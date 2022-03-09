@@ -18,6 +18,7 @@ func TestAccResourceSeverity(t *testing.T) {
 						"rootly_severity.foo", "name", "mysev"),
 					resource.TestCheckResourceAttr("rootly_severity.foo", "severity", "medium"),
 					resource.TestCheckResourceAttr("rootly_severity.foo", "description", ""),
+					resource.TestCheckResourceAttr("rootly_severity.foo", "color", "#047BF8"),
 				),
 			},
 			{
@@ -26,6 +27,7 @@ func TestAccResourceSeverity(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_severity.foo", "name", "mysev2"),
 					resource.TestCheckResourceAttr("rootly_severity.foo", "severity", "high"),
 					resource.TestCheckResourceAttr("rootly_severity.foo", "description", "test description"),
+					resource.TestCheckResourceAttr("rootly_severity.foo", "color", "#203"),
 				),
 			},
 		},
@@ -43,5 +45,6 @@ resource "rootly_severity" "foo" {
   name        = "mysev2"
   severity    = "high"
   description = "test description"
+  color       = "#203"
 }
 `

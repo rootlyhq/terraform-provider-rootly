@@ -16,6 +16,7 @@ type Severity struct {
 	ID          string `jsonapi:"primary,severities"`
 	Name        string `jsonapi:"attr,name,omitempty"`
 	Slug        string `jsonapi:"attr,slug,omitempty"`
+	Color       string `jsonapi:"attr,color,omitempty"`
 	Description string `jsonapi:"attr,description,omitempty"`
 	Severity    string `jsonapi:"attr,severity,omitempty"`
 	//NotifyEmails  *[]string `json:"notify_emails,omitempty"`

@@ -31,6 +31,13 @@ func resourceSeverity() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"color": {
+				Description:  "The cikir of the severity",
+				Type:         schema.TypeString,
+				Optional:     true,
+				Default:      "#047BF8", // Default value from the API
+				ValidateFunc: validCSSHexColor(),
+			},
 			"slug": {
 				Description: "The slug of the severity",
 				Type:        schema.TypeString,
@@ -70,6 +77,10 @@ func resourceSeverityCreate(ctx context.Context, d *schema.ResourceData, meta in
 		s.Description = value.(string)
 	}
 
+	if value, ok := d.GetOk("color"); ok {
+		s.Color = value.(string)
+	}
+
 	if value, ok := d.GetOk("slug"); ok {
 		s.Slug = value.(string)
 	}
@@ -107,9 +118,10 @@ func resourceSeverityRead(ctx context.Context, d *schema.ResourceData, meta inte
 	}
 
 	d.Set("name", severity.Name)
-	d.Set("severity", severity.Severity)
 	d.Set("description", severity.Description)
+	d.Set("color", severity.Color)
 	d.Set("slug", severity.Slug)
+	d.Set("severity", severity.Severity)
 
 	return nil
 }
@@ -130,6 +142,10 @@ func resourceSeverityUpdate(ctx context.Context, d *schema.ResourceData, meta in
 		s.Description = d.Get("description").(string)
 	}
 
+	if d.HasChange("color") {
+		s.Color = d.Get("color").(string)
+	}
+
 	if d.HasChange("severity") {
 		s.Severity = d.Get("severity").(string)
 	}
@@ -144,6 +160,7 @@ func resourceSeverityUpdate(ctx context.Context, d *schema.ResourceData, meta in
 
 func resourceSeverityDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
+	tflog.Trace(ctx, fmt.Sprintf("Deleting Severity: %s", d.Id()))
 
 	err := c.DeleteSeverity(d.Id())
 	if err != nil {
@@ -158,7 +175,6 @@ func resourceSeverityDelete(ctx context.Context, d *schema.ResourceData, meta in
 	}
 
 	d.SetId("")
-	tflog.Trace(ctx, "deleted a resource")
 
 	return nil
 }
