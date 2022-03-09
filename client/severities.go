@@ -2,11 +2,11 @@ package client
 
 import (
 	"bytes"
-	"encoding/json"
 	"fmt"
+	"net/http"
+
 	"github.com/google/jsonapi"
 	"github.com/pkg/errors"
-	"net/http"
 )
 
 const SeveritiesPrefix = "severities"
@@ -89,13 +89,12 @@ func (c *Client) UpdateSeverity(id string, s *Severity) (*Severity, error) {
 		return nil, err
 	}
 
-	severity := Severity{}
-	err = json.Unmarshal(body, &severity)
-	if err != nil {
-		return nil, err
+	severity := new(Severity)
+	if err := jsonapi.UnmarshalPayload(bytes.NewReader(body), severity); err != nil {
+		return nil, errors.Errorf("Error unmarshaling severity (creation): %s", err.Error())
 	}
 
-	return &severity, nil
+	return severity, nil
 }
 
 func (c *Client) DeleteSeverity(id string) error {
