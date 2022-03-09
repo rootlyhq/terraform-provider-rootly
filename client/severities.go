@@ -4,14 +4,13 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/google/jsonapi"
 	"github.com/pkg/errors"
 	"net/http"
-	"strings"
-
-	"github.com/google/jsonapi"
 )
 
-const SeveritiesPath = "severities"
+const SeveritiesPrefix = "severities"
+const SeveritiesPath = "/v1/severities"
 
 type Severity struct {
 	ID          string `jsonapi:"primary,severities"`
@@ -19,18 +18,26 @@ type Severity struct {
 	Slug        string `jsonapi:"attr,slug,omitempty"`
 	Description string `jsonapi:"attr,description,omitempty"`
 	Severity    string `jsonapi:"attr,severity,omitempty"`
-	Color       string `jsonapi:"attr,color,omitempty"`
 	//NotifyEmails  *[]string `json:"notify_emails,omitempty"`
 	//SlackChannels *[]string `json:"slack_channels,omitempty"`
 	//SlackAliases  *[]string `json:"slack_aliases,omitempty"`
 }
 
+func (s Severity) Marshal() (*bytes.Buffer, error) {
+	buffer := new(bytes.Buffer)
+	if err := jsonapi.MarshalPayload(buffer, s); err != nil {
+		return nil, errors.Errorf("Error marshaling severity (creation): %s", err.Error())
+	}
+
+	return buffer, nil
+}
+
 func (c *Client) CreateSeverity(s *Severity) (*Severity, error) {
 	buffer := new(bytes.Buffer)
 	if err := jsonapi.MarshalPayload(buffer, s); err != nil {
-		return nil, errors.New("TODO")
+		return nil, errors.Errorf("Error marshaling severity (creation): %s", err.Error())
 	}
-	req, err := http.NewRequest("POST", c.makeUrl(fmt.Sprintf("%s", SeveritiesPath)), buffer)
+	req, err := http.NewRequest("POST", fmt.Sprintf("%s", SeveritiesPath), buffer)
 	if err != nil {
 		return nil, err
 	}
@@ -40,22 +47,15 @@ func (c *Client) CreateSeverity(s *Severity) (*Severity, error) {
 		return nil, err
 	}
 
-	//severityResponse := SeverityResponse{}
-	//err = json.Unmarshal(body, &severityResponse)
-	//if err != nil {
-	//	return nil, err
-	//}
-
 	severity := new(Severity)
 	if err := jsonapi.UnmarshalPayload(bytes.NewReader(body), severity); err != nil {
-		return nil, errors.New("TODO")
+		return nil, errors.Errorf("Error unmarshaling severity (creation): %s", err.Error())
 	}
 
 	return severity, nil
 }
 
 func (c *Client) GetSeverity(id string) (*Severity, error) {
-	var severity Severity
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/%s", SeveritiesPath, id), nil)
 	if err != nil {
 		return nil, err
@@ -66,26 +66,20 @@ func (c *Client) GetSeverity(id string) (*Severity, error) {
 		return nil, err
 	}
 
-	err = json.Unmarshal(body, &severity)
-	if err != nil {
-		return nil, err
+	severity := new(Severity)
+	if err := jsonapi.UnmarshalPayload(bytes.NewReader(body), severity); err != nil {
+		return nil, errors.Errorf("Error unmarshaling severity (creation): %s", err.Error())
 	}
 
-	return &severity, nil
+	return severity, nil
 }
 
 func (c *Client) UpdateSeverity(id string, s *Severity) (*Severity, error) {
-	data := &Data{
-		Type: "severities",
-		Attributes: map[string]interface{}{
-			"name": "value",
-		},
+	buffer := new(bytes.Buffer)
+	if err := jsonapi.MarshalPayload(buffer, s); err != nil {
+		return nil, errors.Errorf("Error marshaling severity (update): %s", err.Error())
 	}
-	rb, err := json.Marshal(data)
-	if err != nil {
-		return nil, err
-	}
-	req, err := http.NewRequest("PUT", fmt.Sprintf("%s/%s", SeveritiesPath, id), strings.NewReader(string(rb)))
+	req, err := http.NewRequest("PUT", fmt.Sprintf("%s/%s", SeveritiesPath, id), buffer)
 	if err != nil {
 		return nil, err
 	}

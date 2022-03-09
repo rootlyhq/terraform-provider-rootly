@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 	"time"
 
 	"github.com/hashicorp/go-cleanhttp"
@@ -11,6 +12,7 @@ import (
 )
 
 type Client struct {
+	Scheme         string
 	Endpoint       string
 	DefaultHeaders map[string]string
 	Client         http.Client
@@ -29,6 +31,7 @@ func NewClient(endpoint, token, userAgent string) (*Client, error) {
 	httpClient.Timeout = 60 * time.Second
 
 	client := &Client{
+		Scheme:   "https",
 		Endpoint: endpoint,
 		DefaultHeaders: map[string]string{
 			"Content-Type": "application/vnd.api+json",
@@ -49,6 +52,14 @@ func (c *Client) doRequest(req *http.Request) ([]byte, error) {
 	for k, v := range c.DefaultHeaders {
 		req.Header.Set(k, v)
 	}
+
+	// Handle endpoint, host and path
+	url := &url.URL{
+		Host:   c.Endpoint,
+		Scheme: c.Scheme,
+		Path:   req.URL.Path,
+	}
+	req.URL = url
 
 	res, err := c.Client.Do(req)
 	defer c.Client.CloseIdleConnections()
