@@ -14,8 +14,7 @@ func TestAccResourceSeverity(t *testing.T) {
 			{
 				Config: testAccResourceSeverity,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr(
-						"rootly_severity.foo", "name", "mysev"),
+					resource.TestCheckResourceAttr("rootly_severity.foo", "name", "mysev"),
 					resource.TestCheckResourceAttr("rootly_severity.foo", "severity", "medium"),
 					resource.TestCheckResourceAttr("rootly_severity.foo", "description", ""),
 					resource.TestCheckResourceAttr("rootly_severity.foo", "color", "#047BF8"),

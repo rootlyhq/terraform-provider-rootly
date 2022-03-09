@@ -34,7 +34,7 @@ func New(version string) func() *schema.Provider {
 				"api_host": {
 					Type:     schema.TypeString,
 					Optional: true,
-					Default:  "api.rootly.com",
+					Default:  "https://api.rootly.com",
 				},
 				"api_token": {
 					Type:        schema.TypeString,

@@ -2,87 +2,46 @@ package client
 
 import (
 	"fmt"
-	"io/ioutil"
-	"net/http"
-	"net/url"
-	"time"
-
 	"github.com/hashicorp/go-cleanhttp"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/logging"
+	rootlygo "github.com/rootlyhq/rootly-go"
+	"net/http"
 )
 
 type Client struct {
-	Scheme         string
-	Endpoint       string
-	DefaultHeaders map[string]string
-	Client         http.Client
-	Timeout        int
+	Token       string
+	ContentType string
+	UserAgent   string
+	Rootly      rootlygo.Client
 }
 
-type Data struct {
-	Type       string
-	Attributes map[string]interface{}
+func (c *Client) Do(req *http.Request) (*http.Response, error) {
+	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", c.Token))
+	req.Header.Set("Content-Type", c.ContentType)
+	req.Header.Set("User-Agent", c.UserAgent)
+
+	return c.Rootly.Client.Do(req)
 }
 
 // NewClient returns a new rootly.Client which can be used to access the API methods.
 func NewClient(endpoint, token, userAgent string) (*Client, error) {
 	httpClient := cleanhttp.DefaultClient()
 	httpClient.Transport = logging.NewTransport("Rootly", httpClient.Transport)
-	httpClient.Timeout = 60 * time.Second
 
-	client := &Client{
-		Scheme:   "https",
-		Endpoint: endpoint,
-		DefaultHeaders: map[string]string{
-			"Content-Type": "application/vnd.api+json",
-			"User-Agent":   userAgent,
-		},
-		Client: *httpClient,
+	rootlyClient, err := rootlygo.NewClient(
+		endpoint,
+		rootlygo.WithHTTPClient(httpClient),
+	)
+	if err != nil {
+		return nil, err
 	}
 
-	if token != "" {
-		client.DefaultHeaders["Authorization"] = fmt.Sprintf("Bearer %s", token)
+	client := &Client{
+		Token:       token,
+		ContentType: "application/vnd.api+json",
+		UserAgent:   userAgent,
+		Rootly:      *rootlyClient,
 	}
 
 	return client, nil
-}
-
-func (c *Client) doRequest(req *http.Request) ([]byte, error) {
-	// Handle headers
-	for k, v := range c.DefaultHeaders {
-		req.Header.Set(k, v)
-	}
-
-	// Handle endpoint, host and path
-	url := &url.URL{
-		Host:   c.Endpoint,
-		Scheme: c.Scheme,
-		Path:   req.URL.Path,
-	}
-	req.URL = url
-
-	res, err := c.Client.Do(req)
-	defer c.Client.CloseIdleConnections()
-	if err != nil {
-		return nil, err
-	}
-	defer res.Body.Close()
-
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		return nil, err
-	}
-
-	if res.StatusCode >= 400 {
-		if res.StatusCode == http.StatusNotFound {
-			return nil, NewNotFoundError(string(body))
-		}
-		return nil, NewRequestError(res.StatusCode, string(body))
-	}
-
-	return body, err
-}
-
-func (c *Client) makeUrl(path string) string {
-	return fmt.Sprintf("%s/%s", c.Endpoint, path)
 }
