@@ -3,13 +3,11 @@ package client
 import (
 	"bytes"
 	"fmt"
-	"net/http"
-
 	"github.com/google/jsonapi"
 	"github.com/pkg/errors"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
-const SeveritiesPrefix = "severities"
 const SeveritiesPath = "/v1/severities"
 
 type Severity struct {
@@ -38,76 +36,77 @@ func (c *Client) CreateSeverity(s *Severity) (*Severity, error) {
 	if err := jsonapi.MarshalPayload(buffer, s); err != nil {
 		return nil, errors.Errorf("Error marshaling severity (creation): %s", err.Error())
 	}
-	req, err := http.NewRequest("POST", fmt.Sprintf("%s", SeveritiesPath), buffer)
-	if err != nil {
-		return nil, err
-	}
 
-	body, err := c.doRequest(req)
+	req, err := rootlygo.NewCreateSeverityRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
-		return nil, err
+		return nil, errors.Errorf("Error unmarshaling severity (creation): %s", err.Error())
+	}
+	resp, err := c.Do(req)
+	if err != nil {
+		fmt.Println(err)
+		return nil, errors.Errorf("Failed to make request to create severity" + "\n\n" + buffer.String())
 	}
 
 	severity := new(Severity)
-	if err := jsonapi.UnmarshalPayload(bytes.NewReader(body), severity); err != nil {
+	if err := jsonapi.UnmarshalPayload(resp.Body, severity); err != nil {
 		return nil, errors.Errorf("Error unmarshaling severity (creation): %s", err.Error())
 	}
 
 	return severity, nil
 }
 
-func (c *Client) GetSeverity(id string) (*Severity, error) {
-	req, err := http.NewRequest("GET", fmt.Sprintf("%s/%s", SeveritiesPath, id), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	body, err := c.doRequest(req)
-	if err != nil {
-		return nil, err
-	}
-
-	severity := new(Severity)
-	if err := jsonapi.UnmarshalPayload(bytes.NewReader(body), severity); err != nil {
-		return nil, errors.Errorf("Error unmarshaling severity (creation): %s", err.Error())
-	}
-
-	return severity, nil
-}
-
-func (c *Client) UpdateSeverity(id string, s *Severity) (*Severity, error) {
-	buffer := new(bytes.Buffer)
-	if err := jsonapi.MarshalPayload(buffer, s); err != nil {
-		return nil, errors.Errorf("Error marshaling severity (update): %s", err.Error())
-	}
-	req, err := http.NewRequest("PUT", fmt.Sprintf("%s/%s", SeveritiesPath, id), buffer)
-	if err != nil {
-		return nil, err
-	}
-
-	body, err := c.doRequest(req)
-	if err != nil {
-		return nil, err
-	}
-
-	severity := new(Severity)
-	if err := jsonapi.UnmarshalPayload(bytes.NewReader(body), severity); err != nil {
-		return nil, errors.Errorf("Error unmarshaling severity (creation): %s", err.Error())
-	}
-
-	return severity, nil
-}
-
-func (c *Client) DeleteSeverity(id string) error {
-	req, err := http.NewRequest("DELETE", fmt.Sprintf("%s/%s", SeveritiesPath, id), nil)
-	if err != nil {
-		return err
-	}
-
-	_, err = c.doRequest(req)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
+//func (c *Client) GetSeverity(id string) (*Severity, error) {
+//	req, err := http.NewRequest("GET", fmt.Sprintf("%s/%s", SeveritiesPath, id), nil)
+//	if err != nil {
+//		return nil, err
+//	}
+//
+//	body, err := c.doRequest(req)
+//	if err != nil {
+//		return nil, err
+//	}
+//
+//	severity := new(Severity)
+//	if err := jsonapi.UnmarshalPayload(bytes.NewReader(body), severity); err != nil {
+//		return nil, errors.Errorf("Error unmarshaling severity (creation): %s", err.Error())
+//	}
+//
+//	return severity, nil
+//}
+//
+//func (c *Client) UpdateSeverity(id string, s *Severity) (*Severity, error) {
+//	buffer := new(bytes.Buffer)
+//	if err := jsonapi.MarshalPayload(buffer, s); err != nil {
+//		return nil, errors.Errorf("Error marshaling severity (update): %s", err.Error())
+//	}
+//	req, err := http.NewRequest("PUT", fmt.Sprintf("%s/%s", SeveritiesPath, id), buffer)
+//	if err != nil {
+//		return nil, err
+//	}
+//
+//	body, err := c.doRequest(req)
+//	if err != nil {
+//		return nil, err
+//	}
+//
+//	severity := new(Severity)
+//	if err := jsonapi.UnmarshalPayload(bytes.NewReader(body), severity); err != nil {
+//		return nil, errors.Errorf("Error unmarshaling severity (creation): %s", err.Error())
+//	}
+//
+//	return severity, nil
+//}
+//
+//func (c *Client) DeleteSeverity(id string) error {
+//	req, err := http.NewRequest("DELETE", fmt.Sprintf("%s/%s", SeveritiesPath, id), nil)
+//	if err != nil {
+//		return err
+//	}
+//
+//	_, err = c.doRequest(req)
+//	if err != nil {
+//		return err
+//	}
+//
+//	return nil
+//}
