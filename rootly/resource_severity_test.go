@@ -17,6 +17,7 @@ func TestAccResourceSeverity(t *testing.T) {
 					resource.TestCheckResourceAttr(
 						"rootly_severity.foo", "name", "mysev"),
 					resource.TestCheckResourceAttr("rootly_severity.foo", "severity", "medium"),
+					resource.TestCheckResourceAttr("rootly_severity.foo", "description", ""),
 				),
 			},
 			{
