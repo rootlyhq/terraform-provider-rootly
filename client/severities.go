@@ -1,8 +1,6 @@
 package client
 
 import (
-	"bytes"
-	"github.com/google/jsonapi"
 	"github.com/pkg/errors"
 	rootlygo "github.com/rootlyhq/rootly-go"
 )
@@ -19,42 +17,34 @@ type Severity struct {
 	//SlackAliases  *[]string `json:"slack_aliases,omitempty"`
 }
 
-func (s Severity) Marshal() (*bytes.Buffer, error) {
-	buffer := new(bytes.Buffer)
-	if err := jsonapi.MarshalPayload(buffer, s); err != nil {
-		return nil, errors.Errorf("Error marshaling severity (creation): %s", err.Error())
-	}
-
-	return buffer, nil
-}
-
 func (c *Client) CreateSeverity(s *Severity) (*Severity, error) {
-	buffer := new(bytes.Buffer)
-	if err := jsonapi.MarshalPayload(buffer, s); err != nil {
-		return nil, errors.Errorf("Error marshaling severity (creation): %s", err.Error())
+	buffer, err := MarshalData(s)
+	if err != nil {
+		return nil, errors.Errorf("Error marshaling severity: %s", err.Error())
 	}
 
 	req, err := rootlygo.NewCreateSeverityRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling severity (creation): %s", err.Error())
+		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}
+
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to create severity" + "\n\n" + buffer.String())
+		return nil, errors.Errorf("Failed to make request to create severity: %s", err.Error())
 	}
 
-	severity := new(Severity)
-	if err := jsonapi.UnmarshalPayload(resp.Body, severity); err != nil {
-		return nil, errors.Errorf("Error unmarshaling severity (creation): %s", err.Error())
+	severity, err := UnmarshalData(resp.Body, new(Severity))
+	if err != nil {
+		return nil, errors.Errorf("Error unmarshaling severity: %s", err.Error())
 	}
 
-	return severity, nil
+	return severity.(*Severity), nil
 }
 
 func (c *Client) GetSeverity(id string) (*Severity, error) {
 	req, err := rootlygo.NewGetSeverityRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, err
+		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}
 
 	resp, err := c.Do(req)
@@ -62,41 +52,41 @@ func (c *Client) GetSeverity(id string) (*Severity, error) {
 		return nil, errors.Errorf("Failed to make request to get severity: %s", id)
 	}
 
-	severity := new(Severity)
-	if err := jsonapi.UnmarshalPayload(resp.Body, severity); err != nil {
-		return nil, errors.Errorf("Error unmarshaling severity (read): %s", err.Error())
+	severity, err := UnmarshalData(resp.Body, new(Severity))
+	if err != nil {
+		return nil, errors.Errorf("Error unmarshaling severity: %s", err.Error())
 	}
 
-	return severity, nil
+	return severity.(*Severity), nil
 }
 
 func (c *Client) UpdateSeverity(id string, s *Severity) (*Severity, error) {
-	buffer := new(bytes.Buffer)
-	if err := jsonapi.MarshalPayload(buffer, s); err != nil {
-		return nil, errors.Errorf("Error marshaling severity (update): %s", err.Error())
+	buffer, err := MarshalData(s)
+	if err != nil {
+		return nil, errors.Errorf("Error marshaling severity: %s", err.Error())
 	}
 
 	req, err := rootlygo.NewUpdateSeverityRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling severity (update): %s", err.Error())
+		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}
 	resp, err := c.Do(req)
 	if err != nil {
 		return nil, errors.Errorf("Failed to make request to update severity: %s", id)
 	}
 
-	severity := new(Severity)
-	if err := jsonapi.UnmarshalPayload(resp.Body, severity); err != nil {
-		return nil, errors.Errorf("Error unmarshaling severity (update): %s", err.Error())
+	severity, err := UnmarshalData(resp.Body, new(Severity))
+	if err != nil {
+		return nil, errors.Errorf("Error unmarshaling severity: %s", err.Error())
 	}
 
-	return severity, nil
+	return severity.(*Severity), nil
 }
 
 func (c *Client) DeleteSeverity(id string) error {
 	req, err := rootlygo.NewDeleteSeverityRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error unmarshaling severity (delete): %s", err.Error())
+		return errors.Errorf("Error building request: %s", err.Error())
 	}
 
 	_, err = c.Do(req)
