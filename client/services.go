@@ -6,11 +6,12 @@ import (
 )
 
 type Service struct {
-	ID          string `jsonapi:"primary,services"`
-	Name        string `jsonapi:"attr,name,omitempty"`
-	Slug        string `jsonapi:"attr,slug,omitempty"`
-	Color       string `jsonapi:"attr,color,omitempty"`
-	Description string `jsonapi:"attr,description,omitempty"`
+	ID                string `jsonapi:"primary,services"`
+	Name              string `jsonapi:"attr,name,omitempty"`
+	Slug              string `jsonapi:"attr,slug,omitempty"`
+	Color             string `jsonapi:"attr,color,omitempty"`
+	Description       string `jsonapi:"attr,description,omitempty"`
+	PublicDescription string `jsonapi:"attr,public_description,omitempty"`
 	//NotifyEmails  *[]string `json:"notify_emails,omitempty"`
 	//SlackChannels *[]string `json:"slack_channels,omitempty"`
 	//SlackAliases  *[]string `json:"slack_aliases,omitempty"`
