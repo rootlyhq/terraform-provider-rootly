@@ -3,12 +3,10 @@ package provider
 import (
 	"context"
 	"fmt"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/meta"
-	"github.com/rootly/terraform-provider-rootly/client"
-	rm "github.com/rootly/terraform-provider-rootly/meta"
-
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/meta"
+	"github.com/rootly/terraform-provider-rootly/client"
 )
 
 func init() {
@@ -45,6 +43,7 @@ func New(version string) func() *schema.Provider {
 			},
 			ResourcesMap: map[string]*schema.Resource{
 				"rootly_severity": resourceSeverity(),
+				"rootly_team":     resourceTeam(),
 			},
 		}
 
@@ -62,7 +61,7 @@ func configure(version string, p *schema.Provider) func(context.Context, *schema
 		// Warning or errors can be collected in a slice type
 		var diags diag.Diagnostics
 
-		cli, err := client.NewClient(host, token, RootlyUserAgent())
+		cli, err := client.NewClient(host, token, RootlyUserAgent(version))
 		if err != nil {
 			diags = append(diags, diag.Diagnostic{
 				Severity: diag.Error,
@@ -77,6 +76,6 @@ func configure(version string, p *schema.Provider) func(context.Context, *schema
 	}
 }
 
-func RootlyUserAgent() string {
-	return fmt.Sprintf("Rootly Terraform Provider/%s (+https://www.terraform.io) Terraform Plugin SDK/%s", rm.GetVersion(), meta.SDKVersionString())
+func RootlyUserAgent(version string) string {
+	return fmt.Sprintf("Rootly Terraform Provider/%s (+https://www.terraform.io) Terraform Plugin SDK/%s", version, meta.SDKVersionString())
 }
