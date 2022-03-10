@@ -42,8 +42,9 @@ func New(version string) func() *schema.Provider {
 				},
 			},
 			ResourcesMap: map[string]*schema.Resource{
-				"rootly_severity": resourceSeverity(),
-				"rootly_team":     resourceTeam(),
+				"rootly_functionality": resourceFunctionality(),
+				"rootly_severity":      resourceSeverity(),
+				"rootly_team":          resourceTeam(),
 			},
 		}
 
