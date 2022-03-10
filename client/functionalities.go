@@ -11,6 +11,8 @@ type Functionality struct {
 	ID          string `jsonapi:"primary,functionalities"`
 	Name        string `jsonapi:"attr,name,omitempty"`
 	Description string `jsonapi:"attr,description,omitempty"`
+	Slug        string `jsonapi:"attr,slug,omitempty"`
+	Color       string `jsonapi:"attr,color,omitempty"`
 }
 
 func (f Functionality) Marshal() (*bytes.Buffer, error) {

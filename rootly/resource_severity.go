@@ -78,10 +78,6 @@ func resourceSeverityCreate(ctx context.Context, d *schema.ResourceData, meta in
 		s.Color = value.(string)
 	}
 
-	if value, ok := d.GetOk("slug"); ok {
-		s.Slug = value.(string)
-	}
-
 	if value, ok := d.GetOk("severity"); ok {
 		s.Severity = value.(string)
 	}
