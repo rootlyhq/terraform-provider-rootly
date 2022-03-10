@@ -27,6 +27,19 @@ func resourceFunctionality() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"color": {
+				Description:  "The color of the severity",
+				Type:         schema.TypeString,
+				Optional:     true,
+				Default:      "#047BF8", // Default value from the API
+				ValidateFunc: validCSSHexColor(),
+			},
+			"slug": {
+				Description: "The slug of the severity",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 		},
 	}
 }
@@ -44,6 +57,10 @@ func resourceFunctionalityCreate(ctx context.Context, d *schema.ResourceData, me
 
 	if value, ok := d.GetOk("description"); ok {
 		s.Description = value.(string)
+	}
+
+	if value, ok := d.GetOk("color"); ok {
+		s.Color = value.(string)
 	}
 
 	res, err := c.CreateFunctionality(s)
@@ -76,6 +93,8 @@ func resourceFunctionalityRead(ctx context.Context, d *schema.ResourceData, meta
 
 	d.Set("name", functionality.Name)
 	d.Set("description", functionality.Description)
+	d.Set("color", functionality.Color)
+	d.Set("slug", functionality.Slug)
 
 	return nil
 }
@@ -92,6 +111,10 @@ func resourceFunctionalityUpdate(ctx context.Context, d *schema.ResourceData, me
 
 	if d.HasChange("description") {
 		s.Description = d.Get("description").(string)
+	}
+
+	if d.HasChange("color") {
+		s.Color = d.Get("color").(string)
 	}
 
 	_, err := c.UpdateFunctionality(d.Id(), s)
