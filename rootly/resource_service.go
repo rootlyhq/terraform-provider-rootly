@@ -24,7 +24,12 @@ func resourceService() *schema.Resource {
 				Required:    true,
 			},
 			"description": {
-				Description: "The description of the service",
+				Description: "For internal use only.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"public_description": {
+				Description: "This will be displayed on your status pages to explain to your customer the use of this service.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -72,6 +77,10 @@ func resourceServiceCreate(ctx context.Context, d *schema.ResourceData, meta int
 		s.Description = value.(string)
 	}
 
+	if value, ok := d.GetOk("public_description"); ok {
+		s.PublicDescription = value.(string)
+	}
+
 	if value, ok := d.GetOk("color"); ok {
 		s.Color = value.(string)
 	}
@@ -106,6 +115,7 @@ func resourceServiceRead(ctx context.Context, d *schema.ResourceData, meta inter
 
 	d.Set("name", service.Name)
 	d.Set("description", service.Description)
+	d.Set("public_description", service.PublicDescription)
 	d.Set("color", service.Color)
 	d.Set("slug", service.Slug)
 
@@ -124,6 +134,10 @@ func resourceServiceUpdate(ctx context.Context, d *schema.ResourceData, meta int
 
 	if d.HasChange("description") {
 		s.Description = d.Get("description").(string)
+	}
+
+	if d.HasChange("public_description") {
+		s.PublicDescription = d.Get("public_description").(string)
 	}
 
 	if d.HasChange("color") {

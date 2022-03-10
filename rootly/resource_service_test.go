@@ -16,6 +16,7 @@ func TestAccResourceService(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_service.foo", "name", "myservice"),
 					resource.TestCheckResourceAttr("rootly_service.foo", "description", ""),
+					resource.TestCheckResourceAttr("rootly_service.foo", "public_description", "my public desc"),
 					resource.TestCheckResourceAttrSet("rootly_service.foo", "slug"),
 					resource.TestCheckResourceAttr("rootly_service.foo", "color", "#047BF8"),
 				),
@@ -25,6 +26,7 @@ func TestAccResourceService(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_service.foo", "name", "myservice2"),
 					resource.TestCheckResourceAttr("rootly_service.foo", "description", "test description"),
+					resource.TestCheckResourceAttr("rootly_service.foo", "public_description", "my new public description"),
 					resource.TestCheckResourceAttrSet("rootly_service.foo", "slug"),
 					resource.TestCheckResourceAttr("rootly_service.foo", "color", "#203"),
 				),
@@ -35,14 +37,16 @@ func TestAccResourceService(t *testing.T) {
 
 const testAccResourceService = `
 resource "rootly_service" "foo" {
-  name = "myservice"
+  name               = "myservice"
+  public_description = "my public desc"
 }
 `
 
 const testAccResourceServiceUpdate = `
 resource "rootly_service" "foo" {
-  name        = "myservice2"
-  description = "test description"
-  color       = "#203"
+  name               = "myservice2"
+  description        = "test description"
+  color              = "#203"
+  public_description = "my new public description"
 }
 `
