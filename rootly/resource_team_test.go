@@ -16,6 +16,7 @@ func TestAccResourceTeam(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_team.foo", "name", "myteam"),
 					resource.TestCheckResourceAttr("rootly_team.foo", "description", ""),
+					resource.TestCheckResourceAttr("rootly_team.foo", "color", "#E65252"),
 				),
 			},
 			{
@@ -23,6 +24,7 @@ func TestAccResourceTeam(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_team.foo", "name", "myteam2"),
 					resource.TestCheckResourceAttr("rootly_team.foo", "description", "mydesc"),
+					resource.TestCheckResourceAttr("rootly_team.foo", "color", "#123"),
 				),
 			},
 		},
@@ -39,5 +41,6 @@ const testAccResourceTeamUpdate = `
 resource "rootly_team" "foo" {
   name        = "myteam2"
   description = "mydesc"
+  color       = "#123"
 }
 `
