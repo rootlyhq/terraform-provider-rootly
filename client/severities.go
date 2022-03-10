@@ -7,8 +7,6 @@ import (
 	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
-const SeveritiesPath = "/v1/severities"
-
 type Severity struct {
 	ID          string `jsonapi:"primary,severities"`
 	Name        string `jsonapi:"attr,name,omitempty"`
