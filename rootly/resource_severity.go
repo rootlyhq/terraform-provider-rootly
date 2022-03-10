@@ -101,83 +101,80 @@ func resourceSeverityCreate(ctx context.Context, d *schema.ResourceData, meta in
 }
 
 func resourceSeverityRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	return diag.Errorf("not implemented")
-	//c := meta.(*client.Client)
-	//tflog.Trace(ctx, fmt.Sprintf("Reading Severity: %s", d.Id()))
-	//
-	//severity, err := c.GetSeverity(d.Id())
-	//if err != nil {
-	//	// In the case of a NotFoundError, it means the resource may have been removed upstream
-	//	// We just remove it from the state.
-	//	if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-	//		tflog.Warn(ctx, fmt.Sprintf("Severity (%s) not found, removing from state", d.Id()))
-	//		d.SetId("")
-	//		return nil
-	//	}
-	//
-	//	return diag.Errorf("Error reading severity: %s", d.Id())
-	//}
-	//
-	//d.Set("name", severity.Name)
-	//d.Set("description", severity.Description)
-	//d.Set("color", severity.Color)
-	//d.Set("slug", severity.Slug)
-	//d.Set("severity", severity.Severity)
-	//
-	//return nil
+	c := meta.(*client.Client)
+	tflog.Trace(ctx, fmt.Sprintf("Reading Severity: %s", d.Id()))
+
+	severity, err := c.GetSeverity(d.Id())
+	if err != nil {
+		// In the case of a NotFoundError, it means the resource may have been removed upstream
+		// We just remove it from the state.
+		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+			tflog.Warn(ctx, fmt.Sprintf("Severity (%s) not found, removing from state", d.Id()))
+			d.SetId("")
+			return nil
+		}
+
+		return diag.Errorf("Error reading severity: %s", d.Id())
+	}
+
+	d.Set("name", severity.Name)
+	d.Set("description", severity.Description)
+	d.Set("color", severity.Color)
+	d.Set("slug", severity.Slug)
+	d.Set("severity", severity.Severity)
+
+	return nil
 }
 
 func resourceSeverityUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	return diag.Errorf("not implemented")
-	//c := meta.(*client.Client)
-	//tflog.Trace(ctx, fmt.Sprintf("Updating Severity: %s", d.Id()))
-	//
-	//name := d.Get("name").(string)
-	//severity := d.Get("severity").(string)
-	//
-	//s := &client.Severity{
-	//	Name:     name,
-	//	Severity: severity,
-	//}
-	//
-	//if d.HasChange("description") {
-	//	s.Description = d.Get("description").(string)
-	//}
-	//
-	//if d.HasChange("color") {
-	//	s.Color = d.Get("color").(string)
-	//}
-	//
-	//if d.HasChange("severity") {
-	//	s.Severity = d.Get("severity").(string)
-	//}
-	//
-	//_, err := c.UpdateSeverity(d.Id(), s)
-	//if err != nil {
-	//	return diag.Errorf("Error updating severity: %s", err.Error())
-	//}
-	//
-	//return resourceSeverityRead(ctx, d, meta)
+	c := meta.(*client.Client)
+	tflog.Trace(ctx, fmt.Sprintf("Updating Severity: %s", d.Id()))
+
+	name := d.Get("name").(string)
+	severity := d.Get("severity").(string)
+
+	s := &client.Severity{
+		Name:     name,
+		Severity: severity,
+	}
+
+	if d.HasChange("description") {
+		s.Description = d.Get("description").(string)
+	}
+
+	if d.HasChange("color") {
+		s.Color = d.Get("color").(string)
+	}
+
+	if d.HasChange("severity") {
+		s.Severity = d.Get("severity").(string)
+	}
+
+	_, err := c.UpdateSeverity(d.Id(), s)
+	if err != nil {
+		return diag.Errorf("Error updating severity: %s", err.Error())
+	}
+
+	return resourceSeverityRead(ctx, d, meta)
 }
 
 func resourceSeverityDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	return diag.Errorf("not implemented")
-	//c := meta.(*client.Client)
-	//tflog.Trace(ctx, fmt.Sprintf("Deleting Severity: %s", d.Id()))
-	//
-	//err := c.DeleteSeverity(d.Id())
-	//if err != nil {
-	//	// In the case of a NotFoundError, it means the resource may have been removed upstream.
-	//	// We just remove it from the state.
-	//	if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-	//		tflog.Warn(ctx, fmt.Sprintf("Severity (%s) not found, removing from state", d.Id()))
-	//		d.SetId("")
-	//		return nil
-	//	}
-	//	return diag.Errorf("Error deleting severity: %s", err.Error())
-	//}
-	//
-	//d.SetId("")
-	//
-	//return nil
+	c := meta.(*client.Client)
+	tflog.Trace(ctx, fmt.Sprintf("Deleting Severity: %s", d.Id()))
+
+	err := c.DeleteSeverity(d.Id())
+	if err != nil {
+		// In the case of a NotFoundError, it means the resource may have been removed upstream.
+		// We just remove it from the state.
+		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+			tflog.Warn(ctx, fmt.Sprintf("Severity (%s) not found, removing from state", d.Id()))
+			d.SetId("")
+			return nil
+		}
+		return diag.Errorf("Error deleting severity: %s", err.Error())
+	}
+
+	d.SetId("")
+
+	return nil
 }

@@ -5,6 +5,7 @@ import (
 	"github.com/hashicorp/go-cleanhttp"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/logging"
 	rootlygo "github.com/rootlyhq/rootly-go"
+	"io/ioutil"
 	"net/http"
 )
 
@@ -15,12 +16,30 @@ type Client struct {
 	Rootly      rootlygo.Client
 }
 
+// Do Intercepts the Request and enriches it with the required information.
 func (c *Client) Do(req *http.Request) (*http.Response, error) {
 	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", c.Token))
 	req.Header.Set("Content-Type", c.ContentType)
 	req.Header.Set("User-Agent", c.UserAgent)
 
-	return c.Rootly.Client.Do(req)
+	res, err := c.Rootly.Client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+
+	if res.StatusCode >= 400 {
+		body, err := ioutil.ReadAll(res.Body)
+		if err != nil {
+			return nil, err
+		}
+
+		if res.StatusCode == http.StatusNotFound {
+			return nil, NewNotFoundError(string(body))
+		}
+		return nil, NewRequestError(res.StatusCode, string(body))
+	}
+
+	return res, nil
 }
 
 // NewClient returns a new rootly.Client which can be used to access the API methods.
