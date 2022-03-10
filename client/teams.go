@@ -11,6 +11,7 @@ type Team struct {
 	ID          string `jsonapi:"primary,groups"`
 	Name        string `jsonapi:"attr,name,omitempty"`
 	Description string `jsonapi:"attr,description,omitempty"`
+	Color       string `jsonapi:"attr,color,omitempty"`
 }
 
 func (t Team) Marshal() (*bytes.Buffer, error) {

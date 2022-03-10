@@ -27,6 +27,13 @@ func resourceTeam() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"color": {
+				Description:  "The color of the severity",
+				Type:         schema.TypeString,
+				Optional:     true,
+				Default:      "#E65252", // Default value from the API
+				ValidateFunc: validCSSHexColor(),
+			},
 		},
 	}
 }
@@ -76,6 +83,7 @@ func resourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interfac
 
 	d.Set("name", team.Name)
 	d.Set("description", team.Description)
+	d.Set("color", team.Color)
 
 	return nil
 }
@@ -92,6 +100,10 @@ func resourceTeamUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 
 	if d.HasChange("description") {
 		s.Description = d.Get("description").(string)
+	}
+
+	if d.HasChange("color") {
+		s.Color = d.Get("color").(string)
 	}
 
 	_, err := c.UpdateTeam(d.Id(), s)
