@@ -27,12 +27,12 @@ func (c *Client) CreateTeam(t *Team) (*Team, error) {
 		return nil, errors.Errorf("Failed to make request to create team: %s", t.ID)
 	}
 
-	team, err := UnmarshalData(resp.Body, new(Team))
+	data, err := UnmarshalData(resp.Body, new(Team))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling team: %s", err.Error())
 	}
 
-	return team.(*Team), nil
+	return data.(*Team), nil
 }
 
 func (c *Client) GetTeam(id string) (*Team, error) {
@@ -46,12 +46,12 @@ func (c *Client) GetTeam(id string) (*Team, error) {
 		return nil, errors.Errorf("Failed to make request to get team: %s", id)
 	}
 
-	team, err := UnmarshalData(resp.Body, new(Team))
+	data, err := UnmarshalData(resp.Body, new(Team))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling team: %s", err.Error())
 	}
 
-	return team.(*Team), nil
+	return data.(*Team), nil
 }
 
 func (c *Client) UpdateTeam(id string, t *Team) (*Team, error) {
@@ -69,12 +69,12 @@ func (c *Client) UpdateTeam(id string, t *Team) (*Team, error) {
 		return nil, errors.Errorf("Failed to make request to update team: %s", id)
 	}
 
-	team, err := UnmarshalData(resp.Body, new(Team))
+	data, err := UnmarshalData(resp.Body, new(Team))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling team: %s", err.Error())
 	}
 
-	return team.(*Team), nil
+	return data.(*Team), nil
 }
 
 func (c *Client) DeleteTeam(id string) error {

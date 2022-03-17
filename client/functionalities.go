@@ -28,12 +28,12 @@ func (c *Client) CreateFunctionality(f *Functionality) (*Functionality, error) {
 		return nil, errors.Errorf("Failed to perform request to create functionality: %s", err.Error())
 	}
 
-	functionality, err := UnmarshalData(resp.Body, new(Functionality))
+	data, err := UnmarshalData(resp.Body, new(Functionality))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling functionality: %s", err.Error())
 	}
 
-	return functionality.(*Functionality), nil
+	return data.(*Functionality), nil
 }
 
 func (c *Client) GetFunctionality(id string) (*Functionality, error) {
@@ -47,12 +47,12 @@ func (c *Client) GetFunctionality(id string) (*Functionality, error) {
 		return nil, errors.Errorf("Failed to make request to get functionality: %s", id)
 	}
 
-	functionality, err := UnmarshalData(resp.Body, new(Functionality))
+	data, err := UnmarshalData(resp.Body, new(Functionality))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling functionality: %s", err.Error())
 	}
 
-	return functionality.(*Functionality), nil
+	return data.(*Functionality), nil
 }
 
 func (c *Client) UpdateFunctionality(id string, f *Functionality) (*Functionality, error) {
@@ -70,12 +70,12 @@ func (c *Client) UpdateFunctionality(id string, f *Functionality) (*Functionalit
 		return nil, errors.Errorf("Failed to make request to update functionality: %s", id)
 	}
 
-	functionality, err := UnmarshalData(resp.Body, new(Functionality))
+	data, err := UnmarshalData(resp.Body, new(Functionality))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling functionality: %s", err.Error())
 	}
 
-	return functionality.(*Functionality), nil
+	return data.(*Functionality), nil
 }
 
 func (c *Client) DeleteFunctionality(id string) error {

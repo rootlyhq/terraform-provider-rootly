@@ -33,12 +33,12 @@ func (c *Client) CreateSeverity(s *Severity) (*Severity, error) {
 		return nil, errors.Errorf("Failed to make request to create severity: %s", err.Error())
 	}
 
-	severity, err := UnmarshalData(resp.Body, new(Severity))
+	data, err := UnmarshalData(resp.Body, new(Severity))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling severity: %s", err.Error())
 	}
 
-	return severity.(*Severity), nil
+	return data.(*Severity), nil
 }
 
 func (c *Client) GetSeverity(id string) (*Severity, error) {
@@ -52,12 +52,12 @@ func (c *Client) GetSeverity(id string) (*Severity, error) {
 		return nil, errors.Errorf("Failed to make request to get severity: %s", id)
 	}
 
-	severity, err := UnmarshalData(resp.Body, new(Severity))
+	data, err := UnmarshalData(resp.Body, new(Severity))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling severity: %s", err.Error())
 	}
 
-	return severity.(*Severity), nil
+	return data.(*Severity), nil
 }
 
 func (c *Client) UpdateSeverity(id string, s *Severity) (*Severity, error) {
@@ -75,12 +75,12 @@ func (c *Client) UpdateSeverity(id string, s *Severity) (*Severity, error) {
 		return nil, errors.Errorf("Failed to make request to update severity: %s", id)
 	}
 
-	severity, err := UnmarshalData(resp.Body, new(Severity))
+	data, err := UnmarshalData(resp.Body, new(Severity))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling severity: %s", err.Error())
 	}
 
-	return severity.(*Severity), nil
+	return data.(*Severity), nil
 }
 
 func (c *Client) DeleteSeverity(id string) error {
