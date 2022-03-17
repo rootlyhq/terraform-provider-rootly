@@ -29,7 +29,7 @@ func resourceSeverity() *schema.Resource {
 				Optional:    true,
 			},
 			"color": {
-				Description:  "The cikir of the severity",
+				Description:  "The color of the severity",
 				Type:         schema.TypeString,
 				Optional:     true,
 				Default:      "#047BF8", // Default value from the API
