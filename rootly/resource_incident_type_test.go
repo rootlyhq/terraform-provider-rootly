@@ -14,7 +14,7 @@ func TestAccResourceIncidentType(t *testing.T) {
 			{
 				Config: testAccResourceIncidentType,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_incident_type.foo", "name", "myincidenttyoe"),
+					resource.TestCheckResourceAttr("rootly_incident_type.foo", "name", "myincidenttype"),
 					resource.TestCheckResourceAttr("rootly_incident_type.foo", "description", ""),
 					resource.TestCheckResourceAttr("rootly_incident_type.foo", "color", "#047BF8"),
 				),
@@ -22,7 +22,7 @@ func TestAccResourceIncidentType(t *testing.T) {
 			{
 				Config: testAccResourceIncidentTypeUpdate,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_incident_type.foo", "name", "myincidenttyoe2"),
+					resource.TestCheckResourceAttr("rootly_incident_type.foo", "name", "myincidenttype2"),
 					resource.TestCheckResourceAttr("rootly_incident_type.foo", "description", "test description"),
 					resource.TestCheckResourceAttr("rootly_incident_type.foo", "color", "#203"),
 				),
@@ -33,13 +33,13 @@ func TestAccResourceIncidentType(t *testing.T) {
 
 const testAccResourceIncidentType = `
 resource "rootly_incident_type" "foo" {
-  name = "myincidenttyoe"
+  name = "myincidenttype"
 }
 `
 
 const testAccResourceIncidentTypeUpdate = `
 resource "rootly_incident_type" "foo" {
-  name        = "myincidenttyoe2"
+  name        = "myincidenttype2"
   description = "test description"
   color       = "#203"
 }

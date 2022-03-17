@@ -11,7 +11,6 @@ func MarshalData(entity interface{}) (io.Reader, error) {
 	if err := jsonapi.MarshalPayload(buffer, entity); err != nil {
 		return nil, err
 	}
-
 	return buffer, nil
 }
 
