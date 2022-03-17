@@ -28,12 +28,12 @@ func (c *Client) CreateIncidentRole(i *IncidentRole) (*IncidentRole, error) {
 		return nil, errors.Errorf("Failed to perform request to create incident role: %s", err.Error())
 	}
 
-	incidentRole, err := UnmarshalData(resp.Body, new(IncidentRole))
+	data, err := UnmarshalData(resp.Body, new(IncidentRole))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling incident role: %s", err.Error())
 	}
 
-	return incidentRole.(*IncidentRole), nil
+	return data.(*IncidentRole), nil
 }
 
 func (c *Client) GetIncidentRole(id string) (*IncidentRole, error) {
@@ -47,12 +47,12 @@ func (c *Client) GetIncidentRole(id string) (*IncidentRole, error) {
 		return nil, errors.Errorf("Failed to make request to get incident role: %s", id)
 	}
 
-	incidentRole, err := UnmarshalData(resp.Body, new(IncidentRole))
+	data, err := UnmarshalData(resp.Body, new(IncidentRole))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling incident role: %s", err.Error())
 	}
 
-	return incidentRole.(*IncidentRole), nil
+	return data.(*IncidentRole), nil
 }
 
 func (c *Client) UpdateIncidentRole(id string, i *IncidentRole) (*IncidentRole, error) {
@@ -70,12 +70,12 @@ func (c *Client) UpdateIncidentRole(id string, i *IncidentRole) (*IncidentRole, 
 		return nil, errors.Errorf("Failed to make request to update incident role: %s", id)
 	}
 
-	incidentRole, err := UnmarshalData(resp.Body, new(IncidentRole))
+	data, err := UnmarshalData(resp.Body, new(IncidentRole))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling incident role: %s", err.Error())
 	}
 
-	return incidentRole.(*IncidentRole), nil
+	return data.(*IncidentRole), nil
 }
 
 func (c *Client) DeleteIncidentRole(id string) error {

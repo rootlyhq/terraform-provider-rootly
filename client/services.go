@@ -33,12 +33,12 @@ func (c *Client) CreateService(s *Service) (*Service, error) {
 		return nil, errors.Errorf("Failed to make request to create service: %s", err.Error())
 	}
 
-	service, err := UnmarshalData(resp.Body, new(Service))
+	data, err := UnmarshalData(resp.Body, new(Service))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling service: %s", err.Error())
 	}
 
-	return service.(*Service), nil
+	return data.(*Service), nil
 }
 
 func (c *Client) GetService(id string) (*Service, error) {
@@ -52,12 +52,12 @@ func (c *Client) GetService(id string) (*Service, error) {
 		return nil, errors.Errorf("Failed to make request to get service: %s", id)
 	}
 
-	service, err := UnmarshalData(resp.Body, new(Service))
+	data, err := UnmarshalData(resp.Body, new(Service))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling service: %s", err.Error())
 	}
 
-	return service.(*Service), nil
+	return data.(*Service), nil
 }
 
 func (c *Client) UpdateService(id string, s *Service) (*Service, error) {
@@ -75,12 +75,12 @@ func (c *Client) UpdateService(id string, s *Service) (*Service, error) {
 		return nil, errors.Errorf("Failed to make request to update service: %s", id)
 	}
 
-	service, err := UnmarshalData(resp.Body, new(Service))
+	data, err := UnmarshalData(resp.Body, new(Service))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling service: %s", err.Error())
 	}
 
-	return service.(*Service), nil
+	return data.(*Service), nil
 }
 
 func (c *Client) DeleteService(id string) error {

@@ -27,12 +27,12 @@ func (c *Client) CreateIncidentType(i *IncidentType) (*IncidentType, error) {
 		return nil, errors.Errorf("Failed to perform request to create incident type: %s", err.Error())
 	}
 
-	incidentType, err := UnmarshalData(resp.Body, new(IncidentType))
+	data, err := UnmarshalData(resp.Body, new(IncidentType))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling incident type: %s", err.Error())
 	}
 
-	return incidentType.(*IncidentType), nil
+	return data.(*IncidentType), nil
 }
 
 func (c *Client) GetIncidentType(id string) (*IncidentType, error) {
@@ -46,12 +46,12 @@ func (c *Client) GetIncidentType(id string) (*IncidentType, error) {
 		return nil, errors.Errorf("Failed to make request to get incident type: %s", id)
 	}
 
-	incidentType, err := UnmarshalData(resp.Body, new(IncidentType))
+	data, err := UnmarshalData(resp.Body, new(IncidentType))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling incident type: %s", err.Error())
 	}
 
-	return incidentType.(*IncidentType), nil
+	return data.(*IncidentType), nil
 }
 
 func (c *Client) UpdateIncidentType(id string, i *IncidentType) (*IncidentType, error) {
@@ -69,12 +69,12 @@ func (c *Client) UpdateIncidentType(id string, i *IncidentType) (*IncidentType, 
 		return nil, errors.Errorf("Failed to make request to update incident type: %s", id)
 	}
 
-	incidentType, err := UnmarshalData(resp.Body, new(IncidentType))
+	data, err := UnmarshalData(resp.Body, new(IncidentType))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling incident type: %s", err.Error())
 	}
 
-	return incidentType.(*IncidentType), nil
+	return data.(*IncidentType), nil
 }
 
 func (c *Client) DeleteIncidentType(id string) error {
