@@ -12,10 +12,15 @@ import (
 
 func resourceIncidentRole() *schema.Resource {
 	return &schema.Resource{
+		Description: "Manages Incident Roles (e.g Commander, Ops Lead, Communication).",
+
 		CreateContext: resourceIncidentRoleCreate,
 		ReadContext:   resourceIncidentRoleRead,
 		UpdateContext: resourceIncidentRoleUpdate,
 		DeleteContext: resourceIncidentRoleDelete,
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
+		},
 
 		Schema: map[string]*schema.Schema{
 			"name": {
@@ -34,7 +39,7 @@ func resourceIncidentRole() *schema.Resource {
 				Optional:    true,
 			},
 			"enabled": {
-				Description: "Whether thee incident role is enabled or not",
+				Description: "Whether the incident role is enabled or not",
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Computed:    true,

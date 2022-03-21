@@ -6,16 +6,20 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootly/terraform-provider-rootly/client"
 )
 
 func resourceService() *schema.Resource {
 	return &schema.Resource{
+		Description: "Manages Services (e.g elasticsearch-prod, redis-preprod, customer-postgresql-prod).",
+
 		CreateContext: resourceServiceCreate,
 		ReadContext:   resourceServiceRead,
 		UpdateContext: resourceServiceUpdate,
 		DeleteContext: resourceServiceDelete,
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
+		},
 
 		Schema: map[string]*schema.Schema{
 			"name": {
@@ -24,7 +28,7 @@ func resourceService() *schema.Resource {
 				Required:    true,
 			},
 			"description": {
-				Description: "For internal use only.",
+				Description: "For internal use only",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -34,7 +38,7 @@ func resourceService() *schema.Resource {
 				Optional:    true,
 			},
 			"color": {
-				Description:  "The cikir of the service",
+				Description:  "The color chosen for the service",
 				Type:         schema.TypeString,
 				Optional:     true,
 				Default:      "#047BF8", // Default value from the API
@@ -45,18 +49,6 @@ func resourceService() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
-			"service": {
-				Description: "The description of the service",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "medium",
-				ValidateFunc: validation.StringInSlice([]string{
-					"critical",
-					"high",
-					"medium",
-					"low",
-				}, false),
 			},
 		},
 	}

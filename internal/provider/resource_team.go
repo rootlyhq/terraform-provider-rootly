@@ -11,10 +11,15 @@ import (
 
 func resourceTeam() *schema.Resource {
 	return &schema.Resource{
+		Description: "Manages Teams (e.g Infrastructure, Security, Search).",
+
 		CreateContext: resourceTeamCreate,
 		ReadContext:   resourceTeamRead,
 		UpdateContext: resourceTeamUpdate,
 		DeleteContext: resourceTeamDelete,
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
+		},
 
 		Schema: map[string]*schema.Schema{
 			"name": {
@@ -28,7 +33,7 @@ func resourceTeam() *schema.Resource {
 				Optional:    true,
 			},
 			"color": {
-				Description:  "The color of the severity",
+				Description:  "The color chosen for the team",
 				Type:         schema.TypeString,
 				Optional:     true,
 				Default:      "#E65252", // Default value from the API

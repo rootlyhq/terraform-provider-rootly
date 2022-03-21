@@ -1,0 +1,28 @@
+---
+page_title: "{{.Type}} {{.Name}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+  {{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Type}} ({{.Name}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+```
+resource "{{.Name}}" "foo" {
+  name = "bar"
+}
+```
+
+{{ .SchemaMarkdown | trimspace }}
+
+## Import
+
+Import is supported using the following syntax:
+
+```shell
+terraform import {{.Name}}.foo 11111111-2222-3333-4444-555555555555
+```

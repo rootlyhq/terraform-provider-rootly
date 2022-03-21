@@ -11,10 +11,15 @@ import (
 
 func resourceFunctionality() *schema.Resource {
 	return &schema.Resource{
+		Description: "Manages functionalities (e.g Logging In, Search, Adds items to Cart).",
+
 		CreateContext: resourceFunctionalityCreate,
 		ReadContext:   resourceFunctionalityRead,
 		UpdateContext: resourceFunctionalityUpdate,
 		DeleteContext: resourceFunctionalityDelete,
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
+		},
 
 		Schema: map[string]*schema.Schema{
 			"name": {
