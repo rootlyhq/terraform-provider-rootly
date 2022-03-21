@@ -3,7 +3,7 @@
 terraform {
   required_providers {
     rootly = {
-      source = "rootly/rootly"
+      source = "rootlyhq/rootly"
     }
   }
 }
