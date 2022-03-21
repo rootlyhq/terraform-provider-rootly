@@ -37,8 +37,7 @@ func TestAccResourceService(t *testing.T) {
 
 const testAccResourceService = `
 resource "rootly_service" "foo" {
-  name               = "myservice"
-  public_description = "my public desc"
+  name = "myservice"
 }
 `
 
@@ -47,6 +46,6 @@ resource "rootly_service" "foo" {
   name               = "myservice2"
   description        = "test description"
   color              = "#203"
-  public_description = "my new public description"
+  public_description = "my public description"
 }
 `

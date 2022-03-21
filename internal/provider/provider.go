@@ -30,11 +30,13 @@ func New(version string) func() *schema.Provider {
 		p := &schema.Provider{
 			Schema: map[string]*schema.Schema{
 				"api_host": {
-					Type:     schema.TypeString,
-					Optional: true,
-					Default:  "https://api.rootly.com",
+					Description: "The Rootly API host. Defaults to https://api.rootly.com",
+					Type:        schema.TypeString,
+					Optional:    true,
+					Default:     "https://api.rootly.com",
 				},
 				"api_token": {
+					Description: "The Rootly API Token. Generate it from your account at https://rootly.com/account",
 					Type:        schema.TypeString,
 					Optional:    true,
 					Sensitive:   true,

@@ -12,10 +12,15 @@ import (
 
 func resourceSeverity() *schema.Resource {
 	return &schema.Resource{
+		Description: "Manages Severities (e.g SEV0, SEV1, SEV2, SEV3).",
+
 		CreateContext: resourceSeverityCreate,
 		ReadContext:   resourceSeverityRead,
 		UpdateContext: resourceSeverityUpdate,
 		DeleteContext: resourceSeverityDelete,
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
+		},
 
 		Schema: map[string]*schema.Schema{
 			"name": {

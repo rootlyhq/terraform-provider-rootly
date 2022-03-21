@@ -11,10 +11,15 @@ import (
 
 func resourceIncidentType() *schema.Resource {
 	return &schema.Resource{
+		Description: "Manages incident types (e.g Cloud, Customer Facing, Security, Training).",
+
 		CreateContext: resourceIncidentTypeCreate,
 		ReadContext:   resourceIncidentTypeRead,
 		UpdateContext: resourceIncidentTypeUpdate,
 		DeleteContext: resourceIncidentTypeDelete,
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
+		},
 
 		Schema: map[string]*schema.Schema{
 			"name": {

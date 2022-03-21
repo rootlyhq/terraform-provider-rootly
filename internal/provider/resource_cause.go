@@ -11,10 +11,15 @@ import (
 
 func resourceCause() *schema.Resource {
 	return &schema.Resource{
+		Description: "Manages incident causes (e.g Bug, Load, Human Error, 3rd party Outage, Configuration Change).",
+
 		CreateContext: resourceCauseCreate,
 		ReadContext:   resourceCauseRead,
 		UpdateContext: resourceCauseUpdate,
 		DeleteContext: resourceCauseDelete,
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
+		},
 
 		Schema: map[string]*schema.Schema{
 			"name": {

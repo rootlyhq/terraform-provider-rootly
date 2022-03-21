@@ -9,9 +9,13 @@ OS_ARCH=darwin_amd64
 default: testacc
 
 # Run acceptance tests
-.PHONY: testacc build release install test
+.PHONY: testacc build release install test docs
 build:
 	go build -o ${BINARY}
+
+docs:
+	@go get -v github.com/hashicorp/terraform-plugin-docs/...
+	tfplugindocs generate
 
 release:
 	goreleaser release --rm-dist --snapshot --skip-publish  --skip-sign
