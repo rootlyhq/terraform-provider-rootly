@@ -1,4 +1,4 @@
-module github.com/rootly/terraform-provider-rootly
+module github.com/rootlyhq/terraform-provider-rootly
 
 go 1.16
 
