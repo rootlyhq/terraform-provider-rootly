@@ -4,7 +4,7 @@ _This template repository is built on the [Terraform Plugin SDK](https://github.
 
 This repository is a *template* for a [Terraform](https://www.terraform.io) provider. It is intended as a starting point for creating Terraform providers, containing:
 
- - A resource, and a data source (`internal/provider/`),
+ - A resource, and a data source (`rootly/`),
  - Examples (`examples/`) and generated documentation (`docs/`),
  - Miscellaneous meta files.
  
