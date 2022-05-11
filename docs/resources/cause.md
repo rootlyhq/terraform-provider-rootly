@@ -27,6 +27,9 @@ resource "rootly_cause" "foo" {
 ### Optional
 
 - `description` (String) The description of the cause
+
+### Read-Only
+
 - `id` (String) The ID of this resource.
 
 ## Import

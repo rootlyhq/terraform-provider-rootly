@@ -28,9 +28,12 @@ resource "rootly_service" "foo" {
 
 - `color` (String) The color chosen for the service
 - `description` (String) For internal use only
-- `id` (String) The ID of this resource.
 - `public_description` (String) This will be displayed on your status pages to explain to your customer the use of this service.
 - `slug` (String) The slug of the service
+
+### Read-Only
+
+- `id` (String) The ID of this resource.
 
 ## Import
 

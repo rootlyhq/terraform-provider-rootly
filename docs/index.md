@@ -19,7 +19,7 @@ Use the navigation to the left to read about the available resources.
 terraform {
   required_providers {
     rootly = {
-      source = "rootlyhq/provider"
+      source = "rootlyhq/rootly"
     }
   }
 }
@@ -33,9 +33,9 @@ provider "rootly" {
 
 # Terraform 0.12- can be specified as:
 # provider "rootly" {
-  # We recommend using the `ROOTLY_API_TOKEN` env var to set the API Token
-  # when interacting with Rootly's API.
-  # api_token = var.rootly_api_key
+# We recommend using the `ROOTLY_API_TOKEN` env var to set the API Token
+# when interacting with Rootly's API.
+# api_token = var.rootly_api_key
 # }
 ```
 

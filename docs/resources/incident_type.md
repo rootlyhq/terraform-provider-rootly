@@ -28,6 +28,9 @@ resource "rootly_incident_type" "foo" {
 
 - `color` (String) The cikir of the incident type
 - `description` (String) The description of the incident type
+
+### Read-Only
+
 - `id` (String) The ID of this resource.
 
 ## Import

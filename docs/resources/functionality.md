@@ -28,8 +28,11 @@ resource "rootly_functionality" "foo" {
 
 - `color` (String) The color of the severity
 - `description` (String) The description of the functionality
-- `id` (String) The ID of this resource.
 - `slug` (String) The slug of the severity
+
+### Read-Only
+
+- `id` (String) The ID of this resource.
 
 ## Import
 

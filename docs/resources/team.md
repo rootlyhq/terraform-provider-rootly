@@ -28,6 +28,9 @@ resource "rootly_team" "foo" {
 
 - `color` (String) The color chosen for the team
 - `description` (String) The description of the team
+
+### Read-Only
+
 - `id` (String) The ID of this resource.
 
 ## Import

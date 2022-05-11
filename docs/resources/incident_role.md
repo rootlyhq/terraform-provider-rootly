@@ -28,8 +28,11 @@ resource "rootly_incident_role" "foo" {
 
 - `description` (String) The description of the incident role
 - `enabled` (Boolean) Whether the incident role is enabled or not
-- `id` (String) The ID of this resource.
 - `summary` (String) The summary of the incident role
+
+### Read-Only
+
+- `id` (String) The ID of this resource.
 
 ## Import
 
