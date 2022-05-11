@@ -19,7 +19,7 @@ Use the navigation to the left to read about the available resources.
 terraform {
   required_providers {
     rootly = {
-      source = "rootlyhq/rootly"
+      source = "rootlyhq/provider"
     }
   }
 }

@@ -33,7 +33,7 @@ func New(version string) func() *schema.Provider {
 					Description: "The Rootly API host. Defaults to https://api.rootly.com",
 					Type:        schema.TypeString,
 					Optional:    true,
-					Default:     "https://api.rootly.com",
+					DefaultFunc: schema.EnvDefaultFunc("ROOTLY_API_URL", "https://api.rootly.com"),
 				},
 				"api_token": {
 					Description: "The Rootly API Token. Generate it from your account at https://rootly.com/account",
