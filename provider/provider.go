@@ -45,6 +45,7 @@ func New(version string) func() *schema.Provider {
 			},
 			ResourcesMap: map[string]*schema.Resource{
 				"rootly_cause":         resourceCause(),
+				"rootly_environment":   resourceEnvironment(),
 				"rootly_functionality": resourceFunctionality(),
 				"rootly_incident_role": resourceIncidentRole(),
 				"rootly_incident_type": resourceIncidentType(),
