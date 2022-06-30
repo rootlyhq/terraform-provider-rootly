@@ -288,8 +288,8 @@ github.com/rogpeppe/fastuuid v1.2.0/go.mod h1:jVj6XXZzXRy/MSR5jhDC/2q6DgLz+nrA6L
 github.com/rogpeppe/go-internal v1.6.1/go.mod h1:xXDCJY+GAPziupqXw64V24skbSoqbTEfhy4qGm1nDQc=
 github.com/rogpeppe/go-internal v1.8.0 h1:FCbCCtXNOY3UtUuHUYaghJg4y7Fd14rXifAYUAtL9R8=
 github.com/rogpeppe/go-internal v1.8.0/go.mod h1:WmiCO8CzOY8rg0OYDC4/i/2WRWAB6poM+XZ2dLUbcbE=
-github.com/rootlyhq/rootly-go v0.0.0-20211202023651-b535d2717364 h1:C2VfZPNMLUSmjtr0npaLO2KGdxjPYovnilcXm0wi6+A=
-github.com/rootlyhq/rootly-go v0.0.0-20211202023651-b535d2717364/go.mod h1:u0w09fIFlwPp4ovYKLydCGSUN1eK2/Fo85vCh9mYcUY=
+github.com/rootlyhq/rootly-go v0.0.0-20220630104328-fe5e7e1e666d h1:4VnM9OZWaCm7zU/YLGLBkCLKtKM1T+zax6mdsPQ1siY=
+github.com/rootlyhq/rootly-go v0.0.0-20220630104328-fe5e7e1e666d/go.mod h1:LYmxsqy0ZgZJduWHlGX5Z8wcTu1X9ooeU3uikaeoynI=
 github.com/russross/blackfriday v1.6.0 h1:KqfZb0pUVN2lYqZUYRddxF4OR8ZMURnJIG5Y3VRLtww=
 github.com/russross/blackfriday v1.6.0/go.mod h1:ti0ldHuxg49ri4ksnFxlkCfN+hvslNlmVHqNRXXJNAY=
 github.com/sebdah/goldie v1.0.0/go.mod h1:jXP4hmWywNEwZzhMuv2ccnqTSFpuq8iyQhtQdkkZBH4=
