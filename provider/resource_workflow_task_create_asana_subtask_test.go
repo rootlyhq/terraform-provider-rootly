@@ -6,25 +6,25 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
-func TestAccResourceWorkflowTaskAddActionItem(t *testing.T) {
+func TestAccResourceWorkflowTaskCreateAsanaSubtask(t *testing.T) {
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck:          func() { testAccPreCheck(t) },
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceWorkflowTaskAddActionItem,
+				Config: testAccResourceWorkflowTaskCreateAsanaSubtask,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_workflow_incident.foo", "name", "test-workflow"),
 				),
 			},
 			{
-				Config: testAccResourceWorkflowTaskAddActionItemUpdate,
+				Config: testAccResourceWorkflowTaskCreateAsanaSubtaskUpdate,
 			},
 		},
 	})
 }
 
-const testAccResourceWorkflowTaskAddActionItem = `
+const testAccResourceWorkflowTaskCreateAsanaSubtask = `
 resource "rootly_workflow_incident" "foo" {
   name = "test-workflow"
 	trigger_params {
@@ -32,17 +32,20 @@ resource "rootly_workflow_incident" "foo" {
 	}
 }
 
-resource "rootly_workflow_task_add_action_item" "foo" {
+resource "rootly_workflow_task_create_asana_subtask" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		summary = "test"
-status = "open"
-priority = "low"
+		parent_task_id = "test"
+title = "test"
+completion = {
+					id = "foo"
+					name = "bar"
+				}
 	}
 }
 `
 
-const testAccResourceWorkflowTaskAddActionItemUpdate = `
+const testAccResourceWorkflowTaskCreateAsanaSubtaskUpdate = `
 resource "rootly_workflow_incident" "foo" {
   name = "test-workflow"
 	trigger_params {
@@ -50,12 +53,15 @@ resource "rootly_workflow_incident" "foo" {
 	}
 }
 
-resource "rootly_workflow_task_add_action_item" "foo" {
+resource "rootly_workflow_task_create_asana_subtask" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		summary = "test"
-status = "open"
-priority = "low"
+		parent_task_id = "test"
+title = "test"
+completion = {
+					id = "foo"
+					name = "bar"
+				}
 	}
 }
 `

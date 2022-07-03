@@ -6,25 +6,25 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
-func TestAccResourceWorkflowTaskAddActionItem(t *testing.T) {
+func TestAccResourceWorkflowTaskUpdateSlackChannelTopic(t *testing.T) {
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck:          func() { testAccPreCheck(t) },
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceWorkflowTaskAddActionItem,
+				Config: testAccResourceWorkflowTaskUpdateSlackChannelTopic,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_workflow_incident.foo", "name", "test-workflow"),
 				),
 			},
 			{
-				Config: testAccResourceWorkflowTaskAddActionItemUpdate,
+				Config: testAccResourceWorkflowTaskUpdateSlackChannelTopicUpdate,
 			},
 		},
 	})
 }
 
-const testAccResourceWorkflowTaskAddActionItem = `
+const testAccResourceWorkflowTaskUpdateSlackChannelTopic = `
 resource "rootly_workflow_incident" "foo" {
   name = "test-workflow"
 	trigger_params {
@@ -32,17 +32,19 @@ resource "rootly_workflow_incident" "foo" {
 	}
 }
 
-resource "rootly_workflow_task_add_action_item" "foo" {
+resource "rootly_workflow_task_update_slack_channel_topic" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		summary = "test"
-status = "open"
-priority = "low"
+		channel = {
+					id = "foo"
+					name = "bar"
+				}
+topic = "test"
 	}
 }
 `
 
-const testAccResourceWorkflowTaskAddActionItemUpdate = `
+const testAccResourceWorkflowTaskUpdateSlackChannelTopicUpdate = `
 resource "rootly_workflow_incident" "foo" {
   name = "test-workflow"
 	trigger_params {
@@ -50,12 +52,14 @@ resource "rootly_workflow_incident" "foo" {
 	}
 }
 
-resource "rootly_workflow_task_add_action_item" "foo" {
+resource "rootly_workflow_task_update_slack_channel_topic" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		summary = "test"
-status = "open"
-priority = "low"
+		channel = {
+					id = "foo"
+					name = "bar"
+				}
+topic = "test"
 	}
 }
 `

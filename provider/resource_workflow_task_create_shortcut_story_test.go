@@ -6,25 +6,25 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
-func TestAccResourceWorkflowTaskAddActionItem(t *testing.T) {
+func TestAccResourceWorkflowTaskCreateShortcutStory(t *testing.T) {
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck:          func() { testAccPreCheck(t) },
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceWorkflowTaskAddActionItem,
+				Config: testAccResourceWorkflowTaskCreateShortcutStory,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_workflow_incident.foo", "name", "test-workflow"),
 				),
 			},
 			{
-				Config: testAccResourceWorkflowTaskAddActionItemUpdate,
+				Config: testAccResourceWorkflowTaskCreateShortcutStoryUpdate,
 			},
 		},
 	})
 }
 
-const testAccResourceWorkflowTaskAddActionItem = `
+const testAccResourceWorkflowTaskCreateShortcutStory = `
 resource "rootly_workflow_incident" "foo" {
   name = "test-workflow"
 	trigger_params {
@@ -32,17 +32,24 @@ resource "rootly_workflow_incident" "foo" {
 	}
 }
 
-resource "rootly_workflow_task_add_action_item" "foo" {
+resource "rootly_workflow_task_create_shortcut_story" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		summary = "test"
-status = "open"
-priority = "low"
+		title = "test"
+project = {
+					id = "foo"
+					name = "bar"
+				}
+archivation = {
+					id = "foo"
+					name = "bar"
+				}
+kind = "bug"
 	}
 }
 `
 
-const testAccResourceWorkflowTaskAddActionItemUpdate = `
+const testAccResourceWorkflowTaskCreateShortcutStoryUpdate = `
 resource "rootly_workflow_incident" "foo" {
   name = "test-workflow"
 	trigger_params {
@@ -50,12 +57,19 @@ resource "rootly_workflow_incident" "foo" {
 	}
 }
 
-resource "rootly_workflow_task_add_action_item" "foo" {
+resource "rootly_workflow_task_create_shortcut_story" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		summary = "test"
-status = "open"
-priority = "low"
+		title = "test"
+project = {
+					id = "foo"
+					name = "bar"
+				}
+archivation = {
+					id = "foo"
+					name = "bar"
+				}
+kind = "bug"
 	}
 }
 `

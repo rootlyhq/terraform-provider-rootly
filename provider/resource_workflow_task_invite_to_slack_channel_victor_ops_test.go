@@ -6,25 +6,25 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
-func TestAccResourceWorkflowTaskAddActionItem(t *testing.T) {
+func TestAccResourceWorkflowTaskInviteToSlackChannelVictorOps(t *testing.T) {
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck:          func() { testAccPreCheck(t) },
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceWorkflowTaskAddActionItem,
+				Config: testAccResourceWorkflowTaskInviteToSlackChannelVictorOps,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_workflow_incident.foo", "name", "test-workflow"),
 				),
 			},
 			{
-				Config: testAccResourceWorkflowTaskAddActionItemUpdate,
+				Config: testAccResourceWorkflowTaskInviteToSlackChannelVictorOpsUpdate,
 			},
 		},
 	})
 }
 
-const testAccResourceWorkflowTaskAddActionItem = `
+const testAccResourceWorkflowTaskInviteToSlackChannelVictorOps = `
 resource "rootly_workflow_incident" "foo" {
   name = "test-workflow"
 	trigger_params {
@@ -32,17 +32,18 @@ resource "rootly_workflow_incident" "foo" {
 	}
 }
 
-resource "rootly_workflow_task_add_action_item" "foo" {
+resource "rootly_workflow_task_invite_to_slack_channel_victor_ops" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		summary = "test"
-status = "open"
-priority = "low"
+		schedule = {
+					id = "foo"
+					name = "bar"
+				}
 	}
 }
 `
 
-const testAccResourceWorkflowTaskAddActionItemUpdate = `
+const testAccResourceWorkflowTaskInviteToSlackChannelVictorOpsUpdate = `
 resource "rootly_workflow_incident" "foo" {
   name = "test-workflow"
 	trigger_params {
@@ -50,12 +51,13 @@ resource "rootly_workflow_incident" "foo" {
 	}
 }
 
-resource "rootly_workflow_task_add_action_item" "foo" {
+resource "rootly_workflow_task_invite_to_slack_channel_victor_ops" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		summary = "test"
-status = "open"
-priority = "low"
+		schedule = {
+					id = "foo"
+					name = "bar"
+				}
 	}
 }
 `

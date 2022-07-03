@@ -6,25 +6,25 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
-func TestAccResourceWorkflowTaskAddActionItem(t *testing.T) {
+func TestAccResourceWorkflowTaskPrint(t *testing.T) {
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck:          func() { testAccPreCheck(t) },
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceWorkflowTaskAddActionItem,
+				Config: testAccResourceWorkflowTaskPrint,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_workflow_incident.foo", "name", "test-workflow"),
 				),
 			},
 			{
-				Config: testAccResourceWorkflowTaskAddActionItemUpdate,
+				Config: testAccResourceWorkflowTaskPrintUpdate,
 			},
 		},
 	})
 }
 
-const testAccResourceWorkflowTaskAddActionItem = `
+const testAccResourceWorkflowTaskPrint = `
 resource "rootly_workflow_incident" "foo" {
   name = "test-workflow"
 	trigger_params {
@@ -32,17 +32,15 @@ resource "rootly_workflow_incident" "foo" {
 	}
 }
 
-resource "rootly_workflow_task_add_action_item" "foo" {
+resource "rootly_workflow_task_print" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		summary = "test"
-status = "open"
-priority = "low"
+		message = "test"
 	}
 }
 `
 
-const testAccResourceWorkflowTaskAddActionItemUpdate = `
+const testAccResourceWorkflowTaskPrintUpdate = `
 resource "rootly_workflow_incident" "foo" {
   name = "test-workflow"
 	trigger_params {
@@ -50,12 +48,10 @@ resource "rootly_workflow_incident" "foo" {
 	}
 }
 
-resource "rootly_workflow_task_add_action_item" "foo" {
+resource "rootly_workflow_task_print" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		summary = "test"
-status = "open"
-priority = "low"
+		message = "test"
 	}
 }
 `

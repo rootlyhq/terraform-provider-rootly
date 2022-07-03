@@ -10,14 +10,14 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/client"
 )
 
-func resourceWorkflowTaskAddActionItem() *schema.Resource {
+func resourceWorkflowTaskAutoAssignRoleVictorOps() *schema.Resource {
 	return &schema.Resource{
-		Description: "Manages workflow add_action_item task.",
+		Description: "Manages workflow auto_assign_role_victor_ops task.",
 
-		CreateContext: resourceWorkflowTaskAddActionItemCreate,
-		ReadContext:   resourceWorkflowTaskAddActionItemRead,
-		UpdateContext: resourceWorkflowTaskAddActionItemUpdate,
-		DeleteContext: resourceWorkflowTaskAddActionItemDelete,
+		CreateContext: resourceWorkflowTaskAutoAssignRoleVictorOpsCreate,
+		ReadContext:   resourceWorkflowTaskAutoAssignRoleVictorOpsRead,
+		UpdateContext: resourceWorkflowTaskAutoAssignRoleVictorOpsUpdate,
+		DeleteContext: resourceWorkflowTaskAutoAssignRoleVictorOpsDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -39,73 +39,20 @@ func resourceWorkflowTaskAddActionItem() *schema.Resource {
 						"task_type": &schema.Schema{
 							Type: schema.TypeString,
 							Optional: true,
-							Default: "add_action_item",
+							Default: "auto_assign_role_victor_ops",
 							ValidateFunc: validation.StringInSlice([]string{
-								"add_action_item",
+								"auto_assign_role_victor_ops",
 							}, false),
 						},
-						"assigned_to_user_id": &schema.Schema{
-							Description: "The user id this action item is assigned to",
-							Type: schema.TypeString,
-							Optional: true,
-						},
-						"priority": &schema.Schema{
-							Description: "The action item priority.",
-							Type: schema.TypeString,
-							Required: true,
-							ValidateFunc: validation.StringInSlice([]string{
-								"low",
-"medium",
-"high",
-							}, false),
-						},
-						"kind": &schema.Schema{
-							Description: "The action item kind.",
-							Type: schema.TypeString,
-							Optional: true,
-						},
-						"summary": &schema.Schema{
-							Description: "The action item summary.",
+						"incident_role_id": &schema.Schema{
+							Description: "The role id.",
 							Type: schema.TypeString,
 							Required: true,
 						},
-						"description": &schema.Schema{
-							Description: "The action item description.",
-							Type: schema.TypeString,
-							Optional: true,
-						},
-						"status": &schema.Schema{
-							Description: "The action item status.",
-							Type: schema.TypeString,
-							Required: true,
-							ValidateFunc: validation.StringInSlice([]string{
-								"open",
-"in_progress",
-"cancelled",
-"done",
-							}, false),
-						},
-						"post_to_incident_timeline": &schema.Schema{
+						"schedule": &schema.Schema{
 							Description: "",
-							Type: schema.TypeBool,
-							Optional: true,
-						},
-						"post_to_slack_channels": &schema.Schema{
-							Description: "",
-							Type: schema.TypeList,
-							Optional: true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type: schema.TypeString,
-										Required: true,
-									},
-									"name": &schema.Schema{
-										Type: schema.TypeString,
-										Required: true,
-									},
-								},
-							},
+							Type: schema.TypeMap,
+							Required: true,
 						},
 					},
 				},
@@ -114,7 +61,7 @@ func resourceWorkflowTaskAddActionItem() *schema.Resource {
 	}
 }
 
-func resourceWorkflowTaskAddActionItemCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskAutoAssignRoleVictorOpsCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
@@ -135,10 +82,10 @@ func resourceWorkflowTaskAddActionItemCreate(ctx context.Context, d *schema.Reso
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created an workflow task resource: %v (%s)", workflowId, d.Id()))
 
-	return resourceWorkflowTaskAddActionItemRead(ctx, d, meta)
+	return resourceWorkflowTaskAutoAssignRoleVictorOpsRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskAddActionItemRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskAutoAssignRoleVictorOpsRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
@@ -147,7 +94,7 @@ func resourceWorkflowTaskAddActionItemRead(ctx context.Context, d *schema.Resour
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskAddActionItem (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskAutoAssignRoleVictorOps (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
@@ -163,7 +110,7 @@ func resourceWorkflowTaskAddActionItemRead(ctx context.Context, d *schema.Resour
 	return nil
 }
 
-func resourceWorkflowTaskAddActionItemUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskAutoAssignRoleVictorOpsUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
@@ -181,10 +128,10 @@ func resourceWorkflowTaskAddActionItemUpdate(ctx context.Context, d *schema.Reso
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
 
-	return resourceWorkflowTaskAddActionItemRead(ctx, d, meta)
+	return resourceWorkflowTaskAutoAssignRoleVictorOpsRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskAddActionItemDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskAutoAssignRoleVictorOpsDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
@@ -193,7 +140,7 @@ func resourceWorkflowTaskAddActionItemDelete(ctx context.Context, d *schema.Reso
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskAddActionItem (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskAutoAssignRoleVictorOps (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}

@@ -10,14 +10,14 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/client"
 )
 
-func resourceWorkflowTaskAddActionItem() *schema.Resource {
+func resourceWorkflowTaskPublishIncident() *schema.Resource {
 	return &schema.Resource{
-		Description: "Manages workflow add_action_item task.",
+		Description: "Manages workflow publish_incident task.",
 
-		CreateContext: resourceWorkflowTaskAddActionItemCreate,
-		ReadContext:   resourceWorkflowTaskAddActionItemRead,
-		UpdateContext: resourceWorkflowTaskAddActionItemUpdate,
-		DeleteContext: resourceWorkflowTaskAddActionItemDelete,
+		CreateContext: resourceWorkflowTaskPublishIncidentCreate,
+		ReadContext:   resourceWorkflowTaskPublishIncidentRead,
+		UpdateContext: resourceWorkflowTaskPublishIncidentUpdate,
+		DeleteContext: resourceWorkflowTaskPublishIncidentDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -39,72 +39,55 @@ func resourceWorkflowTaskAddActionItem() *schema.Resource {
 						"task_type": &schema.Schema{
 							Type: schema.TypeString,
 							Optional: true,
-							Default: "add_action_item",
+							Default: "publish_incident",
 							ValidateFunc: validation.StringInSlice([]string{
-								"add_action_item",
+								"publish_incident",
 							}, false),
 						},
-						"assigned_to_user_id": &schema.Schema{
-							Description: "The user id this action item is assigned to",
-							Type: schema.TypeString,
-							Optional: true,
-						},
-						"priority": &schema.Schema{
-							Description: "The action item priority.",
-							Type: schema.TypeString,
+						"incident": &schema.Schema{
+							Description: "",
+							Type: schema.TypeMap,
 							Required: true,
-							ValidateFunc: validation.StringInSlice([]string{
-								"low",
-"medium",
-"high",
-							}, false),
 						},
-						"kind": &schema.Schema{
-							Description: "The action item kind.",
-							Type: schema.TypeString,
-							Optional: true,
-						},
-						"summary": &schema.Schema{
-							Description: "The action item summary.",
+						"public_title": &schema.Schema{
+							Description: "",
 							Type: schema.TypeString,
 							Required: true,
 						},
-						"description": &schema.Schema{
-							Description: "The action item description.",
+						"event": &schema.Schema{
+							Description: "Incident event description",
 							Type: schema.TypeString,
-							Optional: true,
+							Required: true,
 						},
 						"status": &schema.Schema{
-							Description: "The action item status.",
+							Description: "",
 							Type: schema.TypeString,
 							Required: true,
 							ValidateFunc: validation.StringInSlice([]string{
-								"open",
+								"investigating",
+"identified",
+"monitoring",
+"resolved",
+"investigating",
+"identified",
+"monitoring",
+"resolved",
+"investigating",
+"identified",
+"monitoring",
+"resolved",
+"scheduled",
 "in_progress",
-"cancelled",
-"done",
+"verifying",
+"completed",
 							}, false),
 						},
-						"post_to_incident_timeline": &schema.Schema{
-							Description: "",
-							Type: schema.TypeBool,
-							Optional: true,
-						},
-						"post_to_slack_channels": &schema.Schema{
+						"status_page_ids": &schema.Schema{
 							Description: "",
 							Type: schema.TypeList,
-							Optional: true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type: schema.TypeString,
-										Required: true,
-									},
-									"name": &schema.Schema{
-										Type: schema.TypeString,
-										Required: true,
-									},
-								},
+							Required: true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
 							},
 						},
 					},
@@ -114,7 +97,7 @@ func resourceWorkflowTaskAddActionItem() *schema.Resource {
 	}
 }
 
-func resourceWorkflowTaskAddActionItemCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskPublishIncidentCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
@@ -135,10 +118,10 @@ func resourceWorkflowTaskAddActionItemCreate(ctx context.Context, d *schema.Reso
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created an workflow task resource: %v (%s)", workflowId, d.Id()))
 
-	return resourceWorkflowTaskAddActionItemRead(ctx, d, meta)
+	return resourceWorkflowTaskPublishIncidentRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskAddActionItemRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskPublishIncidentRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
@@ -147,7 +130,7 @@ func resourceWorkflowTaskAddActionItemRead(ctx context.Context, d *schema.Resour
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskAddActionItem (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskPublishIncident (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
@@ -163,7 +146,7 @@ func resourceWorkflowTaskAddActionItemRead(ctx context.Context, d *schema.Resour
 	return nil
 }
 
-func resourceWorkflowTaskAddActionItemUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskPublishIncidentUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
@@ -181,10 +164,10 @@ func resourceWorkflowTaskAddActionItemUpdate(ctx context.Context, d *schema.Reso
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
 
-	return resourceWorkflowTaskAddActionItemRead(ctx, d, meta)
+	return resourceWorkflowTaskPublishIncidentRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskAddActionItemDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskPublishIncidentDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
@@ -193,7 +176,7 @@ func resourceWorkflowTaskAddActionItemDelete(ctx context.Context, d *schema.Reso
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskAddActionItem (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskPublishIncident (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}

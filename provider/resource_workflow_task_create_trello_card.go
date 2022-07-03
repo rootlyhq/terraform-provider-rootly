@@ -10,14 +10,14 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/client"
 )
 
-func resourceWorkflowTaskAddActionItem() *schema.Resource {
+func resourceWorkflowTaskCreateTrelloCard() *schema.Resource {
 	return &schema.Resource{
-		Description: "Manages workflow add_action_item task.",
+		Description: "Manages workflow create_trello_card task.",
 
-		CreateContext: resourceWorkflowTaskAddActionItemCreate,
-		ReadContext:   resourceWorkflowTaskAddActionItemRead,
-		UpdateContext: resourceWorkflowTaskAddActionItemUpdate,
-		DeleteContext: resourceWorkflowTaskAddActionItemDelete,
+		CreateContext: resourceWorkflowTaskCreateTrelloCardCreate,
+		ReadContext:   resourceWorkflowTaskCreateTrelloCardRead,
+		UpdateContext: resourceWorkflowTaskCreateTrelloCardUpdate,
+		DeleteContext: resourceWorkflowTaskCreateTrelloCardDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -39,58 +39,37 @@ func resourceWorkflowTaskAddActionItem() *schema.Resource {
 						"task_type": &schema.Schema{
 							Type: schema.TypeString,
 							Optional: true,
-							Default: "add_action_item",
+							Default: "create_trello_card",
 							ValidateFunc: validation.StringInSlice([]string{
-								"add_action_item",
+								"create_trello_card",
 							}, false),
 						},
-						"assigned_to_user_id": &schema.Schema{
-							Description: "The user id this action item is assigned to",
-							Type: schema.TypeString,
-							Optional: true,
-						},
-						"priority": &schema.Schema{
-							Description: "The action item priority.",
-							Type: schema.TypeString,
-							Required: true,
-							ValidateFunc: validation.StringInSlice([]string{
-								"low",
-"medium",
-"high",
-							}, false),
-						},
-						"kind": &schema.Schema{
-							Description: "The action item kind.",
-							Type: schema.TypeString,
-							Optional: true,
-						},
-						"summary": &schema.Schema{
-							Description: "The action item summary.",
+						"title": &schema.Schema{
+							Description: "The card title",
 							Type: schema.TypeString,
 							Required: true,
 						},
 						"description": &schema.Schema{
-							Description: "The action item description.",
+							Description: "The card description",
 							Type: schema.TypeString,
 							Optional: true,
 						},
-						"status": &schema.Schema{
-							Description: "The action item status.",
+						"due_date": &schema.Schema{
+							Description: "The due date (ISO8601 format)",
 							Type: schema.TypeString,
+							Optional: true,
+						},
+						"board": &schema.Schema{
+							Description: "The board id and display name.",
+							Type: schema.TypeMap,
 							Required: true,
-							ValidateFunc: validation.StringInSlice([]string{
-								"open",
-"in_progress",
-"cancelled",
-"done",
-							}, false),
 						},
-						"post_to_incident_timeline": &schema.Schema{
-							Description: "",
-							Type: schema.TypeBool,
-							Optional: true,
+						"list": &schema.Schema{
+							Description: "The list id and display name.",
+							Type: schema.TypeMap,
+							Required: true,
 						},
-						"post_to_slack_channels": &schema.Schema{
+						"labels": &schema.Schema{
 							Description: "",
 							Type: schema.TypeList,
 							Optional: true,
@@ -107,6 +86,11 @@ func resourceWorkflowTaskAddActionItem() *schema.Resource {
 								},
 							},
 						},
+						"archivation": &schema.Schema{
+							Description: "The archivation id and display name.",
+							Type: schema.TypeMap,
+							Optional: true,
+						},
 					},
 				},
 			},
@@ -114,7 +98,7 @@ func resourceWorkflowTaskAddActionItem() *schema.Resource {
 	}
 }
 
-func resourceWorkflowTaskAddActionItemCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateTrelloCardCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
@@ -135,10 +119,10 @@ func resourceWorkflowTaskAddActionItemCreate(ctx context.Context, d *schema.Reso
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created an workflow task resource: %v (%s)", workflowId, d.Id()))
 
-	return resourceWorkflowTaskAddActionItemRead(ctx, d, meta)
+	return resourceWorkflowTaskCreateTrelloCardRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskAddActionItemRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateTrelloCardRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
@@ -147,7 +131,7 @@ func resourceWorkflowTaskAddActionItemRead(ctx context.Context, d *schema.Resour
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskAddActionItem (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateTrelloCard (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
@@ -163,7 +147,7 @@ func resourceWorkflowTaskAddActionItemRead(ctx context.Context, d *schema.Resour
 	return nil
 }
 
-func resourceWorkflowTaskAddActionItemUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateTrelloCardUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
@@ -181,10 +165,10 @@ func resourceWorkflowTaskAddActionItemUpdate(ctx context.Context, d *schema.Reso
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
 
-	return resourceWorkflowTaskAddActionItemRead(ctx, d, meta)
+	return resourceWorkflowTaskCreateTrelloCardRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskAddActionItemDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateTrelloCardDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
@@ -193,7 +177,7 @@ func resourceWorkflowTaskAddActionItemDelete(ctx context.Context, d *schema.Reso
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskAddActionItem (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateTrelloCard (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}

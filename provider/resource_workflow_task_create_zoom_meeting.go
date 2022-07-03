@@ -10,14 +10,14 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/client"
 )
 
-func resourceWorkflowTaskAddActionItem() *schema.Resource {
+func resourceWorkflowTaskCreateZoomMeeting() *schema.Resource {
 	return &schema.Resource{
-		Description: "Manages workflow add_action_item task.",
+		Description: "Manages workflow create_zoom_meeting task.",
 
-		CreateContext: resourceWorkflowTaskAddActionItemCreate,
-		ReadContext:   resourceWorkflowTaskAddActionItemRead,
-		UpdateContext: resourceWorkflowTaskAddActionItemUpdate,
-		DeleteContext: resourceWorkflowTaskAddActionItemDelete,
+		CreateContext: resourceWorkflowTaskCreateZoomMeetingCreate,
+		ReadContext:   resourceWorkflowTaskCreateZoomMeetingRead,
+		UpdateContext: resourceWorkflowTaskCreateZoomMeetingUpdate,
+		DeleteContext: resourceWorkflowTaskCreateZoomMeetingDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -39,50 +39,35 @@ func resourceWorkflowTaskAddActionItem() *schema.Resource {
 						"task_type": &schema.Schema{
 							Type: schema.TypeString,
 							Optional: true,
-							Default: "add_action_item",
+							Default: "create_zoom_meeting",
 							ValidateFunc: validation.StringInSlice([]string{
-								"add_action_item",
+								"create_zoom_meeting",
 							}, false),
 						},
-						"assigned_to_user_id": &schema.Schema{
-							Description: "The user id this action item is assigned to",
+						"topic": &schema.Schema{
+							Description: "The meeting topic",
+							Type: schema.TypeString,
+							Required: true,
+						},
+						"password": &schema.Schema{
+							Description: "The meeting password",
 							Type: schema.TypeString,
 							Optional: true,
 						},
-						"priority": &schema.Schema{
-							Description: "The action item priority.",
+						"create_as_email": &schema.Schema{
+							Description: "The email to use if creating as email.",
 							Type: schema.TypeString,
-							Required: true,
+							Optional: true,
+						},
+						"auto_recording": &schema.Schema{
+							Description: "",
+							Type: schema.TypeString,
+							Optional: true,
+							Default: "none",
 							ValidateFunc: validation.StringInSlice([]string{
-								"low",
-"medium",
-"high",
-							}, false),
-						},
-						"kind": &schema.Schema{
-							Description: "The action item kind.",
-							Type: schema.TypeString,
-							Optional: true,
-						},
-						"summary": &schema.Schema{
-							Description: "The action item summary.",
-							Type: schema.TypeString,
-							Required: true,
-						},
-						"description": &schema.Schema{
-							Description: "The action item description.",
-							Type: schema.TypeString,
-							Optional: true,
-						},
-						"status": &schema.Schema{
-							Description: "The action item status.",
-							Type: schema.TypeString,
-							Required: true,
-							ValidateFunc: validation.StringInSlice([]string{
-								"open",
-"in_progress",
-"cancelled",
-"done",
+								"none",
+"local",
+"cloud",
 							}, false),
 						},
 						"post_to_incident_timeline": &schema.Schema{
@@ -114,7 +99,7 @@ func resourceWorkflowTaskAddActionItem() *schema.Resource {
 	}
 }
 
-func resourceWorkflowTaskAddActionItemCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateZoomMeetingCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
@@ -135,10 +120,10 @@ func resourceWorkflowTaskAddActionItemCreate(ctx context.Context, d *schema.Reso
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created an workflow task resource: %v (%s)", workflowId, d.Id()))
 
-	return resourceWorkflowTaskAddActionItemRead(ctx, d, meta)
+	return resourceWorkflowTaskCreateZoomMeetingRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskAddActionItemRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateZoomMeetingRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
@@ -147,7 +132,7 @@ func resourceWorkflowTaskAddActionItemRead(ctx context.Context, d *schema.Resour
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskAddActionItem (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateZoomMeeting (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
@@ -163,7 +148,7 @@ func resourceWorkflowTaskAddActionItemRead(ctx context.Context, d *schema.Resour
 	return nil
 }
 
-func resourceWorkflowTaskAddActionItemUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateZoomMeetingUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
@@ -181,10 +166,10 @@ func resourceWorkflowTaskAddActionItemUpdate(ctx context.Context, d *schema.Reso
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
 
-	return resourceWorkflowTaskAddActionItemRead(ctx, d, meta)
+	return resourceWorkflowTaskCreateZoomMeetingRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskAddActionItemDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateZoomMeetingDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
@@ -193,7 +178,7 @@ func resourceWorkflowTaskAddActionItemDelete(ctx context.Context, d *schema.Reso
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskAddActionItem (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateZoomMeeting (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
