@@ -59,6 +59,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_workflow_alert": resourceWorkflowAlert(),
 				"rootly_workflow_pulse": resourceWorkflowPulse(),
 				"rootly_workflow_post_mortem": resourceWorkflowPostMortem(),
+				"rootly_workflow_task_add_action_item": resourceWorkflowTaskAddActionItem(),
 			},
 		}
 
