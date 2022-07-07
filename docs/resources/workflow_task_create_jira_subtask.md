@@ -42,7 +42,7 @@ Required:
 Optional:
 
 - `assign_user_email` (String) The assigned user's email.
-- `custom_fields_mapping` (Map of String)
+- `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON.
 - `description` (String) The issue description.
 - `due_date` (String) The due date.
 - `labels` (String) The issue labels.

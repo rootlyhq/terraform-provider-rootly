@@ -39,7 +39,7 @@ Required:
 
 Optional:
 
-- `custom_fields_mapping` (Map of String) Custom field mappings JSON.
+- `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON.
 - `task_type` (String)
 
 ## Import

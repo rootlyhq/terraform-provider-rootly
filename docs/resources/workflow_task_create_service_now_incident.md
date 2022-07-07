@@ -39,6 +39,7 @@ Required:
 Optional:
 
 - `completion` (Map of String) The completion id and display name.
+- `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON.
 - `description` (String) The incident description
 - `priority` (Map of String) The priority id and display name.
 - `task_type` (String)
