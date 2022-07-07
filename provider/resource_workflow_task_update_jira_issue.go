@@ -90,8 +90,8 @@ func resourceWorkflowTaskUpdateJiraIssue() *schema.Resource {
 							Optional: true,
 						},
 						"custom_fields_mapping": &schema.Schema{
-							Description: "",
-							Type: schema.TypeMap,
+							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON.",
+							Type: schema.TypeString,
 							Optional: true,
 						},
 					},
