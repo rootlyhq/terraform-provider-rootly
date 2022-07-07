@@ -15,12 +15,8 @@ If you wish to work on the provider, you'll first need [Go](http://www.golang.or
 
 To compile the provider, run `go install`. This will build the provider and put the provider binary in the `$GOPATH/bin` directory.
 
-To generate or update documentation, run `go generate`.
+To generate or update documentation, run `make docs`.
 
 In order to run the full suite of Acceptance tests, run `make testacc`.
 
-*Note:* Acceptance tests create real resources, and often cost money to run.
-
-```sh
-$ make testacc
-```
+The provider depends on [rootly-go](https://github.com/rootlyhq/rootly-go) for Go types of the Rootly API. These types are auto-generated from Swagger/OpenAPI. See the rootly-go [README](https://github.com/rootlyhq/rootly-go#readme) for more information.
