@@ -14,7 +14,7 @@ func TestAccResourceWorkflowPulse(t *testing.T) {
 			{
 				Config: testAccResourceWorkflowPulse,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_pulse.foo", "name", "test-workflow"),
+					resource.TestCheckResourceAttr("rootly_workflow_pulse.foo", "name", "test-pulse-workflow"),
 					resource.TestCheckResourceAttr("rootly_workflow_pulse.foo", "description", ""),
 					resource.TestCheckResourceAttr("rootly_workflow_pulse.foo", "enabled", "true"),
 				),
@@ -22,7 +22,7 @@ func TestAccResourceWorkflowPulse(t *testing.T) {
 			{
 				Config: testAccResourceWorkflowPulseUpdate,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_pulse.foo", "name", "test-workflow2"),
+					resource.TestCheckResourceAttr("rootly_workflow_pulse.foo", "name", "test-pulse-workflow2"),
 					resource.TestCheckResourceAttr("rootly_workflow_pulse.foo", "description", "test description"),
 					resource.TestCheckResourceAttr("rootly_workflow_pulse.foo", "enabled", "false"),
 				),
@@ -33,7 +33,7 @@ func TestAccResourceWorkflowPulse(t *testing.T) {
 
 const testAccResourceWorkflowPulse = `
 resource "rootly_workflow_pulse" "foo" {
-  name = "test-workflow"
+  name = "test-pulse-workflow"
 	trigger_params {
 		triggers = ["pulse_created"]
 	}
@@ -42,7 +42,7 @@ resource "rootly_workflow_pulse" "foo" {
 
 const testAccResourceWorkflowPulseUpdate = `
 resource "rootly_workflow_pulse" "foo" {
-  name       = "test-workflow2"
+  name       = "test-pulse-workflow2"
   description = "test description"
   enabled     = false
 	trigger_params {
