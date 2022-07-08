@@ -38,6 +38,7 @@ provider "rootly" {
 # api_token = var.rootly_api_key
 # }
 
+# Severities
 resource "rootly_severity" "sev0" {
   name  = "SEV0"
   color = "#FF0000"
@@ -53,6 +54,7 @@ resource "rootly_severity" "sev2" {
   color = "#FFA500"
 }
 
+# Services
 resource "rootly_service" "elasticsearch_prod" {
   name  = "elasticsearch-prod"
   color = "#800080"
@@ -63,6 +65,7 @@ resource "rootly_service" "customer_postgresql_prod" {
   color = "#800080"
 }
 
+# Functionalities
 resource "rootly_functionality" "add_items_to_cart" {
   name  = "Add items to cart"
   color = "#800080"
@@ -73,22 +76,35 @@ resource "rootly_functionality" "logging_in" {
   color = "#800080"
 }
 
+# Jira workflow
 resource "rootly_workflow_incident" "jira" {
-  name = "Create JIRA issue"
+  name        = "Create a Jira Issue"
+  description = "Open Jira ticket whenever incident starts"
   trigger_params {
-    triggers = ["incident_created"]
+    triggers                  = ["incident_created"]
+    incident_condition_kind   = "IS"
+    incident_kinds            = ["normal"]
+    incident_condition_status = "IS"
+    incident_statuses         = ["started"]
   }
+  enabled = true
 }
 
 resource "rootly_workflow_task_create_jira_issue" "jira" {
   workflow_id = rootly_workflow_incident.jira.id
   task_params {
-    title = "{{incident.title}}"
-    project_key = "INCIDENTS"
+    title       = "{{ incident.title }}"
+    description = "{{ incident.summary }}"
+    project_key = "ROOT"
     issue_type = {
-      id = "39000"
-      name = "Bug"
+      id   = "10001"
+      name = "Task"
     }
+    status = {
+      id   = "10000"
+      name = "To Do"
+    }
+    labels = "{{ incident.environment_slugs | concat: incident.service_slugs | concat: incident.functionality_slugs | concat: incident.group_slugs | join: \",\" }}"
   }
 }
 ```
