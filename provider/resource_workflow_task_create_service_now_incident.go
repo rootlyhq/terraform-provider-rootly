@@ -70,6 +70,7 @@ func resourceWorkflowTaskCreateServiceNowIncident() *schema.Resource {
 							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON.",
 							Type: schema.TypeString,
 							Optional: true,
+							Default: "{}",
 						},
 					},
 				},

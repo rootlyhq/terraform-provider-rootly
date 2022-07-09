@@ -152,6 +152,36 @@ func resourceWorkflowPulse() *schema.Resource {
 							Optional: true,
 							Default: "ANY",
 						},
+						"pulse_payload": &schema.Schema{
+							Type:        schema.TypeList,
+							Optional:    true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+						},
+						"pulse_labels": &schema.Schema{
+							Type:        schema.TypeList,
+							Optional:    true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+						},
+						"pulse_sources": &schema.Schema{
+							Type:        schema.TypeList,
+							Optional:    true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+						},
+						"pulse_query_payload": &schema.Schema{
+							Type: schema.TypeString,
+							Optional: true,
+						},
+						"pulse_condition_payload": &schema.Schema{
+							Type: schema.TypeString,
+							Optional: true,
+							Default: "ANY",
+						},
 					},
 				},
 			},

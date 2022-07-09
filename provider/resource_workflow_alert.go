@@ -147,7 +147,37 @@ func resourceWorkflowAlert() *schema.Resource {
 							Optional: true,
 							Default: "ANY",
 						},
+						"alert_payload": &schema.Schema{
+							Type:        schema.TypeList,
+							Optional:    true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+						},
+						"alert_labels": &schema.Schema{
+							Type:        schema.TypeList,
+							Optional:    true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+						},
+						"alert_sources": &schema.Schema{
+							Type:        schema.TypeList,
+							Optional:    true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+						},
 						"alert_condition_label": &schema.Schema{
+							Type: schema.TypeString,
+							Optional: true,
+							Default: "ANY",
+						},
+						"alert_query_payload": &schema.Schema{
+							Type: schema.TypeString,
+							Optional: true,
+						},
+						"alert_condition_payload": &schema.Schema{
 							Type: schema.TypeString,
 							Optional: true,
 							Default: "ANY",
