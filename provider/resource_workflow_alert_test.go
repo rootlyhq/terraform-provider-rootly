@@ -14,7 +14,7 @@ func TestAccResourceWorkflowAlert(t *testing.T) {
 			{
 				Config: testAccResourceWorkflowAlert,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_alert.foo", "name", "test-workflow"),
+					resource.TestCheckResourceAttr("rootly_workflow_alert.foo", "name", "test-alert-workflow"),
 					resource.TestCheckResourceAttr("rootly_workflow_alert.foo", "description", ""),
 					resource.TestCheckResourceAttr("rootly_workflow_alert.foo", "enabled", "true"),
 				),
@@ -22,7 +22,7 @@ func TestAccResourceWorkflowAlert(t *testing.T) {
 			{
 				Config: testAccResourceWorkflowAlertUpdate,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_alert.foo", "name", "test-workflow2"),
+					resource.TestCheckResourceAttr("rootly_workflow_alert.foo", "name", "test-alert-workflow2"),
 					resource.TestCheckResourceAttr("rootly_workflow_alert.foo", "description", "test description"),
 					resource.TestCheckResourceAttr("rootly_workflow_alert.foo", "enabled", "false"),
 				),
@@ -33,7 +33,7 @@ func TestAccResourceWorkflowAlert(t *testing.T) {
 
 const testAccResourceWorkflowAlert = `
 resource "rootly_workflow_alert" "foo" {
-  name = "test-workflow"
+  name = "test-alert-workflow"
 	trigger_params {
 		triggers = ["alert_created"]
 	}
@@ -42,7 +42,7 @@ resource "rootly_workflow_alert" "foo" {
 
 const testAccResourceWorkflowAlertUpdate = `
 resource "rootly_workflow_alert" "foo" {
-  name       = "test-workflow2"
+  name       = "test-alert-workflow2"
   description = "test description"
   enabled     = false
 	trigger_params {

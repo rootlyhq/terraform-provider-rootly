@@ -14,7 +14,7 @@ func TestAccResourceWorkflowActionItem(t *testing.T) {
 			{
 				Config: testAccResourceWorkflowActionItem,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_action_item.foo", "name", "test-workflow"),
+					resource.TestCheckResourceAttr("rootly_workflow_action_item.foo", "name", "test-action-item-workflow"),
 					resource.TestCheckResourceAttr("rootly_workflow_action_item.foo", "description", ""),
 					resource.TestCheckResourceAttr("rootly_workflow_action_item.foo", "enabled", "true"),
 				),
@@ -22,7 +22,7 @@ func TestAccResourceWorkflowActionItem(t *testing.T) {
 			{
 				Config: testAccResourceWorkflowActionItemUpdate,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_action_item.foo", "name", "test-workflow2"),
+					resource.TestCheckResourceAttr("rootly_workflow_action_item.foo", "name", "test-action-item-workflow2"),
 					resource.TestCheckResourceAttr("rootly_workflow_action_item.foo", "description", "test description"),
 					resource.TestCheckResourceAttr("rootly_workflow_action_item.foo", "enabled", "false"),
 				),
@@ -33,7 +33,7 @@ func TestAccResourceWorkflowActionItem(t *testing.T) {
 
 const testAccResourceWorkflowActionItem = `
 resource "rootly_workflow_action_item" "foo" {
-  name = "test-workflow"
+  name = "test-action-item-workflow"
 	trigger_params {
 		triggers = ["action_item_created"]
 	}
@@ -42,7 +42,7 @@ resource "rootly_workflow_action_item" "foo" {
 
 const testAccResourceWorkflowActionItemUpdate = `
 resource "rootly_workflow_action_item" "foo" {
-  name       = "test-workflow2"
+  name       = "test-action-item-workflow2"
   description = "test description"
   enabled     = false
 	trigger_params {

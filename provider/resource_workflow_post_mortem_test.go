@@ -14,7 +14,7 @@ func TestAccResourceWorkflowPostMortem(t *testing.T) {
 			{
 				Config: testAccResourceWorkflowPostMortem,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_post_mortem.foo", "name", "test-workflow"),
+					resource.TestCheckResourceAttr("rootly_workflow_post_mortem.foo", "name", "test-postmortem-workflow"),
 					resource.TestCheckResourceAttr("rootly_workflow_post_mortem.foo", "description", ""),
 					resource.TestCheckResourceAttr("rootly_workflow_post_mortem.foo", "enabled", "true"),
 				),
@@ -22,7 +22,7 @@ func TestAccResourceWorkflowPostMortem(t *testing.T) {
 			{
 				Config: testAccResourceWorkflowPostMortemUpdate,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_post_mortem.foo", "name", "test-workflow2"),
+					resource.TestCheckResourceAttr("rootly_workflow_post_mortem.foo", "name", "test-postmortem-workflow2"),
 					resource.TestCheckResourceAttr("rootly_workflow_post_mortem.foo", "description", "test description"),
 					resource.TestCheckResourceAttr("rootly_workflow_post_mortem.foo", "enabled", "false"),
 				),
@@ -33,7 +33,7 @@ func TestAccResourceWorkflowPostMortem(t *testing.T) {
 
 const testAccResourceWorkflowPostMortem = `
 resource "rootly_workflow_post_mortem" "foo" {
-  name = "test-workflow"
+  name = "test-postmortem-workflow"
 	trigger_params {
 		triggers = ["post_mortem_created"]
 	}
@@ -42,7 +42,7 @@ resource "rootly_workflow_post_mortem" "foo" {
 
 const testAccResourceWorkflowPostMortemUpdate = `
 resource "rootly_workflow_post_mortem" "foo" {
-  name       = "test-workflow2"
+  name       = "test-postmortem-workflow2"
   description = "test description"
   enabled     = false
 	trigger_params {
