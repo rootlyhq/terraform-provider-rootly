@@ -19,7 +19,9 @@ Object.keys(schema).filter((key) => key.match(/_task_params/)).forEach((key) => 
 	const task_schema = schema[key]
 	const task_name_camel = task_name.split("_").map((p) => `${p[0].toUpperCase()}${p.slice(1)}`).join('')
 	fs.writeFileSync(`./provider/resource_workflow_task_${task_name}.go`, genResourceFile(task_name, task_schema))
+	console.log(`generated provider/resource_workflow_task_${task_name}.go`)
 	fs.writeFileSync(`./provider/resource_workflow_task_${task_name}_test.go`, genResourceTestFile(task_name, task_schema))
+	console.log(`generated provider/resource_workflow_task_${task_name}_test.go`)
 })
 
 function genResourceFile(task_name, task_schema) {
@@ -298,7 +300,6 @@ resource "rootly_workflow_task_${task_name}" "foo" {
 
 function genTestParams(task_name, task_schema) {
 	return (task_schema.required || []).map((key) => {
-		console.log(task_name, key)
 		let val = task_schema.properties[key].enum ? task_schema.properties[key].enum[0] : "test"
 		switch (task_schema.properties[key].type) {
 			case "boolean":
