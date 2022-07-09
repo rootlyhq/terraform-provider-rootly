@@ -181,11 +181,15 @@ function genTaskSchemaProperty(property_name, property_schema, required_props) {
 							Description: "${property_schema.description || ""}",
 							Type: ${genTaskSchemaPropertyType(property_schema.type)},
 							${isRequired ? 'Required' : 'Optional'}: true,`
+	if (property_name === "custom_fields_mapping") {
+			a = `${a}
+							Default: "{}",`
+	}
 	if (property_schema.enum) {
 		if (!isRequired) {
 			a = `${a}
 							Default: "${property_schema.enum[0]}",`
-			}
+		}
 		a = `${a}
 							ValidateFunc: validation.StringInSlice([]string{
 								${property_schema.enum.map((k) => `"${k}",`).join('\n')}
@@ -242,13 +246,17 @@ return `package provider
 
 import (
 	"testing"
+	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceWorkflowTask${task_name_camel}(t *testing.T) {
 	resource.UnitTest(t, resource.TestCase{
-		PreCheck:          func() { testAccPreCheck(t) },
+		PreCheck:          func() {
+			testAccPreCheck(t)
+			time.Sleep(1 * time.Second)
+		},
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
@@ -299,7 +307,8 @@ resource "rootly_workflow_task_${task_name}" "foo" {
 }
 
 function genTestParams(task_name, task_schema) {
-	return (task_schema.required || []).map((key) => {
+	const required = task_schema.required || []
+	return (required).map((key) => {
 		let val = task_schema.properties[key].enum ? task_schema.properties[key].enum[0] : "test"
 		switch (task_schema.properties[key].type) {
 			case "boolean":
