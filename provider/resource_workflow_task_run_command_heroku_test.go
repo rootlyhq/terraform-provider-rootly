@@ -4,7 +4,6 @@ package provider
 
 import (
 	"testing"
-	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
@@ -13,7 +12,6 @@ func TestAccResourceWorkflowTaskRunCommandHeroku(t *testing.T) {
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck:          func() {
 			testAccPreCheck(t)
-			time.Sleep(1 * time.Second)
 		},
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
