@@ -45,15 +45,16 @@ jobs:
     name: Matrix Test
     needs: build
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     strategy:
-      fail-fast: false
+      fail-fast: true
+      max-parallel: 1
       matrix:
         # list whatever Terraform versions here you would like to support
         terraform:
-          - '0.14.*'
-          - '0.15.*'
-          - '1.0.*'
+          #- '0.14.*'
+          #- '0.15.*'
+          #- '1.0.*'
           - '1.1.*'
     steps:
 
