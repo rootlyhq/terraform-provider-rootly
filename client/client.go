@@ -45,7 +45,7 @@ func (c *Client) Do(req *http.Request) (*http.Response, error) {
 // NewClient returns a new rootly.Client which can be used to access the API methods.
 func NewClient(endpoint, token, userAgent string) (*Client, error) {
 	retryableClient := retryablehttp.NewClient()
-	retryableClient.RetryMax = 3
+	retryableClient.RetryMax = 5
 	httpClient := retryableClient.StandardClient()
 	httpClient.Transport = logging.NewTransport("Rootly", httpClient.Transport)
 
