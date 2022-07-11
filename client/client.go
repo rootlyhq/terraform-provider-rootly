@@ -2,7 +2,7 @@ package client
 
 import (
 	"fmt"
-	"github.com/hashicorp/go-cleanhttp"
+	"github.com/hashicorp/go-retryablehttp"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/logging"
 	rootlygo "github.com/rootlyhq/rootly-go"
 	"io/ioutil"
@@ -44,7 +44,9 @@ func (c *Client) Do(req *http.Request) (*http.Response, error) {
 
 // NewClient returns a new rootly.Client which can be used to access the API methods.
 func NewClient(endpoint, token, userAgent string) (*Client, error) {
-	httpClient := cleanhttp.DefaultClient()
+	retryableClient := retryablehttp.NewClient()
+	retryableClient.RetryMax = 3
+	httpClient := retryableClient.StandardClient()
 	httpClient.Transport = logging.NewTransport("Rootly", httpClient.Transport)
 
 	rootlyClient, err := rootlygo.NewClient(
