@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.6] -- 2022-07-11
+
+### Changed
+
+- Retry failed HTTP requests with exponential backoff.
+
 ## [0.1.5] -- 2022-07-07
 
 ### Added
