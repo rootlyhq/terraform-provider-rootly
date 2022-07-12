@@ -13,6 +13,8 @@ Use the navigation to the left to read about the available resources.
 
 ## Example Usage
 
+See [examples folder](https://github.com/rootlyhq/terraform-provider-rootly/tree/main/examples/provider) for more examples.
+
 ```terraform
 # Terraform 0.12+ uses the Terraform Registry:
 
@@ -74,6 +76,29 @@ resource "rootly_functionality" "add_items_to_cart" {
 resource "rootly_functionality" "logging_in" {
   name  = "Logging In"
   color = "#800080"
+}
+
+# Custom Fields
+resource "rootly_custom_field" "regions_affected" {
+  name = "Regions affected"
+  kind = "multi_select"
+	shown = ["incident_form"]
+	required = ["incident_form"]
+}
+
+resource "rootly_custom_field_option" "asia" {
+	custom_field_id = rootly_custom_field.regions_affected.id
+  value = "Asia"
+}
+
+resource "rootly_custom_field_option" "europe" {
+	custom_field_id = rootly_custom_field.regions_affected.id
+  value = "Europe"
+}
+
+resource "rootly_custom_field_option" "north_america" {
+	custom_field_id = rootly_custom_field.regions_affected.id
+  value = "North America"
 }
 
 # Jira workflow

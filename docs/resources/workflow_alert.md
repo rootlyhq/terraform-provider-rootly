@@ -50,7 +50,12 @@ Optional:
 
 - `alert_condition` (String)
 - `alert_condition_label` (String)
+- `alert_condition_payload` (String)
 - `alert_condition_source` (String)
+- `alert_labels` (List of String)
+- `alert_payload` (List of String)
+- `alert_query_payload` (String)
+- `alert_sources` (List of String)
 - `trigger_type` (String)
 - `triggers` (List of String)
 

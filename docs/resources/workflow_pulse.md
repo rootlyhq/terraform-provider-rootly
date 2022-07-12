@@ -50,7 +50,12 @@ Optional:
 
 - `pulse_condition` (String)
 - `pulse_condition_label` (String)
+- `pulse_condition_payload` (String)
 - `pulse_condition_source` (String)
+- `pulse_labels` (List of String)
+- `pulse_payload` (List of String)
+- `pulse_query_payload` (String)
+- `pulse_sources` (List of String)
 - `trigger_type` (String)
 - `triggers` (List of String)
 
