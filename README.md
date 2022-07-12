@@ -11,6 +11,8 @@ The [Rootly](https://rootly.com/) provider is used to interact with the resource
 
 ## Example Usage
 
+See [examples folder](./examples/provider) for more examples.
+
 ```terraform
 # Terraform 0.12+ uses the Terraform Registry:
 
