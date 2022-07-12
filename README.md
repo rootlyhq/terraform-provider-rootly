@@ -9,9 +9,10 @@ The [Rootly](https://rootly.com/) provider is used to interact with the resource
 - `api_host` (String) The Rootly API host. Defaults to https://api.rootly.com
 - `api_token` (String, Sensitive) The Rootly API Token. Generate it from your account at https://rootly.com/account
 
-## Example Usage
+## Usage
 
-See [examples folder](./examples/provider) for more examples.
+- More [examples](./examples/provider)
+- [Terraform provider API documentation](https://registry.terraform.io/providers/rootlyhq/rootly/latest/docs)
 
 ```terraform
 # Terraform 0.12+ uses the Terraform Registry:
@@ -31,13 +32,6 @@ provider "rootly" {
   # api_token = var.rootly_api_key
 }
 
-# Terraform 0.12- can be specified as:
-# provider "rootly" {
-# We recommend using the `ROOTLY_API_TOKEN` env var to set the API Token
-# when interacting with Rootly's API.
-# api_token = var.rootly_api_key
-# }
-
 resource "rootly_severity" "sev0" {
   name  = "SEV0"
   color = "#FF0000"
@@ -53,6 +47,30 @@ resource "rootly_functionality" "add_items_to_cart" {
   color = "#800080"
 }
 
+# Custom Fields
+resource "rootly_custom_field" "regions_affected" {
+  name = "Regions affected"
+  kind = "multi_select"
+	shown = ["incident_form"]
+	required = ["incident_form"]
+}
+
+resource "rootly_custom_field_option" "asia" {
+	custom_field_id = rootly_custom_field.regions_affected.id
+  value = "Asia"
+}
+
+resource "rootly_custom_field_option" "europe" {
+	custom_field_id = rootly_custom_field.regions_affected.id
+  value = "Europe"
+}
+
+resource "rootly_custom_field_option" "north_america" {
+	custom_field_id = rootly_custom_field.regions_affected.id
+  value = "North America"
+}
+
+# Workflows
 resource "rootly_workflow_incident" "jira" {
   name = "Create JIRA issue"
   trigger_params {
