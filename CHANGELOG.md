@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.7] -- 2022-07-12
+
+### Added
+
+- Added workflow examples.
+
 ## [0.1.6] -- 2022-07-11
 
 ### Changed
