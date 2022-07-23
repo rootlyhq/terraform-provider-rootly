@@ -68,6 +68,11 @@ func resourceWorkflowTaskCreateAsanaTask() *schema.Resource {
 								},
 							},
 						},
+						"assign_user_email": &schema.Schema{
+							Description: "",
+							Type: schema.TypeString,
+							Optional: true,
+						},
 						"title": &schema.Schema{
 							Description: "The task title",
 							Type: schema.TypeString,
@@ -77,6 +82,12 @@ func resourceWorkflowTaskCreateAsanaTask() *schema.Resource {
 							Description: "",
 							Type: schema.TypeMap,
 							Required: true,
+						},
+						"custom_fields_mapping": &schema.Schema{
+							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON.",
+							Type: schema.TypeString,
+							Optional: true,
+							Default: "{}",
 						},
 					},
 				},

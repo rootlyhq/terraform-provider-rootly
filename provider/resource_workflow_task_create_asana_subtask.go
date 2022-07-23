@@ -56,6 +56,11 @@ func resourceWorkflowTaskCreateAsanaSubtask() *schema.Resource {
 							Type: schema.TypeString,
 							Required: true,
 						},
+						"assign_user_email": &schema.Schema{
+							Description: "",
+							Type: schema.TypeString,
+							Optional: true,
+						},
 						"completion": &schema.Schema{
 							Description: "",
 							Type: schema.TypeMap,
@@ -65,6 +70,12 @@ func resourceWorkflowTaskCreateAsanaSubtask() *schema.Resource {
 							Description: "",
 							Type: schema.TypeString,
 							Optional: true,
+						},
+						"custom_fields_mapping": &schema.Schema{
+							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON.",
+							Type: schema.TypeString,
+							Optional: true,
+							Default: "{}",
 						},
 					},
 				},

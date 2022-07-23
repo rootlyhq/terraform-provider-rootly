@@ -10,5 +10,5 @@ require (
 	github.com/hashicorp/terraform-plugin-log v0.4.1
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.18.0
 	github.com/pkg/errors v0.9.1
-	github.com/rootlyhq/rootly-go v0.0.0-20220709014914-a1dcd25e84af
+	github.com/rootlyhq/rootly-go v0.0.0-20220723064936-7bcaf4c5ecd3
 )
