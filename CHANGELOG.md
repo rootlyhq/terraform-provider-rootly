@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.8] -- 2022-07-23
+
+### Added
+
+- Added additional schema fields.
+
+### Fixed
+
+- Fixed "enabled" fields with "false".
+
 ## [0.1.7] -- 2022-07-12
 
 ### Added
