@@ -262,7 +262,7 @@ func resourceWorkflowIncidentCreate(ctx context.Context, d *schema.ResourceData,
 		s.Description = value.(string)
 	}
 
-	if v, ok := d.GetOk("enabled"); ok {
+	if v, ok := d.GetOkExists("enabled"); ok {
 		s.Enabled = tools.Bool(v.(bool))
 	}
 
