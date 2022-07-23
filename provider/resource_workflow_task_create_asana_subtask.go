@@ -71,12 +71,6 @@ func resourceWorkflowTaskCreateAsanaSubtask() *schema.Resource {
 							Type: schema.TypeString,
 							Optional: true,
 						},
-						"custom_fields_mapping": &schema.Schema{
-							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON.",
-							Type: schema.TypeString,
-							Optional: true,
-							Default: "{}",
-						},
 					},
 				},
 			},

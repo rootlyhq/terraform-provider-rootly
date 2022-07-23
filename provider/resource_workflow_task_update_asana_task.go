@@ -61,6 +61,11 @@ func resourceWorkflowTaskUpdateAsanaTask() *schema.Resource {
 							Type: schema.TypeMap,
 							Required: true,
 						},
+						"assign_user_email": &schema.Schema{
+							Description: "",
+							Type: schema.TypeString,
+							Optional: true,
+						},
 					},
 				},
 			},

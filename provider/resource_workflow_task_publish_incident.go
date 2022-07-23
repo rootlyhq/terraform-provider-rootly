@@ -84,13 +84,10 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 "completed",
 							}, false),
 						},
-						"status_page_ids": &schema.Schema{
+						"status_page_id": &schema.Schema{
 							Description: "",
-							Type: schema.TypeList,
+							Type: schema.TypeString,
 							Required: true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
 						},
 					},
 				},
