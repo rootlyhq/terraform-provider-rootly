@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.9] -- 2022-07-23
+
+### Changed
+
+- Updated GPG github action
+
 ## [0.1.8] -- 2022-07-23
 
 ### Added
