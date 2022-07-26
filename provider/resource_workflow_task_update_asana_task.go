@@ -30,6 +30,12 @@ func resourceWorkflowTaskUpdateAsanaTask() *schema.Resource {
 				Type:         schema.TypeString,
 				Required:     true,
 			},
+			"position": {
+				Description:  "The position of the workflow task (1 being top of list)",
+				Type:         schema.TypeInt,
+				Optional:     true,
+				Computed:     true,
+			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
 				Type: schema.TypeList,
@@ -56,15 +62,21 @@ func resourceWorkflowTaskUpdateAsanaTask() *schema.Resource {
 							Type: schema.TypeString,
 							Optional: true,
 						},
+						"assign_user_email": &schema.Schema{
+							Description: "The assigned user's email.",
+							Type: schema.TypeString,
+							Optional: true,
+						},
 						"completion": &schema.Schema{
 							Description: "",
 							Type: schema.TypeMap,
 							Required: true,
 						},
-						"assign_user_email": &schema.Schema{
-							Description: "",
+						"custom_fields_mapping": &schema.Schema{
+							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON.",
 							Type: schema.TypeString,
 							Optional: true,
+							Default: "{}",
 						},
 					},
 				},

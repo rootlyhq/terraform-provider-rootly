@@ -114,6 +114,12 @@ func resourceWorkflowActionItem() *schema.Resource {
 					Type: schema.TypeString,
 				},
 			},
+			"position": {
+				Description:  "The position of the workflow (1 being top of list)",
+				Type:         schema.TypeInt,
+				Optional:     true,
+				Computed:     true,
+			},
 			"trigger_params": {
 				Description: "The conditions for triggering this workflow.",
 				Type: schema.TypeList,

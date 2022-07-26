@@ -30,6 +30,12 @@ func resourceWorkflowTaskSnapshotNewRelicGraph() *schema.Resource {
 				Type:         schema.TypeString,
 				Required:     true,
 			},
+			"position": {
+				Description:  "The position of the workflow task (1 being top of list)",
+				Type:         schema.TypeInt,
+				Optional:     true,
+				Computed:     true,
+			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
 				Type: schema.TypeList,

@@ -46,7 +46,7 @@ resource "rootly_workflow_task_publish_incident" "foo" {
 public_title = "test"
 event = "test"
 status = "investigating"
-status_page_id = "foo"
+status_page_id = "test"
 	}
 }
 `
@@ -69,7 +69,7 @@ resource "rootly_workflow_task_publish_incident" "foo" {
 public_title = "test"
 event = "test"
 status = "investigating"
-status_page_id = "foo"
+status_page_id = "test"
 	}
 }
 `

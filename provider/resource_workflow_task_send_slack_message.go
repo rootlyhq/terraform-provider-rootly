@@ -30,6 +30,12 @@ func resourceWorkflowTaskSendSlackMessage() *schema.Resource {
 				Type:         schema.TypeString,
 				Required:     true,
 			},
+			"position": {
+				Description:  "The position of the workflow task (1 being top of list)",
+				Type:         schema.TypeInt,
+				Optional:     true,
+				Computed:     true,
+			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
 				Type: schema.TypeList,
@@ -97,16 +103,15 @@ func resourceWorkflowTaskSendSlackMessage() *schema.Resource {
 								},
 							},
 						},
-						"text": &schema.Schema{
-							Description: "The message text.",
-							Type: schema.TypeString,
-							Required: true,
-						},
 						"send_as_ephemeral": &schema.Schema{
 							Description: "",
 							Type: schema.TypeBool,
 							Optional: true,
-							Default: false,
+						},
+						"text": &schema.Schema{
+							Description: "The message text.",
+							Type: schema.TypeString,
+							Required: true,
 						},
 					},
 				},

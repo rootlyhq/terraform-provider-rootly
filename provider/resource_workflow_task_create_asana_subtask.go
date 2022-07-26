@@ -30,6 +30,12 @@ func resourceWorkflowTaskCreateAsanaSubtask() *schema.Resource {
 				Type:         schema.TypeString,
 				Required:     true,
 			},
+			"position": {
+				Description:  "The position of the workflow task (1 being top of list)",
+				Type:         schema.TypeInt,
+				Optional:     true,
+				Computed:     true,
+			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
 				Type: schema.TypeList,
@@ -57,7 +63,7 @@ func resourceWorkflowTaskCreateAsanaSubtask() *schema.Resource {
 							Required: true,
 						},
 						"assign_user_email": &schema.Schema{
-							Description: "",
+							Description: "The assigned user's email.",
 							Type: schema.TypeString,
 							Optional: true,
 						},
@@ -70,6 +76,12 @@ func resourceWorkflowTaskCreateAsanaSubtask() *schema.Resource {
 							Description: "",
 							Type: schema.TypeString,
 							Optional: true,
+						},
+						"custom_fields_mapping": &schema.Schema{
+							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON.",
+							Type: schema.TypeString,
+							Optional: true,
+							Default: "{}",
 						},
 					},
 				},
