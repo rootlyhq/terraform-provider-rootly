@@ -25,6 +25,10 @@ resource "rootly_workflow_task_send_slack_message" "foo" {
 - `task_params` (Block List, Min: 1, Max: 1) The parameters for this workflow task. (see [below for nested schema](#nestedblock--task_params))
 - `workflow_id` (String) The ID of the parent workflow
 
+### Optional
+
+- `position` (Number) The position of the workflow task (1 being top of list)
+
 ### Read-Only
 
 - `id` (String) The ID of this resource.
@@ -39,6 +43,7 @@ Required:
 Optional:
 
 - `channels` (Block List) (see [below for nested schema](#nestedblock--task_params--channels))
+- `send_as_ephemeral` (Boolean)
 - `slack_user_groups` (Block List) (see [below for nested schema](#nestedblock--task_params--slack_user_groups))
 - `slack_users` (Block List) (see [below for nested schema](#nestedblock--task_params--slack_users))
 - `task_type` (String)

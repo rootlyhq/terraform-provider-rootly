@@ -32,6 +32,7 @@ resource "rootly_workflow_alert" "foo" {
 - `environment_ids` (List of String) Environment IDs required to trigger workflow.
 - `group_ids` (List of String) Group IDs required to trigger workflow.
 - `incident_type_ids` (List of String) Incident type IDs required to trigger workflow.
+- `position` (Number) The position of the workflow (1 being top of list)
 - `repeat_every_duration` (String) Repeat workflow every duration.
 - `repeat_on` (List of String) Repeat workflow on days.
 - `service_ids` (List of String) Service IDs required to trigger workflow.

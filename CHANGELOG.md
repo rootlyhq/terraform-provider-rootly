@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.10] -- 2022-07-26
+
+### Added
+
+- Added position field to workflows and tasks
+
 ## [0.1.9] -- 2022-07-23
 
 ### Changed

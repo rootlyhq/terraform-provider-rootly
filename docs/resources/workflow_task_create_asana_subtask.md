@@ -25,6 +25,10 @@ resource "rootly_workflow_task_create_asana_subtask" "foo" {
 - `task_params` (Block List, Min: 1, Max: 1) The parameters for this workflow task. (see [below for nested schema](#nestedblock--task_params))
 - `workflow_id` (String) The ID of the parent workflow
 
+### Optional
+
+- `position` (Number) The position of the workflow task (1 being top of list)
+
 ### Read-Only
 
 - `id` (String) The ID of this resource.
@@ -40,6 +44,8 @@ Required:
 
 Optional:
 
+- `assign_user_email` (String) The assigned user's email.
+- `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON.
 - `notes` (String)
 - `task_type` (String)
 
