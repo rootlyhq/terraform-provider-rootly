@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.11] -- 2022-08-03
+
+### Changed
+
+- Fixed position field persistence for workflows.
+
+### Added
+
 ## [0.1.10] -- 2022-07-26
 
 ### Added
