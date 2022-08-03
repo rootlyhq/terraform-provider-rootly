@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.12] -- 2022-08-03
+
+### Added
+
+- Added workflow_group resource.
+
+### Changed
+
+- changed workflow_task_snapshot_datadog_dashboard.dashboards  optional
+
 ## [0.1.11] -- 2022-08-03
 
 ### Changed
