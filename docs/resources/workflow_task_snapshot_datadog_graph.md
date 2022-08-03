@@ -38,11 +38,11 @@ resource "rootly_workflow_task_snapshot_datadog_graph" "foo" {
 
 Required:
 
-- `dashboards` (Block List, Min: 1) (see [below for nested schema](#nestedblock--task_params--dashboards))
 - `past_duration` (String) in format '1 minute', '30 days', '3 months', etc.
 
 Optional:
 
+- `dashboards` (Block List) (see [below for nested schema](#nestedblock--task_params--dashboards))
 - `metric_queries` (List of String)
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
 - `task_type` (String)
