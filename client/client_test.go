@@ -3,7 +3,7 @@ package client
 import (
 	"fmt"
 	"github.com/hashicorp/go-cleanhttp"
-	rootlygo "github.com/rootlyhq/rootly-go"
+	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 	"io/ioutil"
 	"net/http"
 	"strings"

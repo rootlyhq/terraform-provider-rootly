@@ -2,7 +2,7 @@ package client
 
 import (
 	"github.com/pkg/errors"
-	rootlygo "github.com/rootlyhq/rootly-go"
+	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
 type WorkflowTask struct {
