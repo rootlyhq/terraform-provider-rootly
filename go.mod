@@ -12,8 +12,8 @@ require (
 	github.com/hashicorp/go-cleanhttp v0.5.2
 	github.com/hashicorp/go-retryablehttp v0.7.1
 	github.com/hashicorp/terraform-plugin-docs v0.13.0
-	github.com/hashicorp/terraform-plugin-log v0.4.1
-	github.com/hashicorp/terraform-plugin-sdk/v2 v2.18.0
+	github.com/hashicorp/terraform-plugin-log v0.7.0
+	github.com/hashicorp/terraform-plugin-sdk/v2 v2.20.0
 	github.com/invopop/yaml v0.2.0 // indirect
 	github.com/labstack/echo/v4 v4.7.2
 	github.com/pkg/errors v0.9.1
