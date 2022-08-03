@@ -318,6 +318,10 @@ func resourceWorkflowActionItemCreate(ctx context.Context, d *schema.ResourceDat
 		s.Enabled = tools.Bool(v.(bool))
 	}
 
+	if v, ok := d.GetOkExists("position"); ok {
+		s.Position = v.(int)
+	}
+
 	if value, ok := d.GetOk("command"); ok {
 		s.Command = value.(string)
 	}
@@ -389,6 +393,7 @@ func resourceWorkflowActionItemRead(ctx context.Context, d *schema.ResourceData,
 	d.Set("name", res.Name)
 	d.Set("description", res.Description)
 	d.Set("enabled", res.Enabled)
+	d.Set("position", res.Position)
 	tps := make([]interface{}, 1, 1)
 	tps[0] = res.TriggerParams
 	d.Set("trigger_params", tps)
@@ -421,6 +426,10 @@ func resourceWorkflowActionItemUpdate(ctx context.Context, d *schema.ResourceDat
 
 	if d.HasChange("enabled") {
 		s.Enabled = tools.Bool(d.Get("enabled").(bool))
+	}
+
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
 	}
 
 	if d.HasChange("trigger_params") {

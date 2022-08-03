@@ -16,17 +16,17 @@ func TestAccResourceWorkflowIncident(t *testing.T) {
 			{
 				Config: testAccResourceWorkflowIncident,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_incident.foo", "name", "test-incident-workflow"),
-					resource.TestCheckResourceAttr("rootly_workflow_incident.foo", "description", ""),
-					resource.TestCheckResourceAttr("rootly_workflow_incident.foo", "enabled", "true"),
+					resource.TestCheckResourceAttr("rootly_workflow_incident.foo3", "name", "test-incident-workflow3"),
+					resource.TestCheckResourceAttr("rootly_workflow_incident.foo3", "position", "1"),
+					resource.TestCheckResourceAttr("rootly_workflow_incident.foo2", "position", "2"),
+					resource.TestCheckResourceAttr("rootly_workflow_incident.foo1", "position", "3"),
 				),
 			},
 			{
 				Config: testAccResourceWorkflowIncidentUpdate,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_incident.foo", "name", "test-incident-workflow2"),
-					resource.TestCheckResourceAttr("rootly_workflow_incident.foo", "description", "test description"),
-					resource.TestCheckResourceAttr("rootly_workflow_incident.foo", "enabled", "false"),
+					resource.TestCheckResourceAttr("rootly_workflow_incident.foo3", "name", "test-incident-workflow3"),
+					resource.TestCheckResourceAttr("rootly_workflow_incident.foo3", "position", "3"),
 				),
 			},
 		},
@@ -34,8 +34,23 @@ func TestAccResourceWorkflowIncident(t *testing.T) {
 }
 
 const testAccResourceWorkflowIncident = `
-resource "rootly_workflow_incident" "foo" {
-  name = "test-incident-workflow"
+resource "rootly_workflow_incident" "foo1" {
+  name = "test-incident-workflow1"
+	position = 3
+	trigger_params {
+		triggers = ["incident_updated"]
+	}
+}
+resource "rootly_workflow_incident" "foo2" {
+  name = "test-incident-workflow2"
+	position = 2
+	trigger_params {
+		triggers = ["incident_updated"]
+	}
+}
+resource "rootly_workflow_incident" "foo3" {
+  name = "test-incident-workflow3"
+	position = 1
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -43,12 +58,11 @@ resource "rootly_workflow_incident" "foo" {
 `
 
 const testAccResourceWorkflowIncidentUpdate = `
-resource "rootly_workflow_incident" "foo" {
-  name       = "test-incident-workflow2"
-  description = "test description"
-  enabled     = false
+resource "rootly_workflow_incident" "foo3" {
+  name = "test-incident-workflow3"
+	position = 3
 	trigger_params {
-		triggers = ["incident_updated", "incident_created"]
+		triggers = ["incident_updated"]
 	}
 }
 `

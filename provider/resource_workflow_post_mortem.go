@@ -326,6 +326,7 @@ func resourceWorkflowPostMortemRead(ctx context.Context, d *schema.ResourceData,
 	d.Set("name", res.Name)
 	d.Set("description", res.Description)
 	d.Set("enabled", res.Enabled)
+	d.Set("position", res.Position)
 	tps := make([]interface{}, 1, 1)
 	tps[0] = res.TriggerParams
 	d.Set("trigger_params", tps)
@@ -358,6 +359,10 @@ func resourceWorkflowPostMortemUpdate(ctx context.Context, d *schema.ResourceDat
 
 	if d.HasChange("enabled") {
 		s.Enabled = tools.Bool(d.Get("enabled").(bool))
+	}
+
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
 	}
 
 	if d.HasChange("trigger_params") {

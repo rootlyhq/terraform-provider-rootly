@@ -10,6 +10,7 @@ type Workflow struct {
 	Name        string `jsonapi:"attr,name,omitempty"`
 	Description string `jsonapi:"attr,description,omitempty"`
 	Enabled     *bool  `jsonapi:"attr,enabled,omitempty"`
+	Position    int  `jsonapi:"attr,position,omitempty"`
 	Command     string `jsonapi:"attr,command,omitempty"`
 	TriggerParams map[string]interface{} `jsonapi:"attr,trigger_params,omitempty"`
 	Wait        string `jsonapi:"attr,wait,omitempty"`
