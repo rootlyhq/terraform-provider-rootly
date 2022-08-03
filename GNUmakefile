@@ -9,7 +9,7 @@ OS_ARCH=darwin_amd64
 default: testacc
 
 # Run acceptance tests
-.PHONY: testacc build release install test docs
+.PHONY: testacc gen_schema build release install test docs
 build:
 	go build -o ${BINARY}
 
@@ -40,3 +40,6 @@ test:
 
 testacc:
 	TF_ACC=1 go test $(TEST) -v $(TESTARGS) -timeout 120m
+
+gen_schema:
+	cd ./gen_schema/ && go run gen.go

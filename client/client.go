@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/go-retryablehttp"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/logging"
-	rootlygo "github.com/rootlyhq/rootly-go"
+	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 	"io/ioutil"
 	"net/http"
 )

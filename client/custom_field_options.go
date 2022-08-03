@@ -3,7 +3,7 @@ package client
 import (
 	"strconv"
 	"github.com/pkg/errors"
-	rootlygo "github.com/rootlyhq/rootly-go"
+	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
 type CustomFieldOption struct {
