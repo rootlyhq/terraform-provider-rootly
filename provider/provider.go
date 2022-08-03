@@ -54,6 +54,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_service": resourceService(),
 				"rootly_severity": resourceSeverity(),
 				"rootly_team": resourceTeam(),
+				"rootly_workflow_group": resourceWorkflowGroup(),
 				"rootly_workflow_incident": resourceWorkflowIncident(),
 				"rootly_workflow_action_item": resourceWorkflowActionItem(),
 				"rootly_workflow_alert": resourceWorkflowAlert(),

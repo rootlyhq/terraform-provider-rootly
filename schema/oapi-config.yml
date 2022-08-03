@@ -1,0 +1,7 @@
+package: rootly
+generate:
+  types: true
+  server: true
+  models: true
+  client: true
+output: rootly-schema.gen.go
