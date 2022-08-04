@@ -93,6 +93,10 @@ resource "rootly_workflow_task_create_jira_issue" "jira" {
 
 ## Development
 
+### Generate Go types from Swagger
+
+Use `make schema`.
+
 ### Auto-generate workflow task resources and tests from Swagger
 
 Use `node tools/gen_tasks.js swagger.json`
