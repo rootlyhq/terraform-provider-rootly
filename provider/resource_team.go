@@ -36,7 +36,7 @@ func resourceTeam() *schema.Resource {
 				Description:  "The color chosen for the team",
 				Type:         schema.TypeString,
 				Optional:     true,
-				Default:      "#E65252", // Default value from the API
+				Computed:     true,
 				ValidateFunc: validCSSHexColor(),
 			},
 		},

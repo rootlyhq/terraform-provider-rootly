@@ -15,8 +15,6 @@ func TestAccResourceTeam(t *testing.T) {
 				Config: testAccResourceTeam,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_team.foo", "name", "myteam"),
-					resource.TestCheckResourceAttr("rootly_team.foo", "description", ""),
-					resource.TestCheckResourceAttr("rootly_team.foo", "color", "#E65252"),
 				),
 			},
 			{
