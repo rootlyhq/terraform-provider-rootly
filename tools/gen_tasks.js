@@ -57,6 +57,7 @@ func resourceWorkflowTask${task_name_camel}() *schema.Resource {
 				Description:  "The ID of the parent workflow",
 				Type:         schema.TypeString,
 				Required:     true,
+				ForceNew:     true,
 			},
 			"position": {
 				Description:  "The position of the workflow task (1 being top of list)",

@@ -29,6 +29,7 @@ func resourceWorkflowTaskCreateConfluencePage() *schema.Resource {
 				Description:  "The ID of the parent workflow",
 				Type:         schema.TypeString,
 				Required:     true,
+				ForceNew:     true,
 			},
 			"position": {
 				Description:  "The position of the workflow task (1 being top of list)",
@@ -59,20 +60,8 @@ func resourceWorkflowTaskCreateConfluencePage() *schema.Resource {
 						},
 						"ancestor": &schema.Schema{
 							Description: "",
-							Type: schema.TypeList,
+							Type: schema.TypeMap,
 							Optional: true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type: schema.TypeString,
-										Required: true,
-									},
-									"name": &schema.Schema{
-										Type: schema.TypeString,
-										Required: true,
-									},
-								},
-							},
 						},
 						"title": &schema.Schema{
 							Description: "The page title",
