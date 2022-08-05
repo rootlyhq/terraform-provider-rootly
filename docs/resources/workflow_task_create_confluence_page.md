@@ -43,21 +43,10 @@ Required:
 
 Optional:
 
-- `ancestor` (Block List) (see [below for nested schema](#nestedblock--task_params--ancestor))
+- `ancestor` (Map of String)
 - `content` (String) The page content
 - `post_mortem_template_id` (String) The post mortem template to use
 - `task_type` (String)
-
-<a id="nestedblock--task_params--ancestor"></a>
-### Nested Schema for `task_params.ancestor`
-
-Required:
-
-- `name` (String)
-
-Read-Only:
-
-- `id` (String) The ID of this resource.
 
 ## Import
 

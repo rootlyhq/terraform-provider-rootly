@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.13] -- 2022-08-05
+
+### Change
+
+- Changed workflow task workflow_id field to ForceNew. Workflow tasks cannot
+	change their workflow. They must be deleted and recreated with the correct
+	workflow.
+
 ## [0.1.12] -- 2022-08-03
 
 ### Added
