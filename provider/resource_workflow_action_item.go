@@ -256,21 +256,21 @@ func resourceWorkflowActionItem() *schema.Resource {
 							Type:        schema.TypeList,
 							Optional:    true,
 							Elem: &schema.Schema{
-								Type: schema.TypeBool,
+								Type: schema.TypeString,
 							},
 						},
 						"incident_action_item_statuses": &schema.Schema{
 							Type:        schema.TypeList,
 							Optional:    true,
 							Elem: &schema.Schema{
-								Type: schema.TypeBool,
+								Type: schema.TypeString,
 							},
 						},
 						"incident_action_item_priorities": &schema.Schema{
 							Type:        schema.TypeList,
 							Optional:    true,
 							Elem: &schema.Schema{
-								Type: schema.TypeBool,
+								Type: schema.TypeString,
 							},
 						},
 						"incident_action_item_condition": &schema.Schema{
