@@ -39,6 +39,7 @@ resource "rootly_workflow_post_mortem" "foo" {
 - `severity_ids` (List of String) Severity IDs required to trigger workflow.
 - `trigger_params` (Block List, Max: 1) The conditions for triggering this workflow. (see [below for nested schema](#nestedblock--trigger_params))
 - `wait` (String) Wait before running workflow.
+- `workflow_group_id` (String) The workflow group this workflow belongs to.
 
 ### Read-Only
 

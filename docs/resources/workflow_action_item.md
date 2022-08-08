@@ -39,6 +39,7 @@ resource "rootly_workflow_action_item" "foo" {
 - `severity_ids` (List of String) Severity IDs required to trigger workflow.
 - `trigger_params` (Block List, Max: 1) The conditions for triggering this workflow. (see [below for nested schema](#nestedblock--trigger_params))
 - `wait` (String) Wait before running workflow.
+- `workflow_group_id` (String) The workflow group this workflow belongs to.
 
 ### Read-Only
 
@@ -54,9 +55,9 @@ Optional:
 - `incident_action_item_condition_kind` (String)
 - `incident_action_item_condition_priority` (String)
 - `incident_action_item_condition_status` (String)
-- `incident_action_item_kinds` (List of Boolean)
-- `incident_action_item_priorities` (List of Boolean)
-- `incident_action_item_statuses` (List of Boolean)
+- `incident_action_item_kinds` (List of String)
+- `incident_action_item_priorities` (List of String)
+- `incident_action_item_statuses` (List of String)
 - `incident_condition` (String)
 - `incident_condition_acknowledged_at` (String)
 - `incident_condition_detected_at` (String)

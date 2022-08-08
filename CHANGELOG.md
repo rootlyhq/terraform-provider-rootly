@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.14] -- 2022-08-08
+
+### Added
+
+- Add workflow_group_id field to workflow resources.
+
+### Changed
+
+- Fixed type of incident_action_item_statuses, incident_action_item_kinds, incident_action_item_priorities for workflow_action_item resource.
+
 ## [0.1.13] -- 2022-08-05
 
 ### Change
