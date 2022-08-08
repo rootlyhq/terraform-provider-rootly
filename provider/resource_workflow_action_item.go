@@ -40,6 +40,12 @@ func resourceWorkflowActionItem() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"workflow_group_id": {
+				Description: "The workflow group this workflow belongs to.",
+				Type: schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
 			"command": {
 				Description: "The workflow command.",
 				Type:        schema.TypeString,
@@ -318,6 +324,10 @@ func resourceWorkflowActionItemCreate(ctx context.Context, d *schema.ResourceDat
 		s.Enabled = tools.Bool(v.(bool))
 	}
 
+	if value, ok := d.GetOk("workflow_group_id"); ok {
+		s.WorkflowGroupId = value.(string)
+	}
+
 	if v, ok := d.GetOkExists("position"); ok {
 		s.Position = v.(int)
 	}
@@ -393,6 +403,7 @@ func resourceWorkflowActionItemRead(ctx context.Context, d *schema.ResourceData,
 	d.Set("name", res.Name)
 	d.Set("description", res.Description)
 	d.Set("enabled", res.Enabled)
+	d.Set("workflow_group_id", res.WorkflowGroupId)
 	d.Set("position", res.Position)
 	tps := make([]interface{}, 1, 1)
 	tps[0] = res.TriggerParams
@@ -426,6 +437,10 @@ func resourceWorkflowActionItemUpdate(ctx context.Context, d *schema.ResourceDat
 
 	if d.HasChange("enabled") {
 		s.Enabled = tools.Bool(d.Get("enabled").(bool))
+	}
+
+	if d.HasChange("workflow_group_id") {
+		s.WorkflowGroupId = d.Get("workflow_group_id").(string)
 	}
 
 	if d.HasChange("position") {
