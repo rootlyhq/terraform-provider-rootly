@@ -37,6 +37,14 @@ jobs:
           # These secrets will need to be configured for the repository:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
+
+      - name: Find and Replace version
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "{{version}}"
+          include: "client/client.go"
+          replace: ${{ github.ref_name }}
+          regex: false
       -
         name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v3.0.0
