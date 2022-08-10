@@ -43,6 +43,9 @@ func New(version string) func() *schema.Provider {
 					DefaultFunc: schema.EnvDefaultFunc("ROOTLY_API_TOKEN", nil),
 				},
 			},
+			DataSourcesMap: map[string]*schema.Resource{
+				"rootly_causes": dataSourceCauses(),
+			},
 			ResourcesMap: map[string]*schema.Resource{
 				"rootly_cause": resourceCause(),
 				"rootly_custom_field": resourceCustomField(),

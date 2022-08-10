@@ -14,14 +14,20 @@ func TestAccResourceCause(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourcecause,
+				Config: testAccDataSourceCause,
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckOutput("causes", "bug"),
+				),
+			},
+			{
+				Config: testAccResourceCause,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_cause.foo", "name", "mycause"),
 					resource.TestCheckResourceAttr("rootly_cause.foo", "description", ""),
 				),
 			},
 			{
-				Config: testAccResourcecauseUpdate,
+				Config: testAccResourceCauseUpdate,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_cause.foo", "name", "mycause2"),
 					resource.TestCheckResourceAttr("rootly_cause.foo", "description", "my cause description"),
@@ -31,13 +37,23 @@ func TestAccResourceCause(t *testing.T) {
 	})
 }
 
-const testAccResourcecause = `
+const testAccDataSourceCause = `
+data "rootly_causes" "test" {
+	slug = "bug"
+}
+
+output "causes" {
+	value = data.rootly_causes.test.causes[0].slug
+}
+`
+
+const testAccResourceCause = `
 resource "rootly_cause" "foo" {
   name = "mycause"
 }
 `
 
-const testAccResourcecauseUpdate = `
+const testAccResourceCauseUpdate = `
 resource "rootly_cause" "foo" {
   name        = "mycause2"
   description = "my cause description"

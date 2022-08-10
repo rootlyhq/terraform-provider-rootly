@@ -1,14 +1,36 @@
 package client
 
 import (
+	"reflect"
 	"github.com/pkg/errors"
+	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
 type Cause struct {
 	ID          string `jsonapi:"primary,causes"`
+	Slug        string `jsonapi:"attr,slug,omitempty"`
 	Name        string `jsonapi:"attr,name,omitempty"`
 	Description string `jsonapi:"attr,description,omitempty"`
+}
+
+func (c *Client) ListCauses(params *rootlygo.ListCausesParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListCausesRequest(c.Rootly.Server, params)
+	if err != nil {
+		return nil, errors.Errorf("Error building request: %s", err.Error())
+	}
+
+	resp, err := c.Do(req)
+	if err != nil {
+		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+	}
+
+	causes, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Cause)))
+	if err != nil {
+		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+	}
+
+	return causes, nil
 }
 
 func (c *Client) CreateCause(cause *Cause) (*Cause, error) {
