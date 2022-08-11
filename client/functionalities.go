@@ -1,7 +1,9 @@
 package client
 
 import (
+	"reflect"
 	"github.com/pkg/errors"
+	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
@@ -11,6 +13,25 @@ type Functionality struct {
 	Description string `jsonapi:"attr,description,omitempty"`
 	Slug        string `jsonapi:"attr,slug,omitempty"`
 	Color       string `jsonapi:"attr,color,omitempty"`
+}
+
+func (c *Client) ListFunctionalities(params *rootlygo.ListFunctionalitiesParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListFunctionalitiesRequest(c.Rootly.Server, params)
+	if err != nil {
+		return nil, errors.Errorf("Error building request: %s", err.Error())
+	}
+
+	resp, err := c.Do(req)
+	if err != nil {
+		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+	}
+
+	items, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Functionality)))
+	if err != nil {
+		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+	}
+
+	return items, nil
 }
 
 func (c *Client) CreateFunctionality(f *Functionality) (*Functionality, error) {
