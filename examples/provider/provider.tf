@@ -22,20 +22,38 @@ provider "rootly" {
 # api_token = var.rootly_api_key
 # }
 
+# Using the output of data sources
+data "rootly_severities" "critical" {
+	slug = "sev0"
+}
+
+resource "rootly_workflow_incident" "ping_oncall" {
+  name        = "Ping on-call when critical incident"
+  description = "ping on-call when critical incident happens"
+  trigger_params {
+    triggers                  = ["incident_created"]
+    incident_condition_kind   = "IS"
+    incident_kinds            = ["normal"]
+    incident_condition_status = "IS"
+    incident_statuses         = ["started"]
+		severity_ids							= [data.rootly_severities.critical.severities[0].id]
+  }
+  enabled = true
+}
+
+resource "rootly_workflow_task_send_sms" "sms_oncall" {
+  workflow_id = rootly_workflow_incident.ping_oncall.id
+  task_params {
+		name = "On-call team"
+		phone_numbers = ["+11231231234"]
+		content = "Critical incident started"
+	}
+}
+
 # Severities
 resource "rootly_severity" "sev0" {
   name  = "SEV0"
   color = "#FF0000"
-}
-
-resource "rootly_severity" "sev1" {
-  name  = "SEV1"
-  color = "#FFA500"
-}
-
-resource "rootly_severity" "sev2" {
-  name  = "SEV2"
-  color = "#FFA500"
 }
 
 # Services
@@ -44,19 +62,9 @@ resource "rootly_service" "elasticsearch_prod" {
   color = "#800080"
 }
 
-resource "rootly_service" "customer_postgresql_prod" {
-  name  = "customer-postgresql-prod"
-  color = "#800080"
-}
-
 # Functionalities
 resource "rootly_functionality" "add_items_to_cart" {
   name  = "Add items to cart"
-  color = "#800080"
-}
-
-resource "rootly_functionality" "logging_in" {
-  name  = "Logging In"
   color = "#800080"
 }
 
