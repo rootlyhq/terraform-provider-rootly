@@ -1,7 +1,9 @@
 package client
 
 import (
+	"reflect"
 	"github.com/pkg/errors"
+	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
@@ -11,6 +13,25 @@ type IncidentRole struct {
 	Summary     string `jsonapi:"attr,summary,omitempty"`
 	Description string `jsonapi:"attr,description,omitempty"`
 	Enabled     *bool  `jsonapi:"attr,enabled,omitempty"`
+}
+
+func (c *Client) ListIncidentRoles(params *rootlygo.ListIncidentRolesParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListIncidentRolesRequest(c.Rootly.Server, params)
+	if err != nil {
+		return nil, errors.Errorf("Error building request: %s", err.Error())
+	}
+
+	resp, err := c.Do(req)
+	if err != nil {
+		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+	}
+
+	items, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(IncidentRole)))
+	if err != nil {
+		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+	}
+
+	return items, nil
 }
 
 func (c *Client) CreateIncidentRole(i *IncidentRole) (*IncidentRole, error) {
