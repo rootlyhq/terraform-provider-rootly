@@ -4513,6 +4513,9 @@ type Incident struct {
 	// Date of mitigation
 	MitigatedAt *string `json:"mitigated_at"`
 
+	// Create an incident as private
+	Private *bool `json:"private"`
+
 	// Date of resolution
 	ResolvedAt *string `json:"resolved_at"`
 
@@ -4521,6 +4524,9 @@ type Incident struct {
 
 	// The Severity ID to attach to the incident
 	SeverityId *string `json:"severity_id"`
+
+	// The slug of the incident
+	Slug string `json:"slug"`
 
 	// Date of start
 	StartedAt *string `json:"started_at"`
@@ -4931,6 +4937,9 @@ type IncidentList struct {
 			// Date of mitigation
 			MitigatedAt *string `json:"mitigated_at"`
 
+			// Create an incident as private
+			Private *bool `json:"private"`
+
 			// Date of resolution
 			ResolvedAt *string `json:"resolved_at"`
 
@@ -4939,6 +4948,9 @@ type IncidentList struct {
 
 			// The Severity ID to attach to the incident
 			SeverityId *string `json:"severity_id"`
+
+			// The slug of the incident
+			Slug string `json:"slug"`
 
 			// Date of start
 			StartedAt *string `json:"started_at"`
@@ -5209,6 +5221,9 @@ type IncidentResponse struct {
 			// Date of mitigation
 			MitigatedAt *string `json:"mitigated_at"`
 
+			// Create an incident as private
+			Private *bool `json:"private"`
+
 			// Date of resolution
 			ResolvedAt *string `json:"resolved_at"`
 
@@ -5217,6 +5232,9 @@ type IncidentResponse struct {
 
 			// The Severity ID to attach to the incident
 			SeverityId *string `json:"severity_id"`
+
+			// The slug of the incident
+			Slug string `json:"slug"`
 
 			// Date of start
 			StartedAt *string `json:"started_at"`
@@ -5957,7 +5975,7 @@ type NewIncident struct {
 			IncidentTypeIds *[]string `json:"incident_type_ids"`
 
 			// The kind of the incident
-			Kind *NewIncidentDataAttributesKind `json:"kind,omitempty"`
+			Kind *NewIncidentDataAttributesKind `json:"kind"`
 
 			// Labels to attach to the incidents. eg: {"platform":"osx", "version": "1.29"}
 			Labels *map[string]interface{} `json:"labels"`
@@ -5968,6 +5986,9 @@ type NewIncident struct {
 			// Emails you want to notify
 			NotifyEmails *[]string `json:"notify_emails"`
 
+			// Create an incident as private
+			Private *bool `json:"private"`
+
 			// Date of resolution
 			ResolvedAt *string `json:"resolved_at"`
 
@@ -5976,9 +5997,6 @@ type NewIncident struct {
 
 			// The Severity ID to attach to the incident
 			SeverityId *string `json:"severity_id"`
-
-			// The slug of the incident
-			Slug *string `json:"slug,omitempty"`
 
 			// Date of start
 			StartedAt *string `json:"started_at"`
@@ -5989,8 +6007,8 @@ type NewIncident struct {
 			// The summary of the incident
 			Summary *string `json:"summary"`
 
-			// The title of the incident
-			Title string `json:"title"`
+			// The title of the incident. We will autogenerate one if null.
+			Title *string `json:"title"`
 
 			// The url to the incident
 			Url *string `json:"url,omitempty"`
@@ -8423,6 +8441,9 @@ type UpdateIncident struct {
 			// Date of mitigation
 			MitigatedAt *string `json:"mitigated_at"`
 
+			// Create an incident as private
+			Private *bool `json:"private"`
+
 			// Date of resolution
 			ResolvedAt *string `json:"resolved_at"`
 
@@ -8439,7 +8460,7 @@ type UpdateIncident struct {
 			Summary *string `json:"summary"`
 
 			// The title of the incident
-			Title *string `json:"title,omitempty"`
+			Title *string `json:"title"`
 		} `json:"attributes"`
 		Type UpdateIncidentDataType `json:"type"`
 	} `json:"data"`

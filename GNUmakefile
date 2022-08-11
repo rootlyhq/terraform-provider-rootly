@@ -1,4 +1,4 @@
-SWAGGER_URL ?= https://rootly.com/swagger/v1/swagger.json
+SWAGGER_URL ?= https://rootly-heroku.s3.amazonaws.com/swagger/v1/swagger.json
 TEST?=$$(go list ./... | grep -v 'vendor')
 HOSTNAME=hashicorp.com
 NAMESPACE=eduW
