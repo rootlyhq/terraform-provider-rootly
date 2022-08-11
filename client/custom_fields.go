@@ -1,7 +1,9 @@
 package client
 
 import (
+	"reflect"
 	"github.com/pkg/errors"
+	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
@@ -13,6 +15,25 @@ type CustomField struct {
 	Enabled     *bool  `jsonapi:"attr,enabled,omitempty"`
 	Shown       []interface{} `jsonapi:"attr,shown,omitempty"`
 	Required    []interface{} `jsonapi:"attr,required,omitempty"`
+}
+
+func (c *Client) ListCustomFields(params *rootlygo.ListCustomFieldsParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListCustomFieldsRequest(c.Rootly.Server, params)
+	if err != nil {
+		return nil, errors.Errorf("Error building request: %s", err.Error())
+	}
+
+	resp, err := c.Do(req)
+	if err != nil {
+		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+	}
+
+	items, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(CustomField)))
+	if err != nil {
+		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+	}
+
+	return items, nil
 }
 
 func (c *Client) CreateCustomField(i *CustomField) (*CustomField, error) {
