@@ -45,7 +45,15 @@ func New(version string) func() *schema.Provider {
 			},
 			DataSourcesMap: map[string]*schema.Resource{
 				"rootly_causes": dataSourceCauses(),
+				"rootly_custom_fields": dataSourceCustomFields(),
+				"rootly_custom_field_options": dataSourceCustomFieldOptions(),
+				"rootly_environments": dataSourceEnvironments(),
+				"rootly_functionalities": dataSourceFunctionalities(),
+				"rootly_incident_types": dataSourceIncidentTypes(),
+				"rootly_incident_roles": dataSourceIncidentRoles(),
+				"rootly_teams": dataSourceTeams(),
 				"rootly_severities": dataSourceSeverities(),
+				"rootly_services": dataSourceServices(),
 			},
 			ResourcesMap: map[string]*schema.Resource{
 				"rootly_cause": resourceCause(),
