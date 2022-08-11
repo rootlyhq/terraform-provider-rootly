@@ -1,7 +1,9 @@
 package client
 
 import (
+	"reflect"
 	"github.com/pkg/errors"
+	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
@@ -12,9 +14,25 @@ type Service struct {
 	Color             string `jsonapi:"attr,color,omitempty"`
 	Description       string `jsonapi:"attr,description,omitempty"`
 	PublicDescription string `jsonapi:"attr,public_description,omitempty"`
-	//NotifyEmails  *[]string `json:"notify_emails,omitempty"`
-	//SlackChannels *[]string `json:"slack_channels,omitempty"`
-	//SlackAliases  *[]string `json:"slack_aliases,omitempty"`
+}
+
+func (c *Client) ListServices(params *rootlygo.ListServicesParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListServicesRequest(c.Rootly.Server, params)
+	if err != nil {
+		return nil, errors.Errorf("Error building request: %s", err.Error())
+	}
+
+	resp, err := c.Do(req)
+	if err != nil {
+		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+	}
+
+	items, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Service)))
+	if err != nil {
+		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+	}
+
+	return items, nil
 }
 
 func (c *Client) CreateService(s *Service) (*Service, error) {
