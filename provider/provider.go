@@ -45,6 +45,7 @@ func New(version string) func() *schema.Provider {
 			},
 			DataSourcesMap: map[string]*schema.Resource{
 				"rootly_causes": dataSourceCauses(),
+				"rootly_severities": dataSourceSeverities(),
 			},
 			ResourcesMap: map[string]*schema.Resource{
 				"rootly_cause": resourceCause(),
