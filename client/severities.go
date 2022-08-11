@@ -1,6 +1,8 @@
 package client
 
 import (
+	"reflect"
+	"github.com/google/jsonapi"
 	"github.com/pkg/errors"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
@@ -15,6 +17,25 @@ type Severity struct {
 	//NotifyEmails  *[]string `json:"notify_emails,omitempty"`
 	//SlackChannels *[]string `json:"slack_channels,omitempty"`
 	//SlackAliases  *[]string `json:"slack_aliases,omitempty"`
+}
+
+func (c *Client) ListSeverities(params *rootlygo.ListSeveritiesParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListSeveritiesRequest(c.Rootly.Server, params)
+	if err != nil {
+		return nil, errors.Errorf("Error building request: %s", err.Error())
+	}
+
+	resp, err := c.Do(req)
+	if err != nil {
+		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+	}
+
+	severities, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Severity)))
+	if err != nil {
+		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+	}
+
+	return severities, nil
 }
 
 func (c *Client) CreateSeverity(s *Severity) (*Severity, error) {

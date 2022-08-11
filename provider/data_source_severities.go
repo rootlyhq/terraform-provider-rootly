@@ -2,19 +2,17 @@ package provider
 
 import (
 	"context"
-	"fmt"
 	"strconv"
 	"time"
-	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
-func dataSourceCauses() *schema.Resource{
+func dataSourceSeverities() *schema.Resource{
 	return &schema.Resource{
-		ReadContext: dataSourceCausesRead,
+		ReadContext: dataSourceSeveritiesRead,
 		Schema: map[string]*schema.Schema{
 			"slug": &schema.Schema{
 				Type:        schema.TypeString,
@@ -24,7 +22,7 @@ func dataSourceCauses() *schema.Resource{
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-			"causes": &schema.Schema{
+			"severities": &schema.Schema{
 				Type: schema.TypeList,
 				Computed: true,
 				Elem: &schema.Resource{
@@ -41,6 +39,14 @@ func dataSourceCauses() *schema.Resource{
 							Type:        schema.TypeString,
 							Computed:    true,
 						},
+						"severity": {
+							Type:        schema.TypeString,
+							Computed:    true,
+						},
+						"color": {
+							Type:        schema.TypeString,
+							Computed:    true,
+						},
 						"description": &schema.Schema{
 							Type:        schema.TypeString,
 							Computed:    true,
@@ -52,30 +58,33 @@ func dataSourceCauses() *schema.Resource{
 	}
 }
 
-func dataSourceCausesRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func dataSourceSeveritiesRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
-	tflog.Trace(ctx, fmt.Sprintf("Reading Causes: %s", d.Id()))
 
-	params := new(rootlygo.ListCausesParams)
+	params := new(rootlygo.ListSeveritiesParams)
 
 	slug := d.Get("slug").(string)
 	name := d.Get("name").(string)
+	severity := d.Get("severity").(string)
+	color := d.Get("color").(string)
 
-	params.Slug = &slug
-	params.Name = &name
+	params.FilterSlug = &slug
+	params.FilterName = &name
+	params.FilterSeverity = &severity
+	params.FilterColor = &color
 
-	causes, err := c.ListCauses(params)
+	severities, err := c.ListSeverities(params)
 	if err != nil {
 		return diag.FromErr(err)
 	}
 
-	tf_causes := make([]interface{}, len(causes), len(causes))
-	for i, cause := range causes {
-		c, _ := cause.(*client.Cause)
-		tf_causes[i] = structToLowerFirstMap(*c)
+	tf_severities := make([]interface{}, len(severities), len(severities))
+	for i, severity := range severities {
+		x, _ := severity.(*client.Severity)
+		tf_severities[i] = structToLowerFirstMap(*x)
 	}
 
-	if err := d.Set("causes", tf_causes); err != nil {
+	if err := d.Set("severities", tf_severities); err != nil {
 		return diag.FromErr(err)
 	}
 

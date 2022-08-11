@@ -5,3 +5,7 @@ generate:
   models: true
   client: true
 output: rootly-schema.gen.go
+output-options:
+  exclude-tags:
+    - Dashboards
+    - DashboardPanels
