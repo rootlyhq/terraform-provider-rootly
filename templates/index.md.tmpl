@@ -1,20 +1,27 @@
----
-layout: ""
-page_title: "Provider: Rootly"
-description: |-
-The Rootly provider allows you to interact with the Rootly API.
----
-
 # Rootly Provider
 
 The [Rootly](https://rootly.com/) provider is used to interact with the resources supported by Rootly. The provider needs to be configured with the proper credentials before it can be used. It requires terraform 0.14 or later.
 
-Use the navigation to the left to read about the available resources.
+{{ .SchemaMarkdown | trimspace }}
 
 ## Example Usage
 
-See [examples folder](https://github.com/rootlyhq/terraform-provider-rootly/tree/main/examples/provider) for more examples.
-
 {{tffile "examples/provider/provider.tf"}}
 
-{{ .SchemaMarkdown | trimspace }}
+## Development
+
+### Generate Go types from Swagger
+
+Use `make schema`.
+
+### Auto-generate workflow task resources and tests from Swagger
+
+Use `node tools/gen_tasks.js swagger.json`
+
+The latest Swagger definition can be downloaded from rootly.com:
+
+```sh
+curl https://api.rootly.com/v1/swagger.json -o ./swagger.json
+```
+
+**Note**: The tests for tasks that depend on other resources will fail (ex: rootly_workflow_task_update_incident requires an incident ID). Not all tasks can be reliably auto-generated from Swagger.

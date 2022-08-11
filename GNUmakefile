@@ -17,6 +17,7 @@ build:
 docs:
 	@go get -v github.com/hashicorp/terraform-plugin-docs/...
 	tfplugindocs generate
+	cp docs/index.md README.md
 
 release:
 	goreleaser release --rm-dist --snapshot --skip-publish  --skip-sign

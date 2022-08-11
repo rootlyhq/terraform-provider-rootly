@@ -24,7 +24,7 @@ provider "rootly" {
 
 # Using the output of data sources
 data "rootly_severities" "critical" {
-	slug = "sev0"
+  slug = "sev0"
 }
 
 resource "rootly_workflow_incident" "ping_oncall" {
@@ -36,7 +36,7 @@ resource "rootly_workflow_incident" "ping_oncall" {
     incident_kinds            = ["normal"]
     incident_condition_status = "IS"
     incident_statuses         = ["started"]
-		severity_ids							= [data.rootly_severities.critical.severities[0].id]
+    severity_ids              = [data.rootly_severities.critical.severities[0].id]
   }
   enabled = true
 }
@@ -44,10 +44,10 @@ resource "rootly_workflow_incident" "ping_oncall" {
 resource "rootly_workflow_task_send_sms" "sms_oncall" {
   workflow_id = rootly_workflow_incident.ping_oncall.id
   task_params {
-		name = "On-call team"
-		phone_numbers = ["+11231231234"]
-		content = "Critical incident started"
-	}
+    name = "On-call team"
+    phone_numbers = ["+11231231234"]
+    content = "Critical incident started"
+  }
 }
 
 # Severities
