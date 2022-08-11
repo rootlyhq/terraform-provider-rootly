@@ -1,15 +1,37 @@
 package client
 
 import (
+	"reflect"
 	"github.com/pkg/errors"
+	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
 type IncidentType struct {
 	ID          string `jsonapi:"primary,incident_types"`
 	Name        string `jsonapi:"attr,name,omitempty"`
+	Slug        string `jsonapi:"attr,slug,omitempty"`
 	Description string `jsonapi:"attr,description,omitempty"`
 	Color       string `jsonapi:"attr,color,omitempty"`
+}
+
+func (c *Client) ListIncidentTypes(params *rootlygo.ListIncidentTypesParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListIncidentTypesRequest(c.Rootly.Server, params)
+	if err != nil {
+		return nil, errors.Errorf("Error building request: %s", err.Error())
+	}
+
+	resp, err := c.Do(req)
+	if err != nil {
+		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+	}
+
+	items, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(IncidentType)))
+	if err != nil {
+		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+	}
+
+	return items, nil
 }
 
 func (c *Client) CreateIncidentType(i *IncidentType) (*IncidentType, error) {
