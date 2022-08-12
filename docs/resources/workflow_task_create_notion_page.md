@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_create_notion_page - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow createnotionpage task.
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_snapshot_looker_look - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow snapshotlookerlook task.
 ---

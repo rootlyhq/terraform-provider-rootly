@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_alert - terraform-provider-rootly"
-subcategory:
+subcategory: Workflows
 description: |-
     Manages workflows.
 ---

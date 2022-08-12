@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_page_pagerduty_on_call_responders - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow pagepagerdutyoncallresponders task.
 ---

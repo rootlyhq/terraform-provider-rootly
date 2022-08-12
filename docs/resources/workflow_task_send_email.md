@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_send_email - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow send_email task.
 ---

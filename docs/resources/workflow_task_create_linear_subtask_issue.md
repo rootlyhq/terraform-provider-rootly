@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_create_linear_subtask_issue - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow createlinearsubtask_issue task.
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_print - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow print task.
 ---

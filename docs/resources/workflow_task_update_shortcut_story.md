@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_update_shortcut_story - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow updateshortcutstory task.
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_create_github_issue - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow creategithubissue task.
 ---

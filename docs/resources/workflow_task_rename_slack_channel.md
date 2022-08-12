@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_rename_slack_channel - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow renameslackchannel task.
 ---

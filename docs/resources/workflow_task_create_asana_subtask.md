@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_create_asana_subtask - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow createasanasubtask task.
 ---

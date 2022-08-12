@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_update_airtable_table_record - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow updateairtabletable_record task.
 ---

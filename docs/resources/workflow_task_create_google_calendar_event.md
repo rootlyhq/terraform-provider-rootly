@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_create_google_calendar_event - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow creategooglecalendar_event task.
 ---

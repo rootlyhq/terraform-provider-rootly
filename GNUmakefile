@@ -18,6 +18,8 @@ docs:
 	@go get -v github.com/hashicorp/terraform-plugin-docs/...
 	tfplugindocs generate
 	cp docs/index.md README.md
+	find ./docs/resources/workflow_task_*.md -type f -print0 | xargs -0 sed -i '' 's/subcategory:$$/subcategory: Workflow Tasks/g'
+	find ./docs/resources/workflow_*.md -type f -print0 | xargs -0 sed -i '' 's/subcategory:$$/subcategory: Workflows/g'
 
 release:
 	goreleaser release --rm-dist --snapshot --skip-publish  --skip-sign

@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_invite_to_slack_channel_opsgenie - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow invitetoslackchannelopsgenie task.
 ---

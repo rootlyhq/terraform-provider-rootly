@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_get_pulses - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow get_pulses task.
 ---

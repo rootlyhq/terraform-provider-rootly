@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_snapshot_datadog_graph - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow snapshotdatadoggraph task.
 ---

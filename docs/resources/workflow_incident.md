@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_incident - terraform-provider-rootly"
-subcategory:
+subcategory: Workflows
 description: |-
     Manages workflows.
 ---

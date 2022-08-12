@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_update_trello_card - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow updatetrellocard task.
 ---

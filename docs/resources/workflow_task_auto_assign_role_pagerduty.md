@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_auto_assign_role_pagerduty - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow autoassignrole_pagerduty task.
 ---
