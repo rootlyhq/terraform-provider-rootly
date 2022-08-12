@@ -834,6 +834,34 @@ const (
 	CustomFieldResponseDataTypeCustomFields CustomFieldResponseDataType = "custom_fields"
 )
 
+// Defines values for DashboardOwner.
+const (
+	DashboardOwnerTeam DashboardOwner = "team"
+	DashboardOwnerUser DashboardOwner = "user"
+)
+
+// Defines values for DashboardListDataAttributesOwner.
+const (
+	DashboardListDataAttributesOwnerTeam DashboardListDataAttributesOwner = "team"
+	DashboardListDataAttributesOwnerUser DashboardListDataAttributesOwner = "user"
+)
+
+// Defines values for DashboardListDataType.
+const (
+	DashboardListDataTypeDashboards DashboardListDataType = "dashboards"
+)
+
+// Defines values for DashboardResponseDataAttributesOwner.
+const (
+	DashboardResponseDataAttributesOwnerTeam DashboardResponseDataAttributesOwner = "team"
+	DashboardResponseDataAttributesOwnerUser DashboardResponseDataAttributesOwner = "user"
+)
+
+// Defines values for DashboardResponseDataType.
+const (
+	DashboardResponseDataTypeDashboards DashboardResponseDataType = "dashboards"
+)
+
 // Defines values for EnvironmentListDataType.
 const (
 	EnvironmentListDataTypeEnvironments EnvironmentListDataType = "environments"
@@ -1372,6 +1400,24 @@ const (
 // Defines values for NewCustomFieldOptionDataType.
 const (
 	NewCustomFieldOptionDataTypeCustomFieldOptions NewCustomFieldOptionDataType = "custom_field_options"
+)
+
+// Defines values for NewDashboardDataAttributesOwner.
+const (
+	NewDashboardDataAttributesOwnerTeam NewDashboardDataAttributesOwner = "team"
+	NewDashboardDataAttributesOwnerUser NewDashboardDataAttributesOwner = "user"
+)
+
+// Defines values for NewDashboardDataAttributesPeriod.
+const (
+	NewDashboardDataAttributesPeriodDay   NewDashboardDataAttributesPeriod = "day"
+	NewDashboardDataAttributesPeriodMonth NewDashboardDataAttributesPeriod = "month"
+	NewDashboardDataAttributesPeriodWeek  NewDashboardDataAttributesPeriod = "week"
+)
+
+// Defines values for NewDashboardDataType.
+const (
+	NewDashboardDataTypeDashboards NewDashboardDataType = "dashboards"
 )
 
 // Defines values for NewEnvironmentDataType.
@@ -1968,6 +2014,24 @@ const (
 // Defines values for UpdateCustomFieldOptionDataType.
 const (
 	UpdateCustomFieldOptionDataTypeCustomFieldOptions UpdateCustomFieldOptionDataType = "custom_field_options"
+)
+
+// Defines values for UpdateDashboardDataAttributesOwner.
+const (
+	UpdateDashboardDataAttributesOwnerTeam UpdateDashboardDataAttributesOwner = "team"
+	UpdateDashboardDataAttributesOwnerUser UpdateDashboardDataAttributesOwner = "user"
+)
+
+// Defines values for UpdateDashboardDataAttributesPeriod.
+const (
+	UpdateDashboardDataAttributesPeriodDay   UpdateDashboardDataAttributesPeriod = "day"
+	UpdateDashboardDataAttributesPeriodMonth UpdateDashboardDataAttributesPeriod = "month"
+	UpdateDashboardDataAttributesPeriodWeek  UpdateDashboardDataAttributesPeriod = "week"
+)
+
+// Defines values for UpdateDashboardDataType.
+const (
+	UpdateDashboardDataTypeDashboards UpdateDashboardDataType = "dashboards"
 )
 
 // Defines values for UpdateEnvironmentDataType.
@@ -4121,6 +4185,134 @@ type CustomFieldResponseDataAttributesShown string
 // CustomFieldResponseDataType defines model for CustomFieldResponse.Data.Type.
 type CustomFieldResponseDataType string
 
+// Dashboard defines model for dashboard.
+type Dashboard struct {
+	// Date of creation
+	CreatedAt *string `json:"created_at,omitempty"`
+
+	// The name of the dashboard
+	Name string `json:"name"`
+
+	// The owner type of the dashboard
+	Owner DashboardOwner `json:"owner"`
+
+	// The grouping period for dashbaord panel data
+	Period *string `json:"period"`
+
+	// Whether the dashboard is public
+	Public bool `json:"public"`
+
+	// The date range for dashboard panel data
+	Range *string `json:"range"`
+
+	// The dashboard team
+	TeamId *float32 `json:"team_id,omitempty"`
+
+	// Date of last update
+	UpdatedAt *string `json:"updated_at,omitempty"`
+
+	// The dashboard user owner if owner is of type user
+	UserId *string `json:"user_id"`
+}
+
+// The owner type of the dashboard
+type DashboardOwner string
+
+// DashboardList defines model for dashboard_list.
+type DashboardList struct {
+	Data []struct {
+		Attributes struct {
+			// Date of creation
+			CreatedAt *string `json:"created_at,omitempty"`
+
+			// The name of the dashboard
+			Name string `json:"name"`
+
+			// The owner type of the dashboard
+			Owner DashboardListDataAttributesOwner `json:"owner"`
+
+			// The grouping period for dashbaord panel data
+			Period *string `json:"period"`
+
+			// Whether the dashboard is public
+			Public bool `json:"public"`
+
+			// The date range for dashboard panel data
+			Range *string `json:"range"`
+
+			// The dashboard team
+			TeamId *float32 `json:"team_id,omitempty"`
+
+			// Date of last update
+			UpdatedAt *string `json:"updated_at,omitempty"`
+
+			// The dashboard user owner if owner is of type user
+			UserId *string `json:"user_id"`
+		} `json:"attributes"`
+
+		// Unique ID of the dashboard
+		Id   string                `json:"id"`
+		Type DashboardListDataType `json:"type"`
+	} `json:"data"`
+	Links struct {
+		First string  `json:"first"`
+		Last  string  `json:"last"`
+		Next  *string `json:"next"`
+		Prev  *string `json:"prev"`
+		Self  string  `json:"self"`
+	} `json:"links"`
+}
+
+// The owner type of the dashboard
+type DashboardListDataAttributesOwner string
+
+// DashboardListDataType defines model for DashboardList.Data.Type.
+type DashboardListDataType string
+
+// DashboardResponse defines model for dashboard_response.
+type DashboardResponse struct {
+	Data struct {
+		Attributes struct {
+			// Date of creation
+			CreatedAt *string `json:"created_at,omitempty"`
+
+			// The name of the dashboard
+			Name string `json:"name"`
+
+			// The owner type of the dashboard
+			Owner DashboardResponseDataAttributesOwner `json:"owner"`
+
+			// The grouping period for dashbaord panel data
+			Period *string `json:"period"`
+
+			// Whether the dashboard is public
+			Public bool `json:"public"`
+
+			// The date range for dashboard panel data
+			Range *string `json:"range"`
+
+			// The dashboard team
+			TeamId *float32 `json:"team_id,omitempty"`
+
+			// Date of last update
+			UpdatedAt *string `json:"updated_at,omitempty"`
+
+			// The dashboard user owner if owner is of type user
+			UserId *string `json:"user_id"`
+		} `json:"attributes"`
+
+		// Unique ID of the dashboard
+		Id   string                    `json:"id"`
+		Type DashboardResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// The owner type of the dashboard
+type DashboardResponseDataAttributesOwner string
+
+// DashboardResponseDataType defines model for DashboardResponse.Data.Type.
+type DashboardResponseDataType string
+
 // Environment defines model for environment.
 type Environment struct {
 	Color *string `json:"color"`
@@ -5874,6 +6066,38 @@ type NewCustomFieldOption struct {
 
 // NewCustomFieldOptionDataType defines model for NewCustomFieldOption.Data.Type.
 type NewCustomFieldOptionDataType string
+
+// NewDashboard defines model for new_dashboard.
+type NewDashboard struct {
+	Data struct {
+		Attributes struct {
+			// The name of the dashboard
+			Name string `json:"name"`
+
+			// The owner type of the dashboard
+			Owner NewDashboardDataAttributesOwner `json:"owner"`
+
+			// The grouping period for dashbaord panel data
+			Period *NewDashboardDataAttributesPeriod `json:"period"`
+
+			// Whether the dashboard is public
+			Public *bool `json:"public,omitempty"`
+
+			// The date range for dashboard panel data
+			Range *string `json:"range"`
+		} `json:"attributes"`
+		Type NewDashboardDataType `json:"type"`
+	} `json:"data"`
+}
+
+// The owner type of the dashboard
+type NewDashboardDataAttributesOwner string
+
+// The grouping period for dashbaord panel data
+type NewDashboardDataAttributesPeriod string
+
+// NewDashboardDataType defines model for NewDashboard.Data.Type.
+type NewDashboardDataType string
 
 // NewEnvironment defines model for new_environment.
 type NewEnvironment struct {
@@ -8283,6 +8507,38 @@ type UpdateCustomFieldOption struct {
 // UpdateCustomFieldOptionDataType defines model for UpdateCustomFieldOption.Data.Type.
 type UpdateCustomFieldOptionDataType string
 
+// UpdateDashboard defines model for update_dashboard.
+type UpdateDashboard struct {
+	Data struct {
+		Attributes *struct {
+			// The name of the dashboard
+			Name *string `json:"name,omitempty"`
+
+			// The owner type of the dashboard
+			Owner *UpdateDashboardDataAttributesOwner `json:"owner,omitempty"`
+
+			// The grouping period for dashbaord panel data
+			Period *UpdateDashboardDataAttributesPeriod `json:"period"`
+
+			// Whether the dashboard is public
+			Public *bool `json:"public,omitempty"`
+
+			// The date range for dashboard panel data
+			Range *string `json:"range"`
+		} `json:"attributes,omitempty"`
+		Type *UpdateDashboardDataType `json:"type,omitempty"`
+	} `json:"data"`
+}
+
+// The owner type of the dashboard
+type UpdateDashboardDataAttributesOwner string
+
+// The grouping period for dashbaord panel data
+type UpdateDashboardDataAttributesPeriod string
+
+// UpdateDashboardDataType defines model for UpdateDashboard.Data.Type.
+type UpdateDashboardDataType string
+
 // UpdateEnvironment defines model for update_environment.
 type UpdateEnvironment struct {
 	Data struct {
@@ -9888,6 +10144,13 @@ type ListCustomFieldOptionsParams struct {
 	FilterColor *string `form:"filter[color],omitempty" json:"filter[color],omitempty"`
 }
 
+// ListDashboardsParams defines parameters for ListDashboards.
+type ListDashboardsParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+}
+
 // ListEnvironmentsParams defines parameters for ListEnvironments.
 type ListEnvironmentsParams struct {
 	Include     *string `form:"include,omitempty" json:"include,omitempty"`
@@ -10262,6 +10525,27 @@ type ClientInterface interface {
 
 	// UpdateCustomField request with any body
 	UpdateCustomFieldWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListDashboards request
+	ListDashboards(ctx context.Context, params *ListDashboardsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateDashboard request with any body
+	CreateDashboardWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteDashboard request
+	DeleteDashboard(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetDashboard request
+	GetDashboard(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateDashboard request with any body
+	UpdateDashboardWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DuplicateDashboard request
+	DuplicateDashboard(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// SetDefaultDashboard request
+	SetDefaultDashboard(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListEnvironments request
 	ListEnvironments(ctx context.Context, params *ListEnvironmentsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -10878,6 +11162,90 @@ func (c *Client) GetCustomField(ctx context.Context, id string, reqEditors ...Re
 
 func (c *Client) UpdateCustomFieldWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateCustomFieldRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListDashboards(ctx context.Context, params *ListDashboardsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListDashboardsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateDashboardWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateDashboardRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteDashboard(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteDashboardRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetDashboard(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetDashboardRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateDashboardWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateDashboardRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DuplicateDashboard(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDuplicateDashboardRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) SetDefaultDashboard(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewSetDefaultDashboardRequest(c.Server, id)
 	if err != nil {
 		return nil, err
 	}
@@ -13396,6 +13764,286 @@ func NewUpdateCustomFieldRequestWithBody(server string, id string, contentType s
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListDashboardsRequest generates requests for ListDashboards
+func NewListDashboardsRequest(server string, params *ListDashboardsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/dashboards")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Include != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateDashboardRequestWithBody generates requests for CreateDashboard with any type of body
+func NewCreateDashboardRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/dashboards")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteDashboardRequest generates requests for DeleteDashboard
+func NewDeleteDashboardRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/dashboards/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetDashboardRequest generates requests for GetDashboard
+func NewGetDashboardRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/dashboards/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateDashboardRequestWithBody generates requests for UpdateDashboard with any type of body
+func NewUpdateDashboardRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/dashboards/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDuplicateDashboardRequest generates requests for DuplicateDashboard
+func NewDuplicateDashboardRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/dashboards/%s/duplicate", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewSetDefaultDashboardRequest generates requests for SetDefaultDashboard
+func NewSetDefaultDashboardRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/dashboards/%s/set_default", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return req, nil
 }
@@ -19688,6 +20336,27 @@ type ClientWithResponsesInterface interface {
 	// UpdateCustomField request with any body
 	UpdateCustomFieldWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCustomFieldResponse, error)
 
+	// ListDashboards request
+	ListDashboardsWithResponse(ctx context.Context, params *ListDashboardsParams, reqEditors ...RequestEditorFn) (*ListDashboardsResponse, error)
+
+	// CreateDashboard request with any body
+	CreateDashboardWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateDashboardResponse, error)
+
+	// DeleteDashboard request
+	DeleteDashboardWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteDashboardResponse, error)
+
+	// GetDashboard request
+	GetDashboardWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetDashboardResponse, error)
+
+	// UpdateDashboard request with any body
+	UpdateDashboardWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateDashboardResponse, error)
+
+	// DuplicateDashboard request
+	DuplicateDashboardWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DuplicateDashboardResponse, error)
+
+	// SetDefaultDashboard request
+	SetDefaultDashboardWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*SetDefaultDashboardResponse, error)
+
 	// ListEnvironments request
 	ListEnvironmentsWithResponse(ctx context.Context, params *ListEnvironmentsParams, reqEditors ...RequestEditorFn) (*ListEnvironmentsResponse, error)
 
@@ -20496,6 +21165,153 @@ func (r UpdateCustomFieldResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r UpdateCustomFieldResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListDashboardsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r ListDashboardsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListDashboardsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateDashboardResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateDashboardResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateDashboardResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteDashboardResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteDashboardResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteDashboardResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetDashboardResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r GetDashboardResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetDashboardResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateDashboardResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateDashboardResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateDashboardResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DuplicateDashboardResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r DuplicateDashboardResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DuplicateDashboardResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type SetDefaultDashboardResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r SetDefaultDashboardResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r SetDefaultDashboardResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -23295,6 +24111,69 @@ func (c *ClientWithResponses) UpdateCustomFieldWithBodyWithResponse(ctx context.
 	return ParseUpdateCustomFieldResponse(rsp)
 }
 
+// ListDashboardsWithResponse request returning *ListDashboardsResponse
+func (c *ClientWithResponses) ListDashboardsWithResponse(ctx context.Context, params *ListDashboardsParams, reqEditors ...RequestEditorFn) (*ListDashboardsResponse, error) {
+	rsp, err := c.ListDashboards(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListDashboardsResponse(rsp)
+}
+
+// CreateDashboardWithBodyWithResponse request with arbitrary body returning *CreateDashboardResponse
+func (c *ClientWithResponses) CreateDashboardWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateDashboardResponse, error) {
+	rsp, err := c.CreateDashboardWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateDashboardResponse(rsp)
+}
+
+// DeleteDashboardWithResponse request returning *DeleteDashboardResponse
+func (c *ClientWithResponses) DeleteDashboardWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteDashboardResponse, error) {
+	rsp, err := c.DeleteDashboard(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteDashboardResponse(rsp)
+}
+
+// GetDashboardWithResponse request returning *GetDashboardResponse
+func (c *ClientWithResponses) GetDashboardWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetDashboardResponse, error) {
+	rsp, err := c.GetDashboard(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetDashboardResponse(rsp)
+}
+
+// UpdateDashboardWithBodyWithResponse request with arbitrary body returning *UpdateDashboardResponse
+func (c *ClientWithResponses) UpdateDashboardWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateDashboardResponse, error) {
+	rsp, err := c.UpdateDashboardWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateDashboardResponse(rsp)
+}
+
+// DuplicateDashboardWithResponse request returning *DuplicateDashboardResponse
+func (c *ClientWithResponses) DuplicateDashboardWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DuplicateDashboardResponse, error) {
+	rsp, err := c.DuplicateDashboard(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDuplicateDashboardResponse(rsp)
+}
+
+// SetDefaultDashboardWithResponse request returning *SetDefaultDashboardResponse
+func (c *ClientWithResponses) SetDefaultDashboardWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*SetDefaultDashboardResponse, error) {
+	rsp, err := c.SetDefaultDashboard(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseSetDefaultDashboardResponse(rsp)
+}
+
 // ListEnvironmentsWithResponse request returning *ListEnvironmentsResponse
 func (c *ClientWithResponses) ListEnvironmentsWithResponse(ctx context.Context, params *ListEnvironmentsParams, reqEditors ...RequestEditorFn) (*ListEnvironmentsResponse, error) {
 	rsp, err := c.ListEnvironments(ctx, params, reqEditors...)
@@ -24740,6 +25619,118 @@ func ParseUpdateCustomFieldResponse(rsp *http.Response) (*UpdateCustomFieldRespo
 	}
 
 	response := &UpdateCustomFieldResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseListDashboardsResponse parses an HTTP response from a ListDashboardsWithResponse call
+func ParseListDashboardsResponse(rsp *http.Response) (*ListDashboardsResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListDashboardsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseCreateDashboardResponse parses an HTTP response from a CreateDashboardWithResponse call
+func ParseCreateDashboardResponse(rsp *http.Response) (*CreateDashboardResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateDashboardResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseDeleteDashboardResponse parses an HTTP response from a DeleteDashboardWithResponse call
+func ParseDeleteDashboardResponse(rsp *http.Response) (*DeleteDashboardResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteDashboardResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseGetDashboardResponse parses an HTTP response from a GetDashboardWithResponse call
+func ParseGetDashboardResponse(rsp *http.Response) (*GetDashboardResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetDashboardResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseUpdateDashboardResponse parses an HTTP response from a UpdateDashboardWithResponse call
+func ParseUpdateDashboardResponse(rsp *http.Response) (*UpdateDashboardResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateDashboardResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseDuplicateDashboardResponse parses an HTTP response from a DuplicateDashboardWithResponse call
+func ParseDuplicateDashboardResponse(rsp *http.Response) (*DuplicateDashboardResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DuplicateDashboardResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseSetDefaultDashboardResponse parses an HTTP response from a SetDefaultDashboardWithResponse call
+func ParseSetDefaultDashboardResponse(rsp *http.Response) (*SetDefaultDashboardResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &SetDefaultDashboardResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
