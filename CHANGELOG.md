@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.1.15] -- 2022-08-12
+
+### Added
+
+- Added data sources:
+	- rootly_causes
+	- rootly_custom_fields
+	- rootly_custom_field_options
+	- rootly_environments
+	- rootly_functionalities
+	- rootly_incident_roles
+	- rootly_incident_types
+	- rootly_severities
+	- rootly_services
+	- rootly_teams
+- Added resources:
+	- rootly_dashboard
+	- rootly_dashboard_panel
+
 ## [0.1.14] -- 2022-08-08
 
 ### Added
