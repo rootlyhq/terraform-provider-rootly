@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.17] -- 2022-08-12
+
+### Changed
+
+Add categories to docs.
+
 ## [0.1.15] -- 2022-08-12
 
 ### Added
