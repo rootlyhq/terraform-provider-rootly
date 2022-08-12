@@ -17,14 +17,12 @@ func TestAccResourceDashboard(t *testing.T) {
 				Config: testAccResourceDashboard,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_dashboard.foo", "name", "mydashboard"),
-					resource.TestCheckResourceAttr("rootly_dashboard.foo", "description", ""),
 				),
 			},
 			{
 				Config: testAccResourceDashboardUpdate,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_dashboard.foo", "name", "mydashboard2"),
-					resource.TestCheckResourceAttr("rootly_dashboard.foo", "description", "my dashboard description"),
 				),
 			},
 		},
