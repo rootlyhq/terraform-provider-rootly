@@ -12,7 +12,7 @@ type Dashboard struct {
 	Slug        string `jsonapi:"attr,slug,omitempty"`
 	Name        string `jsonapi:"attr,name,omitempty"`
 	Owner       string `jsonapi:"attr,owner,omitempty"`
-	UserId      string `jsonapi:"attr,user_id,omitempty"`
+	UserId      int `jsonapi:"attr,user_id,omitempty"`
 	Public      *bool `jsonapi:"attr,public,omitempty"`
 }
 
@@ -52,7 +52,7 @@ func (c *Client) CreateDashboard(dashboard *Dashboard) (*Dashboard, error) {
 
 	data, err := UnmarshalData(resp.Body, new(Dashboard))
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling dashboard: %s", err.Error())
+		return nil, errors.Errorf("Error unmarshaling dashboard during create: %s", err.Error())
 	}
 
 	return data.(*Dashboard), nil

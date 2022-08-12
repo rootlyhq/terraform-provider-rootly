@@ -25,7 +25,7 @@ func resourceDashboard() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"user_id": {
 				Description: "The user_id of the dashboard, for dashboards with owner == user",
-				Type:        schema.TypeString,
+				Type:        schema.TypeInt,
 				Computed:    true,
 			},
 			"owner": {
@@ -51,7 +51,7 @@ func resourceDashboard() *schema.Resource {
 			"public": {
 				Description: "Whether the dashboard is public",
 				Type:        schema.TypeBool,
-				Required:    true,
+				Optional:    true,
 				Default:     false,
 			},
 		},
@@ -74,7 +74,7 @@ func resourceDashboardCreate(ctx context.Context, d *schema.ResourceData, meta i
 	}
 
 	if value, ok := d.GetOk("user_id"); ok {
-		s.UserId = value.(string)
+		s.UserId = value.(int)
 	}
 
 	res, err := c.CreateDashboard(s)

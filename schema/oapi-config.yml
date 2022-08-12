@@ -6,5 +6,9 @@ generate:
   client: true
 output: rootly-schema.gen.go
 output-options:
-  exclude-tags:
-    - DashboardPanels
+  exclude-schemas:
+    - new_dashboard_panel
+    - update_dashboard_panel
+    - dashboard_panel_list
+    - dashboard_panel
+    - dashboard_panel_response

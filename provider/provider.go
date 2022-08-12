@@ -60,6 +60,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_custom_field": resourceCustomField(),
 				"rootly_custom_field_option": resourceCustomFieldOption(),
 				"rootly_dashboard": resourceDashboard(),
+				"rootly_dashboard_panel": resourceDashboardPanel(),
 				"rootly_environment": resourceEnvironment(),
 				"rootly_functionality": resourceFunctionality(),
 				"rootly_incident_role": resourceIncidentRole(),

@@ -15,14 +15,14 @@ Manages dashboards.
 ### Required
 
 - `name` (String) The name of the dashboard
-- `public` (Boolean) Whether the dashboard is public
 
 ### Optional
 
 - `owner` (String) Whether the dashboard is owned by organization or user.
+- `public` (Boolean) Whether the dashboard is public
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
 - `slug` (String) The slug of the dashboard
-- `user_id` (String) The user_id of the dashboard, for dashboards with owner == user
+- `user_id` (Number) The user_id of the dashboard, for dashboards with owner == user

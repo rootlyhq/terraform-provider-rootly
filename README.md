@@ -12,9 +12,9 @@ The [Rootly](https://rootly.com/) provider is used to interact with the resource
 
 ## Example Usage
 
-```terraform
-# Terraform 0.12+ uses the Terraform Registry:
+Provider
 
+```terraform
 terraform {
   required_providers {
     rootly = {
@@ -23,21 +23,17 @@ terraform {
   }
 }
 
-# Configure the Rootly provider
 provider "rootly" {
   # We recommend using the `ROOTLY_API_TOKEN` env var to set the API Token
   # when interacting with Rootly's API.
   # api_token = var.rootly_api_key
 }
+```
 
-# Terraform 0.12- can be specified as:
-# provider "rootly" {
-# We recommend using the `ROOTLY_API_TOKEN` env var to set the API Token
-# when interacting with Rootly's API.
-# api_token = var.rootly_api_key
-# }
+Data sources
 
-# Using the output of data sources
+```terraform
+# uses output of severity data source as input for workflow
 data "rootly_severities" "critical" {
   slug = "sev0"
 }
@@ -64,25 +60,11 @@ resource "rootly_workflow_task_send_sms" "sms_oncall" {
     content = "Critical incident started"
   }
 }
+```
 
-# Severities
-resource "rootly_severity" "sev0" {
-  name  = "SEV0"
-  color = "#FF0000"
-}
+Custom Fields
 
-# Services
-resource "rootly_service" "elasticsearch_prod" {
-  name  = "elasticsearch-prod"
-  color = "#800080"
-}
-
-# Functionalities
-resource "rootly_functionality" "add_items_to_cart" {
-  name  = "Add items to cart"
-  color = "#800080"
-}
-
+```terraform
 # Custom Fields
 resource "rootly_custom_field" "regions_affected" {
   name = "Regions affected"
@@ -105,7 +87,11 @@ resource "rootly_custom_field_option" "north_america" {
   custom_field_id = rootly_custom_field.regions_affected.id
   value = "North America"
 }
+```
 
+Workflows
+
+```terraform
 # Jira workflow
 resource "rootly_workflow_incident" "jira" {
   name        = "Create a Jira Issue"
@@ -136,6 +122,40 @@ resource "rootly_workflow_task_create_jira_issue" "jira" {
     }
     labels = "{{ incident.environment_slugs | concat: incident.service_slugs | concat: incident.functionality_slugs | concat: incident.group_slugs | join: \",\" }}"
   }
+}
+```
+
+Dashboards
+
+```terraform
+resource "rootly_dashboard" "overview" {
+  name = "mydashboard_panel"
+}
+
+resource "rootly_dashboard_panel" "incidents_by_severity" {
+  dashboard_id = rootly_dashboard.foo.id
+	name = "test"
+	params {
+		display = "line_chart"
+		datasets {
+			collection = "incidents"
+			filter {
+				operation = "and"
+				rules {
+					operation = "and"
+					condition = "="
+					key = "status"
+					value = "started"
+				}
+			}
+			group_by = "severity"
+			aggregate {
+				cumulative = false
+				key = "results"
+				operation = "count"
+			}
+		}
+	}
 }
 ```
 
