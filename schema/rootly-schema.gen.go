@@ -29,42 +29,46 @@ const (
 
 // Defines values for ActionItemTriggerParamsIncidentActionItemConditionGroup.
 const (
-	ActionItemTriggerParamsIncidentActionItemConditionGroupANY      ActionItemTriggerParamsIncidentActionItemConditionGroup = "ANY"
-	ActionItemTriggerParamsIncidentActionItemConditionGroupCONTAINS ActionItemTriggerParamsIncidentActionItemConditionGroup = "CONTAINS"
-	ActionItemTriggerParamsIncidentActionItemConditionGroupIS       ActionItemTriggerParamsIncidentActionItemConditionGroup = "IS"
-	ActionItemTriggerParamsIncidentActionItemConditionGroupNONE     ActionItemTriggerParamsIncidentActionItemConditionGroup = "NONE"
-	ActionItemTriggerParamsIncidentActionItemConditionGroupSET      ActionItemTriggerParamsIncidentActionItemConditionGroup = "SET"
-	ActionItemTriggerParamsIncidentActionItemConditionGroupUNSET    ActionItemTriggerParamsIncidentActionItemConditionGroup = "UNSET"
+	ActionItemTriggerParamsIncidentActionItemConditionGroupANY         ActionItemTriggerParamsIncidentActionItemConditionGroup = "ANY"
+	ActionItemTriggerParamsIncidentActionItemConditionGroupCONTAINS    ActionItemTriggerParamsIncidentActionItemConditionGroup = "CONTAINS"
+	ActionItemTriggerParamsIncidentActionItemConditionGroupCONTAINSALL ActionItemTriggerParamsIncidentActionItemConditionGroup = "CONTAINS_ALL"
+	ActionItemTriggerParamsIncidentActionItemConditionGroupIS          ActionItemTriggerParamsIncidentActionItemConditionGroup = "IS"
+	ActionItemTriggerParamsIncidentActionItemConditionGroupNONE        ActionItemTriggerParamsIncidentActionItemConditionGroup = "NONE"
+	ActionItemTriggerParamsIncidentActionItemConditionGroupSET         ActionItemTriggerParamsIncidentActionItemConditionGroup = "SET"
+	ActionItemTriggerParamsIncidentActionItemConditionGroupUNSET       ActionItemTriggerParamsIncidentActionItemConditionGroup = "UNSET"
 )
 
 // Defines values for ActionItemTriggerParamsIncidentActionItemConditionKind.
 const (
-	ActionItemTriggerParamsIncidentActionItemConditionKindANY      ActionItemTriggerParamsIncidentActionItemConditionKind = "ANY"
-	ActionItemTriggerParamsIncidentActionItemConditionKindCONTAINS ActionItemTriggerParamsIncidentActionItemConditionKind = "CONTAINS"
-	ActionItemTriggerParamsIncidentActionItemConditionKindIS       ActionItemTriggerParamsIncidentActionItemConditionKind = "IS"
-	ActionItemTriggerParamsIncidentActionItemConditionKindNONE     ActionItemTriggerParamsIncidentActionItemConditionKind = "NONE"
-	ActionItemTriggerParamsIncidentActionItemConditionKindSET      ActionItemTriggerParamsIncidentActionItemConditionKind = "SET"
-	ActionItemTriggerParamsIncidentActionItemConditionKindUNSET    ActionItemTriggerParamsIncidentActionItemConditionKind = "UNSET"
+	ActionItemTriggerParamsIncidentActionItemConditionKindANY         ActionItemTriggerParamsIncidentActionItemConditionKind = "ANY"
+	ActionItemTriggerParamsIncidentActionItemConditionKindCONTAINS    ActionItemTriggerParamsIncidentActionItemConditionKind = "CONTAINS"
+	ActionItemTriggerParamsIncidentActionItemConditionKindCONTAINSALL ActionItemTriggerParamsIncidentActionItemConditionKind = "CONTAINS_ALL"
+	ActionItemTriggerParamsIncidentActionItemConditionKindIS          ActionItemTriggerParamsIncidentActionItemConditionKind = "IS"
+	ActionItemTriggerParamsIncidentActionItemConditionKindNONE        ActionItemTriggerParamsIncidentActionItemConditionKind = "NONE"
+	ActionItemTriggerParamsIncidentActionItemConditionKindSET         ActionItemTriggerParamsIncidentActionItemConditionKind = "SET"
+	ActionItemTriggerParamsIncidentActionItemConditionKindUNSET       ActionItemTriggerParamsIncidentActionItemConditionKind = "UNSET"
 )
 
 // Defines values for ActionItemTriggerParamsIncidentActionItemConditionPriority.
 const (
-	ActionItemTriggerParamsIncidentActionItemConditionPriorityANY      ActionItemTriggerParamsIncidentActionItemConditionPriority = "ANY"
-	ActionItemTriggerParamsIncidentActionItemConditionPriorityCONTAINS ActionItemTriggerParamsIncidentActionItemConditionPriority = "CONTAINS"
-	ActionItemTriggerParamsIncidentActionItemConditionPriorityIS       ActionItemTriggerParamsIncidentActionItemConditionPriority = "IS"
-	ActionItemTriggerParamsIncidentActionItemConditionPriorityNONE     ActionItemTriggerParamsIncidentActionItemConditionPriority = "NONE"
-	ActionItemTriggerParamsIncidentActionItemConditionPrioritySET      ActionItemTriggerParamsIncidentActionItemConditionPriority = "SET"
-	ActionItemTriggerParamsIncidentActionItemConditionPriorityUNSET    ActionItemTriggerParamsIncidentActionItemConditionPriority = "UNSET"
+	ActionItemTriggerParamsIncidentActionItemConditionPriorityANY         ActionItemTriggerParamsIncidentActionItemConditionPriority = "ANY"
+	ActionItemTriggerParamsIncidentActionItemConditionPriorityCONTAINS    ActionItemTriggerParamsIncidentActionItemConditionPriority = "CONTAINS"
+	ActionItemTriggerParamsIncidentActionItemConditionPriorityCONTAINSALL ActionItemTriggerParamsIncidentActionItemConditionPriority = "CONTAINS_ALL"
+	ActionItemTriggerParamsIncidentActionItemConditionPriorityIS          ActionItemTriggerParamsIncidentActionItemConditionPriority = "IS"
+	ActionItemTriggerParamsIncidentActionItemConditionPriorityNONE        ActionItemTriggerParamsIncidentActionItemConditionPriority = "NONE"
+	ActionItemTriggerParamsIncidentActionItemConditionPrioritySET         ActionItemTriggerParamsIncidentActionItemConditionPriority = "SET"
+	ActionItemTriggerParamsIncidentActionItemConditionPriorityUNSET       ActionItemTriggerParamsIncidentActionItemConditionPriority = "UNSET"
 )
 
 // Defines values for ActionItemTriggerParamsIncidentActionItemConditionStatus.
 const (
-	ActionItemTriggerParamsIncidentActionItemConditionStatusANY      ActionItemTriggerParamsIncidentActionItemConditionStatus = "ANY"
-	ActionItemTriggerParamsIncidentActionItemConditionStatusCONTAINS ActionItemTriggerParamsIncidentActionItemConditionStatus = "CONTAINS"
-	ActionItemTriggerParamsIncidentActionItemConditionStatusIS       ActionItemTriggerParamsIncidentActionItemConditionStatus = "IS"
-	ActionItemTriggerParamsIncidentActionItemConditionStatusNONE     ActionItemTriggerParamsIncidentActionItemConditionStatus = "NONE"
-	ActionItemTriggerParamsIncidentActionItemConditionStatusSET      ActionItemTriggerParamsIncidentActionItemConditionStatus = "SET"
-	ActionItemTriggerParamsIncidentActionItemConditionStatusUNSET    ActionItemTriggerParamsIncidentActionItemConditionStatus = "UNSET"
+	ActionItemTriggerParamsIncidentActionItemConditionStatusANY         ActionItemTriggerParamsIncidentActionItemConditionStatus = "ANY"
+	ActionItemTriggerParamsIncidentActionItemConditionStatusCONTAINS    ActionItemTriggerParamsIncidentActionItemConditionStatus = "CONTAINS"
+	ActionItemTriggerParamsIncidentActionItemConditionStatusCONTAINSALL ActionItemTriggerParamsIncidentActionItemConditionStatus = "CONTAINS_ALL"
+	ActionItemTriggerParamsIncidentActionItemConditionStatusIS          ActionItemTriggerParamsIncidentActionItemConditionStatus = "IS"
+	ActionItemTriggerParamsIncidentActionItemConditionStatusNONE        ActionItemTriggerParamsIncidentActionItemConditionStatus = "NONE"
+	ActionItemTriggerParamsIncidentActionItemConditionStatusSET         ActionItemTriggerParamsIncidentActionItemConditionStatus = "SET"
+	ActionItemTriggerParamsIncidentActionItemConditionStatusUNSET       ActionItemTriggerParamsIncidentActionItemConditionStatus = "UNSET"
 )
 
 // Defines values for ActionItemTriggerParamsIncidentActionItemKinds.
@@ -97,92 +101,101 @@ const (
 
 // Defines values for ActionItemTriggerParamsIncidentConditionEnvironment.
 const (
-	ActionItemTriggerParamsIncidentConditionEnvironmentANY      ActionItemTriggerParamsIncidentConditionEnvironment = "ANY"
-	ActionItemTriggerParamsIncidentConditionEnvironmentCONTAINS ActionItemTriggerParamsIncidentConditionEnvironment = "CONTAINS"
-	ActionItemTriggerParamsIncidentConditionEnvironmentIS       ActionItemTriggerParamsIncidentConditionEnvironment = "IS"
-	ActionItemTriggerParamsIncidentConditionEnvironmentNONE     ActionItemTriggerParamsIncidentConditionEnvironment = "NONE"
-	ActionItemTriggerParamsIncidentConditionEnvironmentSET      ActionItemTriggerParamsIncidentConditionEnvironment = "SET"
-	ActionItemTriggerParamsIncidentConditionEnvironmentUNSET    ActionItemTriggerParamsIncidentConditionEnvironment = "UNSET"
+	ActionItemTriggerParamsIncidentConditionEnvironmentANY         ActionItemTriggerParamsIncidentConditionEnvironment = "ANY"
+	ActionItemTriggerParamsIncidentConditionEnvironmentCONTAINS    ActionItemTriggerParamsIncidentConditionEnvironment = "CONTAINS"
+	ActionItemTriggerParamsIncidentConditionEnvironmentCONTAINSALL ActionItemTriggerParamsIncidentConditionEnvironment = "CONTAINS_ALL"
+	ActionItemTriggerParamsIncidentConditionEnvironmentIS          ActionItemTriggerParamsIncidentConditionEnvironment = "IS"
+	ActionItemTriggerParamsIncidentConditionEnvironmentNONE        ActionItemTriggerParamsIncidentConditionEnvironment = "NONE"
+	ActionItemTriggerParamsIncidentConditionEnvironmentSET         ActionItemTriggerParamsIncidentConditionEnvironment = "SET"
+	ActionItemTriggerParamsIncidentConditionEnvironmentUNSET       ActionItemTriggerParamsIncidentConditionEnvironment = "UNSET"
 )
 
 // Defines values for ActionItemTriggerParamsIncidentConditionFunctionality.
 const (
-	ActionItemTriggerParamsIncidentConditionFunctionalityANY      ActionItemTriggerParamsIncidentConditionFunctionality = "ANY"
-	ActionItemTriggerParamsIncidentConditionFunctionalityCONTAINS ActionItemTriggerParamsIncidentConditionFunctionality = "CONTAINS"
-	ActionItemTriggerParamsIncidentConditionFunctionalityIS       ActionItemTriggerParamsIncidentConditionFunctionality = "IS"
-	ActionItemTriggerParamsIncidentConditionFunctionalityNONE     ActionItemTriggerParamsIncidentConditionFunctionality = "NONE"
-	ActionItemTriggerParamsIncidentConditionFunctionalitySET      ActionItemTriggerParamsIncidentConditionFunctionality = "SET"
-	ActionItemTriggerParamsIncidentConditionFunctionalityUNSET    ActionItemTriggerParamsIncidentConditionFunctionality = "UNSET"
+	ActionItemTriggerParamsIncidentConditionFunctionalityANY         ActionItemTriggerParamsIncidentConditionFunctionality = "ANY"
+	ActionItemTriggerParamsIncidentConditionFunctionalityCONTAINS    ActionItemTriggerParamsIncidentConditionFunctionality = "CONTAINS"
+	ActionItemTriggerParamsIncidentConditionFunctionalityCONTAINSALL ActionItemTriggerParamsIncidentConditionFunctionality = "CONTAINS_ALL"
+	ActionItemTriggerParamsIncidentConditionFunctionalityIS          ActionItemTriggerParamsIncidentConditionFunctionality = "IS"
+	ActionItemTriggerParamsIncidentConditionFunctionalityNONE        ActionItemTriggerParamsIncidentConditionFunctionality = "NONE"
+	ActionItemTriggerParamsIncidentConditionFunctionalitySET         ActionItemTriggerParamsIncidentConditionFunctionality = "SET"
+	ActionItemTriggerParamsIncidentConditionFunctionalityUNSET       ActionItemTriggerParamsIncidentConditionFunctionality = "UNSET"
 )
 
 // Defines values for ActionItemTriggerParamsIncidentConditionGroup.
 const (
-	ActionItemTriggerParamsIncidentConditionGroupANY      ActionItemTriggerParamsIncidentConditionGroup = "ANY"
-	ActionItemTriggerParamsIncidentConditionGroupCONTAINS ActionItemTriggerParamsIncidentConditionGroup = "CONTAINS"
-	ActionItemTriggerParamsIncidentConditionGroupIS       ActionItemTriggerParamsIncidentConditionGroup = "IS"
-	ActionItemTriggerParamsIncidentConditionGroupNONE     ActionItemTriggerParamsIncidentConditionGroup = "NONE"
-	ActionItemTriggerParamsIncidentConditionGroupSET      ActionItemTriggerParamsIncidentConditionGroup = "SET"
-	ActionItemTriggerParamsIncidentConditionGroupUNSET    ActionItemTriggerParamsIncidentConditionGroup = "UNSET"
+	ActionItemTriggerParamsIncidentConditionGroupANY         ActionItemTriggerParamsIncidentConditionGroup = "ANY"
+	ActionItemTriggerParamsIncidentConditionGroupCONTAINS    ActionItemTriggerParamsIncidentConditionGroup = "CONTAINS"
+	ActionItemTriggerParamsIncidentConditionGroupCONTAINSALL ActionItemTriggerParamsIncidentConditionGroup = "CONTAINS_ALL"
+	ActionItemTriggerParamsIncidentConditionGroupIS          ActionItemTriggerParamsIncidentConditionGroup = "IS"
+	ActionItemTriggerParamsIncidentConditionGroupNONE        ActionItemTriggerParamsIncidentConditionGroup = "NONE"
+	ActionItemTriggerParamsIncidentConditionGroupSET         ActionItemTriggerParamsIncidentConditionGroup = "SET"
+	ActionItemTriggerParamsIncidentConditionGroupUNSET       ActionItemTriggerParamsIncidentConditionGroup = "UNSET"
 )
 
 // Defines values for ActionItemTriggerParamsIncidentConditionIncidentType.
 const (
-	ActionItemTriggerParamsIncidentConditionIncidentTypeANY      ActionItemTriggerParamsIncidentConditionIncidentType = "ANY"
-	ActionItemTriggerParamsIncidentConditionIncidentTypeCONTAINS ActionItemTriggerParamsIncidentConditionIncidentType = "CONTAINS"
-	ActionItemTriggerParamsIncidentConditionIncidentTypeIS       ActionItemTriggerParamsIncidentConditionIncidentType = "IS"
-	ActionItemTriggerParamsIncidentConditionIncidentTypeNONE     ActionItemTriggerParamsIncidentConditionIncidentType = "NONE"
-	ActionItemTriggerParamsIncidentConditionIncidentTypeSET      ActionItemTriggerParamsIncidentConditionIncidentType = "SET"
-	ActionItemTriggerParamsIncidentConditionIncidentTypeUNSET    ActionItemTriggerParamsIncidentConditionIncidentType = "UNSET"
+	ActionItemTriggerParamsIncidentConditionIncidentTypeANY         ActionItemTriggerParamsIncidentConditionIncidentType = "ANY"
+	ActionItemTriggerParamsIncidentConditionIncidentTypeCONTAINS    ActionItemTriggerParamsIncidentConditionIncidentType = "CONTAINS"
+	ActionItemTriggerParamsIncidentConditionIncidentTypeCONTAINSALL ActionItemTriggerParamsIncidentConditionIncidentType = "CONTAINS_ALL"
+	ActionItemTriggerParamsIncidentConditionIncidentTypeIS          ActionItemTriggerParamsIncidentConditionIncidentType = "IS"
+	ActionItemTriggerParamsIncidentConditionIncidentTypeNONE        ActionItemTriggerParamsIncidentConditionIncidentType = "NONE"
+	ActionItemTriggerParamsIncidentConditionIncidentTypeSET         ActionItemTriggerParamsIncidentConditionIncidentType = "SET"
+	ActionItemTriggerParamsIncidentConditionIncidentTypeUNSET       ActionItemTriggerParamsIncidentConditionIncidentType = "UNSET"
 )
 
 // Defines values for ActionItemTriggerParamsIncidentConditionKind.
 const (
-	ActionItemTriggerParamsIncidentConditionKindANY      ActionItemTriggerParamsIncidentConditionKind = "ANY"
-	ActionItemTriggerParamsIncidentConditionKindCONTAINS ActionItemTriggerParamsIncidentConditionKind = "CONTAINS"
-	ActionItemTriggerParamsIncidentConditionKindIS       ActionItemTriggerParamsIncidentConditionKind = "IS"
-	ActionItemTriggerParamsIncidentConditionKindNONE     ActionItemTriggerParamsIncidentConditionKind = "NONE"
-	ActionItemTriggerParamsIncidentConditionKindSET      ActionItemTriggerParamsIncidentConditionKind = "SET"
-	ActionItemTriggerParamsIncidentConditionKindUNSET    ActionItemTriggerParamsIncidentConditionKind = "UNSET"
+	ActionItemTriggerParamsIncidentConditionKindANY         ActionItemTriggerParamsIncidentConditionKind = "ANY"
+	ActionItemTriggerParamsIncidentConditionKindCONTAINS    ActionItemTriggerParamsIncidentConditionKind = "CONTAINS"
+	ActionItemTriggerParamsIncidentConditionKindCONTAINSALL ActionItemTriggerParamsIncidentConditionKind = "CONTAINS_ALL"
+	ActionItemTriggerParamsIncidentConditionKindIS          ActionItemTriggerParamsIncidentConditionKind = "IS"
+	ActionItemTriggerParamsIncidentConditionKindNONE        ActionItemTriggerParamsIncidentConditionKind = "NONE"
+	ActionItemTriggerParamsIncidentConditionKindSET         ActionItemTriggerParamsIncidentConditionKind = "SET"
+	ActionItemTriggerParamsIncidentConditionKindUNSET       ActionItemTriggerParamsIncidentConditionKind = "UNSET"
 )
 
 // Defines values for ActionItemTriggerParamsIncidentConditionService.
 const (
-	ActionItemTriggerParamsIncidentConditionServiceANY      ActionItemTriggerParamsIncidentConditionService = "ANY"
-	ActionItemTriggerParamsIncidentConditionServiceCONTAINS ActionItemTriggerParamsIncidentConditionService = "CONTAINS"
-	ActionItemTriggerParamsIncidentConditionServiceIS       ActionItemTriggerParamsIncidentConditionService = "IS"
-	ActionItemTriggerParamsIncidentConditionServiceNONE     ActionItemTriggerParamsIncidentConditionService = "NONE"
-	ActionItemTriggerParamsIncidentConditionServiceSET      ActionItemTriggerParamsIncidentConditionService = "SET"
-	ActionItemTriggerParamsIncidentConditionServiceUNSET    ActionItemTriggerParamsIncidentConditionService = "UNSET"
+	ActionItemTriggerParamsIncidentConditionServiceANY         ActionItemTriggerParamsIncidentConditionService = "ANY"
+	ActionItemTriggerParamsIncidentConditionServiceCONTAINS    ActionItemTriggerParamsIncidentConditionService = "CONTAINS"
+	ActionItemTriggerParamsIncidentConditionServiceCONTAINSALL ActionItemTriggerParamsIncidentConditionService = "CONTAINS_ALL"
+	ActionItemTriggerParamsIncidentConditionServiceIS          ActionItemTriggerParamsIncidentConditionService = "IS"
+	ActionItemTriggerParamsIncidentConditionServiceNONE        ActionItemTriggerParamsIncidentConditionService = "NONE"
+	ActionItemTriggerParamsIncidentConditionServiceSET         ActionItemTriggerParamsIncidentConditionService = "SET"
+	ActionItemTriggerParamsIncidentConditionServiceUNSET       ActionItemTriggerParamsIncidentConditionService = "UNSET"
 )
 
 // Defines values for ActionItemTriggerParamsIncidentConditionSeverity.
 const (
-	ActionItemTriggerParamsIncidentConditionSeverityANY      ActionItemTriggerParamsIncidentConditionSeverity = "ANY"
-	ActionItemTriggerParamsIncidentConditionSeverityCONTAINS ActionItemTriggerParamsIncidentConditionSeverity = "CONTAINS"
-	ActionItemTriggerParamsIncidentConditionSeverityIS       ActionItemTriggerParamsIncidentConditionSeverity = "IS"
-	ActionItemTriggerParamsIncidentConditionSeverityNONE     ActionItemTriggerParamsIncidentConditionSeverity = "NONE"
-	ActionItemTriggerParamsIncidentConditionSeveritySET      ActionItemTriggerParamsIncidentConditionSeverity = "SET"
-	ActionItemTriggerParamsIncidentConditionSeverityUNSET    ActionItemTriggerParamsIncidentConditionSeverity = "UNSET"
+	ActionItemTriggerParamsIncidentConditionSeverityANY         ActionItemTriggerParamsIncidentConditionSeverity = "ANY"
+	ActionItemTriggerParamsIncidentConditionSeverityCONTAINS    ActionItemTriggerParamsIncidentConditionSeverity = "CONTAINS"
+	ActionItemTriggerParamsIncidentConditionSeverityCONTAINSALL ActionItemTriggerParamsIncidentConditionSeverity = "CONTAINS_ALL"
+	ActionItemTriggerParamsIncidentConditionSeverityIS          ActionItemTriggerParamsIncidentConditionSeverity = "IS"
+	ActionItemTriggerParamsIncidentConditionSeverityNONE        ActionItemTriggerParamsIncidentConditionSeverity = "NONE"
+	ActionItemTriggerParamsIncidentConditionSeveritySET         ActionItemTriggerParamsIncidentConditionSeverity = "SET"
+	ActionItemTriggerParamsIncidentConditionSeverityUNSET       ActionItemTriggerParamsIncidentConditionSeverity = "UNSET"
 )
 
 // Defines values for ActionItemTriggerParamsIncidentConditionStatus.
 const (
-	ActionItemTriggerParamsIncidentConditionStatusANY      ActionItemTriggerParamsIncidentConditionStatus = "ANY"
-	ActionItemTriggerParamsIncidentConditionStatusCONTAINS ActionItemTriggerParamsIncidentConditionStatus = "CONTAINS"
-	ActionItemTriggerParamsIncidentConditionStatusIS       ActionItemTriggerParamsIncidentConditionStatus = "IS"
-	ActionItemTriggerParamsIncidentConditionStatusNONE     ActionItemTriggerParamsIncidentConditionStatus = "NONE"
-	ActionItemTriggerParamsIncidentConditionStatusSET      ActionItemTriggerParamsIncidentConditionStatus = "SET"
-	ActionItemTriggerParamsIncidentConditionStatusUNSET    ActionItemTriggerParamsIncidentConditionStatus = "UNSET"
+	ActionItemTriggerParamsIncidentConditionStatusANY         ActionItemTriggerParamsIncidentConditionStatus = "ANY"
+	ActionItemTriggerParamsIncidentConditionStatusCONTAINS    ActionItemTriggerParamsIncidentConditionStatus = "CONTAINS"
+	ActionItemTriggerParamsIncidentConditionStatusCONTAINSALL ActionItemTriggerParamsIncidentConditionStatus = "CONTAINS_ALL"
+	ActionItemTriggerParamsIncidentConditionStatusIS          ActionItemTriggerParamsIncidentConditionStatus = "IS"
+	ActionItemTriggerParamsIncidentConditionStatusNONE        ActionItemTriggerParamsIncidentConditionStatus = "NONE"
+	ActionItemTriggerParamsIncidentConditionStatusSET         ActionItemTriggerParamsIncidentConditionStatus = "SET"
+	ActionItemTriggerParamsIncidentConditionStatusUNSET       ActionItemTriggerParamsIncidentConditionStatus = "UNSET"
 )
 
 // Defines values for ActionItemTriggerParamsIncidentConditionVisibility.
 const (
-	ActionItemTriggerParamsIncidentConditionVisibilityANY      ActionItemTriggerParamsIncidentConditionVisibility = "ANY"
-	ActionItemTriggerParamsIncidentConditionVisibilityCONTAINS ActionItemTriggerParamsIncidentConditionVisibility = "CONTAINS"
-	ActionItemTriggerParamsIncidentConditionVisibilityIS       ActionItemTriggerParamsIncidentConditionVisibility = "IS"
-	ActionItemTriggerParamsIncidentConditionVisibilityNONE     ActionItemTriggerParamsIncidentConditionVisibility = "NONE"
-	ActionItemTriggerParamsIncidentConditionVisibilitySET      ActionItemTriggerParamsIncidentConditionVisibility = "SET"
-	ActionItemTriggerParamsIncidentConditionVisibilityUNSET    ActionItemTriggerParamsIncidentConditionVisibility = "UNSET"
+	ActionItemTriggerParamsIncidentConditionVisibilityANY         ActionItemTriggerParamsIncidentConditionVisibility = "ANY"
+	ActionItemTriggerParamsIncidentConditionVisibilityCONTAINS    ActionItemTriggerParamsIncidentConditionVisibility = "CONTAINS"
+	ActionItemTriggerParamsIncidentConditionVisibilityCONTAINSALL ActionItemTriggerParamsIncidentConditionVisibility = "CONTAINS_ALL"
+	ActionItemTriggerParamsIncidentConditionVisibilityIS          ActionItemTriggerParamsIncidentConditionVisibility = "IS"
+	ActionItemTriggerParamsIncidentConditionVisibilityNONE        ActionItemTriggerParamsIncidentConditionVisibility = "NONE"
+	ActionItemTriggerParamsIncidentConditionVisibilitySET         ActionItemTriggerParamsIncidentConditionVisibility = "SET"
+	ActionItemTriggerParamsIncidentConditionVisibilityUNSET       ActionItemTriggerParamsIncidentConditionVisibility = "UNSET"
 )
 
 // Defines values for ActionItemTriggerParamsIncidentKinds.
@@ -259,79 +272,9 @@ const (
 	AddToTimeline AddToTimelineTaskParamsTaskType = "add_to_timeline"
 )
 
-// Defines values for AlertSource.
-const (
-	AlertSourceAsana     AlertSource = "asana"
-	AlertSourceDatadog   AlertSource = "datadog"
-	AlertSourceJira      AlertSource = "jira"
-	AlertSourceNobl9     AlertSource = "nobl9"
-	AlertSourceOpsgenie  AlertSource = "opsgenie"
-	AlertSourcePagerduty AlertSource = "pagerduty"
-	AlertSourceRollbar   AlertSource = "rollbar"
-	AlertSourceSentry    AlertSource = "sentry"
-	AlertSourceVictorops AlertSource = "victorops"
-	AlertSourceZendesk   AlertSource = "zendesk"
-)
-
-// Defines values for AlertListDataAttributesSource.
-const (
-	AlertListDataAttributesSourceAsana     AlertListDataAttributesSource = "asana"
-	AlertListDataAttributesSourceDatadog   AlertListDataAttributesSource = "datadog"
-	AlertListDataAttributesSourceJira      AlertListDataAttributesSource = "jira"
-	AlertListDataAttributesSourceNobl9     AlertListDataAttributesSource = "nobl9"
-	AlertListDataAttributesSourceOpsgenie  AlertListDataAttributesSource = "opsgenie"
-	AlertListDataAttributesSourcePagerduty AlertListDataAttributesSource = "pagerduty"
-	AlertListDataAttributesSourceRollbar   AlertListDataAttributesSource = "rollbar"
-	AlertListDataAttributesSourceSentry    AlertListDataAttributesSource = "sentry"
-	AlertListDataAttributesSourceVictorops AlertListDataAttributesSource = "victorops"
-	AlertListDataAttributesSourceZendesk   AlertListDataAttributesSource = "zendesk"
-)
-
-// Defines values for AlertListDataSource.
-const (
-	AlertListDataSourceAsana     AlertListDataSource = "asana"
-	AlertListDataSourceDatadog   AlertListDataSource = "datadog"
-	AlertListDataSourceJira      AlertListDataSource = "jira"
-	AlertListDataSourceNobl9     AlertListDataSource = "nobl9"
-	AlertListDataSourceOpsgenie  AlertListDataSource = "opsgenie"
-	AlertListDataSourcePagerduty AlertListDataSource = "pagerduty"
-	AlertListDataSourceRollbar   AlertListDataSource = "rollbar"
-	AlertListDataSourceSentry    AlertListDataSource = "sentry"
-	AlertListDataSourceVictorops AlertListDataSource = "victorops"
-	AlertListDataSourceZendesk   AlertListDataSource = "zendesk"
-)
-
 // Defines values for AlertListDataType.
 const (
 	AlertListDataTypeAlerts AlertListDataType = "alerts"
-)
-
-// Defines values for AlertResponseDataAttributesSource.
-const (
-	AlertResponseDataAttributesSourceAsana     AlertResponseDataAttributesSource = "asana"
-	AlertResponseDataAttributesSourceDatadog   AlertResponseDataAttributesSource = "datadog"
-	AlertResponseDataAttributesSourceJira      AlertResponseDataAttributesSource = "jira"
-	AlertResponseDataAttributesSourceNobl9     AlertResponseDataAttributesSource = "nobl9"
-	AlertResponseDataAttributesSourceOpsgenie  AlertResponseDataAttributesSource = "opsgenie"
-	AlertResponseDataAttributesSourcePagerduty AlertResponseDataAttributesSource = "pagerduty"
-	AlertResponseDataAttributesSourceRollbar   AlertResponseDataAttributesSource = "rollbar"
-	AlertResponseDataAttributesSourceSentry    AlertResponseDataAttributesSource = "sentry"
-	AlertResponseDataAttributesSourceVictorops AlertResponseDataAttributesSource = "victorops"
-	AlertResponseDataAttributesSourceZendesk   AlertResponseDataAttributesSource = "zendesk"
-)
-
-// Defines values for AlertResponseDataSource.
-const (
-	AlertResponseDataSourceAsana     AlertResponseDataSource = "asana"
-	AlertResponseDataSourceDatadog   AlertResponseDataSource = "datadog"
-	AlertResponseDataSourceJira      AlertResponseDataSource = "jira"
-	AlertResponseDataSourceNobl9     AlertResponseDataSource = "nobl9"
-	AlertResponseDataSourceOpsgenie  AlertResponseDataSource = "opsgenie"
-	AlertResponseDataSourcePagerduty AlertResponseDataSource = "pagerduty"
-	AlertResponseDataSourceRollbar   AlertResponseDataSource = "rollbar"
-	AlertResponseDataSourceSentry    AlertResponseDataSource = "sentry"
-	AlertResponseDataSourceVictorops AlertResponseDataSource = "victorops"
-	AlertResponseDataSourceZendesk   AlertResponseDataSource = "zendesk"
 )
 
 // Defines values for AlertResponseDataType.
@@ -348,32 +291,35 @@ const (
 
 // Defines values for AlertTriggerParamsAlertConditionLabel.
 const (
-	AlertTriggerParamsAlertConditionLabelANY      AlertTriggerParamsAlertConditionLabel = "ANY"
-	AlertTriggerParamsAlertConditionLabelCONTAINS AlertTriggerParamsAlertConditionLabel = "CONTAINS"
-	AlertTriggerParamsAlertConditionLabelIS       AlertTriggerParamsAlertConditionLabel = "IS"
-	AlertTriggerParamsAlertConditionLabelNONE     AlertTriggerParamsAlertConditionLabel = "NONE"
-	AlertTriggerParamsAlertConditionLabelSET      AlertTriggerParamsAlertConditionLabel = "SET"
-	AlertTriggerParamsAlertConditionLabelUNSET    AlertTriggerParamsAlertConditionLabel = "UNSET"
+	AlertTriggerParamsAlertConditionLabelANY         AlertTriggerParamsAlertConditionLabel = "ANY"
+	AlertTriggerParamsAlertConditionLabelCONTAINS    AlertTriggerParamsAlertConditionLabel = "CONTAINS"
+	AlertTriggerParamsAlertConditionLabelCONTAINSALL AlertTriggerParamsAlertConditionLabel = "CONTAINS_ALL"
+	AlertTriggerParamsAlertConditionLabelIS          AlertTriggerParamsAlertConditionLabel = "IS"
+	AlertTriggerParamsAlertConditionLabelNONE        AlertTriggerParamsAlertConditionLabel = "NONE"
+	AlertTriggerParamsAlertConditionLabelSET         AlertTriggerParamsAlertConditionLabel = "SET"
+	AlertTriggerParamsAlertConditionLabelUNSET       AlertTriggerParamsAlertConditionLabel = "UNSET"
 )
 
 // Defines values for AlertTriggerParamsAlertConditionPayload.
 const (
-	AlertTriggerParamsAlertConditionPayloadANY      AlertTriggerParamsAlertConditionPayload = "ANY"
-	AlertTriggerParamsAlertConditionPayloadCONTAINS AlertTriggerParamsAlertConditionPayload = "CONTAINS"
-	AlertTriggerParamsAlertConditionPayloadIS       AlertTriggerParamsAlertConditionPayload = "IS"
-	AlertTriggerParamsAlertConditionPayloadNONE     AlertTriggerParamsAlertConditionPayload = "NONE"
-	AlertTriggerParamsAlertConditionPayloadSET      AlertTriggerParamsAlertConditionPayload = "SET"
-	AlertTriggerParamsAlertConditionPayloadUNSET    AlertTriggerParamsAlertConditionPayload = "UNSET"
+	AlertTriggerParamsAlertConditionPayloadANY         AlertTriggerParamsAlertConditionPayload = "ANY"
+	AlertTriggerParamsAlertConditionPayloadCONTAINS    AlertTriggerParamsAlertConditionPayload = "CONTAINS"
+	AlertTriggerParamsAlertConditionPayloadCONTAINSALL AlertTriggerParamsAlertConditionPayload = "CONTAINS_ALL"
+	AlertTriggerParamsAlertConditionPayloadIS          AlertTriggerParamsAlertConditionPayload = "IS"
+	AlertTriggerParamsAlertConditionPayloadNONE        AlertTriggerParamsAlertConditionPayload = "NONE"
+	AlertTriggerParamsAlertConditionPayloadSET         AlertTriggerParamsAlertConditionPayload = "SET"
+	AlertTriggerParamsAlertConditionPayloadUNSET       AlertTriggerParamsAlertConditionPayload = "UNSET"
 )
 
 // Defines values for AlertTriggerParamsAlertConditionSource.
 const (
-	AlertTriggerParamsAlertConditionSourceANY      AlertTriggerParamsAlertConditionSource = "ANY"
-	AlertTriggerParamsAlertConditionSourceCONTAINS AlertTriggerParamsAlertConditionSource = "CONTAINS"
-	AlertTriggerParamsAlertConditionSourceIS       AlertTriggerParamsAlertConditionSource = "IS"
-	AlertTriggerParamsAlertConditionSourceNONE     AlertTriggerParamsAlertConditionSource = "NONE"
-	AlertTriggerParamsAlertConditionSourceSET      AlertTriggerParamsAlertConditionSource = "SET"
-	AlertTriggerParamsAlertConditionSourceUNSET    AlertTriggerParamsAlertConditionSource = "UNSET"
+	AlertTriggerParamsAlertConditionSourceANY         AlertTriggerParamsAlertConditionSource = "ANY"
+	AlertTriggerParamsAlertConditionSourceCONTAINS    AlertTriggerParamsAlertConditionSource = "CONTAINS"
+	AlertTriggerParamsAlertConditionSourceCONTAINSALL AlertTriggerParamsAlertConditionSource = "CONTAINS_ALL"
+	AlertTriggerParamsAlertConditionSourceIS          AlertTriggerParamsAlertConditionSource = "IS"
+	AlertTriggerParamsAlertConditionSourceNONE        AlertTriggerParamsAlertConditionSource = "NONE"
+	AlertTriggerParamsAlertConditionSourceSET         AlertTriggerParamsAlertConditionSource = "SET"
+	AlertTriggerParamsAlertConditionSourceUNSET       AlertTriggerParamsAlertConditionSource = "UNSET"
 )
 
 // Defines values for AlertTriggerParamsTriggerType.
@@ -686,6 +632,11 @@ const (
 // Defines values for CreateNotionPageTaskParamsTaskType.
 const (
 	CreateNotionPage CreateNotionPageTaskParamsTaskType = "create_notion_page"
+)
+
+// Defines values for CreatePagerdutyStatusUpdateParamsTaskType.
+const (
+	CreatePagerdutyStatusUpdate CreatePagerdutyStatusUpdateParamsTaskType = "create_pagerduty_status_update"
 )
 
 // Defines values for CreateServiceNowIncidentTaskParamsTaskType.
@@ -1188,92 +1139,101 @@ const (
 
 // Defines values for IncidentTriggerParamsIncidentConditionEnvironment.
 const (
-	IncidentTriggerParamsIncidentConditionEnvironmentANY      IncidentTriggerParamsIncidentConditionEnvironment = "ANY"
-	IncidentTriggerParamsIncidentConditionEnvironmentCONTAINS IncidentTriggerParamsIncidentConditionEnvironment = "CONTAINS"
-	IncidentTriggerParamsIncidentConditionEnvironmentIS       IncidentTriggerParamsIncidentConditionEnvironment = "IS"
-	IncidentTriggerParamsIncidentConditionEnvironmentNONE     IncidentTriggerParamsIncidentConditionEnvironment = "NONE"
-	IncidentTriggerParamsIncidentConditionEnvironmentSET      IncidentTriggerParamsIncidentConditionEnvironment = "SET"
-	IncidentTriggerParamsIncidentConditionEnvironmentUNSET    IncidentTriggerParamsIncidentConditionEnvironment = "UNSET"
+	IncidentTriggerParamsIncidentConditionEnvironmentANY         IncidentTriggerParamsIncidentConditionEnvironment = "ANY"
+	IncidentTriggerParamsIncidentConditionEnvironmentCONTAINS    IncidentTriggerParamsIncidentConditionEnvironment = "CONTAINS"
+	IncidentTriggerParamsIncidentConditionEnvironmentCONTAINSALL IncidentTriggerParamsIncidentConditionEnvironment = "CONTAINS_ALL"
+	IncidentTriggerParamsIncidentConditionEnvironmentIS          IncidentTriggerParamsIncidentConditionEnvironment = "IS"
+	IncidentTriggerParamsIncidentConditionEnvironmentNONE        IncidentTriggerParamsIncidentConditionEnvironment = "NONE"
+	IncidentTriggerParamsIncidentConditionEnvironmentSET         IncidentTriggerParamsIncidentConditionEnvironment = "SET"
+	IncidentTriggerParamsIncidentConditionEnvironmentUNSET       IncidentTriggerParamsIncidentConditionEnvironment = "UNSET"
 )
 
 // Defines values for IncidentTriggerParamsIncidentConditionFunctionality.
 const (
-	IncidentTriggerParamsIncidentConditionFunctionalityANY      IncidentTriggerParamsIncidentConditionFunctionality = "ANY"
-	IncidentTriggerParamsIncidentConditionFunctionalityCONTAINS IncidentTriggerParamsIncidentConditionFunctionality = "CONTAINS"
-	IncidentTriggerParamsIncidentConditionFunctionalityIS       IncidentTriggerParamsIncidentConditionFunctionality = "IS"
-	IncidentTriggerParamsIncidentConditionFunctionalityNONE     IncidentTriggerParamsIncidentConditionFunctionality = "NONE"
-	IncidentTriggerParamsIncidentConditionFunctionalitySET      IncidentTriggerParamsIncidentConditionFunctionality = "SET"
-	IncidentTriggerParamsIncidentConditionFunctionalityUNSET    IncidentTriggerParamsIncidentConditionFunctionality = "UNSET"
+	IncidentTriggerParamsIncidentConditionFunctionalityANY         IncidentTriggerParamsIncidentConditionFunctionality = "ANY"
+	IncidentTriggerParamsIncidentConditionFunctionalityCONTAINS    IncidentTriggerParamsIncidentConditionFunctionality = "CONTAINS"
+	IncidentTriggerParamsIncidentConditionFunctionalityCONTAINSALL IncidentTriggerParamsIncidentConditionFunctionality = "CONTAINS_ALL"
+	IncidentTriggerParamsIncidentConditionFunctionalityIS          IncidentTriggerParamsIncidentConditionFunctionality = "IS"
+	IncidentTriggerParamsIncidentConditionFunctionalityNONE        IncidentTriggerParamsIncidentConditionFunctionality = "NONE"
+	IncidentTriggerParamsIncidentConditionFunctionalitySET         IncidentTriggerParamsIncidentConditionFunctionality = "SET"
+	IncidentTriggerParamsIncidentConditionFunctionalityUNSET       IncidentTriggerParamsIncidentConditionFunctionality = "UNSET"
 )
 
 // Defines values for IncidentTriggerParamsIncidentConditionGroup.
 const (
-	IncidentTriggerParamsIncidentConditionGroupANY      IncidentTriggerParamsIncidentConditionGroup = "ANY"
-	IncidentTriggerParamsIncidentConditionGroupCONTAINS IncidentTriggerParamsIncidentConditionGroup = "CONTAINS"
-	IncidentTriggerParamsIncidentConditionGroupIS       IncidentTriggerParamsIncidentConditionGroup = "IS"
-	IncidentTriggerParamsIncidentConditionGroupNONE     IncidentTriggerParamsIncidentConditionGroup = "NONE"
-	IncidentTriggerParamsIncidentConditionGroupSET      IncidentTriggerParamsIncidentConditionGroup = "SET"
-	IncidentTriggerParamsIncidentConditionGroupUNSET    IncidentTriggerParamsIncidentConditionGroup = "UNSET"
+	IncidentTriggerParamsIncidentConditionGroupANY         IncidentTriggerParamsIncidentConditionGroup = "ANY"
+	IncidentTriggerParamsIncidentConditionGroupCONTAINS    IncidentTriggerParamsIncidentConditionGroup = "CONTAINS"
+	IncidentTriggerParamsIncidentConditionGroupCONTAINSALL IncidentTriggerParamsIncidentConditionGroup = "CONTAINS_ALL"
+	IncidentTriggerParamsIncidentConditionGroupIS          IncidentTriggerParamsIncidentConditionGroup = "IS"
+	IncidentTriggerParamsIncidentConditionGroupNONE        IncidentTriggerParamsIncidentConditionGroup = "NONE"
+	IncidentTriggerParamsIncidentConditionGroupSET         IncidentTriggerParamsIncidentConditionGroup = "SET"
+	IncidentTriggerParamsIncidentConditionGroupUNSET       IncidentTriggerParamsIncidentConditionGroup = "UNSET"
 )
 
 // Defines values for IncidentTriggerParamsIncidentConditionIncidentType.
 const (
-	IncidentTriggerParamsIncidentConditionIncidentTypeANY      IncidentTriggerParamsIncidentConditionIncidentType = "ANY"
-	IncidentTriggerParamsIncidentConditionIncidentTypeCONTAINS IncidentTriggerParamsIncidentConditionIncidentType = "CONTAINS"
-	IncidentTriggerParamsIncidentConditionIncidentTypeIS       IncidentTriggerParamsIncidentConditionIncidentType = "IS"
-	IncidentTriggerParamsIncidentConditionIncidentTypeNONE     IncidentTriggerParamsIncidentConditionIncidentType = "NONE"
-	IncidentTriggerParamsIncidentConditionIncidentTypeSET      IncidentTriggerParamsIncidentConditionIncidentType = "SET"
-	IncidentTriggerParamsIncidentConditionIncidentTypeUNSET    IncidentTriggerParamsIncidentConditionIncidentType = "UNSET"
+	IncidentTriggerParamsIncidentConditionIncidentTypeANY         IncidentTriggerParamsIncidentConditionIncidentType = "ANY"
+	IncidentTriggerParamsIncidentConditionIncidentTypeCONTAINS    IncidentTriggerParamsIncidentConditionIncidentType = "CONTAINS"
+	IncidentTriggerParamsIncidentConditionIncidentTypeCONTAINSALL IncidentTriggerParamsIncidentConditionIncidentType = "CONTAINS_ALL"
+	IncidentTriggerParamsIncidentConditionIncidentTypeIS          IncidentTriggerParamsIncidentConditionIncidentType = "IS"
+	IncidentTriggerParamsIncidentConditionIncidentTypeNONE        IncidentTriggerParamsIncidentConditionIncidentType = "NONE"
+	IncidentTriggerParamsIncidentConditionIncidentTypeSET         IncidentTriggerParamsIncidentConditionIncidentType = "SET"
+	IncidentTriggerParamsIncidentConditionIncidentTypeUNSET       IncidentTriggerParamsIncidentConditionIncidentType = "UNSET"
 )
 
 // Defines values for IncidentTriggerParamsIncidentConditionKind.
 const (
-	IncidentTriggerParamsIncidentConditionKindANY      IncidentTriggerParamsIncidentConditionKind = "ANY"
-	IncidentTriggerParamsIncidentConditionKindCONTAINS IncidentTriggerParamsIncidentConditionKind = "CONTAINS"
-	IncidentTriggerParamsIncidentConditionKindIS       IncidentTriggerParamsIncidentConditionKind = "IS"
-	IncidentTriggerParamsIncidentConditionKindNONE     IncidentTriggerParamsIncidentConditionKind = "NONE"
-	IncidentTriggerParamsIncidentConditionKindSET      IncidentTriggerParamsIncidentConditionKind = "SET"
-	IncidentTriggerParamsIncidentConditionKindUNSET    IncidentTriggerParamsIncidentConditionKind = "UNSET"
+	IncidentTriggerParamsIncidentConditionKindANY         IncidentTriggerParamsIncidentConditionKind = "ANY"
+	IncidentTriggerParamsIncidentConditionKindCONTAINS    IncidentTriggerParamsIncidentConditionKind = "CONTAINS"
+	IncidentTriggerParamsIncidentConditionKindCONTAINSALL IncidentTriggerParamsIncidentConditionKind = "CONTAINS_ALL"
+	IncidentTriggerParamsIncidentConditionKindIS          IncidentTriggerParamsIncidentConditionKind = "IS"
+	IncidentTriggerParamsIncidentConditionKindNONE        IncidentTriggerParamsIncidentConditionKind = "NONE"
+	IncidentTriggerParamsIncidentConditionKindSET         IncidentTriggerParamsIncidentConditionKind = "SET"
+	IncidentTriggerParamsIncidentConditionKindUNSET       IncidentTriggerParamsIncidentConditionKind = "UNSET"
 )
 
 // Defines values for IncidentTriggerParamsIncidentConditionService.
 const (
-	IncidentTriggerParamsIncidentConditionServiceANY      IncidentTriggerParamsIncidentConditionService = "ANY"
-	IncidentTriggerParamsIncidentConditionServiceCONTAINS IncidentTriggerParamsIncidentConditionService = "CONTAINS"
-	IncidentTriggerParamsIncidentConditionServiceIS       IncidentTriggerParamsIncidentConditionService = "IS"
-	IncidentTriggerParamsIncidentConditionServiceNONE     IncidentTriggerParamsIncidentConditionService = "NONE"
-	IncidentTriggerParamsIncidentConditionServiceSET      IncidentTriggerParamsIncidentConditionService = "SET"
-	IncidentTriggerParamsIncidentConditionServiceUNSET    IncidentTriggerParamsIncidentConditionService = "UNSET"
+	IncidentTriggerParamsIncidentConditionServiceANY         IncidentTriggerParamsIncidentConditionService = "ANY"
+	IncidentTriggerParamsIncidentConditionServiceCONTAINS    IncidentTriggerParamsIncidentConditionService = "CONTAINS"
+	IncidentTriggerParamsIncidentConditionServiceCONTAINSALL IncidentTriggerParamsIncidentConditionService = "CONTAINS_ALL"
+	IncidentTriggerParamsIncidentConditionServiceIS          IncidentTriggerParamsIncidentConditionService = "IS"
+	IncidentTriggerParamsIncidentConditionServiceNONE        IncidentTriggerParamsIncidentConditionService = "NONE"
+	IncidentTriggerParamsIncidentConditionServiceSET         IncidentTriggerParamsIncidentConditionService = "SET"
+	IncidentTriggerParamsIncidentConditionServiceUNSET       IncidentTriggerParamsIncidentConditionService = "UNSET"
 )
 
 // Defines values for IncidentTriggerParamsIncidentConditionSeverity.
 const (
-	IncidentTriggerParamsIncidentConditionSeverityANY      IncidentTriggerParamsIncidentConditionSeverity = "ANY"
-	IncidentTriggerParamsIncidentConditionSeverityCONTAINS IncidentTriggerParamsIncidentConditionSeverity = "CONTAINS"
-	IncidentTriggerParamsIncidentConditionSeverityIS       IncidentTriggerParamsIncidentConditionSeverity = "IS"
-	IncidentTriggerParamsIncidentConditionSeverityNONE     IncidentTriggerParamsIncidentConditionSeverity = "NONE"
-	IncidentTriggerParamsIncidentConditionSeveritySET      IncidentTriggerParamsIncidentConditionSeverity = "SET"
-	IncidentTriggerParamsIncidentConditionSeverityUNSET    IncidentTriggerParamsIncidentConditionSeverity = "UNSET"
+	IncidentTriggerParamsIncidentConditionSeverityANY         IncidentTriggerParamsIncidentConditionSeverity = "ANY"
+	IncidentTriggerParamsIncidentConditionSeverityCONTAINS    IncidentTriggerParamsIncidentConditionSeverity = "CONTAINS"
+	IncidentTriggerParamsIncidentConditionSeverityCONTAINSALL IncidentTriggerParamsIncidentConditionSeverity = "CONTAINS_ALL"
+	IncidentTriggerParamsIncidentConditionSeverityIS          IncidentTriggerParamsIncidentConditionSeverity = "IS"
+	IncidentTriggerParamsIncidentConditionSeverityNONE        IncidentTriggerParamsIncidentConditionSeverity = "NONE"
+	IncidentTriggerParamsIncidentConditionSeveritySET         IncidentTriggerParamsIncidentConditionSeverity = "SET"
+	IncidentTriggerParamsIncidentConditionSeverityUNSET       IncidentTriggerParamsIncidentConditionSeverity = "UNSET"
 )
 
 // Defines values for IncidentTriggerParamsIncidentConditionStatus.
 const (
-	IncidentTriggerParamsIncidentConditionStatusANY      IncidentTriggerParamsIncidentConditionStatus = "ANY"
-	IncidentTriggerParamsIncidentConditionStatusCONTAINS IncidentTriggerParamsIncidentConditionStatus = "CONTAINS"
-	IncidentTriggerParamsIncidentConditionStatusIS       IncidentTriggerParamsIncidentConditionStatus = "IS"
-	IncidentTriggerParamsIncidentConditionStatusNONE     IncidentTriggerParamsIncidentConditionStatus = "NONE"
-	IncidentTriggerParamsIncidentConditionStatusSET      IncidentTriggerParamsIncidentConditionStatus = "SET"
-	IncidentTriggerParamsIncidentConditionStatusUNSET    IncidentTriggerParamsIncidentConditionStatus = "UNSET"
+	IncidentTriggerParamsIncidentConditionStatusANY         IncidentTriggerParamsIncidentConditionStatus = "ANY"
+	IncidentTriggerParamsIncidentConditionStatusCONTAINS    IncidentTriggerParamsIncidentConditionStatus = "CONTAINS"
+	IncidentTriggerParamsIncidentConditionStatusCONTAINSALL IncidentTriggerParamsIncidentConditionStatus = "CONTAINS_ALL"
+	IncidentTriggerParamsIncidentConditionStatusIS          IncidentTriggerParamsIncidentConditionStatus = "IS"
+	IncidentTriggerParamsIncidentConditionStatusNONE        IncidentTriggerParamsIncidentConditionStatus = "NONE"
+	IncidentTriggerParamsIncidentConditionStatusSET         IncidentTriggerParamsIncidentConditionStatus = "SET"
+	IncidentTriggerParamsIncidentConditionStatusUNSET       IncidentTriggerParamsIncidentConditionStatus = "UNSET"
 )
 
 // Defines values for IncidentTriggerParamsIncidentConditionVisibility.
 const (
-	IncidentTriggerParamsIncidentConditionVisibilityANY      IncidentTriggerParamsIncidentConditionVisibility = "ANY"
-	IncidentTriggerParamsIncidentConditionVisibilityCONTAINS IncidentTriggerParamsIncidentConditionVisibility = "CONTAINS"
-	IncidentTriggerParamsIncidentConditionVisibilityIS       IncidentTriggerParamsIncidentConditionVisibility = "IS"
-	IncidentTriggerParamsIncidentConditionVisibilityNONE     IncidentTriggerParamsIncidentConditionVisibility = "NONE"
-	IncidentTriggerParamsIncidentConditionVisibilitySET      IncidentTriggerParamsIncidentConditionVisibility = "SET"
-	IncidentTriggerParamsIncidentConditionVisibilityUNSET    IncidentTriggerParamsIncidentConditionVisibility = "UNSET"
+	IncidentTriggerParamsIncidentConditionVisibilityANY         IncidentTriggerParamsIncidentConditionVisibility = "ANY"
+	IncidentTriggerParamsIncidentConditionVisibilityCONTAINS    IncidentTriggerParamsIncidentConditionVisibility = "CONTAINS"
+	IncidentTriggerParamsIncidentConditionVisibilityCONTAINSALL IncidentTriggerParamsIncidentConditionVisibility = "CONTAINS_ALL"
+	IncidentTriggerParamsIncidentConditionVisibilityIS          IncidentTriggerParamsIncidentConditionVisibility = "IS"
+	IncidentTriggerParamsIncidentConditionVisibilityNONE        IncidentTriggerParamsIncidentConditionVisibility = "NONE"
+	IncidentTriggerParamsIncidentConditionVisibilitySET         IncidentTriggerParamsIncidentConditionVisibility = "SET"
+	IncidentTriggerParamsIncidentConditionVisibilityUNSET       IncidentTriggerParamsIncidentConditionVisibility = "UNSET"
 )
 
 // Defines values for IncidentTriggerParamsIncidentKinds.
@@ -1343,20 +1303,6 @@ const (
 // Defines values for MitigateIncidentDataType.
 const (
 	MitigateIncidentDataTypeIncidents MitigateIncidentDataType = "incidents"
-)
-
-// Defines values for NewAlertDataAttributesSource.
-const (
-	NewAlertDataAttributesSourceAsana     NewAlertDataAttributesSource = "asana"
-	NewAlertDataAttributesSourceDatadog   NewAlertDataAttributesSource = "datadog"
-	NewAlertDataAttributesSourceJira      NewAlertDataAttributesSource = "jira"
-	NewAlertDataAttributesSourceNobl9     NewAlertDataAttributesSource = "nobl9"
-	NewAlertDataAttributesSourceOpsgenie  NewAlertDataAttributesSource = "opsgenie"
-	NewAlertDataAttributesSourcePagerduty NewAlertDataAttributesSource = "pagerduty"
-	NewAlertDataAttributesSourceRollbar   NewAlertDataAttributesSource = "rollbar"
-	NewAlertDataAttributesSourceSentry    NewAlertDataAttributesSource = "sentry"
-	NewAlertDataAttributesSourceVictorops NewAlertDataAttributesSource = "victorops"
-	NewAlertDataAttributesSourceZendesk   NewAlertDataAttributesSource = "zendesk"
 )
 
 // Defines values for NewAlertDataType.
@@ -1624,12 +1570,13 @@ const (
 
 // Defines values for NewWorkflowCustomFieldSelectionDataAttributesIncidentCondition.
 const (
-	NewWorkflowCustomFieldSelectionDataAttributesIncidentConditionANY      NewWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "ANY"
-	NewWorkflowCustomFieldSelectionDataAttributesIncidentConditionCONTAINS NewWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "CONTAINS"
-	NewWorkflowCustomFieldSelectionDataAttributesIncidentConditionIS       NewWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "IS"
-	NewWorkflowCustomFieldSelectionDataAttributesIncidentConditionNONE     NewWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "NONE"
-	NewWorkflowCustomFieldSelectionDataAttributesIncidentConditionSET      NewWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "SET"
-	NewWorkflowCustomFieldSelectionDataAttributesIncidentConditionUNSET    NewWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "UNSET"
+	NewWorkflowCustomFieldSelectionDataAttributesIncidentConditionANY         NewWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "ANY"
+	NewWorkflowCustomFieldSelectionDataAttributesIncidentConditionCONTAINS    NewWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "CONTAINS"
+	NewWorkflowCustomFieldSelectionDataAttributesIncidentConditionCONTAINSALL NewWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "CONTAINS_ALL"
+	NewWorkflowCustomFieldSelectionDataAttributesIncidentConditionIS          NewWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "IS"
+	NewWorkflowCustomFieldSelectionDataAttributesIncidentConditionNONE        NewWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "NONE"
+	NewWorkflowCustomFieldSelectionDataAttributesIncidentConditionSET         NewWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "SET"
+	NewWorkflowCustomFieldSelectionDataAttributesIncidentConditionUNSET       NewWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "UNSET"
 )
 
 // Defines values for NewWorkflowCustomFieldSelectionDataType.
@@ -1659,11 +1606,11 @@ const (
 
 // Defines values for PageOpsgenieOnCallRespondersTaskParamsPriority.
 const (
-	Auto PageOpsgenieOnCallRespondersTaskParamsPriority = "auto"
-	P1   PageOpsgenieOnCallRespondersTaskParamsPriority = "P1"
-	P2   PageOpsgenieOnCallRespondersTaskParamsPriority = "P2"
-	P3   PageOpsgenieOnCallRespondersTaskParamsPriority = "P3"
-	P4   PageOpsgenieOnCallRespondersTaskParamsPriority = "P4"
+	PageOpsgenieOnCallRespondersTaskParamsPriorityAuto PageOpsgenieOnCallRespondersTaskParamsPriority = "auto"
+	PageOpsgenieOnCallRespondersTaskParamsPriorityP1   PageOpsgenieOnCallRespondersTaskParamsPriority = "P1"
+	PageOpsgenieOnCallRespondersTaskParamsPriorityP2   PageOpsgenieOnCallRespondersTaskParamsPriority = "P2"
+	PageOpsgenieOnCallRespondersTaskParamsPriorityP3   PageOpsgenieOnCallRespondersTaskParamsPriority = "P3"
+	PageOpsgenieOnCallRespondersTaskParamsPriorityP4   PageOpsgenieOnCallRespondersTaskParamsPriority = "P4"
 )
 
 // Defines values for PageOpsgenieOnCallRespondersTaskParamsTaskType.
@@ -1754,32 +1701,35 @@ const (
 
 // Defines values for PulseTriggerParamsPulseConditionLabel.
 const (
-	PulseTriggerParamsPulseConditionLabelANY      PulseTriggerParamsPulseConditionLabel = "ANY"
-	PulseTriggerParamsPulseConditionLabelCONTAINS PulseTriggerParamsPulseConditionLabel = "CONTAINS"
-	PulseTriggerParamsPulseConditionLabelIS       PulseTriggerParamsPulseConditionLabel = "IS"
-	PulseTriggerParamsPulseConditionLabelNONE     PulseTriggerParamsPulseConditionLabel = "NONE"
-	PulseTriggerParamsPulseConditionLabelSET      PulseTriggerParamsPulseConditionLabel = "SET"
-	PulseTriggerParamsPulseConditionLabelUNSET    PulseTriggerParamsPulseConditionLabel = "UNSET"
+	PulseTriggerParamsPulseConditionLabelANY         PulseTriggerParamsPulseConditionLabel = "ANY"
+	PulseTriggerParamsPulseConditionLabelCONTAINS    PulseTriggerParamsPulseConditionLabel = "CONTAINS"
+	PulseTriggerParamsPulseConditionLabelCONTAINSALL PulseTriggerParamsPulseConditionLabel = "CONTAINS_ALL"
+	PulseTriggerParamsPulseConditionLabelIS          PulseTriggerParamsPulseConditionLabel = "IS"
+	PulseTriggerParamsPulseConditionLabelNONE        PulseTriggerParamsPulseConditionLabel = "NONE"
+	PulseTriggerParamsPulseConditionLabelSET         PulseTriggerParamsPulseConditionLabel = "SET"
+	PulseTriggerParamsPulseConditionLabelUNSET       PulseTriggerParamsPulseConditionLabel = "UNSET"
 )
 
 // Defines values for PulseTriggerParamsPulseConditionPayload.
 const (
-	PulseTriggerParamsPulseConditionPayloadANY      PulseTriggerParamsPulseConditionPayload = "ANY"
-	PulseTriggerParamsPulseConditionPayloadCONTAINS PulseTriggerParamsPulseConditionPayload = "CONTAINS"
-	PulseTriggerParamsPulseConditionPayloadIS       PulseTriggerParamsPulseConditionPayload = "IS"
-	PulseTriggerParamsPulseConditionPayloadNONE     PulseTriggerParamsPulseConditionPayload = "NONE"
-	PulseTriggerParamsPulseConditionPayloadSET      PulseTriggerParamsPulseConditionPayload = "SET"
-	PulseTriggerParamsPulseConditionPayloadUNSET    PulseTriggerParamsPulseConditionPayload = "UNSET"
+	PulseTriggerParamsPulseConditionPayloadANY         PulseTriggerParamsPulseConditionPayload = "ANY"
+	PulseTriggerParamsPulseConditionPayloadCONTAINS    PulseTriggerParamsPulseConditionPayload = "CONTAINS"
+	PulseTriggerParamsPulseConditionPayloadCONTAINSALL PulseTriggerParamsPulseConditionPayload = "CONTAINS_ALL"
+	PulseTriggerParamsPulseConditionPayloadIS          PulseTriggerParamsPulseConditionPayload = "IS"
+	PulseTriggerParamsPulseConditionPayloadNONE        PulseTriggerParamsPulseConditionPayload = "NONE"
+	PulseTriggerParamsPulseConditionPayloadSET         PulseTriggerParamsPulseConditionPayload = "SET"
+	PulseTriggerParamsPulseConditionPayloadUNSET       PulseTriggerParamsPulseConditionPayload = "UNSET"
 )
 
 // Defines values for PulseTriggerParamsPulseConditionSource.
 const (
-	PulseTriggerParamsPulseConditionSourceANY      PulseTriggerParamsPulseConditionSource = "ANY"
-	PulseTriggerParamsPulseConditionSourceCONTAINS PulseTriggerParamsPulseConditionSource = "CONTAINS"
-	PulseTriggerParamsPulseConditionSourceIS       PulseTriggerParamsPulseConditionSource = "IS"
-	PulseTriggerParamsPulseConditionSourceNONE     PulseTriggerParamsPulseConditionSource = "NONE"
-	PulseTriggerParamsPulseConditionSourceSET      PulseTriggerParamsPulseConditionSource = "SET"
-	PulseTriggerParamsPulseConditionSourceUNSET    PulseTriggerParamsPulseConditionSource = "UNSET"
+	PulseTriggerParamsPulseConditionSourceANY         PulseTriggerParamsPulseConditionSource = "ANY"
+	PulseTriggerParamsPulseConditionSourceCONTAINS    PulseTriggerParamsPulseConditionSource = "CONTAINS"
+	PulseTriggerParamsPulseConditionSourceCONTAINSALL PulseTriggerParamsPulseConditionSource = "CONTAINS_ALL"
+	PulseTriggerParamsPulseConditionSourceIS          PulseTriggerParamsPulseConditionSource = "IS"
+	PulseTriggerParamsPulseConditionSourceNONE        PulseTriggerParamsPulseConditionSource = "NONE"
+	PulseTriggerParamsPulseConditionSourceSET         PulseTriggerParamsPulseConditionSource = "SET"
+	PulseTriggerParamsPulseConditionSourceUNSET       PulseTriggerParamsPulseConditionSource = "UNSET"
 )
 
 // Defines values for PulseTriggerParamsTriggerType.
@@ -1951,6 +1901,16 @@ const (
 // Defines values for StatusPageResponseDataType.
 const (
 	StatusPageResponseDataTypeStatusPages StatusPageResponseDataType = "status_pages"
+)
+
+// Defines values for StatusPageTemplateListDataType.
+const (
+	StatusPageTemplateListDataTypeStatusPageTemplates StatusPageTemplateListDataType = "status_page_templates"
+)
+
+// Defines values for StatusPageTemplateResponseDataType.
+const (
+	StatusPageTemplateResponseDataTypeStatusPageTemplates StatusPageTemplateResponseDataType = "status_page_templates"
 )
 
 // Defines values for TeamListDataType.
@@ -2185,6 +2145,24 @@ const (
 	UpdateLinearIssue UpdateLinearIssueTaskParamsTaskType = "update_linear_issue"
 )
 
+// Defines values for UpdatePagerdutyIncidentTaskParamsStatus.
+const (
+	UpdatePagerdutyIncidentTaskParamsStatusAcknowledged UpdatePagerdutyIncidentTaskParamsStatus = "acknowledged"
+	UpdatePagerdutyIncidentTaskParamsStatusResolved     UpdatePagerdutyIncidentTaskParamsStatus = "resolved"
+)
+
+// Defines values for UpdatePagerdutyIncidentTaskParamsTaskType.
+const (
+	UpdatePagerdutyIncident UpdatePagerdutyIncidentTaskParamsTaskType = "update_pagerduty_incident"
+)
+
+// Defines values for UpdatePagerdutyIncidentTaskParamsUrgency.
+const (
+	UpdatePagerdutyIncidentTaskParamsUrgencyAuto UpdatePagerdutyIncidentTaskParamsUrgency = "auto"
+	UpdatePagerdutyIncidentTaskParamsUrgencyHigh UpdatePagerdutyIncidentTaskParamsUrgency = "high"
+	UpdatePagerdutyIncidentTaskParamsUrgencyLow  UpdatePagerdutyIncidentTaskParamsUrgency = "low"
+)
+
 // Defines values for UpdatePlaybookDataType.
 const (
 	UpdatePlaybookDataTypePlaybooks UpdatePlaybookDataType = "playbooks"
@@ -2257,10 +2235,10 @@ const (
 
 // Defines values for UpdateStatusTaskParamsStatus.
 const (
-	UpdateStatusTaskParamsStatusCancelled UpdateStatusTaskParamsStatus = "cancelled"
-	UpdateStatusTaskParamsStatusMitigated UpdateStatusTaskParamsStatus = "mitigated"
-	UpdateStatusTaskParamsStatusResolved  UpdateStatusTaskParamsStatus = "resolved"
-	UpdateStatusTaskParamsStatusStarted   UpdateStatusTaskParamsStatus = "started"
+	Cancelled UpdateStatusTaskParamsStatus = "cancelled"
+	Mitigated UpdateStatusTaskParamsStatus = "mitigated"
+	Resolved  UpdateStatusTaskParamsStatus = "resolved"
+	Started   UpdateStatusTaskParamsStatus = "started"
 )
 
 // Defines values for UpdateStatusTaskParamsTaskType.
@@ -2303,12 +2281,13 @@ const (
 
 // Defines values for UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition.
 const (
-	UpdateWorkflowCustomFieldSelectionDataAttributesIncidentConditionANY      UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "ANY"
-	UpdateWorkflowCustomFieldSelectionDataAttributesIncidentConditionCONTAINS UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "CONTAINS"
-	UpdateWorkflowCustomFieldSelectionDataAttributesIncidentConditionIS       UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "IS"
-	UpdateWorkflowCustomFieldSelectionDataAttributesIncidentConditionNONE     UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "NONE"
-	UpdateWorkflowCustomFieldSelectionDataAttributesIncidentConditionSET      UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "SET"
-	UpdateWorkflowCustomFieldSelectionDataAttributesIncidentConditionUNSET    UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "UNSET"
+	UpdateWorkflowCustomFieldSelectionDataAttributesIncidentConditionANY         UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "ANY"
+	UpdateWorkflowCustomFieldSelectionDataAttributesIncidentConditionCONTAINS    UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "CONTAINS"
+	UpdateWorkflowCustomFieldSelectionDataAttributesIncidentConditionCONTAINSALL UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "CONTAINS_ALL"
+	UpdateWorkflowCustomFieldSelectionDataAttributesIncidentConditionIS          UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "IS"
+	UpdateWorkflowCustomFieldSelectionDataAttributesIncidentConditionNONE        UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "NONE"
+	UpdateWorkflowCustomFieldSelectionDataAttributesIncidentConditionSET         UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "SET"
+	UpdateWorkflowCustomFieldSelectionDataAttributesIncidentConditionUNSET       UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition = "UNSET"
 )
 
 // Defines values for UpdateWorkflowCustomFieldSelectionDataType.
@@ -2377,22 +2356,24 @@ const (
 
 // Defines values for WorkflowCustomFieldSelectionIncidentCondition.
 const (
-	WorkflowCustomFieldSelectionIncidentConditionANY      WorkflowCustomFieldSelectionIncidentCondition = "ANY"
-	WorkflowCustomFieldSelectionIncidentConditionCONTAINS WorkflowCustomFieldSelectionIncidentCondition = "CONTAINS"
-	WorkflowCustomFieldSelectionIncidentConditionIS       WorkflowCustomFieldSelectionIncidentCondition = "IS"
-	WorkflowCustomFieldSelectionIncidentConditionNONE     WorkflowCustomFieldSelectionIncidentCondition = "NONE"
-	WorkflowCustomFieldSelectionIncidentConditionSET      WorkflowCustomFieldSelectionIncidentCondition = "SET"
-	WorkflowCustomFieldSelectionIncidentConditionUNSET    WorkflowCustomFieldSelectionIncidentCondition = "UNSET"
+	WorkflowCustomFieldSelectionIncidentConditionANY         WorkflowCustomFieldSelectionIncidentCondition = "ANY"
+	WorkflowCustomFieldSelectionIncidentConditionCONTAINS    WorkflowCustomFieldSelectionIncidentCondition = "CONTAINS"
+	WorkflowCustomFieldSelectionIncidentConditionCONTAINSALL WorkflowCustomFieldSelectionIncidentCondition = "CONTAINS_ALL"
+	WorkflowCustomFieldSelectionIncidentConditionIS          WorkflowCustomFieldSelectionIncidentCondition = "IS"
+	WorkflowCustomFieldSelectionIncidentConditionNONE        WorkflowCustomFieldSelectionIncidentCondition = "NONE"
+	WorkflowCustomFieldSelectionIncidentConditionSET         WorkflowCustomFieldSelectionIncidentCondition = "SET"
+	WorkflowCustomFieldSelectionIncidentConditionUNSET       WorkflowCustomFieldSelectionIncidentCondition = "UNSET"
 )
 
 // Defines values for WorkflowCustomFieldSelectionListDataAttributesIncidentCondition.
 const (
-	WorkflowCustomFieldSelectionListDataAttributesIncidentConditionANY      WorkflowCustomFieldSelectionListDataAttributesIncidentCondition = "ANY"
-	WorkflowCustomFieldSelectionListDataAttributesIncidentConditionCONTAINS WorkflowCustomFieldSelectionListDataAttributesIncidentCondition = "CONTAINS"
-	WorkflowCustomFieldSelectionListDataAttributesIncidentConditionIS       WorkflowCustomFieldSelectionListDataAttributesIncidentCondition = "IS"
-	WorkflowCustomFieldSelectionListDataAttributesIncidentConditionNONE     WorkflowCustomFieldSelectionListDataAttributesIncidentCondition = "NONE"
-	WorkflowCustomFieldSelectionListDataAttributesIncidentConditionSET      WorkflowCustomFieldSelectionListDataAttributesIncidentCondition = "SET"
-	WorkflowCustomFieldSelectionListDataAttributesIncidentConditionUNSET    WorkflowCustomFieldSelectionListDataAttributesIncidentCondition = "UNSET"
+	WorkflowCustomFieldSelectionListDataAttributesIncidentConditionANY         WorkflowCustomFieldSelectionListDataAttributesIncidentCondition = "ANY"
+	WorkflowCustomFieldSelectionListDataAttributesIncidentConditionCONTAINS    WorkflowCustomFieldSelectionListDataAttributesIncidentCondition = "CONTAINS"
+	WorkflowCustomFieldSelectionListDataAttributesIncidentConditionCONTAINSALL WorkflowCustomFieldSelectionListDataAttributesIncidentCondition = "CONTAINS_ALL"
+	WorkflowCustomFieldSelectionListDataAttributesIncidentConditionIS          WorkflowCustomFieldSelectionListDataAttributesIncidentCondition = "IS"
+	WorkflowCustomFieldSelectionListDataAttributesIncidentConditionNONE        WorkflowCustomFieldSelectionListDataAttributesIncidentCondition = "NONE"
+	WorkflowCustomFieldSelectionListDataAttributesIncidentConditionSET         WorkflowCustomFieldSelectionListDataAttributesIncidentCondition = "SET"
+	WorkflowCustomFieldSelectionListDataAttributesIncidentConditionUNSET       WorkflowCustomFieldSelectionListDataAttributesIncidentCondition = "UNSET"
 )
 
 // Defines values for WorkflowCustomFieldSelectionListDataType.
@@ -2402,12 +2383,13 @@ const (
 
 // Defines values for WorkflowCustomFieldSelectionResponseDataAttributesIncidentCondition.
 const (
-	WorkflowCustomFieldSelectionResponseDataAttributesIncidentConditionANY      WorkflowCustomFieldSelectionResponseDataAttributesIncidentCondition = "ANY"
-	WorkflowCustomFieldSelectionResponseDataAttributesIncidentConditionCONTAINS WorkflowCustomFieldSelectionResponseDataAttributesIncidentCondition = "CONTAINS"
-	WorkflowCustomFieldSelectionResponseDataAttributesIncidentConditionIS       WorkflowCustomFieldSelectionResponseDataAttributesIncidentCondition = "IS"
-	WorkflowCustomFieldSelectionResponseDataAttributesIncidentConditionNONE     WorkflowCustomFieldSelectionResponseDataAttributesIncidentCondition = "NONE"
-	WorkflowCustomFieldSelectionResponseDataAttributesIncidentConditionSET      WorkflowCustomFieldSelectionResponseDataAttributesIncidentCondition = "SET"
-	WorkflowCustomFieldSelectionResponseDataAttributesIncidentConditionUNSET    WorkflowCustomFieldSelectionResponseDataAttributesIncidentCondition = "UNSET"
+	WorkflowCustomFieldSelectionResponseDataAttributesIncidentConditionANY         WorkflowCustomFieldSelectionResponseDataAttributesIncidentCondition = "ANY"
+	WorkflowCustomFieldSelectionResponseDataAttributesIncidentConditionCONTAINS    WorkflowCustomFieldSelectionResponseDataAttributesIncidentCondition = "CONTAINS"
+	WorkflowCustomFieldSelectionResponseDataAttributesIncidentConditionCONTAINSALL WorkflowCustomFieldSelectionResponseDataAttributesIncidentCondition = "CONTAINS_ALL"
+	WorkflowCustomFieldSelectionResponseDataAttributesIncidentConditionIS          WorkflowCustomFieldSelectionResponseDataAttributesIncidentCondition = "IS"
+	WorkflowCustomFieldSelectionResponseDataAttributesIncidentConditionNONE        WorkflowCustomFieldSelectionResponseDataAttributesIncidentCondition = "NONE"
+	WorkflowCustomFieldSelectionResponseDataAttributesIncidentConditionSET         WorkflowCustomFieldSelectionResponseDataAttributesIncidentCondition = "SET"
+	WorkflowCustomFieldSelectionResponseDataAttributesIncidentConditionUNSET       WorkflowCustomFieldSelectionResponseDataAttributesIncidentCondition = "UNSET"
 )
 
 // Defines values for WorkflowCustomFieldSelectionResponseDataType.
@@ -2812,7 +2794,7 @@ type Alert struct {
 	} `json:"services,omitempty"`
 
 	// The source of the alert (eg: zendesk)
-	Source AlertSource `json:"source"`
+	Source string `json:"source"`
 
 	// The summary of the alert
 	Summary string `json:"summary"`
@@ -2820,9 +2802,6 @@ type Alert struct {
 	// Date of last update
 	UpdatedAt string `json:"updated_at"`
 }
-
-// The source of the alert (eg: zendesk)
-type AlertSource string
 
 // AlertList defines model for alert_list.
 type AlertList struct {
@@ -2933,7 +2912,7 @@ type AlertList struct {
 			} `json:"services,omitempty"`
 
 			// The source of the alert (eg: zendesk)
-			Source AlertListDataAttributesSource `json:"source"`
+			Source string `json:"source"`
 
 			// The summary of the alert
 			Summary string `json:"summary"`
@@ -2946,8 +2925,8 @@ type AlertList struct {
 		Id string `json:"id"`
 
 		// The source of the alert (eg: zendesk)
-		Source *AlertListDataSource `json:"source,omitempty"`
-		Type   AlertListDataType    `json:"type"`
+		Source *string           `json:"source,omitempty"`
+		Type   AlertListDataType `json:"type"`
 	} `json:"data"`
 	Links struct {
 		First string  `json:"first"`
@@ -2957,12 +2936,6 @@ type AlertList struct {
 		Self  string  `json:"self"`
 	} `json:"links"`
 }
-
-// The source of the alert (eg: zendesk)
-type AlertListDataAttributesSource string
-
-// The source of the alert (eg: zendesk)
-type AlertListDataSource string
 
 // AlertListDataType defines model for AlertList.Data.Type.
 type AlertListDataType string
@@ -3076,7 +3049,7 @@ type AlertResponse struct {
 			} `json:"services,omitempty"`
 
 			// The source of the alert (eg: zendesk)
-			Source AlertResponseDataAttributesSource `json:"source"`
+			Source string `json:"source"`
 
 			// The summary of the alert
 			Summary string `json:"summary"`
@@ -3089,16 +3062,10 @@ type AlertResponse struct {
 		Id string `json:"id"`
 
 		// The source of the alert (eg: zendesk)
-		Source *AlertResponseDataSource `json:"source,omitempty"`
-		Type   AlertResponseDataType    `json:"type"`
+		Source *string               `json:"source,omitempty"`
+		Type   AlertResponseDataType `json:"type"`
 	} `json:"data"`
 }
-
-// The source of the alert (eg: zendesk)
-type AlertResponseDataAttributesSource string
-
-// The source of the alert (eg: zendesk)
-type AlertResponseDataSource string
 
 // AlertResponseDataType defines model for AlertResponse.Data.Type.
 type AlertResponseDataType string
@@ -3568,13 +3535,15 @@ type CreateGoogleMeetingTaskParamsTaskType string
 
 // CreateIncidentTaskParams defines model for create_incident_task_params.
 type CreateIncidentTaskParams struct {
-	EnvironmentIds   *[]string `json:"environment_ids,omitempty"`
-	FunctionalityIds *[]string `json:"functionality_ids,omitempty"`
-	GroupIds         *[]string `json:"group_ids,omitempty"`
-	IncidentTypeIds  *[]string `json:"incident_type_ids,omitempty"`
-	Private          *bool     `json:"private,omitempty"`
-	ServiceIds       *[]string `json:"service_ids,omitempty"`
-	SeverityId       *string   `json:"severity_id,omitempty"`
+	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
+	CustomFieldsMapping *string   `json:"custom_fields_mapping"`
+	EnvironmentIds      *[]string `json:"environment_ids,omitempty"`
+	FunctionalityIds    *[]string `json:"functionality_ids,omitempty"`
+	GroupIds            *[]string `json:"group_ids,omitempty"`
+	IncidentTypeIds     *[]string `json:"incident_type_ids,omitempty"`
+	Private             *bool     `json:"private,omitempty"`
+	ServiceIds          *[]string `json:"service_ids,omitempty"`
+	SeverityId          *string   `json:"severity_id,omitempty"`
 
 	// The incident summary
 	Summary  *string                           `json:"summary,omitempty"`
@@ -3780,6 +3749,19 @@ type CreateNotionPageTaskParams struct {
 
 // CreateNotionPageTaskParamsTaskType defines model for CreateNotionPageTaskParams.TaskType.
 type CreateNotionPageTaskParamsTaskType string
+
+// CreatePagerdutyStatusUpdateParams defines model for create_pagerduty_status_update_params.
+type CreatePagerdutyStatusUpdateParams struct {
+	// A message outlining the incident's resolution in Pagerduty
+	Message string `json:"message"`
+
+	// Pagerduty incident id
+	PagerdutyIncidentId string                                     `json:"pagerduty_incident_id"`
+	TaskType            *CreatePagerdutyStatusUpdateParamsTaskType `json:"task_type,omitempty"`
+}
+
+// CreatePagerdutyStatusUpdateParamsTaskType defines model for CreatePagerdutyStatusUpdateParams.TaskType.
+type CreatePagerdutyStatusUpdateParamsTaskType string
 
 // CreateServiceNowIncidentTaskParams defines model for create_service_now_incident_task_params.
 type CreateServiceNowIncidentTaskParams struct {
@@ -5984,7 +5966,7 @@ type NewAlert struct {
 			ServiceIds *[]string `json:"service_ids"`
 
 			// The source of the alert (eg: zendesk)
-			Source *NewAlertDataAttributesSource `json:"source,omitempty"`
+			Source *string `json:"source,omitempty"`
 
 			// Pulse start datetime
 			StartedAt *time.Time `json:"started_at"`
@@ -5995,9 +5977,6 @@ type NewAlert struct {
 		Type NewAlertDataType `json:"type"`
 	} `json:"data"`
 }
-
-// The source of the alert (eg: zendesk)
-type NewAlertDataAttributesSource string
 
 // NewAlertDataType defines model for NewAlert.Data.Type.
 type NewAlertDataType string
@@ -6210,7 +6189,7 @@ type NewIncident struct {
 			// Emails you want to notify
 			NotifyEmails *[]string `json:"notify_emails"`
 
-			// Create an incident as private
+			// Create an incident as private. Once an incident is made as private it cannot be undone
 			Private *bool `json:"private"`
 
 			// Date of resolution
@@ -8245,6 +8224,116 @@ type StatusPageResponseDataAttributesShowUptimeLastDays int
 // StatusPageResponseDataType defines model for StatusPageResponse.Data.Type.
 type StatusPageResponseDataType string
 
+// StatusPageTemplate defines model for status_page_template.
+type StatusPageTemplate struct {
+	// Description of the event the template will populate
+	Body string `json:"body"`
+
+	// Date of creation
+	CreatedAt string `json:"created_at"`
+
+	// Enable / Disable the status page template
+	Enabled *bool `json:"enabled"`
+
+	// Position of the workflow task
+	Position *float32 `json:"position,omitempty"`
+
+	// Controls if incident subscribers should be notified
+	ShouldNotifySubscribers *bool `json:"should_notify_subscribers"`
+
+	// Title of the template
+	Title string `json:"title"`
+
+	// Status of the event the template will populate
+	UpdateStatus *string `json:"update_status"`
+
+	// Date of last update
+	UpdatedAt string `json:"updated_at"`
+}
+
+// StatusPageTemplateList defines model for status_page_template_list.
+type StatusPageTemplateList struct {
+	Data []struct {
+		Attributes struct {
+			// Description of the event the template will populate
+			Body string `json:"body"`
+
+			// Date of creation
+			CreatedAt string `json:"created_at"`
+
+			// Enable / Disable the status page template
+			Enabled *bool `json:"enabled"`
+
+			// Position of the workflow task
+			Position *float32 `json:"position,omitempty"`
+
+			// Controls if incident subscribers should be notified
+			ShouldNotifySubscribers *bool `json:"should_notify_subscribers"`
+
+			// Title of the template
+			Title string `json:"title"`
+
+			// Status of the event the template will populate
+			UpdateStatus *string `json:"update_status"`
+
+			// Date of last update
+			UpdatedAt string `json:"updated_at"`
+		} `json:"attributes"`
+
+		// Unique ID of the template
+		Id   string                         `json:"id"`
+		Type StatusPageTemplateListDataType `json:"type"`
+	} `json:"data"`
+	Links struct {
+		First string  `json:"first"`
+		Last  string  `json:"last"`
+		Next  *string `json:"next"`
+		Prev  *string `json:"prev"`
+		Self  string  `json:"self"`
+	} `json:"links"`
+}
+
+// StatusPageTemplateListDataType defines model for StatusPageTemplateList.Data.Type.
+type StatusPageTemplateListDataType string
+
+// StatusPageTemplateResponse defines model for status_page_template_response.
+type StatusPageTemplateResponse struct {
+	Data struct {
+		Attributes struct {
+			// Description of the event the template will populate
+			Body string `json:"body"`
+
+			// Date of creation
+			CreatedAt string `json:"created_at"`
+
+			// Enable / Disable the status page template
+			Enabled *bool `json:"enabled"`
+
+			// Position of the workflow task
+			Position *float32 `json:"position,omitempty"`
+
+			// Controls if incident subscribers should be notified
+			ShouldNotifySubscribers *bool `json:"should_notify_subscribers"`
+
+			// Title of the template
+			Title string `json:"title"`
+
+			// Status of the event the template will populate
+			UpdateStatus *string `json:"update_status"`
+
+			// Date of last update
+			UpdatedAt string `json:"updated_at"`
+		} `json:"attributes"`
+
+		// Unique ID of the status page template
+		Id   string                             `json:"id"`
+		Type StatusPageTemplateResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// StatusPageTemplateResponseDataType defines model for StatusPageTemplateResponse.Data.Type.
+type StatusPageTemplateResponseDataType string
+
 // Team defines model for team.
 type Team struct {
 	Color *string `json:"color"`
@@ -8697,7 +8786,7 @@ type UpdateIncident struct {
 			// Date of mitigation
 			MitigatedAt *string `json:"mitigated_at"`
 
-			// Create an incident as private
+			// Convert the incident as private. Once an incident is updated as private it cannot be undone
 			Private *bool `json:"private"`
 
 			// Date of resolution
@@ -8966,11 +9055,14 @@ type UpdateIncidentStatusPageEventDataType string
 
 // UpdateIncidentTaskParams defines model for update_incident_task_params.
 type UpdateIncidentTaskParams struct {
-	AcknowledgedAt   *string   `json:"acknowledged_at"`
-	DetectedAt       *string   `json:"detected_at"`
-	EnvironmentIds   *[]string `json:"environment_ids"`
-	FunctionalityIds *[]string `json:"functionality_ids"`
-	GroupIds         *[]string `json:"group_ids"`
+	AcknowledgedAt *string `json:"acknowledged_at"`
+
+	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
+	CustomFieldsMapping *string   `json:"custom_fields_mapping"`
+	DetectedAt          *string   `json:"detected_at"`
+	EnvironmentIds      *[]string `json:"environment_ids"`
+	FunctionalityIds    *[]string `json:"functionality_ids"`
+	GroupIds            *[]string `json:"group_ids"`
 
 	// The incident id to update
 	IncidentId      *string   `json:"incident_id,omitempty"`
@@ -9083,6 +9175,35 @@ type UpdateLinearIssueTaskParams struct {
 
 // UpdateLinearIssueTaskParamsTaskType defines model for UpdateLinearIssueTaskParams.TaskType.
 type UpdateLinearIssueTaskParamsTaskType string
+
+// UpdatePagerdutyIncidentTaskParams defines model for update_pagerduty_incident_task_params.
+type UpdatePagerdutyIncidentTaskParams struct {
+	// Escalation level of policy attached to incident
+	EscalationLevel *float32 `json:"escalation_level,omitempty"`
+
+	// Pagerduty incident id
+	PagerdutyIncidentId string `json:"pagerduty_incident_id"`
+
+	// A message outlining the incident's resolution in Pagerduty
+	Resolution *string                                    `json:"resolution,omitempty"`
+	Status     *UpdatePagerdutyIncidentTaskParamsStatus   `json:"status,omitempty"`
+	TaskType   *UpdatePagerdutyIncidentTaskParamsTaskType `json:"task_type,omitempty"`
+
+	// Title to update to
+	Title *string `json:"title,omitempty"`
+
+	// Pagerduty incident urgency, selecting auto will let Rootly auto map our incident severity.
+	Urgency *UpdatePagerdutyIncidentTaskParamsUrgency `json:"urgency,omitempty"`
+}
+
+// UpdatePagerdutyIncidentTaskParamsStatus defines model for UpdatePagerdutyIncidentTaskParams.Status.
+type UpdatePagerdutyIncidentTaskParamsStatus string
+
+// UpdatePagerdutyIncidentTaskParamsTaskType defines model for UpdatePagerdutyIncidentTaskParams.TaskType.
+type UpdatePagerdutyIncidentTaskParamsTaskType string
+
+// Pagerduty incident urgency, selecting auto will let Rootly auto map our incident severity.
+type UpdatePagerdutyIncidentTaskParamsUrgency string
 
 // UpdatePlaybook defines model for update_playbook.
 type UpdatePlaybook struct {
@@ -10178,6 +10299,7 @@ type ListEnvironmentsParams struct {
 	FilterSlug  *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
 	FilterName  *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
 	FilterColor *string `form:"filter[color],omitempty" json:"filter[color],omitempty"`
+	Sort        *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // ListFunctionalitiesParams defines parameters for ListFunctionalities.
@@ -10188,6 +10310,7 @@ type ListFunctionalitiesParams struct {
 	FilterSearch *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
 	FilterName   *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
 	FilterSlug   *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	Sort         *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // GetFunctionalityIncidentsChartParams defines parameters for GetFunctionalityIncidentsChart.
@@ -10208,6 +10331,7 @@ type ListIncidentRolesParams struct {
 	FilterSlug    *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
 	FilterName    *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
 	FilterEnabled *bool   `form:"filter[enabled],omitempty" json:"filter[enabled],omitempty"`
+	Sort          *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // ListIncidentRoleTasksParams defines parameters for ListIncidentRoleTasks.
@@ -10225,6 +10349,7 @@ type ListIncidentTypesParams struct {
 	FilterSlug  *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
 	FilterName  *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
 	FilterColor *string `form:"filter[color],omitempty" json:"filter[color],omitempty"`
+	Sort        *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // ListIncidentsParams defines parameters for ListIncidents.
@@ -10242,6 +10367,7 @@ type ListIncidentsParams struct {
 	FilterServices                     *string `form:"filter[services],omitempty" json:"filter[services],omitempty"`
 	FilterTeams                        *string `form:"filter[teams],omitempty" json:"filter[teams],omitempty"`
 	FilterCustomFieldSelectedOptionIds *string `form:"filter[custom_field_selected_option_ids],omitempty" json:"filter[custom_field_selected_option_ids],omitempty"`
+	Sort                               *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // ListIncidentCustomFieldSelectionsParams defines parameters for ListIncidentCustomFieldSelections.
@@ -10321,6 +10447,7 @@ type ListIncidentPostMortemsParams struct {
 	FilterFunctionalities *string `form:"filter[functionalities],omitempty" json:"filter[functionalities],omitempty"`
 	FilterServices        *string `form:"filter[services],omitempty" json:"filter[services],omitempty"`
 	FilterTeams           *string `form:"filter[teams],omitempty" json:"filter[teams],omitempty"`
+	Sort                  *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // ListPulsesParams defines parameters for ListPulses.
@@ -10338,6 +10465,7 @@ type ListServicesParams struct {
 	FilterName        *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
 	FilterSlug        *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
 	FilterBackstageId *string `form:"filter[backstage_id],omitempty" json:"filter[backstage_id],omitempty"`
+	Sort              *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // GetServiceIncidentsChartParams defines parameters for GetServiceIncidentsChart.
@@ -10359,10 +10487,18 @@ type ListSeveritiesParams struct {
 	FilterName     *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
 	FilterSeverity *string `form:"filter[severity],omitempty" json:"filter[severity],omitempty"`
 	FilterColor    *string `form:"filter[color],omitempty" json:"filter[color],omitempty"`
+	Sort           *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // ListStatusPagesParams defines parameters for ListStatusPages.
 type ListStatusPagesParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+}
+
+// ListStatusPageTemplatesParams defines parameters for ListStatusPageTemplates.
+type ListStatusPageTemplatesParams struct {
 	Include    *string `form:"include,omitempty" json:"include,omitempty"`
 	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
@@ -10376,6 +10512,7 @@ type ListTeamsParams struct {
 	FilterSlug  *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
 	FilterName  *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
 	FilterColor *string `form:"filter[color],omitempty" json:"filter[color],omitempty"`
+	Sort        *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // ListWorkflowGroupsParams defines parameters for ListWorkflowGroups.
@@ -10878,6 +11015,12 @@ type ClientInterface interface {
 	// UpdateStatusPage request with any body
 	UpdateStatusPageWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListStatusPageTemplates request
+	ListStatusPageTemplates(ctx context.Context, statusPageId string, params *ListStatusPageTemplatesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateStatusPageTemplate request with any body
+	CreateStatusPageTemplateWithBody(ctx context.Context, statusPageId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListTeams request
 	ListTeams(ctx context.Context, params *ListTeamsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -10892,6 +11035,15 @@ type ClientInterface interface {
 
 	// UpdateTeam request with any body
 	UpdateTeamWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteStatusPageTemplate request
+	DeleteStatusPageTemplate(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetStatusPageTemplate request
+	GetStatusPageTemplate(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateStatusPageTemplate request with any body
+	UpdateStatusPageTemplateWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetCurrentUser request
 	GetCurrentUser(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -12541,6 +12693,30 @@ func (c *Client) UpdateStatusPageWithBody(ctx context.Context, id string, conten
 	return c.Client.Do(req)
 }
 
+func (c *Client) ListStatusPageTemplates(ctx context.Context, statusPageId string, params *ListStatusPageTemplatesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListStatusPageTemplatesRequest(c.Server, statusPageId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateStatusPageTemplateWithBody(ctx context.Context, statusPageId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateStatusPageTemplateRequestWithBody(c.Server, statusPageId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) ListTeams(ctx context.Context, params *ListTeamsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListTeamsRequest(c.Server, params)
 	if err != nil {
@@ -12591,6 +12767,42 @@ func (c *Client) GetTeam(ctx context.Context, id string, reqEditors ...RequestEd
 
 func (c *Client) UpdateTeamWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateTeamRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteStatusPageTemplate(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteStatusPageTemplateRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetStatusPageTemplate(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetStatusPageTemplateRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateStatusPageTemplateWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateStatusPageTemplateRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -14586,6 +14798,22 @@ func NewListEnvironmentsRequest(server string, params *ListEnvironmentsParams) (
 
 	}
 
+	if params.Sort != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
 	queryURL.RawQuery = queryValues.Encode()
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -15041,6 +15269,22 @@ func NewListFunctionalitiesRequest(server string, params *ListFunctionalitiesPar
 	if params.FilterSlug != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[slug]", runtime.ParamLocationQuery, *params.FilterSlug); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.Sort != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 			return nil, err
@@ -15626,6 +15870,22 @@ func NewListIncidentRolesRequest(server string, params *ListIncidentRolesParams)
 
 	}
 
+	if params.Sort != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
 	queryURL.RawQuery = queryValues.Encode()
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -16008,6 +16268,22 @@ func NewListIncidentTypesRequest(server string, params *ListIncidentTypesParams)
 
 	}
 
+	if params.Sort != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
 	queryURL.RawQuery = queryValues.Encode()
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -16367,6 +16643,22 @@ func NewListIncidentsRequest(server string, params *ListIncidentsParams) (*http.
 	if params.FilterCustomFieldSelectedOptionIds != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[custom_field_selected_option_ids]", runtime.ParamLocationQuery, *params.FilterCustomFieldSelectedOptionIds); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.Sort != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 			return nil, err
@@ -18226,6 +18518,22 @@ func NewListIncidentPostMortemsRequest(server string, params *ListIncidentPostMo
 
 	}
 
+	if params.Sort != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
 	queryURL.RawQuery = queryValues.Encode()
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -18588,6 +18896,22 @@ func NewListServicesRequest(server string, params *ListServicesParams) (*http.Re
 	if params.FilterBackstageId != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[backstage_id]", runtime.ParamLocationQuery, *params.FilterBackstageId); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.Sort != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 			return nil, err
@@ -18968,6 +19292,22 @@ func NewListSeveritiesRequest(server string, params *ListSeveritiesParams) (*htt
 	if params.FilterColor != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[color]", runtime.ParamLocationQuery, *params.FilterColor); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.Sort != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 			return nil, err
@@ -19440,6 +19780,128 @@ func NewUpdateStatusPageRequestWithBody(server string, id string, contentType st
 	return req, nil
 }
 
+// NewListStatusPageTemplatesRequest generates requests for ListStatusPageTemplates
+func NewListStatusPageTemplatesRequest(server string, statusPageId string, params *ListStatusPageTemplatesParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "status_page_id", runtime.ParamLocationPath, statusPageId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/status-pages/%s/templates", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Include != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateStatusPageTemplateRequestWithBody generates requests for CreateStatusPageTemplate with any type of body
+func NewCreateStatusPageTemplateRequestWithBody(server string, statusPageId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "status_page_id", runtime.ParamLocationPath, statusPageId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/status-pages/%s/templates", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListTeamsRequest generates requests for ListTeams
 func NewListTeamsRequest(server string, params *ListTeamsParams) (*http.Request, error) {
 	var err error
@@ -19544,6 +20006,22 @@ func NewListTeamsRequest(server string, params *ListTeamsParams) (*http.Request,
 	if params.FilterColor != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[color]", runtime.ParamLocationQuery, *params.FilterColor); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.Sort != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 			return nil, err
@@ -19681,6 +20159,110 @@ func NewUpdateTeamRequestWithBody(server string, id string, contentType string, 
 	}
 
 	operationPath := fmt.Sprintf("/v1/teams/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteStatusPageTemplateRequest generates requests for DeleteStatusPageTemplate
+func NewDeleteStatusPageTemplateRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/templates/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetStatusPageTemplateRequest generates requests for GetStatusPageTemplate
+func NewGetStatusPageTemplateRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/templates/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateStatusPageTemplateRequestWithBody generates requests for UpdateStatusPageTemplate with any type of body
+func NewUpdateStatusPageTemplateRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/templates/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -21090,6 +21672,12 @@ type ClientWithResponsesInterface interface {
 	// UpdateStatusPage request with any body
 	UpdateStatusPageWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateStatusPageResponse, error)
 
+	// ListStatusPageTemplates request
+	ListStatusPageTemplatesWithResponse(ctx context.Context, statusPageId string, params *ListStatusPageTemplatesParams, reqEditors ...RequestEditorFn) (*ListStatusPageTemplatesResponse, error)
+
+	// CreateStatusPageTemplate request with any body
+	CreateStatusPageTemplateWithBodyWithResponse(ctx context.Context, statusPageId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateStatusPageTemplateResponse, error)
+
 	// ListTeams request
 	ListTeamsWithResponse(ctx context.Context, params *ListTeamsParams, reqEditors ...RequestEditorFn) (*ListTeamsResponse, error)
 
@@ -21104,6 +21692,15 @@ type ClientWithResponsesInterface interface {
 
 	// UpdateTeam request with any body
 	UpdateTeamWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateTeamResponse, error)
+
+	// DeleteStatusPageTemplate request
+	DeleteStatusPageTemplateWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteStatusPageTemplateResponse, error)
+
+	// GetStatusPageTemplate request
+	GetStatusPageTemplateWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetStatusPageTemplateResponse, error)
+
+	// UpdateStatusPageTemplate request with any body
+	UpdateStatusPageTemplateWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateStatusPageTemplateResponse, error)
 
 	// GetCurrentUser request
 	GetCurrentUserWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetCurrentUserResponse, error)
@@ -23941,6 +24538,48 @@ func (r UpdateStatusPageResponse) StatusCode() int {
 	return 0
 }
 
+type ListStatusPageTemplatesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r ListStatusPageTemplatesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListStatusPageTemplatesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateStatusPageTemplateResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateStatusPageTemplateResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateStatusPageTemplateResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type ListTeamsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -24040,6 +24679,69 @@ func (r UpdateTeamResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r UpdateTeamResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteStatusPageTemplateResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteStatusPageTemplateResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteStatusPageTemplateResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetStatusPageTemplateResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r GetStatusPageTemplateResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetStatusPageTemplateResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateStatusPageTemplateResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateStatusPageTemplateResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateStatusPageTemplateResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -25675,6 +26377,24 @@ func (c *ClientWithResponses) UpdateStatusPageWithBodyWithResponse(ctx context.C
 	return ParseUpdateStatusPageResponse(rsp)
 }
 
+// ListStatusPageTemplatesWithResponse request returning *ListStatusPageTemplatesResponse
+func (c *ClientWithResponses) ListStatusPageTemplatesWithResponse(ctx context.Context, statusPageId string, params *ListStatusPageTemplatesParams, reqEditors ...RequestEditorFn) (*ListStatusPageTemplatesResponse, error) {
+	rsp, err := c.ListStatusPageTemplates(ctx, statusPageId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListStatusPageTemplatesResponse(rsp)
+}
+
+// CreateStatusPageTemplateWithBodyWithResponse request with arbitrary body returning *CreateStatusPageTemplateResponse
+func (c *ClientWithResponses) CreateStatusPageTemplateWithBodyWithResponse(ctx context.Context, statusPageId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateStatusPageTemplateResponse, error) {
+	rsp, err := c.CreateStatusPageTemplateWithBody(ctx, statusPageId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateStatusPageTemplateResponse(rsp)
+}
+
 // ListTeamsWithResponse request returning *ListTeamsResponse
 func (c *ClientWithResponses) ListTeamsWithResponse(ctx context.Context, params *ListTeamsParams, reqEditors ...RequestEditorFn) (*ListTeamsResponse, error) {
 	rsp, err := c.ListTeams(ctx, params, reqEditors...)
@@ -25718,6 +26438,33 @@ func (c *ClientWithResponses) UpdateTeamWithBodyWithResponse(ctx context.Context
 		return nil, err
 	}
 	return ParseUpdateTeamResponse(rsp)
+}
+
+// DeleteStatusPageTemplateWithResponse request returning *DeleteStatusPageTemplateResponse
+func (c *ClientWithResponses) DeleteStatusPageTemplateWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteStatusPageTemplateResponse, error) {
+	rsp, err := c.DeleteStatusPageTemplate(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteStatusPageTemplateResponse(rsp)
+}
+
+// GetStatusPageTemplateWithResponse request returning *GetStatusPageTemplateResponse
+func (c *ClientWithResponses) GetStatusPageTemplateWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetStatusPageTemplateResponse, error) {
+	rsp, err := c.GetStatusPageTemplate(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetStatusPageTemplateResponse(rsp)
+}
+
+// UpdateStatusPageTemplateWithBodyWithResponse request with arbitrary body returning *UpdateStatusPageTemplateResponse
+func (c *ClientWithResponses) UpdateStatusPageTemplateWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateStatusPageTemplateResponse, error) {
+	rsp, err := c.UpdateStatusPageTemplateWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateStatusPageTemplateResponse(rsp)
 }
 
 // GetCurrentUserWithResponse request returning *GetCurrentUserResponse
@@ -28021,6 +28768,38 @@ func ParseUpdateStatusPageResponse(rsp *http.Response) (*UpdateStatusPageRespons
 	return response, nil
 }
 
+// ParseListStatusPageTemplatesResponse parses an HTTP response from a ListStatusPageTemplatesWithResponse call
+func ParseListStatusPageTemplatesResponse(rsp *http.Response) (*ListStatusPageTemplatesResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListStatusPageTemplatesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseCreateStatusPageTemplateResponse parses an HTTP response from a CreateStatusPageTemplateWithResponse call
+func ParseCreateStatusPageTemplateResponse(rsp *http.Response) (*CreateStatusPageTemplateResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateStatusPageTemplateResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
 // ParseListTeamsResponse parses an HTTP response from a ListTeamsWithResponse call
 func ParseListTeamsResponse(rsp *http.Response) (*ListTeamsResponse, error) {
 	bodyBytes, err := ioutil.ReadAll(rsp.Body)
@@ -28094,6 +28873,54 @@ func ParseUpdateTeamResponse(rsp *http.Response) (*UpdateTeamResponse, error) {
 	}
 
 	response := &UpdateTeamResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseDeleteStatusPageTemplateResponse parses an HTTP response from a DeleteStatusPageTemplateWithResponse call
+func ParseDeleteStatusPageTemplateResponse(rsp *http.Response) (*DeleteStatusPageTemplateResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteStatusPageTemplateResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseGetStatusPageTemplateResponse parses an HTTP response from a GetStatusPageTemplateWithResponse call
+func ParseGetStatusPageTemplateResponse(rsp *http.Response) (*GetStatusPageTemplateResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetStatusPageTemplateResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseUpdateStatusPageTemplateResponse parses an HTTP response from a UpdateStatusPageTemplateWithResponse call
+func ParseUpdateStatusPageTemplateResponse(rsp *http.Response) (*UpdateStatusPageTemplateResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateStatusPageTemplateResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
