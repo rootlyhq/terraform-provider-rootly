@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.18] -- 2022-08-17
+
+Add CONTAINS_ALL to genius workflows
+
+# Changelog
+
 ## [0.1.17] -- 2022-08-12
 
 ### Changed
