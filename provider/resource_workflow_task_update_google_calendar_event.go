@@ -121,6 +121,18 @@ func resourceWorkflowTaskUpdateGoogleCalendarEvent() *schema.Resource {
 							Type: schema.TypeBool,
 							Optional: true,
 						},
+						"conference_solution_key": &schema.Schema{
+							Description: "Sets the video conference type attached to the meeting.",
+							Type: schema.TypeString,
+							Optional: true,
+							Default: "eventHangout",
+							ValidateFunc: validation.StringInSlice([]string{
+								"eventHangout",
+"eventNamedHangout",
+"hangoutsMeet",
+"addOn",
+							}, false),
+						},
 					},
 				},
 			},

@@ -424,9 +424,25 @@ const (
 	Voip  CreateGoToMeetingTaskParamsConferenceCallInfo = "voip"
 )
 
+// Defines values for CreateGoToMeetingTaskParamsConferenceSolutionKey.
+const (
+	CreateGoToMeetingTaskParamsConferenceSolutionKeyAddOn             CreateGoToMeetingTaskParamsConferenceSolutionKey = "addOn"
+	CreateGoToMeetingTaskParamsConferenceSolutionKeyEventHangout      CreateGoToMeetingTaskParamsConferenceSolutionKey = "eventHangout"
+	CreateGoToMeetingTaskParamsConferenceSolutionKeyEventNamedHangout CreateGoToMeetingTaskParamsConferenceSolutionKey = "eventNamedHangout"
+	CreateGoToMeetingTaskParamsConferenceSolutionKeyHangoutsMeet      CreateGoToMeetingTaskParamsConferenceSolutionKey = "hangoutsMeet"
+)
+
 // Defines values for CreateGoToMeetingTaskParamsTaskType.
 const (
 	CreateGoToMeetingTask CreateGoToMeetingTaskParamsTaskType = "create_go_to_meeting_task"
+)
+
+// Defines values for CreateGoogleCalendarEventTaskParamsConferenceSolutionKey.
+const (
+	CreateGoogleCalendarEventTaskParamsConferenceSolutionKeyAddOn             CreateGoogleCalendarEventTaskParamsConferenceSolutionKey = "addOn"
+	CreateGoogleCalendarEventTaskParamsConferenceSolutionKeyEventHangout      CreateGoogleCalendarEventTaskParamsConferenceSolutionKey = "eventHangout"
+	CreateGoogleCalendarEventTaskParamsConferenceSolutionKeyEventNamedHangout CreateGoogleCalendarEventTaskParamsConferenceSolutionKey = "eventNamedHangout"
+	CreateGoogleCalendarEventTaskParamsConferenceSolutionKeyHangoutsMeet      CreateGoogleCalendarEventTaskParamsConferenceSolutionKey = "hangoutsMeet"
 )
 
 // Defines values for CreateGoogleCalendarEventTaskParamsTaskType.
@@ -1599,6 +1615,11 @@ const (
 	NewWorkflowGroupDataTypeWorkflowGroups NewWorkflowGroupDataType = "workflow_groups"
 )
 
+// Defines values for NewWorkflowRunDataType.
+const (
+	NewWorkflowRunDataTypeWorkflowRuns NewWorkflowRunDataType = "workflow_runs"
+)
+
 // Defines values for NewWorkflowTaskDataType.
 const (
 	NewWorkflowTaskDataTypeWorkflowTasks NewWorkflowTaskDataType = "workflow_tasks"
@@ -2009,6 +2030,14 @@ const (
 	UpdateGithubIssue UpdateGithubIssueTaskParamsTaskType = "update_github_issue"
 )
 
+// Defines values for UpdateGoogleCalendarEventTaskParamsConferenceSolutionKey.
+const (
+	AddOn             UpdateGoogleCalendarEventTaskParamsConferenceSolutionKey = "addOn"
+	EventHangout      UpdateGoogleCalendarEventTaskParamsConferenceSolutionKey = "eventHangout"
+	EventNamedHangout UpdateGoogleCalendarEventTaskParamsConferenceSolutionKey = "eventNamedHangout"
+	HangoutsMeet      UpdateGoogleCalendarEventTaskParamsConferenceSolutionKey = "hangoutsMeet"
+)
+
 // Defines values for UpdateGoogleCalendarEventTaskParamsTaskType.
 const (
 	UpdateGoogleCalendarEventTaskParamsTaskTypeCreateGoogleCalendarEvent UpdateGoogleCalendarEventTaskParamsTaskType = "create_google_calendar_event"
@@ -2235,10 +2264,10 @@ const (
 
 // Defines values for UpdateStatusTaskParamsStatus.
 const (
-	Cancelled UpdateStatusTaskParamsStatus = "cancelled"
-	Mitigated UpdateStatusTaskParamsStatus = "mitigated"
-	Resolved  UpdateStatusTaskParamsStatus = "resolved"
-	Started   UpdateStatusTaskParamsStatus = "started"
+	UpdateStatusTaskParamsStatusCancelled UpdateStatusTaskParamsStatus = "cancelled"
+	UpdateStatusTaskParamsStatusMitigated UpdateStatusTaskParamsStatus = "mitigated"
+	UpdateStatusTaskParamsStatusResolved  UpdateStatusTaskParamsStatus = "resolved"
+	UpdateStatusTaskParamsStatusStarted   UpdateStatusTaskParamsStatus = "started"
 )
 
 // Defines values for UpdateStatusTaskParamsTaskType.
@@ -2503,6 +2532,41 @@ const (
 // Defines values for WorkflowResponseDataType.
 const (
 	WorkflowResponseDataTypeWorkflows WorkflowResponseDataType = "workflows"
+)
+
+// Defines values for WorkflowRunStatus.
+const (
+	WorkflowRunStatusCanceled  WorkflowRunStatus = "canceled"
+	WorkflowRunStatusCompleted WorkflowRunStatus = "completed"
+	WorkflowRunStatusFailed    WorkflowRunStatus = "failed"
+	WorkflowRunStatusQueued    WorkflowRunStatus = "queued"
+	WorkflowRunStatusStarted   WorkflowRunStatus = "started"
+)
+
+// Defines values for WorkflowRunTriggeredBy.
+const (
+	WorkflowRunTriggeredBySystem WorkflowRunTriggeredBy = "system"
+	WorkflowRunTriggeredByUser   WorkflowRunTriggeredBy = "user"
+)
+
+// Defines values for WorkflowRunResponseDataAttributesStatus.
+const (
+	Canceled  WorkflowRunResponseDataAttributesStatus = "canceled"
+	Completed WorkflowRunResponseDataAttributesStatus = "completed"
+	Failed    WorkflowRunResponseDataAttributesStatus = "failed"
+	Queued    WorkflowRunResponseDataAttributesStatus = "queued"
+	Started   WorkflowRunResponseDataAttributesStatus = "started"
+)
+
+// Defines values for WorkflowRunResponseDataAttributesTriggeredBy.
+const (
+	WorkflowRunResponseDataAttributesTriggeredBySystem WorkflowRunResponseDataAttributesTriggeredBy = "system"
+	WorkflowRunResponseDataAttributesTriggeredByUser   WorkflowRunResponseDataAttributesTriggeredBy = "user"
+)
+
+// Defines values for WorkflowRunResponseDataType.
+const (
+	WorkflowRunResponseDataTypeWorkflowRuns WorkflowRunResponseDataType = "workflow_runs"
 )
 
 // Defines values for WorkflowTaskListDataType.
@@ -3072,12 +3136,15 @@ type AlertResponseDataType string
 
 // AlertTriggerParams defines model for alert_trigger_params.
 type AlertTriggerParams struct {
-	AlertCondition        *AlertTriggerParamsAlertCondition        `json:"alert_condition,omitempty"`
-	AlertConditionLabel   *AlertTriggerParamsAlertConditionLabel   `json:"alert_condition_label,omitempty"`
-	AlertConditionPayload *AlertTriggerParamsAlertConditionPayload `json:"alert_condition_payload,omitempty"`
-	AlertConditionSource  *AlertTriggerParamsAlertConditionSource  `json:"alert_condition_source,omitempty"`
-	AlertLabels           *[]string                                `json:"alert_labels,omitempty"`
-	AlertPayload          *[]string                                `json:"alert_payload,omitempty"`
+	AlertCondition                 *AlertTriggerParamsAlertCondition        `json:"alert_condition,omitempty"`
+	AlertConditionLabel            *AlertTriggerParamsAlertConditionLabel   `json:"alert_condition_label,omitempty"`
+	AlertConditionLabelUseRegexp   *bool                                    `json:"alert_condition_label_use_regexp,omitempty"`
+	AlertConditionPayload          *AlertTriggerParamsAlertConditionPayload `json:"alert_condition_payload,omitempty"`
+	AlertConditionPayloadUseRegexp *bool                                    `json:"alert_condition_payload_use_regexp,omitempty"`
+	AlertConditionSource           *AlertTriggerParamsAlertConditionSource  `json:"alert_condition_source,omitempty"`
+	AlertConditionSourceUseRegexp  *bool                                    `json:"alert_condition_source_use_regexp,omitempty"`
+	AlertLabels                    *[]string                                `json:"alert_labels,omitempty"`
+	AlertPayload                   *[]string                                `json:"alert_payload,omitempty"`
 
 	// You can use jsonpath syntax. eg: $.incident.teams[*]
 	AlertQueryPayload *string                       `json:"alert_query_payload"`
@@ -3432,9 +3499,12 @@ type CreateGithubIssueTaskParamsTaskType string
 
 // CreateGoToMeetingTaskParams defines model for create_go_to_meeting_task_params.
 type CreateGoToMeetingTaskParams struct {
-	ConferenceCallInfo     *CreateGoToMeetingTaskParamsConferenceCallInfo `json:"conference_call_info"`
-	PasswordRequired       *bool                                          `json:"password_required"`
-	PostToIncidentTimeline *bool                                          `json:"post_to_incident_timeline,omitempty"`
+	ConferenceCallInfo *CreateGoToMeetingTaskParamsConferenceCallInfo `json:"conference_call_info"`
+
+	// Sets the video conference type attached to the meeting.
+	ConferenceSolutionKey  CreateGoToMeetingTaskParamsConferenceSolutionKey `json:"conference_solution_key"`
+	PasswordRequired       *bool                                            `json:"password_required"`
+	PostToIncidentTimeline *bool                                            `json:"post_to_incident_timeline,omitempty"`
 	PostToSlackChannels    *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -3448,6 +3518,9 @@ type CreateGoToMeetingTaskParams struct {
 // CreateGoToMeetingTaskParamsConferenceCallInfo defines model for CreateGoToMeetingTaskParams.ConferenceCallInfo.
 type CreateGoToMeetingTaskParamsConferenceCallInfo string
 
+// Sets the video conference type attached to the meeting.
+type CreateGoToMeetingTaskParamsConferenceSolutionKey string
+
 // CreateGoToMeetingTaskParamsTaskType defines model for CreateGoToMeetingTaskParams.TaskType.
 type CreateGoToMeetingTaskParamsTaskType string
 
@@ -3458,6 +3531,9 @@ type CreateGoogleCalendarEventTaskParams struct {
 	CanGuestsInviteOthers   *bool    `json:"can_guests_invite_others,omitempty"`
 	CanGuestsModifyEvent    *bool    `json:"can_guests_modify_event,omitempty"`
 	CanGuestsSeeOtherGuests *bool    `json:"can_guests_see_other_guests,omitempty"`
+
+	// Sets the video conference type attached to the meeting.
+	ConferenceSolutionKey *CreateGoogleCalendarEventTaskParamsConferenceSolutionKey `json:"conference_solution_key"`
 
 	// The days until meeting
 	DaysUntilMeeting float32 `json:"days_until_meeting"`
@@ -3481,6 +3557,9 @@ type CreateGoogleCalendarEventTaskParams struct {
 	TimeOfMeeting string                                       `json:"time_of_meeting"`
 	TimeZone      *CreateGoogleCalendarEventTaskParamsTimeZone `json:"time_zone"`
 }
+
+// Sets the video conference type attached to the meeting.
+type CreateGoogleCalendarEventTaskParamsConferenceSolutionKey string
 
 // CreateGoogleCalendarEventTaskParamsTaskType defines model for CreateGoogleCalendarEventTaskParams.TaskType.
 type CreateGoogleCalendarEventTaskParamsTaskType string
@@ -6797,6 +6876,17 @@ type NewWorkflowGroupDataAttributesKind string
 // NewWorkflowGroupDataType defines model for NewWorkflowGroup.Data.Type.
 type NewWorkflowGroupDataType string
 
+// NewWorkflowRun defines model for new_workflow_run.
+type NewWorkflowRun struct {
+	Data struct {
+		Attributes interface{}            `json:"attributes"`
+		Type       NewWorkflowRunDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewWorkflowRunDataType defines model for NewWorkflowRun.Data.Type.
+type NewWorkflowRunDataType string
+
 // NewWorkflowTask defines model for new_workflow_task.
 type NewWorkflowTask struct {
 	Data struct {
@@ -7521,12 +7611,15 @@ type PulseResponseDataType string
 
 // PulseTriggerParams defines model for pulse_trigger_params.
 type PulseTriggerParams struct {
-	PulseCondition        *PulseTriggerParamsPulseCondition        `json:"pulse_condition,omitempty"`
-	PulseConditionLabel   *PulseTriggerParamsPulseConditionLabel   `json:"pulse_condition_label,omitempty"`
-	PulseConditionPayload *PulseTriggerParamsPulseConditionPayload `json:"pulse_condition_payload,omitempty"`
-	PulseConditionSource  *PulseTriggerParamsPulseConditionSource  `json:"pulse_condition_source,omitempty"`
-	PulseLabels           *[]string                                `json:"pulse_labels,omitempty"`
-	PulsePayload          *[]string                                `json:"pulse_payload,omitempty"`
+	PulseCondition                 *PulseTriggerParamsPulseCondition        `json:"pulse_condition,omitempty"`
+	PulseConditionLabel            *PulseTriggerParamsPulseConditionLabel   `json:"pulse_condition_label,omitempty"`
+	PulseConditionLabelUseRegexp   *bool                                    `json:"pulse_condition_label_use_regexp,omitempty"`
+	PulseConditionPayload          *PulseTriggerParamsPulseConditionPayload `json:"pulse_condition_payload,omitempty"`
+	PulseConditionPayloadUseRegexp *bool                                    `json:"pulse_condition_payload_use_regexp,omitempty"`
+	PulseConditionSource           *PulseTriggerParamsPulseConditionSource  `json:"pulse_condition_source,omitempty"`
+	PulseConditionSourceUseRegexp  *bool                                    `json:"pulse_condition_source_use_regexp,omitempty"`
+	PulseLabels                    *[]string                                `json:"pulse_labels,omitempty"`
+	PulsePayload                   *[]string                                `json:"pulse_payload,omitempty"`
 
 	// You can use jsonpath syntax. eg: $.incident.teams[*]
 	PulseQueryPayload *string                       `json:"pulse_query_payload"`
@@ -8730,6 +8823,9 @@ type UpdateGoogleCalendarEventTaskParams struct {
 	CanGuestsModifyEvent    *bool     `json:"can_guests_modify_event,omitempty"`
 	CanGuestsSeeOtherGuests *bool     `json:"can_guests_see_other_guests,omitempty"`
 
+	// Sets the video conference type attached to the meeting.
+	ConferenceSolutionKey *UpdateGoogleCalendarEventTaskParamsConferenceSolutionKey `json:"conference_solution_key"`
+
 	// The event description
 	Description *string `json:"description,omitempty"`
 
@@ -8751,6 +8847,9 @@ type UpdateGoogleCalendarEventTaskParams struct {
 	// Time of meeting in format HH:MM
 	TimeOfMeeting *string `json:"time_of_meeting,omitempty"`
 }
+
+// Sets the video conference type attached to the meeting.
+type UpdateGoogleCalendarEventTaskParamsConferenceSolutionKey string
 
 // UpdateGoogleCalendarEventTaskParamsTaskType defines model for UpdateGoogleCalendarEventTaskParams.TaskType.
 type UpdateGoogleCalendarEventTaskParamsTaskType string
@@ -10152,6 +10251,61 @@ type WorkflowResponseDataAttributesTriggers string
 // WorkflowResponseDataType defines model for WorkflowResponse.Data.Type.
 type WorkflowResponseDataType string
 
+// WorkflowRun defines model for workflow_run.
+type WorkflowRun struct {
+	ActionItemId *string                `json:"action_item_id"`
+	AlertId      *string                `json:"alert_id"`
+	CanceledAt   *string                `json:"canceled_at"`
+	CompletedAt  *string                `json:"completed_at"`
+	FailedAt     *string                `json:"failed_at"`
+	IncidentId   *string                `json:"incident_id"`
+	PostMortemId *string                `json:"post_mortem_id"`
+	PulseId      *string                `json:"pulse_id"`
+	StartedAt    *string                `json:"started_at"`
+	Status       WorkflowRunStatus      `json:"status"`
+	TriggeredBy  WorkflowRunTriggeredBy `json:"triggered_by"`
+	WorkflowId   string                 `json:"workflow_id"`
+}
+
+// WorkflowRunStatus defines model for WorkflowRun.Status.
+type WorkflowRunStatus string
+
+// WorkflowRunTriggeredBy defines model for WorkflowRun.TriggeredBy.
+type WorkflowRunTriggeredBy string
+
+// WorkflowRunResponse defines model for workflow_run_response.
+type WorkflowRunResponse struct {
+	Data struct {
+		Attributes struct {
+			ActionItemId *string                                      `json:"action_item_id"`
+			AlertId      *string                                      `json:"alert_id"`
+			CanceledAt   *string                                      `json:"canceled_at"`
+			CompletedAt  *string                                      `json:"completed_at"`
+			FailedAt     *string                                      `json:"failed_at"`
+			IncidentId   *string                                      `json:"incident_id"`
+			PostMortemId *string                                      `json:"post_mortem_id"`
+			PulseId      *string                                      `json:"pulse_id"`
+			StartedAt    *string                                      `json:"started_at"`
+			Status       WorkflowRunResponseDataAttributesStatus      `json:"status"`
+			TriggeredBy  WorkflowRunResponseDataAttributesTriggeredBy `json:"triggered_by"`
+			WorkflowId   string                                       `json:"workflow_id"`
+		} `json:"attributes"`
+
+		// Unique ID of the workflow run
+		Id   string                      `json:"id"`
+		Type WorkflowRunResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// WorkflowRunResponseDataAttributesStatus defines model for WorkflowRunResponse.Data.Attributes.Status.
+type WorkflowRunResponseDataAttributesStatus string
+
+// WorkflowRunResponseDataAttributesTriggeredBy defines model for WorkflowRunResponse.Data.Attributes.TriggeredBy.
+type WorkflowRunResponseDataAttributesTriggeredBy string
+
+// WorkflowRunResponseDataType defines model for WorkflowRunResponse.Data.Type.
+type WorkflowRunResponseDataType string
+
 // WorkflowTask defines model for workflow_task.
 type WorkflowTask struct {
 	// Date of creation
@@ -11101,6 +11255,9 @@ type ClientInterface interface {
 
 	// CreateWorkflowCustomFieldSelection request with any body
 	CreateWorkflowCustomFieldSelectionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateWorkflowRun request with any body
+	CreateWorkflowRunWithBody(ctx context.Context, workflowId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListWorkflowTasks request
 	ListWorkflowTasks(ctx context.Context, workflowId string, params *ListWorkflowTasksParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -13031,6 +13188,18 @@ func (c *Client) ListWorkflowCustomFieldSelections(ctx context.Context, id strin
 
 func (c *Client) CreateWorkflowCustomFieldSelectionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateWorkflowCustomFieldSelectionRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateWorkflowRunWithBody(ctx context.Context, workflowId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateWorkflowRunRequestWithBody(c.Server, workflowId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -21111,6 +21280,42 @@ func NewCreateWorkflowCustomFieldSelectionRequestWithBody(server string, id stri
 	return req, nil
 }
 
+// NewCreateWorkflowRunRequestWithBody generates requests for CreateWorkflowRun with any type of body
+func NewCreateWorkflowRunRequestWithBody(server string, workflowId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "workflow_id", runtime.ParamLocationPath, workflowId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/workflows/%s/workflow_runs", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListWorkflowTasksRequest generates requests for ListWorkflowTasks
 func NewListWorkflowTasksRequest(server string, workflowId string, params *ListWorkflowTasksParams) (*http.Request, error) {
 	var err error
@@ -21758,6 +21963,9 @@ type ClientWithResponsesInterface interface {
 
 	// CreateWorkflowCustomFieldSelection request with any body
 	CreateWorkflowCustomFieldSelectionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateWorkflowCustomFieldSelectionResponse, error)
+
+	// CreateWorkflowRun request with any body
+	CreateWorkflowRunWithBodyWithResponse(ctx context.Context, workflowId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateWorkflowRunResponse, error)
 
 	// ListWorkflowTasks request
 	ListWorkflowTasksWithResponse(ctx context.Context, workflowId string, params *ListWorkflowTasksParams, reqEditors ...RequestEditorFn) (*ListWorkflowTasksResponse, error)
@@ -25147,6 +25355,27 @@ func (r CreateWorkflowCustomFieldSelectionResponse) StatusCode() int {
 	return 0
 }
 
+type CreateWorkflowRunResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateWorkflowRunResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateWorkflowRunResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type ListWorkflowTasksResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -26636,6 +26865,15 @@ func (c *ClientWithResponses) CreateWorkflowCustomFieldSelectionWithBodyWithResp
 		return nil, err
 	}
 	return ParseCreateWorkflowCustomFieldSelectionResponse(rsp)
+}
+
+// CreateWorkflowRunWithBodyWithResponse request with arbitrary body returning *CreateWorkflowRunResponse
+func (c *ClientWithResponses) CreateWorkflowRunWithBodyWithResponse(ctx context.Context, workflowId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateWorkflowRunResponse, error) {
+	rsp, err := c.CreateWorkflowRunWithBody(ctx, workflowId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateWorkflowRunResponse(rsp)
 }
 
 // ListWorkflowTasksWithResponse request returning *ListWorkflowTasksResponse
@@ -29225,6 +29463,22 @@ func ParseCreateWorkflowCustomFieldSelectionResponse(rsp *http.Response) (*Creat
 	}
 
 	response := &CreateWorkflowCustomFieldSelectionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseCreateWorkflowRunResponse parses an HTTP response from a CreateWorkflowRunWithResponse call
+func ParseCreateWorkflowRunResponse(rsp *http.Response) (*CreateWorkflowRunResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateWorkflowRunResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
