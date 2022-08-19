@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.19] -- 2022-08-17
+
+Add `POST /v1/workflows/{workflow_id}/workflow_runs` endpoint
+Add `conference_solution_key` to `resource_workflow_task_create_google_calendar_event.go` &  `resource_workflow_task_update_google_calendar_event.go`
+ADD `alert_condition_source_use_regexp`, `alert_condition_label_use_regexp`, `alert_condition_payload_use_regexp` flags
+ADD `pulse_condition_source_use_regexp`, `pulse_condition_label_use_regexp`, `pulse_condition_payload_use_regexp` flags
+
+# Changelog
+
 ## [0.1.18] -- 2022-08-17
 
 Add CONTAINS_ALL to genius workflows
