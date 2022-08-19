@@ -159,10 +159,20 @@ func resourceWorkflowPulse() *schema.Resource {
 							Optional: true,
 							Default: "ANY",
 						},
+						"pulse_condition_source_use_regexp": &schema.Schema{
+							Type: schema.TypeBool,
+							Optional: true,
+							Default: false,
+						},
 						"pulse_condition_label": &schema.Schema{
 							Type: schema.TypeString,
 							Optional: true,
 							Default: "ANY",
+						},
+						"pulse_condition_label_use_regexp": &schema.Schema{
+							Type: schema.TypeBool,
+							Optional: true,
+							Default: false,
 						},
 						"pulse_payload": &schema.Schema{
 							Type:        schema.TypeList,
@@ -193,6 +203,11 @@ func resourceWorkflowPulse() *schema.Resource {
 							Type: schema.TypeString,
 							Optional: true,
 							Default: "ANY",
+						},
+						"pulse_condition_payload_use_regexp": &schema.Schema{
+							Type: schema.TypeBool,
+							Optional: true,
+							Default: false,
 						},
 					},
 				},

@@ -159,6 +159,11 @@ func resourceWorkflowAlert() *schema.Resource {
 							Optional: true,
 							Default: "ANY",
 						},
+						"alert_condition_source_use_regexp": &schema.Schema{
+							Type: schema.TypeBool,
+							Default: false,
+							Optional: true,
+						},
 						"alert_payload": &schema.Schema{
 							Type:        schema.TypeList,
 							Optional:    true,
@@ -185,6 +190,11 @@ func resourceWorkflowAlert() *schema.Resource {
 							Optional: true,
 							Default: "ANY",
 						},
+						"alert_condition_label_use_regexp": &schema.Schema{
+							Type: schema.TypeBool,
+							Optional: true,
+							Default: false,
+						},
 						"alert_query_payload": &schema.Schema{
 							Type: schema.TypeString,
 							Optional: true,
@@ -193,6 +203,11 @@ func resourceWorkflowAlert() *schema.Resource {
 							Type: schema.TypeString,
 							Optional: true,
 							Default: "ANY",
+						},
+						"alert_condition_payload_use_regexp": &schema.Schema{
+							Type: schema.TypeBool,
+							Optional: true,
+							Default: false,
 						},
 					},
 				},
