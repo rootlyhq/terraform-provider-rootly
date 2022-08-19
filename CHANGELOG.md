@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.20] -- 2022-08-18
+
+- Fix missing fields.
+
 ## [0.1.19] -- 2022-08-17
 
 Add `conference_solution_key` to `resource_workflow_task_create_google_calendar_event.go` &  `resource_workflow_task_update_google_calendar_event.go`
