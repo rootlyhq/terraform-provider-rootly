@@ -25,6 +25,7 @@ func dataSourceIncidentRoles() *schema.Resource{
 			"enabled": &schema.Schema{
 				Type:        schema.TypeBool,
 				Optional:    true,
+				Default:     true,
 			},
 			"incident_roles": &schema.Schema{
 				Type: schema.TypeList,

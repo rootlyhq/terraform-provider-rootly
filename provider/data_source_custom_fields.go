@@ -29,6 +29,7 @@ func dataSourceCustomFields() *schema.Resource{
 			"enabled": &schema.Schema{
 				Type:        schema.TypeBool,
 				Optional:    true,
+				Default:     true,
 			},
 			"custom_fields": &schema.Schema{
 				Type: schema.TypeList,
