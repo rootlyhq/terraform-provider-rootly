@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.21] -- 2022-08-22
+
+- Change enabled default from false to true for incident_roles and custom_fields.
+
 ## [0.1.20] -- 2022-08-18
 
 - Fix missing fields.
