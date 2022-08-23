@@ -2551,11 +2551,11 @@ const (
 
 // Defines values for WorkflowRunResponseDataAttributesStatus.
 const (
-	Canceled  WorkflowRunResponseDataAttributesStatus = "canceled"
-	Completed WorkflowRunResponseDataAttributesStatus = "completed"
-	Failed    WorkflowRunResponseDataAttributesStatus = "failed"
-	Queued    WorkflowRunResponseDataAttributesStatus = "queued"
-	Started   WorkflowRunResponseDataAttributesStatus = "started"
+	WorkflowRunResponseDataAttributesStatusCanceled  WorkflowRunResponseDataAttributesStatus = "canceled"
+	WorkflowRunResponseDataAttributesStatusCompleted WorkflowRunResponseDataAttributesStatus = "completed"
+	WorkflowRunResponseDataAttributesStatusFailed    WorkflowRunResponseDataAttributesStatus = "failed"
+	WorkflowRunResponseDataAttributesStatusQueued    WorkflowRunResponseDataAttributesStatus = "queued"
+	WorkflowRunResponseDataAttributesStatusStarted   WorkflowRunResponseDataAttributesStatus = "started"
 )
 
 // Defines values for WorkflowRunResponseDataAttributesTriggeredBy.
@@ -2567,6 +2567,26 @@ const (
 // Defines values for WorkflowRunResponseDataType.
 const (
 	WorkflowRunResponseDataTypeWorkflowRuns WorkflowRunResponseDataType = "workflow_runs"
+)
+
+// Defines values for WorkflowRunsListDataAttributesStatus.
+const (
+	WorkflowRunsListDataAttributesStatusCanceled  WorkflowRunsListDataAttributesStatus = "canceled"
+	WorkflowRunsListDataAttributesStatusCompleted WorkflowRunsListDataAttributesStatus = "completed"
+	WorkflowRunsListDataAttributesStatusFailed    WorkflowRunsListDataAttributesStatus = "failed"
+	WorkflowRunsListDataAttributesStatusQueued    WorkflowRunsListDataAttributesStatus = "queued"
+	WorkflowRunsListDataAttributesStatusStarted   WorkflowRunsListDataAttributesStatus = "started"
+)
+
+// Defines values for WorkflowRunsListDataAttributesTriggeredBy.
+const (
+	WorkflowRunsListDataAttributesTriggeredBySystem WorkflowRunsListDataAttributesTriggeredBy = "system"
+	WorkflowRunsListDataAttributesTriggeredByUser   WorkflowRunsListDataAttributesTriggeredBy = "user"
+)
+
+// Defines values for WorkflowRunsListDataType.
+const (
+	WorkflowRuns WorkflowRunsListDataType = "workflow_runs"
 )
 
 // Defines values for WorkflowTaskListDataType.
@@ -7712,6 +7732,9 @@ type SendEmailTaskParams struct {
 	// The email body
 	Body *string `json:"body"`
 
+	// The from email address. Need to use SMTP integration if different than rootly.com.
+	From *string `json:"from"`
+
 	// The preheader
 	Preheader *string `json:"preheader"`
 
@@ -10306,6 +10329,46 @@ type WorkflowRunResponseDataAttributesTriggeredBy string
 // WorkflowRunResponseDataType defines model for WorkflowRunResponse.Data.Type.
 type WorkflowRunResponseDataType string
 
+// WorkflowRunsList defines model for workflow_runs_list.
+type WorkflowRunsList struct {
+	Data []struct {
+		Attributes struct {
+			ActionItemId *string                                   `json:"action_item_id"`
+			AlertId      *string                                   `json:"alert_id"`
+			CanceledAt   *string                                   `json:"canceled_at"`
+			CompletedAt  *string                                   `json:"completed_at"`
+			FailedAt     *string                                   `json:"failed_at"`
+			IncidentId   *string                                   `json:"incident_id"`
+			PostMortemId *string                                   `json:"post_mortem_id"`
+			PulseId      *string                                   `json:"pulse_id"`
+			StartedAt    *string                                   `json:"started_at"`
+			Status       WorkflowRunsListDataAttributesStatus      `json:"status"`
+			TriggeredBy  WorkflowRunsListDataAttributesTriggeredBy `json:"triggered_by"`
+			WorkflowId   string                                    `json:"workflow_id"`
+		} `json:"attributes"`
+
+		// Unique ID of the workflow run
+		Id   string                   `json:"id"`
+		Type WorkflowRunsListDataType `json:"type"`
+	} `json:"data"`
+	Links struct {
+		First string  `json:"first"`
+		Last  string  `json:"last"`
+		Next  *string `json:"next"`
+		Prev  *string `json:"prev"`
+		Self  string  `json:"self"`
+	} `json:"links"`
+}
+
+// WorkflowRunsListDataAttributesStatus defines model for WorkflowRunsList.Data.Attributes.Status.
+type WorkflowRunsListDataAttributesStatus string
+
+// WorkflowRunsListDataAttributesTriggeredBy defines model for WorkflowRunsList.Data.Attributes.TriggeredBy.
+type WorkflowRunsListDataAttributesTriggeredBy string
+
+// WorkflowRunsListDataType defines model for WorkflowRunsList.Data.Type.
+type WorkflowRunsListDataType string
+
 // WorkflowTask defines model for workflow_task.
 type WorkflowTask struct {
 	// Date of creation
@@ -10688,6 +10751,13 @@ type ListWorkflowsParams struct {
 
 // ListWorkflowCustomFieldSelectionsParams defines parameters for ListWorkflowCustomFieldSelections.
 type ListWorkflowCustomFieldSelectionsParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+}
+
+// ListWorkflowRunsParams defines parameters for ListWorkflowRuns.
+type ListWorkflowRunsParams struct {
 	Include    *string `form:"include,omitempty" json:"include,omitempty"`
 	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
@@ -11255,6 +11325,9 @@ type ClientInterface interface {
 
 	// CreateWorkflowCustomFieldSelection request with any body
 	CreateWorkflowCustomFieldSelectionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListWorkflowRuns request
+	ListWorkflowRuns(ctx context.Context, workflowId string, params *ListWorkflowRunsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateWorkflowRun request with any body
 	CreateWorkflowRunWithBody(ctx context.Context, workflowId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -13188,6 +13261,18 @@ func (c *Client) ListWorkflowCustomFieldSelections(ctx context.Context, id strin
 
 func (c *Client) CreateWorkflowCustomFieldSelectionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateWorkflowCustomFieldSelectionRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListWorkflowRuns(ctx context.Context, workflowId string, params *ListWorkflowRunsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListWorkflowRunsRequest(c.Server, workflowId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -21280,6 +21365,92 @@ func NewCreateWorkflowCustomFieldSelectionRequestWithBody(server string, id stri
 	return req, nil
 }
 
+// NewListWorkflowRunsRequest generates requests for ListWorkflowRuns
+func NewListWorkflowRunsRequest(server string, workflowId string, params *ListWorkflowRunsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "workflow_id", runtime.ParamLocationPath, workflowId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/workflows/%s/workflow_runs", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Include != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewCreateWorkflowRunRequestWithBody generates requests for CreateWorkflowRun with any type of body
 func NewCreateWorkflowRunRequestWithBody(server string, workflowId string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
@@ -21963,6 +22134,9 @@ type ClientWithResponsesInterface interface {
 
 	// CreateWorkflowCustomFieldSelection request with any body
 	CreateWorkflowCustomFieldSelectionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateWorkflowCustomFieldSelectionResponse, error)
+
+	// ListWorkflowRuns request
+	ListWorkflowRunsWithResponse(ctx context.Context, workflowId string, params *ListWorkflowRunsParams, reqEditors ...RequestEditorFn) (*ListWorkflowRunsResponse, error)
 
 	// CreateWorkflowRun request with any body
 	CreateWorkflowRunWithBodyWithResponse(ctx context.Context, workflowId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateWorkflowRunResponse, error)
@@ -25355,6 +25529,27 @@ func (r CreateWorkflowCustomFieldSelectionResponse) StatusCode() int {
 	return 0
 }
 
+type ListWorkflowRunsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r ListWorkflowRunsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListWorkflowRunsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type CreateWorkflowRunResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -26865,6 +27060,15 @@ func (c *ClientWithResponses) CreateWorkflowCustomFieldSelectionWithBodyWithResp
 		return nil, err
 	}
 	return ParseCreateWorkflowCustomFieldSelectionResponse(rsp)
+}
+
+// ListWorkflowRunsWithResponse request returning *ListWorkflowRunsResponse
+func (c *ClientWithResponses) ListWorkflowRunsWithResponse(ctx context.Context, workflowId string, params *ListWorkflowRunsParams, reqEditors ...RequestEditorFn) (*ListWorkflowRunsResponse, error) {
+	rsp, err := c.ListWorkflowRuns(ctx, workflowId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListWorkflowRunsResponse(rsp)
 }
 
 // CreateWorkflowRunWithBodyWithResponse request with arbitrary body returning *CreateWorkflowRunResponse
@@ -29463,6 +29667,22 @@ func ParseCreateWorkflowCustomFieldSelectionResponse(rsp *http.Response) (*Creat
 	}
 
 	response := &CreateWorkflowCustomFieldSelectionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseListWorkflowRunsResponse parses an HTTP response from a ListWorkflowRunsWithResponse call
+func ParseListWorkflowRunsResponse(rsp *http.Response) (*ListWorkflowRunsResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListWorkflowRunsResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
