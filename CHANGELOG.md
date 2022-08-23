@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.23] -- 2022-08-22
+
+- Add `from` for `resource_workflow_task_send_email`.
+- Add `ListWorkflowRunsWithResponse`
+
 ## [0.1.22] -- 2022-08-22
 
 - Add filtering by backstage_id/pagerduty_id/opsgenie_id for services & functionalities.
