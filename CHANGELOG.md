@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.24] -- 2022-08-22
+
+- Regenerate docs
+
 ## [0.1.23] -- 2022-08-22
 
 - Add `from` for `resource_workflow_task_send_email`.
