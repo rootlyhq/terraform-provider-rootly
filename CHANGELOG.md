@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.22] -- 2022-08-22
+
+- Add filtering by backstage_id/pagerduty_id/opsgenie_id for services & functionalities.
+
 ## [0.1.21] -- 2022-08-22
 
 - Change enabled default from false to true for incident_roles and custom_fields.
