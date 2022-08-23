@@ -53,6 +53,11 @@ func resourceWorkflowTaskSendEmail() *schema.Resource {
 								"send_email",
 							}, false),
 						},
+						"from": &schema.Schema{
+							Description: "The from email address. Need to use SMTP integration if different than rootly.com.",
+							Type: schema.TypeString,
+							Optional: true,
+						},
 						"to": &schema.Schema{
 							Description: "",
 							Type: schema.TypeList,
