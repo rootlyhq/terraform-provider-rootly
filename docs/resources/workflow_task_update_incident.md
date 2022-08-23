@@ -31,6 +31,7 @@ Manages workflow update_incident task.
 Optional:
 
 - `acknowledged_at` (String)
+- `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON.
 - `detected_at` (String)
 - `environment_ids` (List of String)
 - `functionality_ids` (List of String)

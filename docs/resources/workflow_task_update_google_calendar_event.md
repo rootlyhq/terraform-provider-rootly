@@ -39,6 +39,7 @@ Optional:
 - `can_guests_invite_others` (Boolean)
 - `can_guests_modify_event` (Boolean)
 - `can_guests_see_other_guests` (Boolean)
+- `conference_solution_key` (String) Sets the video conference type attached to the meeting.
 - `description` (String) The event description
 - `meeting_duration` (String) Meeting duration in format like '1 hour', '30 minutes'
 - `post_to_incident_timeline` (Boolean)

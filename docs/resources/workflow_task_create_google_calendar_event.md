@@ -42,6 +42,7 @@ Optional:
 - `can_guests_invite_others` (Boolean)
 - `can_guests_modify_event` (Boolean)
 - `can_guests_see_other_guests` (Boolean)
+- `conference_solution_key` (String) Sets the video conference type attached to the meeting.
 - `exclude_weekends` (Boolean)
 - `post_to_incident_timeline` (Boolean)
 - `send_updates` (Boolean) Send an email to the attendees notifying them of the event

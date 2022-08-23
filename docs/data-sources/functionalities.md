@@ -18,6 +18,8 @@ description: |-
 ### Optional
 
 - `name` (String)
+- `opsgenie_id` (String)
+- `pagerduty_id` (String)
 - `slug` (String)
 
 ### Read-Only
