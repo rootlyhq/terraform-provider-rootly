@@ -22,6 +22,18 @@ func dataSourceServices() *schema.Resource{
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"backstage_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"pagerduty_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"opsgenie_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"services": &schema.Schema{
 				Type: schema.TypeList,
 				Computed: true,
