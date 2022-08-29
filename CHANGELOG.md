@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.25] -- 2022-08-29
+
+- Add `rootly_workflow_custom_field_selection` resource.
+
 ## [0.1.24] -- 2022-08-22
 
 - Regenerate docs
