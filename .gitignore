@@ -36,3 +36,7 @@ website/vendor
 
 # Swagger
 swagger.json
+
+node_modules/
+
+terraform-provider-rootly

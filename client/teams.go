@@ -2,16 +2,20 @@ package client
 
 import (
 	"reflect"
+	
 	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
 type Team struct {
-	ID          string `jsonapi:"primary,groups"`
-	Name        string `jsonapi:"attr,name,omitempty"`
-	Description string `jsonapi:"attr,description,omitempty"`
-	Color       string `jsonapi:"attr,color,omitempty"`
+	ID string `jsonapi:"primary,teams"`
+	Name string `jsonapi:"attr,name,omitempty"`
+  Description string `jsonapi:"attr,description,omitempty"`
+  NotifyEmails []interface{} `jsonapi:"attr,notify_emails,omitempty"`
+  Color string `jsonapi:"attr,color,omitempty"`
+  SlackChannels []interface{} `jsonapi:"attr,slack_channels,omitempty"`
+  SlackAliases []interface{} `jsonapi:"attr,slack_aliases,omitempty"`
 }
 
 func (c *Client) ListTeams(params *rootlygo.ListTeamsParams) ([]interface{}, error) {
@@ -25,16 +29,16 @@ func (c *Client) ListTeams(params *rootlygo.ListTeamsParams) ([]interface{}, err
 		return nil, errors.Errorf("Failed to make request: %s", err.Error())
 	}
 
-	items, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Team)))
+	teams, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Team)))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
 
-	return items, nil
+	return teams, nil
 }
 
-func (c *Client) CreateTeam(t *Team) (*Team, error) {
-	buffer, err := MarshalData(t)
+func (c *Client) CreateTeam(d *Team) (*Team, error) {
+	buffer, err := MarshalData(d)
 	if err != nil {
 		return nil, errors.Errorf("Error marshaling team: %s", err.Error())
 	}
@@ -45,7 +49,7 @@ func (c *Client) CreateTeam(t *Team) (*Team, error) {
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to create team: %s", t.ID)
+		return nil, errors.Errorf("Failed to perform request to create team: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Team))
@@ -75,8 +79,8 @@ func (c *Client) GetTeam(id string) (*Team, error) {
 	return data.(*Team), nil
 }
 
-func (c *Client) UpdateTeam(id string, t *Team) (*Team, error) {
-	buffer, err := MarshalData(t)
+func (c *Client) UpdateTeam(id string, team *Team) (*Team, error) {
+	buffer, err := MarshalData(team)
 	if err != nil {
 		return nil, errors.Errorf("Error marshaling team: %s", err.Error())
 	}

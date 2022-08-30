@@ -1,28 +1,18 @@
 const fs = require("fs")
 const path = require('path')
-const swaggerPath = process.argv[2]
-let schema = null
 
-if (!swaggerPath) {
-	console.error("No swagger definition specified. Use `node tools/gen_tasks.js <swagger_file_path>`")
-	process.exit(1)
+module.exports = (swagger) => {
+	const schema = swagger.components.schemas
+	Object.keys(schema).filter((key) => key.match(/_task_params/)).forEach((key) => {
+		const task_name = key.replace("_task_params", "")
+		const task_schema = schema[key]
+		const task_name_camel = task_name.split("_").map((p) => `${p[0].toUpperCase()}${p.slice(1)}`).join('')
+		fs.writeFileSync(`./provider/resource_workflow_task_${task_name}.go`, genResourceFile(task_name, task_schema))
+		//console.log(`generated provider/resource_workflow_task_${task_name}.go`)
+		//fs.writeFileSync(`./provider/resource_workflow_task_${task_name}_test.go`, genResourceTestFile(task_name, task_schema))
+		//console.log(`generated provider/resource_workflow_task_${task_name}_test.go`)
+	})
 }
-
-try {
-	schema = require(path.resolve(swaggerPath)).components.schemas
-} catch (error) {
-	throw new Error(`Error loading Swagger definition: ${error.message}`)
-}
-
-Object.keys(schema).filter((key) => key.match(/_task_params/)).forEach((key) => {
-	const task_name = key.replace("_task_params", "")
-	const task_schema = schema[key]
-	const task_name_camel = task_name.split("_").map((p) => `${p[0].toUpperCase()}${p.slice(1)}`).join('')
-	fs.writeFileSync(`./provider/resource_workflow_task_${task_name}.go`, genResourceFile(task_name, task_schema))
-	console.log(`generated provider/resource_workflow_task_${task_name}.go`)
-	fs.writeFileSync(`./provider/resource_workflow_task_${task_name}_test.go`, genResourceTestFile(task_name, task_schema))
-	console.log(`generated provider/resource_workflow_task_${task_name}_test.go`)
-})
 
 function genResourceFile(task_name, task_schema) {
 	const task_name_camel = task_name.split("_").map((p) => `${p[0].toUpperCase()}${p.slice(1)}`).join('')

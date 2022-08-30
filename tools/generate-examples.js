@@ -4,7 +4,7 @@ const templatesPath = process.argv[2]
 let templates = null
 
 if (!templatesPath) {
-  console.error("No templates JSON specified. Use `node tools/gen_examples.js <templates_file_path>`")
+  console.error("No templates JSON specified. Use `node tools/generate-examples.js <templates_file_path>`")
   process.exit(1)
 }
 

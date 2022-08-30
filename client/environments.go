@@ -2,17 +2,18 @@ package client
 
 import (
 	"reflect"
+	
 	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
 type Environment struct {
-	ID          string `jsonapi:"primary,environments"`
-	Name        string `jsonapi:"attr,name,omitempty"`
-	Slug        string `jsonapi:"attr,slug,omitempty"`
-	Color       string `jsonapi:"attr,color,omitempty"`
-	Description string `jsonapi:"attr,description,omitempty"`
+	ID string `jsonapi:"primary,environments"`
+	Name string `jsonapi:"attr,name,omitempty"`
+  Slug string `jsonapi:"attr,slug,omitempty"`
+  Description string `jsonapi:"attr,description,omitempty"`
+  Color string `jsonapi:"attr,color,omitempty"`
 }
 
 func (c *Client) ListEnvironments(params *rootlygo.ListEnvironmentsParams) ([]interface{}, error) {
@@ -26,16 +27,16 @@ func (c *Client) ListEnvironments(params *rootlygo.ListEnvironmentsParams) ([]in
 		return nil, errors.Errorf("Failed to make request: %s", err.Error())
 	}
 
-	items, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Environment)))
+	environments, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Environment)))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
 
-	return items, nil
+	return environments, nil
 }
 
-func (c *Client) CreateEnvironment(s *Environment) (*Environment, error) {
-	buffer, err := MarshalData(s)
+func (c *Client) CreateEnvironment(d *Environment) (*Environment, error) {
+	buffer, err := MarshalData(d)
 	if err != nil {
 		return nil, errors.Errorf("Error marshaling environment: %s", err.Error())
 	}
@@ -44,10 +45,9 @@ func (c *Client) CreateEnvironment(s *Environment) (*Environment, error) {
 	if err != nil {
 		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}
-
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to create environment: %s", err.Error())
+		return nil, errors.Errorf("Failed to perform request to create environment: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Environment))
@@ -77,8 +77,8 @@ func (c *Client) GetEnvironment(id string) (*Environment, error) {
 	return data.(*Environment), nil
 }
 
-func (c *Client) UpdateEnvironment(id string, s *Environment) (*Environment, error) {
-	buffer, err := MarshalData(s)
+func (c *Client) UpdateEnvironment(id string, environment *Environment) (*Environment, error) {
+	buffer, err := MarshalData(environment)
 	if err != nil {
 		return nil, errors.Errorf("Error marshaling environment: %s", err.Error())
 	}

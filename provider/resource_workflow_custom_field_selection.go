@@ -36,7 +36,7 @@ func resourceWorkflowCustomFieldSelection() *schema.Resource {
 				ForceNew: true,
 			},
 			"incident_condition": {
-				Description: "The trigger condition",
+				Description: "The trigger condition. Can be IS, ANY, CONTAINS, NONE, SET, and UNSET",
 				Type: schema.TypeString,
 				Optional: true,
 				Default: "ANY",
@@ -51,7 +51,7 @@ func resourceWorkflowCustomFieldSelection() *schema.Resource {
 				}, false),
 			},
 			"values": {
-				Description:  "Custom field values to associate with this custom field trigger",
+				Description:  "Custom field values to trigger with text kind custom fields",
 				Type: schema.TypeList,
 				Optional: true,
 				Computed: true,
@@ -60,7 +60,7 @@ func resourceWorkflowCustomFieldSelection() *schema.Resource {
 				},
 			},
 			"selected_option_ids": {
-				Description:  "Custom field options to associate with this custom field trigger",
+				Description:  "Custom field options to trigger with select kind custom fields",
 				Type: schema.TypeList,
 				Optional: true,
 				Computed: true,

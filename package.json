@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "inflect": "^0.5.0"
+  }
+}

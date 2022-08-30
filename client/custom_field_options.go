@@ -9,10 +9,11 @@ import (
 )
 
 type CustomFieldOption struct {
-	ID            string `jsonapi:"primary,custom_field_options"`
-	CustomFieldId int    `jsonapi:"attr,custom_field_id,omitempty"`
-	Value         string `jsonapi:"attr,value,omitempty"`
-	Color         string `jsonapi:"attr,color,omitempty"`
+	ID string `jsonapi:"primary,custom_field_options"`
+	CustomFieldId int `jsonapi:"attr,custom_field_id,omitempty"`
+  Value string `jsonapi:"attr,value,omitempty"`
+  Color string `jsonapi:"attr,color,omitempty"`
+  Position int `jsonapi:"attr,position,omitempty"`
 }
 
 func (c *Client) ListCustomFieldOptions(id string, params *rootlygo.ListCustomFieldOptionsParams) ([]interface{}, error) {
@@ -26,32 +27,32 @@ func (c *Client) ListCustomFieldOptions(id string, params *rootlygo.ListCustomFi
 		return nil, errors.Errorf("Failed to make request: %s", err.Error())
 	}
 
-	items, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(CustomFieldOption)))
+	custom_field_options, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(CustomFieldOption)))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
 
-	return items, nil
+	return custom_field_options, nil
 }
 
-func (c *Client) CreateCustomFieldOption(i *CustomFieldOption) (*CustomFieldOption, error) {
-	buffer, err := MarshalData(i)
+func (c *Client) CreateCustomFieldOption(d *CustomFieldOption) (*CustomFieldOption, error) {
+	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling custom field option: %s", err.Error())
+		return nil, errors.Errorf("Error marshaling custom_field_option: %s", err.Error())
 	}
 
-	req, err := rootlygo.NewCreateCustomFieldOptionRequestWithBody(c.Rootly.Server, strconv.Itoa(i.CustomFieldId), c.ContentType, buffer)
+	req, err := rootlygo.NewCreateCustomFieldOptionRequestWithBody(c.Rootly.Server, strconv.Itoa(d.CustomFieldId), c.ContentType, buffer)
 	if err != nil {
 		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create custom field option: %s", err.Error())
+		return nil, errors.Errorf("Failed to perform request to create custom_field_option: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(CustomFieldOption))
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling custom field option: %s", err.Error())
+		return nil, errors.Errorf("Error unmarshaling custom_field_option: %s", err.Error())
 	}
 
 	return data.(*CustomFieldOption), nil
@@ -65,21 +66,21 @@ func (c *Client) GetCustomFieldOption(id string) (*CustomFieldOption, error) {
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get custom field option: %s", id)
+		return nil, errors.Errorf("Failed to make request to get custom_field_option: %s", id)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(CustomFieldOption))
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling custom field option: %s", err.Error())
+		return nil, errors.Errorf("Error unmarshaling custom_field_option: %s", err.Error())
 	}
 
 	return data.(*CustomFieldOption), nil
 }
 
-func (c *Client) UpdateCustomFieldOption(id string, i *CustomFieldOption) (*CustomFieldOption, error) {
-	buffer, err := MarshalData(i)
+func (c *Client) UpdateCustomFieldOption(id string, custom_field_option *CustomFieldOption) (*CustomFieldOption, error) {
+	buffer, err := MarshalData(custom_field_option)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling custom field option: %s", err.Error())
+		return nil, errors.Errorf("Error marshaling custom_field_option: %s", err.Error())
 	}
 
 	req, err := rootlygo.NewUpdateCustomFieldOptionRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
@@ -88,12 +89,12 @@ func (c *Client) UpdateCustomFieldOption(id string, i *CustomFieldOption) (*Cust
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update custom field option: %s", id)
+		return nil, errors.Errorf("Failed to make request to update custom_field_option: %s", id)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(CustomFieldOption))
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling custom field option: %s", err.Error())
+		return nil, errors.Errorf("Error unmarshaling custom_field_option: %s", err.Error())
 	}
 
 	return data.(*CustomFieldOption), nil
@@ -107,7 +108,7 @@ func (c *Client) DeleteCustomFieldOption(id string) error {
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete custom field option: %s", id)
+		return errors.Errorf("Failed to make request to delete custom_field_option: %s", id)
 	}
 
 	return nil

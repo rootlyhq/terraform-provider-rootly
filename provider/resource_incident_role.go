@@ -7,43 +7,54 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
-	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
-func resourceIncidentRole() *schema.Resource {
+func resourceIncidentRole() *schema.Resource{
 	return &schema.Resource{
-		Description: "Manages Incident Roles (e.g Commander, Ops Lead, Communication).",
-
 		CreateContext: resourceIncidentRoleCreate,
-		ReadContext:   resourceIncidentRoleRead,
+		ReadContext: resourceIncidentRoleRead,
 		UpdateContext: resourceIncidentRoleUpdate,
 		DeleteContext: resourceIncidentRoleDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-
 		Schema: map[string]*schema.Schema{
-			"name": {
+			
+			"name": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
 				Description: "The name of the incident role",
-				Type:        schema.TypeString,
-				Required:    true,
 			},
-			"description": {
-				Description: "The description of the incident role",
-				Type:        schema.TypeString,
-				Optional:    true,
+			
+
+			"slug": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				Description: "The slug of the incident role",
 			},
-			"summary": {
+			
+
+			"summary": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
 				Description: "The summary of the incident role",
-				Type:        schema.TypeString,
-				Optional:    true,
 			},
-			"enabled": {
-				Description: "Whether the incident role is enabled or not",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Computed:    true,
+			
+
+			"description": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				Description: "The description of the incident role",
 			},
+			
 		},
 	}
 }
@@ -51,42 +62,39 @@ func resourceIncidentRole() *schema.Resource {
 func resourceIncidentRoleCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
-	name := d.Get("name").(string)
+	tflog.Trace(ctx, fmt.Sprintf("Creating IncidentRole"))
 
-	tflog.Trace(ctx, fmt.Sprintf("Creating Incident Role: %s", name))
+	s := &client.IncidentRole{}
 
-	s := &client.IncidentRole{
-		Name: name,
+	  if value, ok := d.GetOkExists("name"); ok {
+		s.Name = value.(string)
 	}
-
-	if value, ok := d.GetOk("description"); ok {
-		s.Description = value.(string)
+    if value, ok := d.GetOkExists("slug"); ok {
+		s.Slug = value.(string)
 	}
-
-	if value, ok := d.GetOk("summary"); ok {
+    if value, ok := d.GetOkExists("summary"); ok {
 		s.Summary = value.(string)
 	}
-
-	if v, ok := d.GetOkExists("enabled"); ok {
-		s.Enabled = tools.Bool(v.(bool))
+    if value, ok := d.GetOkExists("description"); ok {
+		s.Description = value.(string)
 	}
 
 	res, err := c.CreateIncidentRole(s)
 	if err != nil {
-		return diag.Errorf("Error creating incident role: %s", err.Error())
+		return diag.Errorf("Error creating incident_role: %s", err.Error())
 	}
 
 	d.SetId(res.ID)
-	tflog.Trace(ctx, fmt.Sprintf("created an incident role resource: %v (%s)", name, d.Id()))
+	tflog.Trace(ctx, fmt.Sprintf("created a incident_role resource: %s", d.Id()))
 
 	return resourceIncidentRoleRead(ctx, d, meta)
 }
 
 func resourceIncidentRoleRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
-	tflog.Trace(ctx, fmt.Sprintf("Reading Incident Role: %s", d.Id()))
+	tflog.Trace(ctx, fmt.Sprintf("Reading IncidentRole: %s", d.Id()))
 
-	res, err := c.GetIncidentRole(d.Id())
+	item, err := c.GetIncidentRole(d.Id())
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -96,43 +104,39 @@ func resourceIncidentRoleRead(ctx context.Context, d *schema.ResourceData, meta 
 			return nil
 		}
 
-		return diag.Errorf("Error reading incident role: %s", d.Id())
+		return diag.Errorf("Error reading incident_role: %s", d.Id())
 	}
 
-	d.Set("name", res.Name)
-	d.Set("description", res.Description)
-	d.Set("summary", res.Summary)
-	d.Set("enabled", res.Enabled)
+	d.Set("name", item.Name)
+  d.Set("slug", item.Slug)
+  d.Set("summary", item.Summary)
+  d.Set("description", item.Description)
 
 	return nil
 }
 
 func resourceIncidentRoleUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
-	tflog.Trace(ctx, fmt.Sprintf("Updating Incident Role: %s", d.Id()))
+	tflog.Trace(ctx, fmt.Sprintf("Updating IncidentRole: %s", d.Id()))
 
-	name := d.Get("name").(string)
+	s := &client.IncidentRole{}
 
-	s := &client.IncidentRole{
-		Name: name,
+	  if d.HasChange("name") {
+		s.Name = d.Get("name").(string)
 	}
-
-	if d.HasChange("description") {
+    if d.HasChange("slug") {
+		s.Slug = d.Get("slug").(string)
+	}
+    if d.HasChange("summary") {
+		s.Summary = d.Get("summary").(string)
+	}
+    if d.HasChange("description") {
 		s.Description = d.Get("description").(string)
 	}
 
-	if d.HasChange("summary") {
-		s.Summary = d.Get("summary").(string)
-	}
-
-	if d.HasChange("enabled") {
-		s.Enabled = tools.Bool(d.Get("enabled").(bool))
-	}
-
-	tflog.Debug(ctx, fmt.Sprintf("adding value: %#v", s))
 	_, err := c.UpdateIncidentRole(d.Id(), s)
 	if err != nil {
-		return diag.Errorf("Error updating incident role: %s", err.Error())
+		return diag.Errorf("Error updating incident_role: %s", err.Error())
 	}
 
 	return resourceIncidentRoleRead(ctx, d, meta)
@@ -140,7 +144,7 @@ func resourceIncidentRoleUpdate(ctx context.Context, d *schema.ResourceData, met
 
 func resourceIncidentRoleDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
-	tflog.Trace(ctx, fmt.Sprintf("Deleting Incident Role: %s", d.Id()))
+	tflog.Trace(ctx, fmt.Sprintf("Deleting IncidentRole: %s", d.Id()))
 
 	err := c.DeleteIncidentRole(d.Id())
 	if err != nil {
@@ -151,7 +155,7 @@ func resourceIncidentRoleDelete(ctx context.Context, d *schema.ResourceData, met
 			d.SetId("")
 			return nil
 		}
-		return diag.Errorf("Error deleting incident role: %s", err.Error())
+		return diag.Errorf("Error deleting incident_role: %s", err.Error())
 	}
 
 	d.SetId("")

@@ -4066,6 +4066,12 @@ type CustomField struct {
 	// The description of the custom_field
 	Description *string `json:"description"`
 
+	// Whether the custom_field is enabled
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// The kind of the custom_field
+	Kind *string `json:"kind,omitempty"`
+
 	// The name of the custom_field
 	Label string `json:"label"`
 
@@ -4096,6 +4102,12 @@ type CustomFieldList struct {
 
 			// The description of the custom_field
 			Description *string `json:"description"`
+
+			// Whether the custom_field is enabled
+			Enabled *bool `json:"enabled,omitempty"`
+
+			// The kind of the custom_field
+			Kind *string `json:"kind,omitempty"`
 
 			// The name of the custom_field
 			Label string `json:"label"`
@@ -4235,6 +4247,12 @@ type CustomFieldResponse struct {
 
 			// The description of the custom_field
 			Description *string `json:"description"`
+
+			// Whether the custom_field is enabled
+			Enabled *bool `json:"enabled,omitempty"`
+
+			// The kind of the custom_field
+			Kind *string `json:"kind,omitempty"`
 
 			// The name of the custom_field
 			Label string `json:"label"`
@@ -6048,10 +6066,10 @@ type NewAlert struct {
 			// Additional data
 			Data *map[string]interface{} `json:"data"`
 
-			// Pulse end datetime
+			// Alert end datetime
 			EndedAt *time.Time `json:"ended_at"`
 
-			// The Environment ID's to attach to the pulse
+			// The Environment ID's to attach to the alert
 			EnvironmentIds *[]string `json:"environment_ids"`
 			Labels         *[]struct {
 				// Key of the tag
@@ -6061,16 +6079,16 @@ type NewAlert struct {
 				Value string `json:"value"`
 			} `json:"labels,omitempty"`
 
-			// The Service ID's to attach to the pulse
+			// The Service ID's to attach to the alert
 			ServiceIds *[]string `json:"service_ids"`
 
 			// The source of the alert (eg: zendesk)
-			Source *string `json:"source,omitempty"`
+			Source string `json:"source"`
 
-			// Pulse start datetime
+			// Alert start datetime
 			StartedAt *time.Time `json:"started_at"`
 
-			// The summary of the pulse
+			// The summary of the alert
 			Summary string `json:"summary"`
 		} `json:"attributes"`
 		Type NewAlertDataType `json:"type"`
@@ -6810,6 +6828,9 @@ type NewWorkflow struct {
 			// Workflow command.
 			Command *string `json:"command"`
 
+			// This will notify you back when the workflow is starting.
+			CommandFeedbackEnabled *bool `json:"command_feedback_enabled"`
+
 			// The description of the workflow
 			Description     *string   `json:"description"`
 			Enabled         *bool     `json:"enabled,omitempty"`
@@ -6859,6 +6880,10 @@ type NewWorkflowCustomFieldSelection struct {
 			// The trigger condition
 			IncidentCondition NewWorkflowCustomFieldSelectionDataAttributesIncidentCondition `json:"incident_condition"`
 			SelectedOptionIds *[]float32                                                     `json:"selected_option_ids,omitempty"`
+			Values            *[]string                                                      `json:"values,omitempty"`
+
+			// The workflow for this selection
+			WorkflowId *string `json:"workflow_id,omitempty"`
 		} `json:"attributes"`
 		Type NewWorkflowCustomFieldSelectionDataType `json:"type"`
 	} `json:"data"`
@@ -7731,6 +7756,9 @@ type RunCommandHerokuTaskParamsTaskType string
 type SendEmailTaskParams struct {
 	// The email body
 	Body *string `json:"body"`
+
+	// URL to your custom email logo
+	CustomLogoUrl *string `json:"custom_logo_url"`
 
 	// The from email address. Need to use SMTP integration if different than rootly.com.
 	From *string `json:"from"`
@@ -9820,6 +9848,7 @@ type UpdateWorkflowCustomFieldSelection struct {
 			// The trigger condition
 			IncidentCondition *UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition `json:"incident_condition,omitempty"`
 			SelectedOptionIds *[]float32                                                         `json:"selected_option_ids,omitempty"`
+			Values            *[]string                                                          `json:"values,omitempty"`
 		} `json:"attributes"`
 		Type UpdateWorkflowCustomFieldSelectionDataType `json:"type"`
 	} `json:"data"`
@@ -10006,6 +10035,10 @@ type WorkflowCustomFieldSelection struct {
 	// The trigger condition
 	IncidentCondition WorkflowCustomFieldSelectionIncidentCondition `json:"incident_condition"`
 	SelectedOptionIds []float32                                     `json:"selected_option_ids"`
+	Values            *[]string                                     `json:"values,omitempty"`
+
+	// The workflow for this selection
+	WorkflowId string `json:"workflow_id"`
 }
 
 // The trigger condition
@@ -10021,6 +10054,10 @@ type WorkflowCustomFieldSelectionList struct {
 			// The trigger condition
 			IncidentCondition WorkflowCustomFieldSelectionListDataAttributesIncidentCondition `json:"incident_condition"`
 			SelectedOptionIds []float32                                                       `json:"selected_option_ids"`
+			Values            *[]string                                                       `json:"values,omitempty"`
+
+			// The workflow for this selection
+			WorkflowId string `json:"workflow_id"`
 		} `json:"attributes"`
 
 		// Unique ID of the workflow_custom_field_selection
@@ -10052,6 +10089,10 @@ type WorkflowCustomFieldSelectionResponse struct {
 			// The trigger condition
 			IncidentCondition WorkflowCustomFieldSelectionResponseDataAttributesIncidentCondition `json:"incident_condition"`
 			SelectedOptionIds []float32                                                           `json:"selected_option_ids"`
+			Values            *[]string                                                           `json:"values,omitempty"`
+
+			// The workflow for this selection
+			WorkflowId string `json:"workflow_id"`
 		} `json:"attributes"`
 
 		// Unique ID of the workflow_custom_field_selection

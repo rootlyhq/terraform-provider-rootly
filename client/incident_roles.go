@@ -2,17 +2,18 @@ package client
 
 import (
 	"reflect"
+	
 	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
 type IncidentRole struct {
-	ID          string `jsonapi:"primary,incident_roles"`
-	Name        string `jsonapi:"attr,name,omitempty"`
-	Summary     string `jsonapi:"attr,summary,omitempty"`
-	Description string `jsonapi:"attr,description,omitempty"`
-	Enabled     *bool  `jsonapi:"attr,enabled,omitempty"`
+	ID string `jsonapi:"primary,incident_roles"`
+	Name string `jsonapi:"attr,name,omitempty"`
+  Slug string `jsonapi:"attr,slug,omitempty"`
+  Summary string `jsonapi:"attr,summary,omitempty"`
+  Description string `jsonapi:"attr,description,omitempty"`
 }
 
 func (c *Client) ListIncidentRoles(params *rootlygo.ListIncidentRolesParams) ([]interface{}, error) {
@@ -26,18 +27,18 @@ func (c *Client) ListIncidentRoles(params *rootlygo.ListIncidentRolesParams) ([]
 		return nil, errors.Errorf("Failed to make request: %s", err.Error())
 	}
 
-	items, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(IncidentRole)))
+	incident_roles, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(IncidentRole)))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
 
-	return items, nil
+	return incident_roles, nil
 }
 
-func (c *Client) CreateIncidentRole(i *IncidentRole) (*IncidentRole, error) {
-	buffer, err := MarshalData(i)
+func (c *Client) CreateIncidentRole(d *IncidentRole) (*IncidentRole, error) {
+	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling incident role: %s", err.Error())
+		return nil, errors.Errorf("Error marshaling incident_role: %s", err.Error())
 	}
 
 	req, err := rootlygo.NewCreateIncidentRoleRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
@@ -46,12 +47,12 @@ func (c *Client) CreateIncidentRole(i *IncidentRole) (*IncidentRole, error) {
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create incident role: %s", err.Error())
+		return nil, errors.Errorf("Failed to perform request to create incident_role: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentRole))
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling incident role: %s", err.Error())
+		return nil, errors.Errorf("Error unmarshaling incident_role: %s", err.Error())
 	}
 
 	return data.(*IncidentRole), nil
@@ -65,21 +66,21 @@ func (c *Client) GetIncidentRole(id string) (*IncidentRole, error) {
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get incident role: %s", id)
+		return nil, errors.Errorf("Failed to make request to get incident_role: %s", id)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentRole))
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling incident role: %s", err.Error())
+		return nil, errors.Errorf("Error unmarshaling incident_role: %s", err.Error())
 	}
 
 	return data.(*IncidentRole), nil
 }
 
-func (c *Client) UpdateIncidentRole(id string, i *IncidentRole) (*IncidentRole, error) {
-	buffer, err := MarshalData(i)
+func (c *Client) UpdateIncidentRole(id string, incident_role *IncidentRole) (*IncidentRole, error) {
+	buffer, err := MarshalData(incident_role)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling incident role: %s", err.Error())
+		return nil, errors.Errorf("Error marshaling incident_role: %s", err.Error())
 	}
 
 	req, err := rootlygo.NewUpdateIncidentRoleRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
@@ -88,12 +89,12 @@ func (c *Client) UpdateIncidentRole(id string, i *IncidentRole) (*IncidentRole, 
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update incident role: %s", id)
+		return nil, errors.Errorf("Failed to make request to update incident_role: %s", id)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentRole))
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling incident role: %s", err.Error())
+		return nil, errors.Errorf("Error unmarshaling incident_role: %s", err.Error())
 	}
 
 	return data.(*IncidentRole), nil
@@ -107,7 +108,7 @@ func (c *Client) DeleteIncidentRole(id string) error {
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete incident role: %s", id)
+		return errors.Errorf("Failed to make request to delete incident_role: %s", id)
 	}
 
 	return nil

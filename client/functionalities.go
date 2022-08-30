@@ -2,17 +2,25 @@ package client
 
 import (
 	"reflect"
+	
 	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
 type Functionality struct {
-	ID          string `jsonapi:"primary,functionalities"`
-	Name        string `jsonapi:"attr,name,omitempty"`
-	Description string `jsonapi:"attr,description,omitempty"`
-	Slug        string `jsonapi:"attr,slug,omitempty"`
-	Color       string `jsonapi:"attr,color,omitempty"`
+	ID string `jsonapi:"primary,functionalities"`
+	Name string `jsonapi:"attr,name,omitempty"`
+  Slug string `jsonapi:"attr,slug,omitempty"`
+  Description string `jsonapi:"attr,description,omitempty"`
+  PublicDescription string `jsonapi:"attr,public_description,omitempty"`
+  NotifyEmails []interface{} `jsonapi:"attr,notify_emails,omitempty"`
+  Color string `jsonapi:"attr,color,omitempty"`
+  EnvironmentIds []interface{} `jsonapi:"attr,environment_ids,omitempty"`
+  ServiceIds []interface{} `jsonapi:"attr,service_ids,omitempty"`
+  OwnersGroupIds []interface{} `jsonapi:"attr,owners_group_ids,omitempty"`
+  SlackChannels []interface{} `jsonapi:"attr,slack_channels,omitempty"`
+  SlackAliases []interface{} `jsonapi:"attr,slack_aliases,omitempty"`
 }
 
 func (c *Client) ListFunctionalities(params *rootlygo.ListFunctionalitiesParams) ([]interface{}, error) {
@@ -26,16 +34,16 @@ func (c *Client) ListFunctionalities(params *rootlygo.ListFunctionalitiesParams)
 		return nil, errors.Errorf("Failed to make request: %s", err.Error())
 	}
 
-	items, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Functionality)))
+	functionalities, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Functionality)))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
 
-	return items, nil
+	return functionalities, nil
 }
 
-func (c *Client) CreateFunctionality(f *Functionality) (*Functionality, error) {
-	buffer, err := MarshalData(f)
+func (c *Client) CreateFunctionality(d *Functionality) (*Functionality, error) {
+	buffer, err := MarshalData(d)
 	if err != nil {
 		return nil, errors.Errorf("Error marshaling functionality: %s", err.Error())
 	}
@@ -76,8 +84,8 @@ func (c *Client) GetFunctionality(id string) (*Functionality, error) {
 	return data.(*Functionality), nil
 }
 
-func (c *Client) UpdateFunctionality(id string, f *Functionality) (*Functionality, error) {
-	buffer, err := MarshalData(f)
+func (c *Client) UpdateFunctionality(id string, functionality *Functionality) (*Functionality, error) {
+	buffer, err := MarshalData(functionality)
 	if err != nil {
 		return nil, errors.Errorf("Error marshaling functionality: %s", err.Error())
 	}

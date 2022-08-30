@@ -6,58 +6,64 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
 )
 
-func resourceSeverity() *schema.Resource {
+func resourceSeverity() *schema.Resource{
 	return &schema.Resource{
-		Description: "Manages Severities (e.g SEV0, SEV1, SEV2, SEV3).",
-
 		CreateContext: resourceSeverityCreate,
-		ReadContext:   resourceSeverityRead,
+		ReadContext: resourceSeverityRead,
 		UpdateContext: resourceSeverityUpdate,
 		DeleteContext: resourceSeverityDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-
 		Schema: map[string]*schema.Schema{
-			"name": {
+			
+			"name": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
 				Description: "The name of the severity",
-				Type:        schema.TypeString,
-				Required:    true,
 			},
-			"description": {
-				Description: "The description of the severity",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"color": {
-				Description:  "The color of the severity",
-				Type:         schema.TypeString,
-				Optional:     true,
-				Default:      "#047BF8", // Default value from the API
-				ValidateFunc: validCSSHexColor(),
-			},
-			"slug": {
+			
+
+			"slug": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
 				Description: "The slug of the severity",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
 			},
-			"severity": {
+			
+
+			"description": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
 				Description: "The description of the severity",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "medium",
-				ValidateFunc: validation.StringInSlice([]string{
-					"critical",
-					"high",
-					"medium",
-					"low",
-				}, false),
 			},
+			
+
+			"severity": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				Description: "The severity of the severity",
+			},
+			
+
+			"color": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				Description: "",
+			},
+			
 		},
 	}
 }
@@ -65,26 +71,24 @@ func resourceSeverity() *schema.Resource {
 func resourceSeverityCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
-	name := d.Get("name").(string)
-	severity := d.Get("severity").(string)
+	tflog.Trace(ctx, fmt.Sprintf("Creating Severity"))
 
-	tflog.Trace(ctx, fmt.Sprintf("Creating Severity: %s", name))
+	s := &client.Severity{}
 
-	s := &client.Severity{
-		Name:     name,
-		Severity: severity,
+	  if value, ok := d.GetOkExists("name"); ok {
+		s.Name = value.(string)
 	}
-
-	if value, ok := d.GetOk("description"); ok {
+    if value, ok := d.GetOkExists("slug"); ok {
+		s.Slug = value.(string)
+	}
+    if value, ok := d.GetOkExists("description"); ok {
 		s.Description = value.(string)
 	}
-
-	if value, ok := d.GetOk("color"); ok {
-		s.Color = value.(string)
-	}
-
-	if value, ok := d.GetOk("severity"); ok {
+    if value, ok := d.GetOkExists("severity"); ok {
 		s.Severity = value.(string)
+	}
+    if value, ok := d.GetOkExists("color"); ok {
+		s.Color = value.(string)
 	}
 
 	res, err := c.CreateSeverity(s)
@@ -93,7 +97,7 @@ func resourceSeverityCreate(ctx context.Context, d *schema.ResourceData, meta in
 	}
 
 	d.SetId(res.ID)
-	tflog.Trace(ctx, fmt.Sprintf("created a severity resource: %v (%s)", name, d.Id()))
+	tflog.Trace(ctx, fmt.Sprintf("created a severity resource: %s", d.Id()))
 
 	return resourceSeverityRead(ctx, d, meta)
 }
@@ -102,7 +106,7 @@ func resourceSeverityRead(ctx context.Context, d *schema.ResourceData, meta inte
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading Severity: %s", d.Id()))
 
-	severity, err := c.GetSeverity(d.Id())
+	item, err := c.GetSeverity(d.Id())
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -115,11 +119,11 @@ func resourceSeverityRead(ctx context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("Error reading severity: %s", d.Id())
 	}
 
-	d.Set("name", severity.Name)
-	d.Set("description", severity.Description)
-	d.Set("color", severity.Color)
-	d.Set("slug", severity.Slug)
-	d.Set("severity", severity.Severity)
+	d.Set("name", item.Name)
+  d.Set("slug", item.Slug)
+  d.Set("description", item.Description)
+  d.Set("severity", item.Severity)
+  d.Set("color", item.Color)
 
 	return nil
 }
@@ -128,24 +132,22 @@ func resourceSeverityUpdate(ctx context.Context, d *schema.ResourceData, meta in
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating Severity: %s", d.Id()))
 
-	name := d.Get("name").(string)
-	severity := d.Get("severity").(string)
+	s := &client.Severity{}
 
-	s := &client.Severity{
-		Name:     name,
-		Severity: severity,
+	  if d.HasChange("name") {
+		s.Name = d.Get("name").(string)
 	}
-
-	if d.HasChange("description") {
+    if d.HasChange("slug") {
+		s.Slug = d.Get("slug").(string)
+	}
+    if d.HasChange("description") {
 		s.Description = d.Get("description").(string)
 	}
-
-	if d.HasChange("color") {
-		s.Color = d.Get("color").(string)
-	}
-
-	if d.HasChange("severity") {
+    if d.HasChange("severity") {
 		s.Severity = d.Get("severity").(string)
+	}
+    if d.HasChange("color") {
+		s.Color = d.Get("color").(string)
 	}
 
 	_, err := c.UpdateSeverity(d.Id(), s)

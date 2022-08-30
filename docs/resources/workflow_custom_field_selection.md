@@ -19,9 +19,9 @@ Manages workflow custom field selections (triggers).
 
 ### Optional
 
-- `incident_condition` (String) The trigger condition
-- `selected_option_ids` (List of Number) Custom field options to associate with this custom field trigger
-- `values` (List of String) Custom field values to associate with this custom field trigger
+- `incident_condition` (String) The trigger condition. Can be IS, ANY, CONTAINS, NONE, SET, and UNSET
+- `selected_option_ids` (List of Number) Custom field options to trigger with select kind custom fields
+- `values` (List of String) Custom field values to trigger with text kind custom fields
 
 ### Read-Only
 

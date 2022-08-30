@@ -2,21 +2,19 @@ package client
 
 import (
 	"reflect"
-	"github.com/google/jsonapi"
+	
 	"github.com/pkg/errors"
+	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
 type Severity struct {
-	ID          string `jsonapi:"primary,severities"`
-	Name        string `jsonapi:"attr,name,omitempty"`
-	Slug        string `jsonapi:"attr,slug,omitempty"`
-	Color       string `jsonapi:"attr,color,omitempty"`
-	Description string `jsonapi:"attr,description,omitempty"`
-	Severity    string `jsonapi:"attr,severity,omitempty"`
-	//NotifyEmails  *[]string `json:"notify_emails,omitempty"`
-	//SlackChannels *[]string `json:"slack_channels,omitempty"`
-	//SlackAliases  *[]string `json:"slack_aliases,omitempty"`
+	ID string `jsonapi:"primary,severities"`
+	Name string `jsonapi:"attr,name,omitempty"`
+  Slug string `jsonapi:"attr,slug,omitempty"`
+  Description string `jsonapi:"attr,description,omitempty"`
+  Severity string `jsonapi:"attr,severity,omitempty"`
+  Color string `jsonapi:"attr,color,omitempty"`
 }
 
 func (c *Client) ListSeverities(params *rootlygo.ListSeveritiesParams) ([]interface{}, error) {
@@ -30,16 +28,16 @@ func (c *Client) ListSeverities(params *rootlygo.ListSeveritiesParams) ([]interf
 		return nil, errors.Errorf("Failed to make request: %s", err.Error())
 	}
 
-	items, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Severity)))
+	severities, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Severity)))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
 
-	return items, nil
+	return severities, nil
 }
 
-func (c *Client) CreateSeverity(s *Severity) (*Severity, error) {
-	buffer, err := MarshalData(s)
+func (c *Client) CreateSeverity(d *Severity) (*Severity, error) {
+	buffer, err := MarshalData(d)
 	if err != nil {
 		return nil, errors.Errorf("Error marshaling severity: %s", err.Error())
 	}
@@ -48,10 +46,9 @@ func (c *Client) CreateSeverity(s *Severity) (*Severity, error) {
 	if err != nil {
 		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}
-
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to create severity: %s", err.Error())
+		return nil, errors.Errorf("Failed to perform request to create severity: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Severity))
@@ -81,8 +78,8 @@ func (c *Client) GetSeverity(id string) (*Severity, error) {
 	return data.(*Severity), nil
 }
 
-func (c *Client) UpdateSeverity(id string, s *Severity) (*Severity, error) {
-	buffer, err := MarshalData(s)
+func (c *Client) UpdateSeverity(id string, severity *Severity) (*Severity, error) {
+	buffer, err := MarshalData(severity)
 	if err != nil {
 		return nil, errors.Errorf("Error marshaling severity: %s", err.Error())
 	}

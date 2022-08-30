@@ -2,16 +2,17 @@ package client
 
 import (
 	"reflect"
+	
 	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
 type Cause struct {
-	ID          string `jsonapi:"primary,causes"`
-	Slug        string `jsonapi:"attr,slug,omitempty"`
-	Name        string `jsonapi:"attr,name,omitempty"`
-	Description string `jsonapi:"attr,description,omitempty"`
+	ID string `jsonapi:"primary,causes"`
+	Name string `jsonapi:"attr,name,omitempty"`
+  Slug string `jsonapi:"attr,slug,omitempty"`
+  Description string `jsonapi:"attr,description,omitempty"`
 }
 
 func (c *Client) ListCauses(params *rootlygo.ListCausesParams) ([]interface{}, error) {
@@ -33,8 +34,8 @@ func (c *Client) ListCauses(params *rootlygo.ListCausesParams) ([]interface{}, e
 	return causes, nil
 }
 
-func (c *Client) CreateCause(cause *Cause) (*Cause, error) {
-	buffer, err := MarshalData(cause)
+func (c *Client) CreateCause(d *Cause) (*Cause, error) {
+	buffer, err := MarshalData(d)
 	if err != nil {
 		return nil, errors.Errorf("Error marshaling cause: %s", err.Error())
 	}

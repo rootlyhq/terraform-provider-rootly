@@ -10,18 +10,19 @@ OS_ARCH=darwin_amd64
 default: testacc
 
 # Run acceptance tests
-.PHONY: testacc schema build release install test docs
-build:
+.PHONY: testacc generate build release install test docs
+build: generate
 	go build -o ${BINARY}
 
-docs:
+docs: build
 	go get github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
 	go run github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
 	cp docs/index.md README.md
+	rm ./docs/data-sources/*s.md
 	find ./docs/resources/workflow_task_*.md -type f -print0 | xargs -0 sed -i '' 's/subcategory:$$/subcategory: Workflow Tasks/g'
 	find ./docs/resources/workflow_*.md -type f -print0 | xargs -0 sed -i '' 's/subcategory:$$/subcategory: Workflows/g'
 
-release:
+release: docs
 	goreleaser release --rm-dist --snapshot --skip-publish  --skip-sign
 
 install: build
@@ -45,7 +46,8 @@ test:
 testacc:
 	TF_ACC=1 go test $(TEST) -v $(TESTARGS) -timeout 120m
 
-schema:
-	cd schema && curl $(SWAGGER_URL) -o swagger.json
+generate:
+	curl $(SWAGGER_URL) -o schema/swagger.json
 	cd schema && oapi-codegen --config=oapi-config.yml swagger.json
-	cd schema && rm swagger.json
+	node tools/generate.js schema/swagger.json
+	rm schema/swagger.json

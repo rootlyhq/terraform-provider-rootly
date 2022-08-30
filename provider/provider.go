@@ -19,7 +19,7 @@ func init() {
 	// schema.SchemaDescriptionBuilder = func(s *schema.Schema) string {
 	// 	desc := s.Description
 	// 	if s.Default != nil {
-	// 		desc += fmt.Sprintf(" Defaults to `%v`.", s.Default)
+	// 		desc += fmt.Sprintf(" Defaults to %v.", s.Default)
 	// 	}
 	// 	return strings.TrimSpace(desc)
 	// }
@@ -44,6 +44,18 @@ func New(version string) func() *schema.Provider {
 				},
 			},
 			DataSourcesMap: map[string]*schema.Resource{
+				"rootly_environment": dataSourceEnvironment(),
+				"rootly_functionality": dataSourceFunctionality(),
+				"rootly_service": dataSourceService(),
+				"rootly_cause": dataSourceCause(),
+				"rootly_severity": dataSourceSeverity(),
+				"rootly_status_page": dataSourceStatusPage(),
+				"rootly_incident_role": dataSourceIncidentRole(),
+				"rootly_team": dataSourceTeam(),
+				"rootly_incident_type": dataSourceIncidentType(),
+				"rootly_custom_field": dataSourceCustomField(),
+				"rootly_custom_field_option": dataSourceCustomFieldOption(),
+				"rootly_workflow_group": dataSourceWorkflowGroup(),
 				"rootly_causes": dataSourceCauses(),
 				"rootly_custom_fields": dataSourceCustomFields(),
 				"rootly_custom_field_options": dataSourceCustomFieldOptions(),
@@ -56,19 +68,20 @@ func New(version string) func() *schema.Provider {
 				"rootly_services": dataSourceServices(),
 			},
 			ResourcesMap: map[string]*schema.Resource{
-				"rootly_cause": resourceCause(),
-				"rootly_custom_field": resourceCustomField(),
-				"rootly_custom_field_option": resourceCustomFieldOption(),
-				"rootly_dashboard": resourceDashboard(),
-				"rootly_dashboard_panel": resourceDashboardPanel(),
 				"rootly_environment": resourceEnvironment(),
 				"rootly_functionality": resourceFunctionality(),
-				"rootly_incident_role": resourceIncidentRole(),
-				"rootly_incident_type": resourceIncidentType(),
 				"rootly_service": resourceService(),
+				"rootly_cause": resourceCause(),
 				"rootly_severity": resourceSeverity(),
+				"rootly_status_page": resourceStatusPage(),
+				"rootly_incident_role": resourceIncidentRole(),
 				"rootly_team": resourceTeam(),
+				"rootly_incident_type": resourceIncidentType(),
+				"rootly_custom_field": resourceCustomField(),
+				"rootly_custom_field_option": resourceCustomFieldOption(),
 				"rootly_workflow_group": resourceWorkflowGroup(),
+				"rootly_dashboard": resourceDashboard(),
+				"rootly_dashboard_panel": resourceDashboardPanel(),
 				"rootly_workflow_incident": resourceWorkflowIncident(),
 				"rootly_workflow_action_item": resourceWorkflowActionItem(),
 				"rootly_workflow_alert": resourceWorkflowAlert(),

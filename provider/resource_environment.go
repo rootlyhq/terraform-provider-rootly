@@ -9,42 +9,52 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/client"
 )
 
-func resourceEnvironment() *schema.Resource {
+func resourceEnvironment() *schema.Resource{
 	return &schema.Resource{
-		Description: "Manages incident environments (e.g production, development).",
-
 		CreateContext: resourceEnvironmentCreate,
-		ReadContext:   resourceEnvironmentRead,
+		ReadContext: resourceEnvironmentRead,
 		UpdateContext: resourceEnvironmentUpdate,
 		DeleteContext: resourceEnvironmentDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-
 		Schema: map[string]*schema.Schema{
-			"name": {
+			
+			"name": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
 				Description: "The name of the environment",
-				Type:        schema.TypeString,
-				Required:    true,
 			},
-			"description": {
-				Description: "The description of the environment",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"color": {
-				Description:  "The color of the environment",
-				Type:         schema.TypeString,
-				Optional:     true,
-				Default:      "#047BF8", // Default value from the API
-				ValidateFunc: validCSSHexColor(),
-			},
-			"slug": {
+			
+
+			"slug": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
 				Description: "The slug of the environment",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
 			},
+			
+
+			"description": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				Description: "The description of the environment",
+			},
+			
+
+			"color": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				Description: "",
+			},
+			
 		},
 	}
 }
@@ -52,19 +62,20 @@ func resourceEnvironment() *schema.Resource {
 func resourceEnvironmentCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
-	name := d.Get("name").(string)
+	tflog.Trace(ctx, fmt.Sprintf("Creating Environment"))
 
-	tflog.Trace(ctx, fmt.Sprintf("Creating Environment: %s", name))
+	s := &client.Environment{}
 
-	s := &client.Environment{
-		Name: name,
+	  if value, ok := d.GetOkExists("name"); ok {
+		s.Name = value.(string)
 	}
-
-	if value, ok := d.GetOk("description"); ok {
+    if value, ok := d.GetOkExists("slug"); ok {
+		s.Slug = value.(string)
+	}
+    if value, ok := d.GetOkExists("description"); ok {
 		s.Description = value.(string)
 	}
-
-	if value, ok := d.GetOk("color"); ok {
+    if value, ok := d.GetOkExists("color"); ok {
 		s.Color = value.(string)
 	}
 
@@ -74,7 +85,7 @@ func resourceEnvironmentCreate(ctx context.Context, d *schema.ResourceData, meta
 	}
 
 	d.SetId(res.ID)
-	tflog.Trace(ctx, fmt.Sprintf("created a environment resource: %v (%s)", name, d.Id()))
+	tflog.Trace(ctx, fmt.Sprintf("created a environment resource: %s", d.Id()))
 
 	return resourceEnvironmentRead(ctx, d, meta)
 }
@@ -83,7 +94,7 @@ func resourceEnvironmentRead(ctx context.Context, d *schema.ResourceData, meta i
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading Environment: %s", d.Id()))
 
-	environment, err := c.GetEnvironment(d.Id())
+	item, err := c.GetEnvironment(d.Id())
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -96,10 +107,10 @@ func resourceEnvironmentRead(ctx context.Context, d *schema.ResourceData, meta i
 		return diag.Errorf("Error reading environment: %s", d.Id())
 	}
 
-	d.Set("name", environment.Name)
-	d.Set("description", environment.Description)
-	d.Set("color", environment.Color)
-	d.Set("slug", environment.Slug)
+	d.Set("name", item.Name)
+  d.Set("slug", item.Slug)
+  d.Set("description", item.Description)
+  d.Set("color", item.Color)
 
 	return nil
 }
@@ -108,17 +119,18 @@ func resourceEnvironmentUpdate(ctx context.Context, d *schema.ResourceData, meta
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating Environment: %s", d.Id()))
 
-	name := d.Get("name").(string)
+	s := &client.Environment{}
 
-	s := &client.Environment{
-		Name: name,
+	  if d.HasChange("name") {
+		s.Name = d.Get("name").(string)
 	}
-
-	if d.HasChange("description") {
+    if d.HasChange("slug") {
+		s.Slug = d.Get("slug").(string)
+	}
+    if d.HasChange("description") {
 		s.Description = d.Get("description").(string)
 	}
-
-	if d.HasChange("color") {
+    if d.HasChange("color") {
 		s.Color = d.Get("color").(string)
 	}
 

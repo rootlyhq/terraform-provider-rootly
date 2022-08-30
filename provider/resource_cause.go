@@ -9,29 +9,43 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/client"
 )
 
-func resourceCause() *schema.Resource {
+func resourceCause() *schema.Resource{
 	return &schema.Resource{
-		Description: "Manages incident causes (e.g Bug, Load, Human Error, 3rd party Outage, Configuration Change).",
-
 		CreateContext: resourceCauseCreate,
-		ReadContext:   resourceCauseRead,
+		ReadContext: resourceCauseRead,
 		UpdateContext: resourceCauseUpdate,
 		DeleteContext: resourceCauseDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-
 		Schema: map[string]*schema.Schema{
-			"name": {
+			
+			"name": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
 				Description: "The name of the cause",
-				Type:        schema.TypeString,
-				Required:    true,
 			},
-			"description": {
+			
+
+			"slug": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				Description: "The slug of the cause",
+			},
+			
+
+			"description": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
 				Description: "The description of the cause",
-				Type:        schema.TypeString,
-				Optional:    true,
 			},
+			
 		},
 	}
 }
@@ -39,15 +53,17 @@ func resourceCause() *schema.Resource {
 func resourceCauseCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
-	name := d.Get("name").(string)
+	tflog.Trace(ctx, fmt.Sprintf("Creating Cause"))
 
-	tflog.Trace(ctx, fmt.Sprintf("Creating Cause: %s", name))
+	s := &client.Cause{}
 
-	s := &client.Cause{
-		Name: name,
+	  if value, ok := d.GetOkExists("name"); ok {
+		s.Name = value.(string)
 	}
-
-	if value, ok := d.GetOk("description"); ok {
+    if value, ok := d.GetOkExists("slug"); ok {
+		s.Slug = value.(string)
+	}
+    if value, ok := d.GetOkExists("description"); ok {
 		s.Description = value.(string)
 	}
 
@@ -57,7 +73,7 @@ func resourceCauseCreate(ctx context.Context, d *schema.ResourceData, meta inter
 	}
 
 	d.SetId(res.ID)
-	tflog.Trace(ctx, fmt.Sprintf("created a cause resource: %v (%s)", name, d.Id()))
+	tflog.Trace(ctx, fmt.Sprintf("created a cause resource: %s", d.Id()))
 
 	return resourceCauseRead(ctx, d, meta)
 }
@@ -66,7 +82,7 @@ func resourceCauseRead(ctx context.Context, d *schema.ResourceData, meta interfa
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading Cause: %s", d.Id()))
 
-	cause, err := c.GetCause(d.Id())
+	item, err := c.GetCause(d.Id())
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -79,8 +95,9 @@ func resourceCauseRead(ctx context.Context, d *schema.ResourceData, meta interfa
 		return diag.Errorf("Error reading cause: %s", d.Id())
 	}
 
-	d.Set("name", cause.Name)
-	d.Set("description", cause.Description)
+	d.Set("name", item.Name)
+  d.Set("slug", item.Slug)
+  d.Set("description", item.Description)
 
 	return nil
 }
@@ -89,13 +106,15 @@ func resourceCauseUpdate(ctx context.Context, d *schema.ResourceData, meta inter
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating Cause: %s", d.Id()))
 
-	name := d.Get("name").(string)
+	s := &client.Cause{}
 
-	s := &client.Cause{
-		Name: name,
+	  if d.HasChange("name") {
+		s.Name = d.Get("name").(string)
 	}
-
-	if d.HasChange("description") {
+    if d.HasChange("slug") {
+		s.Slug = d.Get("slug").(string)
+	}
+    if d.HasChange("description") {
 		s.Description = d.Get("description").(string)
 	}
 

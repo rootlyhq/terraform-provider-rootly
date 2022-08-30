@@ -2,19 +2,22 @@ package client
 
 import (
 	"reflect"
+	
 	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
 type CustomField struct {
-	ID          string `jsonapi:"primary,custom_fields"`
-	Label       string `jsonapi:"attr,label,omitempty"`
-	Kind        string `jsonapi:"attr,kind,omitempty"`
-	Description string `jsonapi:"attr,description,omitempty"`
-	Enabled     *bool  `jsonapi:"attr,enabled,omitempty"`
-	Shown       []interface{} `jsonapi:"attr,shown,omitempty"`
-	Required    []interface{} `jsonapi:"attr,required,omitempty"`
+	ID string `jsonapi:"primary,custom_fields"`
+	Label string `jsonapi:"attr,label,omitempty"`
+  Kind string `jsonapi:"attr,kind,omitempty"`
+  Enabled bool `jsonapi:"attr,enabled,omitempty"`
+  Slug string `jsonapi:"attr,slug,omitempty"`
+  Description string `jsonapi:"attr,description,omitempty"`
+  Shown []interface{} `jsonapi:"attr,shown,omitempty"`
+  Required []interface{} `jsonapi:"attr,required,omitempty"`
+  Position int `jsonapi:"attr,position,omitempty"`
 }
 
 func (c *Client) ListCustomFields(params *rootlygo.ListCustomFieldsParams) ([]interface{}, error) {
@@ -28,18 +31,18 @@ func (c *Client) ListCustomFields(params *rootlygo.ListCustomFieldsParams) ([]in
 		return nil, errors.Errorf("Failed to make request: %s", err.Error())
 	}
 
-	items, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(CustomField)))
+	custom_fields, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(CustomField)))
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
 
-	return items, nil
+	return custom_fields, nil
 }
 
-func (c *Client) CreateCustomField(i *CustomField) (*CustomField, error) {
-	buffer, err := MarshalData(i)
+func (c *Client) CreateCustomField(d *CustomField) (*CustomField, error) {
+	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling custom field: %s", err.Error())
+		return nil, errors.Errorf("Error marshaling custom_field: %s", err.Error())
 	}
 
 	req, err := rootlygo.NewCreateCustomFieldRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
@@ -48,12 +51,12 @@ func (c *Client) CreateCustomField(i *CustomField) (*CustomField, error) {
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create custom field: %s", err.Error())
+		return nil, errors.Errorf("Failed to perform request to create custom_field: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(CustomField))
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling custom field: %s", err.Error())
+		return nil, errors.Errorf("Error unmarshaling custom_field: %s", err.Error())
 	}
 
 	return data.(*CustomField), nil
@@ -67,21 +70,21 @@ func (c *Client) GetCustomField(id string) (*CustomField, error) {
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get custom field: %s", id)
+		return nil, errors.Errorf("Failed to make request to get custom_field: %s", id)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(CustomField))
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling custom field: %s", err.Error())
+		return nil, errors.Errorf("Error unmarshaling custom_field: %s", err.Error())
 	}
 
 	return data.(*CustomField), nil
 }
 
-func (c *Client) UpdateCustomField(id string, i *CustomField) (*CustomField, error) {
-	buffer, err := MarshalData(i)
+func (c *Client) UpdateCustomField(id string, custom_field *CustomField) (*CustomField, error) {
+	buffer, err := MarshalData(custom_field)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling custom field: %s", err.Error())
+		return nil, errors.Errorf("Error marshaling custom_field: %s", err.Error())
 	}
 
 	req, err := rootlygo.NewUpdateCustomFieldRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
@@ -90,12 +93,12 @@ func (c *Client) UpdateCustomField(id string, i *CustomField) (*CustomField, err
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update custom field: %s", id)
+		return nil, errors.Errorf("Failed to make request to update custom_field: %s", id)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(CustomField))
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling custom field: %s", err.Error())
+		return nil, errors.Errorf("Error unmarshaling custom_field: %s", err.Error())
 	}
 
 	return data.(*CustomField), nil
@@ -109,7 +112,7 @@ func (c *Client) DeleteCustomField(id string) error {
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete custom field: %s", id)
+		return errors.Errorf("Failed to make request to delete custom_field: %s", id)
 	}
 
 	return nil

@@ -28,7 +28,7 @@ func TestAccResourceFunctionality(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_functionality.foo", "name", "myfunctionality2"),
 					resource.TestCheckResourceAttr("rootly_functionality.foo", "description", "my functionality description"),
 					resource.TestCheckResourceAttrSet("rootly_functionality.foo", "slug"),
-					resource.TestCheckResourceAttr("rootly_functionality.foo", "color", "#203"),
+					resource.TestCheckResourceAttr("rootly_functionality.foo", "color", "#203203"),
 				),
 			},
 		},
@@ -38,6 +38,7 @@ func TestAccResourceFunctionality(t *testing.T) {
 const testAccResourceFunctionality = `
 resource "rootly_functionality" "foo" {
   name = "myfunctionality"
+	color = "#047BF8"
 }
 `
 
@@ -45,6 +46,6 @@ const testAccResourceFunctionalityUpdate = `
 resource "rootly_functionality" "foo" {
   name        = "myfunctionality2"
   description = "my functionality description"
-  color       = "#203"
+  color       = "#203203"
 }
 `
