@@ -18,6 +18,7 @@ description: |-
 ### Optional
 
 - `allow_search_engine_index` (Boolean)
+- `created_at` (String)
 - `description` (String)
 - `enabled` (Boolean)
 - `footer_color` (String)
@@ -25,12 +26,11 @@ description: |-
 - `public` (Boolean)
 - `show_uptime` (Boolean)
 - `show_uptime_last_days` (Map of String)
+- `title` (String)
+- `updated_at` (String)
 
 ### Read-Only
 
-- `created_at` (String)
 - `id` (String) The ID of this resource.
-- `title` (String)
-- `updated_at` (String)
 
 

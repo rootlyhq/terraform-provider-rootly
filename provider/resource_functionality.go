@@ -22,9 +22,10 @@ func resourceFunctionality() *schema.Resource{
 			
 			"name": &schema.Schema{
 				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The name of the functionality",
 			},
 			
@@ -34,6 +35,7 @@ func resourceFunctionality() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "The slug of the functionality",
 			},
 			
@@ -43,6 +45,7 @@ func resourceFunctionality() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "The description of the functionality",
 			},
 			
@@ -52,6 +55,7 @@ func resourceFunctionality() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "The public description of the functionality",
 			},
 			
@@ -73,6 +77,7 @@ func resourceFunctionality() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "",
 			},
 			

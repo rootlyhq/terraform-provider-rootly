@@ -22,9 +22,10 @@ func resourceIncidentRole() *schema.Resource{
 			
 			"name": &schema.Schema{
 				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The name of the incident role",
 			},
 			
@@ -34,6 +35,7 @@ func resourceIncidentRole() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "The slug of the incident role",
 			},
 			
@@ -43,6 +45,7 @@ func resourceIncidentRole() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "The summary of the incident role",
 			},
 			
@@ -52,6 +55,7 @@ func resourceIncidentRole() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "The description of the incident role",
 			},
 			

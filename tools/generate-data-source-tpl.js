@@ -1,6 +1,6 @@
 const inflect = require('inflect');
 
-module.exports = (name, resourceSchema, collectionSchema, pathIdField) => {
+module.exports = (name, resourceSchema, filterParameters, pathIdField) => {
 	const namePlural = inflect.pluralize(name)
 	const nameCamel = inflect.camelize(name)
 	const nameCamelPlural = inflect.camelize(namePlural)
@@ -37,13 +37,16 @@ func dataSource${nameCamel}Read(ctx context.Context, d *schema.ResourceData, met
 	page_size := 1
 	params.PageSize = &page_size
 
-	${setFilterFields(name, resourceSchema, collectionSchema)}
+	${setFilterFields(name, resourceSchema, filterParameters)}
 
 	${listFn(nameCamelPlural, resourceSchema, pathIdField)}
 	if err != nil {
 		return diag.FromErr(err)
 	}
 
+	if len(items) == 0 {
+		return diag.Errorf("${name} not found")
+	}
 	item, _ := items[0].(*client.${nameCamel})
 
 	d.SetId(item.ID)
@@ -66,13 +69,12 @@ function listFn(nameCamelPlural, resourceSchema, pathIdField) {
 	}
 }
 
-function setFilterFields(name, resourceSchema, collectionSchema) {
-	return (collectionSchema.get.parameters || []).filter((paramSchema) => {
+function setFilterFields(name, resourceSchema, filterParameters) {
+	return (filterParameters || []).filter((paramSchema) => {
 		return paramSchema.name.match(/^filter/)
 	}).map((paramSchema) => {
 		const filterField = inflect.underscore(paramSchema.name.replace("filter[", "").replace("]", ""))
 		const fieldSchema = resourceSchema.properties[filterField]
-		// TODO remove
 		if (fieldSchema) {
 			return `
 				${filterField} := d.Get("${filterField}").(${jsonapiToGoType(fieldSchema.type)})
@@ -103,14 +105,13 @@ function schemaFields(resourceSchema) {
 
 function schemaField(name, resourceSchema) {
 	const schema = resourceSchema.properties[name]
-	const optional = (resourceSchema.required || []).indexOf(name) === -1 ? "true" : "false"
 	switch (schema.type) {
 		case 'string':
 			return `
 			"${name}": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: ${optional},
+				Optional: true,
 			},
 			`
 		case 'number':
@@ -118,15 +119,24 @@ function schemaField(name, resourceSchema) {
 			"${name}": &schema.Schema{
 				Type: schema.TypeInt,
 				Computed: true,
-				Optional: ${optional},
+				Optional: true,
 			},
 			`
 		case 'boolean':
+			if (name === "enabled") {
+				return `
+				"${name}": &schema.Schema{
+					Type: schema.TypeBool,
+					Default: true,
+					Optional: true,
+				},
+				`
+			}
 			return `
 			"${name}": &schema.Schema{
 				Type: schema.TypeBool,
 				Computed: true,
-				Optional: ${optional},
+				Optional: true,
 			},
 			`
 		case 'array':
@@ -135,7 +145,7 @@ function schemaField(name, resourceSchema) {
 				"${name}": &schema.Schema{
 					Type: schema.TypeList,
 					Computed: true,
-					Optional: ${optional},
+					Optional: true,
 					Elem: &schema.Resource{
 						Schema: map[string]*schema.Schema{
 							"id": &schema.Schema{
@@ -158,7 +168,7 @@ function schemaField(name, resourceSchema) {
 						Type: schema.TypeString,
 					},
 					Computed: true,
-					Optional: ${optional},
+					Optional: true,
 				},
 				`
 			}
@@ -169,7 +179,7 @@ function schemaField(name, resourceSchema) {
 				Type: schema.TypeMap,
 				Elem: schema.TypeString,
 				Computed: true,
-				Optional: ${optional},
+				Optional: true,
 			},
 			`
 	}

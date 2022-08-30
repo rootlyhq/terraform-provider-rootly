@@ -1,31 +1,55 @@
 package client
 
 import (
+	"reflect"
+	
 	"github.com/pkg/errors"
+	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
 type Workflow struct {
-	ID          string `jsonapi:"primary,workflows"`
-	Name        string `jsonapi:"attr,name,omitempty"`
-	Description string `jsonapi:"attr,description,omitempty"`
-	Enabled     *bool  `jsonapi:"attr,enabled,omitempty"`
-	WorkflowGroupId string `jsonapi:"attr,workflow_group_id,omitempty"`
-	Position    int  `jsonapi:"attr,position,omitempty"`
-	Command     string `jsonapi:"attr,command,omitempty"`
-	TriggerParams map[string]interface{} `jsonapi:"attr,trigger_params,omitempty"`
-	Wait        string `jsonapi:"attr,wait,omitempty"`
-	RepeatEveryDuration string `jsonapi:"attr,repeat_every_duration,omitempty"`
-	RepeatOn []interface{} `jsonapi:"attr,repeat_on,omitempty"`
-	EnvironmentIds []interface{} `jsonapi:"attr,environment_ids,omitempty"`
-	SeverityIds []interface{} `jsonapi:"attr,severity_ids,omitempty"`
-	IncidentTypeIds []interface{} `jsonapi:"attr,incident_type_ids,omitempty"`
-	ServiceIds []interface{} `jsonapi:"attr,service_ids,omitempty"`
-	GroupIds []interface{} `jsonapi:"attr,group_ids,omitempty"`
+	ID string `jsonapi:"primary,workflows"`
+	Name string `jsonapi:"attr,name,omitempty"`
+  Slug string `jsonapi:"attr,slug,omitempty"`
+  Description string `jsonapi:"attr,description,omitempty"`
+  Command string `jsonapi:"attr,command,omitempty"`
+  Triggers []interface{} `jsonapi:"attr,triggers,omitempty"`
+  Wait string `jsonapi:"attr,wait,omitempty"`
+  RepeatEveryDuration string `jsonapi:"attr,repeat_every_duration,omitempty"`
+  RepeatOn []interface{} `jsonapi:"attr,repeat_on,omitempty"`
+  Enabled bool `jsonapi:"attr,enabled,omitempty"`
+  Position int `jsonapi:"attr,position,omitempty"`
+  WorkflowGroupId string `jsonapi:"attr,workflow_group_id,omitempty"`
+  TriggerParams interface{} `jsonapi:"attr,trigger_params,omitempty"`
+  EnvironmentIds []interface{} `jsonapi:"attr,environment_ids,omitempty"`
+  SeverityIds []interface{} `jsonapi:"attr,severity_ids,omitempty"`
+  IncidentTypeIds []interface{} `jsonapi:"attr,incident_type_ids,omitempty"`
+  ServiceIds []interface{} `jsonapi:"attr,service_ids,omitempty"`
+  GroupIds []interface{} `jsonapi:"attr,group_ids,omitempty"`
 }
 
-func (c *Client) CreateWorkflow(i *Workflow) (*Workflow, error) {
-	buffer, err := MarshalData(i)
+func (c *Client) ListWorkflows(params *rootlygo.ListWorkflowsParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListWorkflowsRequest(c.Rootly.Server, params)
+	if err != nil {
+		return nil, errors.Errorf("Error building request: %s", err.Error())
+	}
+
+	resp, err := c.Do(req)
+	if err != nil {
+		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+	}
+
+	workflows, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Workflow)))
+	if err != nil {
+		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+	}
+
+	return workflows, nil
+}
+
+func (c *Client) CreateWorkflow(d *Workflow) (*Workflow, error) {
+	buffer, err := MarshalData(d)
 	if err != nil {
 		return nil, errors.Errorf("Error marshaling workflow: %s", err.Error())
 	}
@@ -66,8 +90,8 @@ func (c *Client) GetWorkflow(id string) (*Workflow, error) {
 	return data.(*Workflow), nil
 }
 
-func (c *Client) UpdateWorkflow(id string, i *Workflow) (*Workflow, error) {
-	buffer, err := MarshalData(i)
+func (c *Client) UpdateWorkflow(id string, workflow *Workflow) (*Workflow, error) {
+	buffer, err := MarshalData(workflow)
 	if err != nil {
 		return nil, errors.Errorf("Error marshaling workflow: %s", err.Error())
 	}

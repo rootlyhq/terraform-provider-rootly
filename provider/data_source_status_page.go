@@ -21,7 +21,7 @@ func dataSourceStatusPage() *schema.Resource{
 			"title": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 
@@ -75,24 +75,24 @@ func dataSourceStatusPage() *schema.Resource{
 			},
 			
 
-			"enabled": &schema.Schema{
-				Type: schema.TypeBool,
-				Computed: true,
-				Optional: true,
-			},
-			
+				"enabled": &schema.Schema{
+					Type: schema.TypeBool,
+					Default: true,
+					Optional: true,
+				},
+				
 
 			"created_at": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 
 			"updated_at": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 		},
@@ -113,6 +113,9 @@ func dataSourceStatusPageRead(ctx context.Context, d *schema.ResourceData, meta 
 		return diag.FromErr(err)
 	}
 
+	if len(items) == 0 {
+		return diag.Errorf("status_page not found")
+	}
 	item, _ := items[0].(*client.StatusPage)
 
 	d.SetId(item.ID)

@@ -14,32 +14,14 @@ func TestAccResourceEnvironment(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceenvironment,
-				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_environment.foo", "name", "myenvironment"),
-					resource.TestCheckResourceAttr("rootly_environment.foo", "description", ""),
-				),
-			},
-			{
-				Config: testAccResourceenvironmentUpdate,
-				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_environment.foo", "name", "myenvironment2"),
-					resource.TestCheckResourceAttr("rootly_environment.foo", "description", "my environment description"),
-				),
+				Config: testAccResourceEnvironment,
 			},
 		},
 	})
 }
 
-const testAccResourceenvironment = `
-resource "rootly_environment" "foo" {
-  name = "myenvironment"
-}
-`
-
-const testAccResourceenvironmentUpdate = `
-resource "rootly_environment" "foo" {
-  name        = "myenvironment2"
-  description = "my environment description"
+const testAccResourceEnvironment = `
+resource "rootly_environment" "test" {
+	name = "test"
 }
 `

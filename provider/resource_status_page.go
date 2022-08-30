@@ -22,9 +22,10 @@ func resourceStatusPage() *schema.Resource{
 			
 			"title": &schema.Schema{
 				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The title of the status page",
 			},
 			
@@ -34,6 +35,7 @@ func resourceStatusPage() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "The description of the status page",
 			},
 			
@@ -43,6 +45,7 @@ func resourceStatusPage() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "The color of the header. Eg. \"#0061F2\"",
 			},
 			
@@ -52,6 +55,7 @@ func resourceStatusPage() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "The color of the footer. Eg. \"#1F2F41\"",
 			},
 			

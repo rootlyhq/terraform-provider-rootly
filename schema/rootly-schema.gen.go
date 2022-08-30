@@ -2285,24 +2285,6 @@ const (
 	UpdateTrelloCard UpdateTrelloCardTaskParamsTaskType = "update_trello_card"
 )
 
-// Defines values for UpdateWorkflowDataAttributesTriggers.
-const (
-	UpdateWorkflowDataAttributesTriggersEnvironmentsUpdated    UpdateWorkflowDataAttributesTriggers = "environments_updated"
-	UpdateWorkflowDataAttributesTriggersFunctionalitiesUpdated UpdateWorkflowDataAttributesTriggers = "functionalities_updated"
-	UpdateWorkflowDataAttributesTriggersIncidentCreated        UpdateWorkflowDataAttributesTriggers = "incident_created"
-	UpdateWorkflowDataAttributesTriggersIncidentTypesUpdated   UpdateWorkflowDataAttributesTriggers = "incident_types_updated"
-	UpdateWorkflowDataAttributesTriggersIncidentUpdated        UpdateWorkflowDataAttributesTriggers = "incident_updated"
-	UpdateWorkflowDataAttributesTriggersRoleAssignmentsUpdated UpdateWorkflowDataAttributesTriggers = "role_assignments_updated"
-	UpdateWorkflowDataAttributesTriggersServicesUpdated        UpdateWorkflowDataAttributesTriggers = "services_updated"
-	UpdateWorkflowDataAttributesTriggersSeverityUpdated        UpdateWorkflowDataAttributesTriggers = "severity_updated"
-	UpdateWorkflowDataAttributesTriggersSlackCommand           UpdateWorkflowDataAttributesTriggers = "slack_command"
-	UpdateWorkflowDataAttributesTriggersStatusUpdated          UpdateWorkflowDataAttributesTriggers = "status_updated"
-	UpdateWorkflowDataAttributesTriggersSummaryUpdated         UpdateWorkflowDataAttributesTriggers = "summary_updated"
-	UpdateWorkflowDataAttributesTriggersTeamsUpdated           UpdateWorkflowDataAttributesTriggers = "teams_updated"
-	UpdateWorkflowDataAttributesTriggersTimelineUpdated        UpdateWorkflowDataAttributesTriggers = "timeline_updated"
-	UpdateWorkflowDataAttributesTriggersTitleUpdated           UpdateWorkflowDataAttributesTriggers = "title_updated"
-)
-
 // Defines values for UpdateWorkflowDataType.
 const (
 	UpdateWorkflowDataTypeWorkflows UpdateWorkflowDataType = "workflows"
@@ -2513,20 +2495,20 @@ const (
 
 // Defines values for WorkflowResponseDataAttributesTriggers.
 const (
-	EnvironmentsUpdated    WorkflowResponseDataAttributesTriggers = "environments_updated"
-	FunctionalitiesUpdated WorkflowResponseDataAttributesTriggers = "functionalities_updated"
-	IncidentCreated        WorkflowResponseDataAttributesTriggers = "incident_created"
-	IncidentTypesUpdated   WorkflowResponseDataAttributesTriggers = "incident_types_updated"
-	IncidentUpdated        WorkflowResponseDataAttributesTriggers = "incident_updated"
-	RoleAssignmentsUpdated WorkflowResponseDataAttributesTriggers = "role_assignments_updated"
-	ServicesUpdated        WorkflowResponseDataAttributesTriggers = "services_updated"
-	SeverityUpdated        WorkflowResponseDataAttributesTriggers = "severity_updated"
-	SlackCommand           WorkflowResponseDataAttributesTriggers = "slack_command"
-	StatusUpdated          WorkflowResponseDataAttributesTriggers = "status_updated"
-	SummaryUpdated         WorkflowResponseDataAttributesTriggers = "summary_updated"
-	TeamsUpdated           WorkflowResponseDataAttributesTriggers = "teams_updated"
-	TimelineUpdated        WorkflowResponseDataAttributesTriggers = "timeline_updated"
-	TitleUpdated           WorkflowResponseDataAttributesTriggers = "title_updated"
+	WorkflowResponseDataAttributesTriggersEnvironmentsUpdated    WorkflowResponseDataAttributesTriggers = "environments_updated"
+	WorkflowResponseDataAttributesTriggersFunctionalitiesUpdated WorkflowResponseDataAttributesTriggers = "functionalities_updated"
+	WorkflowResponseDataAttributesTriggersIncidentCreated        WorkflowResponseDataAttributesTriggers = "incident_created"
+	WorkflowResponseDataAttributesTriggersIncidentTypesUpdated   WorkflowResponseDataAttributesTriggers = "incident_types_updated"
+	WorkflowResponseDataAttributesTriggersIncidentUpdated        WorkflowResponseDataAttributesTriggers = "incident_updated"
+	WorkflowResponseDataAttributesTriggersRoleAssignmentsUpdated WorkflowResponseDataAttributesTriggers = "role_assignments_updated"
+	WorkflowResponseDataAttributesTriggersServicesUpdated        WorkflowResponseDataAttributesTriggers = "services_updated"
+	WorkflowResponseDataAttributesTriggersSeverityUpdated        WorkflowResponseDataAttributesTriggers = "severity_updated"
+	WorkflowResponseDataAttributesTriggersSlackCommand           WorkflowResponseDataAttributesTriggers = "slack_command"
+	WorkflowResponseDataAttributesTriggersStatusUpdated          WorkflowResponseDataAttributesTriggers = "status_updated"
+	WorkflowResponseDataAttributesTriggersSummaryUpdated         WorkflowResponseDataAttributesTriggers = "summary_updated"
+	WorkflowResponseDataAttributesTriggersTeamsUpdated           WorkflowResponseDataAttributesTriggers = "teams_updated"
+	WorkflowResponseDataAttributesTriggersTimelineUpdated        WorkflowResponseDataAttributesTriggers = "timeline_updated"
+	WorkflowResponseDataAttributesTriggersTitleUpdated           WorkflowResponseDataAttributesTriggers = "title_updated"
 )
 
 // Defines values for WorkflowResponseDataType.
@@ -4962,6 +4944,8 @@ type IncidentActionItemResponseDataType string
 
 // IncidentCustomFieldSelection defines model for incident_custom_field_selection.
 type IncidentCustomFieldSelection struct {
+	CustomFieldId     *float32  `json:"custom_field_id,omitempty"`
+	IncidentId        *string   `json:"incident_id,omitempty"`
 	SelectedOptionIds []float32 `json:"selected_option_ids"`
 
 	// The value of the incident_custom_field_selection
@@ -4972,6 +4956,8 @@ type IncidentCustomFieldSelection struct {
 type IncidentCustomFieldSelectionList struct {
 	Data []struct {
 		Attributes struct {
+			CustomFieldId     *float32  `json:"custom_field_id,omitempty"`
+			IncidentId        *string   `json:"incident_id,omitempty"`
 			SelectedOptionIds []float32 `json:"selected_option_ids"`
 
 			// The value of the incident_custom_field_selection
@@ -4998,6 +4984,8 @@ type IncidentCustomFieldSelectionListDataType string
 type IncidentCustomFieldSelectionResponse struct {
 	Data struct {
 		Attributes struct {
+			CustomFieldId     *float32  `json:"custom_field_id,omitempty"`
+			IncidentId        *string   `json:"incident_id,omitempty"`
 			SelectedOptionIds []float32 `json:"selected_option_ids"`
 
 			// The value of the incident_custom_field_selection
@@ -7085,6 +7073,7 @@ type PlaybookTask struct {
 
 	// The description of incident task
 	Description *string `json:"description"`
+	PlaybookId  *string `json:"playbook_id,omitempty"`
 
 	// The task of the incident task
 	Task string `json:"task"`
@@ -7102,6 +7091,7 @@ type PlaybookTaskList struct {
 
 			// The description of incident task
 			Description *string `json:"description"`
+			PlaybookId  *string `json:"playbook_id,omitempty"`
 
 			// The task of the incident task
 			Task string `json:"task"`
@@ -7135,6 +7125,7 @@ type PlaybookTaskResponse struct {
 
 			// The description of incident task
 			Description *string `json:"description"`
+			PlaybookId  *string `json:"playbook_id,omitempty"`
 
 			// The task of the incident task
 			Task string `json:"task"`
@@ -8383,7 +8374,8 @@ type StatusPageTemplate struct {
 	Position *float32 `json:"position,omitempty"`
 
 	// Controls if incident subscribers should be notified
-	ShouldNotifySubscribers *bool `json:"should_notify_subscribers"`
+	ShouldNotifySubscribers *bool   `json:"should_notify_subscribers"`
+	StatusPageId            *string `json:"status_page_id,omitempty"`
 
 	// Title of the template
 	Title string `json:"title"`
@@ -8412,7 +8404,8 @@ type StatusPageTemplateList struct {
 			Position *float32 `json:"position,omitempty"`
 
 			// Controls if incident subscribers should be notified
-			ShouldNotifySubscribers *bool `json:"should_notify_subscribers"`
+			ShouldNotifySubscribers *bool   `json:"should_notify_subscribers"`
+			StatusPageId            *string `json:"status_page_id,omitempty"`
 
 			// Title of the template
 			Title string `json:"title"`
@@ -8457,7 +8450,8 @@ type StatusPageTemplateResponse struct {
 			Position *float32 `json:"position,omitempty"`
 
 			// Controls if incident subscribers should be notified
-			ShouldNotifySubscribers *bool `json:"should_notify_subscribers"`
+			ShouldNotifySubscribers *bool   `json:"should_notify_subscribers"`
+			StatusPageId            *string `json:"status_page_id,omitempty"`
 
 			// Title of the template
 			Title string `json:"title"`
@@ -9821,9 +9815,8 @@ type UpdateWorkflow struct {
 			SeverityIds         *[]string `json:"severity_ids,omitempty"`
 
 			// The slug of the workflow
-			Slug          *string                                 `json:"slug,omitempty"`
-			TriggerParams *interface{}                            `json:"trigger_params,omitempty"`
-			Triggers      *[]UpdateWorkflowDataAttributesTriggers `json:"triggers,omitempty"`
+			Slug          *string      `json:"slug,omitempty"`
+			TriggerParams *interface{} `json:"trigger_params,omitempty"`
 
 			// Wait this duration before executing.
 			Wait *string `json:"wait"`
@@ -9834,9 +9827,6 @@ type UpdateWorkflow struct {
 		Type UpdateWorkflowDataType `json:"type"`
 	} `json:"data"`
 }
-
-// Actions that trigger the workflow.
-type UpdateWorkflowDataAttributesTriggers string
 
 // UpdateWorkflowDataType defines model for UpdateWorkflow.Data.Type.
 type UpdateWorkflowDataType string
@@ -10628,13 +10618,6 @@ type ListIncidentsParams struct {
 	Sort                               *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
-// ListIncidentCustomFieldSelectionsParams defines parameters for ListIncidentCustomFieldSelections.
-type ListIncidentCustomFieldSelectionsParams struct {
-	Include    *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
-}
-
 // ListIncidentActionItemsParams defines parameters for ListIncidentActionItems.
 type ListIncidentActionItemsParams struct {
 	Include    *string `form:"include,omitempty" json:"include,omitempty"`
@@ -10644,6 +10627,13 @@ type ListIncidentActionItemsParams struct {
 
 // ListAlertParams defines parameters for ListAlert.
 type ListAlertParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+}
+
+// ListIncidentCustomFieldSelectionsParams defines parameters for ListIncidentCustomFieldSelections.
+type ListIncidentCustomFieldSelectionsParams struct {
 	Include    *string `form:"include,omitempty" json:"include,omitempty"`
 	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
@@ -11112,12 +11102,6 @@ type ClientInterface interface {
 	// CancelIncident request with any body
 	CancelIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ListIncidentCustomFieldSelections request
-	ListIncidentCustomFieldSelections(ctx context.Context, id string, params *ListIncidentCustomFieldSelectionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// CreateIncidentCustomFieldSelection request with any body
-	CreateIncidentCustomFieldSelectionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
 	// MitigateIncident request with any body
 	MitigateIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -11135,6 +11119,12 @@ type ClientInterface interface {
 
 	// AttachAlert request with any body
 	AttachAlertWithBody(ctx context.Context, incidentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListIncidentCustomFieldSelections request
+	ListIncidentCustomFieldSelections(ctx context.Context, incidentId string, params *ListIncidentCustomFieldSelectionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateIncidentCustomFieldSelection request with any body
+	CreateIncidentCustomFieldSelectionWithBody(ctx context.Context, incidentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListIncidentEvents request
 	ListIncidentEvents(ctx context.Context, incidentId string, params *ListIncidentEventsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -11362,10 +11352,10 @@ type ClientInterface interface {
 	UpdateWorkflowWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListWorkflowCustomFieldSelections request
-	ListWorkflowCustomFieldSelections(ctx context.Context, id string, params *ListWorkflowCustomFieldSelectionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	ListWorkflowCustomFieldSelections(ctx context.Context, workflowId string, params *ListWorkflowCustomFieldSelectionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateWorkflowCustomFieldSelection request with any body
-	CreateWorkflowCustomFieldSelectionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	CreateWorkflowCustomFieldSelectionWithBody(ctx context.Context, workflowId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListWorkflowRuns request
 	ListWorkflowRuns(ctx context.Context, workflowId string, params *ListWorkflowRunsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -12292,30 +12282,6 @@ func (c *Client) CancelIncidentWithBody(ctx context.Context, id string, contentT
 	return c.Client.Do(req)
 }
 
-func (c *Client) ListIncidentCustomFieldSelections(ctx context.Context, id string, params *ListIncidentCustomFieldSelectionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewListIncidentCustomFieldSelectionsRequest(c.Server, id, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) CreateIncidentCustomFieldSelectionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateIncidentCustomFieldSelectionRequestWithBody(c.Server, id, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
 func (c *Client) MitigateIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewMitigateIncidentRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
@@ -12378,6 +12344,30 @@ func (c *Client) ListAlert(ctx context.Context, incidentId string, params *ListA
 
 func (c *Client) AttachAlertWithBody(ctx context.Context, incidentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewAttachAlertRequestWithBody(c.Server, incidentId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListIncidentCustomFieldSelections(ctx context.Context, incidentId string, params *ListIncidentCustomFieldSelectionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListIncidentCustomFieldSelectionsRequest(c.Server, incidentId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateIncidentCustomFieldSelectionWithBody(ctx context.Context, incidentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateIncidentCustomFieldSelectionRequestWithBody(c.Server, incidentId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -13288,8 +13278,8 @@ func (c *Client) UpdateWorkflowWithBody(ctx context.Context, id string, contentT
 	return c.Client.Do(req)
 }
 
-func (c *Client) ListWorkflowCustomFieldSelections(ctx context.Context, id string, params *ListWorkflowCustomFieldSelectionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewListWorkflowCustomFieldSelectionsRequest(c.Server, id, params)
+func (c *Client) ListWorkflowCustomFieldSelections(ctx context.Context, workflowId string, params *ListWorkflowCustomFieldSelectionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListWorkflowCustomFieldSelectionsRequest(c.Server, workflowId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -13300,8 +13290,8 @@ func (c *Client) ListWorkflowCustomFieldSelections(ctx context.Context, id strin
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateWorkflowCustomFieldSelectionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateWorkflowCustomFieldSelectionRequestWithBody(c.Server, id, contentType, body)
+func (c *Client) CreateWorkflowCustomFieldSelectionWithBody(ctx context.Context, workflowId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateWorkflowCustomFieldSelectionRequestWithBody(c.Server, workflowId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -17146,128 +17136,6 @@ func NewCancelIncidentRequestWithBody(server string, id string, contentType stri
 	return req, nil
 }
 
-// NewListIncidentCustomFieldSelectionsRequest generates requests for ListIncidentCustomFieldSelections
-func NewListIncidentCustomFieldSelectionsRequest(server string, id string, params *ListIncidentCustomFieldSelectionsParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/incidents/%s/custom_field_selections", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	queryValues := queryURL.Query()
-
-	if params.Include != nil {
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-	}
-
-	if params.PageNumber != nil {
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-	}
-
-	if params.PageSize != nil {
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-	}
-
-	queryURL.RawQuery = queryValues.Encode()
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewCreateIncidentCustomFieldSelectionRequestWithBody generates requests for CreateIncidentCustomFieldSelection with any type of body
-func NewCreateIncidentCustomFieldSelectionRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/incidents/%s/custom_field_selections", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("POST", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
 // NewMitigateIncidentRequestWithBody generates requests for MitigateIncident with any type of body
 func NewMitigateIncidentRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
@@ -17565,6 +17433,128 @@ func NewAttachAlertRequestWithBody(server string, incidentId string, contentType
 	}
 
 	operationPath := fmt.Sprintf("/v1/incidents/%s/alerts", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListIncidentCustomFieldSelectionsRequest generates requests for ListIncidentCustomFieldSelections
+func NewListIncidentCustomFieldSelectionsRequest(server string, incidentId string, params *ListIncidentCustomFieldSelectionsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "incident_id", runtime.ParamLocationPath, incidentId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incidents/%s/custom_field_selections", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Include != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateIncidentCustomFieldSelectionRequestWithBody generates requests for CreateIncidentCustomFieldSelection with any type of body
+func NewCreateIncidentCustomFieldSelectionRequestWithBody(server string, incidentId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "incident_id", runtime.ParamLocationPath, incidentId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incidents/%s/custom_field_selections", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -21285,12 +21275,12 @@ func NewUpdateWorkflowRequestWithBody(server string, id string, contentType stri
 }
 
 // NewListWorkflowCustomFieldSelectionsRequest generates requests for ListWorkflowCustomFieldSelections
-func NewListWorkflowCustomFieldSelectionsRequest(server string, id string, params *ListWorkflowCustomFieldSelectionsParams) (*http.Request, error) {
+func NewListWorkflowCustomFieldSelectionsRequest(server string, workflowId string, params *ListWorkflowCustomFieldSelectionsParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "workflow_id", runtime.ParamLocationPath, workflowId)
 	if err != nil {
 		return nil, err
 	}
@@ -21371,12 +21361,12 @@ func NewListWorkflowCustomFieldSelectionsRequest(server string, id string, param
 }
 
 // NewCreateWorkflowCustomFieldSelectionRequestWithBody generates requests for CreateWorkflowCustomFieldSelection with any type of body
-func NewCreateWorkflowCustomFieldSelectionRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+func NewCreateWorkflowCustomFieldSelectionRequestWithBody(server string, workflowId string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "workflow_id", runtime.ParamLocationPath, workflowId)
 	if err != nil {
 		return nil, err
 	}
@@ -21921,12 +21911,6 @@ type ClientWithResponsesInterface interface {
 	// CancelIncident request with any body
 	CancelIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CancelIncidentResponse, error)
 
-	// ListIncidentCustomFieldSelections request
-	ListIncidentCustomFieldSelectionsWithResponse(ctx context.Context, id string, params *ListIncidentCustomFieldSelectionsParams, reqEditors ...RequestEditorFn) (*ListIncidentCustomFieldSelectionsResponse, error)
-
-	// CreateIncidentCustomFieldSelection request with any body
-	CreateIncidentCustomFieldSelectionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentCustomFieldSelectionResponse, error)
-
 	// MitigateIncident request with any body
 	MitigateIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*MitigateIncidentResponse, error)
 
@@ -21944,6 +21928,12 @@ type ClientWithResponsesInterface interface {
 
 	// AttachAlert request with any body
 	AttachAlertWithBodyWithResponse(ctx context.Context, incidentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AttachAlertResponse, error)
+
+	// ListIncidentCustomFieldSelections request
+	ListIncidentCustomFieldSelectionsWithResponse(ctx context.Context, incidentId string, params *ListIncidentCustomFieldSelectionsParams, reqEditors ...RequestEditorFn) (*ListIncidentCustomFieldSelectionsResponse, error)
+
+	// CreateIncidentCustomFieldSelection request with any body
+	CreateIncidentCustomFieldSelectionWithBodyWithResponse(ctx context.Context, incidentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentCustomFieldSelectionResponse, error)
 
 	// ListIncidentEvents request
 	ListIncidentEventsWithResponse(ctx context.Context, incidentId string, params *ListIncidentEventsParams, reqEditors ...RequestEditorFn) (*ListIncidentEventsResponse, error)
@@ -22171,10 +22161,10 @@ type ClientWithResponsesInterface interface {
 	UpdateWorkflowWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateWorkflowResponse, error)
 
 	// ListWorkflowCustomFieldSelections request
-	ListWorkflowCustomFieldSelectionsWithResponse(ctx context.Context, id string, params *ListWorkflowCustomFieldSelectionsParams, reqEditors ...RequestEditorFn) (*ListWorkflowCustomFieldSelectionsResponse, error)
+	ListWorkflowCustomFieldSelectionsWithResponse(ctx context.Context, workflowId string, params *ListWorkflowCustomFieldSelectionsParams, reqEditors ...RequestEditorFn) (*ListWorkflowCustomFieldSelectionsResponse, error)
 
 	// CreateWorkflowCustomFieldSelection request with any body
-	CreateWorkflowCustomFieldSelectionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateWorkflowCustomFieldSelectionResponse, error)
+	CreateWorkflowCustomFieldSelectionWithBodyWithResponse(ctx context.Context, workflowId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateWorkflowCustomFieldSelectionResponse, error)
 
 	// ListWorkflowRuns request
 	ListWorkflowRunsWithResponse(ctx context.Context, workflowId string, params *ListWorkflowRunsParams, reqEditors ...RequestEditorFn) (*ListWorkflowRunsResponse, error)
@@ -23785,48 +23775,6 @@ func (r CancelIncidentResponse) StatusCode() int {
 	return 0
 }
 
-type ListIncidentCustomFieldSelectionsResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r ListIncidentCustomFieldSelectionsResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r ListIncidentCustomFieldSelectionsResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type CreateIncidentCustomFieldSelectionResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r CreateIncidentCustomFieldSelectionResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r CreateIncidentCustomFieldSelectionResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
 type MitigateIncidentResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -23947,6 +23895,48 @@ func (r AttachAlertResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r AttachAlertResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListIncidentCustomFieldSelectionsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r ListIncidentCustomFieldSelectionsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListIncidentCustomFieldSelectionsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateIncidentCustomFieldSelectionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateIncidentCustomFieldSelectionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateIncidentCustomFieldSelectionResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -26338,24 +26328,6 @@ func (c *ClientWithResponses) CancelIncidentWithBodyWithResponse(ctx context.Con
 	return ParseCancelIncidentResponse(rsp)
 }
 
-// ListIncidentCustomFieldSelectionsWithResponse request returning *ListIncidentCustomFieldSelectionsResponse
-func (c *ClientWithResponses) ListIncidentCustomFieldSelectionsWithResponse(ctx context.Context, id string, params *ListIncidentCustomFieldSelectionsParams, reqEditors ...RequestEditorFn) (*ListIncidentCustomFieldSelectionsResponse, error) {
-	rsp, err := c.ListIncidentCustomFieldSelections(ctx, id, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseListIncidentCustomFieldSelectionsResponse(rsp)
-}
-
-// CreateIncidentCustomFieldSelectionWithBodyWithResponse request with arbitrary body returning *CreateIncidentCustomFieldSelectionResponse
-func (c *ClientWithResponses) CreateIncidentCustomFieldSelectionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentCustomFieldSelectionResponse, error) {
-	rsp, err := c.CreateIncidentCustomFieldSelectionWithBody(ctx, id, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseCreateIncidentCustomFieldSelectionResponse(rsp)
-}
-
 // MitigateIncidentWithBodyWithResponse request with arbitrary body returning *MitigateIncidentResponse
 func (c *ClientWithResponses) MitigateIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*MitigateIncidentResponse, error) {
 	rsp, err := c.MitigateIncidentWithBody(ctx, id, contentType, body, reqEditors...)
@@ -26408,6 +26380,24 @@ func (c *ClientWithResponses) AttachAlertWithBodyWithResponse(ctx context.Contex
 		return nil, err
 	}
 	return ParseAttachAlertResponse(rsp)
+}
+
+// ListIncidentCustomFieldSelectionsWithResponse request returning *ListIncidentCustomFieldSelectionsResponse
+func (c *ClientWithResponses) ListIncidentCustomFieldSelectionsWithResponse(ctx context.Context, incidentId string, params *ListIncidentCustomFieldSelectionsParams, reqEditors ...RequestEditorFn) (*ListIncidentCustomFieldSelectionsResponse, error) {
+	rsp, err := c.ListIncidentCustomFieldSelections(ctx, incidentId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListIncidentCustomFieldSelectionsResponse(rsp)
+}
+
+// CreateIncidentCustomFieldSelectionWithBodyWithResponse request with arbitrary body returning *CreateIncidentCustomFieldSelectionResponse
+func (c *ClientWithResponses) CreateIncidentCustomFieldSelectionWithBodyWithResponse(ctx context.Context, incidentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentCustomFieldSelectionResponse, error) {
+	rsp, err := c.CreateIncidentCustomFieldSelectionWithBody(ctx, incidentId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateIncidentCustomFieldSelectionResponse(rsp)
 }
 
 // ListIncidentEventsWithResponse request returning *ListIncidentEventsResponse
@@ -27086,8 +27076,8 @@ func (c *ClientWithResponses) UpdateWorkflowWithBodyWithResponse(ctx context.Con
 }
 
 // ListWorkflowCustomFieldSelectionsWithResponse request returning *ListWorkflowCustomFieldSelectionsResponse
-func (c *ClientWithResponses) ListWorkflowCustomFieldSelectionsWithResponse(ctx context.Context, id string, params *ListWorkflowCustomFieldSelectionsParams, reqEditors ...RequestEditorFn) (*ListWorkflowCustomFieldSelectionsResponse, error) {
-	rsp, err := c.ListWorkflowCustomFieldSelections(ctx, id, params, reqEditors...)
+func (c *ClientWithResponses) ListWorkflowCustomFieldSelectionsWithResponse(ctx context.Context, workflowId string, params *ListWorkflowCustomFieldSelectionsParams, reqEditors ...RequestEditorFn) (*ListWorkflowCustomFieldSelectionsResponse, error) {
+	rsp, err := c.ListWorkflowCustomFieldSelections(ctx, workflowId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -27095,8 +27085,8 @@ func (c *ClientWithResponses) ListWorkflowCustomFieldSelectionsWithResponse(ctx 
 }
 
 // CreateWorkflowCustomFieldSelectionWithBodyWithResponse request with arbitrary body returning *CreateWorkflowCustomFieldSelectionResponse
-func (c *ClientWithResponses) CreateWorkflowCustomFieldSelectionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateWorkflowCustomFieldSelectionResponse, error) {
-	rsp, err := c.CreateWorkflowCustomFieldSelectionWithBody(ctx, id, contentType, body, reqEditors...)
+func (c *ClientWithResponses) CreateWorkflowCustomFieldSelectionWithBodyWithResponse(ctx context.Context, workflowId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateWorkflowCustomFieldSelectionResponse, error) {
+	rsp, err := c.CreateWorkflowCustomFieldSelectionWithBody(ctx, workflowId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -28355,38 +28345,6 @@ func ParseCancelIncidentResponse(rsp *http.Response) (*CancelIncidentResponse, e
 	return response, nil
 }
 
-// ParseListIncidentCustomFieldSelectionsResponse parses an HTTP response from a ListIncidentCustomFieldSelectionsWithResponse call
-func ParseListIncidentCustomFieldSelectionsResponse(rsp *http.Response) (*ListIncidentCustomFieldSelectionsResponse, error) {
-	bodyBytes, err := ioutil.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &ListIncidentCustomFieldSelectionsResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
-// ParseCreateIncidentCustomFieldSelectionResponse parses an HTTP response from a CreateIncidentCustomFieldSelectionWithResponse call
-func ParseCreateIncidentCustomFieldSelectionResponse(rsp *http.Response) (*CreateIncidentCustomFieldSelectionResponse, error) {
-	bodyBytes, err := ioutil.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &CreateIncidentCustomFieldSelectionResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
 // ParseMitigateIncidentResponse parses an HTTP response from a MitigateIncidentWithResponse call
 func ParseMitigateIncidentResponse(rsp *http.Response) (*MitigateIncidentResponse, error) {
 	bodyBytes, err := ioutil.ReadAll(rsp.Body)
@@ -28476,6 +28434,38 @@ func ParseAttachAlertResponse(rsp *http.Response) (*AttachAlertResponse, error) 
 	}
 
 	response := &AttachAlertResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseListIncidentCustomFieldSelectionsResponse parses an HTTP response from a ListIncidentCustomFieldSelectionsWithResponse call
+func ParseListIncidentCustomFieldSelectionsResponse(rsp *http.Response) (*ListIncidentCustomFieldSelectionsResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListIncidentCustomFieldSelectionsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseCreateIncidentCustomFieldSelectionResponse parses an HTTP response from a CreateIncidentCustomFieldSelectionWithResponse call
+func ParseCreateIncidentCustomFieldSelectionResponse(rsp *http.Response) (*CreateIncidentCustomFieldSelectionResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateIncidentCustomFieldSelectionResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

@@ -21,7 +21,7 @@ func dataSourceIncidentRole() *schema.Resource{
 			"name": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 
@@ -49,14 +49,14 @@ func dataSourceIncidentRole() *schema.Resource{
 			"created_at": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 
 			"updated_at": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 		},
@@ -84,6 +84,9 @@ func dataSourceIncidentRoleRead(ctx context.Context, d *schema.ResourceData, met
 		return diag.FromErr(err)
 	}
 
+	if len(items) == 0 {
+		return diag.Errorf("incident_role not found")
+	}
 	item, _ := items[0].(*client.IncidentRole)
 
 	d.SetId(item.ID)

@@ -14,7 +14,7 @@ default: testacc
 build: generate docs
 	go build -o ${BINARY}
 
-docs: generate
+docs:
 	go get github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
 	go run github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
 	cp docs/index.md README.md

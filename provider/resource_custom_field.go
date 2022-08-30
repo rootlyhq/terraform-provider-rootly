@@ -22,9 +22,10 @@ func resourceCustomField() *schema.Resource{
 			
 			"label": &schema.Schema{
 				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The name of the custom_field",
 			},
 			
@@ -34,6 +35,7 @@ func resourceCustomField() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "The kind of the custom_field",
 			},
 			
@@ -52,6 +54,7 @@ func resourceCustomField() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "The slug of the custom_field",
 			},
 			
@@ -61,6 +64,7 @@ func resourceCustomField() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "The description of the custom_field",
 			},
 			
@@ -94,6 +98,7 @@ func resourceCustomField() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "The position of the custom_field",
 			},
 			

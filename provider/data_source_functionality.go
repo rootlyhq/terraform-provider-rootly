@@ -21,7 +21,7 @@ func dataSourceFunctionality() *schema.Resource{
 			"name": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 
@@ -134,14 +134,14 @@ func dataSourceFunctionality() *schema.Resource{
 			"created_at": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 
 			"updated_at": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 		},
@@ -169,6 +169,9 @@ func dataSourceFunctionalityRead(ctx context.Context, d *schema.ResourceData, me
 		return diag.FromErr(err)
 	}
 
+	if len(items) == 0 {
+		return diag.Errorf("functionality not found")
+	}
 	item, _ := items[0].(*client.Functionality)
 
 	d.SetId(item.ID)

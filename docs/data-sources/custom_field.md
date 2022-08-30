@@ -17,19 +17,19 @@ description: |-
 
 ### Optional
 
+- `created_at` (String)
 - `description` (String)
 - `enabled` (Boolean)
 - `kind` (String)
-
-### Read-Only
-
-- `created_at` (String)
-- `id` (String) The ID of this resource.
 - `label` (String)
 - `position` (Number)
 - `required` (List of String)
 - `shown` (List of String)
 - `slug` (String)
 - `updated_at` (String)
+
+### Read-Only
+
+- `id` (String) The ID of this resource.
 
 

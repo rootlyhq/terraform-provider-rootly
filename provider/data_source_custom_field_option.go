@@ -28,35 +28,35 @@ func dataSourceCustomFieldOption() *schema.Resource{
 			"value": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 
 			"color": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 
 			"position": &schema.Schema{
 				Type: schema.TypeInt,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 
 			"created_at": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 
 			"updated_at": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 		},
@@ -85,6 +85,9 @@ func dataSourceCustomFieldOptionRead(ctx context.Context, d *schema.ResourceData
 		return diag.FromErr(err)
 	}
 
+	if len(items) == 0 {
+		return diag.Errorf("custom_field_option not found")
+	}
 	item, _ := items[0].(*client.CustomFieldOption)
 
 	d.SetId(item.ID)

@@ -17,15 +17,15 @@ description: |-
 
 ### Optional
 
-- `custom_field_id` (Number)
-
-### Read-Only
-
 - `color` (String)
 - `created_at` (String)
-- `id` (String) The ID of this resource.
+- `custom_field_id` (Number)
 - `position` (Number)
 - `updated_at` (String)
 - `value` (String)
+
+### Read-Only
+
+- `id` (String) The ID of this resource.
 
 

@@ -22,9 +22,10 @@ func resourceSeverity() *schema.Resource{
 			
 			"name": &schema.Schema{
 				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The name of the severity",
 			},
 			
@@ -34,6 +35,7 @@ func resourceSeverity() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "The slug of the severity",
 			},
 			
@@ -43,15 +45,17 @@ func resourceSeverity() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "The description of the severity",
 			},
 			
 
 			"severity": &schema.Schema{
 				Type: schema.TypeString,
-				Computed: true,
+				Default: "critical",
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "The severity of the severity",
 			},
 			
@@ -61,6 +65,7 @@ func resourceSeverity() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "",
 			},
 			

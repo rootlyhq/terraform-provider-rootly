@@ -18,12 +18,12 @@ description: |-
 ### Optional
 
 - `expanded` (Boolean)
+- `kind` (String)
+- `name` (String)
+- `position` (Number)
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
-- `kind` (String)
-- `name` (String)
-- `position` (Number)
 
 

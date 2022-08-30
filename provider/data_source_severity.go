@@ -21,7 +21,7 @@ func dataSourceSeverity() *schema.Resource{
 			"name": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 
@@ -56,14 +56,14 @@ func dataSourceSeverity() *schema.Resource{
 			"created_at": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 
 			"updated_at": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 		},
@@ -99,6 +99,9 @@ func dataSourceSeverityRead(ctx context.Context, d *schema.ResourceData, meta in
 		return diag.FromErr(err)
 	}
 
+	if len(items) == 0 {
+		return diag.Errorf("severity not found")
+	}
 	item, _ := items[0].(*client.Severity)
 
 	d.SetId(item.ID)

@@ -22,9 +22,10 @@ func resourceEnvironment() *schema.Resource{
 			
 			"name": &schema.Schema{
 				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The name of the environment",
 			},
 			
@@ -34,6 +35,7 @@ func resourceEnvironment() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "The slug of the environment",
 			},
 			
@@ -43,6 +45,7 @@ func resourceEnvironment() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "The description of the environment",
 			},
 			
@@ -52,6 +55,7 @@ func resourceEnvironment() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "",
 			},
 			

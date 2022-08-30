@@ -17,7 +17,7 @@ import (
 )
 
 type ${nameCamel} struct {
-	ID string \`jsonapi:"primary,${namePlural}"\`
+	ID string \`jsonapi:"primary,${name === "team" ? "groups" : namePlural}"\`
 	${structAttrs(resourceSchema)}
 }
 

@@ -21,7 +21,7 @@ func dataSourceEnvironment() *schema.Resource{
 			"name": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 
@@ -49,14 +49,14 @@ func dataSourceEnvironment() *schema.Resource{
 			"created_at": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 
 			"updated_at": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 		},
@@ -88,6 +88,9 @@ func dataSourceEnvironmentRead(ctx context.Context, d *schema.ResourceData, meta
 		return diag.FromErr(err)
 	}
 
+	if len(items) == 0 {
+		return diag.Errorf("environment not found")
+	}
 	item, _ := items[0].(*client.Environment)
 
 	d.SetId(item.ID)

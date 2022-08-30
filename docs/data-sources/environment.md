@@ -18,14 +18,14 @@ description: |-
 ### Optional
 
 - `color` (String)
+- `created_at` (String)
 - `description` (String)
+- `name` (String)
 - `slug` (String)
+- `updated_at` (String)
 
 ### Read-Only
 
-- `created_at` (String)
 - `id` (String) The ID of this resource.
-- `name` (String)
-- `updated_at` (String)
 
 

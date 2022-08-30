@@ -23,26 +23,9 @@ func TestAccResource${nameCamel}(t *testing.T) {
 			{
 				Config: testAccResource${nameCamel},
 			},
-			{
-				Config: testAccDataSource${nameCamel},
-			},
 		},
 	})
 }
-
-const testAccDataSource${nameCamel} = \`
-resource "rootly_${name}" "test" {
-	${testParams(name, resourceSchema, requiredFields || [])}
-}
-
-data "rootly_${name}" "test" {
-	depends_on = [rootly_${name}.test]
-}
-
-output "${name}" {
-	value = data.rootly_${name}.test.id
-}
-\`
 
 const testAccResource${nameCamel} = \`
 resource "rootly_${name}" "test" {

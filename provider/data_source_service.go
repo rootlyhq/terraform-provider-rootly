@@ -21,7 +21,7 @@ func dataSourceService() *schema.Resource{
 			"name": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 
@@ -176,14 +176,14 @@ func dataSourceService() *schema.Resource{
 			"created_at": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 
 			"updated_at": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 		},
@@ -211,6 +211,9 @@ func dataSourceServiceRead(ctx context.Context, d *schema.ResourceData, meta int
 		return diag.FromErr(err)
 	}
 
+	if len(items) == 0 {
+		return diag.Errorf("service not found")
+	}
 	item, _ := items[0].(*client.Service)
 
 	d.SetId(item.ID)

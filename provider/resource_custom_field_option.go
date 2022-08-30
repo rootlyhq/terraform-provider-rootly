@@ -25,15 +25,17 @@ func resourceCustomFieldOption() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: true,
 				Description: "The ID of the parent custom field",
 			},
 			
 
 			"value": &schema.Schema{
 				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The value of the custom_field_option",
 			},
 			
@@ -43,6 +45,7 @@ func resourceCustomFieldOption() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "The hex color of the custom_field_option",
 			},
 			
@@ -52,6 +55,7 @@ func resourceCustomFieldOption() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "The position of the custom_field_option",
 			},
 			

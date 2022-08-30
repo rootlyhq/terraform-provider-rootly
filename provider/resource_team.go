@@ -22,9 +22,10 @@ func resourceTeam() *schema.Resource{
 			
 			"name": &schema.Schema{
 				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The name of the team",
 			},
 			
@@ -34,6 +35,7 @@ func resourceTeam() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "The description of the team",
 			},
 			
@@ -55,6 +57,7 @@ func resourceTeam() *schema.Resource{
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "",
 			},
 			

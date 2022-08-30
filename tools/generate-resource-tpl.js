@@ -1,6 +1,6 @@
 const inflect = require('inflect');
 
-module.exports = (name, resourceSchema, collectionSchema, pathIdField, createResourceSchema) => {
+module.exports = (name, resourceSchema, requiredFields, pathIdField) => {
 	const namePlural = inflect.pluralize(name)
 	const nameCamel = inflect.camelize(name)
 	const nameCamelPlural = inflect.camelize(namePlural)
@@ -26,7 +26,7 @@ func resource${nameCamel}() *schema.Resource{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 		Schema: map[string]*schema.Schema{
-			${schemaFields(resourceSchema, createResourceSchema)}
+			${schemaFields(resourceSchema, requiredFields, pathIdField)}
 		},
 	}
 }
@@ -156,25 +156,27 @@ function jsonapiToGoType(type) {
 	}
 }
 
-function schemaFields(resourceSchema, createResourceSchema) {
+function schemaFields(resourceSchema, requiredFields, pathIdField) {
 	return Object.keys(resourceSchema.properties).filter(excludeDateFields).map((field) => {
-		return schemaField(field, resourceSchema, createResourceSchema)
+		return schemaField(field, resourceSchema, requiredFields, pathIdField)
 	}).join('\n')
 }
 
-function schemaField(name, resourceSchema, createResourceSchema) {
+function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 	const schema = resourceSchema.properties[name]
-	const optional = (createResourceSchema.required || []).indexOf(name) === -1 ? "true" : "false"
-	const required = (createResourceSchema.required || []).indexOf(name) === -1 ? "false" : "true"
+	const optional = (requiredFields || []).indexOf(name) === -1 || schema.enum ? "true" : "false"
+	const required = (requiredFields || []).indexOf(name) === -1 || schema.enum ? "false" : "true"
 	const description = (schema.description || '').replace(/"/g, '\\"')
+	const forceNew = name === pathIdField ? "true" : "false"
 	switch (schema.type) {
 		case 'string':
 			return `
 			"${name}": &schema.Schema{
 				Type: schema.TypeString,
-				Computed: ${optional},
+				${schema.enum ? `Default: "${schema.enum[0]}",` : `Computed: ${optional},`}
 				Required: ${required},
 				Optional: ${optional},
+				ForceNew: ${forceNew},
 				Description: "${description}",
 			},
 			`
@@ -185,6 +187,7 @@ function schemaField(name, resourceSchema, createResourceSchema) {
 				Computed: ${optional},
 				Required: ${required},
 				Optional: ${optional},
+				ForceNew: ${forceNew},
 				Description: "${description}",
 			},
 			`
@@ -221,7 +224,7 @@ function schemaField(name, resourceSchema, createResourceSchema) {
 					},
 				},
 				`
-			} else {
+			} else if (schema.items && schema.items.type === "string") {
 				return `
 				"${name}": &schema.Schema{
 					Type: schema.TypeList,
@@ -234,6 +237,22 @@ function schemaField(name, resourceSchema, createResourceSchema) {
 					Description: "${description}",
 				},
 				`
+			} else if (schema.items && schema.items.type === "number") {
+				return `
+				"${name}": &schema.Schema{
+					Type: schema.TypeList,
+					Elem: &schema.Schema{
+						Type: schema.TypeInt,
+					},
+					Computed: ${optional},
+					Required: ${required},
+					Optional: ${optional},
+					Description: "${description}",
+				},
+				`
+			} else {
+				console.log(`unsupported array field schema:`, name, schema)
+				return ''
 			}
 		case 'object':
 		default:

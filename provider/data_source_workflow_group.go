@@ -21,14 +21,14 @@ func dataSourceWorkflowGroup() *schema.Resource{
 			"kind": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 
 			"name": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 
@@ -42,7 +42,7 @@ func dataSourceWorkflowGroup() *schema.Resource{
 			"position": &schema.Schema{
 				Type: schema.TypeInt,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 		},
@@ -74,6 +74,9 @@ func dataSourceWorkflowGroupRead(ctx context.Context, d *schema.ResourceData, me
 		return diag.FromErr(err)
 	}
 
+	if len(items) == 0 {
+		return diag.Errorf("workflow_group not found")
+	}
 	item, _ := items[0].(*client.WorkflowGroup)
 
 	d.SetId(item.ID)

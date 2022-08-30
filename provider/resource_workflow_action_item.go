@@ -6,301 +6,427 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
-	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
-func resourceWorkflowActionItem() *schema.Resource {
+func resourceWorkflowActionItem() *schema.Resource{
 	return &schema.Resource{
-		Description: "Manages workflows.",
-
 		CreateContext: resourceWorkflowActionItemCreate,
-		ReadContext:   resourceWorkflowActionItemRead,
+		ReadContext: resourceWorkflowActionItemRead,
 		UpdateContext: resourceWorkflowActionItemUpdate,
 		DeleteContext: resourceWorkflowActionItemDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-
 		Schema: map[string]*schema.Schema{
-			"name": {
-				Description: "The name of the workflow",
-				Type:        schema.TypeString,
-				Required:    true,
-			},
-			"description": {
-				Description: "The description of the workflow",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"enabled": {
-				Description: "Whether the workflow is enabled or not",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Computed:    true,
-			},
-			"workflow_group_id": {
-				Description: "The workflow group this workflow belongs to.",
+			
+			"name": &schema.Schema{
 				Type: schema.TypeString,
-				Optional: true,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				Description: "The title of the workflow",
+			},
+			
+
+			"slug": &schema.Schema{
+				Type: schema.TypeString,
 				Computed: true,
+				Required: false,
+				Optional: true,
+				Description: "The slug of the workflow",
 			},
-			"command": {
-				Description: "The workflow command.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
+			
+
+			"description": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				Description: "The description of the workflow",
 			},
-			"wait": {
-				Description: "Wait before running workflow.",
-				Type:        schema.TypeString,
-				Optional:    true,
+			
+
+			"command": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				Description: "Workflow command.",
 			},
-			"repeat_every_duration": {
+			
+
+				"triggers": &schema.Schema{
+					Type: schema.TypeList,
+					Elem: &schema.Schema{
+						Type: schema.TypeString,
+					},
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "",
+				},
+				
+
+			"wait": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				Description: "Wait this duration before executing.",
+			},
+			
+
+			"repeat_every_duration": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
 				Description: "Repeat workflow every duration.",
-				Type:        schema.TypeString,
-				Optional:    true,
 			},
-			"repeat_on": {
-				Description: "Repeat workflow on days.",
-				Type:        schema.TypeList,
-				Optional:    true,
+			
+
+				"repeat_on": &schema.Schema{
+					Type: schema.TypeList,
+					Elem: &schema.Schema{
+						Type: schema.TypeString,
+					},
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "",
+				},
+				
+
+			"enabled": &schema.Schema{
+				Type: schema.TypeBool,
 				Computed: true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-					ValidateFunc: validation.StringInSlice([]string{
-						"S",
-						"M",
-						"T",
-						"W",
-						"R",
-						"F",
-						"U",
-					}, false),
-				},
-			},
-			"environment_ids": {
-				Description: "Environment IDs required to trigger workflow.",
-				Type:        schema.TypeList,
-				Optional:    true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
-			},
-			"severity_ids": {
-				Description: "Severity IDs required to trigger workflow.",
-				Type:        schema.TypeList,
-				Optional:    true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
-			},
-			"incident_type_ids": {
-				Description: "Incident type IDs required to trigger workflow.",
-				Type:        schema.TypeList,
-				Optional:    true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
-			},
-			"service_ids": {
-				Description: "Service IDs required to trigger workflow.",
-				Type:        schema.TypeList,
-				Optional:    true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
-			},
-			"group_ids": {
-				Description: "Group IDs required to trigger workflow.",
-				Type:        schema.TypeList,
-				Optional:    true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
-			},
-			"position": {
-				Description:  "The position of the workflow (1 being top of list)",
-				Type:         schema.TypeInt,
-				Optional:     true,
-				Computed:     true,
-			},
-			"trigger_params": {
-				Description: "The conditions for triggering this workflow.",
-				Type: schema.TypeList,
+				Required: false,
 				Optional: true,
+				Description: "",
+			},
+			
+
+			"position": &schema.Schema{
+				Type: schema.TypeInt,
 				Computed: true,
-				MaxItems: 1,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"trigger_type": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-							Default: "action_item",
-							ValidateFunc: validation.StringInSlice([]string{
-								"action_item",
-							}, false),
-						},
-						"triggers": &schema.Schema{
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-						},
-						"incident_kinds": &schema.Schema{
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-						},
-						"incident_statuses": &schema.Schema{
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-						},
-						"incident_visibilities": &schema.Schema{
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Schema{
-								Type: schema.TypeBool,
-							},
-						},
-						"incident_condition": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-							Default: "ALL",
-						},
-						"incident_condition_visibility": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-							Default: "ANY",
-						},
-						"incident_condition_kind": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-							Default: "ANY",
-						},
-						"incident_condition_status": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-							Default: "ANY",
-						},
-						"incident_condition_environment": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-							Default: "ANY",
-						},
-						"incident_condition_severity": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-							Default: "ANY",
-						},
-						"incident_condition_incident_type": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-							Default: "ANY",
-						},
-						"incident_condition_service": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-							Default: "ANY",
-						},
-						"incident_condition_functionality": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-							Default: "ANY",
-						},
-						"incident_condition_group": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-							Default: "ANY",
-						},
-						"incident_condition_summary": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-						},
-						"incident_condition_incident_roles": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-						},
-						"incident_condition_started_at": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-						},
-						"incident_condition_detected_at": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-						},
-						"incident_condition_acknowledged_at": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-						},
-						"incident_condition_mitigated_at": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-						},
-						"incident_condition_resolved_at": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-						},
-						"incident_conditional_inactivity": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-						},
-						"incident_action_item_kinds": &schema.Schema{
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-						},
-						"incident_action_item_statuses": &schema.Schema{
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-						},
-						"incident_action_item_priorities": &schema.Schema{
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-						},
-						"incident_action_item_condition": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-							Default: "ALL",
-						},
-						"incident_action_item_condition_kind": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-							Default: "ANY",
-						},
-						"incident_action_item_condition_status": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-							Default: "ANY",
-						},
-						"incident_action_item_condition_priority": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-							Default: "ANY",
-						},
-						"incident_action_item_condition_group": &schema.Schema{
-							Type: schema.TypeString,
-							Optional: true,
-							Default: "ANY",
+				Required: false,
+				Optional: true,
+				Description: "The order which the workflow should run with other workflows.",
+			},
+			
+
+			"workflow_group_id": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				Description: "The group this workflow belongs to.",
+			},
+			
+
+				"trigger_params": &schema.Schema{
+					Type: schema.TypeList,
+					MinItems: 1,
+					MaxItems: 1,
+					Elem: &schema.Resource{
+						Schema: map[string]*schema.Schema{
+							
+			"trigger_type": &schema.Schema{
+				Type: schema.TypeString,
+				Default: "action_item",
+				Required: false,
+				Optional: true,
+				Description: "",
+			},
+			
+
+				"triggers": &schema.Schema{
+					Type: schema.TypeList,
+					Elem: &schema.Schema{
+						Type: schema.TypeString,
+					},
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "",
+				},
+				
+
+				"incident_kinds": &schema.Schema{
+					Type: schema.TypeList,
+					Elem: &schema.Schema{
+						Type: schema.TypeString,
+					},
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "",
+				},
+				
+
+				"incident_statuses": &schema.Schema{
+					Type: schema.TypeList,
+					Elem: &schema.Schema{
+						Type: schema.TypeString,
+					},
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "",
+				},
+				
+
+				"incident_visibilities": &schema.Schema{
+					Type: schema.TypeList,
+					Elem: &schema.Schema{
+						Type: schema.TypeString,
+					},
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "",
+				},
+				
+
+			"incident_condition": &schema.Schema{
+				Type: schema.TypeString,
+				Default: "ALL",
+				Required: false,
+				Optional: true,
+				Description: "",
+			},
+			
+
+			"incident_condition_visibility": &schema.Schema{
+				Type: schema.TypeString,
+				Default: "IS",
+				Required: false,
+				Optional: true,
+				Description: "",
+			},
+			
+
+			"incident_condition_kind": &schema.Schema{
+				Type: schema.TypeString,
+				Default: "IS",
+				Required: false,
+				Optional: true,
+				Description: "",
+			},
+			
+
+			"incident_condition_status": &schema.Schema{
+				Type: schema.TypeString,
+				Default: "IS",
+				Required: false,
+				Optional: true,
+				Description: "",
+			},
+			
+
+			"incident_condition_environment": &schema.Schema{
+				Type: schema.TypeString,
+				Default: "IS",
+				Required: false,
+				Optional: true,
+				Description: "",
+			},
+			
+
+			"incident_condition_severity": &schema.Schema{
+				Type: schema.TypeString,
+				Default: "IS",
+				Required: false,
+				Optional: true,
+				Description: "",
+			},
+			
+
+			"incident_condition_incident_type": &schema.Schema{
+				Type: schema.TypeString,
+				Default: "IS",
+				Required: false,
+				Optional: true,
+				Description: "",
+			},
+			
+
+			"incident_condition_service": &schema.Schema{
+				Type: schema.TypeString,
+				Default: "IS",
+				Required: false,
+				Optional: true,
+				Description: "",
+			},
+			
+
+			"incident_condition_functionality": &schema.Schema{
+				Type: schema.TypeString,
+				Default: "IS",
+				Required: false,
+				Optional: true,
+				Description: "",
+			},
+			
+
+			"incident_condition_group": &schema.Schema{
+				Type: schema.TypeString,
+				Default: "IS",
+				Required: false,
+				Optional: true,
+				Description: "",
+			},
+			
+
+				"incident_action_item_kinds": &schema.Schema{
+					Type: schema.TypeList,
+					Elem: &schema.Schema{
+						Type: schema.TypeString,
+					},
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "",
+				},
+				
+
+				"incident_action_item_statuses": &schema.Schema{
+					Type: schema.TypeList,
+					Elem: &schema.Schema{
+						Type: schema.TypeString,
+					},
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "",
+				},
+				
+
+				"incident_action_item_priorities": &schema.Schema{
+					Type: schema.TypeList,
+					Elem: &schema.Schema{
+						Type: schema.TypeString,
+					},
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "",
+				},
+				
+
+			"incident_action_item_condition": &schema.Schema{
+				Type: schema.TypeString,
+				Default: "ALL",
+				Required: false,
+				Optional: true,
+				Description: "",
+			},
+			
+
+			"incident_action_item_condition_kind": &schema.Schema{
+				Type: schema.TypeString,
+				Default: "IS",
+				Required: false,
+				Optional: true,
+				Description: "",
+			},
+			
+
+			"incident_action_item_condition_status": &schema.Schema{
+				Type: schema.TypeString,
+				Default: "IS",
+				Required: false,
+				Optional: true,
+				Description: "",
+			},
+			
+
+			"incident_action_item_condition_priority": &schema.Schema{
+				Type: schema.TypeString,
+				Default: "IS",
+				Required: false,
+				Optional: true,
+				Description: "",
+			},
+			
+
+			"incident_action_item_condition_group": &schema.Schema{
+				Type: schema.TypeString,
+				Default: "IS",
+				Required: false,
+				Optional: true,
+				Description: "",
+			},
+			
 						},
 					},
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "",
 				},
-			},
+				
+
+				"environment_ids": &schema.Schema{
+					Type: schema.TypeList,
+					Elem: &schema.Schema{
+						Type: schema.TypeString,
+					},
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "",
+				},
+				
+
+				"severity_ids": &schema.Schema{
+					Type: schema.TypeList,
+					Elem: &schema.Schema{
+						Type: schema.TypeString,
+					},
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "",
+				},
+				
+
+				"incident_type_ids": &schema.Schema{
+					Type: schema.TypeList,
+					Elem: &schema.Schema{
+						Type: schema.TypeString,
+					},
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "",
+				},
+				
+
+				"service_ids": &schema.Schema{
+					Type: schema.TypeList,
+					Elem: &schema.Schema{
+						Type: schema.TypeString,
+					},
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "",
+				},
+				
+
+				"group_ids": &schema.Schema{
+					Type: schema.TypeList,
+					Elem: &schema.Schema{
+						Type: schema.TypeString,
+					},
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "",
+				},
+				
 		},
 	}
 }
@@ -308,192 +434,196 @@ func resourceWorkflowActionItem() *schema.Resource {
 func resourceWorkflowActionItemCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
-	name := d.Get("name").(string)
+	tflog.Trace(ctx, fmt.Sprintf("Creating WorkflowActionItem"))
 
-	tflog.Trace(ctx, fmt.Sprintf("Creating workflow: %s", name))
+	s := &client.Workflow{}
 
-	s := &client.Workflow{
-		Name: name,
+	  if value, ok := d.GetOkExists("name"); ok {
+			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
 	}
-
-	if value, ok := d.GetOk("description"); ok {
-		s.Description = value.(string)
+    if value, ok := d.GetOkExists("slug"); ok {
+			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
 	}
-
-	if v, ok := d.GetOkExists("enabled"); ok {
-		s.Enabled = tools.Bool(v.(bool))
+    if value, ok := d.GetOkExists("description"); ok {
+			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
 	}
-
-	if value, ok := d.GetOk("workflow_group_id"); ok {
-		s.WorkflowGroupId = value.(string)
+    if value, ok := d.GetOkExists("command"); ok {
+			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
 	}
-
-	if v, ok := d.GetOkExists("position"); ok {
-		s.Position = v.(int)
+    if value, ok := d.GetOkExists("triggers"); ok {
+			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
 	}
-
-	if value, ok := d.GetOk("command"); ok {
-		s.Command = value.(string)
+    if value, ok := d.GetOkExists("wait"); ok {
+			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
 	}
-
-	if value, ok := d.GetOk("wait"); ok {
-		s.Wait = value.(string)
+    if value, ok := d.GetOkExists("repeat_every_duration"); ok {
+			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
 	}
-
-	if value, ok := d.GetOk("trigger_params"); ok {
-		s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
+    if value, ok := d.GetOkExists("repeat_on"); ok {
+			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
 	}
-
-	if value, ok := d.GetOk("repeat_every_duration"); ok {
-		s.RepeatEveryDuration = value.(string)
+    if value, ok := d.GetOkExists("enabled"); ok {
+			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
 	}
-
-	if value, ok := d.GetOk("repeat_on"); ok {
-		s.RepeatOn = value.([]interface{})
+    if value, ok := d.GetOkExists("position"); ok {
+			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
 	}
-
-	if value, ok := d.GetOk("environment_ids"); ok {
-		s.EnvironmentIds = value.([]interface{})
+    if value, ok := d.GetOkExists("workflow_group_id"); ok {
+			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
 	}
-
-	if value, ok := d.GetOk("severity_ids"); ok {
-		s.SeverityIds = value.([]interface{})
+    if value, ok := d.GetOkExists("trigger_params"); ok {
+			s.TriggerParams = value.(string)
 	}
-
-	if value, ok := d.GetOk("incident_type_ids"); ok {
-		s.IncidentTypeIds = value.([]interface{})
+    if value, ok := d.GetOkExists("environment_ids"); ok {
+			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
 	}
-
-	if value, ok := d.GetOk("service_ids"); ok {
-		s.ServiceIds = value.([]interface{})
+    if value, ok := d.GetOkExists("severity_ids"); ok {
+			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
 	}
-
-	if value, ok := d.GetOk("group_ids"); ok {
-		s.GroupIds = value.([]interface{})
+    if value, ok := d.GetOkExists("incident_type_ids"); ok {
+			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
+	}
+    if value, ok := d.GetOkExists("service_ids"); ok {
+			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
+	}
+    if value, ok := d.GetOkExists("group_ids"); ok {
+			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
 	}
 
 	res, err := c.CreateWorkflow(s)
 	if err != nil {
-		return diag.Errorf("Error creating workflow: %s", err.Error())
+		return diag.Errorf("Error creating workflow_action_item: %s", err.Error())
 	}
 
 	d.SetId(res.ID)
-	tflog.Trace(ctx, fmt.Sprintf("created an workflow resource: %v (%s)", name, d.Id()))
+	tflog.Trace(ctx, fmt.Sprintf("created a workflow_action_item resource: %s", d.Id()))
 
 	return resourceWorkflowActionItemRead(ctx, d, meta)
 }
 
 func resourceWorkflowActionItemRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
-	tflog.Trace(ctx, fmt.Sprintf("Reading workflow: %s", d.Id()))
+	tflog.Trace(ctx, fmt.Sprintf("Reading WorkflowActionItem: %s", d.Id()))
 
-	res, err := c.GetWorkflow(d.Id())
+	item, err := c.GetWorkflow(d.Id())
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("Workflow (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowActionItem (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
 
-		return diag.Errorf("Error reading workflow: %s", d.Id())
+		return diag.Errorf("Error reading workflow_action_item: %s", d.Id())
 	}
 
-	d.Set("name", res.Name)
-	d.Set("description", res.Description)
-	d.Set("enabled", res.Enabled)
-	d.Set("workflow_group_id", res.WorkflowGroupId)
-	d.Set("position", res.Position)
-	tps := make([]interface{}, 1, 1)
-	tps[0] = res.TriggerParams
-	d.Set("trigger_params", tps)
-	d.Set("command", res.Command)
-	d.Set("wait", res.Wait)
-	d.Set("repeat_every_duration", res.RepeatEveryDuration)
-	d.Set("repeat_on", res.RepeatOn)
-	d.Set("environment_ids", res.EnvironmentIds)
-	d.Set("severity_ids", res.SeverityIds)
-	d.Set("incident_type_ids", res.IncidentTypeIds)
-	d.Set("service_ids", res.ServiceIds)
-	d.Set("group_ids", res.GroupIds)
+	d.Set("name", item.Name)
+  d.Set("slug", item.Slug)
+  d.Set("description", item.Description)
+  d.Set("command", item.Command)
+  d.Set("triggers", item.Triggers)
+  d.Set("wait", item.Wait)
+  d.Set("repeat_every_duration", item.RepeatEveryDuration)
+  d.Set("repeat_on", item.RepeatOn)
+  d.Set("enabled", item.Enabled)
+  d.Set("position", item.Position)
+  d.Set("workflow_group_id", item.WorkflowGroupId)
+  
+        tps := make([]interface{}, 1, 1)
+        tps[0] = item.TriggerParams
+        d.Set("trigger_params", tps)
+			
+  d.Set("environment_ids", item.EnvironmentIds)
+  d.Set("severity_ids", item.SeverityIds)
+  d.Set("incident_type_ids", item.IncidentTypeIds)
+  d.Set("service_ids", item.ServiceIds)
+  d.Set("group_ids", item.GroupIds)
 
 	return nil
 }
 
 func resourceWorkflowActionItemUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
-	tflog.Trace(ctx, fmt.Sprintf("Updating workflow: %s", d.Id()))
+	tflog.Trace(ctx, fmt.Sprintf("Updating WorkflowActionItem: %s", d.Id()))
 
-	name := d.Get("name").(string)
+	s := &client.Workflow{}
 
-	s := &client.Workflow{
-		Name: name,
-	}
+	
+				if d.HasChange("name") {
+					s.Name = d.Get("name").(string)
+				}
+  
+				if d.HasChange("slug") {
+					s.Slug = d.Get("slug").(string)
+				}
+  
+				if d.HasChange("description") {
+					s.Description = d.Get("description").(string)
+				}
+  
+				if d.HasChange("command") {
+					s.Command = d.Get("command").(string)
+				}
+  
+				if d.HasChange("triggers") {
+					s.Triggers = d.Get("triggers").([]interface{})
+				}
+  
+				if d.HasChange("wait") {
+					s.Wait = d.Get("wait").(string)
+				}
+  
+				if d.HasChange("repeat_every_duration") {
+					s.RepeatEveryDuration = d.Get("repeat_every_duration").(string)
+				}
+  
+				if d.HasChange("repeat_on") {
+					s.RepeatOn = d.Get("repeat_on").([]interface{})
+				}
+  
+				if d.HasChange("enabled") {
+					s.Enabled = d.Get("enabled").(bool)
+				}
+  
+				if d.HasChange("position") {
+					s.Position = d.Get("position").(int)
+				}
+  
+				if d.HasChange("workflow_group_id") {
+					s.WorkflowGroupId = d.Get("workflow_group_id").(string)
+				}
+  
+				if d.HasChange("trigger_params") {
+					tps := d.Get("trigger_params").([]interface{})
+					for _, tpsi := range tps {
+						s.TriggerParams = tpsi.(map[string]interface{})
+					}
+				}
+  
+				if d.HasChange("environment_ids") {
+					s.EnvironmentIds = d.Get("environment_ids").([]interface{})
+				}
+  
+				if d.HasChange("severity_ids") {
+					s.SeverityIds = d.Get("severity_ids").([]interface{})
+				}
+  
+				if d.HasChange("incident_type_ids") {
+					s.IncidentTypeIds = d.Get("incident_type_ids").([]interface{})
+				}
+  
+				if d.HasChange("service_ids") {
+					s.ServiceIds = d.Get("service_ids").([]interface{})
+				}
+  
+				if d.HasChange("group_ids") {
+					s.GroupIds = d.Get("group_ids").([]interface{})
+				}
 
-	if d.HasChange("description") {
-		s.Description = d.Get("description").(string)
-	}
-
-	if d.HasChange("enabled") {
-		s.Enabled = tools.Bool(d.Get("enabled").(bool))
-	}
-
-	if d.HasChange("workflow_group_id") {
-		s.WorkflowGroupId = d.Get("workflow_group_id").(string)
-	}
-
-	if d.HasChange("position") {
-		s.Position = d.Get("position").(int)
-	}
-
-	if d.HasChange("trigger_params") {
-		tps := d.Get("trigger_params").([]interface{})
-		for _, tpsi := range tps {
-			s.TriggerParams = tpsi.(map[string]interface{})
-		}
-	}
-
-	if d.HasChange("command") {
-		s.Command = d.Get("command").(string)
-	}
-
-	if d.HasChange("wait") {
-		s.Wait = d.Get("wait").(string)
-	}
-
-	if d.HasChange("repeat_every_duration") {
-		s.RepeatEveryDuration = d.Get("repeat_every_duration").(string)
-	}
-
-	if d.HasChange("repeat_on") {
-		s.RepeatOn = d.Get("repeat_on").([]interface{})
-	}
-
-	if d.HasChange("environment_ids") {
-		s.EnvironmentIds = d.Get("environment_ids").([]interface{})
-	}
-
-	if d.HasChange("severity_ids") {
-		s.SeverityIds = d.Get("severity_ids").([]interface{})
-	}
-
-	if d.HasChange("incident_type_ids") {
-		s.IncidentTypeIds = d.Get("incident_type_ids").([]interface{})
-	}
-
-	if d.HasChange("service_ids") {
-		s.ServiceIds = d.Get("service_ids").([]interface{})
-	}
-
-	if d.HasChange("group_ids") {
-		s.GroupIds = d.Get("group_ids").([]interface{})
-	}
-
-	tflog.Debug(ctx, fmt.Sprintf("adding value: %#v", s))
 	_, err := c.UpdateWorkflow(d.Id(), s)
 	if err != nil {
-		return diag.Errorf("Error updating workflow: %s", err.Error())
+		return diag.Errorf("Error updating workflow_action_item: %s", err.Error())
 	}
 
 	return resourceWorkflowActionItemRead(ctx, d, meta)
@@ -501,18 +631,18 @@ func resourceWorkflowActionItemUpdate(ctx context.Context, d *schema.ResourceDat
 
 func resourceWorkflowActionItemDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
-	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow: %s", d.Id()))
+	tflog.Trace(ctx, fmt.Sprintf("Deleting WorkflowActionItem: %s", d.Id()))
 
 	err := c.DeleteWorkflow(d.Id())
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("Workflow (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowActionItem (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
-		return diag.Errorf("Error deleting workflow: %s", err.Error())
+		return diag.Errorf("Error deleting workflow_action_item: %s", err.Error())
 	}
 
 	d.SetId("")

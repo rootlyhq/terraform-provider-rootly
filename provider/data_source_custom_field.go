@@ -21,7 +21,7 @@ func dataSourceCustomField() *schema.Resource{
 			"label": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 
@@ -32,17 +32,17 @@ func dataSourceCustomField() *schema.Resource{
 			},
 			
 
-			"enabled": &schema.Schema{
-				Type: schema.TypeBool,
-				Computed: true,
-				Optional: true,
-			},
-			
+				"enabled": &schema.Schema{
+					Type: schema.TypeBool,
+					Default: true,
+					Optional: true,
+				},
+				
 
 			"slug": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 
@@ -59,7 +59,7 @@ func dataSourceCustomField() *schema.Resource{
 						Type: schema.TypeString,
 					},
 					Computed: true,
-					Optional: false,
+					Optional: true,
 				},
 				
 
@@ -69,28 +69,28 @@ func dataSourceCustomField() *schema.Resource{
 						Type: schema.TypeString,
 					},
 					Computed: true,
-					Optional: false,
+					Optional: true,
 				},
 				
 
 			"position": &schema.Schema{
 				Type: schema.TypeInt,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 
 			"created_at": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 
 			"updated_at": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
-				Optional: false,
+				Optional: true,
 			},
 			
 		},
@@ -126,6 +126,9 @@ func dataSourceCustomFieldRead(ctx context.Context, d *schema.ResourceData, meta
 		return diag.FromErr(err)
 	}
 
+	if len(items) == 0 {
+		return diag.Errorf("custom_field not found")
+	}
 	item, _ := items[0].(*client.CustomField)
 
 	d.SetId(item.ID)

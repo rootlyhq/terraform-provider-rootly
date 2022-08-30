@@ -18,17 +18,17 @@ description: |-
 ### Optional
 
 - `color` (String)
+- `created_at` (String)
 - `description` (String)
+- `name` (String)
 - `notify_emails` (List of String)
 - `slack_aliases` (Block List) (see [below for nested schema](#nestedblock--slack_aliases))
 - `slack_channels` (Block List) (see [below for nested schema](#nestedblock--slack_channels))
+- `updated_at` (String)
 
 ### Read-Only
 
-- `created_at` (String)
 - `id` (String) The ID of this resource.
-- `name` (String)
-- `updated_at` (String)
 
 <a id="nestedblock--slack_aliases"></a>
 ### Nested Schema for `slack_aliases`

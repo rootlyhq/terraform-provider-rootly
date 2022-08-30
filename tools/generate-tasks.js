@@ -3,7 +3,7 @@ const path = require('path')
 
 module.exports = (swagger) => {
 	const schema = swagger.components.schemas
-	Object.keys(schema).filter((key) => key.match(/_task_params/)).forEach((key) => {
+	return Object.keys(schema).filter((key) => key.match(/_task_params/)).map((key) => {
 		const task_name = key.replace("_task_params", "")
 		const task_schema = schema[key]
 		const task_name_camel = task_name.split("_").map((p) => `${p[0].toUpperCase()}${p.slice(1)}`).join('')
@@ -11,6 +11,7 @@ module.exports = (swagger) => {
 		//console.log(`generated provider/resource_workflow_task_${task_name}.go`)
 		//fs.writeFileSync(`./provider/resource_workflow_task_${task_name}_test.go`, genResourceTestFile(task_name, task_schema))
 		//console.log(`generated provider/resource_workflow_task_${task_name}_test.go`)
+		return task_name
 	})
 }
 
