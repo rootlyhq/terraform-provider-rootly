@@ -28,18 +28,6 @@ Dashboards
 
 ## Development
 
-### Generate Go types from Swagger
+`make build` auto-generates code from Swagger, compiles provider, and regenerates docs.
 
-Use `make schema`.
-
-### Auto-generate workflow task resources and tests from Swagger
-
-Use `node tools/gen_tasks.js swagger.json`
-
-The latest Swagger definition can be downloaded from rootly.com:
-
-```sh
-curl https://api.rootly.com/v1/swagger.json -o ./swagger.json
-```
-
-**Note**: The tests for tasks that depend on other resources will fail (ex: rootly_workflow_task_update_incident requires an incident ID). Not all tasks can be reliably auto-generated from Swagger.
+Exclude API resources from the provider by adding them to the excluded list in `tools/generate.js`.

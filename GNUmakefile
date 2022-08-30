@@ -11,10 +11,10 @@ default: testacc
 
 # Run acceptance tests
 .PHONY: testacc generate build release install test docs
-build: generate
+build: generate docs
 	go build -o ${BINARY}
 
-docs: build
+docs: generate
 	go get github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
 	go run github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
 	cp docs/index.md README.md
