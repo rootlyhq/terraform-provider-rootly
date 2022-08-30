@@ -134,11 +134,11 @@ function createResourceFields(resourceSchema) {
 		const schema = resourceSchema.properties[field]
 		if (field === "trigger_params") {
 			return`  if value, ok := d.GetOkExists("${field}"); ok {
-			s.${inflect.camelize(field)} = value.(${jsonapiToGoType(schema.type)})
+			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
 	}`
 		} else {
 			return`  if value, ok := d.GetOkExists("${field}"); ok {
-			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
+			s.${inflect.camelize(field)} = value.(${jsonapiToGoType(schema.type)})
 	}`
 		}
 	}).join('\n  ')
