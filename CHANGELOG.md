@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.26] -- 2022-08-31
+
+- Change data sources to return one resource. Example: `data.rootly_causes.name.causes[0].id` changed to `data.rootly_cause.name.id`
+- Add playbook resources/data-source.
+- Add status_page resources/data-source.
+- Add status_page_template resources/data-source.
+
 ## [0.1.25] -- 2022-08-29
 
 - Add `rootly_workflow_custom_field_selection` resource.
