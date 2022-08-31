@@ -8460,6 +8460,7 @@ type Team struct {
 		// Slack channel name
 		Name string `json:"name"`
 	} `json:"slack_channels"`
+	Slug *string `json:"slug,omitempty"`
 
 	// Date of last update
 	UpdatedAt string `json:"updated_at"`
@@ -8500,6 +8501,7 @@ type TeamList struct {
 				// Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels"`
+			Slug *string `json:"slug,omitempty"`
 
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`
@@ -8556,6 +8558,7 @@ type TeamResponse struct {
 				// Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels"`
+			Slug *string `json:"slug,omitempty"`
 
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`

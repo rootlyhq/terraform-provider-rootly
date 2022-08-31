@@ -18,13 +18,6 @@ func dataSourceWorkflowGroup() *schema.Resource{
 				Computed: true,
 			},
 			
-			"kind": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Optional: true,
-			},
-			
-
 			"name": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,

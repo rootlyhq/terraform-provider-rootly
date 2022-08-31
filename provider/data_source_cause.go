@@ -31,27 +31,6 @@ func dataSourceCause() *schema.Resource{
 				Optional: true,
 			},
 			
-
-			"description": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Optional: true,
-			},
-			
-
-			"created_at": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Optional: true,
-			},
-			
-
-			"updated_at": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Optional: true,
-			},
-			
 		},
 	}
 }

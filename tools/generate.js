@@ -30,23 +30,22 @@ const excluded = [
 const resources = Object.keys(swagger.components.schemas).filter((name) => {
 	return excluded.indexOf(name) === -1 && collectionPathSchema(name)
 })
+const dataSources = resources.filter(resourceHasFilters).filter((name) => name !== "workflow")
+const taskResources = generateTasks(swagger)
 
-resources.forEach(generate)
+generateProvider(resources, taskResources, dataSources)
 
-const task_resources = generateTasks(swagger)
-generateProvider(resources, task_resources)
-
-function generate(name) {
+resources.forEach((name) => {
 	generateClient(name)
 	generateResource(name)
-	if (name !== "workflow") {
-		generateDataSource(name)
-		generateResourceTest(name)
-	}
-}
+	generateResourceTest(name)
+})
 
-function generateProvider(resources, task_resources) {
-	fs.writeFileSync(path.resolve(__dirname, '..', 'provider', 'provider.go'), providerTpl(resources.filter((name) => name !== 'workflow'), task_resources))
+dataSources.forEach(generateDataSource)
+
+function generateProvider(resources, taskResources, dataSources) {
+	const code = providerTpl(resources.filter((name) => name !== 'workflow'), taskResources, dataSources)
+	fs.writeFileSync(path.resolve(__dirname, '..', 'provider', 'provider.go'), code)
 }
 
 function generateClient(name) {
@@ -56,12 +55,20 @@ function generateClient(name) {
 	fs.writeFileSync(path.resolve(__dirname, '..', 'client', `${inflect.pluralize(name)}.go`), code)
 }
 
+function resourceHasFilters(name) {
+	const collectionSchema = collectionPathSchema(name)
+	const filterParameters = collectionSchema.get && collectionSchema.get.parameters
+	return filterParameters.filter((filter) => filter.name.match(/filter/i)).length
+}
+
 function generateDataSource(name) {
 	const collectionSchema = collectionPathSchema(name)
 	const filterParameters = collectionSchema.get && collectionSchema.get.parameters
 	const pathIdField = collectionSchema && collectionSchema.parameters && collectionSchema.parameters[0] && collectionSchema.parameters[0].name
 	const code = dataSourceTpl(name, resourceSchema(name), filterParameters, pathIdField)
-	fs.writeFileSync(path.resolve(__dirname, '..', 'provider', `data_source_${name}.go`), code)
+	if (code) {
+		fs.writeFileSync(path.resolve(__dirname, '..', 'provider', `data_source_${name}.go`), code)
+	}
 }
 
 function generateResource(name) {

@@ -25,76 +25,14 @@ func dataSourceTeam() *schema.Resource{
 			},
 			
 
-			"description": &schema.Schema{
+			"slug": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
 				Optional: true,
 			},
 			
-
-				"notify_emails": &schema.Schema{
-					Type: schema.TypeList,
-					Elem: &schema.Schema{
-						Type: schema.TypeString,
-					},
-					Computed: true,
-					Optional: true,
-				},
-				
 
 			"color": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Optional: true,
-			},
-			
-
-				"slack_channels": &schema.Schema{
-					Type: schema.TypeList,
-					Computed: true,
-					Optional: true,
-					Elem: &schema.Resource{
-						Schema: map[string]*schema.Schema{
-							"id": &schema.Schema{
-								Type: schema.TypeString,
-								Required: true,
-							},
-							"name": &schema.Schema{
-								Type: schema.TypeString,
-								Required: true,
-							},
-						},
-					},
-				},
-				
-
-				"slack_aliases": &schema.Schema{
-					Type: schema.TypeList,
-					Computed: true,
-					Optional: true,
-					Elem: &schema.Resource{
-						Schema: map[string]*schema.Schema{
-							"id": &schema.Schema{
-								Type: schema.TypeString,
-								Required: true,
-							},
-							"name": &schema.Schema{
-								Type: schema.TypeString,
-								Required: true,
-							},
-						},
-					},
-				},
-				
-
-			"created_at": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Optional: true,
-			},
-			
-
-			"updated_at": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
 				Optional: true,
@@ -112,6 +50,10 @@ func dataSourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interf
 	params.PageSize = &page_size
 
 	
+				slug := d.Get("slug").(string)
+				params.FilterSlug = &slug
+			
+
 				name := d.Get("name").(string)
 				params.FilterName = &name
 			

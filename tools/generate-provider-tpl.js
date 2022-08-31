@@ -1,6 +1,6 @@
 const inflect = require('inflect')
 
-module.exports = (resources, task_resources) => {
+module.exports = (resources, taskResources, dataSources) => {
 return `package provider
 
 import (
@@ -47,7 +47,7 @@ func New(version string) func() *schema.Provider {
 				},
 			},
 			DataSourcesMap: map[string]*schema.Resource{
-${resources.map((name) => {
+${dataSources.map((name) => {
 	return `				"rootly_${name}": dataSource${inflect.camelize(name)}(),`
 }).join('\n')}
 				"rootly_causes": dataSourceCauses(),
@@ -72,7 +72,7 @@ ${resources.map((name) => {
 				"rootly_workflow_alert": resourceWorkflowAlert(),
 				"rootly_workflow_pulse": resourceWorkflowPulse(),
 				"rootly_workflow_post_mortem": resourceWorkflowPostMortem(),
-${task_resources.map((name) => {
+${taskResources.map((name) => {
 	return `				"rootly_workflow_task_${name}": resourceWorkflowTask${inflect.camelize(name)}(),`
 }).join('\n')}
 			},

@@ -18,12 +18,9 @@ description: |-
 ### Optional
 
 - `color` (String)
-- `created_at` (String)
-- `description` (String)
 - `name` (String)
 - `severity` (String)
 - `slug` (String)
-- `updated_at` (String)
 
 ### Read-Only
 

@@ -25,7 +25,7 @@ func dataSource${nameCamel}() *schema.Resource{
 				Type: schema.TypeString,
 				Computed: true,
 			},
-			${schemaFields(resourceSchema)}
+			${schemaFields(resourceSchema, filterParameters)}
 		},
 	}
 }
@@ -98,23 +98,18 @@ function jsonapiToGoType(type) {
 	}
 }
 
-function schemaFields(resourceSchema) {
-	return Object.keys(resourceSchema.properties).map((field) => {
-		return schemaField(field, resourceSchema)
+function schemaFields(resourceSchema, filterParameters) {
+	return Object.keys(resourceSchema.properties).filter((name) => {
+		return filterParameters.some((param) => param.name.match(name))
+	}).map((name) => {
+		return schemaField(name, resourceSchema);
 	}).join('\n')
 }
 
 function schemaField(name, resourceSchema) {
 	const schema = resourceSchema.properties[name]
 	switch (schema.type) {
-		case 'string':
-			return `
-			"${name}": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Optional: true,
-			},
-			`
+		case 'integer':
 		case 'number':
 			return `
 			"${name}": &schema.Schema{
@@ -140,45 +135,11 @@ function schemaField(name, resourceSchema) {
 				Optional: true,
 			},
 			`
-		case 'array':
-			if (schema.items && schema.items.type === "object") {
-				return `
-				"${name}": &schema.Schema{
-					Type: schema.TypeList,
-					Computed: true,
-					Optional: true,
-					Elem: &schema.Resource{
-						Schema: map[string]*schema.Schema{
-							"id": &schema.Schema{
-								Type: schema.TypeString,
-								Required: true,
-							},
-							"name": &schema.Schema{
-								Type: schema.TypeString,
-								Required: true,
-							},
-						},
-					},
-				},
-				`
-			} else {
-				return `
-				"${name}": &schema.Schema{
-					Type: schema.TypeList,
-					Elem: &schema.Schema{
-						Type: schema.TypeString,
-					},
-					Computed: true,
-					Optional: true,
-				},
-				`
-			}
-		case 'object':
+		case 'string':
 		default:
 			return `
 			"${name}": &schema.Schema{
-				Type: schema.TypeMap,
-				Elem: schema.TypeString,
+				Type: schema.TypeString,
 				Computed: true,
 				Optional: true,
 			},

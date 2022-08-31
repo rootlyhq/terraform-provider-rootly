@@ -17,11 +17,8 @@ description: |-
 
 ### Optional
 
-- `created_at` (String)
-- `description` (String)
 - `name` (String)
 - `slug` (String)
-- `updated_at` (String)
 
 ### Read-Only
 

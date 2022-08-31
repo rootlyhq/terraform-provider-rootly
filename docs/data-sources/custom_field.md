@@ -17,16 +17,10 @@ description: |-
 
 ### Optional
 
-- `created_at` (String)
-- `description` (String)
 - `enabled` (Boolean)
 - `kind` (String)
 - `label` (String)
-- `position` (Number)
-- `required` (List of String)
-- `shown` (List of String)
 - `slug` (String)
-- `updated_at` (String)
 
 ### Read-Only
 

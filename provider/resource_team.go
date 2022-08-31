@@ -31,6 +31,16 @@ func resourceTeam() *schema.Resource{
 			},
 			
 
+			"slug": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "",
+			},
+			
+
 			"description": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
@@ -118,6 +128,9 @@ func resourceTeamCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	  if value, ok := d.GetOkExists("name"); ok {
 				s.Name = value.(string)
 			}
+    if value, ok := d.GetOkExists("slug"); ok {
+				s.Slug = value.(string)
+			}
     if value, ok := d.GetOkExists("description"); ok {
 				s.Description = value.(string)
 			}
@@ -163,6 +176,7 @@ func resourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	}
 
 	d.Set("name", item.Name)
+  d.Set("slug", item.Slug)
   d.Set("description", item.Description)
   d.Set("notify_emails", item.NotifyEmails)
   d.Set("color", item.Color)
@@ -180,6 +194,9 @@ func resourceTeamUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 
 	  if d.HasChange("name") {
 				s.Name = d.Get("name").(string)
+			}
+    if d.HasChange("slug") {
+				s.Slug = d.Get("slug").(string)
 			}
     if d.HasChange("description") {
 				s.Description = d.Get("description").(string)

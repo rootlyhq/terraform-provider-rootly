@@ -23,6 +23,7 @@ description: |-
 - `notify_emails` (List of String) Emails to attach to the team
 - `slack_aliases` (Block List) Slack Aliases associated with this service (see [below for nested schema](#nestedblock--slack_aliases))
 - `slack_channels` (Block List) Slack Channels associated with this service (see [below for nested schema](#nestedblock--slack_channels))
+- `slug` (String)
 
 ### Read-Only
 

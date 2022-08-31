@@ -18,10 +18,6 @@ description: |-
 ### Optional
 
 - `color` (String)
-- `created_at` (String)
-- `custom_field_id` (Number)
-- `position` (Number)
-- `updated_at` (String)
 - `value` (String)
 
 ### Read-Only

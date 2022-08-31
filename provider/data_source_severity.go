@@ -32,13 +32,6 @@ func dataSourceSeverity() *schema.Resource{
 			},
 			
 
-			"description": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Optional: true,
-			},
-			
-
 			"severity": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
@@ -47,20 +40,6 @@ func dataSourceSeverity() *schema.Resource{
 			
 
 			"color": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Optional: true,
-			},
-			
-
-			"created_at": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Optional: true,
-			},
-			
-
-			"updated_at": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
 				Optional: true,

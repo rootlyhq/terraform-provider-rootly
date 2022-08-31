@@ -18,13 +18,6 @@ func dataSourceCustomFieldOption() *schema.Resource{
 				Computed: true,
 			},
 			
-			"custom_field_id": &schema.Schema{
-				Type: schema.TypeInt,
-				Computed: true,
-				Optional: true,
-			},
-			
-
 			"value": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
@@ -33,27 +26,6 @@ func dataSourceCustomFieldOption() *schema.Resource{
 			
 
 			"color": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Optional: true,
-			},
-			
-
-			"position": &schema.Schema{
-				Type: schema.TypeInt,
-				Computed: true,
-				Optional: true,
-			},
-			
-
-			"created_at": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Optional: true,
-			},
-			
-
-			"updated_at": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
 				Optional: true,

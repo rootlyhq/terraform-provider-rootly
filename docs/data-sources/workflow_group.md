@@ -18,7 +18,6 @@ description: |-
 ### Optional
 
 - `expanded` (Boolean)
-- `kind` (String)
 - `name` (String)
 - `position` (Number)
 

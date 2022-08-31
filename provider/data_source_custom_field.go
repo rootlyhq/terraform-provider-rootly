@@ -45,54 +45,6 @@ func dataSourceCustomField() *schema.Resource{
 				Optional: true,
 			},
 			
-
-			"description": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Optional: true,
-			},
-			
-
-				"shown": &schema.Schema{
-					Type: schema.TypeList,
-					Elem: &schema.Schema{
-						Type: schema.TypeString,
-					},
-					Computed: true,
-					Optional: true,
-				},
-				
-
-				"required": &schema.Schema{
-					Type: schema.TypeList,
-					Elem: &schema.Schema{
-						Type: schema.TypeString,
-					},
-					Computed: true,
-					Optional: true,
-				},
-				
-
-			"position": &schema.Schema{
-				Type: schema.TypeInt,
-				Computed: true,
-				Optional: true,
-			},
-			
-
-			"created_at": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Optional: true,
-			},
-			
-
-			"updated_at": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Optional: true,
-			},
-			
 		},
 	}
 }

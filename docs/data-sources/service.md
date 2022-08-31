@@ -17,50 +17,10 @@ description: |-
 
 ### Optional
 
-- `color` (String)
-- `created_at` (String)
-- `description` (String)
-- `environment_ids` (List of String)
-- `github_repository_branch` (String)
-- `github_repository_name` (String)
-- `gitlab_repository_branch` (String)
-- `gitlab_repository_name` (String)
 - `name` (String)
-- `notify_emails` (List of String)
-- `opsgenie_id` (String)
-- `owners_group_ids` (List of String)
-- `pagerduty_id` (String)
-- `public_description` (String)
-- `service_ids` (List of String)
-- `slack_aliases` (Block List) (see [below for nested schema](#nestedblock--slack_aliases))
-- `slack_channels` (Block List) (see [below for nested schema](#nestedblock--slack_channels))
 - `slug` (String)
-- `updated_at` (String)
 
 ### Read-Only
-
-- `id` (String) The ID of this resource.
-
-<a id="nestedblock--slack_aliases"></a>
-### Nested Schema for `slack_aliases`
-
-Required:
-
-- `name` (String)
-
-Read-Only:
-
-- `id` (String) The ID of this resource.
-
-
-<a id="nestedblock--slack_channels"></a>
-### Nested Schema for `slack_channels`
-
-Required:
-
-- `name` (String)
-
-Read-Only:
 
 - `id` (String) The ID of this resource.
 
