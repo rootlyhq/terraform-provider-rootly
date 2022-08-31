@@ -204,6 +204,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 				Description: "${description}",
 			},
 			`
+		case 'integer':
 		case 'number':
 			return `
 			"${name}": &schema.Schema{

@@ -88,6 +88,7 @@ function jsonapiToGoType(type) {
 	switch (type) {
 		case 'string':
 			return 'string'
+		case 'integer':
 		case 'number':
 			return 'int'
 		case 'boolean':

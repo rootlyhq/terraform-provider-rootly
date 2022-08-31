@@ -80,13 +80,11 @@ func resourceStatusPage() *schema.Resource{
 			
 
 			"show_uptime_last_days": &schema.Schema{
-				Type: schema.TypeMap,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
+				Type: schema.TypeInt,
 				Computed: true,
 				Required: false,
 				Optional: true,
+				ForceNew: false,
 				Description: "Show uptime over x days",
 			},
 			

@@ -39,9 +39,10 @@ resource "rootly_workflow_incident" "foo" {
 resource "rootly_workflow_task_send_email" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
+		from = "test@test.com"
 		to = ["foo"]
-subject = "test"
-body = "test"
+		subject = "test"
+		body = "test"
 	}
 }
 `
@@ -57,9 +58,10 @@ resource "rootly_workflow_incident" "foo" {
 resource "rootly_workflow_task_send_email" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
+		from = "test@test.com"
 		to = ["foo"]
-subject = "test"
-body = "test"
+		subject = "test"
+		body = "test"
 	}
 }
 `

@@ -25,7 +25,7 @@ description: |-
 - `header_color` (String) The color of the header. Eg. "#0061F2"
 - `public` (Boolean) Make the status page accessible to the public
 - `show_uptime` (Boolean) Show uptime
-- `show_uptime_last_days` (Map of String) Show uptime over x days
+- `show_uptime_last_days` (Number) Show uptime over x days
 
 ### Read-Only
 
