@@ -2544,6 +2544,7 @@ type ActionItemTriggerParams struct {
 	IncidentConditionEnvironment        *ActionItemTriggerParamsIncidentConditionEnvironment        `json:"incident_condition_environment,omitempty"`
 	IncidentConditionFunctionality      *ActionItemTriggerParamsIncidentConditionFunctionality      `json:"incident_condition_functionality,omitempty"`
 	IncidentConditionGroup              *ActionItemTriggerParamsIncidentConditionGroup              `json:"incident_condition_group,omitempty"`
+	IncidentConditionIncidentRoles      *interface{}                                                `json:"incident_condition_incident_roles,omitempty"`
 	IncidentConditionIncidentType       *ActionItemTriggerParamsIncidentConditionIncidentType       `json:"incident_condition_incident_type,omitempty"`
 	IncidentConditionKind               *ActionItemTriggerParamsIncidentConditionKind               `json:"incident_condition_kind,omitempty"`
 	IncidentConditionMitigatedAt        *interface{}                                                `json:"incident_condition_mitigated_at,omitempty"`
@@ -5793,6 +5794,7 @@ type IncidentTriggerParams struct {
 	IncidentConditionEnvironment    *IncidentTriggerParamsIncidentConditionEnvironment   `json:"incident_condition_environment,omitempty"`
 	IncidentConditionFunctionality  *IncidentTriggerParamsIncidentConditionFunctionality `json:"incident_condition_functionality,omitempty"`
 	IncidentConditionGroup          *IncidentTriggerParamsIncidentConditionGroup         `json:"incident_condition_group,omitempty"`
+	IncidentConditionIncidentRoles  *interface{}                                         `json:"incident_condition_incident_roles,omitempty"`
 	IncidentConditionIncidentType   *IncidentTriggerParamsIncidentConditionIncidentType  `json:"incident_condition_incident_type,omitempty"`
 	IncidentConditionKind           *IncidentTriggerParamsIncidentConditionKind          `json:"incident_condition_kind,omitempty"`
 	IncidentConditionMitigatedAt    *interface{}                                         `json:"incident_condition_mitigated_at,omitempty"`

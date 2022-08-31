@@ -266,6 +266,15 @@ func resourceWorkflowActionItem() *schema.Resource{
 			},
 			
 
+			"incident_condition_incident_roles": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				Description: "",
+			},
+			
+
 			"incident_condition_summary": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,

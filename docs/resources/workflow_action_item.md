@@ -58,6 +58,7 @@ Optional:
 - `incident_condition_environment` (String)
 - `incident_condition_functionality` (String)
 - `incident_condition_group` (String)
+- `incident_condition_incident_roles` (String)
 - `incident_condition_incident_type` (String)
 - `incident_condition_kind` (String)
 - `incident_condition_mitigated_at` (String)
