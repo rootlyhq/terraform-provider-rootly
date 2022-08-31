@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.27] -- 2022-08-31
+
+- Add "slug" to team data source.
+
 ## [0.1.26] -- 2022-08-31
 
 - Change data sources to return one resource. Example: `data.rootly_causes.name.causes[0].id` changed to `data.rootly_cause.name.id`
