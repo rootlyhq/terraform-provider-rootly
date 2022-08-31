@@ -12,7 +12,7 @@ type CustomField struct {
 	ID string `jsonapi:"primary,custom_fields"`
 	Label string `jsonapi:"attr,label,omitempty"`
   Kind string `jsonapi:"attr,kind,omitempty"`
-  Enabled bool `jsonapi:"attr,enabled,omitempty"`
+  Enabled *bool `jsonapi:"attr,enabled,omitempty"`
   Slug string `jsonapi:"attr,slug,omitempty"`
   Description string `jsonapi:"attr,description,omitempty"`
   Shown []interface{} `jsonapi:"attr,shown,omitempty"`

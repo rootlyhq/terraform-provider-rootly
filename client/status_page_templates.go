@@ -14,8 +14,8 @@ type StatusPageTemplate struct {
   Title string `jsonapi:"attr,title,omitempty"`
   Body string `jsonapi:"attr,body,omitempty"`
   UpdateStatus string `jsonapi:"attr,update_status,omitempty"`
-  ShouldNotifySubscribers bool `jsonapi:"attr,should_notify_subscribers,omitempty"`
-  Enabled bool `jsonapi:"attr,enabled,omitempty"`
+  ShouldNotifySubscribers *bool `jsonapi:"attr,should_notify_subscribers,omitempty"`
+  Enabled *bool `jsonapi:"attr,enabled,omitempty"`
   Position int `jsonapi:"attr,position,omitempty"`
 }
 

@@ -31,7 +31,6 @@ description: |-
 - `severity_ids` (List of String)
 - `slug` (String) The slug of the workflow
 - `trigger_params` (Block List, Max: 1) (see [below for nested schema](#nestedblock--trigger_params))
-- `triggers` (List of String)
 - `wait` (String) Wait this duration before executing.
 - `workflow_group_id` (String) The group this workflow belongs to.
 

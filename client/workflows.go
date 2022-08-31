@@ -14,14 +14,13 @@ type Workflow struct {
   Slug string `jsonapi:"attr,slug,omitempty"`
   Description string `jsonapi:"attr,description,omitempty"`
   Command string `jsonapi:"attr,command,omitempty"`
-  Triggers []interface{} `jsonapi:"attr,triggers,omitempty"`
   Wait string `jsonapi:"attr,wait,omitempty"`
   RepeatEveryDuration string `jsonapi:"attr,repeat_every_duration,omitempty"`
   RepeatOn []interface{} `jsonapi:"attr,repeat_on,omitempty"`
-  Enabled bool `jsonapi:"attr,enabled,omitempty"`
+  Enabled *bool `jsonapi:"attr,enabled,omitempty"`
   Position int `jsonapi:"attr,position,omitempty"`
   WorkflowGroupId string `jsonapi:"attr,workflow_group_id,omitempty"`
-  TriggerParams interface{} `jsonapi:"attr,trigger_params,omitempty"`
+  TriggerParams map[string]interface{} `jsonapi:"attr,trigger_params,omitempty"`
   EnvironmentIds []interface{} `jsonapi:"attr,environment_ids,omitempty"`
   SeverityIds []interface{} `jsonapi:"attr,severity_ids,omitempty"`
   IncidentTypeIds []interface{} `jsonapi:"attr,incident_type_ids,omitempty"`

@@ -1890,7 +1890,7 @@ const (
 
 // Defines values for StandaloneTriggerParamsTriggers.
 const (
-	StandaloneTriggerParamsTriggersSlackCommand StandaloneTriggerParamsTriggers = "slack_command"
+	SlackCommand StandaloneTriggerParamsTriggers = "slack_command"
 )
 
 // Defines values for StatusPageShowUptimeLastDays.
@@ -2347,24 +2347,6 @@ const (
 	WorkflowRepeatOnW WorkflowRepeatOn = "W"
 )
 
-// Defines values for WorkflowTriggers.
-const (
-	WorkflowTriggersEnvironmentsUpdated    WorkflowTriggers = "environments_updated"
-	WorkflowTriggersFunctionalitiesUpdated WorkflowTriggers = "functionalities_updated"
-	WorkflowTriggersIncidentCreated        WorkflowTriggers = "incident_created"
-	WorkflowTriggersIncidentTypesUpdated   WorkflowTriggers = "incident_types_updated"
-	WorkflowTriggersIncidentUpdated        WorkflowTriggers = "incident_updated"
-	WorkflowTriggersRoleAssignmentsUpdated WorkflowTriggers = "role_assignments_updated"
-	WorkflowTriggersServicesUpdated        WorkflowTriggers = "services_updated"
-	WorkflowTriggersSeverityUpdated        WorkflowTriggers = "severity_updated"
-	WorkflowTriggersSlackCommand           WorkflowTriggers = "slack_command"
-	WorkflowTriggersStatusUpdated          WorkflowTriggers = "status_updated"
-	WorkflowTriggersSummaryUpdated         WorkflowTriggers = "summary_updated"
-	WorkflowTriggersTeamsUpdated           WorkflowTriggers = "teams_updated"
-	WorkflowTriggersTimelineUpdated        WorkflowTriggers = "timeline_updated"
-	WorkflowTriggersTitleUpdated           WorkflowTriggers = "title_updated"
-)
-
 // Defines values for WorkflowCustomFieldSelectionIncidentCondition.
 const (
 	WorkflowCustomFieldSelectionIncidentConditionANY         WorkflowCustomFieldSelectionIncidentCondition = "ANY"
@@ -2459,24 +2441,6 @@ const (
 	WorkflowListDataAttributesRepeatOnW WorkflowListDataAttributesRepeatOn = "W"
 )
 
-// Defines values for WorkflowListDataAttributesTriggers.
-const (
-	WorkflowListDataAttributesTriggersEnvironmentsUpdated    WorkflowListDataAttributesTriggers = "environments_updated"
-	WorkflowListDataAttributesTriggersFunctionalitiesUpdated WorkflowListDataAttributesTriggers = "functionalities_updated"
-	WorkflowListDataAttributesTriggersIncidentCreated        WorkflowListDataAttributesTriggers = "incident_created"
-	WorkflowListDataAttributesTriggersIncidentTypesUpdated   WorkflowListDataAttributesTriggers = "incident_types_updated"
-	WorkflowListDataAttributesTriggersIncidentUpdated        WorkflowListDataAttributesTriggers = "incident_updated"
-	WorkflowListDataAttributesTriggersRoleAssignmentsUpdated WorkflowListDataAttributesTriggers = "role_assignments_updated"
-	WorkflowListDataAttributesTriggersServicesUpdated        WorkflowListDataAttributesTriggers = "services_updated"
-	WorkflowListDataAttributesTriggersSeverityUpdated        WorkflowListDataAttributesTriggers = "severity_updated"
-	WorkflowListDataAttributesTriggersSlackCommand           WorkflowListDataAttributesTriggers = "slack_command"
-	WorkflowListDataAttributesTriggersStatusUpdated          WorkflowListDataAttributesTriggers = "status_updated"
-	WorkflowListDataAttributesTriggersSummaryUpdated         WorkflowListDataAttributesTriggers = "summary_updated"
-	WorkflowListDataAttributesTriggersTeamsUpdated           WorkflowListDataAttributesTriggers = "teams_updated"
-	WorkflowListDataAttributesTriggersTimelineUpdated        WorkflowListDataAttributesTriggers = "timeline_updated"
-	WorkflowListDataAttributesTriggersTitleUpdated           WorkflowListDataAttributesTriggers = "title_updated"
-)
-
 // Defines values for WorkflowListDataType.
 const (
 	WorkflowListDataTypeWorkflows WorkflowListDataType = "workflows"
@@ -2491,24 +2455,6 @@ const (
 	WorkflowResponseDataAttributesRepeatOnT WorkflowResponseDataAttributesRepeatOn = "T"
 	WorkflowResponseDataAttributesRepeatOnU WorkflowResponseDataAttributesRepeatOn = "U"
 	WorkflowResponseDataAttributesRepeatOnW WorkflowResponseDataAttributesRepeatOn = "W"
-)
-
-// Defines values for WorkflowResponseDataAttributesTriggers.
-const (
-	WorkflowResponseDataAttributesTriggersEnvironmentsUpdated    WorkflowResponseDataAttributesTriggers = "environments_updated"
-	WorkflowResponseDataAttributesTriggersFunctionalitiesUpdated WorkflowResponseDataAttributesTriggers = "functionalities_updated"
-	WorkflowResponseDataAttributesTriggersIncidentCreated        WorkflowResponseDataAttributesTriggers = "incident_created"
-	WorkflowResponseDataAttributesTriggersIncidentTypesUpdated   WorkflowResponseDataAttributesTriggers = "incident_types_updated"
-	WorkflowResponseDataAttributesTriggersIncidentUpdated        WorkflowResponseDataAttributesTriggers = "incident_updated"
-	WorkflowResponseDataAttributesTriggersRoleAssignmentsUpdated WorkflowResponseDataAttributesTriggers = "role_assignments_updated"
-	WorkflowResponseDataAttributesTriggersServicesUpdated        WorkflowResponseDataAttributesTriggers = "services_updated"
-	WorkflowResponseDataAttributesTriggersSeverityUpdated        WorkflowResponseDataAttributesTriggers = "severity_updated"
-	WorkflowResponseDataAttributesTriggersSlackCommand           WorkflowResponseDataAttributesTriggers = "slack_command"
-	WorkflowResponseDataAttributesTriggersStatusUpdated          WorkflowResponseDataAttributesTriggers = "status_updated"
-	WorkflowResponseDataAttributesTriggersSummaryUpdated         WorkflowResponseDataAttributesTriggers = "summary_updated"
-	WorkflowResponseDataAttributesTriggersTeamsUpdated           WorkflowResponseDataAttributesTriggers = "teams_updated"
-	WorkflowResponseDataAttributesTriggersTimelineUpdated        WorkflowResponseDataAttributesTriggers = "timeline_updated"
-	WorkflowResponseDataAttributesTriggersTitleUpdated           WorkflowResponseDataAttributesTriggers = "title_updated"
 )
 
 // Defines values for WorkflowResponseDataType.
@@ -2588,19 +2534,27 @@ type ActionItemTriggerParams struct {
 	IncidentActionItemConditionKind     *ActionItemTriggerParamsIncidentActionItemConditionKind     `json:"incident_action_item_condition_kind,omitempty"`
 	IncidentActionItemConditionPriority *ActionItemTriggerParamsIncidentActionItemConditionPriority `json:"incident_action_item_condition_priority,omitempty"`
 	IncidentActionItemConditionStatus   *ActionItemTriggerParamsIncidentActionItemConditionStatus   `json:"incident_action_item_condition_status,omitempty"`
+	IncidentActionItemGroupIds          *[]string                                                   `json:"incident_action_item_group_ids,omitempty"`
 	IncidentActionItemKinds             *[]ActionItemTriggerParamsIncidentActionItemKinds           `json:"incident_action_item_kinds,omitempty"`
 	IncidentActionItemPriorities        *[]ActionItemTriggerParamsIncidentActionItemPriorities      `json:"incident_action_item_priorities,omitempty"`
 	IncidentActionItemStatuses          *[]ActionItemTriggerParamsIncidentActionItemStatuses        `json:"incident_action_item_statuses,omitempty"`
 	IncidentCondition                   *ActionItemTriggerParamsIncidentCondition                   `json:"incident_condition,omitempty"`
+	IncidentConditionAcknowledgedAt     *interface{}                                                `json:"incident_condition_acknowledged_at,omitempty"`
+	IncidentConditionDetectedAt         *interface{}                                                `json:"incident_condition_detected_at,omitempty"`
 	IncidentConditionEnvironment        *ActionItemTriggerParamsIncidentConditionEnvironment        `json:"incident_condition_environment,omitempty"`
 	IncidentConditionFunctionality      *ActionItemTriggerParamsIncidentConditionFunctionality      `json:"incident_condition_functionality,omitempty"`
 	IncidentConditionGroup              *ActionItemTriggerParamsIncidentConditionGroup              `json:"incident_condition_group,omitempty"`
 	IncidentConditionIncidentType       *ActionItemTriggerParamsIncidentConditionIncidentType       `json:"incident_condition_incident_type,omitempty"`
 	IncidentConditionKind               *ActionItemTriggerParamsIncidentConditionKind               `json:"incident_condition_kind,omitempty"`
+	IncidentConditionMitigatedAt        *interface{}                                                `json:"incident_condition_mitigated_at,omitempty"`
+	IncidentConditionResolvedAt         *interface{}                                                `json:"incident_condition_resolved_at,omitempty"`
 	IncidentConditionService            *ActionItemTriggerParamsIncidentConditionService            `json:"incident_condition_service,omitempty"`
 	IncidentConditionSeverity           *ActionItemTriggerParamsIncidentConditionSeverity           `json:"incident_condition_severity,omitempty"`
+	IncidentConditionStartedAt          *interface{}                                                `json:"incident_condition_started_at,omitempty"`
 	IncidentConditionStatus             *ActionItemTriggerParamsIncidentConditionStatus             `json:"incident_condition_status,omitempty"`
+	IncidentConditionSummary            *interface{}                                                `json:"incident_condition_summary,omitempty"`
 	IncidentConditionVisibility         *ActionItemTriggerParamsIncidentConditionVisibility         `json:"incident_condition_visibility,omitempty"`
+	IncidentConditionalInactivity       *interface{}                                                `json:"incident_conditional_inactivity,omitempty"`
 	IncidentKinds                       *[]ActionItemTriggerParamsIncidentKinds                     `json:"incident_kinds,omitempty"`
 	IncidentStatuses                    *[]ActionItemTriggerParamsIncidentStatuses                  `json:"incident_statuses,omitempty"`
 	IncidentVisibilities                *[]bool                                                     `json:"incident_visibilities,omitempty"`
@@ -5839,7 +5793,6 @@ type IncidentTriggerParams struct {
 	IncidentConditionEnvironment    *IncidentTriggerParamsIncidentConditionEnvironment   `json:"incident_condition_environment,omitempty"`
 	IncidentConditionFunctionality  *IncidentTriggerParamsIncidentConditionFunctionality `json:"incident_condition_functionality,omitempty"`
 	IncidentConditionGroup          *IncidentTriggerParamsIncidentConditionGroup         `json:"incident_condition_group,omitempty"`
-	IncidentConditionIncidentRoles  *interface{}                                         `json:"incident_condition_incident_roles,omitempty"`
 	IncidentConditionIncidentType   *IncidentTriggerParamsIncidentConditionIncidentType  `json:"incident_condition_incident_type,omitempty"`
 	IncidentConditionKind           *IncidentTriggerParamsIncidentConditionKind          `json:"incident_condition_kind,omitempty"`
 	IncidentConditionMitigatedAt    *interface{}                                         `json:"incident_condition_mitigated_at,omitempty"`
@@ -9997,9 +9950,8 @@ type Workflow struct {
 	SeverityIds         *[]string           `json:"severity_ids,omitempty"`
 
 	// The slug of the workflow
-	Slug          *string             `json:"slug,omitempty"`
-	TriggerParams *interface{}        `json:"trigger_params,omitempty"`
-	Triggers      *[]WorkflowTriggers `json:"triggers,omitempty"`
+	Slug          *string      `json:"slug,omitempty"`
+	TriggerParams *interface{} `json:"trigger_params,omitempty"`
 
 	// Date of last update
 	UpdatedAt string `json:"updated_at"`
@@ -10013,9 +9965,6 @@ type Workflow struct {
 
 // Repeat on weekdays.
 type WorkflowRepeatOn string
-
-// Actions that trigger the workflow.
-type WorkflowTriggers string
 
 // WorkflowCustomFieldSelection defines model for workflow_custom_field_selection.
 type WorkflowCustomFieldSelection struct {
@@ -10210,9 +10159,8 @@ type WorkflowList struct {
 			SeverityIds         *[]string                             `json:"severity_ids,omitempty"`
 
 			// The slug of the workflow
-			Slug          *string                               `json:"slug,omitempty"`
-			TriggerParams *interface{}                          `json:"trigger_params,omitempty"`
-			Triggers      *[]WorkflowListDataAttributesTriggers `json:"triggers,omitempty"`
+			Slug          *string      `json:"slug,omitempty"`
+			TriggerParams *interface{} `json:"trigger_params,omitempty"`
 
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`
@@ -10239,9 +10187,6 @@ type WorkflowList struct {
 
 // Repeat on weekdays.
 type WorkflowListDataAttributesRepeatOn string
-
-// Actions that trigger the workflow.
-type WorkflowListDataAttributesTriggers string
 
 // WorkflowListDataType defines model for WorkflowList.Data.Type.
 type WorkflowListDataType string
@@ -10276,9 +10221,8 @@ type WorkflowResponse struct {
 			SeverityIds         *[]string                                 `json:"severity_ids,omitempty"`
 
 			// The slug of the workflow
-			Slug          *string                                   `json:"slug,omitempty"`
-			TriggerParams *interface{}                              `json:"trigger_params,omitempty"`
-			Triggers      *[]WorkflowResponseDataAttributesTriggers `json:"triggers,omitempty"`
+			Slug          *string      `json:"slug,omitempty"`
+			TriggerParams *interface{} `json:"trigger_params,omitempty"`
 
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`
@@ -10298,9 +10242,6 @@ type WorkflowResponse struct {
 
 // Repeat on weekdays.
 type WorkflowResponseDataAttributesRepeatOn string
-
-// Actions that trigger the workflow.
-type WorkflowResponseDataAttributesTriggers string
 
 // WorkflowResponseDataType defines model for WorkflowResponse.Data.Type.
 type WorkflowResponseDataType string

@@ -7,6 +7,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
+	
 )
 
 func resourceWorkflowCustomFieldSelection() *schema.Resource{
@@ -85,20 +86,20 @@ func resourceWorkflowCustomFieldSelectionCreate(ctx context.Context, d *schema.R
 	s := &client.WorkflowCustomFieldSelection{}
 
 	  if value, ok := d.GetOkExists("workflow_id"); ok {
-		s.WorkflowId = value.(string)
-	}
+				s.WorkflowId = value.(string)
+			}
     if value, ok := d.GetOkExists("custom_field_id"); ok {
-		s.CustomFieldId = value.(int)
-	}
+				s.CustomFieldId = value.(int)
+			}
     if value, ok := d.GetOkExists("incident_condition"); ok {
-		s.IncidentCondition = value.(string)
-	}
+				s.IncidentCondition = value.(string)
+			}
     if value, ok := d.GetOkExists("values"); ok {
-		s.Values = value.([]interface{})
-	}
+				s.Values = value.([]interface{})
+			}
     if value, ok := d.GetOkExists("selected_option_ids"); ok {
-		s.SelectedOptionIds = value.([]interface{})
-	}
+				s.SelectedOptionIds = value.([]interface{})
+			}
 
 	res, err := c.CreateWorkflowCustomFieldSelection(s)
 	if err != nil {
@@ -144,20 +145,20 @@ func resourceWorkflowCustomFieldSelectionUpdate(ctx context.Context, d *schema.R
 	s := &client.WorkflowCustomFieldSelection{}
 
 	  if d.HasChange("workflow_id") {
-		s.WorkflowId = d.Get("workflow_id").(string)
-	}
+				s.WorkflowId = d.Get("workflow_id").(string)
+			}
     if d.HasChange("custom_field_id") {
-		s.CustomFieldId = d.Get("custom_field_id").(int)
-	}
+				s.CustomFieldId = d.Get("custom_field_id").(int)
+			}
     if d.HasChange("incident_condition") {
-		s.IncidentCondition = d.Get("incident_condition").(string)
-	}
+				s.IncidentCondition = d.Get("incident_condition").(string)
+			}
     if d.HasChange("values") {
-		s.Values = d.Get("values").([]interface{})
-	}
+				s.Values = d.Get("values").([]interface{})
+			}
     if d.HasChange("selected_option_ids") {
-		s.SelectedOptionIds = d.Get("selected_option_ids").([]interface{})
-	}
+				s.SelectedOptionIds = d.Get("selected_option_ids").([]interface{})
+			}
 
 	_, err := c.UpdateWorkflowCustomFieldSelection(d.Id(), s)
 	if err != nil {

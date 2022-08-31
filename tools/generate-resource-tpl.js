@@ -1,9 +1,19 @@
 const inflect = require('inflect');
 
+function includeTools(resourceSchema) {
+	for (var key in resourceSchema.properties) {
+		if (resourceSchema.properties[key].type === "boolean") {
+			return true;
+		}
+	}
+	return false;
+}
+
 module.exports = (name, resourceSchema, requiredFields, pathIdField) => {
 	const namePlural = inflect.pluralize(name)
 	const nameCamel = inflect.camelize(name)
 	const nameCamelPlural = inflect.camelize(namePlural)
+	const tools = includeTools(resourceSchema) ? `"github.com/rootlyhq/terraform-provider-rootly/tools"` : ""
 
 return `package provider
 
@@ -14,6 +24,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
+	${tools}
 )
 
 func resource${nameCamel}() *schema.Resource{
@@ -124,18 +135,30 @@ function setResourceFields(name, resourceSchema) {
 function createResourceFields(name, resourceSchema) {
 	return Object.keys(resourceSchema.properties).filter(excludeDateFields).map((field) => {
 		const schema = resourceSchema.properties[field]
-		return`  if value, ok := d.GetOkExists("${field}"); ok {
-		s.${inflect.camelize(field)} = value.(${jsonapiToGoType(schema.type)})
-	}`
+		if (schema.type === "boolean") {
+			return`  if value, ok := d.GetOkExists("${field}"); ok {
+				s.${inflect.camelize(field)} = tools.Bool(value.(${jsonapiToGoType(schema.type)}))
+			}`
+		} else {
+			return`  if value, ok := d.GetOkExists("${field}"); ok {
+				s.${inflect.camelize(field)} = value.(${jsonapiToGoType(schema.type)})
+			}`
+		}
 	}).join('\n  ')
 }
 
 function updateResourceFields(name, resourceSchema) {
 	return Object.keys(resourceSchema.properties).filter(excludeDateFields).map((field) => {
 		const schema = resourceSchema.properties[field]
-		return`  if d.HasChange("${field}") {
-		s.${inflect.camelize(field)} = d.Get("${field}").(${jsonapiToGoType(schema.type)})
-	}`
+		if (schema.type === "boolean") {
+			return`  if d.HasChange("${field}") {
+				s.${inflect.camelize(field)} = tools.Bool(d.Get("${field}").(${jsonapiToGoType(schema.type)}))
+			}`
+		} else {
+			return`  if d.HasChange("${field}") {
+				s.${inflect.camelize(field)} = d.Get("${field}").(${jsonapiToGoType(schema.type)})
+			}`
+		}
 	}).join('\n  ')
 }
 
@@ -143,6 +166,7 @@ function jsonapiToGoType(type) {
 	switch (type) {
 		case 'string':
 			return 'string'
+		case 'integer':
 		case 'number':
 			return 'int'
 		case 'boolean':
@@ -150,9 +174,9 @@ function jsonapiToGoType(type) {
 		case 'array':
 			return '[]interface{}'
 		case 'object':
-			return 'interface{}'
+			return 'map[string]interface{}'
 		default:
-			return 'string'
+			return 'interface{}'
 	}
 }
 
@@ -192,6 +216,15 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 			},
 			`
 		case 'boolean':
+			if (name === "enabled") {
+				return `
+				"${name}": &schema.Schema{
+					Type: schema.TypeBool,
+					Default: true,
+					Optional: true,
+				},
+				`
+			}
 			return `
 			"${name}": &schema.Schema{
 				Type: schema.TypeBool,

@@ -31,7 +31,6 @@ description: |-
 - `severity_ids` (List of String)
 - `slug` (String) The slug of the workflow
 - `trigger_params` (Block List, Max: 1) (see [below for nested schema](#nestedblock--trigger_params))
-- `triggers` (List of String)
 - `wait` (String) Wait this duration before executing.
 - `workflow_group_id` (String) The group this workflow belongs to.
 
@@ -45,19 +44,28 @@ description: |-
 Optional:
 
 - `incident_condition` (String)
+- `incident_condition_acknowledged_at` (String)
+- `incident_condition_detected_at` (String)
 - `incident_condition_environment` (String)
 - `incident_condition_functionality` (String)
 - `incident_condition_group` (String)
 - `incident_condition_incident_type` (String)
 - `incident_condition_kind` (String)
+- `incident_condition_mitigated_at` (String)
+- `incident_condition_resolved_at` (String)
 - `incident_condition_service` (String)
 - `incident_condition_severity` (String)
+- `incident_condition_started_at` (String)
 - `incident_condition_status` (String)
+- `incident_condition_summary` (String)
 - `incident_condition_visibility` (String)
+- `incident_conditional_inactivity` (String)
 - `incident_kinds` (List of String)
+- `incident_post_mortem_cause_ids` (List of String)
 - `incident_post_mortem_condition` (String)
 - `incident_post_mortem_condition_cause` (String)
-- `incident_post_mortem_condition_status` (List of String)
+- `incident_post_mortem_condition_status` (String)
+- `incident_post_mortem_statuses` (List of String)
 - `incident_statuses` (List of String)
 - `incident_visibilities` (List of String)
 - `trigger_type` (String)

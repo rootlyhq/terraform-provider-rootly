@@ -1,9 +1,27 @@
 const inflect = require('inflect');
 
+function includeTools(resourceSchema) {
+	for (var key in resourceSchema.properties) {
+		if (resourceSchema.properties[key].type === "boolean") {
+			return true;
+		}
+	}
+	return false;
+}
+
 module.exports = (name, resourceSchema, requiredFields, taskParamsSchema) => {
+	// convert {anyOf: [{enum: [null]}, {type: "string"}]} to {type: "string"}
+	Object.keys(taskParamsSchema.properties).forEach((key) => {
+		const propSchema = taskParamsSchema.properties[key]
+		if (propSchema.anyOf) {
+			taskParamsSchema.properties[key] = propSchema.anyOf.filter((x) => x.type).pop()
+			delete taskParamsSchema.properties[key].enum;
+		}
+	})
 	const namePlural = inflect.pluralize(name)
 	const nameCamel = inflect.camelize(name)
 	const nameCamelPlural = inflect.camelize(namePlural)
+	const tools = includeTools(resourceSchema) ? `"github.com/rootlyhq/terraform-provider-rootly/tools"` : ""
 
 return `package provider
 
@@ -14,6 +32,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
+	${tools}
 )
 
 func resource${nameCamel}() *schema.Resource{
@@ -136,6 +155,10 @@ function createResourceFields(resourceSchema) {
 			return`  if value, ok := d.GetOkExists("${field}"); ok {
 			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
 	}`
+		} else if (schema.type === "boolean") {
+			return`  if value, ok := d.GetOkExists("${field}"); ok {
+				s.${inflect.camelize(field)} = tools.Bool(value.(${jsonapiToGoType(schema.type)}))
+			}`
 		} else {
 			return`  if value, ok := d.GetOkExists("${field}"); ok {
 			s.${inflect.camelize(field)} = value.(${jsonapiToGoType(schema.type)})
@@ -155,11 +178,14 @@ function updateResourceFields(resourceSchema) {
 						s.TriggerParams = tpsi.(map[string]interface{})
 					}
 				}`
+		} else if (schema.type === "boolean") {
+			return`  if d.HasChange("${field}") {
+				s.${inflect.camelize(field)} = tools.Bool(d.Get("${field}").(${jsonapiToGoType(schema.type)}))
+			}`
 		} else {
-			return`
-				if d.HasChange("${field}") {
-					s.${inflect.camelize(field)} = d.Get("${field}").(${jsonapiToGoType(schema.type)})
-				}`
+			return`  if d.HasChange("${field}") {
+				s.${inflect.camelize(field)} = d.Get("${field}").(${jsonapiToGoType(schema.type)})
+			}`
 		}
 	}).join('\n  ')
 }
@@ -168,6 +194,7 @@ function jsonapiToGoType(type) {
 	switch (type) {
 		case 'string':
 			return 'string'
+		case 'integer':
 		case 'number':
 			return 'int'
 		case 'boolean':
@@ -175,9 +202,9 @@ function jsonapiToGoType(type) {
 		case 'array':
 			return '[]interface{}'
 		case 'object':
-			return 'interface{}'
+			return 'map[string]interface{}'
 		default:
-			return 'string'
+			return 'map[string]interface{}'
 	}
 }
 
@@ -214,6 +241,15 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
 			},
 			`
 		case 'boolean':
+			if (name === "enabled") {
+				return `
+				"${name}": &schema.Schema{
+					Type: schema.TypeBool,
+					Default: true,
+					Optional: true,
+				},
+				`
+			}
 			return `
 			"${name}": &schema.Schema{
 				Type: schema.TypeBool,
@@ -273,10 +309,8 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
 							${schemaFields(taskParamsSchema, taskParamsSchema.required)}
 						},
 					},
-					Computed: ${optional},
-					Required: ${required},
-					Optional: ${optional},
-					Description: "${description}",
+					Computed: true,
+					Optional: true,
 				},
 				`
 			}

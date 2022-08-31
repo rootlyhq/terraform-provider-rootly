@@ -12,7 +12,7 @@ type WorkflowGroup struct {
 	ID string `jsonapi:"primary,workflow_groups"`
 	Kind string `jsonapi:"attr,kind,omitempty"`
   Name string `jsonapi:"attr,name,omitempty"`
-  Expanded bool `jsonapi:"attr,expanded,omitempty"`
+  Expanded *bool `jsonapi:"attr,expanded,omitempty"`
   Position int `jsonapi:"attr,position,omitempty"`
 }
 

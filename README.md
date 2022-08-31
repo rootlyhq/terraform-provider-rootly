@@ -34,7 +34,7 @@ Data sources
 
 ```terraform
 # uses output of severity data source as input for workflow
-data "rootly_severities" "critical" {
+data "rootly_severity" "critical" {
   slug = "sev0"
 }
 
@@ -47,7 +47,7 @@ resource "rootly_workflow_incident" "ping_oncall" {
     incident_kinds            = ["normal"]
     incident_condition_status = "IS"
     incident_statuses         = ["started"]
-    severity_ids              = [data.rootly_severities.critical.severities[0].id]
+    severity_ids              = [data.rootly_severity.critical.id]
   }
   enabled = true
 }

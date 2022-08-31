@@ -7,6 +7,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
+	
 )
 
 func resourceService() *schema.Resource{
@@ -231,56 +232,56 @@ func resourceServiceCreate(ctx context.Context, d *schema.ResourceData, meta int
 	s := &client.Service{}
 
 	  if value, ok := d.GetOkExists("name"); ok {
-		s.Name = value.(string)
-	}
+				s.Name = value.(string)
+			}
     if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
-	}
+				s.Slug = value.(string)
+			}
     if value, ok := d.GetOkExists("description"); ok {
-		s.Description = value.(string)
-	}
+				s.Description = value.(string)
+			}
     if value, ok := d.GetOkExists("public_description"); ok {
-		s.PublicDescription = value.(string)
-	}
+				s.PublicDescription = value.(string)
+			}
     if value, ok := d.GetOkExists("notify_emails"); ok {
-		s.NotifyEmails = value.([]interface{})
-	}
+				s.NotifyEmails = value.([]interface{})
+			}
     if value, ok := d.GetOkExists("color"); ok {
-		s.Color = value.(string)
-	}
+				s.Color = value.(string)
+			}
     if value, ok := d.GetOkExists("pagerduty_id"); ok {
-		s.PagerdutyId = value.(string)
-	}
+				s.PagerdutyId = value.(string)
+			}
     if value, ok := d.GetOkExists("opsgenie_id"); ok {
-		s.OpsgenieId = value.(string)
-	}
+				s.OpsgenieId = value.(string)
+			}
     if value, ok := d.GetOkExists("github_repository_name"); ok {
-		s.GithubRepositoryName = value.(string)
-	}
+				s.GithubRepositoryName = value.(string)
+			}
     if value, ok := d.GetOkExists("github_repository_branch"); ok {
-		s.GithubRepositoryBranch = value.(string)
-	}
+				s.GithubRepositoryBranch = value.(string)
+			}
     if value, ok := d.GetOkExists("gitlab_repository_name"); ok {
-		s.GitlabRepositoryName = value.(string)
-	}
+				s.GitlabRepositoryName = value.(string)
+			}
     if value, ok := d.GetOkExists("gitlab_repository_branch"); ok {
-		s.GitlabRepositoryBranch = value.(string)
-	}
+				s.GitlabRepositoryBranch = value.(string)
+			}
     if value, ok := d.GetOkExists("environment_ids"); ok {
-		s.EnvironmentIds = value.([]interface{})
-	}
+				s.EnvironmentIds = value.([]interface{})
+			}
     if value, ok := d.GetOkExists("service_ids"); ok {
-		s.ServiceIds = value.([]interface{})
-	}
+				s.ServiceIds = value.([]interface{})
+			}
     if value, ok := d.GetOkExists("owners_group_ids"); ok {
-		s.OwnersGroupIds = value.([]interface{})
-	}
+				s.OwnersGroupIds = value.([]interface{})
+			}
     if value, ok := d.GetOkExists("slack_channels"); ok {
-		s.SlackChannels = value.([]interface{})
-	}
+				s.SlackChannels = value.([]interface{})
+			}
     if value, ok := d.GetOkExists("slack_aliases"); ok {
-		s.SlackAliases = value.([]interface{})
-	}
+				s.SlackAliases = value.([]interface{})
+			}
 
 	res, err := c.CreateService(s)
 	if err != nil {
@@ -338,56 +339,56 @@ func resourceServiceUpdate(ctx context.Context, d *schema.ResourceData, meta int
 	s := &client.Service{}
 
 	  if d.HasChange("name") {
-		s.Name = d.Get("name").(string)
-	}
+				s.Name = d.Get("name").(string)
+			}
     if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
-	}
+				s.Slug = d.Get("slug").(string)
+			}
     if d.HasChange("description") {
-		s.Description = d.Get("description").(string)
-	}
+				s.Description = d.Get("description").(string)
+			}
     if d.HasChange("public_description") {
-		s.PublicDescription = d.Get("public_description").(string)
-	}
+				s.PublicDescription = d.Get("public_description").(string)
+			}
     if d.HasChange("notify_emails") {
-		s.NotifyEmails = d.Get("notify_emails").([]interface{})
-	}
+				s.NotifyEmails = d.Get("notify_emails").([]interface{})
+			}
     if d.HasChange("color") {
-		s.Color = d.Get("color").(string)
-	}
+				s.Color = d.Get("color").(string)
+			}
     if d.HasChange("pagerduty_id") {
-		s.PagerdutyId = d.Get("pagerduty_id").(string)
-	}
+				s.PagerdutyId = d.Get("pagerduty_id").(string)
+			}
     if d.HasChange("opsgenie_id") {
-		s.OpsgenieId = d.Get("opsgenie_id").(string)
-	}
+				s.OpsgenieId = d.Get("opsgenie_id").(string)
+			}
     if d.HasChange("github_repository_name") {
-		s.GithubRepositoryName = d.Get("github_repository_name").(string)
-	}
+				s.GithubRepositoryName = d.Get("github_repository_name").(string)
+			}
     if d.HasChange("github_repository_branch") {
-		s.GithubRepositoryBranch = d.Get("github_repository_branch").(string)
-	}
+				s.GithubRepositoryBranch = d.Get("github_repository_branch").(string)
+			}
     if d.HasChange("gitlab_repository_name") {
-		s.GitlabRepositoryName = d.Get("gitlab_repository_name").(string)
-	}
+				s.GitlabRepositoryName = d.Get("gitlab_repository_name").(string)
+			}
     if d.HasChange("gitlab_repository_branch") {
-		s.GitlabRepositoryBranch = d.Get("gitlab_repository_branch").(string)
-	}
+				s.GitlabRepositoryBranch = d.Get("gitlab_repository_branch").(string)
+			}
     if d.HasChange("environment_ids") {
-		s.EnvironmentIds = d.Get("environment_ids").([]interface{})
-	}
+				s.EnvironmentIds = d.Get("environment_ids").([]interface{})
+			}
     if d.HasChange("service_ids") {
-		s.ServiceIds = d.Get("service_ids").([]interface{})
-	}
+				s.ServiceIds = d.Get("service_ids").([]interface{})
+			}
     if d.HasChange("owners_group_ids") {
-		s.OwnersGroupIds = d.Get("owners_group_ids").([]interface{})
-	}
+				s.OwnersGroupIds = d.Get("owners_group_ids").([]interface{})
+			}
     if d.HasChange("slack_channels") {
-		s.SlackChannels = d.Get("slack_channels").([]interface{})
-	}
+				s.SlackChannels = d.Get("slack_channels").([]interface{})
+			}
     if d.HasChange("slack_aliases") {
-		s.SlackAliases = d.Get("slack_aliases").([]interface{})
-	}
+				s.SlackAliases = d.Get("slack_aliases").([]interface{})
+			}
 
 	_, err := c.UpdateService(d.Id(), s)
 	if err != nil {

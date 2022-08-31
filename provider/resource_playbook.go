@@ -7,6 +7,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
+	
 )
 
 func resourcePlaybook() *schema.Resource{
@@ -61,14 +62,14 @@ func resourcePlaybookCreate(ctx context.Context, d *schema.ResourceData, meta in
 	s := &client.Playbook{}
 
 	  if value, ok := d.GetOkExists("title"); ok {
-		s.Title = value.(string)
-	}
+				s.Title = value.(string)
+			}
     if value, ok := d.GetOkExists("summary"); ok {
-		s.Summary = value.(string)
-	}
+				s.Summary = value.(string)
+			}
     if value, ok := d.GetOkExists("external_url"); ok {
-		s.ExternalUrl = value.(string)
-	}
+				s.ExternalUrl = value.(string)
+			}
 
 	res, err := c.CreatePlaybook(s)
 	if err != nil {
@@ -112,14 +113,14 @@ func resourcePlaybookUpdate(ctx context.Context, d *schema.ResourceData, meta in
 	s := &client.Playbook{}
 
 	  if d.HasChange("title") {
-		s.Title = d.Get("title").(string)
-	}
+				s.Title = d.Get("title").(string)
+			}
     if d.HasChange("summary") {
-		s.Summary = d.Get("summary").(string)
-	}
+				s.Summary = d.Get("summary").(string)
+			}
     if d.HasChange("external_url") {
-		s.ExternalUrl = d.Get("external_url").(string)
-	}
+				s.ExternalUrl = d.Get("external_url").(string)
+			}
 
 	_, err := c.UpdatePlaybook(d.Id(), s)
 	if err != nil {

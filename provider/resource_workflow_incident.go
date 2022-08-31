@@ -7,6 +7,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
+	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
 func resourceWorkflowIncident() *schema.Resource{
@@ -56,18 +57,6 @@ func resourceWorkflowIncident() *schema.Resource{
 			},
 			
 
-				"triggers": &schema.Schema{
-					Type: schema.TypeList,
-					Elem: &schema.Schema{
-						Type: schema.TypeString,
-					},
-					Computed: true,
-					Required: false,
-					Optional: true,
-					Description: "",
-				},
-				
-
 			"wait": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
@@ -98,14 +87,12 @@ func resourceWorkflowIncident() *schema.Resource{
 				},
 				
 
-			"enabled": &schema.Schema{
-				Type: schema.TypeBool,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				Description: "",
-			},
-			
+				"enabled": &schema.Schema{
+					Type: schema.TypeBool,
+					Default: true,
+					Optional: true,
+				},
+				
 
 			"position": &schema.Schema{
 				Type: schema.TypeInt,
@@ -153,6 +140,18 @@ func resourceWorkflowIncident() *schema.Resource{
 				},
 				
 
+				"incident_visibilities": &schema.Schema{
+					Type: schema.TypeList,
+					Elem: &schema.Schema{
+						Type: schema.TypeString,
+					},
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "",
+				},
+				
+
 				"incident_kinds": &schema.Schema{
 					Type: schema.TypeList,
 					Elem: &schema.Schema{
@@ -166,18 +165,6 @@ func resourceWorkflowIncident() *schema.Resource{
 				
 
 				"incident_statuses": &schema.Schema{
-					Type: schema.TypeList,
-					Elem: &schema.Schema{
-						Type: schema.TypeString,
-					},
-					Computed: true,
-					Required: false,
-					Optional: true,
-					Description: "",
-				},
-				
-
-				"incident_visibilities": &schema.Schema{
 					Type: schema.TypeList,
 					Elem: &schema.Schema{
 						Type: schema.TypeString,
@@ -280,22 +267,7 @@ func resourceWorkflowIncident() *schema.Resource{
 			
 
 			"incident_condition_summary": &schema.Schema{
-				Type: schema.TypeMap,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
-				Computed: true,
-				Required: false,
-				Optional: true,
-				Description: "",
-			},
-			
-
-			"incident_condition_incident_roles": &schema.Schema{
-				Type: schema.TypeMap,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
+				Type: schema.TypeString,
 				Computed: true,
 				Required: false,
 				Optional: true,
@@ -304,10 +276,7 @@ func resourceWorkflowIncident() *schema.Resource{
 			
 
 			"incident_condition_started_at": &schema.Schema{
-				Type: schema.TypeMap,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
+				Type: schema.TypeString,
 				Computed: true,
 				Required: false,
 				Optional: true,
@@ -316,10 +285,7 @@ func resourceWorkflowIncident() *schema.Resource{
 			
 
 			"incident_condition_detected_at": &schema.Schema{
-				Type: schema.TypeMap,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
+				Type: schema.TypeString,
 				Computed: true,
 				Required: false,
 				Optional: true,
@@ -328,10 +294,7 @@ func resourceWorkflowIncident() *schema.Resource{
 			
 
 			"incident_condition_acknowledged_at": &schema.Schema{
-				Type: schema.TypeMap,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
+				Type: schema.TypeString,
 				Computed: true,
 				Required: false,
 				Optional: true,
@@ -340,10 +303,7 @@ func resourceWorkflowIncident() *schema.Resource{
 			
 
 			"incident_condition_mitigated_at": &schema.Schema{
-				Type: schema.TypeMap,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
+				Type: schema.TypeString,
 				Computed: true,
 				Required: false,
 				Optional: true,
@@ -352,10 +312,7 @@ func resourceWorkflowIncident() *schema.Resource{
 			
 
 			"incident_condition_resolved_at": &schema.Schema{
-				Type: schema.TypeMap,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
+				Type: schema.TypeString,
 				Computed: true,
 				Required: false,
 				Optional: true,
@@ -364,10 +321,7 @@ func resourceWorkflowIncident() *schema.Resource{
 			
 
 			"incident_conditional_inactivity": &schema.Schema{
-				Type: schema.TypeMap,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
+				Type: schema.TypeString,
 				Computed: true,
 				Required: false,
 				Optional: true,
@@ -377,9 +331,7 @@ func resourceWorkflowIncident() *schema.Resource{
 						},
 					},
 					Computed: true,
-					Required: false,
 					Optional: true,
-					Description: "",
 				},
 				
 
@@ -454,55 +406,52 @@ func resourceWorkflowIncidentCreate(ctx context.Context, d *schema.ResourceData,
 	s := &client.Workflow{}
 
 	  if value, ok := d.GetOkExists("name"); ok {
-			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
+			s.Name = value.(string)
 	}
     if value, ok := d.GetOkExists("slug"); ok {
-			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
+			s.Slug = value.(string)
 	}
     if value, ok := d.GetOkExists("description"); ok {
-			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
+			s.Description = value.(string)
 	}
     if value, ok := d.GetOkExists("command"); ok {
-			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
-	}
-    if value, ok := d.GetOkExists("triggers"); ok {
-			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
+			s.Command = value.(string)
 	}
     if value, ok := d.GetOkExists("wait"); ok {
-			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
+			s.Wait = value.(string)
 	}
     if value, ok := d.GetOkExists("repeat_every_duration"); ok {
-			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
+			s.RepeatEveryDuration = value.(string)
 	}
     if value, ok := d.GetOkExists("repeat_on"); ok {
-			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
+			s.RepeatOn = value.([]interface{})
 	}
     if value, ok := d.GetOkExists("enabled"); ok {
-			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
-	}
+				s.Enabled = tools.Bool(value.(bool))
+			}
     if value, ok := d.GetOkExists("position"); ok {
-			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
+			s.Position = value.(int)
 	}
     if value, ok := d.GetOkExists("workflow_group_id"); ok {
-			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
+			s.WorkflowGroupId = value.(string)
 	}
     if value, ok := d.GetOkExists("trigger_params"); ok {
-			s.TriggerParams = value.(string)
+			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
 	}
     if value, ok := d.GetOkExists("environment_ids"); ok {
-			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
+			s.EnvironmentIds = value.([]interface{})
 	}
     if value, ok := d.GetOkExists("severity_ids"); ok {
-			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
+			s.SeverityIds = value.([]interface{})
 	}
     if value, ok := d.GetOkExists("incident_type_ids"); ok {
-			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
+			s.IncidentTypeIds = value.([]interface{})
 	}
     if value, ok := d.GetOkExists("service_ids"); ok {
-			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
+			s.ServiceIds = value.([]interface{})
 	}
     if value, ok := d.GetOkExists("group_ids"); ok {
-			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
+			s.GroupIds = value.([]interface{})
 	}
 
 	res, err := c.CreateWorkflow(s)
@@ -537,7 +486,6 @@ func resourceWorkflowIncidentRead(ctx context.Context, d *schema.ResourceData, m
   d.Set("slug", item.Slug)
   d.Set("description", item.Description)
   d.Set("command", item.Command)
-  d.Set("triggers", item.Triggers)
   d.Set("wait", item.Wait)
   d.Set("repeat_every_duration", item.RepeatEveryDuration)
   d.Set("repeat_on", item.RepeatOn)
@@ -564,50 +512,36 @@ func resourceWorkflowIncidentUpdate(ctx context.Context, d *schema.ResourceData,
 
 	s := &client.Workflow{}
 
-	
-				if d.HasChange("name") {
-					s.Name = d.Get("name").(string)
-				}
-  
-				if d.HasChange("slug") {
-					s.Slug = d.Get("slug").(string)
-				}
-  
-				if d.HasChange("description") {
-					s.Description = d.Get("description").(string)
-				}
-  
-				if d.HasChange("command") {
-					s.Command = d.Get("command").(string)
-				}
-  
-				if d.HasChange("triggers") {
-					s.Triggers = d.Get("triggers").([]interface{})
-				}
-  
-				if d.HasChange("wait") {
-					s.Wait = d.Get("wait").(string)
-				}
-  
-				if d.HasChange("repeat_every_duration") {
-					s.RepeatEveryDuration = d.Get("repeat_every_duration").(string)
-				}
-  
-				if d.HasChange("repeat_on") {
-					s.RepeatOn = d.Get("repeat_on").([]interface{})
-				}
-  
-				if d.HasChange("enabled") {
-					s.Enabled = d.Get("enabled").(bool)
-				}
-  
-				if d.HasChange("position") {
-					s.Position = d.Get("position").(int)
-				}
-  
-				if d.HasChange("workflow_group_id") {
-					s.WorkflowGroupId = d.Get("workflow_group_id").(string)
-				}
+	  if d.HasChange("name") {
+				s.Name = d.Get("name").(string)
+			}
+    if d.HasChange("slug") {
+				s.Slug = d.Get("slug").(string)
+			}
+    if d.HasChange("description") {
+				s.Description = d.Get("description").(string)
+			}
+    if d.HasChange("command") {
+				s.Command = d.Get("command").(string)
+			}
+    if d.HasChange("wait") {
+				s.Wait = d.Get("wait").(string)
+			}
+    if d.HasChange("repeat_every_duration") {
+				s.RepeatEveryDuration = d.Get("repeat_every_duration").(string)
+			}
+    if d.HasChange("repeat_on") {
+				s.RepeatOn = d.Get("repeat_on").([]interface{})
+			}
+    if d.HasChange("enabled") {
+				s.Enabled = tools.Bool(d.Get("enabled").(bool))
+			}
+    if d.HasChange("position") {
+				s.Position = d.Get("position").(int)
+			}
+    if d.HasChange("workflow_group_id") {
+				s.WorkflowGroupId = d.Get("workflow_group_id").(string)
+			}
   
 				if d.HasChange("trigger_params") {
 					tps := d.Get("trigger_params").([]interface{})
@@ -615,26 +549,21 @@ func resourceWorkflowIncidentUpdate(ctx context.Context, d *schema.ResourceData,
 						s.TriggerParams = tpsi.(map[string]interface{})
 					}
 				}
-  
-				if d.HasChange("environment_ids") {
-					s.EnvironmentIds = d.Get("environment_ids").([]interface{})
-				}
-  
-				if d.HasChange("severity_ids") {
-					s.SeverityIds = d.Get("severity_ids").([]interface{})
-				}
-  
-				if d.HasChange("incident_type_ids") {
-					s.IncidentTypeIds = d.Get("incident_type_ids").([]interface{})
-				}
-  
-				if d.HasChange("service_ids") {
-					s.ServiceIds = d.Get("service_ids").([]interface{})
-				}
-  
-				if d.HasChange("group_ids") {
-					s.GroupIds = d.Get("group_ids").([]interface{})
-				}
+    if d.HasChange("environment_ids") {
+				s.EnvironmentIds = d.Get("environment_ids").([]interface{})
+			}
+    if d.HasChange("severity_ids") {
+				s.SeverityIds = d.Get("severity_ids").([]interface{})
+			}
+    if d.HasChange("incident_type_ids") {
+				s.IncidentTypeIds = d.Get("incident_type_ids").([]interface{})
+			}
+    if d.HasChange("service_ids") {
+				s.ServiceIds = d.Get("service_ids").([]interface{})
+			}
+    if d.HasChange("group_ids") {
+				s.GroupIds = d.Get("group_ids").([]interface{})
+			}
 
 	_, err := c.UpdateWorkflow(d.Id(), s)
 	if err != nil {

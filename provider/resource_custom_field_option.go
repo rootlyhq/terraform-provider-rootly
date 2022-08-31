@@ -7,6 +7,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
+	
 )
 
 func resourceCustomFieldOption() *schema.Resource{
@@ -71,17 +72,17 @@ func resourceCustomFieldOptionCreate(ctx context.Context, d *schema.ResourceData
 	s := &client.CustomFieldOption{}
 
 	  if value, ok := d.GetOkExists("custom_field_id"); ok {
-		s.CustomFieldId = value.(int)
-	}
+				s.CustomFieldId = value.(int)
+			}
     if value, ok := d.GetOkExists("value"); ok {
-		s.Value = value.(string)
-	}
+				s.Value = value.(string)
+			}
     if value, ok := d.GetOkExists("color"); ok {
-		s.Color = value.(string)
-	}
+				s.Color = value.(string)
+			}
     if value, ok := d.GetOkExists("position"); ok {
-		s.Position = value.(int)
-	}
+				s.Position = value.(int)
+			}
 
 	res, err := c.CreateCustomFieldOption(s)
 	if err != nil {
@@ -126,17 +127,17 @@ func resourceCustomFieldOptionUpdate(ctx context.Context, d *schema.ResourceData
 	s := &client.CustomFieldOption{}
 
 	  if d.HasChange("custom_field_id") {
-		s.CustomFieldId = d.Get("custom_field_id").(int)
-	}
+				s.CustomFieldId = d.Get("custom_field_id").(int)
+			}
     if d.HasChange("value") {
-		s.Value = d.Get("value").(string)
-	}
+				s.Value = d.Get("value").(string)
+			}
     if d.HasChange("color") {
-		s.Color = d.Get("color").(string)
-	}
+				s.Color = d.Get("color").(string)
+			}
     if d.HasChange("position") {
-		s.Position = d.Get("position").(int)
-	}
+				s.Position = d.Get("position").(int)
+			}
 
 	_, err := c.UpdateCustomFieldOption(d.Id(), s)
 	if err != nil {

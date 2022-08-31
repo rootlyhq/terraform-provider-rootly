@@ -7,6 +7,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
+	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
 func resourceCustomField() *schema.Resource{
@@ -40,14 +41,12 @@ func resourceCustomField() *schema.Resource{
 			},
 			
 
-			"enabled": &schema.Schema{
-				Type: schema.TypeBool,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				Description: "Whether the custom_field is enabled",
-			},
-			
+				"enabled": &schema.Schema{
+					Type: schema.TypeBool,
+					Default: true,
+					Optional: true,
+				},
+				
 
 			"slug": &schema.Schema{
 				Type: schema.TypeString,
@@ -114,29 +113,29 @@ func resourceCustomFieldCreate(ctx context.Context, d *schema.ResourceData, meta
 	s := &client.CustomField{}
 
 	  if value, ok := d.GetOkExists("label"); ok {
-		s.Label = value.(string)
-	}
+				s.Label = value.(string)
+			}
     if value, ok := d.GetOkExists("kind"); ok {
-		s.Kind = value.(string)
-	}
+				s.Kind = value.(string)
+			}
     if value, ok := d.GetOkExists("enabled"); ok {
-		s.Enabled = value.(bool)
-	}
+				s.Enabled = tools.Bool(value.(bool))
+			}
     if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
-	}
+				s.Slug = value.(string)
+			}
     if value, ok := d.GetOkExists("description"); ok {
-		s.Description = value.(string)
-	}
+				s.Description = value.(string)
+			}
     if value, ok := d.GetOkExists("shown"); ok {
-		s.Shown = value.([]interface{})
-	}
+				s.Shown = value.([]interface{})
+			}
     if value, ok := d.GetOkExists("required"); ok {
-		s.Required = value.([]interface{})
-	}
+				s.Required = value.([]interface{})
+			}
     if value, ok := d.GetOkExists("position"); ok {
-		s.Position = value.(int)
-	}
+				s.Position = value.(int)
+			}
 
 	res, err := c.CreateCustomField(s)
 	if err != nil {
@@ -185,29 +184,29 @@ func resourceCustomFieldUpdate(ctx context.Context, d *schema.ResourceData, meta
 	s := &client.CustomField{}
 
 	  if d.HasChange("label") {
-		s.Label = d.Get("label").(string)
-	}
+				s.Label = d.Get("label").(string)
+			}
     if d.HasChange("kind") {
-		s.Kind = d.Get("kind").(string)
-	}
+				s.Kind = d.Get("kind").(string)
+			}
     if d.HasChange("enabled") {
-		s.Enabled = d.Get("enabled").(bool)
-	}
+				s.Enabled = tools.Bool(d.Get("enabled").(bool))
+			}
     if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
-	}
+				s.Slug = d.Get("slug").(string)
+			}
     if d.HasChange("description") {
-		s.Description = d.Get("description").(string)
-	}
+				s.Description = d.Get("description").(string)
+			}
     if d.HasChange("shown") {
-		s.Shown = d.Get("shown").([]interface{})
-	}
+				s.Shown = d.Get("shown").([]interface{})
+			}
     if d.HasChange("required") {
-		s.Required = d.Get("required").([]interface{})
-	}
+				s.Required = d.Get("required").([]interface{})
+			}
     if d.HasChange("position") {
-		s.Position = d.Get("position").(int)
-	}
+				s.Position = d.Get("position").(int)
+			}
 
 	_, err := c.UpdateCustomField(d.Id(), s)
 	if err != nil {

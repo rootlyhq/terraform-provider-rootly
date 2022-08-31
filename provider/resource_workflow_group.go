@@ -7,6 +7,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
+	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
 func resourceWorkflowGroup() *schema.Resource{
@@ -70,17 +71,17 @@ func resourceWorkflowGroupCreate(ctx context.Context, d *schema.ResourceData, me
 	s := &client.WorkflowGroup{}
 
 	  if value, ok := d.GetOkExists("kind"); ok {
-		s.Kind = value.(string)
-	}
+				s.Kind = value.(string)
+			}
     if value, ok := d.GetOkExists("name"); ok {
-		s.Name = value.(string)
-	}
+				s.Name = value.(string)
+			}
     if value, ok := d.GetOkExists("expanded"); ok {
-		s.Expanded = value.(bool)
-	}
+				s.Expanded = tools.Bool(value.(bool))
+			}
     if value, ok := d.GetOkExists("position"); ok {
-		s.Position = value.(int)
-	}
+				s.Position = value.(int)
+			}
 
 	res, err := c.CreateWorkflowGroup(s)
 	if err != nil {
@@ -125,17 +126,17 @@ func resourceWorkflowGroupUpdate(ctx context.Context, d *schema.ResourceData, me
 	s := &client.WorkflowGroup{}
 
 	  if d.HasChange("kind") {
-		s.Kind = d.Get("kind").(string)
-	}
+				s.Kind = d.Get("kind").(string)
+			}
     if d.HasChange("name") {
-		s.Name = d.Get("name").(string)
-	}
+				s.Name = d.Get("name").(string)
+			}
     if d.HasChange("expanded") {
-		s.Expanded = d.Get("expanded").(bool)
-	}
+				s.Expanded = tools.Bool(d.Get("expanded").(bool))
+			}
     if d.HasChange("position") {
-		s.Position = d.Get("position").(int)
-	}
+				s.Position = d.Get("position").(int)
+			}
 
 	_, err := c.UpdateWorkflowGroup(d.Id(), s)
 	if err != nil {

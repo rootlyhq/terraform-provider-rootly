@@ -7,6 +7,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
+	
 )
 
 func resourceTeam() *schema.Resource{
@@ -115,23 +116,23 @@ func resourceTeamCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	s := &client.Team{}
 
 	  if value, ok := d.GetOkExists("name"); ok {
-		s.Name = value.(string)
-	}
+				s.Name = value.(string)
+			}
     if value, ok := d.GetOkExists("description"); ok {
-		s.Description = value.(string)
-	}
+				s.Description = value.(string)
+			}
     if value, ok := d.GetOkExists("notify_emails"); ok {
-		s.NotifyEmails = value.([]interface{})
-	}
+				s.NotifyEmails = value.([]interface{})
+			}
     if value, ok := d.GetOkExists("color"); ok {
-		s.Color = value.(string)
-	}
+				s.Color = value.(string)
+			}
     if value, ok := d.GetOkExists("slack_channels"); ok {
-		s.SlackChannels = value.([]interface{})
-	}
+				s.SlackChannels = value.([]interface{})
+			}
     if value, ok := d.GetOkExists("slack_aliases"); ok {
-		s.SlackAliases = value.([]interface{})
-	}
+				s.SlackAliases = value.([]interface{})
+			}
 
 	res, err := c.CreateTeam(s)
 	if err != nil {
@@ -178,23 +179,23 @@ func resourceTeamUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 	s := &client.Team{}
 
 	  if d.HasChange("name") {
-		s.Name = d.Get("name").(string)
-	}
+				s.Name = d.Get("name").(string)
+			}
     if d.HasChange("description") {
-		s.Description = d.Get("description").(string)
-	}
+				s.Description = d.Get("description").(string)
+			}
     if d.HasChange("notify_emails") {
-		s.NotifyEmails = d.Get("notify_emails").([]interface{})
-	}
+				s.NotifyEmails = d.Get("notify_emails").([]interface{})
+			}
     if d.HasChange("color") {
-		s.Color = d.Get("color").(string)
-	}
+				s.Color = d.Get("color").(string)
+			}
     if d.HasChange("slack_channels") {
-		s.SlackChannels = d.Get("slack_channels").([]interface{})
-	}
+				s.SlackChannels = d.Get("slack_channels").([]interface{})
+			}
     if d.HasChange("slack_aliases") {
-		s.SlackAliases = d.Get("slack_aliases").([]interface{})
-	}
+				s.SlackAliases = d.Get("slack_aliases").([]interface{})
+			}
 
 	_, err := c.UpdateTeam(d.Id(), s)
 	if err != nil {

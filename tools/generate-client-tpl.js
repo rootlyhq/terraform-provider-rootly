@@ -154,15 +154,16 @@ function structAttr(name, resourceSchema) {
 	switch (schema.type) {
 		case 'string':
 			return `${inflect.camelize(name)} string \`jsonapi:"attr,${name},omitempty"\``
+		case 'integer':
 		case 'number':
 			return `${inflect.camelize(name)} int \`jsonapi:"attr,${name},omitempty"\``
 		case 'boolean':
-			return `${inflect.camelize(name)} bool \`jsonapi:"attr,${name},omitempty"\``
+			return `${inflect.camelize(name)} *bool \`jsonapi:"attr,${name},omitempty"\``
 		case 'array':
 			return `${inflect.camelize(name)} []interface{} \`jsonapi:"attr,${name},omitempty"\``
 		case 'object':
 		default:
-			return `${inflect.camelize(name)} interface{} \`jsonapi:"attr,${name},omitempty"\``
+			return `${inflect.camelize(name)} map[string]interface{} \`jsonapi:"attr,${name},omitempty"\``
 	}
 }
 

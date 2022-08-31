@@ -7,6 +7,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
+	
 )
 
 func resourceCause() *schema.Resource{
@@ -61,14 +62,14 @@ func resourceCauseCreate(ctx context.Context, d *schema.ResourceData, meta inter
 	s := &client.Cause{}
 
 	  if value, ok := d.GetOkExists("name"); ok {
-		s.Name = value.(string)
-	}
+				s.Name = value.(string)
+			}
     if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
-	}
+				s.Slug = value.(string)
+			}
     if value, ok := d.GetOkExists("description"); ok {
-		s.Description = value.(string)
-	}
+				s.Description = value.(string)
+			}
 
 	res, err := c.CreateCause(s)
 	if err != nil {
@@ -112,14 +113,14 @@ func resourceCauseUpdate(ctx context.Context, d *schema.ResourceData, meta inter
 	s := &client.Cause{}
 
 	  if d.HasChange("name") {
-		s.Name = d.Get("name").(string)
-	}
+				s.Name = d.Get("name").(string)
+			}
     if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
-	}
+				s.Slug = d.Get("slug").(string)
+			}
     if d.HasChange("description") {
-		s.Description = d.Get("description").(string)
-	}
+				s.Description = d.Get("description").(string)
+			}
 
 	_, err := c.UpdateCause(d.Id(), s)
 	if err != nil {

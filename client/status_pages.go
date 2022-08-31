@@ -14,11 +14,11 @@ type StatusPage struct {
   Description string `jsonapi:"attr,description,omitempty"`
   HeaderColor string `jsonapi:"attr,header_color,omitempty"`
   FooterColor string `jsonapi:"attr,footer_color,omitempty"`
-  AllowSearchEngineIndex bool `jsonapi:"attr,allow_search_engine_index,omitempty"`
-  ShowUptime bool `jsonapi:"attr,show_uptime,omitempty"`
-  ShowUptimeLastDays interface{} `jsonapi:"attr,show_uptime_last_days,omitempty"`
-  Public bool `jsonapi:"attr,public,omitempty"`
-  Enabled bool `jsonapi:"attr,enabled,omitempty"`
+  AllowSearchEngineIndex *bool `jsonapi:"attr,allow_search_engine_index,omitempty"`
+  ShowUptime *bool `jsonapi:"attr,show_uptime,omitempty"`
+  ShowUptimeLastDays int `jsonapi:"attr,show_uptime_last_days,omitempty"`
+  Public *bool `jsonapi:"attr,public,omitempty"`
+  Enabled *bool `jsonapi:"attr,enabled,omitempty"`
 }
 
 func (c *Client) ListStatusPages(params *rootlygo.ListStatusPagesParams) ([]interface{}, error) {

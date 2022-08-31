@@ -7,6 +7,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
+	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
 func resourceStatusPage() *schema.Resource{
@@ -99,14 +100,12 @@ func resourceStatusPage() *schema.Resource{
 			},
 			
 
-			"enabled": &schema.Schema{
-				Type: schema.TypeBool,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				Description: "Enabled / Disable the status page",
-			},
-			
+				"enabled": &schema.Schema{
+					Type: schema.TypeBool,
+					Default: true,
+					Optional: true,
+				},
+				
 		},
 	}
 }
@@ -119,32 +118,32 @@ func resourceStatusPageCreate(ctx context.Context, d *schema.ResourceData, meta 
 	s := &client.StatusPage{}
 
 	  if value, ok := d.GetOkExists("title"); ok {
-		s.Title = value.(string)
-	}
+				s.Title = value.(string)
+			}
     if value, ok := d.GetOkExists("description"); ok {
-		s.Description = value.(string)
-	}
+				s.Description = value.(string)
+			}
     if value, ok := d.GetOkExists("header_color"); ok {
-		s.HeaderColor = value.(string)
-	}
+				s.HeaderColor = value.(string)
+			}
     if value, ok := d.GetOkExists("footer_color"); ok {
-		s.FooterColor = value.(string)
-	}
+				s.FooterColor = value.(string)
+			}
     if value, ok := d.GetOkExists("allow_search_engine_index"); ok {
-		s.AllowSearchEngineIndex = value.(bool)
-	}
+				s.AllowSearchEngineIndex = tools.Bool(value.(bool))
+			}
     if value, ok := d.GetOkExists("show_uptime"); ok {
-		s.ShowUptime = value.(bool)
-	}
+				s.ShowUptime = tools.Bool(value.(bool))
+			}
     if value, ok := d.GetOkExists("show_uptime_last_days"); ok {
-		s.ShowUptimeLastDays = value.(string)
-	}
+				s.ShowUptimeLastDays = value.(int)
+			}
     if value, ok := d.GetOkExists("public"); ok {
-		s.Public = value.(bool)
-	}
+				s.Public = tools.Bool(value.(bool))
+			}
     if value, ok := d.GetOkExists("enabled"); ok {
-		s.Enabled = value.(bool)
-	}
+				s.Enabled = tools.Bool(value.(bool))
+			}
 
 	res, err := c.CreateStatusPage(s)
 	if err != nil {
@@ -194,32 +193,32 @@ func resourceStatusPageUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	s := &client.StatusPage{}
 
 	  if d.HasChange("title") {
-		s.Title = d.Get("title").(string)
-	}
+				s.Title = d.Get("title").(string)
+			}
     if d.HasChange("description") {
-		s.Description = d.Get("description").(string)
-	}
+				s.Description = d.Get("description").(string)
+			}
     if d.HasChange("header_color") {
-		s.HeaderColor = d.Get("header_color").(string)
-	}
+				s.HeaderColor = d.Get("header_color").(string)
+			}
     if d.HasChange("footer_color") {
-		s.FooterColor = d.Get("footer_color").(string)
-	}
+				s.FooterColor = d.Get("footer_color").(string)
+			}
     if d.HasChange("allow_search_engine_index") {
-		s.AllowSearchEngineIndex = d.Get("allow_search_engine_index").(bool)
-	}
+				s.AllowSearchEngineIndex = tools.Bool(d.Get("allow_search_engine_index").(bool))
+			}
     if d.HasChange("show_uptime") {
-		s.ShowUptime = d.Get("show_uptime").(bool)
-	}
+				s.ShowUptime = tools.Bool(d.Get("show_uptime").(bool))
+			}
     if d.HasChange("show_uptime_last_days") {
-		s.ShowUptimeLastDays = d.Get("show_uptime_last_days").(string)
-	}
+				s.ShowUptimeLastDays = d.Get("show_uptime_last_days").(int)
+			}
     if d.HasChange("public") {
-		s.Public = d.Get("public").(bool)
-	}
+				s.Public = tools.Bool(d.Get("public").(bool))
+			}
     if d.HasChange("enabled") {
-		s.Enabled = d.Get("enabled").(bool)
-	}
+				s.Enabled = tools.Bool(d.Get("enabled").(bool))
+			}
 
 	_, err := c.UpdateStatusPage(d.Id(), s)
 	if err != nil {

@@ -19,7 +19,7 @@ description: |-
 ### Optional
 
 - `description` (String) The description of the custom_field
-- `enabled` (Boolean) Whether the custom_field is enabled
+- `enabled` (Boolean)
 - `kind` (String) The kind of the custom_field
 - `position` (Number) The position of the custom_field
 - `required` (List of String)

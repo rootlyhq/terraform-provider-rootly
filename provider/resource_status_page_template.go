@@ -7,6 +7,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
+	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
 func resourceStatusPageTemplate() *schema.Resource{
@@ -69,14 +70,12 @@ func resourceStatusPageTemplate() *schema.Resource{
 			},
 			
 
-			"enabled": &schema.Schema{
-				Type: schema.TypeBool,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				Description: "Enable / Disable the status page template",
-			},
-			
+				"enabled": &schema.Schema{
+					Type: schema.TypeBool,
+					Default: true,
+					Optional: true,
+				},
+				
 
 			"position": &schema.Schema{
 				Type: schema.TypeInt,
@@ -99,26 +98,26 @@ func resourceStatusPageTemplateCreate(ctx context.Context, d *schema.ResourceDat
 	s := &client.StatusPageTemplate{}
 
 	  if value, ok := d.GetOkExists("status_page_id"); ok {
-		s.StatusPageId = value.(string)
-	}
+				s.StatusPageId = value.(string)
+			}
     if value, ok := d.GetOkExists("title"); ok {
-		s.Title = value.(string)
-	}
+				s.Title = value.(string)
+			}
     if value, ok := d.GetOkExists("body"); ok {
-		s.Body = value.(string)
-	}
+				s.Body = value.(string)
+			}
     if value, ok := d.GetOkExists("update_status"); ok {
-		s.UpdateStatus = value.(string)
-	}
+				s.UpdateStatus = value.(string)
+			}
     if value, ok := d.GetOkExists("should_notify_subscribers"); ok {
-		s.ShouldNotifySubscribers = value.(bool)
-	}
+				s.ShouldNotifySubscribers = tools.Bool(value.(bool))
+			}
     if value, ok := d.GetOkExists("enabled"); ok {
-		s.Enabled = value.(bool)
-	}
+				s.Enabled = tools.Bool(value.(bool))
+			}
     if value, ok := d.GetOkExists("position"); ok {
-		s.Position = value.(int)
-	}
+				s.Position = value.(int)
+			}
 
 	res, err := c.CreateStatusPageTemplate(s)
 	if err != nil {
@@ -166,26 +165,26 @@ func resourceStatusPageTemplateUpdate(ctx context.Context, d *schema.ResourceDat
 	s := &client.StatusPageTemplate{}
 
 	  if d.HasChange("status_page_id") {
-		s.StatusPageId = d.Get("status_page_id").(string)
-	}
+				s.StatusPageId = d.Get("status_page_id").(string)
+			}
     if d.HasChange("title") {
-		s.Title = d.Get("title").(string)
-	}
+				s.Title = d.Get("title").(string)
+			}
     if d.HasChange("body") {
-		s.Body = d.Get("body").(string)
-	}
+				s.Body = d.Get("body").(string)
+			}
     if d.HasChange("update_status") {
-		s.UpdateStatus = d.Get("update_status").(string)
-	}
+				s.UpdateStatus = d.Get("update_status").(string)
+			}
     if d.HasChange("should_notify_subscribers") {
-		s.ShouldNotifySubscribers = d.Get("should_notify_subscribers").(bool)
-	}
+				s.ShouldNotifySubscribers = tools.Bool(d.Get("should_notify_subscribers").(bool))
+			}
     if d.HasChange("enabled") {
-		s.Enabled = d.Get("enabled").(bool)
-	}
+				s.Enabled = tools.Bool(d.Get("enabled").(bool))
+			}
     if d.HasChange("position") {
-		s.Position = d.Get("position").(int)
-	}
+				s.Position = d.Get("position").(int)
+			}
 
 	_, err := c.UpdateStatusPageTemplate(d.Id(), s)
 	if err != nil {

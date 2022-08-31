@@ -20,7 +20,7 @@ description: |-
 
 - `allow_search_engine_index` (Boolean) Allow search engines to include your public status page in search results.
 - `description` (String) The description of the status page
-- `enabled` (Boolean) Enabled / Disable the status page
+- `enabled` (Boolean)
 - `footer_color` (String) The color of the footer. Eg. "#1F2F41"
 - `header_color` (String) The color of the header. Eg. "#0061F2"
 - `public` (Boolean) Make the status page accessible to the public

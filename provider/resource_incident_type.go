@@ -7,6 +7,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
+	
 )
 
 func resourceIncidentType() *schema.Resource{
@@ -71,17 +72,17 @@ func resourceIncidentTypeCreate(ctx context.Context, d *schema.ResourceData, met
 	s := &client.IncidentType{}
 
 	  if value, ok := d.GetOkExists("name"); ok {
-		s.Name = value.(string)
-	}
+				s.Name = value.(string)
+			}
     if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
-	}
+				s.Slug = value.(string)
+			}
     if value, ok := d.GetOkExists("description"); ok {
-		s.Description = value.(string)
-	}
+				s.Description = value.(string)
+			}
     if value, ok := d.GetOkExists("color"); ok {
-		s.Color = value.(string)
-	}
+				s.Color = value.(string)
+			}
 
 	res, err := c.CreateIncidentType(s)
 	if err != nil {
@@ -126,17 +127,17 @@ func resourceIncidentTypeUpdate(ctx context.Context, d *schema.ResourceData, met
 	s := &client.IncidentType{}
 
 	  if d.HasChange("name") {
-		s.Name = d.Get("name").(string)
-	}
+				s.Name = d.Get("name").(string)
+			}
     if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
-	}
+				s.Slug = d.Get("slug").(string)
+			}
     if d.HasChange("description") {
-		s.Description = d.Get("description").(string)
-	}
+				s.Description = d.Get("description").(string)
+			}
     if d.HasChange("color") {
-		s.Color = d.Get("color").(string)
-	}
+				s.Color = d.Get("color").(string)
+			}
 
 	_, err := c.UpdateIncidentType(d.Id(), s)
 	if err != nil {

@@ -19,7 +19,7 @@ description: |-
 
 ### Optional
 
-- `enabled` (Boolean) Enable / Disable the status page template
+- `enabled` (Boolean)
 - `position` (Number) Position of the workflow task
 - `should_notify_subscribers` (Boolean) Controls if incident subscribers should be notified
 - `status_page_id` (String)
