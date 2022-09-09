@@ -166,6 +166,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_workflow_task_update_status": resourceWorkflowTaskUpdateStatus(),
 				"rootly_workflow_task_update_trello_card": resourceWorkflowTaskUpdateTrelloCard(),
 				"rootly_workflow_task_update_zendesk_ticket": resourceWorkflowTaskUpdateZendeskTicket(),
+				"rootly_workflow_task_trigger_workflow": resourceWorkflowTaskTriggerWorkflow(),
 			},
 		}
 

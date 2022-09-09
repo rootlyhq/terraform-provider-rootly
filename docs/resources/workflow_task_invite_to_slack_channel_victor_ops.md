@@ -34,5 +34,16 @@ Required:
 
 Optional:
 
-- `channels` (List of String)
+- `channels` (Block List) (see [below for nested schema](#nestedblock--task_params--channels))
 - `task_type` (String)
+
+<a id="nestedblock--task_params--channels"></a>
+### Nested Schema for `task_params.channels`
+
+Required:
+
+- `name` (String)
+
+Read-Only:
+
+- `id` (String) The ID of this resource.

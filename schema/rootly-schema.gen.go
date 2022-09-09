@@ -1944,6 +1944,21 @@ const (
 	TeamResponseDataTypeGroups TeamResponseDataType = "groups"
 )
 
+// Defines values for TriggerWorkflowTaskParamsKind.
+const (
+	TriggerWorkflowTaskParamsKindActionItem TriggerWorkflowTaskParamsKind = "action_item"
+	TriggerWorkflowTaskParamsKindAlert      TriggerWorkflowTaskParamsKind = "alert"
+	TriggerWorkflowTaskParamsKindIncident   TriggerWorkflowTaskParamsKind = "incident"
+	TriggerWorkflowTaskParamsKindPostMortem TriggerWorkflowTaskParamsKind = "post_mortem"
+	TriggerWorkflowTaskParamsKindPulse      TriggerWorkflowTaskParamsKind = "pulse"
+	TriggerWorkflowTaskParamsKindSimple     TriggerWorkflowTaskParamsKind = "simple"
+)
+
+// Defines values for TriggerWorkflowTaskParamsTaskType.
+const (
+	TriggerWorkflow TriggerWorkflowTaskParamsTaskType = "trigger_workflow"
+)
+
 // Defines values for TweetTwitterMessageTaskParamsTaskType.
 const (
 	TweetTwitterMessage TweetTwitterMessageTaskParamsTaskType = "tweet_twitter_message"
@@ -5949,7 +5964,10 @@ type IncidentsChartResponse = map[string]interface{}
 
 // InviteToSlackChannelOpsgenieTaskParams defines model for invite_to_slack_channel_opsgenie_task_params.
 type InviteToSlackChannelOpsgenieTaskParams struct {
-	Channels *[]string `json:"channels,omitempty"`
+	Channels *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"channels,omitempty"`
 	Schedule struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -5968,7 +5986,10 @@ type InviteToSlackChannelTaskParams interface{}
 
 // InviteToSlackChannelVictorOpsTaskParams defines model for invite_to_slack_channel_victor_ops_task_params.
 type InviteToSlackChannelVictorOpsTaskParams struct {
-	Channels *[]string `json:"channels,omitempty"`
+	Channels *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"channels,omitempty"`
 	Schedule struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -8572,6 +8593,26 @@ type TeamResponse struct {
 
 // TeamResponseDataType defines model for TeamResponse.Data.Type.
 type TeamResponseDataType string
+
+// TriggerWorkflowTaskParams defines model for trigger_workflow_task_params.
+type TriggerWorkflowTaskParams struct {
+	Kind     *TriggerWorkflowTaskParamsKind `json:"kind,omitempty"`
+	Resource *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"resource,omitempty"`
+	TaskType *TriggerWorkflowTaskParamsTaskType `json:"task_type,omitempty"`
+	Workflow struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"workflow"`
+}
+
+// TriggerWorkflowTaskParamsKind defines model for TriggerWorkflowTaskParams.Kind.
+type TriggerWorkflowTaskParamsKind string
+
+// TriggerWorkflowTaskParamsTaskType defines model for TriggerWorkflowTaskParams.TaskType.
+type TriggerWorkflowTaskParamsTaskType string
 
 // TweetTwitterMessageTaskParams defines model for tweet_twitter_message_task_params.
 type TweetTwitterMessageTaskParams struct {

@@ -12,14 +12,14 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/client"
 )
 
-func resourceWorkflowTaskInviteToSlackChannelOpsgenie() *schema.Resource {
+func resourceWorkflowTaskTriggerWorkflow() *schema.Resource {
 	return &schema.Resource{
-		Description: "Manages workflow invite_to_slack_channel_opsgenie task.",
+		Description: "Manages workflow trigger_workflow task.",
 
-		CreateContext: resourceWorkflowTaskInviteToSlackChannelOpsgenieCreate,
-		ReadContext:   resourceWorkflowTaskInviteToSlackChannelOpsgenieRead,
-		UpdateContext: resourceWorkflowTaskInviteToSlackChannelOpsgenieUpdate,
-		DeleteContext: resourceWorkflowTaskInviteToSlackChannelOpsgenieDelete,
+		CreateContext: resourceWorkflowTaskTriggerWorkflowCreate,
+		ReadContext:   resourceWorkflowTaskTriggerWorkflowRead,
+		UpdateContext: resourceWorkflowTaskTriggerWorkflowUpdate,
+		DeleteContext: resourceWorkflowTaskTriggerWorkflowDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -48,29 +48,31 @@ func resourceWorkflowTaskInviteToSlackChannelOpsgenie() *schema.Resource {
 						"task_type": &schema.Schema{
 							Type: schema.TypeString,
 							Optional: true,
-							Default: "invite_to_slack_channel_opsgenie",
+							Default: "trigger_workflow",
 							ValidateFunc: validation.StringInSlice([]string{
-								"invite_to_slack_channel_opsgenie",
+								"trigger_workflow",
 							}, false),
 						},
-						"channels": &schema.Schema{
+						"kind": &schema.Schema{
 							Description: "",
-							Type: schema.TypeList,
+							Type: schema.TypeString,
 							Optional: true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type: schema.TypeString,
-										Required: true,
-									},
-									"name": &schema.Schema{
-										Type: schema.TypeString,
-										Required: true,
-									},
-								},
-							},
+							Default: "simple",
+							ValidateFunc: validation.StringInSlice([]string{
+								"simple",
+"incident",
+"post_mortem",
+"action_item",
+"pulse",
+"alert",
+							}, false),
 						},
-						"schedule": &schema.Schema{
+						"resource": &schema.Schema{
+							Description: "",
+							Type: schema.TypeMap,
+							Optional: true,
+						},
+						"workflow": &schema.Schema{
 							Description: "",
 							Type: schema.TypeMap,
 							Required: true,
@@ -82,7 +84,7 @@ func resourceWorkflowTaskInviteToSlackChannelOpsgenie() *schema.Resource {
 	}
 }
 
-func resourceWorkflowTaskInviteToSlackChannelOpsgenieCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskTriggerWorkflowCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
@@ -103,10 +105,10 @@ func resourceWorkflowTaskInviteToSlackChannelOpsgenieCreate(ctx context.Context,
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created an workflow task resource: %v (%s)", workflowId, d.Id()))
 
-	return resourceWorkflowTaskInviteToSlackChannelOpsgenieRead(ctx, d, meta)
+	return resourceWorkflowTaskTriggerWorkflowRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskInviteToSlackChannelOpsgenieRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskTriggerWorkflowRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
@@ -115,7 +117,7 @@ func resourceWorkflowTaskInviteToSlackChannelOpsgenieRead(ctx context.Context, d
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskInviteToSlackChannelOpsgenie (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskTriggerWorkflow (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
@@ -131,7 +133,7 @@ func resourceWorkflowTaskInviteToSlackChannelOpsgenieRead(ctx context.Context, d
 	return nil
 }
 
-func resourceWorkflowTaskInviteToSlackChannelOpsgenieUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskTriggerWorkflowUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
@@ -149,10 +151,10 @@ func resourceWorkflowTaskInviteToSlackChannelOpsgenieUpdate(ctx context.Context,
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
 
-	return resourceWorkflowTaskInviteToSlackChannelOpsgenieRead(ctx, d, meta)
+	return resourceWorkflowTaskTriggerWorkflowRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskInviteToSlackChannelOpsgenieDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskTriggerWorkflowDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
@@ -161,7 +163,7 @@ func resourceWorkflowTaskInviteToSlackChannelOpsgenieDelete(ctx context.Context,
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskInviteToSlackChannelOpsgenie (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskTriggerWorkflow (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}

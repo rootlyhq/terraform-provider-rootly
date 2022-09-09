@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.28] -- 2022-09-09
+
+- Fix `channels` type for `invite_to_slack_channel_pagerduty`, `invite_to_slack_channel_opsgenie` & `invite_to_slack_channel_victor_ops_task`.
+- Add `trigger_workflow_task`.
+
 ## [0.1.27] -- 2022-08-31
 
 - Add "slug" to team data source.

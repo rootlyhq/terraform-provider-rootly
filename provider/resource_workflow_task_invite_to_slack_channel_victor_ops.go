@@ -57,8 +57,17 @@ func resourceWorkflowTaskInviteToSlackChannelVictorOps() *schema.Resource {
 							Description: "",
 							Type: schema.TypeList,
 							Optional: true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": &schema.Schema{
+										Type: schema.TypeString,
+										Required: true,
+									},
+									"name": &schema.Schema{
+										Type: schema.TypeString,
+										Required: true,
+									},
+								},
 							},
 						},
 						"schedule": &schema.Schema{
