@@ -45,3 +45,4 @@ Optional:
 - `reporter_user_email` (String) The reporter user's email.
 - `status` (Map of String) The status id and display name.
 - `task_type` (String)
+- `update_payload` (String) Update payload. Can contain liquid markup and need to be valid JSON.

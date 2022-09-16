@@ -18,6 +18,7 @@ description: |-
 
 ### Optional
 
+- `backstage_id` (String) The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
 - `color` (String)
 - `description` (String) The description of the service
 - `environment_ids` (List of String) Environments associated with this service

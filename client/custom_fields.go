@@ -17,6 +17,7 @@ type CustomField struct {
   Description string `jsonapi:"attr,description,omitempty"`
   Shown []interface{} `jsonapi:"attr,shown,omitempty"`
   Required []interface{} `jsonapi:"attr,required,omitempty"`
+  Default string `jsonapi:"attr,default,omitempty"`
   Position int `jsonapi:"attr,position,omitempty"`
 }
 

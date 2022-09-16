@@ -13,6 +13,7 @@ type CustomFieldOption struct {
 	CustomFieldId int `jsonapi:"attr,custom_field_id,omitempty"`
   Value string `jsonapi:"attr,value,omitempty"`
   Color string `jsonapi:"attr,color,omitempty"`
+  Default *bool `jsonapi:"attr,default,omitempty"`
   Position int `jsonapi:"attr,position,omitempty"`
 }
 

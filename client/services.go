@@ -16,6 +16,7 @@ type Service struct {
   PublicDescription string `jsonapi:"attr,public_description,omitempty"`
   NotifyEmails []interface{} `jsonapi:"attr,notify_emails,omitempty"`
   Color string `jsonapi:"attr,color,omitempty"`
+  BackstageId string `jsonapi:"attr,backstage_id,omitempty"`
   PagerdutyId string `jsonapi:"attr,pagerduty_id,omitempty"`
   OpsgenieId string `jsonapi:"attr,opsgenie_id,omitempty"`
   GithubRepositoryName string `jsonapi:"attr,github_repository_name,omitempty"`

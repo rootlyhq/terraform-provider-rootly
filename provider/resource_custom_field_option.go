@@ -7,7 +7,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
-	
+	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
 func resourceCustomFieldOption() *schema.Resource{
@@ -51,6 +51,15 @@ func resourceCustomFieldOption() *schema.Resource{
 			},
 			
 
+			"default": &schema.Schema{
+				Type: schema.TypeBool,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				Description: "",
+			},
+			
+
 			"position": &schema.Schema{
 				Type: schema.TypeInt,
 				Computed: true,
@@ -79,6 +88,9 @@ func resourceCustomFieldOptionCreate(ctx context.Context, d *schema.ResourceData
 			}
     if value, ok := d.GetOkExists("color"); ok {
 				s.Color = value.(string)
+			}
+    if value, ok := d.GetOkExists("default"); ok {
+				s.Default = tools.Bool(value.(bool))
 			}
     if value, ok := d.GetOkExists("position"); ok {
 				s.Position = value.(int)
@@ -115,6 +127,7 @@ func resourceCustomFieldOptionRead(ctx context.Context, d *schema.ResourceData, 
 	d.Set("custom_field_id", item.CustomFieldId)
   d.Set("value", item.Value)
   d.Set("color", item.Color)
+  d.Set("default", item.Default)
   d.Set("position", item.Position)
 
 	return nil
@@ -134,6 +147,9 @@ func resourceCustomFieldOptionUpdate(ctx context.Context, d *schema.ResourceData
 			}
     if d.HasChange("color") {
 				s.Color = d.Get("color").(string)
+			}
+    if d.HasChange("default") {
+				s.Default = tools.Bool(d.Get("default").(bool))
 			}
     if d.HasChange("position") {
 				s.Position = d.Get("position").(int)

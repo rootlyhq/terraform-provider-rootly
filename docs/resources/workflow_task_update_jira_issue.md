@@ -44,3 +44,4 @@ Optional:
 - `status` (Map of String) The status id and display name.
 - `task_type` (String)
 - `title` (String) The issue title.
+- `update_payload` (String) Update payload. Can contain liquid markup and need to be valid JSON.

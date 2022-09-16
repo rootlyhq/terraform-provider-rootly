@@ -20,6 +20,7 @@ description: |-
 
 - `color` (String) The hex color of the custom_field_option
 - `custom_field_id` (Number) The ID of the parent custom field
+- `default` (Boolean)
 - `position` (Number) The position of the custom_field_option
 
 ### Read-Only

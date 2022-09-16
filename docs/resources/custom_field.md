@@ -18,6 +18,7 @@ description: |-
 
 ### Optional
 
+- `default` (String) The default value for text field kinds.
 - `description` (String) The description of the custom_field
 - `enabled` (Boolean)
 - `kind` (String) The kind of the custom_field

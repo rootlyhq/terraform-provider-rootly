@@ -137,6 +137,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_workflow_task_invite_to_slack_channel": resourceWorkflowTaskInviteToSlackChannel(),
 				"rootly_workflow_task_invite_to_slack_channel_victor_ops": resourceWorkflowTaskInviteToSlackChannelVictorOps(),
 				"rootly_workflow_task_page_opsgenie_on_call_responders": resourceWorkflowTaskPageOpsgenieOnCallResponders(),
+				"rootly_workflow_task_create_opsgenie_alert": resourceWorkflowTaskCreateOpsgenieAlert(),
 				"rootly_workflow_task_page_pagerduty_on_call_responders": resourceWorkflowTaskPagePagerdutyOnCallResponders(),
 				"rootly_workflow_task_page_victor_ops_on_call_responders": resourceWorkflowTaskPageVictorOpsOnCallResponders(),
 				"rootly_workflow_task_print": resourceWorkflowTaskPrint(),

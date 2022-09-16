@@ -650,6 +650,20 @@ const (
 	CreateNotionPage CreateNotionPageTaskParamsTaskType = "create_notion_page"
 )
 
+// Defines values for CreateOpsgenieAlertTaskParamsPriority.
+const (
+	CreateOpsgenieAlertTaskParamsPriorityAuto CreateOpsgenieAlertTaskParamsPriority = "auto"
+	CreateOpsgenieAlertTaskParamsPriorityP1   CreateOpsgenieAlertTaskParamsPriority = "P1"
+	CreateOpsgenieAlertTaskParamsPriorityP2   CreateOpsgenieAlertTaskParamsPriority = "P2"
+	CreateOpsgenieAlertTaskParamsPriorityP3   CreateOpsgenieAlertTaskParamsPriority = "P3"
+	CreateOpsgenieAlertTaskParamsPriorityP4   CreateOpsgenieAlertTaskParamsPriority = "P4"
+)
+
+// Defines values for CreateOpsgenieAlertTaskParamsTaskType.
+const (
+	CreateOpsgenieAlert CreateOpsgenieAlertTaskParamsTaskType = "create_opsgenie_alert"
+)
+
 // Defines values for CreatePagerdutyStatusUpdateParamsTaskType.
 const (
 	CreatePagerdutyStatusUpdate CreatePagerdutyStatusUpdateParamsTaskType = "create_pagerduty_status_update"
@@ -2239,10 +2253,10 @@ const (
 
 // Defines values for UpdateSeverityDataAttributesSeverity.
 const (
-	UpdateSeverityDataAttributesSeverityCritical UpdateSeverityDataAttributesSeverity = "critical"
-	UpdateSeverityDataAttributesSeverityHigh     UpdateSeverityDataAttributesSeverity = "high"
-	UpdateSeverityDataAttributesSeverityLow      UpdateSeverityDataAttributesSeverity = "low"
-	UpdateSeverityDataAttributesSeverityMedium   UpdateSeverityDataAttributesSeverity = "medium"
+	Critical UpdateSeverityDataAttributesSeverity = "critical"
+	High     UpdateSeverityDataAttributesSeverity = "high"
+	Low      UpdateSeverityDataAttributesSeverity = "low"
+	Medium   UpdateSeverityDataAttributesSeverity = "medium"
 )
 
 // Defines values for UpdateSeverityDataType.
@@ -2760,7 +2774,9 @@ type Alert struct {
 
 	// Services attached to the alert
 	Services *[]struct {
-		Color *string `json:"color"`
+		// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
+		BackstageId *string `json:"backstage_id"`
+		Color       *string `json:"color"`
 
 		// Date of creation
 		CreatedAt string `json:"created_at"`
@@ -2878,7 +2894,9 @@ type AlertList struct {
 
 			// Services attached to the alert
 			Services *[]struct {
-				Color *string `json:"color"`
+				// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
+				BackstageId *string `json:"backstage_id"`
+				Color       *string `json:"color"`
 
 				// Date of creation
 				CreatedAt string `json:"created_at"`
@@ -3015,7 +3033,9 @@ type AlertResponse struct {
 
 			// Services attached to the alert
 			Services *[]struct {
-				Color *string `json:"color"`
+				// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
+				BackstageId *string `json:"backstage_id"`
+				Color       *string `json:"color"`
 
 				// Date of creation
 				CreatedAt string `json:"created_at"`
@@ -3651,6 +3671,9 @@ type CreateJiraIssueTaskParams struct {
 
 	// The issue title.
 	Title string `json:"title"`
+
+	// Update payload. Can contain liquid markup and need to be valid JSON.
+	UpdatePayload *string `json:"update_payload"`
 }
 
 // CreateJiraIssueTaskParamsTaskType defines model for CreateJiraIssueTaskParams.TaskType.
@@ -3703,6 +3726,9 @@ type CreateJiraSubtaskTaskParams struct {
 
 	// The issue title.
 	Title string `json:"title"`
+
+	// Update payload. Can contain liquid markup and need to be valid JSON.
+	UpdatePayload *string `json:"update_payload"`
 }
 
 // CreateJiraSubtaskTaskParamsTaskType defines model for CreateJiraSubtaskTaskParams.TaskType.
@@ -3800,6 +3826,39 @@ type CreateNotionPageTaskParams struct {
 
 // CreateNotionPageTaskParamsTaskType defines model for CreateNotionPageTaskParams.TaskType.
 type CreateNotionPageTaskParamsTaskType string
+
+// CreateOpsgenieAlertTaskParams defines model for create_opsgenie_alert_task_params.
+type CreateOpsgenieAlertTaskParams struct {
+	// Description field of the alert that is generally used to provide a detailed information about the alert
+	Description *string `json:"description,omitempty"`
+	Escalations *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"escalations,omitempty"`
+
+	// Message of the alert
+	Message   string                                 `json:"message"`
+	Priority  *CreateOpsgenieAlertTaskParamsPriority `json:"priority,omitempty"`
+	Schedules *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"schedules,omitempty"`
+	TaskType *CreateOpsgenieAlertTaskParamsTaskType `json:"task_type,omitempty"`
+	Teams    *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"teams,omitempty"`
+	Users *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"users,omitempty"`
+}
+
+// CreateOpsgenieAlertTaskParamsPriority defines model for CreateOpsgenieAlertTaskParams.Priority.
+type CreateOpsgenieAlertTaskParamsPriority string
+
+// CreateOpsgenieAlertTaskParamsTaskType defines model for CreateOpsgenieAlertTaskParams.TaskType.
+type CreateOpsgenieAlertTaskParamsTaskType string
 
 // CreatePagerdutyStatusUpdateParams defines model for create_pagerduty_status_update_params.
 type CreatePagerdutyStatusUpdateParams struct {
@@ -4015,6 +4074,9 @@ type CustomField struct {
 	// Date of creation
 	CreatedAt string `json:"created_at"`
 
+	// The default value for text field kinds.
+	Default *string `json:"default"`
+
 	// The description of the custom_field
 	Description *string `json:"description"`
 
@@ -4051,6 +4113,9 @@ type CustomFieldList struct {
 		Attributes struct {
 			// Date of creation
 			CreatedAt string `json:"created_at"`
+
+			// The default value for text field kinds.
+			Default *string `json:"default"`
 
 			// The description of the custom_field
 			Description *string `json:"description"`
@@ -4108,6 +4173,7 @@ type CustomFieldOption struct {
 
 	// The ID of the parent custom field
 	CustomFieldId *float32 `json:"custom_field_id,omitempty"`
+	Default       *bool    `json:"default,omitempty"`
 
 	// The position of the custom_field_option
 	Position float32 `json:"position"`
@@ -4131,6 +4197,7 @@ type CustomFieldOptionList struct {
 
 			// The ID of the parent custom field
 			CustomFieldId *float32 `json:"custom_field_id,omitempty"`
+			Default       *bool    `json:"default,omitempty"`
 
 			// The position of the custom_field_option
 			Position float32 `json:"position"`
@@ -4170,6 +4237,7 @@ type CustomFieldOptionResponse struct {
 
 			// The ID of the parent custom field
 			CustomFieldId *float32 `json:"custom_field_id,omitempty"`
+			Default       *bool    `json:"default,omitempty"`
 
 			// The position of the custom_field_option
 			Position float32 `json:"position"`
@@ -4196,6 +4264,9 @@ type CustomFieldResponse struct {
 		Attributes struct {
 			// Date of creation
 			CreatedAt string `json:"created_at"`
+
+			// The default value for text field kinds.
+			Default *string `json:"default"`
 
 			// The description of the custom_field
 			Description *string `json:"description"`
@@ -6083,6 +6154,9 @@ type NewCauseDataType string
 type NewCustomField struct {
 	Data struct {
 		Attributes struct {
+			// The default value for text field kinds.
+			Default *string `json:"default"`
+
 			// The description of the custom_field
 			Description *string `json:"description"`
 
@@ -6112,7 +6186,8 @@ type NewCustomFieldOption struct {
 	Data struct {
 		Attributes struct {
 			// The hex color of the custom_field_option
-			Color *string `json:"color,omitempty"`
+			Color   *string `json:"color,omitempty"`
+			Default *bool   `json:"default,omitempty"`
 
 			// The position of the custom_field_option
 			Position *float32 `json:"position,omitempty"`
@@ -6613,7 +6688,9 @@ type NewPulseDataType string
 type NewService struct {
 	Data struct {
 		Attributes struct {
-			Color *string `json:"color"`
+			// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
+			BackstageId *string `json:"backstage_id"`
+			Color       *string `json:"color"`
 
 			// The description of the service
 			Description *string `json:"description"`
@@ -7267,7 +7344,9 @@ type Pulse struct {
 
 	// Services attached to the pulse
 	Services *[]struct {
-		Color *string `json:"color"`
+		// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
+		BackstageId *string `json:"backstage_id"`
+		Color       *string `json:"color"`
 
 		// Date of creation
 		CreatedAt string `json:"created_at"`
@@ -7392,7 +7471,9 @@ type PulseList struct {
 
 			// Services attached to the pulse
 			Services *[]struct {
-				Color *string `json:"color"`
+				// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
+				BackstageId *string `json:"backstage_id"`
+				Color       *string `json:"color"`
 
 				// Date of creation
 				CreatedAt string `json:"created_at"`
@@ -7533,7 +7614,9 @@ type PulseResponse struct {
 
 			// Services attached to the pulse
 			Services *[]struct {
-				Color *string `json:"color"`
+				// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
+				BackstageId *string `json:"backstage_id"`
+				Color       *string `json:"color"`
 
 				// Date of creation
 				CreatedAt string `json:"created_at"`
@@ -7761,7 +7844,9 @@ type SendSmsTaskParamsTaskType string
 
 // Service defines model for service.
 type Service struct {
-	Color *string `json:"color"`
+	// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
+	BackstageId *string `json:"backstage_id"`
+	Color       *string `json:"color"`
 
 	// Date of creation
 	CreatedAt string `json:"created_at"`
@@ -7834,7 +7919,9 @@ type Service struct {
 type ServiceList struct {
 	Data []struct {
 		Attributes struct {
-			Color *string `json:"color"`
+			// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
+			BackstageId *string `json:"backstage_id"`
+			Color       *string `json:"color"`
 
 			// Date of creation
 			CreatedAt string `json:"created_at"`
@@ -7923,7 +8010,9 @@ type ServiceListDataType string
 type ServiceResponse struct {
 	Data struct {
 		Attributes struct {
-			Color *string `json:"color"`
+			// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
+			BackstageId *string `json:"backstage_id"`
+			Color       *string `json:"color"`
 
 			// Date of creation
 			CreatedAt string `json:"created_at"`
@@ -8686,6 +8775,9 @@ type UpdateCauseDataType string
 type UpdateCustomField struct {
 	Data struct {
 		Attributes struct {
+			// The default value for text field kinds.
+			Default *string `json:"default"`
+
 			// The description of the custom_field
 			Description *string `json:"description"`
 
@@ -8718,7 +8810,8 @@ type UpdateCustomFieldOption struct {
 	Data struct {
 		Attributes struct {
 			// The hex color of the custom_field_option
-			Color *string `json:"color,omitempty"`
+			Color   *string `json:"color,omitempty"`
+			Default *bool   `json:"default,omitempty"`
 
 			// The position of the custom_field_option
 			Position *float32 `json:"position,omitempty"`
@@ -9286,6 +9379,9 @@ type UpdateJiraIssueTaskParams struct {
 
 	// The issue title.
 	Title *string `json:"title,omitempty"`
+
+	// Update payload. Can contain liquid markup and need to be valid JSON.
+	UpdatePayload *string `json:"update_payload"`
 }
 
 // UpdateJiraIssueTaskParamsTaskType defines model for UpdateJiraIssueTaskParams.TaskType.
@@ -9467,7 +9563,9 @@ type UpdatePulseDataType string
 type UpdateService struct {
 	Data struct {
 		Attributes struct {
-			Color *string `json:"color"`
+			// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
+			BackstageId *string `json:"backstage_id"`
+			Color       *string `json:"color"`
 
 			// The description of the service
 			Description *string `json:"description"`

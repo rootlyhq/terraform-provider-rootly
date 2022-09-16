@@ -31,6 +31,13 @@ func dataSourceService() *schema.Resource{
 				Optional: true,
 			},
 			
+
+			"backstage_id": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Optional: true,
+			},
+			
 		},
 	}
 }
@@ -49,6 +56,10 @@ func dataSourceServiceRead(ctx context.Context, d *schema.ResourceData, meta int
 
 				slug := d.Get("slug").(string)
 				params.FilterSlug = &slug
+			
+
+				backstage_id := d.Get("backstage_id").(string)
+				params.FilterBackstageId = &backstage_id
 			
 
 	items, err := c.ListServices(params)

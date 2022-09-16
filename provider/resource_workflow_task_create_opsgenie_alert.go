@@ -12,14 +12,14 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/client"
 )
 
-func resourceWorkflowTaskCreateJiraIssue() *schema.Resource {
+func resourceWorkflowTaskCreateOpsgenieAlert() *schema.Resource {
 	return &schema.Resource{
-		Description: "Manages workflow create_jira_issue task.",
+		Description: "Manages workflow create_opsgenie_alert task.",
 
-		CreateContext: resourceWorkflowTaskCreateJiraIssueCreate,
-		ReadContext:   resourceWorkflowTaskCreateJiraIssueRead,
-		UpdateContext: resourceWorkflowTaskCreateJiraIssueUpdate,
-		DeleteContext: resourceWorkflowTaskCreateJiraIssueDelete,
+		CreateContext: resourceWorkflowTaskCreateOpsgenieAlertCreate,
+		ReadContext:   resourceWorkflowTaskCreateOpsgenieAlertRead,
+		UpdateContext: resourceWorkflowTaskCreateOpsgenieAlertUpdate,
+		DeleteContext: resourceWorkflowTaskCreateOpsgenieAlertDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -48,71 +48,101 @@ func resourceWorkflowTaskCreateJiraIssue() *schema.Resource {
 						"task_type": &schema.Schema{
 							Type: schema.TypeString,
 							Optional: true,
-							Default: "create_jira_issue",
+							Default: "create_opsgenie_alert",
 							ValidateFunc: validation.StringInSlice([]string{
-								"create_jira_issue",
+								"create_opsgenie_alert",
 							}, false),
 						},
-						"title": &schema.Schema{
-							Description: "The issue title.",
+						"message": &schema.Schema{
+							Description: "Message of the alert",
 							Type: schema.TypeString,
 							Required: true,
 						},
 						"description": &schema.Schema{
-							Description: "The issue description.",
+							Description: "Description field of the alert that is generally used to provide a detailed information about the alert",
 							Type: schema.TypeString,
 							Optional: true,
 						},
-						"labels": &schema.Schema{
-							Description: "The issue labels.",
-							Type: schema.TypeString,
+						"teams": &schema.Schema{
+							Description: "",
+							Type: schema.TypeList,
 							Optional: true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": &schema.Schema{
+										Type: schema.TypeString,
+										Required: true,
+									},
+									"name": &schema.Schema{
+										Type: schema.TypeString,
+										Required: true,
+									},
+								},
+							},
 						},
-						"assign_user_email": &schema.Schema{
-							Description: "The assigned user's email.",
-							Type: schema.TypeString,
+						"users": &schema.Schema{
+							Description: "",
+							Type: schema.TypeList,
 							Optional: true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": &schema.Schema{
+										Type: schema.TypeString,
+										Required: true,
+									},
+									"name": &schema.Schema{
+										Type: schema.TypeString,
+										Required: true,
+									},
+								},
+							},
 						},
-						"reporter_user_email": &schema.Schema{
-							Description: "The reporter user's email.",
-							Type: schema.TypeString,
+						"schedules": &schema.Schema{
+							Description: "",
+							Type: schema.TypeList,
 							Optional: true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": &schema.Schema{
+										Type: schema.TypeString,
+										Required: true,
+									},
+									"name": &schema.Schema{
+										Type: schema.TypeString,
+										Required: true,
+									},
+								},
+							},
 						},
-						"project_key": &schema.Schema{
-							Description: "The project key.",
-							Type: schema.TypeString,
-							Required: true,
-						},
-						"due_date": &schema.Schema{
-							Description: "The due date.",
-							Type: schema.TypeString,
+						"escalations": &schema.Schema{
+							Description: "",
+							Type: schema.TypeList,
 							Optional: true,
-						},
-						"issue_type": &schema.Schema{
-							Description: "The issue type id and display name.",
-							Type: schema.TypeMap,
-							Required: true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": &schema.Schema{
+										Type: schema.TypeString,
+										Required: true,
+									},
+									"name": &schema.Schema{
+										Type: schema.TypeString,
+										Required: true,
+									},
+								},
+							},
 						},
 						"priority": &schema.Schema{
-							Description: "The priority id and display name.",
-							Type: schema.TypeMap,
-							Optional: true,
-						},
-						"status": &schema.Schema{
-							Description: "The status id and display name.",
-							Type: schema.TypeMap,
-							Optional: true,
-						},
-						"custom_fields_mapping": &schema.Schema{
-							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON.",
+							Description: "",
 							Type: schema.TypeString,
 							Optional: true,
-							Default: "{}",
-						},
-						"update_payload": &schema.Schema{
-							Description: "Update payload. Can contain liquid markup and need to be valid JSON.",
-							Type: schema.TypeString,
-							Optional: true,
+							Default: "P1",
+							ValidateFunc: validation.StringInSlice([]string{
+								"P1",
+"P2",
+"P3",
+"P4",
+"auto",
+							}, false),
 						},
 					},
 				},
@@ -121,7 +151,7 @@ func resourceWorkflowTaskCreateJiraIssue() *schema.Resource {
 	}
 }
 
-func resourceWorkflowTaskCreateJiraIssueCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateOpsgenieAlertCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
@@ -142,10 +172,10 @@ func resourceWorkflowTaskCreateJiraIssueCreate(ctx context.Context, d *schema.Re
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created an workflow task resource: %v (%s)", workflowId, d.Id()))
 
-	return resourceWorkflowTaskCreateJiraIssueRead(ctx, d, meta)
+	return resourceWorkflowTaskCreateOpsgenieAlertRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskCreateJiraIssueRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateOpsgenieAlertRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
@@ -154,7 +184,7 @@ func resourceWorkflowTaskCreateJiraIssueRead(ctx context.Context, d *schema.Reso
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateJiraIssue (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateOpsgenieAlert (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
@@ -170,7 +200,7 @@ func resourceWorkflowTaskCreateJiraIssueRead(ctx context.Context, d *schema.Reso
 	return nil
 }
 
-func resourceWorkflowTaskCreateJiraIssueUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateOpsgenieAlertUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
@@ -188,10 +218,10 @@ func resourceWorkflowTaskCreateJiraIssueUpdate(ctx context.Context, d *schema.Re
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
 
-	return resourceWorkflowTaskCreateJiraIssueRead(ctx, d, meta)
+	return resourceWorkflowTaskCreateOpsgenieAlertRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskCreateJiraIssueDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateOpsgenieAlertDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
@@ -200,7 +230,7 @@ func resourceWorkflowTaskCreateJiraIssueDelete(ctx context.Context, d *schema.Re
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateJiraIssue (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateOpsgenieAlert (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}

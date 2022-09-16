@@ -92,6 +92,16 @@ func resourceCustomField() *schema.Resource{
 				},
 				
 
+			"default": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The default value for text field kinds.",
+			},
+			
+
 			"position": &schema.Schema{
 				Type: schema.TypeInt,
 				Computed: true,
@@ -133,6 +143,9 @@ func resourceCustomFieldCreate(ctx context.Context, d *schema.ResourceData, meta
     if value, ok := d.GetOkExists("required"); ok {
 				s.Required = value.([]interface{})
 			}
+    if value, ok := d.GetOkExists("default"); ok {
+				s.Default = value.(string)
+			}
     if value, ok := d.GetOkExists("position"); ok {
 				s.Position = value.(int)
 			}
@@ -172,6 +185,7 @@ func resourceCustomFieldRead(ctx context.Context, d *schema.ResourceData, meta i
   d.Set("description", item.Description)
   d.Set("shown", item.Shown)
   d.Set("required", item.Required)
+  d.Set("default", item.Default)
   d.Set("position", item.Position)
 
 	return nil
@@ -203,6 +217,9 @@ func resourceCustomFieldUpdate(ctx context.Context, d *schema.ResourceData, meta
 			}
     if d.HasChange("required") {
 				s.Required = d.Get("required").([]interface{})
+			}
+    if d.HasChange("default") {
+				s.Default = d.Get("default").(string)
 			}
     if d.HasChange("position") {
 				s.Position = d.Get("position").(int)

@@ -104,6 +104,11 @@ func resourceWorkflowTaskUpdateJiraIssue() *schema.Resource {
 							Optional: true,
 							Default: "{}",
 						},
+						"update_payload": &schema.Schema{
+							Description: "Update payload. Can contain liquid markup and need to be valid JSON.",
+							Type: schema.TypeString,
+							Optional: true,
+						},
 					},
 				},
 			},
