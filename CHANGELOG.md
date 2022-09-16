@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.29] -- 2022-09-15
+
+- Fix `update_payload` type for Jira Task.
+- Add `create_opsgenie_alert_task`.
+- Add `default` field for custom fields.
+
 ## [0.1.28] -- 2022-09-09
 
 - Fix `channels` type for `invite_to_slack_channel_pagerduty`, `invite_to_slack_channel_opsgenie` & `invite_to_slack_channel_victor_ops_task`.
