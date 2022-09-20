@@ -5,6 +5,7 @@
 - Add more genius workflow triggers.
 - Add `create_linear_issue_comment`.
 - Add `template` field for `create_confluence_page`.
+- `conference_solution_key` is now optional for `create_google_meeting`.
 
 ## [0.1.29] -- 2022-09-15
 
