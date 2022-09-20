@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.30] -- 2022-09-20
+
+- Add more genius workflow triggers.
+- Add `create_linear_issue_comment`.
+- Add `template` field for `create_confluence_page`.
+
 ## [0.1.29] -- 2022-09-15
 
 - Fix `update_payload` type for Jira Task.
