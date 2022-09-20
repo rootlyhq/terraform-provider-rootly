@@ -12,14 +12,14 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/client"
 )
 
-func resourceWorkflowTaskCreateConfluencePage() *schema.Resource {
+func resourceWorkflowTaskCreateLinearIssueComment() *schema.Resource {
 	return &schema.Resource{
-		Description: "Manages workflow create_confluence_page task.",
+		Description: "Manages workflow create_linear_issue_comment task.",
 
-		CreateContext: resourceWorkflowTaskCreateConfluencePageCreate,
-		ReadContext:   resourceWorkflowTaskCreateConfluencePageRead,
-		UpdateContext: resourceWorkflowTaskCreateConfluencePageUpdate,
-		DeleteContext: resourceWorkflowTaskCreateConfluencePageDelete,
+		CreateContext: resourceWorkflowTaskCreateLinearIssueCommentCreate,
+		ReadContext:   resourceWorkflowTaskCreateLinearIssueCommentRead,
+		UpdateContext: resourceWorkflowTaskCreateLinearIssueCommentUpdate,
+		DeleteContext: resourceWorkflowTaskCreateLinearIssueCommentDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -48,40 +48,20 @@ func resourceWorkflowTaskCreateConfluencePage() *schema.Resource {
 						"task_type": &schema.Schema{
 							Type: schema.TypeString,
 							Optional: true,
-							Default: "create_confluence_page",
+							Default: "create_linear_issue_comment",
 							ValidateFunc: validation.StringInSlice([]string{
-								"create_confluence_page",
+								"create_linear_issue_comment",
 							}, false),
 						},
-						"space": &schema.Schema{
-							Description: "",
-							Type: schema.TypeMap,
-							Required: true,
-						},
-						"ancestor": &schema.Schema{
-							Description: "",
-							Type: schema.TypeMap,
-							Optional: true,
-						},
-						"template": &schema.Schema{
-							Description: "",
-							Type: schema.TypeMap,
-							Optional: true,
-						},
-						"title": &schema.Schema{
-							Description: "The page title",
+						"issue_id": &schema.Schema{
+							Description: "The issue id",
 							Type: schema.TypeString,
 							Required: true,
 						},
-						"content": &schema.Schema{
-							Description: "The page content",
+						"body": &schema.Schema{
+							Description: "The issue description",
 							Type: schema.TypeString,
-							Optional: true,
-						},
-						"post_mortem_template_id": &schema.Schema{
-							Description: "The post mortem template to use",
-							Type: schema.TypeString,
-							Optional: true,
+							Required: true,
 						},
 					},
 				},
@@ -90,7 +70,7 @@ func resourceWorkflowTaskCreateConfluencePage() *schema.Resource {
 	}
 }
 
-func resourceWorkflowTaskCreateConfluencePageCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateLinearIssueCommentCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
@@ -111,10 +91,10 @@ func resourceWorkflowTaskCreateConfluencePageCreate(ctx context.Context, d *sche
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created an workflow task resource: %v (%s)", workflowId, d.Id()))
 
-	return resourceWorkflowTaskCreateConfluencePageRead(ctx, d, meta)
+	return resourceWorkflowTaskCreateLinearIssueCommentRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskCreateConfluencePageRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateLinearIssueCommentRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
@@ -123,7 +103,7 @@ func resourceWorkflowTaskCreateConfluencePageRead(ctx context.Context, d *schema
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateConfluencePage (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateLinearIssueComment (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
@@ -139,7 +119,7 @@ func resourceWorkflowTaskCreateConfluencePageRead(ctx context.Context, d *schema
 	return nil
 }
 
-func resourceWorkflowTaskCreateConfluencePageUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateLinearIssueCommentUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
@@ -157,10 +137,10 @@ func resourceWorkflowTaskCreateConfluencePageUpdate(ctx context.Context, d *sche
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
 
-	return resourceWorkflowTaskCreateConfluencePageRead(ctx, d, meta)
+	return resourceWorkflowTaskCreateLinearIssueCommentRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskCreateConfluencePageDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateLinearIssueCommentDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
@@ -169,7 +149,7 @@ func resourceWorkflowTaskCreateConfluencePageDelete(ctx context.Context, d *sche
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateConfluencePage (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateLinearIssueComment (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}

@@ -118,6 +118,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_workflow_task_create_jira_subtask": resourceWorkflowTaskCreateJiraSubtask(),
 				"rootly_workflow_task_create_linear_issue": resourceWorkflowTaskCreateLinearIssue(),
 				"rootly_workflow_task_create_linear_subtask_issue": resourceWorkflowTaskCreateLinearSubtaskIssue(),
+				"rootly_workflow_task_create_linear_issue_comment": resourceWorkflowTaskCreateLinearIssueComment(),
 				"rootly_workflow_task_create_microsoft_teams_meeting": resourceWorkflowTaskCreateMicrosoftTeamsMeeting(),
 				"rootly_workflow_task_create_notion_page": resourceWorkflowTaskCreateNotionPage(),
 				"rootly_workflow_task_create_service_now_incident": resourceWorkflowTaskCreateServiceNowIncident(),

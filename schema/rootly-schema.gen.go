@@ -630,6 +630,11 @@ const (
 	CreateJiraSubtask CreateJiraSubtaskTaskParamsTaskType = "create_jira_subtask"
 )
 
+// Defines values for CreateLinearIssueCommentTaskParamsTaskType.
+const (
+	CreateLinearIssueComment CreateLinearIssueCommentTaskParamsTaskType = "create_linear_issue_comment"
+)
+
 // Defines values for CreateLinearIssueTaskParamsTaskType.
 const (
 	CreateLinearIssue CreateLinearIssueTaskParamsTaskType = "create_linear_issue"
@@ -1294,17 +1299,27 @@ const (
 
 // Defines values for IncidentTriggerParamsTriggers.
 const (
+	IncidentTriggerParamsTriggersEnvironmentsAdded      IncidentTriggerParamsTriggers = "environments_added"
+	IncidentTriggerParamsTriggersEnvironmentsRemoved    IncidentTriggerParamsTriggers = "environments_removed"
 	IncidentTriggerParamsTriggersEnvironmentsUpdated    IncidentTriggerParamsTriggers = "environments_updated"
+	IncidentTriggerParamsTriggersFunctionalitiesAdded   IncidentTriggerParamsTriggers = "functionalities_added"
+	IncidentTriggerParamsTriggersFunctionalitiesRemoved IncidentTriggerParamsTriggers = "functionalities_removed"
 	IncidentTriggerParamsTriggersFunctionalitiesUpdated IncidentTriggerParamsTriggers = "functionalities_updated"
 	IncidentTriggerParamsTriggersIncidentCreated        IncidentTriggerParamsTriggers = "incident_created"
+	IncidentTriggerParamsTriggersIncidentTypesAdded     IncidentTriggerParamsTriggers = "incident_types_added"
+	IncidentTriggerParamsTriggersIncidentTypesRemoved   IncidentTriggerParamsTriggers = "incident_types_removed"
 	IncidentTriggerParamsTriggersIncidentTypesUpdated   IncidentTriggerParamsTriggers = "incident_types_updated"
 	IncidentTriggerParamsTriggersIncidentUpdated        IncidentTriggerParamsTriggers = "incident_updated"
 	IncidentTriggerParamsTriggersRoleAssignmentsUpdated IncidentTriggerParamsTriggers = "role_assignments_updated"
+	IncidentTriggerParamsTriggersServicesAdded          IncidentTriggerParamsTriggers = "services_added"
+	IncidentTriggerParamsTriggersServicesRemoved        IncidentTriggerParamsTriggers = "services_removed"
 	IncidentTriggerParamsTriggersServicesUpdated        IncidentTriggerParamsTriggers = "services_updated"
 	IncidentTriggerParamsTriggersSeverityUpdated        IncidentTriggerParamsTriggers = "severity_updated"
 	IncidentTriggerParamsTriggersSlackCommand           IncidentTriggerParamsTriggers = "slack_command"
 	IncidentTriggerParamsTriggersStatusUpdated          IncidentTriggerParamsTriggers = "status_updated"
 	IncidentTriggerParamsTriggersSummaryUpdated         IncidentTriggerParamsTriggers = "summary_updated"
+	IncidentTriggerParamsTriggersTeamsAdded             IncidentTriggerParamsTriggers = "teams_added"
+	IncidentTriggerParamsTriggersTeamsRemoved           IncidentTriggerParamsTriggers = "teams_removed"
 	IncidentTriggerParamsTriggersTeamsUpdated           IncidentTriggerParamsTriggers = "teams_updated"
 	IncidentTriggerParamsTriggersTimelineUpdated        IncidentTriggerParamsTriggers = "timeline_updated"
 	IncidentTriggerParamsTriggersTitleUpdated           IncidentTriggerParamsTriggers = "title_updated"
@@ -3418,6 +3433,10 @@ type CreateConfluencePageTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"space"`
 	TaskType *CreateConfluencePageTaskParamsTaskType `json:"task_type,omitempty"`
+	Template *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"template,omitempty"`
 
 	// The page title
 	Title string `json:"title"`
@@ -3733,6 +3752,19 @@ type CreateJiraSubtaskTaskParams struct {
 
 // CreateJiraSubtaskTaskParamsTaskType defines model for CreateJiraSubtaskTaskParams.TaskType.
 type CreateJiraSubtaskTaskParamsTaskType string
+
+// CreateLinearIssueCommentTaskParams defines model for create_linear_issue_comment_task_params.
+type CreateLinearIssueCommentTaskParams struct {
+	// The issue description
+	Body string `json:"body"`
+
+	// The issue id
+	IssueId  string                                      `json:"issue_id"`
+	TaskType *CreateLinearIssueCommentTaskParamsTaskType `json:"task_type,omitempty"`
+}
+
+// CreateLinearIssueCommentTaskParamsTaskType defines model for CreateLinearIssueCommentTaskParams.TaskType.
+type CreateLinearIssueCommentTaskParamsTaskType string
 
 // CreateLinearIssueTaskParams defines model for create_linear_issue_task_params.
 type CreateLinearIssueTaskParams struct {
