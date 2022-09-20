@@ -63,6 +63,18 @@ func resourceWorkflowTaskCreateGoogleMeeting() *schema.Resource {
 							Type: schema.TypeString,
 							Required: true,
 						},
+						"conference_solution_key": &schema.Schema{
+							Description: "Sets the video conference type attached to the meeting.",
+							Type: schema.TypeString,
+							Optional: true,
+							Default: "eventHangout",
+							ValidateFunc: validation.StringInSlice([]string{
+								"eventHangout",
+"eventNamedHangout",
+"hangoutsMeet",
+"addOn",
+							}, false),
+						},
 						"post_to_incident_timeline": &schema.Schema{
 							Description: "",
 							Type: schema.TypeBool,

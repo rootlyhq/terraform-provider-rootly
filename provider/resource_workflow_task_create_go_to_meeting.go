@@ -97,17 +97,6 @@ func resourceWorkflowTaskCreateGoToMeeting() *schema.Resource {
 								},
 							},
 						},
-						"conference_solution_key": &schema.Schema{
-							Description: "Sets the video conference type attached to the meeting.",
-							Type: schema.TypeString,
-							Required: true,
-							ValidateFunc: validation.StringInSlice([]string{
-								"eventHangout",
-"eventNamedHangout",
-"hangoutsMeet",
-"addOn",
-							}, false),
-						},
 					},
 				},
 			},

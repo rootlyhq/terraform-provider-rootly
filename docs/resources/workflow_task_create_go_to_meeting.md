@@ -30,7 +30,6 @@ Manages workflow create_go_to_meeting task.
 
 Required:
 
-- `conference_solution_key` (String) Sets the video conference type attached to the meeting.
 - `subject` (String) The meeting subject
 
 Optional:

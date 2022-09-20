@@ -424,14 +424,6 @@ const (
 	Voip  CreateGoToMeetingTaskParamsConferenceCallInfo = "voip"
 )
 
-// Defines values for CreateGoToMeetingTaskParamsConferenceSolutionKey.
-const (
-	CreateGoToMeetingTaskParamsConferenceSolutionKeyAddOn             CreateGoToMeetingTaskParamsConferenceSolutionKey = "addOn"
-	CreateGoToMeetingTaskParamsConferenceSolutionKeyEventHangout      CreateGoToMeetingTaskParamsConferenceSolutionKey = "eventHangout"
-	CreateGoToMeetingTaskParamsConferenceSolutionKeyEventNamedHangout CreateGoToMeetingTaskParamsConferenceSolutionKey = "eventNamedHangout"
-	CreateGoToMeetingTaskParamsConferenceSolutionKeyHangoutsMeet      CreateGoToMeetingTaskParamsConferenceSolutionKey = "hangoutsMeet"
-)
-
 // Defines values for CreateGoToMeetingTaskParamsTaskType.
 const (
 	CreateGoToMeetingTask CreateGoToMeetingTaskParamsTaskType = "create_go_to_meeting_task"
@@ -608,6 +600,14 @@ const (
 // Defines values for CreateGoogleDocsPageTaskParamsTaskType.
 const (
 	CreateGoogleDocsPage CreateGoogleDocsPageTaskParamsTaskType = "create_google_docs_page"
+)
+
+// Defines values for CreateGoogleMeetingTaskParamsConferenceSolutionKey.
+const (
+	CreateGoogleMeetingTaskParamsConferenceSolutionKeyAddOn             CreateGoogleMeetingTaskParamsConferenceSolutionKey = "addOn"
+	CreateGoogleMeetingTaskParamsConferenceSolutionKeyEventHangout      CreateGoogleMeetingTaskParamsConferenceSolutionKey = "eventHangout"
+	CreateGoogleMeetingTaskParamsConferenceSolutionKeyEventNamedHangout CreateGoogleMeetingTaskParamsConferenceSolutionKey = "eventNamedHangout"
+	CreateGoogleMeetingTaskParamsConferenceSolutionKeyHangoutsMeet      CreateGoogleMeetingTaskParamsConferenceSolutionKey = "hangoutsMeet"
 )
 
 // Defines values for CreateGoogleMeetingTaskParamsTaskType.
@@ -3510,12 +3510,9 @@ type CreateGithubIssueTaskParamsTaskType string
 
 // CreateGoToMeetingTaskParams defines model for create_go_to_meeting_task_params.
 type CreateGoToMeetingTaskParams struct {
-	ConferenceCallInfo *CreateGoToMeetingTaskParamsConferenceCallInfo `json:"conference_call_info"`
-
-	// Sets the video conference type attached to the meeting.
-	ConferenceSolutionKey  CreateGoToMeetingTaskParamsConferenceSolutionKey `json:"conference_solution_key"`
-	PasswordRequired       *bool                                            `json:"password_required"`
-	PostToIncidentTimeline *bool                                            `json:"post_to_incident_timeline,omitempty"`
+	ConferenceCallInfo     *CreateGoToMeetingTaskParamsConferenceCallInfo `json:"conference_call_info"`
+	PasswordRequired       *bool                                          `json:"password_required"`
+	PostToIncidentTimeline *bool                                          `json:"post_to_incident_timeline,omitempty"`
 	PostToSlackChannels    *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -3528,9 +3525,6 @@ type CreateGoToMeetingTaskParams struct {
 
 // CreateGoToMeetingTaskParamsConferenceCallInfo defines model for CreateGoToMeetingTaskParams.ConferenceCallInfo.
 type CreateGoToMeetingTaskParamsConferenceCallInfo string
-
-// Sets the video conference type attached to the meeting.
-type CreateGoToMeetingTaskParamsConferenceSolutionKey string
 
 // CreateGoToMeetingTaskParamsTaskType defines model for CreateGoToMeetingTaskParams.TaskType.
 type CreateGoToMeetingTaskParamsTaskType string
@@ -3607,6 +3601,9 @@ type CreateGoogleDocsPageTaskParamsTaskType string
 
 // CreateGoogleMeetingTaskParams defines model for create_google_meeting_task_params.
 type CreateGoogleMeetingTaskParams struct {
+	// Sets the video conference type attached to the meeting.
+	ConferenceSolutionKey *CreateGoogleMeetingTaskParamsConferenceSolutionKey `json:"conference_solution_key,omitempty"`
+
 	// The meeting description
 	Description            string `json:"description"`
 	PostToIncidentTimeline *bool  `json:"post_to_incident_timeline,omitempty"`
@@ -3619,6 +3616,9 @@ type CreateGoogleMeetingTaskParams struct {
 	Summary  string                                 `json:"summary"`
 	TaskType *CreateGoogleMeetingTaskParamsTaskType `json:"task_type,omitempty"`
 }
+
+// Sets the video conference type attached to the meeting.
+type CreateGoogleMeetingTaskParamsConferenceSolutionKey string
 
 // CreateGoogleMeetingTaskParamsTaskType defines model for CreateGoogleMeetingTaskParams.TaskType.
 type CreateGoogleMeetingTaskParamsTaskType string
