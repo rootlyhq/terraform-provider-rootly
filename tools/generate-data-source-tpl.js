@@ -69,16 +69,24 @@ function listFn(nameCamelPlural, resourceSchema, pathIdField) {
 	}
 }
 
+function filterCamelize(name) {
+	return inflect.camelize(name.replace(/[\[\]]+/g, '_').replace(/_$/, ''))
+}
+
+function filterUnderscore(name) {
+	return inflect.underscore(filterCamelize(name)).replace('filter_', '')
+}
+
 function setFilterFields(name, resourceSchema, filterParameters) {
 	return (filterParameters || []).filter((paramSchema) => {
 		return paramSchema.name.match(/^filter/)
 	}).map((paramSchema) => {
-		const filterField = inflect.underscore(paramSchema.name.replace("filter[", "").replace("]", ""))
+		const filterField = inflect.underscore(filterUnderscore(paramSchema.name))
 		const fieldSchema = resourceSchema.properties[filterField]
 		if (fieldSchema) {
 			return `
 				${filterField} := d.Get("${filterField}").(${jsonapiToGoType(fieldSchema.type)})
-				params.Filter${inflect.camelize(filterField)} = &${filterField}
+				params.${filterCamelize(paramSchema.name)} = &${filterField}
 			`
 		}
 	}).filter((x) => x).join('\n')
