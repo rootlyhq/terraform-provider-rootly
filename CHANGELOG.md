@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.31] -- 2022-09-22
+
+- Add date range filters to data sources.
+- Add `rootly_workflow_task_update_opsgenie_alert` resource.
+- Add `rootly_workflow_task_create_slack_channel` resource.
+
 ## [0.1.30] -- 2022-09-20
 
 - Add more genius workflow triggers.
