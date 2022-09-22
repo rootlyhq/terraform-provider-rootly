@@ -17,7 +17,7 @@ description: |-
 
 ### Optional
 
-- `created_at` (String)
+- `created_at` (Map of String) Filter by date range using 'lt' and 'gt'.
 - `enabled` (Boolean)
 - `kind` (String)
 - `label` (String)

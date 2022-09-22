@@ -18,7 +18,7 @@ description: |-
 ### Optional
 
 - `color` (String)
-- `created_at` (String)
+- `created_at` (Map of String) Filter by date range using 'lt' and 'gt'.
 - `name` (String)
 - `slug` (String)
 

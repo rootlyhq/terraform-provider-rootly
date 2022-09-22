@@ -81,12 +81,21 @@ function setFilterFields(name, resourceSchema, filterParameters) {
 	return (filterParameters || []).filter((paramSchema) => {
 		return paramSchema.name.match(/^filter/)
 	}).map((paramSchema) => {
-		const filterField = inflect.underscore(filterUnderscore(paramSchema.name))
+		const filterField = filterUnderscore(paramSchema.name)
 		const fieldSchema = resourceSchema.properties[filterField]
 		if (fieldSchema) {
 			return `
 				${filterField} := d.Get("${filterField}").(${jsonapiToGoType(fieldSchema.type)})
 				params.${filterCamelize(paramSchema.name)} = &${filterField}
+			`
+		} else if (paramSchema.name.match(/(lt|gt)\]/)) {
+			const rangeKey = filterField.split('_').pop()
+			return `
+				${filterField} := d.Get("${filterField.replace(/_(lt|gt)$/, '')}").(map[string]interface{})
+				if value, exists := ${filterField}["${rangeKey}"]; exists {
+					v := value.(string)
+					params.${filterCamelize(paramSchema.name)} = &v
+				}
 			`
 		}
 	}).filter((x) => x).join('\n')
@@ -114,7 +123,7 @@ function schemaFields(resourceSchema, filterParameters) {
 	}).join('\n')
 }
 
-function schemaField(name, resourceSchema) {
+function schemaField(name, resourceSchema, filterParameters) {
 	const schema = resourceSchema.properties[name]
 	switch (schema.type) {
 		case 'integer':
@@ -145,6 +154,15 @@ function schemaField(name, resourceSchema) {
 			`
 		case 'string':
 		default:
+			if (name.match(/_at$/)) {
+				return `
+				"${name}": &schema.Schema{
+					Type: schema.TypeMap,
+					Description: "Filter by date range using 'lt' and 'gt'.",
+					Optional: true,
+				},
+				`
+			}
 			return `
 			"${name}": &schema.Schema{
 				Type: schema.TypeString,

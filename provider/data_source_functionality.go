@@ -32,12 +32,12 @@ func dataSourceFunctionality() *schema.Resource{
 			},
 			
 
-			"created_at": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Optional: true,
-			},
-			
+				"created_at": &schema.Schema{
+					Type: schema.TypeMap,
+					Description: "Filter by date range using 'lt' and 'gt'.",
+					Optional: true,
+				},
+				
 		},
 	}
 }
@@ -56,6 +56,20 @@ func dataSourceFunctionalityRead(ctx context.Context, d *schema.ResourceData, me
 
 				slug := d.Get("slug").(string)
 				params.FilterSlug = &slug
+			
+
+				created_at_gt := d.Get("created_at").(map[string]interface{})
+				if value, exists := created_at_gt["gt"]; exists {
+					v := value.(string)
+					params.FilterCreatedAtGt = &v
+				}
+			
+
+				created_at_lt := d.Get("created_at").(map[string]interface{})
+				if value, exists := created_at_lt["lt"]; exists {
+					v := value.(string)
+					params.FilterCreatedAtLt = &v
+				}
 			
 
 	items, err := c.ListFunctionalities(params)
