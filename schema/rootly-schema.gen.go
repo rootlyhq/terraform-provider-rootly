@@ -696,6 +696,11 @@ const (
 	CreateShortcutTask CreateShortcutTaskTaskParamsTaskType = "create_shortcut_task"
 )
 
+// Defines values for CreateSlackChannelTaskParamsTaskType.
+const (
+	CreateSlackChannel CreateSlackChannelTaskParamsTaskType = "create_slack_channel"
+)
+
 // Defines values for CreateTrelloCardTaskParamsTaskType.
 const (
 	CreateTrelloCard CreateTrelloCardTaskParamsTaskType = "create_trello_card"
@@ -2216,6 +2221,20 @@ const (
 // Defines values for UpdateLinearIssueTaskParamsTaskType.
 const (
 	UpdateLinearIssue UpdateLinearIssueTaskParamsTaskType = "update_linear_issue"
+)
+
+// Defines values for UpdateOpsgenieAlertTaskParamsPriority.
+const (
+	Auto UpdateOpsgenieAlertTaskParamsPriority = "auto"
+	P1   UpdateOpsgenieAlertTaskParamsPriority = "P1"
+	P2   UpdateOpsgenieAlertTaskParamsPriority = "P2"
+	P3   UpdateOpsgenieAlertTaskParamsPriority = "P3"
+	P4   UpdateOpsgenieAlertTaskParamsPriority = "P4"
+)
+
+// Defines values for UpdateOpsgenieAlertTaskParamsTaskType.
+const (
+	UpdateOpsgenieAlert UpdateOpsgenieAlertTaskParamsTaskType = "update_opsgenie_alert"
 )
 
 // Defines values for UpdatePagerdutyIncidentTaskParamsStatus.
@@ -3987,6 +4006,22 @@ type CreateShortcutTaskTaskParams struct {
 // CreateShortcutTaskTaskParamsTaskType defines model for CreateShortcutTaskTaskParams.TaskType.
 type CreateShortcutTaskTaskParamsTaskType string
 
+// CreateSlackChannelTaskParams defines model for create_slack_channel_task_params.
+type CreateSlackChannelTaskParams struct {
+	Private  *bool                                 `json:"private,omitempty"`
+	TaskType *CreateSlackChannelTaskParamsTaskType `json:"task_type,omitempty"`
+
+	// Slack channel title
+	Title     string `json:"title"`
+	Workspace struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"workspace"`
+}
+
+// CreateSlackChannelTaskParamsTaskType defines model for CreateSlackChannelTaskParams.TaskType.
+type CreateSlackChannelTaskParamsTaskType string
+
 // CreateTrelloCardTaskParams defines model for create_trello_card_task_params.
 type CreateTrelloCardTaskParams struct {
 	// The archivation id and display name.
@@ -4077,7 +4112,8 @@ type CreateZendeskTicketTaskParamsTaskType string
 
 // CreateZoomMeetingTaskParams defines model for create_zoom_meeting_task_params.
 type CreateZoomMeetingTaskParams struct {
-	AutoRecording *CreateZoomMeetingTaskParamsAutoRecording `json:"auto_recording,omitempty"`
+	AlternativeHosts *[]string                                 `json:"alternative_hosts,omitempty"`
+	AutoRecording    *CreateZoomMeetingTaskParamsAutoRecording `json:"auto_recording,omitempty"`
 
 	// The email to use if creating as email.
 	CreateAsEmail *string `json:"create_as_email,omitempty"`
@@ -9447,6 +9483,28 @@ type UpdateLinearIssueTaskParams struct {
 // UpdateLinearIssueTaskParamsTaskType defines model for UpdateLinearIssueTaskParams.TaskType.
 type UpdateLinearIssueTaskParamsTaskType string
 
+// UpdateOpsgenieAlertTaskParams defines model for update_opsgenie_alert_task_params.
+type UpdateOpsgenieAlertTaskParams struct {
+	Completion struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"completion"`
+
+	// Description field of the alert that is generally used to provide a detailed information about the alert
+	Description *string `json:"description,omitempty"`
+
+	// Message of the alert
+	Message  *string                                `json:"message,omitempty"`
+	Priority UpdateOpsgenieAlertTaskParamsPriority  `json:"priority"`
+	TaskType *UpdateOpsgenieAlertTaskParamsTaskType `json:"task_type,omitempty"`
+}
+
+// UpdateOpsgenieAlertTaskParamsPriority defines model for UpdateOpsgenieAlertTaskParams.Priority.
+type UpdateOpsgenieAlertTaskParamsPriority string
+
+// UpdateOpsgenieAlertTaskParamsTaskType defines model for UpdateOpsgenieAlertTaskParams.TaskType.
+type UpdateOpsgenieAlertTaskParamsTaskType string
+
 // UpdatePagerdutyIncidentTaskParams defines model for update_pagerduty_incident_task_params.
 type UpdatePagerdutyIncidentTaskParams struct {
 	// Escalation level of policy attached to incident
@@ -10603,22 +10661,26 @@ type ListAlertsParams struct {
 
 // ListCausesParams defines parameters for ListCauses.
 type ListCausesParams struct {
-	Include    *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
-	FilterSlug *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
-	FilterName *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	Include           *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSlug        *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterName        *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterCreatedAtGt *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtLt *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
 }
 
 // ListCustomFieldsParams defines parameters for ListCustomFields.
 type ListCustomFieldsParams struct {
-	Include       *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber    *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize      *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
-	FilterSlug    *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
-	FilterLabel   *string `form:"filter[label],omitempty" json:"filter[label],omitempty"`
-	FilterKind    *string `form:"filter[kind],omitempty" json:"filter[kind],omitempty"`
-	FilterEnabled *bool   `form:"filter[enabled],omitempty" json:"filter[enabled],omitempty"`
+	Include           *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSlug        *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterLabel       *string `form:"filter[label],omitempty" json:"filter[label],omitempty"`
+	FilterKind        *string `form:"filter[kind],omitempty" json:"filter[kind],omitempty"`
+	FilterEnabled     *bool   `form:"filter[enabled],omitempty" json:"filter[enabled],omitempty"`
+	FilterCreatedAtGt *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtLt *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
 }
 
 // ListCustomFieldOptionsParams defines parameters for ListCustomFieldOptions.
@@ -10658,24 +10720,28 @@ type ListDashboardPanelsParams struct {
 
 // ListEnvironmentsParams defines parameters for ListEnvironments.
 type ListEnvironmentsParams struct {
-	Include     *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber  *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize    *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
-	FilterSlug  *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
-	FilterName  *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
-	FilterColor *string `form:"filter[color],omitempty" json:"filter[color],omitempty"`
-	Sort        *string `form:"sort,omitempty" json:"sort,omitempty"`
+	Include           *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSlug        *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterName        *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterColor       *string `form:"filter[color],omitempty" json:"filter[color],omitempty"`
+	FilterCreatedAtGt *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtLt *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	Sort              *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // ListFunctionalitiesParams defines parameters for ListFunctionalities.
 type ListFunctionalitiesParams struct {
-	Include      *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber   *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize     *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
-	FilterSearch *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
-	FilterName   *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
-	FilterSlug   *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
-	Sort         *string `form:"sort,omitempty" json:"sort,omitempty"`
+	Include           *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSearch      *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
+	FilterName        *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterSlug        *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterCreatedAtGt *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtLt *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	Sort              *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // GetFunctionalityIncidentsChartParams defines parameters for GetFunctionalityIncidentsChart.
@@ -10690,13 +10756,15 @@ type GetFunctionalityUptimeChartParams struct {
 
 // ListIncidentRolesParams defines parameters for ListIncidentRoles.
 type ListIncidentRolesParams struct {
-	Include       *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber    *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize      *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
-	FilterSlug    *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
-	FilterName    *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
-	FilterEnabled *bool   `form:"filter[enabled],omitempty" json:"filter[enabled],omitempty"`
-	Sort          *string `form:"sort,omitempty" json:"sort,omitempty"`
+	Include           *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSlug        *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterName        *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterEnabled     *bool   `form:"filter[enabled],omitempty" json:"filter[enabled],omitempty"`
+	FilterCreatedAtGt *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtLt *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	Sort              *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // ListIncidentRoleTasksParams defines parameters for ListIncidentRoleTasks.
@@ -10708,13 +10776,15 @@ type ListIncidentRoleTasksParams struct {
 
 // ListIncidentTypesParams defines parameters for ListIncidentTypes.
 type ListIncidentTypesParams struct {
-	Include     *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber  *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize    *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
-	FilterSlug  *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
-	FilterName  *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
-	FilterColor *string `form:"filter[color],omitempty" json:"filter[color],omitempty"`
-	Sort        *string `form:"sort,omitempty" json:"sort,omitempty"`
+	Include           *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSlug        *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterName        *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterColor       *string `form:"filter[color],omitempty" json:"filter[color],omitempty"`
+	FilterCreatedAtGt *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtLt *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	Sort              *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // ListIncidentsParams defines parameters for ListIncidents.
@@ -10732,6 +10802,18 @@ type ListIncidentsParams struct {
 	FilterServices                     *string `form:"filter[services],omitempty" json:"filter[services],omitempty"`
 	FilterTeams                        *string `form:"filter[teams],omitempty" json:"filter[teams],omitempty"`
 	FilterCustomFieldSelectedOptionIds *string `form:"filter[custom_field_selected_option_ids],omitempty" json:"filter[custom_field_selected_option_ids],omitempty"`
+	FilterCreatedAtGt                  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtLt                  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterStartedAtGt                  *string `form:"filter[started_at][gt],omitempty" json:"filter[started_at][gt],omitempty"`
+	FilterStartedAtLt                  *string `form:"filter[started_at][lt],omitempty" json:"filter[started_at][lt],omitempty"`
+	FilterDetectedAtGt                 *string `form:"filter[detected_at][gt],omitempty" json:"filter[detected_at][gt],omitempty"`
+	FilterDetectedAtLt                 *string `form:"filter[detected_at][lt],omitempty" json:"filter[detected_at][lt],omitempty"`
+	FilterAcknowledgedAtGt             *string `form:"filter[acknowledged_at][gt],omitempty" json:"filter[acknowledged_at][gt],omitempty"`
+	FilterAcknowledgedAtLt             *string `form:"filter[acknowledged_at][lt],omitempty" json:"filter[acknowledged_at][lt],omitempty"`
+	FilterMitigatedAtGt                *string `form:"filter[mitigated_at][gt],omitempty" json:"filter[mitigated_at][gt],omitempty"`
+	FilterMitigatedAtLt                *string `form:"filter[mitigated_at][lt],omitempty" json:"filter[mitigated_at][lt],omitempty"`
+	FilterResolvedAtGt                 *string `form:"filter[resolved_at][gt],omitempty" json:"filter[resolved_at][gt],omitempty"`
+	FilterResolvedAtLt                 *string `form:"filter[resolved_at][lt],omitempty" json:"filter[resolved_at][lt],omitempty"`
 	Sort                               *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
@@ -10812,6 +10894,14 @@ type ListIncidentPostMortemsParams struct {
 	FilterFunctionalities *string `form:"filter[functionalities],omitempty" json:"filter[functionalities],omitempty"`
 	FilterServices        *string `form:"filter[services],omitempty" json:"filter[services],omitempty"`
 	FilterTeams           *string `form:"filter[teams],omitempty" json:"filter[teams],omitempty"`
+	FilterCreatedAtGt     *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtLt     *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterStartedAtGt     *string `form:"filter[started_at][gt],omitempty" json:"filter[started_at][gt],omitempty"`
+	FilterStartedAtLt     *string `form:"filter[started_at][lt],omitempty" json:"filter[started_at][lt],omitempty"`
+	FilterMitigatedAtGt   *string `form:"filter[mitigated_at][gt],omitempty" json:"filter[mitigated_at][gt],omitempty"`
+	FilterMitigatedAtLt   *string `form:"filter[mitigated_at][lt],omitempty" json:"filter[mitigated_at][lt],omitempty"`
+	FilterResolvedAtGt    *string `form:"filter[resolved_at][gt],omitempty" json:"filter[resolved_at][gt],omitempty"`
+	FilterResolvedAtLt    *string `form:"filter[resolved_at][lt],omitempty" json:"filter[resolved_at][lt],omitempty"`
 	Sort                  *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
@@ -10830,6 +10920,8 @@ type ListServicesParams struct {
 	FilterName        *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
 	FilterSlug        *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
 	FilterBackstageId *string `form:"filter[backstage_id],omitempty" json:"filter[backstage_id],omitempty"`
+	FilterCreatedAtGt *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtLt *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
 	Sort              *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
@@ -10845,14 +10937,16 @@ type GetServiceUptimeChartParams struct {
 
 // ListSeveritiesParams defines parameters for ListSeverities.
 type ListSeveritiesParams struct {
-	Include        *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber     *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize       *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
-	FilterSlug     *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
-	FilterName     *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
-	FilterSeverity *string `form:"filter[severity],omitempty" json:"filter[severity],omitempty"`
-	FilterColor    *string `form:"filter[color],omitempty" json:"filter[color],omitempty"`
-	Sort           *string `form:"sort,omitempty" json:"sort,omitempty"`
+	Include           *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSlug        *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterName        *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterSeverity    *string `form:"filter[severity],omitempty" json:"filter[severity],omitempty"`
+	FilterColor       *string `form:"filter[color],omitempty" json:"filter[color],omitempty"`
+	FilterCreatedAtGt *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtLt *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	Sort              *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // ListStatusPagesParams defines parameters for ListStatusPages.
@@ -10871,13 +10965,15 @@ type ListStatusPageTemplatesParams struct {
 
 // ListTeamsParams defines parameters for ListTeams.
 type ListTeamsParams struct {
-	Include     *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber  *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize    *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
-	FilterSlug  *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
-	FilterName  *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
-	FilterColor *string `form:"filter[color],omitempty" json:"filter[color],omitempty"`
-	Sort        *string `form:"sort,omitempty" json:"sort,omitempty"`
+	Include           *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSlug        *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterName        *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterColor       *string `form:"filter[color],omitempty" json:"filter[color],omitempty"`
+	FilterCreatedAtGt *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtLt *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	Sort              *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // ListWorkflowGroupsParams defines parameters for ListWorkflowGroups.
@@ -13814,6 +13910,38 @@ func NewListCausesRequest(server string, params *ListCausesParams) (*http.Reques
 
 	}
 
+	if params.FilterCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
 	queryURL.RawQuery = queryValues.Encode()
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -14181,6 +14309,38 @@ func NewListCustomFieldsRequest(server string, params *ListCustomFieldsParams) (
 	if params.FilterEnabled != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[enabled]", runtime.ParamLocationQuery, *params.FilterEnabled); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 			return nil, err
@@ -15200,6 +15360,38 @@ func NewListEnvironmentsRequest(server string, params *ListEnvironmentsParams) (
 
 	}
 
+	if params.FilterCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
 	if params.Sort != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
@@ -15671,6 +15863,38 @@ func NewListFunctionalitiesRequest(server string, params *ListFunctionalitiesPar
 	if params.FilterSlug != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[slug]", runtime.ParamLocationQuery, *params.FilterSlug); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 			return nil, err
@@ -16272,6 +16496,38 @@ func NewListIncidentRolesRequest(server string, params *ListIncidentRolesParams)
 
 	}
 
+	if params.FilterCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
 	if params.Sort != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
@@ -16670,6 +16926,38 @@ func NewListIncidentTypesRequest(server string, params *ListIncidentTypesParams)
 
 	}
 
+	if params.FilterCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
 	if params.Sort != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
@@ -17045,6 +17333,198 @@ func NewListIncidentsRequest(server string, params *ListIncidentsParams) (*http.
 	if params.FilterCustomFieldSelectedOptionIds != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[custom_field_selected_option_ids]", runtime.ParamLocationQuery, *params.FilterCustomFieldSelectedOptionIds); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterStartedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[started_at][gt]", runtime.ParamLocationQuery, *params.FilterStartedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterStartedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[started_at][lt]", runtime.ParamLocationQuery, *params.FilterStartedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterDetectedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[detected_at][gt]", runtime.ParamLocationQuery, *params.FilterDetectedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterDetectedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[detected_at][lt]", runtime.ParamLocationQuery, *params.FilterDetectedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterAcknowledgedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[acknowledged_at][gt]", runtime.ParamLocationQuery, *params.FilterAcknowledgedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterAcknowledgedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[acknowledged_at][lt]", runtime.ParamLocationQuery, *params.FilterAcknowledgedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterMitigatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[mitigated_at][gt]", runtime.ParamLocationQuery, *params.FilterMitigatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterMitigatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[mitigated_at][lt]", runtime.ParamLocationQuery, *params.FilterMitigatedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterResolvedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[resolved_at][gt]", runtime.ParamLocationQuery, *params.FilterResolvedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterResolvedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[resolved_at][lt]", runtime.ParamLocationQuery, *params.FilterResolvedAtLt); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 			return nil, err
@@ -18920,6 +19400,134 @@ func NewListIncidentPostMortemsRequest(server string, params *ListIncidentPostMo
 
 	}
 
+	if params.FilterCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterStartedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[started_at][gt]", runtime.ParamLocationQuery, *params.FilterStartedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterStartedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[started_at][lt]", runtime.ParamLocationQuery, *params.FilterStartedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterMitigatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[mitigated_at][gt]", runtime.ParamLocationQuery, *params.FilterMitigatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterMitigatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[mitigated_at][lt]", runtime.ParamLocationQuery, *params.FilterMitigatedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterResolvedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[resolved_at][gt]", runtime.ParamLocationQuery, *params.FilterResolvedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterResolvedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[resolved_at][lt]", runtime.ParamLocationQuery, *params.FilterResolvedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
 	if params.Sort != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
@@ -19298,6 +19906,38 @@ func NewListServicesRequest(server string, params *ListServicesParams) (*http.Re
 	if params.FilterBackstageId != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[backstage_id]", runtime.ParamLocationQuery, *params.FilterBackstageId); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 			return nil, err
@@ -19694,6 +20334,38 @@ func NewListSeveritiesRequest(server string, params *ListSeveritiesParams) (*htt
 	if params.FilterColor != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[color]", runtime.ParamLocationQuery, *params.FilterColor); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 			return nil, err
@@ -20408,6 +21080,38 @@ func NewListTeamsRequest(server string, params *ListTeamsParams) (*http.Request,
 	if params.FilterColor != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[color]", runtime.ParamLocationQuery, *params.FilterColor); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 			return nil, err

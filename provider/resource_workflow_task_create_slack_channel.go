@@ -12,14 +12,14 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/client"
 )
 
-func resourceWorkflowTaskCreateZoomMeeting() *schema.Resource {
+func resourceWorkflowTaskCreateSlackChannel() *schema.Resource {
 	return &schema.Resource{
-		Description: "Manages workflow create_zoom_meeting task.",
+		Description: "Manages workflow create_slack_channel task.",
 
-		CreateContext: resourceWorkflowTaskCreateZoomMeetingCreate,
-		ReadContext:   resourceWorkflowTaskCreateZoomMeetingRead,
-		UpdateContext: resourceWorkflowTaskCreateZoomMeetingUpdate,
-		DeleteContext: resourceWorkflowTaskCreateZoomMeetingDelete,
+		CreateContext: resourceWorkflowTaskCreateSlackChannelCreate,
+		ReadContext:   resourceWorkflowTaskCreateSlackChannelRead,
+		UpdateContext: resourceWorkflowTaskCreateSlackChannelUpdate,
+		DeleteContext: resourceWorkflowTaskCreateSlackChannelDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -48,66 +48,25 @@ func resourceWorkflowTaskCreateZoomMeeting() *schema.Resource {
 						"task_type": &schema.Schema{
 							Type: schema.TypeString,
 							Optional: true,
-							Default: "create_zoom_meeting",
+							Default: "create_slack_channel",
 							ValidateFunc: validation.StringInSlice([]string{
-								"create_zoom_meeting",
+								"create_slack_channel",
 							}, false),
 						},
-						"topic": &schema.Schema{
-							Description: "The meeting topic",
+						"workspace": &schema.Schema{
+							Description: "",
+							Type: schema.TypeMap,
+							Required: true,
+						},
+						"title": &schema.Schema{
+							Description: "Slack channel title",
 							Type: schema.TypeString,
 							Required: true,
 						},
-						"password": &schema.Schema{
-							Description: "The meeting password",
-							Type: schema.TypeString,
-							Optional: true,
-						},
-						"create_as_email": &schema.Schema{
-							Description: "The email to use if creating as email.",
-							Type: schema.TypeString,
-							Optional: true,
-						},
-						"alternative_hosts": &schema.Schema{
-							Description: "",
-							Type: schema.TypeList,
-							Optional: true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-						},
-						"auto_recording": &schema.Schema{
-							Description: "",
-							Type: schema.TypeString,
-							Optional: true,
-							Default: "none",
-							ValidateFunc: validation.StringInSlice([]string{
-								"none",
-"local",
-"cloud",
-							}, false),
-						},
-						"post_to_incident_timeline": &schema.Schema{
+						"private": &schema.Schema{
 							Description: "",
 							Type: schema.TypeBool,
 							Optional: true,
-						},
-						"post_to_slack_channels": &schema.Schema{
-							Description: "",
-							Type: schema.TypeList,
-							Optional: true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type: schema.TypeString,
-										Required: true,
-									},
-									"name": &schema.Schema{
-										Type: schema.TypeString,
-										Required: true,
-									},
-								},
-							},
 						},
 					},
 				},
@@ -116,7 +75,7 @@ func resourceWorkflowTaskCreateZoomMeeting() *schema.Resource {
 	}
 }
 
-func resourceWorkflowTaskCreateZoomMeetingCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateSlackChannelCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
@@ -137,10 +96,10 @@ func resourceWorkflowTaskCreateZoomMeetingCreate(ctx context.Context, d *schema.
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created an workflow task resource: %v (%s)", workflowId, d.Id()))
 
-	return resourceWorkflowTaskCreateZoomMeetingRead(ctx, d, meta)
+	return resourceWorkflowTaskCreateSlackChannelRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskCreateZoomMeetingRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateSlackChannelRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
@@ -149,7 +108,7 @@ func resourceWorkflowTaskCreateZoomMeetingRead(ctx context.Context, d *schema.Re
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateZoomMeeting (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateSlackChannel (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
@@ -165,7 +124,7 @@ func resourceWorkflowTaskCreateZoomMeetingRead(ctx context.Context, d *schema.Re
 	return nil
 }
 
-func resourceWorkflowTaskCreateZoomMeetingUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateSlackChannelUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
@@ -183,10 +142,10 @@ func resourceWorkflowTaskCreateZoomMeetingUpdate(ctx context.Context, d *schema.
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
 
-	return resourceWorkflowTaskCreateZoomMeetingRead(ctx, d, meta)
+	return resourceWorkflowTaskCreateSlackChannelRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskCreateZoomMeetingDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateSlackChannelDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
@@ -195,7 +154,7 @@ func resourceWorkflowTaskCreateZoomMeetingDelete(ctx context.Context, d *schema.
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateZoomMeeting (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateSlackChannel (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}

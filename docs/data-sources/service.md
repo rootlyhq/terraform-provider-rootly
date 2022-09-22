@@ -18,6 +18,7 @@ description: |-
 ### Optional
 
 - `backstage_id` (String)
+- `created_at` (String)
 - `name` (String)
 - `slug` (String)
 

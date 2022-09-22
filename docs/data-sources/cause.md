@@ -17,6 +17,7 @@ description: |-
 
 ### Optional
 
+- `created_at` (String)
 - `name` (String)
 - `slug` (String)
 

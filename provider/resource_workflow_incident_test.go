@@ -17,16 +17,12 @@ func TestAccResourceWorkflowIncident(t *testing.T) {
 				Config: testAccResourceWorkflowIncident,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_workflow_incident.foo3", "name", "test-incident-workflow3"),
-					resource.TestCheckResourceAttr("rootly_workflow_incident.foo1", "position", "1"),
-					resource.TestCheckResourceAttr("rootly_workflow_incident.foo2", "position", "2"),
-					resource.TestCheckResourceAttr("rootly_workflow_incident.foo3", "position", "3"),
 				),
 			},
 			{
 				Config: testAccResourceWorkflowIncidentUpdate,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_workflow_incident.foo3", "name", "test-incident-workflow3"),
-					resource.TestCheckResourceAttr("rootly_workflow_incident.foo3", "position", "1"),
 				),
 			},
 		},
@@ -36,14 +32,12 @@ func TestAccResourceWorkflowIncident(t *testing.T) {
 const testAccResourceWorkflowIncident = `
 resource "rootly_workflow_incident" "foo1" {
   name = "test-incident-workflow1"
-	position = 1
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
 }
 resource "rootly_workflow_incident" "foo2" {
   name = "test-incident-workflow2"
-	position = 2
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -51,7 +45,6 @@ resource "rootly_workflow_incident" "foo2" {
 }
 resource "rootly_workflow_incident" "foo3" {
   name = "test-incident-workflow3"
-	position = 3
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -62,7 +55,6 @@ resource "rootly_workflow_incident" "foo3" {
 const testAccResourceWorkflowIncidentUpdate = `
 resource "rootly_workflow_incident" "foo3" {
   name = "test-incident-workflow3"
-	position = 1
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

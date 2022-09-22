@@ -17,6 +17,7 @@ description: |-
 
 ### Optional
 
+- `created_at` (String)
 - `enabled` (Boolean)
 - `kind` (String)
 - `label` (String)

@@ -18,6 +18,7 @@ description: |-
 ### Optional
 
 - `color` (String)
+- `created_at` (String)
 - `name` (String)
 - `severity` (String)
 - `slug` (String)
