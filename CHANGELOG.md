@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.32] -- 2022-10-04
+
+- Add `slack_channel_created` trigger type for workflows.
+- Add `priority` attribute for workflows.
+- Add `rootly_workflow_task_send_dashboard_report` resource.
+- Add `due_date` attribute for action items.
+
 ## [0.1.31] -- 2022-09-22
 
 - Add date range filters to data sources.

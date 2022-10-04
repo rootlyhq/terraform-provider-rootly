@@ -200,10 +200,11 @@ const (
 
 // Defines values for ActionItemTriggerParamsIncidentKinds.
 const (
-	ActionItemTriggerParamsIncidentKindsExample   ActionItemTriggerParamsIncidentKinds = "example"
-	ActionItemTriggerParamsIncidentKindsNormal    ActionItemTriggerParamsIncidentKinds = "normal"
-	ActionItemTriggerParamsIncidentKindsScheduled ActionItemTriggerParamsIncidentKinds = "scheduled"
-	ActionItemTriggerParamsIncidentKindsTest      ActionItemTriggerParamsIncidentKinds = "test"
+	ActionItemTriggerParamsIncidentKindsBackfilled ActionItemTriggerParamsIncidentKinds = "backfilled"
+	ActionItemTriggerParamsIncidentKindsExample    ActionItemTriggerParamsIncidentKinds = "example"
+	ActionItemTriggerParamsIncidentKindsNormal     ActionItemTriggerParamsIncidentKinds = "normal"
+	ActionItemTriggerParamsIncidentKindsScheduled  ActionItemTriggerParamsIncidentKinds = "scheduled"
+	ActionItemTriggerParamsIncidentKindsTest       ActionItemTriggerParamsIncidentKinds = "test"
 )
 
 // Defines values for ActionItemTriggerParamsIncidentStatuses.
@@ -230,6 +231,7 @@ const (
 	ActionItemTriggerParamsTriggersActionItemUpdated   ActionItemTriggerParamsTriggers = "action_item_updated"
 	ActionItemTriggerParamsTriggersAssignedUserUpdated ActionItemTriggerParamsTriggers = "assigned_user_updated"
 	ActionItemTriggerParamsTriggersDescriptionUpdated  ActionItemTriggerParamsTriggers = "description_updated"
+	ActionItemTriggerParamsTriggersDueDateUpdated      ActionItemTriggerParamsTriggers = "due_date_updated"
 	ActionItemTriggerParamsTriggersPriorityUpdated     ActionItemTriggerParamsTriggers = "priority_updated"
 	ActionItemTriggerParamsTriggersSlackCommand        ActionItemTriggerParamsTriggers = "slack_command"
 	ActionItemTriggerParamsTriggersStatusUpdated       ActionItemTriggerParamsTriggers = "status_updated"
@@ -1278,10 +1280,11 @@ const (
 
 // Defines values for IncidentTriggerParamsIncidentKinds.
 const (
-	IncidentTriggerParamsIncidentKindsExample   IncidentTriggerParamsIncidentKinds = "example"
-	IncidentTriggerParamsIncidentKindsNormal    IncidentTriggerParamsIncidentKinds = "normal"
-	IncidentTriggerParamsIncidentKindsScheduled IncidentTriggerParamsIncidentKinds = "scheduled"
-	IncidentTriggerParamsIncidentKindsTest      IncidentTriggerParamsIncidentKinds = "test"
+	IncidentTriggerParamsIncidentKindsBackfilled IncidentTriggerParamsIncidentKinds = "backfilled"
+	IncidentTriggerParamsIncidentKindsExample    IncidentTriggerParamsIncidentKinds = "example"
+	IncidentTriggerParamsIncidentKindsNormal     IncidentTriggerParamsIncidentKinds = "normal"
+	IncidentTriggerParamsIncidentKindsScheduled  IncidentTriggerParamsIncidentKinds = "scheduled"
+	IncidentTriggerParamsIncidentKindsTest       IncidentTriggerParamsIncidentKinds = "test"
 )
 
 // Defines values for IncidentTriggerParamsIncidentStatuses.
@@ -1320,6 +1323,7 @@ const (
 	IncidentTriggerParamsTriggersServicesRemoved        IncidentTriggerParamsTriggers = "services_removed"
 	IncidentTriggerParamsTriggersServicesUpdated        IncidentTriggerParamsTriggers = "services_updated"
 	IncidentTriggerParamsTriggersSeverityUpdated        IncidentTriggerParamsTriggers = "severity_updated"
+	IncidentTriggerParamsTriggersSlackChannelCreated    IncidentTriggerParamsTriggers = "slack_channel_created"
 	IncidentTriggerParamsTriggersSlackCommand           IncidentTriggerParamsTriggers = "slack_command"
 	IncidentTriggerParamsTriggersStatusUpdated          IncidentTriggerParamsTriggers = "status_updated"
 	IncidentTriggerParamsTriggersSummaryUpdated         IncidentTriggerParamsTriggers = "summary_updated"
@@ -1428,10 +1432,11 @@ const (
 
 // Defines values for NewIncidentDataAttributesKind.
 const (
-	NewIncidentDataAttributesKindExample   NewIncidentDataAttributesKind = "example"
-	NewIncidentDataAttributesKindNormal    NewIncidentDataAttributesKind = "normal"
-	NewIncidentDataAttributesKindScheduled NewIncidentDataAttributesKind = "scheduled"
-	NewIncidentDataAttributesKindTest      NewIncidentDataAttributesKind = "test"
+	NewIncidentDataAttributesKindBackfilled NewIncidentDataAttributesKind = "backfilled"
+	NewIncidentDataAttributesKindExample    NewIncidentDataAttributesKind = "example"
+	NewIncidentDataAttributesKindNormal     NewIncidentDataAttributesKind = "normal"
+	NewIncidentDataAttributesKindScheduled  NewIncidentDataAttributesKind = "scheduled"
+	NewIncidentDataAttributesKindTest       NewIncidentDataAttributesKind = "test"
 )
 
 // Defines values for NewIncidentDataAttributesStatus.
@@ -1600,6 +1605,13 @@ const (
 // Defines values for NewTeamDataType.
 const (
 	NewTeamDataTypeGroups NewTeamDataType = "groups"
+)
+
+// Defines values for NewWorkflowDataAttributesPriority.
+const (
+	NewWorkflowDataAttributesPriorityHigh   NewWorkflowDataAttributesPriority = "high"
+	NewWorkflowDataAttributesPriorityLow    NewWorkflowDataAttributesPriority = "low"
+	NewWorkflowDataAttributesPriorityNormal NewWorkflowDataAttributesPriority = "normal"
 )
 
 // Defines values for NewWorkflowDataAttributesRepeatOn.
@@ -1821,6 +1833,11 @@ const (
 // Defines values for RunCommandHerokuTaskParamsTaskType.
 const (
 	RunCommandHeroku RunCommandHerokuTaskParamsTaskType = "run_command_heroku"
+)
+
+// Defines values for SendDashboardReportTaskParamsTaskType.
+const (
+	SendDashboardReport SendDashboardReportTaskParamsTaskType = "send_dashboard_report"
 )
 
 // Defines values for SendEmailTaskParamsTaskType.
@@ -2225,11 +2242,11 @@ const (
 
 // Defines values for UpdateOpsgenieAlertTaskParamsPriority.
 const (
-	Auto UpdateOpsgenieAlertTaskParamsPriority = "auto"
-	P1   UpdateOpsgenieAlertTaskParamsPriority = "P1"
-	P2   UpdateOpsgenieAlertTaskParamsPriority = "P2"
-	P3   UpdateOpsgenieAlertTaskParamsPriority = "P3"
-	P4   UpdateOpsgenieAlertTaskParamsPriority = "P4"
+	UpdateOpsgenieAlertTaskParamsPriorityAuto UpdateOpsgenieAlertTaskParamsPriority = "auto"
+	UpdateOpsgenieAlertTaskParamsPriorityP1   UpdateOpsgenieAlertTaskParamsPriority = "P1"
+	UpdateOpsgenieAlertTaskParamsPriorityP2   UpdateOpsgenieAlertTaskParamsPriority = "P2"
+	UpdateOpsgenieAlertTaskParamsPriorityP3   UpdateOpsgenieAlertTaskParamsPriority = "P3"
+	UpdateOpsgenieAlertTaskParamsPriorityP4   UpdateOpsgenieAlertTaskParamsPriority = "P4"
 )
 
 // Defines values for UpdateOpsgenieAlertTaskParamsTaskType.
@@ -4931,29 +4948,32 @@ type IncidentActionItem struct {
 	// The description of incident action item
 	Description *string `json:"description"`
 
-	// The kind of the incident action item
+	// The due date of the action item
+	DueDate *string `json:"due_date"`
+
+	// The kind of the action item
 	Kind *IncidentActionItemKind `json:"kind,omitempty"`
 
-	// The priority of the incident action item
+	// The priority of the action item
 	Priority *IncidentActionItemPriority `json:"priority,omitempty"`
 
-	// The status of incident the action item
+	// The status of the action item
 	Status *IncidentActionItemStatus `json:"status,omitempty"`
 
-	// The summary of the incident action item
+	// The summary of the action item
 	Summary string `json:"summary"`
 
 	// Date of last update
 	UpdatedAt string `json:"updated_at"`
 }
 
-// The kind of the incident action item
+// The kind of the action item
 type IncidentActionItemKind string
 
-// The priority of the incident action item
+// The priority of the action item
 type IncidentActionItemPriority string
 
-// The status of incident the action item
+// The status of the action item
 type IncidentActionItemStatus string
 
 // IncidentActionItemList defines model for incident_action_item_list.
@@ -4966,23 +4986,26 @@ type IncidentActionItemList struct {
 			// The description of incident action item
 			Description *string `json:"description"`
 
-			// The kind of the incident action item
+			// The due date of the action item
+			DueDate *string `json:"due_date"`
+
+			// The kind of the action item
 			Kind *IncidentActionItemListDataAttributesKind `json:"kind,omitempty"`
 
-			// The priority of the incident action item
+			// The priority of the action item
 			Priority *IncidentActionItemListDataAttributesPriority `json:"priority,omitempty"`
 
-			// The status of incident the action item
+			// The status of the action item
 			Status *IncidentActionItemListDataAttributesStatus `json:"status,omitempty"`
 
-			// The summary of the incident action item
+			// The summary of the action item
 			Summary string `json:"summary"`
 
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`
 		} `json:"attributes"`
 
-		// Unique ID of the incident action item
+		// Unique ID of the action item
 		Id   string                         `json:"id"`
 		Type IncidentActionItemListDataType `json:"type"`
 	} `json:"data"`
@@ -4995,13 +5018,13 @@ type IncidentActionItemList struct {
 	} `json:"links"`
 }
 
-// The kind of the incident action item
+// The kind of the action item
 type IncidentActionItemListDataAttributesKind string
 
-// The priority of the incident action item
+// The priority of the action item
 type IncidentActionItemListDataAttributesPriority string
 
-// The status of incident the action item
+// The status of the action item
 type IncidentActionItemListDataAttributesStatus string
 
 // IncidentActionItemListDataType defines model for IncidentActionItemList.Data.Type.
@@ -5017,35 +5040,38 @@ type IncidentActionItemResponse struct {
 			// The description of incident action item
 			Description *string `json:"description"`
 
-			// The kind of the incident action item
+			// The due date of the action item
+			DueDate *string `json:"due_date"`
+
+			// The kind of the action item
 			Kind *IncidentActionItemResponseDataAttributesKind `json:"kind,omitempty"`
 
-			// The priority of the incident action item
+			// The priority of the action item
 			Priority *IncidentActionItemResponseDataAttributesPriority `json:"priority,omitempty"`
 
-			// The status of incident the action item
+			// The status of the action item
 			Status *IncidentActionItemResponseDataAttributesStatus `json:"status,omitempty"`
 
-			// The summary of the incident action item
+			// The summary of the action item
 			Summary string `json:"summary"`
 
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`
 		} `json:"attributes"`
 
-		// Unique ID of the incident action item
+		// Unique ID of the action item
 		Id   string                             `json:"id"`
 		Type IncidentActionItemResponseDataType `json:"type"`
 	} `json:"data"`
 }
 
-// The kind of the incident action item
+// The kind of the action item
 type IncidentActionItemResponseDataAttributesKind string
 
-// The priority of the incident action item
+// The priority of the action item
 type IncidentActionItemResponseDataAttributesPriority string
 
-// The status of incident the action item
+// The status of the action item
 type IncidentActionItemResponseDataAttributesStatus string
 
 // IncidentActionItemResponseDataType defines model for IncidentActionItemResponse.Data.Type.
@@ -6383,9 +6409,6 @@ type NewIncident struct {
 			// Date of cancellation
 			CancelledAt *string `json:"cancelled_at"`
 
-			// Create an incident on Slack as well (if integration enabled)
-			CreateOnSlack *bool `json:"create_on_slack"`
-
 			// Date of detection
 			DetectedAt *string `json:"detected_at"`
 
@@ -6457,32 +6480,35 @@ type NewIncidentDataType string
 type NewIncidentActionItem struct {
 	Data struct {
 		Attributes struct {
-			// The description of the incident action item
+			// The description of the action item
 			Description *string `json:"description"`
 
-			// The kind of the incident action item
+			// The due date of the action item
+			DueDate *string `json:"due_date"`
+
+			// The kind of the action item
 			Kind *NewIncidentActionItemDataAttributesKind `json:"kind,omitempty"`
 
-			// The priority of the incident action item
+			// The priority of the action item
 			Priority *NewIncidentActionItemDataAttributesPriority `json:"priority,omitempty"`
 
-			// The status of incident the action item
+			// The status of the action item
 			Status *NewIncidentActionItemDataAttributesStatus `json:"status,omitempty"`
 
-			// The summary of the incident action item
+			// The summary of the action item
 			Summary string `json:"summary"`
 		} `json:"attributes"`
 		Type NewIncidentActionItemDataType `json:"type"`
 	} `json:"data"`
 }
 
-// The kind of the incident action item
+// The kind of the action item
 type NewIncidentActionItemDataAttributesKind string
 
-// The priority of the incident action item
+// The priority of the action item
 type NewIncidentActionItemDataAttributesPriority string
 
-// The status of incident the action item
+// The status of the action item
 type NewIncidentActionItemDataAttributesStatus string
 
 // NewIncidentActionItemDataType defines model for NewIncidentActionItem.Data.Type.
@@ -6953,6 +6979,9 @@ type NewWorkflow struct {
 			// The order which the workflow should run with other workflows.
 			Position *float32 `json:"position,omitempty"`
 
+			// Priority
+			Priority *NewWorkflowDataAttributesPriority `json:"priority"`
+
 			// Repeat workflow every duration.
 			RepeatEveryDuration *string                              `json:"repeat_every_duration"`
 			RepeatOn            *[]NewWorkflowDataAttributesRepeatOn `json:"repeat_on,omitempty"`
@@ -6972,6 +7001,9 @@ type NewWorkflow struct {
 		Type NewWorkflowDataType `json:"type"`
 	} `json:"data"`
 }
+
+// Priority
+type NewWorkflowDataAttributesPriority string
 
 // Repeat on weekdays.
 type NewWorkflowDataAttributesRepeatOn string
@@ -7869,6 +7901,27 @@ type RunCommandHerokuTaskParamsSize string
 
 // RunCommandHerokuTaskParamsTaskType defines model for RunCommandHerokuTaskParams.TaskType.
 type RunCommandHerokuTaskParamsTaskType string
+
+// SendDashboardReportTaskParams defines model for send_dashboard_report_task_params.
+type SendDashboardReportTaskParams struct {
+	// The email body
+	Body         *string  `json:"body"`
+	DashboardIds []string `json:"dashboard_ids"`
+
+	// The from email address. Need to use SMTP integration if different than rootly.com.
+	From *string `json:"from"`
+
+	// The preheader
+	Preheader *string `json:"preheader"`
+
+	// The subject
+	Subject  string                                 `json:"subject"`
+	TaskType *SendDashboardReportTaskParamsTaskType `json:"task_type,omitempty"`
+	To       []string                               `json:"to"`
+}
+
+// SendDashboardReportTaskParamsTaskType defines model for SendDashboardReportTaskParams.TaskType.
+type SendDashboardReportTaskParamsTaskType string
 
 // SendEmailTaskParams defines model for send_email_task_params.
 type SendEmailTaskParams struct {
@@ -9122,32 +9175,35 @@ type UpdateIncidentDataType string
 type UpdateIncidentActionItem struct {
 	Data struct {
 		Attributes struct {
-			// The description of the incident action item
+			// The description of the action item
 			Description *string `json:"description"`
 
-			// The kind of the incident action item
+			// The due date of the action item
+			DueDate *string `json:"due_date"`
+
+			// The kind of the action item
 			Kind *UpdateIncidentActionItemDataAttributesKind `json:"kind,omitempty"`
 
-			// The priority of the incident action item
+			// The priority of the action item
 			Priority *UpdateIncidentActionItemDataAttributesPriority `json:"priority,omitempty"`
 
-			// The status of incident the action item
+			// The status of the action item
 			Status *UpdateIncidentActionItemDataAttributesStatus `json:"status,omitempty"`
 
-			// The summary of the incident action item
+			// The summary of the action item
 			Summary *string `json:"summary,omitempty"`
 		} `json:"attributes"`
 		Type UpdateIncidentActionItemDataType `json:"type"`
 	} `json:"data"`
 }
 
-// The kind of the incident action item
+// The kind of the action item
 type UpdateIncidentActionItemDataAttributesKind string
 
-// The priority of the incident action item
+// The priority of the action item
 type UpdateIncidentActionItemDataAttributesPriority string
 
-// The status of incident the action item
+// The status of the action item
 type UpdateIncidentActionItemDataAttributesStatus string
 
 // UpdateIncidentActionItemDataType defines model for UpdateIncidentActionItem.Data.Type.

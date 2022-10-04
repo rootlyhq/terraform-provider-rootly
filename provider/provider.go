@@ -148,6 +148,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_workflow_task_rename_slack_channel": resourceWorkflowTaskRenameSlackChannel(),
 				"rootly_workflow_task_run_command_heroku": resourceWorkflowTaskRunCommandHeroku(),
 				"rootly_workflow_task_send_email": resourceWorkflowTaskSendEmail(),
+				"rootly_workflow_task_send_dashboard_report": resourceWorkflowTaskSendDashboardReport(),
 				"rootly_workflow_task_create_slack_channel": resourceWorkflowTaskCreateSlackChannel(),
 				"rootly_workflow_task_send_slack_message": resourceWorkflowTaskSendSlackMessage(),
 				"rootly_workflow_task_send_sms": resourceWorkflowTaskSendSms(),
