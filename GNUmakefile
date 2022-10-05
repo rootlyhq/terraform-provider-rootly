@@ -50,4 +50,3 @@ generate:
 	curl $(SWAGGER_URL) -o schema/swagger.json
 	cd schema && oapi-codegen --config=oapi-config.yml swagger.json
 	node tools/generate.js schema/swagger.json
-	rm schema/swagger.json

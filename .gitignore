@@ -36,6 +36,7 @@ website/vendor
 
 # Swagger
 swagger.json
+schema/swagger.json
 
 node_modules/
 
