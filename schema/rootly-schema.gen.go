@@ -1332,6 +1332,7 @@ const (
 	IncidentTriggerParamsTriggersTeamsUpdated           IncidentTriggerParamsTriggers = "teams_updated"
 	IncidentTriggerParamsTriggersTimelineUpdated        IncidentTriggerParamsTriggers = "timeline_updated"
 	IncidentTriggerParamsTriggersTitleUpdated           IncidentTriggerParamsTriggers = "title_updated"
+	IncidentTriggerParamsTriggersUserJoinedSlackChannel IncidentTriggerParamsTriggers = "user_joined_slack_channel"
 )
 
 // Defines values for IncidentTypeListDataType.
@@ -1843,6 +1844,11 @@ const (
 // Defines values for SendEmailTaskParamsTaskType.
 const (
 	SendEmail SendEmailTaskParamsTaskType = "send_email"
+)
+
+// Defines values for SendSlackBlocksTaskParamsTaskType.
+const (
+	SendSlackBlocks SendSlackBlocksTaskParamsTaskType = "send_slack_blocks"
 )
 
 // Defines values for SendSmsTaskParamsTaskType.
@@ -5770,7 +5776,8 @@ type IncidentRoleTask struct {
 	CreatedAt string `json:"created_at"`
 
 	// The description of incident task
-	Description *string `json:"description"`
+	Description    *string `json:"description"`
+	IncidentRoleId *string `json:"incident_role_id,omitempty"`
 
 	// The priority of the incident task
 	Priority *IncidentRoleTaskPriority `json:"priority,omitempty"`
@@ -5793,7 +5800,8 @@ type IncidentRoleTaskList struct {
 			CreatedAt string `json:"created_at"`
 
 			// The description of incident task
-			Description *string `json:"description"`
+			Description    *string `json:"description"`
+			IncidentRoleId *string `json:"incident_role_id,omitempty"`
 
 			// The priority of the incident task
 			Priority *IncidentRoleTaskListDataAttributesPriority `json:"priority,omitempty"`
@@ -5832,7 +5840,8 @@ type IncidentRoleTaskResponse struct {
 			CreatedAt string `json:"created_at"`
 
 			// The description of incident task
-			Description *string `json:"description"`
+			Description    *string `json:"description"`
+			IncidentRoleId *string `json:"incident_role_id,omitempty"`
 
 			// The priority of the incident task
 			Priority *IncidentRoleTaskResponseDataAttributesPriority `json:"priority,omitempty"`
@@ -6600,7 +6609,8 @@ type NewIncidentRoleTask struct {
 	Data struct {
 		Attributes struct {
 			// The description of the incident task
-			Description *string `json:"description"`
+			Description    *string `json:"description"`
+			IncidentRoleId *string `json:"incident_role_id,omitempty"`
 
 			// The priority of the incident task
 			Priority *NewIncidentRoleTaskDataAttributesPriority `json:"priority,omitempty"`
@@ -7945,6 +7955,30 @@ type SendEmailTaskParams struct {
 
 // SendEmailTaskParamsTaskType defines model for SendEmailTaskParams.TaskType.
 type SendEmailTaskParamsTaskType string
+
+// SendSlackBlocksTaskParams defines model for send_slack_blocks_task_params.
+type SendSlackBlocksTaskParams struct {
+	// Blocks JSON.
+	Blocks   string `json:"blocks"`
+	Channels []struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"channels"`
+	Message         *string `json:"message,omitempty"`
+	SendAsEphemeral *bool   `json:"send_as_ephemeral,omitempty"`
+	SlackUserGroups []struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"slack_user_groups"`
+	SlackUsers []struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"slack_users"`
+	TaskType *SendSlackBlocksTaskParamsTaskType `json:"task_type,omitempty"`
+}
+
+// SendSlackBlocksTaskParamsTaskType defines model for SendSlackBlocksTaskParams.TaskType.
+type SendSlackBlocksTaskParamsTaskType string
 
 // SendSlackMessageTaskParams defines model for send_slack_message_task_params.
 type SendSlackMessageTaskParams interface{}
@@ -11311,8 +11345,8 @@ type ClientInterface interface {
 	// DeleteIncidentRoleTask request
 	DeleteIncidentRoleTask(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetIncidentRoleTasks request
-	GetIncidentRoleTasks(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetIncidentRoleTask request
+	GetIncidentRoleTask(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIncidentRoleTask request with any body
 	UpdateIncidentRoleTaskWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -12311,8 +12345,8 @@ func (c *Client) DeleteIncidentRoleTask(ctx context.Context, id string, reqEdito
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetIncidentRoleTasks(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetIncidentRoleTasksRequest(c.Server, id)
+func (c *Client) GetIncidentRoleTask(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetIncidentRoleTaskRequest(c.Server, id)
 	if err != nil {
 		return nil, err
 	}
@@ -16365,8 +16399,8 @@ func NewDeleteIncidentRoleTaskRequest(server string, id string) (*http.Request, 
 	return req, nil
 }
 
-// NewGetIncidentRoleTasksRequest generates requests for GetIncidentRoleTasks
-func NewGetIncidentRoleTasksRequest(server string, id string) (*http.Request, error) {
+// NewGetIncidentRoleTaskRequest generates requests for GetIncidentRoleTask
+func NewGetIncidentRoleTaskRequest(server string, id string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -22728,8 +22762,8 @@ type ClientWithResponsesInterface interface {
 	// DeleteIncidentRoleTask request
 	DeleteIncidentRoleTaskWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentRoleTaskResponse, error)
 
-	// GetIncidentRoleTasks request
-	GetIncidentRoleTasksWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentRoleTasksResponse, error)
+	// GetIncidentRoleTask request
+	GetIncidentRoleTaskWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentRoleTaskResponse, error)
 
 	// UpdateIncidentRoleTask request with any body
 	UpdateIncidentRoleTaskWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentRoleTaskResponse, error)
@@ -24232,13 +24266,13 @@ func (r DeleteIncidentRoleTaskResponse) StatusCode() int {
 	return 0
 }
 
-type GetIncidentRoleTasksResponse struct {
+type GetIncidentRoleTaskResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 }
 
 // Status returns HTTPResponse.Status
-func (r GetIncidentRoleTasksResponse) Status() string {
+func (r GetIncidentRoleTaskResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -24246,7 +24280,7 @@ func (r GetIncidentRoleTasksResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetIncidentRoleTasksResponse) StatusCode() int {
+func (r GetIncidentRoleTaskResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -27025,13 +27059,13 @@ func (c *ClientWithResponses) DeleteIncidentRoleTaskWithResponse(ctx context.Con
 	return ParseDeleteIncidentRoleTaskResponse(rsp)
 }
 
-// GetIncidentRoleTasksWithResponse request returning *GetIncidentRoleTasksResponse
-func (c *ClientWithResponses) GetIncidentRoleTasksWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentRoleTasksResponse, error) {
-	rsp, err := c.GetIncidentRoleTasks(ctx, id, reqEditors...)
+// GetIncidentRoleTaskWithResponse request returning *GetIncidentRoleTaskResponse
+func (c *ClientWithResponses) GetIncidentRoleTaskWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentRoleTaskResponse, error) {
+	rsp, err := c.GetIncidentRoleTask(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetIncidentRoleTasksResponse(rsp)
+	return ParseGetIncidentRoleTaskResponse(rsp)
 }
 
 // UpdateIncidentRoleTaskWithBodyWithResponse request with arbitrary body returning *UpdateIncidentRoleTaskResponse
@@ -28902,15 +28936,15 @@ func ParseDeleteIncidentRoleTaskResponse(rsp *http.Response) (*DeleteIncidentRol
 	return response, nil
 }
 
-// ParseGetIncidentRoleTasksResponse parses an HTTP response from a GetIncidentRoleTasksWithResponse call
-func ParseGetIncidentRoleTasksResponse(rsp *http.Response) (*GetIncidentRoleTasksResponse, error) {
+// ParseGetIncidentRoleTaskResponse parses an HTTP response from a GetIncidentRoleTaskWithResponse call
+func ParseGetIncidentRoleTaskResponse(rsp *http.Response) (*GetIncidentRoleTaskResponse, error) {
 	bodyBytes, err := ioutil.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetIncidentRoleTasksResponse{
+	response := &GetIncidentRoleTaskResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

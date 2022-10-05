@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.33] -- 2022-10-05
+
+- Add `workflow_task_send_slack_blocks` resource.
+- Add `incident_role_task` resource.
+
 ## [0.1.32] -- 2022-10-04
 
 - Add `slack_channel_created` trigger type for workflows.

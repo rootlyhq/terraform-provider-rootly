@@ -77,6 +77,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_incident_role": resourceIncidentRole(),
 				"rootly_team": resourceTeam(),
 				"rootly_incident_type": resourceIncidentType(),
+				"rootly_incident_role_task": resourceIncidentRoleTask(),
 				"rootly_custom_field": resourceCustomField(),
 				"rootly_custom_field_option": resourceCustomFieldOption(),
 				"rootly_workflow_custom_field_selection": resourceWorkflowCustomFieldSelection(),
@@ -172,6 +173,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_workflow_task_update_trello_card": resourceWorkflowTaskUpdateTrelloCard(),
 				"rootly_workflow_task_update_zendesk_ticket": resourceWorkflowTaskUpdateZendeskTicket(),
 				"rootly_workflow_task_trigger_workflow": resourceWorkflowTaskTriggerWorkflow(),
+				"rootly_workflow_task_send_slack_blocks": resourceWorkflowTaskSendSlackBlocks(),
 			},
 		}
 

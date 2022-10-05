@@ -19,7 +19,6 @@ const excluded = [
 	"incident_post_mortem",
 	"incident_action_item",
 	"incident_event",
-	"incident_role_task",
 	"incident_feedback",
 	"incident_custom_field_selection",
 	"pulse",
