@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.34] -- 2022-10-06
+
+- Add enum values and required object properties to attribute description.
+
 ## [0.1.33] -- 2022-10-05
 
 - Add `workflow_task_send_slack_blocks` resource.
