@@ -66,7 +66,7 @@ func resourceWorkflowTaskSendSlackBlocks() *schema.Resource {
 						"channels": &schema.Schema{
 							Description: "",
 							Type: schema.TypeList,
-							Required: true,
+							Optional: true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"id": &schema.Schema{
@@ -83,7 +83,7 @@ func resourceWorkflowTaskSendSlackBlocks() *schema.Resource {
 						"slack_users": &schema.Schema{
 							Description: "",
 							Type: schema.TypeList,
-							Required: true,
+							Optional: true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"id": &schema.Schema{
@@ -100,7 +100,7 @@ func resourceWorkflowTaskSendSlackBlocks() *schema.Resource {
 						"slack_user_groups": &schema.Schema{
 							Description: "",
 							Type: schema.TypeList,
-							Required: true,
+							Optional: true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"id": &schema.Schema{

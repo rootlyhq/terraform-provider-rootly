@@ -31,14 +31,14 @@ Manages workflow send_slack_blocks task.
 Required:
 
 - `blocks` (String) Blocks JSON.
-- `channels` (Block List, Min: 1) (see [below for nested schema](#nestedblock--task_params--channels))
-- `slack_user_groups` (Block List, Min: 1) (see [below for nested schema](#nestedblock--task_params--slack_user_groups))
-- `slack_users` (Block List, Min: 1) (see [below for nested schema](#nestedblock--task_params--slack_users))
 
 Optional:
 
+- `channels` (Block List) (see [below for nested schema](#nestedblock--task_params--channels))
 - `message` (String)
 - `send_as_ephemeral` (Boolean)
+- `slack_user_groups` (Block List) (see [below for nested schema](#nestedblock--task_params--slack_user_groups))
+- `slack_users` (Block List) (see [below for nested schema](#nestedblock--task_params--slack_users))
 - `task_type` (String)
 
 <a id="nestedblock--task_params--channels"></a>

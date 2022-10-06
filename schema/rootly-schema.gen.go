@@ -1846,11 +1846,6 @@ const (
 	SendEmail SendEmailTaskParamsTaskType = "send_email"
 )
 
-// Defines values for SendSlackBlocksTaskParamsTaskType.
-const (
-	SendSlackBlocks SendSlackBlocksTaskParamsTaskType = "send_slack_blocks"
-)
-
 // Defines values for SendSmsTaskParamsTaskType.
 const (
 	SendSms SendSmsTaskParamsTaskType = "send_sms"
@@ -7957,28 +7952,7 @@ type SendEmailTaskParams struct {
 type SendEmailTaskParamsTaskType string
 
 // SendSlackBlocksTaskParams defines model for send_slack_blocks_task_params.
-type SendSlackBlocksTaskParams struct {
-	// Blocks JSON.
-	Blocks   string `json:"blocks"`
-	Channels []struct {
-		Id   *string `json:"id,omitempty"`
-		Name *string `json:"name,omitempty"`
-	} `json:"channels"`
-	Message         *string `json:"message,omitempty"`
-	SendAsEphemeral *bool   `json:"send_as_ephemeral,omitempty"`
-	SlackUserGroups []struct {
-		Id   *string `json:"id,omitempty"`
-		Name *string `json:"name,omitempty"`
-	} `json:"slack_user_groups"`
-	SlackUsers []struct {
-		Id   *string `json:"id,omitempty"`
-		Name *string `json:"name,omitempty"`
-	} `json:"slack_users"`
-	TaskType *SendSlackBlocksTaskParamsTaskType `json:"task_type,omitempty"`
-}
-
-// SendSlackBlocksTaskParamsTaskType defines model for SendSlackBlocksTaskParams.TaskType.
-type SendSlackBlocksTaskParamsTaskType string
+type SendSlackBlocksTaskParams interface{}
 
 // SendSlackMessageTaskParams defines model for send_slack_message_task_params.
 type SendSlackMessageTaskParams interface{}
