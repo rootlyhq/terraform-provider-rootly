@@ -54,7 +54,7 @@ func resourceWorkflowTaskPagePagerdutyOnCallResponders() *schema.Resource {
 							}, false),
 						},
 						"service": &schema.Schema{
-							Description: "",
+							Description: "Map must contain two fields, `id` and `name`. ",
 							Type: schema.TypeMap,
 							Required: true,
 						},
@@ -98,7 +98,7 @@ func resourceWorkflowTaskPagePagerdutyOnCallResponders() *schema.Resource {
 							Optional: true,
 						},
 						"urgency": &schema.Schema{
-							Description: "",
+							Description: ". Value must be one of `high`, `low`, `auto`.",
 							Type: schema.TypeString,
 							Optional: true,
 							Default: "high",

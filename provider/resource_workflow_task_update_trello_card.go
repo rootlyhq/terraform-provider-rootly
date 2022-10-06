@@ -74,12 +74,12 @@ func resourceWorkflowTaskUpdateTrelloCard() *schema.Resource {
 							Optional: true,
 						},
 						"board": &schema.Schema{
-							Description: "The board id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The board id and display name.",
 							Type: schema.TypeMap,
 							Optional: true,
 						},
 						"list": &schema.Schema{
-							Description: "The list id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The list id and display name.",
 							Type: schema.TypeMap,
 							Optional: true,
 						},
@@ -101,7 +101,7 @@ func resourceWorkflowTaskUpdateTrelloCard() *schema.Resource {
 							},
 						},
 						"archivation": &schema.Schema{
-							Description: "The archivation id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The archivation id and display name.",
 							Type: schema.TypeMap,
 							Required: true,
 						},

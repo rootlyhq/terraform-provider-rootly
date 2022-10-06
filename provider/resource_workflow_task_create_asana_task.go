@@ -54,7 +54,7 @@ func resourceWorkflowTaskCreateAsanaTask() *schema.Resource {
 							}, false),
 						},
 						"workspace": &schema.Schema{
-							Description: "",
+							Description: "Map must contain two fields, `id` and `name`. ",
 							Type: schema.TypeMap,
 							Required: true,
 						},
@@ -86,7 +86,7 @@ func resourceWorkflowTaskCreateAsanaTask() *schema.Resource {
 							Optional: true,
 						},
 						"completion": &schema.Schema{
-							Description: "",
+							Description: "Map must contain two fields, `id` and `name`. ",
 							Type: schema.TypeMap,
 							Required: true,
 						},

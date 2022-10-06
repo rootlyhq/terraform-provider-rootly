@@ -54,7 +54,7 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 							}, false),
 						},
 						"incident": &schema.Schema{
-							Description: "",
+							Description: "Map must contain two fields, `id` and `name`. ",
 							Type: schema.TypeMap,
 							Required: true,
 						},
@@ -69,7 +69,7 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 							Required: true,
 						},
 						"status": &schema.Schema{
-							Description: "",
+							Description: ". Value must be one of `investigating`, `identified`, `monitoring`, `resolved`, `investigating`, `identified`, `monitoring`, `resolved`, `investigating`, `identified`, `monitoring`, `resolved`, `scheduled`, `in_progress`, `verifying`, `completed`.",
 							Type: schema.TypeString,
 							Required: true,
 							ValidateFunc: validation.StringInSlice([]string{

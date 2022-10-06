@@ -79,7 +79,7 @@ func resourceWorkflowTaskUpdateShortcutStory() *schema.Resource {
 							Optional: true,
 						},
 						"archivation": &schema.Schema{
-							Description: "The archivation id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The archivation id and display name.",
 							Type: schema.TypeMap,
 							Required: true,
 						},

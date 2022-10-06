@@ -173,10 +173,21 @@ func resourceWorkflowTask${task_name_camel}Delete(ctx context.Context, d *schema
 `
 }
 
+function annotatedDescription(schema) {
+	const description = (schema.description || "").replace(/"/g, '\\"')
+	if (schema.enum) {
+		return `${description}. Value must be one of ${schema.enum.map((val) => `\`${val}\``).join(", ")}.`
+	}
+	if (schema.type === "object" && schema.properties.id && schema.properties.name) {
+		return `Map must contain two fields, \`id\` and \`name\`. ${description}`
+	}
+	return description
+}
+
 function genTaskSchemaProperty(property_name, property_schema, required_props) {
 	const isRequired = required_props && required_props.indexOf(property_name) !== -1
 	let a = `						"${property_name}": &schema.Schema{
-							Description: "${property_schema.description || ""}",
+							Description: "${annotatedDescription(property_schema)}",
 							Type: ${genTaskSchemaPropertyType(property_schema.type)},
 							${isRequired ? 'Required' : 'Optional'}: true,`
 	if (property_name === "custom_fields_mapping") {

@@ -30,10 +30,10 @@ Manages workflow trigger_workflow task.
 
 Required:
 
-- `workflow` (Map of String)
+- `workflow` (Map of String) Map must contain two fields, `id` and `name`.
 
 Optional:
 
-- `kind` (String)
-- `resource` (Map of String)
+- `kind` (String) . Value must be one of `simple`, `incident`, `post_mortem`, `action_item`, `pulse`, `alert`.
+- `resource` (Map of String) Map must contain two fields, `id` and `name`.
 - `task_type` (String)

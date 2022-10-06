@@ -30,7 +30,7 @@ Manages workflow update_github_issue task.
 
 Required:
 
-- `completion` (Map of String)
+- `completion` (Map of String) Map must contain two fields, `id` and `name`.
 - `issue_id` (String) The issue id
 
 Optional:

@@ -34,6 +34,6 @@ Required:
 
 Optional:
 
-- `escalation_policy` (Map of String)
-- `schedule` (Map of String)
+- `escalation_policy` (Map of String) Map must contain two fields, `id` and `name`.
+- `schedule` (Map of String) Map must contain two fields, `id` and `name`.
 - `task_type` (String)

@@ -47,7 +47,7 @@ func resourceWorkflowCustomFieldSelection() *schema.Resource{
 				Required: false,
 				Optional: true,
 				ForceNew: false,
-				Description: "The trigger condition",
+				Description: "The trigger condition. Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
 			},
 			
 

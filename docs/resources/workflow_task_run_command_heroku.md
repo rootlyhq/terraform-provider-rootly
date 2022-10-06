@@ -32,7 +32,7 @@ Required:
 
 - `app_name` (String)
 - `command` (String)
-- `size` (String)
+- `size` (String) . Value must be one of `standard-1X`, `standard-2X`.
 
 Optional:
 

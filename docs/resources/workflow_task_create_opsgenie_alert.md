@@ -36,7 +36,7 @@ Optional:
 
 - `description` (String) Description field of the alert that is generally used to provide a detailed information about the alert
 - `escalations` (Block List) (see [below for nested schema](#nestedblock--task_params--escalations))
-- `priority` (String)
+- `priority` (String) . Value must be one of `P1`, `P2`, `P3`, `P4`, `auto`.
 - `schedules` (Block List) (see [below for nested schema](#nestedblock--task_params--schedules))
 - `task_type` (String)
 - `teams` (Block List) (see [below for nested schema](#nestedblock--task_params--teams))

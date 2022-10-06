@@ -31,9 +31,9 @@ Manages workflow publish_incident task.
 Required:
 
 - `event` (String) Incident event description
-- `incident` (Map of String)
+- `incident` (Map of String) Map must contain two fields, `id` and `name`.
 - `public_title` (String)
-- `status` (String)
+- `status` (String) . Value must be one of `investigating`, `identified`, `monitoring`, `resolved`, `investigating`, `identified`, `monitoring`, `resolved`, `investigating`, `identified`, `monitoring`, `resolved`, `scheduled`, `in_progress`, `verifying`, `completed`.
 - `status_page_id` (String)
 
 Optional:

@@ -186,6 +186,17 @@ function schemaFields(resourceSchema, requiredFields, pathIdField) {
 	}).join('\n')
 }
 
+function annotatedDescription(schema) {
+	const description = (schema.description || "").replace(/"/g, '\\"')
+	if (schema.enum) {
+		return `${description}. Value must be one of ${schema.enum.map((val) => `\`${val}\``).join(", ")}.`
+	}
+	if (schema.type === "object" && schema.properties.id && schema.properties.name) {
+		return `Map must contain two fields, \`id\` and \`name\`. ${description}`
+	}
+	return description
+}
+
 function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 	const schema = resourceSchema.properties[name]
 	const optional = (requiredFields || []).indexOf(name) === -1 || schema.enum ? "true" : "false"
@@ -201,7 +212,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 				Required: ${required},
 				Optional: ${optional},
 				ForceNew: ${forceNew},
-				Description: "${description}",
+				Description: "${annotatedDescription(schema)}",
 			},
 			`
 		case 'integer':
@@ -299,7 +310,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 				Computed: ${optional},
 				Required: ${required},
 				Optional: ${optional},
-				Description: "${description}",
+				Description: "${annotatedDescription(schema)}",
 			},
 			`
 	}

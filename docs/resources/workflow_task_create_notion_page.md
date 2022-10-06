@@ -30,7 +30,7 @@ Manages workflow create_notion_page task.
 
 Required:
 
-- `parent_page` (Map of String) The parent page id and display name.
+- `parent_page` (Map of String) Map must contain two fields, `id` and `name`. The parent page id and display name.
 
 Optional:
 

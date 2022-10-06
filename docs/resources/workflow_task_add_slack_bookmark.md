@@ -30,7 +30,7 @@ Manages workflow add_slack_bookmark task.
 
 Required:
 
-- `channel` (Map of String)
+- `channel` (Map of String) Map must contain two fields, `id` and `name`.
 
 Optional:
 

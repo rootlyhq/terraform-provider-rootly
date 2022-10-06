@@ -54,7 +54,7 @@ func resourceWorkflowTaskCreateSlackChannel() *schema.Resource {
 							}, false),
 						},
 						"workspace": &schema.Schema{
-							Description: "",
+							Description: "Map must contain two fields, `id` and `name`. ",
 							Type: schema.TypeMap,
 							Required: true,
 						},

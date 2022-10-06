@@ -30,7 +30,7 @@ Manages workflow create_github_issue task.
 
 Required:
 
-- `repository` (Map of String)
+- `repository` (Map of String) Map must contain two fields, `id` and `name`.
 - `title` (String) The issue title
 
 Optional:

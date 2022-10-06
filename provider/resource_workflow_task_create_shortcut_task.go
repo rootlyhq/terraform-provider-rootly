@@ -64,7 +64,7 @@ func resourceWorkflowTaskCreateShortcutTask() *schema.Resource {
 							Required: true,
 						},
 						"completion": &schema.Schema{
-							Description: "The completion id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The completion id and display name.",
 							Type: schema.TypeMap,
 							Required: true,
 						},

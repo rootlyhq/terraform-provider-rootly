@@ -64,7 +64,7 @@ func resourceWorkflowTaskCreateDatadogNotebook() *schema.Resource {
 							Required: true,
 						},
 						"kind": &schema.Schema{
-							Description: "The notebook kind",
+							Description: "The notebook kind. Value must be one of `postmortem`, `runbook`, `investigation`, `documentation`, `report`.",
 							Type: schema.TypeString,
 							Required: true,
 							ValidateFunc: validation.StringInSlice([]string{

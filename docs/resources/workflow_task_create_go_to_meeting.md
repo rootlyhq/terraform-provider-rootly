@@ -34,7 +34,7 @@ Required:
 
 Optional:
 
-- `conference_call_info` (String)
+- `conference_call_info` (String) . Value must be one of `ptsn`, `free`, `hyrid`, `voip`.
 - `password_required` (Boolean)
 - `post_to_incident_timeline` (Boolean)
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))

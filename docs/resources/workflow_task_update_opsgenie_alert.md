@@ -30,8 +30,8 @@ Manages workflow update_opsgenie_alert task.
 
 Required:
 
-- `completion` (Map of String)
-- `priority` (String)
+- `completion` (Map of String) Map must contain two fields, `id` and `name`.
+- `priority` (String) . Value must be one of `P1`, `P2`, `P3`, `P4`, `auto`.
 
 Optional:
 

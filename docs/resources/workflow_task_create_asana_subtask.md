@@ -30,7 +30,7 @@ Manages workflow create_asana_subtask task.
 
 Required:
 
-- `completion` (Map of String)
+- `completion` (Map of String) Map must contain two fields, `id` and `name`.
 - `parent_task_id` (String) The parent task id
 - `title` (String) The subtask title
 

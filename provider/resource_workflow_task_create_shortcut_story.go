@@ -59,7 +59,7 @@ func resourceWorkflowTaskCreateShortcutStory() *schema.Resource {
 							Required: true,
 						},
 						"kind": &schema.Schema{
-							Description: "",
+							Description: ". Value must be one of `bug`, `chore`, `feature`.",
 							Type: schema.TypeString,
 							Required: true,
 							ValidateFunc: validation.StringInSlice([]string{
@@ -84,12 +84,12 @@ func resourceWorkflowTaskCreateShortcutStory() *schema.Resource {
 							Optional: true,
 						},
 						"archivation": &schema.Schema{
-							Description: "The archivation id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The archivation id and display name.",
 							Type: schema.TypeMap,
 							Required: true,
 						},
 						"project": &schema.Schema{
-							Description: "The project id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The project id and display name.",
 							Type: schema.TypeMap,
 							Required: true,
 						},

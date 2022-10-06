@@ -71,12 +71,12 @@ func resourceWorkflowTaskInviteToSlackChannelPagerduty() *schema.Resource {
 							},
 						},
 						"escalation_policy": &schema.Schema{
-							Description: "",
+							Description: "Map must contain two fields, `id` and `name`. ",
 							Type: schema.TypeMap,
 							Optional: true,
 						},
 						"schedule": &schema.Schema{
-							Description: "",
+							Description: "Map must contain two fields, `id` and `name`. ",
 							Type: schema.TypeMap,
 							Optional: true,
 						},

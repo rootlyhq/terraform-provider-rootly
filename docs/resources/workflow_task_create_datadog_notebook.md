@@ -30,7 +30,7 @@ Manages workflow create_datadog_notebook task.
 
 Required:
 
-- `kind` (String) The notebook kind
+- `kind` (String) The notebook kind. Value must be one of `postmortem`, `runbook`, `investigation`, `documentation`, `report`.
 - `title` (String) The notebook title
 
 Optional:

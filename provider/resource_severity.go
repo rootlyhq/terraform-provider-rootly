@@ -57,7 +57,7 @@ func resourceSeverity() *schema.Resource{
 				Required: false,
 				Optional: true,
 				ForceNew: false,
-				Description: "The severity of the severity",
+				Description: "The severity of the severity. Value must be one of `critical`, `high`, `medium`, `low`.",
 			},
 			
 

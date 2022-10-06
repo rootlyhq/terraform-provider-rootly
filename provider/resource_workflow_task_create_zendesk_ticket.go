@@ -54,7 +54,7 @@ func resourceWorkflowTaskCreateZendeskTicket() *schema.Resource {
 							}, false),
 						},
 						"kind": &schema.Schema{
-							Description: "",
+							Description: ". Value must be one of `problem`, `incident`, `question`, `task`.",
 							Type: schema.TypeString,
 							Required: true,
 							ValidateFunc: validation.StringInSlice([]string{
@@ -80,12 +80,12 @@ func resourceWorkflowTaskCreateZendeskTicket() *schema.Resource {
 							Optional: true,
 						},
 						"priority": &schema.Schema{
-							Description: "The priority id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The priority id and display name.",
 							Type: schema.TypeMap,
 							Optional: true,
 						},
 						"completion": &schema.Schema{
-							Description: "The completion id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The completion id and display name.",
 							Type: schema.TypeMap,
 							Optional: true,
 						},

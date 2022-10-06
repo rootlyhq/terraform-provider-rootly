@@ -59,7 +59,7 @@ func resourceWorkflowTaskCreateGoToMeeting() *schema.Resource {
 							Required: true,
 						},
 						"conference_call_info": &schema.Schema{
-							Description: "",
+							Description: ". Value must be one of `ptsn`, `free`, `hyrid`, `voip`.",
 							Type: schema.TypeString,
 							Optional: true,
 							Default: "ptsn",

@@ -77,7 +77,7 @@ func resourceWorkflowTaskCreateZoomMeeting() *schema.Resource {
 							},
 						},
 						"auto_recording": &schema.Schema{
-							Description: "",
+							Description: ". Value must be one of `none`, `local`, `cloud`.",
 							Type: schema.TypeString,
 							Optional: true,
 							Default: "none",

@@ -34,8 +34,8 @@ Required:
 
 Optional:
 
-- `completion` (Map of String) The completion id and display name.
-- `priority` (Map of String) The priority id and display name.
+- `completion` (Map of String) Map must contain two fields, `id` and `name`. The completion id and display name.
+- `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name.
 - `subject` (String) The ticket subject.
 - `tags` (String) The ticket tags.
 - `task_type` (String)

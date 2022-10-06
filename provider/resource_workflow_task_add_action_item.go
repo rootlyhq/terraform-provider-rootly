@@ -59,7 +59,7 @@ func resourceWorkflowTaskAddActionItem() *schema.Resource {
 							Optional: true,
 						},
 						"priority": &schema.Schema{
-							Description: "The action item priority.",
+							Description: "The action item priority.. Value must be one of `low`, `medium`, `high`.",
 							Type: schema.TypeString,
 							Required: true,
 							ValidateFunc: validation.StringInSlice([]string{
@@ -84,7 +84,7 @@ func resourceWorkflowTaskAddActionItem() *schema.Resource {
 							Optional: true,
 						},
 						"status": &schema.Schema{
-							Description: "The action item status.",
+							Description: "The action item status.. Value must be one of `open`, `in_progress`, `cancelled`, `done`.",
 							Type: schema.TypeString,
 							Required: true,
 							ValidateFunc: validation.StringInSlice([]string{

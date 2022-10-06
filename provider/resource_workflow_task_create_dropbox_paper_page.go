@@ -69,12 +69,12 @@ func resourceWorkflowTaskCreateDropboxPaperPage() *schema.Resource {
 							Optional: true,
 						},
 						"namespace": &schema.Schema{
-							Description: "",
+							Description: "Map must contain two fields, `id` and `name`. ",
 							Type: schema.TypeMap,
 							Optional: true,
 						},
 						"parent_folder": &schema.Schema{
-							Description: "",
+							Description: "Map must contain two fields, `id` and `name`. ",
 							Type: schema.TypeMap,
 							Optional: true,
 						},

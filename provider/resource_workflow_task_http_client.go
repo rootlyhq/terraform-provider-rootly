@@ -79,7 +79,7 @@ func resourceWorkflowTaskHttpClient() *schema.Resource {
 							Optional: true,
 						},
 						"method": &schema.Schema{
-							Description: "HTTP method.",
+							Description: "HTTP method.. Value must be one of `GET`, `POST`, `PUT`, `DELETE`, `OPTIONS`.",
 							Type: schema.TypeString,
 							Optional: true,
 							Default: "GET",

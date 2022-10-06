@@ -59,7 +59,7 @@ func resourceWorkflowTaskAddSlackBookmark() *schema.Resource {
 							Optional: true,
 						},
 						"channel": &schema.Schema{
-							Description: "",
+							Description: "Map must contain two fields, `id` and `name`. ",
 							Type: schema.TypeMap,
 							Required: true,
 						},

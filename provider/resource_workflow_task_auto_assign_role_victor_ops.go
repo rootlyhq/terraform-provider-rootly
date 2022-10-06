@@ -59,7 +59,7 @@ func resourceWorkflowTaskAutoAssignRoleVictorOps() *schema.Resource {
 							Required: true,
 						},
 						"schedule": &schema.Schema{
-							Description: "",
+							Description: "Map must contain two fields, `id` and `name`. ",
 							Type: schema.TypeMap,
 							Required: true,
 						},

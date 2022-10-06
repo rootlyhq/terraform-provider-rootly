@@ -30,7 +30,7 @@ Manages workflow update_slack_channel_topic task.
 
 Required:
 
-- `channel` (Map of String)
+- `channel` (Map of String) Map must contain two fields, `id` and `name`.
 - `topic` (String)
 
 Optional:

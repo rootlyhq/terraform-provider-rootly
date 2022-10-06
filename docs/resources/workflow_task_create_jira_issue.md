@@ -30,7 +30,7 @@ Manages workflow create_jira_issue task.
 
 Required:
 
-- `issue_type` (Map of String) The issue type id and display name.
+- `issue_type` (Map of String) Map must contain two fields, `id` and `name`. The issue type id and display name.
 - `project_key` (String) The project key.
 - `title` (String) The issue title.
 
@@ -41,8 +41,8 @@ Optional:
 - `description` (String) The issue description.
 - `due_date` (String) The due date.
 - `labels` (String) The issue labels.
-- `priority` (Map of String) The priority id and display name.
+- `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name.
 - `reporter_user_email` (String) The reporter user's email.
-- `status` (Map of String) The status id and display name.
+- `status` (Map of String) Map must contain two fields, `id` and `name`. The status id and display name.
 - `task_type` (String)
 - `update_payload` (String) Update payload. Can contain liquid markup and need to be valid JSON.

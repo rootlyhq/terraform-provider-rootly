@@ -20,7 +20,7 @@ description: |-
 
 - `color` (String)
 - `description` (String) The description of the severity
-- `severity` (String) The severity of the severity
+- `severity` (String) The severity of the severity. Value must be one of `critical`, `high`, `medium`, `low`.
 - `slug` (String) The slug of the severity
 
 ### Read-Only

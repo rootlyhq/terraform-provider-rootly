@@ -59,12 +59,12 @@ func resourceWorkflowTaskAutoAssignRolePagerduty() *schema.Resource {
 							Required: true,
 						},
 						"schedule": &schema.Schema{
-							Description: "",
+							Description: "Map must contain two fields, `id` and `name`. ",
 							Type: schema.TypeMap,
 							Optional: true,
 						},
 						"escalation_policy": &schema.Schema{
-							Description: "",
+							Description: "Map must contain two fields, `id` and `name`. ",
 							Type: schema.TypeMap,
 							Optional: true,
 						},

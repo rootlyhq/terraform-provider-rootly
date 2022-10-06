@@ -30,7 +30,7 @@ Manages workflow update_asana_task task.
 
 Required:
 
-- `completion` (Map of String)
+- `completion` (Map of String) Map must contain two fields, `id` and `name`.
 - `task_id` (String) The task id
 
 Optional:

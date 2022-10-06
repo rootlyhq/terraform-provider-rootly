@@ -64,17 +64,17 @@ func resourceWorkflowTaskCreateLinearIssue() *schema.Resource {
 							Optional: true,
 						},
 						"team": &schema.Schema{
-							Description: "The team id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The team id and display name.",
 							Type: schema.TypeMap,
 							Required: true,
 						},
 						"state": &schema.Schema{
-							Description: "The state id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The state id and display name.",
 							Type: schema.TypeMap,
 							Required: true,
 						},
 						"priority": &schema.Schema{
-							Description: "The priority id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The priority id and display name.",
 							Type: schema.TypeMap,
 							Optional: true,
 						},

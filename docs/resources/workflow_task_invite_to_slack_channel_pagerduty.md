@@ -31,8 +31,8 @@ Manages workflow invite_to_slack_channel_pagerduty task.
 Optional:
 
 - `channels` (Block List) (see [below for nested schema](#nestedblock--task_params--channels))
-- `escalation_policy` (Map of String)
-- `schedule` (Map of String)
+- `escalation_policy` (Map of String) Map must contain two fields, `id` and `name`.
+- `schedule` (Map of String) Map must contain two fields, `id` and `name`.
 - `task_type` (String)
 
 <a id="nestedblock--task_params--channels"></a>

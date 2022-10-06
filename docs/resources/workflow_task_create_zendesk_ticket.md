@@ -30,13 +30,13 @@ Manages workflow create_zendesk_ticket task.
 
 Required:
 
-- `kind` (String)
+- `kind` (String) . Value must be one of `problem`, `incident`, `question`, `task`.
 - `subject` (String) The ticket subject.
 
 Optional:
 
 - `comment` (String) The ticket comment.
-- `completion` (Map of String) The completion id and display name.
-- `priority` (Map of String) The priority id and display name.
+- `completion` (Map of String) Map must contain two fields, `id` and `name`. The completion id and display name.
+- `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name.
 - `tags` (String) The ticket tags.
 - `task_type` (String)

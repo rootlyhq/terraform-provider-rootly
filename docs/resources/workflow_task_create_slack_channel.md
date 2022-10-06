@@ -31,7 +31,7 @@ Manages workflow create_slack_channel task.
 Required:
 
 - `title` (String) Slack channel title
-- `workspace` (Map of String)
+- `workspace` (Map of String) Map must contain two fields, `id` and `name`.
 
 Optional:
 

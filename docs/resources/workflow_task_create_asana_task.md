@@ -30,10 +30,10 @@ Manages workflow create_asana_task task.
 
 Required:
 
-- `completion` (Map of String)
+- `completion` (Map of String) Map must contain two fields, `id` and `name`.
 - `projects` (Block List, Min: 1) (see [below for nested schema](#nestedblock--task_params--projects))
 - `title` (String) The task title
-- `workspace` (Map of String)
+- `workspace` (Map of String) Map must contain two fields, `id` and `name`.
 
 Optional:
 

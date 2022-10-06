@@ -57,7 +57,7 @@ func resourceIncidentRoleTask() *schema.Resource{
 				Required: false,
 				Optional: true,
 				ForceNew: false,
-				Description: "The priority of the incident task",
+				Description: "The priority of the incident task. Value must be one of `high`, `medium`, `low`.",
 			},
 			
 		},

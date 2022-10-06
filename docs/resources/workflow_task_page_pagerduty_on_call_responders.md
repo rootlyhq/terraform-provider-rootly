@@ -30,14 +30,14 @@ Manages workflow page_pagerduty_on_call_responders task.
 
 Required:
 
-- `service` (Map of String)
+- `service` (Map of String) Map must contain two fields, `id` and `name`.
 
 Optional:
 
 - `escalation_policies` (Block List) (see [below for nested schema](#nestedblock--task_params--escalation_policies))
 - `message` (String)
 - `task_type` (String)
-- `urgency` (String)
+- `urgency` (String) . Value must be one of `high`, `low`, `auto`.
 - `users` (Block List) (see [below for nested schema](#nestedblock--task_params--users))
 
 <a id="nestedblock--task_params--escalation_policies"></a>

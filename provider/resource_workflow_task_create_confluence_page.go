@@ -54,17 +54,17 @@ func resourceWorkflowTaskCreateConfluencePage() *schema.Resource {
 							}, false),
 						},
 						"space": &schema.Schema{
-							Description: "",
+							Description: "Map must contain two fields, `id` and `name`. ",
 							Type: schema.TypeMap,
 							Required: true,
 						},
 						"ancestor": &schema.Schema{
-							Description: "",
+							Description: "Map must contain two fields, `id` and `name`. ",
 							Type: schema.TypeMap,
 							Optional: true,
 						},
 						"template": &schema.Schema{
-							Description: "",
+							Description: "Map must contain two fields, `id` and `name`. ",
 							Type: schema.TypeMap,
 							Optional: true,
 						},

@@ -54,7 +54,7 @@ func resourceWorkflowTaskCreateNotionPage() *schema.Resource {
 							}, false),
 						},
 						"parent_page": &schema.Schema{
-							Description: "The parent page id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The parent page id and display name.",
 							Type: schema.TypeMap,
 							Required: true,
 						},

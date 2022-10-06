@@ -64,7 +64,7 @@ func resourceWorkflowTaskCreateGithubIssue() *schema.Resource {
 							Optional: true,
 						},
 						"repository": &schema.Schema{
-							Description: "",
+							Description: "Map must contain two fields, `id` and `name`. ",
 							Type: schema.TypeMap,
 							Required: true,
 						},

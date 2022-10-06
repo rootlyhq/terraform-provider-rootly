@@ -64,7 +64,7 @@ func resourceWorkflowTaskUpdatePagerdutyIncident() *schema.Resource {
 							Optional: true,
 						},
 						"status": &schema.Schema{
-							Description: "",
+							Description: ". Value must be one of `resolved`, `acknowledged`.",
 							Type: schema.TypeString,
 							Optional: true,
 							Default: "resolved",
@@ -84,7 +84,7 @@ func resourceWorkflowTaskUpdatePagerdutyIncident() *schema.Resource {
 							Optional: true,
 						},
 						"urgency": &schema.Schema{
-							Description: "Pagerduty incident urgency, selecting auto will let Rootly auto map our incident severity.",
+							Description: "Pagerduty incident urgency, selecting auto will let Rootly auto map our incident severity.. Value must be one of `high`, `low`, `auto`.",
 							Type: schema.TypeString,
 							Optional: true,
 							Default: "high",

@@ -20,7 +20,7 @@ description: |-
 
 - `description` (String) The description of incident task
 - `incident_role_id` (String)
-- `priority` (String) The priority of the incident task
+- `priority` (String) The priority of the incident task. Value must be one of `high`, `medium`, `low`.
 
 ### Read-Only
 

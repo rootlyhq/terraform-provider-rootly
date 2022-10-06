@@ -30,7 +30,7 @@ Manages workflow page_opsgenie_on_call_responders task.
 
 Optional:
 
-- `priority` (String)
+- `priority` (String) . Value must be one of `P1`, `P2`, `P3`, `P4`, `auto`.
 - `task_type` (String)
 - `teams` (Block List) (see [below for nested schema](#nestedblock--task_params--teams))
 - `users` (Block List) (see [below for nested schema](#nestedblock--task_params--users))

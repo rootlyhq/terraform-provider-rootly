@@ -31,7 +31,7 @@ Manages workflow auto_assign_role_victor_ops task.
 Required:
 
 - `incident_role_id` (String) The role id.
-- `schedule` (Map of String)
+- `schedule` (Map of String) Map must contain two fields, `id` and `name`.
 
 Optional:
 

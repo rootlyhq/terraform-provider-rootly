@@ -89,17 +89,17 @@ func resourceWorkflowTaskCreateJiraIssue() *schema.Resource {
 							Optional: true,
 						},
 						"issue_type": &schema.Schema{
-							Description: "The issue type id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The issue type id and display name.",
 							Type: schema.TypeMap,
 							Required: true,
 						},
 						"priority": &schema.Schema{
-							Description: "The priority id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The priority id and display name.",
 							Type: schema.TypeMap,
 							Optional: true,
 						},
 						"status": &schema.Schema{
-							Description: "The status id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The status id and display name.",
 							Type: schema.TypeMap,
 							Optional: true,
 						},

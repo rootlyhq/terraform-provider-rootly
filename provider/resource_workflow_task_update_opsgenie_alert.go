@@ -64,7 +64,7 @@ func resourceWorkflowTaskUpdateOpsgenieAlert() *schema.Resource {
 							Optional: true,
 						},
 						"priority": &schema.Schema{
-							Description: "",
+							Description: ". Value must be one of `P1`, `P2`, `P3`, `P4`, `auto`.",
 							Type: schema.TypeString,
 							Required: true,
 							ValidateFunc: validation.StringInSlice([]string{
@@ -76,7 +76,7 @@ func resourceWorkflowTaskUpdateOpsgenieAlert() *schema.Resource {
 							}, false),
 						},
 						"completion": &schema.Schema{
-							Description: "",
+							Description: "Map must contain two fields, `id` and `name`. ",
 							Type: schema.TypeMap,
 							Required: true,
 						},

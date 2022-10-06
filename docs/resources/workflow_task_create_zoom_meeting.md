@@ -35,7 +35,7 @@ Required:
 Optional:
 
 - `alternative_hosts` (List of String)
-- `auto_recording` (String)
+- `auto_recording` (String) . Value must be one of `none`, `local`, `cloud`.
 - `create_as_email` (String) The email to use if creating as email.
 - `password` (String) The meeting password
 - `post_to_incident_timeline` (Boolean)

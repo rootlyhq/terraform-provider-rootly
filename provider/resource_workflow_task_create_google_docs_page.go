@@ -64,12 +64,12 @@ func resourceWorkflowTaskCreateGoogleDocsPage() *schema.Resource {
 							Required: true,
 						},
 						"drive": &schema.Schema{
-							Description: "",
+							Description: "Map must contain two fields, `id` and `name`. ",
 							Type: schema.TypeMap,
 							Optional: true,
 						},
 						"parent_folder": &schema.Schema{
-							Description: "",
+							Description: "Map must contain two fields, `id` and `name`. ",
 							Type: schema.TypeMap,
 							Optional: true,
 						},

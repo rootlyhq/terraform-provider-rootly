@@ -31,7 +31,7 @@ Manages workflow snapshot_new_relic_graph task.
 Required:
 
 - `metric_query` (String)
-- `metric_type` (String)
+- `metric_type` (String) . Value must be one of `APDEX`, `AREA`, `BAR`, `BASELINE`, `BILLBOARD`, `BULLET`, `EVENT_FEED`, `FUNNEL`, `HEATMAP`, `HISTOGRAM`, `LINE`, `PIE`, `SCATTER`, `STACKED_HORIZONTAL_BAR`, `TABLE`, `VERTICAL_BAR`.
 
 Optional:
 

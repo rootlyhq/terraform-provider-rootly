@@ -30,13 +30,13 @@ Manages workflow create_confluence_page task.
 
 Required:
 
-- `space` (Map of String)
+- `space` (Map of String) Map must contain two fields, `id` and `name`.
 - `title` (String) The page title
 
 Optional:
 
-- `ancestor` (Map of String)
+- `ancestor` (Map of String) Map must contain two fields, `id` and `name`.
 - `content` (String) The page content
 - `post_mortem_template_id` (String) The post mortem template to use
 - `task_type` (String)
-- `template` (Map of String)
+- `template` (Map of String) Map must contain two fields, `id` and `name`.

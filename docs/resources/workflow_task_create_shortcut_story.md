@@ -30,9 +30,9 @@ Manages workflow create_shortcut_story task.
 
 Required:
 
-- `archivation` (Map of String) The archivation id and display name.
-- `kind` (String)
-- `project` (Map of String) The project id and display name.
+- `archivation` (Map of String) Map must contain two fields, `id` and `name`. The archivation id and display name.
+- `kind` (String) . Value must be one of `bug`, `chore`, `feature`.
+- `project` (Map of String) Map must contain two fields, `id` and `name`. The project id and display name.
 - `title` (String) The incident title
 
 Optional:
