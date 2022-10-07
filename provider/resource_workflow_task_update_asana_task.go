@@ -90,12 +90,14 @@ func resourceWorkflowTaskUpdateAsanaTaskCreate(ctx context.Context, d *schema.Re
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
+	position := d.Get("position").(int)
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	tflog.Trace(ctx, fmt.Sprintf("Creating workflow task: %s", workflowId))
 
 	s := &client.WorkflowTask{
 		WorkflowId: workflowId,
+		Position: position,
 		TaskParams: taskParams,
 	}
 
@@ -128,6 +130,7 @@ func resourceWorkflowTaskUpdateAsanaTaskRead(ctx context.Context, d *schema.Reso
 	}
 
 	d.Set("workflow_id", res.WorkflowId)
+	d.Set("position", res.Position)
 	tps := make([]interface{}, 1, 1)
 	tps[0] = res.TaskParams
 	d.Set("task_params", tps)
@@ -140,10 +143,12 @@ func resourceWorkflowTaskUpdateAsanaTaskUpdate(ctx context.Context, d *schema.Re
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
 	workflowId := d.Get("workflow_id").(string)
+	position := d.Get("position").(int)
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	s := &client.WorkflowTask{
 		WorkflowId: workflowId,
+		Position: position,
 		TaskParams: taskParams,
 	}
 

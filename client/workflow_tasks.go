@@ -8,6 +8,7 @@ import (
 type WorkflowTask struct {
 	ID          string `jsonapi:"primary,workflow_tasks"`
 	WorkflowId  string `jsonapi:"attr,workflow_id,omitempty"`
+	Position    int `jsonapi:"attr,position,omitempty"`
 	TaskParams  map[string]interface{} `jsonapi:"attr,task_params,omitempty"`
 }
 
