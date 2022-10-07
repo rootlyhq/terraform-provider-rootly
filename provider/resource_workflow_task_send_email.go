@@ -81,6 +81,16 @@ func resourceWorkflowTaskSendEmail() *schema.Resource {
 							Type: schema.TypeString,
 							Required: true,
 						},
+						"include_header": &schema.Schema{
+							Description: "",
+							Type: schema.TypeBool,
+							Optional: true,
+						},
+						"include_footer": &schema.Schema{
+							Description: "",
+							Type: schema.TypeBool,
+							Optional: true,
+						},
 						"custom_logo_url": &schema.Schema{
 							Description: "URL to your custom email logo",
 							Type: schema.TypeString,

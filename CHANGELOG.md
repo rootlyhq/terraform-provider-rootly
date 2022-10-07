@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.37] -- 2022-10-07
+
+- Add `include_header` and `include_footer` to `workflow_task_send_email`.
+- Add `content` attribute to `PostMortemTemplate`.
+
 ## [0.1.36] -- 2022-10-07
 
 - Fix missing position for workflow tasks.

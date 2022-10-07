@@ -6724,6 +6724,9 @@ type NewPlaybookTaskDataType string
 type NewPostMortemTemplate struct {
 	Data struct {
 		Attributes struct {
+			// The postmortem template. Liquid syntax is supported.
+			Content string `json:"content"`
+
 			// Default selected template when editing a postmortem
 			Default *bool `json:"default"`
 
@@ -7303,6 +7306,9 @@ type PlaybookTaskResponseDataType string
 
 // PostMortemTemplate defines model for post_mortem_template.
 type PostMortemTemplate struct {
+	// The postmortem template. Liquid syntax and markdown are supported.
+	Content *string `json:"content,omitempty"`
+
 	// Date of creation
 	CreatedAt string `json:"created_at"`
 
@@ -7320,6 +7326,9 @@ type PostMortemTemplate struct {
 type PostMortemTemplateList struct {
 	Data []struct {
 		Attributes struct {
+			// The postmortem template. Liquid syntax and markdown are supported.
+			Content *string `json:"content,omitempty"`
+
 			// Date of creation
 			CreatedAt string `json:"created_at"`
 
@@ -7353,6 +7362,9 @@ type PostMortemTemplateListDataType string
 type PostMortemTemplateResponse struct {
 	Data struct {
 		Attributes struct {
+			// The postmortem template. Liquid syntax and markdown are supported.
+			Content *string `json:"content,omitempty"`
+
 			// Date of creation
 			CreatedAt string `json:"created_at"`
 
@@ -7937,7 +7949,9 @@ type SendEmailTaskParams struct {
 	CustomLogoUrl *string `json:"custom_logo_url"`
 
 	// The from email address. Need to use SMTP integration if different than rootly.com.
-	From *string `json:"from"`
+	From          *string `json:"from"`
+	IncludeFooter *bool   `json:"include_footer,omitempty"`
+	IncludeHeader *bool   `json:"include_header,omitempty"`
 
 	// The preheader
 	Preheader *string `json:"preheader"`
@@ -9654,6 +9668,9 @@ type UpdatePlaybookTaskDataType string
 type UpdatePostMortemTemplate struct {
 	Data struct {
 		Attributes struct {
+			// The postmortem template. Liquid syntax is supported.
+			Content *string `json:"content,omitempty"`
+
 			// Default selected template when editing a postmortem
 			Default *bool `json:"default"`
 
