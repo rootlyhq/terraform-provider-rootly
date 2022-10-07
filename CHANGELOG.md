@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.36] -- 2022-10-07
+
+- Fix missing position for workflow tasks.
+- Display API errors for all failing resource requests.
+
 ## [0.1.35] -- 2022-10-06
 
 - Fix `workflow_task_send_slack_blocks` required parameters.
