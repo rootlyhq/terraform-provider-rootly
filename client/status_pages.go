@@ -71,7 +71,7 @@ func (c *Client) GetStatusPage(id string) (*StatusPage, error) {
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get status_page: %s", id)
+		return nil, errors.Errorf("Failed to make request to get status_page: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(StatusPage))
@@ -94,7 +94,7 @@ func (c *Client) UpdateStatusPage(id string, status_page *StatusPage) (*StatusPa
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update status_page: %s", id)
+		return nil, errors.Errorf("Failed to make request to update status_page: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(StatusPage))
@@ -113,7 +113,7 @@ func (c *Client) DeleteStatusPage(id string) error {
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete status_page: %s", id)
+		return errors.Errorf("Failed to make request to delete status_page: %s", err.Error())
 	}
 
 	return nil

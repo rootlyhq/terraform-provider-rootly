@@ -67,7 +67,7 @@ func (c *Client) GetSeverity(id string) (*Severity, error) {
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get severity: %s", id)
+		return nil, errors.Errorf("Failed to make request to get severity: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Severity))
@@ -90,7 +90,7 @@ func (c *Client) UpdateSeverity(id string, severity *Severity) (*Severity, error
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update severity: %s", id)
+		return nil, errors.Errorf("Failed to make request to update severity: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Severity))
@@ -109,7 +109,7 @@ func (c *Client) DeleteSeverity(id string) error {
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete severity: %s", id)
+		return errors.Errorf("Failed to make request to delete severity: %s", err.Error())
 	}
 
 	return nil

@@ -69,7 +69,7 @@ func (c *Client) GetStatusPageTemplate(id string) (*StatusPageTemplate, error) {
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get status_page_template: %s", id)
+		return nil, errors.Errorf("Failed to make request to get status_page_template: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(StatusPageTemplate))
@@ -92,7 +92,7 @@ func (c *Client) UpdateStatusPageTemplate(id string, status_page_template *Statu
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update status_page_template: %s", id)
+		return nil, errors.Errorf("Failed to make request to update status_page_template: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(StatusPageTemplate))
@@ -111,7 +111,7 @@ func (c *Client) DeleteStatusPageTemplate(id string) error {
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete status_page_template: %s", id)
+		return errors.Errorf("Failed to make request to delete status_page_template: %s", err.Error())
 	}
 
 	return nil

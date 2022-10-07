@@ -78,7 +78,7 @@ func (c *Client) GetWorkflow(id string) (*Workflow, error) {
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get workflow: %s", id)
+		return nil, errors.Errorf("Failed to make request to get workflow: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Workflow))
@@ -101,7 +101,7 @@ func (c *Client) UpdateWorkflow(id string, workflow *Workflow) (*Workflow, error
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update workflow: %s", id)
+		return nil, errors.Errorf("Failed to make request to update workflow: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Workflow))
@@ -120,7 +120,7 @@ func (c *Client) DeleteWorkflow(id string) error {
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete workflow: %s", id)
+		return errors.Errorf("Failed to make request to delete workflow: %s", err.Error())
 	}
 
 	return nil

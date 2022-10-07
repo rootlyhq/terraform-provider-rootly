@@ -71,7 +71,7 @@ func (c *Client) Get${nameCamel}(id string) (*${nameCamel}, error) {
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get ${name}: %s", id)
+		return nil, errors.Errorf("Failed to make request to get ${name}: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(${nameCamel}))
@@ -94,7 +94,7 @@ func (c *Client) Update${nameCamel}(id string, ${name} *${nameCamel}) (*${nameCa
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update ${name}: %s", id)
+		return nil, errors.Errorf("Failed to make request to update ${name}: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(${nameCamel}))
@@ -113,7 +113,7 @@ func (c *Client) Delete${nameCamel}(id string) error {
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete ${name}: %s", id)
+		return errors.Errorf("Failed to make request to delete ${name}: %s", err.Error())
 	}
 
 	return nil

@@ -69,7 +69,7 @@ func (c *Client) GetTeam(id string) (*Team, error) {
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get team: %s", id)
+		return nil, errors.Errorf("Failed to make request to get team: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Team))
@@ -92,7 +92,7 @@ func (c *Client) UpdateTeam(id string, team *Team) (*Team, error) {
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update team: %s", id)
+		return nil, errors.Errorf("Failed to make request to update team: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Team))
@@ -111,7 +111,7 @@ func (c *Client) DeleteTeam(id string) error {
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete team: %s", id)
+		return errors.Errorf("Failed to make request to delete team: %s", err.Error())
 	}
 
 	return nil

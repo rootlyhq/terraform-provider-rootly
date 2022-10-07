@@ -66,7 +66,7 @@ func (c *Client) GetIncidentType(id string) (*IncidentType, error) {
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get incident_type: %s", id)
+		return nil, errors.Errorf("Failed to make request to get incident_type: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentType))
@@ -89,7 +89,7 @@ func (c *Client) UpdateIncidentType(id string, incident_type *IncidentType) (*In
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update incident_type: %s", id)
+		return nil, errors.Errorf("Failed to make request to update incident_type: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentType))
@@ -108,7 +108,7 @@ func (c *Client) DeleteIncidentType(id string) error {
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete incident_type: %s", id)
+		return errors.Errorf("Failed to make request to delete incident_type: %s", err.Error())
 	}
 
 	return nil

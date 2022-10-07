@@ -65,7 +65,7 @@ func (c *Client) GetCause(id string) (*Cause, error) {
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get cause: %s", id)
+		return nil, errors.Errorf("Failed to make request to get cause: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Cause))
@@ -88,7 +88,7 @@ func (c *Client) UpdateCause(id string, cause *Cause) (*Cause, error) {
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update cause: %s", id)
+		return nil, errors.Errorf("Failed to make request to update cause: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Cause))
@@ -107,7 +107,7 @@ func (c *Client) DeleteCause(id string) error {
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete cause: %s", id)
+		return errors.Errorf("Failed to make request to delete cause: %s", err.Error())
 	}
 
 	return nil

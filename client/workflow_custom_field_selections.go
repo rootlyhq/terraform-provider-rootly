@@ -67,7 +67,7 @@ func (c *Client) GetWorkflowCustomFieldSelection(id string) (*WorkflowCustomFiel
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get workflow_custom_field_selection: %s", id)
+		return nil, errors.Errorf("Failed to make request to get workflow_custom_field_selection: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowCustomFieldSelection))
@@ -90,7 +90,7 @@ func (c *Client) UpdateWorkflowCustomFieldSelection(id string, workflow_custom_f
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update workflow_custom_field_selection: %s", id)
+		return nil, errors.Errorf("Failed to make request to update workflow_custom_field_selection: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowCustomFieldSelection))
@@ -109,7 +109,7 @@ func (c *Client) DeleteWorkflowCustomFieldSelection(id string) error {
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete workflow_custom_field_selection: %s", id)
+		return errors.Errorf("Failed to make request to delete workflow_custom_field_selection: %s", err.Error())
 	}
 
 	return nil

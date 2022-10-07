@@ -73,7 +73,7 @@ func (c *Client) GetFunctionality(id string) (*Functionality, error) {
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get functionality: %s", id)
+		return nil, errors.Errorf("Failed to make request to get functionality: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Functionality))
@@ -96,7 +96,7 @@ func (c *Client) UpdateFunctionality(id string, functionality *Functionality) (*
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update functionality: %s", id)
+		return nil, errors.Errorf("Failed to make request to update functionality: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Functionality))
@@ -115,7 +115,7 @@ func (c *Client) DeleteFunctionality(id string) error {
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete functionality: %s", id)
+		return errors.Errorf("Failed to make request to delete functionality: %s", err.Error())
 	}
 
 	return nil

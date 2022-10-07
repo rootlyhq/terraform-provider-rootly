@@ -66,7 +66,7 @@ func (c *Client) GetWorkflowGroup(id string) (*WorkflowGroup, error) {
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get workflow_group: %s", id)
+		return nil, errors.Errorf("Failed to make request to get workflow_group: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowGroup))
@@ -89,7 +89,7 @@ func (c *Client) UpdateWorkflowGroup(id string, workflow_group *WorkflowGroup) (
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update workflow_group: %s", id)
+		return nil, errors.Errorf("Failed to make request to update workflow_group: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowGroup))
@@ -108,7 +108,7 @@ func (c *Client) DeleteWorkflowGroup(id string) error {
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete workflow_group: %s", id)
+		return errors.Errorf("Failed to make request to delete workflow_group: %s", err.Error())
 	}
 
 	return nil

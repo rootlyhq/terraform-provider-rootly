@@ -80,7 +80,7 @@ func (c *Client) GetService(id string) (*Service, error) {
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get service: %s", id)
+		return nil, errors.Errorf("Failed to make request to get service: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Service))
@@ -103,7 +103,7 @@ func (c *Client) UpdateService(id string, service *Service) (*Service, error) {
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update service: %s", id)
+		return nil, errors.Errorf("Failed to make request to update service: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Service))
@@ -122,7 +122,7 @@ func (c *Client) DeleteService(id string) error {
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete service: %s", id)
+		return errors.Errorf("Failed to make request to delete service: %s", err.Error())
 	}
 
 	return nil

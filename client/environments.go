@@ -66,7 +66,7 @@ func (c *Client) GetEnvironment(id string) (*Environment, error) {
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get environment: %s", id)
+		return nil, errors.Errorf("Failed to make request to get environment: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Environment))
@@ -89,7 +89,7 @@ func (c *Client) UpdateEnvironment(id string, environment *Environment) (*Enviro
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update environment: %s", id)
+		return nil, errors.Errorf("Failed to make request to update environment: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Environment))
@@ -108,7 +108,7 @@ func (c *Client) DeleteEnvironment(id string) error {
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete environment: %s", id)
+		return errors.Errorf("Failed to make request to delete environment: %s", err.Error())
 	}
 
 	return nil

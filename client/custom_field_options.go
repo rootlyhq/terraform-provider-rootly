@@ -67,7 +67,7 @@ func (c *Client) GetCustomFieldOption(id string) (*CustomFieldOption, error) {
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get custom_field_option: %s", id)
+		return nil, errors.Errorf("Failed to make request to get custom_field_option: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(CustomFieldOption))
@@ -90,7 +90,7 @@ func (c *Client) UpdateCustomFieldOption(id string, custom_field_option *CustomF
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update custom_field_option: %s", id)
+		return nil, errors.Errorf("Failed to make request to update custom_field_option: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(CustomFieldOption))
@@ -109,7 +109,7 @@ func (c *Client) DeleteCustomFieldOption(id string) error {
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete custom_field_option: %s", id)
+		return errors.Errorf("Failed to make request to delete custom_field_option: %s", err.Error())
 	}
 
 	return nil

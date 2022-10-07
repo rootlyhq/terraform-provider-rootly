@@ -65,7 +65,7 @@ func (c *Client) GetPlaybook(id string) (*Playbook, error) {
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get playbook: %s", id)
+		return nil, errors.Errorf("Failed to make request to get playbook: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Playbook))
@@ -88,7 +88,7 @@ func (c *Client) UpdatePlaybook(id string, playbook *Playbook) (*Playbook, error
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update playbook: %s", id)
+		return nil, errors.Errorf("Failed to make request to update playbook: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Playbook))
@@ -107,7 +107,7 @@ func (c *Client) DeletePlaybook(id string) error {
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete playbook: %s", id)
+		return errors.Errorf("Failed to make request to delete playbook: %s", err.Error())
 	}
 
 	return nil

@@ -66,7 +66,7 @@ func (c *Client) GetIncidentRole(id string) (*IncidentRole, error) {
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get incident_role: %s", id)
+		return nil, errors.Errorf("Failed to make request to get incident_role: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentRole))
@@ -89,7 +89,7 @@ func (c *Client) UpdateIncidentRole(id string, incident_role *IncidentRole) (*In
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update incident_role: %s", id)
+		return nil, errors.Errorf("Failed to make request to update incident_role: %s", err.Error())
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentRole))
@@ -108,7 +108,7 @@ func (c *Client) DeleteIncidentRole(id string) error {
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete incident_role: %s", id)
+		return errors.Errorf("Failed to make request to delete incident_role: %s", err.Error())
 	}
 
 	return nil
