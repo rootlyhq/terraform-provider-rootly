@@ -264,6 +264,11 @@ const (
 	AddRole AddRoleTaskParamsTaskType = "add_role"
 )
 
+// Defines values for AddSlackBookmarkTaskParamsTaskType.
+const (
+	AddSlackBookmark AddSlackBookmarkTaskParamsTaskType = "add_slack_bookmark"
+)
+
 // Defines values for AddTeamTaskParamsTaskType.
 const (
 	AddTeam AddTeamTaskParamsTaskType = "add_team"
@@ -347,6 +352,11 @@ const (
 // Defines values for AutoAssignRoleOpsgenieTaskParamsTaskType.
 const (
 	AutoAssignRoleOpsgenie AutoAssignRoleOpsgenieTaskParamsTaskType = "auto_assign_role_opsgenie"
+)
+
+// Defines values for AutoAssignRolePagerdutyTaskParamsTaskType.
+const (
+	AutoAssignRolePagerduty AutoAssignRolePagerdutyTaskParamsTaskType = "auto_assign_role_pagerduty"
 )
 
 // Defines values for AutoAssignRoleVictorOpsTaskParamsTaskType.
@@ -880,6 +890,16 @@ const (
 	GetAlerts GetAlertsTaskParamsTaskType = "get_alerts"
 )
 
+// Defines values for GetGithubCommitsTaskParamsTaskType.
+const (
+	GetGithubCommits GetGithubCommitsTaskParamsTaskType = "get_github_commits"
+)
+
+// Defines values for GetGitlabCommitsTaskParamsTaskType.
+const (
+	GetGitlabCommits GetGitlabCommitsTaskParamsTaskType = "get_gitlab_commits"
+)
+
 // Defines values for GetPulsesTaskParamsTaskType.
 const (
 	GetPulses GetPulsesTaskParamsTaskType = "get_pulses"
@@ -1350,6 +1370,16 @@ const (
 	InviteToSlackChannelOpsgenie InviteToSlackChannelOpsgenieTaskParamsTaskType = "invite_to_slack_channel_opsgenie"
 )
 
+// Defines values for InviteToSlackChannelPagerdutyTaskParamsTaskType.
+const (
+	InviteToSlackChannelPagerduty InviteToSlackChannelPagerdutyTaskParamsTaskType = "invite_to_slack_channel_pagerduty"
+)
+
+// Defines values for InviteToSlackChannelTaskParamsTaskType.
+const (
+	InviteToSlackChannel InviteToSlackChannelTaskParamsTaskType = "invite_to_slack_channel"
+)
+
 // Defines values for InviteToSlackChannelVictorOpsTaskParamsTaskType.
 const (
 	InviteToSlackChannelVictorOps InviteToSlackChannelVictorOpsTaskParamsTaskType = "invite_to_slack_channel_victor_ops"
@@ -1698,6 +1728,11 @@ const (
 	PagePagerdutyOnCallRespondersTaskParamsUrgencyLow  PagePagerdutyOnCallRespondersTaskParamsUrgency = "low"
 )
 
+// Defines values for PageVictorOpsOnCallRespondersTaskParamsTaskType.
+const (
+	PageVictorOpsOnCallResponders PageVictorOpsOnCallRespondersTaskParamsTaskType = "page_victor_ops_on_call_responders"
+)
+
 // Defines values for PlaybookListDataType.
 const (
 	PlaybookListDataTypePlaybooks PlaybookListDataType = "playbooks"
@@ -1844,6 +1879,16 @@ const (
 // Defines values for SendEmailTaskParamsTaskType.
 const (
 	SendEmail SendEmailTaskParamsTaskType = "send_email"
+)
+
+// Defines values for SendSlackBlocksTaskParamsTaskType.
+const (
+	SendSlackBlocks SendSlackBlocksTaskParamsTaskType = "send_slack_blocks"
+)
+
+// Defines values for SendSlackMessageTaskParamsTaskType.
+const (
+	SendSlackMessage SendSlackMessageTaskParamsTaskType = "send_slack_message"
 )
 
 // Defines values for SendSmsTaskParamsTaskType.
@@ -2760,7 +2805,28 @@ type AddRoleTaskParams struct {
 type AddRoleTaskParamsTaskType string
 
 // AddSlackBookmarkTaskParams defines model for add_slack_bookmark_task_params.
-type AddSlackBookmarkTaskParams interface{}
+type AddSlackBookmarkTaskParams struct {
+	Channel struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"channel"`
+
+	// The bookmark emoji.
+	Emoji *string `json:"emoji,omitempty"`
+
+	// The bookmark link. Required if not a playbook bookmark.
+	Link *string `json:"link,omitempty"`
+
+	// The playbook id if bookmark is of an incident playbook.
+	PlaybookId *string                             `json:"playbook_id,omitempty"`
+	TaskType   *AddSlackBookmarkTaskParamsTaskType `json:"task_type,omitempty"`
+
+	// The bookmark title. Required if not a playbook bookmark.
+	Title *string `json:"title,omitempty"`
+}
+
+// AddSlackBookmarkTaskParamsTaskType defines model for AddSlackBookmarkTaskParams.TaskType.
+type AddSlackBookmarkTaskParamsTaskType string
 
 // AddTeamTaskParams defines model for add_team_task_params.
 type AddTeamTaskParams struct {
@@ -3258,7 +3324,23 @@ type AutoAssignRoleOpsgenieTaskParams struct {
 type AutoAssignRoleOpsgenieTaskParamsTaskType string
 
 // AutoAssignRolePagerdutyTaskParams defines model for auto_assign_role_pagerduty_task_params.
-type AutoAssignRolePagerdutyTaskParams interface{}
+type AutoAssignRolePagerdutyTaskParams struct {
+	EscalationPolicy *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"escalation_policy,omitempty"`
+
+	// The role id.
+	IncidentRoleId string `json:"incident_role_id"`
+	Schedule       *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"schedule,omitempty"`
+	TaskType *AutoAssignRolePagerdutyTaskParamsTaskType `json:"task_type,omitempty"`
+}
+
+// AutoAssignRolePagerdutyTaskParamsTaskType defines model for AutoAssignRolePagerdutyTaskParams.TaskType.
+type AutoAssignRolePagerdutyTaskParamsTaskType string
 
 // AutoAssignRoleVictorOpsTaskParams defines model for auto_assign_role_victor_ops_task_params.
 type AutoAssignRoleVictorOpsTaskParams struct {
@@ -4828,10 +4910,42 @@ type GetAlertsTaskParams struct {
 type GetAlertsTaskParamsTaskType string
 
 // GetGithubCommitsTaskParams defines model for get_github_commits_task_params.
-type GetGithubCommitsTaskParams interface{}
+type GetGithubCommitsTaskParams struct {
+	// The branch
+	Branch                string    `json:"branch"`
+	GithubRepositoryNames *[]string `json:"github_repository_names,omitempty"`
+
+	// How far back to fetch commits (in format '1 minute', '30 days', '3 months', etc.)
+	PastDuration        string `json:"past_duration"`
+	PostToSlackChannels *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"post_to_slack_channels,omitempty"`
+	ServiceIds *[]string                           `json:"service_ids,omitempty"`
+	TaskType   *GetGithubCommitsTaskParamsTaskType `json:"task_type,omitempty"`
+}
+
+// GetGithubCommitsTaskParamsTaskType defines model for GetGithubCommitsTaskParams.TaskType.
+type GetGithubCommitsTaskParamsTaskType string
 
 // GetGitlabCommitsTaskParams defines model for get_gitlab_commits_task_params.
-type GetGitlabCommitsTaskParams interface{}
+type GetGitlabCommitsTaskParams struct {
+	// The branch
+	Branch                string    `json:"branch"`
+	GitlabRepositoryNames *[]string `json:"gitlab_repository_names,omitempty"`
+
+	// How far back to fetch commits (in format '1 minute', '30 days', '3 months', etc.)
+	PastDuration        string `json:"past_duration"`
+	PostToSlackChannels *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"post_to_slack_channels,omitempty"`
+	ServiceIds *[]string                           `json:"service_ids,omitempty"`
+	TaskType   *GetGitlabCommitsTaskParamsTaskType `json:"task_type,omitempty"`
+}
+
+// GetGitlabCommitsTaskParamsTaskType defines model for GetGitlabCommitsTaskParams.TaskType.
+type GetGitlabCommitsTaskParamsTaskType string
 
 // GetPulsesTaskParams defines model for get_pulses_task_params.
 type GetPulsesTaskParams struct {
@@ -6148,10 +6262,44 @@ type InviteToSlackChannelOpsgenieTaskParams struct {
 type InviteToSlackChannelOpsgenieTaskParamsTaskType string
 
 // InviteToSlackChannelPagerdutyTaskParams defines model for invite_to_slack_channel_pagerduty_task_params.
-type InviteToSlackChannelPagerdutyTaskParams interface{}
+type InviteToSlackChannelPagerdutyTaskParams struct {
+	Channels *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"channels,omitempty"`
+	EscalationPolicy *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"escalation_policy,omitempty"`
+	Schedule *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"schedule,omitempty"`
+	TaskType *InviteToSlackChannelPagerdutyTaskParamsTaskType `json:"task_type,omitempty"`
+}
+
+// InviteToSlackChannelPagerdutyTaskParamsTaskType defines model for InviteToSlackChannelPagerdutyTaskParams.TaskType.
+type InviteToSlackChannelPagerdutyTaskParamsTaskType string
 
 // InviteToSlackChannelTaskParams defines model for invite_to_slack_channel_task_params.
-type InviteToSlackChannelTaskParams interface{}
+type InviteToSlackChannelTaskParams struct {
+	Channel struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"channel"`
+	SlackUserGroups *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"slack_user_groups,omitempty"`
+	SlackUsers *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"slack_users,omitempty"`
+	TaskType *InviteToSlackChannelTaskParamsTaskType `json:"task_type,omitempty"`
+}
+
+// InviteToSlackChannelTaskParamsTaskType defines model for InviteToSlackChannelTaskParams.TaskType.
+type InviteToSlackChannelTaskParamsTaskType string
 
 // InviteToSlackChannelVictorOpsTaskParams defines model for invite_to_slack_channel_victor_ops_task_params.
 type InviteToSlackChannelVictorOpsTaskParams struct {
@@ -7142,7 +7290,20 @@ type PagePagerdutyOnCallRespondersTaskParamsTaskType string
 type PagePagerdutyOnCallRespondersTaskParamsUrgency string
 
 // PageVictorOpsOnCallRespondersTaskParams defines model for page_victor_ops_on_call_responders_task_params.
-type PageVictorOpsOnCallRespondersTaskParams interface{}
+type PageVictorOpsOnCallRespondersTaskParams struct {
+	EscalationPolicies *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"escalation_policies,omitempty"`
+	TaskType *PageVictorOpsOnCallRespondersTaskParamsTaskType `json:"task_type,omitempty"`
+	Users    *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"users,omitempty"`
+}
+
+// PageVictorOpsOnCallRespondersTaskParamsTaskType defines model for PageVictorOpsOnCallRespondersTaskParams.TaskType.
+type PageVictorOpsOnCallRespondersTaskParamsTaskType string
 
 // Playbook defines model for playbook.
 type Playbook struct {
@@ -7966,10 +8127,52 @@ type SendEmailTaskParams struct {
 type SendEmailTaskParamsTaskType string
 
 // SendSlackBlocksTaskParams defines model for send_slack_blocks_task_params.
-type SendSlackBlocksTaskParams interface{}
+type SendSlackBlocksTaskParams struct {
+	// Blocks JSON.
+	Blocks   string `json:"blocks"`
+	Channels *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"channels,omitempty"`
+	Message         *string `json:"message,omitempty"`
+	SendAsEphemeral *bool   `json:"send_as_ephemeral,omitempty"`
+	SlackUserGroups *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"slack_user_groups,omitempty"`
+	SlackUsers *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"slack_users,omitempty"`
+	TaskType *SendSlackBlocksTaskParamsTaskType `json:"task_type,omitempty"`
+}
+
+// SendSlackBlocksTaskParamsTaskType defines model for SendSlackBlocksTaskParams.TaskType.
+type SendSlackBlocksTaskParamsTaskType string
 
 // SendSlackMessageTaskParams defines model for send_slack_message_task_params.
-type SendSlackMessageTaskParams interface{}
+type SendSlackMessageTaskParams struct {
+	Channels *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"channels,omitempty"`
+	SendAsEphemeral *bool `json:"send_as_ephemeral,omitempty"`
+	SlackUserGroups *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"slack_user_groups,omitempty"`
+	SlackUsers *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"slack_users,omitempty"`
+	TaskType *SendSlackMessageTaskParamsTaskType `json:"task_type,omitempty"`
+
+	// The message text.
+	Text string `json:"text"`
+}
+
+// SendSlackMessageTaskParamsTaskType defines model for SendSlackMessageTaskParams.TaskType.
+type SendSlackMessageTaskParamsTaskType string
 
 // SendSmsTaskParams defines model for send_sms_task_params.
 type SendSmsTaskParams struct {
