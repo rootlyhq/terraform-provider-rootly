@@ -85,7 +85,7 @@ func resourceStatusPage() *schema.Resource{
 				Required: false,
 				Optional: true,
 				ForceNew: false,
-				Description: "Show uptime over x days",
+				Description: "Show uptime over x days. Value must be one of `30`, `60`, `90`.",
 			},
 			
 

@@ -214,11 +214,22 @@ function schemaFields(resourceSchema, requiredFields, taskParamsSchema) {
 	}).join('\n')
 }
 
+function annotatedDescription(schema) {
+	const description = (schema.description || "").replace(/"/g, '\\"')
+	if (schema.enum) {
+		return `${description}. Value must be one of ${schema.enum.map((val) => `\`${val}\``).join(", ")}.`
+	}
+	if (schema.type === "object" && schema.properties.id && schema.properties.name) {
+		return `Map must contain two fields, \`id\` and \`name\`. ${description}`
+	}
+	return description
+}
+
 function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
 	const schema = resourceSchema.properties[name]
 	const optional = (requiredFields || []).indexOf(name) === -1 || schema.enum ? "true" : "false"
 	const required = (requiredFields || []).indexOf(name) === -1 || schema.enum ? "false" : "true"
-	const description = (schema.description || '').replace(/"/g, '\\"')
+	const description = annotatedDescription(schema)
 	switch (schema.type) {
 		case 'string':
 			return `

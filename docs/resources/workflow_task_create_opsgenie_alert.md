@@ -48,10 +48,7 @@ Optional:
 Required:
 
 - `name` (String)
-
-Read-Only:
-
-- `id` (String) The ID of this resource.
+- `id` (String)
 
 
 <a id="nestedblock--task_params--schedules"></a>
@@ -60,10 +57,7 @@ Read-Only:
 Required:
 
 - `name` (String)
-
-Read-Only:
-
-- `id` (String) The ID of this resource.
+- `id` (String)
 
 
 <a id="nestedblock--task_params--teams"></a>
@@ -72,10 +66,7 @@ Read-Only:
 Required:
 
 - `name` (String)
-
-Read-Only:
-
-- `id` (String) The ID of this resource.
+- `id` (String)
 
 
 <a id="nestedblock--task_params--users"></a>
@@ -84,7 +75,4 @@ Read-Only:
 Required:
 
 - `name` (String)
-
-Read-Only:
-
-- `id` (String) The ID of this resource.
+- `id` (String)

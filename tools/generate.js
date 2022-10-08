@@ -1,7 +1,7 @@
 const fs = require("fs")
 const path = require('path')
 const swaggerPath = process.argv[2]
-const inflect = require('inflect')
+const inflect = require('./inflect')
 const providerTpl = require('./generate-provider-tpl')
 const clientTpl = require('./generate-client-tpl')
 const dataSourceTpl = require('./generate-data-source-tpl')
@@ -15,8 +15,10 @@ const excluded = [
 	"dashboard",
 	"dashboard_panel",
 	"workflow_task",
+	"workflow_run",
 	"incident",
 	"incident_post_mortem",
+	"post_mortem_template",
 	"incident_action_item",
 	"incident_event",
 	"incident_feedback",

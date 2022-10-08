@@ -46,10 +46,7 @@ description: |-
 Required:
 
 - `name` (String)
-
-Read-Only:
-
-- `id` (String) The ID of this resource.
+- `id` (String)
 
 
 <a id="nestedblock--slack_channels"></a>
@@ -58,7 +55,4 @@ Read-Only:
 Required:
 
 - `name` (String)
-
-Read-Only:
-
-- `id` (String) The ID of this resource.
+- `id` (String)

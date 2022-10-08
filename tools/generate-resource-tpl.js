@@ -1,4 +1,4 @@
-const inflect = require('inflect');
+const inflect = require('./inflect');
 
 function includeTools(resourceSchema) {
 	for (var key in resourceSchema.properties) {
@@ -201,7 +201,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 	const schema = resourceSchema.properties[name]
 	const optional = (requiredFields || []).indexOf(name) === -1 || schema.enum ? "true" : "false"
 	const required = (requiredFields || []).indexOf(name) === -1 || schema.enum ? "false" : "true"
-	const description = (schema.description || '').replace(/"/g, '\\"')
+	const description = annotatedDescription(schema)
 	const forceNew = name === pathIdField ? "true" : "false"
 	switch (schema.type) {
 		case 'string':
@@ -212,7 +212,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 				Required: ${required},
 				Optional: ${optional},
 				ForceNew: ${forceNew},
-				Description: "${annotatedDescription(schema)}",
+				Description: "${description}",
 			},
 			`
 		case 'integer':
@@ -310,7 +310,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 				Computed: ${optional},
 				Required: ${required},
 				Optional: ${optional},
-				Description: "${annotatedDescription(schema)}",
+				Description: "${description}",
 			},
 			`
 	}

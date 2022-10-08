@@ -43,10 +43,7 @@ Optional:
 Required:
 
 - `name` (String)
-
-Read-Only:
-
-- `id` (String) The ID of this resource.
+- `id` (String)
 
 
 <a id="nestedblock--task_params--post_to_slack_channels"></a>
@@ -55,7 +52,4 @@ Read-Only:
 Required:
 
 - `name` (String)
-
-Read-Only:
-
-- `id` (String) The ID of this resource.
+- `id` (String)

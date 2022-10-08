@@ -1,4 +1,4 @@
-const inflect = require('inflect')
+const inflect = require('./inflect')
 
 module.exports = (resources, taskResources, dataSources) => {
 return `package provider

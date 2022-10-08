@@ -1,4 +1,4 @@
-const inflect = require('inflect');
+const inflect = require('./inflect');
 
 module.exports = (name, resourceSchema, filterParameters, pathIdField) => {
 	const namePlural = inflect.pluralize(name)

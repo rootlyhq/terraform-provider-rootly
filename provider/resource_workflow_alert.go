@@ -124,7 +124,7 @@ func resourceWorkflowAlert() *schema.Resource{
 				Default: "alert",
 				Required: false,
 				Optional: true,
-				Description: "",
+				Description: ". Value must be one of `alert`.",
 			},
 			
 
@@ -145,7 +145,7 @@ func resourceWorkflowAlert() *schema.Resource{
 				Default: "ALL",
 				Required: false,
 				Optional: true,
-				Description: "",
+				Description: ". Value must be one of `ALL`, `ANY`, `NONE`.",
 			},
 			
 
@@ -154,7 +154,7 @@ func resourceWorkflowAlert() *schema.Resource{
 				Default: "IS",
 				Required: false,
 				Optional: true,
-				Description: "",
+				Description: ". Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
 			},
 			
 
@@ -184,7 +184,7 @@ func resourceWorkflowAlert() *schema.Resource{
 				Default: "IS",
 				Required: false,
 				Optional: true,
-				Description: "",
+				Description: ". Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
 			},
 			
 
@@ -214,7 +214,7 @@ func resourceWorkflowAlert() *schema.Resource{
 				Default: "IS",
 				Required: false,
 				Optional: true,
-				Description: "",
+				Description: ". Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
 			},
 			
 

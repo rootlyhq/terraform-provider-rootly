@@ -19,6 +19,7 @@ docs:
 	go run github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
 	cp docs/index.md README.md
 	rm ./docs/data-sources/*s.md
+	find ./docs/resources/*.md -type f -exec node tools/clean-docs.js {} \;
 	find ./docs/resources/workflow_task_*.md -type f -print0 | xargs -0 sed -i '' 's/subcategory:$$/subcategory: Workflow Tasks/g'
 	find ./docs/resources/workflow_*.md -type f -print0 | xargs -0 sed -i '' 's/subcategory:$$/subcategory: Workflows/g'
 
