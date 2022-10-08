@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.38] -- 2022-10-08
+
+- Improve documentation.
+
 ## [0.1.37] -- 2022-10-07
 
 - Add `include_header` and `include_footer` to `workflow_task_send_email`.
