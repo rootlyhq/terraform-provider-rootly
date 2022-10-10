@@ -16,9 +16,9 @@ const excluded = [
 	"dashboard_panel",
 	"workflow_task",
 	"workflow_run",
+	"post_mortem_template",
 	"incident",
 	"incident_post_mortem",
-	"post_mortem_template",
 	"incident_action_item",
 	"incident_event",
 	"incident_feedback",
@@ -27,6 +27,8 @@ const excluded = [
 	"alert",
 	"playbook_task",
 ]
+
+console.log(`Excluding resource from generation:`, excluded)
 
 const resources = Object.keys(swagger.components.schemas).filter((name) => {
 	return excluded.indexOf(name) === -1 && collectionPathSchema(name)

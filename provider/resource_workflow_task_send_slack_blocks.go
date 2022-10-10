@@ -4,6 +4,7 @@ package provider
 
 import (
 	"context"
+	"strings"
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -62,6 +63,12 @@ func resourceWorkflowTaskSendSlackBlocks() *schema.Resource {
 							Description: "Blocks JSON.",
 							Type: schema.TypeString,
 							Required: true,
+							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+								if strings.Join(strings.Fields(old), "") == strings.Join(strings.Fields(new), "") {
+									return true
+								}
+								return false
+							},
 						},
 						"channels": &schema.Schema{
 							Description: "",

@@ -1,16 +1,21 @@
 const fs = require("fs")
 const path = require('path')
 
+const excluded = [
+	"send_slack_blocks"
+]
+
+console.log(`Excluding task from generation:`, excluded)
+
 module.exports = (swagger) => {
 	const schema = swagger.components.schemas
 	return Object.keys(schema).filter((key) => key.match(/_task_params/)).map((key) => {
 		const task_name = key.replace("_task_params", "")
 		const task_schema = schema[key]
 		const task_name_camel = task_name.split("_").map((p) => `${p[0].toUpperCase()}${p.slice(1)}`).join('')
-		fs.writeFileSync(`./provider/resource_workflow_task_${task_name}.go`, genResourceFile(task_name, task_schema))
-		//console.log(`generated provider/resource_workflow_task_${task_name}.go`)
-		//fs.writeFileSync(`./provider/resource_workflow_task_${task_name}_test.go`, genResourceTestFile(task_name, task_schema))
-		//console.log(`generated provider/resource_workflow_task_${task_name}_test.go`)
+		if (!excluded.filter((k) => key.match(k)).length) {
+			fs.writeFileSync(`./provider/resource_workflow_task_${task_name}.go`, genResourceFile(task_name, task_schema))
+		}
 		return task_name
 	})
 }

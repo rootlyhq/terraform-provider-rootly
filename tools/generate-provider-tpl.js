@@ -67,6 +67,7 @@ ${resources.map((name) => {
 }).join('\n')}
 				"rootly_dashboard": resourceDashboard(),
 				"rootly_dashboard_panel": resourceDashboardPanel(),
+				"rootly_postmortem_template": resourcePostmortemTemplate(),
 				"rootly_workflow_incident": resourceWorkflowIncident(),
 				"rootly_workflow_action_item": resourceWorkflowActionItem(),
 				"rootly_workflow_alert": resourceWorkflowAlert(),
