@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.39] -- 2022-10-09
+
+- Add `rootly_post_mortem_template`
+- Fix diff for `rootly_workflow_task_send_slack_blocks`
+
 ## [0.1.38] -- 2022-10-08
 
 - Improve documentation.
