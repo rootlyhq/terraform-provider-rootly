@@ -64,9 +64,15 @@ func resourceWorkflowTaskCreateSlackChannel() *schema.Resource {
 							Required: true,
 						},
 						"private": &schema.Schema{
-							Description: "",
-							Type: schema.TypeBool,
+							Description: ". Value must be one of `auto`, `true`, `false`.",
+							Type: schema.TypeString,
 							Optional: true,
+							Default: "auto",
+							ValidateFunc: validation.StringInSlice([]string{
+								"auto",
+"true",
+"false",
+							}, false),
 						},
 					},
 				},

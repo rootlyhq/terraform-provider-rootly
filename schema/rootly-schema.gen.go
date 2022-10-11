@@ -708,6 +708,13 @@ const (
 	CreateShortcutTask CreateShortcutTaskTaskParamsTaskType = "create_shortcut_task"
 )
 
+// Defines values for CreateSlackChannelTaskParamsPrivate.
+const (
+	CreateSlackChannelTaskParamsPrivateAuto  CreateSlackChannelTaskParamsPrivate = "auto"
+	CreateSlackChannelTaskParamsPrivateFalse CreateSlackChannelTaskParamsPrivate = "false"
+	CreateSlackChannelTaskParamsPrivateTrue  CreateSlackChannelTaskParamsPrivate = "true"
+)
+
 // Defines values for CreateSlackChannelTaskParamsTaskType.
 const (
 	CreateSlackChannel CreateSlackChannelTaskParamsTaskType = "create_slack_channel"
@@ -2288,11 +2295,11 @@ const (
 
 // Defines values for UpdateOpsgenieAlertTaskParamsPriority.
 const (
-	UpdateOpsgenieAlertTaskParamsPriorityAuto UpdateOpsgenieAlertTaskParamsPriority = "auto"
-	UpdateOpsgenieAlertTaskParamsPriorityP1   UpdateOpsgenieAlertTaskParamsPriority = "P1"
-	UpdateOpsgenieAlertTaskParamsPriorityP2   UpdateOpsgenieAlertTaskParamsPriority = "P2"
-	UpdateOpsgenieAlertTaskParamsPriorityP3   UpdateOpsgenieAlertTaskParamsPriority = "P3"
-	UpdateOpsgenieAlertTaskParamsPriorityP4   UpdateOpsgenieAlertTaskParamsPriority = "P4"
+	Auto UpdateOpsgenieAlertTaskParamsPriority = "auto"
+	P1   UpdateOpsgenieAlertTaskParamsPriority = "P1"
+	P2   UpdateOpsgenieAlertTaskParamsPriority = "P2"
+	P3   UpdateOpsgenieAlertTaskParamsPriority = "P3"
+	P4   UpdateOpsgenieAlertTaskParamsPriority = "P4"
 )
 
 // Defines values for UpdateOpsgenieAlertTaskParamsTaskType.
@@ -4108,7 +4115,7 @@ type CreateShortcutTaskTaskParamsTaskType string
 
 // CreateSlackChannelTaskParams defines model for create_slack_channel_task_params.
 type CreateSlackChannelTaskParams struct {
-	Private  *bool                                 `json:"private,omitempty"`
+	Private  *CreateSlackChannelTaskParamsPrivate  `json:"private,omitempty"`
 	TaskType *CreateSlackChannelTaskParamsTaskType `json:"task_type,omitempty"`
 
 	// Slack channel title
@@ -4118,6 +4125,9 @@ type CreateSlackChannelTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"workspace"`
 }
+
+// CreateSlackChannelTaskParamsPrivate defines model for CreateSlackChannelTaskParams.Private.
+type CreateSlackChannelTaskParamsPrivate string
 
 // CreateSlackChannelTaskParamsTaskType defines model for CreateSlackChannelTaskParams.TaskType.
 type CreateSlackChannelTaskParamsTaskType string
