@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.40] -- 2022-10-10
+
+- Convert `rootly_workflow_task_create_slack_channel` private field to `text` and supports `auto` options.
+
 ## [0.1.39] -- 2022-10-09
 
 - Add `rootly_post_mortem_template`
