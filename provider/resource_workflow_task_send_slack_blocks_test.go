@@ -36,7 +36,7 @@ resource "rootly_workflow_incident" "foo" {
 resource "rootly_workflow_task_send_slack_blocks" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		blocks = "[{\"foo\":        \"bar\"}]"
+		blocks = "[{\"foo\":                   \"bar\"}]"
 	}
 }
 `

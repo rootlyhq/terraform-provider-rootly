@@ -4,8 +4,9 @@ package provider
 
 import (
 	"context"
-	"strings"
 	"fmt"
+	"testing"
+  "github.com/stretchr/testify/assert"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -64,10 +65,9 @@ func resourceWorkflowTaskSendSlackBlocks() *schema.Resource {
 							Type: schema.TypeString,
 							Required: true,
 							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-								if strings.Join(strings.Fields(old), "") == strings.Join(strings.Fields(new), "") {
-									return true
-								}
-								return false
+								t := &testing.T{}
+								assert := assert.New(t)
+								return assert.JSONEq(old, new)
 							},
 						},
 						"channels": &schema.Schema{
