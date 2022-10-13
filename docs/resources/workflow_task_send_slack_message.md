@@ -34,6 +34,7 @@ Required:
 
 Optional:
 
+- `actionables` (List of String)
 - `channels` (Block List) (see [below for nested schema](#nestedblock--task_params--channels))
 - `send_as_ephemeral` (Boolean)
 - `slack_user_groups` (Block List) (see [below for nested schema](#nestedblock--task_params--slack_user_groups))

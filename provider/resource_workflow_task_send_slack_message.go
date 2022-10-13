@@ -105,6 +105,14 @@ func resourceWorkflowTaskSendSlackMessage() *schema.Resource {
 								},
 							},
 						},
+						"actionables": &schema.Schema{
+							Description: "",
+							Type: schema.TypeList,
+							Optional: true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+						},
 						"send_as_ephemeral": &schema.Schema{
 							Description: "",
 							Type: schema.TypeBool,

@@ -1893,6 +1893,21 @@ const (
 	SendSlackBlocks SendSlackBlocksTaskParamsTaskType = "send_slack_blocks"
 )
 
+// Defines values for SendSlackMessageTaskParamsActionables.
+const (
+	SendSlackMessageTaskParamsActionablesAddOpsgenieResponders  SendSlackMessageTaskParamsActionables = "add_opsgenie_responders"
+	SendSlackMessageTaskParamsActionablesAddPagerdutyResponders SendSlackMessageTaskParamsActionables = "add_pagerduty_responders"
+	SendSlackMessageTaskParamsActionablesAddVictorOpsResponders SendSlackMessageTaskParamsActionables = "add_victor_ops_responders"
+	SendSlackMessageTaskParamsActionablesAllCommands            SendSlackMessageTaskParamsActionables = "all_commands"
+	SendSlackMessageTaskParamsActionablesLeaveFeedback          SendSlackMessageTaskParamsActionables = "leave_feedback"
+	SendSlackMessageTaskParamsActionablesManageActionItems      SendSlackMessageTaskParamsActionables = "manage_action_items"
+	SendSlackMessageTaskParamsActionablesManageCustomFields     SendSlackMessageTaskParamsActionables = "manage_custom_fields"
+	SendSlackMessageTaskParamsActionablesManageIncidentRoles    SendSlackMessageTaskParamsActionables = "manage_incident_roles"
+	SendSlackMessageTaskParamsActionablesUpdateIncident         SendSlackMessageTaskParamsActionables = "update_incident"
+	SendSlackMessageTaskParamsActionablesUpdateSummary          SendSlackMessageTaskParamsActionables = "update_summary"
+	SendSlackMessageTaskParamsActionablesViewTasks              SendSlackMessageTaskParamsActionables = "view_tasks"
+)
+
 // Defines values for SendSlackMessageTaskParamsTaskType.
 const (
 	SendSlackMessage SendSlackMessageTaskParamsTaskType = "send_slack_message"
@@ -8165,7 +8180,8 @@ type SendSlackBlocksTaskParamsTaskType string
 
 // SendSlackMessageTaskParams defines model for send_slack_message_task_params.
 type SendSlackMessageTaskParams struct {
-	Channels *[]struct {
+	Actionables *[]SendSlackMessageTaskParamsActionables `json:"actionables,omitempty"`
+	Channels    *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"channels,omitempty"`
@@ -8183,6 +8199,9 @@ type SendSlackMessageTaskParams struct {
 	// The message text.
 	Text string `json:"text"`
 }
+
+// SendSlackMessageTaskParamsActionables defines model for SendSlackMessageTaskParams.Actionables.
+type SendSlackMessageTaskParamsActionables string
 
 // SendSlackMessageTaskParamsTaskType defines model for SendSlackMessageTaskParams.TaskType.
 type SendSlackMessageTaskParamsTaskType string
