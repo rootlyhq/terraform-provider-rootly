@@ -31,12 +31,13 @@ Manages workflow update_incident task.
 Optional:
 
 - `acknowledged_at` (String)
+- `attribute_to_query_by` (String) . Value must be one of `id`, `slug`, `sequential_id`, `pagerduty_incident_id`, `opsgenie_incident_id`, `victor_ops_incident_id`.
 - `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON.
 - `detected_at` (String)
 - `environment_ids` (List of String)
 - `functionality_ids` (List of String)
 - `group_ids` (List of String)
-- `incident_id` (String) The incident id to update
+- `incident_id` (String) The incident id to update or id of any attribute on the incident
 - `incident_type_ids` (List of String)
 - `mitigated_at` (String)
 - `private` (Boolean)

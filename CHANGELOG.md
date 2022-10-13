@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.45] -- 2022-10-13
+
+- Add `attribute_to_query_by` to `rootly_workflow_task_update_incident`.
+
 ## [0.1.44] -- 2022-10-13
 
 - Add enum values in docs for array fields.

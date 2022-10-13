@@ -57,8 +57,22 @@ func resourceWorkflowTaskUpdateIncident() *schema.Resource {
 								"update_incident",
 							}, false),
 						},
+						"attribute_to_query_by": &schema.Schema{
+							Description: ". Value must be one of `id`, `slug`, `sequential_id`, `pagerduty_incident_id`, `opsgenie_incident_id`, `victor_ops_incident_id`.",
+							Type: schema.TypeString,
+							Optional: true,
+							Default: "id",
+							ValidateFunc: validation.StringInSlice([]string{
+								"id",
+"slug",
+"sequential_id",
+"pagerduty_incident_id",
+"opsgenie_incident_id",
+"victor_ops_incident_id",
+							}, false),
+						},
 						"incident_id": &schema.Schema{
-							Description: "The incident id to update",
+							Description: "The incident id to update or id of any attribute on the incident",
 							Type: schema.TypeString,
 							Optional: true,
 						},

@@ -2288,6 +2288,16 @@ const (
 	UpdateIncidentStatusPageEventDataTypeIncidentStatusPageEvents UpdateIncidentStatusPageEventDataType = "incident_status_page_events"
 )
 
+// Defines values for UpdateIncidentTaskParamsAttributeToQueryBy.
+const (
+	Id                  UpdateIncidentTaskParamsAttributeToQueryBy = "id"
+	OpsgenieIncidentId  UpdateIncidentTaskParamsAttributeToQueryBy = "opsgenie_incident_id"
+	PagerdutyIncidentId UpdateIncidentTaskParamsAttributeToQueryBy = "pagerduty_incident_id"
+	SequentialId        UpdateIncidentTaskParamsAttributeToQueryBy = "sequential_id"
+	Slug                UpdateIncidentTaskParamsAttributeToQueryBy = "slug"
+	VictorOpsIncidentId UpdateIncidentTaskParamsAttributeToQueryBy = "victor_ops_incident_id"
+)
+
 // Defines values for UpdateIncidentTaskParamsTaskType.
 const (
 	UpdateIncidentTaskParamsTaskTypeUpdateIncident UpdateIncidentTaskParamsTaskType = "update_incident"
@@ -9672,7 +9682,8 @@ type UpdateIncidentStatusPageEventDataType string
 
 // UpdateIncidentTaskParams defines model for update_incident_task_params.
 type UpdateIncidentTaskParams struct {
-	AcknowledgedAt *string `json:"acknowledged_at"`
+	AcknowledgedAt     *string                                     `json:"acknowledged_at"`
+	AttributeToQueryBy *UpdateIncidentTaskParamsAttributeToQueryBy `json:"attribute_to_query_by,omitempty"`
 
 	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
 	CustomFieldsMapping *string   `json:"custom_fields_mapping"`
@@ -9681,7 +9692,7 @@ type UpdateIncidentTaskParams struct {
 	FunctionalityIds    *[]string `json:"functionality_ids"`
 	GroupIds            *[]string `json:"group_ids"`
 
-	// The incident id to update
+	// The incident id to update or id of any attribute on the incident
 	IncidentId      *string   `json:"incident_id,omitempty"`
 	IncidentTypeIds *[]string `json:"incident_type_ids"`
 	MitigatedAt     *string   `json:"mitigated_at"`
@@ -9699,6 +9710,9 @@ type UpdateIncidentTaskParams struct {
 	// The incident title
 	Title *string `json:"title"`
 }
+
+// UpdateIncidentTaskParamsAttributeToQueryBy defines model for UpdateIncidentTaskParams.AttributeToQueryBy.
+type UpdateIncidentTaskParamsAttributeToQueryBy string
 
 // UpdateIncidentTaskParamsTaskType defines model for UpdateIncidentTaskParams.TaskType.
 type UpdateIncidentTaskParamsTaskType string
