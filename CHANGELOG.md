@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.43] -- 2022-10-13
+
+- Add `actionables` to `send_slack_message_task`.
+
 ## [0.1.42] -- 2022-10-13
 
 - Ignore whitespace and keyorder when diffing `custom_fields_mapping` JSON fields.
