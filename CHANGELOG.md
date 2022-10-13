@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.44] -- 2022-10-13
+
+- Add enum values in docs for array fields.
+
 ## [0.1.43] -- 2022-10-13
 
 - Add `actionables` to `send_slack_message_task`.

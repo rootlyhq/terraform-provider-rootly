@@ -193,6 +193,9 @@ function annotatedDescription(schema) {
 	if (schema.enum) {
 		return `${description}. Value must be one of ${schema.enum.map((val) => `\`${val}\``).join(", ")}.`
 	}
+	if (schema.type === "array" && schema.items && schema.items.enum) {
+		return `${description}. Value must be one of ${schema.items.enum.map((val) => `\`${val}\``).join(", ")}.`
+	}
 	if (schema.type === "object" && schema.properties.id && schema.properties.name) {
 		return `Map must contain two fields, \`id\` and \`name\`. ${description}`
 	}
