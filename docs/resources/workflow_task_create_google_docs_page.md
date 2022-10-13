@@ -40,3 +40,4 @@ Optional:
 - `permissions` (String) Page permissions JSON.
 - `post_mortem_template_id` (String) Post mortem template to use when creating page, if desired.
 - `task_type` (String)
+- `template_id` (String) The Google Doc file ID to use as a template.

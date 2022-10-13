@@ -5,6 +5,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -75,6 +76,11 @@ func resourceWorkflowTaskCreateGoogleDocsPage() *schema.Resource {
 						},
 						"content": &schema.Schema{
 							Description: "The page content",
+							Type: schema.TypeString,
+							Optional: true,
+						},
+						"template_id": &schema.Schema{
+							Description: "The Google Doc file ID to use as a template.",
 							Type: schema.TypeString,
 							Optional: true,
 						},

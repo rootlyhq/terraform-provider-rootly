@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.42] -- 2022-10-13
+
+- Ignore whitespace and keyorder when diffing `custom_fields_mapping` JSON fields.
+
 ## [0.1.41] -- 2022-10-12
 
 - Whitespace and order agnostic diff for `rootly_workflow_task_send_slack_blocks` JSON.

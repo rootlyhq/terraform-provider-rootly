@@ -3718,6 +3718,9 @@ type CreateGoogleDocsPageTaskParams struct {
 	PostMortemTemplateId *string                                 `json:"post_mortem_template_id,omitempty"`
 	TaskType             *CreateGoogleDocsPageTaskParamsTaskType `json:"task_type,omitempty"`
 
+	// The Google Doc file ID to use as a template.
+	TemplateId *string `json:"template_id,omitempty"`
+
 	// The page title
 	Title string `json:"title"`
 }

@@ -5,6 +5,10 @@ package provider
 import (
 	"context"
 	"fmt"
+	
+	"testing"
+  "github.com/stretchr/testify/assert"
+	
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -112,6 +116,11 @@ func resourceWorkflowTaskCreateJiraSubtask() *schema.Resource {
 							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON.",
 							Type: schema.TypeString,
 							Optional: true,
+							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+								t := &testing.T{}
+								assert := assert.New(t)
+								return assert.JSONEq(old, new)
+							},
 							Default: "{}",
 						},
 						"update_payload": &schema.Schema{
