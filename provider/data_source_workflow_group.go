@@ -50,16 +50,22 @@ func dataSourceWorkflowGroupRead(ctx context.Context, d *schema.ResourceData, me
 	params.PageSize = &page_size
 
 	
-				name := d.Get("name").(string)
-				params.FilterName = &name
+				if value, ok := d.GetOkExists("name"); ok {
+					name := value.(string)
+					params.FilterName = &name
+				}
 			
 
-				expanded := d.Get("expanded").(bool)
-				params.FilterExpanded = &expanded
+				if value, ok := d.GetOkExists("expanded"); ok {
+					expanded := value.(bool)
+					params.FilterExpanded = &expanded
+				}
 			
 
-				position := d.Get("position").(int)
-				params.FilterPosition = &position
+				if value, ok := d.GetOkExists("position"); ok {
+					position := value.(int)
+					params.FilterPosition = &position
+				}
 			
 
 	items, err := c.ListWorkflowGroups(params)

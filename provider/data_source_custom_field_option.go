@@ -43,12 +43,16 @@ func dataSourceCustomFieldOptionRead(ctx context.Context, d *schema.ResourceData
 	params.PageSize = &page_size
 
 	
-				value := d.Get("value").(string)
-				params.FilterValue = &value
+				if value, ok := d.GetOkExists("value"); ok {
+					value := value.(string)
+					params.FilterValue = &value
+				}
 			
 
-				color := d.Get("color").(string)
-				params.FilterColor = &color
+				if value, ok := d.GetOkExists("color"); ok {
+					color := value.(string)
+					params.FilterColor = &color
+				}
 			
 
 	custom_field_id := strconv.Itoa(d.Get("custom_field_id").(int))

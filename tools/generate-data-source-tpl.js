@@ -85,8 +85,10 @@ function setFilterFields(name, resourceSchema, filterParameters) {
 		const fieldSchema = resourceSchema.properties[filterField]
 		if (fieldSchema) {
 			return `
-				${filterField} := d.Get("${filterField}").(${jsonapiToGoType(fieldSchema.type)})
-				params.${filterCamelize(paramSchema.name)} = &${filterField}
+				if value, ok := d.GetOkExists("${filterField}"); ok {
+					${filterField} := value.(${jsonapiToGoType(fieldSchema.type)})
+					params.${filterCamelize(paramSchema.name)} = &${filterField}
+				}
 			`
 		} else if (paramSchema.name.match(/(lt|gt)\]/)) {
 			const rangeKey = filterField.split('_').pop()

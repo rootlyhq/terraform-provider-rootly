@@ -50,12 +50,16 @@ func dataSourceFunctionalityRead(ctx context.Context, d *schema.ResourceData, me
 	params.PageSize = &page_size
 
 	
-				name := d.Get("name").(string)
-				params.FilterName = &name
+				if value, ok := d.GetOkExists("name"); ok {
+					name := value.(string)
+					params.FilterName = &name
+				}
 			
 
-				slug := d.Get("slug").(string)
-				params.FilterSlug = &slug
+				if value, ok := d.GetOkExists("slug"); ok {
+					slug := value.(string)
+					params.FilterSlug = &slug
+				}
 			
 
 				created_at_gt := d.Get("created_at").(map[string]interface{})

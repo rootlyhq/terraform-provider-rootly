@@ -64,20 +64,28 @@ func dataSourceCustomFieldRead(ctx context.Context, d *schema.ResourceData, meta
 	params.PageSize = &page_size
 
 	
-				slug := d.Get("slug").(string)
-				params.FilterSlug = &slug
+				if value, ok := d.GetOkExists("slug"); ok {
+					slug := value.(string)
+					params.FilterSlug = &slug
+				}
 			
 
-				label := d.Get("label").(string)
-				params.FilterLabel = &label
+				if value, ok := d.GetOkExists("label"); ok {
+					label := value.(string)
+					params.FilterLabel = &label
+				}
 			
 
-				kind := d.Get("kind").(string)
-				params.FilterKind = &kind
+				if value, ok := d.GetOkExists("kind"); ok {
+					kind := value.(string)
+					params.FilterKind = &kind
+				}
 			
 
-				enabled := d.Get("enabled").(bool)
-				params.FilterEnabled = &enabled
+				if value, ok := d.GetOkExists("enabled"); ok {
+					enabled := value.(bool)
+					params.FilterEnabled = &enabled
+				}
 			
 
 				created_at_gt := d.Get("created_at").(map[string]interface{})

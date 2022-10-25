@@ -57,16 +57,22 @@ func dataSourceServiceRead(ctx context.Context, d *schema.ResourceData, meta int
 	params.PageSize = &page_size
 
 	
-				name := d.Get("name").(string)
-				params.FilterName = &name
+				if value, ok := d.GetOkExists("name"); ok {
+					name := value.(string)
+					params.FilterName = &name
+				}
 			
 
-				slug := d.Get("slug").(string)
-				params.FilterSlug = &slug
+				if value, ok := d.GetOkExists("slug"); ok {
+					slug := value.(string)
+					params.FilterSlug = &slug
+				}
 			
 
-				backstage_id := d.Get("backstage_id").(string)
-				params.FilterBackstageId = &backstage_id
+				if value, ok := d.GetOkExists("backstage_id"); ok {
+					backstage_id := value.(string)
+					params.FilterBackstageId = &backstage_id
+				}
 			
 
 				created_at_gt := d.Get("created_at").(map[string]interface{})
