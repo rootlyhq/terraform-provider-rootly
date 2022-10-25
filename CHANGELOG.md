@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.46] -- 2022-10-25
+
+- Make all data source attributes optional.
+
 ## [0.1.45] -- 2022-10-13
 
 - Add `attribute_to_query_by` to `rootly_workflow_task_update_incident`.
