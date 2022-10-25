@@ -10623,6 +10623,9 @@ type WorkflowGroup struct {
 
 	// The position of the workflow group
 	Position float32 `json:"position"`
+
+	// The slug of the workflow group.
+	Slug *string `json:"slug,omitempty"`
 }
 
 // The kind of the workflow group.
@@ -10643,6 +10646,9 @@ type WorkflowGroupList struct {
 
 			// The position of the workflow group
 			Position float32 `json:"position"`
+
+			// The slug of the workflow group.
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 
 		// Unique ID of the workflow group
@@ -10679,6 +10685,9 @@ type WorkflowGroupResponse struct {
 
 			// The position of the workflow group
 			Position float32 `json:"position"`
+
+			// The slug of the workflow group.
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 
 		// Unique ID of the workflow group
@@ -11312,6 +11321,8 @@ type ListWorkflowGroupsParams struct {
 	PageNumber     *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize       *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 	FilterName     *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterSlug     *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterKind     *string `form:"filter[kind],omitempty" json:"filter[kind],omitempty"`
 	FilterExpanded *bool   `form:"filter[expanded],omitempty" json:"filter[expanded],omitempty"`
 	FilterPosition *int    `form:"filter[position],omitempty" json:"filter[position],omitempty"`
 }
@@ -21921,6 +21932,38 @@ func NewListWorkflowGroupsRequest(server string, params *ListWorkflowGroupsParam
 	if params.FilterName != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[name]", runtime.ParamLocationQuery, *params.FilterName); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterSlug != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[slug]", runtime.ParamLocationQuery, *params.FilterSlug); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterKind != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[kind]", runtime.ParamLocationQuery, *params.FilterKind); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 			return nil, err

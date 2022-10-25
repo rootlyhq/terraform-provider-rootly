@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.47] -- 2022-10-25
+
+- Add `slug` attribute to `workflow_groups`.
+
 ## [0.1.46] -- 2022-10-25
 
 - Make all data source attributes optional.

@@ -41,6 +41,16 @@ func resourceWorkflowGroup() *schema.Resource{
 			},
 			
 
+			"slug": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The slug of the workflow group.",
+			},
+			
+
 			"expanded": &schema.Schema{
 				Type: schema.TypeBool,
 				Computed: true,
@@ -75,6 +85,9 @@ func resourceWorkflowGroupCreate(ctx context.Context, d *schema.ResourceData, me
 			}
     if value, ok := d.GetOkExists("name"); ok {
 				s.Name = value.(string)
+			}
+    if value, ok := d.GetOkExists("slug"); ok {
+				s.Slug = value.(string)
 			}
     if value, ok := d.GetOkExists("expanded"); ok {
 				s.Expanded = tools.Bool(value.(bool))
@@ -113,6 +126,7 @@ func resourceWorkflowGroupRead(ctx context.Context, d *schema.ResourceData, meta
 
 	d.Set("kind", item.Kind)
   d.Set("name", item.Name)
+  d.Set("slug", item.Slug)
   d.Set("expanded", item.Expanded)
   d.Set("position", item.Position)
 
@@ -130,6 +144,9 @@ func resourceWorkflowGroupUpdate(ctx context.Context, d *schema.ResourceData, me
 			}
     if d.HasChange("name") {
 				s.Name = d.Get("name").(string)
+			}
+    if d.HasChange("slug") {
+				s.Slug = d.Get("slug").(string)
 			}
     if d.HasChange("expanded") {
 				s.Expanded = tools.Bool(d.Get("expanded").(bool))

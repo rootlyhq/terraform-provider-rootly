@@ -21,6 +21,7 @@ description: |-
 - `expanded` (Boolean) Whether the group is expanded or collapsed.
 - `kind` (String) The kind of the workflow group.. Value must be one of `simple`, `incident`, `post_mortem`, `action_item`, `pulse`, `alert`.
 - `position` (Number) The position of the workflow group
+- `slug` (String) The slug of the workflow group.
 
 ### Read-Only
 

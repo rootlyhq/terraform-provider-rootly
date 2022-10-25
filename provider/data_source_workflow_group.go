@@ -18,7 +18,21 @@ func dataSourceWorkflowGroup() *schema.Resource{
 				Computed: true,
 			},
 			
+			"kind": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Optional: true,
+			},
+			
+
 			"name": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Optional: true,
+			},
+			
+
+			"slug": &schema.Schema{
 				Type: schema.TypeString,
 				Computed: true,
 				Optional: true,
@@ -53,6 +67,18 @@ func dataSourceWorkflowGroupRead(ctx context.Context, d *schema.ResourceData, me
 				if value, ok := d.GetOkExists("name"); ok {
 					name := value.(string)
 					params.FilterName = &name
+				}
+			
+
+				if value, ok := d.GetOkExists("slug"); ok {
+					slug := value.(string)
+					params.FilterSlug = &slug
+				}
+			
+
+				if value, ok := d.GetOkExists("kind"); ok {
+					kind := value.(string)
+					params.FilterKind = &kind
 				}
 			
 
