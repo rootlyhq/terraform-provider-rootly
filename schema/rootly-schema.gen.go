@@ -882,6 +882,273 @@ const (
 	EnvironmentResponseDataTypeEnvironments EnvironmentResponseDataType = "environments"
 )
 
+// Defines values for FormFieldInputKind.
+const (
+	FormFieldInputKindCheckbox    FormFieldInputKind = "checkbox"
+	FormFieldInputKindDate        FormFieldInputKind = "date"
+	FormFieldInputKindDatetime    FormFieldInputKind = "datetime"
+	FormFieldInputKindMultiSelect FormFieldInputKind = "multi_select"
+	FormFieldInputKindSelect      FormFieldInputKind = "select"
+	FormFieldInputKindTags        FormFieldInputKind = "tags"
+	FormFieldInputKindText        FormFieldInputKind = "text"
+	FormFieldInputKindTextarea    FormFieldInputKind = "textarea"
+	FormFieldInputKindUsers       FormFieldInputKind = "users"
+)
+
+// Defines values for FormFieldKind.
+const (
+	FormFieldKindAttachAlerts                FormFieldKind = "attach_alerts"
+	FormFieldKindCustom                      FormFieldKind = "custom"
+	FormFieldKindEnvironments                FormFieldKind = "environments"
+	FormFieldKindFunctionalities             FormFieldKind = "functionalities"
+	FormFieldKindLabels                      FormFieldKind = "labels"
+	FormFieldKindManualStartingDatetimeField FormFieldKind = "manual_starting_datetime_field"
+	FormFieldKindMarkAsBackfilled            FormFieldKind = "mark_as_backfilled"
+	FormFieldKindMarkAsTest                  FormFieldKind = "mark_as_test"
+	FormFieldKindNotifyEmails                FormFieldKind = "notify_emails"
+	FormFieldKindServices                    FormFieldKind = "services"
+	FormFieldKindSeverity                    FormFieldKind = "severity"
+	FormFieldKindShowOngoingIncidents        FormFieldKind = "show_ongoing_incidents"
+	FormFieldKindSummary                     FormFieldKind = "summary"
+	FormFieldKindTeams                       FormFieldKind = "teams"
+	FormFieldKindTitle                       FormFieldKind = "title"
+	FormFieldKindTriggerManualWorkflows      FormFieldKind = "trigger_manual_workflows"
+	FormFieldKindTypes                       FormFieldKind = "types"
+	FormFieldKindVisibility                  FormFieldKind = "visibility"
+)
+
+// Defines values for FormFieldRequired.
+const (
+	FormFieldRequiredSlackIncidentMitigationForm   FormFieldRequired = "slack_incident_mitigation_form"
+	FormFieldRequiredSlackIncidentResolutionForm   FormFieldRequired = "slack_incident_resolution_form"
+	FormFieldRequiredSlackNewIncidentForm          FormFieldRequired = "slack_new_incident_form"
+	FormFieldRequiredSlackUpdateIncidentForm       FormFieldRequired = "slack_update_incident_form"
+	FormFieldRequiredSlackUpdateIncidentStatusForm FormFieldRequired = "slack_update_incident_status_form"
+	FormFieldRequiredWebIncidentMitigationForm     FormFieldRequired = "web_incident_mitigation_form"
+	FormFieldRequiredWebIncidentPostMortemForm     FormFieldRequired = "web_incident_post_mortem_form"
+	FormFieldRequiredWebIncidentResolutionForm     FormFieldRequired = "web_incident_resolution_form"
+	FormFieldRequiredWebNewIncidentForm            FormFieldRequired = "web_new_incident_form"
+	FormFieldRequiredWebUpdateIncidentForm         FormFieldRequired = "web_update_incident_form"
+)
+
+// Defines values for FormFieldShown.
+const (
+	FormFieldShownIncidentPostMortem            FormFieldShown = "incident_post_mortem"
+	FormFieldShownSlackIncidentMitigationForm   FormFieldShown = "slack_incident_mitigation_form"
+	FormFieldShownSlackIncidentResolutionForm   FormFieldShown = "slack_incident_resolution_form"
+	FormFieldShownSlackNewIncidentForm          FormFieldShown = "slack_new_incident_form"
+	FormFieldShownSlackUpdateIncidentForm       FormFieldShown = "slack_update_incident_form"
+	FormFieldShownSlackUpdateIncidentStatusForm FormFieldShown = "slack_update_incident_status_form"
+	FormFieldShownWebIncidentMitigationForm     FormFieldShown = "web_incident_mitigation_form"
+	FormFieldShownWebIncidentPostMortemForm     FormFieldShown = "web_incident_post_mortem_form"
+	FormFieldShownWebIncidentResolutionForm     FormFieldShown = "web_incident_resolution_form"
+	FormFieldShownWebNewIncidentForm            FormFieldShown = "web_new_incident_form"
+	FormFieldShownWebUpdateIncidentForm         FormFieldShown = "web_update_incident_form"
+)
+
+// Defines values for FormFieldListDataAttributesInputKind.
+const (
+	FormFieldListDataAttributesInputKindCheckbox    FormFieldListDataAttributesInputKind = "checkbox"
+	FormFieldListDataAttributesInputKindDate        FormFieldListDataAttributesInputKind = "date"
+	FormFieldListDataAttributesInputKindDatetime    FormFieldListDataAttributesInputKind = "datetime"
+	FormFieldListDataAttributesInputKindMultiSelect FormFieldListDataAttributesInputKind = "multi_select"
+	FormFieldListDataAttributesInputKindSelect      FormFieldListDataAttributesInputKind = "select"
+	FormFieldListDataAttributesInputKindTags        FormFieldListDataAttributesInputKind = "tags"
+	FormFieldListDataAttributesInputKindText        FormFieldListDataAttributesInputKind = "text"
+	FormFieldListDataAttributesInputKindTextarea    FormFieldListDataAttributesInputKind = "textarea"
+	FormFieldListDataAttributesInputKindUsers       FormFieldListDataAttributesInputKind = "users"
+)
+
+// Defines values for FormFieldListDataAttributesKind.
+const (
+	FormFieldListDataAttributesKindAttachAlerts                FormFieldListDataAttributesKind = "attach_alerts"
+	FormFieldListDataAttributesKindCustom                      FormFieldListDataAttributesKind = "custom"
+	FormFieldListDataAttributesKindEnvironments                FormFieldListDataAttributesKind = "environments"
+	FormFieldListDataAttributesKindFunctionalities             FormFieldListDataAttributesKind = "functionalities"
+	FormFieldListDataAttributesKindLabels                      FormFieldListDataAttributesKind = "labels"
+	FormFieldListDataAttributesKindManualStartingDatetimeField FormFieldListDataAttributesKind = "manual_starting_datetime_field"
+	FormFieldListDataAttributesKindMarkAsBackfilled            FormFieldListDataAttributesKind = "mark_as_backfilled"
+	FormFieldListDataAttributesKindMarkAsTest                  FormFieldListDataAttributesKind = "mark_as_test"
+	FormFieldListDataAttributesKindNotifyEmails                FormFieldListDataAttributesKind = "notify_emails"
+	FormFieldListDataAttributesKindServices                    FormFieldListDataAttributesKind = "services"
+	FormFieldListDataAttributesKindSeverity                    FormFieldListDataAttributesKind = "severity"
+	FormFieldListDataAttributesKindShowOngoingIncidents        FormFieldListDataAttributesKind = "show_ongoing_incidents"
+	FormFieldListDataAttributesKindSummary                     FormFieldListDataAttributesKind = "summary"
+	FormFieldListDataAttributesKindTeams                       FormFieldListDataAttributesKind = "teams"
+	FormFieldListDataAttributesKindTitle                       FormFieldListDataAttributesKind = "title"
+	FormFieldListDataAttributesKindTriggerManualWorkflows      FormFieldListDataAttributesKind = "trigger_manual_workflows"
+	FormFieldListDataAttributesKindTypes                       FormFieldListDataAttributesKind = "types"
+	FormFieldListDataAttributesKindVisibility                  FormFieldListDataAttributesKind = "visibility"
+)
+
+// Defines values for FormFieldListDataAttributesRequired.
+const (
+	FormFieldListDataAttributesRequiredSlackIncidentMitigationForm   FormFieldListDataAttributesRequired = "slack_incident_mitigation_form"
+	FormFieldListDataAttributesRequiredSlackIncidentResolutionForm   FormFieldListDataAttributesRequired = "slack_incident_resolution_form"
+	FormFieldListDataAttributesRequiredSlackNewIncidentForm          FormFieldListDataAttributesRequired = "slack_new_incident_form"
+	FormFieldListDataAttributesRequiredSlackUpdateIncidentForm       FormFieldListDataAttributesRequired = "slack_update_incident_form"
+	FormFieldListDataAttributesRequiredSlackUpdateIncidentStatusForm FormFieldListDataAttributesRequired = "slack_update_incident_status_form"
+	FormFieldListDataAttributesRequiredWebIncidentMitigationForm     FormFieldListDataAttributesRequired = "web_incident_mitigation_form"
+	FormFieldListDataAttributesRequiredWebIncidentPostMortemForm     FormFieldListDataAttributesRequired = "web_incident_post_mortem_form"
+	FormFieldListDataAttributesRequiredWebIncidentResolutionForm     FormFieldListDataAttributesRequired = "web_incident_resolution_form"
+	FormFieldListDataAttributesRequiredWebNewIncidentForm            FormFieldListDataAttributesRequired = "web_new_incident_form"
+	FormFieldListDataAttributesRequiredWebUpdateIncidentForm         FormFieldListDataAttributesRequired = "web_update_incident_form"
+)
+
+// Defines values for FormFieldListDataAttributesShown.
+const (
+	FormFieldListDataAttributesShownIncidentPostMortem            FormFieldListDataAttributesShown = "incident_post_mortem"
+	FormFieldListDataAttributesShownSlackIncidentMitigationForm   FormFieldListDataAttributesShown = "slack_incident_mitigation_form"
+	FormFieldListDataAttributesShownSlackIncidentResolutionForm   FormFieldListDataAttributesShown = "slack_incident_resolution_form"
+	FormFieldListDataAttributesShownSlackNewIncidentForm          FormFieldListDataAttributesShown = "slack_new_incident_form"
+	FormFieldListDataAttributesShownSlackUpdateIncidentForm       FormFieldListDataAttributesShown = "slack_update_incident_form"
+	FormFieldListDataAttributesShownSlackUpdateIncidentStatusForm FormFieldListDataAttributesShown = "slack_update_incident_status_form"
+	FormFieldListDataAttributesShownWebIncidentMitigationForm     FormFieldListDataAttributesShown = "web_incident_mitigation_form"
+	FormFieldListDataAttributesShownWebIncidentPostMortemForm     FormFieldListDataAttributesShown = "web_incident_post_mortem_form"
+	FormFieldListDataAttributesShownWebIncidentResolutionForm     FormFieldListDataAttributesShown = "web_incident_resolution_form"
+	FormFieldListDataAttributesShownWebNewIncidentForm            FormFieldListDataAttributesShown = "web_new_incident_form"
+	FormFieldListDataAttributesShownWebUpdateIncidentForm         FormFieldListDataAttributesShown = "web_update_incident_form"
+)
+
+// Defines values for FormFieldListDataType.
+const (
+	FormFieldListDataTypeFormFields FormFieldListDataType = "form_fields"
+)
+
+// Defines values for FormFieldOptionListDataType.
+const (
+	FormFieldOptionListDataTypeFormFieldOptions FormFieldOptionListDataType = "form_field_options"
+)
+
+// Defines values for FormFieldOptionResponseDataType.
+const (
+	FormFieldOptionResponseDataTypeFormFieldOptions FormFieldOptionResponseDataType = "form_field_options"
+)
+
+// Defines values for FormFieldPositionForm.
+const (
+	FormFieldPositionFormIncidentPostMortem            FormFieldPositionForm = "incident_post_mortem"
+	FormFieldPositionFormSlackIncidentMitigationForm   FormFieldPositionForm = "slack_incident_mitigation_form"
+	FormFieldPositionFormSlackIncidentResolutionForm   FormFieldPositionForm = "slack_incident_resolution_form"
+	FormFieldPositionFormSlackNewIncidentForm          FormFieldPositionForm = "slack_new_incident_form"
+	FormFieldPositionFormSlackUpdateIncidentForm       FormFieldPositionForm = "slack_update_incident_form"
+	FormFieldPositionFormSlackUpdateIncidentStatusForm FormFieldPositionForm = "slack_update_incident_status_form"
+	FormFieldPositionFormWebIncidentMitigationForm     FormFieldPositionForm = "web_incident_mitigation_form"
+	FormFieldPositionFormWebIncidentPostMortemForm     FormFieldPositionForm = "web_incident_post_mortem_form"
+	FormFieldPositionFormWebIncidentResolutionForm     FormFieldPositionForm = "web_incident_resolution_form"
+	FormFieldPositionFormWebNewIncidentForm            FormFieldPositionForm = "web_new_incident_form"
+	FormFieldPositionFormWebUpdateIncidentForm         FormFieldPositionForm = "web_update_incident_form"
+)
+
+// Defines values for FormFieldPositionListDataAttributesForm.
+const (
+	FormFieldPositionListDataAttributesFormIncidentPostMortem            FormFieldPositionListDataAttributesForm = "incident_post_mortem"
+	FormFieldPositionListDataAttributesFormSlackIncidentMitigationForm   FormFieldPositionListDataAttributesForm = "slack_incident_mitigation_form"
+	FormFieldPositionListDataAttributesFormSlackIncidentResolutionForm   FormFieldPositionListDataAttributesForm = "slack_incident_resolution_form"
+	FormFieldPositionListDataAttributesFormSlackNewIncidentForm          FormFieldPositionListDataAttributesForm = "slack_new_incident_form"
+	FormFieldPositionListDataAttributesFormSlackUpdateIncidentForm       FormFieldPositionListDataAttributesForm = "slack_update_incident_form"
+	FormFieldPositionListDataAttributesFormSlackUpdateIncidentStatusForm FormFieldPositionListDataAttributesForm = "slack_update_incident_status_form"
+	FormFieldPositionListDataAttributesFormWebIncidentMitigationForm     FormFieldPositionListDataAttributesForm = "web_incident_mitigation_form"
+	FormFieldPositionListDataAttributesFormWebIncidentPostMortemForm     FormFieldPositionListDataAttributesForm = "web_incident_post_mortem_form"
+	FormFieldPositionListDataAttributesFormWebIncidentResolutionForm     FormFieldPositionListDataAttributesForm = "web_incident_resolution_form"
+	FormFieldPositionListDataAttributesFormWebNewIncidentForm            FormFieldPositionListDataAttributesForm = "web_new_incident_form"
+	FormFieldPositionListDataAttributesFormWebUpdateIncidentForm         FormFieldPositionListDataAttributesForm = "web_update_incident_form"
+)
+
+// Defines values for FormFieldPositionListDataType.
+const (
+	FormFieldPositionListDataTypeFormFieldPositions FormFieldPositionListDataType = "form_field_positions"
+)
+
+// Defines values for FormFieldPositionResponseDataAttributesForm.
+const (
+	FormFieldPositionResponseDataAttributesFormIncidentPostMortem            FormFieldPositionResponseDataAttributesForm = "incident_post_mortem"
+	FormFieldPositionResponseDataAttributesFormSlackIncidentMitigationForm   FormFieldPositionResponseDataAttributesForm = "slack_incident_mitigation_form"
+	FormFieldPositionResponseDataAttributesFormSlackIncidentResolutionForm   FormFieldPositionResponseDataAttributesForm = "slack_incident_resolution_form"
+	FormFieldPositionResponseDataAttributesFormSlackNewIncidentForm          FormFieldPositionResponseDataAttributesForm = "slack_new_incident_form"
+	FormFieldPositionResponseDataAttributesFormSlackUpdateIncidentForm       FormFieldPositionResponseDataAttributesForm = "slack_update_incident_form"
+	FormFieldPositionResponseDataAttributesFormSlackUpdateIncidentStatusForm FormFieldPositionResponseDataAttributesForm = "slack_update_incident_status_form"
+	FormFieldPositionResponseDataAttributesFormWebIncidentMitigationForm     FormFieldPositionResponseDataAttributesForm = "web_incident_mitigation_form"
+	FormFieldPositionResponseDataAttributesFormWebIncidentPostMortemForm     FormFieldPositionResponseDataAttributesForm = "web_incident_post_mortem_form"
+	FormFieldPositionResponseDataAttributesFormWebIncidentResolutionForm     FormFieldPositionResponseDataAttributesForm = "web_incident_resolution_form"
+	FormFieldPositionResponseDataAttributesFormWebNewIncidentForm            FormFieldPositionResponseDataAttributesForm = "web_new_incident_form"
+	FormFieldPositionResponseDataAttributesFormWebUpdateIncidentForm         FormFieldPositionResponseDataAttributesForm = "web_update_incident_form"
+)
+
+// Defines values for FormFieldPositionResponseDataType.
+const (
+	FormFieldPositionResponseDataTypeFormFieldPositions FormFieldPositionResponseDataType = "form_field_positions"
+)
+
+// Defines values for FormFieldResponseDataAttributesInputKind.
+const (
+	FormFieldResponseDataAttributesInputKindCheckbox    FormFieldResponseDataAttributesInputKind = "checkbox"
+	FormFieldResponseDataAttributesInputKindDate        FormFieldResponseDataAttributesInputKind = "date"
+	FormFieldResponseDataAttributesInputKindDatetime    FormFieldResponseDataAttributesInputKind = "datetime"
+	FormFieldResponseDataAttributesInputKindMultiSelect FormFieldResponseDataAttributesInputKind = "multi_select"
+	FormFieldResponseDataAttributesInputKindSelect      FormFieldResponseDataAttributesInputKind = "select"
+	FormFieldResponseDataAttributesInputKindTags        FormFieldResponseDataAttributesInputKind = "tags"
+	FormFieldResponseDataAttributesInputKindText        FormFieldResponseDataAttributesInputKind = "text"
+	FormFieldResponseDataAttributesInputKindTextarea    FormFieldResponseDataAttributesInputKind = "textarea"
+	FormFieldResponseDataAttributesInputKindUsers       FormFieldResponseDataAttributesInputKind = "users"
+)
+
+// Defines values for FormFieldResponseDataAttributesKind.
+const (
+	FormFieldResponseDataAttributesKindAttachAlerts                FormFieldResponseDataAttributesKind = "attach_alerts"
+	FormFieldResponseDataAttributesKindCustom                      FormFieldResponseDataAttributesKind = "custom"
+	FormFieldResponseDataAttributesKindEnvironments                FormFieldResponseDataAttributesKind = "environments"
+	FormFieldResponseDataAttributesKindFunctionalities             FormFieldResponseDataAttributesKind = "functionalities"
+	FormFieldResponseDataAttributesKindLabels                      FormFieldResponseDataAttributesKind = "labels"
+	FormFieldResponseDataAttributesKindManualStartingDatetimeField FormFieldResponseDataAttributesKind = "manual_starting_datetime_field"
+	FormFieldResponseDataAttributesKindMarkAsBackfilled            FormFieldResponseDataAttributesKind = "mark_as_backfilled"
+	FormFieldResponseDataAttributesKindMarkAsTest                  FormFieldResponseDataAttributesKind = "mark_as_test"
+	FormFieldResponseDataAttributesKindNotifyEmails                FormFieldResponseDataAttributesKind = "notify_emails"
+	FormFieldResponseDataAttributesKindServices                    FormFieldResponseDataAttributesKind = "services"
+	FormFieldResponseDataAttributesKindSeverity                    FormFieldResponseDataAttributesKind = "severity"
+	FormFieldResponseDataAttributesKindShowOngoingIncidents        FormFieldResponseDataAttributesKind = "show_ongoing_incidents"
+	FormFieldResponseDataAttributesKindSummary                     FormFieldResponseDataAttributesKind = "summary"
+	FormFieldResponseDataAttributesKindTeams                       FormFieldResponseDataAttributesKind = "teams"
+	FormFieldResponseDataAttributesKindTitle                       FormFieldResponseDataAttributesKind = "title"
+	FormFieldResponseDataAttributesKindTriggerManualWorkflows      FormFieldResponseDataAttributesKind = "trigger_manual_workflows"
+	FormFieldResponseDataAttributesKindTypes                       FormFieldResponseDataAttributesKind = "types"
+	FormFieldResponseDataAttributesKindVisibility                  FormFieldResponseDataAttributesKind = "visibility"
+)
+
+// Defines values for FormFieldResponseDataAttributesRequired.
+const (
+	FormFieldResponseDataAttributesRequiredSlackIncidentMitigationForm   FormFieldResponseDataAttributesRequired = "slack_incident_mitigation_form"
+	FormFieldResponseDataAttributesRequiredSlackIncidentResolutionForm   FormFieldResponseDataAttributesRequired = "slack_incident_resolution_form"
+	FormFieldResponseDataAttributesRequiredSlackNewIncidentForm          FormFieldResponseDataAttributesRequired = "slack_new_incident_form"
+	FormFieldResponseDataAttributesRequiredSlackUpdateIncidentForm       FormFieldResponseDataAttributesRequired = "slack_update_incident_form"
+	FormFieldResponseDataAttributesRequiredSlackUpdateIncidentStatusForm FormFieldResponseDataAttributesRequired = "slack_update_incident_status_form"
+	FormFieldResponseDataAttributesRequiredWebIncidentMitigationForm     FormFieldResponseDataAttributesRequired = "web_incident_mitigation_form"
+	FormFieldResponseDataAttributesRequiredWebIncidentPostMortemForm     FormFieldResponseDataAttributesRequired = "web_incident_post_mortem_form"
+	FormFieldResponseDataAttributesRequiredWebIncidentResolutionForm     FormFieldResponseDataAttributesRequired = "web_incident_resolution_form"
+	FormFieldResponseDataAttributesRequiredWebNewIncidentForm            FormFieldResponseDataAttributesRequired = "web_new_incident_form"
+	FormFieldResponseDataAttributesRequiredWebUpdateIncidentForm         FormFieldResponseDataAttributesRequired = "web_update_incident_form"
+)
+
+// Defines values for FormFieldResponseDataAttributesShown.
+const (
+	FormFieldResponseDataAttributesShownIncidentPostMortem            FormFieldResponseDataAttributesShown = "incident_post_mortem"
+	FormFieldResponseDataAttributesShownSlackIncidentMitigationForm   FormFieldResponseDataAttributesShown = "slack_incident_mitigation_form"
+	FormFieldResponseDataAttributesShownSlackIncidentResolutionForm   FormFieldResponseDataAttributesShown = "slack_incident_resolution_form"
+	FormFieldResponseDataAttributesShownSlackNewIncidentForm          FormFieldResponseDataAttributesShown = "slack_new_incident_form"
+	FormFieldResponseDataAttributesShownSlackUpdateIncidentForm       FormFieldResponseDataAttributesShown = "slack_update_incident_form"
+	FormFieldResponseDataAttributesShownSlackUpdateIncidentStatusForm FormFieldResponseDataAttributesShown = "slack_update_incident_status_form"
+	FormFieldResponseDataAttributesShownWebIncidentMitigationForm     FormFieldResponseDataAttributesShown = "web_incident_mitigation_form"
+	FormFieldResponseDataAttributesShownWebIncidentPostMortemForm     FormFieldResponseDataAttributesShown = "web_incident_post_mortem_form"
+	FormFieldResponseDataAttributesShownWebIncidentResolutionForm     FormFieldResponseDataAttributesShown = "web_incident_resolution_form"
+	FormFieldResponseDataAttributesShownWebNewIncidentForm            FormFieldResponseDataAttributesShown = "web_new_incident_form"
+	FormFieldResponseDataAttributesShownWebUpdateIncidentForm         FormFieldResponseDataAttributesShown = "web_update_incident_form"
+)
+
+// Defines values for FormFieldResponseDataType.
+const (
+	FormFieldResponseDataTypeFormFields FormFieldResponseDataType = "form_fields"
+)
+
 // Defines values for FunctionalityListDataType.
 const (
 	FunctionalityListDataTypeFunctionalities FunctionalityListDataType = "functionalities"
@@ -1072,6 +1339,16 @@ const (
 // Defines values for IncidentFeedbackResponseDataType.
 const (
 	IncidentFeedbackResponseDataTypeIncidentFeedbacks IncidentFeedbackResponseDataType = "incident_feedbacks"
+)
+
+// Defines values for IncidentFormFieldSelectionListDataType.
+const (
+	IncidentFormFieldSelectionListDataTypeIncidentFormFieldSelections IncidentFormFieldSelectionListDataType = "incident_form_field_selections"
+)
+
+// Defines values for IncidentFormFieldSelectionResponseDataType.
+const (
+	IncidentFormFieldSelectionResponseDataTypeIncidentFormFieldSelections IncidentFormFieldSelectionResponseDataType = "incident_form_field_selections"
 )
 
 // Defines values for IncidentListDataType.
@@ -1463,6 +1740,80 @@ const (
 	NewEnvironmentDataTypeEnvironments NewEnvironmentDataType = "environments"
 )
 
+// Defines values for NewFormFieldDataAttributesInputKind.
+const (
+	NewFormFieldDataAttributesInputKindCheckbox    NewFormFieldDataAttributesInputKind = "checkbox"
+	NewFormFieldDataAttributesInputKindDate        NewFormFieldDataAttributesInputKind = "date"
+	NewFormFieldDataAttributesInputKindDatetime    NewFormFieldDataAttributesInputKind = "datetime"
+	NewFormFieldDataAttributesInputKindMultiSelect NewFormFieldDataAttributesInputKind = "multi_select"
+	NewFormFieldDataAttributesInputKindSelect      NewFormFieldDataAttributesInputKind = "select"
+	NewFormFieldDataAttributesInputKindTags        NewFormFieldDataAttributesInputKind = "tags"
+	NewFormFieldDataAttributesInputKindText        NewFormFieldDataAttributesInputKind = "text"
+	NewFormFieldDataAttributesInputKindTextarea    NewFormFieldDataAttributesInputKind = "textarea"
+	NewFormFieldDataAttributesInputKindUsers       NewFormFieldDataAttributesInputKind = "users"
+)
+
+// Defines values for NewFormFieldDataAttributesKind.
+const (
+	NewFormFieldDataAttributesKindAttachAlerts                NewFormFieldDataAttributesKind = "attach_alerts"
+	NewFormFieldDataAttributesKindCustom                      NewFormFieldDataAttributesKind = "custom"
+	NewFormFieldDataAttributesKindEnvironments                NewFormFieldDataAttributesKind = "environments"
+	NewFormFieldDataAttributesKindFunctionalities             NewFormFieldDataAttributesKind = "functionalities"
+	NewFormFieldDataAttributesKindLabels                      NewFormFieldDataAttributesKind = "labels"
+	NewFormFieldDataAttributesKindManualStartingDatetimeField NewFormFieldDataAttributesKind = "manual_starting_datetime_field"
+	NewFormFieldDataAttributesKindMarkAsBackfilled            NewFormFieldDataAttributesKind = "mark_as_backfilled"
+	NewFormFieldDataAttributesKindMarkAsTest                  NewFormFieldDataAttributesKind = "mark_as_test"
+	NewFormFieldDataAttributesKindNotifyEmails                NewFormFieldDataAttributesKind = "notify_emails"
+	NewFormFieldDataAttributesKindServices                    NewFormFieldDataAttributesKind = "services"
+	NewFormFieldDataAttributesKindSeverity                    NewFormFieldDataAttributesKind = "severity"
+	NewFormFieldDataAttributesKindShowOngoingIncidents        NewFormFieldDataAttributesKind = "show_ongoing_incidents"
+	NewFormFieldDataAttributesKindSummary                     NewFormFieldDataAttributesKind = "summary"
+	NewFormFieldDataAttributesKindTeams                       NewFormFieldDataAttributesKind = "teams"
+	NewFormFieldDataAttributesKindTitle                       NewFormFieldDataAttributesKind = "title"
+	NewFormFieldDataAttributesKindTriggerManualWorkflows      NewFormFieldDataAttributesKind = "trigger_manual_workflows"
+	NewFormFieldDataAttributesKindTypes                       NewFormFieldDataAttributesKind = "types"
+	NewFormFieldDataAttributesKindVisibility                  NewFormFieldDataAttributesKind = "visibility"
+)
+
+// Defines values for NewFormFieldDataAttributesRequired.
+const (
+	NewFormFieldDataAttributesRequiredSlackIncidentMitigationForm   NewFormFieldDataAttributesRequired = "slack_incident_mitigation_form"
+	NewFormFieldDataAttributesRequiredSlackIncidentResolutionForm   NewFormFieldDataAttributesRequired = "slack_incident_resolution_form"
+	NewFormFieldDataAttributesRequiredSlackNewIncidentForm          NewFormFieldDataAttributesRequired = "slack_new_incident_form"
+	NewFormFieldDataAttributesRequiredSlackUpdateIncidentForm       NewFormFieldDataAttributesRequired = "slack_update_incident_form"
+	NewFormFieldDataAttributesRequiredSlackUpdateIncidentStatusForm NewFormFieldDataAttributesRequired = "slack_update_incident_status_form"
+	NewFormFieldDataAttributesRequiredWebIncidentMitigationForm     NewFormFieldDataAttributesRequired = "web_incident_mitigation_form"
+	NewFormFieldDataAttributesRequiredWebIncidentPostMortemForm     NewFormFieldDataAttributesRequired = "web_incident_post_mortem_form"
+	NewFormFieldDataAttributesRequiredWebIncidentResolutionForm     NewFormFieldDataAttributesRequired = "web_incident_resolution_form"
+	NewFormFieldDataAttributesRequiredWebNewIncidentForm            NewFormFieldDataAttributesRequired = "web_new_incident_form"
+	NewFormFieldDataAttributesRequiredWebUpdateIncidentForm         NewFormFieldDataAttributesRequired = "web_update_incident_form"
+)
+
+// Defines values for NewFormFieldDataAttributesShown.
+const (
+	NewFormFieldDataAttributesShownIncidentPostMortem            NewFormFieldDataAttributesShown = "incident_post_mortem"
+	NewFormFieldDataAttributesShownSlackIncidentMitigationForm   NewFormFieldDataAttributesShown = "slack_incident_mitigation_form"
+	NewFormFieldDataAttributesShownSlackIncidentResolutionForm   NewFormFieldDataAttributesShown = "slack_incident_resolution_form"
+	NewFormFieldDataAttributesShownSlackNewIncidentForm          NewFormFieldDataAttributesShown = "slack_new_incident_form"
+	NewFormFieldDataAttributesShownSlackUpdateIncidentForm       NewFormFieldDataAttributesShown = "slack_update_incident_form"
+	NewFormFieldDataAttributesShownSlackUpdateIncidentStatusForm NewFormFieldDataAttributesShown = "slack_update_incident_status_form"
+	NewFormFieldDataAttributesShownWebIncidentMitigationForm     NewFormFieldDataAttributesShown = "web_incident_mitigation_form"
+	NewFormFieldDataAttributesShownWebIncidentPostMortemForm     NewFormFieldDataAttributesShown = "web_incident_post_mortem_form"
+	NewFormFieldDataAttributesShownWebIncidentResolutionForm     NewFormFieldDataAttributesShown = "web_incident_resolution_form"
+	NewFormFieldDataAttributesShownWebNewIncidentForm            NewFormFieldDataAttributesShown = "web_new_incident_form"
+	NewFormFieldDataAttributesShownWebUpdateIncidentForm         NewFormFieldDataAttributesShown = "web_update_incident_form"
+)
+
+// Defines values for NewFormFieldDataType.
+const (
+	NewFormFieldDataTypeFormFields NewFormFieldDataType = "form_fields"
+)
+
+// Defines values for NewFormFieldOptionDataType.
+const (
+	NewFormFieldOptionDataTypeFormFieldOptions NewFormFieldOptionDataType = "form_field_options"
+)
+
 // Defines values for NewFunctionalityDataType.
 const (
 	NewFunctionalityDataTypeFunctionalities NewFunctionalityDataType = "functionalities"
@@ -1549,6 +1900,11 @@ const (
 // Defines values for NewIncidentFeedbackDataType.
 const (
 	NewIncidentFeedbackDataTypeIncidentFeedbacks NewIncidentFeedbackDataType = "incident_feedbacks"
+)
+
+// Defines values for NewIncidentFormFieldSelectionDataType.
+const (
+	NewIncidentFormFieldSelectionDataTypeIncidentFormFieldSelections NewIncidentFormFieldSelectionDataType = "incident_form_field_selections"
 )
 
 // Defines values for NewIncidentRoleDataType.
@@ -1682,6 +2038,22 @@ const (
 // Defines values for NewWorkflowCustomFieldSelectionDataType.
 const (
 	NewWorkflowCustomFieldSelectionDataTypeWorkflowCustomFieldSelections NewWorkflowCustomFieldSelectionDataType = "workflow_custom_field_selections"
+)
+
+// Defines values for NewWorkflowFormFieldConditionDataAttributesIncidentCondition.
+const (
+	NewWorkflowFormFieldConditionDataAttributesIncidentConditionANY         NewWorkflowFormFieldConditionDataAttributesIncidentCondition = "ANY"
+	NewWorkflowFormFieldConditionDataAttributesIncidentConditionCONTAINS    NewWorkflowFormFieldConditionDataAttributesIncidentCondition = "CONTAINS"
+	NewWorkflowFormFieldConditionDataAttributesIncidentConditionCONTAINSALL NewWorkflowFormFieldConditionDataAttributesIncidentCondition = "CONTAINS_ALL"
+	NewWorkflowFormFieldConditionDataAttributesIncidentConditionIS          NewWorkflowFormFieldConditionDataAttributesIncidentCondition = "IS"
+	NewWorkflowFormFieldConditionDataAttributesIncidentConditionNONE        NewWorkflowFormFieldConditionDataAttributesIncidentCondition = "NONE"
+	NewWorkflowFormFieldConditionDataAttributesIncidentConditionSET         NewWorkflowFormFieldConditionDataAttributesIncidentCondition = "SET"
+	NewWorkflowFormFieldConditionDataAttributesIncidentConditionUNSET       NewWorkflowFormFieldConditionDataAttributesIncidentCondition = "UNSET"
+)
+
+// Defines values for NewWorkflowFormFieldConditionDataType.
+const (
+	NewWorkflowFormFieldConditionDataTypeWorkflowFormFieldConditions NewWorkflowFormFieldConditionDataType = "workflow_form_field_conditions"
 )
 
 // Defines values for NewWorkflowGroupDataAttributesKind.
@@ -1901,7 +2273,7 @@ const (
 	SendSlackMessageTaskParamsActionablesAllCommands            SendSlackMessageTaskParamsActionables = "all_commands"
 	SendSlackMessageTaskParamsActionablesLeaveFeedback          SendSlackMessageTaskParamsActionables = "leave_feedback"
 	SendSlackMessageTaskParamsActionablesManageActionItems      SendSlackMessageTaskParamsActionables = "manage_action_items"
-	SendSlackMessageTaskParamsActionablesManageCustomFields     SendSlackMessageTaskParamsActionables = "manage_custom_fields"
+	SendSlackMessageTaskParamsActionablesManageFormFields       SendSlackMessageTaskParamsActionables = "manage_form_fields"
 	SendSlackMessageTaskParamsActionablesManageIncidentRoles    SendSlackMessageTaskParamsActionables = "manage_incident_roles"
 	SendSlackMessageTaskParamsActionablesUpdateIncident         SendSlackMessageTaskParamsActionables = "update_incident"
 	SendSlackMessageTaskParamsActionablesUpdateSummary          SendSlackMessageTaskParamsActionables = "update_summary"
@@ -2154,9 +2526,103 @@ const (
 	UpdateEnvironmentDataTypeEnvironments UpdateEnvironmentDataType = "environments"
 )
 
+// Defines values for UpdateFormFieldDataAttributesInputKind.
+const (
+	UpdateFormFieldDataAttributesInputKindCheckbox    UpdateFormFieldDataAttributesInputKind = "checkbox"
+	UpdateFormFieldDataAttributesInputKindDate        UpdateFormFieldDataAttributesInputKind = "date"
+	UpdateFormFieldDataAttributesInputKindDatetime    UpdateFormFieldDataAttributesInputKind = "datetime"
+	UpdateFormFieldDataAttributesInputKindMultiSelect UpdateFormFieldDataAttributesInputKind = "multi_select"
+	UpdateFormFieldDataAttributesInputKindSelect      UpdateFormFieldDataAttributesInputKind = "select"
+	UpdateFormFieldDataAttributesInputKindTags        UpdateFormFieldDataAttributesInputKind = "tags"
+	UpdateFormFieldDataAttributesInputKindText        UpdateFormFieldDataAttributesInputKind = "text"
+	UpdateFormFieldDataAttributesInputKindTextarea    UpdateFormFieldDataAttributesInputKind = "textarea"
+	UpdateFormFieldDataAttributesInputKindUsers       UpdateFormFieldDataAttributesInputKind = "users"
+)
+
+// Defines values for UpdateFormFieldDataAttributesKind.
+const (
+	UpdateFormFieldDataAttributesKindAttachAlerts                UpdateFormFieldDataAttributesKind = "attach_alerts"
+	UpdateFormFieldDataAttributesKindCustom                      UpdateFormFieldDataAttributesKind = "custom"
+	UpdateFormFieldDataAttributesKindEnvironments                UpdateFormFieldDataAttributesKind = "environments"
+	UpdateFormFieldDataAttributesKindFunctionalities             UpdateFormFieldDataAttributesKind = "functionalities"
+	UpdateFormFieldDataAttributesKindLabels                      UpdateFormFieldDataAttributesKind = "labels"
+	UpdateFormFieldDataAttributesKindManualStartingDatetimeField UpdateFormFieldDataAttributesKind = "manual_starting_datetime_field"
+	UpdateFormFieldDataAttributesKindMarkAsBackfilled            UpdateFormFieldDataAttributesKind = "mark_as_backfilled"
+	UpdateFormFieldDataAttributesKindMarkAsTest                  UpdateFormFieldDataAttributesKind = "mark_as_test"
+	UpdateFormFieldDataAttributesKindNotifyEmails                UpdateFormFieldDataAttributesKind = "notify_emails"
+	UpdateFormFieldDataAttributesKindServices                    UpdateFormFieldDataAttributesKind = "services"
+	UpdateFormFieldDataAttributesKindSeverity                    UpdateFormFieldDataAttributesKind = "severity"
+	UpdateFormFieldDataAttributesKindShowOngoingIncidents        UpdateFormFieldDataAttributesKind = "show_ongoing_incidents"
+	UpdateFormFieldDataAttributesKindSummary                     UpdateFormFieldDataAttributesKind = "summary"
+	UpdateFormFieldDataAttributesKindTeams                       UpdateFormFieldDataAttributesKind = "teams"
+	UpdateFormFieldDataAttributesKindTitle                       UpdateFormFieldDataAttributesKind = "title"
+	UpdateFormFieldDataAttributesKindTriggerManualWorkflows      UpdateFormFieldDataAttributesKind = "trigger_manual_workflows"
+	UpdateFormFieldDataAttributesKindTypes                       UpdateFormFieldDataAttributesKind = "types"
+	UpdateFormFieldDataAttributesKindVisibility                  UpdateFormFieldDataAttributesKind = "visibility"
+)
+
+// Defines values for UpdateFormFieldDataAttributesRequired.
+const (
+	UpdateFormFieldDataAttributesRequiredSlackIncidentMitigationForm   UpdateFormFieldDataAttributesRequired = "slack_incident_mitigation_form"
+	UpdateFormFieldDataAttributesRequiredSlackIncidentResolutionForm   UpdateFormFieldDataAttributesRequired = "slack_incident_resolution_form"
+	UpdateFormFieldDataAttributesRequiredSlackNewIncidentForm          UpdateFormFieldDataAttributesRequired = "slack_new_incident_form"
+	UpdateFormFieldDataAttributesRequiredSlackUpdateIncidentForm       UpdateFormFieldDataAttributesRequired = "slack_update_incident_form"
+	UpdateFormFieldDataAttributesRequiredSlackUpdateIncidentStatusForm UpdateFormFieldDataAttributesRequired = "slack_update_incident_status_form"
+	UpdateFormFieldDataAttributesRequiredWebIncidentMitigationForm     UpdateFormFieldDataAttributesRequired = "web_incident_mitigation_form"
+	UpdateFormFieldDataAttributesRequiredWebIncidentPostMortemForm     UpdateFormFieldDataAttributesRequired = "web_incident_post_mortem_form"
+	UpdateFormFieldDataAttributesRequiredWebIncidentResolutionForm     UpdateFormFieldDataAttributesRequired = "web_incident_resolution_form"
+	UpdateFormFieldDataAttributesRequiredWebNewIncidentForm            UpdateFormFieldDataAttributesRequired = "web_new_incident_form"
+	UpdateFormFieldDataAttributesRequiredWebUpdateIncidentForm         UpdateFormFieldDataAttributesRequired = "web_update_incident_form"
+)
+
+// Defines values for UpdateFormFieldDataAttributesShown.
+const (
+	UpdateFormFieldDataAttributesShownIncidentPostMortem            UpdateFormFieldDataAttributesShown = "incident_post_mortem"
+	UpdateFormFieldDataAttributesShownSlackIncidentMitigationForm   UpdateFormFieldDataAttributesShown = "slack_incident_mitigation_form"
+	UpdateFormFieldDataAttributesShownSlackIncidentResolutionForm   UpdateFormFieldDataAttributesShown = "slack_incident_resolution_form"
+	UpdateFormFieldDataAttributesShownSlackNewIncidentForm          UpdateFormFieldDataAttributesShown = "slack_new_incident_form"
+	UpdateFormFieldDataAttributesShownSlackUpdateIncidentForm       UpdateFormFieldDataAttributesShown = "slack_update_incident_form"
+	UpdateFormFieldDataAttributesShownSlackUpdateIncidentStatusForm UpdateFormFieldDataAttributesShown = "slack_update_incident_status_form"
+	UpdateFormFieldDataAttributesShownWebIncidentMitigationForm     UpdateFormFieldDataAttributesShown = "web_incident_mitigation_form"
+	UpdateFormFieldDataAttributesShownWebIncidentPostMortemForm     UpdateFormFieldDataAttributesShown = "web_incident_post_mortem_form"
+	UpdateFormFieldDataAttributesShownWebIncidentResolutionForm     UpdateFormFieldDataAttributesShown = "web_incident_resolution_form"
+	UpdateFormFieldDataAttributesShownWebNewIncidentForm            UpdateFormFieldDataAttributesShown = "web_new_incident_form"
+	UpdateFormFieldDataAttributesShownWebUpdateIncidentForm         UpdateFormFieldDataAttributesShown = "web_update_incident_form"
+)
+
+// Defines values for UpdateFormFieldDataType.
+const (
+	UpdateFormFieldDataTypeFormFields UpdateFormFieldDataType = "form_fields"
+)
+
+// Defines values for UpdateFormFieldOptionDataType.
+const (
+	UpdateFormFieldOptionDataTypeFormFieldOptions UpdateFormFieldOptionDataType = "form_field_options"
+)
+
+// Defines values for UpdateFormFieldPositionDataAttributesForm.
+const (
+	UpdateFormFieldPositionDataAttributesFormIncidentPostMortem            UpdateFormFieldPositionDataAttributesForm = "incident_post_mortem"
+	UpdateFormFieldPositionDataAttributesFormSlackIncidentMitigationForm   UpdateFormFieldPositionDataAttributesForm = "slack_incident_mitigation_form"
+	UpdateFormFieldPositionDataAttributesFormSlackIncidentResolutionForm   UpdateFormFieldPositionDataAttributesForm = "slack_incident_resolution_form"
+	UpdateFormFieldPositionDataAttributesFormSlackNewIncidentForm          UpdateFormFieldPositionDataAttributesForm = "slack_new_incident_form"
+	UpdateFormFieldPositionDataAttributesFormSlackUpdateIncidentForm       UpdateFormFieldPositionDataAttributesForm = "slack_update_incident_form"
+	UpdateFormFieldPositionDataAttributesFormSlackUpdateIncidentStatusForm UpdateFormFieldPositionDataAttributesForm = "slack_update_incident_status_form"
+	UpdateFormFieldPositionDataAttributesFormWebIncidentMitigationForm     UpdateFormFieldPositionDataAttributesForm = "web_incident_mitigation_form"
+	UpdateFormFieldPositionDataAttributesFormWebIncidentPostMortemForm     UpdateFormFieldPositionDataAttributesForm = "web_incident_post_mortem_form"
+	UpdateFormFieldPositionDataAttributesFormWebIncidentResolutionForm     UpdateFormFieldPositionDataAttributesForm = "web_incident_resolution_form"
+	UpdateFormFieldPositionDataAttributesFormWebNewIncidentForm            UpdateFormFieldPositionDataAttributesForm = "web_new_incident_form"
+	UpdateFormFieldPositionDataAttributesFormWebUpdateIncidentForm         UpdateFormFieldPositionDataAttributesForm = "web_update_incident_form"
+)
+
+// Defines values for UpdateFormFieldPositionDataType.
+const (
+	FormFieldPositions UpdateFormFieldPositionDataType = "form_field_positions"
+)
+
 // Defines values for UpdateFunctionalityDataType.
 const (
-	UpdateFunctionalityDataTypeFunctionalities UpdateFunctionalityDataType = "functionalities"
+	Functionalities UpdateFunctionalityDataType = "functionalities"
 )
 
 // Defines values for UpdateGithubIssueTaskParamsTaskType.
@@ -2236,6 +2702,11 @@ const (
 // Defines values for UpdateIncidentFeedbackDataType.
 const (
 	UpdateIncidentFeedbackDataTypeIncidentFeedbacks UpdateIncidentFeedbackDataType = "incident_feedbacks"
+)
+
+// Defines values for UpdateIncidentFormFieldSelectionDataType.
+const (
+	UpdateIncidentFormFieldSelectionDataTypeIncidentFormFieldSelections UpdateIncidentFormFieldSelectionDataType = "incident_form_field_selections"
 )
 
 // Defines values for UpdateIncidentPostMortemDataAttributesStatus.
@@ -2464,6 +2935,22 @@ const (
 	UpdateWorkflowCustomFieldSelectionDataTypeWorkflowCustomFieldSelections UpdateWorkflowCustomFieldSelectionDataType = "workflow_custom_field_selections"
 )
 
+// Defines values for UpdateWorkflowFormFieldConditionDataAttributesIncidentCondition.
+const (
+	UpdateWorkflowFormFieldConditionDataAttributesIncidentConditionANY         UpdateWorkflowFormFieldConditionDataAttributesIncidentCondition = "ANY"
+	UpdateWorkflowFormFieldConditionDataAttributesIncidentConditionCONTAINS    UpdateWorkflowFormFieldConditionDataAttributesIncidentCondition = "CONTAINS"
+	UpdateWorkflowFormFieldConditionDataAttributesIncidentConditionCONTAINSALL UpdateWorkflowFormFieldConditionDataAttributesIncidentCondition = "CONTAINS_ALL"
+	UpdateWorkflowFormFieldConditionDataAttributesIncidentConditionIS          UpdateWorkflowFormFieldConditionDataAttributesIncidentCondition = "IS"
+	UpdateWorkflowFormFieldConditionDataAttributesIncidentConditionNONE        UpdateWorkflowFormFieldConditionDataAttributesIncidentCondition = "NONE"
+	UpdateWorkflowFormFieldConditionDataAttributesIncidentConditionSET         UpdateWorkflowFormFieldConditionDataAttributesIncidentCondition = "SET"
+	UpdateWorkflowFormFieldConditionDataAttributesIncidentConditionUNSET       UpdateWorkflowFormFieldConditionDataAttributesIncidentCondition = "UNSET"
+)
+
+// Defines values for UpdateWorkflowFormFieldConditionDataType.
+const (
+	UpdateWorkflowFormFieldConditionDataTypeWorkflowFormFieldConditions UpdateWorkflowFormFieldConditionDataType = "workflow_form_field_conditions"
+)
+
 // Defines values for UpdateWorkflowGroupDataAttributesKind.
 const (
 	UpdateWorkflowGroupDataAttributesKindActionItem UpdateWorkflowGroupDataAttributesKind = "action_item"
@@ -2491,7 +2978,7 @@ const (
 
 // Defines values for UserResponseDataType.
 const (
-	Users UserResponseDataType = "users"
+	UserResponseDataTypeUsers UserResponseDataType = "users"
 )
 
 // Defines values for WorkflowRepeatOn.
@@ -2546,6 +3033,49 @@ const (
 // Defines values for WorkflowCustomFieldSelectionResponseDataType.
 const (
 	WorkflowCustomFieldSelectionResponseDataTypeWorkflowCustomFieldSelections WorkflowCustomFieldSelectionResponseDataType = "workflow_custom_field_selections"
+)
+
+// Defines values for WorkflowFormFieldConditionIncidentCondition.
+const (
+	WorkflowFormFieldConditionIncidentConditionANY         WorkflowFormFieldConditionIncidentCondition = "ANY"
+	WorkflowFormFieldConditionIncidentConditionCONTAINS    WorkflowFormFieldConditionIncidentCondition = "CONTAINS"
+	WorkflowFormFieldConditionIncidentConditionCONTAINSALL WorkflowFormFieldConditionIncidentCondition = "CONTAINS_ALL"
+	WorkflowFormFieldConditionIncidentConditionIS          WorkflowFormFieldConditionIncidentCondition = "IS"
+	WorkflowFormFieldConditionIncidentConditionNONE        WorkflowFormFieldConditionIncidentCondition = "NONE"
+	WorkflowFormFieldConditionIncidentConditionSET         WorkflowFormFieldConditionIncidentCondition = "SET"
+	WorkflowFormFieldConditionIncidentConditionUNSET       WorkflowFormFieldConditionIncidentCondition = "UNSET"
+)
+
+// Defines values for WorkflowFormFieldConditionListDataAttributesIncidentCondition.
+const (
+	WorkflowFormFieldConditionListDataAttributesIncidentConditionANY         WorkflowFormFieldConditionListDataAttributesIncidentCondition = "ANY"
+	WorkflowFormFieldConditionListDataAttributesIncidentConditionCONTAINS    WorkflowFormFieldConditionListDataAttributesIncidentCondition = "CONTAINS"
+	WorkflowFormFieldConditionListDataAttributesIncidentConditionCONTAINSALL WorkflowFormFieldConditionListDataAttributesIncidentCondition = "CONTAINS_ALL"
+	WorkflowFormFieldConditionListDataAttributesIncidentConditionIS          WorkflowFormFieldConditionListDataAttributesIncidentCondition = "IS"
+	WorkflowFormFieldConditionListDataAttributesIncidentConditionNONE        WorkflowFormFieldConditionListDataAttributesIncidentCondition = "NONE"
+	WorkflowFormFieldConditionListDataAttributesIncidentConditionSET         WorkflowFormFieldConditionListDataAttributesIncidentCondition = "SET"
+	WorkflowFormFieldConditionListDataAttributesIncidentConditionUNSET       WorkflowFormFieldConditionListDataAttributesIncidentCondition = "UNSET"
+)
+
+// Defines values for WorkflowFormFieldConditionListDataType.
+const (
+	WorkflowFormFieldConditionListDataTypeWorkflowFormFieldConditions WorkflowFormFieldConditionListDataType = "workflow_form_field_conditions"
+)
+
+// Defines values for WorkflowFormFieldConditionResponseDataAttributesIncidentCondition.
+const (
+	ANY         WorkflowFormFieldConditionResponseDataAttributesIncidentCondition = "ANY"
+	CONTAINS    WorkflowFormFieldConditionResponseDataAttributesIncidentCondition = "CONTAINS"
+	CONTAINSALL WorkflowFormFieldConditionResponseDataAttributesIncidentCondition = "CONTAINS_ALL"
+	IS          WorkflowFormFieldConditionResponseDataAttributesIncidentCondition = "IS"
+	NONE        WorkflowFormFieldConditionResponseDataAttributesIncidentCondition = "NONE"
+	SET         WorkflowFormFieldConditionResponseDataAttributesIncidentCondition = "SET"
+	UNSET       WorkflowFormFieldConditionResponseDataAttributesIncidentCondition = "UNSET"
+)
+
+// Defines values for WorkflowFormFieldConditionResponseDataType.
+const (
+	WorkflowFormFieldConditionResponseDataTypeWorkflowFormFieldConditions WorkflowFormFieldConditionResponseDataType = "workflow_form_field_conditions"
 )
 
 // Defines values for WorkflowGroupKind.
@@ -4740,6 +5270,321 @@ type ErrorsList struct {
 	} `json:"errors,omitempty"`
 }
 
+// FormField defines model for form_field.
+type FormField struct {
+	// Date of creation
+	CreatedAt     string   `json:"created_at"`
+	DefaultValues []string `json:"default_values"`
+
+	// The description of the form_field
+	Description *string `json:"description"`
+
+	// The input kind of the form_field
+	InputKind FormFieldInputKind `json:"input_kind"`
+
+	// The kind of the form_field
+	Kind FormFieldKind `json:"kind"`
+
+	// The name of the form_field
+	Name     string              `json:"name"`
+	Required []FormFieldRequired `json:"required"`
+	Shown    []FormFieldShown    `json:"shown"`
+
+	// The slug of the form_field
+	Slug string `json:"slug"`
+
+	// Date of last update
+	UpdatedAt string `json:"updated_at"`
+}
+
+// The input kind of the form_field
+type FormFieldInputKind string
+
+// The kind of the form_field
+type FormFieldKind string
+
+// Where the form_field is required
+type FormFieldRequired string
+
+// Where the form_field is shown
+type FormFieldShown string
+
+// FormFieldList defines model for form_field_list.
+type FormFieldList struct {
+	Data []struct {
+		Attributes struct {
+			// Date of creation
+			CreatedAt     string   `json:"created_at"`
+			DefaultValues []string `json:"default_values"`
+
+			// The description of the form_field
+			Description *string `json:"description"`
+
+			// The input kind of the form_field
+			InputKind FormFieldListDataAttributesInputKind `json:"input_kind"`
+
+			// The kind of the form_field
+			Kind FormFieldListDataAttributesKind `json:"kind"`
+
+			// The name of the form_field
+			Name     string                                `json:"name"`
+			Required []FormFieldListDataAttributesRequired `json:"required"`
+			Shown    []FormFieldListDataAttributesShown    `json:"shown"`
+
+			// The slug of the form_field
+			Slug string `json:"slug"`
+
+			// Date of last update
+			UpdatedAt string `json:"updated_at"`
+		} `json:"attributes"`
+
+		// Unique ID of the form_field
+		Id   string                `json:"id"`
+		Type FormFieldListDataType `json:"type"`
+	} `json:"data"`
+	Links struct {
+		First string  `json:"first"`
+		Last  string  `json:"last"`
+		Next  *string `json:"next"`
+		Prev  *string `json:"prev"`
+		Self  string  `json:"self"`
+	} `json:"links"`
+}
+
+// The input kind of the form_field
+type FormFieldListDataAttributesInputKind string
+
+// The kind of the form_field
+type FormFieldListDataAttributesKind string
+
+// Where the form_field is required
+type FormFieldListDataAttributesRequired string
+
+// Where the form_field is shown
+type FormFieldListDataAttributesShown string
+
+// FormFieldListDataType defines model for FormFieldList.Data.Type.
+type FormFieldListDataType string
+
+// FormFieldOption defines model for form_field_option.
+type FormFieldOption struct {
+	// The hex color of the form_field_option
+	Color string `json:"color"`
+
+	// Date of creation
+	CreatedAt string `json:"created_at"`
+	Default   *bool  `json:"default,omitempty"`
+
+	// The ID of the parent custom field
+	FormFieldId *string `json:"form_field_id,omitempty"`
+
+	// The position of the form_field_option
+	Position float32 `json:"position"`
+
+	// Date of last update
+	UpdatedAt string `json:"updated_at"`
+
+	// The value of the form_field_option
+	Value string `json:"value"`
+}
+
+// FormFieldOptionList defines model for form_field_option_list.
+type FormFieldOptionList struct {
+	Data []struct {
+		Attributes struct {
+			// The hex color of the form_field_option
+			Color string `json:"color"`
+
+			// Date of creation
+			CreatedAt string `json:"created_at"`
+			Default   *bool  `json:"default,omitempty"`
+
+			// The ID of the parent custom field
+			FormFieldId *string `json:"form_field_id,omitempty"`
+
+			// The position of the form_field_option
+			Position float32 `json:"position"`
+
+			// Date of last update
+			UpdatedAt string `json:"updated_at"`
+
+			// The value of the form_field_option
+			Value string `json:"value"`
+		} `json:"attributes"`
+
+		// Unique ID of the form_field_option
+		Id   string                      `json:"id"`
+		Type FormFieldOptionListDataType `json:"type"`
+	} `json:"data"`
+	Links struct {
+		First string  `json:"first"`
+		Last  string  `json:"last"`
+		Next  *string `json:"next"`
+		Prev  *string `json:"prev"`
+		Self  string  `json:"self"`
+	} `json:"links"`
+}
+
+// FormFieldOptionListDataType defines model for FormFieldOptionList.Data.Type.
+type FormFieldOptionListDataType string
+
+// FormFieldOptionResponse defines model for form_field_option_response.
+type FormFieldOptionResponse struct {
+	Data struct {
+		Attributes struct {
+			// The hex color of the form_field_option
+			Color string `json:"color"`
+
+			// Date of creation
+			CreatedAt string `json:"created_at"`
+			Default   *bool  `json:"default,omitempty"`
+
+			// The ID of the parent custom field
+			FormFieldId *string `json:"form_field_id,omitempty"`
+
+			// The position of the form_field_option
+			Position float32 `json:"position"`
+
+			// Date of last update
+			UpdatedAt string `json:"updated_at"`
+
+			// The value of the form_field_option
+			Value string `json:"value"`
+		} `json:"attributes"`
+
+		// Unique ID of the form_field_option
+		Id   string                          `json:"id"`
+		Type FormFieldOptionResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// FormFieldOptionResponseDataType defines model for FormFieldOptionResponse.Data.Type.
+type FormFieldOptionResponseDataType string
+
+// FormFieldPosition defines model for form_field_position.
+type FormFieldPosition struct {
+	// The form for the position
+	Form FormFieldPositionForm `json:"form"`
+
+	// The ID of the form field.
+	FormFieldId string `json:"form_field_id"`
+
+	// The position of the form_field_position
+	Position float32 `json:"position"`
+}
+
+// The form for the position
+type FormFieldPositionForm string
+
+// FormFieldPositionList defines model for form_field_position_list.
+type FormFieldPositionList struct {
+	Data []struct {
+		Attributes struct {
+			// The form for the position
+			Form FormFieldPositionListDataAttributesForm `json:"form"`
+
+			// The ID of the form field.
+			FormFieldId string `json:"form_field_id"`
+
+			// The position of the form_field_position
+			Position float32 `json:"position"`
+		} `json:"attributes"`
+
+		// Unique ID of the form_field_position
+		Id   string                        `json:"id"`
+		Type FormFieldPositionListDataType `json:"type"`
+	} `json:"data"`
+	Links struct {
+		First string  `json:"first"`
+		Last  string  `json:"last"`
+		Next  *string `json:"next"`
+		Prev  *string `json:"prev"`
+		Self  string  `json:"self"`
+	} `json:"links"`
+}
+
+// The form for the position
+type FormFieldPositionListDataAttributesForm string
+
+// FormFieldPositionListDataType defines model for FormFieldPositionList.Data.Type.
+type FormFieldPositionListDataType string
+
+// FormFieldPositionResponse defines model for form_field_position_response.
+type FormFieldPositionResponse struct {
+	Data struct {
+		Attributes struct {
+			// The form for the position
+			Form FormFieldPositionResponseDataAttributesForm `json:"form"`
+
+			// The ID of the form field.
+			FormFieldId string `json:"form_field_id"`
+
+			// The position of the form_field_position
+			Position float32 `json:"position"`
+		} `json:"attributes"`
+
+		// Unique ID of the form_field_position
+		Id   string                            `json:"id"`
+		Type FormFieldPositionResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// The form for the position
+type FormFieldPositionResponseDataAttributesForm string
+
+// FormFieldPositionResponseDataType defines model for FormFieldPositionResponse.Data.Type.
+type FormFieldPositionResponseDataType string
+
+// FormFieldResponse defines model for form_field_response.
+type FormFieldResponse struct {
+	Data struct {
+		Attributes struct {
+			// Date of creation
+			CreatedAt     string   `json:"created_at"`
+			DefaultValues []string `json:"default_values"`
+
+			// The description of the form_field
+			Description *string `json:"description"`
+
+			// The input kind of the form_field
+			InputKind FormFieldResponseDataAttributesInputKind `json:"input_kind"`
+
+			// The kind of the form_field
+			Kind FormFieldResponseDataAttributesKind `json:"kind"`
+
+			// The name of the form_field
+			Name     string                                    `json:"name"`
+			Required []FormFieldResponseDataAttributesRequired `json:"required"`
+			Shown    []FormFieldResponseDataAttributesShown    `json:"shown"`
+
+			// The slug of the form_field
+			Slug string `json:"slug"`
+
+			// Date of last update
+			UpdatedAt string `json:"updated_at"`
+		} `json:"attributes"`
+
+		// Unique ID of the form_field
+		Id   string                    `json:"id"`
+		Type FormFieldResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// The input kind of the form_field
+type FormFieldResponseDataAttributesInputKind string
+
+// The kind of the form_field
+type FormFieldResponseDataAttributesKind string
+
+// Where the form_field is required
+type FormFieldResponseDataAttributesRequired string
+
+// Where the form_field is shown
+type FormFieldResponseDataAttributesShown string
+
+// FormFieldResponseDataType defines model for FormFieldResponse.Data.Type.
+type FormFieldResponseDataType string
+
 // Functionality defines model for functionality.
 type Functionality struct {
 	Color *string `json:"color"`
@@ -5472,6 +6317,71 @@ type IncidentFeedbackResponseDataAttributesRating int
 
 // IncidentFeedbackResponseDataType defines model for IncidentFeedbackResponse.Data.Type.
 type IncidentFeedbackResponseDataType string
+
+// IncidentFormFieldSelection defines model for incident_form_field_selection.
+type IncidentFormFieldSelection struct {
+	// The custom field for this selection
+	FormFieldId       string     `json:"form_field_id"`
+	IncidentId        string     `json:"incident_id"`
+	SelectedOptionIds *[]string  `json:"selected_option_ids,omitempty"`
+	SelectedUserIds   *[]float32 `json:"selected_user_ids,omitempty"`
+
+	// The selected value for text kind custom fields
+	Value *string `json:"value"`
+}
+
+// IncidentFormFieldSelectionList defines model for incident_form_field_selection_list.
+type IncidentFormFieldSelectionList struct {
+	Data []struct {
+		Attributes struct {
+			// The custom field for this selection
+			FormFieldId       string     `json:"form_field_id"`
+			IncidentId        string     `json:"incident_id"`
+			SelectedOptionIds *[]string  `json:"selected_option_ids,omitempty"`
+			SelectedUserIds   *[]float32 `json:"selected_user_ids,omitempty"`
+
+			// The selected value for text kind custom fields
+			Value *string `json:"value"`
+		} `json:"attributes"`
+
+		// Unique ID of the incident_form_field_selection
+		Id   string                                 `json:"id"`
+		Type IncidentFormFieldSelectionListDataType `json:"type"`
+	} `json:"data"`
+	Links struct {
+		First string  `json:"first"`
+		Last  string  `json:"last"`
+		Next  *string `json:"next"`
+		Prev  *string `json:"prev"`
+		Self  string  `json:"self"`
+	} `json:"links"`
+}
+
+// IncidentFormFieldSelectionListDataType defines model for IncidentFormFieldSelectionList.Data.Type.
+type IncidentFormFieldSelectionListDataType string
+
+// IncidentFormFieldSelectionResponse defines model for incident_form_field_selection_response.
+type IncidentFormFieldSelectionResponse struct {
+	Data struct {
+		Attributes struct {
+			// The custom field for this selection
+			FormFieldId       string     `json:"form_field_id"`
+			IncidentId        string     `json:"incident_id"`
+			SelectedOptionIds *[]string  `json:"selected_option_ids,omitempty"`
+			SelectedUserIds   *[]float32 `json:"selected_user_ids,omitempty"`
+
+			// The selected value for text kind custom fields
+			Value *string `json:"value"`
+		} `json:"attributes"`
+
+		// Unique ID of the incident_form_field_selection
+		Id   string                                     `json:"id"`
+		Type IncidentFormFieldSelectionResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// IncidentFormFieldSelectionResponseDataType defines model for IncidentFormFieldSelectionResponse.Data.Type.
+type IncidentFormFieldSelectionResponseDataType string
 
 // IncidentList defines model for incident_list.
 type IncidentList struct {
@@ -6537,6 +7447,69 @@ type NewEnvironment struct {
 // NewEnvironmentDataType defines model for NewEnvironment.Data.Type.
 type NewEnvironmentDataType string
 
+// NewFormField defines model for new_form_field.
+type NewFormField struct {
+	Data struct {
+		Attributes struct {
+			DefaultValues *[]string `json:"default_values,omitempty"`
+
+			// The description of the form_field
+			Description *string `json:"description"`
+
+			// The input kind of the form_field
+			InputKind *NewFormFieldDataAttributesInputKind `json:"input_kind,omitempty"`
+
+			// The kind of the form_field
+			Kind NewFormFieldDataAttributesKind `json:"kind"`
+
+			// The name of the form_field
+			Name     string                                `json:"name"`
+			Required *[]NewFormFieldDataAttributesRequired `json:"required,omitempty"`
+			Shown    *[]NewFormFieldDataAttributesShown    `json:"shown,omitempty"`
+		} `json:"attributes"`
+		Type NewFormFieldDataType `json:"type"`
+	} `json:"data"`
+}
+
+// The input kind of the form_field
+type NewFormFieldDataAttributesInputKind string
+
+// The kind of the form_field
+type NewFormFieldDataAttributesKind string
+
+// Where the form_field is required
+type NewFormFieldDataAttributesRequired string
+
+// Where the form_field is shown
+type NewFormFieldDataAttributesShown string
+
+// NewFormFieldDataType defines model for NewFormField.Data.Type.
+type NewFormFieldDataType string
+
+// NewFormFieldOption defines model for new_form_field_option.
+type NewFormFieldOption struct {
+	Data struct {
+		Attributes struct {
+			// The hex color of the form_field_option
+			Color   *string `json:"color,omitempty"`
+			Default *bool   `json:"default,omitempty"`
+
+			// The ID of the form field
+			FormFieldId string `json:"form_field_id"`
+
+			// The position of the form_field_option
+			Position *float32 `json:"position,omitempty"`
+
+			// The value of the form_field_option
+			Value string `json:"value"`
+		} `json:"attributes"`
+		Type NewFormFieldOptionDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewFormFieldOptionDataType defines model for NewFormFieldOption.Data.Type.
+type NewFormFieldOptionDataType string
+
 // NewFunctionality defines model for new_functionality.
 type NewFunctionality struct {
 	Data struct {
@@ -6764,6 +7737,26 @@ type NewIncidentFeedbackDataAttributesRating int
 
 // NewIncidentFeedbackDataType defines model for NewIncidentFeedback.Data.Type.
 type NewIncidentFeedbackDataType string
+
+// NewIncidentFormFieldSelection defines model for new_incident_form_field_selection.
+type NewIncidentFormFieldSelection struct {
+	Data struct {
+		Attributes struct {
+			// The custom field for this selection
+			FormFieldId       string     `json:"form_field_id"`
+			IncidentId        string     `json:"incident_id"`
+			SelectedOptionIds *[]string  `json:"selected_option_ids,omitempty"`
+			SelectedUserIds   *[]float32 `json:"selected_user_ids,omitempty"`
+
+			// The selected value for text kind custom fields
+			Value *string `json:"value"`
+		} `json:"attributes"`
+		Type NewIncidentFormFieldSelectionDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewIncidentFormFieldSelectionDataType defines model for NewIncidentFormFieldSelection.Data.Type.
+type NewIncidentFormFieldSelectionDataType string
 
 // NewIncidentRole defines model for new_incident_role.
 type NewIncidentRole struct {
@@ -7229,6 +8222,32 @@ type NewWorkflowCustomFieldSelectionDataAttributesIncidentCondition string
 
 // NewWorkflowCustomFieldSelectionDataType defines model for NewWorkflowCustomFieldSelection.Data.Type.
 type NewWorkflowCustomFieldSelectionDataType string
+
+// NewWorkflowFormFieldCondition defines model for new_workflow_form_field_condition.
+type NewWorkflowFormFieldCondition struct {
+	Data struct {
+		Attributes struct {
+			// The custom field for this condition
+			FormFieldId string `json:"form_field_id"`
+
+			// The trigger condition
+			IncidentCondition NewWorkflowFormFieldConditionDataAttributesIncidentCondition `json:"incident_condition"`
+			SelectedOptionIds *[]string                                                    `json:"selected_option_ids,omitempty"`
+			SelectedUserIds   *[]float32                                                   `json:"selected_user_ids,omitempty"`
+			Values            *[]string                                                    `json:"values,omitempty"`
+
+			// The workflow for this condition
+			WorkflowId *string `json:"workflow_id,omitempty"`
+		} `json:"attributes"`
+		Type NewWorkflowFormFieldConditionDataType `json:"type"`
+	} `json:"data"`
+}
+
+// The trigger condition
+type NewWorkflowFormFieldConditionDataAttributesIncidentCondition string
+
+// NewWorkflowFormFieldConditionDataType defines model for NewWorkflowFormFieldCondition.Data.Type.
+type NewWorkflowFormFieldConditionDataType string
 
 // NewWorkflowGroup defines model for new_workflow_group.
 type NewWorkflowGroup struct {
@@ -9265,6 +10284,89 @@ type UpdateEnvironment struct {
 // UpdateEnvironmentDataType defines model for UpdateEnvironment.Data.Type.
 type UpdateEnvironmentDataType string
 
+// UpdateFormField defines model for update_form_field.
+type UpdateFormField struct {
+	Data struct {
+		Attributes struct {
+			DefaultValues *[]string `json:"default_values,omitempty"`
+
+			// The description of the form_field
+			Description *string `json:"description"`
+
+			// The input kind of the form_field
+			InputKind *UpdateFormFieldDataAttributesInputKind `json:"input_kind,omitempty"`
+
+			// The kind of the form_field
+			Kind *UpdateFormFieldDataAttributesKind `json:"kind,omitempty"`
+
+			// The name of the form_field
+			Name     *string                                  `json:"name,omitempty"`
+			Required *[]UpdateFormFieldDataAttributesRequired `json:"required,omitempty"`
+			Shown    *[]UpdateFormFieldDataAttributesShown    `json:"shown,omitempty"`
+		} `json:"attributes"`
+		Type UpdateFormFieldDataType `json:"type"`
+	} `json:"data"`
+}
+
+// The input kind of the form_field
+type UpdateFormFieldDataAttributesInputKind string
+
+// The kind of the form_field
+type UpdateFormFieldDataAttributesKind string
+
+// Where the form_field is required
+type UpdateFormFieldDataAttributesRequired string
+
+// Where the form_field is shown
+type UpdateFormFieldDataAttributesShown string
+
+// UpdateFormFieldDataType defines model for UpdateFormField.Data.Type.
+type UpdateFormFieldDataType string
+
+// UpdateFormFieldOption defines model for update_form_field_option.
+type UpdateFormFieldOption struct {
+	Data struct {
+		Attributes struct {
+			// The hex color of the form_field_option
+			Color   *string `json:"color,omitempty"`
+			Default *bool   `json:"default,omitempty"`
+
+			// The position of the form_field_option
+			Position *float32 `json:"position,omitempty"`
+
+			// The value of the form_field_option
+			Value *string `json:"value,omitempty"`
+		} `json:"attributes"`
+		Type UpdateFormFieldOptionDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateFormFieldOptionDataType defines model for UpdateFormFieldOption.Data.Type.
+type UpdateFormFieldOptionDataType string
+
+// UpdateFormFieldPosition defines model for update_form_field_position.
+type UpdateFormFieldPosition struct {
+	Data struct {
+		Attributes struct {
+			// The form for the position
+			Form *UpdateFormFieldPositionDataAttributesForm `json:"form,omitempty"`
+
+			// The ID of the form field.
+			FormFieldId *string `json:"form_field_id,omitempty"`
+
+			// The position of the form_field_position
+			Position *float32 `json:"position,omitempty"`
+		} `json:"attributes"`
+		Type UpdateFormFieldPositionDataType `json:"type"`
+	} `json:"data"`
+}
+
+// The form for the position
+type UpdateFormFieldPositionDataAttributesForm string
+
+// UpdateFormFieldPositionDataType defines model for UpdateFormFieldPosition.Data.Type.
+type UpdateFormFieldPositionDataType string
+
 // UpdateFunctionality defines model for update_functionality.
 type UpdateFunctionality struct {
 	Data struct {
@@ -9534,6 +10636,23 @@ type UpdateIncidentFeedbackDataAttributesRating int
 
 // UpdateIncidentFeedbackDataType defines model for UpdateIncidentFeedback.Data.Type.
 type UpdateIncidentFeedbackDataType string
+
+// UpdateIncidentFormFieldSelection defines model for update_incident_form_field_selection.
+type UpdateIncidentFormFieldSelection struct {
+	Data struct {
+		Attributes struct {
+			SelectedOptionIds *[]string  `json:"selected_option_ids,omitempty"`
+			SelectedUserIds   *[]float32 `json:"selected_user_ids,omitempty"`
+
+			// The selected value for text kind custom fields
+			Value *string `json:"value"`
+		} `json:"attributes"`
+		Type UpdateIncidentFormFieldSelectionDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateIncidentFormFieldSelectionDataType defines model for UpdateIncidentFormFieldSelection.Data.Type.
+type UpdateIncidentFormFieldSelectionDataType string
 
 // UpdateIncidentPostMortem defines model for update_incident_post_mortem.
 type UpdateIncidentPostMortem struct {
@@ -10367,6 +11486,26 @@ type UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition string
 // UpdateWorkflowCustomFieldSelectionDataType defines model for UpdateWorkflowCustomFieldSelection.Data.Type.
 type UpdateWorkflowCustomFieldSelectionDataType string
 
+// UpdateWorkflowFormFieldCondition defines model for update_workflow_form_field_condition.
+type UpdateWorkflowFormFieldCondition struct {
+	Data struct {
+		Attributes struct {
+			// The trigger condition
+			IncidentCondition *UpdateWorkflowFormFieldConditionDataAttributesIncidentCondition `json:"incident_condition,omitempty"`
+			SelectedOptionIds *[]string                                                        `json:"selected_option_ids,omitempty"`
+			SelectedUserIds   *[]float32                                                       `json:"selected_user_ids,omitempty"`
+			Values            *[]string                                                        `json:"values,omitempty"`
+		} `json:"attributes"`
+		Type UpdateWorkflowFormFieldConditionDataType `json:"type"`
+	} `json:"data"`
+}
+
+// The trigger condition
+type UpdateWorkflowFormFieldConditionDataAttributesIncidentCondition string
+
+// UpdateWorkflowFormFieldConditionDataType defines model for UpdateWorkflowFormFieldCondition.Data.Type.
+type UpdateWorkflowFormFieldConditionDataType string
+
 // UpdateWorkflowGroup defines model for update_workflow_group.
 type UpdateWorkflowGroup struct {
 	Data struct {
@@ -10609,6 +11748,89 @@ type WorkflowCustomFieldSelectionResponseDataAttributesIncidentCondition string
 
 // WorkflowCustomFieldSelectionResponseDataType defines model for WorkflowCustomFieldSelectionResponse.Data.Type.
 type WorkflowCustomFieldSelectionResponseDataType string
+
+// WorkflowFormFieldCondition defines model for workflow_form_field_condition.
+type WorkflowFormFieldCondition struct {
+	// The custom field for this condition
+	FormFieldId string `json:"form_field_id"`
+
+	// The trigger condition
+	IncidentCondition WorkflowFormFieldConditionIncidentCondition `json:"incident_condition"`
+	SelectedOptionIds []string                                    `json:"selected_option_ids"`
+	SelectedUserIds   []float32                                   `json:"selected_user_ids"`
+	Values            *[]string                                   `json:"values,omitempty"`
+
+	// The workflow for this condition
+	WorkflowId string `json:"workflow_id"`
+}
+
+// The trigger condition
+type WorkflowFormFieldConditionIncidentCondition string
+
+// WorkflowFormFieldConditionList defines model for workflow_form_field_condition_list.
+type WorkflowFormFieldConditionList struct {
+	Data []struct {
+		Attributes struct {
+			// The custom field for this condition
+			FormFieldId string `json:"form_field_id"`
+
+			// The trigger condition
+			IncidentCondition WorkflowFormFieldConditionListDataAttributesIncidentCondition `json:"incident_condition"`
+			SelectedOptionIds []string                                                      `json:"selected_option_ids"`
+			SelectedUserIds   []float32                                                     `json:"selected_user_ids"`
+			Values            *[]string                                                     `json:"values,omitempty"`
+
+			// The workflow for this condition
+			WorkflowId string `json:"workflow_id"`
+		} `json:"attributes"`
+
+		// Unique ID of the workflow_form_field_condition
+		Id   string                                 `json:"id"`
+		Type WorkflowFormFieldConditionListDataType `json:"type"`
+	} `json:"data"`
+	Links struct {
+		First string  `json:"first"`
+		Last  string  `json:"last"`
+		Next  *string `json:"next"`
+		Prev  *string `json:"prev"`
+		Self  string  `json:"self"`
+	} `json:"links"`
+}
+
+// The trigger condition
+type WorkflowFormFieldConditionListDataAttributesIncidentCondition string
+
+// WorkflowFormFieldConditionListDataType defines model for WorkflowFormFieldConditionList.Data.Type.
+type WorkflowFormFieldConditionListDataType string
+
+// WorkflowFormFieldConditionResponse defines model for workflow_form_field_condition_response.
+type WorkflowFormFieldConditionResponse struct {
+	Data struct {
+		Attributes struct {
+			// The custom field for this condition
+			FormFieldId string `json:"form_field_id"`
+
+			// The trigger condition
+			IncidentCondition WorkflowFormFieldConditionResponseDataAttributesIncidentCondition `json:"incident_condition"`
+			SelectedOptionIds []string                                                          `json:"selected_option_ids"`
+			SelectedUserIds   []float32                                                         `json:"selected_user_ids"`
+			Values            *[]string                                                         `json:"values,omitempty"`
+
+			// The workflow for this condition
+			WorkflowId string `json:"workflow_id"`
+		} `json:"attributes"`
+
+		// Unique ID of the workflow_form_field_condition
+		Id   string                                     `json:"id"`
+		Type WorkflowFormFieldConditionResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// The trigger condition
+type WorkflowFormFieldConditionResponseDataAttributesIncidentCondition string
+
+// WorkflowFormFieldConditionResponseDataType defines model for WorkflowFormFieldConditionResponse.Data.Type.
+type WorkflowFormFieldConditionResponseDataType string
 
 // WorkflowGroup defines model for workflow_group.
 type WorkflowGroup struct {
@@ -11070,6 +12292,36 @@ type ListEnvironmentsParams struct {
 	Sort              *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
+// ListFormFieldsParams defines parameters for ListFormFields.
+type ListFormFieldsParams struct {
+	Include           *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSlug        *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterName        *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterKind        *string `form:"filter[kind],omitempty" json:"filter[kind],omitempty"`
+	FilterEnabled     *bool   `form:"filter[enabled],omitempty" json:"filter[enabled],omitempty"`
+	FilterCreatedAtGt *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtLt *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+}
+
+// ListFormFieldOptionsParams defines parameters for ListFormFieldOptions.
+type ListFormFieldOptionsParams struct {
+	Include     *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber  *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize    *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterValue *string `form:"filter[value],omitempty" json:"filter[value],omitempty"`
+	FilterColor *string `form:"filter[color],omitempty" json:"filter[color],omitempty"`
+}
+
+// ListFormFieldPositionsParams defines parameters for ListFormFieldPositions.
+type ListFormFieldPositionsParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterForm *string `form:"filter[form],omitempty" json:"filter[form],omitempty"`
+}
+
 // ListFunctionalitiesParams defines parameters for ListFunctionalities.
 type ListFunctionalitiesParams struct {
 	Include           *string `form:"include,omitempty" json:"include,omitempty"`
@@ -11186,6 +12438,13 @@ type ListIncidentEventsParams struct {
 
 // ListIncidentFeedbacksParams defines parameters for ListIncidentFeedbacks.
 type ListIncidentFeedbacksParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+}
+
+// ListIncidentFormFieldSelectionsParams defines parameters for ListIncidentFormFieldSelections.
+type ListIncidentFormFieldSelectionsParams struct {
 	Include    *string `form:"include,omitempty" json:"include,omitempty"`
 	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
@@ -11336,6 +12595,13 @@ type ListWorkflowsParams struct {
 
 // ListWorkflowCustomFieldSelectionsParams defines parameters for ListWorkflowCustomFieldSelections.
 type ListWorkflowCustomFieldSelectionsParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+}
+
+// ListWorkflowFormFieldConditionsParams defines parameters for ListWorkflowFormFieldConditions.
+type ListWorkflowFormFieldConditionsParams struct {
 	Include    *string `form:"include,omitempty" json:"include,omitempty"`
 	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
@@ -11563,6 +12829,48 @@ type ClientInterface interface {
 	// UpdateIncidentFeedback request with any body
 	UpdateIncidentFeedbackWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// DeleteFormFieldOption request
+	DeleteFormFieldOption(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetFormFieldOption request
+	GetFormFieldOption(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateFormFieldOption request with any body
+	UpdateFormFieldOptionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteFormFieldPosition request
+	DeleteFormFieldPosition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetFormFieldPosition request
+	GetFormFieldPosition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateFormFieldPosition request with any body
+	UpdateFormFieldPositionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListFormFields request
+	ListFormFields(ctx context.Context, params *ListFormFieldsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateFormField request with any body
+	CreateFormFieldWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListFormFieldOptions request
+	ListFormFieldOptions(ctx context.Context, formFieldId string, params *ListFormFieldOptionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateFormFieldOption request with any body
+	CreateFormFieldOptionWithBody(ctx context.Context, formFieldId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListFormFieldPositions request
+	ListFormFieldPositions(ctx context.Context, formFieldId string, params *ListFormFieldPositionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteFormField request
+	DeleteFormField(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetFormField request
+	GetFormField(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateFormField request with any body
+	UpdateFormFieldWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListFunctionalities request
 	ListFunctionalities(ctx context.Context, params *ListFunctionalitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -11592,6 +12900,15 @@ type ClientInterface interface {
 
 	// UpdateIncidentCustomFieldSelection request with any body
 	UpdateIncidentCustomFieldSelectionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteIncidentFormFieldSelection request
+	DeleteIncidentFormFieldSelection(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetIncidentFormFieldSelection request
+	GetIncidentFormFieldSelection(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateIncidentFormFieldSelection request with any body
+	UpdateIncidentFormFieldSelectionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteIncidentRoleTask request
 	DeleteIncidentRoleTask(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -11691,6 +13008,12 @@ type ClientInterface interface {
 
 	// CreateIncidentFeedback request with any body
 	CreateIncidentFeedbackWithBody(ctx context.Context, incidentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListIncidentFormFieldSelections request
+	ListIncidentFormFieldSelections(ctx context.Context, incidentId string, params *ListIncidentFormFieldSelectionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateIncidentFormFieldSelection request with any body
+	CreateIncidentFormFieldSelectionWithBody(ctx context.Context, incidentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListIncidentStatusPages request
 	ListIncidentStatusPages(ctx context.Context, incidentId string, params *ListIncidentStatusPagesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -11866,6 +13189,15 @@ type ClientInterface interface {
 	// UpdateWorkflowCustomFieldSelection request with any body
 	UpdateWorkflowCustomFieldSelectionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// DeleteWorkflowFormFieldCondition request
+	DeleteWorkflowFormFieldCondition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetWorkflowFormFieldCondition request
+	GetWorkflowFormFieldCondition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateWorkflowFormFieldCondition request with any body
+	UpdateWorkflowFormFieldConditionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListWorkflowGroups request
 	ListWorkflowGroups(ctx context.Context, params *ListWorkflowGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -11910,6 +13242,12 @@ type ClientInterface interface {
 
 	// CreateWorkflowCustomFieldSelection request with any body
 	CreateWorkflowCustomFieldSelectionWithBody(ctx context.Context, workflowId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListWorkflowFormFieldConditions request
+	ListWorkflowFormFieldConditions(ctx context.Context, workflowId string, params *ListWorkflowFormFieldConditionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateWorkflowFormFieldCondition request with any body
+	CreateWorkflowFormFieldConditionWithBody(ctx context.Context, workflowId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListWorkflowRuns request
 	ListWorkflowRuns(ctx context.Context, workflowId string, params *ListWorkflowRunsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -12464,6 +13802,174 @@ func (c *Client) UpdateIncidentFeedbackWithBody(ctx context.Context, id string, 
 	return c.Client.Do(req)
 }
 
+func (c *Client) DeleteFormFieldOption(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteFormFieldOptionRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetFormFieldOption(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetFormFieldOptionRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateFormFieldOptionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateFormFieldOptionRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteFormFieldPosition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteFormFieldPositionRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetFormFieldPosition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetFormFieldPositionRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateFormFieldPositionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateFormFieldPositionRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListFormFields(ctx context.Context, params *ListFormFieldsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListFormFieldsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateFormFieldWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateFormFieldRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListFormFieldOptions(ctx context.Context, formFieldId string, params *ListFormFieldOptionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListFormFieldOptionsRequest(c.Server, formFieldId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateFormFieldOptionWithBody(ctx context.Context, formFieldId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateFormFieldOptionRequestWithBody(c.Server, formFieldId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListFormFieldPositions(ctx context.Context, formFieldId string, params *ListFormFieldPositionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListFormFieldPositionsRequest(c.Server, formFieldId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteFormField(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteFormFieldRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetFormField(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetFormFieldRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateFormFieldWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateFormFieldRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) ListFunctionalities(ctx context.Context, params *ListFunctionalitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListFunctionalitiesRequest(c.Server, params)
 	if err != nil {
@@ -12574,6 +14080,42 @@ func (c *Client) GetIncidentCustomFieldSelection(ctx context.Context, id string,
 
 func (c *Client) UpdateIncidentCustomFieldSelectionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIncidentCustomFieldSelectionRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteIncidentFormFieldSelection(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteIncidentFormFieldSelectionRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetIncidentFormFieldSelection(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetIncidentFormFieldSelectionRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateIncidentFormFieldSelectionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateIncidentFormFieldSelectionRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -12970,6 +14512,30 @@ func (c *Client) ListIncidentFeedbacks(ctx context.Context, incidentId string, p
 
 func (c *Client) CreateIncidentFeedbackWithBody(ctx context.Context, incidentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIncidentFeedbackRequestWithBody(c.Server, incidentId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListIncidentFormFieldSelections(ctx context.Context, incidentId string, params *ListIncidentFormFieldSelectionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListIncidentFormFieldSelectionsRequest(c.Server, incidentId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateIncidentFormFieldSelectionWithBody(ctx context.Context, incidentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateIncidentFormFieldSelectionRequestWithBody(c.Server, incidentId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -13676,6 +15242,42 @@ func (c *Client) UpdateWorkflowCustomFieldSelectionWithBody(ctx context.Context,
 	return c.Client.Do(req)
 }
 
+func (c *Client) DeleteWorkflowFormFieldCondition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteWorkflowFormFieldConditionRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetWorkflowFormFieldCondition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetWorkflowFormFieldConditionRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateWorkflowFormFieldConditionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateWorkflowFormFieldConditionRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) ListWorkflowGroups(ctx context.Context, params *ListWorkflowGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListWorkflowGroupsRequest(c.Server, params)
 	if err != nil {
@@ -13846,6 +15448,30 @@ func (c *Client) ListWorkflowCustomFieldSelections(ctx context.Context, workflow
 
 func (c *Client) CreateWorkflowCustomFieldSelectionWithBody(ctx context.Context, workflowId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateWorkflowCustomFieldSelectionRequestWithBody(c.Server, workflowId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListWorkflowFormFieldConditions(ctx context.Context, workflowId string, params *ListWorkflowFormFieldConditionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListWorkflowFormFieldConditionsRequest(c.Server, workflowId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateWorkflowFormFieldConditionWithBody(ctx context.Context, workflowId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateWorkflowFormFieldConditionRequestWithBody(c.Server, workflowId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -16100,6 +17726,778 @@ func NewUpdateIncidentFeedbackRequestWithBody(server string, id string, contentT
 	return req, nil
 }
 
+// NewDeleteFormFieldOptionRequest generates requests for DeleteFormFieldOption
+func NewDeleteFormFieldOptionRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_options/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetFormFieldOptionRequest generates requests for GetFormFieldOption
+func NewGetFormFieldOptionRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_options/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateFormFieldOptionRequestWithBody generates requests for UpdateFormFieldOption with any type of body
+func NewUpdateFormFieldOptionRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_options/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteFormFieldPositionRequest generates requests for DeleteFormFieldPosition
+func NewDeleteFormFieldPositionRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_positions/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetFormFieldPositionRequest generates requests for GetFormFieldPosition
+func NewGetFormFieldPositionRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_positions/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateFormFieldPositionRequestWithBody generates requests for UpdateFormFieldPosition with any type of body
+func NewUpdateFormFieldPositionRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_positions/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListFormFieldsRequest generates requests for ListFormFields
+func NewListFormFieldsRequest(server string, params *ListFormFieldsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_fields")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Include != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterSlug != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[slug]", runtime.ParamLocationQuery, *params.FilterSlug); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterName != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[name]", runtime.ParamLocationQuery, *params.FilterName); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterKind != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[kind]", runtime.ParamLocationQuery, *params.FilterKind); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterEnabled != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[enabled]", runtime.ParamLocationQuery, *params.FilterEnabled); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateFormFieldRequestWithBody generates requests for CreateFormField with any type of body
+func NewCreateFormFieldRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_fields")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListFormFieldOptionsRequest generates requests for ListFormFieldOptions
+func NewListFormFieldOptionsRequest(server string, formFieldId string, params *ListFormFieldOptionsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "form_field_id", runtime.ParamLocationPath, formFieldId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_fields/%s/options", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Include != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterValue != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[value]", runtime.ParamLocationQuery, *params.FilterValue); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterColor != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[color]", runtime.ParamLocationQuery, *params.FilterColor); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateFormFieldOptionRequestWithBody generates requests for CreateFormFieldOption with any type of body
+func NewCreateFormFieldOptionRequestWithBody(server string, formFieldId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "form_field_id", runtime.ParamLocationPath, formFieldId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_fields/%s/options", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListFormFieldPositionsRequest generates requests for ListFormFieldPositions
+func NewListFormFieldPositionsRequest(server string, formFieldId string, params *ListFormFieldPositionsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "form_field_id", runtime.ParamLocationPath, formFieldId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_fields/%s/positions", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Include != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterForm != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[form]", runtime.ParamLocationQuery, *params.FilterForm); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDeleteFormFieldRequest generates requests for DeleteFormField
+func NewDeleteFormFieldRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_fields/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetFormFieldRequest generates requests for GetFormField
+func NewGetFormFieldRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_fields/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateFormFieldRequestWithBody generates requests for UpdateFormField with any type of body
+func NewUpdateFormFieldRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_fields/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListFunctionalitiesRequest generates requests for ListFunctionalities
 func NewListFunctionalitiesRequest(server string, params *ListFunctionalitiesParams) (*http.Request, error) {
 	var err error
@@ -16597,6 +18995,110 @@ func NewUpdateIncidentCustomFieldSelectionRequestWithBody(server string, id stri
 	}
 
 	operationPath := fmt.Sprintf("/v1/incident_custom_field_selections/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteIncidentFormFieldSelectionRequest generates requests for DeleteIncidentFormFieldSelection
+func NewDeleteIncidentFormFieldSelectionRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_form_field_selections/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetIncidentFormFieldSelectionRequest generates requests for GetIncidentFormFieldSelection
+func NewGetIncidentFormFieldSelectionRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_form_field_selections/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateIncidentFormFieldSelectionRequestWithBody generates requests for UpdateIncidentFormFieldSelection with any type of body
+func NewUpdateIncidentFormFieldSelectionRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_form_field_selections/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -18737,6 +21239,128 @@ func NewCreateIncidentFeedbackRequestWithBody(server string, incidentId string, 
 	}
 
 	operationPath := fmt.Sprintf("/v1/incidents/%s/feedbacks", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListIncidentFormFieldSelectionsRequest generates requests for ListIncidentFormFieldSelections
+func NewListIncidentFormFieldSelectionsRequest(server string, incidentId string, params *ListIncidentFormFieldSelectionsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "incident_id", runtime.ParamLocationPath, incidentId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incidents/%s/form_field_selections", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Include != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateIncidentFormFieldSelectionRequestWithBody generates requests for CreateIncidentFormFieldSelection with any type of body
+func NewCreateIncidentFormFieldSelectionRequestWithBody(server string, incidentId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "incident_id", runtime.ParamLocationPath, incidentId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incidents/%s/form_field_selections", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -21860,6 +24484,110 @@ func NewUpdateWorkflowCustomFieldSelectionRequestWithBody(server string, id stri
 	return req, nil
 }
 
+// NewDeleteWorkflowFormFieldConditionRequest generates requests for DeleteWorkflowFormFieldCondition
+func NewDeleteWorkflowFormFieldConditionRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/workflow_form_field_conditions/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetWorkflowFormFieldConditionRequest generates requests for GetWorkflowFormFieldCondition
+func NewGetWorkflowFormFieldConditionRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/workflow_form_field_conditions/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateWorkflowFormFieldConditionRequestWithBody generates requests for UpdateWorkflowFormFieldCondition with any type of body
+func NewUpdateWorkflowFormFieldConditionRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/workflow_form_field_conditions/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListWorkflowGroupsRequest generates requests for ListWorkflowGroups
 func NewListWorkflowGroupsRequest(server string, params *ListWorkflowGroupsParams) (*http.Request, error) {
 	var err error
@@ -22590,6 +25318,128 @@ func NewCreateWorkflowCustomFieldSelectionRequestWithBody(server string, workflo
 	return req, nil
 }
 
+// NewListWorkflowFormFieldConditionsRequest generates requests for ListWorkflowFormFieldConditions
+func NewListWorkflowFormFieldConditionsRequest(server string, workflowId string, params *ListWorkflowFormFieldConditionsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "workflow_id", runtime.ParamLocationPath, workflowId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/workflows/%s/form_field_conditions", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Include != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateWorkflowFormFieldConditionRequestWithBody generates requests for CreateWorkflowFormFieldCondition with any type of body
+func NewCreateWorkflowFormFieldConditionRequestWithBody(server string, workflowId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "workflow_id", runtime.ParamLocationPath, workflowId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/workflows/%s/form_field_conditions", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListWorkflowRunsRequest generates requests for ListWorkflowRuns
 func NewListWorkflowRunsRequest(server string, workflowId string, params *ListWorkflowRunsParams) (*http.Request, error) {
 	var err error
@@ -23012,6 +25862,48 @@ type ClientWithResponsesInterface interface {
 	// UpdateIncidentFeedback request with any body
 	UpdateIncidentFeedbackWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentFeedbackResponse, error)
 
+	// DeleteFormFieldOption request
+	DeleteFormFieldOptionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldOptionResponse, error)
+
+	// GetFormFieldOption request
+	GetFormFieldOptionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormFieldOptionResponse, error)
+
+	// UpdateFormFieldOption request with any body
+	UpdateFormFieldOptionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormFieldOptionResponse, error)
+
+	// DeleteFormFieldPosition request
+	DeleteFormFieldPositionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldPositionResponse, error)
+
+	// GetFormFieldPosition request
+	GetFormFieldPositionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormFieldPositionResponse, error)
+
+	// UpdateFormFieldPosition request with any body
+	UpdateFormFieldPositionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormFieldPositionResponse, error)
+
+	// ListFormFields request
+	ListFormFieldsWithResponse(ctx context.Context, params *ListFormFieldsParams, reqEditors ...RequestEditorFn) (*ListFormFieldsResponse, error)
+
+	// CreateFormField request with any body
+	CreateFormFieldWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormFieldResponse, error)
+
+	// ListFormFieldOptions request
+	ListFormFieldOptionsWithResponse(ctx context.Context, formFieldId string, params *ListFormFieldOptionsParams, reqEditors ...RequestEditorFn) (*ListFormFieldOptionsResponse, error)
+
+	// CreateFormFieldOption request with any body
+	CreateFormFieldOptionWithBodyWithResponse(ctx context.Context, formFieldId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormFieldOptionResponse, error)
+
+	// ListFormFieldPositions request
+	ListFormFieldPositionsWithResponse(ctx context.Context, formFieldId string, params *ListFormFieldPositionsParams, reqEditors ...RequestEditorFn) (*ListFormFieldPositionsResponse, error)
+
+	// DeleteFormField request
+	DeleteFormFieldWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldResponse, error)
+
+	// GetFormField request
+	GetFormFieldWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormFieldResponse, error)
+
+	// UpdateFormField request with any body
+	UpdateFormFieldWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormFieldResponse, error)
+
 	// ListFunctionalities request
 	ListFunctionalitiesWithResponse(ctx context.Context, params *ListFunctionalitiesParams, reqEditors ...RequestEditorFn) (*ListFunctionalitiesResponse, error)
 
@@ -23041,6 +25933,15 @@ type ClientWithResponsesInterface interface {
 
 	// UpdateIncidentCustomFieldSelection request with any body
 	UpdateIncidentCustomFieldSelectionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentCustomFieldSelectionResponse, error)
+
+	// DeleteIncidentFormFieldSelection request
+	DeleteIncidentFormFieldSelectionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentFormFieldSelectionResponse, error)
+
+	// GetIncidentFormFieldSelection request
+	GetIncidentFormFieldSelectionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentFormFieldSelectionResponse, error)
+
+	// UpdateIncidentFormFieldSelection request with any body
+	UpdateIncidentFormFieldSelectionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentFormFieldSelectionResponse, error)
 
 	// DeleteIncidentRoleTask request
 	DeleteIncidentRoleTaskWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentRoleTaskResponse, error)
@@ -23140,6 +26041,12 @@ type ClientWithResponsesInterface interface {
 
 	// CreateIncidentFeedback request with any body
 	CreateIncidentFeedbackWithBodyWithResponse(ctx context.Context, incidentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentFeedbackResponse, error)
+
+	// ListIncidentFormFieldSelections request
+	ListIncidentFormFieldSelectionsWithResponse(ctx context.Context, incidentId string, params *ListIncidentFormFieldSelectionsParams, reqEditors ...RequestEditorFn) (*ListIncidentFormFieldSelectionsResponse, error)
+
+	// CreateIncidentFormFieldSelection request with any body
+	CreateIncidentFormFieldSelectionWithBodyWithResponse(ctx context.Context, incidentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentFormFieldSelectionResponse, error)
 
 	// ListIncidentStatusPages request
 	ListIncidentStatusPagesWithResponse(ctx context.Context, incidentId string, params *ListIncidentStatusPagesParams, reqEditors ...RequestEditorFn) (*ListIncidentStatusPagesResponse, error)
@@ -23315,6 +26222,15 @@ type ClientWithResponsesInterface interface {
 	// UpdateWorkflowCustomFieldSelection request with any body
 	UpdateWorkflowCustomFieldSelectionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateWorkflowCustomFieldSelectionResponse, error)
 
+	// DeleteWorkflowFormFieldCondition request
+	DeleteWorkflowFormFieldConditionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteWorkflowFormFieldConditionResponse, error)
+
+	// GetWorkflowFormFieldCondition request
+	GetWorkflowFormFieldConditionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetWorkflowFormFieldConditionResponse, error)
+
+	// UpdateWorkflowFormFieldCondition request with any body
+	UpdateWorkflowFormFieldConditionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateWorkflowFormFieldConditionResponse, error)
+
 	// ListWorkflowGroups request
 	ListWorkflowGroupsWithResponse(ctx context.Context, params *ListWorkflowGroupsParams, reqEditors ...RequestEditorFn) (*ListWorkflowGroupsResponse, error)
 
@@ -23359,6 +26275,12 @@ type ClientWithResponsesInterface interface {
 
 	// CreateWorkflowCustomFieldSelection request with any body
 	CreateWorkflowCustomFieldSelectionWithBodyWithResponse(ctx context.Context, workflowId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateWorkflowCustomFieldSelectionResponse, error)
+
+	// ListWorkflowFormFieldConditions request
+	ListWorkflowFormFieldConditionsWithResponse(ctx context.Context, workflowId string, params *ListWorkflowFormFieldConditionsParams, reqEditors ...RequestEditorFn) (*ListWorkflowFormFieldConditionsResponse, error)
+
+	// CreateWorkflowFormFieldCondition request with any body
+	CreateWorkflowFormFieldConditionWithBodyWithResponse(ctx context.Context, workflowId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateWorkflowFormFieldConditionResponse, error)
 
 	// ListWorkflowRuns request
 	ListWorkflowRunsWithResponse(ctx context.Context, workflowId string, params *ListWorkflowRunsParams, reqEditors ...RequestEditorFn) (*ListWorkflowRunsResponse, error)
@@ -24318,6 +27240,300 @@ func (r UpdateIncidentFeedbackResponse) StatusCode() int {
 	return 0
 }
 
+type DeleteFormFieldOptionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteFormFieldOptionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteFormFieldOptionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetFormFieldOptionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r GetFormFieldOptionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetFormFieldOptionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateFormFieldOptionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateFormFieldOptionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateFormFieldOptionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteFormFieldPositionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteFormFieldPositionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteFormFieldPositionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetFormFieldPositionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r GetFormFieldPositionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetFormFieldPositionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateFormFieldPositionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateFormFieldPositionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateFormFieldPositionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListFormFieldsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r ListFormFieldsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListFormFieldsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateFormFieldResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateFormFieldResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateFormFieldResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListFormFieldOptionsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r ListFormFieldOptionsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListFormFieldOptionsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateFormFieldOptionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateFormFieldOptionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateFormFieldOptionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListFormFieldPositionsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r ListFormFieldPositionsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListFormFieldPositionsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteFormFieldResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteFormFieldResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteFormFieldResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetFormFieldResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r GetFormFieldResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetFormFieldResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateFormFieldResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateFormFieldResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateFormFieldResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type ListFunctionalitiesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -24522,6 +27738,69 @@ func (r UpdateIncidentCustomFieldSelectionResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r UpdateIncidentCustomFieldSelectionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteIncidentFormFieldSelectionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteIncidentFormFieldSelectionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteIncidentFormFieldSelectionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetIncidentFormFieldSelectionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r GetIncidentFormFieldSelectionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetIncidentFormFieldSelectionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateIncidentFormFieldSelectionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateIncidentFormFieldSelectionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateIncidentFormFieldSelectionResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -25215,6 +28494,48 @@ func (r CreateIncidentFeedbackResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r CreateIncidentFeedbackResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListIncidentFormFieldSelectionsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r ListIncidentFormFieldSelectionsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListIncidentFormFieldSelectionsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateIncidentFormFieldSelectionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateIncidentFormFieldSelectionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateIncidentFormFieldSelectionResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -26439,6 +29760,69 @@ func (r UpdateWorkflowCustomFieldSelectionResponse) StatusCode() int {
 	return 0
 }
 
+type DeleteWorkflowFormFieldConditionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteWorkflowFormFieldConditionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteWorkflowFormFieldConditionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetWorkflowFormFieldConditionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r GetWorkflowFormFieldConditionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetWorkflowFormFieldConditionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateWorkflowFormFieldConditionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateWorkflowFormFieldConditionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateWorkflowFormFieldConditionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type ListWorkflowGroupsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -26748,6 +30132,48 @@ func (r CreateWorkflowCustomFieldSelectionResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r CreateWorkflowCustomFieldSelectionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListWorkflowFormFieldConditionsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r ListWorkflowFormFieldConditionsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListWorkflowFormFieldConditionsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateWorkflowFormFieldConditionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateWorkflowFormFieldConditionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateWorkflowFormFieldConditionResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -27243,6 +30669,132 @@ func (c *ClientWithResponses) UpdateIncidentFeedbackWithBodyWithResponse(ctx con
 	return ParseUpdateIncidentFeedbackResponse(rsp)
 }
 
+// DeleteFormFieldOptionWithResponse request returning *DeleteFormFieldOptionResponse
+func (c *ClientWithResponses) DeleteFormFieldOptionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldOptionResponse, error) {
+	rsp, err := c.DeleteFormFieldOption(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteFormFieldOptionResponse(rsp)
+}
+
+// GetFormFieldOptionWithResponse request returning *GetFormFieldOptionResponse
+func (c *ClientWithResponses) GetFormFieldOptionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormFieldOptionResponse, error) {
+	rsp, err := c.GetFormFieldOption(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetFormFieldOptionResponse(rsp)
+}
+
+// UpdateFormFieldOptionWithBodyWithResponse request with arbitrary body returning *UpdateFormFieldOptionResponse
+func (c *ClientWithResponses) UpdateFormFieldOptionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormFieldOptionResponse, error) {
+	rsp, err := c.UpdateFormFieldOptionWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateFormFieldOptionResponse(rsp)
+}
+
+// DeleteFormFieldPositionWithResponse request returning *DeleteFormFieldPositionResponse
+func (c *ClientWithResponses) DeleteFormFieldPositionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldPositionResponse, error) {
+	rsp, err := c.DeleteFormFieldPosition(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteFormFieldPositionResponse(rsp)
+}
+
+// GetFormFieldPositionWithResponse request returning *GetFormFieldPositionResponse
+func (c *ClientWithResponses) GetFormFieldPositionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormFieldPositionResponse, error) {
+	rsp, err := c.GetFormFieldPosition(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetFormFieldPositionResponse(rsp)
+}
+
+// UpdateFormFieldPositionWithBodyWithResponse request with arbitrary body returning *UpdateFormFieldPositionResponse
+func (c *ClientWithResponses) UpdateFormFieldPositionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormFieldPositionResponse, error) {
+	rsp, err := c.UpdateFormFieldPositionWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateFormFieldPositionResponse(rsp)
+}
+
+// ListFormFieldsWithResponse request returning *ListFormFieldsResponse
+func (c *ClientWithResponses) ListFormFieldsWithResponse(ctx context.Context, params *ListFormFieldsParams, reqEditors ...RequestEditorFn) (*ListFormFieldsResponse, error) {
+	rsp, err := c.ListFormFields(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListFormFieldsResponse(rsp)
+}
+
+// CreateFormFieldWithBodyWithResponse request with arbitrary body returning *CreateFormFieldResponse
+func (c *ClientWithResponses) CreateFormFieldWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormFieldResponse, error) {
+	rsp, err := c.CreateFormFieldWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateFormFieldResponse(rsp)
+}
+
+// ListFormFieldOptionsWithResponse request returning *ListFormFieldOptionsResponse
+func (c *ClientWithResponses) ListFormFieldOptionsWithResponse(ctx context.Context, formFieldId string, params *ListFormFieldOptionsParams, reqEditors ...RequestEditorFn) (*ListFormFieldOptionsResponse, error) {
+	rsp, err := c.ListFormFieldOptions(ctx, formFieldId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListFormFieldOptionsResponse(rsp)
+}
+
+// CreateFormFieldOptionWithBodyWithResponse request with arbitrary body returning *CreateFormFieldOptionResponse
+func (c *ClientWithResponses) CreateFormFieldOptionWithBodyWithResponse(ctx context.Context, formFieldId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormFieldOptionResponse, error) {
+	rsp, err := c.CreateFormFieldOptionWithBody(ctx, formFieldId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateFormFieldOptionResponse(rsp)
+}
+
+// ListFormFieldPositionsWithResponse request returning *ListFormFieldPositionsResponse
+func (c *ClientWithResponses) ListFormFieldPositionsWithResponse(ctx context.Context, formFieldId string, params *ListFormFieldPositionsParams, reqEditors ...RequestEditorFn) (*ListFormFieldPositionsResponse, error) {
+	rsp, err := c.ListFormFieldPositions(ctx, formFieldId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListFormFieldPositionsResponse(rsp)
+}
+
+// DeleteFormFieldWithResponse request returning *DeleteFormFieldResponse
+func (c *ClientWithResponses) DeleteFormFieldWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldResponse, error) {
+	rsp, err := c.DeleteFormField(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteFormFieldResponse(rsp)
+}
+
+// GetFormFieldWithResponse request returning *GetFormFieldResponse
+func (c *ClientWithResponses) GetFormFieldWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormFieldResponse, error) {
+	rsp, err := c.GetFormField(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetFormFieldResponse(rsp)
+}
+
+// UpdateFormFieldWithBodyWithResponse request with arbitrary body returning *UpdateFormFieldResponse
+func (c *ClientWithResponses) UpdateFormFieldWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormFieldResponse, error) {
+	rsp, err := c.UpdateFormFieldWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateFormFieldResponse(rsp)
+}
+
 // ListFunctionalitiesWithResponse request returning *ListFunctionalitiesResponse
 func (c *ClientWithResponses) ListFunctionalitiesWithResponse(ctx context.Context, params *ListFunctionalitiesParams, reqEditors ...RequestEditorFn) (*ListFunctionalitiesResponse, error) {
 	rsp, err := c.ListFunctionalities(ctx, params, reqEditors...)
@@ -27331,6 +30883,33 @@ func (c *ClientWithResponses) UpdateIncidentCustomFieldSelectionWithBodyWithResp
 		return nil, err
 	}
 	return ParseUpdateIncidentCustomFieldSelectionResponse(rsp)
+}
+
+// DeleteIncidentFormFieldSelectionWithResponse request returning *DeleteIncidentFormFieldSelectionResponse
+func (c *ClientWithResponses) DeleteIncidentFormFieldSelectionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentFormFieldSelectionResponse, error) {
+	rsp, err := c.DeleteIncidentFormFieldSelection(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteIncidentFormFieldSelectionResponse(rsp)
+}
+
+// GetIncidentFormFieldSelectionWithResponse request returning *GetIncidentFormFieldSelectionResponse
+func (c *ClientWithResponses) GetIncidentFormFieldSelectionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentFormFieldSelectionResponse, error) {
+	rsp, err := c.GetIncidentFormFieldSelection(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetIncidentFormFieldSelectionResponse(rsp)
+}
+
+// UpdateIncidentFormFieldSelectionWithBodyWithResponse request with arbitrary body returning *UpdateIncidentFormFieldSelectionResponse
+func (c *ClientWithResponses) UpdateIncidentFormFieldSelectionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentFormFieldSelectionResponse, error) {
+	rsp, err := c.UpdateIncidentFormFieldSelectionWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateIncidentFormFieldSelectionResponse(rsp)
 }
 
 // DeleteIncidentRoleTaskWithResponse request returning *DeleteIncidentRoleTaskResponse
@@ -27628,6 +31207,24 @@ func (c *ClientWithResponses) CreateIncidentFeedbackWithBodyWithResponse(ctx con
 		return nil, err
 	}
 	return ParseCreateIncidentFeedbackResponse(rsp)
+}
+
+// ListIncidentFormFieldSelectionsWithResponse request returning *ListIncidentFormFieldSelectionsResponse
+func (c *ClientWithResponses) ListIncidentFormFieldSelectionsWithResponse(ctx context.Context, incidentId string, params *ListIncidentFormFieldSelectionsParams, reqEditors ...RequestEditorFn) (*ListIncidentFormFieldSelectionsResponse, error) {
+	rsp, err := c.ListIncidentFormFieldSelections(ctx, incidentId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListIncidentFormFieldSelectionsResponse(rsp)
+}
+
+// CreateIncidentFormFieldSelectionWithBodyWithResponse request with arbitrary body returning *CreateIncidentFormFieldSelectionResponse
+func (c *ClientWithResponses) CreateIncidentFormFieldSelectionWithBodyWithResponse(ctx context.Context, incidentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentFormFieldSelectionResponse, error) {
+	rsp, err := c.CreateIncidentFormFieldSelectionWithBody(ctx, incidentId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateIncidentFormFieldSelectionResponse(rsp)
 }
 
 // ListIncidentStatusPagesWithResponse request returning *ListIncidentStatusPagesResponse
@@ -28152,6 +31749,33 @@ func (c *ClientWithResponses) UpdateWorkflowCustomFieldSelectionWithBodyWithResp
 	return ParseUpdateWorkflowCustomFieldSelectionResponse(rsp)
 }
 
+// DeleteWorkflowFormFieldConditionWithResponse request returning *DeleteWorkflowFormFieldConditionResponse
+func (c *ClientWithResponses) DeleteWorkflowFormFieldConditionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteWorkflowFormFieldConditionResponse, error) {
+	rsp, err := c.DeleteWorkflowFormFieldCondition(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteWorkflowFormFieldConditionResponse(rsp)
+}
+
+// GetWorkflowFormFieldConditionWithResponse request returning *GetWorkflowFormFieldConditionResponse
+func (c *ClientWithResponses) GetWorkflowFormFieldConditionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetWorkflowFormFieldConditionResponse, error) {
+	rsp, err := c.GetWorkflowFormFieldCondition(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetWorkflowFormFieldConditionResponse(rsp)
+}
+
+// UpdateWorkflowFormFieldConditionWithBodyWithResponse request with arbitrary body returning *UpdateWorkflowFormFieldConditionResponse
+func (c *ClientWithResponses) UpdateWorkflowFormFieldConditionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateWorkflowFormFieldConditionResponse, error) {
+	rsp, err := c.UpdateWorkflowFormFieldConditionWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateWorkflowFormFieldConditionResponse(rsp)
+}
+
 // ListWorkflowGroupsWithResponse request returning *ListWorkflowGroupsResponse
 func (c *ClientWithResponses) ListWorkflowGroupsWithResponse(ctx context.Context, params *ListWorkflowGroupsParams, reqEditors ...RequestEditorFn) (*ListWorkflowGroupsResponse, error) {
 	rsp, err := c.ListWorkflowGroups(ctx, params, reqEditors...)
@@ -28285,6 +31909,24 @@ func (c *ClientWithResponses) CreateWorkflowCustomFieldSelectionWithBodyWithResp
 		return nil, err
 	}
 	return ParseCreateWorkflowCustomFieldSelectionResponse(rsp)
+}
+
+// ListWorkflowFormFieldConditionsWithResponse request returning *ListWorkflowFormFieldConditionsResponse
+func (c *ClientWithResponses) ListWorkflowFormFieldConditionsWithResponse(ctx context.Context, workflowId string, params *ListWorkflowFormFieldConditionsParams, reqEditors ...RequestEditorFn) (*ListWorkflowFormFieldConditionsResponse, error) {
+	rsp, err := c.ListWorkflowFormFieldConditions(ctx, workflowId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListWorkflowFormFieldConditionsResponse(rsp)
+}
+
+// CreateWorkflowFormFieldConditionWithBodyWithResponse request with arbitrary body returning *CreateWorkflowFormFieldConditionResponse
+func (c *ClientWithResponses) CreateWorkflowFormFieldConditionWithBodyWithResponse(ctx context.Context, workflowId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateWorkflowFormFieldConditionResponse, error) {
+	rsp, err := c.CreateWorkflowFormFieldConditionWithBody(ctx, workflowId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateWorkflowFormFieldConditionResponse(rsp)
 }
 
 // ListWorkflowRunsWithResponse request returning *ListWorkflowRunsResponse
@@ -29043,6 +32685,230 @@ func ParseUpdateIncidentFeedbackResponse(rsp *http.Response) (*UpdateIncidentFee
 	return response, nil
 }
 
+// ParseDeleteFormFieldOptionResponse parses an HTTP response from a DeleteFormFieldOptionWithResponse call
+func ParseDeleteFormFieldOptionResponse(rsp *http.Response) (*DeleteFormFieldOptionResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteFormFieldOptionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseGetFormFieldOptionResponse parses an HTTP response from a GetFormFieldOptionWithResponse call
+func ParseGetFormFieldOptionResponse(rsp *http.Response) (*GetFormFieldOptionResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetFormFieldOptionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseUpdateFormFieldOptionResponse parses an HTTP response from a UpdateFormFieldOptionWithResponse call
+func ParseUpdateFormFieldOptionResponse(rsp *http.Response) (*UpdateFormFieldOptionResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateFormFieldOptionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseDeleteFormFieldPositionResponse parses an HTTP response from a DeleteFormFieldPositionWithResponse call
+func ParseDeleteFormFieldPositionResponse(rsp *http.Response) (*DeleteFormFieldPositionResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteFormFieldPositionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseGetFormFieldPositionResponse parses an HTTP response from a GetFormFieldPositionWithResponse call
+func ParseGetFormFieldPositionResponse(rsp *http.Response) (*GetFormFieldPositionResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetFormFieldPositionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseUpdateFormFieldPositionResponse parses an HTTP response from a UpdateFormFieldPositionWithResponse call
+func ParseUpdateFormFieldPositionResponse(rsp *http.Response) (*UpdateFormFieldPositionResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateFormFieldPositionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseListFormFieldsResponse parses an HTTP response from a ListFormFieldsWithResponse call
+func ParseListFormFieldsResponse(rsp *http.Response) (*ListFormFieldsResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListFormFieldsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseCreateFormFieldResponse parses an HTTP response from a CreateFormFieldWithResponse call
+func ParseCreateFormFieldResponse(rsp *http.Response) (*CreateFormFieldResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateFormFieldResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseListFormFieldOptionsResponse parses an HTTP response from a ListFormFieldOptionsWithResponse call
+func ParseListFormFieldOptionsResponse(rsp *http.Response) (*ListFormFieldOptionsResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListFormFieldOptionsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseCreateFormFieldOptionResponse parses an HTTP response from a CreateFormFieldOptionWithResponse call
+func ParseCreateFormFieldOptionResponse(rsp *http.Response) (*CreateFormFieldOptionResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateFormFieldOptionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseListFormFieldPositionsResponse parses an HTTP response from a ListFormFieldPositionsWithResponse call
+func ParseListFormFieldPositionsResponse(rsp *http.Response) (*ListFormFieldPositionsResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListFormFieldPositionsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseDeleteFormFieldResponse parses an HTTP response from a DeleteFormFieldWithResponse call
+func ParseDeleteFormFieldResponse(rsp *http.Response) (*DeleteFormFieldResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteFormFieldResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseGetFormFieldResponse parses an HTTP response from a GetFormFieldWithResponse call
+func ParseGetFormFieldResponse(rsp *http.Response) (*GetFormFieldResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetFormFieldResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseUpdateFormFieldResponse parses an HTTP response from a UpdateFormFieldWithResponse call
+func ParseUpdateFormFieldResponse(rsp *http.Response) (*UpdateFormFieldResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateFormFieldResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
 // ParseListFunctionalitiesResponse parses an HTTP response from a ListFunctionalitiesWithResponse call
 func ParseListFunctionalitiesResponse(rsp *http.Response) (*ListFunctionalitiesResponse, error) {
 	bodyBytes, err := ioutil.ReadAll(rsp.Body)
@@ -29196,6 +33062,54 @@ func ParseUpdateIncidentCustomFieldSelectionResponse(rsp *http.Response) (*Updat
 	}
 
 	response := &UpdateIncidentCustomFieldSelectionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseDeleteIncidentFormFieldSelectionResponse parses an HTTP response from a DeleteIncidentFormFieldSelectionWithResponse call
+func ParseDeleteIncidentFormFieldSelectionResponse(rsp *http.Response) (*DeleteIncidentFormFieldSelectionResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteIncidentFormFieldSelectionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseGetIncidentFormFieldSelectionResponse parses an HTTP response from a GetIncidentFormFieldSelectionWithResponse call
+func ParseGetIncidentFormFieldSelectionResponse(rsp *http.Response) (*GetIncidentFormFieldSelectionResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetIncidentFormFieldSelectionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseUpdateIncidentFormFieldSelectionResponse parses an HTTP response from a UpdateIncidentFormFieldSelectionWithResponse call
+func ParseUpdateIncidentFormFieldSelectionResponse(rsp *http.Response) (*UpdateIncidentFormFieldSelectionResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateIncidentFormFieldSelectionResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29724,6 +33638,38 @@ func ParseCreateIncidentFeedbackResponse(rsp *http.Response) (*CreateIncidentFee
 	}
 
 	response := &CreateIncidentFeedbackResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseListIncidentFormFieldSelectionsResponse parses an HTTP response from a ListIncidentFormFieldSelectionsWithResponse call
+func ParseListIncidentFormFieldSelectionsResponse(rsp *http.Response) (*ListIncidentFormFieldSelectionsResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListIncidentFormFieldSelectionsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseCreateIncidentFormFieldSelectionResponse parses an HTTP response from a CreateIncidentFormFieldSelectionWithResponse call
+func ParseCreateIncidentFormFieldSelectionResponse(rsp *http.Response) (*CreateIncidentFormFieldSelectionResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateIncidentFormFieldSelectionResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30659,6 +34605,54 @@ func ParseUpdateWorkflowCustomFieldSelectionResponse(rsp *http.Response) (*Updat
 	return response, nil
 }
 
+// ParseDeleteWorkflowFormFieldConditionResponse parses an HTTP response from a DeleteWorkflowFormFieldConditionWithResponse call
+func ParseDeleteWorkflowFormFieldConditionResponse(rsp *http.Response) (*DeleteWorkflowFormFieldConditionResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteWorkflowFormFieldConditionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseGetWorkflowFormFieldConditionResponse parses an HTTP response from a GetWorkflowFormFieldConditionWithResponse call
+func ParseGetWorkflowFormFieldConditionResponse(rsp *http.Response) (*GetWorkflowFormFieldConditionResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetWorkflowFormFieldConditionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseUpdateWorkflowFormFieldConditionResponse parses an HTTP response from a UpdateWorkflowFormFieldConditionWithResponse call
+func ParseUpdateWorkflowFormFieldConditionResponse(rsp *http.Response) (*UpdateWorkflowFormFieldConditionResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateWorkflowFormFieldConditionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
 // ParseListWorkflowGroupsResponse parses an HTTP response from a ListWorkflowGroupsWithResponse call
 func ParseListWorkflowGroupsResponse(rsp *http.Response) (*ListWorkflowGroupsResponse, error) {
 	bodyBytes, err := ioutil.ReadAll(rsp.Body)
@@ -30892,6 +34886,38 @@ func ParseCreateWorkflowCustomFieldSelectionResponse(rsp *http.Response) (*Creat
 	}
 
 	response := &CreateWorkflowCustomFieldSelectionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseListWorkflowFormFieldConditionsResponse parses an HTTP response from a ListWorkflowFormFieldConditionsWithResponse call
+func ParseListWorkflowFormFieldConditionsResponse(rsp *http.Response) (*ListWorkflowFormFieldConditionsResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListWorkflowFormFieldConditionsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseCreateWorkflowFormFieldConditionResponse parses an HTTP response from a CreateWorkflowFormFieldConditionWithResponse call
+func ParseCreateWorkflowFormFieldConditionResponse(rsp *http.Response) (*CreateWorkflowFormFieldConditionResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateWorkflowFormFieldConditionResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
