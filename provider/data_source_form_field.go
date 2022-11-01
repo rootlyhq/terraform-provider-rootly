@@ -39,6 +39,13 @@ func dataSourceFormField() *schema.Resource{
 			},
 			
 
+				"enabled": &schema.Schema{
+					Type: schema.TypeBool,
+					Default: true,
+					Optional: true,
+				},
+				
+
 				"created_at": &schema.Schema{
 					Type: schema.TypeMap,
 					Description: "Filter by date range using 'lt' and 'gt'.",
@@ -72,6 +79,12 @@ func dataSourceFormFieldRead(ctx context.Context, d *schema.ResourceData, meta i
 				if value, ok := d.GetOkExists("kind"); ok {
 					kind := value.(string)
 					params.FilterKind = &kind
+				}
+			
+
+				if value, ok := d.GetOkExists("enabled"); ok {
+					enabled := value.(bool)
+					params.FilterEnabled = &enabled
 				}
 			
 

@@ -7,7 +7,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
-	
+	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
 func resourceFormField() *schema.Resource{
@@ -27,7 +27,7 @@ func resourceFormField() *schema.Resource{
 				Required: false,
 				Optional: true,
 				ForceNew: false,
-				Description: "The kind of the form_field. Value must be one of `custom`, `title`, `summary`, `severity`, `environments`, `types`, `services`, `functionalities`, `teams`, `visibility`, `mark_as_test`, `mark_as_backfilled`, `labels`, `notify_emails`, `trigger_manual_workflows`, `show_ongoing_incidents`, `attach_alerts`, `manual_starting_datetime_field`.",
+				Description: "The kind of the form field. Value must be one of `custom`, `title`, `summary`, `severity`, `environments`, `types`, `services`, `functionalities`, `teams`, `visibility`, `mark_as_test`, `mark_as_backfilled`, `labels`, `notify_emails`, `trigger_manual_workflows`, `show_ongoing_incidents`, `attach_alerts`, `manual_starting_datetime_field`.",
 			},
 			
 
@@ -37,7 +37,7 @@ func resourceFormField() *schema.Resource{
 				Required: false,
 				Optional: true,
 				ForceNew: false,
-				Description: "The input kind of the form_field. Value must be one of `text`, `textarea`, `select`, `multi_select`, `date`, `datetime`, `users`, `checkbox`, `tags`.",
+				Description: "The input kind of the form field. Value must be one of `text`, `textarea`, `select`, `multi_select`, `date`, `datetime`, `users`, `checkbox`, `tags`.",
 			},
 			
 
@@ -47,7 +47,7 @@ func resourceFormField() *schema.Resource{
 				Required: true,
 				Optional: false,
 				ForceNew: false,
-				Description: "The name of the form_field",
+				Description: "The name of the form field",
 			},
 			
 
@@ -57,7 +57,7 @@ func resourceFormField() *schema.Resource{
 				Required: false,
 				Optional: true,
 				ForceNew: false,
-				Description: "The slug of the form_field",
+				Description: "The slug of the form field",
 			},
 			
 
@@ -67,7 +67,7 @@ func resourceFormField() *schema.Resource{
 				Required: false,
 				Optional: true,
 				ForceNew: false,
-				Description: "The description of the form_field",
+				Description: "The description of the form field",
 			},
 			
 
@@ -92,6 +92,13 @@ func resourceFormField() *schema.Resource{
 					Required: false,
 					Optional: true,
 					Description: "",
+				},
+				
+
+				"enabled": &schema.Schema{
+					Type: schema.TypeBool,
+					Default: true,
+					Optional: true,
 				},
 				
 
@@ -138,6 +145,9 @@ func resourceFormFieldCreate(ctx context.Context, d *schema.ResourceData, meta i
     if value, ok := d.GetOkExists("required"); ok {
 				s.Required = value.([]interface{})
 			}
+    if value, ok := d.GetOkExists("enabled"); ok {
+				s.Enabled = tools.Bool(value.(bool))
+			}
     if value, ok := d.GetOkExists("default_values"); ok {
 				s.DefaultValues = value.([]interface{})
 			}
@@ -177,6 +187,7 @@ func resourceFormFieldRead(ctx context.Context, d *schema.ResourceData, meta int
   d.Set("description", item.Description)
   d.Set("shown", item.Shown)
   d.Set("required", item.Required)
+  d.Set("enabled", item.Enabled)
   d.Set("default_values", item.DefaultValues)
 
 	return nil
@@ -208,6 +219,9 @@ func resourceFormFieldUpdate(ctx context.Context, d *schema.ResourceData, meta i
 			}
     if d.HasChange("required") {
 				s.Required = d.Get("required").([]interface{})
+			}
+    if d.HasChange("enabled") {
+				s.Enabled = tools.Bool(d.Get("enabled").(bool))
 			}
     if d.HasChange("default_values") {
 				s.DefaultValues = d.Get("default_values").([]interface{})

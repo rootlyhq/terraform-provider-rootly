@@ -23,6 +23,7 @@ const excluded = [
 	"incident_event",
 	"incident_feedback",
 	"incident_custom_field_selection",
+	"incident_form_field_selection",
 	"pulse",
 	"alert",
 	"playbook_task",

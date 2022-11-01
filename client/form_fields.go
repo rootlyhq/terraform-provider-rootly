@@ -17,6 +17,7 @@ type FormField struct {
   Description string `jsonapi:"attr,description,omitempty"`
   Shown []interface{} `jsonapi:"attr,shown,omitempty"`
   Required []interface{} `jsonapi:"attr,required,omitempty"`
+  Enabled *bool `jsonapi:"attr,enabled,omitempty"`
   DefaultValues []interface{} `jsonapi:"attr,default_values,omitempty"`
 }
 

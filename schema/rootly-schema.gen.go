@@ -5276,37 +5276,40 @@ type FormField struct {
 	CreatedAt     string   `json:"created_at"`
 	DefaultValues []string `json:"default_values"`
 
-	// The description of the form_field
+	// The description of the form field
 	Description *string `json:"description"`
 
-	// The input kind of the form_field
+	// Whether the form field is enabled
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// The input kind of the form field
 	InputKind FormFieldInputKind `json:"input_kind"`
 
-	// The kind of the form_field
+	// The kind of the form field
 	Kind FormFieldKind `json:"kind"`
 
-	// The name of the form_field
+	// The name of the form field
 	Name     string              `json:"name"`
 	Required []FormFieldRequired `json:"required"`
 	Shown    []FormFieldShown    `json:"shown"`
 
-	// The slug of the form_field
+	// The slug of the form field
 	Slug string `json:"slug"`
 
 	// Date of last update
 	UpdatedAt string `json:"updated_at"`
 }
 
-// The input kind of the form_field
+// The input kind of the form field
 type FormFieldInputKind string
 
-// The kind of the form_field
+// The kind of the form field
 type FormFieldKind string
 
-// Where the form_field is required
+// Where the form field is required
 type FormFieldRequired string
 
-// Where the form_field is shown
+// Where the form field is shown
 type FormFieldShown string
 
 // FormFieldList defines model for form_field_list.
@@ -5317,28 +5320,31 @@ type FormFieldList struct {
 			CreatedAt     string   `json:"created_at"`
 			DefaultValues []string `json:"default_values"`
 
-			// The description of the form_field
+			// The description of the form field
 			Description *string `json:"description"`
 
-			// The input kind of the form_field
+			// Whether the form field is enabled
+			Enabled *bool `json:"enabled,omitempty"`
+
+			// The input kind of the form field
 			InputKind FormFieldListDataAttributesInputKind `json:"input_kind"`
 
-			// The kind of the form_field
+			// The kind of the form field
 			Kind FormFieldListDataAttributesKind `json:"kind"`
 
-			// The name of the form_field
+			// The name of the form field
 			Name     string                                `json:"name"`
 			Required []FormFieldListDataAttributesRequired `json:"required"`
 			Shown    []FormFieldListDataAttributesShown    `json:"shown"`
 
-			// The slug of the form_field
+			// The slug of the form field
 			Slug string `json:"slug"`
 
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`
 		} `json:"attributes"`
 
-		// Unique ID of the form_field
+		// Unique ID of the form field
 		Id   string                `json:"id"`
 		Type FormFieldListDataType `json:"type"`
 	} `json:"data"`
@@ -5351,16 +5357,16 @@ type FormFieldList struct {
 	} `json:"links"`
 }
 
-// The input kind of the form_field
+// The input kind of the form field
 type FormFieldListDataAttributesInputKind string
 
-// The kind of the form_field
+// The kind of the form field
 type FormFieldListDataAttributesKind string
 
-// Where the form_field is required
+// Where the form field is required
 type FormFieldListDataAttributesRequired string
 
-// Where the form_field is shown
+// Where the form field is shown
 type FormFieldListDataAttributesShown string
 
 // FormFieldListDataType defines model for FormFieldList.Data.Type.
@@ -5543,43 +5549,46 @@ type FormFieldResponse struct {
 			CreatedAt     string   `json:"created_at"`
 			DefaultValues []string `json:"default_values"`
 
-			// The description of the form_field
+			// The description of the form field
 			Description *string `json:"description"`
 
-			// The input kind of the form_field
+			// Whether the form field is enabled
+			Enabled *bool `json:"enabled,omitempty"`
+
+			// The input kind of the form field
 			InputKind FormFieldResponseDataAttributesInputKind `json:"input_kind"`
 
-			// The kind of the form_field
+			// The kind of the form field
 			Kind FormFieldResponseDataAttributesKind `json:"kind"`
 
-			// The name of the form_field
+			// The name of the form field
 			Name     string                                    `json:"name"`
 			Required []FormFieldResponseDataAttributesRequired `json:"required"`
 			Shown    []FormFieldResponseDataAttributesShown    `json:"shown"`
 
-			// The slug of the form_field
+			// The slug of the form field
 			Slug string `json:"slug"`
 
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`
 		} `json:"attributes"`
 
-		// Unique ID of the form_field
+		// Unique ID of the form field
 		Id   string                    `json:"id"`
 		Type FormFieldResponseDataType `json:"type"`
 	} `json:"data"`
 }
 
-// The input kind of the form_field
+// The input kind of the form field
 type FormFieldResponseDataAttributesInputKind string
 
-// The kind of the form_field
+// The kind of the form field
 type FormFieldResponseDataAttributesKind string
 
-// Where the form_field is required
+// Where the form field is required
 type FormFieldResponseDataAttributesRequired string
 
-// Where the form_field is shown
+// Where the form field is shown
 type FormFieldResponseDataAttributesShown string
 
 // FormFieldResponseDataType defines model for FormFieldResponse.Data.Type.
@@ -7453,16 +7462,19 @@ type NewFormField struct {
 		Attributes struct {
 			DefaultValues *[]string `json:"default_values,omitempty"`
 
-			// The description of the form_field
+			// The description of the form field
 			Description *string `json:"description"`
 
-			// The input kind of the form_field
+			// Whether the form field is enabled
+			Enabled *bool `json:"enabled,omitempty"`
+
+			// The input kind of the form field
 			InputKind *NewFormFieldDataAttributesInputKind `json:"input_kind,omitempty"`
 
-			// The kind of the form_field
+			// The kind of the form field
 			Kind NewFormFieldDataAttributesKind `json:"kind"`
 
-			// The name of the form_field
+			// The name of the form field
 			Name     string                                `json:"name"`
 			Required *[]NewFormFieldDataAttributesRequired `json:"required,omitempty"`
 			Shown    *[]NewFormFieldDataAttributesShown    `json:"shown,omitempty"`
@@ -7471,16 +7483,16 @@ type NewFormField struct {
 	} `json:"data"`
 }
 
-// The input kind of the form_field
+// The input kind of the form field
 type NewFormFieldDataAttributesInputKind string
 
-// The kind of the form_field
+// The kind of the form field
 type NewFormFieldDataAttributesKind string
 
-// Where the form_field is required
+// Where the form field is required
 type NewFormFieldDataAttributesRequired string
 
-// Where the form_field is shown
+// Where the form field is shown
 type NewFormFieldDataAttributesShown string
 
 // NewFormFieldDataType defines model for NewFormField.Data.Type.
@@ -10290,16 +10302,19 @@ type UpdateFormField struct {
 		Attributes struct {
 			DefaultValues *[]string `json:"default_values,omitempty"`
 
-			// The description of the form_field
+			// The description of the form field
 			Description *string `json:"description"`
 
-			// The input kind of the form_field
+			// Whether the form field is enabled
+			Enabled *bool `json:"enabled,omitempty"`
+
+			// The input kind of the form field
 			InputKind *UpdateFormFieldDataAttributesInputKind `json:"input_kind,omitempty"`
 
-			// The kind of the form_field
+			// The kind of the form field
 			Kind *UpdateFormFieldDataAttributesKind `json:"kind,omitempty"`
 
-			// The name of the form_field
+			// The name of the form field
 			Name     *string                                  `json:"name,omitempty"`
 			Required *[]UpdateFormFieldDataAttributesRequired `json:"required,omitempty"`
 			Shown    *[]UpdateFormFieldDataAttributesShown    `json:"shown,omitempty"`
@@ -10308,16 +10323,16 @@ type UpdateFormField struct {
 	} `json:"data"`
 }
 
-// The input kind of the form_field
+// The input kind of the form field
 type UpdateFormFieldDataAttributesInputKind string
 
-// The kind of the form_field
+// The kind of the form field
 type UpdateFormFieldDataAttributesKind string
 
-// Where the form_field is required
+// Where the form field is required
 type UpdateFormFieldDataAttributesRequired string
 
-// Where the form_field is shown
+// Where the form field is shown
 type UpdateFormFieldDataAttributesShown string
 
 // UpdateFormFieldDataType defines model for UpdateFormField.Data.Type.

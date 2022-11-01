@@ -87,7 +87,6 @@ func New(version string) func() *schema.Provider {
 				"rootly_form_field": resourceFormField(),
 				"rootly_form_field_option": resourceFormFieldOption(),
 				"rootly_form_field_position": resourceFormFieldPosition(),
-				"rootly_incident_form_field_selection": resourceIncidentFormFieldSelection(),
 				"rootly_workflow_form_field_condition": resourceWorkflowFormFieldCondition(),
 				"rootly_workflow_group": resourceWorkflowGroup(),
 				"rootly_status_page_template": resourceStatusPageTemplate(),
