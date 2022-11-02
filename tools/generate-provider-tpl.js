@@ -50,6 +50,8 @@ func New(version string) func() *schema.Provider {
 ${dataSources.map((name) => {
 	return `				"rootly_${name}": dataSource${inflect.camelize(name)}(),`
 }).join('\n')}
+				"rootly_custom_field": dataSourceCustomField(),
+				"rootly_custom_field_option": dataSourceCustomFieldOption(),
 				"rootly_causes": dataSourceCauses(),
 				"rootly_custom_fields": dataSourceCustomFields(),
 				"rootly_custom_field_options": dataSourceCustomFieldOptions(),
@@ -65,6 +67,8 @@ ${dataSources.map((name) => {
 ${resources.map((name) => {
 	return `				"rootly_${name}": resource${inflect.camelize(name)}(),`
 }).join('\n')}
+				"rootly_custom_field": resourceCustomField(),
+				"rootly_custom_field_option": resourceCustomFieldOption(),
 				"rootly_dashboard": resourceDashboard(),
 				"rootly_dashboard_panel": resourceDashboardPanel(),
 				"rootly_postmortem_template": resourcePostmortemTemplate(),

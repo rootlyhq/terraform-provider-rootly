@@ -27,6 +27,9 @@ const excluded = [
 	"pulse",
 	"alert",
 	"playbook_task",
+	"form_field_position",
+	"custom_field",
+	"custom_field_option",
 ]
 
 console.log(`Excluding resource from generation:`, excluded)

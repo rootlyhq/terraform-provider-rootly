@@ -11,6 +11,8 @@ import (
 
 func dataSourceCustomField() *schema.Resource{
 	return &schema.Resource{
+		Description: "DEPRECATED: Please use `form_field` data source instead.",
+		DeprecationMessage: "Please use `form_field` data source instead.",
 		ReadContext: dataSourceCustomFieldRead,
 		Schema: map[string]*schema.Schema{
 			"id": &schema.Schema{

@@ -12,6 +12,8 @@ import (
 
 func resourceCustomFieldOption() *schema.Resource{
 	return &schema.Resource{
+		Description: "DEPRECATED: Please use `rootly_form_field` and `rootly_form_field_option` resources instead.",
+		DeprecationMessage: "Please use `rootly_form_field` and `rootly_form_field_option` resources instead.",
 		CreateContext: resourceCustomFieldOptionCreate,
 		ReadContext: resourceCustomFieldOptionRead,
 		UpdateContext: resourceCustomFieldOptionUpdate,

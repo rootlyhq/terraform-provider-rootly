@@ -3,12 +3,12 @@
 page_title: "rootly_custom_field_option Data Source - terraform-provider-rootly"
 subcategory: ""
 description: |-
-  
+  DEPRECATED: Please use form_field and form_field_option data sources instead.
 ---
 
 # rootly_custom_field_option (Data Source)
 
-
+DEPRECATED: Please use `form_field` and `form_field_option` data sources instead.
 
 
 

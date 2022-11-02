@@ -1814,6 +1814,26 @@ const (
 	NewFormFieldOptionDataTypeFormFieldOptions NewFormFieldOptionDataType = "form_field_options"
 )
 
+// Defines values for NewFormFieldPositionDataAttributesForm.
+const (
+	NewFormFieldPositionDataAttributesFormIncidentPostMortem            NewFormFieldPositionDataAttributesForm = "incident_post_mortem"
+	NewFormFieldPositionDataAttributesFormSlackIncidentMitigationForm   NewFormFieldPositionDataAttributesForm = "slack_incident_mitigation_form"
+	NewFormFieldPositionDataAttributesFormSlackIncidentResolutionForm   NewFormFieldPositionDataAttributesForm = "slack_incident_resolution_form"
+	NewFormFieldPositionDataAttributesFormSlackNewIncidentForm          NewFormFieldPositionDataAttributesForm = "slack_new_incident_form"
+	NewFormFieldPositionDataAttributesFormSlackUpdateIncidentForm       NewFormFieldPositionDataAttributesForm = "slack_update_incident_form"
+	NewFormFieldPositionDataAttributesFormSlackUpdateIncidentStatusForm NewFormFieldPositionDataAttributesForm = "slack_update_incident_status_form"
+	NewFormFieldPositionDataAttributesFormWebIncidentMitigationForm     NewFormFieldPositionDataAttributesForm = "web_incident_mitigation_form"
+	NewFormFieldPositionDataAttributesFormWebIncidentPostMortemForm     NewFormFieldPositionDataAttributesForm = "web_incident_post_mortem_form"
+	NewFormFieldPositionDataAttributesFormWebIncidentResolutionForm     NewFormFieldPositionDataAttributesForm = "web_incident_resolution_form"
+	NewFormFieldPositionDataAttributesFormWebNewIncidentForm            NewFormFieldPositionDataAttributesForm = "web_new_incident_form"
+	NewFormFieldPositionDataAttributesFormWebUpdateIncidentForm         NewFormFieldPositionDataAttributesForm = "web_update_incident_form"
+)
+
+// Defines values for NewFormFieldPositionDataType.
+const (
+	NewFormFieldPositionDataTypeFormFieldPositions NewFormFieldPositionDataType = "form_field_positions"
+)
+
 // Defines values for NewFunctionalityDataType.
 const (
 	NewFunctionalityDataTypeFunctionalities NewFunctionalityDataType = "functionalities"
@@ -2617,7 +2637,7 @@ const (
 
 // Defines values for UpdateFormFieldPositionDataType.
 const (
-	FormFieldPositions UpdateFormFieldPositionDataType = "form_field_positions"
+	UpdateFormFieldPositionDataTypeFormFieldPositions UpdateFormFieldPositionDataType = "form_field_positions"
 )
 
 // Defines values for UpdateFunctionalityDataType.
@@ -2791,11 +2811,11 @@ const (
 
 // Defines values for UpdateOpsgenieAlertTaskParamsPriority.
 const (
-	Auto UpdateOpsgenieAlertTaskParamsPriority = "auto"
-	P1   UpdateOpsgenieAlertTaskParamsPriority = "P1"
-	P2   UpdateOpsgenieAlertTaskParamsPriority = "P2"
-	P3   UpdateOpsgenieAlertTaskParamsPriority = "P3"
-	P4   UpdateOpsgenieAlertTaskParamsPriority = "P4"
+	UpdateOpsgenieAlertTaskParamsPriorityAuto UpdateOpsgenieAlertTaskParamsPriority = "auto"
+	UpdateOpsgenieAlertTaskParamsPriorityP1   UpdateOpsgenieAlertTaskParamsPriority = "P1"
+	UpdateOpsgenieAlertTaskParamsPriorityP2   UpdateOpsgenieAlertTaskParamsPriority = "P2"
+	UpdateOpsgenieAlertTaskParamsPriorityP3   UpdateOpsgenieAlertTaskParamsPriority = "P3"
+	UpdateOpsgenieAlertTaskParamsPriorityP4   UpdateOpsgenieAlertTaskParamsPriority = "P4"
 )
 
 // Defines values for UpdateOpsgenieAlertTaskParamsTaskType.
@@ -2803,9 +2823,31 @@ const (
 	UpdateOpsgenieAlert UpdateOpsgenieAlertTaskParamsTaskType = "update_opsgenie_alert"
 )
 
+// Defines values for UpdateOpsgenieIncidentTaskParamsPriority.
+const (
+	UpdateOpsgenieIncidentTaskParamsPriorityAuto UpdateOpsgenieIncidentTaskParamsPriority = "auto"
+	UpdateOpsgenieIncidentTaskParamsPriorityP1   UpdateOpsgenieIncidentTaskParamsPriority = "P1"
+	UpdateOpsgenieIncidentTaskParamsPriorityP2   UpdateOpsgenieIncidentTaskParamsPriority = "P2"
+	UpdateOpsgenieIncidentTaskParamsPriorityP3   UpdateOpsgenieIncidentTaskParamsPriority = "P3"
+	UpdateOpsgenieIncidentTaskParamsPriorityP4   UpdateOpsgenieIncidentTaskParamsPriority = "P4"
+)
+
+// Defines values for UpdateOpsgenieIncidentTaskParamsStatus.
+const (
+	UpdateOpsgenieIncidentTaskParamsStatusAuto    UpdateOpsgenieIncidentTaskParamsStatus = "auto"
+	UpdateOpsgenieIncidentTaskParamsStatusOpen    UpdateOpsgenieIncidentTaskParamsStatus = "open"
+	UpdateOpsgenieIncidentTaskParamsStatusResolve UpdateOpsgenieIncidentTaskParamsStatus = "resolve"
+)
+
+// Defines values for UpdateOpsgenieIncidentTaskParamsTaskType.
+const (
+	UpdateOpsgenieIncident UpdateOpsgenieIncidentTaskParamsTaskType = "update_opsgenie_incident"
+)
+
 // Defines values for UpdatePagerdutyIncidentTaskParamsStatus.
 const (
 	UpdatePagerdutyIncidentTaskParamsStatusAcknowledged UpdatePagerdutyIncidentTaskParamsStatus = "acknowledged"
+	UpdatePagerdutyIncidentTaskParamsStatusAuto         UpdatePagerdutyIncidentTaskParamsStatus = "auto"
 	UpdatePagerdutyIncidentTaskParamsStatusResolved     UpdatePagerdutyIncidentTaskParamsStatus = "resolved"
 )
 
@@ -2912,6 +2954,18 @@ const (
 // Defines values for UpdateTrelloCardTaskParamsTaskType.
 const (
 	UpdateTrelloCard UpdateTrelloCardTaskParamsTaskType = "update_trello_card"
+)
+
+// Defines values for UpdateVictorOpsIncidentTaskParamsStatus.
+const (
+	UpdateVictorOpsIncidentTaskParamsStatusAck     UpdateVictorOpsIncidentTaskParamsStatus = "ack"
+	UpdateVictorOpsIncidentTaskParamsStatusAuto    UpdateVictorOpsIncidentTaskParamsStatus = "auto"
+	UpdateVictorOpsIncidentTaskParamsStatusResolve UpdateVictorOpsIncidentTaskParamsStatus = "resolve"
+)
+
+// Defines values for UpdateVictorOpsIncidentTaskParamsTaskType.
+const (
+	UpdateVictorOpsIncident UpdateVictorOpsIncidentTaskParamsTaskType = "update_victor_ops_incident"
 )
 
 // Defines values for UpdateWorkflowDataType.
@@ -7522,6 +7576,29 @@ type NewFormFieldOption struct {
 // NewFormFieldOptionDataType defines model for NewFormFieldOption.Data.Type.
 type NewFormFieldOptionDataType string
 
+// NewFormFieldPosition defines model for new_form_field_position.
+type NewFormFieldPosition struct {
+	Data struct {
+		Attributes struct {
+			// The form for the position
+			Form NewFormFieldPositionDataAttributesForm `json:"form"`
+
+			// The ID of the form field.
+			FormFieldId string `json:"form_field_id"`
+
+			// The position of the form_field_position
+			Position float32 `json:"position"`
+		} `json:"attributes"`
+		Type NewFormFieldPositionDataType `json:"type"`
+	} `json:"data"`
+}
+
+// The form for the position
+type NewFormFieldPositionDataAttributesForm string
+
+// NewFormFieldPositionDataType defines model for NewFormFieldPosition.Data.Type.
+type NewFormFieldPositionDataType string
+
 // NewFunctionality defines model for new_functionality.
 type NewFunctionality struct {
 	Data struct {
@@ -10966,6 +11043,30 @@ type UpdateOpsgenieAlertTaskParamsPriority string
 // UpdateOpsgenieAlertTaskParamsTaskType defines model for UpdateOpsgenieAlertTaskParams.TaskType.
 type UpdateOpsgenieAlertTaskParamsTaskType string
 
+// UpdateOpsgenieIncidentTaskParams defines model for update_opsgenie_incident_task_params.
+type UpdateOpsgenieIncidentTaskParams struct {
+	// Description field of the alert that is generally used to provide a detailed information about the alert
+	Description *string `json:"description,omitempty"`
+
+	// Message of the alert
+	Message *string `json:"message,omitempty"`
+
+	// The Opsgenie incident ID, this can also be a Rootly incident variable ex. {{ incident.opsgenie_incident_id }}
+	OpsgenieIncidentId string                                    `json:"opsgenie_incident_id"`
+	Priority           *UpdateOpsgenieIncidentTaskParamsPriority `json:"priority,omitempty"`
+	Status             *UpdateOpsgenieIncidentTaskParamsStatus   `json:"status,omitempty"`
+	TaskType           *UpdateOpsgenieIncidentTaskParamsTaskType `json:"task_type,omitempty"`
+}
+
+// UpdateOpsgenieIncidentTaskParamsPriority defines model for UpdateOpsgenieIncidentTaskParams.Priority.
+type UpdateOpsgenieIncidentTaskParamsPriority string
+
+// UpdateOpsgenieIncidentTaskParamsStatus defines model for UpdateOpsgenieIncidentTaskParams.Status.
+type UpdateOpsgenieIncidentTaskParamsStatus string
+
+// UpdateOpsgenieIncidentTaskParamsTaskType defines model for UpdateOpsgenieIncidentTaskParams.TaskType.
+type UpdateOpsgenieIncidentTaskParamsTaskType string
+
 // UpdatePagerdutyIncidentTaskParams defines model for update_pagerduty_incident_task_params.
 type UpdatePagerdutyIncidentTaskParams struct {
 	// Escalation level of policy attached to incident
@@ -11439,6 +11540,23 @@ type UpdateTrelloCardTaskParams struct {
 
 // UpdateTrelloCardTaskParamsTaskType defines model for UpdateTrelloCardTaskParams.TaskType.
 type UpdateTrelloCardTaskParamsTaskType string
+
+// UpdateVictorOpsIncidentTaskParams defines model for update_victor_ops_incident_task_params.
+type UpdateVictorOpsIncidentTaskParams struct {
+	// Resolution message
+	ResolutionMessage *string                                    `json:"resolution_message,omitempty"`
+	Status            UpdateVictorOpsIncidentTaskParamsStatus    `json:"status"`
+	TaskType          *UpdateVictorOpsIncidentTaskParamsTaskType `json:"task_type,omitempty"`
+
+	// The victor_ops incident ID, this can also be a Rootly incident variable ex. {{ incident.victor_ops_incident_id }}
+	VictorOpsIncidentId string `json:"victor_ops_incident_id"`
+}
+
+// UpdateVictorOpsIncidentTaskParamsStatus defines model for UpdateVictorOpsIncidentTaskParams.Status.
+type UpdateVictorOpsIncidentTaskParamsStatus string
+
+// UpdateVictorOpsIncidentTaskParamsTaskType defines model for UpdateVictorOpsIncidentTaskParams.TaskType.
+type UpdateVictorOpsIncidentTaskParamsTaskType string
 
 // UpdateWorkflow defines model for update_workflow.
 type UpdateWorkflow struct {
@@ -12877,6 +12995,9 @@ type ClientInterface interface {
 	// ListFormFieldPositions request
 	ListFormFieldPositions(ctx context.Context, formFieldId string, params *ListFormFieldPositionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// CreateFormFieldPosition request with any body
+	CreateFormFieldPositionWithBody(ctx context.Context, formFieldId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// DeleteFormField request
 	DeleteFormField(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -13939,6 +14060,18 @@ func (c *Client) CreateFormFieldOptionWithBody(ctx context.Context, formFieldId 
 
 func (c *Client) ListFormFieldPositions(ctx context.Context, formFieldId string, params *ListFormFieldPositionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListFormFieldPositionsRequest(c.Server, formFieldId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateFormFieldPositionWithBody(ctx context.Context, formFieldId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateFormFieldPositionRequestWithBody(c.Server, formFieldId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -18405,6 +18538,42 @@ func NewListFormFieldPositionsRequest(server string, formFieldId string, params 
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewCreateFormFieldPositionRequestWithBody generates requests for CreateFormFieldPosition with any type of body
+func NewCreateFormFieldPositionRequestWithBody(server string, formFieldId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "form_field_id", runtime.ParamLocationPath, formFieldId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_fields/%s/positions", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -25910,6 +26079,9 @@ type ClientWithResponsesInterface interface {
 	// ListFormFieldPositions request
 	ListFormFieldPositionsWithResponse(ctx context.Context, formFieldId string, params *ListFormFieldPositionsParams, reqEditors ...RequestEditorFn) (*ListFormFieldPositionsResponse, error)
 
+	// CreateFormFieldPosition request with any body
+	CreateFormFieldPositionWithBodyWithResponse(ctx context.Context, formFieldId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormFieldPositionResponse, error)
+
 	// DeleteFormField request
 	DeleteFormFieldWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldResponse, error)
 
@@ -27480,6 +27652,27 @@ func (r ListFormFieldPositionsResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r ListFormFieldPositionsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateFormFieldPositionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateFormFieldPositionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateFormFieldPositionResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -30783,6 +30976,15 @@ func (c *ClientWithResponses) ListFormFieldPositionsWithResponse(ctx context.Con
 	return ParseListFormFieldPositionsResponse(rsp)
 }
 
+// CreateFormFieldPositionWithBodyWithResponse request with arbitrary body returning *CreateFormFieldPositionResponse
+func (c *ClientWithResponses) CreateFormFieldPositionWithBodyWithResponse(ctx context.Context, formFieldId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormFieldPositionResponse, error) {
+	rsp, err := c.CreateFormFieldPositionWithBody(ctx, formFieldId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateFormFieldPositionResponse(rsp)
+}
+
 // DeleteFormFieldWithResponse request returning *DeleteFormFieldResponse
 func (c *ClientWithResponses) DeleteFormFieldWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldResponse, error) {
 	rsp, err := c.DeleteFormField(ctx, id, reqEditors...)
@@ -32869,6 +33071,22 @@ func ParseListFormFieldPositionsResponse(rsp *http.Response) (*ListFormFieldPosi
 	}
 
 	response := &ListFormFieldPositionsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseCreateFormFieldPositionResponse parses an HTTP response from a CreateFormFieldPositionWithResponse call
+func ParseCreateFormFieldPositionResponse(rsp *http.Response) (*CreateFormFieldPositionResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateFormFieldPositionResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

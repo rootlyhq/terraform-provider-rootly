@@ -13,14 +13,14 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/client"
 )
 
-func resourceWorkflowTaskUpdatePagerdutyIncident() *schema.Resource {
+func resourceWorkflowTaskUpdateOpsgenieIncident() *schema.Resource {
 	return &schema.Resource{
-		Description: "Manages workflow update_pagerduty_incident task.",
+		Description: "Manages workflow update_opsgenie_incident task.",
 
-		CreateContext: resourceWorkflowTaskUpdatePagerdutyIncidentCreate,
-		ReadContext:   resourceWorkflowTaskUpdatePagerdutyIncidentRead,
-		UpdateContext: resourceWorkflowTaskUpdatePagerdutyIncidentUpdate,
-		DeleteContext: resourceWorkflowTaskUpdatePagerdutyIncidentDelete,
+		CreateContext: resourceWorkflowTaskUpdateOpsgenieIncidentCreate,
+		ReadContext:   resourceWorkflowTaskUpdateOpsgenieIncidentRead,
+		UpdateContext: resourceWorkflowTaskUpdateOpsgenieIncidentUpdate,
+		DeleteContext: resourceWorkflowTaskUpdateOpsgenieIncidentDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -49,50 +49,47 @@ func resourceWorkflowTaskUpdatePagerdutyIncident() *schema.Resource {
 						"task_type": &schema.Schema{
 							Type: schema.TypeString,
 							Optional: true,
-							Default: "update_pagerduty_incident",
+							Default: "update_opsgenie_incident",
 							ValidateFunc: validation.StringInSlice([]string{
-								"update_pagerduty_incident",
+								"update_opsgenie_incident",
 							}, false),
 						},
-						"pagerduty_incident_id": &schema.Schema{
-							Description: "Pagerduty incident id",
+						"opsgenie_incident_id": &schema.Schema{
+							Description: "The Opsgenie incident ID, this can also be a Rootly incident variable ",
 							Type: schema.TypeString,
 							Required: true,
 						},
-						"title": &schema.Schema{
-							Description: "Title to update to",
+						"message": &schema.Schema{
+							Description: "Message of the alert",
+							Type: schema.TypeString,
+							Optional: true,
+						},
+						"description": &schema.Schema{
+							Description: "Description field of the alert that is generally used to provide a detailed information about the alert",
 							Type: schema.TypeString,
 							Optional: true,
 						},
 						"status": &schema.Schema{
-							Description: ". Value must be one of `resolved`, `acknowledged`, `auto`.",
+							Description: ". Value must be one of `resolve`, `open`, `auto`.",
 							Type: schema.TypeString,
 							Optional: true,
-							Default: "resolved",
+							Default: "resolve",
 							ValidateFunc: validation.StringInSlice([]string{
-								"resolved",
-"acknowledged",
+								"resolve",
+"open",
 "auto",
 							}, false),
 						},
-						"resolution": &schema.Schema{
-							Description: "A message outlining the incident's resolution in Pagerduty",
+						"priority": &schema.Schema{
+							Description: ". Value must be one of `P1`, `P2`, `P3`, `P4`, `auto`.",
 							Type: schema.TypeString,
 							Optional: true,
-						},
-						"escalation_level": &schema.Schema{
-							Description: "Escalation level of policy attached to incident",
-							Type: schema.TypeInt,
-							Optional: true,
-						},
-						"urgency": &schema.Schema{
-							Description: "Pagerduty incident urgency, selecting auto will let Rootly auto map our incident severity.. Value must be one of `high`, `low`, `auto`.",
-							Type: schema.TypeString,
-							Optional: true,
-							Default: "high",
+							Default: "P1",
 							ValidateFunc: validation.StringInSlice([]string{
-								"high",
-"low",
+								"P1",
+"P2",
+"P3",
+"P4",
 "auto",
 							}, false),
 						},
@@ -103,7 +100,7 @@ func resourceWorkflowTaskUpdatePagerdutyIncident() *schema.Resource {
 	}
 }
 
-func resourceWorkflowTaskUpdatePagerdutyIncidentCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskUpdateOpsgenieIncidentCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
@@ -126,10 +123,10 @@ func resourceWorkflowTaskUpdatePagerdutyIncidentCreate(ctx context.Context, d *s
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created an workflow task resource: %v (%s)", workflowId, d.Id()))
 
-	return resourceWorkflowTaskUpdatePagerdutyIncidentRead(ctx, d, meta)
+	return resourceWorkflowTaskUpdateOpsgenieIncidentRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskUpdatePagerdutyIncidentRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskUpdateOpsgenieIncidentRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
@@ -138,7 +135,7 @@ func resourceWorkflowTaskUpdatePagerdutyIncidentRead(ctx context.Context, d *sch
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskUpdatePagerdutyIncident (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskUpdateOpsgenieIncident (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
@@ -155,7 +152,7 @@ func resourceWorkflowTaskUpdatePagerdutyIncidentRead(ctx context.Context, d *sch
 	return nil
 }
 
-func resourceWorkflowTaskUpdatePagerdutyIncidentUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskUpdateOpsgenieIncidentUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
@@ -175,10 +172,10 @@ func resourceWorkflowTaskUpdatePagerdutyIncidentUpdate(ctx context.Context, d *s
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
 
-	return resourceWorkflowTaskUpdatePagerdutyIncidentRead(ctx, d, meta)
+	return resourceWorkflowTaskUpdateOpsgenieIncidentRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskUpdatePagerdutyIncidentDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskUpdateOpsgenieIncidentDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
@@ -187,7 +184,7 @@ func resourceWorkflowTaskUpdatePagerdutyIncidentDelete(ctx context.Context, d *s
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskUpdatePagerdutyIncident (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskUpdateOpsgenieIncident (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}

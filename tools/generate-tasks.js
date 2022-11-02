@@ -189,7 +189,7 @@ func resourceWorkflowTask${task_name_camel}Delete(ctx context.Context, d *schema
 }
 
 function annotatedDescription(schema) {
-	const description = (schema.description || "").replace(/"/g, '\\"')
+	const description = (schema.description || "").replace(/"/g, '\\"').replace(/ex. .+$/, '')
 	if (schema.enum) {
 		return `${description}. Value must be one of ${schema.enum.map((val) => `\`${val}\``).join(", ")}.`
 	}

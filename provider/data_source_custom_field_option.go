@@ -11,6 +11,8 @@ import (
 
 func dataSourceCustomFieldOption() *schema.Resource{
 	return &schema.Resource{
+		Description: "DEPRECATED: Please use `form_field` and `form_field_option` data sources instead.",
+		DeprecationMessage: "Please use `form_field` and `form_field_option` data sources instead.",
 		ReadContext: dataSourceCustomFieldOptionRead,
 		Schema: map[string]*schema.Schema{
 			"id": &schema.Schema{
