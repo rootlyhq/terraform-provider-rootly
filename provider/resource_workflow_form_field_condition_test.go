@@ -1,0 +1,62 @@
+package provider
+
+import (
+	"testing"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+)
+
+func TestAccResourceWorkflowFormFieldCondition(t *testing.T) {
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:          func() { testAccPreCheck(t) },
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceWorkflowFormFieldCondition,
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_workflow_form_field_condition.test1", "incident_condition", "IS"),
+					resource.TestCheckResourceAttr("rootly_workflow_form_field_condition.test2", "incident_condition", "IS"),
+				),
+			},
+		},
+	})
+}
+
+const testAccResourceWorkflowFormFieldCondition = `
+resource "rootly_workflow_incident" "test" {
+  name = "workflow-form-field-test"
+}
+
+resource "rootly_form_field" "test1" {
+  name = "form-field-test"
+	kind = "custom"
+	input_kind = "select"
+	shown = ["web_new_incident_form"]
+	required = ["web_new_incident_form"]
+}
+
+resource "rootly_form_field" "test2" {
+  name = "form-field-test"
+	kind = "custom"
+	input_kind = "text"
+	shown = ["web_new_incident_form"]
+	required = ["web_new_incident_form"]
+}
+
+resource "rootly_form_field_option" "test" {
+	form_field_id = rootly_form_field.test1.id
+	value = "test"
+}
+
+resource "rootly_workflow_form_field_condition" "test1" {
+	workflow_id = rootly_workflow_incident.test.id
+	form_field_id = rootly_form_field.test1.id
+	selected_option_ids = [rootly_form_field_option.test.id]
+}
+
+resource "rootly_workflow_form_field_condition" "test2" {
+	workflow_id = rootly_workflow_incident.test.id
+	form_field_id = rootly_form_field.test2.id
+	values = ["test"]
+}
+`
