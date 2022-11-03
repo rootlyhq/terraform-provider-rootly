@@ -37,7 +37,7 @@ func resourceFormField() *schema.Resource{
 				Required: false,
 				Optional: true,
 				ForceNew: false,
-				Description: "The input kind of the form field. Value must be one of `text`, `textarea`, `select`, `multi_select`, `date`, `datetime`, `users`, `checkbox`, `tags`.",
+				Description: "The input kind of the form field. Value must be one of `text`, `textarea`, `select`, `multi_select`, `date`, `datetime`, `users`, `number`, `checkbox`, `tags`.",
 			},
 			
 

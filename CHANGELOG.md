@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.49] -- 2022-11-02
+
+- Add support for `number` with `form_field` resources.
+- Add `skip_on_failure` to `workflow_task` resources.
+
 ## [0.1.48] -- 2022-11-02
 
 - Add `form_field` resources.

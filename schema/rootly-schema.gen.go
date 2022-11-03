@@ -888,6 +888,7 @@ const (
 	FormFieldInputKindDate        FormFieldInputKind = "date"
 	FormFieldInputKindDatetime    FormFieldInputKind = "datetime"
 	FormFieldInputKindMultiSelect FormFieldInputKind = "multi_select"
+	FormFieldInputKindNumber      FormFieldInputKind = "number"
 	FormFieldInputKindSelect      FormFieldInputKind = "select"
 	FormFieldInputKindTags        FormFieldInputKind = "tags"
 	FormFieldInputKindText        FormFieldInputKind = "text"
@@ -952,6 +953,7 @@ const (
 	FormFieldListDataAttributesInputKindDate        FormFieldListDataAttributesInputKind = "date"
 	FormFieldListDataAttributesInputKindDatetime    FormFieldListDataAttributesInputKind = "datetime"
 	FormFieldListDataAttributesInputKindMultiSelect FormFieldListDataAttributesInputKind = "multi_select"
+	FormFieldListDataAttributesInputKindNumber      FormFieldListDataAttributesInputKind = "number"
 	FormFieldListDataAttributesInputKindSelect      FormFieldListDataAttributesInputKind = "select"
 	FormFieldListDataAttributesInputKindTags        FormFieldListDataAttributesInputKind = "tags"
 	FormFieldListDataAttributesInputKindText        FormFieldListDataAttributesInputKind = "text"
@@ -1086,6 +1088,7 @@ const (
 	FormFieldResponseDataAttributesInputKindDate        FormFieldResponseDataAttributesInputKind = "date"
 	FormFieldResponseDataAttributesInputKindDatetime    FormFieldResponseDataAttributesInputKind = "datetime"
 	FormFieldResponseDataAttributesInputKindMultiSelect FormFieldResponseDataAttributesInputKind = "multi_select"
+	FormFieldResponseDataAttributesInputKindNumber      FormFieldResponseDataAttributesInputKind = "number"
 	FormFieldResponseDataAttributesInputKindSelect      FormFieldResponseDataAttributesInputKind = "select"
 	FormFieldResponseDataAttributesInputKindTags        FormFieldResponseDataAttributesInputKind = "tags"
 	FormFieldResponseDataAttributesInputKindText        FormFieldResponseDataAttributesInputKind = "text"
@@ -1746,6 +1749,7 @@ const (
 	NewFormFieldDataAttributesInputKindDate        NewFormFieldDataAttributesInputKind = "date"
 	NewFormFieldDataAttributesInputKindDatetime    NewFormFieldDataAttributesInputKind = "datetime"
 	NewFormFieldDataAttributesInputKindMultiSelect NewFormFieldDataAttributesInputKind = "multi_select"
+	NewFormFieldDataAttributesInputKindNumber      NewFormFieldDataAttributesInputKind = "number"
 	NewFormFieldDataAttributesInputKindSelect      NewFormFieldDataAttributesInputKind = "select"
 	NewFormFieldDataAttributesInputKindTags        NewFormFieldDataAttributesInputKind = "tags"
 	NewFormFieldDataAttributesInputKindText        NewFormFieldDataAttributesInputKind = "text"
@@ -2552,6 +2556,7 @@ const (
 	UpdateFormFieldDataAttributesInputKindDate        UpdateFormFieldDataAttributesInputKind = "date"
 	UpdateFormFieldDataAttributesInputKindDatetime    UpdateFormFieldDataAttributesInputKind = "datetime"
 	UpdateFormFieldDataAttributesInputKindMultiSelect UpdateFormFieldDataAttributesInputKind = "multi_select"
+	UpdateFormFieldDataAttributesInputKindNumber      UpdateFormFieldDataAttributesInputKind = "number"
 	UpdateFormFieldDataAttributesInputKindSelect      UpdateFormFieldDataAttributesInputKind = "select"
 	UpdateFormFieldDataAttributesInputKindTags        UpdateFormFieldDataAttributesInputKind = "tags"
 	UpdateFormFieldDataAttributesInputKindText        UpdateFormFieldDataAttributesInputKind = "text"
@@ -8380,8 +8385,11 @@ type NewWorkflowTask struct {
 	Data struct {
 		Attributes struct {
 			// The position of the workflow task
-			Position   *float32    `json:"position,omitempty"`
-			TaskParams interface{} `json:"task_params"`
+			Position *float32 `json:"position,omitempty"`
+
+			// Skip workflow task if any failures
+			SkipOnFailure *bool       `json:"skip_on_failure,omitempty"`
+			TaskParams    interface{} `json:"task_params"`
 		} `json:"attributes"`
 		Type NewWorkflowTaskDataType `json:"type"`
 	} `json:"data"`
@@ -11670,8 +11678,11 @@ type UpdateWorkflowTask struct {
 	Data struct {
 		Attributes struct {
 			// The position of the workflow task
-			Position   *float32     `json:"position,omitempty"`
-			TaskParams *interface{} `json:"task_params,omitempty"`
+			Position *float32 `json:"position,omitempty"`
+
+			// Is the task skipped if any failures
+			SkipOnFailure *bool        `json:"skip_on_failure,omitempty"`
+			TaskParams    *interface{} `json:"task_params,omitempty"`
 		} `json:"attributes"`
 		Type UpdateWorkflowTaskDataType `json:"type"`
 	} `json:"data"`
@@ -12275,8 +12286,11 @@ type WorkflowTask struct {
 	CreatedAt string `json:"created_at"`
 
 	// The position of the workflow task
-	Position   float32     `json:"position"`
-	TaskParams interface{} `json:"task_params"`
+	Position float32 `json:"position"`
+
+	// Is the task skipped if any failures
+	SkipOnFailure *bool       `json:"skip_on_failure,omitempty"`
+	TaskParams    interface{} `json:"task_params"`
 
 	// Date of last update
 	UpdatedAt string `json:"updated_at"`
@@ -12293,8 +12307,11 @@ type WorkflowTaskList struct {
 			CreatedAt string `json:"created_at"`
 
 			// The position of the workflow task
-			Position   float32     `json:"position"`
-			TaskParams interface{} `json:"task_params"`
+			Position float32 `json:"position"`
+
+			// Is the task skipped if any failures
+			SkipOnFailure *bool       `json:"skip_on_failure,omitempty"`
+			TaskParams    interface{} `json:"task_params"`
 
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`
@@ -12327,8 +12344,11 @@ type WorkflowTaskResponse struct {
 			CreatedAt string `json:"created_at"`
 
 			// The position of the workflow task
-			Position   float32     `json:"position"`
-			TaskParams interface{} `json:"task_params"`
+			Position float32 `json:"position"`
+
+			// Is the task skipped if any failures
+			SkipOnFailure *bool       `json:"skip_on_failure,omitempty"`
+			TaskParams    interface{} `json:"task_params"`
 
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`

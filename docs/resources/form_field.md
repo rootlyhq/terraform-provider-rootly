@@ -21,7 +21,7 @@ description: |-
 - `default_values` (List of String)
 - `description` (String) The description of the form field
 - `enabled` (Boolean)
-- `input_kind` (String) The input kind of the form field. Value must be one of `text`, `textarea`, `select`, `multi_select`, `date`, `datetime`, `users`, `checkbox`, `tags`.
+- `input_kind` (String) The input kind of the form field. Value must be one of `text`, `textarea`, `select`, `multi_select`, `date`, `datetime`, `users`, `number`, `checkbox`, `tags`.
 - `kind` (String) The kind of the form field. Value must be one of `custom`, `title`, `summary`, `severity`, `environments`, `types`, `services`, `functionalities`, `teams`, `visibility`, `mark_as_test`, `mark_as_backfilled`, `labels`, `notify_emails`, `trigger_manual_workflows`, `show_ongoing_incidents`, `attach_alerts`, `manual_starting_datetime_field`.
 - `required` (List of String)
 - `shown` (List of String)
