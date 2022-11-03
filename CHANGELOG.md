@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.48] -- 2022-11-02
+
+- Add `form_field` resources.
+- Deprecate `custom_fields` resources.
+
 ## [0.1.47] -- 2022-10-25
 
 - Add `slug` attribute to `workflow_groups`.
