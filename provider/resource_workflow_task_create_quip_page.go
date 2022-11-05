@@ -13,14 +13,14 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/client"
 )
 
-func resourceWorkflowTaskSendSlackMessage() *schema.Resource {
+func resourceWorkflowTaskCreateQuipPage() *schema.Resource {
 	return &schema.Resource{
-		Description: "Manages workflow send_slack_message task.",
+		Description: "Manages workflow create_quip_page task.",
 
-		CreateContext: resourceWorkflowTaskSendSlackMessageCreate,
-		ReadContext:   resourceWorkflowTaskSendSlackMessageRead,
-		UpdateContext: resourceWorkflowTaskSendSlackMessageUpdate,
-		DeleteContext: resourceWorkflowTaskSendSlackMessageDelete,
+		CreateContext: resourceWorkflowTaskCreateQuipPageCreate,
+		ReadContext:   resourceWorkflowTaskCreateQuipPageRead,
+		UpdateContext: resourceWorkflowTaskCreateQuipPageUpdate,
+		DeleteContext: resourceWorkflowTaskCreateQuipPageDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -49,84 +49,35 @@ func resourceWorkflowTaskSendSlackMessage() *schema.Resource {
 						"task_type": &schema.Schema{
 							Type: schema.TypeString,
 							Optional: true,
-							Default: "send_slack_message",
+							Default: "create_quip_page",
 							ValidateFunc: validation.StringInSlice([]string{
-								"send_slack_message",
+								"create_quip_page",
 							}, false),
 						},
-						"channels": &schema.Schema{
-							Description: "",
-							Type: schema.TypeList,
-							Optional: true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type: schema.TypeString,
-										Required: true,
-									},
-									"name": &schema.Schema{
-										Type: schema.TypeString,
-										Required: true,
-									},
-								},
-							},
-						},
-						"slack_users": &schema.Schema{
-							Description: "",
-							Type: schema.TypeList,
-							Optional: true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type: schema.TypeString,
-										Required: true,
-									},
-									"name": &schema.Schema{
-										Type: schema.TypeString,
-										Required: true,
-									},
-								},
-							},
-						},
-						"slack_user_groups": &schema.Schema{
-							Description: "",
-							Type: schema.TypeList,
-							Optional: true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type: schema.TypeString,
-										Required: true,
-									},
-									"name": &schema.Schema{
-										Type: schema.TypeString,
-										Required: true,
-									},
-								},
-							},
-						},
-						"actionables": &schema.Schema{
-							Description: ". Value must be one of `update_summary`, `manage_incident_roles`, `update_incident`, `all_commands`, `leave_feedback`, `manage_form_fields`, `manage_action_items`, `view_tasks`, `add_pagerduty_responders`, `add_opsgenie_responders`, `add_victor_ops_responders`.",
-							Type: schema.TypeList,
-							Optional: true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-						},
-						"send_as_ephemeral": &schema.Schema{
-							Description: "",
-							Type: schema.TypeBool,
+						"post_mortem_template_id": &schema.Schema{
+							Description: "Post mortem template to use when creating page, if desired.",
+							Type: schema.TypeString,
 							Optional: true,
 						},
-						"parent_message_thread_task": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. A hash where [id] is the task id of the parent task that sent a message, and [name] is the name of the parent task",
-							Type: schema.TypeMap,
-							Optional: true,
-						},
-						"text": &schema.Schema{
-							Description: "The message text.",
+						"title": &schema.Schema{
+							Description: "The page title",
 							Type: schema.TypeString,
 							Required: true,
+						},
+						"parent_folder_id": &schema.Schema{
+							Description: "The parent folder id",
+							Type: schema.TypeString,
+							Optional: true,
+						},
+						"content": &schema.Schema{
+							Description: "The page content",
+							Type: schema.TypeString,
+							Optional: true,
+						},
+						"template_id": &schema.Schema{
+							Description: "The Quip file ID to use as a template.",
+							Type: schema.TypeString,
+							Optional: true,
 						},
 					},
 				},
@@ -135,7 +86,7 @@ func resourceWorkflowTaskSendSlackMessage() *schema.Resource {
 	}
 }
 
-func resourceWorkflowTaskSendSlackMessageCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateQuipPageCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
@@ -158,10 +109,10 @@ func resourceWorkflowTaskSendSlackMessageCreate(ctx context.Context, d *schema.R
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created an workflow task resource: %v (%s)", workflowId, d.Id()))
 
-	return resourceWorkflowTaskSendSlackMessageRead(ctx, d, meta)
+	return resourceWorkflowTaskCreateQuipPageRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskSendSlackMessageRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateQuipPageRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
@@ -170,7 +121,7 @@ func resourceWorkflowTaskSendSlackMessageRead(ctx context.Context, d *schema.Res
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskSendSlackMessage (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateQuipPage (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
@@ -187,7 +138,7 @@ func resourceWorkflowTaskSendSlackMessageRead(ctx context.Context, d *schema.Res
 	return nil
 }
 
-func resourceWorkflowTaskSendSlackMessageUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateQuipPageUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
@@ -207,10 +158,10 @@ func resourceWorkflowTaskSendSlackMessageUpdate(ctx context.Context, d *schema.R
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
 
-	return resourceWorkflowTaskSendSlackMessageRead(ctx, d, meta)
+	return resourceWorkflowTaskCreateQuipPageRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskSendSlackMessageDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateQuipPageDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
@@ -219,7 +170,7 @@ func resourceWorkflowTaskSendSlackMessageDelete(ctx context.Context, d *schema.R
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskSendSlackMessage (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateQuipPage (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}

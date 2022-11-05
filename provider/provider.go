@@ -120,6 +120,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_workflow_task_create_google_calendar_event": resourceWorkflowTaskCreateGoogleCalendarEvent(),
 				"rootly_workflow_task_update_google_calendar_event": resourceWorkflowTaskUpdateGoogleCalendarEvent(),
 				"rootly_workflow_task_create_google_docs_page": resourceWorkflowTaskCreateGoogleDocsPage(),
+				"rootly_workflow_task_create_quip_page": resourceWorkflowTaskCreateQuipPage(),
 				"rootly_workflow_task_create_google_meeting": resourceWorkflowTaskCreateGoogleMeeting(),
 				"rootly_workflow_task_create_go_to_meeting": resourceWorkflowTaskCreateGoToMeeting(),
 				"rootly_workflow_task_create_incident": resourceWorkflowTaskCreateIncident(),

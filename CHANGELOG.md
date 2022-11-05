@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.50] -- 2022-11-04
+
+- Add `CreateQuipPageTaskParams` resource.
+- Add `workflow_task_create_quip_page` to `workflow_task_send_slack_message` resource.
+
 ## [0.1.49] -- 2022-11-02
 
 - Add support for `number` with `form_field` resources.

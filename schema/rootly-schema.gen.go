@@ -611,7 +611,7 @@ const (
 
 // Defines values for CreateGoogleDocsPageTaskParamsTaskType.
 const (
-	CreateGoogleDocsPage CreateGoogleDocsPageTaskParamsTaskType = "create_google_docs_page"
+	CreateGoogleDocsPageTaskParamsTaskTypeCreateGoogleDocsPage CreateGoogleDocsPageTaskParamsTaskType = "create_google_docs_page"
 )
 
 // Defines values for CreateGoogleMeetingTaskParamsConferenceSolutionKey.
@@ -684,6 +684,11 @@ const (
 // Defines values for CreatePagerdutyStatusUpdateParamsTaskType.
 const (
 	CreatePagerdutyStatusUpdate CreatePagerdutyStatusUpdateParamsTaskType = "create_pagerduty_status_update"
+)
+
+// Defines values for CreateQuipPageTaskParamsTaskType.
+const (
+	CreateQuipPageTaskParamsTaskTypeCreateGoogleDocsPage CreateQuipPageTaskParamsTaskType = "create_google_docs_page"
 )
 
 // Defines values for CreateServiceNowIncidentTaskParamsTaskType.
@@ -4647,6 +4652,28 @@ type CreatePagerdutyStatusUpdateParams struct {
 
 // CreatePagerdutyStatusUpdateParamsTaskType defines model for CreatePagerdutyStatusUpdateParams.TaskType.
 type CreatePagerdutyStatusUpdateParamsTaskType string
+
+// CreateQuipPageTaskParams defines model for create_quip_page_task_params.
+type CreateQuipPageTaskParams struct {
+	// The page content
+	Content *string `json:"content,omitempty"`
+
+	// The parent folder id
+	ParentFolderId *string `json:"parent_folder_id,omitempty"`
+
+	// Post mortem template to use when creating page, if desired.
+	PostMortemTemplateId *string                           `json:"post_mortem_template_id,omitempty"`
+	TaskType             *CreateQuipPageTaskParamsTaskType `json:"task_type,omitempty"`
+
+	// The Quip file ID to use as a template.
+	TemplateId *string `json:"template_id,omitempty"`
+
+	// The page title
+	Title string `json:"title"`
+}
+
+// CreateQuipPageTaskParamsTaskType defines model for CreateQuipPageTaskParams.TaskType.
+type CreateQuipPageTaskParamsTaskType string
 
 // CreateServiceNowIncidentTaskParams defines model for create_service_now_incident_task_params.
 type CreateServiceNowIncidentTaskParams struct {
@@ -9282,14 +9309,20 @@ type SendEmailTaskParamsTaskType string
 
 // SendSlackBlocksTaskParams defines model for send_slack_blocks_task_params.
 type SendSlackBlocksTaskParams struct {
-	// Blocks JSON.
+	// Support liquid markup. Needs to be a valid JSON string after liquid is parsed.
 	Blocks   string `json:"blocks"`
 	Channels *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"channels,omitempty"`
-	Message         *string `json:"message,omitempty"`
-	SendAsEphemeral *bool   `json:"send_as_ephemeral,omitempty"`
+	Message *string `json:"message,omitempty"`
+
+	// A hash where [id] is the task id of the parent task that sent a message, and [name] is the name of the parent task
+	ParentMessageThreadTask *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"parent_message_thread_task,omitempty"`
+	SendAsEphemeral *bool `json:"send_as_ephemeral,omitempty"`
 	SlackUserGroups *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -9311,6 +9344,12 @@ type SendSlackMessageTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"channels,omitempty"`
+
+	// A hash where [id] is the task id of the parent task that sent a message, and [name] is the name of the parent task
+	ParentMessageThreadTask *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"parent_message_thread_task,omitempty"`
 	SendAsEphemeral *bool `json:"send_as_ephemeral,omitempty"`
 	SlackUserGroups *[]struct {
 		Id   *string `json:"id,omitempty"`
