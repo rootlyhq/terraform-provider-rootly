@@ -71,7 +71,6 @@ func resourceWorkflowTaskSendSlackBlocks() *schema.Resource {
 								assert := assert.New(t)
 								return assert.JSONEq(old, new)
 							},
-							Default: "{}",
 						},
 						"channels": &schema.Schema{
 							Description: "",

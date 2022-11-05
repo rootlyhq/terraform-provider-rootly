@@ -205,18 +205,22 @@ function annotatedDescription(schema) {
 
 function genTaskSchemaProperty(property_name, property_schema, required_props) {
 	const isRequired = required_props && required_props.indexOf(property_name) !== -1
+	const isJSON = property_schema.type === "string" && property_schema.description && property_schema.description.match(/JSON/)
 	let a = `						"${property_name}": &schema.Schema{
 							Description: "${annotatedDescription(property_schema)}",
 							Type: ${genTaskSchemaPropertyType(property_schema.type)},
 							${isRequired ? 'Required' : 'Optional'}: true,`
-	if (property_schema.type === "string" && property_schema.description && property_schema.description.match(/JSON/)) {
+	if (isJSON) {
 			a = `${a}
 							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 								t := &testing.T{}
 								assert := assert.New(t)
 								return assert.JSONEq(old, new)
-							},
+							},`
+		if (!isRequired) {
+			a = `${a}
 							Default: "{}",`
+		}
 	}
 	if (property_schema.enum) {
 		if (!isRequired) {
