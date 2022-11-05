@@ -127,6 +127,12 @@ func resourceWorkflowTaskCreateJiraSubtask() *schema.Resource {
 							Description: "Update payload. Can contain liquid markup and need to be valid JSON.",
 							Type: schema.TypeString,
 							Optional: true,
+							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+								t := &testing.T{}
+								assert := assert.New(t)
+								return assert.JSONEq(old, new)
+							},
+							Default: "{}",
 						},
 					},
 				},

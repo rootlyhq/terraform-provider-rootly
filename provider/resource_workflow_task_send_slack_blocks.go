@@ -5,8 +5,10 @@ package provider
 import (
 	"context"
 	"fmt"
+	
 	"testing"
   "github.com/stretchr/testify/assert"
+	
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -61,7 +63,7 @@ func resourceWorkflowTaskSendSlackBlocks() *schema.Resource {
 							Optional: true,
 						},
 						"blocks": &schema.Schema{
-							Description: "Blocks JSON.",
+							Description: "Support liquid markup. Needs to be a valid JSON string after liquid is parsed.",
 							Type: schema.TypeString,
 							Required: true,
 							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
@@ -69,6 +71,7 @@ func resourceWorkflowTaskSendSlackBlocks() *schema.Resource {
 								assert := assert.New(t)
 								return assert.JSONEq(old, new)
 							},
+							Default: "{}",
 						},
 						"channels": &schema.Schema{
 							Description: "",
@@ -124,6 +127,11 @@ func resourceWorkflowTaskSendSlackBlocks() *schema.Resource {
 						"send_as_ephemeral": &schema.Schema{
 							Description: "",
 							Type: schema.TypeBool,
+							Optional: true,
+						},
+						"parent_message_thread_task": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. A hash where [id] is the task id of the parent task that sent a message, and [name] is the name of the parent task",
+							Type: schema.TypeMap,
 							Optional: true,
 						},
 					},
