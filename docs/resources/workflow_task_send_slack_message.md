@@ -34,7 +34,7 @@ Required:
 
 Optional:
 
-- `actionables` (List of String) . Value must be one of `update_summary`, `manage_incident_roles`, `update_incident`, `all_commands`, `leave_feedback`, `manage_form_fields`, `manage_action_items`, `view_tasks`, `add_pagerduty_responders`, `add_opsgenie_responders`, `add_victor_ops_responders`.
+- `actionables` (List of String) . Value must be one of `update_summary`, `archive_channel`, `manage_incident_roles`, `update_incident`, `all_commands`, `leave_feedback`, `manage_form_fields`, `manage_action_items`, `view_tasks`, `add_pagerduty_responders`, `add_opsgenie_responders`, `add_victor_ops_responders`.
 - `channels` (Block List) (see [below for nested schema](#nestedblock--task_params--channels))
 - `parent_message_thread_task` (Map of String) Map must contain two fields, `id` and `name`. A hash where [id] is the task id of the parent task that sent a message, and [name] is the name of the parent task
 - `send_as_ephemeral` (Boolean)

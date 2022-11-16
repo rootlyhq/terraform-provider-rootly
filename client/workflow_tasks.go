@@ -1,7 +1,9 @@
 package client
 
 import (
+	"reflect"
 	"github.com/pkg/errors"
+	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
@@ -10,6 +12,25 @@ type WorkflowTask struct {
 	WorkflowId  string `jsonapi:"attr,workflow_id,omitempty"`
 	Position    int `jsonapi:"attr,position,omitempty"`
 	TaskParams  map[string]interface{} `jsonapi:"attr,task_params,omitempty"`
+}
+
+func (c *Client) ListWorkflowTasks(workflowId string, params *rootlygo.ListWorkflowTasksParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListWorkflowTasksRequest(c.Rootly.Server, workflowId, params)
+	if err != nil {
+		return nil, errors.Errorf("Error building request: %s", err.Error())
+	}
+
+	resp, err := c.Do(req)
+	if err != nil {
+		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+	}
+
+	workflow_tasks, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(WorkflowTask)))
+	if err != nil {
+		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+	}
+
+	return workflow_tasks, nil
 }
 
 func (c *Client) CreateWorkflowTask(i *WorkflowTask) (*WorkflowTask, error) {

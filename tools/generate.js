@@ -36,7 +36,7 @@ console.log(`Excluding resource from generation:`, excluded)
 const resources = Object.keys(swagger.components.schemas).filter((name) => {
 	return excluded.indexOf(name) === -1 && collectionPathSchema(name)
 })
-const dataSources = resources.filter(resourceHasFilters).filter((name) => name !== "workflow")
+const dataSources = resources.filter(resourceHasFilters)
 const taskResources = generateTasks(swagger)
 
 generateProvider(resources, taskResources, dataSources)

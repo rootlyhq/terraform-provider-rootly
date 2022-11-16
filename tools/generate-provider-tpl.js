@@ -59,6 +59,7 @@ ${dataSources.map((name) => {
 				"rootly_functionalities": dataSourceFunctionalities(),
 				"rootly_incident_types": dataSourceIncidentTypes(),
 				"rootly_incident_roles": dataSourceIncidentRoles(),
+				"rootly_workflow_task": dataSourceWorkflowTask(),
 				"rootly_teams": dataSourceTeams(),
 				"rootly_severities": dataSourceSeverities(),
 				"rootly_services": dataSourceServices(),
