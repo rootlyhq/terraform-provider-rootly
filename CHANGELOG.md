@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.53] -- 2022-11-17
+
+- Update `IncidentTriggerParamsTriggers`.
+
 ## [0.1.52] -- 2022-11-14
 
 - Add `rootly_workflow` and `rootly_workflow_task` data sources.
