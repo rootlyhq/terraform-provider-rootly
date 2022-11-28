@@ -225,12 +225,18 @@ function genTaskSchemaProperty(property_name, property_schema, required_props) {
 	if (property_schema.enum) {
 		if (!isRequired) {
 			a = `${a}
-							Default: "${property_schema.enum[0]}",`
+							Default: nil,`
 		}
 		a = `${a}
 							ValidateFunc: validation.StringInSlice([]string{
 								${property_schema.enum.map((k) => `"${k}",`).join('\n')}
 							}, false),`
+	}
+	if (property_schema.type === "number"){
+		if (!isRequired) {
+			a = `${a}
+							Default: nil,`
+		}
 	}
 	if (property_schema.type === "array") {
 		if (property_schema.items.type === "string") {
