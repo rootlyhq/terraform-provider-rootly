@@ -113,6 +113,11 @@ func resourceWorkflowTaskSendSlackMessage() *schema.Resource {
 								Type: schema.TypeString,
 							},
 						},
+						"broadcast_thread_reply_to_channel": &schema.Schema{
+							Description: "",
+							Type: schema.TypeBool,
+							Optional: true,
+						},
 						"send_as_ephemeral": &schema.Schema{
 							Description: "",
 							Type: schema.TypeBool,
