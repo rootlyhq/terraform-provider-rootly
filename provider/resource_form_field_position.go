@@ -54,6 +54,7 @@ func resourceFormFieldPosition() *schema.Resource{
 	}
 }
 
+
 func resourceFormFieldPositionCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
@@ -82,6 +83,7 @@ func resourceFormFieldPositionCreate(ctx context.Context, d *schema.ResourceData
 	return resourceFormFieldPositionRead(ctx, d, meta)
 }
 
+
 func resourceFormFieldPositionRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading FormFieldPosition: %s", d.Id()))
@@ -105,6 +107,7 @@ func resourceFormFieldPositionRead(ctx context.Context, d *schema.ResourceData, 
 
 	return nil
 }
+
 
 func resourceFormFieldPositionUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
@@ -130,6 +133,7 @@ func resourceFormFieldPositionUpdate(ctx context.Context, d *schema.ResourceData
 	return resourceFormFieldPositionRead(ctx, d, meta)
 }
 
+
 func resourceFormFieldPositionDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting FormFieldPosition: %s", d.Id()))
@@ -150,3 +154,4 @@ func resourceFormFieldPositionDelete(ctx context.Context, d *schema.ResourceData
 
 	return nil
 }
+

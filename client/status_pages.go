@@ -21,6 +21,7 @@ type StatusPage struct {
   Enabled *bool `jsonapi:"attr,enabled,omitempty"`
 }
 
+
 func (c *Client) ListStatusPages(params *rootlygo.ListStatusPagesParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListStatusPagesRequest(c.Rootly.Server, params)
 	if err != nil {
@@ -39,6 +40,7 @@ func (c *Client) ListStatusPages(params *rootlygo.ListStatusPagesParams) ([]inte
 
 	return status_pages, nil
 }
+
 
 func (c *Client) CreateStatusPage(d *StatusPage) (*StatusPage, error) {
 	buffer, err := MarshalData(d)
@@ -63,6 +65,7 @@ func (c *Client) CreateStatusPage(d *StatusPage) (*StatusPage, error) {
 	return data.(*StatusPage), nil
 }
 
+
 func (c *Client) GetStatusPage(id string) (*StatusPage, error) {
 	req, err := rootlygo.NewGetStatusPageRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -81,6 +84,7 @@ func (c *Client) GetStatusPage(id string) (*StatusPage, error) {
 
 	return data.(*StatusPage), nil
 }
+
 
 func (c *Client) UpdateStatusPage(id string, status_page *StatusPage) (*StatusPage, error) {
 	buffer, err := MarshalData(status_page)
@@ -105,6 +109,7 @@ func (c *Client) UpdateStatusPage(id string, status_page *StatusPage) (*StatusPa
 	return data.(*StatusPage), nil
 }
 
+
 func (c *Client) DeleteStatusPage(id string) error {
 	req, err := rootlygo.NewDeleteStatusPageRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -118,3 +123,4 @@ func (c *Client) DeleteStatusPage(id string) error {
 
 	return nil
 }
+

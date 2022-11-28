@@ -18,6 +18,7 @@ type WorkflowFormFieldCondition struct {
   SelectedUserIds []interface{} `jsonapi:"attr,selected_user_ids,omitempty"`
 }
 
+
 func (c *Client) ListWorkflowFormFieldConditions(id string, params *rootlygo.ListWorkflowFormFieldConditionsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListWorkflowFormFieldConditionsRequest(c.Rootly.Server, id, params)
 	if err != nil {
@@ -36,6 +37,7 @@ func (c *Client) ListWorkflowFormFieldConditions(id string, params *rootlygo.Lis
 
 	return workflow_form_field_conditions, nil
 }
+
 
 func (c *Client) CreateWorkflowFormFieldCondition(d *WorkflowFormFieldCondition) (*WorkflowFormFieldCondition, error) {
 	buffer, err := MarshalData(d)
@@ -60,6 +62,7 @@ func (c *Client) CreateWorkflowFormFieldCondition(d *WorkflowFormFieldCondition)
 	return data.(*WorkflowFormFieldCondition), nil
 }
 
+
 func (c *Client) GetWorkflowFormFieldCondition(id string) (*WorkflowFormFieldCondition, error) {
 	req, err := rootlygo.NewGetWorkflowFormFieldConditionRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -78,6 +81,7 @@ func (c *Client) GetWorkflowFormFieldCondition(id string) (*WorkflowFormFieldCon
 
 	return data.(*WorkflowFormFieldCondition), nil
 }
+
 
 func (c *Client) UpdateWorkflowFormFieldCondition(id string, workflow_form_field_condition *WorkflowFormFieldCondition) (*WorkflowFormFieldCondition, error) {
 	buffer, err := MarshalData(workflow_form_field_condition)
@@ -102,6 +106,7 @@ func (c *Client) UpdateWorkflowFormFieldCondition(id string, workflow_form_field
 	return data.(*WorkflowFormFieldCondition), nil
 }
 
+
 func (c *Client) DeleteWorkflowFormFieldCondition(id string) error {
 	req, err := rootlygo.NewDeleteWorkflowFormFieldConditionRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -115,3 +120,4 @@ func (c *Client) DeleteWorkflowFormFieldCondition(id string) error {
 
 	return nil
 }
+

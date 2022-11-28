@@ -1,18 +1,20 @@
 const inflect = require('./inflect');
 
-module.exports = (name, resourceSchema, pathIdField) => {
+module.exports = (name, resourceSchema, pathIdField, exclude = []) => {
 	const namePlural = inflect.pluralize(name)
 	const nameCamel = inflect.camelize(name)
 	const nameCamelPlural = inflect.camelize(namePlural)
+	const reflectImport = !exclude.includes("list") ? `"reflect"` : ''
+	const jsonAPIImport = !exclude.includes("list") ? `"github.com/google/jsonapi"` : ''
 	const strconvImport = pathIdField && resourceSchema.properties[pathIdField].type === 'number' ? `"strconv"` : ''
 
-return `package client
+definition = `package client
 
 import (
-	"reflect"
+	${reflectImport}
 	${strconvImport}
 	"github.com/pkg/errors"
-	"github.com/google/jsonapi"
+	${jsonAPIImport}
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
@@ -21,6 +23,10 @@ type ${nameCamel} struct {
 	${structAttrs(resourceSchema)}
 }
 
+`
+
+	if (!exclude.includes("list")) {
+			definition = definition + `
 func (c *Client) List${nameCamelPlural}(${listFnParams(nameCamelPlural, pathIdField)}) ([]interface{}, error) {
 	req, err := rootlygo.NewList${nameCamelPlural}Request(${listClientParams(pathIdField)})
 	if err != nil {
@@ -40,6 +46,11 @@ func (c *Client) List${nameCamelPlural}(${listFnParams(nameCamelPlural, pathIdFi
 	return ${namePlural}, nil
 }
 
+`
+	}
+
+	if (!exclude.includes("create")) {
+		definition = definition + `
 func (c *Client) Create${nameCamel}(d *${nameCamel}) (*${nameCamel}, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
@@ -63,6 +74,11 @@ func (c *Client) Create${nameCamel}(d *${nameCamel}) (*${nameCamel}, error) {
 	return data.(*${nameCamel}), nil
 }
 
+`
+	}
+
+	if (!exclude.includes("read")) {
+		definition = definition + `
 func (c *Client) Get${nameCamel}(id string) (*${nameCamel}, error) {
 	req, err := rootlygo.NewGet${nameCamel}Request(c.Rootly.Server, id)
 	if err != nil {
@@ -82,6 +98,11 @@ func (c *Client) Get${nameCamel}(id string) (*${nameCamel}, error) {
 	return data.(*${nameCamel}), nil
 }
 
+`
+	}
+
+	if (!exclude.includes("update")) {
+		definition = definition + `
 func (c *Client) Update${nameCamel}(id string, ${name} *${nameCamel}) (*${nameCamel}, error) {
 	buffer, err := MarshalData(${name})
 	if err != nil {
@@ -105,6 +126,11 @@ func (c *Client) Update${nameCamel}(id string, ${name} *${nameCamel}) (*${nameCa
 	return data.(*${nameCamel}), nil
 }
 
+`
+	}
+
+	if (!exclude.includes("delete")) {
+		definition = definition + `
 func (c *Client) Delete${nameCamel}(id string) error {
 	req, err := rootlygo.NewDelete${nameCamel}Request(c.Rootly.Server, id)
 	if err != nil {
@@ -118,7 +144,11 @@ func (c *Client) Delete${nameCamel}(id string) error {
 
 	return nil
 }
-`}
+
+`
+	}
+	return definition;
+}
 
 function listFnParams(nameCamelPlural, nested) {
 	if (nested) {

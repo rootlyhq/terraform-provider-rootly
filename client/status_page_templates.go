@@ -19,6 +19,7 @@ type StatusPageTemplate struct {
   Position int `jsonapi:"attr,position,omitempty"`
 }
 
+
 func (c *Client) ListStatusPageTemplates(id string, params *rootlygo.ListStatusPageTemplatesParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListStatusPageTemplatesRequest(c.Rootly.Server, id, params)
 	if err != nil {
@@ -37,6 +38,7 @@ func (c *Client) ListStatusPageTemplates(id string, params *rootlygo.ListStatusP
 
 	return status_page_templates, nil
 }
+
 
 func (c *Client) CreateStatusPageTemplate(d *StatusPageTemplate) (*StatusPageTemplate, error) {
 	buffer, err := MarshalData(d)
@@ -61,6 +63,7 @@ func (c *Client) CreateStatusPageTemplate(d *StatusPageTemplate) (*StatusPageTem
 	return data.(*StatusPageTemplate), nil
 }
 
+
 func (c *Client) GetStatusPageTemplate(id string) (*StatusPageTemplate, error) {
 	req, err := rootlygo.NewGetStatusPageTemplateRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -79,6 +82,7 @@ func (c *Client) GetStatusPageTemplate(id string) (*StatusPageTemplate, error) {
 
 	return data.(*StatusPageTemplate), nil
 }
+
 
 func (c *Client) UpdateStatusPageTemplate(id string, status_page_template *StatusPageTemplate) (*StatusPageTemplate, error) {
 	buffer, err := MarshalData(status_page_template)
@@ -103,6 +107,7 @@ func (c *Client) UpdateStatusPageTemplate(id string, status_page_template *Statu
 	return data.(*StatusPageTemplate), nil
 }
 
+
 func (c *Client) DeleteStatusPageTemplate(id string) error {
 	req, err := rootlygo.NewDeleteStatusPageTemplateRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -116,3 +121,4 @@ func (c *Client) DeleteStatusPageTemplate(id string) error {
 
 	return nil
 }
+

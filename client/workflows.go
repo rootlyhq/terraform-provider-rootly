@@ -28,6 +28,7 @@ type Workflow struct {
   GroupIds []interface{} `jsonapi:"attr,group_ids,omitempty"`
 }
 
+
 func (c *Client) ListWorkflows(params *rootlygo.ListWorkflowsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListWorkflowsRequest(c.Rootly.Server, params)
 	if err != nil {
@@ -46,6 +47,7 @@ func (c *Client) ListWorkflows(params *rootlygo.ListWorkflowsParams) ([]interfac
 
 	return workflows, nil
 }
+
 
 func (c *Client) CreateWorkflow(d *Workflow) (*Workflow, error) {
 	buffer, err := MarshalData(d)
@@ -70,6 +72,7 @@ func (c *Client) CreateWorkflow(d *Workflow) (*Workflow, error) {
 	return data.(*Workflow), nil
 }
 
+
 func (c *Client) GetWorkflow(id string) (*Workflow, error) {
 	req, err := rootlygo.NewGetWorkflowRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -88,6 +91,7 @@ func (c *Client) GetWorkflow(id string) (*Workflow, error) {
 
 	return data.(*Workflow), nil
 }
+
 
 func (c *Client) UpdateWorkflow(id string, workflow *Workflow) (*Workflow, error) {
 	buffer, err := MarshalData(workflow)
@@ -112,6 +116,7 @@ func (c *Client) UpdateWorkflow(id string, workflow *Workflow) (*Workflow, error
 	return data.(*Workflow), nil
 }
 
+
 func (c *Client) DeleteWorkflow(id string) error {
 	req, err := rootlygo.NewDeleteWorkflowRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -125,3 +130,4 @@ func (c *Client) DeleteWorkflow(id string) error {
 
 	return nil
 }
+

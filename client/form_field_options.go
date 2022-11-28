@@ -17,6 +17,7 @@ type FormFieldOption struct {
   Position int `jsonapi:"attr,position,omitempty"`
 }
 
+
 func (c *Client) ListFormFieldOptions(id string, params *rootlygo.ListFormFieldOptionsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListFormFieldOptionsRequest(c.Rootly.Server, id, params)
 	if err != nil {
@@ -35,6 +36,7 @@ func (c *Client) ListFormFieldOptions(id string, params *rootlygo.ListFormFieldO
 
 	return form_field_options, nil
 }
+
 
 func (c *Client) CreateFormFieldOption(d *FormFieldOption) (*FormFieldOption, error) {
 	buffer, err := MarshalData(d)
@@ -59,6 +61,7 @@ func (c *Client) CreateFormFieldOption(d *FormFieldOption) (*FormFieldOption, er
 	return data.(*FormFieldOption), nil
 }
 
+
 func (c *Client) GetFormFieldOption(id string) (*FormFieldOption, error) {
 	req, err := rootlygo.NewGetFormFieldOptionRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -77,6 +80,7 @@ func (c *Client) GetFormFieldOption(id string) (*FormFieldOption, error) {
 
 	return data.(*FormFieldOption), nil
 }
+
 
 func (c *Client) UpdateFormFieldOption(id string, form_field_option *FormFieldOption) (*FormFieldOption, error) {
 	buffer, err := MarshalData(form_field_option)
@@ -101,6 +105,7 @@ func (c *Client) UpdateFormFieldOption(id string, form_field_option *FormFieldOp
 	return data.(*FormFieldOption), nil
 }
 
+
 func (c *Client) DeleteFormFieldOption(id string) error {
 	req, err := rootlygo.NewDeleteFormFieldOptionRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -114,3 +119,4 @@ func (c *Client) DeleteFormFieldOption(id string) error {
 
 	return nil
 }
+

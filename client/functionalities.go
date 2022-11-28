@@ -23,6 +23,7 @@ type Functionality struct {
   SlackAliases []interface{} `jsonapi:"attr,slack_aliases,omitempty"`
 }
 
+
 func (c *Client) ListFunctionalities(params *rootlygo.ListFunctionalitiesParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListFunctionalitiesRequest(c.Rootly.Server, params)
 	if err != nil {
@@ -41,6 +42,7 @@ func (c *Client) ListFunctionalities(params *rootlygo.ListFunctionalitiesParams)
 
 	return functionalities, nil
 }
+
 
 func (c *Client) CreateFunctionality(d *Functionality) (*Functionality, error) {
 	buffer, err := MarshalData(d)
@@ -65,6 +67,7 @@ func (c *Client) CreateFunctionality(d *Functionality) (*Functionality, error) {
 	return data.(*Functionality), nil
 }
 
+
 func (c *Client) GetFunctionality(id string) (*Functionality, error) {
 	req, err := rootlygo.NewGetFunctionalityRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -83,6 +86,7 @@ func (c *Client) GetFunctionality(id string) (*Functionality, error) {
 
 	return data.(*Functionality), nil
 }
+
 
 func (c *Client) UpdateFunctionality(id string, functionality *Functionality) (*Functionality, error) {
 	buffer, err := MarshalData(functionality)
@@ -107,6 +111,7 @@ func (c *Client) UpdateFunctionality(id string, functionality *Functionality) (*
 	return data.(*Functionality), nil
 }
 
+
 func (c *Client) DeleteFunctionality(id string) error {
 	req, err := rootlygo.NewDeleteFunctionalityRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -120,3 +125,4 @@ func (c *Client) DeleteFunctionality(id string) error {
 
 	return nil
 }
+

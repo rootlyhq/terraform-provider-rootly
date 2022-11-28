@@ -30,6 +30,7 @@ type Service struct {
   SlackAliases []interface{} `jsonapi:"attr,slack_aliases,omitempty"`
 }
 
+
 func (c *Client) ListServices(params *rootlygo.ListServicesParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListServicesRequest(c.Rootly.Server, params)
 	if err != nil {
@@ -48,6 +49,7 @@ func (c *Client) ListServices(params *rootlygo.ListServicesParams) ([]interface{
 
 	return services, nil
 }
+
 
 func (c *Client) CreateService(d *Service) (*Service, error) {
 	buffer, err := MarshalData(d)
@@ -72,6 +74,7 @@ func (c *Client) CreateService(d *Service) (*Service, error) {
 	return data.(*Service), nil
 }
 
+
 func (c *Client) GetService(id string) (*Service, error) {
 	req, err := rootlygo.NewGetServiceRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -90,6 +93,7 @@ func (c *Client) GetService(id string) (*Service, error) {
 
 	return data.(*Service), nil
 }
+
 
 func (c *Client) UpdateService(id string, service *Service) (*Service, error) {
 	buffer, err := MarshalData(service)
@@ -114,6 +118,7 @@ func (c *Client) UpdateService(id string, service *Service) (*Service, error) {
 	return data.(*Service), nil
 }
 
+
 func (c *Client) DeleteService(id string) error {
 	req, err := rootlygo.NewDeleteServiceRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -127,3 +132,4 @@ func (c *Client) DeleteService(id string) error {
 
 	return nil
 }
+

@@ -74,6 +74,7 @@ func resourceSeverity() *schema.Resource{
 	}
 }
 
+
 func resourceSeverityCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
@@ -108,6 +109,7 @@ func resourceSeverityCreate(ctx context.Context, d *schema.ResourceData, meta in
 	return resourceSeverityRead(ctx, d, meta)
 }
 
+
 func resourceSeverityRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading Severity: %s", d.Id()))
@@ -133,6 +135,7 @@ func resourceSeverityRead(ctx context.Context, d *schema.ResourceData, meta inte
 
 	return nil
 }
+
 
 func resourceSeverityUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
@@ -164,6 +167,7 @@ func resourceSeverityUpdate(ctx context.Context, d *schema.ResourceData, meta in
 	return resourceSeverityRead(ctx, d, meta)
 }
 
+
 func resourceSeverityDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting Severity: %s", d.Id()))
@@ -184,3 +188,4 @@ func resourceSeverityDelete(ctx context.Context, d *schema.ResourceData, meta in
 
 	return nil
 }
+

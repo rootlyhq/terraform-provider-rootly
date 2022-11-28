@@ -28,7 +28,7 @@ const excluded = [
 	"alert",
 	"playbook_task",
 	"custom_field",
-	"custom_field_option",
+	"custom_field_option"
 ]
 
 console.log(`Excluding resource from generation:`, excluded)
@@ -57,8 +57,13 @@ function generateProvider(resources, taskResources, dataSources) {
 function generateClient(name) {
 	const collectionSchema = collectionPathSchema(name)
 	const pathIdField = collectionSchema && collectionSchema.parameters && collectionSchema.parameters[0] && collectionSchema.parameters[0].name
-	const code = clientTpl(name, resourceSchema(name), pathIdField)
-	fs.writeFileSync(path.resolve(__dirname, '..', 'client', `${inflect.pluralize(name)}.go`), code)
+	if (name == 'webhooks_delivery') {
+		const code = clientTpl(name, resourceSchema(name), pathIdField, ["list", "create", "update", "delete"])
+		fs.writeFileSync(path.resolve(__dirname, '..', 'client', `${inflect.pluralize(name)}.go`), code)
+	} else {
+		const code = clientTpl(name, resourceSchema(name), pathIdField)
+		fs.writeFileSync(path.resolve(__dirname, '..', 'client', `${inflect.pluralize(name)}.go`), code)
+	}
 }
 
 function resourceHasFilters(name) {
@@ -92,6 +97,9 @@ function generateResource(name) {
 		fs.writeFileSync(path.resolve(__dirname, '..', 'provider', `resource_${name}_alert.go`), code)
 		code = workflowTpl("workflow_pulse", resourceSchema(name), requiredFields(name), swagger.components.schemas.pulse_trigger_params)
 		fs.writeFileSync(path.resolve(__dirname, '..', 'provider', `resource_${name}_pulse.go`), code)
+	} else if (name === 'webhooks_delivery') {
+		code = resourceTpl(name, resourceSchema(name), requiredFields(name), pathIdField, ["create", "update", "delete"])
+		fs.writeFileSync(path.resolve(__dirname, '..', 'provider', `resource_${name}.go`), code)
 	} else {
 		code = resourceTpl(name, resourceSchema(name), requiredFields(name), pathIdField)
 		fs.writeFileSync(path.resolve(__dirname, '..', 'provider', `resource_${name}.go`), code)
@@ -112,7 +120,7 @@ function resourceSchema(name) {
 }
 
 function requiredFields(name) {
-	return swagger.components.schemas[`new_${name}`].properties.data.properties.attributes.required;
+	return swagger.components.schemas[`new_${name}`] ? swagger.components.schemas[`new_${name}`].properties.data.properties.attributes.required : false;
 }
 
 function collectionPathSchema(name) {

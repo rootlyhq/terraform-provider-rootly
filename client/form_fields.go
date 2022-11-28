@@ -21,6 +21,7 @@ type FormField struct {
   DefaultValues []interface{} `jsonapi:"attr,default_values,omitempty"`
 }
 
+
 func (c *Client) ListFormFields(params *rootlygo.ListFormFieldsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListFormFieldsRequest(c.Rootly.Server, params)
 	if err != nil {
@@ -39,6 +40,7 @@ func (c *Client) ListFormFields(params *rootlygo.ListFormFieldsParams) ([]interf
 
 	return form_fields, nil
 }
+
 
 func (c *Client) CreateFormField(d *FormField) (*FormField, error) {
 	buffer, err := MarshalData(d)
@@ -63,6 +65,7 @@ func (c *Client) CreateFormField(d *FormField) (*FormField, error) {
 	return data.(*FormField), nil
 }
 
+
 func (c *Client) GetFormField(id string) (*FormField, error) {
 	req, err := rootlygo.NewGetFormFieldRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -81,6 +84,7 @@ func (c *Client) GetFormField(id string) (*FormField, error) {
 
 	return data.(*FormField), nil
 }
+
 
 func (c *Client) UpdateFormField(id string, form_field *FormField) (*FormField, error) {
 	buffer, err := MarshalData(form_field)
@@ -105,6 +109,7 @@ func (c *Client) UpdateFormField(id string, form_field *FormField) (*FormField, 
 	return data.(*FormField), nil
 }
 
+
 func (c *Client) DeleteFormField(id string) error {
 	req, err := rootlygo.NewDeleteFormFieldRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -118,3 +123,4 @@ func (c *Client) DeleteFormField(id string) error {
 
 	return nil
 }
+

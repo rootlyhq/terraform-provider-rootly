@@ -64,6 +64,7 @@ func resourceEnvironment() *schema.Resource{
 	}
 }
 
+
 func resourceEnvironmentCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
@@ -95,6 +96,7 @@ func resourceEnvironmentCreate(ctx context.Context, d *schema.ResourceData, meta
 	return resourceEnvironmentRead(ctx, d, meta)
 }
 
+
 func resourceEnvironmentRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading Environment: %s", d.Id()))
@@ -119,6 +121,7 @@ func resourceEnvironmentRead(ctx context.Context, d *schema.ResourceData, meta i
 
 	return nil
 }
+
 
 func resourceEnvironmentUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
@@ -147,6 +150,7 @@ func resourceEnvironmentUpdate(ctx context.Context, d *schema.ResourceData, meta
 	return resourceEnvironmentRead(ctx, d, meta)
 }
 
+
 func resourceEnvironmentDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting Environment: %s", d.Id()))
@@ -167,3 +171,4 @@ func resourceEnvironmentDelete(ctx context.Context, d *schema.ResourceData, meta
 
 	return nil
 }
+

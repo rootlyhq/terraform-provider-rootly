@@ -34,6 +34,8 @@ Required:
 
 Optional:
 
+- `attachments` (String) Support liquid markup. Needs to be a valid JSON string after liquid is parsed.
+- `broadcast_thread_reply_to_channel` (Boolean)
 - `channels` (Block List) (see [below for nested schema](#nestedblock--task_params--channels))
 - `message` (String)
 - `parent_message_thread_task` (Map of String) Map must contain two fields, `id` and `name`. A hash where [id] is the task id of the parent task that sent a message, and [name] is the name of the parent task

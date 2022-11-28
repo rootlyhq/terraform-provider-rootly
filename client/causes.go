@@ -15,6 +15,7 @@ type Cause struct {
   Description string `jsonapi:"attr,description,omitempty"`
 }
 
+
 func (c *Client) ListCauses(params *rootlygo.ListCausesParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListCausesRequest(c.Rootly.Server, params)
 	if err != nil {
@@ -33,6 +34,7 @@ func (c *Client) ListCauses(params *rootlygo.ListCausesParams) ([]interface{}, e
 
 	return causes, nil
 }
+
 
 func (c *Client) CreateCause(d *Cause) (*Cause, error) {
 	buffer, err := MarshalData(d)
@@ -57,6 +59,7 @@ func (c *Client) CreateCause(d *Cause) (*Cause, error) {
 	return data.(*Cause), nil
 }
 
+
 func (c *Client) GetCause(id string) (*Cause, error) {
 	req, err := rootlygo.NewGetCauseRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -75,6 +78,7 @@ func (c *Client) GetCause(id string) (*Cause, error) {
 
 	return data.(*Cause), nil
 }
+
 
 func (c *Client) UpdateCause(id string, cause *Cause) (*Cause, error) {
 	buffer, err := MarshalData(cause)
@@ -99,6 +103,7 @@ func (c *Client) UpdateCause(id string, cause *Cause) (*Cause, error) {
 	return data.(*Cause), nil
 }
 
+
 func (c *Client) DeleteCause(id string) error {
 	req, err := rootlygo.NewDeleteCauseRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -112,3 +117,4 @@ func (c *Client) DeleteCause(id string) error {
 
 	return nil
 }
+

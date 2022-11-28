@@ -17,6 +17,7 @@ type Severity struct {
   Color string `jsonapi:"attr,color,omitempty"`
 }
 
+
 func (c *Client) ListSeverities(params *rootlygo.ListSeveritiesParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListSeveritiesRequest(c.Rootly.Server, params)
 	if err != nil {
@@ -35,6 +36,7 @@ func (c *Client) ListSeverities(params *rootlygo.ListSeveritiesParams) ([]interf
 
 	return severities, nil
 }
+
 
 func (c *Client) CreateSeverity(d *Severity) (*Severity, error) {
 	buffer, err := MarshalData(d)
@@ -59,6 +61,7 @@ func (c *Client) CreateSeverity(d *Severity) (*Severity, error) {
 	return data.(*Severity), nil
 }
 
+
 func (c *Client) GetSeverity(id string) (*Severity, error) {
 	req, err := rootlygo.NewGetSeverityRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -77,6 +80,7 @@ func (c *Client) GetSeverity(id string) (*Severity, error) {
 
 	return data.(*Severity), nil
 }
+
 
 func (c *Client) UpdateSeverity(id string, severity *Severity) (*Severity, error) {
 	buffer, err := MarshalData(severity)
@@ -101,6 +105,7 @@ func (c *Client) UpdateSeverity(id string, severity *Severity) (*Severity, error
 	return data.(*Severity), nil
 }
 
+
 func (c *Client) DeleteSeverity(id string) error {
 	req, err := rootlygo.NewDeleteSeverityRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -114,3 +119,4 @@ func (c *Client) DeleteSeverity(id string) error {
 
 	return nil
 }
+

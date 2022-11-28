@@ -16,6 +16,7 @@ type Environment struct {
   Color string `jsonapi:"attr,color,omitempty"`
 }
 
+
 func (c *Client) ListEnvironments(params *rootlygo.ListEnvironmentsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListEnvironmentsRequest(c.Rootly.Server, params)
 	if err != nil {
@@ -34,6 +35,7 @@ func (c *Client) ListEnvironments(params *rootlygo.ListEnvironmentsParams) ([]in
 
 	return environments, nil
 }
+
 
 func (c *Client) CreateEnvironment(d *Environment) (*Environment, error) {
 	buffer, err := MarshalData(d)
@@ -58,6 +60,7 @@ func (c *Client) CreateEnvironment(d *Environment) (*Environment, error) {
 	return data.(*Environment), nil
 }
 
+
 func (c *Client) GetEnvironment(id string) (*Environment, error) {
 	req, err := rootlygo.NewGetEnvironmentRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -76,6 +79,7 @@ func (c *Client) GetEnvironment(id string) (*Environment, error) {
 
 	return data.(*Environment), nil
 }
+
 
 func (c *Client) UpdateEnvironment(id string, environment *Environment) (*Environment, error) {
 	buffer, err := MarshalData(environment)
@@ -100,6 +104,7 @@ func (c *Client) UpdateEnvironment(id string, environment *Environment) (*Enviro
 	return data.(*Environment), nil
 }
 
+
 func (c *Client) DeleteEnvironment(id string) error {
 	req, err := rootlygo.NewDeleteEnvironmentRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -113,3 +118,4 @@ func (c *Client) DeleteEnvironment(id string) error {
 
 	return nil
 }
+

@@ -336,7 +336,7 @@ const (
 
 // Defines values for AlertTriggerParamsTriggers.
 const (
-	AlertCreated AlertTriggerParamsTriggers = "alert_created"
+	AlertTriggerParamsTriggersAlertCreated AlertTriggerParamsTriggers = "alert_created"
 )
 
 // Defines values for ArchiveSlackChannelsTaskParamsTaskType.
@@ -1630,6 +1630,8 @@ const (
 	IncidentTriggerParamsTriggersIncidentTypesRemoved      IncidentTriggerParamsTriggers = "incident_types_removed"
 	IncidentTriggerParamsTriggersIncidentTypesUpdated      IncidentTriggerParamsTriggers = "incident_types_updated"
 	IncidentTriggerParamsTriggersIncidentUpdated           IncidentTriggerParamsTriggers = "incident_updated"
+	IncidentTriggerParamsTriggersRoleAssignmentsAdded      IncidentTriggerParamsTriggers = "role_assignments_added"
+	IncidentTriggerParamsTriggersRoleAssignmentsRemoved    IncidentTriggerParamsTriggers = "role_assignments_removed"
 	IncidentTriggerParamsTriggersRoleAssignmentsUpdated    IncidentTriggerParamsTriggers = "role_assignments_updated"
 	IncidentTriggerParamsTriggersServicesAdded             IncidentTriggerParamsTriggers = "services_added"
 	IncidentTriggerParamsTriggersServicesRemoved           IncidentTriggerParamsTriggers = "services_removed"
@@ -2031,6 +2033,32 @@ const (
 	NewTeamDataTypeGroups NewTeamDataType = "groups"
 )
 
+// Defines values for NewWebhooksEndpointDataAttributesEventTypes.
+const (
+	NewWebhooksEndpointDataAttributesEventTypesAlertCreated                NewWebhooksEndpointDataAttributesEventTypes = "alert.created"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentCancelled           NewWebhooksEndpointDataAttributesEventTypes = "incident.cancelled"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentCreated             NewWebhooksEndpointDataAttributesEventTypes = "incident.created"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentDeleted             NewWebhooksEndpointDataAttributesEventTypes = "incident.deleted"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentMitigated           NewWebhooksEndpointDataAttributesEventTypes = "incident.mitigated"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentPostMortemCreated   NewWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.created"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentPostMortemDeleted   NewWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.deleted"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentPostMortemPublished NewWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.published"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentPostMortemUpdated   NewWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.updated"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentResolved            NewWebhooksEndpointDataAttributesEventTypes = "incident.resolved"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentScheduledCompleted  NewWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.completed"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentScheduledCreated    NewWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.created"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentScheduledDeleted    NewWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.deleted"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentScheduledInProgress NewWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.in_progress"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentScheduledUpdated    NewWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.updated"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentUpdated             NewWebhooksEndpointDataAttributesEventTypes = "incident.updated"
+	NewWebhooksEndpointDataAttributesEventTypesPulseCreated                NewWebhooksEndpointDataAttributesEventTypes = "pulse.created"
+)
+
+// Defines values for NewWebhooksEndpointDataType.
+const (
+	NewWebhooksEndpointDataTypeWebhooksEndpoints NewWebhooksEndpointDataType = "webhooks_endpoints"
+)
+
 // Defines values for NewWorkflowDataAttributesPriority.
 const (
 	NewWorkflowDataAttributesPriorityHigh   NewWorkflowDataAttributesPriority = "high"
@@ -2251,7 +2279,7 @@ const (
 
 // Defines values for PulseTriggerParamsTriggers.
 const (
-	PulseCreated PulseTriggerParamsTriggers = "pulse_created"
+	PulseTriggerParamsTriggersPulseCreated PulseTriggerParamsTriggers = "pulse_created"
 )
 
 // Defines values for RedisClientTaskParamsTaskType.
@@ -2980,6 +3008,32 @@ const (
 	UpdateVictorOpsIncident UpdateVictorOpsIncidentTaskParamsTaskType = "update_victor_ops_incident"
 )
 
+// Defines values for UpdateWebhooksEndpointDataAttributesEventTypes.
+const (
+	UpdateWebhooksEndpointDataAttributesEventTypesAlertCreated                UpdateWebhooksEndpointDataAttributesEventTypes = "alert.created"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentCancelled           UpdateWebhooksEndpointDataAttributesEventTypes = "incident.cancelled"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentCreated             UpdateWebhooksEndpointDataAttributesEventTypes = "incident.created"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentDeleted             UpdateWebhooksEndpointDataAttributesEventTypes = "incident.deleted"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentMitigated           UpdateWebhooksEndpointDataAttributesEventTypes = "incident.mitigated"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentPostMortemCreated   UpdateWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.created"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentPostMortemDeleted   UpdateWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.deleted"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentPostMortemPublished UpdateWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.published"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentPostMortemUpdated   UpdateWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.updated"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentResolved            UpdateWebhooksEndpointDataAttributesEventTypes = "incident.resolved"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentScheduledCompleted  UpdateWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.completed"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentScheduledCreated    UpdateWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.created"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentScheduledDeleted    UpdateWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.deleted"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentScheduledInProgress UpdateWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.in_progress"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentScheduledUpdated    UpdateWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.updated"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentUpdated             UpdateWebhooksEndpointDataAttributesEventTypes = "incident.updated"
+	UpdateWebhooksEndpointDataAttributesEventTypesPulseCreated                UpdateWebhooksEndpointDataAttributesEventTypes = "pulse.created"
+)
+
+// Defines values for UpdateWebhooksEndpointDataType.
+const (
+	UpdateWebhooksEndpointDataTypeWebhooksEndpoints UpdateWebhooksEndpointDataType = "webhooks_endpoints"
+)
+
 // Defines values for UpdateWorkflowDataType.
 const (
 	UpdateWorkflowDataTypeWorkflows UpdateWorkflowDataType = "workflows"
@@ -3045,6 +3099,89 @@ const (
 // Defines values for UserResponseDataType.
 const (
 	UserResponseDataTypeUsers UserResponseDataType = "users"
+)
+
+// Defines values for WebhooksDeliveryListDataType.
+const (
+	WebhooksDeliveryListDataTypeWebhooksDeliveries WebhooksDeliveryListDataType = "webhooks_deliveries"
+)
+
+// Defines values for WebhooksDeliveryResponseDataType.
+const (
+	WebhooksDeliveryResponseDataTypeWebhooksDeliveries WebhooksDeliveryResponseDataType = "webhooks_deliveries"
+)
+
+// Defines values for WebhooksEndpointEventTypes.
+const (
+	WebhooksEndpointEventTypesAlertCreated                WebhooksEndpointEventTypes = "alert.created"
+	WebhooksEndpointEventTypesIncidentCancelled           WebhooksEndpointEventTypes = "incident.cancelled"
+	WebhooksEndpointEventTypesIncidentCreated             WebhooksEndpointEventTypes = "incident.created"
+	WebhooksEndpointEventTypesIncidentDeleted             WebhooksEndpointEventTypes = "incident.deleted"
+	WebhooksEndpointEventTypesIncidentMitigated           WebhooksEndpointEventTypes = "incident.mitigated"
+	WebhooksEndpointEventTypesIncidentPostMortemCreated   WebhooksEndpointEventTypes = "incident_post_mortem.created"
+	WebhooksEndpointEventTypesIncidentPostMortemDeleted   WebhooksEndpointEventTypes = "incident_post_mortem.deleted"
+	WebhooksEndpointEventTypesIncidentPostMortemPublished WebhooksEndpointEventTypes = "incident_post_mortem.published"
+	WebhooksEndpointEventTypesIncidentPostMortemUpdated   WebhooksEndpointEventTypes = "incident_post_mortem.updated"
+	WebhooksEndpointEventTypesIncidentResolved            WebhooksEndpointEventTypes = "incident.resolved"
+	WebhooksEndpointEventTypesIncidentScheduledCompleted  WebhooksEndpointEventTypes = "incident.scheduled.completed"
+	WebhooksEndpointEventTypesIncidentScheduledCreated    WebhooksEndpointEventTypes = "incident.scheduled.created"
+	WebhooksEndpointEventTypesIncidentScheduledDeleted    WebhooksEndpointEventTypes = "incident.scheduled.deleted"
+	WebhooksEndpointEventTypesIncidentScheduledInProgress WebhooksEndpointEventTypes = "incident.scheduled.in_progress"
+	WebhooksEndpointEventTypesIncidentScheduledUpdated    WebhooksEndpointEventTypes = "incident.scheduled.updated"
+	WebhooksEndpointEventTypesIncidentUpdated             WebhooksEndpointEventTypes = "incident.updated"
+	WebhooksEndpointEventTypesPulseCreated                WebhooksEndpointEventTypes = "pulse.created"
+)
+
+// Defines values for WebhooksEndpointListDataAttributesEventTypes.
+const (
+	WebhooksEndpointListDataAttributesEventTypesAlertCreated                WebhooksEndpointListDataAttributesEventTypes = "alert.created"
+	WebhooksEndpointListDataAttributesEventTypesIncidentCancelled           WebhooksEndpointListDataAttributesEventTypes = "incident.cancelled"
+	WebhooksEndpointListDataAttributesEventTypesIncidentCreated             WebhooksEndpointListDataAttributesEventTypes = "incident.created"
+	WebhooksEndpointListDataAttributesEventTypesIncidentDeleted             WebhooksEndpointListDataAttributesEventTypes = "incident.deleted"
+	WebhooksEndpointListDataAttributesEventTypesIncidentMitigated           WebhooksEndpointListDataAttributesEventTypes = "incident.mitigated"
+	WebhooksEndpointListDataAttributesEventTypesIncidentPostMortemCreated   WebhooksEndpointListDataAttributesEventTypes = "incident_post_mortem.created"
+	WebhooksEndpointListDataAttributesEventTypesIncidentPostMortemDeleted   WebhooksEndpointListDataAttributesEventTypes = "incident_post_mortem.deleted"
+	WebhooksEndpointListDataAttributesEventTypesIncidentPostMortemPublished WebhooksEndpointListDataAttributesEventTypes = "incident_post_mortem.published"
+	WebhooksEndpointListDataAttributesEventTypesIncidentPostMortemUpdated   WebhooksEndpointListDataAttributesEventTypes = "incident_post_mortem.updated"
+	WebhooksEndpointListDataAttributesEventTypesIncidentResolved            WebhooksEndpointListDataAttributesEventTypes = "incident.resolved"
+	WebhooksEndpointListDataAttributesEventTypesIncidentScheduledCompleted  WebhooksEndpointListDataAttributesEventTypes = "incident.scheduled.completed"
+	WebhooksEndpointListDataAttributesEventTypesIncidentScheduledCreated    WebhooksEndpointListDataAttributesEventTypes = "incident.scheduled.created"
+	WebhooksEndpointListDataAttributesEventTypesIncidentScheduledDeleted    WebhooksEndpointListDataAttributesEventTypes = "incident.scheduled.deleted"
+	WebhooksEndpointListDataAttributesEventTypesIncidentScheduledInProgress WebhooksEndpointListDataAttributesEventTypes = "incident.scheduled.in_progress"
+	WebhooksEndpointListDataAttributesEventTypesIncidentScheduledUpdated    WebhooksEndpointListDataAttributesEventTypes = "incident.scheduled.updated"
+	WebhooksEndpointListDataAttributesEventTypesIncidentUpdated             WebhooksEndpointListDataAttributesEventTypes = "incident.updated"
+	WebhooksEndpointListDataAttributesEventTypesPulseCreated                WebhooksEndpointListDataAttributesEventTypes = "pulse.created"
+)
+
+// Defines values for WebhooksEndpointListDataType.
+const (
+	WebhooksEndpointListDataTypeWebhooksEndpoints WebhooksEndpointListDataType = "webhooks_endpoints"
+)
+
+// Defines values for WebhooksEndpointResponseDataAttributesEventTypes.
+const (
+	AlertCreated                WebhooksEndpointResponseDataAttributesEventTypes = "alert.created"
+	IncidentCancelled           WebhooksEndpointResponseDataAttributesEventTypes = "incident.cancelled"
+	IncidentCreated             WebhooksEndpointResponseDataAttributesEventTypes = "incident.created"
+	IncidentDeleted             WebhooksEndpointResponseDataAttributesEventTypes = "incident.deleted"
+	IncidentMitigated           WebhooksEndpointResponseDataAttributesEventTypes = "incident.mitigated"
+	IncidentPostMortemCreated   WebhooksEndpointResponseDataAttributesEventTypes = "incident_post_mortem.created"
+	IncidentPostMortemDeleted   WebhooksEndpointResponseDataAttributesEventTypes = "incident_post_mortem.deleted"
+	IncidentPostMortemPublished WebhooksEndpointResponseDataAttributesEventTypes = "incident_post_mortem.published"
+	IncidentPostMortemUpdated   WebhooksEndpointResponseDataAttributesEventTypes = "incident_post_mortem.updated"
+	IncidentResolved            WebhooksEndpointResponseDataAttributesEventTypes = "incident.resolved"
+	IncidentScheduledCompleted  WebhooksEndpointResponseDataAttributesEventTypes = "incident.scheduled.completed"
+	IncidentScheduledCreated    WebhooksEndpointResponseDataAttributesEventTypes = "incident.scheduled.created"
+	IncidentScheduledDeleted    WebhooksEndpointResponseDataAttributesEventTypes = "incident.scheduled.deleted"
+	IncidentScheduledInProgress WebhooksEndpointResponseDataAttributesEventTypes = "incident.scheduled.in_progress"
+	IncidentScheduledUpdated    WebhooksEndpointResponseDataAttributesEventTypes = "incident.scheduled.updated"
+	IncidentUpdated             WebhooksEndpointResponseDataAttributesEventTypes = "incident.updated"
+	PulseCreated                WebhooksEndpointResponseDataAttributesEventTypes = "pulse.created"
+)
+
+// Defines values for WebhooksEndpointResponseDataType.
+const (
+	WebhooksEndpointResponseDataTypeWebhooksEndpoints WebhooksEndpointResponseDataType = "webhooks_endpoints"
 )
 
 // Defines values for WorkflowRepeatOn.
@@ -3964,6 +4101,10 @@ type AutoAssignRolePagerdutyTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"schedule,omitempty"`
+	Service *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"service,omitempty"`
 	TaskType *AutoAssignRolePagerdutyTaskParamsTaskType `json:"task_type,omitempty"`
 }
 
@@ -8266,6 +8407,32 @@ type NewTeam struct {
 // NewTeamDataType defines model for NewTeam.Data.Type.
 type NewTeamDataType string
 
+// NewWebhooksEndpoint defines model for new_webhooks_endpoint.
+type NewWebhooksEndpoint struct {
+	Data struct {
+		Attributes struct {
+			Enabled    *bool                                          `json:"enabled,omitempty"`
+			EventTypes *[]NewWebhooksEndpointDataAttributesEventTypes `json:"event_types,omitempty"`
+
+			// The name of the endpoint
+			Name string `json:"name"`
+
+			// The webhook signing secret used to verify webhook requests.
+			Secret *string `json:"secret,omitempty"`
+
+			// The URL of the endpoint.
+			Url string `json:"url"`
+		} `json:"attributes"`
+		Type NewWebhooksEndpointDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewWebhooksEndpointDataAttributesEventTypes defines model for NewWebhooksEndpoint.Data.Attributes.EventTypes.
+type NewWebhooksEndpointDataAttributesEventTypes string
+
+// NewWebhooksEndpointDataType defines model for NewWebhooksEndpoint.Data.Type.
+type NewWebhooksEndpointDataType string
+
 // NewWorkflow defines model for new_workflow.
 type NewWorkflow struct {
 	Data struct {
@@ -9312,8 +9479,12 @@ type SendEmailTaskParamsTaskType string
 // SendSlackBlocksTaskParams defines model for send_slack_blocks_task_params.
 type SendSlackBlocksTaskParams struct {
 	// Support liquid markup. Needs to be a valid JSON string after liquid is parsed.
-	Blocks   string `json:"blocks"`
-	Channels *[]struct {
+	Attachments *string `json:"attachments,omitempty"`
+
+	// Support liquid markup. Needs to be a valid JSON string after liquid is parsed.
+	Blocks                        string `json:"blocks"`
+	BroadcastThreadReplyToChannel *bool  `json:"broadcast_thread_reply_to_channel,omitempty"`
+	Channels                      *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"channels,omitempty"`
@@ -9341,8 +9512,9 @@ type SendSlackBlocksTaskParamsTaskType string
 
 // SendSlackMessageTaskParams defines model for send_slack_message_task_params.
 type SendSlackMessageTaskParams struct {
-	Actionables *[]SendSlackMessageTaskParamsActionables `json:"actionables,omitempty"`
-	Channels    *[]struct {
+	Actionables                   *[]SendSlackMessageTaskParamsActionables `json:"actionables,omitempty"`
+	BroadcastThreadReplyToChannel *bool                                    `json:"broadcast_thread_reply_to_channel,omitempty"`
+	Channels                      *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"channels,omitempty"`
@@ -11607,6 +11779,26 @@ type UpdateVictorOpsIncidentTaskParamsStatus string
 // UpdateVictorOpsIncidentTaskParamsTaskType defines model for UpdateVictorOpsIncidentTaskParams.TaskType.
 type UpdateVictorOpsIncidentTaskParamsTaskType string
 
+// UpdateWebhooksEndpoint defines model for update_webhooks_endpoint.
+type UpdateWebhooksEndpoint struct {
+	Data struct {
+		Attributes struct {
+			Enabled    *bool                                             `json:"enabled,omitempty"`
+			EventTypes *[]UpdateWebhooksEndpointDataAttributesEventTypes `json:"event_types,omitempty"`
+
+			// The name of the endpoint
+			Name *string `json:"name,omitempty"`
+		} `json:"attributes"`
+		Type UpdateWebhooksEndpointDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateWebhooksEndpointDataAttributesEventTypes defines model for UpdateWebhooksEndpoint.Data.Attributes.EventTypes.
+type UpdateWebhooksEndpointDataAttributesEventTypes string
+
+// UpdateWebhooksEndpointDataType defines model for UpdateWebhooksEndpoint.Data.Type.
+type UpdateWebhooksEndpointDataType string
+
 // UpdateWorkflow defines model for update_workflow.
 type UpdateWorkflow struct {
 	Data struct {
@@ -11809,6 +12001,187 @@ type UserResponse struct {
 
 // UserResponseDataType defines model for UserResponse.Data.Type.
 type UserResponseDataType string
+
+// WebhooksDelivery defines model for webhooks_delivery.
+type WebhooksDelivery struct {
+	Attempts int `json:"attempts"`
+
+	// Date of creation
+	CreatedAt     string  `json:"created_at"`
+	Delivered     bool    `json:"delivered"`
+	EndpointId    string  `json:"endpoint_id"`
+	LastAttemptAt *string `json:"last_attempt_at"`
+	Payload       string  `json:"payload"`
+
+	// Date of last update
+	UpdatedAt string `json:"updated_at"`
+}
+
+// WebhooksDeliveryList defines model for webhooks_delivery_list.
+type WebhooksDeliveryList struct {
+	Data []struct {
+		Attributes struct {
+			Attempts int `json:"attempts"`
+
+			// Date of creation
+			CreatedAt     string  `json:"created_at"`
+			Delivered     bool    `json:"delivered"`
+			EndpointId    string  `json:"endpoint_id"`
+			LastAttemptAt *string `json:"last_attempt_at"`
+			Payload       string  `json:"payload"`
+
+			// Date of last update
+			UpdatedAt string `json:"updated_at"`
+		} `json:"attributes"`
+
+		// Unique ID of the webhooks_delivery
+		Id   string                       `json:"id"`
+		Type WebhooksDeliveryListDataType `json:"type"`
+	} `json:"data"`
+	Links *struct {
+		First string  `json:"first"`
+		Last  string  `json:"last"`
+		Next  *string `json:"next"`
+		Prev  *string `json:"prev"`
+		Self  string  `json:"self"`
+	} `json:"links,omitempty"`
+}
+
+// WebhooksDeliveryListDataType defines model for WebhooksDeliveryList.Data.Type.
+type WebhooksDeliveryListDataType string
+
+// WebhooksDeliveryResponse defines model for webhooks_delivery_response.
+type WebhooksDeliveryResponse struct {
+	Data struct {
+		Attributes struct {
+			Attempts int `json:"attempts"`
+
+			// Date of creation
+			CreatedAt     string  `json:"created_at"`
+			Delivered     bool    `json:"delivered"`
+			EndpointId    string  `json:"endpoint_id"`
+			LastAttemptAt *string `json:"last_attempt_at"`
+			Payload       string  `json:"payload"`
+
+			// Date of last update
+			UpdatedAt string `json:"updated_at"`
+		} `json:"attributes"`
+
+		// Unique ID of the webhooks_delivery
+		Id   string                           `json:"id"`
+		Type WebhooksDeliveryResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// WebhooksDeliveryResponseDataType defines model for WebhooksDeliveryResponse.Data.Type.
+type WebhooksDeliveryResponseDataType string
+
+// WebhooksEndpoint defines model for webhooks_endpoint.
+type WebhooksEndpoint struct {
+	// Date of creation
+	CreatedAt  string                       `json:"created_at"`
+	Enabled    bool                         `json:"enabled"`
+	EventTypes []WebhooksEndpointEventTypes `json:"event_types"`
+
+	// The name of the endpoint
+	Name string `json:"name"`
+
+	// The webhook signing secret used to verify webhook requests.
+	Secret string `json:"secret"`
+
+	// The slug of the endpoint
+	Slug string `json:"slug"`
+
+	// Date of last update
+	UpdatedAt string `json:"updated_at"`
+
+	// The URL of the endpoint.
+	Url string `json:"url"`
+}
+
+// WebhooksEndpointEventTypes defines model for WebhooksEndpoint.EventTypes.
+type WebhooksEndpointEventTypes string
+
+// WebhooksEndpointList defines model for webhooks_endpoint_list.
+type WebhooksEndpointList struct {
+	Data []struct {
+		Attributes struct {
+			// Date of creation
+			CreatedAt  string                                         `json:"created_at"`
+			Enabled    bool                                           `json:"enabled"`
+			EventTypes []WebhooksEndpointListDataAttributesEventTypes `json:"event_types"`
+
+			// The name of the endpoint
+			Name string `json:"name"`
+
+			// The webhook signing secret used to verify webhook requests.
+			Secret string `json:"secret"`
+
+			// The slug of the endpoint
+			Slug string `json:"slug"`
+
+			// Date of last update
+			UpdatedAt string `json:"updated_at"`
+
+			// The URL of the endpoint.
+			Url string `json:"url"`
+		} `json:"attributes"`
+
+		// Unique ID of the webhooks_endpoint
+		Id   string                       `json:"id"`
+		Type WebhooksEndpointListDataType `json:"type"`
+	} `json:"data"`
+	Links *struct {
+		First string  `json:"first"`
+		Last  string  `json:"last"`
+		Next  *string `json:"next"`
+		Prev  *string `json:"prev"`
+		Self  string  `json:"self"`
+	} `json:"links,omitempty"`
+}
+
+// WebhooksEndpointListDataAttributesEventTypes defines model for WebhooksEndpointList.Data.Attributes.EventTypes.
+type WebhooksEndpointListDataAttributesEventTypes string
+
+// WebhooksEndpointListDataType defines model for WebhooksEndpointList.Data.Type.
+type WebhooksEndpointListDataType string
+
+// WebhooksEndpointResponse defines model for webhooks_endpoint_response.
+type WebhooksEndpointResponse struct {
+	Data struct {
+		Attributes struct {
+			// Date of creation
+			CreatedAt  string                                             `json:"created_at"`
+			Enabled    bool                                               `json:"enabled"`
+			EventTypes []WebhooksEndpointResponseDataAttributesEventTypes `json:"event_types"`
+
+			// The name of the endpoint
+			Name string `json:"name"`
+
+			// The webhook signing secret used to verify webhook requests.
+			Secret string `json:"secret"`
+
+			// The slug of the endpoint
+			Slug string `json:"slug"`
+
+			// Date of last update
+			UpdatedAt string `json:"updated_at"`
+
+			// The URL of the endpoint.
+			Url string `json:"url"`
+		} `json:"attributes"`
+
+		// Unique ID of the webhooks_endpoint
+		Id   string                           `json:"id"`
+		Type WebhooksEndpointResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// WebhooksEndpointResponseDataAttributesEventTypes defines model for WebhooksEndpointResponse.Data.Attributes.EventTypes.
+type WebhooksEndpointResponseDataAttributesEventTypes string
+
+// WebhooksEndpointResponseDataType defines model for WebhooksEndpointResponse.Data.Type.
+type WebhooksEndpointResponseDataType string
 
 // Workflow defines model for workflow.
 type Workflow struct {
@@ -12774,6 +13147,22 @@ type ListTeamsParams struct {
 	Sort              *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
+// ListWebhooksEndpointsParams defines parameters for ListWebhooksEndpoints.
+type ListWebhooksEndpointsParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSlug *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterName *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+}
+
+// ListWebhooksDeliveriesParams defines parameters for ListWebhooksDeliveries.
+type ListWebhooksDeliveriesParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+}
+
 // ListWorkflowGroupsParams defines parameters for ListWorkflowGroups.
 type ListWorkflowGroupsParams struct {
 	Include        *string `form:"include,omitempty" json:"include,omitempty"`
@@ -13386,6 +13775,30 @@ type ClientInterface interface {
 
 	// GetCurrentUser request
 	GetCurrentUser(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetWebhooksDelivery request
+	GetWebhooksDelivery(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeliverWebhooksDelivery request
+	DeliverWebhooksDelivery(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListWebhooksEndpoints request
+	ListWebhooksEndpoints(ctx context.Context, params *ListWebhooksEndpointsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateWebhooksEndpoint request with any body
+	CreateWebhooksEndpointWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListWebhooksDeliveries request
+	ListWebhooksDeliveries(ctx context.Context, endpointId string, params *ListWebhooksDeliveriesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteWebhooksEndpoint request
+	DeleteWebhooksEndpoint(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetWebhooksEndpoint request
+	GetWebhooksEndpoint(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateWebhooksEndpoint request with any body
+	UpdateWebhooksEndpointWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteWorkflowCustomFieldSelection request
 	DeleteWorkflowCustomFieldSelection(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -15415,6 +15828,102 @@ func (c *Client) UpdateStatusPageTemplateWithBody(ctx context.Context, id string
 
 func (c *Client) GetCurrentUser(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCurrentUserRequest(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetWebhooksDelivery(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetWebhooksDeliveryRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeliverWebhooksDelivery(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeliverWebhooksDeliveryRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListWebhooksEndpoints(ctx context.Context, params *ListWebhooksEndpointsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListWebhooksEndpointsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateWebhooksEndpointWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateWebhooksEndpointRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListWebhooksDeliveries(ctx context.Context, endpointId string, params *ListWebhooksDeliveriesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListWebhooksDeliveriesRequest(c.Server, endpointId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteWebhooksEndpoint(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteWebhooksEndpointRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetWebhooksEndpoint(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetWebhooksEndpointRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateWebhooksEndpointWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateWebhooksEndpointRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -24731,6 +25240,404 @@ func NewGetCurrentUserRequest(server string) (*http.Request, error) {
 	return req, nil
 }
 
+// NewGetWebhooksDeliveryRequest generates requests for GetWebhooksDelivery
+func NewGetWebhooksDeliveryRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/webhooks/deliveries/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDeliverWebhooksDeliveryRequest generates requests for DeliverWebhooksDelivery
+func NewDeliverWebhooksDeliveryRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/webhooks/deliveries/%s/deliver", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewListWebhooksEndpointsRequest generates requests for ListWebhooksEndpoints
+func NewListWebhooksEndpointsRequest(server string, params *ListWebhooksEndpointsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/webhooks/endpoints")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Include != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterSlug != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[slug]", runtime.ParamLocationQuery, *params.FilterSlug); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterName != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[name]", runtime.ParamLocationQuery, *params.FilterName); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateWebhooksEndpointRequestWithBody generates requests for CreateWebhooksEndpoint with any type of body
+func NewCreateWebhooksEndpointRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/webhooks/endpoints")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListWebhooksDeliveriesRequest generates requests for ListWebhooksDeliveries
+func NewListWebhooksDeliveriesRequest(server string, endpointId string, params *ListWebhooksDeliveriesParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "endpoint_id", runtime.ParamLocationPath, endpointId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/webhooks/endpoints/%s/deliveries", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Include != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDeleteWebhooksEndpointRequest generates requests for DeleteWebhooksEndpoint
+func NewDeleteWebhooksEndpointRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/webhooks/endpoints/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetWebhooksEndpointRequest generates requests for GetWebhooksEndpoint
+func NewGetWebhooksEndpointRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/webhooks/endpoints/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateWebhooksEndpointRequestWithBody generates requests for UpdateWebhooksEndpoint with any type of body
+func NewUpdateWebhooksEndpointRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/webhooks/endpoints/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewDeleteWorkflowCustomFieldSelectionRequest generates requests for DeleteWorkflowCustomFieldSelection
 func NewDeleteWorkflowCustomFieldSelectionRequest(server string, id string) (*http.Request, error) {
 	var err error
@@ -26630,6 +27537,30 @@ type ClientWithResponsesInterface interface {
 
 	// GetCurrentUser request
 	GetCurrentUserWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetCurrentUserResponse, error)
+
+	// GetWebhooksDelivery request
+	GetWebhooksDeliveryWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetWebhooksDeliveryResponse, error)
+
+	// DeliverWebhooksDelivery request
+	DeliverWebhooksDeliveryWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeliverWebhooksDeliveryResponse, error)
+
+	// ListWebhooksEndpoints request
+	ListWebhooksEndpointsWithResponse(ctx context.Context, params *ListWebhooksEndpointsParams, reqEditors ...RequestEditorFn) (*ListWebhooksEndpointsResponse, error)
+
+	// CreateWebhooksEndpoint request with any body
+	CreateWebhooksEndpointWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateWebhooksEndpointResponse, error)
+
+	// ListWebhooksDeliveries request
+	ListWebhooksDeliveriesWithResponse(ctx context.Context, endpointId string, params *ListWebhooksDeliveriesParams, reqEditors ...RequestEditorFn) (*ListWebhooksDeliveriesResponse, error)
+
+	// DeleteWebhooksEndpoint request
+	DeleteWebhooksEndpointWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteWebhooksEndpointResponse, error)
+
+	// GetWebhooksEndpoint request
+	GetWebhooksEndpointWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetWebhooksEndpointResponse, error)
+
+	// UpdateWebhooksEndpoint request with any body
+	UpdateWebhooksEndpointWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateWebhooksEndpointResponse, error)
 
 	// DeleteWorkflowCustomFieldSelection request
 	DeleteWorkflowCustomFieldSelectionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteWorkflowCustomFieldSelectionResponse, error)
@@ -30136,6 +31067,174 @@ func (r GetCurrentUserResponse) StatusCode() int {
 	return 0
 }
 
+type GetWebhooksDeliveryResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r GetWebhooksDeliveryResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetWebhooksDeliveryResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeliverWebhooksDeliveryResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r DeliverWebhooksDeliveryResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeliverWebhooksDeliveryResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListWebhooksEndpointsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r ListWebhooksEndpointsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListWebhooksEndpointsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateWebhooksEndpointResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateWebhooksEndpointResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateWebhooksEndpointResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListWebhooksDeliveriesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r ListWebhooksDeliveriesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListWebhooksDeliveriesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteWebhooksEndpointResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteWebhooksEndpointResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteWebhooksEndpointResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetWebhooksEndpointResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r GetWebhooksEndpointResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetWebhooksEndpointResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateWebhooksEndpointResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateWebhooksEndpointResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateWebhooksEndpointResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type DeleteWorkflowCustomFieldSelectionResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -32168,6 +33267,78 @@ func (c *ClientWithResponses) GetCurrentUserWithResponse(ctx context.Context, re
 		return nil, err
 	}
 	return ParseGetCurrentUserResponse(rsp)
+}
+
+// GetWebhooksDeliveryWithResponse request returning *GetWebhooksDeliveryResponse
+func (c *ClientWithResponses) GetWebhooksDeliveryWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetWebhooksDeliveryResponse, error) {
+	rsp, err := c.GetWebhooksDelivery(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetWebhooksDeliveryResponse(rsp)
+}
+
+// DeliverWebhooksDeliveryWithResponse request returning *DeliverWebhooksDeliveryResponse
+func (c *ClientWithResponses) DeliverWebhooksDeliveryWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeliverWebhooksDeliveryResponse, error) {
+	rsp, err := c.DeliverWebhooksDelivery(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeliverWebhooksDeliveryResponse(rsp)
+}
+
+// ListWebhooksEndpointsWithResponse request returning *ListWebhooksEndpointsResponse
+func (c *ClientWithResponses) ListWebhooksEndpointsWithResponse(ctx context.Context, params *ListWebhooksEndpointsParams, reqEditors ...RequestEditorFn) (*ListWebhooksEndpointsResponse, error) {
+	rsp, err := c.ListWebhooksEndpoints(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListWebhooksEndpointsResponse(rsp)
+}
+
+// CreateWebhooksEndpointWithBodyWithResponse request with arbitrary body returning *CreateWebhooksEndpointResponse
+func (c *ClientWithResponses) CreateWebhooksEndpointWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateWebhooksEndpointResponse, error) {
+	rsp, err := c.CreateWebhooksEndpointWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateWebhooksEndpointResponse(rsp)
+}
+
+// ListWebhooksDeliveriesWithResponse request returning *ListWebhooksDeliveriesResponse
+func (c *ClientWithResponses) ListWebhooksDeliveriesWithResponse(ctx context.Context, endpointId string, params *ListWebhooksDeliveriesParams, reqEditors ...RequestEditorFn) (*ListWebhooksDeliveriesResponse, error) {
+	rsp, err := c.ListWebhooksDeliveries(ctx, endpointId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListWebhooksDeliveriesResponse(rsp)
+}
+
+// DeleteWebhooksEndpointWithResponse request returning *DeleteWebhooksEndpointResponse
+func (c *ClientWithResponses) DeleteWebhooksEndpointWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteWebhooksEndpointResponse, error) {
+	rsp, err := c.DeleteWebhooksEndpoint(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteWebhooksEndpointResponse(rsp)
+}
+
+// GetWebhooksEndpointWithResponse request returning *GetWebhooksEndpointResponse
+func (c *ClientWithResponses) GetWebhooksEndpointWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetWebhooksEndpointResponse, error) {
+	rsp, err := c.GetWebhooksEndpoint(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetWebhooksEndpointResponse(rsp)
+}
+
+// UpdateWebhooksEndpointWithBodyWithResponse request with arbitrary body returning *UpdateWebhooksEndpointResponse
+func (c *ClientWithResponses) UpdateWebhooksEndpointWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateWebhooksEndpointResponse, error) {
+	rsp, err := c.UpdateWebhooksEndpointWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateWebhooksEndpointResponse(rsp)
 }
 
 // DeleteWorkflowCustomFieldSelectionWithResponse request returning *DeleteWorkflowCustomFieldSelectionResponse
@@ -35014,6 +36185,134 @@ func ParseGetCurrentUserResponse(rsp *http.Response) (*GetCurrentUserResponse, e
 	}
 
 	response := &GetCurrentUserResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseGetWebhooksDeliveryResponse parses an HTTP response from a GetWebhooksDeliveryWithResponse call
+func ParseGetWebhooksDeliveryResponse(rsp *http.Response) (*GetWebhooksDeliveryResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetWebhooksDeliveryResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseDeliverWebhooksDeliveryResponse parses an HTTP response from a DeliverWebhooksDeliveryWithResponse call
+func ParseDeliverWebhooksDeliveryResponse(rsp *http.Response) (*DeliverWebhooksDeliveryResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeliverWebhooksDeliveryResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseListWebhooksEndpointsResponse parses an HTTP response from a ListWebhooksEndpointsWithResponse call
+func ParseListWebhooksEndpointsResponse(rsp *http.Response) (*ListWebhooksEndpointsResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListWebhooksEndpointsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseCreateWebhooksEndpointResponse parses an HTTP response from a CreateWebhooksEndpointWithResponse call
+func ParseCreateWebhooksEndpointResponse(rsp *http.Response) (*CreateWebhooksEndpointResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateWebhooksEndpointResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseListWebhooksDeliveriesResponse parses an HTTP response from a ListWebhooksDeliveriesWithResponse call
+func ParseListWebhooksDeliveriesResponse(rsp *http.Response) (*ListWebhooksDeliveriesResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListWebhooksDeliveriesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseDeleteWebhooksEndpointResponse parses an HTTP response from a DeleteWebhooksEndpointWithResponse call
+func ParseDeleteWebhooksEndpointResponse(rsp *http.Response) (*DeleteWebhooksEndpointResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteWebhooksEndpointResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseGetWebhooksEndpointResponse parses an HTTP response from a GetWebhooksEndpointWithResponse call
+func ParseGetWebhooksEndpointResponse(rsp *http.Response) (*GetWebhooksEndpointResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetWebhooksEndpointResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseUpdateWebhooksEndpointResponse parses an HTTP response from a UpdateWebhooksEndpointWithResponse call
+func ParseUpdateWebhooksEndpointResponse(rsp *http.Response) (*UpdateWebhooksEndpointResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateWebhooksEndpointResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

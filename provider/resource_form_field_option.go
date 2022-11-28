@@ -73,6 +73,7 @@ func resourceFormFieldOption() *schema.Resource{
 	}
 }
 
+
 func resourceFormFieldOptionCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
@@ -107,6 +108,7 @@ func resourceFormFieldOptionCreate(ctx context.Context, d *schema.ResourceData, 
 	return resourceFormFieldOptionRead(ctx, d, meta)
 }
 
+
 func resourceFormFieldOptionRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading FormFieldOption: %s", d.Id()))
@@ -132,6 +134,7 @@ func resourceFormFieldOptionRead(ctx context.Context, d *schema.ResourceData, me
 
 	return nil
 }
+
 
 func resourceFormFieldOptionUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
@@ -163,6 +166,7 @@ func resourceFormFieldOptionUpdate(ctx context.Context, d *schema.ResourceData, 
 	return resourceFormFieldOptionRead(ctx, d, meta)
 }
 
+
 func resourceFormFieldOptionDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting FormFieldOption: %s", d.Id()))
@@ -183,3 +187,4 @@ func resourceFormFieldOptionDelete(ctx context.Context, d *schema.ResourceData, 
 
 	return nil
 }
+

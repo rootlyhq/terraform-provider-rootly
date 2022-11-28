@@ -164,6 +164,7 @@ func resourceFunctionality() *schema.Resource{
 	}
 }
 
+
 func resourceFunctionalityCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
@@ -216,6 +217,7 @@ func resourceFunctionalityCreate(ctx context.Context, d *schema.ResourceData, me
 	return resourceFunctionalityRead(ctx, d, meta)
 }
 
+
 func resourceFunctionalityRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading Functionality: %s", d.Id()))
@@ -247,6 +249,7 @@ func resourceFunctionalityRead(ctx context.Context, d *schema.ResourceData, meta
 
 	return nil
 }
+
 
 func resourceFunctionalityUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
@@ -296,6 +299,7 @@ func resourceFunctionalityUpdate(ctx context.Context, d *schema.ResourceData, me
 	return resourceFunctionalityRead(ctx, d, meta)
 }
 
+
 func resourceFunctionalityDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting Functionality: %s", d.Id()))
@@ -316,3 +320,4 @@ func resourceFunctionalityDelete(ctx context.Context, d *schema.ResourceData, me
 
 	return nil
 }
+

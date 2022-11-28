@@ -19,6 +19,7 @@ type Team struct {
   SlackAliases []interface{} `jsonapi:"attr,slack_aliases,omitempty"`
 }
 
+
 func (c *Client) ListTeams(params *rootlygo.ListTeamsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListTeamsRequest(c.Rootly.Server, params)
 	if err != nil {
@@ -37,6 +38,7 @@ func (c *Client) ListTeams(params *rootlygo.ListTeamsParams) ([]interface{}, err
 
 	return teams, nil
 }
+
 
 func (c *Client) CreateTeam(d *Team) (*Team, error) {
 	buffer, err := MarshalData(d)
@@ -61,6 +63,7 @@ func (c *Client) CreateTeam(d *Team) (*Team, error) {
 	return data.(*Team), nil
 }
 
+
 func (c *Client) GetTeam(id string) (*Team, error) {
 	req, err := rootlygo.NewGetTeamRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -79,6 +82,7 @@ func (c *Client) GetTeam(id string) (*Team, error) {
 
 	return data.(*Team), nil
 }
+
 
 func (c *Client) UpdateTeam(id string, team *Team) (*Team, error) {
 	buffer, err := MarshalData(team)
@@ -103,6 +107,7 @@ func (c *Client) UpdateTeam(id string, team *Team) (*Team, error) {
 	return data.(*Team), nil
 }
 
+
 func (c *Client) DeleteTeam(id string) error {
 	req, err := rootlygo.NewDeleteTeamRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -116,3 +121,4 @@ func (c *Client) DeleteTeam(id string) error {
 
 	return nil
 }
+

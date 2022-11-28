@@ -90,6 +90,7 @@ func resourceStatusPageTemplate() *schema.Resource{
 	}
 }
 
+
 func resourceStatusPageTemplateCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
@@ -130,6 +131,7 @@ func resourceStatusPageTemplateCreate(ctx context.Context, d *schema.ResourceDat
 	return resourceStatusPageTemplateRead(ctx, d, meta)
 }
 
+
 func resourceStatusPageTemplateRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading StatusPageTemplate: %s", d.Id()))
@@ -157,6 +159,7 @@ func resourceStatusPageTemplateRead(ctx context.Context, d *schema.ResourceData,
 
 	return nil
 }
+
 
 func resourceStatusPageTemplateUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
@@ -194,6 +197,7 @@ func resourceStatusPageTemplateUpdate(ctx context.Context, d *schema.ResourceDat
 	return resourceStatusPageTemplateRead(ctx, d, meta)
 }
 
+
 func resourceStatusPageTemplateDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting StatusPageTemplate: %s", d.Id()))
@@ -214,3 +218,4 @@ func resourceStatusPageTemplateDelete(ctx context.Context, d *schema.ResourceDat
 
 	return nil
 }
+
