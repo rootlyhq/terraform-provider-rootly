@@ -17,7 +17,6 @@ type WorkflowCustomFieldSelection struct {
   SelectedOptionIds []interface{} `jsonapi:"attr,selected_option_ids,omitempty"`
 }
 
-
 func (c *Client) ListWorkflowCustomFieldSelections(id string, params *rootlygo.ListWorkflowCustomFieldSelectionsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListWorkflowCustomFieldSelectionsRequest(c.Rootly.Server, id, params)
 	if err != nil {
@@ -36,7 +35,6 @@ func (c *Client) ListWorkflowCustomFieldSelections(id string, params *rootlygo.L
 
 	return workflow_custom_field_selections, nil
 }
-
 
 func (c *Client) CreateWorkflowCustomFieldSelection(d *WorkflowCustomFieldSelection) (*WorkflowCustomFieldSelection, error) {
 	buffer, err := MarshalData(d)
@@ -61,7 +59,6 @@ func (c *Client) CreateWorkflowCustomFieldSelection(d *WorkflowCustomFieldSelect
 	return data.(*WorkflowCustomFieldSelection), nil
 }
 
-
 func (c *Client) GetWorkflowCustomFieldSelection(id string) (*WorkflowCustomFieldSelection, error) {
 	req, err := rootlygo.NewGetWorkflowCustomFieldSelectionRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -80,7 +77,6 @@ func (c *Client) GetWorkflowCustomFieldSelection(id string) (*WorkflowCustomFiel
 
 	return data.(*WorkflowCustomFieldSelection), nil
 }
-
 
 func (c *Client) UpdateWorkflowCustomFieldSelection(id string, workflow_custom_field_selection *WorkflowCustomFieldSelection) (*WorkflowCustomFieldSelection, error) {
 	buffer, err := MarshalData(workflow_custom_field_selection)
@@ -105,7 +101,6 @@ func (c *Client) UpdateWorkflowCustomFieldSelection(id string, workflow_custom_f
 	return data.(*WorkflowCustomFieldSelection), nil
 }
 
-
 func (c *Client) DeleteWorkflowCustomFieldSelection(id string) error {
 	req, err := rootlygo.NewDeleteWorkflowCustomFieldSelectionRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -119,4 +114,3 @@ func (c *Client) DeleteWorkflowCustomFieldSelection(id string) error {
 
 	return nil
 }
-

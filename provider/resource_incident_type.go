@@ -64,7 +64,6 @@ func resourceIncidentType() *schema.Resource{
 	}
 }
 
-
 func resourceIncidentTypeCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
@@ -96,7 +95,6 @@ func resourceIncidentTypeCreate(ctx context.Context, d *schema.ResourceData, met
 	return resourceIncidentTypeRead(ctx, d, meta)
 }
 
-
 func resourceIncidentTypeRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading IncidentType: %s", d.Id()))
@@ -121,7 +119,6 @@ func resourceIncidentTypeRead(ctx context.Context, d *schema.ResourceData, meta 
 
 	return nil
 }
-
 
 func resourceIncidentTypeUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
@@ -150,7 +147,6 @@ func resourceIncidentTypeUpdate(ctx context.Context, d *schema.ResourceData, met
 	return resourceIncidentTypeRead(ctx, d, meta)
 }
 
-
 func resourceIncidentTypeDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting IncidentType: %s", d.Id()))
@@ -171,4 +167,3 @@ func resourceIncidentTypeDelete(ctx context.Context, d *schema.ResourceData, met
 
 	return nil
 }
-

@@ -72,17 +72,6 @@ func resourceWorkflowTaskSendSlackBlocks() *schema.Resource {
 								return assert.JSONEq(old, new)
 							},
 						},
-						"attachments": &schema.Schema{
-							Description: "Support liquid markup. Needs to be a valid JSON string after liquid is parsed.",
-							Type: schema.TypeString,
-							Optional: true,
-							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-								t := &testing.T{}
-								assert := assert.New(t)
-								return assert.JSONEq(old, new)
-							},
-							Default: "{}",
-						},
 						"channels": &schema.Schema{
 							Description: "",
 							Type: schema.TypeList,
@@ -133,11 +122,6 @@ func resourceWorkflowTaskSendSlackBlocks() *schema.Resource {
 									},
 								},
 							},
-						},
-						"broadcast_thread_reply_to_channel": &schema.Schema{
-							Description: "",
-							Type: schema.TypeBool,
-							Optional: true,
 						},
 						"send_as_ephemeral": &schema.Schema{
 							Description: "",

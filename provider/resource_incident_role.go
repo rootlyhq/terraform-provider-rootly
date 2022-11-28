@@ -64,7 +64,6 @@ func resourceIncidentRole() *schema.Resource{
 	}
 }
 
-
 func resourceIncidentRoleCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
@@ -96,7 +95,6 @@ func resourceIncidentRoleCreate(ctx context.Context, d *schema.ResourceData, met
 	return resourceIncidentRoleRead(ctx, d, meta)
 }
 
-
 func resourceIncidentRoleRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading IncidentRole: %s", d.Id()))
@@ -121,7 +119,6 @@ func resourceIncidentRoleRead(ctx context.Context, d *schema.ResourceData, meta 
 
 	return nil
 }
-
 
 func resourceIncidentRoleUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
@@ -150,7 +147,6 @@ func resourceIncidentRoleUpdate(ctx context.Context, d *schema.ResourceData, met
 	return resourceIncidentRoleRead(ctx, d, meta)
 }
 
-
 func resourceIncidentRoleDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting IncidentRole: %s", d.Id()))
@@ -171,4 +167,3 @@ func resourceIncidentRoleDelete(ctx context.Context, d *schema.ResourceData, met
 
 	return nil
 }
-

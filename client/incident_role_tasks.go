@@ -16,7 +16,6 @@ type IncidentRoleTask struct {
   Priority string `jsonapi:"attr,priority,omitempty"`
 }
 
-
 func (c *Client) ListIncidentRoleTasks(id string, params *rootlygo.ListIncidentRoleTasksParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListIncidentRoleTasksRequest(c.Rootly.Server, id, params)
 	if err != nil {
@@ -35,7 +34,6 @@ func (c *Client) ListIncidentRoleTasks(id string, params *rootlygo.ListIncidentR
 
 	return incident_role_tasks, nil
 }
-
 
 func (c *Client) CreateIncidentRoleTask(d *IncidentRoleTask) (*IncidentRoleTask, error) {
 	buffer, err := MarshalData(d)
@@ -60,7 +58,6 @@ func (c *Client) CreateIncidentRoleTask(d *IncidentRoleTask) (*IncidentRoleTask,
 	return data.(*IncidentRoleTask), nil
 }
 
-
 func (c *Client) GetIncidentRoleTask(id string) (*IncidentRoleTask, error) {
 	req, err := rootlygo.NewGetIncidentRoleTaskRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -79,7 +76,6 @@ func (c *Client) GetIncidentRoleTask(id string) (*IncidentRoleTask, error) {
 
 	return data.(*IncidentRoleTask), nil
 }
-
 
 func (c *Client) UpdateIncidentRoleTask(id string, incident_role_task *IncidentRoleTask) (*IncidentRoleTask, error) {
 	buffer, err := MarshalData(incident_role_task)
@@ -104,7 +100,6 @@ func (c *Client) UpdateIncidentRoleTask(id string, incident_role_task *IncidentR
 	return data.(*IncidentRoleTask), nil
 }
 
-
 func (c *Client) DeleteIncidentRoleTask(id string) error {
 	req, err := rootlygo.NewDeleteIncidentRoleTaskRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -118,4 +113,3 @@ func (c *Client) DeleteIncidentRoleTask(id string) error {
 
 	return nil
 }
-

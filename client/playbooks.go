@@ -15,7 +15,6 @@ type Playbook struct {
   ExternalUrl string `jsonapi:"attr,external_url,omitempty"`
 }
 
-
 func (c *Client) ListPlaybooks(params *rootlygo.ListPlaybooksParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListPlaybooksRequest(c.Rootly.Server, params)
 	if err != nil {
@@ -34,7 +33,6 @@ func (c *Client) ListPlaybooks(params *rootlygo.ListPlaybooksParams) ([]interfac
 
 	return playbooks, nil
 }
-
 
 func (c *Client) CreatePlaybook(d *Playbook) (*Playbook, error) {
 	buffer, err := MarshalData(d)
@@ -59,7 +57,6 @@ func (c *Client) CreatePlaybook(d *Playbook) (*Playbook, error) {
 	return data.(*Playbook), nil
 }
 
-
 func (c *Client) GetPlaybook(id string) (*Playbook, error) {
 	req, err := rootlygo.NewGetPlaybookRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -78,7 +75,6 @@ func (c *Client) GetPlaybook(id string) (*Playbook, error) {
 
 	return data.(*Playbook), nil
 }
-
 
 func (c *Client) UpdatePlaybook(id string, playbook *Playbook) (*Playbook, error) {
 	buffer, err := MarshalData(playbook)
@@ -103,7 +99,6 @@ func (c *Client) UpdatePlaybook(id string, playbook *Playbook) (*Playbook, error
 	return data.(*Playbook), nil
 }
 
-
 func (c *Client) DeletePlaybook(id string) error {
 	req, err := rootlygo.NewDeletePlaybookRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -117,4 +112,3 @@ func (c *Client) DeletePlaybook(id string) error {
 
 	return nil
 }
-

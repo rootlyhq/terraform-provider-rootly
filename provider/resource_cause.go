@@ -54,7 +54,6 @@ func resourceCause() *schema.Resource{
 	}
 }
 
-
 func resourceCauseCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
@@ -83,7 +82,6 @@ func resourceCauseCreate(ctx context.Context, d *schema.ResourceData, meta inter
 	return resourceCauseRead(ctx, d, meta)
 }
 
-
 func resourceCauseRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading Cause: %s", d.Id()))
@@ -107,7 +105,6 @@ func resourceCauseRead(ctx context.Context, d *schema.ResourceData, meta interfa
 
 	return nil
 }
-
 
 func resourceCauseUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
@@ -133,7 +130,6 @@ func resourceCauseUpdate(ctx context.Context, d *schema.ResourceData, meta inter
 	return resourceCauseRead(ctx, d, meta)
 }
 
-
 func resourceCauseDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting Cause: %s", d.Id()))
@@ -154,4 +150,3 @@ func resourceCauseDelete(ctx context.Context, d *schema.ResourceData, meta inter
 
 	return nil
 }
-

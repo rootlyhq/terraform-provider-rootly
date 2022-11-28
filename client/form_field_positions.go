@@ -15,7 +15,6 @@ type FormFieldPosition struct {
   Position int `jsonapi:"attr,position,omitempty"`
 }
 
-
 func (c *Client) ListFormFieldPositions(id string, params *rootlygo.ListFormFieldPositionsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListFormFieldPositionsRequest(c.Rootly.Server, id, params)
 	if err != nil {
@@ -34,7 +33,6 @@ func (c *Client) ListFormFieldPositions(id string, params *rootlygo.ListFormFiel
 
 	return form_field_positions, nil
 }
-
 
 func (c *Client) CreateFormFieldPosition(d *FormFieldPosition) (*FormFieldPosition, error) {
 	buffer, err := MarshalData(d)
@@ -59,7 +57,6 @@ func (c *Client) CreateFormFieldPosition(d *FormFieldPosition) (*FormFieldPositi
 	return data.(*FormFieldPosition), nil
 }
 
-
 func (c *Client) GetFormFieldPosition(id string) (*FormFieldPosition, error) {
 	req, err := rootlygo.NewGetFormFieldPositionRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -78,7 +75,6 @@ func (c *Client) GetFormFieldPosition(id string) (*FormFieldPosition, error) {
 
 	return data.(*FormFieldPosition), nil
 }
-
 
 func (c *Client) UpdateFormFieldPosition(id string, form_field_position *FormFieldPosition) (*FormFieldPosition, error) {
 	buffer, err := MarshalData(form_field_position)
@@ -103,7 +99,6 @@ func (c *Client) UpdateFormFieldPosition(id string, form_field_position *FormFie
 	return data.(*FormFieldPosition), nil
 }
 
-
 func (c *Client) DeleteFormFieldPosition(id string) error {
 	req, err := rootlygo.NewDeleteFormFieldPositionRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -117,4 +112,3 @@ func (c *Client) DeleteFormFieldPosition(id string) error {
 
 	return nil
 }
-

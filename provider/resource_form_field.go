@@ -117,7 +117,6 @@ func resourceFormField() *schema.Resource{
 	}
 }
 
-
 func resourceFormFieldCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
@@ -164,7 +163,6 @@ func resourceFormFieldCreate(ctx context.Context, d *schema.ResourceData, meta i
 	return resourceFormFieldRead(ctx, d, meta)
 }
 
-
 func resourceFormFieldRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading FormField: %s", d.Id()))
@@ -194,7 +192,6 @@ func resourceFormFieldRead(ctx context.Context, d *schema.ResourceData, meta int
 
 	return nil
 }
-
 
 func resourceFormFieldUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
@@ -238,7 +235,6 @@ func resourceFormFieldUpdate(ctx context.Context, d *schema.ResourceData, meta i
 	return resourceFormFieldRead(ctx, d, meta)
 }
 
-
 func resourceFormFieldDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting FormField: %s", d.Id()))
@@ -259,4 +255,3 @@ func resourceFormFieldDelete(ctx context.Context, d *schema.ResourceData, meta i
 
 	return nil
 }
-

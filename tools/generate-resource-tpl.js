@@ -9,11 +9,13 @@ function includeTools(resourceSchema) {
 	return false;
 }
 
-module.exports = (name, resourceSchema, requiredFields, pathIdField, exclude = []) => {
+module.exports = (name, resourceSchema, requiredFields, pathIdField) => {
+	const namePlural = inflect.pluralize(name)
 	const nameCamel = inflect.camelize(name)
-	const tools = includeTools(resourceSchema) && exclude.length === 0 ? `"github.com/rootlyhq/terraform-provider-rootly/tools"` : ""
+	const nameCamelPlural = inflect.camelize(namePlural)
+	const tools = includeTools(resourceSchema) ? `"github.com/rootlyhq/terraform-provider-rootly/tools"` : ""
 
-definition = `package provider
+return `package provider
 
 import (
 	"context"
@@ -27,10 +29,10 @@ import (
 
 func resource${nameCamel}() *schema.Resource{
 	return &schema.Resource{
-		${(!exclude.includes("create")) ? `CreateContext: resource${nameCamel}Create,` : ""}
-		${(!exclude.includes("read")) ? `ReadContext: resource${nameCamel}Read,` : ""}
-		${(!exclude.includes("update")) ? `UpdateContext: resource${nameCamel}Update,` : ""}
-		${(!exclude.includes("delete")) ? `DeleteContext: resource${nameCamel}Delete,` : ""}
+		CreateContext: resource${nameCamel}Create,
+		ReadContext: resource${nameCamel}Read,
+		UpdateContext: resource${nameCamel}Update,
+		DeleteContext: resource${nameCamel}Delete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -40,11 +42,6 @@ func resource${nameCamel}() *schema.Resource{
 	}
 }
 
-`
-
-	if (!exclude.includes("create")) {
-
-		definition = definition + `
 func resource${nameCamel}Create(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
@@ -65,12 +62,6 @@ func resource${nameCamel}Create(ctx context.Context, d *schema.ResourceData, met
 	return resource${nameCamel}Read(ctx, d, meta)
 }
 
-`
-	}
-
-	if (!exclude.includes("read")) {
-
-		definition = definition + `
 func resource${nameCamel}Read(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading ${nameCamel}: %s", d.Id()))
@@ -93,12 +84,6 @@ func resource${nameCamel}Read(ctx context.Context, d *schema.ResourceData, meta 
 	return nil
 }
 
-`
-	}
-
-	if (!exclude.includes("update")) {
-
-		definition = definition + `
 func resource${nameCamel}Update(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating ${nameCamel}: %s", d.Id()))
@@ -115,12 +100,6 @@ func resource${nameCamel}Update(ctx context.Context, d *schema.ResourceData, met
 	return resource${nameCamel}Read(ctx, d, meta)
 }
 
-`
-	}
-
-	if (!exclude.includes("delete")) {
-
-		definition = definition + `
 func resource${nameCamel}Delete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting ${nameCamel}: %s", d.Id()))
@@ -141,11 +120,7 @@ func resource${nameCamel}Delete(ctx context.Context, d *schema.ResourceData, met
 
 	return nil
 }
-
-`
-	}
-	return definition;
-}
+`}
 
 function excludeDateFields(field) {
 	return field !== 'created_at' && field !== 'updated_at'

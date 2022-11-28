@@ -54,7 +54,6 @@ func resourcePlaybook() *schema.Resource{
 	}
 }
 
-
 func resourcePlaybookCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
@@ -83,7 +82,6 @@ func resourcePlaybookCreate(ctx context.Context, d *schema.ResourceData, meta in
 	return resourcePlaybookRead(ctx, d, meta)
 }
 
-
 func resourcePlaybookRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading Playbook: %s", d.Id()))
@@ -107,7 +105,6 @@ func resourcePlaybookRead(ctx context.Context, d *schema.ResourceData, meta inte
 
 	return nil
 }
-
 
 func resourcePlaybookUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
@@ -133,7 +130,6 @@ func resourcePlaybookUpdate(ctx context.Context, d *schema.ResourceData, meta in
 	return resourcePlaybookRead(ctx, d, meta)
 }
 
-
 func resourcePlaybookDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting Playbook: %s", d.Id()))
@@ -154,4 +150,3 @@ func resourcePlaybookDelete(ctx context.Context, d *schema.ResourceData, meta in
 
 	return nil
 }
-

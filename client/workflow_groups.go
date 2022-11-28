@@ -17,7 +17,6 @@ type WorkflowGroup struct {
   Position int `jsonapi:"attr,position,omitempty"`
 }
 
-
 func (c *Client) ListWorkflowGroups(params *rootlygo.ListWorkflowGroupsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListWorkflowGroupsRequest(c.Rootly.Server, params)
 	if err != nil {
@@ -36,7 +35,6 @@ func (c *Client) ListWorkflowGroups(params *rootlygo.ListWorkflowGroupsParams) (
 
 	return workflow_groups, nil
 }
-
 
 func (c *Client) CreateWorkflowGroup(d *WorkflowGroup) (*WorkflowGroup, error) {
 	buffer, err := MarshalData(d)
@@ -61,7 +59,6 @@ func (c *Client) CreateWorkflowGroup(d *WorkflowGroup) (*WorkflowGroup, error) {
 	return data.(*WorkflowGroup), nil
 }
 
-
 func (c *Client) GetWorkflowGroup(id string) (*WorkflowGroup, error) {
 	req, err := rootlygo.NewGetWorkflowGroupRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -80,7 +77,6 @@ func (c *Client) GetWorkflowGroup(id string) (*WorkflowGroup, error) {
 
 	return data.(*WorkflowGroup), nil
 }
-
 
 func (c *Client) UpdateWorkflowGroup(id string, workflow_group *WorkflowGroup) (*WorkflowGroup, error) {
 	buffer, err := MarshalData(workflow_group)
@@ -105,7 +101,6 @@ func (c *Client) UpdateWorkflowGroup(id string, workflow_group *WorkflowGroup) (
 	return data.(*WorkflowGroup), nil
 }
 
-
 func (c *Client) DeleteWorkflowGroup(id string) error {
 	req, err := rootlygo.NewDeleteWorkflowGroupRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -119,4 +114,3 @@ func (c *Client) DeleteWorkflowGroup(id string) error {
 
 	return nil
 }
-

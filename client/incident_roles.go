@@ -16,7 +16,6 @@ type IncidentRole struct {
   Description string `jsonapi:"attr,description,omitempty"`
 }
 
-
 func (c *Client) ListIncidentRoles(params *rootlygo.ListIncidentRolesParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListIncidentRolesRequest(c.Rootly.Server, params)
 	if err != nil {
@@ -35,7 +34,6 @@ func (c *Client) ListIncidentRoles(params *rootlygo.ListIncidentRolesParams) ([]
 
 	return incident_roles, nil
 }
-
 
 func (c *Client) CreateIncidentRole(d *IncidentRole) (*IncidentRole, error) {
 	buffer, err := MarshalData(d)
@@ -60,7 +58,6 @@ func (c *Client) CreateIncidentRole(d *IncidentRole) (*IncidentRole, error) {
 	return data.(*IncidentRole), nil
 }
 
-
 func (c *Client) GetIncidentRole(id string) (*IncidentRole, error) {
 	req, err := rootlygo.NewGetIncidentRoleRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -79,7 +76,6 @@ func (c *Client) GetIncidentRole(id string) (*IncidentRole, error) {
 
 	return data.(*IncidentRole), nil
 }
-
 
 func (c *Client) UpdateIncidentRole(id string, incident_role *IncidentRole) (*IncidentRole, error) {
 	buffer, err := MarshalData(incident_role)
@@ -104,7 +100,6 @@ func (c *Client) UpdateIncidentRole(id string, incident_role *IncidentRole) (*In
 	return data.(*IncidentRole), nil
 }
 
-
 func (c *Client) DeleteIncidentRole(id string) error {
 	req, err := rootlygo.NewDeleteIncidentRoleRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -118,4 +113,3 @@ func (c *Client) DeleteIncidentRole(id string) error {
 
 	return nil
 }
-

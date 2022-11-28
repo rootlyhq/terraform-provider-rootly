@@ -118,7 +118,6 @@ func resourceTeam() *schema.Resource{
 	}
 }
 
-
 func resourceTeamCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
@@ -159,7 +158,6 @@ func resourceTeamCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	return resourceTeamRead(ctx, d, meta)
 }
 
-
 func resourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading Team: %s", d.Id()))
@@ -187,7 +185,6 @@ func resourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interfac
 
 	return nil
 }
-
 
 func resourceTeamUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
@@ -225,7 +222,6 @@ func resourceTeamUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 	return resourceTeamRead(ctx, d, meta)
 }
 
-
 func resourceTeamDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting Team: %s", d.Id()))
@@ -246,4 +242,3 @@ func resourceTeamDelete(ctx context.Context, d *schema.ResourceData, meta interf
 
 	return nil
 }
-

@@ -16,7 +16,6 @@ type IncidentType struct {
   Color string `jsonapi:"attr,color,omitempty"`
 }
 
-
 func (c *Client) ListIncidentTypes(params *rootlygo.ListIncidentTypesParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListIncidentTypesRequest(c.Rootly.Server, params)
 	if err != nil {
@@ -35,7 +34,6 @@ func (c *Client) ListIncidentTypes(params *rootlygo.ListIncidentTypesParams) ([]
 
 	return incident_types, nil
 }
-
 
 func (c *Client) CreateIncidentType(d *IncidentType) (*IncidentType, error) {
 	buffer, err := MarshalData(d)
@@ -60,7 +58,6 @@ func (c *Client) CreateIncidentType(d *IncidentType) (*IncidentType, error) {
 	return data.(*IncidentType), nil
 }
 
-
 func (c *Client) GetIncidentType(id string) (*IncidentType, error) {
 	req, err := rootlygo.NewGetIncidentTypeRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -79,7 +76,6 @@ func (c *Client) GetIncidentType(id string) (*IncidentType, error) {
 
 	return data.(*IncidentType), nil
 }
-
 
 func (c *Client) UpdateIncidentType(id string, incident_type *IncidentType) (*IncidentType, error) {
 	buffer, err := MarshalData(incident_type)
@@ -104,7 +100,6 @@ func (c *Client) UpdateIncidentType(id string, incident_type *IncidentType) (*In
 	return data.(*IncidentType), nil
 }
 
-
 func (c *Client) DeleteIncidentType(id string) error {
 	req, err := rootlygo.NewDeleteIncidentTypeRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -118,4 +113,3 @@ func (c *Client) DeleteIncidentType(id string) error {
 
 	return nil
 }
-
