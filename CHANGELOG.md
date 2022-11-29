@@ -1,4 +1,7 @@
 # Changelog
+## [0.1.54] -- 2022-11-29
+- Default nil values for optional enums
+- Added maintenance form fields constants `web_scheduled_incident_form`, `web_update_scheduled_incident_form`, `slack_scheduled_incident_form`, and `slack_update_scheduled_incident_form`
 
 ## [0.1.53] -- 2022-11-17
 
