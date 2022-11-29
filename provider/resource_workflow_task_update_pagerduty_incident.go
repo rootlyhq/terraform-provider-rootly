@@ -65,7 +65,7 @@ func resourceWorkflowTaskUpdatePagerdutyIncident() *schema.Resource {
 							Optional: true,
 						},
 						"status": &schema.Schema{
-							Description: " Value must be one of `resolved`, `acknowledged`, `auto`.",
+							Description: "Value must be one of `resolved`, `acknowledged`, `auto`.",
 							Type: schema.TypeString,
 							Optional: true,
 							Default: nil,

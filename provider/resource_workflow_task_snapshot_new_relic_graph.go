@@ -60,7 +60,7 @@ func resourceWorkflowTaskSnapshotNewRelicGraph() *schema.Resource {
 							Required: true,
 						},
 						"metric_type": &schema.Schema{
-							Description: " Value must be one of `APDEX`, `AREA`, `BAR`, `BASELINE`, `BILLBOARD`, `BULLET`, `EVENT_FEED`, `FUNNEL`, `HEATMAP`, `HISTOGRAM`, `LINE`, `PIE`, `SCATTER`, `STACKED_HORIZONTAL_BAR`, `TABLE`, `VERTICAL_BAR`.",
+							Description: "Value must be one of `APDEX`, `AREA`, `BAR`, `BASELINE`, `BILLBOARD`, `BULLET`, `EVENT_FEED`, `FUNNEL`, `HEATMAP`, `HISTOGRAM`, `LINE`, `PIE`, `SCATTER`, `STACKED_HORIZONTAL_BAR`, `TABLE`, `VERTICAL_BAR`.",
 							Type: schema.TypeString,
 							Required: true,
 							ValidateFunc: validation.StringInSlice([]string{

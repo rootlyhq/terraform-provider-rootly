@@ -23,6 +23,7 @@ func TestAccResourceWebhooksEndpoint(t *testing.T) {
 const testAccResourceWebhooksEndpoint = `
 resource "rootly_webhooks_endpoint" "test" {
 	name = "test"
-url = https://rootly.com/dummy
+	url = https://rootly.com/dummy
+
 }
 `

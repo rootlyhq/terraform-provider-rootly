@@ -60,7 +60,7 @@ func resourceWorkflowTaskUpdateVictorOpsIncident() *schema.Resource {
 							Required: true,
 						},
 						"status": &schema.Schema{
-							Description: " Value must be one of `resolve`, `ack`, `auto`.",
+							Description: "Value must be one of `resolve`, `ack`, `auto`.",
 							Type: schema.TypeString,
 							Required: true,
 							ValidateFunc: validation.StringInSlice([]string{

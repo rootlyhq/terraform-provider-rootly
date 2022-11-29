@@ -55,7 +55,7 @@ func resourceWorkflowTaskTriggerWorkflow() *schema.Resource {
 							}, false),
 						},
 						"kind": &schema.Schema{
-							Description: " Value must be one of `simple`, `incident`, `post_mortem`, `action_item`, `pulse`, `alert`.",
+							Description: "Value must be one of `simple`, `incident`, `post_mortem`, `action_item`, `pulse`, `alert`.",
 							Type: schema.TypeString,
 							Optional: true,
 							Default: "simple",

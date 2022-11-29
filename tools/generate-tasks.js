@@ -192,10 +192,10 @@ func resourceWorkflowTask${task_name_camel}Delete(ctx context.Context, d *schema
 function annotatedDescription(schema) {
 	const description = (schema.description || "").replace(/"/g, '\\"').replace(/ex. .+$/, '')
 	if (schema.enum) {
-		return `${!!description ? `${description}.` : ''} Value must be one of ${schema.enum.map((val) => `\`${val}\``).join(", ")}.`
+		return `${!!description ? `${description}. ` : ''}Value must be one of ${schema.enum.map((val) => `\`${val}\``).join(", ")}.`
 	}
 	if (schema.type === "array" && schema.items && schema.items.enum) {
-		return `${!!description ? `${description}.` : ''} Value must be one of ${schema.items.enum.map((val) => `\`${val}\``).join(", ")}.`
+		return `${!!description ? `${description}. ` : ''}Value must be one of ${schema.items.enum.map((val) => `\`${val}\``).join(", ")}.`
 	}
 	if (schema.type === "object" && schema.properties.id && schema.properties.name) {
 		return `Map must contain two fields, \`id\` and \`name\`. ${description}`

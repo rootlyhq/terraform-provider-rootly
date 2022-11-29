@@ -60,7 +60,7 @@ func resourceWorkflowTaskCreateShortcutStory() *schema.Resource {
 							Required: true,
 						},
 						"kind": &schema.Schema{
-							Description: " Value must be one of `bug`, `chore`, `feature`.",
+							Description: "Value must be one of `bug`, `chore`, `feature`.",
 							Type: schema.TypeString,
 							Required: true,
 							ValidateFunc: validation.StringInSlice([]string{

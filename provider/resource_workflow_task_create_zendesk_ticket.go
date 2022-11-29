@@ -55,7 +55,7 @@ func resourceWorkflowTaskCreateZendeskTicket() *schema.Resource {
 							}, false),
 						},
 						"kind": &schema.Schema{
-							Description: " Value must be one of `problem`, `incident`, `question`, `task`.",
+							Description: "Value must be one of `problem`, `incident`, `question`, `task`.",
 							Type: schema.TypeString,
 							Required: true,
 							ValidateFunc: validation.StringInSlice([]string{
