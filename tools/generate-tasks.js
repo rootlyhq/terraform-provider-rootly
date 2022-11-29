@@ -224,8 +224,13 @@ function genTaskSchemaProperty(property_name, property_schema, required_props) {
 	}
 	if (property_schema.enum) {
 		if (!isRequired) {
-			a = `${a}
+			if (property_schema?.default) {
+				a = `${a}
+							Default: "${property_schema?.default}",`
+			} else {
+				a = `${a}
 							Default: nil,`
+			}
 		}
 		a = `${a}
 							ValidateFunc: validation.StringInSlice([]string{
