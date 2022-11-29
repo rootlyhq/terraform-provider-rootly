@@ -42,7 +42,7 @@ function testParams(name, schema, required) {
 			case "boolean":
 				return `${key} = false`
 			case "string":
-				return key == 'url' ? `	url = https://rootly.com/dummy\n` : `${key} = "${val}"`
+				return key == 'url' ? `	url = "https://rootly.com/dummy"` : `${key} = "${val}"`
 			case "number":
 				return `${key} = 1`
 			case "array":
