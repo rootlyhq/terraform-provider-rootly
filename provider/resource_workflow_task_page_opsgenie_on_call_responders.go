@@ -89,7 +89,7 @@ func resourceWorkflowTaskPageOpsgenieOnCallResponders() *schema.Resource {
 							},
 						},
 						"priority": &schema.Schema{
-							Description: ". Value must be one of `P1`, `P2`, `P3`, `P4`, `auto`.",
+							Description: " Value must be one of `P1`, `P2`, `P3`, `P4`, `auto`.",
 							Type: schema.TypeString,
 							Optional: true,
 							Default: "P1",

@@ -55,7 +55,7 @@ func resourceWorkflowTaskUpdateStatus() *schema.Resource {
 							}, false),
 						},
 						"status": &schema.Schema{
-							Description: ". Value must be one of `started`, `mitigated`, `resolved`, `cancelled`.",
+							Description: " Value must be one of `started`, `mitigated`, `resolved`, `cancelled`.",
 							Type: schema.TypeString,
 							Required: true,
 							ValidateFunc: validation.StringInSlice([]string{

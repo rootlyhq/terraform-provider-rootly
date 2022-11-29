@@ -36,7 +36,7 @@ Optional:
 
 - `escalation_level` (Number) Escalation level of policy attached to incident
 - `resolution` (String) A message outlining the incident's resolution in Pagerduty
-- `status` (String) . Value must be one of `resolved`, `acknowledged`, `auto`.
+- `status` (String) Value must be one of `resolved`, `acknowledged`, `auto`.
 - `task_type` (String)
 - `title` (String) Title to update to
 - `urgency` (String) Pagerduty incident urgency, selecting auto will let Rootly auto map our incident severity.. Value must be one of `high`, `low`, `auto`.
