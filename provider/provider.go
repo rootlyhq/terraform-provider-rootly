@@ -91,7 +91,6 @@ func New(version string) func() *schema.Provider {
 				"rootly_workflow_form_field_condition": resourceWorkflowFormFieldCondition(),
 				"rootly_workflow_group": resourceWorkflowGroup(),
 				"rootly_status_page_template": resourceStatusPageTemplate(),
-				"rootly_webhooks_delivery": resourceWebhooksDelivery(),
 				"rootly_webhooks_endpoint": resourceWebhooksEndpoint(),
 				"rootly_custom_field": resourceCustomField(),
 				"rootly_custom_field_option": resourceCustomFieldOption(),

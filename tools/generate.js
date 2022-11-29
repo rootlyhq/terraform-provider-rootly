@@ -29,6 +29,7 @@ const excluded = [
 	"playbook_task",
 	"custom_field",
 	"custom_field_option",
+	"webhooks_delivery",
 ]
 
 console.log(`Excluding resource from generation:`, excluded)
