@@ -30,7 +30,7 @@ Manages workflow update_status task.
 
 Required:
 
-- `status` (String) . Value must be one of `started`, `mitigated`, `resolved`, `cancelled`.
+- `status` (String) Value must be one of `started`, `mitigated`, `resolved`, `cancelled`.
 
 Optional:
 

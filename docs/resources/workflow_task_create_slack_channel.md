@@ -35,5 +35,5 @@ Required:
 
 Optional:
 
-- `private` (String) . Value must be one of `auto`, `true`, `false`.
+- `private` (String) Value must be one of `auto`, `true`, `false`.
 - `task_type` (String)

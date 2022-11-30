@@ -30,7 +30,7 @@ Manages workflow update_victor_ops_incident task.
 
 Required:
 
-- `status` (String) . Value must be one of `resolve`, `ack`, `auto`.
+- `status` (String) Value must be one of `resolve`, `ack`, `auto`.
 - `victor_ops_incident_id` (String) The victor_ops incident ID, this can also be a Rootly incident variable
 
 Optional:

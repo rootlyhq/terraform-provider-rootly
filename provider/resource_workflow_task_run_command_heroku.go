@@ -65,7 +65,7 @@ func resourceWorkflowTaskRunCommandHeroku() *schema.Resource {
 							Required: true,
 						},
 						"size": &schema.Schema{
-							Description: ". Value must be one of `standard-1X`, `standard-2X`.",
+							Description: "Value must be one of `standard-1X`, `standard-2X`.",
 							Type: schema.TypeString,
 							Required: true,
 							ValidateFunc: validation.StringInSlice([]string{

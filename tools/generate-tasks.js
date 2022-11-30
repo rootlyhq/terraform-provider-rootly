@@ -192,10 +192,10 @@ func resourceWorkflowTask${task_name_camel}Delete(ctx context.Context, d *schema
 function annotatedDescription(schema) {
 	const description = (schema.description || "").replace(/"/g, '\\"').replace(/ex. .+$/, '')
 	if (schema.enum) {
-		return `${description}. Value must be one of ${schema.enum.map((val) => `\`${val}\``).join(", ")}.`
+		return `${!!description ? `${description}. ` : ''}Value must be one of ${schema.enum.map((val) => `\`${val}\``).join(", ")}.`
 	}
 	if (schema.type === "array" && schema.items && schema.items.enum) {
-		return `${description}. Value must be one of ${schema.items.enum.map((val) => `\`${val}\``).join(", ")}.`
+		return `${!!description ? `${description}. ` : ''}Value must be one of ${schema.items.enum.map((val) => `\`${val}\``).join(", ")}.`
 	}
 	if (schema.type === "object" && schema.properties.id && schema.properties.name) {
 		return `Map must contain two fields, \`id\` and \`name\`. ${description}`
@@ -224,13 +224,24 @@ function genTaskSchemaProperty(property_name, property_schema, required_props) {
 	}
 	if (property_schema.enum) {
 		if (!isRequired) {
-			a = `${a}
-							Default: "${property_schema.enum[0]}",`
+			if (property_schema?.default) {
+				a = `${a}
+							Default: "${property_schema?.default}",`
+			} else {
+				a = `${a}
+							Default: nil,`
+			}
 		}
 		a = `${a}
 							ValidateFunc: validation.StringInSlice([]string{
 								${property_schema.enum.map((k) => `"${k}",`).join('\n')}
 							}, false),`
+	}
+	if (property_schema.type === "number"){
+		if (!isRequired) {
+			a = `${a}
+							Default: nil,`
+		}
 	}
 	if (property_schema.type === "array") {
 		if (property_schema.items.type === "string") {

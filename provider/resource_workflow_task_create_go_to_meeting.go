@@ -60,10 +60,10 @@ func resourceWorkflowTaskCreateGoToMeeting() *schema.Resource {
 							Required: true,
 						},
 						"conference_call_info": &schema.Schema{
-							Description: ". Value must be one of `ptsn`, `free`, `hyrid`, `voip`.",
+							Description: "Value must be one of `ptsn`, `free`, `hyrid`, `voip`.",
 							Type: schema.TypeString,
 							Optional: true,
-							Default: "ptsn",
+							Default: nil,
 							ValidateFunc: validation.StringInSlice([]string{
 								"ptsn",
 "free",

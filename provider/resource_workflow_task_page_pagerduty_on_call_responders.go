@@ -99,7 +99,7 @@ func resourceWorkflowTaskPagePagerdutyOnCallResponders() *schema.Resource {
 							Optional: true,
 						},
 						"urgency": &schema.Schema{
-							Description: ". Value must be one of `high`, `low`, `auto`.",
+							Description: "Value must be one of `high`, `low`, `auto`.",
 							Type: schema.TypeString,
 							Optional: true,
 							Default: "high",

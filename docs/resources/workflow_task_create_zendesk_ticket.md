@@ -30,7 +30,7 @@ Manages workflow create_zendesk_ticket task.
 
 Required:
 
-- `kind` (String) . Value must be one of `problem`, `incident`, `question`, `task`.
+- `kind` (String) Value must be one of `problem`, `incident`, `question`, `task`.
 - `subject` (String) The ticket subject.
 
 Optional:

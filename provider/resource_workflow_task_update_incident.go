@@ -58,7 +58,7 @@ func resourceWorkflowTaskUpdateIncident() *schema.Resource {
 							}, false),
 						},
 						"attribute_to_query_by": &schema.Schema{
-							Description: ". Value must be one of `id`, `slug`, `sequential_id`, `pagerduty_incident_id`, `opsgenie_incident_id`, `victor_ops_incident_id`.",
+							Description: "Value must be one of `id`, `slug`, `sequential_id`, `pagerduty_incident_id`, `opsgenie_incident_id`, `victor_ops_incident_id`.",
 							Type: schema.TypeString,
 							Optional: true,
 							Default: "id",

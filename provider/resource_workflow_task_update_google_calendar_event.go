@@ -73,6 +73,7 @@ func resourceWorkflowTaskUpdateGoogleCalendarEvent() *schema.Resource {
 							Description: "Days to adjust meeting by",
 							Type: schema.TypeInt,
 							Optional: true,
+							Default: nil,
 						},
 						"time_of_meeting": &schema.Schema{
 							Description: "Time of meeting in format HH:MM",
@@ -126,7 +127,7 @@ func resourceWorkflowTaskUpdateGoogleCalendarEvent() *schema.Resource {
 							Description: "Sets the video conference type attached to the meeting.. Value must be one of `eventHangout`, `eventNamedHangout`, `hangoutsMeet`, `addOn`.",
 							Type: schema.TypeString,
 							Optional: true,
-							Default: "eventHangout",
+							Default: nil,
 							ValidateFunc: validation.StringInSlice([]string{
 								"eventHangout",
 "eventNamedHangout",
