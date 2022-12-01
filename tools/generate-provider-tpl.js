@@ -77,6 +77,7 @@ ${resources.map((name) => {
 				"rootly_workflow_action_item": resourceWorkflowActionItem(),
 				"rootly_workflow_alert": resourceWorkflowAlert(),
 				"rootly_workflow_pulse": resourceWorkflowPulse(),
+				"rootly_workflow_simple": resourceWorkflowSimple(),
 				"rootly_workflow_post_mortem": resourceWorkflowPostMortem(),
 ${taskResources.map((name) => {
 	return `				"rootly_workflow_task_${name}": resourceWorkflowTask${inflect.camelize(name)}(),`

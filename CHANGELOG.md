@@ -1,4 +1,9 @@
 # Changelog
+
+## [0.1.55] -- 2022-12-01
+- Add `rootly_workflow_simple` resource.
+- Add `auto_refresh` to `dashboard` resources.
+
 ## [0.1.54] -- 2022-11-29
 - Default nil values for optional enums
 - Added maintenance form fields constants `web_scheduled_incident_form`, `web_update_scheduled_incident_form`, `slack_scheduled_incident_form`, and `slack_update_scheduled_incident_form`

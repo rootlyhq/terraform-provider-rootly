@@ -93,6 +93,8 @@ function generateResource(name) {
 		fs.writeFileSync(path.resolve(__dirname, '..', 'provider', `resource_${name}_alert.go`), code)
 		code = workflowTpl("workflow_pulse", resourceSchema(name), requiredFields(name), swagger.components.schemas.pulse_trigger_params)
 		fs.writeFileSync(path.resolve(__dirname, '..', 'provider', `resource_${name}_pulse.go`), code)
+		code = workflowTpl("workflow_simple", resourceSchema(name), requiredFields(name), swagger.components.schemas.simple_trigger_params)
+		fs.writeFileSync(path.resolve(__dirname, '..', 'provider', `resource_${name}_simple.go`), code)
 	} else {
 		code = resourceTpl(name, resourceSchema(name), requiredFields(name), pathIdField)
 		fs.writeFileSync(path.resolve(__dirname, '..', 'provider', `resource_${name}.go`), code)

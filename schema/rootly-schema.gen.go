@@ -2441,6 +2441,16 @@ const (
 	SeverityResponseDataTypeSeverities SeverityResponseDataType = "severities"
 )
 
+// Defines values for SimpleTriggerParamsTriggerType.
+const (
+	SimpleTriggerParamsTriggerTypeSimple SimpleTriggerParamsTriggerType = "simple"
+)
+
+// Defines values for SimpleTriggerParamsTriggers.
+const (
+	SlackCommand SimpleTriggerParamsTriggers = "slack_command"
+)
+
 // Defines values for SnapshotDatadogGraphTaskParamsTaskType.
 const (
 	SnapshotDatadogGraph SnapshotDatadogGraphTaskParamsTaskType = "snapshot_datadog_graph"
@@ -2479,16 +2489,6 @@ const (
 // Defines values for SnapshotNewRelicGraphTaskParamsTaskType.
 const (
 	SnapshotLookerGraph SnapshotNewRelicGraphTaskParamsTaskType = "snapshot_looker_graph"
-)
-
-// Defines values for StandaloneTriggerParamsTriggerType.
-const (
-	StandaloneTriggerParamsTriggerTypeSimple StandaloneTriggerParamsTriggerType = "simple"
-)
-
-// Defines values for StandaloneTriggerParamsTriggers.
-const (
-	SlackCommand StandaloneTriggerParamsTriggers = "slack_command"
 )
 
 // Defines values for StatusPageShowUptimeLastDays.
@@ -5334,6 +5334,9 @@ type CustomFieldResponseDataType string
 
 // Dashboard defines model for dashboard.
 type Dashboard struct {
+	// Whether the dashboard auto-updates the UI with new data.
+	AutoRefresh *bool `json:"auto_refresh,omitempty"`
+
 	// Date of creation
 	CreatedAt *string `json:"created_at,omitempty"`
 
@@ -5369,6 +5372,9 @@ type DashboardOwner string
 type DashboardList struct {
 	Data []struct {
 		Attributes struct {
+			// Whether the dashboard auto-updates the UI with new data.
+			AutoRefresh *bool `json:"auto_refresh,omitempty"`
+
 			// Date of creation
 			CreatedAt *string `json:"created_at,omitempty"`
 
@@ -5420,6 +5426,9 @@ type DashboardListDataType string
 type DashboardResponse struct {
 	Data struct {
 		Attributes struct {
+			// Whether the dashboard auto-updates the UI with new data.
+			AutoRefresh *bool `json:"auto_refresh,omitempty"`
+
 			// Date of creation
 			CreatedAt *string `json:"created_at,omitempty"`
 
@@ -7698,6 +7707,9 @@ type NewCustomFieldOptionDataType string
 type NewDashboard struct {
 	Data struct {
 		Attributes struct {
+			// Whether the dashboard auto-updates the UI with new data.
+			AutoRefresh *bool `json:"auto_refresh,omitempty"`
+
 			// The name of the dashboard
 			Name string `json:"name"`
 
@@ -9974,6 +9986,18 @@ type SeverityResponseDataAttributesSeverity string
 // SeverityResponseDataType defines model for SeverityResponse.Data.Type.
 type SeverityResponseDataType string
 
+// SimpleTriggerParams defines model for simple_trigger_params.
+type SimpleTriggerParams struct {
+	TriggerType SimpleTriggerParamsTriggerType `json:"trigger_type"`
+	Triggers    *[]SimpleTriggerParamsTriggers `json:"triggers,omitempty"`
+}
+
+// SimpleTriggerParamsTriggerType defines model for SimpleTriggerParams.TriggerType.
+type SimpleTriggerParamsTriggerType string
+
+// Actions that trigger the workflow.
+type SimpleTriggerParamsTriggers string
+
 // SnapshotDatadogGraphTaskParams defines model for snapshot_datadog_graph_task_params.
 type SnapshotDatadogGraphTaskParams struct {
 	Dashboards *[]struct {
@@ -10042,18 +10066,6 @@ type SnapshotNewRelicGraphTaskParamsMetricType string
 
 // SnapshotNewRelicGraphTaskParamsTaskType defines model for SnapshotNewRelicGraphTaskParams.TaskType.
 type SnapshotNewRelicGraphTaskParamsTaskType string
-
-// StandaloneTriggerParams defines model for standalone_trigger_params.
-type StandaloneTriggerParams struct {
-	TriggerType StandaloneTriggerParamsTriggerType `json:"trigger_type"`
-	Triggers    *[]StandaloneTriggerParamsTriggers `json:"triggers,omitempty"`
-}
-
-// StandaloneTriggerParamsTriggerType defines model for StandaloneTriggerParams.TriggerType.
-type StandaloneTriggerParamsTriggerType string
-
-// Actions that trigger the workflow.
-type StandaloneTriggerParamsTriggers string
 
 // StatusPage defines model for status_page.
 type StatusPage struct {
@@ -10607,6 +10619,9 @@ type UpdateCustomFieldOptionDataType string
 type UpdateDashboard struct {
 	Data struct {
 		Attributes *struct {
+			// Whether the dashboard auto-updates the UI with new data.
+			AutoRefresh *bool `json:"auto_refresh,omitempty"`
+
 			// The name of the dashboard
 			Name *string `json:"name,omitempty"`
 
