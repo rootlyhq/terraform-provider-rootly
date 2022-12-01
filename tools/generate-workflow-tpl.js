@@ -217,7 +217,7 @@ function schemaFields(resourceSchema, requiredFields, taskParamsSchema) {
 function annotatedDescription(schema) {
 	const description = (schema.description || "").replace(/"/g, '\\"')
 	if (schema.enum) {
-		return `${description}. Value must be one of ${schema.enum.map((val) => `\`${val}\``).join(", ")}.`
+		return `${!!description ? `${description}. ` : ''}Value must be one off ${schema.enum.map((val) => `\`${val}\``).join(", ")}.`
 	}
 	if (schema.type === "object" && schema.properties.id && schema.properties.name) {
 		return `Map must contain two fields, \`id\` and \`name\`. ${description}`

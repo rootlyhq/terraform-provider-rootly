@@ -43,5 +43,5 @@ description: |-
 
 Optional:
 
-- `trigger_type` (String) . Value must be one of `simple`.
+- `trigger_type` (String) Value must be one off `simple`.
 - `triggers` (List of String)

@@ -124,7 +124,7 @@ func resourceWorkflowPulse() *schema.Resource{
 				Default: "pulse",
 				Required: false,
 				Optional: true,
-				Description: ". Value must be one of `pulse`.",
+				Description: "Value must be one off `pulse`.",
 			},
 			
 
@@ -145,7 +145,7 @@ func resourceWorkflowPulse() *schema.Resource{
 				Default: "ALL",
 				Required: false,
 				Optional: true,
-				Description: ". Value must be one of `ALL`, `ANY`, `NONE`.",
+				Description: "Value must be one off `ALL`, `ANY`, `NONE`.",
 			},
 			
 
@@ -154,7 +154,7 @@ func resourceWorkflowPulse() *schema.Resource{
 				Default: "IS",
 				Required: false,
 				Optional: true,
-				Description: ". Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
+				Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
 			},
 			
 
@@ -184,7 +184,7 @@ func resourceWorkflowPulse() *schema.Resource{
 				Default: "IS",
 				Required: false,
 				Optional: true,
-				Description: ". Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
+				Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
 			},
 			
 
@@ -214,7 +214,7 @@ func resourceWorkflowPulse() *schema.Resource{
 				Default: "IS",
 				Required: false,
 				Optional: true,
-				Description: ". Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
+				Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
 			},
 			
 

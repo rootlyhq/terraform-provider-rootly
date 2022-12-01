@@ -124,7 +124,7 @@ func resourceWorkflowIncident() *schema.Resource{
 				Default: "incident",
 				Required: false,
 				Optional: true,
-				Description: ". Value must be one of `incident`.",
+				Description: "Value must be one off `incident`.",
 			},
 			
 
@@ -181,7 +181,7 @@ func resourceWorkflowIncident() *schema.Resource{
 				Default: "ALL",
 				Required: false,
 				Optional: true,
-				Description: ". Value must be one of `ALL`, `ANY`, `NONE`.",
+				Description: "Value must be one off `ALL`, `ANY`, `NONE`.",
 			},
 			
 
@@ -190,7 +190,7 @@ func resourceWorkflowIncident() *schema.Resource{
 				Default: "IS",
 				Required: false,
 				Optional: true,
-				Description: ". Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
+				Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
 			},
 			
 
@@ -199,7 +199,7 @@ func resourceWorkflowIncident() *schema.Resource{
 				Default: "IS",
 				Required: false,
 				Optional: true,
-				Description: ". Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
+				Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
 			},
 			
 
@@ -208,7 +208,7 @@ func resourceWorkflowIncident() *schema.Resource{
 				Default: "IS",
 				Required: false,
 				Optional: true,
-				Description: ". Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
+				Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
 			},
 			
 
@@ -217,7 +217,7 @@ func resourceWorkflowIncident() *schema.Resource{
 				Default: "IS",
 				Required: false,
 				Optional: true,
-				Description: ". Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
+				Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
 			},
 			
 
@@ -226,7 +226,7 @@ func resourceWorkflowIncident() *schema.Resource{
 				Default: "IS",
 				Required: false,
 				Optional: true,
-				Description: ". Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
+				Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
 			},
 			
 
@@ -235,7 +235,7 @@ func resourceWorkflowIncident() *schema.Resource{
 				Default: "IS",
 				Required: false,
 				Optional: true,
-				Description: ". Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
+				Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
 			},
 			
 
@@ -244,7 +244,7 @@ func resourceWorkflowIncident() *schema.Resource{
 				Default: "IS",
 				Required: false,
 				Optional: true,
-				Description: ". Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
+				Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
 			},
 			
 
@@ -253,7 +253,7 @@ func resourceWorkflowIncident() *schema.Resource{
 				Default: "IS",
 				Required: false,
 				Optional: true,
-				Description: ". Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
+				Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
 			},
 			
 
@@ -262,7 +262,7 @@ func resourceWorkflowIncident() *schema.Resource{
 				Default: "IS",
 				Required: false,
 				Optional: true,
-				Description: ". Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
+				Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
 			},
 			
 

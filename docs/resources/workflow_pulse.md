@@ -43,16 +43,16 @@ description: |-
 
 Optional:
 
-- `pulse_condition` (String) . Value must be one of `ALL`, `ANY`, `NONE`.
-- `pulse_condition_label` (String) . Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
+- `pulse_condition` (String) Value must be one off `ALL`, `ANY`, `NONE`.
+- `pulse_condition_label` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
 - `pulse_condition_label_use_regexp` (Boolean)
-- `pulse_condition_payload` (String) . Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
+- `pulse_condition_payload` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
 - `pulse_condition_payload_use_regexp` (Boolean)
-- `pulse_condition_source` (String) . Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
+- `pulse_condition_source` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
 - `pulse_condition_source_use_regexp` (Boolean)
 - `pulse_labels` (List of String)
 - `pulse_payload` (List of String)
 - `pulse_query_payload` (String) You can use jsonpath syntax. eg: $.incident.teams[*]
 - `pulse_sources` (List of String)
-- `trigger_type` (String) . Value must be one of `pulse`.
+- `trigger_type` (String) Value must be one off `pulse`.
 - `triggers` (List of String)

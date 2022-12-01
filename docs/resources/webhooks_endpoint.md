@@ -20,7 +20,7 @@ description: |-
 ### Optional
 
 - `enabled` (Boolean)
-- `event_types` (List of String) . Value must be one of `incident.created`, `incident.updated`, `incident.mitigated`, `incident.resolved`, `incident.cancelled`, `incident.deleted`, `incident.scheduled.created`, `incident.scheduled.updated`, `incident.scheduled.in_progress`, `incident.scheduled.completed`, `incident.scheduled.deleted`, `incident_post_mortem.created`, `incident_post_mortem.updated`, `incident_post_mortem.published`, `incident_post_mortem.deleted`, `alert.created`, `pulse.created`.
+- `event_types` (List of String) Value must be one of `incident.created`, `incident.updated`, `incident.mitigated`, `incident.resolved`, `incident.cancelled`, `incident.deleted`, `incident.scheduled.created`, `incident.scheduled.updated`, `incident.scheduled.in_progress`, `incident.scheduled.completed`, `incident.scheduled.deleted`, `incident_post_mortem.created`, `incident_post_mortem.updated`, `incident_post_mortem.published`, `incident_post_mortem.deleted`, `alert.created`, `pulse.created`.
 - `secret` (String) The webhook signing secret used to verify webhook requests.
 - `slug` (String) The slug of the endpoint
 

@@ -43,16 +43,16 @@ description: |-
 
 Optional:
 
-- `alert_condition` (String) . Value must be one of `ALL`, `ANY`, `NONE`.
-- `alert_condition_label` (String) . Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
+- `alert_condition` (String) Value must be one off `ALL`, `ANY`, `NONE`.
+- `alert_condition_label` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
 - `alert_condition_label_use_regexp` (Boolean)
-- `alert_condition_payload` (String) . Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
+- `alert_condition_payload` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
 - `alert_condition_payload_use_regexp` (Boolean)
-- `alert_condition_source` (String) . Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
+- `alert_condition_source` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
 - `alert_condition_source_use_regexp` (Boolean)
 - `alert_labels` (List of String)
 - `alert_payload` (List of String)
 - `alert_query_payload` (String) You can use jsonpath syntax. eg: $.incident.teams[*]
 - `alert_sources` (List of String)
-- `trigger_type` (String) . Value must be one of `alert`.
+- `trigger_type` (String) Value must be one off `alert`.
 - `triggers` (List of String)

@@ -59,7 +59,7 @@ func resourceWebhooksEndpoint() *schema.Resource{
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: ". Value must be one of `incident.created`, `incident.updated`, `incident.mitigated`, `incident.resolved`, `incident.cancelled`, `incident.deleted`, `incident.scheduled.created`, `incident.scheduled.updated`, `incident.scheduled.in_progress`, `incident.scheduled.completed`, `incident.scheduled.deleted`, `incident_post_mortem.created`, `incident_post_mortem.updated`, `incident_post_mortem.published`, `incident_post_mortem.deleted`, `alert.created`, `pulse.created`.",
+					Description: "Value must be one of `incident.created`, `incident.updated`, `incident.mitigated`, `incident.resolved`, `incident.cancelled`, `incident.deleted`, `incident.scheduled.created`, `incident.scheduled.updated`, `incident.scheduled.in_progress`, `incident.scheduled.completed`, `incident.scheduled.deleted`, `incident_post_mortem.created`, `incident_post_mortem.updated`, `incident_post_mortem.published`, `incident_post_mortem.deleted`, `alert.created`, `pulse.created`.",
 				},
 				
 
