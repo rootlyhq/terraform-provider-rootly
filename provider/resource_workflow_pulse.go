@@ -83,7 +83,7 @@ func resourceWorkflowPulse() *schema.Resource{
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "",
+					Description: "Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
 				},
 				
 
@@ -136,7 +136,7 @@ func resourceWorkflowPulse() *schema.Resource{
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "",
+					Description: "Value must be one of `pulse_created`.",
 				},
 				
 

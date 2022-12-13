@@ -83,7 +83,7 @@ func resourceWorkflowIncident() *schema.Resource{
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "",
+					Description: "Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
 				},
 				
 
@@ -136,7 +136,7 @@ func resourceWorkflowIncident() *schema.Resource{
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "",
+					Description: "Value must be one of `incident_created`, `incident_updated`, `title_updated`, `summary_updated`, `status_updated`, `severity_updated`, `environments_added`, `environments_removed`, `environments_updated`, `incident_types_added`, `incident_types_removed`, `incident_types_updated`, `services_added`, `services_removed`, `services_updated`, `functionalities_added`, `functionalities_removed`, `functionalities_updated`, `teams_added`, `teams_removed`, `teams_updated`, `timeline_updated`, `status_page_timeline_updated`, `role_assignments_updated`, `role_assignments_added`, `role_assignments_removed`, `slack_command`, `slack_channel_created`, `slack_channel_converted`, `user_joined_slack_channel`.",
 				},
 				
 
@@ -160,7 +160,7 @@ func resourceWorkflowIncident() *schema.Resource{
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "",
+					Description: "Value must be one of `example`, `test`, `normal`, `backfilled`, `scheduled`.",
 				},
 				
 
@@ -172,7 +172,7 @@ func resourceWorkflowIncident() *schema.Resource{
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "",
+					Description: "Value must be one of `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.",
 				},
 				
 

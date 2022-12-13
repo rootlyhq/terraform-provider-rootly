@@ -26,7 +26,7 @@ description: |-
 - `incident_type_ids` (List of String)
 - `position` (Number) The order which the workflow should run with other workflows.
 - `repeat_every_duration` (String) Repeat workflow every duration.
-- `repeat_on` (List of String)
+- `repeat_on` (List of String) Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.
 - `service_ids` (List of String)
 - `severity_ids` (List of String)
 - `slug` (String) The slug of the workflow
@@ -61,8 +61,8 @@ Optional:
 - `incident_condition_summary` (String)
 - `incident_condition_visibility` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
 - `incident_conditional_inactivity` (String)
-- `incident_kinds` (List of String)
-- `incident_statuses` (List of String)
+- `incident_kinds` (List of String) Value must be one of `example`, `test`, `normal`, `backfilled`, `scheduled`.
+- `incident_statuses` (List of String) Value must be one of `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.
 - `incident_visibilities` (List of String)
 - `trigger_type` (String) Value must be one off `incident`.
-- `triggers` (List of String)
+- `triggers` (List of String) Value must be one of `incident_created`, `incident_updated`, `title_updated`, `summary_updated`, `status_updated`, `severity_updated`, `environments_added`, `environments_removed`, `environments_updated`, `incident_types_added`, `incident_types_removed`, `incident_types_updated`, `services_added`, `services_removed`, `services_updated`, `functionalities_added`, `functionalities_removed`, `functionalities_updated`, `teams_added`, `teams_removed`, `teams_updated`, `timeline_updated`, `status_page_timeline_updated`, `role_assignments_updated`, `role_assignments_added`, `role_assignments_removed`, `slack_command`, `slack_channel_created`, `slack_channel_converted`, `user_joined_slack_channel`.

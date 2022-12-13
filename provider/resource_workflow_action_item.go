@@ -83,7 +83,7 @@ func resourceWorkflowActionItem() *schema.Resource{
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "",
+					Description: "Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
 				},
 				
 
@@ -136,7 +136,7 @@ func resourceWorkflowActionItem() *schema.Resource{
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "",
+					Description: "Value must be one of `action_item_created`, `action_item_updated`, `assigned_user_updated`, `summary_updated`, `description_updated`, `status_updated`, `priority_updated`, `due_date_updated`, `teams_updated`, `slack_command`.",
 				},
 				
 
@@ -160,7 +160,7 @@ func resourceWorkflowActionItem() *schema.Resource{
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "",
+					Description: "Value must be one of `example`, `test`, `normal`, `backfilled`, `scheduled`.",
 				},
 				
 
@@ -172,7 +172,7 @@ func resourceWorkflowActionItem() *schema.Resource{
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "",
+					Description: "Value must be one of `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.",
 				},
 				
 
@@ -364,7 +364,7 @@ func resourceWorkflowActionItem() *schema.Resource{
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "",
+					Description: "Value must be one of `task`, `follow_up`.",
 				},
 				
 
@@ -385,7 +385,7 @@ func resourceWorkflowActionItem() *schema.Resource{
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "",
+					Description: "Value must be one of `open`, `in_progress`, `cancelled`, `done`.",
 				},
 				
 
@@ -406,7 +406,7 @@ func resourceWorkflowActionItem() *schema.Resource{
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "",
+					Description: "Value must be one of `high`, `medium`, `low`.",
 				},
 				
 

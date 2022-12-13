@@ -26,7 +26,7 @@ description: |-
 - `incident_type_ids` (List of String)
 - `position` (Number) The order which the workflow should run with other workflows.
 - `repeat_every_duration` (String) Repeat workflow every duration.
-- `repeat_on` (List of String)
+- `repeat_on` (List of String) Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.
 - `service_ids` (List of String)
 - `severity_ids` (List of String)
 - `slug` (String) The slug of the workflow
@@ -55,4 +55,4 @@ Optional:
 - `pulse_query_payload` (String) You can use jsonpath syntax. eg: $.incident.teams[*]
 - `pulse_sources` (List of String)
 - `trigger_type` (String) Value must be one off `pulse`.
-- `triggers` (List of String)
+- `triggers` (List of String) Value must be one of `pulse_created`.

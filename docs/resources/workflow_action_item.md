@@ -26,7 +26,7 @@ description: |-
 - `incident_type_ids` (List of String)
 - `position` (Number) The order which the workflow should run with other workflows.
 - `repeat_every_duration` (String) Repeat workflow every duration.
-- `repeat_on` (List of String)
+- `repeat_on` (List of String) Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.
 - `service_ids` (List of String)
 - `severity_ids` (List of String)
 - `slug` (String) The slug of the workflow
@@ -49,9 +49,9 @@ Optional:
 - `incident_action_item_condition_priority` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
 - `incident_action_item_condition_status` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
 - `incident_action_item_group_ids` (List of String)
-- `incident_action_item_kinds` (List of String)
-- `incident_action_item_priorities` (List of String)
-- `incident_action_item_statuses` (List of String)
+- `incident_action_item_kinds` (List of String) Value must be one of `task`, `follow_up`.
+- `incident_action_item_priorities` (List of String) Value must be one of `high`, `medium`, `low`.
+- `incident_action_item_statuses` (List of String) Value must be one of `open`, `in_progress`, `cancelled`, `done`.
 - `incident_condition` (String) Value must be one off `ALL`, `ANY`, `NONE`.
 - `incident_condition_acknowledged_at` (String)
 - `incident_condition_detected_at` (String)
@@ -70,8 +70,8 @@ Optional:
 - `incident_condition_summary` (String)
 - `incident_condition_visibility` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
 - `incident_conditional_inactivity` (String)
-- `incident_kinds` (List of String)
-- `incident_statuses` (List of String)
+- `incident_kinds` (List of String) Value must be one of `example`, `test`, `normal`, `backfilled`, `scheduled`.
+- `incident_statuses` (List of String) Value must be one of `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.
 - `incident_visibilities` (List of String)
 - `trigger_type` (String) Value must be one off `action_item`.
-- `triggers` (List of String)
+- `triggers` (List of String) Value must be one of `action_item_created`, `action_item_updated`, `assigned_user_updated`, `summary_updated`, `description_updated`, `status_updated`, `priority_updated`, `due_date_updated`, `teams_updated`, `slack_command`.

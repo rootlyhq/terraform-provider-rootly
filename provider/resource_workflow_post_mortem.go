@@ -83,7 +83,7 @@ func resourceWorkflowPostMortem() *schema.Resource{
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "",
+					Description: "Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
 				},
 				
 
@@ -136,7 +136,7 @@ func resourceWorkflowPostMortem() *schema.Resource{
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "",
+					Description: "Value must be one of `action_item_created`, `action_item_updated`, `assigned_user_updated`, `summary_updated`, `description_updated`, `status_updated`, `priority_updated`, `due_date_updated`, `teams_updated`, `slack_command`.",
 				},
 				
 
@@ -160,7 +160,7 @@ func resourceWorkflowPostMortem() *schema.Resource{
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "",
+					Description: "Value must be one of `example`, `test`, `normal`, `backfilled`, `scheduled`.",
 				},
 				
 
@@ -172,7 +172,7 @@ func resourceWorkflowPostMortem() *schema.Resource{
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "",
+					Description: "Value must be one of `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.",
 				},
 				
 
@@ -199,7 +199,7 @@ func resourceWorkflowPostMortem() *schema.Resource{
 				Default: "IS",
 				Required: false,
 				Optional: true,
-				Description: "Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
+				Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
 			},
 			
 
@@ -364,7 +364,7 @@ func resourceWorkflowPostMortem() *schema.Resource{
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "",
+					Description: "Value must be one of `draft`, `published`.",
 				},
 				
 
