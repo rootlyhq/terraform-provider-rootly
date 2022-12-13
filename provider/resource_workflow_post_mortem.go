@@ -199,7 +199,7 @@ func resourceWorkflowPostMortem() *schema.Resource{
 				Default: "IS",
 				Required: false,
 				Optional: true,
-				Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
+				Description: "Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
 			},
 			
 
