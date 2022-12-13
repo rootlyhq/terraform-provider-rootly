@@ -1673,6 +1673,7 @@ const (
 	IncidentTriggerParamsTriggersServicesRemoved           IncidentTriggerParamsTriggers = "services_removed"
 	IncidentTriggerParamsTriggersServicesUpdated           IncidentTriggerParamsTriggers = "services_updated"
 	IncidentTriggerParamsTriggersSeverityUpdated           IncidentTriggerParamsTriggers = "severity_updated"
+	IncidentTriggerParamsTriggersSlackChannelConverted     IncidentTriggerParamsTriggers = "slack_channel_converted"
 	IncidentTriggerParamsTriggersSlackChannelCreated       IncidentTriggerParamsTriggers = "slack_channel_created"
 	IncidentTriggerParamsTriggersSlackCommand              IncidentTriggerParamsTriggers = "slack_command"
 	IncidentTriggerParamsTriggersStatusPageTimelineUpdated IncidentTriggerParamsTriggers = "status_page_timeline_updated"
@@ -1894,6 +1895,13 @@ const (
 	NewFormFieldPositionDataTypeFormFieldPositions NewFormFieldPositionDataType = "form_field_positions"
 )
 
+// Defines values for NewFunctionalityDataAttributesShowUptimeLastDays.
+const (
+	NewFunctionalityDataAttributesShowUptimeLastDaysN30 NewFunctionalityDataAttributesShowUptimeLastDays = 30
+	NewFunctionalityDataAttributesShowUptimeLastDaysN60 NewFunctionalityDataAttributesShowUptimeLastDays = 60
+	NewFunctionalityDataAttributesShowUptimeLastDaysN90 NewFunctionalityDataAttributesShowUptimeLastDays = 90
+)
+
 // Defines values for NewFunctionalityDataType.
 const (
 	NewFunctionalityDataTypeFunctionalities NewFunctionalityDataType = "functionalities"
@@ -2044,6 +2052,13 @@ const (
 // Defines values for NewPulseDataType.
 const (
 	NewPulseDataTypePulses NewPulseDataType = "pulses"
+)
+
+// Defines values for NewServiceDataAttributesShowUptimeLastDays.
+const (
+	NewServiceDataAttributesShowUptimeLastDaysN30 NewServiceDataAttributesShowUptimeLastDays = 30
+	NewServiceDataAttributesShowUptimeLastDaysN60 NewServiceDataAttributesShowUptimeLastDays = 60
+	NewServiceDataAttributesShowUptimeLastDaysN90 NewServiceDataAttributesShowUptimeLastDays = 90
 )
 
 // Defines values for NewServiceDataType.
@@ -7873,6 +7888,12 @@ type NewFunctionality struct {
 			// Services associated with this functionality
 			ServiceIds *[]string `json:"service_ids"`
 
+			// Show uptime
+			ShowUptime *bool `json:"show_uptime"`
+
+			// Show uptime over x days
+			ShowUptimeLastDays *NewFunctionalityDataAttributesShowUptimeLastDays `json:"show_uptime_last_days"`
+
 			// Slack Aliases associated with this service
 			SlackAliases *[]struct {
 				// Slack alias ID
@@ -7894,6 +7915,9 @@ type NewFunctionality struct {
 		Type NewFunctionalityDataType `json:"type"`
 	} `json:"data"`
 }
+
+// Show uptime over x days
+type NewFunctionalityDataAttributesShowUptimeLastDays int
 
 // NewFunctionalityDataType defines model for NewFunctionality.Data.Type.
 type NewFunctionalityDataType string
@@ -8348,6 +8372,12 @@ type NewService struct {
 			// Services dependent on this service
 			ServiceIds *[]string `json:"service_ids"`
 
+			// Show uptime
+			ShowUptime *bool `json:"show_uptime"`
+
+			// Show uptime over x days
+			ShowUptimeLastDays *NewServiceDataAttributesShowUptimeLastDays `json:"show_uptime_last_days"`
+
 			// Slack Aliases associated with this service
 			SlackAliases *[]struct {
 				// Slack alias ID
@@ -8369,6 +8399,9 @@ type NewService struct {
 		Type NewServiceDataType `json:"type"`
 	} `json:"data"`
 }
+
+// Show uptime over x days
+type NewServiceDataAttributesShowUptimeLastDays int
 
 // NewServiceDataType defines model for NewService.Data.Type.
 type NewServiceDataType string
