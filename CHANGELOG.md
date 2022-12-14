@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.56] -- 2022-12-13
+
+- Improve docs.
+- Add `show_uptime` & `show_uptime_last_days` to services and functionalities.
+- Add `slack_channel_converted` trigger to `resourceWorkflowIncident`.
+
 ## [0.1.55] -- 2022-12-01
 - Add `rootly_workflow_simple` resource.
 - Add `auto_refresh` to `dashboard` resources.
