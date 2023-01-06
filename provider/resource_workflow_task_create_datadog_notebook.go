@@ -5,7 +5,7 @@ package provider
 import (
 	"context"
 	"fmt"
-	
+
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -27,59 +27,59 @@ func resourceWorkflowTaskCreateDatadogNotebook() *schema.Resource {
 
 		Schema: map[string]*schema.Schema{
 			"workflow_id": {
-				Description:  "The ID of the parent workflow",
-				Type:         schema.TypeString,
-				Required:     true,
-				ForceNew:     true,
+				Description: "The ID of the parent workflow",
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
 			},
 			"position": {
-				Description:  "The position of the workflow task (1 being top of list)",
-				Type:         schema.TypeInt,
-				Optional:     true,
-				Computed:     true,
+				Description: "The position of the workflow task (1 being top of list)",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type: schema.TypeList,
-				Required: true,
-				MinItems: 1,
-				MaxItems: 1,
+				Type:        schema.TypeList,
+				Required:    true,
+				MinItems:    1,
+				MaxItems:    1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"task_type": &schema.Schema{
-							Type: schema.TypeString,
+							Type:     schema.TypeString,
 							Optional: true,
-							Default: "create_datadog_notebook",
+							Default:  "create_datadog_notebook",
 							ValidateFunc: validation.StringInSlice([]string{
 								"create_datadog_notebook",
 							}, false),
 						},
 						"post_mortem_template_id": &schema.Schema{
 							Description: "Post mortem template to use when creating notebook, if desired.",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 						"title": &schema.Schema{
 							Description: "The notebook title",
-							Type: schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 						},
 						"kind": &schema.Schema{
 							Description: "The notebook kind. Value must be one of `postmortem`, `runbook`, `investigation`, `documentation`, `report`.",
-							Type: schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 							ValidateFunc: validation.StringInSlice([]string{
 								"postmortem",
-"runbook",
-"investigation",
-"documentation",
-"report",
+								"runbook",
+								"investigation",
+								"documentation",
+								"report",
 							}, false),
 						},
 						"content": &schema.Schema{
 							Description: "The notebook content",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 					},
 				},
@@ -99,7 +99,7 @@ func resourceWorkflowTaskCreateDatadogNotebookCreate(ctx context.Context, d *sch
 
 	s := &client.WorkflowTask{
 		WorkflowId: workflowId,
-		Position: position,
+		Position:   position,
 		TaskParams: taskParams,
 	}
 
@@ -150,7 +150,7 @@ func resourceWorkflowTaskCreateDatadogNotebookUpdate(ctx context.Context, d *sch
 
 	s := &client.WorkflowTask{
 		WorkflowId: workflowId,
-		Position: position,
+		Position:   position,
 		TaskParams: taskParams,
 	}
 

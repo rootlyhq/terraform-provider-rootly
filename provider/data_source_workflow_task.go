@@ -2,40 +2,38 @@ package provider
 
 import (
 	"context"
-	
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
-func dataSourceWorkflowTask() *schema.Resource{
+func dataSourceWorkflowTask() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceWorkflowTaskRead,
 		Schema: map[string]*schema.Schema{
 			"id": &schema.Schema{
-				Type: schema.TypeString,
+				Type:     schema.TypeString,
 				Computed: true,
 			},
 
 			"workflow_id": &schema.Schema{
-				Type: schema.TypeString,
+				Type:     schema.TypeString,
 				Required: true,
 			},
-			
+
 			"name": &schema.Schema{
-				Type: schema.TypeString,
+				Type:     schema.TypeString,
 				Computed: true,
 				Optional: true,
 			},
-			
 
 			"slug": &schema.Schema{
-				Type: schema.TypeString,
+				Type:     schema.TypeString,
 				Computed: true,
 				Optional: true,
 			},
-			
 		},
 	}
 }
@@ -47,21 +45,17 @@ func dataSourceWorkflowTaskRead(ctx context.Context, d *schema.ResourceData, met
 	page_size := 1
 	params.PageSize = &page_size
 
-	
-				if value, ok := d.GetOkExists("name"); ok {
-					name := value.(string)
-					params.FilterName = &name
-				}
-			
+	if value, ok := d.GetOkExists("name"); ok {
+		name := value.(string)
+		params.FilterName = &name
+	}
 
-				if value, ok := d.GetOkExists("slug"); ok {
-					slug := value.(string)
-					params.FilterSlug = &slug
-				}
+	if value, ok := d.GetOkExists("slug"); ok {
+		slug := value.(string)
+		params.FilterSlug = &slug
+	}
 
-
-				workflow_id := d.Get("workflow_id").(string)
-			
+	workflow_id := d.Get("workflow_id").(string)
 
 	items, err := c.ListWorkflowTasks(workflow_id, params)
 	if err != nil {

@@ -5,10 +5,10 @@ package provider
 import (
 	"context"
 	"fmt"
-	
+
+	"github.com/stretchr/testify/assert"
 	"testing"
-  "github.com/stretchr/testify/assert"
-	
+
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -30,97 +30,97 @@ func resourceWorkflowTaskCreateIncident() *schema.Resource {
 
 		Schema: map[string]*schema.Schema{
 			"workflow_id": {
-				Description:  "The ID of the parent workflow",
-				Type:         schema.TypeString,
-				Required:     true,
-				ForceNew:     true,
+				Description: "The ID of the parent workflow",
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
 			},
 			"position": {
-				Description:  "The position of the workflow task (1 being top of list)",
-				Type:         schema.TypeInt,
-				Optional:     true,
-				Computed:     true,
+				Description: "The position of the workflow task (1 being top of list)",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type: schema.TypeList,
-				Required: true,
-				MinItems: 1,
-				MaxItems: 1,
+				Type:        schema.TypeList,
+				Required:    true,
+				MinItems:    1,
+				MaxItems:    1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"task_type": &schema.Schema{
-							Type: schema.TypeString,
+							Type:     schema.TypeString,
 							Optional: true,
-							Default: "create_incident",
+							Default:  "create_incident",
 							ValidateFunc: validation.StringInSlice([]string{
 								"create_incident",
 							}, false),
 						},
 						"title": &schema.Schema{
 							Description: "The incident title",
-							Type: schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 						},
 						"summary": &schema.Schema{
 							Description: "The incident summary",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 						"severity_id": &schema.Schema{
 							Description: "",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 						"incident_type_ids": &schema.Schema{
 							Description: "",
-							Type: schema.TypeList,
-							Optional: true,
+							Type:        schema.TypeList,
+							Optional:    true,
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
 						},
 						"service_ids": &schema.Schema{
 							Description: "",
-							Type: schema.TypeList,
-							Optional: true,
+							Type:        schema.TypeList,
+							Optional:    true,
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
 						},
 						"functionality_ids": &schema.Schema{
 							Description: "",
-							Type: schema.TypeList,
-							Optional: true,
+							Type:        schema.TypeList,
+							Optional:    true,
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
 						},
 						"environment_ids": &schema.Schema{
 							Description: "",
-							Type: schema.TypeList,
-							Optional: true,
+							Type:        schema.TypeList,
+							Optional:    true,
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
 						},
 						"group_ids": &schema.Schema{
 							Description: "",
-							Type: schema.TypeList,
-							Optional: true,
+							Type:        schema.TypeList,
+							Optional:    true,
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
 						},
 						"private": &schema.Schema{
 							Description: "",
-							Type: schema.TypeBool,
-							Optional: true,
+							Type:        schema.TypeBool,
+							Optional:    true,
 						},
 						"custom_fields_mapping": &schema.Schema{
 							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON.",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 								t := &testing.T{}
 								assert := assert.New(t)
@@ -146,7 +146,7 @@ func resourceWorkflowTaskCreateIncidentCreate(ctx context.Context, d *schema.Res
 
 	s := &client.WorkflowTask{
 		WorkflowId: workflowId,
-		Position: position,
+		Position:   position,
 		TaskParams: taskParams,
 	}
 
@@ -197,7 +197,7 @@ func resourceWorkflowTaskCreateIncidentUpdate(ctx context.Context, d *schema.Res
 
 	s := &client.WorkflowTask{
 		WorkflowId: workflowId,
-		Position: position,
+		Position:   position,
 		TaskParams: taskParams,
 	}
 

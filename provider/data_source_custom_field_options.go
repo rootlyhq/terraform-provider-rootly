@@ -2,54 +2,54 @@ package provider
 
 import (
 	"context"
-	"strconv"
-	"time"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
+	"strconv"
+	"time"
 )
 
-func dataSourceCustomFieldOptions() *schema.Resource{
+func dataSourceCustomFieldOptions() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceCustomFieldOptionsRead,
 		Schema: map[string]*schema.Schema{
 			"custom_field_id": &schema.Schema{
-				Type:        schema.TypeInt,
-				Required:    true,
+				Type:     schema.TypeInt,
+				Required: true,
 			},
 			"value": &schema.Schema{
-				Type:        schema.TypeString,
-				Optional:    true,
+				Type:     schema.TypeString,
+				Optional: true,
 			},
 			"color": &schema.Schema{
-				Type:        schema.TypeString,
-				Optional:    true,
+				Type:     schema.TypeString,
+				Optional: true,
 			},
 			"custom_field_options": &schema.Schema{
-				Type: schema.TypeList,
+				Type:     schema.TypeList,
 				Computed: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"id": &schema.Schema{
-							Type: schema.TypeString,
+							Type:     schema.TypeString,
 							Computed: true,
 						},
 						"custom_field_id": &schema.Schema{
-							Type:        schema.TypeInt,
-							Computed:    true,
+							Type:     schema.TypeInt,
+							Computed: true,
 						},
 						"value": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
+							Type:     schema.TypeString,
+							Computed: true,
 						},
 						"color": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
+							Type:     schema.TypeString,
+							Computed: true,
 						},
 						"position": &schema.Schema{
-							Type:        schema.TypeInt,
-							Computed:    true,
+							Type:     schema.TypeInt,
+							Computed: true,
 						},
 					},
 				},

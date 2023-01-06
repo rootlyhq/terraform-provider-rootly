@@ -2,46 +2,46 @@ package provider
 
 import (
 	"context"
-	"strconv"
-	"time"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
+	"strconv"
+	"time"
 )
 
-func dataSourceIncidentTypes() *schema.Resource{
+func dataSourceIncidentTypes() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceIncidentTypesRead,
 		Schema: map[string]*schema.Schema{
 			"slug": &schema.Schema{
-				Type:        schema.TypeString,
-				Optional:    true,
+				Type:     schema.TypeString,
+				Optional: true,
 			},
 			"name": &schema.Schema{
-				Type:        schema.TypeString,
-				Optional:    true,
+				Type:     schema.TypeString,
+				Optional: true,
 			},
 			"incident_types": &schema.Schema{
-				Type: schema.TypeList,
+				Type:     schema.TypeList,
 				Computed: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"id": &schema.Schema{
-							Type: schema.TypeString,
+							Type:     schema.TypeString,
 							Computed: true,
 						},
 						"slug": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
+							Type:     schema.TypeString,
+							Computed: true,
 						},
 						"name": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
+							Type:     schema.TypeString,
+							Computed: true,
 						},
 						"description": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
+							Type:     schema.TypeString,
+							Computed: true,
 						},
 					},
 				},

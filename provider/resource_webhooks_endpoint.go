@@ -10,80 +10,69 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
-func resourceWebhooksEndpoint() *schema.Resource{
+func resourceWebhooksEndpoint() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceWebhooksEndpointCreate,
-		ReadContext: resourceWebhooksEndpointRead,
+		ReadContext:   resourceWebhooksEndpointRead,
 		UpdateContext: resourceWebhooksEndpointUpdate,
 		DeleteContext: resourceWebhooksEndpointDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 		Schema: map[string]*schema.Schema{
-			
+
 			"name": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The name of the endpoint",
-				
 			},
-			
 
 			"slug": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The slug of the endpoint",
-				
 			},
-			
 
 			"url": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The URL of the endpoint.",
-				
 			},
-			
 
-				"event_types": &schema.Schema{
-					Type: schema.TypeList,
-					Elem: &schema.Schema{
-						Type: schema.TypeString,
-					},
-					Computed: true,
-					Required: false,
-					Optional: true,
-					Description: "Value must be one of `incident.created`, `incident.updated`, `incident.mitigated`, `incident.resolved`, `incident.cancelled`, `incident.deleted`, `incident.scheduled.created`, `incident.scheduled.updated`, `incident.scheduled.in_progress`, `incident.scheduled.completed`, `incident.scheduled.deleted`, `incident_post_mortem.created`, `incident_post_mortem.updated`, `incident_post_mortem.published`, `incident_post_mortem.deleted`, `alert.created`, `pulse.created`, `genius_workflow_run.queued`, `genius_workflow_run.started`, `genius_workflow_run.completed`, `genius_workflow_run.failed`, `genius_workflow_run.canceled`.",
+			"event_types": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
 				},
-				
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Value must be one of `incident.created`, `incident.updated`, `incident.mitigated`, `incident.resolved`, `incident.cancelled`, `incident.deleted`, `incident.scheduled.created`, `incident.scheduled.updated`, `incident.scheduled.in_progress`, `incident.scheduled.completed`, `incident.scheduled.deleted`, `incident_post_mortem.created`, `incident_post_mortem.updated`, `incident_post_mortem.published`, `incident_post_mortem.deleted`, `alert.created`, `pulse.created`, `genius_workflow_run.queued`, `genius_workflow_run.started`, `genius_workflow_run.completed`, `genius_workflow_run.failed`, `genius_workflow_run.canceled`.",
+			},
 
 			"secret": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The webhook signing secret used to verify webhook requests.",
-				
 			},
-			
 
-				"enabled": &schema.Schema{
-					Type: schema.TypeBool,
-					Default: true,
-					Optional: true,
-					
-				},
-				
+			"enabled": &schema.Schema{
+				Type:     schema.TypeBool,
+				Default:  true,
+				Optional: true,
+			},
 		},
 	}
 }
@@ -95,24 +84,24 @@ func resourceWebhooksEndpointCreate(ctx context.Context, d *schema.ResourceData,
 
 	s := &client.WebhooksEndpoint{}
 
-	  if value, ok := d.GetOkExists("name"); ok {
-				s.Name = value.(string)
-			}
-    if value, ok := d.GetOkExists("slug"); ok {
-				s.Slug = value.(string)
-			}
-    if value, ok := d.GetOkExists("url"); ok {
-				s.Url = value.(string)
-			}
-    if value, ok := d.GetOkExists("event_types"); ok {
-				s.EventTypes = value.([]interface{})
-			}
-    if value, ok := d.GetOkExists("secret"); ok {
-				s.Secret = value.(string)
-			}
-    if value, ok := d.GetOkExists("enabled"); ok {
-				s.Enabled = tools.Bool(value.(bool))
-			}
+	if value, ok := d.GetOkExists("name"); ok {
+		s.Name = value.(string)
+	}
+	if value, ok := d.GetOkExists("slug"); ok {
+		s.Slug = value.(string)
+	}
+	if value, ok := d.GetOkExists("url"); ok {
+		s.Url = value.(string)
+	}
+	if value, ok := d.GetOkExists("event_types"); ok {
+		s.EventTypes = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("secret"); ok {
+		s.Secret = value.(string)
+	}
+	if value, ok := d.GetOkExists("enabled"); ok {
+		s.Enabled = tools.Bool(value.(bool))
+	}
 
 	res, err := c.CreateWebhooksEndpoint(s)
 	if err != nil {
@@ -143,11 +132,11 @@ func resourceWebhooksEndpointRead(ctx context.Context, d *schema.ResourceData, m
 	}
 
 	d.Set("name", item.Name)
-  d.Set("slug", item.Slug)
-  d.Set("url", item.Url)
-  d.Set("event_types", item.EventTypes)
-  d.Set("secret", item.Secret)
-  d.Set("enabled", item.Enabled)
+	d.Set("slug", item.Slug)
+	d.Set("url", item.Url)
+	d.Set("event_types", item.EventTypes)
+	d.Set("secret", item.Secret)
+	d.Set("enabled", item.Enabled)
 
 	return nil
 }
@@ -158,24 +147,24 @@ func resourceWebhooksEndpointUpdate(ctx context.Context, d *schema.ResourceData,
 
 	s := &client.WebhooksEndpoint{}
 
-	  if d.HasChange("name") {
-				s.Name = d.Get("name").(string)
-			}
-    if d.HasChange("slug") {
-				s.Slug = d.Get("slug").(string)
-			}
-    if d.HasChange("url") {
-				s.Url = d.Get("url").(string)
-			}
-    if d.HasChange("event_types") {
-				s.EventTypes = d.Get("event_types").([]interface{})
-			}
-    if d.HasChange("secret") {
-				s.Secret = d.Get("secret").(string)
-			}
-    if d.HasChange("enabled") {
-				s.Enabled = tools.Bool(d.Get("enabled").(bool))
-			}
+	if d.HasChange("name") {
+		s.Name = d.Get("name").(string)
+	}
+	if d.HasChange("slug") {
+		s.Slug = d.Get("slug").(string)
+	}
+	if d.HasChange("url") {
+		s.Url = d.Get("url").(string)
+	}
+	if d.HasChange("event_types") {
+		s.EventTypes = d.Get("event_types").([]interface{})
+	}
+	if d.HasChange("secret") {
+		s.Secret = d.Get("secret").(string)
+	}
+	if d.HasChange("enabled") {
+		s.Enabled = tools.Bool(d.Get("enabled").(bool))
+	}
 
 	_, err := c.UpdateWebhooksEndpoint(d.Id(), s)
 	if err != nil {

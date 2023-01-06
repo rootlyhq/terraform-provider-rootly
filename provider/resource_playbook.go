@@ -7,52 +7,45 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
-	
 )
 
-func resourcePlaybook() *schema.Resource{
+func resourcePlaybook() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourcePlaybookCreate,
-		ReadContext: resourcePlaybookRead,
+		ReadContext:   resourcePlaybookRead,
 		UpdateContext: resourcePlaybookUpdate,
 		DeleteContext: resourcePlaybookDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 		Schema: map[string]*schema.Schema{
-			
+
 			"title": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The title of the playbook",
-				
 			},
-			
 
 			"summary": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The summary of the playbook",
-				
 			},
-			
 
 			"external_url": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The external url of the playbook",
-				
 			},
-			
 		},
 	}
 }
@@ -64,15 +57,15 @@ func resourcePlaybookCreate(ctx context.Context, d *schema.ResourceData, meta in
 
 	s := &client.Playbook{}
 
-	  if value, ok := d.GetOkExists("title"); ok {
-				s.Title = value.(string)
-			}
-    if value, ok := d.GetOkExists("summary"); ok {
-				s.Summary = value.(string)
-			}
-    if value, ok := d.GetOkExists("external_url"); ok {
-				s.ExternalUrl = value.(string)
-			}
+	if value, ok := d.GetOkExists("title"); ok {
+		s.Title = value.(string)
+	}
+	if value, ok := d.GetOkExists("summary"); ok {
+		s.Summary = value.(string)
+	}
+	if value, ok := d.GetOkExists("external_url"); ok {
+		s.ExternalUrl = value.(string)
+	}
 
 	res, err := c.CreatePlaybook(s)
 	if err != nil {
@@ -103,8 +96,8 @@ func resourcePlaybookRead(ctx context.Context, d *schema.ResourceData, meta inte
 	}
 
 	d.Set("title", item.Title)
-  d.Set("summary", item.Summary)
-  d.Set("external_url", item.ExternalUrl)
+	d.Set("summary", item.Summary)
+	d.Set("external_url", item.ExternalUrl)
 
 	return nil
 }
@@ -115,15 +108,15 @@ func resourcePlaybookUpdate(ctx context.Context, d *schema.ResourceData, meta in
 
 	s := &client.Playbook{}
 
-	  if d.HasChange("title") {
-				s.Title = d.Get("title").(string)
-			}
-    if d.HasChange("summary") {
-				s.Summary = d.Get("summary").(string)
-			}
-    if d.HasChange("external_url") {
-				s.ExternalUrl = d.Get("external_url").(string)
-			}
+	if d.HasChange("title") {
+		s.Title = d.Get("title").(string)
+	}
+	if d.HasChange("summary") {
+		s.Summary = d.Get("summary").(string)
+	}
+	if d.HasChange("external_url") {
+		s.ExternalUrl = d.Get("external_url").(string)
+	}
 
 	_, err := c.UpdatePlaybook(d.Id(), s)
 	if err != nil {

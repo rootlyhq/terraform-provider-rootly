@@ -13,6 +13,7 @@ default: testacc
 .PHONY: testacc generate build release install test docs
 build: generate docs
 	go build -o ${BINARY}
+	go fmt provider/*
 
 docs:
 	go get github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs

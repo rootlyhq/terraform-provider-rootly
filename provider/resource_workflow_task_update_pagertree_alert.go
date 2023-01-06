@@ -5,7 +5,7 @@ package provider
 import (
 	"context"
 	"fmt"
-	
+
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -27,86 +27,86 @@ func resourceWorkflowTaskUpdatePagertreeAlert() *schema.Resource {
 
 		Schema: map[string]*schema.Schema{
 			"workflow_id": {
-				Description:  "The ID of the parent workflow",
-				Type:         schema.TypeString,
-				Required:     true,
-				ForceNew:     true,
+				Description: "The ID of the parent workflow",
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
 			},
 			"position": {
-				Description:  "The position of the workflow task (1 being top of list)",
-				Type:         schema.TypeInt,
-				Optional:     true,
-				Computed:     true,
+				Description: "The position of the workflow task (1 being top of list)",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type: schema.TypeList,
-				Required: true,
-				MinItems: 1,
-				MaxItems: 1,
+				Type:        schema.TypeList,
+				Required:    true,
+				MinItems:    1,
+				MaxItems:    1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"task_type": &schema.Schema{
-							Type: schema.TypeString,
+							Type:     schema.TypeString,
 							Optional: true,
-							Default: "update_pagertree_alert",
+							Default:  "update_pagertree_alert",
 							ValidateFunc: validation.StringInSlice([]string{
 								"update_pagertree_alert",
 							}, false),
 						},
 						"pagertree_alert_id": &schema.Schema{
 							Description: "The prefix ID of the Pagertree alert.",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 						"title": &schema.Schema{
 							Description: "Title of alert as text",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 						"description": &schema.Schema{
 							Description: "Description of alert as text",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 						"urgency": &schema.Schema{
 							Description: "Value must be one of `auto`, `critical`, `high`, `medium`, `low`.",
-							Type: schema.TypeString,
-							Optional: true,
-							Default: nil,
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     nil,
 							ValidateFunc: validation.StringInSlice([]string{
 								"auto",
-"critical",
-"high",
-"medium",
-"low",
+								"critical",
+								"high",
+								"medium",
+								"low",
 							}, false),
 						},
 						"severity": &schema.Schema{
 							Description: "Value must be one of `auto`, `SEV-1`, `SEV-2`, `SEV-3`, `SEV-4`.",
-							Type: schema.TypeString,
-							Optional: true,
-							Default: nil,
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     nil,
 							ValidateFunc: validation.StringInSlice([]string{
 								"auto",
-"SEV-1",
-"SEV-2",
-"SEV-3",
-"SEV-4",
+								"SEV-1",
+								"SEV-2",
+								"SEV-3",
+								"SEV-4",
 							}, false),
 						},
 						"teams": &schema.Schema{
 							Description: "",
-							Type: schema.TypeList,
-							Optional: true,
+							Type:        schema.TypeList,
+							Optional:    true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"id": &schema.Schema{
-										Type: schema.TypeString,
+										Type:     schema.TypeString,
 										Required: true,
 									},
 									"name": &schema.Schema{
-										Type: schema.TypeString,
+										Type:     schema.TypeString,
 										Required: true,
 									},
 								},
@@ -114,16 +114,16 @@ func resourceWorkflowTaskUpdatePagertreeAlert() *schema.Resource {
 						},
 						"users": &schema.Schema{
 							Description: "",
-							Type: schema.TypeList,
-							Optional: true,
+							Type:        schema.TypeList,
+							Optional:    true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"id": &schema.Schema{
-										Type: schema.TypeString,
+										Type:     schema.TypeString,
 										Required: true,
 									},
 									"name": &schema.Schema{
-										Type: schema.TypeString,
+										Type:     schema.TypeString,
 										Required: true,
 									},
 								},
@@ -131,8 +131,8 @@ func resourceWorkflowTaskUpdatePagertreeAlert() *schema.Resource {
 						},
 						"incident": &schema.Schema{
 							Description: "Setting to true makes an alert a Pagertree incident.",
-							Type: schema.TypeBool,
-							Optional: true,
+							Type:        schema.TypeBool,
+							Optional:    true,
 						},
 					},
 				},
@@ -152,7 +152,7 @@ func resourceWorkflowTaskUpdatePagertreeAlertCreate(ctx context.Context, d *sche
 
 	s := &client.WorkflowTask{
 		WorkflowId: workflowId,
-		Position: position,
+		Position:   position,
 		TaskParams: taskParams,
 	}
 
@@ -203,7 +203,7 @@ func resourceWorkflowTaskUpdatePagertreeAlertUpdate(ctx context.Context, d *sche
 
 	s := &client.WorkflowTask{
 		WorkflowId: workflowId,
-		Position: position,
+		Position:   position,
 		TaskParams: taskParams,
 	}
 

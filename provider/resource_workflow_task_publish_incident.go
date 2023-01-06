@@ -5,7 +5,7 @@ package provider
 import (
 	"context"
 	"fmt"
-	
+
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -27,75 +27,75 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 
 		Schema: map[string]*schema.Schema{
 			"workflow_id": {
-				Description:  "The ID of the parent workflow",
-				Type:         schema.TypeString,
-				Required:     true,
-				ForceNew:     true,
+				Description: "The ID of the parent workflow",
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
 			},
 			"position": {
-				Description:  "The position of the workflow task (1 being top of list)",
-				Type:         schema.TypeInt,
-				Optional:     true,
-				Computed:     true,
+				Description: "The position of the workflow task (1 being top of list)",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type: schema.TypeList,
-				Required: true,
-				MinItems: 1,
-				MaxItems: 1,
+				Type:        schema.TypeList,
+				Required:    true,
+				MinItems:    1,
+				MaxItems:    1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"task_type": &schema.Schema{
-							Type: schema.TypeString,
+							Type:     schema.TypeString,
 							Optional: true,
-							Default: "publish_incident",
+							Default:  "publish_incident",
 							ValidateFunc: validation.StringInSlice([]string{
 								"publish_incident",
 							}, false),
 						},
 						"incident": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. ",
-							Type: schema.TypeMap,
-							Required: true,
+							Type:        schema.TypeMap,
+							Required:    true,
 						},
 						"public_title": &schema.Schema{
 							Description: "",
-							Type: schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 						},
 						"event": &schema.Schema{
 							Description: "Incident event description",
-							Type: schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 						},
 						"status": &schema.Schema{
 							Description: "Value must be one of `investigating`, `identified`, `monitoring`, `resolved`, `investigating`, `identified`, `monitoring`, `resolved`, `investigating`, `identified`, `monitoring`, `resolved`, `scheduled`, `in_progress`, `verifying`, `completed`.",
-							Type: schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 							ValidateFunc: validation.StringInSlice([]string{
 								"investigating",
-"identified",
-"monitoring",
-"resolved",
-"investigating",
-"identified",
-"monitoring",
-"resolved",
-"investigating",
-"identified",
-"monitoring",
-"resolved",
-"scheduled",
-"in_progress",
-"verifying",
-"completed",
+								"identified",
+								"monitoring",
+								"resolved",
+								"investigating",
+								"identified",
+								"monitoring",
+								"resolved",
+								"investigating",
+								"identified",
+								"monitoring",
+								"resolved",
+								"scheduled",
+								"in_progress",
+								"verifying",
+								"completed",
 							}, false),
 						},
 						"status_page_id": &schema.Schema{
 							Description: "",
-							Type: schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 						},
 					},
 				},
@@ -115,7 +115,7 @@ func resourceWorkflowTaskPublishIncidentCreate(ctx context.Context, d *schema.Re
 
 	s := &client.WorkflowTask{
 		WorkflowId: workflowId,
-		Position: position,
+		Position:   position,
 		TaskParams: taskParams,
 	}
 
@@ -166,7 +166,7 @@ func resourceWorkflowTaskPublishIncidentUpdate(ctx context.Context, d *schema.Re
 
 	s := &client.WorkflowTask{
 		WorkflowId: workflowId,
-		Position: position,
+		Position:   position,
 		TaskParams: taskParams,
 	}
 

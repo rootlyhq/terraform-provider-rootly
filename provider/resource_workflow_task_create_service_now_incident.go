@@ -5,10 +5,10 @@ package provider
 import (
 	"context"
 	"fmt"
-	
+
+	"github.com/stretchr/testify/assert"
 	"testing"
-  "github.com/stretchr/testify/assert"
-	
+
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -30,57 +30,57 @@ func resourceWorkflowTaskCreateServiceNowIncident() *schema.Resource {
 
 		Schema: map[string]*schema.Schema{
 			"workflow_id": {
-				Description:  "The ID of the parent workflow",
-				Type:         schema.TypeString,
-				Required:     true,
-				ForceNew:     true,
+				Description: "The ID of the parent workflow",
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
 			},
 			"position": {
-				Description:  "The position of the workflow task (1 being top of list)",
-				Type:         schema.TypeInt,
-				Optional:     true,
-				Computed:     true,
+				Description: "The position of the workflow task (1 being top of list)",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type: schema.TypeList,
-				Required: true,
-				MinItems: 1,
-				MaxItems: 1,
+				Type:        schema.TypeList,
+				Required:    true,
+				MinItems:    1,
+				MaxItems:    1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"task_type": &schema.Schema{
-							Type: schema.TypeString,
+							Type:     schema.TypeString,
 							Optional: true,
-							Default: "create_service_now_incident",
+							Default:  "create_service_now_incident",
 							ValidateFunc: validation.StringInSlice([]string{
 								"create_service_now_incident",
 							}, false),
 						},
 						"title": &schema.Schema{
 							Description: "The incident title",
-							Type: schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 						},
 						"description": &schema.Schema{
 							Description: "The incident description",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 						"priority": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. The priority id and display name.",
-							Type: schema.TypeMap,
-							Optional: true,
+							Type:        schema.TypeMap,
+							Optional:    true,
 						},
 						"completion": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. The completion id and display name.",
-							Type: schema.TypeMap,
-							Optional: true,
+							Type:        schema.TypeMap,
+							Optional:    true,
 						},
 						"custom_fields_mapping": &schema.Schema{
 							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON.",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 								t := &testing.T{}
 								assert := assert.New(t)
@@ -106,7 +106,7 @@ func resourceWorkflowTaskCreateServiceNowIncidentCreate(ctx context.Context, d *
 
 	s := &client.WorkflowTask{
 		WorkflowId: workflowId,
-		Position: position,
+		Position:   position,
 		TaskParams: taskParams,
 	}
 
@@ -157,7 +157,7 @@ func resourceWorkflowTaskCreateServiceNowIncidentUpdate(ctx context.Context, d *
 
 	s := &client.WorkflowTask{
 		WorkflowId: workflowId,
-		Position: position,
+		Position:   position,
 		TaskParams: taskParams,
 	}
 

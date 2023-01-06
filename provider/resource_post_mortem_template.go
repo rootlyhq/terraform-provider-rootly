@@ -10,42 +10,40 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
-func resourcePostmortemTemplate() *schema.Resource{
+func resourcePostmortemTemplate() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourcePostmortemTemplateCreate,
-		ReadContext: resourcePostmortemTemplateRead,
+		ReadContext:   resourcePostmortemTemplateRead,
 		UpdateContext: resourcePostmortemTemplateUpdate,
 		DeleteContext: resourcePostmortemTemplateDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 		Schema: map[string]*schema.Schema{
-			
+
 			"name": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The name of the postmortem template",
 			},
-			
 
 			"default": &schema.Schema{
-				Type: schema.TypeBool,
-				Computed: true,
-				Required: false,
-				Optional: true,
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
 				Description: "Default selected template when editing a postmortem",
 			},
-			
 
 			"content": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The postmortem template. Liquid syntax and markdown are supported.",
 				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 					return true // suppress diffing for this field, since it will always be different than what is specified in configuration, as input is sanitized and formatted on the server.
@@ -62,15 +60,15 @@ func resourcePostmortemTemplateCreate(ctx context.Context, d *schema.ResourceDat
 
 	s := &client.PostmortemTemplate{}
 
-	  if value, ok := d.GetOkExists("name"); ok {
-				s.Name = value.(string)
-			}
-    if value, ok := d.GetOkExists("default"); ok {
-				s.Default = tools.Bool(value.(bool))
-			}
-    if value, ok := d.GetOkExists("content"); ok {
-				s.Content = value.(string)
-			}
+	if value, ok := d.GetOkExists("name"); ok {
+		s.Name = value.(string)
+	}
+	if value, ok := d.GetOkExists("default"); ok {
+		s.Default = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("content"); ok {
+		s.Content = value.(string)
+	}
 
 	res, err := c.CreatePostmortemTemplate(s)
 	if err != nil {
@@ -101,8 +99,8 @@ func resourcePostmortemTemplateRead(ctx context.Context, d *schema.ResourceData,
 	}
 
 	d.Set("name", item.Name)
-  d.Set("default", item.Default)
-  d.Set("content", item.Content)
+	d.Set("default", item.Default)
+	d.Set("content", item.Content)
 
 	return nil
 }
@@ -113,15 +111,15 @@ func resourcePostmortemTemplateUpdate(ctx context.Context, d *schema.ResourceDat
 
 	s := &client.PostmortemTemplate{}
 
-	  if d.HasChange("name") {
-				s.Name = d.Get("name").(string)
-			}
-    if d.HasChange("default") {
-				s.Default = tools.Bool(d.Get("default").(bool))
-			}
-    if d.HasChange("content") {
-				s.Content = d.Get("content").(string)
-			}
+	if d.HasChange("name") {
+		s.Name = d.Get("name").(string)
+	}
+	if d.HasChange("default") {
+		s.Default = tools.Bool(d.Get("default").(bool))
+	}
+	if d.HasChange("content") {
+		s.Content = d.Get("content").(string)
+	}
 
 	_, err := c.UpdatePostmortemTemplate(d.Id(), s)
 	if err != nil {

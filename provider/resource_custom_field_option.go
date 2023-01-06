@@ -10,67 +10,62 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
-func resourceCustomFieldOption() *schema.Resource{
+func resourceCustomFieldOption() *schema.Resource {
 	return &schema.Resource{
-		Description: "DEPRECATED: Please use `rootly_form_field` and `rootly_form_field_option` resources instead.",
+		Description:        "DEPRECATED: Please use `rootly_form_field` and `rootly_form_field_option` resources instead.",
 		DeprecationMessage: "Please use `rootly_form_field` and `rootly_form_field_option` resources instead.",
-		CreateContext: resourceCustomFieldOptionCreate,
-		ReadContext: resourceCustomFieldOptionRead,
-		UpdateContext: resourceCustomFieldOptionUpdate,
-		DeleteContext: resourceCustomFieldOptionDelete,
+		CreateContext:      resourceCustomFieldOptionCreate,
+		ReadContext:        resourceCustomFieldOptionRead,
+		UpdateContext:      resourceCustomFieldOptionUpdate,
+		DeleteContext:      resourceCustomFieldOptionDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 		Schema: map[string]*schema.Schema{
-			
+
 			"custom_field_id": &schema.Schema{
-				Type: schema.TypeInt,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: true,
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    true,
 				Description: "The ID of the parent custom field",
 			},
-			
 
 			"value": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The value of the custom_field_option",
 			},
-			
 
 			"color": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The hex color of the custom_field_option",
 			},
-			
 
 			"default": &schema.Schema{
-				Type: schema.TypeBool,
-				Computed: true,
-				Required: false,
-				Optional: true,
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
 				Description: "",
 			},
-			
 
 			"position": &schema.Schema{
-				Type: schema.TypeInt,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The position of the custom_field_option",
 			},
-			
 		},
 	}
 }
@@ -82,21 +77,21 @@ func resourceCustomFieldOptionCreate(ctx context.Context, d *schema.ResourceData
 
 	s := &client.CustomFieldOption{}
 
-	  if value, ok := d.GetOkExists("custom_field_id"); ok {
-				s.CustomFieldId = value.(int)
-			}
-    if value, ok := d.GetOkExists("value"); ok {
-				s.Value = value.(string)
-			}
-    if value, ok := d.GetOkExists("color"); ok {
-				s.Color = value.(string)
-			}
-    if value, ok := d.GetOkExists("default"); ok {
-				s.Default = tools.Bool(value.(bool))
-			}
-    if value, ok := d.GetOkExists("position"); ok {
-				s.Position = value.(int)
-			}
+	if value, ok := d.GetOkExists("custom_field_id"); ok {
+		s.CustomFieldId = value.(int)
+	}
+	if value, ok := d.GetOkExists("value"); ok {
+		s.Value = value.(string)
+	}
+	if value, ok := d.GetOkExists("color"); ok {
+		s.Color = value.(string)
+	}
+	if value, ok := d.GetOkExists("default"); ok {
+		s.Default = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("position"); ok {
+		s.Position = value.(int)
+	}
 
 	res, err := c.CreateCustomFieldOption(s)
 	if err != nil {
@@ -127,10 +122,10 @@ func resourceCustomFieldOptionRead(ctx context.Context, d *schema.ResourceData, 
 	}
 
 	d.Set("custom_field_id", item.CustomFieldId)
-  d.Set("value", item.Value)
-  d.Set("color", item.Color)
-  d.Set("default", item.Default)
-  d.Set("position", item.Position)
+	d.Set("value", item.Value)
+	d.Set("color", item.Color)
+	d.Set("default", item.Default)
+	d.Set("position", item.Position)
 
 	return nil
 }
@@ -141,21 +136,21 @@ func resourceCustomFieldOptionUpdate(ctx context.Context, d *schema.ResourceData
 
 	s := &client.CustomFieldOption{}
 
-	  if d.HasChange("custom_field_id") {
-				s.CustomFieldId = d.Get("custom_field_id").(int)
-			}
-    if d.HasChange("value") {
-				s.Value = d.Get("value").(string)
-			}
-    if d.HasChange("color") {
-				s.Color = d.Get("color").(string)
-			}
-    if d.HasChange("default") {
-				s.Default = tools.Bool(d.Get("default").(bool))
-			}
-    if d.HasChange("position") {
-				s.Position = d.Get("position").(int)
-			}
+	if d.HasChange("custom_field_id") {
+		s.CustomFieldId = d.Get("custom_field_id").(int)
+	}
+	if d.HasChange("value") {
+		s.Value = d.Get("value").(string)
+	}
+	if d.HasChange("color") {
+		s.Color = d.Get("color").(string)
+	}
+	if d.HasChange("default") {
+		s.Default = tools.Bool(d.Get("default").(bool))
+	}
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
+	}
 
 	_, err := c.UpdateCustomFieldOption(d.Id(), s)
 	if err != nil {

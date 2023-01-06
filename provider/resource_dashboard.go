@@ -68,8 +68,8 @@ func resourceDashboardCreate(ctx context.Context, d *schema.ResourceData, meta i
 	tflog.Trace(ctx, fmt.Sprintf("Creating Dashboard: %s", name))
 
 	s := &client.Dashboard{
-		Name: name,
-		Owner: owner,
+		Name:   name,
+		Owner:  owner,
 		Public: &public,
 	}
 

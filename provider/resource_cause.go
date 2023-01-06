@@ -7,52 +7,45 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
-	
 )
 
-func resourceCause() *schema.Resource{
+func resourceCause() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceCauseCreate,
-		ReadContext: resourceCauseRead,
+		ReadContext:   resourceCauseRead,
 		UpdateContext: resourceCauseUpdate,
 		DeleteContext: resourceCauseDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 		Schema: map[string]*schema.Schema{
-			
+
 			"name": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The name of the cause",
-				
 			},
-			
 
 			"slug": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The slug of the cause",
-				
 			},
-			
 
 			"description": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The description of the cause",
-				
 			},
-			
 		},
 	}
 }
@@ -64,15 +57,15 @@ func resourceCauseCreate(ctx context.Context, d *schema.ResourceData, meta inter
 
 	s := &client.Cause{}
 
-	  if value, ok := d.GetOkExists("name"); ok {
-				s.Name = value.(string)
-			}
-    if value, ok := d.GetOkExists("slug"); ok {
-				s.Slug = value.(string)
-			}
-    if value, ok := d.GetOkExists("description"); ok {
-				s.Description = value.(string)
-			}
+	if value, ok := d.GetOkExists("name"); ok {
+		s.Name = value.(string)
+	}
+	if value, ok := d.GetOkExists("slug"); ok {
+		s.Slug = value.(string)
+	}
+	if value, ok := d.GetOkExists("description"); ok {
+		s.Description = value.(string)
+	}
 
 	res, err := c.CreateCause(s)
 	if err != nil {
@@ -103,8 +96,8 @@ func resourceCauseRead(ctx context.Context, d *schema.ResourceData, meta interfa
 	}
 
 	d.Set("name", item.Name)
-  d.Set("slug", item.Slug)
-  d.Set("description", item.Description)
+	d.Set("slug", item.Slug)
+	d.Set("description", item.Description)
 
 	return nil
 }
@@ -115,15 +108,15 @@ func resourceCauseUpdate(ctx context.Context, d *schema.ResourceData, meta inter
 
 	s := &client.Cause{}
 
-	  if d.HasChange("name") {
-				s.Name = d.Get("name").(string)
-			}
-    if d.HasChange("slug") {
-				s.Slug = d.Get("slug").(string)
-			}
-    if d.HasChange("description") {
-				s.Description = d.Get("description").(string)
-			}
+	if d.HasChange("name") {
+		s.Name = d.Get("name").(string)
+	}
+	if d.HasChange("slug") {
+		s.Slug = d.Get("slug").(string)
+	}
+	if d.HasChange("description") {
+		s.Description = d.Get("description").(string)
+	}
 
 	_, err := c.UpdateCause(d.Id(), s)
 	if err != nil {

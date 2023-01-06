@@ -5,7 +5,7 @@ package provider
 import (
 	"context"
 	"fmt"
-	
+
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -27,91 +27,91 @@ func resourceWorkflowTaskAddActionItem() *schema.Resource {
 
 		Schema: map[string]*schema.Schema{
 			"workflow_id": {
-				Description:  "The ID of the parent workflow",
-				Type:         schema.TypeString,
-				Required:     true,
-				ForceNew:     true,
+				Description: "The ID of the parent workflow",
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
 			},
 			"position": {
-				Description:  "The position of the workflow task (1 being top of list)",
-				Type:         schema.TypeInt,
-				Optional:     true,
-				Computed:     true,
+				Description: "The position of the workflow task (1 being top of list)",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type: schema.TypeList,
-				Required: true,
-				MinItems: 1,
-				MaxItems: 1,
+				Type:        schema.TypeList,
+				Required:    true,
+				MinItems:    1,
+				MaxItems:    1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"task_type": &schema.Schema{
-							Type: schema.TypeString,
+							Type:     schema.TypeString,
 							Optional: true,
-							Default: "add_action_item",
+							Default:  "add_action_item",
 							ValidateFunc: validation.StringInSlice([]string{
 								"add_action_item",
 							}, false),
 						},
 						"assigned_to_user_id": &schema.Schema{
 							Description: "The user id this action item is assigned to",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 						"priority": &schema.Schema{
 							Description: "The action item priority.. Value must be one of `low`, `medium`, `high`.",
-							Type: schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 							ValidateFunc: validation.StringInSlice([]string{
 								"low",
-"medium",
-"high",
+								"medium",
+								"high",
 							}, false),
 						},
 						"kind": &schema.Schema{
 							Description: "The action item kind.",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 						"summary": &schema.Schema{
 							Description: "The action item summary.",
-							Type: schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 						},
 						"description": &schema.Schema{
 							Description: "The action item description.",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 						"status": &schema.Schema{
 							Description: "The action item status.. Value must be one of `open`, `in_progress`, `cancelled`, `done`.",
-							Type: schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 							ValidateFunc: validation.StringInSlice([]string{
 								"open",
-"in_progress",
-"cancelled",
-"done",
+								"in_progress",
+								"cancelled",
+								"done",
 							}, false),
 						},
 						"post_to_incident_timeline": &schema.Schema{
 							Description: "",
-							Type: schema.TypeBool,
-							Optional: true,
+							Type:        schema.TypeBool,
+							Optional:    true,
 						},
 						"post_to_slack_channels": &schema.Schema{
 							Description: "",
-							Type: schema.TypeList,
-							Optional: true,
+							Type:        schema.TypeList,
+							Optional:    true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"id": &schema.Schema{
-										Type: schema.TypeString,
+										Type:     schema.TypeString,
 										Required: true,
 									},
 									"name": &schema.Schema{
-										Type: schema.TypeString,
+										Type:     schema.TypeString,
 										Required: true,
 									},
 								},
@@ -135,7 +135,7 @@ func resourceWorkflowTaskAddActionItemCreate(ctx context.Context, d *schema.Reso
 
 	s := &client.WorkflowTask{
 		WorkflowId: workflowId,
-		Position: position,
+		Position:   position,
 		TaskParams: taskParams,
 	}
 
@@ -186,7 +186,7 @@ func resourceWorkflowTaskAddActionItemUpdate(ctx context.Context, d *schema.Reso
 
 	s := &client.WorkflowTask{
 		WorkflowId: workflowId,
-		Position: position,
+		Position:   position,
 		TaskParams: taskParams,
 	}
 

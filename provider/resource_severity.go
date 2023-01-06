@@ -7,74 +7,63 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
-	
 )
 
-func resourceSeverity() *schema.Resource{
+func resourceSeverity() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceSeverityCreate,
-		ReadContext: resourceSeverityRead,
+		ReadContext:   resourceSeverityRead,
 		UpdateContext: resourceSeverityUpdate,
 		DeleteContext: resourceSeverityDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 		Schema: map[string]*schema.Schema{
-			
+
 			"name": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The name of the severity",
-				
 			},
-			
 
 			"slug": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The slug of the severity",
-				
 			},
-			
 
 			"description": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The description of the severity",
-				
 			},
-			
 
 			"severity": &schema.Schema{
-				Type: schema.TypeString,
-				Default: "critical",
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Default:     "critical",
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The severity of the severity. Value must be one of `critical`, `high`, `medium`, `low`.",
-				
 			},
-			
 
 			"color": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "",
-				
 			},
-			
 		},
 	}
 }
@@ -86,21 +75,21 @@ func resourceSeverityCreate(ctx context.Context, d *schema.ResourceData, meta in
 
 	s := &client.Severity{}
 
-	  if value, ok := d.GetOkExists("name"); ok {
-				s.Name = value.(string)
-			}
-    if value, ok := d.GetOkExists("slug"); ok {
-				s.Slug = value.(string)
-			}
-    if value, ok := d.GetOkExists("description"); ok {
-				s.Description = value.(string)
-			}
-    if value, ok := d.GetOkExists("severity"); ok {
-				s.Severity = value.(string)
-			}
-    if value, ok := d.GetOkExists("color"); ok {
-				s.Color = value.(string)
-			}
+	if value, ok := d.GetOkExists("name"); ok {
+		s.Name = value.(string)
+	}
+	if value, ok := d.GetOkExists("slug"); ok {
+		s.Slug = value.(string)
+	}
+	if value, ok := d.GetOkExists("description"); ok {
+		s.Description = value.(string)
+	}
+	if value, ok := d.GetOkExists("severity"); ok {
+		s.Severity = value.(string)
+	}
+	if value, ok := d.GetOkExists("color"); ok {
+		s.Color = value.(string)
+	}
 
 	res, err := c.CreateSeverity(s)
 	if err != nil {
@@ -131,10 +120,10 @@ func resourceSeverityRead(ctx context.Context, d *schema.ResourceData, meta inte
 	}
 
 	d.Set("name", item.Name)
-  d.Set("slug", item.Slug)
-  d.Set("description", item.Description)
-  d.Set("severity", item.Severity)
-  d.Set("color", item.Color)
+	d.Set("slug", item.Slug)
+	d.Set("description", item.Description)
+	d.Set("severity", item.Severity)
+	d.Set("color", item.Color)
 
 	return nil
 }
@@ -145,21 +134,21 @@ func resourceSeverityUpdate(ctx context.Context, d *schema.ResourceData, meta in
 
 	s := &client.Severity{}
 
-	  if d.HasChange("name") {
-				s.Name = d.Get("name").(string)
-			}
-    if d.HasChange("slug") {
-				s.Slug = d.Get("slug").(string)
-			}
-    if d.HasChange("description") {
-				s.Description = d.Get("description").(string)
-			}
-    if d.HasChange("severity") {
-				s.Severity = d.Get("severity").(string)
-			}
-    if d.HasChange("color") {
-				s.Color = d.Get("color").(string)
-			}
+	if d.HasChange("name") {
+		s.Name = d.Get("name").(string)
+	}
+	if d.HasChange("slug") {
+		s.Slug = d.Get("slug").(string)
+	}
+	if d.HasChange("description") {
+		s.Description = d.Get("description").(string)
+	}
+	if d.HasChange("severity") {
+		s.Severity = d.Get("severity").(string)
+	}
+	if d.HasChange("color") {
+		s.Color = d.Get("color").(string)
+	}
 
 	_, err := c.UpdateSeverity(d.Id(), s)
 	if err != nil {

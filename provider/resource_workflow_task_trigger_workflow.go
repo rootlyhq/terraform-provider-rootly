@@ -5,7 +5,7 @@ package provider
 import (
 	"context"
 	"fmt"
-	
+
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -27,56 +27,56 @@ func resourceWorkflowTaskTriggerWorkflow() *schema.Resource {
 
 		Schema: map[string]*schema.Schema{
 			"workflow_id": {
-				Description:  "The ID of the parent workflow",
-				Type:         schema.TypeString,
-				Required:     true,
-				ForceNew:     true,
+				Description: "The ID of the parent workflow",
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
 			},
 			"position": {
-				Description:  "The position of the workflow task (1 being top of list)",
-				Type:         schema.TypeInt,
-				Optional:     true,
-				Computed:     true,
+				Description: "The position of the workflow task (1 being top of list)",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type: schema.TypeList,
-				Required: true,
-				MinItems: 1,
-				MaxItems: 1,
+				Type:        schema.TypeList,
+				Required:    true,
+				MinItems:    1,
+				MaxItems:    1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"task_type": &schema.Schema{
-							Type: schema.TypeString,
+							Type:     schema.TypeString,
 							Optional: true,
-							Default: "trigger_workflow",
+							Default:  "trigger_workflow",
 							ValidateFunc: validation.StringInSlice([]string{
 								"trigger_workflow",
 							}, false),
 						},
 						"kind": &schema.Schema{
 							Description: "Value must be one of `simple`, `incident`, `post_mortem`, `action_item`, `pulse`, `alert`.",
-							Type: schema.TypeString,
-							Optional: true,
-							Default: "simple",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "simple",
 							ValidateFunc: validation.StringInSlice([]string{
 								"simple",
-"incident",
-"post_mortem",
-"action_item",
-"pulse",
-"alert",
+								"incident",
+								"post_mortem",
+								"action_item",
+								"pulse",
+								"alert",
 							}, false),
 						},
 						"resource": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. ",
-							Type: schema.TypeMap,
-							Optional: true,
+							Type:        schema.TypeMap,
+							Optional:    true,
 						},
 						"workflow": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. ",
-							Type: schema.TypeMap,
-							Required: true,
+							Type:        schema.TypeMap,
+							Required:    true,
 						},
 					},
 				},
@@ -96,7 +96,7 @@ func resourceWorkflowTaskTriggerWorkflowCreate(ctx context.Context, d *schema.Re
 
 	s := &client.WorkflowTask{
 		WorkflowId: workflowId,
-		Position: position,
+		Position:   position,
 		TaskParams: taskParams,
 	}
 
@@ -147,7 +147,7 @@ func resourceWorkflowTaskTriggerWorkflowUpdate(ctx context.Context, d *schema.Re
 
 	s := &client.WorkflowTask{
 		WorkflowId: workflowId,
-		Position: position,
+		Position:   position,
 		TaskParams: taskParams,
 	}
 

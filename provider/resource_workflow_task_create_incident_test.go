@@ -10,7 +10,7 @@ import (
 
 func TestAccResourceWorkflowTaskCreateIncident(t *testing.T) {
 	resource.UnitTest(t, resource.TestCase{
-		PreCheck:          func() {
+		PreCheck: func() {
 			testAccPreCheck(t)
 		},
 		ProviderFactories: providerFactories,

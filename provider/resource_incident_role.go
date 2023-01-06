@@ -7,63 +7,54 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
-	
 )
 
-func resourceIncidentRole() *schema.Resource{
+func resourceIncidentRole() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceIncidentRoleCreate,
-		ReadContext: resourceIncidentRoleRead,
+		ReadContext:   resourceIncidentRoleRead,
 		UpdateContext: resourceIncidentRoleUpdate,
 		DeleteContext: resourceIncidentRoleDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 		Schema: map[string]*schema.Schema{
-			
+
 			"name": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The name of the incident role",
-				
 			},
-			
 
 			"slug": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The slug of the incident role",
-				
 			},
-			
 
 			"summary": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The summary of the incident role",
-				
 			},
-			
 
 			"description": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The description of the incident role",
-				
 			},
-			
 		},
 	}
 }
@@ -75,18 +66,18 @@ func resourceIncidentRoleCreate(ctx context.Context, d *schema.ResourceData, met
 
 	s := &client.IncidentRole{}
 
-	  if value, ok := d.GetOkExists("name"); ok {
-				s.Name = value.(string)
-			}
-    if value, ok := d.GetOkExists("slug"); ok {
-				s.Slug = value.(string)
-			}
-    if value, ok := d.GetOkExists("summary"); ok {
-				s.Summary = value.(string)
-			}
-    if value, ok := d.GetOkExists("description"); ok {
-				s.Description = value.(string)
-			}
+	if value, ok := d.GetOkExists("name"); ok {
+		s.Name = value.(string)
+	}
+	if value, ok := d.GetOkExists("slug"); ok {
+		s.Slug = value.(string)
+	}
+	if value, ok := d.GetOkExists("summary"); ok {
+		s.Summary = value.(string)
+	}
+	if value, ok := d.GetOkExists("description"); ok {
+		s.Description = value.(string)
+	}
 
 	res, err := c.CreateIncidentRole(s)
 	if err != nil {
@@ -117,9 +108,9 @@ func resourceIncidentRoleRead(ctx context.Context, d *schema.ResourceData, meta 
 	}
 
 	d.Set("name", item.Name)
-  d.Set("slug", item.Slug)
-  d.Set("summary", item.Summary)
-  d.Set("description", item.Description)
+	d.Set("slug", item.Slug)
+	d.Set("summary", item.Summary)
+	d.Set("description", item.Description)
 
 	return nil
 }
@@ -130,18 +121,18 @@ func resourceIncidentRoleUpdate(ctx context.Context, d *schema.ResourceData, met
 
 	s := &client.IncidentRole{}
 
-	  if d.HasChange("name") {
-				s.Name = d.Get("name").(string)
-			}
-    if d.HasChange("slug") {
-				s.Slug = d.Get("slug").(string)
-			}
-    if d.HasChange("summary") {
-				s.Summary = d.Get("summary").(string)
-			}
-    if d.HasChange("description") {
-				s.Description = d.Get("description").(string)
-			}
+	if d.HasChange("name") {
+		s.Name = d.Get("name").(string)
+	}
+	if d.HasChange("slug") {
+		s.Slug = d.Get("slug").(string)
+	}
+	if d.HasChange("summary") {
+		s.Summary = d.Get("summary").(string)
+	}
+	if d.HasChange("description") {
+		s.Description = d.Get("description").(string)
+	}
 
 	_, err := c.UpdateIncidentRole(d.Id(), s)
 	if err != nil {

@@ -10,109 +10,100 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
-func resourceCustomField() *schema.Resource{
+func resourceCustomField() *schema.Resource {
 	return &schema.Resource{
-		Description: "DEPRECATED: Please use `rootly_form_field` resource instead.",
+		Description:        "DEPRECATED: Please use `rootly_form_field` resource instead.",
 		DeprecationMessage: "Please use `rootly_form_field` resource instead.",
-		CreateContext: resourceCustomFieldCreate,
-		ReadContext: resourceCustomFieldRead,
-		UpdateContext: resourceCustomFieldUpdate,
-		DeleteContext: resourceCustomFieldDelete,
+		CreateContext:      resourceCustomFieldCreate,
+		ReadContext:        resourceCustomFieldRead,
+		UpdateContext:      resourceCustomFieldUpdate,
+		DeleteContext:      resourceCustomFieldDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 		Schema: map[string]*schema.Schema{
-			
+
 			"label": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The name of the custom_field",
 			},
-			
 
 			"kind": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The kind of the custom_field",
 			},
-			
 
-				"enabled": &schema.Schema{
-					Type: schema.TypeBool,
-					Default: true,
-					Optional: true,
-				},
-				
+			"enabled": &schema.Schema{
+				Type:     schema.TypeBool,
+				Default:  true,
+				Optional: true,
+			},
 
 			"slug": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The slug of the custom_field",
 			},
-			
 
 			"description": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The description of the custom_field",
 			},
-			
 
-				"shown": &schema.Schema{
-					Type: schema.TypeList,
-					Elem: &schema.Schema{
-						Type: schema.TypeString,
-					},
-					Computed: true,
-					Required: false,
-					Optional: true,
-					Description: "",
+			"shown": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
 				},
-				
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "",
+			},
 
-				"required": &schema.Schema{
-					Type: schema.TypeList,
-					Elem: &schema.Schema{
-						Type: schema.TypeString,
-					},
-					Computed: true,
-					Required: false,
-					Optional: true,
-					Description: "",
+			"required": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
 				},
-				
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "",
+			},
 
 			"default": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The default value for text field kinds.",
 			},
-			
 
 			"position": &schema.Schema{
-				Type: schema.TypeInt,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The position of the custom_field",
 			},
-			
 		},
 	}
 }
@@ -124,33 +115,33 @@ func resourceCustomFieldCreate(ctx context.Context, d *schema.ResourceData, meta
 
 	s := &client.CustomField{}
 
-	  if value, ok := d.GetOkExists("label"); ok {
-				s.Label = value.(string)
-			}
-    if value, ok := d.GetOkExists("kind"); ok {
-				s.Kind = value.(string)
-			}
-    if value, ok := d.GetOkExists("enabled"); ok {
-				s.Enabled = tools.Bool(value.(bool))
-			}
-    if value, ok := d.GetOkExists("slug"); ok {
-				s.Slug = value.(string)
-			}
-    if value, ok := d.GetOkExists("description"); ok {
-				s.Description = value.(string)
-			}
-    if value, ok := d.GetOkExists("shown"); ok {
-				s.Shown = value.([]interface{})
-			}
-    if value, ok := d.GetOkExists("required"); ok {
-				s.Required = value.([]interface{})
-			}
-    if value, ok := d.GetOkExists("default"); ok {
-				s.Default = value.(string)
-			}
-    if value, ok := d.GetOkExists("position"); ok {
-				s.Position = value.(int)
-			}
+	if value, ok := d.GetOkExists("label"); ok {
+		s.Label = value.(string)
+	}
+	if value, ok := d.GetOkExists("kind"); ok {
+		s.Kind = value.(string)
+	}
+	if value, ok := d.GetOkExists("enabled"); ok {
+		s.Enabled = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("slug"); ok {
+		s.Slug = value.(string)
+	}
+	if value, ok := d.GetOkExists("description"); ok {
+		s.Description = value.(string)
+	}
+	if value, ok := d.GetOkExists("shown"); ok {
+		s.Shown = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("required"); ok {
+		s.Required = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("default"); ok {
+		s.Default = value.(string)
+	}
+	if value, ok := d.GetOkExists("position"); ok {
+		s.Position = value.(int)
+	}
 
 	res, err := c.CreateCustomField(s)
 	if err != nil {
@@ -181,14 +172,14 @@ func resourceCustomFieldRead(ctx context.Context, d *schema.ResourceData, meta i
 	}
 
 	d.Set("label", item.Label)
-  d.Set("kind", item.Kind)
-  d.Set("enabled", item.Enabled)
-  d.Set("slug", item.Slug)
-  d.Set("description", item.Description)
-  d.Set("shown", item.Shown)
-  d.Set("required", item.Required)
-  d.Set("default", item.Default)
-  d.Set("position", item.Position)
+	d.Set("kind", item.Kind)
+	d.Set("enabled", item.Enabled)
+	d.Set("slug", item.Slug)
+	d.Set("description", item.Description)
+	d.Set("shown", item.Shown)
+	d.Set("required", item.Required)
+	d.Set("default", item.Default)
+	d.Set("position", item.Position)
 
 	return nil
 }
@@ -199,33 +190,33 @@ func resourceCustomFieldUpdate(ctx context.Context, d *schema.ResourceData, meta
 
 	s := &client.CustomField{}
 
-	  if d.HasChange("label") {
-				s.Label = d.Get("label").(string)
-			}
-    if d.HasChange("kind") {
-				s.Kind = d.Get("kind").(string)
-			}
-    if d.HasChange("enabled") {
-				s.Enabled = tools.Bool(d.Get("enabled").(bool))
-			}
-    if d.HasChange("slug") {
-				s.Slug = d.Get("slug").(string)
-			}
-    if d.HasChange("description") {
-				s.Description = d.Get("description").(string)
-			}
-    if d.HasChange("shown") {
-				s.Shown = d.Get("shown").([]interface{})
-			}
-    if d.HasChange("required") {
-				s.Required = d.Get("required").([]interface{})
-			}
-    if d.HasChange("default") {
-				s.Default = d.Get("default").(string)
-			}
-    if d.HasChange("position") {
-				s.Position = d.Get("position").(int)
-			}
+	if d.HasChange("label") {
+		s.Label = d.Get("label").(string)
+	}
+	if d.HasChange("kind") {
+		s.Kind = d.Get("kind").(string)
+	}
+	if d.HasChange("enabled") {
+		s.Enabled = tools.Bool(d.Get("enabled").(bool))
+	}
+	if d.HasChange("slug") {
+		s.Slug = d.Get("slug").(string)
+	}
+	if d.HasChange("description") {
+		s.Description = d.Get("description").(string)
+	}
+	if d.HasChange("shown") {
+		s.Shown = d.Get("shown").([]interface{})
+	}
+	if d.HasChange("required") {
+		s.Required = d.Get("required").([]interface{})
+	}
+	if d.HasChange("default") {
+		s.Default = d.Get("default").(string)
+	}
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
+	}
 
 	_, err := c.UpdateCustomField(d.Id(), s)
 	if err != nil {

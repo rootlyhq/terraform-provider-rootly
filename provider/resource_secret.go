@@ -7,45 +7,40 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
-	
 )
 
-func resourceSecret() *schema.Resource{
+func resourceSecret() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceSecretCreate,
-		ReadContext: resourceSecretRead,
+		ReadContext:   resourceSecretRead,
 		UpdateContext: resourceSecretUpdate,
 		DeleteContext: resourceSecretDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 		Schema: map[string]*schema.Schema{
-			
+
 			"name": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The name of the secret",
-				
 			},
-			
 
 			"secret": &schema.Schema{
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: true,
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    true,
 				Description: "The redacted secret",
-				
-		DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-			return true // suppress diffing for this field, since it will always be different than what is specified in configuration.
-		},
-	
+
+				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+					return true // suppress diffing for this field, since it will always be different than what is specified in configuration.
+				},
 			},
-			
 		},
 	}
 }
@@ -57,12 +52,12 @@ func resourceSecretCreate(ctx context.Context, d *schema.ResourceData, meta inte
 
 	s := &client.Secret{}
 
-	  if value, ok := d.GetOkExists("name"); ok {
-				s.Name = value.(string)
-			}
-    if value, ok := d.GetOkExists("secret"); ok {
-				s.Secret = value.(string)
-			}
+	if value, ok := d.GetOkExists("name"); ok {
+		s.Name = value.(string)
+	}
+	if value, ok := d.GetOkExists("secret"); ok {
+		s.Secret = value.(string)
+	}
 
 	res, err := c.CreateSecret(s)
 	if err != nil {
@@ -93,7 +88,7 @@ func resourceSecretRead(ctx context.Context, d *schema.ResourceData, meta interf
 	}
 
 	d.Set("name", item.Name)
-  d.Set("secret", item.Secret)
+	d.Set("secret", item.Secret)
 
 	return nil
 }
@@ -104,12 +99,12 @@ func resourceSecretUpdate(ctx context.Context, d *schema.ResourceData, meta inte
 
 	s := &client.Secret{}
 
-	  if d.HasChange("name") {
-				s.Name = d.Get("name").(string)
-			}
-    if d.HasChange("secret") {
-				s.Secret = d.Get("secret").(string)
-			}
+	if d.HasChange("name") {
+		s.Name = d.Get("name").(string)
+	}
+	if d.HasChange("secret") {
+		s.Secret = d.Get("secret").(string)
+	}
 
 	_, err := c.UpdateSecret(d.Id(), s)
 	if err != nil {

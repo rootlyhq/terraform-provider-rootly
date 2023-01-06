@@ -1,10 +1,9 @@
 package provider
 
 import (
-	"reflect"
 	"github.com/buxizhizhoum/inflection"
+	"reflect"
 )
-
 
 func structToLowerFirstMap(in interface{}) map[string]interface{} {
 	v := reflect.ValueOf(in)
@@ -16,6 +15,6 @@ func structToLowerFirstMap(in interface{}) map[string]interface{} {
 		name := vType.Field(i).Name
 		result[inflection.Underscore(name)] = v.Field(i).Interface()
 	}
-	
-	return result;
+
+	return result
 }

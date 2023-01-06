@@ -36,62 +36,62 @@ func resourceDashboardPanel() *schema.Resource {
 			},
 			"params": {
 				Description: "The params JSON of the dashboard_panel. See rootly API docs for schema.",
-				Type: schema.TypeList,
-				MaxItems: 1,
-				Required: true,
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Required:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"display": &schema.Schema{
-							Type: schema.TypeString,
+							Type:     schema.TypeString,
 							Required: true,
 						},
 						"datasets": &schema.Schema{
-							Type: schema.TypeList,
+							Type:     schema.TypeList,
 							Optional: true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"collection": &schema.Schema{
-										Type: schema.TypeString,
+										Type:     schema.TypeString,
 										Required: true,
 									},
 									"name": &schema.Schema{
-										Type: schema.TypeString,
+										Type:     schema.TypeString,
 										Optional: true,
 										Computed: true,
 									},
 									"group_by": &schema.Schema{
-										Type: schema.TypeString,
+										Type:     schema.TypeString,
 										Optional: true,
 										Computed: true,
 									},
 									"filter": &schema.Schema{
-										Type: schema.TypeList,
+										Type:     schema.TypeList,
 										Optional: true,
 										Elem: &schema.Resource{
 											Schema: map[string]*schema.Schema{
 												"operation": &schema.Schema{
-													Type: schema.TypeString,
+													Type:     schema.TypeString,
 													Required: true,
 												},
 												"rules": &schema.Schema{
-													Type: schema.TypeList,
+													Type:     schema.TypeList,
 													Optional: true,
 													Elem: &schema.Resource{
 														Schema: map[string]*schema.Schema{
 															"operation": &schema.Schema{
-																Type: schema.TypeString,
+																Type:     schema.TypeString,
 																Required: true,
 															},
 															"condition": &schema.Schema{
-																Type: schema.TypeString,
+																Type:     schema.TypeString,
 																Required: true,
 															},
 															"key": &schema.Schema{
-																Type: schema.TypeString,
+																Type:     schema.TypeString,
 																Required: true,
 															},
 															"value": &schema.Schema{
-																Type: schema.TypeString,
+																Type:     schema.TypeString,
 																Required: true,
 															},
 														},
@@ -101,21 +101,21 @@ func resourceDashboardPanel() *schema.Resource {
 										},
 									},
 									"aggregate": &schema.Schema{
-										Type: schema.TypeList,
+										Type:     schema.TypeList,
 										Optional: true,
 										MaxItems: 1,
 										Elem: &schema.Resource{
 											Schema: map[string]*schema.Schema{
 												"cumulative": &schema.Schema{
-													Type: schema.TypeBool,
+													Type:     schema.TypeBool,
 													Required: true,
 												},
 												"key": &schema.Schema{
-													Type: schema.TypeString,
+													Type:     schema.TypeString,
 													Required: true,
 												},
 												"operation": &schema.Schema{
-													Type: schema.TypeString,
+													Type:     schema.TypeString,
 													Required: true,
 												},
 											},
