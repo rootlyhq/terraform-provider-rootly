@@ -205,7 +205,12 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 	const optional = (requiredFields || []).indexOf(name) === -1 || schema.enum ? "true" : "false"
 	const required = (requiredFields || []).indexOf(name) === -1 || schema.enum ? "false" : "true"
 	const description = annotatedDescription(schema)
-	const forceNew = name === pathIdField ? "true" : "false"
+	const forceNew = name === pathIdField || schema.write_only ? "true" : "false"
+	const skipDiff = schema.write_only ? `
+		DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+			return true // suppress diffing for this field, since it will always be different than what is specified in configuration.
+		},
+	` : ''
 	switch (schema.type) {
 		case 'string':
 			return `
@@ -216,6 +221,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 				Optional: ${optional},
 				ForceNew: ${forceNew},
 				Description: "${description}",
+				${skipDiff}
 			},
 			`
 		case 'integer':
@@ -228,6 +234,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 				Optional: ${optional},
 				ForceNew: ${forceNew},
 				Description: "${description}",
+				${skipDiff}
 			},
 			`
 		case 'boolean':
@@ -237,6 +244,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 					Type: schema.TypeBool,
 					Default: true,
 					Optional: true,
+					${skipDiff}
 				},
 				`
 			}
@@ -247,6 +255,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 				Required: ${required},
 				Optional: ${optional},
 				Description: "${description}",
+				${skipDiff}
 			},
 			`
 		case 'array':
