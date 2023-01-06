@@ -686,6 +686,29 @@ const (
 	CreatePagerdutyStatusUpdate CreatePagerdutyStatusUpdateParamsTaskType = "create_pagerduty_status_update"
 )
 
+// Defines values for CreatePagertreeAlertTaskParamsSeverity.
+const (
+	CreatePagertreeAlertTaskParamsSeverityAuto CreatePagertreeAlertTaskParamsSeverity = "auto"
+	CreatePagertreeAlertTaskParamsSeveritySEV1 CreatePagertreeAlertTaskParamsSeverity = "SEV-1"
+	CreatePagertreeAlertTaskParamsSeveritySEV2 CreatePagertreeAlertTaskParamsSeverity = "SEV-2"
+	CreatePagertreeAlertTaskParamsSeveritySEV3 CreatePagertreeAlertTaskParamsSeverity = "SEV-3"
+	CreatePagertreeAlertTaskParamsSeveritySEV4 CreatePagertreeAlertTaskParamsSeverity = "SEV-4"
+)
+
+// Defines values for CreatePagertreeAlertTaskParamsTaskType.
+const (
+	CreatePagertreeAlert CreatePagertreeAlertTaskParamsTaskType = "create_pagertree_alert"
+)
+
+// Defines values for CreatePagertreeAlertTaskParamsUrgency.
+const (
+	CreatePagertreeAlertTaskParamsUrgencyAuto     CreatePagertreeAlertTaskParamsUrgency = "auto"
+	CreatePagertreeAlertTaskParamsUrgencyCritical CreatePagertreeAlertTaskParamsUrgency = "critical"
+	CreatePagertreeAlertTaskParamsUrgencyHigh     CreatePagertreeAlertTaskParamsUrgency = "high"
+	CreatePagertreeAlertTaskParamsUrgencyLow      CreatePagertreeAlertTaskParamsUrgency = "low"
+	CreatePagertreeAlertTaskParamsUrgencyMedium   CreatePagertreeAlertTaskParamsUrgency = "medium"
+)
+
 // Defines values for CreateQuipPageTaskParamsTaskType.
 const (
 	CreateQuipPageTaskParamsTaskTypeCreateGoogleDocsPage CreateQuipPageTaskParamsTaskType = "create_google_docs_page"
@@ -1400,10 +1423,22 @@ const (
 	IncidentListDataTypeIncidents IncidentListDataType = "incidents"
 )
 
+// Defines values for IncidentPostMortemShowTimelineOrder.
+const (
+	IncidentPostMortemShowTimelineOrderAsc  IncidentPostMortemShowTimelineOrder = "asc"
+	IncidentPostMortemShowTimelineOrderDesc IncidentPostMortemShowTimelineOrder = "desc"
+)
+
 // Defines values for IncidentPostMortemStatus.
 const (
 	IncidentPostMortemStatusDraft     IncidentPostMortemStatus = "draft"
 	IncidentPostMortemStatusPublished IncidentPostMortemStatus = "published"
+)
+
+// Defines values for IncidentPostMortemListDataAttributesShowTimelineOrder.
+const (
+	IncidentPostMortemListDataAttributesShowTimelineOrderAsc  IncidentPostMortemListDataAttributesShowTimelineOrder = "asc"
+	IncidentPostMortemListDataAttributesShowTimelineOrderDesc IncidentPostMortemListDataAttributesShowTimelineOrder = "desc"
 )
 
 // Defines values for IncidentPostMortemListDataAttributesStatus.
@@ -1415,6 +1450,12 @@ const (
 // Defines values for IncidentPostMortemListDataType.
 const (
 	IncidentPostMortemListDataTypeIncidentPostMortems IncidentPostMortemListDataType = "incident_post_mortems"
+)
+
+// Defines values for IncidentPostMortemResponseDataAttributesShowTimelineOrder.
+const (
+	Asc  IncidentPostMortemResponseDataAttributesShowTimelineOrder = "asc"
+	Desc IncidentPostMortemResponseDataAttributesShowTimelineOrder = "desc"
 )
 
 // Defines values for IncidentPostMortemResponseDataAttributesStatus.
@@ -2054,6 +2095,11 @@ const (
 	NewPulseDataTypePulses NewPulseDataType = "pulses"
 )
 
+// Defines values for NewSecretDataType.
+const (
+	NewSecretDataTypeSecrets NewSecretDataType = "secrets"
+)
+
 // Defines values for NewServiceDataAttributesShowUptimeLastDays.
 const (
 	NewServiceDataAttributesShowUptimeLastDaysN30 NewServiceDataAttributesShowUptimeLastDays = 30
@@ -2099,6 +2145,11 @@ const (
 // Defines values for NewWebhooksEndpointDataAttributesEventTypes.
 const (
 	NewWebhooksEndpointDataAttributesEventTypesAlertCreated                NewWebhooksEndpointDataAttributesEventTypes = "alert.created"
+	NewWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunCanceled   NewWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.canceled"
+	NewWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunCompleted  NewWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.completed"
+	NewWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunFailed     NewWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.failed"
+	NewWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunQueued     NewWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.queued"
+	NewWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunStarted    NewWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.started"
 	NewWebhooksEndpointDataAttributesEventTypesIncidentCancelled           NewWebhooksEndpointDataAttributesEventTypes = "incident.cancelled"
 	NewWebhooksEndpointDataAttributesEventTypesIncidentCreated             NewWebhooksEndpointDataAttributesEventTypes = "incident.created"
 	NewWebhooksEndpointDataAttributesEventTypesIncidentDeleted             NewWebhooksEndpointDataAttributesEventTypes = "incident.deleted"
@@ -2360,6 +2411,11 @@ const (
 	ResolveIncidentDataTypeIncidents ResolveIncidentDataType = "incidents"
 )
 
+// Defines values for RestartIncidentDataType.
+const (
+	RestartIncidentDataTypeIncidents RestartIncidentDataType = "incidents"
+)
+
 // Defines values for RunCommandHerokuTaskParamsSize.
 const (
 	Standard1X RunCommandHerokuTaskParamsSize = "standard-1X"
@@ -2369,6 +2425,16 @@ const (
 // Defines values for RunCommandHerokuTaskParamsTaskType.
 const (
 	RunCommandHeroku RunCommandHerokuTaskParamsTaskType = "run_command_heroku"
+)
+
+// Defines values for SecretListDataType.
+const (
+	SecretListDataTypeSecrets SecretListDataType = "secrets"
+)
+
+// Defines values for SecretResponseDataType.
+const (
+	SecretResponseDataTypeSecrets SecretResponseDataType = "secrets"
 )
 
 // Defines values for SendDashboardReportTaskParamsTaskType.
@@ -2780,7 +2846,7 @@ const (
 
 // Defines values for UpdateIncidentDataType.
 const (
-	Incidents UpdateIncidentDataType = "incidents"
+	UpdateIncidentDataTypeIncidents UpdateIncidentDataType = "incidents"
 )
 
 // Defines values for UpdateIncidentActionItemDataAttributesKind.
@@ -2978,6 +3044,29 @@ const (
 	UpdatePagerdutyIncidentTaskParamsUrgencyLow  UpdatePagerdutyIncidentTaskParamsUrgency = "low"
 )
 
+// Defines values for UpdatePagertreeAlertTaskParamsSeverity.
+const (
+	UpdatePagertreeAlertTaskParamsSeverityAuto UpdatePagertreeAlertTaskParamsSeverity = "auto"
+	UpdatePagertreeAlertTaskParamsSeveritySEV1 UpdatePagertreeAlertTaskParamsSeverity = "SEV-1"
+	UpdatePagertreeAlertTaskParamsSeveritySEV2 UpdatePagertreeAlertTaskParamsSeverity = "SEV-2"
+	UpdatePagertreeAlertTaskParamsSeveritySEV3 UpdatePagertreeAlertTaskParamsSeverity = "SEV-3"
+	UpdatePagertreeAlertTaskParamsSeveritySEV4 UpdatePagertreeAlertTaskParamsSeverity = "SEV-4"
+)
+
+// Defines values for UpdatePagertreeAlertTaskParamsTaskType.
+const (
+	UpdatePagertreeAlert UpdatePagertreeAlertTaskParamsTaskType = "update_pagertree_alert"
+)
+
+// Defines values for UpdatePagertreeAlertTaskParamsUrgency.
+const (
+	UpdatePagertreeAlertTaskParamsUrgencyAuto     UpdatePagertreeAlertTaskParamsUrgency = "auto"
+	UpdatePagertreeAlertTaskParamsUrgencyCritical UpdatePagertreeAlertTaskParamsUrgency = "critical"
+	UpdatePagertreeAlertTaskParamsUrgencyHigh     UpdatePagertreeAlertTaskParamsUrgency = "high"
+	UpdatePagertreeAlertTaskParamsUrgencyLow      UpdatePagertreeAlertTaskParamsUrgency = "low"
+	UpdatePagertreeAlertTaskParamsUrgencyMedium   UpdatePagertreeAlertTaskParamsUrgency = "medium"
+)
+
 // Defines values for UpdatePlaybookDataType.
 const (
 	UpdatePlaybookDataTypePlaybooks UpdatePlaybookDataType = "playbooks"
@@ -2998,6 +3087,11 @@ const (
 	UpdatePulseDataTypePulses UpdatePulseDataType = "pulses"
 )
 
+// Defines values for UpdateSecretDataType.
+const (
+	UpdateSecretDataTypeSecrets UpdateSecretDataType = "secrets"
+)
+
 // Defines values for UpdateServiceDataType.
 const (
 	UpdateServiceDataTypeServices UpdateServiceDataType = "services"
@@ -3010,10 +3104,10 @@ const (
 
 // Defines values for UpdateSeverityDataAttributesSeverity.
 const (
-	Critical UpdateSeverityDataAttributesSeverity = "critical"
-	High     UpdateSeverityDataAttributesSeverity = "high"
-	Low      UpdateSeverityDataAttributesSeverity = "low"
-	Medium   UpdateSeverityDataAttributesSeverity = "medium"
+	UpdateSeverityDataAttributesSeverityCritical UpdateSeverityDataAttributesSeverity = "critical"
+	UpdateSeverityDataAttributesSeverityHigh     UpdateSeverityDataAttributesSeverity = "high"
+	UpdateSeverityDataAttributesSeverityLow      UpdateSeverityDataAttributesSeverity = "low"
+	UpdateSeverityDataAttributesSeverityMedium   UpdateSeverityDataAttributesSeverity = "medium"
 )
 
 // Defines values for UpdateSeverityDataType.
@@ -3073,9 +3167,9 @@ const (
 
 // Defines values for UpdateVictorOpsIncidentTaskParamsStatus.
 const (
-	UpdateVictorOpsIncidentTaskParamsStatusAck     UpdateVictorOpsIncidentTaskParamsStatus = "ack"
-	UpdateVictorOpsIncidentTaskParamsStatusAuto    UpdateVictorOpsIncidentTaskParamsStatus = "auto"
-	UpdateVictorOpsIncidentTaskParamsStatusResolve UpdateVictorOpsIncidentTaskParamsStatus = "resolve"
+	Ack     UpdateVictorOpsIncidentTaskParamsStatus = "ack"
+	Auto    UpdateVictorOpsIncidentTaskParamsStatus = "auto"
+	Resolve UpdateVictorOpsIncidentTaskParamsStatus = "resolve"
 )
 
 // Defines values for UpdateVictorOpsIncidentTaskParamsTaskType.
@@ -3086,6 +3180,11 @@ const (
 // Defines values for UpdateWebhooksEndpointDataAttributesEventTypes.
 const (
 	UpdateWebhooksEndpointDataAttributesEventTypesAlertCreated                UpdateWebhooksEndpointDataAttributesEventTypes = "alert.created"
+	UpdateWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunCanceled   UpdateWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.canceled"
+	UpdateWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunCompleted  UpdateWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.completed"
+	UpdateWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunFailed     UpdateWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.failed"
+	UpdateWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunQueued     UpdateWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.queued"
+	UpdateWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunStarted    UpdateWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.started"
 	UpdateWebhooksEndpointDataAttributesEventTypesIncidentCancelled           UpdateWebhooksEndpointDataAttributesEventTypes = "incident.cancelled"
 	UpdateWebhooksEndpointDataAttributesEventTypesIncidentCreated             UpdateWebhooksEndpointDataAttributesEventTypes = "incident.created"
 	UpdateWebhooksEndpointDataAttributesEventTypesIncidentDeleted             UpdateWebhooksEndpointDataAttributesEventTypes = "incident.deleted"
@@ -3189,6 +3288,11 @@ const (
 // Defines values for WebhooksEndpointEventTypes.
 const (
 	WebhooksEndpointEventTypesAlertCreated                WebhooksEndpointEventTypes = "alert.created"
+	WebhooksEndpointEventTypesGeniusWorkflowRunCanceled   WebhooksEndpointEventTypes = "genius_workflow_run.canceled"
+	WebhooksEndpointEventTypesGeniusWorkflowRunCompleted  WebhooksEndpointEventTypes = "genius_workflow_run.completed"
+	WebhooksEndpointEventTypesGeniusWorkflowRunFailed     WebhooksEndpointEventTypes = "genius_workflow_run.failed"
+	WebhooksEndpointEventTypesGeniusWorkflowRunQueued     WebhooksEndpointEventTypes = "genius_workflow_run.queued"
+	WebhooksEndpointEventTypesGeniusWorkflowRunStarted    WebhooksEndpointEventTypes = "genius_workflow_run.started"
 	WebhooksEndpointEventTypesIncidentCancelled           WebhooksEndpointEventTypes = "incident.cancelled"
 	WebhooksEndpointEventTypesIncidentCreated             WebhooksEndpointEventTypes = "incident.created"
 	WebhooksEndpointEventTypesIncidentDeleted             WebhooksEndpointEventTypes = "incident.deleted"
@@ -3210,6 +3314,11 @@ const (
 // Defines values for WebhooksEndpointListDataAttributesEventTypes.
 const (
 	WebhooksEndpointListDataAttributesEventTypesAlertCreated                WebhooksEndpointListDataAttributesEventTypes = "alert.created"
+	WebhooksEndpointListDataAttributesEventTypesGeniusWorkflowRunCanceled   WebhooksEndpointListDataAttributesEventTypes = "genius_workflow_run.canceled"
+	WebhooksEndpointListDataAttributesEventTypesGeniusWorkflowRunCompleted  WebhooksEndpointListDataAttributesEventTypes = "genius_workflow_run.completed"
+	WebhooksEndpointListDataAttributesEventTypesGeniusWorkflowRunFailed     WebhooksEndpointListDataAttributesEventTypes = "genius_workflow_run.failed"
+	WebhooksEndpointListDataAttributesEventTypesGeniusWorkflowRunQueued     WebhooksEndpointListDataAttributesEventTypes = "genius_workflow_run.queued"
+	WebhooksEndpointListDataAttributesEventTypesGeniusWorkflowRunStarted    WebhooksEndpointListDataAttributesEventTypes = "genius_workflow_run.started"
 	WebhooksEndpointListDataAttributesEventTypesIncidentCancelled           WebhooksEndpointListDataAttributesEventTypes = "incident.cancelled"
 	WebhooksEndpointListDataAttributesEventTypesIncidentCreated             WebhooksEndpointListDataAttributesEventTypes = "incident.created"
 	WebhooksEndpointListDataAttributesEventTypesIncidentDeleted             WebhooksEndpointListDataAttributesEventTypes = "incident.deleted"
@@ -3236,6 +3345,11 @@ const (
 // Defines values for WebhooksEndpointResponseDataAttributesEventTypes.
 const (
 	AlertCreated                WebhooksEndpointResponseDataAttributesEventTypes = "alert.created"
+	GeniusWorkflowRunCanceled   WebhooksEndpointResponseDataAttributesEventTypes = "genius_workflow_run.canceled"
+	GeniusWorkflowRunCompleted  WebhooksEndpointResponseDataAttributesEventTypes = "genius_workflow_run.completed"
+	GeniusWorkflowRunFailed     WebhooksEndpointResponseDataAttributesEventTypes = "genius_workflow_run.failed"
+	GeniusWorkflowRunQueued     WebhooksEndpointResponseDataAttributesEventTypes = "genius_workflow_run.queued"
+	GeniusWorkflowRunStarted    WebhooksEndpointResponseDataAttributesEventTypes = "genius_workflow_run.started"
 	IncidentCancelled           WebhooksEndpointResponseDataAttributesEventTypes = "incident.cancelled"
 	IncidentCreated             WebhooksEndpointResponseDataAttributesEventTypes = "incident.created"
 	IncidentDeleted             WebhooksEndpointResponseDataAttributesEventTypes = "incident.deleted"
@@ -4871,6 +4985,38 @@ type CreatePagerdutyStatusUpdateParams struct {
 // CreatePagerdutyStatusUpdateParamsTaskType defines model for CreatePagerdutyStatusUpdateParams.TaskType.
 type CreatePagerdutyStatusUpdateParamsTaskType string
 
+// CreatePagertreeAlertTaskParams defines model for create_pagertree_alert_task_params.
+type CreatePagertreeAlertTaskParams struct {
+	// Description of alert as text
+	Description *string `json:"description,omitempty"`
+
+	// Setting to true makes an alert a Pagertree incident.
+	Incident *bool                                   `json:"incident,omitempty"`
+	Severity *CreatePagertreeAlertTaskParamsSeverity `json:"severity,omitempty"`
+	TaskType *CreatePagertreeAlertTaskParamsTaskType `json:"task_type,omitempty"`
+	Teams    *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"teams,omitempty"`
+
+	// Title of alert as text
+	Title   *string                                `json:"title,omitempty"`
+	Urgency *CreatePagertreeAlertTaskParamsUrgency `json:"urgency,omitempty"`
+	Users   *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"users,omitempty"`
+}
+
+// CreatePagertreeAlertTaskParamsSeverity defines model for CreatePagertreeAlertTaskParams.Severity.
+type CreatePagertreeAlertTaskParamsSeverity string
+
+// CreatePagertreeAlertTaskParamsTaskType defines model for CreatePagertreeAlertTaskParams.TaskType.
+type CreatePagertreeAlertTaskParamsTaskType string
+
+// CreatePagertreeAlertTaskParamsUrgency defines model for CreatePagertreeAlertTaskParams.Urgency.
+type CreatePagertreeAlertTaskParamsUrgency string
+
 // CreateQuipPageTaskParams defines model for create_quip_page_task_params.
 type CreateQuipPageTaskParams struct {
 	// The page content
@@ -6208,6 +6354,12 @@ type Incident struct {
 	// Date of acknowledgment
 	AcknowledgedAt *string `json:"acknowledged_at"`
 
+	// Why was the incident cancelled?
+	CancellationMessage *string `json:"cancellation_message"`
+
+	// Date of cancellation
+	CancelledAt *string `json:"cancelled_at"`
+
 	// Date of creation
 	CreatedAt string `json:"created_at"`
 
@@ -6232,11 +6384,23 @@ type Incident struct {
 	// Date of mitigation
 	MitigatedAt *string `json:"mitigated_at"`
 
+	// How was the incident mitigated?
+	MitigationMessage *string `json:"mitigation_message"`
+
 	// Create an incident as private
 	Private *bool `json:"private"`
 
+	// How was the incident resolved?
+	ResolutionMessage *string `json:"resolution_message"`
+
 	// Date of resolution
 	ResolvedAt *string `json:"resolved_at"`
+
+	// Scheduled for
+	ScheduledFor *string `json:"scheduled_for"`
+
+	// Scheduled until
+	ScheduledUntil *string `json:"scheduled_until"`
 
 	// The Service ID's to attach to the incident
 	ServiceIds *[]string `json:"service_ids"`
@@ -6712,6 +6876,12 @@ type IncidentList struct {
 			// Date of acknowledgment
 			AcknowledgedAt *string `json:"acknowledged_at"`
 
+			// Why was the incident cancelled?
+			CancellationMessage *string `json:"cancellation_message"`
+
+			// Date of cancellation
+			CancelledAt *string `json:"cancelled_at"`
+
 			// Date of creation
 			CreatedAt string `json:"created_at"`
 
@@ -6736,11 +6906,23 @@ type IncidentList struct {
 			// Date of mitigation
 			MitigatedAt *string `json:"mitigated_at"`
 
+			// How was the incident mitigated?
+			MitigationMessage *string `json:"mitigation_message"`
+
 			// Create an incident as private
 			Private *bool `json:"private"`
 
+			// How was the incident resolved?
+			ResolutionMessage *string `json:"resolution_message"`
+
 			// Date of resolution
 			ResolvedAt *string `json:"resolved_at"`
+
+			// Scheduled for
+			ScheduledFor *string `json:"scheduled_for"`
+
+			// Scheduled until
+			ScheduledUntil *string `json:"scheduled_until"`
 
 			// The Service ID's to attach to the incident
 			ServiceIds *[]string `json:"service_ids"`
@@ -6815,6 +6997,9 @@ type IncidentPostMortem struct {
 	// Show workflow events in the timeline of the incident postmortem
 	ShowTimelineGenius *bool `json:"show_timeline_genius,omitempty"`
 
+	// The order of the incident postmortem timeline
+	ShowTimelineOrder *IncidentPostMortemShowTimelineOrder `json:"show_timeline_order,omitempty"`
+
 	// Show tasks in the timeline of the incident postmortem
 	ShowTimelineTasks *bool `json:"show_timeline_tasks,omitempty"`
 
@@ -6836,6 +7021,9 @@ type IncidentPostMortem struct {
 	// The url to the incident postmortem
 	Url *string `json:"url,omitempty"`
 }
+
+// The order of the incident postmortem timeline
+type IncidentPostMortemShowTimelineOrder string
 
 // The status of the incident postmortem
 type IncidentPostMortemStatus string
@@ -6877,6 +7065,9 @@ type IncidentPostMortemList struct {
 			// Show workflow events in the timeline of the incident postmortem
 			ShowTimelineGenius *bool `json:"show_timeline_genius,omitempty"`
 
+			// The order of the incident postmortem timeline
+			ShowTimelineOrder *IncidentPostMortemListDataAttributesShowTimelineOrder `json:"show_timeline_order,omitempty"`
+
 			// Show tasks in the timeline of the incident postmortem
 			ShowTimelineTasks *bool `json:"show_timeline_tasks,omitempty"`
 
@@ -6911,6 +7102,9 @@ type IncidentPostMortemList struct {
 		Self  string  `json:"self"`
 	} `json:"links"`
 }
+
+// The order of the incident postmortem timeline
+type IncidentPostMortemListDataAttributesShowTimelineOrder string
 
 // The status of the incident postmortem
 type IncidentPostMortemListDataAttributesStatus string
@@ -6955,6 +7149,9 @@ type IncidentPostMortemResponse struct {
 			// Show workflow events in the timeline of the incident postmortem
 			ShowTimelineGenius *bool `json:"show_timeline_genius,omitempty"`
 
+			// The order of the incident postmortem timeline
+			ShowTimelineOrder *IncidentPostMortemResponseDataAttributesShowTimelineOrder `json:"show_timeline_order,omitempty"`
+
 			// Show tasks in the timeline of the incident postmortem
 			ShowTimelineTasks *bool `json:"show_timeline_tasks,omitempty"`
 
@@ -6983,6 +7180,9 @@ type IncidentPostMortemResponse struct {
 	} `json:"data"`
 }
 
+// The order of the incident postmortem timeline
+type IncidentPostMortemResponseDataAttributesShowTimelineOrder string
+
 // The status of the incident postmortem
 type IncidentPostMortemResponseDataAttributesStatus string
 
@@ -6995,6 +7195,12 @@ type IncidentResponse struct {
 		Attributes struct {
 			// Date of acknowledgment
 			AcknowledgedAt *string `json:"acknowledged_at"`
+
+			// Why was the incident cancelled?
+			CancellationMessage *string `json:"cancellation_message"`
+
+			// Date of cancellation
+			CancelledAt *string `json:"cancelled_at"`
 
 			// Date of creation
 			CreatedAt string `json:"created_at"`
@@ -7020,11 +7226,23 @@ type IncidentResponse struct {
 			// Date of mitigation
 			MitigatedAt *string `json:"mitigated_at"`
 
+			// How was the incident mitigated?
+			MitigationMessage *string `json:"mitigation_message"`
+
 			// Create an incident as private
 			Private *bool `json:"private"`
 
+			// How was the incident resolved?
+			ResolutionMessage *string `json:"resolution_message"`
+
 			// Date of resolution
 			ResolvedAt *string `json:"resolved_at"`
+
+			// Scheduled for
+			ScheduledFor *string `json:"scheduled_for"`
+
+			// Scheduled until
+			ScheduledUntil *string `json:"scheduled_until"`
 
 			// The Service ID's to attach to the incident
 			ServiceIds *[]string `json:"service_ids"`
@@ -8325,6 +8543,23 @@ type NewPulse struct {
 // NewPulseDataType defines model for NewPulse.Data.Type.
 type NewPulseDataType string
 
+// NewSecret defines model for new_secret.
+type NewSecret struct {
+	Data struct {
+		Attributes struct {
+			// The name of the secret
+			Name string `json:"name"`
+
+			// The secret
+			Secret string `json:"secret"`
+		} `json:"attributes"`
+		Type NewSecretDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewSecretDataType defines model for NewSecret.Data.Type.
+type NewSecretDataType string
+
 // NewService defines model for new_service.
 type NewService struct {
 	Data struct {
@@ -9517,6 +9752,17 @@ type ResolveIncident struct {
 // ResolveIncidentDataType defines model for ResolveIncident.Data.Type.
 type ResolveIncidentDataType string
 
+// RestartIncident defines model for restart_incident.
+type RestartIncident struct {
+	Data struct {
+		Attributes *map[string]interface{} `json:"attributes,omitempty"`
+		Type       RestartIncidentDataType `json:"type"`
+	} `json:"data"`
+}
+
+// RestartIncidentDataType defines model for RestartIncident.Data.Type.
+type RestartIncidentDataType string
+
 // RunCommandHerokuTaskParams defines model for run_command_heroku_task_params.
 type RunCommandHerokuTaskParams struct {
 	AppName             string `json:"app_name"`
@@ -9534,6 +9780,80 @@ type RunCommandHerokuTaskParamsSize string
 
 // RunCommandHerokuTaskParamsTaskType defines model for RunCommandHerokuTaskParams.TaskType.
 type RunCommandHerokuTaskParamsTaskType string
+
+// Secret defines model for secret.
+type Secret struct {
+	// Date of creation
+	CreatedAt string `json:"created_at"`
+
+	// The name of the secret
+	Name string `json:"name"`
+
+	// The redacted secret
+	Secret *string `json:"secret,omitempty"`
+
+	// Date of last update
+	UpdatedAt string `json:"updated_at"`
+}
+
+// SecretList defines model for secret_list.
+type SecretList struct {
+	Data []struct {
+		Attributes struct {
+			// Date of creation
+			CreatedAt string `json:"created_at"`
+
+			// The name of the secret
+			Name string `json:"name"`
+
+			// The redacted secret
+			Secret *string `json:"secret,omitempty"`
+
+			// Date of last update
+			UpdatedAt string `json:"updated_at"`
+		} `json:"attributes"`
+
+		// Unique ID of the secret
+		Id   string             `json:"id"`
+		Type SecretListDataType `json:"type"`
+	} `json:"data"`
+	Links *struct {
+		First string  `json:"first"`
+		Last  string  `json:"last"`
+		Next  *string `json:"next"`
+		Prev  *string `json:"prev"`
+		Self  string  `json:"self"`
+	} `json:"links,omitempty"`
+}
+
+// SecretListDataType defines model for SecretList.Data.Type.
+type SecretListDataType string
+
+// SecretResponse defines model for secret_response.
+type SecretResponse struct {
+	Data struct {
+		Attributes struct {
+			// Date of creation
+			CreatedAt string `json:"created_at"`
+
+			// The name of the secret
+			Name string `json:"name"`
+
+			// The redacted secret
+			Secret *string `json:"secret,omitempty"`
+
+			// Date of last update
+			UpdatedAt string `json:"updated_at"`
+		} `json:"attributes"`
+
+		// Unique ID of the secret
+		Id   string                 `json:"id"`
+		Type SecretResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// SecretResponseDataType defines model for SecretResponse.Data.Type.
+type SecretResponseDataType string
 
 // SendDashboardReportTaskParams defines model for send_dashboard_report_task_params.
 type SendDashboardReportTaskParams struct {
@@ -11425,6 +11745,41 @@ type UpdatePagerdutyIncidentTaskParamsTaskType string
 // Pagerduty incident urgency, selecting auto will let Rootly auto map our incident severity.
 type UpdatePagerdutyIncidentTaskParamsUrgency string
 
+// UpdatePagertreeAlertTaskParams defines model for update_pagertree_alert_task_params.
+type UpdatePagertreeAlertTaskParams struct {
+	// Description of alert as text
+	Description *string `json:"description,omitempty"`
+
+	// Setting to true makes an alert a Pagertree incident.
+	Incident *bool `json:"incident,omitempty"`
+
+	// The prefix ID of the Pagertree alert.
+	PagertreeAlertId *string                                 `json:"pagertree_alert_id,omitempty"`
+	Severity         *UpdatePagertreeAlertTaskParamsSeverity `json:"severity,omitempty"`
+	TaskType         *UpdatePagertreeAlertTaskParamsTaskType `json:"task_type,omitempty"`
+	Teams            *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"teams,omitempty"`
+
+	// Title of alert as text
+	Title   *string                                `json:"title,omitempty"`
+	Urgency *UpdatePagertreeAlertTaskParamsUrgency `json:"urgency,omitempty"`
+	Users   *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"users,omitempty"`
+}
+
+// UpdatePagertreeAlertTaskParamsSeverity defines model for UpdatePagertreeAlertTaskParams.Severity.
+type UpdatePagertreeAlertTaskParamsSeverity string
+
+// UpdatePagertreeAlertTaskParamsTaskType defines model for UpdatePagertreeAlertTaskParams.TaskType.
+type UpdatePagertreeAlertTaskParamsTaskType string
+
+// UpdatePagertreeAlertTaskParamsUrgency defines model for UpdatePagertreeAlertTaskParams.Urgency.
+type UpdatePagertreeAlertTaskParamsUrgency string
+
 // UpdatePlaybook defines model for update_playbook.
 type UpdatePlaybook struct {
 	Data struct {
@@ -11542,6 +11897,23 @@ type UpdatePulse struct {
 
 // UpdatePulseDataType defines model for UpdatePulse.Data.Type.
 type UpdatePulseDataType string
+
+// UpdateSecret defines model for update_secret.
+type UpdateSecret struct {
+	Data struct {
+		Attributes struct {
+			// The name of the secret
+			Name string `json:"name"`
+
+			// The secret
+			Secret *string `json:"secret,omitempty"`
+		} `json:"attributes"`
+		Type UpdateSecretDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateSecretDataType defines model for UpdateSecret.Data.Type.
+type UpdateSecretDataType string
 
 // UpdateService defines model for update_service.
 type UpdateService struct {
@@ -12112,14 +12484,11 @@ type UserResponseDataType string
 
 // WebhooksDelivery defines model for webhooks_delivery.
 type WebhooksDelivery struct {
-	Attempts int `json:"attempts"`
-
 	// Date of creation
-	CreatedAt     string  `json:"created_at"`
-	Delivered     bool    `json:"delivered"`
-	EndpointId    string  `json:"endpoint_id"`
-	LastAttemptAt *string `json:"last_attempt_at"`
-	Payload       string  `json:"payload"`
+	CreatedAt   string  `json:"created_at"`
+	DeliveredAt *string `json:"delivered_at"`
+	EndpointId  string  `json:"endpoint_id"`
+	Payload     string  `json:"payload"`
 
 	// Date of last update
 	UpdatedAt string `json:"updated_at"`
@@ -12129,14 +12498,11 @@ type WebhooksDelivery struct {
 type WebhooksDeliveryList struct {
 	Data []struct {
 		Attributes struct {
-			Attempts int `json:"attempts"`
-
 			// Date of creation
-			CreatedAt     string  `json:"created_at"`
-			Delivered     bool    `json:"delivered"`
-			EndpointId    string  `json:"endpoint_id"`
-			LastAttemptAt *string `json:"last_attempt_at"`
-			Payload       string  `json:"payload"`
+			CreatedAt   string  `json:"created_at"`
+			DeliveredAt *string `json:"delivered_at"`
+			EndpointId  string  `json:"endpoint_id"`
+			Payload     string  `json:"payload"`
 
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`
@@ -12162,14 +12528,11 @@ type WebhooksDeliveryListDataType string
 type WebhooksDeliveryResponse struct {
 	Data struct {
 		Attributes struct {
-			Attempts int `json:"attempts"`
-
 			// Date of creation
-			CreatedAt     string  `json:"created_at"`
-			Delivered     bool    `json:"delivered"`
-			EndpointId    string  `json:"endpoint_id"`
-			LastAttemptAt *string `json:"last_attempt_at"`
-			Payload       string  `json:"payload"`
+			CreatedAt   string  `json:"created_at"`
+			DeliveredAt *string `json:"delivered_at"`
+			EndpointId  string  `json:"endpoint_id"`
+			Payload     string  `json:"payload"`
 
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`
@@ -13191,6 +13554,13 @@ type ListPulsesParams struct {
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
+// ListSecretsParams defines parameters for ListSecrets.
+type ListSecretsParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+}
+
 // ListServicesParams defines parameters for ListServices.
 type ListServicesParams struct {
 	Include           *string `form:"include,omitempty" json:"include,omitempty"`
@@ -13683,6 +14053,9 @@ type ClientInterface interface {
 	// ResolveIncident request with any body
 	ResolveIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// RestartIncident request with any body
+	RestartIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListIncidentActionItems request
 	ListIncidentActionItems(ctx context.Context, incidentId string, params *ListIncidentActionItemsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -13790,6 +14163,21 @@ type ClientInterface interface {
 
 	// UpdatePulse request with any body
 	UpdatePulseWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListSecrets request
+	ListSecrets(ctx context.Context, params *ListSecretsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateSecret request with any body
+	CreateSecretWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteSecret request
+	DeleteSecret(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetSecret request
+	GetSecret(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateSecret request with any body
+	UpdateSecretWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListServices request
 	ListServices(ctx context.Context, params *ListServicesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -15142,6 +15530,18 @@ func (c *Client) ResolveIncidentWithBody(ctx context.Context, id string, content
 	return c.Client.Do(req)
 }
 
+func (c *Client) RestartIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRestartIncidentRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) ListIncidentActionItems(ctx context.Context, incidentId string, params *ListIncidentActionItemsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListIncidentActionItemsRequest(c.Server, incidentId, params)
 	if err != nil {
@@ -15564,6 +15964,66 @@ func (c *Client) GetPulse(ctx context.Context, id string, reqEditors ...RequestE
 
 func (c *Client) UpdatePulseWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdatePulseRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListSecrets(ctx context.Context, params *ListSecretsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListSecretsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateSecretWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateSecretRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteSecret(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteSecretRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetSecret(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetSecretRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateSecretWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateSecretRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -21616,6 +22076,42 @@ func NewResolveIncidentRequestWithBody(server string, id string, contentType str
 	return req, nil
 }
 
+// NewRestartIncidentRequestWithBody generates requests for RestartIncident with any type of body
+func NewRestartIncidentRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incidents/%s/restart", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListIncidentActionItemsRequest generates requests for ListIncidentActionItems
 func NewListIncidentActionItemsRequest(server string, incidentId string, params *ListIncidentActionItemsParams) (*http.Request, error) {
 	var err error
@@ -23716,6 +24212,218 @@ func NewUpdatePulseRequestWithBody(server string, id string, contentType string,
 	}
 
 	operationPath := fmt.Sprintf("/v1/pulses/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListSecretsRequest generates requests for ListSecrets
+func NewListSecretsRequest(server string, params *ListSecretsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/secrets")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Include != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateSecretRequestWithBody generates requests for CreateSecret with any type of body
+func NewCreateSecretRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/secrets")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteSecretRequest generates requests for DeleteSecret
+func NewDeleteSecretRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/secrets/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetSecretRequest generates requests for GetSecret
+func NewGetSecretRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/secrets/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateSecretRequestWithBody generates requests for UpdateSecret with any type of body
+func NewUpdateSecretRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/secrets/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -27445,6 +28153,9 @@ type ClientWithResponsesInterface interface {
 	// ResolveIncident request with any body
 	ResolveIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ResolveIncidentResponse, error)
 
+	// RestartIncident request with any body
+	RestartIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RestartIncidentResponse, error)
+
 	// ListIncidentActionItems request
 	ListIncidentActionItemsWithResponse(ctx context.Context, incidentId string, params *ListIncidentActionItemsParams, reqEditors ...RequestEditorFn) (*ListIncidentActionItemsResponse, error)
 
@@ -27552,6 +28263,21 @@ type ClientWithResponsesInterface interface {
 
 	// UpdatePulse request with any body
 	UpdatePulseWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdatePulseResponse, error)
+
+	// ListSecrets request
+	ListSecretsWithResponse(ctx context.Context, params *ListSecretsParams, reqEditors ...RequestEditorFn) (*ListSecretsResponse, error)
+
+	// CreateSecret request with any body
+	CreateSecretWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateSecretResponse, error)
+
+	// DeleteSecret request
+	DeleteSecretWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteSecretResponse, error)
+
+	// GetSecret request
+	GetSecretWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetSecretResponse, error)
+
+	// UpdateSecret request with any body
+	UpdateSecretWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateSecretResponse, error)
 
 	// ListServices request
 	ListServicesWithResponse(ctx context.Context, params *ListServicesParams, reqEditors ...RequestEditorFn) (*ListServicesResponse, error)
@@ -29768,6 +30494,27 @@ func (r ResolveIncidentResponse) StatusCode() int {
 	return 0
 }
 
+type RestartIncidentResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r RestartIncidentResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RestartIncidentResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type ListIncidentActionItemsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -30518,6 +31265,111 @@ func (r UpdatePulseResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r UpdatePulseResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListSecretsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r ListSecretsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListSecretsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateSecretResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateSecretResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateSecretResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteSecretResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteSecretResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteSecretResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetSecretResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r GetSecretResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetSecretResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateSecretResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateSecretResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateSecretResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -32774,6 +33626,15 @@ func (c *ClientWithResponses) ResolveIncidentWithBodyWithResponse(ctx context.Co
 	return ParseResolveIncidentResponse(rsp)
 }
 
+// RestartIncidentWithBodyWithResponse request with arbitrary body returning *RestartIncidentResponse
+func (c *ClientWithResponses) RestartIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RestartIncidentResponse, error) {
+	rsp, err := c.RestartIncidentWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRestartIncidentResponse(rsp)
+}
+
 // ListIncidentActionItemsWithResponse request returning *ListIncidentActionItemsResponse
 func (c *ClientWithResponses) ListIncidentActionItemsWithResponse(ctx context.Context, incidentId string, params *ListIncidentActionItemsParams, reqEditors ...RequestEditorFn) (*ListIncidentActionItemsResponse, error) {
 	rsp, err := c.ListIncidentActionItems(ctx, incidentId, params, reqEditors...)
@@ -33096,6 +33957,51 @@ func (c *ClientWithResponses) UpdatePulseWithBodyWithResponse(ctx context.Contex
 		return nil, err
 	}
 	return ParseUpdatePulseResponse(rsp)
+}
+
+// ListSecretsWithResponse request returning *ListSecretsResponse
+func (c *ClientWithResponses) ListSecretsWithResponse(ctx context.Context, params *ListSecretsParams, reqEditors ...RequestEditorFn) (*ListSecretsResponse, error) {
+	rsp, err := c.ListSecrets(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListSecretsResponse(rsp)
+}
+
+// CreateSecretWithBodyWithResponse request with arbitrary body returning *CreateSecretResponse
+func (c *ClientWithResponses) CreateSecretWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateSecretResponse, error) {
+	rsp, err := c.CreateSecretWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateSecretResponse(rsp)
+}
+
+// DeleteSecretWithResponse request returning *DeleteSecretResponse
+func (c *ClientWithResponses) DeleteSecretWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteSecretResponse, error) {
+	rsp, err := c.DeleteSecret(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteSecretResponse(rsp)
+}
+
+// GetSecretWithResponse request returning *GetSecretResponse
+func (c *ClientWithResponses) GetSecretWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetSecretResponse, error) {
+	rsp, err := c.GetSecret(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetSecretResponse(rsp)
+}
+
+// UpdateSecretWithBodyWithResponse request with arbitrary body returning *UpdateSecretResponse
+func (c *ClientWithResponses) UpdateSecretWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateSecretResponse, error) {
+	rsp, err := c.UpdateSecretWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateSecretResponse(rsp)
 }
 
 // ListServicesWithResponse request returning *ListServicesResponse
@@ -35228,6 +36134,22 @@ func ParseResolveIncidentResponse(rsp *http.Response) (*ResolveIncidentResponse,
 	return response, nil
 }
 
+// ParseRestartIncidentResponse parses an HTTP response from a RestartIncidentWithResponse call
+func ParseRestartIncidentResponse(rsp *http.Response) (*RestartIncidentResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RestartIncidentResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
 // ParseListIncidentActionItemsResponse parses an HTTP response from a ListIncidentActionItemsWithResponse call
 func ParseListIncidentActionItemsResponse(rsp *http.Response) (*ListIncidentActionItemsResponse, error) {
 	bodyBytes, err := ioutil.ReadAll(rsp.Body)
@@ -35797,6 +36719,86 @@ func ParseUpdatePulseResponse(rsp *http.Response) (*UpdatePulseResponse, error) 
 	}
 
 	response := &UpdatePulseResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseListSecretsResponse parses an HTTP response from a ListSecretsWithResponse call
+func ParseListSecretsResponse(rsp *http.Response) (*ListSecretsResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListSecretsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseCreateSecretResponse parses an HTTP response from a CreateSecretWithResponse call
+func ParseCreateSecretResponse(rsp *http.Response) (*CreateSecretResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateSecretResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseDeleteSecretResponse parses an HTTP response from a DeleteSecretWithResponse call
+func ParseDeleteSecretResponse(rsp *http.Response) (*DeleteSecretResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteSecretResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseGetSecretResponse parses an HTTP response from a GetSecretWithResponse call
+func ParseGetSecretResponse(rsp *http.Response) (*GetSecretResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetSecretResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseUpdateSecretResponse parses an HTTP response from a UpdateSecretWithResponse call
+func ParseUpdateSecretResponse(rsp *http.Response) (*UpdateSecretResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateSecretResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

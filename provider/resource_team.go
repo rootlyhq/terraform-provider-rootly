@@ -28,6 +28,7 @@ func resourceTeam() *schema.Resource{
 				Optional: false,
 				ForceNew: false,
 				Description: "The name of the team",
+				
 			},
 			
 
@@ -38,6 +39,7 @@ func resourceTeam() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "",
+				
 			},
 			
 
@@ -48,6 +50,7 @@ func resourceTeam() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The description of the team",
+				
 			},
 			
 
@@ -70,6 +73,7 @@ func resourceTeam() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "",
+				
 			},
 			
 

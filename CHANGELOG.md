@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.57] -- 2023-01-05
+
+- Add `secrets` resources.
+- Add `pagertree` genius task resources.
+
 ## [0.1.56] -- 2022-12-13
 
 - Improve docs.

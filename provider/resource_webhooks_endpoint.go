@@ -28,6 +28,7 @@ func resourceWebhooksEndpoint() *schema.Resource{
 				Optional: false,
 				ForceNew: false,
 				Description: "The name of the endpoint",
+				
 			},
 			
 
@@ -38,6 +39,7 @@ func resourceWebhooksEndpoint() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The slug of the endpoint",
+				
 			},
 			
 
@@ -48,6 +50,7 @@ func resourceWebhooksEndpoint() *schema.Resource{
 				Optional: false,
 				ForceNew: false,
 				Description: "The URL of the endpoint.",
+				
 			},
 			
 
@@ -59,7 +62,7 @@ func resourceWebhooksEndpoint() *schema.Resource{
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "Value must be one of `incident.created`, `incident.updated`, `incident.mitigated`, `incident.resolved`, `incident.cancelled`, `incident.deleted`, `incident.scheduled.created`, `incident.scheduled.updated`, `incident.scheduled.in_progress`, `incident.scheduled.completed`, `incident.scheduled.deleted`, `incident_post_mortem.created`, `incident_post_mortem.updated`, `incident_post_mortem.published`, `incident_post_mortem.deleted`, `alert.created`, `pulse.created`.",
+					Description: "Value must be one of `incident.created`, `incident.updated`, `incident.mitigated`, `incident.resolved`, `incident.cancelled`, `incident.deleted`, `incident.scheduled.created`, `incident.scheduled.updated`, `incident.scheduled.in_progress`, `incident.scheduled.completed`, `incident.scheduled.deleted`, `incident_post_mortem.created`, `incident_post_mortem.updated`, `incident_post_mortem.published`, `incident_post_mortem.deleted`, `alert.created`, `pulse.created`, `genius_workflow_run.queued`, `genius_workflow_run.started`, `genius_workflow_run.completed`, `genius_workflow_run.failed`, `genius_workflow_run.canceled`.",
 				},
 				
 
@@ -70,6 +73,7 @@ func resourceWebhooksEndpoint() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The webhook signing secret used to verify webhook requests.",
+				
 			},
 			
 
@@ -77,6 +81,7 @@ func resourceWebhooksEndpoint() *schema.Resource{
 					Type: schema.TypeBool,
 					Default: true,
 					Optional: true,
+					
 				},
 				
 		},

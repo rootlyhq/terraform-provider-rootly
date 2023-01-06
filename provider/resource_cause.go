@@ -28,6 +28,7 @@ func resourceCause() *schema.Resource{
 				Optional: false,
 				ForceNew: false,
 				Description: "The name of the cause",
+				
 			},
 			
 
@@ -38,6 +39,7 @@ func resourceCause() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The slug of the cause",
+				
 			},
 			
 
@@ -48,6 +50,7 @@ func resourceCause() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The description of the cause",
+				
 			},
 			
 		},

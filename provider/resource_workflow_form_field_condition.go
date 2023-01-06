@@ -28,6 +28,7 @@ func resourceWorkflowFormFieldCondition() *schema.Resource{
 				Optional: true,
 				ForceNew: true,
 				Description: "The workflow for this condition",
+				
 			},
 			
 
@@ -38,6 +39,7 @@ func resourceWorkflowFormFieldCondition() *schema.Resource{
 				Optional: false,
 				ForceNew: false,
 				Description: "The custom field for this condition",
+				
 			},
 			
 
@@ -48,6 +50,7 @@ func resourceWorkflowFormFieldCondition() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The trigger condition. Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
+				
 			},
 			
 

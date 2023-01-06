@@ -28,6 +28,7 @@ func resourceService() *schema.Resource{
 				Optional: false,
 				ForceNew: false,
 				Description: "The name of the service",
+				
 			},
 			
 
@@ -38,6 +39,7 @@ func resourceService() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The slug of the service",
+				
 			},
 			
 
@@ -48,6 +50,7 @@ func resourceService() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The description of the service",
+				
 			},
 			
 
@@ -58,6 +61,7 @@ func resourceService() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The public description of the service",
+				
 			},
 			
 
@@ -80,6 +84,7 @@ func resourceService() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "",
+				
 			},
 			
 
@@ -90,6 +95,7 @@ func resourceService() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name",
+				
 			},
 			
 
@@ -100,6 +106,7 @@ func resourceService() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The PagerDuty service id associated to this service",
+				
 			},
 			
 
@@ -110,6 +117,7 @@ func resourceService() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The Opsgenie service id associated to this service",
+				
 			},
 			
 
@@ -120,6 +128,7 @@ func resourceService() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The GitHub repository name associated to this service. eg: rootlyhq/my-service",
+				
 			},
 			
 
@@ -130,6 +139,7 @@ func resourceService() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The GitHub repository branch associated to this service. eg: main",
+				
 			},
 			
 
@@ -140,6 +150,7 @@ func resourceService() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The Gitlab repository name associated to this service. eg: rootlyhq/my-service",
+				
 			},
 			
 
@@ -150,6 +161,7 @@ func resourceService() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The Gitlab repository branch associated to this service. eg: main",
+				
 			},
 			
 

@@ -28,6 +28,7 @@ func resourcePlaybook() *schema.Resource{
 				Optional: false,
 				ForceNew: false,
 				Description: "The title of the playbook",
+				
 			},
 			
 
@@ -38,6 +39,7 @@ func resourcePlaybook() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The summary of the playbook",
+				
 			},
 			
 
@@ -48,6 +50,7 @@ func resourcePlaybook() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The external url of the playbook",
+				
 			},
 			
 		},

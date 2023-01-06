@@ -28,6 +28,7 @@ func resourceFormFieldPosition() *schema.Resource{
 				Optional: false,
 				ForceNew: true,
 				Description: "The ID of the form field.",
+				
 			},
 			
 
@@ -38,6 +39,7 @@ func resourceFormFieldPosition() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The form for the position. Value must be one of `web_new_incident_form`, `web_update_incident_form`, `web_incident_post_mortem_form`, `web_incident_mitigation_form`, `web_incident_resolution_form`, `web_scheduled_incident_form`, `web_update_scheduled_incident_form`, `incident_post_mortem`, `slack_new_incident_form`, `slack_update_incident_form`, `slack_update_incident_status_form`, `slack_incident_mitigation_form`, `slack_incident_resolution_form`, `slack_scheduled_incident_form`, `slack_update_scheduled_incident_form`.",
+				
 			},
 			
 
@@ -48,6 +50,7 @@ func resourceFormFieldPosition() *schema.Resource{
 				Optional: false,
 				ForceNew: false,
 				Description: "The position of the form_field_position",
+				
 			},
 			
 		},

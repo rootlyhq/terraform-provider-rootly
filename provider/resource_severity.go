@@ -28,6 +28,7 @@ func resourceSeverity() *schema.Resource{
 				Optional: false,
 				ForceNew: false,
 				Description: "The name of the severity",
+				
 			},
 			
 
@@ -38,6 +39,7 @@ func resourceSeverity() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The slug of the severity",
+				
 			},
 			
 
@@ -48,6 +50,7 @@ func resourceSeverity() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The description of the severity",
+				
 			},
 			
 
@@ -58,6 +61,7 @@ func resourceSeverity() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The severity of the severity. Value must be one of `critical`, `high`, `medium`, `low`.",
+				
 			},
 			
 
@@ -68,6 +72,7 @@ func resourceSeverity() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "",
+				
 			},
 			
 		},

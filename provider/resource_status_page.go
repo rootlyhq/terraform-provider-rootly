@@ -28,6 +28,7 @@ func resourceStatusPage() *schema.Resource{
 				Optional: false,
 				ForceNew: false,
 				Description: "The title of the status page",
+				
 			},
 			
 
@@ -38,6 +39,7 @@ func resourceStatusPage() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The description of the status page",
+				
 			},
 			
 
@@ -48,6 +50,7 @@ func resourceStatusPage() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The color of the header. Eg. \"#0061F2\"",
+				
 			},
 			
 
@@ -58,6 +61,7 @@ func resourceStatusPage() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The color of the footer. Eg. \"#1F2F41\"",
+				
 			},
 			
 
@@ -67,6 +71,7 @@ func resourceStatusPage() *schema.Resource{
 				Required: false,
 				Optional: true,
 				Description: "Allow search engines to include your public status page in search results.",
+				
 			},
 			
 
@@ -76,6 +81,7 @@ func resourceStatusPage() *schema.Resource{
 				Required: false,
 				Optional: true,
 				Description: "Show uptime",
+				
 			},
 			
 
@@ -86,6 +92,7 @@ func resourceStatusPage() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "Show uptime over x days. Value must be one of `30`, `60`, `90`.",
+				
 			},
 			
 
@@ -95,6 +102,7 @@ func resourceStatusPage() *schema.Resource{
 				Required: false,
 				Optional: true,
 				Description: "Make the status page accessible to the public",
+				
 			},
 			
 
@@ -102,6 +110,7 @@ func resourceStatusPage() *schema.Resource{
 					Type: schema.TypeBool,
 					Default: true,
 					Optional: true,
+					
 				},
 				
 		},

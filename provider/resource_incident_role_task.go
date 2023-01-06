@@ -28,6 +28,7 @@ func resourceIncidentRoleTask() *schema.Resource{
 				Optional: true,
 				ForceNew: true,
 				Description: "",
+				
 			},
 			
 
@@ -38,6 +39,7 @@ func resourceIncidentRoleTask() *schema.Resource{
 				Optional: false,
 				ForceNew: false,
 				Description: "The task of the incident task",
+				
 			},
 			
 
@@ -48,6 +50,7 @@ func resourceIncidentRoleTask() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The description of incident task",
+				
 			},
 			
 
@@ -58,6 +61,7 @@ func resourceIncidentRoleTask() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The priority of the incident task. Value must be one of `high`, `medium`, `low`.",
+				
 			},
 			
 		},

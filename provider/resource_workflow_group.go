@@ -28,6 +28,7 @@ func resourceWorkflowGroup() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The kind of the workflow group.. Value must be one of `simple`, `incident`, `post_mortem`, `action_item`, `pulse`, `alert`.",
+				
 			},
 			
 
@@ -38,6 +39,7 @@ func resourceWorkflowGroup() *schema.Resource{
 				Optional: false,
 				ForceNew: false,
 				Description: "The name of the workflow group.",
+				
 			},
 			
 
@@ -48,6 +50,7 @@ func resourceWorkflowGroup() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The slug of the workflow group.",
+				
 			},
 			
 
@@ -57,6 +60,7 @@ func resourceWorkflowGroup() *schema.Resource{
 				Required: false,
 				Optional: true,
 				Description: "Whether the group is expanded or collapsed.",
+				
 			},
 			
 
@@ -67,6 +71,7 @@ func resourceWorkflowGroup() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The position of the workflow group",
+				
 			},
 			
 		},

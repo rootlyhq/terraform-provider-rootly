@@ -28,6 +28,7 @@ func resourceStatusPageTemplate() *schema.Resource{
 				Optional: true,
 				ForceNew: true,
 				Description: "",
+				
 			},
 			
 
@@ -38,6 +39,7 @@ func resourceStatusPageTemplate() *schema.Resource{
 				Optional: false,
 				ForceNew: false,
 				Description: "Title of the template",
+				
 			},
 			
 
@@ -48,6 +50,7 @@ func resourceStatusPageTemplate() *schema.Resource{
 				Optional: false,
 				ForceNew: false,
 				Description: "Description of the event the template will populate",
+				
 			},
 			
 
@@ -58,6 +61,7 @@ func resourceStatusPageTemplate() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "Status of the event the template will populate",
+				
 			},
 			
 
@@ -67,6 +71,7 @@ func resourceStatusPageTemplate() *schema.Resource{
 				Required: false,
 				Optional: true,
 				Description: "Controls if incident subscribers should be notified",
+				
 			},
 			
 
@@ -74,6 +79,7 @@ func resourceStatusPageTemplate() *schema.Resource{
 					Type: schema.TypeBool,
 					Default: true,
 					Optional: true,
+					
 				},
 				
 
@@ -84,6 +90,7 @@ func resourceStatusPageTemplate() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "Position of the workflow task",
+				
 			},
 			
 		},

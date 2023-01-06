@@ -28,6 +28,7 @@ func resourceEnvironment() *schema.Resource{
 				Optional: false,
 				ForceNew: false,
 				Description: "The name of the environment",
+				
 			},
 			
 
@@ -38,6 +39,7 @@ func resourceEnvironment() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The slug of the environment",
+				
 			},
 			
 
@@ -48,6 +50,7 @@ func resourceEnvironment() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The description of the environment",
+				
 			},
 			
 
@@ -58,6 +61,7 @@ func resourceEnvironment() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "",
+				
 			},
 			
 		},

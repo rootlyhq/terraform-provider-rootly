@@ -28,6 +28,7 @@ func resourceFunctionality() *schema.Resource{
 				Optional: false,
 				ForceNew: false,
 				Description: "The name of the functionality",
+				
 			},
 			
 
@@ -38,6 +39,7 @@ func resourceFunctionality() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The slug of the functionality",
+				
 			},
 			
 
@@ -48,6 +50,7 @@ func resourceFunctionality() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The description of the functionality",
+				
 			},
 			
 
@@ -58,6 +61,7 @@ func resourceFunctionality() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The public description of the functionality",
+				
 			},
 			
 
@@ -80,6 +84,7 @@ func resourceFunctionality() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "",
+				
 			},
 			
 

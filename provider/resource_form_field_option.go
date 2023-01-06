@@ -28,6 +28,7 @@ func resourceFormFieldOption() *schema.Resource{
 				Optional: false,
 				ForceNew: true,
 				Description: "The ID of the parent custom field",
+				
 			},
 			
 
@@ -38,6 +39,7 @@ func resourceFormFieldOption() *schema.Resource{
 				Optional: false,
 				ForceNew: false,
 				Description: "The value of the form_field_option",
+				
 			},
 			
 
@@ -48,6 +50,7 @@ func resourceFormFieldOption() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The hex color of the form_field_option",
+				
 			},
 			
 
@@ -57,6 +60,7 @@ func resourceFormFieldOption() *schema.Resource{
 				Required: false,
 				Optional: true,
 				Description: "",
+				
 			},
 			
 
@@ -67,6 +71,7 @@ func resourceFormFieldOption() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The position of the form_field_option",
+				
 			},
 			
 		},

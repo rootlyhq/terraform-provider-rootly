@@ -28,6 +28,7 @@ func resourceFormField() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The kind of the form field. Value must be one of `custom`, `title`, `summary`, `severity`, `environments`, `types`, `services`, `functionalities`, `teams`, `visibility`, `mark_as_test`, `mark_as_backfilled`, `labels`, `notify_emails`, `trigger_manual_workflows`, `show_ongoing_incidents`, `attach_alerts`, `manual_starting_datetime_field`.",
+				
 			},
 			
 
@@ -38,6 +39,7 @@ func resourceFormField() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The input kind of the form field. Value must be one of `text`, `textarea`, `select`, `multi_select`, `date`, `datetime`, `users`, `number`, `checkbox`, `tags`.",
+				
 			},
 			
 
@@ -48,6 +50,7 @@ func resourceFormField() *schema.Resource{
 				Optional: false,
 				ForceNew: false,
 				Description: "The name of the form field",
+				
 			},
 			
 
@@ -58,6 +61,7 @@ func resourceFormField() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The slug of the form field",
+				
 			},
 			
 
@@ -68,6 +72,7 @@ func resourceFormField() *schema.Resource{
 				Optional: true,
 				ForceNew: false,
 				Description: "The description of the form field",
+				
 			},
 			
 
@@ -99,6 +104,7 @@ func resourceFormField() *schema.Resource{
 					Type: schema.TypeBool,
 					Default: true,
 					Optional: true,
+					
 				},
 				
 
