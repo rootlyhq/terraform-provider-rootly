@@ -38,7 +38,7 @@ func resourceSecret() *schema.Resource {
 				Description: "The redacted secret",
 
 				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-					return true // suppress diffing for this field, since it will always be different than what is specified in configuration.
+					return len(old) != 0
 				},
 			},
 		},

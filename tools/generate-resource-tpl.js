@@ -208,7 +208,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 	const forceNew = name === pathIdField || schema.write_only ? "true" : "false"
 	const skipDiff = schema.write_only ? `
 		DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-			return true // suppress diffing for this field, since it will always be different than what is specified in configuration.
+			return len(old) != 0
 		},
 	` : ''
 	switch (schema.type) {
