@@ -45,9 +45,6 @@ func resourcePostmortemTemplate() *schema.Resource {
 				Optional:    true,
 				ForceNew:    false,
 				Description: "The postmortem template. Liquid syntax and markdown are supported.",
-				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-					return true // suppress diffing for this field, since it will always be different than what is specified in configuration, as input is sanitized and formatted on the server.
-				},
 			},
 		},
 	}
