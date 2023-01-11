@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.59] -- 2023-01-11
+
+- Fix inoperative postmortem template content attribute.
+
 ## [0.1.57] -- 2023-01-05
 
 - Add `secrets` resources.
