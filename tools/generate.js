@@ -16,7 +16,6 @@ const excluded = [
 	"dashboard_panel",
 	"workflow_task",
 	"workflow_run",
-	"post_mortem_template",
 	"incident",
 	"incident_post_mortem",
 	"incident_action_item",

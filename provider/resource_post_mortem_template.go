@@ -40,14 +40,13 @@ func resourcePostmortemTemplate() *schema.Resource {
 
 			"content": &schema.Schema{
 				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    true,
 				Description: "The postmortem template. Liquid syntax and markdown are supported.",
+
 				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-					// suppress diffing for this field, since it will always be different than what is specified in configuration, as input is sanitized and formatted on the server.
-					// return false if old value is empty string, so that TF will apply the first value but not subsequent ones received from the server.
 					return len(old) != 0
 				},
 			},

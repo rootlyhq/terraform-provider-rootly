@@ -3270,9 +3270,14 @@ const (
 	UpdateZendeskTicket UpdateZendeskTicketTaskParamsTaskType = "update_zendesk_ticket"
 )
 
+// Defines values for UserListDataType.
+const (
+	UserListDataTypeUsers UserListDataType = "users"
+)
+
 // Defines values for UserResponseDataType.
 const (
-	UserResponseDataTypeUsers UserResponseDataType = "users"
+	Users UserResponseDataType = "users"
 )
 
 // Defines values for WebhooksDeliveryListDataType.
@@ -12453,6 +12458,42 @@ type User struct {
 	UpdatedAt string `json:"updated_at"`
 }
 
+// UserList defines model for user_list.
+type UserList struct {
+	Data []struct {
+		Attributes struct {
+			// Date of creation
+			CreatedAt string `json:"created_at"`
+
+			// The email of the user
+			Email string `json:"email"`
+
+			// The full name of the user
+			FullName *string `json:"full_name"`
+
+			// The full name with team of the user
+			FullNameWithTeam *string `json:"full_name_with_team"`
+
+			// Date of last update
+			UpdatedAt string `json:"updated_at"`
+		} `json:"attributes"`
+
+		// Unique ID of the user
+		Id   string           `json:"id"`
+		Type UserListDataType `json:"type"`
+	} `json:"data"`
+	Links struct {
+		First string  `json:"first"`
+		Last  string  `json:"last"`
+		Next  *string `json:"next"`
+		Prev  *string `json:"prev"`
+		Self  string  `json:"self"`
+	} `json:"links"`
+}
+
+// UserListDataType defines model for UserList.Data.Type.
+type UserListDataType string
+
 // UserResponse defines model for user_response.
 type UserResponse struct {
 	Data struct {
@@ -14268,6 +14309,9 @@ type ClientInterface interface {
 
 	// UpdateStatusPageTemplate request with any body
 	UpdateStatusPageTemplateWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetUsers request
+	GetUsers(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetCurrentUser request
 	GetCurrentUser(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -16384,6 +16428,18 @@ func (c *Client) GetStatusPageTemplate(ctx context.Context, id string, reqEditor
 
 func (c *Client) UpdateStatusPageTemplateWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateStatusPageTemplateRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetUsers(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetUsersRequest(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -26029,6 +26085,33 @@ func NewUpdateStatusPageTemplateRequestWithBody(server string, id string, conten
 	return req, nil
 }
 
+// NewGetUsersRequest generates requests for GetUsers
+func NewGetUsersRequest(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/users")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewGetCurrentUserRequest generates requests for GetCurrentUser
 func NewGetCurrentUserRequest(server string) (*http.Request, error) {
 	var err error
@@ -28368,6 +28451,9 @@ type ClientWithResponsesInterface interface {
 
 	// UpdateStatusPageTemplate request with any body
 	UpdateStatusPageTemplateWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateStatusPageTemplateResponse, error)
+
+	// GetUsers request
+	GetUsersWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetUsersResponse, error)
 
 	// GetCurrentUser request
 	GetCurrentUserWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetCurrentUserResponse, error)
@@ -32006,6 +32092,27 @@ func (r UpdateStatusPageTemplateResponse) StatusCode() int {
 	return 0
 }
 
+type GetUsersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r GetUsersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetUsersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type GetCurrentUserResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -34272,6 +34379,15 @@ func (c *ClientWithResponses) UpdateStatusPageTemplateWithBodyWithResponse(ctx c
 		return nil, err
 	}
 	return ParseUpdateStatusPageTemplateResponse(rsp)
+}
+
+// GetUsersWithResponse request returning *GetUsersResponse
+func (c *ClientWithResponses) GetUsersWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetUsersResponse, error) {
+	rsp, err := c.GetUsers(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetUsersResponse(rsp)
 }
 
 // GetCurrentUserWithResponse request returning *GetCurrentUserResponse
@@ -37279,6 +37395,22 @@ func ParseUpdateStatusPageTemplateResponse(rsp *http.Response) (*UpdateStatusPag
 	}
 
 	response := &UpdateStatusPageTemplateResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseGetUsersResponse parses an HTTP response from a GetUsersWithResponse call
+func ParseGetUsersResponse(rsp *http.Response) (*GetUsersResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetUsersResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

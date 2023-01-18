@@ -21,8 +21,8 @@ func TestAccResourcePostmortemTemplate(t *testing.T) {
 }
 
 const testAccResourcePostmortemTemplate = `
-resource "rootly_postmortem_template" "test" {
+resource "rootly_post_mortem_template" "test" {
 	name = "test"
-	content = "test"
+content = "test"
 }
 `

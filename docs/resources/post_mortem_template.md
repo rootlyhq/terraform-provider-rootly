@@ -1,11 +1,11 @@
 ---
-page_title: "Resource rootly_postmortem_template - terraform-provider-rootly"
+page_title: "Resource rootly_post_mortem_template - terraform-provider-rootly"
 subcategory:
 description: |-
     
 ---
 
-# Resource (rootly_postmortem_template)
+# Resource (rootly_post_mortem_template)
 
 
 
@@ -14,11 +14,11 @@ description: |-
 
 ### Required
 
+- `content` (String) The postmortem template. Liquid syntax and markdown are supported.
 - `name` (String) The name of the postmortem template
 
 ### Optional
 
-- `content` (String) The postmortem template. Liquid syntax and markdown are supported.
 - `default` (Boolean) Default selected template when editing a postmortem
 
 ### Read-Only
