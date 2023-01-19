@@ -39,8 +39,14 @@ resource "rootly_workflow_incident" "foo" {
 resource "rootly_workflow_task_create_airtable_table_record" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		base_key = "test"
-table_name = "test"
+		base = {
+			id = "foo"
+			name = "bar"
+		}
+		table = {
+			id = "foo"
+			name = "bar"
+		}
 	}
 }
 `
