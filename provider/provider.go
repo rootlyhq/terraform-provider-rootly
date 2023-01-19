@@ -81,6 +81,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_severity":                                         resourceSeverity(),
 				"rootly_status_page":                                      resourceStatusPage(),
 				"rootly_incident_role":                                    resourceIncidentRole(),
+                                "rootly_postmortem_template":                              resourcePostmortemTemplate(),
 				"rootly_post_mortem_template":                             resourcePostmortemTemplate(),
 				"rootly_team":                                             resourceTeam(),
 				"rootly_incident_type":                                    resourceIncidentType(),
