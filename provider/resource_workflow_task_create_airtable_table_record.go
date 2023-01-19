@@ -57,14 +57,14 @@ func resourceWorkflowTaskCreateAirtableTableRecord() *schema.Resource {
 								"create_airtable_table_record",
 							}, false),
 						},
-						"base_key": &schema.Schema{
-							Description: "The base key",
-							Type:        schema.TypeString,
+						"base": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. ",
+							Type:        schema.TypeMap,
 							Required:    true,
 						},
-						"table_name": &schema.Schema{
-							Description: "The table name",
-							Type:        schema.TypeString,
+						"table": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. ",
+							Type:        schema.TypeMap,
 							Required:    true,
 						},
 						"custom_fields_mapping": &schema.Schema{

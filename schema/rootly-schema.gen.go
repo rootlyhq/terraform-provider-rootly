@@ -4432,15 +4432,18 @@ type CauseResponseDataType string
 
 // CreateAirtableTableRecordTaskParams defines model for create_airtable_table_record_task_params.
 type CreateAirtableTableRecordTaskParams struct {
-	// The base key
-	BaseKey string `json:"base_key"`
+	Base struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"base"`
 
 	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
 	CustomFieldsMapping *string `json:"custom_fields_mapping"`
-
-	// The table name
-	TableName string                                       `json:"table_name"`
-	TaskType  *CreateAirtableTableRecordTaskParamsTaskType `json:"task_type,omitempty"`
+	Table               struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"table"`
+	TaskType *CreateAirtableTableRecordTaskParamsTaskType `json:"task_type,omitempty"`
 }
 
 // CreateAirtableTableRecordTaskParamsTaskType defines model for CreateAirtableTableRecordTaskParams.TaskType.

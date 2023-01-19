@@ -30,8 +30,8 @@ Manages workflow create_airtable_table_record task.
 
 Required:
 
-- `base_key` (String) The base key
-- `table_name` (String) The table name
+- `base` (Map of String) Map must contain two fields, `id` and `name`.
+- `table` (Map of String) Map must contain two fields, `id` and `name`.
 
 Optional:
 

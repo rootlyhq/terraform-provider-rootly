@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.60] -- 2023-01-19
+
+- Fix `workflow_task_create_airtable_table_record` attributes.
+
 ## [0.1.59] -- 2023-01-11
 
 - Fix inoperative postmortem template content attribute.
