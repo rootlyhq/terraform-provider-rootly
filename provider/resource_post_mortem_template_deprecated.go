@@ -1,0 +1,152 @@
+package provider
+
+import (
+	"context"
+	"fmt"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/rootlyhq/terraform-provider-rootly/client"
+	"github.com/rootlyhq/terraform-provider-rootly/tools"
+)
+
+func resourcePostmortemTemplateDeprecated() *schema.Resource {
+	return &schema.Resource{
+		CreateContext: resourcePostmortemTemplateDeprecatedCreate,
+		ReadContext:   resourcePostmortemTemplateDeprecatedRead,
+		UpdateContext: resourcePostmortemTemplateDeprecatedUpdate,
+		DeleteContext: resourcePostmortemTemplateDeprecatedDelete,
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
+		},
+		Schema: map[string]*schema.Schema{
+
+			"name": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
+				Description: "The name of the postmortem template",
+			},
+
+			"default": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Default selected template when editing a postmortem",
+			},
+
+			"content": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    true,
+				Description: "The postmortem template. Liquid syntax and markdown are supported.",
+
+				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+					return len(old) != 0
+				},
+			},
+		},
+	}
+}
+
+func resourcePostmortemTemplateDeprecatedCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	c := meta.(*client.Client)
+
+	tflog.Trace(ctx, fmt.Sprintf("Creating PostmortemTemplate"))
+
+	s := &client.PostmortemTemplate{}
+
+	if value, ok := d.GetOkExists("name"); ok {
+		s.Name = value.(string)
+	}
+	if value, ok := d.GetOkExists("default"); ok {
+		s.Default = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("content"); ok {
+		s.Content = value.(string)
+	}
+
+	res, err := c.CreatePostmortemTemplate(s)
+	if err != nil {
+		return diag.Errorf("Error creating post_mortem_template: %s", err.Error())
+	}
+
+	d.SetId(res.ID)
+	tflog.Trace(ctx, fmt.Sprintf("created a post_mortem_template resource: %s", d.Id()))
+
+	return resourcePostmortemTemplateDeprecatedRead(ctx, d, meta)
+}
+
+func resourcePostmortemTemplateDeprecatedRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	c := meta.(*client.Client)
+	tflog.Trace(ctx, fmt.Sprintf("Reading PostmortemTemplate: %s", d.Id()))
+
+	item, err := c.GetPostmortemTemplate(d.Id())
+	if err != nil {
+		// In the case of a NotFoundError, it means the resource may have been removed upstream
+		// We just remove it from the state.
+		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+			tflog.Warn(ctx, fmt.Sprintf("PostmortemTemplate (%s) not found, removing from state", d.Id()))
+			d.SetId("")
+			return nil
+		}
+
+		return diag.Errorf("Error reading post_mortem_template: %s", d.Id())
+	}
+
+	d.Set("name", item.Name)
+	d.Set("default", item.Default)
+	d.Set("content", item.Content)
+
+	return nil
+}
+
+func resourcePostmortemTemplateDeprecatedUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	c := meta.(*client.Client)
+	tflog.Trace(ctx, fmt.Sprintf("Updating PostmortemTemplate: %s", d.Id()))
+
+	s := &client.PostmortemTemplate{}
+
+	if d.HasChange("name") {
+		s.Name = d.Get("name").(string)
+	}
+	if d.HasChange("default") {
+		s.Default = tools.Bool(d.Get("default").(bool))
+	}
+	if d.HasChange("content") {
+		s.Content = d.Get("content").(string)
+	}
+
+	_, err := c.UpdatePostmortemTemplate(d.Id(), s)
+	if err != nil {
+		return diag.Errorf("Error updating post_mortem_template: %s", err.Error())
+	}
+
+	return resourcePostmortemTemplateDeprecatedRead(ctx, d, meta)
+}
+
+func resourcePostmortemTemplateDeprecatedDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	c := meta.(*client.Client)
+	tflog.Trace(ctx, fmt.Sprintf("Deleting PostmortemTemplate: %s", d.Id()))
+
+	err := c.DeletePostmortemTemplate(d.Id())
+	if err != nil {
+		// In the case of a NotFoundError, it means the resource may have been removed upstream.
+		// We just remove it from the state.
+		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+			tflog.Warn(ctx, fmt.Sprintf("PostmortemTemplate (%s) not found, removing from state", d.Id()))
+			d.SetId("")
+			return nil
+		}
+		return diag.Errorf("Error deleting post_mortem_template: %s", err.Error())
+	}
+
+	d.SetId("")
+
+	return nil
+}
