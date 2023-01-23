@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.1.62] -- TBD
+## [0.1.62] -- 2023-01-23
 
 - Rename `rootly_postmortem_template` to `rootly_post_mortem_template` to match Rootly API.
 - Add `rootly_playbook_task` resource.
