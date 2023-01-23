@@ -25,7 +25,6 @@ const excluded = [
 	"incident_form_field_selection",
 	"pulse",
 	"alert",
-	"playbook_task",
 	"custom_field",
 	"custom_field_option",
 	"webhooks_delivery",

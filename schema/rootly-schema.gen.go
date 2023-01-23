@@ -14145,8 +14145,8 @@ type ClientInterface interface {
 	// DeletePlaybookTask request
 	DeletePlaybookTask(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetPlaybookTasks request
-	GetPlaybookTasks(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetPlaybookTask request
+	GetPlaybookTask(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdatePlaybookTask request with any body
 	UpdatePlaybookTaskWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -15769,8 +15769,8 @@ func (c *Client) DeletePlaybookTask(ctx context.Context, id string, reqEditors .
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetPlaybookTasks(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetPlaybookTasksRequest(c.Server, id)
+func (c *Client) GetPlaybookTask(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetPlaybookTaskRequest(c.Server, id)
 	if err != nil {
 		return nil, err
 	}
@@ -23059,8 +23059,8 @@ func NewDeletePlaybookTaskRequest(server string, id string) (*http.Request, erro
 	return req, nil
 }
 
-// NewGetPlaybookTasksRequest generates requests for GetPlaybookTasks
-func NewGetPlaybookTasksRequest(server string, id string) (*http.Request, error) {
+// NewGetPlaybookTaskRequest generates requests for GetPlaybookTask
+func NewGetPlaybookTaskRequest(server string, id string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -28287,8 +28287,8 @@ type ClientWithResponsesInterface interface {
 	// DeletePlaybookTask request
 	DeletePlaybookTaskWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeletePlaybookTaskResponse, error)
 
-	// GetPlaybookTasks request
-	GetPlaybookTasksWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetPlaybookTasksResponse, error)
+	// GetPlaybookTask request
+	GetPlaybookTaskWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetPlaybookTaskResponse, error)
 
 	// UpdatePlaybookTask request with any body
 	UpdatePlaybookTaskWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdatePlaybookTaskResponse, error)
@@ -30919,13 +30919,13 @@ func (r DeletePlaybookTaskResponse) StatusCode() int {
 	return 0
 }
 
-type GetPlaybookTasksResponse struct {
+type GetPlaybookTaskResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 }
 
 // Status returns HTTPResponse.Status
-func (r GetPlaybookTasksResponse) Status() string {
+func (r GetPlaybookTaskResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -30933,7 +30933,7 @@ func (r GetPlaybookTasksResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetPlaybookTasksResponse) StatusCode() int {
+func (r GetPlaybookTaskResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -33880,13 +33880,13 @@ func (c *ClientWithResponses) DeletePlaybookTaskWithResponse(ctx context.Context
 	return ParseDeletePlaybookTaskResponse(rsp)
 }
 
-// GetPlaybookTasksWithResponse request returning *GetPlaybookTasksResponse
-func (c *ClientWithResponses) GetPlaybookTasksWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetPlaybookTasksResponse, error) {
-	rsp, err := c.GetPlaybookTasks(ctx, id, reqEditors...)
+// GetPlaybookTaskWithResponse request returning *GetPlaybookTaskResponse
+func (c *ClientWithResponses) GetPlaybookTaskWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetPlaybookTaskResponse, error) {
+	rsp, err := c.GetPlaybookTask(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetPlaybookTasksResponse(rsp)
+	return ParseGetPlaybookTaskResponse(rsp)
 }
 
 // UpdatePlaybookTaskWithBodyWithResponse request with arbitrary body returning *UpdatePlaybookTaskResponse
@@ -36509,15 +36509,15 @@ func ParseDeletePlaybookTaskResponse(rsp *http.Response) (*DeletePlaybookTaskRes
 	return response, nil
 }
 
-// ParseGetPlaybookTasksResponse parses an HTTP response from a GetPlaybookTasksWithResponse call
-func ParseGetPlaybookTasksResponse(rsp *http.Response) (*GetPlaybookTasksResponse, error) {
+// ParseGetPlaybookTaskResponse parses an HTTP response from a GetPlaybookTaskWithResponse call
+func ParseGetPlaybookTaskResponse(rsp *http.Response) (*GetPlaybookTaskResponse, error) {
 	bodyBytes, err := ioutil.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetPlaybookTasksResponse{
+	response := &GetPlaybookTaskResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

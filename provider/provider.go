@@ -84,6 +84,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_post_mortem_template":                             resourcePostmortemTemplate(),
 				"rootly_team":                                             resourceTeam(),
 				"rootly_incident_type":                                    resourceIncidentType(),
+				"rootly_playbook_task":                                    resourcePlaybookTask(),
 				"rootly_incident_role_task":                               resourceIncidentRoleTask(),
 				"rootly_workflow_custom_field_selection":                  resourceWorkflowCustomFieldSelection(),
 				"rootly_form_field":                                       resourceFormField(),
