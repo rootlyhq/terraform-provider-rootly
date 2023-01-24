@@ -46,6 +46,61 @@ func resourcePlaybook() *schema.Resource {
 				ForceNew:    false,
 				Description: "The external url of the playbook",
 			},
+
+			"severity_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "The Severity ID's to attach to the incident",
+			},
+
+			"environment_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "The Environment ID's to attach to the incident",
+			},
+
+			"functionality_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "The Functionality ID's to attach to the incident",
+			},
+
+			"group_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "The Team ID's to attach to the incident",
+			},
+
+			"incident_type_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "The Incident Type ID's to attach to the incident",
+			},
 		},
 	}
 }
@@ -65,6 +120,21 @@ func resourcePlaybookCreate(ctx context.Context, d *schema.ResourceData, meta in
 	}
 	if value, ok := d.GetOkExists("external_url"); ok {
 		s.ExternalUrl = value.(string)
+	}
+	if value, ok := d.GetOkExists("severity_ids"); ok {
+		s.SeverityIds = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("environment_ids"); ok {
+		s.EnvironmentIds = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("functionality_ids"); ok {
+		s.FunctionalityIds = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("group_ids"); ok {
+		s.GroupIds = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("incident_type_ids"); ok {
+		s.IncidentTypeIds = value.([]interface{})
 	}
 
 	res, err := c.CreatePlaybook(s)
@@ -98,6 +168,11 @@ func resourcePlaybookRead(ctx context.Context, d *schema.ResourceData, meta inte
 	d.Set("title", item.Title)
 	d.Set("summary", item.Summary)
 	d.Set("external_url", item.ExternalUrl)
+	d.Set("severity_ids", item.SeverityIds)
+	d.Set("environment_ids", item.EnvironmentIds)
+	d.Set("functionality_ids", item.FunctionalityIds)
+	d.Set("group_ids", item.GroupIds)
+	d.Set("incident_type_ids", item.IncidentTypeIds)
 
 	return nil
 }
@@ -116,6 +191,21 @@ func resourcePlaybookUpdate(ctx context.Context, d *schema.ResourceData, meta in
 	}
 	if d.HasChange("external_url") {
 		s.ExternalUrl = d.Get("external_url").(string)
+	}
+	if d.HasChange("severity_ids") {
+		s.SeverityIds = d.Get("severity_ids").([]interface{})
+	}
+	if d.HasChange("environment_ids") {
+		s.EnvironmentIds = d.Get("environment_ids").([]interface{})
+	}
+	if d.HasChange("functionality_ids") {
+		s.FunctionalityIds = d.Get("functionality_ids").([]interface{})
+	}
+	if d.HasChange("group_ids") {
+		s.GroupIds = d.Get("group_ids").([]interface{})
+	}
+	if d.HasChange("incident_type_ids") {
+		s.IncidentTypeIds = d.Get("incident_type_ids").([]interface{})
 	}
 
 	_, err := c.UpdatePlaybook(d.Id(), s)

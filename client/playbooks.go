@@ -13,6 +13,11 @@ type Playbook struct {
 	Title string `jsonapi:"attr,title,omitempty"`
   Summary string `jsonapi:"attr,summary,omitempty"`
   ExternalUrl string `jsonapi:"attr,external_url,omitempty"`
+  SeverityIds []interface{} `jsonapi:"attr,severity_ids,omitempty"`
+  EnvironmentIds []interface{} `jsonapi:"attr,environment_ids,omitempty"`
+  FunctionalityIds []interface{} `jsonapi:"attr,functionality_ids,omitempty"`
+  GroupIds []interface{} `jsonapi:"attr,group_ids,omitempty"`
+  IncidentTypeIds []interface{} `jsonapi:"attr,incident_type_ids,omitempty"`
 }
 
 func (c *Client) ListPlaybooks(params *rootlygo.ListPlaybooksParams) ([]interface{}, error) {

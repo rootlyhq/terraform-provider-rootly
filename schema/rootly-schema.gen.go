@@ -2464,6 +2464,7 @@ const (
 	SendSlackMessageTaskParamsActionablesManageFormFields       SendSlackMessageTaskParamsActionables = "manage_form_fields"
 	SendSlackMessageTaskParamsActionablesManageIncidentRoles    SendSlackMessageTaskParamsActionables = "manage_incident_roles"
 	SendSlackMessageTaskParamsActionablesUpdateIncident         SendSlackMessageTaskParamsActionables = "update_incident"
+	SendSlackMessageTaskParamsActionablesUpdateStatus           SendSlackMessageTaskParamsActionables = "update_status"
 	SendSlackMessageTaskParamsActionablesUpdateSummary          SendSlackMessageTaskParamsActionables = "update_summary"
 	SendSlackMessageTaskParamsActionablesViewTasks              SendSlackMessageTaskParamsActionables = "view_tasks"
 )
@@ -9008,8 +9009,23 @@ type Playbook struct {
 	// Date of creation
 	CreatedAt string `json:"created_at"`
 
+	// The Environment ID's to attach to the incident
+	EnvironmentIds *[]string `json:"environment_ids"`
+
 	// The external url of the playbook
 	ExternalUrl *string `json:"external_url"`
+
+	// The Functionality ID's to attach to the incident
+	FunctionalityIds *[]string `json:"functionality_ids"`
+
+	// The Team ID's to attach to the incident
+	GroupIds *[]string `json:"group_ids"`
+
+	// The Incident Type ID's to attach to the incident
+	IncidentTypeIds *[]string `json:"incident_type_ids"`
+
+	// The Severity ID's to attach to the incident
+	SeverityIds *[]string `json:"severity_ids"`
 
 	// The summary of the playbook
 	Summary *string `json:"summary"`
@@ -9028,8 +9044,23 @@ type PlaybookList struct {
 			// Date of creation
 			CreatedAt string `json:"created_at"`
 
+			// The Environment ID's to attach to the incident
+			EnvironmentIds *[]string `json:"environment_ids"`
+
 			// The external url of the playbook
 			ExternalUrl *string `json:"external_url"`
+
+			// The Functionality ID's to attach to the incident
+			FunctionalityIds *[]string `json:"functionality_ids"`
+
+			// The Team ID's to attach to the incident
+			GroupIds *[]string `json:"group_ids"`
+
+			// The Incident Type ID's to attach to the incident
+			IncidentTypeIds *[]string `json:"incident_type_ids"`
+
+			// The Severity ID's to attach to the incident
+			SeverityIds *[]string `json:"severity_ids"`
 
 			// The summary of the playbook
 			Summary *string `json:"summary"`
@@ -9064,8 +9095,23 @@ type PlaybookResponse struct {
 			// Date of creation
 			CreatedAt string `json:"created_at"`
 
+			// The Environment ID's to attach to the incident
+			EnvironmentIds *[]string `json:"environment_ids"`
+
 			// The external url of the playbook
 			ExternalUrl *string `json:"external_url"`
+
+			// The Functionality ID's to attach to the incident
+			FunctionalityIds *[]string `json:"functionality_ids"`
+
+			// The Team ID's to attach to the incident
+			GroupIds *[]string `json:"group_ids"`
+
+			// The Incident Type ID's to attach to the incident
+			IncidentTypeIds *[]string `json:"incident_type_ids"`
+
+			// The Severity ID's to attach to the incident
+			SeverityIds *[]string `json:"severity_ids"`
 
 			// The summary of the playbook
 			Summary *string `json:"summary"`
@@ -11803,6 +11849,9 @@ type UpdatePlaybook struct {
 
 			// The Team ID's to attach to the incident
 			GroupIds *[]string `json:"group_ids"`
+
+			// The Incident Type ID's to attach to the incident
+			IncidentTypeIds *[]string `json:"incident_type_ids"`
 
 			// The Service ID's to attach to the incident
 			ServiceIds *[]string `json:"service_ids"`

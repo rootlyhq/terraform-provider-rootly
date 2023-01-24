@@ -106,7 +106,7 @@ func resourceWorkflowTaskSendSlackMessage() *schema.Resource {
 							},
 						},
 						"actionables": &schema.Schema{
-							Description: "Value must be one of `update_summary`, `archive_channel`, `manage_incident_roles`, `update_incident`, `all_commands`, `leave_feedback`, `manage_form_fields`, `manage_action_items`, `view_tasks`, `add_pagerduty_responders`, `add_opsgenie_responders`, `add_victor_ops_responders`.",
+							Description: "Value must be one of `update_summary`, `update_status`, `archive_channel`, `manage_incident_roles`, `update_incident`, `all_commands`, `leave_feedback`, `manage_form_fields`, `manage_action_items`, `view_tasks`, `add_pagerduty_responders`, `add_opsgenie_responders`, `add_victor_ops_responders`.",
 							Type:        schema.TypeList,
 							Optional:    true,
 							Elem: &schema.Schema{

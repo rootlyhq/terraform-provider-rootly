@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.63] -- 2023-01-24
+
+- Add additional fields to `rootly_playbook`.
+
 ## [0.1.62] -- 2023-01-23
 
 - Rename `rootly_postmortem_template` to `rootly_post_mortem_template` to match Rootly API.
