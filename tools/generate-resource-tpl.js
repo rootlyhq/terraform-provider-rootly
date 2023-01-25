@@ -307,6 +307,19 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 					Description: "${description}",
 				},
 				`
+			} else if (schema.items && schema.items.type === "integer") {
+				return `
+				"${name}": &schema.Schema{
+					Type: schema.TypeList,
+					Elem: &schema.Schema{
+						Type: schema.TypeInt,
+					},
+					Computed: ${optional},
+					Required: ${required},
+					Optional: ${optional},
+					Description: "${description}",
+				},
+				`
 			} else {
 				console.log(`unsupported array field schema:`, name, schema)
 				return ''

@@ -29,6 +29,7 @@ description: |-
 - `notify_emails` (List of String) Emails attached to the service
 - `opsgenie_id` (String) The Opsgenie service id associated to this service
 - `owners_group_ids` (List of String) Owner Teams associated with this service
+- `owners_user_ids` (List of Number) Owner Users associated with this service
 - `pagerduty_id` (String) The PagerDuty service id associated to this service
 - `public_description` (String) The public description of the service
 - `service_ids` (List of String) Services dependent on this service

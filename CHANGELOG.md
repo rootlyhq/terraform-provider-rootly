@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.65] -- 2023-01-24
+
+- add `owners_user_ids` attribute to `service` and `functionality` resources.
+
+## [0.1.64] -- 2023-01-24
+
+- Remove duplicate fields.
+
 ## [0.1.63] -- 2023-01-24
 
 - Add additional fields to `rootly_playbook`.

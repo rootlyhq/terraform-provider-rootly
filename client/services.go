@@ -26,6 +26,7 @@ type Service struct {
   EnvironmentIds []interface{} `jsonapi:"attr,environment_ids,omitempty"`
   ServiceIds []interface{} `jsonapi:"attr,service_ids,omitempty"`
   OwnersGroupIds []interface{} `jsonapi:"attr,owners_group_ids,omitempty"`
+  OwnersUserIds []interface{} `jsonapi:"attr,owners_user_ids,omitempty"`
   SlackChannels []interface{} `jsonapi:"attr,slack_channels,omitempty"`
   SlackAliases []interface{} `jsonapi:"attr,slack_aliases,omitempty"`
 }

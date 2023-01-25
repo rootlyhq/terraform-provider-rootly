@@ -3889,6 +3889,9 @@ type Alert struct {
 		// Owner Teams associated with this service
 		OwnersGroupIds *[]string `json:"owners_group_ids"`
 
+		// Owner Users associated with this service
+		OwnersUserIds *[]int `json:"owners_user_ids"`
+
 		// The PagerDuty service id associated to this service
 		PagerdutyId *string `json:"pagerduty_id"`
 
@@ -4008,6 +4011,9 @@ type AlertList struct {
 
 				// Owner Teams associated with this service
 				OwnersGroupIds *[]string `json:"owners_group_ids"`
+
+				// Owner Users associated with this service
+				OwnersUserIds *[]int `json:"owners_user_ids"`
 
 				// The PagerDuty service id associated to this service
 				PagerdutyId *string `json:"pagerduty_id"`
@@ -4147,6 +4153,9 @@ type AlertResponse struct {
 
 				// Owner Teams associated with this service
 				OwnersGroupIds *[]string `json:"owners_group_ids"`
+
+				// Owner Users associated with this service
+				OwnersUserIds *[]int `json:"owners_user_ids"`
 
 				// The PagerDuty service id associated to this service
 				PagerdutyId *string `json:"pagerduty_id"`
@@ -6084,6 +6093,9 @@ type Functionality struct {
 	// Owner Teams associated with this functionality
 	OwnersGroupIds *[]string `json:"owners_group_ids"`
 
+	// Owner Users associated with this service
+	OwnersUserIds *[]int `json:"owners_user_ids"`
+
 	// The public description of the functionality
 	PublicDescription *string `json:"public_description"`
 
@@ -6138,6 +6150,9 @@ type FunctionalityList struct {
 
 			// Owner Teams associated with this functionality
 			OwnersGroupIds *[]string `json:"owners_group_ids"`
+
+			// Owner Users associated with this service
+			OwnersUserIds *[]int `json:"owners_user_ids"`
 
 			// The public description of the functionality
 			PublicDescription *string `json:"public_description"`
@@ -6209,6 +6224,9 @@ type FunctionalityResponse struct {
 
 			// Owner Teams associated with this functionality
 			OwnersGroupIds *[]string `json:"owners_group_ids"`
+
+			// Owner Users associated with this service
+			OwnersUserIds *[]int `json:"owners_user_ids"`
 
 			// The public description of the functionality
 			PublicDescription *string `json:"public_description"`
@@ -8109,6 +8127,9 @@ type NewFunctionality struct {
 			// Owner Teams associated with this functionality
 			OwnersGroupIds *[]string `json:"owners_group_ids"`
 
+			// Owner Users associated with this service
+			OwnersUserIds *[]int `json:"owners_user_ids"`
+
 			// The public description of the functionality
 			PublicDescription *string `json:"public_description"`
 
@@ -8606,6 +8627,9 @@ type NewService struct {
 
 			// Owner Teams associated with this service
 			OwnersGroupIds *[]string `json:"owners_group_ids"`
+
+			// Owner Users associated with this service
+			OwnersUserIds *[]int `json:"owners_user_ids"`
 
 			// The PagerDuty service id associated to this service
 			PagerdutyId *string `json:"pagerduty_id"`
@@ -9403,6 +9427,9 @@ type Pulse struct {
 		// Owner Teams associated with this service
 		OwnersGroupIds *[]string `json:"owners_group_ids"`
 
+		// Owner Users associated with this service
+		OwnersUserIds *[]int `json:"owners_user_ids"`
+
 		// The PagerDuty service id associated to this service
 		PagerdutyId *string `json:"pagerduty_id"`
 
@@ -9529,6 +9556,9 @@ type PulseList struct {
 
 				// Owner Teams associated with this service
 				OwnersGroupIds *[]string `json:"owners_group_ids"`
+
+				// Owner Users associated with this service
+				OwnersUserIds *[]int `json:"owners_user_ids"`
 
 				// The PagerDuty service id associated to this service
 				PagerdutyId *string `json:"pagerduty_id"`
@@ -9672,6 +9702,9 @@ type PulseResponse struct {
 
 				// Owner Teams associated with this service
 				OwnersGroupIds *[]string `json:"owners_group_ids"`
+
+				// Owner Users associated with this service
+				OwnersUserIds *[]int `json:"owners_user_ids"`
 
 				// The PagerDuty service id associated to this service
 				PagerdutyId *string `json:"pagerduty_id"`
@@ -10077,6 +10110,9 @@ type Service struct {
 	// Owner Teams associated with this service
 	OwnersGroupIds *[]string `json:"owners_group_ids"`
 
+	// Owner Users associated with this service
+	OwnersUserIds *[]int `json:"owners_user_ids"`
+
 	// The PagerDuty service id associated to this service
 	PagerdutyId *string `json:"pagerduty_id"`
 
@@ -10151,6 +10187,9 @@ type ServiceList struct {
 
 			// Owner Teams associated with this service
 			OwnersGroupIds *[]string `json:"owners_group_ids"`
+
+			// Owner Users associated with this service
+			OwnersUserIds *[]int `json:"owners_user_ids"`
 
 			// The PagerDuty service id associated to this service
 			PagerdutyId *string `json:"pagerduty_id"`
@@ -10242,6 +10281,9 @@ type ServiceResponse struct {
 
 			// Owner Teams associated with this service
 			OwnersGroupIds *[]string `json:"owners_group_ids"`
+
+			// Owner Users associated with this service
+			OwnersUserIds *[]int `json:"owners_user_ids"`
 
 			// The PagerDuty service id associated to this service
 			PagerdutyId *string `json:"pagerduty_id"`
@@ -11183,6 +11225,9 @@ type UpdateFunctionality struct {
 			// Owner Teams associated with this functionality
 			OwnersGroupIds *[]string `json:"owners_group_ids"`
 
+			// Owner Users associated with this service
+			OwnersUserIds *[]int `json:"owners_user_ids"`
+
 			// The public description of the functionality
 			PublicDescription *string `json:"public_description"`
 
@@ -12009,6 +12054,9 @@ type UpdateService struct {
 
 			// Owner Teams associated with this service
 			OwnersGroupIds *[]string `json:"owners_group_ids"`
+
+			// Owner Users associated with this service
+			OwnersUserIds *[]int `json:"owners_user_ids"`
 
 			// The PagerDuty service id associated to this service
 			PagerdutyId *string `json:"pagerduty_id"`

@@ -109,6 +109,17 @@ func resourceFunctionality() *schema.Resource {
 				Description: "Owner Teams associated with this functionality",
 			},
 
+			"owners_user_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeInt,
+				},
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Owner Users associated with this service",
+			},
+
 			"slack_channels": &schema.Schema{
 				Type:        schema.TypeList,
 				Computed:    true,
@@ -186,6 +197,9 @@ func resourceFunctionalityCreate(ctx context.Context, d *schema.ResourceData, me
 	if value, ok := d.GetOkExists("owners_group_ids"); ok {
 		s.OwnersGroupIds = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("owners_user_ids"); ok {
+		s.OwnersUserIds = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("slack_channels"); ok {
 		s.SlackChannels = value.([]interface{})
 	}
@@ -230,6 +244,7 @@ func resourceFunctionalityRead(ctx context.Context, d *schema.ResourceData, meta
 	d.Set("environment_ids", item.EnvironmentIds)
 	d.Set("service_ids", item.ServiceIds)
 	d.Set("owners_group_ids", item.OwnersGroupIds)
+	d.Set("owners_user_ids", item.OwnersUserIds)
 	d.Set("slack_channels", item.SlackChannels)
 	d.Set("slack_aliases", item.SlackAliases)
 
@@ -268,6 +283,9 @@ func resourceFunctionalityUpdate(ctx context.Context, d *schema.ResourceData, me
 	}
 	if d.HasChange("owners_group_ids") {
 		s.OwnersGroupIds = d.Get("owners_group_ids").([]interface{})
+	}
+	if d.HasChange("owners_user_ids") {
+		s.OwnersUserIds = d.Get("owners_user_ids").([]interface{})
 	}
 	if d.HasChange("slack_channels") {
 		s.SlackChannels = d.Get("slack_channels").([]interface{})
