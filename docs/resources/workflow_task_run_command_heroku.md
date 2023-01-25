@@ -36,6 +36,7 @@ Required:
 
 Optional:
 
+- `post_to_incident_timeline` (Boolean)
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
 - `task_type` (String)
 

@@ -94,6 +94,11 @@ func resourceWorkflowTaskHttpClient() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
+						"event_message": &schema.Schema{
+							Description: "",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 						"method": &schema.Schema{
 							Description: "HTTP method.. Value must be one of `GET`, `POST`, `PUT`, `DELETE`, `OPTIONS`.",
 							Type:        schema.TypeString,
@@ -111,6 +116,11 @@ func resourceWorkflowTaskHttpClient() *schema.Resource {
 							Description: "HTTP status code.",
 							Type:        schema.TypeString,
 							Required:    true,
+						},
+						"post_to_incident_timeline": &schema.Schema{
+							Description: "",
+							Type:        schema.TypeBool,
+							Optional:    true,
 						},
 						"post_to_slack_channels": &schema.Schema{
 							Description: "",

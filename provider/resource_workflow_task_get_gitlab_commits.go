@@ -80,6 +80,11 @@ func resourceWorkflowTaskGetGitlabCommits() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 						},
+						"post_to_incident_timeline": &schema.Schema{
+							Description: "",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
 						"post_to_slack_channels": &schema.Schema{
 							Description: "",
 							Type:        schema.TypeList,

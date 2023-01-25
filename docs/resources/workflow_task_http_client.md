@@ -35,10 +35,12 @@ Required:
 Optional:
 
 - `body` (String) HTTP body.
+- `event_message` (String)
 - `event_url` (String)
 - `headers` (String) JSON map of HTTP headers.
 - `method` (String) HTTP method.. Value must be one of `GET`, `POST`, `PUT`, `DELETE`, `OPTIONS`.
 - `params` (String) JSON map of HTTP query parameters.
+- `post_to_incident_timeline` (Boolean)
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
 - `task_type` (String)
 - `url` (String)

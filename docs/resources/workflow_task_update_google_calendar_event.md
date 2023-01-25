@@ -43,8 +43,17 @@ Optional:
 - `description` (String) The event description
 - `meeting_duration` (String) Meeting duration in format like '1 hour', '30 minutes'
 - `post_to_incident_timeline` (Boolean)
+- `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
 - `replace_attendees` (Boolean)
 - `send_updates` (Boolean) Send an email to the attendees notifying them of the event
 - `summary` (String) The event summary
 - `task_type` (String)
 - `time_of_meeting` (String) Time of meeting in format HH:MM
+
+<a id="nestedblock--task_params--post_to_slack_channels"></a>
+### Nested Schema for `task_params.post_to_slack_channels`
+
+Required:
+
+- `name` (String)
+- `id` (String)

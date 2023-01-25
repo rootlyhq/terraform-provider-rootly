@@ -36,6 +36,7 @@ Optional:
 
 - `environment_ids` (List of String)
 - `labels` (List of String)
+- `post_to_incident_timeline` (Boolean)
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
 - `service_ids` (List of String)
 - `sources` (List of String)

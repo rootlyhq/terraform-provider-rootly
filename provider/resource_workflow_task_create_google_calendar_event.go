@@ -256,11 +256,6 @@ func resourceWorkflowTaskCreateGoogleCalendarEvent() *schema.Resource {
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},
-						"post_to_incident_timeline": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeBool,
-							Optional:    true,
-						},
 						"summary": &schema.Schema{
 							Description: "The event summary",
 							Type:        schema.TypeString,
@@ -287,6 +282,28 @@ func resourceWorkflowTaskCreateGoogleCalendarEvent() *schema.Resource {
 								"hangoutsMeet",
 								"addOn",
 							}, false),
+						},
+						"post_to_incident_timeline": &schema.Schema{
+							Description: "",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
+						"post_to_slack_channels": &schema.Schema{
+							Description: "",
+							Type:        schema.TypeList,
+							Optional:    true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": &schema.Schema{
+										Type:     schema.TypeString,
+										Required: true,
+									},
+									"name": &schema.Schema{
+										Type:     schema.TypeString,
+										Required: true,
+									},
+								},
+							},
 						},
 					},
 				},

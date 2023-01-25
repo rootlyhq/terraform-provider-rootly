@@ -4268,7 +4268,8 @@ type AttachDatadogDashboardsTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"dashboards"`
-	PostToSlackChannels *[]struct {
+	PostToIncidentTimeline *bool `json:"post_to_incident_timeline,omitempty"`
+	PostToSlackChannels    *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"post_to_slack_channels,omitempty"`
@@ -4645,6 +4646,10 @@ type CreateGoogleCalendarEventTaskParams struct {
 	// Meeting duration in format like '1 hour', '30 minutes'
 	MeetingDuration        string `json:"meeting_duration"`
 	PostToIncidentTimeline *bool  `json:"post_to_incident_timeline,omitempty"`
+	PostToSlackChannels    *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"post_to_slack_channels,omitempty"`
 
 	// Send an email to the attendees notifying them of the event
 	SendUpdates *bool `json:"send_updates,omitempty"`
@@ -6274,8 +6279,9 @@ type GetAlertsTaskParams struct {
 	Labels         *[]string `json:"labels,omitempty"`
 
 	// How far back to fetch commits (in format '1 minute', '30 days', '3 months', etc.)
-	PastDuration        string `json:"past_duration"`
-	PostToSlackChannels *[]struct {
+	PastDuration           string `json:"past_duration"`
+	PostToIncidentTimeline *bool  `json:"post_to_incident_timeline,omitempty"`
+	PostToSlackChannels    *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"post_to_slack_channels,omitempty"`
@@ -6294,8 +6300,9 @@ type GetGithubCommitsTaskParams struct {
 	GithubRepositoryNames *[]string `json:"github_repository_names,omitempty"`
 
 	// How far back to fetch commits (in format '1 minute', '30 days', '3 months', etc.)
-	PastDuration        string `json:"past_duration"`
-	PostToSlackChannels *[]struct {
+	PastDuration           string `json:"past_duration"`
+	PostToIncidentTimeline *bool  `json:"post_to_incident_timeline,omitempty"`
+	PostToSlackChannels    *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"post_to_slack_channels,omitempty"`
@@ -6313,8 +6320,9 @@ type GetGitlabCommitsTaskParams struct {
 	GitlabRepositoryNames *[]string `json:"gitlab_repository_names,omitempty"`
 
 	// How far back to fetch commits (in format '1 minute', '30 days', '3 months', etc.)
-	PastDuration        string `json:"past_duration"`
-	PostToSlackChannels *[]struct {
+	PastDuration           string `json:"past_duration"`
+	PostToIncidentTimeline *bool  `json:"post_to_incident_timeline,omitempty"`
+	PostToSlackChannels    *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"post_to_slack_channels,omitempty"`
@@ -6331,8 +6339,9 @@ type GetPulsesTaskParams struct {
 	Labels         *[]string `json:"labels,omitempty"`
 
 	// How far back to fetch commits (in format '1 minute', '30 days', '3 months', etc.)
-	PastDuration        string `json:"past_duration"`
-	PostToSlackChannels *[]struct {
+	PastDuration           string `json:"past_duration"`
+	PostToIncidentTimeline *bool  `json:"post_to_incident_timeline,omitempty"`
+	PostToSlackChannels    *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"post_to_slack_channels,omitempty"`
@@ -6348,8 +6357,9 @@ type GetPulsesTaskParamsTaskType string
 // HttpClientTaskParams defines model for http_client_task_params.
 type HttpClientTaskParams struct {
 	// HTTP body.
-	Body     *string `json:"body,omitempty"`
-	EventUrl *string `json:"event_url,omitempty"`
+	Body         *string `json:"body,omitempty"`
+	EventMessage *string `json:"event_message,omitempty"`
+	EventUrl     *string `json:"event_url,omitempty"`
 
 	// JSON map of HTTP headers.
 	Headers *string `json:"headers,omitempty"`
@@ -6358,8 +6368,9 @@ type HttpClientTaskParams struct {
 	Method *HttpClientTaskParamsMethod `json:"method,omitempty"`
 
 	// JSON map of HTTP query parameters.
-	Params              *string `json:"params,omitempty"`
-	PostToSlackChannels *[]struct {
+	Params                 *string `json:"params,omitempty"`
+	PostToIncidentTimeline *bool   `json:"post_to_incident_timeline,omitempty"`
+	PostToSlackChannels    *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"post_to_slack_channels,omitempty"`
@@ -9798,10 +9809,11 @@ type PulseTriggerParamsTriggers string
 
 // RedisClientTaskParams defines model for redis_client_task_params.
 type RedisClientTaskParams struct {
-	Commands            string  `json:"commands"`
-	EventMessage        *string `json:"event_message,omitempty"`
-	EventUrl            *string `json:"event_url,omitempty"`
-	PostToSlackChannels *[]struct {
+	Commands               string  `json:"commands"`
+	EventMessage           *string `json:"event_message,omitempty"`
+	EventUrl               *string `json:"event_url,omitempty"`
+	PostToIncidentTimeline *bool   `json:"post_to_incident_timeline,omitempty"`
+	PostToSlackChannels    *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"post_to_slack_channels,omitempty"`
@@ -9852,9 +9864,10 @@ type RestartIncidentDataType string
 
 // RunCommandHerokuTaskParams defines model for run_command_heroku_task_params.
 type RunCommandHerokuTaskParams struct {
-	AppName             string `json:"app_name"`
-	Command             string `json:"command"`
-	PostToSlackChannels *[]struct {
+	AppName                string `json:"app_name"`
+	Command                string `json:"command"`
+	PostToIncidentTimeline *bool  `json:"post_to_incident_timeline,omitempty"`
+	PostToSlackChannels    *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"post_to_slack_channels,omitempty"`
@@ -10456,8 +10469,9 @@ type SnapshotDatadogGraphTaskParams struct {
 	MetricQueries *[]string `json:"metric_queries,omitempty"`
 
 	// in format '1 minute', '30 days', '3 months', etc.
-	PastDuration        string `json:"past_duration"`
-	PostToSlackChannels *[]struct {
+	PastDuration           string `json:"past_duration"`
+	PostToIncidentTimeline *bool  `json:"post_to_incident_timeline,omitempty"`
+	PostToSlackChannels    *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"post_to_slack_channels,omitempty"`
@@ -10473,7 +10487,8 @@ type SnapshotGrafanaDashboardTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"dashboards"`
-	PostToSlackChannels *[]struct {
+	PostToIncidentTimeline *bool `json:"post_to_incident_timeline,omitempty"`
+	PostToSlackChannels    *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"post_to_slack_channels,omitempty"`
@@ -10489,7 +10504,8 @@ type SnapshotLookerLookTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"dashboards"`
-	PostToSlackChannels *[]struct {
+	PostToIncidentTimeline *bool `json:"post_to_incident_timeline,omitempty"`
+	PostToSlackChannels    *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"post_to_slack_channels,omitempty"`
@@ -10501,9 +10517,10 @@ type SnapshotLookerLookTaskParamsTaskType string
 
 // SnapshotNewRelicGraphTaskParams defines model for snapshot_new_relic_graph_task_params.
 type SnapshotNewRelicGraphTaskParams struct {
-	MetricQuery         string                                    `json:"metric_query"`
-	MetricType          SnapshotNewRelicGraphTaskParamsMetricType `json:"metric_type"`
-	PostToSlackChannels *[]struct {
+	MetricQuery            string                                    `json:"metric_query"`
+	MetricType             SnapshotNewRelicGraphTaskParamsMetricType `json:"metric_type"`
+	PostToIncidentTimeline *bool                                     `json:"post_to_incident_timeline,omitempty"`
+	PostToSlackChannels    *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"post_to_slack_channels,omitempty"`
@@ -11302,7 +11319,11 @@ type UpdateGoogleCalendarEventTaskParams struct {
 	// Meeting duration in format like '1 hour', '30 minutes'
 	MeetingDuration        *string `json:"meeting_duration,omitempty"`
 	PostToIncidentTimeline *bool   `json:"post_to_incident_timeline,omitempty"`
-	ReplaceAttendees       *bool   `json:"replace_attendees,omitempty"`
+	PostToSlackChannels    *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"post_to_slack_channels,omitempty"`
+	ReplaceAttendees *bool `json:"replace_attendees,omitempty"`
 
 	// Send an email to the attendees notifying them of the event
 	SendUpdates *bool `json:"send_updates,omitempty"`

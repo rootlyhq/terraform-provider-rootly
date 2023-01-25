@@ -1,8 +1,12 @@
 # Changelog
 
+## [0.1.66] -- 2023-01-24
+
+- Add missing attributes to `tasks` related to slack.
+
 ## [0.1.65] -- 2023-01-24
 
-- add `owners_user_ids` attribute to `service` and `functionality` resources.
+- Add `owners_user_ids` attribute to `service` and `functionality` resources.
 
 ## [0.1.64] -- 2023-01-24
 
