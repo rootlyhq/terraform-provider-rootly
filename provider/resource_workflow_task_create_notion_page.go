@@ -64,6 +64,16 @@ func resourceWorkflowTaskCreateNotionPage() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
+						"show_timeline_as_table": &schema.Schema{
+							Description: "",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
+						"show_action_items_as_table": &schema.Schema{
+							Description: "",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
 					},
 				},
 			},

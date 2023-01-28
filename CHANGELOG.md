@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.67] -- 2024-01-28
+
+- Add `show_action_items_as_table` and `show_timeline_as_table` fields to `rootly_workflow_task_create_notion_page`.
+- Drop support for `rootly_postmortem_template`. Rename to `rootly_post_mortem_template` instead.
+
 ## [0.1.66] -- 2023-01-24
 
 - Add missing attributes to `tasks` related to slack.

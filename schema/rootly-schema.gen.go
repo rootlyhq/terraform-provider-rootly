@@ -4955,8 +4955,10 @@ type CreateNotionPageTaskParams struct {
 	} `json:"parent_page"`
 
 	// Post mortem template to use when creating page task, if desired.
-	PostMortemTemplateId *string                             `json:"post_mortem_template_id,omitempty"`
-	TaskType             *CreateNotionPageTaskParamsTaskType `json:"task_type,omitempty"`
+	PostMortemTemplateId   *string                             `json:"post_mortem_template_id,omitempty"`
+	ShowActionItemsAsTable *bool                               `json:"show_action_items_as_table,omitempty"`
+	ShowTimelineAsTable    *bool                               `json:"show_timeline_as_table,omitempty"`
+	TaskType               *CreateNotionPageTaskParamsTaskType `json:"task_type,omitempty"`
 }
 
 // CreateNotionPageTaskParamsTaskType defines model for CreateNotionPageTaskParams.TaskType.
