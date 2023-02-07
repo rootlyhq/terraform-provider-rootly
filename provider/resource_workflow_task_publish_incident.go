@@ -67,12 +67,13 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 						"event": &schema.Schema{
 							Description: "Incident event description",
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 						},
 						"status": &schema.Schema{
 							Description: "Value must be one of `investigating`, `identified`, `monitoring`, `resolved`, `scheduled`, `in_progress`, `verifying`, `completed`.",
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
+							Default:     nil,
 							ValidateFunc: validation.StringInSlice([]string{
 								"investigating",
 								"identified",
@@ -83,6 +84,11 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 								"verifying",
 								"completed",
 							}, false),
+						},
+						"status_page_template": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. ",
+							Type:        schema.TypeMap,
+							Optional:    true,
 						},
 						"status_page_id": &schema.Schema{
 							Description: "",

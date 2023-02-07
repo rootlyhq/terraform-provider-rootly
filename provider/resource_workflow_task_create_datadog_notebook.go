@@ -59,6 +59,11 @@ func resourceWorkflowTaskCreateDatadogNotebook() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
+						"template": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. ",
+							Type:        schema.TypeMap,
+							Optional:    true,
+						},
 						"title": &schema.Schema{
 							Description: "The notebook title",
 							Type:        schema.TypeString,

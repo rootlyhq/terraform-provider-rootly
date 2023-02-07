@@ -4552,6 +4552,10 @@ type CreateDatadogNotebookTaskParams struct {
 	// Post mortem template to use when creating notebook, if desired.
 	PostMortemTemplateId *string                                  `json:"post_mortem_template_id,omitempty"`
 	TaskType             *CreateDatadogNotebookTaskParamsTaskType `json:"task_type,omitempty"`
+	Template             *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"template,omitempty"`
 
 	// The notebook title
 	Title string `json:"title"`
@@ -9342,15 +9346,19 @@ type PrintTaskParamsTaskType string
 // PublishIncidentTaskParams defines model for publish_incident_task_params.
 type PublishIncidentTaskParams struct {
 	// Incident event description
-	Event    string `json:"event"`
+	Event    *string `json:"event,omitempty"`
 	Incident struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"incident"`
-	PublicTitle  string                             `json:"public_title"`
-	Status       PublishIncidentTaskParamsStatus    `json:"status"`
-	StatusPageId string                             `json:"status_page_id"`
-	TaskType     *PublishIncidentTaskParamsTaskType `json:"task_type,omitempty"`
+	PublicTitle        string                           `json:"public_title"`
+	Status             *PublishIncidentTaskParamsStatus `json:"status,omitempty"`
+	StatusPageId       string                           `json:"status_page_id"`
+	StatusPageTemplate *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"status_page_template,omitempty"`
+	TaskType *PublishIncidentTaskParamsTaskType `json:"task_type,omitempty"`
 }
 
 // PublishIncidentTaskParamsStatus defines model for PublishIncidentTaskParams.Status.
@@ -14211,6 +14219,9 @@ type ClientInterface interface {
 	// CancelIncident request with any body
 	CancelIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// MarkAsDuplicateIncident request with any body
+	MarkAsDuplicateIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// MitigateIncident request with any body
 	MitigateIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -15663,6 +15674,18 @@ func (c *Client) UpdateIncidentWithBody(ctx context.Context, id string, contentT
 
 func (c *Client) CancelIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCancelIncidentRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) MarkAsDuplicateIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewMarkAsDuplicateIncidentRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -22183,6 +22206,42 @@ func NewCancelIncidentRequestWithBody(server string, id string, contentType stri
 	return req, nil
 }
 
+// NewMarkAsDuplicateIncidentRequestWithBody generates requests for MarkAsDuplicateIncident with any type of body
+func NewMarkAsDuplicateIncidentRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incidents/%s/duplicate", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewMitigateIncidentRequestWithBody generates requests for MitigateIncident with any type of body
 func NewMitigateIncidentRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
@@ -28353,6 +28412,9 @@ type ClientWithResponsesInterface interface {
 	// CancelIncident request with any body
 	CancelIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CancelIncidentResponse, error)
 
+	// MarkAsDuplicateIncident request with any body
+	MarkAsDuplicateIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*MarkAsDuplicateIncidentResponse, error)
+
 	// MitigateIncident request with any body
 	MitigateIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*MitigateIncidentResponse, error)
 
@@ -30655,6 +30717,27 @@ func (r CancelIncidentResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r CancelIncidentResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type MarkAsDuplicateIncidentResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r MarkAsDuplicateIncidentResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r MarkAsDuplicateIncidentResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -33838,6 +33921,15 @@ func (c *ClientWithResponses) CancelIncidentWithBodyWithResponse(ctx context.Con
 	return ParseCancelIncidentResponse(rsp)
 }
 
+// MarkAsDuplicateIncidentWithBodyWithResponse request with arbitrary body returning *MarkAsDuplicateIncidentResponse
+func (c *ClientWithResponses) MarkAsDuplicateIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*MarkAsDuplicateIncidentResponse, error) {
+	rsp, err := c.MarkAsDuplicateIncidentWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseMarkAsDuplicateIncidentResponse(rsp)
+}
+
 // MitigateIncidentWithBodyWithResponse request with arbitrary body returning *MitigateIncidentResponse
 func (c *ClientWithResponses) MitigateIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*MitigateIncidentResponse, error) {
 	rsp, err := c.MitigateIncidentWithBody(ctx, id, contentType, body, reqEditors...)
@@ -36334,6 +36426,22 @@ func ParseCancelIncidentResponse(rsp *http.Response) (*CancelIncidentResponse, e
 	}
 
 	response := &CancelIncidentResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseMarkAsDuplicateIncidentResponse parses an HTTP response from a MarkAsDuplicateIncidentWithResponse call
+func ParseMarkAsDuplicateIncidentResponse(rsp *http.Response) (*MarkAsDuplicateIncidentResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &MarkAsDuplicateIncidentResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
