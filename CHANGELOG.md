@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.69] -- 2024-02-10
+
+- Add `project` and `labels` fields to `workflow_task_create_linear_issue` & `workflow_task_update_linear_issue`.
+
 ## [0.1.68] -- 2024-01-28
 
 - Add `show_action_items_as_table` and `show_timeline_as_table` fields to `rootly_workflow_task_create_notion_page`.

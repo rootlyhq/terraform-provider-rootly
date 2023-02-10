@@ -37,5 +37,15 @@ Required:
 Optional:
 
 - `description` (String) The issue description.
+- `labels` (Block List) (see [below for nested schema](#nestedblock--task_params--labels))
 - `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name.
+- `project` (Map of String) Map must contain two fields, `id` and `name`. The project id and display name.
 - `task_type` (String)
+
+<a id="nestedblock--task_params--labels"></a>
+### Nested Schema for `task_params.labels`
+
+Required:
+
+- `name` (String)
+- `id` (String)

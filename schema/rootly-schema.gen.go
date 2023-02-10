@@ -4877,12 +4877,22 @@ type CreateLinearIssueCommentTaskParamsTaskType string
 type CreateLinearIssueTaskParams struct {
 	// The issue description.
 	Description *string `json:"description,omitempty"`
+	Labels      *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"labels,omitempty"`
 
 	// The priority id and display name.
 	Priority *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"priority,omitempty"`
+
+	// The project id and display name.
+	Project *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"project,omitempty"`
 
 	// The state id and display name.
 	State struct {
@@ -11779,12 +11789,22 @@ type UpdateLinearIssueTaskParams struct {
 
 	// The issue id.
 	IssueId string `json:"issue_id"`
+	Labels  *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"labels,omitempty"`
 
 	// The priority id and display name.
 	Priority *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"priority,omitempty"`
+
+	// The project id and display name.
+	Project *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"project,omitempty"`
 
 	// The state id and display name.
 	State *struct {

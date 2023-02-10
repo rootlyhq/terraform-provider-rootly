@@ -74,6 +74,28 @@ func resourceWorkflowTaskCreateLinearIssue() *schema.Resource {
 							Type:        schema.TypeMap,
 							Required:    true,
 						},
+						"project": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. The project id and display name.",
+							Type:        schema.TypeMap,
+							Optional:    true,
+						},
+						"labels": &schema.Schema{
+							Description: "",
+							Type:        schema.TypeList,
+							Optional:    true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": &schema.Schema{
+										Type:     schema.TypeString,
+										Required: true,
+									},
+									"name": &schema.Schema{
+										Type:     schema.TypeString,
+										Required: true,
+									},
+								},
+							},
+						},
 						"priority": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. The priority id and display name.",
 							Type:        schema.TypeMap,
