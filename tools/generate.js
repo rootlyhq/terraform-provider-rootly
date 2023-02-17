@@ -28,6 +28,9 @@ const excluded = [
 	"custom_field",
 	"custom_field_option",
 	"webhooks_delivery",
+	'audit',
+	'incident_event_functionality',
+	'incident_event_service'
 ]
 
 console.log(`Excluding resource from generation:`, excluded)

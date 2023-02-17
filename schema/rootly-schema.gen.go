@@ -349,6 +349,71 @@ const (
 	AttachDatadogDashboards AttachDatadogDashboardsTaskParamsTaskType = "attach_datadog_dashboards"
 )
 
+// Defines values for AuditItemType.
+const (
+	AuditItemTypeCause                          AuditItemType = "Cause"
+	AuditItemTypeCustomField                    AuditItemType = "CustomField"
+	AuditItemTypeCustomFieldOption              AuditItemType = "CustomFieldOption"
+	AuditItemTypeDashboard                      AuditItemType = "Dashboard"
+	AuditItemTypeEnvironment                    AuditItemType = "Environment"
+	AuditItemTypeFunctionality                  AuditItemType = "Functionality"
+	AuditItemTypeGeniusWorkflow                 AuditItemType = "GeniusWorkflow"
+	AuditItemTypeGeniusWorkflowGroup            AuditItemType = "GeniusWorkflowGroup"
+	AuditItemTypeGeniusWorkflowRun              AuditItemType = "GeniusWorkflowRun"
+	AuditItemTypeGroup                          AuditItemType = "Group"
+	AuditItemTypeIncident                       AuditItemType = "Incident"
+	AuditItemTypeIncidentActionItem             AuditItemType = "IncidentActionItem"
+	AuditItemTypeIncidentEvent                  AuditItemType = "IncidentEvent"
+	AuditItemTypeIncidentFormFieldSelection     AuditItemType = "IncidentFormFieldSelection"
+	AuditItemTypeIncidentFormFieldSelectionUser AuditItemType = "IncidentFormFieldSelectionUser"
+	AuditItemTypeIncidentPostMortem             AuditItemType = "IncidentPostMortem"
+	AuditItemTypeIncidentRoleAssignment         AuditItemType = "IncidentRoleAssignment"
+	AuditItemTypeIncidentRoleTask               AuditItemType = "IncidentRoleTask"
+	AuditItemTypeIncidentStatusPageEvent        AuditItemType = "IncidentStatusPageEvent"
+	AuditItemTypeIncidentTask                   AuditItemType = "IncidentTask"
+	AuditItemTypeIncidentType                   AuditItemType = "IncidentType"
+	AuditItemTypePlaybook                       AuditItemType = "Playbook"
+	AuditItemTypePlaybookTask                   AuditItemType = "PlaybookTask"
+	AuditItemTypeService                        AuditItemType = "Service"
+	AuditItemTypeSeverity                       AuditItemType = "Severity"
+	AuditItemTypeStatusPage                     AuditItemType = "StatusPage"
+)
+
+// Defines values for AuditsListDataAttributesItemType.
+const (
+	AuditsListDataAttributesItemTypeCause                          AuditsListDataAttributesItemType = "Cause"
+	AuditsListDataAttributesItemTypeCustomField                    AuditsListDataAttributesItemType = "CustomField"
+	AuditsListDataAttributesItemTypeCustomFieldOption              AuditsListDataAttributesItemType = "CustomFieldOption"
+	AuditsListDataAttributesItemTypeDashboard                      AuditsListDataAttributesItemType = "Dashboard"
+	AuditsListDataAttributesItemTypeEnvironment                    AuditsListDataAttributesItemType = "Environment"
+	AuditsListDataAttributesItemTypeFunctionality                  AuditsListDataAttributesItemType = "Functionality"
+	AuditsListDataAttributesItemTypeGeniusWorkflow                 AuditsListDataAttributesItemType = "GeniusWorkflow"
+	AuditsListDataAttributesItemTypeGeniusWorkflowGroup            AuditsListDataAttributesItemType = "GeniusWorkflowGroup"
+	AuditsListDataAttributesItemTypeGeniusWorkflowRun              AuditsListDataAttributesItemType = "GeniusWorkflowRun"
+	AuditsListDataAttributesItemTypeGroup                          AuditsListDataAttributesItemType = "Group"
+	AuditsListDataAttributesItemTypeIncident                       AuditsListDataAttributesItemType = "Incident"
+	AuditsListDataAttributesItemTypeIncidentActionItem             AuditsListDataAttributesItemType = "IncidentActionItem"
+	AuditsListDataAttributesItemTypeIncidentEvent                  AuditsListDataAttributesItemType = "IncidentEvent"
+	AuditsListDataAttributesItemTypeIncidentFormFieldSelection     AuditsListDataAttributesItemType = "IncidentFormFieldSelection"
+	AuditsListDataAttributesItemTypeIncidentFormFieldSelectionUser AuditsListDataAttributesItemType = "IncidentFormFieldSelectionUser"
+	AuditsListDataAttributesItemTypeIncidentPostMortem             AuditsListDataAttributesItemType = "IncidentPostMortem"
+	AuditsListDataAttributesItemTypeIncidentRoleAssignment         AuditsListDataAttributesItemType = "IncidentRoleAssignment"
+	AuditsListDataAttributesItemTypeIncidentRoleTask               AuditsListDataAttributesItemType = "IncidentRoleTask"
+	AuditsListDataAttributesItemTypeIncidentStatusPageEvent        AuditsListDataAttributesItemType = "IncidentStatusPageEvent"
+	AuditsListDataAttributesItemTypeIncidentTask                   AuditsListDataAttributesItemType = "IncidentTask"
+	AuditsListDataAttributesItemTypeIncidentType                   AuditsListDataAttributesItemType = "IncidentType"
+	AuditsListDataAttributesItemTypePlaybook                       AuditsListDataAttributesItemType = "Playbook"
+	AuditsListDataAttributesItemTypePlaybookTask                   AuditsListDataAttributesItemType = "PlaybookTask"
+	AuditsListDataAttributesItemTypeService                        AuditsListDataAttributesItemType = "Service"
+	AuditsListDataAttributesItemTypeSeverity                       AuditsListDataAttributesItemType = "Severity"
+	AuditsListDataAttributesItemTypeStatusPage                     AuditsListDataAttributesItemType = "StatusPage"
+)
+
+// Defines values for AuditsListDataType.
+const (
+	Audits AuditsListDataType = "audits"
+)
+
 // Defines values for AutoAssignRoleOpsgenieTaskParamsTaskType.
 const (
 	AutoAssignRoleOpsgenie AutoAssignRoleOpsgenieTaskParamsTaskType = "auto_assign_role_opsgenie"
@@ -1349,6 +1414,40 @@ const (
 	IncidentEventVisibilityInternal IncidentEventVisibility = "internal"
 )
 
+// Defines values for IncidentEventFunctionalityStatus.
+const (
+	IncidentEventFunctionalityStatusImpacted      IncidentEventFunctionalityStatus = "impacted"
+	IncidentEventFunctionalityStatusMajorOutage   IncidentEventFunctionalityStatus = "major_outage"
+	IncidentEventFunctionalityStatusOperational   IncidentEventFunctionalityStatus = "operational"
+	IncidentEventFunctionalityStatusPartialOutage IncidentEventFunctionalityStatus = "partial_outage"
+)
+
+// Defines values for IncidentEventFunctionalityListDataAttributesStatus.
+const (
+	IncidentEventFunctionalityListDataAttributesStatusImpacted      IncidentEventFunctionalityListDataAttributesStatus = "impacted"
+	IncidentEventFunctionalityListDataAttributesStatusMajorOutage   IncidentEventFunctionalityListDataAttributesStatus = "major_outage"
+	IncidentEventFunctionalityListDataAttributesStatusOperational   IncidentEventFunctionalityListDataAttributesStatus = "operational"
+	IncidentEventFunctionalityListDataAttributesStatusPartialOutage IncidentEventFunctionalityListDataAttributesStatus = "partial_outage"
+)
+
+// Defines values for IncidentEventFunctionalityListDataType.
+const (
+	IncidentEventFunctionalityListDataTypeIncidentEventFunctionalities IncidentEventFunctionalityListDataType = "incident_event_functionalities"
+)
+
+// Defines values for IncidentEventFunctionalityResponseDataAttributesStatus.
+const (
+	IncidentEventFunctionalityResponseDataAttributesStatusImpacted      IncidentEventFunctionalityResponseDataAttributesStatus = "impacted"
+	IncidentEventFunctionalityResponseDataAttributesStatusMajorOutage   IncidentEventFunctionalityResponseDataAttributesStatus = "major_outage"
+	IncidentEventFunctionalityResponseDataAttributesStatusOperational   IncidentEventFunctionalityResponseDataAttributesStatus = "operational"
+	IncidentEventFunctionalityResponseDataAttributesStatusPartialOutage IncidentEventFunctionalityResponseDataAttributesStatus = "partial_outage"
+)
+
+// Defines values for IncidentEventFunctionalityResponseDataType.
+const (
+	IncidentEventFunctionalityResponseDataTypeIncidentEventFunctionalities IncidentEventFunctionalityResponseDataType = "incident_event_functionalities"
+)
+
 // Defines values for IncidentEventListDataAttributesVisibility.
 const (
 	IncidentEventListDataAttributesVisibilityExternal IncidentEventListDataAttributesVisibility = "external"
@@ -1369,6 +1468,40 @@ const (
 // Defines values for IncidentEventResponseDataType.
 const (
 	IncidentEventResponseDataTypeIncidentEvents IncidentEventResponseDataType = "incident_events"
+)
+
+// Defines values for IncidentEventServiceStatus.
+const (
+	IncidentEventServiceStatusImpacted      IncidentEventServiceStatus = "impacted"
+	IncidentEventServiceStatusMajorOutage   IncidentEventServiceStatus = "major_outage"
+	IncidentEventServiceStatusOperational   IncidentEventServiceStatus = "operational"
+	IncidentEventServiceStatusPartialOutage IncidentEventServiceStatus = "partial_outage"
+)
+
+// Defines values for IncidentEventServiceListDataAttributesStatus.
+const (
+	IncidentEventServiceListDataAttributesStatusImpacted      IncidentEventServiceListDataAttributesStatus = "impacted"
+	IncidentEventServiceListDataAttributesStatusMajorOutage   IncidentEventServiceListDataAttributesStatus = "major_outage"
+	IncidentEventServiceListDataAttributesStatusOperational   IncidentEventServiceListDataAttributesStatus = "operational"
+	IncidentEventServiceListDataAttributesStatusPartialOutage IncidentEventServiceListDataAttributesStatus = "partial_outage"
+)
+
+// Defines values for IncidentEventServiceListDataType.
+const (
+	IncidentEventServiceListDataTypeIncidentEventServices IncidentEventServiceListDataType = "incident_event_services"
+)
+
+// Defines values for IncidentEventServiceResponseDataAttributesStatus.
+const (
+	IncidentEventServiceResponseDataAttributesStatusImpacted      IncidentEventServiceResponseDataAttributesStatus = "impacted"
+	IncidentEventServiceResponseDataAttributesStatusMajorOutage   IncidentEventServiceResponseDataAttributesStatus = "major_outage"
+	IncidentEventServiceResponseDataAttributesStatusOperational   IncidentEventServiceResponseDataAttributesStatus = "operational"
+	IncidentEventServiceResponseDataAttributesStatusPartialOutage IncidentEventServiceResponseDataAttributesStatus = "partial_outage"
+)
+
+// Defines values for IncidentEventServiceResponseDataType.
+const (
+	IncidentEventServiceResponseDataTypeIncidentEventServices IncidentEventServiceResponseDataType = "incident_event_services"
 )
 
 // Defines values for IncidentFeedbackRating.
@@ -2015,6 +2148,32 @@ const (
 // Defines values for NewIncidentEventDataType.
 const (
 	NewIncidentEventDataTypeIncidentEvents NewIncidentEventDataType = "incident_events"
+)
+
+// Defines values for NewIncidentEventFunctionalityDataAttributesStatus.
+const (
+	NewIncidentEventFunctionalityDataAttributesStatusImpacted      NewIncidentEventFunctionalityDataAttributesStatus = "impacted"
+	NewIncidentEventFunctionalityDataAttributesStatusMajorOutage   NewIncidentEventFunctionalityDataAttributesStatus = "major_outage"
+	NewIncidentEventFunctionalityDataAttributesStatusOperational   NewIncidentEventFunctionalityDataAttributesStatus = "operational"
+	NewIncidentEventFunctionalityDataAttributesStatusPartialOutage NewIncidentEventFunctionalityDataAttributesStatus = "partial_outage"
+)
+
+// Defines values for NewIncidentEventFunctionalityDataType.
+const (
+	NewIncidentEventFunctionalityDataTypeIncidentEventFunctionalities NewIncidentEventFunctionalityDataType = "incident_event_functionalities"
+)
+
+// Defines values for NewIncidentEventServiceDataAttributesStatus.
+const (
+	NewIncidentEventServiceDataAttributesStatusImpacted      NewIncidentEventServiceDataAttributesStatus = "impacted"
+	NewIncidentEventServiceDataAttributesStatusMajorOutage   NewIncidentEventServiceDataAttributesStatus = "major_outage"
+	NewIncidentEventServiceDataAttributesStatusOperational   NewIncidentEventServiceDataAttributesStatus = "operational"
+	NewIncidentEventServiceDataAttributesStatusPartialOutage NewIncidentEventServiceDataAttributesStatus = "partial_outage"
+)
+
+// Defines values for NewIncidentEventServiceDataType.
+const (
+	NewIncidentEventServiceDataTypeIncidentEventServices NewIncidentEventServiceDataType = "incident_event_services"
 )
 
 // Defines values for NewIncidentFeedbackDataAttributesRating.
@@ -2890,6 +3049,32 @@ const (
 // Defines values for UpdateIncidentEventDataType.
 const (
 	UpdateIncidentEventDataTypeIncidentEvents UpdateIncidentEventDataType = "incident_events"
+)
+
+// Defines values for UpdateIncidentEventFunctionalityDataAttributesStatus.
+const (
+	UpdateIncidentEventFunctionalityDataAttributesStatusImpacted      UpdateIncidentEventFunctionalityDataAttributesStatus = "impacted"
+	UpdateIncidentEventFunctionalityDataAttributesStatusMajorOutage   UpdateIncidentEventFunctionalityDataAttributesStatus = "major_outage"
+	UpdateIncidentEventFunctionalityDataAttributesStatusOperational   UpdateIncidentEventFunctionalityDataAttributesStatus = "operational"
+	UpdateIncidentEventFunctionalityDataAttributesStatusPartialOutage UpdateIncidentEventFunctionalityDataAttributesStatus = "partial_outage"
+)
+
+// Defines values for UpdateIncidentEventFunctionalityDataType.
+const (
+	UpdateIncidentEventFunctionalityDataTypeIncidentEventFunctionalities UpdateIncidentEventFunctionalityDataType = "incident_event_functionalities"
+)
+
+// Defines values for UpdateIncidentEventServiceDataAttributesStatus.
+const (
+	UpdateIncidentEventServiceDataAttributesStatusImpacted      UpdateIncidentEventServiceDataAttributesStatus = "impacted"
+	UpdateIncidentEventServiceDataAttributesStatusMajorOutage   UpdateIncidentEventServiceDataAttributesStatus = "major_outage"
+	UpdateIncidentEventServiceDataAttributesStatusOperational   UpdateIncidentEventServiceDataAttributesStatus = "operational"
+	UpdateIncidentEventServiceDataAttributesStatusPartialOutage UpdateIncidentEventServiceDataAttributesStatus = "partial_outage"
+)
+
+// Defines values for UpdateIncidentEventServiceDataType.
+const (
+	UpdateIncidentEventServiceDataTypeIncidentEventServices UpdateIncidentEventServiceDataType = "incident_event_services"
 )
 
 // Defines values for UpdateIncidentFeedbackDataAttributesRating.
@@ -3836,6 +4021,27 @@ type Alert struct {
 		// The name of the environment
 		Name string `json:"name"`
 
+		// Emails attached to the environment
+		NotifyEmails *[]string `json:"notify_emails"`
+
+		// Slack Aliases associated with this environment
+		SlackAliases *[]struct {
+			// Slack alias ID
+			Id string `json:"id"`
+
+			// Slack alias name
+			Name string `json:"name"`
+		} `json:"slack_aliases"`
+
+		// Slack Channels associated with this environment
+		SlackChannels *[]struct {
+			// Slack channel ID
+			Id string `json:"id"`
+
+			// Slack channel name
+			Name string `json:"name"`
+		} `json:"slack_channels"`
+
 		// The slug of the environment
 		Slug *string `json:"slug,omitempty"`
 
@@ -3958,6 +4164,27 @@ type AlertList struct {
 
 				// The name of the environment
 				Name string `json:"name"`
+
+				// Emails attached to the environment
+				NotifyEmails *[]string `json:"notify_emails"`
+
+				// Slack Aliases associated with this environment
+				SlackAliases *[]struct {
+					// Slack alias ID
+					Id string `json:"id"`
+
+					// Slack alias name
+					Name string `json:"name"`
+				} `json:"slack_aliases"`
+
+				// Slack Channels associated with this environment
+				SlackChannels *[]struct {
+					// Slack channel ID
+					Id string `json:"id"`
+
+					// Slack channel name
+					Name string `json:"name"`
+				} `json:"slack_channels"`
 
 				// The slug of the environment
 				Slug *string `json:"slug,omitempty"`
@@ -4100,6 +4327,27 @@ type AlertResponse struct {
 
 				// The name of the environment
 				Name string `json:"name"`
+
+				// Emails attached to the environment
+				NotifyEmails *[]string `json:"notify_emails"`
+
+				// Slack Aliases associated with this environment
+				SlackAliases *[]struct {
+					// Slack alias ID
+					Id string `json:"id"`
+
+					// Slack alias name
+					Name string `json:"name"`
+				} `json:"slack_aliases"`
+
+				// Slack Channels associated with this environment
+				SlackChannels *[]struct {
+					// Slack channel ID
+					Id string `json:"id"`
+
+					// Slack channel name
+					Name string `json:"name"`
+				} `json:"slack_channels"`
 
 				// The slug of the environment
 				Slug *string `json:"slug,omitempty"`
@@ -4278,6 +4526,84 @@ type AttachDatadogDashboardsTaskParams struct {
 
 // AttachDatadogDashboardsTaskParamsTaskType defines model for AttachDatadogDashboardsTaskParams.TaskType.
 type AttachDatadogDashboardsTaskParamsTaskType string
+
+// Audit defines model for audit.
+type Audit struct {
+	// Date of creation
+	CreatedAt string `json:"created_at"`
+
+	// Describes the action that was taken.
+	Event string `json:"event"`
+
+	// ID of audit
+	Id *float32 `json:"id"`
+
+	// ID of the affected object.
+	ItemId *string `json:"item_id"`
+
+	// Describes the object in which the action was taken on.
+	ItemType *AuditItemType `json:"item_type"`
+
+	// The object in which the action was taken on.
+	Object *map[string]interface{} `json:"object"`
+
+	// The changes that occurred on the object.
+	ObjectChanges *map[string]interface{} `json:"object_changes"`
+
+	// The ID of who took action on the object. Together with whodunnit_type can be used to find the user.
+	UserId *float32 `json:"user_id"`
+}
+
+// Describes the object in which the action was taken on.
+type AuditItemType string
+
+// AuditsList defines model for audits_list.
+type AuditsList struct {
+	Data []struct {
+		Attributes struct {
+			// Date of creation
+			CreatedAt string `json:"created_at"`
+
+			// Describes the action that was taken.
+			Event string `json:"event"`
+
+			// ID of audit
+			Id *float32 `json:"id"`
+
+			// ID of the affected object.
+			ItemId *string `json:"item_id"`
+
+			// Describes the object in which the action was taken on.
+			ItemType *AuditsListDataAttributesItemType `json:"item_type"`
+
+			// The object in which the action was taken on.
+			Object *map[string]interface{} `json:"object"`
+
+			// The changes that occurred on the object.
+			ObjectChanges *map[string]interface{} `json:"object_changes"`
+
+			// The ID of who took action on the object. Together with whodunnit_type can be used to find the user.
+			UserId *float32 `json:"user_id"`
+		} `json:"attributes"`
+
+		// Unique ID of the audit log item
+		Id   string             `json:"id"`
+		Type AuditsListDataType `json:"type"`
+	} `json:"data"`
+	Links struct {
+		First string  `json:"first"`
+		Last  string  `json:"last"`
+		Next  *string `json:"next"`
+		Prev  *string `json:"prev"`
+		Self  string  `json:"self"`
+	} `json:"links"`
+}
+
+// Describes the object in which the action was taken on.
+type AuditsListDataAttributesItemType string
+
+// AuditsListDataType defines model for AuditsList.Data.Type.
+type AuditsListDataType string
 
 // AutoAssignRoleOpsgenieTaskParams defines model for auto_assign_role_opsgenie_task_params.
 type AutoAssignRoleOpsgenieTaskParams struct {
@@ -5682,6 +6008,27 @@ type Environment struct {
 	// The name of the environment
 	Name string `json:"name"`
 
+	// Emails attached to the environment
+	NotifyEmails *[]string `json:"notify_emails"`
+
+	// Slack Aliases associated with this environment
+	SlackAliases *[]struct {
+		// Slack alias ID
+		Id string `json:"id"`
+
+		// Slack alias name
+		Name string `json:"name"`
+	} `json:"slack_aliases"`
+
+	// Slack Channels associated with this environment
+	SlackChannels *[]struct {
+		// Slack channel ID
+		Id string `json:"id"`
+
+		// Slack channel name
+		Name string `json:"name"`
+	} `json:"slack_channels"`
+
 	// The slug of the environment
 	Slug *string `json:"slug,omitempty"`
 
@@ -5703,6 +6050,27 @@ type EnvironmentList struct {
 
 			// The name of the environment
 			Name string `json:"name"`
+
+			// Emails attached to the environment
+			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Slack Aliases associated with this environment
+			SlackAliases *[]struct {
+				// Slack alias ID
+				Id string `json:"id"`
+
+				// Slack alias name
+				Name string `json:"name"`
+			} `json:"slack_aliases"`
+
+			// Slack Channels associated with this environment
+			SlackChannels *[]struct {
+				// Slack channel ID
+				Id string `json:"id"`
+
+				// Slack channel name
+				Name string `json:"name"`
+			} `json:"slack_channels"`
 
 			// The slug of the environment
 			Slug *string `json:"slug,omitempty"`
@@ -5741,6 +6109,27 @@ type EnvironmentResponse struct {
 
 			// The name of the environment
 			Name string `json:"name"`
+
+			// Emails attached to the environment
+			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Slack Aliases associated with this environment
+			SlackAliases *[]struct {
+				// Slack alias ID
+				Id string `json:"id"`
+
+				// Slack alias name
+				Name string `json:"name"`
+			} `json:"slack_aliases"`
+
+			// Slack Channels associated with this environment
+			SlackChannels *[]struct {
+				// Slack channel ID
+				Id string `json:"id"`
+
+				// Slack channel name
+				Name string `json:"name"`
+			} `json:"slack_channels"`
 
 			// The slug of the environment
 			Slug *string `json:"slug,omitempty"`
@@ -6695,6 +7084,80 @@ type IncidentEvent struct {
 // The visibility of the incident action item
 type IncidentEventVisibility string
 
+// IncidentEventFunctionality defines model for incident_event_functionality.
+type IncidentEventFunctionality struct {
+	// The ID of the functionality.
+	FunctionalityId string `json:"functionality_id"`
+
+	// The ID of the incident event.
+	IncidentEventId string `json:"incident_event_id"`
+
+	// The status of the affected functionality
+	Status IncidentEventFunctionalityStatus `json:"status"`
+}
+
+// The status of the affected functionality
+type IncidentEventFunctionalityStatus string
+
+// IncidentEventFunctionalityList defines model for incident_event_functionality_list.
+type IncidentEventFunctionalityList struct {
+	Data []struct {
+		Attributes struct {
+			// The ID of the functionality.
+			FunctionalityId string `json:"functionality_id"`
+
+			// The ID of the incident event.
+			IncidentEventId string `json:"incident_event_id"`
+
+			// The status of the affected functionality
+			Status IncidentEventFunctionalityListDataAttributesStatus `json:"status"`
+		} `json:"attributes"`
+
+		// Unique ID of the incident event functionality
+		Id   string                                 `json:"id"`
+		Type IncidentEventFunctionalityListDataType `json:"type"`
+	} `json:"data"`
+	Links struct {
+		First string  `json:"first"`
+		Last  string  `json:"last"`
+		Next  *string `json:"next"`
+		Prev  *string `json:"prev"`
+		Self  string  `json:"self"`
+	} `json:"links"`
+}
+
+// The status of the affected functionality
+type IncidentEventFunctionalityListDataAttributesStatus string
+
+// IncidentEventFunctionalityListDataType defines model for IncidentEventFunctionalityList.Data.Type.
+type IncidentEventFunctionalityListDataType string
+
+// IncidentEventFunctionalityResponse defines model for incident_event_functionality_response.
+type IncidentEventFunctionalityResponse struct {
+	Data struct {
+		Attributes struct {
+			// The ID of the functionality.
+			FunctionalityId string `json:"functionality_id"`
+
+			// The ID of the incident event.
+			IncidentEventId string `json:"incident_event_id"`
+
+			// The status of the affected functionality
+			Status IncidentEventFunctionalityResponseDataAttributesStatus `json:"status"`
+		} `json:"attributes"`
+
+		// Unique ID of the incident event functionality
+		Id   string                                     `json:"id"`
+		Type IncidentEventFunctionalityResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// The status of the affected functionality
+type IncidentEventFunctionalityResponseDataAttributesStatus string
+
+// IncidentEventFunctionalityResponseDataType defines model for IncidentEventFunctionalityResponse.Data.Type.
+type IncidentEventFunctionalityResponseDataType string
+
 // IncidentEventList defines model for incident_event_list.
 type IncidentEventList struct {
 	Data []struct {
@@ -6765,6 +7228,80 @@ type IncidentEventResponseDataAttributesVisibility string
 
 // IncidentEventResponseDataType defines model for IncidentEventResponse.Data.Type.
 type IncidentEventResponseDataType string
+
+// IncidentEventService defines model for incident_event_service.
+type IncidentEventService struct {
+	// The ID of the incident event.
+	IncidentEventId string `json:"incident_event_id"`
+
+	// The ID of the service.
+	ServiceId string `json:"service_id"`
+
+	// The status of the affected service
+	Status IncidentEventServiceStatus `json:"status"`
+}
+
+// The status of the affected service
+type IncidentEventServiceStatus string
+
+// IncidentEventServiceList defines model for incident_event_service_list.
+type IncidentEventServiceList struct {
+	Data []struct {
+		Attributes struct {
+			// The ID of the incident event.
+			IncidentEventId string `json:"incident_event_id"`
+
+			// The ID of the service.
+			ServiceId string `json:"service_id"`
+
+			// The status of the affected service
+			Status IncidentEventServiceListDataAttributesStatus `json:"status"`
+		} `json:"attributes"`
+
+		// Unique ID of the incident event service
+		Id   string                           `json:"id"`
+		Type IncidentEventServiceListDataType `json:"type"`
+	} `json:"data"`
+	Links struct {
+		First string  `json:"first"`
+		Last  string  `json:"last"`
+		Next  *string `json:"next"`
+		Prev  *string `json:"prev"`
+		Self  string  `json:"self"`
+	} `json:"links"`
+}
+
+// The status of the affected service
+type IncidentEventServiceListDataAttributesStatus string
+
+// IncidentEventServiceListDataType defines model for IncidentEventServiceList.Data.Type.
+type IncidentEventServiceListDataType string
+
+// IncidentEventServiceResponse defines model for incident_event_service_response.
+type IncidentEventServiceResponse struct {
+	Data struct {
+		Attributes struct {
+			// The ID of the incident event.
+			IncidentEventId string `json:"incident_event_id"`
+
+			// The ID of the service.
+			ServiceId string `json:"service_id"`
+
+			// The status of the affected service
+			Status IncidentEventServiceResponseDataAttributesStatus `json:"status"`
+		} `json:"attributes"`
+
+		// Unique ID of the incident event service
+		Id   string                               `json:"id"`
+		Type IncidentEventServiceResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// The status of the affected service
+type IncidentEventServiceResponseDataAttributesStatus string
+
+// IncidentEventServiceResponseDataType defines model for IncidentEventServiceResponse.Data.Type.
+type IncidentEventServiceResponseDataType string
 
 // IncidentFeedback defines model for incident_feedback.
 type IncidentFeedback struct {
@@ -7708,6 +8245,27 @@ type IncidentType struct {
 	// The name of the incident type
 	Name string `json:"name"`
 
+	// Emails to attach to the incident type
+	NotifyEmails *[]string `json:"notify_emails"`
+
+	// Slack Aliases associated with this incident type
+	SlackAliases *[]struct {
+		// Slack alias ID
+		Id string `json:"id"`
+
+		// Slack alias name
+		Name string `json:"name"`
+	} `json:"slack_aliases"`
+
+	// Slack Channels associated with this incident type
+	SlackChannels *[]struct {
+		// Slack channel ID
+		Id string `json:"id"`
+
+		// Slack channel name
+		Name string `json:"name"`
+	} `json:"slack_channels"`
+
 	// The slug of the incident type
 	Slug *string `json:"slug,omitempty"`
 
@@ -7729,6 +8287,27 @@ type IncidentTypeList struct {
 
 			// The name of the incident type
 			Name string `json:"name"`
+
+			// Emails to attach to the incident type
+			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Slack Aliases associated with this incident type
+			SlackAliases *[]struct {
+				// Slack alias ID
+				Id string `json:"id"`
+
+				// Slack alias name
+				Name string `json:"name"`
+			} `json:"slack_aliases"`
+
+			// Slack Channels associated with this incident type
+			SlackChannels *[]struct {
+				// Slack channel ID
+				Id string `json:"id"`
+
+				// Slack channel name
+				Name string `json:"name"`
+			} `json:"slack_channels"`
 
 			// The slug of the incident type
 			Slug *string `json:"slug,omitempty"`
@@ -7767,6 +8346,27 @@ type IncidentTypeResponse struct {
 
 			// The name of the incident type
 			Name string `json:"name"`
+
+			// Emails to attach to the incident type
+			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Slack Aliases associated with this incident type
+			SlackAliases *[]struct {
+				// Slack alias ID
+				Id string `json:"id"`
+
+				// Slack alias name
+				Name string `json:"name"`
+			} `json:"slack_aliases"`
+
+			// Slack Channels associated with this incident type
+			SlackChannels *[]struct {
+				// Slack channel ID
+				Id string `json:"id"`
+
+				// Slack channel name
+				Name string `json:"name"`
+			} `json:"slack_channels"`
 
 			// The slug of the incident type
 			Slug *string `json:"slug,omitempty"`
@@ -8036,6 +8636,27 @@ type NewEnvironment struct {
 
 			// The name of the environment
 			Name string `json:"name"`
+
+			// Emails to attach to the environment
+			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Slack Aliases associated with this environment
+			SlackAliases *[]struct {
+				// Slack alias ID
+				Id string `json:"id"`
+
+				// Slack alias name
+				Name string `json:"name"`
+			} `json:"slack_aliases"`
+
+			// Slack Channels associated with this environment
+			SlackChannels *[]struct {
+				// Slack channel ID
+				Id string `json:"id"`
+
+				// Slack channel name
+				Name string `json:"name"`
+			} `json:"slack_channels"`
 		} `json:"attributes"`
 		Type NewEnvironmentDataType `json:"type"`
 	} `json:"data"`
@@ -8350,6 +8971,52 @@ type NewIncidentEventDataAttributesVisibility string
 // NewIncidentEventDataType defines model for NewIncidentEvent.Data.Type.
 type NewIncidentEventDataType string
 
+// NewIncidentEventFunctionality defines model for new_incident_event_functionality.
+type NewIncidentEventFunctionality struct {
+	Data struct {
+		Attributes struct {
+			// The ID of the functionality.
+			FunctionalityId string `json:"functionality_id"`
+
+			// The ID of the incident event.
+			IncidentEventId string `json:"incident_event_id"`
+
+			// The status of the affected functionality
+			Status NewIncidentEventFunctionalityDataAttributesStatus `json:"status"`
+		} `json:"attributes"`
+		Type NewIncidentEventFunctionalityDataType `json:"type"`
+	} `json:"data"`
+}
+
+// The status of the affected functionality
+type NewIncidentEventFunctionalityDataAttributesStatus string
+
+// NewIncidentEventFunctionalityDataType defines model for NewIncidentEventFunctionality.Data.Type.
+type NewIncidentEventFunctionalityDataType string
+
+// NewIncidentEventService defines model for new_incident_event_service.
+type NewIncidentEventService struct {
+	Data struct {
+		Attributes struct {
+			// The ID of the incident event.
+			IncidentEventId string `json:"incident_event_id"`
+
+			// The ID of the service.
+			ServiceId string `json:"service_id"`
+
+			// The status of the affected service
+			Status NewIncidentEventServiceDataAttributesStatus `json:"status"`
+		} `json:"attributes"`
+		Type NewIncidentEventServiceDataType `json:"type"`
+	} `json:"data"`
+}
+
+// The status of the affected service
+type NewIncidentEventServiceDataAttributesStatus string
+
+// NewIncidentEventServiceDataType defines model for NewIncidentEventService.Data.Type.
+type NewIncidentEventServiceDataType string
+
 // NewIncidentFeedback defines model for new_incident_feedback.
 type NewIncidentFeedback struct {
 	Data struct {
@@ -8474,6 +9141,27 @@ type NewIncidentType struct {
 
 			// The name of the incident type
 			Name string `json:"name"`
+
+			// Emails to attach to the incident type
+			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Slack Aliases associated with this incident type
+			SlackAliases *[]struct {
+				// Slack alias ID
+				Id string `json:"id"`
+
+				// Slack alias name
+				Name string `json:"name"`
+			} `json:"slack_aliases"`
+
+			// Slack Channels associated with this incident type
+			SlackChannels *[]struct {
+				// Slack channel ID
+				Id string `json:"id"`
+
+				// Slack channel name
+				Name string `json:"name"`
+			} `json:"slack_channels"`
 		} `json:"attributes"`
 		Type NewIncidentTypeDataType `json:"type"`
 	} `json:"data"`
@@ -8713,8 +9401,29 @@ type NewSeverity struct {
 			// The name of the severity
 			Name string `json:"name"`
 
+			// Emails to attach to the severity
+			NotifyEmails *[]string `json:"notify_emails"`
+
 			// The severity of the severity
 			Severity *NewSeverityDataAttributesSeverity `json:"severity,omitempty"`
+
+			// Slack Aliases associated with this severity
+			SlackAliases *[]struct {
+				// Slack alias ID
+				Id string `json:"id"`
+
+				// Slack alias name
+				Name string `json:"name"`
+			} `json:"slack_aliases"`
+
+			// Slack Channels associated with this severity
+			SlackChannels *[]struct {
+				// Slack channel ID
+				Id string `json:"id"`
+
+				// Slack channel name
+				Name string `json:"name"`
+			} `json:"slack_channels"`
 		} `json:"attributes"`
 		Type NewSeverityDataType `json:"type"`
 	} `json:"data"`
@@ -9398,6 +10107,27 @@ type Pulse struct {
 		// The name of the environment
 		Name string `json:"name"`
 
+		// Emails attached to the environment
+		NotifyEmails *[]string `json:"notify_emails"`
+
+		// Slack Aliases associated with this environment
+		SlackAliases *[]struct {
+			// Slack alias ID
+			Id string `json:"id"`
+
+			// Slack alias name
+			Name string `json:"name"`
+		} `json:"slack_aliases"`
+
+		// Slack Channels associated with this environment
+		SlackChannels *[]struct {
+			// Slack channel ID
+			Id string `json:"id"`
+
+			// Slack channel name
+			Name string `json:"name"`
+		} `json:"slack_channels"`
+
 		// The slug of the environment
 		Slug *string `json:"slug,omitempty"`
 
@@ -9527,6 +10257,27 @@ type PulseList struct {
 
 				// The name of the environment
 				Name string `json:"name"`
+
+				// Emails attached to the environment
+				NotifyEmails *[]string `json:"notify_emails"`
+
+				// Slack Aliases associated with this environment
+				SlackAliases *[]struct {
+					// Slack alias ID
+					Id string `json:"id"`
+
+					// Slack alias name
+					Name string `json:"name"`
+				} `json:"slack_aliases"`
+
+				// Slack Channels associated with this environment
+				SlackChannels *[]struct {
+					// Slack channel ID
+					Id string `json:"id"`
+
+					// Slack channel name
+					Name string `json:"name"`
+				} `json:"slack_channels"`
 
 				// The slug of the environment
 				Slug *string `json:"slug,omitempty"`
@@ -9673,6 +10424,27 @@ type PulseResponse struct {
 
 				// The name of the environment
 				Name string `json:"name"`
+
+				// Emails attached to the environment
+				NotifyEmails *[]string `json:"notify_emails"`
+
+				// Slack Aliases associated with this environment
+				SlackAliases *[]struct {
+					// Slack alias ID
+					Id string `json:"id"`
+
+					// Slack alias name
+					Name string `json:"name"`
+				} `json:"slack_aliases"`
+
+				// Slack Channels associated with this environment
+				SlackChannels *[]struct {
+					// Slack channel ID
+					Id string `json:"id"`
+
+					// Slack channel name
+					Name string `json:"name"`
+				} `json:"slack_channels"`
 
 				// The slug of the environment
 				Slug *string `json:"slug,omitempty"`
@@ -10374,8 +11146,29 @@ type Severity struct {
 	// The name of the severity
 	Name string `json:"name"`
 
+	// Emails to attach to the severity
+	NotifyEmails *[]string `json:"notify_emails"`
+
 	// The severity of the severity
 	Severity *SeveritySeverity `json:"severity,omitempty"`
+
+	// Slack Aliases associated with this severity
+	SlackAliases *[]struct {
+		// Slack alias ID
+		Id string `json:"id"`
+
+		// Slack alias name
+		Name string `json:"name"`
+	} `json:"slack_aliases"`
+
+	// Slack Channels associated with this severity
+	SlackChannels *[]struct {
+		// Slack channel ID
+		Id string `json:"id"`
+
+		// Slack channel name
+		Name string `json:"name"`
+	} `json:"slack_channels"`
 
 	// The slug of the severity
 	Slug *string `json:"slug,omitempty"`
@@ -10402,8 +11195,29 @@ type SeverityList struct {
 			// The name of the severity
 			Name string `json:"name"`
 
+			// Emails to attach to the severity
+			NotifyEmails *[]string `json:"notify_emails"`
+
 			// The severity of the severity
 			Severity *SeverityListDataAttributesSeverity `json:"severity,omitempty"`
+
+			// Slack Aliases associated with this severity
+			SlackAliases *[]struct {
+				// Slack alias ID
+				Id string `json:"id"`
+
+				// Slack alias name
+				Name string `json:"name"`
+			} `json:"slack_aliases"`
+
+			// Slack Channels associated with this severity
+			SlackChannels *[]struct {
+				// Slack channel ID
+				Id string `json:"id"`
+
+				// Slack channel name
+				Name string `json:"name"`
+			} `json:"slack_channels"`
 
 			// The slug of the severity
 			Slug *string `json:"slug,omitempty"`
@@ -10446,8 +11260,29 @@ type SeverityResponse struct {
 			// The name of the severity
 			Name string `json:"name"`
 
+			// Emails to attach to the severity
+			NotifyEmails *[]string `json:"notify_emails"`
+
 			// The severity of the severity
 			Severity *SeverityResponseDataAttributesSeverity `json:"severity,omitempty"`
+
+			// Slack Aliases associated with this severity
+			SlackAliases *[]struct {
+				// Slack alias ID
+				Id string `json:"id"`
+
+				// Slack alias name
+				Name string `json:"name"`
+			} `json:"slack_aliases"`
+
+			// Slack Channels associated with this severity
+			SlackChannels *[]struct {
+				// Slack channel ID
+				Id string `json:"id"`
+
+				// Slack channel name
+				Name string `json:"name"`
+			} `json:"slack_channels"`
 
 			// The slug of the severity
 			Slug *string `json:"slug,omitempty"`
@@ -11147,6 +11982,27 @@ type UpdateEnvironment struct {
 
 			// The name of the environment
 			Name *string `json:"name,omitempty"`
+
+			// Emails to attach to the environment
+			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Slack Aliases associated with this environment
+			SlackAliases *[]struct {
+				// Slack alias ID
+				Id string `json:"id"`
+
+				// Slack alias name
+				Name string `json:"name"`
+			} `json:"slack_aliases"`
+
+			// Slack Channels associated with this environment
+			SlackChannels *[]struct {
+				// Slack channel ID
+				Id string `json:"id"`
+
+				// Slack channel name
+				Name string `json:"name"`
+			} `json:"slack_channels"`
 		} `json:"attributes"`
 		Type UpdateEnvironmentDataType `json:"type"`
 	} `json:"data"`
@@ -11495,6 +12351,40 @@ type UpdateIncidentEventDataAttributesVisibility string
 // UpdateIncidentEventDataType defines model for UpdateIncidentEvent.Data.Type.
 type UpdateIncidentEventDataType string
 
+// UpdateIncidentEventFunctionality defines model for update_incident_event_functionality.
+type UpdateIncidentEventFunctionality struct {
+	Data struct {
+		Attributes struct {
+			// The status of the affected functionality
+			Status UpdateIncidentEventFunctionalityDataAttributesStatus `json:"status"`
+		} `json:"attributes"`
+		Type UpdateIncidentEventFunctionalityDataType `json:"type"`
+	} `json:"data"`
+}
+
+// The status of the affected functionality
+type UpdateIncidentEventFunctionalityDataAttributesStatus string
+
+// UpdateIncidentEventFunctionalityDataType defines model for UpdateIncidentEventFunctionality.Data.Type.
+type UpdateIncidentEventFunctionalityDataType string
+
+// UpdateIncidentEventService defines model for update_incident_event_service.
+type UpdateIncidentEventService struct {
+	Data struct {
+		Attributes struct {
+			// The status of the affected service
+			Status UpdateIncidentEventServiceDataAttributesStatus `json:"status"`
+		} `json:"attributes"`
+		Type UpdateIncidentEventServiceDataType `json:"type"`
+	} `json:"data"`
+}
+
+// The status of the affected service
+type UpdateIncidentEventServiceDataAttributesStatus string
+
+// UpdateIncidentEventServiceDataType defines model for UpdateIncidentEventService.Data.Type.
+type UpdateIncidentEventServiceDataType string
+
 // UpdateIncidentFeedback defines model for update_incident_feedback.
 type UpdateIncidentFeedback struct {
 	Data struct {
@@ -11728,6 +12618,27 @@ type UpdateIncidentType struct {
 
 			// The name of the incident type
 			Name *string `json:"name,omitempty"`
+
+			// Emails to attach to the incident type
+			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Slack Aliases associated with this incident type
+			SlackAliases *[]struct {
+				// Slack alias ID
+				Id string `json:"id"`
+
+				// Slack alias name
+				Name string `json:"name"`
+			} `json:"slack_aliases"`
+
+			// Slack Channels associated with this incident type
+			SlackChannels *[]struct {
+				// Slack channel ID
+				Id string `json:"id"`
+
+				// Slack channel name
+				Name string `json:"name"`
+			} `json:"slack_channels"`
 		} `json:"attributes"`
 		Type UpdateIncidentTypeDataType `json:"type"`
 	} `json:"data"`
@@ -12186,8 +13097,29 @@ type UpdateSeverity struct {
 			// The name of the severity
 			Name *string `json:"name,omitempty"`
 
+			// Emails to attach to the severity
+			NotifyEmails *[]string `json:"notify_emails"`
+
 			// The severity of the severity
 			Severity *UpdateSeverityDataAttributesSeverity `json:"severity,omitempty"`
+
+			// Slack Aliases associated with this severity
+			SlackAliases *[]struct {
+				// Slack alias ID
+				Id string `json:"id"`
+
+				// Slack alias name
+				Name string `json:"name"`
+			} `json:"slack_aliases"`
+
+			// Slack Channels associated with this severity
+			SlackChannels *[]struct {
+				// Slack channel ID
+				Id string `json:"id"`
+
+				// Slack channel name
+				Name string `json:"name"`
+			} `json:"slack_channels"`
 		} `json:"attributes"`
 		Type UpdateSeverityDataType `json:"type"`
 	} `json:"data"`
@@ -13450,6 +14382,17 @@ type ListAlertsParams struct {
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
+// ListAuditsParams defines parameters for ListAudits.
+type ListAuditsParams struct {
+	Include           *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterCreatedAtGt *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtLt *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterUserId      *string `form:"filter[user_id],omitempty" json:"filter[user_id],omitempty"`
+	FilterItemType    *string `form:"filter[item_type],omitempty" json:"filter[item_type],omitempty"`
+}
+
 // ListCausesParams defines parameters for ListCauses.
 type ListCausesParams struct {
 	Include           *string `form:"include,omitempty" json:"include,omitempty"`
@@ -13520,6 +14463,20 @@ type ListEnvironmentsParams struct {
 	FilterCreatedAtGt *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
 	FilterCreatedAtLt *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
 	Sort              *string `form:"sort,omitempty" json:"sort,omitempty"`
+}
+
+// ListIncidentEventFunctionalitiesParams defines parameters for ListIncidentEventFunctionalities.
+type ListIncidentEventFunctionalitiesParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+}
+
+// ListIncidentEventServicesParams defines parameters for ListIncidentEventServices.
+type ListIncidentEventServicesParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
 // ListFormFieldsParams defines parameters for ListFormFields.
@@ -13975,6 +14932,9 @@ type ClientInterface interface {
 	// GetAlert request
 	GetAlert(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListAudits request
+	ListAudits(ctx context.Context, params *ListAuditsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListCauses request
 	ListCauses(ctx context.Context, params *ListCausesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -14083,6 +15043,18 @@ type ClientInterface interface {
 	// UpdateIncidentEvent request with any body
 	UpdateIncidentEventWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListIncidentEventFunctionalities request
+	ListIncidentEventFunctionalities(ctx context.Context, incidentEventId string, params *ListIncidentEventFunctionalitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateIncidentEventFunctionality request with any body
+	CreateIncidentEventFunctionalityWithBody(ctx context.Context, incidentEventId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListIncidentEventServices request
+	ListIncidentEventServices(ctx context.Context, incidentEventId string, params *ListIncidentEventServicesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateIncidentEventService request with any body
+	CreateIncidentEventServiceWithBody(ctx context.Context, incidentEventId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// DeleteIncidentFeedback request
 	DeleteIncidentFeedback(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -14166,6 +15138,24 @@ type ClientInterface interface {
 
 	// UpdateIncidentCustomFieldSelection request with any body
 	UpdateIncidentCustomFieldSelectionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteIncidentEventFunctionality request
+	DeleteIncidentEventFunctionality(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetIncidentEventFunctionalities request
+	GetIncidentEventFunctionalities(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateIncidentEventFunctionality request with any body
+	UpdateIncidentEventFunctionalityWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteIncidentEventService request
+	DeleteIncidentEventService(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetIncidentEventServices request
+	GetIncidentEventServices(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateIncidentEventService request with any body
+	UpdateIncidentEventServiceWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteIncidentFormFieldSelection request
 	DeleteIncidentFormFieldSelection(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -14648,6 +15638,18 @@ func (c *Client) GetAlert(ctx context.Context, id string, reqEditors ...RequestE
 	return c.Client.Do(req)
 }
 
+func (c *Client) ListAudits(ctx context.Context, params *ListAuditsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListAuditsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) ListCauses(ctx context.Context, params *ListCausesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListCausesRequest(c.Server, params)
 	if err != nil {
@@ -15080,6 +16082,54 @@ func (c *Client) UpdateIncidentEventWithBody(ctx context.Context, id string, con
 	return c.Client.Do(req)
 }
 
+func (c *Client) ListIncidentEventFunctionalities(ctx context.Context, incidentEventId string, params *ListIncidentEventFunctionalitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListIncidentEventFunctionalitiesRequest(c.Server, incidentEventId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateIncidentEventFunctionalityWithBody(ctx context.Context, incidentEventId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateIncidentEventFunctionalityRequestWithBody(c.Server, incidentEventId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListIncidentEventServices(ctx context.Context, incidentEventId string, params *ListIncidentEventServicesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListIncidentEventServicesRequest(c.Server, incidentEventId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateIncidentEventServiceWithBody(ctx context.Context, incidentEventId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateIncidentEventServiceRequestWithBody(c.Server, incidentEventId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) DeleteIncidentFeedback(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteIncidentFeedbackRequest(c.Server, id)
 	if err != nil {
@@ -15406,6 +16456,78 @@ func (c *Client) GetIncidentCustomFieldSelection(ctx context.Context, id string,
 
 func (c *Client) UpdateIncidentCustomFieldSelectionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIncidentCustomFieldSelectionRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteIncidentEventFunctionality(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteIncidentEventFunctionalityRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetIncidentEventFunctionalities(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetIncidentEventFunctionalitiesRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateIncidentEventFunctionalityWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateIncidentEventFunctionalityRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteIncidentEventService(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteIncidentEventServiceRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetIncidentEventServices(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetIncidentEventServicesRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateIncidentEventServiceWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateIncidentEventServiceRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -17294,6 +18416,149 @@ func NewGetAlertRequest(server string, id string) (*http.Request, error) {
 	return req, nil
 }
 
+// NewListAuditsRequest generates requests for ListAudits
+func NewListAuditsRequest(server string, params *ListAuditsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/audits")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Include != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterUserId != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[user_id]", runtime.ParamLocationQuery, *params.FilterUserId); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterItemType != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[item_type]", runtime.ParamLocationQuery, *params.FilterItemType); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewListCausesRequest generates requests for ListCauses
 func NewListCausesRequest(server string, params *ListCausesParams) (*http.Request, error) {
 	var err error
@@ -19140,6 +20405,250 @@ func NewUpdateIncidentEventRequestWithBody(server string, id string, contentType
 	return req, nil
 }
 
+// NewListIncidentEventFunctionalitiesRequest generates requests for ListIncidentEventFunctionalities
+func NewListIncidentEventFunctionalitiesRequest(server string, incidentEventId string, params *ListIncidentEventFunctionalitiesParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "incident_event_id", runtime.ParamLocationPath, incidentEventId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/events/%s/functionalities", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Include != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateIncidentEventFunctionalityRequestWithBody generates requests for CreateIncidentEventFunctionality with any type of body
+func NewCreateIncidentEventFunctionalityRequestWithBody(server string, incidentEventId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "incident_event_id", runtime.ParamLocationPath, incidentEventId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/events/%s/functionalities", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListIncidentEventServicesRequest generates requests for ListIncidentEventServices
+func NewListIncidentEventServicesRequest(server string, incidentEventId string, params *ListIncidentEventServicesParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "incident_event_id", runtime.ParamLocationPath, incidentEventId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/events/%s/services", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Include != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateIncidentEventServiceRequestWithBody generates requests for CreateIncidentEventService with any type of body
+func NewCreateIncidentEventServiceRequestWithBody(server string, incidentEventId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "incident_event_id", runtime.ParamLocationPath, incidentEventId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/events/%s/services", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewDeleteIncidentFeedbackRequest generates requests for DeleteIncidentFeedback
 func NewDeleteIncidentFeedbackRequest(server string, id string) (*http.Request, error) {
 	var err error
@@ -20549,6 +22058,214 @@ func NewUpdateIncidentCustomFieldSelectionRequestWithBody(server string, id stri
 	}
 
 	operationPath := fmt.Sprintf("/v1/incident_custom_field_selections/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteIncidentEventFunctionalityRequest generates requests for DeleteIncidentEventFunctionality
+func NewDeleteIncidentEventFunctionalityRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_event_functionalities/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetIncidentEventFunctionalitiesRequest generates requests for GetIncidentEventFunctionalities
+func NewGetIncidentEventFunctionalitiesRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_event_functionalities/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateIncidentEventFunctionalityRequestWithBody generates requests for UpdateIncidentEventFunctionality with any type of body
+func NewUpdateIncidentEventFunctionalityRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_event_functionalities/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteIncidentEventServiceRequest generates requests for DeleteIncidentEventService
+func NewDeleteIncidentEventServiceRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_event_services/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetIncidentEventServicesRequest generates requests for GetIncidentEventServices
+func NewGetIncidentEventServicesRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_event_services/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateIncidentEventServiceRequestWithBody generates requests for UpdateIncidentEventService with any type of body
+func NewUpdateIncidentEventServiceRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_event_services/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -28168,6 +29885,9 @@ type ClientWithResponsesInterface interface {
 	// GetAlert request
 	GetAlertWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetAlertResponse, error)
 
+	// ListAudits request
+	ListAuditsWithResponse(ctx context.Context, params *ListAuditsParams, reqEditors ...RequestEditorFn) (*ListAuditsResponse, error)
+
 	// ListCauses request
 	ListCausesWithResponse(ctx context.Context, params *ListCausesParams, reqEditors ...RequestEditorFn) (*ListCausesResponse, error)
 
@@ -28276,6 +29996,18 @@ type ClientWithResponsesInterface interface {
 	// UpdateIncidentEvent request with any body
 	UpdateIncidentEventWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentEventResponse, error)
 
+	// ListIncidentEventFunctionalities request
+	ListIncidentEventFunctionalitiesWithResponse(ctx context.Context, incidentEventId string, params *ListIncidentEventFunctionalitiesParams, reqEditors ...RequestEditorFn) (*ListIncidentEventFunctionalitiesResponse, error)
+
+	// CreateIncidentEventFunctionality request with any body
+	CreateIncidentEventFunctionalityWithBodyWithResponse(ctx context.Context, incidentEventId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentEventFunctionalityResponse, error)
+
+	// ListIncidentEventServices request
+	ListIncidentEventServicesWithResponse(ctx context.Context, incidentEventId string, params *ListIncidentEventServicesParams, reqEditors ...RequestEditorFn) (*ListIncidentEventServicesResponse, error)
+
+	// CreateIncidentEventService request with any body
+	CreateIncidentEventServiceWithBodyWithResponse(ctx context.Context, incidentEventId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentEventServiceResponse, error)
+
 	// DeleteIncidentFeedback request
 	DeleteIncidentFeedbackWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentFeedbackResponse, error)
 
@@ -28359,6 +30091,24 @@ type ClientWithResponsesInterface interface {
 
 	// UpdateIncidentCustomFieldSelection request with any body
 	UpdateIncidentCustomFieldSelectionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentCustomFieldSelectionResponse, error)
+
+	// DeleteIncidentEventFunctionality request
+	DeleteIncidentEventFunctionalityWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentEventFunctionalityResponse, error)
+
+	// GetIncidentEventFunctionalities request
+	GetIncidentEventFunctionalitiesWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentEventFunctionalitiesResponse, error)
+
+	// UpdateIncidentEventFunctionality request with any body
+	UpdateIncidentEventFunctionalityWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentEventFunctionalityResponse, error)
+
+	// DeleteIncidentEventService request
+	DeleteIncidentEventServiceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentEventServiceResponse, error)
+
+	// GetIncidentEventServices request
+	GetIncidentEventServicesWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentEventServicesResponse, error)
+
+	// UpdateIncidentEventService request with any body
+	UpdateIncidentEventServiceWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentEventServiceResponse, error)
 
 	// DeleteIncidentFormFieldSelection request
 	DeleteIncidentFormFieldSelectionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentFormFieldSelectionResponse, error)
@@ -28889,6 +30639,27 @@ func (r GetAlertResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r GetAlertResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListAuditsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r ListAuditsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListAuditsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -29651,6 +31422,90 @@ func (r UpdateIncidentEventResponse) StatusCode() int {
 	return 0
 }
 
+type ListIncidentEventFunctionalitiesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r ListIncidentEventFunctionalitiesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListIncidentEventFunctionalitiesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateIncidentEventFunctionalityResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateIncidentEventFunctionalityResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateIncidentEventFunctionalityResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListIncidentEventServicesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r ListIncidentEventServicesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListIncidentEventServicesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateIncidentEventServiceResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateIncidentEventServiceResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateIncidentEventServiceResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type DeleteIncidentFeedbackResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -30233,6 +32088,132 @@ func (r UpdateIncidentCustomFieldSelectionResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r UpdateIncidentCustomFieldSelectionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteIncidentEventFunctionalityResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteIncidentEventFunctionalityResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteIncidentEventFunctionalityResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetIncidentEventFunctionalitiesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r GetIncidentEventFunctionalitiesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetIncidentEventFunctionalitiesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateIncidentEventFunctionalityResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateIncidentEventFunctionalityResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateIncidentEventFunctionalityResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteIncidentEventServiceResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteIncidentEventServiceResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteIncidentEventServiceResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetIncidentEventServicesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r GetIncidentEventServicesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetIncidentEventServicesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateIncidentEventServiceResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateIncidentEventServiceResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateIncidentEventServiceResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -33149,6 +35130,15 @@ func (c *ClientWithResponses) GetAlertWithResponse(ctx context.Context, id strin
 	return ParseGetAlertResponse(rsp)
 }
 
+// ListAuditsWithResponse request returning *ListAuditsResponse
+func (c *ClientWithResponses) ListAuditsWithResponse(ctx context.Context, params *ListAuditsParams, reqEditors ...RequestEditorFn) (*ListAuditsResponse, error) {
+	rsp, err := c.ListAudits(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListAuditsResponse(rsp)
+}
+
 // ListCausesWithResponse request returning *ListCausesResponse
 func (c *ClientWithResponses) ListCausesWithResponse(ctx context.Context, params *ListCausesParams, reqEditors ...RequestEditorFn) (*ListCausesResponse, error) {
 	rsp, err := c.ListCauses(ctx, params, reqEditors...)
@@ -33473,6 +35463,42 @@ func (c *ClientWithResponses) UpdateIncidentEventWithBodyWithResponse(ctx contex
 	return ParseUpdateIncidentEventResponse(rsp)
 }
 
+// ListIncidentEventFunctionalitiesWithResponse request returning *ListIncidentEventFunctionalitiesResponse
+func (c *ClientWithResponses) ListIncidentEventFunctionalitiesWithResponse(ctx context.Context, incidentEventId string, params *ListIncidentEventFunctionalitiesParams, reqEditors ...RequestEditorFn) (*ListIncidentEventFunctionalitiesResponse, error) {
+	rsp, err := c.ListIncidentEventFunctionalities(ctx, incidentEventId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListIncidentEventFunctionalitiesResponse(rsp)
+}
+
+// CreateIncidentEventFunctionalityWithBodyWithResponse request with arbitrary body returning *CreateIncidentEventFunctionalityResponse
+func (c *ClientWithResponses) CreateIncidentEventFunctionalityWithBodyWithResponse(ctx context.Context, incidentEventId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentEventFunctionalityResponse, error) {
+	rsp, err := c.CreateIncidentEventFunctionalityWithBody(ctx, incidentEventId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateIncidentEventFunctionalityResponse(rsp)
+}
+
+// ListIncidentEventServicesWithResponse request returning *ListIncidentEventServicesResponse
+func (c *ClientWithResponses) ListIncidentEventServicesWithResponse(ctx context.Context, incidentEventId string, params *ListIncidentEventServicesParams, reqEditors ...RequestEditorFn) (*ListIncidentEventServicesResponse, error) {
+	rsp, err := c.ListIncidentEventServices(ctx, incidentEventId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListIncidentEventServicesResponse(rsp)
+}
+
+// CreateIncidentEventServiceWithBodyWithResponse request with arbitrary body returning *CreateIncidentEventServiceResponse
+func (c *ClientWithResponses) CreateIncidentEventServiceWithBodyWithResponse(ctx context.Context, incidentEventId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentEventServiceResponse, error) {
+	rsp, err := c.CreateIncidentEventServiceWithBody(ctx, incidentEventId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateIncidentEventServiceResponse(rsp)
+}
+
 // DeleteIncidentFeedbackWithResponse request returning *DeleteIncidentFeedbackResponse
 func (c *ClientWithResponses) DeleteIncidentFeedbackWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentFeedbackResponse, error) {
 	rsp, err := c.DeleteIncidentFeedback(ctx, id, reqEditors...)
@@ -33723,6 +35749,60 @@ func (c *ClientWithResponses) UpdateIncidentCustomFieldSelectionWithBodyWithResp
 		return nil, err
 	}
 	return ParseUpdateIncidentCustomFieldSelectionResponse(rsp)
+}
+
+// DeleteIncidentEventFunctionalityWithResponse request returning *DeleteIncidentEventFunctionalityResponse
+func (c *ClientWithResponses) DeleteIncidentEventFunctionalityWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentEventFunctionalityResponse, error) {
+	rsp, err := c.DeleteIncidentEventFunctionality(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteIncidentEventFunctionalityResponse(rsp)
+}
+
+// GetIncidentEventFunctionalitiesWithResponse request returning *GetIncidentEventFunctionalitiesResponse
+func (c *ClientWithResponses) GetIncidentEventFunctionalitiesWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentEventFunctionalitiesResponse, error) {
+	rsp, err := c.GetIncidentEventFunctionalities(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetIncidentEventFunctionalitiesResponse(rsp)
+}
+
+// UpdateIncidentEventFunctionalityWithBodyWithResponse request with arbitrary body returning *UpdateIncidentEventFunctionalityResponse
+func (c *ClientWithResponses) UpdateIncidentEventFunctionalityWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentEventFunctionalityResponse, error) {
+	rsp, err := c.UpdateIncidentEventFunctionalityWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateIncidentEventFunctionalityResponse(rsp)
+}
+
+// DeleteIncidentEventServiceWithResponse request returning *DeleteIncidentEventServiceResponse
+func (c *ClientWithResponses) DeleteIncidentEventServiceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentEventServiceResponse, error) {
+	rsp, err := c.DeleteIncidentEventService(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteIncidentEventServiceResponse(rsp)
+}
+
+// GetIncidentEventServicesWithResponse request returning *GetIncidentEventServicesResponse
+func (c *ClientWithResponses) GetIncidentEventServicesWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentEventServicesResponse, error) {
+	rsp, err := c.GetIncidentEventServices(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetIncidentEventServicesResponse(rsp)
+}
+
+// UpdateIncidentEventServiceWithBodyWithResponse request with arbitrary body returning *UpdateIncidentEventServiceResponse
+func (c *ClientWithResponses) UpdateIncidentEventServiceWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentEventServiceResponse, error) {
+	rsp, err := c.UpdateIncidentEventServiceWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateIncidentEventServiceResponse(rsp)
 }
 
 // DeleteIncidentFormFieldSelectionWithResponse request returning *DeleteIncidentFormFieldSelectionResponse
@@ -35045,6 +37125,22 @@ func ParseGetAlertResponse(rsp *http.Response) (*GetAlertResponse, error) {
 	return response, nil
 }
 
+// ParseListAuditsResponse parses an HTTP response from a ListAuditsWithResponse call
+func ParseListAuditsResponse(rsp *http.Response) (*ListAuditsResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListAuditsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
 // ParseListCausesResponse parses an HTTP response from a ListCausesWithResponse call
 func ParseListCausesResponse(rsp *http.Response) (*ListCausesResponse, error) {
 	bodyBytes, err := ioutil.ReadAll(rsp.Body)
@@ -35621,6 +37717,70 @@ func ParseUpdateIncidentEventResponse(rsp *http.Response) (*UpdateIncidentEventR
 	return response, nil
 }
 
+// ParseListIncidentEventFunctionalitiesResponse parses an HTTP response from a ListIncidentEventFunctionalitiesWithResponse call
+func ParseListIncidentEventFunctionalitiesResponse(rsp *http.Response) (*ListIncidentEventFunctionalitiesResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListIncidentEventFunctionalitiesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseCreateIncidentEventFunctionalityResponse parses an HTTP response from a CreateIncidentEventFunctionalityWithResponse call
+func ParseCreateIncidentEventFunctionalityResponse(rsp *http.Response) (*CreateIncidentEventFunctionalityResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateIncidentEventFunctionalityResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseListIncidentEventServicesResponse parses an HTTP response from a ListIncidentEventServicesWithResponse call
+func ParseListIncidentEventServicesResponse(rsp *http.Response) (*ListIncidentEventServicesResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListIncidentEventServicesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseCreateIncidentEventServiceResponse parses an HTTP response from a CreateIncidentEventServiceWithResponse call
+func ParseCreateIncidentEventServiceResponse(rsp *http.Response) (*CreateIncidentEventServiceResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateIncidentEventServiceResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
 // ParseDeleteIncidentFeedbackResponse parses an HTTP response from a DeleteIncidentFeedbackWithResponse call
 func ParseDeleteIncidentFeedbackResponse(rsp *http.Response) (*DeleteIncidentFeedbackResponse, error) {
 	bodyBytes, err := ioutil.ReadAll(rsp.Body)
@@ -36062,6 +38222,102 @@ func ParseUpdateIncidentCustomFieldSelectionResponse(rsp *http.Response) (*Updat
 	}
 
 	response := &UpdateIncidentCustomFieldSelectionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseDeleteIncidentEventFunctionalityResponse parses an HTTP response from a DeleteIncidentEventFunctionalityWithResponse call
+func ParseDeleteIncidentEventFunctionalityResponse(rsp *http.Response) (*DeleteIncidentEventFunctionalityResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteIncidentEventFunctionalityResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseGetIncidentEventFunctionalitiesResponse parses an HTTP response from a GetIncidentEventFunctionalitiesWithResponse call
+func ParseGetIncidentEventFunctionalitiesResponse(rsp *http.Response) (*GetIncidentEventFunctionalitiesResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetIncidentEventFunctionalitiesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseUpdateIncidentEventFunctionalityResponse parses an HTTP response from a UpdateIncidentEventFunctionalityWithResponse call
+func ParseUpdateIncidentEventFunctionalityResponse(rsp *http.Response) (*UpdateIncidentEventFunctionalityResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateIncidentEventFunctionalityResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseDeleteIncidentEventServiceResponse parses an HTTP response from a DeleteIncidentEventServiceWithResponse call
+func ParseDeleteIncidentEventServiceResponse(rsp *http.Response) (*DeleteIncidentEventServiceResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteIncidentEventServiceResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseGetIncidentEventServicesResponse parses an HTTP response from a GetIncidentEventServicesWithResponse call
+func ParseGetIncidentEventServicesResponse(rsp *http.Response) (*GetIncidentEventServicesResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetIncidentEventServicesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseUpdateIncidentEventServiceResponse parses an HTTP response from a UpdateIncidentEventServiceWithResponse call
+func ParseUpdateIncidentEventServiceResponse(rsp *http.Response) (*UpdateIncidentEventServiceResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateIncidentEventServiceResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

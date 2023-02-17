@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.70] -- 2024-02-16
+
+- Add `notify_emails`, `slack_channels`, `slack_aliases` fields to `severities`, `environments` & `incident_types`.
+
 ## [0.1.69] -- 2024-02-10
 
 - Add `project` and `labels` fields to `workflow_task_create_linear_issue` & `workflow_task_update_linear_issue`.

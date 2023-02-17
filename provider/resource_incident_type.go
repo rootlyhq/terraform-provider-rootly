@@ -55,6 +55,57 @@ func resourceIncidentType() *schema.Resource {
 				ForceNew:    false,
 				Description: "",
 			},
+
+			"notify_emails": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Emails to attach to the incident type",
+			},
+
+			"slack_channels": &schema.Schema{
+				Type:        schema.TypeList,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Slack Channels associated with this incident type",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"id": &schema.Schema{
+							Type:     schema.TypeString,
+							Required: true,
+						},
+						"name": &schema.Schema{
+							Type:     schema.TypeString,
+							Required: true,
+						},
+					},
+				},
+			},
+
+			"slack_aliases": &schema.Schema{
+				Type:        schema.TypeList,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Slack Aliases associated with this incident type",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"id": &schema.Schema{
+							Type:     schema.TypeString,
+							Required: true,
+						},
+						"name": &schema.Schema{
+							Type:     schema.TypeString,
+							Required: true,
+						},
+					},
+				},
+			},
 		},
 	}
 }
@@ -77,6 +128,15 @@ func resourceIncidentTypeCreate(ctx context.Context, d *schema.ResourceData, met
 	}
 	if value, ok := d.GetOkExists("color"); ok {
 		s.Color = value.(string)
+	}
+	if value, ok := d.GetOkExists("notify_emails"); ok {
+		s.NotifyEmails = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("slack_channels"); ok {
+		s.SlackChannels = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("slack_aliases"); ok {
+		s.SlackAliases = value.([]interface{})
 	}
 
 	res, err := c.CreateIncidentType(s)
@@ -111,6 +171,9 @@ func resourceIncidentTypeRead(ctx context.Context, d *schema.ResourceData, meta 
 	d.Set("slug", item.Slug)
 	d.Set("description", item.Description)
 	d.Set("color", item.Color)
+	d.Set("notify_emails", item.NotifyEmails)
+	d.Set("slack_channels", item.SlackChannels)
+	d.Set("slack_aliases", item.SlackAliases)
 
 	return nil
 }
@@ -132,6 +195,15 @@ func resourceIncidentTypeUpdate(ctx context.Context, d *schema.ResourceData, met
 	}
 	if d.HasChange("color") {
 		s.Color = d.Get("color").(string)
+	}
+	if d.HasChange("notify_emails") {
+		s.NotifyEmails = d.Get("notify_emails").([]interface{})
+	}
+	if d.HasChange("slack_channels") {
+		s.SlackChannels = d.Get("slack_channels").([]interface{})
+	}
+	if d.HasChange("slack_aliases") {
+		s.SlackAliases = d.Get("slack_aliases").([]interface{})
 	}
 
 	_, err := c.UpdateIncidentType(d.Id(), s)

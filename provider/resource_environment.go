@@ -47,6 +47,17 @@ func resourceEnvironment() *schema.Resource {
 				Description: "The description of the environment",
 			},
 
+			"notify_emails": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Emails attached to the environment",
+			},
+
 			"color": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
@@ -54,6 +65,46 @@ func resourceEnvironment() *schema.Resource {
 				Optional:    true,
 				ForceNew:    false,
 				Description: "",
+			},
+
+			"slack_channels": &schema.Schema{
+				Type:        schema.TypeList,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Slack Channels associated with this environment",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"id": &schema.Schema{
+							Type:     schema.TypeString,
+							Required: true,
+						},
+						"name": &schema.Schema{
+							Type:     schema.TypeString,
+							Required: true,
+						},
+					},
+				},
+			},
+
+			"slack_aliases": &schema.Schema{
+				Type:        schema.TypeList,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Slack Aliases associated with this environment",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"id": &schema.Schema{
+							Type:     schema.TypeString,
+							Required: true,
+						},
+						"name": &schema.Schema{
+							Type:     schema.TypeString,
+							Required: true,
+						},
+					},
+				},
 			},
 		},
 	}
@@ -75,8 +126,17 @@ func resourceEnvironmentCreate(ctx context.Context, d *schema.ResourceData, meta
 	if value, ok := d.GetOkExists("description"); ok {
 		s.Description = value.(string)
 	}
+	if value, ok := d.GetOkExists("notify_emails"); ok {
+		s.NotifyEmails = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("color"); ok {
 		s.Color = value.(string)
+	}
+	if value, ok := d.GetOkExists("slack_channels"); ok {
+		s.SlackChannels = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("slack_aliases"); ok {
+		s.SlackAliases = value.([]interface{})
 	}
 
 	res, err := c.CreateEnvironment(s)
@@ -110,7 +170,10 @@ func resourceEnvironmentRead(ctx context.Context, d *schema.ResourceData, meta i
 	d.Set("name", item.Name)
 	d.Set("slug", item.Slug)
 	d.Set("description", item.Description)
+	d.Set("notify_emails", item.NotifyEmails)
 	d.Set("color", item.Color)
+	d.Set("slack_channels", item.SlackChannels)
+	d.Set("slack_aliases", item.SlackAliases)
 
 	return nil
 }
@@ -130,8 +193,17 @@ func resourceEnvironmentUpdate(ctx context.Context, d *schema.ResourceData, meta
 	if d.HasChange("description") {
 		s.Description = d.Get("description").(string)
 	}
+	if d.HasChange("notify_emails") {
+		s.NotifyEmails = d.Get("notify_emails").([]interface{})
+	}
 	if d.HasChange("color") {
 		s.Color = d.Get("color").(string)
+	}
+	if d.HasChange("slack_channels") {
+		s.SlackChannels = d.Get("slack_channels").([]interface{})
+	}
+	if d.HasChange("slack_aliases") {
+		s.SlackAliases = d.Get("slack_aliases").([]interface{})
 	}
 
 	_, err := c.UpdateEnvironment(d.Id(), s)

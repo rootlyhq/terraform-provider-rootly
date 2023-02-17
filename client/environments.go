@@ -13,7 +13,10 @@ type Environment struct {
 	Name string `jsonapi:"attr,name,omitempty"`
   Slug string `jsonapi:"attr,slug,omitempty"`
   Description string `jsonapi:"attr,description,omitempty"`
+  NotifyEmails []interface{} `jsonapi:"attr,notify_emails,omitempty"`
   Color string `jsonapi:"attr,color,omitempty"`
+  SlackChannels []interface{} `jsonapi:"attr,slack_channels,omitempty"`
+  SlackAliases []interface{} `jsonapi:"attr,slack_aliases,omitempty"`
 }
 
 func (c *Client) ListEnvironments(params *rootlygo.ListEnvironmentsParams) ([]interface{}, error) {

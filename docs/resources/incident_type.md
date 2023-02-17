@@ -20,8 +20,28 @@ description: |-
 
 - `color` (String)
 - `description` (String) The description of the incident type
+- `notify_emails` (List of String) Emails to attach to the incident type
+- `slack_aliases` (Block List) Slack Aliases associated with this incident type (see [below for nested schema](#nestedblock--slack_aliases))
+- `slack_channels` (Block List) Slack Channels associated with this incident type (see [below for nested schema](#nestedblock--slack_channels))
 - `slug` (String) The slug of the incident type
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--slack_aliases"></a>
+### Nested Schema for `slack_aliases`
+
+Required:
+
+- `name` (String)
+- `id` (String)
+
+
+<a id="nestedblock--slack_channels"></a>
+### Nested Schema for `slack_channels`
+
+Required:
+
+- `name` (String)
+- `id` (String)

@@ -15,6 +15,9 @@ type Severity struct {
   Description string `jsonapi:"attr,description,omitempty"`
   Severity string `jsonapi:"attr,severity,omitempty"`
   Color string `jsonapi:"attr,color,omitempty"`
+  NotifyEmails []interface{} `jsonapi:"attr,notify_emails,omitempty"`
+  SlackChannels []interface{} `jsonapi:"attr,slack_channels,omitempty"`
+  SlackAliases []interface{} `jsonapi:"attr,slack_aliases,omitempty"`
 }
 
 func (c *Client) ListSeverities(params *rootlygo.ListSeveritiesParams) ([]interface{}, error) {
