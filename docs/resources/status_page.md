@@ -21,11 +21,13 @@ description: |-
 - `allow_search_engine_index` (Boolean) Allow search engines to include your public status page in search results.
 - `description` (String) The description of the status page
 - `enabled` (Boolean)
+- `failure_message` (String) Message showing when at least one component is not operational
 - `footer_color` (String) The color of the footer. Eg. "#1F2F41"
 - `header_color` (String) The color of the header. Eg. "#0061F2"
 - `public` (Boolean) Make the status page accessible to the public
 - `show_uptime` (Boolean) Show uptime
 - `show_uptime_last_days` (Number) Show uptime over x days. Value must be one of `30`, `60`, `90`.
+- `success_message` (String) Message showing when all components are operational
 
 ### Read-Only
 

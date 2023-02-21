@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.71] -- 2024-02-21
+
+- Add `failure_message`, `success_message` fields to `status_pages` resource.
+- Add `pause_reminder`, `snooze_reminder`, `restart_reminder` to `actionables` on `workflow_task_send_slack_message` resource.
+- Add `format` field to `post_mortem_template` resource.
+
 ## [0.1.70] -- 2024-02-16
 
 - Add `notify_emails`, `slack_channels`, `slack_aliases` fields to `severities`, `environments` & `incident_types`.

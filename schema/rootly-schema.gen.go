@@ -1416,17 +1416,13 @@ const (
 
 // Defines values for IncidentEventFunctionalityStatus.
 const (
-	IncidentEventFunctionalityStatusImpacted      IncidentEventFunctionalityStatus = "impacted"
 	IncidentEventFunctionalityStatusMajorOutage   IncidentEventFunctionalityStatus = "major_outage"
-	IncidentEventFunctionalityStatusOperational   IncidentEventFunctionalityStatus = "operational"
 	IncidentEventFunctionalityStatusPartialOutage IncidentEventFunctionalityStatus = "partial_outage"
 )
 
 // Defines values for IncidentEventFunctionalityListDataAttributesStatus.
 const (
-	IncidentEventFunctionalityListDataAttributesStatusImpacted      IncidentEventFunctionalityListDataAttributesStatus = "impacted"
 	IncidentEventFunctionalityListDataAttributesStatusMajorOutage   IncidentEventFunctionalityListDataAttributesStatus = "major_outage"
-	IncidentEventFunctionalityListDataAttributesStatusOperational   IncidentEventFunctionalityListDataAttributesStatus = "operational"
 	IncidentEventFunctionalityListDataAttributesStatusPartialOutage IncidentEventFunctionalityListDataAttributesStatus = "partial_outage"
 )
 
@@ -1437,9 +1433,7 @@ const (
 
 // Defines values for IncidentEventFunctionalityResponseDataAttributesStatus.
 const (
-	IncidentEventFunctionalityResponseDataAttributesStatusImpacted      IncidentEventFunctionalityResponseDataAttributesStatus = "impacted"
 	IncidentEventFunctionalityResponseDataAttributesStatusMajorOutage   IncidentEventFunctionalityResponseDataAttributesStatus = "major_outage"
-	IncidentEventFunctionalityResponseDataAttributesStatusOperational   IncidentEventFunctionalityResponseDataAttributesStatus = "operational"
 	IncidentEventFunctionalityResponseDataAttributesStatusPartialOutage IncidentEventFunctionalityResponseDataAttributesStatus = "partial_outage"
 )
 
@@ -1472,17 +1466,13 @@ const (
 
 // Defines values for IncidentEventServiceStatus.
 const (
-	IncidentEventServiceStatusImpacted      IncidentEventServiceStatus = "impacted"
 	IncidentEventServiceStatusMajorOutage   IncidentEventServiceStatus = "major_outage"
-	IncidentEventServiceStatusOperational   IncidentEventServiceStatus = "operational"
 	IncidentEventServiceStatusPartialOutage IncidentEventServiceStatus = "partial_outage"
 )
 
 // Defines values for IncidentEventServiceListDataAttributesStatus.
 const (
-	IncidentEventServiceListDataAttributesStatusImpacted      IncidentEventServiceListDataAttributesStatus = "impacted"
 	IncidentEventServiceListDataAttributesStatusMajorOutage   IncidentEventServiceListDataAttributesStatus = "major_outage"
-	IncidentEventServiceListDataAttributesStatusOperational   IncidentEventServiceListDataAttributesStatus = "operational"
 	IncidentEventServiceListDataAttributesStatusPartialOutage IncidentEventServiceListDataAttributesStatus = "partial_outage"
 )
 
@@ -1493,9 +1483,7 @@ const (
 
 // Defines values for IncidentEventServiceResponseDataAttributesStatus.
 const (
-	IncidentEventServiceResponseDataAttributesStatusImpacted      IncidentEventServiceResponseDataAttributesStatus = "impacted"
 	IncidentEventServiceResponseDataAttributesStatusMajorOutage   IncidentEventServiceResponseDataAttributesStatus = "major_outage"
-	IncidentEventServiceResponseDataAttributesStatusOperational   IncidentEventServiceResponseDataAttributesStatus = "operational"
 	IncidentEventServiceResponseDataAttributesStatusPartialOutage IncidentEventServiceResponseDataAttributesStatus = "partial_outage"
 )
 
@@ -2152,9 +2140,7 @@ const (
 
 // Defines values for NewIncidentEventFunctionalityDataAttributesStatus.
 const (
-	NewIncidentEventFunctionalityDataAttributesStatusImpacted      NewIncidentEventFunctionalityDataAttributesStatus = "impacted"
 	NewIncidentEventFunctionalityDataAttributesStatusMajorOutage   NewIncidentEventFunctionalityDataAttributesStatus = "major_outage"
-	NewIncidentEventFunctionalityDataAttributesStatusOperational   NewIncidentEventFunctionalityDataAttributesStatus = "operational"
 	NewIncidentEventFunctionalityDataAttributesStatusPartialOutage NewIncidentEventFunctionalityDataAttributesStatus = "partial_outage"
 )
 
@@ -2165,9 +2151,7 @@ const (
 
 // Defines values for NewIncidentEventServiceDataAttributesStatus.
 const (
-	NewIncidentEventServiceDataAttributesStatusImpacted      NewIncidentEventServiceDataAttributesStatus = "impacted"
 	NewIncidentEventServiceDataAttributesStatusMajorOutage   NewIncidentEventServiceDataAttributesStatus = "major_outage"
-	NewIncidentEventServiceDataAttributesStatusOperational   NewIncidentEventServiceDataAttributesStatus = "operational"
 	NewIncidentEventServiceDataAttributesStatusPartialOutage NewIncidentEventServiceDataAttributesStatus = "partial_outage"
 )
 
@@ -2242,6 +2226,12 @@ const (
 // Defines values for NewPlaybookTaskDataType.
 const (
 	NewPlaybookTaskDataTypePlaybookTasks NewPlaybookTaskDataType = "playbook_tasks"
+)
+
+// Defines values for NewPostMortemTemplateDataAttributesFormat.
+const (
+	NewPostMortemTemplateDataAttributesFormatHtml     NewPostMortemTemplateDataAttributesFormat = "html"
+	NewPostMortemTemplateDataAttributesFormatMarkdown NewPostMortemTemplateDataAttributesFormat = "markdown"
 )
 
 // Defines values for NewPostMortemTemplateDataType.
@@ -2622,6 +2612,9 @@ const (
 	SendSlackMessageTaskParamsActionablesManageActionItems      SendSlackMessageTaskParamsActionables = "manage_action_items"
 	SendSlackMessageTaskParamsActionablesManageFormFields       SendSlackMessageTaskParamsActionables = "manage_form_fields"
 	SendSlackMessageTaskParamsActionablesManageIncidentRoles    SendSlackMessageTaskParamsActionables = "manage_incident_roles"
+	SendSlackMessageTaskParamsActionablesPauseReminder          SendSlackMessageTaskParamsActionables = "pause_reminder"
+	SendSlackMessageTaskParamsActionablesRestartReminder        SendSlackMessageTaskParamsActionables = "restart_reminder"
+	SendSlackMessageTaskParamsActionablesSnoozeReminder         SendSlackMessageTaskParamsActionables = "snooze_reminder"
 	SendSlackMessageTaskParamsActionablesUpdateIncident         SendSlackMessageTaskParamsActionables = "update_incident"
 	SendSlackMessageTaskParamsActionablesUpdateStatus           SendSlackMessageTaskParamsActionables = "update_status"
 	SendSlackMessageTaskParamsActionablesUpdateSummary          SendSlackMessageTaskParamsActionables = "update_summary"
@@ -3004,6 +2997,15 @@ const (
 	UpdateGoogleCalendarEventTaskParamsTaskTypeCreateGoogleCalendarEvent UpdateGoogleCalendarEventTaskParamsTaskType = "create_google_calendar_event"
 )
 
+// Defines values for UpdateIncidentDataAttributesKind.
+const (
+	UpdateIncidentDataAttributesKindBackfilled UpdateIncidentDataAttributesKind = "backfilled"
+	UpdateIncidentDataAttributesKindExample    UpdateIncidentDataAttributesKind = "example"
+	UpdateIncidentDataAttributesKindNormal     UpdateIncidentDataAttributesKind = "normal"
+	UpdateIncidentDataAttributesKindScheduled  UpdateIncidentDataAttributesKind = "scheduled"
+	UpdateIncidentDataAttributesKindTest       UpdateIncidentDataAttributesKind = "test"
+)
+
 // Defines values for UpdateIncidentDataType.
 const (
 	UpdateIncidentDataTypeIncidents UpdateIncidentDataType = "incidents"
@@ -3053,9 +3055,7 @@ const (
 
 // Defines values for UpdateIncidentEventFunctionalityDataAttributesStatus.
 const (
-	UpdateIncidentEventFunctionalityDataAttributesStatusImpacted      UpdateIncidentEventFunctionalityDataAttributesStatus = "impacted"
 	UpdateIncidentEventFunctionalityDataAttributesStatusMajorOutage   UpdateIncidentEventFunctionalityDataAttributesStatus = "major_outage"
-	UpdateIncidentEventFunctionalityDataAttributesStatusOperational   UpdateIncidentEventFunctionalityDataAttributesStatus = "operational"
 	UpdateIncidentEventFunctionalityDataAttributesStatusPartialOutage UpdateIncidentEventFunctionalityDataAttributesStatus = "partial_outage"
 )
 
@@ -3066,9 +3066,7 @@ const (
 
 // Defines values for UpdateIncidentEventServiceDataAttributesStatus.
 const (
-	UpdateIncidentEventServiceDataAttributesStatusImpacted      UpdateIncidentEventServiceDataAttributesStatus = "impacted"
 	UpdateIncidentEventServiceDataAttributesStatusMajorOutage   UpdateIncidentEventServiceDataAttributesStatus = "major_outage"
-	UpdateIncidentEventServiceDataAttributesStatusOperational   UpdateIncidentEventServiceDataAttributesStatus = "operational"
 	UpdateIncidentEventServiceDataAttributesStatusPartialOutage UpdateIncidentEventServiceDataAttributesStatus = "partial_outage"
 )
 
@@ -3263,6 +3261,12 @@ const (
 	UpdatePlaybookTaskDataTypePlaybookTasks UpdatePlaybookTaskDataType = "playbook_tasks"
 )
 
+// Defines values for UpdatePostMortemTemplateDataAttributesFormat.
+const (
+	UpdatePostMortemTemplateDataAttributesFormatHtml     UpdatePostMortemTemplateDataAttributesFormat = "html"
+	UpdatePostMortemTemplateDataAttributesFormatMarkdown UpdatePostMortemTemplateDataAttributesFormat = "markdown"
+)
+
 // Defines values for UpdatePostMortemTemplateDataType.
 const (
 	UpdatePostMortemTemplateDataTypePostMortemTemplates UpdatePostMortemTemplateDataType = "post_mortem_templates"
@@ -3290,10 +3294,10 @@ const (
 
 // Defines values for UpdateSeverityDataAttributesSeverity.
 const (
-	UpdateSeverityDataAttributesSeverityCritical UpdateSeverityDataAttributesSeverity = "critical"
-	UpdateSeverityDataAttributesSeverityHigh     UpdateSeverityDataAttributesSeverity = "high"
-	UpdateSeverityDataAttributesSeverityLow      UpdateSeverityDataAttributesSeverity = "low"
-	UpdateSeverityDataAttributesSeverityMedium   UpdateSeverityDataAttributesSeverity = "medium"
+	Critical UpdateSeverityDataAttributesSeverity = "critical"
+	High     UpdateSeverityDataAttributesSeverity = "high"
+	Low      UpdateSeverityDataAttributesSeverity = "low"
+	Medium   UpdateSeverityDataAttributesSeverity = "medium"
 )
 
 // Defines values for UpdateSeverityDataType.
@@ -9232,12 +9236,18 @@ type NewPostMortemTemplate struct {
 			// Default selected template when editing a postmortem
 			Default *bool `json:"default"`
 
+			// The format of the input
+			Format *NewPostMortemTemplateDataAttributesFormat `json:"format"`
+
 			// The name of the postmortem template
 			Name string `json:"name"`
 		} `json:"attributes"`
 		Type NewPostMortemTemplateDataType `json:"type"`
 	} `json:"data"`
 }
+
+// The format of the input
+type NewPostMortemTemplateDataAttributesFormat string
 
 // NewPostMortemTemplateDataType defines model for NewPostMortemTemplate.Data.Type.
 type NewPostMortemTemplateDataType string
@@ -9448,6 +9458,9 @@ type NewStatusPage struct {
 			// Enabled / Disable the status page
 			Enabled *bool `json:"enabled"`
 
+			// Message showing when at least one component is not operational
+			FailureMessage *string `json:"failure_message"`
+
 			// The color of the footer. Eg. "#1F2F41"
 			FooterColor *string `json:"footer_color"`
 
@@ -9462,6 +9475,9 @@ type NewStatusPage struct {
 
 			// Show uptime over x days
 			ShowUptimeLastDays *NewStatusPageDataAttributesShowUptimeLastDays `json:"show_uptime_last_days"`
+
+			// Message showing when all components are operational
+			SuccessMessage *string `json:"success_message"`
 
 			// The title of the status page
 			Title string `json:"title"`
@@ -11402,6 +11418,9 @@ type StatusPage struct {
 	// Enabled / Disable the status page
 	Enabled *bool `json:"enabled"`
 
+	// Message showing when at least one component is not operational
+	FailureMessage *string `json:"failure_message"`
+
 	// The color of the footer. Eg. "#1F2F41"
 	FooterColor *string `json:"footer_color"`
 
@@ -11416,6 +11435,9 @@ type StatusPage struct {
 
 	// Show uptime over x days
 	ShowUptimeLastDays *StatusPageShowUptimeLastDays `json:"show_uptime_last_days"`
+
+	// Message showing when all components are operational
+	SuccessMessage *string `json:"success_message"`
 
 	// The title of the status page
 	Title string `json:"title"`
@@ -11443,6 +11465,9 @@ type StatusPageList struct {
 			// Enabled / Disable the status page
 			Enabled *bool `json:"enabled"`
 
+			// Message showing when at least one component is not operational
+			FailureMessage *string `json:"failure_message"`
+
 			// The color of the footer. Eg. "#1F2F41"
 			FooterColor *string `json:"footer_color"`
 
@@ -11457,6 +11482,9 @@ type StatusPageList struct {
 
 			// Show uptime over x days
 			ShowUptimeLastDays *StatusPageListDataAttributesShowUptimeLastDays `json:"show_uptime_last_days"`
+
+			// Message showing when all components are operational
+			SuccessMessage *string `json:"success_message"`
 
 			// The title of the status page
 			Title string `json:"title"`
@@ -11500,6 +11528,9 @@ type StatusPageResponse struct {
 			// Enabled / Disable the status page
 			Enabled *bool `json:"enabled"`
 
+			// Message showing when at least one component is not operational
+			FailureMessage *string `json:"failure_message"`
+
 			// The color of the footer. Eg. "#1F2F41"
 			FooterColor *string `json:"footer_color"`
 
@@ -11514,6 +11545,9 @@ type StatusPageResponse struct {
 
 			// Show uptime over x days
 			ShowUptimeLastDays *StatusPageResponseDataAttributesShowUptimeLastDays `json:"show_uptime_last_days"`
+
+			// Message showing when all components are operational
+			SuccessMessage *string `json:"success_message"`
 
 			// The title of the status page
 			Title string `json:"title"`
@@ -12243,6 +12277,9 @@ type UpdateIncident struct {
 			// The Incident Type ID's to attach to the incident
 			IncidentTypeIds *[]string `json:"incident_type_ids"`
 
+			// The kind of the incident
+			Kind *UpdateIncidentDataAttributesKind `json:"kind"`
+
 			// Labels to attach to the incidents. eg: {"platform":"osx", "version": "1.29"}
 			Labels *map[string]interface{} `json:"labels"`
 
@@ -12273,6 +12310,9 @@ type UpdateIncident struct {
 		Type UpdateIncidentDataType `json:"type"`
 	} `json:"data"`
 }
+
+// The kind of the incident
+type UpdateIncidentDataAttributesKind string
 
 // UpdateIncidentDataType defines model for UpdateIncident.Data.Type.
 type UpdateIncidentDataType string
@@ -12906,12 +12946,18 @@ type UpdatePostMortemTemplate struct {
 			// Default selected template when editing a postmortem
 			Default *bool `json:"default"`
 
+			// The format of the input
+			Format *UpdatePostMortemTemplateDataAttributesFormat `json:"format"`
+
 			// The name of the postmortem template
 			Name *string `json:"name,omitempty"`
 		} `json:"attributes"`
 		Type UpdatePostMortemTemplateDataType `json:"type"`
 	} `json:"data"`
 }
+
+// The format of the input
+type UpdatePostMortemTemplateDataAttributesFormat string
 
 // UpdatePostMortemTemplateDataType defines model for UpdatePostMortemTemplate.Data.Type.
 type UpdatePostMortemTemplateDataType string
@@ -13207,6 +13253,9 @@ type UpdateStatusPage struct {
 			// Enabled / Disable the status page
 			Enabled *bool `json:"enabled"`
 
+			// Message showing when at least one component is not operational
+			FailureMessage *string `json:"failure_message"`
+
 			// The color of the footer. Eg. "#1F2F41"
 			FooterColor *string `json:"footer_color"`
 
@@ -13221,6 +13270,9 @@ type UpdateStatusPage struct {
 
 			// Show uptime over x days
 			ShowUptimeLastDays *UpdateStatusPageDataAttributesShowUptimeLastDays `json:"show_uptime_last_days"`
+
+			// Message showing when all components are operational
+			SuccessMessage *string `json:"success_message"`
 
 			// The title of the status page
 			Title *string `json:"title,omitempty"`

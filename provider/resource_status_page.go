@@ -82,6 +82,24 @@ func resourceStatusPage() *schema.Resource {
 				Description: "Show uptime over x days. Value must be one of `30`, `60`, `90`.",
 			},
 
+			"success_message": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Message showing when all components are operational",
+			},
+
+			"failure_message": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Message showing when at least one component is not operational",
+			},
+
 			"public": &schema.Schema{
 				Type:        schema.TypeBool,
 				Computed:    true,
@@ -127,6 +145,12 @@ func resourceStatusPageCreate(ctx context.Context, d *schema.ResourceData, meta 
 	if value, ok := d.GetOkExists("show_uptime_last_days"); ok {
 		s.ShowUptimeLastDays = value.(int)
 	}
+	if value, ok := d.GetOkExists("success_message"); ok {
+		s.SuccessMessage = value.(string)
+	}
+	if value, ok := d.GetOkExists("failure_message"); ok {
+		s.FailureMessage = value.(string)
+	}
 	if value, ok := d.GetOkExists("public"); ok {
 		s.Public = tools.Bool(value.(bool))
 	}
@@ -169,6 +193,8 @@ func resourceStatusPageRead(ctx context.Context, d *schema.ResourceData, meta in
 	d.Set("allow_search_engine_index", item.AllowSearchEngineIndex)
 	d.Set("show_uptime", item.ShowUptime)
 	d.Set("show_uptime_last_days", item.ShowUptimeLastDays)
+	d.Set("success_message", item.SuccessMessage)
+	d.Set("failure_message", item.FailureMessage)
 	d.Set("public", item.Public)
 	d.Set("enabled", item.Enabled)
 
@@ -201,6 +227,12 @@ func resourceStatusPageUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	}
 	if d.HasChange("show_uptime_last_days") {
 		s.ShowUptimeLastDays = d.Get("show_uptime_last_days").(int)
+	}
+	if d.HasChange("success_message") {
+		s.SuccessMessage = d.Get("success_message").(string)
+	}
+	if d.HasChange("failure_message") {
+		s.FailureMessage = d.Get("failure_message").(string)
 	}
 	if d.HasChange("public") {
 		s.Public = tools.Bool(d.Get("public").(bool))

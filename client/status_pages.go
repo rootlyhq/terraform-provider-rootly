@@ -17,6 +17,8 @@ type StatusPage struct {
   AllowSearchEngineIndex *bool `jsonapi:"attr,allow_search_engine_index,omitempty"`
   ShowUptime *bool `jsonapi:"attr,show_uptime,omitempty"`
   ShowUptimeLastDays int `jsonapi:"attr,show_uptime_last_days,omitempty"`
+  SuccessMessage string `jsonapi:"attr,success_message,omitempty"`
+  FailureMessage string `jsonapi:"attr,failure_message,omitempty"`
   Public *bool `jsonapi:"attr,public,omitempty"`
   Enabled *bool `jsonapi:"attr,enabled,omitempty"`
 }
