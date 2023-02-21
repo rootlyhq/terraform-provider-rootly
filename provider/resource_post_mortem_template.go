@@ -50,6 +50,15 @@ func resourcePostmortemTemplate() *schema.Resource {
 					return len(old) != 0
 				},
 			},
+
+			"format": &schema.Schema{
+				Type:        schema.TypeString,
+				Default:     "html",
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The format of the input.. Value must be one of `html`, `markdown`.",
+			},
 		},
 	}
 }
@@ -69,6 +78,9 @@ func resourcePostmortemTemplateCreate(ctx context.Context, d *schema.ResourceDat
 	}
 	if value, ok := d.GetOkExists("content"); ok {
 		s.Content = value.(string)
+	}
+	if value, ok := d.GetOkExists("format"); ok {
+		s.Format = value.(string)
 	}
 
 	res, err := c.CreatePostmortemTemplate(s)
@@ -102,6 +114,7 @@ func resourcePostmortemTemplateRead(ctx context.Context, d *schema.ResourceData,
 	d.Set("name", item.Name)
 	d.Set("default", item.Default)
 	d.Set("content", item.Content)
+	d.Set("format", item.Format)
 
 	return nil
 }
@@ -120,6 +133,9 @@ func resourcePostmortemTemplateUpdate(ctx context.Context, d *schema.ResourceDat
 	}
 	if d.HasChange("content") {
 		s.Content = d.Get("content").(string)
+	}
+	if d.HasChange("format") {
+		s.Format = d.Get("format").(string)
 	}
 
 	_, err := c.UpdatePostmortemTemplate(d.Id(), s)

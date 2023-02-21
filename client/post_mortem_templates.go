@@ -13,6 +13,7 @@ type PostmortemTemplate struct {
 	Name string `jsonapi:"attr,name,omitempty"`
   Default *bool `jsonapi:"attr,default,omitempty"`
   Content string `jsonapi:"attr,content,omitempty"`
+  Format string `jsonapi:"attr,format,omitempty"`
 }
 
 func (c *Client) ListPostmortemTemplates(params *rootlygo.ListPostmortemTemplatesParams) ([]interface{}, error) {

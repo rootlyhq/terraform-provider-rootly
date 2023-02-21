@@ -20,6 +20,7 @@ description: |-
 ### Optional
 
 - `default` (Boolean) Default selected template when editing a postmortem
+- `format` (String) The format of the input.. Value must be one of `html`, `markdown`.
 
 ### Read-Only
 

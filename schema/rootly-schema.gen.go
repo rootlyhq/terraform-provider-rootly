@@ -2453,9 +2453,27 @@ const (
 	PlaybookTaskResponseDataTypePlaybookTasks PlaybookTaskResponseDataType = "playbook_tasks"
 )
 
+// Defines values for PostMortemTemplateFormat.
+const (
+	PostMortemTemplateFormatHtml     PostMortemTemplateFormat = "html"
+	PostMortemTemplateFormatMarkdown PostMortemTemplateFormat = "markdown"
+)
+
+// Defines values for PostMortemTemplateListDataAttributesFormat.
+const (
+	PostMortemTemplateListDataAttributesFormatHtml     PostMortemTemplateListDataAttributesFormat = "html"
+	PostMortemTemplateListDataAttributesFormatMarkdown PostMortemTemplateListDataAttributesFormat = "markdown"
+)
+
 // Defines values for PostMortemTemplateListDataType.
 const (
 	PostMortemTemplateListDataTypePostMortemTemplates PostMortemTemplateListDataType = "post_mortem_templates"
+)
+
+// Defines values for PostMortemTemplateResponseDataAttributesFormat.
+const (
+	PostMortemTemplateResponseDataAttributesFormatHtml     PostMortemTemplateResponseDataAttributesFormat = "html"
+	PostMortemTemplateResponseDataAttributesFormatMarkdown PostMortemTemplateResponseDataAttributesFormat = "markdown"
 )
 
 // Defines values for PostMortemTemplateResponseDataType.
@@ -3263,8 +3281,8 @@ const (
 
 // Defines values for UpdatePostMortemTemplateDataAttributesFormat.
 const (
-	UpdatePostMortemTemplateDataAttributesFormatHtml     UpdatePostMortemTemplateDataAttributesFormat = "html"
-	UpdatePostMortemTemplateDataAttributesFormatMarkdown UpdatePostMortemTemplateDataAttributesFormat = "markdown"
+	Html     UpdatePostMortemTemplateDataAttributesFormat = "html"
+	Markdown UpdatePostMortemTemplateDataAttributesFormat = "markdown"
 )
 
 // Defines values for UpdatePostMortemTemplateDataType.
@@ -9996,12 +10014,18 @@ type PostMortemTemplate struct {
 	// Default selected template when editing a postmortem
 	Default *bool `json:"default"`
 
+	// The format of the input.
+	Format *PostMortemTemplateFormat `json:"format,omitempty"`
+
 	// The name of the postmortem template
 	Name string `json:"name"`
 
 	// Date of last update
 	UpdatedAt string `json:"updated_at"`
 }
+
+// The format of the input.
+type PostMortemTemplateFormat string
 
 // PostMortemTemplateList defines model for post_mortem_template_list.
 type PostMortemTemplateList struct {
@@ -10015,6 +10039,9 @@ type PostMortemTemplateList struct {
 
 			// Default selected template when editing a postmortem
 			Default *bool `json:"default"`
+
+			// The format of the input.
+			Format *PostMortemTemplateListDataAttributesFormat `json:"format,omitempty"`
 
 			// The name of the postmortem template
 			Name string `json:"name"`
@@ -10036,6 +10063,9 @@ type PostMortemTemplateList struct {
 	} `json:"links"`
 }
 
+// The format of the input.
+type PostMortemTemplateListDataAttributesFormat string
+
 // PostMortemTemplateListDataType defines model for PostMortemTemplateList.Data.Type.
 type PostMortemTemplateListDataType string
 
@@ -10052,6 +10082,9 @@ type PostMortemTemplateResponse struct {
 			// Default selected template when editing a postmortem
 			Default *bool `json:"default"`
 
+			// The format of the input.
+			Format *PostMortemTemplateResponseDataAttributesFormat `json:"format,omitempty"`
+
 			// The name of the postmortem template
 			Name string `json:"name"`
 
@@ -10064,6 +10097,9 @@ type PostMortemTemplateResponse struct {
 		Type PostMortemTemplateResponseDataType `json:"type"`
 	} `json:"data"`
 }
+
+// The format of the input.
+type PostMortemTemplateResponseDataAttributesFormat string
 
 // PostMortemTemplateResponseDataType defines model for PostMortemTemplateResponse.Data.Type.
 type PostMortemTemplateResponseDataType string
