@@ -26,10 +26,10 @@ resource "rootly_workflow_incident" "send_sms" {
 resource "rootly_workflow_task_send_sms" "send_sms" {
   workflow_id = rootly_workflow_incident.send_sms.id
   task_params {
-    name    = "Send SMS"
-    content = "We have an ongoing incident {{ incident.title }} of severity {{ incident.severity }} and your assistance is required."
+    name          = "Send SMS"
+    content       = "We have an ongoing incident {{ incident.title }} of severity {{ incident.severity }} and your assistance is required."
+    phone_numbers = ["+11231231231", "+11231231232"]
   }
-  # TODO
 }
 ```
 

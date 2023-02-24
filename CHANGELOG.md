@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.74] -- 2024-02-24
+
+- Add more resources examples.
+
 ## [0.1.73] -- 2024-02-23
 
 - Add resources examples.

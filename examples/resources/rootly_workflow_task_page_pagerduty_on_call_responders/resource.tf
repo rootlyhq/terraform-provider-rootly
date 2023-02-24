@@ -13,6 +13,9 @@ resource "rootly_workflow_task_page_pagerduty_on_call_responders" "page_pagerdut
   workflow_id = rootly_workflow_incident.page_pagerduty_responders.id
   task_params {
     name = "Page PagerDuty on-call responders"
+    service = {
+      id   = "PWIXJZS"
+      name = "Service A" // Any string really
+    }
   }
-  // TODO
 }
