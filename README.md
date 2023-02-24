@@ -55,9 +55,9 @@ resource "rootly_workflow_incident" "ping_oncall" {
 resource "rootly_workflow_task_send_sms" "sms_oncall" {
   workflow_id = rootly_workflow_incident.ping_oncall.id
   task_params {
-    name = "On-call team"
+    name          = "On-call team"
     phone_numbers = ["+11231231234"]
-    content = "Critical incident started"
+    content       = "Critical incident started"
   }
 }
 ```
@@ -67,26 +67,26 @@ Custom form fields
 ```terraform
 # Custom form Fields
 resource "rootly_form_field" "regions_affected" {
-  name = "Regions affected"
-  kind = "custom"
+  name       = "Regions affected"
+  kind       = "custom"
   input_kind = "multi_select"
-  shown = ["web_new_incident_form", "web_update_incident_form"]
-  required = ["web_new_incident_form", "web_update_incident_form"]
+  shown      = ["web_new_incident_form", "web_update_incident_form"]
+  required   = ["web_new_incident_form", "web_update_incident_form"]
 }
 
 resource "rootly_form_field_option" "asia" {
   form_field_id = rootly_form_field.regions_affected.id
-  value = "Asia"
+  value         = "Asia"
 }
 
 resource "rootly_form_field_option" "europe" {
   form_field_id = rootly_form_field.regions_affected.id
-  value = "Europe"
+  value         = "Europe"
 }
 
 resource "rootly_form_field_option" "north_america" {
   form_field_id = rootly_form_field.regions_affected.id
-  value = "North America"
+  value         = "North America"
 }
 ```
 
@@ -130,33 +130,33 @@ Dashboards
 
 ```terraform
 resource "rootly_dashboard" "overview" {
-  name = "mydashboard_panel"
+  name = "my_dashboard"
 }
 
 resource "rootly_dashboard_panel" "incidents_by_severity" {
   dashboard_id = rootly_dashboard.foo.id
-	name = "test"
-	params {
-		display = "line_chart"
-		datasets {
-			collection = "incidents"
-			filter {
-				operation = "and"
-				rules {
-					operation = "and"
-					condition = "="
-					key = "status"
-					value = "started"
-				}
-			}
-			group_by = "severity"
-			aggregate {
-				cumulative = false
-				key = "results"
-				operation = "count"
-			}
-		}
-	}
+  name         = "test"
+  params {
+    display = "line_chart"
+    datasets {
+      collection = "incidents"
+      filter {
+        operation = "and"
+        rules {
+          operation = "and"
+          condition = "="
+          key       = "status"
+          value     = "started"
+        }
+      }
+      group_by = "severity"
+      aggregate {
+        cumulative = false
+        key        = "results"
+        operation  = "count"
+      }
+    }
+  }
 }
 ```
 

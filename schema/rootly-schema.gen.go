@@ -6873,6 +6873,15 @@ type Incident struct {
 	// The Severity ID to attach to the incident
 	SeverityId *string `json:"severity_id"`
 
+	// Slack channel id
+	SlackChannelId *string `json:"slack_channel_id"`
+
+	// Slack channel name
+	SlackChannelName *string `json:"slack_channel_name"`
+
+	// Slack channel url
+	SlackChannelUrl *string `json:"slack_channel_url"`
+
 	// The slug of the incident
 	Slug string `json:"slug"`
 
@@ -7543,6 +7552,15 @@ type IncidentList struct {
 			// The Severity ID to attach to the incident
 			SeverityId *string `json:"severity_id"`
 
+			// Slack channel id
+			SlackChannelId *string `json:"slack_channel_id"`
+
+			// Slack channel name
+			SlackChannelName *string `json:"slack_channel_name"`
+
+			// Slack channel url
+			SlackChannelUrl *string `json:"slack_channel_url"`
+
 			// The slug of the incident
 			Slug string `json:"slug"`
 
@@ -7862,6 +7880,15 @@ type IncidentResponse struct {
 
 			// The Severity ID to attach to the incident
 			SeverityId *string `json:"severity_id"`
+
+			// Slack channel id
+			SlackChannelId *string `json:"slack_channel_id"`
+
+			// Slack channel name
+			SlackChannelName *string `json:"slack_channel_name"`
+
+			// Slack channel url
+			SlackChannelUrl *string `json:"slack_channel_url"`
 
 			// The slug of the incident
 			Slug string `json:"slug"`
@@ -12333,6 +12360,15 @@ type UpdateIncident struct {
 
 			// The Severity ID to attach to the incident
 			SeverityId *string `json:"severity_id"`
+
+			// Slack channel id
+			SlackChannelId *string `json:"slack_channel_id"`
+
+			// Slack channel name
+			SlackChannelName *string `json:"slack_channel_name"`
+
+			// Slack channel url
+			SlackChannelUrl *string `json:"slack_channel_url"`
 
 			// Date of start
 			StartedAt *string `json:"started_at"`

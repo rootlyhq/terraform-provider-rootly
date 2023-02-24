@@ -9,4 +9,10 @@ description: |-
 
 {{ .Description | trimspace }}
 
+{{ if .HasExample -}}
+## Example Usage
+
+{{ printf "{{tffile %q}}" .ExampleFile }}
+{{- end }}
+
 {{ .SchemaMarkdown | trimspace }}

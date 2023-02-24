@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.73] -- 2024-02-23
+
+- Add resources examples.
+
 ## [0.1.72] -- 2024-02-21
 
 - Add `format` field to `post_mortem_template` resource.
