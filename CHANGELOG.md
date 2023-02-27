@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.75] -- 2024-02-27
+
+- Fix resources examples.
+- Add `pin_to_channel` to `workflow_task_send_slack_message` & `workflow_task_send_slack_block` resources.
+
 ## [0.1.74] -- 2024-02-24
 
 - Add more resources examples.
