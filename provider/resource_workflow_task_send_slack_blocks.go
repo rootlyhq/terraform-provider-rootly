@@ -144,6 +144,11 @@ func resourceWorkflowTaskSendSlackBlocks() *schema.Resource {
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},
+						"pin_to_channel": &schema.Schema{
+							Description: "",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
 						"parent_message_thread_task": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. A hash where [id] is the task id of the parent task that sent a message, and [name] is the name of the parent task",
 							Type:        schema.TypeMap,

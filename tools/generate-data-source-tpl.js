@@ -17,11 +17,11 @@ import (
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
-func dataSource${nameCamel}() *schema.Resource{
-	return &schema.Resource{
+func dataSource${nameCamel}() *schema.Resource {
+	return &schema.Resource {
 		ReadContext: dataSource${nameCamel}Read,
-		Schema: map[string]*schema.Schema{
-			"id": &schema.Schema{
+		Schema: map[string]*schema.Schema {
+			"id": &schema.Schema {
 				Type: schema.TypeString,
 				Computed: true,
 			},
@@ -131,7 +131,7 @@ function schemaField(name, resourceSchema, filterParameters) {
 		case 'integer':
 		case 'number':
 			return `
-			"${name}": &schema.Schema{
+			"${name}": &schema.Schema {
 				Type: schema.TypeInt,
 				Computed: true,
 				Optional: true,
@@ -140,7 +140,7 @@ function schemaField(name, resourceSchema, filterParameters) {
 		case 'boolean':
 			if (name === "enabled") {
 				return `
-				"${name}": &schema.Schema{
+				"${name}": &schema.Schema {
 					Type: schema.TypeBool,
 					Default: true,
 					Optional: true,
@@ -148,7 +148,7 @@ function schemaField(name, resourceSchema, filterParameters) {
 				`
 			}
 			return `
-			"${name}": &schema.Schema{
+			"${name}": &schema.Schema {
 				Type: schema.TypeBool,
 				Computed: true,
 				Optional: true,
@@ -158,7 +158,7 @@ function schemaField(name, resourceSchema, filterParameters) {
 		default:
 			if (name.match(/_at$/)) {
 				return `
-				"${name}": &schema.Schema{
+				"${name}": &schema.Schema {
 					Type: schema.TypeMap,
 					Description: "Filter by date range using 'lt' and 'gt'.",
 					Optional: true,
@@ -166,7 +166,7 @@ function schemaField(name, resourceSchema, filterParameters) {
 				`
 			}
 			return `
-			"${name}": &schema.Schema{
+			"${name}": &schema.Schema {
 				Type: schema.TypeString,
 				Computed: true,
 				Optional: true,

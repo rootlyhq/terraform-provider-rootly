@@ -1,5 +1,9 @@
 const inflect = require('./inflect');
 
+function includeStructure(resourceSchema) {
+	return resourceSchema.properties && resourceSchema.properties.accepts_unordered
+}
+
 function includeTools(resourceSchema) {
 	for (var key in resourceSchema.properties) {
 		if (resourceSchema.properties[key].type === "boolean") {
@@ -12,7 +16,7 @@ function includeTools(resourceSchema) {
 module.exports = (name, resourceSchema, requiredFields, pathIdField) => {
 	const namePlural = inflect.pluralize(name)
 	const nameCamel = inflect.camelize(name)
-	const nameCamelPlural = inflect.camelize(namePlural)
+	const structure = includeStructure(resourceSchema) ? `"github.com/hashicorp/terraform-plugin-sdk/v2/helper/structure"` : ""
 	const tools = includeTools(resourceSchema) ? `"github.com/rootlyhq/terraform-provider-rootly/tools"` : ""
 
 return `package provider
@@ -22,21 +26,22 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	${structure}
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
 	${tools}
 )
 
-func resource${nameCamel}() *schema.Resource{
+func resource${nameCamel}() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resource${nameCamel}Create,
 		ReadContext: resource${nameCamel}Read,
 		UpdateContext: resource${nameCamel}Update,
 		DeleteContext: resource${nameCamel}Delete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
+		Schema: map[string]*schema.Schema {
 			${schemaFields(resourceSchema, requiredFields, pathIdField)}
 		},
 	}
@@ -211,10 +216,16 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 			return len(old) != 0
 		},
 	` : ''
+	const stateFunc = schema.accepts_unordered ? `
+		StateFunc: func(v interface{}) string {
+			json, _ := structure.NormalizeJsonString(v)
+			return json
+		},
+	` : ''
 	switch (schema.type) {
 		case 'string':
 			return `
-			"${name}": &schema.Schema{
+			"${name}": &schema.Schema {
 				Type: schema.TypeString,
 				${schema.enum ? `Default: "${schema.enum[0]}",` : `Computed: ${optional},`}
 				Required: ${required},
@@ -227,7 +238,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 		case 'integer':
 		case 'number':
 			return `
-			"${name}": &schema.Schema{
+			"${name}": &schema.Schema {
 				Type: schema.TypeInt,
 				Computed: ${optional},
 				Required: ${required},
@@ -240,7 +251,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 		case 'boolean':
 			if (name === "enabled") {
 				return `
-				"${name}": &schema.Schema{
+				"${name}": &schema.Schema {
 					Type: schema.TypeBool,
 					Default: true,
 					Optional: true,
@@ -249,7 +260,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 				`
 			}
 			return `
-			"${name}": &schema.Schema{
+			"${name}": &schema.Schema {
 				Type: schema.TypeBool,
 				Computed: ${optional},
 				Required: ${required},
@@ -261,63 +272,67 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 		case 'array':
 			if (schema.items && schema.items.type === "object") {
 				return `
-				"${name}": &schema.Schema{
+				"${name}": &schema.Schema {
 					Type: schema.TypeList,
 					Computed: ${optional},
 					Required: ${required},
 					Optional: ${optional},
 					Description: "${description}",
-					Elem: &schema.Resource{
-						Schema: map[string]*schema.Schema{
-							"id": &schema.Schema{
+					Elem: &schema.Resource {
+						Schema: map[string]*schema.Schema {
+							"id": &schema.Schema {
 								Type: schema.TypeString,
 								Required: true,
 							},
-							"name": &schema.Schema{
+							"name": &schema.Schema {
 								Type: schema.TypeString,
 								Required: true,
 							},
 						},
 					},
+					${stateFunc}
 				},
 				`
 			} else if (schema.items && schema.items.type === "string") {
 				return `
-				"${name}": &schema.Schema{
+				"${name}": &schema.Schema {
 					Type: schema.TypeList,
-					Elem: &schema.Schema{
+					Elem: &schema.Schema {
 						Type: schema.TypeString,
 					},
 					Computed: ${optional},
 					Required: ${required},
 					Optional: ${optional},
 					Description: "${description}",
+					${stateFunc}
 				},
 				`
 			} else if (schema.items && schema.items.type === "number") {
 				return `
-				"${name}": &schema.Schema{
+				"${name}": &schema.Schema {
 					Type: schema.TypeList,
-					Elem: &schema.Schema{
+					Elem: &schema.Schema {
 						Type: schema.TypeInt,
 					},
 					Computed: ${optional},
 					Required: ${required},
 					Optional: ${optional},
 					Description: "${description}",
+					${stateFunc}
 				},
 				`
 			} else if (schema.items && schema.items.type === "integer") {
 				return `
-				"${name}": &schema.Schema{
+				"${name}": &schema.Schema {
 					Type: schema.TypeList,
-					Elem: &schema.Schema{
+					Elem: &schema.Schema {
 						Type: schema.TypeInt,
 					},
 					Computed: ${optional},
 					Required: ${required},
 					Optional: ${optional},
 					Description: "${description}",
+					${stateFunc}
 				},
 				`
 			} else {
@@ -327,9 +342,9 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 		case 'object':
 		default:
 			return `
-			"${name}": &schema.Schema{
+			"${name}": &schema.Schema {
 				Type: schema.TypeMap,
-				Elem: &schema.Schema{
+				Elem: &schema.Schema {
 					Type: schema.TypeString,
 				},
 				Computed: ${optional},

@@ -35,7 +35,7 @@ import (
 	${tools}
 )
 
-func resource${nameCamel}() *schema.Resource{
+func resource${nameCamel}() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resource${nameCamel}Create,
 		ReadContext: resource${nameCamel}Read,
@@ -44,7 +44,7 @@ func resource${nameCamel}() *schema.Resource{
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
+		Schema: map[string]*schema.Schema {
 			${schemaFields(resourceSchema, requiredFields, taskParamsSchema)}
 		},
 	}
@@ -236,7 +236,7 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
 	switch (schema.type) {
 		case 'string':
 			return `
-			"${name}": &schema.Schema{
+			"${name}": &schema.Schema {
 				Type: schema.TypeString,
 				${schema.enum ? `Default: "${schema.enum[0]}",` : `Computed: ${optional},`}
 				Required: ${required},
@@ -246,7 +246,7 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
 			`
 		case 'number':
 			return `
-			"${name}": &schema.Schema{
+			"${name}": &schema.Schema {
 				Type: schema.TypeInt,
 				Computed: ${optional},
 				Required: ${required},
@@ -257,7 +257,7 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
 		case 'boolean':
 			if (name === "enabled") {
 				return `
-				"${name}": &schema.Schema{
+				"${name}": &schema.Schema {
 					Type: schema.TypeBool,
 					Default: true,
 					Optional: true,
@@ -265,7 +265,7 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
 				`
 			}
 			return `
-			"${name}": &schema.Schema{
+			"${name}": &schema.Schema {
 				Type: schema.TypeBool,
 				Computed: ${optional},
 				Required: ${required},
@@ -276,19 +276,19 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
 		case 'array':
 			if (schema.items && schema.items.type === "object") {
 				return `
-				"${name}": &schema.Schema{
+				"${name}": &schema.Schema {
 					Type: schema.TypeList,
 					Computed: ${optional},
 					Required: ${required},
 					Optional: ${optional},
 					Description: "${description}",
 					Elem: &schema.Resource{
-						Schema: map[string]*schema.Schema{
-							"id": &schema.Schema{
+						Schema: map[string]*schema.Schema {
+							"id": &schema.Schema {
 								Type: schema.TypeString,
 								Required: true,
 							},
-							"name": &schema.Schema{
+							"name": &schema.Schema {
 								Type: schema.TypeString,
 								Required: true,
 							},
@@ -298,9 +298,9 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
 				`
 			} else {
 				return `
-				"${name}": &schema.Schema{
+				"${name}": &schema.Schema {
 					Type: schema.TypeList,
-					Elem: &schema.Schema{
+					Elem: &schema.Schema {
 						Type: schema.TypeString,
 					},
 					Computed: ${optional},
@@ -314,12 +314,12 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
 		default:
 			if (name === "trigger_params") {
 				return `
-				"${name}": &schema.Schema{
+				"${name}": &schema.Schema {
 					Type: schema.TypeList,
 					MinItems: 1,
 					MaxItems: 1,
 					Elem: &schema.Resource{
-						Schema: map[string]*schema.Schema{
+						Schema: map[string]*schema.Schema {
 							${schemaFields(taskParamsSchema, taskParamsSchema.required)}
 						},
 					},
@@ -329,9 +329,9 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
 				`
 			}
 			return `
-			"${name}": &schema.Schema{
+			"${name}": &schema.Schema {
 				Type: schema.TypeMap,
-				Elem: &schema.Schema{
+				Elem: &schema.Schema {
 					Type: schema.TypeString,
 				},
 				Computed: ${optional},

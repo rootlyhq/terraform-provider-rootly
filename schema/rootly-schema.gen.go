@@ -10891,6 +10891,7 @@ type SendSlackBlocksTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"parent_message_thread_task,omitempty"`
+	PinToChannel    *bool `json:"pin_to_channel,omitempty"`
 	SendAsEphemeral *bool `json:"send_as_ephemeral,omitempty"`
 	SlackUserGroups *[]struct {
 		Id   *string `json:"id,omitempty"`
@@ -10920,6 +10921,7 @@ type SendSlackMessageTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"parent_message_thread_task,omitempty"`
+	PinToChannel    *bool `json:"pin_to_channel,omitempty"`
 	SendAsEphemeral *bool `json:"send_as_ephemeral,omitempty"`
 	SlackUserGroups *[]struct {
 		Id   *string `json:"id,omitempty"`

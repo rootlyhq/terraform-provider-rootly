@@ -31,7 +31,7 @@ func init() {
 func New(version string) func() *schema.Provider {
 	return func() *schema.Provider {
 		p := &schema.Provider{
-			Schema: map[string]*schema.Schema{
+			Schema: map[string]*schema.Schema {
 				"api_host": {
 					Description: "The Rootly API host. Defaults to https://api.rootly.com",
 					Type:        schema.TypeString,

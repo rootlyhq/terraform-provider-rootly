@@ -54,7 +54,7 @@ func resourceWorkflowTask${task_name_camel}() *schema.Resource {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
-		Schema: map[string]*schema.Schema{
+		Schema: map[string]*schema.Schema {
 			"workflow_id": {
 				Description:  "The ID of the parent workflow",
 				Type:         schema.TypeString,
@@ -74,12 +74,12 @@ func resourceWorkflowTask${task_name_camel}() *schema.Resource {
 				MinItems: 1,
 				MaxItems: 1,
 				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"task_type": &schema.Schema{
+					Schema: map[string]*schema.Schema {
+						"task_type": &schema.Schema {
 							Type: schema.TypeString,
 							Optional: true,
 							Default: "${task_name}",
-							ValidateFunc: validation.StringInSlice([]string{
+							ValidateFunc: validation.StringInSlice([]string {
 								"${task_name}",
 							}, false),
 						},
@@ -206,7 +206,7 @@ function annotatedDescription(schema) {
 function genTaskSchemaProperty(property_name, property_schema, required_props) {
 	const isRequired = required_props && required_props.indexOf(property_name) !== -1
 	const isJSON = property_schema.type === "string" && property_schema.description && property_schema.description.match(/JSON/)
-	let a = `						"${property_name}": &schema.Schema{
+	let a = `						"${property_name}": &schema.Schema {
 							Description: "${annotatedDescription(property_schema)}",
 							Type: ${genTaskSchemaPropertyType(property_schema.type)},
 							${isRequired ? 'Required' : 'Optional'}: true,`
@@ -246,18 +246,18 @@ function genTaskSchemaProperty(property_name, property_schema, required_props) {
 	if (property_schema.type === "array") {
 		if (property_schema.items.type === "string") {
 			a = `${a}
-							Elem: &schema.Schema{
+							Elem: &schema.Schema {
 								Type: schema.TypeString,
 							},`
 		} else if (property_schema.items.type === "object") {
 			a = `${a}
 							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
+								Schema: map[string]*schema.Schema {
+									"id": &schema.Schema {
 										Type: schema.TypeString,
 										Required: true,
 									},
-									"name": &schema.Schema{
+									"name": &schema.Schema {
 										Type: schema.TypeString,
 										Required: true,
 									},
@@ -304,7 +304,7 @@ func TestAccResourceWorkflowTask${task_name_camel}(t *testing.T) {
 			testAccPreCheck(t)
 		},
 		ProviderFactories: providerFactories,
-		Steps: []resource.TestStep{
+		Steps: []resource.TestStep {
 			{
 				Config: testAccResourceWorkflowTask${task_name_camel},
 				Check: resource.ComposeTestCheckFunc(
