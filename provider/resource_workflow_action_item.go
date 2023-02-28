@@ -217,6 +217,14 @@ func resourceWorkflowActionItem() *schema.Resource {
 							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
 						},
 
+						"incident_condition_incident_roles": &schema.Schema{
+							Type:        schema.TypeString,
+							Default:     "IS",
+							Required:    false,
+							Optional:    true,
+							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
+						},
+
 						"incident_condition_service": &schema.Schema{
 							Type:        schema.TypeString,
 							Default:     "IS",
@@ -239,14 +247,6 @@ func resourceWorkflowActionItem() *schema.Resource {
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
-						},
-
-						"incident_condition_incident_roles": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "",
 						},
 
 						"incident_condition_summary": &schema.Schema{
@@ -427,6 +427,17 @@ func resourceWorkflowActionItem() *schema.Resource {
 				Description: "",
 			},
 
+			"incident_roles_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "",
+			},
+
 			"service_ids": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -501,6 +512,9 @@ func resourceWorkflowActionItemCreate(ctx context.Context, d *schema.ResourceDat
 	if value, ok := d.GetOkExists("incident_type_ids"); ok {
 		s.IncidentTypeIds = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("incident_roles_ids"); ok {
+		s.IncidentRolesIds = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("service_ids"); ok {
 		s.ServiceIds = value.([]interface{})
 	}
@@ -554,6 +568,7 @@ func resourceWorkflowActionItemRead(ctx context.Context, d *schema.ResourceData,
 	d.Set("environment_ids", item.EnvironmentIds)
 	d.Set("severity_ids", item.SeverityIds)
 	d.Set("incident_type_ids", item.IncidentTypeIds)
+	d.Set("incident_roles_ids", item.IncidentRolesIds)
 	d.Set("service_ids", item.ServiceIds)
 	d.Set("group_ids", item.GroupIds)
 
@@ -611,6 +626,9 @@ func resourceWorkflowActionItemUpdate(ctx context.Context, d *schema.ResourceDat
 	}
 	if d.HasChange("incident_type_ids") {
 		s.IncidentTypeIds = d.Get("incident_type_ids").([]interface{})
+	}
+	if d.HasChange("incident_roles_ids") {
+		s.IncidentRolesIds = d.Get("incident_roles_ids").([]interface{})
 	}
 	if d.HasChange("service_ids") {
 		s.ServiceIds = d.Get("service_ids").([]interface{})

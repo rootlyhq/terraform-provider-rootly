@@ -40,6 +40,7 @@ resource "rootly_workflow_incident" "my-workflow" {
 - `enabled` (Boolean)
 - `environment_ids` (List of String)
 - `group_ids` (List of String)
+- `incident_roles_ids` (List of String)
 - `incident_type_ids` (List of String)
 - `position` (Number) The order which the workflow should run with other workflows.
 - `repeat_every_duration` (String) Repeat workflow every duration.
@@ -66,7 +67,7 @@ Optional:
 - `incident_condition_environment` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
 - `incident_condition_functionality` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
 - `incident_condition_group` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
-- `incident_condition_incident_roles` (String)
+- `incident_condition_incident_roles` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
 - `incident_condition_incident_type` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
 - `incident_condition_kind` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
 - `incident_condition_mitigated_at` (String)

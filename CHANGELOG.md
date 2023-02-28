@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.76] -- 2024-02-28
+
+- Add `incident_roles_ids` & `incident_condition_incident_roles` to `resource_workflow_*` resources.
+
 ## [0.1.75] -- 2024-02-27
 
 - Fix resources examples.

@@ -132,6 +132,17 @@ const (
 	ActionItemTriggerParamsIncidentConditionGroupUNSET       ActionItemTriggerParamsIncidentConditionGroup = "UNSET"
 )
 
+// Defines values for ActionItemTriggerParamsIncidentConditionIncidentRoles.
+const (
+	ActionItemTriggerParamsIncidentConditionIncidentRolesANY         ActionItemTriggerParamsIncidentConditionIncidentRoles = "ANY"
+	ActionItemTriggerParamsIncidentConditionIncidentRolesCONTAINS    ActionItemTriggerParamsIncidentConditionIncidentRoles = "CONTAINS"
+	ActionItemTriggerParamsIncidentConditionIncidentRolesCONTAINSALL ActionItemTriggerParamsIncidentConditionIncidentRoles = "CONTAINS_ALL"
+	ActionItemTriggerParamsIncidentConditionIncidentRolesIS          ActionItemTriggerParamsIncidentConditionIncidentRoles = "IS"
+	ActionItemTriggerParamsIncidentConditionIncidentRolesNONE        ActionItemTriggerParamsIncidentConditionIncidentRoles = "NONE"
+	ActionItemTriggerParamsIncidentConditionIncidentRolesSET         ActionItemTriggerParamsIncidentConditionIncidentRoles = "SET"
+	ActionItemTriggerParamsIncidentConditionIncidentRolesUNSET       ActionItemTriggerParamsIncidentConditionIncidentRoles = "UNSET"
+)
+
 // Defines values for ActionItemTriggerParamsIncidentConditionIncidentType.
 const (
 	ActionItemTriggerParamsIncidentConditionIncidentTypeANY         ActionItemTriggerParamsIncidentConditionIncidentType = "ANY"
@@ -1720,6 +1731,17 @@ const (
 	IncidentTriggerParamsIncidentConditionGroupNONE        IncidentTriggerParamsIncidentConditionGroup = "NONE"
 	IncidentTriggerParamsIncidentConditionGroupSET         IncidentTriggerParamsIncidentConditionGroup = "SET"
 	IncidentTriggerParamsIncidentConditionGroupUNSET       IncidentTriggerParamsIncidentConditionGroup = "UNSET"
+)
+
+// Defines values for IncidentTriggerParamsIncidentConditionIncidentRoles.
+const (
+	IncidentTriggerParamsIncidentConditionIncidentRolesANY         IncidentTriggerParamsIncidentConditionIncidentRoles = "ANY"
+	IncidentTriggerParamsIncidentConditionIncidentRolesCONTAINS    IncidentTriggerParamsIncidentConditionIncidentRoles = "CONTAINS"
+	IncidentTriggerParamsIncidentConditionIncidentRolesCONTAINSALL IncidentTriggerParamsIncidentConditionIncidentRoles = "CONTAINS_ALL"
+	IncidentTriggerParamsIncidentConditionIncidentRolesIS          IncidentTriggerParamsIncidentConditionIncidentRoles = "IS"
+	IncidentTriggerParamsIncidentConditionIncidentRolesNONE        IncidentTriggerParamsIncidentConditionIncidentRoles = "NONE"
+	IncidentTriggerParamsIncidentConditionIncidentRolesSET         IncidentTriggerParamsIncidentConditionIncidentRoles = "SET"
+	IncidentTriggerParamsIncidentConditionIncidentRolesUNSET       IncidentTriggerParamsIncidentConditionIncidentRoles = "UNSET"
 )
 
 // Defines values for IncidentTriggerParamsIncidentConditionIncidentType.
@@ -3837,7 +3859,7 @@ type ActionItemTriggerParams struct {
 	IncidentConditionEnvironment        *ActionItemTriggerParamsIncidentConditionEnvironment        `json:"incident_condition_environment,omitempty"`
 	IncidentConditionFunctionality      *ActionItemTriggerParamsIncidentConditionFunctionality      `json:"incident_condition_functionality,omitempty"`
 	IncidentConditionGroup              *ActionItemTriggerParamsIncidentConditionGroup              `json:"incident_condition_group,omitempty"`
-	IncidentConditionIncidentRoles      *interface{}                                                `json:"incident_condition_incident_roles,omitempty"`
+	IncidentConditionIncidentRoles      *ActionItemTriggerParamsIncidentConditionIncidentRoles      `json:"incident_condition_incident_roles,omitempty"`
 	IncidentConditionIncidentType       *ActionItemTriggerParamsIncidentConditionIncidentType       `json:"incident_condition_incident_type,omitempty"`
 	IncidentConditionKind               *ActionItemTriggerParamsIncidentConditionKind               `json:"incident_condition_kind,omitempty"`
 	IncidentConditionMitigatedAt        *interface{}                                                `json:"incident_condition_mitigated_at,omitempty"`
@@ -3891,6 +3913,9 @@ type ActionItemTriggerParamsIncidentConditionFunctionality string
 
 // ActionItemTriggerParamsIncidentConditionGroup defines model for ActionItemTriggerParams.IncidentConditionGroup.
 type ActionItemTriggerParamsIncidentConditionGroup string
+
+// ActionItemTriggerParamsIncidentConditionIncidentRoles defines model for ActionItemTriggerParams.IncidentConditionIncidentRoles.
+type ActionItemTriggerParamsIncidentConditionIncidentRoles string
 
 // ActionItemTriggerParamsIncidentConditionIncidentType defines model for ActionItemTriggerParams.IncidentConditionIncidentType.
 type ActionItemTriggerParamsIncidentConditionIncidentType string
@@ -8220,7 +8245,7 @@ type IncidentTriggerParams struct {
 	IncidentConditionEnvironment    *IncidentTriggerParamsIncidentConditionEnvironment   `json:"incident_condition_environment,omitempty"`
 	IncidentConditionFunctionality  *IncidentTriggerParamsIncidentConditionFunctionality `json:"incident_condition_functionality,omitempty"`
 	IncidentConditionGroup          *IncidentTriggerParamsIncidentConditionGroup         `json:"incident_condition_group,omitempty"`
-	IncidentConditionIncidentRoles  *interface{}                                         `json:"incident_condition_incident_roles,omitempty"`
+	IncidentConditionIncidentRoles  *IncidentTriggerParamsIncidentConditionIncidentRoles `json:"incident_condition_incident_roles,omitempty"`
 	IncidentConditionIncidentType   *IncidentTriggerParamsIncidentConditionIncidentType  `json:"incident_condition_incident_type,omitempty"`
 	IncidentConditionKind           *IncidentTriggerParamsIncidentConditionKind          `json:"incident_condition_kind,omitempty"`
 	IncidentConditionMitigatedAt    *interface{}                                         `json:"incident_condition_mitigated_at,omitempty"`
@@ -8250,6 +8275,9 @@ type IncidentTriggerParamsIncidentConditionFunctionality string
 
 // IncidentTriggerParamsIncidentConditionGroup defines model for IncidentTriggerParams.IncidentConditionGroup.
 type IncidentTriggerParamsIncidentConditionGroup string
+
+// IncidentTriggerParamsIncidentConditionIncidentRoles defines model for IncidentTriggerParams.IncidentConditionIncidentRoles.
+type IncidentTriggerParamsIncidentConditionIncidentRoles string
 
 // IncidentTriggerParamsIncidentConditionIncidentType defines model for IncidentTriggerParams.IncidentConditionIncidentType.
 type IncidentTriggerParamsIncidentConditionIncidentType string
@@ -9614,11 +9642,12 @@ type NewWorkflow struct {
 			CommandFeedbackEnabled *bool `json:"command_feedback_enabled"`
 
 			// The description of the workflow
-			Description     *string   `json:"description"`
-			Enabled         *bool     `json:"enabled,omitempty"`
-			EnvironmentIds  *[]string `json:"environment_ids,omitempty"`
-			GroupIds        *[]string `json:"group_ids,omitempty"`
-			IncidentTypeIds *[]string `json:"incident_type_ids,omitempty"`
+			Description      *string   `json:"description"`
+			Enabled          *bool     `json:"enabled,omitempty"`
+			EnvironmentIds   *[]string `json:"environment_ids,omitempty"`
+			GroupIds         *[]string `json:"group_ids,omitempty"`
+			IncidentRolesIds *[]string `json:"incident_roles_ids,omitempty"`
+			IncidentTypeIds  *[]string `json:"incident_type_ids,omitempty"`
 
 			// The title of the workflow
 			Name string `json:"name"`
@@ -13501,11 +13530,12 @@ type UpdateWorkflow struct {
 			Command *string `json:"command"`
 
 			// The description of the workflow
-			Description     *string   `json:"description"`
-			Enabled         *bool     `json:"enabled,omitempty"`
-			EnvironmentIds  *[]string `json:"environment_ids,omitempty"`
-			GroupIds        *[]string `json:"group_ids,omitempty"`
-			IncidentTypeIds *[]string `json:"incident_type_ids,omitempty"`
+			Description      *string   `json:"description"`
+			Enabled          *bool     `json:"enabled,omitempty"`
+			EnvironmentIds   *[]string `json:"environment_ids,omitempty"`
+			GroupIds         *[]string `json:"group_ids,omitempty"`
+			IncidentRolesIds *[]string `json:"incident_roles_ids,omitempty"`
+			IncidentTypeIds  *[]string `json:"incident_type_ids,omitempty"`
 
 			// The title of the workflow
 			Name *string `json:"name,omitempty"`
@@ -13913,11 +13943,12 @@ type Workflow struct {
 	CreatedAt string `json:"created_at"`
 
 	// The description of the workflow
-	Description     *string   `json:"description"`
-	Enabled         *bool     `json:"enabled,omitempty"`
-	EnvironmentIds  *[]string `json:"environment_ids,omitempty"`
-	GroupIds        *[]string `json:"group_ids,omitempty"`
-	IncidentTypeIds *[]string `json:"incident_type_ids,omitempty"`
+	Description      *string   `json:"description"`
+	Enabled          *bool     `json:"enabled,omitempty"`
+	EnvironmentIds   *[]string `json:"environment_ids,omitempty"`
+	GroupIds         *[]string `json:"group_ids,omitempty"`
+	IncidentRolesIds *[]string `json:"incident_roles_ids,omitempty"`
+	IncidentTypeIds  *[]string `json:"incident_type_ids,omitempty"`
 
 	// The title of the workflow
 	Name string `json:"name"`
@@ -14214,11 +14245,12 @@ type WorkflowList struct {
 			CreatedAt string `json:"created_at"`
 
 			// The description of the workflow
-			Description     *string   `json:"description"`
-			Enabled         *bool     `json:"enabled,omitempty"`
-			EnvironmentIds  *[]string `json:"environment_ids,omitempty"`
-			GroupIds        *[]string `json:"group_ids,omitempty"`
-			IncidentTypeIds *[]string `json:"incident_type_ids,omitempty"`
+			Description      *string   `json:"description"`
+			Enabled          *bool     `json:"enabled,omitempty"`
+			EnvironmentIds   *[]string `json:"environment_ids,omitempty"`
+			GroupIds         *[]string `json:"group_ids,omitempty"`
+			IncidentRolesIds *[]string `json:"incident_roles_ids,omitempty"`
+			IncidentTypeIds  *[]string `json:"incident_type_ids,omitempty"`
 
 			// The title of the workflow
 			Name string `json:"name"`
@@ -14276,11 +14308,12 @@ type WorkflowResponse struct {
 			CreatedAt string `json:"created_at"`
 
 			// The description of the workflow
-			Description     *string   `json:"description"`
-			Enabled         *bool     `json:"enabled,omitempty"`
-			EnvironmentIds  *[]string `json:"environment_ids,omitempty"`
-			GroupIds        *[]string `json:"group_ids,omitempty"`
-			IncidentTypeIds *[]string `json:"incident_type_ids,omitempty"`
+			Description      *string   `json:"description"`
+			Enabled          *bool     `json:"enabled,omitempty"`
+			EnvironmentIds   *[]string `json:"environment_ids,omitempty"`
+			GroupIds         *[]string `json:"group_ids,omitempty"`
+			IncidentRolesIds *[]string `json:"incident_roles_ids,omitempty"`
+			IncidentTypeIds  *[]string `json:"incident_type_ids,omitempty"`
 
 			// The title of the workflow
 			Name string `json:"name"`

@@ -24,6 +24,7 @@ type Workflow struct {
   EnvironmentIds []interface{} `jsonapi:"attr,environment_ids,omitempty"`
   SeverityIds []interface{} `jsonapi:"attr,severity_ids,omitempty"`
   IncidentTypeIds []interface{} `jsonapi:"attr,incident_type_ids,omitempty"`
+  IncidentRolesIds []interface{} `jsonapi:"attr,incident_roles_ids,omitempty"`
   ServiceIds []interface{} `jsonapi:"attr,service_ids,omitempty"`
   GroupIds []interface{} `jsonapi:"attr,group_ids,omitempty"`
 }
