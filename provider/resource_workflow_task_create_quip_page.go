@@ -55,7 +55,7 @@ func resourceWorkflowTaskCreateQuipPage() *schema.Resource {
 							}, false),
 						},
 						"post_mortem_template_id": &schema.Schema{
-							Description: "Post mortem template to use when creating page, if desired.",
+							Description: "Retrospective template to use when creating page, if desired.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},

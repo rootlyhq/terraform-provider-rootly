@@ -80,7 +80,7 @@ func resourceWorkflowTaskCreateConfluencePage() *schema.Resource {
 							Optional:    true,
 						},
 						"post_mortem_template_id": &schema.Schema{
-							Description: "The post mortem template to use",
+							Description: "The Retrospective template to use",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},

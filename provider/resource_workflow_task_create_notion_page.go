@@ -60,7 +60,7 @@ func resourceWorkflowTaskCreateNotionPage() *schema.Resource {
 							Required:    true,
 						},
 						"post_mortem_template_id": &schema.Schema{
-							Description: "Post mortem template to use when creating page task, if desired.",
+							Description: "Retrospective template to use when creating page task, if desired.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},

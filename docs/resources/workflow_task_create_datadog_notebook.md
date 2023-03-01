@@ -38,6 +38,6 @@ Required:
 Optional:
 
 - `content` (String) The notebook content
-- `post_mortem_template_id` (String) Post mortem template to use when creating notebook, if desired.
+- `post_mortem_template_id` (String) Retrospective template to use when creating notebook, if desired.
 - `task_type` (String)
 - `template` (Map of String) Map must contain two fields, `id` and `name`.

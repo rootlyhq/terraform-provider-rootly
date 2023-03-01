@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.77] -- 2024-02-28
+
+- Rename `Postmortem` to `Retrospective` in our documentation.
+- Add `check_workflow_conditions` to `workflow_task_trigger_workflow` resource.
+
 ## [0.1.76] -- 2024-02-28
 
 - Add `incident_roles_ids` & `incident_condition_incident_roles` to `resource_workflow_*` resources.

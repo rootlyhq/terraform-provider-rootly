@@ -4895,7 +4895,7 @@ type CreateConfluencePageTaskParams struct {
 	// The page content
 	Content *string `json:"content,omitempty"`
 
-	// The post mortem template to use
+	// The Retrospective template to use
 	PostMortemTemplateId *string `json:"post_mortem_template_id,omitempty"`
 	Space                struct {
 		Id   *string `json:"id,omitempty"`
@@ -4922,7 +4922,7 @@ type CreateDatadogNotebookTaskParams struct {
 	// The notebook kind
 	Kind CreateDatadogNotebookTaskParamsKind `json:"kind"`
 
-	// Post mortem template to use when creating notebook, if desired.
+	// Retrospective template to use when creating notebook, if desired.
 	PostMortemTemplateId *string                                  `json:"post_mortem_template_id,omitempty"`
 	TaskType             *CreateDatadogNotebookTaskParamsTaskType `json:"task_type,omitempty"`
 	Template             *struct {
@@ -4953,7 +4953,7 @@ type CreateDropboxPaperPageTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"parent_folder,omitempty"`
 
-	// Post mortem template to use when creating page task, if desired.
+	// Retrospective template to use when creating page task, if desired.
 	PostMortemTemplateId *string                                   `json:"post_mortem_template_id,omitempty"`
 	TaskType             *CreateDropboxPaperPageTaskParamsTaskType `json:"task_type,omitempty"`
 
@@ -5065,7 +5065,7 @@ type CreateGoogleDocsPageTaskParams struct {
 	// Page permissions JSON.
 	Permissions *string `json:"permissions,omitempty"`
 
-	// Post mortem template to use when creating page, if desired.
+	// Retrospective template to use when creating page, if desired.
 	PostMortemTemplateId *string                                 `json:"post_mortem_template_id,omitempty"`
 	TaskType             *CreateGoogleDocsPageTaskParamsTaskType `json:"task_type,omitempty"`
 
@@ -5341,7 +5341,7 @@ type CreateNotionPageTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"parent_page"`
 
-	// Post mortem template to use when creating page task, if desired.
+	// Retrospective template to use when creating page task, if desired.
 	PostMortemTemplateId   *string                             `json:"post_mortem_template_id,omitempty"`
 	ShowActionItemsAsTable *bool                               `json:"show_action_items_as_table,omitempty"`
 	ShowTimelineAsTable    *bool                               `json:"show_timeline_as_table,omitempty"`
@@ -5437,7 +5437,7 @@ type CreateQuipPageTaskParams struct {
 	// The parent folder id
 	ParentFolderId *string `json:"parent_folder_id,omitempty"`
 
-	// Post mortem template to use when creating page, if desired.
+	// Retrospective template to use when creating page, if desired.
 	PostMortemTemplateId *string                           `json:"post_mortem_template_id,omitempty"`
 	TaskType             *CreateQuipPageTaskParamsTaskType `json:"task_type,omitempty"`
 
@@ -7620,7 +7620,7 @@ type IncidentListDataType string
 
 // IncidentPostMortem defines model for incident_post_mortem.
 type IncidentPostMortem struct {
-	// The content of the incident postmortem (Only if internal)
+	// The content of the incident retrospective (Only if internal)
 	Content *string `json:"content"`
 
 	// Date of creation
@@ -7635,60 +7635,60 @@ type IncidentPostMortem struct {
 	// Show alerts attached to the incident
 	ShowAlertsAttached *bool `json:"show_alerts_attached,omitempty"`
 
-	// Show services impacted of the incident postmortem
+	// Show services impacted of the incident retrospective
 	ShowFunctionalitiesImpacted *bool `json:"show_functionalities_impacted,omitempty"`
 
-	// Show groups impacted of the incident postmortem
+	// Show groups impacted of the incident retrospective
 	ShowGroupsImpacted *bool `json:"show_groups_impacted,omitempty"`
 
-	// Show functionalities impacted of the incident postmortem
+	// Show functionalities impacted of the incident retrospective
 	ShowServicesImpacted *bool `json:"show_services_impacted,omitempty"`
 
-	// Show events timeline of the incident postmortem
+	// Show events timeline of the incident retrospective
 	ShowTimeline *bool `json:"show_timeline,omitempty"`
 
-	// Show action items in the timeline of the incident postmortem
+	// Show action items in the timeline of the incident retrospective
 	ShowTimelineActionItems *bool `json:"show_timeline_action_items,omitempty"`
 
-	// Show workflow events in the timeline of the incident postmortem
+	// Show workflow events in the timeline of the incident retrospective
 	ShowTimelineGenius *bool `json:"show_timeline_genius,omitempty"`
 
-	// The order of the incident postmortem timeline
+	// The order of the incident retrospective timeline
 	ShowTimelineOrder *IncidentPostMortemShowTimelineOrder `json:"show_timeline_order,omitempty"`
 
-	// Show tasks in the timeline of the incident postmortem
+	// Show tasks in the timeline of the incident retrospective
 	ShowTimelineTasks *bool `json:"show_timeline_tasks,omitempty"`
 
-	// Show trail events in the timeline of the incident postmortem
+	// Show trail events in the timeline of the incident retrospective
 	ShowTimelineTrail *bool `json:"show_timeline_trail,omitempty"`
 
 	// Date of started at
 	StartedAt *string `json:"started_at"`
 
-	// The status of the incident postmortem
+	// The status of the incident retrospective
 	Status *IncidentPostMortemStatus `json:"status,omitempty"`
 
-	// The title of the incident postmortem
+	// The title of the incident retrospective
 	Title string `json:"title"`
 
 	// Date of last update
 	UpdatedAt string `json:"updated_at"`
 
-	// The url to the incident postmortem
+	// The url to the incident retrospective
 	Url *string `json:"url,omitempty"`
 }
 
-// The order of the incident postmortem timeline
+// The order of the incident retrospective timeline
 type IncidentPostMortemShowTimelineOrder string
 
-// The status of the incident postmortem
+// The status of the incident retrospective
 type IncidentPostMortemStatus string
 
 // IncidentPostMortemList defines model for incident_post_mortem_list.
 type IncidentPostMortemList struct {
 	Data []struct {
 		Attributes struct {
-			// The content of the incident postmortem (Only if internal)
+			// The content of the incident retrospective (Only if internal)
 			Content *string `json:"content"`
 
 			// Date of creation
@@ -7703,50 +7703,50 @@ type IncidentPostMortemList struct {
 			// Show alerts attached to the incident
 			ShowAlertsAttached *bool `json:"show_alerts_attached,omitempty"`
 
-			// Show services impacted of the incident postmortem
+			// Show services impacted of the incident retrospective
 			ShowFunctionalitiesImpacted *bool `json:"show_functionalities_impacted,omitempty"`
 
-			// Show groups impacted of the incident postmortem
+			// Show groups impacted of the incident retrospective
 			ShowGroupsImpacted *bool `json:"show_groups_impacted,omitempty"`
 
-			// Show functionalities impacted of the incident postmortem
+			// Show functionalities impacted of the incident retrospective
 			ShowServicesImpacted *bool `json:"show_services_impacted,omitempty"`
 
-			// Show events timeline of the incident postmortem
+			// Show events timeline of the incident retrospective
 			ShowTimeline *bool `json:"show_timeline,omitempty"`
 
-			// Show action items in the timeline of the incident postmortem
+			// Show action items in the timeline of the incident retrospective
 			ShowTimelineActionItems *bool `json:"show_timeline_action_items,omitempty"`
 
-			// Show workflow events in the timeline of the incident postmortem
+			// Show workflow events in the timeline of the incident retrospective
 			ShowTimelineGenius *bool `json:"show_timeline_genius,omitempty"`
 
-			// The order of the incident postmortem timeline
+			// The order of the incident retrospective timeline
 			ShowTimelineOrder *IncidentPostMortemListDataAttributesShowTimelineOrder `json:"show_timeline_order,omitempty"`
 
-			// Show tasks in the timeline of the incident postmortem
+			// Show tasks in the timeline of the incident retrospective
 			ShowTimelineTasks *bool `json:"show_timeline_tasks,omitempty"`
 
-			// Show trail events in the timeline of the incident postmortem
+			// Show trail events in the timeline of the incident retrospective
 			ShowTimelineTrail *bool `json:"show_timeline_trail,omitempty"`
 
 			// Date of started at
 			StartedAt *string `json:"started_at"`
 
-			// The status of the incident postmortem
+			// The status of the incident retrospective
 			Status *IncidentPostMortemListDataAttributesStatus `json:"status,omitempty"`
 
-			// The title of the incident postmortem
+			// The title of the incident retrospective
 			Title string `json:"title"`
 
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`
 
-			// The url to the incident postmortem
+			// The url to the incident retrospective
 			Url *string `json:"url,omitempty"`
 		} `json:"attributes"`
 
-		// Unique ID of the incident postmortem
+		// Unique ID of the incident retrospective
 		Id   string                         `json:"id"`
 		Type IncidentPostMortemListDataType `json:"type"`
 	} `json:"data"`
@@ -7759,10 +7759,10 @@ type IncidentPostMortemList struct {
 	} `json:"links"`
 }
 
-// The order of the incident postmortem timeline
+// The order of the incident retrospective timeline
 type IncidentPostMortemListDataAttributesShowTimelineOrder string
 
-// The status of the incident postmortem
+// The status of the incident retrospective
 type IncidentPostMortemListDataAttributesStatus string
 
 // IncidentPostMortemListDataType defines model for IncidentPostMortemList.Data.Type.
@@ -7772,7 +7772,7 @@ type IncidentPostMortemListDataType string
 type IncidentPostMortemResponse struct {
 	Data struct {
 		Attributes struct {
-			// The content of the incident postmortem (Only if internal)
+			// The content of the incident retrospective (Only if internal)
 			Content *string `json:"content"`
 
 			// Date of creation
@@ -7787,59 +7787,59 @@ type IncidentPostMortemResponse struct {
 			// Show alerts attached to the incident
 			ShowAlertsAttached *bool `json:"show_alerts_attached,omitempty"`
 
-			// Show services impacted of the incident postmortem
+			// Show services impacted of the incident retrospective
 			ShowFunctionalitiesImpacted *bool `json:"show_functionalities_impacted,omitempty"`
 
-			// Show groups impacted of the incident postmortem
+			// Show groups impacted of the incident retrospective
 			ShowGroupsImpacted *bool `json:"show_groups_impacted,omitempty"`
 
-			// Show functionalities impacted of the incident postmortem
+			// Show functionalities impacted of the incident retrospective
 			ShowServicesImpacted *bool `json:"show_services_impacted,omitempty"`
 
-			// Show events timeline of the incident postmortem
+			// Show events timeline of the incident retrospective
 			ShowTimeline *bool `json:"show_timeline,omitempty"`
 
-			// Show action items in the timeline of the incident postmortem
+			// Show action items in the timeline of the incident retrospective
 			ShowTimelineActionItems *bool `json:"show_timeline_action_items,omitempty"`
 
-			// Show workflow events in the timeline of the incident postmortem
+			// Show workflow events in the timeline of the incident retrospective
 			ShowTimelineGenius *bool `json:"show_timeline_genius,omitempty"`
 
-			// The order of the incident postmortem timeline
+			// The order of the incident retrospective timeline
 			ShowTimelineOrder *IncidentPostMortemResponseDataAttributesShowTimelineOrder `json:"show_timeline_order,omitempty"`
 
-			// Show tasks in the timeline of the incident postmortem
+			// Show tasks in the timeline of the incident retrospective
 			ShowTimelineTasks *bool `json:"show_timeline_tasks,omitempty"`
 
-			// Show trail events in the timeline of the incident postmortem
+			// Show trail events in the timeline of the incident retrospective
 			ShowTimelineTrail *bool `json:"show_timeline_trail,omitempty"`
 
 			// Date of started at
 			StartedAt *string `json:"started_at"`
 
-			// The status of the incident postmortem
+			// The status of the incident retrospective
 			Status *IncidentPostMortemResponseDataAttributesStatus `json:"status,omitempty"`
 
-			// The title of the incident postmortem
+			// The title of the incident retrospective
 			Title string `json:"title"`
 
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`
 
-			// The url to the incident postmortem
+			// The url to the incident retrospective
 			Url *string `json:"url,omitempty"`
 		} `json:"attributes"`
 
-		// Unique ID of the incident postmortem
+		// Unique ID of the incident retrospective
 		Id   string                             `json:"id"`
 		Type IncidentPostMortemResponseDataType `json:"type"`
 	} `json:"data"`
 }
 
-// The order of the incident postmortem timeline
+// The order of the incident retrospective timeline
 type IncidentPostMortemResponseDataAttributesShowTimelineOrder string
 
-// The status of the incident postmortem
+// The status of the incident retrospective
 type IncidentPostMortemResponseDataAttributesStatus string
 
 // IncidentPostMortemResponseDataType defines model for IncidentPostMortemResponse.Data.Type.
@@ -11923,8 +11923,9 @@ type TeamResponseDataType string
 
 // TriggerWorkflowTaskParams defines model for trigger_workflow_task_params.
 type TriggerWorkflowTaskParams struct {
-	Kind     *TriggerWorkflowTaskParamsKind `json:"kind,omitempty"`
-	Resource *struct {
+	CheckWorkflowConditions *bool                          `json:"check_workflow_conditions,omitempty"`
+	Kind                    *TriggerWorkflowTaskParamsKind `json:"kind,omitempty"`
+	Resource                *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"resource,omitempty"`
@@ -12572,7 +12573,7 @@ type UpdateIncidentFormFieldSelectionDataType string
 type UpdateIncidentPostMortem struct {
 	Data struct {
 		Attributes struct {
-			// The Cause ID's to attach to the incident postmortem
+			// The Cause ID's to attach to the incident retrospective
 			CauseIds *[]string `json:"cause_ids"`
 
 			// Date of mitigation
@@ -12581,50 +12582,50 @@ type UpdateIncidentPostMortem struct {
 			// Date of resolution
 			ResolvedAt *string `json:"resolved_at"`
 
-			// Show action items (follow-ups) in the incident postmortem
+			// Show action items (follow-ups) in the incident retrospective
 			ShowActionItems *bool `json:"show_action_items,omitempty"`
 
 			// Show alerts attached to the incident
 			ShowAlertsAttached *bool `json:"show_alerts_attached,omitempty"`
 
-			// Show services impacted of the incident postmortem
+			// Show services impacted of the incident retrospective
 			ShowFunctionalitiesImpacted *bool `json:"show_functionalities_impacted,omitempty"`
 
-			// Show groups impacted of the incident postmortem
+			// Show groups impacted of the incident retrospective
 			ShowGroupsImpacted *bool `json:"show_groups_impacted,omitempty"`
 
-			// Show functionalities impacted of the incident postmortem
+			// Show functionalities impacted of the incident retrospective
 			ShowServicesImpacted *bool `json:"show_services_impacted,omitempty"`
 
-			// Show events timeline of the incident postmortem
+			// Show events timeline of the incident retrospective
 			ShowTimeline *bool `json:"show_timeline,omitempty"`
 
-			// Show action items in the timeline of the incident postmortem
+			// Show action items in the timeline of the incident retrospective
 			ShowTimelineActionItems *bool `json:"show_timeline_action_items,omitempty"`
 
-			// Show workflow events in the timeline of the incident postmortem
+			// Show workflow events in the timeline of the incident retrospective
 			ShowTimelineGenius *bool `json:"show_timeline_genius,omitempty"`
 
-			// Show tasks in the timeline of the incident postmortem
+			// Show tasks in the timeline of the incident retrospective
 			ShowTimelineTasks *bool `json:"show_timeline_tasks,omitempty"`
 
-			// Show trail events in the timeline of the incident postmortem
+			// Show trail events in the timeline of the incident retrospective
 			ShowTimelineTrail *bool `json:"show_timeline_trail,omitempty"`
 
 			// Date of started at
 			StartedAt *string `json:"started_at"`
 
-			// The status of the incident postmortem
+			// The status of the incident retrospective
 			Status *UpdateIncidentPostMortemDataAttributesStatus `json:"status,omitempty"`
 
-			// The title of the incident postmortem
+			// The title of the incident retrospective
 			Title *string `json:"title,omitempty"`
 		} `json:"attributes"`
 		Type UpdateIncidentPostMortemDataType `json:"type"`
 	} `json:"data"`
 }
 
-// The status of the incident postmortem
+// The status of the incident retrospective
 type UpdateIncidentPostMortemDataAttributesStatus string
 
 // UpdateIncidentPostMortemDataType defines model for UpdateIncidentPostMortem.Data.Type.
@@ -12632,7 +12633,7 @@ type UpdateIncidentPostMortemDataType string
 
 // UpdateIncidentPostmortemTaskParams defines model for update_incident_postmortem_task_params.
 type UpdateIncidentPostmortemTaskParams struct {
-	// UUID of the postmortem that needs to be updated.
+	// UUID of the retrospective that needs to be updated.
 	PostmortemId *string                                     `json:"postmortem_id,omitempty"`
 	Status       *string                                     `json:"status"`
 	TaskType     *UpdateIncidentPostmortemTaskParamsTaskType `json:"task_type,omitempty"`

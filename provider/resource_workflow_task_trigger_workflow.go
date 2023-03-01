@@ -78,6 +78,11 @@ func resourceWorkflowTaskTriggerWorkflow() *schema.Resource {
 							Type:        schema.TypeMap,
 							Required:    true,
 						},
+						"check_workflow_conditions": &schema.Schema{
+							Description: "",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
 					},
 				},
 			},

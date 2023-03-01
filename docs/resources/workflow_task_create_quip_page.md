@@ -38,6 +38,6 @@ Optional:
 
 - `content` (String) The page content
 - `parent_folder_id` (String) The parent folder id
-- `post_mortem_template_id` (String) Post mortem template to use when creating page, if desired.
+- `post_mortem_template_id` (String) Retrospective template to use when creating page, if desired.
 - `task_type` (String)
 - `template_id` (String) The Quip file ID to use as a template.

@@ -32,7 +32,7 @@ Manages workflow update_incident_postmortem task.
 
 Optional:
 
-- `postmortem_id` (String) UUID of the postmortem that needs to be updated.
+- `postmortem_id` (String) UUID of the retrospective that needs to be updated.
 - `status` (String)
 - `task_type` (String)
 - `title` (String) The incident title

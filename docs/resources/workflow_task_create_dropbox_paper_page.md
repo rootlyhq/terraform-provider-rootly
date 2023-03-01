@@ -39,5 +39,5 @@ Optional:
 - `content` (String) The page content
 - `namespace` (Map of String) Map must contain two fields, `id` and `name`.
 - `parent_folder` (Map of String) Map must contain two fields, `id` and `name`.
-- `post_mortem_template_id` (String) Post mortem template to use when creating page task, if desired.
+- `post_mortem_template_id` (String) Retrospective template to use when creating page task, if desired.
 - `task_type` (String)

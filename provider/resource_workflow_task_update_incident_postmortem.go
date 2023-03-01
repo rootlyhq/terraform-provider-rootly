@@ -55,7 +55,7 @@ func resourceWorkflowTaskUpdateIncidentPostmortem() *schema.Resource {
 							}, false),
 						},
 						"postmortem_id": &schema.Schema{
-							Description: "UUID of the postmortem that needs to be updated.",
+							Description: "UUID of the retrospective that needs to be updated.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
