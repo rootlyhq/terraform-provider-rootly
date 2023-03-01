@@ -30,6 +30,12 @@ func dataSourceIncidentRole() *schema.Resource {
 				Optional: true,
 			},
 
+			"enabled": &schema.Schema{
+				Type:     schema.TypeBool,
+				Default:  true,
+				Optional: true,
+			},
+
 			"created_at": &schema.Schema{
 				Type:        schema.TypeMap,
 				Description: "Filter by date range using 'lt' and 'gt'.",
@@ -54,6 +60,11 @@ func dataSourceIncidentRoleRead(ctx context.Context, d *schema.ResourceData, met
 	if value, ok := d.GetOkExists("name"); ok {
 		name := value.(string)
 		params.FilterName = &name
+	}
+
+	if value, ok := d.GetOkExists("enabled"); ok {
+		enabled := value.(bool)
+		params.FilterEnabled = &enabled
 	}
 
 	created_at_gt := d.Get("created_at").(map[string]interface{})

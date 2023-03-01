@@ -21,6 +21,8 @@ description: |-
 ### Optional
 
 - `description` (String) The description of the incident role
+- `enabled` (Boolean)
+- `optional` (Boolean)
 - `slug` (String) The slug of the incident role
 - `summary` (String) The summary of the incident role
 

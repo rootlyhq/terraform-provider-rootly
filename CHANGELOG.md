@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.78] -- 2024-03-01
+
+- Add `optinal` and `enabled` attributes to `incident_roles` resource.
+
 ## [0.1.77] -- 2024-02-28
 
 - Rename `Postmortem` to `Retrospective` in our documentation.

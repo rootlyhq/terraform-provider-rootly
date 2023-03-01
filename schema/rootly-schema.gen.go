@@ -7947,9 +7947,11 @@ type IncidentRole struct {
 
 	// The description of the incident role
 	Description *string `json:"description"`
+	Enabled     *bool   `json:"enabled,omitempty"`
 
 	// The name of the incident role
-	Name string `json:"name"`
+	Name     string `json:"name"`
+	Optional *bool  `json:"optional,omitempty"`
 
 	// The slug of the incident role
 	Slug *string `json:"slug,omitempty"`
@@ -7970,9 +7972,11 @@ type IncidentRoleList struct {
 
 			// The description of the incident role
 			Description *string `json:"description"`
+			Enabled     *bool   `json:"enabled,omitempty"`
 
 			// The name of the incident role
-			Name string `json:"name"`
+			Name     string `json:"name"`
+			Optional *bool  `json:"optional,omitempty"`
 
 			// The slug of the incident role
 			Slug *string `json:"slug,omitempty"`
@@ -8009,9 +8013,11 @@ type IncidentRoleResponse struct {
 
 			// The description of the incident role
 			Description *string `json:"description"`
+			Enabled     *bool   `json:"enabled,omitempty"`
 
 			// The name of the incident role
-			Name string `json:"name"`
+			Name     string `json:"name"`
+			Optional *bool  `json:"optional,omitempty"`
 
 			// The slug of the incident role
 			Slug *string `json:"slug,omitempty"`
@@ -9143,9 +9149,11 @@ type NewIncidentRole struct {
 		Attributes struct {
 			// The description of the incident role
 			Description *string `json:"description"`
+			Enabled     *bool   `json:"enabled,omitempty"`
 
 			// The name of the incident role
-			Name string `json:"name"`
+			Name     string `json:"name"`
+			Optional *bool  `json:"optional,omitempty"`
 
 			// The summary of the incident role
 			Summary *string `json:"summary"`
@@ -12651,9 +12659,11 @@ type UpdateIncidentRole struct {
 		Attributes struct {
 			// The description of the incident role
 			Description *string `json:"description"`
+			Enabled     *bool   `json:"enabled,omitempty"`
 
 			// The name of the incident role
-			Name *string `json:"name,omitempty"`
+			Name     *string `json:"name,omitempty"`
+			Optional *bool   `json:"optional,omitempty"`
 
 			// The summary of the incident role
 			Summary *string `json:"summary"`

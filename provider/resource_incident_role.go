@@ -8,6 +8,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
+	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
 func resourceIncidentRole() *schema.Resource {
@@ -56,6 +57,20 @@ func resourceIncidentRole() *schema.Resource {
 				ForceNew:    false,
 				Description: "The description of the incident role",
 			},
+
+			"optional": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "",
+			},
+
+			"enabled": &schema.Schema{
+				Type:     schema.TypeBool,
+				Default:  true,
+				Optional: true,
+			},
 		},
 	}
 }
@@ -78,6 +93,12 @@ func resourceIncidentRoleCreate(ctx context.Context, d *schema.ResourceData, met
 	}
 	if value, ok := d.GetOkExists("description"); ok {
 		s.Description = value.(string)
+	}
+	if value, ok := d.GetOkExists("optional"); ok {
+		s.Optional = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("enabled"); ok {
+		s.Enabled = tools.Bool(value.(bool))
 	}
 
 	res, err := c.CreateIncidentRole(s)
@@ -112,6 +133,8 @@ func resourceIncidentRoleRead(ctx context.Context, d *schema.ResourceData, meta 
 	d.Set("slug", item.Slug)
 	d.Set("summary", item.Summary)
 	d.Set("description", item.Description)
+	d.Set("optional", item.Optional)
+	d.Set("enabled", item.Enabled)
 
 	return nil
 }
@@ -133,6 +156,12 @@ func resourceIncidentRoleUpdate(ctx context.Context, d *schema.ResourceData, met
 	}
 	if d.HasChange("description") {
 		s.Description = d.Get("description").(string)
+	}
+	if d.HasChange("optional") {
+		s.Optional = tools.Bool(d.Get("optional").(bool))
+	}
+	if d.HasChange("enabled") {
+		s.Enabled = tools.Bool(d.Get("enabled").(bool))
 	}
 
 	_, err := c.UpdateIncidentRole(d.Id(), s)

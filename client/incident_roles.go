@@ -14,6 +14,8 @@ type IncidentRole struct {
   Slug string `jsonapi:"attr,slug,omitempty"`
   Summary string `jsonapi:"attr,summary,omitempty"`
   Description string `jsonapi:"attr,description,omitempty"`
+  Optional *bool `jsonapi:"attr,optional,omitempty"`
+  Enabled *bool `jsonapi:"attr,enabled,omitempty"`
 }
 
 func (c *Client) ListIncidentRoles(params *rootlygo.ListIncidentRolesParams) ([]interface{}, error) {
