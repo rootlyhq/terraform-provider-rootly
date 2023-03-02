@@ -58,6 +58,15 @@ func resourceIncidentRole() *schema.Resource {
 				Description: "The description of the incident role",
 			},
 
+			"position": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Position of the incident role",
+			},
+
 			"optional": &schema.Schema{
 				Type:        schema.TypeBool,
 				Computed:    true,
@@ -93,6 +102,9 @@ func resourceIncidentRoleCreate(ctx context.Context, d *schema.ResourceData, met
 	}
 	if value, ok := d.GetOkExists("description"); ok {
 		s.Description = value.(string)
+	}
+	if value, ok := d.GetOkExists("position"); ok {
+		s.Position = value.(int)
 	}
 	if value, ok := d.GetOkExists("optional"); ok {
 		s.Optional = tools.Bool(value.(bool))
@@ -133,6 +145,7 @@ func resourceIncidentRoleRead(ctx context.Context, d *schema.ResourceData, meta 
 	d.Set("slug", item.Slug)
 	d.Set("summary", item.Summary)
 	d.Set("description", item.Description)
+	d.Set("position", item.Position)
 	d.Set("optional", item.Optional)
 	d.Set("enabled", item.Enabled)
 
@@ -156,6 +169,9 @@ func resourceIncidentRoleUpdate(ctx context.Context, d *schema.ResourceData, met
 	}
 	if d.HasChange("description") {
 		s.Description = d.Get("description").(string)
+	}
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
 	}
 	if d.HasChange("optional") {
 		s.Optional = tools.Bool(d.Get("optional").(bool))

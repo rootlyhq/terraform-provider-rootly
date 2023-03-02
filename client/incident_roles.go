@@ -14,6 +14,7 @@ type IncidentRole struct {
   Slug string `jsonapi:"attr,slug,omitempty"`
   Summary string `jsonapi:"attr,summary,omitempty"`
   Description string `jsonapi:"attr,description,omitempty"`
+  Position int `jsonapi:"attr,position,omitempty"`
   Optional *bool `jsonapi:"attr,optional,omitempty"`
   Enabled *bool `jsonapi:"attr,enabled,omitempty"`
 }

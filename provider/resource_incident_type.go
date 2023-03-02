@@ -57,6 +57,15 @@ func resourceIncidentType() *schema.Resource {
 				Description: "",
 			},
 
+			"position": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Position of the incident type",
+			},
+
 			"notify_emails": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -130,6 +139,9 @@ func resourceIncidentTypeCreate(ctx context.Context, d *schema.ResourceData, met
 	if value, ok := d.GetOkExists("color"); ok {
 		s.Color = value.(string)
 	}
+	if value, ok := d.GetOkExists("position"); ok {
+		s.Position = value.(int)
+	}
 	if value, ok := d.GetOkExists("notify_emails"); ok {
 		s.NotifyEmails = value.([]interface{})
 	}
@@ -172,6 +184,7 @@ func resourceIncidentTypeRead(ctx context.Context, d *schema.ResourceData, meta 
 	d.Set("slug", item.Slug)
 	d.Set("description", item.Description)
 	d.Set("color", item.Color)
+	d.Set("position", item.Position)
 	d.Set("notify_emails", item.NotifyEmails)
 	d.Set("slack_channels", item.SlackChannels)
 	d.Set("slack_aliases", item.SlackAliases)
@@ -196,6 +209,9 @@ func resourceIncidentTypeUpdate(ctx context.Context, d *schema.ResourceData, met
 	}
 	if d.HasChange("color") {
 		s.Color = d.Get("color").(string)
+	}
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
 	}
 	if d.HasChange("notify_emails") {
 		s.NotifyEmails = d.Get("notify_emails").([]interface{})

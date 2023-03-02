@@ -71,6 +71,7 @@ resource "rootly_service" "customer_postgresql_prod" {
 - `owners_group_ids` (List of String) Owner Teams associated with this service
 - `owners_user_ids` (List of Number) Owner Users associated with this service
 - `pagerduty_id` (String) The PagerDuty service id associated to this service
+- `position` (Number) Position of the service
 - `public_description` (String) The public description of the service
 - `service_ids` (List of String) Services dependent on this service
 - `slack_aliases` (Block List) Slack Aliases associated with this service (see [below for nested schema](#nestedblock--slack_aliases))

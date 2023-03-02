@@ -23,6 +23,7 @@ description: |-
 - `color` (String)
 - `description` (String) The description of the incident type
 - `notify_emails` (List of String) Emails to attach to the incident type
+- `position` (Number) Position of the incident type
 - `slack_aliases` (Block List) Slack Aliases associated with this incident type (see [below for nested schema](#nestedblock--slack_aliases))
 - `slack_channels` (Block List) Slack Channels associated with this incident type (see [below for nested schema](#nestedblock--slack_channels))
 - `slug` (String) The slug of the incident type

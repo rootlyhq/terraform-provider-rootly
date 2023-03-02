@@ -21,6 +21,7 @@ description: |-
 ### Optional
 
 - `description` (String) The description of the cause
+- `position` (Number) Position of the cause
 - `slug` (String) The slug of the cause
 
 ### Read-Only

@@ -77,6 +77,15 @@ func resourceService() *schema.Resource {
 				Description: "",
 			},
 
+			"position": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Position of the service",
+			},
+
 			"backstage_id": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
@@ -252,6 +261,9 @@ func resourceServiceCreate(ctx context.Context, d *schema.ResourceData, meta int
 	if value, ok := d.GetOkExists("color"); ok {
 		s.Color = value.(string)
 	}
+	if value, ok := d.GetOkExists("position"); ok {
+		s.Position = value.(int)
+	}
 	if value, ok := d.GetOkExists("backstage_id"); ok {
 		s.BackstageId = value.(string)
 	}
@@ -326,6 +338,7 @@ func resourceServiceRead(ctx context.Context, d *schema.ResourceData, meta inter
 	d.Set("public_description", item.PublicDescription)
 	d.Set("notify_emails", item.NotifyEmails)
 	d.Set("color", item.Color)
+	d.Set("position", item.Position)
 	d.Set("backstage_id", item.BackstageId)
 	d.Set("pagerduty_id", item.PagerdutyId)
 	d.Set("opsgenie_id", item.OpsgenieId)
@@ -366,6 +379,9 @@ func resourceServiceUpdate(ctx context.Context, d *schema.ResourceData, meta int
 	}
 	if d.HasChange("color") {
 		s.Color = d.Get("color").(string)
+	}
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
 	}
 	if d.HasChange("backstage_id") {
 		s.BackstageId = d.Get("backstage_id").(string)

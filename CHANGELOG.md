@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.79] -- 2024-03-01
+
+- Add `position` attributes to multiple resources.
+
 ## [0.1.78] -- 2024-03-01
 
 - Add `optional` and `enabled` attributes to `incident_roles` resource.

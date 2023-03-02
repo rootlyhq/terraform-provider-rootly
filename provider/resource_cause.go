@@ -47,6 +47,15 @@ func resourceCause() *schema.Resource {
 				ForceNew:    false,
 				Description: "The description of the cause",
 			},
+
+			"position": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Position of the cause",
+			},
 		},
 	}
 }
@@ -66,6 +75,9 @@ func resourceCauseCreate(ctx context.Context, d *schema.ResourceData, meta inter
 	}
 	if value, ok := d.GetOkExists("description"); ok {
 		s.Description = value.(string)
+	}
+	if value, ok := d.GetOkExists("position"); ok {
+		s.Position = value.(int)
 	}
 
 	res, err := c.CreateCause(s)
@@ -99,6 +111,7 @@ func resourceCauseRead(ctx context.Context, d *schema.ResourceData, meta interfa
 	d.Set("name", item.Name)
 	d.Set("slug", item.Slug)
 	d.Set("description", item.Description)
+	d.Set("position", item.Position)
 
 	return nil
 }
@@ -117,6 +130,9 @@ func resourceCauseUpdate(ctx context.Context, d *schema.ResourceData, meta inter
 	}
 	if d.HasChange("description") {
 		s.Description = d.Get("description").(string)
+	}
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
 	}
 
 	_, err := c.UpdateCause(d.Id(), s)

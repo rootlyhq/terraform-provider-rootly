@@ -16,6 +16,7 @@ type Functionality struct {
   PublicDescription string `jsonapi:"attr,public_description,omitempty"`
   NotifyEmails []interface{} `jsonapi:"attr,notify_emails,omitempty"`
   Color string `jsonapi:"attr,color,omitempty"`
+  Position int `jsonapi:"attr,position,omitempty"`
   EnvironmentIds []interface{} `jsonapi:"attr,environment_ids,omitempty"`
   ServiceIds []interface{} `jsonapi:"attr,service_ids,omitempty"`
   OwnersGroupIds []interface{} `jsonapi:"attr,owners_group_ids,omitempty"`

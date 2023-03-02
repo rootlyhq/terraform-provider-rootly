@@ -13,6 +13,7 @@ type Cause struct {
 	Name string `jsonapi:"attr,name,omitempty"`
   Slug string `jsonapi:"attr,slug,omitempty"`
   Description string `jsonapi:"attr,description,omitempty"`
+  Position int `jsonapi:"attr,position,omitempty"`
 }
 
 func (c *Client) ListCauses(params *rootlygo.ListCausesParams) ([]interface{}, error) {

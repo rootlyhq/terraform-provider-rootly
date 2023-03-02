@@ -79,6 +79,7 @@ resource "rootly_environment" "production" {
 - `color` (String)
 - `description` (String) The description of the environment
 - `notify_emails` (List of String) Emails attached to the environment
+- `position` (Number) Position of the environment
 - `slack_aliases` (Block List) Slack Aliases associated with this environment (see [below for nested schema](#nestedblock--slack_aliases))
 - `slack_channels` (Block List) Slack Channels associated with this environment (see [below for nested schema](#nestedblock--slack_channels))
 - `slug` (String) The slug of the environment

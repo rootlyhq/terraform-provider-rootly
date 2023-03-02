@@ -77,6 +77,15 @@ func resourceFunctionality() *schema.Resource {
 				Description: "",
 			},
 
+			"position": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Position of the functionality",
+			},
+
 			"environment_ids": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -189,6 +198,9 @@ func resourceFunctionalityCreate(ctx context.Context, d *schema.ResourceData, me
 	if value, ok := d.GetOkExists("color"); ok {
 		s.Color = value.(string)
 	}
+	if value, ok := d.GetOkExists("position"); ok {
+		s.Position = value.(int)
+	}
 	if value, ok := d.GetOkExists("environment_ids"); ok {
 		s.EnvironmentIds = value.([]interface{})
 	}
@@ -242,6 +254,7 @@ func resourceFunctionalityRead(ctx context.Context, d *schema.ResourceData, meta
 	d.Set("public_description", item.PublicDescription)
 	d.Set("notify_emails", item.NotifyEmails)
 	d.Set("color", item.Color)
+	d.Set("position", item.Position)
 	d.Set("environment_ids", item.EnvironmentIds)
 	d.Set("service_ids", item.ServiceIds)
 	d.Set("owners_group_ids", item.OwnersGroupIds)
@@ -275,6 +288,9 @@ func resourceFunctionalityUpdate(ctx context.Context, d *schema.ResourceData, me
 	}
 	if d.HasChange("color") {
 		s.Color = d.Get("color").(string)
+	}
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
 	}
 	if d.HasChange("environment_ids") {
 		s.EnvironmentIds = d.Get("environment_ids").([]interface{})

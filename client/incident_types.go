@@ -14,6 +14,7 @@ type IncidentType struct {
   Slug string `jsonapi:"attr,slug,omitempty"`
   Description string `jsonapi:"attr,description,omitempty"`
   Color string `jsonapi:"attr,color,omitempty"`
+  Position int `jsonapi:"attr,position,omitempty"`
   NotifyEmails []interface{} `jsonapi:"attr,notify_emails,omitempty"`
   SlackChannels []interface{} `jsonapi:"attr,slack_channels,omitempty"`
   SlackAliases []interface{} `jsonapi:"attr,slack_aliases,omitempty"`

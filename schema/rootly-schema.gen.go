@@ -4071,6 +4071,9 @@ type Alert struct {
 		// Emails attached to the environment
 		NotifyEmails *[]string `json:"notify_emails"`
 
+		// Position of the environment
+		Position *int `json:"position"`
+
 		// Slack Aliases associated with this environment
 		SlackAliases *[]struct {
 			// Slack alias ID
@@ -4148,6 +4151,9 @@ type Alert struct {
 		// The PagerDuty service id associated to this service
 		PagerdutyId *string `json:"pagerduty_id"`
 
+		// Position of the service
+		Position *int `json:"position"`
+
 		// The public description of the service
 		PublicDescription *string `json:"public_description"`
 
@@ -4214,6 +4220,9 @@ type AlertList struct {
 
 				// Emails attached to the environment
 				NotifyEmails *[]string `json:"notify_emails"`
+
+				// Position of the environment
+				Position *int `json:"position"`
 
 				// Slack Aliases associated with this environment
 				SlackAliases *[]struct {
@@ -4291,6 +4300,9 @@ type AlertList struct {
 
 				// The PagerDuty service id associated to this service
 				PagerdutyId *string `json:"pagerduty_id"`
+
+				// Position of the service
+				Position *int `json:"position"`
 
 				// The public description of the service
 				PublicDescription *string `json:"public_description"`
@@ -4378,6 +4390,9 @@ type AlertResponse struct {
 				// Emails attached to the environment
 				NotifyEmails *[]string `json:"notify_emails"`
 
+				// Position of the environment
+				Position *int `json:"position"`
+
 				// Slack Aliases associated with this environment
 				SlackAliases *[]struct {
 					// Slack alias ID
@@ -4454,6 +4469,9 @@ type AlertResponse struct {
 
 				// The PagerDuty service id associated to this service
 				PagerdutyId *string `json:"pagerduty_id"`
+
+				// Position of the service
+				Position *int `json:"position"`
 
 				// The public description of the service
 				PublicDescription *string `json:"public_description"`
@@ -4742,6 +4760,9 @@ type Cause struct {
 	// The name of the cause
 	Name string `json:"name"`
 
+	// Position of the cause
+	Position *int `json:"position"`
+
 	// The slug of the cause
 	Slug *string `json:"slug,omitempty"`
 
@@ -4761,6 +4782,9 @@ type CauseList struct {
 
 			// The name of the cause
 			Name string `json:"name"`
+
+			// Position of the cause
+			Position *int `json:"position"`
 
 			// The slug of the cause
 			Slug *string `json:"slug,omitempty"`
@@ -4797,6 +4821,9 @@ type CauseResponse struct {
 
 			// The name of the cause
 			Name string `json:"name"`
+
+			// Position of the cause
+			Position *int `json:"position"`
 
 			// The slug of the cause
 			Slug *string `json:"slug,omitempty"`
@@ -6058,6 +6085,9 @@ type Environment struct {
 	// Emails attached to the environment
 	NotifyEmails *[]string `json:"notify_emails"`
 
+	// Position of the environment
+	Position *int `json:"position"`
+
 	// Slack Aliases associated with this environment
 	SlackAliases *[]struct {
 		// Slack alias ID
@@ -6100,6 +6130,9 @@ type EnvironmentList struct {
 
 			// Emails attached to the environment
 			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Position of the environment
+			Position *int `json:"position"`
 
 			// Slack Aliases associated with this environment
 			SlackAliases *[]struct {
@@ -6159,6 +6192,9 @@ type EnvironmentResponse struct {
 
 			// Emails attached to the environment
 			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Position of the environment
+			Position *int `json:"position"`
 
 			// Slack Aliases associated with this environment
 			SlackAliases *[]struct {
@@ -6553,6 +6589,9 @@ type Functionality struct {
 	// Owner Users associated with this service
 	OwnersUserIds *[]int `json:"owners_user_ids"`
 
+	// Position of the functionality
+	Position *int `json:"position"`
+
 	// The public description of the functionality
 	PublicDescription *string `json:"public_description"`
 
@@ -6610,6 +6649,9 @@ type FunctionalityList struct {
 
 			// Owner Users associated with this service
 			OwnersUserIds *[]int `json:"owners_user_ids"`
+
+			// Position of the functionality
+			Position *int `json:"position"`
 
 			// The public description of the functionality
 			PublicDescription *string `json:"public_description"`
@@ -6684,6 +6726,9 @@ type FunctionalityResponse struct {
 
 			// Owner Users associated with this service
 			OwnersUserIds *[]int `json:"owners_user_ids"`
+
+			// Position of the functionality
+			Position *int `json:"position"`
 
 			// The public description of the functionality
 			PublicDescription *string `json:"public_description"`
@@ -7953,6 +7998,9 @@ type IncidentRole struct {
 	Name     string `json:"name"`
 	Optional *bool  `json:"optional,omitempty"`
 
+	// Position of the incident role
+	Position *int `json:"position"`
+
 	// The slug of the incident role
 	Slug *string `json:"slug,omitempty"`
 
@@ -7977,6 +8025,9 @@ type IncidentRoleList struct {
 			// The name of the incident role
 			Name     string `json:"name"`
 			Optional *bool  `json:"optional,omitempty"`
+
+			// Position of the incident role
+			Position *int `json:"position"`
 
 			// The slug of the incident role
 			Slug *string `json:"slug,omitempty"`
@@ -8018,6 +8069,9 @@ type IncidentRoleResponse struct {
 			// The name of the incident role
 			Name     string `json:"name"`
 			Optional *bool  `json:"optional,omitempty"`
+
+			// Position of the incident role
+			Position *int `json:"position"`
 
 			// The slug of the incident role
 			Slug *string `json:"slug,omitempty"`
@@ -8331,6 +8385,9 @@ type IncidentType struct {
 	// Emails to attach to the incident type
 	NotifyEmails *[]string `json:"notify_emails"`
 
+	// Position of the incident type
+	Position *int `json:"position"`
+
 	// Slack Aliases associated with this incident type
 	SlackAliases *[]struct {
 		// Slack alias ID
@@ -8373,6 +8430,9 @@ type IncidentTypeList struct {
 
 			// Emails to attach to the incident type
 			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Position of the incident type
+			Position *int `json:"position"`
 
 			// Slack Aliases associated with this incident type
 			SlackAliases *[]struct {
@@ -8432,6 +8492,9 @@ type IncidentTypeResponse struct {
 
 			// Emails to attach to the incident type
 			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Position of the incident type
+			Position *int `json:"position"`
 
 			// Slack Aliases associated with this incident type
 			SlackAliases *[]struct {
@@ -8613,6 +8676,9 @@ type NewCause struct {
 
 			// The name of the cause
 			Name string `json:"name"`
+
+			// Position of the cause
+			Position *int `json:"position"`
 		} `json:"attributes"`
 		Type NewCauseDataType `json:"type"`
 	} `json:"data"`
@@ -8722,6 +8788,9 @@ type NewEnvironment struct {
 
 			// Emails to attach to the environment
 			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Position of the environment
+			Position *int `json:"position"`
 
 			// Slack Aliases associated with this environment
 			SlackAliases *[]struct {
@@ -8860,6 +8929,9 @@ type NewFunctionality struct {
 
 			// Owner Users associated with this service
 			OwnersUserIds *[]int `json:"owners_user_ids"`
+
+			// Position of the functionality
+			Position *int `json:"position"`
 
 			// The public description of the functionality
 			PublicDescription *string `json:"public_description"`
@@ -9155,6 +9227,9 @@ type NewIncidentRole struct {
 			Name     string `json:"name"`
 			Optional *bool  `json:"optional,omitempty"`
 
+			// Position of the incident role
+			Position *int `json:"position"`
+
 			// The summary of the incident role
 			Summary *string `json:"summary"`
 		} `json:"attributes"`
@@ -9229,6 +9304,9 @@ type NewIncidentType struct {
 
 			// Emails to attach to the incident type
 			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Position of the incident type
+			Position *int `json:"position"`
 
 			// Slack Aliases associated with this incident type
 			SlackAliases *[]struct {
@@ -9440,6 +9518,9 @@ type NewService struct {
 			// The PagerDuty service id associated to this service
 			PagerdutyId *string `json:"pagerduty_id"`
 
+			// Position of the service
+			Position *int `json:"position"`
+
 			// The public description of the service
 			PublicDescription *string `json:"public_description"`
 
@@ -9494,6 +9575,9 @@ type NewSeverity struct {
 
 			// Emails to attach to the severity
 			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Position of the severity
+			Position *int `json:"position"`
 
 			// The severity of the severity
 			Severity *NewSeverityDataAttributesSeverity `json:"severity,omitempty"`
@@ -9587,6 +9671,9 @@ type NewTeam struct {
 
 			// Emails to attach to the team
 			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Position of the team
+			Position *int `json:"position"`
 
 			// Slack Aliases associated with this service
 			SlackAliases *[]struct {
@@ -10226,6 +10313,9 @@ type Pulse struct {
 		// Emails attached to the environment
 		NotifyEmails *[]string `json:"notify_emails"`
 
+		// Position of the environment
+		Position *int `json:"position"`
+
 		// Slack Aliases associated with this environment
 		SlackAliases *[]struct {
 			// Slack alias ID
@@ -10310,6 +10400,9 @@ type Pulse struct {
 		// The PagerDuty service id associated to this service
 		PagerdutyId *string `json:"pagerduty_id"`
 
+		// Position of the service
+		Position *int `json:"position"`
+
 		// The public description of the service
 		PublicDescription *string `json:"public_description"`
 
@@ -10376,6 +10469,9 @@ type PulseList struct {
 
 				// Emails attached to the environment
 				NotifyEmails *[]string `json:"notify_emails"`
+
+				// Position of the environment
+				Position *int `json:"position"`
 
 				// Slack Aliases associated with this environment
 				SlackAliases *[]struct {
@@ -10460,6 +10556,9 @@ type PulseList struct {
 
 				// The PagerDuty service id associated to this service
 				PagerdutyId *string `json:"pagerduty_id"`
+
+				// Position of the service
+				Position *int `json:"position"`
 
 				// The public description of the service
 				PublicDescription *string `json:"public_description"`
@@ -10544,6 +10643,9 @@ type PulseResponse struct {
 				// Emails attached to the environment
 				NotifyEmails *[]string `json:"notify_emails"`
 
+				// Position of the environment
+				Position *int `json:"position"`
+
 				// Slack Aliases associated with this environment
 				SlackAliases *[]struct {
 					// Slack alias ID
@@ -10627,6 +10729,9 @@ type PulseResponse struct {
 
 				// The PagerDuty service id associated to this service
 				PagerdutyId *string `json:"pagerduty_id"`
+
+				// Position of the service
+				Position *int `json:"position"`
 
 				// The public description of the service
 				PublicDescription *string `json:"public_description"`
@@ -11039,6 +11144,9 @@ type Service struct {
 	// The PagerDuty service id associated to this service
 	PagerdutyId *string `json:"pagerduty_id"`
 
+	// Position of the service
+	Position *int `json:"position"`
+
 	// The public description of the service
 	PublicDescription *string `json:"public_description"`
 
@@ -11116,6 +11224,9 @@ type ServiceList struct {
 
 			// The PagerDuty service id associated to this service
 			PagerdutyId *string `json:"pagerduty_id"`
+
+			// Position of the service
+			Position *int `json:"position"`
 
 			// The public description of the service
 			PublicDescription *string `json:"public_description"`
@@ -11211,6 +11322,9 @@ type ServiceResponse struct {
 			// The PagerDuty service id associated to this service
 			PagerdutyId *string `json:"pagerduty_id"`
 
+			// Position of the service
+			Position *int `json:"position"`
+
 			// The public description of the service
 			PublicDescription *string `json:"public_description"`
 
@@ -11267,6 +11381,9 @@ type Severity struct {
 	// Emails to attach to the severity
 	NotifyEmails *[]string `json:"notify_emails"`
 
+	// Position of the severity
+	Position *int `json:"position"`
+
 	// The severity of the severity
 	Severity *SeveritySeverity `json:"severity,omitempty"`
 
@@ -11315,6 +11432,9 @@ type SeverityList struct {
 
 			// Emails to attach to the severity
 			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Position of the severity
+			Position *int `json:"position"`
 
 			// The severity of the severity
 			Severity *SeverityListDataAttributesSeverity `json:"severity,omitempty"`
@@ -11380,6 +11500,9 @@ type SeverityResponse struct {
 
 			// Emails to attach to the severity
 			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Position of the severity
+			Position *int `json:"position"`
 
 			// The severity of the severity
 			Severity *SeverityResponseDataAttributesSeverity `json:"severity,omitempty"`
@@ -11799,6 +11922,9 @@ type Team struct {
 	// Emails to attach to the team
 	NotifyEmails *[]string `json:"notify_emails"`
 
+	// Position of the team
+	Position *int `json:"position"`
+
 	// Slack Aliases associated with this service
 	SlackAliases *[]struct {
 		// Slack alias ID
@@ -11839,6 +11965,9 @@ type TeamList struct {
 
 			// Emails to attach to the team
 			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Position of the team
+			Position *int `json:"position"`
 
 			// Slack Aliases associated with this service
 			SlackAliases *[]struct {
@@ -11896,6 +12025,9 @@ type TeamResponse struct {
 
 			// Emails to attach to the team
 			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Position of the team
+			Position *int `json:"position"`
 
 			// Slack Aliases associated with this service
 			SlackAliases *[]struct {
@@ -12010,6 +12142,9 @@ type UpdateCause struct {
 
 			// The name of the cause
 			Name *string `json:"name,omitempty"`
+
+			// Position of the cause
+			Position *int `json:"position"`
 		} `json:"attributes"`
 		Type UpdateCauseDataType `json:"type"`
 	} `json:"data"`
@@ -12122,6 +12257,9 @@ type UpdateEnvironment struct {
 
 			// Emails to attach to the environment
 			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Position of the environment
+			Position *int `json:"position"`
 
 			// Slack Aliases associated with this environment
 			SlackAliases *[]struct {
@@ -12257,6 +12395,9 @@ type UpdateFunctionality struct {
 
 			// Owner Users associated with this service
 			OwnersUserIds *[]int `json:"owners_user_ids"`
+
+			// Position of the functionality
+			Position *int `json:"position"`
 
 			// The public description of the functionality
 			PublicDescription *string `json:"public_description"`
@@ -12665,6 +12806,9 @@ type UpdateIncidentRole struct {
 			Name     *string `json:"name,omitempty"`
 			Optional *bool   `json:"optional,omitempty"`
 
+			// Position of the incident role
+			Position *int `json:"position"`
+
 			// The summary of the incident role
 			Summary *string `json:"summary"`
 		} `json:"attributes"`
@@ -12775,6 +12919,9 @@ type UpdateIncidentType struct {
 
 			// Emails to attach to the incident type
 			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Position of the incident type
+			Position *int `json:"position"`
 
 			// Slack Aliases associated with this incident type
 			SlackAliases *[]struct {
@@ -13183,6 +13330,9 @@ type UpdateService struct {
 			// The PagerDuty service id associated to this service
 			PagerdutyId *string `json:"pagerduty_id"`
 
+			// Position of the service
+			Position *int `json:"position"`
+
 			// The public description of the service
 			PublicDescription *string `json:"public_description"`
 
@@ -13259,6 +13409,9 @@ type UpdateSeverity struct {
 
 			// Emails to attach to the severity
 			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Position of the severity
+			Position *int `json:"position"`
 
 			// The severity of the severity
 			Severity *UpdateSeverityDataAttributesSeverity `json:"severity,omitempty"`
@@ -13429,6 +13582,9 @@ type UpdateTeam struct {
 
 			// Emails to attach to the team
 			NotifyEmails *[]string `json:"notify_emails"`
+
+			// Position of the team
+			Position *int `json:"position"`
 
 			// Slack Aliases associated with this service
 			SlackAliases *[]struct {
