@@ -105,6 +105,24 @@ func resourceWorkflowTaskCreateAsanaTask() *schema.Resource {
 							},
 							Default: "{}",
 						},
+						"dependency_direction": &schema.Schema{
+							Description: "Value must be one of `blocking`, `blocked_by`.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "blocking",
+							ValidateFunc: validation.StringInSlice([]string{
+								"blocking",
+								"blocked_by",
+							}, false),
+						},
+						"dependent_task_ids": &schema.Schema{
+							Description: "Dependent task ids. Supports liquid syntax.",
+							Type:        schema.TypeList,
+							Optional:    true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+						},
 					},
 				},
 			},

@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.80] -- 2024-03-03
+
+- Add `dependency_direction` & `dependent_task_ids` attributes to asana tasks resources.
+
 ## [0.1.79] -- 2024-03-01
 
 - Add `position` attributes to multiple resources.

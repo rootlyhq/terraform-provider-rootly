@@ -465,9 +465,21 @@ const (
 	CreateAirtableTableRecord CreateAirtableTableRecordTaskParamsTaskType = "create_airtable_table_record"
 )
 
+// Defines values for CreateAsanaSubtaskTaskParamsDependencyDirection.
+const (
+	CreateAsanaSubtaskTaskParamsDependencyDirectionBlockedBy CreateAsanaSubtaskTaskParamsDependencyDirection = "blocked_by"
+	CreateAsanaSubtaskTaskParamsDependencyDirectionBlocking  CreateAsanaSubtaskTaskParamsDependencyDirection = "blocking"
+)
+
 // Defines values for CreateAsanaSubtaskTaskParamsTaskType.
 const (
 	CreateAsanaSubtask CreateAsanaSubtaskTaskParamsTaskType = "create_asana_subtask"
+)
+
+// Defines values for CreateAsanaTaskTaskParamsDependencyDirection.
+const (
+	CreateAsanaTaskTaskParamsDependencyDirectionBlockedBy CreateAsanaTaskTaskParamsDependencyDirection = "blocked_by"
+	CreateAsanaTaskTaskParamsDependencyDirectionBlocking  CreateAsanaTaskTaskParamsDependencyDirection = "blocking"
 )
 
 // Defines values for CreateAsanaTaskTaskParamsTaskType.
@@ -2841,6 +2853,12 @@ const (
 	UpdateAirtableTableRecord UpdateAirtableTableRecordTaskParamsTaskType = "update_airtable_table_record"
 )
 
+// Defines values for UpdateAsanaTaskTaskParamsDependencyDirection.
+const (
+	BlockedBy UpdateAsanaTaskTaskParamsDependencyDirection = "blocked_by"
+	Blocking  UpdateAsanaTaskTaskParamsDependencyDirection = "blocking"
+)
+
 // Defines values for UpdateAsanaTaskTaskParamsTaskType.
 const (
 	UpdateAsanaTask UpdateAsanaTaskTaskParamsTaskType = "update_asana_task"
@@ -4870,8 +4888,12 @@ type CreateAsanaSubtaskTaskParams struct {
 	} `json:"completion"`
 
 	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
-	CustomFieldsMapping *string `json:"custom_fields_mapping"`
-	Notes               *string `json:"notes,omitempty"`
+	CustomFieldsMapping *string                                          `json:"custom_fields_mapping"`
+	DependencyDirection *CreateAsanaSubtaskTaskParamsDependencyDirection `json:"dependency_direction,omitempty"`
+
+	// Dependent task ids. Supports liquid syntax.
+	DependentTaskIds *[]string `json:"dependent_task_ids"`
+	Notes            *string   `json:"notes,omitempty"`
 
 	// The parent task id
 	ParentTaskId string                                `json:"parent_task_id"`
@@ -4880,6 +4902,9 @@ type CreateAsanaSubtaskTaskParams struct {
 	// The subtask title
 	Title string `json:"title"`
 }
+
+// CreateAsanaSubtaskTaskParamsDependencyDirection defines model for CreateAsanaSubtaskTaskParams.DependencyDirection.
+type CreateAsanaSubtaskTaskParamsDependencyDirection string
 
 // CreateAsanaSubtaskTaskParamsTaskType defines model for CreateAsanaSubtaskTaskParams.TaskType.
 type CreateAsanaSubtaskTaskParamsTaskType string
@@ -4894,8 +4919,12 @@ type CreateAsanaTaskTaskParams struct {
 	} `json:"completion"`
 
 	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
-	CustomFieldsMapping *string `json:"custom_fields_mapping"`
-	Projects            []struct {
+	CustomFieldsMapping *string                                       `json:"custom_fields_mapping"`
+	DependencyDirection *CreateAsanaTaskTaskParamsDependencyDirection `json:"dependency_direction,omitempty"`
+
+	// Dependent task ids. Supports liquid syntax.
+	DependentTaskIds *[]string `json:"dependent_task_ids"`
+	Projects         []struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"projects"`
@@ -4908,6 +4937,9 @@ type CreateAsanaTaskTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"workspace"`
 }
+
+// CreateAsanaTaskTaskParamsDependencyDirection defines model for CreateAsanaTaskTaskParams.DependencyDirection.
+type CreateAsanaTaskTaskParamsDependencyDirection string
 
 // CreateAsanaTaskTaskParamsTaskType defines model for CreateAsanaTaskTaskParams.TaskType.
 type CreateAsanaTaskTaskParamsTaskType string
@@ -12120,7 +12152,11 @@ type UpdateAsanaTaskTaskParams struct {
 	} `json:"completion"`
 
 	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
-	CustomFieldsMapping *string `json:"custom_fields_mapping"`
+	CustomFieldsMapping *string                                       `json:"custom_fields_mapping"`
+	DependencyDirection *UpdateAsanaTaskTaskParamsDependencyDirection `json:"dependency_direction,omitempty"`
+
+	// Dependent task ids. Supports liquid syntax.
+	DependentTaskIds *[]string `json:"dependent_task_ids"`
 
 	// The task id
 	TaskId   string                             `json:"task_id"`
@@ -12129,6 +12165,9 @@ type UpdateAsanaTaskTaskParams struct {
 	// The task title
 	Title *string `json:"title,omitempty"`
 }
+
+// UpdateAsanaTaskTaskParamsDependencyDirection defines model for UpdateAsanaTaskTaskParams.DependencyDirection.
+type UpdateAsanaTaskTaskParamsDependencyDirection string
 
 // UpdateAsanaTaskTaskParamsTaskType defines model for UpdateAsanaTaskTaskParams.TaskType.
 type UpdateAsanaTaskTaskParamsTaskType string
