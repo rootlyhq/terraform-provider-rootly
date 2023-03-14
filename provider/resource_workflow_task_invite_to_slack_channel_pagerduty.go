@@ -81,6 +81,11 @@ func resourceWorkflowTaskInviteToSlackChannelPagerduty() *schema.Resource {
 							Type:        schema.TypeMap,
 							Optional:    true,
 						},
+						"service": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. ",
+							Type:        schema.TypeMap,
+							Optional:    true,
+						},
 					},
 				},
 			},

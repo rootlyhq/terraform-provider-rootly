@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.81] -- 2024-03-13
+
+- Add `service` to `workflow_task_invite_to_slack_channel` task.
+
 ## [0.1.80] -- 2024-03-03
 
 - Add `dependency_direction` & `dependent_task_ids` attributes to asana tasks resources.

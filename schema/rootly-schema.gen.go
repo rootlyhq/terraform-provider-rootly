@@ -367,6 +367,7 @@ const (
 	AuditItemTypeCustomFieldOption              AuditItemType = "CustomFieldOption"
 	AuditItemTypeDashboard                      AuditItemType = "Dashboard"
 	AuditItemTypeEnvironment                    AuditItemType = "Environment"
+	AuditItemTypeExportJob                      AuditItemType = "ExportJob"
 	AuditItemTypeFunctionality                  AuditItemType = "Functionality"
 	AuditItemTypeGeniusWorkflow                 AuditItemType = "GeniusWorkflow"
 	AuditItemTypeGeniusWorkflowGroup            AuditItemType = "GeniusWorkflowGroup"
@@ -397,6 +398,7 @@ const (
 	AuditsListDataAttributesItemTypeCustomFieldOption              AuditsListDataAttributesItemType = "CustomFieldOption"
 	AuditsListDataAttributesItemTypeDashboard                      AuditsListDataAttributesItemType = "Dashboard"
 	AuditsListDataAttributesItemTypeEnvironment                    AuditsListDataAttributesItemType = "Environment"
+	AuditsListDataAttributesItemTypeExportJob                      AuditsListDataAttributesItemType = "ExportJob"
 	AuditsListDataAttributesItemTypeFunctionality                  AuditsListDataAttributesItemType = "Functionality"
 	AuditsListDataAttributesItemTypeGeniusWorkflow                 AuditsListDataAttributesItemType = "GeniusWorkflow"
 	AuditsListDataAttributesItemTypeGeniusWorkflowGroup            AuditsListDataAttributesItemType = "GeniusWorkflowGroup"
@@ -1348,6 +1350,44 @@ const (
 	HttpClient HttpClientTaskParamsTaskType = "http_client"
 )
 
+// Defines values for IncidentEnvironmentsDataType.
+const (
+	IncidentEnvironmentsDataTypeEnvironments IncidentEnvironmentsDataType = "environments"
+)
+
+// Defines values for IncidentFunctionalitiesDataType.
+const (
+	IncidentFunctionalitiesDataTypeFunctionalities IncidentFunctionalitiesDataType = "functionalities"
+)
+
+// Defines values for IncidentGroupsDataType.
+const (
+	IncidentGroupsDataTypeGroups IncidentGroupsDataType = "groups"
+)
+
+// Defines values for IncidentIncidentTypesDataType.
+const (
+	IncidentIncidentTypesDataTypeIncidentTypes IncidentIncidentTypesDataType = "incident_types"
+)
+
+// Defines values for IncidentServicesDataType.
+const (
+	IncidentServicesDataTypeServices IncidentServicesDataType = "services"
+)
+
+// Defines values for IncidentSeverityDataAttributesSeverity.
+const (
+	IncidentSeverityDataAttributesSeverityCritical IncidentSeverityDataAttributesSeverity = "critical"
+	IncidentSeverityDataAttributesSeverityHigh     IncidentSeverityDataAttributesSeverity = "high"
+	IncidentSeverityDataAttributesSeverityLow      IncidentSeverityDataAttributesSeverity = "low"
+	IncidentSeverityDataAttributesSeverityMedium   IncidentSeverityDataAttributesSeverity = "medium"
+)
+
+// Defines values for IncidentSeverityDataType.
+const (
+	IncidentSeverityDataTypeSeverities IncidentSeverityDataType = "severities"
+)
+
 // Defines values for IncidentActionItemKind.
 const (
 	IncidentActionItemKindFollowUp IncidentActionItemKind = "follow_up"
@@ -1562,6 +1602,44 @@ const (
 	IncidentFormFieldSelectionResponseDataTypeIncidentFormFieldSelections IncidentFormFieldSelectionResponseDataType = "incident_form_field_selections"
 )
 
+// Defines values for IncidentListDataAttributesEnvironmentsDataType.
+const (
+	IncidentListDataAttributesEnvironmentsDataTypeEnvironments IncidentListDataAttributesEnvironmentsDataType = "environments"
+)
+
+// Defines values for IncidentListDataAttributesFunctionalitiesDataType.
+const (
+	IncidentListDataAttributesFunctionalitiesDataTypeFunctionalities IncidentListDataAttributesFunctionalitiesDataType = "functionalities"
+)
+
+// Defines values for IncidentListDataAttributesGroupsDataType.
+const (
+	IncidentListDataAttributesGroupsDataTypeGroups IncidentListDataAttributesGroupsDataType = "groups"
+)
+
+// Defines values for IncidentListDataAttributesIncidentTypesDataType.
+const (
+	IncidentListDataAttributesIncidentTypesDataTypeIncidentTypes IncidentListDataAttributesIncidentTypesDataType = "incident_types"
+)
+
+// Defines values for IncidentListDataAttributesServicesDataType.
+const (
+	IncidentListDataAttributesServicesDataTypeServices IncidentListDataAttributesServicesDataType = "services"
+)
+
+// Defines values for IncidentListDataAttributesSeverityDataAttributesSeverity.
+const (
+	IncidentListDataAttributesSeverityDataAttributesSeverityCritical IncidentListDataAttributesSeverityDataAttributesSeverity = "critical"
+	IncidentListDataAttributesSeverityDataAttributesSeverityHigh     IncidentListDataAttributesSeverityDataAttributesSeverity = "high"
+	IncidentListDataAttributesSeverityDataAttributesSeverityLow      IncidentListDataAttributesSeverityDataAttributesSeverity = "low"
+	IncidentListDataAttributesSeverityDataAttributesSeverityMedium   IncidentListDataAttributesSeverityDataAttributesSeverity = "medium"
+)
+
+// Defines values for IncidentListDataAttributesSeverityDataType.
+const (
+	IncidentListDataAttributesSeverityDataTypeSeverities IncidentListDataAttributesSeverityDataType = "severities"
+)
+
 // Defines values for IncidentListDataType.
 const (
 	IncidentListDataTypeIncidents IncidentListDataType = "incidents"
@@ -1611,6 +1689,44 @@ const (
 // Defines values for IncidentPostMortemResponseDataType.
 const (
 	IncidentPostMortemResponseDataTypeIncidentPostMortems IncidentPostMortemResponseDataType = "incident_post_mortems"
+)
+
+// Defines values for IncidentResponseDataAttributesEnvironmentsDataType.
+const (
+	IncidentResponseDataAttributesEnvironmentsDataTypeEnvironments IncidentResponseDataAttributesEnvironmentsDataType = "environments"
+)
+
+// Defines values for IncidentResponseDataAttributesFunctionalitiesDataType.
+const (
+	IncidentResponseDataAttributesFunctionalitiesDataTypeFunctionalities IncidentResponseDataAttributesFunctionalitiesDataType = "functionalities"
+)
+
+// Defines values for IncidentResponseDataAttributesGroupsDataType.
+const (
+	IncidentResponseDataAttributesGroupsDataTypeGroups IncidentResponseDataAttributesGroupsDataType = "groups"
+)
+
+// Defines values for IncidentResponseDataAttributesIncidentTypesDataType.
+const (
+	IncidentResponseDataAttributesIncidentTypesDataTypeIncidentTypes IncidentResponseDataAttributesIncidentTypesDataType = "incident_types"
+)
+
+// Defines values for IncidentResponseDataAttributesServicesDataType.
+const (
+	IncidentResponseDataAttributesServicesDataTypeServices IncidentResponseDataAttributesServicesDataType = "services"
+)
+
+// Defines values for IncidentResponseDataAttributesSeverityDataAttributesSeverity.
+const (
+	IncidentResponseDataAttributesSeverityDataAttributesSeverityCritical IncidentResponseDataAttributesSeverityDataAttributesSeverity = "critical"
+	IncidentResponseDataAttributesSeverityDataAttributesSeverityHigh     IncidentResponseDataAttributesSeverityDataAttributesSeverity = "high"
+	IncidentResponseDataAttributesSeverityDataAttributesSeverityLow      IncidentResponseDataAttributesSeverityDataAttributesSeverity = "low"
+	IncidentResponseDataAttributesSeverityDataAttributesSeverityMedium   IncidentResponseDataAttributesSeverityDataAttributesSeverity = "medium"
+)
+
+// Defines values for IncidentResponseDataAttributesSeverityDataType.
+const (
+	IncidentResponseDataAttributesSeverityDataTypeSeverities IncidentResponseDataAttributesSeverityDataType = "severities"
 )
 
 // Defines values for IncidentResponseDataType.
@@ -2922,7 +3038,7 @@ const (
 
 // Defines values for UpdateEnvironmentDataType.
 const (
-	UpdateEnvironmentDataTypeEnvironments UpdateEnvironmentDataType = "environments"
+	Environments UpdateEnvironmentDataType = "environments"
 )
 
 // Defines values for UpdateFormFieldDataAttributesInputKind.
@@ -3219,7 +3335,7 @@ const (
 
 // Defines values for UpdateIncidentTypeDataType.
 const (
-	UpdateIncidentTypeDataTypeIncidentTypes UpdateIncidentTypeDataType = "incident_types"
+	IncidentTypes UpdateIncidentTypeDataType = "incident_types"
 )
 
 // Defines values for UpdateJiraIssueTaskParamsTaskType.
@@ -3352,15 +3468,15 @@ const (
 
 // Defines values for UpdateSeverityDataAttributesSeverity.
 const (
-	Critical UpdateSeverityDataAttributesSeverity = "critical"
-	High     UpdateSeverityDataAttributesSeverity = "high"
-	Low      UpdateSeverityDataAttributesSeverity = "low"
-	Medium   UpdateSeverityDataAttributesSeverity = "medium"
+	UpdateSeverityDataAttributesSeverityCritical UpdateSeverityDataAttributesSeverity = "critical"
+	UpdateSeverityDataAttributesSeverityHigh     UpdateSeverityDataAttributesSeverity = "high"
+	UpdateSeverityDataAttributesSeverityLow      UpdateSeverityDataAttributesSeverity = "low"
+	UpdateSeverityDataAttributesSeverityMedium   UpdateSeverityDataAttributesSeverity = "medium"
 )
 
 // Defines values for UpdateSeverityDataType.
 const (
-	UpdateSeverityDataTypeSeverities UpdateSeverityDataType = "severities"
+	Severities UpdateSeverityDataType = "severities"
 )
 
 // Defines values for UpdateShortcutStoryTaskParamsTaskType.
@@ -3405,7 +3521,7 @@ const (
 
 // Defines values for UpdateTeamDataType.
 const (
-	UpdateTeamDataTypeGroups UpdateTeamDataType = "groups"
+	Groups UpdateTeamDataType = "groups"
 )
 
 // Defines values for UpdateTrelloCardTaskParamsTaskType.
@@ -6933,17 +7049,229 @@ type Incident struct {
 	// Date of detection
 	DetectedAt *string `json:"detected_at"`
 
-	// The Environment ID's to attach to the incident
-	EnvironmentIds *[]string `json:"environment_ids"`
+	// The Environments of the incident
+	Environments *[]struct {
+		Data struct {
+			Attributes struct {
+				Color *string `json:"color"`
 
-	// The Functionality ID's to attach to the incident
-	FunctionalityIds *[]string `json:"functionality_ids"`
+				// Date of creation
+				CreatedAt string `json:"created_at"`
 
-	// The Team ID's to attach to the incident
-	GroupIds *[]string `json:"group_ids"`
+				// The description of the environment
+				Description *string `json:"description"`
 
-	// The Environment ID's to attach to the incident
-	IncidentTypesIds *[]string `json:"incident_types_ids"`
+				// The name of the environment
+				Name string `json:"name"`
+
+				// Emails attached to the environment
+				NotifyEmails *[]string `json:"notify_emails"`
+
+				// Position of the environment
+				Position *int `json:"position"`
+
+				// Slack Aliases associated with this environment
+				SlackAliases *[]struct {
+					// Slack alias ID
+					Id string `json:"id"`
+
+					// Slack alias name
+					Name string `json:"name"`
+				} `json:"slack_aliases"`
+
+				// Slack Channels associated with this environment
+				SlackChannels *[]struct {
+					// Slack channel ID
+					Id string `json:"id"`
+
+					// Slack channel name
+					Name string `json:"name"`
+				} `json:"slack_channels"`
+
+				// The slug of the environment
+				Slug *string `json:"slug,omitempty"`
+
+				// Date of last update
+				UpdatedAt string `json:"updated_at"`
+			} `json:"attributes"`
+
+			// Unique ID of the environment
+			Id   string                       `json:"id"`
+			Type IncidentEnvironmentsDataType `json:"type"`
+		} `json:"data"`
+	} `json:"environments"`
+
+	// The Functionalities of the incident
+	Functionalities *[]struct {
+		Data struct {
+			Attributes struct {
+				Color *string `json:"color"`
+
+				// Date of creation
+				CreatedAt string `json:"created_at"`
+
+				// The description of the functionality
+				Description *string `json:"description"`
+
+				// Environments associated with this functionality
+				EnvironmentIds *[]string `json:"environment_ids"`
+
+				// The name of the functionality
+				Name string `json:"name"`
+
+				// Emails attached to the functionality
+				NotifyEmails *[]string `json:"notify_emails"`
+
+				// Owner Teams associated with this functionality
+				OwnersGroupIds *[]string `json:"owners_group_ids"`
+
+				// Owner Users associated with this service
+				OwnersUserIds *[]int `json:"owners_user_ids"`
+
+				// Position of the functionality
+				Position *int `json:"position"`
+
+				// The public description of the functionality
+				PublicDescription *string `json:"public_description"`
+
+				// Services associated with this functionality
+				ServiceIds *[]string `json:"service_ids"`
+
+				// Slack Aliases associated with this service
+				SlackAliases *[]struct {
+					// Slack alias ID
+					Id string `json:"id"`
+
+					// Slack alias name
+					Name string `json:"name"`
+				} `json:"slack_aliases"`
+
+				// Slack Channels associated with this service
+				SlackChannels *[]struct {
+					// Slack channel ID
+					Id string `json:"id"`
+
+					// Slack channel name
+					Name string `json:"name"`
+				} `json:"slack_channels"`
+
+				// The slug of the functionality
+				Slug *string `json:"slug,omitempty"`
+
+				// Date of last update
+				UpdatedAt string `json:"updated_at"`
+			} `json:"attributes"`
+
+			// Unique ID of the functionality
+			Id   string                          `json:"id"`
+			Type IncidentFunctionalitiesDataType `json:"type"`
+		} `json:"data"`
+	} `json:"functionalities"`
+
+	// The Teams of to the incident
+	Groups *[]struct {
+		Data struct {
+			Attributes struct {
+				Color *string `json:"color"`
+
+				// Date of creation
+				CreatedAt string `json:"created_at"`
+
+				// The description of the team
+				Description *string `json:"description"`
+
+				// The name of the team
+				Name string `json:"name"`
+
+				// Emails to attach to the team
+				NotifyEmails *[]string `json:"notify_emails"`
+
+				// Position of the team
+				Position *int `json:"position"`
+
+				// Slack Aliases associated with this service
+				SlackAliases *[]struct {
+					// Slack alias ID
+					Id string `json:"id"`
+
+					// Slack alias name
+					Name string `json:"name"`
+				} `json:"slack_aliases"`
+
+				// Slack Channels associated with this service
+				SlackChannels *[]struct {
+					// Slack channel ID
+					Id string `json:"id"`
+
+					// Slack channel name
+					Name string `json:"name"`
+				} `json:"slack_channels"`
+				Slug *string `json:"slug,omitempty"`
+
+				// Date of last update
+				UpdatedAt string `json:"updated_at"`
+			} `json:"attributes"`
+
+			// Unique ID of the team
+			Id   string                 `json:"id"`
+			Type IncidentGroupsDataType `json:"type"`
+		} `json:"data"`
+	} `json:"groups"`
+
+	// The Incident Types of the incident
+	IncidentTypes *[]struct {
+		Data struct {
+			Attributes struct {
+				Color *string `json:"color"`
+
+				// Date of creation
+				CreatedAt string `json:"created_at"`
+
+				// The description of the incident type
+				Description *string `json:"description"`
+
+				// The name of the incident type
+				Name string `json:"name"`
+
+				// Emails to attach to the incident type
+				NotifyEmails *[]string `json:"notify_emails"`
+
+				// Position of the incident type
+				Position *int `json:"position"`
+
+				// Slack Aliases associated with this incident type
+				SlackAliases *[]struct {
+					// Slack alias ID
+					Id string `json:"id"`
+
+					// Slack alias name
+					Name string `json:"name"`
+				} `json:"slack_aliases"`
+
+				// Slack Channels associated with this incident type
+				SlackChannels *[]struct {
+					// Slack channel ID
+					Id string `json:"id"`
+
+					// Slack channel name
+					Name string `json:"name"`
+				} `json:"slack_channels"`
+
+				// The slug of the incident type
+				Slug *string `json:"slug,omitempty"`
+
+				// Date of last update
+				UpdatedAt string `json:"updated_at"`
+			} `json:"attributes"`
+
+			// Unique ID of the incident type
+			Id   string                        `json:"id"`
+			Type IncidentIncidentTypesDataType `json:"type"`
+		} `json:"data"`
+	} `json:"incident_types"`
+
+	// The kind of the incident
+	Kind *string `json:"kind,omitempty"`
 
 	// Labels to attach to the incidents. eg: {"platform":"osx", "version": "1.29"}
 	Labels *map[string]interface{} `json:"labels"`
@@ -6969,11 +7297,147 @@ type Incident struct {
 	// Scheduled until
 	ScheduledUntil *string `json:"scheduled_until"`
 
-	// The Service ID's to attach to the incident
-	ServiceIds *[]string `json:"service_ids"`
+	// The Services of the incident
+	Services *[]struct {
+		Data struct {
+			Attributes struct {
+				// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
+				BackstageId *string `json:"backstage_id"`
+				Color       *string `json:"color"`
 
-	// The Severity ID to attach to the incident
-	SeverityId *string `json:"severity_id"`
+				// Date of creation
+				CreatedAt string `json:"created_at"`
+
+				// The description of the service
+				Description *string `json:"description"`
+
+				// Environments associated with this service
+				EnvironmentIds *[]string `json:"environment_ids"`
+
+				// The GitHub repository branch associated to this service. eg: main
+				GithubRepositoryBranch *string `json:"github_repository_branch"`
+
+				// The GitHub repository name associated to this service. eg: rootlyhq/my-service
+				GithubRepositoryName *string `json:"github_repository_name"`
+
+				// The Gitlab repository branch associated to this service. eg: main
+				GitlabRepositoryBranch *string `json:"gitlab_repository_branch"`
+
+				// The Gitlab repository name associated to this service. eg: rootlyhq/my-service
+				GitlabRepositoryName *string `json:"gitlab_repository_name"`
+
+				// The name of the service
+				Name string `json:"name"`
+
+				// Emails attached to the service
+				NotifyEmails *[]string `json:"notify_emails"`
+
+				// The Opsgenie service id associated to this service
+				OpsgenieId *string `json:"opsgenie_id"`
+
+				// Owner Teams associated with this service
+				OwnersGroupIds *[]string `json:"owners_group_ids"`
+
+				// Owner Users associated with this service
+				OwnersUserIds *[]int `json:"owners_user_ids"`
+
+				// The PagerDuty service id associated to this service
+				PagerdutyId *string `json:"pagerduty_id"`
+
+				// Position of the service
+				Position *int `json:"position"`
+
+				// The public description of the service
+				PublicDescription *string `json:"public_description"`
+
+				// Services dependent on this service
+				ServiceIds *[]string `json:"service_ids"`
+
+				// Slack Aliases associated with this service
+				SlackAliases *[]struct {
+					// Slack alias ID
+					Id string `json:"id"`
+
+					// Slack alias name
+					Name string `json:"name"`
+				} `json:"slack_aliases"`
+
+				// Slack Channels associated with this service
+				SlackChannels *[]struct {
+					// Slack channel ID
+					Id string `json:"id"`
+
+					// Slack channel name
+					Name string `json:"name"`
+				} `json:"slack_channels"`
+
+				// The slug of the service
+				Slug *string `json:"slug,omitempty"`
+
+				// Date of last update
+				UpdatedAt string `json:"updated_at"`
+			} `json:"attributes"`
+
+			// Unique ID of the service
+			Id   string                   `json:"id"`
+			Type IncidentServicesDataType `json:"type"`
+		} `json:"data"`
+	} `json:"services"`
+
+	// The Severity of the incident
+	Severity *struct {
+		Data struct {
+			Attributes struct {
+				Color *string `json:"color"`
+
+				// Date of creation
+				CreatedAt string `json:"created_at"`
+
+				// The description of the severity
+				Description *string `json:"description"`
+
+				// The name of the severity
+				Name string `json:"name"`
+
+				// Emails to attach to the severity
+				NotifyEmails *[]string `json:"notify_emails"`
+
+				// Position of the severity
+				Position *int `json:"position"`
+
+				// The severity of the severity
+				Severity *IncidentSeverityDataAttributesSeverity `json:"severity,omitempty"`
+
+				// Slack Aliases associated with this severity
+				SlackAliases *[]struct {
+					// Slack alias ID
+					Id string `json:"id"`
+
+					// Slack alias name
+					Name string `json:"name"`
+				} `json:"slack_aliases"`
+
+				// Slack Channels associated with this severity
+				SlackChannels *[]struct {
+					// Slack channel ID
+					Id string `json:"id"`
+
+					// Slack channel name
+					Name string `json:"name"`
+				} `json:"slack_channels"`
+
+				// The slug of the severity
+				Slug *string `json:"slug,omitempty"`
+
+				// Date of last update
+				UpdatedAt string `json:"updated_at"`
+			} `json:"attributes"`
+
+			// Unique ID of the severity
+			Id   string                   `json:"id"`
+			Type IncidentSeverityDataType `json:"type"`
+		} `json:"data"`
+	} `json:"severity"`
 
 	// Slack channel id
 	SlackChannelId *string `json:"slack_channel_id"`
@@ -6999,6 +7463,27 @@ type Incident struct {
 	// Date of last update
 	UpdatedAt string `json:"updated_at"`
 }
+
+// IncidentEnvironmentsDataType defines model for Incident.Environments.Data.Type.
+type IncidentEnvironmentsDataType string
+
+// IncidentFunctionalitiesDataType defines model for Incident.Functionalities.Data.Type.
+type IncidentFunctionalitiesDataType string
+
+// IncidentGroupsDataType defines model for Incident.Groups.Data.Type.
+type IncidentGroupsDataType string
+
+// IncidentIncidentTypesDataType defines model for Incident.IncidentTypes.Data.Type.
+type IncidentIncidentTypesDataType string
+
+// IncidentServicesDataType defines model for Incident.Services.Data.Type.
+type IncidentServicesDataType string
+
+// The severity of the severity
+type IncidentSeverityDataAttributesSeverity string
+
+// IncidentSeverityDataType defines model for Incident.Severity.Data.Type.
+type IncidentSeverityDataType string
 
 // IncidentActionItem defines model for incident_action_item.
 type IncidentActionItem struct {
@@ -7612,17 +8097,229 @@ type IncidentList struct {
 			// Date of detection
 			DetectedAt *string `json:"detected_at"`
 
-			// The Environment ID's to attach to the incident
-			EnvironmentIds *[]string `json:"environment_ids"`
+			// The Environments of the incident
+			Environments *[]struct {
+				Data struct {
+					Attributes struct {
+						Color *string `json:"color"`
 
-			// The Functionality ID's to attach to the incident
-			FunctionalityIds *[]string `json:"functionality_ids"`
+						// Date of creation
+						CreatedAt string `json:"created_at"`
 
-			// The Team ID's to attach to the incident
-			GroupIds *[]string `json:"group_ids"`
+						// The description of the environment
+						Description *string `json:"description"`
 
-			// The Environment ID's to attach to the incident
-			IncidentTypesIds *[]string `json:"incident_types_ids"`
+						// The name of the environment
+						Name string `json:"name"`
+
+						// Emails attached to the environment
+						NotifyEmails *[]string `json:"notify_emails"`
+
+						// Position of the environment
+						Position *int `json:"position"`
+
+						// Slack Aliases associated with this environment
+						SlackAliases *[]struct {
+							// Slack alias ID
+							Id string `json:"id"`
+
+							// Slack alias name
+							Name string `json:"name"`
+						} `json:"slack_aliases"`
+
+						// Slack Channels associated with this environment
+						SlackChannels *[]struct {
+							// Slack channel ID
+							Id string `json:"id"`
+
+							// Slack channel name
+							Name string `json:"name"`
+						} `json:"slack_channels"`
+
+						// The slug of the environment
+						Slug *string `json:"slug,omitempty"`
+
+						// Date of last update
+						UpdatedAt string `json:"updated_at"`
+					} `json:"attributes"`
+
+					// Unique ID of the environment
+					Id   string                                         `json:"id"`
+					Type IncidentListDataAttributesEnvironmentsDataType `json:"type"`
+				} `json:"data"`
+			} `json:"environments"`
+
+			// The Functionalities of the incident
+			Functionalities *[]struct {
+				Data struct {
+					Attributes struct {
+						Color *string `json:"color"`
+
+						// Date of creation
+						CreatedAt string `json:"created_at"`
+
+						// The description of the functionality
+						Description *string `json:"description"`
+
+						// Environments associated with this functionality
+						EnvironmentIds *[]string `json:"environment_ids"`
+
+						// The name of the functionality
+						Name string `json:"name"`
+
+						// Emails attached to the functionality
+						NotifyEmails *[]string `json:"notify_emails"`
+
+						// Owner Teams associated with this functionality
+						OwnersGroupIds *[]string `json:"owners_group_ids"`
+
+						// Owner Users associated with this service
+						OwnersUserIds *[]int `json:"owners_user_ids"`
+
+						// Position of the functionality
+						Position *int `json:"position"`
+
+						// The public description of the functionality
+						PublicDescription *string `json:"public_description"`
+
+						// Services associated with this functionality
+						ServiceIds *[]string `json:"service_ids"`
+
+						// Slack Aliases associated with this service
+						SlackAliases *[]struct {
+							// Slack alias ID
+							Id string `json:"id"`
+
+							// Slack alias name
+							Name string `json:"name"`
+						} `json:"slack_aliases"`
+
+						// Slack Channels associated with this service
+						SlackChannels *[]struct {
+							// Slack channel ID
+							Id string `json:"id"`
+
+							// Slack channel name
+							Name string `json:"name"`
+						} `json:"slack_channels"`
+
+						// The slug of the functionality
+						Slug *string `json:"slug,omitempty"`
+
+						// Date of last update
+						UpdatedAt string `json:"updated_at"`
+					} `json:"attributes"`
+
+					// Unique ID of the functionality
+					Id   string                                            `json:"id"`
+					Type IncidentListDataAttributesFunctionalitiesDataType `json:"type"`
+				} `json:"data"`
+			} `json:"functionalities"`
+
+			// The Teams of to the incident
+			Groups *[]struct {
+				Data struct {
+					Attributes struct {
+						Color *string `json:"color"`
+
+						// Date of creation
+						CreatedAt string `json:"created_at"`
+
+						// The description of the team
+						Description *string `json:"description"`
+
+						// The name of the team
+						Name string `json:"name"`
+
+						// Emails to attach to the team
+						NotifyEmails *[]string `json:"notify_emails"`
+
+						// Position of the team
+						Position *int `json:"position"`
+
+						// Slack Aliases associated with this service
+						SlackAliases *[]struct {
+							// Slack alias ID
+							Id string `json:"id"`
+
+							// Slack alias name
+							Name string `json:"name"`
+						} `json:"slack_aliases"`
+
+						// Slack Channels associated with this service
+						SlackChannels *[]struct {
+							// Slack channel ID
+							Id string `json:"id"`
+
+							// Slack channel name
+							Name string `json:"name"`
+						} `json:"slack_channels"`
+						Slug *string `json:"slug,omitempty"`
+
+						// Date of last update
+						UpdatedAt string `json:"updated_at"`
+					} `json:"attributes"`
+
+					// Unique ID of the team
+					Id   string                                   `json:"id"`
+					Type IncidentListDataAttributesGroupsDataType `json:"type"`
+				} `json:"data"`
+			} `json:"groups"`
+
+			// The Incident Types of the incident
+			IncidentTypes *[]struct {
+				Data struct {
+					Attributes struct {
+						Color *string `json:"color"`
+
+						// Date of creation
+						CreatedAt string `json:"created_at"`
+
+						// The description of the incident type
+						Description *string `json:"description"`
+
+						// The name of the incident type
+						Name string `json:"name"`
+
+						// Emails to attach to the incident type
+						NotifyEmails *[]string `json:"notify_emails"`
+
+						// Position of the incident type
+						Position *int `json:"position"`
+
+						// Slack Aliases associated with this incident type
+						SlackAliases *[]struct {
+							// Slack alias ID
+							Id string `json:"id"`
+
+							// Slack alias name
+							Name string `json:"name"`
+						} `json:"slack_aliases"`
+
+						// Slack Channels associated with this incident type
+						SlackChannels *[]struct {
+							// Slack channel ID
+							Id string `json:"id"`
+
+							// Slack channel name
+							Name string `json:"name"`
+						} `json:"slack_channels"`
+
+						// The slug of the incident type
+						Slug *string `json:"slug,omitempty"`
+
+						// Date of last update
+						UpdatedAt string `json:"updated_at"`
+					} `json:"attributes"`
+
+					// Unique ID of the incident type
+					Id   string                                          `json:"id"`
+					Type IncidentListDataAttributesIncidentTypesDataType `json:"type"`
+				} `json:"data"`
+			} `json:"incident_types"`
+
+			// The kind of the incident
+			Kind *string `json:"kind,omitempty"`
 
 			// Labels to attach to the incidents. eg: {"platform":"osx", "version": "1.29"}
 			Labels *map[string]interface{} `json:"labels"`
@@ -7648,11 +8345,147 @@ type IncidentList struct {
 			// Scheduled until
 			ScheduledUntil *string `json:"scheduled_until"`
 
-			// The Service ID's to attach to the incident
-			ServiceIds *[]string `json:"service_ids"`
+			// The Services of the incident
+			Services *[]struct {
+				Data struct {
+					Attributes struct {
+						// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
+						BackstageId *string `json:"backstage_id"`
+						Color       *string `json:"color"`
 
-			// The Severity ID to attach to the incident
-			SeverityId *string `json:"severity_id"`
+						// Date of creation
+						CreatedAt string `json:"created_at"`
+
+						// The description of the service
+						Description *string `json:"description"`
+
+						// Environments associated with this service
+						EnvironmentIds *[]string `json:"environment_ids"`
+
+						// The GitHub repository branch associated to this service. eg: main
+						GithubRepositoryBranch *string `json:"github_repository_branch"`
+
+						// The GitHub repository name associated to this service. eg: rootlyhq/my-service
+						GithubRepositoryName *string `json:"github_repository_name"`
+
+						// The Gitlab repository branch associated to this service. eg: main
+						GitlabRepositoryBranch *string `json:"gitlab_repository_branch"`
+
+						// The Gitlab repository name associated to this service. eg: rootlyhq/my-service
+						GitlabRepositoryName *string `json:"gitlab_repository_name"`
+
+						// The name of the service
+						Name string `json:"name"`
+
+						// Emails attached to the service
+						NotifyEmails *[]string `json:"notify_emails"`
+
+						// The Opsgenie service id associated to this service
+						OpsgenieId *string `json:"opsgenie_id"`
+
+						// Owner Teams associated with this service
+						OwnersGroupIds *[]string `json:"owners_group_ids"`
+
+						// Owner Users associated with this service
+						OwnersUserIds *[]int `json:"owners_user_ids"`
+
+						// The PagerDuty service id associated to this service
+						PagerdutyId *string `json:"pagerduty_id"`
+
+						// Position of the service
+						Position *int `json:"position"`
+
+						// The public description of the service
+						PublicDescription *string `json:"public_description"`
+
+						// Services dependent on this service
+						ServiceIds *[]string `json:"service_ids"`
+
+						// Slack Aliases associated with this service
+						SlackAliases *[]struct {
+							// Slack alias ID
+							Id string `json:"id"`
+
+							// Slack alias name
+							Name string `json:"name"`
+						} `json:"slack_aliases"`
+
+						// Slack Channels associated with this service
+						SlackChannels *[]struct {
+							// Slack channel ID
+							Id string `json:"id"`
+
+							// Slack channel name
+							Name string `json:"name"`
+						} `json:"slack_channels"`
+
+						// The slug of the service
+						Slug *string `json:"slug,omitempty"`
+
+						// Date of last update
+						UpdatedAt string `json:"updated_at"`
+					} `json:"attributes"`
+
+					// Unique ID of the service
+					Id   string                                     `json:"id"`
+					Type IncidentListDataAttributesServicesDataType `json:"type"`
+				} `json:"data"`
+			} `json:"services"`
+
+			// The Severity of the incident
+			Severity *struct {
+				Data struct {
+					Attributes struct {
+						Color *string `json:"color"`
+
+						// Date of creation
+						CreatedAt string `json:"created_at"`
+
+						// The description of the severity
+						Description *string `json:"description"`
+
+						// The name of the severity
+						Name string `json:"name"`
+
+						// Emails to attach to the severity
+						NotifyEmails *[]string `json:"notify_emails"`
+
+						// Position of the severity
+						Position *int `json:"position"`
+
+						// The severity of the severity
+						Severity *IncidentListDataAttributesSeverityDataAttributesSeverity `json:"severity,omitempty"`
+
+						// Slack Aliases associated with this severity
+						SlackAliases *[]struct {
+							// Slack alias ID
+							Id string `json:"id"`
+
+							// Slack alias name
+							Name string `json:"name"`
+						} `json:"slack_aliases"`
+
+						// Slack Channels associated with this severity
+						SlackChannels *[]struct {
+							// Slack channel ID
+							Id string `json:"id"`
+
+							// Slack channel name
+							Name string `json:"name"`
+						} `json:"slack_channels"`
+
+						// The slug of the severity
+						Slug *string `json:"slug,omitempty"`
+
+						// Date of last update
+						UpdatedAt string `json:"updated_at"`
+					} `json:"attributes"`
+
+					// Unique ID of the severity
+					Id   string                                     `json:"id"`
+					Type IncidentListDataAttributesSeverityDataType `json:"type"`
+				} `json:"data"`
+			} `json:"severity"`
 
 			// Slack channel id
 			SlackChannelId *string `json:"slack_channel_id"`
@@ -7691,6 +8524,27 @@ type IncidentList struct {
 		Self  string  `json:"self"`
 	} `json:"links"`
 }
+
+// IncidentListDataAttributesEnvironmentsDataType defines model for IncidentList.Data.Attributes.Environments.Data.Type.
+type IncidentListDataAttributesEnvironmentsDataType string
+
+// IncidentListDataAttributesFunctionalitiesDataType defines model for IncidentList.Data.Attributes.Functionalities.Data.Type.
+type IncidentListDataAttributesFunctionalitiesDataType string
+
+// IncidentListDataAttributesGroupsDataType defines model for IncidentList.Data.Attributes.Groups.Data.Type.
+type IncidentListDataAttributesGroupsDataType string
+
+// IncidentListDataAttributesIncidentTypesDataType defines model for IncidentList.Data.Attributes.IncidentTypes.Data.Type.
+type IncidentListDataAttributesIncidentTypesDataType string
+
+// IncidentListDataAttributesServicesDataType defines model for IncidentList.Data.Attributes.Services.Data.Type.
+type IncidentListDataAttributesServicesDataType string
+
+// The severity of the severity
+type IncidentListDataAttributesSeverityDataAttributesSeverity string
+
+// IncidentListDataAttributesSeverityDataType defines model for IncidentList.Data.Attributes.Severity.Data.Type.
+type IncidentListDataAttributesSeverityDataType string
 
 // IncidentListDataType defines model for IncidentList.Data.Type.
 type IncidentListDataType string
@@ -7941,17 +8795,229 @@ type IncidentResponse struct {
 			// Date of detection
 			DetectedAt *string `json:"detected_at"`
 
-			// The Environment ID's to attach to the incident
-			EnvironmentIds *[]string `json:"environment_ids"`
+			// The Environments of the incident
+			Environments *[]struct {
+				Data struct {
+					Attributes struct {
+						Color *string `json:"color"`
 
-			// The Functionality ID's to attach to the incident
-			FunctionalityIds *[]string `json:"functionality_ids"`
+						// Date of creation
+						CreatedAt string `json:"created_at"`
 
-			// The Team ID's to attach to the incident
-			GroupIds *[]string `json:"group_ids"`
+						// The description of the environment
+						Description *string `json:"description"`
 
-			// The Environment ID's to attach to the incident
-			IncidentTypesIds *[]string `json:"incident_types_ids"`
+						// The name of the environment
+						Name string `json:"name"`
+
+						// Emails attached to the environment
+						NotifyEmails *[]string `json:"notify_emails"`
+
+						// Position of the environment
+						Position *int `json:"position"`
+
+						// Slack Aliases associated with this environment
+						SlackAliases *[]struct {
+							// Slack alias ID
+							Id string `json:"id"`
+
+							// Slack alias name
+							Name string `json:"name"`
+						} `json:"slack_aliases"`
+
+						// Slack Channels associated with this environment
+						SlackChannels *[]struct {
+							// Slack channel ID
+							Id string `json:"id"`
+
+							// Slack channel name
+							Name string `json:"name"`
+						} `json:"slack_channels"`
+
+						// The slug of the environment
+						Slug *string `json:"slug,omitempty"`
+
+						// Date of last update
+						UpdatedAt string `json:"updated_at"`
+					} `json:"attributes"`
+
+					// Unique ID of the environment
+					Id   string                                             `json:"id"`
+					Type IncidentResponseDataAttributesEnvironmentsDataType `json:"type"`
+				} `json:"data"`
+			} `json:"environments"`
+
+			// The Functionalities of the incident
+			Functionalities *[]struct {
+				Data struct {
+					Attributes struct {
+						Color *string `json:"color"`
+
+						// Date of creation
+						CreatedAt string `json:"created_at"`
+
+						// The description of the functionality
+						Description *string `json:"description"`
+
+						// Environments associated with this functionality
+						EnvironmentIds *[]string `json:"environment_ids"`
+
+						// The name of the functionality
+						Name string `json:"name"`
+
+						// Emails attached to the functionality
+						NotifyEmails *[]string `json:"notify_emails"`
+
+						// Owner Teams associated with this functionality
+						OwnersGroupIds *[]string `json:"owners_group_ids"`
+
+						// Owner Users associated with this service
+						OwnersUserIds *[]int `json:"owners_user_ids"`
+
+						// Position of the functionality
+						Position *int `json:"position"`
+
+						// The public description of the functionality
+						PublicDescription *string `json:"public_description"`
+
+						// Services associated with this functionality
+						ServiceIds *[]string `json:"service_ids"`
+
+						// Slack Aliases associated with this service
+						SlackAliases *[]struct {
+							// Slack alias ID
+							Id string `json:"id"`
+
+							// Slack alias name
+							Name string `json:"name"`
+						} `json:"slack_aliases"`
+
+						// Slack Channels associated with this service
+						SlackChannels *[]struct {
+							// Slack channel ID
+							Id string `json:"id"`
+
+							// Slack channel name
+							Name string `json:"name"`
+						} `json:"slack_channels"`
+
+						// The slug of the functionality
+						Slug *string `json:"slug,omitempty"`
+
+						// Date of last update
+						UpdatedAt string `json:"updated_at"`
+					} `json:"attributes"`
+
+					// Unique ID of the functionality
+					Id   string                                                `json:"id"`
+					Type IncidentResponseDataAttributesFunctionalitiesDataType `json:"type"`
+				} `json:"data"`
+			} `json:"functionalities"`
+
+			// The Teams of to the incident
+			Groups *[]struct {
+				Data struct {
+					Attributes struct {
+						Color *string `json:"color"`
+
+						// Date of creation
+						CreatedAt string `json:"created_at"`
+
+						// The description of the team
+						Description *string `json:"description"`
+
+						// The name of the team
+						Name string `json:"name"`
+
+						// Emails to attach to the team
+						NotifyEmails *[]string `json:"notify_emails"`
+
+						// Position of the team
+						Position *int `json:"position"`
+
+						// Slack Aliases associated with this service
+						SlackAliases *[]struct {
+							// Slack alias ID
+							Id string `json:"id"`
+
+							// Slack alias name
+							Name string `json:"name"`
+						} `json:"slack_aliases"`
+
+						// Slack Channels associated with this service
+						SlackChannels *[]struct {
+							// Slack channel ID
+							Id string `json:"id"`
+
+							// Slack channel name
+							Name string `json:"name"`
+						} `json:"slack_channels"`
+						Slug *string `json:"slug,omitempty"`
+
+						// Date of last update
+						UpdatedAt string `json:"updated_at"`
+					} `json:"attributes"`
+
+					// Unique ID of the team
+					Id   string                                       `json:"id"`
+					Type IncidentResponseDataAttributesGroupsDataType `json:"type"`
+				} `json:"data"`
+			} `json:"groups"`
+
+			// The Incident Types of the incident
+			IncidentTypes *[]struct {
+				Data struct {
+					Attributes struct {
+						Color *string `json:"color"`
+
+						// Date of creation
+						CreatedAt string `json:"created_at"`
+
+						// The description of the incident type
+						Description *string `json:"description"`
+
+						// The name of the incident type
+						Name string `json:"name"`
+
+						// Emails to attach to the incident type
+						NotifyEmails *[]string `json:"notify_emails"`
+
+						// Position of the incident type
+						Position *int `json:"position"`
+
+						// Slack Aliases associated with this incident type
+						SlackAliases *[]struct {
+							// Slack alias ID
+							Id string `json:"id"`
+
+							// Slack alias name
+							Name string `json:"name"`
+						} `json:"slack_aliases"`
+
+						// Slack Channels associated with this incident type
+						SlackChannels *[]struct {
+							// Slack channel ID
+							Id string `json:"id"`
+
+							// Slack channel name
+							Name string `json:"name"`
+						} `json:"slack_channels"`
+
+						// The slug of the incident type
+						Slug *string `json:"slug,omitempty"`
+
+						// Date of last update
+						UpdatedAt string `json:"updated_at"`
+					} `json:"attributes"`
+
+					// Unique ID of the incident type
+					Id   string                                              `json:"id"`
+					Type IncidentResponseDataAttributesIncidentTypesDataType `json:"type"`
+				} `json:"data"`
+			} `json:"incident_types"`
+
+			// The kind of the incident
+			Kind *string `json:"kind,omitempty"`
 
 			// Labels to attach to the incidents. eg: {"platform":"osx", "version": "1.29"}
 			Labels *map[string]interface{} `json:"labels"`
@@ -7977,11 +9043,147 @@ type IncidentResponse struct {
 			// Scheduled until
 			ScheduledUntil *string `json:"scheduled_until"`
 
-			// The Service ID's to attach to the incident
-			ServiceIds *[]string `json:"service_ids"`
+			// The Services of the incident
+			Services *[]struct {
+				Data struct {
+					Attributes struct {
+						// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
+						BackstageId *string `json:"backstage_id"`
+						Color       *string `json:"color"`
 
-			// The Severity ID to attach to the incident
-			SeverityId *string `json:"severity_id"`
+						// Date of creation
+						CreatedAt string `json:"created_at"`
+
+						// The description of the service
+						Description *string `json:"description"`
+
+						// Environments associated with this service
+						EnvironmentIds *[]string `json:"environment_ids"`
+
+						// The GitHub repository branch associated to this service. eg: main
+						GithubRepositoryBranch *string `json:"github_repository_branch"`
+
+						// The GitHub repository name associated to this service. eg: rootlyhq/my-service
+						GithubRepositoryName *string `json:"github_repository_name"`
+
+						// The Gitlab repository branch associated to this service. eg: main
+						GitlabRepositoryBranch *string `json:"gitlab_repository_branch"`
+
+						// The Gitlab repository name associated to this service. eg: rootlyhq/my-service
+						GitlabRepositoryName *string `json:"gitlab_repository_name"`
+
+						// The name of the service
+						Name string `json:"name"`
+
+						// Emails attached to the service
+						NotifyEmails *[]string `json:"notify_emails"`
+
+						// The Opsgenie service id associated to this service
+						OpsgenieId *string `json:"opsgenie_id"`
+
+						// Owner Teams associated with this service
+						OwnersGroupIds *[]string `json:"owners_group_ids"`
+
+						// Owner Users associated with this service
+						OwnersUserIds *[]int `json:"owners_user_ids"`
+
+						// The PagerDuty service id associated to this service
+						PagerdutyId *string `json:"pagerduty_id"`
+
+						// Position of the service
+						Position *int `json:"position"`
+
+						// The public description of the service
+						PublicDescription *string `json:"public_description"`
+
+						// Services dependent on this service
+						ServiceIds *[]string `json:"service_ids"`
+
+						// Slack Aliases associated with this service
+						SlackAliases *[]struct {
+							// Slack alias ID
+							Id string `json:"id"`
+
+							// Slack alias name
+							Name string `json:"name"`
+						} `json:"slack_aliases"`
+
+						// Slack Channels associated with this service
+						SlackChannels *[]struct {
+							// Slack channel ID
+							Id string `json:"id"`
+
+							// Slack channel name
+							Name string `json:"name"`
+						} `json:"slack_channels"`
+
+						// The slug of the service
+						Slug *string `json:"slug,omitempty"`
+
+						// Date of last update
+						UpdatedAt string `json:"updated_at"`
+					} `json:"attributes"`
+
+					// Unique ID of the service
+					Id   string                                         `json:"id"`
+					Type IncidentResponseDataAttributesServicesDataType `json:"type"`
+				} `json:"data"`
+			} `json:"services"`
+
+			// The Severity of the incident
+			Severity *struct {
+				Data struct {
+					Attributes struct {
+						Color *string `json:"color"`
+
+						// Date of creation
+						CreatedAt string `json:"created_at"`
+
+						// The description of the severity
+						Description *string `json:"description"`
+
+						// The name of the severity
+						Name string `json:"name"`
+
+						// Emails to attach to the severity
+						NotifyEmails *[]string `json:"notify_emails"`
+
+						// Position of the severity
+						Position *int `json:"position"`
+
+						// The severity of the severity
+						Severity *IncidentResponseDataAttributesSeverityDataAttributesSeverity `json:"severity,omitempty"`
+
+						// Slack Aliases associated with this severity
+						SlackAliases *[]struct {
+							// Slack alias ID
+							Id string `json:"id"`
+
+							// Slack alias name
+							Name string `json:"name"`
+						} `json:"slack_aliases"`
+
+						// Slack Channels associated with this severity
+						SlackChannels *[]struct {
+							// Slack channel ID
+							Id string `json:"id"`
+
+							// Slack channel name
+							Name string `json:"name"`
+						} `json:"slack_channels"`
+
+						// The slug of the severity
+						Slug *string `json:"slug,omitempty"`
+
+						// Date of last update
+						UpdatedAt string `json:"updated_at"`
+					} `json:"attributes"`
+
+					// Unique ID of the severity
+					Id   string                                         `json:"id"`
+					Type IncidentResponseDataAttributesSeverityDataType `json:"type"`
+				} `json:"data"`
+			} `json:"severity"`
 
 			// Slack channel id
 			SlackChannelId *string `json:"slack_channel_id"`
@@ -8013,6 +9215,27 @@ type IncidentResponse struct {
 		Type IncidentResponseDataType `json:"type"`
 	} `json:"data"`
 }
+
+// IncidentResponseDataAttributesEnvironmentsDataType defines model for IncidentResponse.Data.Attributes.Environments.Data.Type.
+type IncidentResponseDataAttributesEnvironmentsDataType string
+
+// IncidentResponseDataAttributesFunctionalitiesDataType defines model for IncidentResponse.Data.Attributes.Functionalities.Data.Type.
+type IncidentResponseDataAttributesFunctionalitiesDataType string
+
+// IncidentResponseDataAttributesGroupsDataType defines model for IncidentResponse.Data.Attributes.Groups.Data.Type.
+type IncidentResponseDataAttributesGroupsDataType string
+
+// IncidentResponseDataAttributesIncidentTypesDataType defines model for IncidentResponse.Data.Attributes.IncidentTypes.Data.Type.
+type IncidentResponseDataAttributesIncidentTypesDataType string
+
+// IncidentResponseDataAttributesServicesDataType defines model for IncidentResponse.Data.Attributes.Services.Data.Type.
+type IncidentResponseDataAttributesServicesDataType string
+
+// The severity of the severity
+type IncidentResponseDataAttributesSeverityDataAttributesSeverity string
+
+// IncidentResponseDataAttributesSeverityDataType defines model for IncidentResponse.Data.Attributes.Severity.Data.Type.
+type IncidentResponseDataAttributesSeverityDataType string
 
 // IncidentResponseDataType defines model for IncidentResponse.Data.Type.
 type IncidentResponseDataType string
@@ -8595,6 +9818,10 @@ type InviteToSlackChannelPagerdutyTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"schedule,omitempty"`
+	Service *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"service,omitempty"`
 	TaskType *InviteToSlackChannelPagerdutyTaskParamsTaskType `json:"task_type,omitempty"`
 }
 
@@ -14936,6 +16163,7 @@ type ListIncidentsParams struct {
 	PageNumber                         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize                           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 	FilterSearch                       *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
+	FilterKind                         *string `form:"filter[kind],omitempty" json:"filter[kind],omitempty"`
 	FilterStatus                       *string `form:"filter[status],omitempty" json:"filter[status],omitempty"`
 	FilterUserId                       *int    `form:"filter[user_id],omitempty" json:"filter[user_id],omitempty"`
 	FilterSeverity                     *string `form:"filter[severity],omitempty" json:"filter[severity],omitempty"`
@@ -14953,6 +16181,8 @@ type ListIncidentsParams struct {
 	FilterCustomFieldSelectedOptionIds *string `form:"filter[custom_field_selected_option_ids],omitempty" json:"filter[custom_field_selected_option_ids],omitempty"`
 	FilterCreatedAtGt                  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
 	FilterCreatedAtLt                  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterUpdatedAtGt                  *string `form:"filter[updated_at][gt],omitempty" json:"filter[updated_at][gt],omitempty"`
+	FilterUpdatedAtLt                  *string `form:"filter[updated_at][lt],omitempty" json:"filter[updated_at][lt],omitempty"`
 	FilterStartedAtGt                  *string `form:"filter[started_at][gt],omitempty" json:"filter[started_at][gt],omitempty"`
 	FilterStartedAtLt                  *string `form:"filter[started_at][lt],omitempty" json:"filter[started_at][lt],omitempty"`
 	FilterDetectedAtGt                 *string `form:"filter[detected_at][gt],omitempty" json:"filter[detected_at][gt],omitempty"`
@@ -15824,6 +17054,12 @@ type ClientInterface interface {
 
 	// GetCurrentUser request
 	GetCurrentUser(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteUser request
+	DeleteUser(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetUser request
+	GetUser(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetWebhooksDelivery request
 	GetWebhooksDelivery(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -18105,6 +19341,30 @@ func (c *Client) GetUsers(ctx context.Context, reqEditors ...RequestEditorFn) (*
 
 func (c *Client) GetCurrentUser(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCurrentUserRequest(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteUser(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteUserRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetUser(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetUserRequest(c.Server, id)
 	if err != nil {
 		return nil, err
 	}
@@ -23681,6 +24941,22 @@ func NewListIncidentsRequest(server string, params *ListIncidentsParams) (*http.
 
 	}
 
+	if params.FilterKind != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[kind]", runtime.ParamLocationQuery, *params.FilterKind); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
 	if params.FilterStatus != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[status]", runtime.ParamLocationQuery, *params.FilterStatus); err != nil {
@@ -23940,6 +25216,38 @@ func NewListIncidentsRequest(server string, params *ListIncidentsParams) (*http.
 	if params.FilterCreatedAtLt != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterUpdatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[updated_at][gt]", runtime.ParamLocationQuery, *params.FilterUpdatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterUpdatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[updated_at][lt]", runtime.ParamLocationQuery, *params.FilterUpdatedAtLt); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 			return nil, err
@@ -28423,6 +29731,74 @@ func NewGetCurrentUserRequest(server string) (*http.Request, error) {
 	return req, nil
 }
 
+// NewDeleteUserRequest generates requests for DeleteUser
+func NewDeleteUserRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/users/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetUserRequest generates requests for GetUser
+func NewGetUserRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/users/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewGetWebhooksDeliveryRequest generates requests for GetWebhooksDelivery
 func NewGetWebhooksDeliveryRequest(server string, id string) (*http.Request, error) {
 	var err error
@@ -30777,6 +32153,12 @@ type ClientWithResponsesInterface interface {
 
 	// GetCurrentUser request
 	GetCurrentUserWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetCurrentUserResponse, error)
+
+	// DeleteUser request
+	DeleteUserWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteUserResponse, error)
+
+	// GetUser request
+	GetUserWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetUserResponse, error)
 
 	// GetWebhooksDelivery request
 	GetWebhooksDeliveryWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetWebhooksDeliveryResponse, error)
@@ -34706,6 +36088,48 @@ func (r GetCurrentUserResponse) StatusCode() int {
 	return 0
 }
 
+type DeleteUserResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteUserResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteUserResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetUserResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r GetUserResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetUserResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type GetWebhooksDeliveryResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -37077,6 +38501,24 @@ func (c *ClientWithResponses) GetCurrentUserWithResponse(ctx context.Context, re
 		return nil, err
 	}
 	return ParseGetCurrentUserResponse(rsp)
+}
+
+// DeleteUserWithResponse request returning *DeleteUserResponse
+func (c *ClientWithResponses) DeleteUserWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteUserResponse, error) {
+	rsp, err := c.DeleteUser(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteUserResponse(rsp)
+}
+
+// GetUserWithResponse request returning *GetUserResponse
+func (c *ClientWithResponses) GetUserWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetUserResponse, error) {
+	rsp, err := c.GetUser(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetUserResponse(rsp)
 }
 
 // GetWebhooksDeliveryWithResponse request returning *GetWebhooksDeliveryResponse
@@ -40299,6 +41741,38 @@ func ParseGetCurrentUserResponse(rsp *http.Response) (*GetCurrentUserResponse, e
 	}
 
 	response := &GetCurrentUserResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseDeleteUserResponse parses an HTTP response from a DeleteUserWithResponse call
+func ParseDeleteUserResponse(rsp *http.Response) (*DeleteUserResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteUserResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseGetUserResponse parses an HTTP response from a GetUserWithResponse call
+func ParseGetUserResponse(rsp *http.Response) (*GetUserResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetUserResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
