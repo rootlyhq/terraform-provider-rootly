@@ -42,6 +42,33 @@ func resourceSecret() *schema.Resource {
 					return len(old) != 0
 				},
 			},
+
+			"hashicorp_vault_mount": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The HashiCorp Vault secret mount path",
+			},
+
+			"hashicorp_vault_path": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The HashiCorp Vault secret path",
+			},
+
+			"hashicorp_vault_version": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The HashiCorp Vault secret version",
+			},
 		},
 	}
 }
@@ -58,6 +85,15 @@ func resourceSecretCreate(ctx context.Context, d *schema.ResourceData, meta inte
 	}
 	if value, ok := d.GetOkExists("secret"); ok {
 		s.Secret = value.(string)
+	}
+	if value, ok := d.GetOkExists("hashicorp_vault_mount"); ok {
+		s.HashicorpVaultMount = value.(string)
+	}
+	if value, ok := d.GetOkExists("hashicorp_vault_path"); ok {
+		s.HashicorpVaultPath = value.(string)
+	}
+	if value, ok := d.GetOkExists("hashicorp_vault_version"); ok {
+		s.HashicorpVaultVersion = value.(int)
 	}
 
 	res, err := c.CreateSecret(s)
@@ -90,6 +126,9 @@ func resourceSecretRead(ctx context.Context, d *schema.ResourceData, meta interf
 
 	d.Set("name", item.Name)
 	d.Set("secret", item.Secret)
+	d.Set("hashicorp_vault_mount", item.HashicorpVaultMount)
+	d.Set("hashicorp_vault_path", item.HashicorpVaultPath)
+	d.Set("hashicorp_vault_version", item.HashicorpVaultVersion)
 
 	return nil
 }
@@ -105,6 +144,15 @@ func resourceSecretUpdate(ctx context.Context, d *schema.ResourceData, meta inte
 	}
 	if d.HasChange("secret") {
 		s.Secret = d.Get("secret").(string)
+	}
+	if d.HasChange("hashicorp_vault_mount") {
+		s.HashicorpVaultMount = d.Get("hashicorp_vault_mount").(string)
+	}
+	if d.HasChange("hashicorp_vault_path") {
+		s.HashicorpVaultPath = d.Get("hashicorp_vault_path").(string)
+	}
+	if d.HasChange("hashicorp_vault_version") {
+		s.HashicorpVaultVersion = d.Get("hashicorp_vault_version").(int)
 	}
 
 	_, err := c.UpdateSecret(d.Id(), s)

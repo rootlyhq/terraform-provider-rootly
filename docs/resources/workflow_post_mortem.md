@@ -64,7 +64,7 @@ Optional:
 - `incident_condition_summary` (String)
 - `incident_condition_visibility` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
 - `incident_conditional_inactivity` (String)
-- `incident_kinds` (List of String) Value must be one of `example`, `test`, `normal`, `backfilled`, `scheduled`.
+- `incident_kinds` (List of String) Value must be one of `example`, `normal`, `normal_sub`, `test`, `test_sub`, `backfilled`, `scheduled`.
 - `incident_post_mortem_cause_ids` (List of String)
 - `incident_post_mortem_condition` (String) Value must be one off `ALL`, `ANY`, `NONE`.
 - `incident_post_mortem_condition_cause` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.

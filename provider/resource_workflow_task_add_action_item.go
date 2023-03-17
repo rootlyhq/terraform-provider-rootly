@@ -54,6 +54,11 @@ func resourceWorkflowTaskAddActionItem() *schema.Resource {
 								"add_action_item",
 							}, false),
 						},
+						"incident_role_id": &schema.Schema{
+							Description: "The role id this action item is associated with",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 						"assigned_to_user_id": &schema.Schema{
 							Description: "The user id this action item is assigned to",
 							Type:        schema.TypeString,

@@ -19,6 +19,12 @@ description: |-
 - `name` (String) The name of the secret
 - `secret` (String) The redacted secret
 
+### Optional
+
+- `hashicorp_vault_mount` (String) The HashiCorp Vault secret mount path
+- `hashicorp_vault_path` (String) The HashiCorp Vault secret path
+- `hashicorp_vault_version` (Number) The HashiCorp Vault secret version
+
 ### Read-Only
 
 - `id` (String) The ID of this resource.

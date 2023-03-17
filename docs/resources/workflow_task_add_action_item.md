@@ -40,6 +40,7 @@ Optional:
 
 - `assigned_to_user_id` (String) The user id this action item is assigned to
 - `description` (String) The action item description.
+- `incident_role_id` (String) The role id this action item is associated with
 - `kind` (String) The action item kind.
 - `post_to_incident_timeline` (Boolean)
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))

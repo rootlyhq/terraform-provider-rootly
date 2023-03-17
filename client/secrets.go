@@ -12,6 +12,9 @@ type Secret struct {
 	ID string `jsonapi:"primary,secrets"`
 	Name string `jsonapi:"attr,name,omitempty"`
   Secret string `jsonapi:"attr,secret,omitempty"`
+  HashicorpVaultMount string `jsonapi:"attr,hashicorp_vault_mount,omitempty"`
+  HashicorpVaultPath string `jsonapi:"attr,hashicorp_vault_path,omitempty"`
+  HashicorpVaultVersion int `jsonapi:"attr,hashicorp_vault_version,omitempty"`
 }
 
 func (c *Client) ListSecrets(params *rootlygo.ListSecretsParams) ([]interface{}, error) {

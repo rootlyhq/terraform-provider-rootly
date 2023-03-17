@@ -214,8 +214,10 @@ const (
 	ActionItemTriggerParamsIncidentKindsBackfilled ActionItemTriggerParamsIncidentKinds = "backfilled"
 	ActionItemTriggerParamsIncidentKindsExample    ActionItemTriggerParamsIncidentKinds = "example"
 	ActionItemTriggerParamsIncidentKindsNormal     ActionItemTriggerParamsIncidentKinds = "normal"
+	ActionItemTriggerParamsIncidentKindsNormalSub  ActionItemTriggerParamsIncidentKinds = "normal_sub"
 	ActionItemTriggerParamsIncidentKindsScheduled  ActionItemTriggerParamsIncidentKinds = "scheduled"
 	ActionItemTriggerParamsIncidentKindsTest       ActionItemTriggerParamsIncidentKinds = "test"
+	ActionItemTriggerParamsIncidentKindsTestSub    ActionItemTriggerParamsIncidentKinds = "test_sub"
 )
 
 // Defines values for ActionItemTriggerParamsIncidentStatuses.
@@ -1943,8 +1945,10 @@ const (
 	IncidentTriggerParamsIncidentKindsBackfilled IncidentTriggerParamsIncidentKinds = "backfilled"
 	IncidentTriggerParamsIncidentKindsExample    IncidentTriggerParamsIncidentKinds = "example"
 	IncidentTriggerParamsIncidentKindsNormal     IncidentTriggerParamsIncidentKinds = "normal"
+	IncidentTriggerParamsIncidentKindsNormalSub  IncidentTriggerParamsIncidentKinds = "normal_sub"
 	IncidentTriggerParamsIncidentKindsScheduled  IncidentTriggerParamsIncidentKinds = "scheduled"
 	IncidentTriggerParamsIncidentKindsTest       IncidentTriggerParamsIncidentKinds = "test"
+	IncidentTriggerParamsIncidentKindsTestSub    IncidentTriggerParamsIncidentKinds = "test_sub"
 )
 
 // Defines values for IncidentTriggerParamsIncidentStatuses.
@@ -2224,8 +2228,10 @@ const (
 	NewIncidentDataAttributesKindBackfilled NewIncidentDataAttributesKind = "backfilled"
 	NewIncidentDataAttributesKindExample    NewIncidentDataAttributesKind = "example"
 	NewIncidentDataAttributesKindNormal     NewIncidentDataAttributesKind = "normal"
+	NewIncidentDataAttributesKindNormalSub  NewIncidentDataAttributesKind = "normal_sub"
 	NewIncidentDataAttributesKindScheduled  NewIncidentDataAttributesKind = "scheduled"
 	NewIncidentDataAttributesKindTest       NewIncidentDataAttributesKind = "test"
+	NewIncidentDataAttributesKindTestSub    NewIncidentDataAttributesKind = "test_sub"
 )
 
 // Defines values for NewIncidentDataAttributesStatus.
@@ -2392,6 +2398,12 @@ const (
 // Defines values for NewPulseDataType.
 const (
 	NewPulseDataTypePulses NewPulseDataType = "pulses"
+)
+
+// Defines values for NewSecretDataAttributesKind.
+const (
+	BuiltIn        NewSecretDataAttributesKind = "built_in"
+	HashicorpVault NewSecretDataAttributesKind = "hashicorp_vault"
 )
 
 // Defines values for NewSecretDataType.
@@ -3176,8 +3188,10 @@ const (
 	UpdateIncidentDataAttributesKindBackfilled UpdateIncidentDataAttributesKind = "backfilled"
 	UpdateIncidentDataAttributesKindExample    UpdateIncidentDataAttributesKind = "example"
 	UpdateIncidentDataAttributesKindNormal     UpdateIncidentDataAttributesKind = "normal"
+	UpdateIncidentDataAttributesKindNormalSub  UpdateIncidentDataAttributesKind = "normal_sub"
 	UpdateIncidentDataAttributesKindScheduled  UpdateIncidentDataAttributesKind = "scheduled"
 	UpdateIncidentDataAttributesKindTest       UpdateIncidentDataAttributesKind = "test"
+	UpdateIncidentDataAttributesKindTestSub    UpdateIncidentDataAttributesKind = "test_sub"
 )
 
 // Defines values for UpdateIncidentDataType.
@@ -4088,6 +4102,9 @@ type AddActionItemTaskParams struct {
 
 	// The action item description.
 	Description *string `json:"description,omitempty"`
+
+	// The role id this action item is associated with
+	IncidentRoleId *string `json:"incident_role_id,omitempty"`
 
 	// The action item kind.
 	Kind                   *string `json:"kind,omitempty"`
@@ -7282,6 +7299,9 @@ type Incident struct {
 	// How was the incident mitigated?
 	MitigationMessage *string `json:"mitigation_message"`
 
+	// ID of parent incident
+	ParentIncidentId *string `json:"parent_incident_id"`
+
 	// Create an incident as private
 	Private *bool `json:"private"`
 
@@ -8330,6 +8350,9 @@ type IncidentList struct {
 			// How was the incident mitigated?
 			MitigationMessage *string `json:"mitigation_message"`
 
+			// ID of parent incident
+			ParentIncidentId *string `json:"parent_incident_id"`
+
 			// Create an incident as private
 			Private *bool `json:"private"`
 
@@ -9027,6 +9050,9 @@ type IncidentResponse struct {
 
 			// How was the incident mitigated?
 			MitigationMessage *string `json:"mitigation_message"`
+
+			// ID of parent incident
+			ParentIncidentId *string `json:"parent_incident_id"`
 
 			// Create an incident as private
 			Private *bool `json:"private"`
@@ -10269,6 +10295,9 @@ type NewIncident struct {
 			// Emails you want to notify
 			NotifyEmails *[]string `json:"notify_emails"`
 
+			// ID of parent incident
+			ParentIncidentId *string `json:"parent_incident_id"`
+
 			// Create an incident as private. Once an incident is made as private it cannot be undone
 			Private *bool `json:"private"`
 
@@ -10720,6 +10749,18 @@ type NewPulseDataType string
 type NewSecret struct {
 	Data struct {
 		Attributes struct {
+			// The HashiCorp Vault secret mount path
+			HashicorpVaultMount *string `json:"hashicorp_vault_mount"`
+
+			// The HashiCorp Vault secret path
+			HashicorpVaultPath *string `json:"hashicorp_vault_path"`
+
+			// The HashiCorp Vault secret version
+			HashicorpVaultVersion *string `json:"hashicorp_vault_version"`
+
+			// The kind of the secret
+			Kind *NewSecretDataAttributesKind `json:"kind,omitempty"`
+
 			// The name of the secret
 			Name string `json:"name"`
 
@@ -10729,6 +10770,9 @@ type NewSecret struct {
 		Type NewSecretDataType `json:"type"`
 	} `json:"data"`
 }
+
+// The kind of the secret
+type NewSecretDataAttributesKind string
 
 // NewSecretDataType defines model for NewSecret.Data.Type.
 type NewSecretDataType string
@@ -12158,6 +12202,15 @@ type Secret struct {
 	// Date of creation
 	CreatedAt string `json:"created_at"`
 
+	// The HashiCorp Vault secret mount path
+	HashicorpVaultMount *string `json:"hashicorp_vault_mount,omitempty"`
+
+	// The HashiCorp Vault secret path
+	HashicorpVaultPath *string `json:"hashicorp_vault_path"`
+
+	// The HashiCorp Vault secret version
+	HashicorpVaultVersion *int `json:"hashicorp_vault_version,omitempty"`
+
 	// The name of the secret
 	Name string `json:"name"`
 
@@ -12174,6 +12227,15 @@ type SecretList struct {
 		Attributes struct {
 			// Date of creation
 			CreatedAt string `json:"created_at"`
+
+			// The HashiCorp Vault secret mount path
+			HashicorpVaultMount *string `json:"hashicorp_vault_mount,omitempty"`
+
+			// The HashiCorp Vault secret path
+			HashicorpVaultPath *string `json:"hashicorp_vault_path"`
+
+			// The HashiCorp Vault secret version
+			HashicorpVaultVersion *int `json:"hashicorp_vault_version,omitempty"`
 
 			// The name of the secret
 			Name string `json:"name"`
@@ -12207,6 +12269,15 @@ type SecretResponse struct {
 		Attributes struct {
 			// Date of creation
 			CreatedAt string `json:"created_at"`
+
+			// The HashiCorp Vault secret mount path
+			HashicorpVaultMount *string `json:"hashicorp_vault_mount,omitempty"`
+
+			// The HashiCorp Vault secret path
+			HashicorpVaultPath *string `json:"hashicorp_vault_path"`
+
+			// The HashiCorp Vault secret version
+			HashicorpVaultVersion *int `json:"hashicorp_vault_version,omitempty"`
 
 			// The name of the secret
 			Name string `json:"name"`
@@ -13796,6 +13867,9 @@ type UpdateIncident struct {
 			// Date of mitigation
 			MitigatedAt *string `json:"mitigated_at"`
 
+			// ID of parent incident
+			ParentIncidentId *string `json:"parent_incident_id"`
+
 			// Convert the incident as private. Once an incident is updated as private it cannot be undone
 			Private *bool `json:"private"`
 
@@ -14539,6 +14613,15 @@ type UpdatePulseDataType string
 type UpdateSecret struct {
 	Data struct {
 		Attributes struct {
+			// The HashiCorp Vault secret mount path
+			HashicorpVaultMount *string `json:"hashicorp_vault_mount"`
+
+			// The HashiCorp Vault secret path
+			HashicorpVaultPath *string `json:"hashicorp_vault_path"`
+
+			// The HashiCorp Vault secret version
+			HashicorpVaultVersion *int `json:"hashicorp_vault_version"`
+
 			// The name of the secret
 			Name string `json:"name"`
 
