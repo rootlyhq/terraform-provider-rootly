@@ -14,8 +14,8 @@ func TestAccResourceWorkflowFormFieldCondition(t *testing.T) {
 			{
 				Config: testAccResourceWorkflowFormFieldCondition,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_form_field_condition.test1", "incident_condition", "IS"),
-					resource.TestCheckResourceAttr("rootly_workflow_form_field_condition.test2", "incident_condition", "IS"),
+					resource.TestCheckResourceAttr("rootly_workflow_form_field_condition.test1", "incident_condition", "ANY"),
+					resource.TestCheckResourceAttr("rootly_workflow_form_field_condition.test2", "incident_condition", "ANY"),
 				),
 			},
 		},

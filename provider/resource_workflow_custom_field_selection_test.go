@@ -14,8 +14,8 @@ func TestAccResourceWorkflowCustomFieldSelection(t *testing.T) {
 			{
 				Config: testAccResourceWorkflowCustomFieldSelection,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_custom_field_selection.test1", "incident_condition", "IS"),
-					resource.TestCheckResourceAttr("rootly_workflow_custom_field_selection.test2", "incident_condition", "IS"),
+					resource.TestCheckResourceAttr("rootly_workflow_custom_field_selection.test1", "incident_condition", "ANY"),
+					resource.TestCheckResourceAttr("rootly_workflow_custom_field_selection.test2", "incident_condition", "ANY"),
 				),
 			},
 		},
