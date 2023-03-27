@@ -138,7 +138,7 @@ func resourceWorkflowPulse() *schema.Resource {
 
 						"pulse_condition_source": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "IS",
+							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
@@ -165,7 +165,7 @@ func resourceWorkflowPulse() *schema.Resource {
 
 						"pulse_condition_label": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "IS",
+							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
@@ -192,7 +192,7 @@ func resourceWorkflowPulse() *schema.Resource {
 
 						"pulse_condition_payload": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "IS",
+							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",

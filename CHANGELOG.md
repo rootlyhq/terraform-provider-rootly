@@ -1,8 +1,14 @@
 # Changelog
 
+## [0.1.83] -- 2024-03-27
+
+- Add `status` to `services` and `functionalities` resources.
+- Add `custom_fields_mapping` attributes to `zendesk` workflow resources.
+- Fix defaulted values for `resources`.
+
 ## [0.1.82] -- 2024-03-17
 
-- Add `normal_sub` to `test_sub` incident kinds.
+- Add `normal_sub` and `test_sub` incident kinds.
 - Add `hashicorp_vault_mount`, `hashicorp_vault_mount`, `hashicorp_vault_mount` attributes to secret resource.
 - Add `incident_role_id` to `AddActionItemTaskParams`.
 

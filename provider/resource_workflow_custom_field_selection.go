@@ -41,7 +41,7 @@ func resourceWorkflowCustomFieldSelection() *schema.Resource {
 
 			"incident_condition": &schema.Schema{
 				Type:        schema.TypeString,
-				Default:     "IS",
+				Default:     "ANY",
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,

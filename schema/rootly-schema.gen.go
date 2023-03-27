@@ -292,9 +292,36 @@ const (
 	AddToTimeline AddToTimelineTaskParamsTaskType = "add_to_timeline"
 )
 
+// Defines values for AlertServicesStatus.
+const (
+	AlertServicesStatusImpacted      AlertServicesStatus = "impacted"
+	AlertServicesStatusMajorOutage   AlertServicesStatus = "major_outage"
+	AlertServicesStatusOperational   AlertServicesStatus = "operational"
+	AlertServicesStatusOutage        AlertServicesStatus = "outage"
+	AlertServicesStatusPartialOutage AlertServicesStatus = "partial_outage"
+)
+
+// Defines values for AlertListDataAttributesServicesStatus.
+const (
+	AlertListDataAttributesServicesStatusImpacted      AlertListDataAttributesServicesStatus = "impacted"
+	AlertListDataAttributesServicesStatusMajorOutage   AlertListDataAttributesServicesStatus = "major_outage"
+	AlertListDataAttributesServicesStatusOperational   AlertListDataAttributesServicesStatus = "operational"
+	AlertListDataAttributesServicesStatusOutage        AlertListDataAttributesServicesStatus = "outage"
+	AlertListDataAttributesServicesStatusPartialOutage AlertListDataAttributesServicesStatus = "partial_outage"
+)
+
 // Defines values for AlertListDataType.
 const (
 	AlertListDataTypeAlerts AlertListDataType = "alerts"
+)
+
+// Defines values for AlertResponseDataAttributesServicesStatus.
+const (
+	AlertResponseDataAttributesServicesStatusImpacted      AlertResponseDataAttributesServicesStatus = "impacted"
+	AlertResponseDataAttributesServicesStatusMajorOutage   AlertResponseDataAttributesServicesStatus = "major_outage"
+	AlertResponseDataAttributesServicesStatusOperational   AlertResponseDataAttributesServicesStatus = "operational"
+	AlertResponseDataAttributesServicesStatusOutage        AlertResponseDataAttributesServicesStatus = "outage"
+	AlertResponseDataAttributesServicesStatusPartialOutage AlertResponseDataAttributesServicesStatus = "partial_outage"
 )
 
 // Defines values for AlertResponseDataType.
@@ -1308,9 +1335,36 @@ const (
 	FormFieldResponseDataTypeFormFields FormFieldResponseDataType = "form_fields"
 )
 
+// Defines values for FunctionalityStatus.
+const (
+	FunctionalityStatusImpacted      FunctionalityStatus = "impacted"
+	FunctionalityStatusMajorOutage   FunctionalityStatus = "major_outage"
+	FunctionalityStatusOperational   FunctionalityStatus = "operational"
+	FunctionalityStatusOutage        FunctionalityStatus = "outage"
+	FunctionalityStatusPartialOutage FunctionalityStatus = "partial_outage"
+)
+
+// Defines values for FunctionalityListDataAttributesStatus.
+const (
+	FunctionalityListDataAttributesStatusImpacted      FunctionalityListDataAttributesStatus = "impacted"
+	FunctionalityListDataAttributesStatusMajorOutage   FunctionalityListDataAttributesStatus = "major_outage"
+	FunctionalityListDataAttributesStatusOperational   FunctionalityListDataAttributesStatus = "operational"
+	FunctionalityListDataAttributesStatusOutage        FunctionalityListDataAttributesStatus = "outage"
+	FunctionalityListDataAttributesStatusPartialOutage FunctionalityListDataAttributesStatus = "partial_outage"
+)
+
 // Defines values for FunctionalityListDataType.
 const (
 	FunctionalityListDataTypeFunctionalities FunctionalityListDataType = "functionalities"
+)
+
+// Defines values for FunctionalityResponseDataAttributesStatus.
+const (
+	FunctionalityResponseDataAttributesStatusImpacted      FunctionalityResponseDataAttributesStatus = "impacted"
+	FunctionalityResponseDataAttributesStatusMajorOutage   FunctionalityResponseDataAttributesStatus = "major_outage"
+	FunctionalityResponseDataAttributesStatusOperational   FunctionalityResponseDataAttributesStatus = "operational"
+	FunctionalityResponseDataAttributesStatusOutage        FunctionalityResponseDataAttributesStatus = "outage"
+	FunctionalityResponseDataAttributesStatusPartialOutage FunctionalityResponseDataAttributesStatus = "partial_outage"
 )
 
 // Defines values for FunctionalityResponseDataType.
@@ -1357,6 +1411,15 @@ const (
 	IncidentEnvironmentsDataTypeEnvironments IncidentEnvironmentsDataType = "environments"
 )
 
+// Defines values for IncidentFunctionalitiesDataAttributesStatus.
+const (
+	IncidentFunctionalitiesDataAttributesStatusImpacted      IncidentFunctionalitiesDataAttributesStatus = "impacted"
+	IncidentFunctionalitiesDataAttributesStatusMajorOutage   IncidentFunctionalitiesDataAttributesStatus = "major_outage"
+	IncidentFunctionalitiesDataAttributesStatusOperational   IncidentFunctionalitiesDataAttributesStatus = "operational"
+	IncidentFunctionalitiesDataAttributesStatusOutage        IncidentFunctionalitiesDataAttributesStatus = "outage"
+	IncidentFunctionalitiesDataAttributesStatusPartialOutage IncidentFunctionalitiesDataAttributesStatus = "partial_outage"
+)
+
 // Defines values for IncidentFunctionalitiesDataType.
 const (
 	IncidentFunctionalitiesDataTypeFunctionalities IncidentFunctionalitiesDataType = "functionalities"
@@ -1370,6 +1433,15 @@ const (
 // Defines values for IncidentIncidentTypesDataType.
 const (
 	IncidentIncidentTypesDataTypeIncidentTypes IncidentIncidentTypesDataType = "incident_types"
+)
+
+// Defines values for IncidentServicesDataAttributesStatus.
+const (
+	IncidentServicesDataAttributesStatusImpacted      IncidentServicesDataAttributesStatus = "impacted"
+	IncidentServicesDataAttributesStatusMajorOutage   IncidentServicesDataAttributesStatus = "major_outage"
+	IncidentServicesDataAttributesStatusOperational   IncidentServicesDataAttributesStatus = "operational"
+	IncidentServicesDataAttributesStatusOutage        IncidentServicesDataAttributesStatus = "outage"
+	IncidentServicesDataAttributesStatusPartialOutage IncidentServicesDataAttributesStatus = "partial_outage"
 )
 
 // Defines values for IncidentServicesDataType.
@@ -1609,6 +1681,15 @@ const (
 	IncidentListDataAttributesEnvironmentsDataTypeEnvironments IncidentListDataAttributesEnvironmentsDataType = "environments"
 )
 
+// Defines values for IncidentListDataAttributesFunctionalitiesDataAttributesStatus.
+const (
+	IncidentListDataAttributesFunctionalitiesDataAttributesStatusImpacted      IncidentListDataAttributesFunctionalitiesDataAttributesStatus = "impacted"
+	IncidentListDataAttributesFunctionalitiesDataAttributesStatusMajorOutage   IncidentListDataAttributesFunctionalitiesDataAttributesStatus = "major_outage"
+	IncidentListDataAttributesFunctionalitiesDataAttributesStatusOperational   IncidentListDataAttributesFunctionalitiesDataAttributesStatus = "operational"
+	IncidentListDataAttributesFunctionalitiesDataAttributesStatusOutage        IncidentListDataAttributesFunctionalitiesDataAttributesStatus = "outage"
+	IncidentListDataAttributesFunctionalitiesDataAttributesStatusPartialOutage IncidentListDataAttributesFunctionalitiesDataAttributesStatus = "partial_outage"
+)
+
 // Defines values for IncidentListDataAttributesFunctionalitiesDataType.
 const (
 	IncidentListDataAttributesFunctionalitiesDataTypeFunctionalities IncidentListDataAttributesFunctionalitiesDataType = "functionalities"
@@ -1622,6 +1703,15 @@ const (
 // Defines values for IncidentListDataAttributesIncidentTypesDataType.
 const (
 	IncidentListDataAttributesIncidentTypesDataTypeIncidentTypes IncidentListDataAttributesIncidentTypesDataType = "incident_types"
+)
+
+// Defines values for IncidentListDataAttributesServicesDataAttributesStatus.
+const (
+	IncidentListDataAttributesServicesDataAttributesStatusImpacted      IncidentListDataAttributesServicesDataAttributesStatus = "impacted"
+	IncidentListDataAttributesServicesDataAttributesStatusMajorOutage   IncidentListDataAttributesServicesDataAttributesStatus = "major_outage"
+	IncidentListDataAttributesServicesDataAttributesStatusOperational   IncidentListDataAttributesServicesDataAttributesStatus = "operational"
+	IncidentListDataAttributesServicesDataAttributesStatusOutage        IncidentListDataAttributesServicesDataAttributesStatus = "outage"
+	IncidentListDataAttributesServicesDataAttributesStatusPartialOutage IncidentListDataAttributesServicesDataAttributesStatus = "partial_outage"
 )
 
 // Defines values for IncidentListDataAttributesServicesDataType.
@@ -1698,6 +1788,15 @@ const (
 	IncidentResponseDataAttributesEnvironmentsDataTypeEnvironments IncidentResponseDataAttributesEnvironmentsDataType = "environments"
 )
 
+// Defines values for IncidentResponseDataAttributesFunctionalitiesDataAttributesStatus.
+const (
+	IncidentResponseDataAttributesFunctionalitiesDataAttributesStatusImpacted      IncidentResponseDataAttributesFunctionalitiesDataAttributesStatus = "impacted"
+	IncidentResponseDataAttributesFunctionalitiesDataAttributesStatusMajorOutage   IncidentResponseDataAttributesFunctionalitiesDataAttributesStatus = "major_outage"
+	IncidentResponseDataAttributesFunctionalitiesDataAttributesStatusOperational   IncidentResponseDataAttributesFunctionalitiesDataAttributesStatus = "operational"
+	IncidentResponseDataAttributesFunctionalitiesDataAttributesStatusOutage        IncidentResponseDataAttributesFunctionalitiesDataAttributesStatus = "outage"
+	IncidentResponseDataAttributesFunctionalitiesDataAttributesStatusPartialOutage IncidentResponseDataAttributesFunctionalitiesDataAttributesStatus = "partial_outage"
+)
+
 // Defines values for IncidentResponseDataAttributesFunctionalitiesDataType.
 const (
 	IncidentResponseDataAttributesFunctionalitiesDataTypeFunctionalities IncidentResponseDataAttributesFunctionalitiesDataType = "functionalities"
@@ -1711,6 +1810,15 @@ const (
 // Defines values for IncidentResponseDataAttributesIncidentTypesDataType.
 const (
 	IncidentResponseDataAttributesIncidentTypesDataTypeIncidentTypes IncidentResponseDataAttributesIncidentTypesDataType = "incident_types"
+)
+
+// Defines values for IncidentResponseDataAttributesServicesDataAttributesStatus.
+const (
+	IncidentResponseDataAttributesServicesDataAttributesStatusImpacted      IncidentResponseDataAttributesServicesDataAttributesStatus = "impacted"
+	IncidentResponseDataAttributesServicesDataAttributesStatusMajorOutage   IncidentResponseDataAttributesServicesDataAttributesStatus = "major_outage"
+	IncidentResponseDataAttributesServicesDataAttributesStatusOperational   IncidentResponseDataAttributesServicesDataAttributesStatus = "operational"
+	IncidentResponseDataAttributesServicesDataAttributesStatusOutage        IncidentResponseDataAttributesServicesDataAttributesStatus = "outage"
+	IncidentResponseDataAttributesServicesDataAttributesStatusPartialOutage IncidentResponseDataAttributesServicesDataAttributesStatus = "partial_outage"
 )
 
 // Defines values for IncidentResponseDataAttributesServicesDataType.
@@ -2218,6 +2326,15 @@ const (
 	NewFunctionalityDataAttributesShowUptimeLastDaysN90 NewFunctionalityDataAttributesShowUptimeLastDays = 90
 )
 
+// Defines values for NewFunctionalityDataAttributesStatus.
+const (
+	NewFunctionalityDataAttributesStatusImpacted      NewFunctionalityDataAttributesStatus = "impacted"
+	NewFunctionalityDataAttributesStatusMajorOutage   NewFunctionalityDataAttributesStatus = "major_outage"
+	NewFunctionalityDataAttributesStatusOperational   NewFunctionalityDataAttributesStatus = "operational"
+	NewFunctionalityDataAttributesStatusOutage        NewFunctionalityDataAttributesStatus = "outage"
+	NewFunctionalityDataAttributesStatusPartialOutage NewFunctionalityDataAttributesStatus = "partial_outage"
+)
+
 // Defines values for NewFunctionalityDataType.
 const (
 	NewFunctionalityDataTypeFunctionalities NewFunctionalityDataType = "functionalities"
@@ -2416,6 +2533,15 @@ const (
 	NewServiceDataAttributesShowUptimeLastDaysN30 NewServiceDataAttributesShowUptimeLastDays = 30
 	NewServiceDataAttributesShowUptimeLastDaysN60 NewServiceDataAttributesShowUptimeLastDays = 60
 	NewServiceDataAttributesShowUptimeLastDaysN90 NewServiceDataAttributesShowUptimeLastDays = 90
+)
+
+// Defines values for NewServiceDataAttributesStatus.
+const (
+	NewServiceDataAttributesStatusImpacted      NewServiceDataAttributesStatus = "impacted"
+	NewServiceDataAttributesStatusMajorOutage   NewServiceDataAttributesStatus = "major_outage"
+	NewServiceDataAttributesStatusOperational   NewServiceDataAttributesStatus = "operational"
+	NewServiceDataAttributesStatusOutage        NewServiceDataAttributesStatus = "outage"
+	NewServiceDataAttributesStatusPartialOutage NewServiceDataAttributesStatus = "partial_outage"
 )
 
 // Defines values for NewServiceDataType.
@@ -2665,9 +2791,36 @@ const (
 	PublishIncident PublishIncidentTaskParamsTaskType = "publish_incident"
 )
 
+// Defines values for PulseServicesStatus.
+const (
+	PulseServicesStatusImpacted      PulseServicesStatus = "impacted"
+	PulseServicesStatusMajorOutage   PulseServicesStatus = "major_outage"
+	PulseServicesStatusOperational   PulseServicesStatus = "operational"
+	PulseServicesStatusOutage        PulseServicesStatus = "outage"
+	PulseServicesStatusPartialOutage PulseServicesStatus = "partial_outage"
+)
+
+// Defines values for PulseListDataAttributesServicesStatus.
+const (
+	PulseListDataAttributesServicesStatusImpacted      PulseListDataAttributesServicesStatus = "impacted"
+	PulseListDataAttributesServicesStatusMajorOutage   PulseListDataAttributesServicesStatus = "major_outage"
+	PulseListDataAttributesServicesStatusOperational   PulseListDataAttributesServicesStatus = "operational"
+	PulseListDataAttributesServicesStatusOutage        PulseListDataAttributesServicesStatus = "outage"
+	PulseListDataAttributesServicesStatusPartialOutage PulseListDataAttributesServicesStatus = "partial_outage"
+)
+
 // Defines values for PulseListDataType.
 const (
 	PulseListDataTypePulses PulseListDataType = "pulses"
+)
+
+// Defines values for PulseResponseDataAttributesServicesStatus.
+const (
+	PulseResponseDataAttributesServicesStatusImpacted      PulseResponseDataAttributesServicesStatus = "impacted"
+	PulseResponseDataAttributesServicesStatusMajorOutage   PulseResponseDataAttributesServicesStatus = "major_outage"
+	PulseResponseDataAttributesServicesStatusOperational   PulseResponseDataAttributesServicesStatus = "operational"
+	PulseResponseDataAttributesServicesStatusOutage        PulseResponseDataAttributesServicesStatus = "outage"
+	PulseResponseDataAttributesServicesStatusPartialOutage PulseResponseDataAttributesServicesStatus = "partial_outage"
 )
 
 // Defines values for PulseResponseDataType.
@@ -2811,9 +2964,36 @@ const (
 	SendSms SendSmsTaskParamsTaskType = "send_sms"
 )
 
+// Defines values for ServiceStatus.
+const (
+	ServiceStatusImpacted      ServiceStatus = "impacted"
+	ServiceStatusMajorOutage   ServiceStatus = "major_outage"
+	ServiceStatusOperational   ServiceStatus = "operational"
+	ServiceStatusOutage        ServiceStatus = "outage"
+	ServiceStatusPartialOutage ServiceStatus = "partial_outage"
+)
+
+// Defines values for ServiceListDataAttributesStatus.
+const (
+	ServiceListDataAttributesStatusImpacted      ServiceListDataAttributesStatus = "impacted"
+	ServiceListDataAttributesStatusMajorOutage   ServiceListDataAttributesStatus = "major_outage"
+	ServiceListDataAttributesStatusOperational   ServiceListDataAttributesStatus = "operational"
+	ServiceListDataAttributesStatusOutage        ServiceListDataAttributesStatus = "outage"
+	ServiceListDataAttributesStatusPartialOutage ServiceListDataAttributesStatus = "partial_outage"
+)
+
 // Defines values for ServiceListDataType.
 const (
 	ServiceListDataTypeServices ServiceListDataType = "services"
+)
+
+// Defines values for ServiceResponseDataAttributesStatus.
+const (
+	ServiceResponseDataAttributesStatusImpacted      ServiceResponseDataAttributesStatus = "impacted"
+	ServiceResponseDataAttributesStatusMajorOutage   ServiceResponseDataAttributesStatus = "major_outage"
+	ServiceResponseDataAttributesStatusOperational   ServiceResponseDataAttributesStatus = "operational"
+	ServiceResponseDataAttributesStatusOutage        ServiceResponseDataAttributesStatus = "outage"
+	ServiceResponseDataAttributesStatusPartialOutage ServiceResponseDataAttributesStatus = "partial_outage"
 )
 
 // Defines values for ServiceResponseDataType.
@@ -3160,6 +3340,15 @@ const (
 	UpdateFormFieldPositionDataTypeFormFieldPositions UpdateFormFieldPositionDataType = "form_field_positions"
 )
 
+// Defines values for UpdateFunctionalityDataAttributesStatus.
+const (
+	UpdateFunctionalityDataAttributesStatusImpacted      UpdateFunctionalityDataAttributesStatus = "impacted"
+	UpdateFunctionalityDataAttributesStatusMajorOutage   UpdateFunctionalityDataAttributesStatus = "major_outage"
+	UpdateFunctionalityDataAttributesStatusOperational   UpdateFunctionalityDataAttributesStatus = "operational"
+	UpdateFunctionalityDataAttributesStatusOutage        UpdateFunctionalityDataAttributesStatus = "outage"
+	UpdateFunctionalityDataAttributesStatusPartialOutage UpdateFunctionalityDataAttributesStatus = "partial_outage"
+)
+
 // Defines values for UpdateFunctionalityDataType.
 const (
 	Functionalities UpdateFunctionalityDataType = "functionalities"
@@ -3468,6 +3657,15 @@ const (
 // Defines values for UpdateSecretDataType.
 const (
 	UpdateSecretDataTypeSecrets UpdateSecretDataType = "secrets"
+)
+
+// Defines values for UpdateServiceDataAttributesStatus.
+const (
+	UpdateServiceDataAttributesStatusImpacted      UpdateServiceDataAttributesStatus = "impacted"
+	UpdateServiceDataAttributesStatusMajorOutage   UpdateServiceDataAttributesStatus = "major_outage"
+	UpdateServiceDataAttributesStatusOperational   UpdateServiceDataAttributesStatus = "operational"
+	UpdateServiceDataAttributesStatusOutage        UpdateServiceDataAttributesStatus = "outage"
+	UpdateServiceDataAttributesStatusPartialOutage UpdateServiceDataAttributesStatus = "partial_outage"
 )
 
 // Defines values for UpdateServiceDataType.
@@ -4332,6 +4530,9 @@ type Alert struct {
 		// The slug of the service
 		Slug *string `json:"slug,omitempty"`
 
+		// The status of the service
+		Status *AlertServicesStatus `json:"status,omitempty"`
+
 		// Date of last update
 		UpdatedAt string `json:"updated_at"`
 	} `json:"services,omitempty"`
@@ -4345,6 +4546,9 @@ type Alert struct {
 	// Date of last update
 	UpdatedAt string `json:"updated_at"`
 }
+
+// The status of the service
+type AlertServicesStatus string
 
 // AlertList defines model for alert_list.
 type AlertList struct {
@@ -4482,6 +4686,9 @@ type AlertList struct {
 				// The slug of the service
 				Slug *string `json:"slug,omitempty"`
 
+				// The status of the service
+				Status *AlertListDataAttributesServicesStatus `json:"status,omitempty"`
+
 				// Date of last update
 				UpdatedAt string `json:"updated_at"`
 			} `json:"services,omitempty"`
@@ -4511,6 +4718,9 @@ type AlertList struct {
 		Self  string  `json:"self"`
 	} `json:"links"`
 }
+
+// The status of the service
+type AlertListDataAttributesServicesStatus string
 
 // AlertListDataType defines model for AlertList.Data.Type.
 type AlertListDataType string
@@ -4651,6 +4861,9 @@ type AlertResponse struct {
 				// The slug of the service
 				Slug *string `json:"slug,omitempty"`
 
+				// The status of the service
+				Status *AlertResponseDataAttributesServicesStatus `json:"status,omitempty"`
+
 				// Date of last update
 				UpdatedAt string `json:"updated_at"`
 			} `json:"services,omitempty"`
@@ -4673,6 +4886,9 @@ type AlertResponse struct {
 		Type   AlertResponseDataType `json:"type"`
 	} `json:"data"`
 }
+
+// The status of the service
+type AlertResponseDataAttributesServicesStatus string
 
 // AlertResponseDataType defines model for AlertResponse.Data.Type.
 type AlertResponseDataType string
@@ -5810,7 +6026,10 @@ type CreateZendeskTicketTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"completion,omitempty"`
-	Kind CreateZendeskTicketTaskParamsKind `json:"kind"`
+
+	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
+	CustomFieldsMapping *string                           `json:"custom_fields_mapping"`
+	Kind                CreateZendeskTicketTaskParamsKind `json:"kind"`
 
 	// The priority id and display name.
 	Priority *struct {
@@ -6784,9 +7003,15 @@ type Functionality struct {
 	// The slug of the functionality
 	Slug *string `json:"slug,omitempty"`
 
+	// The status of the functionality
+	Status *FunctionalityStatus `json:"status,omitempty"`
+
 	// Date of last update
 	UpdatedAt string `json:"updated_at"`
 }
+
+// The status of the functionality
+type FunctionalityStatus string
 
 // FunctionalityList defines model for functionality_list.
 type FunctionalityList struct {
@@ -6845,6 +7070,9 @@ type FunctionalityList struct {
 			// The slug of the functionality
 			Slug *string `json:"slug,omitempty"`
 
+			// The status of the functionality
+			Status *FunctionalityListDataAttributesStatus `json:"status,omitempty"`
+
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`
 		} `json:"attributes"`
@@ -6861,6 +7089,9 @@ type FunctionalityList struct {
 		Self  string  `json:"self"`
 	} `json:"links"`
 }
+
+// The status of the functionality
+type FunctionalityListDataAttributesStatus string
 
 // FunctionalityListDataType defines model for FunctionalityList.Data.Type.
 type FunctionalityListDataType string
@@ -6922,6 +7153,9 @@ type FunctionalityResponse struct {
 			// The slug of the functionality
 			Slug *string `json:"slug,omitempty"`
 
+			// The status of the functionality
+			Status *FunctionalityResponseDataAttributesStatus `json:"status,omitempty"`
+
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`
 		} `json:"attributes"`
@@ -6931,6 +7165,9 @@ type FunctionalityResponse struct {
 		Type FunctionalityResponseDataType `json:"type"`
 	} `json:"data"`
 }
+
+// The status of the functionality
+type FunctionalityResponseDataAttributesStatus string
 
 // FunctionalityResponseDataType defines model for FunctionalityResponse.Data.Type.
 type FunctionalityResponseDataType string
@@ -7175,6 +7412,9 @@ type Incident struct {
 				// The slug of the functionality
 				Slug *string `json:"slug,omitempty"`
 
+				// The status of the functionality
+				Status *IncidentFunctionalitiesDataAttributesStatus `json:"status,omitempty"`
+
 				// Date of last update
 				UpdatedAt string `json:"updated_at"`
 			} `json:"attributes"`
@@ -7394,6 +7634,9 @@ type Incident struct {
 				// The slug of the service
 				Slug *string `json:"slug,omitempty"`
 
+				// The status of the service
+				Status *IncidentServicesDataAttributesStatus `json:"status,omitempty"`
+
 				// Date of last update
 				UpdatedAt string `json:"updated_at"`
 			} `json:"attributes"`
@@ -7487,6 +7730,9 @@ type Incident struct {
 // IncidentEnvironmentsDataType defines model for Incident.Environments.Data.Type.
 type IncidentEnvironmentsDataType string
 
+// The status of the functionality
+type IncidentFunctionalitiesDataAttributesStatus string
+
 // IncidentFunctionalitiesDataType defines model for Incident.Functionalities.Data.Type.
 type IncidentFunctionalitiesDataType string
 
@@ -7495,6 +7741,9 @@ type IncidentGroupsDataType string
 
 // IncidentIncidentTypesDataType defines model for Incident.IncidentTypes.Data.Type.
 type IncidentIncidentTypesDataType string
+
+// The status of the service
+type IncidentServicesDataAttributesStatus string
 
 // IncidentServicesDataType defines model for Incident.Services.Data.Type.
 type IncidentServicesDataType string
@@ -8226,6 +8475,9 @@ type IncidentList struct {
 						// The slug of the functionality
 						Slug *string `json:"slug,omitempty"`
 
+						// The status of the functionality
+						Status *IncidentListDataAttributesFunctionalitiesDataAttributesStatus `json:"status,omitempty"`
+
 						// Date of last update
 						UpdatedAt string `json:"updated_at"`
 					} `json:"attributes"`
@@ -8445,6 +8697,9 @@ type IncidentList struct {
 						// The slug of the service
 						Slug *string `json:"slug,omitempty"`
 
+						// The status of the service
+						Status *IncidentListDataAttributesServicesDataAttributesStatus `json:"status,omitempty"`
+
 						// Date of last update
 						UpdatedAt string `json:"updated_at"`
 					} `json:"attributes"`
@@ -8551,6 +8806,9 @@ type IncidentList struct {
 // IncidentListDataAttributesEnvironmentsDataType defines model for IncidentList.Data.Attributes.Environments.Data.Type.
 type IncidentListDataAttributesEnvironmentsDataType string
 
+// The status of the functionality
+type IncidentListDataAttributesFunctionalitiesDataAttributesStatus string
+
 // IncidentListDataAttributesFunctionalitiesDataType defines model for IncidentList.Data.Attributes.Functionalities.Data.Type.
 type IncidentListDataAttributesFunctionalitiesDataType string
 
@@ -8559,6 +8817,9 @@ type IncidentListDataAttributesGroupsDataType string
 
 // IncidentListDataAttributesIncidentTypesDataType defines model for IncidentList.Data.Attributes.IncidentTypes.Data.Type.
 type IncidentListDataAttributesIncidentTypesDataType string
+
+// The status of the service
+type IncidentListDataAttributesServicesDataAttributesStatus string
 
 // IncidentListDataAttributesServicesDataType defines model for IncidentList.Data.Attributes.Services.Data.Type.
 type IncidentListDataAttributesServicesDataType string
@@ -8927,6 +9188,9 @@ type IncidentResponse struct {
 						// The slug of the functionality
 						Slug *string `json:"slug,omitempty"`
 
+						// The status of the functionality
+						Status *IncidentResponseDataAttributesFunctionalitiesDataAttributesStatus `json:"status,omitempty"`
+
 						// Date of last update
 						UpdatedAt string `json:"updated_at"`
 					} `json:"attributes"`
@@ -9146,6 +9410,9 @@ type IncidentResponse struct {
 						// The slug of the service
 						Slug *string `json:"slug,omitempty"`
 
+						// The status of the service
+						Status *IncidentResponseDataAttributesServicesDataAttributesStatus `json:"status,omitempty"`
+
 						// Date of last update
 						UpdatedAt string `json:"updated_at"`
 					} `json:"attributes"`
@@ -9245,6 +9512,9 @@ type IncidentResponse struct {
 // IncidentResponseDataAttributesEnvironmentsDataType defines model for IncidentResponse.Data.Attributes.Environments.Data.Type.
 type IncidentResponseDataAttributesEnvironmentsDataType string
 
+// The status of the functionality
+type IncidentResponseDataAttributesFunctionalitiesDataAttributesStatus string
+
 // IncidentResponseDataAttributesFunctionalitiesDataType defines model for IncidentResponse.Data.Attributes.Functionalities.Data.Type.
 type IncidentResponseDataAttributesFunctionalitiesDataType string
 
@@ -9253,6 +9523,9 @@ type IncidentResponseDataAttributesGroupsDataType string
 
 // IncidentResponseDataAttributesIncidentTypesDataType defines model for IncidentResponse.Data.Attributes.IncidentTypes.Data.Type.
 type IncidentResponseDataAttributesIncidentTypesDataType string
+
+// The status of the service
+type IncidentResponseDataAttributesServicesDataAttributesStatus string
 
 // IncidentResponseDataAttributesServicesDataType defines model for IncidentResponse.Data.Attributes.Services.Data.Type.
 type IncidentResponseDataAttributesServicesDataType string
@@ -10247,6 +10520,9 @@ type NewFunctionality struct {
 				// Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels"`
+
+			// The status of the functionality
+			Status *NewFunctionalityDataAttributesStatus `json:"status,omitempty"`
 		} `json:"attributes"`
 		Type NewFunctionalityDataType `json:"type"`
 	} `json:"data"`
@@ -10254,6 +10530,9 @@ type NewFunctionality struct {
 
 // Show uptime over x days
 type NewFunctionalityDataAttributesShowUptimeLastDays int
+
+// The status of the functionality
+type NewFunctionalityDataAttributesStatus string
 
 // NewFunctionalityDataType defines model for NewFunctionality.Data.Type.
 type NewFunctionalityDataType string
@@ -10853,6 +11132,9 @@ type NewService struct {
 				// Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels"`
+
+			// The status of the service
+			Status *NewServiceDataAttributesStatus `json:"status,omitempty"`
 		} `json:"attributes"`
 		Type NewServiceDataType `json:"type"`
 	} `json:"data"`
@@ -10860,6 +11142,9 @@ type NewService struct {
 
 // Show uptime over x days
 type NewServiceDataAttributesShowUptimeLastDays int
+
+// The status of the service
+type NewServiceDataAttributesStatus string
 
 // NewServiceDataType defines model for NewService.Data.Type.
 type NewServiceDataType string
@@ -11733,6 +12018,9 @@ type Pulse struct {
 		// The slug of the service
 		Slug *string `json:"slug,omitempty"`
 
+		// The status of the service
+		Status *PulseServicesStatus `json:"status,omitempty"`
+
 		// Date of last update
 		UpdatedAt string `json:"updated_at"`
 	} `json:"services,omitempty"`
@@ -11746,6 +12034,9 @@ type Pulse struct {
 	// Date of last update
 	UpdatedAt string `json:"updated_at"`
 }
+
+// The status of the service
+type PulseServicesStatus string
 
 // PulseList defines model for pulse_list.
 type PulseList struct {
@@ -11890,6 +12181,9 @@ type PulseList struct {
 				// The slug of the service
 				Slug *string `json:"slug,omitempty"`
 
+				// The status of the service
+				Status *PulseListDataAttributesServicesStatus `json:"status,omitempty"`
+
 				// Date of last update
 				UpdatedAt string `json:"updated_at"`
 			} `json:"services,omitempty"`
@@ -11916,6 +12210,9 @@ type PulseList struct {
 		Self  string  `json:"self"`
 	} `json:"links"`
 }
+
+// The status of the service
+type PulseListDataAttributesServicesStatus string
 
 // PulseListDataType defines model for PulseList.Data.Type.
 type PulseListDataType string
@@ -12063,6 +12360,9 @@ type PulseResponse struct {
 				// The slug of the service
 				Slug *string `json:"slug,omitempty"`
 
+				// The status of the service
+				Status *PulseResponseDataAttributesServicesStatus `json:"status,omitempty"`
+
 				// Date of last update
 				UpdatedAt string `json:"updated_at"`
 			} `json:"services,omitempty"`
@@ -12082,6 +12382,9 @@ type PulseResponse struct {
 		Type PulseResponseDataType `json:"type"`
 	} `json:"data"`
 }
+
+// The status of the service
+type PulseResponseDataAttributesServicesStatus string
 
 // PulseResponseDataType defines model for PulseResponse.Data.Type.
 type PulseResponseDataType string
@@ -12504,9 +12807,15 @@ type Service struct {
 	// The slug of the service
 	Slug *string `json:"slug,omitempty"`
 
+	// The status of the service
+	Status *ServiceStatus `json:"status,omitempty"`
+
 	// Date of last update
 	UpdatedAt string `json:"updated_at"`
 }
+
+// The status of the service
+type ServiceStatus string
 
 // ServiceList defines model for service_list.
 type ServiceList struct {
@@ -12585,6 +12894,9 @@ type ServiceList struct {
 			// The slug of the service
 			Slug *string `json:"slug,omitempty"`
 
+			// The status of the service
+			Status *ServiceListDataAttributesStatus `json:"status,omitempty"`
+
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`
 		} `json:"attributes"`
@@ -12601,6 +12913,9 @@ type ServiceList struct {
 		Self  string  `json:"self"`
 	} `json:"links"`
 }
+
+// The status of the service
+type ServiceListDataAttributesStatus string
 
 // ServiceListDataType defines model for ServiceList.Data.Type.
 type ServiceListDataType string
@@ -12682,6 +12997,9 @@ type ServiceResponse struct {
 			// The slug of the service
 			Slug *string `json:"slug,omitempty"`
 
+			// The status of the service
+			Status *ServiceResponseDataAttributesStatus `json:"status,omitempty"`
+
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`
 		} `json:"attributes"`
@@ -12691,6 +13009,9 @@ type ServiceResponse struct {
 		Type ServiceResponseDataType `json:"type"`
 	} `json:"data"`
 }
+
+// The status of the service
+type ServiceResponseDataAttributesStatus string
 
 // ServiceResponseDataType defines model for ServiceResponse.Data.Type.
 type ServiceResponseDataType string
@@ -13759,10 +14080,16 @@ type UpdateFunctionality struct {
 				// Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels"`
+
+			// The status of the functionality
+			Status *UpdateFunctionalityDataAttributesStatus `json:"status,omitempty"`
 		} `json:"attributes"`
 		Type UpdateFunctionalityDataType `json:"type"`
 	} `json:"data"`
 }
+
+// The status of the functionality
+type UpdateFunctionalityDataAttributesStatus string
 
 // UpdateFunctionalityDataType defines model for UpdateFunctionality.Data.Type.
 type UpdateFunctionalityDataType string
@@ -14705,10 +15032,16 @@ type UpdateService struct {
 				// Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels"`
+
+			// The status of the service
+			Status *UpdateServiceDataAttributesStatus `json:"status,omitempty"`
 		} `json:"attributes"`
 		Type UpdateServiceDataType `json:"type"`
 	} `json:"data"`
 }
+
+// The status of the service
+type UpdateServiceDataAttributesStatus string
 
 // UpdateServiceDataType defines model for UpdateService.Data.Type.
 type UpdateServiceDataType string
@@ -15171,6 +15504,9 @@ type UpdateZendeskTicketTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"completion,omitempty"`
+
+	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
+	CustomFieldsMapping *string `json:"custom_fields_mapping"`
 
 	// The priority id and display name.
 	Priority *struct {
@@ -16288,9 +16624,16 @@ type ListIncidentActionItemsParams struct {
 
 // ListAlertParams defines parameters for ListAlert.
 type ListAlertParams struct {
-	Include    *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	Include           *string `form:"include,omitempty" json:"include,omitempty"`
+	FilterSource      *string `form:"filter[source],omitempty" json:"filter[source],omitempty"`
+	FilterStartedAtGt *string `form:"filter[started_at][gt],omitempty" json:"filter[started_at][gt],omitempty"`
+	FilterStartedAtLt *string `form:"filter[started_at][lt],omitempty" json:"filter[started_at][lt],omitempty"`
+	FilterEndedAtGt   *string `form:"filter[ended_at][gt],omitempty" json:"filter[ended_at][gt],omitempty"`
+	FilterEndedAtLt   *string `form:"filter[ended_at][lt],omitempty" json:"filter[ended_at][lt],omitempty"`
+	FilterCreatedAtGt *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtLt *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
 // ListIncidentCustomFieldSelectionsParams defines parameters for ListIncidentCustomFieldSelections.
@@ -16376,9 +16719,16 @@ type ListIncidentPostMortemsParams struct {
 
 // ListPulsesParams defines parameters for ListPulses.
 type ListPulsesParams struct {
-	Include    *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	Include           *string `form:"include,omitempty" json:"include,omitempty"`
+	FilterSource      *string `form:"filter[source],omitempty" json:"filter[source],omitempty"`
+	FilterStartedAtGt *string `form:"filter[started_at][gt],omitempty" json:"filter[started_at][gt],omitempty"`
+	FilterStartedAtLt *string `form:"filter[started_at][lt],omitempty" json:"filter[started_at][lt],omitempty"`
+	FilterEndedAtGt   *string `form:"filter[ended_at][gt],omitempty" json:"filter[ended_at][gt],omitempty"`
+	FilterEndedAtLt   *string `form:"filter[ended_at][lt],omitempty" json:"filter[ended_at][lt],omitempty"`
+	FilterCreatedAtGt *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtLt *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
 // ListSecretsParams defines parameters for ListSecrets.
@@ -26009,6 +26359,118 @@ func NewListAlertRequest(server string, incidentId string, params *ListAlertPara
 
 	}
 
+	if params.FilterSource != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[source]", runtime.ParamLocationQuery, *params.FilterSource); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterStartedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[started_at][gt]", runtime.ParamLocationQuery, *params.FilterStartedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterStartedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[started_at][lt]", runtime.ParamLocationQuery, *params.FilterStartedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterEndedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[ended_at][gt]", runtime.ParamLocationQuery, *params.FilterEndedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterEndedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[ended_at][lt]", runtime.ParamLocationQuery, *params.FilterEndedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
 	if params.PageNumber != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
@@ -27808,6 +28270,118 @@ func NewListPulsesRequest(server string, params *ListPulsesParams) (*http.Reques
 	if params.Include != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterSource != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[source]", runtime.ParamLocationQuery, *params.FilterSource); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterStartedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[started_at][gt]", runtime.ParamLocationQuery, *params.FilterStartedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterStartedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[started_at][lt]", runtime.ParamLocationQuery, *params.FilterStartedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterEndedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[ended_at][gt]", runtime.ParamLocationQuery, *params.FilterEndedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterEndedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[ended_at][lt]", runtime.ParamLocationQuery, *params.FilterEndedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 			return nil, err

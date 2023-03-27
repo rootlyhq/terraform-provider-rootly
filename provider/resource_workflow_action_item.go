@@ -171,7 +171,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 
 						"incident_condition_visibility": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "IS",
+							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
@@ -187,7 +187,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 
 						"incident_condition_status": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "IS",
+							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
@@ -195,7 +195,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 
 						"incident_condition_environment": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "IS",
+							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
@@ -203,7 +203,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 
 						"incident_condition_severity": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "IS",
+							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
@@ -211,7 +211,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 
 						"incident_condition_incident_type": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "IS",
+							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
@@ -219,7 +219,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 
 						"incident_condition_incident_roles": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "IS",
+							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
@@ -227,7 +227,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 
 						"incident_condition_service": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "IS",
+							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
@@ -235,7 +235,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 
 						"incident_condition_functionality": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "IS",
+							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
@@ -243,7 +243,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 
 						"incident_condition_group": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "IS",
+							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
@@ -315,7 +315,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 
 						"incident_action_item_condition_kind": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "IS",
+							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
@@ -334,7 +334,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 
 						"incident_action_item_condition_status": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "IS",
+							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
@@ -353,7 +353,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 
 						"incident_action_item_condition_priority": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "IS",
+							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",
@@ -372,7 +372,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 
 						"incident_action_item_condition_group": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "IS",
+							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.",

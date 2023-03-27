@@ -20,7 +20,7 @@ type Client struct {
 func (c *Client) Do(req *http.Request) (*http.Response, error) {
 	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", c.Token))
 	req.Header.Set("Content-Type", c.ContentType)
-	req.Header.Set("User-Agent", "terraform-provider-rootly/v0.1.82")
+	req.Header.Set("User-Agent", "terraform-provider-rootly/v0.1.83")
 
 	res, err := c.Rootly.Client.Do(req)
 	if err != nil {

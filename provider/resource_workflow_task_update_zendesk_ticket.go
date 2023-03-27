@@ -6,6 +6,9 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/stretchr/testify/assert"
+	"testing"
+
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -78,6 +81,17 @@ func resourceWorkflowTaskUpdateZendeskTicket() *schema.Resource {
 							Description: "Map must contain two fields, `id` and `name`. The completion id and display name.",
 							Type:        schema.TypeMap,
 							Optional:    true,
+						},
+						"custom_fields_mapping": &schema.Schema{
+							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+								t := &testing.T{}
+								assert := assert.New(t)
+								return assert.JSONEq(old, new)
+							},
+							Default: "{}",
 						},
 					},
 				},

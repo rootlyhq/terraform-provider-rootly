@@ -232,13 +232,21 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
 	const schema = resourceSchema.properties[name]
 	const optional = (requiredFields || []).indexOf(name) === -1 || schema.enum ? "true" : "false"
 	const required = (requiredFields || []).indexOf(name) === -1 || schema.enum ? "false" : "true"
+	let defaultValue;
+	if (schema.default) {
+		defaultValue = `Default: "${schema.default}"`
+	} else if (schema.enum && schema.enum.length > 0) {
+		defaultValue = `Default: "${schema.enum[0]}"`
+	} else {
+		defaultValue = `Computed: ${optional}`
+	}
 	const description = annotatedDescription(schema)
 	switch (schema.type) {
 		case 'string':
 			return `
 			"${name}": &schema.Schema {
 				Type: schema.TypeString,
-				${schema.enum ? `Default: "${schema.enum[0]}",` : `Computed: ${optional},`}
+				${defaultValue},
 				Required: ${required},
 				Optional: ${optional},
 				Description: "${description}",
