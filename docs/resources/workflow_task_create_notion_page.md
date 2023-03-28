@@ -36,6 +36,7 @@ Required:
 
 Optional:
 
+- `mark_post_mortem_as_published` (Boolean)
 - `post_mortem_template_id` (String) Retrospective template to use when creating page task, if desired.
 - `show_action_items_as_table` (Boolean)
 - `show_timeline_as_table` (Boolean)

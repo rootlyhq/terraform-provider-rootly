@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.84] -- 2024-03-28
+
+- Add `mark_post_mortem_as_published` attribute to `create_dropbox_paper_page_task`, `create_google_docs_page`, `create_confluence_page`, `create_datadog_notebook`, `create_notion_page` resources.
+
 ## [0.1.83] -- 2024-03-27
 
 - Add `status` to `services` and `functionalities` resources.

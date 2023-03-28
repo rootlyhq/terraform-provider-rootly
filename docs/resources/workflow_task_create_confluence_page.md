@@ -39,6 +39,7 @@ Optional:
 
 - `ancestor` (Map of String) Map must contain two fields, `id` and `name`.
 - `content` (String) The page content
+- `mark_post_mortem_as_published` (Boolean)
 - `post_mortem_template_id` (String) The Retrospective template to use
 - `task_type` (String)
 - `template` (Map of String) Map must contain two fields, `id` and `name`.

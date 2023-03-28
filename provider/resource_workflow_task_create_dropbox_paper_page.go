@@ -59,6 +59,11 @@ func resourceWorkflowTaskCreateDropboxPaperPage() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
+						"mark_post_mortem_as_published": &schema.Schema{
+							Description: "",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
 						"title": &schema.Schema{
 							Description: "The page task title",
 							Type:        schema.TypeString,

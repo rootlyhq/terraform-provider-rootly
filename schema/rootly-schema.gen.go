@@ -5301,7 +5301,8 @@ type CreateConfluencePageTaskParams struct {
 	} `json:"ancestor,omitempty"`
 
 	// The page content
-	Content *string `json:"content,omitempty"`
+	Content                   *string `json:"content,omitempty"`
+	MarkPostMortemAsPublished *bool   `json:"mark_post_mortem_as_published,omitempty"`
 
 	// The Retrospective template to use
 	PostMortemTemplateId *string `json:"post_mortem_template_id,omitempty"`
@@ -5328,7 +5329,8 @@ type CreateDatadogNotebookTaskParams struct {
 	Content *string `json:"content,omitempty"`
 
 	// The notebook kind
-	Kind CreateDatadogNotebookTaskParamsKind `json:"kind"`
+	Kind                      CreateDatadogNotebookTaskParamsKind `json:"kind"`
+	MarkPostMortemAsPublished *bool                               `json:"mark_post_mortem_as_published,omitempty"`
 
 	// Retrospective template to use when creating notebook, if desired.
 	PostMortemTemplateId *string                                  `json:"post_mortem_template_id,omitempty"`
@@ -5351,8 +5353,9 @@ type CreateDatadogNotebookTaskParamsTaskType string
 // CreateDropboxPaperPageTaskParams defines model for create_dropbox_paper_page_task_params.
 type CreateDropboxPaperPageTaskParams struct {
 	// The page content
-	Content   *string `json:"content,omitempty"`
-	Namespace *struct {
+	Content                   *string `json:"content,omitempty"`
+	MarkPostMortemAsPublished *bool   `json:"mark_post_mortem_as_published,omitempty"`
+	Namespace                 *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"namespace,omitempty"`
@@ -5465,7 +5468,8 @@ type CreateGoogleDocsPageTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"drive,omitempty"`
-	ParentFolder *struct {
+	MarkPostMortemAsPublished *bool `json:"mark_post_mortem_as_published,omitempty"`
+	ParentFolder              *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"parent_folder,omitempty"`
@@ -5743,6 +5747,8 @@ type CreateMicrosoftTeamsMeetingTaskParamsTaskType string
 
 // CreateNotionPageTaskParams defines model for create_notion_page_task_params.
 type CreateNotionPageTaskParams struct {
+	MarkPostMortemAsPublished *bool `json:"mark_post_mortem_as_published,omitempty"`
+
 	// The parent page id and display name.
 	ParentPage struct {
 		Id   *string `json:"id,omitempty"`

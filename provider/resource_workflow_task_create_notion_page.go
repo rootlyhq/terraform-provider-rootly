@@ -64,6 +64,11 @@ func resourceWorkflowTaskCreateNotionPage() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
+						"mark_post_mortem_as_published": &schema.Schema{
+							Description: "",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
 						"show_timeline_as_table": &schema.Schema{
 							Description: "",
 							Type:        schema.TypeBool,
