@@ -106,6 +106,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_workflow_simple":                                  resourceWorkflowSimple(),
 				"rootly_workflow_post_mortem":                             resourceWorkflowPostMortem(),
 				"rootly_workflow_task_add_action_item":                    resourceWorkflowTaskAddActionItem(),
+				"rootly_workflow_task_update_action_item":                 resourceWorkflowTaskUpdateActionItem(),
 				"rootly_workflow_task_add_role":                           resourceWorkflowTaskAddRole(),
 				"rootly_workflow_task_add_slack_bookmark":                 resourceWorkflowTaskAddSlackBookmark(),
 				"rootly_workflow_task_add_team":                           resourceWorkflowTaskAddTeam(),
