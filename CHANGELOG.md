@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.86] -- 2024-04-04
+
+- Add `rootly_workflow_task_update_google_docs_page`, `rootly_workflow_task_create_google_docs_permissions`, `rootly_workflow_task_remove_google_docs_permissions` resources.
+- Add `subscribers_updated`, `subscribers_added`, `subscribers_removed`, `user_left_slack_channel` workflow triggers.
+
 ## [0.1.85] -- 2024-03-30
 
 - Add `rootly_workflow_task_update_action_item` resource.

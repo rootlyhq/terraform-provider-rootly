@@ -738,6 +738,11 @@ const (
 	CreateGoogleDocsPageTaskParamsTaskTypeCreateGoogleDocsPage CreateGoogleDocsPageTaskParamsTaskType = "create_google_docs_page"
 )
 
+// Defines values for CreateGoogleDocsPermissionsTaskParamsTaskType.
+const (
+	CreateGoogleDocsPermissions CreateGoogleDocsPermissionsTaskParamsTaskType = "create_google_docs_permissions"
+)
+
 // Defines values for CreateGoogleMeetingTaskParamsConferenceSolutionKey.
 const (
 	CreateGoogleMeetingTaskParamsConferenceSolutionKeyAddOn             CreateGoogleMeetingTaskParamsConferenceSolutionKey = "addOn"
@@ -1559,12 +1564,14 @@ const (
 // Defines values for IncidentEventFunctionalityStatus.
 const (
 	IncidentEventFunctionalityStatusMajorOutage   IncidentEventFunctionalityStatus = "major_outage"
+	IncidentEventFunctionalityStatusOperational   IncidentEventFunctionalityStatus = "operational"
 	IncidentEventFunctionalityStatusPartialOutage IncidentEventFunctionalityStatus = "partial_outage"
 )
 
 // Defines values for IncidentEventFunctionalityListDataAttributesStatus.
 const (
 	IncidentEventFunctionalityListDataAttributesStatusMajorOutage   IncidentEventFunctionalityListDataAttributesStatus = "major_outage"
+	IncidentEventFunctionalityListDataAttributesStatusOperational   IncidentEventFunctionalityListDataAttributesStatus = "operational"
 	IncidentEventFunctionalityListDataAttributesStatusPartialOutage IncidentEventFunctionalityListDataAttributesStatus = "partial_outage"
 )
 
@@ -1576,6 +1583,7 @@ const (
 // Defines values for IncidentEventFunctionalityResponseDataAttributesStatus.
 const (
 	IncidentEventFunctionalityResponseDataAttributesStatusMajorOutage   IncidentEventFunctionalityResponseDataAttributesStatus = "major_outage"
+	IncidentEventFunctionalityResponseDataAttributesStatusOperational   IncidentEventFunctionalityResponseDataAttributesStatus = "operational"
 	IncidentEventFunctionalityResponseDataAttributesStatusPartialOutage IncidentEventFunctionalityResponseDataAttributesStatus = "partial_outage"
 )
 
@@ -1609,12 +1617,14 @@ const (
 // Defines values for IncidentEventServiceStatus.
 const (
 	IncidentEventServiceStatusMajorOutage   IncidentEventServiceStatus = "major_outage"
+	IncidentEventServiceStatusOperational   IncidentEventServiceStatus = "operational"
 	IncidentEventServiceStatusPartialOutage IncidentEventServiceStatus = "partial_outage"
 )
 
 // Defines values for IncidentEventServiceListDataAttributesStatus.
 const (
 	IncidentEventServiceListDataAttributesStatusMajorOutage   IncidentEventServiceListDataAttributesStatus = "major_outage"
+	IncidentEventServiceListDataAttributesStatusOperational   IncidentEventServiceListDataAttributesStatus = "operational"
 	IncidentEventServiceListDataAttributesStatusPartialOutage IncidentEventServiceListDataAttributesStatus = "partial_outage"
 )
 
@@ -1626,6 +1636,7 @@ const (
 // Defines values for IncidentEventServiceResponseDataAttributesStatus.
 const (
 	IncidentEventServiceResponseDataAttributesStatusMajorOutage   IncidentEventServiceResponseDataAttributesStatus = "major_outage"
+	IncidentEventServiceResponseDataAttributesStatusOperational   IncidentEventServiceResponseDataAttributesStatus = "operational"
 	IncidentEventServiceResponseDataAttributesStatusPartialOutage IncidentEventServiceResponseDataAttributesStatus = "partial_outage"
 )
 
@@ -2107,6 +2118,9 @@ const (
 	IncidentTriggerParamsTriggersSlackCommand              IncidentTriggerParamsTriggers = "slack_command"
 	IncidentTriggerParamsTriggersStatusPageTimelineUpdated IncidentTriggerParamsTriggers = "status_page_timeline_updated"
 	IncidentTriggerParamsTriggersStatusUpdated             IncidentTriggerParamsTriggers = "status_updated"
+	IncidentTriggerParamsTriggersSubscribersAdded          IncidentTriggerParamsTriggers = "subscribers_added"
+	IncidentTriggerParamsTriggersSubscribersRemoved        IncidentTriggerParamsTriggers = "subscribers_removed"
+	IncidentTriggerParamsTriggersSubscribersUpdated        IncidentTriggerParamsTriggers = "subscribers_updated"
 	IncidentTriggerParamsTriggersSummaryUpdated            IncidentTriggerParamsTriggers = "summary_updated"
 	IncidentTriggerParamsTriggersTeamsAdded                IncidentTriggerParamsTriggers = "teams_added"
 	IncidentTriggerParamsTriggersTeamsRemoved              IncidentTriggerParamsTriggers = "teams_removed"
@@ -2114,6 +2128,7 @@ const (
 	IncidentTriggerParamsTriggersTimelineUpdated           IncidentTriggerParamsTriggers = "timeline_updated"
 	IncidentTriggerParamsTriggersTitleUpdated              IncidentTriggerParamsTriggers = "title_updated"
 	IncidentTriggerParamsTriggersUserJoinedSlackChannel    IncidentTriggerParamsTriggers = "user_joined_slack_channel"
+	IncidentTriggerParamsTriggersUserLeftSlackChannel      IncidentTriggerParamsTriggers = "user_left_slack_channel"
 )
 
 // Defines values for IncidentTypeListDataType.
@@ -2419,6 +2434,7 @@ const (
 // Defines values for NewIncidentEventFunctionalityDataAttributesStatus.
 const (
 	NewIncidentEventFunctionalityDataAttributesStatusMajorOutage   NewIncidentEventFunctionalityDataAttributesStatus = "major_outage"
+	NewIncidentEventFunctionalityDataAttributesStatusOperational   NewIncidentEventFunctionalityDataAttributesStatus = "operational"
 	NewIncidentEventFunctionalityDataAttributesStatusPartialOutage NewIncidentEventFunctionalityDataAttributesStatus = "partial_outage"
 )
 
@@ -2430,6 +2446,7 @@ const (
 // Defines values for NewIncidentEventServiceDataAttributesStatus.
 const (
 	NewIncidentEventServiceDataAttributesStatusMajorOutage   NewIncidentEventServiceDataAttributesStatus = "major_outage"
+	NewIncidentEventServiceDataAttributesStatusOperational   NewIncidentEventServiceDataAttributesStatus = "operational"
 	NewIncidentEventServiceDataAttributesStatusPartialOutage NewIncidentEventServiceDataAttributesStatus = "partial_outage"
 )
 
@@ -2886,6 +2903,18 @@ const (
 // Defines values for RedisClientTaskParamsTaskType.
 const (
 	RedisClient RedisClientTaskParamsTaskType = "redis_client"
+)
+
+// Defines values for RemoveGoogleDocsPermissionsTaskParamsAttributeToQueryBy.
+const (
+	EmailAddress RemoveGoogleDocsPermissionsTaskParamsAttributeToQueryBy = "email_address"
+	Role         RemoveGoogleDocsPermissionsTaskParamsAttributeToQueryBy = "role"
+	Type         RemoveGoogleDocsPermissionsTaskParamsAttributeToQueryBy = "type"
+)
+
+// Defines values for RemoveGoogleDocsPermissionsTaskParamsTaskType.
+const (
+	RemoveGoogleDocsPermissions RemoveGoogleDocsPermissionsTaskParamsTaskType = "remove_google_docs_permissions"
 )
 
 // Defines values for RemoveSubscribersDataType.
@@ -3411,6 +3440,11 @@ const (
 	UpdateGoogleCalendarEventTaskParamsTaskTypeCreateGoogleCalendarEvent UpdateGoogleCalendarEventTaskParamsTaskType = "create_google_calendar_event"
 )
 
+// Defines values for UpdateGoogleDocsPageTaskParamsTaskType.
+const (
+	UpdateGoogleDocsPage UpdateGoogleDocsPageTaskParamsTaskType = "update_google_docs_page"
+)
+
 // Defines values for UpdateIncidentDataAttributesKind.
 const (
 	UpdateIncidentDataAttributesKindBackfilled UpdateIncidentDataAttributesKind = "backfilled"
@@ -3472,6 +3506,7 @@ const (
 // Defines values for UpdateIncidentEventFunctionalityDataAttributesStatus.
 const (
 	UpdateIncidentEventFunctionalityDataAttributesStatusMajorOutage   UpdateIncidentEventFunctionalityDataAttributesStatus = "major_outage"
+	UpdateIncidentEventFunctionalityDataAttributesStatusOperational   UpdateIncidentEventFunctionalityDataAttributesStatus = "operational"
 	UpdateIncidentEventFunctionalityDataAttributesStatusPartialOutage UpdateIncidentEventFunctionalityDataAttributesStatus = "partial_outage"
 )
 
@@ -3483,6 +3518,7 @@ const (
 // Defines values for UpdateIncidentEventServiceDataAttributesStatus.
 const (
 	UpdateIncidentEventServiceDataAttributesStatusMajorOutage   UpdateIncidentEventServiceDataAttributesStatus = "major_outage"
+	UpdateIncidentEventServiceDataAttributesStatusOperational   UpdateIncidentEventServiceDataAttributesStatus = "operational"
 	UpdateIncidentEventServiceDataAttributesStatusPartialOutage UpdateIncidentEventServiceDataAttributesStatus = "partial_outage"
 )
 
@@ -5546,6 +5582,23 @@ type CreateGoogleDocsPageTaskParams struct {
 
 // CreateGoogleDocsPageTaskParamsTaskType defines model for CreateGoogleDocsPageTaskParams.TaskType.
 type CreateGoogleDocsPageTaskParamsTaskType string
+
+// CreateGoogleDocsPermissionsTaskParams defines model for create_google_docs_permissions_task_params.
+type CreateGoogleDocsPermissionsTaskParams struct {
+	// Email message notification
+	EmailMessage *string `json:"email_message"`
+
+	// The Google Doc file ID
+	FileId string `json:"file_id"`
+
+	// Page permissions JSON
+	Permissions           string                                         `json:"permissions"`
+	SendNotificationEmail *bool                                          `json:"send_notification_email,omitempty"`
+	TaskType              *CreateGoogleDocsPermissionsTaskParamsTaskType `json:"task_type,omitempty"`
+}
+
+// CreateGoogleDocsPermissionsTaskParamsTaskType defines model for CreateGoogleDocsPermissionsTaskParams.TaskType.
+type CreateGoogleDocsPermissionsTaskParamsTaskType string
 
 // CreateGoogleMeetingTaskParams defines model for create_google_meeting_task_params.
 type CreateGoogleMeetingTaskParams struct {
@@ -12505,6 +12558,22 @@ type RedisClientTaskParams struct {
 // RedisClientTaskParamsTaskType defines model for RedisClientTaskParams.TaskType.
 type RedisClientTaskParamsTaskType string
 
+// RemoveGoogleDocsPermissionsTaskParams defines model for remove_google_docs_permissions_task_params.
+type RemoveGoogleDocsPermissionsTaskParams struct {
+	AttributeToQueryBy RemoveGoogleDocsPermissionsTaskParamsAttributeToQueryBy `json:"attribute_to_query_by"`
+
+	// The Google Doc file ID
+	FileId   string                                         `json:"file_id"`
+	TaskType *RemoveGoogleDocsPermissionsTaskParamsTaskType `json:"task_type,omitempty"`
+	Value    string                                         `json:"value"`
+}
+
+// RemoveGoogleDocsPermissionsTaskParamsAttributeToQueryBy defines model for RemoveGoogleDocsPermissionsTaskParams.AttributeToQueryBy.
+type RemoveGoogleDocsPermissionsTaskParamsAttributeToQueryBy string
+
+// RemoveGoogleDocsPermissionsTaskParamsTaskType defines model for RemoveGoogleDocsPermissionsTaskParams.TaskType.
+type RemoveGoogleDocsPermissionsTaskParamsTaskType string
+
 // RemoveSubscribers defines model for remove_subscribers.
 type RemoveSubscribers struct {
 	Data struct {
@@ -14271,6 +14340,28 @@ type UpdateGoogleCalendarEventTaskParamsConferenceSolutionKey string
 
 // UpdateGoogleCalendarEventTaskParamsTaskType defines model for UpdateGoogleCalendarEventTaskParams.TaskType.
 type UpdateGoogleCalendarEventTaskParamsTaskType string
+
+// UpdateGoogleDocsPageTaskParams defines model for update_google_docs_page_task_params.
+type UpdateGoogleDocsPageTaskParams struct {
+	// The Google Doc content
+	Content *string `json:"content,omitempty"`
+
+	// Email message notification
+	EmailMessage *string `json:"email_message"`
+
+	// The Google Doc file ID
+	FileId string `json:"file_id"`
+
+	// Retrospective template to use when updating page, if desired.
+	PostMortemTemplateId *string                                 `json:"post_mortem_template_id,omitempty"`
+	TaskType             *UpdateGoogleDocsPageTaskParamsTaskType `json:"task_type,omitempty"`
+
+	// The Google Doc title
+	Title *string `json:"title,omitempty"`
+}
+
+// UpdateGoogleDocsPageTaskParamsTaskType defines model for UpdateGoogleDocsPageTaskParams.TaskType.
+type UpdateGoogleDocsPageTaskParamsTaskType string
 
 // UpdateIncident defines model for update_incident.
 type UpdateIncident struct {
