@@ -5365,6 +5365,7 @@ type CreateAsanaTaskTaskParams struct {
 
 	// Dependent task ids. Supports liquid syntax.
 	DependentTaskIds *[]string `json:"dependent_task_ids"`
+	Notes            *string   `json:"notes,omitempty"`
 	Projects         []struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`

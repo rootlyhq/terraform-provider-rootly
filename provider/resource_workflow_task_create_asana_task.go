@@ -84,6 +84,11 @@ func resourceWorkflowTaskCreateAsanaTask() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 						},
+						"notes": &schema.Schema{
+							Description: "",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 						"assign_user_email": &schema.Schema{
 							Description: "The assigned user's email.",
 							Type:        schema.TypeString,
