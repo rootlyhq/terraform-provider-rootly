@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.87] -- 2024-04-06
+
+- Add `notes` attribute to `rootly_workflow_task_create_asana_subtask` resource.
+
 ## [0.1.86] -- 2024-04-04
 
 - Add `rootly_workflow_task_update_google_docs_page`, `rootly_workflow_task_create_google_docs_permissions`, `rootly_workflow_task_remove_google_docs_permissions` resources.
