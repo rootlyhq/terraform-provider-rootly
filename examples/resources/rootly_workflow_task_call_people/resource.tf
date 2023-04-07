@@ -10,7 +10,9 @@ resource "rootly_workflow_incident" "call_people" {
 }
 
 resource "rootly_workflow_task_call_people" "call_people" {
-  workflow_id = rootly_workflow_incident.call_people.id
+  workflow_id     = rootly_workflow_incident.call_people.id
+  skip_on_failure = false
+  enabled         = true
   task_params {
     name    = "Call people"
     content = "We have an ongoing incident {{ incident.title }} of severity {{ incident.severity }} and your assistance is required."

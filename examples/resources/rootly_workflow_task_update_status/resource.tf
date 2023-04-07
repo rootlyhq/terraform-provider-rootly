@@ -11,7 +11,9 @@ resource "rootly_workflow_incident" "auto_resolve_incident" {
 }
 
 resource "rootly_workflow_task_update_status" "update_status" {
-  workflow_id = rootly_workflow_incident.auto_resolve_incident.id
+  workflow_id     = rootly_workflow_incident.auto_resolve_incident.id
+  skip_on_failure = false
+  enabled         = true
   task_params {
     status  = "resolved"
     message = "Automatically marked as resolved due to inactivity"

@@ -11,7 +11,9 @@ resource "rootly_workflow_incident" "auto_archive_incident" {
 }
 
 resource "rootly_workflow_task_archive_slack_channels" "archive_slack_channels" {
-  workflow_id = rootly_workflow_incident.auto_archive_incident.id
+  workflow_id     = rootly_workflow_incident.auto_archive_incident.id
+  skip_on_failure = false
+  enabled         = true
   task_params {
     name = "Archive Slack channels"
     channels {

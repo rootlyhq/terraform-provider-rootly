@@ -24,7 +24,9 @@ resource "rootly_workflow_incident" "invite_to_incident_channel" {
 }
 
 resource "rootly_workflow_task_invite_to_slack_channel" "invite_to_slack_channel" {
-  workflow_id = rootly_workflow_incident.invite_to_incident_channel.id
+  workflow_id     = rootly_workflow_incident.invite_to_incident_channel.id
+  skip_on_failure = false
+  enabled         = true
   task_params {
     name = "Invite to Slack channel"
     channel = {

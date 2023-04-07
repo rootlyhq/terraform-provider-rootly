@@ -12,7 +12,9 @@ resource "rootly_workflow_incident" "jira" {
 }
 
 resource "rootly_workflow_task_create_jira_issue" "jira" {
-  workflow_id = rootly_workflow_incident.jira.id
+  workflow_id     = rootly_workflow_incident.jira.id
+  skip_on_failure = false
+  enabled         = true
   task_params {
     title       = "{{ incident.title }}"
     description = "{{ incident.summary }}"

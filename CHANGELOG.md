@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.88] -- 2024-04-06
+
+- Add `enabled` attribute to worklow tasks.
+
 ## [0.1.87] -- 2024-04-06
 
 - Add `notes` attribute to `rootly_workflow_task_create_asana_subtask` resource.

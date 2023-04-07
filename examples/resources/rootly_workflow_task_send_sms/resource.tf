@@ -10,7 +10,9 @@ resource "rootly_workflow_incident" "send_sms" {
 }
 
 resource "rootly_workflow_task_send_sms" "send_sms" {
-  workflow_id = rootly_workflow_incident.send_sms.id
+  workflow_id     = rootly_workflow_incident.send_sms.id
+  skip_on_failure = false
+  enabled         = true
   task_params {
     name          = "Send SMS"
     content       = "We have an ongoing incident {{ incident.title }} of severity {{ incident.severity }} and your assistance is required."

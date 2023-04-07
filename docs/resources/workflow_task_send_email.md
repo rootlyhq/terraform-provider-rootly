@@ -25,7 +25,9 @@ resource "rootly_workflow_incident" "send_email_to_stakeholders" {
 }
 
 resource "rootly_workflow_task_send_email" "send_email" {
-  workflow_id = rootly_workflow_incident.send_email_to_stakeholders.id
+  workflow_id     = rootly_workflow_incident.send_email_to_stakeholders.id
+  skip_on_failure = false
+  enabled         = true
   task_params {
     name      = "Send Email to Subscribers"
     to        = ["{{ incident.subscribers | map: 'email' | join: ',' }}", "{{ incident.raw_severity | get: 'notify_emails' | join: ',' }}", "{{ incident.raw_environments | map: 'notify_emails' | flatten | join: ',' }}", "{{ incident.raw_functionalities | map: 'notify_emails' | flatten | join: ',' }}", "{{ incident.raw_services | map: 'notify_emails' | flatten | join: ',' }}", "{{ incident.raw_types | map: 'notify_emails' | flatten | join: ',' }}", "{{ incident.raw_groups | map: 'notify_emails' | flatten | join: ',' }}"]

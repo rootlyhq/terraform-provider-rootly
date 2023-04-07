@@ -9,7 +9,10 @@ resource "rootly_workflow_alert" "send_alerts_to_slack" {
 }
 
 resource "rootly_workflow_task_send_slack_blocks" "send_slack_blocks" {
-  workflow_id = rootly_workflow_alert.send_alerts_to_slack.id
+  workflow_id     = rootly_workflow_alert.send_alerts_to_slack.id
+  skip_on_failure = false
+  enabled         = true
+
   task_params {
     name    = "Send alert block"
     message = ":boom: New alert!"

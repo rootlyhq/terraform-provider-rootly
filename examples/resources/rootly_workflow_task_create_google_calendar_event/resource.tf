@@ -10,7 +10,9 @@ resource "rootly_workflow_incident" "schedule_postmortem_review_meeting" {
 }
 
 resource "rootly_workflow_task_create_google_calendar_event" "create_google_calendar_event" {
-  workflow_id = rootly_workflow_incident.schedule_postmortem_review_meeting.id
+  workflow_id     = rootly_workflow_incident.schedule_postmortem_review_meeting.id
+  skip_on_failure = false
+  enabled         = true
   task_params {
     name               = "Schedule Postmortem Review Meeting"
     days_until_meeting = 7

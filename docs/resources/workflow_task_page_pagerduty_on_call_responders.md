@@ -24,7 +24,9 @@ resource "rootly_workflow_incident" "page_pagerduty_responders" {
 }
 
 resource "rootly_workflow_task_page_pagerduty_on_call_responders" "page_pagerduty_on_call_responders" {
-  workflow_id = rootly_workflow_incident.page_pagerduty_responders.id
+  workflow_id     = rootly_workflow_incident.page_pagerduty_responders.id
+  skip_on_failure = false
+  enabled         = true
   task_params {
     name = "Page PagerDuty on-call responders"
     service = {

@@ -10,7 +10,9 @@ resource "rootly_workflow_incident" "notify_slack_channels" {
 }
 
 resource "rootly_workflow_task_send_slack_message" "send_slack_message" {
-  workflow_id = rootly_workflow_incident.notify_slack_channels.id
+  workflow_id     = rootly_workflow_incident.notify_slack_channels.id
+  skip_on_failure = false
+  enabled         = true
   task_params {
     name = "Notify team about incident"
     channels {

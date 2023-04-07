@@ -11578,6 +11578,9 @@ type NewWorkflowRunDataType string
 type NewWorkflowTask struct {
 	Data struct {
 		Attributes struct {
+			// Enable/disable workflow task
+			Enabled *bool `json:"enabled,omitempty"`
+
 			// The position of the workflow task
 			Position *float32 `json:"position,omitempty"`
 
@@ -15687,6 +15690,9 @@ type UpdateWorkflowGroupDataType string
 type UpdateWorkflowTask struct {
 	Data struct {
 		Attributes struct {
+			// Enable/disable workflow task
+			Enabled *bool `json:"enabled,omitempty"`
+
 			// The position of the workflow task
 			Position *float32 `json:"position,omitempty"`
 
@@ -16509,11 +16515,14 @@ type WorkflowTask struct {
 	// Date of creation
 	CreatedAt string `json:"created_at"`
 
+	// Enable/disable workflow task
+	Enabled bool `json:"enabled"`
+
 	// The position of the workflow task
 	Position float32 `json:"position"`
 
 	// Is the task skipped if any failures
-	SkipOnFailure *bool       `json:"skip_on_failure,omitempty"`
+	SkipOnFailure bool        `json:"skip_on_failure"`
 	TaskParams    interface{} `json:"task_params"`
 
 	// Date of last update
@@ -16530,11 +16539,14 @@ type WorkflowTaskList struct {
 			// Date of creation
 			CreatedAt string `json:"created_at"`
 
+			// Enable/disable workflow task
+			Enabled bool `json:"enabled"`
+
 			// The position of the workflow task
 			Position float32 `json:"position"`
 
 			// Is the task skipped if any failures
-			SkipOnFailure *bool       `json:"skip_on_failure,omitempty"`
+			SkipOnFailure bool        `json:"skip_on_failure"`
 			TaskParams    interface{} `json:"task_params"`
 
 			// Date of last update
@@ -16567,11 +16579,14 @@ type WorkflowTaskResponse struct {
 			// Date of creation
 			CreatedAt string `json:"created_at"`
 
+			// Enable/disable workflow task
+			Enabled bool `json:"enabled"`
+
 			// The position of the workflow task
 			Position float32 `json:"position"`
 
 			// Is the task skipped if any failures
-			SkipOnFailure *bool       `json:"skip_on_failure,omitempty"`
+			SkipOnFailure bool        `json:"skip_on_failure"`
 			TaskParams    interface{} `json:"task_params"`
 
 			// Date of last update

@@ -25,7 +25,9 @@ resource "rootly_workflow_incident" "renaming_slack_channel_to_jira_ticket_numbe
 }
 
 resource "rootly_workflow_task_rename_slack_channel" "rename_slack_channel" {
-  workflow_id = rootly_workflow_incident.renaming_slack_channel_to_jira_ticket_number.id
+  workflow_id     = rootly_workflow_incident.renaming_slack_channel_to_jira_ticket_number.id
+  skip_on_failure = false
+  enabled         = true
   task_params {
     name = "Rename a Slack channel to Jira ticket slug"
     channel = {
