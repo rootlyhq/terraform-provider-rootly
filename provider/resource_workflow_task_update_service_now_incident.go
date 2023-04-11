@@ -41,6 +41,18 @@ func resourceWorkflowTaskUpdateServiceNowIncident() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"skip_on_failure": {
+				Description: "Skip workflow task if any failures",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+			},
+			"enabled": {
+				Description: "Enable/disable this workflow task",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     true,
+			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
 				Type:        schema.TypeList,
@@ -105,14 +117,18 @@ func resourceWorkflowTaskUpdateServiceNowIncidentCreate(ctx context.Context, d *
 
 	workflowId := d.Get("workflow_id").(string)
 	position := d.Get("position").(int)
+	skipOnFailure := d.Get("skip_on_failure").(bool)
+	enabled := d.Get("enabled").(bool)
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	tflog.Trace(ctx, fmt.Sprintf("Creating workflow task: %s", workflowId))
 
 	s := &client.WorkflowTask{
-		WorkflowId: workflowId,
-		Position:   position,
-		TaskParams: taskParams,
+		WorkflowId:    workflowId,
+		Position:      position,
+		SkipOnFailure: skipOnFailure,
+		Enabled:       enabled,
+		TaskParams:    taskParams,
 	}
 
 	res, err := c.CreateWorkflowTask(s)
@@ -145,6 +161,8 @@ func resourceWorkflowTaskUpdateServiceNowIncidentRead(ctx context.Context, d *sc
 
 	d.Set("workflow_id", res.WorkflowId)
 	d.Set("position", res.Position)
+	d.Set("skip_on_failure", res.SkipOnFailure)
+	d.Set("enabled", res.Enabled)
 	tps := make([]interface{}, 1, 1)
 	tps[0] = res.TaskParams
 	d.Set("task_params", tps)
@@ -158,12 +176,16 @@ func resourceWorkflowTaskUpdateServiceNowIncidentUpdate(ctx context.Context, d *
 
 	workflowId := d.Get("workflow_id").(string)
 	position := d.Get("position").(int)
+	skipOnFailure := d.Get("skip_on_failure").(bool)
+	enabled := d.Get("enabled").(bool)
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	s := &client.WorkflowTask{
-		WorkflowId: workflowId,
-		Position:   position,
-		TaskParams: taskParams,
+		WorkflowId:    workflowId,
+		Position:      position,
+		SkipOnFailure: skipOnFailure,
+		Enabled:       enabled,
+		TaskParams:    taskParams,
 	}
 
 	tflog.Debug(ctx, fmt.Sprintf("adding value: %#v", s))

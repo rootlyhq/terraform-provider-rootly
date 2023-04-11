@@ -21,7 +21,9 @@ Manages workflow update_opsgenie_incident task.
 
 ### Optional
 
+- `enabled` (Boolean) Enable/disable this workflow task
 - `position` (Number) The position of the workflow task (1 being top of list)
+- `skip_on_failure` (Boolean) Skip workflow task if any failures
 
 ### Read-Only
 

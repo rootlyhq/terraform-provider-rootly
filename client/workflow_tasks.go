@@ -11,6 +11,8 @@ type WorkflowTask struct {
 	ID          string `jsonapi:"primary,workflow_tasks"`
 	WorkflowId  string `jsonapi:"attr,workflow_id,omitempty"`
 	Position    int `jsonapi:"attr,position,omitempty"`
+	SkipOnFailure    bool `jsonapi:"attr,skip_on_failure,omitempty"`
+	Enabled    bool `jsonapi:"attr,enabled,omitempty"`
 	TaskParams  map[string]interface{} `jsonapi:"attr,task_params,omitempty"`
 }
 

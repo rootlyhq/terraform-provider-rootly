@@ -48,7 +48,9 @@ resource "rootly_workflow_task_send_slack_message" "send_slack_message" {
 
 ### Optional
 
+- `enabled` (Boolean) Enable/disable this workflow task
 - `position` (Number) The position of the workflow task (1 being top of list)
+- `skip_on_failure` (Boolean) Skip workflow task if any failures
 
 ### Read-Only
 
@@ -66,6 +68,7 @@ Optional:
 - `actionables` (List of String) Value must be one of `update_summary`, `update_status`, `archive_channel`, `manage_incident_roles`, `update_incident`, `all_commands`, `leave_feedback`, `manage_form_fields`, `manage_action_items`, `view_tasks`, `add_pagerduty_responders`, `add_opsgenie_responders`, `add_victor_ops_responders`, `snooze_reminder`, `pause_reminder`, `restart_reminder`.
 - `broadcast_thread_reply_to_channel` (Boolean)
 - `channels` (Block List) (see [below for nested schema](#nestedblock--task_params--channels))
+- `color` (String) A hex color
 - `parent_message_thread_task` (Map of String) Map must contain two fields, `id` and `name`. A hash where [id] is the task id of the parent task that sent a message, and [name] is the name of the parent task
 - `pin_to_channel` (Boolean)
 - `send_as_ephemeral` (Boolean)

@@ -10705,6 +10705,9 @@ type NewIncident struct {
 			// The Severity ID to attach to the incident
 			SeverityId *string `json:"severity_id"`
 
+			// Slack channel name
+			SlackChannelName *string `json:"slack_channel_name"`
+
 			// Date of start
 			StartedAt *string `json:"started_at"`
 
@@ -12842,6 +12845,9 @@ type SendSlackMessageTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"channels,omitempty"`
+
+	// A hex color ex. #FFFFFF
+	Color *string `json:"color,omitempty"`
 
 	// A hash where [id] is the task id of the parent task that sent a message, and [name] is the name of the parent task
 	ParentMessageThreadTask *struct {
@@ -16417,18 +16423,19 @@ type WorkflowResponseDataType string
 
 // WorkflowRun defines model for workflow_run.
 type WorkflowRun struct {
-	ActionItemId *string                `json:"action_item_id"`
-	AlertId      *string                `json:"alert_id"`
-	CanceledAt   *string                `json:"canceled_at"`
-	CompletedAt  *string                `json:"completed_at"`
-	FailedAt     *string                `json:"failed_at"`
-	IncidentId   *string                `json:"incident_id"`
-	PostMortemId *string                `json:"post_mortem_id"`
-	PulseId      *string                `json:"pulse_id"`
-	StartedAt    *string                `json:"started_at"`
-	Status       WorkflowRunStatus      `json:"status"`
-	TriggeredBy  WorkflowRunTriggeredBy `json:"triggered_by"`
-	WorkflowId   string                 `json:"workflow_id"`
+	ActionItemId  *string                `json:"action_item_id"`
+	AlertId       *string                `json:"alert_id"`
+	CanceledAt    *string                `json:"canceled_at"`
+	CompletedAt   *string                `json:"completed_at"`
+	FailedAt      *string                `json:"failed_at"`
+	IncidentId    *string                `json:"incident_id"`
+	PostMortemId  *string                `json:"post_mortem_id"`
+	PulseId       *string                `json:"pulse_id"`
+	StartedAt     *string                `json:"started_at"`
+	Status        WorkflowRunStatus      `json:"status"`
+	StatusMessage *string                `json:"status_message"`
+	TriggeredBy   WorkflowRunTriggeredBy `json:"triggered_by"`
+	WorkflowId    string                 `json:"workflow_id"`
 }
 
 // WorkflowRunStatus defines model for WorkflowRun.Status.
@@ -16441,18 +16448,19 @@ type WorkflowRunTriggeredBy string
 type WorkflowRunResponse struct {
 	Data struct {
 		Attributes struct {
-			ActionItemId *string                                      `json:"action_item_id"`
-			AlertId      *string                                      `json:"alert_id"`
-			CanceledAt   *string                                      `json:"canceled_at"`
-			CompletedAt  *string                                      `json:"completed_at"`
-			FailedAt     *string                                      `json:"failed_at"`
-			IncidentId   *string                                      `json:"incident_id"`
-			PostMortemId *string                                      `json:"post_mortem_id"`
-			PulseId      *string                                      `json:"pulse_id"`
-			StartedAt    *string                                      `json:"started_at"`
-			Status       WorkflowRunResponseDataAttributesStatus      `json:"status"`
-			TriggeredBy  WorkflowRunResponseDataAttributesTriggeredBy `json:"triggered_by"`
-			WorkflowId   string                                       `json:"workflow_id"`
+			ActionItemId  *string                                      `json:"action_item_id"`
+			AlertId       *string                                      `json:"alert_id"`
+			CanceledAt    *string                                      `json:"canceled_at"`
+			CompletedAt   *string                                      `json:"completed_at"`
+			FailedAt      *string                                      `json:"failed_at"`
+			IncidentId    *string                                      `json:"incident_id"`
+			PostMortemId  *string                                      `json:"post_mortem_id"`
+			PulseId       *string                                      `json:"pulse_id"`
+			StartedAt     *string                                      `json:"started_at"`
+			Status        WorkflowRunResponseDataAttributesStatus      `json:"status"`
+			StatusMessage *string                                      `json:"status_message"`
+			TriggeredBy   WorkflowRunResponseDataAttributesTriggeredBy `json:"triggered_by"`
+			WorkflowId    string                                       `json:"workflow_id"`
 		} `json:"attributes"`
 
 		// Unique ID of the workflow run
@@ -16474,18 +16482,19 @@ type WorkflowRunResponseDataType string
 type WorkflowRunsList struct {
 	Data []struct {
 		Attributes struct {
-			ActionItemId *string                                   `json:"action_item_id"`
-			AlertId      *string                                   `json:"alert_id"`
-			CanceledAt   *string                                   `json:"canceled_at"`
-			CompletedAt  *string                                   `json:"completed_at"`
-			FailedAt     *string                                   `json:"failed_at"`
-			IncidentId   *string                                   `json:"incident_id"`
-			PostMortemId *string                                   `json:"post_mortem_id"`
-			PulseId      *string                                   `json:"pulse_id"`
-			StartedAt    *string                                   `json:"started_at"`
-			Status       WorkflowRunsListDataAttributesStatus      `json:"status"`
-			TriggeredBy  WorkflowRunsListDataAttributesTriggeredBy `json:"triggered_by"`
-			WorkflowId   string                                    `json:"workflow_id"`
+			ActionItemId  *string                                   `json:"action_item_id"`
+			AlertId       *string                                   `json:"alert_id"`
+			CanceledAt    *string                                   `json:"canceled_at"`
+			CompletedAt   *string                                   `json:"completed_at"`
+			FailedAt      *string                                   `json:"failed_at"`
+			IncidentId    *string                                   `json:"incident_id"`
+			PostMortemId  *string                                   `json:"post_mortem_id"`
+			PulseId       *string                                   `json:"pulse_id"`
+			StartedAt     *string                                   `json:"started_at"`
+			Status        WorkflowRunsListDataAttributesStatus      `json:"status"`
+			StatusMessage *string                                   `json:"status_message"`
+			TriggeredBy   WorkflowRunsListDataAttributesTriggeredBy `json:"triggered_by"`
+			WorkflowId    string                                    `json:"workflow_id"`
 		} `json:"attributes"`
 
 		// Unique ID of the workflow run

@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.89] -- 2024-04-11
+
+- Add `skip_on_failure` and `enabled` to `workflow_task` resources.
+- Add `color` to `workflow_task_send_slack_message` resource.
+
 ## [0.1.88] -- 2024-04-06
 
 - Add `enabled` attribute to worklow tasks.
