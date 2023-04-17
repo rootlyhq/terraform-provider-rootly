@@ -15702,7 +15702,7 @@ type UpdateWorkflowTask struct {
 			// The position of the workflow task
 			Position *float32 `json:"position,omitempty"`
 
-			// Is the task skipped if any failures
+			// Skip workflow task if any failures
 			SkipOnFailure *bool        `json:"skip_on_failure,omitempty"`
 			TaskParams    *interface{} `json:"task_params,omitempty"`
 		} `json:"attributes"`
@@ -16530,7 +16530,7 @@ type WorkflowTask struct {
 	// The position of the workflow task
 	Position float32 `json:"position"`
 
-	// Is the task skipped if any failures
+	// Skip workflow task if any failures
 	SkipOnFailure bool        `json:"skip_on_failure"`
 	TaskParams    interface{} `json:"task_params"`
 
@@ -16554,7 +16554,7 @@ type WorkflowTaskList struct {
 			// The position of the workflow task
 			Position float32 `json:"position"`
 
-			// Is the task skipped if any failures
+			// Skip workflow task if any failures
 			SkipOnFailure bool        `json:"skip_on_failure"`
 			TaskParams    interface{} `json:"task_params"`
 
@@ -16594,7 +16594,7 @@ type WorkflowTaskResponse struct {
 			// The position of the workflow task
 			Position float32 `json:"position"`
 
-			// Is the task skipped if any failures
+			// Skip workflow task if any failures
 			SkipOnFailure bool        `json:"skip_on_failure"`
 			TaskParams    interface{} `json:"task_params"`
 
