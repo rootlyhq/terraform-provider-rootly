@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.90] -- 2024-04-19
+
+- Fix `rootly_workflow_task_trigger_workflow` required attributes.
+
 ## [0.1.89] -- 2024-04-11
 
 - Add `skip_on_failure` and `enabled` to `workflow_task` resources.
