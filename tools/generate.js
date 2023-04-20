@@ -30,7 +30,8 @@ const excluded = [
 	"webhooks_delivery",
 	'audit',
 	'incident_event_functionality',
-	'incident_event_service'
+	'incident_event_service',
+	"user"
 ]
 
 console.log(`Excluding resource from generation:`, excluded)
