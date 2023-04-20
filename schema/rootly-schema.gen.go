@@ -13872,12 +13872,12 @@ type TeamResponseDataType string
 
 // TriggerWorkflowTaskParams defines model for trigger_workflow_task_params.
 type TriggerWorkflowTaskParams struct {
-	CheckWorkflowConditions *bool                          `json:"check_workflow_conditions,omitempty"`
-	Kind                    *TriggerWorkflowTaskParamsKind `json:"kind,omitempty"`
-	Resource                *struct {
+	CheckWorkflowConditions *bool                         `json:"check_workflow_conditions,omitempty"`
+	Kind                    TriggerWorkflowTaskParamsKind `json:"kind"`
+	Resource                struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
-	} `json:"resource,omitempty"`
+	} `json:"resource"`
 	TaskType *TriggerWorkflowTaskParamsTaskType `json:"task_type,omitempty"`
 	Workflow struct {
 		Id   *string `json:"id,omitempty"`

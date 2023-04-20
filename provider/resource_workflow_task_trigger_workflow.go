@@ -69,8 +69,7 @@ func resourceWorkflowTaskTriggerWorkflow() *schema.Resource {
 						"kind": &schema.Schema{
 							Description: "Value must be one of `simple`, `incident`, `post_mortem`, `action_item`, `pulse`, `alert`.",
 							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "simple",
+							Required:    true,
 							ValidateFunc: validation.StringInSlice([]string{
 								"simple",
 								"incident",
@@ -83,7 +82,7 @@ func resourceWorkflowTaskTriggerWorkflow() *schema.Resource {
 						"resource": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. ",
 							Type:        schema.TypeMap,
-							Optional:    true,
+							Required:    true,
 						},
 						"workflow": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. ",
