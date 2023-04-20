@@ -1,11 +1,11 @@
-const inflect = require('./inflect')
+const inflect = require("./inflect");
 
 module.exports = (name, resourceSchema, requiredFields, pathIdField) => {
-	const namePlural = inflect.pluralize(name)
-	const nameCamel = inflect.camelize(name)
-	const nameCamelPlural = inflect.camelize(namePlural)
+  const namePlural = inflect.pluralize(name);
+  const nameCamel = inflect.camelize(name);
+  const nameCamelPlural = inflect.camelize(namePlural);
 
-return `package provider
+  return `package provider
 
 import (
 	"testing"
@@ -32,32 +32,41 @@ resource "rootly_${name}" "test" {
 	${testParams(name, resourceSchema, requiredFields || [])}
 }
 \`
-`
-}
+`;
+};
 
 function testParams(name, schema, required) {
-	return (required).map((key) => {
-		let val = schema.properties[key].enum ? schema.properties[key].enum[0] : "test"
-		switch (schema.properties[key].type) {
-			case "boolean":
-				return `${key} = false`
-			case "string":
-				return key == 'url' ? `	url = "https://rootly.com/dummy"` : `${key} = "${val}"`
-			case "number":
-				return `${key} = 1`
-			case "array":
-				if (schema.properties[key].items.type === "object" && schema.properties[key].items.properties.id) {
-					return `${key} {
+  return required
+    .map((key) => {
+      let val = schema.properties[key].enum
+        ? schema.properties[key].enum[0]
+        : "test";
+      switch (schema.properties[key].type) {
+        case "boolean":
+          return `${key} = false`;
+        case "string":
+          return key == "url"
+            ? `	url = "https://rootly.com/dummy"`
+            : `${key} = "${val}"`;
+        case "number":
+          return `${key} = 1`;
+        case "array":
+          if (
+            schema.properties[key].items.type === "object" &&
+            schema.properties[key].items.properties.id
+          ) {
+            return `${key} {
 						id = "foo"
 						name = "bar"
-					}`
-				}
-				return `${key} = ["foo"]`
-			case "object":
-				return `${key} = {
+					}`;
+          }
+          return `${key} = ["foo"]`;
+        case "object":
+          return `${key} = {
 					id = "foo"
 					name = "bar"
-				}`
-		}
-	}).join('\n')
+				}`;
+      }
+    })
+    .join("\n");
 }

@@ -1,12 +1,15 @@
-const inflect = require('./inflect');
+const inflect = require("./inflect");
 
 module.exports = (name, resourceSchema, pathIdField) => {
-	const namePlural = inflect.pluralize(name)
-	const nameCamel = inflect.camelize(name)
-	const nameCamelPlural = inflect.camelize(namePlural)
-	const strconvImport = pathIdField && resourceSchema.properties[pathIdField].type === 'number' ? `"strconv"` : ''
+  const namePlural = inflect.pluralize(name);
+  const nameCamel = inflect.camelize(name);
+  const nameCamelPlural = inflect.camelize(namePlural);
+  const strconvImport =
+    pathIdField && resourceSchema.properties[pathIdField].type === "number"
+      ? `"strconv"`
+      : "";
 
-return `package client
+  return `package client
 
 import (
 	"reflect"
@@ -21,8 +24,13 @@ type ${nameCamel} struct {
 	${structAttrs(resourceSchema)}
 }
 
-func (c *Client) List${nameCamelPlural}(${listFnParams(nameCamelPlural, pathIdField)}) ([]interface{}, error) {
-	req, err := rootlygo.NewList${nameCamelPlural}Request(${listClientParams(pathIdField)})
+func (c *Client) List${nameCamelPlural}(${listFnParams(
+    nameCamelPlural,
+    pathIdField
+  )}) ([]interface{}, error) {
+	req, err := rootlygo.NewList${nameCamelPlural}Request(${listClientParams(
+    pathIdField
+  )})
 	if err != nil {
 		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}
@@ -46,7 +54,10 @@ func (c *Client) Create${nameCamel}(d *${nameCamel}) (*${nameCamel}, error) {
 		return nil, errors.Errorf("Error marshaling ${name}: %s", err.Error())
 	}
 
-	req, err := rootlygo.NewCreate${nameCamel}RequestWithBody(${createParams(pathIdField, resourceSchema)})
+	req, err := rootlygo.NewCreate${nameCamel}RequestWithBody(${createParams(
+    pathIdField,
+    resourceSchema
+  )})
 	if err != nil {
 		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}
@@ -118,59 +129,77 @@ func (c *Client) Delete${nameCamel}(id string) error {
 
 	return nil
 }
-`}
+`;
+};
 
 function listFnParams(nameCamelPlural, nested) {
-	if (nested) {
-		return `id string, params *rootlygo.List${nameCamelPlural}Params`
-	} else {
-		return `params *rootlygo.List${nameCamelPlural}Params`
-	}
+  if (nested) {
+    return `id string, params *rootlygo.List${nameCamelPlural}Params`;
+  } else {
+    return `params *rootlygo.List${nameCamelPlural}Params`;
+  }
 }
 
 function listClientParams(nested) {
-	if (nested) {
-		return `c.Rootly.Server, id, params`
-	} else {
-		return `c.Rootly.Server, params`
-	}
+  if (nested) {
+    return `c.Rootly.Server, id, params`;
+  } else {
+    return `c.Rootly.Server, params`;
+  }
 }
 
 function createParams(pathIdField, resourceSchema) {
-	if (pathIdField) {
-		const schema = resourceSchema.properties[pathIdField]
-		if (schema.type === "number") {
-			return `c.Rootly.Server, strconv.Itoa(d.${inflect.camelize(pathIdField)}), c.ContentType, buffer`
-		} else {
-			return `c.Rootly.Server, d.${inflect.camelize(pathIdField)}, c.ContentType, buffer`
-		}
-	} else {
-		return `c.Rootly.Server, c.ContentType, buffer`
-	}
+  if (pathIdField) {
+    const schema = resourceSchema.properties[pathIdField];
+    if (schema.type === "number") {
+      return `c.Rootly.Server, strconv.Itoa(d.${inflect.camelize(
+        pathIdField
+      )}), c.ContentType, buffer`;
+    } else {
+      return `c.Rootly.Server, d.${inflect.camelize(
+        pathIdField
+      )}, c.ContentType, buffer`;
+    }
+  } else {
+    return `c.Rootly.Server, c.ContentType, buffer`;
+  }
 }
 
 function structAttr(name, resourceSchema) {
-	const schema = resourceSchema.properties[name]
-	switch (schema.type) {
-		case 'string':
-			return `${inflect.camelize(name)} string \`jsonapi:"attr,${name},omitempty"\``
-		case 'integer':
-		case 'number':
-			return `${inflect.camelize(name)} int \`jsonapi:"attr,${name},omitempty"\``
-		case 'boolean':
-			return `${inflect.camelize(name)} *bool \`jsonapi:"attr,${name},omitempty"\``
-		case 'array':
-			return `${inflect.camelize(name)} []interface{} \`jsonapi:"attr,${name},omitempty"\``
-		case 'object':
-		default:
-			return `${inflect.camelize(name)} map[string]interface{} \`jsonapi:"attr,${name},omitempty"\``
-	}
+  const schema = resourceSchema.properties[name];
+  switch (schema.type) {
+    case "string":
+      return `${inflect.camelize(
+        name
+      )} string \`jsonapi:"attr,${name},omitempty"\``;
+    case "integer":
+    case "number":
+      return `${inflect.camelize(
+        name
+      )} int \`jsonapi:"attr,${name},omitempty"\``;
+    case "boolean":
+      return `${inflect.camelize(
+        name
+      )} *bool \`jsonapi:"attr,${name},omitempty"\``;
+    case "array":
+      return `${inflect.camelize(
+        name
+      )} []interface{} \`jsonapi:"attr,${name},omitempty"\``;
+    case "object":
+    default:
+      return `${inflect.camelize(
+        name
+      )} map[string]interface{} \`jsonapi:"attr,${name},omitempty"\``;
+  }
 }
 
 function structAttrs(resourceSchema) {
-	return Object.keys(resourceSchema.properties).filter((name) => {
-		return name !== 'created_at' && name !== 'updated_at'
-	}).map((name) => {
-		return structAttr(name, resourceSchema)
-	}).join('\n  ')
+  return Object.keys(resourceSchema.properties)
+    .filter((name) => {
+      return name !== "created_at" && name !== "updated_at";
+    })
+    .map((name) => {
+      return structAttr(name, resourceSchema);
+    })
+    .join("\n  ");
 }

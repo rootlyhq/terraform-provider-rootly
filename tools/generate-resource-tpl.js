@@ -1,25 +1,31 @@
-const inflect = require('./inflect');
+const inflect = require("./inflect");
 
 function includeStructure(resourceSchema) {
-	return resourceSchema.properties && resourceSchema.properties.accepts_unordered
+  return (
+    resourceSchema.properties && resourceSchema.properties.accepts_unordered
+  );
 }
 
 function includeTools(resourceSchema) {
-	for (var key in resourceSchema.properties) {
-		if (resourceSchema.properties[key].type === "boolean") {
-			return true;
-		}
-	}
-	return false;
+  for (var key in resourceSchema.properties) {
+    if (resourceSchema.properties[key].type === "boolean") {
+      return true;
+    }
+  }
+  return false;
 }
 
 module.exports = (name, resourceSchema, requiredFields, pathIdField) => {
-	const namePlural = inflect.pluralize(name)
-	const nameCamel = inflect.camelize(name)
-	const structure = includeStructure(resourceSchema) ? `"github.com/hashicorp/terraform-plugin-sdk/v2/helper/structure"` : ""
-	const tools = includeTools(resourceSchema) ? `"github.com/rootlyhq/terraform-provider-rootly/tools"` : ""
+  const namePlural = inflect.pluralize(name);
+  const nameCamel = inflect.camelize(name);
+  const structure = includeStructure(resourceSchema)
+    ? `"github.com/hashicorp/terraform-plugin-sdk/v2/helper/structure"`
+    : "";
+  const tools = includeTools(resourceSchema)
+    ? `"github.com/rootlyhq/terraform-provider-rootly/tools"`
+    : "";
 
-return `package provider
+  return `package provider
 
 import (
 	"context"
@@ -125,114 +131,155 @@ func resource${nameCamel}Delete(ctx context.Context, d *schema.ResourceData, met
 
 	return nil
 }
-`}
+`;
+};
 
 function excludeDateFields(field) {
-	return field !== 'created_at' && field !== 'updated_at'
+  return field !== "created_at" && field !== "updated_at";
 }
 
 function setResourceFields(name, resourceSchema) {
-	return Object.keys(resourceSchema.properties).filter(excludeDateFields).map((field) => {
-		return `d.Set("${field}", item.${inflect.camelize(field)})`
-	}).join('\n  ')
+  return Object.keys(resourceSchema.properties)
+    .filter(excludeDateFields)
+    .map((field) => {
+      return `d.Set("${field}", item.${inflect.camelize(field)})`;
+    })
+    .join("\n  ");
 }
 
 function createResourceFields(name, resourceSchema) {
-	return Object.keys(resourceSchema.properties).filter(excludeDateFields).map((field) => {
-		const schema = resourceSchema.properties[field]
-		if (schema.type === "boolean") {
-			return`  if value, ok := d.GetOkExists("${field}"); ok {
-				s.${inflect.camelize(field)} = tools.Bool(value.(${jsonapiToGoType(schema.type)}))
-			}`
-		} else {
-			return`  if value, ok := d.GetOkExists("${field}"); ok {
+  return Object.keys(resourceSchema.properties)
+    .filter(excludeDateFields)
+    .map((field) => {
+      const schema = resourceSchema.properties[field];
+      if (schema.type === "boolean") {
+        return `  if value, ok := d.GetOkExists("${field}"); ok {
+				s.${inflect.camelize(field)} = tools.Bool(value.(${jsonapiToGoType(
+          schema.type
+        )}))
+			}`;
+      } else {
+        return `  if value, ok := d.GetOkExists("${field}"); ok {
 				s.${inflect.camelize(field)} = value.(${jsonapiToGoType(schema.type)})
-			}`
-		}
-	}).join('\n  ')
+			}`;
+      }
+    })
+    .join("\n  ");
 }
 
 function updateResourceFields(name, resourceSchema) {
-	return Object.keys(resourceSchema.properties).filter(excludeDateFields).map((field) => {
-		const schema = resourceSchema.properties[field]
-		if (schema.type === "boolean") {
-			return`  if d.HasChange("${field}") {
-				s.${inflect.camelize(field)} = tools.Bool(d.Get("${field}").(${jsonapiToGoType(schema.type)}))
-			}`
-		} else {
-			return`  if d.HasChange("${field}") {
-				s.${inflect.camelize(field)} = d.Get("${field}").(${jsonapiToGoType(schema.type)})
-			}`
-		}
-	}).join('\n  ')
+  return Object.keys(resourceSchema.properties)
+    .filter(excludeDateFields)
+    .map((field) => {
+      const schema = resourceSchema.properties[field];
+      if (schema.type === "boolean") {
+        return `  if d.HasChange("${field}") {
+				s.${inflect.camelize(field)} = tools.Bool(d.Get("${field}").(${jsonapiToGoType(
+          schema.type
+        )}))
+			}`;
+      } else {
+        return `  if d.HasChange("${field}") {
+				s.${inflect.camelize(field)} = d.Get("${field}").(${jsonapiToGoType(
+          schema.type
+        )})
+			}`;
+      }
+    })
+    .join("\n  ");
 }
 
 function jsonapiToGoType(type) {
-	switch (type) {
-		case 'string':
-			return 'string'
-		case 'integer':
-		case 'number':
-			return 'int'
-		case 'boolean':
-			return 'bool'
-		case 'array':
-			return '[]interface{}'
-		case 'object':
-			return 'map[string]interface{}'
-		default:
-			return 'interface{}'
-	}
+  switch (type) {
+    case "string":
+      return "string";
+    case "integer":
+    case "number":
+      return "int";
+    case "boolean":
+      return "bool";
+    case "array":
+      return "[]interface{}";
+    case "object":
+      return "map[string]interface{}";
+    default:
+      return "interface{}";
+  }
 }
 
 function schemaFields(resourceSchema, requiredFields, pathIdField) {
-	return Object.keys(resourceSchema.properties).filter(excludeDateFields).map((field) => {
-		return schemaField(field, resourceSchema, requiredFields, pathIdField)
-	}).join('\n')
+  return Object.keys(resourceSchema.properties)
+    .filter(excludeDateFields)
+    .map((field) => {
+      return schemaField(field, resourceSchema, requiredFields, pathIdField);
+    })
+    .join("\n");
 }
 
 function annotatedDescription(schema) {
-	const description = (schema.description || "").replace(/"/g, '\\"')
-	if (schema.enum) {
-		return `${!!description ? `${description}. ` : ''}Value must be one of ${schema.enum.map((val) => `\`${val}\``).join(", ")}.`
-	}
-	if (schema.type === "object" && schema.properties.id && schema.properties.name) {
-		return `Map must contain two fields, \`id\` and \`name\`. ${description}`
-	}
-	if (schema.type === "array" && schema.items && schema.items.enum) {
-		return `${!!description ? `${description}. ` : ''}Value must be one of ${schema.items.enum.map((val) => `\`${val}\``).join(", ")}.`
-	}
-	return description
+  const description = (schema.description || "").replace(/"/g, '\\"');
+  if (schema.enum) {
+    return `${
+      !!description ? `${description}. ` : ""
+    }Value must be one of ${schema.enum
+      .map((val) => `\`${val}\``)
+      .join(", ")}.`;
+  }
+  if (
+    schema.type === "object" &&
+    schema.properties.id &&
+    schema.properties.name
+  ) {
+    return `Map must contain two fields, \`id\` and \`name\`. ${description}`;
+  }
+  if (schema.type === "array" && schema.items && schema.items.enum) {
+    return `${
+      !!description ? `${description}. ` : ""
+    }Value must be one of ${schema.items.enum
+      .map((val) => `\`${val}\``)
+      .join(", ")}.`;
+  }
+  return description;
 }
 
 function schemaField(name, resourceSchema, requiredFields, pathIdField) {
-	const schema = resourceSchema.properties[name]
-	const optional = (requiredFields || []).indexOf(name) === -1 || schema.enum ? "true" : "false"
-	const required = (requiredFields || []).indexOf(name) === -1 || schema.enum ? "false" : "true"
-	let defaultValue;
-	if (schema.default) {
-		defaultValue = `Default: "${schema.default}"`
-	} else if (schema.enum && schema.enum.length > 0) {
-		defaultValue = `Default: "${schema.enum[0]}"`
-	} else {
-		defaultValue = `Computed: ${optional}`
-	}
-	const description = annotatedDescription(schema)
-	const forceNew = name === pathIdField || schema.write_only ? "true" : "false"
-	const skipDiff = schema.write_only ? `
+  const schema = resourceSchema.properties[name];
+  const optional =
+    (requiredFields || []).indexOf(name) === -1 || schema.enum
+      ? "true"
+      : "false";
+  const required =
+    (requiredFields || []).indexOf(name) === -1 || schema.enum
+      ? "false"
+      : "true";
+  let defaultValue;
+  if (schema.default) {
+    defaultValue = `Default: "${schema.default}"`;
+  } else if (schema.enum && schema.enum.length > 0) {
+    defaultValue = `Default: "${schema.enum[0]}"`;
+  } else {
+    defaultValue = `Computed: ${optional}`;
+  }
+  const description = annotatedDescription(schema);
+  const forceNew = name === pathIdField || schema.write_only ? "true" : "false";
+  const skipDiff = schema.write_only
+    ? `
 		DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 			return len(old) != 0
 		},
-	` : ''
-	const stateFunc = schema.accepts_unordered ? `
+	`
+    : "";
+  const stateFunc = schema.accepts_unordered
+    ? `
 		StateFunc: func(v interface{}) string {
 			json, _ := structure.NormalizeJsonString(v)
 			return json
 		},
-	` : ''
-	switch (schema.type) {
-		case 'string':
-			return `
+	`
+    : "";
+  switch (schema.type) {
+    case "string":
+      return `
 			"${name}": &schema.Schema {
 				Type: schema.TypeString,
 				${defaultValue},
@@ -242,10 +289,10 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 				Description: "${description}",
 				${skipDiff}
 			},
-			`
-		case 'integer':
-		case 'number':
-			return `
+			`;
+    case "integer":
+    case "number":
+      return `
 			"${name}": &schema.Schema {
 				Type: schema.TypeInt,
 				Computed: ${optional},
@@ -255,19 +302,19 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 				Description: "${description}",
 				${skipDiff}
 			},
-			`
-		case 'boolean':
-			if (name === "enabled") {
-				return `
+			`;
+    case "boolean":
+      if (name === "enabled") {
+        return `
 				"${name}": &schema.Schema {
 					Type: schema.TypeBool,
 					Default: true,
 					Optional: true,
 					${skipDiff}
 				},
-				`
-			}
-			return `
+				`;
+      }
+      return `
 			"${name}": &schema.Schema {
 				Type: schema.TypeBool,
 				Computed: ${optional},
@@ -276,10 +323,10 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 				Description: "${description}",
 				${skipDiff}
 			},
-			`
-		case 'array':
-			if (schema.items && schema.items.type === "object") {
-				return `
+			`;
+    case "array":
+      if (schema.items && schema.items.type === "object") {
+        return `
 				"${name}": &schema.Schema {
 					Type: schema.TypeList,
 					Computed: ${optional},
@@ -300,9 +347,9 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 					},
 					${stateFunc}
 				},
-				`
-			} else if (schema.items && schema.items.type === "string") {
-				return `
+				`;
+      } else if (schema.items && schema.items.type === "string") {
+        return `
 				"${name}": &schema.Schema {
 					Type: schema.TypeList,
 					Elem: &schema.Schema {
@@ -314,9 +361,9 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 					Description: "${description}",
 					${stateFunc}
 				},
-				`
-			} else if (schema.items && schema.items.type === "number") {
-				return `
+				`;
+      } else if (schema.items && schema.items.type === "number") {
+        return `
 				"${name}": &schema.Schema {
 					Type: schema.TypeList,
 					Elem: &schema.Schema {
@@ -328,9 +375,9 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 					Description: "${description}",
 					${stateFunc}
 				},
-				`
-			} else if (schema.items && schema.items.type === "integer") {
-				return `
+				`;
+      } else if (schema.items && schema.items.type === "integer") {
+        return `
 				"${name}": &schema.Schema {
 					Type: schema.TypeList,
 					Elem: &schema.Schema {
@@ -342,14 +389,14 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 					Description: "${description}",
 					${stateFunc}
 				},
-				`
-			} else {
-				console.log(`unsupported array field schema:`, name, schema)
-				return ''
-			}
-		case 'object':
-		default:
-			return `
+				`;
+      } else {
+        console.log(`unsupported array field schema:`, name, schema);
+        return "";
+      }
+    case "object":
+    default:
+      return `
 			"${name}": &schema.Schema {
 				Type: schema.TypeMap,
 				Elem: &schema.Schema {
@@ -360,6 +407,6 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 				Optional: ${optional},
 				Description: "${description}",
 			},
-			`
-	}
+			`;
+  }
 }

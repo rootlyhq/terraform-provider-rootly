@@ -1,7 +1,7 @@
-const inflect = require('./inflect')
+const inflect = require("./inflect");
 
 module.exports = (resources, taskResources, dataSources) => {
-return `package provider
+  return `package provider
 
 import (
 	"context"
@@ -47,9 +47,11 @@ func New(version string) func() *schema.Provider {
 				},
 			},
 			DataSourcesMap: map[string]*schema.Resource{
-${dataSources.map((name) => {
-	return `				"rootly_${name}": dataSource${inflect.camelize(name)}(),`
-}).join('\n')}
+${dataSources
+  .map((name) => {
+    return `				"rootly_${name}": dataSource${inflect.camelize(name)}(),`;
+  })
+  .join("\n")}
 				"rootly_custom_field": dataSourceCustomField(),
 				"rootly_custom_field_option": dataSourceCustomFieldOption(),
 				"rootly_causes": dataSourceCauses(),
@@ -65,9 +67,11 @@ ${dataSources.map((name) => {
 				"rootly_services": dataSourceServices(),
 			},
 			ResourcesMap: map[string]*schema.Resource{
-${resources.map((name) => {
-	return `				"rootly_${name}": resource${inflect.camelize(name)}(),`
-}).join('\n')}
+${resources
+  .map((name) => {
+    return `				"rootly_${name}": resource${inflect.camelize(name)}(),`;
+  })
+  .join("\n")}
 				"rootly_custom_field": resourceCustomField(),
 				"rootly_custom_field_option": resourceCustomFieldOption(),
 				"rootly_dashboard": resourceDashboard(),
@@ -78,9 +82,13 @@ ${resources.map((name) => {
 				"rootly_workflow_pulse": resourceWorkflowPulse(),
 				"rootly_workflow_simple": resourceWorkflowSimple(),
 				"rootly_workflow_post_mortem": resourceWorkflowPostMortem(),
-${taskResources.map((name) => {
-	return `				"rootly_workflow_task_${name}": resourceWorkflowTask${inflect.camelize(name)}(),`
-}).join('\n')}
+${taskResources
+  .map((name) => {
+    return `				"rootly_workflow_task_${name}": resourceWorkflowTask${inflect.camelize(
+      name
+    )}(),`;
+  })
+  .join("\n")}
 			},
 		}
 
@@ -116,5 +124,5 @@ func configure(version string, p *schema.Provider) func(context.Context, *schema
 func RootlyUserAgent(version string) string {
 	return fmt.Sprintf("Rootly Terraform Provider/%s (+https://www.terraform.io) Terraform Plugin SDK/%s", version, meta.SDKVersionString())
 }
-`
-}
+`;
+};

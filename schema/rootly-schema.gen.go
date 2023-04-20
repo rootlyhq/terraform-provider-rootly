@@ -16614,6 +16614,23 @@ type WorkflowTaskResponse struct {
 // WorkflowTaskResponseDataType defines model for WorkflowTaskResponse.Data.Type.
 type WorkflowTaskResponseDataType string
 
+// GetAllIncidentActionItemsParams defines parameters for GetAllIncidentActionItems.
+type GetAllIncidentActionItemsParams struct {
+	Include                   *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber                *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize                  *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterKind                *string `form:"filter[kind],omitempty" json:"filter[kind],omitempty"`
+	FilterPriority            *string `form:"filter[priority],omitempty" json:"filter[priority],omitempty"`
+	FilterIncidentStatus      *string `form:"filter[incident_status],omitempty" json:"filter[incident_status],omitempty"`
+	FilterIncidentCreatedAtGt *string `form:"filter[incident_created_at][gt],omitempty" json:"filter[incident_created_at][gt],omitempty"`
+	FilterIncidentCreatedAtLt *string `form:"filter[incident_created_at][lt],omitempty" json:"filter[incident_created_at][lt],omitempty"`
+	FilterDueDateGt           *string `form:"filter[due_date][gt],omitempty" json:"filter[due_date][gt],omitempty"`
+	FilterDueDateLt           *string `form:"filter[due_date][lt],omitempty" json:"filter[due_date][lt],omitempty"`
+	FilterCreatedAtGt         *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtLt         *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	Sort                      *string `form:"sort,omitempty" json:"sort,omitempty"`
+}
+
 // ListAlertsParams defines parameters for ListAlerts.
 type ListAlertsParams struct {
 	Include    *string `form:"include,omitempty" json:"include,omitempty"`
@@ -17030,6 +17047,12 @@ type ListTeamsParams struct {
 	Sort              *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
+// ListUsersParams defines parameters for ListUsers.
+type ListUsersParams struct {
+	PageNumber *int `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int `form:"page[size],omitempty" json:"page[size],omitempty"`
+}
+
 // ListWebhooksEndpointsParams defines parameters for ListWebhooksEndpoints.
 type ListWebhooksEndpointsParams struct {
 	Include    *string `form:"include,omitempty" json:"include,omitempty"`
@@ -17170,6 +17193,9 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 
 // The interface specification for the client above.
 type ClientInterface interface {
+	// GetAllIncidentActionItems request
+	GetAllIncidentActionItems(ctx context.Context, params *GetAllIncidentActionItemsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// DeleteIncidentActionItem request
 	DeleteIncidentActionItem(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -17716,8 +17742,8 @@ type ClientInterface interface {
 	// UpdateStatusPageTemplate request with any body
 	UpdateStatusPageTemplateWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetUsers request
-	GetUsers(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// ListUsers request
+	ListUsers(ctx context.Context, params *ListUsersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetCurrentUser request
 	GetCurrentUser(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -17832,6 +17858,18 @@ type ClientInterface interface {
 
 	// CreateWorkflowTask request with any body
 	CreateWorkflowTaskWithBody(ctx context.Context, workflowId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+}
+
+func (c *Client) GetAllIncidentActionItems(ctx context.Context, params *GetAllIncidentActionItemsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAllIncidentActionItemsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
 }
 
 func (c *Client) DeleteIncidentActionItem(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -20018,8 +20056,8 @@ func (c *Client) UpdateStatusPageTemplateWithBody(ctx context.Context, id string
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetUsers(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetUsersRequest(c.Server)
+func (c *Client) ListUsers(ctx context.Context, params *ListUsersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListUsersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -20484,6 +20522,245 @@ func (c *Client) CreateWorkflowTaskWithBody(ctx context.Context, workflowId stri
 		return nil, err
 	}
 	return c.Client.Do(req)
+}
+
+// NewGetAllIncidentActionItemsRequest generates requests for GetAllIncidentActionItems
+func NewGetAllIncidentActionItemsRequest(server string, params *GetAllIncidentActionItemsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/action_items")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Include != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterKind != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[kind]", runtime.ParamLocationQuery, *params.FilterKind); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterPriority != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[priority]", runtime.ParamLocationQuery, *params.FilterPriority); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterIncidentStatus != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[incident_status]", runtime.ParamLocationQuery, *params.FilterIncidentStatus); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterIncidentCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[incident_created_at][gt]", runtime.ParamLocationQuery, *params.FilterIncidentCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterIncidentCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[incident_created_at][lt]", runtime.ParamLocationQuery, *params.FilterIncidentCreatedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterDueDateGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[due_date][gt]", runtime.ParamLocationQuery, *params.FilterDueDateGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterDueDateLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[due_date][lt]", runtime.ParamLocationQuery, *params.FilterDueDateLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.Sort != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
 }
 
 // NewDeleteIncidentActionItemRequest generates requests for DeleteIncidentActionItem
@@ -30664,8 +30941,8 @@ func NewUpdateStatusPageTemplateRequestWithBody(server string, id string, conten
 	return req, nil
 }
 
-// NewGetUsersRequest generates requests for GetUsers
-func NewGetUsersRequest(server string) (*http.Request, error) {
+// NewListUsersRequest generates requests for ListUsers
+func NewListUsersRequest(server string, params *ListUsersParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -30682,6 +30959,42 @@ func NewGetUsersRequest(server string) (*http.Request, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	queryValues := queryURL.Query()
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
 	if err != nil {
@@ -32595,6 +32908,9 @@ func WithBaseURL(baseURL string) ClientOption {
 
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
+	// GetAllIncidentActionItems request
+	GetAllIncidentActionItemsWithResponse(ctx context.Context, params *GetAllIncidentActionItemsParams, reqEditors ...RequestEditorFn) (*GetAllIncidentActionItemsResponse, error)
+
 	// DeleteIncidentActionItem request
 	DeleteIncidentActionItemWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentActionItemResponse, error)
 
@@ -33141,8 +33457,8 @@ type ClientWithResponsesInterface interface {
 	// UpdateStatusPageTemplate request with any body
 	UpdateStatusPageTemplateWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateStatusPageTemplateResponse, error)
 
-	// GetUsers request
-	GetUsersWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetUsersResponse, error)
+	// ListUsers request
+	ListUsersWithResponse(ctx context.Context, params *ListUsersParams, reqEditors ...RequestEditorFn) (*ListUsersResponse, error)
 
 	// GetCurrentUser request
 	GetCurrentUserWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetCurrentUserResponse, error)
@@ -33257,6 +33573,27 @@ type ClientWithResponsesInterface interface {
 
 	// CreateWorkflowTask request with any body
 	CreateWorkflowTaskWithBodyWithResponse(ctx context.Context, workflowId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateWorkflowTaskResponse, error)
+}
+
+type GetAllIncidentActionItemsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r GetAllIncidentActionItemsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetAllIncidentActionItemsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
 }
 
 type DeleteIncidentActionItemResponse struct {
@@ -37081,13 +37418,13 @@ func (r UpdateStatusPageTemplateResponse) StatusCode() int {
 	return 0
 }
 
-type GetUsersResponse struct {
+type ListUsersResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 }
 
 // Status returns HTTPResponse.Status
-func (r GetUsersResponse) Status() string {
+func (r ListUsersResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -37095,7 +37432,7 @@ func (r GetUsersResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetUsersResponse) StatusCode() int {
+func (r ListUsersResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -37898,6 +38235,15 @@ func (r CreateWorkflowTaskResponse) StatusCode() int {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
+}
+
+// GetAllIncidentActionItemsWithResponse request returning *GetAllIncidentActionItemsResponse
+func (c *ClientWithResponses) GetAllIncidentActionItemsWithResponse(ctx context.Context, params *GetAllIncidentActionItemsParams, reqEditors ...RequestEditorFn) (*GetAllIncidentActionItemsResponse, error) {
+	rsp, err := c.GetAllIncidentActionItems(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetAllIncidentActionItemsResponse(rsp)
 }
 
 // DeleteIncidentActionItemWithResponse request returning *DeleteIncidentActionItemResponse
@@ -39538,13 +39884,13 @@ func (c *ClientWithResponses) UpdateStatusPageTemplateWithBodyWithResponse(ctx c
 	return ParseUpdateStatusPageTemplateResponse(rsp)
 }
 
-// GetUsersWithResponse request returning *GetUsersResponse
-func (c *ClientWithResponses) GetUsersWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetUsersResponse, error) {
-	rsp, err := c.GetUsers(ctx, reqEditors...)
+// ListUsersWithResponse request returning *ListUsersResponse
+func (c *ClientWithResponses) ListUsersWithResponse(ctx context.Context, params *ListUsersParams, reqEditors ...RequestEditorFn) (*ListUsersResponse, error) {
+	rsp, err := c.ListUsers(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetUsersResponse(rsp)
+	return ParseListUsersResponse(rsp)
 }
 
 // GetCurrentUserWithResponse request returning *GetCurrentUserResponse
@@ -39887,6 +40233,22 @@ func (c *ClientWithResponses) CreateWorkflowTaskWithBodyWithResponse(ctx context
 		return nil, err
 	}
 	return ParseCreateWorkflowTaskResponse(rsp)
+}
+
+// ParseGetAllIncidentActionItemsResponse parses an HTTP response from a GetAllIncidentActionItemsWithResponse call
+func ParseGetAllIncidentActionItemsResponse(rsp *http.Response) (*GetAllIncidentActionItemsResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetAllIncidentActionItemsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
 }
 
 // ParseDeleteIncidentActionItemResponse parses an HTTP response from a DeleteIncidentActionItemWithResponse call
@@ -42801,15 +43163,15 @@ func ParseUpdateStatusPageTemplateResponse(rsp *http.Response) (*UpdateStatusPag
 	return response, nil
 }
 
-// ParseGetUsersResponse parses an HTTP response from a GetUsersWithResponse call
-func ParseGetUsersResponse(rsp *http.Response) (*GetUsersResponse, error) {
+// ParseListUsersResponse parses an HTTP response from a ListUsersWithResponse call
+func ParseListUsersResponse(rsp *http.Response) (*ListUsersResponse, error) {
 	bodyBytes, err := ioutil.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetUsersResponse{
+	response := &ListUsersResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
