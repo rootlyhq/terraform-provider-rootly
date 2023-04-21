@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.91] -- 2024-04-20
+
+- Fix `incident_role_ids` typo.
+
 ## [0.1.90] -- 2024-04-19
 
 - Fix `rootly_workflow_task_trigger_workflow` required attributes.

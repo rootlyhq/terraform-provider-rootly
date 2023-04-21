@@ -11444,12 +11444,12 @@ type NewWorkflow struct {
 			CommandFeedbackEnabled *bool `json:"command_feedback_enabled"`
 
 			// The description of the workflow
-			Description      *string   `json:"description"`
-			Enabled          *bool     `json:"enabled,omitempty"`
-			EnvironmentIds   *[]string `json:"environment_ids,omitempty"`
-			GroupIds         *[]string `json:"group_ids,omitempty"`
-			IncidentRolesIds *[]string `json:"incident_roles_ids,omitempty"`
-			IncidentTypeIds  *[]string `json:"incident_type_ids,omitempty"`
+			Description     *string   `json:"description"`
+			Enabled         *bool     `json:"enabled,omitempty"`
+			EnvironmentIds  *[]string `json:"environment_ids,omitempty"`
+			GroupIds        *[]string `json:"group_ids,omitempty"`
+			IncidentRoleIds *[]string `json:"incident_role_ids,omitempty"`
+			IncidentTypeIds *[]string `json:"incident_type_ids,omitempty"`
 
 			// The title of the workflow
 			Name string `json:"name"`
@@ -15592,12 +15592,12 @@ type UpdateWorkflow struct {
 			Command *string `json:"command"`
 
 			// The description of the workflow
-			Description      *string   `json:"description"`
-			Enabled          *bool     `json:"enabled,omitempty"`
-			EnvironmentIds   *[]string `json:"environment_ids,omitempty"`
-			GroupIds         *[]string `json:"group_ids,omitempty"`
-			IncidentRolesIds *[]string `json:"incident_roles_ids,omitempty"`
-			IncidentTypeIds  *[]string `json:"incident_type_ids,omitempty"`
+			Description     *string   `json:"description"`
+			Enabled         *bool     `json:"enabled,omitempty"`
+			EnvironmentIds  *[]string `json:"environment_ids,omitempty"`
+			GroupIds        *[]string `json:"group_ids,omitempty"`
+			IncidentRoleIds *[]string `json:"incident_role_ids,omitempty"`
+			IncidentTypeIds *[]string `json:"incident_type_ids,omitempty"`
 
 			// The title of the workflow
 			Name *string `json:"name,omitempty"`
@@ -16011,12 +16011,12 @@ type Workflow struct {
 	CreatedAt string `json:"created_at"`
 
 	// The description of the workflow
-	Description      *string   `json:"description"`
-	Enabled          *bool     `json:"enabled,omitempty"`
-	EnvironmentIds   *[]string `json:"environment_ids,omitempty"`
-	GroupIds         *[]string `json:"group_ids,omitempty"`
-	IncidentRolesIds *[]string `json:"incident_roles_ids,omitempty"`
-	IncidentTypeIds  *[]string `json:"incident_type_ids,omitempty"`
+	Description     *string   `json:"description"`
+	Enabled         *bool     `json:"enabled,omitempty"`
+	EnvironmentIds  *[]string `json:"environment_ids,omitempty"`
+	GroupIds        *[]string `json:"group_ids,omitempty"`
+	IncidentRoleIds *[]string `json:"incident_role_ids,omitempty"`
+	IncidentTypeIds *[]string `json:"incident_type_ids,omitempty"`
 
 	// The title of the workflow
 	Name string `json:"name"`
@@ -16313,12 +16313,12 @@ type WorkflowList struct {
 			CreatedAt string `json:"created_at"`
 
 			// The description of the workflow
-			Description      *string   `json:"description"`
-			Enabled          *bool     `json:"enabled,omitempty"`
-			EnvironmentIds   *[]string `json:"environment_ids,omitempty"`
-			GroupIds         *[]string `json:"group_ids,omitempty"`
-			IncidentRolesIds *[]string `json:"incident_roles_ids,omitempty"`
-			IncidentTypeIds  *[]string `json:"incident_type_ids,omitempty"`
+			Description     *string   `json:"description"`
+			Enabled         *bool     `json:"enabled,omitempty"`
+			EnvironmentIds  *[]string `json:"environment_ids,omitempty"`
+			GroupIds        *[]string `json:"group_ids,omitempty"`
+			IncidentRoleIds *[]string `json:"incident_role_ids,omitempty"`
+			IncidentTypeIds *[]string `json:"incident_type_ids,omitempty"`
 
 			// The title of the workflow
 			Name string `json:"name"`
@@ -16376,12 +16376,12 @@ type WorkflowResponse struct {
 			CreatedAt string `json:"created_at"`
 
 			// The description of the workflow
-			Description      *string   `json:"description"`
-			Enabled          *bool     `json:"enabled,omitempty"`
-			EnvironmentIds   *[]string `json:"environment_ids,omitempty"`
-			GroupIds         *[]string `json:"group_ids,omitempty"`
-			IncidentRolesIds *[]string `json:"incident_roles_ids,omitempty"`
-			IncidentTypeIds  *[]string `json:"incident_type_ids,omitempty"`
+			Description     *string   `json:"description"`
+			Enabled         *bool     `json:"enabled,omitempty"`
+			EnvironmentIds  *[]string `json:"environment_ids,omitempty"`
+			GroupIds        *[]string `json:"group_ids,omitempty"`
+			IncidentRoleIds *[]string `json:"incident_role_ids,omitempty"`
+			IncidentTypeIds *[]string `json:"incident_type_ids,omitempty"`
 
 			// The title of the workflow
 			Name string `json:"name"`
@@ -16614,8 +16614,8 @@ type WorkflowTaskResponse struct {
 // WorkflowTaskResponseDataType defines model for WorkflowTaskResponse.Data.Type.
 type WorkflowTaskResponseDataType string
 
-// GetAllIncidentActionItemsParams defines parameters for GetAllIncidentActionItems.
-type GetAllIncidentActionItemsParams struct {
+// ListAllIncidentActionItemsParams defines parameters for ListAllIncidentActionItems.
+type ListAllIncidentActionItemsParams struct {
 	Include                   *string `form:"include,omitempty" json:"include,omitempty"`
 	PageNumber                *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize                  *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
@@ -17193,8 +17193,8 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 
 // The interface specification for the client above.
 type ClientInterface interface {
-	// GetAllIncidentActionItems request
-	GetAllIncidentActionItems(ctx context.Context, params *GetAllIncidentActionItemsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// ListAllIncidentActionItems request
+	ListAllIncidentActionItems(ctx context.Context, params *ListAllIncidentActionItemsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteIncidentActionItem request
 	DeleteIncidentActionItem(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -17860,8 +17860,8 @@ type ClientInterface interface {
 	CreateWorkflowTaskWithBody(ctx context.Context, workflowId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
-func (c *Client) GetAllIncidentActionItems(ctx context.Context, params *GetAllIncidentActionItemsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetAllIncidentActionItemsRequest(c.Server, params)
+func (c *Client) ListAllIncidentActionItems(ctx context.Context, params *ListAllIncidentActionItemsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListAllIncidentActionItemsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -20524,8 +20524,8 @@ func (c *Client) CreateWorkflowTaskWithBody(ctx context.Context, workflowId stri
 	return c.Client.Do(req)
 }
 
-// NewGetAllIncidentActionItemsRequest generates requests for GetAllIncidentActionItems
-func NewGetAllIncidentActionItemsRequest(server string, params *GetAllIncidentActionItemsParams) (*http.Request, error) {
+// NewListAllIncidentActionItemsRequest generates requests for ListAllIncidentActionItems
+func NewListAllIncidentActionItemsRequest(server string, params *ListAllIncidentActionItemsParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -32908,8 +32908,8 @@ func WithBaseURL(baseURL string) ClientOption {
 
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
-	// GetAllIncidentActionItems request
-	GetAllIncidentActionItemsWithResponse(ctx context.Context, params *GetAllIncidentActionItemsParams, reqEditors ...RequestEditorFn) (*GetAllIncidentActionItemsResponse, error)
+	// ListAllIncidentActionItems request
+	ListAllIncidentActionItemsWithResponse(ctx context.Context, params *ListAllIncidentActionItemsParams, reqEditors ...RequestEditorFn) (*ListAllIncidentActionItemsResponse, error)
 
 	// DeleteIncidentActionItem request
 	DeleteIncidentActionItemWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentActionItemResponse, error)
@@ -33575,13 +33575,13 @@ type ClientWithResponsesInterface interface {
 	CreateWorkflowTaskWithBodyWithResponse(ctx context.Context, workflowId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateWorkflowTaskResponse, error)
 }
 
-type GetAllIncidentActionItemsResponse struct {
+type ListAllIncidentActionItemsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 }
 
 // Status returns HTTPResponse.Status
-func (r GetAllIncidentActionItemsResponse) Status() string {
+func (r ListAllIncidentActionItemsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -33589,7 +33589,7 @@ func (r GetAllIncidentActionItemsResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetAllIncidentActionItemsResponse) StatusCode() int {
+func (r ListAllIncidentActionItemsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -38237,13 +38237,13 @@ func (r CreateWorkflowTaskResponse) StatusCode() int {
 	return 0
 }
 
-// GetAllIncidentActionItemsWithResponse request returning *GetAllIncidentActionItemsResponse
-func (c *ClientWithResponses) GetAllIncidentActionItemsWithResponse(ctx context.Context, params *GetAllIncidentActionItemsParams, reqEditors ...RequestEditorFn) (*GetAllIncidentActionItemsResponse, error) {
-	rsp, err := c.GetAllIncidentActionItems(ctx, params, reqEditors...)
+// ListAllIncidentActionItemsWithResponse request returning *ListAllIncidentActionItemsResponse
+func (c *ClientWithResponses) ListAllIncidentActionItemsWithResponse(ctx context.Context, params *ListAllIncidentActionItemsParams, reqEditors ...RequestEditorFn) (*ListAllIncidentActionItemsResponse, error) {
+	rsp, err := c.ListAllIncidentActionItems(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetAllIncidentActionItemsResponse(rsp)
+	return ParseListAllIncidentActionItemsResponse(rsp)
 }
 
 // DeleteIncidentActionItemWithResponse request returning *DeleteIncidentActionItemResponse
@@ -40235,15 +40235,15 @@ func (c *ClientWithResponses) CreateWorkflowTaskWithBodyWithResponse(ctx context
 	return ParseCreateWorkflowTaskResponse(rsp)
 }
 
-// ParseGetAllIncidentActionItemsResponse parses an HTTP response from a GetAllIncidentActionItemsWithResponse call
-func ParseGetAllIncidentActionItemsResponse(rsp *http.Response) (*GetAllIncidentActionItemsResponse, error) {
+// ParseListAllIncidentActionItemsResponse parses an HTTP response from a ListAllIncidentActionItemsWithResponse call
+func ParseListAllIncidentActionItemsResponse(rsp *http.Response) (*ListAllIncidentActionItemsResponse, error) {
 	bodyBytes, err := ioutil.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetAllIncidentActionItemsResponse{
+	response := &ListAllIncidentActionItemsResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

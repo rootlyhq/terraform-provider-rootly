@@ -166,7 +166,7 @@ func resourceWorkflowSimple() *schema.Resource {
 				Description: "",
 			},
 
-			"incident_roles_ids": &schema.Schema{
+			"incident_role_ids": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
@@ -251,8 +251,8 @@ func resourceWorkflowSimpleCreate(ctx context.Context, d *schema.ResourceData, m
 	if value, ok := d.GetOkExists("incident_type_ids"); ok {
 		s.IncidentTypeIds = value.([]interface{})
 	}
-	if value, ok := d.GetOkExists("incident_roles_ids"); ok {
-		s.IncidentRolesIds = value.([]interface{})
+	if value, ok := d.GetOkExists("incident_role_ids"); ok {
+		s.IncidentRoleIds = value.([]interface{})
 	}
 	if value, ok := d.GetOkExists("service_ids"); ok {
 		s.ServiceIds = value.([]interface{})
@@ -307,7 +307,7 @@ func resourceWorkflowSimpleRead(ctx context.Context, d *schema.ResourceData, met
 	d.Set("environment_ids", item.EnvironmentIds)
 	d.Set("severity_ids", item.SeverityIds)
 	d.Set("incident_type_ids", item.IncidentTypeIds)
-	d.Set("incident_roles_ids", item.IncidentRolesIds)
+	d.Set("incident_role_ids", item.IncidentRoleIds)
 	d.Set("service_ids", item.ServiceIds)
 	d.Set("group_ids", item.GroupIds)
 
@@ -366,8 +366,8 @@ func resourceWorkflowSimpleUpdate(ctx context.Context, d *schema.ResourceData, m
 	if d.HasChange("incident_type_ids") {
 		s.IncidentTypeIds = d.Get("incident_type_ids").([]interface{})
 	}
-	if d.HasChange("incident_roles_ids") {
-		s.IncidentRolesIds = d.Get("incident_roles_ids").([]interface{})
+	if d.HasChange("incident_role_ids") {
+		s.IncidentRoleIds = d.Get("incident_role_ids").([]interface{})
 	}
 	if d.HasChange("service_ids") {
 		s.ServiceIds = d.Get("service_ids").([]interface{})
