@@ -59,11 +59,11 @@ resource "rootly_workflow_alert" "my-workflow" {
 Optional:
 
 - `alert_condition` (String) Value must be one off `ALL`, `ANY`, `NONE`.
-- `alert_condition_label` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
+- `alert_condition_label` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `alert_condition_label_use_regexp` (Boolean)
-- `alert_condition_payload` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
+- `alert_condition_payload` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `alert_condition_payload_use_regexp` (Boolean)
-- `alert_condition_source` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `NONE`, `SET`, `UNSET`.
+- `alert_condition_source` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `alert_condition_source_use_regexp` (Boolean)
 - `alert_labels` (List of String)
 - `alert_payload` (List of String)

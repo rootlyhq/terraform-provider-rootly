@@ -1,112 +1,116 @@
 # Changelog
 
-## [0.1.91] -- 2024-04-20
+## [0.1.92] -- 2023-04-20
+
+- Add `CONTAINS_NONE` to workflows conditions.
+
+## [0.1.91] -- 2023-04-20
 
 - Fix `incident_role_ids` typo.
 
-## [0.1.90] -- 2024-04-19
+## [0.1.90] -- 2023-04-19
 
 - Fix `rootly_workflow_task_trigger_workflow` required attributes.
 
-## [0.1.89] -- 2024-04-11
+## [0.1.89] -- 2023-04-11
 
 - Add `skip_on_failure` and `enabled` to `workflow_task` resources.
 - Add `color` to `workflow_task_send_slack_message` resource.
 
-## [0.1.88] -- 2024-04-06
+## [0.1.88] -- 2023-04-06
 
 - Add `enabled` attribute to worklow tasks.
 
-## [0.1.87] -- 2024-04-06
+## [0.1.87] -- 2023-04-06
 
 - Add `notes` attribute to `rootly_workflow_task_create_asana_subtask` resource.
 
-## [0.1.86] -- 2024-04-04
+## [0.1.86] -- 2023-04-04
 
 - Add `rootly_workflow_task_update_google_docs_page`, `rootly_workflow_task_create_google_docs_permissions`, `rootly_workflow_task_remove_google_docs_permissions` resources.
 - Add `subscribers_updated`, `subscribers_added`, `subscribers_removed`, `user_left_slack_channel` workflow triggers.
 
-## [0.1.85] -- 2024-03-30
+## [0.1.85] -- 2023-03-30
 
 - Add `rootly_workflow_task_update_action_item` resource.
 
-## [0.1.84] -- 2024-03-28
+## [0.1.84] -- 2023-03-28
 
 - Add `mark_post_mortem_as_published` attribute to `create_dropbox_paper_page_task`, `create_google_docs_page`, `create_confluence_page`, `create_datadog_notebook`, `create_notion_page` resources.
 
-## [0.1.83] -- 2024-03-27
+## [0.1.83] -- 2023-03-27
 
 - Add `status` to `services` and `functionalities` resources.
 - Add `custom_fields_mapping` attributes to `zendesk` workflow resources.
 - Fix defaulted values for `resources`.
 
-## [0.1.82] -- 2024-03-17
+## [0.1.82] -- 2023-03-17
 
 - Add `normal_sub` and `test_sub` incident kinds.
 - Add `hashicorp_vault_mount`, `hashicorp_vault_mount`, `hashicorp_vault_mount` attributes to secret resource.
 - Add `incident_role_id` to `AddActionItemTaskParams`.
 
-## [0.1.81] -- 2024-03-13
+## [0.1.81] -- 2023-03-13
 
 - Add `service` to `workflow_task_invite_to_slack_channel` task.
 
-## [0.1.80] -- 2024-03-03
+## [0.1.80] -- 2023-03-03
 
 - Add `dependency_direction` & `dependent_task_ids` attributes to asana tasks resources.
 
-## [0.1.79] -- 2024-03-01
+## [0.1.79] -- 2023-03-01
 
 - Add `position` attributes to multiple resources.
 
-## [0.1.78] -- 2024-03-01
+## [0.1.78] -- 2023-03-01
 
 - Add `optional` and `enabled` attributes to `incident_roles` resource.
 
-## [0.1.77] -- 2024-02-28
+## [0.1.77] -- 2023-02-28
 
 - Rename `Postmortem` to `Retrospective` in our documentation.
 - Add `check_workflow_conditions` to `workflow_task_trigger_workflow` resource.
 
-## [0.1.76] -- 2024-02-28
+## [0.1.76] -- 2023-02-28
 
 - Add `incident_roles_ids` & `incident_condition_incident_roles` to `resource_workflow_*` resources.
 
-## [0.1.75] -- 2024-02-27
+## [0.1.75] -- 2023-02-27
 
 - Fix resources examples.
 - Add `pin_to_channel` to `workflow_task_send_slack_message` & `workflow_task_send_slack_block` resources.
 
-## [0.1.74] -- 2024-02-24
+## [0.1.74] -- 2023-02-24
 
 - Add more resources examples.
 
-## [0.1.73] -- 2024-02-23
+## [0.1.73] -- 2023-02-23
 
 - Add resources examples.
 
-## [0.1.72] -- 2024-02-21
+## [0.1.72] -- 2023-02-21
 
 - Add `format` field to `post_mortem_template` resource.
 
-## [0.1.71] -- 2024-02-21
+## [0.1.71] -- 2023-02-21
 
 - Add `failure_message`, `success_message` fields to `status_pages` resource.
 - Add `pause_reminder`, `snooze_reminder`, `restart_reminder` to `actionables` on `workflow_task_send_slack_message` resource.
 
-## [0.1.70] -- 2024-02-16
+## [0.1.70] -- 2023-02-16
 
 - Add `notify_emails`, `slack_channels`, `slack_aliases` fields to `severities`, `environments` & `incident_types`.
 
-## [0.1.69] -- 2024-02-10
+## [0.1.69] -- 2023-02-10
 
 - Add `project` and `labels` fields to `workflow_task_create_linear_issue` & `workflow_task_update_linear_issue`.
 
-## [0.1.68] -- 2024-01-28
+## [0.1.68] -- 2023-01-28
 
 - Add `show_action_items_as_table` and `show_timeline_as_table` fields to `rootly_workflow_task_create_notion_page`.
 - Drop support for `rootly_postmortem_template`. Rename to `rootly_post_mortem_template` instead.
 
-## [0.1.67] -- 2024-01-28
+## [0.1.67] -- 2023-01-28
 
 - Add `show_action_items_as_table` and `show_timeline_as_table` fields to `rootly_workflow_task_create_notion_page`.
 - Drop support for `rootly_postmortem_template`. Rename to `rootly_post_mortem_template` instead.
