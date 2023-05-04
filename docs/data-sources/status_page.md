@@ -1,19 +1,19 @@
 ---
-page_title: "Data Source rootly_incident_type - terraform-provider-rootly"
+page_title: "Data Source rootly_status_page - terraform-provider-rootly"
 subcategory:
 description: |-
     
 ---
 
-# Data Source (rootly_incident_type)
+# Data Source (rootly_status_page)
 
 
 
 ## Example Usage
 
 ```terraform
-data "rootly_incident_type" "my-incident-type" {
-  slug = "my-incident-type"
+data "rootly_status_page" "my-status-page" {
+  slug = "my-status-page"
 }
 ```
 
@@ -22,10 +22,7 @@ data "rootly_incident_type" "my-incident-type" {
 
 ### Optional
 
-- `color` (String)
 - `created_at` (Map of String) Filter by date range using 'lt' and 'gt'.
-- `name` (String)
-- `slug` (String)
 
 ### Read-Only
 

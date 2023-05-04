@@ -9,25 +9,13 @@ import (
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
-func dataSourceWorkflow() *schema.Resource {
+func dataSourceStatusPage() *schema.Resource {
 	return &schema.Resource{
-		ReadContext: dataSourceWorkflowRead,
+		ReadContext: dataSourceStatusPageRead,
 		Schema: map[string]*schema.Schema{
 			"id": &schema.Schema{
 				Type:     schema.TypeString,
 				Computed: true,
-			},
-
-			"name": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
-				Optional: true,
-			},
-
-			"slug": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
-				Optional: true,
 			},
 
 			"created_at": &schema.Schema{
@@ -39,22 +27,12 @@ func dataSourceWorkflow() *schema.Resource {
 	}
 }
 
-func dataSourceWorkflowRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func dataSourceStatusPageRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
-	params := new(rootlygo.ListWorkflowsParams)
+	params := new(rootlygo.ListStatusPagesParams)
 	page_size := 1
 	params.PageSize = &page_size
-
-	if value, ok := d.GetOkExists("name"); ok {
-		name := value.(string)
-		params.FilterName = &name
-	}
-
-	if value, ok := d.GetOkExists("slug"); ok {
-		slug := value.(string)
-		params.FilterSlug = &slug
-	}
 
 	created_at_gt := d.Get("created_at").(map[string]interface{})
 	if value, exists := created_at_gt["gt"]; exists {
@@ -68,15 +46,15 @@ func dataSourceWorkflowRead(ctx context.Context, d *schema.ResourceData, meta in
 		params.FilterCreatedAtLt = &v
 	}
 
-	items, err := c.ListWorkflows(params)
+	items, err := c.ListStatusPages(params)
 	if err != nil {
 		return diag.FromErr(err)
 	}
 
 	if len(items) == 0 {
-		return diag.Errorf("workflow not found")
+		return diag.Errorf("status_page not found")
 	}
-	item, _ := items[0].(*client.Workflow)
+	item, _ := items[0].(*client.StatusPage)
 
 	d.SetId(item.ID)
 

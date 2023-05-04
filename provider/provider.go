@@ -49,6 +49,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_service":              dataSourceService(),
 				"rootly_cause":                dataSourceCause(),
 				"rootly_severity":             dataSourceSeverity(),
+				"rootly_status_page":          dataSourceStatusPage(),
 				"rootly_incident_role":        dataSourceIncidentRole(),
 				"rootly_team":                 dataSourceTeam(),
 				"rootly_incident_type":        dataSourceIncidentType(),

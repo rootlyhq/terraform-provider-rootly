@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.93] -- 2023-05-04
+
+- Add data sources documentation.
+- Add `rootly_status_page` data source.
+
 ## [0.1.92] -- 2023-04-20
 
 - Add `CONTAINS_NONE` to workflows conditions.
