@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.94] -- 2023-05-04
+
+- Add `incident_inactivity_duration` to workflow resources.
+
 ## [0.1.93] -- 2023-05-04
 
 - Add data sources documentation.

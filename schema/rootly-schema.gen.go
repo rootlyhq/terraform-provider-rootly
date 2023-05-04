@@ -4332,6 +4332,7 @@ type ActionItemTriggerParams struct {
 	IncidentConditionSummary            *interface{}                                                `json:"incident_condition_summary,omitempty"`
 	IncidentConditionVisibility         *ActionItemTriggerParamsIncidentConditionVisibility         `json:"incident_condition_visibility,omitempty"`
 	IncidentConditionalInactivity       *interface{}                                                `json:"incident_conditional_inactivity,omitempty"`
+	IncidentInactivityDuration          *interface{}                                                `json:"incident_inactivity_duration,omitempty"`
 	IncidentKinds                       *[]ActionItemTriggerParamsIncidentKinds                     `json:"incident_kinds,omitempty"`
 	IncidentStatuses                    *[]ActionItemTriggerParamsIncidentStatuses                  `json:"incident_statuses,omitempty"`
 	IncidentVisibilities                *[]bool                                                     `json:"incident_visibilities,omitempty"`
@@ -10027,6 +10028,7 @@ type IncidentTriggerParams struct {
 	IncidentConditionSummary        *interface{}                                         `json:"incident_condition_summary,omitempty"`
 	IncidentConditionVisibility     *IncidentTriggerParamsIncidentConditionVisibility    `json:"incident_condition_visibility,omitempty"`
 	IncidentConditionalInactivity   *interface{}                                         `json:"incident_conditional_inactivity,omitempty"`
+	IncidentInactivityDuration      *interface{}                                         `json:"incident_inactivity_duration,omitempty"`
 	IncidentKinds                   *[]IncidentTriggerParamsIncidentKinds                `json:"incident_kinds,omitempty"`
 	IncidentStatuses                *[]IncidentTriggerParamsIncidentStatuses             `json:"incident_statuses,omitempty"`
 	IncidentVisibilities            *[]bool                                              `json:"incident_visibilities,omitempty"`

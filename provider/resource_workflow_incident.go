@@ -161,6 +161,14 @@ func resourceWorkflowIncident() *schema.Resource {
 							Description: "Value must be one of `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.",
 						},
 
+						"incident_inactivity_duration": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Description: "ex. 10 min, 1h, 3 days, 2 weeks",
+						},
+
 						"incident_condition": &schema.Schema{
 							Type:        schema.TypeString,
 							Default:     "ALL",
