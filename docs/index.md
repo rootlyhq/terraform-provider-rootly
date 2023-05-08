@@ -7,8 +7,8 @@ The [Rootly](https://rootly.com/) provider is used to interact with the resource
 
 ### Optional
 
-- `api_host` (String) The Rootly API host. Defaults to https://api.rootly.com
-- `api_token` (String, Sensitive) The Rootly API Token. Generate it from your account at https://rootly.com/account
+- `api_host` (String) The Rootly API host. Defaults to https://api.rootly.com. Can also be sourced from the ROOTLY_API_URL environment variable.
+- `api_token` (String, Sensitive) The Rootly API Token. Generate it from your account at https://rootly.com/account. It must be provided but can also be sourced from the ROOTLY_API_TOKEN environment variable.
 
 ## Example Usage
 
