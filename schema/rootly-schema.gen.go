@@ -3021,6 +3021,7 @@ const (
 	SendSlackMessageTaskParamsActionablesSnoozeReminder         SendSlackMessageTaskParamsActionables = "snooze_reminder"
 	SendSlackMessageTaskParamsActionablesUpdateIncident         SendSlackMessageTaskParamsActionables = "update_incident"
 	SendSlackMessageTaskParamsActionablesUpdateStatus           SendSlackMessageTaskParamsActionables = "update_status"
+	SendSlackMessageTaskParamsActionablesUpdateStatusPage       SendSlackMessageTaskParamsActionables = "update_status_page"
 	SendSlackMessageTaskParamsActionablesUpdateSummary          SendSlackMessageTaskParamsActionables = "update_summary"
 	SendSlackMessageTaskParamsActionablesViewTasks              SendSlackMessageTaskParamsActionables = "view_tasks"
 )

@@ -2,11 +2,12 @@ package client
 
 import (
 	"fmt"
+	"io/ioutil"
+	"net/http"
+
 	"github.com/hashicorp/go-retryablehttp"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/logging"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
-	"io/ioutil"
-	"net/http"
 )
 
 type Client struct {
@@ -20,7 +21,7 @@ type Client struct {
 func (c *Client) Do(req *http.Request) (*http.Response, error) {
 	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", c.Token))
 	req.Header.Set("Content-Type", c.ContentType)
-	req.Header.Set("User-Agent", "terraform-provider-rootly/v0.1.94")
+	req.Header.Set("User-Agent", "terraform-provider-rootly/v0.1.95")
 
 	res, err := c.Rootly.Client.Do(req)
 	if err != nil {
