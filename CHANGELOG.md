@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.96] -- 2023-05-16
+
+- Add `authentication_enabled`, `authentication_password`, `website_url`, `website_privacy_url`, `website_support_url`, `ga_tracking_id`, `time_zone` attributes to status page resource.
+
 ## [0.1.95] -- 2023-05-12
 
 - Improve docs.

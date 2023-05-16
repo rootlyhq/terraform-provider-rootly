@@ -101,6 +101,72 @@ func resourceStatusPage() *schema.Resource {
 				Description: "Message showing when at least one component is not operational",
 			},
 
+			"authentication_enabled": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Enable authentication",
+			},
+
+			"authentication_password": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Authentication password",
+
+				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+					return len(old) != 0
+				},
+			},
+
+			"website_url": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Website URL",
+			},
+
+			"website_privacy_url": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Website Privacy URL",
+			},
+
+			"website_support_url": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Website Support URL",
+			},
+
+			"ga_tracking_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Google Analytics tracking ID",
+			},
+
+			"time_zone": &schema.Schema{
+				Type:        schema.TypeString,
+				Default:     "UTC",
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Status Page Timezone. Value must be one of `International Date Line West`, `American Samoa`, `Midway Island`, `Hawaii`, `Alaska`, `Pacific Time (US & Canada)`, `Tijuana`, `Arizona`, `Mazatlan`, `Mountain Time (US & Canada)`, `Central America`, `Central Time (US & Canada)`, `Chihuahua`, `Guadalajara`, `Mexico City`, `Monterrey`, `Saskatchewan`, `Bogota`, `Eastern Time (US & Canada)`, `Indiana (East)`, `Lima`, `Quito`, `Atlantic Time (Canada)`, `Caracas`, `Georgetown`, `La Paz`, `Puerto Rico`, `Santiago`, `Newfoundland`, `Brasilia`, `Buenos Aires`, `Greenland`, `Montevideo`, `Mid-Atlantic`, `Azores`, `Cape Verde Is.`, `Edinburgh`, `Lisbon`, `London`, `Monrovia`, `UTC`, `Amsterdam`, `Belgrade`, `Berlin`, `Bern`, `Bratislava`, `Brussels`, `Budapest`, `Casablanca`, `Copenhagen`, `Dublin`, `Ljubljana`, `Madrid`, `Paris`, `Prague`, `Rome`, `Sarajevo`, `Skopje`, `Stockholm`, `Vienna`, `Warsaw`, `West Central Africa`, `Zagreb`, `Zurich`, `Athens`, `Bucharest`, `Cairo`, `Harare`, `Helsinki`, `Jerusalem`, `Kaliningrad`, `Kyiv`, `Pretoria`, `Riga`, `Sofia`, `Tallinn`, `Vilnius`, `Baghdad`, `Istanbul`, `Kuwait`, `Minsk`, `Moscow`, `Nairobi`, `Riyadh`, `St. Petersburg`, `Volgograd`, `Tehran`, `Abu Dhabi`, `Baku`, `Muscat`, `Samara`, `Tbilisi`, `Yerevan`, `Kabul`, `Ekaterinburg`, `Islamabad`, `Karachi`, `Tashkent`, `Chennai`, `Kolkata`, `Mumbai`, `New Delhi`, `Sri Jayawardenepura`, `Kathmandu`, `Almaty`, `Astana`, `Dhaka`, `Urumqi`, `Rangoon`, `Bangkok`, `Hanoi`, `Jakarta`, `Krasnoyarsk`, `Novosibirsk`, `Beijing`, `Chongqing`, `Hong Kong`, `Irkutsk`, `Kuala Lumpur`, `Perth`, `Singapore`, `Taipei`, `Ulaanbaatar`, `Osaka`, `Sapporo`, `Seoul`, `Tokyo`, `Yakutsk`, `Adelaide`, `Darwin`, `Brisbane`, `Canberra`, `Guam`, `Hobart`, `Melbourne`, `Port Moresby`, `Sydney`, `Vladivostok`, `Magadan`, `New Caledonia`, `Solomon Is.`, `Srednekolymsk`, `Auckland`, `Fiji`, `Kamchatka`, `Marshall Is.`, `Wellington`, `Chatham Is.`, `Nuku'alofa`, `Samoa`, `Tokelau Is.`.",
+			},
+
 			"public": &schema.Schema{
 				Type:        schema.TypeBool,
 				Computed:    true,
@@ -152,6 +218,27 @@ func resourceStatusPageCreate(ctx context.Context, d *schema.ResourceData, meta 
 	if value, ok := d.GetOkExists("failure_message"); ok {
 		s.FailureMessage = value.(string)
 	}
+	if value, ok := d.GetOkExists("authentication_enabled"); ok {
+		s.AuthenticationEnabled = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("authentication_password"); ok {
+		s.AuthenticationPassword = value.(string)
+	}
+	if value, ok := d.GetOkExists("website_url"); ok {
+		s.WebsiteUrl = value.(string)
+	}
+	if value, ok := d.GetOkExists("website_privacy_url"); ok {
+		s.WebsitePrivacyUrl = value.(string)
+	}
+	if value, ok := d.GetOkExists("website_support_url"); ok {
+		s.WebsiteSupportUrl = value.(string)
+	}
+	if value, ok := d.GetOkExists("ga_tracking_id"); ok {
+		s.GaTrackingId = value.(string)
+	}
+	if value, ok := d.GetOkExists("time_zone"); ok {
+		s.TimeZone = value.(string)
+	}
 	if value, ok := d.GetOkExists("public"); ok {
 		s.Public = tools.Bool(value.(bool))
 	}
@@ -196,6 +283,13 @@ func resourceStatusPageRead(ctx context.Context, d *schema.ResourceData, meta in
 	d.Set("show_uptime_last_days", item.ShowUptimeLastDays)
 	d.Set("success_message", item.SuccessMessage)
 	d.Set("failure_message", item.FailureMessage)
+	d.Set("authentication_enabled", item.AuthenticationEnabled)
+	d.Set("authentication_password", item.AuthenticationPassword)
+	d.Set("website_url", item.WebsiteUrl)
+	d.Set("website_privacy_url", item.WebsitePrivacyUrl)
+	d.Set("website_support_url", item.WebsiteSupportUrl)
+	d.Set("ga_tracking_id", item.GaTrackingId)
+	d.Set("time_zone", item.TimeZone)
 	d.Set("public", item.Public)
 	d.Set("enabled", item.Enabled)
 
@@ -234,6 +328,27 @@ func resourceStatusPageUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	}
 	if d.HasChange("failure_message") {
 		s.FailureMessage = d.Get("failure_message").(string)
+	}
+	if d.HasChange("authentication_enabled") {
+		s.AuthenticationEnabled = tools.Bool(d.Get("authentication_enabled").(bool))
+	}
+	if d.HasChange("authentication_password") {
+		s.AuthenticationPassword = d.Get("authentication_password").(string)
+	}
+	if d.HasChange("website_url") {
+		s.WebsiteUrl = d.Get("website_url").(string)
+	}
+	if d.HasChange("website_privacy_url") {
+		s.WebsitePrivacyUrl = d.Get("website_privacy_url").(string)
+	}
+	if d.HasChange("website_support_url") {
+		s.WebsiteSupportUrl = d.Get("website_support_url").(string)
+	}
+	if d.HasChange("ga_tracking_id") {
+		s.GaTrackingId = d.Get("ga_tracking_id").(string)
+	}
+	if d.HasChange("time_zone") {
+		s.TimeZone = d.Get("time_zone").(string)
 	}
 	if d.HasChange("public") {
 		s.Public = tools.Bool(d.Get("public").(bool))

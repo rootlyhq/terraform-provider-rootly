@@ -597,157 +597,157 @@ const (
 
 // Defines values for CreateGoogleCalendarEventTaskParamsTimeZone.
 const (
-	AbuDhabi                  CreateGoogleCalendarEventTaskParamsTimeZone = "Abu Dhabi"
-	Adelaide                  CreateGoogleCalendarEventTaskParamsTimeZone = "Adelaide"
-	Alaska                    CreateGoogleCalendarEventTaskParamsTimeZone = "Alaska"
-	Almaty                    CreateGoogleCalendarEventTaskParamsTimeZone = "Almaty"
-	AmericanSamoa             CreateGoogleCalendarEventTaskParamsTimeZone = "American Samoa"
-	Amsterdam                 CreateGoogleCalendarEventTaskParamsTimeZone = "Amsterdam"
-	Arizona                   CreateGoogleCalendarEventTaskParamsTimeZone = "Arizona"
-	Astana                    CreateGoogleCalendarEventTaskParamsTimeZone = "Astana"
-	Athens                    CreateGoogleCalendarEventTaskParamsTimeZone = "Athens"
-	AtlanticTimeCanada        CreateGoogleCalendarEventTaskParamsTimeZone = "Atlantic Time (Canada)"
-	Auckland                  CreateGoogleCalendarEventTaskParamsTimeZone = "Auckland"
-	Azores                    CreateGoogleCalendarEventTaskParamsTimeZone = "Azores"
-	Baghdad                   CreateGoogleCalendarEventTaskParamsTimeZone = "Baghdad"
-	Baku                      CreateGoogleCalendarEventTaskParamsTimeZone = "Baku"
-	Bangkok                   CreateGoogleCalendarEventTaskParamsTimeZone = "Bangkok"
-	Beijing                   CreateGoogleCalendarEventTaskParamsTimeZone = "Beijing"
-	Belgrade                  CreateGoogleCalendarEventTaskParamsTimeZone = "Belgrade"
-	Berlin                    CreateGoogleCalendarEventTaskParamsTimeZone = "Berlin"
-	Bern                      CreateGoogleCalendarEventTaskParamsTimeZone = "Bern"
-	Bogota                    CreateGoogleCalendarEventTaskParamsTimeZone = "Bogota"
-	Brasilia                  CreateGoogleCalendarEventTaskParamsTimeZone = "Brasilia"
-	Bratislava                CreateGoogleCalendarEventTaskParamsTimeZone = "Bratislava"
-	Brisbane                  CreateGoogleCalendarEventTaskParamsTimeZone = "Brisbane"
-	Brussels                  CreateGoogleCalendarEventTaskParamsTimeZone = "Brussels"
-	Bucharest                 CreateGoogleCalendarEventTaskParamsTimeZone = "Bucharest"
-	Budapest                  CreateGoogleCalendarEventTaskParamsTimeZone = "Budapest"
-	BuenosAires               CreateGoogleCalendarEventTaskParamsTimeZone = "Buenos Aires"
-	Cairo                     CreateGoogleCalendarEventTaskParamsTimeZone = "Cairo"
-	Canberra                  CreateGoogleCalendarEventTaskParamsTimeZone = "Canberra"
-	CapeVerdeIs               CreateGoogleCalendarEventTaskParamsTimeZone = "Cape Verde Is."
-	Caracas                   CreateGoogleCalendarEventTaskParamsTimeZone = "Caracas"
-	Casablanca                CreateGoogleCalendarEventTaskParamsTimeZone = "Casablanca"
-	CentralAmerica            CreateGoogleCalendarEventTaskParamsTimeZone = "Central America"
-	CentralTimeUSCanada       CreateGoogleCalendarEventTaskParamsTimeZone = "Central Time (US & Canada)"
-	ChathamIs                 CreateGoogleCalendarEventTaskParamsTimeZone = "Chatham Is."
-	Chennai                   CreateGoogleCalendarEventTaskParamsTimeZone = "Chennai"
-	Chihuahua                 CreateGoogleCalendarEventTaskParamsTimeZone = "Chihuahua"
-	Chongqing                 CreateGoogleCalendarEventTaskParamsTimeZone = "Chongqing"
-	Copenhagen                CreateGoogleCalendarEventTaskParamsTimeZone = "Copenhagen"
-	Darwin                    CreateGoogleCalendarEventTaskParamsTimeZone = "Darwin"
-	Dhaka                     CreateGoogleCalendarEventTaskParamsTimeZone = "Dhaka"
-	Dublin                    CreateGoogleCalendarEventTaskParamsTimeZone = "Dublin"
-	EasternTimeUSCanada       CreateGoogleCalendarEventTaskParamsTimeZone = "Eastern Time (US & Canada)"
-	Edinburgh                 CreateGoogleCalendarEventTaskParamsTimeZone = "Edinburgh"
-	Ekaterinburg              CreateGoogleCalendarEventTaskParamsTimeZone = "Ekaterinburg"
-	Fiji                      CreateGoogleCalendarEventTaskParamsTimeZone = "Fiji"
-	Georgetown                CreateGoogleCalendarEventTaskParamsTimeZone = "Georgetown"
-	Greenland                 CreateGoogleCalendarEventTaskParamsTimeZone = "Greenland"
-	Guadalajara               CreateGoogleCalendarEventTaskParamsTimeZone = "Guadalajara"
-	Guam                      CreateGoogleCalendarEventTaskParamsTimeZone = "Guam"
-	Hanoi                     CreateGoogleCalendarEventTaskParamsTimeZone = "Hanoi"
-	Harare                    CreateGoogleCalendarEventTaskParamsTimeZone = "Harare"
-	Hawaii                    CreateGoogleCalendarEventTaskParamsTimeZone = "Hawaii"
-	Helsinki                  CreateGoogleCalendarEventTaskParamsTimeZone = "Helsinki"
-	Hobart                    CreateGoogleCalendarEventTaskParamsTimeZone = "Hobart"
-	HongKong                  CreateGoogleCalendarEventTaskParamsTimeZone = "Hong Kong"
-	IndianaEast               CreateGoogleCalendarEventTaskParamsTimeZone = "Indiana (East)"
-	InternationalDateLineWest CreateGoogleCalendarEventTaskParamsTimeZone = "International Date Line West"
-	Irkutsk                   CreateGoogleCalendarEventTaskParamsTimeZone = "Irkutsk"
-	Islamabad                 CreateGoogleCalendarEventTaskParamsTimeZone = "Islamabad"
-	Istanbul                  CreateGoogleCalendarEventTaskParamsTimeZone = "Istanbul"
-	Jakarta                   CreateGoogleCalendarEventTaskParamsTimeZone = "Jakarta"
-	Jerusalem                 CreateGoogleCalendarEventTaskParamsTimeZone = "Jerusalem"
-	Kabul                     CreateGoogleCalendarEventTaskParamsTimeZone = "Kabul"
-	Kaliningrad               CreateGoogleCalendarEventTaskParamsTimeZone = "Kaliningrad"
-	Kamchatka                 CreateGoogleCalendarEventTaskParamsTimeZone = "Kamchatka"
-	Karachi                   CreateGoogleCalendarEventTaskParamsTimeZone = "Karachi"
-	Kathmandu                 CreateGoogleCalendarEventTaskParamsTimeZone = "Kathmandu"
-	Kolkata                   CreateGoogleCalendarEventTaskParamsTimeZone = "Kolkata"
-	Krasnoyarsk               CreateGoogleCalendarEventTaskParamsTimeZone = "Krasnoyarsk"
-	KualaLumpur               CreateGoogleCalendarEventTaskParamsTimeZone = "Kuala Lumpur"
-	Kuwait                    CreateGoogleCalendarEventTaskParamsTimeZone = "Kuwait"
-	Kyiv                      CreateGoogleCalendarEventTaskParamsTimeZone = "Kyiv"
-	LaPaz                     CreateGoogleCalendarEventTaskParamsTimeZone = "La Paz"
-	Lima                      CreateGoogleCalendarEventTaskParamsTimeZone = "Lima"
-	Lisbon                    CreateGoogleCalendarEventTaskParamsTimeZone = "Lisbon"
-	Ljubljana                 CreateGoogleCalendarEventTaskParamsTimeZone = "Ljubljana"
-	London                    CreateGoogleCalendarEventTaskParamsTimeZone = "London"
-	Madrid                    CreateGoogleCalendarEventTaskParamsTimeZone = "Madrid"
-	Magadan                   CreateGoogleCalendarEventTaskParamsTimeZone = "Magadan"
-	MarshallIs                CreateGoogleCalendarEventTaskParamsTimeZone = "Marshall Is."
-	Mazatlan                  CreateGoogleCalendarEventTaskParamsTimeZone = "Mazatlan"
-	Melbourne                 CreateGoogleCalendarEventTaskParamsTimeZone = "Melbourne"
-	MexicoCity                CreateGoogleCalendarEventTaskParamsTimeZone = "Mexico City"
-	MidAtlantic               CreateGoogleCalendarEventTaskParamsTimeZone = "Mid-Atlantic"
-	MidwayIsland              CreateGoogleCalendarEventTaskParamsTimeZone = "Midway Island"
-	Minsk                     CreateGoogleCalendarEventTaskParamsTimeZone = "Minsk"
-	Monrovia                  CreateGoogleCalendarEventTaskParamsTimeZone = "Monrovia"
-	Monterrey                 CreateGoogleCalendarEventTaskParamsTimeZone = "Monterrey"
-	Montevideo                CreateGoogleCalendarEventTaskParamsTimeZone = "Montevideo"
-	Moscow                    CreateGoogleCalendarEventTaskParamsTimeZone = "Moscow"
-	MountainTimeUSCanada      CreateGoogleCalendarEventTaskParamsTimeZone = "Mountain Time (US & Canada)"
-	Mumbai                    CreateGoogleCalendarEventTaskParamsTimeZone = "Mumbai"
-	Muscat                    CreateGoogleCalendarEventTaskParamsTimeZone = "Muscat"
-	Nairobi                   CreateGoogleCalendarEventTaskParamsTimeZone = "Nairobi"
-	NewCaledonia              CreateGoogleCalendarEventTaskParamsTimeZone = "New Caledonia"
-	NewDelhi                  CreateGoogleCalendarEventTaskParamsTimeZone = "New Delhi"
-	Newfoundland              CreateGoogleCalendarEventTaskParamsTimeZone = "Newfoundland"
-	Novosibirsk               CreateGoogleCalendarEventTaskParamsTimeZone = "Novosibirsk"
-	Nukualofa                 CreateGoogleCalendarEventTaskParamsTimeZone = "Nuku'alofa"
-	Osaka                     CreateGoogleCalendarEventTaskParamsTimeZone = "Osaka"
-	PacificTimeUSCanada       CreateGoogleCalendarEventTaskParamsTimeZone = "Pacific Time (US & Canada)"
-	Paris                     CreateGoogleCalendarEventTaskParamsTimeZone = "Paris"
-	Perth                     CreateGoogleCalendarEventTaskParamsTimeZone = "Perth"
-	PortMoresby               CreateGoogleCalendarEventTaskParamsTimeZone = "Port Moresby"
-	Prague                    CreateGoogleCalendarEventTaskParamsTimeZone = "Prague"
-	Pretoria                  CreateGoogleCalendarEventTaskParamsTimeZone = "Pretoria"
-	PuertoRico                CreateGoogleCalendarEventTaskParamsTimeZone = "Puerto Rico"
-	Quito                     CreateGoogleCalendarEventTaskParamsTimeZone = "Quito"
-	Rangoon                   CreateGoogleCalendarEventTaskParamsTimeZone = "Rangoon"
-	Riga                      CreateGoogleCalendarEventTaskParamsTimeZone = "Riga"
-	Riyadh                    CreateGoogleCalendarEventTaskParamsTimeZone = "Riyadh"
-	Rome                      CreateGoogleCalendarEventTaskParamsTimeZone = "Rome"
-	Samara                    CreateGoogleCalendarEventTaskParamsTimeZone = "Samara"
-	Samoa                     CreateGoogleCalendarEventTaskParamsTimeZone = "Samoa"
-	Santiago                  CreateGoogleCalendarEventTaskParamsTimeZone = "Santiago"
-	Sapporo                   CreateGoogleCalendarEventTaskParamsTimeZone = "Sapporo"
-	Sarajevo                  CreateGoogleCalendarEventTaskParamsTimeZone = "Sarajevo"
-	Saskatchewan              CreateGoogleCalendarEventTaskParamsTimeZone = "Saskatchewan"
-	Seoul                     CreateGoogleCalendarEventTaskParamsTimeZone = "Seoul"
-	Singapore                 CreateGoogleCalendarEventTaskParamsTimeZone = "Singapore"
-	Skopje                    CreateGoogleCalendarEventTaskParamsTimeZone = "Skopje"
-	Sofia                     CreateGoogleCalendarEventTaskParamsTimeZone = "Sofia"
-	SolomonIs                 CreateGoogleCalendarEventTaskParamsTimeZone = "Solomon Is."
-	Srednekolymsk             CreateGoogleCalendarEventTaskParamsTimeZone = "Srednekolymsk"
-	SriJayawardenepura        CreateGoogleCalendarEventTaskParamsTimeZone = "Sri Jayawardenepura"
-	StPetersburg              CreateGoogleCalendarEventTaskParamsTimeZone = "St. Petersburg"
-	Stockholm                 CreateGoogleCalendarEventTaskParamsTimeZone = "Stockholm"
-	Sydney                    CreateGoogleCalendarEventTaskParamsTimeZone = "Sydney"
-	Taipei                    CreateGoogleCalendarEventTaskParamsTimeZone = "Taipei"
-	Tallinn                   CreateGoogleCalendarEventTaskParamsTimeZone = "Tallinn"
-	Tashkent                  CreateGoogleCalendarEventTaskParamsTimeZone = "Tashkent"
-	Tbilisi                   CreateGoogleCalendarEventTaskParamsTimeZone = "Tbilisi"
-	Tehran                    CreateGoogleCalendarEventTaskParamsTimeZone = "Tehran"
-	Tijuana                   CreateGoogleCalendarEventTaskParamsTimeZone = "Tijuana"
-	TokelauIs                 CreateGoogleCalendarEventTaskParamsTimeZone = "Tokelau Is."
-	Tokyo                     CreateGoogleCalendarEventTaskParamsTimeZone = "Tokyo"
-	UTC                       CreateGoogleCalendarEventTaskParamsTimeZone = "UTC"
-	Ulaanbaatar               CreateGoogleCalendarEventTaskParamsTimeZone = "Ulaanbaatar"
-	Urumqi                    CreateGoogleCalendarEventTaskParamsTimeZone = "Urumqi"
-	Vienna                    CreateGoogleCalendarEventTaskParamsTimeZone = "Vienna"
-	Vilnius                   CreateGoogleCalendarEventTaskParamsTimeZone = "Vilnius"
-	Vladivostok               CreateGoogleCalendarEventTaskParamsTimeZone = "Vladivostok"
-	Volgograd                 CreateGoogleCalendarEventTaskParamsTimeZone = "Volgograd"
-	Warsaw                    CreateGoogleCalendarEventTaskParamsTimeZone = "Warsaw"
-	Wellington                CreateGoogleCalendarEventTaskParamsTimeZone = "Wellington"
-	WestCentralAfrica         CreateGoogleCalendarEventTaskParamsTimeZone = "West Central Africa"
-	Yakutsk                   CreateGoogleCalendarEventTaskParamsTimeZone = "Yakutsk"
-	Yerevan                   CreateGoogleCalendarEventTaskParamsTimeZone = "Yerevan"
-	Zagreb                    CreateGoogleCalendarEventTaskParamsTimeZone = "Zagreb"
-	Zurich                    CreateGoogleCalendarEventTaskParamsTimeZone = "Zurich"
+	CreateGoogleCalendarEventTaskParamsTimeZoneAbuDhabi                  CreateGoogleCalendarEventTaskParamsTimeZone = "Abu Dhabi"
+	CreateGoogleCalendarEventTaskParamsTimeZoneAdelaide                  CreateGoogleCalendarEventTaskParamsTimeZone = "Adelaide"
+	CreateGoogleCalendarEventTaskParamsTimeZoneAlaska                    CreateGoogleCalendarEventTaskParamsTimeZone = "Alaska"
+	CreateGoogleCalendarEventTaskParamsTimeZoneAlmaty                    CreateGoogleCalendarEventTaskParamsTimeZone = "Almaty"
+	CreateGoogleCalendarEventTaskParamsTimeZoneAmericanSamoa             CreateGoogleCalendarEventTaskParamsTimeZone = "American Samoa"
+	CreateGoogleCalendarEventTaskParamsTimeZoneAmsterdam                 CreateGoogleCalendarEventTaskParamsTimeZone = "Amsterdam"
+	CreateGoogleCalendarEventTaskParamsTimeZoneArizona                   CreateGoogleCalendarEventTaskParamsTimeZone = "Arizona"
+	CreateGoogleCalendarEventTaskParamsTimeZoneAstana                    CreateGoogleCalendarEventTaskParamsTimeZone = "Astana"
+	CreateGoogleCalendarEventTaskParamsTimeZoneAthens                    CreateGoogleCalendarEventTaskParamsTimeZone = "Athens"
+	CreateGoogleCalendarEventTaskParamsTimeZoneAtlanticTimeCanada        CreateGoogleCalendarEventTaskParamsTimeZone = "Atlantic Time (Canada)"
+	CreateGoogleCalendarEventTaskParamsTimeZoneAuckland                  CreateGoogleCalendarEventTaskParamsTimeZone = "Auckland"
+	CreateGoogleCalendarEventTaskParamsTimeZoneAzores                    CreateGoogleCalendarEventTaskParamsTimeZone = "Azores"
+	CreateGoogleCalendarEventTaskParamsTimeZoneBaghdad                   CreateGoogleCalendarEventTaskParamsTimeZone = "Baghdad"
+	CreateGoogleCalendarEventTaskParamsTimeZoneBaku                      CreateGoogleCalendarEventTaskParamsTimeZone = "Baku"
+	CreateGoogleCalendarEventTaskParamsTimeZoneBangkok                   CreateGoogleCalendarEventTaskParamsTimeZone = "Bangkok"
+	CreateGoogleCalendarEventTaskParamsTimeZoneBeijing                   CreateGoogleCalendarEventTaskParamsTimeZone = "Beijing"
+	CreateGoogleCalendarEventTaskParamsTimeZoneBelgrade                  CreateGoogleCalendarEventTaskParamsTimeZone = "Belgrade"
+	CreateGoogleCalendarEventTaskParamsTimeZoneBerlin                    CreateGoogleCalendarEventTaskParamsTimeZone = "Berlin"
+	CreateGoogleCalendarEventTaskParamsTimeZoneBern                      CreateGoogleCalendarEventTaskParamsTimeZone = "Bern"
+	CreateGoogleCalendarEventTaskParamsTimeZoneBogota                    CreateGoogleCalendarEventTaskParamsTimeZone = "Bogota"
+	CreateGoogleCalendarEventTaskParamsTimeZoneBrasilia                  CreateGoogleCalendarEventTaskParamsTimeZone = "Brasilia"
+	CreateGoogleCalendarEventTaskParamsTimeZoneBratislava                CreateGoogleCalendarEventTaskParamsTimeZone = "Bratislava"
+	CreateGoogleCalendarEventTaskParamsTimeZoneBrisbane                  CreateGoogleCalendarEventTaskParamsTimeZone = "Brisbane"
+	CreateGoogleCalendarEventTaskParamsTimeZoneBrussels                  CreateGoogleCalendarEventTaskParamsTimeZone = "Brussels"
+	CreateGoogleCalendarEventTaskParamsTimeZoneBucharest                 CreateGoogleCalendarEventTaskParamsTimeZone = "Bucharest"
+	CreateGoogleCalendarEventTaskParamsTimeZoneBudapest                  CreateGoogleCalendarEventTaskParamsTimeZone = "Budapest"
+	CreateGoogleCalendarEventTaskParamsTimeZoneBuenosAires               CreateGoogleCalendarEventTaskParamsTimeZone = "Buenos Aires"
+	CreateGoogleCalendarEventTaskParamsTimeZoneCairo                     CreateGoogleCalendarEventTaskParamsTimeZone = "Cairo"
+	CreateGoogleCalendarEventTaskParamsTimeZoneCanberra                  CreateGoogleCalendarEventTaskParamsTimeZone = "Canberra"
+	CreateGoogleCalendarEventTaskParamsTimeZoneCapeVerdeIs               CreateGoogleCalendarEventTaskParamsTimeZone = "Cape Verde Is."
+	CreateGoogleCalendarEventTaskParamsTimeZoneCaracas                   CreateGoogleCalendarEventTaskParamsTimeZone = "Caracas"
+	CreateGoogleCalendarEventTaskParamsTimeZoneCasablanca                CreateGoogleCalendarEventTaskParamsTimeZone = "Casablanca"
+	CreateGoogleCalendarEventTaskParamsTimeZoneCentralAmerica            CreateGoogleCalendarEventTaskParamsTimeZone = "Central America"
+	CreateGoogleCalendarEventTaskParamsTimeZoneCentralTimeUSCanada       CreateGoogleCalendarEventTaskParamsTimeZone = "Central Time (US & Canada)"
+	CreateGoogleCalendarEventTaskParamsTimeZoneChathamIs                 CreateGoogleCalendarEventTaskParamsTimeZone = "Chatham Is."
+	CreateGoogleCalendarEventTaskParamsTimeZoneChennai                   CreateGoogleCalendarEventTaskParamsTimeZone = "Chennai"
+	CreateGoogleCalendarEventTaskParamsTimeZoneChihuahua                 CreateGoogleCalendarEventTaskParamsTimeZone = "Chihuahua"
+	CreateGoogleCalendarEventTaskParamsTimeZoneChongqing                 CreateGoogleCalendarEventTaskParamsTimeZone = "Chongqing"
+	CreateGoogleCalendarEventTaskParamsTimeZoneCopenhagen                CreateGoogleCalendarEventTaskParamsTimeZone = "Copenhagen"
+	CreateGoogleCalendarEventTaskParamsTimeZoneDarwin                    CreateGoogleCalendarEventTaskParamsTimeZone = "Darwin"
+	CreateGoogleCalendarEventTaskParamsTimeZoneDhaka                     CreateGoogleCalendarEventTaskParamsTimeZone = "Dhaka"
+	CreateGoogleCalendarEventTaskParamsTimeZoneDublin                    CreateGoogleCalendarEventTaskParamsTimeZone = "Dublin"
+	CreateGoogleCalendarEventTaskParamsTimeZoneEasternTimeUSCanada       CreateGoogleCalendarEventTaskParamsTimeZone = "Eastern Time (US & Canada)"
+	CreateGoogleCalendarEventTaskParamsTimeZoneEdinburgh                 CreateGoogleCalendarEventTaskParamsTimeZone = "Edinburgh"
+	CreateGoogleCalendarEventTaskParamsTimeZoneEkaterinburg              CreateGoogleCalendarEventTaskParamsTimeZone = "Ekaterinburg"
+	CreateGoogleCalendarEventTaskParamsTimeZoneFiji                      CreateGoogleCalendarEventTaskParamsTimeZone = "Fiji"
+	CreateGoogleCalendarEventTaskParamsTimeZoneGeorgetown                CreateGoogleCalendarEventTaskParamsTimeZone = "Georgetown"
+	CreateGoogleCalendarEventTaskParamsTimeZoneGreenland                 CreateGoogleCalendarEventTaskParamsTimeZone = "Greenland"
+	CreateGoogleCalendarEventTaskParamsTimeZoneGuadalajara               CreateGoogleCalendarEventTaskParamsTimeZone = "Guadalajara"
+	CreateGoogleCalendarEventTaskParamsTimeZoneGuam                      CreateGoogleCalendarEventTaskParamsTimeZone = "Guam"
+	CreateGoogleCalendarEventTaskParamsTimeZoneHanoi                     CreateGoogleCalendarEventTaskParamsTimeZone = "Hanoi"
+	CreateGoogleCalendarEventTaskParamsTimeZoneHarare                    CreateGoogleCalendarEventTaskParamsTimeZone = "Harare"
+	CreateGoogleCalendarEventTaskParamsTimeZoneHawaii                    CreateGoogleCalendarEventTaskParamsTimeZone = "Hawaii"
+	CreateGoogleCalendarEventTaskParamsTimeZoneHelsinki                  CreateGoogleCalendarEventTaskParamsTimeZone = "Helsinki"
+	CreateGoogleCalendarEventTaskParamsTimeZoneHobart                    CreateGoogleCalendarEventTaskParamsTimeZone = "Hobart"
+	CreateGoogleCalendarEventTaskParamsTimeZoneHongKong                  CreateGoogleCalendarEventTaskParamsTimeZone = "Hong Kong"
+	CreateGoogleCalendarEventTaskParamsTimeZoneIndianaEast               CreateGoogleCalendarEventTaskParamsTimeZone = "Indiana (East)"
+	CreateGoogleCalendarEventTaskParamsTimeZoneInternationalDateLineWest CreateGoogleCalendarEventTaskParamsTimeZone = "International Date Line West"
+	CreateGoogleCalendarEventTaskParamsTimeZoneIrkutsk                   CreateGoogleCalendarEventTaskParamsTimeZone = "Irkutsk"
+	CreateGoogleCalendarEventTaskParamsTimeZoneIslamabad                 CreateGoogleCalendarEventTaskParamsTimeZone = "Islamabad"
+	CreateGoogleCalendarEventTaskParamsTimeZoneIstanbul                  CreateGoogleCalendarEventTaskParamsTimeZone = "Istanbul"
+	CreateGoogleCalendarEventTaskParamsTimeZoneJakarta                   CreateGoogleCalendarEventTaskParamsTimeZone = "Jakarta"
+	CreateGoogleCalendarEventTaskParamsTimeZoneJerusalem                 CreateGoogleCalendarEventTaskParamsTimeZone = "Jerusalem"
+	CreateGoogleCalendarEventTaskParamsTimeZoneKabul                     CreateGoogleCalendarEventTaskParamsTimeZone = "Kabul"
+	CreateGoogleCalendarEventTaskParamsTimeZoneKaliningrad               CreateGoogleCalendarEventTaskParamsTimeZone = "Kaliningrad"
+	CreateGoogleCalendarEventTaskParamsTimeZoneKamchatka                 CreateGoogleCalendarEventTaskParamsTimeZone = "Kamchatka"
+	CreateGoogleCalendarEventTaskParamsTimeZoneKarachi                   CreateGoogleCalendarEventTaskParamsTimeZone = "Karachi"
+	CreateGoogleCalendarEventTaskParamsTimeZoneKathmandu                 CreateGoogleCalendarEventTaskParamsTimeZone = "Kathmandu"
+	CreateGoogleCalendarEventTaskParamsTimeZoneKolkata                   CreateGoogleCalendarEventTaskParamsTimeZone = "Kolkata"
+	CreateGoogleCalendarEventTaskParamsTimeZoneKrasnoyarsk               CreateGoogleCalendarEventTaskParamsTimeZone = "Krasnoyarsk"
+	CreateGoogleCalendarEventTaskParamsTimeZoneKualaLumpur               CreateGoogleCalendarEventTaskParamsTimeZone = "Kuala Lumpur"
+	CreateGoogleCalendarEventTaskParamsTimeZoneKuwait                    CreateGoogleCalendarEventTaskParamsTimeZone = "Kuwait"
+	CreateGoogleCalendarEventTaskParamsTimeZoneKyiv                      CreateGoogleCalendarEventTaskParamsTimeZone = "Kyiv"
+	CreateGoogleCalendarEventTaskParamsTimeZoneLaPaz                     CreateGoogleCalendarEventTaskParamsTimeZone = "La Paz"
+	CreateGoogleCalendarEventTaskParamsTimeZoneLima                      CreateGoogleCalendarEventTaskParamsTimeZone = "Lima"
+	CreateGoogleCalendarEventTaskParamsTimeZoneLisbon                    CreateGoogleCalendarEventTaskParamsTimeZone = "Lisbon"
+	CreateGoogleCalendarEventTaskParamsTimeZoneLjubljana                 CreateGoogleCalendarEventTaskParamsTimeZone = "Ljubljana"
+	CreateGoogleCalendarEventTaskParamsTimeZoneLondon                    CreateGoogleCalendarEventTaskParamsTimeZone = "London"
+	CreateGoogleCalendarEventTaskParamsTimeZoneMadrid                    CreateGoogleCalendarEventTaskParamsTimeZone = "Madrid"
+	CreateGoogleCalendarEventTaskParamsTimeZoneMagadan                   CreateGoogleCalendarEventTaskParamsTimeZone = "Magadan"
+	CreateGoogleCalendarEventTaskParamsTimeZoneMarshallIs                CreateGoogleCalendarEventTaskParamsTimeZone = "Marshall Is."
+	CreateGoogleCalendarEventTaskParamsTimeZoneMazatlan                  CreateGoogleCalendarEventTaskParamsTimeZone = "Mazatlan"
+	CreateGoogleCalendarEventTaskParamsTimeZoneMelbourne                 CreateGoogleCalendarEventTaskParamsTimeZone = "Melbourne"
+	CreateGoogleCalendarEventTaskParamsTimeZoneMexicoCity                CreateGoogleCalendarEventTaskParamsTimeZone = "Mexico City"
+	CreateGoogleCalendarEventTaskParamsTimeZoneMidAtlantic               CreateGoogleCalendarEventTaskParamsTimeZone = "Mid-Atlantic"
+	CreateGoogleCalendarEventTaskParamsTimeZoneMidwayIsland              CreateGoogleCalendarEventTaskParamsTimeZone = "Midway Island"
+	CreateGoogleCalendarEventTaskParamsTimeZoneMinsk                     CreateGoogleCalendarEventTaskParamsTimeZone = "Minsk"
+	CreateGoogleCalendarEventTaskParamsTimeZoneMonrovia                  CreateGoogleCalendarEventTaskParamsTimeZone = "Monrovia"
+	CreateGoogleCalendarEventTaskParamsTimeZoneMonterrey                 CreateGoogleCalendarEventTaskParamsTimeZone = "Monterrey"
+	CreateGoogleCalendarEventTaskParamsTimeZoneMontevideo                CreateGoogleCalendarEventTaskParamsTimeZone = "Montevideo"
+	CreateGoogleCalendarEventTaskParamsTimeZoneMoscow                    CreateGoogleCalendarEventTaskParamsTimeZone = "Moscow"
+	CreateGoogleCalendarEventTaskParamsTimeZoneMountainTimeUSCanada      CreateGoogleCalendarEventTaskParamsTimeZone = "Mountain Time (US & Canada)"
+	CreateGoogleCalendarEventTaskParamsTimeZoneMumbai                    CreateGoogleCalendarEventTaskParamsTimeZone = "Mumbai"
+	CreateGoogleCalendarEventTaskParamsTimeZoneMuscat                    CreateGoogleCalendarEventTaskParamsTimeZone = "Muscat"
+	CreateGoogleCalendarEventTaskParamsTimeZoneNairobi                   CreateGoogleCalendarEventTaskParamsTimeZone = "Nairobi"
+	CreateGoogleCalendarEventTaskParamsTimeZoneNewCaledonia              CreateGoogleCalendarEventTaskParamsTimeZone = "New Caledonia"
+	CreateGoogleCalendarEventTaskParamsTimeZoneNewDelhi                  CreateGoogleCalendarEventTaskParamsTimeZone = "New Delhi"
+	CreateGoogleCalendarEventTaskParamsTimeZoneNewfoundland              CreateGoogleCalendarEventTaskParamsTimeZone = "Newfoundland"
+	CreateGoogleCalendarEventTaskParamsTimeZoneNovosibirsk               CreateGoogleCalendarEventTaskParamsTimeZone = "Novosibirsk"
+	CreateGoogleCalendarEventTaskParamsTimeZoneNukualofa                 CreateGoogleCalendarEventTaskParamsTimeZone = "Nuku'alofa"
+	CreateGoogleCalendarEventTaskParamsTimeZoneOsaka                     CreateGoogleCalendarEventTaskParamsTimeZone = "Osaka"
+	CreateGoogleCalendarEventTaskParamsTimeZonePacificTimeUSCanada       CreateGoogleCalendarEventTaskParamsTimeZone = "Pacific Time (US & Canada)"
+	CreateGoogleCalendarEventTaskParamsTimeZoneParis                     CreateGoogleCalendarEventTaskParamsTimeZone = "Paris"
+	CreateGoogleCalendarEventTaskParamsTimeZonePerth                     CreateGoogleCalendarEventTaskParamsTimeZone = "Perth"
+	CreateGoogleCalendarEventTaskParamsTimeZonePortMoresby               CreateGoogleCalendarEventTaskParamsTimeZone = "Port Moresby"
+	CreateGoogleCalendarEventTaskParamsTimeZonePrague                    CreateGoogleCalendarEventTaskParamsTimeZone = "Prague"
+	CreateGoogleCalendarEventTaskParamsTimeZonePretoria                  CreateGoogleCalendarEventTaskParamsTimeZone = "Pretoria"
+	CreateGoogleCalendarEventTaskParamsTimeZonePuertoRico                CreateGoogleCalendarEventTaskParamsTimeZone = "Puerto Rico"
+	CreateGoogleCalendarEventTaskParamsTimeZoneQuito                     CreateGoogleCalendarEventTaskParamsTimeZone = "Quito"
+	CreateGoogleCalendarEventTaskParamsTimeZoneRangoon                   CreateGoogleCalendarEventTaskParamsTimeZone = "Rangoon"
+	CreateGoogleCalendarEventTaskParamsTimeZoneRiga                      CreateGoogleCalendarEventTaskParamsTimeZone = "Riga"
+	CreateGoogleCalendarEventTaskParamsTimeZoneRiyadh                    CreateGoogleCalendarEventTaskParamsTimeZone = "Riyadh"
+	CreateGoogleCalendarEventTaskParamsTimeZoneRome                      CreateGoogleCalendarEventTaskParamsTimeZone = "Rome"
+	CreateGoogleCalendarEventTaskParamsTimeZoneSamara                    CreateGoogleCalendarEventTaskParamsTimeZone = "Samara"
+	CreateGoogleCalendarEventTaskParamsTimeZoneSamoa                     CreateGoogleCalendarEventTaskParamsTimeZone = "Samoa"
+	CreateGoogleCalendarEventTaskParamsTimeZoneSantiago                  CreateGoogleCalendarEventTaskParamsTimeZone = "Santiago"
+	CreateGoogleCalendarEventTaskParamsTimeZoneSapporo                   CreateGoogleCalendarEventTaskParamsTimeZone = "Sapporo"
+	CreateGoogleCalendarEventTaskParamsTimeZoneSarajevo                  CreateGoogleCalendarEventTaskParamsTimeZone = "Sarajevo"
+	CreateGoogleCalendarEventTaskParamsTimeZoneSaskatchewan              CreateGoogleCalendarEventTaskParamsTimeZone = "Saskatchewan"
+	CreateGoogleCalendarEventTaskParamsTimeZoneSeoul                     CreateGoogleCalendarEventTaskParamsTimeZone = "Seoul"
+	CreateGoogleCalendarEventTaskParamsTimeZoneSingapore                 CreateGoogleCalendarEventTaskParamsTimeZone = "Singapore"
+	CreateGoogleCalendarEventTaskParamsTimeZoneSkopje                    CreateGoogleCalendarEventTaskParamsTimeZone = "Skopje"
+	CreateGoogleCalendarEventTaskParamsTimeZoneSofia                     CreateGoogleCalendarEventTaskParamsTimeZone = "Sofia"
+	CreateGoogleCalendarEventTaskParamsTimeZoneSolomonIs                 CreateGoogleCalendarEventTaskParamsTimeZone = "Solomon Is."
+	CreateGoogleCalendarEventTaskParamsTimeZoneSrednekolymsk             CreateGoogleCalendarEventTaskParamsTimeZone = "Srednekolymsk"
+	CreateGoogleCalendarEventTaskParamsTimeZoneSriJayawardenepura        CreateGoogleCalendarEventTaskParamsTimeZone = "Sri Jayawardenepura"
+	CreateGoogleCalendarEventTaskParamsTimeZoneStPetersburg              CreateGoogleCalendarEventTaskParamsTimeZone = "St. Petersburg"
+	CreateGoogleCalendarEventTaskParamsTimeZoneStockholm                 CreateGoogleCalendarEventTaskParamsTimeZone = "Stockholm"
+	CreateGoogleCalendarEventTaskParamsTimeZoneSydney                    CreateGoogleCalendarEventTaskParamsTimeZone = "Sydney"
+	CreateGoogleCalendarEventTaskParamsTimeZoneTaipei                    CreateGoogleCalendarEventTaskParamsTimeZone = "Taipei"
+	CreateGoogleCalendarEventTaskParamsTimeZoneTallinn                   CreateGoogleCalendarEventTaskParamsTimeZone = "Tallinn"
+	CreateGoogleCalendarEventTaskParamsTimeZoneTashkent                  CreateGoogleCalendarEventTaskParamsTimeZone = "Tashkent"
+	CreateGoogleCalendarEventTaskParamsTimeZoneTbilisi                   CreateGoogleCalendarEventTaskParamsTimeZone = "Tbilisi"
+	CreateGoogleCalendarEventTaskParamsTimeZoneTehran                    CreateGoogleCalendarEventTaskParamsTimeZone = "Tehran"
+	CreateGoogleCalendarEventTaskParamsTimeZoneTijuana                   CreateGoogleCalendarEventTaskParamsTimeZone = "Tijuana"
+	CreateGoogleCalendarEventTaskParamsTimeZoneTokelauIs                 CreateGoogleCalendarEventTaskParamsTimeZone = "Tokelau Is."
+	CreateGoogleCalendarEventTaskParamsTimeZoneTokyo                     CreateGoogleCalendarEventTaskParamsTimeZone = "Tokyo"
+	CreateGoogleCalendarEventTaskParamsTimeZoneUTC                       CreateGoogleCalendarEventTaskParamsTimeZone = "UTC"
+	CreateGoogleCalendarEventTaskParamsTimeZoneUlaanbaatar               CreateGoogleCalendarEventTaskParamsTimeZone = "Ulaanbaatar"
+	CreateGoogleCalendarEventTaskParamsTimeZoneUrumqi                    CreateGoogleCalendarEventTaskParamsTimeZone = "Urumqi"
+	CreateGoogleCalendarEventTaskParamsTimeZoneVienna                    CreateGoogleCalendarEventTaskParamsTimeZone = "Vienna"
+	CreateGoogleCalendarEventTaskParamsTimeZoneVilnius                   CreateGoogleCalendarEventTaskParamsTimeZone = "Vilnius"
+	CreateGoogleCalendarEventTaskParamsTimeZoneVladivostok               CreateGoogleCalendarEventTaskParamsTimeZone = "Vladivostok"
+	CreateGoogleCalendarEventTaskParamsTimeZoneVolgograd                 CreateGoogleCalendarEventTaskParamsTimeZone = "Volgograd"
+	CreateGoogleCalendarEventTaskParamsTimeZoneWarsaw                    CreateGoogleCalendarEventTaskParamsTimeZone = "Warsaw"
+	CreateGoogleCalendarEventTaskParamsTimeZoneWellington                CreateGoogleCalendarEventTaskParamsTimeZone = "Wellington"
+	CreateGoogleCalendarEventTaskParamsTimeZoneWestCentralAfrica         CreateGoogleCalendarEventTaskParamsTimeZone = "West Central Africa"
+	CreateGoogleCalendarEventTaskParamsTimeZoneYakutsk                   CreateGoogleCalendarEventTaskParamsTimeZone = "Yakutsk"
+	CreateGoogleCalendarEventTaskParamsTimeZoneYerevan                   CreateGoogleCalendarEventTaskParamsTimeZone = "Yerevan"
+	CreateGoogleCalendarEventTaskParamsTimeZoneZagreb                    CreateGoogleCalendarEventTaskParamsTimeZone = "Zagreb"
+	CreateGoogleCalendarEventTaskParamsTimeZoneZurich                    CreateGoogleCalendarEventTaskParamsTimeZone = "Zurich"
 )
 
 // Defines values for CreateGoogleDocsPageTaskParamsTaskType.
@@ -2618,6 +2618,161 @@ const (
 	NewStatusPageDataAttributesShowUptimeLastDaysN90 NewStatusPageDataAttributesShowUptimeLastDays = 90
 )
 
+// Defines values for NewStatusPageDataAttributesTimeZone.
+const (
+	NewStatusPageDataAttributesTimeZoneAbuDhabi                  NewStatusPageDataAttributesTimeZone = "Abu Dhabi"
+	NewStatusPageDataAttributesTimeZoneAdelaide                  NewStatusPageDataAttributesTimeZone = "Adelaide"
+	NewStatusPageDataAttributesTimeZoneAlaska                    NewStatusPageDataAttributesTimeZone = "Alaska"
+	NewStatusPageDataAttributesTimeZoneAlmaty                    NewStatusPageDataAttributesTimeZone = "Almaty"
+	NewStatusPageDataAttributesTimeZoneAmericanSamoa             NewStatusPageDataAttributesTimeZone = "American Samoa"
+	NewStatusPageDataAttributesTimeZoneAmsterdam                 NewStatusPageDataAttributesTimeZone = "Amsterdam"
+	NewStatusPageDataAttributesTimeZoneArizona                   NewStatusPageDataAttributesTimeZone = "Arizona"
+	NewStatusPageDataAttributesTimeZoneAstana                    NewStatusPageDataAttributesTimeZone = "Astana"
+	NewStatusPageDataAttributesTimeZoneAthens                    NewStatusPageDataAttributesTimeZone = "Athens"
+	NewStatusPageDataAttributesTimeZoneAtlanticTimeCanada        NewStatusPageDataAttributesTimeZone = "Atlantic Time (Canada)"
+	NewStatusPageDataAttributesTimeZoneAuckland                  NewStatusPageDataAttributesTimeZone = "Auckland"
+	NewStatusPageDataAttributesTimeZoneAzores                    NewStatusPageDataAttributesTimeZone = "Azores"
+	NewStatusPageDataAttributesTimeZoneBaghdad                   NewStatusPageDataAttributesTimeZone = "Baghdad"
+	NewStatusPageDataAttributesTimeZoneBaku                      NewStatusPageDataAttributesTimeZone = "Baku"
+	NewStatusPageDataAttributesTimeZoneBangkok                   NewStatusPageDataAttributesTimeZone = "Bangkok"
+	NewStatusPageDataAttributesTimeZoneBeijing                   NewStatusPageDataAttributesTimeZone = "Beijing"
+	NewStatusPageDataAttributesTimeZoneBelgrade                  NewStatusPageDataAttributesTimeZone = "Belgrade"
+	NewStatusPageDataAttributesTimeZoneBerlin                    NewStatusPageDataAttributesTimeZone = "Berlin"
+	NewStatusPageDataAttributesTimeZoneBern                      NewStatusPageDataAttributesTimeZone = "Bern"
+	NewStatusPageDataAttributesTimeZoneBogota                    NewStatusPageDataAttributesTimeZone = "Bogota"
+	NewStatusPageDataAttributesTimeZoneBrasilia                  NewStatusPageDataAttributesTimeZone = "Brasilia"
+	NewStatusPageDataAttributesTimeZoneBratislava                NewStatusPageDataAttributesTimeZone = "Bratislava"
+	NewStatusPageDataAttributesTimeZoneBrisbane                  NewStatusPageDataAttributesTimeZone = "Brisbane"
+	NewStatusPageDataAttributesTimeZoneBrussels                  NewStatusPageDataAttributesTimeZone = "Brussels"
+	NewStatusPageDataAttributesTimeZoneBucharest                 NewStatusPageDataAttributesTimeZone = "Bucharest"
+	NewStatusPageDataAttributesTimeZoneBudapest                  NewStatusPageDataAttributesTimeZone = "Budapest"
+	NewStatusPageDataAttributesTimeZoneBuenosAires               NewStatusPageDataAttributesTimeZone = "Buenos Aires"
+	NewStatusPageDataAttributesTimeZoneCairo                     NewStatusPageDataAttributesTimeZone = "Cairo"
+	NewStatusPageDataAttributesTimeZoneCanberra                  NewStatusPageDataAttributesTimeZone = "Canberra"
+	NewStatusPageDataAttributesTimeZoneCapeVerdeIs               NewStatusPageDataAttributesTimeZone = "Cape Verde Is."
+	NewStatusPageDataAttributesTimeZoneCaracas                   NewStatusPageDataAttributesTimeZone = "Caracas"
+	NewStatusPageDataAttributesTimeZoneCasablanca                NewStatusPageDataAttributesTimeZone = "Casablanca"
+	NewStatusPageDataAttributesTimeZoneCentralAmerica            NewStatusPageDataAttributesTimeZone = "Central America"
+	NewStatusPageDataAttributesTimeZoneCentralTimeUSCanada       NewStatusPageDataAttributesTimeZone = "Central Time (US & Canada)"
+	NewStatusPageDataAttributesTimeZoneChathamIs                 NewStatusPageDataAttributesTimeZone = "Chatham Is."
+	NewStatusPageDataAttributesTimeZoneChennai                   NewStatusPageDataAttributesTimeZone = "Chennai"
+	NewStatusPageDataAttributesTimeZoneChihuahua                 NewStatusPageDataAttributesTimeZone = "Chihuahua"
+	NewStatusPageDataAttributesTimeZoneChongqing                 NewStatusPageDataAttributesTimeZone = "Chongqing"
+	NewStatusPageDataAttributesTimeZoneCopenhagen                NewStatusPageDataAttributesTimeZone = "Copenhagen"
+	NewStatusPageDataAttributesTimeZoneDarwin                    NewStatusPageDataAttributesTimeZone = "Darwin"
+	NewStatusPageDataAttributesTimeZoneDhaka                     NewStatusPageDataAttributesTimeZone = "Dhaka"
+	NewStatusPageDataAttributesTimeZoneDublin                    NewStatusPageDataAttributesTimeZone = "Dublin"
+	NewStatusPageDataAttributesTimeZoneEasternTimeUSCanada       NewStatusPageDataAttributesTimeZone = "Eastern Time (US & Canada)"
+	NewStatusPageDataAttributesTimeZoneEdinburgh                 NewStatusPageDataAttributesTimeZone = "Edinburgh"
+	NewStatusPageDataAttributesTimeZoneEkaterinburg              NewStatusPageDataAttributesTimeZone = "Ekaterinburg"
+	NewStatusPageDataAttributesTimeZoneFiji                      NewStatusPageDataAttributesTimeZone = "Fiji"
+	NewStatusPageDataAttributesTimeZoneGeorgetown                NewStatusPageDataAttributesTimeZone = "Georgetown"
+	NewStatusPageDataAttributesTimeZoneGreenland                 NewStatusPageDataAttributesTimeZone = "Greenland"
+	NewStatusPageDataAttributesTimeZoneGuadalajara               NewStatusPageDataAttributesTimeZone = "Guadalajara"
+	NewStatusPageDataAttributesTimeZoneGuam                      NewStatusPageDataAttributesTimeZone = "Guam"
+	NewStatusPageDataAttributesTimeZoneHanoi                     NewStatusPageDataAttributesTimeZone = "Hanoi"
+	NewStatusPageDataAttributesTimeZoneHarare                    NewStatusPageDataAttributesTimeZone = "Harare"
+	NewStatusPageDataAttributesTimeZoneHawaii                    NewStatusPageDataAttributesTimeZone = "Hawaii"
+	NewStatusPageDataAttributesTimeZoneHelsinki                  NewStatusPageDataAttributesTimeZone = "Helsinki"
+	NewStatusPageDataAttributesTimeZoneHobart                    NewStatusPageDataAttributesTimeZone = "Hobart"
+	NewStatusPageDataAttributesTimeZoneHongKong                  NewStatusPageDataAttributesTimeZone = "Hong Kong"
+	NewStatusPageDataAttributesTimeZoneIndianaEast               NewStatusPageDataAttributesTimeZone = "Indiana (East)"
+	NewStatusPageDataAttributesTimeZoneInternationalDateLineWest NewStatusPageDataAttributesTimeZone = "International Date Line West"
+	NewStatusPageDataAttributesTimeZoneIrkutsk                   NewStatusPageDataAttributesTimeZone = "Irkutsk"
+	NewStatusPageDataAttributesTimeZoneIslamabad                 NewStatusPageDataAttributesTimeZone = "Islamabad"
+	NewStatusPageDataAttributesTimeZoneIstanbul                  NewStatusPageDataAttributesTimeZone = "Istanbul"
+	NewStatusPageDataAttributesTimeZoneJakarta                   NewStatusPageDataAttributesTimeZone = "Jakarta"
+	NewStatusPageDataAttributesTimeZoneJerusalem                 NewStatusPageDataAttributesTimeZone = "Jerusalem"
+	NewStatusPageDataAttributesTimeZoneKabul                     NewStatusPageDataAttributesTimeZone = "Kabul"
+	NewStatusPageDataAttributesTimeZoneKaliningrad               NewStatusPageDataAttributesTimeZone = "Kaliningrad"
+	NewStatusPageDataAttributesTimeZoneKamchatka                 NewStatusPageDataAttributesTimeZone = "Kamchatka"
+	NewStatusPageDataAttributesTimeZoneKarachi                   NewStatusPageDataAttributesTimeZone = "Karachi"
+	NewStatusPageDataAttributesTimeZoneKathmandu                 NewStatusPageDataAttributesTimeZone = "Kathmandu"
+	NewStatusPageDataAttributesTimeZoneKolkata                   NewStatusPageDataAttributesTimeZone = "Kolkata"
+	NewStatusPageDataAttributesTimeZoneKrasnoyarsk               NewStatusPageDataAttributesTimeZone = "Krasnoyarsk"
+	NewStatusPageDataAttributesTimeZoneKualaLumpur               NewStatusPageDataAttributesTimeZone = "Kuala Lumpur"
+	NewStatusPageDataAttributesTimeZoneKuwait                    NewStatusPageDataAttributesTimeZone = "Kuwait"
+	NewStatusPageDataAttributesTimeZoneKyiv                      NewStatusPageDataAttributesTimeZone = "Kyiv"
+	NewStatusPageDataAttributesTimeZoneLaPaz                     NewStatusPageDataAttributesTimeZone = "La Paz"
+	NewStatusPageDataAttributesTimeZoneLima                      NewStatusPageDataAttributesTimeZone = "Lima"
+	NewStatusPageDataAttributesTimeZoneLisbon                    NewStatusPageDataAttributesTimeZone = "Lisbon"
+	NewStatusPageDataAttributesTimeZoneLjubljana                 NewStatusPageDataAttributesTimeZone = "Ljubljana"
+	NewStatusPageDataAttributesTimeZoneLondon                    NewStatusPageDataAttributesTimeZone = "London"
+	NewStatusPageDataAttributesTimeZoneMadrid                    NewStatusPageDataAttributesTimeZone = "Madrid"
+	NewStatusPageDataAttributesTimeZoneMagadan                   NewStatusPageDataAttributesTimeZone = "Magadan"
+	NewStatusPageDataAttributesTimeZoneMarshallIs                NewStatusPageDataAttributesTimeZone = "Marshall Is."
+	NewStatusPageDataAttributesTimeZoneMazatlan                  NewStatusPageDataAttributesTimeZone = "Mazatlan"
+	NewStatusPageDataAttributesTimeZoneMelbourne                 NewStatusPageDataAttributesTimeZone = "Melbourne"
+	NewStatusPageDataAttributesTimeZoneMexicoCity                NewStatusPageDataAttributesTimeZone = "Mexico City"
+	NewStatusPageDataAttributesTimeZoneMidAtlantic               NewStatusPageDataAttributesTimeZone = "Mid-Atlantic"
+	NewStatusPageDataAttributesTimeZoneMidwayIsland              NewStatusPageDataAttributesTimeZone = "Midway Island"
+	NewStatusPageDataAttributesTimeZoneMinsk                     NewStatusPageDataAttributesTimeZone = "Minsk"
+	NewStatusPageDataAttributesTimeZoneMonrovia                  NewStatusPageDataAttributesTimeZone = "Monrovia"
+	NewStatusPageDataAttributesTimeZoneMonterrey                 NewStatusPageDataAttributesTimeZone = "Monterrey"
+	NewStatusPageDataAttributesTimeZoneMontevideo                NewStatusPageDataAttributesTimeZone = "Montevideo"
+	NewStatusPageDataAttributesTimeZoneMoscow                    NewStatusPageDataAttributesTimeZone = "Moscow"
+	NewStatusPageDataAttributesTimeZoneMountainTimeUSCanada      NewStatusPageDataAttributesTimeZone = "Mountain Time (US & Canada)"
+	NewStatusPageDataAttributesTimeZoneMumbai                    NewStatusPageDataAttributesTimeZone = "Mumbai"
+	NewStatusPageDataAttributesTimeZoneMuscat                    NewStatusPageDataAttributesTimeZone = "Muscat"
+	NewStatusPageDataAttributesTimeZoneNairobi                   NewStatusPageDataAttributesTimeZone = "Nairobi"
+	NewStatusPageDataAttributesTimeZoneNewCaledonia              NewStatusPageDataAttributesTimeZone = "New Caledonia"
+	NewStatusPageDataAttributesTimeZoneNewDelhi                  NewStatusPageDataAttributesTimeZone = "New Delhi"
+	NewStatusPageDataAttributesTimeZoneNewfoundland              NewStatusPageDataAttributesTimeZone = "Newfoundland"
+	NewStatusPageDataAttributesTimeZoneNovosibirsk               NewStatusPageDataAttributesTimeZone = "Novosibirsk"
+	NewStatusPageDataAttributesTimeZoneNukualofa                 NewStatusPageDataAttributesTimeZone = "Nuku'alofa"
+	NewStatusPageDataAttributesTimeZoneOsaka                     NewStatusPageDataAttributesTimeZone = "Osaka"
+	NewStatusPageDataAttributesTimeZonePacificTimeUSCanada       NewStatusPageDataAttributesTimeZone = "Pacific Time (US & Canada)"
+	NewStatusPageDataAttributesTimeZoneParis                     NewStatusPageDataAttributesTimeZone = "Paris"
+	NewStatusPageDataAttributesTimeZonePerth                     NewStatusPageDataAttributesTimeZone = "Perth"
+	NewStatusPageDataAttributesTimeZonePortMoresby               NewStatusPageDataAttributesTimeZone = "Port Moresby"
+	NewStatusPageDataAttributesTimeZonePrague                    NewStatusPageDataAttributesTimeZone = "Prague"
+	NewStatusPageDataAttributesTimeZonePretoria                  NewStatusPageDataAttributesTimeZone = "Pretoria"
+	NewStatusPageDataAttributesTimeZonePuertoRico                NewStatusPageDataAttributesTimeZone = "Puerto Rico"
+	NewStatusPageDataAttributesTimeZoneQuito                     NewStatusPageDataAttributesTimeZone = "Quito"
+	NewStatusPageDataAttributesTimeZoneRangoon                   NewStatusPageDataAttributesTimeZone = "Rangoon"
+	NewStatusPageDataAttributesTimeZoneRiga                      NewStatusPageDataAttributesTimeZone = "Riga"
+	NewStatusPageDataAttributesTimeZoneRiyadh                    NewStatusPageDataAttributesTimeZone = "Riyadh"
+	NewStatusPageDataAttributesTimeZoneRome                      NewStatusPageDataAttributesTimeZone = "Rome"
+	NewStatusPageDataAttributesTimeZoneSamara                    NewStatusPageDataAttributesTimeZone = "Samara"
+	NewStatusPageDataAttributesTimeZoneSamoa                     NewStatusPageDataAttributesTimeZone = "Samoa"
+	NewStatusPageDataAttributesTimeZoneSantiago                  NewStatusPageDataAttributesTimeZone = "Santiago"
+	NewStatusPageDataAttributesTimeZoneSapporo                   NewStatusPageDataAttributesTimeZone = "Sapporo"
+	NewStatusPageDataAttributesTimeZoneSarajevo                  NewStatusPageDataAttributesTimeZone = "Sarajevo"
+	NewStatusPageDataAttributesTimeZoneSaskatchewan              NewStatusPageDataAttributesTimeZone = "Saskatchewan"
+	NewStatusPageDataAttributesTimeZoneSeoul                     NewStatusPageDataAttributesTimeZone = "Seoul"
+	NewStatusPageDataAttributesTimeZoneSingapore                 NewStatusPageDataAttributesTimeZone = "Singapore"
+	NewStatusPageDataAttributesTimeZoneSkopje                    NewStatusPageDataAttributesTimeZone = "Skopje"
+	NewStatusPageDataAttributesTimeZoneSofia                     NewStatusPageDataAttributesTimeZone = "Sofia"
+	NewStatusPageDataAttributesTimeZoneSolomonIs                 NewStatusPageDataAttributesTimeZone = "Solomon Is."
+	NewStatusPageDataAttributesTimeZoneSrednekolymsk             NewStatusPageDataAttributesTimeZone = "Srednekolymsk"
+	NewStatusPageDataAttributesTimeZoneSriJayawardenepura        NewStatusPageDataAttributesTimeZone = "Sri Jayawardenepura"
+	NewStatusPageDataAttributesTimeZoneStPetersburg              NewStatusPageDataAttributesTimeZone = "St. Petersburg"
+	NewStatusPageDataAttributesTimeZoneStockholm                 NewStatusPageDataAttributesTimeZone = "Stockholm"
+	NewStatusPageDataAttributesTimeZoneSydney                    NewStatusPageDataAttributesTimeZone = "Sydney"
+	NewStatusPageDataAttributesTimeZoneTaipei                    NewStatusPageDataAttributesTimeZone = "Taipei"
+	NewStatusPageDataAttributesTimeZoneTallinn                   NewStatusPageDataAttributesTimeZone = "Tallinn"
+	NewStatusPageDataAttributesTimeZoneTashkent                  NewStatusPageDataAttributesTimeZone = "Tashkent"
+	NewStatusPageDataAttributesTimeZoneTbilisi                   NewStatusPageDataAttributesTimeZone = "Tbilisi"
+	NewStatusPageDataAttributesTimeZoneTehran                    NewStatusPageDataAttributesTimeZone = "Tehran"
+	NewStatusPageDataAttributesTimeZoneTijuana                   NewStatusPageDataAttributesTimeZone = "Tijuana"
+	NewStatusPageDataAttributesTimeZoneTokelauIs                 NewStatusPageDataAttributesTimeZone = "Tokelau Is."
+	NewStatusPageDataAttributesTimeZoneTokyo                     NewStatusPageDataAttributesTimeZone = "Tokyo"
+	NewStatusPageDataAttributesTimeZoneUTC                       NewStatusPageDataAttributesTimeZone = "UTC"
+	NewStatusPageDataAttributesTimeZoneUlaanbaatar               NewStatusPageDataAttributesTimeZone = "Ulaanbaatar"
+	NewStatusPageDataAttributesTimeZoneUrumqi                    NewStatusPageDataAttributesTimeZone = "Urumqi"
+	NewStatusPageDataAttributesTimeZoneVienna                    NewStatusPageDataAttributesTimeZone = "Vienna"
+	NewStatusPageDataAttributesTimeZoneVilnius                   NewStatusPageDataAttributesTimeZone = "Vilnius"
+	NewStatusPageDataAttributesTimeZoneVladivostok               NewStatusPageDataAttributesTimeZone = "Vladivostok"
+	NewStatusPageDataAttributesTimeZoneVolgograd                 NewStatusPageDataAttributesTimeZone = "Volgograd"
+	NewStatusPageDataAttributesTimeZoneWarsaw                    NewStatusPageDataAttributesTimeZone = "Warsaw"
+	NewStatusPageDataAttributesTimeZoneWellington                NewStatusPageDataAttributesTimeZone = "Wellington"
+	NewStatusPageDataAttributesTimeZoneWestCentralAfrica         NewStatusPageDataAttributesTimeZone = "West Central Africa"
+	NewStatusPageDataAttributesTimeZoneYakutsk                   NewStatusPageDataAttributesTimeZone = "Yakutsk"
+	NewStatusPageDataAttributesTimeZoneYerevan                   NewStatusPageDataAttributesTimeZone = "Yerevan"
+	NewStatusPageDataAttributesTimeZoneZagreb                    NewStatusPageDataAttributesTimeZone = "Zagreb"
+	NewStatusPageDataAttributesTimeZoneZurich                    NewStatusPageDataAttributesTimeZone = "Zurich"
+)
+
 // Defines values for NewStatusPageDataType.
 const (
 	NewStatusPageDataTypeStatusPages NewStatusPageDataType = "status_pages"
@@ -3164,11 +3319,321 @@ const (
 	StatusPageShowUptimeLastDaysN90 StatusPageShowUptimeLastDays = 90
 )
 
+// Defines values for StatusPageTimeZone.
+const (
+	StatusPageTimeZoneAbuDhabi                  StatusPageTimeZone = "Abu Dhabi"
+	StatusPageTimeZoneAdelaide                  StatusPageTimeZone = "Adelaide"
+	StatusPageTimeZoneAlaska                    StatusPageTimeZone = "Alaska"
+	StatusPageTimeZoneAlmaty                    StatusPageTimeZone = "Almaty"
+	StatusPageTimeZoneAmericanSamoa             StatusPageTimeZone = "American Samoa"
+	StatusPageTimeZoneAmsterdam                 StatusPageTimeZone = "Amsterdam"
+	StatusPageTimeZoneArizona                   StatusPageTimeZone = "Arizona"
+	StatusPageTimeZoneAstana                    StatusPageTimeZone = "Astana"
+	StatusPageTimeZoneAthens                    StatusPageTimeZone = "Athens"
+	StatusPageTimeZoneAtlanticTimeCanada        StatusPageTimeZone = "Atlantic Time (Canada)"
+	StatusPageTimeZoneAuckland                  StatusPageTimeZone = "Auckland"
+	StatusPageTimeZoneAzores                    StatusPageTimeZone = "Azores"
+	StatusPageTimeZoneBaghdad                   StatusPageTimeZone = "Baghdad"
+	StatusPageTimeZoneBaku                      StatusPageTimeZone = "Baku"
+	StatusPageTimeZoneBangkok                   StatusPageTimeZone = "Bangkok"
+	StatusPageTimeZoneBeijing                   StatusPageTimeZone = "Beijing"
+	StatusPageTimeZoneBelgrade                  StatusPageTimeZone = "Belgrade"
+	StatusPageTimeZoneBerlin                    StatusPageTimeZone = "Berlin"
+	StatusPageTimeZoneBern                      StatusPageTimeZone = "Bern"
+	StatusPageTimeZoneBogota                    StatusPageTimeZone = "Bogota"
+	StatusPageTimeZoneBrasilia                  StatusPageTimeZone = "Brasilia"
+	StatusPageTimeZoneBratislava                StatusPageTimeZone = "Bratislava"
+	StatusPageTimeZoneBrisbane                  StatusPageTimeZone = "Brisbane"
+	StatusPageTimeZoneBrussels                  StatusPageTimeZone = "Brussels"
+	StatusPageTimeZoneBucharest                 StatusPageTimeZone = "Bucharest"
+	StatusPageTimeZoneBudapest                  StatusPageTimeZone = "Budapest"
+	StatusPageTimeZoneBuenosAires               StatusPageTimeZone = "Buenos Aires"
+	StatusPageTimeZoneCairo                     StatusPageTimeZone = "Cairo"
+	StatusPageTimeZoneCanberra                  StatusPageTimeZone = "Canberra"
+	StatusPageTimeZoneCapeVerdeIs               StatusPageTimeZone = "Cape Verde Is."
+	StatusPageTimeZoneCaracas                   StatusPageTimeZone = "Caracas"
+	StatusPageTimeZoneCasablanca                StatusPageTimeZone = "Casablanca"
+	StatusPageTimeZoneCentralAmerica            StatusPageTimeZone = "Central America"
+	StatusPageTimeZoneCentralTimeUSCanada       StatusPageTimeZone = "Central Time (US & Canada)"
+	StatusPageTimeZoneChathamIs                 StatusPageTimeZone = "Chatham Is."
+	StatusPageTimeZoneChennai                   StatusPageTimeZone = "Chennai"
+	StatusPageTimeZoneChihuahua                 StatusPageTimeZone = "Chihuahua"
+	StatusPageTimeZoneChongqing                 StatusPageTimeZone = "Chongqing"
+	StatusPageTimeZoneCopenhagen                StatusPageTimeZone = "Copenhagen"
+	StatusPageTimeZoneDarwin                    StatusPageTimeZone = "Darwin"
+	StatusPageTimeZoneDhaka                     StatusPageTimeZone = "Dhaka"
+	StatusPageTimeZoneDublin                    StatusPageTimeZone = "Dublin"
+	StatusPageTimeZoneEasternTimeUSCanada       StatusPageTimeZone = "Eastern Time (US & Canada)"
+	StatusPageTimeZoneEdinburgh                 StatusPageTimeZone = "Edinburgh"
+	StatusPageTimeZoneEkaterinburg              StatusPageTimeZone = "Ekaterinburg"
+	StatusPageTimeZoneFiji                      StatusPageTimeZone = "Fiji"
+	StatusPageTimeZoneGeorgetown                StatusPageTimeZone = "Georgetown"
+	StatusPageTimeZoneGreenland                 StatusPageTimeZone = "Greenland"
+	StatusPageTimeZoneGuadalajara               StatusPageTimeZone = "Guadalajara"
+	StatusPageTimeZoneGuam                      StatusPageTimeZone = "Guam"
+	StatusPageTimeZoneHanoi                     StatusPageTimeZone = "Hanoi"
+	StatusPageTimeZoneHarare                    StatusPageTimeZone = "Harare"
+	StatusPageTimeZoneHawaii                    StatusPageTimeZone = "Hawaii"
+	StatusPageTimeZoneHelsinki                  StatusPageTimeZone = "Helsinki"
+	StatusPageTimeZoneHobart                    StatusPageTimeZone = "Hobart"
+	StatusPageTimeZoneHongKong                  StatusPageTimeZone = "Hong Kong"
+	StatusPageTimeZoneIndianaEast               StatusPageTimeZone = "Indiana (East)"
+	StatusPageTimeZoneInternationalDateLineWest StatusPageTimeZone = "International Date Line West"
+	StatusPageTimeZoneIrkutsk                   StatusPageTimeZone = "Irkutsk"
+	StatusPageTimeZoneIslamabad                 StatusPageTimeZone = "Islamabad"
+	StatusPageTimeZoneIstanbul                  StatusPageTimeZone = "Istanbul"
+	StatusPageTimeZoneJakarta                   StatusPageTimeZone = "Jakarta"
+	StatusPageTimeZoneJerusalem                 StatusPageTimeZone = "Jerusalem"
+	StatusPageTimeZoneKabul                     StatusPageTimeZone = "Kabul"
+	StatusPageTimeZoneKaliningrad               StatusPageTimeZone = "Kaliningrad"
+	StatusPageTimeZoneKamchatka                 StatusPageTimeZone = "Kamchatka"
+	StatusPageTimeZoneKarachi                   StatusPageTimeZone = "Karachi"
+	StatusPageTimeZoneKathmandu                 StatusPageTimeZone = "Kathmandu"
+	StatusPageTimeZoneKolkata                   StatusPageTimeZone = "Kolkata"
+	StatusPageTimeZoneKrasnoyarsk               StatusPageTimeZone = "Krasnoyarsk"
+	StatusPageTimeZoneKualaLumpur               StatusPageTimeZone = "Kuala Lumpur"
+	StatusPageTimeZoneKuwait                    StatusPageTimeZone = "Kuwait"
+	StatusPageTimeZoneKyiv                      StatusPageTimeZone = "Kyiv"
+	StatusPageTimeZoneLaPaz                     StatusPageTimeZone = "La Paz"
+	StatusPageTimeZoneLima                      StatusPageTimeZone = "Lima"
+	StatusPageTimeZoneLisbon                    StatusPageTimeZone = "Lisbon"
+	StatusPageTimeZoneLjubljana                 StatusPageTimeZone = "Ljubljana"
+	StatusPageTimeZoneLondon                    StatusPageTimeZone = "London"
+	StatusPageTimeZoneMadrid                    StatusPageTimeZone = "Madrid"
+	StatusPageTimeZoneMagadan                   StatusPageTimeZone = "Magadan"
+	StatusPageTimeZoneMarshallIs                StatusPageTimeZone = "Marshall Is."
+	StatusPageTimeZoneMazatlan                  StatusPageTimeZone = "Mazatlan"
+	StatusPageTimeZoneMelbourne                 StatusPageTimeZone = "Melbourne"
+	StatusPageTimeZoneMexicoCity                StatusPageTimeZone = "Mexico City"
+	StatusPageTimeZoneMidAtlantic               StatusPageTimeZone = "Mid-Atlantic"
+	StatusPageTimeZoneMidwayIsland              StatusPageTimeZone = "Midway Island"
+	StatusPageTimeZoneMinsk                     StatusPageTimeZone = "Minsk"
+	StatusPageTimeZoneMonrovia                  StatusPageTimeZone = "Monrovia"
+	StatusPageTimeZoneMonterrey                 StatusPageTimeZone = "Monterrey"
+	StatusPageTimeZoneMontevideo                StatusPageTimeZone = "Montevideo"
+	StatusPageTimeZoneMoscow                    StatusPageTimeZone = "Moscow"
+	StatusPageTimeZoneMountainTimeUSCanada      StatusPageTimeZone = "Mountain Time (US & Canada)"
+	StatusPageTimeZoneMumbai                    StatusPageTimeZone = "Mumbai"
+	StatusPageTimeZoneMuscat                    StatusPageTimeZone = "Muscat"
+	StatusPageTimeZoneNairobi                   StatusPageTimeZone = "Nairobi"
+	StatusPageTimeZoneNewCaledonia              StatusPageTimeZone = "New Caledonia"
+	StatusPageTimeZoneNewDelhi                  StatusPageTimeZone = "New Delhi"
+	StatusPageTimeZoneNewfoundland              StatusPageTimeZone = "Newfoundland"
+	StatusPageTimeZoneNovosibirsk               StatusPageTimeZone = "Novosibirsk"
+	StatusPageTimeZoneNukualofa                 StatusPageTimeZone = "Nuku'alofa"
+	StatusPageTimeZoneOsaka                     StatusPageTimeZone = "Osaka"
+	StatusPageTimeZonePacificTimeUSCanada       StatusPageTimeZone = "Pacific Time (US & Canada)"
+	StatusPageTimeZoneParis                     StatusPageTimeZone = "Paris"
+	StatusPageTimeZonePerth                     StatusPageTimeZone = "Perth"
+	StatusPageTimeZonePortMoresby               StatusPageTimeZone = "Port Moresby"
+	StatusPageTimeZonePrague                    StatusPageTimeZone = "Prague"
+	StatusPageTimeZonePretoria                  StatusPageTimeZone = "Pretoria"
+	StatusPageTimeZonePuertoRico                StatusPageTimeZone = "Puerto Rico"
+	StatusPageTimeZoneQuito                     StatusPageTimeZone = "Quito"
+	StatusPageTimeZoneRangoon                   StatusPageTimeZone = "Rangoon"
+	StatusPageTimeZoneRiga                      StatusPageTimeZone = "Riga"
+	StatusPageTimeZoneRiyadh                    StatusPageTimeZone = "Riyadh"
+	StatusPageTimeZoneRome                      StatusPageTimeZone = "Rome"
+	StatusPageTimeZoneSamara                    StatusPageTimeZone = "Samara"
+	StatusPageTimeZoneSamoa                     StatusPageTimeZone = "Samoa"
+	StatusPageTimeZoneSantiago                  StatusPageTimeZone = "Santiago"
+	StatusPageTimeZoneSapporo                   StatusPageTimeZone = "Sapporo"
+	StatusPageTimeZoneSarajevo                  StatusPageTimeZone = "Sarajevo"
+	StatusPageTimeZoneSaskatchewan              StatusPageTimeZone = "Saskatchewan"
+	StatusPageTimeZoneSeoul                     StatusPageTimeZone = "Seoul"
+	StatusPageTimeZoneSingapore                 StatusPageTimeZone = "Singapore"
+	StatusPageTimeZoneSkopje                    StatusPageTimeZone = "Skopje"
+	StatusPageTimeZoneSofia                     StatusPageTimeZone = "Sofia"
+	StatusPageTimeZoneSolomonIs                 StatusPageTimeZone = "Solomon Is."
+	StatusPageTimeZoneSrednekolymsk             StatusPageTimeZone = "Srednekolymsk"
+	StatusPageTimeZoneSriJayawardenepura        StatusPageTimeZone = "Sri Jayawardenepura"
+	StatusPageTimeZoneStPetersburg              StatusPageTimeZone = "St. Petersburg"
+	StatusPageTimeZoneStockholm                 StatusPageTimeZone = "Stockholm"
+	StatusPageTimeZoneSydney                    StatusPageTimeZone = "Sydney"
+	StatusPageTimeZoneTaipei                    StatusPageTimeZone = "Taipei"
+	StatusPageTimeZoneTallinn                   StatusPageTimeZone = "Tallinn"
+	StatusPageTimeZoneTashkent                  StatusPageTimeZone = "Tashkent"
+	StatusPageTimeZoneTbilisi                   StatusPageTimeZone = "Tbilisi"
+	StatusPageTimeZoneTehran                    StatusPageTimeZone = "Tehran"
+	StatusPageTimeZoneTijuana                   StatusPageTimeZone = "Tijuana"
+	StatusPageTimeZoneTokelauIs                 StatusPageTimeZone = "Tokelau Is."
+	StatusPageTimeZoneTokyo                     StatusPageTimeZone = "Tokyo"
+	StatusPageTimeZoneUTC                       StatusPageTimeZone = "UTC"
+	StatusPageTimeZoneUlaanbaatar               StatusPageTimeZone = "Ulaanbaatar"
+	StatusPageTimeZoneUrumqi                    StatusPageTimeZone = "Urumqi"
+	StatusPageTimeZoneVienna                    StatusPageTimeZone = "Vienna"
+	StatusPageTimeZoneVilnius                   StatusPageTimeZone = "Vilnius"
+	StatusPageTimeZoneVladivostok               StatusPageTimeZone = "Vladivostok"
+	StatusPageTimeZoneVolgograd                 StatusPageTimeZone = "Volgograd"
+	StatusPageTimeZoneWarsaw                    StatusPageTimeZone = "Warsaw"
+	StatusPageTimeZoneWellington                StatusPageTimeZone = "Wellington"
+	StatusPageTimeZoneWestCentralAfrica         StatusPageTimeZone = "West Central Africa"
+	StatusPageTimeZoneYakutsk                   StatusPageTimeZone = "Yakutsk"
+	StatusPageTimeZoneYerevan                   StatusPageTimeZone = "Yerevan"
+	StatusPageTimeZoneZagreb                    StatusPageTimeZone = "Zagreb"
+	StatusPageTimeZoneZurich                    StatusPageTimeZone = "Zurich"
+)
+
 // Defines values for StatusPageListDataAttributesShowUptimeLastDays.
 const (
 	StatusPageListDataAttributesShowUptimeLastDaysN30 StatusPageListDataAttributesShowUptimeLastDays = 30
 	StatusPageListDataAttributesShowUptimeLastDaysN60 StatusPageListDataAttributesShowUptimeLastDays = 60
 	StatusPageListDataAttributesShowUptimeLastDaysN90 StatusPageListDataAttributesShowUptimeLastDays = 90
+)
+
+// Defines values for StatusPageListDataAttributesTimeZone.
+const (
+	StatusPageListDataAttributesTimeZoneAbuDhabi                  StatusPageListDataAttributesTimeZone = "Abu Dhabi"
+	StatusPageListDataAttributesTimeZoneAdelaide                  StatusPageListDataAttributesTimeZone = "Adelaide"
+	StatusPageListDataAttributesTimeZoneAlaska                    StatusPageListDataAttributesTimeZone = "Alaska"
+	StatusPageListDataAttributesTimeZoneAlmaty                    StatusPageListDataAttributesTimeZone = "Almaty"
+	StatusPageListDataAttributesTimeZoneAmericanSamoa             StatusPageListDataAttributesTimeZone = "American Samoa"
+	StatusPageListDataAttributesTimeZoneAmsterdam                 StatusPageListDataAttributesTimeZone = "Amsterdam"
+	StatusPageListDataAttributesTimeZoneArizona                   StatusPageListDataAttributesTimeZone = "Arizona"
+	StatusPageListDataAttributesTimeZoneAstana                    StatusPageListDataAttributesTimeZone = "Astana"
+	StatusPageListDataAttributesTimeZoneAthens                    StatusPageListDataAttributesTimeZone = "Athens"
+	StatusPageListDataAttributesTimeZoneAtlanticTimeCanada        StatusPageListDataAttributesTimeZone = "Atlantic Time (Canada)"
+	StatusPageListDataAttributesTimeZoneAuckland                  StatusPageListDataAttributesTimeZone = "Auckland"
+	StatusPageListDataAttributesTimeZoneAzores                    StatusPageListDataAttributesTimeZone = "Azores"
+	StatusPageListDataAttributesTimeZoneBaghdad                   StatusPageListDataAttributesTimeZone = "Baghdad"
+	StatusPageListDataAttributesTimeZoneBaku                      StatusPageListDataAttributesTimeZone = "Baku"
+	StatusPageListDataAttributesTimeZoneBangkok                   StatusPageListDataAttributesTimeZone = "Bangkok"
+	StatusPageListDataAttributesTimeZoneBeijing                   StatusPageListDataAttributesTimeZone = "Beijing"
+	StatusPageListDataAttributesTimeZoneBelgrade                  StatusPageListDataAttributesTimeZone = "Belgrade"
+	StatusPageListDataAttributesTimeZoneBerlin                    StatusPageListDataAttributesTimeZone = "Berlin"
+	StatusPageListDataAttributesTimeZoneBern                      StatusPageListDataAttributesTimeZone = "Bern"
+	StatusPageListDataAttributesTimeZoneBogota                    StatusPageListDataAttributesTimeZone = "Bogota"
+	StatusPageListDataAttributesTimeZoneBrasilia                  StatusPageListDataAttributesTimeZone = "Brasilia"
+	StatusPageListDataAttributesTimeZoneBratislava                StatusPageListDataAttributesTimeZone = "Bratislava"
+	StatusPageListDataAttributesTimeZoneBrisbane                  StatusPageListDataAttributesTimeZone = "Brisbane"
+	StatusPageListDataAttributesTimeZoneBrussels                  StatusPageListDataAttributesTimeZone = "Brussels"
+	StatusPageListDataAttributesTimeZoneBucharest                 StatusPageListDataAttributesTimeZone = "Bucharest"
+	StatusPageListDataAttributesTimeZoneBudapest                  StatusPageListDataAttributesTimeZone = "Budapest"
+	StatusPageListDataAttributesTimeZoneBuenosAires               StatusPageListDataAttributesTimeZone = "Buenos Aires"
+	StatusPageListDataAttributesTimeZoneCairo                     StatusPageListDataAttributesTimeZone = "Cairo"
+	StatusPageListDataAttributesTimeZoneCanberra                  StatusPageListDataAttributesTimeZone = "Canberra"
+	StatusPageListDataAttributesTimeZoneCapeVerdeIs               StatusPageListDataAttributesTimeZone = "Cape Verde Is."
+	StatusPageListDataAttributesTimeZoneCaracas                   StatusPageListDataAttributesTimeZone = "Caracas"
+	StatusPageListDataAttributesTimeZoneCasablanca                StatusPageListDataAttributesTimeZone = "Casablanca"
+	StatusPageListDataAttributesTimeZoneCentralAmerica            StatusPageListDataAttributesTimeZone = "Central America"
+	StatusPageListDataAttributesTimeZoneCentralTimeUSCanada       StatusPageListDataAttributesTimeZone = "Central Time (US & Canada)"
+	StatusPageListDataAttributesTimeZoneChathamIs                 StatusPageListDataAttributesTimeZone = "Chatham Is."
+	StatusPageListDataAttributesTimeZoneChennai                   StatusPageListDataAttributesTimeZone = "Chennai"
+	StatusPageListDataAttributesTimeZoneChihuahua                 StatusPageListDataAttributesTimeZone = "Chihuahua"
+	StatusPageListDataAttributesTimeZoneChongqing                 StatusPageListDataAttributesTimeZone = "Chongqing"
+	StatusPageListDataAttributesTimeZoneCopenhagen                StatusPageListDataAttributesTimeZone = "Copenhagen"
+	StatusPageListDataAttributesTimeZoneDarwin                    StatusPageListDataAttributesTimeZone = "Darwin"
+	StatusPageListDataAttributesTimeZoneDhaka                     StatusPageListDataAttributesTimeZone = "Dhaka"
+	StatusPageListDataAttributesTimeZoneDublin                    StatusPageListDataAttributesTimeZone = "Dublin"
+	StatusPageListDataAttributesTimeZoneEasternTimeUSCanada       StatusPageListDataAttributesTimeZone = "Eastern Time (US & Canada)"
+	StatusPageListDataAttributesTimeZoneEdinburgh                 StatusPageListDataAttributesTimeZone = "Edinburgh"
+	StatusPageListDataAttributesTimeZoneEkaterinburg              StatusPageListDataAttributesTimeZone = "Ekaterinburg"
+	StatusPageListDataAttributesTimeZoneFiji                      StatusPageListDataAttributesTimeZone = "Fiji"
+	StatusPageListDataAttributesTimeZoneGeorgetown                StatusPageListDataAttributesTimeZone = "Georgetown"
+	StatusPageListDataAttributesTimeZoneGreenland                 StatusPageListDataAttributesTimeZone = "Greenland"
+	StatusPageListDataAttributesTimeZoneGuadalajara               StatusPageListDataAttributesTimeZone = "Guadalajara"
+	StatusPageListDataAttributesTimeZoneGuam                      StatusPageListDataAttributesTimeZone = "Guam"
+	StatusPageListDataAttributesTimeZoneHanoi                     StatusPageListDataAttributesTimeZone = "Hanoi"
+	StatusPageListDataAttributesTimeZoneHarare                    StatusPageListDataAttributesTimeZone = "Harare"
+	StatusPageListDataAttributesTimeZoneHawaii                    StatusPageListDataAttributesTimeZone = "Hawaii"
+	StatusPageListDataAttributesTimeZoneHelsinki                  StatusPageListDataAttributesTimeZone = "Helsinki"
+	StatusPageListDataAttributesTimeZoneHobart                    StatusPageListDataAttributesTimeZone = "Hobart"
+	StatusPageListDataAttributesTimeZoneHongKong                  StatusPageListDataAttributesTimeZone = "Hong Kong"
+	StatusPageListDataAttributesTimeZoneIndianaEast               StatusPageListDataAttributesTimeZone = "Indiana (East)"
+	StatusPageListDataAttributesTimeZoneInternationalDateLineWest StatusPageListDataAttributesTimeZone = "International Date Line West"
+	StatusPageListDataAttributesTimeZoneIrkutsk                   StatusPageListDataAttributesTimeZone = "Irkutsk"
+	StatusPageListDataAttributesTimeZoneIslamabad                 StatusPageListDataAttributesTimeZone = "Islamabad"
+	StatusPageListDataAttributesTimeZoneIstanbul                  StatusPageListDataAttributesTimeZone = "Istanbul"
+	StatusPageListDataAttributesTimeZoneJakarta                   StatusPageListDataAttributesTimeZone = "Jakarta"
+	StatusPageListDataAttributesTimeZoneJerusalem                 StatusPageListDataAttributesTimeZone = "Jerusalem"
+	StatusPageListDataAttributesTimeZoneKabul                     StatusPageListDataAttributesTimeZone = "Kabul"
+	StatusPageListDataAttributesTimeZoneKaliningrad               StatusPageListDataAttributesTimeZone = "Kaliningrad"
+	StatusPageListDataAttributesTimeZoneKamchatka                 StatusPageListDataAttributesTimeZone = "Kamchatka"
+	StatusPageListDataAttributesTimeZoneKarachi                   StatusPageListDataAttributesTimeZone = "Karachi"
+	StatusPageListDataAttributesTimeZoneKathmandu                 StatusPageListDataAttributesTimeZone = "Kathmandu"
+	StatusPageListDataAttributesTimeZoneKolkata                   StatusPageListDataAttributesTimeZone = "Kolkata"
+	StatusPageListDataAttributesTimeZoneKrasnoyarsk               StatusPageListDataAttributesTimeZone = "Krasnoyarsk"
+	StatusPageListDataAttributesTimeZoneKualaLumpur               StatusPageListDataAttributesTimeZone = "Kuala Lumpur"
+	StatusPageListDataAttributesTimeZoneKuwait                    StatusPageListDataAttributesTimeZone = "Kuwait"
+	StatusPageListDataAttributesTimeZoneKyiv                      StatusPageListDataAttributesTimeZone = "Kyiv"
+	StatusPageListDataAttributesTimeZoneLaPaz                     StatusPageListDataAttributesTimeZone = "La Paz"
+	StatusPageListDataAttributesTimeZoneLima                      StatusPageListDataAttributesTimeZone = "Lima"
+	StatusPageListDataAttributesTimeZoneLisbon                    StatusPageListDataAttributesTimeZone = "Lisbon"
+	StatusPageListDataAttributesTimeZoneLjubljana                 StatusPageListDataAttributesTimeZone = "Ljubljana"
+	StatusPageListDataAttributesTimeZoneLondon                    StatusPageListDataAttributesTimeZone = "London"
+	StatusPageListDataAttributesTimeZoneMadrid                    StatusPageListDataAttributesTimeZone = "Madrid"
+	StatusPageListDataAttributesTimeZoneMagadan                   StatusPageListDataAttributesTimeZone = "Magadan"
+	StatusPageListDataAttributesTimeZoneMarshallIs                StatusPageListDataAttributesTimeZone = "Marshall Is."
+	StatusPageListDataAttributesTimeZoneMazatlan                  StatusPageListDataAttributesTimeZone = "Mazatlan"
+	StatusPageListDataAttributesTimeZoneMelbourne                 StatusPageListDataAttributesTimeZone = "Melbourne"
+	StatusPageListDataAttributesTimeZoneMexicoCity                StatusPageListDataAttributesTimeZone = "Mexico City"
+	StatusPageListDataAttributesTimeZoneMidAtlantic               StatusPageListDataAttributesTimeZone = "Mid-Atlantic"
+	StatusPageListDataAttributesTimeZoneMidwayIsland              StatusPageListDataAttributesTimeZone = "Midway Island"
+	StatusPageListDataAttributesTimeZoneMinsk                     StatusPageListDataAttributesTimeZone = "Minsk"
+	StatusPageListDataAttributesTimeZoneMonrovia                  StatusPageListDataAttributesTimeZone = "Monrovia"
+	StatusPageListDataAttributesTimeZoneMonterrey                 StatusPageListDataAttributesTimeZone = "Monterrey"
+	StatusPageListDataAttributesTimeZoneMontevideo                StatusPageListDataAttributesTimeZone = "Montevideo"
+	StatusPageListDataAttributesTimeZoneMoscow                    StatusPageListDataAttributesTimeZone = "Moscow"
+	StatusPageListDataAttributesTimeZoneMountainTimeUSCanada      StatusPageListDataAttributesTimeZone = "Mountain Time (US & Canada)"
+	StatusPageListDataAttributesTimeZoneMumbai                    StatusPageListDataAttributesTimeZone = "Mumbai"
+	StatusPageListDataAttributesTimeZoneMuscat                    StatusPageListDataAttributesTimeZone = "Muscat"
+	StatusPageListDataAttributesTimeZoneNairobi                   StatusPageListDataAttributesTimeZone = "Nairobi"
+	StatusPageListDataAttributesTimeZoneNewCaledonia              StatusPageListDataAttributesTimeZone = "New Caledonia"
+	StatusPageListDataAttributesTimeZoneNewDelhi                  StatusPageListDataAttributesTimeZone = "New Delhi"
+	StatusPageListDataAttributesTimeZoneNewfoundland              StatusPageListDataAttributesTimeZone = "Newfoundland"
+	StatusPageListDataAttributesTimeZoneNovosibirsk               StatusPageListDataAttributesTimeZone = "Novosibirsk"
+	StatusPageListDataAttributesTimeZoneNukualofa                 StatusPageListDataAttributesTimeZone = "Nuku'alofa"
+	StatusPageListDataAttributesTimeZoneOsaka                     StatusPageListDataAttributesTimeZone = "Osaka"
+	StatusPageListDataAttributesTimeZonePacificTimeUSCanada       StatusPageListDataAttributesTimeZone = "Pacific Time (US & Canada)"
+	StatusPageListDataAttributesTimeZoneParis                     StatusPageListDataAttributesTimeZone = "Paris"
+	StatusPageListDataAttributesTimeZonePerth                     StatusPageListDataAttributesTimeZone = "Perth"
+	StatusPageListDataAttributesTimeZonePortMoresby               StatusPageListDataAttributesTimeZone = "Port Moresby"
+	StatusPageListDataAttributesTimeZonePrague                    StatusPageListDataAttributesTimeZone = "Prague"
+	StatusPageListDataAttributesTimeZonePretoria                  StatusPageListDataAttributesTimeZone = "Pretoria"
+	StatusPageListDataAttributesTimeZonePuertoRico                StatusPageListDataAttributesTimeZone = "Puerto Rico"
+	StatusPageListDataAttributesTimeZoneQuito                     StatusPageListDataAttributesTimeZone = "Quito"
+	StatusPageListDataAttributesTimeZoneRangoon                   StatusPageListDataAttributesTimeZone = "Rangoon"
+	StatusPageListDataAttributesTimeZoneRiga                      StatusPageListDataAttributesTimeZone = "Riga"
+	StatusPageListDataAttributesTimeZoneRiyadh                    StatusPageListDataAttributesTimeZone = "Riyadh"
+	StatusPageListDataAttributesTimeZoneRome                      StatusPageListDataAttributesTimeZone = "Rome"
+	StatusPageListDataAttributesTimeZoneSamara                    StatusPageListDataAttributesTimeZone = "Samara"
+	StatusPageListDataAttributesTimeZoneSamoa                     StatusPageListDataAttributesTimeZone = "Samoa"
+	StatusPageListDataAttributesTimeZoneSantiago                  StatusPageListDataAttributesTimeZone = "Santiago"
+	StatusPageListDataAttributesTimeZoneSapporo                   StatusPageListDataAttributesTimeZone = "Sapporo"
+	StatusPageListDataAttributesTimeZoneSarajevo                  StatusPageListDataAttributesTimeZone = "Sarajevo"
+	StatusPageListDataAttributesTimeZoneSaskatchewan              StatusPageListDataAttributesTimeZone = "Saskatchewan"
+	StatusPageListDataAttributesTimeZoneSeoul                     StatusPageListDataAttributesTimeZone = "Seoul"
+	StatusPageListDataAttributesTimeZoneSingapore                 StatusPageListDataAttributesTimeZone = "Singapore"
+	StatusPageListDataAttributesTimeZoneSkopje                    StatusPageListDataAttributesTimeZone = "Skopje"
+	StatusPageListDataAttributesTimeZoneSofia                     StatusPageListDataAttributesTimeZone = "Sofia"
+	StatusPageListDataAttributesTimeZoneSolomonIs                 StatusPageListDataAttributesTimeZone = "Solomon Is."
+	StatusPageListDataAttributesTimeZoneSrednekolymsk             StatusPageListDataAttributesTimeZone = "Srednekolymsk"
+	StatusPageListDataAttributesTimeZoneSriJayawardenepura        StatusPageListDataAttributesTimeZone = "Sri Jayawardenepura"
+	StatusPageListDataAttributesTimeZoneStPetersburg              StatusPageListDataAttributesTimeZone = "St. Petersburg"
+	StatusPageListDataAttributesTimeZoneStockholm                 StatusPageListDataAttributesTimeZone = "Stockholm"
+	StatusPageListDataAttributesTimeZoneSydney                    StatusPageListDataAttributesTimeZone = "Sydney"
+	StatusPageListDataAttributesTimeZoneTaipei                    StatusPageListDataAttributesTimeZone = "Taipei"
+	StatusPageListDataAttributesTimeZoneTallinn                   StatusPageListDataAttributesTimeZone = "Tallinn"
+	StatusPageListDataAttributesTimeZoneTashkent                  StatusPageListDataAttributesTimeZone = "Tashkent"
+	StatusPageListDataAttributesTimeZoneTbilisi                   StatusPageListDataAttributesTimeZone = "Tbilisi"
+	StatusPageListDataAttributesTimeZoneTehran                    StatusPageListDataAttributesTimeZone = "Tehran"
+	StatusPageListDataAttributesTimeZoneTijuana                   StatusPageListDataAttributesTimeZone = "Tijuana"
+	StatusPageListDataAttributesTimeZoneTokelauIs                 StatusPageListDataAttributesTimeZone = "Tokelau Is."
+	StatusPageListDataAttributesTimeZoneTokyo                     StatusPageListDataAttributesTimeZone = "Tokyo"
+	StatusPageListDataAttributesTimeZoneUTC                       StatusPageListDataAttributesTimeZone = "UTC"
+	StatusPageListDataAttributesTimeZoneUlaanbaatar               StatusPageListDataAttributesTimeZone = "Ulaanbaatar"
+	StatusPageListDataAttributesTimeZoneUrumqi                    StatusPageListDataAttributesTimeZone = "Urumqi"
+	StatusPageListDataAttributesTimeZoneVienna                    StatusPageListDataAttributesTimeZone = "Vienna"
+	StatusPageListDataAttributesTimeZoneVilnius                   StatusPageListDataAttributesTimeZone = "Vilnius"
+	StatusPageListDataAttributesTimeZoneVladivostok               StatusPageListDataAttributesTimeZone = "Vladivostok"
+	StatusPageListDataAttributesTimeZoneVolgograd                 StatusPageListDataAttributesTimeZone = "Volgograd"
+	StatusPageListDataAttributesTimeZoneWarsaw                    StatusPageListDataAttributesTimeZone = "Warsaw"
+	StatusPageListDataAttributesTimeZoneWellington                StatusPageListDataAttributesTimeZone = "Wellington"
+	StatusPageListDataAttributesTimeZoneWestCentralAfrica         StatusPageListDataAttributesTimeZone = "West Central Africa"
+	StatusPageListDataAttributesTimeZoneYakutsk                   StatusPageListDataAttributesTimeZone = "Yakutsk"
+	StatusPageListDataAttributesTimeZoneYerevan                   StatusPageListDataAttributesTimeZone = "Yerevan"
+	StatusPageListDataAttributesTimeZoneZagreb                    StatusPageListDataAttributesTimeZone = "Zagreb"
+	StatusPageListDataAttributesTimeZoneZurich                    StatusPageListDataAttributesTimeZone = "Zurich"
 )
 
 // Defines values for StatusPageListDataType.
@@ -3181,6 +3646,161 @@ const (
 	StatusPageResponseDataAttributesShowUptimeLastDaysN30 StatusPageResponseDataAttributesShowUptimeLastDays = 30
 	StatusPageResponseDataAttributesShowUptimeLastDaysN60 StatusPageResponseDataAttributesShowUptimeLastDays = 60
 	StatusPageResponseDataAttributesShowUptimeLastDaysN90 StatusPageResponseDataAttributesShowUptimeLastDays = 90
+)
+
+// Defines values for StatusPageResponseDataAttributesTimeZone.
+const (
+	StatusPageResponseDataAttributesTimeZoneAbuDhabi                  StatusPageResponseDataAttributesTimeZone = "Abu Dhabi"
+	StatusPageResponseDataAttributesTimeZoneAdelaide                  StatusPageResponseDataAttributesTimeZone = "Adelaide"
+	StatusPageResponseDataAttributesTimeZoneAlaska                    StatusPageResponseDataAttributesTimeZone = "Alaska"
+	StatusPageResponseDataAttributesTimeZoneAlmaty                    StatusPageResponseDataAttributesTimeZone = "Almaty"
+	StatusPageResponseDataAttributesTimeZoneAmericanSamoa             StatusPageResponseDataAttributesTimeZone = "American Samoa"
+	StatusPageResponseDataAttributesTimeZoneAmsterdam                 StatusPageResponseDataAttributesTimeZone = "Amsterdam"
+	StatusPageResponseDataAttributesTimeZoneArizona                   StatusPageResponseDataAttributesTimeZone = "Arizona"
+	StatusPageResponseDataAttributesTimeZoneAstana                    StatusPageResponseDataAttributesTimeZone = "Astana"
+	StatusPageResponseDataAttributesTimeZoneAthens                    StatusPageResponseDataAttributesTimeZone = "Athens"
+	StatusPageResponseDataAttributesTimeZoneAtlanticTimeCanada        StatusPageResponseDataAttributesTimeZone = "Atlantic Time (Canada)"
+	StatusPageResponseDataAttributesTimeZoneAuckland                  StatusPageResponseDataAttributesTimeZone = "Auckland"
+	StatusPageResponseDataAttributesTimeZoneAzores                    StatusPageResponseDataAttributesTimeZone = "Azores"
+	StatusPageResponseDataAttributesTimeZoneBaghdad                   StatusPageResponseDataAttributesTimeZone = "Baghdad"
+	StatusPageResponseDataAttributesTimeZoneBaku                      StatusPageResponseDataAttributesTimeZone = "Baku"
+	StatusPageResponseDataAttributesTimeZoneBangkok                   StatusPageResponseDataAttributesTimeZone = "Bangkok"
+	StatusPageResponseDataAttributesTimeZoneBeijing                   StatusPageResponseDataAttributesTimeZone = "Beijing"
+	StatusPageResponseDataAttributesTimeZoneBelgrade                  StatusPageResponseDataAttributesTimeZone = "Belgrade"
+	StatusPageResponseDataAttributesTimeZoneBerlin                    StatusPageResponseDataAttributesTimeZone = "Berlin"
+	StatusPageResponseDataAttributesTimeZoneBern                      StatusPageResponseDataAttributesTimeZone = "Bern"
+	StatusPageResponseDataAttributesTimeZoneBogota                    StatusPageResponseDataAttributesTimeZone = "Bogota"
+	StatusPageResponseDataAttributesTimeZoneBrasilia                  StatusPageResponseDataAttributesTimeZone = "Brasilia"
+	StatusPageResponseDataAttributesTimeZoneBratislava                StatusPageResponseDataAttributesTimeZone = "Bratislava"
+	StatusPageResponseDataAttributesTimeZoneBrisbane                  StatusPageResponseDataAttributesTimeZone = "Brisbane"
+	StatusPageResponseDataAttributesTimeZoneBrussels                  StatusPageResponseDataAttributesTimeZone = "Brussels"
+	StatusPageResponseDataAttributesTimeZoneBucharest                 StatusPageResponseDataAttributesTimeZone = "Bucharest"
+	StatusPageResponseDataAttributesTimeZoneBudapest                  StatusPageResponseDataAttributesTimeZone = "Budapest"
+	StatusPageResponseDataAttributesTimeZoneBuenosAires               StatusPageResponseDataAttributesTimeZone = "Buenos Aires"
+	StatusPageResponseDataAttributesTimeZoneCairo                     StatusPageResponseDataAttributesTimeZone = "Cairo"
+	StatusPageResponseDataAttributesTimeZoneCanberra                  StatusPageResponseDataAttributesTimeZone = "Canberra"
+	StatusPageResponseDataAttributesTimeZoneCapeVerdeIs               StatusPageResponseDataAttributesTimeZone = "Cape Verde Is."
+	StatusPageResponseDataAttributesTimeZoneCaracas                   StatusPageResponseDataAttributesTimeZone = "Caracas"
+	StatusPageResponseDataAttributesTimeZoneCasablanca                StatusPageResponseDataAttributesTimeZone = "Casablanca"
+	StatusPageResponseDataAttributesTimeZoneCentralAmerica            StatusPageResponseDataAttributesTimeZone = "Central America"
+	StatusPageResponseDataAttributesTimeZoneCentralTimeUSCanada       StatusPageResponseDataAttributesTimeZone = "Central Time (US & Canada)"
+	StatusPageResponseDataAttributesTimeZoneChathamIs                 StatusPageResponseDataAttributesTimeZone = "Chatham Is."
+	StatusPageResponseDataAttributesTimeZoneChennai                   StatusPageResponseDataAttributesTimeZone = "Chennai"
+	StatusPageResponseDataAttributesTimeZoneChihuahua                 StatusPageResponseDataAttributesTimeZone = "Chihuahua"
+	StatusPageResponseDataAttributesTimeZoneChongqing                 StatusPageResponseDataAttributesTimeZone = "Chongqing"
+	StatusPageResponseDataAttributesTimeZoneCopenhagen                StatusPageResponseDataAttributesTimeZone = "Copenhagen"
+	StatusPageResponseDataAttributesTimeZoneDarwin                    StatusPageResponseDataAttributesTimeZone = "Darwin"
+	StatusPageResponseDataAttributesTimeZoneDhaka                     StatusPageResponseDataAttributesTimeZone = "Dhaka"
+	StatusPageResponseDataAttributesTimeZoneDublin                    StatusPageResponseDataAttributesTimeZone = "Dublin"
+	StatusPageResponseDataAttributesTimeZoneEasternTimeUSCanada       StatusPageResponseDataAttributesTimeZone = "Eastern Time (US & Canada)"
+	StatusPageResponseDataAttributesTimeZoneEdinburgh                 StatusPageResponseDataAttributesTimeZone = "Edinburgh"
+	StatusPageResponseDataAttributesTimeZoneEkaterinburg              StatusPageResponseDataAttributesTimeZone = "Ekaterinburg"
+	StatusPageResponseDataAttributesTimeZoneFiji                      StatusPageResponseDataAttributesTimeZone = "Fiji"
+	StatusPageResponseDataAttributesTimeZoneGeorgetown                StatusPageResponseDataAttributesTimeZone = "Georgetown"
+	StatusPageResponseDataAttributesTimeZoneGreenland                 StatusPageResponseDataAttributesTimeZone = "Greenland"
+	StatusPageResponseDataAttributesTimeZoneGuadalajara               StatusPageResponseDataAttributesTimeZone = "Guadalajara"
+	StatusPageResponseDataAttributesTimeZoneGuam                      StatusPageResponseDataAttributesTimeZone = "Guam"
+	StatusPageResponseDataAttributesTimeZoneHanoi                     StatusPageResponseDataAttributesTimeZone = "Hanoi"
+	StatusPageResponseDataAttributesTimeZoneHarare                    StatusPageResponseDataAttributesTimeZone = "Harare"
+	StatusPageResponseDataAttributesTimeZoneHawaii                    StatusPageResponseDataAttributesTimeZone = "Hawaii"
+	StatusPageResponseDataAttributesTimeZoneHelsinki                  StatusPageResponseDataAttributesTimeZone = "Helsinki"
+	StatusPageResponseDataAttributesTimeZoneHobart                    StatusPageResponseDataAttributesTimeZone = "Hobart"
+	StatusPageResponseDataAttributesTimeZoneHongKong                  StatusPageResponseDataAttributesTimeZone = "Hong Kong"
+	StatusPageResponseDataAttributesTimeZoneIndianaEast               StatusPageResponseDataAttributesTimeZone = "Indiana (East)"
+	StatusPageResponseDataAttributesTimeZoneInternationalDateLineWest StatusPageResponseDataAttributesTimeZone = "International Date Line West"
+	StatusPageResponseDataAttributesTimeZoneIrkutsk                   StatusPageResponseDataAttributesTimeZone = "Irkutsk"
+	StatusPageResponseDataAttributesTimeZoneIslamabad                 StatusPageResponseDataAttributesTimeZone = "Islamabad"
+	StatusPageResponseDataAttributesTimeZoneIstanbul                  StatusPageResponseDataAttributesTimeZone = "Istanbul"
+	StatusPageResponseDataAttributesTimeZoneJakarta                   StatusPageResponseDataAttributesTimeZone = "Jakarta"
+	StatusPageResponseDataAttributesTimeZoneJerusalem                 StatusPageResponseDataAttributesTimeZone = "Jerusalem"
+	StatusPageResponseDataAttributesTimeZoneKabul                     StatusPageResponseDataAttributesTimeZone = "Kabul"
+	StatusPageResponseDataAttributesTimeZoneKaliningrad               StatusPageResponseDataAttributesTimeZone = "Kaliningrad"
+	StatusPageResponseDataAttributesTimeZoneKamchatka                 StatusPageResponseDataAttributesTimeZone = "Kamchatka"
+	StatusPageResponseDataAttributesTimeZoneKarachi                   StatusPageResponseDataAttributesTimeZone = "Karachi"
+	StatusPageResponseDataAttributesTimeZoneKathmandu                 StatusPageResponseDataAttributesTimeZone = "Kathmandu"
+	StatusPageResponseDataAttributesTimeZoneKolkata                   StatusPageResponseDataAttributesTimeZone = "Kolkata"
+	StatusPageResponseDataAttributesTimeZoneKrasnoyarsk               StatusPageResponseDataAttributesTimeZone = "Krasnoyarsk"
+	StatusPageResponseDataAttributesTimeZoneKualaLumpur               StatusPageResponseDataAttributesTimeZone = "Kuala Lumpur"
+	StatusPageResponseDataAttributesTimeZoneKuwait                    StatusPageResponseDataAttributesTimeZone = "Kuwait"
+	StatusPageResponseDataAttributesTimeZoneKyiv                      StatusPageResponseDataAttributesTimeZone = "Kyiv"
+	StatusPageResponseDataAttributesTimeZoneLaPaz                     StatusPageResponseDataAttributesTimeZone = "La Paz"
+	StatusPageResponseDataAttributesTimeZoneLima                      StatusPageResponseDataAttributesTimeZone = "Lima"
+	StatusPageResponseDataAttributesTimeZoneLisbon                    StatusPageResponseDataAttributesTimeZone = "Lisbon"
+	StatusPageResponseDataAttributesTimeZoneLjubljana                 StatusPageResponseDataAttributesTimeZone = "Ljubljana"
+	StatusPageResponseDataAttributesTimeZoneLondon                    StatusPageResponseDataAttributesTimeZone = "London"
+	StatusPageResponseDataAttributesTimeZoneMadrid                    StatusPageResponseDataAttributesTimeZone = "Madrid"
+	StatusPageResponseDataAttributesTimeZoneMagadan                   StatusPageResponseDataAttributesTimeZone = "Magadan"
+	StatusPageResponseDataAttributesTimeZoneMarshallIs                StatusPageResponseDataAttributesTimeZone = "Marshall Is."
+	StatusPageResponseDataAttributesTimeZoneMazatlan                  StatusPageResponseDataAttributesTimeZone = "Mazatlan"
+	StatusPageResponseDataAttributesTimeZoneMelbourne                 StatusPageResponseDataAttributesTimeZone = "Melbourne"
+	StatusPageResponseDataAttributesTimeZoneMexicoCity                StatusPageResponseDataAttributesTimeZone = "Mexico City"
+	StatusPageResponseDataAttributesTimeZoneMidAtlantic               StatusPageResponseDataAttributesTimeZone = "Mid-Atlantic"
+	StatusPageResponseDataAttributesTimeZoneMidwayIsland              StatusPageResponseDataAttributesTimeZone = "Midway Island"
+	StatusPageResponseDataAttributesTimeZoneMinsk                     StatusPageResponseDataAttributesTimeZone = "Minsk"
+	StatusPageResponseDataAttributesTimeZoneMonrovia                  StatusPageResponseDataAttributesTimeZone = "Monrovia"
+	StatusPageResponseDataAttributesTimeZoneMonterrey                 StatusPageResponseDataAttributesTimeZone = "Monterrey"
+	StatusPageResponseDataAttributesTimeZoneMontevideo                StatusPageResponseDataAttributesTimeZone = "Montevideo"
+	StatusPageResponseDataAttributesTimeZoneMoscow                    StatusPageResponseDataAttributesTimeZone = "Moscow"
+	StatusPageResponseDataAttributesTimeZoneMountainTimeUSCanada      StatusPageResponseDataAttributesTimeZone = "Mountain Time (US & Canada)"
+	StatusPageResponseDataAttributesTimeZoneMumbai                    StatusPageResponseDataAttributesTimeZone = "Mumbai"
+	StatusPageResponseDataAttributesTimeZoneMuscat                    StatusPageResponseDataAttributesTimeZone = "Muscat"
+	StatusPageResponseDataAttributesTimeZoneNairobi                   StatusPageResponseDataAttributesTimeZone = "Nairobi"
+	StatusPageResponseDataAttributesTimeZoneNewCaledonia              StatusPageResponseDataAttributesTimeZone = "New Caledonia"
+	StatusPageResponseDataAttributesTimeZoneNewDelhi                  StatusPageResponseDataAttributesTimeZone = "New Delhi"
+	StatusPageResponseDataAttributesTimeZoneNewfoundland              StatusPageResponseDataAttributesTimeZone = "Newfoundland"
+	StatusPageResponseDataAttributesTimeZoneNovosibirsk               StatusPageResponseDataAttributesTimeZone = "Novosibirsk"
+	StatusPageResponseDataAttributesTimeZoneNukualofa                 StatusPageResponseDataAttributesTimeZone = "Nuku'alofa"
+	StatusPageResponseDataAttributesTimeZoneOsaka                     StatusPageResponseDataAttributesTimeZone = "Osaka"
+	StatusPageResponseDataAttributesTimeZonePacificTimeUSCanada       StatusPageResponseDataAttributesTimeZone = "Pacific Time (US & Canada)"
+	StatusPageResponseDataAttributesTimeZoneParis                     StatusPageResponseDataAttributesTimeZone = "Paris"
+	StatusPageResponseDataAttributesTimeZonePerth                     StatusPageResponseDataAttributesTimeZone = "Perth"
+	StatusPageResponseDataAttributesTimeZonePortMoresby               StatusPageResponseDataAttributesTimeZone = "Port Moresby"
+	StatusPageResponseDataAttributesTimeZonePrague                    StatusPageResponseDataAttributesTimeZone = "Prague"
+	StatusPageResponseDataAttributesTimeZonePretoria                  StatusPageResponseDataAttributesTimeZone = "Pretoria"
+	StatusPageResponseDataAttributesTimeZonePuertoRico                StatusPageResponseDataAttributesTimeZone = "Puerto Rico"
+	StatusPageResponseDataAttributesTimeZoneQuito                     StatusPageResponseDataAttributesTimeZone = "Quito"
+	StatusPageResponseDataAttributesTimeZoneRangoon                   StatusPageResponseDataAttributesTimeZone = "Rangoon"
+	StatusPageResponseDataAttributesTimeZoneRiga                      StatusPageResponseDataAttributesTimeZone = "Riga"
+	StatusPageResponseDataAttributesTimeZoneRiyadh                    StatusPageResponseDataAttributesTimeZone = "Riyadh"
+	StatusPageResponseDataAttributesTimeZoneRome                      StatusPageResponseDataAttributesTimeZone = "Rome"
+	StatusPageResponseDataAttributesTimeZoneSamara                    StatusPageResponseDataAttributesTimeZone = "Samara"
+	StatusPageResponseDataAttributesTimeZoneSamoa                     StatusPageResponseDataAttributesTimeZone = "Samoa"
+	StatusPageResponseDataAttributesTimeZoneSantiago                  StatusPageResponseDataAttributesTimeZone = "Santiago"
+	StatusPageResponseDataAttributesTimeZoneSapporo                   StatusPageResponseDataAttributesTimeZone = "Sapporo"
+	StatusPageResponseDataAttributesTimeZoneSarajevo                  StatusPageResponseDataAttributesTimeZone = "Sarajevo"
+	StatusPageResponseDataAttributesTimeZoneSaskatchewan              StatusPageResponseDataAttributesTimeZone = "Saskatchewan"
+	StatusPageResponseDataAttributesTimeZoneSeoul                     StatusPageResponseDataAttributesTimeZone = "Seoul"
+	StatusPageResponseDataAttributesTimeZoneSingapore                 StatusPageResponseDataAttributesTimeZone = "Singapore"
+	StatusPageResponseDataAttributesTimeZoneSkopje                    StatusPageResponseDataAttributesTimeZone = "Skopje"
+	StatusPageResponseDataAttributesTimeZoneSofia                     StatusPageResponseDataAttributesTimeZone = "Sofia"
+	StatusPageResponseDataAttributesTimeZoneSolomonIs                 StatusPageResponseDataAttributesTimeZone = "Solomon Is."
+	StatusPageResponseDataAttributesTimeZoneSrednekolymsk             StatusPageResponseDataAttributesTimeZone = "Srednekolymsk"
+	StatusPageResponseDataAttributesTimeZoneSriJayawardenepura        StatusPageResponseDataAttributesTimeZone = "Sri Jayawardenepura"
+	StatusPageResponseDataAttributesTimeZoneStPetersburg              StatusPageResponseDataAttributesTimeZone = "St. Petersburg"
+	StatusPageResponseDataAttributesTimeZoneStockholm                 StatusPageResponseDataAttributesTimeZone = "Stockholm"
+	StatusPageResponseDataAttributesTimeZoneSydney                    StatusPageResponseDataAttributesTimeZone = "Sydney"
+	StatusPageResponseDataAttributesTimeZoneTaipei                    StatusPageResponseDataAttributesTimeZone = "Taipei"
+	StatusPageResponseDataAttributesTimeZoneTallinn                   StatusPageResponseDataAttributesTimeZone = "Tallinn"
+	StatusPageResponseDataAttributesTimeZoneTashkent                  StatusPageResponseDataAttributesTimeZone = "Tashkent"
+	StatusPageResponseDataAttributesTimeZoneTbilisi                   StatusPageResponseDataAttributesTimeZone = "Tbilisi"
+	StatusPageResponseDataAttributesTimeZoneTehran                    StatusPageResponseDataAttributesTimeZone = "Tehran"
+	StatusPageResponseDataAttributesTimeZoneTijuana                   StatusPageResponseDataAttributesTimeZone = "Tijuana"
+	StatusPageResponseDataAttributesTimeZoneTokelauIs                 StatusPageResponseDataAttributesTimeZone = "Tokelau Is."
+	StatusPageResponseDataAttributesTimeZoneTokyo                     StatusPageResponseDataAttributesTimeZone = "Tokyo"
+	StatusPageResponseDataAttributesTimeZoneUTC                       StatusPageResponseDataAttributesTimeZone = "UTC"
+	StatusPageResponseDataAttributesTimeZoneUlaanbaatar               StatusPageResponseDataAttributesTimeZone = "Ulaanbaatar"
+	StatusPageResponseDataAttributesTimeZoneUrumqi                    StatusPageResponseDataAttributesTimeZone = "Urumqi"
+	StatusPageResponseDataAttributesTimeZoneVienna                    StatusPageResponseDataAttributesTimeZone = "Vienna"
+	StatusPageResponseDataAttributesTimeZoneVilnius                   StatusPageResponseDataAttributesTimeZone = "Vilnius"
+	StatusPageResponseDataAttributesTimeZoneVladivostok               StatusPageResponseDataAttributesTimeZone = "Vladivostok"
+	StatusPageResponseDataAttributesTimeZoneVolgograd                 StatusPageResponseDataAttributesTimeZone = "Volgograd"
+	StatusPageResponseDataAttributesTimeZoneWarsaw                    StatusPageResponseDataAttributesTimeZone = "Warsaw"
+	StatusPageResponseDataAttributesTimeZoneWellington                StatusPageResponseDataAttributesTimeZone = "Wellington"
+	StatusPageResponseDataAttributesTimeZoneWestCentralAfrica         StatusPageResponseDataAttributesTimeZone = "West Central Africa"
+	StatusPageResponseDataAttributesTimeZoneYakutsk                   StatusPageResponseDataAttributesTimeZone = "Yakutsk"
+	StatusPageResponseDataAttributesTimeZoneYerevan                   StatusPageResponseDataAttributesTimeZone = "Yerevan"
+	StatusPageResponseDataAttributesTimeZoneZagreb                    StatusPageResponseDataAttributesTimeZone = "Zagreb"
+	StatusPageResponseDataAttributesTimeZoneZurich                    StatusPageResponseDataAttributesTimeZone = "Zurich"
 )
 
 // Defines values for StatusPageResponseDataType.
@@ -3819,6 +4439,161 @@ const (
 	N30 UpdateStatusPageDataAttributesShowUptimeLastDays = 30
 	N60 UpdateStatusPageDataAttributesShowUptimeLastDays = 60
 	N90 UpdateStatusPageDataAttributesShowUptimeLastDays = 90
+)
+
+// Defines values for UpdateStatusPageDataAttributesTimeZone.
+const (
+	UpdateStatusPageDataAttributesTimeZoneAbuDhabi                  UpdateStatusPageDataAttributesTimeZone = "Abu Dhabi"
+	UpdateStatusPageDataAttributesTimeZoneAdelaide                  UpdateStatusPageDataAttributesTimeZone = "Adelaide"
+	UpdateStatusPageDataAttributesTimeZoneAlaska                    UpdateStatusPageDataAttributesTimeZone = "Alaska"
+	UpdateStatusPageDataAttributesTimeZoneAlmaty                    UpdateStatusPageDataAttributesTimeZone = "Almaty"
+	UpdateStatusPageDataAttributesTimeZoneAmericanSamoa             UpdateStatusPageDataAttributesTimeZone = "American Samoa"
+	UpdateStatusPageDataAttributesTimeZoneAmsterdam                 UpdateStatusPageDataAttributesTimeZone = "Amsterdam"
+	UpdateStatusPageDataAttributesTimeZoneArizona                   UpdateStatusPageDataAttributesTimeZone = "Arizona"
+	UpdateStatusPageDataAttributesTimeZoneAstana                    UpdateStatusPageDataAttributesTimeZone = "Astana"
+	UpdateStatusPageDataAttributesTimeZoneAthens                    UpdateStatusPageDataAttributesTimeZone = "Athens"
+	UpdateStatusPageDataAttributesTimeZoneAtlanticTimeCanada        UpdateStatusPageDataAttributesTimeZone = "Atlantic Time (Canada)"
+	UpdateStatusPageDataAttributesTimeZoneAuckland                  UpdateStatusPageDataAttributesTimeZone = "Auckland"
+	UpdateStatusPageDataAttributesTimeZoneAzores                    UpdateStatusPageDataAttributesTimeZone = "Azores"
+	UpdateStatusPageDataAttributesTimeZoneBaghdad                   UpdateStatusPageDataAttributesTimeZone = "Baghdad"
+	UpdateStatusPageDataAttributesTimeZoneBaku                      UpdateStatusPageDataAttributesTimeZone = "Baku"
+	UpdateStatusPageDataAttributesTimeZoneBangkok                   UpdateStatusPageDataAttributesTimeZone = "Bangkok"
+	UpdateStatusPageDataAttributesTimeZoneBeijing                   UpdateStatusPageDataAttributesTimeZone = "Beijing"
+	UpdateStatusPageDataAttributesTimeZoneBelgrade                  UpdateStatusPageDataAttributesTimeZone = "Belgrade"
+	UpdateStatusPageDataAttributesTimeZoneBerlin                    UpdateStatusPageDataAttributesTimeZone = "Berlin"
+	UpdateStatusPageDataAttributesTimeZoneBern                      UpdateStatusPageDataAttributesTimeZone = "Bern"
+	UpdateStatusPageDataAttributesTimeZoneBogota                    UpdateStatusPageDataAttributesTimeZone = "Bogota"
+	UpdateStatusPageDataAttributesTimeZoneBrasilia                  UpdateStatusPageDataAttributesTimeZone = "Brasilia"
+	UpdateStatusPageDataAttributesTimeZoneBratislava                UpdateStatusPageDataAttributesTimeZone = "Bratislava"
+	UpdateStatusPageDataAttributesTimeZoneBrisbane                  UpdateStatusPageDataAttributesTimeZone = "Brisbane"
+	UpdateStatusPageDataAttributesTimeZoneBrussels                  UpdateStatusPageDataAttributesTimeZone = "Brussels"
+	UpdateStatusPageDataAttributesTimeZoneBucharest                 UpdateStatusPageDataAttributesTimeZone = "Bucharest"
+	UpdateStatusPageDataAttributesTimeZoneBudapest                  UpdateStatusPageDataAttributesTimeZone = "Budapest"
+	UpdateStatusPageDataAttributesTimeZoneBuenosAires               UpdateStatusPageDataAttributesTimeZone = "Buenos Aires"
+	UpdateStatusPageDataAttributesTimeZoneCairo                     UpdateStatusPageDataAttributesTimeZone = "Cairo"
+	UpdateStatusPageDataAttributesTimeZoneCanberra                  UpdateStatusPageDataAttributesTimeZone = "Canberra"
+	UpdateStatusPageDataAttributesTimeZoneCapeVerdeIs               UpdateStatusPageDataAttributesTimeZone = "Cape Verde Is."
+	UpdateStatusPageDataAttributesTimeZoneCaracas                   UpdateStatusPageDataAttributesTimeZone = "Caracas"
+	UpdateStatusPageDataAttributesTimeZoneCasablanca                UpdateStatusPageDataAttributesTimeZone = "Casablanca"
+	UpdateStatusPageDataAttributesTimeZoneCentralAmerica            UpdateStatusPageDataAttributesTimeZone = "Central America"
+	UpdateStatusPageDataAttributesTimeZoneCentralTimeUSCanada       UpdateStatusPageDataAttributesTimeZone = "Central Time (US & Canada)"
+	UpdateStatusPageDataAttributesTimeZoneChathamIs                 UpdateStatusPageDataAttributesTimeZone = "Chatham Is."
+	UpdateStatusPageDataAttributesTimeZoneChennai                   UpdateStatusPageDataAttributesTimeZone = "Chennai"
+	UpdateStatusPageDataAttributesTimeZoneChihuahua                 UpdateStatusPageDataAttributesTimeZone = "Chihuahua"
+	UpdateStatusPageDataAttributesTimeZoneChongqing                 UpdateStatusPageDataAttributesTimeZone = "Chongqing"
+	UpdateStatusPageDataAttributesTimeZoneCopenhagen                UpdateStatusPageDataAttributesTimeZone = "Copenhagen"
+	UpdateStatusPageDataAttributesTimeZoneDarwin                    UpdateStatusPageDataAttributesTimeZone = "Darwin"
+	UpdateStatusPageDataAttributesTimeZoneDhaka                     UpdateStatusPageDataAttributesTimeZone = "Dhaka"
+	UpdateStatusPageDataAttributesTimeZoneDublin                    UpdateStatusPageDataAttributesTimeZone = "Dublin"
+	UpdateStatusPageDataAttributesTimeZoneEasternTimeUSCanada       UpdateStatusPageDataAttributesTimeZone = "Eastern Time (US & Canada)"
+	UpdateStatusPageDataAttributesTimeZoneEdinburgh                 UpdateStatusPageDataAttributesTimeZone = "Edinburgh"
+	UpdateStatusPageDataAttributesTimeZoneEkaterinburg              UpdateStatusPageDataAttributesTimeZone = "Ekaterinburg"
+	UpdateStatusPageDataAttributesTimeZoneFiji                      UpdateStatusPageDataAttributesTimeZone = "Fiji"
+	UpdateStatusPageDataAttributesTimeZoneGeorgetown                UpdateStatusPageDataAttributesTimeZone = "Georgetown"
+	UpdateStatusPageDataAttributesTimeZoneGreenland                 UpdateStatusPageDataAttributesTimeZone = "Greenland"
+	UpdateStatusPageDataAttributesTimeZoneGuadalajara               UpdateStatusPageDataAttributesTimeZone = "Guadalajara"
+	UpdateStatusPageDataAttributesTimeZoneGuam                      UpdateStatusPageDataAttributesTimeZone = "Guam"
+	UpdateStatusPageDataAttributesTimeZoneHanoi                     UpdateStatusPageDataAttributesTimeZone = "Hanoi"
+	UpdateStatusPageDataAttributesTimeZoneHarare                    UpdateStatusPageDataAttributesTimeZone = "Harare"
+	UpdateStatusPageDataAttributesTimeZoneHawaii                    UpdateStatusPageDataAttributesTimeZone = "Hawaii"
+	UpdateStatusPageDataAttributesTimeZoneHelsinki                  UpdateStatusPageDataAttributesTimeZone = "Helsinki"
+	UpdateStatusPageDataAttributesTimeZoneHobart                    UpdateStatusPageDataAttributesTimeZone = "Hobart"
+	UpdateStatusPageDataAttributesTimeZoneHongKong                  UpdateStatusPageDataAttributesTimeZone = "Hong Kong"
+	UpdateStatusPageDataAttributesTimeZoneIndianaEast               UpdateStatusPageDataAttributesTimeZone = "Indiana (East)"
+	UpdateStatusPageDataAttributesTimeZoneInternationalDateLineWest UpdateStatusPageDataAttributesTimeZone = "International Date Line West"
+	UpdateStatusPageDataAttributesTimeZoneIrkutsk                   UpdateStatusPageDataAttributesTimeZone = "Irkutsk"
+	UpdateStatusPageDataAttributesTimeZoneIslamabad                 UpdateStatusPageDataAttributesTimeZone = "Islamabad"
+	UpdateStatusPageDataAttributesTimeZoneIstanbul                  UpdateStatusPageDataAttributesTimeZone = "Istanbul"
+	UpdateStatusPageDataAttributesTimeZoneJakarta                   UpdateStatusPageDataAttributesTimeZone = "Jakarta"
+	UpdateStatusPageDataAttributesTimeZoneJerusalem                 UpdateStatusPageDataAttributesTimeZone = "Jerusalem"
+	UpdateStatusPageDataAttributesTimeZoneKabul                     UpdateStatusPageDataAttributesTimeZone = "Kabul"
+	UpdateStatusPageDataAttributesTimeZoneKaliningrad               UpdateStatusPageDataAttributesTimeZone = "Kaliningrad"
+	UpdateStatusPageDataAttributesTimeZoneKamchatka                 UpdateStatusPageDataAttributesTimeZone = "Kamchatka"
+	UpdateStatusPageDataAttributesTimeZoneKarachi                   UpdateStatusPageDataAttributesTimeZone = "Karachi"
+	UpdateStatusPageDataAttributesTimeZoneKathmandu                 UpdateStatusPageDataAttributesTimeZone = "Kathmandu"
+	UpdateStatusPageDataAttributesTimeZoneKolkata                   UpdateStatusPageDataAttributesTimeZone = "Kolkata"
+	UpdateStatusPageDataAttributesTimeZoneKrasnoyarsk               UpdateStatusPageDataAttributesTimeZone = "Krasnoyarsk"
+	UpdateStatusPageDataAttributesTimeZoneKualaLumpur               UpdateStatusPageDataAttributesTimeZone = "Kuala Lumpur"
+	UpdateStatusPageDataAttributesTimeZoneKuwait                    UpdateStatusPageDataAttributesTimeZone = "Kuwait"
+	UpdateStatusPageDataAttributesTimeZoneKyiv                      UpdateStatusPageDataAttributesTimeZone = "Kyiv"
+	UpdateStatusPageDataAttributesTimeZoneLaPaz                     UpdateStatusPageDataAttributesTimeZone = "La Paz"
+	UpdateStatusPageDataAttributesTimeZoneLima                      UpdateStatusPageDataAttributesTimeZone = "Lima"
+	UpdateStatusPageDataAttributesTimeZoneLisbon                    UpdateStatusPageDataAttributesTimeZone = "Lisbon"
+	UpdateStatusPageDataAttributesTimeZoneLjubljana                 UpdateStatusPageDataAttributesTimeZone = "Ljubljana"
+	UpdateStatusPageDataAttributesTimeZoneLondon                    UpdateStatusPageDataAttributesTimeZone = "London"
+	UpdateStatusPageDataAttributesTimeZoneMadrid                    UpdateStatusPageDataAttributesTimeZone = "Madrid"
+	UpdateStatusPageDataAttributesTimeZoneMagadan                   UpdateStatusPageDataAttributesTimeZone = "Magadan"
+	UpdateStatusPageDataAttributesTimeZoneMarshallIs                UpdateStatusPageDataAttributesTimeZone = "Marshall Is."
+	UpdateStatusPageDataAttributesTimeZoneMazatlan                  UpdateStatusPageDataAttributesTimeZone = "Mazatlan"
+	UpdateStatusPageDataAttributesTimeZoneMelbourne                 UpdateStatusPageDataAttributesTimeZone = "Melbourne"
+	UpdateStatusPageDataAttributesTimeZoneMexicoCity                UpdateStatusPageDataAttributesTimeZone = "Mexico City"
+	UpdateStatusPageDataAttributesTimeZoneMidAtlantic               UpdateStatusPageDataAttributesTimeZone = "Mid-Atlantic"
+	UpdateStatusPageDataAttributesTimeZoneMidwayIsland              UpdateStatusPageDataAttributesTimeZone = "Midway Island"
+	UpdateStatusPageDataAttributesTimeZoneMinsk                     UpdateStatusPageDataAttributesTimeZone = "Minsk"
+	UpdateStatusPageDataAttributesTimeZoneMonrovia                  UpdateStatusPageDataAttributesTimeZone = "Monrovia"
+	UpdateStatusPageDataAttributesTimeZoneMonterrey                 UpdateStatusPageDataAttributesTimeZone = "Monterrey"
+	UpdateStatusPageDataAttributesTimeZoneMontevideo                UpdateStatusPageDataAttributesTimeZone = "Montevideo"
+	UpdateStatusPageDataAttributesTimeZoneMoscow                    UpdateStatusPageDataAttributesTimeZone = "Moscow"
+	UpdateStatusPageDataAttributesTimeZoneMountainTimeUSCanada      UpdateStatusPageDataAttributesTimeZone = "Mountain Time (US & Canada)"
+	UpdateStatusPageDataAttributesTimeZoneMumbai                    UpdateStatusPageDataAttributesTimeZone = "Mumbai"
+	UpdateStatusPageDataAttributesTimeZoneMuscat                    UpdateStatusPageDataAttributesTimeZone = "Muscat"
+	UpdateStatusPageDataAttributesTimeZoneNairobi                   UpdateStatusPageDataAttributesTimeZone = "Nairobi"
+	UpdateStatusPageDataAttributesTimeZoneNewCaledonia              UpdateStatusPageDataAttributesTimeZone = "New Caledonia"
+	UpdateStatusPageDataAttributesTimeZoneNewDelhi                  UpdateStatusPageDataAttributesTimeZone = "New Delhi"
+	UpdateStatusPageDataAttributesTimeZoneNewfoundland              UpdateStatusPageDataAttributesTimeZone = "Newfoundland"
+	UpdateStatusPageDataAttributesTimeZoneNovosibirsk               UpdateStatusPageDataAttributesTimeZone = "Novosibirsk"
+	UpdateStatusPageDataAttributesTimeZoneNukualofa                 UpdateStatusPageDataAttributesTimeZone = "Nuku'alofa"
+	UpdateStatusPageDataAttributesTimeZoneOsaka                     UpdateStatusPageDataAttributesTimeZone = "Osaka"
+	UpdateStatusPageDataAttributesTimeZonePacificTimeUSCanada       UpdateStatusPageDataAttributesTimeZone = "Pacific Time (US & Canada)"
+	UpdateStatusPageDataAttributesTimeZoneParis                     UpdateStatusPageDataAttributesTimeZone = "Paris"
+	UpdateStatusPageDataAttributesTimeZonePerth                     UpdateStatusPageDataAttributesTimeZone = "Perth"
+	UpdateStatusPageDataAttributesTimeZonePortMoresby               UpdateStatusPageDataAttributesTimeZone = "Port Moresby"
+	UpdateStatusPageDataAttributesTimeZonePrague                    UpdateStatusPageDataAttributesTimeZone = "Prague"
+	UpdateStatusPageDataAttributesTimeZonePretoria                  UpdateStatusPageDataAttributesTimeZone = "Pretoria"
+	UpdateStatusPageDataAttributesTimeZonePuertoRico                UpdateStatusPageDataAttributesTimeZone = "Puerto Rico"
+	UpdateStatusPageDataAttributesTimeZoneQuito                     UpdateStatusPageDataAttributesTimeZone = "Quito"
+	UpdateStatusPageDataAttributesTimeZoneRangoon                   UpdateStatusPageDataAttributesTimeZone = "Rangoon"
+	UpdateStatusPageDataAttributesTimeZoneRiga                      UpdateStatusPageDataAttributesTimeZone = "Riga"
+	UpdateStatusPageDataAttributesTimeZoneRiyadh                    UpdateStatusPageDataAttributesTimeZone = "Riyadh"
+	UpdateStatusPageDataAttributesTimeZoneRome                      UpdateStatusPageDataAttributesTimeZone = "Rome"
+	UpdateStatusPageDataAttributesTimeZoneSamara                    UpdateStatusPageDataAttributesTimeZone = "Samara"
+	UpdateStatusPageDataAttributesTimeZoneSamoa                     UpdateStatusPageDataAttributesTimeZone = "Samoa"
+	UpdateStatusPageDataAttributesTimeZoneSantiago                  UpdateStatusPageDataAttributesTimeZone = "Santiago"
+	UpdateStatusPageDataAttributesTimeZoneSapporo                   UpdateStatusPageDataAttributesTimeZone = "Sapporo"
+	UpdateStatusPageDataAttributesTimeZoneSarajevo                  UpdateStatusPageDataAttributesTimeZone = "Sarajevo"
+	UpdateStatusPageDataAttributesTimeZoneSaskatchewan              UpdateStatusPageDataAttributesTimeZone = "Saskatchewan"
+	UpdateStatusPageDataAttributesTimeZoneSeoul                     UpdateStatusPageDataAttributesTimeZone = "Seoul"
+	UpdateStatusPageDataAttributesTimeZoneSingapore                 UpdateStatusPageDataAttributesTimeZone = "Singapore"
+	UpdateStatusPageDataAttributesTimeZoneSkopje                    UpdateStatusPageDataAttributesTimeZone = "Skopje"
+	UpdateStatusPageDataAttributesTimeZoneSofia                     UpdateStatusPageDataAttributesTimeZone = "Sofia"
+	UpdateStatusPageDataAttributesTimeZoneSolomonIs                 UpdateStatusPageDataAttributesTimeZone = "Solomon Is."
+	UpdateStatusPageDataAttributesTimeZoneSrednekolymsk             UpdateStatusPageDataAttributesTimeZone = "Srednekolymsk"
+	UpdateStatusPageDataAttributesTimeZoneSriJayawardenepura        UpdateStatusPageDataAttributesTimeZone = "Sri Jayawardenepura"
+	UpdateStatusPageDataAttributesTimeZoneStPetersburg              UpdateStatusPageDataAttributesTimeZone = "St. Petersburg"
+	UpdateStatusPageDataAttributesTimeZoneStockholm                 UpdateStatusPageDataAttributesTimeZone = "Stockholm"
+	UpdateStatusPageDataAttributesTimeZoneSydney                    UpdateStatusPageDataAttributesTimeZone = "Sydney"
+	UpdateStatusPageDataAttributesTimeZoneTaipei                    UpdateStatusPageDataAttributesTimeZone = "Taipei"
+	UpdateStatusPageDataAttributesTimeZoneTallinn                   UpdateStatusPageDataAttributesTimeZone = "Tallinn"
+	UpdateStatusPageDataAttributesTimeZoneTashkent                  UpdateStatusPageDataAttributesTimeZone = "Tashkent"
+	UpdateStatusPageDataAttributesTimeZoneTbilisi                   UpdateStatusPageDataAttributesTimeZone = "Tbilisi"
+	UpdateStatusPageDataAttributesTimeZoneTehran                    UpdateStatusPageDataAttributesTimeZone = "Tehran"
+	UpdateStatusPageDataAttributesTimeZoneTijuana                   UpdateStatusPageDataAttributesTimeZone = "Tijuana"
+	UpdateStatusPageDataAttributesTimeZoneTokelauIs                 UpdateStatusPageDataAttributesTimeZone = "Tokelau Is."
+	UpdateStatusPageDataAttributesTimeZoneTokyo                     UpdateStatusPageDataAttributesTimeZone = "Tokyo"
+	UpdateStatusPageDataAttributesTimeZoneUTC                       UpdateStatusPageDataAttributesTimeZone = "UTC"
+	UpdateStatusPageDataAttributesTimeZoneUlaanbaatar               UpdateStatusPageDataAttributesTimeZone = "Ulaanbaatar"
+	UpdateStatusPageDataAttributesTimeZoneUrumqi                    UpdateStatusPageDataAttributesTimeZone = "Urumqi"
+	UpdateStatusPageDataAttributesTimeZoneVienna                    UpdateStatusPageDataAttributesTimeZone = "Vienna"
+	UpdateStatusPageDataAttributesTimeZoneVilnius                   UpdateStatusPageDataAttributesTimeZone = "Vilnius"
+	UpdateStatusPageDataAttributesTimeZoneVladivostok               UpdateStatusPageDataAttributesTimeZone = "Vladivostok"
+	UpdateStatusPageDataAttributesTimeZoneVolgograd                 UpdateStatusPageDataAttributesTimeZone = "Volgograd"
+	UpdateStatusPageDataAttributesTimeZoneWarsaw                    UpdateStatusPageDataAttributesTimeZone = "Warsaw"
+	UpdateStatusPageDataAttributesTimeZoneWellington                UpdateStatusPageDataAttributesTimeZone = "Wellington"
+	UpdateStatusPageDataAttributesTimeZoneWestCentralAfrica         UpdateStatusPageDataAttributesTimeZone = "West Central Africa"
+	UpdateStatusPageDataAttributesTimeZoneYakutsk                   UpdateStatusPageDataAttributesTimeZone = "Yakutsk"
+	UpdateStatusPageDataAttributesTimeZoneYerevan                   UpdateStatusPageDataAttributesTimeZone = "Yerevan"
+	UpdateStatusPageDataAttributesTimeZoneZagreb                    UpdateStatusPageDataAttributesTimeZone = "Zagreb"
+	UpdateStatusPageDataAttributesTimeZoneZurich                    UpdateStatusPageDataAttributesTimeZone = "Zurich"
 )
 
 // Defines values for UpdateStatusPageDataType.
@@ -4581,7 +5356,13 @@ type Alert struct {
 		// Date of last update
 		UpdatedAt string `json:"updated_at"`
 	} `json:"environments,omitempty"`
-	Labels *[]struct {
+
+	// External ID
+	ExternalId *string `json:"external_id"`
+
+	// External Url
+	ExternalUrl *string `json:"external_url"`
+	Labels      *[]struct {
 		// Key of the tag
 		Key string `json:"key"`
 
@@ -4737,7 +5518,13 @@ type AlertList struct {
 				// Date of last update
 				UpdatedAt string `json:"updated_at"`
 			} `json:"environments,omitempty"`
-			Labels *[]struct {
+
+			// External ID
+			ExternalId *string `json:"external_id"`
+
+			// External Url
+			ExternalUrl *string `json:"external_url"`
+			Labels      *[]struct {
 				// Key of the tag
 				Key string `json:"key"`
 
@@ -4912,7 +5699,13 @@ type AlertResponse struct {
 				// Date of last update
 				UpdatedAt string `json:"updated_at"`
 			} `json:"environments,omitempty"`
-			Labels *[]struct {
+
+			// External ID
+			ExternalId *string `json:"external_id"`
+
+			// External Url
+			ExternalUrl *string `json:"external_url"`
+			Labels      *[]struct {
 				// Key of the tag
 				Key string `json:"key"`
 
@@ -10357,7 +11150,13 @@ type NewAlert struct {
 
 			// The Environment ID's to attach to the alert
 			EnvironmentIds *[]string `json:"environment_ids"`
-			Labels         *[]struct {
+
+			// External ID
+			ExternalId *string `json:"external_id"`
+
+			// External Url
+			ExternalUrl *string `json:"external_url"`
+			Labels      *[]struct {
 				// Key of the tag
 				Key string `json:"key"`
 
@@ -11367,6 +12166,12 @@ type NewStatusPage struct {
 			// Allow search engines to include your public status page in search results.
 			AllowSearchEngineIndex *bool `json:"allow_search_engine_index"`
 
+			// Enable authentication
+			AuthenticationEnabled *bool `json:"authentication_enabled"`
+
+			// Authentication password
+			AuthenticationPassword *string `json:"authentication_password"`
+
 			// The description of the status page
 			Description *string `json:"description"`
 
@@ -11378,6 +12183,9 @@ type NewStatusPage struct {
 
 			// The color of the footer. Eg. "#1F2F41"
 			FooterColor *string `json:"footer_color"`
+
+			// Google Analytics tracking ID
+			GaTrackingId *string `json:"ga_tracking_id"`
 
 			// The color of the header. Eg. "#0061F2"
 			HeaderColor *string `json:"header_color"`
@@ -11397,8 +12205,20 @@ type NewStatusPage struct {
 			// Message showing when all components are operational
 			SuccessMessage *string `json:"success_message"`
 
+			// Status Page Timezone
+			TimeZone *NewStatusPageDataAttributesTimeZone `json:"time_zone"`
+
 			// The title of the status page
 			Title string `json:"title"`
+
+			// Website Privacy URL
+			WebsitePrivacyUrl *string `json:"website_privacy_url"`
+
+			// Website Support URL
+			WebsiteSupportUrl *string `json:"website_support_url"`
+
+			// Website URL
+			WebsiteUrl *string `json:"website_url"`
 		} `json:"attributes"`
 		Type NewStatusPageDataType `json:"type"`
 	} `json:"data"`
@@ -11406,6 +12226,9 @@ type NewStatusPage struct {
 
 // Show uptime over x days
 type NewStatusPageDataAttributesShowUptimeLastDays int
+
+// Status Page Timezone
+type NewStatusPageDataAttributesTimeZone string
 
 // NewStatusPageDataType defines model for NewStatusPage.Data.Type.
 type NewStatusPageDataType string
@@ -13489,6 +14312,12 @@ type StatusPage struct {
 	// Allow search engines to include your public status page in search results.
 	AllowSearchEngineIndex *bool `json:"allow_search_engine_index"`
 
+	// Enable authentication
+	AuthenticationEnabled *bool `json:"authentication_enabled"`
+
+	// Authentication password
+	AuthenticationPassword *string `json:"authentication_password"`
+
 	// Date of creation
 	CreatedAt string `json:"created_at"`
 
@@ -13503,6 +14332,9 @@ type StatusPage struct {
 
 	// The color of the footer. Eg. "#1F2F41"
 	FooterColor *string `json:"footer_color"`
+
+	// Google Analytics tracking ID
+	GaTrackingId *string `json:"ga_tracking_id"`
 
 	// The color of the header. Eg. "#0061F2"
 	HeaderColor *string `json:"header_color"`
@@ -13519,15 +14351,30 @@ type StatusPage struct {
 	// Message showing when all components are operational
 	SuccessMessage *string `json:"success_message"`
 
+	// Status Page Timezone
+	TimeZone *StatusPageTimeZone `json:"time_zone"`
+
 	// The title of the status page
 	Title string `json:"title"`
 
 	// Date of last update
 	UpdatedAt string `json:"updated_at"`
+
+	// Website Privacy URL
+	WebsitePrivacyUrl *string `json:"website_privacy_url"`
+
+	// Website Support URL
+	WebsiteSupportUrl *string `json:"website_support_url"`
+
+	// Website URL
+	WebsiteUrl *string `json:"website_url"`
 }
 
 // Show uptime over x days
 type StatusPageShowUptimeLastDays int
+
+// Status Page Timezone
+type StatusPageTimeZone string
 
 // StatusPageList defines model for status_page_list.
 type StatusPageList struct {
@@ -13535,6 +14382,12 @@ type StatusPageList struct {
 		Attributes struct {
 			// Allow search engines to include your public status page in search results.
 			AllowSearchEngineIndex *bool `json:"allow_search_engine_index"`
+
+			// Enable authentication
+			AuthenticationEnabled *bool `json:"authentication_enabled"`
+
+			// Authentication password
+			AuthenticationPassword *string `json:"authentication_password"`
 
 			// Date of creation
 			CreatedAt string `json:"created_at"`
@@ -13551,6 +14404,9 @@ type StatusPageList struct {
 			// The color of the footer. Eg. "#1F2F41"
 			FooterColor *string `json:"footer_color"`
 
+			// Google Analytics tracking ID
+			GaTrackingId *string `json:"ga_tracking_id"`
+
 			// The color of the header. Eg. "#0061F2"
 			HeaderColor *string `json:"header_color"`
 
@@ -13566,11 +14422,23 @@ type StatusPageList struct {
 			// Message showing when all components are operational
 			SuccessMessage *string `json:"success_message"`
 
+			// Status Page Timezone
+			TimeZone *StatusPageListDataAttributesTimeZone `json:"time_zone"`
+
 			// The title of the status page
 			Title string `json:"title"`
 
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`
+
+			// Website Privacy URL
+			WebsitePrivacyUrl *string `json:"website_privacy_url"`
+
+			// Website Support URL
+			WebsiteSupportUrl *string `json:"website_support_url"`
+
+			// Website URL
+			WebsiteUrl *string `json:"website_url"`
 		} `json:"attributes"`
 
 		// Unique ID of the status page
@@ -13589,6 +14457,9 @@ type StatusPageList struct {
 // Show uptime over x days
 type StatusPageListDataAttributesShowUptimeLastDays int
 
+// Status Page Timezone
+type StatusPageListDataAttributesTimeZone string
+
 // StatusPageListDataType defines model for StatusPageList.Data.Type.
 type StatusPageListDataType string
 
@@ -13598,6 +14469,12 @@ type StatusPageResponse struct {
 		Attributes struct {
 			// Allow search engines to include your public status page in search results.
 			AllowSearchEngineIndex *bool `json:"allow_search_engine_index"`
+
+			// Enable authentication
+			AuthenticationEnabled *bool `json:"authentication_enabled"`
+
+			// Authentication password
+			AuthenticationPassword *string `json:"authentication_password"`
 
 			// Date of creation
 			CreatedAt string `json:"created_at"`
@@ -13614,6 +14491,9 @@ type StatusPageResponse struct {
 			// The color of the footer. Eg. "#1F2F41"
 			FooterColor *string `json:"footer_color"`
 
+			// Google Analytics tracking ID
+			GaTrackingId *string `json:"ga_tracking_id"`
+
 			// The color of the header. Eg. "#0061F2"
 			HeaderColor *string `json:"header_color"`
 
@@ -13629,11 +14509,23 @@ type StatusPageResponse struct {
 			// Message showing when all components are operational
 			SuccessMessage *string `json:"success_message"`
 
+			// Status Page Timezone
+			TimeZone *StatusPageResponseDataAttributesTimeZone `json:"time_zone"`
+
 			// The title of the status page
 			Title string `json:"title"`
 
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`
+
+			// Website Privacy URL
+			WebsitePrivacyUrl *string `json:"website_privacy_url"`
+
+			// Website Support URL
+			WebsiteSupportUrl *string `json:"website_support_url"`
+
+			// Website URL
+			WebsiteUrl *string `json:"website_url"`
 		} `json:"attributes"`
 
 		// Unique ID of the status page
@@ -13644,6 +14536,9 @@ type StatusPageResponse struct {
 
 // Show uptime over x days
 type StatusPageResponseDataAttributesShowUptimeLastDays int
+
+// Status Page Timezone
+type StatusPageResponseDataAttributesTimeZone string
 
 // StatusPageResponseDataType defines model for StatusPageResponse.Data.Type.
 type StatusPageResponseDataType string
@@ -15455,6 +16350,12 @@ type UpdateStatusPage struct {
 			// Allow search engines to include your public status page in search results.
 			AllowSearchEngineIndex *bool `json:"allow_search_engine_index"`
 
+			// Enable authentication
+			AuthenticationEnabled *bool `json:"authentication_enabled"`
+
+			// Authentication password
+			AuthenticationPassword *string `json:"authentication_password"`
+
 			// The description of the status page
 			Description *string `json:"description"`
 
@@ -15466,6 +16367,9 @@ type UpdateStatusPage struct {
 
 			// The color of the footer. Eg. "#1F2F41"
 			FooterColor *string `json:"footer_color"`
+
+			// Google Analytics tracking ID
+			GaTrackingId *string `json:"ga_tracking_id"`
 
 			// The color of the header. Eg. "#0061F2"
 			HeaderColor *string `json:"header_color"`
@@ -15482,8 +16386,20 @@ type UpdateStatusPage struct {
 			// Message showing when all components are operational
 			SuccessMessage *string `json:"success_message"`
 
+			// Status Page Timezone
+			TimeZone *UpdateStatusPageDataAttributesTimeZone `json:"time_zone"`
+
 			// The title of the status page
 			Title *string `json:"title,omitempty"`
+
+			// Website Privacy URL
+			WebsitePrivacyUrl *string `json:"website_privacy_url"`
+
+			// Website Support URL
+			WebsiteSupportUrl *string `json:"website_support_url"`
+
+			// Website URL
+			WebsiteUrl *string `json:"website_url"`
 		} `json:"attributes"`
 		Type UpdateStatusPageDataType `json:"type"`
 	} `json:"data"`
@@ -15491,6 +16407,9 @@ type UpdateStatusPage struct {
 
 // Show uptime over x days
 type UpdateStatusPageDataAttributesShowUptimeLastDays int
+
+// Status Page Timezone
+type UpdateStatusPageDataAttributesTimeZone string
 
 // UpdateStatusPageDataType defines model for UpdateStatusPage.Data.Type.
 type UpdateStatusPageDataType string

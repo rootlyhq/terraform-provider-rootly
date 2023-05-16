@@ -35,7 +35,7 @@ func resourceSecret() *schema.Resource {
 				Computed:    false,
 				Required:    true,
 				Optional:    false,
-				ForceNew:    true,
+				ForceNew:    false,
 				Description: "The redacted secret",
 
 				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {

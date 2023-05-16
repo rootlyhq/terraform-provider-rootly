@@ -262,7 +262,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
   }
   const description = annotatedDescription(schema);
   const forceNew = name === pathIdField || schema.write_only ? "true" : "false";
-  const skipDiff = schema.write_only
+  const skipDiff = schema.skip_diff || schema.write_only
     ? `
 		DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 			return len(old) != 0

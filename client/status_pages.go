@@ -19,6 +19,13 @@ type StatusPage struct {
   ShowUptimeLastDays int `jsonapi:"attr,show_uptime_last_days,omitempty"`
   SuccessMessage string `jsonapi:"attr,success_message,omitempty"`
   FailureMessage string `jsonapi:"attr,failure_message,omitempty"`
+  AuthenticationEnabled *bool `jsonapi:"attr,authentication_enabled,omitempty"`
+  AuthenticationPassword string `jsonapi:"attr,authentication_password,omitempty"`
+  WebsiteUrl string `jsonapi:"attr,website_url,omitempty"`
+  WebsitePrivacyUrl string `jsonapi:"attr,website_privacy_url,omitempty"`
+  WebsiteSupportUrl string `jsonapi:"attr,website_support_url,omitempty"`
+  GaTrackingId string `jsonapi:"attr,ga_tracking_id,omitempty"`
+  TimeZone string `jsonapi:"attr,time_zone,omitempty"`
   Public *bool `jsonapi:"attr,public,omitempty"`
   Enabled *bool `jsonapi:"attr,enabled,omitempty"`
 }
