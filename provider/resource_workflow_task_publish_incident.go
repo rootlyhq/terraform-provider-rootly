@@ -97,6 +97,16 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 								"completed",
 							}, false),
 						},
+						"notify_subscribers": &schema.Schema{
+							Description: "When true notifies subscribers of the status page by email/text",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
+						"should_tweet": &schema.Schema{
+							Description: "For StatusPage.io integrated pages auto publishes a tweet for your update",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
 						"status_page_template": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. ",
 							Type:        schema.TypeMap,

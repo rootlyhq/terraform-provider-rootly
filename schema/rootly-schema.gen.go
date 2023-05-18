@@ -10703,6 +10703,9 @@ type IncidentStatusPageEvent struct {
 	// Notify all status pages subscribers
 	NotifySubscribers *bool `json:"notify_subscribers,omitempty"`
 
+	// For StatusPage.io integrated pages auto publishes a tweet for your update
+	ShouldTweet *bool `json:"should_tweet,omitempty"`
+
 	// Date of start
 	StartedAt string `json:"started_at"`
 
@@ -10731,6 +10734,9 @@ type IncidentStatusPageEventList struct {
 
 			// Notify all status pages subscribers
 			NotifySubscribers *bool `json:"notify_subscribers,omitempty"`
+
+			// For StatusPage.io integrated pages auto publishes a tweet for your update
+			ShouldTweet *bool `json:"should_tweet,omitempty"`
 
 			// Date of start
 			StartedAt string `json:"started_at"`
@@ -10776,6 +10782,9 @@ type IncidentStatusPageEventResponse struct {
 
 			// Notify all status pages subscribers
 			NotifySubscribers *bool `json:"notify_subscribers,omitempty"`
+
+			// For StatusPage.io integrated pages auto publishes a tweet for your update
+			ShouldTweet *bool `json:"should_tweet,omitempty"`
 
 			// Date of start
 			StartedAt string `json:"started_at"`
@@ -11801,6 +11810,9 @@ type NewIncidentStatusPageEvent struct {
 
 			// Notify all status pages subscribers
 			NotifySubscribers *bool `json:"notify_subscribers"`
+
+			// For StatusPage.io integrated pages auto publishes a tweet for your update
+			ShouldTweet *bool `json:"should_tweet"`
 
 			// The status of the incident event
 			Status *NewIncidentStatusPageEventDataAttributesStatus `json:"status,omitempty"`
@@ -12852,7 +12864,13 @@ type PublishIncidentTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"incident"`
-	PublicTitle        string                           `json:"public_title"`
+
+	// When true notifies subscribers of the status page by email/text
+	NotifySubscribers *bool  `json:"notify_subscribers,omitempty"`
+	PublicTitle       string `json:"public_title"`
+
+	// For StatusPage.io integrated pages auto publishes a tweet for your update
+	ShouldTweet        *bool                            `json:"should_tweet,omitempty"`
 	Status             *PublishIncidentTaskParamsStatus `json:"status,omitempty"`
 	StatusPageId       string                           `json:"status_page_id"`
 	StatusPageTemplate *struct {
@@ -15672,6 +15690,9 @@ type UpdateIncidentStatusPageEvent struct {
 
 			// Notify all status pages subscribers
 			NotifySubscribers *bool `json:"notify_subscribers"`
+
+			// For StatusPage.io integrated pages auto publishes a tweet for your update
+			ShouldTweet *bool `json:"should_tweet"`
 
 			// The status of the incident event
 			Status *UpdateIncidentStatusPageEventDataAttributesStatus `json:"status,omitempty"`
