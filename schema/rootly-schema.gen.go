@@ -6791,7 +6791,8 @@ type CreatePagertreeAlertTaskParamsUrgency string
 // CreateQuipPageTaskParams defines model for create_quip_page_task_params.
 type CreateQuipPageTaskParams struct {
 	// The page content
-	Content *string `json:"content,omitempty"`
+	Content                   *string `json:"content,omitempty"`
+	MarkPostMortemAsPublished *bool   `json:"mark_post_mortem_as_published,omitempty"`
 
 	// The parent folder id
 	ParentFolderId *string `json:"parent_folder_id,omitempty"`
@@ -12196,6 +12197,9 @@ type NewStatusPage struct {
 			// The color of the footer. Eg. "#1F2F41"
 			FooterColor *string `json:"footer_color"`
 
+			// Services attached to the status page
+			FunctionalityIds *[]string `json:"functionality_ids,omitempty"`
+
 			// Google Analytics tracking ID
 			GaTrackingId *string `json:"ga_tracking_id"`
 
@@ -12207,6 +12211,9 @@ type NewStatusPage struct {
 
 			// The public title of the status page
 			PublicTitle *string `json:"public_title,omitempty"`
+
+			// Functionalities attached to the status page
+			ServiceIds *[]string `json:"service_ids,omitempty"`
 
 			// Show uptime
 			ShowUptime *bool `json:"show_uptime"`
@@ -14351,6 +14358,9 @@ type StatusPage struct {
 	// The color of the footer. Eg. "#1F2F41"
 	FooterColor *string `json:"footer_color"`
 
+	// Services attached to the status page
+	FunctionalityIds *[]string `json:"functionality_ids,omitempty"`
+
 	// Google Analytics tracking ID
 	GaTrackingId *string `json:"ga_tracking_id"`
 
@@ -14359,6 +14369,9 @@ type StatusPage struct {
 
 	// Make the status page accessible to the public
 	Public *bool `json:"public"`
+
+	// Functionalities attached to the status page
+	ServiceIds *[]string `json:"service_ids,omitempty"`
 
 	// Show uptime
 	ShowUptime *bool `json:"show_uptime"`
@@ -14422,6 +14435,9 @@ type StatusPageList struct {
 			// The color of the footer. Eg. "#1F2F41"
 			FooterColor *string `json:"footer_color"`
 
+			// Services attached to the status page
+			FunctionalityIds *[]string `json:"functionality_ids,omitempty"`
+
 			// Google Analytics tracking ID
 			GaTrackingId *string `json:"ga_tracking_id"`
 
@@ -14430,6 +14446,9 @@ type StatusPageList struct {
 
 			// Make the status page accessible to the public
 			Public *bool `json:"public"`
+
+			// Functionalities attached to the status page
+			ServiceIds *[]string `json:"service_ids,omitempty"`
 
 			// Show uptime
 			ShowUptime *bool `json:"show_uptime"`
@@ -14509,6 +14528,9 @@ type StatusPageResponse struct {
 			// The color of the footer. Eg. "#1F2F41"
 			FooterColor *string `json:"footer_color"`
 
+			// Services attached to the status page
+			FunctionalityIds *[]string `json:"functionality_ids,omitempty"`
+
 			// Google Analytics tracking ID
 			GaTrackingId *string `json:"ga_tracking_id"`
 
@@ -14517,6 +14539,9 @@ type StatusPageResponse struct {
 
 			// Make the status page accessible to the public
 			Public *bool `json:"public"`
+
+			// Functionalities attached to the status page
+			ServiceIds *[]string `json:"service_ids,omitempty"`
 
 			// Show uptime
 			ShowUptime *bool `json:"show_uptime"`
@@ -16389,6 +16414,9 @@ type UpdateStatusPage struct {
 			// The color of the footer. Eg. "#1F2F41"
 			FooterColor *string `json:"footer_color"`
 
+			// Services attached to the status page
+			FunctionalityIds *[]string `json:"functionality_ids,omitempty"`
+
 			// Google Analytics tracking ID
 			GaTrackingId *string `json:"ga_tracking_id"`
 
@@ -16397,6 +16425,9 @@ type UpdateStatusPage struct {
 
 			// Make the status page accessible to the public
 			Public *bool `json:"public"`
+
+			// Functionalities attached to the status page
+			ServiceIds *[]string `json:"service_ids,omitempty"`
 
 			// Show uptime
 			ShowUptime *bool `json:"show_uptime"`

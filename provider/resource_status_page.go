@@ -175,6 +175,28 @@ func resourceStatusPage() *schema.Resource {
 				Description: "Make the status page accessible to the public",
 			},
 
+			"service_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Functionalities attached to the status page",
+			},
+
+			"functionality_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Services attached to the status page",
+			},
+
 			"enabled": &schema.Schema{
 				Type:     schema.TypeBool,
 				Default:  true,
@@ -242,6 +264,12 @@ func resourceStatusPageCreate(ctx context.Context, d *schema.ResourceData, meta 
 	if value, ok := d.GetOkExists("public"); ok {
 		s.Public = tools.Bool(value.(bool))
 	}
+	if value, ok := d.GetOkExists("service_ids"); ok {
+		s.ServiceIds = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("functionality_ids"); ok {
+		s.FunctionalityIds = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("enabled"); ok {
 		s.Enabled = tools.Bool(value.(bool))
 	}
@@ -291,6 +319,8 @@ func resourceStatusPageRead(ctx context.Context, d *schema.ResourceData, meta in
 	d.Set("ga_tracking_id", item.GaTrackingId)
 	d.Set("time_zone", item.TimeZone)
 	d.Set("public", item.Public)
+	d.Set("service_ids", item.ServiceIds)
+	d.Set("functionality_ids", item.FunctionalityIds)
 	d.Set("enabled", item.Enabled)
 
 	return nil
@@ -352,6 +382,12 @@ func resourceStatusPageUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	}
 	if d.HasChange("public") {
 		s.Public = tools.Bool(d.Get("public").(bool))
+	}
+	if d.HasChange("service_ids") {
+		s.ServiceIds = d.Get("service_ids").([]interface{})
+	}
+	if d.HasChange("functionality_ids") {
+		s.FunctionalityIds = d.Get("functionality_ids").([]interface{})
 	}
 	if d.HasChange("enabled") {
 		s.Enabled = tools.Bool(d.Get("enabled").(bool))

@@ -39,6 +39,7 @@ Required:
 Optional:
 
 - `content` (String) The page content
+- `mark_post_mortem_as_published` (Boolean)
 - `parent_folder_id` (String) The parent folder id
 - `post_mortem_template_id` (String) Retrospective template to use when creating page, if desired.
 - `task_type` (String)

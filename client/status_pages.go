@@ -27,6 +27,8 @@ type StatusPage struct {
   GaTrackingId string `jsonapi:"attr,ga_tracking_id,omitempty"`
   TimeZone string `jsonapi:"attr,time_zone,omitempty"`
   Public *bool `jsonapi:"attr,public,omitempty"`
+  ServiceIds []interface{} `jsonapi:"attr,service_ids,omitempty"`
+  FunctionalityIds []interface{} `jsonapi:"attr,functionality_ids,omitempty"`
   Enabled *bool `jsonapi:"attr,enabled,omitempty"`
 }
 

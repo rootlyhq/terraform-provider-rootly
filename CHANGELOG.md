@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.98] -- 2023-05-23
+
+- Add `service_ids`, `functionality_ids` attributes to `status_page` resource.
+- Add `mark_post_mortem_as_published` attribute to `workflow_task_create_quip_page` resource.
+
 ## [0.1.97] -- 2023-05-18
 
 - Add `notify_subscribers`, `should_tweet` attributes to `workflow_task_publish_incident` resource.
