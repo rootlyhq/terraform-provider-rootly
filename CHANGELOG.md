@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.99] -- 2023-05-24
+
+- `skip_on_failure` and `enabled` attributes for `workflow_task` resources are now working as expected.
+- Fix some documentation.
+
 ## [0.1.98] -- 2023-05-23
 
 - Add `service_ids`, `functionality_ids` attributes to `status_page` resource.
