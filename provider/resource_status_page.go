@@ -183,7 +183,7 @@ func resourceStatusPage() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
-				Description: "Functionalities attached to the status page",
+				Description: "Services attached to the status page",
 			},
 
 			"functionality_ids": &schema.Schema{
@@ -194,7 +194,7 @@ func resourceStatusPage() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
-				Description: "Services attached to the status page",
+				Description: "Functionalities attached to the status page",
 			},
 
 			"enabled": &schema.Schema{

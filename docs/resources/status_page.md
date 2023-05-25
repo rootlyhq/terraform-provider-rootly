@@ -27,11 +27,11 @@ description: |-
 - `enabled` (Boolean)
 - `failure_message` (String) Message showing when at least one component is not operational
 - `footer_color` (String) The color of the footer. Eg. "#1F2F41"
-- `functionality_ids` (List of String) Services attached to the status page
+- `functionality_ids` (List of String) Functionalities attached to the status page
 - `ga_tracking_id` (String) Google Analytics tracking ID
 - `header_color` (String) The color of the header. Eg. "#0061F2"
 - `public` (Boolean) Make the status page accessible to the public
-- `service_ids` (List of String) Functionalities attached to the status page
+- `service_ids` (List of String) Services attached to the status page
 - `show_uptime` (Boolean) Show uptime
 - `show_uptime_last_days` (Number) Show uptime over x days. Value must be one of `30`, `60`, `90`.
 - `success_message` (String) Message showing when all components are operational

@@ -12197,7 +12197,7 @@ type NewStatusPage struct {
 			// The color of the footer. Eg. "#1F2F41"
 			FooterColor *string `json:"footer_color"`
 
-			// Services attached to the status page
+			// Functionalities attached to the status page
 			FunctionalityIds *[]string `json:"functionality_ids,omitempty"`
 
 			// Google Analytics tracking ID
@@ -12212,7 +12212,7 @@ type NewStatusPage struct {
 			// The public title of the status page
 			PublicTitle *string `json:"public_title,omitempty"`
 
-			// Functionalities attached to the status page
+			// Services attached to the status page
 			ServiceIds *[]string `json:"service_ids,omitempty"`
 
 			// Show uptime
@@ -14358,7 +14358,7 @@ type StatusPage struct {
 	// The color of the footer. Eg. "#1F2F41"
 	FooterColor *string `json:"footer_color"`
 
-	// Services attached to the status page
+	// Functionalities attached to the status page
 	FunctionalityIds *[]string `json:"functionality_ids,omitempty"`
 
 	// Google Analytics tracking ID
@@ -14370,7 +14370,7 @@ type StatusPage struct {
 	// Make the status page accessible to the public
 	Public *bool `json:"public"`
 
-	// Functionalities attached to the status page
+	// Services attached to the status page
 	ServiceIds *[]string `json:"service_ids,omitempty"`
 
 	// Show uptime
@@ -14435,7 +14435,7 @@ type StatusPageList struct {
 			// The color of the footer. Eg. "#1F2F41"
 			FooterColor *string `json:"footer_color"`
 
-			// Services attached to the status page
+			// Functionalities attached to the status page
 			FunctionalityIds *[]string `json:"functionality_ids,omitempty"`
 
 			// Google Analytics tracking ID
@@ -14447,7 +14447,7 @@ type StatusPageList struct {
 			// Make the status page accessible to the public
 			Public *bool `json:"public"`
 
-			// Functionalities attached to the status page
+			// Services attached to the status page
 			ServiceIds *[]string `json:"service_ids,omitempty"`
 
 			// Show uptime
@@ -14528,7 +14528,7 @@ type StatusPageResponse struct {
 			// The color of the footer. Eg. "#1F2F41"
 			FooterColor *string `json:"footer_color"`
 
-			// Services attached to the status page
+			// Functionalities attached to the status page
 			FunctionalityIds *[]string `json:"functionality_ids,omitempty"`
 
 			// Google Analytics tracking ID
@@ -14540,7 +14540,7 @@ type StatusPageResponse struct {
 			// Make the status page accessible to the public
 			Public *bool `json:"public"`
 
-			// Functionalities attached to the status page
+			// Services attached to the status page
 			ServiceIds *[]string `json:"service_ids,omitempty"`
 
 			// Show uptime
@@ -16414,7 +16414,7 @@ type UpdateStatusPage struct {
 			// The color of the footer. Eg. "#1F2F41"
 			FooterColor *string `json:"footer_color"`
 
-			// Services attached to the status page
+			// Functionalities attached to the status page
 			FunctionalityIds *[]string `json:"functionality_ids,omitempty"`
 
 			// Google Analytics tracking ID
@@ -16426,7 +16426,7 @@ type UpdateStatusPage struct {
 			// Make the status page accessible to the public
 			Public *bool `json:"public"`
 
-			// Functionalities attached to the status page
+			// Services attached to the status page
 			ServiceIds *[]string `json:"service_ids,omitempty"`
 
 			// Show uptime

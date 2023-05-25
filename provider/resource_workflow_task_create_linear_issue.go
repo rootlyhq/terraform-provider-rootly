@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
+	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
 func resourceWorkflowTaskCreateLinearIssue() *schema.Resource {
@@ -125,8 +126,8 @@ func resourceWorkflowTaskCreateLinearIssueCreate(ctx context.Context, d *schema.
 
 	workflowId := d.Get("workflow_id").(string)
 	position := d.Get("position").(int)
-	skipOnFailure := d.Get("skip_on_failure").(bool)
-	enabled := d.Get("enabled").(bool)
+	skipOnFailure := tools.Bool(d.Get("skip_on_failure").(bool))
+	enabled := tools.Bool(d.Get("enabled").(bool))
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	tflog.Trace(ctx, fmt.Sprintf("Creating workflow task: %s", workflowId))
@@ -184,8 +185,8 @@ func resourceWorkflowTaskCreateLinearIssueUpdate(ctx context.Context, d *schema.
 
 	workflowId := d.Get("workflow_id").(string)
 	position := d.Get("position").(int)
-	skipOnFailure := d.Get("skip_on_failure").(bool)
-	enabled := d.Get("enabled").(bool)
+	skipOnFailure := tools.Bool(d.Get("skip_on_failure").(bool))
+	enabled := tools.Bool(d.Get("enabled").(bool))
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	s := &client.WorkflowTask{
