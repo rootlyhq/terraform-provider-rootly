@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.0] -- 2023-06-02
+
+- Fix Semantic Versioning.
+
 ## [0.2.00] -- 2023-06-02
 
 - Add `ticket_payload` attribute to `workflow_task_create_zendesk_ticket` resource.
