@@ -14957,6 +14957,7 @@ type UpdateAsanaTaskTaskParams struct {
 
 	// Dependent task ids. Supports liquid syntax.
 	DependentTaskIds *[]string `json:"dependent_task_ids"`
+	Notes            *string   `json:"notes,omitempty"`
 
 	// The task id
 	TaskId   string                             `json:"task_id"`

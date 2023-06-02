@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.1] -- 2023-06-02
+
+- Add `notes` attribute to `workflow_task_update_asana_task` resource.
+
 ## [1.0.0] -- 2023-06-02
 
 - Fix Semantic Versioning.
