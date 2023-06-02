@@ -165,3 +165,16 @@ resource "rootly_dashboard_panel" "incidents_by_severity" {
 `make build` auto-generates code from Swagger, compiles provider, and regenerates docs.
 
 Exclude API resources from the provider by adding them to the excluded list in `tools/generate.js`.
+
+## Release
+
+- Update `CHANGELOG.md`
+- Update `User-Agent` in `client.go` to `terraform-provider-rootly/v0.2.xx`
+
+```bash
+git add -A
+git commit -m 'v0.2.xx'
+git push # Wait for test to pass
+git tag v0.2.xx
+git push --tags
+```
