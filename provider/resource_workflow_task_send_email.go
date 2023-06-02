@@ -80,6 +80,22 @@ func resourceWorkflowTaskSendEmail() *schema.Resource {
 								Type: schema.TypeString,
 							},
 						},
+						"cc": &schema.Schema{
+							Description: "",
+							Type:        schema.TypeList,
+							Optional:    true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+						},
+						"bcc": &schema.Schema{
+							Description: "",
+							Type:        schema.TypeList,
+							Optional:    true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+						},
 						"subject": &schema.Schema{
 							Description: "The subject",
 							Type:        schema.TypeString,

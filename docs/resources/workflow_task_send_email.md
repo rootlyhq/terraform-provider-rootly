@@ -136,6 +136,8 @@ Required:
 
 Optional:
 
+- `bcc` (List of String)
+- `cc` (List of String)
 - `custom_logo_url` (String) URL to your custom email logo
 - `from` (String) The from email address. Need to use SMTP integration if different than rootly.com.
 - `include_footer` (Boolean)

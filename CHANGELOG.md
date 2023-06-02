@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2.00] -- 2023-06-02
+
+- Add `ticket_payload` attribute to `workflow_task_create_zendesk_ticket` resource.
+- Add `bcc` & `cc` attributes to `/workflow_task_send_email` resource.
+
 ## [0.1.99] -- 2023-05-24
 
 - `skip_on_failure` and `enabled` attributes for `workflow_task` resources are now working as expected.

@@ -106,6 +106,17 @@ func resourceWorkflowTaskUpdateZendeskTicket() *schema.Resource {
 							},
 							Default: "{}",
 						},
+						"ticket_payload": &schema.Schema{
+							Description: "Additional Zendesk ticket attributes. Will be merged into whatever was specified in this tasks current parameters. Can contain liquid markup and need to be valid JSON.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+								t := &testing.T{}
+								assert := assert.New(t)
+								return assert.JSONEq(old, new)
+							},
+							Default: "{}",
+						},
 					},
 				},
 			},

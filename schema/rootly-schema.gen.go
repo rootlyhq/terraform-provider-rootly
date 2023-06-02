@@ -6995,6 +6995,9 @@ type CreateZendeskTicketTaskParams struct {
 	// The ticket tags.
 	Tags     *string                                `json:"tags,omitempty"`
 	TaskType *CreateZendeskTicketTaskParamsTaskType `json:"task_type,omitempty"`
+
+	// Additional Zendesk ticket attributes. Will be merged into whatever was specified in this tasks current parameters. Can contain liquid markup and need to be valid JSON.
+	TicketPayload *string `json:"ticket_payload"`
 }
 
 // CreateZendeskTicketTaskParamsKind defines model for CreateZendeskTicketTaskParams.Kind.
@@ -13673,8 +13676,11 @@ type SendDashboardReportTaskParamsTaskType string
 
 // SendEmailTaskParams defines model for send_email_task_params.
 type SendEmailTaskParams struct {
+	Bcc *[]string `json:"bcc,omitempty"`
+
 	// The email body
-	Body *string `json:"body"`
+	Body *string   `json:"body"`
+	Cc   *[]string `json:"cc,omitempty"`
 
 	// URL to your custom email logo
 	CustomLogoUrl *string `json:"custom_logo_url"`
@@ -16756,6 +16762,9 @@ type UpdateZendeskTicketTaskParams struct {
 
 	// The ticket id.
 	TicketId string `json:"ticket_id"`
+
+	// Additional Zendesk ticket attributes. Will be merged into whatever was specified in this tasks current parameters. Can contain liquid markup and need to be valid JSON.
+	TicketPayload *string `json:"ticket_payload"`
 }
 
 // UpdateZendeskTicketTaskParamsTaskType defines model for UpdateZendeskTicketTaskParams.TaskType.
@@ -17889,8 +17898,8 @@ type ListIncidentActionItemsParams struct {
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
-// ListAlertParams defines parameters for ListAlert.
-type ListAlertParams struct {
+// ListIncidentAlertsParams defines parameters for ListIncidentAlerts.
+type ListIncidentAlertsParams struct {
 	Include           *string `form:"include,omitempty" json:"include,omitempty"`
 	FilterSource      *string `form:"filter[source],omitempty" json:"filter[source],omitempty"`
 	FilterStartedAtGt *string `form:"filter[started_at][gt],omitempty" json:"filter[started_at][gt],omitempty"`
@@ -18571,8 +18580,8 @@ type ClientInterface interface {
 	// CreateIncidentActionItem request with any body
 	CreateIncidentActionItemWithBody(ctx context.Context, incidentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ListAlert request
-	ListAlert(ctx context.Context, incidentId string, params *ListAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// ListIncidentAlerts request
+	ListIncidentAlerts(ctx context.Context, incidentId string, params *ListIncidentAlertsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// AttachAlert request with any body
 	AttachAlertWithBody(ctx context.Context, incidentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -20264,8 +20273,8 @@ func (c *Client) CreateIncidentActionItemWithBody(ctx context.Context, incidentI
 	return c.Client.Do(req)
 }
 
-func (c *Client) ListAlert(ctx context.Context, incidentId string, params *ListAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewListAlertRequest(c.Server, incidentId, params)
+func (c *Client) ListIncidentAlerts(ctx context.Context, incidentId string, params *ListIncidentAlertsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListIncidentAlertsRequest(c.Server, incidentId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -28038,8 +28047,8 @@ func NewCreateIncidentActionItemRequestWithBody(server string, incidentId string
 	return req, nil
 }
 
-// NewListAlertRequest generates requests for ListAlert
-func NewListAlertRequest(server string, incidentId string, params *ListAlertParams) (*http.Request, error) {
+// NewListIncidentAlertsRequest generates requests for ListIncidentAlerts
+func NewListIncidentAlertsRequest(server string, incidentId string, params *ListIncidentAlertsParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -34590,8 +34599,8 @@ type ClientWithResponsesInterface interface {
 	// CreateIncidentActionItem request with any body
 	CreateIncidentActionItemWithBodyWithResponse(ctx context.Context, incidentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentActionItemResponse, error)
 
-	// ListAlert request
-	ListAlertWithResponse(ctx context.Context, incidentId string, params *ListAlertParams, reqEditors ...RequestEditorFn) (*ListAlertResponse, error)
+	// ListIncidentAlerts request
+	ListIncidentAlertsWithResponse(ctx context.Context, incidentId string, params *ListIncidentAlertsParams, reqEditors ...RequestEditorFn) (*ListIncidentAlertsResponse, error)
 
 	// AttachAlert request with any body
 	AttachAlertWithBodyWithResponse(ctx context.Context, incidentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AttachAlertResponse, error)
@@ -37309,13 +37318,13 @@ func (r CreateIncidentActionItemResponse) StatusCode() int {
 	return 0
 }
 
-type ListAlertResponse struct {
+type ListIncidentAlertsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 }
 
 // Status returns HTTPResponse.Status
-func (r ListAlertResponse) Status() string {
+func (r ListIncidentAlertsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -37323,7 +37332,7 @@ func (r ListAlertResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ListAlertResponse) StatusCode() int {
+func (r ListIncidentAlertsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -40603,13 +40612,13 @@ func (c *ClientWithResponses) CreateIncidentActionItemWithBodyWithResponse(ctx c
 	return ParseCreateIncidentActionItemResponse(rsp)
 }
 
-// ListAlertWithResponse request returning *ListAlertResponse
-func (c *ClientWithResponses) ListAlertWithResponse(ctx context.Context, incidentId string, params *ListAlertParams, reqEditors ...RequestEditorFn) (*ListAlertResponse, error) {
-	rsp, err := c.ListAlert(ctx, incidentId, params, reqEditors...)
+// ListIncidentAlertsWithResponse request returning *ListIncidentAlertsResponse
+func (c *ClientWithResponses) ListIncidentAlertsWithResponse(ctx context.Context, incidentId string, params *ListIncidentAlertsParams, reqEditors ...RequestEditorFn) (*ListIncidentAlertsResponse, error) {
+	rsp, err := c.ListIncidentAlerts(ctx, incidentId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseListAlertResponse(rsp)
+	return ParseListIncidentAlertsResponse(rsp)
 }
 
 // AttachAlertWithBodyWithResponse request with arbitrary body returning *AttachAlertResponse
@@ -43399,15 +43408,15 @@ func ParseCreateIncidentActionItemResponse(rsp *http.Response) (*CreateIncidentA
 	return response, nil
 }
 
-// ParseListAlertResponse parses an HTTP response from a ListAlertWithResponse call
-func ParseListAlertResponse(rsp *http.Response) (*ListAlertResponse, error) {
+// ParseListIncidentAlertsResponse parses an HTTP response from a ListIncidentAlertsWithResponse call
+func ParseListIncidentAlertsResponse(rsp *http.Response) (*ListIncidentAlertsResponse, error) {
 	bodyBytes, err := ioutil.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &ListAlertResponse{
+	response := &ListIncidentAlertsResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

@@ -44,3 +44,4 @@ Optional:
 - `subject` (String) The ticket subject.
 - `tags` (String) The ticket tags.
 - `task_type` (String)
+- `ticket_payload` (String) Additional Zendesk ticket attributes. Will be merged into whatever was specified in this tasks current parameters. Can contain liquid markup and need to be valid JSON.
