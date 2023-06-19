@@ -86,7 +86,7 @@ Optional:
 - `incident_condition_visibility` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `incident_conditional_inactivity` (String)
 - `incident_inactivity_duration` (String) ex. 10 min, 1h, 3 days, 2 weeks
-- `incident_kinds` (List of String) Value must be one of `example`, `normal`, `normal_sub`, `test`, `test_sub`, `backfilled`, `scheduled`.
+- `incident_kinds` (List of String) Value must be one of `example`, `example_sub`, `normal`, `normal_sub`, `test`, `test_sub`, `backfilled`, `scheduled`.
 - `incident_statuses` (List of String) Value must be one of `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.
 - `incident_visibilities` (List of String)
 - `trigger_type` (String) Value must be one off `incident`.

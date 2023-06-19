@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.2] -- 2023-06-18
+
+- Add `workflow_task_update_notion_page` resource.
+
 ## [1.0.1] -- 2023-06-02
 
 - Add `notes` attribute to `workflow_task_update_asana_task` resource.

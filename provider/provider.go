@@ -145,6 +145,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_workflow_task_create_linear_issue_comment":        resourceWorkflowTaskCreateLinearIssueComment(),
 				"rootly_workflow_task_create_microsoft_teams_meeting":     resourceWorkflowTaskCreateMicrosoftTeamsMeeting(),
 				"rootly_workflow_task_create_notion_page":                 resourceWorkflowTaskCreateNotionPage(),
+				"rootly_workflow_task_update_notion_page":                 resourceWorkflowTaskUpdateNotionPage(),
 				"rootly_workflow_task_create_service_now_incident":        resourceWorkflowTaskCreateServiceNowIncident(),
 				"rootly_workflow_task_create_shortcut_story":              resourceWorkflowTaskCreateShortcutStory(),
 				"rootly_workflow_task_create_shortcut_task":               resourceWorkflowTaskCreateShortcutTask(),

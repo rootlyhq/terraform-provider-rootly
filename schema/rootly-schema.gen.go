@@ -227,6 +227,7 @@ const (
 const (
 	ActionItemTriggerParamsIncidentKindsBackfilled ActionItemTriggerParamsIncidentKinds = "backfilled"
 	ActionItemTriggerParamsIncidentKindsExample    ActionItemTriggerParamsIncidentKinds = "example"
+	ActionItemTriggerParamsIncidentKindsExampleSub ActionItemTriggerParamsIncidentKinds = "example_sub"
 	ActionItemTriggerParamsIncidentKindsNormal     ActionItemTriggerParamsIncidentKinds = "normal"
 	ActionItemTriggerParamsIncidentKindsNormalSub  ActionItemTriggerParamsIncidentKinds = "normal_sub"
 	ActionItemTriggerParamsIncidentKindsScheduled  ActionItemTriggerParamsIncidentKinds = "scheduled"
@@ -2095,6 +2096,7 @@ const (
 const (
 	IncidentTriggerParamsIncidentKindsBackfilled IncidentTriggerParamsIncidentKinds = "backfilled"
 	IncidentTriggerParamsIncidentKindsExample    IncidentTriggerParamsIncidentKinds = "example"
+	IncidentTriggerParamsIncidentKindsExampleSub IncidentTriggerParamsIncidentKinds = "example_sub"
 	IncidentTriggerParamsIncidentKindsNormal     IncidentTriggerParamsIncidentKinds = "normal"
 	IncidentTriggerParamsIncidentKindsNormalSub  IncidentTriggerParamsIncidentKinds = "normal_sub"
 	IncidentTriggerParamsIncidentKindsScheduled  IncidentTriggerParamsIncidentKinds = "scheduled"
@@ -2391,6 +2393,7 @@ const (
 const (
 	NewIncidentDataAttributesKindBackfilled NewIncidentDataAttributesKind = "backfilled"
 	NewIncidentDataAttributesKindExample    NewIncidentDataAttributesKind = "example"
+	NewIncidentDataAttributesKindExampleSub NewIncidentDataAttributesKind = "example_sub"
 	NewIncidentDataAttributesKindNormal     NewIncidentDataAttributesKind = "normal"
 	NewIncidentDataAttributesKindNormalSub  NewIncidentDataAttributesKind = "normal_sub"
 	NewIncidentDataAttributesKindScheduled  NewIncidentDataAttributesKind = "scheduled"
@@ -4102,6 +4105,7 @@ const (
 const (
 	UpdateIncidentDataAttributesKindBackfilled UpdateIncidentDataAttributesKind = "backfilled"
 	UpdateIncidentDataAttributesKindExample    UpdateIncidentDataAttributesKind = "example"
+	UpdateIncidentDataAttributesKindExampleSub UpdateIncidentDataAttributesKind = "example_sub"
 	UpdateIncidentDataAttributesKindNormal     UpdateIncidentDataAttributesKind = "normal"
 	UpdateIncidentDataAttributesKindNormalSub  UpdateIncidentDataAttributesKind = "normal_sub"
 	UpdateIncidentDataAttributesKindScheduled  UpdateIncidentDataAttributesKind = "scheduled"
@@ -4277,6 +4281,11 @@ const (
 // Defines values for UpdateLinearIssueTaskParamsTaskType.
 const (
 	UpdateLinearIssue UpdateLinearIssueTaskParamsTaskType = "update_linear_issue"
+)
+
+// Defines values for UpdateNotionPageTaskParamsTaskType.
+const (
+	UpdateNotionPage UpdateNotionPageTaskParamsTaskType = "update_notion_page"
 )
 
 // Defines values for UpdateOpsgenieAlertTaskParamsPriority.
@@ -15905,6 +15914,21 @@ type UpdateLinearIssueTaskParams struct {
 
 // UpdateLinearIssueTaskParamsTaskType defines model for UpdateLinearIssueTaskParams.TaskType.
 type UpdateLinearIssueTaskParamsTaskType string
+
+// UpdateNotionPageTaskParams defines model for update_notion_page_task_params.
+type UpdateNotionPageTaskParams struct {
+	// The Notion page ID
+	FileId string `json:"file_id"`
+
+	// Retrospective template to use when creating page task, if desired.
+	PostMortemTemplateId   *string                             `json:"post_mortem_template_id,omitempty"`
+	ShowActionItemsAsTable *bool                               `json:"show_action_items_as_table,omitempty"`
+	ShowTimelineAsTable    *bool                               `json:"show_timeline_as_table,omitempty"`
+	TaskType               *UpdateNotionPageTaskParamsTaskType `json:"task_type,omitempty"`
+}
+
+// UpdateNotionPageTaskParamsTaskType defines model for UpdateNotionPageTaskParams.TaskType.
+type UpdateNotionPageTaskParamsTaskType string
 
 // UpdateOpsgenieAlertTaskParams defines model for update_opsgenie_alert_task_params.
 type UpdateOpsgenieAlertTaskParams struct {

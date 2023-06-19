@@ -147,7 +147,7 @@ func resourceWorkflowPostMortem() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one of `example`, `normal`, `normal_sub`, `test`, `test_sub`, `backfilled`, `scheduled`.",
+							Description: "Value must be one of `example`, `example_sub`, `normal`, `normal_sub`, `test`, `test_sub`, `backfilled`, `scheduled`.",
 						},
 
 						"incident_statuses": &schema.Schema{
