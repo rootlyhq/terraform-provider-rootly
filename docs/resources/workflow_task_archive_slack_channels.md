@@ -15,9 +15,9 @@ Manages workflow archive_slack_channels task.
 resource "rootly_workflow_incident" "auto_archive_incident" {
   name        = "Auto archive incident 48hrs after resolution"
   description = "After an incident has been resolved, automatically archive the channel after 48 hours."
-  wait        = "2 days"
   trigger_params {
     triggers                  = ["status_updated"]
+    wait                      = "2 days"
     incident_statuses         = ["resolved"]
     incident_condition_status = "IS"
   }
@@ -29,6 +29,7 @@ resource "rootly_workflow_task_archive_slack_channels" "archive_slack_channels" 
   skip_on_failure = false
   enabled         = true
   task_params {
+    name = "Archive Slack channels"
     channels {
       id   = "{{ incident.slack_channel_id }}"
       name = "{{ incident.slack_channel_id }}"
