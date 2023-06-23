@@ -31,7 +31,7 @@ resource "rootly_workflow_task_archive_slack_channels" "archive_slack_channels" 
   task_params {
     channels {
       id   = "{{ incident.slack_channel_id }}"
-      name = "Archive Slack channels"
+      name = "{{ incident.slack_channel_id }}"
     }
   }
 }
