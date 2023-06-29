@@ -21,6 +21,7 @@ description: |-
 ### Optional
 
 - `command` (String) Workflow command.
+- `command_feedback_enabled` (Boolean) This will notify you back when the workflow is starting.
 - `description` (String) The description of the workflow
 - `enabled` (Boolean)
 - `environment_ids` (List of String)
@@ -75,7 +76,7 @@ Optional:
 - `incident_conditional_inactivity` (String)
 - `incident_inactivity_duration` (String) ex. 10 min, 1h, 3 days, 2 weeks
 - `incident_kinds` (List of String) Value must be one of `example`, `example_sub`, `normal`, `normal_sub`, `test`, `test_sub`, `backfilled`, `scheduled`.
-- `incident_statuses` (List of String) Value must be one of `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.
+- `incident_statuses` (List of String) Value must be one of `in_triage`, `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.
 - `incident_visibilities` (List of String)
 - `trigger_type` (String) Value must be one off `action_item`.
 - `triggers` (List of String) Value must be one of `action_item_created`, `action_item_updated`, `assigned_user_updated`, `summary_updated`, `description_updated`, `status_updated`, `priority_updated`, `due_date_updated`, `teams_updated`, `slack_command`.

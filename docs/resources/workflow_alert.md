@@ -33,6 +33,7 @@ resource "rootly_workflow_alert" "my-workflow" {
 ### Optional
 
 - `command` (String) Workflow command.
+- `command_feedback_enabled` (Boolean) This will notify you back when the workflow is starting.
 - `description` (String) The description of the workflow
 - `enabled` (Boolean)
 - `environment_ids` (List of String)

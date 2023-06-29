@@ -42,6 +42,7 @@ resource "rootly_workflow_incident" "my-workflow" {
 ### Optional
 
 - `command` (String) Workflow command.
+- `command_feedback_enabled` (Boolean) This will notify you back when the workflow is starting.
 - `description` (String) The description of the workflow
 - `enabled` (Boolean)
 - `environment_ids` (List of String)
@@ -87,7 +88,7 @@ Optional:
 - `incident_conditional_inactivity` (String)
 - `incident_inactivity_duration` (String) ex. 10 min, 1h, 3 days, 2 weeks
 - `incident_kinds` (List of String) Value must be one of `example`, `example_sub`, `normal`, `normal_sub`, `test`, `test_sub`, `backfilled`, `scheduled`.
-- `incident_statuses` (List of String) Value must be one of `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.
+- `incident_statuses` (List of String) Value must be one of `in_triage`, `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.
 - `incident_visibilities` (List of String)
 - `trigger_type` (String) Value must be one off `incident`.
-- `triggers` (List of String) Value must be one of `incident_created`, `incident_updated`, `title_updated`, `summary_updated`, `status_updated`, `severity_updated`, `environments_added`, `environments_removed`, `environments_updated`, `incident_types_added`, `incident_types_removed`, `incident_types_updated`, `services_added`, `services_removed`, `services_updated`, `functionalities_added`, `functionalities_removed`, `functionalities_updated`, `teams_added`, `teams_removed`, `teams_updated`, `timeline_updated`, `status_page_timeline_updated`, `role_assignments_updated`, `role_assignments_added`, `role_assignments_removed`, `slack_command`, `slack_channel_created`, `slack_channel_converted`, `subscribers_updated`, `subscribers_added`, `subscribers_removed`, `user_joined_slack_channel`, `user_left_slack_channel`.
+- `triggers` (List of String) Value must be one of `incident_in_triage`, `incident_created`, `incident_started`, `incident_updated`, `title_updated`, `summary_updated`, `status_updated`, `severity_updated`, `environments_added`, `environments_removed`, `environments_updated`, `incident_types_added`, `incident_types_removed`, `incident_types_updated`, `services_added`, `services_removed`, `services_updated`, `functionalities_added`, `functionalities_removed`, `functionalities_updated`, `teams_added`, `teams_removed`, `teams_updated`, `timeline_updated`, `status_page_timeline_updated`, `role_assignments_updated`, `role_assignments_added`, `role_assignments_removed`, `slack_command`, `slack_channel_created`, `slack_channel_converted`, `subscribers_updated`, `subscribers_added`, `subscribers_removed`, `user_joined_slack_channel`, `user_left_slack_channel`.

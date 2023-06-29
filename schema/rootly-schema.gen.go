@@ -242,6 +242,7 @@ const (
 	ActionItemTriggerParamsIncidentStatusesCompleted    ActionItemTriggerParamsIncidentStatuses = "completed"
 	ActionItemTriggerParamsIncidentStatusesDetected     ActionItemTriggerParamsIncidentStatuses = "detected"
 	ActionItemTriggerParamsIncidentStatusesInProgress   ActionItemTriggerParamsIncidentStatuses = "in_progress"
+	ActionItemTriggerParamsIncidentStatusesInTriage     ActionItemTriggerParamsIncidentStatuses = "in_triage"
 	ActionItemTriggerParamsIncidentStatusesMitigated    ActionItemTriggerParamsIncidentStatuses = "mitigated"
 	ActionItemTriggerParamsIncidentStatusesResolved     ActionItemTriggerParamsIncidentStatuses = "resolved"
 	ActionItemTriggerParamsIncidentStatusesScheduled    ActionItemTriggerParamsIncidentStatuses = "scheduled"
@@ -1080,6 +1081,7 @@ const (
 	FormFieldKindLabels                      FormFieldKind = "labels"
 	FormFieldKindManualStartingDatetimeField FormFieldKind = "manual_starting_datetime_field"
 	FormFieldKindMarkAsBackfilled            FormFieldKind = "mark_as_backfilled"
+	FormFieldKindMarkAsInTriage              FormFieldKind = "mark_as_in_triage"
 	FormFieldKindMarkAsTest                  FormFieldKind = "mark_as_test"
 	FormFieldKindNotifyEmails                FormFieldKind = "notify_emails"
 	FormFieldKindServices                    FormFieldKind = "services"
@@ -1153,6 +1155,7 @@ const (
 	FormFieldListDataAttributesKindLabels                      FormFieldListDataAttributesKind = "labels"
 	FormFieldListDataAttributesKindManualStartingDatetimeField FormFieldListDataAttributesKind = "manual_starting_datetime_field"
 	FormFieldListDataAttributesKindMarkAsBackfilled            FormFieldListDataAttributesKind = "mark_as_backfilled"
+	FormFieldListDataAttributesKindMarkAsInTriage              FormFieldListDataAttributesKind = "mark_as_in_triage"
 	FormFieldListDataAttributesKindMarkAsTest                  FormFieldListDataAttributesKind = "mark_as_test"
 	FormFieldListDataAttributesKindNotifyEmails                FormFieldListDataAttributesKind = "notify_emails"
 	FormFieldListDataAttributesKindServices                    FormFieldListDataAttributesKind = "services"
@@ -1308,6 +1311,7 @@ const (
 	FormFieldResponseDataAttributesKindLabels                      FormFieldResponseDataAttributesKind = "labels"
 	FormFieldResponseDataAttributesKindManualStartingDatetimeField FormFieldResponseDataAttributesKind = "manual_starting_datetime_field"
 	FormFieldResponseDataAttributesKindMarkAsBackfilled            FormFieldResponseDataAttributesKind = "mark_as_backfilled"
+	FormFieldResponseDataAttributesKindMarkAsInTriage              FormFieldResponseDataAttributesKind = "mark_as_in_triage"
 	FormFieldResponseDataAttributesKindMarkAsTest                  FormFieldResponseDataAttributesKind = "mark_as_test"
 	FormFieldResponseDataAttributesKindNotifyEmails                FormFieldResponseDataAttributesKind = "notify_emails"
 	FormFieldResponseDataAttributesKindServices                    FormFieldResponseDataAttributesKind = "services"
@@ -1432,6 +1436,11 @@ const (
 // Defines values for HttpClientTaskParamsTaskType.
 const (
 	HttpClient HttpClientTaskParamsTaskType = "http_client"
+)
+
+// Defines values for InTriageIncidentDataType.
+const (
+	InTriageIncidentDataTypeIncidents InTriageIncidentDataType = "incidents"
 )
 
 // Defines values for IncidentEnvironmentsDataType.
@@ -2111,6 +2120,7 @@ const (
 	IncidentTriggerParamsIncidentStatusesCompleted    IncidentTriggerParamsIncidentStatuses = "completed"
 	IncidentTriggerParamsIncidentStatusesDetected     IncidentTriggerParamsIncidentStatuses = "detected"
 	IncidentTriggerParamsIncidentStatusesInProgress   IncidentTriggerParamsIncidentStatuses = "in_progress"
+	IncidentTriggerParamsIncidentStatusesInTriage     IncidentTriggerParamsIncidentStatuses = "in_triage"
 	IncidentTriggerParamsIncidentStatusesMitigated    IncidentTriggerParamsIncidentStatuses = "mitigated"
 	IncidentTriggerParamsIncidentStatusesResolved     IncidentTriggerParamsIncidentStatuses = "resolved"
 	IncidentTriggerParamsIncidentStatusesScheduled    IncidentTriggerParamsIncidentStatuses = "scheduled"
@@ -2131,6 +2141,8 @@ const (
 	IncidentTriggerParamsTriggersFunctionalitiesRemoved    IncidentTriggerParamsTriggers = "functionalities_removed"
 	IncidentTriggerParamsTriggersFunctionalitiesUpdated    IncidentTriggerParamsTriggers = "functionalities_updated"
 	IncidentTriggerParamsTriggersIncidentCreated           IncidentTriggerParamsTriggers = "incident_created"
+	IncidentTriggerParamsTriggersIncidentInTriage          IncidentTriggerParamsTriggers = "incident_in_triage"
+	IncidentTriggerParamsTriggersIncidentStarted           IncidentTriggerParamsTriggers = "incident_started"
 	IncidentTriggerParamsTriggersIncidentTypesAdded        IncidentTriggerParamsTriggers = "incident_types_added"
 	IncidentTriggerParamsTriggersIncidentTypesRemoved      IncidentTriggerParamsTriggers = "incident_types_removed"
 	IncidentTriggerParamsTriggersIncidentTypesUpdated      IncidentTriggerParamsTriggers = "incident_types_updated"
@@ -2284,6 +2296,7 @@ const (
 	NewFormFieldDataAttributesKindLabels                      NewFormFieldDataAttributesKind = "labels"
 	NewFormFieldDataAttributesKindManualStartingDatetimeField NewFormFieldDataAttributesKind = "manual_starting_datetime_field"
 	NewFormFieldDataAttributesKindMarkAsBackfilled            NewFormFieldDataAttributesKind = "mark_as_backfilled"
+	NewFormFieldDataAttributesKindMarkAsInTriage              NewFormFieldDataAttributesKind = "mark_as_in_triage"
 	NewFormFieldDataAttributesKindMarkAsTest                  NewFormFieldDataAttributesKind = "mark_as_test"
 	NewFormFieldDataAttributesKindNotifyEmails                NewFormFieldDataAttributesKind = "notify_emails"
 	NewFormFieldDataAttributesKindServices                    NewFormFieldDataAttributesKind = "services"
@@ -2408,6 +2421,7 @@ const (
 	NewIncidentDataAttributesStatusCompleted    NewIncidentDataAttributesStatus = "completed"
 	NewIncidentDataAttributesStatusDetected     NewIncidentDataAttributesStatus = "detected"
 	NewIncidentDataAttributesStatusInProgress   NewIncidentDataAttributesStatus = "in_progress"
+	NewIncidentDataAttributesStatusInTriage     NewIncidentDataAttributesStatus = "in_triage"
 	NewIncidentDataAttributesStatusMitigated    NewIncidentDataAttributesStatus = "mitigated"
 	NewIncidentDataAttributesStatusResolved     NewIncidentDataAttributesStatus = "resolved"
 	NewIncidentDataAttributesStatusScheduled    NewIncidentDataAttributesStatus = "scheduled"
@@ -2797,6 +2811,7 @@ const (
 	NewWebhooksEndpointDataAttributesEventTypesIncidentCancelled           NewWebhooksEndpointDataAttributesEventTypes = "incident.cancelled"
 	NewWebhooksEndpointDataAttributesEventTypesIncidentCreated             NewWebhooksEndpointDataAttributesEventTypes = "incident.created"
 	NewWebhooksEndpointDataAttributesEventTypesIncidentDeleted             NewWebhooksEndpointDataAttributesEventTypes = "incident.deleted"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentInTriage            NewWebhooksEndpointDataAttributesEventTypes = "incident.in_triage"
 	NewWebhooksEndpointDataAttributesEventTypesIncidentMitigated           NewWebhooksEndpointDataAttributesEventTypes = "incident.mitigated"
 	NewWebhooksEndpointDataAttributesEventTypesIncidentPostMortemCreated   NewWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.created"
 	NewWebhooksEndpointDataAttributesEventTypesIncidentPostMortemDeleted   NewWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.deleted"
@@ -3980,6 +3995,7 @@ const (
 	UpdateFormFieldDataAttributesKindLabels                      UpdateFormFieldDataAttributesKind = "labels"
 	UpdateFormFieldDataAttributesKindManualStartingDatetimeField UpdateFormFieldDataAttributesKind = "manual_starting_datetime_field"
 	UpdateFormFieldDataAttributesKindMarkAsBackfilled            UpdateFormFieldDataAttributesKind = "mark_as_backfilled"
+	UpdateFormFieldDataAttributesKindMarkAsInTriage              UpdateFormFieldDataAttributesKind = "mark_as_in_triage"
 	UpdateFormFieldDataAttributesKindMarkAsTest                  UpdateFormFieldDataAttributesKind = "mark_as_test"
 	UpdateFormFieldDataAttributesKindNotifyEmails                UpdateFormFieldDataAttributesKind = "notify_emails"
 	UpdateFormFieldDataAttributesKindServices                    UpdateFormFieldDataAttributesKind = "services"
@@ -4115,7 +4131,7 @@ const (
 
 // Defines values for UpdateIncidentDataType.
 const (
-	UpdateIncidentDataTypeIncidents UpdateIncidentDataType = "incidents"
+	Incidents UpdateIncidentDataType = "incidents"
 )
 
 // Defines values for UpdateIncidentActionItemDataAttributesKind.
@@ -4613,6 +4629,7 @@ const (
 // Defines values for UpdateStatusTaskParamsStatus.
 const (
 	UpdateStatusTaskParamsStatusCancelled UpdateStatusTaskParamsStatus = "cancelled"
+	UpdateStatusTaskParamsStatusInTriage  UpdateStatusTaskParamsStatus = "in_triage"
 	UpdateStatusTaskParamsStatusMitigated UpdateStatusTaskParamsStatus = "mitigated"
 	UpdateStatusTaskParamsStatusResolved  UpdateStatusTaskParamsStatus = "resolved"
 	UpdateStatusTaskParamsStatusStarted   UpdateStatusTaskParamsStatus = "started"
@@ -4656,6 +4673,7 @@ const (
 	UpdateWebhooksEndpointDataAttributesEventTypesIncidentCancelled           UpdateWebhooksEndpointDataAttributesEventTypes = "incident.cancelled"
 	UpdateWebhooksEndpointDataAttributesEventTypesIncidentCreated             UpdateWebhooksEndpointDataAttributesEventTypes = "incident.created"
 	UpdateWebhooksEndpointDataAttributesEventTypesIncidentDeleted             UpdateWebhooksEndpointDataAttributesEventTypes = "incident.deleted"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentInTriage            UpdateWebhooksEndpointDataAttributesEventTypes = "incident.in_triage"
 	UpdateWebhooksEndpointDataAttributesEventTypesIncidentMitigated           UpdateWebhooksEndpointDataAttributesEventTypes = "incident.mitigated"
 	UpdateWebhooksEndpointDataAttributesEventTypesIncidentPostMortemCreated   UpdateWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.created"
 	UpdateWebhooksEndpointDataAttributesEventTypesIncidentPostMortemDeleted   UpdateWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.deleted"
@@ -4771,6 +4789,7 @@ const (
 	WebhooksEndpointEventTypesIncidentCancelled           WebhooksEndpointEventTypes = "incident.cancelled"
 	WebhooksEndpointEventTypesIncidentCreated             WebhooksEndpointEventTypes = "incident.created"
 	WebhooksEndpointEventTypesIncidentDeleted             WebhooksEndpointEventTypes = "incident.deleted"
+	WebhooksEndpointEventTypesIncidentInTriage            WebhooksEndpointEventTypes = "incident.in_triage"
 	WebhooksEndpointEventTypesIncidentMitigated           WebhooksEndpointEventTypes = "incident.mitigated"
 	WebhooksEndpointEventTypesIncidentPostMortemCreated   WebhooksEndpointEventTypes = "incident_post_mortem.created"
 	WebhooksEndpointEventTypesIncidentPostMortemDeleted   WebhooksEndpointEventTypes = "incident_post_mortem.deleted"
@@ -4797,6 +4816,7 @@ const (
 	WebhooksEndpointListDataAttributesEventTypesIncidentCancelled           WebhooksEndpointListDataAttributesEventTypes = "incident.cancelled"
 	WebhooksEndpointListDataAttributesEventTypesIncidentCreated             WebhooksEndpointListDataAttributesEventTypes = "incident.created"
 	WebhooksEndpointListDataAttributesEventTypesIncidentDeleted             WebhooksEndpointListDataAttributesEventTypes = "incident.deleted"
+	WebhooksEndpointListDataAttributesEventTypesIncidentInTriage            WebhooksEndpointListDataAttributesEventTypes = "incident.in_triage"
 	WebhooksEndpointListDataAttributesEventTypesIncidentMitigated           WebhooksEndpointListDataAttributesEventTypes = "incident.mitigated"
 	WebhooksEndpointListDataAttributesEventTypesIncidentPostMortemCreated   WebhooksEndpointListDataAttributesEventTypes = "incident_post_mortem.created"
 	WebhooksEndpointListDataAttributesEventTypesIncidentPostMortemDeleted   WebhooksEndpointListDataAttributesEventTypes = "incident_post_mortem.deleted"
@@ -4828,6 +4848,7 @@ const (
 	IncidentCancelled           WebhooksEndpointResponseDataAttributesEventTypes = "incident.cancelled"
 	IncidentCreated             WebhooksEndpointResponseDataAttributesEventTypes = "incident.created"
 	IncidentDeleted             WebhooksEndpointResponseDataAttributesEventTypes = "incident.deleted"
+	IncidentInTriage            WebhooksEndpointResponseDataAttributesEventTypes = "incident.in_triage"
 	IncidentMitigated           WebhooksEndpointResponseDataAttributesEventTypes = "incident.mitigated"
 	IncidentPostMortemCreated   WebhooksEndpointResponseDataAttributesEventTypes = "incident_post_mortem.created"
 	IncidentPostMortemDeleted   WebhooksEndpointResponseDataAttributesEventTypes = "incident_post_mortem.deleted"
@@ -8250,6 +8271,16 @@ type HttpClientTaskParamsMethod string
 // HttpClientTaskParamsTaskType defines model for HttpClientTaskParams.TaskType.
 type HttpClientTaskParamsTaskType string
 
+// InTriageIncident defines model for in_triage_incident.
+type InTriageIncident struct {
+	Data struct {
+		Type InTriageIncidentDataType `json:"type"`
+	} `json:"data"`
+}
+
+// InTriageIncidentDataType defines model for InTriageIncident.Data.Type.
+type InTriageIncidentDataType string
+
 // Incident defines model for incident.
 type Incident struct {
 	// Date of acknowledgment
@@ -8438,6 +8469,9 @@ type Incident struct {
 			Type IncidentGroupsDataType `json:"type"`
 		} `json:"data"`
 	} `json:"groups"`
+
+	// Date of triage
+	InTriageAt *string `json:"in_triage_at"`
 
 	// The Incident Types of the incident
 	IncidentTypes *[]struct {
@@ -9502,6 +9536,9 @@ type IncidentList struct {
 				} `json:"data"`
 			} `json:"groups"`
 
+			// Date of triage
+			InTriageAt *string `json:"in_triage_at"`
+
 			// The Incident Types of the incident
 			IncidentTypes *[]struct {
 				Data struct {
@@ -10214,6 +10251,9 @@ type IncidentResponse struct {
 					Type IncidentResponseDataAttributesGroupsDataType `json:"type"`
 				} `json:"data"`
 			} `json:"groups"`
+
+			// Date of triage
+			InTriageAt *string `json:"in_triage_at"`
 
 			// The Incident Types of the incident
 			IncidentTypes *[]struct {
@@ -11538,6 +11578,9 @@ type NewIncident struct {
 
 			// The Team ID's to attach to the incident
 			GroupIds *[]string `json:"group_ids"`
+
+			// Date of triage
+			InTriageAt *string `json:"in_triage_at"`
 
 			// The Incident Type ID's to attach to the incident
 			IncidentTypeIds *[]string `json:"incident_type_ids"`
@@ -15395,6 +15438,9 @@ type UpdateIncident struct {
 			// The Team ID's to attach to the incident
 			GroupIds *[]string `json:"group_ids"`
 
+			// Date of triage
+			InTriageAt *string `json:"in_triage_at"`
+
 			// The Incident Type ID's to attach to the incident
 			IncidentTypeIds *[]string `json:"incident_type_ids"`
 
@@ -16639,6 +16685,9 @@ type UpdateWorkflow struct {
 			// Workflow command.
 			Command *string `json:"command"`
 
+			// This will notify you back when the workflow is starting.
+			CommandFeedbackEnabled *bool `json:"command_feedback_enabled"`
+
 			// The description of the workflow
 			Description     *string   `json:"description"`
 			Enabled         *bool     `json:"enabled,omitempty"`
@@ -17058,6 +17107,9 @@ type Workflow struct {
 	// Workflow command.
 	Command *string `json:"command"`
 
+	// This will notify you back when the workflow is starting.
+	CommandFeedbackEnabled *bool `json:"command_feedback_enabled"`
+
 	// Date of creation
 	CreatedAt string `json:"created_at"`
 
@@ -17360,6 +17412,9 @@ type WorkflowList struct {
 			// Workflow command.
 			Command *string `json:"command"`
 
+			// This will notify you back when the workflow is starting.
+			CommandFeedbackEnabled *bool `json:"command_feedback_enabled"`
+
 			// Date of creation
 			CreatedAt string `json:"created_at"`
 
@@ -17422,6 +17477,9 @@ type WorkflowResponse struct {
 		Attributes struct {
 			// Workflow command.
 			Command *string `json:"command"`
+
+			// This will notify you back when the workflow is starting.
+			CommandFeedbackEnabled *bool `json:"command_feedback_enabled"`
 
 			// Date of creation
 			CreatedAt string `json:"created_at"`
@@ -17913,6 +17971,8 @@ type ListIncidentsParams struct {
 	FilterMitigatedAtLt                *string `form:"filter[mitigated_at][lt],omitempty" json:"filter[mitigated_at][lt],omitempty"`
 	FilterResolvedAtGt                 *string `form:"filter[resolved_at][gt],omitempty" json:"filter[resolved_at][gt],omitempty"`
 	FilterResolvedAtLt                 *string `form:"filter[resolved_at][lt],omitempty" json:"filter[resolved_at][lt],omitempty"`
+	FilterInTriageAtGt                 *string `form:"filter[in_triage_at][gt],omitempty" json:"filter[in_triage_at][gt],omitempty"`
+	FilterInTriageAtLt                 *string `form:"filter[in_triage_at][lt],omitempty" json:"filter[in_triage_at][lt],omitempty"`
 	Sort                               *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
@@ -18586,6 +18646,9 @@ type ClientInterface interface {
 
 	// MarkAsDuplicateIncident request with any body
 	MarkAsDuplicateIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// TriageIncident request with any body
+	TriageIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// MitigateIncident request with any body
 	MitigateIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -20216,6 +20279,18 @@ func (c *Client) CancelIncidentWithBody(ctx context.Context, id string, contentT
 
 func (c *Client) MarkAsDuplicateIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewMarkAsDuplicateIncidentRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) TriageIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewTriageIncidentRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -27539,6 +27614,38 @@ func NewListIncidentsRequest(server string, params *ListIncidentsParams) (*http.
 
 	}
 
+	if params.FilterInTriageAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[in_triage_at][gt]", runtime.ParamLocationQuery, *params.FilterInTriageAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterInTriageAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[in_triage_at][lt]", runtime.ParamLocationQuery, *params.FilterInTriageAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
 	if params.Sort != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
@@ -27787,6 +27894,42 @@ func NewMarkAsDuplicateIncidentRequestWithBody(server string, id string, content
 	}
 
 	operationPath := fmt.Sprintf("/v1/incidents/%s/duplicate", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewTriageIncidentRequestWithBody generates requests for TriageIncident with any type of body
+func NewTriageIncidentRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incidents/%s/in_triage", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -34606,6 +34749,9 @@ type ClientWithResponsesInterface interface {
 	// MarkAsDuplicateIncident request with any body
 	MarkAsDuplicateIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*MarkAsDuplicateIncidentResponse, error)
 
+	// TriageIncident request with any body
+	TriageIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*TriageIncidentResponse, error)
+
 	// MitigateIncident request with any body
 	MitigateIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*MitigateIncidentResponse, error)
 
@@ -37211,6 +37357,27 @@ func (r MarkAsDuplicateIncidentResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r MarkAsDuplicateIncidentResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type TriageIncidentResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r TriageIncidentResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r TriageIncidentResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -40583,6 +40750,15 @@ func (c *ClientWithResponses) MarkAsDuplicateIncidentWithBodyWithResponse(ctx co
 	return ParseMarkAsDuplicateIncidentResponse(rsp)
 }
 
+// TriageIncidentWithBodyWithResponse request with arbitrary body returning *TriageIncidentResponse
+func (c *ClientWithResponses) TriageIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*TriageIncidentResponse, error) {
+	rsp, err := c.TriageIncidentWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseTriageIncidentResponse(rsp)
+}
+
 // MitigateIncidentWithBodyWithResponse request with arbitrary body returning *MitigateIncidentResponse
 func (c *ClientWithResponses) MitigateIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*MitigateIncidentResponse, error) {
 	rsp, err := c.MitigateIncidentWithBody(ctx, id, contentType, body, reqEditors...)
@@ -43330,6 +43506,22 @@ func ParseMarkAsDuplicateIncidentResponse(rsp *http.Response) (*MarkAsDuplicateI
 	}
 
 	response := &MarkAsDuplicateIncidentResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseTriageIncidentResponse parses an HTTP response from a TriageIncidentWithResponse call
+func ParseTriageIncidentResponse(rsp *http.Response) (*TriageIncidentResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &TriageIncidentResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

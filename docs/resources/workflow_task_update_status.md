@@ -58,7 +58,7 @@ resource "rootly_workflow_task_update_status" "update_status" {
 
 Required:
 
-- `status` (String) Value must be one of `started`, `mitigated`, `resolved`, `cancelled`.
+- `status` (String) Value must be one of `in_triage`, `started`, `mitigated`, `resolved`, `cancelled`.
 
 Optional:
 

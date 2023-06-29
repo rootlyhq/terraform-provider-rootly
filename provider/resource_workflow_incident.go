@@ -53,6 +53,14 @@ func resourceWorkflowIncident() *schema.Resource {
 				Description: "Workflow command.",
 			},
 
+			"command_feedback_enabled": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "This will notify you back when the workflow is starting.",
+			},
+
 			"wait": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
@@ -125,7 +133,7 @@ func resourceWorkflowIncident() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one of `incident_created`, `incident_updated`, `title_updated`, `summary_updated`, `status_updated`, `severity_updated`, `environments_added`, `environments_removed`, `environments_updated`, `incident_types_added`, `incident_types_removed`, `incident_types_updated`, `services_added`, `services_removed`, `services_updated`, `functionalities_added`, `functionalities_removed`, `functionalities_updated`, `teams_added`, `teams_removed`, `teams_updated`, `timeline_updated`, `status_page_timeline_updated`, `role_assignments_updated`, `role_assignments_added`, `role_assignments_removed`, `slack_command`, `slack_channel_created`, `slack_channel_converted`, `subscribers_updated`, `subscribers_added`, `subscribers_removed`, `user_joined_slack_channel`, `user_left_slack_channel`.",
+							Description: "Value must be one of `incident_in_triage`, `incident_created`, `incident_started`, `incident_updated`, `title_updated`, `summary_updated`, `status_updated`, `severity_updated`, `environments_added`, `environments_removed`, `environments_updated`, `incident_types_added`, `incident_types_removed`, `incident_types_updated`, `services_added`, `services_removed`, `services_updated`, `functionalities_added`, `functionalities_removed`, `functionalities_updated`, `teams_added`, `teams_removed`, `teams_updated`, `timeline_updated`, `status_page_timeline_updated`, `role_assignments_updated`, `role_assignments_added`, `role_assignments_removed`, `slack_command`, `slack_channel_created`, `slack_channel_converted`, `subscribers_updated`, `subscribers_added`, `subscribers_removed`, `user_joined_slack_channel`, `user_left_slack_channel`.",
 						},
 
 						"incident_visibilities": &schema.Schema{
@@ -158,7 +166,7 @@ func resourceWorkflowIncident() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one of `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.",
+							Description: "Value must be one of `in_triage`, `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.",
 						},
 
 						"incident_inactivity_duration": &schema.Schema{
@@ -406,6 +414,9 @@ func resourceWorkflowIncidentCreate(ctx context.Context, d *schema.ResourceData,
 	if value, ok := d.GetOkExists("command"); ok {
 		s.Command = value.(string)
 	}
+	if value, ok := d.GetOkExists("command_feedback_enabled"); ok {
+		s.CommandFeedbackEnabled = tools.Bool(value.(bool))
+	}
 	if value, ok := d.GetOkExists("wait"); ok {
 		s.Wait = value.(string)
 	}
@@ -478,6 +489,7 @@ func resourceWorkflowIncidentRead(ctx context.Context, d *schema.ResourceData, m
 	d.Set("slug", item.Slug)
 	d.Set("description", item.Description)
 	d.Set("command", item.Command)
+	d.Set("command_feedback_enabled", item.CommandFeedbackEnabled)
 	d.Set("wait", item.Wait)
 	d.Set("repeat_every_duration", item.RepeatEveryDuration)
 	d.Set("repeat_on", item.RepeatOn)
@@ -516,6 +528,9 @@ func resourceWorkflowIncidentUpdate(ctx context.Context, d *schema.ResourceData,
 	}
 	if d.HasChange("command") {
 		s.Command = d.Get("command").(string)
+	}
+	if d.HasChange("command_feedback_enabled") {
+		s.CommandFeedbackEnabled = tools.Bool(d.Get("command_feedback_enabled").(bool))
 	}
 	if d.HasChange("wait") {
 		s.Wait = d.Get("wait").(string)

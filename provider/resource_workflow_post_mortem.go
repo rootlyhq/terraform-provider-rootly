@@ -53,6 +53,14 @@ func resourceWorkflowPostMortem() *schema.Resource {
 				Description: "Workflow command.",
 			},
 
+			"command_feedback_enabled": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "This will notify you back when the workflow is starting.",
+			},
+
 			"wait": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
@@ -158,7 +166,7 @@ func resourceWorkflowPostMortem() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one of `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.",
+							Description: "Value must be one of `in_triage`, `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.",
 						},
 
 						"incident_inactivity_duration": &schema.Schema{
@@ -452,6 +460,9 @@ func resourceWorkflowPostMortemCreate(ctx context.Context, d *schema.ResourceDat
 	if value, ok := d.GetOkExists("command"); ok {
 		s.Command = value.(string)
 	}
+	if value, ok := d.GetOkExists("command_feedback_enabled"); ok {
+		s.CommandFeedbackEnabled = tools.Bool(value.(bool))
+	}
 	if value, ok := d.GetOkExists("wait"); ok {
 		s.Wait = value.(string)
 	}
@@ -524,6 +535,7 @@ func resourceWorkflowPostMortemRead(ctx context.Context, d *schema.ResourceData,
 	d.Set("slug", item.Slug)
 	d.Set("description", item.Description)
 	d.Set("command", item.Command)
+	d.Set("command_feedback_enabled", item.CommandFeedbackEnabled)
 	d.Set("wait", item.Wait)
 	d.Set("repeat_every_duration", item.RepeatEveryDuration)
 	d.Set("repeat_on", item.RepeatOn)
@@ -562,6 +574,9 @@ func resourceWorkflowPostMortemUpdate(ctx context.Context, d *schema.ResourceDat
 	}
 	if d.HasChange("command") {
 		s.Command = d.Get("command").(string)
+	}
+	if d.HasChange("command_feedback_enabled") {
+		s.CommandFeedbackEnabled = tools.Bool(d.Get("command_feedback_enabled").(bool))
 	}
 	if d.HasChange("wait") {
 		s.Wait = d.Get("wait").(string)

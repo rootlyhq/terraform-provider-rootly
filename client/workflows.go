@@ -14,6 +14,7 @@ type Workflow struct {
   Slug string `jsonapi:"attr,slug,omitempty"`
   Description string `jsonapi:"attr,description,omitempty"`
   Command string `jsonapi:"attr,command,omitempty"`
+  CommandFeedbackEnabled *bool `jsonapi:"attr,command_feedback_enabled,omitempty"`
   Wait string `jsonapi:"attr,wait,omitempty"`
   RepeatEveryDuration string `jsonapi:"attr,repeat_every_duration,omitempty"`
   RepeatOn []interface{} `jsonapi:"attr,repeat_on,omitempty"`

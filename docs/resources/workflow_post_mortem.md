@@ -21,6 +21,7 @@ description: |-
 ### Optional
 
 - `command` (String) Workflow command.
+- `command_feedback_enabled` (Boolean) This will notify you back when the workflow is starting.
 - `description` (String) The description of the workflow
 - `enabled` (Boolean)
 - `environment_ids` (List of String)
@@ -71,7 +72,7 @@ Optional:
 - `incident_post_mortem_condition_cause` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `incident_post_mortem_condition_status` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `incident_post_mortem_statuses` (List of String) Value must be one of `draft`, `published`.
-- `incident_statuses` (List of String) Value must be one of `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.
+- `incident_statuses` (List of String) Value must be one of `in_triage`, `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.
 - `incident_visibilities` (List of String)
 - `trigger_type` (String) Value must be one off `post_mortem`.
 - `triggers` (List of String) Value must be one of `action_item_created`, `action_item_updated`, `assigned_user_updated`, `summary_updated`, `description_updated`, `status_updated`, `priority_updated`, `due_date_updated`, `teams_updated`, `slack_command`.

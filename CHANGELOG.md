@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.3] -- 2023-06-29
+
+- Added `in_triage` status for incidents.
+- Added `command_feedback_enabled` for workflows.
+
 ## [1.0.2] -- 2023-06-18
 
 - Add `workflow_task_update_notion_page` resource.
