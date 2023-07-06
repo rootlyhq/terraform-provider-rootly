@@ -4,6 +4,7 @@ const swaggerPath = process.argv[2];
 const inflect = require("./inflect");
 const providerTpl = require("./generate-provider-tpl");
 const clientTpl = require("./generate-client-tpl");
+const clientReadOnlyTpl = require("./generate-read-only-client-tpl");
 const dataSourceTpl = require("./generate-data-source-tpl");
 const resourceTpl = require("./generate-resource-tpl");
 const resourceTestTpl = require("./generate-resource-test-tpl");
@@ -31,21 +32,36 @@ const excluded = [
   "audit",
   "incident_event_functionality",
   "incident_event_service",
-  "user",
 ];
 
-console.log(`Excluding resource from generation:`, excluded);
+const excluded_resources = [
+  "user"
+];
 
-const resources = Object.keys(swagger.components.schemas).filter((name) => {
+console.log(`Excluding resource from generation:`, excluded.concat(excluded_resources));
+
+const all_resources = Object.keys(swagger.components.schemas).filter((name) => {
   return excluded.indexOf(name) === -1 && collectionPathSchema(name);
 });
-const dataSources = resources.filter(resourceHasFilters);
+
+const resources = Object.keys(swagger.components.schemas).filter((name) => {
+  return excluded.concat(excluded_resources).indexOf(name) === -1 && collectionPathSchema(name);
+});
+
+const dataSources = all_resources.filter(resourceHasFilters);
 const taskResources = generateTasks(swagger);
 
 generateProvider(resources, taskResources, dataSources);
 
+all_resources.forEach((name) => {
+  if (name == 'user') {
+    generateReadOnlyClient(name);
+  } else {
+    generateClient(name);
+  }
+});
+
 resources.forEach((name) => {
-  generateClient(name);
   generateResource(name);
   generateResourceTest(name);
 });
@@ -60,6 +76,20 @@ function generateProvider(resources, taskResources, dataSources) {
   );
   fs.writeFileSync(
     path.resolve(__dirname, "..", "provider", "provider.go"),
+    code
+  );
+}
+
+function generateReadOnlyClient(name) {
+  const collectionSchema = collectionPathSchema(name);
+  const pathIdField =
+    collectionSchema &&
+    collectionSchema.parameters &&
+    collectionSchema.parameters[0] &&
+    collectionSchema.parameters[0].name;
+  const code = clientReadOnlyTpl(name, resourceSchema(name), pathIdField);
+  fs.writeFileSync(
+    path.resolve(__dirname, "..", "client", `${inflect.pluralize(name)}.go`),
     code
   );
 }

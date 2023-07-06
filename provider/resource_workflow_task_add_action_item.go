@@ -73,8 +73,13 @@ func resourceWorkflowTaskAddActionItem() *schema.Resource {
 							Optional:    true,
 						},
 						"assigned_to_user_id": &schema.Schema{
-							Description: "The user id this action item is assigned to",
+							Description: "[DEPRECATED] Use assigned_to_user attribute instead. The user id this action item is assigned to",
 							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"assigned_to_user": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`.  The user this action item is assigned to",
+							Type:        schema.TypeMap,
 							Optional:    true,
 						},
 						"priority": &schema.Schema{

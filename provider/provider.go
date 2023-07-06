@@ -44,6 +44,7 @@ func New(version string) func() *schema.Provider {
 				},
 			},
 			DataSourcesMap: map[string]*schema.Resource{
+				"rootly_user":                 dataSourceUser(),
 				"rootly_environment":          dataSourceEnvironment(),
 				"rootly_functionality":        dataSourceFunctionality(),
 				"rootly_service":              dataSourceService(),

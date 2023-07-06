@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4] -- 2023-07-06
+
+- Added `assigned_to_user` and deprecated `assigned_to_user_id` for `workflow_task_add_action_item` resource.
+- Added `assigned_to_user` and deprecated `assigned_to_user_id` for `workflow_task_update_action_item` resource.
+- Added `assigned_to_user` and deprecated `assigned_to_user_id` for `workflow_task_add_role` resource.
+- Added `user` data source.
+
 ## [1.0.3] -- 2023-06-29
 
 - Added `in_triage` status for incidents.

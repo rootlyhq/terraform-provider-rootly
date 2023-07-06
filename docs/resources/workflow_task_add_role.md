@@ -38,5 +38,6 @@ Required:
 
 Optional:
 
-- `assigned_to_user_id` (String) The user id this role is assigned to
+- `assigned_to_user` (Map of String) Map must contain two fields, `id` and `name`.  The user this role is assigned to
+- `assigned_to_user_id` (String) [DEPRECATED] Use assigned_to_user attribute instead. The user id this role is assigned to
 - `task_type` (String)

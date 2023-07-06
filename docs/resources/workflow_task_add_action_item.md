@@ -40,7 +40,8 @@ Required:
 
 Optional:
 
-- `assigned_to_user_id` (String) The user id this action item is assigned to
+- `assigned_to_user` (Map of String) Map must contain two fields, `id` and `name`.  The user this action item is assigned to
+- `assigned_to_user_id` (String) [DEPRECATED] Use assigned_to_user attribute instead. The user id this action item is assigned to
 - `description` (String) The action item description.
 - `incident_role_id` (String) The role id this action item is associated with
 - `kind` (String) The action item kind.

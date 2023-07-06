@@ -5217,7 +5217,13 @@ type ActionItemTriggerParamsTriggers string
 
 // AddActionItemTaskParams defines model for add_action_item_task_params.
 type AddActionItemTaskParams struct {
-	// The user id this action item is assigned to
+	//  The user this action item is assigned to
+	AssignedToUser *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"assigned_to_user,omitempty"`
+
+	// [DEPRECATED] Use assigned_to_user attribute instead. The user id this action item is assigned to
 	AssignedToUserId *string `json:"assigned_to_user_id,omitempty"`
 
 	// The action item description.
@@ -5256,7 +5262,13 @@ type AddActionItemTaskParamsTaskType string
 
 // AddRoleTaskParams defines model for add_role_task_params.
 type AddRoleTaskParams struct {
-	// The user id this role is assigned to
+	//  The user this role is assigned to
+	AssignedToUser *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"assigned_to_user,omitempty"`
+
+	// [DEPRECATED] Use assigned_to_user attribute instead. The user id this role is assigned to
 	AssignedToUserId *string `json:"assigned_to_user_id,omitempty"`
 
 	// The role id to add to the incident
@@ -14944,7 +14956,13 @@ type TweetTwitterMessageTaskParamsTaskType string
 
 // UpdateActionItemTaskParams defines model for update_action_item_task_params.
 type UpdateActionItemTaskParams struct {
-	// The user id this action item is assigned to
+	//  The user this action item is assigned to
+	AssignedToUser *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"assigned_to_user,omitempty"`
+
+	// [DEPRECATED] Use assigned_to_user attribute instead. The user id this action item is assigned to
 	AssignedToUserId *string `json:"assigned_to_user_id,omitempty"`
 
 	// Attribute of the action item to match against
@@ -18174,8 +18192,13 @@ type ListTeamsParams struct {
 
 // ListUsersParams defines parameters for ListUsers.
 type ListUsersParams struct {
-	PageNumber *int `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize   *int `form:"page[size],omitempty" json:"page[size],omitempty"`
+	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSearch      *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
+	FilterEmail       *string `form:"filter[email],omitempty" json:"filter[email],omitempty"`
+	FilterCreatedAtGt *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtLt *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	Sort              *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // ListWebhooksEndpointsParams defines parameters for ListWebhooksEndpoints.
@@ -18466,9 +18489,6 @@ type ClientInterface interface {
 
 	// CreateIncidentEventService request with any body
 	CreateIncidentEventServiceWithBody(ctx context.Context, incidentEventId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// DeleteIncidentFeedback request
-	DeleteIncidentFeedback(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetIncidentFeedbacks request
 	GetIncidentFeedbacks(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -19559,18 +19579,6 @@ func (c *Client) ListIncidentEventServices(ctx context.Context, incidentEventId 
 
 func (c *Client) CreateIncidentEventServiceWithBody(ctx context.Context, incidentEventId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIncidentEventServiceRequestWithBody(c.Server, incidentEventId, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) DeleteIncidentFeedback(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDeleteIncidentFeedbackRequest(c.Server, id)
 	if err != nil {
 		return nil, err
 	}
@@ -24431,40 +24439,6 @@ func NewCreateIncidentEventServiceRequestWithBody(server string, incidentEventId
 	}
 
 	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewDeleteIncidentFeedbackRequest generates requests for DeleteIncidentFeedback
-func NewDeleteIncidentFeedbackRequest(server string, id string) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/feedbacks/%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
 
 	return req, nil
 }
@@ -32431,6 +32405,86 @@ func NewListUsersRequest(server string, params *ListUsersParams) (*http.Request,
 
 	}
 
+	if params.FilterSearch != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[search]", runtime.ParamLocationQuery, *params.FilterSearch); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterEmail != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[email]", runtime.ParamLocationQuery, *params.FilterEmail); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.Sort != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
 	queryURL.RawQuery = queryValues.Encode()
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -34569,9 +34623,6 @@ type ClientWithResponsesInterface interface {
 	// CreateIncidentEventService request with any body
 	CreateIncidentEventServiceWithBodyWithResponse(ctx context.Context, incidentEventId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentEventServiceResponse, error)
 
-	// DeleteIncidentFeedback request
-	DeleteIncidentFeedbackWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentFeedbackResponse, error)
-
 	// GetIncidentFeedbacks request
 	GetIncidentFeedbacksWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentFeedbacksResponse, error)
 
@@ -36097,27 +36148,6 @@ func (r CreateIncidentEventServiceResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r CreateIncidentEventServiceResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type DeleteIncidentFeedbackResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r DeleteIncidentFeedbackResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r DeleteIncidentFeedbackResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -40210,15 +40240,6 @@ func (c *ClientWithResponses) CreateIncidentEventServiceWithBodyWithResponse(ctx
 	return ParseCreateIncidentEventServiceResponse(rsp)
 }
 
-// DeleteIncidentFeedbackWithResponse request returning *DeleteIncidentFeedbackResponse
-func (c *ClientWithResponses) DeleteIncidentFeedbackWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentFeedbackResponse, error) {
-	rsp, err := c.DeleteIncidentFeedback(ctx, id, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseDeleteIncidentFeedbackResponse(rsp)
-}
-
 // GetIncidentFeedbacksWithResponse request returning *GetIncidentFeedbacksResponse
 func (c *ClientWithResponses) GetIncidentFeedbacksWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentFeedbacksResponse, error) {
 	rsp, err := c.GetIncidentFeedbacks(ctx, id, reqEditors...)
@@ -42546,22 +42567,6 @@ func ParseCreateIncidentEventServiceResponse(rsp *http.Response) (*CreateInciden
 	}
 
 	response := &CreateIncidentEventServiceResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
-// ParseDeleteIncidentFeedbackResponse parses an HTTP response from a DeleteIncidentFeedbackWithResponse call
-func ParseDeleteIncidentFeedbackResponse(rsp *http.Response) (*DeleteIncidentFeedbackResponse, error) {
-	bodyBytes, err := ioutil.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &DeleteIncidentFeedbackResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
