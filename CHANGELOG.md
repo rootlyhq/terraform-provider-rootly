@@ -2,7 +2,7 @@
 
 ## [1.0.5] -- 2023-07-14
 
-- Added `allow_multi_user_assignment` to `workflow_task_add_action_item` resource.
+- Added `allow_multi_user_assignment` to `incident_role` resource.
 - Fixed `triggers` list for `workflow_post_mortem` resource.
 - Added `template_id` to `workflow_task_update_google_docs_page` resource.
 
