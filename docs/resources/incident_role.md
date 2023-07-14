@@ -20,6 +20,7 @@ description: |-
 
 ### Optional
 
+- `allow_multi_user_assignment` (Boolean)
 - `description` (String) The description of the incident role
 - `enabled` (Boolean)
 - `optional` (Boolean)

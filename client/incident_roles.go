@@ -17,6 +17,7 @@ type IncidentRole struct {
   Position int `jsonapi:"attr,position,omitempty"`
   Optional *bool `jsonapi:"attr,optional,omitempty"`
   Enabled *bool `jsonapi:"attr,enabled,omitempty"`
+  AllowMultiUserAssignment *bool `jsonapi:"attr,allow_multi_user_assignment,omitempty"`
 }
 
 func (c *Client) ListIncidentRoles(params *rootlygo.ListIncidentRolesParams) ([]interface{}, error) {

@@ -80,6 +80,14 @@ func resourceIncidentRole() *schema.Resource {
 				Default:  true,
 				Optional: true,
 			},
+
+			"allow_multi_user_assignment": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "",
+			},
 		},
 	}
 }
@@ -111,6 +119,9 @@ func resourceIncidentRoleCreate(ctx context.Context, d *schema.ResourceData, met
 	}
 	if value, ok := d.GetOkExists("enabled"); ok {
 		s.Enabled = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("allow_multi_user_assignment"); ok {
+		s.AllowMultiUserAssignment = tools.Bool(value.(bool))
 	}
 
 	res, err := c.CreateIncidentRole(s)
@@ -148,6 +159,7 @@ func resourceIncidentRoleRead(ctx context.Context, d *schema.ResourceData, meta 
 	d.Set("position", item.Position)
 	d.Set("optional", item.Optional)
 	d.Set("enabled", item.Enabled)
+	d.Set("allow_multi_user_assignment", item.AllowMultiUserAssignment)
 
 	return nil
 }
@@ -178,6 +190,9 @@ func resourceIncidentRoleUpdate(ctx context.Context, d *schema.ResourceData, met
 	}
 	if d.HasChange("enabled") {
 		s.Enabled = tools.Bool(d.Get("enabled").(bool))
+	}
+	if d.HasChange("allow_multi_user_assignment") {
+		s.AllowMultiUserAssignment = tools.Bool(d.Get("allow_multi_user_assignment").(bool))
 	}
 
 	_, err := c.UpdateIncidentRole(d.Id(), s)

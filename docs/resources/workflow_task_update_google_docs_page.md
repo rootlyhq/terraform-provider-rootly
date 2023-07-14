@@ -39,7 +39,7 @@ Required:
 Optional:
 
 - `content` (String) The Google Doc content
-- `email_message` (String) Email message notification
 - `post_mortem_template_id` (String) Retrospective template to use when updating page, if desired.
 - `task_type` (String)
+- `template_id` (String) The Google Doc file ID to use as a template.
 - `title` (String) The Google Doc title

@@ -421,6 +421,7 @@ const (
 	AuditItemTypeDashboard                      AuditItemType = "Dashboard"
 	AuditItemTypeEnvironment                    AuditItemType = "Environment"
 	AuditItemTypeExportJob                      AuditItemType = "ExportJob"
+	AuditItemTypeFormField                      AuditItemType = "FormField"
 	AuditItemTypeFunctionality                  AuditItemType = "Functionality"
 	AuditItemTypeGeniusWorkflow                 AuditItemType = "GeniusWorkflow"
 	AuditItemTypeGeniusWorkflowGroup            AuditItemType = "GeniusWorkflowGroup"
@@ -452,6 +453,7 @@ const (
 	AuditsListDataAttributesItemTypeDashboard                      AuditsListDataAttributesItemType = "Dashboard"
 	AuditsListDataAttributesItemTypeEnvironment                    AuditsListDataAttributesItemType = "Environment"
 	AuditsListDataAttributesItemTypeExportJob                      AuditsListDataAttributesItemType = "ExportJob"
+	AuditsListDataAttributesItemTypeFormField                      AuditsListDataAttributesItemType = "FormField"
 	AuditsListDataAttributesItemTypeFunctionality                  AuditsListDataAttributesItemType = "Functionality"
 	AuditsListDataAttributesItemTypeGeniusWorkflow                 AuditsListDataAttributesItemType = "GeniusWorkflow"
 	AuditsListDataAttributesItemTypeGeniusWorkflowGroup            AuditsListDataAttributesItemType = "GeniusWorkflowGroup"
@@ -10557,6 +10559,8 @@ type IncidentResponseDataType string
 
 // IncidentRole defines model for incident_role.
 type IncidentRole struct {
+	AllowMultiUserAssignment *bool `json:"allow_multi_user_assignment,omitempty"`
+
 	// Date of creation
 	CreatedAt string `json:"created_at"`
 
@@ -10585,6 +10589,8 @@ type IncidentRole struct {
 type IncidentRoleList struct {
 	Data []struct {
 		Attributes struct {
+			AllowMultiUserAssignment *bool `json:"allow_multi_user_assignment,omitempty"`
+
 			// Date of creation
 			CreatedAt string `json:"created_at"`
 
@@ -10629,6 +10635,8 @@ type IncidentRoleListDataType string
 type IncidentRoleResponse struct {
 	Data struct {
 		Attributes struct {
+			AllowMultiUserAssignment *bool `json:"allow_multi_user_assignment,omitempty"`
+
 			// Date of creation
 			CreatedAt string `json:"created_at"`
 
@@ -11824,6 +11832,8 @@ type NewIncidentFormFieldSelectionDataType string
 type NewIncidentRole struct {
 	Data struct {
 		Attributes struct {
+			AllowMultiUserAssignment *bool `json:"allow_multi_user_assignment,omitempty"`
+
 			// The description of the incident role
 			Description *string `json:"description"`
 			Enabled     *bool   `json:"enabled,omitempty"`
@@ -15417,15 +15427,15 @@ type UpdateGoogleDocsPageTaskParams struct {
 	// The Google Doc content
 	Content *string `json:"content,omitempty"`
 
-	// Email message notification
-	EmailMessage *string `json:"email_message"`
-
 	// The Google Doc file ID
 	FileId string `json:"file_id"`
 
 	// Retrospective template to use when updating page, if desired.
 	PostMortemTemplateId *string                                 `json:"post_mortem_template_id,omitempty"`
 	TaskType             *UpdateGoogleDocsPageTaskParamsTaskType `json:"task_type,omitempty"`
+
+	// The Google Doc file ID to use as a template.
+	TemplateId *string `json:"template_id,omitempty"`
 
 	// The Google Doc title
 	Title *string `json:"title,omitempty"`
@@ -15742,6 +15752,8 @@ type UpdateIncidentPostmortemTaskParamsTaskType string
 type UpdateIncidentRole struct {
 	Data struct {
 		Attributes struct {
+			AllowMultiUserAssignment *bool `json:"allow_multi_user_assignment,omitempty"`
+
 			// The description of the incident role
 			Description *string `json:"description"`
 			Enabled     *bool   `json:"enabled,omitempty"`

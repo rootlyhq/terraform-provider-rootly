@@ -87,8 +87,8 @@ func resourceWorkflowTaskUpdateGoogleDocsPage() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
-						"email_message": &schema.Schema{
-							Description: "Email message notification",
+						"template_id": &schema.Schema{
+							Description: "The Google Doc file ID to use as a template.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},

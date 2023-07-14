@@ -133,7 +133,7 @@ func resourceWorkflowPostMortem() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one of `action_item_created`, `action_item_updated`, `assigned_user_updated`, `summary_updated`, `description_updated`, `status_updated`, `priority_updated`, `due_date_updated`, `teams_updated`, `slack_command`.",
+							Description: "Value must be one of `post_mortem_created`, `post_mortem_updated`, `status_updated`, `causes_updated`, `slack_command`.",
 						},
 
 						"incident_visibilities": &schema.Schema{
