@@ -48,6 +48,7 @@ resource "rootly_workflow_task_page_pagerduty_on_call_responders" "page_pagerdut
 ### Optional
 
 - `enabled` (Boolean) Enable/disable this workflow task
+- `name` (String) Name of the workflow task
 - `position` (Number) The position of the workflow task (1 being top of list)
 - `skip_on_failure` (Boolean) Skip workflow task if any failures
 

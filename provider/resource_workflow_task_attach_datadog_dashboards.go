@@ -33,6 +33,11 @@ func resourceWorkflowTaskAttachDatadogDashboards() *schema.Resource {
 				Required:    true,
 				ForceNew:    true,
 			},
+			"name": {
+				Description: "Name of the workflow task",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"position": {
 				Description: "The position of the workflow task (1 being top of list)",
 				Type:        schema.TypeInt,
@@ -117,6 +122,7 @@ func resourceWorkflowTaskAttachDatadogDashboardsCreate(ctx context.Context, d *s
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
+	name := d.Get("name").(string)
 	position := d.Get("position").(int)
 	skipOnFailure := tools.Bool(d.Get("skip_on_failure").(bool))
 	enabled := tools.Bool(d.Get("enabled").(bool))
@@ -126,6 +132,7 @@ func resourceWorkflowTaskAttachDatadogDashboardsCreate(ctx context.Context, d *s
 
 	s := &client.WorkflowTask{
 		WorkflowId:    workflowId,
+		Name:          name,
 		Position:      position,
 		SkipOnFailure: skipOnFailure,
 		Enabled:       enabled,
@@ -161,6 +168,7 @@ func resourceWorkflowTaskAttachDatadogDashboardsRead(ctx context.Context, d *sch
 	}
 
 	d.Set("workflow_id", res.WorkflowId)
+	d.Set("name", res.Name)
 	d.Set("position", res.Position)
 	d.Set("skip_on_failure", res.SkipOnFailure)
 	d.Set("enabled", res.Enabled)
@@ -176,6 +184,7 @@ func resourceWorkflowTaskAttachDatadogDashboardsUpdate(ctx context.Context, d *s
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
 	workflowId := d.Get("workflow_id").(string)
+	name := d.Get("name").(string)
 	position := d.Get("position").(int)
 	skipOnFailure := tools.Bool(d.Get("skip_on_failure").(bool))
 	enabled := tools.Bool(d.Get("enabled").(bool))
@@ -183,6 +192,7 @@ func resourceWorkflowTaskAttachDatadogDashboardsUpdate(ctx context.Context, d *s
 
 	s := &client.WorkflowTask{
 		WorkflowId:    workflowId,
+		Name:          name,
 		Position:      position,
 		SkipOnFailure: skipOnFailure,
 		Enabled:       enabled,

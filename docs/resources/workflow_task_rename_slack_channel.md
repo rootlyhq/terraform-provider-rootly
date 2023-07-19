@@ -50,6 +50,7 @@ resource "rootly_workflow_task_rename_slack_channel" "rename_slack_channel" {
 ### Optional
 
 - `enabled` (Boolean) Enable/disable this workflow task
+- `name` (String) Name of the workflow task
 - `position` (Number) The position of the workflow task (1 being top of list)
 - `skip_on_failure` (Boolean) Skip workflow task if any failures
 

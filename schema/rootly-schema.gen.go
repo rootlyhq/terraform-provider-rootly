@@ -12549,6 +12549,9 @@ type NewWorkflowTask struct {
 			// Enable/disable workflow task
 			Enabled *bool `json:"enabled,omitempty"`
 
+			// Name of the workflow task
+			Name *string `json:"name,omitempty"`
+
 			// The position of the workflow task
 			Position *float32 `json:"position,omitempty"`
 
@@ -16826,6 +16829,9 @@ type UpdateWorkflowTask struct {
 			// Enable/disable workflow task
 			Enabled *bool `json:"enabled,omitempty"`
 
+			// Name of the workflow task
+			Name *string `json:"name,omitempty"`
+
 			// The position of the workflow task
 			Position *float32 `json:"position,omitempty"`
 
@@ -17666,6 +17672,9 @@ type WorkflowTask struct {
 	// Enable/disable workflow task
 	Enabled bool `json:"enabled"`
 
+	// Name of the workflow task
+	Name *string `json:"name,omitempty"`
+
 	// The position of the workflow task
 	Position float32 `json:"position"`
 
@@ -17689,6 +17698,9 @@ type WorkflowTaskList struct {
 
 			// Enable/disable workflow task
 			Enabled bool `json:"enabled"`
+
+			// Name of the workflow task
+			Name *string `json:"name,omitempty"`
 
 			// The position of the workflow task
 			Position float32 `json:"position"`
@@ -17729,6 +17741,9 @@ type WorkflowTaskResponse struct {
 
 			// Enable/disable workflow task
 			Enabled bool `json:"enabled"`
+
+			// Name of the workflow task
+			Name *string `json:"name,omitempty"`
 
 			// The position of the workflow task
 			Position float32 `json:"position"`

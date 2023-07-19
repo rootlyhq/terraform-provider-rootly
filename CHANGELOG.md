@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.6] -- 2023-07-18
+
+- Added `name` attributes to all workflow tasks.
+
 ## [1.0.5] -- 2023-07-14
 
 - Added `allow_multi_user_assignment` to `incident_role` resource.

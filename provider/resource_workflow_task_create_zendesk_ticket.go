@@ -36,6 +36,11 @@ func resourceWorkflowTaskCreateZendeskTicket() *schema.Resource {
 				Required:    true,
 				ForceNew:    true,
 			},
+			"name": {
+				Description: "Name of the workflow task",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"position": {
 				Description: "The position of the workflow task (1 being top of list)",
 				Type:        schema.TypeInt,
@@ -139,6 +144,7 @@ func resourceWorkflowTaskCreateZendeskTicketCreate(ctx context.Context, d *schem
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
+	name := d.Get("name").(string)
 	position := d.Get("position").(int)
 	skipOnFailure := tools.Bool(d.Get("skip_on_failure").(bool))
 	enabled := tools.Bool(d.Get("enabled").(bool))
@@ -148,6 +154,7 @@ func resourceWorkflowTaskCreateZendeskTicketCreate(ctx context.Context, d *schem
 
 	s := &client.WorkflowTask{
 		WorkflowId:    workflowId,
+		Name:          name,
 		Position:      position,
 		SkipOnFailure: skipOnFailure,
 		Enabled:       enabled,
@@ -183,6 +190,7 @@ func resourceWorkflowTaskCreateZendeskTicketRead(ctx context.Context, d *schema.
 	}
 
 	d.Set("workflow_id", res.WorkflowId)
+	d.Set("name", res.Name)
 	d.Set("position", res.Position)
 	d.Set("skip_on_failure", res.SkipOnFailure)
 	d.Set("enabled", res.Enabled)
@@ -198,6 +206,7 @@ func resourceWorkflowTaskCreateZendeskTicketUpdate(ctx context.Context, d *schem
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
 	workflowId := d.Get("workflow_id").(string)
+	name := d.Get("name").(string)
 	position := d.Get("position").(int)
 	skipOnFailure := tools.Bool(d.Get("skip_on_failure").(bool))
 	enabled := tools.Bool(d.Get("enabled").(bool))
@@ -205,6 +214,7 @@ func resourceWorkflowTaskCreateZendeskTicketUpdate(ctx context.Context, d *schem
 
 	s := &client.WorkflowTask{
 		WorkflowId:    workflowId,
+		Name:          name,
 		Position:      position,
 		SkipOnFailure: skipOnFailure,
 		Enabled:       enabled,

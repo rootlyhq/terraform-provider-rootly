@@ -2,18 +2,20 @@ package client
 
 import (
 	"reflect"
-	"github.com/pkg/errors"
+
 	"github.com/google/jsonapi"
+	"github.com/pkg/errors"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
 )
 
 type WorkflowTask struct {
-	ID          string `jsonapi:"primary,workflow_tasks"`
-	WorkflowId  string `jsonapi:"attr,workflow_id,omitempty"`
-	Position    int `jsonapi:"attr,position,omitempty"`
-	SkipOnFailure    *bool `jsonapi:"attr,skip_on_failure,omitempty"`
-	Enabled    *bool `jsonapi:"attr,enabled,omitempty"`
-	TaskParams  map[string]interface{} `jsonapi:"attr,task_params,omitempty"`
+	ID            string                 `jsonapi:"primary,workflow_tasks"`
+	WorkflowId    string                 `jsonapi:"attr,workflow_id,omitempty"`
+	Name          string                 `jsonapi:"attr,name,omitempty"`
+	Position      int                    `jsonapi:"attr,position,omitempty"`
+	SkipOnFailure *bool                  `jsonapi:"attr,skip_on_failure,omitempty"`
+	Enabled       *bool                  `jsonapi:"attr,enabled,omitempty"`
+	TaskParams    map[string]interface{} `jsonapi:"attr,task_params,omitempty"`
 }
 
 func (c *Client) ListWorkflowTasks(workflowId string, params *rootlygo.ListWorkflowTasksParams) ([]interface{}, error) {
