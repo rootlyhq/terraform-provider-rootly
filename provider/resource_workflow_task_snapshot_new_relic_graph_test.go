@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskSnapshotNewRelicGraph(t *testing.T) {
 
 const testAccResourceWorkflowTaskSnapshotNewRelicGraph = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -47,7 +47,7 @@ metric_type = "APDEX"
 
 const testAccResourceWorkflowTaskSnapshotNewRelicGraphUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

@@ -33,6 +33,10 @@ Manages workflow update_incident task.
 <a id="nestedblock--task_params"></a>
 ### Nested Schema for `task_params`
 
+Required:
+
+- `incident_id` (String) The incident id to update or id of any attribute on the incident
+
 Optional:
 
 - `acknowledged_at` (String)
@@ -42,7 +46,6 @@ Optional:
 - `environment_ids` (List of String)
 - `functionality_ids` (List of String)
 - `group_ids` (List of String)
-- `incident_id` (String) The incident id to update or id of any attribute on the incident
 - `incident_type_ids` (List of String)
 - `mitigated_at` (String)
 - `private` (Boolean)

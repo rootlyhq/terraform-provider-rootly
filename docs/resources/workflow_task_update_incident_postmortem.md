@@ -33,9 +33,12 @@ Manages workflow update_incident_postmortem task.
 <a id="nestedblock--task_params"></a>
 ### Nested Schema for `task_params`
 
-Optional:
+Required:
 
 - `postmortem_id` (String) UUID of the retrospective that needs to be updated.
+
+Optional:
+
 - `status` (String)
 - `task_type` (String)
 - `title` (String) The incident title

@@ -34,21 +34,3 @@ func (c *Client) ListUsers(params *rootlygo.ListUsersParams) ([]interface{}, err
 	return users, nil
 }
 
-func (c *Client) GetUser(id string) (*User, error) {
-	req, err := rootlygo.NewGetUserRequest(c.Rootly.Server, id)
-	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
-	}
-
-	resp, err := c.Do(req)
-	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get user: %s", err.Error())
-	}
-
-	data, err := UnmarshalData(resp.Body, new(User))
-	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling user: %s", err.Error())
-	}
-
-	return data.(*User), nil
-}

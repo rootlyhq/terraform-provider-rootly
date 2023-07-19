@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskUpdateShortcutStory(t *testing.T) {
 
 const testAccResourceWorkflowTaskUpdateShortcutStory = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -50,7 +50,7 @@ archivation = {
 
 const testAccResourceWorkflowTaskUpdateShortcutStoryUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

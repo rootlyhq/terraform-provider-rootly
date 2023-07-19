@@ -37,6 +37,7 @@ func resourceWorkflowTaskRenameSlackChannel() *schema.Resource {
 				Description: "Name of the workflow task",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Computed:    true,
 			},
 			"position": {
 				Description: "The position of the workflow task (1 being top of list)",
@@ -75,7 +76,7 @@ func resourceWorkflowTaskRenameSlackChannel() *schema.Resource {
 						"channel": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. ",
 							Type:        schema.TypeMap,
-							Optional:    true,
+							Required:    true,
 						},
 						"title": &schema.Schema{
 							Description: "",

@@ -18,29 +18,44 @@ func TestAccResourceWorkflowTaskSendSlackMessage(t *testing.T) {
 			{
 				Config: testAccResourceWorkflowTaskSendSlackMessage,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_incident.test", "name", "test-workflow"),
+					resource.TestCheckResourceAttr("rootly_workflow_incident.foo", "name", "test-workflow"),
 				),
+			},
+			{
+				Config: testAccResourceWorkflowTaskSendSlackMessageUpdate,
 			},
 		},
 	})
 }
 
 const testAccResourceWorkflowTaskSendSlackMessage = `
-data "rootly_severity" "sev0" {
-	slug = "sev0"
-}
-
-resource "rootly_workflow_incident" "test" {
-  name = "test-workflow"
+resource "rootly_workflow_incident" "foo" {
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
 }
 
-resource "rootly_workflow_task_send_slack_message" "test" {
-	workflow_id = rootly_workflow_incident.test.id
+resource "rootly_workflow_task_send_slack_message" "foo" {
+	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		text = data.rootly_severity.sev0.id
+		text = "test"
+	}
+}
+`
+
+const testAccResourceWorkflowTaskSendSlackMessageUpdate = `
+resource "rootly_workflow_incident" "foo" {
+  	name = "test-workflow"
+	trigger_params {
+		triggers = ["incident_updated"]
+	}
+}
+
+resource "rootly_workflow_task_send_slack_message" "foo" {
+	workflow_id = rootly_workflow_incident.foo.id
+	task_params {
+		text = "test"
 	}
 }
 `

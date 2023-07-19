@@ -37,6 +37,7 @@ func resourceWorkflowTaskCreateGoToMeeting() *schema.Resource {
 				Description: "Name of the workflow task",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Computed:    true,
 			},
 			"position": {
 				Description: "The position of the workflow task (1 being top of list)",
@@ -81,7 +82,7 @@ func resourceWorkflowTaskCreateGoToMeeting() *schema.Resource {
 							Description: "Value must be one of `ptsn`, `free`, `hyrid`, `voip`.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     nil,
+							Default:     "voip",
 							ValidateFunc: validation.StringInSlice([]string{
 								"ptsn",
 								"free",

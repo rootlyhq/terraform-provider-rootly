@@ -37,6 +37,7 @@ func resourceWorkflowTaskUpdateOpsgenieAlert() *schema.Resource {
 				Description: "Name of the workflow task",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Computed:    true,
 			},
 			"position": {
 				Description: "The position of the workflow task (1 being top of list)",
@@ -71,6 +72,11 @@ func resourceWorkflowTaskUpdateOpsgenieAlert() *schema.Resource {
 							ValidateFunc: validation.StringInSlice([]string{
 								"update_opsgenie_alert",
 							}, false),
+						},
+						"alert_id": &schema.Schema{
+							Description: "Opsgenie Alert ID",
+							Type:        schema.TypeString,
+							Required:    true,
 						},
 						"message": &schema.Schema{
 							Description: "Message of the alert",

@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskPagePagerdutyOnCallResponders(t *testing.T) {
 
 const testAccResourceWorkflowTaskPagePagerdutyOnCallResponders = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -49,7 +49,7 @@ resource "rootly_workflow_task_page_pagerduty_on_call_responders" "foo" {
 
 const testAccResourceWorkflowTaskPagePagerdutyOnCallRespondersUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

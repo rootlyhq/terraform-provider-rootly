@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskCreateGoogleMeeting(t *testing.T) {
 
 const testAccResourceWorkflowTaskCreateGoogleMeeting = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -47,7 +47,7 @@ description = "test"
 
 const testAccResourceWorkflowTaskCreateGoogleMeetingUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

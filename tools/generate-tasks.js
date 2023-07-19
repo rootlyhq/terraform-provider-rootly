@@ -21,6 +21,10 @@ module.exports = (swagger) => {
           `./provider/resource_workflow_task_${task_name}.go`,
           genResourceFile(task_name, task_schema)
         );
+        fs.writeFileSync(
+          `./provider/resource_workflow_task_${task_name}_test.go`,
+          genResourceTestFile(task_name, task_schema)
+        );
       }
       return task_name;
     });
@@ -86,6 +90,7 @@ func resourceWorkflowTask${task_name_camel}() *schema.Resource {
 				Description:  "Name of the workflow task",
 				Type:         schema.TypeString,
 				Optional:     true,
+				Computed:     true,
 			},
 			"position": {
 				Description:  "The position of the workflow task (1 being top of list)",
@@ -438,9 +443,16 @@ resource "rootly_workflow_task_${task_name}" "foo" {
 function genTestParams(task_name, task_schema) {
   const required = task_schema.required || [];
   return required.map((key) => {
-    let val = task_schema.properties[key].enum
-      ? task_schema.properties[key].enum[0]
-      : "test";
+    let val;
+
+    if (task_schema.properties[key].example) {
+      val = task_schema.properties[key].example;
+    } else if (task_schema.properties[key].enum) {
+      val = task_schema.properties[key].enum[0];
+    } else {
+      val = "test";
+    }
+
     switch (task_schema.properties[key].type) {
       case "boolean":
         return `${key} = false`;
@@ -458,7 +470,11 @@ function genTestParams(task_name, task_schema) {
 						name = "bar"
 					}`;
         }
-        return `${key} = ["foo"]`;
+		if (task_schema.properties[key].items.example) {
+			return `${key} = ["${task_schema.properties[key].items.example}"]`;
+		} else {
+			return `${key} = ["foo"]`;
+		}
       case "object":
         return `${key} = {
 					id = "foo"

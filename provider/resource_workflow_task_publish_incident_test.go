@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskPublishIncident(t *testing.T) {
 
 const testAccResourceWorkflowTaskPublishIncident = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -44,7 +44,6 @@ resource "rootly_workflow_task_publish_incident" "foo" {
 					name = "bar"
 				}
 public_title = "test"
-event = "test"
 status = "investigating"
 status_page_id = "test"
 	}
@@ -53,7 +52,7 @@ status_page_id = "test"
 
 const testAccResourceWorkflowTaskPublishIncidentUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -67,7 +66,6 @@ resource "rootly_workflow_task_publish_incident" "foo" {
 					name = "bar"
 				}
 public_title = "test"
-event = "test"
 status = "investigating"
 status_page_id = "test"
 	}

@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskRunCommandHeroku(t *testing.T) {
 
 const testAccResourceWorkflowTaskRunCommandHeroku = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -48,7 +48,7 @@ size = "standard-1X"
 
 const testAccResourceWorkflowTaskRunCommandHerokuUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

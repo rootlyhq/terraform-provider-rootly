@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskPageOpsgenieOnCallResponders(t *testing.T) {
 
 const testAccResourceWorkflowTaskPageOpsgenieOnCallResponders = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -46,7 +46,7 @@ resource "rootly_workflow_task_page_opsgenie_on_call_responders" "foo" {
 
 const testAccResourceWorkflowTaskPageOpsgenieOnCallRespondersUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

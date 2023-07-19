@@ -40,6 +40,7 @@ func resourceWorkflowTaskUpdateIncident() *schema.Resource {
 				Description: "Name of the workflow task",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Computed:    true,
 			},
 			"position": {
 				Description: "The position of the workflow task (1 being top of list)",
@@ -92,7 +93,7 @@ func resourceWorkflowTaskUpdateIncident() *schema.Resource {
 						"incident_id": &schema.Schema{
 							Description: "The incident id to update or id of any attribute on the incident",
 							Type:        schema.TypeString,
-							Optional:    true,
+							Required:    true,
 						},
 						"title": &schema.Schema{
 							Description: "The incident title",

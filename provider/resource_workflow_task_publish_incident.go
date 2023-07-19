@@ -37,6 +37,7 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 				Description: "Name of the workflow task",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Computed:    true,
 			},
 			"position": {
 				Description: "The position of the workflow task (1 being top of list)",
@@ -90,8 +91,7 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 						"status": &schema.Schema{
 							Description: "Value must be one of `investigating`, `identified`, `monitoring`, `resolved`, `scheduled`, `in_progress`, `verifying`, `completed`.",
 							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     nil,
+							Required:    true,
 							ValidateFunc: validation.StringInSlice([]string{
 								"investigating",
 								"identified",

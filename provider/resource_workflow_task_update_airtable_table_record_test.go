@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskUpdateAirtableTableRecord(t *testing.T) {
 
 const testAccResourceWorkflowTaskUpdateAirtableTableRecord = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -48,7 +48,7 @@ record_id = "test"
 
 const testAccResourceWorkflowTaskUpdateAirtableTableRecordUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

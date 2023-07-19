@@ -48,24 +48,6 @@ func (c *Client) List${nameCamelPlural}(${listFnParams(
 	return ${namePlural}, nil
 }
 
-func (c *Client) Get${nameCamel}(id string) (*${nameCamel}, error) {
-	req, err := rootlygo.NewGet${nameCamel}Request(c.Rootly.Server, id)
-	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
-	}
-
-	resp, err := c.Do(req)
-	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get ${name}: %s", err.Error())
-	}
-
-	data, err := UnmarshalData(resp.Body, new(${nameCamel}))
-	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling ${name}: %s", err.Error())
-	}
-
-	return data.(*${nameCamel}), nil
-}
 `;
 };
 

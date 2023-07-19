@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskCreateDropboxPaperPage(t *testing.T) {
 
 const testAccResourceWorkflowTaskCreateDropboxPaperPage = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -46,7 +46,7 @@ resource "rootly_workflow_task_create_dropbox_paper_page" "foo" {
 
 const testAccResourceWorkflowTaskCreateDropboxPaperPageUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

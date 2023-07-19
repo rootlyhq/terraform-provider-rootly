@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskUpdateSlackChannelTopic(t *testing.T) {
 
 const testAccResourceWorkflowTaskUpdateSlackChannelTopic = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -50,7 +50,7 @@ topic = "test"
 
 const testAccResourceWorkflowTaskUpdateSlackChannelTopicUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

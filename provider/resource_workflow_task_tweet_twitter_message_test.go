@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskTweetTwitterMessage(t *testing.T) {
 
 const testAccResourceWorkflowTaskTweetTwitterMessage = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -46,7 +46,7 @@ resource "rootly_workflow_task_tweet_twitter_message" "foo" {
 
 const testAccResourceWorkflowTaskTweetTwitterMessageUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

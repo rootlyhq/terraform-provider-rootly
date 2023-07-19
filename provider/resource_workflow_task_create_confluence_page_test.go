@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskCreateConfluencePage(t *testing.T) {
 
 const testAccResourceWorkflowTaskCreateConfluencePage = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -50,7 +50,7 @@ title = "test"
 
 const testAccResourceWorkflowTaskCreateConfluencePageUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

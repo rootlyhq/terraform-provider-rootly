@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskCreateLinearIssue(t *testing.T) {
 
 const testAccResourceWorkflowTaskCreateLinearIssue = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -54,7 +54,7 @@ state = {
 
 const testAccResourceWorkflowTaskCreateLinearIssueUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

@@ -40,6 +40,7 @@ func resourceWorkflowTaskHttpClient() *schema.Resource {
 				Description: "Name of the workflow task",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Computed:    true,
 			},
 			"position": {
 				Description: "The position of the workflow task (1 being top of list)",
@@ -103,9 +104,9 @@ func resourceWorkflowTaskHttpClient() *schema.Resource {
 							Optional:    true,
 						},
 						"url": &schema.Schema{
-							Description: "",
+							Description: "URL endpoint.",
 							Type:        schema.TypeString,
-							Optional:    true,
+							Required:    true,
 						},
 						"event_url": &schema.Schema{
 							Description: "",
@@ -131,7 +132,7 @@ func resourceWorkflowTaskHttpClient() *schema.Resource {
 							}, false),
 						},
 						"succeed_on_status": &schema.Schema{
-							Description: "HTTP status code.",
+							Description: "HTTP status code expected. Can be a regular expression. Eg: 200, 200|203, 20[0-3]",
 							Type:        schema.TypeString,
 							Required:    true,
 						},

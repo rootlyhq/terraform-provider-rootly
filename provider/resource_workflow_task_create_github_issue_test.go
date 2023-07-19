@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskCreateGithubIssue(t *testing.T) {
 
 const testAccResourceWorkflowTaskCreateGithubIssue = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -50,7 +50,7 @@ title = "test"
 
 const testAccResourceWorkflowTaskCreateGithubIssueUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

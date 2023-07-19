@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskCreateJiraIssue(t *testing.T) {
 
 const testAccResourceWorkflowTaskCreateJiraIssue = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -51,7 +51,7 @@ issue_type = {
 
 const testAccResourceWorkflowTaskCreateJiraIssueUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

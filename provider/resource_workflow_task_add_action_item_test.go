@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskAddActionItem(t *testing.T) {
 
 const testAccResourceWorkflowTaskAddActionItem = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -48,7 +48,7 @@ priority = "low"
 
 const testAccResourceWorkflowTaskAddActionItemUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

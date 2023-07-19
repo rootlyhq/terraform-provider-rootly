@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskSnapshotLookerLook(t *testing.T) {
 
 const testAccResourceWorkflowTaskSnapshotLookerLook = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -49,7 +49,7 @@ resource "rootly_workflow_task_snapshot_looker_look" "foo" {
 
 const testAccResourceWorkflowTaskSnapshotLookerLookUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskUpdateGoogleCalendarEvent(t *testing.T) {
 
 const testAccResourceWorkflowTaskUpdateGoogleCalendarEvent = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -46,7 +46,7 @@ resource "rootly_workflow_task_update_google_calendar_event" "foo" {
 
 const testAccResourceWorkflowTaskUpdateGoogleCalendarEventUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

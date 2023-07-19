@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskCreateTrelloCard(t *testing.T) {
 
 const testAccResourceWorkflowTaskCreateTrelloCard = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -54,7 +54,7 @@ list = {
 
 const testAccResourceWorkflowTaskCreateTrelloCardUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

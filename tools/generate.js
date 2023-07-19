@@ -17,8 +17,6 @@ const excluded = [
   "dashboard_panel",
   "workflow_task",
   "workflow_run",
-  "incident",
-  "incident_post_mortem",
   "incident_action_item",
   "incident_event",
   "incident_feedback",
@@ -35,7 +33,9 @@ const excluded = [
 ];
 
 const excluded_resources = [
-  "user"
+  "user",
+  "incident",
+  "incident_post_mortem"
 ];
 
 console.log(`Excluding resource from generation:`, excluded.concat(excluded_resources));
@@ -54,7 +54,7 @@ const taskResources = generateTasks(swagger);
 generateProvider(resources, taskResources, dataSources);
 
 all_resources.forEach((name) => {
-  if (name == 'user') {
+  if (name == 'user' || name == 'incident_post_mortem') {
     generateReadOnlyClient(name);
   } else {
     generateClient(name);

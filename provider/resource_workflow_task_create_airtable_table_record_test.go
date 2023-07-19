@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskCreateAirtableTableRecord(t *testing.T) {
 
 const testAccResourceWorkflowTaskCreateAirtableTableRecord = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -40,20 +40,20 @@ resource "rootly_workflow_task_create_airtable_table_record" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
 		base = {
-			id = "foo"
-			name = "bar"
-		}
-		table = {
-			id = "foo"
-			name = "bar"
-		}
+					id = "foo"
+					name = "bar"
+				}
+table = {
+					id = "foo"
+					name = "bar"
+				}
 	}
 }
 `
 
 const testAccResourceWorkflowTaskCreateAirtableTableRecordUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -63,13 +63,13 @@ resource "rootly_workflow_task_create_airtable_table_record" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
 		base = {
-			id = "foo"
-			name = "bar"
-		}
-		table = {
-			id = "foo"
-			name = "bar"
-		}
+					id = "foo"
+					name = "bar"
+				}
+table = {
+					id = "foo"
+					name = "bar"
+				}
 	}
 }
 `

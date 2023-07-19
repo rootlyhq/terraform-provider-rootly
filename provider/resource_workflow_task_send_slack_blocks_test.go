@@ -21,13 +21,16 @@ func TestAccResourceWorkflowTaskSendSlackBlocks(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_workflow_incident.foo", "name", "test-workflow"),
 				),
 			},
+			{
+				Config: testAccResourceWorkflowTaskSendSlackBlocksUpdate,
+			},
 		},
 	})
 }
 
 const testAccResourceWorkflowTaskSendSlackBlocks = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -36,7 +39,23 @@ resource "rootly_workflow_incident" "foo" {
 resource "rootly_workflow_task_send_slack_blocks" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		blocks = "[{\"foo\":                   \"bar\"}]"
+		blocks = "test"
+	}
+}
+`
+
+const testAccResourceWorkflowTaskSendSlackBlocksUpdate = `
+resource "rootly_workflow_incident" "foo" {
+  	name = "test-workflow"
+	trigger_params {
+		triggers = ["incident_updated"]
+	}
+}
+
+resource "rootly_workflow_task_send_slack_blocks" "foo" {
+	workflow_id = rootly_workflow_incident.foo.id
+	task_params {
+		blocks = "test"
 	}
 }
 `

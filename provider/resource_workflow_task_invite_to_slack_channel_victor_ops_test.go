@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskInviteToSlackChannelVictorOps(t *testing.T) {
 
 const testAccResourceWorkflowTaskInviteToSlackChannelVictorOps = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -49,7 +49,7 @@ resource "rootly_workflow_task_invite_to_slack_channel_victor_ops" "foo" {
 
 const testAccResourceWorkflowTaskInviteToSlackChannelVictorOpsUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

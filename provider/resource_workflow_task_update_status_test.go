@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskUpdateStatus(t *testing.T) {
 
 const testAccResourceWorkflowTaskUpdateStatus = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -39,14 +39,14 @@ resource "rootly_workflow_incident" "foo" {
 resource "rootly_workflow_task_update_status" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		status = "started"
+		status = "in_triage"
 	}
 }
 `
 
 const testAccResourceWorkflowTaskUpdateStatusUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -55,7 +55,7 @@ resource "rootly_workflow_incident" "foo" {
 resource "rootly_workflow_task_update_status" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		status = "started"
+		status = "in_triage"
 	}
 }
 `

@@ -63,9 +63,9 @@ resource "rootly_workflow_task_rename_slack_channel" "rename_slack_channel" {
 
 Required:
 
+- `channel` (Map of String) Map must contain two fields, `id` and `name`.
 - `title` (String)
 
 Optional:
 
-- `channel` (Map of String) Map must contain two fields, `id` and `name`.
 - `task_type` (String)

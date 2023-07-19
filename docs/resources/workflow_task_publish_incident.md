@@ -72,6 +72,7 @@ Required:
 
 - `incident` (Map of String) Map must contain two fields, `id` and `name`.
 - `public_title` (String)
+- `status` (String) Value must be one of `investigating`, `identified`, `monitoring`, `resolved`, `scheduled`, `in_progress`, `verifying`, `completed`.
 - `status_page_id` (String)
 
 Optional:
@@ -79,6 +80,5 @@ Optional:
 - `event` (String) Incident event description
 - `notify_subscribers` (Boolean) When true notifies subscribers of the status page by email/text
 - `should_tweet` (Boolean) For StatusPage.io integrated pages auto publishes a tweet for your update
-- `status` (String) Value must be one of `investigating`, `identified`, `monitoring`, `resolved`, `scheduled`, `in_progress`, `verifying`, `completed`.
 - `status_page_template` (Map of String) Map must contain two fields, `id` and `name`.
 - `task_type` (String)

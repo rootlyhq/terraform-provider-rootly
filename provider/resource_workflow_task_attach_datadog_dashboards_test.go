@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskAttachDatadogDashboards(t *testing.T) {
 
 const testAccResourceWorkflowTaskAttachDatadogDashboards = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -49,7 +49,7 @@ resource "rootly_workflow_task_attach_datadog_dashboards" "foo" {
 
 const testAccResourceWorkflowTaskAttachDatadogDashboardsUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

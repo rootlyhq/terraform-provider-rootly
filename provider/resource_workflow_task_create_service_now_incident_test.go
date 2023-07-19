@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskCreateServiceNowIncident(t *testing.T) {
 
 const testAccResourceWorkflowTaskCreateServiceNowIncident = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -46,7 +46,7 @@ resource "rootly_workflow_task_create_service_now_incident" "foo" {
 
 const testAccResourceWorkflowTaskCreateServiceNowIncidentUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskSnapshotGrafanaDashboard(t *testing.T) {
 
 const testAccResourceWorkflowTaskSnapshotGrafanaDashboard = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -49,7 +49,7 @@ resource "rootly_workflow_task_snapshot_grafana_dashboard" "foo" {
 
 const testAccResourceWorkflowTaskSnapshotGrafanaDashboardUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}

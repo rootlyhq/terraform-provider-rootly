@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskSendEmail(t *testing.T) {
 
 const testAccResourceWorkflowTaskSendEmail = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -39,17 +39,16 @@ resource "rootly_workflow_incident" "foo" {
 resource "rootly_workflow_task_send_email" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		from = "test@test.com"
 		to = ["foo"]
-		subject = "test"
-		body = "test"
+subject = "test"
+body = "test"
 	}
 }
 `
 
 const testAccResourceWorkflowTaskSendEmailUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -58,10 +57,9 @@ resource "rootly_workflow_incident" "foo" {
 resource "rootly_workflow_task_send_email" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		from = "test@test.com"
 		to = ["foo"]
-		subject = "test"
-		body = "test"
+subject = "test"
+body = "test"
 	}
 }
 `

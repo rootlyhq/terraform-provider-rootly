@@ -3211,6 +3211,11 @@ const (
 	SendSms SendSmsTaskParamsTaskType = "send_sms"
 )
 
+// Defines values for SendWhatsappMessageTaskParamsTaskType.
+const (
+	SendWhatsappMessage SendWhatsappMessageTaskParamsTaskType = "send_whatsapp_message"
+)
+
 // Defines values for ServiceStatus.
 const (
 	ServiceStatusImpacted      ServiceStatus = "impacted"
@@ -5292,14 +5297,14 @@ type AddSlackBookmarkTaskParams struct {
 	Emoji *string `json:"emoji,omitempty"`
 
 	// The bookmark link. Required if not a playbook bookmark.
-	Link *string `json:"link,omitempty"`
+	Link *string `json:"link"`
 
 	// The playbook id if bookmark is of an incident playbook.
 	PlaybookId *string                             `json:"playbook_id,omitempty"`
 	TaskType   *AddSlackBookmarkTaskParamsTaskType `json:"task_type,omitempty"`
 
 	// The bookmark title. Required if not a playbook bookmark.
-	Title *string `json:"title,omitempty"`
+	Title *string `json:"title"`
 }
 
 // AddSlackBookmarkTaskParamsTaskType defines model for AddSlackBookmarkTaskParams.TaskType.
@@ -8273,10 +8278,12 @@ type HttpClientTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"post_to_slack_channels,omitempty"`
 
-	// HTTP status code.
+	// HTTP status code expected. Can be a regular expression. Eg: 200, 200|203, 20[0-3]
 	SucceedOnStatus string                        `json:"succeed_on_status"`
 	TaskType        *HttpClientTaskParamsTaskType `json:"task_type,omitempty"`
-	Url             *string                       `json:"url,omitempty"`
+
+	// URL endpoint.
+	Url string `json:"url"`
 }
 
 // HTTP method.
@@ -12957,9 +12964,9 @@ type PublishIncidentTaskParams struct {
 	PublicTitle       string `json:"public_title"`
 
 	// For StatusPage.io integrated pages auto publishes a tweet for your update
-	ShouldTweet        *bool                            `json:"should_tweet,omitempty"`
-	Status             *PublishIncidentTaskParamsStatus `json:"status,omitempty"`
-	StatusPageId       string                           `json:"status_page_id"`
+	ShouldTweet        *bool                           `json:"should_tweet,omitempty"`
+	Status             PublishIncidentTaskParamsStatus `json:"status"`
+	StatusPageId       string                          `json:"status_page_id"`
 	StatusPageTemplate *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -13574,10 +13581,10 @@ type RemoveSubscribersDataType string
 
 // RenameSlackChannelTaskParams defines model for rename_slack_channel_task_params.
 type RenameSlackChannelTaskParams struct {
-	Channel *struct {
+	Channel struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
-	} `json:"channel,omitempty"`
+	} `json:"channel"`
 	TaskType *RenameSlackChannelTaskParamsTaskType `json:"task_type,omitempty"`
 	Title    string                                `json:"title"`
 }
@@ -13737,7 +13744,7 @@ type SendDashboardReportTaskParams struct {
 	DashboardIds []string `json:"dashboard_ids"`
 
 	// The from email address. Need to use SMTP integration if different than rootly.com.
-	From *string `json:"from"`
+	From *string `json:"from,omitempty"`
 
 	// The preheader
 	Preheader *string `json:"preheader"`
@@ -13763,7 +13770,7 @@ type SendEmailTaskParams struct {
 	CustomLogoUrl *string `json:"custom_logo_url"`
 
 	// The from email address. Need to use SMTP integration if different than rootly.com.
-	From          *string `json:"from"`
+	From          *string `json:"from,omitempty"`
 	IncludeFooter *bool   `json:"include_footer,omitempty"`
 	IncludeHeader *bool   `json:"include_header,omitempty"`
 
@@ -13866,6 +13873,20 @@ type SendSmsTaskParams struct {
 
 // SendSmsTaskParamsTaskType defines model for SendSmsTaskParams.TaskType.
 type SendSmsTaskParamsTaskType string
+
+// SendWhatsappMessageTaskParams defines model for send_whatsapp_message_task_params.
+type SendWhatsappMessageTaskParams struct {
+	// The WhatsApp message
+	Content string `json:"content"`
+
+	// The name
+	Name         string                                 `json:"name"`
+	PhoneNumbers []string                               `json:"phone_numbers"`
+	TaskType     *SendWhatsappMessageTaskParamsTaskType `json:"task_type,omitempty"`
+}
+
+// SendWhatsappMessageTaskParamsTaskType defines model for SendWhatsappMessageTaskParams.TaskType.
+type SendWhatsappMessageTaskParamsTaskType string
 
 // Service defines model for service.
 type Service struct {
@@ -15740,7 +15761,7 @@ type UpdateIncidentPostMortemDataType string
 // UpdateIncidentPostmortemTaskParams defines model for update_incident_postmortem_task_params.
 type UpdateIncidentPostmortemTaskParams struct {
 	// UUID of the retrospective that needs to be updated.
-	PostmortemId *string                                     `json:"postmortem_id,omitempty"`
+	PostmortemId string                                      `json:"postmortem_id"`
 	Status       *string                                     `json:"status"`
 	TaskType     *UpdateIncidentPostmortemTaskParamsTaskType `json:"task_type,omitempty"`
 
@@ -15843,7 +15864,7 @@ type UpdateIncidentTaskParams struct {
 	GroupIds            *[]string `json:"group_ids"`
 
 	// The incident id to update or id of any attribute on the incident
-	IncidentId      *string   `json:"incident_id,omitempty"`
+	IncidentId      string    `json:"incident_id"`
 	IncidentTypeIds *[]string `json:"incident_type_ids"`
 	MitigatedAt     *string   `json:"mitigated_at"`
 	Private         *bool     `json:"private,omitempty"`
@@ -16011,6 +16032,8 @@ type UpdateNotionPageTaskParamsTaskType string
 
 // UpdateOpsgenieAlertTaskParams defines model for update_opsgenie_alert_task_params.
 type UpdateOpsgenieAlertTaskParams struct {
+	// Opsgenie Alert ID
+	AlertId    string `json:"alert_id"`
 	Completion struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`

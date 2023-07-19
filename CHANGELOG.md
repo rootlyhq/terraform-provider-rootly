@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.7] -- 2023-07-19
+
+- Fixed `name` computed value.
+- Added `rootly_incident` + `rootly_incident_post_mortem` data sources.
+- Added `send_whatsapp_message_task` resource.
+- Fixed some required attributes for workflow task resources.
+- Improved test files.
+
 ## [1.0.6] -- 2023-07-18
 
 - Added `name` attributes to all workflow tasks.

@@ -30,7 +30,7 @@ func TestAccResourceWorkflowTaskCreateDatadogNotebook(t *testing.T) {
 
 const testAccResourceWorkflowTaskCreateDatadogNotebook = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
@@ -47,7 +47,7 @@ kind = "postmortem"
 
 const testAccResourceWorkflowTaskCreateDatadogNotebookUpdate = `
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow"
+  	name = "test-workflow"
 	trigger_params {
 		triggers = ["incident_updated"]
 	}
