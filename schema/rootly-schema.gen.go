@@ -424,6 +424,7 @@ const (
 	AuditItemTypeFormField                      AuditItemType = "FormField"
 	AuditItemTypeFunctionality                  AuditItemType = "Functionality"
 	AuditItemTypeGeniusWorkflow                 AuditItemType = "GeniusWorkflow"
+	AuditItemTypeGeniusWorkflowFolder           AuditItemType = "GeniusWorkflowFolder"
 	AuditItemTypeGeniusWorkflowGroup            AuditItemType = "GeniusWorkflowGroup"
 	AuditItemTypeGeniusWorkflowRun              AuditItemType = "GeniusWorkflowRun"
 	AuditItemTypeGroup                          AuditItemType = "Group"
@@ -440,6 +441,7 @@ const (
 	AuditItemTypeIncidentType                   AuditItemType = "IncidentType"
 	AuditItemTypePlaybook                       AuditItemType = "Playbook"
 	AuditItemTypePlaybookTask                   AuditItemType = "PlaybookTask"
+	AuditItemTypeRole                           AuditItemType = "Role"
 	AuditItemTypeService                        AuditItemType = "Service"
 	AuditItemTypeSeverity                       AuditItemType = "Severity"
 	AuditItemTypeStatusPage                     AuditItemType = "StatusPage"
@@ -456,6 +458,7 @@ const (
 	AuditsListDataAttributesItemTypeFormField                      AuditsListDataAttributesItemType = "FormField"
 	AuditsListDataAttributesItemTypeFunctionality                  AuditsListDataAttributesItemType = "Functionality"
 	AuditsListDataAttributesItemTypeGeniusWorkflow                 AuditsListDataAttributesItemType = "GeniusWorkflow"
+	AuditsListDataAttributesItemTypeGeniusWorkflowFolder           AuditsListDataAttributesItemType = "GeniusWorkflowFolder"
 	AuditsListDataAttributesItemTypeGeniusWorkflowGroup            AuditsListDataAttributesItemType = "GeniusWorkflowGroup"
 	AuditsListDataAttributesItemTypeGeniusWorkflowRun              AuditsListDataAttributesItemType = "GeniusWorkflowRun"
 	AuditsListDataAttributesItemTypeGroup                          AuditsListDataAttributesItemType = "Group"
@@ -472,6 +475,7 @@ const (
 	AuditsListDataAttributesItemTypeIncidentType                   AuditsListDataAttributesItemType = "IncidentType"
 	AuditsListDataAttributesItemTypePlaybook                       AuditsListDataAttributesItemType = "Playbook"
 	AuditsListDataAttributesItemTypePlaybookTask                   AuditsListDataAttributesItemType = "PlaybookTask"
+	AuditsListDataAttributesItemTypeRole                           AuditsListDataAttributesItemType = "Role"
 	AuditsListDataAttributesItemTypeService                        AuditsListDataAttributesItemType = "Service"
 	AuditsListDataAttributesItemTypeSeverity                       AuditsListDataAttributesItemType = "Severity"
 	AuditsListDataAttributesItemTypeStatusPage                     AuditsListDataAttributesItemType = "StatusPage"
@@ -6053,12 +6057,12 @@ type AutoAssignRolePagerdutyTaskParamsTaskType string
 // AutoAssignRoleVictorOpsTaskParams defines model for auto_assign_role_victor_ops_task_params.
 type AutoAssignRoleVictorOpsTaskParams struct {
 	// The role id.
-	IncidentRoleId string `json:"incident_role_id"`
-	Schedule       struct {
+	IncidentRoleId string                                     `json:"incident_role_id"`
+	TaskType       *AutoAssignRoleVictorOpsTaskParamsTaskType `json:"task_type,omitempty"`
+	Team           struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
-	} `json:"schedule"`
-	TaskType *AutoAssignRoleVictorOpsTaskParamsTaskType `json:"task_type,omitempty"`
+	} `json:"team"`
 }
 
 // AutoAssignRoleVictorOpsTaskParamsTaskType defines model for AutoAssignRoleVictorOpsTaskParams.TaskType.
@@ -8570,10 +8574,10 @@ type Incident struct {
 	// Date of resolution
 	ResolvedAt *string `json:"resolved_at"`
 
-	// Scheduled for
+	// Date of when the maintenance begins
 	ScheduledFor *string `json:"scheduled_for"`
 
-	// Scheduled until
+	// Date of when the maintenance ends
 	ScheduledUntil *string `json:"scheduled_until"`
 
 	// The Services of the incident
@@ -9636,10 +9640,10 @@ type IncidentList struct {
 			// Date of resolution
 			ResolvedAt *string `json:"resolved_at"`
 
-			// Scheduled for
+			// Date of when the maintenance begins
 			ScheduledFor *string `json:"scheduled_for"`
 
-			// Scheduled until
+			// Date of when the maintenance ends
 			ScheduledUntil *string `json:"scheduled_until"`
 
 			// The Services of the incident
@@ -10352,10 +10356,10 @@ type IncidentResponse struct {
 			// Date of resolution
 			ResolvedAt *string `json:"resolved_at"`
 
-			// Scheduled for
+			// Date of when the maintenance begins
 			ScheduledFor *string `json:"scheduled_for"`
 
-			// Scheduled until
+			// Date of when the maintenance ends
 			ScheduledUntil *string `json:"scheduled_until"`
 
 			// The Services of the incident
@@ -11194,11 +11198,11 @@ type InviteToSlackChannelVictorOpsTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"channels,omitempty"`
-	Schedule struct {
+	TaskType *InviteToSlackChannelVictorOpsTaskParamsTaskType `json:"task_type,omitempty"`
+	Team     *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
-	} `json:"schedule"`
-	TaskType *InviteToSlackChannelVictorOpsTaskParamsTaskType `json:"task_type,omitempty"`
+	} `json:"team,omitempty"`
 }
 
 // InviteToSlackChannelVictorOpsTaskParamsTaskType defines model for InviteToSlackChannelVictorOpsTaskParams.TaskType.
@@ -11632,6 +11636,12 @@ type NewIncident struct {
 
 			// Date of resolution
 			ResolvedAt *string `json:"resolved_at"`
+
+			// Date of when the maintenance begins
+			ScheduledFor *string `json:"scheduled_for"`
+
+			// Date of when the maintenance ends
+			ScheduledUntil *string `json:"scheduled_until"`
 
 			// The Service ID's to attach to the incident
 			ServiceIds *[]string `json:"service_ids"`
@@ -12958,6 +12968,9 @@ type PublishIncidentTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"incident"`
+
+	// Additional API Payload you can pass to statuspage.io for example. Can contain liquid markup and need to be valid JSON.
+	IntegrationPayload *string `json:"integration_payload"`
 
 	// When true notifies subscribers of the status page by email/text
 	NotifySubscribers *bool  `json:"notify_subscribers,omitempty"`
@@ -15513,6 +15526,12 @@ type UpdateIncident struct {
 
 			// Date of resolution
 			ResolvedAt *string `json:"resolved_at"`
+
+			// Date of when the maintenance begins
+			ScheduledFor *string `json:"scheduled_for"`
+
+			// Date of when the maintenance ends
+			ScheduledUntil *string `json:"scheduled_until"`
 
 			// The Service ID's to attach to the incident
 			ServiceIds *[]string `json:"service_ids"`

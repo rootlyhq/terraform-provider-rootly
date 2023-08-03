@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.8] -- 2023-08-03
+
+- Fixed `auto_assign_role_victor_ops_task_params`.
+- Fixed `invite_to_slack_channel_victor_ops_task_params`.
+- Added `integration_payload` attribute to `publish_incident_task_params`.
+
 ## [1.0.7] -- 2023-07-19
 
 - Fixed `name` computed value.

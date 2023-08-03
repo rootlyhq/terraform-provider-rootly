@@ -10,11 +10,11 @@ import (
 
 func TestAccResourceWorkflowTaskAutoAssignRoleVictorOps(t *testing.T) {
 	resource.UnitTest(t, resource.TestCase{
-		PreCheck: func() {
+		PreCheck:          func() {
 			testAccPreCheck(t)
 		},
 		ProviderFactories: providerFactories,
-		Steps: []resource.TestStep{
+		Steps: []resource.TestStep {
 			{
 				Config: testAccResourceWorkflowTaskAutoAssignRoleVictorOps,
 				Check: resource.ComposeTestCheckFunc(
@@ -40,7 +40,7 @@ resource "rootly_workflow_task_auto_assign_role_victor_ops" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
 		incident_role_id = "test"
-schedule = {
+team = {
 					id = "foo"
 					name = "bar"
 				}
@@ -60,7 +60,7 @@ resource "rootly_workflow_task_auto_assign_role_victor_ops" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
 		incident_role_id = "test"
-schedule = {
+team = {
 					id = "foo"
 					name = "bar"
 				}
