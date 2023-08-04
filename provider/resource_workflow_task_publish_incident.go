@@ -6,6 +6,9 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/stretchr/testify/assert"
+	"testing"
+
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -122,6 +125,17 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 							Description: "",
 							Type:        schema.TypeString,
 							Required:    true,
+						},
+						"integration_payload": &schema.Schema{
+							Description: "Additional API Payload you can pass to statuspage.io for example. Can contain liquid markup and need to be valid JSON.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+								t := &testing.T{}
+								assert := assert.New(t)
+								return assert.JSONEq(old, new)
+							},
+							Default: "{}",
 						},
 					},
 				},

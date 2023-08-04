@@ -78,6 +78,7 @@ Required:
 Optional:
 
 - `event` (String) Incident event description
+- `integration_payload` (String) Additional API Payload you can pass to statuspage.io for example. Can contain liquid markup and need to be valid JSON.
 - `notify_subscribers` (Boolean) When true notifies subscribers of the status page by email/text
 - `should_tweet` (Boolean) For StatusPage.io integrated pages auto publishes a tweet for your update
 - `status_page_template` (Map of String) Map must contain two fields, `id` and `name`.

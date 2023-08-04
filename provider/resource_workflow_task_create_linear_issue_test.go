@@ -10,11 +10,11 @@ import (
 
 func TestAccResourceWorkflowTaskCreateLinearIssue(t *testing.T) {
 	resource.UnitTest(t, resource.TestCase{
-		PreCheck:          func() {
+		PreCheck: func() {
 			testAccPreCheck(t)
 		},
 		ProviderFactories: providerFactories,
-		Steps: []resource.TestStep {
+		Steps: []resource.TestStep{
 			{
 				Config: testAccResourceWorkflowTaskCreateLinearIssue,
 				Check: resource.ComposeTestCheckFunc(

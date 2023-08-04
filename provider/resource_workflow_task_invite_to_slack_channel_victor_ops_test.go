@@ -39,7 +39,7 @@ resource "rootly_workflow_incident" "foo" {
 resource "rootly_workflow_task_invite_to_slack_channel_victor_ops" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		schedule = {
+		team = {
 					id = "foo"
 					name = "bar"
 				}
@@ -58,7 +58,7 @@ resource "rootly_workflow_incident" "foo" {
 resource "rootly_workflow_task_invite_to_slack_channel_victor_ops" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		schedule = {
+		team = {
 					id = "foo"
 					name = "bar"
 				}

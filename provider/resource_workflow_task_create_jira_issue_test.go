@@ -10,11 +10,11 @@ import (
 
 func TestAccResourceWorkflowTaskCreateJiraIssue(t *testing.T) {
 	resource.UnitTest(t, resource.TestCase{
-		PreCheck:          func() {
+		PreCheck: func() {
 			testAccPreCheck(t)
 		},
 		ProviderFactories: providerFactories,
-		Steps: []resource.TestStep {
+		Steps: []resource.TestStep{
 			{
 				Config: testAccResourceWorkflowTaskCreateJiraIssue,
 				Check: resource.ComposeTestCheckFunc(

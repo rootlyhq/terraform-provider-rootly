@@ -111,6 +111,11 @@ func resourceWorkflowTaskUpdateJiraIssue() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 						},
+						"due_date": &schema.Schema{
+							Description: "The due date.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 						"priority": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. The priority id and display name.",
 							Type:        schema.TypeMap,

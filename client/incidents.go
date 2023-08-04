@@ -29,6 +29,8 @@ type Incident struct {
   MitigationMessage string `jsonapi:"attr,mitigation_message,omitempty"`
   ResolutionMessage string `jsonapi:"attr,resolution_message,omitempty"`
   CancellationMessage string `jsonapi:"attr,cancellation_message,omitempty"`
+  ScheduledFor string `jsonapi:"attr,scheduled_for,omitempty"`
+  ScheduledUntil string `jsonapi:"attr,scheduled_until,omitempty"`
   InTriageAt string `jsonapi:"attr,in_triage_at,omitempty"`
   StartedAt string `jsonapi:"attr,started_at,omitempty"`
   DetectedAt string `jsonapi:"attr,detected_at,omitempty"`
@@ -36,8 +38,6 @@ type Incident struct {
   MitigatedAt string `jsonapi:"attr,mitigated_at,omitempty"`
   ResolvedAt string `jsonapi:"attr,resolved_at,omitempty"`
   CancelledAt string `jsonapi:"attr,cancelled_at,omitempty"`
-  ScheduledFor string `jsonapi:"attr,scheduled_for,omitempty"`
-  ScheduledUntil string `jsonapi:"attr,scheduled_until,omitempty"`
 }
 
 func (c *Client) ListIncidents(params *rootlygo.ListIncidentsParams) ([]interface{}, error) {

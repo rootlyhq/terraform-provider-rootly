@@ -11199,10 +11199,10 @@ type InviteToSlackChannelVictorOpsTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"channels,omitempty"`
 	TaskType *InviteToSlackChannelVictorOpsTaskParamsTaskType `json:"task_type,omitempty"`
-	Team     *struct {
+	Team     struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
-	} `json:"team,omitempty"`
+	} `json:"team"`
 }
 
 // InviteToSlackChannelVictorOpsTaskParamsTaskType defines model for InviteToSlackChannelVictorOpsTaskParams.TaskType.
@@ -15960,6 +15960,9 @@ type UpdateJiraIssueTaskParams struct {
 
 	// The issue description.
 	Description *string `json:"description,omitempty"`
+
+	// The due date.
+	DueDate *string `json:"due_date,omitempty"`
 
 	// The issue id.
 	IssueId string `json:"issue_id"`
