@@ -5,10 +5,10 @@ package provider
 import (
 	"context"
 	"fmt"
-	
+
+	"github.com/stretchr/testify/assert"
 	"testing"
-  "github.com/stretchr/testify/assert"
-	
+
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -29,93 +29,93 @@ func resourceWorkflowTaskCreateZendeskTicket() *schema.Resource {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
-		Schema: map[string]*schema.Schema {
+		Schema: map[string]*schema.Schema{
 			"workflow_id": {
-				Description:  "The ID of the parent workflow",
-				Type:         schema.TypeString,
-				Required:     true,
-				ForceNew:     true,
+				Description: "The ID of the parent workflow",
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
 			},
 			"name": {
-				Description:  "Name of the workflow task",
-				Type:         schema.TypeString,
-				Optional:     true,
-				Computed:     true,
+				Description: "Name of the workflow task",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"position": {
-				Description:  "The position of the workflow task (1 being top of list)",
-				Type:         schema.TypeInt,
-				Optional:     true,
-				Computed:     true,
+				Description: "The position of the workflow task (1 being top of list)",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
 			},
 			"skip_on_failure": {
-				Description:  "Skip workflow task if any failures",
-				Type:         schema.TypeBool,
-				Optional:     true,
-				Default:      false,
+				Description: "Skip workflow task if any failures",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
 			},
 			"enabled": {
-				Description:  "Enable/disable this workflow task",
-				Type:         schema.TypeBool,
-				Optional:     true,
-				Default:      true,
+				Description: "Enable/disable this workflow task",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type: schema.TypeList,
-				Required: true,
-				MinItems: 1,
-				MaxItems: 1,
+				Type:        schema.TypeList,
+				Required:    true,
+				MinItems:    1,
+				MaxItems:    1,
 				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema {
-						"task_type": &schema.Schema {
-							Type: schema.TypeString,
+					Schema: map[string]*schema.Schema{
+						"task_type": &schema.Schema{
+							Type:     schema.TypeString,
 							Optional: true,
-							Default: "create_zendesk_ticket",
-							ValidateFunc: validation.StringInSlice([]string {
+							Default:  "create_zendesk_ticket",
+							ValidateFunc: validation.StringInSlice([]string{
 								"create_zendesk_ticket",
 							}, false),
 						},
-						"kind": &schema.Schema {
+						"kind": &schema.Schema{
 							Description: "Value must be one of `problem`, `incident`, `question`, `task`.",
-							Type: schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 							ValidateFunc: validation.StringInSlice([]string{
 								"problem",
-"incident",
-"question",
-"task",
+								"incident",
+								"question",
+								"task",
 							}, false),
 						},
-						"subject": &schema.Schema {
+						"subject": &schema.Schema{
 							Description: "The ticket subject.",
-							Type: schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 						},
-						"comment": &schema.Schema {
+						"comment": &schema.Schema{
 							Description: "The ticket comment.",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
-						"tags": &schema.Schema {
+						"tags": &schema.Schema{
 							Description: "The ticket tags.",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
-						"priority": &schema.Schema {
+						"priority": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. The priority id and display name.",
-							Type: schema.TypeMap,
-							Optional: true,
+							Type:        schema.TypeMap,
+							Optional:    true,
 						},
-						"completion": &schema.Schema {
+						"completion": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. The completion id and display name.",
-							Type: schema.TypeMap,
-							Optional: true,
+							Type:        schema.TypeMap,
+							Optional:    true,
 						},
-						"custom_fields_mapping": &schema.Schema {
+						"custom_fields_mapping": &schema.Schema{
 							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON.",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 								t := &testing.T{}
 								assert := assert.New(t)
@@ -123,10 +123,10 @@ func resourceWorkflowTaskCreateZendeskTicket() *schema.Resource {
 							},
 							Default: "{}",
 						},
-						"ticket_payload": &schema.Schema {
+						"ticket_payload": &schema.Schema{
 							Description: "Additional Zendesk ticket attributes. Will be merged into whatever was specified in this tasks current parameters. Can contain liquid markup and need to be valid JSON.",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 								t := &testing.T{}
 								assert := assert.New(t)
@@ -154,12 +154,12 @@ func resourceWorkflowTaskCreateZendeskTicketCreate(ctx context.Context, d *schem
 	tflog.Trace(ctx, fmt.Sprintf("Creating workflow task: %s", workflowId))
 
 	s := &client.WorkflowTask{
-		WorkflowId: workflowId,
-		Name: name,
-		Position: position,
+		WorkflowId:    workflowId,
+		Name:          name,
+		Position:      position,
 		SkipOnFailure: skipOnFailure,
-		Enabled: enabled,
-		TaskParams: taskParams,
+		Enabled:       enabled,
+		TaskParams:    taskParams,
 	}
 
 	res, err := c.CreateWorkflowTask(s)
@@ -214,12 +214,12 @@ func resourceWorkflowTaskCreateZendeskTicketUpdate(ctx context.Context, d *schem
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	s := &client.WorkflowTask{
-		WorkflowId: workflowId,
-		Name: name,
-		Position: position,
+		WorkflowId:    workflowId,
+		Name:          name,
+		Position:      position,
 		SkipOnFailure: skipOnFailure,
-		Enabled: enabled,
-		TaskParams: taskParams,
+		Enabled:       enabled,
+		TaskParams:    taskParams,
 	}
 
 	tflog.Debug(ctx, fmt.Sprintf("adding value: %#v", s))

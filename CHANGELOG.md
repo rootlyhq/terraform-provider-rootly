@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.9] -- 2023-08-04
+
+- Fixed `invite_to_slack_channel_victor_ops_task_params` required argument.
+- Added `due_date` attribute to `publish_incident_task_params`.
+
 ## [1.0.8] -- 2023-08-03
 
 - Fixed `auto_assign_role_victor_ops_task_params`.

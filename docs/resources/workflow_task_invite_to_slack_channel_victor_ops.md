@@ -35,7 +35,7 @@ Manages workflow invite_to_slack_channel_victor_ops task.
 
 Required:
 
-- `schedule` (Map of String) Map must contain two fields, `id` and `name`.
+- `team` (Map of String) Map must contain two fields, `id` and `name`.
 
 Optional:
 
