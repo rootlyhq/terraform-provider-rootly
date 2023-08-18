@@ -141,6 +141,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_workflow_task_create_google_meeting":              resourceWorkflowTaskCreateGoogleMeeting(),
 				"rootly_workflow_task_create_go_to_meeting":               resourceWorkflowTaskCreateGoToMeeting(),
 				"rootly_workflow_task_create_incident":                    resourceWorkflowTaskCreateIncident(),
+				"rootly_workflow_task_create_incident_postmortem":         resourceWorkflowTaskCreateIncidentPostmortem(),
 				"rootly_workflow_task_create_jira_issue":                  resourceWorkflowTaskCreateJiraIssue(),
 				"rootly_workflow_task_create_jira_subtask":                resourceWorkflowTaskCreateJiraSubtask(),
 				"rootly_workflow_task_create_linear_issue":                resourceWorkflowTaskCreateLinearIssue(),

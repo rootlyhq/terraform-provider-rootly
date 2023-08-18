@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0] -- 2023-08-17
+
+- Added `service_ids` to `playbook` resource.
+- Added `integration` attribute to `task_create_confluence_page`, `task_create_jira_issue` ,`task_create_jira_subtask` & ``.
+- Added `jira_issue_id`, `asana_task_id`, `shortcut_task_id`, `shortcut_story_id`, `linear_issue_id`, `zendesk_ticket_id`, `trello_card_id`, `airtable_record_id`, `github_issue_id`, `freshservice_ticket_id` & `freshservice_task_id` attributes to `task_update_incident`.
+- Added `assign_user_email` attribute to `task_create_linear_subtask_issue` & `task_update_linear_issue`.
+- Added `create_incident_postmortem_task` workflow task.
+
 ## [1.0.9] -- 2023-08-04
 
 - Fixed `invite_to_slack_channel_victor_ops_task_params` required argument.

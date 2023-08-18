@@ -81,6 +81,17 @@ func resourcePlaybook() *schema.Resource {
 				Description: "The Functionality ID's to attach to the incident",
 			},
 
+			"service_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "The Service ID's to attach to the incident",
+			},
+
 			"group_ids": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -131,6 +142,9 @@ func resourcePlaybookCreate(ctx context.Context, d *schema.ResourceData, meta in
 	if value, ok := d.GetOkExists("functionality_ids"); ok {
 		s.FunctionalityIds = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("service_ids"); ok {
+		s.ServiceIds = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("group_ids"); ok {
 		s.GroupIds = value.([]interface{})
 	}
@@ -172,6 +186,7 @@ func resourcePlaybookRead(ctx context.Context, d *schema.ResourceData, meta inte
 	d.Set("severity_ids", item.SeverityIds)
 	d.Set("environment_ids", item.EnvironmentIds)
 	d.Set("functionality_ids", item.FunctionalityIds)
+	d.Set("service_ids", item.ServiceIds)
 	d.Set("group_ids", item.GroupIds)
 	d.Set("incident_type_ids", item.IncidentTypeIds)
 
@@ -201,6 +216,9 @@ func resourcePlaybookUpdate(ctx context.Context, d *schema.ResourceData, meta in
 	}
 	if d.HasChange("functionality_ids") {
 		s.FunctionalityIds = d.Get("functionality_ids").([]interface{})
+	}
+	if d.HasChange("service_ids") {
+		s.ServiceIds = d.Get("service_ids").([]interface{})
 	}
 	if d.HasChange("group_ids") {
 		s.GroupIds = d.Get("group_ids").([]interface{})

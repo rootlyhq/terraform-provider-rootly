@@ -25,6 +25,7 @@ description: |-
 - `functionality_ids` (List of String) The Functionality ID's to attach to the incident
 - `group_ids` (List of String) The Team ID's to attach to the incident
 - `incident_type_ids` (List of String) The Incident Type ID's to attach to the incident
+- `service_ids` (List of String) The Service ID's to attach to the incident
 - `severity_ids` (List of String) The Severity ID's to attach to the incident
 - `summary` (String) The summary of the playbook
 

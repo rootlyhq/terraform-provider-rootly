@@ -1,13 +1,13 @@
 ---
-page_title: "Resource rootly_workflow_task_create_linear_subtask_issue - terraform-provider-rootly"
+page_title: "Resource rootly_workflow_task_create_incident_postmortem - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow createlinearsubtask_issue task.
+    Manages workflow createincidentpostmortem task.
 ---
 
-# Resource (rootly_workflow_task_create_linear_subtask_issue)
+# Resource (rootly_workflow_task_create_incident_postmortem)
 
-Manages workflow create_linear_subtask_issue task.
+Manages workflow create_incident_postmortem task.
 
 
 
@@ -35,13 +35,11 @@ Manages workflow create_linear_subtask_issue task.
 
 Required:
 
-- `parent_issue_id` (String) The parent issue.
-- `state` (Map of String) Map must contain two fields, `id` and `name`. The state id and display name.
-- `title` (String) The issue title.
+- `incident_id` (String) UUID of the incident that needs a retrospective.
+- `title` (String) The retrospective title
 
 Optional:
 
-- `assign_user_email` (String) The assigned user's email.
-- `description` (String) The issue description.
-- `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name.
+- `status` (String)
 - `task_type` (String)
+- `template` (Map of String) Map must contain two fields, `id` and `name`. Retrospective template to use.

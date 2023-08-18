@@ -98,6 +98,11 @@ func resourceWorkflowTaskCreateLinearSubtaskIssue() *schema.Resource {
 							Type:        schema.TypeMap,
 							Optional:    true,
 						},
+						"assign_user_email": &schema.Schema{
+							Description: "The assigned user's email.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 					},
 				},
 			},

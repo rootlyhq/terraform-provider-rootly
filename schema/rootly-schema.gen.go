@@ -781,6 +781,11 @@ const (
 	CreateGoogleMeeting CreateGoogleMeetingTaskParamsTaskType = "create_google_meeting"
 )
 
+// Defines values for CreateIncidentPostmortemTaskParamsTaskType.
+const (
+	CreateIncidentPostmortem CreateIncidentPostmortemTaskParamsTaskType = "create_incident_postmortem"
+)
+
 // Defines values for CreateIncidentTaskParamsTaskType.
 const (
 	CreateIncident CreateIncidentTaskParamsTaskType = "create_incident"
@@ -4282,12 +4287,23 @@ const (
 
 // Defines values for UpdateIncidentTaskParamsAttributeToQueryBy.
 const (
-	UpdateIncidentTaskParamsAttributeToQueryById                  UpdateIncidentTaskParamsAttributeToQueryBy = "id"
-	UpdateIncidentTaskParamsAttributeToQueryByOpsgenieIncidentId  UpdateIncidentTaskParamsAttributeToQueryBy = "opsgenie_incident_id"
-	UpdateIncidentTaskParamsAttributeToQueryByPagerdutyIncidentId UpdateIncidentTaskParamsAttributeToQueryBy = "pagerduty_incident_id"
-	UpdateIncidentTaskParamsAttributeToQueryBySequentialId        UpdateIncidentTaskParamsAttributeToQueryBy = "sequential_id"
-	UpdateIncidentTaskParamsAttributeToQueryBySlug                UpdateIncidentTaskParamsAttributeToQueryBy = "slug"
-	UpdateIncidentTaskParamsAttributeToQueryByVictorOpsIncidentId UpdateIncidentTaskParamsAttributeToQueryBy = "victor_ops_incident_id"
+	UpdateIncidentTaskParamsAttributeToQueryByAirtableRecordId     UpdateIncidentTaskParamsAttributeToQueryBy = "airtable_record_id"
+	UpdateIncidentTaskParamsAttributeToQueryByAsanaTaskId          UpdateIncidentTaskParamsAttributeToQueryBy = "asana_task_id"
+	UpdateIncidentTaskParamsAttributeToQueryByFreshserviceTaskId   UpdateIncidentTaskParamsAttributeToQueryBy = "freshservice_task_id"
+	UpdateIncidentTaskParamsAttributeToQueryByFreshserviceTicketId UpdateIncidentTaskParamsAttributeToQueryBy = "freshservice_ticket_id"
+	UpdateIncidentTaskParamsAttributeToQueryByGithubIssueId        UpdateIncidentTaskParamsAttributeToQueryBy = "github_issue_id"
+	UpdateIncidentTaskParamsAttributeToQueryById                   UpdateIncidentTaskParamsAttributeToQueryBy = "id"
+	UpdateIncidentTaskParamsAttributeToQueryByJiraIssueId          UpdateIncidentTaskParamsAttributeToQueryBy = "jira_issue_id"
+	UpdateIncidentTaskParamsAttributeToQueryByLinearIssueId        UpdateIncidentTaskParamsAttributeToQueryBy = "linear_issue_id"
+	UpdateIncidentTaskParamsAttributeToQueryByOpsgenieIncidentId   UpdateIncidentTaskParamsAttributeToQueryBy = "opsgenie_incident_id"
+	UpdateIncidentTaskParamsAttributeToQueryByPagerdutyIncidentId  UpdateIncidentTaskParamsAttributeToQueryBy = "pagerduty_incident_id"
+	UpdateIncidentTaskParamsAttributeToQueryBySequentialId         UpdateIncidentTaskParamsAttributeToQueryBy = "sequential_id"
+	UpdateIncidentTaskParamsAttributeToQueryByShortcutStoryId      UpdateIncidentTaskParamsAttributeToQueryBy = "shortcut_story_id"
+	UpdateIncidentTaskParamsAttributeToQueryByShortcutTaskId       UpdateIncidentTaskParamsAttributeToQueryBy = "shortcut_task_id"
+	UpdateIncidentTaskParamsAttributeToQueryBySlug                 UpdateIncidentTaskParamsAttributeToQueryBy = "slug"
+	UpdateIncidentTaskParamsAttributeToQueryByTrelloCardId         UpdateIncidentTaskParamsAttributeToQueryBy = "trello_card_id"
+	UpdateIncidentTaskParamsAttributeToQueryByVictorOpsIncidentId  UpdateIncidentTaskParamsAttributeToQueryBy = "victor_ops_incident_id"
+	UpdateIncidentTaskParamsAttributeToQueryByZendeskTicketId      UpdateIncidentTaskParamsAttributeToQueryBy = "zendesk_ticket_id"
 )
 
 // Defines values for UpdateIncidentTaskParamsTaskType.
@@ -6282,8 +6298,14 @@ type CreateConfluencePageTaskParams struct {
 	} `json:"ancestor,omitempty"`
 
 	// The page content
-	Content                   *string `json:"content,omitempty"`
-	MarkPostMortemAsPublished *bool   `json:"mark_post_mortem_as_published,omitempty"`
+	Content *string `json:"content,omitempty"`
+
+	// Specify integration id if you have more than one Confluence instance.
+	Integration *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"integration,omitempty"`
+	MarkPostMortemAsPublished *bool `json:"mark_post_mortem_as_published,omitempty"`
 
 	// The Retrospective template to use
 	PostMortemTemplateId *string `json:"post_mortem_template_id,omitempty"`
@@ -6513,6 +6535,26 @@ type CreateGoogleMeetingTaskParamsConferenceSolutionKey string
 // CreateGoogleMeetingTaskParamsTaskType defines model for CreateGoogleMeetingTaskParams.TaskType.
 type CreateGoogleMeetingTaskParamsTaskType string
 
+// CreateIncidentPostmortemTaskParams defines model for create_incident_postmortem_task_params.
+type CreateIncidentPostmortemTaskParams struct {
+	// UUID of the incident that needs a retrospective.
+	IncidentId string                                      `json:"incident_id"`
+	Status     *string                                     `json:"status"`
+	TaskType   *CreateIncidentPostmortemTaskParamsTaskType `json:"task_type,omitempty"`
+
+	// Retrospective template to use.
+	Template *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"template"`
+
+	// The retrospective title
+	Title string `json:"title"`
+}
+
+// CreateIncidentPostmortemTaskParamsTaskType defines model for CreateIncidentPostmortemTaskParams.TaskType.
+type CreateIncidentPostmortemTaskParamsTaskType string
+
 // CreateIncidentTaskParams defines model for create_incident_task_params.
 type CreateIncidentTaskParams struct {
 	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
@@ -6549,6 +6591,12 @@ type CreateJiraIssueTaskParams struct {
 
 	// The due date.
 	DueDate *string `json:"due_date,omitempty"`
+
+	// Specify integration id if you have more than one Jira instance.
+	Integration *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"integration,omitempty"`
 
 	// The issue type id and display name.
 	IssueType struct {
@@ -6601,6 +6649,12 @@ type CreateJiraSubtaskTaskParams struct {
 
 	// The due date.
 	DueDate *string `json:"due_date,omitempty"`
+
+	// Specify integration id if you have more than one Jira instance.
+	Integration *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"integration,omitempty"`
 
 	// The issue labels.
 	Labels *string `json:"labels,omitempty"`
@@ -6658,6 +6712,9 @@ type CreateLinearIssueCommentTaskParamsTaskType string
 
 // CreateLinearIssueTaskParams defines model for create_linear_issue_task_params.
 type CreateLinearIssueTaskParams struct {
+	// The assigned user's email.
+	AssignUserEmail *string `json:"assign_user_email,omitempty"`
+
 	// The issue description.
 	Description *string `json:"description,omitempty"`
 	Labels      *[]struct {
@@ -6699,6 +6756,9 @@ type CreateLinearIssueTaskParamsTaskType string
 
 // CreateLinearSubtaskIssueTaskParams defines model for create_linear_subtask_issue_task_params.
 type CreateLinearSubtaskIssueTaskParams struct {
+	// The assigned user's email.
+	AssignUserEmail *string `json:"assign_user_email,omitempty"`
+
 	// The issue description.
 	Description *string `json:"description,omitempty"`
 
@@ -11666,6 +11726,9 @@ type NewIncident struct {
 
 			// The url to the incident
 			Url *string `json:"url,omitempty"`
+
+			// User ID of the creator of the incident. Default to the user attached to the Api Key
+			UserId *string `json:"user_id"`
 		} `json:"attributes"`
 		Type NewIncidentDataType `json:"type"`
 	} `json:"data"`
@@ -11983,6 +12046,9 @@ type NewPlaybook struct {
 
 			// The Team ID's to attach to the incident
 			GroupIds *[]string `json:"group_ids"`
+
+			// The Incident Type ID's to attach to the incident
+			IncidentTypeIds *[]string `json:"incident_type_ids"`
 
 			// The Service ID's to attach to the incident
 			ServiceIds *[]string `json:"service_ids"`
@@ -12664,6 +12730,9 @@ type Playbook struct {
 	// The Incident Type ID's to attach to the incident
 	IncidentTypeIds *[]string `json:"incident_type_ids"`
 
+	// The Service ID's to attach to the incident
+	ServiceIds *[]string `json:"service_ids"`
+
 	// The Severity ID's to attach to the incident
 	SeverityIds *[]string `json:"severity_ids"`
 
@@ -12698,6 +12767,9 @@ type PlaybookList struct {
 
 			// The Incident Type ID's to attach to the incident
 			IncidentTypeIds *[]string `json:"incident_type_ids"`
+
+			// The Service ID's to attach to the incident
+			ServiceIds *[]string `json:"service_ids"`
 
 			// The Severity ID's to attach to the incident
 			SeverityIds *[]string `json:"severity_ids"`
@@ -12749,6 +12821,9 @@ type PlaybookResponse struct {
 
 			// The Incident Type ID's to attach to the incident
 			IncidentTypeIds *[]string `json:"incident_type_ids"`
+
+			// The Service ID's to attach to the incident
+			ServiceIds *[]string `json:"service_ids"`
 
 			// The Severity ID's to attach to the incident
 			SeverityIds *[]string `json:"severity_ids"`
@@ -16001,6 +16076,9 @@ type UpdateJiraIssueTaskParamsTaskType string
 
 // UpdateLinearIssueTaskParams defines model for update_linear_issue_task_params.
 type UpdateLinearIssueTaskParams struct {
+	// The assigned user's email.
+	AssignUserEmail *string `json:"assign_user_email,omitempty"`
+
 	// The issue description.
 	Description *string `json:"description,omitempty"`
 
@@ -18075,16 +18153,19 @@ type ListIncidentActionItemsParams struct {
 
 // ListIncidentAlertsParams defines parameters for ListIncidentAlerts.
 type ListIncidentAlertsParams struct {
-	Include           *string `form:"include,omitempty" json:"include,omitempty"`
-	FilterSource      *string `form:"filter[source],omitempty" json:"filter[source],omitempty"`
-	FilterStartedAtGt *string `form:"filter[started_at][gt],omitempty" json:"filter[started_at][gt],omitempty"`
-	FilterStartedAtLt *string `form:"filter[started_at][lt],omitempty" json:"filter[started_at][lt],omitempty"`
-	FilterEndedAtGt   *string `form:"filter[ended_at][gt],omitempty" json:"filter[ended_at][gt],omitempty"`
-	FilterEndedAtLt   *string `form:"filter[ended_at][lt],omitempty" json:"filter[ended_at][lt],omitempty"`
-	FilterCreatedAtGt *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
-	FilterCreatedAtLt *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
-	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	Include            *string `form:"include,omitempty" json:"include,omitempty"`
+	FilterSource       *string `form:"filter[source],omitempty" json:"filter[source],omitempty"`
+	FilterServices     *string `form:"filter[services],omitempty" json:"filter[services],omitempty"`
+	FilterEnvironments *string `form:"filter[environments],omitempty" json:"filter[environments],omitempty"`
+	FilterLabels       *string `form:"filter[labels],omitempty" json:"filter[labels],omitempty"`
+	FilterStartedAtGt  *string `form:"filter[started_at][gt],omitempty" json:"filter[started_at][gt],omitempty"`
+	FilterStartedAtLt  *string `form:"filter[started_at][lt],omitempty" json:"filter[started_at][lt],omitempty"`
+	FilterEndedAtGt    *string `form:"filter[ended_at][gt],omitempty" json:"filter[ended_at][gt],omitempty"`
+	FilterEndedAtLt    *string `form:"filter[ended_at][lt],omitempty" json:"filter[ended_at][lt],omitempty"`
+	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
 // ListIncidentCustomFieldSelectionsParams defines parameters for ListIncidentCustomFieldSelections.
@@ -18170,16 +18251,20 @@ type ListIncidentPostMortemsParams struct {
 
 // ListPulsesParams defines parameters for ListPulses.
 type ListPulsesParams struct {
-	Include           *string `form:"include,omitempty" json:"include,omitempty"`
-	FilterSource      *string `form:"filter[source],omitempty" json:"filter[source],omitempty"`
-	FilterStartedAtGt *string `form:"filter[started_at][gt],omitempty" json:"filter[started_at][gt],omitempty"`
-	FilterStartedAtLt *string `form:"filter[started_at][lt],omitempty" json:"filter[started_at][lt],omitempty"`
-	FilterEndedAtGt   *string `form:"filter[ended_at][gt],omitempty" json:"filter[ended_at][gt],omitempty"`
-	FilterEndedAtLt   *string `form:"filter[ended_at][lt],omitempty" json:"filter[ended_at][lt],omitempty"`
-	FilterCreatedAtGt *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
-	FilterCreatedAtLt *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
-	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	Include            *string `form:"include,omitempty" json:"include,omitempty"`
+	FilterSource       *string `form:"filter[source],omitempty" json:"filter[source],omitempty"`
+	FilterServices     *string `form:"filter[services],omitempty" json:"filter[services],omitempty"`
+	FilterEnvironments *string `form:"filter[environments],omitempty" json:"filter[environments],omitempty"`
+	FilterLabels       *string `form:"filter[labels],omitempty" json:"filter[labels],omitempty"`
+	FilterRefs         *string `form:"filter[refs],omitempty" json:"filter[refs],omitempty"`
+	FilterStartedAtGt  *string `form:"filter[started_at][gt],omitempty" json:"filter[started_at][gt],omitempty"`
+	FilterStartedAtLt  *string `form:"filter[started_at][lt],omitempty" json:"filter[started_at][lt],omitempty"`
+	FilterEndedAtGt    *string `form:"filter[ended_at][gt],omitempty" json:"filter[ended_at][gt],omitempty"`
+	FilterEndedAtLt    *string `form:"filter[ended_at][lt],omitempty" json:"filter[ended_at][lt],omitempty"`
+	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
 // ListSecretsParams defines parameters for ListSecrets.
@@ -28321,6 +28406,54 @@ func NewListIncidentAlertsRequest(server string, incidentId string, params *List
 
 	}
 
+	if params.FilterServices != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[services]", runtime.ParamLocationQuery, *params.FilterServices); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterEnvironments != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[environments]", runtime.ParamLocationQuery, *params.FilterEnvironments); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterLabels != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[labels]", runtime.ParamLocationQuery, *params.FilterLabels); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
 	if params.FilterStartedAtGt != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[started_at][gt]", runtime.ParamLocationQuery, *params.FilterStartedAtGt); err != nil {
@@ -30232,6 +30365,70 @@ func NewListPulsesRequest(server string, params *ListPulsesParams) (*http.Reques
 	if params.FilterSource != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[source]", runtime.ParamLocationQuery, *params.FilterSource); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterServices != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[services]", runtime.ParamLocationQuery, *params.FilterServices); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterEnvironments != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[environments]", runtime.ParamLocationQuery, *params.FilterEnvironments); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterLabels != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[labels]", runtime.ParamLocationQuery, *params.FilterLabels); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterRefs != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[refs]", runtime.ParamLocationQuery, *params.FilterRefs); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 			return nil, err

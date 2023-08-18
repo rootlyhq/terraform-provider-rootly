@@ -16,6 +16,7 @@ type Playbook struct {
   SeverityIds []interface{} `jsonapi:"attr,severity_ids,omitempty"`
   EnvironmentIds []interface{} `jsonapi:"attr,environment_ids,omitempty"`
   FunctionalityIds []interface{} `jsonapi:"attr,functionality_ids,omitempty"`
+  ServiceIds []interface{} `jsonapi:"attr,service_ids,omitempty"`
   GroupIds []interface{} `jsonapi:"attr,group_ids,omitempty"`
   IncidentTypeIds []interface{} `jsonapi:"attr,incident_type_ids,omitempty"`
 }

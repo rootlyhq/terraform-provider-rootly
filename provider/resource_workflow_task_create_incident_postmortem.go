@@ -6,9 +6,6 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/stretchr/testify/assert"
-	"testing"
-
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -17,14 +14,14 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
-func resourceWorkflowTaskCreateJiraSubtask() *schema.Resource {
+func resourceWorkflowTaskCreateIncidentPostmortem() *schema.Resource {
 	return &schema.Resource{
-		Description: "Manages workflow create_jira_subtask task.",
+		Description: "Manages workflow create_incident_postmortem task.",
 
-		CreateContext: resourceWorkflowTaskCreateJiraSubtaskCreate,
-		ReadContext:   resourceWorkflowTaskCreateJiraSubtaskRead,
-		UpdateContext: resourceWorkflowTaskCreateJiraSubtaskUpdate,
-		DeleteContext: resourceWorkflowTaskCreateJiraSubtaskDelete,
+		CreateContext: resourceWorkflowTaskCreateIncidentPostmortemCreate,
+		ReadContext:   resourceWorkflowTaskCreateIncidentPostmortemRead,
+		UpdateContext: resourceWorkflowTaskCreateIncidentPostmortemUpdate,
+		DeleteContext: resourceWorkflowTaskCreateIncidentPostmortemDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -71,92 +68,30 @@ func resourceWorkflowTaskCreateJiraSubtask() *schema.Resource {
 						"task_type": &schema.Schema{
 							Type:     schema.TypeString,
 							Optional: true,
-							Default:  "create_jira_subtask",
+							Default:  "create_incident_postmortem",
 							ValidateFunc: validation.StringInSlice([]string{
-								"create_jira_subtask",
+								"create_incident_postmortem",
 							}, false),
 						},
-						"integration": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. Specify integration id if you have more than one Jira instance.",
-							Type:        schema.TypeMap,
-							Optional:    true,
-						},
-						"project_key": &schema.Schema{
-							Description: "The project key.",
-							Type:        schema.TypeString,
-							Required:    true,
-						},
-						"parent_issue_id": &schema.Schema{
-							Description: "The parent issue.",
+						"incident_id": &schema.Schema{
+							Description: "UUID of the incident that needs a retrospective.",
 							Type:        schema.TypeString,
 							Required:    true,
 						},
 						"title": &schema.Schema{
-							Description: "The issue title.",
+							Description: "The retrospective title",
 							Type:        schema.TypeString,
 							Required:    true,
-						},
-						"description": &schema.Schema{
-							Description: "The issue description.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"subtask_issue_type": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. The issue type id and display name.",
-							Type:        schema.TypeMap,
-							Required:    true,
-						},
-						"labels": &schema.Schema{
-							Description: "The issue labels.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"due_date": &schema.Schema{
-							Description: "The due date.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"assign_user_email": &schema.Schema{
-							Description: "The assigned user's email.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"reporter_user_email": &schema.Schema{
-							Description: "The reporter user's email.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"priority": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. The priority id and display name.",
-							Type:        schema.TypeMap,
-							Optional:    true,
 						},
 						"status": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. The status id and display name.",
+							Description: "",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"template": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. Retrospective template to use.",
 							Type:        schema.TypeMap,
 							Optional:    true,
-						},
-						"custom_fields_mapping": &schema.Schema{
-							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-								t := &testing.T{}
-								assert := assert.New(t)
-								return assert.JSONEq(old, new)
-							},
-							Default: "{}",
-						},
-						"update_payload": &schema.Schema{
-							Description: "Update payload. Can contain liquid markup and need to be valid JSON.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-								t := &testing.T{}
-								assert := assert.New(t)
-								return assert.JSONEq(old, new)
-							},
-							Default: "{}",
 						},
 					},
 				},
@@ -165,7 +100,7 @@ func resourceWorkflowTaskCreateJiraSubtask() *schema.Resource {
 	}
 }
 
-func resourceWorkflowTaskCreateJiraSubtaskCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateIncidentPostmortemCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
@@ -194,10 +129,10 @@ func resourceWorkflowTaskCreateJiraSubtaskCreate(ctx context.Context, d *schema.
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created an workflow task resource: %v (%s)", workflowId, d.Id()))
 
-	return resourceWorkflowTaskCreateJiraSubtaskRead(ctx, d, meta)
+	return resourceWorkflowTaskCreateIncidentPostmortemRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskCreateJiraSubtaskRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateIncidentPostmortemRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
@@ -206,7 +141,7 @@ func resourceWorkflowTaskCreateJiraSubtaskRead(ctx context.Context, d *schema.Re
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateJiraSubtask (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateIncidentPostmortem (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
@@ -226,7 +161,7 @@ func resourceWorkflowTaskCreateJiraSubtaskRead(ctx context.Context, d *schema.Re
 	return nil
 }
 
-func resourceWorkflowTaskCreateJiraSubtaskUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateIncidentPostmortemUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
@@ -252,10 +187,10 @@ func resourceWorkflowTaskCreateJiraSubtaskUpdate(ctx context.Context, d *schema.
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
 
-	return resourceWorkflowTaskCreateJiraSubtaskRead(ctx, d, meta)
+	return resourceWorkflowTaskCreateIncidentPostmortemRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskCreateJiraSubtaskDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateIncidentPostmortemDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
@@ -264,7 +199,7 @@ func resourceWorkflowTaskCreateJiraSubtaskDelete(ctx context.Context, d *schema.
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateJiraSubtask (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateIncidentPostmortem (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
