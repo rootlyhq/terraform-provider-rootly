@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.2] -- 2023-08-24
+
+- Added `custom_fields_mapping` attribute to `task_update_action_item` resource.
+
 ## [1.1.1] -- 2023-08-23
 
 - Added `priority` attribute to `task_update_action_item` resource.

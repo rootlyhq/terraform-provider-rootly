@@ -15099,6 +15099,9 @@ type UpdateActionItemTaskParams struct {
 	// Attribute of the action item to match against
 	AttributeToQueryBy UpdateActionItemTaskParamsAttributeToQueryBy `json:"attribute_to_query_by"`
 
+	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
+	CustomFieldsMapping *string `json:"custom_fields_mapping"`
+
 	// The action item description.
 	Description            *string   `json:"description,omitempty"`
 	GroupIds               *[]string `json:"group_ids"`
