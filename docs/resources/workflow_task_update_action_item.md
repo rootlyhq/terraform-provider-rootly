@@ -45,6 +45,7 @@ Optional:
 - `description` (String) The action item description.
 - `group_ids` (List of String)
 - `post_to_incident_timeline` (Boolean)
+- `priority` (String) The action item priority.. Value must be one of `high`, `medium`, `low`.
 - `status` (String) The action item status.. Value must be one of `open`, `in_progress`, `cancelled`, `done`.
 - `summary` (String) Brief description of the action item
 - `task_type` (String)

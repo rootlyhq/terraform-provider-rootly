@@ -89,6 +89,7 @@ Optional:
 - `slack_user_groups` (Block List) (see [below for nested schema](#nestedblock--task_params--slack_user_groups))
 - `slack_users` (Block List) (see [below for nested schema](#nestedblock--task_params--slack_users))
 - `task_type` (String)
+- `update_parent_message` (Boolean)
 
 <a id="nestedblock--task_params--channels"></a>
 ### Nested Schema for `task_params.channels`

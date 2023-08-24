@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.1] -- 2023-08-23
+
+- Added `priority` attribute to `task_update_action_item` resource.
+- Added `update_parent_message` attribute to `task_send_slack_message` resource.
+
 ## [1.1.0] -- 2023-08-17
 
 - Added `service_ids` to `playbook` resource.

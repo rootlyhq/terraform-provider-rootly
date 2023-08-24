@@ -35,7 +35,7 @@ Manages workflow add_action_item task.
 
 Required:
 
-- `priority` (String) The action item priority.. Value must be one of `low`, `medium`, `high`.
+- `priority` (String) The action item priority.. Value must be one of `high`, `medium`, `low`.
 - `status` (String) The action item status.. Value must be one of `open`, `in_progress`, `cancelled`, `done`.
 - `summary` (String) The action item summary.
 

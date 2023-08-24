@@ -89,13 +89,13 @@ func resourceWorkflowTaskAddActionItem() *schema.Resource {
 							Optional:    true,
 						},
 						"priority": &schema.Schema{
-							Description: "The action item priority.. Value must be one of `low`, `medium`, `high`.",
+							Description: "The action item priority.. Value must be one of `high`, `medium`, `low`.",
 							Type:        schema.TypeString,
 							Required:    true,
 							ValidateFunc: validation.StringInSlice([]string{
-								"low",
-								"medium",
 								"high",
+								"medium",
+								"low",
 							}, false),
 						},
 						"kind": &schema.Schema{

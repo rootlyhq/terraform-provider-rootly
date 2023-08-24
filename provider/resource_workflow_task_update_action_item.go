@@ -125,6 +125,17 @@ func resourceWorkflowTaskUpdateActionItem() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
+						"priority": &schema.Schema{
+							Description: "The action item priority.. Value must be one of `high`, `medium`, `low`.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     nil,
+							ValidateFunc: validation.StringInSlice([]string{
+								"high",
+								"medium",
+								"low",
+							}, false),
+						},
 						"status": &schema.Schema{
 							Description: "The action item status.. Value must be one of `open`, `in_progress`, `cancelled`, `done`.",
 							Type:        schema.TypeString,

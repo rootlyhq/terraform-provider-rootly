@@ -41,7 +41,7 @@ resource "rootly_workflow_task_add_action_item" "foo" {
 	task_params {
 		summary = "test"
 status = "open"
-priority = "low"
+priority = "high"
 	}
 }
 `
@@ -59,7 +59,7 @@ resource "rootly_workflow_task_add_action_item" "foo" {
 	task_params {
 		summary = "test"
 status = "open"
-priority = "low"
+priority = "high"
 	}
 }
 `

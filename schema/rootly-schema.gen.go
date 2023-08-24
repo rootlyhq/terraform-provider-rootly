@@ -3898,6 +3898,13 @@ const (
 	UpdateActionItemTaskParamsAttributeToQueryByZendeskTicketId      UpdateActionItemTaskParamsAttributeToQueryBy = "zendesk_ticket_id"
 )
 
+// Defines values for UpdateActionItemTaskParamsPriority.
+const (
+	UpdateActionItemTaskParamsPriorityHigh   UpdateActionItemTaskParamsPriority = "high"
+	UpdateActionItemTaskParamsPriorityLow    UpdateActionItemTaskParamsPriority = "low"
+	UpdateActionItemTaskParamsPriorityMedium UpdateActionItemTaskParamsPriority = "medium"
+)
+
 // Defines values for UpdateActionItemTaskParamsStatus.
 const (
 	UpdateActionItemTaskParamsStatusCancelled  UpdateActionItemTaskParamsStatus = "cancelled"
@@ -4460,10 +4467,10 @@ const (
 
 // Defines values for UpdateSeverityDataAttributesSeverity.
 const (
-	Critical UpdateSeverityDataAttributesSeverity = "critical"
-	High     UpdateSeverityDataAttributesSeverity = "high"
-	Low      UpdateSeverityDataAttributesSeverity = "low"
-	Medium   UpdateSeverityDataAttributesSeverity = "medium"
+	UpdateSeverityDataAttributesSeverityCritical UpdateSeverityDataAttributesSeverity = "critical"
+	UpdateSeverityDataAttributesSeverityHigh     UpdateSeverityDataAttributesSeverity = "high"
+	UpdateSeverityDataAttributesSeverityLow      UpdateSeverityDataAttributesSeverity = "low"
+	UpdateSeverityDataAttributesSeverityMedium   UpdateSeverityDataAttributesSeverity = "medium"
 )
 
 // Defines values for UpdateSeverityDataType.
@@ -13903,7 +13910,8 @@ type SendSlackBlocksTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"slack_users,omitempty"`
-	TaskType *SendSlackBlocksTaskParamsTaskType `json:"task_type,omitempty"`
+	TaskType            *SendSlackBlocksTaskParamsTaskType `json:"task_type,omitempty"`
+	UpdateParentMessage *bool                              `json:"update_parent_message,omitempty"`
 }
 
 // SendSlackBlocksTaskParamsTaskType defines model for SendSlackBlocksTaskParams.TaskType.
@@ -13939,7 +13947,8 @@ type SendSlackMessageTaskParams struct {
 	TaskType *SendSlackMessageTaskParamsTaskType `json:"task_type,omitempty"`
 
 	// The message text.
-	Text string `json:"text"`
+	Text                string `json:"text"`
+	UpdateParentMessage *bool  `json:"update_parent_message,omitempty"`
 }
 
 // SendSlackMessageTaskParamsActionables defines model for SendSlackMessageTaskParams.Actionables.
@@ -15095,6 +15104,9 @@ type UpdateActionItemTaskParams struct {
 	GroupIds               *[]string `json:"group_ids"`
 	PostToIncidentTimeline *bool     `json:"post_to_incident_timeline,omitempty"`
 
+	// The action item priority.
+	Priority *UpdateActionItemTaskParamsPriority `json:"priority,omitempty"`
+
 	// Value that attribute_to_query_by to uses to match against
 	QueryValue string `json:"query_value"`
 
@@ -15108,6 +15120,9 @@ type UpdateActionItemTaskParams struct {
 
 // Attribute of the action item to match against
 type UpdateActionItemTaskParamsAttributeToQueryBy string
+
+// The action item priority.
+type UpdateActionItemTaskParamsPriority string
 
 // The action item status.
 type UpdateActionItemTaskParamsStatus string
