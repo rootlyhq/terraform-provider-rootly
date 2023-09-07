@@ -4364,6 +4364,7 @@ const (
 // Defines values for UpdateOpsgenieIncidentTaskParamsStatus.
 const (
 	UpdateOpsgenieIncidentTaskParamsStatusAuto    UpdateOpsgenieIncidentTaskParamsStatus = "auto"
+	UpdateOpsgenieIncidentTaskParamsStatusClose   UpdateOpsgenieIncidentTaskParamsStatus = "close"
 	UpdateOpsgenieIncidentTaskParamsStatusOpen    UpdateOpsgenieIncidentTaskParamsStatus = "open"
 	UpdateOpsgenieIncidentTaskParamsStatusResolve UpdateOpsgenieIncidentTaskParamsStatus = "resolve"
 )
@@ -8530,6 +8531,15 @@ type Incident struct {
 				// Emails to attach to the team
 				NotifyEmails *[]string `json:"notify_emails"`
 
+				// The Opsgenie group id associated to this team
+				OpsgenieId *string `json:"opsgenie_id"`
+
+				// The PagerDuty group id associated to this team
+				PagerdutyId *string `json:"pagerduty_id"`
+
+				// The PagerTree group id associated to this team
+				PagertreeId *string `json:"pagertree_id"`
+
 				// Position of the team
 				Position *int `json:"position"`
 
@@ -8554,6 +8564,9 @@ type Incident struct {
 
 				// Date of last update
 				UpdatedAt string `json:"updated_at"`
+
+				// The VictorOps group id associated to this team
+				VictorOpsId *string `json:"victor_ops_id"`
 			} `json:"attributes"`
 
 			// Unique ID of the team
@@ -9596,6 +9609,15 @@ type IncidentList struct {
 						// Emails to attach to the team
 						NotifyEmails *[]string `json:"notify_emails"`
 
+						// The Opsgenie group id associated to this team
+						OpsgenieId *string `json:"opsgenie_id"`
+
+						// The PagerDuty group id associated to this team
+						PagerdutyId *string `json:"pagerduty_id"`
+
+						// The PagerTree group id associated to this team
+						PagertreeId *string `json:"pagertree_id"`
+
 						// Position of the team
 						Position *int `json:"position"`
 
@@ -9620,6 +9642,9 @@ type IncidentList struct {
 
 						// Date of last update
 						UpdatedAt string `json:"updated_at"`
+
+						// The VictorOps group id associated to this team
+						VictorOpsId *string `json:"victor_ops_id"`
 					} `json:"attributes"`
 
 					// Unique ID of the team
@@ -10312,6 +10337,15 @@ type IncidentResponse struct {
 						// Emails to attach to the team
 						NotifyEmails *[]string `json:"notify_emails"`
 
+						// The Opsgenie group id associated to this team
+						OpsgenieId *string `json:"opsgenie_id"`
+
+						// The PagerDuty group id associated to this team
+						PagerdutyId *string `json:"pagerduty_id"`
+
+						// The PagerTree group id associated to this team
+						PagertreeId *string `json:"pagertree_id"`
+
 						// Position of the team
 						Position *int `json:"position"`
 
@@ -10336,6 +10370,9 @@ type IncidentResponse struct {
 
 						// Date of last update
 						UpdatedAt string `json:"updated_at"`
+
+						// The VictorOps group id associated to this team
+						VictorOpsId *string `json:"victor_ops_id"`
 					} `json:"attributes"`
 
 					// Unique ID of the team
@@ -12434,6 +12471,15 @@ type NewTeam struct {
 			// Emails to attach to the team
 			NotifyEmails *[]string `json:"notify_emails"`
 
+			// The Opsgenie group id associated to this team
+			OpsgenieId *string `json:"opsgenie_id"`
+
+			// The PagerDuty group id associated to this team
+			PagerdutyId *string `json:"pagerduty_id"`
+
+			// The PagerTree group id associated to this team
+			PagertreeId *string `json:"pagertree_id"`
+
 			// Position of the team
 			Position *int `json:"position"`
 
@@ -12454,6 +12500,9 @@ type NewTeam struct {
 				// Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels"`
+
+			// The VictorOps group id associated to this team
+			VictorOpsId *string `json:"victor_ops_id"`
 		} `json:"attributes"`
 		Type NewTeamDataType `json:"type"`
 	} `json:"data"`
@@ -14916,6 +14965,15 @@ type Team struct {
 	// Emails to attach to the team
 	NotifyEmails *[]string `json:"notify_emails"`
 
+	// The Opsgenie group id associated to this team
+	OpsgenieId *string `json:"opsgenie_id"`
+
+	// The PagerDuty group id associated to this team
+	PagerdutyId *string `json:"pagerduty_id"`
+
+	// The PagerTree group id associated to this team
+	PagertreeId *string `json:"pagertree_id"`
+
 	// Position of the team
 	Position *int `json:"position"`
 
@@ -14940,6 +14998,9 @@ type Team struct {
 
 	// Date of last update
 	UpdatedAt string `json:"updated_at"`
+
+	// The VictorOps group id associated to this team
+	VictorOpsId *string `json:"victor_ops_id"`
 }
 
 // TeamList defines model for team_list.
@@ -14959,6 +15020,15 @@ type TeamList struct {
 
 			// Emails to attach to the team
 			NotifyEmails *[]string `json:"notify_emails"`
+
+			// The Opsgenie group id associated to this team
+			OpsgenieId *string `json:"opsgenie_id"`
+
+			// The PagerDuty group id associated to this team
+			PagerdutyId *string `json:"pagerduty_id"`
+
+			// The PagerTree group id associated to this team
+			PagertreeId *string `json:"pagertree_id"`
 
 			// Position of the team
 			Position *int `json:"position"`
@@ -14984,6 +15054,9 @@ type TeamList struct {
 
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`
+
+			// The VictorOps group id associated to this team
+			VictorOpsId *string `json:"victor_ops_id"`
 		} `json:"attributes"`
 
 		// Unique ID of the team
@@ -15020,6 +15093,15 @@ type TeamResponse struct {
 			// Emails to attach to the team
 			NotifyEmails *[]string `json:"notify_emails"`
 
+			// The Opsgenie group id associated to this team
+			OpsgenieId *string `json:"opsgenie_id"`
+
+			// The PagerDuty group id associated to this team
+			PagerdutyId *string `json:"pagerduty_id"`
+
+			// The PagerTree group id associated to this team
+			PagertreeId *string `json:"pagertree_id"`
+
 			// Position of the team
 			Position *int `json:"position"`
 
@@ -15044,6 +15126,9 @@ type TeamResponse struct {
 
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`
+
+			// The VictorOps group id associated to this team
+			VictorOpsId *string `json:"victor_ops_id"`
 		} `json:"attributes"`
 
 		// Unique ID of the team
@@ -16746,6 +16831,15 @@ type UpdateTeam struct {
 			// Emails to attach to the team
 			NotifyEmails *[]string `json:"notify_emails"`
 
+			// The Opsgenie group id associated to this team
+			OpsgenieId *string `json:"opsgenie_id"`
+
+			// The PagerDuty group id associated to this team
+			PagerdutyId *string `json:"pagerduty_id"`
+
+			// The PagerTree group id associated to this team
+			PagertreeId *string `json:"pagertree_id"`
+
 			// Position of the team
 			Position *int `json:"position"`
 
@@ -16766,6 +16860,9 @@ type UpdateTeam struct {
 				// Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels"`
+
+			// The VictorOps group id associated to this team
+			VictorOpsId *string `json:"victor_ops_id"`
 		} `json:"attributes"`
 		Type UpdateTeamDataType `json:"type"`
 	} `json:"data"`

@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.3] -- 2023-09-06
+
+- Added `pagerduty_id`, `opsgenie_id`, `victor_ops_id` & `pagertree_id` attributes to `rootly_team` resource.
+- Added `close` status to `task_update_opsgenie_incident` resource.
+
 ## [1.1.2] -- 2023-08-24
 
 - Added `custom_fields_mapping` attribute to `task_update_action_item` resource.

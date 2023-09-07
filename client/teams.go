@@ -16,6 +16,10 @@ type Team struct {
   NotifyEmails []interface{} `jsonapi:"attr,notify_emails,omitempty"`
   Color string `jsonapi:"attr,color,omitempty"`
   Position int `jsonapi:"attr,position,omitempty"`
+  PagerdutyId string `jsonapi:"attr,pagerduty_id,omitempty"`
+  OpsgenieId string `jsonapi:"attr,opsgenie_id,omitempty"`
+  VictorOpsId string `jsonapi:"attr,victor_ops_id,omitempty"`
+  PagertreeId string `jsonapi:"attr,pagertree_id,omitempty"`
   SlackChannels []interface{} `jsonapi:"attr,slack_channels,omitempty"`
   SlackAliases []interface{} `jsonapi:"attr,slack_aliases,omitempty"`
 }
