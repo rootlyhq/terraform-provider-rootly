@@ -89,13 +89,14 @@ func resourceWorkflowTaskUpdateOpsgenieIncident() *schema.Resource {
 							Optional:    true,
 						},
 						"status": &schema.Schema{
-							Description: "Value must be one of `resolve`, `open`, `auto`.",
+							Description: "Value must be one of `resolve`, `open`, `close`, `auto`.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Default:     nil,
 							ValidateFunc: validation.StringInSlice([]string{
 								"resolve",
 								"open",
+								"close",
 								"auto",
 							}, false),
 						},

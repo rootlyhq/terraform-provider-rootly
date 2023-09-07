@@ -77,6 +77,42 @@ func resourceTeam() *schema.Resource {
 				Description: "Position of the team",
 			},
 
+			"pagerduty_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The PagerDuty group id associated to this team",
+			},
+
+			"opsgenie_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The Opsgenie group id associated to this team",
+			},
+
+			"victor_ops_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The VictorOps group id associated to this team",
+			},
+
+			"pagertree_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The PagerTree group id associated to this team",
+			},
+
 			"slack_channels": &schema.Schema{
 				Type:        schema.TypeList,
 				Computed:    true,
@@ -145,6 +181,18 @@ func resourceTeamCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	if value, ok := d.GetOkExists("position"); ok {
 		s.Position = value.(int)
 	}
+	if value, ok := d.GetOkExists("pagerduty_id"); ok {
+		s.PagerdutyId = value.(string)
+	}
+	if value, ok := d.GetOkExists("opsgenie_id"); ok {
+		s.OpsgenieId = value.(string)
+	}
+	if value, ok := d.GetOkExists("victor_ops_id"); ok {
+		s.VictorOpsId = value.(string)
+	}
+	if value, ok := d.GetOkExists("pagertree_id"); ok {
+		s.PagertreeId = value.(string)
+	}
 	if value, ok := d.GetOkExists("slack_channels"); ok {
 		s.SlackChannels = value.([]interface{})
 	}
@@ -186,6 +234,10 @@ func resourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	d.Set("notify_emails", item.NotifyEmails)
 	d.Set("color", item.Color)
 	d.Set("position", item.Position)
+	d.Set("pagerduty_id", item.PagerdutyId)
+	d.Set("opsgenie_id", item.OpsgenieId)
+	d.Set("victor_ops_id", item.VictorOpsId)
+	d.Set("pagertree_id", item.PagertreeId)
 	d.Set("slack_channels", item.SlackChannels)
 	d.Set("slack_aliases", item.SlackAliases)
 
@@ -215,6 +267,18 @@ func resourceTeamUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 	}
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)
+	}
+	if d.HasChange("pagerduty_id") {
+		s.PagerdutyId = d.Get("pagerduty_id").(string)
+	}
+	if d.HasChange("opsgenie_id") {
+		s.OpsgenieId = d.Get("opsgenie_id").(string)
+	}
+	if d.HasChange("victor_ops_id") {
+		s.VictorOpsId = d.Get("victor_ops_id").(string)
+	}
+	if d.HasChange("pagertree_id") {
+		s.PagertreeId = d.Get("pagertree_id").(string)
 	}
 	if d.HasChange("slack_channels") {
 		s.SlackChannels = d.Get("slack_channels").([]interface{})

@@ -23,10 +23,14 @@ description: |-
 - `color` (String)
 - `description` (String) The description of the team
 - `notify_emails` (List of String) Emails to attach to the team
+- `opsgenie_id` (String) The Opsgenie group id associated to this team
+- `pagerduty_id` (String) The PagerDuty group id associated to this team
+- `pagertree_id` (String) The PagerTree group id associated to this team
 - `position` (Number) Position of the team
 - `slack_aliases` (Block List) Slack Aliases associated with this service (see [below for nested schema](#nestedblock--slack_aliases))
 - `slack_channels` (Block List) Slack Channels associated with this service (see [below for nested schema](#nestedblock--slack_channels))
 - `slug` (String)
+- `victor_ops_id` (String) The VictorOps group id associated to this team
 
 ### Read-Only
 

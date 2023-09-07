@@ -42,5 +42,5 @@ Optional:
 - `description` (String) Description field of the alert that is generally used to provide a detailed information about the alert
 - `message` (String) Message of the alert
 - `priority` (String) Value must be one of `P1`, `P2`, `P3`, `P4`, `auto`.
-- `status` (String) Value must be one of `resolve`, `open`, `auto`.
+- `status` (String) Value must be one of `resolve`, `open`, `close`, `auto`.
 - `task_type` (String)
