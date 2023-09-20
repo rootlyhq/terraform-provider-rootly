@@ -76,7 +76,7 @@ resource "rootly_severity" "sev2" {
 
 ### Optional
 
-- `color` (String)
+- `color` (String) The hex color of the severity
 - `description` (String) The description of the severity
 - `notify_emails` (List of String) Emails to attach to the severity
 - `position` (Number) Position of the severity

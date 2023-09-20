@@ -76,7 +76,7 @@ resource "rootly_environment" "production" {
 
 ### Optional
 
-- `color` (String)
+- `color` (String) The hex color of the environment
 - `description` (String) The description of the environment
 - `notify_emails` (List of String) Emails attached to the environment
 - `position` (Number) Position of the environment

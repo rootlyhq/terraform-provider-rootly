@@ -1031,10 +1031,28 @@ const (
 	CustomFieldResponseDataTypeCustomFields CustomFieldResponseDataType = "custom_fields"
 )
 
+// Defines values for DashboardColor.
+const (
+	DashboardColorHashD7F5E1 DashboardColor = "#D7F5E1"
+	DashboardColorHashE9E2FF DashboardColor = "#E9E2FF"
+	DashboardColorHashFAE6E8 DashboardColor = "#FAE6E8"
+	DashboardColorHashFAEEE6 DashboardColor = "#FAEEE6"
+	DashboardColorHashFCF2CF DashboardColor = "#FCF2CF"
+)
+
 // Defines values for DashboardOwner.
 const (
 	DashboardOwnerTeam DashboardOwner = "team"
 	DashboardOwnerUser DashboardOwner = "user"
+)
+
+// Defines values for DashboardListDataAttributesColor.
+const (
+	DashboardListDataAttributesColorHashD7F5E1 DashboardListDataAttributesColor = "#D7F5E1"
+	DashboardListDataAttributesColorHashE9E2FF DashboardListDataAttributesColor = "#E9E2FF"
+	DashboardListDataAttributesColorHashFAE6E8 DashboardListDataAttributesColor = "#FAE6E8"
+	DashboardListDataAttributesColorHashFAEEE6 DashboardListDataAttributesColor = "#FAEEE6"
+	DashboardListDataAttributesColorHashFCF2CF DashboardListDataAttributesColor = "#FCF2CF"
 )
 
 // Defines values for DashboardListDataAttributesOwner.
@@ -1046,6 +1064,15 @@ const (
 // Defines values for DashboardListDataType.
 const (
 	DashboardListDataTypeDashboards DashboardListDataType = "dashboards"
+)
+
+// Defines values for DashboardResponseDataAttributesColor.
+const (
+	DashboardResponseDataAttributesColorHashD7F5E1 DashboardResponseDataAttributesColor = "#D7F5E1"
+	DashboardResponseDataAttributesColorHashE9E2FF DashboardResponseDataAttributesColor = "#E9E2FF"
+	DashboardResponseDataAttributesColorHashFAE6E8 DashboardResponseDataAttributesColor = "#FAE6E8"
+	DashboardResponseDataAttributesColorHashFAEEE6 DashboardResponseDataAttributesColor = "#FAEEE6"
+	DashboardResponseDataAttributesColorHashFCF2CF DashboardResponseDataAttributesColor = "#FCF2CF"
 )
 
 // Defines values for DashboardResponseDataAttributesOwner.
@@ -2259,6 +2286,15 @@ const (
 // Defines values for NewCustomFieldOptionDataType.
 const (
 	NewCustomFieldOptionDataTypeCustomFieldOptions NewCustomFieldOptionDataType = "custom_field_options"
+)
+
+// Defines values for NewDashboardDataAttributesColor.
+const (
+	NewDashboardDataAttributesColorHashD7F5E1 NewDashboardDataAttributesColor = "#D7F5E1"
+	NewDashboardDataAttributesColorHashE9E2FF NewDashboardDataAttributesColor = "#E9E2FF"
+	NewDashboardDataAttributesColorHashFAE6E8 NewDashboardDataAttributesColor = "#FAE6E8"
+	NewDashboardDataAttributesColorHashFAEEE6 NewDashboardDataAttributesColor = "#FAEEE6"
+	NewDashboardDataAttributesColorHashFCF2CF NewDashboardDataAttributesColor = "#FCF2CF"
 )
 
 // Defines values for NewDashboardDataAttributesOwner.
@@ -3972,6 +4008,15 @@ const (
 	UpdateCustomFieldOptionDataTypeCustomFieldOptions UpdateCustomFieldOptionDataType = "custom_field_options"
 )
 
+// Defines values for UpdateDashboardDataAttributesColor.
+const (
+	HashD7F5E1 UpdateDashboardDataAttributesColor = "#D7F5E1"
+	HashE9E2FF UpdateDashboardDataAttributesColor = "#E9E2FF"
+	HashFAE6E8 UpdateDashboardDataAttributesColor = "#FAE6E8"
+	HashFAEEE6 UpdateDashboardDataAttributesColor = "#FAEEE6"
+	HashFCF2CF UpdateDashboardDataAttributesColor = "#FCF2CF"
+)
+
 // Defines values for UpdateDashboardDataAttributesOwner.
 const (
 	UpdateDashboardDataAttributesOwnerTeam UpdateDashboardDataAttributesOwner = "team"
@@ -5392,6 +5437,7 @@ type Alert struct {
 
 	// Environments attached to the alert
 	Environments *[]struct {
+		// The hex color of the environment
 		Color *string `json:"color"`
 
 		// Date of creation
@@ -5451,7 +5497,9 @@ type Alert struct {
 	Services *[]struct {
 		// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
 		BackstageId *string `json:"backstage_id"`
-		Color       *string `json:"color"`
+
+		// The hex color of the service
+		Color *string `json:"color"`
 
 		// Date of creation
 		CreatedAt string `json:"created_at"`
@@ -5554,6 +5602,7 @@ type AlertList struct {
 
 			// Environments attached to the alert
 			Environments *[]struct {
+				// The hex color of the environment
 				Color *string `json:"color"`
 
 				// Date of creation
@@ -5613,7 +5662,9 @@ type AlertList struct {
 			Services *[]struct {
 				// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
 				BackstageId *string `json:"backstage_id"`
-				Color       *string `json:"color"`
+
+				// The hex color of the service
+				Color *string `json:"color"`
 
 				// Date of creation
 				CreatedAt string `json:"created_at"`
@@ -5735,6 +5786,7 @@ type AlertResponse struct {
 
 			// Environments attached to the alert
 			Environments *[]struct {
+				// The hex color of the environment
 				Color *string `json:"color"`
 
 				// Date of creation
@@ -5794,7 +5846,9 @@ type AlertResponse struct {
 			Services *[]struct {
 				// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
 				BackstageId *string `json:"backstage_id"`
-				Color       *string `json:"color"`
+
+				// The hex color of the service
+				Color *string `json:"color"`
 
 				// Date of creation
 				CreatedAt string `json:"created_at"`
@@ -7397,8 +7451,17 @@ type Dashboard struct {
 	// Whether the dashboard auto-updates the UI with new data.
 	AutoRefresh *bool `json:"auto_refresh,omitempty"`
 
+	// The hex color of the dashboard
+	Color *DashboardColor `json:"color"`
+
 	// Date of creation
 	CreatedAt *string `json:"created_at,omitempty"`
+
+	// The description of the dashboard
+	Description *string `json:"description"`
+
+	// The emoji icon of the dashboard
+	Icon *string `json:"icon,omitempty"`
 
 	// The name of the dashboard
 	Name string `json:"name"`
@@ -7425,6 +7488,9 @@ type Dashboard struct {
 	UserId *string `json:"user_id"`
 }
 
+// The hex color of the dashboard
+type DashboardColor string
+
 // The owner type of the dashboard
 type DashboardOwner string
 
@@ -7435,8 +7501,17 @@ type DashboardList struct {
 			// Whether the dashboard auto-updates the UI with new data.
 			AutoRefresh *bool `json:"auto_refresh,omitempty"`
 
+			// The hex color of the dashboard
+			Color *DashboardListDataAttributesColor `json:"color"`
+
 			// Date of creation
 			CreatedAt *string `json:"created_at,omitempty"`
+
+			// The description of the dashboard
+			Description *string `json:"description"`
+
+			// The emoji icon of the dashboard
+			Icon *string `json:"icon,omitempty"`
 
 			// The name of the dashboard
 			Name string `json:"name"`
@@ -7476,6 +7551,9 @@ type DashboardList struct {
 	} `json:"links"`
 }
 
+// The hex color of the dashboard
+type DashboardListDataAttributesColor string
+
 // The owner type of the dashboard
 type DashboardListDataAttributesOwner string
 
@@ -7489,8 +7567,17 @@ type DashboardResponse struct {
 			// Whether the dashboard auto-updates the UI with new data.
 			AutoRefresh *bool `json:"auto_refresh,omitempty"`
 
+			// The hex color of the dashboard
+			Color *DashboardResponseDataAttributesColor `json:"color"`
+
 			// Date of creation
 			CreatedAt *string `json:"created_at,omitempty"`
+
+			// The description of the dashboard
+			Description *string `json:"description"`
+
+			// The emoji icon of the dashboard
+			Icon *string `json:"icon,omitempty"`
 
 			// The name of the dashboard
 			Name string `json:"name"`
@@ -7523,6 +7610,9 @@ type DashboardResponse struct {
 	} `json:"data"`
 }
 
+// The hex color of the dashboard
+type DashboardResponseDataAttributesColor string
+
 // The owner type of the dashboard
 type DashboardResponseDataAttributesOwner string
 
@@ -7531,6 +7621,7 @@ type DashboardResponseDataType string
 
 // Environment defines model for environment.
 type Environment struct {
+	// The hex color of the environment
 	Color *string `json:"color"`
 
 	// Date of creation
@@ -7577,6 +7668,7 @@ type Environment struct {
 type EnvironmentList struct {
 	Data []struct {
 		Attributes struct {
+			// The hex color of the environment
 			Color *string `json:"color"`
 
 			// Date of creation
@@ -7639,6 +7731,7 @@ type EnvironmentListDataType string
 type EnvironmentResponse struct {
 	Data struct {
 		Attributes struct {
+			// The hex color of the environment
 			Color *string `json:"color"`
 
 			// Date of creation
@@ -8026,6 +8119,7 @@ type FormFieldResponseDataType string
 
 // Functionality defines model for functionality.
 type Functionality struct {
+	// The hex color of the functionality
 	Color *string `json:"color"`
 
 	// Date of creation
@@ -8093,6 +8187,7 @@ type FunctionalityStatus string
 type FunctionalityList struct {
 	Data []struct {
 		Attributes struct {
+			// The hex color of the functionality
 			Color *string `json:"color"`
 
 			// Date of creation
@@ -8176,6 +8271,7 @@ type FunctionalityListDataType string
 type FunctionalityResponse struct {
 	Data struct {
 		Attributes struct {
+			// The hex color of the functionality
 			Color *string `json:"color"`
 
 			// Date of creation
@@ -8395,6 +8491,7 @@ type Incident struct {
 	Environments *[]struct {
 		Data struct {
 			Attributes struct {
+				// The hex color of the environment
 				Color *string `json:"color"`
 
 				// Date of creation
@@ -8447,6 +8544,7 @@ type Incident struct {
 	Functionalities *[]struct {
 		Data struct {
 			Attributes struct {
+				// The hex color of the functionality
 				Color *string `json:"color"`
 
 				// Date of creation
@@ -8517,6 +8615,7 @@ type Incident struct {
 	Groups *[]struct {
 		Data struct {
 			Attributes struct {
+				// The hex color of the team
 				Color *string `json:"color"`
 
 				// Date of creation
@@ -8582,6 +8681,7 @@ type Incident struct {
 	IncidentTypes *[]struct {
 		Data struct {
 			Attributes struct {
+				// The hex color of the incident type
 				Color *string `json:"color"`
 
 				// Date of creation
@@ -8666,7 +8766,9 @@ type Incident struct {
 			Attributes struct {
 				// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
 				BackstageId *string `json:"backstage_id"`
-				Color       *string `json:"color"`
+
+				// The hex color of the service
+				Color *string `json:"color"`
 
 				// Date of creation
 				CreatedAt string `json:"created_at"`
@@ -8754,6 +8856,7 @@ type Incident struct {
 	Severity *struct {
 		Data struct {
 			Attributes struct {
+				// The hex color of the severity
 				Color *string `json:"color"`
 
 				// Date of creation
@@ -9473,6 +9576,7 @@ type IncidentList struct {
 			Environments *[]struct {
 				Data struct {
 					Attributes struct {
+						// The hex color of the environment
 						Color *string `json:"color"`
 
 						// Date of creation
@@ -9525,6 +9629,7 @@ type IncidentList struct {
 			Functionalities *[]struct {
 				Data struct {
 					Attributes struct {
+						// The hex color of the functionality
 						Color *string `json:"color"`
 
 						// Date of creation
@@ -9595,6 +9700,7 @@ type IncidentList struct {
 			Groups *[]struct {
 				Data struct {
 					Attributes struct {
+						// The hex color of the team
 						Color *string `json:"color"`
 
 						// Date of creation
@@ -9660,6 +9766,7 @@ type IncidentList struct {
 			IncidentTypes *[]struct {
 				Data struct {
 					Attributes struct {
+						// The hex color of the incident type
 						Color *string `json:"color"`
 
 						// Date of creation
@@ -9744,7 +9851,9 @@ type IncidentList struct {
 					Attributes struct {
 						// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
 						BackstageId *string `json:"backstage_id"`
-						Color       *string `json:"color"`
+
+						// The hex color of the service
+						Color *string `json:"color"`
 
 						// Date of creation
 						CreatedAt string `json:"created_at"`
@@ -9832,6 +9941,7 @@ type IncidentList struct {
 			Severity *struct {
 				Data struct {
 					Attributes struct {
+						// The hex color of the severity
 						Color *string `json:"color"`
 
 						// Date of creation
@@ -10201,6 +10311,7 @@ type IncidentResponse struct {
 			Environments *[]struct {
 				Data struct {
 					Attributes struct {
+						// The hex color of the environment
 						Color *string `json:"color"`
 
 						// Date of creation
@@ -10253,6 +10364,7 @@ type IncidentResponse struct {
 			Functionalities *[]struct {
 				Data struct {
 					Attributes struct {
+						// The hex color of the functionality
 						Color *string `json:"color"`
 
 						// Date of creation
@@ -10323,6 +10435,7 @@ type IncidentResponse struct {
 			Groups *[]struct {
 				Data struct {
 					Attributes struct {
+						// The hex color of the team
 						Color *string `json:"color"`
 
 						// Date of creation
@@ -10388,6 +10501,7 @@ type IncidentResponse struct {
 			IncidentTypes *[]struct {
 				Data struct {
 					Attributes struct {
+						// The hex color of the incident type
 						Color *string `json:"color"`
 
 						// Date of creation
@@ -10472,7 +10586,9 @@ type IncidentResponse struct {
 					Attributes struct {
 						// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
 						BackstageId *string `json:"backstage_id"`
-						Color       *string `json:"color"`
+
+						// The hex color of the service
+						Color *string `json:"color"`
 
 						// Date of creation
 						CreatedAt string `json:"created_at"`
@@ -10560,6 +10676,7 @@ type IncidentResponse struct {
 			Severity *struct {
 				Data struct {
 					Attributes struct {
+						// The hex color of the severity
 						Color *string `json:"color"`
 
 						// Date of creation
@@ -11074,6 +11191,7 @@ type IncidentTriggerParamsTriggers string
 
 // IncidentType defines model for incident_type.
 type IncidentType struct {
+	// The hex color of the incident type
 	Color *string `json:"color"`
 
 	// Date of creation
@@ -11120,6 +11238,7 @@ type IncidentType struct {
 type IncidentTypeList struct {
 	Data []struct {
 		Attributes struct {
+			// The hex color of the incident type
 			Color *string `json:"color"`
 
 			// Date of creation
@@ -11182,6 +11301,7 @@ type IncidentTypeListDataType string
 type IncidentTypeResponse struct {
 	Data struct {
 		Attributes struct {
+			// The hex color of the incident type
 			Color *string `json:"color"`
 
 			// Date of creation
@@ -11459,6 +11579,15 @@ type NewDashboard struct {
 			// Whether the dashboard auto-updates the UI with new data.
 			AutoRefresh *bool `json:"auto_refresh,omitempty"`
 
+			// The hex color of the dashboard
+			Color *NewDashboardDataAttributesColor `json:"color"`
+
+			// The description of the dashboard
+			Description *string `json:"description"`
+
+			// The emoji icon of the dashboard
+			Icon *string `json:"icon,omitempty"`
+
 			// The name of the dashboard
 			Name string `json:"name"`
 
@@ -11478,6 +11607,9 @@ type NewDashboard struct {
 	} `json:"data"`
 }
 
+// The hex color of the dashboard
+type NewDashboardDataAttributesColor string
+
 // The owner type of the dashboard
 type NewDashboardDataAttributesOwner string
 
@@ -11491,6 +11623,7 @@ type NewDashboardDataType string
 type NewEnvironment struct {
 	Data struct {
 		Attributes struct {
+			// The hex color of the environment
 			Color *string `json:"color"`
 
 			// The description of the environment
@@ -11623,6 +11756,7 @@ type NewFormFieldPositionDataType string
 type NewFunctionality struct {
 	Data struct {
 		Attributes struct {
+			// The hex color of the functionality
 			Color *string `json:"color"`
 
 			// The description of the functionality
@@ -12036,6 +12170,7 @@ type NewIncidentStatusPageEventDataType string
 type NewIncidentType struct {
 	Data struct {
 		Attributes struct {
+			// The hex color of the incident type
 			Color *string `json:"color"`
 
 			// The description of the incident type
@@ -12240,7 +12375,9 @@ type NewService struct {
 		Attributes struct {
 			// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
 			BackstageId *string `json:"backstage_id"`
-			Color       *string `json:"color"`
+
+			// The hex color of the service
+			Color *string `json:"color"`
 
 			// The description of the service
 			Description *string `json:"description"`
@@ -12331,6 +12468,7 @@ type NewServiceDataType string
 type NewSeverity struct {
 	Data struct {
 		Attributes struct {
+			// The hex color of the severity
 			Color *string `json:"color"`
 
 			// The description of the severity
@@ -12460,6 +12598,7 @@ type NewStatusPageDataType string
 type NewTeam struct {
 	Data struct {
 		Attributes struct {
+			// The hex color of the team
 			Color *string `json:"color"`
 
 			// The description of the team
@@ -13134,6 +13273,7 @@ type Pulse struct {
 
 	// Environments attached to the pulse
 	Environments *[]struct {
+		// The hex color of the environment
 		Color *string `json:"color"`
 
 		// Date of creation
@@ -13194,7 +13334,9 @@ type Pulse struct {
 	Services *[]struct {
 		// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
 		BackstageId *string `json:"backstage_id"`
-		Color       *string `json:"color"`
+
+		// The hex color of the service
+		Color *string `json:"color"`
 
 		// Date of creation
 		CreatedAt string `json:"created_at"`
@@ -13297,6 +13439,7 @@ type PulseList struct {
 
 			// Environments attached to the pulse
 			Environments *[]struct {
+				// The hex color of the environment
 				Color *string `json:"color"`
 
 				// Date of creation
@@ -13357,7 +13500,9 @@ type PulseList struct {
 			Services *[]struct {
 				// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
 				BackstageId *string `json:"backstage_id"`
-				Color       *string `json:"color"`
+
+				// The hex color of the service
+				Color *string `json:"color"`
 
 				// Date of creation
 				CreatedAt string `json:"created_at"`
@@ -13476,6 +13621,7 @@ type PulseResponse struct {
 
 			// Environments attached to the pulse
 			Environments *[]struct {
+				// The hex color of the environment
 				Color *string `json:"color"`
 
 				// Date of creation
@@ -13536,7 +13682,9 @@ type PulseResponse struct {
 			Services *[]struct {
 				// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
 				BackstageId *string `json:"backstage_id"`
-				Color       *string `json:"color"`
+
+				// The hex color of the service
+				Color *string `json:"color"`
 
 				// Date of creation
 				CreatedAt string `json:"created_at"`
@@ -14038,7 +14186,9 @@ type SendWhatsappMessageTaskParamsTaskType string
 type Service struct {
 	// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
 	BackstageId *string `json:"backstage_id"`
-	Color       *string `json:"color"`
+
+	// The hex color of the service
+	Color *string `json:"color"`
 
 	// Date of creation
 	CreatedAt string `json:"created_at"`
@@ -14125,7 +14275,9 @@ type ServiceList struct {
 		Attributes struct {
 			// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
 			BackstageId *string `json:"backstage_id"`
-			Color       *string `json:"color"`
+
+			// The hex color of the service
+			Color *string `json:"color"`
 
 			// Date of creation
 			CreatedAt string `json:"created_at"`
@@ -14228,7 +14380,9 @@ type ServiceResponse struct {
 		Attributes struct {
 			// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
 			BackstageId *string `json:"backstage_id"`
-			Color       *string `json:"color"`
+
+			// The hex color of the service
+			Color *string `json:"color"`
 
 			// Date of creation
 			CreatedAt string `json:"created_at"`
@@ -14320,6 +14474,7 @@ type ServiceResponseDataType string
 
 // Severity defines model for severity.
 type Severity struct {
+	// The hex color of the severity
 	Color *string `json:"color"`
 
 	// Date of creation
@@ -14372,6 +14527,7 @@ type SeveritySeverity string
 type SeverityList struct {
 	Data []struct {
 		Attributes struct {
+			// The hex color of the severity
 			Color *string `json:"color"`
 
 			// Date of creation
@@ -14440,6 +14596,7 @@ type SeverityListDataType string
 type SeverityResponse struct {
 	Data struct {
 		Attributes struct {
+			// The hex color of the severity
 			Color *string `json:"color"`
 
 			// Date of creation
@@ -14951,6 +15108,7 @@ type StatusPageTemplateResponseDataType string
 
 // Team defines model for team.
 type Team struct {
+	// The hex color of the team
 	Color *string `json:"color"`
 
 	// Date of creation
@@ -15007,6 +15165,7 @@ type Team struct {
 type TeamList struct {
 	Data []struct {
 		Attributes struct {
+			// The hex color of the team
 			Color *string `json:"color"`
 
 			// Date of creation
@@ -15079,6 +15238,7 @@ type TeamListDataType string
 type TeamResponse struct {
 	Data struct {
 		Attributes struct {
+			// The hex color of the team
 			Color *string `json:"color"`
 
 			// Date of creation
@@ -15350,6 +15510,15 @@ type UpdateDashboard struct {
 			// Whether the dashboard auto-updates the UI with new data.
 			AutoRefresh *bool `json:"auto_refresh,omitempty"`
 
+			// The hex color of the dashboard
+			Color *UpdateDashboardDataAttributesColor `json:"color"`
+
+			// The description of the dashboard
+			Description *string `json:"description"`
+
+			// The emoji icon of the dashboard
+			Icon *string `json:"icon,omitempty"`
+
 			// The name of the dashboard
 			Name *string `json:"name,omitempty"`
 
@@ -15369,6 +15538,9 @@ type UpdateDashboard struct {
 	} `json:"data"`
 }
 
+// The hex color of the dashboard
+type UpdateDashboardDataAttributesColor string
+
 // The owner type of the dashboard
 type UpdateDashboardDataAttributesOwner string
 
@@ -15382,6 +15554,7 @@ type UpdateDashboardDataType string
 type UpdateEnvironment struct {
 	Data struct {
 		Attributes struct {
+			// The hex color of the environment
 			Color *string `json:"color"`
 
 			// The description of the environment
@@ -15511,6 +15684,7 @@ type UpdateFormFieldPositionDataType string
 type UpdateFunctionality struct {
 	Data struct {
 		Attributes struct {
+			// The hex color of the functionality
 			Color *string `json:"color"`
 
 			// The description of the functionality
@@ -16089,6 +16263,7 @@ type UpdateIncidentTaskParamsTaskType string
 type UpdateIncidentType struct {
 	Data struct {
 		Attributes struct {
+			// The hex color of the incident type
 			Color *string `json:"color"`
 
 			// The description of the incident type
@@ -16504,7 +16679,9 @@ type UpdateService struct {
 		Attributes struct {
 			// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
 			BackstageId *string `json:"backstage_id"`
-			Color       *string `json:"color"`
+
+			// The hex color of the service
+			Color *string `json:"color"`
 
 			// The description of the service
 			Description *string `json:"description"`
@@ -16617,6 +16794,7 @@ type UpdateServiceNowIncidentTaskParamsTaskType string
 type UpdateSeverity struct {
 	Data struct {
 		Attributes struct {
+			// The hex color of the severity
 			Color *string `json:"color"`
 
 			// The description of the severity
@@ -16820,6 +16998,7 @@ type UpdateStatusTaskParamsTaskType string
 type UpdateTeam struct {
 	Data struct {
 		Attributes struct {
+			// The hex color of the team
 			Color *string `json:"color"`
 
 			// The description of the team

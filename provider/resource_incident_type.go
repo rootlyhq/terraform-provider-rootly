@@ -54,7 +54,7 @@ func resourceIncidentType() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "",
+				Description: "The hex color of the incident type",
 			},
 
 			"position": &schema.Schema{

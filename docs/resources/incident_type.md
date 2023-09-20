@@ -20,7 +20,7 @@ description: |-
 
 ### Optional
 
-- `color` (String)
+- `color` (String) The hex color of the incident type
 - `description` (String) The description of the incident type
 - `notify_emails` (List of String) Emails to attach to the incident type
 - `position` (Number) Position of the incident type

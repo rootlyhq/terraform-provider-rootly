@@ -58,7 +58,7 @@ resource "rootly_functionality" "logging_in" {
 
 ### Optional
 
-- `color` (String)
+- `color` (String) The hex color of the functionality
 - `description` (String) The description of the functionality
 - `environment_ids` (List of String) Environments associated with this functionality
 - `notify_emails` (List of String) Emails attached to the functionality

@@ -65,7 +65,7 @@ func resourceTeam() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "",
+				Description: "The hex color of the team",
 			},
 
 			"position": &schema.Schema{

@@ -74,7 +74,7 @@ func resourceFunctionality() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "",
+				Description: "The hex color of the functionality",
 			},
 
 			"status": &schema.Schema{

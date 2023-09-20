@@ -20,7 +20,7 @@ description: |-
 
 ### Optional
 
-- `color` (String)
+- `color` (String) The hex color of the team
 - `description` (String) The description of the team
 - `notify_emails` (List of String) Emails to attach to the team
 - `opsgenie_id` (String) The Opsgenie group id associated to this team

@@ -65,7 +65,7 @@ func resourceEnvironment() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "",
+				Description: "The hex color of the environment",
 			},
 
 			"position": &schema.Schema{

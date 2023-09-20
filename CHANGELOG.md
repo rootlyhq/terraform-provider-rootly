@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.4] -- 2023-09-20
+
+- Upgraded go dependencies.
+
 ## [1.1.3] -- 2023-09-06
 
 - Added `pagerduty_id`, `opsgenie_id`, `victor_ops_id` & `pagertree_id` attributes to `rootly_team` resource.

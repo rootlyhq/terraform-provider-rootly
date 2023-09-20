@@ -74,7 +74,7 @@ func resourceService() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "",
+				Description: "The hex color of the service",
 			},
 
 			"status": &schema.Schema{
