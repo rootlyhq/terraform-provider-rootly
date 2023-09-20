@@ -4,17 +4,16 @@ package provider
 
 import (
 	"testing"
-
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceWorkflowTaskUpdateActionItem(t *testing.T) {
 	resource.UnitTest(t, resource.TestCase{
-		PreCheck: func() {
+		PreCheck:          func() {
 			testAccPreCheck(t)
 		},
 		ProviderFactories: providerFactories,
-		Steps: []resource.TestStep{
+		Steps: []resource.TestStep {
 			{
 				Config: testAccResourceWorkflowTaskUpdateActionItem,
 				Check: resource.ComposeTestCheckFunc(

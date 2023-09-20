@@ -5,114 +5,133 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
+	
 )
 
 func resourcePlaybook() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourcePlaybookCreate,
-		ReadContext:   resourcePlaybookRead,
+		ReadContext: resourcePlaybookRead,
 		UpdateContext: resourcePlaybookUpdate,
 		DeleteContext: resourcePlaybookDelete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
-
-			"title": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+		Schema: map[string]*schema.Schema {
+			
+			"title": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The title of the playbook",
+				
 			},
+			
 
-			"summary": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"summary": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "The summary of the playbook",
+				
 			},
+			
 
-			"external_url": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"external_url": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "The external url of the playbook",
+				
 			},
+			
 
-			"severity_ids": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
+				"severity_ids": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
+					},
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "The Severity ID's to attach to the incident",
+					
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "The Severity ID's to attach to the incident",
-			},
+				
 
-			"environment_ids": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
+				"environment_ids": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
+					},
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "The Environment ID's to attach to the incident",
+					
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "The Environment ID's to attach to the incident",
-			},
+				
 
-			"functionality_ids": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
+				"functionality_ids": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
+					},
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "The Functionality ID's to attach to the incident",
+					
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "The Functionality ID's to attach to the incident",
-			},
+				
 
-			"service_ids": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
+				"service_ids": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
+					},
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "The Service ID's to attach to the incident",
+					
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "The Service ID's to attach to the incident",
-			},
+				
 
-			"group_ids": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
+				"group_ids": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
+					},
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "The Team ID's to attach to the incident",
+					
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "The Team ID's to attach to the incident",
-			},
+				
 
-			"incident_type_ids": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
+				"incident_type_ids": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
+					},
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "The Incident Type ID's to attach to the incident",
+					
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "The Incident Type ID's to attach to the incident",
-			},
+				
 		},
 	}
 }
@@ -124,33 +143,33 @@ func resourcePlaybookCreate(ctx context.Context, d *schema.ResourceData, meta in
 
 	s := &client.Playbook{}
 
-	if value, ok := d.GetOkExists("title"); ok {
-		s.Title = value.(string)
-	}
-	if value, ok := d.GetOkExists("summary"); ok {
-		s.Summary = value.(string)
-	}
-	if value, ok := d.GetOkExists("external_url"); ok {
-		s.ExternalUrl = value.(string)
-	}
-	if value, ok := d.GetOkExists("severity_ids"); ok {
-		s.SeverityIds = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("environment_ids"); ok {
-		s.EnvironmentIds = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("functionality_ids"); ok {
-		s.FunctionalityIds = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("service_ids"); ok {
-		s.ServiceIds = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("group_ids"); ok {
-		s.GroupIds = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("incident_type_ids"); ok {
-		s.IncidentTypeIds = value.([]interface{})
-	}
+	  if value, ok := d.GetOkExists("title"); ok {
+				s.Title = value.(string)
+			}
+    if value, ok := d.GetOkExists("summary"); ok {
+				s.Summary = value.(string)
+			}
+    if value, ok := d.GetOkExists("external_url"); ok {
+				s.ExternalUrl = value.(string)
+			}
+    if value, ok := d.GetOkExists("severity_ids"); ok {
+				s.SeverityIds = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("environment_ids"); ok {
+				s.EnvironmentIds = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("functionality_ids"); ok {
+				s.FunctionalityIds = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("service_ids"); ok {
+				s.ServiceIds = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("group_ids"); ok {
+				s.GroupIds = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("incident_type_ids"); ok {
+				s.IncidentTypeIds = value.([]interface{})
+			}
 
 	res, err := c.CreatePlaybook(s)
 	if err != nil {
@@ -181,14 +200,14 @@ func resourcePlaybookRead(ctx context.Context, d *schema.ResourceData, meta inte
 	}
 
 	d.Set("title", item.Title)
-	d.Set("summary", item.Summary)
-	d.Set("external_url", item.ExternalUrl)
-	d.Set("severity_ids", item.SeverityIds)
-	d.Set("environment_ids", item.EnvironmentIds)
-	d.Set("functionality_ids", item.FunctionalityIds)
-	d.Set("service_ids", item.ServiceIds)
-	d.Set("group_ids", item.GroupIds)
-	d.Set("incident_type_ids", item.IncidentTypeIds)
+  d.Set("summary", item.Summary)
+  d.Set("external_url", item.ExternalUrl)
+  d.Set("severity_ids", item.SeverityIds)
+  d.Set("environment_ids", item.EnvironmentIds)
+  d.Set("functionality_ids", item.FunctionalityIds)
+  d.Set("service_ids", item.ServiceIds)
+  d.Set("group_ids", item.GroupIds)
+  d.Set("incident_type_ids", item.IncidentTypeIds)
 
 	return nil
 }
@@ -199,33 +218,33 @@ func resourcePlaybookUpdate(ctx context.Context, d *schema.ResourceData, meta in
 
 	s := &client.Playbook{}
 
-	if d.HasChange("title") {
-		s.Title = d.Get("title").(string)
-	}
-	if d.HasChange("summary") {
-		s.Summary = d.Get("summary").(string)
-	}
-	if d.HasChange("external_url") {
-		s.ExternalUrl = d.Get("external_url").(string)
-	}
-	if d.HasChange("severity_ids") {
-		s.SeverityIds = d.Get("severity_ids").([]interface{})
-	}
-	if d.HasChange("environment_ids") {
-		s.EnvironmentIds = d.Get("environment_ids").([]interface{})
-	}
-	if d.HasChange("functionality_ids") {
-		s.FunctionalityIds = d.Get("functionality_ids").([]interface{})
-	}
-	if d.HasChange("service_ids") {
-		s.ServiceIds = d.Get("service_ids").([]interface{})
-	}
-	if d.HasChange("group_ids") {
-		s.GroupIds = d.Get("group_ids").([]interface{})
-	}
-	if d.HasChange("incident_type_ids") {
-		s.IncidentTypeIds = d.Get("incident_type_ids").([]interface{})
-	}
+	  if d.HasChange("title") {
+				s.Title = d.Get("title").(string)
+			}
+    if d.HasChange("summary") {
+				s.Summary = d.Get("summary").(string)
+			}
+    if d.HasChange("external_url") {
+				s.ExternalUrl = d.Get("external_url").(string)
+			}
+    if d.HasChange("severity_ids") {
+				s.SeverityIds = d.Get("severity_ids").([]interface{})
+			}
+    if d.HasChange("environment_ids") {
+				s.EnvironmentIds = d.Get("environment_ids").([]interface{})
+			}
+    if d.HasChange("functionality_ids") {
+				s.FunctionalityIds = d.Get("functionality_ids").([]interface{})
+			}
+    if d.HasChange("service_ids") {
+				s.ServiceIds = d.Get("service_ids").([]interface{})
+			}
+    if d.HasChange("group_ids") {
+				s.GroupIds = d.Get("group_ids").([]interface{})
+			}
+    if d.HasChange("incident_type_ids") {
+				s.IncidentTypeIds = d.Get("incident_type_ids").([]interface{})
+			}
 
 	_, err := c.UpdatePlaybook(d.Id(), s)
 	if err != nil {

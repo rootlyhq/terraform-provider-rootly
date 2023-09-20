@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
 	"github.com/rootlyhq/terraform-provider-rootly/tools"
@@ -14,57 +14,67 @@ import (
 func resourceWorkflowGroup() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceWorkflowGroupCreate,
-		ReadContext:   resourceWorkflowGroupRead,
+		ReadContext: resourceWorkflowGroupRead,
 		UpdateContext: resourceWorkflowGroupUpdate,
 		DeleteContext: resourceWorkflowGroupDelete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
-
-			"kind": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "simple",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+		Schema: map[string]*schema.Schema {
+			
+			"kind": &schema.Schema {
+				Type: schema.TypeString,
+				Default: "simple",
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "The kind of the workflow group.. Value must be one of `simple`, `incident`, `post_mortem`, `action_item`, `pulse`, `alert`.",
+				
 			},
+			
 
-			"name": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+			"name": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The name of the workflow group.",
+				
 			},
+			
 
-			"slug": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"slug": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "The slug of the workflow group.",
+				
 			},
+			
 
-			"expanded": &schema.Schema{
-				Type:        schema.TypeBool,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
+			"expanded": &schema.Schema {
+				Type: schema.TypeBool,
+				Computed: true,
+				Required: false,
+				Optional: true,
 				Description: "Whether the group is expanded or collapsed.",
+				
 			},
+			
 
-			"position": &schema.Schema{
-				Type:        schema.TypeInt,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"position": &schema.Schema {
+				Type: schema.TypeInt,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "The position of the workflow group",
+				
 			},
+			
 		},
 	}
 }
@@ -76,21 +86,21 @@ func resourceWorkflowGroupCreate(ctx context.Context, d *schema.ResourceData, me
 
 	s := &client.WorkflowGroup{}
 
-	if value, ok := d.GetOkExists("kind"); ok {
-		s.Kind = value.(string)
-	}
-	if value, ok := d.GetOkExists("name"); ok {
-		s.Name = value.(string)
-	}
-	if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
-	}
-	if value, ok := d.GetOkExists("expanded"); ok {
-		s.Expanded = tools.Bool(value.(bool))
-	}
-	if value, ok := d.GetOkExists("position"); ok {
-		s.Position = value.(int)
-	}
+	  if value, ok := d.GetOkExists("kind"); ok {
+				s.Kind = value.(string)
+			}
+    if value, ok := d.GetOkExists("name"); ok {
+				s.Name = value.(string)
+			}
+    if value, ok := d.GetOkExists("slug"); ok {
+				s.Slug = value.(string)
+			}
+    if value, ok := d.GetOkExists("expanded"); ok {
+				s.Expanded = tools.Bool(value.(bool))
+			}
+    if value, ok := d.GetOkExists("position"); ok {
+				s.Position = value.(int)
+			}
 
 	res, err := c.CreateWorkflowGroup(s)
 	if err != nil {
@@ -121,10 +131,10 @@ func resourceWorkflowGroupRead(ctx context.Context, d *schema.ResourceData, meta
 	}
 
 	d.Set("kind", item.Kind)
-	d.Set("name", item.Name)
-	d.Set("slug", item.Slug)
-	d.Set("expanded", item.Expanded)
-	d.Set("position", item.Position)
+  d.Set("name", item.Name)
+  d.Set("slug", item.Slug)
+  d.Set("expanded", item.Expanded)
+  d.Set("position", item.Position)
 
 	return nil
 }
@@ -135,21 +145,21 @@ func resourceWorkflowGroupUpdate(ctx context.Context, d *schema.ResourceData, me
 
 	s := &client.WorkflowGroup{}
 
-	if d.HasChange("kind") {
-		s.Kind = d.Get("kind").(string)
-	}
-	if d.HasChange("name") {
-		s.Name = d.Get("name").(string)
-	}
-	if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
-	}
-	if d.HasChange("expanded") {
-		s.Expanded = tools.Bool(d.Get("expanded").(bool))
-	}
-	if d.HasChange("position") {
-		s.Position = d.Get("position").(int)
-	}
+	  if d.HasChange("kind") {
+				s.Kind = d.Get("kind").(string)
+			}
+    if d.HasChange("name") {
+				s.Name = d.Get("name").(string)
+			}
+    if d.HasChange("slug") {
+				s.Slug = d.Get("slug").(string)
+			}
+    if d.HasChange("expanded") {
+				s.Expanded = tools.Bool(d.Get("expanded").(bool))
+			}
+    if d.HasChange("position") {
+				s.Position = d.Get("position").(int)
+			}
 
 	_, err := c.UpdateWorkflowGroup(d.Id(), s)
 	if err != nil {

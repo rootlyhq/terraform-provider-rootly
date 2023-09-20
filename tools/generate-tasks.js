@@ -54,8 +54,8 @@ import (
 	${
     has_json_field
       ? `
-	"testing"
-  "github.com/stretchr/testify/assert"
+	"reflect"
+  "encoding/json"
 	`
       : ``
   }
@@ -297,10 +297,18 @@ function genTaskSchemaProperty(property_name, property_schema, required_props) {
 							${isRequired ? "Required" : "Optional"}: true,`;
   if (isJSON) {
     a = `${a}
-							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-								t := &testing.T{}
-								assert := assert.New(t)
-								return assert.JSONEq(old, new)
+							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {
+								var oldJSONAsInterface, newJSONAsInterface interface{}
+							
+								if err := json.Unmarshal([]byte(old), &oldJSONAsInterface); err != nil {
+									return false
+								}
+
+								if err := json.Unmarshal([]byte(new), &newJSONAsInterface); err != nil {
+									return false
+								}
+
+								return reflect.DeepEqual(oldJSONAsInterface, newJSONAsInterface)
 							},`;
     if (!isRequired) {
       a = `${a}
@@ -382,7 +390,6 @@ function genResourceTestFile(task_name, task_schema) {
 
 import (
 	"testing"
-
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 

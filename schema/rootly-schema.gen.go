@@ -12871,7 +12871,10 @@ type PagePagerdutyOnCallRespondersTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"escalation_policies,omitempty"`
 	Message *string `json:"message,omitempty"`
-	Service struct {
+
+	// Rootly only supports linking to a single Pagerduty incident. If this feature is disabled Rootly will add responders from any additional pages to the existing Pagerduty incident that is linked to the Rootly incident. If enabled, Rootly will create a new Pagerduty incident that is not linked to any Rootly incidents.
+	NotifySubscribers *bool `json:"notify_subscribers,omitempty"`
+	Service           struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"service"`

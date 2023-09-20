@@ -5,10 +5,10 @@ package provider
 import (
 	"context"
 	"fmt"
-
-	"github.com/stretchr/testify/assert"
-	"testing"
-
+	
+	"reflect"
+  "encoding/json"
+	
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -29,181 +29,189 @@ func resourceWorkflowTaskUpdateIncident() *schema.Resource {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
-		Schema: map[string]*schema.Schema{
+		Schema: map[string]*schema.Schema {
 			"workflow_id": {
-				Description: "The ID of the parent workflow",
-				Type:        schema.TypeString,
-				Required:    true,
-				ForceNew:    true,
+				Description:  "The ID of the parent workflow",
+				Type:         schema.TypeString,
+				Required:     true,
+				ForceNew:     true,
 			},
 			"name": {
-				Description: "Name of the workflow task",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
+				Description:  "Name of the workflow task",
+				Type:         schema.TypeString,
+				Optional:     true,
+				Computed:     true,
 			},
 			"position": {
-				Description: "The position of the workflow task (1 being top of list)",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Computed:    true,
+				Description:  "The position of the workflow task (1 being top of list)",
+				Type:         schema.TypeInt,
+				Optional:     true,
+				Computed:     true,
 			},
 			"skip_on_failure": {
-				Description: "Skip workflow task if any failures",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Default:     false,
+				Description:  "Skip workflow task if any failures",
+				Type:         schema.TypeBool,
+				Optional:     true,
+				Default:      false,
 			},
 			"enabled": {
-				Description: "Enable/disable this workflow task",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Default:     true,
+				Description:  "Enable/disable this workflow task",
+				Type:         schema.TypeBool,
+				Optional:     true,
+				Default:      true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type:        schema.TypeList,
-				Required:    true,
-				MinItems:    1,
-				MaxItems:    1,
+				Type: schema.TypeList,
+				Required: true,
+				MinItems: 1,
+				MaxItems: 1,
 				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"task_type": &schema.Schema{
-							Type:     schema.TypeString,
+					Schema: map[string]*schema.Schema {
+						"task_type": &schema.Schema {
+							Type: schema.TypeString,
 							Optional: true,
-							Default:  "update_incident",
-							ValidateFunc: validation.StringInSlice([]string{
+							Default: "update_incident",
+							ValidateFunc: validation.StringInSlice([]string {
 								"update_incident",
 							}, false),
 						},
-						"attribute_to_query_by": &schema.Schema{
+						"attribute_to_query_by": &schema.Schema {
 							Description: "Value must be one of `id`, `slug`, `sequential_id`, `pagerduty_incident_id`, `opsgenie_incident_id`, `victor_ops_incident_id`, `jira_issue_id`, `asana_task_id`, `shortcut_task_id`, `linear_issue_id`, `zendesk_ticket_id`, `trello_card_id`, `airtable_record_id`, `shortcut_story_id`, `github_issue_id`, `freshservice_ticket_id`, `freshservice_task_id`.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "id",
+							Type: schema.TypeString,
+							Optional: true,
+							Default: "id",
 							ValidateFunc: validation.StringInSlice([]string{
 								"id",
-								"slug",
-								"sequential_id",
-								"pagerduty_incident_id",
-								"opsgenie_incident_id",
-								"victor_ops_incident_id",
-								"jira_issue_id",
-								"asana_task_id",
-								"shortcut_task_id",
-								"linear_issue_id",
-								"zendesk_ticket_id",
-								"trello_card_id",
-								"airtable_record_id",
-								"shortcut_story_id",
-								"github_issue_id",
-								"freshservice_ticket_id",
-								"freshservice_task_id",
+"slug",
+"sequential_id",
+"pagerduty_incident_id",
+"opsgenie_incident_id",
+"victor_ops_incident_id",
+"jira_issue_id",
+"asana_task_id",
+"shortcut_task_id",
+"linear_issue_id",
+"zendesk_ticket_id",
+"trello_card_id",
+"airtable_record_id",
+"shortcut_story_id",
+"github_issue_id",
+"freshservice_ticket_id",
+"freshservice_task_id",
 							}, false),
 						},
-						"incident_id": &schema.Schema{
+						"incident_id": &schema.Schema {
 							Description: "The incident id to update or id of any attribute on the incident",
-							Type:        schema.TypeString,
-							Required:    true,
+							Type: schema.TypeString,
+							Required: true,
 						},
-						"title": &schema.Schema{
+						"title": &schema.Schema {
 							Description: "The incident title",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"summary": &schema.Schema{
+						"summary": &schema.Schema {
 							Description: "The incident summary",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"status": &schema.Schema{
+						"status": &schema.Schema {
 							Description: "",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"severity_id": &schema.Schema{
+						"severity_id": &schema.Schema {
 							Description: "",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"incident_type_ids": &schema.Schema{
+						"incident_type_ids": &schema.Schema {
 							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Schema{
+							Type: schema.TypeList,
+							Optional: true,
+							Elem: &schema.Schema {
 								Type: schema.TypeString,
 							},
 						},
-						"service_ids": &schema.Schema{
+						"service_ids": &schema.Schema {
 							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Schema{
+							Type: schema.TypeList,
+							Optional: true,
+							Elem: &schema.Schema {
 								Type: schema.TypeString,
 							},
 						},
-						"functionality_ids": &schema.Schema{
+						"functionality_ids": &schema.Schema {
 							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Schema{
+							Type: schema.TypeList,
+							Optional: true,
+							Elem: &schema.Schema {
 								Type: schema.TypeString,
 							},
 						},
-						"environment_ids": &schema.Schema{
+						"environment_ids": &schema.Schema {
 							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Schema{
+							Type: schema.TypeList,
+							Optional: true,
+							Elem: &schema.Schema {
 								Type: schema.TypeString,
 							},
 						},
-						"group_ids": &schema.Schema{
+						"group_ids": &schema.Schema {
 							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Schema{
+							Type: schema.TypeList,
+							Optional: true,
+							Elem: &schema.Schema {
 								Type: schema.TypeString,
 							},
 						},
-						"started_at": &schema.Schema{
+						"started_at": &schema.Schema {
 							Description: "",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"detected_at": &schema.Schema{
+						"detected_at": &schema.Schema {
 							Description: "",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"acknowledged_at": &schema.Schema{
+						"acknowledged_at": &schema.Schema {
 							Description: "",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"mitigated_at": &schema.Schema{
+						"mitigated_at": &schema.Schema {
 							Description: "",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"resolved_at": &schema.Schema{
+						"resolved_at": &schema.Schema {
 							Description: "",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"private": &schema.Schema{
+						"private": &schema.Schema {
 							Description: "",
-							Type:        schema.TypeBool,
-							Optional:    true,
+							Type: schema.TypeBool,
+							Optional: true,
 						},
-						"custom_fields_mapping": &schema.Schema{
+						"custom_fields_mapping": &schema.Schema {
 							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-								t := &testing.T{}
-								assert := assert.New(t)
-								return assert.JSONEq(old, new)
+							Type: schema.TypeString,
+							Optional: true,
+							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {
+								var oldJSONAsInterface, newJSONAsInterface interface{}
+							
+								if err := json.Unmarshal([]byte(old), &oldJSONAsInterface); err != nil {
+									return false
+								}
+
+								if err := json.Unmarshal([]byte(new), &newJSONAsInterface); err != nil {
+									return false
+								}
+
+								return reflect.DeepEqual(oldJSONAsInterface, newJSONAsInterface)
 							},
 							Default: "{}",
 						},
@@ -227,12 +235,12 @@ func resourceWorkflowTaskUpdateIncidentCreate(ctx context.Context, d *schema.Res
 	tflog.Trace(ctx, fmt.Sprintf("Creating workflow task: %s", workflowId))
 
 	s := &client.WorkflowTask{
-		WorkflowId:    workflowId,
-		Name:          name,
-		Position:      position,
+		WorkflowId: workflowId,
+		Name: name,
+		Position: position,
 		SkipOnFailure: skipOnFailure,
-		Enabled:       enabled,
-		TaskParams:    taskParams,
+		Enabled: enabled,
+		TaskParams: taskParams,
 	}
 
 	res, err := c.CreateWorkflowTask(s)
@@ -287,12 +295,12 @@ func resourceWorkflowTaskUpdateIncidentUpdate(ctx context.Context, d *schema.Res
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	s := &client.WorkflowTask{
-		WorkflowId:    workflowId,
-		Name:          name,
-		Position:      position,
+		WorkflowId: workflowId,
+		Name: name,
+		Position: position,
 		SkipOnFailure: skipOnFailure,
-		Enabled:       enabled,
-		TaskParams:    taskParams,
+		Enabled: enabled,
+		TaskParams: taskParams,
 	}
 
 	tflog.Debug(ctx, fmt.Sprintf("adding value: %#v", s))
