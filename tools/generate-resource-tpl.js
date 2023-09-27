@@ -261,8 +261,8 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
     defaultValue = `Computed: ${optional}`;
   }
   const description = annotatedDescription(schema);
-  const forceNew = name === pathIdField || schema.write_only ? "true" : "false";
-  const skipDiff = schema.skip_diff || schema.write_only
+  const forceNew = name === pathIdField || schema.tf_write_only ? "true" : "false";
+  const skipDiff = schema.tf_skip_diff || schema.tf_write_only
     ? `
 		DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 			return len(old) != 0
