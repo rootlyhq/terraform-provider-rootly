@@ -42,8 +42,8 @@ Optional:
 
 - `comment` (String) The ticket comment.
 - `completion` (Map of String) Map must contain two fields, `id` and `name`. The completion id and display name.
-- `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON.
+- `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON
 - `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name.
 - `tags` (String) The ticket tags.
 - `task_type` (String)
-- `ticket_payload` (String) Additional Zendesk ticket attributes. Will be merged into whatever was specified in this tasks current parameters. Can contain liquid markup and need to be valid JSON.
+- `ticket_payload` (String) Additional Zendesk ticket attributes. Will be merged into whatever was specified in this tasks current parameters. Can contain liquid markup and need to be valid JSON

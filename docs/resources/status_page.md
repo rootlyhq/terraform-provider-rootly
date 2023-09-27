@@ -20,7 +20,7 @@ description: |-
 
 ### Optional
 
-- `allow_search_engine_index` (Boolean) Allow search engines to include your public status page in search results.
+- `allow_search_engine_index` (Boolean) Allow search engines to include your public status page in search results
 - `authentication_enabled` (Boolean) Enable authentication
 - `authentication_password` (String) Authentication password
 - `description` (String) The description of the status page

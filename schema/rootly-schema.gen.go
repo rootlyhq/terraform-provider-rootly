@@ -254,20 +254,6 @@ const (
 	ActionItemTriggerParamsTriggerTypeActionItem ActionItemTriggerParamsTriggerType = "action_item"
 )
 
-// Defines values for ActionItemTriggerParamsTriggers.
-const (
-	ActionItemTriggerParamsTriggersActionItemCreated   ActionItemTriggerParamsTriggers = "action_item_created"
-	ActionItemTriggerParamsTriggersActionItemUpdated   ActionItemTriggerParamsTriggers = "action_item_updated"
-	ActionItemTriggerParamsTriggersAssignedUserUpdated ActionItemTriggerParamsTriggers = "assigned_user_updated"
-	ActionItemTriggerParamsTriggersDescriptionUpdated  ActionItemTriggerParamsTriggers = "description_updated"
-	ActionItemTriggerParamsTriggersDueDateUpdated      ActionItemTriggerParamsTriggers = "due_date_updated"
-	ActionItemTriggerParamsTriggersPriorityUpdated     ActionItemTriggerParamsTriggers = "priority_updated"
-	ActionItemTriggerParamsTriggersSlackCommand        ActionItemTriggerParamsTriggers = "slack_command"
-	ActionItemTriggerParamsTriggersStatusUpdated       ActionItemTriggerParamsTriggers = "status_updated"
-	ActionItemTriggerParamsTriggersSummaryUpdated      ActionItemTriggerParamsTriggers = "summary_updated"
-	ActionItemTriggerParamsTriggersTeamsUpdated        ActionItemTriggerParamsTriggers = "teams_updated"
-)
-
 // Defines values for AddActionItemTaskParamsPriority.
 const (
 	AddActionItemTaskParamsPriorityHigh   AddActionItemTaskParamsPriority = "high"
@@ -2168,46 +2154,6 @@ const (
 // Defines values for IncidentTriggerParamsTriggerType.
 const (
 	IncidentTriggerParamsTriggerTypeIncident IncidentTriggerParamsTriggerType = "incident"
-)
-
-// Defines values for IncidentTriggerParamsTriggers.
-const (
-	IncidentTriggerParamsTriggersEnvironmentsAdded         IncidentTriggerParamsTriggers = "environments_added"
-	IncidentTriggerParamsTriggersEnvironmentsRemoved       IncidentTriggerParamsTriggers = "environments_removed"
-	IncidentTriggerParamsTriggersEnvironmentsUpdated       IncidentTriggerParamsTriggers = "environments_updated"
-	IncidentTriggerParamsTriggersFunctionalitiesAdded      IncidentTriggerParamsTriggers = "functionalities_added"
-	IncidentTriggerParamsTriggersFunctionalitiesRemoved    IncidentTriggerParamsTriggers = "functionalities_removed"
-	IncidentTriggerParamsTriggersFunctionalitiesUpdated    IncidentTriggerParamsTriggers = "functionalities_updated"
-	IncidentTriggerParamsTriggersIncidentCreated           IncidentTriggerParamsTriggers = "incident_created"
-	IncidentTriggerParamsTriggersIncidentInTriage          IncidentTriggerParamsTriggers = "incident_in_triage"
-	IncidentTriggerParamsTriggersIncidentStarted           IncidentTriggerParamsTriggers = "incident_started"
-	IncidentTriggerParamsTriggersIncidentTypesAdded        IncidentTriggerParamsTriggers = "incident_types_added"
-	IncidentTriggerParamsTriggersIncidentTypesRemoved      IncidentTriggerParamsTriggers = "incident_types_removed"
-	IncidentTriggerParamsTriggersIncidentTypesUpdated      IncidentTriggerParamsTriggers = "incident_types_updated"
-	IncidentTriggerParamsTriggersIncidentUpdated           IncidentTriggerParamsTriggers = "incident_updated"
-	IncidentTriggerParamsTriggersRoleAssignmentsAdded      IncidentTriggerParamsTriggers = "role_assignments_added"
-	IncidentTriggerParamsTriggersRoleAssignmentsRemoved    IncidentTriggerParamsTriggers = "role_assignments_removed"
-	IncidentTriggerParamsTriggersRoleAssignmentsUpdated    IncidentTriggerParamsTriggers = "role_assignments_updated"
-	IncidentTriggerParamsTriggersServicesAdded             IncidentTriggerParamsTriggers = "services_added"
-	IncidentTriggerParamsTriggersServicesRemoved           IncidentTriggerParamsTriggers = "services_removed"
-	IncidentTriggerParamsTriggersServicesUpdated           IncidentTriggerParamsTriggers = "services_updated"
-	IncidentTriggerParamsTriggersSeverityUpdated           IncidentTriggerParamsTriggers = "severity_updated"
-	IncidentTriggerParamsTriggersSlackChannelConverted     IncidentTriggerParamsTriggers = "slack_channel_converted"
-	IncidentTriggerParamsTriggersSlackChannelCreated       IncidentTriggerParamsTriggers = "slack_channel_created"
-	IncidentTriggerParamsTriggersSlackCommand              IncidentTriggerParamsTriggers = "slack_command"
-	IncidentTriggerParamsTriggersStatusPageTimelineUpdated IncidentTriggerParamsTriggers = "status_page_timeline_updated"
-	IncidentTriggerParamsTriggersStatusUpdated             IncidentTriggerParamsTriggers = "status_updated"
-	IncidentTriggerParamsTriggersSubscribersAdded          IncidentTriggerParamsTriggers = "subscribers_added"
-	IncidentTriggerParamsTriggersSubscribersRemoved        IncidentTriggerParamsTriggers = "subscribers_removed"
-	IncidentTriggerParamsTriggersSubscribersUpdated        IncidentTriggerParamsTriggers = "subscribers_updated"
-	IncidentTriggerParamsTriggersSummaryUpdated            IncidentTriggerParamsTriggers = "summary_updated"
-	IncidentTriggerParamsTriggersTeamsAdded                IncidentTriggerParamsTriggers = "teams_added"
-	IncidentTriggerParamsTriggersTeamsRemoved              IncidentTriggerParamsTriggers = "teams_removed"
-	IncidentTriggerParamsTriggersTeamsUpdated              IncidentTriggerParamsTriggers = "teams_updated"
-	IncidentTriggerParamsTriggersTimelineUpdated           IncidentTriggerParamsTriggers = "timeline_updated"
-	IncidentTriggerParamsTriggersTitleUpdated              IncidentTriggerParamsTriggers = "title_updated"
-	IncidentTriggerParamsTriggersUserJoinedSlackChannel    IncidentTriggerParamsTriggers = "user_joined_slack_channel"
-	IncidentTriggerParamsTriggersUserLeftSlackChannel      IncidentTriggerParamsTriggers = "user_left_slack_channel"
 )
 
 // Defines values for IncidentTypeListDataType.
@@ -5223,7 +5169,7 @@ type ActionItemTriggerParams struct {
 	IncidentStatuses                    *[]ActionItemTriggerParamsIncidentStatuses                  `json:"incident_statuses,omitempty"`
 	IncidentVisibilities                *[]bool                                                     `json:"incident_visibilities,omitempty"`
 	TriggerType                         ActionItemTriggerParamsTriggerType                          `json:"trigger_type"`
-	Triggers                            *[]ActionItemTriggerParamsTriggers                          `json:"triggers,omitempty"`
+	Triggers                            *[]string                                                   `json:"triggers,omitempty"`
 }
 
 // ActionItemTriggerParamsIncidentActionItemCondition defines model for ActionItemTriggerParams.IncidentActionItemCondition.
@@ -5292,9 +5238,6 @@ type ActionItemTriggerParamsIncidentStatuses string
 // ActionItemTriggerParamsTriggerType defines model for ActionItemTriggerParams.TriggerType.
 type ActionItemTriggerParamsTriggerType string
 
-// Actions that trigger the workflow.
-type ActionItemTriggerParamsTriggers string
-
 // AddActionItemTaskParams defines model for add_action_item_task_params.
 type AddActionItemTaskParams struct {
 	//  The user this action item is assigned to
@@ -5320,10 +5263,10 @@ type AddActionItemTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"post_to_slack_channels,omitempty"`
 
-	// The action item priority.
+	// The action item priority
 	Priority AddActionItemTaskParamsPriority `json:"priority"`
 
-	// The action item status.
+	// The action item status
 	Status AddActionItemTaskParamsStatus `json:"status"`
 
 	// The action item summary.
@@ -5331,10 +5274,10 @@ type AddActionItemTaskParams struct {
 	TaskType *AddActionItemTaskParamsTaskType `json:"task_type,omitempty"`
 }
 
-// The action item priority.
+// The action item priority
 type AddActionItemTaskParamsPriority string
 
-// The action item status.
+// The action item status
 type AddActionItemTaskParamsStatus string
 
 // AddActionItemTaskParamsTaskType defines model for AddActionItemTaskParams.TaskType.
@@ -5369,14 +5312,14 @@ type AddSlackBookmarkTaskParams struct {
 	// The bookmark emoji.
 	Emoji *string `json:"emoji,omitempty"`
 
-	// The bookmark link. Required if not a playbook bookmark.
+	// The bookmark link. Required if not a playbook bookmark
 	Link *string `json:"link"`
 
 	// The playbook id if bookmark is of an incident playbook.
 	PlaybookId *string                             `json:"playbook_id,omitempty"`
 	TaskType   *AddSlackBookmarkTaskParamsTaskType `json:"task_type,omitempty"`
 
-	// The bookmark title. Required if not a playbook bookmark.
+	// The bookmark title. Required if not a playbook bookmark
 	Title *string `json:"title"`
 }
 
@@ -5387,7 +5330,7 @@ type AddSlackBookmarkTaskParamsTaskType string
 type AddSubscribers struct {
 	Data struct {
 		Attributes struct {
-			// Users without read permissions for private incidents will be removed from the subscriber list of this incident.
+			// Users without read permissions for private incidents will be removed from the subscriber list of this incident
 			RemoveUsersWithNoPrivateIncidentAccess *bool `json:"remove_users_with_no_private_incident_access"`
 
 			// IDs of users you wish to add to list of subscribers for this incident
@@ -5985,7 +5928,7 @@ type AlertTriggerParamsAlertConditionSource string
 // AlertTriggerParamsTriggerType defines model for AlertTriggerParams.TriggerType.
 type AlertTriggerParamsTriggerType string
 
-// Actions that trigger the workflow.
+// Actions that trigger the workflow
 type AlertTriggerParamsTriggers string
 
 // ArchiveSlackChannelsTaskParams defines model for archive_slack_channels_task_params.
@@ -6028,23 +5971,23 @@ type Audit struct {
 	// ID of audit
 	Id *float32 `json:"id"`
 
-	// ID of the affected object.
+	// ID of the affected object
 	ItemId *string `json:"item_id"`
 
-	// Describes the object in which the action was taken on.
+	// Describes the object in which the action was taken on
 	ItemType *AuditItemType `json:"item_type"`
 
-	// The object in which the action was taken on.
+	// The object in which the action was taken on
 	Object *map[string]interface{} `json:"object"`
 
-	// The changes that occurred on the object.
+	// The changes that occurred on the object
 	ObjectChanges *map[string]interface{} `json:"object_changes"`
 
-	// The ID of who took action on the object. Together with whodunnit_type can be used to find the user.
+	// The ID of who took action on the object. Together with whodunnit_type can be used to find the user
 	UserId *float32 `json:"user_id"`
 }
 
-// Describes the object in which the action was taken on.
+// Describes the object in which the action was taken on
 type AuditItemType string
 
 // AuditsList defines model for audits_list.
@@ -6060,19 +6003,19 @@ type AuditsList struct {
 			// ID of audit
 			Id *float32 `json:"id"`
 
-			// ID of the affected object.
+			// ID of the affected object
 			ItemId *string `json:"item_id"`
 
-			// Describes the object in which the action was taken on.
+			// Describes the object in which the action was taken on
 			ItemType *AuditsListDataAttributesItemType `json:"item_type"`
 
-			// The object in which the action was taken on.
+			// The object in which the action was taken on
 			Object *map[string]interface{} `json:"object"`
 
-			// The changes that occurred on the object.
+			// The changes that occurred on the object
 			ObjectChanges *map[string]interface{} `json:"object_changes"`
 
-			// The ID of who took action on the object. Together with whodunnit_type can be used to find the user.
+			// The ID of who took action on the object. Together with whodunnit_type can be used to find the user
 			UserId *float32 `json:"user_id"`
 		} `json:"attributes"`
 
@@ -6089,7 +6032,7 @@ type AuditsList struct {
 	} `json:"links"`
 }
 
-// Describes the object in which the action was taken on.
+// Describes the object in which the action was taken on
 type AuditsListDataAttributesItemType string
 
 // AuditsListDataType defines model for AuditsList.Data.Type.
@@ -6097,7 +6040,7 @@ type AuditsListDataType string
 
 // AutoAssignRoleOpsgenieTaskParams defines model for auto_assign_role_opsgenie_task_params.
 type AutoAssignRoleOpsgenieTaskParams struct {
-	// The role id.
+	// The role id
 	IncidentRoleId string `json:"incident_role_id"`
 	Schedule       struct {
 		Id   *string `json:"id,omitempty"`
@@ -6134,7 +6077,7 @@ type AutoAssignRolePagerdutyTaskParamsTaskType string
 
 // AutoAssignRoleVictorOpsTaskParams defines model for auto_assign_role_victor_ops_task_params.
 type AutoAssignRoleVictorOpsTaskParams struct {
-	// The role id.
+	// The role id
 	IncidentRoleId string                                     `json:"incident_role_id"`
 	TaskType       *AutoAssignRoleVictorOpsTaskParamsTaskType `json:"task_type,omitempty"`
 	Team           struct {
@@ -6273,7 +6216,7 @@ type CreateAirtableTableRecordTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"base"`
 
-	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
+	// Custom field mappings. Can contain liquid markup and need to be valid JSON
 	CustomFieldsMapping *string `json:"custom_fields_mapping"`
 	Table               struct {
 		Id   *string `json:"id,omitempty"`
@@ -6294,11 +6237,11 @@ type CreateAsanaSubtaskTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"completion"`
 
-	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
+	// Custom field mappings. Can contain liquid markup and need to be valid JSON
 	CustomFieldsMapping *string                                          `json:"custom_fields_mapping"`
 	DependencyDirection *CreateAsanaSubtaskTaskParamsDependencyDirection `json:"dependency_direction,omitempty"`
 
-	// Dependent task ids. Supports liquid syntax.
+	// Dependent task ids. Supports liquid syntax
 	DependentTaskIds *[]string `json:"dependent_task_ids"`
 	Notes            *string   `json:"notes,omitempty"`
 
@@ -6325,11 +6268,11 @@ type CreateAsanaTaskTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"completion"`
 
-	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
+	// Custom field mappings. Can contain liquid markup and need to be valid JSON
 	CustomFieldsMapping *string                                       `json:"custom_fields_mapping"`
 	DependencyDirection *CreateAsanaTaskTaskParamsDependencyDirection `json:"dependency_direction,omitempty"`
 
-	// Dependent task ids. Supports liquid syntax.
+	// Dependent task ids. Supports liquid syntax
 	DependentTaskIds *[]string `json:"dependent_task_ids"`
 	Notes            *string   `json:"notes,omitempty"`
 	Projects         []struct {
@@ -6486,7 +6429,7 @@ type CreateGoogleCalendarEventTaskParams struct {
 	CanGuestsModifyEvent    *bool    `json:"can_guests_modify_event,omitempty"`
 	CanGuestsSeeOtherGuests *bool    `json:"can_guests_see_other_guests,omitempty"`
 
-	// Sets the video conference type attached to the meeting.
+	// Sets the video conference type attached to the meeting
 	ConferenceSolutionKey *CreateGoogleCalendarEventTaskParamsConferenceSolutionKey `json:"conference_solution_key"`
 
 	// The days until meeting
@@ -6516,7 +6459,7 @@ type CreateGoogleCalendarEventTaskParams struct {
 	TimeZone      *CreateGoogleCalendarEventTaskParamsTimeZone `json:"time_zone"`
 }
 
-// Sets the video conference type attached to the meeting.
+// Sets the video conference type attached to the meeting
 type CreateGoogleCalendarEventTaskParamsConferenceSolutionKey string
 
 // CreateGoogleCalendarEventTaskParamsTaskType defines model for CreateGoogleCalendarEventTaskParams.TaskType.
@@ -6599,12 +6542,12 @@ type CreateGoogleMeetingTaskParamsTaskType string
 
 // CreateIncidentPostmortemTaskParams defines model for create_incident_postmortem_task_params.
 type CreateIncidentPostmortemTaskParams struct {
-	// UUID of the incident that needs a retrospective.
+	// UUID of the incident that needs a retrospective
 	IncidentId string                                      `json:"incident_id"`
 	Status     *string                                     `json:"status"`
 	TaskType   *CreateIncidentPostmortemTaskParamsTaskType `json:"task_type,omitempty"`
 
-	// Retrospective template to use.
+	// Retrospective template to use
 	Template *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -6619,7 +6562,7 @@ type CreateIncidentPostmortemTaskParamsTaskType string
 
 // CreateIncidentTaskParams defines model for create_incident_task_params.
 type CreateIncidentTaskParams struct {
-	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
+	// Custom field mappings. Can contain liquid markup and need to be valid JSON
 	CustomFieldsMapping *string   `json:"custom_fields_mapping"`
 	EnvironmentIds      *[]string `json:"environment_ids,omitempty"`
 	FunctionalityIds    *[]string `json:"functionality_ids,omitempty"`
@@ -6645,7 +6588,7 @@ type CreateJiraIssueTaskParams struct {
 	// The assigned user's email.
 	AssignUserEmail *string `json:"assign_user_email,omitempty"`
 
-	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
+	// Custom field mappings. Can contain liquid markup and need to be valid JSON
 	CustomFieldsMapping *string `json:"custom_fields_mapping"`
 
 	// The issue description.
@@ -6691,7 +6634,7 @@ type CreateJiraIssueTaskParams struct {
 	// The issue title.
 	Title string `json:"title"`
 
-	// Update payload. Can contain liquid markup and need to be valid JSON.
+	// Update payload. Can contain liquid markup and need to be valid JSON
 	UpdatePayload *string `json:"update_payload"`
 }
 
@@ -6703,7 +6646,7 @@ type CreateJiraSubtaskTaskParams struct {
 	// The assigned user's email.
 	AssignUserEmail *string `json:"assign_user_email,omitempty"`
 
-	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
+	// Custom field mappings. Can contain liquid markup and need to be valid JSON
 	CustomFieldsMapping *string `json:"custom_fields_mapping"`
 
 	// The issue description.
@@ -6752,7 +6695,7 @@ type CreateJiraSubtaskTaskParams struct {
 	// The issue title.
 	Title string `json:"title"`
 
-	// Update payload. Can contain liquid markup and need to be valid JSON.
+	// Update payload. Can contain liquid markup and need to be valid JSON
 	UpdatePayload *string `json:"update_payload"`
 }
 
@@ -6994,7 +6937,7 @@ type CreateServiceNowIncidentTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"completion,omitempty"`
 
-	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
+	// Custom field mappings. Can contain liquid markup and need to be valid JSON
 	CustomFieldsMapping *string `json:"custom_fields_mapping"`
 
 	// The incident description
@@ -7154,7 +7097,7 @@ type CreateZendeskTicketTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"completion,omitempty"`
 
-	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
+	// Custom field mappings. Can contain liquid markup and need to be valid JSON
 	CustomFieldsMapping *string                           `json:"custom_fields_mapping"`
 	Kind                CreateZendeskTicketTaskParamsKind `json:"kind"`
 
@@ -7171,7 +7114,7 @@ type CreateZendeskTicketTaskParams struct {
 	Tags     *string                                `json:"tags,omitempty"`
 	TaskType *CreateZendeskTicketTaskParamsTaskType `json:"task_type,omitempty"`
 
-	// Additional Zendesk ticket attributes. Will be merged into whatever was specified in this tasks current parameters. Can contain liquid markup and need to be valid JSON.
+	// Additional Zendesk ticket attributes. Will be merged into whatever was specified in this tasks current parameters. Can contain liquid markup and need to be valid JSON
 	TicketPayload *string `json:"ticket_payload"`
 }
 
@@ -7213,7 +7156,7 @@ type CustomField struct {
 	// Date of creation
 	CreatedAt string `json:"created_at"`
 
-	// The default value for text field kinds.
+	// The default value for text field kinds
 	Default *string `json:"default"`
 
 	// The description of the custom_field
@@ -7253,7 +7196,7 @@ type CustomFieldList struct {
 			// Date of creation
 			CreatedAt string `json:"created_at"`
 
-			// The default value for text field kinds.
+			// The default value for text field kinds
 			Default *string `json:"default"`
 
 			// The description of the custom_field
@@ -7404,7 +7347,7 @@ type CustomFieldResponse struct {
 			// Date of creation
 			CreatedAt string `json:"created_at"`
 
-			// The default value for text field kinds.
+			// The default value for text field kinds
 			Default *string `json:"default"`
 
 			// The description of the custom_field
@@ -8435,7 +8378,7 @@ type HttpClientTaskParams struct {
 	// JSON map of HTTP headers.
 	Headers *string `json:"headers,omitempty"`
 
-	// HTTP method.
+	// HTTP method
 	Method *HttpClientTaskParamsMethod `json:"method,omitempty"`
 
 	// JSON map of HTTP query parameters.
@@ -8450,11 +8393,11 @@ type HttpClientTaskParams struct {
 	SucceedOnStatus string                        `json:"succeed_on_status"`
 	TaskType        *HttpClientTaskParamsTaskType `json:"task_type,omitempty"`
 
-	// URL endpoint.
+	// URL endpoint
 	Url string `json:"url"`
 }
 
-// HTTP method.
+// HTTP method
 type HttpClientTaskParamsMethod string
 
 // HttpClientTaskParamsTaskType defines model for HttpClientTaskParams.TaskType.
@@ -11141,7 +11084,7 @@ type IncidentTriggerParams struct {
 	IncidentStatuses                *[]IncidentTriggerParamsIncidentStatuses             `json:"incident_statuses,omitempty"`
 	IncidentVisibilities            *[]bool                                              `json:"incident_visibilities,omitempty"`
 	TriggerType                     IncidentTriggerParamsTriggerType                     `json:"trigger_type"`
-	Triggers                        *[]IncidentTriggerParamsTriggers                     `json:"triggers,omitempty"`
+	Triggers                        *[]string                                            `json:"triggers,omitempty"`
 }
 
 // IncidentTriggerParamsIncidentCondition defines model for IncidentTriggerParams.IncidentCondition.
@@ -11185,9 +11128,6 @@ type IncidentTriggerParamsIncidentStatuses string
 
 // IncidentTriggerParamsTriggerType defines model for IncidentTriggerParams.TriggerType.
 type IncidentTriggerParamsTriggerType string
-
-// Actions that trigger the workflow.
-type IncidentTriggerParamsTriggers string
 
 // IncidentType defines model for incident_type.
 type IncidentType struct {
@@ -11524,7 +11464,7 @@ type NewCauseDataType string
 type NewCustomField struct {
 	Data struct {
 		Attributes struct {
-			// The default value for text field kinds.
+			// The default value for text field kinds
 			Default *string `json:"default"`
 
 			// The description of the custom_field
@@ -11899,7 +11839,7 @@ type NewIncident struct {
 			// The summary of the incident
 			Summary *string `json:"summary"`
 
-			// The title of the incident. We will autogenerate one if null.
+			// The title of the incident. We will autogenerate one if null
 			Title *string `json:"title"`
 
 			// The url to the incident
@@ -12269,7 +12209,7 @@ type NewPlaybookTaskDataType string
 type NewPostMortemTemplate struct {
 	Data struct {
 		Attributes struct {
-			// The postmortem template. Liquid syntax is supported.
+			// The postmortem template. Liquid syntax is supported
 			Content string `json:"content"`
 
 			// Default selected template when editing a postmortem
@@ -12518,7 +12458,7 @@ type NewSeverityDataType string
 type NewStatusPage struct {
 	Data struct {
 		Attributes struct {
-			// Allow search engines to include your public status page in search results.
+			// Allow search engines to include your public status page in search results
 			AllowSearchEngineIndex *bool `json:"allow_search_engine_index"`
 
 			// Enable authentication
@@ -12680,10 +12620,10 @@ type NewWebhooksEndpointDataType string
 type NewWorkflow struct {
 	Data struct {
 		Attributes struct {
-			// Workflow command.
+			// Workflow command
 			Command *string `json:"command"`
 
-			// This will notify you back when the workflow is starting.
+			// This will notify you back when the workflow is starting
 			CommandFeedbackEnabled *bool `json:"command_feedback_enabled"`
 
 			// The description of the workflow
@@ -12703,7 +12643,7 @@ type NewWorkflow struct {
 			// Priority
 			Priority *NewWorkflowDataAttributesPriority `json:"priority"`
 
-			// Repeat workflow every duration.
+			// Repeat workflow every duration
 			RepeatEveryDuration *string                              `json:"repeat_every_duration"`
 			RepeatOn            *[]NewWorkflowDataAttributesRepeatOn `json:"repeat_on,omitempty"`
 			ServiceIds          *[]string                            `json:"service_ids,omitempty"`
@@ -12713,7 +12653,7 @@ type NewWorkflow struct {
 			Slug          *string      `json:"slug,omitempty"`
 			TriggerParams *interface{} `json:"trigger_params,omitempty"`
 
-			// Wait this duration before executing.
+			// Wait this duration before executing
 			Wait *string `json:"wait"`
 
 			// The group this workflow belongs to.
@@ -12726,7 +12666,7 @@ type NewWorkflow struct {
 // Priority
 type NewWorkflowDataAttributesPriority string
 
-// Repeat on weekdays.
+// Repeat on weekdays
 type NewWorkflowDataAttributesRepeatOn string
 
 // NewWorkflowDataType defines model for NewWorkflow.Data.Type.
@@ -12790,7 +12730,7 @@ type NewWorkflowGroup struct {
 			// Whether the group is expanded or collapsed.
 			Expanded *bool `json:"expanded,omitempty"`
 
-			// The kind of the workflow group.
+			// The kind of the workflow group
 			Kind NewWorkflowGroupDataAttributesKind `json:"kind"`
 
 			// The name of the workflow group.
@@ -12803,7 +12743,7 @@ type NewWorkflowGroup struct {
 	} `json:"data"`
 }
 
-// The kind of the workflow group.
+// The kind of the workflow group
 type NewWorkflowGroupDataAttributesKind string
 
 // NewWorkflowGroupDataType defines model for NewWorkflowGroup.Data.Type.
@@ -12866,15 +12806,14 @@ type PageOpsgenieOnCallRespondersTaskParamsTaskType string
 
 // PagePagerdutyOnCallRespondersTaskParams defines model for page_pagerduty_on_call_responders_task_params.
 type PagePagerdutyOnCallRespondersTaskParams struct {
-	EscalationPolicies *[]struct {
+	// Rootly only supports linking to a single Pagerduty incident. If this feature is disabled Rootly will add responders from any additional pages to the existing Pagerduty incident that is linked to the Rootly incident. If enabled, Rootly will create a new Pagerduty incident that is not linked to any Rootly incidents
+	CreateNewIncidentOnConflict *bool `json:"create_new_incident_on_conflict,omitempty"`
+	EscalationPolicies          *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"escalation_policies,omitempty"`
 	Message *string `json:"message,omitempty"`
-
-	// Rootly only supports linking to a single Pagerduty incident. If this feature is disabled Rootly will add responders from any additional pages to the existing Pagerduty incident that is linked to the Rootly incident. If enabled, Rootly will create a new Pagerduty incident that is not linked to any Rootly incidents.
-	NotifySubscribers *bool `json:"notify_subscribers,omitempty"`
-	Service           struct {
+	Service struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"service"`
@@ -13124,7 +13063,7 @@ type PlaybookTaskResponseDataType string
 
 // PostMortemTemplate defines model for post_mortem_template.
 type PostMortemTemplate struct {
-	// The postmortem template. Liquid syntax and markdown are supported.
+	// The postmortem template. Liquid syntax and markdown are supported
 	Content *string `json:"content,omitempty"`
 
 	// Date of creation
@@ -13133,7 +13072,7 @@ type PostMortemTemplate struct {
 	// Default selected template when editing a postmortem
 	Default *bool `json:"default"`
 
-	// The format of the input.
+	// The format of the input
 	Format *PostMortemTemplateFormat `json:"format,omitempty"`
 
 	// The name of the postmortem template
@@ -13143,14 +13082,14 @@ type PostMortemTemplate struct {
 	UpdatedAt string `json:"updated_at"`
 }
 
-// The format of the input.
+// The format of the input
 type PostMortemTemplateFormat string
 
 // PostMortemTemplateList defines model for post_mortem_template_list.
 type PostMortemTemplateList struct {
 	Data []struct {
 		Attributes struct {
-			// The postmortem template. Liquid syntax and markdown are supported.
+			// The postmortem template. Liquid syntax and markdown are supported
 			Content *string `json:"content,omitempty"`
 
 			// Date of creation
@@ -13159,7 +13098,7 @@ type PostMortemTemplateList struct {
 			// Default selected template when editing a postmortem
 			Default *bool `json:"default"`
 
-			// The format of the input.
+			// The format of the input
 			Format *PostMortemTemplateListDataAttributesFormat `json:"format,omitempty"`
 
 			// The name of the postmortem template
@@ -13182,7 +13121,7 @@ type PostMortemTemplateList struct {
 	} `json:"links"`
 }
 
-// The format of the input.
+// The format of the input
 type PostMortemTemplateListDataAttributesFormat string
 
 // PostMortemTemplateListDataType defines model for PostMortemTemplateList.Data.Type.
@@ -13192,7 +13131,7 @@ type PostMortemTemplateListDataType string
 type PostMortemTemplateResponse struct {
 	Data struct {
 		Attributes struct {
-			// The postmortem template. Liquid syntax and markdown are supported.
+			// The postmortem template. Liquid syntax and markdown are supported
 			Content *string `json:"content,omitempty"`
 
 			// Date of creation
@@ -13201,7 +13140,7 @@ type PostMortemTemplateResponse struct {
 			// Default selected template when editing a postmortem
 			Default *bool `json:"default"`
 
-			// The format of the input.
+			// The format of the input
 			Format *PostMortemTemplateResponseDataAttributesFormat `json:"format,omitempty"`
 
 			// The name of the postmortem template
@@ -13217,7 +13156,7 @@ type PostMortemTemplateResponse struct {
 	} `json:"data"`
 }
 
-// The format of the input.
+// The format of the input
 type PostMortemTemplateResponseDataAttributesFormat string
 
 // PostMortemTemplateResponseDataType defines model for PostMortemTemplateResponse.Data.Type.
@@ -13242,7 +13181,7 @@ type PublishIncidentTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"incident"`
 
-	// Additional API Payload you can pass to statuspage.io for example. Can contain liquid markup and need to be valid JSON.
+	// Additional API Payload you can pass to statuspage.io for example. Can contain liquid markup and need to be valid JSON
 	IntegrationPayload *string `json:"integration_payload"`
 
 	// When true notifies subscribers of the status page by email/text
@@ -13821,7 +13760,7 @@ type PulseTriggerParamsPulseConditionSource string
 // PulseTriggerParamsTriggerType defines model for PulseTriggerParams.TriggerType.
 type PulseTriggerParamsTriggerType string
 
-// Actions that trigger the workflow.
+// Actions that trigger the workflow
 type PulseTriggerParamsTriggers string
 
 // RedisClientTaskParams defines model for redis_client_task_params.
@@ -13861,7 +13800,7 @@ type RemoveGoogleDocsPermissionsTaskParamsTaskType string
 type RemoveSubscribers struct {
 	Data struct {
 		Attributes struct {
-			// Users without read permissions for private incidents will be removed from the subscriber list of this incident.
+			// Users without read permissions for private incidents will be removed from the subscriber list of this incident
 			RemoveUsersWithNoPrivateIncidentAccess *bool `json:"remove_users_with_no_private_incident_access"`
 
 			// IDs of users you wish to remove from the list of subscribers for this incident
@@ -14038,7 +13977,7 @@ type SendDashboardReportTaskParams struct {
 	Body         *string  `json:"body"`
 	DashboardIds []string `json:"dashboard_ids"`
 
-	// The from email address. Need to use SMTP integration if different than rootly.com.
+	// The from email address. Need to use SMTP integration if different than rootly.com
 	From *string `json:"from,omitempty"`
 
 	// The preheader
@@ -14064,7 +14003,7 @@ type SendEmailTaskParams struct {
 	// URL to your custom email logo
 	CustomLogoUrl *string `json:"custom_logo_url"`
 
-	// The from email address. Need to use SMTP integration if different than rootly.com.
+	// The from email address. Need to use SMTP integration if different than rootly.com
 	From          *string `json:"from,omitempty"`
 	IncludeFooter *bool   `json:"include_footer,omitempty"`
 	IncludeHeader *bool   `json:"include_header,omitempty"`
@@ -14666,7 +14605,7 @@ type SimpleTriggerParams struct {
 // SimpleTriggerParamsTriggerType defines model for SimpleTriggerParams.TriggerType.
 type SimpleTriggerParamsTriggerType string
 
-// Actions that trigger the workflow.
+// Actions that trigger the workflow
 type SimpleTriggerParamsTriggers string
 
 // SnapshotDatadogGraphTaskParams defines model for snapshot_datadog_graph_task_params.
@@ -14677,7 +14616,7 @@ type SnapshotDatadogGraphTaskParams struct {
 	} `json:"dashboards,omitempty"`
 	MetricQueries *[]string `json:"metric_queries,omitempty"`
 
-	// in format '1 minute', '30 days', '3 months', etc.
+	// in format '1 minute', '30 days', '3 months', etc
 	PastDuration           string `json:"past_duration"`
 	PostToIncidentTimeline *bool  `json:"post_to_incident_timeline,omitempty"`
 	PostToSlackChannels    *[]struct {
@@ -14744,7 +14683,7 @@ type SnapshotNewRelicGraphTaskParamsTaskType string
 
 // StatusPage defines model for status_page.
 type StatusPage struct {
-	// Allow search engines to include your public status page in search results.
+	// Allow search engines to include your public status page in search results
 	AllowSearchEngineIndex *bool `json:"allow_search_engine_index"`
 
 	// Enable authentication
@@ -14821,7 +14760,7 @@ type StatusPageTimeZone string
 type StatusPageList struct {
 	Data []struct {
 		Attributes struct {
-			// Allow search engines to include your public status page in search results.
+			// Allow search engines to include your public status page in search results
 			AllowSearchEngineIndex *bool `json:"allow_search_engine_index"`
 
 			// Enable authentication
@@ -14914,7 +14853,7 @@ type StatusPageListDataType string
 type StatusPageResponse struct {
 	Data struct {
 		Attributes struct {
-			// Allow search engines to include your public status page in search results.
+			// Allow search engines to include your public status page in search results
 			AllowSearchEngineIndex *bool `json:"allow_search_engine_index"`
 
 			// Enable authentication
@@ -15347,7 +15286,7 @@ type UpdateActionItemTaskParams struct {
 	// Attribute of the action item to match against
 	AttributeToQueryBy UpdateActionItemTaskParamsAttributeToQueryBy `json:"attribute_to_query_by"`
 
-	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
+	// Custom field mappings. Can contain liquid markup and need to be valid JSON
 	CustomFieldsMapping *string `json:"custom_fields_mapping"`
 
 	// The action item description.
@@ -15355,13 +15294,13 @@ type UpdateActionItemTaskParams struct {
 	GroupIds               *[]string `json:"group_ids"`
 	PostToIncidentTimeline *bool     `json:"post_to_incident_timeline,omitempty"`
 
-	// The action item priority.
+	// The action item priority
 	Priority *UpdateActionItemTaskParamsPriority `json:"priority,omitempty"`
 
 	// Value that attribute_to_query_by to uses to match against
 	QueryValue string `json:"query_value"`
 
-	// The action item status.
+	// The action item status
 	Status *UpdateActionItemTaskParamsStatus `json:"status,omitempty"`
 
 	// Brief description of the action item
@@ -15372,10 +15311,10 @@ type UpdateActionItemTaskParams struct {
 // Attribute of the action item to match against
 type UpdateActionItemTaskParamsAttributeToQueryBy string
 
-// The action item priority.
+// The action item priority
 type UpdateActionItemTaskParamsPriority string
 
-// The action item status.
+// The action item status
 type UpdateActionItemTaskParamsStatus string
 
 // UpdateActionItemTaskParamsTaskType defines model for UpdateActionItemTaskParams.TaskType.
@@ -15386,7 +15325,7 @@ type UpdateAirtableTableRecordTaskParams struct {
 	// The base key
 	BaseKey string `json:"base_key"`
 
-	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
+	// Custom field mappings. Can contain liquid markup and need to be valid JSON
 	CustomFieldsMapping *string `json:"custom_fields_mapping"`
 
 	// The record id
@@ -15409,11 +15348,11 @@ type UpdateAsanaTaskTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"completion"`
 
-	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
+	// Custom field mappings. Can contain liquid markup and need to be valid JSON
 	CustomFieldsMapping *string                                       `json:"custom_fields_mapping"`
 	DependencyDirection *UpdateAsanaTaskTaskParamsDependencyDirection `json:"dependency_direction,omitempty"`
 
-	// Dependent task ids. Supports liquid syntax.
+	// Dependent task ids. Supports liquid syntax
 	DependentTaskIds *[]string `json:"dependent_task_ids"`
 	Notes            *string   `json:"notes,omitempty"`
 
@@ -15455,7 +15394,7 @@ type UpdateCauseDataType string
 type UpdateCustomField struct {
 	Data struct {
 		Attributes struct {
-			// The default value for text field kinds.
+			// The default value for text field kinds
 			Default *string `json:"default"`
 
 			// The description of the custom_field
@@ -15779,7 +15718,7 @@ type UpdateGoogleCalendarEventTaskParams struct {
 	CanGuestsModifyEvent    *bool     `json:"can_guests_modify_event,omitempty"`
 	CanGuestsSeeOtherGuests *bool     `json:"can_guests_see_other_guests,omitempty"`
 
-	// Sets the video conference type attached to the meeting.
+	// Sets the video conference type attached to the meeting
 	ConferenceSolutionKey *UpdateGoogleCalendarEventTaskParamsConferenceSolutionKey `json:"conference_solution_key"`
 
 	// The event description
@@ -15808,7 +15747,7 @@ type UpdateGoogleCalendarEventTaskParams struct {
 	TimeOfMeeting *string `json:"time_of_meeting,omitempty"`
 }
 
-// Sets the video conference type attached to the meeting.
+// Sets the video conference type attached to the meeting
 type UpdateGoogleCalendarEventTaskParamsConferenceSolutionKey string
 
 // UpdateGoogleCalendarEventTaskParamsTaskType defines model for UpdateGoogleCalendarEventTaskParams.TaskType.
@@ -16134,7 +16073,7 @@ type UpdateIncidentPostMortemDataType string
 
 // UpdateIncidentPostmortemTaskParams defines model for update_incident_postmortem_task_params.
 type UpdateIncidentPostmortemTaskParams struct {
-	// UUID of the retrospective that needs to be updated.
+	// UUID of the retrospective that needs to be updated
 	PostmortemId string                                      `json:"postmortem_id"`
 	Status       *string                                     `json:"status"`
 	TaskType     *UpdateIncidentPostmortemTaskParamsTaskType `json:"task_type,omitempty"`
@@ -16230,7 +16169,7 @@ type UpdateIncidentTaskParams struct {
 	AcknowledgedAt     *string                                     `json:"acknowledged_at"`
 	AttributeToQueryBy *UpdateIncidentTaskParamsAttributeToQueryBy `json:"attribute_to_query_by,omitempty"`
 
-	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
+	// Custom field mappings. Can contain liquid markup and need to be valid JSON
 	CustomFieldsMapping *string   `json:"custom_fields_mapping"`
 	DetectedAt          *string   `json:"detected_at"`
 	EnvironmentIds      *[]string `json:"environment_ids"`
@@ -16311,7 +16250,7 @@ type UpdateJiraIssueTaskParams struct {
 	// The assigned user's email.
 	AssignUserEmail *string `json:"assign_user_email,omitempty"`
 
-	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
+	// Custom field mappings. Can contain liquid markup and need to be valid JSON
 	CustomFieldsMapping *string `json:"custom_fields_mapping"`
 
 	// The issue description.
@@ -16348,7 +16287,7 @@ type UpdateJiraIssueTaskParams struct {
 	// The issue title.
 	Title *string `json:"title,omitempty"`
 
-	// Update payload. Can contain liquid markup and need to be valid JSON.
+	// Update payload. Can contain liquid markup and need to be valid JSON
 	UpdatePayload *string `json:"update_payload"`
 }
 
@@ -16475,7 +16414,7 @@ type UpdatePagerdutyIncidentTaskParams struct {
 	// Title to update to
 	Title *string `json:"title,omitempty"`
 
-	// Pagerduty incident urgency, selecting auto will let Rootly auto map our incident severity.
+	// Pagerduty incident urgency, selecting auto will let Rootly auto map our incident severity
 	Urgency *UpdatePagerdutyIncidentTaskParamsUrgency `json:"urgency,omitempty"`
 }
 
@@ -16485,7 +16424,7 @@ type UpdatePagerdutyIncidentTaskParamsStatus string
 // UpdatePagerdutyIncidentTaskParamsTaskType defines model for UpdatePagerdutyIncidentTaskParams.TaskType.
 type UpdatePagerdutyIncidentTaskParamsTaskType string
 
-// Pagerduty incident urgency, selecting auto will let Rootly auto map our incident severity.
+// Pagerduty incident urgency, selecting auto will let Rootly auto map our incident severity
 type UpdatePagerdutyIncidentTaskParamsUrgency string
 
 // UpdatePagertreeAlertTaskParams defines model for update_pagertree_alert_task_params.
@@ -16582,7 +16521,7 @@ type UpdatePlaybookTaskDataType string
 type UpdatePostMortemTemplate struct {
 	Data struct {
 		Attributes struct {
-			// The postmortem template. Liquid syntax is supported.
+			// The postmortem template. Liquid syntax is supported
 			Content *string `json:"content,omitempty"`
 
 			// Default selected template when editing a postmortem
@@ -16770,7 +16709,7 @@ type UpdateServiceNowIncidentTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"completion,omitempty"`
 
-	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
+	// Custom field mappings. Can contain liquid markup and need to be valid JSON
 	CustomFieldsMapping *string `json:"custom_fields_mapping"`
 
 	// The incident description
@@ -16910,7 +16849,7 @@ type UpdateSlackChannelTopicTaskParamsTaskType string
 type UpdateStatusPage struct {
 	Data struct {
 		Attributes struct {
-			// Allow search engines to include your public status page in search results.
+			// Allow search engines to include your public status page in search results
 			AllowSearchEngineIndex *bool `json:"allow_search_engine_index"`
 
 			// Enable authentication
@@ -16985,7 +16924,7 @@ type UpdateStatusPageDataType string
 
 // UpdateStatusTaskParams defines model for update_status_task_params.
 type UpdateStatusTaskParams struct {
-	// In format '1 hour', '1 day', etc.
+	// In format '1 hour', '1 day', etc
 	InactivityTimeout *string                         `json:"inactivity_timeout,omitempty"`
 	Status            UpdateStatusTaskParamsStatus    `json:"status"`
 	TaskType          *UpdateStatusTaskParamsTaskType `json:"task_type,omitempty"`
@@ -17135,10 +17074,10 @@ type UpdateWebhooksEndpointDataType string
 type UpdateWorkflow struct {
 	Data struct {
 		Attributes struct {
-			// Workflow command.
+			// Workflow command
 			Command *string `json:"command"`
 
-			// This will notify you back when the workflow is starting.
+			// This will notify you back when the workflow is starting
 			CommandFeedbackEnabled *bool `json:"command_feedback_enabled"`
 
 			// The description of the workflow
@@ -17155,7 +17094,7 @@ type UpdateWorkflow struct {
 			// The order which the workflow should run with other workflows.
 			Position *float32 `json:"position,omitempty"`
 
-			// Repeat workflow every duration.
+			// Repeat workflow every duration
 			RepeatEveryDuration *string   `json:"repeat_every_duration"`
 			ServiceIds          *[]string `json:"service_ids,omitempty"`
 			SeverityIds         *[]string `json:"severity_ids,omitempty"`
@@ -17164,7 +17103,7 @@ type UpdateWorkflow struct {
 			Slug          *string      `json:"slug,omitempty"`
 			TriggerParams *interface{} `json:"trigger_params,omitempty"`
 
-			// Wait this duration before executing.
+			// Wait this duration before executing
 			Wait *string `json:"wait"`
 
 			// The group this workflow belongs to.
@@ -17223,7 +17162,7 @@ type UpdateWorkflowGroup struct {
 			// Whether the group is expanded or collapsed.
 			Expanded *bool `json:"expanded,omitempty"`
 
-			// The kind of the workflow group.
+			// The kind of the workflow group
 			Kind *UpdateWorkflowGroupDataAttributesKind `json:"kind,omitempty"`
 
 			// The name of the workflow group.
@@ -17236,7 +17175,7 @@ type UpdateWorkflowGroup struct {
 	} `json:"data"`
 }
 
-// The kind of the workflow group.
+// The kind of the workflow group
 type UpdateWorkflowGroupDataAttributesKind string
 
 // UpdateWorkflowGroupDataType defines model for UpdateWorkflowGroup.Data.Type.
@@ -17274,7 +17213,7 @@ type UpdateZendeskTicketTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"completion,omitempty"`
 
-	// Custom field mappings. Can contain liquid markup and need to be valid JSON.
+	// Custom field mappings. Can contain liquid markup and need to be valid JSON
 	CustomFieldsMapping *string `json:"custom_fields_mapping"`
 
 	// The priority id and display name.
@@ -17293,7 +17232,7 @@ type UpdateZendeskTicketTaskParams struct {
 	// The ticket id.
 	TicketId string `json:"ticket_id"`
 
-	// Additional Zendesk ticket attributes. Will be merged into whatever was specified in this tasks current parameters. Can contain liquid markup and need to be valid JSON.
+	// Additional Zendesk ticket attributes. Will be merged into whatever was specified in this tasks current parameters. Can contain liquid markup and need to be valid JSON
 	TicketPayload *string `json:"ticket_payload"`
 }
 
@@ -17560,10 +17499,10 @@ type WebhooksEndpointResponseDataType string
 
 // Workflow defines model for workflow.
 type Workflow struct {
-	// Workflow command.
+	// Workflow command
 	Command *string `json:"command"`
 
-	// This will notify you back when the workflow is starting.
+	// This will notify you back when the workflow is starting
 	CommandFeedbackEnabled *bool `json:"command_feedback_enabled"`
 
 	// Date of creation
@@ -17583,7 +17522,7 @@ type Workflow struct {
 	// The order which the workflow should run with other workflows.
 	Position *float32 `json:"position,omitempty"`
 
-	// Repeat workflow every duration.
+	// Repeat workflow every duration
 	RepeatEveryDuration *string             `json:"repeat_every_duration"`
 	RepeatOn            *[]WorkflowRepeatOn `json:"repeat_on"`
 	ServiceIds          *[]string           `json:"service_ids,omitempty"`
@@ -17596,14 +17535,14 @@ type Workflow struct {
 	// Date of last update
 	UpdatedAt string `json:"updated_at"`
 
-	// Wait this duration before executing.
+	// Wait this duration before executing
 	Wait *string `json:"wait"`
 
 	// The group this workflow belongs to.
 	WorkflowGroupId *string `json:"workflow_group_id,omitempty"`
 }
 
-// Repeat on weekdays.
+// Repeat on weekdays
 type WorkflowRepeatOn string
 
 // WorkflowCustomFieldSelection defines model for workflow_custom_field_selection.
@@ -17774,7 +17713,7 @@ type WorkflowGroup struct {
 	// Whether the group is expanded or collapsed.
 	Expanded *bool `json:"expanded,omitempty"`
 
-	// The kind of the workflow group.
+	// The kind of the workflow group
 	Kind WorkflowGroupKind `json:"kind"`
 
 	// The name of the workflow group.
@@ -17787,7 +17726,7 @@ type WorkflowGroup struct {
 	Slug *string `json:"slug,omitempty"`
 }
 
-// The kind of the workflow group.
+// The kind of the workflow group
 type WorkflowGroupKind string
 
 // WorkflowGroupList defines model for workflow_group_list.
@@ -17797,7 +17736,7 @@ type WorkflowGroupList struct {
 			// Whether the group is expanded or collapsed.
 			Expanded *bool `json:"expanded,omitempty"`
 
-			// The kind of the workflow group.
+			// The kind of the workflow group
 			Kind WorkflowGroupListDataAttributesKind `json:"kind"`
 
 			// The name of the workflow group.
@@ -17823,7 +17762,7 @@ type WorkflowGroupList struct {
 	} `json:"links"`
 }
 
-// The kind of the workflow group.
+// The kind of the workflow group
 type WorkflowGroupListDataAttributesKind string
 
 // WorkflowGroupListDataType defines model for WorkflowGroupList.Data.Type.
@@ -17836,7 +17775,7 @@ type WorkflowGroupResponse struct {
 			// Whether the group is expanded or collapsed.
 			Expanded *bool `json:"expanded,omitempty"`
 
-			// The kind of the workflow group.
+			// The kind of the workflow group
 			Kind WorkflowGroupResponseDataAttributesKind `json:"kind"`
 
 			// The name of the workflow group.
@@ -17855,7 +17794,7 @@ type WorkflowGroupResponse struct {
 	} `json:"data"`
 }
 
-// The kind of the workflow group.
+// The kind of the workflow group
 type WorkflowGroupResponseDataAttributesKind string
 
 // WorkflowGroupResponseDataType defines model for WorkflowGroupResponse.Data.Type.
@@ -17865,10 +17804,10 @@ type WorkflowGroupResponseDataType string
 type WorkflowList struct {
 	Data []struct {
 		Attributes struct {
-			// Workflow command.
+			// Workflow command
 			Command *string `json:"command"`
 
-			// This will notify you back when the workflow is starting.
+			// This will notify you back when the workflow is starting
 			CommandFeedbackEnabled *bool `json:"command_feedback_enabled"`
 
 			// Date of creation
@@ -17888,7 +17827,7 @@ type WorkflowList struct {
 			// The order which the workflow should run with other workflows.
 			Position *float32 `json:"position,omitempty"`
 
-			// Repeat workflow every duration.
+			// Repeat workflow every duration
 			RepeatEveryDuration *string                               `json:"repeat_every_duration"`
 			RepeatOn            *[]WorkflowListDataAttributesRepeatOn `json:"repeat_on"`
 			ServiceIds          *[]string                             `json:"service_ids,omitempty"`
@@ -17901,7 +17840,7 @@ type WorkflowList struct {
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`
 
-			// Wait this duration before executing.
+			// Wait this duration before executing
 			Wait *string `json:"wait"`
 
 			// The group this workflow belongs to.
@@ -17921,7 +17860,7 @@ type WorkflowList struct {
 	} `json:"links"`
 }
 
-// Repeat on weekdays.
+// Repeat on weekdays
 type WorkflowListDataAttributesRepeatOn string
 
 // WorkflowListDataType defines model for WorkflowList.Data.Type.
@@ -17931,10 +17870,10 @@ type WorkflowListDataType string
 type WorkflowResponse struct {
 	Data struct {
 		Attributes struct {
-			// Workflow command.
+			// Workflow command
 			Command *string `json:"command"`
 
-			// This will notify you back when the workflow is starting.
+			// This will notify you back when the workflow is starting
 			CommandFeedbackEnabled *bool `json:"command_feedback_enabled"`
 
 			// Date of creation
@@ -17954,7 +17893,7 @@ type WorkflowResponse struct {
 			// The order which the workflow should run with other workflows.
 			Position *float32 `json:"position,omitempty"`
 
-			// Repeat workflow every duration.
+			// Repeat workflow every duration
 			RepeatEveryDuration *string                                   `json:"repeat_every_duration"`
 			RepeatOn            *[]WorkflowResponseDataAttributesRepeatOn `json:"repeat_on"`
 			ServiceIds          *[]string                                 `json:"service_ids,omitempty"`
@@ -17967,7 +17906,7 @@ type WorkflowResponse struct {
 			// Date of last update
 			UpdatedAt string `json:"updated_at"`
 
-			// Wait this duration before executing.
+			// Wait this duration before executing
 			Wait *string `json:"wait"`
 
 			// The group this workflow belongs to.
@@ -17980,7 +17919,7 @@ type WorkflowResponse struct {
 	} `json:"data"`
 }
 
-// Repeat on weekdays.
+// Repeat on weekdays
 type WorkflowResponseDataAttributesRepeatOn string
 
 // WorkflowResponseDataType defines model for WorkflowResponse.Data.Type.

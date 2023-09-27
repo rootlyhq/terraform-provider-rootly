@@ -35,11 +35,11 @@ Manages workflow create_incident_postmortem task.
 
 Required:
 
-- `incident_id` (String) UUID of the incident that needs a retrospective.
+- `incident_id` (String) UUID of the incident that needs a retrospective
 - `title` (String) The retrospective title
 
 Optional:
 
 - `status` (String)
 - `task_type` (String)
-- `template` (Map of String) Map must contain two fields, `id` and `name`. Retrospective template to use.
+- `template` (Map of String) Map must contain two fields, `id` and `name`. Retrospective template to use

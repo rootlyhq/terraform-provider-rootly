@@ -42,6 +42,6 @@ Required:
 
 Optional:
 
-- `from` (String) The from email address. Need to use SMTP integration if different than rootly.com.
+- `from` (String) The from email address. Need to use SMTP integration if different than rootly.com
 - `preheader` (String) The preheader
 - `task_type` (String)

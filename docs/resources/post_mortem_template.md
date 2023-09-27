@@ -16,13 +16,13 @@ description: |-
 
 ### Required
 
-- `content` (String) The postmortem template. Liquid syntax and markdown are supported.
+- `content` (String) The postmortem template. Liquid syntax and markdown are supported
 - `name` (String) The name of the postmortem template
 
 ### Optional
 
 - `default` (Boolean) Default selected template when editing a postmortem
-- `format` (String) The format of the input.. Value must be one of `html`, `markdown`.
+- `format` (String) The format of the input. Value must be one of `html`, `markdown`.
 
 ### Read-Only
 

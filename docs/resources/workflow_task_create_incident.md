@@ -39,7 +39,7 @@ Required:
 
 Optional:
 
-- `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON.
+- `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON
 - `environment_ids` (List of String)
 - `functionality_ids` (List of String)
 - `group_ids` (List of String)

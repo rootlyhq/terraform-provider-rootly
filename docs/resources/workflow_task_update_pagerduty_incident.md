@@ -44,4 +44,4 @@ Optional:
 - `status` (String) Value must be one of `resolved`, `acknowledged`, `auto`.
 - `task_type` (String)
 - `title` (String) Title to update to
-- `urgency` (String) Pagerduty incident urgency, selecting auto will let Rootly auto map our incident severity.. Value must be one of `high`, `low`, `auto`.
+- `urgency` (String) Pagerduty incident urgency, selecting auto will let Rootly auto map our incident severity. Value must be one of `high`, `low`, `auto`.

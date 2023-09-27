@@ -72,7 +72,7 @@ Optional:
 - `can_guests_invite_others` (Boolean)
 - `can_guests_modify_event` (Boolean)
 - `can_guests_see_other_guests` (Boolean)
-- `conference_solution_key` (String) Sets the video conference type attached to the meeting.. Value must be one of `eventHangout`, `eventNamedHangout`, `hangoutsMeet`, `addOn`.
+- `conference_solution_key` (String) Sets the video conference type attached to the meeting. Value must be one of `eventHangout`, `eventNamedHangout`, `hangoutsMeet`, `addOn`.
 - `exclude_weekends` (Boolean)
 - `post_to_incident_timeline` (Boolean)
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))

@@ -42,11 +42,11 @@ Optional:
 
 - `assigned_to_user` (Map of String) Map must contain two fields, `id` and `name`.  The user this action item is assigned to
 - `assigned_to_user_id` (String) [DEPRECATED] Use assigned_to_user attribute instead. The user id this action item is assigned to
-- `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON.
+- `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON
 - `description` (String) The action item description.
 - `group_ids` (List of String)
 - `post_to_incident_timeline` (Boolean)
-- `priority` (String) The action item priority.. Value must be one of `high`, `medium`, `low`.
-- `status` (String) The action item status.. Value must be one of `open`, `in_progress`, `cancelled`, `done`.
+- `priority` (String) The action item priority. Value must be one of `high`, `medium`, `low`.
+- `status` (String) The action item status. Value must be one of `open`, `in_progress`, `cancelled`, `done`.
 - `summary` (String) Brief description of the action item
 - `task_type` (String)

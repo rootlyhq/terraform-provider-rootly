@@ -35,7 +35,7 @@ Manages workflow snapshot_datadog_graph task.
 
 Required:
 
-- `past_duration` (String) in format '1 minute', '30 days', '3 months', etc.
+- `past_duration` (String) in format '1 minute', '30 days', '3 months', etc
 
 Optional:
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.6] -- 2023-09-20
+
+- Allow to pass `custom_fields.<slug>.updated` trigger to workflows.
+- Improve documentation.
+
 ## [1.1.5] -- 2023-09-20
 
 - Fix panic error by replacing testify with our own JSON comparison logic.

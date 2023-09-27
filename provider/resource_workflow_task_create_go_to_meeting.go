@@ -5,7 +5,7 @@ package provider
 import (
 	"context"
 	"fmt"
-	
+
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -26,92 +26,92 @@ func resourceWorkflowTaskCreateGoToMeeting() *schema.Resource {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
-		Schema: map[string]*schema.Schema {
+		Schema: map[string]*schema.Schema{
 			"workflow_id": {
-				Description:  "The ID of the parent workflow",
-				Type:         schema.TypeString,
-				Required:     true,
-				ForceNew:     true,
+				Description: "The ID of the parent workflow",
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
 			},
 			"name": {
-				Description:  "Name of the workflow task",
-				Type:         schema.TypeString,
-				Optional:     true,
-				Computed:     true,
+				Description: "Name of the workflow task",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"position": {
-				Description:  "The position of the workflow task (1 being top of list)",
-				Type:         schema.TypeInt,
-				Optional:     true,
-				Computed:     true,
+				Description: "The position of the workflow task (1 being top of list)",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
 			},
 			"skip_on_failure": {
-				Description:  "Skip workflow task if any failures",
-				Type:         schema.TypeBool,
-				Optional:     true,
-				Default:      false,
+				Description: "Skip workflow task if any failures",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
 			},
 			"enabled": {
-				Description:  "Enable/disable this workflow task",
-				Type:         schema.TypeBool,
-				Optional:     true,
-				Default:      true,
+				Description: "Enable/disable this workflow task",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type: schema.TypeList,
-				Required: true,
-				MinItems: 1,
-				MaxItems: 1,
+				Type:        schema.TypeList,
+				Required:    true,
+				MinItems:    1,
+				MaxItems:    1,
 				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema {
-						"task_type": &schema.Schema {
-							Type: schema.TypeString,
+					Schema: map[string]*schema.Schema{
+						"task_type": &schema.Schema{
+							Type:     schema.TypeString,
 							Optional: true,
-							Default: "create_go_to_meeting",
-							ValidateFunc: validation.StringInSlice([]string {
+							Default:  "create_go_to_meeting",
+							ValidateFunc: validation.StringInSlice([]string{
 								"create_go_to_meeting",
 							}, false),
 						},
-						"subject": &schema.Schema {
+						"subject": &schema.Schema{
 							Description: "The meeting subject",
-							Type: schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 						},
-						"conference_call_info": &schema.Schema {
+						"conference_call_info": &schema.Schema{
 							Description: "Value must be one of `ptsn`, `free`, `hyrid`, `voip`.",
-							Type: schema.TypeString,
-							Optional: true,
-							Default: "voip",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "voip",
 							ValidateFunc: validation.StringInSlice([]string{
 								"ptsn",
-"free",
-"hyrid",
-"voip",
+								"free",
+								"hyrid",
+								"voip",
 							}, false),
 						},
-						"password_required": &schema.Schema {
+						"password_required": &schema.Schema{
 							Description: "",
-							Type: schema.TypeBool,
-							Optional: true,
+							Type:        schema.TypeBool,
+							Optional:    true,
 						},
-						"post_to_incident_timeline": &schema.Schema {
+						"post_to_incident_timeline": &schema.Schema{
 							Description: "",
-							Type: schema.TypeBool,
-							Optional: true,
+							Type:        schema.TypeBool,
+							Optional:    true,
 						},
-						"post_to_slack_channels": &schema.Schema {
+						"post_to_slack_channels": &schema.Schema{
 							Description: "",
-							Type: schema.TypeList,
-							Optional: true,
+							Type:        schema.TypeList,
+							Optional:    true,
 							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema {
-									"id": &schema.Schema {
-										Type: schema.TypeString,
+								Schema: map[string]*schema.Schema{
+									"id": &schema.Schema{
+										Type:     schema.TypeString,
 										Required: true,
 									},
-									"name": &schema.Schema {
-										Type: schema.TypeString,
+									"name": &schema.Schema{
+										Type:     schema.TypeString,
 										Required: true,
 									},
 								},
@@ -137,12 +137,12 @@ func resourceWorkflowTaskCreateGoToMeetingCreate(ctx context.Context, d *schema.
 	tflog.Trace(ctx, fmt.Sprintf("Creating workflow task: %s", workflowId))
 
 	s := &client.WorkflowTask{
-		WorkflowId: workflowId,
-		Name: name,
-		Position: position,
+		WorkflowId:    workflowId,
+		Name:          name,
+		Position:      position,
 		SkipOnFailure: skipOnFailure,
-		Enabled: enabled,
-		TaskParams: taskParams,
+		Enabled:       enabled,
+		TaskParams:    taskParams,
 	}
 
 	res, err := c.CreateWorkflowTask(s)
@@ -197,12 +197,12 @@ func resourceWorkflowTaskCreateGoToMeetingUpdate(ctx context.Context, d *schema.
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	s := &client.WorkflowTask{
-		WorkflowId: workflowId,
-		Name: name,
-		Position: position,
+		WorkflowId:    workflowId,
+		Name:          name,
+		Position:      position,
 		SkipOnFailure: skipOnFailure,
-		Enabled: enabled,
-		TaskParams: taskParams,
+		Enabled:       enabled,
+		TaskParams:    taskParams,
 	}
 
 	tflog.Debug(ctx, fmt.Sprintf("adding value: %#v", s))

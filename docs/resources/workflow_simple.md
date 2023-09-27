@@ -20,8 +20,8 @@ description: |-
 
 ### Optional
 
-- `command` (String) Workflow command.
-- `command_feedback_enabled` (Boolean) This will notify you back when the workflow is starting.
+- `command` (String) Workflow command
+- `command_feedback_enabled` (Boolean) This will notify you back when the workflow is starting
 - `description` (String) The description of the workflow
 - `enabled` (Boolean)
 - `environment_ids` (List of String)
@@ -29,13 +29,13 @@ description: |-
 - `incident_role_ids` (List of String)
 - `incident_type_ids` (List of String)
 - `position` (Number) The order which the workflow should run with other workflows.
-- `repeat_every_duration` (String) Repeat workflow every duration.
-- `repeat_on` (List of String) Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.
+- `repeat_every_duration` (String) Repeat workflow every duration
+- `repeat_on` (List of String) Repeat on weekdays. Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.
 - `service_ids` (List of String)
 - `severity_ids` (List of String)
 - `slug` (String) The slug of the workflow
 - `trigger_params` (Block List, Max: 1) (see [below for nested schema](#nestedblock--trigger_params))
-- `wait` (String) Wait this duration before executing.
+- `wait` (String) Wait this duration before executing
 - `workflow_group_id` (String) The group this workflow belongs to.
 
 ### Read-Only
@@ -48,4 +48,4 @@ description: |-
 Optional:
 
 - `trigger_type` (String) Value must be one off `simple`.
-- `triggers` (List of String) Value must be one of `slack_command`.
+- `triggers` (List of String) Actions that trigger the workflow. Value must be one of `slack_command`.
