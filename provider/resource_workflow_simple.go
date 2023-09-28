@@ -92,7 +92,7 @@ func resourceWorkflowSimple() *schema.Resource {
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
+					Description: "Repeat on weekdays.. Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
 				},
 				
 
@@ -145,7 +145,7 @@ func resourceWorkflowSimple() *schema.Resource {
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "Value must be one of `slack_command`.",
+					Description: "Actions that trigger the workflow.. Value must be one of `slack_command`.",
 				},
 				
 						},

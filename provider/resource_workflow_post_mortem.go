@@ -92,7 +92,7 @@ func resourceWorkflowPostMortem() *schema.Resource {
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
+					Description: "Repeat on weekdays.. Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
 				},
 				
 
@@ -145,7 +145,7 @@ func resourceWorkflowPostMortem() *schema.Resource {
 					Computed: true,
 					Required: false,
 					Optional: true,
-					Description: "Value must be one of `post_mortem_created`, `post_mortem_updated`, `status_updated`, `causes_updated`, `slack_command`.",
+					Description: "Actions that trigger the workflow. One of custom_fields.<SLUG>.updated, post_mortem_created, post_mortem_updated, status_updated, causes_updated, slack_command",
 				},
 				
 

@@ -30,7 +30,7 @@ description: |-
 - `incident_type_ids` (List of String)
 - `position` (Number) The order which the workflow should run with other workflows.
 - `repeat_every_duration` (String) Repeat workflow every duration.
-- `repeat_on` (List of String) Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.
+- `repeat_on` (List of String) Repeat on weekdays.. Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.
 - `service_ids` (List of String)
 - `severity_ids` (List of String)
 - `slug` (String) The slug of the workflow
@@ -79,4 +79,4 @@ Optional:
 - `incident_statuses` (List of String) Value must be one of `in_triage`, `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.
 - `incident_visibilities` (List of String)
 - `trigger_type` (String) Value must be one off `action_item`.
-- `triggers` (List of String) Value must be one of `action_item_created`, `action_item_updated`, `assigned_user_updated`, `summary_updated`, `description_updated`, `status_updated`, `priority_updated`, `due_date_updated`, `teams_updated`, `slack_command`.
+- `triggers` (List of String) Actions that trigger the workflow. One of custom_fields.<SLUG>.updated, action_item_created, action_item_updated, assigned_user_updated, summary_updated, description_updated, status_updated, priority_updated, due_date_updated, teams_updated, slack_command

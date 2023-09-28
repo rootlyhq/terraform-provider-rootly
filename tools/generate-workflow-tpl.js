@@ -243,7 +243,7 @@ function schemaFields(resourceSchema, requiredFields, taskParamsSchema) {
 }
 
 function annotatedDescription(schema) {
-  const description = (schema.description || "").replace(/"/g, '\\"');
+  const description = (schema.description || (schema.items && schema.items.description) || "").replace(/"/g, '\\"');
   if (schema.enum) {
     return `${
       !!description ? `${description}. ` : ""
