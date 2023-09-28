@@ -63,5 +63,5 @@ Required:
 
 Optional:
 
-- `inactivity_timeout` (String) In format '1 hour', '1 day', etc.
+- `inactivity_timeout` (String) In format '1 hour', '1 day', etc
 - `task_type` (String)

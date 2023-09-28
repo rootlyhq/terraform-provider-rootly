@@ -41,7 +41,7 @@ Required:
 Optional:
 
 - `assign_user_email` (String) The assigned user's email.
-- `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON.
+- `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON
 - `description` (String) The issue description.
 - `due_date` (String) The due date.
 - `labels` (String) The issue labels.
@@ -50,4 +50,4 @@ Optional:
 - `status` (Map of String) Map must contain two fields, `id` and `name`. The status id and display name.
 - `task_type` (String)
 - `title` (String) The issue title.
-- `update_payload` (String) Update payload. Can contain liquid markup and need to be valid JSON.
+- `update_payload` (String) Update payload. Can contain liquid markup and need to be valid JSON

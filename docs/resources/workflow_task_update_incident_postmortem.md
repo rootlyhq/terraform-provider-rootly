@@ -35,7 +35,7 @@ Manages workflow update_incident_postmortem task.
 
 Required:
 
-- `postmortem_id` (String) UUID of the retrospective that needs to be updated.
+- `postmortem_id` (String) UUID of the retrospective that needs to be updated
 
 Optional:
 

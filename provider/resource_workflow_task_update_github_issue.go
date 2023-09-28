@@ -5,7 +5,7 @@ package provider
 import (
 	"context"
 	"fmt"
-	
+
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -26,72 +26,72 @@ func resourceWorkflowTaskUpdateGithubIssue() *schema.Resource {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
-		Schema: map[string]*schema.Schema {
+		Schema: map[string]*schema.Schema{
 			"workflow_id": {
-				Description:  "The ID of the parent workflow",
-				Type:         schema.TypeString,
-				Required:     true,
-				ForceNew:     true,
+				Description: "The ID of the parent workflow",
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
 			},
 			"name": {
-				Description:  "Name of the workflow task",
-				Type:         schema.TypeString,
-				Optional:     true,
-				Computed:     true,
+				Description: "Name of the workflow task",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"position": {
-				Description:  "The position of the workflow task (1 being top of list)",
-				Type:         schema.TypeInt,
-				Optional:     true,
-				Computed:     true,
+				Description: "The position of the workflow task (1 being top of list)",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
 			},
 			"skip_on_failure": {
-				Description:  "Skip workflow task if any failures",
-				Type:         schema.TypeBool,
-				Optional:     true,
-				Default:      false,
+				Description: "Skip workflow task if any failures",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
 			},
 			"enabled": {
-				Description:  "Enable/disable this workflow task",
-				Type:         schema.TypeBool,
-				Optional:     true,
-				Default:      true,
+				Description: "Enable/disable this workflow task",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type: schema.TypeList,
-				Required: true,
-				MinItems: 1,
-				MaxItems: 1,
+				Type:        schema.TypeList,
+				Required:    true,
+				MinItems:    1,
+				MaxItems:    1,
 				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema {
-						"task_type": &schema.Schema {
-							Type: schema.TypeString,
+					Schema: map[string]*schema.Schema{
+						"task_type": &schema.Schema{
+							Type:     schema.TypeString,
 							Optional: true,
-							Default: "update_github_issue",
-							ValidateFunc: validation.StringInSlice([]string {
+							Default:  "update_github_issue",
+							ValidateFunc: validation.StringInSlice([]string{
 								"update_github_issue",
 							}, false),
 						},
-						"issue_id": &schema.Schema {
+						"issue_id": &schema.Schema{
 							Description: "The issue id",
-							Type: schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 						},
-						"title": &schema.Schema {
+						"title": &schema.Schema{
 							Description: "The issue title",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
-						"body": &schema.Schema {
+						"body": &schema.Schema{
 							Description: "The issue body",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
-						"completion": &schema.Schema {
+						"completion": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. ",
-							Type: schema.TypeMap,
-							Required: true,
+							Type:        schema.TypeMap,
+							Required:    true,
 						},
 					},
 				},
@@ -113,12 +113,12 @@ func resourceWorkflowTaskUpdateGithubIssueCreate(ctx context.Context, d *schema.
 	tflog.Trace(ctx, fmt.Sprintf("Creating workflow task: %s", workflowId))
 
 	s := &client.WorkflowTask{
-		WorkflowId: workflowId,
-		Name: name,
-		Position: position,
+		WorkflowId:    workflowId,
+		Name:          name,
+		Position:      position,
 		SkipOnFailure: skipOnFailure,
-		Enabled: enabled,
-		TaskParams: taskParams,
+		Enabled:       enabled,
+		TaskParams:    taskParams,
 	}
 
 	res, err := c.CreateWorkflowTask(s)
@@ -173,12 +173,12 @@ func resourceWorkflowTaskUpdateGithubIssueUpdate(ctx context.Context, d *schema.
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	s := &client.WorkflowTask{
-		WorkflowId: workflowId,
-		Name: name,
-		Position: position,
+		WorkflowId:    workflowId,
+		Name:          name,
+		Position:      position,
 		SkipOnFailure: skipOnFailure,
-		Enabled: enabled,
-		TaskParams: taskParams,
+		Enabled:       enabled,
+		TaskParams:    taskParams,
 	}
 
 	tflog.Debug(ctx, fmt.Sprintf("adding value: %#v", s))

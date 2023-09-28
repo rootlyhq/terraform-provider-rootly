@@ -5,55 +5,48 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-	
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
-	
 )
 
 func resourcePlaybookTask() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourcePlaybookTaskCreate,
-		ReadContext: resourcePlaybookTaskRead,
+		ReadContext:   resourcePlaybookTaskRead,
 		UpdateContext: resourcePlaybookTaskUpdate,
 		DeleteContext: resourcePlaybookTaskDelete,
-		Importer: &schema.ResourceImporter {
+		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema {
-			
-			"playbook_id": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: true,
+		Schema: map[string]*schema.Schema{
+
+			"playbook_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    true,
 				Description: "",
-				
 			},
-			
 
-			"task": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+			"task": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The task of the incident task",
-				
 			},
-			
 
-			"description": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"description": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The description of incident task",
-				
 			},
-			
 		},
 	}
 }
@@ -65,15 +58,15 @@ func resourcePlaybookTaskCreate(ctx context.Context, d *schema.ResourceData, met
 
 	s := &client.PlaybookTask{}
 
-	  if value, ok := d.GetOkExists("playbook_id"); ok {
-				s.PlaybookId = value.(string)
-			}
-    if value, ok := d.GetOkExists("task"); ok {
-				s.Task = value.(string)
-			}
-    if value, ok := d.GetOkExists("description"); ok {
-				s.Description = value.(string)
-			}
+	if value, ok := d.GetOkExists("playbook_id"); ok {
+		s.PlaybookId = value.(string)
+	}
+	if value, ok := d.GetOkExists("task"); ok {
+		s.Task = value.(string)
+	}
+	if value, ok := d.GetOkExists("description"); ok {
+		s.Description = value.(string)
+	}
 
 	res, err := c.CreatePlaybookTask(s)
 	if err != nil {
@@ -104,8 +97,8 @@ func resourcePlaybookTaskRead(ctx context.Context, d *schema.ResourceData, meta 
 	}
 
 	d.Set("playbook_id", item.PlaybookId)
-  d.Set("task", item.Task)
-  d.Set("description", item.Description)
+	d.Set("task", item.Task)
+	d.Set("description", item.Description)
 
 	return nil
 }
@@ -116,15 +109,15 @@ func resourcePlaybookTaskUpdate(ctx context.Context, d *schema.ResourceData, met
 
 	s := &client.PlaybookTask{}
 
-	  if d.HasChange("playbook_id") {
-				s.PlaybookId = d.Get("playbook_id").(string)
-			}
-    if d.HasChange("task") {
-				s.Task = d.Get("task").(string)
-			}
-    if d.HasChange("description") {
-				s.Description = d.Get("description").(string)
-			}
+	if d.HasChange("playbook_id") {
+		s.PlaybookId = d.Get("playbook_id").(string)
+	}
+	if d.HasChange("task") {
+		s.Task = d.Get("task").(string)
+	}
+	if d.HasChange("description") {
+		s.Description = d.Get("description").(string)
+	}
 
 	_, err := c.UpdatePlaybookTask(d.Id(), s)
 	if err != nil {

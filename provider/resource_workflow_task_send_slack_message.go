@@ -5,7 +5,7 @@ package provider
 import (
 	"context"
 	"fmt"
-	
+
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -26,146 +26,146 @@ func resourceWorkflowTaskSendSlackMessage() *schema.Resource {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
-		Schema: map[string]*schema.Schema {
+		Schema: map[string]*schema.Schema{
 			"workflow_id": {
-				Description:  "The ID of the parent workflow",
-				Type:         schema.TypeString,
-				Required:     true,
-				ForceNew:     true,
+				Description: "The ID of the parent workflow",
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
 			},
 			"name": {
-				Description:  "Name of the workflow task",
-				Type:         schema.TypeString,
-				Optional:     true,
-				Computed:     true,
+				Description: "Name of the workflow task",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"position": {
-				Description:  "The position of the workflow task (1 being top of list)",
-				Type:         schema.TypeInt,
-				Optional:     true,
-				Computed:     true,
+				Description: "The position of the workflow task (1 being top of list)",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
 			},
 			"skip_on_failure": {
-				Description:  "Skip workflow task if any failures",
-				Type:         schema.TypeBool,
-				Optional:     true,
-				Default:      false,
+				Description: "Skip workflow task if any failures",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
 			},
 			"enabled": {
-				Description:  "Enable/disable this workflow task",
-				Type:         schema.TypeBool,
-				Optional:     true,
-				Default:      true,
+				Description: "Enable/disable this workflow task",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type: schema.TypeList,
-				Required: true,
-				MinItems: 1,
-				MaxItems: 1,
+				Type:        schema.TypeList,
+				Required:    true,
+				MinItems:    1,
+				MaxItems:    1,
 				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema {
-						"task_type": &schema.Schema {
-							Type: schema.TypeString,
+					Schema: map[string]*schema.Schema{
+						"task_type": &schema.Schema{
+							Type:     schema.TypeString,
 							Optional: true,
-							Default: "send_slack_message",
-							ValidateFunc: validation.StringInSlice([]string {
+							Default:  "send_slack_message",
+							ValidateFunc: validation.StringInSlice([]string{
 								"send_slack_message",
 							}, false),
 						},
-						"channels": &schema.Schema {
+						"channels": &schema.Schema{
 							Description: "",
-							Type: schema.TypeList,
-							Optional: true,
+							Type:        schema.TypeList,
+							Optional:    true,
 							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema {
-									"id": &schema.Schema {
-										Type: schema.TypeString,
+								Schema: map[string]*schema.Schema{
+									"id": &schema.Schema{
+										Type:     schema.TypeString,
 										Required: true,
 									},
-									"name": &schema.Schema {
-										Type: schema.TypeString,
+									"name": &schema.Schema{
+										Type:     schema.TypeString,
 										Required: true,
 									},
 								},
 							},
 						},
-						"slack_users": &schema.Schema {
+						"slack_users": &schema.Schema{
 							Description: "",
-							Type: schema.TypeList,
-							Optional: true,
+							Type:        schema.TypeList,
+							Optional:    true,
 							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema {
-									"id": &schema.Schema {
-										Type: schema.TypeString,
+								Schema: map[string]*schema.Schema{
+									"id": &schema.Schema{
+										Type:     schema.TypeString,
 										Required: true,
 									},
-									"name": &schema.Schema {
-										Type: schema.TypeString,
+									"name": &schema.Schema{
+										Type:     schema.TypeString,
 										Required: true,
 									},
 								},
 							},
 						},
-						"slack_user_groups": &schema.Schema {
+						"slack_user_groups": &schema.Schema{
 							Description: "",
-							Type: schema.TypeList,
-							Optional: true,
+							Type:        schema.TypeList,
+							Optional:    true,
 							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema {
-									"id": &schema.Schema {
-										Type: schema.TypeString,
+								Schema: map[string]*schema.Schema{
+									"id": &schema.Schema{
+										Type:     schema.TypeString,
 										Required: true,
 									},
-									"name": &schema.Schema {
-										Type: schema.TypeString,
+									"name": &schema.Schema{
+										Type:     schema.TypeString,
 										Required: true,
 									},
 								},
 							},
 						},
-						"actionables": &schema.Schema {
+						"actionables": &schema.Schema{
 							Description: "Value must be one of `update_summary`, `update_status`, `archive_channel`, `manage_incident_roles`, `update_incident`, `all_commands`, `leave_feedback`, `manage_form_fields`, `manage_action_items`, `view_tasks`, `add_pagerduty_responders`, `add_opsgenie_responders`, `add_victor_ops_responders`, `snooze_reminder`, `pause_reminder`, `restart_reminder`, `update_status_page`.",
-							Type: schema.TypeList,
-							Optional: true,
-							Elem: &schema.Schema {
+							Type:        schema.TypeList,
+							Optional:    true,
+							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
 						},
-						"broadcast_thread_reply_to_channel": &schema.Schema {
+						"broadcast_thread_reply_to_channel": &schema.Schema{
 							Description: "",
-							Type: schema.TypeBool,
-							Optional: true,
+							Type:        schema.TypeBool,
+							Optional:    true,
 						},
-						"send_as_ephemeral": &schema.Schema {
+						"send_as_ephemeral": &schema.Schema{
 							Description: "",
-							Type: schema.TypeBool,
-							Optional: true,
+							Type:        schema.TypeBool,
+							Optional:    true,
 						},
-						"color": &schema.Schema {
+						"color": &schema.Schema{
 							Description: "A hex color ",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
-						"pin_to_channel": &schema.Schema {
+						"pin_to_channel": &schema.Schema{
 							Description: "",
-							Type: schema.TypeBool,
-							Optional: true,
+							Type:        schema.TypeBool,
+							Optional:    true,
 						},
-						"update_parent_message": &schema.Schema {
+						"update_parent_message": &schema.Schema{
 							Description: "",
-							Type: schema.TypeBool,
-							Optional: true,
+							Type:        schema.TypeBool,
+							Optional:    true,
 						},
-						"parent_message_thread_task": &schema.Schema {
+						"parent_message_thread_task": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. A hash where [id] is the task id of the parent task that sent a message, and [name] is the name of the parent task",
-							Type: schema.TypeMap,
-							Optional: true,
+							Type:        schema.TypeMap,
+							Optional:    true,
 						},
-						"text": &schema.Schema {
+						"text": &schema.Schema{
 							Description: "The message text.",
-							Type: schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 						},
 					},
 				},
@@ -187,12 +187,12 @@ func resourceWorkflowTaskSendSlackMessageCreate(ctx context.Context, d *schema.R
 	tflog.Trace(ctx, fmt.Sprintf("Creating workflow task: %s", workflowId))
 
 	s := &client.WorkflowTask{
-		WorkflowId: workflowId,
-		Name: name,
-		Position: position,
+		WorkflowId:    workflowId,
+		Name:          name,
+		Position:      position,
 		SkipOnFailure: skipOnFailure,
-		Enabled: enabled,
-		TaskParams: taskParams,
+		Enabled:       enabled,
+		TaskParams:    taskParams,
 	}
 
 	res, err := c.CreateWorkflowTask(s)
@@ -247,12 +247,12 @@ func resourceWorkflowTaskSendSlackMessageUpdate(ctx context.Context, d *schema.R
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	s := &client.WorkflowTask{
-		WorkflowId: workflowId,
-		Name: name,
-		Position: position,
+		WorkflowId:    workflowId,
+		Name:          name,
+		Position:      position,
 		SkipOnFailure: skipOnFailure,
-		Enabled: enabled,
-		TaskParams: taskParams,
+		Enabled:       enabled,
+		TaskParams:    taskParams,
 	}
 
 	tflog.Debug(ctx, fmt.Sprintf("adding value: %#v", s))

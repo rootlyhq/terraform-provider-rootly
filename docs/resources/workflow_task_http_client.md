@@ -36,7 +36,7 @@ Manages workflow http_client task.
 Required:
 
 - `succeed_on_status` (String) HTTP status code expected. Can be a regular expression. Eg: 200, 200|203, 20[0-3]
-- `url` (String) URL endpoint.
+- `url` (String) URL endpoint
 
 Optional:
 
@@ -44,7 +44,7 @@ Optional:
 - `event_message` (String)
 - `event_url` (String)
 - `headers` (String) JSON map of HTTP headers.
-- `method` (String) HTTP method.. Value must be one of `GET`, `POST`, `PUT`, `DELETE`, `OPTIONS`.
+- `method` (String) HTTP method. Value must be one of `GET`, `POST`, `PUT`, `DELETE`, `OPTIONS`.
 - `params` (String) JSON map of HTTP query parameters.
 - `post_to_incident_timeline` (Boolean)
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
