@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.7] -- 2023-10-20
+
+- Add `functionality_ids` conditions to workflows.
+- Add `clickup_task_id` to `attribute_to_query_by` for `workflow_task_update_incident` and `workflow update_action_item` tasks.
+- Add `retrospective_steps` resource.
+
 ## [1.1.6] -- 2023-09-20
 
 - Allow to pass `custom_fields.<slug>.updated` trigger to workflows.

@@ -25,6 +25,7 @@ description: |-
 - `description` (String) The description of the workflow
 - `enabled` (Boolean)
 - `environment_ids` (List of String)
+- `functionality_ids` (List of String)
 - `group_ids` (List of String)
 - `incident_role_ids` (List of String)
 - `incident_type_ids` (List of String)
@@ -79,4 +80,4 @@ Optional:
 - `incident_statuses` (List of String) Value must be one of `in_triage`, `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.
 - `incident_visibilities` (List of String)
 - `trigger_type` (String) Value must be one off `action_item`.
-- `triggers` (List of String) Actions that trigger the workflow. One of custom_fields.<SLUG>.updated, action_item_created, action_item_updated, assigned_user_updated, summary_updated, description_updated, status_updated, priority_updated, due_date_updated, teams_updated, slack_command
+- `triggers` (List of String) Actions that trigger the workflow. One of custom_fields.<slug>.updated, action_item_created, action_item_updated, assigned_user_updated, summary_updated, description_updated, status_updated, priority_updated, due_date_updated, teams_updated, slack_command

@@ -37,6 +37,7 @@ resource "rootly_workflow_alert" "my-workflow" {
 - `description` (String) The description of the workflow
 - `enabled` (Boolean)
 - `environment_ids` (List of String)
+- `functionality_ids` (List of String)
 - `group_ids` (List of String)
 - `incident_role_ids` (List of String)
 - `incident_type_ids` (List of String)

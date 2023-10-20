@@ -133,7 +133,7 @@ func resourceWorkflowIncident() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
-							Description: "Actions that trigger the workflow. One of custom_fields.<SLUG>.updated, incident_in_triage, incident_created, incident_started, incident_updated, title_updated, summary_updated, status_updated, severity_updated, environments_added, environments_removed, environments_updated, incident_types_added, incident_types_removed, incident_types_updated, services_added, services_removed, services_updated, functionalities_added, functionalities_removed, functionalities_updated, teams_added, teams_removed, teams_updated, timeline_updated, status_page_timeline_updated, role_assignments_updated, role_assignments_added, role_assignments_removed, slack_command, slack_channel_created, slack_channel_converted, subscribers_updated, subscribers_added, subscribers_removed, user_joined_slack_channel, user_left_slack_channel",
+							Description: "Actions that trigger the workflow. One of custom_fields.<slug>.updated, incident_in_triage, incident_created, incident_started, incident_updated, title_updated, summary_updated, status_updated, severity_updated, environments_added, environments_removed, environments_updated, incident_types_added, incident_types_removed, incident_types_updated, services_added, services_removed, services_updated, functionalities_added, functionalities_removed, functionalities_updated, teams_added, teams_removed, teams_updated, timeline_updated, status_page_timeline_updated, role_assignments_updated, role_assignments_added, role_assignments_removed, slack_command, slack_channel_created, slack_channel_converted, subscribers_updated, subscribers_added, subscribers_removed, user_joined_slack_channel, user_left_slack_channel",
 						},
 
 						"incident_visibilities": &schema.Schema{
@@ -381,6 +381,17 @@ func resourceWorkflowIncident() *schema.Resource {
 				Description: "",
 			},
 
+			"functionality_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "",
+			},
+
 			"group_ids": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -453,6 +464,9 @@ func resourceWorkflowIncidentCreate(ctx context.Context, d *schema.ResourceData,
 	if value, ok := d.GetOkExists("service_ids"); ok {
 		s.ServiceIds = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("functionality_ids"); ok {
+		s.FunctionalityIds = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("group_ids"); ok {
 		s.GroupIds = value.([]interface{})
 	}
@@ -506,6 +520,7 @@ func resourceWorkflowIncidentRead(ctx context.Context, d *schema.ResourceData, m
 	d.Set("incident_type_ids", item.IncidentTypeIds)
 	d.Set("incident_role_ids", item.IncidentRoleIds)
 	d.Set("service_ids", item.ServiceIds)
+	d.Set("functionality_ids", item.FunctionalityIds)
 	d.Set("group_ids", item.GroupIds)
 
 	return nil
@@ -571,6 +586,9 @@ func resourceWorkflowIncidentUpdate(ctx context.Context, d *schema.ResourceData,
 	}
 	if d.HasChange("service_ids") {
 		s.ServiceIds = d.Get("service_ids").([]interface{})
+	}
+	if d.HasChange("functionality_ids") {
+		s.FunctionalityIds = d.Get("functionality_ids").([]interface{})
 	}
 	if d.HasChange("group_ids") {
 		s.GroupIds = d.Get("group_ids").([]interface{})

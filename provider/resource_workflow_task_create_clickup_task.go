@@ -17,14 +17,14 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
-func resourceWorkflowTaskUpdateIncident() *schema.Resource {
+func resourceWorkflowTaskCreateClickupTask() *schema.Resource {
 	return &schema.Resource{
-		Description: "Manages workflow update_incident task.",
+		Description: "Manages workflow create_clickup_task task.",
 
-		CreateContext: resourceWorkflowTaskUpdateIncidentCreate,
-		ReadContext:   resourceWorkflowTaskUpdateIncidentRead,
-		UpdateContext: resourceWorkflowTaskUpdateIncidentUpdate,
-		DeleteContext: resourceWorkflowTaskUpdateIncidentDelete,
+		CreateContext: resourceWorkflowTaskCreateClickupTaskCreate,
+		ReadContext:   resourceWorkflowTaskCreateClickupTaskRead,
+		UpdateContext: resourceWorkflowTaskCreateClickupTaskUpdate,
+		DeleteContext: resourceWorkflowTaskCreateClickupTaskDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -71,134 +71,52 @@ func resourceWorkflowTaskUpdateIncident() *schema.Resource {
 						"task_type": &schema.Schema{
 							Type:     schema.TypeString,
 							Optional: true,
-							Default:  "update_incident",
+							Default:  "create_clickup_task",
 							ValidateFunc: validation.StringInSlice([]string{
-								"update_incident",
+								"create_clickup_task",
 							}, false),
 						},
-						"attribute_to_query_by": &schema.Schema{
-							Description: "Value must be one of `id`, `slug`, `sequential_id`, `pagerduty_incident_id`, `opsgenie_incident_id`, `victor_ops_incident_id`, `jira_issue_id`, `asana_task_id`, `shortcut_task_id`, `linear_issue_id`, `zendesk_ticket_id`, `trello_card_id`, `airtable_record_id`, `shortcut_story_id`, `github_issue_id`, `freshservice_ticket_id`, `freshservice_task_id`, `clickup_task_id`.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "id",
-							ValidateFunc: validation.StringInSlice([]string{
-								"id",
-								"slug",
-								"sequential_id",
-								"pagerduty_incident_id",
-								"opsgenie_incident_id",
-								"victor_ops_incident_id",
-								"jira_issue_id",
-								"asana_task_id",
-								"shortcut_task_id",
-								"linear_issue_id",
-								"zendesk_ticket_id",
-								"trello_card_id",
-								"airtable_record_id",
-								"shortcut_story_id",
-								"github_issue_id",
-								"freshservice_ticket_id",
-								"freshservice_task_id",
-								"clickup_task_id",
-							}, false),
-						},
-						"incident_id": &schema.Schema{
-							Description: "The incident id to update or id of any attribute on the incident",
+						"title": &schema.Schema{
+							Description: "The task title.",
 							Type:        schema.TypeString,
 							Required:    true,
 						},
-						"title": &schema.Schema{
-							Description: "The incident title",
+						"description": &schema.Schema{
+							Description: "The task description.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
-						"summary": &schema.Schema{
-							Description: "The incident summary",
+						"tags": &schema.Schema{
+							Description: "The task tags.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
-						"status": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"severity_id": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"incident_type_ids": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-						},
-						"service_ids": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-						},
-						"functionality_ids": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-						},
-						"environment_ids": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-						},
-						"group_ids": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-						},
-						"started_at": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"detected_at": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"acknowledged_at": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"mitigated_at": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"resolved_at": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"private": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeBool,
+						"priority": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. The priority id and display name.",
+							Type:        schema.TypeMap,
 							Optional:    true,
 						},
 						"custom_fields_mapping": &schema.Schema{
 							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON",
+							Type:        schema.TypeString,
+							Optional:    true,
+							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {
+								var oldJSONAsInterface, newJSONAsInterface interface{}
+
+								if err := json.Unmarshal([]byte(old), &oldJSONAsInterface); err != nil {
+									return false
+								}
+
+								if err := json.Unmarshal([]byte(new), &newJSONAsInterface); err != nil {
+									return false
+								}
+
+								return reflect.DeepEqual(oldJSONAsInterface, newJSONAsInterface)
+							},
+							Default: "{}",
+						},
+						"task_payload": &schema.Schema{
+							Description: "Additional ClickUp task attributes. Will be merged into whatever was specified in this tasks current parameters. Can contain liquid markup and need to be valid JSON",
 							Type:        schema.TypeString,
 							Optional:    true,
 							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {
@@ -223,7 +141,7 @@ func resourceWorkflowTaskUpdateIncident() *schema.Resource {
 	}
 }
 
-func resourceWorkflowTaskUpdateIncidentCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateClickupTaskCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
@@ -252,10 +170,10 @@ func resourceWorkflowTaskUpdateIncidentCreate(ctx context.Context, d *schema.Res
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created an workflow task resource: %v (%s)", workflowId, d.Id()))
 
-	return resourceWorkflowTaskUpdateIncidentRead(ctx, d, meta)
+	return resourceWorkflowTaskCreateClickupTaskRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskUpdateIncidentRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateClickupTaskRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
@@ -264,7 +182,7 @@ func resourceWorkflowTaskUpdateIncidentRead(ctx context.Context, d *schema.Resou
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskUpdateIncident (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateClickupTask (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
@@ -284,7 +202,7 @@ func resourceWorkflowTaskUpdateIncidentRead(ctx context.Context, d *schema.Resou
 	return nil
 }
 
-func resourceWorkflowTaskUpdateIncidentUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateClickupTaskUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
@@ -310,10 +228,10 @@ func resourceWorkflowTaskUpdateIncidentUpdate(ctx context.Context, d *schema.Res
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
 
-	return resourceWorkflowTaskUpdateIncidentRead(ctx, d, meta)
+	return resourceWorkflowTaskCreateClickupTaskRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskUpdateIncidentDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateClickupTaskDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
@@ -322,7 +240,7 @@ func resourceWorkflowTaskUpdateIncidentDelete(ctx context.Context, d *schema.Res
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskUpdateIncident (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateClickupTask (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}

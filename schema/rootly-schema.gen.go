@@ -404,6 +404,7 @@ const (
 	AuditItemTypeCause                          AuditItemType = "Cause"
 	AuditItemTypeCustomField                    AuditItemType = "CustomField"
 	AuditItemTypeCustomFieldOption              AuditItemType = "CustomFieldOption"
+	AuditItemTypeCustomForm                     AuditItemType = "CustomForm"
 	AuditItemTypeDashboard                      AuditItemType = "Dashboard"
 	AuditItemTypeEnvironment                    AuditItemType = "Environment"
 	AuditItemTypeExportJob                      AuditItemType = "ExportJob"
@@ -438,6 +439,7 @@ const (
 	AuditsListDataAttributesItemTypeCause                          AuditsListDataAttributesItemType = "Cause"
 	AuditsListDataAttributesItemTypeCustomField                    AuditsListDataAttributesItemType = "CustomField"
 	AuditsListDataAttributesItemTypeCustomFieldOption              AuditsListDataAttributesItemType = "CustomFieldOption"
+	AuditsListDataAttributesItemTypeCustomForm                     AuditsListDataAttributesItemType = "CustomForm"
 	AuditsListDataAttributesItemTypeDashboard                      AuditsListDataAttributesItemType = "Dashboard"
 	AuditsListDataAttributesItemTypeEnvironment                    AuditsListDataAttributesItemType = "Environment"
 	AuditsListDataAttributesItemTypeExportJob                      AuditsListDataAttributesItemType = "ExportJob"
@@ -532,6 +534,11 @@ const (
 // Defines values for CreateAsanaTaskTaskParamsTaskType.
 const (
 	CreateAsanaTask CreateAsanaTaskTaskParamsTaskType = "create_asana_task"
+)
+
+// Defines values for CreateClickupTaskTaskParamsTaskType.
+const (
+	CreateClickupTask CreateClickupTaskTaskParamsTaskType = "create_clickup_task"
 )
 
 // Defines values for CreateConfluencePageTaskParamsTaskType.
@@ -2576,6 +2583,11 @@ const (
 	NewPulseDataTypePulses NewPulseDataType = "pulses"
 )
 
+// Defines values for NewRetrospectiveStepDataType.
+const (
+	NewRetrospectiveStepDataTypeRetrospectiveSteps NewRetrospectiveStepDataType = "retrospective_steps"
+)
+
 // Defines values for NewSecretDataAttributesKind.
 const (
 	BuiltIn        NewSecretDataAttributesKind = "built_in"
@@ -2623,9 +2635,11 @@ const (
 
 // Defines values for NewStatusPageDataAttributesShowUptimeLastDays.
 const (
-	NewStatusPageDataAttributesShowUptimeLastDaysN30 NewStatusPageDataAttributesShowUptimeLastDays = 30
-	NewStatusPageDataAttributesShowUptimeLastDaysN60 NewStatusPageDataAttributesShowUptimeLastDays = 60
-	NewStatusPageDataAttributesShowUptimeLastDaysN90 NewStatusPageDataAttributesShowUptimeLastDays = 90
+	NewStatusPageDataAttributesShowUptimeLastDaysN180 NewStatusPageDataAttributesShowUptimeLastDays = 180
+	NewStatusPageDataAttributesShowUptimeLastDaysN30  NewStatusPageDataAttributesShowUptimeLastDays = 30
+	NewStatusPageDataAttributesShowUptimeLastDaysN360 NewStatusPageDataAttributesShowUptimeLastDays = 360
+	NewStatusPageDataAttributesShowUptimeLastDaysN60  NewStatusPageDataAttributesShowUptimeLastDays = 60
+	NewStatusPageDataAttributesShowUptimeLastDaysN90  NewStatusPageDataAttributesShowUptimeLastDays = 90
 )
 
 // Defines values for NewStatusPageDataAttributesTimeZone.
@@ -3135,6 +3149,16 @@ const (
 	RestartIncidentDataTypeIncidents RestartIncidentDataType = "incidents"
 )
 
+// Defines values for RetrospectiveStepListDataType.
+const (
+	RetrospectiveStepListDataTypeRetrospectiveSteps RetrospectiveStepListDataType = "retrospective_steps"
+)
+
+// Defines values for RetrospectiveStepResponseDataType.
+const (
+	RetrospectiveStepResponseDataTypeRetrospectiveSteps RetrospectiveStepResponseDataType = "retrospective_steps"
+)
+
 // Defines values for RunCommandHerokuTaskParamsSize.
 const (
 	Standard1X RunCommandHerokuTaskParamsSize = "standard-1X"
@@ -3330,9 +3354,11 @@ const (
 
 // Defines values for StatusPageShowUptimeLastDays.
 const (
-	StatusPageShowUptimeLastDaysN30 StatusPageShowUptimeLastDays = 30
-	StatusPageShowUptimeLastDaysN60 StatusPageShowUptimeLastDays = 60
-	StatusPageShowUptimeLastDaysN90 StatusPageShowUptimeLastDays = 90
+	StatusPageShowUptimeLastDaysN180 StatusPageShowUptimeLastDays = 180
+	StatusPageShowUptimeLastDaysN30  StatusPageShowUptimeLastDays = 30
+	StatusPageShowUptimeLastDaysN360 StatusPageShowUptimeLastDays = 360
+	StatusPageShowUptimeLastDaysN60  StatusPageShowUptimeLastDays = 60
+	StatusPageShowUptimeLastDaysN90  StatusPageShowUptimeLastDays = 90
 )
 
 // Defines values for StatusPageTimeZone.
@@ -3492,9 +3518,11 @@ const (
 
 // Defines values for StatusPageListDataAttributesShowUptimeLastDays.
 const (
-	StatusPageListDataAttributesShowUptimeLastDaysN30 StatusPageListDataAttributesShowUptimeLastDays = 30
-	StatusPageListDataAttributesShowUptimeLastDaysN60 StatusPageListDataAttributesShowUptimeLastDays = 60
-	StatusPageListDataAttributesShowUptimeLastDaysN90 StatusPageListDataAttributesShowUptimeLastDays = 90
+	StatusPageListDataAttributesShowUptimeLastDaysN180 StatusPageListDataAttributesShowUptimeLastDays = 180
+	StatusPageListDataAttributesShowUptimeLastDaysN30  StatusPageListDataAttributesShowUptimeLastDays = 30
+	StatusPageListDataAttributesShowUptimeLastDaysN360 StatusPageListDataAttributesShowUptimeLastDays = 360
+	StatusPageListDataAttributesShowUptimeLastDaysN60  StatusPageListDataAttributesShowUptimeLastDays = 60
+	StatusPageListDataAttributesShowUptimeLastDaysN90  StatusPageListDataAttributesShowUptimeLastDays = 90
 )
 
 // Defines values for StatusPageListDataAttributesTimeZone.
@@ -3659,9 +3687,11 @@ const (
 
 // Defines values for StatusPageResponseDataAttributesShowUptimeLastDays.
 const (
-	StatusPageResponseDataAttributesShowUptimeLastDaysN30 StatusPageResponseDataAttributesShowUptimeLastDays = 30
-	StatusPageResponseDataAttributesShowUptimeLastDaysN60 StatusPageResponseDataAttributesShowUptimeLastDays = 60
-	StatusPageResponseDataAttributesShowUptimeLastDaysN90 StatusPageResponseDataAttributesShowUptimeLastDays = 90
+	StatusPageResponseDataAttributesShowUptimeLastDaysN180 StatusPageResponseDataAttributesShowUptimeLastDays = 180
+	StatusPageResponseDataAttributesShowUptimeLastDaysN30  StatusPageResponseDataAttributesShowUptimeLastDays = 30
+	StatusPageResponseDataAttributesShowUptimeLastDaysN360 StatusPageResponseDataAttributesShowUptimeLastDays = 360
+	StatusPageResponseDataAttributesShowUptimeLastDaysN60  StatusPageResponseDataAttributesShowUptimeLastDays = 60
+	StatusPageResponseDataAttributesShowUptimeLastDaysN90  StatusPageResponseDataAttributesShowUptimeLastDays = 90
 )
 
 // Defines values for StatusPageResponseDataAttributesTimeZone.
@@ -3868,6 +3898,7 @@ const (
 const (
 	UpdateActionItemTaskParamsAttributeToQueryByAirtableRecordId     UpdateActionItemTaskParamsAttributeToQueryBy = "airtable_record_id"
 	UpdateActionItemTaskParamsAttributeToQueryByAsanaTaskId          UpdateActionItemTaskParamsAttributeToQueryBy = "asana_task_id"
+	UpdateActionItemTaskParamsAttributeToQueryByClickupTaskId        UpdateActionItemTaskParamsAttributeToQueryBy = "clickup_task_id"
 	UpdateActionItemTaskParamsAttributeToQueryByFreshserviceTaskId   UpdateActionItemTaskParamsAttributeToQueryBy = "freshservice_task_id"
 	UpdateActionItemTaskParamsAttributeToQueryByFreshserviceTicketId UpdateActionItemTaskParamsAttributeToQueryBy = "freshservice_ticket_id"
 	UpdateActionItemTaskParamsAttributeToQueryByGithubIssueId        UpdateActionItemTaskParamsAttributeToQueryBy = "github_issue_id"
@@ -3919,6 +3950,11 @@ const (
 // Defines values for UpdateCauseDataType.
 const (
 	UpdateCauseDataTypeCauses UpdateCauseDataType = "causes"
+)
+
+// Defines values for UpdateClickupTaskTaskParamsTaskType.
+const (
+	UpdateClickupTask UpdateClickupTaskTaskParamsTaskType = "update_clickup_task"
 )
 
 // Defines values for UpdateCustomFieldDataAttributesRequired.
@@ -4287,6 +4323,7 @@ const (
 const (
 	UpdateIncidentTaskParamsAttributeToQueryByAirtableRecordId     UpdateIncidentTaskParamsAttributeToQueryBy = "airtable_record_id"
 	UpdateIncidentTaskParamsAttributeToQueryByAsanaTaskId          UpdateIncidentTaskParamsAttributeToQueryBy = "asana_task_id"
+	UpdateIncidentTaskParamsAttributeToQueryByClickupTaskId        UpdateIncidentTaskParamsAttributeToQueryBy = "clickup_task_id"
 	UpdateIncidentTaskParamsAttributeToQueryByFreshserviceTaskId   UpdateIncidentTaskParamsAttributeToQueryBy = "freshservice_task_id"
 	UpdateIncidentTaskParamsAttributeToQueryByFreshserviceTicketId UpdateIncidentTaskParamsAttributeToQueryBy = "freshservice_ticket_id"
 	UpdateIncidentTaskParamsAttributeToQueryByGithubIssueId        UpdateIncidentTaskParamsAttributeToQueryBy = "github_issue_id"
@@ -4433,6 +4470,11 @@ const (
 	UpdatePulseDataTypePulses UpdatePulseDataType = "pulses"
 )
 
+// Defines values for UpdateRetrospectiveStepDataType.
+const (
+	UpdateRetrospectiveStepDataTypeRetrospectiveSteps UpdateRetrospectiveStepDataType = "retrospective_steps"
+)
+
 // Defines values for UpdateSecretDataType.
 const (
 	UpdateSecretDataTypeSecrets UpdateSecretDataType = "secrets"
@@ -4487,9 +4529,11 @@ const (
 
 // Defines values for UpdateStatusPageDataAttributesShowUptimeLastDays.
 const (
-	N30 UpdateStatusPageDataAttributesShowUptimeLastDays = 30
-	N60 UpdateStatusPageDataAttributesShowUptimeLastDays = 60
-	N90 UpdateStatusPageDataAttributesShowUptimeLastDays = 90
+	N180 UpdateStatusPageDataAttributesShowUptimeLastDays = 180
+	N30  UpdateStatusPageDataAttributesShowUptimeLastDays = 30
+	N360 UpdateStatusPageDataAttributesShowUptimeLastDays = 360
+	N60  UpdateStatusPageDataAttributesShowUptimeLastDays = 60
+	N90  UpdateStatusPageDataAttributesShowUptimeLastDays = 90
 )
 
 // Defines values for UpdateStatusPageDataAttributesTimeZone.
@@ -6295,6 +6339,34 @@ type CreateAsanaTaskTaskParamsDependencyDirection string
 // CreateAsanaTaskTaskParamsTaskType defines model for CreateAsanaTaskTaskParams.TaskType.
 type CreateAsanaTaskTaskParamsTaskType string
 
+// CreateClickupTaskTaskParams defines model for create_clickup_task_task_params.
+type CreateClickupTaskTaskParams struct {
+	// Custom field mappings. Can contain liquid markup and need to be valid JSON
+	CustomFieldsMapping *string `json:"custom_fields_mapping"`
+
+	// The task description.
+	Description *string `json:"description,omitempty"`
+
+	// The priority id and display name.
+	Priority *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"priority,omitempty"`
+
+	// The task tags.
+	Tags *string `json:"tags,omitempty"`
+
+	// Additional ClickUp task attributes. Will be merged into whatever was specified in this tasks current parameters. Can contain liquid markup and need to be valid JSON
+	TaskPayload *string                              `json:"task_payload"`
+	TaskType    *CreateClickupTaskTaskParamsTaskType `json:"task_type,omitempty"`
+
+	// The task title.
+	Title string `json:"title"`
+}
+
+// CreateClickupTaskTaskParamsTaskType defines model for CreateClickupTaskTaskParams.TaskType.
+type CreateClickupTaskTaskParamsTaskType string
+
 // CreateConfluencePageTaskParams defines model for create_confluence_page_task_params.
 type CreateConfluencePageTaskParams struct {
 	Ancestor *struct {
@@ -7412,7 +7484,7 @@ type Dashboard struct {
 	// The owner type of the dashboard
 	Owner DashboardOwner `json:"owner"`
 
-	// The grouping period for dashbaord panel data
+	// The grouping period for dashboard panel data
 	Period *string `json:"period"`
 
 	// Whether the dashboard is public
@@ -7428,7 +7500,7 @@ type Dashboard struct {
 	UpdatedAt *string `json:"updated_at,omitempty"`
 
 	// The dashboard user owner if owner is of type user
-	UserId *string `json:"user_id"`
+	UserId *float32 `json:"user_id"`
 }
 
 // The hex color of the dashboard
@@ -7462,7 +7534,7 @@ type DashboardList struct {
 			// The owner type of the dashboard
 			Owner DashboardListDataAttributesOwner `json:"owner"`
 
-			// The grouping period for dashbaord panel data
+			// The grouping period for dashboard panel data
 			Period *string `json:"period"`
 
 			// Whether the dashboard is public
@@ -7478,7 +7550,7 @@ type DashboardList struct {
 			UpdatedAt *string `json:"updated_at,omitempty"`
 
 			// The dashboard user owner if owner is of type user
-			UserId *string `json:"user_id"`
+			UserId *float32 `json:"user_id"`
 		} `json:"attributes"`
 
 		// Unique ID of the dashboard
@@ -7528,7 +7600,7 @@ type DashboardResponse struct {
 			// The owner type of the dashboard
 			Owner DashboardResponseDataAttributesOwner `json:"owner"`
 
-			// The grouping period for dashbaord panel data
+			// The grouping period for dashboard panel data
 			Period *string `json:"period"`
 
 			// Whether the dashboard is public
@@ -7544,7 +7616,7 @@ type DashboardResponse struct {
 			UpdatedAt *string `json:"updated_at,omitempty"`
 
 			// The dashboard user owner if owner is of type user
-			UserId *string `json:"user_id"`
+			UserId *float32 `json:"user_id"`
 		} `json:"attributes"`
 
 		// Unique ID of the dashboard
@@ -11534,7 +11606,7 @@ type NewDashboard struct {
 			// The owner type of the dashboard
 			Owner NewDashboardDataAttributesOwner `json:"owner"`
 
-			// The grouping period for dashbaord panel data
+			// The grouping period for dashboard panel data
 			Period *NewDashboardDataAttributesPeriod `json:"period"`
 
 			// Whether the dashboard is public
@@ -11553,7 +11625,7 @@ type NewDashboardDataAttributesColor string
 // The owner type of the dashboard
 type NewDashboardDataAttributesOwner string
 
-// The grouping period for dashbaord panel data
+// The grouping period for dashboard panel data
 type NewDashboardDataAttributesPeriod string
 
 // NewDashboardDataType defines model for NewDashboard.Data.Type.
@@ -11624,7 +11696,10 @@ type NewFormField struct {
 			// The name of the form field
 			Name     string                                `json:"name"`
 			Required *[]NewFormFieldDataAttributesRequired `json:"required,omitempty"`
-			Shown    *[]NewFormFieldDataAttributesShown    `json:"shown,omitempty"`
+
+			// Whether the form field is shown on the incident details panel
+			ShowOnIncidentDetails *bool                              `json:"show_on_incident_details,omitempty"`
+			Shown                 *[]NewFormFieldDataAttributesShown `json:"shown,omitempty"`
 		} `json:"attributes"`
 		Type NewFormFieldDataType `json:"type"`
 	} `json:"data"`
@@ -12277,6 +12352,35 @@ type NewPulse struct {
 // NewPulseDataType defines model for NewPulse.Data.Type.
 type NewPulseDataType string
 
+// NewRetrospectiveStep defines model for new_retrospective_step.
+type NewRetrospectiveStep struct {
+	Data struct {
+		Attributes struct {
+			// The description of the step
+			Description *string `json:"description"`
+
+			// Due date in days
+			DueAfterDays *int `json:"due_after_days"`
+
+			// Users assigned to the selected incident role will be the default owners for this step
+			IncidentRoleId *string `json:"incident_role_id"`
+
+			// Position of the step
+			Position *int `json:"position"`
+
+			// Is the step skippable?
+			Skippable *bool `json:"skippable,omitempty"`
+
+			// The name of the step
+			Title string `json:"title"`
+		} `json:"attributes"`
+		Type NewRetrospectiveStepDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewRetrospectiveStepDataType defines model for NewRetrospectiveStep.Data.Type.
+type NewRetrospectiveStepDataType string
+
 // NewSecret defines model for new_secret.
 type NewSecret struct {
 	Data struct {
@@ -12627,12 +12731,13 @@ type NewWorkflow struct {
 			CommandFeedbackEnabled *bool `json:"command_feedback_enabled"`
 
 			// The description of the workflow
-			Description     *string   `json:"description"`
-			Enabled         *bool     `json:"enabled,omitempty"`
-			EnvironmentIds  *[]string `json:"environment_ids,omitempty"`
-			GroupIds        *[]string `json:"group_ids,omitempty"`
-			IncidentRoleIds *[]string `json:"incident_role_ids,omitempty"`
-			IncidentTypeIds *[]string `json:"incident_type_ids,omitempty"`
+			Description      *string   `json:"description"`
+			Enabled          *bool     `json:"enabled,omitempty"`
+			EnvironmentIds   *[]string `json:"environment_ids,omitempty"`
+			FunctionalityIds *[]string `json:"functionality_ids,omitempty"`
+			GroupIds         *[]string `json:"group_ids,omitempty"`
+			IncidentRoleIds  *[]string `json:"incident_role_ids,omitempty"`
+			IncidentTypeIds  *[]string `json:"incident_type_ids,omitempty"`
 
 			// The title of the workflow
 			Name string `json:"name"`
@@ -13850,6 +13955,125 @@ type RestartIncident struct {
 
 // RestartIncidentDataType defines model for RestartIncident.Data.Type.
 type RestartIncidentDataType string
+
+// RetrospectiveStep defines model for retrospective_step.
+type RetrospectiveStep struct {
+	// Date of creation
+	CreatedAt string `json:"created_at"`
+
+	// The description of the step
+	Description *string `json:"description"`
+
+	// Due date in days
+	DueAfterDays *int `json:"due_after_days"`
+
+	// Users assigned to the selected incident role will be the default owners for this step
+	IncidentRoleId *string `json:"incident_role_id"`
+
+	// Position of the step
+	Position *int `json:"position,omitempty"`
+
+	// Is the step skippable?
+	Skippable *bool `json:"skippable,omitempty"`
+
+	// The slug of the step
+	Slug *string `json:"slug,omitempty"`
+
+	// The name of the step
+	Title string `json:"title"`
+
+	// Date of last update
+	UpdatedAt string `json:"updated_at"`
+}
+
+// RetrospectiveStepList defines model for retrospective_step_list.
+type RetrospectiveStepList struct {
+	Data []struct {
+		Attributes struct {
+			// Date of creation
+			CreatedAt string `json:"created_at"`
+
+			// The description of the step
+			Description *string `json:"description"`
+
+			// Due date in days
+			DueAfterDays *int `json:"due_after_days"`
+
+			// Users assigned to the selected incident role will be the default owners for this step
+			IncidentRoleId *string `json:"incident_role_id"`
+
+			// Position of the step
+			Position *int `json:"position,omitempty"`
+
+			// Is the step skippable?
+			Skippable *bool `json:"skippable,omitempty"`
+
+			// The slug of the step
+			Slug *string `json:"slug,omitempty"`
+
+			// The name of the step
+			Title string `json:"title"`
+
+			// Date of last update
+			UpdatedAt string `json:"updated_at"`
+		} `json:"attributes"`
+
+		// Unique ID of the step
+		Id   string                        `json:"id"`
+		Type RetrospectiveStepListDataType `json:"type"`
+	} `json:"data"`
+	Links struct {
+		First string  `json:"first"`
+		Last  string  `json:"last"`
+		Next  *string `json:"next"`
+		Prev  *string `json:"prev"`
+		Self  string  `json:"self"`
+	} `json:"links"`
+}
+
+// RetrospectiveStepListDataType defines model for RetrospectiveStepList.Data.Type.
+type RetrospectiveStepListDataType string
+
+// RetrospectiveStepResponse defines model for retrospective_step_response.
+type RetrospectiveStepResponse struct {
+	Data struct {
+		Attributes struct {
+			// Date of creation
+			CreatedAt string `json:"created_at"`
+
+			// The description of the step
+			Description *string `json:"description"`
+
+			// Due date in days
+			DueAfterDays *int `json:"due_after_days"`
+
+			// Users assigned to the selected incident role will be the default owners for this step
+			IncidentRoleId *string `json:"incident_role_id"`
+
+			// Position of the step
+			Position *int `json:"position,omitempty"`
+
+			// Is the step skippable?
+			Skippable *bool `json:"skippable,omitempty"`
+
+			// The slug of the step
+			Slug *string `json:"slug,omitempty"`
+
+			// The name of the step
+			Title string `json:"title"`
+
+			// Date of last update
+			UpdatedAt string `json:"updated_at"`
+		} `json:"attributes"`
+
+		// Unique ID of the step
+		Id   string                            `json:"id"`
+		Type RetrospectiveStepResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// RetrospectiveStepResponseDataType defines model for RetrospectiveStepResponse.Data.Type.
+type RetrospectiveStepResponseDataType string
 
 // RunCommandHerokuTaskParams defines model for run_command_heroku_task_params.
 type RunCommandHerokuTaskParams struct {
@@ -15390,6 +15614,40 @@ type UpdateCause struct {
 // UpdateCauseDataType defines model for UpdateCause.Data.Type.
 type UpdateCauseDataType string
 
+// UpdateClickupTaskTaskParams defines model for update_clickup_task_task_params.
+type UpdateClickupTaskTaskParams struct {
+	// Custom field mappings. Can contain liquid markup and need to be valid JSON
+	CustomFieldsMapping *string `json:"custom_fields_mapping"`
+
+	// The task description.
+	Description *string `json:"description,omitempty"`
+
+	// The parent task id.
+	ParentTaskId *string `json:"parent_task_id,omitempty"`
+
+	// The priority id and display name.
+	Priority *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"priority,omitempty"`
+
+	// The task tags.
+	Tags *string `json:"tags,omitempty"`
+
+	// The task id.
+	TaskId string `json:"task_id"`
+
+	// Additional ClickUp task attributes. Will be merged into whatever was specified in this tasks current parameters. Can contain liquid markup and need to be valid JSON
+	TaskPayload *string                              `json:"task_payload"`
+	TaskType    *UpdateClickupTaskTaskParamsTaskType `json:"task_type,omitempty"`
+
+	// The task title.
+	Title *string `json:"title,omitempty"`
+}
+
+// UpdateClickupTaskTaskParamsTaskType defines model for UpdateClickupTaskTaskParams.TaskType.
+type UpdateClickupTaskTaskParamsTaskType string
+
 // UpdateCustomField defines model for update_custom_field.
 type UpdateCustomField struct {
 	Data struct {
@@ -15467,7 +15725,7 @@ type UpdateDashboard struct {
 			// The owner type of the dashboard
 			Owner *UpdateDashboardDataAttributesOwner `json:"owner,omitempty"`
 
-			// The grouping period for dashbaord panel data
+			// The grouping period for dashboard panel data
 			Period *UpdateDashboardDataAttributesPeriod `json:"period"`
 
 			// Whether the dashboard is public
@@ -15486,7 +15744,7 @@ type UpdateDashboardDataAttributesColor string
 // The owner type of the dashboard
 type UpdateDashboardDataAttributesOwner string
 
-// The grouping period for dashbaord panel data
+// The grouping period for dashboard panel data
 type UpdateDashboardDataAttributesPeriod string
 
 // UpdateDashboardDataType defines model for UpdateDashboard.Data.Type.
@@ -15557,7 +15815,10 @@ type UpdateFormField struct {
 			// The name of the form field
 			Name     *string                                  `json:"name,omitempty"`
 			Required *[]UpdateFormFieldDataAttributesRequired `json:"required,omitempty"`
-			Shown    *[]UpdateFormFieldDataAttributesShown    `json:"shown,omitempty"`
+
+			// Whether the form field is shown on the incident details panel
+			ShowOnIncidentDetails *bool                                 `json:"show_on_incident_details,omitempty"`
+			Shown                 *[]UpdateFormFieldDataAttributesShown `json:"shown,omitempty"`
 		} `json:"attributes"`
 		Type UpdateFormFieldDataType `json:"type"`
 	} `json:"data"`
@@ -16589,6 +16850,35 @@ type UpdatePulse struct {
 // UpdatePulseDataType defines model for UpdatePulse.Data.Type.
 type UpdatePulseDataType string
 
+// UpdateRetrospectiveStep defines model for update_retrospective_step.
+type UpdateRetrospectiveStep struct {
+	Data struct {
+		Attributes struct {
+			// The description of the step
+			Description *string `json:"description"`
+
+			// Due date in days
+			DueAfterDays *int `json:"due_after_days"`
+
+			// Users assigned to the selected incident role will be the default owners for this step
+			IncidentRoleId *string `json:"incident_role_id"`
+
+			// Position of the step
+			Position *int `json:"position"`
+
+			// Is the step skippable?
+			Skippable *bool `json:"skippable,omitempty"`
+
+			// The name of the step
+			Title *string `json:"title,omitempty"`
+		} `json:"attributes"`
+		Type UpdateRetrospectiveStepDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateRetrospectiveStepDataType defines model for UpdateRetrospectiveStep.Data.Type.
+type UpdateRetrospectiveStepDataType string
+
 // UpdateSecret defines model for update_secret.
 type UpdateSecret struct {
 	Data struct {
@@ -17081,12 +17371,13 @@ type UpdateWorkflow struct {
 			CommandFeedbackEnabled *bool `json:"command_feedback_enabled"`
 
 			// The description of the workflow
-			Description     *string   `json:"description"`
-			Enabled         *bool     `json:"enabled,omitempty"`
-			EnvironmentIds  *[]string `json:"environment_ids,omitempty"`
-			GroupIds        *[]string `json:"group_ids,omitempty"`
-			IncidentRoleIds *[]string `json:"incident_role_ids,omitempty"`
-			IncidentTypeIds *[]string `json:"incident_type_ids,omitempty"`
+			Description      *string   `json:"description"`
+			Enabled          *bool     `json:"enabled,omitempty"`
+			EnvironmentIds   *[]string `json:"environment_ids,omitempty"`
+			FunctionalityIds *[]string `json:"functionality_ids,omitempty"`
+			GroupIds         *[]string `json:"group_ids,omitempty"`
+			IncidentRoleIds  *[]string `json:"incident_role_ids,omitempty"`
+			IncidentTypeIds  *[]string `json:"incident_type_ids,omitempty"`
 
 			// The title of the workflow
 			Name *string `json:"name,omitempty"`
@@ -17509,12 +17800,13 @@ type Workflow struct {
 	CreatedAt string `json:"created_at"`
 
 	// The description of the workflow
-	Description     *string   `json:"description"`
-	Enabled         *bool     `json:"enabled,omitempty"`
-	EnvironmentIds  *[]string `json:"environment_ids,omitempty"`
-	GroupIds        *[]string `json:"group_ids,omitempty"`
-	IncidentRoleIds *[]string `json:"incident_role_ids,omitempty"`
-	IncidentTypeIds *[]string `json:"incident_type_ids,omitempty"`
+	Description      *string   `json:"description"`
+	Enabled          *bool     `json:"enabled,omitempty"`
+	EnvironmentIds   *[]string `json:"environment_ids,omitempty"`
+	FunctionalityIds *[]string `json:"functionality_ids,omitempty"`
+	GroupIds         *[]string `json:"group_ids,omitempty"`
+	IncidentRoleIds  *[]string `json:"incident_role_ids,omitempty"`
+	IncidentTypeIds  *[]string `json:"incident_type_ids,omitempty"`
 
 	// The title of the workflow
 	Name string `json:"name"`
@@ -17814,12 +18106,13 @@ type WorkflowList struct {
 			CreatedAt string `json:"created_at"`
 
 			// The description of the workflow
-			Description     *string   `json:"description"`
-			Enabled         *bool     `json:"enabled,omitempty"`
-			EnvironmentIds  *[]string `json:"environment_ids,omitempty"`
-			GroupIds        *[]string `json:"group_ids,omitempty"`
-			IncidentRoleIds *[]string `json:"incident_role_ids,omitempty"`
-			IncidentTypeIds *[]string `json:"incident_type_ids,omitempty"`
+			Description      *string   `json:"description"`
+			Enabled          *bool     `json:"enabled,omitempty"`
+			EnvironmentIds   *[]string `json:"environment_ids,omitempty"`
+			FunctionalityIds *[]string `json:"functionality_ids,omitempty"`
+			GroupIds         *[]string `json:"group_ids,omitempty"`
+			IncidentRoleIds  *[]string `json:"incident_role_ids,omitempty"`
+			IncidentTypeIds  *[]string `json:"incident_type_ids,omitempty"`
 
 			// The title of the workflow
 			Name string `json:"name"`
@@ -17880,12 +18173,13 @@ type WorkflowResponse struct {
 			CreatedAt string `json:"created_at"`
 
 			// The description of the workflow
-			Description     *string   `json:"description"`
-			Enabled         *bool     `json:"enabled,omitempty"`
-			EnvironmentIds  *[]string `json:"environment_ids,omitempty"`
-			GroupIds        *[]string `json:"group_ids,omitempty"`
-			IncidentRoleIds *[]string `json:"incident_role_ids,omitempty"`
-			IncidentTypeIds *[]string `json:"incident_type_ids,omitempty"`
+			Description      *string   `json:"description"`
+			Enabled          *bool     `json:"enabled,omitempty"`
+			EnvironmentIds   *[]string `json:"environment_ids,omitempty"`
+			FunctionalityIds *[]string `json:"functionality_ids,omitempty"`
+			GroupIds         *[]string `json:"group_ids,omitempty"`
+			IncidentRoleIds  *[]string `json:"incident_role_ids,omitempty"`
+			IncidentTypeIds  *[]string `json:"incident_type_ids,omitempty"`
 
 			// The title of the workflow
 			Name string `json:"name"`
@@ -18501,6 +18795,14 @@ type ListPulsesParams struct {
 	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
 	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+}
+
+// ListRetrospectiveStepsParams defines parameters for ListRetrospectiveSteps.
+type ListRetrospectiveStepsParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	Sort       *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // ListSecretsParams defines parameters for ListSecrets.
@@ -19182,6 +19484,21 @@ type ClientInterface interface {
 
 	// UpdatePulse request with any body
 	UpdatePulseWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListRetrospectiveSteps request
+	ListRetrospectiveSteps(ctx context.Context, params *ListRetrospectiveStepsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateRetrospectiveStep request with any body
+	CreateRetrospectiveStepWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteRetrospectiveStep request
+	DeleteRetrospectiveStep(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetRetrospectiveStep request
+	GetRetrospectiveStep(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateRetrospectiveStep request with any body
+	UpdateRetrospectiveStepWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListSecrets request
 	ListSecrets(ctx context.Context, params *ListSecretsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -21172,6 +21489,66 @@ func (c *Client) GetPulse(ctx context.Context, id string, reqEditors ...RequestE
 
 func (c *Client) UpdatePulseWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdatePulseRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListRetrospectiveSteps(ctx context.Context, params *ListRetrospectiveStepsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListRetrospectiveStepsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateRetrospectiveStepWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateRetrospectiveStepRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteRetrospectiveStep(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteRetrospectiveStepRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetRetrospectiveStep(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetRetrospectiveStepRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateRetrospectiveStepWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateRetrospectiveStepRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -30915,6 +31292,234 @@ func NewUpdatePulseRequestWithBody(server string, id string, contentType string,
 	return req, nil
 }
 
+// NewListRetrospectiveStepsRequest generates requests for ListRetrospectiveSteps
+func NewListRetrospectiveStepsRequest(server string, params *ListRetrospectiveStepsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/retrospective_steps")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Include != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.Sort != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateRetrospectiveStepRequestWithBody generates requests for CreateRetrospectiveStep with any type of body
+func NewCreateRetrospectiveStepRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/retrospective_steps")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteRetrospectiveStepRequest generates requests for DeleteRetrospectiveStep
+func NewDeleteRetrospectiveStepRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/retrospective_steps/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetRetrospectiveStepRequest generates requests for GetRetrospectiveStep
+func NewGetRetrospectiveStepRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/retrospective_steps/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateRetrospectiveStepRequestWithBody generates requests for UpdateRetrospectiveStep with any type of body
+func NewUpdateRetrospectiveStepRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/retrospective_steps/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListSecretsRequest generates requests for ListSecrets
 func NewListSecretsRequest(server string, params *ListSecretsParams) (*http.Request, error) {
 	var err error
@@ -35428,6 +36033,21 @@ type ClientWithResponsesInterface interface {
 	// UpdatePulse request with any body
 	UpdatePulseWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdatePulseResponse, error)
 
+	// ListRetrospectiveSteps request
+	ListRetrospectiveStepsWithResponse(ctx context.Context, params *ListRetrospectiveStepsParams, reqEditors ...RequestEditorFn) (*ListRetrospectiveStepsResponse, error)
+
+	// CreateRetrospectiveStep request with any body
+	CreateRetrospectiveStepWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateRetrospectiveStepResponse, error)
+
+	// DeleteRetrospectiveStep request
+	DeleteRetrospectiveStepWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteRetrospectiveStepResponse, error)
+
+	// GetRetrospectiveStep request
+	GetRetrospectiveStepWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetRetrospectiveStepResponse, error)
+
+	// UpdateRetrospectiveStep request with any body
+	UpdateRetrospectiveStepWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveStepResponse, error)
+
 	// ListSecrets request
 	ListSecretsWithResponse(ctx context.Context, params *ListSecretsParams, reqEditors ...RequestEditorFn) (*ListSecretsResponse, error)
 
@@ -38759,6 +39379,111 @@ func (r UpdatePulseResponse) StatusCode() int {
 	return 0
 }
 
+type ListRetrospectiveStepsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r ListRetrospectiveStepsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListRetrospectiveStepsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateRetrospectiveStepResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateRetrospectiveStepResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateRetrospectiveStepResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteRetrospectiveStepResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteRetrospectiveStepResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteRetrospectiveStepResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetRetrospectiveStepResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r GetRetrospectiveStepResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetRetrospectiveStepResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateRetrospectiveStepResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateRetrospectiveStepResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateRetrospectiveStepResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type ListSecretsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -41643,6 +42368,51 @@ func (c *ClientWithResponses) UpdatePulseWithBodyWithResponse(ctx context.Contex
 		return nil, err
 	}
 	return ParseUpdatePulseResponse(rsp)
+}
+
+// ListRetrospectiveStepsWithResponse request returning *ListRetrospectiveStepsResponse
+func (c *ClientWithResponses) ListRetrospectiveStepsWithResponse(ctx context.Context, params *ListRetrospectiveStepsParams, reqEditors ...RequestEditorFn) (*ListRetrospectiveStepsResponse, error) {
+	rsp, err := c.ListRetrospectiveSteps(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListRetrospectiveStepsResponse(rsp)
+}
+
+// CreateRetrospectiveStepWithBodyWithResponse request with arbitrary body returning *CreateRetrospectiveStepResponse
+func (c *ClientWithResponses) CreateRetrospectiveStepWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateRetrospectiveStepResponse, error) {
+	rsp, err := c.CreateRetrospectiveStepWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateRetrospectiveStepResponse(rsp)
+}
+
+// DeleteRetrospectiveStepWithResponse request returning *DeleteRetrospectiveStepResponse
+func (c *ClientWithResponses) DeleteRetrospectiveStepWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteRetrospectiveStepResponse, error) {
+	rsp, err := c.DeleteRetrospectiveStep(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteRetrospectiveStepResponse(rsp)
+}
+
+// GetRetrospectiveStepWithResponse request returning *GetRetrospectiveStepResponse
+func (c *ClientWithResponses) GetRetrospectiveStepWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetRetrospectiveStepResponse, error) {
+	rsp, err := c.GetRetrospectiveStep(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetRetrospectiveStepResponse(rsp)
+}
+
+// UpdateRetrospectiveStepWithBodyWithResponse request with arbitrary body returning *UpdateRetrospectiveStepResponse
+func (c *ClientWithResponses) UpdateRetrospectiveStepWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveStepResponse, error) {
+	rsp, err := c.UpdateRetrospectiveStepWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateRetrospectiveStepResponse(rsp)
 }
 
 // ListSecretsWithResponse request returning *ListSecretsResponse
@@ -44672,6 +45442,86 @@ func ParseUpdatePulseResponse(rsp *http.Response) (*UpdatePulseResponse, error) 
 	}
 
 	response := &UpdatePulseResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseListRetrospectiveStepsResponse parses an HTTP response from a ListRetrospectiveStepsWithResponse call
+func ParseListRetrospectiveStepsResponse(rsp *http.Response) (*ListRetrospectiveStepsResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListRetrospectiveStepsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseCreateRetrospectiveStepResponse parses an HTTP response from a CreateRetrospectiveStepWithResponse call
+func ParseCreateRetrospectiveStepResponse(rsp *http.Response) (*CreateRetrospectiveStepResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateRetrospectiveStepResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseDeleteRetrospectiveStepResponse parses an HTTP response from a DeleteRetrospectiveStepWithResponse call
+func ParseDeleteRetrospectiveStepResponse(rsp *http.Response) (*DeleteRetrospectiveStepResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteRetrospectiveStepResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseGetRetrospectiveStepResponse parses an HTTP response from a GetRetrospectiveStepWithResponse call
+func ParseGetRetrospectiveStepResponse(rsp *http.Response) (*GetRetrospectiveStepResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetRetrospectiveStepResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseUpdateRetrospectiveStepResponse parses an HTTP response from a UpdateRetrospectiveStepWithResponse call
+func ParseUpdateRetrospectiveStepResponse(rsp *http.Response) (*UpdateRetrospectiveStepResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateRetrospectiveStepResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

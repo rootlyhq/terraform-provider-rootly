@@ -133,7 +133,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
-							Description: "Actions that trigger the workflow. One of custom_fields.<SLUG>.updated, action_item_created, action_item_updated, assigned_user_updated, summary_updated, description_updated, status_updated, priority_updated, due_date_updated, teams_updated, slack_command",
+							Description: "Actions that trigger the workflow. One of custom_fields.<slug>.updated, action_item_created, action_item_updated, assigned_user_updated, summary_updated, description_updated, status_updated, priority_updated, due_date_updated, teams_updated, slack_command",
 						},
 
 						"incident_visibilities": &schema.Schema{
@@ -465,6 +465,17 @@ func resourceWorkflowActionItem() *schema.Resource {
 				Description: "",
 			},
 
+			"functionality_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "",
+			},
+
 			"group_ids": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -537,6 +548,9 @@ func resourceWorkflowActionItemCreate(ctx context.Context, d *schema.ResourceDat
 	if value, ok := d.GetOkExists("service_ids"); ok {
 		s.ServiceIds = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("functionality_ids"); ok {
+		s.FunctionalityIds = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("group_ids"); ok {
 		s.GroupIds = value.([]interface{})
 	}
@@ -590,6 +604,7 @@ func resourceWorkflowActionItemRead(ctx context.Context, d *schema.ResourceData,
 	d.Set("incident_type_ids", item.IncidentTypeIds)
 	d.Set("incident_role_ids", item.IncidentRoleIds)
 	d.Set("service_ids", item.ServiceIds)
+	d.Set("functionality_ids", item.FunctionalityIds)
 	d.Set("group_ids", item.GroupIds)
 
 	return nil
@@ -655,6 +670,9 @@ func resourceWorkflowActionItemUpdate(ctx context.Context, d *schema.ResourceDat
 	}
 	if d.HasChange("service_ids") {
 		s.ServiceIds = d.Get("service_ids").([]interface{})
+	}
+	if d.HasChange("functionality_ids") {
+		s.FunctionalityIds = d.Get("functionality_ids").([]interface{})
 	}
 	if d.HasChange("group_ids") {
 		s.GroupIds = d.Get("group_ids").([]interface{})
