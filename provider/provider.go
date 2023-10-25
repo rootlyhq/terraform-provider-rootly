@@ -69,6 +69,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_custom_field_options": dataSourceCustomFieldOptions(),
 				"rootly_environments":         dataSourceEnvironments(),
 				"rootly_functionalities":      dataSourceFunctionalities(),
+				"rootly_ip_ranges":            dataSourceIpRanges(),
 				"rootly_incident_types":       dataSourceIncidentTypes(),
 				"rootly_incident_roles":       dataSourceIncidentRoles(),
 				"rootly_workflow_task":        dataSourceWorkflowTask(),

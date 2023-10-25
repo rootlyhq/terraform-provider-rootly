@@ -13,6 +13,7 @@ const generateTasks = require("./generate-tasks");
 const swagger = require(path.resolve(swaggerPath));
 
 const excluded = [
+  "ip_ranges",
   "dashboard",
   "dashboard_panel",
   "workflow_task",
