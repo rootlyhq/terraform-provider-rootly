@@ -6,8 +6,10 @@ import (
 )
 
 type IpRanges struct {
-	Ipv4 []interface{} `jsonapi:"attr,ipv4,omitempty"`
-	Ipv6 []interface{} `jsonapi:"attr,ipv4,omitempty"`
+	IntegrationsIpv4 []interface{} `jsonapi:"attr,integrations_ipv4,omitempty"`
+	IntegrationsIpv6 []interface{} `jsonapi:"attr,integrations_ipv6,omitempty"`
+	WebhooksIpv4 []interface{} `jsonapi:"attr,webhooks_ipv4,omitempty"`
+	WebhooksIpv6 []interface{} `jsonapi:"attr,webhooks_ipv6,omitempty"`
 }
 
 func (c *Client) GetIpRanges() (*IpRanges, error) {

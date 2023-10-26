@@ -11451,22 +11451,34 @@ type InviteToSlackChannelVictorOpsTaskParamsTaskType string
 
 // IpRanges defines model for ip_ranges.
 type IpRanges struct {
-	// IPv4 addresses associated with rootly.com
-	Ipv4 []string `json:"ipv4"`
+	// IPv4 addresses associated with Rootly integrations.
+	IntegrationsIpv4 []string `json:"integrations_ipv4"`
 
-	// IPv6 addresses associated with rootly.com
-	Ipv6 []string `json:"ipv6"`
+	// IPv6 addresses associated with Rootly integrations.
+	IntegrationsIpv6 []string `json:"integrations_ipv6"`
+
+	// IPv4 addresses associated with Rootly webhooks.
+	WebhooksIpv4 []string `json:"webhooks_ipv4"`
+
+	// IPv6 addresses associated with Rootly webhooks.
+	WebhooksIpv6 []string `json:"webhooks_ipv6"`
 }
 
 // IpRangesResponse defines model for ip_ranges_response.
 type IpRangesResponse struct {
 	Data struct {
 		Attributes struct {
-			// IPv4 addresses associated with rootly.com
-			Ipv4 []string `json:"ipv4"`
+			// IPv4 addresses associated with Rootly integrations.
+			IntegrationsIpv4 []string `json:"integrations_ipv4"`
 
-			// IPv6 addresses associated with rootly.com
-			Ipv6 []string `json:"ipv6"`
+			// IPv6 addresses associated with Rootly integrations.
+			IntegrationsIpv6 []string `json:"integrations_ipv6"`
+
+			// IPv4 addresses associated with Rootly webhooks.
+			WebhooksIpv4 []string `json:"webhooks_ipv4"`
+
+			// IPv6 addresses associated with Rootly webhooks.
+			WebhooksIpv6 []string `json:"webhooks_ipv6"`
 		} `json:"attributes"`
 
 		// Unique ID of the ip_ranges

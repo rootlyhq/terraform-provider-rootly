@@ -12,21 +12,37 @@ func dataSourceIpRanges() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceIpRangesRead,
 		Schema: map[string]*schema.Schema{
-			"ipv4": &schema.Schema{
+			"integrations_ipv4": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
 				Computed:    true,
-				Description: "IPv4 addresses used by rootly.com services",
+				Description: "IPv4 addresses used by Rootly integrations.",
 			},
-			"ipv6": &schema.Schema{
+			"integrations_ipv6": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
 				Computed:    true,
-				Description: "IPv6 addresses used by rootly.com services",
+				Description: "IPv6 addresses used by Rootly integrations.",
+			},
+			"webhooks_ipv4": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Description: "IPv4 addresses used by Rootly webhooks.",
+			},
+			"webhooks_ipv6": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Description: "IPv6 addresses used by Rootly webhooks.",
 			},
 		},
 	}
@@ -41,8 +57,10 @@ func dataSourceIpRangesRead(ctx context.Context, d *schema.ResourceData, meta in
 	}
 
 	d.SetId("ip_ranges")
-	d.Set("ipv4", ip_range.Ipv4)
-	d.Set("ipv6", ip_range.Ipv6)
+	d.Set("integrations_ipv4", ip_range.IntegrationsIpv4)
+	d.Set("integrations_ipv6", ip_range.IntegrationsIpv6)
+	d.Set("webhooks_ipv4", ip_range.WebhooksIpv4)
+	d.Set("webhooks_ipv6", ip_range.WebhooksIpv6)
 
 	return nil
 }

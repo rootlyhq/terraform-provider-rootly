@@ -21,5 +21,7 @@ data "rootly_ip_ranges" "ip_ranges" {}
 ### Read-Only
 
 - `id` (String) The ID of this resource.
-- `ipv4` (List of String) IPv4 addresses used by rootly.com services
-- `ipv6` (List of String) IPv6 addresses used by rootly.com services
+- `integrations_ipv4` (List of String) IPv4 addresses used by Rootly integrations.
+- `integrations_ipv6` (List of String) IPv6 addresses used by Rootly integrations.
+- `webhooks_ipv4` (List of String) IPv4 addresses used by Rootly webhooks.
+- `webhooks_ipv6` (List of String) IPv6 addresses used by Rootly webhooks.
