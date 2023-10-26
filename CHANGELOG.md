@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.8] -- 2023-10-25
+
+- Add 'rootly_ip_ranges' data source.
+
 ## [1.1.7] -- 2023-10-20
 
 - Add `functionality_ids` conditions to workflows.
