@@ -77,27 +77,27 @@ func resourceWorkflowTaskUpdateZendeskTicket() *schema.Resource {
 							}, false),
 						},
 						"ticket_id": &schema.Schema{
-							Description: "The ticket id.",
+							Description: "The ticket id",
 							Type:        schema.TypeString,
 							Required:    true,
 						},
 						"subject": &schema.Schema{
-							Description: "The ticket subject.",
+							Description: "The ticket subject",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
 						"tags": &schema.Schema{
-							Description: "The ticket tags.",
+							Description: "The ticket tags",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
 						"priority": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. The priority id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The priority id and display name",
 							Type:        schema.TypeMap,
 							Optional:    true,
 						},
 						"completion": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. The completion id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The completion id and display name",
 							Type:        schema.TypeMap,
 							Optional:    true,
 						},

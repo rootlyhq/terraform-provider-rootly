@@ -35,7 +35,7 @@ Manages workflow auto_assign_role_pagerduty task.
 
 Required:
 
-- `incident_role_id` (String) The role id.
+- `incident_role_id` (String) The role id
 
 Optional:
 

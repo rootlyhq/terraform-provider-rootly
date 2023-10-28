@@ -74,7 +74,7 @@ func resourceWorkflowTaskCreateDatadogNotebook() *schema.Resource {
 							}, false),
 						},
 						"post_mortem_template_id": &schema.Schema{
-							Description: "Retrospective template to use when creating notebook, if desired.",
+							Description: "Retrospective template to use when creating notebook, if desired",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},

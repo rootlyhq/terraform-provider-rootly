@@ -36,14 +36,14 @@ Manages workflow create_zendesk_ticket task.
 Required:
 
 - `kind` (String) Value must be one of `problem`, `incident`, `question`, `task`.
-- `subject` (String) The ticket subject.
+- `subject` (String) The ticket subject
 
 Optional:
 
-- `comment` (String) The ticket comment.
-- `completion` (Map of String) Map must contain two fields, `id` and `name`. The completion id and display name.
+- `comment` (String) The ticket comment
+- `completion` (Map of String) Map must contain two fields, `id` and `name`. The completion id and display name
 - `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON
-- `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name.
-- `tags` (String) The ticket tags.
+- `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name
+- `tags` (String) The ticket tags
 - `task_type` (String)
 - `ticket_payload` (String) Additional Zendesk ticket attributes. Will be merged into whatever was specified in this tasks current parameters. Can contain liquid markup and need to be valid JSON

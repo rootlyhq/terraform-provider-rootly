@@ -35,21 +35,21 @@ Manages workflow create_jira_subtask task.
 
 Required:
 
-- `parent_issue_id` (String) The parent issue.
-- `project_key` (String) The project key.
-- `subtask_issue_type` (Map of String) Map must contain two fields, `id` and `name`. The issue type id and display name.
-- `title` (String) The issue title.
+- `parent_issue_id` (String) The parent issue
+- `project_key` (String) The project key
+- `subtask_issue_type` (Map of String) Map must contain two fields, `id` and `name`. The issue type id and display name
+- `title` (String) The issue title
 
 Optional:
 
-- `assign_user_email` (String) The assigned user's email.
+- `assign_user_email` (String) The assigned user's email
 - `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON
-- `description` (String) The issue description.
-- `due_date` (String) The due date.
-- `integration` (Map of String) Map must contain two fields, `id` and `name`. Specify integration id if you have more than one Jira instance.
-- `labels` (String) The issue labels.
-- `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name.
-- `reporter_user_email` (String) The reporter user's email.
-- `status` (Map of String) Map must contain two fields, `id` and `name`. The status id and display name.
+- `description` (String) The issue description
+- `due_date` (String) The due date
+- `integration` (Map of String) Map must contain two fields, `id` and `name`. Specify integration id if you have more than one Jira instance
+- `labels` (String) The issue labels
+- `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name
+- `reporter_user_email` (String) The reporter user's email
+- `status` (Map of String) Map must contain two fields, `id` and `name`. The status id and display name
 - `task_type` (String)
 - `update_payload` (String) Update payload. Can contain liquid markup and need to be valid JSON

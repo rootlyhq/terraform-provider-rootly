@@ -43,7 +43,7 @@ Optional:
 - `drive` (Map of String) Map must contain two fields, `id` and `name`.
 - `mark_post_mortem_as_published` (Boolean)
 - `parent_folder` (Map of String) Map must contain two fields, `id` and `name`.
-- `permissions` (String) Page permissions JSON.
-- `post_mortem_template_id` (String) Retrospective template to use when creating page, if desired.
+- `permissions` (String) Page permissions JSON
+- `post_mortem_template_id` (String) Retrospective template to use when creating page, if desired
 - `task_type` (String)
-- `template_id` (String) The Google Doc file ID to use as a template.
+- `template_id` (String) The Google Doc file ID to use as a template

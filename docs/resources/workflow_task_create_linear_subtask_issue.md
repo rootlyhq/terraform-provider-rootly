@@ -35,13 +35,13 @@ Manages workflow create_linear_subtask_issue task.
 
 Required:
 
-- `parent_issue_id` (String) The parent issue.
-- `state` (Map of String) Map must contain two fields, `id` and `name`. The state id and display name.
-- `title` (String) The issue title.
+- `parent_issue_id` (String) The parent issue
+- `state` (Map of String) Map must contain two fields, `id` and `name`. The state id and display name
+- `title` (String) The issue title
 
 Optional:
 
-- `assign_user_email` (String) The assigned user's email.
-- `description` (String) The issue description.
-- `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name.
+- `assign_user_email` (String) The assigned user's email
+- `description` (String) The issue description
+- `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name
 - `task_type` (String)

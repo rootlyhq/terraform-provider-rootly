@@ -74,32 +74,32 @@ func resourceWorkflowTaskCreateLinearSubtaskIssue() *schema.Resource {
 							}, false),
 						},
 						"parent_issue_id": &schema.Schema{
-							Description: "The parent issue.",
+							Description: "The parent issue",
 							Type:        schema.TypeString,
 							Required:    true,
 						},
 						"title": &schema.Schema{
-							Description: "The issue title.",
+							Description: "The issue title",
 							Type:        schema.TypeString,
 							Required:    true,
 						},
 						"description": &schema.Schema{
-							Description: "The issue description.",
+							Description: "The issue description",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
 						"state": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. The state id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The state id and display name",
 							Type:        schema.TypeMap,
 							Required:    true,
 						},
 						"priority": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. The priority id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The priority id and display name",
 							Type:        schema.TypeMap,
 							Optional:    true,
 						},
 						"assign_user_email": &schema.Schema{
-							Description: "The assigned user's email.",
+							Description: "The assigned user's email",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},

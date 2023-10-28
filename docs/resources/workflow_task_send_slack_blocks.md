@@ -75,11 +75,11 @@ resource "rootly_workflow_task_send_slack_blocks" "send_slack_blocks" {
 
 Required:
 
-- `blocks` (String) Support liquid markup. Needs to be a valid JSON string after liquid is parsed.
+- `blocks` (String) Support liquid markup. Needs to be a valid JSON string after liquid is parsed
 
 Optional:
 
-- `attachments` (String) Support liquid markup. Needs to be a valid JSON string after liquid is parsed.
+- `attachments` (String) Support liquid markup. Needs to be a valid JSON string after liquid is parsed
 - `broadcast_thread_reply_to_channel` (Boolean)
 - `channels` (Block List) (see [below for nested schema](#nestedblock--task_params--channels))
 - `message` (String)

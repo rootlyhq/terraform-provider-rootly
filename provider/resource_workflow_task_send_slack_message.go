@@ -163,7 +163,7 @@ func resourceWorkflowTaskSendSlackMessage() *schema.Resource {
 							Optional:    true,
 						},
 						"text": &schema.Schema{
-							Description: "The message text.",
+							Description: "The message text",
 							Type:        schema.TypeString,
 							Required:    true,
 						},

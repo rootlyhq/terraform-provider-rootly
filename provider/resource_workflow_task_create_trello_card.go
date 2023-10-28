@@ -84,17 +84,17 @@ func resourceWorkflowTaskCreateTrelloCard() *schema.Resource {
 							Optional:    true,
 						},
 						"due_date": &schema.Schema{
-							Description: "The due date (ISO8601 format)",
+							Description: "The due date",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
 						"board": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. The board id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The board id and display name",
 							Type:        schema.TypeMap,
 							Required:    true,
 						},
 						"list": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. The list id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The list id and display name",
 							Type:        schema.TypeMap,
 							Required:    true,
 						},
@@ -116,7 +116,7 @@ func resourceWorkflowTaskCreateTrelloCard() *schema.Resource {
 							},
 						},
 						"archivation": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. The archivation id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The archivation id and display name",
 							Type:        schema.TypeMap,
 							Optional:    true,
 						},

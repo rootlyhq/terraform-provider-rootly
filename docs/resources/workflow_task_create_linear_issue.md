@@ -35,17 +35,17 @@ Manages workflow create_linear_issue task.
 
 Required:
 
-- `state` (Map of String) Map must contain two fields, `id` and `name`. The state id and display name.
-- `team` (Map of String) Map must contain two fields, `id` and `name`. The team id and display name.
-- `title` (String) The issue title.
+- `state` (Map of String) Map must contain two fields, `id` and `name`. The state id and display name
+- `team` (Map of String) Map must contain two fields, `id` and `name`. The team id and display name
+- `title` (String) The issue title
 
 Optional:
 
-- `assign_user_email` (String) The assigned user's email.
-- `description` (String) The issue description.
+- `assign_user_email` (String) The assigned user's email
+- `description` (String) The issue description
 - `labels` (Block List) (see [below for nested schema](#nestedblock--task_params--labels))
-- `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name.
-- `project` (Map of String) Map must contain two fields, `id` and `name`. The project id and display name.
+- `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name
+- `project` (Map of String) Map must contain two fields, `id` and `name`. The project id and display name
 - `task_type` (String)
 
 <a id="nestedblock--task_params--labels"></a>

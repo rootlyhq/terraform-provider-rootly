@@ -35,16 +35,16 @@ Manages workflow update_trello_card task.
 
 Required:
 
-- `archivation` (Map of String) Map must contain two fields, `id` and `name`. The archivation id and display name.
+- `archivation` (Map of String) Map must contain two fields, `id` and `name`. The archivation id and display name
 - `card_id` (String) The card id
 
 Optional:
 
-- `board` (Map of String) Map must contain two fields, `id` and `name`. The board id and display name.
+- `board` (Map of String) Map must contain two fields, `id` and `name`. The board id and display name
 - `description` (String) The card description
-- `due_date` (String) The due date (ISO8601 format)
+- `due_date` (String) The due date
 - `labels` (Block List) (see [below for nested schema](#nestedblock--task_params--labels))
-- `list` (Map of String) Map must contain two fields, `id` and `name`. The list id and display name.
+- `list` (Map of String) Map must contain two fields, `id` and `name`. The list id and display name
 - `task_type` (String)
 - `title` (String) The card title
 

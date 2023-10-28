@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.9] -- 2023-10-28
+
+- Add `due_date` attribute to `clickup`, `shortcut` & `trello` workflow resources.
+- Fix documentation.
+
 ## [1.1.8] -- 2023-10-25
 
 - Add 'rootly_ip_ranges' data source.

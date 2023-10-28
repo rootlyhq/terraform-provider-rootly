@@ -77,7 +77,7 @@ func resourceWorkflowTaskCreateGoogleDocsPage() *schema.Resource {
 							}, false),
 						},
 						"post_mortem_template_id": &schema.Schema{
-							Description: "Retrospective template to use when creating page, if desired.",
+							Description: "Retrospective template to use when creating page, if desired",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -107,12 +107,12 @@ func resourceWorkflowTaskCreateGoogleDocsPage() *schema.Resource {
 							Optional:    true,
 						},
 						"template_id": &schema.Schema{
-							Description: "The Google Doc file ID to use as a template.",
+							Description: "The Google Doc file ID to use as a template",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
 						"permissions": &schema.Schema{
-							Description: "Page permissions JSON.",
+							Description: "Page permissions JSON",
 							Type:        schema.TypeString,
 							Optional:    true,
 							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {

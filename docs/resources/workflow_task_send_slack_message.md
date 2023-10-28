@@ -62,7 +62,7 @@ resource "rootly_workflow_task_send_slack_message" "send_slack_message" {
 
 Required:
 
-- `text` (String) The message text.
+- `text` (String) The message text
 
 Optional:
 

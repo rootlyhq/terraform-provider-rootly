@@ -35,19 +35,19 @@ Manages workflow update_jira_issue task.
 
 Required:
 
-- `issue_id` (String) The issue id.
-- `project_key` (String) The project key.
+- `issue_id` (String) The issue id
+- `project_key` (String) The project key
 
 Optional:
 
-- `assign_user_email` (String) The assigned user's email.
+- `assign_user_email` (String) The assigned user's email
 - `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON
-- `description` (String) The issue description.
-- `due_date` (String) The due date.
-- `labels` (String) The issue labels.
-- `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name.
-- `reporter_user_email` (String) The reporter user's email.
-- `status` (Map of String) Map must contain two fields, `id` and `name`. The status id and display name.
+- `description` (String) The issue description
+- `due_date` (String) The due date
+- `labels` (String) The issue labels
+- `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name
+- `reporter_user_email` (String) The reporter user's email
+- `status` (Map of String) Map must contain two fields, `id` and `name`. The status id and display name
 - `task_type` (String)
-- `title` (String) The issue title.
+- `title` (String) The issue title
 - `update_payload` (String) Update payload. Can contain liquid markup and need to be valid JSON

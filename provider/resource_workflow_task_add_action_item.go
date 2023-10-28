@@ -99,17 +99,17 @@ func resourceWorkflowTaskAddActionItem() *schema.Resource {
 							}, false),
 						},
 						"kind": &schema.Schema{
-							Description: "The action item kind.",
+							Description: "The action item kind",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
 						"summary": &schema.Schema{
-							Description: "The action item summary.",
+							Description: "The action item summary",
 							Type:        schema.TypeString,
 							Required:    true,
 						},
 						"description": &schema.Schema{
-							Description: "The action item description.",
+							Description: "The action item description",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},

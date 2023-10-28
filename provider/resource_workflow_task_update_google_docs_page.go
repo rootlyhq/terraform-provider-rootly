@@ -89,7 +89,7 @@ func resourceWorkflowTaskUpdateGoogleDocsPage() *schema.Resource {
 							Optional:    true,
 						},
 						"post_mortem_template_id": &schema.Schema{
-							Description: "Retrospective template to use when updating page, if desired.",
+							Description: "Retrospective template to use when updating page, if desired",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},

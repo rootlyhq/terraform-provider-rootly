@@ -35,7 +35,7 @@ Manages workflow create_shortcut_task task.
 
 Required:
 
-- `completion` (Map of String) Map must contain two fields, `id` and `name`. The completion id and display name.
+- `completion` (Map of String) Map must contain two fields, `id` and `name`. The completion id and display name
 - `description` (String) The task description
 - `parent_story_id` (String) The parent story
 

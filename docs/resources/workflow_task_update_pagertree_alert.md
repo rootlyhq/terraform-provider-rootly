@@ -36,8 +36,8 @@ Manages workflow update_pagertree_alert task.
 Optional:
 
 - `description` (String) Description of alert as text
-- `incident` (Boolean) Setting to true makes an alert a Pagertree incident.
-- `pagertree_alert_id` (String) The prefix ID of the Pagertree alert.
+- `incident` (Boolean) Setting to true makes an alert a Pagertree incident
+- `pagertree_alert_id` (String) The prefix ID of the Pagertree alert
 - `severity` (String) Value must be one of `auto`, `SEV-1`, `SEV-2`, `SEV-3`, `SEV-4`.
 - `task_type` (String)
 - `teams` (Block List) (see [below for nested schema](#nestedblock--task_params--teams))

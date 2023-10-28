@@ -35,13 +35,13 @@ Manages workflow update_shortcut_story task.
 
 Required:
 
-- `archivation` (Map of String) Map must contain two fields, `id` and `name`. The archivation id and display name.
+- `archivation` (Map of String) Map must contain two fields, `id` and `name`. The archivation id and display name
 - `story_id` (String) The story id
 
 Optional:
 
 - `description` (String) The incident description
-- `due_date` (String) The story due date (ISO8601 format).
-- `labels` (String) The story labels.
+- `due_date` (String) The due date
+- `labels` (String) The story labels
 - `task_type` (String)
 - `title` (String) The incident title

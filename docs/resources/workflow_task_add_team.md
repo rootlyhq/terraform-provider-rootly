@@ -35,7 +35,7 @@ Manages workflow add_team task.
 
 Required:
 
-- `group_id` (String) The team id.
+- `group_id` (String) The team id
 
 Optional:
 

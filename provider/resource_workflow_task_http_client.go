@@ -77,7 +77,7 @@ func resourceWorkflowTaskHttpClient() *schema.Resource {
 							}, false),
 						},
 						"headers": &schema.Schema{
-							Description: "JSON map of HTTP headers.",
+							Description: "JSON map of HTTP headers",
 							Type:        schema.TypeString,
 							Optional:    true,
 							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {
@@ -96,7 +96,7 @@ func resourceWorkflowTaskHttpClient() *schema.Resource {
 							Default: "{}",
 						},
 						"params": &schema.Schema{
-							Description: "JSON map of HTTP query parameters.",
+							Description: "JSON map of HTTP query parameters",
 							Type:        schema.TypeString,
 							Optional:    true,
 							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {
@@ -115,7 +115,7 @@ func resourceWorkflowTaskHttpClient() *schema.Resource {
 							Default: "{}",
 						},
 						"body": &schema.Schema{
-							Description: "HTTP body.",
+							Description: "HTTP body",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},

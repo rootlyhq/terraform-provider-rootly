@@ -74,7 +74,7 @@ func resourceWorkflowTaskUpdatePagertreeAlert() *schema.Resource {
 							}, false),
 						},
 						"pagertree_alert_id": &schema.Schema{
-							Description: "The prefix ID of the Pagertree alert.",
+							Description: "The prefix ID of the Pagertree alert",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -149,7 +149,7 @@ func resourceWorkflowTaskUpdatePagertreeAlert() *schema.Resource {
 							},
 						},
 						"incident": &schema.Schema{
-							Description: "Setting to true makes an alert a Pagertree incident.",
+							Description: "Setting to true makes an alert a Pagertree incident",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},

@@ -74,7 +74,7 @@ func resourceWorkflowTaskAddTeam() *schema.Resource {
 							}, false),
 						},
 						"group_id": &schema.Schema{
-							Description: "The team id.",
+							Description: "The team id",
 							Type:        schema.TypeString,
 							Required:    true,
 						},

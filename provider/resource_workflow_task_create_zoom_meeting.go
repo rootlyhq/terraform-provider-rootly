@@ -84,7 +84,7 @@ func resourceWorkflowTaskCreateZoomMeeting() *schema.Resource {
 							Optional:    true,
 						},
 						"create_as_email": &schema.Schema{
-							Description: "The email to use if creating as email.",
+							Description: "The email to use if creating as email",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},

@@ -39,8 +39,8 @@ Required:
 
 Optional:
 
-- `emoji` (String) The bookmark emoji.
+- `emoji` (String) The bookmark emoji
 - `link` (String) The bookmark link. Required if not a playbook bookmark
-- `playbook_id` (String) The playbook id if bookmark is of an incident playbook.
+- `playbook_id` (String) The playbook id if bookmark is of an incident playbook
 - `task_type` (String)
 - `title` (String) The bookmark title. Required if not a playbook bookmark

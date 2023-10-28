@@ -40,7 +40,7 @@ Required:
 
 Optional:
 
-- `assign_user_email` (String) The assigned user's email.
+- `assign_user_email` (String) The assigned user's email
 - `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON
 - `dependency_direction` (String) Value must be one of `blocking`, `blocked_by`.
 - `dependent_task_ids` (List of String) Dependent task ids. Supports liquid syntax

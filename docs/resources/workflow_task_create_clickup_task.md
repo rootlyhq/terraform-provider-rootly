@@ -35,13 +35,14 @@ Manages workflow create_clickup_task task.
 
 Required:
 
-- `title` (String) The task title.
+- `title` (String) The task title
 
 Optional:
 
 - `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON
-- `description` (String) The task description.
-- `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name.
-- `tags` (String) The task tags.
+- `description` (String) The task description
+- `due_date` (String) The due date
+- `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name
+- `tags` (String) The task tags
 - `task_payload` (String) Additional ClickUp task attributes. Will be merged into whatever was specified in this tasks current parameters. Can contain liquid markup and need to be valid JSON
 - `task_type` (String)

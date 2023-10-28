@@ -35,7 +35,7 @@ Manages workflow update_shortcut_task task.
 
 Required:
 
-- `completion` (Map of String) Map must contain two fields, `id` and `name`. The completion id and display name.
+- `completion` (Map of String) Map must contain two fields, `id` and `name`. The completion id and display name
 - `parent_story_id` (String) The parent story
 - `task_id` (String) The task id
 

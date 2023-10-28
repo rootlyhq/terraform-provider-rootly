@@ -35,18 +35,18 @@ Manages workflow update_linear_issue task.
 
 Required:
 
-- `issue_id` (String) The issue id.
+- `issue_id` (String) The issue id
 
 Optional:
 
-- `assign_user_email` (String) The assigned user's email.
-- `description` (String) The issue description.
+- `assign_user_email` (String) The assigned user's email
+- `description` (String) The issue description
 - `labels` (Block List) (see [below for nested schema](#nestedblock--task_params--labels))
-- `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name.
-- `project` (Map of String) Map must contain two fields, `id` and `name`. The project id and display name.
-- `state` (Map of String) Map must contain two fields, `id` and `name`. The state id and display name.
+- `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name
+- `project` (Map of String) Map must contain two fields, `id` and `name`. The project id and display name
+- `state` (Map of String) Map must contain two fields, `id` and `name`. The state id and display name
 - `task_type` (String)
-- `title` (String) The issue title.
+- `title` (String) The issue title
 
 <a id="nestedblock--task_params--labels"></a>
 ### Nested Schema for `task_params.labels`

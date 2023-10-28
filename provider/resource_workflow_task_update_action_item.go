@@ -125,7 +125,7 @@ func resourceWorkflowTaskUpdateActionItem() *schema.Resource {
 							},
 						},
 						"description": &schema.Schema{
-							Description: "The action item description.",
+							Description: "The action item description",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},

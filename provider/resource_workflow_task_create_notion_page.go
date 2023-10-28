@@ -74,12 +74,12 @@ func resourceWorkflowTaskCreateNotionPage() *schema.Resource {
 							}, false),
 						},
 						"parent_page": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. The parent page id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The parent page id and display name",
 							Type:        schema.TypeMap,
 							Required:    true,
 						},
 						"post_mortem_template_id": &schema.Schema{
-							Description: "Retrospective template to use when creating page task, if desired.",
+							Description: "Retrospective template to use when creating page task, if desired",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},

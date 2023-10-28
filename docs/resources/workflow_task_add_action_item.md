@@ -37,15 +37,15 @@ Required:
 
 - `priority` (String) The action item priority. Value must be one of `high`, `medium`, `low`.
 - `status` (String) The action item status. Value must be one of `open`, `in_progress`, `cancelled`, `done`.
-- `summary` (String) The action item summary.
+- `summary` (String) The action item summary
 
 Optional:
 
 - `assigned_to_user` (Map of String) Map must contain two fields, `id` and `name`.  The user this action item is assigned to
 - `assigned_to_user_id` (String) [DEPRECATED] Use assigned_to_user attribute instead. The user id this action item is assigned to
-- `description` (String) The action item description.
+- `description` (String) The action item description
 - `incident_role_id` (String) The role id this action item is associated with
-- `kind` (String) The action item kind.
+- `kind` (String) The action item kind
 - `post_to_incident_timeline` (Boolean)
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
 - `task_type` (String)

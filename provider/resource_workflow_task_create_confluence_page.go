@@ -74,7 +74,7 @@ func resourceWorkflowTaskCreateConfluencePage() *schema.Resource {
 							}, false),
 						},
 						"integration": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. Specify integration id if you have more than one Confluence instance.",
+							Description: "Map must contain two fields, `id` and `name`. Specify integration id if you have more than one Confluence instance",
 							Type:        schema.TypeMap,
 							Optional:    true,
 						},

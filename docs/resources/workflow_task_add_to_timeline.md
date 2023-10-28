@@ -35,13 +35,13 @@ Manages workflow add_to_timeline task.
 
 Required:
 
-- `event` (String) The timeline event description.
+- `event` (String) The timeline event description
 
 Optional:
 
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
 - `task_type` (String)
-- `url` (String) A URL for the timeline event.
+- `url` (String) A URL for the timeline event
 
 <a id="nestedblock--task_params--post_to_slack_channels"></a>
 ### Nested Schema for `task_params.post_to_slack_channels`

@@ -74,7 +74,7 @@ func resourceWorkflowTaskAutoAssignRolePagerduty() *schema.Resource {
 							}, false),
 						},
 						"incident_role_id": &schema.Schema{
-							Description: "The role id.",
+							Description: "The role id",
 							Type:        schema.TypeString,
 							Required:    true,
 						},

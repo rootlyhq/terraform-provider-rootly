@@ -40,7 +40,7 @@ Required:
 
 Optional:
 
-- `conference_solution_key` (String) Sets the video conference type attached to the meeting.. Value must be one of `eventHangout`, `eventNamedHangout`, `hangoutsMeet`, `addOn`.
+- `conference_solution_key` (String) Sets the video conference type attached to the meeting. Value must be one of `eventHangout`, `eventNamedHangout`, `hangoutsMeet`, `addOn`.
 - `post_to_incident_timeline` (Boolean)
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
 - `task_type` (String)

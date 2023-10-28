@@ -74,7 +74,7 @@ func resourceWorkflowTaskAddSlackBookmark() *schema.Resource {
 							}, false),
 						},
 						"playbook_id": &schema.Schema{
-							Description: "The playbook id if bookmark is of an incident playbook.",
+							Description: "The playbook id if bookmark is of an incident playbook",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -94,7 +94,7 @@ func resourceWorkflowTaskAddSlackBookmark() *schema.Resource {
 							Optional:    true,
 						},
 						"emoji": &schema.Schema{
-							Description: "The bookmark emoji.",
+							Description: "The bookmark emoji",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},

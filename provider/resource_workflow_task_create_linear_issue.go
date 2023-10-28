@@ -74,27 +74,27 @@ func resourceWorkflowTaskCreateLinearIssue() *schema.Resource {
 							}, false),
 						},
 						"title": &schema.Schema{
-							Description: "The issue title.",
+							Description: "The issue title",
 							Type:        schema.TypeString,
 							Required:    true,
 						},
 						"description": &schema.Schema{
-							Description: "The issue description.",
+							Description: "The issue description",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
 						"team": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. The team id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The team id and display name",
 							Type:        schema.TypeMap,
 							Required:    true,
 						},
 						"state": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. The state id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The state id and display name",
 							Type:        schema.TypeMap,
 							Required:    true,
 						},
 						"project": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. The project id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The project id and display name",
 							Type:        schema.TypeMap,
 							Optional:    true,
 						},
@@ -116,12 +116,12 @@ func resourceWorkflowTaskCreateLinearIssue() *schema.Resource {
 							},
 						},
 						"priority": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. The priority id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The priority id and display name",
 							Type:        schema.TypeMap,
 							Optional:    true,
 						},
 						"assign_user_email": &schema.Schema{
-							Description: "The assigned user's email.",
+							Description: "The assigned user's email",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},

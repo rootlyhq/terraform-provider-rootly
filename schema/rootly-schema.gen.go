@@ -5298,13 +5298,13 @@ type AddActionItemTaskParams struct {
 	// [DEPRECATED] Use assigned_to_user attribute instead. The user id this action item is assigned to
 	AssignedToUserId *string `json:"assigned_to_user_id,omitempty"`
 
-	// The action item description.
+	// The action item description
 	Description *string `json:"description,omitempty"`
 
 	// The role id this action item is associated with
 	IncidentRoleId *string `json:"incident_role_id,omitempty"`
 
-	// The action item kind.
+	// The action item kind
 	Kind                   *string `json:"kind,omitempty"`
 	PostToIncidentTimeline *bool   `json:"post_to_incident_timeline,omitempty"`
 	PostToSlackChannels    *[]struct {
@@ -5318,7 +5318,7 @@ type AddActionItemTaskParams struct {
 	// The action item status
 	Status AddActionItemTaskParamsStatus `json:"status"`
 
-	// The action item summary.
+	// The action item summary
 	Summary  string                           `json:"summary"`
 	TaskType *AddActionItemTaskParamsTaskType `json:"task_type,omitempty"`
 }
@@ -5358,13 +5358,13 @@ type AddSlackBookmarkTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"channel"`
 
-	// The bookmark emoji.
+	// The bookmark emoji
 	Emoji *string `json:"emoji,omitempty"`
 
 	// The bookmark link. Required if not a playbook bookmark
 	Link *string `json:"link"`
 
-	// The playbook id if bookmark is of an incident playbook.
+	// The playbook id if bookmark is of an incident playbook
 	PlaybookId *string                             `json:"playbook_id,omitempty"`
 	TaskType   *AddSlackBookmarkTaskParamsTaskType `json:"task_type,omitempty"`
 
@@ -5394,7 +5394,7 @@ type AddSubscribersDataType string
 
 // AddTeamTaskParams defines model for add_team_task_params.
 type AddTeamTaskParams struct {
-	// The team id.
+	// The team id
 	GroupId  string                     `json:"group_id"`
 	TaskType *AddTeamTaskParamsTaskType `json:"task_type,omitempty"`
 }
@@ -5404,7 +5404,7 @@ type AddTeamTaskParamsTaskType string
 
 // AddToTimelineTaskParams defines model for add_to_timeline_task_params.
 type AddToTimelineTaskParams struct {
-	// The timeline event description.
+	// The timeline event description
 	Event               string `json:"event"`
 	PostToSlackChannels *[]struct {
 		Id   *string `json:"id,omitempty"`
@@ -5412,7 +5412,7 @@ type AddToTimelineTaskParams struct {
 	} `json:"post_to_slack_channels,omitempty"`
 	TaskType *AddToTimelineTaskParamsTaskType `json:"task_type,omitempty"`
 
-	// A URL for the timeline event.
+	// A URL for the timeline event
 	Url *string `json:"url,omitempty"`
 }
 
@@ -6108,7 +6108,7 @@ type AutoAssignRolePagerdutyTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"escalation_policy,omitempty"`
 
-	// The role id.
+	// The role id
 	IncidentRoleId string `json:"incident_role_id"`
 	Schedule       *struct {
 		Id   *string `json:"id,omitempty"`
@@ -6279,7 +6279,7 @@ type CreateAirtableTableRecordTaskParamsTaskType string
 
 // CreateAsanaSubtaskTaskParams defines model for create_asana_subtask_task_params.
 type CreateAsanaSubtaskTaskParams struct {
-	// The assigned user's email.
+	// The assigned user's email
 	AssignUserEmail *string `json:"assign_user_email,omitempty"`
 	Completion      struct {
 		Id   *string `json:"id,omitempty"`
@@ -6310,7 +6310,7 @@ type CreateAsanaSubtaskTaskParamsTaskType string
 
 // CreateAsanaTaskTaskParams defines model for create_asana_task_task_params.
 type CreateAsanaTaskTaskParams struct {
-	// The assigned user's email.
+	// The assigned user's email
 	AssignUserEmail *string `json:"assign_user_email,omitempty"`
 	Completion      struct {
 		Id   *string `json:"id,omitempty"`
@@ -6349,23 +6349,26 @@ type CreateClickupTaskTaskParams struct {
 	// Custom field mappings. Can contain liquid markup and need to be valid JSON
 	CustomFieldsMapping *string `json:"custom_fields_mapping"`
 
-	// The task description.
+	// The task description
 	Description *string `json:"description,omitempty"`
 
-	// The priority id and display name.
+	// The due date
+	DueDate *string `json:"due_date,omitempty"`
+
+	// The priority id and display name
 	Priority *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"priority,omitempty"`
 
-	// The task tags.
+	// The task tags
 	Tags *string `json:"tags,omitempty"`
 
 	// Additional ClickUp task attributes. Will be merged into whatever was specified in this tasks current parameters. Can contain liquid markup and need to be valid JSON
 	TaskPayload *string                              `json:"task_payload"`
 	TaskType    *CreateClickupTaskTaskParamsTaskType `json:"task_type,omitempty"`
 
-	// The task title.
+	// The task title
 	Title string `json:"title"`
 }
 
@@ -6382,7 +6385,7 @@ type CreateConfluencePageTaskParams struct {
 	// The page content
 	Content *string `json:"content,omitempty"`
 
-	// Specify integration id if you have more than one Confluence instance.
+	// Specify integration id if you have more than one Confluence instance
 	Integration *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -6417,7 +6420,7 @@ type CreateDatadogNotebookTaskParams struct {
 	Kind                      CreateDatadogNotebookTaskParamsKind `json:"kind"`
 	MarkPostMortemAsPublished *bool                               `json:"mark_post_mortem_as_published,omitempty"`
 
-	// Retrospective template to use when creating notebook, if desired.
+	// Retrospective template to use when creating notebook, if desired
 	PostMortemTemplateId *string                                  `json:"post_mortem_template_id,omitempty"`
 	TaskType             *CreateDatadogNotebookTaskParamsTaskType `json:"task_type,omitempty"`
 	Template             *struct {
@@ -6449,7 +6452,7 @@ type CreateDropboxPaperPageTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"parent_folder,omitempty"`
 
-	// Retrospective template to use when creating page task, if desired.
+	// Retrospective template to use when creating page task, if desired
 	PostMortemTemplateId *string                                   `json:"post_mortem_template_id,omitempty"`
 	TaskType             *CreateDropboxPaperPageTaskParamsTaskType `json:"task_type,omitempty"`
 
@@ -6559,14 +6562,14 @@ type CreateGoogleDocsPageTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"parent_folder,omitempty"`
 
-	// Page permissions JSON.
+	// Page permissions JSON
 	Permissions *string `json:"permissions,omitempty"`
 
-	// Retrospective template to use when creating page, if desired.
+	// Retrospective template to use when creating page, if desired
 	PostMortemTemplateId *string                                 `json:"post_mortem_template_id,omitempty"`
 	TaskType             *CreateGoogleDocsPageTaskParamsTaskType `json:"task_type,omitempty"`
 
-	// The Google Doc file ID to use as a template.
+	// The Google Doc file ID to use as a template
 	TemplateId *string `json:"template_id,omitempty"`
 
 	// The page title
@@ -6595,7 +6598,7 @@ type CreateGoogleDocsPermissionsTaskParamsTaskType string
 
 // CreateGoogleMeetingTaskParams defines model for create_google_meeting_task_params.
 type CreateGoogleMeetingTaskParams struct {
-	// Sets the video conference type attached to the meeting.
+	// Sets the video conference type attached to the meeting
 	ConferenceSolutionKey *CreateGoogleMeetingTaskParamsConferenceSolutionKey `json:"conference_solution_key,omitempty"`
 
 	// The meeting description
@@ -6611,7 +6614,7 @@ type CreateGoogleMeetingTaskParams struct {
 	TaskType *CreateGoogleMeetingTaskParamsTaskType `json:"task_type,omitempty"`
 }
 
-// Sets the video conference type attached to the meeting.
+// Sets the video conference type attached to the meeting
 type CreateGoogleMeetingTaskParamsConferenceSolutionKey string
 
 // CreateGoogleMeetingTaskParamsTaskType defines model for CreateGoogleMeetingTaskParams.TaskType.
@@ -6662,53 +6665,53 @@ type CreateIncidentTaskParamsTaskType string
 
 // CreateJiraIssueTaskParams defines model for create_jira_issue_task_params.
 type CreateJiraIssueTaskParams struct {
-	// The assigned user's email.
+	// The assigned user's email
 	AssignUserEmail *string `json:"assign_user_email,omitempty"`
 
 	// Custom field mappings. Can contain liquid markup and need to be valid JSON
 	CustomFieldsMapping *string `json:"custom_fields_mapping"`
 
-	// The issue description.
+	// The issue description
 	Description *string `json:"description,omitempty"`
 
-	// The due date.
+	// The due date
 	DueDate *string `json:"due_date,omitempty"`
 
-	// Specify integration id if you have more than one Jira instance.
+	// Specify integration id if you have more than one Jira instance
 	Integration *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"integration,omitempty"`
 
-	// The issue type id and display name.
+	// The issue type id and display name
 	IssueType struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"issue_type"`
 
-	// The issue labels.
+	// The issue labels
 	Labels *string `json:"labels,omitempty"`
 
-	// The priority id and display name.
+	// The priority id and display name
 	Priority *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"priority,omitempty"`
 
-	// The project key.
+	// The project key
 	ProjectKey string `json:"project_key"`
 
-	// The reporter user's email.
+	// The reporter user's email
 	ReporterUserEmail *string `json:"reporter_user_email,omitempty"`
 
-	// The status id and display name.
+	// The status id and display name
 	Status *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"status,omitempty"`
 	TaskType *CreateJiraIssueTaskParamsTaskType `json:"task_type,omitempty"`
 
-	// The issue title.
+	// The issue title
 	Title string `json:"title"`
 
 	// Update payload. Can contain liquid markup and need to be valid JSON
@@ -6720,56 +6723,56 @@ type CreateJiraIssueTaskParamsTaskType string
 
 // CreateJiraSubtaskTaskParams defines model for create_jira_subtask_task_params.
 type CreateJiraSubtaskTaskParams struct {
-	// The assigned user's email.
+	// The assigned user's email
 	AssignUserEmail *string `json:"assign_user_email,omitempty"`
 
 	// Custom field mappings. Can contain liquid markup and need to be valid JSON
 	CustomFieldsMapping *string `json:"custom_fields_mapping"`
 
-	// The issue description.
+	// The issue description
 	Description *string `json:"description,omitempty"`
 
-	// The due date.
+	// The due date
 	DueDate *string `json:"due_date,omitempty"`
 
-	// Specify integration id if you have more than one Jira instance.
+	// Specify integration id if you have more than one Jira instance
 	Integration *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"integration,omitempty"`
 
-	// The issue labels.
+	// The issue labels
 	Labels *string `json:"labels,omitempty"`
 
-	// The parent issue.
+	// The parent issue
 	ParentIssueId string `json:"parent_issue_id"`
 
-	// The priority id and display name.
+	// The priority id and display name
 	Priority *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"priority,omitempty"`
 
-	// The project key.
+	// The project key
 	ProjectKey string `json:"project_key"`
 
-	// The reporter user's email.
+	// The reporter user's email
 	ReporterUserEmail *string `json:"reporter_user_email,omitempty"`
 
-	// The status id and display name.
+	// The status id and display name
 	Status *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"status,omitempty"`
 
-	// The issue type id and display name.
+	// The issue type id and display name
 	SubtaskIssueType struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"subtask_issue_type"`
 	TaskType *CreateJiraSubtaskTaskParamsTaskType `json:"task_type,omitempty"`
 
-	// The issue title.
+	// The issue title
 	Title string `json:"title"`
 
 	// Update payload. Can contain liquid markup and need to be valid JSON
@@ -6794,42 +6797,42 @@ type CreateLinearIssueCommentTaskParamsTaskType string
 
 // CreateLinearIssueTaskParams defines model for create_linear_issue_task_params.
 type CreateLinearIssueTaskParams struct {
-	// The assigned user's email.
+	// The assigned user's email
 	AssignUserEmail *string `json:"assign_user_email,omitempty"`
 
-	// The issue description.
+	// The issue description
 	Description *string `json:"description,omitempty"`
 	Labels      *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"labels,omitempty"`
 
-	// The priority id and display name.
+	// The priority id and display name
 	Priority *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"priority,omitempty"`
 
-	// The project id and display name.
+	// The project id and display name
 	Project *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"project,omitempty"`
 
-	// The state id and display name.
+	// The state id and display name
 	State struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"state"`
 	TaskType *CreateLinearIssueTaskParamsTaskType `json:"task_type,omitempty"`
 
-	// The team id and display name.
+	// The team id and display name
 	Team struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"team"`
 
-	// The issue title.
+	// The issue title
 	Title string `json:"title"`
 }
 
@@ -6838,29 +6841,29 @@ type CreateLinearIssueTaskParamsTaskType string
 
 // CreateLinearSubtaskIssueTaskParams defines model for create_linear_subtask_issue_task_params.
 type CreateLinearSubtaskIssueTaskParams struct {
-	// The assigned user's email.
+	// The assigned user's email
 	AssignUserEmail *string `json:"assign_user_email,omitempty"`
 
-	// The issue description.
+	// The issue description
 	Description *string `json:"description,omitempty"`
 
-	// The parent issue.
+	// The parent issue
 	ParentIssueId string `json:"parent_issue_id"`
 
-	// The priority id and display name.
+	// The priority id and display name
 	Priority *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"priority,omitempty"`
 
-	// The state id and display name.
+	// The state id and display name
 	State struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"state"`
 	TaskType *CreateLinearSubtaskIssueTaskParamsTaskType `json:"task_type,omitempty"`
 
-	// The issue title.
+	// The issue title
 	Title string `json:"title"`
 }
 
@@ -6889,13 +6892,13 @@ type CreateMicrosoftTeamsMeetingTaskParamsTaskType string
 type CreateNotionPageTaskParams struct {
 	MarkPostMortemAsPublished *bool `json:"mark_post_mortem_as_published,omitempty"`
 
-	// The parent page id and display name.
+	// The parent page id and display name
 	ParentPage struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"parent_page"`
 
-	// Retrospective template to use when creating page task, if desired.
+	// Retrospective template to use when creating page task, if desired
 	PostMortemTemplateId   *string                             `json:"post_mortem_template_id,omitempty"`
 	ShowActionItemsAsTable *bool                               `json:"show_action_items_as_table,omitempty"`
 	ShowTimelineAsTable    *bool                               `json:"show_timeline_as_table,omitempty"`
@@ -6956,7 +6959,7 @@ type CreatePagertreeAlertTaskParams struct {
 	// Description of alert as text
 	Description *string `json:"description,omitempty"`
 
-	// Setting to true makes an alert a Pagertree incident.
+	// Setting to true makes an alert a Pagertree incident
 	Incident *bool                                   `json:"incident,omitempty"`
 	Severity *CreatePagertreeAlertTaskParamsSeverity `json:"severity,omitempty"`
 	TaskType *CreatePagertreeAlertTaskParamsTaskType `json:"task_type,omitempty"`
@@ -6992,11 +6995,11 @@ type CreateQuipPageTaskParams struct {
 	// The parent folder id
 	ParentFolderId *string `json:"parent_folder_id,omitempty"`
 
-	// Retrospective template to use when creating page, if desired.
+	// Retrospective template to use when creating page, if desired
 	PostMortemTemplateId *string                           `json:"post_mortem_template_id,omitempty"`
 	TaskType             *CreateQuipPageTaskParamsTaskType `json:"task_type,omitempty"`
 
-	// The Quip file ID to use as a template.
+	// The Quip file ID to use as a template
 	TemplateId *string `json:"template_id,omitempty"`
 
 	// The page title
@@ -7008,7 +7011,7 @@ type CreateQuipPageTaskParamsTaskType string
 
 // CreateServiceNowIncidentTaskParams defines model for create_service_now_incident_task_params.
 type CreateServiceNowIncidentTaskParams struct {
-	// The completion id and display name.
+	// The completion id and display name
 	Completion *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -7020,7 +7023,7 @@ type CreateServiceNowIncidentTaskParams struct {
 	// The incident description
 	Description *string `json:"description,omitempty"`
 
-	// The priority id and display name.
+	// The priority id and display name
 	Priority *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -7036,7 +7039,7 @@ type CreateServiceNowIncidentTaskParamsTaskType string
 
 // CreateShortcutStoryTaskParams defines model for create_shortcut_story_task_params.
 type CreateShortcutStoryTaskParams struct {
-	// The archivation id and display name.
+	// The archivation id and display name
 	Archivation struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -7045,14 +7048,14 @@ type CreateShortcutStoryTaskParams struct {
 	// The incident description
 	Description *string `json:"description,omitempty"`
 
-	// The story due date (ISO8601 format).
+	// The due date
 	DueDate *string                           `json:"due_date,omitempty"`
 	Kind    CreateShortcutStoryTaskParamsKind `json:"kind"`
 
-	// The story labels.
+	// The story labels
 	Labels *string `json:"labels,omitempty"`
 
-	// The project id and display name.
+	// The project id and display name
 	Project struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -7071,7 +7074,7 @@ type CreateShortcutStoryTaskParamsTaskType string
 
 // CreateShortcutTaskTaskParams defines model for create_shortcut_task_task_params.
 type CreateShortcutTaskTaskParams struct {
-	// The completion id and display name.
+	// The completion id and display name
 	Completion struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -7109,13 +7112,13 @@ type CreateSlackChannelTaskParamsTaskType string
 
 // CreateTrelloCardTaskParams defines model for create_trello_card_task_params.
 type CreateTrelloCardTaskParams struct {
-	// The archivation id and display name.
+	// The archivation id and display name
 	Archivation *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"archivation,omitempty"`
 
-	// The board id and display name.
+	// The board id and display name
 	Board struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -7124,14 +7127,14 @@ type CreateTrelloCardTaskParams struct {
 	// The card description
 	Description *string `json:"description,omitempty"`
 
-	// The due date (ISO8601 format)
+	// The due date
 	DueDate *string `json:"due_date,omitempty"`
 	Labels  *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"labels,omitempty"`
 
-	// The list id and display name.
+	// The list id and display name
 	List struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -7165,10 +7168,10 @@ type CreateWebexMeetingTaskParamsTaskType string
 
 // CreateZendeskTicketTaskParams defines model for create_zendesk_ticket_task_params.
 type CreateZendeskTicketTaskParams struct {
-	// The ticket comment.
+	// The ticket comment
 	Comment *string `json:"comment,omitempty"`
 
-	// The completion id and display name.
+	// The completion id and display name
 	Completion *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -7178,16 +7181,16 @@ type CreateZendeskTicketTaskParams struct {
 	CustomFieldsMapping *string                           `json:"custom_fields_mapping"`
 	Kind                CreateZendeskTicketTaskParamsKind `json:"kind"`
 
-	// The priority id and display name.
+	// The priority id and display name
 	Priority *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"priority,omitempty"`
 
-	// The ticket subject.
+	// The ticket subject
 	Subject string `json:"subject"`
 
-	// The ticket tags.
+	// The ticket tags
 	Tags     *string                                `json:"tags,omitempty"`
 	TaskType *CreateZendeskTicketTaskParamsTaskType `json:"task_type,omitempty"`
 
@@ -7206,7 +7209,7 @@ type CreateZoomMeetingTaskParams struct {
 	AlternativeHosts *[]string                                 `json:"alternative_hosts,omitempty"`
 	AutoRecording    *CreateZoomMeetingTaskParamsAutoRecording `json:"auto_recording,omitempty"`
 
-	// The email to use if creating as email.
+	// The email to use if creating as email
 	CreateAsEmail *string `json:"create_as_email,omitempty"`
 
 	// The meeting password
@@ -8447,18 +8450,18 @@ type GetPulsesTaskParamsTaskType string
 
 // HttpClientTaskParams defines model for http_client_task_params.
 type HttpClientTaskParams struct {
-	// HTTP body.
+	// HTTP body
 	Body         *string `json:"body,omitempty"`
 	EventMessage *string `json:"event_message,omitempty"`
 	EventUrl     *string `json:"event_url,omitempty"`
 
-	// JSON map of HTTP headers.
+	// JSON map of HTTP headers
 	Headers *string `json:"headers,omitempty"`
 
 	// HTTP method
 	Method *HttpClientTaskParamsMethod `json:"method,omitempty"`
 
-	// JSON map of HTTP query parameters.
+	// JSON map of HTTP query parameters
 	Params                 *string `json:"params,omitempty"`
 	PostToIncidentTimeline *bool   `json:"post_to_incident_timeline,omitempty"`
 	PostToSlackChannels    *[]struct {
@@ -14292,10 +14295,10 @@ type SendEmailTaskParamsTaskType string
 
 // SendSlackBlocksTaskParams defines model for send_slack_blocks_task_params.
 type SendSlackBlocksTaskParams struct {
-	// Support liquid markup. Needs to be a valid JSON string after liquid is parsed.
+	// Support liquid markup. Needs to be a valid JSON string after liquid is parsed
 	Attachments *string `json:"attachments,omitempty"`
 
-	// Support liquid markup. Needs to be a valid JSON string after liquid is parsed.
+	// Support liquid markup. Needs to be a valid JSON string after liquid is parsed
 	Blocks                        string `json:"blocks"`
 	BroadcastThreadReplyToChannel *bool  `json:"broadcast_thread_reply_to_channel,omitempty"`
 	Channels                      *[]struct {
@@ -14355,7 +14358,7 @@ type SendSlackMessageTaskParams struct {
 	} `json:"slack_users,omitempty"`
 	TaskType *SendSlackMessageTaskParamsTaskType `json:"task_type,omitempty"`
 
-	// The message text.
+	// The message text
 	Text                string `json:"text"`
 	UpdateParentMessage *bool  `json:"update_parent_message,omitempty"`
 }
@@ -15559,7 +15562,7 @@ type UpdateActionItemTaskParams struct {
 	// Custom field mappings. Can contain liquid markup and need to be valid JSON
 	CustomFieldsMapping *string `json:"custom_fields_mapping"`
 
-	// The action item description.
+	// The action item description
 	Description            *string   `json:"description,omitempty"`
 	GroupIds               *[]string `json:"group_ids"`
 	PostToIncidentTimeline *bool     `json:"post_to_incident_timeline,omitempty"`
@@ -15611,7 +15614,7 @@ type UpdateAirtableTableRecordTaskParamsTaskType string
 
 // UpdateAsanaTaskTaskParams defines model for update_asana_task_task_params.
 type UpdateAsanaTaskTaskParams struct {
-	// The assigned user's email.
+	// The assigned user's email
 	AssignUserEmail *string `json:"assign_user_email,omitempty"`
 	Completion      struct {
 		Id   *string `json:"id,omitempty"`
@@ -15665,29 +15668,32 @@ type UpdateClickupTaskTaskParams struct {
 	// Custom field mappings. Can contain liquid markup and need to be valid JSON
 	CustomFieldsMapping *string `json:"custom_fields_mapping"`
 
-	// The task description.
+	// The task description
 	Description *string `json:"description,omitempty"`
 
-	// The parent task id.
+	// The due date
+	DueDate *string `json:"due_date,omitempty"`
+
+	// The parent task id
 	ParentTaskId *string `json:"parent_task_id,omitempty"`
 
-	// The priority id and display name.
+	// The priority id and display name
 	Priority *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"priority,omitempty"`
 
-	// The task tags.
+	// The task tags
 	Tags *string `json:"tags,omitempty"`
 
-	// The task id.
+	// The task id
 	TaskId string `json:"task_id"`
 
 	// Additional ClickUp task attributes. Will be merged into whatever was specified in this tasks current parameters. Can contain liquid markup and need to be valid JSON
 	TaskPayload *string                              `json:"task_payload"`
 	TaskType    *UpdateClickupTaskTaskParamsTaskType `json:"task_type,omitempty"`
 
-	// The task title.
+	// The task title
 	Title *string `json:"title,omitempty"`
 }
 
@@ -16068,7 +16074,7 @@ type UpdateGoogleDocsPageTaskParams struct {
 	// The Google Doc file ID
 	FileId string `json:"file_id"`
 
-	// Retrospective template to use when updating page, if desired.
+	// Retrospective template to use when updating page, if desired
 	PostMortemTemplateId *string                                 `json:"post_mortem_template_id,omitempty"`
 	TaskType             *UpdateGoogleDocsPageTaskParamsTaskType `json:"task_type,omitempty"`
 
@@ -16554,44 +16560,44 @@ type UpdateIncidentTypeDataType string
 
 // UpdateJiraIssueTaskParams defines model for update_jira_issue_task_params.
 type UpdateJiraIssueTaskParams struct {
-	// The assigned user's email.
+	// The assigned user's email
 	AssignUserEmail *string `json:"assign_user_email,omitempty"`
 
 	// Custom field mappings. Can contain liquid markup and need to be valid JSON
 	CustomFieldsMapping *string `json:"custom_fields_mapping"`
 
-	// The issue description.
+	// The issue description
 	Description *string `json:"description,omitempty"`
 
-	// The due date.
+	// The due date
 	DueDate *string `json:"due_date,omitempty"`
 
-	// The issue id.
+	// The issue id
 	IssueId string `json:"issue_id"`
 
-	// The issue labels.
+	// The issue labels
 	Labels *string `json:"labels,omitempty"`
 
-	// The priority id and display name.
+	// The priority id and display name
 	Priority *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"priority,omitempty"`
 
-	// The project key.
+	// The project key
 	ProjectKey string `json:"project_key"`
 
-	// The reporter user's email.
+	// The reporter user's email
 	ReporterUserEmail *string `json:"reporter_user_email,omitempty"`
 
-	// The status id and display name.
+	// The status id and display name
 	Status *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"status,omitempty"`
 	TaskType *UpdateJiraIssueTaskParamsTaskType `json:"task_type,omitempty"`
 
-	// The issue title.
+	// The issue title
 	Title *string `json:"title,omitempty"`
 
 	// Update payload. Can contain liquid markup and need to be valid JSON
@@ -16603,39 +16609,39 @@ type UpdateJiraIssueTaskParamsTaskType string
 
 // UpdateLinearIssueTaskParams defines model for update_linear_issue_task_params.
 type UpdateLinearIssueTaskParams struct {
-	// The assigned user's email.
+	// The assigned user's email
 	AssignUserEmail *string `json:"assign_user_email,omitempty"`
 
-	// The issue description.
+	// The issue description
 	Description *string `json:"description,omitempty"`
 
-	// The issue id.
+	// The issue id
 	IssueId string `json:"issue_id"`
 	Labels  *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"labels,omitempty"`
 
-	// The priority id and display name.
+	// The priority id and display name
 	Priority *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"priority,omitempty"`
 
-	// The project id and display name.
+	// The project id and display name
 	Project *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"project,omitempty"`
 
-	// The state id and display name.
+	// The state id and display name
 	State *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"state,omitempty"`
 	TaskType *UpdateLinearIssueTaskParamsTaskType `json:"task_type,omitempty"`
 
-	// The issue title.
+	// The issue title
 	Title *string `json:"title,omitempty"`
 }
 
@@ -16647,7 +16653,7 @@ type UpdateNotionPageTaskParams struct {
 	// The Notion page ID
 	FileId string `json:"file_id"`
 
-	// Retrospective template to use when creating page task, if desired.
+	// Retrospective template to use when creating page task, if desired
 	PostMortemTemplateId   *string                             `json:"post_mortem_template_id,omitempty"`
 	ShowActionItemsAsTable *bool                               `json:"show_action_items_as_table,omitempty"`
 	ShowTimelineAsTable    *bool                               `json:"show_timeline_as_table,omitempty"`
@@ -16739,10 +16745,10 @@ type UpdatePagertreeAlertTaskParams struct {
 	// Description of alert as text
 	Description *string `json:"description,omitempty"`
 
-	// Setting to true makes an alert a Pagertree incident.
+	// Setting to true makes an alert a Pagertree incident
 	Incident *bool `json:"incident,omitempty"`
 
-	// The prefix ID of the Pagertree alert.
+	// The prefix ID of the Pagertree alert
 	PagertreeAlertId *string                                 `json:"pagertree_alert_id,omitempty"`
 	Severity         *UpdatePagertreeAlertTaskParamsSeverity `json:"severity,omitempty"`
 	TaskType         *UpdatePagertreeAlertTaskParamsTaskType `json:"task_type,omitempty"`
@@ -17039,7 +17045,7 @@ type UpdateServiceDataType string
 
 // UpdateServiceNowIncidentTaskParams defines model for update_service_now_incident_task_params.
 type UpdateServiceNowIncidentTaskParams struct {
-	// The completion id and display name.
+	// The completion id and display name
 	Completion *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -17054,7 +17060,7 @@ type UpdateServiceNowIncidentTaskParams struct {
 	// The incident id
 	IncidentId string `json:"incident_id"`
 
-	// The priority id and display name.
+	// The priority id and display name
 	Priority *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -17120,7 +17126,7 @@ type UpdateSeverityDataType string
 
 // UpdateShortcutStoryTaskParams defines model for update_shortcut_story_task_params.
 type UpdateShortcutStoryTaskParams struct {
-	// The archivation id and display name.
+	// The archivation id and display name
 	Archivation struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -17129,10 +17135,10 @@ type UpdateShortcutStoryTaskParams struct {
 	// The incident description
 	Description *string `json:"description,omitempty"`
 
-	// The story due date (ISO8601 format).
+	// The due date
 	DueDate *string `json:"due_date,omitempty"`
 
-	// The story labels.
+	// The story labels
 	Labels *string `json:"labels,omitempty"`
 
 	// The story id
@@ -17148,7 +17154,7 @@ type UpdateShortcutStoryTaskParamsTaskType string
 
 // UpdateShortcutTaskTaskParams defines model for update_shortcut_task_task_params.
 type UpdateShortcutTaskTaskParams struct {
-	// The completion id and display name.
+	// The completion id and display name
 	Completion struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -17330,13 +17336,13 @@ type UpdateTeamDataType string
 
 // UpdateTrelloCardTaskParams defines model for update_trello_card_task_params.
 type UpdateTrelloCardTaskParams struct {
-	// The archivation id and display name.
+	// The archivation id and display name
 	Archivation struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"archivation"`
 
-	// The board id and display name.
+	// The board id and display name
 	Board *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -17348,14 +17354,14 @@ type UpdateTrelloCardTaskParams struct {
 	// The card description
 	Description *string `json:"description,omitempty"`
 
-	// The due date (ISO8601 format)
+	// The due date
 	DueDate *string `json:"due_date,omitempty"`
 	Labels  *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"labels,omitempty"`
 
-	// The list id and display name.
+	// The list id and display name
 	List *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -17544,7 +17550,7 @@ type UpdateWorkflowTaskDataType string
 
 // UpdateZendeskTicketTaskParams defines model for update_zendesk_ticket_task_params.
 type UpdateZendeskTicketTaskParams struct {
-	// The completion id and display name.
+	// The completion id and display name
 	Completion *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -17553,20 +17559,20 @@ type UpdateZendeskTicketTaskParams struct {
 	// Custom field mappings. Can contain liquid markup and need to be valid JSON
 	CustomFieldsMapping *string `json:"custom_fields_mapping"`
 
-	// The priority id and display name.
+	// The priority id and display name
 	Priority *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"priority,omitempty"`
 
-	// The ticket subject.
+	// The ticket subject
 	Subject *string `json:"subject,omitempty"`
 
-	// The ticket tags.
+	// The ticket tags
 	Tags     *string                                `json:"tags,omitempty"`
 	TaskType *UpdateZendeskTicketTaskParamsTaskType `json:"task_type,omitempty"`
 
-	// The ticket id.
+	// The ticket id
 	TicketId string `json:"ticket_id"`
 
 	// Additional Zendesk ticket attributes. Will be merged into whatever was specified in this tasks current parameters. Can contain liquid markup and need to be valid JSON

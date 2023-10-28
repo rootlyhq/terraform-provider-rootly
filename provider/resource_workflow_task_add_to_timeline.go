@@ -74,12 +74,12 @@ func resourceWorkflowTaskAddToTimeline() *schema.Resource {
 							}, false),
 						},
 						"event": &schema.Schema{
-							Description: "The timeline event description.",
+							Description: "The timeline event description",
 							Type:        schema.TypeString,
 							Required:    true,
 						},
 						"url": &schema.Schema{
-							Description: "A URL for the timeline event.",
+							Description: "A URL for the timeline event",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},

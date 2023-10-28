@@ -77,23 +77,28 @@ func resourceWorkflowTaskCreateClickupTask() *schema.Resource {
 							}, false),
 						},
 						"title": &schema.Schema{
-							Description: "The task title.",
+							Description: "The task title",
 							Type:        schema.TypeString,
 							Required:    true,
 						},
 						"description": &schema.Schema{
-							Description: "The task description.",
+							Description: "The task description",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
 						"tags": &schema.Schema{
-							Description: "The task tags.",
+							Description: "The task tags",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
 						"priority": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. The priority id and display name.",
+							Description: "Map must contain two fields, `id` and `name`. The priority id and display name",
 							Type:        schema.TypeMap,
+							Optional:    true,
+						},
+						"due_date": &schema.Schema{
+							Description: "The due date",
+							Type:        schema.TypeString,
 							Optional:    true,
 						},
 						"custom_fields_mapping": &schema.Schema{
