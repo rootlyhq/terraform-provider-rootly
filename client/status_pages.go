@@ -11,7 +11,9 @@ import (
 type StatusPage struct {
 	ID string `jsonapi:"primary,status_pages"`
 	Title string `jsonapi:"attr,title,omitempty"`
+  PublicTitle string `jsonapi:"attr,public_title,omitempty"`
   Description string `jsonapi:"attr,description,omitempty"`
+  PublicDescription string `jsonapi:"attr,public_description,omitempty"`
   HeaderColor string `jsonapi:"attr,header_color,omitempty"`
   FooterColor string `jsonapi:"attr,footer_color,omitempty"`
   AllowSearchEngineIndex *bool `jsonapi:"attr,allow_search_engine_index,omitempty"`

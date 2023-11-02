@@ -73,6 +73,16 @@ func resourceWorkflowTaskPageOpsgenieOnCallResponders() *schema.Resource {
 								"page_opsgenie_on_call_responders",
 							}, false),
 						},
+						"message": &schema.Schema{
+							Description: "Message of the incident",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"description": &schema.Schema{
+							Description: "Description field of the incident that is generally used to provide a detailed information about the incident",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 						"teams": &schema.Schema{
 							Description: "",
 							Type:        schema.TypeList,

@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.0] -- 2023-11-02
+
+- Add `public_title`, `public_description` attributes status page resource.
+- Add `message`, `description` attributes to `PageOpsgenieOnCallResponders` resource.
+- Update dependencies.
+
 ## [1.1.9] -- 2023-10-28
 
 - Add `due_date` attribute to `clickup`, `shortcut` & `trello` workflow resources.

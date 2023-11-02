@@ -12644,8 +12644,11 @@ type NewStatusPage struct {
 			// Make the status page accessible to the public
 			Public *bool `json:"public"`
 
+			// The public description of the status page
+			PublicDescription *string `json:"public_description"`
+
 			// The public title of the status page
-			PublicTitle *string `json:"public_title,omitempty"`
+			PublicTitle *string `json:"public_title"`
 
 			// Services attached to the status page
 			ServiceIds *[]string `json:"service_ids,omitempty"`
@@ -12940,6 +12943,11 @@ type NewWorkflowTaskDataType string
 
 // PageOpsgenieOnCallRespondersTaskParams defines model for page_opsgenie_on_call_responders_task_params.
 type PageOpsgenieOnCallRespondersTaskParams struct {
+	// Description field of the incident that is generally used to provide a detailed information about the incident
+	Description *string `json:"description,omitempty"`
+
+	// Message of the incident
+	Message  *string                                         `json:"message,omitempty"`
 	Priority *PageOpsgenieOnCallRespondersTaskParamsPriority `json:"priority,omitempty"`
 	TaskType *PageOpsgenieOnCallRespondersTaskParamsTaskType `json:"task_type,omitempty"`
 	Teams    *[]struct {
@@ -14992,6 +15000,12 @@ type StatusPage struct {
 	// Make the status page accessible to the public
 	Public *bool `json:"public"`
 
+	// The public description of the status page
+	PublicDescription *string `json:"public_description"`
+
+	// The public title of the status page
+	PublicTitle *string `json:"public_title"`
+
 	// Services attached to the status page
 	ServiceIds *[]string `json:"service_ids,omitempty"`
 
@@ -15068,6 +15082,12 @@ type StatusPageList struct {
 
 			// Make the status page accessible to the public
 			Public *bool `json:"public"`
+
+			// The public description of the status page
+			PublicDescription *string `json:"public_description"`
+
+			// The public title of the status page
+			PublicTitle *string `json:"public_title"`
 
 			// Services attached to the status page
 			ServiceIds *[]string `json:"service_ids,omitempty"`
@@ -15161,6 +15181,12 @@ type StatusPageResponse struct {
 
 			// Make the status page accessible to the public
 			Public *bool `json:"public"`
+
+			// The public description of the status page
+			PublicDescription *string `json:"public_description"`
+
+			// The public title of the status page
+			PublicTitle *string `json:"public_title"`
 
 			// Services attached to the status page
 			ServiceIds *[]string `json:"service_ids,omitempty"`
@@ -17223,6 +17249,12 @@ type UpdateStatusPage struct {
 
 			// Make the status page accessible to the public
 			Public *bool `json:"public"`
+
+			// The public description of the status page
+			PublicDescription *string `json:"public_description"`
+
+			// The public title of the status page
+			PublicTitle *string `json:"public_title"`
 
 			// Services attached to the status page
 			ServiceIds *[]string `json:"service_ids,omitempty"`
