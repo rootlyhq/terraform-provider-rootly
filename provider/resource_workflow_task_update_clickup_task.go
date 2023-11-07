@@ -81,11 +81,6 @@ func resourceWorkflowTaskUpdateClickupTask() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 						},
-						"parent_task_id": &schema.Schema{
-							Description: "The parent task id",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
 						"title": &schema.Schema{
 							Description: "The task title",
 							Type:        schema.TypeString,

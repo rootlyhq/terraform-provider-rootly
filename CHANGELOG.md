@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.1] -- 2023-11-07
+
+- Add `due_date` attribute to `asana` workflow resources.
+- Update dependencies.
+
 ## [1.2.0] -- 2023-11-02
 
 - Add `public_title`, `public_description` attributes status page resource.
