@@ -1,21 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const excluded = [
-	"add_role",
-	"add_slack_bookmark",
-	"add_team",
-	"auto_assign_role_opsgenie",
-	"auto_assign_role_pagerduty",
-	"auto_assign_role_victor_ops",
-	"create_clickup_task",
-	"create_pagertree_alert",
-	"invite_to_slack_channel_pagerduty",
-	"page_victor_ops_on_call_responders",
-	"update_pagerduty_incident",
-	"send_email",
-	"send_dashboard_report",
-];
+const excluded = [];
 
 console.log(`Excluding task from generation:`, excluded);
 
@@ -34,10 +20,6 @@ module.exports = (swagger) => {
         fs.writeFileSync(
           `./provider/resource_workflow_task_${task_name}.go`,
           genResourceFile(task_name, task_schema)
-        );
-        fs.writeFileSync(
-          `./provider/resource_workflow_task_${task_name}_test.go`,
-          genResourceTestFile(task_name, task_schema)
         );
       }
       return task_name;
