@@ -82,10 +82,11 @@ func resourceWorkflowActionItem() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Repeat on weekdays. Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Repeat on weekdays. Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
 			},
 
 			"enabled": &schema.Schema{
@@ -130,10 +131,11 @@ func resourceWorkflowActionItem() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "Actions that trigger the workflow. One of custom_fields.<slug>.updated, action_item_created, action_item_updated, assigned_user_updated, summary_updated, description_updated, status_updated, priority_updated, due_date_updated, teams_updated, slack_command",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "Actions that trigger the workflow. One of custom_fields.<slug>.updated, action_item_created, action_item_updated, assigned_user_updated, summary_updated, description_updated, status_updated, priority_updated, due_date_updated, teams_updated, slack_command",
 						},
 
 						"incident_visibilities": &schema.Schema{
@@ -141,10 +143,11 @@ func resourceWorkflowActionItem() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "",
 						},
 
 						"incident_kinds": &schema.Schema{
@@ -152,10 +155,11 @@ func resourceWorkflowActionItem() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "Value must be one of `example`, `example_sub`, `normal`, `normal_sub`, `test`, `test_sub`, `backfilled`, `scheduled`.",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "Value must be one of `example`, `example_sub`, `normal`, `normal_sub`, `test`, `test_sub`, `backfilled`, `scheduled`.",
 						},
 
 						"incident_statuses": &schema.Schema{
@@ -163,10 +167,11 @@ func resourceWorkflowActionItem() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "Value must be one of `in_triage`, `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "Value must be one of `in_triage`, `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.",
 						},
 
 						"incident_inactivity_duration": &schema.Schema{
@@ -342,10 +347,11 @@ func resourceWorkflowActionItem() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "Value must be one of `task`, `follow_up`.",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "Value must be one of `task`, `follow_up`.",
 						},
 
 						"incident_action_item_condition_status": &schema.Schema{
@@ -361,10 +367,11 @@ func resourceWorkflowActionItem() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "Value must be one of `open`, `in_progress`, `cancelled`, `done`.",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "Value must be one of `open`, `in_progress`, `cancelled`, `done`.",
 						},
 
 						"incident_action_item_condition_priority": &schema.Schema{
@@ -380,10 +387,11 @@ func resourceWorkflowActionItem() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "Value must be one of `high`, `medium`, `low`.",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "Value must be one of `high`, `medium`, `low`.",
 						},
 
 						"incident_action_item_condition_group": &schema.Schema{
@@ -399,10 +407,11 @@ func resourceWorkflowActionItem() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "",
 						},
 					},
 				},
@@ -415,10 +424,11 @@ func resourceWorkflowActionItem() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"severity_ids": &schema.Schema{
@@ -426,10 +436,11 @@ func resourceWorkflowActionItem() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"incident_type_ids": &schema.Schema{
@@ -437,10 +448,11 @@ func resourceWorkflowActionItem() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"incident_role_ids": &schema.Schema{
@@ -448,10 +460,11 @@ func resourceWorkflowActionItem() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"service_ids": &schema.Schema{
@@ -459,10 +472,11 @@ func resourceWorkflowActionItem() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"functionality_ids": &schema.Schema{
@@ -470,10 +484,11 @@ func resourceWorkflowActionItem() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"group_ids": &schema.Schema{
@@ -481,10 +496,11 @@ func resourceWorkflowActionItem() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 		},
 	}

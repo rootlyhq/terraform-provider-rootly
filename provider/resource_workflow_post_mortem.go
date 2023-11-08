@@ -82,10 +82,11 @@ func resourceWorkflowPostMortem() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Repeat on weekdays. Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Repeat on weekdays. Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
 			},
 
 			"enabled": &schema.Schema{
@@ -130,10 +131,11 @@ func resourceWorkflowPostMortem() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "Actions that trigger the workflow. One of custom_fields.<slug>.updated, post_mortem_created, post_mortem_updated, status_updated, causes_updated, slack_command",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "Actions that trigger the workflow. One of custom_fields.<slug>.updated, post_mortem_created, post_mortem_updated, status_updated, causes_updated, slack_command",
 						},
 
 						"incident_visibilities": &schema.Schema{
@@ -141,10 +143,11 @@ func resourceWorkflowPostMortem() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "",
 						},
 
 						"incident_kinds": &schema.Schema{
@@ -152,10 +155,11 @@ func resourceWorkflowPostMortem() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "Value must be one of `example`, `example_sub`, `normal`, `normal_sub`, `test`, `test_sub`, `backfilled`, `scheduled`.",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "Value must be one of `example`, `example_sub`, `normal`, `normal_sub`, `test`, `test_sub`, `backfilled`, `scheduled`.",
 						},
 
 						"incident_statuses": &schema.Schema{
@@ -163,10 +167,11 @@ func resourceWorkflowPostMortem() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "Value must be one of `in_triage`, `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "Value must be one of `in_triage`, `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.",
 						},
 
 						"incident_inactivity_duration": &schema.Schema{
@@ -342,10 +347,11 @@ func resourceWorkflowPostMortem() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "Value must be one of `draft`, `published`.",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "Value must be one of `draft`, `published`.",
 						},
 
 						"incident_post_mortem_condition_cause": &schema.Schema{
@@ -361,10 +367,11 @@ func resourceWorkflowPostMortem() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "",
 						},
 					},
 				},
@@ -377,10 +384,11 @@ func resourceWorkflowPostMortem() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"severity_ids": &schema.Schema{
@@ -388,10 +396,11 @@ func resourceWorkflowPostMortem() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"incident_type_ids": &schema.Schema{
@@ -399,10 +408,11 @@ func resourceWorkflowPostMortem() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"incident_role_ids": &schema.Schema{
@@ -410,10 +420,11 @@ func resourceWorkflowPostMortem() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"service_ids": &schema.Schema{
@@ -421,10 +432,11 @@ func resourceWorkflowPostMortem() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"functionality_ids": &schema.Schema{
@@ -432,10 +444,11 @@ func resourceWorkflowPostMortem() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"group_ids": &schema.Schema{
@@ -443,10 +456,11 @@ func resourceWorkflowPostMortem() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 		},
 	}

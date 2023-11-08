@@ -82,10 +82,11 @@ func resourceWorkflowIncident() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Repeat on weekdays. Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Repeat on weekdays. Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
 			},
 
 			"enabled": &schema.Schema{
@@ -130,10 +131,11 @@ func resourceWorkflowIncident() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "Actions that trigger the workflow. One of custom_fields.<slug>.updated, incident_in_triage, incident_created, incident_started, incident_updated, title_updated, summary_updated, status_updated, severity_updated, environments_added, environments_removed, environments_updated, incident_types_added, incident_types_removed, incident_types_updated, services_added, services_removed, services_updated, functionalities_added, functionalities_removed, functionalities_updated, teams_added, teams_removed, teams_updated, timeline_updated, status_page_timeline_updated, role_assignments_updated, role_assignments_added, role_assignments_removed, slack_command, slack_channel_created, slack_channel_converted, subscribers_updated, subscribers_added, subscribers_removed, user_joined_slack_channel, user_left_slack_channel",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "Actions that trigger the workflow. One of custom_fields.<slug>.updated, incident_in_triage, incident_created, incident_started, incident_updated, title_updated, summary_updated, status_updated, severity_updated, environments_added, environments_removed, environments_updated, incident_types_added, incident_types_removed, incident_types_updated, services_added, services_removed, services_updated, functionalities_added, functionalities_removed, functionalities_updated, teams_added, teams_removed, teams_updated, timeline_updated, status_page_timeline_updated, role_assignments_updated, role_assignments_added, role_assignments_removed, slack_command, slack_channel_created, slack_channel_converted, subscribers_updated, subscribers_added, subscribers_removed, user_joined_slack_channel, user_left_slack_channel",
 						},
 
 						"incident_visibilities": &schema.Schema{
@@ -141,10 +143,11 @@ func resourceWorkflowIncident() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "",
 						},
 
 						"incident_kinds": &schema.Schema{
@@ -152,10 +155,11 @@ func resourceWorkflowIncident() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "Value must be one of `example`, `example_sub`, `normal`, `normal_sub`, `test`, `test_sub`, `backfilled`, `scheduled`.",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "Value must be one of `example`, `example_sub`, `normal`, `normal_sub`, `test`, `test_sub`, `backfilled`, `scheduled`.",
 						},
 
 						"incident_statuses": &schema.Schema{
@@ -163,10 +167,11 @@ func resourceWorkflowIncident() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "Value must be one of `in_triage`, `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "Value must be one of `in_triage`, `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.",
 						},
 
 						"incident_inactivity_duration": &schema.Schema{
@@ -331,10 +336,11 @@ func resourceWorkflowIncident() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"severity_ids": &schema.Schema{
@@ -342,10 +348,11 @@ func resourceWorkflowIncident() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"incident_type_ids": &schema.Schema{
@@ -353,10 +360,11 @@ func resourceWorkflowIncident() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"incident_role_ids": &schema.Schema{
@@ -364,10 +372,11 @@ func resourceWorkflowIncident() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"service_ids": &schema.Schema{
@@ -375,10 +384,11 @@ func resourceWorkflowIncident() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"functionality_ids": &schema.Schema{
@@ -386,10 +396,11 @@ func resourceWorkflowIncident() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"group_ids": &schema.Schema{
@@ -397,10 +408,11 @@ func resourceWorkflowIncident() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 		},
 	}

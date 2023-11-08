@@ -82,10 +82,11 @@ func resourceWorkflowAlert() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Repeat on weekdays. Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Repeat on weekdays. Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
 			},
 
 			"enabled": &schema.Schema{
@@ -130,10 +131,11 @@ func resourceWorkflowAlert() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "Actions that trigger the workflow. Value must be one of `alert_created`.",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "Actions that trigger the workflow. Value must be one of `alert_created`.",
 						},
 
 						"alert_condition": &schema.Schema{
@@ -165,10 +167,11 @@ func resourceWorkflowAlert() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "",
 						},
 
 						"alert_condition_label": &schema.Schema{
@@ -192,10 +195,11 @@ func resourceWorkflowAlert() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "",
 						},
 
 						"alert_condition_payload": &schema.Schema{
@@ -219,10 +223,11 @@ func resourceWorkflowAlert() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "",
 						},
 
 						"alert_query_payload": &schema.Schema{
@@ -243,10 +248,11 @@ func resourceWorkflowAlert() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"severity_ids": &schema.Schema{
@@ -254,10 +260,11 @@ func resourceWorkflowAlert() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"incident_type_ids": &schema.Schema{
@@ -265,10 +272,11 @@ func resourceWorkflowAlert() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"incident_role_ids": &schema.Schema{
@@ -276,10 +284,11 @@ func resourceWorkflowAlert() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"service_ids": &schema.Schema{
@@ -287,10 +296,11 @@ func resourceWorkflowAlert() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"functionality_ids": &schema.Schema{
@@ -298,10 +308,11 @@ func resourceWorkflowAlert() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"group_ids": &schema.Schema{
@@ -309,10 +320,11 @@ func resourceWorkflowAlert() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 		},
 	}

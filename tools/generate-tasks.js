@@ -21,10 +21,6 @@ module.exports = (swagger) => {
           `./provider/resource_workflow_task_${task_name}.go`,
           genResourceFile(task_name, task_schema)
         );
-        fs.writeFileSync(
-          `./provider/resource_workflow_task_${task_name}_test.go`,
-          genResourceTestFile(task_name, task_schema)
-        );
       }
       return task_name;
     });
