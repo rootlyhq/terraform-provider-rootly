@@ -11,7 +11,10 @@ const excluded = [
 	"create_clickup_task",
 	"create_pagertree_alert",
 	"invite_to_slack_channel_pagerduty",
-	"page_victor_ops_on_call_responders"
+	"page_victor_ops_on_call_responders",
+	"update_pagerduty_incident",
+	"send_email",
+	"send_dashboard_report",
 ];
 
 console.log(`Excluding task from generation:`, excluded);
