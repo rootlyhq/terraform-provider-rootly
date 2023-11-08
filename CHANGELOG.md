@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.2.2] -- 2023-11-07
+
+- Ignore order of list attributes values when diffing for changes.
+
 ## [1.2.1] -- 2023-11-07
 
 - Add `due_date` attribute to `asana` workflow resources.
