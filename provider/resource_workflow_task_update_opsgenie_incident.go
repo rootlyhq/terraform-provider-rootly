@@ -101,7 +101,7 @@ func resourceWorkflowTaskUpdateOpsgenieIncident() *schema.Resource {
 							}, false),
 						},
 						"priority": &schema.Schema{
-							Description: "Value must be one of `P1`, `P2`, `P3`, `P4`, `auto`.",
+							Description: "Value must be one of `P1`, `P2`, `P3`, `P4`, `P5`, `auto`.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Default:     nil,
@@ -110,6 +110,7 @@ func resourceWorkflowTaskUpdateOpsgenieIncident() *schema.Resource {
 								"P2",
 								"P3",
 								"P4",
+								"P5",
 								"auto",
 							}, false),
 						},

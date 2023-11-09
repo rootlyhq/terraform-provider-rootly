@@ -37,7 +37,7 @@ Required:
 
 - `alert_id` (String) Opsgenie Alert ID
 - `completion` (Map of String) Map must contain two fields, `id` and `name`.
-- `priority` (String) Value must be one of `P1`, `P2`, `P3`, `P4`, `auto`.
+- `priority` (String) Value must be one of `P1`, `P2`, `P3`, `P4`, `P5`, `auto`.
 
 Optional:
 

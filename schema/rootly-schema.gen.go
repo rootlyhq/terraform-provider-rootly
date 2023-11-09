@@ -826,6 +826,7 @@ const (
 	CreateOpsgenieAlertTaskParamsPriorityP2   CreateOpsgenieAlertTaskParamsPriority = "P2"
 	CreateOpsgenieAlertTaskParamsPriorityP3   CreateOpsgenieAlertTaskParamsPriority = "P3"
 	CreateOpsgenieAlertTaskParamsPriorityP4   CreateOpsgenieAlertTaskParamsPriority = "P4"
+	CreateOpsgenieAlertTaskParamsPriorityP5   CreateOpsgenieAlertTaskParamsPriority = "P5"
 )
 
 // Defines values for CreateOpsgenieAlertTaskParamsTaskType.
@@ -2933,6 +2934,7 @@ const (
 	PageOpsgenieOnCallRespondersTaskParamsPriorityP2   PageOpsgenieOnCallRespondersTaskParamsPriority = "P2"
 	PageOpsgenieOnCallRespondersTaskParamsPriorityP3   PageOpsgenieOnCallRespondersTaskParamsPriority = "P3"
 	PageOpsgenieOnCallRespondersTaskParamsPriorityP4   PageOpsgenieOnCallRespondersTaskParamsPriority = "P4"
+	PageOpsgenieOnCallRespondersTaskParamsPriorityP5   PageOpsgenieOnCallRespondersTaskParamsPriority = "P5"
 )
 
 // Defines values for PageOpsgenieOnCallRespondersTaskParamsTaskType.
@@ -4378,6 +4380,7 @@ const (
 	UpdateOpsgenieAlertTaskParamsPriorityP2   UpdateOpsgenieAlertTaskParamsPriority = "P2"
 	UpdateOpsgenieAlertTaskParamsPriorityP3   UpdateOpsgenieAlertTaskParamsPriority = "P3"
 	UpdateOpsgenieAlertTaskParamsPriorityP4   UpdateOpsgenieAlertTaskParamsPriority = "P4"
+	UpdateOpsgenieAlertTaskParamsPriorityP5   UpdateOpsgenieAlertTaskParamsPriority = "P5"
 )
 
 // Defines values for UpdateOpsgenieAlertTaskParamsTaskType.
@@ -4392,6 +4395,7 @@ const (
 	UpdateOpsgenieIncidentTaskParamsPriorityP2   UpdateOpsgenieIncidentTaskParamsPriority = "P2"
 	UpdateOpsgenieIncidentTaskParamsPriorityP3   UpdateOpsgenieIncidentTaskParamsPriority = "P3"
 	UpdateOpsgenieIncidentTaskParamsPriorityP4   UpdateOpsgenieIncidentTaskParamsPriority = "P4"
+	UpdateOpsgenieIncidentTaskParamsPriorityP5   UpdateOpsgenieIncidentTaskParamsPriority = "P5"
 )
 
 // Defines values for UpdateOpsgenieIncidentTaskParamsStatus.
