@@ -11,6 +11,9 @@ function includeTools(resourceSchema) {
     if (resourceSchema.properties[key].type === "boolean") {
       return true;
     }
+    if (resourceSchema.properties[key].type === "array" && resourceSchema.properties[key].items?.type !== "object") {
+      return true;
+    }
   }
   return false;
 }
@@ -355,6 +358,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 					Elem: &schema.Schema {
 						Type: schema.TypeString,
 					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
 					Computed: ${optional},
 					Required: ${required},
 					Optional: ${optional},

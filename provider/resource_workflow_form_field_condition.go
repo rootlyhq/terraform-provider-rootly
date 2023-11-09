@@ -8,6 +8,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
+	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
 func resourceWorkflowFormFieldCondition() *schema.Resource {
@@ -53,10 +54,11 @@ func resourceWorkflowFormFieldCondition() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"selected_option_ids": &schema.Schema{
@@ -64,10 +66,11 @@ func resourceWorkflowFormFieldCondition() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
 			},
 
 			"selected_user_ids": &schema.Schema{

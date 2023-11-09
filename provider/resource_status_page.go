@@ -198,10 +198,11 @@ func resourceStatusPage() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Services attached to the status page",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Services attached to the status page",
 			},
 
 			"functionality_ids": &schema.Schema{
@@ -209,10 +210,11 @@ func resourceStatusPage() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Functionalities attached to the status page",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Functionalities attached to the status page",
 			},
 
 			"enabled": &schema.Schema{

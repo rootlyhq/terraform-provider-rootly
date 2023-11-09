@@ -8,6 +8,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
+	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
 func resourceTeam() *schema.Resource {
@@ -53,10 +54,11 @@ func resourceTeam() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Emails to attach to the team",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Emails to attach to the team",
 			},
 
 			"color": &schema.Schema{

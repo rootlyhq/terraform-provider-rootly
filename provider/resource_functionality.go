@@ -8,6 +8,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
+	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
 func resourceFunctionality() *schema.Resource {
@@ -62,10 +63,11 @@ func resourceFunctionality() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Emails attached to the functionality",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Emails attached to the functionality",
 			},
 
 			"color": &schema.Schema{
@@ -100,10 +102,11 @@ func resourceFunctionality() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Environments associated with this functionality",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Environments associated with this functionality",
 			},
 
 			"service_ids": &schema.Schema{
@@ -111,10 +114,11 @@ func resourceFunctionality() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Services associated with this functionality",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Services associated with this functionality",
 			},
 
 			"owners_group_ids": &schema.Schema{
@@ -122,10 +126,11 @@ func resourceFunctionality() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Owner Teams associated with this functionality",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Owner Teams associated with this functionality",
 			},
 
 			"owners_user_ids": &schema.Schema{

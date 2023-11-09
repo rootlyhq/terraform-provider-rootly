@@ -8,6 +8,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
+	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
 func resourcePlaybook() *schema.Resource {
@@ -53,10 +54,11 @@ func resourcePlaybook() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "The Severity ID's to attach to the incident",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "The Severity ID's to attach to the incident",
 			},
 
 			"environment_ids": &schema.Schema{
@@ -64,10 +66,11 @@ func resourcePlaybook() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "The Environment ID's to attach to the incident",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "The Environment ID's to attach to the incident",
 			},
 
 			"functionality_ids": &schema.Schema{
@@ -75,10 +78,11 @@ func resourcePlaybook() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "The Functionality ID's to attach to the incident",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "The Functionality ID's to attach to the incident",
 			},
 
 			"service_ids": &schema.Schema{
@@ -86,10 +90,11 @@ func resourcePlaybook() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "The Service ID's to attach to the incident",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "The Service ID's to attach to the incident",
 			},
 
 			"group_ids": &schema.Schema{
@@ -97,10 +102,11 @@ func resourcePlaybook() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "The Team ID's to attach to the incident",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "The Team ID's to attach to the incident",
 			},
 
 			"incident_type_ids": &schema.Schema{
@@ -108,10 +114,11 @@ func resourcePlaybook() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "The Incident Type ID's to attach to the incident",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "The Incident Type ID's to attach to the incident",
 			},
 		},
 	}

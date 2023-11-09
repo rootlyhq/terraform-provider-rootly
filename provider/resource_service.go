@@ -8,6 +8,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
+	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
 func resourceService() *schema.Resource {
@@ -62,10 +63,11 @@ func resourceService() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Emails attached to the service",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Emails attached to the service",
 			},
 
 			"color": &schema.Schema{
@@ -163,10 +165,11 @@ func resourceService() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Environments associated with this service",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Environments associated with this service",
 			},
 
 			"service_ids": &schema.Schema{
@@ -174,10 +177,11 @@ func resourceService() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Services dependent on this service",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Services dependent on this service",
 			},
 
 			"owners_group_ids": &schema.Schema{
@@ -185,10 +189,11 @@ func resourceService() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Owner Teams associated with this service",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Owner Teams associated with this service",
 			},
 
 			"owners_user_ids": &schema.Schema{
