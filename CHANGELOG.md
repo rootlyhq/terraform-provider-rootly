@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.3] -- 2023-11-08
+
+- Ignore order of list attributes values when diffing for changes for all resources in addition to workflows
+- Update priority options for Opsgenie tasks
+
 ## [1.2.2] -- 2023-11-07
 
 - Ignore order of list attributes values when diffing for changes.
