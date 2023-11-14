@@ -16,12 +16,13 @@ description: |-
 
 ### Required
 
-- `task` (String) The task of the incident task
+- `task` (String) The task of the task
 
 ### Optional
 
-- `description` (String) The description of incident task
+- `description` (String) The description of task
 - `playbook_id` (String)
+- `position` (Number) The position of the task
 
 ### Read-Only
 

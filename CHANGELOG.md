@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.4] -- 2023-11-14
+
+- Add `position` attribute to `playbook_task` resource.
+- Add `slack_incident_cancellation_form` & `web_incident_cancellation_form` to `form_field` resource.
+
 ## [1.2.3] -- 2023-11-08
 
 - Ignore order of list attributes values when diffing for changes for all resources in addition to workflows

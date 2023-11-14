@@ -36,7 +36,7 @@ func resourcePlaybookTask() *schema.Resource {
 				Required:    true,
 				Optional:    false,
 				ForceNew:    false,
-				Description: "The task of the incident task",
+				Description: "The task of the task",
 			},
 
 			"description": &schema.Schema{
@@ -45,7 +45,16 @@ func resourcePlaybookTask() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "The description of incident task",
+				Description: "The description of task",
+			},
+
+			"position": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The position of the task",
 			},
 		},
 	}
@@ -66,6 +75,9 @@ func resourcePlaybookTaskCreate(ctx context.Context, d *schema.ResourceData, met
 	}
 	if value, ok := d.GetOkExists("description"); ok {
 		s.Description = value.(string)
+	}
+	if value, ok := d.GetOkExists("position"); ok {
+		s.Position = value.(int)
 	}
 
 	res, err := c.CreatePlaybookTask(s)
@@ -99,6 +111,7 @@ func resourcePlaybookTaskRead(ctx context.Context, d *schema.ResourceData, meta 
 	d.Set("playbook_id", item.PlaybookId)
 	d.Set("task", item.Task)
 	d.Set("description", item.Description)
+	d.Set("position", item.Position)
 
 	return nil
 }
@@ -117,6 +130,9 @@ func resourcePlaybookTaskUpdate(ctx context.Context, d *schema.ResourceData, met
 	}
 	if d.HasChange("description") {
 		s.Description = d.Get("description").(string)
+	}
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
 	}
 
 	_, err := c.UpdatePlaybookTask(d.Id(), s)

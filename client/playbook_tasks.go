@@ -13,6 +13,7 @@ type PlaybookTask struct {
 	PlaybookId string `jsonapi:"attr,playbook_id,omitempty"`
   Task string `jsonapi:"attr,task,omitempty"`
   Description string `jsonapi:"attr,description,omitempty"`
+  Position int `jsonapi:"attr,position,omitempty"`
 }
 
 func (c *Client) ListPlaybookTasks(id string, params *rootlygo.ListPlaybookTasksParams) ([]interface{}, error) {
