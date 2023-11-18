@@ -12,8 +12,9 @@ resource "rootly_workflow_incident" "incident_inactivity_notice" {
 
 resource "rootly_workflow_task_send_slack_message" "send_slack_message" {
   workflow_id = rootly_workflow_incident.incident_inactivity_notice.id
+  name        = "Helper actions for user"
+
   task_params {
-    name = "Helper actions for user"
     channels {
       id   = "{{ incident.slack_channel_id }}"
       name = "{{ incident.slack_channel_id }}"

@@ -19,8 +19,9 @@ resource "rootly_workflow_incident" "ping_oncall" {
 
 resource "rootly_workflow_task_send_sms" "sms_oncall" {
   workflow_id = rootly_workflow_incident.ping_oncall.id
+  name        = "On-call team"
+
   task_params {
-    name          = "On-call team"
     phone_numbers = ["+11231231234"]
     content       = "Critical incident started"
   }

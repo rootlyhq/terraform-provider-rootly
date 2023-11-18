@@ -11,8 +11,9 @@ resource "rootly_workflow_incident" "reminder_to_update_incident_summary" {
 
 resource "rootly_workflow_task_send_slack_message" "send_slack_message" {
   workflow_id = rootly_workflow_incident.reminder_to_update_incident_summary.id
+  name        = "Summary update reminder"
+
   task_params {
-    name = "Summary update reminder"
     channels {
       id   = "{{ incident.slack_channel_id }}"
       name = "{{ incident.slack_channel_id }}"

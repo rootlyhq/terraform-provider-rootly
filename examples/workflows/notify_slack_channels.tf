@@ -11,8 +11,9 @@ resource "rootly_workflow_incident" "notify_slack_channels" {
 
 resource "rootly_workflow_task_send_slack_message" "send_slack_message" {
   workflow_id = rootly_workflow_incident.notify_slack_channels.id
+  name        = "Notify team about incident"
+
   task_params {
-    name = "Notify team about incident"
     channels {
       id   = "{{ incident.slack_channel_id }}"
       name = "{{ incident.slack_channel_id }}"

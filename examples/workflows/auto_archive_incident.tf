@@ -12,8 +12,9 @@ resource "rootly_workflow_incident" "auto_archive_incident" {
 
 resource "rootly_workflow_task_archive_slack_channels" "archive_slack_channels" {
   workflow_id = rootly_workflow_incident.auto_archive_incident.id
+  name        = "Archive Slack channels"
+
   task_params {
-    name = "Archive Slack channels"
     channels {
       id   = "{{ incident.slack_channel_id }}"
       name = "{{ incident.slack_channel_id }}"
@@ -23,8 +24,9 @@ resource "rootly_workflow_task_archive_slack_channels" "archive_slack_channels" 
 
 resource "rootly_workflow_task_send_email" "send_email" {
   workflow_id = rootly_workflow_incident.auto_archive_incident.id
+  name        = "Send Email to Subscribers"
+
   task_params {
-    name      = "Send Email to Subscribers"
     to        = ["{{ incident.subscribers | map: 'email' | join: ',' }}", "{{ incident.raw_severity | get: 'notify_emails' | join: ',' }}", "{{ incident.raw_environments | map: 'notify_emails' | flatten | join: ',' }}", "{{ incident.raw_functionalities | map: 'notify_emails' | flatten | join: ',' }}", "{{ incident.raw_services | map: 'notify_emails' | flatten | join: ',' }}", "{{ incident.raw_types | map: 'notify_emails' | flatten | join: ',' }}", "{{ incident.raw_groups | map: 'notify_emails' | flatten | join: ',' }}"]
     preheader = "{{ incident.summary }}"
     subject   = "#{{ incident.sequential_id }} {{ incident.title }} status changed to: {{ incident.status }}"

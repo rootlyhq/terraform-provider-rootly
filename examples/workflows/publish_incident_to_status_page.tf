@@ -11,7 +11,8 @@ resource "rootly_workflow_incident" "publish_incident_to_status_page" {
 
 resource "rootly_workflow_task_publish_incident" "publish_incident" {
   workflow_id = rootly_workflow_incident.publish_incident_to_status_page.id
+  name        = "Automatically publish to status pages"
+
   task_params {
-    name = "Automatically publish to status pages"
   }
 }

@@ -11,16 +11,18 @@ resource "rootly_workflow_incident" "send_sms_and_call" {
 
 resource "rootly_workflow_task_send_sms" "send_sms" {
   workflow_id = rootly_workflow_incident.send_sms_and_call.id
+  name        = "Send SMS"
+
   task_params {
-    name    = "Send SMS"
     content = "We have an ongoing incident {{ incident.title }} of severity {{ incident.severity }} and your assistance is required."
   }
 }
 
 resource "rootly_workflow_task_call_people" "call_people" {
   workflow_id = rootly_workflow_incident.send_sms_and_call.id
+  name        = "Call people"
+
   task_params {
-    name    = "Call people"
     content = "We have an ongoing incident {{ incident.title }} of severity {{ incident.severity }} and your assistance is required."
   }
 }

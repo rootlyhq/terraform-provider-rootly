@@ -11,8 +11,9 @@ resource "rootly_workflow_incident" "auto_publish_incident_started_to_status_pag
 
 resource "rootly_workflow_task_publish_incident" "publish_incident" {
   workflow_id = rootly_workflow_incident.auto_publish_incident_started_to_status_page.id
+  name        = "Publish incident started to status page"
+
   task_params {
-    name = "Publish incident started to status page"
     incident = {
       id   = "{{ incident.id }}"
       name = "{{ incident.id }}"

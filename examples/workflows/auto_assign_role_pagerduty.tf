@@ -11,7 +11,8 @@ resource "rootly_workflow_incident" "auto_assign_role_pagerduty" {
 
 resource "rootly_workflow_task_auto_assign_role_pagerduty" "auto_assign_role_pagerduty" {
   workflow_id = rootly_workflow_incident.auto_assign_role_pagerduty.id
+  name        = "Auto Assign Roles from On-call Rotation"
+
   task_params {
-    name = "Auto Assign Roles from On-call Rotation"
   }
 }
