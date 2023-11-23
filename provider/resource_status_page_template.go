@@ -58,6 +58,15 @@ func resourceStatusPageTemplate() *schema.Resource {
 				Description: "Status of the event the template will populate",
 			},
 
+			"kind": &schema.Schema{
+				Type:        schema.TypeString,
+				Default:     "normal",
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The kind of the status page template. Value must be one of `normal`, `scheduled`.",
+			},
+
 			"should_notify_subscribers": &schema.Schema{
 				Type:        schema.TypeBool,
 				Computed:    true,
@@ -103,6 +112,9 @@ func resourceStatusPageTemplateCreate(ctx context.Context, d *schema.ResourceDat
 	if value, ok := d.GetOkExists("update_status"); ok {
 		s.UpdateStatus = value.(string)
 	}
+	if value, ok := d.GetOkExists("kind"); ok {
+		s.Kind = value.(string)
+	}
 	if value, ok := d.GetOkExists("should_notify_subscribers"); ok {
 		s.ShouldNotifySubscribers = tools.Bool(value.(bool))
 	}
@@ -145,6 +157,7 @@ func resourceStatusPageTemplateRead(ctx context.Context, d *schema.ResourceData,
 	d.Set("title", item.Title)
 	d.Set("body", item.Body)
 	d.Set("update_status", item.UpdateStatus)
+	d.Set("kind", item.Kind)
 	d.Set("should_notify_subscribers", item.ShouldNotifySubscribers)
 	d.Set("enabled", item.Enabled)
 	d.Set("position", item.Position)
@@ -169,6 +182,9 @@ func resourceStatusPageTemplateUpdate(ctx context.Context, d *schema.ResourceDat
 	}
 	if d.HasChange("update_status") {
 		s.UpdateStatus = d.Get("update_status").(string)
+	}
+	if d.HasChange("kind") {
+		s.Kind = d.Get("kind").(string)
 	}
 	if d.HasChange("should_notify_subscribers") {
 		s.ShouldNotifySubscribers = tools.Bool(d.Get("should_notify_subscribers").(bool))

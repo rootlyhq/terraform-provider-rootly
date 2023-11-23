@@ -22,6 +22,7 @@ description: |-
 ### Optional
 
 - `enabled` (Boolean)
+- `kind` (String) The kind of the status page template. Value must be one of `normal`, `scheduled`.
 - `position` (Number) Position of the workflow task
 - `should_notify_subscribers` (Boolean) Controls if incident subscribers should be notified
 - `status_page_id` (String)

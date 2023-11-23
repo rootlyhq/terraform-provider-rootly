@@ -2883,6 +2883,12 @@ const (
 	StatusPageResponseDataTypeStatusPages StatusPageResponseDataType = "status_pages"
 )
 
+// Defines values for StatusPageTemplateKind.
+const (
+	StatusPageTemplateKindNormal    StatusPageTemplateKind = "normal"
+	StatusPageTemplateKindScheduled StatusPageTemplateKind = "scheduled"
+)
+
 // Defines values for StatusPageTemplateListDataType.
 const (
 	StatusPageTemplateListDataTypeStatusPageTemplates StatusPageTemplateListDataType = "status_page_templates"
@@ -3538,10 +3544,10 @@ const (
 
 // Defines values for UpdateSeverityDataAttributesSeverity.
 const (
-	Critical UpdateSeverityDataAttributesSeverity = "critical"
-	High     UpdateSeverityDataAttributesSeverity = "high"
-	Low      UpdateSeverityDataAttributesSeverity = "low"
-	Medium   UpdateSeverityDataAttributesSeverity = "medium"
+	UpdateSeverityDataAttributesSeverityCritical UpdateSeverityDataAttributesSeverity = "critical"
+	UpdateSeverityDataAttributesSeverityHigh     UpdateSeverityDataAttributesSeverity = "high"
+	UpdateSeverityDataAttributesSeverityLow      UpdateSeverityDataAttributesSeverity = "low"
+	UpdateSeverityDataAttributesSeverityMedium   UpdateSeverityDataAttributesSeverity = "medium"
 )
 
 // Defines values for UpdateSeverityDataType.
@@ -10028,6 +10034,9 @@ type StatusPageTemplate struct {
 	// Enabled Enable / Disable the status page template
 	Enabled *bool `json:"enabled"`
 
+	// Kind The kind of the status page template
+	Kind *StatusPageTemplateKind `json:"kind,omitempty"`
+
 	// Position Position of the workflow task
 	Position *float32 `json:"position,omitempty"`
 
@@ -10044,6 +10053,9 @@ type StatusPageTemplate struct {
 	// UpdatedAt Date of last update
 	UpdatedAt string `json:"updated_at"`
 }
+
+// StatusPageTemplateKind The kind of the status page template
+type StatusPageTemplateKind string
 
 // StatusPageTemplateList defines model for status_page_template_list.
 type StatusPageTemplateList struct {

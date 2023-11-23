@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.5] -- 2023-11-22
+
+- Add `kind` attribute to `status_page_template` resource.
+- Fix documentation.
+
 ## [1.2.4] -- 2023-11-14
 
 - Add `position` attribute to `playbook_task` resource.
