@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.2.6] -- 2023-11-24
+
+- Add `create_zendesk_jira_link_task` resource.
+
 ## [1.2.5] -- 2023-11-22
 
 - Add `kind` attribute to `status_page_template` resource.

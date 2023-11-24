@@ -313,7 +313,7 @@ const (
 
 // Defines values for AddActionItemTaskParamsTaskType.
 const (
-	AddActionItemTaskParamsTaskTypeAddActionItem AddActionItemTaskParamsTaskType = "add_action_item"
+	AddActionItem AddActionItemTaskParamsTaskType = "add_action_item"
 )
 
 // Defines values for AddRoleTaskParamsTaskType.
@@ -889,6 +889,11 @@ const (
 // Defines values for CreateWebexMeetingTaskParamsTaskType.
 const (
 	CreateWebexMeeting CreateWebexMeetingTaskParamsTaskType = "create_webex_meeting"
+)
+
+// Defines values for CreateZendeskJiraLinkParamsTaskType.
+const (
+	CreateZendeskJiraLink CreateZendeskJiraLinkParamsTaskType = "create_zendesk_jira_link"
 )
 
 // Defines values for CreateZendeskTicketTaskParamsKind.
@@ -2963,7 +2968,7 @@ const (
 
 // Defines values for UpdateActionItemTaskParamsTaskType.
 const (
-	UpdateActionItemTaskParamsTaskTypeAddActionItem UpdateActionItemTaskParamsTaskType = "add_action_item"
+	UpdateActionItem UpdateActionItemTaskParamsTaskType = "update_action_item"
 )
 
 // Defines values for UpdateAirtableTableRecordTaskParamsTaskType.
@@ -5596,6 +5601,22 @@ type CreateWebexMeetingTaskParams struct {
 
 // CreateWebexMeetingTaskParamsTaskType defines model for CreateWebexMeetingTaskParams.TaskType.
 type CreateWebexMeetingTaskParamsTaskType string
+
+// CreateZendeskJiraLinkParams defines model for create_zendesk_jira_link_params.
+type CreateZendeskJiraLinkParams struct {
+	// JiraIssueId Jira Issue Id.
+	JiraIssueId string `json:"jira_issue_id"`
+
+	// JiraIssueKey Jira Issue Key.
+	JiraIssueKey string                               `json:"jira_issue_key"`
+	TaskType     *CreateZendeskJiraLinkParamsTaskType `json:"task_type,omitempty"`
+
+	// ZendeskTicketId Zendesk Ticket Id.
+	ZendeskTicketId string `json:"zendesk_ticket_id"`
+}
+
+// CreateZendeskJiraLinkParamsTaskType defines model for CreateZendeskJiraLinkParams.TaskType.
+type CreateZendeskJiraLinkParamsTaskType string
 
 // CreateZendeskTicketTaskParams defines model for create_zendesk_ticket_task_params.
 type CreateZendeskTicketTaskParams struct {
@@ -16173,6 +16194,32 @@ func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeCreateZendeskTicketTas
 	return err
 }
 
+// AsCreateZendeskJiraLinkParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a CreateZendeskJiraLinkParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsCreateZendeskJiraLinkParams() (CreateZendeskJiraLinkParams, error) {
+	var body CreateZendeskJiraLinkParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateZendeskJiraLinkParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided CreateZendeskJiraLinkParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromCreateZendeskJiraLinkParams(v CreateZendeskJiraLinkParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateZendeskJiraLinkParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided CreateZendeskJiraLinkParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeCreateZendeskJiraLinkParams(v CreateZendeskJiraLinkParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JsonMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsCreateClickupTaskTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a CreateClickupTaskTaskParams
 func (t NewWorkflowTask_Data_Attributes_TaskParams) AsCreateClickupTaskTaskParams() (CreateClickupTaskTaskParams, error) {
 	var body CreateClickupTaskTaskParams
@@ -18897,6 +18944,32 @@ func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeCreateZendeskTicket
 	return err
 }
 
+// AsCreateZendeskJiraLinkParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a CreateZendeskJiraLinkParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsCreateZendeskJiraLinkParams() (CreateZendeskJiraLinkParams, error) {
+	var body CreateZendeskJiraLinkParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateZendeskJiraLinkParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided CreateZendeskJiraLinkParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromCreateZendeskJiraLinkParams(v CreateZendeskJiraLinkParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateZendeskJiraLinkParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided CreateZendeskJiraLinkParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeCreateZendeskJiraLinkParams(v CreateZendeskJiraLinkParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JsonMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsCreateClickupTaskTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a CreateClickupTaskTaskParams
 func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsCreateClickupTaskTaskParams() (CreateClickupTaskTaskParams, error) {
 	var body CreateClickupTaskTaskParams
@@ -21611,6 +21684,32 @@ func (t *WorkflowTask_TaskParams) FromCreateZendeskTicketTaskParams(v CreateZend
 
 // MergeCreateZendeskTicketTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided CreateZendeskTicketTaskParams
 func (t *WorkflowTask_TaskParams) MergeCreateZendeskTicketTaskParams(v CreateZendeskTicketTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JsonMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsCreateZendeskJiraLinkParams returns the union data inside the WorkflowTask_TaskParams as a CreateZendeskJiraLinkParams
+func (t WorkflowTask_TaskParams) AsCreateZendeskJiraLinkParams() (CreateZendeskJiraLinkParams, error) {
+	var body CreateZendeskJiraLinkParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateZendeskJiraLinkParams overwrites any union data inside the WorkflowTask_TaskParams as the provided CreateZendeskJiraLinkParams
+func (t *WorkflowTask_TaskParams) FromCreateZendeskJiraLinkParams(v CreateZendeskJiraLinkParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateZendeskJiraLinkParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided CreateZendeskJiraLinkParams
+func (t *WorkflowTask_TaskParams) MergeCreateZendeskJiraLinkParams(v CreateZendeskJiraLinkParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
