@@ -4,7 +4,7 @@ go 1.21
 
 toolchain go1.21.1
 
-require github.com/oapi-codegen/runtime v1.0.0
+require github.com/oapi-codegen/runtime v1.1.0
 
 require (
 	github.com/Masterminds/goutils v1.1.1 // indirect
