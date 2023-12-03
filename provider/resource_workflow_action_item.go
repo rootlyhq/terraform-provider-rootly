@@ -135,7 +135,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 							Computed:         true,
 							Required:         false,
 							Optional:         true,
-							Description:      "Actions that trigger the workflow. One of custom_fields.<slug>.updated, action_item_created, action_item_updated, assigned_user_updated, summary_updated, description_updated, status_updated, priority_updated, due_date_updated, teams_updated, slack_command",
+							Description:      "Actions that trigger the workflow. One of custom_fields.<slug>.updated, incident_updated, action_item_created, action_item_updated, assigned_user_updated, summary_updated, description_updated, status_updated, priority_updated, due_date_updated, teams_updated, slack_command",
 						},
 
 						"incident_visibilities": &schema.Schema{

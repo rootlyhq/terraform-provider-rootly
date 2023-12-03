@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.7] -- 2023-12-02
+
+- Upgrade dependencies
+- Add `incident_updated` trigger to `workflow_action_item` resource.
+
 ## [1.2.6] -- 2023-11-24
 
 - Add `create_zendesk_jira_link_task` resource.

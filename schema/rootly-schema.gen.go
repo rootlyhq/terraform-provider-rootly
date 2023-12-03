@@ -2598,6 +2598,7 @@ const (
 	SendSlackMessageTaskParamsActionablesAddVictorOpsResponders SendSlackMessageTaskParamsActionables = "add_victor_ops_responders"
 	SendSlackMessageTaskParamsActionablesAllCommands            SendSlackMessageTaskParamsActionables = "all_commands"
 	SendSlackMessageTaskParamsActionablesArchiveChannel         SendSlackMessageTaskParamsActionables = "archive_channel"
+	SendSlackMessageTaskParamsActionablesCancelIncident         SendSlackMessageTaskParamsActionables = "cancel_incident"
 	SendSlackMessageTaskParamsActionablesLeaveFeedback          SendSlackMessageTaskParamsActionables = "leave_feedback"
 	SendSlackMessageTaskParamsActionablesManageActionItems      SendSlackMessageTaskParamsActionables = "manage_action_items"
 	SendSlackMessageTaskParamsActionablesManageFormFields       SendSlackMessageTaskParamsActionables = "manage_form_fields"
