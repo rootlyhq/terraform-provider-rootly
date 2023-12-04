@@ -20,6 +20,7 @@ type Team struct {
   OpsgenieId string `jsonapi:"attr,opsgenie_id,omitempty"`
   VictorOpsId string `jsonapi:"attr,victor_ops_id,omitempty"`
   PagertreeId string `jsonapi:"attr,pagertree_id,omitempty"`
+  UserIds []interface{} `jsonapi:"attr,user_ids,omitempty"`
   SlackChannels []interface{} `jsonapi:"attr,slack_channels,omitempty"`
   SlackAliases []interface{} `jsonapi:"attr,slack_aliases,omitempty"`
 }

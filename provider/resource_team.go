@@ -115,6 +115,17 @@ func resourceTeam() *schema.Resource {
 				Description: "The PagerTree group id associated to this team",
 			},
 
+			"user_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeInt,
+				},
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "The User ID's members of this team",
+			},
+
 			"slack_channels": &schema.Schema{
 				Type:        schema.TypeList,
 				Computed:    true,
@@ -195,6 +206,9 @@ func resourceTeamCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	if value, ok := d.GetOkExists("pagertree_id"); ok {
 		s.PagertreeId = value.(string)
 	}
+	if value, ok := d.GetOkExists("user_ids"); ok {
+		s.UserIds = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("slack_channels"); ok {
 		s.SlackChannels = value.([]interface{})
 	}
@@ -240,6 +254,7 @@ func resourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	d.Set("opsgenie_id", item.OpsgenieId)
 	d.Set("victor_ops_id", item.VictorOpsId)
 	d.Set("pagertree_id", item.PagertreeId)
+	d.Set("user_ids", item.UserIds)
 	d.Set("slack_channels", item.SlackChannels)
 	d.Set("slack_aliases", item.SlackAliases)
 
@@ -281,6 +296,9 @@ func resourceTeamUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 	}
 	if d.HasChange("pagertree_id") {
 		s.PagertreeId = d.Get("pagertree_id").(string)
+	}
+	if d.HasChange("user_ids") {
+		s.UserIds = d.Get("user_ids").([]interface{})
 	}
 	if d.HasChange("slack_channels") {
 		s.SlackChannels = d.Get("slack_channels").([]interface{})

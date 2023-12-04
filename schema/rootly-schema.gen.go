@@ -8653,6 +8653,9 @@ type NewTeam struct {
 				Name string `json:"name"`
 			} `json:"slack_channels"`
 
+			// UserIds The User ID's members of this team
+			UserIds *[]int `json:"user_ids"`
+
 			// VictorOpsId The VictorOps group id associated to this team
 			VictorOpsId *string `json:"victor_ops_id"`
 		} `json:"attributes"`
@@ -10158,6 +10161,9 @@ type Team struct {
 
 	// UpdatedAt Date of last update
 	UpdatedAt string `json:"updated_at"`
+
+	// UserIds The User ID's members of this team
+	UserIds *[]int `json:"user_ids"`
 
 	// VictorOpsId The VictorOps group id associated to this team
 	VictorOpsId *string `json:"victor_ops_id"`
@@ -12009,6 +12015,9 @@ type UpdateTeam struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels"`
+
+			// UserIds The User ID's members of this team
+			UserIds *[]int `json:"user_ids"`
 
 			// VictorOpsId The VictorOps group id associated to this team
 			VictorOpsId *string `json:"victor_ops_id"`

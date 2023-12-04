@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.2.8] -- 2023-12-03
+
+- Add `user_ids` attribute to `team` resource.
+
 ## [1.2.7] -- 2023-12-02
 
 - Upgrade dependencies
