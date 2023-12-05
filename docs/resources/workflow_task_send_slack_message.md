@@ -67,16 +67,16 @@ Required:
 Optional:
 
 - `actionables` (List of String) Value must be one of `update_summary`, `update_status`, `archive_channel`, `manage_incident_roles`, `update_incident`, `all_commands`, `leave_feedback`, `manage_form_fields`, `manage_action_items`, `view_tasks`, `add_pagerduty_responders`, `add_opsgenie_responders`, `add_victor_ops_responders`, `snooze_reminder`, `pause_reminder`, `restart_reminder`, `update_status_page`, `cancel_incident`.
-- `broadcast_thread_reply_to_channel` (Boolean)
+- `broadcast_thread_reply_to_channel` (Boolean) Value must be one of true or false
 - `channels` (Block List) (see [below for nested schema](#nestedblock--task_params--channels))
 - `color` (String) A hex color
 - `parent_message_thread_task` (Map of String) Map must contain two fields, `id` and `name`. A hash where [id] is the task id of the parent task that sent a message, and [name] is the name of the parent task
-- `pin_to_channel` (Boolean)
-- `send_as_ephemeral` (Boolean)
+- `pin_to_channel` (Boolean) Value must be one of true or false
+- `send_as_ephemeral` (Boolean) Value must be one of true or false
 - `slack_user_groups` (Block List) (see [below for nested schema](#nestedblock--task_params--slack_user_groups))
 - `slack_users` (Block List) (see [below for nested schema](#nestedblock--task_params--slack_users))
 - `task_type` (String)
-- `update_parent_message` (Boolean)
+- `update_parent_message` (Boolean) Value must be one of true or false
 
 <a id="nestedblock--task_params--channels"></a>
 ### Nested Schema for `task_params.channels`

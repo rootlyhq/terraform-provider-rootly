@@ -48,7 +48,7 @@ Optional:
 - `group_ids` (List of String)
 - `incident_type_ids` (List of String)
 - `mitigated_at` (String)
-- `private` (Boolean)
+- `private` (Boolean) Value must be one of true or false
 - `resolved_at` (String)
 - `service_ids` (List of String)
 - `severity_id` (String)

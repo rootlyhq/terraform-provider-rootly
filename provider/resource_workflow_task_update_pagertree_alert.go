@@ -149,7 +149,7 @@ func resourceWorkflowTaskUpdatePagertreeAlert() *schema.Resource {
 							},
 						},
 						"incident": &schema.Schema{
-							Description: "Setting to true makes an alert a Pagertree incident",
+							Description: "Setting to true makes an alert a Pagertree incident. Value must be one of true or false",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},

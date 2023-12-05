@@ -72,7 +72,7 @@ func resourceStatusPageTemplate() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
-				Description: "Controls if incident subscribers should be notified",
+				Description: "Controls if incident subscribers should be notified. Value must be one of true or false",
 			},
 
 			"enabled": &schema.Schema{

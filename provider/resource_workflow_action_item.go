@@ -58,7 +58,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
-				Description: "This will notify you back when the workflow is starting",
+				Description: "This will notify you back when the workflow is starting. Value must be one of true or false",
 			},
 
 			"wait": &schema.Schema{
@@ -502,6 +502,18 @@ func resourceWorkflowActionItem() *schema.Resource {
 				Optional:         true,
 				Description:      "",
 			},
+
+			"cause_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
+			},
 		},
 	}
 }
@@ -570,6 +582,9 @@ func resourceWorkflowActionItemCreate(ctx context.Context, d *schema.ResourceDat
 	if value, ok := d.GetOkExists("group_ids"); ok {
 		s.GroupIds = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("cause_ids"); ok {
+		s.CauseIds = value.([]interface{})
+	}
 
 	res, err := c.CreateWorkflow(s)
 	if err != nil {
@@ -622,6 +637,7 @@ func resourceWorkflowActionItemRead(ctx context.Context, d *schema.ResourceData,
 	d.Set("service_ids", item.ServiceIds)
 	d.Set("functionality_ids", item.FunctionalityIds)
 	d.Set("group_ids", item.GroupIds)
+	d.Set("cause_ids", item.CauseIds)
 
 	return nil
 }
@@ -692,6 +708,9 @@ func resourceWorkflowActionItemUpdate(ctx context.Context, d *schema.ResourceDat
 	}
 	if d.HasChange("group_ids") {
 		s.GroupIds = d.Get("group_ids").([]interface{})
+	}
+	if d.HasChange("cause_ids") {
+		s.CauseIds = d.Get("cause_ids").([]interface{})
 	}
 
 	_, err := c.UpdateWorkflow(d.Id(), s)

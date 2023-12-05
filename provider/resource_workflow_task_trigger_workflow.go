@@ -97,7 +97,7 @@ func resourceWorkflowTaskTriggerWorkflow() *schema.Resource {
 							Required:    true,
 						},
 						"check_workflow_conditions": &schema.Schema{
-							Description: "",
+							Description: "Value must be one of true or false",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},

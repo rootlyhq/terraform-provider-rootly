@@ -20,8 +20,9 @@ description: |-
 
 ### Optional
 
+- `cause_ids` (List of String)
 - `command` (String) Workflow command
-- `command_feedback_enabled` (Boolean) This will notify you back when the workflow is starting
+- `command_feedback_enabled` (Boolean) This will notify you back when the workflow is starting. Value must be one of true or false
 - `description` (String) The description of the workflow
 - `enabled` (Boolean)
 - `environment_ids` (List of String)

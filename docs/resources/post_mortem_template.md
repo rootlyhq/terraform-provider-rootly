@@ -21,7 +21,7 @@ description: |-
 
 ### Optional
 
-- `default` (Boolean) Default selected template when editing a postmortem
+- `default` (Boolean) Default selected template when editing a postmortem. Value must be one of true or false
 - `format` (String) The format of the input. Value must be one of `html`, `markdown`.
 
 ### Read-Only

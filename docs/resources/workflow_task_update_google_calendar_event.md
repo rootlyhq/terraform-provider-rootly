@@ -41,16 +41,16 @@ Optional:
 
 - `adjustment_days` (Number) Days to adjust meeting by
 - `attendees` (List of String) Emails of attendees
-- `can_guests_invite_others` (Boolean)
-- `can_guests_modify_event` (Boolean)
-- `can_guests_see_other_guests` (Boolean)
+- `can_guests_invite_others` (Boolean) Value must be one of true or false
+- `can_guests_modify_event` (Boolean) Value must be one of true or false
+- `can_guests_see_other_guests` (Boolean) Value must be one of true or false
 - `conference_solution_key` (String) Sets the video conference type attached to the meeting. Value must be one of `eventHangout`, `eventNamedHangout`, `hangoutsMeet`, `addOn`.
 - `description` (String) The event description
 - `meeting_duration` (String) Meeting duration in format like '1 hour', '30 minutes'
-- `post_to_incident_timeline` (Boolean)
+- `post_to_incident_timeline` (Boolean) Value must be one of true or false
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
-- `replace_attendees` (Boolean)
-- `send_updates` (Boolean) Send an email to the attendees notifying them of the event
+- `replace_attendees` (Boolean) Value must be one of true or false
+- `send_updates` (Boolean) Send an email to the attendees notifying them of the event. Value must be one of true or false
 - `summary` (String) The event summary
 - `task_type` (String)
 - `time_of_meeting` (String) Time of meeting in format HH:MM

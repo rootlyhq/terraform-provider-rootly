@@ -125,7 +125,7 @@ func resourceWorkflowTaskAddActionItem() *schema.Resource {
 							}, false),
 						},
 						"post_to_incident_timeline": &schema.Schema{
-							Description: "",
+							Description: "Value must be one of true or false",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},

@@ -41,5 +41,5 @@ Required:
 Optional:
 
 - `email_message` (String) Email message notification
-- `send_notification_email` (Boolean)
+- `send_notification_email` (Boolean) Value must be one of true or false
 - `task_type` (String)

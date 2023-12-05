@@ -72,7 +72,7 @@ func resourceIncidentRole() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
-				Description: "",
+				Description: "Value must be one of true or false",
 			},
 
 			"enabled": &schema.Schema{
@@ -86,7 +86,7 @@ func resourceIncidentRole() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
-				Description: "",
+				Description: "Value must be one of true or false",
 			},
 		},
 	}

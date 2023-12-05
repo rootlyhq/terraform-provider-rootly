@@ -409,6 +409,11 @@ const (
 	ArchiveSlackChannels ArchiveSlackChannelsTaskParamsTaskType = "archive_slack_channels"
 )
 
+// Defines values for AssignRoleToUserDataType.
+const (
+	AssignRoleToUserDataTypeIncidents AssignRoleToUserDataType = "incidents"
+)
+
 // Defines values for AttachDatadogDashboardsTaskParamsTaskType.
 const (
 	AttachDatadogDashboards AttachDatadogDashboardsTaskParamsTaskType = "attach_datadog_dashboards"
@@ -1016,6 +1021,7 @@ const (
 // Defines values for FormFieldKind.
 const (
 	FormFieldKindAttachAlerts                FormFieldKind = "attach_alerts"
+	FormFieldKindCauses                      FormFieldKind = "causes"
 	FormFieldKindCustom                      FormFieldKind = "custom"
 	FormFieldKindEnvironments                FormFieldKind = "environments"
 	FormFieldKindFunctionalities             FormFieldKind = "functionalities"
@@ -1400,6 +1406,18 @@ const (
 	IncidentTriggerParamsIncidentConditionAcknowledgedAt1UNSET IncidentTriggerParamsIncidentConditionAcknowledgedAt1 = "UNSET"
 )
 
+// Defines values for IncidentTriggerParamsIncidentConditionCause.
+const (
+	IncidentTriggerParamsIncidentConditionCauseANY          IncidentTriggerParamsIncidentConditionCause = "ANY"
+	IncidentTriggerParamsIncidentConditionCauseCONTAINS     IncidentTriggerParamsIncidentConditionCause = "CONTAINS"
+	IncidentTriggerParamsIncidentConditionCauseCONTAINSALL  IncidentTriggerParamsIncidentConditionCause = "CONTAINS_ALL"
+	IncidentTriggerParamsIncidentConditionCauseCONTAINSNONE IncidentTriggerParamsIncidentConditionCause = "CONTAINS_NONE"
+	IncidentTriggerParamsIncidentConditionCauseIS           IncidentTriggerParamsIncidentConditionCause = "IS"
+	IncidentTriggerParamsIncidentConditionCauseNONE         IncidentTriggerParamsIncidentConditionCause = "NONE"
+	IncidentTriggerParamsIncidentConditionCauseSET          IncidentTriggerParamsIncidentConditionCause = "SET"
+	IncidentTriggerParamsIncidentConditionCauseUNSET        IncidentTriggerParamsIncidentConditionCause = "UNSET"
+)
+
 // Defines values for IncidentTriggerParamsIncidentConditionDetectedAt1.
 const (
 	IncidentTriggerParamsIncidentConditionDetectedAt1SET   IncidentTriggerParamsIncidentConditionDetectedAt1 = "SET"
@@ -1567,6 +1585,18 @@ const (
 	IncidentTriggerParamsIncidentKindsTestSub    IncidentTriggerParamsIncidentKinds = "test_sub"
 )
 
+// Defines values for IncidentTriggerParamsIncidentPostMortemConditionCause.
+const (
+	IncidentTriggerParamsIncidentPostMortemConditionCauseANY          IncidentTriggerParamsIncidentPostMortemConditionCause = "ANY"
+	IncidentTriggerParamsIncidentPostMortemConditionCauseCONTAINS     IncidentTriggerParamsIncidentPostMortemConditionCause = "CONTAINS"
+	IncidentTriggerParamsIncidentPostMortemConditionCauseCONTAINSALL  IncidentTriggerParamsIncidentPostMortemConditionCause = "CONTAINS_ALL"
+	IncidentTriggerParamsIncidentPostMortemConditionCauseCONTAINSNONE IncidentTriggerParamsIncidentPostMortemConditionCause = "CONTAINS_NONE"
+	IncidentTriggerParamsIncidentPostMortemConditionCauseIS           IncidentTriggerParamsIncidentPostMortemConditionCause = "IS"
+	IncidentTriggerParamsIncidentPostMortemConditionCauseNONE         IncidentTriggerParamsIncidentPostMortemConditionCause = "NONE"
+	IncidentTriggerParamsIncidentPostMortemConditionCauseSET          IncidentTriggerParamsIncidentPostMortemConditionCause = "SET"
+	IncidentTriggerParamsIncidentPostMortemConditionCauseUNSET        IncidentTriggerParamsIncidentPostMortemConditionCause = "UNSET"
+)
+
 // Defines values for IncidentTriggerParamsIncidentStatuses.
 const (
 	IncidentTriggerParamsIncidentStatusesAcknowledged IncidentTriggerParamsIncidentStatuses = "acknowledged"
@@ -1718,6 +1748,7 @@ const (
 // Defines values for NewFormFieldDataAttributesKind.
 const (
 	NewFormFieldDataAttributesKindAttachAlerts                NewFormFieldDataAttributesKind = "attach_alerts"
+	NewFormFieldDataAttributesKindCauses                      NewFormFieldDataAttributesKind = "causes"
 	NewFormFieldDataAttributesKindCustom                      NewFormFieldDataAttributesKind = "custom"
 	NewFormFieldDataAttributesKindEnvironments                NewFormFieldDataAttributesKind = "environments"
 	NewFormFieldDataAttributesKindFunctionalities             NewFormFieldDataAttributesKind = "functionalities"
@@ -2935,6 +2966,11 @@ const (
 	TweetTwitterMessage TweetTwitterMessageTaskParamsTaskType = "tweet_twitter_message"
 )
 
+// Defines values for UnassignRoleFromUserDataType.
+const (
+	UnassignRoleFromUserDataTypeIncidents UnassignRoleFromUserDataType = "incidents"
+)
+
 // Defines values for UpdateActionItemTaskParamsAttributeToQueryBy.
 const (
 	UpdateActionItemTaskParamsAttributeToQueryByAirtableRecordId     UpdateActionItemTaskParamsAttributeToQueryBy = "airtable_record_id"
@@ -3080,6 +3116,7 @@ const (
 // Defines values for UpdateFormFieldDataAttributesKind.
 const (
 	UpdateFormFieldDataAttributesKindAttachAlerts                UpdateFormFieldDataAttributesKind = "attach_alerts"
+	UpdateFormFieldDataAttributesKindCauses                      UpdateFormFieldDataAttributesKind = "causes"
 	UpdateFormFieldDataAttributesKindCustom                      UpdateFormFieldDataAttributesKind = "custom"
 	UpdateFormFieldDataAttributesKindEnvironments                UpdateFormFieldDataAttributesKind = "environments"
 	UpdateFormFieldDataAttributesKindFunctionalities             UpdateFormFieldDataAttributesKind = "functionalities"
@@ -4497,6 +4534,23 @@ type ArchiveSlackChannelsTaskParams struct {
 
 // ArchiveSlackChannelsTaskParamsTaskType defines model for ArchiveSlackChannelsTaskParams.TaskType.
 type ArchiveSlackChannelsTaskParamsTaskType string
+
+// AssignRoleToUser defines model for assign_role_to_user.
+type AssignRoleToUser struct {
+	Data struct {
+		Attributes struct {
+			// IncidentRoleId ID of the incident role
+			IncidentRoleId *string `json:"incident_role_id,omitempty"`
+
+			// UserId ID of user you wish to assign this incident
+			UserId *string `json:"user_id,omitempty"`
+		} `json:"attributes"`
+		Type AssignRoleToUserDataType `json:"type"`
+	} `json:"data"`
+}
+
+// AssignRoleToUserDataType defines model for AssignRoleToUser.Data.Type.
+type AssignRoleToUserDataType string
 
 // AttachDatadogDashboardsTaskParams defines model for attach_datadog_dashboards_task_params.
 type AttachDatadogDashboardsTaskParams struct {
@@ -7071,6 +7125,7 @@ type IncidentStatusPageEventResponseDataType string
 type IncidentTriggerParams struct {
 	IncidentCondition               *IncidentTriggerParamsIncidentCondition                `json:"incident_condition,omitempty"`
 	IncidentConditionAcknowledgedAt *IncidentTriggerParams_IncidentConditionAcknowledgedAt `json:"incident_condition_acknowledged_at,omitempty"`
+	IncidentConditionCause          *IncidentTriggerParamsIncidentConditionCause           `json:"incident_condition_cause,omitempty"`
 	IncidentConditionDetectedAt     *IncidentTriggerParams_IncidentConditionDetectedAt     `json:"incident_condition_detected_at,omitempty"`
 	IncidentConditionEnvironment    *IncidentTriggerParamsIncidentConditionEnvironment     `json:"incident_condition_environment,omitempty"`
 	IncidentConditionFunctionality  *IncidentTriggerParamsIncidentConditionFunctionality   `json:"incident_condition_functionality,omitempty"`
@@ -7089,10 +7144,13 @@ type IncidentTriggerParams struct {
 	IncidentConditionalInactivity   *IncidentTriggerParams_IncidentConditionalInactivity   `json:"incident_conditional_inactivity,omitempty"`
 	IncidentInactivityDuration      *IncidentTriggerParams_IncidentInactivityDuration      `json:"incident_inactivity_duration,omitempty"`
 	IncidentKinds                   *[]IncidentTriggerParamsIncidentKinds                  `json:"incident_kinds,omitempty"`
-	IncidentStatuses                *[]IncidentTriggerParamsIncidentStatuses               `json:"incident_statuses,omitempty"`
-	IncidentVisibilities            *[]bool                                                `json:"incident_visibilities,omitempty"`
-	TriggerType                     IncidentTriggerParamsTriggerType                       `json:"trigger_type"`
-	Triggers                        *[]string                                              `json:"triggers,omitempty"`
+
+	// IncidentPostMortemConditionCause [DEPRECATED] Use incident_condition_cause instead
+	IncidentPostMortemConditionCause *IncidentTriggerParamsIncidentPostMortemConditionCause `json:"incident_post_mortem_condition_cause,omitempty"`
+	IncidentStatuses                 *[]IncidentTriggerParamsIncidentStatuses               `json:"incident_statuses,omitempty"`
+	IncidentVisibilities             *[]bool                                                `json:"incident_visibilities,omitempty"`
+	TriggerType                      IncidentTriggerParamsTriggerType                       `json:"trigger_type"`
+	Triggers                         *[]string                                              `json:"triggers,omitempty"`
 }
 
 // IncidentTriggerParamsIncidentCondition defines model for IncidentTriggerParams.IncidentCondition.
@@ -7108,6 +7166,9 @@ type IncidentTriggerParamsIncidentConditionAcknowledgedAt1 string
 type IncidentTriggerParams_IncidentConditionAcknowledgedAt struct {
 	union json.RawMessage
 }
+
+// IncidentTriggerParamsIncidentConditionCause defines model for IncidentTriggerParams.IncidentConditionCause.
+type IncidentTriggerParamsIncidentConditionCause string
 
 // IncidentTriggerParamsIncidentConditionDetectedAt0 defines model for .
 type IncidentTriggerParamsIncidentConditionDetectedAt0 = interface{}
@@ -7218,6 +7279,9 @@ type IncidentTriggerParams_IncidentInactivityDuration struct {
 
 // IncidentTriggerParamsIncidentKinds defines model for IncidentTriggerParams.IncidentKinds.
 type IncidentTriggerParamsIncidentKinds string
+
+// IncidentTriggerParamsIncidentPostMortemConditionCause [DEPRECATED] Use incident_condition_cause instead
+type IncidentTriggerParamsIncidentPostMortemConditionCause string
 
 // IncidentTriggerParamsIncidentStatuses defines model for IncidentTriggerParams.IncidentStatuses.
 type IncidentTriggerParamsIncidentStatuses string
@@ -7813,6 +7877,9 @@ type NewIncident struct {
 
 			// CancelledAt Date of cancellation
 			CancelledAt *string `json:"cancelled_at"`
+
+			// CauseIds The Cause ID's to attach to the incident
+			CauseIds *[]string `json:"cause_ids"`
 
 			// DetectedAt Date of detection
 			DetectedAt *string `json:"detected_at"`
@@ -8696,6 +8763,8 @@ type NewWebhooksEndpointDataType string
 type NewWorkflow struct {
 	Data struct {
 		Attributes struct {
+			CauseIds *[]string `json:"cause_ids,omitempty"`
+
 			// Command Workflow command
 			Command *string `json:"command"`
 
@@ -10228,6 +10297,23 @@ type TweetTwitterMessageTaskParams struct {
 // TweetTwitterMessageTaskParamsTaskType defines model for TweetTwitterMessageTaskParams.TaskType.
 type TweetTwitterMessageTaskParamsTaskType string
 
+// UnassignRoleFromUser defines model for unassign_role_from_user.
+type UnassignRoleFromUser struct {
+	Data struct {
+		Attributes struct {
+			// IncidentRoleId ID of the incident role
+			IncidentRoleId *string `json:"incident_role_id,omitempty"`
+
+			// UserId ID of user you wish to remove as assigned user from this incident
+			UserId *string `json:"user_id,omitempty"`
+		} `json:"attributes"`
+		Type UnassignRoleFromUserDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UnassignRoleFromUserDataType defines model for UnassignRoleFromUser.Data.Type.
+type UnassignRoleFromUserDataType string
+
 // UpdateActionItemTaskParams defines model for update_action_item_task_params.
 type UpdateActionItemTaskParams struct {
 	// AssignedToUser  The user this action item is assigned to
@@ -10780,6 +10866,9 @@ type UpdateIncident struct {
 
 			// CancelledAt Date of cancellation
 			CancelledAt *string `json:"cancelled_at"`
+
+			// CauseIds The Cause ID's to attach to the incident
+			CauseIds *[]string `json:"cause_ids"`
 
 			// DetectedAt Date of detection
 			DetectedAt *string `json:"detected_at"`
@@ -12111,6 +12200,8 @@ type UpdateWebhooksEndpointDataType string
 type UpdateWorkflow struct {
 	Data struct {
 		Attributes struct {
+			CauseIds *[]string `json:"cause_ids,omitempty"`
+
 			// Command Workflow command
 			Command *string `json:"command"`
 
@@ -12435,6 +12526,8 @@ type WebhooksEndpointResponseDataType string
 
 // Workflow defines model for workflow.
 type Workflow struct {
+	CauseIds *[]string `json:"cause_ids,omitempty"`
+
 	// Command Workflow command
 	Command *string `json:"command"`
 
@@ -13016,6 +13109,7 @@ type ListIncidentsParams struct {
 	FilterUserId                       *int    `form:"filter[user_id],omitempty" json:"filter[user_id],omitempty"`
 	FilterSeverity                     *string `form:"filter[severity],omitempty" json:"filter[severity],omitempty"`
 	FilterSeverityId                   *string `form:"filter[severity_id],omitempty" json:"filter[severity_id],omitempty"`
+	FilterLabels                       *string `form:"filter[labels],omitempty" json:"filter[labels],omitempty"`
 	FilterTypes                        *string `form:"filter[types],omitempty" json:"filter[types],omitempty"`
 	FilterTypeIds                      *string `form:"filter[type_ids],omitempty" json:"filter[type_ids],omitempty"`
 	FilterEnvironments                 *string `form:"filter[environments],omitempty" json:"filter[environments],omitempty"`
@@ -13026,6 +13120,8 @@ type ListIncidentsParams struct {
 	FilterServiceIds                   *string `form:"filter[service_ids],omitempty" json:"filter[service_ids],omitempty"`
 	FilterTeams                        *string `form:"filter[teams],omitempty" json:"filter[teams],omitempty"`
 	FilterTeamIds                      *string `form:"filter[team_ids],omitempty" json:"filter[team_ids],omitempty"`
+	FilterCause                        *string `form:"filter[cause],omitempty" json:"filter[cause],omitempty"`
+	FilterCauseIds                     *string `form:"filter[cause_ids],omitempty" json:"filter[cause_ids],omitempty"`
 	FilterCustomFieldSelectedOptionIds *string `form:"filter[custom_field_selected_option_ids],omitempty" json:"filter[custom_field_selected_option_ids],omitempty"`
 	FilterCreatedAtGt                  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
 	FilterCreatedAtGte                 *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
@@ -13505,6 +13601,9 @@ type UpdateIncidentApplicationVndAPIPlusJSONRequestBody = UpdateIncident
 // AddSubscribersToIncidentApplicationVndAPIPlusJSONRequestBody defines body for AddSubscribersToIncident for application/vnd.api+json ContentType.
 type AddSubscribersToIncidentApplicationVndAPIPlusJSONRequestBody = AddSubscribers
 
+// AssignUserToIncidentApplicationVndAPIPlusJSONRequestBody defines body for AssignUserToIncident for application/vnd.api+json ContentType.
+type AssignUserToIncidentApplicationVndAPIPlusJSONRequestBody = AssignRoleToUser
+
 // CancelIncidentApplicationVndAPIPlusJSONRequestBody defines body for CancelIncident for application/vnd.api+json ContentType.
 type CancelIncidentApplicationVndAPIPlusJSONRequestBody = CancelIncident
 
@@ -13525,6 +13624,9 @@ type ResolveIncidentApplicationVndAPIPlusJSONRequestBody = ResolveIncident
 
 // RestartIncidentApplicationVndAPIPlusJSONRequestBody defines body for RestartIncident for application/vnd.api+json ContentType.
 type RestartIncidentApplicationVndAPIPlusJSONRequestBody = RestartIncident
+
+// RemoveAssignedUserFromIncidentApplicationVndAPIPlusJSONRequestBody defines body for RemoveAssignedUserFromIncident for application/vnd.api+json ContentType.
+type RemoveAssignedUserFromIncidentApplicationVndAPIPlusJSONRequestBody = UnassignRoleFromUser
 
 // CreateIncidentActionItemApplicationVndAPIPlusJSONRequestBody defines body for CreateIncidentActionItem for application/vnd.api+json ContentType.
 type CreateIncidentActionItemApplicationVndAPIPlusJSONRequestBody = NewIncidentActionItem
@@ -23532,6 +23634,11 @@ type ClientInterface interface {
 
 	AddSubscribersToIncidentWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body AddSubscribersToIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// AssignUserToIncidentWithBody request with any body
+	AssignUserToIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	AssignUserToIncidentWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body AssignUserToIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// CancelIncidentWithBody request with any body
 	CancelIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -23566,6 +23673,11 @@ type ClientInterface interface {
 	RestartIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	RestartIncidentWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body RestartIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveAssignedUserFromIncidentWithBody request with any body
+	RemoveAssignedUserFromIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	RemoveAssignedUserFromIncidentWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body RemoveAssignedUserFromIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListIncidentActionItems request
 	ListIncidentActionItems(ctx context.Context, incidentId string, params *ListIncidentActionItemsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -25732,6 +25844,30 @@ func (c *Client) AddSubscribersToIncidentWithApplicationVndAPIPlusJSONBody(ctx c
 	return c.Client.Do(req)
 }
 
+func (c *Client) AssignUserToIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAssignUserToIncidentRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AssignUserToIncidentWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body AssignUserToIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAssignUserToIncidentRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) CancelIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCancelIncidentRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
@@ -25890,6 +26026,30 @@ func (c *Client) RestartIncidentWithBody(ctx context.Context, id string, content
 
 func (c *Client) RestartIncidentWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body RestartIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewRestartIncidentRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveAssignedUserFromIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveAssignedUserFromIncidentRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveAssignedUserFromIncidentWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body RemoveAssignedUserFromIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveAssignedUserFromIncidentRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -34138,6 +34298,22 @@ func NewListIncidentsRequest(server string, params *ListIncidentsParams) (*http.
 
 		}
 
+		if params.FilterLabels != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[labels]", runtime.ParamLocationQuery, *params.FilterLabels); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
 		if params.FilterTypes != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[types]", runtime.ParamLocationQuery, *params.FilterTypes); err != nil {
@@ -34285,6 +34461,38 @@ func NewListIncidentsRequest(server string, params *ListIncidentsParams) (*http.
 		if params.FilterTeamIds != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[team_ids]", runtime.ParamLocationQuery, *params.FilterTeamIds); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCause != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[cause]", runtime.ParamLocationQuery, *params.FilterCause); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCauseIds != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[cause_ids]", runtime.ParamLocationQuery, *params.FilterCauseIds); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 				return nil, err
@@ -35055,6 +35263,53 @@ func NewAddSubscribersToIncidentRequestWithBody(server string, id string, conten
 	return req, nil
 }
 
+// NewAssignUserToIncidentRequestWithApplicationVndAPIPlusJSONBody calls the generic AssignUserToIncident builder with application/vnd.api+json body
+func NewAssignUserToIncidentRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body AssignUserToIncidentApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewAssignUserToIncidentRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewAssignUserToIncidentRequestWithBody generates requests for AssignUserToIncident with any type of body
+func NewAssignUserToIncidentRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incidents/%s/assign_role_to_user", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewCancelIncidentRequestWithApplicationVndAPIPlusJSONBody calls the generic CancelIncident builder with application/vnd.api+json body
 func NewCancelIncidentRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body CancelIncidentApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
@@ -35375,6 +35630,53 @@ func NewRestartIncidentRequestWithBody(server string, id string, contentType str
 	}
 
 	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewRemoveAssignedUserFromIncidentRequestWithApplicationVndAPIPlusJSONBody calls the generic RemoveAssignedUserFromIncident builder with application/vnd.api+json body
+func NewRemoveAssignedUserFromIncidentRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body RemoveAssignedUserFromIncidentApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewRemoveAssignedUserFromIncidentRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewRemoveAssignedUserFromIncidentRequestWithBody generates requests for RemoveAssignedUserFromIncident with any type of body
+func NewRemoveAssignedUserFromIncidentRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incidents/%s/unassign_role_from_user", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -43612,6 +43914,11 @@ type ClientWithResponsesInterface interface {
 
 	AddSubscribersToIncidentWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body AddSubscribersToIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*AddSubscribersToIncidentResponse, error)
 
+	// AssignUserToIncidentWithBodyWithResponse request with any body
+	AssignUserToIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AssignUserToIncidentResponse, error)
+
+	AssignUserToIncidentWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body AssignUserToIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*AssignUserToIncidentResponse, error)
+
 	// CancelIncidentWithBodyWithResponse request with any body
 	CancelIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CancelIncidentResponse, error)
 
@@ -43646,6 +43953,11 @@ type ClientWithResponsesInterface interface {
 	RestartIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RestartIncidentResponse, error)
 
 	RestartIncidentWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body RestartIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*RestartIncidentResponse, error)
+
+	// RemoveAssignedUserFromIncidentWithBodyWithResponse request with any body
+	RemoveAssignedUserFromIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RemoveAssignedUserFromIncidentResponse, error)
+
+	RemoveAssignedUserFromIncidentWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body RemoveAssignedUserFromIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*RemoveAssignedUserFromIncidentResponse, error)
 
 	// ListIncidentActionItemsWithResponse request
 	ListIncidentActionItemsWithResponse(ctx context.Context, incidentId string, params *ListIncidentActionItemsParams, reqEditors ...RequestEditorFn) (*ListIncidentActionItemsResponse, error)
@@ -46495,6 +46807,29 @@ func (r AddSubscribersToIncidentResponse) StatusCode() int {
 	return 0
 }
 
+type AssignUserToIncidentResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *IncidentResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r AssignUserToIncidentResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AssignUserToIncidentResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type CancelIncidentResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -46650,6 +46985,29 @@ func (r RestartIncidentResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r RestartIncidentResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveAssignedUserFromIncidentResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *IncidentResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveAssignedUserFromIncidentResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveAssignedUserFromIncidentResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -50571,6 +50929,23 @@ func (c *ClientWithResponses) AddSubscribersToIncidentWithApplicationVndAPIPlusJ
 	return ParseAddSubscribersToIncidentResponse(rsp)
 }
 
+// AssignUserToIncidentWithBodyWithResponse request with arbitrary body returning *AssignUserToIncidentResponse
+func (c *ClientWithResponses) AssignUserToIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AssignUserToIncidentResponse, error) {
+	rsp, err := c.AssignUserToIncidentWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAssignUserToIncidentResponse(rsp)
+}
+
+func (c *ClientWithResponses) AssignUserToIncidentWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body AssignUserToIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*AssignUserToIncidentResponse, error) {
+	rsp, err := c.AssignUserToIncidentWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAssignUserToIncidentResponse(rsp)
+}
+
 // CancelIncidentWithBodyWithResponse request with arbitrary body returning *CancelIncidentResponse
 func (c *ClientWithResponses) CancelIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CancelIncidentResponse, error) {
 	rsp, err := c.CancelIncidentWithBody(ctx, id, contentType, body, reqEditors...)
@@ -50688,6 +51063,23 @@ func (c *ClientWithResponses) RestartIncidentWithApplicationVndAPIPlusJSONBodyWi
 		return nil, err
 	}
 	return ParseRestartIncidentResponse(rsp)
+}
+
+// RemoveAssignedUserFromIncidentWithBodyWithResponse request with arbitrary body returning *RemoveAssignedUserFromIncidentResponse
+func (c *ClientWithResponses) RemoveAssignedUserFromIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RemoveAssignedUserFromIncidentResponse, error) {
+	rsp, err := c.RemoveAssignedUserFromIncidentWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveAssignedUserFromIncidentResponse(rsp)
+}
+
+func (c *ClientWithResponses) RemoveAssignedUserFromIncidentWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body RemoveAssignedUserFromIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*RemoveAssignedUserFromIncidentResponse, error) {
+	rsp, err := c.RemoveAssignedUserFromIncidentWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveAssignedUserFromIncidentResponse(rsp)
 }
 
 // ListIncidentActionItemsWithResponse request returning *ListIncidentActionItemsResponse
@@ -55523,6 +55915,39 @@ func ParseAddSubscribersToIncidentResponse(rsp *http.Response) (*AddSubscribersT
 	return response, nil
 }
 
+// ParseAssignUserToIncidentResponse parses an HTTP response from a AssignUserToIncidentWithResponse call
+func ParseAssignUserToIncidentResponse(rsp *http.Response) (*AssignUserToIncidentResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AssignUserToIncidentResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest IncidentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseCancelIncidentResponse parses an HTTP response from a CancelIncidentWithResponse call
 func ParseCancelIncidentResponse(rsp *http.Response) (*CancelIncidentResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -55730,6 +56155,39 @@ func ParseRestartIncidentResponse(rsp *http.Response) (*RestartIncidentResponse,
 	}
 
 	response := &RestartIncidentResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest IncidentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveAssignedUserFromIncidentResponse parses an HTTP response from a RemoveAssignedUserFromIncidentWithResponse call
+func ParseRemoveAssignedUserFromIncidentResponse(rsp *http.Response) (*RemoveAssignedUserFromIncidentResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveAssignedUserFromIncidentResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

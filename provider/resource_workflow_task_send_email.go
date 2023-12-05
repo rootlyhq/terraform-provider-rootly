@@ -118,12 +118,12 @@ func resourceWorkflowTaskSendEmail() *schema.Resource {
 							Required:    true,
 						},
 						"include_header": &schema.Schema{
-							Description: "",
+							Description: "Value must be one of true or false",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},
 						"include_footer": &schema.Schema{
-							Description: "",
+							Description: "Value must be one of true or false",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},

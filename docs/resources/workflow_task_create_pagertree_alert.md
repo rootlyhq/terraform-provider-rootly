@@ -36,7 +36,7 @@ Manages workflow create_pagertree_alert task.
 Optional:
 
 - `description` (String) Description of alert as text
-- `incident` (Boolean) Setting to true makes an alert a Pagertree incident
+- `incident` (Boolean) Setting to true makes an alert a Pagertree incident. Value must be one of true or false
 - `severity` (String) Value must be one of `auto`, `SEV-1`, `SEV-2`, `SEV-3`, `SEV-4`.
 - `task_type` (String)
 - `teams` (Block List) (see [below for nested schema](#nestedblock--task_params--teams))

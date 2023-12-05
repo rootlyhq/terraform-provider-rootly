@@ -20,8 +20,9 @@ description: |-
 
 ### Optional
 
+- `cause_ids` (List of String)
 - `command` (String) Workflow command
-- `command_feedback_enabled` (Boolean) This will notify you back when the workflow is starting
+- `command_feedback_enabled` (Boolean) This will notify you back when the workflow is starting. Value must be one of true or false
 - `description` (String) The description of the workflow
 - `enabled` (Boolean)
 - `environment_ids` (List of String)
@@ -50,6 +51,7 @@ Optional:
 
 - `incident_condition` (String) Value must be one off `ALL`, `ANY`, `NONE`.
 - `incident_condition_acknowledged_at` (String)
+- `incident_condition_cause` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `incident_condition_detected_at` (String)
 - `incident_condition_environment` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `incident_condition_functionality` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
@@ -68,12 +70,11 @@ Optional:
 - `incident_conditional_inactivity` (String)
 - `incident_inactivity_duration` (String) ex. 10 min, 1h, 3 days, 2 weeks
 - `incident_kinds` (List of String) Value must be one of `example`, `example_sub`, `normal`, `normal_sub`, `test`, `test_sub`, `backfilled`, `scheduled`.
-- `incident_post_mortem_cause_ids` (List of String)
 - `incident_post_mortem_condition` (String) Value must be one off `ALL`, `ANY`, `NONE`.
-- `incident_post_mortem_condition_cause` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
+- `incident_post_mortem_condition_cause` (String) [DEPRECATED] Use incident_condition_cause instead. Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `incident_post_mortem_condition_status` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `incident_post_mortem_statuses` (List of String) Value must be one of `draft`, `published`.
 - `incident_statuses` (List of String) Value must be one of `in_triage`, `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `cancelled`, `scheduled`, `in_progress`, `completed`.
 - `incident_visibilities` (List of String)
 - `trigger_type` (String) Value must be one off `post_mortem`.
-- `triggers` (List of String) Actions that trigger the workflow. One of custom_fields.<slug>.updated, post_mortem_created, post_mortem_updated, status_updated, causes_updated, slack_command
+- `triggers` (List of String) Actions that trigger the workflow. One of custom_fields.<slug>.updated, post_mortem_created, post_mortem_updated, status_updated, slack_command

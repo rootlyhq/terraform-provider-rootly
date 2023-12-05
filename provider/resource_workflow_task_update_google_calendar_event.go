@@ -105,22 +105,22 @@ func resourceWorkflowTaskUpdateGoogleCalendarEvent() *schema.Resource {
 							Optional:    true,
 						},
 						"send_updates": &schema.Schema{
-							Description: "Send an email to the attendees notifying them of the event",
+							Description: "Send an email to the attendees notifying them of the event. Value must be one of true or false",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},
 						"can_guests_modify_event": &schema.Schema{
-							Description: "",
+							Description: "Value must be one of true or false",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},
 						"can_guests_see_other_guests": &schema.Schema{
-							Description: "",
+							Description: "Value must be one of true or false",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},
 						"can_guests_invite_others": &schema.Schema{
-							Description: "",
+							Description: "Value must be one of true or false",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},
@@ -133,7 +133,7 @@ func resourceWorkflowTaskUpdateGoogleCalendarEvent() *schema.Resource {
 							},
 						},
 						"replace_attendees": &schema.Schema{
-							Description: "",
+							Description: "Value must be one of true or false",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},
@@ -150,7 +150,7 @@ func resourceWorkflowTaskUpdateGoogleCalendarEvent() *schema.Resource {
 							}, false),
 						},
 						"post_to_incident_timeline": &schema.Schema{
-							Description: "",
+							Description: "Value must be one of true or false",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.9] -- 2023-12-16
+
+- Add `causes` kind to `form_field` resource.
+- Add `incident_condition_cause` column to `workflow_incident`.
+- Deprecated `incident_post_mortem_condition_cause` column of `workflow_post_mortem`
+- Remove `causes_updated` trigger of `workflow_post_mortem`.
+
 ## [1.2.8] -- 2023-12-03
 
 - Add `user_ids` attribute to `team` resource.

@@ -47,7 +47,7 @@ resource "rootly_form_field_option" "north_america" {
 ### Optional
 
 - `color` (String) The hex color of the form_field_option
-- `default` (Boolean)
+- `default` (Boolean) Value must be one of true or false
 - `position` (Number) The position of the form_field_option
 
 ### Read-Only

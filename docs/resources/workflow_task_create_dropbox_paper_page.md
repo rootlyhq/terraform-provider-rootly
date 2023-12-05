@@ -40,7 +40,7 @@ Required:
 Optional:
 
 - `content` (String) The page content
-- `mark_post_mortem_as_published` (Boolean)
+- `mark_post_mortem_as_published` (Boolean) Value must be one of true or false
 - `namespace` (Map of String) Map must contain two fields, `id` and `name`.
 - `parent_folder` (Map of String) Map must contain two fields, `id` and `name`.
 - `post_mortem_template_id` (String) Retrospective template to use when creating page task, if desired

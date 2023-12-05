@@ -84,17 +84,17 @@ func resourceWorkflowTaskCreateNotionPage() *schema.Resource {
 							Optional:    true,
 						},
 						"mark_post_mortem_as_published": &schema.Schema{
-							Description: "",
+							Description: "Value must be one of true or false",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},
 						"show_timeline_as_table": &schema.Schema{
-							Description: "",
+							Description: "Value must be one of true or false",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},
 						"show_action_items_as_table": &schema.Schema{
-							Description: "",
+							Description: "Value must be one of true or false",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},

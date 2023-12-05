@@ -44,7 +44,7 @@ Optional:
 - `functionality_ids` (List of String)
 - `group_ids` (List of String)
 - `incident_type_ids` (List of String)
-- `private` (Boolean)
+- `private` (Boolean) Value must be one of true or false
 - `service_ids` (List of String)
 - `severity_id` (String)
 - `summary` (String) The incident summary

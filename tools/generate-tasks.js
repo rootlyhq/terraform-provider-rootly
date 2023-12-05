@@ -277,6 +277,11 @@ function annotatedDescription(schema) {
   ) {
     return `Map must contain two fields, \`id\` and \`name\`. ${description}`;
   }
+  if (schema.type === "boolean") {
+    return `${
+      !!description ? `${description}. ` : ""
+    }Value must be one of true or false`;
+  }
   return description;
 }
 

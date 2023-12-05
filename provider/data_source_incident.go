@@ -48,6 +48,12 @@ func dataSourceIncident() *schema.Resource {
 				Optional: true,
 			},
 
+			"labels": &schema.Schema{
+				Type:     schema.TypeString,
+				Computed: true,
+				Optional: true,
+			},
+
 			"in_triage_at": &schema.Schema{
 				Type:        schema.TypeMap,
 				Description: "Filter by date range using 'lt' and 'gt'.",
@@ -114,6 +120,11 @@ func dataSourceIncidentRead(ctx context.Context, d *schema.ResourceData, meta in
 	if value, ok := d.GetOkExists("severity"); ok {
 		severity := value.(string)
 		params.FilterSeverity = &severity
+	}
+
+	if value, ok := d.GetOkExists("labels"); ok {
+		labels := value.(string)
+		params.FilterLabels = &labels
 	}
 
 	if value, ok := d.GetOkExists("environments"); ok {

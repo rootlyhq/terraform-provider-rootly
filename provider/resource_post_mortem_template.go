@@ -36,7 +36,7 @@ func resourcePostmortemTemplate() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
-				Description: "Default selected template when editing a postmortem",
+				Description: "Default selected template when editing a postmortem. Value must be one of true or false",
 			},
 
 			"content": &schema.Schema{

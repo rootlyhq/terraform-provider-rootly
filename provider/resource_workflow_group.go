@@ -54,7 +54,7 @@ func resourceWorkflowGroup() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
-				Description: "Whether the group is expanded or collapsed.",
+				Description: "Whether the group is expanded or collapsed.. Value must be one of true or false",
 			},
 
 			"position": &schema.Schema{

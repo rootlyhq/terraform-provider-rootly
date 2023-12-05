@@ -37,6 +37,6 @@ resource "rootly_dashboard" "foo" {
 
 const testAccResourceDashboardUpdate = `
 resource "rootly_dashboard" "foo" {
-  name        = "mydashboard2"
+  name = "mydashboard2"
 }
 `

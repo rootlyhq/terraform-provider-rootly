@@ -193,7 +193,7 @@ func resourceWorkflowTaskUpdateIncident() *schema.Resource {
 							Optional:    true,
 						},
 						"private": &schema.Schema{
-							Description: "",
+							Description: "Value must be one of true or false",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},

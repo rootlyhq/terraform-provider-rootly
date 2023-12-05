@@ -141,7 +141,7 @@ Optional:
 - `cc` (List of String)
 - `custom_logo_url` (String) URL to your custom email logo
 - `from` (String) The from email address. Need to use SMTP integration if different than rootly.com
-- `include_footer` (Boolean)
-- `include_header` (Boolean)
+- `include_footer` (Boolean) Value must be one of true or false
+- `include_header` (Boolean) Value must be one of true or false
 - `preheader` (String) The preheader
 - `task_type` (String)

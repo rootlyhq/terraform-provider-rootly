@@ -28,7 +28,7 @@ resource "rootly_workflow_incident" "test" {
 }
 
 resource "rootly_form_field" "test1" {
-  name = "form-field-test"
+  	name = "form-field-test-1"
 	kind = "custom"
 	input_kind = "select"
 	shown = ["web_new_incident_form"]
@@ -36,7 +36,7 @@ resource "rootly_form_field" "test1" {
 }
 
 resource "rootly_form_field" "test2" {
-  name = "form-field-test"
+  	name = "form-field-test-2"
 	kind = "custom"
 	input_kind = "text"
 	shown = ["web_new_incident_form"]

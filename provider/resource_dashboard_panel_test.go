@@ -25,7 +25,7 @@ func TestAccResourceDashboardPanel(t *testing.T) {
 
 const testAccResourceDashboardPanel = `
 resource "rootly_dashboard" "foo" {
-  name = "mydashboard_panel"
+  name = "my-dashboard-with-panel"
 }
 
 resource "rootly_dashboard_panel" "foo" {

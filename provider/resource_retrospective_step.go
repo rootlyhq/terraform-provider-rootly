@@ -81,7 +81,7 @@ func resourceRetrospectiveStep() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
-				Description: "Is the step skippable?",
+				Description: "Is the step skippable?. Value must be one of true or false",
 			},
 		},
 	}

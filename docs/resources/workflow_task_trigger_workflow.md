@@ -71,5 +71,5 @@ Required:
 
 Optional:
 
-- `check_workflow_conditions` (Boolean)
+- `check_workflow_conditions` (Boolean) Value must be one of true or false
 - `task_type` (String)

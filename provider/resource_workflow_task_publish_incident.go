@@ -107,12 +107,12 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 							}, false),
 						},
 						"notify_subscribers": &schema.Schema{
-							Description: "When true notifies subscribers of the status page by email/text",
+							Description: "When true notifies subscribers of the status page by email/text. Value must be one of true or false",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},
 						"should_tweet": &schema.Schema{
-							Description: "For StatusPage.io integrated pages auto publishes a tweet for your update",
+							Description: "For StatusPage.io integrated pages auto publishes a tweet for your update. Value must be one of true or false",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},

@@ -28,7 +28,7 @@ func resourceFormField() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "The kind of the form field. Value must be one of `custom`, `title`, `summary`, `severity`, `environments`, `types`, `services`, `functionalities`, `teams`, `visibility`, `mark_as_test`, `mark_as_backfilled`, `labels`, `notify_emails`, `trigger_manual_workflows`, `show_ongoing_incidents`, `attach_alerts`, `mark_as_in_triage`, `manual_starting_datetime_field`.",
+				Description: "The kind of the form field. Value must be one of `custom`, `title`, `summary`, `severity`, `environments`, `types`, `services`, `causes`, `functionalities`, `teams`, `visibility`, `mark_as_test`, `mark_as_backfilled`, `labels`, `notify_emails`, `trigger_manual_workflows`, `show_ongoing_incidents`, `attach_alerts`, `mark_as_in_triage`, `manual_starting_datetime_field`.",
 			},
 
 			"input_kind": &schema.Schema{

@@ -58,7 +58,7 @@ func resourceWorkflowPostMortem() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
-				Description: "This will notify you back when the workflow is starting",
+				Description: "This will notify you back when the workflow is starting. Value must be one of true or false",
 			},
 
 			"wait": &schema.Schema{
@@ -135,7 +135,7 @@ func resourceWorkflowPostMortem() *schema.Resource {
 							Computed:         true,
 							Required:         false,
 							Optional:         true,
-							Description:      "Actions that trigger the workflow. One of custom_fields.<slug>.updated, post_mortem_created, post_mortem_updated, status_updated, causes_updated, slack_command",
+							Description:      "Actions that trigger the workflow. One of custom_fields.<slug>.updated, post_mortem_created, post_mortem_updated, status_updated, slack_command",
 						},
 
 						"incident_visibilities": &schema.Schema{
@@ -270,6 +270,22 @@ func resourceWorkflowPostMortem() *schema.Resource {
 							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
+						"incident_condition_cause": &schema.Schema{
+							Type:        schema.TypeString,
+							Default:     "ANY",
+							Required:    false,
+							Optional:    true,
+							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+						},
+
+						"incident_post_mortem_condition_cause": &schema.Schema{
+							Type:        schema.TypeString,
+							Default:     "ANY",
+							Required:    false,
+							Optional:    true,
+							Description: "[DEPRECATED] Use incident_condition_cause instead. Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+						},
+
 						"incident_condition_summary": &schema.Schema{
 							Type:        schema.TypeString,
 							Computed:    true,
@@ -352,26 +368,6 @@ func resourceWorkflowPostMortem() *schema.Resource {
 							Required:         false,
 							Optional:         true,
 							Description:      "Value must be one of `draft`, `published`.",
-						},
-
-						"incident_post_mortem_condition_cause": &schema.Schema{
-							Type:        schema.TypeString,
-							Default:     "ANY",
-							Required:    false,
-							Optional:    true,
-							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
-						},
-
-						"incident_post_mortem_cause_ids": &schema.Schema{
-							Type: schema.TypeList,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-							DiffSuppressFunc: tools.EqualIgnoringOrder,
-							Computed:         true,
-							Required:         false,
-							Optional:         true,
-							Description:      "",
 						},
 					},
 				},
@@ -462,6 +458,18 @@ func resourceWorkflowPostMortem() *schema.Resource {
 				Optional:         true,
 				Description:      "",
 			},
+
+			"cause_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
+			},
 		},
 	}
 }
@@ -530,6 +538,9 @@ func resourceWorkflowPostMortemCreate(ctx context.Context, d *schema.ResourceDat
 	if value, ok := d.GetOkExists("group_ids"); ok {
 		s.GroupIds = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("cause_ids"); ok {
+		s.CauseIds = value.([]interface{})
+	}
 
 	res, err := c.CreateWorkflow(s)
 	if err != nil {
@@ -582,6 +593,7 @@ func resourceWorkflowPostMortemRead(ctx context.Context, d *schema.ResourceData,
 	d.Set("service_ids", item.ServiceIds)
 	d.Set("functionality_ids", item.FunctionalityIds)
 	d.Set("group_ids", item.GroupIds)
+	d.Set("cause_ids", item.CauseIds)
 
 	return nil
 }
@@ -652,6 +664,9 @@ func resourceWorkflowPostMortemUpdate(ctx context.Context, d *schema.ResourceDat
 	}
 	if d.HasChange("group_ids") {
 		s.GroupIds = d.Get("group_ids").([]interface{})
+	}
+	if d.HasChange("cause_ids") {
+		s.CauseIds = d.Get("cause_ids").([]interface{})
 	}
 
 	_, err := c.UpdateWorkflow(d.Id(), s)

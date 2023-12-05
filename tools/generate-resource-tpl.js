@@ -242,6 +242,12 @@ function annotatedDescription(schema) {
       .map((val) => `\`${val}\``)
       .join(", ")}.`;
   }
+
+  if (schema.type === "boolean") {
+    return `${
+      !!description ? `${description}. ` : ""
+    }Value must be one of true or false`;
+  }
   return description;
 }
 

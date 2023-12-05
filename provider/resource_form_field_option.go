@@ -54,7 +54,7 @@ func resourceFormFieldOption() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
-				Description: "",
+				Description: "Value must be one of true or false",
 			},
 
 			"position": &schema.Schema{

@@ -32,8 +32,9 @@ resource "rootly_workflow_pulse" "my-workflow" {
 
 ### Optional
 
+- `cause_ids` (List of String)
 - `command` (String) Workflow command
-- `command_feedback_enabled` (Boolean) This will notify you back when the workflow is starting
+- `command_feedback_enabled` (Boolean) This will notify you back when the workflow is starting. Value must be one of true or false
 - `description` (String) The description of the workflow
 - `enabled` (Boolean)
 - `environment_ids` (List of String)
@@ -62,11 +63,11 @@ Optional:
 
 - `pulse_condition` (String) Value must be one off `ALL`, `ANY`, `NONE`.
 - `pulse_condition_label` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
-- `pulse_condition_label_use_regexp` (Boolean)
+- `pulse_condition_label_use_regexp` (Boolean) Value must be one of true or false
 - `pulse_condition_payload` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
-- `pulse_condition_payload_use_regexp` (Boolean)
+- `pulse_condition_payload_use_regexp` (Boolean) Value must be one of true or false
 - `pulse_condition_source` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
-- `pulse_condition_source_use_regexp` (Boolean)
+- `pulse_condition_source_use_regexp` (Boolean) Value must be one of true or false
 - `pulse_labels` (List of String)
 - `pulse_payload` (List of String)
 - `pulse_query_payload` (String) You can use jsonpath syntax. eg: $.incident.teams[*]

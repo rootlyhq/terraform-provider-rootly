@@ -58,7 +58,7 @@ func resourceWorkflowIncident() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
-				Description: "This will notify you back when the workflow is starting",
+				Description: "This will notify you back when the workflow is starting. Value must be one of true or false",
 			},
 
 			"wait": &schema.Schema{
@@ -135,7 +135,7 @@ func resourceWorkflowIncident() *schema.Resource {
 							Computed:         true,
 							Required:         false,
 							Optional:         true,
-							Description:      "Actions that trigger the workflow. One of custom_fields.<slug>.updated, incident_in_triage, incident_created, incident_started, incident_updated, title_updated, summary_updated, status_updated, severity_updated, environments_added, environments_removed, environments_updated, incident_types_added, incident_types_removed, incident_types_updated, services_added, services_removed, services_updated, functionalities_added, functionalities_removed, functionalities_updated, teams_added, teams_removed, teams_updated, timeline_updated, status_page_timeline_updated, role_assignments_updated, role_assignments_added, role_assignments_removed, slack_command, slack_channel_created, slack_channel_converted, subscribers_updated, subscribers_added, subscribers_removed, user_joined_slack_channel, user_left_slack_channel",
+							Description:      "Actions that trigger the workflow. One of custom_fields.<slug>.updated, incident_in_triage, incident_created, incident_started, incident_updated, title_updated, summary_updated, status_updated, severity_updated, environments_added, environments_removed, environments_updated, incident_types_added, incident_types_removed, incident_types_updated, services_added, services_removed, services_updated, functionalities_added, functionalities_removed, functionalities_updated, teams_added, teams_removed, teams_updated, causes_added, causes_removed, causes_updated, timeline_updated, status_page_timeline_updated, role_assignments_updated, role_assignments_added, role_assignments_removed, slack_command, slack_channel_created, slack_channel_converted, subscribers_updated, subscribers_added, subscribers_removed, user_joined_slack_channel, user_left_slack_channel",
 						},
 
 						"incident_visibilities": &schema.Schema{
@@ -268,6 +268,22 @@ func resourceWorkflowIncident() *schema.Resource {
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+						},
+
+						"incident_condition_cause": &schema.Schema{
+							Type:        schema.TypeString,
+							Default:     "ANY",
+							Required:    false,
+							Optional:    true,
+							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+						},
+
+						"incident_post_mortem_condition_cause": &schema.Schema{
+							Type:        schema.TypeString,
+							Default:     "ANY",
+							Required:    false,
+							Optional:    true,
+							Description: "[DEPRECATED] Use incident_condition_cause instead. Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"incident_condition_summary": &schema.Schema{
@@ -414,6 +430,18 @@ func resourceWorkflowIncident() *schema.Resource {
 				Optional:         true,
 				Description:      "",
 			},
+
+			"cause_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
+			},
 		},
 	}
 }
@@ -482,6 +510,9 @@ func resourceWorkflowIncidentCreate(ctx context.Context, d *schema.ResourceData,
 	if value, ok := d.GetOkExists("group_ids"); ok {
 		s.GroupIds = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("cause_ids"); ok {
+		s.CauseIds = value.([]interface{})
+	}
 
 	res, err := c.CreateWorkflow(s)
 	if err != nil {
@@ -534,6 +565,7 @@ func resourceWorkflowIncidentRead(ctx context.Context, d *schema.ResourceData, m
 	d.Set("service_ids", item.ServiceIds)
 	d.Set("functionality_ids", item.FunctionalityIds)
 	d.Set("group_ids", item.GroupIds)
+	d.Set("cause_ids", item.CauseIds)
 
 	return nil
 }
@@ -604,6 +636,9 @@ func resourceWorkflowIncidentUpdate(ctx context.Context, d *schema.ResourceData,
 	}
 	if d.HasChange("group_ids") {
 		s.GroupIds = d.Get("group_ids").([]interface{})
+	}
+	if d.HasChange("cause_ids") {
+		s.CauseIds = d.Get("cause_ids").([]interface{})
 	}
 
 	_, err := c.UpdateWorkflow(d.Id(), s)

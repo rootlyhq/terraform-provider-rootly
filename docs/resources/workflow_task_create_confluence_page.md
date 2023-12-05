@@ -43,7 +43,7 @@ Optional:
 - `ancestor` (Map of String) Map must contain two fields, `id` and `name`.
 - `content` (String) The page content
 - `integration` (Map of String) Map must contain two fields, `id` and `name`. Specify integration id if you have more than one Confluence instance
-- `mark_post_mortem_as_published` (Boolean)
+- `mark_post_mortem_as_published` (Boolean) Value must be one of true or false
 - `post_mortem_template_id` (String) The Retrospective template to use
 - `task_type` (String)
 - `template` (Map of String) Map must contain two fields, `id` and `name`.
