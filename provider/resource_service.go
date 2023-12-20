@@ -201,10 +201,11 @@ func resourceService() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeInt,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Owner Users associated with this service",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Owner Users associated with this service",
 			},
 
 			"slack_channels": &schema.Schema{

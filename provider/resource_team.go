@@ -120,10 +120,11 @@ func resourceTeam() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeInt,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "The User ID's members of this team",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "The User ID's members of this team",
 			},
 
 			"slack_channels": &schema.Schema{
