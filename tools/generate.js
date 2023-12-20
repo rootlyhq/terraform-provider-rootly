@@ -9,65 +9,83 @@ const dataSourceTpl = require("./generate-data-source-tpl");
 const resourceTpl = require("./generate-resource-tpl");
 const resourceTestTpl = require("./generate-resource-test-tpl");
 const workflowTpl = require("./generate-workflow-tpl");
-const generateTasks = require("./generate-tasks");
+const generateWorkflowTaskResources = require("./generate-tasks");
 const swagger = require(path.resolve(swaggerPath));
 
-const excluded = [
-  "ip_ranges",
-  "dashboard",
-  "dashboard_panel",
-  "workflow_task",
-  "workflow_run",
-  "incident_action_item",
-  "incident_event",
-  "incident_feedback",
-  "incident_custom_field_selection",
-  "incident_form_field_selection",
-  "pulse",
-  "alert",
-  "custom_field",
-  "custom_field_option",
-  "webhooks_delivery",
-  "audit",
-  "incident_event_functionality",
-  "incident_event_service",
-];
+const excluded = {
+  dataSources: [
+    "alert",
+    "audit",
+    "custom_field",
+    "custom_field_option",
+    "dashboard",
+    "dashboard_panel",
+    "incident_action_item",
+    "incident_custom_field_selection",
+    "incident_event",
+    "incident_event_functionality",
+    "incident_event_service",
+    "incident_feedback",
+    "incident_form_field_selection",
+    "ip_ranges",
+    "pulse",
+    "webhooks_delivery",
+    "workflow_run",
+    "workflow_task",
+  ],
+  resources: [
+    "alert",
+    "audit",
+    "custom_field",
+    "custom_field_option",
+    "dashboard",
+    "dashboard_panel",
+    "incident",
+    "incident_action_item",
+    "incident_custom_field_selection",
+    "incident_event",
+    "incident_event_functionality",
+    "incident_event_service",
+    "incident_feedback",
+    "incident_form_field_selection",
+    "incident_post_mortem",
+    "ip_ranges",
+    "pulse",
+    "user",
+    "webhooks_delivery",
+    "workflow_run",
+    "workflow_task",
+  ],
+}
 
-const excluded_resources = [
-  "user",
-  "incident",
-  "incident_post_mortem"
-];
+function main() {
+  generateProvider(resources(), workflowTaskResources(), dataSources())
+  generateClients()
+  generateResources()
+  generateWorkflowTaskResources(workflowTaskResources(), swagger)
+  generateResourceTests()
+  generateDataSources()
+}
 
-console.log(`Excluding resource from generation:`, excluded.concat(excluded_resources));
+main()
 
-const all_resources = Object.keys(swagger.components.schemas).filter((name) => {
-  return excluded.indexOf(name) === -1 && collectionPathSchema(name);
-});
+function resources() {
+  return Object.keys(swagger.components.schemas).filter((name) => {
+    return !excluded.resources.includes(name) && collectionPathSchema(name);
+  });
+}
 
-const resources = Object.keys(swagger.components.schemas).filter((name) => {
-  return excluded.concat(excluded_resources).indexOf(name) === -1 && collectionPathSchema(name);
-});
+function dataSources() {
+  return Object.keys(swagger.components.schemas).filter((name) => {
+    return !excluded.dataSources.includes(name) && collectionPathSchema(name) && resourceHasFilters(name);
+  });
+}
 
-const dataSources = all_resources.filter(resourceHasFilters);
-const taskResources = generateTasks(swagger);
-
-generateProvider(resources, taskResources, dataSources);
-
-all_resources.forEach((name) => {
-  if (name == 'user' || name == 'incident_post_mortem') {
-    generateReadOnlyClient(name);
-  } else {
-    generateClient(name);
-  }
-});
-
-resources.forEach((name) => {
-  generateResource(name);
-  generateResourceTest(name);
-});
-
-dataSources.forEach(generateDataSource);
+function workflowTaskResources() {
+  return Object.keys(swagger.components.schemas)
+    .filter((key) => key.match(/_task_params/))
+    .map((key) => key.replace("_task_params", ""))
+}
 
 function generateProvider(resources, taskResources, dataSources) {
   const code = providerTpl(
@@ -79,6 +97,25 @@ function generateProvider(resources, taskResources, dataSources) {
     path.resolve(__dirname, "..", "provider", "provider.go"),
     code
   );
+}
+
+function generateClients() {
+  resources().forEach(generateClient)
+  dataSources()
+    .filter((name) => !resources().includes(name))
+    .forEach(generateReadOnlyClient)
+}
+
+function generateResources() {
+  resources().forEach(generateResource)
+}
+
+function generateResourceTests() {
+  resources().forEach(generateResourceTest)
+}
+
+function generateDataSources() {
+  dataSources().forEach(generateDataSource)
 }
 
 function generateReadOnlyClient(name) {

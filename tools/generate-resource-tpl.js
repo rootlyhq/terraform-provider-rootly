@@ -379,6 +379,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 					Elem: &schema.Schema {
 						Type: schema.TypeInt,
 					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
 					Computed: ${optional},
 					Required: ${required},
 					Optional: ${optional},
@@ -393,6 +394,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 					Elem: &schema.Schema {
 						Type: schema.TypeInt,
 					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
 					Computed: ${optional},
 					Required: ${required},
 					Optional: ${optional},
