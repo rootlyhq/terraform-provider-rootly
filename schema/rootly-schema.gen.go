@@ -479,6 +479,73 @@ const (
 	Audits AuditsListDataType = "audits"
 )
 
+// Defines values for AuthorizationAuthorizableType.
+const (
+	AuthorizationAuthorizableTypeDashboard AuthorizationAuthorizableType = "Dashboard"
+)
+
+// Defines values for AuthorizationGranteeType.
+const (
+	AuthorizationGranteeTypeTeam AuthorizationGranteeType = "Team"
+	AuthorizationGranteeTypeUser AuthorizationGranteeType = "User"
+)
+
+// Defines values for AuthorizationPermissions.
+const (
+	AuthorizationPermissionsAuthorize AuthorizationPermissions = "authorize"
+	AuthorizationPermissionsDestroy   AuthorizationPermissions = "destroy"
+	AuthorizationPermissionsRead      AuthorizationPermissions = "read"
+	AuthorizationPermissionsUpdate    AuthorizationPermissions = "update"
+)
+
+// Defines values for AuthorizationListDataAttributesAuthorizableType.
+const (
+	AuthorizationListDataAttributesAuthorizableTypeDashboard AuthorizationListDataAttributesAuthorizableType = "Dashboard"
+)
+
+// Defines values for AuthorizationListDataAttributesGranteeType.
+const (
+	AuthorizationListDataAttributesGranteeTypeTeam AuthorizationListDataAttributesGranteeType = "Team"
+	AuthorizationListDataAttributesGranteeTypeUser AuthorizationListDataAttributesGranteeType = "User"
+)
+
+// Defines values for AuthorizationListDataAttributesPermissions.
+const (
+	AuthorizationListDataAttributesPermissionsAuthorize AuthorizationListDataAttributesPermissions = "authorize"
+	AuthorizationListDataAttributesPermissionsDestroy   AuthorizationListDataAttributesPermissions = "destroy"
+	AuthorizationListDataAttributesPermissionsRead      AuthorizationListDataAttributesPermissions = "read"
+	AuthorizationListDataAttributesPermissionsUpdate    AuthorizationListDataAttributesPermissions = "update"
+)
+
+// Defines values for AuthorizationListDataType.
+const (
+	AuthorizationListDataTypeAuthorizations AuthorizationListDataType = "authorizations"
+)
+
+// Defines values for AuthorizationResponseDataAttributesAuthorizableType.
+const (
+	AuthorizationResponseDataAttributesAuthorizableTypeDashboard AuthorizationResponseDataAttributesAuthorizableType = "Dashboard"
+)
+
+// Defines values for AuthorizationResponseDataAttributesGranteeType.
+const (
+	AuthorizationResponseDataAttributesGranteeTypeTeam AuthorizationResponseDataAttributesGranteeType = "Team"
+	AuthorizationResponseDataAttributesGranteeTypeUser AuthorizationResponseDataAttributesGranteeType = "User"
+)
+
+// Defines values for AuthorizationResponseDataAttributesPermissions.
+const (
+	AuthorizationResponseDataAttributesPermissionsAuthorize AuthorizationResponseDataAttributesPermissions = "authorize"
+	AuthorizationResponseDataAttributesPermissionsDestroy   AuthorizationResponseDataAttributesPermissions = "destroy"
+	AuthorizationResponseDataAttributesPermissionsRead      AuthorizationResponseDataAttributesPermissions = "read"
+	AuthorizationResponseDataAttributesPermissionsUpdate    AuthorizationResponseDataAttributesPermissions = "update"
+)
+
+// Defines values for AuthorizationResponseDataType.
+const (
+	AuthorizationResponseDataTypeAuthorizations AuthorizationResponseDataType = "authorizations"
+)
+
 // Defines values for AutoAssignRoleOpsgenieTaskParamsTaskType.
 const (
 	AutoAssignRoleOpsgenie AutoAssignRoleOpsgenieTaskParamsTaskType = "auto_assign_role_opsgenie"
@@ -1843,6 +1910,138 @@ const (
 	IncidentListDataTypeIncidents IncidentListDataType = "incidents"
 )
 
+// Defines values for IncidentPermissionSetPrivateIncidentPermissions.
+const (
+	IncidentPermissionSetPrivateIncidentPermissionsCreate IncidentPermissionSetPrivateIncidentPermissions = "create"
+	IncidentPermissionSetPrivateIncidentPermissionsDelete IncidentPermissionSetPrivateIncidentPermissions = "delete"
+	IncidentPermissionSetPrivateIncidentPermissionsRead   IncidentPermissionSetPrivateIncidentPermissions = "read"
+	IncidentPermissionSetPrivateIncidentPermissionsUpdate IncidentPermissionSetPrivateIncidentPermissions = "update"
+)
+
+// Defines values for IncidentPermissionSetPublicIncidentPermissions.
+const (
+	IncidentPermissionSetPublicIncidentPermissionsCreate IncidentPermissionSetPublicIncidentPermissions = "create"
+	IncidentPermissionSetPublicIncidentPermissionsDelete IncidentPermissionSetPublicIncidentPermissions = "delete"
+	IncidentPermissionSetPublicIncidentPermissionsRead   IncidentPermissionSetPublicIncidentPermissions = "read"
+	IncidentPermissionSetPublicIncidentPermissionsUpdate IncidentPermissionSetPublicIncidentPermissions = "update"
+)
+
+// Defines values for IncidentPermissionSetBooleanKind.
+const (
+	IncidentPermissionSetBooleanKindAssignIncidentRoles IncidentPermissionSetBooleanKind = "assign_incident_roles"
+	IncidentPermissionSetBooleanKindInviteSubscribers   IncidentPermissionSetBooleanKind = "invite_subscribers"
+	IncidentPermissionSetBooleanKindModifyCustomFields  IncidentPermissionSetBooleanKind = "modify_custom_fields"
+	IncidentPermissionSetBooleanKindPublishToStatusPage IncidentPermissionSetBooleanKind = "publish_to_status_page"
+	IncidentPermissionSetBooleanKindTriggerWorkflows    IncidentPermissionSetBooleanKind = "trigger_workflows"
+	IncidentPermissionSetBooleanKindUpdateSummary       IncidentPermissionSetBooleanKind = "update_summary"
+	IncidentPermissionSetBooleanKindUpdateTimeline      IncidentPermissionSetBooleanKind = "update_timeline"
+)
+
+// Defines values for IncidentPermissionSetBooleanListDataAttributesKind.
+const (
+	IncidentPermissionSetBooleanListDataAttributesKindAssignIncidentRoles IncidentPermissionSetBooleanListDataAttributesKind = "assign_incident_roles"
+	IncidentPermissionSetBooleanListDataAttributesKindInviteSubscribers   IncidentPermissionSetBooleanListDataAttributesKind = "invite_subscribers"
+	IncidentPermissionSetBooleanListDataAttributesKindModifyCustomFields  IncidentPermissionSetBooleanListDataAttributesKind = "modify_custom_fields"
+	IncidentPermissionSetBooleanListDataAttributesKindPublishToStatusPage IncidentPermissionSetBooleanListDataAttributesKind = "publish_to_status_page"
+	IncidentPermissionSetBooleanListDataAttributesKindTriggerWorkflows    IncidentPermissionSetBooleanListDataAttributesKind = "trigger_workflows"
+	IncidentPermissionSetBooleanListDataAttributesKindUpdateSummary       IncidentPermissionSetBooleanListDataAttributesKind = "update_summary"
+	IncidentPermissionSetBooleanListDataAttributesKindUpdateTimeline      IncidentPermissionSetBooleanListDataAttributesKind = "update_timeline"
+)
+
+// Defines values for IncidentPermissionSetBooleanListDataType.
+const (
+	IncidentPermissionSetBooleanListDataTypeIncidentPermissionSetBooleans IncidentPermissionSetBooleanListDataType = "incident_permission_set_booleans"
+)
+
+// Defines values for IncidentPermissionSetBooleanResponseDataAttributesKind.
+const (
+	IncidentPermissionSetBooleanResponseDataAttributesKindAssignIncidentRoles IncidentPermissionSetBooleanResponseDataAttributesKind = "assign_incident_roles"
+	IncidentPermissionSetBooleanResponseDataAttributesKindInviteSubscribers   IncidentPermissionSetBooleanResponseDataAttributesKind = "invite_subscribers"
+	IncidentPermissionSetBooleanResponseDataAttributesKindModifyCustomFields  IncidentPermissionSetBooleanResponseDataAttributesKind = "modify_custom_fields"
+	IncidentPermissionSetBooleanResponseDataAttributesKindPublishToStatusPage IncidentPermissionSetBooleanResponseDataAttributesKind = "publish_to_status_page"
+	IncidentPermissionSetBooleanResponseDataAttributesKindTriggerWorkflows    IncidentPermissionSetBooleanResponseDataAttributesKind = "trigger_workflows"
+	IncidentPermissionSetBooleanResponseDataAttributesKindUpdateSummary       IncidentPermissionSetBooleanResponseDataAttributesKind = "update_summary"
+	IncidentPermissionSetBooleanResponseDataAttributesKindUpdateTimeline      IncidentPermissionSetBooleanResponseDataAttributesKind = "update_timeline"
+)
+
+// Defines values for IncidentPermissionSetBooleanResponseDataType.
+const (
+	IncidentPermissionSetBooleanResponseDataTypeIncidentPermissionSetBooleans IncidentPermissionSetBooleanResponseDataType = "incident_permission_set_booleans"
+)
+
+// Defines values for IncidentPermissionSetListDataAttributesPrivateIncidentPermissions.
+const (
+	IncidentPermissionSetListDataAttributesPrivateIncidentPermissionsCreate IncidentPermissionSetListDataAttributesPrivateIncidentPermissions = "create"
+	IncidentPermissionSetListDataAttributesPrivateIncidentPermissionsDelete IncidentPermissionSetListDataAttributesPrivateIncidentPermissions = "delete"
+	IncidentPermissionSetListDataAttributesPrivateIncidentPermissionsRead   IncidentPermissionSetListDataAttributesPrivateIncidentPermissions = "read"
+	IncidentPermissionSetListDataAttributesPrivateIncidentPermissionsUpdate IncidentPermissionSetListDataAttributesPrivateIncidentPermissions = "update"
+)
+
+// Defines values for IncidentPermissionSetListDataAttributesPublicIncidentPermissions.
+const (
+	IncidentPermissionSetListDataAttributesPublicIncidentPermissionsCreate IncidentPermissionSetListDataAttributesPublicIncidentPermissions = "create"
+	IncidentPermissionSetListDataAttributesPublicIncidentPermissionsDelete IncidentPermissionSetListDataAttributesPublicIncidentPermissions = "delete"
+	IncidentPermissionSetListDataAttributesPublicIncidentPermissionsRead   IncidentPermissionSetListDataAttributesPublicIncidentPermissions = "read"
+	IncidentPermissionSetListDataAttributesPublicIncidentPermissionsUpdate IncidentPermissionSetListDataAttributesPublicIncidentPermissions = "update"
+)
+
+// Defines values for IncidentPermissionSetListDataType.
+const (
+	IncidentPermissionSetListDataTypeIncidentPermissionSets IncidentPermissionSetListDataType = "incident_permission_sets"
+)
+
+// Defines values for IncidentPermissionSetResourceKind.
+const (
+	IncidentPermissionSetResourceKindIncidentTypes IncidentPermissionSetResourceKind = "incident_types"
+	IncidentPermissionSetResourceKindSeverities    IncidentPermissionSetResourceKind = "severities"
+	IncidentPermissionSetResourceKindStatuses      IncidentPermissionSetResourceKind = "statuses"
+)
+
+// Defines values for IncidentPermissionSetResourceListDataAttributesKind.
+const (
+	IncidentPermissionSetResourceListDataAttributesKindIncidentTypes IncidentPermissionSetResourceListDataAttributesKind = "incident_types"
+	IncidentPermissionSetResourceListDataAttributesKindSeverities    IncidentPermissionSetResourceListDataAttributesKind = "severities"
+	IncidentPermissionSetResourceListDataAttributesKindStatuses      IncidentPermissionSetResourceListDataAttributesKind = "statuses"
+)
+
+// Defines values for IncidentPermissionSetResourceListDataType.
+const (
+	IncidentPermissionSetResourceListDataTypeIncidentPermissionSetResources IncidentPermissionSetResourceListDataType = "incident_permission_set_resources"
+)
+
+// Defines values for IncidentPermissionSetResourceResponseDataAttributesKind.
+const (
+	IncidentPermissionSetResourceResponseDataAttributesKindIncidentTypes IncidentPermissionSetResourceResponseDataAttributesKind = "incident_types"
+	IncidentPermissionSetResourceResponseDataAttributesKindSeverities    IncidentPermissionSetResourceResponseDataAttributesKind = "severities"
+	IncidentPermissionSetResourceResponseDataAttributesKindStatuses      IncidentPermissionSetResourceResponseDataAttributesKind = "statuses"
+)
+
+// Defines values for IncidentPermissionSetResourceResponseDataType.
+const (
+	IncidentPermissionSetResourceResponseDataTypeIncidentPermissionSetResources IncidentPermissionSetResourceResponseDataType = "incident_permission_set_resources"
+)
+
+// Defines values for IncidentPermissionSetResponseDataAttributesPrivateIncidentPermissions.
+const (
+	IncidentPermissionSetResponseDataAttributesPrivateIncidentPermissionsCreate IncidentPermissionSetResponseDataAttributesPrivateIncidentPermissions = "create"
+	IncidentPermissionSetResponseDataAttributesPrivateIncidentPermissionsDelete IncidentPermissionSetResponseDataAttributesPrivateIncidentPermissions = "delete"
+	IncidentPermissionSetResponseDataAttributesPrivateIncidentPermissionsRead   IncidentPermissionSetResponseDataAttributesPrivateIncidentPermissions = "read"
+	IncidentPermissionSetResponseDataAttributesPrivateIncidentPermissionsUpdate IncidentPermissionSetResponseDataAttributesPrivateIncidentPermissions = "update"
+)
+
+// Defines values for IncidentPermissionSetResponseDataAttributesPublicIncidentPermissions.
+const (
+	IncidentPermissionSetResponseDataAttributesPublicIncidentPermissionsCreate IncidentPermissionSetResponseDataAttributesPublicIncidentPermissions = "create"
+	IncidentPermissionSetResponseDataAttributesPublicIncidentPermissionsDelete IncidentPermissionSetResponseDataAttributesPublicIncidentPermissions = "delete"
+	IncidentPermissionSetResponseDataAttributesPublicIncidentPermissionsRead   IncidentPermissionSetResponseDataAttributesPublicIncidentPermissions = "read"
+	IncidentPermissionSetResponseDataAttributesPublicIncidentPermissionsUpdate IncidentPermissionSetResponseDataAttributesPublicIncidentPermissions = "update"
+)
+
+// Defines values for IncidentPermissionSetResponseDataType.
+const (
+	IncidentPermissionSetResponseDataTypeIncidentPermissionSets IncidentPermissionSetResponseDataType = "incident_permission_sets"
+)
+
 // Defines values for IncidentPostMortemShowTimelineOrder.
 const (
 	IncidentPostMortemShowTimelineOrderAsc  IncidentPostMortemShowTimelineOrder = "asc"
@@ -2264,6 +2463,30 @@ const (
 	Alerts NewAlertDataType = "alerts"
 )
 
+// Defines values for NewAuthorizationDataAttributesAuthorizableType.
+const (
+	NewAuthorizationDataAttributesAuthorizableTypeDashboard NewAuthorizationDataAttributesAuthorizableType = "Dashboard"
+)
+
+// Defines values for NewAuthorizationDataAttributesGranteeType.
+const (
+	NewAuthorizationDataAttributesGranteeTypeTeam NewAuthorizationDataAttributesGranteeType = "Team"
+	NewAuthorizationDataAttributesGranteeTypeUser NewAuthorizationDataAttributesGranteeType = "User"
+)
+
+// Defines values for NewAuthorizationDataAttributesPermissions.
+const (
+	NewAuthorizationDataAttributesPermissionsAuthorize NewAuthorizationDataAttributesPermissions = "authorize"
+	NewAuthorizationDataAttributesPermissionsDestroy   NewAuthorizationDataAttributesPermissions = "destroy"
+	NewAuthorizationDataAttributesPermissionsRead      NewAuthorizationDataAttributesPermissions = "read"
+	NewAuthorizationDataAttributesPermissionsUpdate    NewAuthorizationDataAttributesPermissions = "update"
+)
+
+// Defines values for NewAuthorizationDataType.
+const (
+	NewAuthorizationDataTypeAuthorizations NewAuthorizationDataType = "authorizations"
+)
+
 // Defines values for NewCauseDataType.
 const (
 	NewCauseDataTypeCauses NewCauseDataType = "causes"
@@ -2586,6 +2809,55 @@ const (
 	NewIncidentFormFieldSelectionDataTypeIncidentFormFieldSelections NewIncidentFormFieldSelectionDataType = "incident_form_field_selections"
 )
 
+// Defines values for NewIncidentPermissionSetDataAttributesPrivateIncidentPermissions.
+const (
+	NewIncidentPermissionSetDataAttributesPrivateIncidentPermissionsCreate NewIncidentPermissionSetDataAttributesPrivateIncidentPermissions = "create"
+	NewIncidentPermissionSetDataAttributesPrivateIncidentPermissionsDelete NewIncidentPermissionSetDataAttributesPrivateIncidentPermissions = "delete"
+	NewIncidentPermissionSetDataAttributesPrivateIncidentPermissionsRead   NewIncidentPermissionSetDataAttributesPrivateIncidentPermissions = "read"
+	NewIncidentPermissionSetDataAttributesPrivateIncidentPermissionsUpdate NewIncidentPermissionSetDataAttributesPrivateIncidentPermissions = "update"
+)
+
+// Defines values for NewIncidentPermissionSetDataAttributesPublicIncidentPermissions.
+const (
+	NewIncidentPermissionSetDataAttributesPublicIncidentPermissionsCreate NewIncidentPermissionSetDataAttributesPublicIncidentPermissions = "create"
+	NewIncidentPermissionSetDataAttributesPublicIncidentPermissionsDelete NewIncidentPermissionSetDataAttributesPublicIncidentPermissions = "delete"
+	NewIncidentPermissionSetDataAttributesPublicIncidentPermissionsRead   NewIncidentPermissionSetDataAttributesPublicIncidentPermissions = "read"
+	NewIncidentPermissionSetDataAttributesPublicIncidentPermissionsUpdate NewIncidentPermissionSetDataAttributesPublicIncidentPermissions = "update"
+)
+
+// Defines values for NewIncidentPermissionSetDataType.
+const (
+	NewIncidentPermissionSetDataTypeIncidentPermissionSets NewIncidentPermissionSetDataType = "incident_permission_sets"
+)
+
+// Defines values for NewIncidentPermissionSetBooleanDataAttributesKind.
+const (
+	NewIncidentPermissionSetBooleanDataAttributesKindAssignIncidentRoles NewIncidentPermissionSetBooleanDataAttributesKind = "assign_incident_roles"
+	NewIncidentPermissionSetBooleanDataAttributesKindInviteSubscribers   NewIncidentPermissionSetBooleanDataAttributesKind = "invite_subscribers"
+	NewIncidentPermissionSetBooleanDataAttributesKindModifyCustomFields  NewIncidentPermissionSetBooleanDataAttributesKind = "modify_custom_fields"
+	NewIncidentPermissionSetBooleanDataAttributesKindPublishToStatusPage NewIncidentPermissionSetBooleanDataAttributesKind = "publish_to_status_page"
+	NewIncidentPermissionSetBooleanDataAttributesKindTriggerWorkflows    NewIncidentPermissionSetBooleanDataAttributesKind = "trigger_workflows"
+	NewIncidentPermissionSetBooleanDataAttributesKindUpdateSummary       NewIncidentPermissionSetBooleanDataAttributesKind = "update_summary"
+	NewIncidentPermissionSetBooleanDataAttributesKindUpdateTimeline      NewIncidentPermissionSetBooleanDataAttributesKind = "update_timeline"
+)
+
+// Defines values for NewIncidentPermissionSetBooleanDataType.
+const (
+	NewIncidentPermissionSetBooleanDataTypeIncidentPermissionSetBooleans NewIncidentPermissionSetBooleanDataType = "incident_permission_set_booleans"
+)
+
+// Defines values for NewIncidentPermissionSetResourceDataAttributesKind.
+const (
+	NewIncidentPermissionSetResourceDataAttributesKindIncidentTypes NewIncidentPermissionSetResourceDataAttributesKind = "incident_types"
+	NewIncidentPermissionSetResourceDataAttributesKindSeverities    NewIncidentPermissionSetResourceDataAttributesKind = "severities"
+	NewIncidentPermissionSetResourceDataAttributesKindStatuses      NewIncidentPermissionSetResourceDataAttributesKind = "statuses"
+)
+
+// Defines values for NewIncidentPermissionSetResourceDataType.
+const (
+	NewIncidentPermissionSetResourceDataTypeIncidentPermissionSetResources NewIncidentPermissionSetResourceDataType = "incident_permission_set_resources"
+)
+
 // Defines values for NewIncidentRoleDataType.
 const (
 	NewIncidentRoleDataTypeIncidentRoles NewIncidentRoleDataType = "incident_roles"
@@ -2654,6 +2926,203 @@ const (
 // Defines values for NewRetrospectiveStepDataType.
 const (
 	NewRetrospectiveStepDataTypeRetrospectiveSteps NewRetrospectiveStepDataType = "retrospective_steps"
+)
+
+// Defines values for NewRoleDataAttributesApiKeysPermissions.
+const (
+	NewRoleDataAttributesApiKeysPermissionsCreate NewRoleDataAttributesApiKeysPermissions = "create"
+	NewRoleDataAttributesApiKeysPermissionsDelete NewRoleDataAttributesApiKeysPermissions = "delete"
+	NewRoleDataAttributesApiKeysPermissionsRead   NewRoleDataAttributesApiKeysPermissions = "read"
+	NewRoleDataAttributesApiKeysPermissionsUpdate NewRoleDataAttributesApiKeysPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesAuditsPermissions.
+const (
+	NewRoleDataAttributesAuditsPermissionsCreate NewRoleDataAttributesAuditsPermissions = "create"
+	NewRoleDataAttributesAuditsPermissionsDelete NewRoleDataAttributesAuditsPermissions = "delete"
+	NewRoleDataAttributesAuditsPermissionsRead   NewRoleDataAttributesAuditsPermissions = "read"
+	NewRoleDataAttributesAuditsPermissionsUpdate NewRoleDataAttributesAuditsPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesBillingPermissions.
+const (
+	NewRoleDataAttributesBillingPermissionsCreate NewRoleDataAttributesBillingPermissions = "create"
+	NewRoleDataAttributesBillingPermissionsDelete NewRoleDataAttributesBillingPermissions = "delete"
+	NewRoleDataAttributesBillingPermissionsRead   NewRoleDataAttributesBillingPermissions = "read"
+	NewRoleDataAttributesBillingPermissionsUpdate NewRoleDataAttributesBillingPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesEnvironmentsPermissions.
+const (
+	NewRoleDataAttributesEnvironmentsPermissionsCreate NewRoleDataAttributesEnvironmentsPermissions = "create"
+	NewRoleDataAttributesEnvironmentsPermissionsDelete NewRoleDataAttributesEnvironmentsPermissions = "delete"
+	NewRoleDataAttributesEnvironmentsPermissionsRead   NewRoleDataAttributesEnvironmentsPermissions = "read"
+	NewRoleDataAttributesEnvironmentsPermissionsUpdate NewRoleDataAttributesEnvironmentsPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesFormFieldsPermissions.
+const (
+	NewRoleDataAttributesFormFieldsPermissionsCreate NewRoleDataAttributesFormFieldsPermissions = "create"
+	NewRoleDataAttributesFormFieldsPermissionsDelete NewRoleDataAttributesFormFieldsPermissions = "delete"
+	NewRoleDataAttributesFormFieldsPermissionsRead   NewRoleDataAttributesFormFieldsPermissions = "read"
+	NewRoleDataAttributesFormFieldsPermissionsUpdate NewRoleDataAttributesFormFieldsPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesFunctionalitiesPermissions.
+const (
+	NewRoleDataAttributesFunctionalitiesPermissionsCreate NewRoleDataAttributesFunctionalitiesPermissions = "create"
+	NewRoleDataAttributesFunctionalitiesPermissionsDelete NewRoleDataAttributesFunctionalitiesPermissions = "delete"
+	NewRoleDataAttributesFunctionalitiesPermissionsRead   NewRoleDataAttributesFunctionalitiesPermissions = "read"
+	NewRoleDataAttributesFunctionalitiesPermissionsUpdate NewRoleDataAttributesFunctionalitiesPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesGroupsPermissions.
+const (
+	NewRoleDataAttributesGroupsPermissionsCreate NewRoleDataAttributesGroupsPermissions = "create"
+	NewRoleDataAttributesGroupsPermissionsDelete NewRoleDataAttributesGroupsPermissions = "delete"
+	NewRoleDataAttributesGroupsPermissionsRead   NewRoleDataAttributesGroupsPermissions = "read"
+	NewRoleDataAttributesGroupsPermissionsUpdate NewRoleDataAttributesGroupsPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesIncidentCausesPermissions.
+const (
+	NewRoleDataAttributesIncidentCausesPermissionsCreate NewRoleDataAttributesIncidentCausesPermissions = "create"
+	NewRoleDataAttributesIncidentCausesPermissionsDelete NewRoleDataAttributesIncidentCausesPermissions = "delete"
+	NewRoleDataAttributesIncidentCausesPermissionsRead   NewRoleDataAttributesIncidentCausesPermissions = "read"
+	NewRoleDataAttributesIncidentCausesPermissionsUpdate NewRoleDataAttributesIncidentCausesPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesIncidentFeedbacksPermissions.
+const (
+	NewRoleDataAttributesIncidentFeedbacksPermissionsCreate NewRoleDataAttributesIncidentFeedbacksPermissions = "create"
+	NewRoleDataAttributesIncidentFeedbacksPermissionsDelete NewRoleDataAttributesIncidentFeedbacksPermissions = "delete"
+	NewRoleDataAttributesIncidentFeedbacksPermissionsRead   NewRoleDataAttributesIncidentFeedbacksPermissions = "read"
+	NewRoleDataAttributesIncidentFeedbacksPermissionsUpdate NewRoleDataAttributesIncidentFeedbacksPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesIncidentPostMortemsPermissions.
+const (
+	NewRoleDataAttributesIncidentPostMortemsPermissionsCreate NewRoleDataAttributesIncidentPostMortemsPermissions = "create"
+	NewRoleDataAttributesIncidentPostMortemsPermissionsDelete NewRoleDataAttributesIncidentPostMortemsPermissions = "delete"
+	NewRoleDataAttributesIncidentPostMortemsPermissionsRead   NewRoleDataAttributesIncidentPostMortemsPermissions = "read"
+	NewRoleDataAttributesIncidentPostMortemsPermissionsUpdate NewRoleDataAttributesIncidentPostMortemsPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesIncidentRolesPermissions.
+const (
+	NewRoleDataAttributesIncidentRolesPermissionsCreate NewRoleDataAttributesIncidentRolesPermissions = "create"
+	NewRoleDataAttributesIncidentRolesPermissionsDelete NewRoleDataAttributesIncidentRolesPermissions = "delete"
+	NewRoleDataAttributesIncidentRolesPermissionsRead   NewRoleDataAttributesIncidentRolesPermissions = "read"
+	NewRoleDataAttributesIncidentRolesPermissionsUpdate NewRoleDataAttributesIncidentRolesPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesIncidentTypesPermissions.
+const (
+	NewRoleDataAttributesIncidentTypesPermissionsCreate NewRoleDataAttributesIncidentTypesPermissions = "create"
+	NewRoleDataAttributesIncidentTypesPermissionsDelete NewRoleDataAttributesIncidentTypesPermissions = "delete"
+	NewRoleDataAttributesIncidentTypesPermissionsRead   NewRoleDataAttributesIncidentTypesPermissions = "read"
+	NewRoleDataAttributesIncidentTypesPermissionsUpdate NewRoleDataAttributesIncidentTypesPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesIncidentsPermissions.
+const (
+	NewRoleDataAttributesIncidentsPermissionsCreate NewRoleDataAttributesIncidentsPermissions = "create"
+	NewRoleDataAttributesIncidentsPermissionsDelete NewRoleDataAttributesIncidentsPermissions = "delete"
+	NewRoleDataAttributesIncidentsPermissionsRead   NewRoleDataAttributesIncidentsPermissions = "read"
+	NewRoleDataAttributesIncidentsPermissionsUpdate NewRoleDataAttributesIncidentsPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesInvitationsPermissions.
+const (
+	NewRoleDataAttributesInvitationsPermissionsCreate NewRoleDataAttributesInvitationsPermissions = "create"
+	NewRoleDataAttributesInvitationsPermissionsDelete NewRoleDataAttributesInvitationsPermissions = "delete"
+	NewRoleDataAttributesInvitationsPermissionsRead   NewRoleDataAttributesInvitationsPermissions = "read"
+	NewRoleDataAttributesInvitationsPermissionsUpdate NewRoleDataAttributesInvitationsPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesPlaybooksPermissions.
+const (
+	NewRoleDataAttributesPlaybooksPermissionsCreate NewRoleDataAttributesPlaybooksPermissions = "create"
+	NewRoleDataAttributesPlaybooksPermissionsDelete NewRoleDataAttributesPlaybooksPermissions = "delete"
+	NewRoleDataAttributesPlaybooksPermissionsRead   NewRoleDataAttributesPlaybooksPermissions = "read"
+	NewRoleDataAttributesPlaybooksPermissionsUpdate NewRoleDataAttributesPlaybooksPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesPrivateIncidentsPermissions.
+const (
+	NewRoleDataAttributesPrivateIncidentsPermissionsCreate NewRoleDataAttributesPrivateIncidentsPermissions = "create"
+	NewRoleDataAttributesPrivateIncidentsPermissionsDelete NewRoleDataAttributesPrivateIncidentsPermissions = "delete"
+	NewRoleDataAttributesPrivateIncidentsPermissionsRead   NewRoleDataAttributesPrivateIncidentsPermissions = "read"
+	NewRoleDataAttributesPrivateIncidentsPermissionsUpdate NewRoleDataAttributesPrivateIncidentsPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesRetrospectivePermissions.
+const (
+	NewRoleDataAttributesRetrospectivePermissionsCreate NewRoleDataAttributesRetrospectivePermissions = "create"
+	NewRoleDataAttributesRetrospectivePermissionsDelete NewRoleDataAttributesRetrospectivePermissions = "delete"
+	NewRoleDataAttributesRetrospectivePermissionsRead   NewRoleDataAttributesRetrospectivePermissions = "read"
+	NewRoleDataAttributesRetrospectivePermissionsUpdate NewRoleDataAttributesRetrospectivePermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesRolesPermissions.
+const (
+	NewRoleDataAttributesRolesPermissionsCreate NewRoleDataAttributesRolesPermissions = "create"
+	NewRoleDataAttributesRolesPermissionsDelete NewRoleDataAttributesRolesPermissions = "delete"
+	NewRoleDataAttributesRolesPermissionsRead   NewRoleDataAttributesRolesPermissions = "read"
+	NewRoleDataAttributesRolesPermissionsUpdate NewRoleDataAttributesRolesPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesSecretsPermissions.
+const (
+	NewRoleDataAttributesSecretsPermissionsCreate NewRoleDataAttributesSecretsPermissions = "create"
+	NewRoleDataAttributesSecretsPermissionsDelete NewRoleDataAttributesSecretsPermissions = "delete"
+	NewRoleDataAttributesSecretsPermissionsRead   NewRoleDataAttributesSecretsPermissions = "read"
+	NewRoleDataAttributesSecretsPermissionsUpdate NewRoleDataAttributesSecretsPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesServicesPermissions.
+const (
+	NewRoleDataAttributesServicesPermissionsCreate NewRoleDataAttributesServicesPermissions = "create"
+	NewRoleDataAttributesServicesPermissionsDelete NewRoleDataAttributesServicesPermissions = "delete"
+	NewRoleDataAttributesServicesPermissionsRead   NewRoleDataAttributesServicesPermissions = "read"
+	NewRoleDataAttributesServicesPermissionsUpdate NewRoleDataAttributesServicesPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesSeveritiesPermissions.
+const (
+	NewRoleDataAttributesSeveritiesPermissionsCreate NewRoleDataAttributesSeveritiesPermissions = "create"
+	NewRoleDataAttributesSeveritiesPermissionsDelete NewRoleDataAttributesSeveritiesPermissions = "delete"
+	NewRoleDataAttributesSeveritiesPermissionsRead   NewRoleDataAttributesSeveritiesPermissions = "read"
+	NewRoleDataAttributesSeveritiesPermissionsUpdate NewRoleDataAttributesSeveritiesPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesStatusPagesPermissions.
+const (
+	NewRoleDataAttributesStatusPagesPermissionsCreate NewRoleDataAttributesStatusPagesPermissions = "create"
+	NewRoleDataAttributesStatusPagesPermissionsDelete NewRoleDataAttributesStatusPagesPermissions = "delete"
+	NewRoleDataAttributesStatusPagesPermissionsRead   NewRoleDataAttributesStatusPagesPermissions = "read"
+	NewRoleDataAttributesStatusPagesPermissionsUpdate NewRoleDataAttributesStatusPagesPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesWebhooksPermissions.
+const (
+	NewRoleDataAttributesWebhooksPermissionsCreate NewRoleDataAttributesWebhooksPermissions = "create"
+	NewRoleDataAttributesWebhooksPermissionsDelete NewRoleDataAttributesWebhooksPermissions = "delete"
+	NewRoleDataAttributesWebhooksPermissionsRead   NewRoleDataAttributesWebhooksPermissions = "read"
+	NewRoleDataAttributesWebhooksPermissionsUpdate NewRoleDataAttributesWebhooksPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesWorkflowsPermissions.
+const (
+	NewRoleDataAttributesWorkflowsPermissionsCreate NewRoleDataAttributesWorkflowsPermissions = "create"
+	NewRoleDataAttributesWorkflowsPermissionsDelete NewRoleDataAttributesWorkflowsPermissions = "delete"
+	NewRoleDataAttributesWorkflowsPermissionsRead   NewRoleDataAttributesWorkflowsPermissions = "read"
+	NewRoleDataAttributesWorkflowsPermissionsUpdate NewRoleDataAttributesWorkflowsPermissions = "update"
+)
+
+// Defines values for NewRoleDataType.
+const (
+	NewRoleDataTypeRoles NewRoleDataType = "roles"
 )
 
 // Defines values for NewSecretDataAttributesKind.
@@ -3188,9 +3657,9 @@ const (
 
 // Defines values for RemoveGoogleDocsPermissionsTaskParamsAttributeToQueryBy.
 const (
-	EmailAddress RemoveGoogleDocsPermissionsTaskParamsAttributeToQueryBy = "email_address"
-	Role         RemoveGoogleDocsPermissionsTaskParamsAttributeToQueryBy = "role"
-	Type         RemoveGoogleDocsPermissionsTaskParamsAttributeToQueryBy = "type"
+	RemoveGoogleDocsPermissionsTaskParamsAttributeToQueryByEmailAddress RemoveGoogleDocsPermissionsTaskParamsAttributeToQueryBy = "email_address"
+	RemoveGoogleDocsPermissionsTaskParamsAttributeToQueryByRole         RemoveGoogleDocsPermissionsTaskParamsAttributeToQueryBy = "role"
+	RemoveGoogleDocsPermissionsTaskParamsAttributeToQueryByType         RemoveGoogleDocsPermissionsTaskParamsAttributeToQueryBy = "type"
 )
 
 // Defines values for RemoveGoogleDocsPermissionsTaskParamsTaskType.
@@ -3226,6 +3695,592 @@ const (
 // Defines values for RetrospectiveStepResponseDataType.
 const (
 	RetrospectiveStepResponseDataTypeRetrospectiveSteps RetrospectiveStepResponseDataType = "retrospective_steps"
+)
+
+// Defines values for RoleApiKeysPermissions.
+const (
+	RoleApiKeysPermissionsCreate RoleApiKeysPermissions = "create"
+	RoleApiKeysPermissionsDelete RoleApiKeysPermissions = "delete"
+	RoleApiKeysPermissionsRead   RoleApiKeysPermissions = "read"
+	RoleApiKeysPermissionsUpdate RoleApiKeysPermissions = "update"
+)
+
+// Defines values for RoleAuditsPermissions.
+const (
+	RoleAuditsPermissionsCreate RoleAuditsPermissions = "create"
+	RoleAuditsPermissionsDelete RoleAuditsPermissions = "delete"
+	RoleAuditsPermissionsRead   RoleAuditsPermissions = "read"
+	RoleAuditsPermissionsUpdate RoleAuditsPermissions = "update"
+)
+
+// Defines values for RoleBillingPermissions.
+const (
+	RoleBillingPermissionsCreate RoleBillingPermissions = "create"
+	RoleBillingPermissionsDelete RoleBillingPermissions = "delete"
+	RoleBillingPermissionsRead   RoleBillingPermissions = "read"
+	RoleBillingPermissionsUpdate RoleBillingPermissions = "update"
+)
+
+// Defines values for RoleEnvironmentsPermissions.
+const (
+	RoleEnvironmentsPermissionsCreate RoleEnvironmentsPermissions = "create"
+	RoleEnvironmentsPermissionsDelete RoleEnvironmentsPermissions = "delete"
+	RoleEnvironmentsPermissionsRead   RoleEnvironmentsPermissions = "read"
+	RoleEnvironmentsPermissionsUpdate RoleEnvironmentsPermissions = "update"
+)
+
+// Defines values for RoleFormFieldsPermissions.
+const (
+	RoleFormFieldsPermissionsCreate RoleFormFieldsPermissions = "create"
+	RoleFormFieldsPermissionsDelete RoleFormFieldsPermissions = "delete"
+	RoleFormFieldsPermissionsRead   RoleFormFieldsPermissions = "read"
+	RoleFormFieldsPermissionsUpdate RoleFormFieldsPermissions = "update"
+)
+
+// Defines values for RoleFunctionalitiesPermissions.
+const (
+	RoleFunctionalitiesPermissionsCreate RoleFunctionalitiesPermissions = "create"
+	RoleFunctionalitiesPermissionsDelete RoleFunctionalitiesPermissions = "delete"
+	RoleFunctionalitiesPermissionsRead   RoleFunctionalitiesPermissions = "read"
+	RoleFunctionalitiesPermissionsUpdate RoleFunctionalitiesPermissions = "update"
+)
+
+// Defines values for RoleGroupsPermissions.
+const (
+	RoleGroupsPermissionsCreate RoleGroupsPermissions = "create"
+	RoleGroupsPermissionsDelete RoleGroupsPermissions = "delete"
+	RoleGroupsPermissionsRead   RoleGroupsPermissions = "read"
+	RoleGroupsPermissionsUpdate RoleGroupsPermissions = "update"
+)
+
+// Defines values for RoleIncidentCausesPermissions.
+const (
+	RoleIncidentCausesPermissionsCreate RoleIncidentCausesPermissions = "create"
+	RoleIncidentCausesPermissionsDelete RoleIncidentCausesPermissions = "delete"
+	RoleIncidentCausesPermissionsRead   RoleIncidentCausesPermissions = "read"
+	RoleIncidentCausesPermissionsUpdate RoleIncidentCausesPermissions = "update"
+)
+
+// Defines values for RoleIncidentFeedbacksPermissions.
+const (
+	RoleIncidentFeedbacksPermissionsCreate RoleIncidentFeedbacksPermissions = "create"
+	RoleIncidentFeedbacksPermissionsDelete RoleIncidentFeedbacksPermissions = "delete"
+	RoleIncidentFeedbacksPermissionsRead   RoleIncidentFeedbacksPermissions = "read"
+	RoleIncidentFeedbacksPermissionsUpdate RoleIncidentFeedbacksPermissions = "update"
+)
+
+// Defines values for RoleIncidentPostMortemsPermissions.
+const (
+	RoleIncidentPostMortemsPermissionsCreate RoleIncidentPostMortemsPermissions = "create"
+	RoleIncidentPostMortemsPermissionsDelete RoleIncidentPostMortemsPermissions = "delete"
+	RoleIncidentPostMortemsPermissionsRead   RoleIncidentPostMortemsPermissions = "read"
+	RoleIncidentPostMortemsPermissionsUpdate RoleIncidentPostMortemsPermissions = "update"
+)
+
+// Defines values for RoleIncidentRolesPermissions.
+const (
+	RoleIncidentRolesPermissionsCreate RoleIncidentRolesPermissions = "create"
+	RoleIncidentRolesPermissionsDelete RoleIncidentRolesPermissions = "delete"
+	RoleIncidentRolesPermissionsRead   RoleIncidentRolesPermissions = "read"
+	RoleIncidentRolesPermissionsUpdate RoleIncidentRolesPermissions = "update"
+)
+
+// Defines values for RoleIncidentTypesPermissions.
+const (
+	RoleIncidentTypesPermissionsCreate RoleIncidentTypesPermissions = "create"
+	RoleIncidentTypesPermissionsDelete RoleIncidentTypesPermissions = "delete"
+	RoleIncidentTypesPermissionsRead   RoleIncidentTypesPermissions = "read"
+	RoleIncidentTypesPermissionsUpdate RoleIncidentTypesPermissions = "update"
+)
+
+// Defines values for RoleIncidentsPermissions.
+const (
+	RoleIncidentsPermissionsCreate RoleIncidentsPermissions = "create"
+	RoleIncidentsPermissionsDelete RoleIncidentsPermissions = "delete"
+	RoleIncidentsPermissionsRead   RoleIncidentsPermissions = "read"
+	RoleIncidentsPermissionsUpdate RoleIncidentsPermissions = "update"
+)
+
+// Defines values for RoleInvitationsPermissions.
+const (
+	RoleInvitationsPermissionsCreate RoleInvitationsPermissions = "create"
+	RoleInvitationsPermissionsDelete RoleInvitationsPermissions = "delete"
+	RoleInvitationsPermissionsRead   RoleInvitationsPermissions = "read"
+	RoleInvitationsPermissionsUpdate RoleInvitationsPermissions = "update"
+)
+
+// Defines values for RolePlaybooksPermissions.
+const (
+	RolePlaybooksPermissionsCreate RolePlaybooksPermissions = "create"
+	RolePlaybooksPermissionsDelete RolePlaybooksPermissions = "delete"
+	RolePlaybooksPermissionsRead   RolePlaybooksPermissions = "read"
+	RolePlaybooksPermissionsUpdate RolePlaybooksPermissions = "update"
+)
+
+// Defines values for RolePrivateIncidentsPermissions.
+const (
+	RolePrivateIncidentsPermissionsCreate RolePrivateIncidentsPermissions = "create"
+	RolePrivateIncidentsPermissionsDelete RolePrivateIncidentsPermissions = "delete"
+	RolePrivateIncidentsPermissionsRead   RolePrivateIncidentsPermissions = "read"
+	RolePrivateIncidentsPermissionsUpdate RolePrivateIncidentsPermissions = "update"
+)
+
+// Defines values for RoleRetrospectivePermissions.
+const (
+	RoleRetrospectivePermissionsCreate RoleRetrospectivePermissions = "create"
+	RoleRetrospectivePermissionsDelete RoleRetrospectivePermissions = "delete"
+	RoleRetrospectivePermissionsRead   RoleRetrospectivePermissions = "read"
+	RoleRetrospectivePermissionsUpdate RoleRetrospectivePermissions = "update"
+)
+
+// Defines values for RoleRolesPermissions.
+const (
+	RoleRolesPermissionsCreate RoleRolesPermissions = "create"
+	RoleRolesPermissionsDelete RoleRolesPermissions = "delete"
+	RoleRolesPermissionsRead   RoleRolesPermissions = "read"
+	RoleRolesPermissionsUpdate RoleRolesPermissions = "update"
+)
+
+// Defines values for RoleSecretsPermissions.
+const (
+	RoleSecretsPermissionsCreate RoleSecretsPermissions = "create"
+	RoleSecretsPermissionsDelete RoleSecretsPermissions = "delete"
+	RoleSecretsPermissionsRead   RoleSecretsPermissions = "read"
+	RoleSecretsPermissionsUpdate RoleSecretsPermissions = "update"
+)
+
+// Defines values for RoleServicesPermissions.
+const (
+	RoleServicesPermissionsCreate RoleServicesPermissions = "create"
+	RoleServicesPermissionsDelete RoleServicesPermissions = "delete"
+	RoleServicesPermissionsRead   RoleServicesPermissions = "read"
+	RoleServicesPermissionsUpdate RoleServicesPermissions = "update"
+)
+
+// Defines values for RoleSeveritiesPermissions.
+const (
+	RoleSeveritiesPermissionsCreate RoleSeveritiesPermissions = "create"
+	RoleSeveritiesPermissionsDelete RoleSeveritiesPermissions = "delete"
+	RoleSeveritiesPermissionsRead   RoleSeveritiesPermissions = "read"
+	RoleSeveritiesPermissionsUpdate RoleSeveritiesPermissions = "update"
+)
+
+// Defines values for RoleStatusPagesPermissions.
+const (
+	RoleStatusPagesPermissionsCreate RoleStatusPagesPermissions = "create"
+	RoleStatusPagesPermissionsDelete RoleStatusPagesPermissions = "delete"
+	RoleStatusPagesPermissionsRead   RoleStatusPagesPermissions = "read"
+	RoleStatusPagesPermissionsUpdate RoleStatusPagesPermissions = "update"
+)
+
+// Defines values for RoleWebhooksPermissions.
+const (
+	RoleWebhooksPermissionsCreate RoleWebhooksPermissions = "create"
+	RoleWebhooksPermissionsDelete RoleWebhooksPermissions = "delete"
+	RoleWebhooksPermissionsRead   RoleWebhooksPermissions = "read"
+	RoleWebhooksPermissionsUpdate RoleWebhooksPermissions = "update"
+)
+
+// Defines values for RoleWorkflowsPermissions.
+const (
+	RoleWorkflowsPermissionsCreate RoleWorkflowsPermissions = "create"
+	RoleWorkflowsPermissionsDelete RoleWorkflowsPermissions = "delete"
+	RoleWorkflowsPermissionsRead   RoleWorkflowsPermissions = "read"
+	RoleWorkflowsPermissionsUpdate RoleWorkflowsPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesApiKeysPermissions.
+const (
+	RoleListDataAttributesApiKeysPermissionsCreate RoleListDataAttributesApiKeysPermissions = "create"
+	RoleListDataAttributesApiKeysPermissionsDelete RoleListDataAttributesApiKeysPermissions = "delete"
+	RoleListDataAttributesApiKeysPermissionsRead   RoleListDataAttributesApiKeysPermissions = "read"
+	RoleListDataAttributesApiKeysPermissionsUpdate RoleListDataAttributesApiKeysPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesAuditsPermissions.
+const (
+	RoleListDataAttributesAuditsPermissionsCreate RoleListDataAttributesAuditsPermissions = "create"
+	RoleListDataAttributesAuditsPermissionsDelete RoleListDataAttributesAuditsPermissions = "delete"
+	RoleListDataAttributesAuditsPermissionsRead   RoleListDataAttributesAuditsPermissions = "read"
+	RoleListDataAttributesAuditsPermissionsUpdate RoleListDataAttributesAuditsPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesBillingPermissions.
+const (
+	RoleListDataAttributesBillingPermissionsCreate RoleListDataAttributesBillingPermissions = "create"
+	RoleListDataAttributesBillingPermissionsDelete RoleListDataAttributesBillingPermissions = "delete"
+	RoleListDataAttributesBillingPermissionsRead   RoleListDataAttributesBillingPermissions = "read"
+	RoleListDataAttributesBillingPermissionsUpdate RoleListDataAttributesBillingPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesEnvironmentsPermissions.
+const (
+	RoleListDataAttributesEnvironmentsPermissionsCreate RoleListDataAttributesEnvironmentsPermissions = "create"
+	RoleListDataAttributesEnvironmentsPermissionsDelete RoleListDataAttributesEnvironmentsPermissions = "delete"
+	RoleListDataAttributesEnvironmentsPermissionsRead   RoleListDataAttributesEnvironmentsPermissions = "read"
+	RoleListDataAttributesEnvironmentsPermissionsUpdate RoleListDataAttributesEnvironmentsPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesFormFieldsPermissions.
+const (
+	RoleListDataAttributesFormFieldsPermissionsCreate RoleListDataAttributesFormFieldsPermissions = "create"
+	RoleListDataAttributesFormFieldsPermissionsDelete RoleListDataAttributesFormFieldsPermissions = "delete"
+	RoleListDataAttributesFormFieldsPermissionsRead   RoleListDataAttributesFormFieldsPermissions = "read"
+	RoleListDataAttributesFormFieldsPermissionsUpdate RoleListDataAttributesFormFieldsPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesFunctionalitiesPermissions.
+const (
+	RoleListDataAttributesFunctionalitiesPermissionsCreate RoleListDataAttributesFunctionalitiesPermissions = "create"
+	RoleListDataAttributesFunctionalitiesPermissionsDelete RoleListDataAttributesFunctionalitiesPermissions = "delete"
+	RoleListDataAttributesFunctionalitiesPermissionsRead   RoleListDataAttributesFunctionalitiesPermissions = "read"
+	RoleListDataAttributesFunctionalitiesPermissionsUpdate RoleListDataAttributesFunctionalitiesPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesGroupsPermissions.
+const (
+	RoleListDataAttributesGroupsPermissionsCreate RoleListDataAttributesGroupsPermissions = "create"
+	RoleListDataAttributesGroupsPermissionsDelete RoleListDataAttributesGroupsPermissions = "delete"
+	RoleListDataAttributesGroupsPermissionsRead   RoleListDataAttributesGroupsPermissions = "read"
+	RoleListDataAttributesGroupsPermissionsUpdate RoleListDataAttributesGroupsPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesIncidentCausesPermissions.
+const (
+	RoleListDataAttributesIncidentCausesPermissionsCreate RoleListDataAttributesIncidentCausesPermissions = "create"
+	RoleListDataAttributesIncidentCausesPermissionsDelete RoleListDataAttributesIncidentCausesPermissions = "delete"
+	RoleListDataAttributesIncidentCausesPermissionsRead   RoleListDataAttributesIncidentCausesPermissions = "read"
+	RoleListDataAttributesIncidentCausesPermissionsUpdate RoleListDataAttributesIncidentCausesPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesIncidentFeedbacksPermissions.
+const (
+	RoleListDataAttributesIncidentFeedbacksPermissionsCreate RoleListDataAttributesIncidentFeedbacksPermissions = "create"
+	RoleListDataAttributesIncidentFeedbacksPermissionsDelete RoleListDataAttributesIncidentFeedbacksPermissions = "delete"
+	RoleListDataAttributesIncidentFeedbacksPermissionsRead   RoleListDataAttributesIncidentFeedbacksPermissions = "read"
+	RoleListDataAttributesIncidentFeedbacksPermissionsUpdate RoleListDataAttributesIncidentFeedbacksPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesIncidentPostMortemsPermissions.
+const (
+	RoleListDataAttributesIncidentPostMortemsPermissionsCreate RoleListDataAttributesIncidentPostMortemsPermissions = "create"
+	RoleListDataAttributesIncidentPostMortemsPermissionsDelete RoleListDataAttributesIncidentPostMortemsPermissions = "delete"
+	RoleListDataAttributesIncidentPostMortemsPermissionsRead   RoleListDataAttributesIncidentPostMortemsPermissions = "read"
+	RoleListDataAttributesIncidentPostMortemsPermissionsUpdate RoleListDataAttributesIncidentPostMortemsPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesIncidentRolesPermissions.
+const (
+	RoleListDataAttributesIncidentRolesPermissionsCreate RoleListDataAttributesIncidentRolesPermissions = "create"
+	RoleListDataAttributesIncidentRolesPermissionsDelete RoleListDataAttributesIncidentRolesPermissions = "delete"
+	RoleListDataAttributesIncidentRolesPermissionsRead   RoleListDataAttributesIncidentRolesPermissions = "read"
+	RoleListDataAttributesIncidentRolesPermissionsUpdate RoleListDataAttributesIncidentRolesPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesIncidentTypesPermissions.
+const (
+	RoleListDataAttributesIncidentTypesPermissionsCreate RoleListDataAttributesIncidentTypesPermissions = "create"
+	RoleListDataAttributesIncidentTypesPermissionsDelete RoleListDataAttributesIncidentTypesPermissions = "delete"
+	RoleListDataAttributesIncidentTypesPermissionsRead   RoleListDataAttributesIncidentTypesPermissions = "read"
+	RoleListDataAttributesIncidentTypesPermissionsUpdate RoleListDataAttributesIncidentTypesPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesIncidentsPermissions.
+const (
+	RoleListDataAttributesIncidentsPermissionsCreate RoleListDataAttributesIncidentsPermissions = "create"
+	RoleListDataAttributesIncidentsPermissionsDelete RoleListDataAttributesIncidentsPermissions = "delete"
+	RoleListDataAttributesIncidentsPermissionsRead   RoleListDataAttributesIncidentsPermissions = "read"
+	RoleListDataAttributesIncidentsPermissionsUpdate RoleListDataAttributesIncidentsPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesInvitationsPermissions.
+const (
+	RoleListDataAttributesInvitationsPermissionsCreate RoleListDataAttributesInvitationsPermissions = "create"
+	RoleListDataAttributesInvitationsPermissionsDelete RoleListDataAttributesInvitationsPermissions = "delete"
+	RoleListDataAttributesInvitationsPermissionsRead   RoleListDataAttributesInvitationsPermissions = "read"
+	RoleListDataAttributesInvitationsPermissionsUpdate RoleListDataAttributesInvitationsPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesPlaybooksPermissions.
+const (
+	RoleListDataAttributesPlaybooksPermissionsCreate RoleListDataAttributesPlaybooksPermissions = "create"
+	RoleListDataAttributesPlaybooksPermissionsDelete RoleListDataAttributesPlaybooksPermissions = "delete"
+	RoleListDataAttributesPlaybooksPermissionsRead   RoleListDataAttributesPlaybooksPermissions = "read"
+	RoleListDataAttributesPlaybooksPermissionsUpdate RoleListDataAttributesPlaybooksPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesPrivateIncidentsPermissions.
+const (
+	RoleListDataAttributesPrivateIncidentsPermissionsCreate RoleListDataAttributesPrivateIncidentsPermissions = "create"
+	RoleListDataAttributesPrivateIncidentsPermissionsDelete RoleListDataAttributesPrivateIncidentsPermissions = "delete"
+	RoleListDataAttributesPrivateIncidentsPermissionsRead   RoleListDataAttributesPrivateIncidentsPermissions = "read"
+	RoleListDataAttributesPrivateIncidentsPermissionsUpdate RoleListDataAttributesPrivateIncidentsPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesRetrospectivePermissions.
+const (
+	RoleListDataAttributesRetrospectivePermissionsCreate RoleListDataAttributesRetrospectivePermissions = "create"
+	RoleListDataAttributesRetrospectivePermissionsDelete RoleListDataAttributesRetrospectivePermissions = "delete"
+	RoleListDataAttributesRetrospectivePermissionsRead   RoleListDataAttributesRetrospectivePermissions = "read"
+	RoleListDataAttributesRetrospectivePermissionsUpdate RoleListDataAttributesRetrospectivePermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesRolesPermissions.
+const (
+	RoleListDataAttributesRolesPermissionsCreate RoleListDataAttributesRolesPermissions = "create"
+	RoleListDataAttributesRolesPermissionsDelete RoleListDataAttributesRolesPermissions = "delete"
+	RoleListDataAttributesRolesPermissionsRead   RoleListDataAttributesRolesPermissions = "read"
+	RoleListDataAttributesRolesPermissionsUpdate RoleListDataAttributesRolesPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesSecretsPermissions.
+const (
+	RoleListDataAttributesSecretsPermissionsCreate RoleListDataAttributesSecretsPermissions = "create"
+	RoleListDataAttributesSecretsPermissionsDelete RoleListDataAttributesSecretsPermissions = "delete"
+	RoleListDataAttributesSecretsPermissionsRead   RoleListDataAttributesSecretsPermissions = "read"
+	RoleListDataAttributesSecretsPermissionsUpdate RoleListDataAttributesSecretsPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesServicesPermissions.
+const (
+	RoleListDataAttributesServicesPermissionsCreate RoleListDataAttributesServicesPermissions = "create"
+	RoleListDataAttributesServicesPermissionsDelete RoleListDataAttributesServicesPermissions = "delete"
+	RoleListDataAttributesServicesPermissionsRead   RoleListDataAttributesServicesPermissions = "read"
+	RoleListDataAttributesServicesPermissionsUpdate RoleListDataAttributesServicesPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesSeveritiesPermissions.
+const (
+	RoleListDataAttributesSeveritiesPermissionsCreate RoleListDataAttributesSeveritiesPermissions = "create"
+	RoleListDataAttributesSeveritiesPermissionsDelete RoleListDataAttributesSeveritiesPermissions = "delete"
+	RoleListDataAttributesSeveritiesPermissionsRead   RoleListDataAttributesSeveritiesPermissions = "read"
+	RoleListDataAttributesSeveritiesPermissionsUpdate RoleListDataAttributesSeveritiesPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesStatusPagesPermissions.
+const (
+	RoleListDataAttributesStatusPagesPermissionsCreate RoleListDataAttributesStatusPagesPermissions = "create"
+	RoleListDataAttributesStatusPagesPermissionsDelete RoleListDataAttributesStatusPagesPermissions = "delete"
+	RoleListDataAttributesStatusPagesPermissionsRead   RoleListDataAttributesStatusPagesPermissions = "read"
+	RoleListDataAttributesStatusPagesPermissionsUpdate RoleListDataAttributesStatusPagesPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesWebhooksPermissions.
+const (
+	RoleListDataAttributesWebhooksPermissionsCreate RoleListDataAttributesWebhooksPermissions = "create"
+	RoleListDataAttributesWebhooksPermissionsDelete RoleListDataAttributesWebhooksPermissions = "delete"
+	RoleListDataAttributesWebhooksPermissionsRead   RoleListDataAttributesWebhooksPermissions = "read"
+	RoleListDataAttributesWebhooksPermissionsUpdate RoleListDataAttributesWebhooksPermissions = "update"
+)
+
+// Defines values for RoleListDataAttributesWorkflowsPermissions.
+const (
+	RoleListDataAttributesWorkflowsPermissionsCreate RoleListDataAttributesWorkflowsPermissions = "create"
+	RoleListDataAttributesWorkflowsPermissionsDelete RoleListDataAttributesWorkflowsPermissions = "delete"
+	RoleListDataAttributesWorkflowsPermissionsRead   RoleListDataAttributesWorkflowsPermissions = "read"
+	RoleListDataAttributesWorkflowsPermissionsUpdate RoleListDataAttributesWorkflowsPermissions = "update"
+)
+
+// Defines values for RoleListDataType.
+const (
+	RoleListDataTypeRoles RoleListDataType = "roles"
+)
+
+// Defines values for RoleResponseDataAttributesApiKeysPermissions.
+const (
+	RoleResponseDataAttributesApiKeysPermissionsCreate RoleResponseDataAttributesApiKeysPermissions = "create"
+	RoleResponseDataAttributesApiKeysPermissionsDelete RoleResponseDataAttributesApiKeysPermissions = "delete"
+	RoleResponseDataAttributesApiKeysPermissionsRead   RoleResponseDataAttributesApiKeysPermissions = "read"
+	RoleResponseDataAttributesApiKeysPermissionsUpdate RoleResponseDataAttributesApiKeysPermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesAuditsPermissions.
+const (
+	RoleResponseDataAttributesAuditsPermissionsCreate RoleResponseDataAttributesAuditsPermissions = "create"
+	RoleResponseDataAttributesAuditsPermissionsDelete RoleResponseDataAttributesAuditsPermissions = "delete"
+	RoleResponseDataAttributesAuditsPermissionsRead   RoleResponseDataAttributesAuditsPermissions = "read"
+	RoleResponseDataAttributesAuditsPermissionsUpdate RoleResponseDataAttributesAuditsPermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesBillingPermissions.
+const (
+	RoleResponseDataAttributesBillingPermissionsCreate RoleResponseDataAttributesBillingPermissions = "create"
+	RoleResponseDataAttributesBillingPermissionsDelete RoleResponseDataAttributesBillingPermissions = "delete"
+	RoleResponseDataAttributesBillingPermissionsRead   RoleResponseDataAttributesBillingPermissions = "read"
+	RoleResponseDataAttributesBillingPermissionsUpdate RoleResponseDataAttributesBillingPermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesEnvironmentsPermissions.
+const (
+	RoleResponseDataAttributesEnvironmentsPermissionsCreate RoleResponseDataAttributesEnvironmentsPermissions = "create"
+	RoleResponseDataAttributesEnvironmentsPermissionsDelete RoleResponseDataAttributesEnvironmentsPermissions = "delete"
+	RoleResponseDataAttributesEnvironmentsPermissionsRead   RoleResponseDataAttributesEnvironmentsPermissions = "read"
+	RoleResponseDataAttributesEnvironmentsPermissionsUpdate RoleResponseDataAttributesEnvironmentsPermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesFormFieldsPermissions.
+const (
+	RoleResponseDataAttributesFormFieldsPermissionsCreate RoleResponseDataAttributesFormFieldsPermissions = "create"
+	RoleResponseDataAttributesFormFieldsPermissionsDelete RoleResponseDataAttributesFormFieldsPermissions = "delete"
+	RoleResponseDataAttributesFormFieldsPermissionsRead   RoleResponseDataAttributesFormFieldsPermissions = "read"
+	RoleResponseDataAttributesFormFieldsPermissionsUpdate RoleResponseDataAttributesFormFieldsPermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesFunctionalitiesPermissions.
+const (
+	RoleResponseDataAttributesFunctionalitiesPermissionsCreate RoleResponseDataAttributesFunctionalitiesPermissions = "create"
+	RoleResponseDataAttributesFunctionalitiesPermissionsDelete RoleResponseDataAttributesFunctionalitiesPermissions = "delete"
+	RoleResponseDataAttributesFunctionalitiesPermissionsRead   RoleResponseDataAttributesFunctionalitiesPermissions = "read"
+	RoleResponseDataAttributesFunctionalitiesPermissionsUpdate RoleResponseDataAttributesFunctionalitiesPermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesGroupsPermissions.
+const (
+	RoleResponseDataAttributesGroupsPermissionsCreate RoleResponseDataAttributesGroupsPermissions = "create"
+	RoleResponseDataAttributesGroupsPermissionsDelete RoleResponseDataAttributesGroupsPermissions = "delete"
+	RoleResponseDataAttributesGroupsPermissionsRead   RoleResponseDataAttributesGroupsPermissions = "read"
+	RoleResponseDataAttributesGroupsPermissionsUpdate RoleResponseDataAttributesGroupsPermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesIncidentCausesPermissions.
+const (
+	RoleResponseDataAttributesIncidentCausesPermissionsCreate RoleResponseDataAttributesIncidentCausesPermissions = "create"
+	RoleResponseDataAttributesIncidentCausesPermissionsDelete RoleResponseDataAttributesIncidentCausesPermissions = "delete"
+	RoleResponseDataAttributesIncidentCausesPermissionsRead   RoleResponseDataAttributesIncidentCausesPermissions = "read"
+	RoleResponseDataAttributesIncidentCausesPermissionsUpdate RoleResponseDataAttributesIncidentCausesPermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesIncidentFeedbacksPermissions.
+const (
+	RoleResponseDataAttributesIncidentFeedbacksPermissionsCreate RoleResponseDataAttributesIncidentFeedbacksPermissions = "create"
+	RoleResponseDataAttributesIncidentFeedbacksPermissionsDelete RoleResponseDataAttributesIncidentFeedbacksPermissions = "delete"
+	RoleResponseDataAttributesIncidentFeedbacksPermissionsRead   RoleResponseDataAttributesIncidentFeedbacksPermissions = "read"
+	RoleResponseDataAttributesIncidentFeedbacksPermissionsUpdate RoleResponseDataAttributesIncidentFeedbacksPermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesIncidentPostMortemsPermissions.
+const (
+	RoleResponseDataAttributesIncidentPostMortemsPermissionsCreate RoleResponseDataAttributesIncidentPostMortemsPermissions = "create"
+	RoleResponseDataAttributesIncidentPostMortemsPermissionsDelete RoleResponseDataAttributesIncidentPostMortemsPermissions = "delete"
+	RoleResponseDataAttributesIncidentPostMortemsPermissionsRead   RoleResponseDataAttributesIncidentPostMortemsPermissions = "read"
+	RoleResponseDataAttributesIncidentPostMortemsPermissionsUpdate RoleResponseDataAttributesIncidentPostMortemsPermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesIncidentRolesPermissions.
+const (
+	RoleResponseDataAttributesIncidentRolesPermissionsCreate RoleResponseDataAttributesIncidentRolesPermissions = "create"
+	RoleResponseDataAttributesIncidentRolesPermissionsDelete RoleResponseDataAttributesIncidentRolesPermissions = "delete"
+	RoleResponseDataAttributesIncidentRolesPermissionsRead   RoleResponseDataAttributesIncidentRolesPermissions = "read"
+	RoleResponseDataAttributesIncidentRolesPermissionsUpdate RoleResponseDataAttributesIncidentRolesPermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesIncidentTypesPermissions.
+const (
+	RoleResponseDataAttributesIncidentTypesPermissionsCreate RoleResponseDataAttributesIncidentTypesPermissions = "create"
+	RoleResponseDataAttributesIncidentTypesPermissionsDelete RoleResponseDataAttributesIncidentTypesPermissions = "delete"
+	RoleResponseDataAttributesIncidentTypesPermissionsRead   RoleResponseDataAttributesIncidentTypesPermissions = "read"
+	RoleResponseDataAttributesIncidentTypesPermissionsUpdate RoleResponseDataAttributesIncidentTypesPermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesIncidentsPermissions.
+const (
+	RoleResponseDataAttributesIncidentsPermissionsCreate RoleResponseDataAttributesIncidentsPermissions = "create"
+	RoleResponseDataAttributesIncidentsPermissionsDelete RoleResponseDataAttributesIncidentsPermissions = "delete"
+	RoleResponseDataAttributesIncidentsPermissionsRead   RoleResponseDataAttributesIncidentsPermissions = "read"
+	RoleResponseDataAttributesIncidentsPermissionsUpdate RoleResponseDataAttributesIncidentsPermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesInvitationsPermissions.
+const (
+	RoleResponseDataAttributesInvitationsPermissionsCreate RoleResponseDataAttributesInvitationsPermissions = "create"
+	RoleResponseDataAttributesInvitationsPermissionsDelete RoleResponseDataAttributesInvitationsPermissions = "delete"
+	RoleResponseDataAttributesInvitationsPermissionsRead   RoleResponseDataAttributesInvitationsPermissions = "read"
+	RoleResponseDataAttributesInvitationsPermissionsUpdate RoleResponseDataAttributesInvitationsPermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesPlaybooksPermissions.
+const (
+	RoleResponseDataAttributesPlaybooksPermissionsCreate RoleResponseDataAttributesPlaybooksPermissions = "create"
+	RoleResponseDataAttributesPlaybooksPermissionsDelete RoleResponseDataAttributesPlaybooksPermissions = "delete"
+	RoleResponseDataAttributesPlaybooksPermissionsRead   RoleResponseDataAttributesPlaybooksPermissions = "read"
+	RoleResponseDataAttributesPlaybooksPermissionsUpdate RoleResponseDataAttributesPlaybooksPermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesPrivateIncidentsPermissions.
+const (
+	RoleResponseDataAttributesPrivateIncidentsPermissionsCreate RoleResponseDataAttributesPrivateIncidentsPermissions = "create"
+	RoleResponseDataAttributesPrivateIncidentsPermissionsDelete RoleResponseDataAttributesPrivateIncidentsPermissions = "delete"
+	RoleResponseDataAttributesPrivateIncidentsPermissionsRead   RoleResponseDataAttributesPrivateIncidentsPermissions = "read"
+	RoleResponseDataAttributesPrivateIncidentsPermissionsUpdate RoleResponseDataAttributesPrivateIncidentsPermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesRetrospectivePermissions.
+const (
+	RoleResponseDataAttributesRetrospectivePermissionsCreate RoleResponseDataAttributesRetrospectivePermissions = "create"
+	RoleResponseDataAttributesRetrospectivePermissionsDelete RoleResponseDataAttributesRetrospectivePermissions = "delete"
+	RoleResponseDataAttributesRetrospectivePermissionsRead   RoleResponseDataAttributesRetrospectivePermissions = "read"
+	RoleResponseDataAttributesRetrospectivePermissionsUpdate RoleResponseDataAttributesRetrospectivePermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesRolesPermissions.
+const (
+	RoleResponseDataAttributesRolesPermissionsCreate RoleResponseDataAttributesRolesPermissions = "create"
+	RoleResponseDataAttributesRolesPermissionsDelete RoleResponseDataAttributesRolesPermissions = "delete"
+	RoleResponseDataAttributesRolesPermissionsRead   RoleResponseDataAttributesRolesPermissions = "read"
+	RoleResponseDataAttributesRolesPermissionsUpdate RoleResponseDataAttributesRolesPermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesSecretsPermissions.
+const (
+	RoleResponseDataAttributesSecretsPermissionsCreate RoleResponseDataAttributesSecretsPermissions = "create"
+	RoleResponseDataAttributesSecretsPermissionsDelete RoleResponseDataAttributesSecretsPermissions = "delete"
+	RoleResponseDataAttributesSecretsPermissionsRead   RoleResponseDataAttributesSecretsPermissions = "read"
+	RoleResponseDataAttributesSecretsPermissionsUpdate RoleResponseDataAttributesSecretsPermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesServicesPermissions.
+const (
+	RoleResponseDataAttributesServicesPermissionsCreate RoleResponseDataAttributesServicesPermissions = "create"
+	RoleResponseDataAttributesServicesPermissionsDelete RoleResponseDataAttributesServicesPermissions = "delete"
+	RoleResponseDataAttributesServicesPermissionsRead   RoleResponseDataAttributesServicesPermissions = "read"
+	RoleResponseDataAttributesServicesPermissionsUpdate RoleResponseDataAttributesServicesPermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesSeveritiesPermissions.
+const (
+	RoleResponseDataAttributesSeveritiesPermissionsCreate RoleResponseDataAttributesSeveritiesPermissions = "create"
+	RoleResponseDataAttributesSeveritiesPermissionsDelete RoleResponseDataAttributesSeveritiesPermissions = "delete"
+	RoleResponseDataAttributesSeveritiesPermissionsRead   RoleResponseDataAttributesSeveritiesPermissions = "read"
+	RoleResponseDataAttributesSeveritiesPermissionsUpdate RoleResponseDataAttributesSeveritiesPermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesStatusPagesPermissions.
+const (
+	RoleResponseDataAttributesStatusPagesPermissionsCreate RoleResponseDataAttributesStatusPagesPermissions = "create"
+	RoleResponseDataAttributesStatusPagesPermissionsDelete RoleResponseDataAttributesStatusPagesPermissions = "delete"
+	RoleResponseDataAttributesStatusPagesPermissionsRead   RoleResponseDataAttributesStatusPagesPermissions = "read"
+	RoleResponseDataAttributesStatusPagesPermissionsUpdate RoleResponseDataAttributesStatusPagesPermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesWebhooksPermissions.
+const (
+	RoleResponseDataAttributesWebhooksPermissionsCreate RoleResponseDataAttributesWebhooksPermissions = "create"
+	RoleResponseDataAttributesWebhooksPermissionsDelete RoleResponseDataAttributesWebhooksPermissions = "delete"
+	RoleResponseDataAttributesWebhooksPermissionsRead   RoleResponseDataAttributesWebhooksPermissions = "read"
+	RoleResponseDataAttributesWebhooksPermissionsUpdate RoleResponseDataAttributesWebhooksPermissions = "update"
+)
+
+// Defines values for RoleResponseDataAttributesWorkflowsPermissions.
+const (
+	RoleResponseDataAttributesWorkflowsPermissionsCreate RoleResponseDataAttributesWorkflowsPermissions = "create"
+	RoleResponseDataAttributesWorkflowsPermissionsDelete RoleResponseDataAttributesWorkflowsPermissions = "delete"
+	RoleResponseDataAttributesWorkflowsPermissionsRead   RoleResponseDataAttributesWorkflowsPermissions = "read"
+	RoleResponseDataAttributesWorkflowsPermissionsUpdate RoleResponseDataAttributesWorkflowsPermissions = "update"
+)
+
+// Defines values for RoleResponseDataType.
+const (
+	RoleResponseDataTypeRoles RoleResponseDataType = "roles"
 )
 
 // Defines values for RunCommandHerokuTaskParamsSize.
@@ -4040,6 +5095,19 @@ const (
 	UpdateAsanaTask UpdateAsanaTaskTaskParamsTaskType = "update_asana_task"
 )
 
+// Defines values for UpdateAuthorizationDataAttributesPermissions.
+const (
+	UpdateAuthorizationDataAttributesPermissionsAuthorize UpdateAuthorizationDataAttributesPermissions = "authorize"
+	UpdateAuthorizationDataAttributesPermissionsDestroy   UpdateAuthorizationDataAttributesPermissions = "destroy"
+	UpdateAuthorizationDataAttributesPermissionsRead      UpdateAuthorizationDataAttributesPermissions = "read"
+	UpdateAuthorizationDataAttributesPermissionsUpdate    UpdateAuthorizationDataAttributesPermissions = "update"
+)
+
+// Defines values for UpdateAuthorizationDataType.
+const (
+	UpdateAuthorizationDataTypeAuthorizations UpdateAuthorizationDataType = "authorizations"
+)
+
 // Defines values for UpdateCauseDataType.
 const (
 	UpdateCauseDataTypeCauses UpdateCauseDataType = "causes"
@@ -4369,6 +5437,55 @@ const (
 	UpdateIncidentFormFieldSelectionDataTypeIncidentFormFieldSelections UpdateIncidentFormFieldSelectionDataType = "incident_form_field_selections"
 )
 
+// Defines values for UpdateIncidentPermissionSetDataAttributesPrivateIncidentPermissions.
+const (
+	UpdateIncidentPermissionSetDataAttributesPrivateIncidentPermissionsCreate UpdateIncidentPermissionSetDataAttributesPrivateIncidentPermissions = "create"
+	UpdateIncidentPermissionSetDataAttributesPrivateIncidentPermissionsDelete UpdateIncidentPermissionSetDataAttributesPrivateIncidentPermissions = "delete"
+	UpdateIncidentPermissionSetDataAttributesPrivateIncidentPermissionsRead   UpdateIncidentPermissionSetDataAttributesPrivateIncidentPermissions = "read"
+	UpdateIncidentPermissionSetDataAttributesPrivateIncidentPermissionsUpdate UpdateIncidentPermissionSetDataAttributesPrivateIncidentPermissions = "update"
+)
+
+// Defines values for UpdateIncidentPermissionSetDataAttributesPublicIncidentPermissions.
+const (
+	UpdateIncidentPermissionSetDataAttributesPublicIncidentPermissionsCreate UpdateIncidentPermissionSetDataAttributesPublicIncidentPermissions = "create"
+	UpdateIncidentPermissionSetDataAttributesPublicIncidentPermissionsDelete UpdateIncidentPermissionSetDataAttributesPublicIncidentPermissions = "delete"
+	UpdateIncidentPermissionSetDataAttributesPublicIncidentPermissionsRead   UpdateIncidentPermissionSetDataAttributesPublicIncidentPermissions = "read"
+	UpdateIncidentPermissionSetDataAttributesPublicIncidentPermissionsUpdate UpdateIncidentPermissionSetDataAttributesPublicIncidentPermissions = "update"
+)
+
+// Defines values for UpdateIncidentPermissionSetDataType.
+const (
+	UpdateIncidentPermissionSetDataTypeIncidentPermissionSets UpdateIncidentPermissionSetDataType = "incident_permission_sets"
+)
+
+// Defines values for UpdateIncidentPermissionSetBooleanDataAttributesKind.
+const (
+	UpdateIncidentPermissionSetBooleanDataAttributesKindAssignIncidentRoles UpdateIncidentPermissionSetBooleanDataAttributesKind = "assign_incident_roles"
+	UpdateIncidentPermissionSetBooleanDataAttributesKindInviteSubscribers   UpdateIncidentPermissionSetBooleanDataAttributesKind = "invite_subscribers"
+	UpdateIncidentPermissionSetBooleanDataAttributesKindModifyCustomFields  UpdateIncidentPermissionSetBooleanDataAttributesKind = "modify_custom_fields"
+	UpdateIncidentPermissionSetBooleanDataAttributesKindPublishToStatusPage UpdateIncidentPermissionSetBooleanDataAttributesKind = "publish_to_status_page"
+	UpdateIncidentPermissionSetBooleanDataAttributesKindTriggerWorkflows    UpdateIncidentPermissionSetBooleanDataAttributesKind = "trigger_workflows"
+	UpdateIncidentPermissionSetBooleanDataAttributesKindUpdateSummary       UpdateIncidentPermissionSetBooleanDataAttributesKind = "update_summary"
+	UpdateIncidentPermissionSetBooleanDataAttributesKindUpdateTimeline      UpdateIncidentPermissionSetBooleanDataAttributesKind = "update_timeline"
+)
+
+// Defines values for UpdateIncidentPermissionSetBooleanDataType.
+const (
+	UpdateIncidentPermissionSetBooleanDataTypeIncidentPermissionSetBooleans UpdateIncidentPermissionSetBooleanDataType = "incident_permission_set_booleans"
+)
+
+// Defines values for UpdateIncidentPermissionSetResourceDataAttributesKind.
+const (
+	UpdateIncidentPermissionSetResourceDataAttributesKindIncidentTypes UpdateIncidentPermissionSetResourceDataAttributesKind = "incident_types"
+	UpdateIncidentPermissionSetResourceDataAttributesKindSeverities    UpdateIncidentPermissionSetResourceDataAttributesKind = "severities"
+	UpdateIncidentPermissionSetResourceDataAttributesKindStatuses      UpdateIncidentPermissionSetResourceDataAttributesKind = "statuses"
+)
+
+// Defines values for UpdateIncidentPermissionSetResourceDataType.
+const (
+	UpdateIncidentPermissionSetResourceDataTypeIncidentPermissionSetResources UpdateIncidentPermissionSetResourceDataType = "incident_permission_set_resources"
+)
+
 // Defines values for UpdateIncidentPostMortemDataAttributesStatus.
 const (
 	UpdateIncidentPostMortemDataAttributesStatusDraft     UpdateIncidentPostMortemDataAttributesStatus = "draft"
@@ -4577,6 +5694,203 @@ const (
 	UpdateRetrospectiveStepDataTypeRetrospectiveSteps UpdateRetrospectiveStepDataType = "retrospective_steps"
 )
 
+// Defines values for UpdateRoleDataAttributesApiKeysPermissions.
+const (
+	UpdateRoleDataAttributesApiKeysPermissionsCreate UpdateRoleDataAttributesApiKeysPermissions = "create"
+	UpdateRoleDataAttributesApiKeysPermissionsDelete UpdateRoleDataAttributesApiKeysPermissions = "delete"
+	UpdateRoleDataAttributesApiKeysPermissionsRead   UpdateRoleDataAttributesApiKeysPermissions = "read"
+	UpdateRoleDataAttributesApiKeysPermissionsUpdate UpdateRoleDataAttributesApiKeysPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesAuditsPermissions.
+const (
+	UpdateRoleDataAttributesAuditsPermissionsCreate UpdateRoleDataAttributesAuditsPermissions = "create"
+	UpdateRoleDataAttributesAuditsPermissionsDelete UpdateRoleDataAttributesAuditsPermissions = "delete"
+	UpdateRoleDataAttributesAuditsPermissionsRead   UpdateRoleDataAttributesAuditsPermissions = "read"
+	UpdateRoleDataAttributesAuditsPermissionsUpdate UpdateRoleDataAttributesAuditsPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesBillingPermissions.
+const (
+	UpdateRoleDataAttributesBillingPermissionsCreate UpdateRoleDataAttributesBillingPermissions = "create"
+	UpdateRoleDataAttributesBillingPermissionsDelete UpdateRoleDataAttributesBillingPermissions = "delete"
+	UpdateRoleDataAttributesBillingPermissionsRead   UpdateRoleDataAttributesBillingPermissions = "read"
+	UpdateRoleDataAttributesBillingPermissionsUpdate UpdateRoleDataAttributesBillingPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesEnvironmentsPermissions.
+const (
+	UpdateRoleDataAttributesEnvironmentsPermissionsCreate UpdateRoleDataAttributesEnvironmentsPermissions = "create"
+	UpdateRoleDataAttributesEnvironmentsPermissionsDelete UpdateRoleDataAttributesEnvironmentsPermissions = "delete"
+	UpdateRoleDataAttributesEnvironmentsPermissionsRead   UpdateRoleDataAttributesEnvironmentsPermissions = "read"
+	UpdateRoleDataAttributesEnvironmentsPermissionsUpdate UpdateRoleDataAttributesEnvironmentsPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesFormFieldsPermissions.
+const (
+	UpdateRoleDataAttributesFormFieldsPermissionsCreate UpdateRoleDataAttributesFormFieldsPermissions = "create"
+	UpdateRoleDataAttributesFormFieldsPermissionsDelete UpdateRoleDataAttributesFormFieldsPermissions = "delete"
+	UpdateRoleDataAttributesFormFieldsPermissionsRead   UpdateRoleDataAttributesFormFieldsPermissions = "read"
+	UpdateRoleDataAttributesFormFieldsPermissionsUpdate UpdateRoleDataAttributesFormFieldsPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesFunctionalitiesPermissions.
+const (
+	UpdateRoleDataAttributesFunctionalitiesPermissionsCreate UpdateRoleDataAttributesFunctionalitiesPermissions = "create"
+	UpdateRoleDataAttributesFunctionalitiesPermissionsDelete UpdateRoleDataAttributesFunctionalitiesPermissions = "delete"
+	UpdateRoleDataAttributesFunctionalitiesPermissionsRead   UpdateRoleDataAttributesFunctionalitiesPermissions = "read"
+	UpdateRoleDataAttributesFunctionalitiesPermissionsUpdate UpdateRoleDataAttributesFunctionalitiesPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesGroupsPermissions.
+const (
+	UpdateRoleDataAttributesGroupsPermissionsCreate UpdateRoleDataAttributesGroupsPermissions = "create"
+	UpdateRoleDataAttributesGroupsPermissionsDelete UpdateRoleDataAttributesGroupsPermissions = "delete"
+	UpdateRoleDataAttributesGroupsPermissionsRead   UpdateRoleDataAttributesGroupsPermissions = "read"
+	UpdateRoleDataAttributesGroupsPermissionsUpdate UpdateRoleDataAttributesGroupsPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesIncidentCausesPermissions.
+const (
+	UpdateRoleDataAttributesIncidentCausesPermissionsCreate UpdateRoleDataAttributesIncidentCausesPermissions = "create"
+	UpdateRoleDataAttributesIncidentCausesPermissionsDelete UpdateRoleDataAttributesIncidentCausesPermissions = "delete"
+	UpdateRoleDataAttributesIncidentCausesPermissionsRead   UpdateRoleDataAttributesIncidentCausesPermissions = "read"
+	UpdateRoleDataAttributesIncidentCausesPermissionsUpdate UpdateRoleDataAttributesIncidentCausesPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesIncidentFeedbacksPermissions.
+const (
+	UpdateRoleDataAttributesIncidentFeedbacksPermissionsCreate UpdateRoleDataAttributesIncidentFeedbacksPermissions = "create"
+	UpdateRoleDataAttributesIncidentFeedbacksPermissionsDelete UpdateRoleDataAttributesIncidentFeedbacksPermissions = "delete"
+	UpdateRoleDataAttributesIncidentFeedbacksPermissionsRead   UpdateRoleDataAttributesIncidentFeedbacksPermissions = "read"
+	UpdateRoleDataAttributesIncidentFeedbacksPermissionsUpdate UpdateRoleDataAttributesIncidentFeedbacksPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesIncidentPostMortemsPermissions.
+const (
+	UpdateRoleDataAttributesIncidentPostMortemsPermissionsCreate UpdateRoleDataAttributesIncidentPostMortemsPermissions = "create"
+	UpdateRoleDataAttributesIncidentPostMortemsPermissionsDelete UpdateRoleDataAttributesIncidentPostMortemsPermissions = "delete"
+	UpdateRoleDataAttributesIncidentPostMortemsPermissionsRead   UpdateRoleDataAttributesIncidentPostMortemsPermissions = "read"
+	UpdateRoleDataAttributesIncidentPostMortemsPermissionsUpdate UpdateRoleDataAttributesIncidentPostMortemsPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesIncidentRolesPermissions.
+const (
+	UpdateRoleDataAttributesIncidentRolesPermissionsCreate UpdateRoleDataAttributesIncidentRolesPermissions = "create"
+	UpdateRoleDataAttributesIncidentRolesPermissionsDelete UpdateRoleDataAttributesIncidentRolesPermissions = "delete"
+	UpdateRoleDataAttributesIncidentRolesPermissionsRead   UpdateRoleDataAttributesIncidentRolesPermissions = "read"
+	UpdateRoleDataAttributesIncidentRolesPermissionsUpdate UpdateRoleDataAttributesIncidentRolesPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesIncidentTypesPermissions.
+const (
+	UpdateRoleDataAttributesIncidentTypesPermissionsCreate UpdateRoleDataAttributesIncidentTypesPermissions = "create"
+	UpdateRoleDataAttributesIncidentTypesPermissionsDelete UpdateRoleDataAttributesIncidentTypesPermissions = "delete"
+	UpdateRoleDataAttributesIncidentTypesPermissionsRead   UpdateRoleDataAttributesIncidentTypesPermissions = "read"
+	UpdateRoleDataAttributesIncidentTypesPermissionsUpdate UpdateRoleDataAttributesIncidentTypesPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesIncidentsPermissions.
+const (
+	UpdateRoleDataAttributesIncidentsPermissionsCreate UpdateRoleDataAttributesIncidentsPermissions = "create"
+	UpdateRoleDataAttributesIncidentsPermissionsDelete UpdateRoleDataAttributesIncidentsPermissions = "delete"
+	UpdateRoleDataAttributesIncidentsPermissionsRead   UpdateRoleDataAttributesIncidentsPermissions = "read"
+	UpdateRoleDataAttributesIncidentsPermissionsUpdate UpdateRoleDataAttributesIncidentsPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesInvitationsPermissions.
+const (
+	UpdateRoleDataAttributesInvitationsPermissionsCreate UpdateRoleDataAttributesInvitationsPermissions = "create"
+	UpdateRoleDataAttributesInvitationsPermissionsDelete UpdateRoleDataAttributesInvitationsPermissions = "delete"
+	UpdateRoleDataAttributesInvitationsPermissionsRead   UpdateRoleDataAttributesInvitationsPermissions = "read"
+	UpdateRoleDataAttributesInvitationsPermissionsUpdate UpdateRoleDataAttributesInvitationsPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesPlaybooksPermissions.
+const (
+	UpdateRoleDataAttributesPlaybooksPermissionsCreate UpdateRoleDataAttributesPlaybooksPermissions = "create"
+	UpdateRoleDataAttributesPlaybooksPermissionsDelete UpdateRoleDataAttributesPlaybooksPermissions = "delete"
+	UpdateRoleDataAttributesPlaybooksPermissionsRead   UpdateRoleDataAttributesPlaybooksPermissions = "read"
+	UpdateRoleDataAttributesPlaybooksPermissionsUpdate UpdateRoleDataAttributesPlaybooksPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesPrivateIncidentsPermissions.
+const (
+	UpdateRoleDataAttributesPrivateIncidentsPermissionsCreate UpdateRoleDataAttributesPrivateIncidentsPermissions = "create"
+	UpdateRoleDataAttributesPrivateIncidentsPermissionsDelete UpdateRoleDataAttributesPrivateIncidentsPermissions = "delete"
+	UpdateRoleDataAttributesPrivateIncidentsPermissionsRead   UpdateRoleDataAttributesPrivateIncidentsPermissions = "read"
+	UpdateRoleDataAttributesPrivateIncidentsPermissionsUpdate UpdateRoleDataAttributesPrivateIncidentsPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesRetrospectivePermissions.
+const (
+	UpdateRoleDataAttributesRetrospectivePermissionsCreate UpdateRoleDataAttributesRetrospectivePermissions = "create"
+	UpdateRoleDataAttributesRetrospectivePermissionsDelete UpdateRoleDataAttributesRetrospectivePermissions = "delete"
+	UpdateRoleDataAttributesRetrospectivePermissionsRead   UpdateRoleDataAttributesRetrospectivePermissions = "read"
+	UpdateRoleDataAttributesRetrospectivePermissionsUpdate UpdateRoleDataAttributesRetrospectivePermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesRolesPermissions.
+const (
+	UpdateRoleDataAttributesRolesPermissionsCreate UpdateRoleDataAttributesRolesPermissions = "create"
+	UpdateRoleDataAttributesRolesPermissionsDelete UpdateRoleDataAttributesRolesPermissions = "delete"
+	UpdateRoleDataAttributesRolesPermissionsRead   UpdateRoleDataAttributesRolesPermissions = "read"
+	UpdateRoleDataAttributesRolesPermissionsUpdate UpdateRoleDataAttributesRolesPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesSecretsPermissions.
+const (
+	UpdateRoleDataAttributesSecretsPermissionsCreate UpdateRoleDataAttributesSecretsPermissions = "create"
+	UpdateRoleDataAttributesSecretsPermissionsDelete UpdateRoleDataAttributesSecretsPermissions = "delete"
+	UpdateRoleDataAttributesSecretsPermissionsRead   UpdateRoleDataAttributesSecretsPermissions = "read"
+	UpdateRoleDataAttributesSecretsPermissionsUpdate UpdateRoleDataAttributesSecretsPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesServicesPermissions.
+const (
+	UpdateRoleDataAttributesServicesPermissionsCreate UpdateRoleDataAttributesServicesPermissions = "create"
+	UpdateRoleDataAttributesServicesPermissionsDelete UpdateRoleDataAttributesServicesPermissions = "delete"
+	UpdateRoleDataAttributesServicesPermissionsRead   UpdateRoleDataAttributesServicesPermissions = "read"
+	UpdateRoleDataAttributesServicesPermissionsUpdate UpdateRoleDataAttributesServicesPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesSeveritiesPermissions.
+const (
+	UpdateRoleDataAttributesSeveritiesPermissionsCreate UpdateRoleDataAttributesSeveritiesPermissions = "create"
+	UpdateRoleDataAttributesSeveritiesPermissionsDelete UpdateRoleDataAttributesSeveritiesPermissions = "delete"
+	UpdateRoleDataAttributesSeveritiesPermissionsRead   UpdateRoleDataAttributesSeveritiesPermissions = "read"
+	UpdateRoleDataAttributesSeveritiesPermissionsUpdate UpdateRoleDataAttributesSeveritiesPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesStatusPagesPermissions.
+const (
+	UpdateRoleDataAttributesStatusPagesPermissionsCreate UpdateRoleDataAttributesStatusPagesPermissions = "create"
+	UpdateRoleDataAttributesStatusPagesPermissionsDelete UpdateRoleDataAttributesStatusPagesPermissions = "delete"
+	UpdateRoleDataAttributesStatusPagesPermissionsRead   UpdateRoleDataAttributesStatusPagesPermissions = "read"
+	UpdateRoleDataAttributesStatusPagesPermissionsUpdate UpdateRoleDataAttributesStatusPagesPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesWebhooksPermissions.
+const (
+	UpdateRoleDataAttributesWebhooksPermissionsCreate UpdateRoleDataAttributesWebhooksPermissions = "create"
+	UpdateRoleDataAttributesWebhooksPermissionsDelete UpdateRoleDataAttributesWebhooksPermissions = "delete"
+	UpdateRoleDataAttributesWebhooksPermissionsRead   UpdateRoleDataAttributesWebhooksPermissions = "read"
+	UpdateRoleDataAttributesWebhooksPermissionsUpdate UpdateRoleDataAttributesWebhooksPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataAttributesWorkflowsPermissions.
+const (
+	Create UpdateRoleDataAttributesWorkflowsPermissions = "create"
+	Delete UpdateRoleDataAttributesWorkflowsPermissions = "delete"
+	Read   UpdateRoleDataAttributesWorkflowsPermissions = "read"
+	Update UpdateRoleDataAttributesWorkflowsPermissions = "update"
+)
+
+// Defines values for UpdateRoleDataType.
+const (
+	UpdateRoleDataTypeRoles UpdateRoleDataType = "roles"
+)
+
 // Defines values for UpdateSecretDataType.
 const (
 	UpdateSecretDataTypeSecrets UpdateSecretDataType = "secrets"
@@ -4611,7 +5925,7 @@ const (
 
 // Defines values for UpdateSeverityDataType.
 const (
-	Severities UpdateSeverityDataType = "severities"
+	UpdateSeverityDataTypeSeverities UpdateSeverityDataType = "severities"
 )
 
 // Defines values for UpdateShortcutStoryTaskParamsTaskType.
@@ -6200,6 +7514,116 @@ type AuditsListDataAttributesItemType string
 
 // AuditsListDataType defines model for AuditsList.Data.Type.
 type AuditsListDataType string
+
+// Authorization defines model for authorization.
+type Authorization struct {
+	// The id of the resource being accessed.
+	AuthorizableId string `json:"authorizable_id"`
+
+	// The type of resource being accessed.
+	AuthorizableType AuthorizationAuthorizableType `json:"authorizable_type"`
+	CreatedAt        string                        `json:"created_at"`
+
+	// The resource id granted access.
+	GranteeId string `json:"grantee_id"`
+
+	// The type of resource granted access.
+	GranteeType AuthorizationGranteeType   `json:"grantee_type"`
+	Permissions []AuthorizationPermissions `json:"permissions"`
+	UpdatedAt   string                     `json:"updated_at"`
+}
+
+// The type of resource being accessed.
+type AuthorizationAuthorizableType string
+
+// The type of resource granted access.
+type AuthorizationGranteeType string
+
+// AuthorizationPermissions defines model for Authorization.Permissions.
+type AuthorizationPermissions string
+
+// AuthorizationList defines model for authorization_list.
+type AuthorizationList struct {
+	Data []struct {
+		Attributes struct {
+			// The id of the resource being accessed.
+			AuthorizableId string `json:"authorizable_id"`
+
+			// The type of resource being accessed.
+			AuthorizableType AuthorizationListDataAttributesAuthorizableType `json:"authorizable_type"`
+			CreatedAt        string                                          `json:"created_at"`
+
+			// The resource id granted access.
+			GranteeId string `json:"grantee_id"`
+
+			// The type of resource granted access.
+			GranteeType AuthorizationListDataAttributesGranteeType   `json:"grantee_type"`
+			Permissions []AuthorizationListDataAttributesPermissions `json:"permissions"`
+			UpdatedAt   string                                       `json:"updated_at"`
+		} `json:"attributes"`
+
+		// Unique ID of the authorization
+		Id   string                    `json:"id"`
+		Type AuthorizationListDataType `json:"type"`
+	} `json:"data"`
+	Links struct {
+		First string  `json:"first"`
+		Last  string  `json:"last"`
+		Next  *string `json:"next"`
+		Prev  *string `json:"prev"`
+		Self  string  `json:"self"`
+	} `json:"links"`
+}
+
+// The type of resource being accessed.
+type AuthorizationListDataAttributesAuthorizableType string
+
+// The type of resource granted access.
+type AuthorizationListDataAttributesGranteeType string
+
+// AuthorizationListDataAttributesPermissions defines model for AuthorizationList.Data.Attributes.Permissions.
+type AuthorizationListDataAttributesPermissions string
+
+// AuthorizationListDataType defines model for AuthorizationList.Data.Type.
+type AuthorizationListDataType string
+
+// AuthorizationResponse defines model for authorization_response.
+type AuthorizationResponse struct {
+	Data struct {
+		Attributes struct {
+			// The id of the resource being accessed.
+			AuthorizableId string `json:"authorizable_id"`
+
+			// The type of resource being accessed.
+			AuthorizableType AuthorizationResponseDataAttributesAuthorizableType `json:"authorizable_type"`
+			CreatedAt        string                                              `json:"created_at"`
+
+			// The resource id granted access.
+			GranteeId string `json:"grantee_id"`
+
+			// The type of resource granted access.
+			GranteeType AuthorizationResponseDataAttributesGranteeType   `json:"grantee_type"`
+			Permissions []AuthorizationResponseDataAttributesPermissions `json:"permissions"`
+			UpdatedAt   string                                           `json:"updated_at"`
+		} `json:"attributes"`
+
+		// Unique ID of the authorization
+		Id   string                        `json:"id"`
+		Type AuthorizationResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// The type of resource being accessed.
+type AuthorizationResponseDataAttributesAuthorizableType string
+
+// The type of resource granted access.
+type AuthorizationResponseDataAttributesGranteeType string
+
+// AuthorizationResponseDataAttributesPermissions defines model for AuthorizationResponse.Data.Attributes.Permissions.
+type AuthorizationResponseDataAttributesPermissions string
+
+// AuthorizationResponseDataType defines model for AuthorizationResponse.Data.Type.
+type AuthorizationResponseDataType string
 
 // AutoAssignRoleOpsgenieTaskParams defines model for auto_assign_role_opsgenie_task_params.
 type AutoAssignRoleOpsgenieTaskParams struct {
@@ -10226,6 +11650,243 @@ type IncidentListDataAttributesSeverityDataType string
 // IncidentListDataType defines model for IncidentList.Data.Type.
 type IncidentListDataType string
 
+// IncidentPermissionSet defines model for incident_permission_set.
+type IncidentPermissionSet struct {
+	CreatedAt string `json:"created_at"`
+
+	// The incident permission set description.
+	Description *string `json:"description"`
+
+	// The incident permission set name.
+	Name                       string                                             `json:"name"`
+	PrivateIncidentPermissions *[]IncidentPermissionSetPrivateIncidentPermissions `json:"private_incident_permissions,omitempty"`
+	PublicIncidentPermissions  *[]IncidentPermissionSetPublicIncidentPermissions  `json:"public_incident_permissions,omitempty"`
+
+	// The incident permission set slug.
+	Slug      string `json:"slug"`
+	UpdatedAt string `json:"updated_at"`
+}
+
+// IncidentPermissionSetPrivateIncidentPermissions defines model for IncidentPermissionSet.PrivateIncidentPermissions.
+type IncidentPermissionSetPrivateIncidentPermissions string
+
+// IncidentPermissionSetPublicIncidentPermissions defines model for IncidentPermissionSet.PublicIncidentPermissions.
+type IncidentPermissionSetPublicIncidentPermissions string
+
+// IncidentPermissionSetBoolean defines model for incident_permission_set_boolean.
+type IncidentPermissionSetBoolean struct {
+	CreatedAt               string                           `json:"created_at"`
+	Enabled                 *bool                            `json:"enabled,omitempty"`
+	IncidentPermissionSetId *string                          `json:"incident_permission_set_id,omitempty"`
+	Kind                    IncidentPermissionSetBooleanKind `json:"kind"`
+	Private                 *bool                            `json:"private,omitempty"`
+	UpdatedAt               string                           `json:"updated_at"`
+}
+
+// IncidentPermissionSetBooleanKind defines model for IncidentPermissionSetBoolean.Kind.
+type IncidentPermissionSetBooleanKind string
+
+// IncidentPermissionSetBooleanList defines model for incident_permission_set_boolean_list.
+type IncidentPermissionSetBooleanList struct {
+	Data []struct {
+		Attributes struct {
+			CreatedAt               string                                             `json:"created_at"`
+			Enabled                 *bool                                              `json:"enabled,omitempty"`
+			IncidentPermissionSetId *string                                            `json:"incident_permission_set_id,omitempty"`
+			Kind                    IncidentPermissionSetBooleanListDataAttributesKind `json:"kind"`
+			Private                 *bool                                              `json:"private,omitempty"`
+			UpdatedAt               string                                             `json:"updated_at"`
+		} `json:"attributes"`
+
+		// Unique ID of the incident permission set boolean
+		Id   string                                   `json:"id"`
+		Type IncidentPermissionSetBooleanListDataType `json:"type"`
+	} `json:"data"`
+	Links struct {
+		First string  `json:"first"`
+		Last  string  `json:"last"`
+		Next  *string `json:"next"`
+		Prev  *string `json:"prev"`
+		Self  string  `json:"self"`
+	} `json:"links"`
+}
+
+// IncidentPermissionSetBooleanListDataAttributesKind defines model for IncidentPermissionSetBooleanList.Data.Attributes.Kind.
+type IncidentPermissionSetBooleanListDataAttributesKind string
+
+// IncidentPermissionSetBooleanListDataType defines model for IncidentPermissionSetBooleanList.Data.Type.
+type IncidentPermissionSetBooleanListDataType string
+
+// IncidentPermissionSetBooleanResponse defines model for incident_permission_set_boolean_response.
+type IncidentPermissionSetBooleanResponse struct {
+	Data struct {
+		Attributes struct {
+			CreatedAt               string                                                 `json:"created_at"`
+			Enabled                 *bool                                                  `json:"enabled,omitempty"`
+			IncidentPermissionSetId *string                                                `json:"incident_permission_set_id,omitempty"`
+			Kind                    IncidentPermissionSetBooleanResponseDataAttributesKind `json:"kind"`
+			Private                 *bool                                                  `json:"private,omitempty"`
+			UpdatedAt               string                                                 `json:"updated_at"`
+		} `json:"attributes"`
+
+		// Unique ID of the incident permission set boolean
+		Id   string                                       `json:"id"`
+		Type IncidentPermissionSetBooleanResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// IncidentPermissionSetBooleanResponseDataAttributesKind defines model for IncidentPermissionSetBooleanResponse.Data.Attributes.Kind.
+type IncidentPermissionSetBooleanResponseDataAttributesKind string
+
+// IncidentPermissionSetBooleanResponseDataType defines model for IncidentPermissionSetBooleanResponse.Data.Type.
+type IncidentPermissionSetBooleanResponseDataType string
+
+// IncidentPermissionSetList defines model for incident_permission_set_list.
+type IncidentPermissionSetList struct {
+	Data []struct {
+		Attributes struct {
+			CreatedAt string `json:"created_at"`
+
+			// The incident permission set description.
+			Description *string `json:"description"`
+
+			// The incident permission set name.
+			Name                       string                                                               `json:"name"`
+			PrivateIncidentPermissions *[]IncidentPermissionSetListDataAttributesPrivateIncidentPermissions `json:"private_incident_permissions,omitempty"`
+			PublicIncidentPermissions  *[]IncidentPermissionSetListDataAttributesPublicIncidentPermissions  `json:"public_incident_permissions,omitempty"`
+
+			// The incident permission set slug.
+			Slug      string `json:"slug"`
+			UpdatedAt string `json:"updated_at"`
+		} `json:"attributes"`
+
+		// Unique ID of the incident permission set
+		Id   string                            `json:"id"`
+		Type IncidentPermissionSetListDataType `json:"type"`
+	} `json:"data"`
+	Links struct {
+		First string  `json:"first"`
+		Last  string  `json:"last"`
+		Next  *string `json:"next"`
+		Prev  *string `json:"prev"`
+		Self  string  `json:"self"`
+	} `json:"links"`
+}
+
+// IncidentPermissionSetListDataAttributesPrivateIncidentPermissions defines model for IncidentPermissionSetList.Data.Attributes.PrivateIncidentPermissions.
+type IncidentPermissionSetListDataAttributesPrivateIncidentPermissions string
+
+// IncidentPermissionSetListDataAttributesPublicIncidentPermissions defines model for IncidentPermissionSetList.Data.Attributes.PublicIncidentPermissions.
+type IncidentPermissionSetListDataAttributesPublicIncidentPermissions string
+
+// IncidentPermissionSetListDataType defines model for IncidentPermissionSetList.Data.Type.
+type IncidentPermissionSetListDataType string
+
+// IncidentPermissionSetResource defines model for incident_permission_set_resource.
+type IncidentPermissionSetResource struct {
+	CreatedAt               string                            `json:"created_at"`
+	IncidentPermissionSetId string                            `json:"incident_permission_set_id"`
+	Kind                    IncidentPermissionSetResourceKind `json:"kind"`
+	Private                 *bool                             `json:"private,omitempty"`
+	ResourceId              *string                           `json:"resource_id"`
+	ResourceType            *string                           `json:"resource_type"`
+	UpdatedAt               string                            `json:"updated_at"`
+}
+
+// IncidentPermissionSetResourceKind defines model for IncidentPermissionSetResource.Kind.
+type IncidentPermissionSetResourceKind string
+
+// IncidentPermissionSetResourceList defines model for incident_permission_set_resource_list.
+type IncidentPermissionSetResourceList struct {
+	Data []struct {
+		Attributes struct {
+			CreatedAt               string                                              `json:"created_at"`
+			IncidentPermissionSetId string                                              `json:"incident_permission_set_id"`
+			Kind                    IncidentPermissionSetResourceListDataAttributesKind `json:"kind"`
+			Private                 *bool                                               `json:"private,omitempty"`
+			ResourceId              *string                                             `json:"resource_id"`
+			ResourceType            *string                                             `json:"resource_type"`
+			UpdatedAt               string                                              `json:"updated_at"`
+		} `json:"attributes"`
+
+		// Unique ID of the incident permission set resource
+		Id   string                                    `json:"id"`
+		Type IncidentPermissionSetResourceListDataType `json:"type"`
+	} `json:"data"`
+	Links struct {
+		First string  `json:"first"`
+		Last  string  `json:"last"`
+		Next  *string `json:"next"`
+		Prev  *string `json:"prev"`
+		Self  string  `json:"self"`
+	} `json:"links"`
+}
+
+// IncidentPermissionSetResourceListDataAttributesKind defines model for IncidentPermissionSetResourceList.Data.Attributes.Kind.
+type IncidentPermissionSetResourceListDataAttributesKind string
+
+// IncidentPermissionSetResourceListDataType defines model for IncidentPermissionSetResourceList.Data.Type.
+type IncidentPermissionSetResourceListDataType string
+
+// IncidentPermissionSetResourceResponse defines model for incident_permission_set_resource_response.
+type IncidentPermissionSetResourceResponse struct {
+	Data struct {
+		Attributes struct {
+			CreatedAt               string                                                  `json:"created_at"`
+			IncidentPermissionSetId string                                                  `json:"incident_permission_set_id"`
+			Kind                    IncidentPermissionSetResourceResponseDataAttributesKind `json:"kind"`
+			Private                 *bool                                                   `json:"private,omitempty"`
+			ResourceId              *string                                                 `json:"resource_id"`
+			ResourceType            *string                                                 `json:"resource_type"`
+			UpdatedAt               string                                                  `json:"updated_at"`
+		} `json:"attributes"`
+
+		// Unique ID of the incident permission set resource
+		Id   string                                        `json:"id"`
+		Type IncidentPermissionSetResourceResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// IncidentPermissionSetResourceResponseDataAttributesKind defines model for IncidentPermissionSetResourceResponse.Data.Attributes.Kind.
+type IncidentPermissionSetResourceResponseDataAttributesKind string
+
+// IncidentPermissionSetResourceResponseDataType defines model for IncidentPermissionSetResourceResponse.Data.Type.
+type IncidentPermissionSetResourceResponseDataType string
+
+// IncidentPermissionSetResponse defines model for incident_permission_set_response.
+type IncidentPermissionSetResponse struct {
+	Data struct {
+		Attributes struct {
+			CreatedAt string `json:"created_at"`
+
+			// The incident permission set description.
+			Description *string `json:"description"`
+
+			// The incident permission set name.
+			Name                       string                                                                   `json:"name"`
+			PrivateIncidentPermissions *[]IncidentPermissionSetResponseDataAttributesPrivateIncidentPermissions `json:"private_incident_permissions,omitempty"`
+			PublicIncidentPermissions  *[]IncidentPermissionSetResponseDataAttributesPublicIncidentPermissions  `json:"public_incident_permissions,omitempty"`
+
+			// The incident permission set slug.
+			Slug      string `json:"slug"`
+			UpdatedAt string `json:"updated_at"`
+		} `json:"attributes"`
+
+		// Unique ID of the incident permission set
+		Id   string                                `json:"id"`
+		Type IncidentPermissionSetResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// IncidentPermissionSetResponseDataAttributesPrivateIncidentPermissions defines model for IncidentPermissionSetResponse.Data.Attributes.PrivateIncidentPermissions.
+type IncidentPermissionSetResponseDataAttributesPrivateIncidentPermissions string
+
+// IncidentPermissionSetResponseDataAttributesPublicIncidentPermissions defines model for IncidentPermissionSetResponse.Data.Attributes.PublicIncidentPermissions.
+type IncidentPermissionSetResponseDataAttributesPublicIncidentPermissions string
+
+// IncidentPermissionSetResponseDataType defines model for IncidentPermissionSetResponse.Data.Type.
+type IncidentPermissionSetResponseDataType string
+
 // IncidentPostMortem defines model for incident_post_mortem.
 type IncidentPostMortem struct {
 	// The content of the incident retrospective (Only if internal)
@@ -11716,6 +13377,39 @@ type NewAlert struct {
 // NewAlertDataType defines model for NewAlert.Data.Type.
 type NewAlertDataType string
 
+// NewAuthorization defines model for new_authorization.
+type NewAuthorization struct {
+	Data struct {
+		Attributes struct {
+			// The id of the resource being accessed.
+			AuthorizableId string `json:"authorizable_id"`
+
+			// The type of resource being accessed.
+			AuthorizableType NewAuthorizationDataAttributesAuthorizableType `json:"authorizable_type"`
+
+			// The resource id granted access.
+			GranteeId string `json:"grantee_id"`
+
+			// The type of resource granted access.
+			GranteeType NewAuthorizationDataAttributesGranteeType   `json:"grantee_type"`
+			Permissions []NewAuthorizationDataAttributesPermissions `json:"permissions"`
+		} `json:"attributes"`
+		Type NewAuthorizationDataType `json:"type"`
+	} `json:"data"`
+}
+
+// The type of resource being accessed.
+type NewAuthorizationDataAttributesAuthorizableType string
+
+// The type of resource granted access.
+type NewAuthorizationDataAttributesGranteeType string
+
+// NewAuthorizationDataAttributesPermissions defines model for NewAuthorization.Data.Attributes.Permissions.
+type NewAuthorizationDataAttributesPermissions string
+
+// NewAuthorizationDataType defines model for NewAuthorization.Data.Type.
+type NewAuthorizationDataType string
+
 // NewCause defines model for new_cause.
 type NewCause struct {
 	Data struct {
@@ -12308,6 +14002,73 @@ type NewIncidentFormFieldSelection struct {
 // NewIncidentFormFieldSelectionDataType defines model for NewIncidentFormFieldSelection.Data.Type.
 type NewIncidentFormFieldSelectionDataType string
 
+// NewIncidentPermissionSet defines model for new_incident_permission_set.
+type NewIncidentPermissionSet struct {
+	Data struct {
+		Attributes struct {
+			// The incident permission set description.
+			Description *string `json:"description"`
+
+			// The incident permission set name.
+			Name                       string                                                              `json:"name"`
+			PrivateIncidentPermissions *[]NewIncidentPermissionSetDataAttributesPrivateIncidentPermissions `json:"private_incident_permissions,omitempty"`
+			PublicIncidentPermissions  *[]NewIncidentPermissionSetDataAttributesPublicIncidentPermissions  `json:"public_incident_permissions,omitempty"`
+
+			// The incident permission set slug.
+			Slug *string `json:"slug,omitempty"`
+		} `json:"attributes"`
+		Type NewIncidentPermissionSetDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewIncidentPermissionSetDataAttributesPrivateIncidentPermissions defines model for NewIncidentPermissionSet.Data.Attributes.PrivateIncidentPermissions.
+type NewIncidentPermissionSetDataAttributesPrivateIncidentPermissions string
+
+// NewIncidentPermissionSetDataAttributesPublicIncidentPermissions defines model for NewIncidentPermissionSet.Data.Attributes.PublicIncidentPermissions.
+type NewIncidentPermissionSetDataAttributesPublicIncidentPermissions string
+
+// NewIncidentPermissionSetDataType defines model for NewIncidentPermissionSet.Data.Type.
+type NewIncidentPermissionSetDataType string
+
+// NewIncidentPermissionSetBoolean defines model for new_incident_permission_set_boolean.
+type NewIncidentPermissionSetBoolean struct {
+	Data struct {
+		Attributes struct {
+			Enabled                 *bool                                             `json:"enabled,omitempty"`
+			IncidentPermissionSetId *string                                           `json:"incident_permission_set_id,omitempty"`
+			Kind                    NewIncidentPermissionSetBooleanDataAttributesKind `json:"kind"`
+			Private                 *bool                                             `json:"private,omitempty"`
+		} `json:"attributes"`
+		Type NewIncidentPermissionSetBooleanDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewIncidentPermissionSetBooleanDataAttributesKind defines model for NewIncidentPermissionSetBoolean.Data.Attributes.Kind.
+type NewIncidentPermissionSetBooleanDataAttributesKind string
+
+// NewIncidentPermissionSetBooleanDataType defines model for NewIncidentPermissionSetBoolean.Data.Type.
+type NewIncidentPermissionSetBooleanDataType string
+
+// NewIncidentPermissionSetResource defines model for new_incident_permission_set_resource.
+type NewIncidentPermissionSetResource struct {
+	Data struct {
+		Attributes struct {
+			IncidentPermissionSetId *string                                            `json:"incident_permission_set_id,omitempty"`
+			Kind                    NewIncidentPermissionSetResourceDataAttributesKind `json:"kind"`
+			Private                 *bool                                              `json:"private,omitempty"`
+			ResourceId              *string                                            `json:"resource_id"`
+			ResourceType            *string                                            `json:"resource_type"`
+		} `json:"attributes"`
+		Type NewIncidentPermissionSetResourceDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewIncidentPermissionSetResourceDataAttributesKind defines model for NewIncidentPermissionSetResource.Data.Attributes.Kind.
+type NewIncidentPermissionSetResourceDataAttributesKind string
+
+// NewIncidentPermissionSetResourceDataType defines model for NewIncidentPermissionSetResource.Data.Type.
+type NewIncidentPermissionSetResourceDataType string
+
 // NewIncidentRole defines model for new_incident_role.
 type NewIncidentRole struct {
 	Data struct {
@@ -12590,6 +14351,123 @@ type NewRetrospectiveStep struct {
 
 // NewRetrospectiveStepDataType defines model for NewRetrospectiveStep.Data.Type.
 type NewRetrospectiveStepDataType string
+
+// NewRole defines model for new_role.
+type NewRole struct {
+	Data struct {
+		Attributes struct {
+			ApiKeysPermissions           *[]NewRoleDataAttributesApiKeysPermissions           `json:"api_keys_permissions,omitempty"`
+			AuditsPermissions            *[]NewRoleDataAttributesAuditsPermissions            `json:"audits_permissions,omitempty"`
+			BillingPermissions           *[]NewRoleDataAttributesBillingPermissions           `json:"billing_permissions,omitempty"`
+			EnvironmentsPermissions      *[]NewRoleDataAttributesEnvironmentsPermissions      `json:"environments_permissions,omitempty"`
+			FormFieldsPermissions        *[]NewRoleDataAttributesFormFieldsPermissions        `json:"form_fields_permissions,omitempty"`
+			FunctionalitiesPermissions   *[]NewRoleDataAttributesFunctionalitiesPermissions   `json:"functionalities_permissions,omitempty"`
+			GroupsPermissions            *[]NewRoleDataAttributesGroupsPermissions            `json:"groups_permissions,omitempty"`
+			IncidentCausesPermissions    *[]NewRoleDataAttributesIncidentCausesPermissions    `json:"incident_causes_permissions,omitempty"`
+			IncidentFeedbacksPermissions *[]NewRoleDataAttributesIncidentFeedbacksPermissions `json:"incident_feedbacks_permissions,omitempty"`
+
+			// Associated incident permissions set.
+			IncidentPermissionSetId        *string                                                `json:"incident_permission_set_id"`
+			IncidentPostMortemsPermissions *[]NewRoleDataAttributesIncidentPostMortemsPermissions `json:"incident_post_mortems_permissions,omitempty"`
+			IncidentRolesPermissions       *[]NewRoleDataAttributesIncidentRolesPermissions       `json:"incident_roles_permissions,omitempty"`
+			IncidentTypesPermissions       *[]NewRoleDataAttributesIncidentTypesPermissions       `json:"incident_types_permissions,omitempty"`
+			IncidentsPermissions           *[]NewRoleDataAttributesIncidentsPermissions           `json:"incidents_permissions,omitempty"`
+			InvitationsPermissions         *[]NewRoleDataAttributesInvitationsPermissions         `json:"invitations_permissions,omitempty"`
+
+			// The role name.
+			Name                        string                                              `json:"name"`
+			PlaybooksPermissions        *[]NewRoleDataAttributesPlaybooksPermissions        `json:"playbooks_permissions,omitempty"`
+			PrivateIncidentsPermissions *[]NewRoleDataAttributesPrivateIncidentsPermissions `json:"private_incidents_permissions,omitempty"`
+			RetrospectivePermissions    *[]NewRoleDataAttributesRetrospectivePermissions    `json:"retrospective_permissions,omitempty"`
+			RolesPermissions            *[]NewRoleDataAttributesRolesPermissions            `json:"roles_permissions,omitempty"`
+			SecretsPermissions          *[]NewRoleDataAttributesSecretsPermissions          `json:"secrets_permissions,omitempty"`
+			ServicesPermissions         *[]NewRoleDataAttributesServicesPermissions         `json:"services_permissions,omitempty"`
+			SeveritiesPermissions       *[]NewRoleDataAttributesSeveritiesPermissions       `json:"severities_permissions,omitempty"`
+
+			// The role slug.
+			Slug                   *string                                        `json:"slug,omitempty"`
+			StatusPagesPermissions *[]NewRoleDataAttributesStatusPagesPermissions `json:"status_pages_permissions,omitempty"`
+			WebhooksPermissions    *[]NewRoleDataAttributesWebhooksPermissions    `json:"webhooks_permissions,omitempty"`
+			WorkflowsPermissions   *[]NewRoleDataAttributesWorkflowsPermissions   `json:"workflows_permissions,omitempty"`
+		} `json:"attributes"`
+		Type NewRoleDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewRoleDataAttributesApiKeysPermissions defines model for NewRole.Data.Attributes.ApiKeysPermissions.
+type NewRoleDataAttributesApiKeysPermissions string
+
+// NewRoleDataAttributesAuditsPermissions defines model for NewRole.Data.Attributes.AuditsPermissions.
+type NewRoleDataAttributesAuditsPermissions string
+
+// NewRoleDataAttributesBillingPermissions defines model for NewRole.Data.Attributes.BillingPermissions.
+type NewRoleDataAttributesBillingPermissions string
+
+// NewRoleDataAttributesEnvironmentsPermissions defines model for NewRole.Data.Attributes.EnvironmentsPermissions.
+type NewRoleDataAttributesEnvironmentsPermissions string
+
+// NewRoleDataAttributesFormFieldsPermissions defines model for NewRole.Data.Attributes.FormFieldsPermissions.
+type NewRoleDataAttributesFormFieldsPermissions string
+
+// NewRoleDataAttributesFunctionalitiesPermissions defines model for NewRole.Data.Attributes.FunctionalitiesPermissions.
+type NewRoleDataAttributesFunctionalitiesPermissions string
+
+// NewRoleDataAttributesGroupsPermissions defines model for NewRole.Data.Attributes.GroupsPermissions.
+type NewRoleDataAttributesGroupsPermissions string
+
+// NewRoleDataAttributesIncidentCausesPermissions defines model for NewRole.Data.Attributes.IncidentCausesPermissions.
+type NewRoleDataAttributesIncidentCausesPermissions string
+
+// NewRoleDataAttributesIncidentFeedbacksPermissions defines model for NewRole.Data.Attributes.IncidentFeedbacksPermissions.
+type NewRoleDataAttributesIncidentFeedbacksPermissions string
+
+// NewRoleDataAttributesIncidentPostMortemsPermissions defines model for NewRole.Data.Attributes.IncidentPostMortemsPermissions.
+type NewRoleDataAttributesIncidentPostMortemsPermissions string
+
+// NewRoleDataAttributesIncidentRolesPermissions defines model for NewRole.Data.Attributes.IncidentRolesPermissions.
+type NewRoleDataAttributesIncidentRolesPermissions string
+
+// NewRoleDataAttributesIncidentTypesPermissions defines model for NewRole.Data.Attributes.IncidentTypesPermissions.
+type NewRoleDataAttributesIncidentTypesPermissions string
+
+// NewRoleDataAttributesIncidentsPermissions defines model for NewRole.Data.Attributes.IncidentsPermissions.
+type NewRoleDataAttributesIncidentsPermissions string
+
+// NewRoleDataAttributesInvitationsPermissions defines model for NewRole.Data.Attributes.InvitationsPermissions.
+type NewRoleDataAttributesInvitationsPermissions string
+
+// NewRoleDataAttributesPlaybooksPermissions defines model for NewRole.Data.Attributes.PlaybooksPermissions.
+type NewRoleDataAttributesPlaybooksPermissions string
+
+// NewRoleDataAttributesPrivateIncidentsPermissions defines model for NewRole.Data.Attributes.PrivateIncidentsPermissions.
+type NewRoleDataAttributesPrivateIncidentsPermissions string
+
+// NewRoleDataAttributesRetrospectivePermissions defines model for NewRole.Data.Attributes.RetrospectivePermissions.
+type NewRoleDataAttributesRetrospectivePermissions string
+
+// NewRoleDataAttributesRolesPermissions defines model for NewRole.Data.Attributes.RolesPermissions.
+type NewRoleDataAttributesRolesPermissions string
+
+// NewRoleDataAttributesSecretsPermissions defines model for NewRole.Data.Attributes.SecretsPermissions.
+type NewRoleDataAttributesSecretsPermissions string
+
+// NewRoleDataAttributesServicesPermissions defines model for NewRole.Data.Attributes.ServicesPermissions.
+type NewRoleDataAttributesServicesPermissions string
+
+// NewRoleDataAttributesSeveritiesPermissions defines model for NewRole.Data.Attributes.SeveritiesPermissions.
+type NewRoleDataAttributesSeveritiesPermissions string
+
+// NewRoleDataAttributesStatusPagesPermissions defines model for NewRole.Data.Attributes.StatusPagesPermissions.
+type NewRoleDataAttributesStatusPagesPermissions string
+
+// NewRoleDataAttributesWebhooksPermissions defines model for NewRole.Data.Attributes.WebhooksPermissions.
+type NewRoleDataAttributesWebhooksPermissions string
+
+// NewRoleDataAttributesWorkflowsPermissions defines model for NewRole.Data.Attributes.WorkflowsPermissions.
+type NewRoleDataAttributesWorkflowsPermissions string
+
+// NewRoleDataType defines model for NewRole.Data.Type.
+type NewRoleDataType string
 
 // NewSecret defines model for new_secret.
 type NewSecret struct {
@@ -14307,6 +16185,386 @@ type RetrospectiveStepResponse struct {
 // RetrospectiveStepResponseDataType defines model for RetrospectiveStepResponse.Data.Type.
 type RetrospectiveStepResponseDataType string
 
+// Role defines model for role.
+type Role struct {
+	ApiKeysPermissions           *[]RoleApiKeysPermissions           `json:"api_keys_permissions,omitempty"`
+	AuditsPermissions            *[]RoleAuditsPermissions            `json:"audits_permissions,omitempty"`
+	BillingPermissions           *[]RoleBillingPermissions           `json:"billing_permissions,omitempty"`
+	CreatedAt                    string                              `json:"created_at"`
+	EnvironmentsPermissions      *[]RoleEnvironmentsPermissions      `json:"environments_permissions,omitempty"`
+	FormFieldsPermissions        *[]RoleFormFieldsPermissions        `json:"form_fields_permissions,omitempty"`
+	FunctionalitiesPermissions   *[]RoleFunctionalitiesPermissions   `json:"functionalities_permissions,omitempty"`
+	GroupsPermissions            *[]RoleGroupsPermissions            `json:"groups_permissions,omitempty"`
+	IncidentCausesPermissions    *[]RoleIncidentCausesPermissions    `json:"incident_causes_permissions,omitempty"`
+	IncidentFeedbacksPermissions *[]RoleIncidentFeedbacksPermissions `json:"incident_feedbacks_permissions,omitempty"`
+
+	// Associated incident permissions set.
+	IncidentPermissionSetId        *string                               `json:"incident_permission_set_id"`
+	IncidentPostMortemsPermissions *[]RoleIncidentPostMortemsPermissions `json:"incident_post_mortems_permissions,omitempty"`
+	IncidentRolesPermissions       *[]RoleIncidentRolesPermissions       `json:"incident_roles_permissions,omitempty"`
+	IncidentTypesPermissions       *[]RoleIncidentTypesPermissions       `json:"incident_types_permissions,omitempty"`
+	IncidentsPermissions           *[]RoleIncidentsPermissions           `json:"incidents_permissions,omitempty"`
+	InvitationsPermissions         *[]RoleInvitationsPermissions         `json:"invitations_permissions,omitempty"`
+
+	// Whether the role can be deleted.
+	IsDeletable *bool `json:"is_deletable,omitempty"`
+
+	// Whether the role can be edited.
+	IsEditable *bool `json:"is_editable,omitempty"`
+
+	// The role name.
+	Name                        string                             `json:"name"`
+	PlaybooksPermissions        *[]RolePlaybooksPermissions        `json:"playbooks_permissions,omitempty"`
+	PrivateIncidentsPermissions *[]RolePrivateIncidentsPermissions `json:"private_incidents_permissions,omitempty"`
+	RetrospectivePermissions    *[]RoleRetrospectivePermissions    `json:"retrospective_permissions,omitempty"`
+	RolesPermissions            *[]RoleRolesPermissions            `json:"roles_permissions,omitempty"`
+	SecretsPermissions          *[]RoleSecretsPermissions          `json:"secrets_permissions,omitempty"`
+	ServicesPermissions         *[]RoleServicesPermissions         `json:"services_permissions,omitempty"`
+	SeveritiesPermissions       *[]RoleSeveritiesPermissions       `json:"severities_permissions,omitempty"`
+
+	// The role slug.
+	Slug                   string                        `json:"slug"`
+	StatusPagesPermissions *[]RoleStatusPagesPermissions `json:"status_pages_permissions,omitempty"`
+	UpdatedAt              string                        `json:"updated_at"`
+	WebhooksPermissions    *[]RoleWebhooksPermissions    `json:"webhooks_permissions,omitempty"`
+	WorkflowsPermissions   *[]RoleWorkflowsPermissions   `json:"workflows_permissions,omitempty"`
+}
+
+// RoleApiKeysPermissions defines model for Role.ApiKeysPermissions.
+type RoleApiKeysPermissions string
+
+// RoleAuditsPermissions defines model for Role.AuditsPermissions.
+type RoleAuditsPermissions string
+
+// RoleBillingPermissions defines model for Role.BillingPermissions.
+type RoleBillingPermissions string
+
+// RoleEnvironmentsPermissions defines model for Role.EnvironmentsPermissions.
+type RoleEnvironmentsPermissions string
+
+// RoleFormFieldsPermissions defines model for Role.FormFieldsPermissions.
+type RoleFormFieldsPermissions string
+
+// RoleFunctionalitiesPermissions defines model for Role.FunctionalitiesPermissions.
+type RoleFunctionalitiesPermissions string
+
+// RoleGroupsPermissions defines model for Role.GroupsPermissions.
+type RoleGroupsPermissions string
+
+// RoleIncidentCausesPermissions defines model for Role.IncidentCausesPermissions.
+type RoleIncidentCausesPermissions string
+
+// RoleIncidentFeedbacksPermissions defines model for Role.IncidentFeedbacksPermissions.
+type RoleIncidentFeedbacksPermissions string
+
+// RoleIncidentPostMortemsPermissions defines model for Role.IncidentPostMortemsPermissions.
+type RoleIncidentPostMortemsPermissions string
+
+// RoleIncidentRolesPermissions defines model for Role.IncidentRolesPermissions.
+type RoleIncidentRolesPermissions string
+
+// RoleIncidentTypesPermissions defines model for Role.IncidentTypesPermissions.
+type RoleIncidentTypesPermissions string
+
+// RoleIncidentsPermissions defines model for Role.IncidentsPermissions.
+type RoleIncidentsPermissions string
+
+// RoleInvitationsPermissions defines model for Role.InvitationsPermissions.
+type RoleInvitationsPermissions string
+
+// RolePlaybooksPermissions defines model for Role.PlaybooksPermissions.
+type RolePlaybooksPermissions string
+
+// RolePrivateIncidentsPermissions defines model for Role.PrivateIncidentsPermissions.
+type RolePrivateIncidentsPermissions string
+
+// RoleRetrospectivePermissions defines model for Role.RetrospectivePermissions.
+type RoleRetrospectivePermissions string
+
+// RoleRolesPermissions defines model for Role.RolesPermissions.
+type RoleRolesPermissions string
+
+// RoleSecretsPermissions defines model for Role.SecretsPermissions.
+type RoleSecretsPermissions string
+
+// RoleServicesPermissions defines model for Role.ServicesPermissions.
+type RoleServicesPermissions string
+
+// RoleSeveritiesPermissions defines model for Role.SeveritiesPermissions.
+type RoleSeveritiesPermissions string
+
+// RoleStatusPagesPermissions defines model for Role.StatusPagesPermissions.
+type RoleStatusPagesPermissions string
+
+// RoleWebhooksPermissions defines model for Role.WebhooksPermissions.
+type RoleWebhooksPermissions string
+
+// RoleWorkflowsPermissions defines model for Role.WorkflowsPermissions.
+type RoleWorkflowsPermissions string
+
+// RoleList defines model for role_list.
+type RoleList struct {
+	Data []struct {
+		Attributes struct {
+			ApiKeysPermissions           *[]RoleListDataAttributesApiKeysPermissions           `json:"api_keys_permissions,omitempty"`
+			AuditsPermissions            *[]RoleListDataAttributesAuditsPermissions            `json:"audits_permissions,omitempty"`
+			BillingPermissions           *[]RoleListDataAttributesBillingPermissions           `json:"billing_permissions,omitempty"`
+			CreatedAt                    string                                                `json:"created_at"`
+			EnvironmentsPermissions      *[]RoleListDataAttributesEnvironmentsPermissions      `json:"environments_permissions,omitempty"`
+			FormFieldsPermissions        *[]RoleListDataAttributesFormFieldsPermissions        `json:"form_fields_permissions,omitempty"`
+			FunctionalitiesPermissions   *[]RoleListDataAttributesFunctionalitiesPermissions   `json:"functionalities_permissions,omitempty"`
+			GroupsPermissions            *[]RoleListDataAttributesGroupsPermissions            `json:"groups_permissions,omitempty"`
+			IncidentCausesPermissions    *[]RoleListDataAttributesIncidentCausesPermissions    `json:"incident_causes_permissions,omitempty"`
+			IncidentFeedbacksPermissions *[]RoleListDataAttributesIncidentFeedbacksPermissions `json:"incident_feedbacks_permissions,omitempty"`
+
+			// Associated incident permissions set.
+			IncidentPermissionSetId        *string                                                 `json:"incident_permission_set_id"`
+			IncidentPostMortemsPermissions *[]RoleListDataAttributesIncidentPostMortemsPermissions `json:"incident_post_mortems_permissions,omitempty"`
+			IncidentRolesPermissions       *[]RoleListDataAttributesIncidentRolesPermissions       `json:"incident_roles_permissions,omitempty"`
+			IncidentTypesPermissions       *[]RoleListDataAttributesIncidentTypesPermissions       `json:"incident_types_permissions,omitempty"`
+			IncidentsPermissions           *[]RoleListDataAttributesIncidentsPermissions           `json:"incidents_permissions,omitempty"`
+			InvitationsPermissions         *[]RoleListDataAttributesInvitationsPermissions         `json:"invitations_permissions,omitempty"`
+
+			// Whether the role can be deleted.
+			IsDeletable *bool `json:"is_deletable,omitempty"`
+
+			// Whether the role can be edited.
+			IsEditable *bool `json:"is_editable,omitempty"`
+
+			// The role name.
+			Name                        string                                               `json:"name"`
+			PlaybooksPermissions        *[]RoleListDataAttributesPlaybooksPermissions        `json:"playbooks_permissions,omitempty"`
+			PrivateIncidentsPermissions *[]RoleListDataAttributesPrivateIncidentsPermissions `json:"private_incidents_permissions,omitempty"`
+			RetrospectivePermissions    *[]RoleListDataAttributesRetrospectivePermissions    `json:"retrospective_permissions,omitempty"`
+			RolesPermissions            *[]RoleListDataAttributesRolesPermissions            `json:"roles_permissions,omitempty"`
+			SecretsPermissions          *[]RoleListDataAttributesSecretsPermissions          `json:"secrets_permissions,omitempty"`
+			ServicesPermissions         *[]RoleListDataAttributesServicesPermissions         `json:"services_permissions,omitempty"`
+			SeveritiesPermissions       *[]RoleListDataAttributesSeveritiesPermissions       `json:"severities_permissions,omitempty"`
+
+			// The role slug.
+			Slug                   string                                          `json:"slug"`
+			StatusPagesPermissions *[]RoleListDataAttributesStatusPagesPermissions `json:"status_pages_permissions,omitempty"`
+			UpdatedAt              string                                          `json:"updated_at"`
+			WebhooksPermissions    *[]RoleListDataAttributesWebhooksPermissions    `json:"webhooks_permissions,omitempty"`
+			WorkflowsPermissions   *[]RoleListDataAttributesWorkflowsPermissions   `json:"workflows_permissions,omitempty"`
+		} `json:"attributes"`
+
+		// Unique ID of the role
+		Id   string           `json:"id"`
+		Type RoleListDataType `json:"type"`
+	} `json:"data"`
+	Links struct {
+		First string  `json:"first"`
+		Last  string  `json:"last"`
+		Next  *string `json:"next"`
+		Prev  *string `json:"prev"`
+		Self  string  `json:"self"`
+	} `json:"links"`
+}
+
+// RoleListDataAttributesApiKeysPermissions defines model for RoleList.Data.Attributes.ApiKeysPermissions.
+type RoleListDataAttributesApiKeysPermissions string
+
+// RoleListDataAttributesAuditsPermissions defines model for RoleList.Data.Attributes.AuditsPermissions.
+type RoleListDataAttributesAuditsPermissions string
+
+// RoleListDataAttributesBillingPermissions defines model for RoleList.Data.Attributes.BillingPermissions.
+type RoleListDataAttributesBillingPermissions string
+
+// RoleListDataAttributesEnvironmentsPermissions defines model for RoleList.Data.Attributes.EnvironmentsPermissions.
+type RoleListDataAttributesEnvironmentsPermissions string
+
+// RoleListDataAttributesFormFieldsPermissions defines model for RoleList.Data.Attributes.FormFieldsPermissions.
+type RoleListDataAttributesFormFieldsPermissions string
+
+// RoleListDataAttributesFunctionalitiesPermissions defines model for RoleList.Data.Attributes.FunctionalitiesPermissions.
+type RoleListDataAttributesFunctionalitiesPermissions string
+
+// RoleListDataAttributesGroupsPermissions defines model for RoleList.Data.Attributes.GroupsPermissions.
+type RoleListDataAttributesGroupsPermissions string
+
+// RoleListDataAttributesIncidentCausesPermissions defines model for RoleList.Data.Attributes.IncidentCausesPermissions.
+type RoleListDataAttributesIncidentCausesPermissions string
+
+// RoleListDataAttributesIncidentFeedbacksPermissions defines model for RoleList.Data.Attributes.IncidentFeedbacksPermissions.
+type RoleListDataAttributesIncidentFeedbacksPermissions string
+
+// RoleListDataAttributesIncidentPostMortemsPermissions defines model for RoleList.Data.Attributes.IncidentPostMortemsPermissions.
+type RoleListDataAttributesIncidentPostMortemsPermissions string
+
+// RoleListDataAttributesIncidentRolesPermissions defines model for RoleList.Data.Attributes.IncidentRolesPermissions.
+type RoleListDataAttributesIncidentRolesPermissions string
+
+// RoleListDataAttributesIncidentTypesPermissions defines model for RoleList.Data.Attributes.IncidentTypesPermissions.
+type RoleListDataAttributesIncidentTypesPermissions string
+
+// RoleListDataAttributesIncidentsPermissions defines model for RoleList.Data.Attributes.IncidentsPermissions.
+type RoleListDataAttributesIncidentsPermissions string
+
+// RoleListDataAttributesInvitationsPermissions defines model for RoleList.Data.Attributes.InvitationsPermissions.
+type RoleListDataAttributesInvitationsPermissions string
+
+// RoleListDataAttributesPlaybooksPermissions defines model for RoleList.Data.Attributes.PlaybooksPermissions.
+type RoleListDataAttributesPlaybooksPermissions string
+
+// RoleListDataAttributesPrivateIncidentsPermissions defines model for RoleList.Data.Attributes.PrivateIncidentsPermissions.
+type RoleListDataAttributesPrivateIncidentsPermissions string
+
+// RoleListDataAttributesRetrospectivePermissions defines model for RoleList.Data.Attributes.RetrospectivePermissions.
+type RoleListDataAttributesRetrospectivePermissions string
+
+// RoleListDataAttributesRolesPermissions defines model for RoleList.Data.Attributes.RolesPermissions.
+type RoleListDataAttributesRolesPermissions string
+
+// RoleListDataAttributesSecretsPermissions defines model for RoleList.Data.Attributes.SecretsPermissions.
+type RoleListDataAttributesSecretsPermissions string
+
+// RoleListDataAttributesServicesPermissions defines model for RoleList.Data.Attributes.ServicesPermissions.
+type RoleListDataAttributesServicesPermissions string
+
+// RoleListDataAttributesSeveritiesPermissions defines model for RoleList.Data.Attributes.SeveritiesPermissions.
+type RoleListDataAttributesSeveritiesPermissions string
+
+// RoleListDataAttributesStatusPagesPermissions defines model for RoleList.Data.Attributes.StatusPagesPermissions.
+type RoleListDataAttributesStatusPagesPermissions string
+
+// RoleListDataAttributesWebhooksPermissions defines model for RoleList.Data.Attributes.WebhooksPermissions.
+type RoleListDataAttributesWebhooksPermissions string
+
+// RoleListDataAttributesWorkflowsPermissions defines model for RoleList.Data.Attributes.WorkflowsPermissions.
+type RoleListDataAttributesWorkflowsPermissions string
+
+// RoleListDataType defines model for RoleList.Data.Type.
+type RoleListDataType string
+
+// RoleResponse defines model for role_response.
+type RoleResponse struct {
+	Data struct {
+		Attributes struct {
+			ApiKeysPermissions           *[]RoleResponseDataAttributesApiKeysPermissions           `json:"api_keys_permissions,omitempty"`
+			AuditsPermissions            *[]RoleResponseDataAttributesAuditsPermissions            `json:"audits_permissions,omitempty"`
+			BillingPermissions           *[]RoleResponseDataAttributesBillingPermissions           `json:"billing_permissions,omitempty"`
+			CreatedAt                    string                                                    `json:"created_at"`
+			EnvironmentsPermissions      *[]RoleResponseDataAttributesEnvironmentsPermissions      `json:"environments_permissions,omitempty"`
+			FormFieldsPermissions        *[]RoleResponseDataAttributesFormFieldsPermissions        `json:"form_fields_permissions,omitempty"`
+			FunctionalitiesPermissions   *[]RoleResponseDataAttributesFunctionalitiesPermissions   `json:"functionalities_permissions,omitempty"`
+			GroupsPermissions            *[]RoleResponseDataAttributesGroupsPermissions            `json:"groups_permissions,omitempty"`
+			IncidentCausesPermissions    *[]RoleResponseDataAttributesIncidentCausesPermissions    `json:"incident_causes_permissions,omitempty"`
+			IncidentFeedbacksPermissions *[]RoleResponseDataAttributesIncidentFeedbacksPermissions `json:"incident_feedbacks_permissions,omitempty"`
+
+			// Associated incident permissions set.
+			IncidentPermissionSetId        *string                                                     `json:"incident_permission_set_id"`
+			IncidentPostMortemsPermissions *[]RoleResponseDataAttributesIncidentPostMortemsPermissions `json:"incident_post_mortems_permissions,omitempty"`
+			IncidentRolesPermissions       *[]RoleResponseDataAttributesIncidentRolesPermissions       `json:"incident_roles_permissions,omitempty"`
+			IncidentTypesPermissions       *[]RoleResponseDataAttributesIncidentTypesPermissions       `json:"incident_types_permissions,omitempty"`
+			IncidentsPermissions           *[]RoleResponseDataAttributesIncidentsPermissions           `json:"incidents_permissions,omitempty"`
+			InvitationsPermissions         *[]RoleResponseDataAttributesInvitationsPermissions         `json:"invitations_permissions,omitempty"`
+
+			// Whether the role can be deleted.
+			IsDeletable *bool `json:"is_deletable,omitempty"`
+
+			// Whether the role can be edited.
+			IsEditable *bool `json:"is_editable,omitempty"`
+
+			// The role name.
+			Name                        string                                                   `json:"name"`
+			PlaybooksPermissions        *[]RoleResponseDataAttributesPlaybooksPermissions        `json:"playbooks_permissions,omitempty"`
+			PrivateIncidentsPermissions *[]RoleResponseDataAttributesPrivateIncidentsPermissions `json:"private_incidents_permissions,omitempty"`
+			RetrospectivePermissions    *[]RoleResponseDataAttributesRetrospectivePermissions    `json:"retrospective_permissions,omitempty"`
+			RolesPermissions            *[]RoleResponseDataAttributesRolesPermissions            `json:"roles_permissions,omitempty"`
+			SecretsPermissions          *[]RoleResponseDataAttributesSecretsPermissions          `json:"secrets_permissions,omitempty"`
+			ServicesPermissions         *[]RoleResponseDataAttributesServicesPermissions         `json:"services_permissions,omitempty"`
+			SeveritiesPermissions       *[]RoleResponseDataAttributesSeveritiesPermissions       `json:"severities_permissions,omitempty"`
+
+			// The role slug.
+			Slug                   string                                              `json:"slug"`
+			StatusPagesPermissions *[]RoleResponseDataAttributesStatusPagesPermissions `json:"status_pages_permissions,omitempty"`
+			UpdatedAt              string                                              `json:"updated_at"`
+			WebhooksPermissions    *[]RoleResponseDataAttributesWebhooksPermissions    `json:"webhooks_permissions,omitempty"`
+			WorkflowsPermissions   *[]RoleResponseDataAttributesWorkflowsPermissions   `json:"workflows_permissions,omitempty"`
+		} `json:"attributes"`
+
+		// Unique ID of the role
+		Id   string               `json:"id"`
+		Type RoleResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// RoleResponseDataAttributesApiKeysPermissions defines model for RoleResponse.Data.Attributes.ApiKeysPermissions.
+type RoleResponseDataAttributesApiKeysPermissions string
+
+// RoleResponseDataAttributesAuditsPermissions defines model for RoleResponse.Data.Attributes.AuditsPermissions.
+type RoleResponseDataAttributesAuditsPermissions string
+
+// RoleResponseDataAttributesBillingPermissions defines model for RoleResponse.Data.Attributes.BillingPermissions.
+type RoleResponseDataAttributesBillingPermissions string
+
+// RoleResponseDataAttributesEnvironmentsPermissions defines model for RoleResponse.Data.Attributes.EnvironmentsPermissions.
+type RoleResponseDataAttributesEnvironmentsPermissions string
+
+// RoleResponseDataAttributesFormFieldsPermissions defines model for RoleResponse.Data.Attributes.FormFieldsPermissions.
+type RoleResponseDataAttributesFormFieldsPermissions string
+
+// RoleResponseDataAttributesFunctionalitiesPermissions defines model for RoleResponse.Data.Attributes.FunctionalitiesPermissions.
+type RoleResponseDataAttributesFunctionalitiesPermissions string
+
+// RoleResponseDataAttributesGroupsPermissions defines model for RoleResponse.Data.Attributes.GroupsPermissions.
+type RoleResponseDataAttributesGroupsPermissions string
+
+// RoleResponseDataAttributesIncidentCausesPermissions defines model for RoleResponse.Data.Attributes.IncidentCausesPermissions.
+type RoleResponseDataAttributesIncidentCausesPermissions string
+
+// RoleResponseDataAttributesIncidentFeedbacksPermissions defines model for RoleResponse.Data.Attributes.IncidentFeedbacksPermissions.
+type RoleResponseDataAttributesIncidentFeedbacksPermissions string
+
+// RoleResponseDataAttributesIncidentPostMortemsPermissions defines model for RoleResponse.Data.Attributes.IncidentPostMortemsPermissions.
+type RoleResponseDataAttributesIncidentPostMortemsPermissions string
+
+// RoleResponseDataAttributesIncidentRolesPermissions defines model for RoleResponse.Data.Attributes.IncidentRolesPermissions.
+type RoleResponseDataAttributesIncidentRolesPermissions string
+
+// RoleResponseDataAttributesIncidentTypesPermissions defines model for RoleResponse.Data.Attributes.IncidentTypesPermissions.
+type RoleResponseDataAttributesIncidentTypesPermissions string
+
+// RoleResponseDataAttributesIncidentsPermissions defines model for RoleResponse.Data.Attributes.IncidentsPermissions.
+type RoleResponseDataAttributesIncidentsPermissions string
+
+// RoleResponseDataAttributesInvitationsPermissions defines model for RoleResponse.Data.Attributes.InvitationsPermissions.
+type RoleResponseDataAttributesInvitationsPermissions string
+
+// RoleResponseDataAttributesPlaybooksPermissions defines model for RoleResponse.Data.Attributes.PlaybooksPermissions.
+type RoleResponseDataAttributesPlaybooksPermissions string
+
+// RoleResponseDataAttributesPrivateIncidentsPermissions defines model for RoleResponse.Data.Attributes.PrivateIncidentsPermissions.
+type RoleResponseDataAttributesPrivateIncidentsPermissions string
+
+// RoleResponseDataAttributesRetrospectivePermissions defines model for RoleResponse.Data.Attributes.RetrospectivePermissions.
+type RoleResponseDataAttributesRetrospectivePermissions string
+
+// RoleResponseDataAttributesRolesPermissions defines model for RoleResponse.Data.Attributes.RolesPermissions.
+type RoleResponseDataAttributesRolesPermissions string
+
+// RoleResponseDataAttributesSecretsPermissions defines model for RoleResponse.Data.Attributes.SecretsPermissions.
+type RoleResponseDataAttributesSecretsPermissions string
+
+// RoleResponseDataAttributesServicesPermissions defines model for RoleResponse.Data.Attributes.ServicesPermissions.
+type RoleResponseDataAttributesServicesPermissions string
+
+// RoleResponseDataAttributesSeveritiesPermissions defines model for RoleResponse.Data.Attributes.SeveritiesPermissions.
+type RoleResponseDataAttributesSeveritiesPermissions string
+
+// RoleResponseDataAttributesStatusPagesPermissions defines model for RoleResponse.Data.Attributes.StatusPagesPermissions.
+type RoleResponseDataAttributesStatusPagesPermissions string
+
+// RoleResponseDataAttributesWebhooksPermissions defines model for RoleResponse.Data.Attributes.WebhooksPermissions.
+type RoleResponseDataAttributesWebhooksPermissions string
+
+// RoleResponseDataAttributesWorkflowsPermissions defines model for RoleResponse.Data.Attributes.WorkflowsPermissions.
+type RoleResponseDataAttributesWorkflowsPermissions string
+
+// RoleResponseDataType defines model for RoleResponse.Data.Type.
+type RoleResponseDataType string
+
 // RunCommandHerokuTaskParams defines model for run_command_heroku_task_params.
 type RunCommandHerokuTaskParams struct {
 	AppName                string `json:"app_name"`
@@ -15891,6 +18149,22 @@ type UpdateAsanaTaskTaskParamsDependencyDirection string
 // UpdateAsanaTaskTaskParamsTaskType defines model for UpdateAsanaTaskTaskParams.TaskType.
 type UpdateAsanaTaskTaskParamsTaskType string
 
+// UpdateAuthorization defines model for update_authorization.
+type UpdateAuthorization struct {
+	Data struct {
+		Attributes struct {
+			Permissions *[]UpdateAuthorizationDataAttributesPermissions `json:"permissions,omitempty"`
+		} `json:"attributes"`
+		Type UpdateAuthorizationDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateAuthorizationDataAttributesPermissions defines model for UpdateAuthorization.Data.Attributes.Permissions.
+type UpdateAuthorizationDataAttributesPermissions string
+
+// UpdateAuthorizationDataType defines model for UpdateAuthorization.Data.Type.
+type UpdateAuthorizationDataType string
+
 // UpdateCause defines model for update_cause.
 type UpdateCause struct {
 	Data struct {
@@ -16570,6 +18844,71 @@ type UpdateIncidentFormFieldSelection struct {
 // UpdateIncidentFormFieldSelectionDataType defines model for UpdateIncidentFormFieldSelection.Data.Type.
 type UpdateIncidentFormFieldSelectionDataType string
 
+// UpdateIncidentPermissionSet defines model for update_incident_permission_set.
+type UpdateIncidentPermissionSet struct {
+	Data struct {
+		Attributes struct {
+			// The incident permission set description.
+			Description *string `json:"description"`
+
+			// The incident permission set name.
+			Name                       *string                                                                `json:"name,omitempty"`
+			PrivateIncidentPermissions *[]UpdateIncidentPermissionSetDataAttributesPrivateIncidentPermissions `json:"private_incident_permissions,omitempty"`
+			PublicIncidentPermissions  *[]UpdateIncidentPermissionSetDataAttributesPublicIncidentPermissions  `json:"public_incident_permissions,omitempty"`
+
+			// The incident permission set slug.
+			Slug *string `json:"slug,omitempty"`
+		} `json:"attributes"`
+		Type UpdateIncidentPermissionSetDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateIncidentPermissionSetDataAttributesPrivateIncidentPermissions defines model for UpdateIncidentPermissionSet.Data.Attributes.PrivateIncidentPermissions.
+type UpdateIncidentPermissionSetDataAttributesPrivateIncidentPermissions string
+
+// UpdateIncidentPermissionSetDataAttributesPublicIncidentPermissions defines model for UpdateIncidentPermissionSet.Data.Attributes.PublicIncidentPermissions.
+type UpdateIncidentPermissionSetDataAttributesPublicIncidentPermissions string
+
+// UpdateIncidentPermissionSetDataType defines model for UpdateIncidentPermissionSet.Data.Type.
+type UpdateIncidentPermissionSetDataType string
+
+// UpdateIncidentPermissionSetBoolean defines model for update_incident_permission_set_boolean.
+type UpdateIncidentPermissionSetBoolean struct {
+	Data struct {
+		Attributes struct {
+			Enabled *bool                                                 `json:"enabled,omitempty"`
+			Kind    *UpdateIncidentPermissionSetBooleanDataAttributesKind `json:"kind,omitempty"`
+			Private *bool                                                 `json:"private,omitempty"`
+		} `json:"attributes"`
+		Type UpdateIncidentPermissionSetBooleanDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateIncidentPermissionSetBooleanDataAttributesKind defines model for UpdateIncidentPermissionSetBoolean.Data.Attributes.Kind.
+type UpdateIncidentPermissionSetBooleanDataAttributesKind string
+
+// UpdateIncidentPermissionSetBooleanDataType defines model for UpdateIncidentPermissionSetBoolean.Data.Type.
+type UpdateIncidentPermissionSetBooleanDataType string
+
+// UpdateIncidentPermissionSetResource defines model for update_incident_permission_set_resource.
+type UpdateIncidentPermissionSetResource struct {
+	Data struct {
+		Attributes struct {
+			Kind         *UpdateIncidentPermissionSetResourceDataAttributesKind `json:"kind,omitempty"`
+			Private      *bool                                                  `json:"private,omitempty"`
+			ResourceId   *string                                                `json:"resource_id"`
+			ResourceType *string                                                `json:"resource_type"`
+		} `json:"attributes"`
+		Type UpdateIncidentPermissionSetResourceDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateIncidentPermissionSetResourceDataAttributesKind defines model for UpdateIncidentPermissionSetResource.Data.Attributes.Kind.
+type UpdateIncidentPermissionSetResourceDataAttributesKind string
+
+// UpdateIncidentPermissionSetResourceDataType defines model for UpdateIncidentPermissionSetResource.Data.Type.
+type UpdateIncidentPermissionSetResourceDataType string
+
 // UpdateIncidentPostMortem defines model for update_incident_post_mortem.
 type UpdateIncidentPostMortem struct {
 	Data struct {
@@ -17181,6 +19520,123 @@ type UpdateRetrospectiveStep struct {
 
 // UpdateRetrospectiveStepDataType defines model for UpdateRetrospectiveStep.Data.Type.
 type UpdateRetrospectiveStepDataType string
+
+// UpdateRole defines model for update_role.
+type UpdateRole struct {
+	Data struct {
+		Attributes struct {
+			ApiKeysPermissions           *[]UpdateRoleDataAttributesApiKeysPermissions           `json:"api_keys_permissions,omitempty"`
+			AuditsPermissions            *[]UpdateRoleDataAttributesAuditsPermissions            `json:"audits_permissions,omitempty"`
+			BillingPermissions           *[]UpdateRoleDataAttributesBillingPermissions           `json:"billing_permissions,omitempty"`
+			EnvironmentsPermissions      *[]UpdateRoleDataAttributesEnvironmentsPermissions      `json:"environments_permissions,omitempty"`
+			FormFieldsPermissions        *[]UpdateRoleDataAttributesFormFieldsPermissions        `json:"form_fields_permissions,omitempty"`
+			FunctionalitiesPermissions   *[]UpdateRoleDataAttributesFunctionalitiesPermissions   `json:"functionalities_permissions,omitempty"`
+			GroupsPermissions            *[]UpdateRoleDataAttributesGroupsPermissions            `json:"groups_permissions,omitempty"`
+			IncidentCausesPermissions    *[]UpdateRoleDataAttributesIncidentCausesPermissions    `json:"incident_causes_permissions,omitempty"`
+			IncidentFeedbacksPermissions *[]UpdateRoleDataAttributesIncidentFeedbacksPermissions `json:"incident_feedbacks_permissions,omitempty"`
+
+			// Associated incident permissions set.
+			IncidentPermissionSetId        *string                                                   `json:"incident_permission_set_id"`
+			IncidentPostMortemsPermissions *[]UpdateRoleDataAttributesIncidentPostMortemsPermissions `json:"incident_post_mortems_permissions,omitempty"`
+			IncidentRolesPermissions       *[]UpdateRoleDataAttributesIncidentRolesPermissions       `json:"incident_roles_permissions,omitempty"`
+			IncidentTypesPermissions       *[]UpdateRoleDataAttributesIncidentTypesPermissions       `json:"incident_types_permissions,omitempty"`
+			IncidentsPermissions           *[]UpdateRoleDataAttributesIncidentsPermissions           `json:"incidents_permissions,omitempty"`
+			InvitationsPermissions         *[]UpdateRoleDataAttributesInvitationsPermissions         `json:"invitations_permissions,omitempty"`
+
+			// The role name.
+			Name                        *string                                                `json:"name,omitempty"`
+			PlaybooksPermissions        *[]UpdateRoleDataAttributesPlaybooksPermissions        `json:"playbooks_permissions,omitempty"`
+			PrivateIncidentsPermissions *[]UpdateRoleDataAttributesPrivateIncidentsPermissions `json:"private_incidents_permissions,omitempty"`
+			RetrospectivePermissions    *[]UpdateRoleDataAttributesRetrospectivePermissions    `json:"retrospective_permissions,omitempty"`
+			RolesPermissions            *[]UpdateRoleDataAttributesRolesPermissions            `json:"roles_permissions,omitempty"`
+			SecretsPermissions          *[]UpdateRoleDataAttributesSecretsPermissions          `json:"secrets_permissions,omitempty"`
+			ServicesPermissions         *[]UpdateRoleDataAttributesServicesPermissions         `json:"services_permissions,omitempty"`
+			SeveritiesPermissions       *[]UpdateRoleDataAttributesSeveritiesPermissions       `json:"severities_permissions,omitempty"`
+
+			// The role slug.
+			Slug                   *string                                           `json:"slug,omitempty"`
+			StatusPagesPermissions *[]UpdateRoleDataAttributesStatusPagesPermissions `json:"status_pages_permissions,omitempty"`
+			WebhooksPermissions    *[]UpdateRoleDataAttributesWebhooksPermissions    `json:"webhooks_permissions,omitempty"`
+			WorkflowsPermissions   *[]UpdateRoleDataAttributesWorkflowsPermissions   `json:"workflows_permissions,omitempty"`
+		} `json:"attributes"`
+		Type UpdateRoleDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateRoleDataAttributesApiKeysPermissions defines model for UpdateRole.Data.Attributes.ApiKeysPermissions.
+type UpdateRoleDataAttributesApiKeysPermissions string
+
+// UpdateRoleDataAttributesAuditsPermissions defines model for UpdateRole.Data.Attributes.AuditsPermissions.
+type UpdateRoleDataAttributesAuditsPermissions string
+
+// UpdateRoleDataAttributesBillingPermissions defines model for UpdateRole.Data.Attributes.BillingPermissions.
+type UpdateRoleDataAttributesBillingPermissions string
+
+// UpdateRoleDataAttributesEnvironmentsPermissions defines model for UpdateRole.Data.Attributes.EnvironmentsPermissions.
+type UpdateRoleDataAttributesEnvironmentsPermissions string
+
+// UpdateRoleDataAttributesFormFieldsPermissions defines model for UpdateRole.Data.Attributes.FormFieldsPermissions.
+type UpdateRoleDataAttributesFormFieldsPermissions string
+
+// UpdateRoleDataAttributesFunctionalitiesPermissions defines model for UpdateRole.Data.Attributes.FunctionalitiesPermissions.
+type UpdateRoleDataAttributesFunctionalitiesPermissions string
+
+// UpdateRoleDataAttributesGroupsPermissions defines model for UpdateRole.Data.Attributes.GroupsPermissions.
+type UpdateRoleDataAttributesGroupsPermissions string
+
+// UpdateRoleDataAttributesIncidentCausesPermissions defines model for UpdateRole.Data.Attributes.IncidentCausesPermissions.
+type UpdateRoleDataAttributesIncidentCausesPermissions string
+
+// UpdateRoleDataAttributesIncidentFeedbacksPermissions defines model for UpdateRole.Data.Attributes.IncidentFeedbacksPermissions.
+type UpdateRoleDataAttributesIncidentFeedbacksPermissions string
+
+// UpdateRoleDataAttributesIncidentPostMortemsPermissions defines model for UpdateRole.Data.Attributes.IncidentPostMortemsPermissions.
+type UpdateRoleDataAttributesIncidentPostMortemsPermissions string
+
+// UpdateRoleDataAttributesIncidentRolesPermissions defines model for UpdateRole.Data.Attributes.IncidentRolesPermissions.
+type UpdateRoleDataAttributesIncidentRolesPermissions string
+
+// UpdateRoleDataAttributesIncidentTypesPermissions defines model for UpdateRole.Data.Attributes.IncidentTypesPermissions.
+type UpdateRoleDataAttributesIncidentTypesPermissions string
+
+// UpdateRoleDataAttributesIncidentsPermissions defines model for UpdateRole.Data.Attributes.IncidentsPermissions.
+type UpdateRoleDataAttributesIncidentsPermissions string
+
+// UpdateRoleDataAttributesInvitationsPermissions defines model for UpdateRole.Data.Attributes.InvitationsPermissions.
+type UpdateRoleDataAttributesInvitationsPermissions string
+
+// UpdateRoleDataAttributesPlaybooksPermissions defines model for UpdateRole.Data.Attributes.PlaybooksPermissions.
+type UpdateRoleDataAttributesPlaybooksPermissions string
+
+// UpdateRoleDataAttributesPrivateIncidentsPermissions defines model for UpdateRole.Data.Attributes.PrivateIncidentsPermissions.
+type UpdateRoleDataAttributesPrivateIncidentsPermissions string
+
+// UpdateRoleDataAttributesRetrospectivePermissions defines model for UpdateRole.Data.Attributes.RetrospectivePermissions.
+type UpdateRoleDataAttributesRetrospectivePermissions string
+
+// UpdateRoleDataAttributesRolesPermissions defines model for UpdateRole.Data.Attributes.RolesPermissions.
+type UpdateRoleDataAttributesRolesPermissions string
+
+// UpdateRoleDataAttributesSecretsPermissions defines model for UpdateRole.Data.Attributes.SecretsPermissions.
+type UpdateRoleDataAttributesSecretsPermissions string
+
+// UpdateRoleDataAttributesServicesPermissions defines model for UpdateRole.Data.Attributes.ServicesPermissions.
+type UpdateRoleDataAttributesServicesPermissions string
+
+// UpdateRoleDataAttributesSeveritiesPermissions defines model for UpdateRole.Data.Attributes.SeveritiesPermissions.
+type UpdateRoleDataAttributesSeveritiesPermissions string
+
+// UpdateRoleDataAttributesStatusPagesPermissions defines model for UpdateRole.Data.Attributes.StatusPagesPermissions.
+type UpdateRoleDataAttributesStatusPagesPermissions string
+
+// UpdateRoleDataAttributesWebhooksPermissions defines model for UpdateRole.Data.Attributes.WebhooksPermissions.
+type UpdateRoleDataAttributesWebhooksPermissions string
+
+// UpdateRoleDataAttributesWorkflowsPermissions defines model for UpdateRole.Data.Attributes.WorkflowsPermissions.
+type UpdateRoleDataAttributesWorkflowsPermissions string
+
+// UpdateRoleDataType defines model for UpdateRole.Data.Type.
+type UpdateRoleDataType string
 
 // UpdateSecret defines model for update_secret.
 type UpdateSecret struct {
@@ -18786,6 +21242,22 @@ type ListAuditsParams struct {
 	Sort               *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
+// ListAuthorizationsParams defines parameters for ListAuthorizations.
+type ListAuthorizationsParams struct {
+	Include                *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber             *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize               *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterAuthorizableId   *string `form:"filter[authorizable_id],omitempty" json:"filter[authorizable_id],omitempty"`
+	FilterAuthorizableType *string `form:"filter[authorizable_type],omitempty" json:"filter[authorizable_type],omitempty"`
+	FilterGranteeId        *string `form:"filter[grantee_id],omitempty" json:"filter[grantee_id],omitempty"`
+	FilterGranteeType      *string `form:"filter[grantee_type],omitempty" json:"filter[grantee_type],omitempty"`
+	FilterCreatedAtGt      *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte     *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt      *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte     *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	Sort                   *string `form:"sort,omitempty" json:"sort,omitempty"`
+}
+
 // ListCausesParams defines parameters for ListCauses.
 type ListCausesParams struct {
 	Include            *string `form:"include,omitempty" json:"include,omitempty"`
@@ -18936,6 +21408,47 @@ type GetFunctionalityIncidentsChartParams struct {
 // GetFunctionalityUptimeChartParams defines parameters for GetFunctionalityUptimeChart.
 type GetFunctionalityUptimeChartParams struct {
 	Period *string `form:"period,omitempty" json:"period,omitempty"`
+}
+
+// ListIncidentPermissionSetsParams defines parameters for ListIncidentPermissionSets.
+type ListIncidentPermissionSetsParams struct {
+	Include            *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSearch       *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
+	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	Sort               *string `form:"sort,omitempty" json:"sort,omitempty"`
+}
+
+// ListIncidentPermissionSetBooleansParams defines parameters for ListIncidentPermissionSetBooleans.
+type ListIncidentPermissionSetBooleansParams struct {
+	Include            *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterKind         *string `form:"filter[kind],omitempty" json:"filter[kind],omitempty"`
+	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	Sort               *string `form:"sort,omitempty" json:"sort,omitempty"`
+}
+
+// ListIncidentPermissionSetResourcesParams defines parameters for ListIncidentPermissionSetResources.
+type ListIncidentPermissionSetResourcesParams struct {
+	Include            *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterKind         *string `form:"filter[kind],omitempty" json:"filter[kind],omitempty"`
+	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	Sort               *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // ListIncidentRolesParams defines parameters for ListIncidentRoles.
@@ -19185,6 +21698,21 @@ type ListRetrospectiveStepsParams struct {
 	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 	Sort       *string `form:"sort,omitempty" json:"sort,omitempty"`
+}
+
+// ListRolesParams defines parameters for ListRoles.
+type ListRolesParams struct {
+	Include            *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSearch       *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
+	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	Sort               *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // ListSecretsParams defines parameters for ListSecrets.
@@ -19459,6 +21987,21 @@ type ClientInterface interface {
 	// ListAudits request
 	ListAudits(ctx context.Context, params *ListAuditsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListAuthorizations request
+	ListAuthorizations(ctx context.Context, params *ListAuthorizationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateAuthorization request with any body
+	CreateAuthorizationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteAuthorization request
+	DeleteAuthorization(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetAuthorization request
+	GetAuthorization(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateAuthorization request with any body
+	UpdateAuthorizationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListCauses request
 	ListCauses(ctx context.Context, params *ListCausesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -19687,6 +22230,51 @@ type ClientInterface interface {
 	// UpdateIncidentFormFieldSelection request with any body
 	UpdateIncidentFormFieldSelectionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// DeleteIncidentPermissionSetBoolean request
+	DeleteIncidentPermissionSetBoolean(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetIncidentPermissionSetBoolean request
+	GetIncidentPermissionSetBoolean(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateIncidentPermissionSetBoolean request with any body
+	UpdateIncidentPermissionSetBooleanWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteIncidentPermissionSetResource request
+	DeleteIncidentPermissionSetResource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetIncidentPermissionSetResource request
+	GetIncidentPermissionSetResource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateIncidentPermissionSetResource request with any body
+	UpdateIncidentPermissionSetResourceWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListIncidentPermissionSets request
+	ListIncidentPermissionSets(ctx context.Context, params *ListIncidentPermissionSetsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateIncidentPermissionSet request with any body
+	CreateIncidentPermissionSetWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteIncidentPermissionSet request
+	DeleteIncidentPermissionSet(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetIncidentPermissionSet request
+	GetIncidentPermissionSet(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateIncidentPermissionSet request with any body
+	UpdateIncidentPermissionSetWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListIncidentPermissionSetBooleans request
+	ListIncidentPermissionSetBooleans(ctx context.Context, incidentPermissionSetId string, params *ListIncidentPermissionSetBooleansParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateIncidentPermissionSetBoolean request with any body
+	CreateIncidentPermissionSetBooleanWithBody(ctx context.Context, incidentPermissionSetId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListIncidentPermissionSetResources request
+	ListIncidentPermissionSetResources(ctx context.Context, incidentPermissionSetId string, params *ListIncidentPermissionSetResourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateIncidentPermissionSetResource request with any body
+	CreateIncidentPermissionSetResourceWithBody(ctx context.Context, incidentPermissionSetId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// DeleteIncidentRoleTask request
 	DeleteIncidentRoleTask(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -19902,6 +22490,21 @@ type ClientInterface interface {
 
 	// UpdateRetrospectiveStep request with any body
 	UpdateRetrospectiveStepWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListRoles request
+	ListRoles(ctx context.Context, params *ListRolesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateRole request with any body
+	CreateRoleWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteRole request
+	DeleteRole(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetRole request
+	GetRole(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateRole request with any body
+	UpdateRoleWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListSecrets request
 	ListSecrets(ctx context.Context, params *ListSecretsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -20212,6 +22815,66 @@ func (c *Client) GetAlert(ctx context.Context, id string, reqEditors ...RequestE
 
 func (c *Client) ListAudits(ctx context.Context, params *ListAuditsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListAuditsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListAuthorizations(ctx context.Context, params *ListAuthorizationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListAuthorizationsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateAuthorizationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateAuthorizationRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteAuthorization(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteAuthorizationRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetAuthorization(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAuthorizationRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateAuthorizationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateAuthorizationRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -21134,6 +23797,186 @@ func (c *Client) UpdateIncidentFormFieldSelectionWithBody(ctx context.Context, i
 	return c.Client.Do(req)
 }
 
+func (c *Client) DeleteIncidentPermissionSetBoolean(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteIncidentPermissionSetBooleanRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetIncidentPermissionSetBoolean(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetIncidentPermissionSetBooleanRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateIncidentPermissionSetBooleanWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateIncidentPermissionSetBooleanRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteIncidentPermissionSetResource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteIncidentPermissionSetResourceRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetIncidentPermissionSetResource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetIncidentPermissionSetResourceRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateIncidentPermissionSetResourceWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateIncidentPermissionSetResourceRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListIncidentPermissionSets(ctx context.Context, params *ListIncidentPermissionSetsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListIncidentPermissionSetsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateIncidentPermissionSetWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateIncidentPermissionSetRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteIncidentPermissionSet(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteIncidentPermissionSetRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetIncidentPermissionSet(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetIncidentPermissionSetRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateIncidentPermissionSetWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateIncidentPermissionSetRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListIncidentPermissionSetBooleans(ctx context.Context, incidentPermissionSetId string, params *ListIncidentPermissionSetBooleansParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListIncidentPermissionSetBooleansRequest(c.Server, incidentPermissionSetId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateIncidentPermissionSetBooleanWithBody(ctx context.Context, incidentPermissionSetId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateIncidentPermissionSetBooleanRequestWithBody(c.Server, incidentPermissionSetId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListIncidentPermissionSetResources(ctx context.Context, incidentPermissionSetId string, params *ListIncidentPermissionSetResourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListIncidentPermissionSetResourcesRequest(c.Server, incidentPermissionSetId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateIncidentPermissionSetResourceWithBody(ctx context.Context, incidentPermissionSetId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateIncidentPermissionSetResourceRequestWithBody(c.Server, incidentPermissionSetId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) DeleteIncidentRoleTask(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteIncidentRoleTaskRequest(c.Server, id)
 	if err != nil {
@@ -21988,6 +24831,66 @@ func (c *Client) GetRetrospectiveStep(ctx context.Context, id string, reqEditors
 
 func (c *Client) UpdateRetrospectiveStepWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateRetrospectiveStepRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListRoles(ctx context.Context, params *ListRolesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListRolesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateRoleWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateRoleRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteRole(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteRoleRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetRole(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetRoleRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateRoleWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateRoleRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -23670,6 +26573,362 @@ func NewListAuditsRequest(server string, params *ListAuditsParams) (*http.Reques
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewListAuthorizationsRequest generates requests for ListAuthorizations
+func NewListAuthorizationsRequest(server string, params *ListAuthorizationsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/authorizations")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Include != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterAuthorizableId != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[authorizable_id]", runtime.ParamLocationQuery, *params.FilterAuthorizableId); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterAuthorizableType != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[authorizable_type]", runtime.ParamLocationQuery, *params.FilterAuthorizableType); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterGranteeId != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[grantee_id]", runtime.ParamLocationQuery, *params.FilterGranteeId); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterGranteeType != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[grantee_type]", runtime.ParamLocationQuery, *params.FilterGranteeType); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtGte != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gte]", runtime.ParamLocationQuery, *params.FilterCreatedAtGte); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLte != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lte]", runtime.ParamLocationQuery, *params.FilterCreatedAtLte); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.Sort != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateAuthorizationRequestWithBody generates requests for CreateAuthorization with any type of body
+func NewCreateAuthorizationRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/authorizations")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteAuthorizationRequest generates requests for DeleteAuthorization
+func NewDeleteAuthorizationRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/authorizations/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetAuthorizationRequest generates requests for GetAuthorization
+func NewGetAuthorizationRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/authorizations/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateAuthorizationRequestWithBody generates requests for UpdateAuthorization with any type of body
+func NewUpdateAuthorizationRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/authorizations/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -27669,6 +30928,990 @@ func NewUpdateIncidentFormFieldSelectionRequestWithBody(server string, id string
 	}
 
 	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteIncidentPermissionSetBooleanRequest generates requests for DeleteIncidentPermissionSetBoolean
+func NewDeleteIncidentPermissionSetBooleanRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_permission_set_booleans/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetIncidentPermissionSetBooleanRequest generates requests for GetIncidentPermissionSetBoolean
+func NewGetIncidentPermissionSetBooleanRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_permission_set_booleans/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateIncidentPermissionSetBooleanRequestWithBody generates requests for UpdateIncidentPermissionSetBoolean with any type of body
+func NewUpdateIncidentPermissionSetBooleanRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_permission_set_booleans/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteIncidentPermissionSetResourceRequest generates requests for DeleteIncidentPermissionSetResource
+func NewDeleteIncidentPermissionSetResourceRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_permission_set_resources/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetIncidentPermissionSetResourceRequest generates requests for GetIncidentPermissionSetResource
+func NewGetIncidentPermissionSetResourceRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_permission_set_resources/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateIncidentPermissionSetResourceRequestWithBody generates requests for UpdateIncidentPermissionSetResource with any type of body
+func NewUpdateIncidentPermissionSetResourceRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_permission_set_resources/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListIncidentPermissionSetsRequest generates requests for ListIncidentPermissionSets
+func NewListIncidentPermissionSetsRequest(server string, params *ListIncidentPermissionSetsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_permission_sets")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Include != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterSearch != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[search]", runtime.ParamLocationQuery, *params.FilterSearch); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterSlug != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[slug]", runtime.ParamLocationQuery, *params.FilterSlug); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterName != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[name]", runtime.ParamLocationQuery, *params.FilterName); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtGte != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gte]", runtime.ParamLocationQuery, *params.FilterCreatedAtGte); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLte != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lte]", runtime.ParamLocationQuery, *params.FilterCreatedAtLte); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.Sort != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateIncidentPermissionSetRequestWithBody generates requests for CreateIncidentPermissionSet with any type of body
+func NewCreateIncidentPermissionSetRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_permission_sets")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteIncidentPermissionSetRequest generates requests for DeleteIncidentPermissionSet
+func NewDeleteIncidentPermissionSetRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_permission_sets/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetIncidentPermissionSetRequest generates requests for GetIncidentPermissionSet
+func NewGetIncidentPermissionSetRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_permission_sets/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateIncidentPermissionSetRequestWithBody generates requests for UpdateIncidentPermissionSet with any type of body
+func NewUpdateIncidentPermissionSetRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_permission_sets/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListIncidentPermissionSetBooleansRequest generates requests for ListIncidentPermissionSetBooleans
+func NewListIncidentPermissionSetBooleansRequest(server string, incidentPermissionSetId string, params *ListIncidentPermissionSetBooleansParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "incident_permission_set_id", runtime.ParamLocationPath, incidentPermissionSetId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_permission_sets/%s/booleans", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Include != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterKind != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[kind]", runtime.ParamLocationQuery, *params.FilterKind); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtGte != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gte]", runtime.ParamLocationQuery, *params.FilterCreatedAtGte); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLte != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lte]", runtime.ParamLocationQuery, *params.FilterCreatedAtLte); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.Sort != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateIncidentPermissionSetBooleanRequestWithBody generates requests for CreateIncidentPermissionSetBoolean with any type of body
+func NewCreateIncidentPermissionSetBooleanRequestWithBody(server string, incidentPermissionSetId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "incident_permission_set_id", runtime.ParamLocationPath, incidentPermissionSetId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_permission_sets/%s/booleans", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListIncidentPermissionSetResourcesRequest generates requests for ListIncidentPermissionSetResources
+func NewListIncidentPermissionSetResourcesRequest(server string, incidentPermissionSetId string, params *ListIncidentPermissionSetResourcesParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "incident_permission_set_id", runtime.ParamLocationPath, incidentPermissionSetId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_permission_sets/%s/resources", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Include != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterKind != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[kind]", runtime.ParamLocationQuery, *params.FilterKind); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtGte != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gte]", runtime.ParamLocationQuery, *params.FilterCreatedAtGte); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLte != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lte]", runtime.ParamLocationQuery, *params.FilterCreatedAtLte); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.Sort != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateIncidentPermissionSetResourceRequestWithBody generates requests for CreateIncidentPermissionSetResource with any type of body
+func NewCreateIncidentPermissionSetResourceRequestWithBody(server string, incidentPermissionSetId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "incident_permission_set_id", runtime.ParamLocationPath, incidentPermissionSetId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_permission_sets/%s/resources", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -33050,6 +37293,346 @@ func NewUpdateRetrospectiveStepRequestWithBody(server string, id string, content
 	return req, nil
 }
 
+// NewListRolesRequest generates requests for ListRoles
+func NewListRolesRequest(server string, params *ListRolesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/roles")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Include != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageNumber != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.PageSize != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterSearch != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[search]", runtime.ParamLocationQuery, *params.FilterSearch); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterSlug != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[slug]", runtime.ParamLocationQuery, *params.FilterSlug); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterName != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[name]", runtime.ParamLocationQuery, *params.FilterName); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtGt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtGte != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gte]", runtime.ParamLocationQuery, *params.FilterCreatedAtGte); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLt != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.FilterCreatedAtLte != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lte]", runtime.ParamLocationQuery, *params.FilterCreatedAtLte); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.Sort != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateRoleRequestWithBody generates requests for CreateRole with any type of body
+func NewCreateRoleRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/roles")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteRoleRequest generates requests for DeleteRole
+func NewDeleteRoleRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/roles/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetRoleRequest generates requests for GetRole
+func NewGetRoleRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/roles/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateRoleRequestWithBody generates requests for UpdateRole with any type of body
+func NewUpdateRoleRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/roles/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListSecretsRequest generates requests for ListSecrets
 func NewListSecretsRequest(server string, params *ListSecretsParams) (*http.Request, error) {
 	var err error
@@ -37335,6 +41918,21 @@ type ClientWithResponsesInterface interface {
 	// ListAudits request
 	ListAuditsWithResponse(ctx context.Context, params *ListAuditsParams, reqEditors ...RequestEditorFn) (*ListAuditsResponse, error)
 
+	// ListAuthorizations request
+	ListAuthorizationsWithResponse(ctx context.Context, params *ListAuthorizationsParams, reqEditors ...RequestEditorFn) (*ListAuthorizationsResponse, error)
+
+	// CreateAuthorization request with any body
+	CreateAuthorizationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateAuthorizationResponse, error)
+
+	// DeleteAuthorization request
+	DeleteAuthorizationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteAuthorizationResponse, error)
+
+	// GetAuthorization request
+	GetAuthorizationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetAuthorizationResponse, error)
+
+	// UpdateAuthorization request with any body
+	UpdateAuthorizationWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAuthorizationResponse, error)
+
 	// ListCauses request
 	ListCausesWithResponse(ctx context.Context, params *ListCausesParams, reqEditors ...RequestEditorFn) (*ListCausesResponse, error)
 
@@ -37563,6 +42161,51 @@ type ClientWithResponsesInterface interface {
 	// UpdateIncidentFormFieldSelection request with any body
 	UpdateIncidentFormFieldSelectionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentFormFieldSelectionResponse, error)
 
+	// DeleteIncidentPermissionSetBoolean request
+	DeleteIncidentPermissionSetBooleanWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentPermissionSetBooleanResponse, error)
+
+	// GetIncidentPermissionSetBoolean request
+	GetIncidentPermissionSetBooleanWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentPermissionSetBooleanResponse, error)
+
+	// UpdateIncidentPermissionSetBoolean request with any body
+	UpdateIncidentPermissionSetBooleanWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentPermissionSetBooleanResponse, error)
+
+	// DeleteIncidentPermissionSetResource request
+	DeleteIncidentPermissionSetResourceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentPermissionSetResourceResponse, error)
+
+	// GetIncidentPermissionSetResource request
+	GetIncidentPermissionSetResourceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentPermissionSetResourceResponse, error)
+
+	// UpdateIncidentPermissionSetResource request with any body
+	UpdateIncidentPermissionSetResourceWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentPermissionSetResourceResponse, error)
+
+	// ListIncidentPermissionSets request
+	ListIncidentPermissionSetsWithResponse(ctx context.Context, params *ListIncidentPermissionSetsParams, reqEditors ...RequestEditorFn) (*ListIncidentPermissionSetsResponse, error)
+
+	// CreateIncidentPermissionSet request with any body
+	CreateIncidentPermissionSetWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentPermissionSetResponse, error)
+
+	// DeleteIncidentPermissionSet request
+	DeleteIncidentPermissionSetWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentPermissionSetResponse, error)
+
+	// GetIncidentPermissionSet request
+	GetIncidentPermissionSetWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentPermissionSetResponse, error)
+
+	// UpdateIncidentPermissionSet request with any body
+	UpdateIncidentPermissionSetWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentPermissionSetResponse, error)
+
+	// ListIncidentPermissionSetBooleans request
+	ListIncidentPermissionSetBooleansWithResponse(ctx context.Context, incidentPermissionSetId string, params *ListIncidentPermissionSetBooleansParams, reqEditors ...RequestEditorFn) (*ListIncidentPermissionSetBooleansResponse, error)
+
+	// CreateIncidentPermissionSetBoolean request with any body
+	CreateIncidentPermissionSetBooleanWithBodyWithResponse(ctx context.Context, incidentPermissionSetId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentPermissionSetBooleanResponse, error)
+
+	// ListIncidentPermissionSetResources request
+	ListIncidentPermissionSetResourcesWithResponse(ctx context.Context, incidentPermissionSetId string, params *ListIncidentPermissionSetResourcesParams, reqEditors ...RequestEditorFn) (*ListIncidentPermissionSetResourcesResponse, error)
+
+	// CreateIncidentPermissionSetResource request with any body
+	CreateIncidentPermissionSetResourceWithBodyWithResponse(ctx context.Context, incidentPermissionSetId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentPermissionSetResourceResponse, error)
+
 	// DeleteIncidentRoleTask request
 	DeleteIncidentRoleTaskWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentRoleTaskResponse, error)
 
@@ -37778,6 +42421,21 @@ type ClientWithResponsesInterface interface {
 
 	// UpdateRetrospectiveStep request with any body
 	UpdateRetrospectiveStepWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveStepResponse, error)
+
+	// ListRoles request
+	ListRolesWithResponse(ctx context.Context, params *ListRolesParams, reqEditors ...RequestEditorFn) (*ListRolesResponse, error)
+
+	// CreateRole request with any body
+	CreateRoleWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateRoleResponse, error)
+
+	// DeleteRole request
+	DeleteRoleWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteRoleResponse, error)
+
+	// GetRole request
+	GetRoleWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetRoleResponse, error)
+
+	// UpdateRole request with any body
+	UpdateRoleWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRoleResponse, error)
 
 	// ListSecrets request
 	ListSecretsWithResponse(ctx context.Context, params *ListSecretsParams, reqEditors ...RequestEditorFn) (*ListSecretsResponse, error)
@@ -38164,6 +42822,111 @@ func (r ListAuditsResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r ListAuditsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListAuthorizationsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r ListAuthorizationsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListAuthorizationsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateAuthorizationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateAuthorizationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateAuthorizationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteAuthorizationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteAuthorizationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteAuthorizationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetAuthorizationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r GetAuthorizationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetAuthorizationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateAuthorizationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateAuthorizationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateAuthorizationResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -39766,6 +44529,321 @@ func (r UpdateIncidentFormFieldSelectionResponse) StatusCode() int {
 	return 0
 }
 
+type DeleteIncidentPermissionSetBooleanResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteIncidentPermissionSetBooleanResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteIncidentPermissionSetBooleanResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetIncidentPermissionSetBooleanResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r GetIncidentPermissionSetBooleanResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetIncidentPermissionSetBooleanResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateIncidentPermissionSetBooleanResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateIncidentPermissionSetBooleanResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateIncidentPermissionSetBooleanResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteIncidentPermissionSetResourceResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteIncidentPermissionSetResourceResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteIncidentPermissionSetResourceResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetIncidentPermissionSetResourceResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r GetIncidentPermissionSetResourceResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetIncidentPermissionSetResourceResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateIncidentPermissionSetResourceResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateIncidentPermissionSetResourceResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateIncidentPermissionSetResourceResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListIncidentPermissionSetsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r ListIncidentPermissionSetsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListIncidentPermissionSetsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateIncidentPermissionSetResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateIncidentPermissionSetResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateIncidentPermissionSetResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteIncidentPermissionSetResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteIncidentPermissionSetResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteIncidentPermissionSetResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetIncidentPermissionSetResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r GetIncidentPermissionSetResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetIncidentPermissionSetResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateIncidentPermissionSetResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateIncidentPermissionSetResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateIncidentPermissionSetResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListIncidentPermissionSetBooleansResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r ListIncidentPermissionSetBooleansResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListIncidentPermissionSetBooleansResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateIncidentPermissionSetBooleanResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateIncidentPermissionSetBooleanResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateIncidentPermissionSetBooleanResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListIncidentPermissionSetResourcesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r ListIncidentPermissionSetResourcesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListIncidentPermissionSetResourcesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateIncidentPermissionSetResourceResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateIncidentPermissionSetResourceResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateIncidentPermissionSetResourceResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type DeleteIncidentRoleTaskResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -41272,6 +46350,111 @@ func (r UpdateRetrospectiveStepResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r UpdateRetrospectiveStepResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListRolesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r ListRolesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListRolesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateRoleResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateRoleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateRoleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteRoleResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteRoleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteRoleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetRoleResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r GetRoleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetRoleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateRoleResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateRoleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateRoleResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -42904,6 +48087,51 @@ func (c *ClientWithResponses) ListAuditsWithResponse(ctx context.Context, params
 	return ParseListAuditsResponse(rsp)
 }
 
+// ListAuthorizationsWithResponse request returning *ListAuthorizationsResponse
+func (c *ClientWithResponses) ListAuthorizationsWithResponse(ctx context.Context, params *ListAuthorizationsParams, reqEditors ...RequestEditorFn) (*ListAuthorizationsResponse, error) {
+	rsp, err := c.ListAuthorizations(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListAuthorizationsResponse(rsp)
+}
+
+// CreateAuthorizationWithBodyWithResponse request with arbitrary body returning *CreateAuthorizationResponse
+func (c *ClientWithResponses) CreateAuthorizationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateAuthorizationResponse, error) {
+	rsp, err := c.CreateAuthorizationWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateAuthorizationResponse(rsp)
+}
+
+// DeleteAuthorizationWithResponse request returning *DeleteAuthorizationResponse
+func (c *ClientWithResponses) DeleteAuthorizationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteAuthorizationResponse, error) {
+	rsp, err := c.DeleteAuthorization(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteAuthorizationResponse(rsp)
+}
+
+// GetAuthorizationWithResponse request returning *GetAuthorizationResponse
+func (c *ClientWithResponses) GetAuthorizationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetAuthorizationResponse, error) {
+	rsp, err := c.GetAuthorization(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetAuthorizationResponse(rsp)
+}
+
+// UpdateAuthorizationWithBodyWithResponse request with arbitrary body returning *UpdateAuthorizationResponse
+func (c *ClientWithResponses) UpdateAuthorizationWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAuthorizationResponse, error) {
+	rsp, err := c.UpdateAuthorizationWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateAuthorizationResponse(rsp)
+}
+
 // ListCausesWithResponse request returning *ListCausesResponse
 func (c *ClientWithResponses) ListCausesWithResponse(ctx context.Context, params *ListCausesParams, reqEditors ...RequestEditorFn) (*ListCausesResponse, error) {
 	rsp, err := c.ListCauses(ctx, params, reqEditors...)
@@ -43588,6 +48816,141 @@ func (c *ClientWithResponses) UpdateIncidentFormFieldSelectionWithBodyWithRespon
 	return ParseUpdateIncidentFormFieldSelectionResponse(rsp)
 }
 
+// DeleteIncidentPermissionSetBooleanWithResponse request returning *DeleteIncidentPermissionSetBooleanResponse
+func (c *ClientWithResponses) DeleteIncidentPermissionSetBooleanWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentPermissionSetBooleanResponse, error) {
+	rsp, err := c.DeleteIncidentPermissionSetBoolean(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteIncidentPermissionSetBooleanResponse(rsp)
+}
+
+// GetIncidentPermissionSetBooleanWithResponse request returning *GetIncidentPermissionSetBooleanResponse
+func (c *ClientWithResponses) GetIncidentPermissionSetBooleanWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentPermissionSetBooleanResponse, error) {
+	rsp, err := c.GetIncidentPermissionSetBoolean(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetIncidentPermissionSetBooleanResponse(rsp)
+}
+
+// UpdateIncidentPermissionSetBooleanWithBodyWithResponse request with arbitrary body returning *UpdateIncidentPermissionSetBooleanResponse
+func (c *ClientWithResponses) UpdateIncidentPermissionSetBooleanWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentPermissionSetBooleanResponse, error) {
+	rsp, err := c.UpdateIncidentPermissionSetBooleanWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateIncidentPermissionSetBooleanResponse(rsp)
+}
+
+// DeleteIncidentPermissionSetResourceWithResponse request returning *DeleteIncidentPermissionSetResourceResponse
+func (c *ClientWithResponses) DeleteIncidentPermissionSetResourceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentPermissionSetResourceResponse, error) {
+	rsp, err := c.DeleteIncidentPermissionSetResource(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteIncidentPermissionSetResourceResponse(rsp)
+}
+
+// GetIncidentPermissionSetResourceWithResponse request returning *GetIncidentPermissionSetResourceResponse
+func (c *ClientWithResponses) GetIncidentPermissionSetResourceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentPermissionSetResourceResponse, error) {
+	rsp, err := c.GetIncidentPermissionSetResource(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetIncidentPermissionSetResourceResponse(rsp)
+}
+
+// UpdateIncidentPermissionSetResourceWithBodyWithResponse request with arbitrary body returning *UpdateIncidentPermissionSetResourceResponse
+func (c *ClientWithResponses) UpdateIncidentPermissionSetResourceWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentPermissionSetResourceResponse, error) {
+	rsp, err := c.UpdateIncidentPermissionSetResourceWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateIncidentPermissionSetResourceResponse(rsp)
+}
+
+// ListIncidentPermissionSetsWithResponse request returning *ListIncidentPermissionSetsResponse
+func (c *ClientWithResponses) ListIncidentPermissionSetsWithResponse(ctx context.Context, params *ListIncidentPermissionSetsParams, reqEditors ...RequestEditorFn) (*ListIncidentPermissionSetsResponse, error) {
+	rsp, err := c.ListIncidentPermissionSets(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListIncidentPermissionSetsResponse(rsp)
+}
+
+// CreateIncidentPermissionSetWithBodyWithResponse request with arbitrary body returning *CreateIncidentPermissionSetResponse
+func (c *ClientWithResponses) CreateIncidentPermissionSetWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentPermissionSetResponse, error) {
+	rsp, err := c.CreateIncidentPermissionSetWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateIncidentPermissionSetResponse(rsp)
+}
+
+// DeleteIncidentPermissionSetWithResponse request returning *DeleteIncidentPermissionSetResponse
+func (c *ClientWithResponses) DeleteIncidentPermissionSetWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentPermissionSetResponse, error) {
+	rsp, err := c.DeleteIncidentPermissionSet(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteIncidentPermissionSetResponse(rsp)
+}
+
+// GetIncidentPermissionSetWithResponse request returning *GetIncidentPermissionSetResponse
+func (c *ClientWithResponses) GetIncidentPermissionSetWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentPermissionSetResponse, error) {
+	rsp, err := c.GetIncidentPermissionSet(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetIncidentPermissionSetResponse(rsp)
+}
+
+// UpdateIncidentPermissionSetWithBodyWithResponse request with arbitrary body returning *UpdateIncidentPermissionSetResponse
+func (c *ClientWithResponses) UpdateIncidentPermissionSetWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentPermissionSetResponse, error) {
+	rsp, err := c.UpdateIncidentPermissionSetWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateIncidentPermissionSetResponse(rsp)
+}
+
+// ListIncidentPermissionSetBooleansWithResponse request returning *ListIncidentPermissionSetBooleansResponse
+func (c *ClientWithResponses) ListIncidentPermissionSetBooleansWithResponse(ctx context.Context, incidentPermissionSetId string, params *ListIncidentPermissionSetBooleansParams, reqEditors ...RequestEditorFn) (*ListIncidentPermissionSetBooleansResponse, error) {
+	rsp, err := c.ListIncidentPermissionSetBooleans(ctx, incidentPermissionSetId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListIncidentPermissionSetBooleansResponse(rsp)
+}
+
+// CreateIncidentPermissionSetBooleanWithBodyWithResponse request with arbitrary body returning *CreateIncidentPermissionSetBooleanResponse
+func (c *ClientWithResponses) CreateIncidentPermissionSetBooleanWithBodyWithResponse(ctx context.Context, incidentPermissionSetId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentPermissionSetBooleanResponse, error) {
+	rsp, err := c.CreateIncidentPermissionSetBooleanWithBody(ctx, incidentPermissionSetId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateIncidentPermissionSetBooleanResponse(rsp)
+}
+
+// ListIncidentPermissionSetResourcesWithResponse request returning *ListIncidentPermissionSetResourcesResponse
+func (c *ClientWithResponses) ListIncidentPermissionSetResourcesWithResponse(ctx context.Context, incidentPermissionSetId string, params *ListIncidentPermissionSetResourcesParams, reqEditors ...RequestEditorFn) (*ListIncidentPermissionSetResourcesResponse, error) {
+	rsp, err := c.ListIncidentPermissionSetResources(ctx, incidentPermissionSetId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListIncidentPermissionSetResourcesResponse(rsp)
+}
+
+// CreateIncidentPermissionSetResourceWithBodyWithResponse request with arbitrary body returning *CreateIncidentPermissionSetResourceResponse
+func (c *ClientWithResponses) CreateIncidentPermissionSetResourceWithBodyWithResponse(ctx context.Context, incidentPermissionSetId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentPermissionSetResourceResponse, error) {
+	rsp, err := c.CreateIncidentPermissionSetResourceWithBody(ctx, incidentPermissionSetId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateIncidentPermissionSetResourceResponse(rsp)
+}
+
 // DeleteIncidentRoleTaskWithResponse request returning *DeleteIncidentRoleTaskResponse
 func (c *ClientWithResponses) DeleteIncidentRoleTaskWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentRoleTaskResponse, error) {
 	rsp, err := c.DeleteIncidentRoleTask(ctx, id, reqEditors...)
@@ -44234,6 +49597,51 @@ func (c *ClientWithResponses) UpdateRetrospectiveStepWithBodyWithResponse(ctx co
 		return nil, err
 	}
 	return ParseUpdateRetrospectiveStepResponse(rsp)
+}
+
+// ListRolesWithResponse request returning *ListRolesResponse
+func (c *ClientWithResponses) ListRolesWithResponse(ctx context.Context, params *ListRolesParams, reqEditors ...RequestEditorFn) (*ListRolesResponse, error) {
+	rsp, err := c.ListRoles(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListRolesResponse(rsp)
+}
+
+// CreateRoleWithBodyWithResponse request with arbitrary body returning *CreateRoleResponse
+func (c *ClientWithResponses) CreateRoleWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateRoleResponse, error) {
+	rsp, err := c.CreateRoleWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateRoleResponse(rsp)
+}
+
+// DeleteRoleWithResponse request returning *DeleteRoleResponse
+func (c *ClientWithResponses) DeleteRoleWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteRoleResponse, error) {
+	rsp, err := c.DeleteRole(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteRoleResponse(rsp)
+}
+
+// GetRoleWithResponse request returning *GetRoleResponse
+func (c *ClientWithResponses) GetRoleWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetRoleResponse, error) {
+	rsp, err := c.GetRole(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetRoleResponse(rsp)
+}
+
+// UpdateRoleWithBodyWithResponse request with arbitrary body returning *UpdateRoleResponse
+func (c *ClientWithResponses) UpdateRoleWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRoleResponse, error) {
+	rsp, err := c.UpdateRoleWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateRoleResponse(rsp)
 }
 
 // ListSecretsWithResponse request returning *ListSecretsResponse
@@ -45023,6 +50431,86 @@ func ParseListAuditsResponse(rsp *http.Response) (*ListAuditsResponse, error) {
 	}
 
 	response := &ListAuditsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseListAuthorizationsResponse parses an HTTP response from a ListAuthorizationsWithResponse call
+func ParseListAuthorizationsResponse(rsp *http.Response) (*ListAuthorizationsResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListAuthorizationsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseCreateAuthorizationResponse parses an HTTP response from a CreateAuthorizationWithResponse call
+func ParseCreateAuthorizationResponse(rsp *http.Response) (*CreateAuthorizationResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateAuthorizationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseDeleteAuthorizationResponse parses an HTTP response from a DeleteAuthorizationWithResponse call
+func ParseDeleteAuthorizationResponse(rsp *http.Response) (*DeleteAuthorizationResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteAuthorizationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseGetAuthorizationResponse parses an HTTP response from a GetAuthorizationWithResponse call
+func ParseGetAuthorizationResponse(rsp *http.Response) (*GetAuthorizationResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetAuthorizationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseUpdateAuthorizationResponse parses an HTTP response from a UpdateAuthorizationWithResponse call
+func ParseUpdateAuthorizationResponse(rsp *http.Response) (*UpdateAuthorizationResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateAuthorizationResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -46246,6 +51734,246 @@ func ParseUpdateIncidentFormFieldSelectionResponse(rsp *http.Response) (*UpdateI
 	return response, nil
 }
 
+// ParseDeleteIncidentPermissionSetBooleanResponse parses an HTTP response from a DeleteIncidentPermissionSetBooleanWithResponse call
+func ParseDeleteIncidentPermissionSetBooleanResponse(rsp *http.Response) (*DeleteIncidentPermissionSetBooleanResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteIncidentPermissionSetBooleanResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseGetIncidentPermissionSetBooleanResponse parses an HTTP response from a GetIncidentPermissionSetBooleanWithResponse call
+func ParseGetIncidentPermissionSetBooleanResponse(rsp *http.Response) (*GetIncidentPermissionSetBooleanResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetIncidentPermissionSetBooleanResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseUpdateIncidentPermissionSetBooleanResponse parses an HTTP response from a UpdateIncidentPermissionSetBooleanWithResponse call
+func ParseUpdateIncidentPermissionSetBooleanResponse(rsp *http.Response) (*UpdateIncidentPermissionSetBooleanResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateIncidentPermissionSetBooleanResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseDeleteIncidentPermissionSetResourceResponse parses an HTTP response from a DeleteIncidentPermissionSetResourceWithResponse call
+func ParseDeleteIncidentPermissionSetResourceResponse(rsp *http.Response) (*DeleteIncidentPermissionSetResourceResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteIncidentPermissionSetResourceResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseGetIncidentPermissionSetResourceResponse parses an HTTP response from a GetIncidentPermissionSetResourceWithResponse call
+func ParseGetIncidentPermissionSetResourceResponse(rsp *http.Response) (*GetIncidentPermissionSetResourceResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetIncidentPermissionSetResourceResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseUpdateIncidentPermissionSetResourceResponse parses an HTTP response from a UpdateIncidentPermissionSetResourceWithResponse call
+func ParseUpdateIncidentPermissionSetResourceResponse(rsp *http.Response) (*UpdateIncidentPermissionSetResourceResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateIncidentPermissionSetResourceResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseListIncidentPermissionSetsResponse parses an HTTP response from a ListIncidentPermissionSetsWithResponse call
+func ParseListIncidentPermissionSetsResponse(rsp *http.Response) (*ListIncidentPermissionSetsResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListIncidentPermissionSetsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseCreateIncidentPermissionSetResponse parses an HTTP response from a CreateIncidentPermissionSetWithResponse call
+func ParseCreateIncidentPermissionSetResponse(rsp *http.Response) (*CreateIncidentPermissionSetResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateIncidentPermissionSetResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseDeleteIncidentPermissionSetResponse parses an HTTP response from a DeleteIncidentPermissionSetWithResponse call
+func ParseDeleteIncidentPermissionSetResponse(rsp *http.Response) (*DeleteIncidentPermissionSetResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteIncidentPermissionSetResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseGetIncidentPermissionSetResponse parses an HTTP response from a GetIncidentPermissionSetWithResponse call
+func ParseGetIncidentPermissionSetResponse(rsp *http.Response) (*GetIncidentPermissionSetResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetIncidentPermissionSetResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseUpdateIncidentPermissionSetResponse parses an HTTP response from a UpdateIncidentPermissionSetWithResponse call
+func ParseUpdateIncidentPermissionSetResponse(rsp *http.Response) (*UpdateIncidentPermissionSetResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateIncidentPermissionSetResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseListIncidentPermissionSetBooleansResponse parses an HTTP response from a ListIncidentPermissionSetBooleansWithResponse call
+func ParseListIncidentPermissionSetBooleansResponse(rsp *http.Response) (*ListIncidentPermissionSetBooleansResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListIncidentPermissionSetBooleansResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseCreateIncidentPermissionSetBooleanResponse parses an HTTP response from a CreateIncidentPermissionSetBooleanWithResponse call
+func ParseCreateIncidentPermissionSetBooleanResponse(rsp *http.Response) (*CreateIncidentPermissionSetBooleanResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateIncidentPermissionSetBooleanResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseListIncidentPermissionSetResourcesResponse parses an HTTP response from a ListIncidentPermissionSetResourcesWithResponse call
+func ParseListIncidentPermissionSetResourcesResponse(rsp *http.Response) (*ListIncidentPermissionSetResourcesResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListIncidentPermissionSetResourcesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseCreateIncidentPermissionSetResourceResponse parses an HTTP response from a CreateIncidentPermissionSetResourceWithResponse call
+func ParseCreateIncidentPermissionSetResourceResponse(rsp *http.Response) (*CreateIncidentPermissionSetResourceResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateIncidentPermissionSetResourceResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
 // ParseDeleteIncidentRoleTaskResponse parses an HTTP response from a DeleteIncidentRoleTaskWithResponse call
 func ParseDeleteIncidentRoleTaskResponse(rsp *http.Response) (*DeleteIncidentRoleTaskResponse, error) {
 	bodyBytes, err := ioutil.ReadAll(rsp.Body)
@@ -47391,6 +53119,86 @@ func ParseUpdateRetrospectiveStepResponse(rsp *http.Response) (*UpdateRetrospect
 	}
 
 	response := &UpdateRetrospectiveStepResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseListRolesResponse parses an HTTP response from a ListRolesWithResponse call
+func ParseListRolesResponse(rsp *http.Response) (*ListRolesResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListRolesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseCreateRoleResponse parses an HTTP response from a CreateRoleWithResponse call
+func ParseCreateRoleResponse(rsp *http.Response) (*CreateRoleResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateRoleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseDeleteRoleResponse parses an HTTP response from a DeleteRoleWithResponse call
+func ParseDeleteRoleResponse(rsp *http.Response) (*DeleteRoleResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteRoleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseGetRoleResponse parses an HTTP response from a GetRoleWithResponse call
+func ParseGetRoleResponse(rsp *http.Response) (*GetRoleResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetRoleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseUpdateRoleResponse parses an HTTP response from a UpdateRoleWithResponse call
+func ParseUpdateRoleResponse(rsp *http.Response) (*UpdateRoleResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateRoleResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

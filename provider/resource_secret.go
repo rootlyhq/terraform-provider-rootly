@@ -37,10 +37,6 @@ func resourceSecret() *schema.Resource {
 				Optional:    false,
 				ForceNew:    false,
 				Description: "The redacted secret",
-
-				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-					return len(old) != 0
-				},
 			},
 
 			"hashicorp_vault_mount": &schema.Schema{

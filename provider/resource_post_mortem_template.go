@@ -44,12 +44,8 @@ func resourcePostmortemTemplate() *schema.Resource {
 				Computed:    false,
 				Required:    true,
 				Optional:    false,
-				ForceNew:    true,
+				ForceNew:    false,
 				Description: "The postmortem template. Liquid syntax and markdown are supported",
-
-				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-					return len(old) != 0
-				},
 			},
 
 			"format": &schema.Schema{
