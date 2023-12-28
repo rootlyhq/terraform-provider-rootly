@@ -32,10 +32,16 @@ func resourceSecret() *schema.Resource {
 
 			"secret": &schema.Schema{
 				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    true,
+				DiffSuppressFunc: func(key, oldValue string, newValue string, d *schema.ResourceData) bool {
+					if oldValue == "" {
+						return false
+					}
+					return true
+				},
 				Description: "The redacted secret",
 			},
 

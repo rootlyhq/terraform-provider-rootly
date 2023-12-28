@@ -77,6 +77,8 @@ ${resources
 				"rootly_custom_field_option": resourceCustomFieldOption(),
 				"rootly_dashboard": resourceDashboard(),
 				"rootly_dashboard_panel": resourceDashboardPanel(),
+				"rootly_post_mortem_template": resourcePostmortemTemplate(),
+				"rootly_secret": resourceSecret(),
 				"rootly_workflow_incident": resourceWorkflowIncident(),
 				"rootly_workflow_action_item": resourceWorkflowActionItem(),
 				"rootly_workflow_alert": resourceWorkflowAlert(),
