@@ -32,15 +32,17 @@ func resourceSecret() *schema.Resource {
 
 			"secret": &schema.Schema{
 				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
-				Description: "The redacted secret",
-
-				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-					return len(old) != 0
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    true,
+				DiffSuppressFunc: func(key, oldValue string, newValue string, d *schema.ResourceData) bool {
+					if oldValue == "" {
+						return false
+					}
+					return true
 				},
+				Description: "The redacted secret",
 			},
 
 			"hashicorp_vault_mount": &schema.Schema{
