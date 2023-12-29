@@ -17,13 +17,13 @@ description: |-
 ### Required
 
 - `name` (String) The name of the secret
-- `secret` (String) The redacted secret
 
 ### Optional
 
 - `hashicorp_vault_mount` (String) The HashiCorp Vault secret mount path
 - `hashicorp_vault_path` (String) The HashiCorp Vault secret path
 - `hashicorp_vault_version` (Number) The HashiCorp Vault secret version
+- `secret` (String) The redacted secret
 
 ### Read-Only
 

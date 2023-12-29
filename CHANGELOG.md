@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.2.11] -- 2023-12-29
+
+- Add support for `authorizations`, `incident_permission_sets`, `incident_permission_set_booleans`, `incident_permission_set_resources`, and `roles`.
+- Add `show_on_incident_details` to `form_field` resource.
+- Add `rich_text` type to `form_field` resource.
+- Suppress diff for post mortem template content and secret.
+
+## [1.2.10] -- 2023-12-20
+
+- Ignore order for int and workflow attributes.
+
 ## [1.2.9] -- 2023-12-16
 
 - Add `causes` kind to `form_field` resource.

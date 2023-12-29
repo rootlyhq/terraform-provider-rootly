@@ -37,7 +37,7 @@ func resourceFormField() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "The input kind of the form field. Value must be one of `text`, `textarea`, `select`, `multi_select`, `date`, `datetime`, `users`, `number`, `checkbox`, `tags`.",
+				Description: "The input kind of the form field. Value must be one of `text`, `textarea`, `select`, `multi_select`, `date`, `datetime`, `users`, `number`, `checkbox`, `tags`, `rich_text`.",
 			},
 
 			"name": &schema.Schema{
@@ -76,7 +76,7 @@ func resourceFormField() *schema.Resource {
 				Computed:         true,
 				Required:         false,
 				Optional:         true,
-				Description:      "Value must be one of `web_new_incident_form`, `web_update_incident_form`, `web_incident_post_mortem_form`, `web_incident_mitigation_form`, `web_incident_resolution_form`, `web_incident_cancellation_form`, `web_scheduled_incident_form`, `web_update_scheduled_incident_form`, `incident_post_mortem`, `slack_new_incident_form`, `slack_update_incident_form`, `slack_update_incident_status_form`, `slack_incident_mitigation_form`, `slack_incident_resolution_form`, `slack_incident_cancellation_form`, `slack_scheduled_incident_form`, `slack_update_scheduled_incident_form`.",
+				Description:      "",
 			},
 
 			"required": &schema.Schema{
@@ -88,7 +88,15 @@ func resourceFormField() *schema.Resource {
 				Computed:         true,
 				Required:         false,
 				Optional:         true,
-				Description:      "Value must be one of `web_new_incident_form`, `web_update_incident_form`, `web_incident_post_mortem_form`, `web_incident_mitigation_form`, `web_incident_resolution_form`, `web_incident_cancellation_form`, `web_scheduled_incident_form`, `web_update_scheduled_incident_form`, `slack_new_incident_form`, `slack_update_incident_form`, `slack_update_incident_status_form`, `slack_incident_mitigation_form`, `slack_incident_resolution_form`, `slack_incident_cancellation_form`, `slack_scheduled_incident_form`, `slack_update_scheduled_incident_form`.",
+				Description:      "",
+			},
+
+			"show_on_incident_details": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Whether the form field is shown on the incident details panel. Value must be one of true or false",
 			},
 
 			"enabled": &schema.Schema{
@@ -140,6 +148,9 @@ func resourceFormFieldCreate(ctx context.Context, d *schema.ResourceData, meta i
 	if value, ok := d.GetOkExists("required"); ok {
 		s.Required = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("show_on_incident_details"); ok {
+		s.ShowOnIncidentDetails = tools.Bool(value.(bool))
+	}
 	if value, ok := d.GetOkExists("enabled"); ok {
 		s.Enabled = tools.Bool(value.(bool))
 	}
@@ -182,6 +193,7 @@ func resourceFormFieldRead(ctx context.Context, d *schema.ResourceData, meta int
 	d.Set("description", item.Description)
 	d.Set("shown", item.Shown)
 	d.Set("required", item.Required)
+	d.Set("show_on_incident_details", item.ShowOnIncidentDetails)
 	d.Set("enabled", item.Enabled)
 	d.Set("default_values", item.DefaultValues)
 
@@ -214,6 +226,9 @@ func resourceFormFieldUpdate(ctx context.Context, d *schema.ResourceData, meta i
 	}
 	if d.HasChange("required") {
 		s.Required = d.Get("required").([]interface{})
+	}
+	if d.HasChange("show_on_incident_details") {
+		s.ShowOnIncidentDetails = tools.Bool(d.Get("show_on_incident_details").(bool))
 	}
 	if d.HasChange("enabled") {
 		s.Enabled = tools.Bool(d.Get("enabled").(bool))

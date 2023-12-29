@@ -24,7 +24,6 @@ type Role struct {
   GroupsPermissions []interface{} `jsonapi:"attr,groups_permissions,omitempty"`
   IncidentCausesPermissions []interface{} `jsonapi:"attr,incident_causes_permissions,omitempty"`
   IncidentFeedbacksPermissions []interface{} `jsonapi:"attr,incident_feedbacks_permissions,omitempty"`
-  IncidentPostMortemsPermissions []interface{} `jsonapi:"attr,incident_post_mortems_permissions,omitempty"`
   IncidentRolesPermissions []interface{} `jsonapi:"attr,incident_roles_permissions,omitempty"`
   IncidentTypesPermissions []interface{} `jsonapi:"attr,incident_types_permissions,omitempty"`
   IncidentsPermissions []interface{} `jsonapi:"attr,incidents_permissions,omitempty"`

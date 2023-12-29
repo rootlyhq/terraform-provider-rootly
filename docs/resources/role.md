@@ -30,7 +30,6 @@ description: |-
 - `incident_causes_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `incident_feedbacks_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `incident_permission_set_id` (String) Associated incident permissions set.
-- `incident_post_mortems_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `incident_roles_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `incident_types_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `incidents_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.

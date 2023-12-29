@@ -173,18 +173,6 @@ func resourceRole() *schema.Resource {
 				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
 			},
 
-			"incident_post_mortems_permissions": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
-			},
-
 			"incident_roles_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -405,9 +393,6 @@ func resourceRoleCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	if value, ok := d.GetOkExists("incident_feedbacks_permissions"); ok {
 		s.IncidentFeedbacksPermissions = value.([]interface{})
 	}
-	if value, ok := d.GetOkExists("incident_post_mortems_permissions"); ok {
-		s.IncidentPostMortemsPermissions = value.([]interface{})
-	}
 	if value, ok := d.GetOkExists("incident_roles_permissions"); ok {
 		s.IncidentRolesPermissions = value.([]interface{})
 	}
@@ -493,7 +478,6 @@ func resourceRoleRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	d.Set("groups_permissions", item.GroupsPermissions)
 	d.Set("incident_causes_permissions", item.IncidentCausesPermissions)
 	d.Set("incident_feedbacks_permissions", item.IncidentFeedbacksPermissions)
-	d.Set("incident_post_mortems_permissions", item.IncidentPostMortemsPermissions)
 	d.Set("incident_roles_permissions", item.IncidentRolesPermissions)
 	d.Set("incident_types_permissions", item.IncidentTypesPermissions)
 	d.Set("incidents_permissions", item.IncidentsPermissions)
@@ -559,9 +543,6 @@ func resourceRoleUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 	}
 	if d.HasChange("incident_feedbacks_permissions") {
 		s.IncidentFeedbacksPermissions = d.Get("incident_feedbacks_permissions").([]interface{})
-	}
-	if d.HasChange("incident_post_mortems_permissions") {
-		s.IncidentPostMortemsPermissions = d.Get("incident_post_mortems_permissions").([]interface{})
 	}
 	if d.HasChange("incident_roles_permissions") {
 		s.IncidentRolesPermissions = d.Get("incident_roles_permissions").([]interface{})

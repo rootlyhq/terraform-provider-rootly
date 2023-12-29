@@ -31,11 +31,11 @@ func resourceSecret() *schema.Resource {
 			},
 
 			"secret": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    true,
+				Type:     schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: true,
 				DiffSuppressFunc: func(key, oldValue string, newValue string, d *schema.ResourceData) bool {
 					if oldValue == "" {
 						return false
