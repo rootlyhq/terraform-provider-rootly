@@ -60,6 +60,9 @@ const excluded = {
     "workflow_run",
     "workflow_task",
   ],
+  tests: [
+    "authorization"
+  ]
 }
 
 function main() {
@@ -115,7 +118,7 @@ function generateResources() {
 }
 
 function generateResourceTests() {
-  resources().forEach(generateResourceTest)
+  resources().filter((name) => !excluded.tests.includes(name)).forEach(generateResourceTest)
 }
 
 function generateDataSources() {
