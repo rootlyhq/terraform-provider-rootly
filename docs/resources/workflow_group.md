@@ -20,7 +20,9 @@ description: |-
 
 ### Optional
 
+- `description` (String) A description of the workflow group.
 - `expanded` (Boolean) Whether the group is expanded or collapsed.. Value must be one of true or false
+- `icon` (String) An emoji icon displayed next to the workflow group.
 - `kind` (String) The kind of the workflow group. Value must be one of `simple`, `incident`, `post_mortem`, `action_item`, `pulse`, `alert`.
 - `position` (Number) The position of the workflow group
 - `slug` (String) The slug of the workflow group.

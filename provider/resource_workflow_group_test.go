@@ -22,7 +22,6 @@ func TestAccResourceWorkflowGroup(t *testing.T) {
 
 const testAccResourceWorkflowGroup = `
 resource "rootly_workflow_group" "test" {
-	kind = "simple"
-name = "test"
+	name = "test"
 }
 `

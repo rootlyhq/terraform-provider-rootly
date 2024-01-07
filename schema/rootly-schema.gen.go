@@ -431,7 +431,6 @@ const (
 	AuditItemTypeFormField                      AuditItemType = "FormField"
 	AuditItemTypeFunctionality                  AuditItemType = "Functionality"
 	AuditItemTypeGeniusWorkflow                 AuditItemType = "GeniusWorkflow"
-	AuditItemTypeGeniusWorkflowFolder           AuditItemType = "GeniusWorkflowFolder"
 	AuditItemTypeGeniusWorkflowGroup            AuditItemType = "GeniusWorkflowGroup"
 	AuditItemTypeGeniusWorkflowRun              AuditItemType = "GeniusWorkflowRun"
 	AuditItemTypeGroup                          AuditItemType = "Group"
@@ -9971,7 +9970,7 @@ type NewWorkflow struct {
 			Wait *string `json:"wait"`
 
 			// WorkflowGroupId The group this workflow belongs to.
-			WorkflowGroupId *string `json:"workflow_group_id,omitempty"`
+			WorkflowGroupId *string `json:"workflow_group_id"`
 		} `json:"attributes"`
 		Type NewWorkflowDataType `json:"type"`
 	} `json:"data"`
@@ -10046,11 +10045,17 @@ type NewWorkflowFormFieldConditionDataType string
 type NewWorkflowGroup struct {
 	Data struct {
 		Attributes struct {
+			// Description A description of the workflow group.
+			Description *string `json:"description"`
+
 			// Expanded Whether the group is expanded or collapsed.
 			Expanded *bool `json:"expanded,omitempty"`
 
+			// Icon An emoji icon displayed next to the workflow group.
+			Icon *string `json:"icon,omitempty"`
+
 			// Kind The kind of the workflow group
-			Kind NewWorkflowGroupDataAttributesKind `json:"kind"`
+			Kind *NewWorkflowGroupDataAttributesKind `json:"kind"`
 
 			// Name The name of the workflow group.
 			Name string `json:"name"`
@@ -13756,7 +13761,7 @@ type UpdateWorkflow struct {
 			Wait *string `json:"wait"`
 
 			// WorkflowGroupId The group this workflow belongs to.
-			WorkflowGroupId *string `json:"workflow_group_id,omitempty"`
+			WorkflowGroupId *string `json:"workflow_group_id"`
 		} `json:"attributes"`
 		Type UpdateWorkflowDataType `json:"type"`
 	} `json:"data"`
@@ -13813,11 +13818,17 @@ type UpdateWorkflowFormFieldConditionDataType string
 type UpdateWorkflowGroup struct {
 	Data struct {
 		Attributes struct {
+			// Description A description of the workflow group.
+			Description *string `json:"description"`
+
 			// Expanded Whether the group is expanded or collapsed.
 			Expanded *bool `json:"expanded,omitempty"`
 
+			// Icon An emoji icon displayed next to the workflow group.
+			Icon *string `json:"icon,omitempty"`
+
 			// Kind The kind of the workflow group
-			Kind *UpdateWorkflowGroupDataAttributesKind `json:"kind,omitempty"`
+			Kind *UpdateWorkflowGroupDataAttributesKind `json:"kind"`
 
 			// Name The name of the workflow group.
 			Name *string `json:"name,omitempty"`
@@ -14089,7 +14100,7 @@ type Workflow struct {
 	Wait *string `json:"wait"`
 
 	// WorkflowGroupId The group this workflow belongs to.
-	WorkflowGroupId *string `json:"workflow_group_id,omitempty"`
+	WorkflowGroupId *string `json:"workflow_group_id"`
 }
 
 // WorkflowRepeatOn Repeat on weekdays
@@ -14195,11 +14206,17 @@ type WorkflowFormFieldConditionResponseDataType string
 
 // WorkflowGroup defines model for workflow_group.
 type WorkflowGroup struct {
+	// Description A description of the workflow group.
+	Description *string `json:"description"`
+
 	// Expanded Whether the group is expanded or collapsed.
 	Expanded *bool `json:"expanded,omitempty"`
 
+	// Icon An emoji icon displayed next to the workflow group.
+	Icon *string `json:"icon,omitempty"`
+
 	// Kind The kind of the workflow group
-	Kind WorkflowGroupKind `json:"kind"`
+	Kind *WorkflowGroupKind `json:"kind"`
 
 	// Name The name of the workflow group.
 	Name string `json:"name"`

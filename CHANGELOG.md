@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.2.12] -- 2024-01-07
+
+- Add `icon` & `description` attribute to `workflow_group` resource.
+
 ## [1.2.11] -- 2023-12-29
 
 - Add support for `authorizations`, `incident_permission_sets`, `incident_permission_set_booleans`, `incident_permission_set_resources`, and `roles`.
