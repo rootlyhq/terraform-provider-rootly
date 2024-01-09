@@ -1132,15 +1132,6 @@ const (
 	FormFieldResponseDataTypeFormFields FormFieldResponseDataType = "form_fields"
 )
 
-// Defines values for FunctionalityStatus.
-const (
-	FunctionalityStatusImpacted      FunctionalityStatus = "impacted"
-	FunctionalityStatusMajorOutage   FunctionalityStatus = "major_outage"
-	FunctionalityStatusOperational   FunctionalityStatus = "operational"
-	FunctionalityStatusOutage        FunctionalityStatus = "outage"
-	FunctionalityStatusPartialOutage FunctionalityStatus = "partial_outage"
-)
-
 // Defines values for FunctionalityListDataType.
 const (
 	FunctionalityListDataTypeFunctionalities FunctionalityListDataType = "functionalities"
@@ -1904,15 +1895,6 @@ const (
 	NewFunctionalityDataAttributesShowUptimeLastDaysN90 NewFunctionalityDataAttributesShowUptimeLastDays = 90
 )
 
-// Defines values for NewFunctionalityDataAttributesStatus.
-const (
-	NewFunctionalityDataAttributesStatusImpacted      NewFunctionalityDataAttributesStatus = "impacted"
-	NewFunctionalityDataAttributesStatusMajorOutage   NewFunctionalityDataAttributesStatus = "major_outage"
-	NewFunctionalityDataAttributesStatusOperational   NewFunctionalityDataAttributesStatus = "operational"
-	NewFunctionalityDataAttributesStatusOutage        NewFunctionalityDataAttributesStatus = "outage"
-	NewFunctionalityDataAttributesStatusPartialOutage NewFunctionalityDataAttributesStatus = "partial_outage"
-)
-
 // Defines values for NewFunctionalityDataType.
 const (
 	NewFunctionalityDataTypeFunctionalities NewFunctionalityDataType = "functionalities"
@@ -2358,15 +2340,6 @@ const (
 	NewServiceDataAttributesShowUptimeLastDaysN30 NewServiceDataAttributesShowUptimeLastDays = 30
 	NewServiceDataAttributesShowUptimeLastDaysN60 NewServiceDataAttributesShowUptimeLastDays = 60
 	NewServiceDataAttributesShowUptimeLastDaysN90 NewServiceDataAttributesShowUptimeLastDays = 90
-)
-
-// Defines values for NewServiceDataAttributesStatus.
-const (
-	NewServiceDataAttributesStatusImpacted      NewServiceDataAttributesStatus = "impacted"
-	NewServiceDataAttributesStatusMajorOutage   NewServiceDataAttributesStatus = "major_outage"
-	NewServiceDataAttributesStatusOperational   NewServiceDataAttributesStatus = "operational"
-	NewServiceDataAttributesStatusOutage        NewServiceDataAttributesStatus = "outage"
-	NewServiceDataAttributesStatusPartialOutage NewServiceDataAttributesStatus = "partial_outage"
 )
 
 // Defines values for NewServiceDataType.
@@ -3142,15 +3115,6 @@ const (
 	SendWhatsappMessage SendWhatsappMessageTaskParamsTaskType = "send_whatsapp_message"
 )
 
-// Defines values for ServiceStatus.
-const (
-	ServiceStatusImpacted      ServiceStatus = "impacted"
-	ServiceStatusMajorOutage   ServiceStatus = "major_outage"
-	ServiceStatusOperational   ServiceStatus = "operational"
-	ServiceStatusOutage        ServiceStatus = "outage"
-	ServiceStatusPartialOutage ServiceStatus = "partial_outage"
-)
-
 // Defines values for ServiceListDataType.
 const (
 	ServiceListDataTypeServices ServiceListDataType = "services"
@@ -3673,15 +3637,6 @@ const (
 // Defines values for UpdateFormFieldPositionDataType.
 const (
 	UpdateFormFieldPositionDataTypeFormFieldPositions UpdateFormFieldPositionDataType = "form_field_positions"
-)
-
-// Defines values for UpdateFunctionalityDataAttributesStatus.
-const (
-	UpdateFunctionalityDataAttributesStatusImpacted      UpdateFunctionalityDataAttributesStatus = "impacted"
-	UpdateFunctionalityDataAttributesStatusMajorOutage   UpdateFunctionalityDataAttributesStatus = "major_outage"
-	UpdateFunctionalityDataAttributesStatusOperational   UpdateFunctionalityDataAttributesStatus = "operational"
-	UpdateFunctionalityDataAttributesStatusOutage        UpdateFunctionalityDataAttributesStatus = "outage"
-	UpdateFunctionalityDataAttributesStatusPartialOutage UpdateFunctionalityDataAttributesStatus = "partial_outage"
 )
 
 // Defines values for UpdateFunctionalityDataType.
@@ -4263,15 +4218,6 @@ const (
 // Defines values for UpdateSecretDataType.
 const (
 	UpdateSecretDataTypeSecrets UpdateSecretDataType = "secrets"
-)
-
-// Defines values for UpdateServiceDataAttributesStatus.
-const (
-	UpdateServiceDataAttributesStatusImpacted      UpdateServiceDataAttributesStatus = "impacted"
-	UpdateServiceDataAttributesStatusMajorOutage   UpdateServiceDataAttributesStatus = "major_outage"
-	UpdateServiceDataAttributesStatusOperational   UpdateServiceDataAttributesStatus = "operational"
-	UpdateServiceDataAttributesStatusOutage        UpdateServiceDataAttributesStatus = "outage"
-	UpdateServiceDataAttributesStatusPartialOutage UpdateServiceDataAttributesStatus = "partial_outage"
 )
 
 // Defines values for UpdateServiceDataType.
@@ -7040,15 +6986,9 @@ type Functionality struct {
 	// Slug The slug of the functionality
 	Slug *string `json:"slug,omitempty"`
 
-	// Status The status of the functionality
-	Status *FunctionalityStatus `json:"status,omitempty"`
-
 	// UpdatedAt Date of last update
 	UpdatedAt string `json:"updated_at"`
 }
-
-// FunctionalityStatus The status of the functionality
-type FunctionalityStatus string
 
 // FunctionalityList defines model for functionality_list.
 type FunctionalityList struct {
@@ -8838,9 +8778,6 @@ type NewFunctionality struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels"`
-
-			// Status The status of the functionality
-			Status *NewFunctionalityDataAttributesStatus `json:"status,omitempty"`
 		} `json:"attributes"`
 		Type NewFunctionalityDataType `json:"type"`
 	} `json:"data"`
@@ -8848,9 +8785,6 @@ type NewFunctionality struct {
 
 // NewFunctionalityDataAttributesShowUptimeLastDays Show uptime over x days
 type NewFunctionalityDataAttributesShowUptimeLastDays int
-
-// NewFunctionalityDataAttributesStatus The status of the functionality
-type NewFunctionalityDataAttributesStatus string
 
 // NewFunctionalityDataType defines model for NewFunctionality.Data.Type.
 type NewFunctionalityDataType string
@@ -9691,9 +9625,6 @@ type NewService struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels"`
-
-			// Status The status of the service
-			Status *NewServiceDataAttributesStatus `json:"status,omitempty"`
 		} `json:"attributes"`
 		Type NewServiceDataType `json:"type"`
 	} `json:"data"`
@@ -9701,9 +9632,6 @@ type NewService struct {
 
 // NewServiceDataAttributesShowUptimeLastDays Show uptime over x days
 type NewServiceDataAttributesShowUptimeLastDays int
-
-// NewServiceDataAttributesStatus The status of the service
-type NewServiceDataAttributesStatus string
 
 // NewServiceDataType defines model for NewService.Data.Type.
 type NewServiceDataType string
@@ -11118,15 +11046,9 @@ type Service struct {
 	// Slug The slug of the service
 	Slug *string `json:"slug,omitempty"`
 
-	// Status The status of the service
-	Status *ServiceStatus `json:"status,omitempty"`
-
 	// UpdatedAt Date of last update
 	UpdatedAt string `json:"updated_at"`
 }
-
-// ServiceStatus The status of the service
-type ServiceStatus string
 
 // ServiceList defines model for service_list.
 type ServiceList struct {
@@ -12102,16 +12024,10 @@ type UpdateFunctionality struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels"`
-
-			// Status The status of the functionality
-			Status *UpdateFunctionalityDataAttributesStatus `json:"status,omitempty"`
 		} `json:"attributes"`
 		Type UpdateFunctionalityDataType `json:"type"`
 	} `json:"data"`
 }
-
-// UpdateFunctionalityDataAttributesStatus The status of the functionality
-type UpdateFunctionalityDataAttributesStatus string
 
 // UpdateFunctionalityDataType defines model for UpdateFunctionality.Data.Type.
 type UpdateFunctionalityDataType string
@@ -13329,16 +13245,10 @@ type UpdateService struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels"`
-
-			// Status The status of the service
-			Status *UpdateServiceDataAttributesStatus `json:"status,omitempty"`
 		} `json:"attributes"`
 		Type UpdateServiceDataType `json:"type"`
 	} `json:"data"`
 }
-
-// UpdateServiceDataAttributesStatus The status of the service
-type UpdateServiceDataAttributesStatus string
 
 // UpdateServiceDataType defines model for UpdateService.Data.Type.
 type UpdateServiceDataType string

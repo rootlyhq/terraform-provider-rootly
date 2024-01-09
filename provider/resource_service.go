@@ -79,15 +79,6 @@ func resourceService() *schema.Resource {
 				Description: "The hex color of the service",
 			},
 
-			"status": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "operational",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The status of the service. Value must be one of `operational`, `impacted`, `outage`, `partial_outage`, `major_outage`.",
-			},
-
 			"position": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    true,
@@ -276,9 +267,6 @@ func resourceServiceCreate(ctx context.Context, d *schema.ResourceData, meta int
 	if value, ok := d.GetOkExists("color"); ok {
 		s.Color = value.(string)
 	}
-	if value, ok := d.GetOkExists("status"); ok {
-		s.Status = value.(string)
-	}
 	if value, ok := d.GetOkExists("position"); ok {
 		s.Position = value.(int)
 	}
@@ -356,7 +344,6 @@ func resourceServiceRead(ctx context.Context, d *schema.ResourceData, meta inter
 	d.Set("public_description", item.PublicDescription)
 	d.Set("notify_emails", item.NotifyEmails)
 	d.Set("color", item.Color)
-	d.Set("status", item.Status)
 	d.Set("position", item.Position)
 	d.Set("backstage_id", item.BackstageId)
 	d.Set("pagerduty_id", item.PagerdutyId)
@@ -398,9 +385,6 @@ func resourceServiceUpdate(ctx context.Context, d *schema.ResourceData, meta int
 	}
 	if d.HasChange("color") {
 		s.Color = d.Get("color").(string)
-	}
-	if d.HasChange("status") {
-		s.Status = d.Get("status").(string)
 	}
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)

@@ -70,7 +70,6 @@ resource "rootly_functionality" "logging_in" {
 - `slack_aliases` (Block List) Slack Aliases associated with this service (see [below for nested schema](#nestedblock--slack_aliases))
 - `slack_channels` (Block List) Slack Channels associated with this service (see [below for nested schema](#nestedblock--slack_channels))
 - `slug` (String) The slug of the functionality
-- `status` (String) The status of the functionality. Value must be one of `operational`, `impacted`, `outage`, `partial_outage`, `major_outage`.
 
 ### Read-Only
 

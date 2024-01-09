@@ -79,15 +79,6 @@ func resourceFunctionality() *schema.Resource {
 				Description: "The hex color of the functionality",
 			},
 
-			"status": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "operational",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The status of the functionality. Value must be one of `operational`, `impacted`, `outage`, `partial_outage`, `major_outage`.",
-			},
-
 			"position": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    true,
@@ -213,9 +204,6 @@ func resourceFunctionalityCreate(ctx context.Context, d *schema.ResourceData, me
 	if value, ok := d.GetOkExists("color"); ok {
 		s.Color = value.(string)
 	}
-	if value, ok := d.GetOkExists("status"); ok {
-		s.Status = value.(string)
-	}
 	if value, ok := d.GetOkExists("position"); ok {
 		s.Position = value.(int)
 	}
@@ -272,7 +260,6 @@ func resourceFunctionalityRead(ctx context.Context, d *schema.ResourceData, meta
 	d.Set("public_description", item.PublicDescription)
 	d.Set("notify_emails", item.NotifyEmails)
 	d.Set("color", item.Color)
-	d.Set("status", item.Status)
 	d.Set("position", item.Position)
 	d.Set("environment_ids", item.EnvironmentIds)
 	d.Set("service_ids", item.ServiceIds)
@@ -307,9 +294,6 @@ func resourceFunctionalityUpdate(ctx context.Context, d *schema.ResourceData, me
 	}
 	if d.HasChange("color") {
 		s.Color = d.Get("color").(string)
-	}
-	if d.HasChange("status") {
-		s.Status = d.Get("status").(string)
 	}
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)

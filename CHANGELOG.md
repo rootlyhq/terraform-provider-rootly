@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.2.13] -- 2024-01-09
+
+- Remove `status` attribute from `service` and `functionality` resource.
+
 ## [1.2.12] -- 2024-01-07
 
 - Add `icon` & `description` attribute to `workflow_group` resource.
