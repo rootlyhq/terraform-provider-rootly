@@ -7672,8 +7672,8 @@ type IncidentPermissionSetResource struct {
 	IncidentPermissionSetId string                            `json:"incident_permission_set_id"`
 	Kind                    IncidentPermissionSetResourceKind `json:"kind"`
 	Private                 *bool                             `json:"private,omitempty"`
-	ResourceId              *string                           `json:"resource_id"`
-	ResourceType            *string                           `json:"resource_type"`
+	ResourceId              *string                           `json:"resource_id,omitempty"`
+	ResourceType            *string                           `json:"resource_type,omitempty"`
 	UpdatedAt               string                            `json:"updated_at"`
 }
 
@@ -9106,8 +9106,8 @@ type NewIncidentPermissionSetResource struct {
 			IncidentPermissionSetId *string                                            `json:"incident_permission_set_id,omitempty"`
 			Kind                    NewIncidentPermissionSetResourceDataAttributesKind `json:"kind"`
 			Private                 *bool                                              `json:"private,omitempty"`
-			ResourceId              *string                                            `json:"resource_id"`
-			ResourceType            *string                                            `json:"resource_type"`
+			ResourceId              *string                                            `json:"resource_id,omitempty"`
+			ResourceType            *string                                            `json:"resource_type,omitempty"`
 		} `json:"attributes"`
 		Type NewIncidentPermissionSetResourceDataType `json:"type"`
 	} `json:"data"`
@@ -12409,8 +12409,8 @@ type UpdateIncidentPermissionSetResource struct {
 		Attributes struct {
 			Kind         *UpdateIncidentPermissionSetResourceDataAttributesKind `json:"kind,omitempty"`
 			Private      *bool                                                  `json:"private,omitempty"`
-			ResourceId   *string                                                `json:"resource_id"`
-			ResourceType *string                                                `json:"resource_type"`
+			ResourceId   *string                                                `json:"resource_id,omitempty"`
+			ResourceType *string                                                `json:"resource_type,omitempty"`
 		} `json:"attributes"`
 		Type UpdateIncidentPermissionSetResourceDataType `json:"type"`
 	} `json:"data"`

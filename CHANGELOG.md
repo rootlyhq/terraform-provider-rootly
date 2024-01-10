@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.2.14] -- 2024-01-10
+
+- Fix required `resource_id` & `resource_type` attribute from `incident_permission_set_resource` resource.
+
 ## [1.2.13] -- 2024-01-09
 
 - Remove `status` attribute from `service` and `functionality` resource.
