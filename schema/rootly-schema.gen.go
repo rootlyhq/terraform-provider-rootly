@@ -7021,8 +7021,9 @@ type FunctionalityResponseDataType string
 
 // GetAlertsTaskParams defines model for get_alerts_task_params.
 type GetAlertsTaskParams struct {
-	EnvironmentIds *[]string `json:"environment_ids,omitempty"`
-	Labels         *[]string `json:"labels,omitempty"`
+	EnvironmentIds                 *[]string `json:"environment_ids,omitempty"`
+	EnvironmentsImpactedByIncident *bool     `json:"environments_impacted_by_incident,omitempty"`
+	Labels                         *[]string `json:"labels,omitempty"`
 
 	// PastDuration How far back to fetch commits (in format '1 minute', '30 days', '3 months', etc.)
 	PastDuration           string `json:"past_duration"`
@@ -7031,9 +7032,10 @@ type GetAlertsTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"post_to_slack_channels,omitempty"`
-	ServiceIds *[]string                    `json:"service_ids,omitempty"`
-	Sources    *[]string                    `json:"sources,omitempty"`
-	TaskType   *GetAlertsTaskParamsTaskType `json:"task_type,omitempty"`
+	ServiceIds                 *[]string                    `json:"service_ids,omitempty"`
+	ServicesImpactedByIncident *bool                        `json:"services_impacted_by_incident,omitempty"`
+	Sources                    *[]string                    `json:"sources,omitempty"`
+	TaskType                   *GetAlertsTaskParamsTaskType `json:"task_type,omitempty"`
 }
 
 // GetAlertsTaskParamsTaskType defines model for GetAlertsTaskParams.TaskType.
@@ -7052,8 +7054,9 @@ type GetGithubCommitsTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"post_to_slack_channels,omitempty"`
-	ServiceIds *[]string                           `json:"service_ids,omitempty"`
-	TaskType   *GetGithubCommitsTaskParamsTaskType `json:"task_type,omitempty"`
+	ServiceIds                 *[]string                           `json:"service_ids,omitempty"`
+	ServicesImpactedByIncident *bool                               `json:"services_impacted_by_incident,omitempty"`
+	TaskType                   *GetGithubCommitsTaskParamsTaskType `json:"task_type,omitempty"`
 }
 
 // GetGithubCommitsTaskParamsTaskType defines model for GetGithubCommitsTaskParams.TaskType.
@@ -7072,8 +7075,9 @@ type GetGitlabCommitsTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"post_to_slack_channels,omitempty"`
-	ServiceIds *[]string                           `json:"service_ids,omitempty"`
-	TaskType   *GetGitlabCommitsTaskParamsTaskType `json:"task_type,omitempty"`
+	ServiceIds                 *[]string                           `json:"service_ids,omitempty"`
+	ServicesImpactedByIncident *bool                               `json:"services_impacted_by_incident,omitempty"`
+	TaskType                   *GetGitlabCommitsTaskParamsTaskType `json:"task_type,omitempty"`
 }
 
 // GetGitlabCommitsTaskParamsTaskType defines model for GetGitlabCommitsTaskParams.TaskType.
@@ -7081,8 +7085,9 @@ type GetGitlabCommitsTaskParamsTaskType string
 
 // GetPulsesTaskParams defines model for get_pulses_task_params.
 type GetPulsesTaskParams struct {
-	EnvironmentIds *[]string `json:"environment_ids,omitempty"`
-	Labels         *[]string `json:"labels,omitempty"`
+	EnvironmentIds                 *[]string `json:"environment_ids,omitempty"`
+	EnvironmentsImpactedByIncident *bool     `json:"environments_impacted_by_incident,omitempty"`
+	Labels                         *[]string `json:"labels,omitempty"`
 
 	// PastDuration How far back to fetch commits (in format '1 minute', '30 days', '3 months', etc.)
 	PastDuration           string `json:"past_duration"`
@@ -7091,10 +7096,11 @@ type GetPulsesTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"post_to_slack_channels,omitempty"`
-	Refs       *[]string                    `json:"refs,omitempty"`
-	ServiceIds *[]string                    `json:"service_ids,omitempty"`
-	Sources    *[]string                    `json:"sources,omitempty"`
-	TaskType   *GetPulsesTaskParamsTaskType `json:"task_type,omitempty"`
+	Refs                       *[]string                    `json:"refs,omitempty"`
+	ServiceIds                 *[]string                    `json:"service_ids,omitempty"`
+	ServicesImpactedByIncident *bool                        `json:"services_impacted_by_incident,omitempty"`
+	Sources                    *[]string                    `json:"sources,omitempty"`
+	TaskType                   *GetPulsesTaskParamsTaskType `json:"task_type,omitempty"`
 }
 
 // GetPulsesTaskParamsTaskType defines model for GetPulsesTaskParams.TaskType.
@@ -9085,7 +9091,7 @@ type NewIncidentPermissionSetBoolean struct {
 	Data struct {
 		Attributes struct {
 			Enabled                 *bool                                             `json:"enabled,omitempty"`
-			IncidentPermissionSetId *string                                           `json:"incident_permission_set_id,omitempty"`
+			IncidentPermissionSetId string                                            `json:"incident_permission_set_id"`
 			Kind                    NewIncidentPermissionSetBooleanDataAttributesKind `json:"kind"`
 			Private                 *bool                                             `json:"private,omitempty"`
 		} `json:"attributes"`
@@ -9103,7 +9109,7 @@ type NewIncidentPermissionSetBooleanDataType string
 type NewIncidentPermissionSetResource struct {
 	Data struct {
 		Attributes struct {
-			IncidentPermissionSetId *string                                            `json:"incident_permission_set_id,omitempty"`
+			IncidentPermissionSetId string                                             `json:"incident_permission_set_id"`
 			Kind                    NewIncidentPermissionSetResourceDataAttributesKind `json:"kind"`
 			Private                 *bool                                              `json:"private,omitempty"`
 			ResourceId              *string                                            `json:"resource_id,omitempty"`

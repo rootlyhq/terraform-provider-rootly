@@ -40,11 +40,13 @@ Required:
 Optional:
 
 - `environment_ids` (List of String)
+- `environments_impacted_by_incident` (Boolean) Value must be one of true or false
 - `labels` (List of String)
 - `post_to_incident_timeline` (Boolean) Value must be one of true or false
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
 - `refs` (List of String)
 - `service_ids` (List of String)
+- `services_impacted_by_incident` (Boolean) Value must be one of true or false
 - `sources` (List of String)
 - `task_type` (String)
 

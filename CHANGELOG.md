@@ -1,8 +1,15 @@
 # Changelog
 
+## [1.2.15] -- 2024-01-11
+
+- Add `environments_impacted_by_incident` & `services_impacted_by_incident` attribute to `workflow_task_get_alerts` resource.
+- Add `environments_impacted_by_incident` & `services_impacted_by_incident` attribute to `workflow_task_get_pulses` resource.
+- Add `services_impacted_by_incident` attribute to `workflow_task_get_github_commits` resource.
+- Add `services_impacted_by_incident` attribute to `workflow_task_get_gitlab_commits` resource.
+
 ## [1.2.14] -- 2024-01-10
 
-- Fix required `resource_id` & `resource_type` attribute from `incident_permission_set_resource` resource.
+- Fix required `resource_id` & `resource_type` attribute for `incident_permission_set_resource` resource.
 
 ## [1.2.13] -- 2024-01-09
 

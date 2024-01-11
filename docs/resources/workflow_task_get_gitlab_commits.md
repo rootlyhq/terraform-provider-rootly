@@ -44,6 +44,7 @@ Optional:
 - `post_to_incident_timeline` (Boolean) Value must be one of true or false
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
 - `service_ids` (List of String)
+- `services_impacted_by_incident` (Boolean) Value must be one of true or false
 - `task_type` (String)
 
 <a id="nestedblock--task_params--post_to_slack_channels"></a>

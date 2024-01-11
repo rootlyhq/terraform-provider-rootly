@@ -24,9 +24,9 @@ func resourceIncidentPermissionSetResource() *schema.Resource {
 
 			"incident_permission_set_id": &schema.Schema{
 				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
 				ForceNew:    true,
 				Description: "",
 			},

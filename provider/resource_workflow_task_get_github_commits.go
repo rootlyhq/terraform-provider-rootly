@@ -101,6 +101,11 @@ func resourceWorkflowTaskGetGithubCommits() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 						},
+						"services_impacted_by_incident": &schema.Schema{
+							Description: "Value must be one of true or false",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
 						"post_to_incident_timeline": &schema.Schema{
 							Description: "Value must be one of true or false",
 							Type:        schema.TypeBool,
