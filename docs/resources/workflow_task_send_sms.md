@@ -11,7 +11,7 @@ Manages workflow send_sms task.
 
 ## Example Usage
 
-```terraform
+```shell
 resource "rootly_workflow_incident" "send_sms" {
   name        = "Send SMS to a teammate"
   description = "Automatically send SMS to a specific teammate."

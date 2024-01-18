@@ -22,6 +22,15 @@ func resourceRetrospectiveStep() *schema.Resource {
 		},
 		Schema: map[string]*schema.Schema{
 
+			"retrospective_process_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    true,
+				Description: "",
+			},
+
 			"title": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    false,
@@ -94,6 +103,9 @@ func resourceRetrospectiveStepCreate(ctx context.Context, d *schema.ResourceData
 
 	s := &client.RetrospectiveStep{}
 
+	if value, ok := d.GetOkExists("retrospective_process_id"); ok {
+		s.RetrospectiveProcessId = value.(string)
+	}
 	if value, ok := d.GetOkExists("title"); ok {
 		s.Title = value.(string)
 	}
@@ -144,6 +156,7 @@ func resourceRetrospectiveStepRead(ctx context.Context, d *schema.ResourceData, 
 		return diag.Errorf("Error reading retrospective_step: %s", d.Id())
 	}
 
+	d.Set("retrospective_process_id", item.RetrospectiveProcessId)
 	d.Set("title", item.Title)
 	d.Set("slug", item.Slug)
 	d.Set("description", item.Description)
@@ -161,6 +174,9 @@ func resourceRetrospectiveStepUpdate(ctx context.Context, d *schema.ResourceData
 
 	s := &client.RetrospectiveStep{}
 
+	if d.HasChange("retrospective_process_id") {
+		s.RetrospectiveProcessId = d.Get("retrospective_process_id").(string)
+	}
 	if d.HasChange("title") {
 		s.Title = d.Get("title").(string)
 	}

@@ -11,7 +11,7 @@ Manages workflow rename_slack_channel task.
 
 ## Example Usage
 
-```terraform
+```shell
 resource "rootly_workflow_incident" "renaming_slack_channel_to_jira_ticket_number" {
   name        = "Rename Slack channel to Jira ticket slug"
   description = "Automatically renames Slack channel to attached Jira ticket number."

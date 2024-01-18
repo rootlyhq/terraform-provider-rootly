@@ -11,7 +11,7 @@ Manages dashboards.
 
 ## Example Usage
 
-```terraform
+```shell
 resource "rootly_dashboard" "overview" {
   name = "my_dashboard"
 }

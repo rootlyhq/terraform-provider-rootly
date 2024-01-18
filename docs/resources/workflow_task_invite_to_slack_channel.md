@@ -11,7 +11,7 @@ Manages workflow invite_to_slack_channel task.
 
 ## Example Usage
 
-```terraform
+```shell
 resource "rootly_workflow_incident" "invite_to_incident_channel" {
   name        = "Invite Slack users and groups to incident channel"
   description = "Invite Slack User Groups e.g. @oncall-infra to the incident channel."

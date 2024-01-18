@@ -43,3 +43,4 @@ Optional:
 - `show_action_items_as_table` (Boolean) Value must be one of true or false
 - `show_timeline_as_table` (Boolean) Value must be one of true or false
 - `task_type` (String)
+- `title` (String) The Notion page title

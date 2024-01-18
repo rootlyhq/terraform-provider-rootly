@@ -11,7 +11,7 @@ Manages workflow publish_incident task.
 
 ## Example Usage
 
-```terraform
+```shell
 resource "rootly_workflow_incident" "auto_publish_incident_resolved_to_status_page" {
   name        = "Auto Update to Status Page - Incident Resolved"
   description = "Automatically updates your status page once an incident is resolved"
@@ -80,6 +80,6 @@ Optional:
 - `event` (String) Incident event description
 - `integration_payload` (String) Additional API Payload you can pass to statuspage.io for example. Can contain liquid markup and need to be valid JSON
 - `notify_subscribers` (Boolean) When true notifies subscribers of the status page by email/text. Value must be one of true or false
-- `should_tweet` (Boolean) For StatusPage.io integrated pages auto publishes a tweet for your update. Value must be one of true or false
+- `should_tweet` (Boolean) For Statuspage.io integrated pages auto publishes a tweet for your update. Value must be one of true or false
 - `status_page_template` (Map of String) Map must contain two fields, `id` and `name`.
 - `task_type` (String)

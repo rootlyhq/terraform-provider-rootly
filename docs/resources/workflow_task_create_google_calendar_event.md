@@ -11,7 +11,7 @@ Manages workflow create_google_calendar_event task.
 
 ## Example Usage
 
-```terraform
+```shell
 resource "rootly_workflow_incident" "schedule_postmortem_review_meeting" {
   name        = "Schedule Postmortem Review Meeting"
   description = "Automatically schedule a Google Calendar meeting to review the postmortem."

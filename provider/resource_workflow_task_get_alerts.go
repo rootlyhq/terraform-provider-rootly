@@ -146,6 +146,11 @@ func resourceWorkflowTaskGetAlerts() *schema.Resource {
 								},
 							},
 						},
+						"parent_message_thread_task": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. A hash where [id] is the task id of the parent task that sent a message, and [name] is the name of the parent task",
+							Type:        schema.TypeMap,
+							Optional:    true,
+						},
 					},
 				},
 			},

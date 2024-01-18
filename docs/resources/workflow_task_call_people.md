@@ -11,7 +11,7 @@ Manages workflow call_people task.
 
 ## Example Usage
 
-```terraform
+```shell
 resource "rootly_workflow_incident" "call_people" {
   name        = "Call a teammate"
   description = "Automatically call a specific teammate."

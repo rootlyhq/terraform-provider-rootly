@@ -73,6 +73,11 @@ func resourceWorkflowTaskCreateNotionPage() *schema.Resource {
 								"create_notion_page",
 							}, false),
 						},
+						"title": &schema.Schema{
+							Description: "The Notion page title",
+							Type:        schema.TypeString,
+							Required:    true,
+						},
 						"parent_page": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. The parent page id and display name",
 							Type:        schema.TypeMap,

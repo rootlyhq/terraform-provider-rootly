@@ -10,7 +10,8 @@ import (
 
 type RetrospectiveStep struct {
 	ID string `jsonapi:"primary,retrospective_steps"`
-	Title string `jsonapi:"attr,title,omitempty"`
+	RetrospectiveProcessId string `jsonapi:"attr,retrospective_process_id,omitempty"`
+  Title string `jsonapi:"attr,title,omitempty"`
   Slug string `jsonapi:"attr,slug,omitempty"`
   Description string `jsonapi:"attr,description,omitempty"`
   IncidentRoleId string `jsonapi:"attr,incident_role_id,omitempty"`
@@ -19,8 +20,8 @@ type RetrospectiveStep struct {
   Skippable *bool `jsonapi:"attr,skippable,omitempty"`
 }
 
-func (c *Client) ListRetrospectiveSteps(params *rootlygo.ListRetrospectiveStepsParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListRetrospectiveStepsRequest(c.Rootly.Server, params)
+func (c *Client) ListRetrospectiveSteps(id string, params *rootlygo.ListRetrospectiveStepsParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListRetrospectiveStepsRequest(c.Rootly.Server, id, params)
 	if err != nil {
 		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}
@@ -44,7 +45,7 @@ func (c *Client) CreateRetrospectiveStep(d *RetrospectiveStep) (*RetrospectiveSt
 		return nil, errors.Errorf("Error marshaling retrospective_step: %s", err.Error())
 	}
 
-	req, err := rootlygo.NewCreateRetrospectiveStepRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
+	req, err := rootlygo.NewCreateRetrospectiveStepRequestWithBody(c.Rootly.Server, d.RetrospectiveProcessId, c.ContentType, buffer)
 	if err != nil {
 		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}

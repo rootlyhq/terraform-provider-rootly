@@ -11,7 +11,7 @@ DEPRECATED: Please use `form_field` and `form_field_option` data sources instead
 
 ## Example Usage
 
-```terraform
+```shell
 data "rootly_custom_field_option" "my-custom-field-option" {
   slug = "my-custom-field-option"
 }

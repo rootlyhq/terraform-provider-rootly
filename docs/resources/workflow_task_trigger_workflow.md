@@ -11,7 +11,7 @@ Manages workflow trigger_workflow task.
 
 ## Example Usage
 
-```terraform
+```shell
 resource "rootly_workflow_incident" "trigger_another_workflow" {
   name        = "Trigger another workflow"
   description = "Trigger another workflow"

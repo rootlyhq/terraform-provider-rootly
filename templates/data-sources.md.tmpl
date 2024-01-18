@@ -12,7 +12,7 @@ description: |-
 {{ if .HasExample -}}
 ## Example Usage
 
-{{ printf "{{tffile %q}}" .ExampleFile }}
+{{ codefile "shell" .ExampleFile }}
 {{- end }}
 
 {{ .SchemaMarkdown | trimspace }}

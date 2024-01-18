@@ -112,7 +112,7 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 							Optional:    true,
 						},
 						"should_tweet": &schema.Schema{
-							Description: "For StatusPage.io integrated pages auto publishes a tweet for your update. Value must be one of true or false",
+							Description: "For Statuspage.io integrated pages auto publishes a tweet for your update. Value must be one of true or false",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},

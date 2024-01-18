@@ -11,7 +11,7 @@ description: |-
 
 ## Example Usage
 
-```terraform
+```shell
 data "rootly_cuser" "my-user" {
   email = "john@acme.com"
 }

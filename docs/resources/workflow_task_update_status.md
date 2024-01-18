@@ -11,7 +11,7 @@ Manages workflow update_status task.
 
 ## Example Usage
 
-```terraform
+```shell
 resource "rootly_workflow_incident" "auto_resolve_incident" {
   name        = "Auto resolve inactive incidents"
   description = "After an incident has been inactive for 24 hrs, automatically mark it as resolved."

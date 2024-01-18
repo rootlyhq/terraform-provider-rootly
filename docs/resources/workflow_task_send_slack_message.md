@@ -11,7 +11,7 @@ Manages workflow send_slack_message task.
 
 ## Example Usage
 
-```terraform
+```shell
 resource "rootly_workflow_incident" "notify_slack_channels" {
   name        = "Notify teams on Slack about the incident"
   description = "Send a message to specific teams on Slack regarding the incident."

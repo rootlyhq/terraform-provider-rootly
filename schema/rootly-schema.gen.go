@@ -2130,6 +2130,11 @@ const (
 	NewPulseDataTypePulses NewPulseDataType = "pulses"
 )
 
+// Defines values for NewRetrospectiveProcessDataType.
+const (
+	NewRetrospectiveProcessDataTypeRetrospectiveProcesses NewRetrospectiveProcessDataType = "retrospective_processes"
+)
+
 // Defines values for NewRetrospectiveStepDataType.
 const (
 	NewRetrospectiveStepDataTypeRetrospectiveSteps NewRetrospectiveStepDataType = "retrospective_steps"
@@ -2836,6 +2841,26 @@ const (
 // Defines values for RestartIncidentDataType.
 const (
 	RestartIncidentDataTypeIncidents RestartIncidentDataType = "incidents"
+)
+
+// Defines values for RetrospectiveConfigurationListDataType.
+const (
+	RetrospectiveConfigurationListDataTypeRetrospectiveConfigurations RetrospectiveConfigurationListDataType = "retrospective_configurations"
+)
+
+// Defines values for RetrospectiveConfigurationResponseDataType.
+const (
+	RetrospectiveConfigurationResponseDataTypeRetrospectiveConfigurations RetrospectiveConfigurationResponseDataType = "retrospective_configurations"
+)
+
+// Defines values for RetrospectiveProcessListDataType.
+const (
+	RetrospectiveProcessListDataTypeRetrospectiveProcesses RetrospectiveProcessListDataType = "retrospective_processes"
+)
+
+// Defines values for RetrospectiveProcessResponseDataType.
+const (
+	RetrospectiveProcessResponseDataTypeRetrospectiveProcesses RetrospectiveProcessResponseDataType = "retrospective_processes"
 )
 
 // Defines values for RetrospectiveStepListDataType.
@@ -4019,6 +4044,16 @@ const (
 // Defines values for UpdatePulseDataType.
 const (
 	UpdatePulseDataTypePulses UpdatePulseDataType = "pulses"
+)
+
+// Defines values for UpdateRetrospectiveConfigurationDataType.
+const (
+	RetrospectiveConfigurations UpdateRetrospectiveConfigurationDataType = "retrospective_configurations"
+)
+
+// Defines values for UpdateRetrospectiveProcessDataType.
+const (
+	UpdateRetrospectiveProcessDataTypeRetrospectiveProcesses UpdateRetrospectiveProcessDataType = "retrospective_processes"
 )
 
 // Defines values for UpdateRetrospectiveStepDataType.
@@ -6095,6 +6130,9 @@ type CreateNotionPageTaskParams struct {
 	ShowActionItemsAsTable *bool                               `json:"show_action_items_as_table,omitempty"`
 	ShowTimelineAsTable    *bool                               `json:"show_timeline_as_table,omitempty"`
 	TaskType               *CreateNotionPageTaskParamsTaskType `json:"task_type,omitempty"`
+
+	// Title The Notion page title
+	Title string `json:"title"`
 }
 
 // CreateNotionPageTaskParamsTaskType defines model for CreateNotionPageTaskParams.TaskType.
@@ -7025,6 +7063,12 @@ type GetAlertsTaskParams struct {
 	EnvironmentsImpactedByIncident *bool     `json:"environments_impacted_by_incident,omitempty"`
 	Labels                         *[]string `json:"labels,omitempty"`
 
+	// ParentMessageThreadTask A hash where [id] is the task id of the parent task that sent a message, and [name] is the name of the parent task
+	ParentMessageThreadTask *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"parent_message_thread_task,omitempty"`
+
 	// PastDuration How far back to fetch commits (in format '1 minute', '30 days', '3 months', etc.)
 	PastDuration           string `json:"past_duration"`
 	PostToIncidentTimeline *bool  `json:"post_to_incident_timeline,omitempty"`
@@ -7088,6 +7132,12 @@ type GetPulsesTaskParams struct {
 	EnvironmentIds                 *[]string `json:"environment_ids,omitempty"`
 	EnvironmentsImpactedByIncident *bool     `json:"environments_impacted_by_incident,omitempty"`
 	Labels                         *[]string `json:"labels,omitempty"`
+
+	// ParentMessageThreadTask A hash where [id] is the task id of the parent task that sent a message, and [name] is the name of the parent task
+	ParentMessageThreadTask *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"parent_message_thread_task,omitempty"`
 
 	// PastDuration How far back to fetch commits (in format '1 minute', '30 days', '3 months', etc.)
 	PastDuration           string `json:"past_duration"`
@@ -7957,7 +8007,7 @@ type IncidentStatusPageEvent struct {
 	// NotifySubscribers Notify all status pages subscribers
 	NotifySubscribers *bool `json:"notify_subscribers,omitempty"`
 
-	// ShouldTweet For StatusPage.io integrated pages auto publishes a tweet for your update
+	// ShouldTweet For Statuspage.io integrated pages auto publishes a tweet for your update
 	ShouldTweet *bool `json:"should_tweet,omitempty"`
 
 	// StartedAt Date of start
@@ -9186,7 +9236,7 @@ type NewIncidentStatusPageEvent struct {
 			// NotifySubscribers Notify all status pages subscribers
 			NotifySubscribers *bool `json:"notify_subscribers"`
 
-			// ShouldTweet For StatusPage.io integrated pages auto publishes a tweet for your update
+			// ShouldTweet For Statuspage.io integrated pages auto publishes a tweet for your update
 			ShouldTweet *bool `json:"should_tweet"`
 
 			// Status The status of the incident event
@@ -9378,6 +9428,50 @@ type NewPulse struct {
 
 // NewPulseDataType defines model for NewPulse.Data.Type.
 type NewPulseDataType string
+
+// NewRetrospectiveProcess defines model for new_retrospective_process.
+type NewRetrospectiveProcess struct {
+	Data struct {
+		Attributes struct {
+			// CopyFrom Retrospective process ID from which retrospective steps have to be copied. To use starter template for retrospective steps provide value: 'starter_template'
+			CopyFrom string `json:"copy_from"`
+
+			// Description The description of the retrospective process
+			Description *string `json:"description"`
+
+			// Name The name of the retrospective process
+			Name                                 string                                                                        `json:"name"`
+			RetrospectiveProcessMatchingCriteria *NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria `json:"retrospective_process_matching_criteria,omitempty"`
+		} `json:"attributes"`
+		Type NewRetrospectiveProcessDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0 defines model for .
+type NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0 struct {
+	// SeverityIds Severity ID's for retrospective process matching criteria
+	SeverityIds []string `json:"severity_ids"`
+}
+
+// NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1 defines model for .
+type NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1 struct {
+	// GroupIds Team ID's for retrospective process matching criteria
+	GroupIds []string `json:"group_ids"`
+}
+
+// NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2 defines model for .
+type NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2 struct {
+	// IncidentTypeIds Incident type ID's for retrospective process matching criteria
+	IncidentTypeIds []string `json:"incident_type_ids"`
+}
+
+// NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria defines model for NewRetrospectiveProcess.Data.Attributes.RetrospectiveProcessMatchingCriteria.
+type NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria struct {
+	union json.RawMessage
+}
+
+// NewRetrospectiveProcessDataType defines model for NewRetrospectiveProcess.Data.Type.
+type NewRetrospectiveProcessDataType string
 
 // NewRetrospectiveStep defines model for new_retrospective_step.
 type NewRetrospectiveStep struct {
@@ -10016,31 +10110,64 @@ type NewWorkflowRun struct {
 }
 
 // NewWorkflowRunDataAttributes0 defines model for .
-type NewWorkflowRunDataAttributes0 = interface{}
+type NewWorkflowRunDataAttributes0 struct {
+	// CheckConditions If true, this will check conditions. If conditions are not satisfied the run will not be created.
+	CheckConditions *bool `json:"check_conditions"`
+
+	// Immediate If false, this will respect wait time configured on the workflow.
+	Immediate *bool `json:"immediate"`
+}
 
 // NewWorkflowRunDataAttributes1 defines model for .
 type NewWorkflowRunDataAttributes1 struct {
+	// CheckConditions If true, this will check conditions. If conditions are not satisfied the run will not be created
+	CheckConditions *bool `json:"check_conditions"`
+
+	// Immediate If false, this will respect wait time configured on the workflow
+	Immediate  *bool  `json:"immediate"`
 	IncidentId string `json:"incident_id"`
 }
 
 // NewWorkflowRunDataAttributes2 defines model for .
 type NewWorkflowRunDataAttributes2 struct {
+	// CheckConditions If true, this will check conditions. If conditions are not satisfied the run will not be created
+	CheckConditions *bool `json:"check_conditions"`
+
+	// Immediate If false, this will respect wait time configured on the workflow
+	Immediate    *bool  `json:"immediate"`
 	PostMortemId string `json:"post_mortem_id"`
 }
 
 // NewWorkflowRunDataAttributes3 defines model for .
 type NewWorkflowRunDataAttributes3 struct {
 	ActionItemId string `json:"action_item_id"`
+
+	// CheckConditions If true, this will check conditions. If conditions are not satisfied the run will not be created
+	CheckConditions *bool `json:"check_conditions"`
+
+	// Immediate If false, this will respect wait time configured on the workflow
+	Immediate *bool `json:"immediate"`
 }
 
 // NewWorkflowRunDataAttributes4 defines model for .
 type NewWorkflowRunDataAttributes4 struct {
 	AlertId string `json:"alert_id"`
+
+	// CheckConditions If true, this will check conditions. If conditions are not satisfied the run will not be created
+	CheckConditions *bool `json:"check_conditions"`
+
+	// Immediate If false, this will respect wait time configured on the workflow
+	Immediate *bool `json:"immediate"`
 }
 
 // NewWorkflowRunDataAttributes5 defines model for .
 type NewWorkflowRunDataAttributes5 struct {
-	PulseId string `json:"pulse_id"`
+	// CheckConditions If true, this will check conditions. If conditions are not satisfied the run will not be created
+	CheckConditions *bool `json:"check_conditions"`
+
+	// Immediate If false, this will respect wait time configured on the workflow
+	Immediate *bool  `json:"immediate"`
+	PulseId   string `json:"pulse_id"`
 }
 
 // NewWorkflowRun_Data_Attributes defines model for NewWorkflowRun.Data.Attributes.
@@ -10340,7 +10467,7 @@ type PublishIncidentTaskParams struct {
 	NotifySubscribers *bool  `json:"notify_subscribers,omitempty"`
 	PublicTitle       string `json:"public_title"`
 
-	// ShouldTweet For StatusPage.io integrated pages auto publishes a tweet for your update
+	// ShouldTweet For Statuspage.io integrated pages auto publishes a tweet for your update
 	ShouldTweet        *bool                           `json:"should_tweet,omitempty"`
 	Status             PublishIncidentTaskParamsStatus `json:"status"`
 	StatusPageId       string                          `json:"status_page_id"`
@@ -10549,6 +10676,123 @@ type RestartIncident struct {
 // RestartIncidentDataType defines model for RestartIncident.Data.Type.
 type RestartIncidentDataType string
 
+// RetrospectiveConfiguration defines model for retrospective_configuration.
+type RetrospectiveConfiguration struct {
+	// CreatedAt Date of creation
+	CreatedAt *string `json:"created_at,omitempty"`
+
+	// GroupIds The Team ID's to attach to the retrospective configuration
+	GroupIds *[]string `json:"group_ids"`
+
+	// IncidentTypeIds The Incident Type ID's to attach to the retrospective configuration
+	IncidentTypeIds *[]string `json:"incident_type_ids"`
+
+	// SeverityIds The Severity ID's to attach to the retrospective configuration
+	SeverityIds *[]string `json:"severity_ids"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt *string `json:"updated_at,omitempty"`
+}
+
+// RetrospectiveConfigurationList defines model for retrospective_configuration_list.
+type RetrospectiveConfigurationList struct {
+	Data []struct {
+		Attributes RetrospectiveConfiguration `json:"attributes"`
+
+		// Id Unique ID of the configuration
+		Id   string                                 `json:"id"`
+		Type RetrospectiveConfigurationListDataType `json:"type"`
+	} `json:"data"`
+}
+
+// RetrospectiveConfigurationListDataType defines model for RetrospectiveConfigurationList.Data.Type.
+type RetrospectiveConfigurationListDataType string
+
+// RetrospectiveConfigurationResponse defines model for retrospective_configuration_response.
+type RetrospectiveConfigurationResponse struct {
+	Data struct {
+		Attributes RetrospectiveConfiguration `json:"attributes"`
+
+		// Id Unique ID of the retrospective configuration
+		Id   string                                     `json:"id"`
+		Type RetrospectiveConfigurationResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// RetrospectiveConfigurationResponseDataType defines model for RetrospectiveConfigurationResponse.Data.Type.
+type RetrospectiveConfigurationResponseDataType string
+
+// RetrospectiveProcess defines model for retrospective_process.
+type RetrospectiveProcess struct {
+	// CreatedAt Date of creation
+	CreatedAt *string `json:"created_at,omitempty"`
+
+	// Description The description of the retrospective process
+	Description *string `json:"description"`
+
+	// IsDefault Is the retrospective process default?
+	IsDefault *bool `json:"is_default,omitempty"`
+
+	// Name The name of the retrospective process
+	Name                                 *string                                                    `json:"name,omitempty"`
+	RetrospectiveProcessMatchingCriteria *RetrospectiveProcess_RetrospectiveProcessMatchingCriteria `json:"retrospective_process_matching_criteria,omitempty"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt *string `json:"updated_at,omitempty"`
+}
+
+// RetrospectiveProcessRetrospectiveProcessMatchingCriteria0 defines model for .
+type RetrospectiveProcessRetrospectiveProcessMatchingCriteria0 struct {
+	// SeverityIds Severity ID's for retrospective process matching criteria
+	SeverityIds []string `json:"severity_ids"`
+}
+
+// RetrospectiveProcessRetrospectiveProcessMatchingCriteria1 defines model for .
+type RetrospectiveProcessRetrospectiveProcessMatchingCriteria1 struct {
+	// GroupIds Team ID's for retrospective process matching criteria
+	GroupIds []string `json:"group_ids"`
+}
+
+// RetrospectiveProcessRetrospectiveProcessMatchingCriteria2 defines model for .
+type RetrospectiveProcessRetrospectiveProcessMatchingCriteria2 struct {
+	// IncidentTypeIds Incident type ID's for retrospective process matching criteria
+	IncidentTypeIds []string `json:"incident_type_ids"`
+}
+
+// RetrospectiveProcess_RetrospectiveProcessMatchingCriteria defines model for RetrospectiveProcess.RetrospectiveProcessMatchingCriteria.
+type RetrospectiveProcess_RetrospectiveProcessMatchingCriteria struct {
+	union json.RawMessage
+}
+
+// RetrospectiveProcessList defines model for retrospective_process_list.
+type RetrospectiveProcessList struct {
+	Data []struct {
+		Attributes RetrospectiveProcess `json:"attributes"`
+
+		// Id Unique ID of the retrospective process
+		Id   string                           `json:"id"`
+		Type RetrospectiveProcessListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// RetrospectiveProcessListDataType defines model for RetrospectiveProcessList.Data.Type.
+type RetrospectiveProcessListDataType string
+
+// RetrospectiveProcessResponse defines model for retrospective_process_response.
+type RetrospectiveProcessResponse struct {
+	Data struct {
+		Attributes RetrospectiveProcess `json:"attributes"`
+
+		// Id Unique id of retrospective process
+		Id   string                               `json:"id"`
+		Type RetrospectiveProcessResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// RetrospectiveProcessResponseDataType defines model for RetrospectiveProcessResponse.Data.Type.
+type RetrospectiveProcessResponseDataType string
+
 // RetrospectiveStep defines model for retrospective_step.
 type RetrospectiveStep struct {
 	// CreatedAt Date of creation
@@ -10564,7 +10808,8 @@ type RetrospectiveStep struct {
 	IncidentRoleId *string `json:"incident_role_id"`
 
 	// Position Position of the step
-	Position *int `json:"position,omitempty"`
+	Position               *int   `json:"position,omitempty"`
+	RetrospectiveProcessId string `json:"retrospective_process_id"`
 
 	// Skippable Is the step skippable?
 	Skippable *bool `json:"skippable,omitempty"`
@@ -12564,7 +12809,7 @@ type UpdateIncidentStatusPageEvent struct {
 			// NotifySubscribers Notify all status pages subscribers
 			NotifySubscribers *bool `json:"notify_subscribers"`
 
-			// ShouldTweet For StatusPage.io integrated pages auto publishes a tweet for your update
+			// ShouldTweet For Statuspage.io integrated pages auto publishes a tweet for your update
 			ShouldTweet *bool `json:"should_tweet"`
 
 			// Status The status of the incident event
@@ -12764,6 +13009,9 @@ type UpdateNotionPageTaskParams struct {
 	ShowActionItemsAsTable *bool                               `json:"show_action_items_as_table,omitempty"`
 	ShowTimelineAsTable    *bool                               `json:"show_timeline_as_table,omitempty"`
 	TaskType               *UpdateNotionPageTaskParamsTaskType `json:"task_type,omitempty"`
+
+	// Title The Notion page title
+	Title *string `json:"title,omitempty"`
 }
 
 // UpdateNotionPageTaskParamsTaskType defines model for UpdateNotionPageTaskParams.TaskType.
@@ -13010,6 +13258,67 @@ type UpdatePulse struct {
 
 // UpdatePulseDataType defines model for UpdatePulse.Data.Type.
 type UpdatePulseDataType string
+
+// UpdateRetrospectiveConfiguration defines model for update_retrospective_configuration.
+type UpdateRetrospectiveConfiguration struct {
+	Data struct {
+		Attributes struct {
+			// GroupIds The Team ID's to attach to the retrospective configuration
+			GroupIds *[]string `json:"group_ids"`
+
+			// IncidentTypeIds The Incident Type ID's to attach to the retrospective configuration
+			IncidentTypeIds *[]string `json:"incident_type_ids"`
+
+			// SeverityIds The Severity ID's to attach to the retrospective configuration
+			SeverityIds *[]string `json:"severity_ids"`
+		} `json:"attributes"`
+		Type UpdateRetrospectiveConfigurationDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateRetrospectiveConfigurationDataType defines model for UpdateRetrospectiveConfiguration.Data.Type.
+type UpdateRetrospectiveConfigurationDataType string
+
+// UpdateRetrospectiveProcess defines model for update_retrospective_process.
+type UpdateRetrospectiveProcess struct {
+	Data struct {
+		Attributes struct {
+			// Description The description of the retrospective process
+			Description *string `json:"description"`
+
+			// Name The name of the retrospective process
+			Name                                 *string                                                                          `json:"name,omitempty"`
+			RetrospectiveProcessMatchingCriteria *UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria `json:"retrospective_process_matching_criteria,omitempty"`
+		} `json:"attributes"`
+		Type UpdateRetrospectiveProcessDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0 defines model for .
+type UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0 struct {
+	// SeverityIds Severity ID's for retrospective process matching criteria
+	SeverityIds []string `json:"severity_ids"`
+}
+
+// UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1 defines model for .
+type UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1 struct {
+	// GroupIds Team ID's for retrospective process matching criteria
+	GroupIds []string `json:"group_ids"`
+}
+
+// UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2 defines model for .
+type UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2 struct {
+	// IncidentTypeIds Incident type ID's for retrospective process matching criteria
+	IncidentTypeIds []string `json:"incident_type_ids"`
+}
+
+// UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria defines model for UpdateRetrospectiveProcess.Data.Attributes.RetrospectiveProcessMatchingCriteria.
+type UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria struct {
+	union json.RawMessage
+}
+
+// UpdateRetrospectiveProcessDataType defines model for UpdateRetrospectiveProcess.Data.Type.
+type UpdateRetrospectiveProcessDataType string
 
 // UpdateRetrospectiveStep defines model for update_retrospective_step.
 type UpdateRetrospectiveStep struct {
@@ -14826,6 +15135,18 @@ type ListPulsesParams struct {
 	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
+// ListRetrospectiveConfigurationsParams defines parameters for ListRetrospectiveConfigurations.
+type ListRetrospectiveConfigurationsParams struct {
+	Include *string `form:"include,omitempty" json:"include,omitempty"`
+}
+
+// ListRetrospectiveProcessesParams defines parameters for ListRetrospectiveProcesses.
+type ListRetrospectiveProcessesParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+}
+
 // ListRetrospectiveStepsParams defines parameters for ListRetrospectiveSteps.
 type ListRetrospectiveStepsParams struct {
 	Include    *string `form:"include,omitempty" json:"include,omitempty"`
@@ -15009,9 +15330,13 @@ type ListWorkflowFormFieldConditionsParams struct {
 
 // ListWorkflowRunsParams defines parameters for ListWorkflowRuns.
 type ListWorkflowRunsParams struct {
-	Include    *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	Include            *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
 }
 
 // ListWorkflowTasksParams defines parameters for ListWorkflowTasks.
@@ -15245,6 +15570,15 @@ type CreatePulseApplicationVndAPIPlusJSONRequestBody = NewPulse
 
 // UpdatePulseApplicationVndAPIPlusJSONRequestBody defines body for UpdatePulse for application/vnd.api+json ContentType.
 type UpdatePulseApplicationVndAPIPlusJSONRequestBody = UpdatePulse
+
+// UpdateRetrospectiveConfigurationApplicationVndAPIPlusJSONRequestBody defines body for UpdateRetrospectiveConfiguration for application/vnd.api+json ContentType.
+type UpdateRetrospectiveConfigurationApplicationVndAPIPlusJSONRequestBody = UpdateRetrospectiveConfiguration
+
+// CreateRetrospectiveProcessApplicationVndAPIPlusJSONRequestBody defines body for CreateRetrospectiveProcess for application/vnd.api+json ContentType.
+type CreateRetrospectiveProcessApplicationVndAPIPlusJSONRequestBody = NewRetrospectiveProcess
+
+// UpdateRetrospectiveProcessApplicationVndAPIPlusJSONRequestBody defines body for UpdateRetrospectiveProcess for application/vnd.api+json ContentType.
+type UpdateRetrospectiveProcessApplicationVndAPIPlusJSONRequestBody = UpdateRetrospectiveProcess
 
 // CreateRetrospectiveStepApplicationVndAPIPlusJSONRequestBody defines body for CreateRetrospectiveStep for application/vnd.api+json ContentType.
 type CreateRetrospectiveStepApplicationVndAPIPlusJSONRequestBody = NewRetrospectiveStep
@@ -16324,6 +16658,94 @@ func (t IncidentTriggerParams_IncidentInactivityDuration) MarshalJSON() ([]byte,
 }
 
 func (t *IncidentTriggerParams_IncidentInactivityDuration) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0 returns the union data inside the NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as a NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0
+func (t NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) AsNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0() (NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0, error) {
+	var body NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0 overwrites any union data inside the NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as the provided NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0
+func (t *NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) FromNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0(v NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0 performs a merge with any union data inside the NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria, using the provided NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0
+func (t *NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) MergeNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0(v NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JsonMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1 returns the union data inside the NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as a NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1
+func (t NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) AsNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1() (NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1, error) {
+	var body NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1 overwrites any union data inside the NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as the provided NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1
+func (t *NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) FromNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1(v NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1 performs a merge with any union data inside the NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria, using the provided NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1
+func (t *NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) MergeNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1(v NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JsonMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2 returns the union data inside the NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as a NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2
+func (t NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) AsNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2() (NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2, error) {
+	var body NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2 overwrites any union data inside the NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as the provided NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2
+func (t *NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) FromNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2(v NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2 performs a merge with any union data inside the NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria, using the provided NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2
+func (t *NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) MergeNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2(v NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JsonMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
 	return err
 }
@@ -19240,6 +19662,182 @@ func (t NewWorkflowTask_Data_Attributes_TaskParams) MarshalJSON() ([]byte, error
 }
 
 func (t *NewWorkflowTask_Data_Attributes_TaskParams) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsRetrospectiveProcessRetrospectiveProcessMatchingCriteria0 returns the union data inside the RetrospectiveProcess_RetrospectiveProcessMatchingCriteria as a RetrospectiveProcessRetrospectiveProcessMatchingCriteria0
+func (t RetrospectiveProcess_RetrospectiveProcessMatchingCriteria) AsRetrospectiveProcessRetrospectiveProcessMatchingCriteria0() (RetrospectiveProcessRetrospectiveProcessMatchingCriteria0, error) {
+	var body RetrospectiveProcessRetrospectiveProcessMatchingCriteria0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromRetrospectiveProcessRetrospectiveProcessMatchingCriteria0 overwrites any union data inside the RetrospectiveProcess_RetrospectiveProcessMatchingCriteria as the provided RetrospectiveProcessRetrospectiveProcessMatchingCriteria0
+func (t *RetrospectiveProcess_RetrospectiveProcessMatchingCriteria) FromRetrospectiveProcessRetrospectiveProcessMatchingCriteria0(v RetrospectiveProcessRetrospectiveProcessMatchingCriteria0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeRetrospectiveProcessRetrospectiveProcessMatchingCriteria0 performs a merge with any union data inside the RetrospectiveProcess_RetrospectiveProcessMatchingCriteria, using the provided RetrospectiveProcessRetrospectiveProcessMatchingCriteria0
+func (t *RetrospectiveProcess_RetrospectiveProcessMatchingCriteria) MergeRetrospectiveProcessRetrospectiveProcessMatchingCriteria0(v RetrospectiveProcessRetrospectiveProcessMatchingCriteria0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JsonMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsRetrospectiveProcessRetrospectiveProcessMatchingCriteria1 returns the union data inside the RetrospectiveProcess_RetrospectiveProcessMatchingCriteria as a RetrospectiveProcessRetrospectiveProcessMatchingCriteria1
+func (t RetrospectiveProcess_RetrospectiveProcessMatchingCriteria) AsRetrospectiveProcessRetrospectiveProcessMatchingCriteria1() (RetrospectiveProcessRetrospectiveProcessMatchingCriteria1, error) {
+	var body RetrospectiveProcessRetrospectiveProcessMatchingCriteria1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromRetrospectiveProcessRetrospectiveProcessMatchingCriteria1 overwrites any union data inside the RetrospectiveProcess_RetrospectiveProcessMatchingCriteria as the provided RetrospectiveProcessRetrospectiveProcessMatchingCriteria1
+func (t *RetrospectiveProcess_RetrospectiveProcessMatchingCriteria) FromRetrospectiveProcessRetrospectiveProcessMatchingCriteria1(v RetrospectiveProcessRetrospectiveProcessMatchingCriteria1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeRetrospectiveProcessRetrospectiveProcessMatchingCriteria1 performs a merge with any union data inside the RetrospectiveProcess_RetrospectiveProcessMatchingCriteria, using the provided RetrospectiveProcessRetrospectiveProcessMatchingCriteria1
+func (t *RetrospectiveProcess_RetrospectiveProcessMatchingCriteria) MergeRetrospectiveProcessRetrospectiveProcessMatchingCriteria1(v RetrospectiveProcessRetrospectiveProcessMatchingCriteria1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JsonMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsRetrospectiveProcessRetrospectiveProcessMatchingCriteria2 returns the union data inside the RetrospectiveProcess_RetrospectiveProcessMatchingCriteria as a RetrospectiveProcessRetrospectiveProcessMatchingCriteria2
+func (t RetrospectiveProcess_RetrospectiveProcessMatchingCriteria) AsRetrospectiveProcessRetrospectiveProcessMatchingCriteria2() (RetrospectiveProcessRetrospectiveProcessMatchingCriteria2, error) {
+	var body RetrospectiveProcessRetrospectiveProcessMatchingCriteria2
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromRetrospectiveProcessRetrospectiveProcessMatchingCriteria2 overwrites any union data inside the RetrospectiveProcess_RetrospectiveProcessMatchingCriteria as the provided RetrospectiveProcessRetrospectiveProcessMatchingCriteria2
+func (t *RetrospectiveProcess_RetrospectiveProcessMatchingCriteria) FromRetrospectiveProcessRetrospectiveProcessMatchingCriteria2(v RetrospectiveProcessRetrospectiveProcessMatchingCriteria2) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeRetrospectiveProcessRetrospectiveProcessMatchingCriteria2 performs a merge with any union data inside the RetrospectiveProcess_RetrospectiveProcessMatchingCriteria, using the provided RetrospectiveProcessRetrospectiveProcessMatchingCriteria2
+func (t *RetrospectiveProcess_RetrospectiveProcessMatchingCriteria) MergeRetrospectiveProcessRetrospectiveProcessMatchingCriteria2(v RetrospectiveProcessRetrospectiveProcessMatchingCriteria2) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JsonMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t RetrospectiveProcess_RetrospectiveProcessMatchingCriteria) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *RetrospectiveProcess_RetrospectiveProcessMatchingCriteria) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0 returns the union data inside the UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as a UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0
+func (t UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) AsUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0() (UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0, error) {
+	var body UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0 overwrites any union data inside the UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as the provided UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0
+func (t *UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) FromUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0(v UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0 performs a merge with any union data inside the UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria, using the provided UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0
+func (t *UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) MergeUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0(v UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JsonMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1 returns the union data inside the UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as a UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1
+func (t UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) AsUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1() (UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1, error) {
+	var body UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1 overwrites any union data inside the UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as the provided UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1
+func (t *UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) FromUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1(v UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1 performs a merge with any union data inside the UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria, using the provided UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1
+func (t *UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) MergeUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1(v UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JsonMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2 returns the union data inside the UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as a UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2
+func (t UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) AsUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2() (UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2, error) {
+	var body UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2 overwrites any union data inside the UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as the provided UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2
+func (t *UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) FromUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2(v UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2 performs a merge with any union data inside the UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria, using the provided UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2
+func (t *UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) MergeUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2(v UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JsonMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
 	return err
 }
@@ -25493,13 +26091,40 @@ type ClientInterface interface {
 
 	UpdatePulseWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdatePulseApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListRetrospectiveConfigurations request
+	ListRetrospectiveConfigurations(ctx context.Context, params *ListRetrospectiveConfigurationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateRetrospectiveConfigurationWithBody request with any body
+	UpdateRetrospectiveConfigurationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateRetrospectiveConfigurationWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateRetrospectiveConfigurationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListRetrospectiveProcesses request
+	ListRetrospectiveProcesses(ctx context.Context, params *ListRetrospectiveProcessesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateRetrospectiveProcessWithBody request with any body
+	CreateRetrospectiveProcessWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateRetrospectiveProcessWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateRetrospectiveProcessApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteRetrospectiveProcess request
+	DeleteRetrospectiveProcess(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetRetrospectiveProcess request
+	GetRetrospectiveProcess(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateRetrospectiveProcessWithBody request with any body
+	UpdateRetrospectiveProcessWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateRetrospectiveProcessWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateRetrospectiveProcessApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListRetrospectiveSteps request
-	ListRetrospectiveSteps(ctx context.Context, params *ListRetrospectiveStepsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	ListRetrospectiveSteps(ctx context.Context, retrospectiveProcessId string, params *ListRetrospectiveStepsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateRetrospectiveStepWithBody request with any body
-	CreateRetrospectiveStepWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	CreateRetrospectiveStepWithBody(ctx context.Context, retrospectiveProcessId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	CreateRetrospectiveStepWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateRetrospectiveStepApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	CreateRetrospectiveStepWithApplicationVndAPIPlusJSONBody(ctx context.Context, retrospectiveProcessId string, body CreateRetrospectiveStepApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteRetrospectiveStep request
 	DeleteRetrospectiveStep(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -28806,8 +29431,8 @@ func (c *Client) UpdatePulseWithApplicationVndAPIPlusJSONBody(ctx context.Contex
 	return c.Client.Do(req)
 }
 
-func (c *Client) ListRetrospectiveSteps(ctx context.Context, params *ListRetrospectiveStepsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewListRetrospectiveStepsRequest(c.Server, params)
+func (c *Client) ListRetrospectiveConfigurations(ctx context.Context, params *ListRetrospectiveConfigurationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListRetrospectiveConfigurationsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -28818,8 +29443,8 @@ func (c *Client) ListRetrospectiveSteps(ctx context.Context, params *ListRetrosp
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateRetrospectiveStepWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateRetrospectiveStepRequestWithBody(c.Server, contentType, body)
+func (c *Client) UpdateRetrospectiveConfigurationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateRetrospectiveConfigurationRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -28830,8 +29455,128 @@ func (c *Client) CreateRetrospectiveStepWithBody(ctx context.Context, contentTyp
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateRetrospectiveStepWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateRetrospectiveStepApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateRetrospectiveStepRequestWithApplicationVndAPIPlusJSONBody(c.Server, body)
+func (c *Client) UpdateRetrospectiveConfigurationWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateRetrospectiveConfigurationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateRetrospectiveConfigurationRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListRetrospectiveProcesses(ctx context.Context, params *ListRetrospectiveProcessesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListRetrospectiveProcessesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateRetrospectiveProcessWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateRetrospectiveProcessRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateRetrospectiveProcessWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateRetrospectiveProcessApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateRetrospectiveProcessRequestWithApplicationVndAPIPlusJSONBody(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteRetrospectiveProcess(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteRetrospectiveProcessRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetRetrospectiveProcess(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetRetrospectiveProcessRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateRetrospectiveProcessWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateRetrospectiveProcessRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateRetrospectiveProcessWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateRetrospectiveProcessApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateRetrospectiveProcessRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListRetrospectiveSteps(ctx context.Context, retrospectiveProcessId string, params *ListRetrospectiveStepsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListRetrospectiveStepsRequest(c.Server, retrospectiveProcessId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateRetrospectiveStepWithBody(ctx context.Context, retrospectiveProcessId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateRetrospectiveStepRequestWithBody(c.Server, retrospectiveProcessId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateRetrospectiveStepWithApplicationVndAPIPlusJSONBody(ctx context.Context, retrospectiveProcessId string, body CreateRetrospectiveStepApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateRetrospectiveStepRequestWithApplicationVndAPIPlusJSONBody(c.Server, retrospectiveProcessId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -42682,8 +43427,8 @@ func NewUpdatePulseRequestWithBody(server string, id string, contentType string,
 	return req, nil
 }
 
-// NewListRetrospectiveStepsRequest generates requests for ListRetrospectiveSteps
-func NewListRetrospectiveStepsRequest(server string, params *ListRetrospectiveStepsParams) (*http.Request, error) {
+// NewListRetrospectiveConfigurationsRequest generates requests for ListRetrospectiveConfigurations
+func NewListRetrospectiveConfigurationsRequest(server string, params *ListRetrospectiveConfigurationsParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -42691,7 +43436,346 @@ func NewListRetrospectiveStepsRequest(server string, params *ListRetrospectiveSt
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/v1/retrospective_steps")
+	operationPath := fmt.Sprintf("/v1/retrospective_configurations")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateRetrospectiveConfigurationRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateRetrospectiveConfiguration builder with application/vnd.api+json body
+func NewUpdateRetrospectiveConfigurationRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateRetrospectiveConfigurationApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateRetrospectiveConfigurationRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateRetrospectiveConfigurationRequestWithBody generates requests for UpdateRetrospectiveConfiguration with any type of body
+func NewUpdateRetrospectiveConfigurationRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/retrospective_configurations/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListRetrospectiveProcessesRequest generates requests for ListRetrospectiveProcesses
+func NewListRetrospectiveProcessesRequest(server string, params *ListRetrospectiveProcessesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/retrospective_processes")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateRetrospectiveProcessRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateRetrospectiveProcess builder with application/vnd.api+json body
+func NewCreateRetrospectiveProcessRequestWithApplicationVndAPIPlusJSONBody(server string, body CreateRetrospectiveProcessApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateRetrospectiveProcessRequestWithBody(server, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateRetrospectiveProcessRequestWithBody generates requests for CreateRetrospectiveProcess with any type of body
+func NewCreateRetrospectiveProcessRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/retrospective_processes")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteRetrospectiveProcessRequest generates requests for DeleteRetrospectiveProcess
+func NewDeleteRetrospectiveProcessRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/retrospective_processes/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetRetrospectiveProcessRequest generates requests for GetRetrospectiveProcess
+func NewGetRetrospectiveProcessRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/retrospective_processes/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateRetrospectiveProcessRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateRetrospectiveProcess builder with application/vnd.api+json body
+func NewUpdateRetrospectiveProcessRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateRetrospectiveProcessApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateRetrospectiveProcessRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateRetrospectiveProcessRequestWithBody generates requests for UpdateRetrospectiveProcess with any type of body
+func NewUpdateRetrospectiveProcessRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/retrospective_processes/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListRetrospectiveStepsRequest generates requests for ListRetrospectiveSteps
+func NewListRetrospectiveStepsRequest(server string, retrospectiveProcessId string, params *ListRetrospectiveStepsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "retrospective_process_id", runtime.ParamLocationPath, retrospectiveProcessId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/retrospective_processes/%s/retrospective_steps", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -42780,26 +43864,33 @@ func NewListRetrospectiveStepsRequest(server string, params *ListRetrospectiveSt
 }
 
 // NewCreateRetrospectiveStepRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateRetrospectiveStep builder with application/vnd.api+json body
-func NewCreateRetrospectiveStepRequestWithApplicationVndAPIPlusJSONBody(server string, body CreateRetrospectiveStepApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+func NewCreateRetrospectiveStepRequestWithApplicationVndAPIPlusJSONBody(server string, retrospectiveProcessId string, body CreateRetrospectiveStepApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewCreateRetrospectiveStepRequestWithBody(server, "application/vnd.api+json", bodyReader)
+	return NewCreateRetrospectiveStepRequestWithBody(server, retrospectiveProcessId, "application/vnd.api+json", bodyReader)
 }
 
 // NewCreateRetrospectiveStepRequestWithBody generates requests for CreateRetrospectiveStep with any type of body
-func NewCreateRetrospectiveStepRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+func NewCreateRetrospectiveStepRequestWithBody(server string, retrospectiveProcessId string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "retrospective_process_id", runtime.ParamLocationPath, retrospectiveProcessId)
+	if err != nil {
+		return nil, err
+	}
 
 	serverURL, err := url.Parse(server)
 	if err != nil {
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/v1/retrospective_steps")
+	operationPath := fmt.Sprintf("/v1/retrospective_processes/%s/retrospective_steps", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -47595,6 +48686,70 @@ func NewListWorkflowRunsRequest(server string, workflowId string, params *ListWo
 
 		}
 
+		if params.FilterCreatedAtGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gte]", runtime.ParamLocationQuery, *params.FilterCreatedAtGte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lte]", runtime.ParamLocationQuery, *params.FilterCreatedAtLte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
 		queryURL.RawQuery = queryValues.Encode()
 	}
 
@@ -48555,13 +49710,40 @@ type ClientWithResponsesInterface interface {
 
 	UpdatePulseWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdatePulseApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdatePulseResponse, error)
 
+	// ListRetrospectiveConfigurationsWithResponse request
+	ListRetrospectiveConfigurationsWithResponse(ctx context.Context, params *ListRetrospectiveConfigurationsParams, reqEditors ...RequestEditorFn) (*ListRetrospectiveConfigurationsResponse, error)
+
+	// UpdateRetrospectiveConfigurationWithBodyWithResponse request with any body
+	UpdateRetrospectiveConfigurationWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveConfigurationResponse, error)
+
+	UpdateRetrospectiveConfigurationWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateRetrospectiveConfigurationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveConfigurationResponse, error)
+
+	// ListRetrospectiveProcessesWithResponse request
+	ListRetrospectiveProcessesWithResponse(ctx context.Context, params *ListRetrospectiveProcessesParams, reqEditors ...RequestEditorFn) (*ListRetrospectiveProcessesResponse, error)
+
+	// CreateRetrospectiveProcessWithBodyWithResponse request with any body
+	CreateRetrospectiveProcessWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateRetrospectiveProcessResponse, error)
+
+	CreateRetrospectiveProcessWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateRetrospectiveProcessApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateRetrospectiveProcessResponse, error)
+
+	// DeleteRetrospectiveProcessWithResponse request
+	DeleteRetrospectiveProcessWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteRetrospectiveProcessResponse, error)
+
+	// GetRetrospectiveProcessWithResponse request
+	GetRetrospectiveProcessWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetRetrospectiveProcessResponse, error)
+
+	// UpdateRetrospectiveProcessWithBodyWithResponse request with any body
+	UpdateRetrospectiveProcessWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveProcessResponse, error)
+
+	UpdateRetrospectiveProcessWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateRetrospectiveProcessApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveProcessResponse, error)
+
 	// ListRetrospectiveStepsWithResponse request
-	ListRetrospectiveStepsWithResponse(ctx context.Context, params *ListRetrospectiveStepsParams, reqEditors ...RequestEditorFn) (*ListRetrospectiveStepsResponse, error)
+	ListRetrospectiveStepsWithResponse(ctx context.Context, retrospectiveProcessId string, params *ListRetrospectiveStepsParams, reqEditors ...RequestEditorFn) (*ListRetrospectiveStepsResponse, error)
 
 	// CreateRetrospectiveStepWithBodyWithResponse request with any body
-	CreateRetrospectiveStepWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateRetrospectiveStepResponse, error)
+	CreateRetrospectiveStepWithBodyWithResponse(ctx context.Context, retrospectiveProcessId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateRetrospectiveStepResponse, error)
 
-	CreateRetrospectiveStepWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateRetrospectiveStepApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateRetrospectiveStepResponse, error)
+	CreateRetrospectiveStepWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, retrospectiveProcessId string, body CreateRetrospectiveStepApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateRetrospectiveStepResponse, error)
 
 	// DeleteRetrospectiveStepWithResponse request
 	DeleteRetrospectiveStepWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteRetrospectiveStepResponse, error)
@@ -52909,6 +54091,166 @@ func (r UpdatePulseResponse) StatusCode() int {
 	return 0
 }
 
+type ListRetrospectiveConfigurationsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *RetrospectiveConfigurationList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListRetrospectiveConfigurationsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListRetrospectiveConfigurationsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateRetrospectiveConfigurationResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *RetrospectiveConfigurationResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateRetrospectiveConfigurationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateRetrospectiveConfigurationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListRetrospectiveProcessesResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *RetrospectiveProcessList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListRetrospectiveProcessesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListRetrospectiveProcessesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateRetrospectiveProcessResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *RetrospectiveProcessResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateRetrospectiveProcessResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateRetrospectiveProcessResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteRetrospectiveProcessResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *RetrospectiveProcessResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteRetrospectiveProcessResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteRetrospectiveProcessResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetRetrospectiveProcessResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *RetrospectiveProcessResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetRetrospectiveProcessResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetRetrospectiveProcessResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateRetrospectiveProcessResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *RetrospectiveProcessResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateRetrospectiveProcessResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateRetrospectiveProcessResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type ListRetrospectiveStepsResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -54771,6 +56113,7 @@ type CreateWorkflowRunResponse struct {
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON201 *WorkflowRunResponse
 	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -57010,9 +58353,96 @@ func (c *ClientWithResponses) UpdatePulseWithApplicationVndAPIPlusJSONBodyWithRe
 	return ParseUpdatePulseResponse(rsp)
 }
 
+// ListRetrospectiveConfigurationsWithResponse request returning *ListRetrospectiveConfigurationsResponse
+func (c *ClientWithResponses) ListRetrospectiveConfigurationsWithResponse(ctx context.Context, params *ListRetrospectiveConfigurationsParams, reqEditors ...RequestEditorFn) (*ListRetrospectiveConfigurationsResponse, error) {
+	rsp, err := c.ListRetrospectiveConfigurations(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListRetrospectiveConfigurationsResponse(rsp)
+}
+
+// UpdateRetrospectiveConfigurationWithBodyWithResponse request with arbitrary body returning *UpdateRetrospectiveConfigurationResponse
+func (c *ClientWithResponses) UpdateRetrospectiveConfigurationWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveConfigurationResponse, error) {
+	rsp, err := c.UpdateRetrospectiveConfigurationWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateRetrospectiveConfigurationResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateRetrospectiveConfigurationWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateRetrospectiveConfigurationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveConfigurationResponse, error) {
+	rsp, err := c.UpdateRetrospectiveConfigurationWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateRetrospectiveConfigurationResponse(rsp)
+}
+
+// ListRetrospectiveProcessesWithResponse request returning *ListRetrospectiveProcessesResponse
+func (c *ClientWithResponses) ListRetrospectiveProcessesWithResponse(ctx context.Context, params *ListRetrospectiveProcessesParams, reqEditors ...RequestEditorFn) (*ListRetrospectiveProcessesResponse, error) {
+	rsp, err := c.ListRetrospectiveProcesses(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListRetrospectiveProcessesResponse(rsp)
+}
+
+// CreateRetrospectiveProcessWithBodyWithResponse request with arbitrary body returning *CreateRetrospectiveProcessResponse
+func (c *ClientWithResponses) CreateRetrospectiveProcessWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateRetrospectiveProcessResponse, error) {
+	rsp, err := c.CreateRetrospectiveProcessWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateRetrospectiveProcessResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateRetrospectiveProcessWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateRetrospectiveProcessApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateRetrospectiveProcessResponse, error) {
+	rsp, err := c.CreateRetrospectiveProcessWithApplicationVndAPIPlusJSONBody(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateRetrospectiveProcessResponse(rsp)
+}
+
+// DeleteRetrospectiveProcessWithResponse request returning *DeleteRetrospectiveProcessResponse
+func (c *ClientWithResponses) DeleteRetrospectiveProcessWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteRetrospectiveProcessResponse, error) {
+	rsp, err := c.DeleteRetrospectiveProcess(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteRetrospectiveProcessResponse(rsp)
+}
+
+// GetRetrospectiveProcessWithResponse request returning *GetRetrospectiveProcessResponse
+func (c *ClientWithResponses) GetRetrospectiveProcessWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetRetrospectiveProcessResponse, error) {
+	rsp, err := c.GetRetrospectiveProcess(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetRetrospectiveProcessResponse(rsp)
+}
+
+// UpdateRetrospectiveProcessWithBodyWithResponse request with arbitrary body returning *UpdateRetrospectiveProcessResponse
+func (c *ClientWithResponses) UpdateRetrospectiveProcessWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveProcessResponse, error) {
+	rsp, err := c.UpdateRetrospectiveProcessWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateRetrospectiveProcessResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateRetrospectiveProcessWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateRetrospectiveProcessApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveProcessResponse, error) {
+	rsp, err := c.UpdateRetrospectiveProcessWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateRetrospectiveProcessResponse(rsp)
+}
+
 // ListRetrospectiveStepsWithResponse request returning *ListRetrospectiveStepsResponse
-func (c *ClientWithResponses) ListRetrospectiveStepsWithResponse(ctx context.Context, params *ListRetrospectiveStepsParams, reqEditors ...RequestEditorFn) (*ListRetrospectiveStepsResponse, error) {
-	rsp, err := c.ListRetrospectiveSteps(ctx, params, reqEditors...)
+func (c *ClientWithResponses) ListRetrospectiveStepsWithResponse(ctx context.Context, retrospectiveProcessId string, params *ListRetrospectiveStepsParams, reqEditors ...RequestEditorFn) (*ListRetrospectiveStepsResponse, error) {
+	rsp, err := c.ListRetrospectiveSteps(ctx, retrospectiveProcessId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -57020,16 +58450,16 @@ func (c *ClientWithResponses) ListRetrospectiveStepsWithResponse(ctx context.Con
 }
 
 // CreateRetrospectiveStepWithBodyWithResponse request with arbitrary body returning *CreateRetrospectiveStepResponse
-func (c *ClientWithResponses) CreateRetrospectiveStepWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateRetrospectiveStepResponse, error) {
-	rsp, err := c.CreateRetrospectiveStepWithBody(ctx, contentType, body, reqEditors...)
+func (c *ClientWithResponses) CreateRetrospectiveStepWithBodyWithResponse(ctx context.Context, retrospectiveProcessId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateRetrospectiveStepResponse, error) {
+	rsp, err := c.CreateRetrospectiveStepWithBody(ctx, retrospectiveProcessId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateRetrospectiveStepResponse(rsp)
 }
 
-func (c *ClientWithResponses) CreateRetrospectiveStepWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateRetrospectiveStepApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateRetrospectiveStepResponse, error) {
-	rsp, err := c.CreateRetrospectiveStepWithApplicationVndAPIPlusJSONBody(ctx, body, reqEditors...)
+func (c *ClientWithResponses) CreateRetrospectiveStepWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, retrospectiveProcessId string, body CreateRetrospectiveStepApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateRetrospectiveStepResponse, error) {
+	rsp, err := c.CreateRetrospectiveStepWithApplicationVndAPIPlusJSONBody(ctx, retrospectiveProcessId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -63765,6 +65195,230 @@ func ParseUpdatePulseResponse(rsp *http.Response) (*UpdatePulseResponse, error) 
 	return response, nil
 }
 
+// ParseListRetrospectiveConfigurationsResponse parses an HTTP response from a ListRetrospectiveConfigurationsWithResponse call
+func ParseListRetrospectiveConfigurationsResponse(rsp *http.Response) (*ListRetrospectiveConfigurationsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListRetrospectiveConfigurationsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest RetrospectiveConfigurationList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateRetrospectiveConfigurationResponse parses an HTTP response from a UpdateRetrospectiveConfigurationWithResponse call
+func ParseUpdateRetrospectiveConfigurationResponse(rsp *http.Response) (*UpdateRetrospectiveConfigurationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateRetrospectiveConfigurationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest RetrospectiveConfigurationResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListRetrospectiveProcessesResponse parses an HTTP response from a ListRetrospectiveProcessesWithResponse call
+func ParseListRetrospectiveProcessesResponse(rsp *http.Response) (*ListRetrospectiveProcessesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListRetrospectiveProcessesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest RetrospectiveProcessList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateRetrospectiveProcessResponse parses an HTTP response from a CreateRetrospectiveProcessWithResponse call
+func ParseCreateRetrospectiveProcessResponse(rsp *http.Response) (*CreateRetrospectiveProcessResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateRetrospectiveProcessResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest RetrospectiveProcessResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteRetrospectiveProcessResponse parses an HTTP response from a DeleteRetrospectiveProcessWithResponse call
+func ParseDeleteRetrospectiveProcessResponse(rsp *http.Response) (*DeleteRetrospectiveProcessResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteRetrospectiveProcessResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest RetrospectiveProcessResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetRetrospectiveProcessResponse parses an HTTP response from a GetRetrospectiveProcessWithResponse call
+func ParseGetRetrospectiveProcessResponse(rsp *http.Response) (*GetRetrospectiveProcessResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetRetrospectiveProcessResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest RetrospectiveProcessResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateRetrospectiveProcessResponse parses an HTTP response from a UpdateRetrospectiveProcessWithResponse call
+func ParseUpdateRetrospectiveProcessResponse(rsp *http.Response) (*UpdateRetrospectiveProcessResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateRetrospectiveProcessResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest RetrospectiveProcessResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseListRetrospectiveStepsResponse parses an HTTP response from a ListRetrospectiveStepsWithResponse call
 func ParseListRetrospectiveStepsResponse(rsp *http.Response) (*ListRetrospectiveStepsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -66423,6 +68077,13 @@ func ParseCreateWorkflowRunResponse(rsp *http.Response) (*CreateWorkflowRunRespo
 			return nil, err
 		}
 		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
 
 	}
 

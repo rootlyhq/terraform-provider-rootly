@@ -11,7 +11,7 @@ description: |-
 
 ## Example Usage
 
-```terraform
+```shell
 resource "rootly_service" "elasticsearch_prod" {
   name          = "elasticsearch-prod"
   color         = "#800080"

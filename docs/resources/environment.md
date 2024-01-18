@@ -11,7 +11,7 @@ description: |-
 
 ## Example Usage
 
-```terraform
+```shell
 resource "rootly_environment" "development" {
   name          = "development"
   color         = "#FF0000"
