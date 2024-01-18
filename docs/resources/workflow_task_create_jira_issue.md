@@ -11,7 +11,7 @@ Manages workflow create_jira_issue task.
 
 ## Example Usage
 
-```terraform
+```shell
 resource "rootly_workflow_incident" "jira" {
   name        = "Create a Jira Issue"
   description = "Open Jira ticket whenever incident starts"

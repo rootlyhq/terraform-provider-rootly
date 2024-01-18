@@ -42,6 +42,7 @@ Optional:
 - `environment_ids` (List of String)
 - `environments_impacted_by_incident` (Boolean) Value must be one of true or false
 - `labels` (List of String)
+- `parent_message_thread_task` (Map of String) Map must contain two fields, `id` and `name`. A hash where [id] is the task id of the parent task that sent a message, and [name] is the name of the parent task
 - `post_to_incident_timeline` (Boolean) Value must be one of true or false
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
 - `service_ids` (List of String)

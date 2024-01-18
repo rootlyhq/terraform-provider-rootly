@@ -11,7 +11,7 @@ Manages workflow page_pagerduty_on_call_responders task.
 
 ## Example Usage
 
-```terraform
+```shell
 resource "rootly_workflow_incident" "page_pagerduty_responders" {
   name        = "Page responders via PagerDuty"
   description = "Automatically page responders to join the incident depending on what's been impacted (see conditions)."

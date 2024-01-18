@@ -11,7 +11,7 @@ description: |-
 
 ## Example Usage
 
-```terraform
+```shell
 resource "rootly_form_field" "regions_affected" {
   name       = "Regions affected"
   kind       = "custom"

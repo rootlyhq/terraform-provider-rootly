@@ -11,7 +11,7 @@ description: |-
 
 ## Example Usage
 
-```terraform
+```shell
 resource "rootly_functionality" "add_items_to_card" {
   name          = "Add items to cart"
   color         = "#800080"

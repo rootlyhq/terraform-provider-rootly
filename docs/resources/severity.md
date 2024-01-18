@@ -11,7 +11,7 @@ description: |-
 
 ## Example Usage
 
-```terraform
+```shell
 resource "rootly_severity" "sev0" {
   name          = "SEV0"
   color         = "#FF0000"

@@ -230,9 +230,10 @@ function annotatedDescription(schema) {
   }
   if (
     schema.type === "object" &&
-    schema.properties.id &&
+    schema.properties &&
+	schema.properties.id &&
     schema.properties.name
-  ) {
+) {
     return `Map must contain two fields, \`id\` and \`name\`. ${description}`;
   }
   if (schema.type === "array" && schema.items && schema.items.enum) {

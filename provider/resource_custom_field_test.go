@@ -21,7 +21,7 @@ func TestAccResourceCustomField(t *testing.T) {
 }
 
 const testAccResourceCustomField = `
-resource "rootly_custom_field" "test" {
-	label = "test"
+resource "rootly_custom_field" "testing" {
+	label = "testing"
 }
 `

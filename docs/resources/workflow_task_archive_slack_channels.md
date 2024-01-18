@@ -11,7 +11,7 @@ Manages workflow archive_slack_channels task.
 
 ## Example Usage
 
-```terraform
+```shell
 resource "rootly_workflow_incident" "auto_archive_incident" {
   name        = "Auto archive incident 48hrs after resolution"
   description = "After an incident has been resolved, automatically archive the channel after 48 hours."

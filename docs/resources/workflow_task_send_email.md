@@ -11,7 +11,7 @@ Manages workflow send_email task.
 
 ## Example Usage
 
-```terraform
+```shell
 resource "rootly_workflow_incident" "send_email_to_stakeholders" {
   name        = "Send update email"
   description = "Workflow for sending an email to stakeholders (e.g. leadership, legal) to keep them updated on the incident."

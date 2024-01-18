@@ -24,6 +24,7 @@ description: |-
 - `due_after_days` (Number) Due date in days
 - `incident_role_id` (String) Users assigned to the selected incident role will be the default owners for this step
 - `position` (Number) Position of the step
+- `retrospective_process_id` (String)
 - `skippable` (Boolean) Is the step skippable?. Value must be one of true or false
 - `slug` (String) The slug of the step
 

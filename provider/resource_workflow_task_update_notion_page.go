@@ -78,6 +78,11 @@ func resourceWorkflowTaskUpdateNotionPage() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 						},
+						"title": &schema.Schema{
+							Description: "The Notion page title",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 						"post_mortem_template_id": &schema.Schema{
 							Description: "Retrospective template to use when creating page task, if desired",
 							Type:        schema.TypeString,

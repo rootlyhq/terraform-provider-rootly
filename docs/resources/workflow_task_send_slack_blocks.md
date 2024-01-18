@@ -11,7 +11,7 @@ Manages workflow send_slack_blocks task.
 
 ## Example Usage
 
-```terraform
+```shell
 resource "rootly_workflow_incident" "send_message_in_incident_channel" {
   name        = "Send a message in the incident channel"
   description = "Send a message in the incident channel"

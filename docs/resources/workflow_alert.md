@@ -11,7 +11,7 @@ description: |-
 
 ## Example Usage
 
-```terraform
+```shell
 resource "rootly_workflow_alert" "my-workflow" {
   name        = "Trigger when an alert is created"
   description = "This workflow will trigger when an alert is created"

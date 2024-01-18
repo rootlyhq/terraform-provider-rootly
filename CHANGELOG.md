@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.16] -- 2024-01-31
+
+- Fix some documentation.
+- Add `title` attribute to `resource_workflow_task_create_notion_page` & `resource_workflow_task_update_notion_page` resources.
+- Add `parent_message_thread_task` attribute to `workflow_task_get_alerts` & `workflow_task_get_pulses` resources.
+- Update dependencies.
+
 ## [1.2.15] -- 2024-01-11
 
 - Add `environments_impacted_by_incident` & `services_impacted_by_incident` attribute to `workflow_task_get_alerts` resource.

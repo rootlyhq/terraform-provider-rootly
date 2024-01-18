@@ -11,7 +11,7 @@ description: |-
 
 ## Example Usage
 
-```terraform
+```shell
 data "rootly_team" "my-team" {
   slug = "my-team"
 }
