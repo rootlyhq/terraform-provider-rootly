@@ -31,7 +31,6 @@ const excluded = {
     "post_mortem_template",
     "pulse",
     "retrospective_configuration",
-    "retrospective_process",
     "secret",
     "webhooks_delivery",
     "workflow_run",
@@ -57,7 +56,6 @@ const excluded = {
     "post_mortem_template",
     "pulse",
     "retrospective_configuration",
-    "retrospective_process",
     "secret",
     "user",
     "webhooks_delivery",
@@ -65,7 +63,10 @@ const excluded = {
     "workflow_task",
   ],
   tests: [
-    "authorization"
+    "authorization",
+    "retrospective_configuration",
+    "retrospective_process",
+    "retrospective_step",
   ]
 }
 

@@ -37,6 +37,7 @@ resource "rootly_${name}" "test" {
 
 function testParams(name, schema, required) {
   return required
+    .filter((key) => schema.properties[key])
     .map((key) => {
       let val = schema.properties[key].enum
         ? schema.properties[key].enum[0]
