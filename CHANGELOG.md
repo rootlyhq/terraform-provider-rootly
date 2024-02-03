@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.17] -- 2024-02-02
+
+- Add support for `retrospective_configuration`
+- Add support for `retrospective_process`
+- Add support for `retrospective_step`
+
 ## [1.2.16] -- 2024-01-31
 
 - Fix some documentation.
