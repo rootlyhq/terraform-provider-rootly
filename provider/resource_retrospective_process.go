@@ -48,16 +48,65 @@ func resourceRetrospectiveProcess() *schema.Resource {
 				Description: "Is the retrospective process default?. Value must be one of true or false",
 			},
 
-			"retrospective_process_matching_criteria": &schema.Schema{
-				Type: schema.TypeMap,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
-				Computed:    true,
+			"copy_from": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
 				Required:    false,
 				Optional:    true,
-				Description: "",
+				ForceNew:    true,
+				DiffSuppressFunc: func(key, oldValue string, newValue string, d *schema.ResourceData) bool {
+					return (oldValue != "")
+				},
+				Default:     "starter_template",
+				Description: "Retrospective process ID from which retrospective steps have to be copied. To use starter template for retrospective steps provide value: 'starter_template'",
 			},
+
+			"retrospective_process_matching_criteria": &schema.Schema{
+				Type:     schema.TypeList,
+				MinItems: 1,
+				MaxItems: 1,
+				Required: true,
+				Computed: false,
+				Optional: false,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"severity_ids": &schema.Schema{
+							Type: schema.TypeList,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         false,
+							Required:         false,
+							Optional:         true,
+							Description:      "Severities for process matching criteria.",
+						},
+						"group_ids": &schema.Schema{
+							Type: schema.TypeList,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         false,
+							Required:         false,
+							Optional:         true,
+							Description:      "Teams for process matching criteria.",
+						},
+						"incident_type_ids": &schema.Schema{
+							Type: schema.TypeList,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         false,
+							Required:         false,
+							Optional:         true,
+							Description:      "Incident types for process matching criteria.",
+						},
+					},
+				},
+			},
+			
 		},
 	}
 }
@@ -72,6 +121,9 @@ func resourceRetrospectiveProcessCreate(ctx context.Context, d *schema.ResourceD
 	if value, ok := d.GetOkExists("name"); ok {
 		s.Name = value.(string)
 	}
+	if value, ok := d.GetOkExists("copy_from"); ok {
+		s.CopyFrom = value.(string)
+	}
 	if value, ok := d.GetOkExists("description"); ok {
 		s.Description = value.(string)
 	}
@@ -79,7 +131,7 @@ func resourceRetrospectiveProcessCreate(ctx context.Context, d *schema.ResourceD
 		s.IsDefault = tools.Bool(value.(bool))
 	}
 	if value, ok := d.GetOkExists("retrospective_process_matching_criteria"); ok {
-		s.RetrospectiveProcessMatchingCriteria = value.(map[string]interface{})
+		s.RetrospectiveProcessMatchingCriteria = value.([]interface{})[0].(map[string]interface{})
 	}
 
 	res, err := c.CreateRetrospectiveProcess(s)
@@ -113,7 +165,10 @@ func resourceRetrospectiveProcessRead(ctx context.Context, d *schema.ResourceDat
 	d.Set("name", item.Name)
 	d.Set("description", item.Description)
 	d.Set("is_default", item.IsDefault)
-	d.Set("retrospective_process_matching_criteria", item.RetrospectiveProcessMatchingCriteria)
+
+	tps := make([]interface{}, 1, 1)
+	tps[0] = item.RetrospectiveProcessMatchingCriteria
+	d.Set("retrospective_process_matching_criteria", tps)
 
 	return nil
 }
@@ -134,7 +189,10 @@ func resourceRetrospectiveProcessUpdate(ctx context.Context, d *schema.ResourceD
 		s.IsDefault = tools.Bool(d.Get("is_default").(bool))
 	}
 	if d.HasChange("retrospective_process_matching_criteria") {
-		s.RetrospectiveProcessMatchingCriteria = d.Get("retrospective_process_matching_criteria").(map[string]interface{})
+		tps := d.Get("retrospective_process_matching_criteria").([]interface{})
+		for _, tpsi := range tps {
+			s.RetrospectiveProcessMatchingCriteria = tpsi.(map[string]interface{})
+		}
 	}
 
 	_, err := c.UpdateRetrospectiveProcess(d.Id(), s)

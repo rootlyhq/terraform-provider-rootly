@@ -10,10 +10,11 @@ import (
 
 type RetrospectiveProcess struct {
 	ID string `jsonapi:"primary,retrospective_processes"`
+	CopyFrom string `jsonapi:"attr,copy_from,omitempty"`
 	Name string `jsonapi:"attr,name,omitempty"`
-  Description string `jsonapi:"attr,description,omitempty"`
-  IsDefault *bool `jsonapi:"attr,is_default,omitempty"`
-  RetrospectiveProcessMatchingCriteria map[string]interface{} `jsonapi:"attr,retrospective_process_matching_criteria,omitempty"`
+	Description string `jsonapi:"attr,description,omitempty"`
+	IsDefault *bool `jsonapi:"attr,is_default,omitempty"`
+	RetrospectiveProcessMatchingCriteria map[string]interface{} `jsonapi:"attr,retrospective_process_matching_criteria,omitempty"`
 }
 
 func (c *Client) ListRetrospectiveProcesses(params *rootlygo.ListRetrospectiveProcessesParams) ([]interface{}, error) {

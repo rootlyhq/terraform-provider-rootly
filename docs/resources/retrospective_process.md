@@ -20,9 +20,12 @@ description: |-
 
 ### Optional
 
+- `copy_from` (String) Retrospective process ID from which retrospective steps have to be copied. To use starter template for retrospective steps provide value: 'starter_template'
 - `description` (String) The description of the retrospective process
+- `group_ids` (List of String) Teams for process matching criteria.
+- `incident_type_ids` (List of String) Incident types for process matching criteria.
 - `is_default` (Boolean) Is the retrospective process default?. Value must be one of true or false
-- `retrospective_process_matching_criteria` (Map of String)
+- `severity_ids` (List of String) Severities for process matching criteria.
 
 ### Read-Only
 
