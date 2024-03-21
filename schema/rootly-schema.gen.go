@@ -522,6 +522,17 @@ const (
 	CauseResponseDataTypeCauses CauseResponseDataType = "causes"
 )
 
+// Defines values for ChangeSlackChannelPrivacyTaskParamsPrivacy.
+const (
+	Private ChangeSlackChannelPrivacyTaskParamsPrivacy = "private"
+	Public  ChangeSlackChannelPrivacyTaskParamsPrivacy = "public"
+)
+
+// Defines values for ChangeSlackChannelPrivacyTaskParamsTaskType.
+const (
+	ChangeSlackChannelPrivacyTaskParamsTaskTypeRenameSlackChannel ChangeSlackChannelPrivacyTaskParamsTaskType = "rename_slack_channel"
+)
+
 // Defines values for CreateAirtableTableRecordTaskParamsTaskType.
 const (
 	CreateAirtableTableRecord CreateAirtableTableRecordTaskParamsTaskType = "create_airtable_table_record"
@@ -1054,7 +1065,6 @@ const (
 	FormFieldInputKindTags        FormFieldInputKind = "tags"
 	FormFieldInputKindText        FormFieldInputKind = "text"
 	FormFieldInputKindTextarea    FormFieldInputKind = "textarea"
-	FormFieldInputKindUsers       FormFieldInputKind = "users"
 )
 
 // Defines values for FormFieldKind.
@@ -1079,6 +1089,14 @@ const (
 	FormFieldKindTriggerManualWorkflows      FormFieldKind = "trigger_manual_workflows"
 	FormFieldKindTypes                       FormFieldKind = "types"
 	FormFieldKindVisibility                  FormFieldKind = "visibility"
+)
+
+// Defines values for FormFieldValueKind.
+const (
+	FormFieldValueKindGroup   FormFieldValueKind = "group"
+	FormFieldValueKindInherit FormFieldValueKind = "inherit"
+	FormFieldValueKindService FormFieldValueKind = "service"
+	FormFieldValueKindUser    FormFieldValueKind = "user"
 )
 
 // Defines values for FormFieldListDataType.
@@ -1709,6 +1727,22 @@ const (
 	MitigateIncidentDataTypeIncidents MitigateIncidentDataType = "incidents"
 )
 
+// Defines values for NewAlertDataAttributesNotificationTargetType.
+const (
+	NewAlertDataAttributesNotificationTargetTypeEscalationPolicy NewAlertDataAttributesNotificationTargetType = "EscalationPolicy"
+	NewAlertDataAttributesNotificationTargetTypeGroup            NewAlertDataAttributesNotificationTargetType = "Group"
+	NewAlertDataAttributesNotificationTargetTypeService          NewAlertDataAttributesNotificationTargetType = "Service"
+	NewAlertDataAttributesNotificationTargetTypeUser             NewAlertDataAttributesNotificationTargetType = "User"
+)
+
+// Defines values for NewAlertDataAttributesStatus.
+const (
+	NewAlertDataAttributesStatusAcknowledged NewAlertDataAttributesStatus = "acknowledged"
+	NewAlertDataAttributesStatusOpen         NewAlertDataAttributesStatus = "open"
+	NewAlertDataAttributesStatusResolved     NewAlertDataAttributesStatus = "resolved"
+	NewAlertDataAttributesStatusTriggered    NewAlertDataAttributesStatus = "triggered"
+)
+
 // Defines values for NewAlertDataType.
 const (
 	Alerts NewAlertDataType = "alerts"
@@ -1825,7 +1859,6 @@ const (
 	NewFormFieldDataAttributesInputKindTags        NewFormFieldDataAttributesInputKind = "tags"
 	NewFormFieldDataAttributesInputKindText        NewFormFieldDataAttributesInputKind = "text"
 	NewFormFieldDataAttributesInputKindTextarea    NewFormFieldDataAttributesInputKind = "textarea"
-	NewFormFieldDataAttributesInputKindUsers       NewFormFieldDataAttributesInputKind = "users"
 )
 
 // Defines values for NewFormFieldDataAttributesKind.
@@ -1850,6 +1883,14 @@ const (
 	NewFormFieldDataAttributesKindTriggerManualWorkflows      NewFormFieldDataAttributesKind = "trigger_manual_workflows"
 	NewFormFieldDataAttributesKindTypes                       NewFormFieldDataAttributesKind = "types"
 	NewFormFieldDataAttributesKindVisibility                  NewFormFieldDataAttributesKind = "visibility"
+)
+
+// Defines values for NewFormFieldDataAttributesValueKind.
+const (
+	NewFormFieldDataAttributesValueKindGroup   NewFormFieldDataAttributesValueKind = "group"
+	NewFormFieldDataAttributesValueKindInherit NewFormFieldDataAttributesValueKind = "inherit"
+	NewFormFieldDataAttributesValueKindService NewFormFieldDataAttributesValueKind = "service"
+	NewFormFieldDataAttributesValueKindUser    NewFormFieldDataAttributesValueKind = "user"
 )
 
 // Defines values for NewFormFieldDataType.
@@ -2830,7 +2871,7 @@ const (
 
 // Defines values for RenameSlackChannelTaskParamsTaskType.
 const (
-	RenameSlackChannel RenameSlackChannelTaskParamsTaskType = "rename_slack_channel"
+	RenameSlackChannelTaskParamsTaskTypeRenameSlackChannel RenameSlackChannelTaskParamsTaskType = "rename_slack_channel"
 )
 
 // Defines values for ResolveIncidentDataType.
@@ -2841,6 +2882,12 @@ const (
 // Defines values for RestartIncidentDataType.
 const (
 	RestartIncidentDataTypeIncidents RestartIncidentDataType = "incidents"
+)
+
+// Defines values for RetrospectiveConfigurationKind.
+const (
+	Mandatory RetrospectiveConfigurationKind = "mandatory"
+	Skip      RetrospectiveConfigurationKind = "skip"
 )
 
 // Defines values for RetrospectiveConfigurationListDataType.
@@ -3591,17 +3638,16 @@ const (
 
 // Defines values for UpdateFormFieldDataAttributesInputKind.
 const (
-	UpdateFormFieldDataAttributesInputKindCheckbox    UpdateFormFieldDataAttributesInputKind = "checkbox"
-	UpdateFormFieldDataAttributesInputKindDate        UpdateFormFieldDataAttributesInputKind = "date"
-	UpdateFormFieldDataAttributesInputKindDatetime    UpdateFormFieldDataAttributesInputKind = "datetime"
-	UpdateFormFieldDataAttributesInputKindMultiSelect UpdateFormFieldDataAttributesInputKind = "multi_select"
-	UpdateFormFieldDataAttributesInputKindNumber      UpdateFormFieldDataAttributesInputKind = "number"
-	UpdateFormFieldDataAttributesInputKindRichText    UpdateFormFieldDataAttributesInputKind = "rich_text"
-	UpdateFormFieldDataAttributesInputKindSelect      UpdateFormFieldDataAttributesInputKind = "select"
-	UpdateFormFieldDataAttributesInputKindTags        UpdateFormFieldDataAttributesInputKind = "tags"
-	UpdateFormFieldDataAttributesInputKindText        UpdateFormFieldDataAttributesInputKind = "text"
-	UpdateFormFieldDataAttributesInputKindTextarea    UpdateFormFieldDataAttributesInputKind = "textarea"
-	UpdateFormFieldDataAttributesInputKindUsers       UpdateFormFieldDataAttributesInputKind = "users"
+	Checkbox    UpdateFormFieldDataAttributesInputKind = "checkbox"
+	Date        UpdateFormFieldDataAttributesInputKind = "date"
+	Datetime    UpdateFormFieldDataAttributesInputKind = "datetime"
+	MultiSelect UpdateFormFieldDataAttributesInputKind = "multi_select"
+	Number      UpdateFormFieldDataAttributesInputKind = "number"
+	RichText    UpdateFormFieldDataAttributesInputKind = "rich_text"
+	Select      UpdateFormFieldDataAttributesInputKind = "select"
+	Tags        UpdateFormFieldDataAttributesInputKind = "tags"
+	Text        UpdateFormFieldDataAttributesInputKind = "text"
+	Textarea    UpdateFormFieldDataAttributesInputKind = "textarea"
 )
 
 // Defines values for UpdateFormFieldDataAttributesKind.
@@ -3626,6 +3672,14 @@ const (
 	UpdateFormFieldDataAttributesKindTriggerManualWorkflows      UpdateFormFieldDataAttributesKind = "trigger_manual_workflows"
 	UpdateFormFieldDataAttributesKindTypes                       UpdateFormFieldDataAttributesKind = "types"
 	UpdateFormFieldDataAttributesKindVisibility                  UpdateFormFieldDataAttributesKind = "visibility"
+)
+
+// Defines values for UpdateFormFieldDataAttributesValueKind.
+const (
+	UpdateFormFieldDataAttributesValueKindGroup   UpdateFormFieldDataAttributesValueKind = "group"
+	UpdateFormFieldDataAttributesValueKindInherit UpdateFormFieldDataAttributesValueKind = "inherit"
+	UpdateFormFieldDataAttributesValueKindService UpdateFormFieldDataAttributesValueKind = "service"
+	UpdateFormFieldDataAttributesValueKindUser    UpdateFormFieldDataAttributesValueKind = "user"
 )
 
 // Defines values for UpdateFormFieldDataType.
@@ -4267,10 +4321,10 @@ const (
 
 // Defines values for UpdateSeverityDataAttributesSeverity.
 const (
-	UpdateSeverityDataAttributesSeverityCritical UpdateSeverityDataAttributesSeverity = "critical"
-	UpdateSeverityDataAttributesSeverityHigh     UpdateSeverityDataAttributesSeverity = "high"
-	UpdateSeverityDataAttributesSeverityLow      UpdateSeverityDataAttributesSeverity = "low"
-	UpdateSeverityDataAttributesSeverityMedium   UpdateSeverityDataAttributesSeverity = "medium"
+	Critical UpdateSeverityDataAttributesSeverity = "critical"
+	High     UpdateSeverityDataAttributesSeverity = "high"
+	Low      UpdateSeverityDataAttributesSeverity = "low"
+	Medium   UpdateSeverityDataAttributesSeverity = "medium"
 )
 
 // Defines values for UpdateSeverityDataType.
@@ -4601,7 +4655,7 @@ const (
 
 // Defines values for UserResponseDataType.
 const (
-	Users UserResponseDataType = "users"
+	UserResponseDataTypeUsers UserResponseDataType = "users"
 )
 
 // Defines values for WebhooksDeliveryListDataType.
@@ -5110,7 +5164,10 @@ type Alert struct {
 
 	// ExternalUrl External Url
 	ExternalUrl *string `json:"external_url"`
-	Labels      *[]struct {
+
+	// Groups Groups attached to the alert
+	Groups *[]Team `json:"groups,omitempty"`
+	Labels *[]struct {
 		// Key Key of the tag
 		Key string `json:"key"`
 
@@ -5479,6 +5536,22 @@ type CauseResponse struct {
 // CauseResponseDataType defines model for CauseResponse.Data.Type.
 type CauseResponseDataType string
 
+// ChangeSlackChannelPrivacyTaskParams defines model for change_slack_channel_privacy_task_params.
+type ChangeSlackChannelPrivacyTaskParams struct {
+	Channel *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"channel,omitempty"`
+	Privacy  ChangeSlackChannelPrivacyTaskParamsPrivacy   `json:"privacy"`
+	TaskType *ChangeSlackChannelPrivacyTaskParamsTaskType `json:"task_type,omitempty"`
+}
+
+// ChangeSlackChannelPrivacyTaskParamsPrivacy defines model for ChangeSlackChannelPrivacyTaskParams.Privacy.
+type ChangeSlackChannelPrivacyTaskParamsPrivacy string
+
+// ChangeSlackChannelPrivacyTaskParamsTaskType defines model for ChangeSlackChannelPrivacyTaskParams.TaskType.
+type ChangeSlackChannelPrivacyTaskParamsTaskType string
+
 // CreateAirtableTableRecordTaskParams defines model for create_airtable_table_record_task_params.
 type CreateAirtableTableRecordTaskParams struct {
 	Base struct {
@@ -5829,8 +5902,11 @@ type CreateGoogleMeetingTaskParams struct {
 	ConferenceSolutionKey *CreateGoogleMeetingTaskParamsConferenceSolutionKey `json:"conference_solution_key,omitempty"`
 
 	// Description The meeting description
-	Description            string `json:"description"`
-	PostToIncidentTimeline *bool  `json:"post_to_incident_timeline,omitempty"`
+	Description string `json:"description"`
+
+	// InviteRootlyBot We will invite Rootly Bot to your call and make the transcript available to you
+	InviteRootlyBot        *bool `json:"invite_rootly_bot,omitempty"`
+	PostToIncidentTimeline *bool `json:"post_to_incident_timeline,omitempty"`
 	PostToSlackChannels    *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -6099,6 +6175,9 @@ type CreateLinearSubtaskIssueTaskParamsTaskType string
 
 // CreateMicrosoftTeamsMeetingTaskParams defines model for create_microsoft_teams_meeting_task_params.
 type CreateMicrosoftTeamsMeetingTaskParams struct {
+	// InviteRootlyBot We will invite Rootly Bot to your call and make the transcript available to you
+	InviteRootlyBot *bool `json:"invite_rootly_bot,omitempty"`
+
 	// Name The meeting name
 	Name                   string `json:"name"`
 	PostToIncidentTimeline *bool  `json:"post_to_incident_timeline,omitempty"`
@@ -6173,10 +6252,10 @@ type CreateOpsgenieAlertTaskParamsTaskType string
 
 // CreatePagerdutyStatusUpdateParams defines model for create_pagerduty_status_update_params.
 type CreatePagerdutyStatusUpdateParams struct {
-	// Message A message outlining the incident's resolution in Pagerduty
+	// Message A message outlining the incident's resolution in PagerDuty
 	Message string `json:"message"`
 
-	// PagerdutyIncidentId Pagerduty incident id
+	// PagerdutyIncidentId PagerDuty incident id
 	PagerdutyIncidentId string                                     `json:"pagerduty_incident_id"`
 	TaskType            *CreatePagerdutyStatusUpdateParamsTaskType `json:"task_type,omitempty"`
 }
@@ -6380,6 +6459,9 @@ type CreateTrelloCardTaskParamsTaskType string
 
 // CreateWebexMeetingTaskParams defines model for create_webex_meeting_task_params.
 type CreateWebexMeetingTaskParams struct {
+	// InviteRootlyBot We will invite Rootly Bot to your call and make the transcript available to you
+	InviteRootlyBot *bool `json:"invite_rootly_bot,omitempty"`
+
 	// Password The meeting password
 	Password               *string `json:"password,omitempty"`
 	PostToIncidentTimeline *bool   `json:"post_to_incident_timeline,omitempty"`
@@ -6457,6 +6539,9 @@ type CreateZoomMeetingTaskParams struct {
 
 	// CreateAsEmail The email to use if creating as email
 	CreateAsEmail *string `json:"create_as_email,omitempty"`
+
+	// InviteRootlyBot We will invite Rootly Bot to your call and make the transcript available to you
+	InviteRootlyBot *bool `json:"invite_rootly_bot,omitempty"`
 
 	// Password The meeting password
 	Password               *string `json:"password,omitempty"`
@@ -6836,6 +6921,9 @@ type FormField struct {
 
 	// UpdatedAt Date of last update
 	UpdatedAt string `json:"updated_at"`
+
+	// ValueKind The value kind of the form field
+	ValueKind FormFieldValueKind `json:"value_kind"`
 }
 
 // FormFieldInputKind The input kind of the form field
@@ -6843,6 +6931,9 @@ type FormFieldInputKind string
 
 // FormFieldKind The kind of the form field
 type FormFieldKind string
+
+// FormFieldValueKind The value kind of the form field
+type FormFieldValueKind string
 
 // FormFieldList defines model for form_field_list.
 type FormFieldList struct {
@@ -7589,10 +7680,12 @@ type IncidentFeedbackResponseDataType string
 // IncidentFormFieldSelection defines model for incident_form_field_selection.
 type IncidentFormFieldSelection struct {
 	// FormFieldId The custom field for this selection
-	FormFieldId       string     `json:"form_field_id"`
-	IncidentId        string     `json:"incident_id"`
-	SelectedOptionIds *[]string  `json:"selected_option_ids,omitempty"`
-	SelectedUserIds   *[]float32 `json:"selected_user_ids,omitempty"`
+	FormFieldId        string     `json:"form_field_id"`
+	IncidentId         string     `json:"incident_id"`
+	SelectedGroupIds   *[]string  `json:"selected_group_ids,omitempty"`
+	SelectedOptionIds  *[]string  `json:"selected_option_ids,omitempty"`
+	SelectedServiceIds *[]float32 `json:"selected_service_ids,omitempty"`
+	SelectedUserIds    *[]float32 `json:"selected_user_ids,omitempty"`
 
 	// Value The selected value for text kind custom fields
 	Value *string `json:"value"`
@@ -8446,7 +8539,10 @@ type NewAlert struct {
 
 			// ExternalUrl External Url
 			ExternalUrl *string `json:"external_url"`
-			Labels      *[]struct {
+
+			// GroupIds The Group ID's to attach to the alert. If your organization has On-Call enabled and your notification target is a Group. This field will be automatically set for you.
+			GroupIds *[]string `json:"group_ids"`
+			Labels   *[]struct {
 				// Key Key of the tag
 				Key string `json:"key"`
 
@@ -8454,7 +8550,13 @@ type NewAlert struct {
 				Value string `json:"value"`
 			} `json:"labels,omitempty"`
 
-			// ServiceIds The Service ID's to attach to the alert
+			// NotificationTargetId Only available for organizations with Rootly On-Call enabled. The _identifier_ of the notification target object.
+			NotificationTargetId *string `json:"notification_target_id"`
+
+			// NotificationTargetType Only available for organizations with Rootly On-Call enabled. Can be one of Group, Service, EscalationPolicy, User.
+			NotificationTargetType *NewAlertDataAttributesNotificationTargetType `json:"notification_target_type"`
+
+			// ServiceIds The Service ID's to attach to the alert. If your organization has On-Call enabled and your notification target is a Service. This field will be automatically set for you.
 			ServiceIds *[]string `json:"service_ids"`
 
 			// Source The source of the alert (eg: zendesk)
@@ -8463,12 +8565,21 @@ type NewAlert struct {
 			// StartedAt Alert start datetime
 			StartedAt *time.Time `json:"started_at"`
 
+			// Status Only available for organizations with Rootly On-Call enabled. Can be one of open, triggered, acknowledged or resolved.
+			Status *NewAlertDataAttributesStatus `json:"status,omitempty"`
+
 			// Summary The summary of the alert
 			Summary string `json:"summary"`
 		} `json:"attributes"`
 		Type NewAlertDataType `json:"type"`
 	} `json:"data"`
 }
+
+// NewAlertDataAttributesNotificationTargetType Only available for organizations with Rootly On-Call enabled. Can be one of Group, Service, EscalationPolicy, User.
+type NewAlertDataAttributesNotificationTargetType string
+
+// NewAlertDataAttributesStatus Only available for organizations with Rootly On-Call enabled. Can be one of open, triggered, acknowledged or resolved.
+type NewAlertDataAttributesStatus string
 
 // NewAlertDataType defines model for NewAlert.Data.Type.
 type NewAlertDataType string
@@ -8716,6 +8827,9 @@ type NewFormField struct {
 			// ShowOnIncidentDetails Whether the form field is shown on the incident details panel
 			ShowOnIncidentDetails *bool     `json:"show_on_incident_details,omitempty"`
 			Shown                 *[]string `json:"shown,omitempty"`
+
+			// ValueKind The value kind of the form field
+			ValueKind *NewFormFieldDataAttributesValueKind `json:"value_kind,omitempty"`
 		} `json:"attributes"`
 		Type NewFormFieldDataType `json:"type"`
 	} `json:"data"`
@@ -8726,6 +8840,9 @@ type NewFormFieldDataAttributesInputKind string
 
 // NewFormFieldDataAttributesKind The kind of the form field
 type NewFormFieldDataAttributesKind string
+
+// NewFormFieldDataAttributesValueKind The value kind of the form field
+type NewFormFieldDataAttributesValueKind string
 
 // NewFormFieldDataType defines model for NewFormField.Data.Type.
 type NewFormFieldDataType string
@@ -9093,10 +9210,12 @@ type NewIncidentFormFieldSelection struct {
 	Data struct {
 		Attributes struct {
 			// FormFieldId The custom field for this selection
-			FormFieldId       string     `json:"form_field_id"`
-			IncidentId        string     `json:"incident_id"`
-			SelectedOptionIds *[]string  `json:"selected_option_ids,omitempty"`
-			SelectedUserIds   *[]float32 `json:"selected_user_ids,omitempty"`
+			FormFieldId        string     `json:"form_field_id"`
+			IncidentId         string     `json:"incident_id"`
+			SelectedGroupIds   *[]string  `json:"selected_group_ids,omitempty"`
+			SelectedOptionIds  *[]string  `json:"selected_option_ids,omitempty"`
+			SelectedServiceIds *[]float32 `json:"selected_service_ids,omitempty"`
+			SelectedUserIds    *[]float32 `json:"selected_user_ids,omitempty"`
 
 			// Value The selected value for text kind custom fields
 			Value *string `json:"value"`
@@ -10234,14 +10353,17 @@ type PageOpsgenieOnCallRespondersTaskParamsTaskType string
 
 // PagePagerdutyOnCallRespondersTaskParams defines model for page_pagerduty_on_call_responders_task_params.
 type PagePagerdutyOnCallRespondersTaskParams struct {
-	// CreateNewIncidentOnConflict Rootly only supports linking to a single Pagerduty incident. If this feature is disabled Rootly will add responders from any additional pages to the existing Pagerduty incident that is linked to the Rootly incident. If enabled, Rootly will create a new Pagerduty incident that is not linked to any Rootly incidents
+	// CreateNewIncidentOnConflict Rootly only supports linking to a single PagerDuty incident. If this feature is disabled Rootly will add responders from any additional pages to the existing PagerDuty incident that is linked to the Rootly incident. If enabled, Rootly will create a new PagerDuty incident that is not linked to any Rootly incidents
 	CreateNewIncidentOnConflict *bool `json:"create_new_incident_on_conflict,omitempty"`
 	EscalationPolicies          *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"escalation_policies,omitempty"`
 	Message *string `json:"message,omitempty"`
-	Service struct {
+
+	// Priority PagerDuty incident priority, selecting auto will let Rootly auto map our incident severity
+	Priority *string `json:"priority,omitempty"`
+	Service  struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"service"`
@@ -10688,7 +10810,7 @@ type RetrospectiveConfiguration struct {
 	IncidentTypeIds *[]string `json:"incident_type_ids"`
 
 	// Kind The kind of the configuration.
-	Kind *string `json:"kind,omitempty"`
+	Kind *RetrospectiveConfigurationKind `json:"kind,omitempty"`
 
 	// SeverityIds The Severity ID's to attach to the retrospective configuration
 	SeverityIds *[]string `json:"severity_ids"`
@@ -10696,6 +10818,9 @@ type RetrospectiveConfiguration struct {
 	// UpdatedAt Date of last update
 	UpdatedAt *string `json:"updated_at,omitempty"`
 }
+
+// RetrospectiveConfigurationKind The kind of the configuration.
+type RetrospectiveConfigurationKind string
 
 // RetrospectiveConfigurationList defines model for retrospective_configuration_list.
 type RetrospectiveConfigurationList struct {
@@ -10733,8 +10858,8 @@ type RetrospectiveProcess struct {
 	// Description The description of the retrospective process
 	Description *string `json:"description"`
 
-	// IsDefault Is the retrospective process default?
-	IsDefault *bool `json:"is_default,omitempty"`
+	// IsDefault Indicates the default process that Rootly created. This will be used as a fallback if no processes match the incident's conditions. The default process cannot have conditions and cannot be changed.
+	IsDefault *bool `json:"is_default"`
 
 	// Name The name of the retrospective process
 	Name                                 *string                                                    `json:"name,omitempty"`
@@ -12169,6 +12294,9 @@ type UpdateFormField struct {
 			// ShowOnIncidentDetails Whether the form field is shown on the incident details panel
 			ShowOnIncidentDetails *bool     `json:"show_on_incident_details,omitempty"`
 			Shown                 *[]string `json:"shown,omitempty"`
+
+			// ValueKind The value kind of the form field
+			ValueKind *UpdateFormFieldDataAttributesValueKind `json:"value_kind,omitempty"`
 		} `json:"attributes"`
 		Type UpdateFormFieldDataType `json:"type"`
 	} `json:"data"`
@@ -12179,6 +12307,9 @@ type UpdateFormFieldDataAttributesInputKind string
 
 // UpdateFormFieldDataAttributesKind The kind of the form field
 type UpdateFormFieldDataAttributesKind string
+
+// UpdateFormFieldDataAttributesValueKind The value kind of the form field
+type UpdateFormFieldDataAttributesValueKind string
 
 // UpdateFormFieldDataType defines model for UpdateFormField.Data.Type.
 type UpdateFormFieldDataType string
@@ -12598,8 +12729,10 @@ type UpdateIncidentFeedbackDataType string
 type UpdateIncidentFormFieldSelection struct {
 	Data struct {
 		Attributes struct {
-			SelectedOptionIds *[]string  `json:"selected_option_ids,omitempty"`
-			SelectedUserIds   *[]float32 `json:"selected_user_ids,omitempty"`
+			SelectedGroupIds   *[]string  `json:"selected_group_ids,omitempty"`
+			SelectedOptionIds  *[]string  `json:"selected_option_ids,omitempty"`
+			SelectedServiceIds *[]float32 `json:"selected_service_ids,omitempty"`
+			SelectedUserIds    *[]float32 `json:"selected_user_ids,omitempty"`
 
 			// Value The selected value for text kind custom fields
 			Value *string `json:"value"`
@@ -13076,7 +13209,10 @@ type UpdatePagerdutyIncidentTaskParams struct {
 	// PagerdutyIncidentId Pagerduty incident id
 	PagerdutyIncidentId string `json:"pagerduty_incident_id"`
 
-	// Resolution A message outlining the incident's resolution in Pagerduty
+	// Priority PagerDuty incident priority, selecting auto will let Rootly auto map our incident severity
+	Priority *string `json:"priority,omitempty"`
+
+	// Resolution A message outlining the incident's resolution in PagerDuty
 	Resolution *string                                    `json:"resolution,omitempty"`
 	Status     *UpdatePagerdutyIncidentTaskParamsStatus   `json:"status,omitempty"`
 	TaskType   *UpdatePagerdutyIncidentTaskParamsTaskType `json:"task_type,omitempty"`
@@ -13084,7 +13220,7 @@ type UpdatePagerdutyIncidentTaskParams struct {
 	// Title Title to update to
 	Title *string `json:"title,omitempty"`
 
-	// Urgency Pagerduty incident urgency, selecting auto will let Rootly auto map our incident severity
+	// Urgency PagerDuty incident urgency, selecting auto will let Rootly auto map our incident severity
 	Urgency *UpdatePagerdutyIncidentTaskParamsUrgency `json:"urgency,omitempty"`
 }
 
@@ -13094,7 +13230,7 @@ type UpdatePagerdutyIncidentTaskParamsStatus string
 // UpdatePagerdutyIncidentTaskParamsTaskType defines model for UpdatePagerdutyIncidentTaskParams.TaskType.
 type UpdatePagerdutyIncidentTaskParamsTaskType string
 
-// UpdatePagerdutyIncidentTaskParamsUrgency Pagerduty incident urgency, selecting auto will let Rootly auto map our incident severity
+// UpdatePagerdutyIncidentTaskParamsUrgency PagerDuty incident urgency, selecting auto will let Rootly auto map our incident severity
 type UpdatePagerdutyIncidentTaskParamsUrgency string
 
 // UpdatePagertreeAlertTaskParams defines model for update_pagertree_alert_task_params.
@@ -18908,6 +19044,32 @@ func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeRenameSlackChannelTask
 	return err
 }
 
+// AsChangeSlackChannelPrivacyTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a ChangeSlackChannelPrivacyTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsChangeSlackChannelPrivacyTaskParams() (ChangeSlackChannelPrivacyTaskParams, error) {
+	var body ChangeSlackChannelPrivacyTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromChangeSlackChannelPrivacyTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided ChangeSlackChannelPrivacyTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromChangeSlackChannelPrivacyTaskParams(v ChangeSlackChannelPrivacyTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeChangeSlackChannelPrivacyTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided ChangeSlackChannelPrivacyTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeChangeSlackChannelPrivacyTaskParams(v ChangeSlackChannelPrivacyTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JsonMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsRunCommandHerokuTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a RunCommandHerokuTaskParams
 func (t NewWorkflowTask_Data_Attributes_TaskParams) AsRunCommandHerokuTaskParams() (RunCommandHerokuTaskParams, error) {
 	var body RunCommandHerokuTaskParams
@@ -21834,6 +21996,32 @@ func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeRenameSlackChannelT
 	return err
 }
 
+// AsChangeSlackChannelPrivacyTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a ChangeSlackChannelPrivacyTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsChangeSlackChannelPrivacyTaskParams() (ChangeSlackChannelPrivacyTaskParams, error) {
+	var body ChangeSlackChannelPrivacyTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromChangeSlackChannelPrivacyTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided ChangeSlackChannelPrivacyTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromChangeSlackChannelPrivacyTaskParams(v ChangeSlackChannelPrivacyTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeChangeSlackChannelPrivacyTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided ChangeSlackChannelPrivacyTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeChangeSlackChannelPrivacyTaskParams(v ChangeSlackChannelPrivacyTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JsonMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsRunCommandHerokuTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a RunCommandHerokuTaskParams
 func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsRunCommandHerokuTaskParams() (RunCommandHerokuTaskParams, error) {
 	var body RunCommandHerokuTaskParams
@@ -24574,6 +24762,32 @@ func (t *WorkflowTask_TaskParams) FromRenameSlackChannelTaskParams(v RenameSlack
 
 // MergeRenameSlackChannelTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided RenameSlackChannelTaskParams
 func (t *WorkflowTask_TaskParams) MergeRenameSlackChannelTaskParams(v RenameSlackChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JsonMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsChangeSlackChannelPrivacyTaskParams returns the union data inside the WorkflowTask_TaskParams as a ChangeSlackChannelPrivacyTaskParams
+func (t WorkflowTask_TaskParams) AsChangeSlackChannelPrivacyTaskParams() (ChangeSlackChannelPrivacyTaskParams, error) {
+	var body ChangeSlackChannelPrivacyTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromChangeSlackChannelPrivacyTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided ChangeSlackChannelPrivacyTaskParams
+func (t *WorkflowTask_TaskParams) FromChangeSlackChannelPrivacyTaskParams(v ChangeSlackChannelPrivacyTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeChangeSlackChannelPrivacyTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided ChangeSlackChannelPrivacyTaskParams
+func (t *WorkflowTask_TaskParams) MergeChangeSlackChannelPrivacyTaskParams(v ChangeSlackChannelPrivacyTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err

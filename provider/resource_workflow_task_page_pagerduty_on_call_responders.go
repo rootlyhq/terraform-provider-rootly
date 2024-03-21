@@ -128,8 +128,13 @@ func resourceWorkflowTaskPagePagerdutyOnCallResponders() *schema.Resource {
 								"auto",
 							}, false),
 						},
+						"priority": &schema.Schema{
+							Description: "PagerDuty incident priority, selecting auto will let Rootly auto map our incident severity",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 						"create_new_incident_on_conflict": &schema.Schema{
-							Description: "Rootly only supports linking to a single Pagerduty incident. If this feature is disabled Rootly will add responders from any additional pages to the existing Pagerduty incident that is linked to the Rootly incident. If enabled, Rootly will create a new Pagerduty incident that is not linked to any Rootly incidents. Value must be one of true or false",
+							Description: "Rootly only supports linking to a single PagerDuty incident. If this feature is disabled Rootly will add responders from any additional pages to the existing PagerDuty incident that is linked to the Rootly incident. If enabled, Rootly will create a new PagerDuty incident that is not linked to any Rootly incidents. Value must be one of true or false",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},

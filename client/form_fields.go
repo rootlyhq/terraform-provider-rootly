@@ -12,6 +12,7 @@ type FormField struct {
 	ID string `jsonapi:"primary,form_fields"`
 	Kind string `jsonapi:"attr,kind,omitempty"`
   InputKind string `jsonapi:"attr,input_kind,omitempty"`
+  ValueKind string `jsonapi:"attr,value_kind,omitempty"`
   Name string `jsonapi:"attr,name,omitempty"`
   Slug string `jsonapi:"attr,slug,omitempty"`
   Description string `jsonapi:"attr,description,omitempty"`

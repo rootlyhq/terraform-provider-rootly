@@ -49,11 +49,11 @@ func resourceRetrospectiveProcess() *schema.Resource {
 			},
 
 			"copy_from": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    true,
+				Type:     schema.TypeString,
+				Computed: false,
+				Required: false,
+				Optional: true,
+				ForceNew: true,
 				DiffSuppressFunc: func(key, oldValue string, newValue string, d *schema.ResourceData) bool {
 					return (oldValue != "")
 				},
@@ -106,7 +106,6 @@ func resourceRetrospectiveProcess() *schema.Resource {
 					},
 				},
 			},
-			
 		},
 	}
 }

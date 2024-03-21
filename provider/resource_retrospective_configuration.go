@@ -8,8 +8,8 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/client"
-	"github.com/rootlyhq/terraform-provider-rootly/tools"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
+	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
 func resourceRetrospectiveConfiguration() *schema.Resource {

@@ -38,4 +38,3 @@ resource "rootly_retrospective_step" "test" {
 	title = "testing-tf"
 }
 `
-

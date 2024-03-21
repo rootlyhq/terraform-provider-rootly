@@ -48,12 +48,13 @@ resource "rootly_form_field_option" "north_america" {
 - `default_values` (List of String)
 - `description` (String) The description of the form field
 - `enabled` (Boolean)
-- `input_kind` (String) The input kind of the form field. Value must be one of `text`, `textarea`, `select`, `multi_select`, `date`, `datetime`, `users`, `number`, `checkbox`, `tags`, `rich_text`.
+- `input_kind` (String) The input kind of the form field. Value must be one of `text`, `textarea`, `select`, `multi_select`, `date`, `datetime`, `number`, `checkbox`, `tags`, `rich_text`.
 - `kind` (String) The kind of the form field. Value must be one of `custom`, `title`, `summary`, `severity`, `environments`, `types`, `services`, `causes`, `functionalities`, `teams`, `visibility`, `mark_as_test`, `mark_as_backfilled`, `labels`, `notify_emails`, `trigger_manual_workflows`, `show_ongoing_incidents`, `attach_alerts`, `mark_as_in_triage`, `manual_starting_datetime_field`.
 - `required` (List of String)
 - `show_on_incident_details` (Boolean) Whether the form field is shown on the incident details panel. Value must be one of true or false
 - `shown` (List of String)
 - `slug` (String) The slug of the form field
+- `value_kind` (String) The value kind of the form field. Value must be one of `inherit`, `group`, `service`, `user`.
 
 ### Read-Only
 

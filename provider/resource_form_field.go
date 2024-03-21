@@ -37,7 +37,16 @@ func resourceFormField() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "The input kind of the form field. Value must be one of `text`, `textarea`, `select`, `multi_select`, `date`, `datetime`, `users`, `number`, `checkbox`, `tags`, `rich_text`.",
+				Description: "The input kind of the form field. Value must be one of `text`, `textarea`, `select`, `multi_select`, `date`, `datetime`, `number`, `checkbox`, `tags`, `rich_text`.",
+			},
+
+			"value_kind": &schema.Schema{
+				Type:        schema.TypeString,
+				Default:     "inherit",
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The value kind of the form field. Value must be one of `inherit`, `group`, `service`, `user`.",
 			},
 
 			"name": &schema.Schema{
@@ -133,6 +142,9 @@ func resourceFormFieldCreate(ctx context.Context, d *schema.ResourceData, meta i
 	if value, ok := d.GetOkExists("input_kind"); ok {
 		s.InputKind = value.(string)
 	}
+	if value, ok := d.GetOkExists("value_kind"); ok {
+		s.ValueKind = value.(string)
+	}
 	if value, ok := d.GetOkExists("name"); ok {
 		s.Name = value.(string)
 	}
@@ -188,6 +200,7 @@ func resourceFormFieldRead(ctx context.Context, d *schema.ResourceData, meta int
 
 	d.Set("kind", item.Kind)
 	d.Set("input_kind", item.InputKind)
+	d.Set("value_kind", item.ValueKind)
 	d.Set("name", item.Name)
 	d.Set("slug", item.Slug)
 	d.Set("description", item.Description)
@@ -211,6 +224,9 @@ func resourceFormFieldUpdate(ctx context.Context, d *schema.ResourceData, meta i
 	}
 	if d.HasChange("input_kind") {
 		s.InputKind = d.Get("input_kind").(string)
+	}
+	if d.HasChange("value_kind") {
+		s.ValueKind = d.Get("value_kind").(string)
 	}
 	if d.HasChange("name") {
 		s.Name = d.Get("name").(string)

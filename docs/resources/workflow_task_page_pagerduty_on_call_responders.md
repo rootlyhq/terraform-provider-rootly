@@ -65,9 +65,10 @@ Required:
 
 Optional:
 
-- `create_new_incident_on_conflict` (Boolean) Rootly only supports linking to a single Pagerduty incident. If this feature is disabled Rootly will add responders from any additional pages to the existing Pagerduty incident that is linked to the Rootly incident. If enabled, Rootly will create a new Pagerduty incident that is not linked to any Rootly incidents. Value must be one of true or false
+- `create_new_incident_on_conflict` (Boolean) Rootly only supports linking to a single PagerDuty incident. If this feature is disabled Rootly will add responders from any additional pages to the existing PagerDuty incident that is linked to the Rootly incident. If enabled, Rootly will create a new PagerDuty incident that is not linked to any Rootly incidents. Value must be one of true or false
 - `escalation_policies` (Block List) (see [below for nested schema](#nestedblock--task_params--escalation_policies))
 - `message` (String)
+- `priority` (String) PagerDuty incident priority, selecting auto will let Rootly auto map our incident severity
 - `task_type` (String)
 - `urgency` (String) Value must be one of `high`, `low`, `auto`.
 - `users` (Block List) (see [below for nested schema](#nestedblock--task_params--users))

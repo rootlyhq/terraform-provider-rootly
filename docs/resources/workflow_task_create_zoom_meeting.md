@@ -42,6 +42,7 @@ Optional:
 - `alternative_hosts` (List of String)
 - `auto_recording` (String) Value must be one of `none`, `local`, `cloud`.
 - `create_as_email` (String) The email to use if creating as email
+- `invite_rootly_bot` (Boolean) We will invite Rootly Bot to your call and make the transcript available to you. Value must be one of true or false
 - `password` (String) The meeting password
 - `post_to_incident_timeline` (Boolean) Value must be one of true or false
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))

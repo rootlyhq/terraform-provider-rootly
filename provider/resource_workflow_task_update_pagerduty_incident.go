@@ -95,7 +95,7 @@ func resourceWorkflowTaskUpdatePagerdutyIncident() *schema.Resource {
 							}, false),
 						},
 						"resolution": &schema.Schema{
-							Description: "A message outlining the incident's resolution in Pagerduty",
+							Description: "A message outlining the incident's resolution in PagerDuty",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -106,7 +106,7 @@ func resourceWorkflowTaskUpdatePagerdutyIncident() *schema.Resource {
 							Default:     nil,
 						},
 						"urgency": &schema.Schema{
-							Description: "Pagerduty incident urgency, selecting auto will let Rootly auto map our incident severity. Value must be one of `high`, `low`, `auto`.",
+							Description: "PagerDuty incident urgency, selecting auto will let Rootly auto map our incident severity. Value must be one of `high`, `low`, `auto`.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Default:     nil,
@@ -115,6 +115,11 @@ func resourceWorkflowTaskUpdatePagerdutyIncident() *schema.Resource {
 								"low",
 								"auto",
 							}, false),
+						},
+						"priority": &schema.Schema{
+							Description: "PagerDuty incident priority, selecting auto will let Rootly auto map our incident severity",
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 					},
 				},
