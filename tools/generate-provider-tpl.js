@@ -79,6 +79,8 @@ ${resources
 				"rootly_dashboard": resourceDashboard(),
 				"rootly_dashboard_panel": resourceDashboardPanel(),
 				"rootly_retrospective_configuration": resourceRetrospectiveConfiguration(),
+				"rootly_retrospective_process": resourceRetrospectiveProcess(),
+				"rootly_retrospective_step": resourceRetrospectiveStep(),
 				"rootly_post_mortem_template": resourcePostmortemTemplate(),
 				"rootly_secret": resourceSecret(),
 				"rootly_workflow_incident": resourceWorkflowIncident(),
