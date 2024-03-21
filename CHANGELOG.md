@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.3.0] -- 2024-03-21
+
+- Add support for `form_field.value_kind` attribute
+
 ## [1.2.17] -- 2024-02-02
 
 - Add support for `retrospective_configuration`
