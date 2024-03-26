@@ -33,6 +33,9 @@ resource "rootly_dashboard_panel" "foo" {
 	name = "test"
 	params {
 		display = "line_chart"
+		legend {
+			groups = "charted"
+		}
 		datasets {
 			collection = "incidents"
 			filter {
@@ -50,6 +53,12 @@ resource "rootly_dashboard_panel" "foo" {
 				key = "results"
 				operation = "count"
 			}
+		}
+		position {
+			x = 3
+			y = 3
+			h = 3
+			w = 12
 		}
 	}
 }

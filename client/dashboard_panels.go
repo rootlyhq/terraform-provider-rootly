@@ -11,6 +11,7 @@ type DashboardPanel struct {
 	ID          string `jsonapi:"primary,dashboard_panels"`
 	Name        string `jsonapi:"attr,name,omitempty"`
 	Params      map[string]interface{} `jsonapi:"attr,params,omitempty"`
+	Position    map[string]interface{} `jsonapi:"attr,position,omitempty"`
 }
 
 func (c *Client) ListDashboardPanels(dashboardId string, params *rootlygo.ListDashboardPanelsParams) ([]interface{}, error) {

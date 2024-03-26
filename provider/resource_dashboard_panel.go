@@ -34,6 +34,31 @@ func resourceDashboardPanel() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"position": &schema.Schema{
+				Type:     schema.TypeList,
+				Optional: true,
+				MaxItems: 1,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"x": &schema.Schema{
+							Type:     schema.TypeInt,
+							Required: true,
+						},
+						"y": &schema.Schema{
+							Type:     schema.TypeInt,
+							Required: true,
+						},
+						"w": &schema.Schema{
+							Type:     schema.TypeInt,
+							Required: true,
+						},
+						"h": &schema.Schema{
+							Type:     schema.TypeInt,
+							Required: true,
+						},
+					},
+				},
+			},
 			"params": {
 				Description: "The params JSON of the dashboard_panel. See rootly API docs for schema.",
 				Type:        schema.TypeList,
@@ -44,6 +69,19 @@ func resourceDashboardPanel() *schema.Resource {
 						"display": &schema.Schema{
 							Type:     schema.TypeString,
 							Required: true,
+						},
+						"legend": &schema.Schema{
+							Type:     schema.TypeList,
+							MaxItems: 1,
+							Optional: true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"groups": &schema.Schema{
+										Type:     schema.TypeString,
+										Required: true,
+									},
+								},
+							},
 						},
 						"datasets": &schema.Schema{
 							Type:     schema.TypeList,
@@ -148,6 +186,7 @@ func unflattenParams(params map[string]interface{}) []map[string]interface{} {
 		}
 	}
 	unflattened_params[0]["datasets"] = datasets
+	unflattened_params[0]["legend"] = []interface{}{params["legend"]}
 	return unflattened_params
 }
 
@@ -156,6 +195,7 @@ func flattenParams(params []interface{}) map[string]interface{} {
 	datasets := first_params["datasets"].([]interface{})
 	flattened_params := make(map[string]interface{})
 	flattened_params["display"] = first_params["display"]
+	flattened_params["legend"] = first_params["legend"].([]interface{})[0]
 	flattened_datasets := make([]interface{}, len(datasets), len(datasets))
 	for i, dataset := range datasets {
 		d := dataset.(map[string]interface{})
@@ -186,6 +226,10 @@ func resourceDashboardPanelCreate(ctx context.Context, d *schema.ResourceData, m
 
 	s := &client.DashboardPanel{
 		Name: name,
+	}
+
+	if value, ok := d.GetOk("position"); ok {
+		s.Position = value.([]interface{})[0].(map[string]interface{})
 	}
 
 	if value, ok := d.GetOk("params"); ok {
@@ -222,6 +266,7 @@ func resourceDashboardPanelRead(ctx context.Context, d *schema.ResourceData, met
 
 	d.Set("name", dashboard_panel.Name)
 	d.Set("params", unflattenParams(dashboard_panel.Params))
+	d.Set("position", []map[string]interface{}{dashboard_panel.Position})
 
 	return nil
 }
@@ -234,6 +279,10 @@ func resourceDashboardPanelUpdate(ctx context.Context, d *schema.ResourceData, m
 
 	s := &client.DashboardPanel{
 		Name: name,
+	}
+
+	if value, ok := d.GetOk("position"); ok {
+		s.Position = value.([]interface{})[0].(map[string]interface{})
 	}
 
 	if value, ok := d.GetOk("params"); ok {
