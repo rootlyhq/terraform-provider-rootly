@@ -31,6 +31,12 @@ resource "rootly_dashboard" "foo" {
 resource "rootly_dashboard_panel" "foo" {
   dashboard_id = rootly_dashboard.foo.id
 	name = "test"
+	position {
+		x = 3
+		y = 3
+		h = 3
+		w = 12
+	}
 	params {
 		display = "line_chart"
 		legend {
@@ -53,12 +59,6 @@ resource "rootly_dashboard_panel" "foo" {
 				key = "results"
 				operation = "count"
 			}
-		}
-		position {
-			x = 3
-			y = 3
-			h = 3
-			w = 12
 		}
 	}
 }
