@@ -22,7 +22,7 @@ func TestAccResourceRetrospectiveStep(t *testing.T) {
 
 const testAccResourceStep = `
 data "rootly_severity" "critical" {
-  slug = "sev0-f3b589d9-732e-4a42-aab5-d1c590c72362"
+  slug = "sev0"
 }
 
 resource "rootly_retrospective_process" "test" {
