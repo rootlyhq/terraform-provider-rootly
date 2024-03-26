@@ -51,6 +51,12 @@ resource "rootly_dashboard_panel" "foo" {
 				operation = "count"
 			}
 		}
+		position {
+			x = 3
+			y = 3
+			h = 3
+			w = 12
+		}
 	}
 }
 `
