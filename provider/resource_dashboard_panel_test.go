@@ -33,6 +33,9 @@ resource "rootly_dashboard_panel" "foo" {
 	name = "test"
 	params {
 		display = "line_chart"
+		legend {
+			groups = "charted"
+		}
 		datasets {
 			collection = "incidents"
 			filter {

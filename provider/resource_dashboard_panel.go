@@ -70,6 +70,19 @@ func resourceDashboardPanel() *schema.Resource {
 							Type:     schema.TypeString,
 							Required: true,
 						},
+						"legend": &schema.Schema{
+							Type:     schema.TypeList,
+							MaxItems: 1,
+							Optional: true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"groups": &schema.Schema{
+										Type:     schema.TypeString,
+										Required: true,
+									},
+								},
+							},
+						},
 						"datasets": &schema.Schema{
 							Type:     schema.TypeList,
 							Optional: true,
@@ -173,6 +186,7 @@ func unflattenParams(params map[string]interface{}) []map[string]interface{} {
 		}
 	}
 	unflattened_params[0]["datasets"] = datasets
+	unflattened_params[0]["legend"] = []interface{}{params["legend"]}
 	return unflattened_params
 }
 
@@ -181,6 +195,7 @@ func flattenParams(params []interface{}) map[string]interface{} {
 	datasets := first_params["datasets"].([]interface{})
 	flattened_params := make(map[string]interface{})
 	flattened_params["display"] = first_params["display"]
+	flattened_params["legend"] = first_params["legend"].([]interface{})[0]
 	flattened_datasets := make([]interface{}, len(datasets), len(datasets))
 	for i, dataset := range datasets {
 		d := dataset.(map[string]interface{})
