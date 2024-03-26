@@ -65,7 +65,8 @@ resource "rootly_workflow_task_trigger_workflow" "trigger_another_workflow_task"
 
 Required:
 
-- `kind` (String) Value must be one of `simple`, `incident`, `post_mortem`, `action_item`, `pulse`, `alert`.
+- `attribute_to_query_by` (String) ["(incident) kind can only match [:id, :slug, :sequential_id, :pagerduty_incident_id, :opsgenie_incident_id, :victor_ops_incident_id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(post_mortem) kind can only match [:id]", "(action_item) kind can only match [:id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(pulse) kind can only match [:id]", "(alert) kind can only match [:id]"]. Value must be one of `id`, `slug`, `sequential_id`, `pagerduty_incident_id`, `opsgenie_incident_id`, `victor_ops_incident_id`, `jira_issue_id`, `asana_task_id`, `shortcut_task_id`, `linear_issue_id`, `zendesk_ticket_id`, `trello_card_id`, `airtable_record_id`, `shortcut_story_id`, `github_issue_id`, `freshservice_ticket_id`, `freshservice_task_id`, `clickup_task_id`.
+- `kind` (String) Value must be one of `incident`, `post_mortem`, `action_item`, `pulse`, `alert`.
 - `resource` (Map of String) Map must contain two fields, `id` and `name`.
 - `workflow` (Map of String) Map must contain two fields, `id` and `name`.
 

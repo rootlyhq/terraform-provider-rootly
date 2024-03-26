@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.4.1] -- 2024-03-26
+
+- Add `workflow_task_create_gitlab_issue` & `workflow_task_update_gitlab_issue` resources.
+
 ## [1.3.1] -- 2024-03-26
 
 - Add `position` & `legend` attribute to `dashboard_panel` resource. Thanks @johanfleury

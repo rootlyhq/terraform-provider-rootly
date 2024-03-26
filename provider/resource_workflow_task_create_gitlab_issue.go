@@ -6,9 +6,6 @@ import (
 	"context"
 	"fmt"
 
-	"encoding/json"
-	"reflect"
-
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -17,14 +14,14 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
-func resourceWorkflowTaskUpdateActionItem() *schema.Resource {
+func resourceWorkflowTaskCreateGitlabIssue() *schema.Resource {
 	return &schema.Resource{
-		Description: "Manages workflow update_action_item task.",
+		Description: "Manages workflow create_gitlab_issue task.",
 
-		CreateContext: resourceWorkflowTaskUpdateActionItemCreate,
-		ReadContext:   resourceWorkflowTaskUpdateActionItemRead,
-		UpdateContext: resourceWorkflowTaskUpdateActionItemUpdate,
-		DeleteContext: resourceWorkflowTaskUpdateActionItemDelete,
+		CreateContext: resourceWorkflowTaskCreateGitlabIssueCreate,
+		ReadContext:   resourceWorkflowTaskCreateGitlabIssueRead,
+		UpdateContext: resourceWorkflowTaskCreateGitlabIssueUpdate,
+		DeleteContext: resourceWorkflowTaskCreateGitlabIssueDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -71,111 +68,46 @@ func resourceWorkflowTaskUpdateActionItem() *schema.Resource {
 						"task_type": &schema.Schema{
 							Type:     schema.TypeString,
 							Optional: true,
-							Default:  "update_action_item",
+							Default:  "create_gitlab_issue",
 							ValidateFunc: validation.StringInSlice([]string{
-								"update_action_item",
+								"create_gitlab_issue",
 							}, false),
 						},
-						"query_value": &schema.Schema{
-							Description: "Value that attribute_to_query_by to uses to match against",
+						"issue_type": &schema.Schema{
+							Description: "The issue type. Value must be one of `issue`, `incident`, `test_case`, `task`.",
 							Type:        schema.TypeString,
-							Required:    true,
-						},
-						"attribute_to_query_by": &schema.Schema{
-							Description: "Attribute of the action item to match against. Value must be one of `id`, `jira_issue_id`, `asana_task_id`, `shortcut_task_id`, `linear_issue_id`, `zendesk_ticket_id`, `trello_card_id`, `airtable_record_id`, `shortcut_story_id`, `github_issue_id`, `gitlab_issue_id`, `freshservice_ticket_id`, `freshservice_task_id`, `clickup_task_id`.",
-							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
+							Default:     nil,
 							ValidateFunc: validation.StringInSlice([]string{
-								"id",
-								"jira_issue_id",
-								"asana_task_id",
-								"shortcut_task_id",
-								"linear_issue_id",
-								"zendesk_ticket_id",
-								"trello_card_id",
-								"airtable_record_id",
-								"shortcut_story_id",
-								"github_issue_id",
-								"gitlab_issue_id",
-								"freshservice_ticket_id",
-								"freshservice_task_id",
-								"clickup_task_id",
+								"issue",
+								"incident",
+								"test_case",
+								"task",
 							}, false),
 						},
-						"summary": &schema.Schema{
-							Description: "Brief description of the action item",
+						"title": &schema.Schema{
+							Description: "The issue title",
 							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"assigned_to_user_id": &schema.Schema{
-							Description: "[DEPRECATED] Use assigned_to_user attribute instead. The user id this action item is assigned to",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"assigned_to_user": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`.  The user this action item is assigned to",
-							Type:        schema.TypeMap,
-							Optional:    true,
-						},
-						"group_ids": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Required:    true,
 						},
 						"description": &schema.Schema{
-							Description: "The action item description",
+							Description: "The issue description",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
-						"priority": &schema.Schema{
-							Description: "The action item priority. Value must be one of `high`, `medium`, `low`.",
+						"repository": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. ",
+							Type:        schema.TypeMap,
+							Required:    true,
+						},
+						"labels": &schema.Schema{
+							Description: "The issue labels",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     nil,
-							ValidateFunc: validation.StringInSlice([]string{
-								"high",
-								"medium",
-								"low",
-							}, false),
 						},
-						"status": &schema.Schema{
-							Description: "The action item status. Value must be one of `open`, `in_progress`, `cancelled`, `done`.",
+						"due_date": &schema.Schema{
+							Description: "The due date",
 							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     nil,
-							ValidateFunc: validation.StringInSlice([]string{
-								"open",
-								"in_progress",
-								"cancelled",
-								"done",
-							}, false),
-						},
-						"custom_fields_mapping": &schema.Schema{
-							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON",
-							Type:        schema.TypeString,
-							Optional:    true,
-							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {
-								var oldJSONAsInterface, newJSONAsInterface interface{}
-
-								if err := json.Unmarshal([]byte(old), &oldJSONAsInterface); err != nil {
-									return false
-								}
-
-								if err := json.Unmarshal([]byte(new), &newJSONAsInterface); err != nil {
-									return false
-								}
-
-								return reflect.DeepEqual(oldJSONAsInterface, newJSONAsInterface)
-							},
-							Default: "{}",
-						},
-						"post_to_incident_timeline": &schema.Schema{
-							Description: "Value must be one of true or false",
-							Type:        schema.TypeBool,
 							Optional:    true,
 						},
 					},
@@ -185,7 +117,7 @@ func resourceWorkflowTaskUpdateActionItem() *schema.Resource {
 	}
 }
 
-func resourceWorkflowTaskUpdateActionItemCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateGitlabIssueCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
@@ -214,10 +146,10 @@ func resourceWorkflowTaskUpdateActionItemCreate(ctx context.Context, d *schema.R
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created an workflow task resource: %v (%s)", workflowId, d.Id()))
 
-	return resourceWorkflowTaskUpdateActionItemRead(ctx, d, meta)
+	return resourceWorkflowTaskCreateGitlabIssueRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskUpdateActionItemRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateGitlabIssueRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
@@ -226,7 +158,7 @@ func resourceWorkflowTaskUpdateActionItemRead(ctx context.Context, d *schema.Res
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskUpdateActionItem (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateGitlabIssue (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
@@ -246,7 +178,7 @@ func resourceWorkflowTaskUpdateActionItemRead(ctx context.Context, d *schema.Res
 	return nil
 }
 
-func resourceWorkflowTaskUpdateActionItemUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateGitlabIssueUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
@@ -272,10 +204,10 @@ func resourceWorkflowTaskUpdateActionItemUpdate(ctx context.Context, d *schema.R
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
 
-	return resourceWorkflowTaskUpdateActionItemRead(ctx, d, meta)
+	return resourceWorkflowTaskCreateGitlabIssueRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskUpdateActionItemDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateGitlabIssueDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
@@ -284,7 +216,7 @@ func resourceWorkflowTaskUpdateActionItemDelete(ctx context.Context, d *schema.R
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskUpdateActionItem (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateGitlabIssue (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}

@@ -54,6 +54,7 @@ resource "rootly_dashboard_panel" "incidents_by_severity" {
 ### Optional
 
 - `name` (String) The name of the dashboard_panel
+- `position` (Block List, Max: 1) (see [below for nested schema](#nestedblock--position))
 
 ### Read-Only
 
@@ -69,6 +70,7 @@ Required:
 Optional:
 
 - `datasets` (Block List) (see [below for nested schema](#nestedblock--params--datasets))
+- `legend` (Block List, Max: 1) (see [below for nested schema](#nestedblock--params--legend))
 
 <a id="nestedblock--params--datasets"></a>
 ### Nested Schema for `params.datasets`
@@ -114,3 +116,25 @@ Required:
 - `key` (String)
 - `operation` (String)
 - `value` (String)
+
+
+
+
+<a id="nestedblock--params--legend"></a>
+### Nested Schema for `params.legend`
+
+Required:
+
+- `groups` (String)
+
+
+
+<a id="nestedblock--position"></a>
+### Nested Schema for `position`
+
+Required:
+
+- `h` (Number)
+- `w` (Number)
+- `x` (Number)
+- `y` (Number)
