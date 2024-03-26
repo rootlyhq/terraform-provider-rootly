@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.3.1] -- 2024-03-26
+
+- Add `position` & `legend` attribute to `dashboard_panel` resource. Thanks @johanfleury
+
 ## [1.3.0] -- 2024-03-21
 
 - Add support for `form_field.value_kind` attribute
