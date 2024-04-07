@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.4.2] -- 2024-04-07
+
+- Fix schema for various workflow tasks
+
 ## [1.4.1] -- 2024-03-26
 
 - Add `workflow_task_create_gitlab_issue` & `workflow_task_update_gitlab_issue` resources.
