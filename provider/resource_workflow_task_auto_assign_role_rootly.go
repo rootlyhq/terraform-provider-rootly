@@ -14,14 +14,14 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
-func resourceWorkflowTaskCreateGoogleMeeting() *schema.Resource {
+func resourceWorkflowTaskAutoAssignRoleRootly() *schema.Resource {
 	return &schema.Resource{
-		Description: "Manages workflow create_google_meeting task.",
+		Description: "Manages workflow auto_assign_role_rootly task.",
 
-		CreateContext: resourceWorkflowTaskCreateGoogleMeetingCreate,
-		ReadContext:   resourceWorkflowTaskCreateGoogleMeetingRead,
-		UpdateContext: resourceWorkflowTaskCreateGoogleMeetingUpdate,
-		DeleteContext: resourceWorkflowTaskCreateGoogleMeetingDelete,
+		CreateContext: resourceWorkflowTaskAutoAssignRoleRootlyCreate,
+		ReadContext:   resourceWorkflowTaskAutoAssignRoleRootlyRead,
+		UpdateContext: resourceWorkflowTaskAutoAssignRoleRootlyUpdate,
+		DeleteContext: resourceWorkflowTaskAutoAssignRoleRootlyDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -68,59 +68,40 @@ func resourceWorkflowTaskCreateGoogleMeeting() *schema.Resource {
 						"task_type": &schema.Schema{
 							Type:     schema.TypeString,
 							Optional: true,
-							Default:  "create_google_meeting",
+							Default:  "auto_assign_role_rootly",
 							ValidateFunc: validation.StringInSlice([]string{
-								"create_google_meeting",
+								"auto_assign_role_rootly",
 							}, false),
 						},
-						"summary": &schema.Schema{
-							Description: "The meeting summary",
+						"incident_role_id": &schema.Schema{
+							Description: "The role id",
 							Type:        schema.TypeString,
 							Required:    true,
 						},
-						"description": &schema.Schema{
-							Description: "The meeting description",
-							Type:        schema.TypeString,
-							Required:    true,
-						},
-						"conference_solution_key": &schema.Schema{
-							Description: "Sets the video conference type attached to the meeting. Value must be one of `eventHangout`, `eventNamedHangout`, `hangoutsMeet`, `addOn`.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     nil,
-							ValidateFunc: validation.StringInSlice([]string{
-								"eventHangout",
-								"eventNamedHangout",
-								"hangoutsMeet",
-								"addOn",
-							}, false),
-						},
-						"record_meeting": &schema.Schema{
-							Description: "We will invite Rootly Bot to your call and make the transcript available to you. Value must be one of true or false",
-							Type:        schema.TypeBool,
+						"escalation_policy_target": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. ",
+							Type:        schema.TypeMap,
 							Optional:    true,
 						},
-						"post_to_incident_timeline": &schema.Schema{
-							Description: "Value must be one of true or false",
-							Type:        schema.TypeBool,
+						"service_target": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. ",
+							Type:        schema.TypeMap,
 							Optional:    true,
 						},
-						"post_to_slack_channels": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
+						"user_target": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. ",
+							Type:        schema.TypeMap,
 							Optional:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
-									},
-									"name": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
-									},
-								},
-							},
+						},
+						"group_target": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. ",
+							Type:        schema.TypeMap,
+							Optional:    true,
+						},
+						"schedule_target": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. ",
+							Type:        schema.TypeMap,
+							Optional:    true,
 						},
 					},
 				},
@@ -129,7 +110,7 @@ func resourceWorkflowTaskCreateGoogleMeeting() *schema.Resource {
 	}
 }
 
-func resourceWorkflowTaskCreateGoogleMeetingCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskAutoAssignRoleRootlyCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
@@ -158,10 +139,10 @@ func resourceWorkflowTaskCreateGoogleMeetingCreate(ctx context.Context, d *schem
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created an workflow task resource: %v (%s)", workflowId, d.Id()))
 
-	return resourceWorkflowTaskCreateGoogleMeetingRead(ctx, d, meta)
+	return resourceWorkflowTaskAutoAssignRoleRootlyRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskCreateGoogleMeetingRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskAutoAssignRoleRootlyRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
@@ -170,7 +151,7 @@ func resourceWorkflowTaskCreateGoogleMeetingRead(ctx context.Context, d *schema.
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateGoogleMeeting (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskAutoAssignRoleRootly (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
@@ -190,7 +171,7 @@ func resourceWorkflowTaskCreateGoogleMeetingRead(ctx context.Context, d *schema.
 	return nil
 }
 
-func resourceWorkflowTaskCreateGoogleMeetingUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskAutoAssignRoleRootlyUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
@@ -216,10 +197,10 @@ func resourceWorkflowTaskCreateGoogleMeetingUpdate(ctx context.Context, d *schem
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
 
-	return resourceWorkflowTaskCreateGoogleMeetingRead(ctx, d, meta)
+	return resourceWorkflowTaskAutoAssignRoleRootlyRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskCreateGoogleMeetingDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskAutoAssignRoleRootlyDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
@@ -228,7 +209,7 @@ func resourceWorkflowTaskCreateGoogleMeetingDelete(ctx context.Context, d *schem
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateGoogleMeeting (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskAutoAssignRoleRootly (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}

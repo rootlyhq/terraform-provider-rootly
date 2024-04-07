@@ -40,9 +40,9 @@ Required:
 
 Optional:
 
-- `invite_rootly_bot` (Boolean) We will invite Rootly Bot to your call and make the transcript available to you. Value must be one of true or false
 - `post_to_incident_timeline` (Boolean) Value must be one of true or false
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
+- `record_meeting` (Boolean) We will invite Rootly Bot to your call and make the transcript available to you. Value must be one of true or false
 - `task_type` (String)
 
 <a id="nestedblock--task_params--post_to_slack_channels"></a>

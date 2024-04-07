@@ -14,14 +14,14 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/tools"
 )
 
-func resourceWorkflowTaskCreateGoogleMeeting() *schema.Resource {
+func resourceWorkflowTaskPageRootlyOnCallResponders() *schema.Resource {
 	return &schema.Resource{
-		Description: "Manages workflow create_google_meeting task.",
+		Description: "Manages workflow page_rootly_on_call_responders task.",
 
-		CreateContext: resourceWorkflowTaskCreateGoogleMeetingCreate,
-		ReadContext:   resourceWorkflowTaskCreateGoogleMeetingRead,
-		UpdateContext: resourceWorkflowTaskCreateGoogleMeetingUpdate,
-		DeleteContext: resourceWorkflowTaskCreateGoogleMeetingDelete,
+		CreateContext: resourceWorkflowTaskPageRootlyOnCallRespondersCreate,
+		ReadContext:   resourceWorkflowTaskPageRootlyOnCallRespondersRead,
+		UpdateContext: resourceWorkflowTaskPageRootlyOnCallRespondersUpdate,
+		DeleteContext: resourceWorkflowTaskPageRootlyOnCallRespondersDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -68,59 +68,40 @@ func resourceWorkflowTaskCreateGoogleMeeting() *schema.Resource {
 						"task_type": &schema.Schema{
 							Type:     schema.TypeString,
 							Optional: true,
-							Default:  "create_google_meeting",
+							Default:  "page_rootly_on_call_responders",
 							ValidateFunc: validation.StringInSlice([]string{
-								"create_google_meeting",
+								"page_rootly_on_call_responders",
 							}, false),
+						},
+						"escalation_policy_target": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. ",
+							Type:        schema.TypeMap,
+							Optional:    true,
+						},
+						"service_target": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. ",
+							Type:        schema.TypeMap,
+							Optional:    true,
+						},
+						"user_target": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. ",
+							Type:        schema.TypeMap,
+							Optional:    true,
+						},
+						"group_target": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. ",
+							Type:        schema.TypeMap,
+							Optional:    true,
 						},
 						"summary": &schema.Schema{
-							Description: "The meeting summary",
-							Type:        schema.TypeString,
-							Required:    true,
-						},
-						"description": &schema.Schema{
-							Description: "The meeting description",
-							Type:        schema.TypeString,
-							Required:    true,
-						},
-						"conference_solution_key": &schema.Schema{
-							Description: "Sets the video conference type attached to the meeting. Value must be one of `eventHangout`, `eventNamedHangout`, `hangoutsMeet`, `addOn`.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     nil,
-							ValidateFunc: validation.StringInSlice([]string{
-								"eventHangout",
-								"eventNamedHangout",
-								"hangoutsMeet",
-								"addOn",
-							}, false),
-						},
-						"record_meeting": &schema.Schema{
-							Description: "We will invite Rootly Bot to your call and make the transcript available to you. Value must be one of true or false",
-							Type:        schema.TypeBool,
-							Optional:    true,
-						},
-						"post_to_incident_timeline": &schema.Schema{
-							Description: "Value must be one of true or false",
-							Type:        schema.TypeBool,
-							Optional:    true,
-						},
-						"post_to_slack_channels": &schema.Schema{
 							Description: "",
-							Type:        schema.TypeList,
+							Type:        schema.TypeString,
+							Required:    true,
+						},
+						"escalation_note": &schema.Schema{
+							Description: "",
+							Type:        schema.TypeString,
 							Optional:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
-									},
-									"name": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
-									},
-								},
-							},
 						},
 					},
 				},
@@ -129,7 +110,7 @@ func resourceWorkflowTaskCreateGoogleMeeting() *schema.Resource {
 	}
 }
 
-func resourceWorkflowTaskCreateGoogleMeetingCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskPageRootlyOnCallRespondersCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
@@ -158,10 +139,10 @@ func resourceWorkflowTaskCreateGoogleMeetingCreate(ctx context.Context, d *schem
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created an workflow task resource: %v (%s)", workflowId, d.Id()))
 
-	return resourceWorkflowTaskCreateGoogleMeetingRead(ctx, d, meta)
+	return resourceWorkflowTaskPageRootlyOnCallRespondersRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskCreateGoogleMeetingRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskPageRootlyOnCallRespondersRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
@@ -170,7 +151,7 @@ func resourceWorkflowTaskCreateGoogleMeetingRead(ctx context.Context, d *schema.
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateGoogleMeeting (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskPageRootlyOnCallResponders (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
@@ -190,7 +171,7 @@ func resourceWorkflowTaskCreateGoogleMeetingRead(ctx context.Context, d *schema.
 	return nil
 }
 
-func resourceWorkflowTaskCreateGoogleMeetingUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskPageRootlyOnCallRespondersUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
@@ -216,10 +197,10 @@ func resourceWorkflowTaskCreateGoogleMeetingUpdate(ctx context.Context, d *schem
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
 
-	return resourceWorkflowTaskCreateGoogleMeetingRead(ctx, d, meta)
+	return resourceWorkflowTaskPageRootlyOnCallRespondersRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskCreateGoogleMeetingDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskPageRootlyOnCallRespondersDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
@@ -228,7 +209,7 @@ func resourceWorkflowTaskCreateGoogleMeetingDelete(ctx context.Context, d *schem
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateGoogleMeeting (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskPageRootlyOnCallResponders (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
