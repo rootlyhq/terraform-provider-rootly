@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.5.0] -- 2024-04-24
+
+- Add On-Call resources
+
 ## [1.4.2] -- 2024-04-07
 
 - Fix schema for various workflow tasks
