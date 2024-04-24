@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_create_shortcut_task - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow createshortcuttask task.
+    Manages workflow create_shortcut_task task.
 ---
 
 # Resource (rootly_workflow_task_create_shortcut_task)

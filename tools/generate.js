@@ -20,7 +20,6 @@ const excluded = {
     "custom_field",
     "dashboard_panel",
     "dashboard",
-    "escalation_policy",
     "incident_action_item",
     "incident_custom_field_selection",
     "incident_event_functionality",
@@ -47,7 +46,6 @@ const excluded = {
     "custom_field",
     "dashboard_panel",
     "dashboard",
-    "escalation_policy",
     "incident_action_item",
     "incident_custom_field_selection",
     "incident_event_functionality",
@@ -75,6 +73,13 @@ const excluded = {
     "retrospective_configuration",
     "retrospective_process",
     "retrospective_step",
+    "escalation_policy",
+    "escalation_level",
+    "shift_override",
+    "schedule",
+    "schedule_rotation",
+    "schedule_rotation_active_time",
+    "schedule_rotation_user",
   ]
 }
 

@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_update_asana_task - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow updateasanatask task.
+    Manages workflow update_asana_task task.
 ---
 
 # Resource (rootly_workflow_task_update_asana_task)

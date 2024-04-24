@@ -1,0 +1,119 @@
+package client
+
+import (
+	"reflect"
+	
+	"github.com/pkg/errors"
+	"github.com/google/jsonapi"
+	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
+)
+
+type EscalationPolicy struct {
+	ID string `jsonapi:"primary,escalation_policies"`
+	Name string `jsonapi:"attr,name,omitempty"`
+  Description string `jsonapi:"attr,description,omitempty"`
+  RepeatCount int `jsonapi:"attr,repeat_count,omitempty"`
+  CreatedByUserId int `jsonapi:"attr,created_by_user_id,omitempty"`
+  LastUpdatedByUserId int `jsonapi:"attr,last_updated_by_user_id,omitempty"`
+  EscalationLevels []interface{} `jsonapi:"attr,escalation_levels,omitempty"`
+  Services []interface{} `jsonapi:"attr,services,omitempty"`
+  Groups []interface{} `jsonapi:"attr,groups,omitempty"`
+}
+
+func (c *Client) ListEscalationPolicies(params *rootlygo.ListEscalationPoliciesParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListEscalationPoliciesRequest(c.Rootly.Server, params)
+	if err != nil {
+		return nil, errors.Errorf("Error building request: %s", err.Error())
+	}
+
+	resp, err := c.Do(req)
+	if err != nil {
+		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+	}
+
+	escalation_policies, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(EscalationPolicy)))
+	if err != nil {
+		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+	}
+
+	return escalation_policies, nil
+}
+
+func (c *Client) CreateEscalationPolicy(d *EscalationPolicy) (*EscalationPolicy, error) {
+	buffer, err := MarshalData(d)
+	if err != nil {
+		return nil, errors.Errorf("Error marshaling escalation_policy: %s", err.Error())
+	}
+
+	req, err := rootlygo.NewCreateEscalationPolicyRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
+	if err != nil {
+		return nil, errors.Errorf("Error building request: %s", err.Error())
+	}
+	resp, err := c.Do(req)
+	if err != nil {
+		return nil, errors.Errorf("Failed to perform request to create escalation_policy: %s", err.Error())
+	}
+
+	data, err := UnmarshalData(resp.Body, new(EscalationPolicy))
+	if err != nil {
+		return nil, errors.Errorf("Error unmarshaling escalation_policy: %s", err.Error())
+	}
+
+	return data.(*EscalationPolicy), nil
+}
+
+func (c *Client) GetEscalationPolicy(id string) (*EscalationPolicy, error) {
+	req, err := rootlygo.NewGetEscalationPolicyRequest(c.Rootly.Server, id)
+	if err != nil {
+		return nil, errors.Errorf("Error building request: %s", err.Error())
+	}
+
+	resp, err := c.Do(req)
+	if err != nil {
+		return nil, errors.Errorf("Failed to make request to get escalation_policy: %s", err.Error())
+	}
+
+	data, err := UnmarshalData(resp.Body, new(EscalationPolicy))
+	if err != nil {
+		return nil, errors.Errorf("Error unmarshaling escalation_policy: %s", err.Error())
+	}
+
+	return data.(*EscalationPolicy), nil
+}
+
+func (c *Client) UpdateEscalationPolicy(id string, escalation_policy *EscalationPolicy) (*EscalationPolicy, error) {
+	buffer, err := MarshalData(escalation_policy)
+	if err != nil {
+		return nil, errors.Errorf("Error marshaling escalation_policy: %s", err.Error())
+	}
+
+	req, err := rootlygo.NewUpdateEscalationPolicyRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	if err != nil {
+		return nil, errors.Errorf("Error building request: %s", err.Error())
+	}
+	resp, err := c.Do(req)
+	if err != nil {
+		return nil, errors.Errorf("Failed to make request to update escalation_policy: %s", err.Error())
+	}
+
+	data, err := UnmarshalData(resp.Body, new(EscalationPolicy))
+	if err != nil {
+		return nil, errors.Errorf("Error unmarshaling escalation_policy: %s", err.Error())
+	}
+
+	return data.(*EscalationPolicy), nil
+}
+
+func (c *Client) DeleteEscalationPolicy(id string) error {
+	req, err := rootlygo.NewDeleteEscalationPolicyRequest(c.Rootly.Server, id)
+	if err != nil {
+		return errors.Errorf("Error building request: %s", err.Error())
+	}
+
+	_, err = c.Do(req)
+	if err != nil {
+		return errors.Errorf("Failed to make request to delete escalation_policy: %s", err.Error())
+	}
+
+	return nil
+}

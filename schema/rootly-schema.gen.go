@@ -876,6 +876,166 @@ const (
 	CreateOpsgenieAlert CreateOpsgenieAlertTaskParamsTaskType = "create_opsgenie_alert"
 )
 
+// Defines values for CreateOutlookEventTaskParamsTaskType.
+const (
+	CreateOutlookEvent CreateOutlookEventTaskParamsTaskType = "create_outlook_event"
+)
+
+// Defines values for CreateOutlookEventTaskParamsTimeZone.
+const (
+	CreateOutlookEventTaskParamsTimeZoneAbuDhabi                  CreateOutlookEventTaskParamsTimeZone = "Abu Dhabi"
+	CreateOutlookEventTaskParamsTimeZoneAdelaide                  CreateOutlookEventTaskParamsTimeZone = "Adelaide"
+	CreateOutlookEventTaskParamsTimeZoneAlaska                    CreateOutlookEventTaskParamsTimeZone = "Alaska"
+	CreateOutlookEventTaskParamsTimeZoneAlmaty                    CreateOutlookEventTaskParamsTimeZone = "Almaty"
+	CreateOutlookEventTaskParamsTimeZoneAmericanSamoa             CreateOutlookEventTaskParamsTimeZone = "American Samoa"
+	CreateOutlookEventTaskParamsTimeZoneAmsterdam                 CreateOutlookEventTaskParamsTimeZone = "Amsterdam"
+	CreateOutlookEventTaskParamsTimeZoneArizona                   CreateOutlookEventTaskParamsTimeZone = "Arizona"
+	CreateOutlookEventTaskParamsTimeZoneAstana                    CreateOutlookEventTaskParamsTimeZone = "Astana"
+	CreateOutlookEventTaskParamsTimeZoneAthens                    CreateOutlookEventTaskParamsTimeZone = "Athens"
+	CreateOutlookEventTaskParamsTimeZoneAtlanticTimeCanada        CreateOutlookEventTaskParamsTimeZone = "Atlantic Time (Canada)"
+	CreateOutlookEventTaskParamsTimeZoneAuckland                  CreateOutlookEventTaskParamsTimeZone = "Auckland"
+	CreateOutlookEventTaskParamsTimeZoneAzores                    CreateOutlookEventTaskParamsTimeZone = "Azores"
+	CreateOutlookEventTaskParamsTimeZoneBaghdad                   CreateOutlookEventTaskParamsTimeZone = "Baghdad"
+	CreateOutlookEventTaskParamsTimeZoneBaku                      CreateOutlookEventTaskParamsTimeZone = "Baku"
+	CreateOutlookEventTaskParamsTimeZoneBangkok                   CreateOutlookEventTaskParamsTimeZone = "Bangkok"
+	CreateOutlookEventTaskParamsTimeZoneBeijing                   CreateOutlookEventTaskParamsTimeZone = "Beijing"
+	CreateOutlookEventTaskParamsTimeZoneBelgrade                  CreateOutlookEventTaskParamsTimeZone = "Belgrade"
+	CreateOutlookEventTaskParamsTimeZoneBerlin                    CreateOutlookEventTaskParamsTimeZone = "Berlin"
+	CreateOutlookEventTaskParamsTimeZoneBern                      CreateOutlookEventTaskParamsTimeZone = "Bern"
+	CreateOutlookEventTaskParamsTimeZoneBogota                    CreateOutlookEventTaskParamsTimeZone = "Bogota"
+	CreateOutlookEventTaskParamsTimeZoneBrasilia                  CreateOutlookEventTaskParamsTimeZone = "Brasilia"
+	CreateOutlookEventTaskParamsTimeZoneBratislava                CreateOutlookEventTaskParamsTimeZone = "Bratislava"
+	CreateOutlookEventTaskParamsTimeZoneBrisbane                  CreateOutlookEventTaskParamsTimeZone = "Brisbane"
+	CreateOutlookEventTaskParamsTimeZoneBrussels                  CreateOutlookEventTaskParamsTimeZone = "Brussels"
+	CreateOutlookEventTaskParamsTimeZoneBucharest                 CreateOutlookEventTaskParamsTimeZone = "Bucharest"
+	CreateOutlookEventTaskParamsTimeZoneBudapest                  CreateOutlookEventTaskParamsTimeZone = "Budapest"
+	CreateOutlookEventTaskParamsTimeZoneBuenosAires               CreateOutlookEventTaskParamsTimeZone = "Buenos Aires"
+	CreateOutlookEventTaskParamsTimeZoneCairo                     CreateOutlookEventTaskParamsTimeZone = "Cairo"
+	CreateOutlookEventTaskParamsTimeZoneCanberra                  CreateOutlookEventTaskParamsTimeZone = "Canberra"
+	CreateOutlookEventTaskParamsTimeZoneCapeVerdeIs               CreateOutlookEventTaskParamsTimeZone = "Cape Verde Is."
+	CreateOutlookEventTaskParamsTimeZoneCaracas                   CreateOutlookEventTaskParamsTimeZone = "Caracas"
+	CreateOutlookEventTaskParamsTimeZoneCasablanca                CreateOutlookEventTaskParamsTimeZone = "Casablanca"
+	CreateOutlookEventTaskParamsTimeZoneCentralAmerica            CreateOutlookEventTaskParamsTimeZone = "Central America"
+	CreateOutlookEventTaskParamsTimeZoneCentralTimeUSCanada       CreateOutlookEventTaskParamsTimeZone = "Central Time (US & Canada)"
+	CreateOutlookEventTaskParamsTimeZoneChathamIs                 CreateOutlookEventTaskParamsTimeZone = "Chatham Is."
+	CreateOutlookEventTaskParamsTimeZoneChennai                   CreateOutlookEventTaskParamsTimeZone = "Chennai"
+	CreateOutlookEventTaskParamsTimeZoneChihuahua                 CreateOutlookEventTaskParamsTimeZone = "Chihuahua"
+	CreateOutlookEventTaskParamsTimeZoneChongqing                 CreateOutlookEventTaskParamsTimeZone = "Chongqing"
+	CreateOutlookEventTaskParamsTimeZoneCopenhagen                CreateOutlookEventTaskParamsTimeZone = "Copenhagen"
+	CreateOutlookEventTaskParamsTimeZoneDarwin                    CreateOutlookEventTaskParamsTimeZone = "Darwin"
+	CreateOutlookEventTaskParamsTimeZoneDhaka                     CreateOutlookEventTaskParamsTimeZone = "Dhaka"
+	CreateOutlookEventTaskParamsTimeZoneDublin                    CreateOutlookEventTaskParamsTimeZone = "Dublin"
+	CreateOutlookEventTaskParamsTimeZoneEasternTimeUSCanada       CreateOutlookEventTaskParamsTimeZone = "Eastern Time (US & Canada)"
+	CreateOutlookEventTaskParamsTimeZoneEdinburgh                 CreateOutlookEventTaskParamsTimeZone = "Edinburgh"
+	CreateOutlookEventTaskParamsTimeZoneEkaterinburg              CreateOutlookEventTaskParamsTimeZone = "Ekaterinburg"
+	CreateOutlookEventTaskParamsTimeZoneFiji                      CreateOutlookEventTaskParamsTimeZone = "Fiji"
+	CreateOutlookEventTaskParamsTimeZoneGeorgetown                CreateOutlookEventTaskParamsTimeZone = "Georgetown"
+	CreateOutlookEventTaskParamsTimeZoneGreenland                 CreateOutlookEventTaskParamsTimeZone = "Greenland"
+	CreateOutlookEventTaskParamsTimeZoneGuadalajara               CreateOutlookEventTaskParamsTimeZone = "Guadalajara"
+	CreateOutlookEventTaskParamsTimeZoneGuam                      CreateOutlookEventTaskParamsTimeZone = "Guam"
+	CreateOutlookEventTaskParamsTimeZoneHanoi                     CreateOutlookEventTaskParamsTimeZone = "Hanoi"
+	CreateOutlookEventTaskParamsTimeZoneHarare                    CreateOutlookEventTaskParamsTimeZone = "Harare"
+	CreateOutlookEventTaskParamsTimeZoneHawaii                    CreateOutlookEventTaskParamsTimeZone = "Hawaii"
+	CreateOutlookEventTaskParamsTimeZoneHelsinki                  CreateOutlookEventTaskParamsTimeZone = "Helsinki"
+	CreateOutlookEventTaskParamsTimeZoneHobart                    CreateOutlookEventTaskParamsTimeZone = "Hobart"
+	CreateOutlookEventTaskParamsTimeZoneHongKong                  CreateOutlookEventTaskParamsTimeZone = "Hong Kong"
+	CreateOutlookEventTaskParamsTimeZoneIndianaEast               CreateOutlookEventTaskParamsTimeZone = "Indiana (East)"
+	CreateOutlookEventTaskParamsTimeZoneInternationalDateLineWest CreateOutlookEventTaskParamsTimeZone = "International Date Line West"
+	CreateOutlookEventTaskParamsTimeZoneIrkutsk                   CreateOutlookEventTaskParamsTimeZone = "Irkutsk"
+	CreateOutlookEventTaskParamsTimeZoneIslamabad                 CreateOutlookEventTaskParamsTimeZone = "Islamabad"
+	CreateOutlookEventTaskParamsTimeZoneIstanbul                  CreateOutlookEventTaskParamsTimeZone = "Istanbul"
+	CreateOutlookEventTaskParamsTimeZoneJakarta                   CreateOutlookEventTaskParamsTimeZone = "Jakarta"
+	CreateOutlookEventTaskParamsTimeZoneJerusalem                 CreateOutlookEventTaskParamsTimeZone = "Jerusalem"
+	CreateOutlookEventTaskParamsTimeZoneKabul                     CreateOutlookEventTaskParamsTimeZone = "Kabul"
+	CreateOutlookEventTaskParamsTimeZoneKaliningrad               CreateOutlookEventTaskParamsTimeZone = "Kaliningrad"
+	CreateOutlookEventTaskParamsTimeZoneKamchatka                 CreateOutlookEventTaskParamsTimeZone = "Kamchatka"
+	CreateOutlookEventTaskParamsTimeZoneKarachi                   CreateOutlookEventTaskParamsTimeZone = "Karachi"
+	CreateOutlookEventTaskParamsTimeZoneKathmandu                 CreateOutlookEventTaskParamsTimeZone = "Kathmandu"
+	CreateOutlookEventTaskParamsTimeZoneKolkata                   CreateOutlookEventTaskParamsTimeZone = "Kolkata"
+	CreateOutlookEventTaskParamsTimeZoneKrasnoyarsk               CreateOutlookEventTaskParamsTimeZone = "Krasnoyarsk"
+	CreateOutlookEventTaskParamsTimeZoneKualaLumpur               CreateOutlookEventTaskParamsTimeZone = "Kuala Lumpur"
+	CreateOutlookEventTaskParamsTimeZoneKuwait                    CreateOutlookEventTaskParamsTimeZone = "Kuwait"
+	CreateOutlookEventTaskParamsTimeZoneKyiv                      CreateOutlookEventTaskParamsTimeZone = "Kyiv"
+	CreateOutlookEventTaskParamsTimeZoneLaPaz                     CreateOutlookEventTaskParamsTimeZone = "La Paz"
+	CreateOutlookEventTaskParamsTimeZoneLima                      CreateOutlookEventTaskParamsTimeZone = "Lima"
+	CreateOutlookEventTaskParamsTimeZoneLisbon                    CreateOutlookEventTaskParamsTimeZone = "Lisbon"
+	CreateOutlookEventTaskParamsTimeZoneLjubljana                 CreateOutlookEventTaskParamsTimeZone = "Ljubljana"
+	CreateOutlookEventTaskParamsTimeZoneLondon                    CreateOutlookEventTaskParamsTimeZone = "London"
+	CreateOutlookEventTaskParamsTimeZoneMadrid                    CreateOutlookEventTaskParamsTimeZone = "Madrid"
+	CreateOutlookEventTaskParamsTimeZoneMagadan                   CreateOutlookEventTaskParamsTimeZone = "Magadan"
+	CreateOutlookEventTaskParamsTimeZoneMarshallIs                CreateOutlookEventTaskParamsTimeZone = "Marshall Is."
+	CreateOutlookEventTaskParamsTimeZoneMazatlan                  CreateOutlookEventTaskParamsTimeZone = "Mazatlan"
+	CreateOutlookEventTaskParamsTimeZoneMelbourne                 CreateOutlookEventTaskParamsTimeZone = "Melbourne"
+	CreateOutlookEventTaskParamsTimeZoneMexicoCity                CreateOutlookEventTaskParamsTimeZone = "Mexico City"
+	CreateOutlookEventTaskParamsTimeZoneMidAtlantic               CreateOutlookEventTaskParamsTimeZone = "Mid-Atlantic"
+	CreateOutlookEventTaskParamsTimeZoneMidwayIsland              CreateOutlookEventTaskParamsTimeZone = "Midway Island"
+	CreateOutlookEventTaskParamsTimeZoneMinsk                     CreateOutlookEventTaskParamsTimeZone = "Minsk"
+	CreateOutlookEventTaskParamsTimeZoneMonrovia                  CreateOutlookEventTaskParamsTimeZone = "Monrovia"
+	CreateOutlookEventTaskParamsTimeZoneMonterrey                 CreateOutlookEventTaskParamsTimeZone = "Monterrey"
+	CreateOutlookEventTaskParamsTimeZoneMontevideo                CreateOutlookEventTaskParamsTimeZone = "Montevideo"
+	CreateOutlookEventTaskParamsTimeZoneMoscow                    CreateOutlookEventTaskParamsTimeZone = "Moscow"
+	CreateOutlookEventTaskParamsTimeZoneMountainTimeUSCanada      CreateOutlookEventTaskParamsTimeZone = "Mountain Time (US & Canada)"
+	CreateOutlookEventTaskParamsTimeZoneMumbai                    CreateOutlookEventTaskParamsTimeZone = "Mumbai"
+	CreateOutlookEventTaskParamsTimeZoneMuscat                    CreateOutlookEventTaskParamsTimeZone = "Muscat"
+	CreateOutlookEventTaskParamsTimeZoneNairobi                   CreateOutlookEventTaskParamsTimeZone = "Nairobi"
+	CreateOutlookEventTaskParamsTimeZoneNewCaledonia              CreateOutlookEventTaskParamsTimeZone = "New Caledonia"
+	CreateOutlookEventTaskParamsTimeZoneNewDelhi                  CreateOutlookEventTaskParamsTimeZone = "New Delhi"
+	CreateOutlookEventTaskParamsTimeZoneNewfoundland              CreateOutlookEventTaskParamsTimeZone = "Newfoundland"
+	CreateOutlookEventTaskParamsTimeZoneNovosibirsk               CreateOutlookEventTaskParamsTimeZone = "Novosibirsk"
+	CreateOutlookEventTaskParamsTimeZoneNukualofa                 CreateOutlookEventTaskParamsTimeZone = "Nuku'alofa"
+	CreateOutlookEventTaskParamsTimeZoneOsaka                     CreateOutlookEventTaskParamsTimeZone = "Osaka"
+	CreateOutlookEventTaskParamsTimeZonePacificTimeUSCanada       CreateOutlookEventTaskParamsTimeZone = "Pacific Time (US & Canada)"
+	CreateOutlookEventTaskParamsTimeZoneParis                     CreateOutlookEventTaskParamsTimeZone = "Paris"
+	CreateOutlookEventTaskParamsTimeZonePerth                     CreateOutlookEventTaskParamsTimeZone = "Perth"
+	CreateOutlookEventTaskParamsTimeZonePortMoresby               CreateOutlookEventTaskParamsTimeZone = "Port Moresby"
+	CreateOutlookEventTaskParamsTimeZonePrague                    CreateOutlookEventTaskParamsTimeZone = "Prague"
+	CreateOutlookEventTaskParamsTimeZonePretoria                  CreateOutlookEventTaskParamsTimeZone = "Pretoria"
+	CreateOutlookEventTaskParamsTimeZonePuertoRico                CreateOutlookEventTaskParamsTimeZone = "Puerto Rico"
+	CreateOutlookEventTaskParamsTimeZoneQuito                     CreateOutlookEventTaskParamsTimeZone = "Quito"
+	CreateOutlookEventTaskParamsTimeZoneRangoon                   CreateOutlookEventTaskParamsTimeZone = "Rangoon"
+	CreateOutlookEventTaskParamsTimeZoneRiga                      CreateOutlookEventTaskParamsTimeZone = "Riga"
+	CreateOutlookEventTaskParamsTimeZoneRiyadh                    CreateOutlookEventTaskParamsTimeZone = "Riyadh"
+	CreateOutlookEventTaskParamsTimeZoneRome                      CreateOutlookEventTaskParamsTimeZone = "Rome"
+	CreateOutlookEventTaskParamsTimeZoneSamara                    CreateOutlookEventTaskParamsTimeZone = "Samara"
+	CreateOutlookEventTaskParamsTimeZoneSamoa                     CreateOutlookEventTaskParamsTimeZone = "Samoa"
+	CreateOutlookEventTaskParamsTimeZoneSantiago                  CreateOutlookEventTaskParamsTimeZone = "Santiago"
+	CreateOutlookEventTaskParamsTimeZoneSapporo                   CreateOutlookEventTaskParamsTimeZone = "Sapporo"
+	CreateOutlookEventTaskParamsTimeZoneSarajevo                  CreateOutlookEventTaskParamsTimeZone = "Sarajevo"
+	CreateOutlookEventTaskParamsTimeZoneSaskatchewan              CreateOutlookEventTaskParamsTimeZone = "Saskatchewan"
+	CreateOutlookEventTaskParamsTimeZoneSeoul                     CreateOutlookEventTaskParamsTimeZone = "Seoul"
+	CreateOutlookEventTaskParamsTimeZoneSingapore                 CreateOutlookEventTaskParamsTimeZone = "Singapore"
+	CreateOutlookEventTaskParamsTimeZoneSkopje                    CreateOutlookEventTaskParamsTimeZone = "Skopje"
+	CreateOutlookEventTaskParamsTimeZoneSofia                     CreateOutlookEventTaskParamsTimeZone = "Sofia"
+	CreateOutlookEventTaskParamsTimeZoneSolomonIs                 CreateOutlookEventTaskParamsTimeZone = "Solomon Is."
+	CreateOutlookEventTaskParamsTimeZoneSrednekolymsk             CreateOutlookEventTaskParamsTimeZone = "Srednekolymsk"
+	CreateOutlookEventTaskParamsTimeZoneSriJayawardenepura        CreateOutlookEventTaskParamsTimeZone = "Sri Jayawardenepura"
+	CreateOutlookEventTaskParamsTimeZoneStPetersburg              CreateOutlookEventTaskParamsTimeZone = "St. Petersburg"
+	CreateOutlookEventTaskParamsTimeZoneStockholm                 CreateOutlookEventTaskParamsTimeZone = "Stockholm"
+	CreateOutlookEventTaskParamsTimeZoneSydney                    CreateOutlookEventTaskParamsTimeZone = "Sydney"
+	CreateOutlookEventTaskParamsTimeZoneTaipei                    CreateOutlookEventTaskParamsTimeZone = "Taipei"
+	CreateOutlookEventTaskParamsTimeZoneTallinn                   CreateOutlookEventTaskParamsTimeZone = "Tallinn"
+	CreateOutlookEventTaskParamsTimeZoneTashkent                  CreateOutlookEventTaskParamsTimeZone = "Tashkent"
+	CreateOutlookEventTaskParamsTimeZoneTbilisi                   CreateOutlookEventTaskParamsTimeZone = "Tbilisi"
+	CreateOutlookEventTaskParamsTimeZoneTehran                    CreateOutlookEventTaskParamsTimeZone = "Tehran"
+	CreateOutlookEventTaskParamsTimeZoneTijuana                   CreateOutlookEventTaskParamsTimeZone = "Tijuana"
+	CreateOutlookEventTaskParamsTimeZoneTokelauIs                 CreateOutlookEventTaskParamsTimeZone = "Tokelau Is."
+	CreateOutlookEventTaskParamsTimeZoneTokyo                     CreateOutlookEventTaskParamsTimeZone = "Tokyo"
+	CreateOutlookEventTaskParamsTimeZoneUTC                       CreateOutlookEventTaskParamsTimeZone = "UTC"
+	CreateOutlookEventTaskParamsTimeZoneUlaanbaatar               CreateOutlookEventTaskParamsTimeZone = "Ulaanbaatar"
+	CreateOutlookEventTaskParamsTimeZoneUrumqi                    CreateOutlookEventTaskParamsTimeZone = "Urumqi"
+	CreateOutlookEventTaskParamsTimeZoneVienna                    CreateOutlookEventTaskParamsTimeZone = "Vienna"
+	CreateOutlookEventTaskParamsTimeZoneVilnius                   CreateOutlookEventTaskParamsTimeZone = "Vilnius"
+	CreateOutlookEventTaskParamsTimeZoneVladivostok               CreateOutlookEventTaskParamsTimeZone = "Vladivostok"
+	CreateOutlookEventTaskParamsTimeZoneVolgograd                 CreateOutlookEventTaskParamsTimeZone = "Volgograd"
+	CreateOutlookEventTaskParamsTimeZoneWarsaw                    CreateOutlookEventTaskParamsTimeZone = "Warsaw"
+	CreateOutlookEventTaskParamsTimeZoneWellington                CreateOutlookEventTaskParamsTimeZone = "Wellington"
+	CreateOutlookEventTaskParamsTimeZoneWestCentralAfrica         CreateOutlookEventTaskParamsTimeZone = "West Central Africa"
+	CreateOutlookEventTaskParamsTimeZoneYakutsk                   CreateOutlookEventTaskParamsTimeZone = "Yakutsk"
+	CreateOutlookEventTaskParamsTimeZoneYerevan                   CreateOutlookEventTaskParamsTimeZone = "Yerevan"
+	CreateOutlookEventTaskParamsTimeZoneZagreb                    CreateOutlookEventTaskParamsTimeZone = "Zagreb"
+	CreateOutlookEventTaskParamsTimeZoneZurich                    CreateOutlookEventTaskParamsTimeZone = "Zurich"
+)
+
 // Defines values for CreatePagerdutyStatusUpdateParamsTaskType.
 const (
 	CreatePagerdutyStatusUpdate CreatePagerdutyStatusUpdateParamsTaskType = "create_pagerduty_status_update"
@@ -912,6 +1072,11 @@ const (
 // Defines values for CreateServiceNowIncidentTaskParamsTaskType.
 const (
 	CreateServiceNowIncident CreateServiceNowIncidentTaskParamsTaskType = "create_service_now_incident"
+)
+
+// Defines values for CreateSharepointPageTaskParamsTaskType.
+const (
+	CreateSharepointPage CreateSharepointPageTaskParamsTaskType = "create_sharepoint_page"
 )
 
 // Defines values for CreateShortcutStoryTaskParamsKind.
@@ -1071,16 +1236,16 @@ const (
 	EnvironmentResponseDataTypeEnvironments EnvironmentResponseDataType = "environments"
 )
 
-// Defines values for EscalationPolicyLevelNotificationTargetParamsType.
+// Defines values for EscalationLevelNotificationTargetParamsType.
 const (
-	EscalationPolicyLevelNotificationTargetParamsTypeSchedule     EscalationPolicyLevelNotificationTargetParamsType = "schedule"
-	EscalationPolicyLevelNotificationTargetParamsTypeSlackChannel EscalationPolicyLevelNotificationTargetParamsType = "slack_channel"
-	EscalationPolicyLevelNotificationTargetParamsTypeUser         EscalationPolicyLevelNotificationTargetParamsType = "user"
+	EscalationLevelNotificationTargetParamsTypeSchedule     EscalationLevelNotificationTargetParamsType = "schedule"
+	EscalationLevelNotificationTargetParamsTypeSlackChannel EscalationLevelNotificationTargetParamsType = "slack_channel"
+	EscalationLevelNotificationTargetParamsTypeUser         EscalationLevelNotificationTargetParamsType = "user"
 )
 
-// Defines values for EscalationPolicyLevelResponseDataType.
+// Defines values for EscalationLevelResponseDataType.
 const (
-	EscalationPolicyLevelResponseDataTypeEscalationLevels EscalationPolicyLevelResponseDataType = "escalation_levels"
+	EscalationLevelResponseDataTypeEscalationLevels EscalationLevelResponseDataType = "escalation_levels"
 )
 
 // Defines values for EscalationPolicyListDataType.
@@ -1892,21 +2057,21 @@ const (
 	NewEnvironmentDataTypeEnvironments NewEnvironmentDataType = "environments"
 )
 
+// Defines values for NewEscalationLevelDataAttributesNotificationTargetParamsType.
+const (
+	NewEscalationLevelDataAttributesNotificationTargetParamsTypeSchedule     NewEscalationLevelDataAttributesNotificationTargetParamsType = "schedule"
+	NewEscalationLevelDataAttributesNotificationTargetParamsTypeSlackChannel NewEscalationLevelDataAttributesNotificationTargetParamsType = "slack_channel"
+	NewEscalationLevelDataAttributesNotificationTargetParamsTypeUser         NewEscalationLevelDataAttributesNotificationTargetParamsType = "user"
+)
+
+// Defines values for NewEscalationLevelDataType.
+const (
+	NewEscalationLevelDataTypeEscalationLevels NewEscalationLevelDataType = "escalation_levels"
+)
+
 // Defines values for NewEscalationPolicyDataType.
 const (
 	NewEscalationPolicyDataTypeEscalationPolicies NewEscalationPolicyDataType = "escalation_policies"
-)
-
-// Defines values for NewEscalationPolicyLevelDataAttributesNotificationTargetParamsType.
-const (
-	NewEscalationPolicyLevelDataAttributesNotificationTargetParamsTypeSchedule     NewEscalationPolicyLevelDataAttributesNotificationTargetParamsType = "schedule"
-	NewEscalationPolicyLevelDataAttributesNotificationTargetParamsTypeSlackChannel NewEscalationPolicyLevelDataAttributesNotificationTargetParamsType = "slack_channel"
-	NewEscalationPolicyLevelDataAttributesNotificationTargetParamsTypeUser         NewEscalationPolicyLevelDataAttributesNotificationTargetParamsType = "user"
-)
-
-// Defines values for NewEscalationPolicyLevelDataType.
-const (
-	NewEscalationPolicyLevelDataTypeEscalationLevels NewEscalationPolicyLevelDataType = "escalation_levels"
 )
 
 // Defines values for NewFormFieldDataAttributesInputKind.
@@ -2207,6 +2372,11 @@ const (
 	NewIncidentTypeDataTypeIncidentTypes NewIncidentTypeDataType = "incident_types"
 )
 
+// Defines values for NewOverrideShiftDataType.
+const (
+	NewOverrideShiftDataTypeShifts NewOverrideShiftDataType = "shifts"
+)
+
 // Defines values for NewPlaybookDataType.
 const (
 	NewPlaybookDataTypePlaybooks NewPlaybookDataType = "playbooks"
@@ -2430,6 +2600,214 @@ const (
 // Defines values for NewRoleDataType.
 const (
 	NewRoleDataTypeRoles NewRoleDataType = "roles"
+)
+
+// Defines values for NewScheduleDataType.
+const (
+	NewScheduleDataTypeSchedules NewScheduleDataType = "schedules"
+)
+
+// Defines values for NewScheduleRotationDataAttributesActiveDays.
+const (
+	NewScheduleRotationDataAttributesActiveDaysF NewScheduleRotationDataAttributesActiveDays = "F"
+	NewScheduleRotationDataAttributesActiveDaysM NewScheduleRotationDataAttributesActiveDays = "M"
+	NewScheduleRotationDataAttributesActiveDaysR NewScheduleRotationDataAttributesActiveDays = "R"
+	NewScheduleRotationDataAttributesActiveDaysS NewScheduleRotationDataAttributesActiveDays = "S"
+	NewScheduleRotationDataAttributesActiveDaysT NewScheduleRotationDataAttributesActiveDays = "T"
+	NewScheduleRotationDataAttributesActiveDaysU NewScheduleRotationDataAttributesActiveDays = "U"
+	NewScheduleRotationDataAttributesActiveDaysW NewScheduleRotationDataAttributesActiveDays = "W"
+)
+
+// Defines values for NewScheduleRotationDataAttributesScheduleRotationableAttributesHandoffDay.
+const (
+	NewScheduleRotationDataAttributesScheduleRotationableAttributesHandoffDayFirstDayOfMonth NewScheduleRotationDataAttributesScheduleRotationableAttributesHandoffDay = "first_day_of_month"
+	NewScheduleRotationDataAttributesScheduleRotationableAttributesHandoffDayLastDayOfMonth  NewScheduleRotationDataAttributesScheduleRotationableAttributesHandoffDay = "last_day_of_month"
+)
+
+// Defines values for NewScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit.
+const (
+	NewScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnitDays  NewScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit = "days"
+	NewScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnitHours NewScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit = "hours"
+	NewScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnitWeeks NewScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit = "weeks"
+)
+
+// Defines values for NewScheduleRotationDataAttributesScheduleRotationableType.
+const (
+	NewScheduleRotationDataAttributesScheduleRotationableTypeScheduleBiweeklyRotation NewScheduleRotationDataAttributesScheduleRotationableType = "ScheduleBiweeklyRotation"
+	NewScheduleRotationDataAttributesScheduleRotationableTypeScheduleCustomRotation   NewScheduleRotationDataAttributesScheduleRotationableType = "ScheduleCustomRotation"
+	NewScheduleRotationDataAttributesScheduleRotationableTypeScheduleDailyRotation    NewScheduleRotationDataAttributesScheduleRotationableType = "ScheduleDailyRotation"
+	NewScheduleRotationDataAttributesScheduleRotationableTypeScheduleMonthlyRotation  NewScheduleRotationDataAttributesScheduleRotationableType = "ScheduleMonthlyRotation"
+	NewScheduleRotationDataAttributesScheduleRotationableTypeScheduleWeeklyRotation   NewScheduleRotationDataAttributesScheduleRotationableType = "ScheduleWeeklyRotation"
+)
+
+// Defines values for NewScheduleRotationDataAttributesTimeZone.
+const (
+	NewScheduleRotationDataAttributesTimeZoneAbuDhabi                  NewScheduleRotationDataAttributesTimeZone = "Abu Dhabi"
+	NewScheduleRotationDataAttributesTimeZoneAdelaide                  NewScheduleRotationDataAttributesTimeZone = "Adelaide"
+	NewScheduleRotationDataAttributesTimeZoneAlaska                    NewScheduleRotationDataAttributesTimeZone = "Alaska"
+	NewScheduleRotationDataAttributesTimeZoneAlmaty                    NewScheduleRotationDataAttributesTimeZone = "Almaty"
+	NewScheduleRotationDataAttributesTimeZoneAmericanSamoa             NewScheduleRotationDataAttributesTimeZone = "American Samoa"
+	NewScheduleRotationDataAttributesTimeZoneAmsterdam                 NewScheduleRotationDataAttributesTimeZone = "Amsterdam"
+	NewScheduleRotationDataAttributesTimeZoneArizona                   NewScheduleRotationDataAttributesTimeZone = "Arizona"
+	NewScheduleRotationDataAttributesTimeZoneAstana                    NewScheduleRotationDataAttributesTimeZone = "Astana"
+	NewScheduleRotationDataAttributesTimeZoneAthens                    NewScheduleRotationDataAttributesTimeZone = "Athens"
+	NewScheduleRotationDataAttributesTimeZoneAtlanticTimeCanada        NewScheduleRotationDataAttributesTimeZone = "Atlantic Time (Canada)"
+	NewScheduleRotationDataAttributesTimeZoneAuckland                  NewScheduleRotationDataAttributesTimeZone = "Auckland"
+	NewScheduleRotationDataAttributesTimeZoneAzores                    NewScheduleRotationDataAttributesTimeZone = "Azores"
+	NewScheduleRotationDataAttributesTimeZoneBaghdad                   NewScheduleRotationDataAttributesTimeZone = "Baghdad"
+	NewScheduleRotationDataAttributesTimeZoneBaku                      NewScheduleRotationDataAttributesTimeZone = "Baku"
+	NewScheduleRotationDataAttributesTimeZoneBangkok                   NewScheduleRotationDataAttributesTimeZone = "Bangkok"
+	NewScheduleRotationDataAttributesTimeZoneBeijing                   NewScheduleRotationDataAttributesTimeZone = "Beijing"
+	NewScheduleRotationDataAttributesTimeZoneBelgrade                  NewScheduleRotationDataAttributesTimeZone = "Belgrade"
+	NewScheduleRotationDataAttributesTimeZoneBerlin                    NewScheduleRotationDataAttributesTimeZone = "Berlin"
+	NewScheduleRotationDataAttributesTimeZoneBern                      NewScheduleRotationDataAttributesTimeZone = "Bern"
+	NewScheduleRotationDataAttributesTimeZoneBogota                    NewScheduleRotationDataAttributesTimeZone = "Bogota"
+	NewScheduleRotationDataAttributesTimeZoneBrasilia                  NewScheduleRotationDataAttributesTimeZone = "Brasilia"
+	NewScheduleRotationDataAttributesTimeZoneBratislava                NewScheduleRotationDataAttributesTimeZone = "Bratislava"
+	NewScheduleRotationDataAttributesTimeZoneBrisbane                  NewScheduleRotationDataAttributesTimeZone = "Brisbane"
+	NewScheduleRotationDataAttributesTimeZoneBrussels                  NewScheduleRotationDataAttributesTimeZone = "Brussels"
+	NewScheduleRotationDataAttributesTimeZoneBucharest                 NewScheduleRotationDataAttributesTimeZone = "Bucharest"
+	NewScheduleRotationDataAttributesTimeZoneBudapest                  NewScheduleRotationDataAttributesTimeZone = "Budapest"
+	NewScheduleRotationDataAttributesTimeZoneBuenosAires               NewScheduleRotationDataAttributesTimeZone = "Buenos Aires"
+	NewScheduleRotationDataAttributesTimeZoneCairo                     NewScheduleRotationDataAttributesTimeZone = "Cairo"
+	NewScheduleRotationDataAttributesTimeZoneCanberra                  NewScheduleRotationDataAttributesTimeZone = "Canberra"
+	NewScheduleRotationDataAttributesTimeZoneCapeVerdeIs               NewScheduleRotationDataAttributesTimeZone = "Cape Verde Is."
+	NewScheduleRotationDataAttributesTimeZoneCaracas                   NewScheduleRotationDataAttributesTimeZone = "Caracas"
+	NewScheduleRotationDataAttributesTimeZoneCasablanca                NewScheduleRotationDataAttributesTimeZone = "Casablanca"
+	NewScheduleRotationDataAttributesTimeZoneCentralAmerica            NewScheduleRotationDataAttributesTimeZone = "Central America"
+	NewScheduleRotationDataAttributesTimeZoneCentralTimeUSCanada       NewScheduleRotationDataAttributesTimeZone = "Central Time (US & Canada)"
+	NewScheduleRotationDataAttributesTimeZoneChathamIs                 NewScheduleRotationDataAttributesTimeZone = "Chatham Is."
+	NewScheduleRotationDataAttributesTimeZoneChennai                   NewScheduleRotationDataAttributesTimeZone = "Chennai"
+	NewScheduleRotationDataAttributesTimeZoneChihuahua                 NewScheduleRotationDataAttributesTimeZone = "Chihuahua"
+	NewScheduleRotationDataAttributesTimeZoneChongqing                 NewScheduleRotationDataAttributesTimeZone = "Chongqing"
+	NewScheduleRotationDataAttributesTimeZoneCopenhagen                NewScheduleRotationDataAttributesTimeZone = "Copenhagen"
+	NewScheduleRotationDataAttributesTimeZoneDarwin                    NewScheduleRotationDataAttributesTimeZone = "Darwin"
+	NewScheduleRotationDataAttributesTimeZoneDhaka                     NewScheduleRotationDataAttributesTimeZone = "Dhaka"
+	NewScheduleRotationDataAttributesTimeZoneDublin                    NewScheduleRotationDataAttributesTimeZone = "Dublin"
+	NewScheduleRotationDataAttributesTimeZoneEasternTimeUSCanada       NewScheduleRotationDataAttributesTimeZone = "Eastern Time (US & Canada)"
+	NewScheduleRotationDataAttributesTimeZoneEdinburgh                 NewScheduleRotationDataAttributesTimeZone = "Edinburgh"
+	NewScheduleRotationDataAttributesTimeZoneEkaterinburg              NewScheduleRotationDataAttributesTimeZone = "Ekaterinburg"
+	NewScheduleRotationDataAttributesTimeZoneFiji                      NewScheduleRotationDataAttributesTimeZone = "Fiji"
+	NewScheduleRotationDataAttributesTimeZoneGeorgetown                NewScheduleRotationDataAttributesTimeZone = "Georgetown"
+	NewScheduleRotationDataAttributesTimeZoneGreenland                 NewScheduleRotationDataAttributesTimeZone = "Greenland"
+	NewScheduleRotationDataAttributesTimeZoneGuadalajara               NewScheduleRotationDataAttributesTimeZone = "Guadalajara"
+	NewScheduleRotationDataAttributesTimeZoneGuam                      NewScheduleRotationDataAttributesTimeZone = "Guam"
+	NewScheduleRotationDataAttributesTimeZoneHanoi                     NewScheduleRotationDataAttributesTimeZone = "Hanoi"
+	NewScheduleRotationDataAttributesTimeZoneHarare                    NewScheduleRotationDataAttributesTimeZone = "Harare"
+	NewScheduleRotationDataAttributesTimeZoneHawaii                    NewScheduleRotationDataAttributesTimeZone = "Hawaii"
+	NewScheduleRotationDataAttributesTimeZoneHelsinki                  NewScheduleRotationDataAttributesTimeZone = "Helsinki"
+	NewScheduleRotationDataAttributesTimeZoneHobart                    NewScheduleRotationDataAttributesTimeZone = "Hobart"
+	NewScheduleRotationDataAttributesTimeZoneHongKong                  NewScheduleRotationDataAttributesTimeZone = "Hong Kong"
+	NewScheduleRotationDataAttributesTimeZoneIndianaEast               NewScheduleRotationDataAttributesTimeZone = "Indiana (East)"
+	NewScheduleRotationDataAttributesTimeZoneInternationalDateLineWest NewScheduleRotationDataAttributesTimeZone = "International Date Line West"
+	NewScheduleRotationDataAttributesTimeZoneIrkutsk                   NewScheduleRotationDataAttributesTimeZone = "Irkutsk"
+	NewScheduleRotationDataAttributesTimeZoneIslamabad                 NewScheduleRotationDataAttributesTimeZone = "Islamabad"
+	NewScheduleRotationDataAttributesTimeZoneIstanbul                  NewScheduleRotationDataAttributesTimeZone = "Istanbul"
+	NewScheduleRotationDataAttributesTimeZoneJakarta                   NewScheduleRotationDataAttributesTimeZone = "Jakarta"
+	NewScheduleRotationDataAttributesTimeZoneJerusalem                 NewScheduleRotationDataAttributesTimeZone = "Jerusalem"
+	NewScheduleRotationDataAttributesTimeZoneKabul                     NewScheduleRotationDataAttributesTimeZone = "Kabul"
+	NewScheduleRotationDataAttributesTimeZoneKaliningrad               NewScheduleRotationDataAttributesTimeZone = "Kaliningrad"
+	NewScheduleRotationDataAttributesTimeZoneKamchatka                 NewScheduleRotationDataAttributesTimeZone = "Kamchatka"
+	NewScheduleRotationDataAttributesTimeZoneKarachi                   NewScheduleRotationDataAttributesTimeZone = "Karachi"
+	NewScheduleRotationDataAttributesTimeZoneKathmandu                 NewScheduleRotationDataAttributesTimeZone = "Kathmandu"
+	NewScheduleRotationDataAttributesTimeZoneKolkata                   NewScheduleRotationDataAttributesTimeZone = "Kolkata"
+	NewScheduleRotationDataAttributesTimeZoneKrasnoyarsk               NewScheduleRotationDataAttributesTimeZone = "Krasnoyarsk"
+	NewScheduleRotationDataAttributesTimeZoneKualaLumpur               NewScheduleRotationDataAttributesTimeZone = "Kuala Lumpur"
+	NewScheduleRotationDataAttributesTimeZoneKuwait                    NewScheduleRotationDataAttributesTimeZone = "Kuwait"
+	NewScheduleRotationDataAttributesTimeZoneKyiv                      NewScheduleRotationDataAttributesTimeZone = "Kyiv"
+	NewScheduleRotationDataAttributesTimeZoneLaPaz                     NewScheduleRotationDataAttributesTimeZone = "La Paz"
+	NewScheduleRotationDataAttributesTimeZoneLima                      NewScheduleRotationDataAttributesTimeZone = "Lima"
+	NewScheduleRotationDataAttributesTimeZoneLisbon                    NewScheduleRotationDataAttributesTimeZone = "Lisbon"
+	NewScheduleRotationDataAttributesTimeZoneLjubljana                 NewScheduleRotationDataAttributesTimeZone = "Ljubljana"
+	NewScheduleRotationDataAttributesTimeZoneLondon                    NewScheduleRotationDataAttributesTimeZone = "London"
+	NewScheduleRotationDataAttributesTimeZoneMadrid                    NewScheduleRotationDataAttributesTimeZone = "Madrid"
+	NewScheduleRotationDataAttributesTimeZoneMagadan                   NewScheduleRotationDataAttributesTimeZone = "Magadan"
+	NewScheduleRotationDataAttributesTimeZoneMarshallIs                NewScheduleRotationDataAttributesTimeZone = "Marshall Is."
+	NewScheduleRotationDataAttributesTimeZoneMazatlan                  NewScheduleRotationDataAttributesTimeZone = "Mazatlan"
+	NewScheduleRotationDataAttributesTimeZoneMelbourne                 NewScheduleRotationDataAttributesTimeZone = "Melbourne"
+	NewScheduleRotationDataAttributesTimeZoneMexicoCity                NewScheduleRotationDataAttributesTimeZone = "Mexico City"
+	NewScheduleRotationDataAttributesTimeZoneMidAtlantic               NewScheduleRotationDataAttributesTimeZone = "Mid-Atlantic"
+	NewScheduleRotationDataAttributesTimeZoneMidwayIsland              NewScheduleRotationDataAttributesTimeZone = "Midway Island"
+	NewScheduleRotationDataAttributesTimeZoneMinsk                     NewScheduleRotationDataAttributesTimeZone = "Minsk"
+	NewScheduleRotationDataAttributesTimeZoneMonrovia                  NewScheduleRotationDataAttributesTimeZone = "Monrovia"
+	NewScheduleRotationDataAttributesTimeZoneMonterrey                 NewScheduleRotationDataAttributesTimeZone = "Monterrey"
+	NewScheduleRotationDataAttributesTimeZoneMontevideo                NewScheduleRotationDataAttributesTimeZone = "Montevideo"
+	NewScheduleRotationDataAttributesTimeZoneMoscow                    NewScheduleRotationDataAttributesTimeZone = "Moscow"
+	NewScheduleRotationDataAttributesTimeZoneMountainTimeUSCanada      NewScheduleRotationDataAttributesTimeZone = "Mountain Time (US & Canada)"
+	NewScheduleRotationDataAttributesTimeZoneMumbai                    NewScheduleRotationDataAttributesTimeZone = "Mumbai"
+	NewScheduleRotationDataAttributesTimeZoneMuscat                    NewScheduleRotationDataAttributesTimeZone = "Muscat"
+	NewScheduleRotationDataAttributesTimeZoneNairobi                   NewScheduleRotationDataAttributesTimeZone = "Nairobi"
+	NewScheduleRotationDataAttributesTimeZoneNewCaledonia              NewScheduleRotationDataAttributesTimeZone = "New Caledonia"
+	NewScheduleRotationDataAttributesTimeZoneNewDelhi                  NewScheduleRotationDataAttributesTimeZone = "New Delhi"
+	NewScheduleRotationDataAttributesTimeZoneNewfoundland              NewScheduleRotationDataAttributesTimeZone = "Newfoundland"
+	NewScheduleRotationDataAttributesTimeZoneNovosibirsk               NewScheduleRotationDataAttributesTimeZone = "Novosibirsk"
+	NewScheduleRotationDataAttributesTimeZoneNukualofa                 NewScheduleRotationDataAttributesTimeZone = "Nuku'alofa"
+	NewScheduleRotationDataAttributesTimeZoneOsaka                     NewScheduleRotationDataAttributesTimeZone = "Osaka"
+	NewScheduleRotationDataAttributesTimeZonePacificTimeUSCanada       NewScheduleRotationDataAttributesTimeZone = "Pacific Time (US & Canada)"
+	NewScheduleRotationDataAttributesTimeZoneParis                     NewScheduleRotationDataAttributesTimeZone = "Paris"
+	NewScheduleRotationDataAttributesTimeZonePerth                     NewScheduleRotationDataAttributesTimeZone = "Perth"
+	NewScheduleRotationDataAttributesTimeZonePortMoresby               NewScheduleRotationDataAttributesTimeZone = "Port Moresby"
+	NewScheduleRotationDataAttributesTimeZonePrague                    NewScheduleRotationDataAttributesTimeZone = "Prague"
+	NewScheduleRotationDataAttributesTimeZonePretoria                  NewScheduleRotationDataAttributesTimeZone = "Pretoria"
+	NewScheduleRotationDataAttributesTimeZonePuertoRico                NewScheduleRotationDataAttributesTimeZone = "Puerto Rico"
+	NewScheduleRotationDataAttributesTimeZoneQuito                     NewScheduleRotationDataAttributesTimeZone = "Quito"
+	NewScheduleRotationDataAttributesTimeZoneRangoon                   NewScheduleRotationDataAttributesTimeZone = "Rangoon"
+	NewScheduleRotationDataAttributesTimeZoneRiga                      NewScheduleRotationDataAttributesTimeZone = "Riga"
+	NewScheduleRotationDataAttributesTimeZoneRiyadh                    NewScheduleRotationDataAttributesTimeZone = "Riyadh"
+	NewScheduleRotationDataAttributesTimeZoneRome                      NewScheduleRotationDataAttributesTimeZone = "Rome"
+	NewScheduleRotationDataAttributesTimeZoneSamara                    NewScheduleRotationDataAttributesTimeZone = "Samara"
+	NewScheduleRotationDataAttributesTimeZoneSamoa                     NewScheduleRotationDataAttributesTimeZone = "Samoa"
+	NewScheduleRotationDataAttributesTimeZoneSantiago                  NewScheduleRotationDataAttributesTimeZone = "Santiago"
+	NewScheduleRotationDataAttributesTimeZoneSapporo                   NewScheduleRotationDataAttributesTimeZone = "Sapporo"
+	NewScheduleRotationDataAttributesTimeZoneSarajevo                  NewScheduleRotationDataAttributesTimeZone = "Sarajevo"
+	NewScheduleRotationDataAttributesTimeZoneSaskatchewan              NewScheduleRotationDataAttributesTimeZone = "Saskatchewan"
+	NewScheduleRotationDataAttributesTimeZoneSeoul                     NewScheduleRotationDataAttributesTimeZone = "Seoul"
+	NewScheduleRotationDataAttributesTimeZoneSingapore                 NewScheduleRotationDataAttributesTimeZone = "Singapore"
+	NewScheduleRotationDataAttributesTimeZoneSkopje                    NewScheduleRotationDataAttributesTimeZone = "Skopje"
+	NewScheduleRotationDataAttributesTimeZoneSofia                     NewScheduleRotationDataAttributesTimeZone = "Sofia"
+	NewScheduleRotationDataAttributesTimeZoneSolomonIs                 NewScheduleRotationDataAttributesTimeZone = "Solomon Is."
+	NewScheduleRotationDataAttributesTimeZoneSrednekolymsk             NewScheduleRotationDataAttributesTimeZone = "Srednekolymsk"
+	NewScheduleRotationDataAttributesTimeZoneSriJayawardenepura        NewScheduleRotationDataAttributesTimeZone = "Sri Jayawardenepura"
+	NewScheduleRotationDataAttributesTimeZoneStPetersburg              NewScheduleRotationDataAttributesTimeZone = "St. Petersburg"
+	NewScheduleRotationDataAttributesTimeZoneStockholm                 NewScheduleRotationDataAttributesTimeZone = "Stockholm"
+	NewScheduleRotationDataAttributesTimeZoneSydney                    NewScheduleRotationDataAttributesTimeZone = "Sydney"
+	NewScheduleRotationDataAttributesTimeZoneTaipei                    NewScheduleRotationDataAttributesTimeZone = "Taipei"
+	NewScheduleRotationDataAttributesTimeZoneTallinn                   NewScheduleRotationDataAttributesTimeZone = "Tallinn"
+	NewScheduleRotationDataAttributesTimeZoneTashkent                  NewScheduleRotationDataAttributesTimeZone = "Tashkent"
+	NewScheduleRotationDataAttributesTimeZoneTbilisi                   NewScheduleRotationDataAttributesTimeZone = "Tbilisi"
+	NewScheduleRotationDataAttributesTimeZoneTehran                    NewScheduleRotationDataAttributesTimeZone = "Tehran"
+	NewScheduleRotationDataAttributesTimeZoneTijuana                   NewScheduleRotationDataAttributesTimeZone = "Tijuana"
+	NewScheduleRotationDataAttributesTimeZoneTokelauIs                 NewScheduleRotationDataAttributesTimeZone = "Tokelau Is."
+	NewScheduleRotationDataAttributesTimeZoneTokyo                     NewScheduleRotationDataAttributesTimeZone = "Tokyo"
+	NewScheduleRotationDataAttributesTimeZoneUTC                       NewScheduleRotationDataAttributesTimeZone = "UTC"
+	NewScheduleRotationDataAttributesTimeZoneUlaanbaatar               NewScheduleRotationDataAttributesTimeZone = "Ulaanbaatar"
+	NewScheduleRotationDataAttributesTimeZoneUrumqi                    NewScheduleRotationDataAttributesTimeZone = "Urumqi"
+	NewScheduleRotationDataAttributesTimeZoneVienna                    NewScheduleRotationDataAttributesTimeZone = "Vienna"
+	NewScheduleRotationDataAttributesTimeZoneVilnius                   NewScheduleRotationDataAttributesTimeZone = "Vilnius"
+	NewScheduleRotationDataAttributesTimeZoneVladivostok               NewScheduleRotationDataAttributesTimeZone = "Vladivostok"
+	NewScheduleRotationDataAttributesTimeZoneVolgograd                 NewScheduleRotationDataAttributesTimeZone = "Volgograd"
+	NewScheduleRotationDataAttributesTimeZoneWarsaw                    NewScheduleRotationDataAttributesTimeZone = "Warsaw"
+	NewScheduleRotationDataAttributesTimeZoneWellington                NewScheduleRotationDataAttributesTimeZone = "Wellington"
+	NewScheduleRotationDataAttributesTimeZoneWestCentralAfrica         NewScheduleRotationDataAttributesTimeZone = "West Central Africa"
+	NewScheduleRotationDataAttributesTimeZoneYakutsk                   NewScheduleRotationDataAttributesTimeZone = "Yakutsk"
+	NewScheduleRotationDataAttributesTimeZoneYerevan                   NewScheduleRotationDataAttributesTimeZone = "Yerevan"
+	NewScheduleRotationDataAttributesTimeZoneZagreb                    NewScheduleRotationDataAttributesTimeZone = "Zagreb"
+	NewScheduleRotationDataAttributesTimeZoneZurich                    NewScheduleRotationDataAttributesTimeZone = "Zurich"
+)
+
+// Defines values for NewScheduleRotationDataType.
+const (
+	NewScheduleRotationDataTypeScheduleRotations NewScheduleRotationDataType = "schedule_rotations"
+)
+
+// Defines values for NewScheduleRotationActiveTimeDataType.
+const (
+	NewScheduleRotationActiveTimeDataTypeScheduleRotationActiveTimes NewScheduleRotationActiveTimeDataType = "schedule_rotation_active_times"
+)
+
+// Defines values for NewScheduleRotationUserDataType.
+const (
+	NewScheduleRotationUserDataTypeScheduleRotationUsers NewScheduleRotationUserDataType = "schedule_rotation_users"
 )
 
 // Defines values for NewSecretDataAttributesKind.
@@ -2767,6 +3145,16 @@ const (
 // Defines values for NewWorkflowTaskDataType.
 const (
 	NewWorkflowTaskDataTypeWorkflowTasks NewWorkflowTaskDataType = "workflow_tasks"
+)
+
+// Defines values for OverrideShiftListDataType.
+const (
+	OverrideShiftListDataTypeShifts OverrideShiftListDataType = "shifts"
+)
+
+// Defines values for OverrideShiftResponseDataType.
+const (
+	OverrideShiftResponseDataTypeShifts OverrideShiftResponseDataType = "shifts"
 )
 
 // Defines values for PageOpsgenieOnCallRespondersTaskParamsPriority.
@@ -3205,6 +3593,234 @@ const (
 	RunCommandHeroku RunCommandHerokuTaskParamsTaskType = "run_command_heroku"
 )
 
+// Defines values for ScheduleListDataType.
+const (
+	ScheduleListDataTypeSchedules ScheduleListDataType = "schedules"
+)
+
+// Defines values for ScheduleResponseDataType.
+const (
+	ScheduleResponseDataTypeSchedules ScheduleResponseDataType = "schedules"
+)
+
+// Defines values for ScheduleRotationActiveDays.
+const (
+	ScheduleRotationActiveDaysF ScheduleRotationActiveDays = "F"
+	ScheduleRotationActiveDaysM ScheduleRotationActiveDays = "M"
+	ScheduleRotationActiveDaysR ScheduleRotationActiveDays = "R"
+	ScheduleRotationActiveDaysS ScheduleRotationActiveDays = "S"
+	ScheduleRotationActiveDaysT ScheduleRotationActiveDays = "T"
+	ScheduleRotationActiveDaysU ScheduleRotationActiveDays = "U"
+	ScheduleRotationActiveDaysW ScheduleRotationActiveDays = "W"
+)
+
+// Defines values for ScheduleRotationScheduleRotationableAttributesHandoffDay.
+const (
+	ScheduleRotationScheduleRotationableAttributesHandoffDayFirstDayOfMonth ScheduleRotationScheduleRotationableAttributesHandoffDay = "first_day_of_month"
+	ScheduleRotationScheduleRotationableAttributesHandoffDayLastDayOfMonth  ScheduleRotationScheduleRotationableAttributesHandoffDay = "last_day_of_month"
+)
+
+// Defines values for ScheduleRotationScheduleRotationableAttributesShiftLengthUnit.
+const (
+	ScheduleRotationScheduleRotationableAttributesShiftLengthUnitDays  ScheduleRotationScheduleRotationableAttributesShiftLengthUnit = "days"
+	ScheduleRotationScheduleRotationableAttributesShiftLengthUnitHours ScheduleRotationScheduleRotationableAttributesShiftLengthUnit = "hours"
+	ScheduleRotationScheduleRotationableAttributesShiftLengthUnitWeeks ScheduleRotationScheduleRotationableAttributesShiftLengthUnit = "weeks"
+)
+
+// Defines values for ScheduleRotationScheduleRotationableType.
+const (
+	ScheduleRotationScheduleRotationableTypeScheduleBiweeklyRotation ScheduleRotationScheduleRotationableType = "ScheduleBiweeklyRotation"
+	ScheduleRotationScheduleRotationableTypeScheduleCustomRotation   ScheduleRotationScheduleRotationableType = "ScheduleCustomRotation"
+	ScheduleRotationScheduleRotationableTypeScheduleDailyRotation    ScheduleRotationScheduleRotationableType = "ScheduleDailyRotation"
+	ScheduleRotationScheduleRotationableTypeScheduleMonthlyRotation  ScheduleRotationScheduleRotationableType = "ScheduleMonthlyRotation"
+	ScheduleRotationScheduleRotationableTypeScheduleWeeklyRotation   ScheduleRotationScheduleRotationableType = "ScheduleWeeklyRotation"
+)
+
+// Defines values for ScheduleRotationTimeZone.
+const (
+	ScheduleRotationTimeZoneAbuDhabi                  ScheduleRotationTimeZone = "Abu Dhabi"
+	ScheduleRotationTimeZoneAdelaide                  ScheduleRotationTimeZone = "Adelaide"
+	ScheduleRotationTimeZoneAlaska                    ScheduleRotationTimeZone = "Alaska"
+	ScheduleRotationTimeZoneAlmaty                    ScheduleRotationTimeZone = "Almaty"
+	ScheduleRotationTimeZoneAmericanSamoa             ScheduleRotationTimeZone = "American Samoa"
+	ScheduleRotationTimeZoneAmsterdam                 ScheduleRotationTimeZone = "Amsterdam"
+	ScheduleRotationTimeZoneArizona                   ScheduleRotationTimeZone = "Arizona"
+	ScheduleRotationTimeZoneAstana                    ScheduleRotationTimeZone = "Astana"
+	ScheduleRotationTimeZoneAthens                    ScheduleRotationTimeZone = "Athens"
+	ScheduleRotationTimeZoneAtlanticTimeCanada        ScheduleRotationTimeZone = "Atlantic Time (Canada)"
+	ScheduleRotationTimeZoneAuckland                  ScheduleRotationTimeZone = "Auckland"
+	ScheduleRotationTimeZoneAzores                    ScheduleRotationTimeZone = "Azores"
+	ScheduleRotationTimeZoneBaghdad                   ScheduleRotationTimeZone = "Baghdad"
+	ScheduleRotationTimeZoneBaku                      ScheduleRotationTimeZone = "Baku"
+	ScheduleRotationTimeZoneBangkok                   ScheduleRotationTimeZone = "Bangkok"
+	ScheduleRotationTimeZoneBeijing                   ScheduleRotationTimeZone = "Beijing"
+	ScheduleRotationTimeZoneBelgrade                  ScheduleRotationTimeZone = "Belgrade"
+	ScheduleRotationTimeZoneBerlin                    ScheduleRotationTimeZone = "Berlin"
+	ScheduleRotationTimeZoneBern                      ScheduleRotationTimeZone = "Bern"
+	ScheduleRotationTimeZoneBogota                    ScheduleRotationTimeZone = "Bogota"
+	ScheduleRotationTimeZoneBrasilia                  ScheduleRotationTimeZone = "Brasilia"
+	ScheduleRotationTimeZoneBratislava                ScheduleRotationTimeZone = "Bratislava"
+	ScheduleRotationTimeZoneBrisbane                  ScheduleRotationTimeZone = "Brisbane"
+	ScheduleRotationTimeZoneBrussels                  ScheduleRotationTimeZone = "Brussels"
+	ScheduleRotationTimeZoneBucharest                 ScheduleRotationTimeZone = "Bucharest"
+	ScheduleRotationTimeZoneBudapest                  ScheduleRotationTimeZone = "Budapest"
+	ScheduleRotationTimeZoneBuenosAires               ScheduleRotationTimeZone = "Buenos Aires"
+	ScheduleRotationTimeZoneCairo                     ScheduleRotationTimeZone = "Cairo"
+	ScheduleRotationTimeZoneCanberra                  ScheduleRotationTimeZone = "Canberra"
+	ScheduleRotationTimeZoneCapeVerdeIs               ScheduleRotationTimeZone = "Cape Verde Is."
+	ScheduleRotationTimeZoneCaracas                   ScheduleRotationTimeZone = "Caracas"
+	ScheduleRotationTimeZoneCasablanca                ScheduleRotationTimeZone = "Casablanca"
+	ScheduleRotationTimeZoneCentralAmerica            ScheduleRotationTimeZone = "Central America"
+	ScheduleRotationTimeZoneCentralTimeUSCanada       ScheduleRotationTimeZone = "Central Time (US & Canada)"
+	ScheduleRotationTimeZoneChathamIs                 ScheduleRotationTimeZone = "Chatham Is."
+	ScheduleRotationTimeZoneChennai                   ScheduleRotationTimeZone = "Chennai"
+	ScheduleRotationTimeZoneChihuahua                 ScheduleRotationTimeZone = "Chihuahua"
+	ScheduleRotationTimeZoneChongqing                 ScheduleRotationTimeZone = "Chongqing"
+	ScheduleRotationTimeZoneCopenhagen                ScheduleRotationTimeZone = "Copenhagen"
+	ScheduleRotationTimeZoneDarwin                    ScheduleRotationTimeZone = "Darwin"
+	ScheduleRotationTimeZoneDhaka                     ScheduleRotationTimeZone = "Dhaka"
+	ScheduleRotationTimeZoneDublin                    ScheduleRotationTimeZone = "Dublin"
+	ScheduleRotationTimeZoneEasternTimeUSCanada       ScheduleRotationTimeZone = "Eastern Time (US & Canada)"
+	ScheduleRotationTimeZoneEdinburgh                 ScheduleRotationTimeZone = "Edinburgh"
+	ScheduleRotationTimeZoneEkaterinburg              ScheduleRotationTimeZone = "Ekaterinburg"
+	ScheduleRotationTimeZoneFiji                      ScheduleRotationTimeZone = "Fiji"
+	ScheduleRotationTimeZoneGeorgetown                ScheduleRotationTimeZone = "Georgetown"
+	ScheduleRotationTimeZoneGreenland                 ScheduleRotationTimeZone = "Greenland"
+	ScheduleRotationTimeZoneGuadalajara               ScheduleRotationTimeZone = "Guadalajara"
+	ScheduleRotationTimeZoneGuam                      ScheduleRotationTimeZone = "Guam"
+	ScheduleRotationTimeZoneHanoi                     ScheduleRotationTimeZone = "Hanoi"
+	ScheduleRotationTimeZoneHarare                    ScheduleRotationTimeZone = "Harare"
+	ScheduleRotationTimeZoneHawaii                    ScheduleRotationTimeZone = "Hawaii"
+	ScheduleRotationTimeZoneHelsinki                  ScheduleRotationTimeZone = "Helsinki"
+	ScheduleRotationTimeZoneHobart                    ScheduleRotationTimeZone = "Hobart"
+	ScheduleRotationTimeZoneHongKong                  ScheduleRotationTimeZone = "Hong Kong"
+	ScheduleRotationTimeZoneIndianaEast               ScheduleRotationTimeZone = "Indiana (East)"
+	ScheduleRotationTimeZoneInternationalDateLineWest ScheduleRotationTimeZone = "International Date Line West"
+	ScheduleRotationTimeZoneIrkutsk                   ScheduleRotationTimeZone = "Irkutsk"
+	ScheduleRotationTimeZoneIslamabad                 ScheduleRotationTimeZone = "Islamabad"
+	ScheduleRotationTimeZoneIstanbul                  ScheduleRotationTimeZone = "Istanbul"
+	ScheduleRotationTimeZoneJakarta                   ScheduleRotationTimeZone = "Jakarta"
+	ScheduleRotationTimeZoneJerusalem                 ScheduleRotationTimeZone = "Jerusalem"
+	ScheduleRotationTimeZoneKabul                     ScheduleRotationTimeZone = "Kabul"
+	ScheduleRotationTimeZoneKaliningrad               ScheduleRotationTimeZone = "Kaliningrad"
+	ScheduleRotationTimeZoneKamchatka                 ScheduleRotationTimeZone = "Kamchatka"
+	ScheduleRotationTimeZoneKarachi                   ScheduleRotationTimeZone = "Karachi"
+	ScheduleRotationTimeZoneKathmandu                 ScheduleRotationTimeZone = "Kathmandu"
+	ScheduleRotationTimeZoneKolkata                   ScheduleRotationTimeZone = "Kolkata"
+	ScheduleRotationTimeZoneKrasnoyarsk               ScheduleRotationTimeZone = "Krasnoyarsk"
+	ScheduleRotationTimeZoneKualaLumpur               ScheduleRotationTimeZone = "Kuala Lumpur"
+	ScheduleRotationTimeZoneKuwait                    ScheduleRotationTimeZone = "Kuwait"
+	ScheduleRotationTimeZoneKyiv                      ScheduleRotationTimeZone = "Kyiv"
+	ScheduleRotationTimeZoneLaPaz                     ScheduleRotationTimeZone = "La Paz"
+	ScheduleRotationTimeZoneLima                      ScheduleRotationTimeZone = "Lima"
+	ScheduleRotationTimeZoneLisbon                    ScheduleRotationTimeZone = "Lisbon"
+	ScheduleRotationTimeZoneLjubljana                 ScheduleRotationTimeZone = "Ljubljana"
+	ScheduleRotationTimeZoneLondon                    ScheduleRotationTimeZone = "London"
+	ScheduleRotationTimeZoneMadrid                    ScheduleRotationTimeZone = "Madrid"
+	ScheduleRotationTimeZoneMagadan                   ScheduleRotationTimeZone = "Magadan"
+	ScheduleRotationTimeZoneMarshallIs                ScheduleRotationTimeZone = "Marshall Is."
+	ScheduleRotationTimeZoneMazatlan                  ScheduleRotationTimeZone = "Mazatlan"
+	ScheduleRotationTimeZoneMelbourne                 ScheduleRotationTimeZone = "Melbourne"
+	ScheduleRotationTimeZoneMexicoCity                ScheduleRotationTimeZone = "Mexico City"
+	ScheduleRotationTimeZoneMidAtlantic               ScheduleRotationTimeZone = "Mid-Atlantic"
+	ScheduleRotationTimeZoneMidwayIsland              ScheduleRotationTimeZone = "Midway Island"
+	ScheduleRotationTimeZoneMinsk                     ScheduleRotationTimeZone = "Minsk"
+	ScheduleRotationTimeZoneMonrovia                  ScheduleRotationTimeZone = "Monrovia"
+	ScheduleRotationTimeZoneMonterrey                 ScheduleRotationTimeZone = "Monterrey"
+	ScheduleRotationTimeZoneMontevideo                ScheduleRotationTimeZone = "Montevideo"
+	ScheduleRotationTimeZoneMoscow                    ScheduleRotationTimeZone = "Moscow"
+	ScheduleRotationTimeZoneMountainTimeUSCanada      ScheduleRotationTimeZone = "Mountain Time (US & Canada)"
+	ScheduleRotationTimeZoneMumbai                    ScheduleRotationTimeZone = "Mumbai"
+	ScheduleRotationTimeZoneMuscat                    ScheduleRotationTimeZone = "Muscat"
+	ScheduleRotationTimeZoneNairobi                   ScheduleRotationTimeZone = "Nairobi"
+	ScheduleRotationTimeZoneNewCaledonia              ScheduleRotationTimeZone = "New Caledonia"
+	ScheduleRotationTimeZoneNewDelhi                  ScheduleRotationTimeZone = "New Delhi"
+	ScheduleRotationTimeZoneNewfoundland              ScheduleRotationTimeZone = "Newfoundland"
+	ScheduleRotationTimeZoneNovosibirsk               ScheduleRotationTimeZone = "Novosibirsk"
+	ScheduleRotationTimeZoneNukualofa                 ScheduleRotationTimeZone = "Nuku'alofa"
+	ScheduleRotationTimeZoneOsaka                     ScheduleRotationTimeZone = "Osaka"
+	ScheduleRotationTimeZonePacificTimeUSCanada       ScheduleRotationTimeZone = "Pacific Time (US & Canada)"
+	ScheduleRotationTimeZoneParis                     ScheduleRotationTimeZone = "Paris"
+	ScheduleRotationTimeZonePerth                     ScheduleRotationTimeZone = "Perth"
+	ScheduleRotationTimeZonePortMoresby               ScheduleRotationTimeZone = "Port Moresby"
+	ScheduleRotationTimeZonePrague                    ScheduleRotationTimeZone = "Prague"
+	ScheduleRotationTimeZonePretoria                  ScheduleRotationTimeZone = "Pretoria"
+	ScheduleRotationTimeZonePuertoRico                ScheduleRotationTimeZone = "Puerto Rico"
+	ScheduleRotationTimeZoneQuito                     ScheduleRotationTimeZone = "Quito"
+	ScheduleRotationTimeZoneRangoon                   ScheduleRotationTimeZone = "Rangoon"
+	ScheduleRotationTimeZoneRiga                      ScheduleRotationTimeZone = "Riga"
+	ScheduleRotationTimeZoneRiyadh                    ScheduleRotationTimeZone = "Riyadh"
+	ScheduleRotationTimeZoneRome                      ScheduleRotationTimeZone = "Rome"
+	ScheduleRotationTimeZoneSamara                    ScheduleRotationTimeZone = "Samara"
+	ScheduleRotationTimeZoneSamoa                     ScheduleRotationTimeZone = "Samoa"
+	ScheduleRotationTimeZoneSantiago                  ScheduleRotationTimeZone = "Santiago"
+	ScheduleRotationTimeZoneSapporo                   ScheduleRotationTimeZone = "Sapporo"
+	ScheduleRotationTimeZoneSarajevo                  ScheduleRotationTimeZone = "Sarajevo"
+	ScheduleRotationTimeZoneSaskatchewan              ScheduleRotationTimeZone = "Saskatchewan"
+	ScheduleRotationTimeZoneSeoul                     ScheduleRotationTimeZone = "Seoul"
+	ScheduleRotationTimeZoneSingapore                 ScheduleRotationTimeZone = "Singapore"
+	ScheduleRotationTimeZoneSkopje                    ScheduleRotationTimeZone = "Skopje"
+	ScheduleRotationTimeZoneSofia                     ScheduleRotationTimeZone = "Sofia"
+	ScheduleRotationTimeZoneSolomonIs                 ScheduleRotationTimeZone = "Solomon Is."
+	ScheduleRotationTimeZoneSrednekolymsk             ScheduleRotationTimeZone = "Srednekolymsk"
+	ScheduleRotationTimeZoneSriJayawardenepura        ScheduleRotationTimeZone = "Sri Jayawardenepura"
+	ScheduleRotationTimeZoneStPetersburg              ScheduleRotationTimeZone = "St. Petersburg"
+	ScheduleRotationTimeZoneStockholm                 ScheduleRotationTimeZone = "Stockholm"
+	ScheduleRotationTimeZoneSydney                    ScheduleRotationTimeZone = "Sydney"
+	ScheduleRotationTimeZoneTaipei                    ScheduleRotationTimeZone = "Taipei"
+	ScheduleRotationTimeZoneTallinn                   ScheduleRotationTimeZone = "Tallinn"
+	ScheduleRotationTimeZoneTashkent                  ScheduleRotationTimeZone = "Tashkent"
+	ScheduleRotationTimeZoneTbilisi                   ScheduleRotationTimeZone = "Tbilisi"
+	ScheduleRotationTimeZoneTehran                    ScheduleRotationTimeZone = "Tehran"
+	ScheduleRotationTimeZoneTijuana                   ScheduleRotationTimeZone = "Tijuana"
+	ScheduleRotationTimeZoneTokelauIs                 ScheduleRotationTimeZone = "Tokelau Is."
+	ScheduleRotationTimeZoneTokyo                     ScheduleRotationTimeZone = "Tokyo"
+	ScheduleRotationTimeZoneUTC                       ScheduleRotationTimeZone = "UTC"
+	ScheduleRotationTimeZoneUlaanbaatar               ScheduleRotationTimeZone = "Ulaanbaatar"
+	ScheduleRotationTimeZoneUrumqi                    ScheduleRotationTimeZone = "Urumqi"
+	ScheduleRotationTimeZoneVienna                    ScheduleRotationTimeZone = "Vienna"
+	ScheduleRotationTimeZoneVilnius                   ScheduleRotationTimeZone = "Vilnius"
+	ScheduleRotationTimeZoneVladivostok               ScheduleRotationTimeZone = "Vladivostok"
+	ScheduleRotationTimeZoneVolgograd                 ScheduleRotationTimeZone = "Volgograd"
+	ScheduleRotationTimeZoneWarsaw                    ScheduleRotationTimeZone = "Warsaw"
+	ScheduleRotationTimeZoneWellington                ScheduleRotationTimeZone = "Wellington"
+	ScheduleRotationTimeZoneWestCentralAfrica         ScheduleRotationTimeZone = "West Central Africa"
+	ScheduleRotationTimeZoneYakutsk                   ScheduleRotationTimeZone = "Yakutsk"
+	ScheduleRotationTimeZoneYerevan                   ScheduleRotationTimeZone = "Yerevan"
+	ScheduleRotationTimeZoneZagreb                    ScheduleRotationTimeZone = "Zagreb"
+	ScheduleRotationTimeZoneZurich                    ScheduleRotationTimeZone = "Zurich"
+)
+
+// Defines values for ScheduleRotationActiveTimeListDataType.
+const (
+	ScheduleRotationActiveTimeListDataTypeScheduleRotationActiveTimes ScheduleRotationActiveTimeListDataType = "schedule_rotation_active_times"
+)
+
+// Defines values for ScheduleRotationActiveTimeResponseDataType.
+const (
+	ScheduleRotationActiveTimeResponseDataTypeScheduleRotationActiveTimes ScheduleRotationActiveTimeResponseDataType = "schedule_rotation_active_times"
+)
+
+// Defines values for ScheduleRotationListDataType.
+const (
+	ScheduleRotationListDataTypeScheduleRotations ScheduleRotationListDataType = "schedule_rotations"
+)
+
+// Defines values for ScheduleRotationResponseDataType.
+const (
+	ScheduleRotationResponseDataTypeScheduleRotations ScheduleRotationResponseDataType = "schedule_rotations"
+)
+
+// Defines values for ScheduleRotationUserListDataType.
+const (
+	ScheduleRotationUserListDataTypeScheduleRotationUsers ScheduleRotationUserListDataType = "schedule_rotation_users"
+)
+
+// Defines values for ScheduleRotationUserResponseDataType.
+const (
+	ScheduleRotationUserResponseDataTypeScheduleRotationUsers ScheduleRotationUserResponseDataType = "schedule_rotation_users"
+)
+
 // Defines values for SecretListDataType.
 const (
 	SecretListDataTypeSecrets SecretListDataType = "secrets"
@@ -3293,6 +3909,11 @@ const (
 // Defines values for SeverityResponseDataType.
 const (
 	SeverityResponseDataTypeSeverities SeverityResponseDataType = "severities"
+)
+
+// Defines values for ShiftOverrideResponseDataType.
+const (
+	ShiftOverrideResponseDataTypeShiftOverride ShiftOverrideResponseDataType = "shift_override"
 )
 
 // Defines values for SimpleTriggerParamsTriggerType.
@@ -3738,21 +4359,21 @@ const (
 	UpdateEnvironmentDataTypeEnvironments UpdateEnvironmentDataType = "environments"
 )
 
+// Defines values for UpdateEscalationLevelDataAttributesNotificationTargetParamsType.
+const (
+	UpdateEscalationLevelDataAttributesNotificationTargetParamsTypeSchedule     UpdateEscalationLevelDataAttributesNotificationTargetParamsType = "schedule"
+	UpdateEscalationLevelDataAttributesNotificationTargetParamsTypeSlackChannel UpdateEscalationLevelDataAttributesNotificationTargetParamsType = "slack_channel"
+	UpdateEscalationLevelDataAttributesNotificationTargetParamsTypeUser         UpdateEscalationLevelDataAttributesNotificationTargetParamsType = "user"
+)
+
+// Defines values for UpdateEscalationLevelDataType.
+const (
+	EscalationLevels UpdateEscalationLevelDataType = "escalation_levels"
+)
+
 // Defines values for UpdateEscalationPolicyDataType.
 const (
 	UpdateEscalationPolicyDataTypeEscalationPolicies UpdateEscalationPolicyDataType = "escalation_policies"
-)
-
-// Defines values for UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsType.
-const (
-	UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsTypeSchedule     UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsType = "schedule"
-	UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsTypeSlackChannel UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsType = "slack_channel"
-	UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsTypeUser         UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsType = "user"
-)
-
-// Defines values for UpdateEscalationPolicyLevelDataType.
-const (
-	EscalationLevels UpdateEscalationPolicyLevelDataType = "escalation_levels"
 )
 
 // Defines values for UpdateFormFieldDataAttributesInputKind.
@@ -4165,6 +4786,11 @@ const (
 	UpdateOpsgenieIncident UpdateOpsgenieIncidentTaskParamsTaskType = "update_opsgenie_incident"
 )
 
+// Defines values for UpdateOverrideShiftDataType.
+const (
+	UpdateOverrideShiftDataTypeShifts UpdateOverrideShiftDataType = "shifts"
+)
+
 // Defines values for UpdatePagerdutyIncidentTaskParamsStatus.
 const (
 	UpdatePagerdutyIncidentTaskParamsStatusAcknowledged UpdatePagerdutyIncidentTaskParamsStatus = "acknowledged"
@@ -4435,6 +5061,214 @@ const (
 // Defines values for UpdateRoleDataType.
 const (
 	UpdateRoleDataTypeRoles UpdateRoleDataType = "roles"
+)
+
+// Defines values for UpdateScheduleDataType.
+const (
+	UpdateScheduleDataTypeSchedules UpdateScheduleDataType = "schedules"
+)
+
+// Defines values for UpdateScheduleRotationDataAttributesActiveDays.
+const (
+	UpdateScheduleRotationDataAttributesActiveDaysF UpdateScheduleRotationDataAttributesActiveDays = "F"
+	UpdateScheduleRotationDataAttributesActiveDaysM UpdateScheduleRotationDataAttributesActiveDays = "M"
+	UpdateScheduleRotationDataAttributesActiveDaysR UpdateScheduleRotationDataAttributesActiveDays = "R"
+	UpdateScheduleRotationDataAttributesActiveDaysS UpdateScheduleRotationDataAttributesActiveDays = "S"
+	UpdateScheduleRotationDataAttributesActiveDaysT UpdateScheduleRotationDataAttributesActiveDays = "T"
+	UpdateScheduleRotationDataAttributesActiveDaysU UpdateScheduleRotationDataAttributesActiveDays = "U"
+	UpdateScheduleRotationDataAttributesActiveDaysW UpdateScheduleRotationDataAttributesActiveDays = "W"
+)
+
+// Defines values for UpdateScheduleRotationDataAttributesScheduleRotationableAttributesHandoffDay.
+const (
+	FirstDayOfMonth UpdateScheduleRotationDataAttributesScheduleRotationableAttributesHandoffDay = "first_day_of_month"
+	LastDayOfMonth  UpdateScheduleRotationDataAttributesScheduleRotationableAttributesHandoffDay = "last_day_of_month"
+)
+
+// Defines values for UpdateScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit.
+const (
+	Days  UpdateScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit = "days"
+	Hours UpdateScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit = "hours"
+	Weeks UpdateScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit = "weeks"
+)
+
+// Defines values for UpdateScheduleRotationDataAttributesScheduleRotationableType.
+const (
+	ScheduleBiweeklyRotation UpdateScheduleRotationDataAttributesScheduleRotationableType = "ScheduleBiweeklyRotation"
+	ScheduleCustomRotation   UpdateScheduleRotationDataAttributesScheduleRotationableType = "ScheduleCustomRotation"
+	ScheduleDailyRotation    UpdateScheduleRotationDataAttributesScheduleRotationableType = "ScheduleDailyRotation"
+	ScheduleMonthlyRotation  UpdateScheduleRotationDataAttributesScheduleRotationableType = "ScheduleMonthlyRotation"
+	ScheduleWeeklyRotation   UpdateScheduleRotationDataAttributesScheduleRotationableType = "ScheduleWeeklyRotation"
+)
+
+// Defines values for UpdateScheduleRotationDataAttributesTimeZone.
+const (
+	UpdateScheduleRotationDataAttributesTimeZoneAbuDhabi                  UpdateScheduleRotationDataAttributesTimeZone = "Abu Dhabi"
+	UpdateScheduleRotationDataAttributesTimeZoneAdelaide                  UpdateScheduleRotationDataAttributesTimeZone = "Adelaide"
+	UpdateScheduleRotationDataAttributesTimeZoneAlaska                    UpdateScheduleRotationDataAttributesTimeZone = "Alaska"
+	UpdateScheduleRotationDataAttributesTimeZoneAlmaty                    UpdateScheduleRotationDataAttributesTimeZone = "Almaty"
+	UpdateScheduleRotationDataAttributesTimeZoneAmericanSamoa             UpdateScheduleRotationDataAttributesTimeZone = "American Samoa"
+	UpdateScheduleRotationDataAttributesTimeZoneAmsterdam                 UpdateScheduleRotationDataAttributesTimeZone = "Amsterdam"
+	UpdateScheduleRotationDataAttributesTimeZoneArizona                   UpdateScheduleRotationDataAttributesTimeZone = "Arizona"
+	UpdateScheduleRotationDataAttributesTimeZoneAstana                    UpdateScheduleRotationDataAttributesTimeZone = "Astana"
+	UpdateScheduleRotationDataAttributesTimeZoneAthens                    UpdateScheduleRotationDataAttributesTimeZone = "Athens"
+	UpdateScheduleRotationDataAttributesTimeZoneAtlanticTimeCanada        UpdateScheduleRotationDataAttributesTimeZone = "Atlantic Time (Canada)"
+	UpdateScheduleRotationDataAttributesTimeZoneAuckland                  UpdateScheduleRotationDataAttributesTimeZone = "Auckland"
+	UpdateScheduleRotationDataAttributesTimeZoneAzores                    UpdateScheduleRotationDataAttributesTimeZone = "Azores"
+	UpdateScheduleRotationDataAttributesTimeZoneBaghdad                   UpdateScheduleRotationDataAttributesTimeZone = "Baghdad"
+	UpdateScheduleRotationDataAttributesTimeZoneBaku                      UpdateScheduleRotationDataAttributesTimeZone = "Baku"
+	UpdateScheduleRotationDataAttributesTimeZoneBangkok                   UpdateScheduleRotationDataAttributesTimeZone = "Bangkok"
+	UpdateScheduleRotationDataAttributesTimeZoneBeijing                   UpdateScheduleRotationDataAttributesTimeZone = "Beijing"
+	UpdateScheduleRotationDataAttributesTimeZoneBelgrade                  UpdateScheduleRotationDataAttributesTimeZone = "Belgrade"
+	UpdateScheduleRotationDataAttributesTimeZoneBerlin                    UpdateScheduleRotationDataAttributesTimeZone = "Berlin"
+	UpdateScheduleRotationDataAttributesTimeZoneBern                      UpdateScheduleRotationDataAttributesTimeZone = "Bern"
+	UpdateScheduleRotationDataAttributesTimeZoneBogota                    UpdateScheduleRotationDataAttributesTimeZone = "Bogota"
+	UpdateScheduleRotationDataAttributesTimeZoneBrasilia                  UpdateScheduleRotationDataAttributesTimeZone = "Brasilia"
+	UpdateScheduleRotationDataAttributesTimeZoneBratislava                UpdateScheduleRotationDataAttributesTimeZone = "Bratislava"
+	UpdateScheduleRotationDataAttributesTimeZoneBrisbane                  UpdateScheduleRotationDataAttributesTimeZone = "Brisbane"
+	UpdateScheduleRotationDataAttributesTimeZoneBrussels                  UpdateScheduleRotationDataAttributesTimeZone = "Brussels"
+	UpdateScheduleRotationDataAttributesTimeZoneBucharest                 UpdateScheduleRotationDataAttributesTimeZone = "Bucharest"
+	UpdateScheduleRotationDataAttributesTimeZoneBudapest                  UpdateScheduleRotationDataAttributesTimeZone = "Budapest"
+	UpdateScheduleRotationDataAttributesTimeZoneBuenosAires               UpdateScheduleRotationDataAttributesTimeZone = "Buenos Aires"
+	UpdateScheduleRotationDataAttributesTimeZoneCairo                     UpdateScheduleRotationDataAttributesTimeZone = "Cairo"
+	UpdateScheduleRotationDataAttributesTimeZoneCanberra                  UpdateScheduleRotationDataAttributesTimeZone = "Canberra"
+	UpdateScheduleRotationDataAttributesTimeZoneCapeVerdeIs               UpdateScheduleRotationDataAttributesTimeZone = "Cape Verde Is."
+	UpdateScheduleRotationDataAttributesTimeZoneCaracas                   UpdateScheduleRotationDataAttributesTimeZone = "Caracas"
+	UpdateScheduleRotationDataAttributesTimeZoneCasablanca                UpdateScheduleRotationDataAttributesTimeZone = "Casablanca"
+	UpdateScheduleRotationDataAttributesTimeZoneCentralAmerica            UpdateScheduleRotationDataAttributesTimeZone = "Central America"
+	UpdateScheduleRotationDataAttributesTimeZoneCentralTimeUSCanada       UpdateScheduleRotationDataAttributesTimeZone = "Central Time (US & Canada)"
+	UpdateScheduleRotationDataAttributesTimeZoneChathamIs                 UpdateScheduleRotationDataAttributesTimeZone = "Chatham Is."
+	UpdateScheduleRotationDataAttributesTimeZoneChennai                   UpdateScheduleRotationDataAttributesTimeZone = "Chennai"
+	UpdateScheduleRotationDataAttributesTimeZoneChihuahua                 UpdateScheduleRotationDataAttributesTimeZone = "Chihuahua"
+	UpdateScheduleRotationDataAttributesTimeZoneChongqing                 UpdateScheduleRotationDataAttributesTimeZone = "Chongqing"
+	UpdateScheduleRotationDataAttributesTimeZoneCopenhagen                UpdateScheduleRotationDataAttributesTimeZone = "Copenhagen"
+	UpdateScheduleRotationDataAttributesTimeZoneDarwin                    UpdateScheduleRotationDataAttributesTimeZone = "Darwin"
+	UpdateScheduleRotationDataAttributesTimeZoneDhaka                     UpdateScheduleRotationDataAttributesTimeZone = "Dhaka"
+	UpdateScheduleRotationDataAttributesTimeZoneDublin                    UpdateScheduleRotationDataAttributesTimeZone = "Dublin"
+	UpdateScheduleRotationDataAttributesTimeZoneEasternTimeUSCanada       UpdateScheduleRotationDataAttributesTimeZone = "Eastern Time (US & Canada)"
+	UpdateScheduleRotationDataAttributesTimeZoneEdinburgh                 UpdateScheduleRotationDataAttributesTimeZone = "Edinburgh"
+	UpdateScheduleRotationDataAttributesTimeZoneEkaterinburg              UpdateScheduleRotationDataAttributesTimeZone = "Ekaterinburg"
+	UpdateScheduleRotationDataAttributesTimeZoneFiji                      UpdateScheduleRotationDataAttributesTimeZone = "Fiji"
+	UpdateScheduleRotationDataAttributesTimeZoneGeorgetown                UpdateScheduleRotationDataAttributesTimeZone = "Georgetown"
+	UpdateScheduleRotationDataAttributesTimeZoneGreenland                 UpdateScheduleRotationDataAttributesTimeZone = "Greenland"
+	UpdateScheduleRotationDataAttributesTimeZoneGuadalajara               UpdateScheduleRotationDataAttributesTimeZone = "Guadalajara"
+	UpdateScheduleRotationDataAttributesTimeZoneGuam                      UpdateScheduleRotationDataAttributesTimeZone = "Guam"
+	UpdateScheduleRotationDataAttributesTimeZoneHanoi                     UpdateScheduleRotationDataAttributesTimeZone = "Hanoi"
+	UpdateScheduleRotationDataAttributesTimeZoneHarare                    UpdateScheduleRotationDataAttributesTimeZone = "Harare"
+	UpdateScheduleRotationDataAttributesTimeZoneHawaii                    UpdateScheduleRotationDataAttributesTimeZone = "Hawaii"
+	UpdateScheduleRotationDataAttributesTimeZoneHelsinki                  UpdateScheduleRotationDataAttributesTimeZone = "Helsinki"
+	UpdateScheduleRotationDataAttributesTimeZoneHobart                    UpdateScheduleRotationDataAttributesTimeZone = "Hobart"
+	UpdateScheduleRotationDataAttributesTimeZoneHongKong                  UpdateScheduleRotationDataAttributesTimeZone = "Hong Kong"
+	UpdateScheduleRotationDataAttributesTimeZoneIndianaEast               UpdateScheduleRotationDataAttributesTimeZone = "Indiana (East)"
+	UpdateScheduleRotationDataAttributesTimeZoneInternationalDateLineWest UpdateScheduleRotationDataAttributesTimeZone = "International Date Line West"
+	UpdateScheduleRotationDataAttributesTimeZoneIrkutsk                   UpdateScheduleRotationDataAttributesTimeZone = "Irkutsk"
+	UpdateScheduleRotationDataAttributesTimeZoneIslamabad                 UpdateScheduleRotationDataAttributesTimeZone = "Islamabad"
+	UpdateScheduleRotationDataAttributesTimeZoneIstanbul                  UpdateScheduleRotationDataAttributesTimeZone = "Istanbul"
+	UpdateScheduleRotationDataAttributesTimeZoneJakarta                   UpdateScheduleRotationDataAttributesTimeZone = "Jakarta"
+	UpdateScheduleRotationDataAttributesTimeZoneJerusalem                 UpdateScheduleRotationDataAttributesTimeZone = "Jerusalem"
+	UpdateScheduleRotationDataAttributesTimeZoneKabul                     UpdateScheduleRotationDataAttributesTimeZone = "Kabul"
+	UpdateScheduleRotationDataAttributesTimeZoneKaliningrad               UpdateScheduleRotationDataAttributesTimeZone = "Kaliningrad"
+	UpdateScheduleRotationDataAttributesTimeZoneKamchatka                 UpdateScheduleRotationDataAttributesTimeZone = "Kamchatka"
+	UpdateScheduleRotationDataAttributesTimeZoneKarachi                   UpdateScheduleRotationDataAttributesTimeZone = "Karachi"
+	UpdateScheduleRotationDataAttributesTimeZoneKathmandu                 UpdateScheduleRotationDataAttributesTimeZone = "Kathmandu"
+	UpdateScheduleRotationDataAttributesTimeZoneKolkata                   UpdateScheduleRotationDataAttributesTimeZone = "Kolkata"
+	UpdateScheduleRotationDataAttributesTimeZoneKrasnoyarsk               UpdateScheduleRotationDataAttributesTimeZone = "Krasnoyarsk"
+	UpdateScheduleRotationDataAttributesTimeZoneKualaLumpur               UpdateScheduleRotationDataAttributesTimeZone = "Kuala Lumpur"
+	UpdateScheduleRotationDataAttributesTimeZoneKuwait                    UpdateScheduleRotationDataAttributesTimeZone = "Kuwait"
+	UpdateScheduleRotationDataAttributesTimeZoneKyiv                      UpdateScheduleRotationDataAttributesTimeZone = "Kyiv"
+	UpdateScheduleRotationDataAttributesTimeZoneLaPaz                     UpdateScheduleRotationDataAttributesTimeZone = "La Paz"
+	UpdateScheduleRotationDataAttributesTimeZoneLima                      UpdateScheduleRotationDataAttributesTimeZone = "Lima"
+	UpdateScheduleRotationDataAttributesTimeZoneLisbon                    UpdateScheduleRotationDataAttributesTimeZone = "Lisbon"
+	UpdateScheduleRotationDataAttributesTimeZoneLjubljana                 UpdateScheduleRotationDataAttributesTimeZone = "Ljubljana"
+	UpdateScheduleRotationDataAttributesTimeZoneLondon                    UpdateScheduleRotationDataAttributesTimeZone = "London"
+	UpdateScheduleRotationDataAttributesTimeZoneMadrid                    UpdateScheduleRotationDataAttributesTimeZone = "Madrid"
+	UpdateScheduleRotationDataAttributesTimeZoneMagadan                   UpdateScheduleRotationDataAttributesTimeZone = "Magadan"
+	UpdateScheduleRotationDataAttributesTimeZoneMarshallIs                UpdateScheduleRotationDataAttributesTimeZone = "Marshall Is."
+	UpdateScheduleRotationDataAttributesTimeZoneMazatlan                  UpdateScheduleRotationDataAttributesTimeZone = "Mazatlan"
+	UpdateScheduleRotationDataAttributesTimeZoneMelbourne                 UpdateScheduleRotationDataAttributesTimeZone = "Melbourne"
+	UpdateScheduleRotationDataAttributesTimeZoneMexicoCity                UpdateScheduleRotationDataAttributesTimeZone = "Mexico City"
+	UpdateScheduleRotationDataAttributesTimeZoneMidAtlantic               UpdateScheduleRotationDataAttributesTimeZone = "Mid-Atlantic"
+	UpdateScheduleRotationDataAttributesTimeZoneMidwayIsland              UpdateScheduleRotationDataAttributesTimeZone = "Midway Island"
+	UpdateScheduleRotationDataAttributesTimeZoneMinsk                     UpdateScheduleRotationDataAttributesTimeZone = "Minsk"
+	UpdateScheduleRotationDataAttributesTimeZoneMonrovia                  UpdateScheduleRotationDataAttributesTimeZone = "Monrovia"
+	UpdateScheduleRotationDataAttributesTimeZoneMonterrey                 UpdateScheduleRotationDataAttributesTimeZone = "Monterrey"
+	UpdateScheduleRotationDataAttributesTimeZoneMontevideo                UpdateScheduleRotationDataAttributesTimeZone = "Montevideo"
+	UpdateScheduleRotationDataAttributesTimeZoneMoscow                    UpdateScheduleRotationDataAttributesTimeZone = "Moscow"
+	UpdateScheduleRotationDataAttributesTimeZoneMountainTimeUSCanada      UpdateScheduleRotationDataAttributesTimeZone = "Mountain Time (US & Canada)"
+	UpdateScheduleRotationDataAttributesTimeZoneMumbai                    UpdateScheduleRotationDataAttributesTimeZone = "Mumbai"
+	UpdateScheduleRotationDataAttributesTimeZoneMuscat                    UpdateScheduleRotationDataAttributesTimeZone = "Muscat"
+	UpdateScheduleRotationDataAttributesTimeZoneNairobi                   UpdateScheduleRotationDataAttributesTimeZone = "Nairobi"
+	UpdateScheduleRotationDataAttributesTimeZoneNewCaledonia              UpdateScheduleRotationDataAttributesTimeZone = "New Caledonia"
+	UpdateScheduleRotationDataAttributesTimeZoneNewDelhi                  UpdateScheduleRotationDataAttributesTimeZone = "New Delhi"
+	UpdateScheduleRotationDataAttributesTimeZoneNewfoundland              UpdateScheduleRotationDataAttributesTimeZone = "Newfoundland"
+	UpdateScheduleRotationDataAttributesTimeZoneNovosibirsk               UpdateScheduleRotationDataAttributesTimeZone = "Novosibirsk"
+	UpdateScheduleRotationDataAttributesTimeZoneNukualofa                 UpdateScheduleRotationDataAttributesTimeZone = "Nuku'alofa"
+	UpdateScheduleRotationDataAttributesTimeZoneOsaka                     UpdateScheduleRotationDataAttributesTimeZone = "Osaka"
+	UpdateScheduleRotationDataAttributesTimeZonePacificTimeUSCanada       UpdateScheduleRotationDataAttributesTimeZone = "Pacific Time (US & Canada)"
+	UpdateScheduleRotationDataAttributesTimeZoneParis                     UpdateScheduleRotationDataAttributesTimeZone = "Paris"
+	UpdateScheduleRotationDataAttributesTimeZonePerth                     UpdateScheduleRotationDataAttributesTimeZone = "Perth"
+	UpdateScheduleRotationDataAttributesTimeZonePortMoresby               UpdateScheduleRotationDataAttributesTimeZone = "Port Moresby"
+	UpdateScheduleRotationDataAttributesTimeZonePrague                    UpdateScheduleRotationDataAttributesTimeZone = "Prague"
+	UpdateScheduleRotationDataAttributesTimeZonePretoria                  UpdateScheduleRotationDataAttributesTimeZone = "Pretoria"
+	UpdateScheduleRotationDataAttributesTimeZonePuertoRico                UpdateScheduleRotationDataAttributesTimeZone = "Puerto Rico"
+	UpdateScheduleRotationDataAttributesTimeZoneQuito                     UpdateScheduleRotationDataAttributesTimeZone = "Quito"
+	UpdateScheduleRotationDataAttributesTimeZoneRangoon                   UpdateScheduleRotationDataAttributesTimeZone = "Rangoon"
+	UpdateScheduleRotationDataAttributesTimeZoneRiga                      UpdateScheduleRotationDataAttributesTimeZone = "Riga"
+	UpdateScheduleRotationDataAttributesTimeZoneRiyadh                    UpdateScheduleRotationDataAttributesTimeZone = "Riyadh"
+	UpdateScheduleRotationDataAttributesTimeZoneRome                      UpdateScheduleRotationDataAttributesTimeZone = "Rome"
+	UpdateScheduleRotationDataAttributesTimeZoneSamara                    UpdateScheduleRotationDataAttributesTimeZone = "Samara"
+	UpdateScheduleRotationDataAttributesTimeZoneSamoa                     UpdateScheduleRotationDataAttributesTimeZone = "Samoa"
+	UpdateScheduleRotationDataAttributesTimeZoneSantiago                  UpdateScheduleRotationDataAttributesTimeZone = "Santiago"
+	UpdateScheduleRotationDataAttributesTimeZoneSapporo                   UpdateScheduleRotationDataAttributesTimeZone = "Sapporo"
+	UpdateScheduleRotationDataAttributesTimeZoneSarajevo                  UpdateScheduleRotationDataAttributesTimeZone = "Sarajevo"
+	UpdateScheduleRotationDataAttributesTimeZoneSaskatchewan              UpdateScheduleRotationDataAttributesTimeZone = "Saskatchewan"
+	UpdateScheduleRotationDataAttributesTimeZoneSeoul                     UpdateScheduleRotationDataAttributesTimeZone = "Seoul"
+	UpdateScheduleRotationDataAttributesTimeZoneSingapore                 UpdateScheduleRotationDataAttributesTimeZone = "Singapore"
+	UpdateScheduleRotationDataAttributesTimeZoneSkopje                    UpdateScheduleRotationDataAttributesTimeZone = "Skopje"
+	UpdateScheduleRotationDataAttributesTimeZoneSofia                     UpdateScheduleRotationDataAttributesTimeZone = "Sofia"
+	UpdateScheduleRotationDataAttributesTimeZoneSolomonIs                 UpdateScheduleRotationDataAttributesTimeZone = "Solomon Is."
+	UpdateScheduleRotationDataAttributesTimeZoneSrednekolymsk             UpdateScheduleRotationDataAttributesTimeZone = "Srednekolymsk"
+	UpdateScheduleRotationDataAttributesTimeZoneSriJayawardenepura        UpdateScheduleRotationDataAttributesTimeZone = "Sri Jayawardenepura"
+	UpdateScheduleRotationDataAttributesTimeZoneStPetersburg              UpdateScheduleRotationDataAttributesTimeZone = "St. Petersburg"
+	UpdateScheduleRotationDataAttributesTimeZoneStockholm                 UpdateScheduleRotationDataAttributesTimeZone = "Stockholm"
+	UpdateScheduleRotationDataAttributesTimeZoneSydney                    UpdateScheduleRotationDataAttributesTimeZone = "Sydney"
+	UpdateScheduleRotationDataAttributesTimeZoneTaipei                    UpdateScheduleRotationDataAttributesTimeZone = "Taipei"
+	UpdateScheduleRotationDataAttributesTimeZoneTallinn                   UpdateScheduleRotationDataAttributesTimeZone = "Tallinn"
+	UpdateScheduleRotationDataAttributesTimeZoneTashkent                  UpdateScheduleRotationDataAttributesTimeZone = "Tashkent"
+	UpdateScheduleRotationDataAttributesTimeZoneTbilisi                   UpdateScheduleRotationDataAttributesTimeZone = "Tbilisi"
+	UpdateScheduleRotationDataAttributesTimeZoneTehran                    UpdateScheduleRotationDataAttributesTimeZone = "Tehran"
+	UpdateScheduleRotationDataAttributesTimeZoneTijuana                   UpdateScheduleRotationDataAttributesTimeZone = "Tijuana"
+	UpdateScheduleRotationDataAttributesTimeZoneTokelauIs                 UpdateScheduleRotationDataAttributesTimeZone = "Tokelau Is."
+	UpdateScheduleRotationDataAttributesTimeZoneTokyo                     UpdateScheduleRotationDataAttributesTimeZone = "Tokyo"
+	UpdateScheduleRotationDataAttributesTimeZoneUTC                       UpdateScheduleRotationDataAttributesTimeZone = "UTC"
+	UpdateScheduleRotationDataAttributesTimeZoneUlaanbaatar               UpdateScheduleRotationDataAttributesTimeZone = "Ulaanbaatar"
+	UpdateScheduleRotationDataAttributesTimeZoneUrumqi                    UpdateScheduleRotationDataAttributesTimeZone = "Urumqi"
+	UpdateScheduleRotationDataAttributesTimeZoneVienna                    UpdateScheduleRotationDataAttributesTimeZone = "Vienna"
+	UpdateScheduleRotationDataAttributesTimeZoneVilnius                   UpdateScheduleRotationDataAttributesTimeZone = "Vilnius"
+	UpdateScheduleRotationDataAttributesTimeZoneVladivostok               UpdateScheduleRotationDataAttributesTimeZone = "Vladivostok"
+	UpdateScheduleRotationDataAttributesTimeZoneVolgograd                 UpdateScheduleRotationDataAttributesTimeZone = "Volgograd"
+	UpdateScheduleRotationDataAttributesTimeZoneWarsaw                    UpdateScheduleRotationDataAttributesTimeZone = "Warsaw"
+	UpdateScheduleRotationDataAttributesTimeZoneWellington                UpdateScheduleRotationDataAttributesTimeZone = "Wellington"
+	UpdateScheduleRotationDataAttributesTimeZoneWestCentralAfrica         UpdateScheduleRotationDataAttributesTimeZone = "West Central Africa"
+	UpdateScheduleRotationDataAttributesTimeZoneYakutsk                   UpdateScheduleRotationDataAttributesTimeZone = "Yakutsk"
+	UpdateScheduleRotationDataAttributesTimeZoneYerevan                   UpdateScheduleRotationDataAttributesTimeZone = "Yerevan"
+	UpdateScheduleRotationDataAttributesTimeZoneZagreb                    UpdateScheduleRotationDataAttributesTimeZone = "Zagreb"
+	UpdateScheduleRotationDataAttributesTimeZoneZurich                    UpdateScheduleRotationDataAttributesTimeZone = "Zurich"
+)
+
+// Defines values for UpdateScheduleRotationDataType.
+const (
+	UpdateScheduleRotationDataTypeScheduleRotations UpdateScheduleRotationDataType = "schedule_rotations"
+)
+
+// Defines values for UpdateScheduleRotationActiveTimeDataType.
+const (
+	UpdateScheduleRotationActiveTimeDataTypeScheduleRotationActiveTimes UpdateScheduleRotationActiveTimeDataType = "schedule_rotation_active_times"
+)
+
+// Defines values for UpdateScheduleRotationUserDataType.
+const (
+	UpdateScheduleRotationUserDataTypeScheduleRotationUsers UpdateScheduleRotationUserDataType = "schedule_rotation_users"
 )
 
 // Defines values for UpdateSecretDataType.
@@ -4871,13 +5705,13 @@ const (
 
 // Defines values for WorkflowRepeatOn.
 const (
-	WorkflowRepeatOnF WorkflowRepeatOn = "F"
-	WorkflowRepeatOnM WorkflowRepeatOn = "M"
-	WorkflowRepeatOnR WorkflowRepeatOn = "R"
-	WorkflowRepeatOnS WorkflowRepeatOn = "S"
-	WorkflowRepeatOnT WorkflowRepeatOn = "T"
-	WorkflowRepeatOnU WorkflowRepeatOn = "U"
-	WorkflowRepeatOnW WorkflowRepeatOn = "W"
+	F WorkflowRepeatOn = "F"
+	M WorkflowRepeatOn = "M"
+	R WorkflowRepeatOn = "R"
+	S WorkflowRepeatOn = "S"
+	T WorkflowRepeatOn = "T"
+	U WorkflowRepeatOn = "U"
+	W WorkflowRepeatOn = "W"
 )
 
 // Defines values for WorkflowCustomFieldSelectionIncidentCondition.
@@ -6028,10 +6862,10 @@ type CreateGoToMeetingTaskParamsTaskType string
 // CreateGoogleCalendarEventTaskParams defines model for create_google_calendar_event_task_params.
 type CreateGoogleCalendarEventTaskParams struct {
 	// Attendees Emails of attendees
-	Attendees               []string `json:"attendees"`
-	CanGuestsInviteOthers   *bool    `json:"can_guests_invite_others,omitempty"`
-	CanGuestsModifyEvent    *bool    `json:"can_guests_modify_event,omitempty"`
-	CanGuestsSeeOtherGuests *bool    `json:"can_guests_see_other_guests,omitempty"`
+	Attendees               *[]string `json:"attendees,omitempty"`
+	CanGuestsInviteOthers   *bool     `json:"can_guests_invite_others,omitempty"`
+	CanGuestsModifyEvent    *bool     `json:"can_guests_modify_event,omitempty"`
+	CanGuestsSeeOtherGuests *bool     `json:"can_guests_see_other_guests,omitempty"`
 
 	// ConferenceSolutionKey Sets the video conference type attached to the meeting
 	ConferenceSolutionKey *CreateGoogleCalendarEventTaskParamsConferenceSolutionKey `json:"conference_solution_key"`
@@ -6474,6 +7308,45 @@ type CreateOpsgenieAlertTaskParamsPriority string
 // CreateOpsgenieAlertTaskParamsTaskType defines model for CreateOpsgenieAlertTaskParams.TaskType.
 type CreateOpsgenieAlertTaskParamsTaskType string
 
+// CreateOutlookEventTaskParams defines model for create_outlook_event_task_params.
+type CreateOutlookEventTaskParams struct {
+	// Attendees Emails of attendees
+	Attendees *[]string `json:"attendees,omitempty"`
+	Calendar  struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"calendar"`
+
+	// DaysUntilMeeting The days until meeting
+	DaysUntilMeeting float32 `json:"days_until_meeting"`
+
+	// Description The event description
+	Description     string `json:"description"`
+	ExcludeWeekends *bool  `json:"exclude_weekends,omitempty"`
+
+	// MeetingDuration Meeting duration in format like '1 hour', '30 minutes'
+	MeetingDuration        string `json:"meeting_duration"`
+	PostToIncidentTimeline *bool  `json:"post_to_incident_timeline,omitempty"`
+	PostToSlackChannels    *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"post_to_slack_channels,omitempty"`
+
+	// Summary The event summary
+	Summary  string                                `json:"summary"`
+	TaskType *CreateOutlookEventTaskParamsTaskType `json:"task_type,omitempty"`
+
+	// TimeOfMeeting Time of meeting in format HH:MM
+	TimeOfMeeting string                                `json:"time_of_meeting"`
+	TimeZone      *CreateOutlookEventTaskParamsTimeZone `json:"time_zone"`
+}
+
+// CreateOutlookEventTaskParamsTaskType defines model for CreateOutlookEventTaskParams.TaskType.
+type CreateOutlookEventTaskParamsTaskType string
+
+// CreateOutlookEventTaskParamsTimeZone defines model for CreateOutlookEventTaskParams.TimeZone.
+type CreateOutlookEventTaskParamsTimeZone string
+
 // CreatePagerdutyStatusUpdateParams defines model for create_pagerduty_status_update_params.
 type CreatePagerdutyStatusUpdateParams struct {
 	// Message A message outlining the incident's resolution in PagerDuty
@@ -6569,6 +7442,38 @@ type CreateServiceNowIncidentTaskParams struct {
 
 // CreateServiceNowIncidentTaskParamsTaskType defines model for CreateServiceNowIncidentTaskParams.TaskType.
 type CreateServiceNowIncidentTaskParamsTaskType string
+
+// CreateSharepointPageTaskParams defines model for create_sharepoint_page_task_params.
+type CreateSharepointPageTaskParams struct {
+	// Content The page content
+	Content *string `json:"content,omitempty"`
+	Drive   struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"drive"`
+	MarkPostMortemAsPublished *bool `json:"mark_post_mortem_as_published,omitempty"`
+	ParentFolder              *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"parent_folder,omitempty"`
+
+	// PostMortemTemplateId Retrospective template to use when creating page, if desired
+	PostMortemTemplateId *string `json:"post_mortem_template_id,omitempty"`
+	Site                 struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"site"`
+	TaskType *CreateSharepointPageTaskParamsTaskType `json:"task_type,omitempty"`
+
+	// TemplateId The SharePoint file ID to use as a template
+	TemplateId *string `json:"template_id,omitempty"`
+
+	// Title The page title
+	Title string `json:"title"`
+}
+
+// CreateSharepointPageTaskParamsTaskType defines model for CreateSharepointPageTaskParams.TaskType.
+type CreateSharepointPageTaskParamsTaskType string
 
 // CreateShortcutStoryTaskParams defines model for create_shortcut_story_task_params.
 type CreateShortcutStoryTaskParams struct {
@@ -7114,6 +8019,61 @@ type ErrorsList struct {
 	} `json:"errors,omitempty"`
 }
 
+// EscalationLevel defines model for escalation_level.
+type EscalationLevel struct {
+	// CreatedAt Date of creation
+	CreatedAt *string `json:"created_at,omitempty"`
+
+	// Delay Delay before notification targets will be alerted.
+	Delay float32 `json:"delay"`
+
+	// EscalationPolicyId The ID of the escalation policy
+	EscalationPolicyId string `json:"escalation_policy_id"`
+
+	// NotificationTargetParams Escalation level's notification targets
+	NotificationTargetParams []struct {
+		// Id The ID of notification target
+		Id string `json:"id"`
+
+		// Type The type of the notification target
+		Type EscalationLevelNotificationTargetParamsType `json:"type"`
+	} `json:"notification_target_params"`
+
+	// Position Position of the escalation policy level
+	Position float32 `json:"position"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt *string `json:"updated_at,omitempty"`
+}
+
+// EscalationLevelNotificationTargetParamsType The type of the notification target
+type EscalationLevelNotificationTargetParamsType string
+
+// EscalationLevelList defines model for escalation_level_list.
+type EscalationLevelList struct {
+	Data []struct {
+		Attributes EscalationLevel `json:"attributes"`
+
+		// Id Unique ID of the escalation policy level
+		Id string `json:"id"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// EscalationLevelResponse defines model for escalation_level_response.
+type EscalationLevelResponse struct {
+	Data struct {
+		Attributes EscalationLevel `json:"attributes"`
+
+		// Id Unique ID of the escalation policy level
+		Id   string                           `json:"id"`
+		Type *EscalationLevelResponseDataType `json:"type,omitempty"`
+	} `json:"data"`
+}
+
+// EscalationLevelResponseDataType defines model for EscalationLevelResponse.Data.Type.
+type EscalationLevelResponseDataType string
+
 // EscalationPolicy defines model for escalation_policy.
 type EscalationPolicy struct {
 	// CreatedAt Date of creation
@@ -7126,7 +8086,7 @@ type EscalationPolicy struct {
 	Description *string `json:"description"`
 
 	// EscalationLevels Levels of the escalation policy
-	EscalationLevels *[]EscalationPolicyLevelResponse `json:"escalation_levels"`
+	EscalationLevels *[]EscalationLevelResponse `json:"escalation_levels"`
 
 	// Groups Teams of to the escalation policy
 	Groups *[]TeamResponse `json:"groups"`
@@ -7146,61 +8106,6 @@ type EscalationPolicy struct {
 	// UpdatedAt Date of last update
 	UpdatedAt *string `json:"updated_at,omitempty"`
 }
-
-// EscalationPolicyLevel defines model for escalation_policy_level.
-type EscalationPolicyLevel struct {
-	// CreatedAt Date of creation
-	CreatedAt *string `json:"created_at,omitempty"`
-
-	// Delay Delay before notification targets will be alerted.
-	Delay float32 `json:"delay"`
-
-	// EscalationPolicyId The ID of the escalation policy
-	EscalationPolicyId string `json:"escalation_policy_id"`
-
-	// NotificationTargetParams Escalation level's notification targets
-	NotificationTargetParams []struct {
-		// Id The ID of notification target
-		Id string `json:"id"`
-
-		// Type The type of the notification target
-		Type EscalationPolicyLevelNotificationTargetParamsType `json:"type"`
-	} `json:"notification_target_params"`
-
-	// Position Position of the escalation policy level
-	Position float32 `json:"position"`
-
-	// UpdatedAt Date of last update
-	UpdatedAt *string `json:"updated_at,omitempty"`
-}
-
-// EscalationPolicyLevelNotificationTargetParamsType The type of the notification target
-type EscalationPolicyLevelNotificationTargetParamsType string
-
-// EscalationPolicyLevelList defines model for escalation_policy_level_list.
-type EscalationPolicyLevelList struct {
-	Data []struct {
-		Attributes EscalationPolicyLevel `json:"attributes"`
-
-		// Id Unique ID of the escalation policy level
-		Id string `json:"id"`
-	} `json:"data"`
-	Links Links `json:"links"`
-}
-
-// EscalationPolicyLevelResponse defines model for escalation_policy_level_response.
-type EscalationPolicyLevelResponse struct {
-	Data struct {
-		Attributes EscalationPolicyLevel `json:"attributes"`
-
-		// Id Unique ID of the escalation policy level
-		Id   string                                 `json:"id"`
-		Type *EscalationPolicyLevelResponseDataType `json:"type,omitempty"`
-	} `json:"data"`
-}
-
-// EscalationPolicyLevelResponseDataType defines model for EscalationPolicyLevelResponse.Data.Type.
-type EscalationPolicyLevelResponseDataType string
 
 // EscalationPolicyList defines model for escalation_policy_list.
 type EscalationPolicyList struct {
@@ -9175,6 +10080,35 @@ type NewEnvironment struct {
 // NewEnvironmentDataType defines model for NewEnvironment.Data.Type.
 type NewEnvironmentDataType string
 
+// NewEscalationLevel defines model for new_escalation_level.
+type NewEscalationLevel struct {
+	Data struct {
+		Attributes struct {
+			// Delay Delay before notification targets will be alerted.
+			Delay *float32 `json:"delay,omitempty"`
+
+			// NotificationTargetParams Escalation level's notification targets
+			NotificationTargetParams []struct {
+				// Id The ID of notification target
+				Id string `json:"id"`
+
+				// Type The type of the notification target
+				Type NewEscalationLevelDataAttributesNotificationTargetParamsType `json:"type"`
+			} `json:"notification_target_params"`
+
+			// Position Position of the escalation policy level
+			Position float32 `json:"position"`
+		} `json:"attributes"`
+		Type NewEscalationLevelDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewEscalationLevelDataAttributesNotificationTargetParamsType The type of the notification target
+type NewEscalationLevelDataAttributesNotificationTargetParamsType string
+
+// NewEscalationLevelDataType defines model for NewEscalationLevel.Data.Type.
+type NewEscalationLevelDataType string
+
 // NewEscalationPolicy defines model for new_escalation_policy.
 type NewEscalationPolicy struct {
 	Data struct {
@@ -9194,35 +10128,6 @@ type NewEscalationPolicy struct {
 
 // NewEscalationPolicyDataType defines model for NewEscalationPolicy.Data.Type.
 type NewEscalationPolicyDataType string
-
-// NewEscalationPolicyLevel defines model for new_escalation_policy_level.
-type NewEscalationPolicyLevel struct {
-	Data struct {
-		Attributes struct {
-			// Delay Delay before notification targets will be alerted.
-			Delay *float32 `json:"delay,omitempty"`
-
-			// NotificationTargetParams Escalation level's notification targets
-			NotificationTargetParams []struct {
-				// Id The ID of notification target
-				Id string `json:"id"`
-
-				// Type The type of the notification target
-				Type NewEscalationPolicyLevelDataAttributesNotificationTargetParamsType `json:"type"`
-			} `json:"notification_target_params"`
-
-			// Position Position of the escalation policy level
-			Position float32 `json:"position"`
-		} `json:"attributes"`
-		Type NewEscalationPolicyLevelDataType `json:"type"`
-	} `json:"data"`
-}
-
-// NewEscalationPolicyLevelDataAttributesNotificationTargetParamsType The type of the notification target
-type NewEscalationPolicyLevelDataAttributesNotificationTargetParamsType string
-
-// NewEscalationPolicyLevelDataType defines model for NewEscalationPolicyLevel.Data.Type.
-type NewEscalationPolicyLevelDataType string
 
 // NewFormField defines model for new_form_field.
 type NewFormField struct {
@@ -9840,6 +10745,26 @@ type NewIncidentType struct {
 // NewIncidentTypeDataType defines model for NewIncidentType.Data.Type.
 type NewIncidentTypeDataType string
 
+// NewOverrideShift defines model for new_override_shift.
+type NewOverrideShift struct {
+	Data struct {
+		Attributes struct {
+			// EndsAt End datetime of override shift
+			EndsAt time.Time `json:"ends_at"`
+
+			// StartsAt Start datetime of override shift
+			StartsAt time.Time `json:"starts_at"`
+
+			// UserId Override shift user
+			UserId int `json:"user_id"`
+		} `json:"attributes"`
+		Type NewOverrideShiftDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewOverrideShiftDataType defines model for NewOverrideShift.Data.Type.
+type NewOverrideShiftDataType string
+
 // NewPlaybook defines model for new_playbook.
 type NewPlaybook struct {
 	Data struct {
@@ -9981,34 +10906,20 @@ type NewRetrospectiveProcess struct {
 			Description *string `json:"description"`
 
 			// Name The name of the retrospective process
-			Name                                 string                                                                        `json:"name"`
-			RetrospectiveProcessMatchingCriteria *NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria `json:"retrospective_process_matching_criteria,omitempty"`
+			Name                                 string `json:"name"`
+			RetrospectiveProcessMatchingCriteria *struct {
+				// GroupIds Team ID's for retrospective process matching criteria
+				GroupIds *[]string `json:"group_ids,omitempty"`
+
+				// IncidentTypeIds Incident type ID's for retrospective process matching criteria
+				IncidentTypeIds *[]string `json:"incident_type_ids,omitempty"`
+
+				// SeverityIds Severity ID's for retrospective process matching criteria
+				SeverityIds *[]string `json:"severity_ids,omitempty"`
+			} `json:"retrospective_process_matching_criteria,omitempty"`
 		} `json:"attributes"`
 		Type NewRetrospectiveProcessDataType `json:"type"`
 	} `json:"data"`
-}
-
-// NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0 defines model for .
-type NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0 struct {
-	// SeverityIds Severity ID's for retrospective process matching criteria
-	SeverityIds []string `json:"severity_ids"`
-}
-
-// NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1 defines model for .
-type NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1 struct {
-	// GroupIds Team ID's for retrospective process matching criteria
-	GroupIds []string `json:"group_ids"`
-}
-
-// NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2 defines model for .
-type NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2 struct {
-	// IncidentTypeIds Incident type ID's for retrospective process matching criteria
-	IncidentTypeIds []string `json:"incident_type_ids"`
-}
-
-// NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria defines model for NewRetrospectiveProcess.Data.Attributes.RetrospectiveProcessMatchingCriteria.
-type NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria struct {
-	union json.RawMessage
 }
 
 // NewRetrospectiveProcessDataType defines model for NewRetrospectiveProcess.Data.Type.
@@ -10155,6 +11066,115 @@ type NewRoleDataAttributesWorkflowsPermissions string
 
 // NewRoleDataType defines model for NewRole.Data.Type.
 type NewRoleDataType string
+
+// NewSchedule defines model for new_schedule.
+type NewSchedule struct {
+	Data struct {
+		Attributes struct {
+			// Description The description of the schedule
+			Description *string `json:"description"`
+
+			// Name The name of the schedule
+			Name string `json:"name"`
+		} `json:"attributes"`
+		Type NewScheduleDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewScheduleDataType defines model for NewSchedule.Data.Type.
+type NewScheduleDataType string
+
+// NewScheduleRotation defines model for new_schedule_rotation.
+type NewScheduleRotation struct {
+	Data struct {
+		Attributes struct {
+			// ActiveAllDay Schedule rotation active all day?
+			ActiveAllDay *bool `json:"active_all_day,omitempty"`
+
+			// ActiveAllWeek Schedule rotation active all week?
+			ActiveAllWeek *bool                                          `json:"active_all_week,omitempty"`
+			ActiveDays    *[]NewScheduleRotationDataAttributesActiveDays `json:"active_days,omitempty"`
+
+			// Name The name of the schedule rotation
+			Name string `json:"name"`
+
+			// Position Position of the schedule rotation
+			Position                       *int `json:"position,omitempty"`
+			ScheduleRotationableAttributes struct {
+				// HandoffDay Hand off day for monthly rotation
+				HandoffDay *NewScheduleRotationDataAttributesScheduleRotationableAttributesHandoffDay `json:"handoff_day,omitempty"`
+
+				// HandoffTime Hand off time for custom rotation
+				HandoffTime *string `json:"handoff_time,omitempty"`
+
+				// ShiftLength Shift length for custom rotation
+				ShiftLength *float32 `json:"shift_length,omitempty"`
+
+				// ShiftLengthUnit Shift length unit for custom rotation
+				ShiftLengthUnit *NewScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit `json:"shift_length_unit,omitempty"`
+			} `json:"schedule_rotationable_attributes"`
+
+			// ScheduleRotationableType Schedule rotation type
+			ScheduleRotationableType NewScheduleRotationDataAttributesScheduleRotationableType `json:"schedule_rotationable_type"`
+
+			// TimeZone Schedule Rotation Timezone
+			TimeZone *NewScheduleRotationDataAttributesTimeZone `json:"time_zone,omitempty"`
+		} `json:"attributes"`
+		Type NewScheduleRotationDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewScheduleRotationDataAttributesActiveDays Schedule rotation active days
+type NewScheduleRotationDataAttributesActiveDays string
+
+// NewScheduleRotationDataAttributesScheduleRotationableAttributesHandoffDay Hand off day for monthly rotation
+type NewScheduleRotationDataAttributesScheduleRotationableAttributesHandoffDay string
+
+// NewScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit Shift length unit for custom rotation
+type NewScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit string
+
+// NewScheduleRotationDataAttributesScheduleRotationableType Schedule rotation type
+type NewScheduleRotationDataAttributesScheduleRotationableType string
+
+// NewScheduleRotationDataAttributesTimeZone Schedule Rotation Timezone
+type NewScheduleRotationDataAttributesTimeZone string
+
+// NewScheduleRotationDataType defines model for NewScheduleRotation.Data.Type.
+type NewScheduleRotationDataType string
+
+// NewScheduleRotationActiveTime defines model for new_schedule_rotation_active_time.
+type NewScheduleRotationActiveTime struct {
+	Data struct {
+		Attributes struct {
+			// EndTime End time for schedule rotation active time
+			EndTime string `json:"end_time"`
+
+			// StartTime Start time for schedule rotation active time
+			StartTime string `json:"start_time"`
+		} `json:"attributes"`
+		Type NewScheduleRotationActiveTimeDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewScheduleRotationActiveTimeDataType defines model for NewScheduleRotationActiveTime.Data.Type.
+type NewScheduleRotationActiveTimeDataType string
+
+// NewScheduleRotationUser defines model for new_schedule_rotation_user.
+type NewScheduleRotationUser struct {
+	Data *struct {
+		Attributes *struct {
+			// Position Position of the user inside rotation
+			Position *int `json:"position,omitempty"`
+
+			// UserId Schedule rotation user
+			UserId int `json:"user_id"`
+		} `json:"attributes,omitempty"`
+		Type *NewScheduleRotationUserDataType `json:"type,omitempty"`
+	} `json:"data,omitempty"`
+}
+
+// NewScheduleRotationUserDataType defines model for NewScheduleRotationUser.Data.Type.
+type NewScheduleRotationUserDataType string
 
 // NewSecret defines model for new_secret.
 type NewSecret struct {
@@ -10783,6 +11803,65 @@ type NewWorkflowTask_Data_Attributes_TaskParams struct {
 // NewWorkflowTaskDataType defines model for NewWorkflowTask.Data.Type.
 type NewWorkflowTaskDataType string
 
+// OverrideShift defines model for override_shift.
+type OverrideShift struct {
+	// CreatedAt Date of creation
+	CreatedAt *string `json:"created_at,omitempty"`
+
+	// EndsAt End datetime of shift
+	EndsAt string `json:"ends_at"`
+
+	// IsOverride Denotes shift is an override shift
+	IsOverride bool `json:"is_override"`
+
+	// RotationId ID of rotation
+	RotationId *string `json:"rotation_id"`
+
+	// ScheduleId ID of schedule
+	ScheduleId string `json:"schedule_id"`
+
+	// ShiftOverride Override metadata
+	ShiftOverride *ShiftOverrideResponse `json:"shift_override"`
+
+	// StartsAt Start datetime of shift
+	StartsAt string `json:"starts_at"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt *string `json:"updated_at,omitempty"`
+
+	// UserId User to whom override shift is assigned to
+	UserId int `json:"user_id"`
+}
+
+// OverrideShiftList defines model for override_shift_list.
+type OverrideShiftList struct {
+	Data []struct {
+		Attributes OverrideShift `json:"attributes"`
+
+		// Id Unique ID of the shift
+		Id   string                    `json:"id"`
+		Type OverrideShiftListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// OverrideShiftListDataType defines model for OverrideShiftList.Data.Type.
+type OverrideShiftListDataType string
+
+// OverrideShiftResponse defines model for override_shift_response.
+type OverrideShiftResponse struct {
+	Data struct {
+		Attributes OverrideShift `json:"attributes"`
+
+		// Id Unique ID of the shift
+		Id   string                        `json:"id"`
+		Type OverrideShiftResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// OverrideShiftResponseDataType defines model for OverrideShiftResponse.Data.Type.
+type OverrideShiftResponseDataType string
+
 // PageOpsgenieOnCallRespondersTaskParams defines model for page_opsgenie_on_call_responders_task_params.
 type PageOpsgenieOnCallRespondersTaskParams struct {
 	// Description Description field of the incident that is generally used to provide a detailed information about the incident
@@ -11345,34 +12424,20 @@ type RetrospectiveProcess struct {
 	IsDefault *bool `json:"is_default"`
 
 	// Name The name of the retrospective process
-	Name                                 *string                                                    `json:"name,omitempty"`
-	RetrospectiveProcessMatchingCriteria *RetrospectiveProcess_RetrospectiveProcessMatchingCriteria `json:"retrospective_process_matching_criteria,omitempty"`
+	Name                                 *string `json:"name,omitempty"`
+	RetrospectiveProcessMatchingCriteria *struct {
+		// GroupIds Team ID's for retrospective process matching criteria
+		GroupIds *[]string `json:"group_ids,omitempty"`
+
+		// IncidentTypeIds Incident type ID's for retrospective process matching criteria
+		IncidentTypeIds *[]string `json:"incident_type_ids,omitempty"`
+
+		// SeverityIds Severity ID's for retrospective process matching criteria
+		SeverityIds *[]string `json:"severity_ids,omitempty"`
+	} `json:"retrospective_process_matching_criteria,omitempty"`
 
 	// UpdatedAt Date of last update
 	UpdatedAt *string `json:"updated_at,omitempty"`
-}
-
-// RetrospectiveProcessRetrospectiveProcessMatchingCriteria0 defines model for .
-type RetrospectiveProcessRetrospectiveProcessMatchingCriteria0 struct {
-	// SeverityIds Severity ID's for retrospective process matching criteria
-	SeverityIds []string `json:"severity_ids"`
-}
-
-// RetrospectiveProcessRetrospectiveProcessMatchingCriteria1 defines model for .
-type RetrospectiveProcessRetrospectiveProcessMatchingCriteria1 struct {
-	// GroupIds Team ID's for retrospective process matching criteria
-	GroupIds []string `json:"group_ids"`
-}
-
-// RetrospectiveProcessRetrospectiveProcessMatchingCriteria2 defines model for .
-type RetrospectiveProcessRetrospectiveProcessMatchingCriteria2 struct {
-	// IncidentTypeIds Incident type ID's for retrospective process matching criteria
-	IncidentTypeIds []string `json:"incident_type_ids"`
-}
-
-// RetrospectiveProcess_RetrospectiveProcessMatchingCriteria defines model for RetrospectiveProcess.RetrospectiveProcessMatchingCriteria.
-type RetrospectiveProcess_RetrospectiveProcessMatchingCriteria struct {
-	union json.RawMessage
 }
 
 // RetrospectiveProcessList defines model for retrospective_process_list.
@@ -11624,6 +12689,222 @@ type RunCommandHerokuTaskParamsSize string
 
 // RunCommandHerokuTaskParamsTaskType defines model for RunCommandHerokuTaskParams.TaskType.
 type RunCommandHerokuTaskParamsTaskType string
+
+// Schedule defines model for schedule.
+type Schedule struct {
+	// CreatedAt Date of creation
+	CreatedAt string `json:"created_at"`
+
+	// Description The description of the schedule
+	Description *string `json:"description"`
+
+	// Name The name of the schedule
+	Name string `json:"name"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt string `json:"updated_at"`
+}
+
+// ScheduleList defines model for schedule_list.
+type ScheduleList struct {
+	Data []struct {
+		Attributes Schedule `json:"attributes"`
+
+		// Id Unique ID of the schedule
+		Id   string               `json:"id"`
+		Type ScheduleListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// ScheduleListDataType defines model for ScheduleList.Data.Type.
+type ScheduleListDataType string
+
+// ScheduleResponse defines model for schedule_response.
+type ScheduleResponse struct {
+	Data struct {
+		Attributes Schedule `json:"attributes"`
+
+		// Id Unique id of schedule
+		Id   string                   `json:"id"`
+		Type ScheduleResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// ScheduleResponseDataType defines model for ScheduleResponse.Data.Type.
+type ScheduleResponseDataType string
+
+// ScheduleRotation defines model for schedule_rotation.
+type ScheduleRotation struct {
+	// ActiveAllDay Schedule rotation active all day?
+	ActiveAllDay *bool `json:"active_all_day,omitempty"`
+
+	// ActiveAllWeek Schedule rotation active all week?
+	ActiveAllWeek *bool                         `json:"active_all_week,omitempty"`
+	ActiveDays    *[]ScheduleRotationActiveDays `json:"active_days,omitempty"`
+
+	// Name The name of the schedule rotation
+	Name string `json:"name"`
+
+	// Position Position of the schedule rotation
+	Position *int `json:"position,omitempty"`
+
+	// ScheduleId The ID of parent schedule
+	ScheduleId                     string `json:"schedule_id"`
+	ScheduleRotationableAttributes struct {
+		// HandoffDay Hand off day for monthly rotation
+		HandoffDay *ScheduleRotationScheduleRotationableAttributesHandoffDay `json:"handoff_day,omitempty"`
+
+		// HandoffTime Hand off time for custom rotation
+		HandoffTime *string `json:"handoff_time,omitempty"`
+
+		// ShiftLength Shift length for custom rotation
+		ShiftLength *float32 `json:"shift_length,omitempty"`
+
+		// ShiftLengthUnit Shift length unit for custom rotation
+		ShiftLengthUnit *ScheduleRotationScheduleRotationableAttributesShiftLengthUnit `json:"shift_length_unit,omitempty"`
+	} `json:"schedule_rotationable_attributes"`
+
+	// ScheduleRotationableType Schedule rotation type
+	ScheduleRotationableType ScheduleRotationScheduleRotationableType `json:"schedule_rotationable_type"`
+
+	// TimeZone Schedule Rotation Timezone
+	TimeZone *ScheduleRotationTimeZone `json:"time_zone,omitempty"`
+}
+
+// ScheduleRotationActiveDays Schedule rotation active days
+type ScheduleRotationActiveDays string
+
+// ScheduleRotationScheduleRotationableAttributesHandoffDay Hand off day for monthly rotation
+type ScheduleRotationScheduleRotationableAttributesHandoffDay string
+
+// ScheduleRotationScheduleRotationableAttributesShiftLengthUnit Shift length unit for custom rotation
+type ScheduleRotationScheduleRotationableAttributesShiftLengthUnit string
+
+// ScheduleRotationScheduleRotationableType Schedule rotation type
+type ScheduleRotationScheduleRotationableType string
+
+// ScheduleRotationTimeZone Schedule Rotation Timezone
+type ScheduleRotationTimeZone string
+
+// ScheduleRotationActiveTime defines model for schedule_rotation_active_time.
+type ScheduleRotationActiveTime struct {
+	// CreatedAt Date of creation
+	CreatedAt string `json:"created_at"`
+
+	// EndTime End time for schedule rotation active time
+	EndTime            string `json:"end_time"`
+	ScheduleRotationId string `json:"schedule_rotation_id"`
+
+	// StartTime Start time for schedule rotation active time
+	StartTime string `json:"start_time"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt string `json:"updated_at"`
+}
+
+// ScheduleRotationActiveTimeList defines model for schedule_rotation_active_time_list.
+type ScheduleRotationActiveTimeList struct {
+	Data []struct {
+		Attributes ScheduleRotationActiveTime `json:"attributes"`
+
+		// Id Unique ID of the schedule rotation active time
+		Id   string                                 `json:"id"`
+		Type ScheduleRotationActiveTimeListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// ScheduleRotationActiveTimeListDataType defines model for ScheduleRotationActiveTimeList.Data.Type.
+type ScheduleRotationActiveTimeListDataType string
+
+// ScheduleRotationActiveTimeResponse defines model for schedule_rotation_active_time_response.
+type ScheduleRotationActiveTimeResponse struct {
+	Data *struct {
+		Attributes *ScheduleRotationActiveTime `json:"attributes,omitempty"`
+
+		// Id Unique ID of the schedule rotation active time
+		Id   *string                                     `json:"id,omitempty"`
+		Type *ScheduleRotationActiveTimeResponseDataType `json:"type,omitempty"`
+	} `json:"data,omitempty"`
+}
+
+// ScheduleRotationActiveTimeResponseDataType defines model for ScheduleRotationActiveTimeResponse.Data.Type.
+type ScheduleRotationActiveTimeResponseDataType string
+
+// ScheduleRotationList defines model for schedule_rotation_list.
+type ScheduleRotationList struct {
+	Data []struct {
+		Attributes ScheduleRotation `json:"attributes"`
+
+		// Id Unique ID of the schedule rotation
+		Id   string                       `json:"id"`
+		Type ScheduleRotationListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// ScheduleRotationListDataType defines model for ScheduleRotationList.Data.Type.
+type ScheduleRotationListDataType string
+
+// ScheduleRotationResponse defines model for schedule_rotation_response.
+type ScheduleRotationResponse struct {
+	Data struct {
+		Attributes ScheduleRotation `json:"attributes"`
+
+		// Id Unique ID of the schedule rotation
+		Id   string                           `json:"id"`
+		Type ScheduleRotationResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// ScheduleRotationResponseDataType defines model for ScheduleRotationResponse.Data.Type.
+type ScheduleRotationResponseDataType string
+
+// ScheduleRotationUser defines model for schedule_rotation_user.
+type ScheduleRotationUser struct {
+	// CreatedAt Date of creation
+	CreatedAt string `json:"created_at"`
+
+	// Position Position of the user inside rotation
+	Position           int    `json:"position"`
+	ScheduleRotationId string `json:"schedule_rotation_id"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt string `json:"updated_at"`
+
+	// UserId Schedule rotation user
+	UserId int `json:"user_id"`
+}
+
+// ScheduleRotationUserList defines model for schedule_rotation_user_list.
+type ScheduleRotationUserList struct {
+	Data []struct {
+		Attributes ScheduleRotationUser `json:"attributes"`
+
+		// Id Unique ID of the schedule rotation user
+		Id   string                           `json:"id"`
+		Type ScheduleRotationUserListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// ScheduleRotationUserListDataType defines model for ScheduleRotationUserList.Data.Type.
+type ScheduleRotationUserListDataType string
+
+// ScheduleRotationUserResponse defines model for schedule_rotation_user_response.
+type ScheduleRotationUserResponse struct {
+	Data struct {
+		Attributes ScheduleRotationUser `json:"attributes"`
+
+		// Id Unique ID of the schedule rotation user
+		Id   string                               `json:"id"`
+		Type ScheduleRotationUserResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// ScheduleRotationUserResponseDataType defines model for ScheduleRotationUserResponse.Data.Type.
+type ScheduleRotationUserResponseDataType string
 
 // Secret defines model for secret.
 type Secret struct {
@@ -12020,6 +13301,35 @@ type SeverityResponse struct {
 
 // SeverityResponseDataType defines model for SeverityResponse.Data.Type.
 type SeverityResponseDataType string
+
+// ShiftOverride defines model for shift_override.
+type ShiftOverride struct {
+	// CreatedAt Date of creation
+	CreatedAt *string `json:"created_at,omitempty"`
+
+	// CreatedByUserId User who created the override
+	CreatedByUserId int `json:"created_by_user_id"`
+
+	// ShiftId ID of shift
+	ShiftId string `json:"shift_id"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt *string `json:"updated_at,omitempty"`
+}
+
+// ShiftOverrideResponse defines model for shift_override_response.
+type ShiftOverrideResponse struct {
+	Data struct {
+		Attributes ShiftOverride `json:"attributes"`
+
+		// Id Unique ID of the shift override
+		Id   string                        `json:"id"`
+		Type ShiftOverrideResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// ShiftOverrideResponseDataType defines model for ShiftOverrideResponse.Data.Type.
+type ShiftOverrideResponseDataType string
 
 // SimpleTriggerParams defines model for simple_trigger_params.
 type SimpleTriggerParams struct {
@@ -12757,6 +14067,35 @@ type UpdateEnvironment struct {
 // UpdateEnvironmentDataType defines model for UpdateEnvironment.Data.Type.
 type UpdateEnvironmentDataType string
 
+// UpdateEscalationLevel defines model for update_escalation_level.
+type UpdateEscalationLevel struct {
+	Data struct {
+		Attributes struct {
+			// Delay Delay before notification targets will be alerted.
+			Delay *float32 `json:"delay,omitempty"`
+
+			// NotificationTargetParams Escalation level's notification targets
+			NotificationTargetParams *[]struct {
+				// Id The ID of notification target
+				Id string `json:"id"`
+
+				// Type The type of the notification target
+				Type UpdateEscalationLevelDataAttributesNotificationTargetParamsType `json:"type"`
+			} `json:"notification_target_params,omitempty"`
+
+			// Position Position of the escalation policy level
+			Position *float32 `json:"position,omitempty"`
+		} `json:"attributes"`
+		Type UpdateEscalationLevelDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateEscalationLevelDataAttributesNotificationTargetParamsType The type of the notification target
+type UpdateEscalationLevelDataAttributesNotificationTargetParamsType string
+
+// UpdateEscalationLevelDataType defines model for UpdateEscalationLevel.Data.Type.
+type UpdateEscalationLevelDataType string
+
 // UpdateEscalationPolicy defines model for update_escalation_policy.
 type UpdateEscalationPolicy struct {
 	Data struct {
@@ -12776,35 +14115,6 @@ type UpdateEscalationPolicy struct {
 
 // UpdateEscalationPolicyDataType defines model for UpdateEscalationPolicy.Data.Type.
 type UpdateEscalationPolicyDataType string
-
-// UpdateEscalationPolicyLevel defines model for update_escalation_policy_level.
-type UpdateEscalationPolicyLevel struct {
-	Data struct {
-		Attributes struct {
-			// Delay Delay before notification targets will be alerted.
-			Delay *float32 `json:"delay,omitempty"`
-
-			// NotificationTargetParams Escalation level's notification targets
-			NotificationTargetParams *[]struct {
-				// Id The ID of notification target
-				Id string `json:"id"`
-
-				// Type The type of the notification target
-				Type UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsType `json:"type"`
-			} `json:"notification_target_params,omitempty"`
-
-			// Position Position of the escalation policy level
-			Position *float32 `json:"position,omitempty"`
-		} `json:"attributes"`
-		Type UpdateEscalationPolicyLevelDataType `json:"type"`
-	} `json:"data"`
-}
-
-// UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsType The type of the notification target
-type UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsType string
-
-// UpdateEscalationPolicyLevelDataType defines model for UpdateEscalationPolicyLevel.Data.Type.
-type UpdateEscalationPolicyLevelDataType string
 
 // UpdateFormField defines model for update_form_field.
 type UpdateFormField struct {
@@ -13771,6 +15081,20 @@ type UpdateOpsgenieIncidentTaskParamsStatus string
 // UpdateOpsgenieIncidentTaskParamsTaskType defines model for UpdateOpsgenieIncidentTaskParams.TaskType.
 type UpdateOpsgenieIncidentTaskParamsTaskType string
 
+// UpdateOverrideShift defines model for update_override_shift.
+type UpdateOverrideShift struct {
+	Data struct {
+		Attributes struct {
+			// UserId Override shift user
+			UserId int `json:"user_id"`
+		} `json:"attributes"`
+		Type UpdateOverrideShiftDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateOverrideShiftDataType defines model for UpdateOverrideShift.Data.Type.
+type UpdateOverrideShiftDataType string
+
 // UpdatePagerdutyIncidentTaskParams defines model for update_pagerduty_incident_task_params.
 type UpdatePagerdutyIncidentTaskParams struct {
 	// EscalationLevel Escalation level of policy attached to incident
@@ -13996,34 +15320,20 @@ type UpdateRetrospectiveProcess struct {
 			Description *string `json:"description"`
 
 			// Name The name of the retrospective process
-			Name                                 *string                                                                          `json:"name,omitempty"`
-			RetrospectiveProcessMatchingCriteria *UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria `json:"retrospective_process_matching_criteria,omitempty"`
+			Name                                 *string `json:"name,omitempty"`
+			RetrospectiveProcessMatchingCriteria *struct {
+				// GroupIds Team ID's for retrospective process matching criteria
+				GroupIds *[]string `json:"group_ids,omitempty"`
+
+				// IncidentTypeIds Incident type ID's for retrospective process matching criteria
+				IncidentTypeIds *[]string `json:"incident_type_ids,omitempty"`
+
+				// SeverityIds Severity ID's for retrospective process matching criteria
+				SeverityIds *[]string `json:"severity_ids,omitempty"`
+			} `json:"retrospective_process_matching_criteria,omitempty"`
 		} `json:"attributes"`
 		Type UpdateRetrospectiveProcessDataType `json:"type"`
 	} `json:"data"`
-}
-
-// UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0 defines model for .
-type UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0 struct {
-	// SeverityIds Severity ID's for retrospective process matching criteria
-	SeverityIds []string `json:"severity_ids"`
-}
-
-// UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1 defines model for .
-type UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1 struct {
-	// GroupIds Team ID's for retrospective process matching criteria
-	GroupIds []string `json:"group_ids"`
-}
-
-// UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2 defines model for .
-type UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2 struct {
-	// IncidentTypeIds Incident type ID's for retrospective process matching criteria
-	IncidentTypeIds []string `json:"incident_type_ids"`
-}
-
-// UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria defines model for UpdateRetrospectiveProcess.Data.Attributes.RetrospectiveProcessMatchingCriteria.
-type UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria struct {
-	union json.RawMessage
 }
 
 // UpdateRetrospectiveProcessDataType defines model for UpdateRetrospectiveProcess.Data.Type.
@@ -14170,6 +15480,115 @@ type UpdateRoleDataAttributesWorkflowsPermissions string
 
 // UpdateRoleDataType defines model for UpdateRole.Data.Type.
 type UpdateRoleDataType string
+
+// UpdateSchedule defines model for update_schedule.
+type UpdateSchedule struct {
+	Data struct {
+		Attributes struct {
+			// Description The description of the schedule
+			Description *string `json:"description"`
+
+			// Name The name of the schedule
+			Name *string `json:"name,omitempty"`
+		} `json:"attributes"`
+		Type UpdateScheduleDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateScheduleDataType defines model for UpdateSchedule.Data.Type.
+type UpdateScheduleDataType string
+
+// UpdateScheduleRotation defines model for update_schedule_rotation.
+type UpdateScheduleRotation struct {
+	Data struct {
+		Attributes struct {
+			// ActiveAllDay Schedule rotation active all day?
+			ActiveAllDay *bool `json:"active_all_day,omitempty"`
+
+			// ActiveAllWeek Schedule rotation active all week?
+			ActiveAllWeek *bool                                             `json:"active_all_week,omitempty"`
+			ActiveDays    *[]UpdateScheduleRotationDataAttributesActiveDays `json:"active_days,omitempty"`
+
+			// Name The name of the schedule rotation
+			Name *string `json:"name,omitempty"`
+
+			// Position Position of the schedule rotation
+			Position                       *int `json:"position,omitempty"`
+			ScheduleRotationableAttributes *struct {
+				// HandoffDay Hand off day for monthly rotation
+				HandoffDay *UpdateScheduleRotationDataAttributesScheduleRotationableAttributesHandoffDay `json:"handoff_day,omitempty"`
+
+				// HandoffTime Hand off time for custom rotation
+				HandoffTime *string `json:"handoff_time,omitempty"`
+
+				// ShiftLength Shift length for custom rotation
+				ShiftLength *float32 `json:"shift_length,omitempty"`
+
+				// ShiftLengthUnit Shift length unit for custom rotation
+				ShiftLengthUnit *UpdateScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit `json:"shift_length_unit,omitempty"`
+			} `json:"schedule_rotationable_attributes,omitempty"`
+
+			// ScheduleRotationableType Schedule rotation type
+			ScheduleRotationableType *UpdateScheduleRotationDataAttributesScheduleRotationableType `json:"schedule_rotationable_type,omitempty"`
+
+			// TimeZone Schedule Rotation Timezone
+			TimeZone *UpdateScheduleRotationDataAttributesTimeZone `json:"time_zone,omitempty"`
+		} `json:"attributes"`
+		Type UpdateScheduleRotationDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateScheduleRotationDataAttributesActiveDays Schedule rotation active days
+type UpdateScheduleRotationDataAttributesActiveDays string
+
+// UpdateScheduleRotationDataAttributesScheduleRotationableAttributesHandoffDay Hand off day for monthly rotation
+type UpdateScheduleRotationDataAttributesScheduleRotationableAttributesHandoffDay string
+
+// UpdateScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit Shift length unit for custom rotation
+type UpdateScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit string
+
+// UpdateScheduleRotationDataAttributesScheduleRotationableType Schedule rotation type
+type UpdateScheduleRotationDataAttributesScheduleRotationableType string
+
+// UpdateScheduleRotationDataAttributesTimeZone Schedule Rotation Timezone
+type UpdateScheduleRotationDataAttributesTimeZone string
+
+// UpdateScheduleRotationDataType defines model for UpdateScheduleRotation.Data.Type.
+type UpdateScheduleRotationDataType string
+
+// UpdateScheduleRotationActiveTime defines model for update_schedule_rotation_active_time.
+type UpdateScheduleRotationActiveTime struct {
+	Data struct {
+		Attributes struct {
+			// EndTime End time for schedule rotation active time
+			EndTime *string `json:"end_time,omitempty"`
+
+			// StartTime Start time for schedule rotation active time
+			StartTime *string `json:"start_time,omitempty"`
+		} `json:"attributes"`
+		Type UpdateScheduleRotationActiveTimeDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateScheduleRotationActiveTimeDataType defines model for UpdateScheduleRotationActiveTime.Data.Type.
+type UpdateScheduleRotationActiveTimeDataType string
+
+// UpdateScheduleRotationUser defines model for update_schedule_rotation_user.
+type UpdateScheduleRotationUser struct {
+	Data struct {
+		Attributes struct {
+			// Position Position of the user inside rotation
+			Position *int `json:"position,omitempty"`
+
+			// UserId Schedule rotation user
+			UserId *int `json:"user_id,omitempty"`
+		} `json:"attributes"`
+		Type UpdateScheduleRotationUserDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateScheduleRotationUserDataType defines model for UpdateScheduleRotationUser.Data.Type.
+type UpdateScheduleRotationUserDataType string
 
 // UpdateSecret defines model for update_secret.
 type UpdateSecret struct {
@@ -15656,6 +17075,7 @@ type ListFunctionalitiesParams struct {
 	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 	FilterSearch       *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
 	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterBackstageId  *string `form:"filter[backstage_id],omitempty" json:"filter[backstage_id],omitempty"`
 	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
 	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
 	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
@@ -15994,6 +17414,42 @@ type ListRolesParams struct {
 	Sort               *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
+// ListScheduleRotationActiveTimesParams defines parameters for ListScheduleRotationActiveTimes.
+type ListScheduleRotationActiveTimesParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+}
+
+// ListScheduleRotationUsersParams defines parameters for ListScheduleRotationUsers.
+type ListScheduleRotationUsersParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+}
+
+// ListSchedulesParams defines parameters for ListSchedules.
+type ListSchedulesParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+}
+
+// ListOverrideShiftsParams defines parameters for ListOverrideShifts.
+type ListOverrideShiftsParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+}
+
+// ListScheduleRotationsParams defines parameters for ListScheduleRotations.
+type ListScheduleRotationsParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	Sort       *string `form:"sort,omitempty" json:"sort,omitempty"`
+}
+
 // ListSecretsParams defines parameters for ListSecrets.
 type ListSecretsParams struct {
 	Include    *string `form:"include,omitempty" json:"include,omitempty"`
@@ -16074,6 +17530,7 @@ type ListTeamsParams struct {
 	FilterSearch       *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
 	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
 	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterBackstageId  *string `form:"filter[backstage_id],omitempty" json:"filter[backstage_id],omitempty"`
 	FilterColor        *string `form:"filter[color],omitempty" json:"filter[color],omitempty"`
 	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
 	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
@@ -16236,13 +17693,13 @@ type CreateEnvironmentApplicationVndAPIPlusJSONRequestBody = NewEnvironment
 type UpdateEnvironmentApplicationVndAPIPlusJSONRequestBody = UpdateEnvironment
 
 // UpdateEscalationLevelApplicationVndAPIPlusJSONRequestBody defines body for UpdateEscalationLevel for application/vnd.api+json ContentType.
-type UpdateEscalationLevelApplicationVndAPIPlusJSONRequestBody = UpdateEscalationPolicyLevel
+type UpdateEscalationLevelApplicationVndAPIPlusJSONRequestBody = UpdateEscalationLevel
 
 // CreateEscalationPolicyApplicationVndAPIPlusJSONRequestBody defines body for CreateEscalationPolicy for application/vnd.api+json ContentType.
 type CreateEscalationPolicyApplicationVndAPIPlusJSONRequestBody = NewEscalationPolicy
 
 // CreateEscalationLevelApplicationVndAPIPlusJSONRequestBody defines body for CreateEscalationLevel for application/vnd.api+json ContentType.
-type CreateEscalationLevelApplicationVndAPIPlusJSONRequestBody = NewEscalationPolicyLevel
+type CreateEscalationLevelApplicationVndAPIPlusJSONRequestBody = NewEscalationLevel
 
 // UpdateEscalationPolicyApplicationVndAPIPlusJSONRequestBody defines body for UpdateEscalationPolicy for application/vnd.api+json ContentType.
 type UpdateEscalationPolicyApplicationVndAPIPlusJSONRequestBody = UpdateEscalationPolicy
@@ -16391,6 +17848,9 @@ type CreateIncidentStatusPageApplicationVndAPIPlusJSONRequestBody = NewIncidentS
 // UpdateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody defines body for UpdateUserNotificationRule for application/vnd.api+json ContentType.
 type UpdateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody = UpdateUserNotificationRule
 
+// UpdateOverrideShiftApplicationVndAPIPlusJSONRequestBody defines body for UpdateOverrideShift for application/vnd.api+json ContentType.
+type UpdateOverrideShiftApplicationVndAPIPlusJSONRequestBody = UpdateOverrideShift
+
 // UpdatePlaybookTaskApplicationVndAPIPlusJSONRequestBody defines body for UpdatePlaybookTask for application/vnd.api+json ContentType.
 type UpdatePlaybookTaskApplicationVndAPIPlusJSONRequestBody = UpdatePlaybookTask
 
@@ -16438,6 +17898,33 @@ type CreateRoleApplicationVndAPIPlusJSONRequestBody = NewRole
 
 // UpdateRoleApplicationVndAPIPlusJSONRequestBody defines body for UpdateRole for application/vnd.api+json ContentType.
 type UpdateRoleApplicationVndAPIPlusJSONRequestBody = UpdateRole
+
+// UpdateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody defines body for UpdateScheduleRotationActiveTime for application/vnd.api+json ContentType.
+type UpdateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody = UpdateScheduleRotationActiveTime
+
+// UpdateScheduleRotationUserApplicationVndAPIPlusJSONRequestBody defines body for UpdateScheduleRotationUser for application/vnd.api+json ContentType.
+type UpdateScheduleRotationUserApplicationVndAPIPlusJSONRequestBody = UpdateScheduleRotationUser
+
+// UpdateScheduleRotationApplicationVndAPIPlusJSONRequestBody defines body for UpdateScheduleRotation for application/vnd.api+json ContentType.
+type UpdateScheduleRotationApplicationVndAPIPlusJSONRequestBody = UpdateScheduleRotation
+
+// CreateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody defines body for CreateScheduleRotationActiveTime for application/vnd.api+json ContentType.
+type CreateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody = NewScheduleRotationActiveTime
+
+// CreateScheduleRotationUserApplicationVndAPIPlusJSONRequestBody defines body for CreateScheduleRotationUser for application/vnd.api+json ContentType.
+type CreateScheduleRotationUserApplicationVndAPIPlusJSONRequestBody = NewScheduleRotationUser
+
+// CreateScheduleApplicationVndAPIPlusJSONRequestBody defines body for CreateSchedule for application/vnd.api+json ContentType.
+type CreateScheduleApplicationVndAPIPlusJSONRequestBody = NewSchedule
+
+// UpdateScheduleApplicationVndAPIPlusJSONRequestBody defines body for UpdateSchedule for application/vnd.api+json ContentType.
+type UpdateScheduleApplicationVndAPIPlusJSONRequestBody = UpdateSchedule
+
+// CreateOverrideShiftApplicationVndAPIPlusJSONRequestBody defines body for CreateOverrideShift for application/vnd.api+json ContentType.
+type CreateOverrideShiftApplicationVndAPIPlusJSONRequestBody = NewOverrideShift
+
+// CreateScheduleRotationApplicationVndAPIPlusJSONRequestBody defines body for CreateScheduleRotation for application/vnd.api+json ContentType.
+type CreateScheduleRotationApplicationVndAPIPlusJSONRequestBody = NewScheduleRotation
 
 // CreateSecretApplicationVndAPIPlusJSONRequestBody defines body for CreateSecret for application/vnd.api+json ContentType.
 type CreateSecretApplicationVndAPIPlusJSONRequestBody = NewSecret
@@ -17512,94 +18999,6 @@ func (t *IncidentTriggerParams_IncidentInactivityDuration) UnmarshalJSON(b []byt
 	return err
 }
 
-// AsNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0 returns the union data inside the NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as a NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0
-func (t NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) AsNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0() (NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0, error) {
-	var body NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0 overwrites any union data inside the NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as the provided NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0
-func (t *NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) FromNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0(v NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0 performs a merge with any union data inside the NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria, using the provided NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0
-func (t *NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) MergeNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0(v NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1 returns the union data inside the NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as a NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1
-func (t NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) AsNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1() (NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1, error) {
-	var body NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1 overwrites any union data inside the NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as the provided NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1
-func (t *NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) FromNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1(v NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1 performs a merge with any union data inside the NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria, using the provided NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1
-func (t *NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) MergeNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1(v NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2 returns the union data inside the NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as a NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2
-func (t NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) AsNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2() (NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2, error) {
-	var body NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2 overwrites any union data inside the NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as the provided NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2
-func (t *NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) FromNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2(v NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2 performs a merge with any union data inside the NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria, using the provided NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2
-func (t *NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) MergeNewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2(v NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-func (t NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) MarshalJSON() ([]byte, error) {
-	b, err := t.union.MarshalJSON()
-	return b, err
-}
-
-func (t *NewRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) UnmarshalJSON(b []byte) error {
-	err := t.union.UnmarshalJSON(b)
-	return err
-}
-
 // AsIncidentTriggerParams returns the union data inside the NewWorkflow_Data_Attributes_TriggerParams as a IncidentTriggerParams
 func (t NewWorkflow_Data_Attributes_TriggerParams) AsIncidentTriggerParams() (IncidentTriggerParams, error) {
 	var body IncidentTriggerParams
@@ -18556,6 +19955,32 @@ func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeCreateGitlabIssueTaskP
 	return err
 }
 
+// AsCreateOutlookEventTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a CreateOutlookEventTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsCreateOutlookEventTaskParams() (CreateOutlookEventTaskParams, error) {
+	var body CreateOutlookEventTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateOutlookEventTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided CreateOutlookEventTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromCreateOutlookEventTaskParams(v CreateOutlookEventTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateOutlookEventTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided CreateOutlookEventTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeCreateOutlookEventTaskParams(v CreateOutlookEventTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsCreateGoogleCalendarEventTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a CreateGoogleCalendarEventTaskParams
 func (t NewWorkflowTask_Data_Attributes_TaskParams) AsCreateGoogleCalendarEventTaskParams() (CreateGoogleCalendarEventTaskParams, error) {
 	var body CreateGoogleCalendarEventTaskParams
@@ -18624,6 +20049,32 @@ func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromUpdateGoogleCalendarEve
 
 // MergeUpdateGoogleCalendarEventTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateGoogleCalendarEventTaskParams
 func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeUpdateGoogleCalendarEventTaskParams(v UpdateGoogleCalendarEventTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsCreateSharepointPageTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a CreateSharepointPageTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsCreateSharepointPageTaskParams() (CreateSharepointPageTaskParams, error) {
+	var body CreateSharepointPageTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateSharepointPageTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided CreateSharepointPageTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromCreateSharepointPageTaskParams(v CreateSharepointPageTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateSharepointPageTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided CreateSharepointPageTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeCreateSharepointPageTaskParams(v CreateSharepointPageTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -20672,182 +22123,6 @@ func (t *NewWorkflowTask_Data_Attributes_TaskParams) UnmarshalJSON(b []byte) err
 	return err
 }
 
-// AsRetrospectiveProcessRetrospectiveProcessMatchingCriteria0 returns the union data inside the RetrospectiveProcess_RetrospectiveProcessMatchingCriteria as a RetrospectiveProcessRetrospectiveProcessMatchingCriteria0
-func (t RetrospectiveProcess_RetrospectiveProcessMatchingCriteria) AsRetrospectiveProcessRetrospectiveProcessMatchingCriteria0() (RetrospectiveProcessRetrospectiveProcessMatchingCriteria0, error) {
-	var body RetrospectiveProcessRetrospectiveProcessMatchingCriteria0
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromRetrospectiveProcessRetrospectiveProcessMatchingCriteria0 overwrites any union data inside the RetrospectiveProcess_RetrospectiveProcessMatchingCriteria as the provided RetrospectiveProcessRetrospectiveProcessMatchingCriteria0
-func (t *RetrospectiveProcess_RetrospectiveProcessMatchingCriteria) FromRetrospectiveProcessRetrospectiveProcessMatchingCriteria0(v RetrospectiveProcessRetrospectiveProcessMatchingCriteria0) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeRetrospectiveProcessRetrospectiveProcessMatchingCriteria0 performs a merge with any union data inside the RetrospectiveProcess_RetrospectiveProcessMatchingCriteria, using the provided RetrospectiveProcessRetrospectiveProcessMatchingCriteria0
-func (t *RetrospectiveProcess_RetrospectiveProcessMatchingCriteria) MergeRetrospectiveProcessRetrospectiveProcessMatchingCriteria0(v RetrospectiveProcessRetrospectiveProcessMatchingCriteria0) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsRetrospectiveProcessRetrospectiveProcessMatchingCriteria1 returns the union data inside the RetrospectiveProcess_RetrospectiveProcessMatchingCriteria as a RetrospectiveProcessRetrospectiveProcessMatchingCriteria1
-func (t RetrospectiveProcess_RetrospectiveProcessMatchingCriteria) AsRetrospectiveProcessRetrospectiveProcessMatchingCriteria1() (RetrospectiveProcessRetrospectiveProcessMatchingCriteria1, error) {
-	var body RetrospectiveProcessRetrospectiveProcessMatchingCriteria1
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromRetrospectiveProcessRetrospectiveProcessMatchingCriteria1 overwrites any union data inside the RetrospectiveProcess_RetrospectiveProcessMatchingCriteria as the provided RetrospectiveProcessRetrospectiveProcessMatchingCriteria1
-func (t *RetrospectiveProcess_RetrospectiveProcessMatchingCriteria) FromRetrospectiveProcessRetrospectiveProcessMatchingCriteria1(v RetrospectiveProcessRetrospectiveProcessMatchingCriteria1) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeRetrospectiveProcessRetrospectiveProcessMatchingCriteria1 performs a merge with any union data inside the RetrospectiveProcess_RetrospectiveProcessMatchingCriteria, using the provided RetrospectiveProcessRetrospectiveProcessMatchingCriteria1
-func (t *RetrospectiveProcess_RetrospectiveProcessMatchingCriteria) MergeRetrospectiveProcessRetrospectiveProcessMatchingCriteria1(v RetrospectiveProcessRetrospectiveProcessMatchingCriteria1) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsRetrospectiveProcessRetrospectiveProcessMatchingCriteria2 returns the union data inside the RetrospectiveProcess_RetrospectiveProcessMatchingCriteria as a RetrospectiveProcessRetrospectiveProcessMatchingCriteria2
-func (t RetrospectiveProcess_RetrospectiveProcessMatchingCriteria) AsRetrospectiveProcessRetrospectiveProcessMatchingCriteria2() (RetrospectiveProcessRetrospectiveProcessMatchingCriteria2, error) {
-	var body RetrospectiveProcessRetrospectiveProcessMatchingCriteria2
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromRetrospectiveProcessRetrospectiveProcessMatchingCriteria2 overwrites any union data inside the RetrospectiveProcess_RetrospectiveProcessMatchingCriteria as the provided RetrospectiveProcessRetrospectiveProcessMatchingCriteria2
-func (t *RetrospectiveProcess_RetrospectiveProcessMatchingCriteria) FromRetrospectiveProcessRetrospectiveProcessMatchingCriteria2(v RetrospectiveProcessRetrospectiveProcessMatchingCriteria2) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeRetrospectiveProcessRetrospectiveProcessMatchingCriteria2 performs a merge with any union data inside the RetrospectiveProcess_RetrospectiveProcessMatchingCriteria, using the provided RetrospectiveProcessRetrospectiveProcessMatchingCriteria2
-func (t *RetrospectiveProcess_RetrospectiveProcessMatchingCriteria) MergeRetrospectiveProcessRetrospectiveProcessMatchingCriteria2(v RetrospectiveProcessRetrospectiveProcessMatchingCriteria2) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-func (t RetrospectiveProcess_RetrospectiveProcessMatchingCriteria) MarshalJSON() ([]byte, error) {
-	b, err := t.union.MarshalJSON()
-	return b, err
-}
-
-func (t *RetrospectiveProcess_RetrospectiveProcessMatchingCriteria) UnmarshalJSON(b []byte) error {
-	err := t.union.UnmarshalJSON(b)
-	return err
-}
-
-// AsUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0 returns the union data inside the UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as a UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0
-func (t UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) AsUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0() (UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0, error) {
-	var body UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0 overwrites any union data inside the UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as the provided UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0
-func (t *UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) FromUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0(v UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0 performs a merge with any union data inside the UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria, using the provided UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0
-func (t *UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) MergeUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0(v UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria0) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1 returns the union data inside the UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as a UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1
-func (t UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) AsUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1() (UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1, error) {
-	var body UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1 overwrites any union data inside the UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as the provided UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1
-func (t *UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) FromUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1(v UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1 performs a merge with any union data inside the UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria, using the provided UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1
-func (t *UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) MergeUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1(v UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria1) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2 returns the union data inside the UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as a UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2
-func (t UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) AsUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2() (UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2, error) {
-	var body UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2 overwrites any union data inside the UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria as the provided UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2
-func (t *UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) FromUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2(v UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2 performs a merge with any union data inside the UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria, using the provided UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2
-func (t *UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) MergeUpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2(v UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteria2) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-func (t UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) MarshalJSON() ([]byte, error) {
-	b, err := t.union.MarshalJSON()
-	return b, err
-}
-
-func (t *UpdateRetrospectiveProcess_Data_Attributes_RetrospectiveProcessMatchingCriteria) UnmarshalJSON(b []byte) error {
-	err := t.union.UnmarshalJSON(b)
-	return err
-}
-
 // AsIncidentTriggerParams returns the union data inside the UpdateWorkflow_Data_Attributes_TriggerParams as a IncidentTriggerParams
 func (t UpdateWorkflow_Data_Attributes_TriggerParams) AsIncidentTriggerParams() (IncidentTriggerParams, error) {
 	var body IncidentTriggerParams
@@ -21638,6 +22913,32 @@ func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeCreateGitlabIssueTa
 	return err
 }
 
+// AsCreateOutlookEventTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a CreateOutlookEventTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsCreateOutlookEventTaskParams() (CreateOutlookEventTaskParams, error) {
+	var body CreateOutlookEventTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateOutlookEventTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided CreateOutlookEventTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromCreateOutlookEventTaskParams(v CreateOutlookEventTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateOutlookEventTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided CreateOutlookEventTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeCreateOutlookEventTaskParams(v CreateOutlookEventTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsCreateGoogleCalendarEventTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a CreateGoogleCalendarEventTaskParams
 func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsCreateGoogleCalendarEventTaskParams() (CreateGoogleCalendarEventTaskParams, error) {
 	var body CreateGoogleCalendarEventTaskParams
@@ -21706,6 +23007,32 @@ func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromUpdateGoogleCalendar
 
 // MergeUpdateGoogleCalendarEventTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateGoogleCalendarEventTaskParams
 func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeUpdateGoogleCalendarEventTaskParams(v UpdateGoogleCalendarEventTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsCreateSharepointPageTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a CreateSharepointPageTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsCreateSharepointPageTaskParams() (CreateSharepointPageTaskParams, error) {
+	var body CreateSharepointPageTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateSharepointPageTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided CreateSharepointPageTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromCreateSharepointPageTaskParams(v CreateSharepointPageTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateSharepointPageTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided CreateSharepointPageTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeCreateSharepointPageTaskParams(v CreateSharepointPageTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -24544,6 +25871,32 @@ func (t *WorkflowTask_TaskParams) MergeCreateGitlabIssueTaskParams(v CreateGitla
 	return err
 }
 
+// AsCreateOutlookEventTaskParams returns the union data inside the WorkflowTask_TaskParams as a CreateOutlookEventTaskParams
+func (t WorkflowTask_TaskParams) AsCreateOutlookEventTaskParams() (CreateOutlookEventTaskParams, error) {
+	var body CreateOutlookEventTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateOutlookEventTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided CreateOutlookEventTaskParams
+func (t *WorkflowTask_TaskParams) FromCreateOutlookEventTaskParams(v CreateOutlookEventTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateOutlookEventTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided CreateOutlookEventTaskParams
+func (t *WorkflowTask_TaskParams) MergeCreateOutlookEventTaskParams(v CreateOutlookEventTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsCreateGoogleCalendarEventTaskParams returns the union data inside the WorkflowTask_TaskParams as a CreateGoogleCalendarEventTaskParams
 func (t WorkflowTask_TaskParams) AsCreateGoogleCalendarEventTaskParams() (CreateGoogleCalendarEventTaskParams, error) {
 	var body CreateGoogleCalendarEventTaskParams
@@ -24612,6 +25965,32 @@ func (t *WorkflowTask_TaskParams) FromUpdateGoogleCalendarEventTaskParams(v Upda
 
 // MergeUpdateGoogleCalendarEventTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided UpdateGoogleCalendarEventTaskParams
 func (t *WorkflowTask_TaskParams) MergeUpdateGoogleCalendarEventTaskParams(v UpdateGoogleCalendarEventTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsCreateSharepointPageTaskParams returns the union data inside the WorkflowTask_TaskParams as a CreateSharepointPageTaskParams
+func (t WorkflowTask_TaskParams) AsCreateSharepointPageTaskParams() (CreateSharepointPageTaskParams, error) {
+	var body CreateSharepointPageTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateSharepointPageTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided CreateSharepointPageTaskParams
+func (t *WorkflowTask_TaskParams) FromCreateSharepointPageTaskParams(v CreateSharepointPageTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateSharepointPageTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided CreateSharepointPageTaskParams
+func (t *WorkflowTask_TaskParams) MergeCreateSharepointPageTaskParams(v CreateSharepointPageTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -27374,6 +28753,17 @@ type ClientInterface interface {
 
 	UpdateUserNotificationRuleWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// DeleteOverrideShift request
+	DeleteOverrideShift(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetOverrideShift request
+	GetOverrideShift(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateOverrideShiftWithBody request with any body
+	UpdateOverrideShiftWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateOverrideShiftWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateOverrideShiftApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// DeletePlaybookTask request
 	DeletePlaybookTask(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -27525,6 +28915,90 @@ type ClientInterface interface {
 	UpdateRoleWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	UpdateRoleWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateRoleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteScheduleRotationActiveTime request
+	DeleteScheduleRotationActiveTime(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetScheduleRotationActiveTime request
+	GetScheduleRotationActiveTime(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateScheduleRotationActiveTimeWithBody request with any body
+	UpdateScheduleRotationActiveTimeWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateScheduleRotationActiveTimeWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteScheduleRotationUser request
+	DeleteScheduleRotationUser(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetScheduleRotationUser request
+	GetScheduleRotationUser(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateScheduleRotationUserWithBody request with any body
+	UpdateScheduleRotationUserWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateScheduleRotationUserWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateScheduleRotationUserApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteScheduleRotation request
+	DeleteScheduleRotation(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetScheduleRotation request
+	GetScheduleRotation(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateScheduleRotationWithBody request with any body
+	UpdateScheduleRotationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateScheduleRotationWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateScheduleRotationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListScheduleRotationActiveTimes request
+	ListScheduleRotationActiveTimes(ctx context.Context, scheduleRotationId string, params *ListScheduleRotationActiveTimesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateScheduleRotationActiveTimeWithBody request with any body
+	CreateScheduleRotationActiveTimeWithBody(ctx context.Context, scheduleRotationId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateScheduleRotationActiveTimeWithApplicationVndAPIPlusJSONBody(ctx context.Context, scheduleRotationId string, body CreateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListScheduleRotationUsers request
+	ListScheduleRotationUsers(ctx context.Context, scheduleRotationId string, params *ListScheduleRotationUsersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateScheduleRotationUserWithBody request with any body
+	CreateScheduleRotationUserWithBody(ctx context.Context, scheduleRotationId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateScheduleRotationUserWithApplicationVndAPIPlusJSONBody(ctx context.Context, scheduleRotationId string, body CreateScheduleRotationUserApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListSchedules request
+	ListSchedules(ctx context.Context, params *ListSchedulesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateScheduleWithBody request with any body
+	CreateScheduleWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateScheduleWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateScheduleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteSchedule request
+	DeleteSchedule(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetSchedule request
+	GetSchedule(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateScheduleWithBody request with any body
+	UpdateScheduleWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateScheduleWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateScheduleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListOverrideShifts request
+	ListOverrideShifts(ctx context.Context, scheduleId string, params *ListOverrideShiftsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateOverrideShiftWithBody request with any body
+	CreateOverrideShiftWithBody(ctx context.Context, scheduleId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateOverrideShiftWithApplicationVndAPIPlusJSONBody(ctx context.Context, scheduleId string, body CreateOverrideShiftApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListScheduleRotations request
+	ListScheduleRotations(ctx context.Context, scheduleId string, params *ListScheduleRotationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateScheduleRotationWithBody request with any body
+	CreateScheduleRotationWithBody(ctx context.Context, scheduleId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateScheduleRotationWithApplicationVndAPIPlusJSONBody(ctx context.Context, scheduleId string, body CreateScheduleRotationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListSecrets request
 	ListSecrets(ctx context.Context, params *ListSecretsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -30653,6 +32127,54 @@ func (c *Client) UpdateUserNotificationRuleWithApplicationVndAPIPlusJSONBody(ctx
 	return c.Client.Do(req)
 }
 
+func (c *Client) DeleteOverrideShift(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteOverrideShiftRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetOverrideShift(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetOverrideShiftRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateOverrideShiftWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateOverrideShiftRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateOverrideShiftWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateOverrideShiftApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateOverrideShiftRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) DeletePlaybookTask(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeletePlaybookTaskRequest(c.Server, id)
 	if err != nil {
@@ -31315,6 +32837,378 @@ func (c *Client) UpdateRoleWithBody(ctx context.Context, id string, contentType 
 
 func (c *Client) UpdateRoleWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateRoleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateRoleRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteScheduleRotationActiveTime(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteScheduleRotationActiveTimeRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetScheduleRotationActiveTime(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetScheduleRotationActiveTimeRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateScheduleRotationActiveTimeWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateScheduleRotationActiveTimeRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateScheduleRotationActiveTimeWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateScheduleRotationActiveTimeRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteScheduleRotationUser(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteScheduleRotationUserRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetScheduleRotationUser(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetScheduleRotationUserRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateScheduleRotationUserWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateScheduleRotationUserRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateScheduleRotationUserWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateScheduleRotationUserApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateScheduleRotationUserRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteScheduleRotation(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteScheduleRotationRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetScheduleRotation(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetScheduleRotationRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateScheduleRotationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateScheduleRotationRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateScheduleRotationWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateScheduleRotationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateScheduleRotationRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListScheduleRotationActiveTimes(ctx context.Context, scheduleRotationId string, params *ListScheduleRotationActiveTimesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListScheduleRotationActiveTimesRequest(c.Server, scheduleRotationId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateScheduleRotationActiveTimeWithBody(ctx context.Context, scheduleRotationId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateScheduleRotationActiveTimeRequestWithBody(c.Server, scheduleRotationId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateScheduleRotationActiveTimeWithApplicationVndAPIPlusJSONBody(ctx context.Context, scheduleRotationId string, body CreateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateScheduleRotationActiveTimeRequestWithApplicationVndAPIPlusJSONBody(c.Server, scheduleRotationId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListScheduleRotationUsers(ctx context.Context, scheduleRotationId string, params *ListScheduleRotationUsersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListScheduleRotationUsersRequest(c.Server, scheduleRotationId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateScheduleRotationUserWithBody(ctx context.Context, scheduleRotationId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateScheduleRotationUserRequestWithBody(c.Server, scheduleRotationId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateScheduleRotationUserWithApplicationVndAPIPlusJSONBody(ctx context.Context, scheduleRotationId string, body CreateScheduleRotationUserApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateScheduleRotationUserRequestWithApplicationVndAPIPlusJSONBody(c.Server, scheduleRotationId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListSchedules(ctx context.Context, params *ListSchedulesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListSchedulesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateScheduleWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateScheduleRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateScheduleWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateScheduleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateScheduleRequestWithApplicationVndAPIPlusJSONBody(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteSchedule(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteScheduleRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetSchedule(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetScheduleRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateScheduleWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateScheduleRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateScheduleWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateScheduleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateScheduleRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListOverrideShifts(ctx context.Context, scheduleId string, params *ListOverrideShiftsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListOverrideShiftsRequest(c.Server, scheduleId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateOverrideShiftWithBody(ctx context.Context, scheduleId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateOverrideShiftRequestWithBody(c.Server, scheduleId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateOverrideShiftWithApplicationVndAPIPlusJSONBody(ctx context.Context, scheduleId string, body CreateOverrideShiftApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateOverrideShiftRequestWithApplicationVndAPIPlusJSONBody(c.Server, scheduleId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListScheduleRotations(ctx context.Context, scheduleId string, params *ListScheduleRotationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListScheduleRotationsRequest(c.Server, scheduleId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateScheduleRotationWithBody(ctx context.Context, scheduleId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateScheduleRotationRequestWithBody(c.Server, scheduleId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateScheduleRotationWithApplicationVndAPIPlusJSONBody(ctx context.Context, scheduleId string, body CreateScheduleRotationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateScheduleRotationRequestWithApplicationVndAPIPlusJSONBody(c.Server, scheduleId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -38119,6 +40013,22 @@ func NewListFunctionalitiesRequest(server string, params *ListFunctionalitiesPar
 
 		}
 
+		if params.FilterBackstageId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[backstage_id]", runtime.ParamLocationQuery, *params.FilterBackstageId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
 		if params.FilterSlug != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[slug]", runtime.ParamLocationQuery, *params.FilterSlug); err != nil {
@@ -43896,6 +45806,121 @@ func NewUpdateUserNotificationRuleRequestWithBody(server string, id string, cont
 	return req, nil
 }
 
+// NewDeleteOverrideShiftRequest generates requests for DeleteOverrideShift
+func NewDeleteOverrideShiftRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/override_shifts/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetOverrideShiftRequest generates requests for GetOverrideShift
+func NewGetOverrideShiftRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/override_shifts/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateOverrideShiftRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateOverrideShift builder with application/vnd.api+json body
+func NewUpdateOverrideShiftRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateOverrideShiftApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateOverrideShiftRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateOverrideShiftRequestWithBody generates requests for UpdateOverrideShift with any type of body
+func NewUpdateOverrideShiftRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/override_shifts/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewDeletePlaybookTaskRequest generates requests for DeletePlaybookTask
 func NewDeletePlaybookTaskRequest(server string, id string) (*http.Request, error) {
 	var err error
@@ -46714,6 +48739,1143 @@ func NewUpdateRoleRequestWithBody(server string, id string, contentType string, 
 	return req, nil
 }
 
+// NewDeleteScheduleRotationActiveTimeRequest generates requests for DeleteScheduleRotationActiveTime
+func NewDeleteScheduleRotationActiveTimeRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedule_rotation_active_times/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetScheduleRotationActiveTimeRequest generates requests for GetScheduleRotationActiveTime
+func NewGetScheduleRotationActiveTimeRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedule_rotation_active_times/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateScheduleRotationActiveTimeRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateScheduleRotationActiveTime builder with application/vnd.api+json body
+func NewUpdateScheduleRotationActiveTimeRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateScheduleRotationActiveTimeRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateScheduleRotationActiveTimeRequestWithBody generates requests for UpdateScheduleRotationActiveTime with any type of body
+func NewUpdateScheduleRotationActiveTimeRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedule_rotation_active_times/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteScheduleRotationUserRequest generates requests for DeleteScheduleRotationUser
+func NewDeleteScheduleRotationUserRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedule_rotation_users/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetScheduleRotationUserRequest generates requests for GetScheduleRotationUser
+func NewGetScheduleRotationUserRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedule_rotation_users/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateScheduleRotationUserRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateScheduleRotationUser builder with application/vnd.api+json body
+func NewUpdateScheduleRotationUserRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateScheduleRotationUserApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateScheduleRotationUserRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateScheduleRotationUserRequestWithBody generates requests for UpdateScheduleRotationUser with any type of body
+func NewUpdateScheduleRotationUserRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedule_rotation_users/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteScheduleRotationRequest generates requests for DeleteScheduleRotation
+func NewDeleteScheduleRotationRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedule_rotations/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetScheduleRotationRequest generates requests for GetScheduleRotation
+func NewGetScheduleRotationRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedule_rotations/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateScheduleRotationRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateScheduleRotation builder with application/vnd.api+json body
+func NewUpdateScheduleRotationRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateScheduleRotationApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateScheduleRotationRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateScheduleRotationRequestWithBody generates requests for UpdateScheduleRotation with any type of body
+func NewUpdateScheduleRotationRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedule_rotations/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListScheduleRotationActiveTimesRequest generates requests for ListScheduleRotationActiveTimes
+func NewListScheduleRotationActiveTimesRequest(server string, scheduleRotationId string, params *ListScheduleRotationActiveTimesParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "schedule_rotation_id", runtime.ParamLocationPath, scheduleRotationId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedule_rotations/%s/schedule_rotation_active_times", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateScheduleRotationActiveTimeRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateScheduleRotationActiveTime builder with application/vnd.api+json body
+func NewCreateScheduleRotationActiveTimeRequestWithApplicationVndAPIPlusJSONBody(server string, scheduleRotationId string, body CreateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateScheduleRotationActiveTimeRequestWithBody(server, scheduleRotationId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateScheduleRotationActiveTimeRequestWithBody generates requests for CreateScheduleRotationActiveTime with any type of body
+func NewCreateScheduleRotationActiveTimeRequestWithBody(server string, scheduleRotationId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "schedule_rotation_id", runtime.ParamLocationPath, scheduleRotationId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedule_rotations/%s/schedule_rotation_active_times", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListScheduleRotationUsersRequest generates requests for ListScheduleRotationUsers
+func NewListScheduleRotationUsersRequest(server string, scheduleRotationId string, params *ListScheduleRotationUsersParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "schedule_rotation_id", runtime.ParamLocationPath, scheduleRotationId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedule_rotations/%s/schedule_rotation_users", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateScheduleRotationUserRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateScheduleRotationUser builder with application/vnd.api+json body
+func NewCreateScheduleRotationUserRequestWithApplicationVndAPIPlusJSONBody(server string, scheduleRotationId string, body CreateScheduleRotationUserApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateScheduleRotationUserRequestWithBody(server, scheduleRotationId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateScheduleRotationUserRequestWithBody generates requests for CreateScheduleRotationUser with any type of body
+func NewCreateScheduleRotationUserRequestWithBody(server string, scheduleRotationId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "schedule_rotation_id", runtime.ParamLocationPath, scheduleRotationId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedule_rotations/%s/schedule_rotation_users", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListSchedulesRequest generates requests for ListSchedules
+func NewListSchedulesRequest(server string, params *ListSchedulesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedules")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateScheduleRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateSchedule builder with application/vnd.api+json body
+func NewCreateScheduleRequestWithApplicationVndAPIPlusJSONBody(server string, body CreateScheduleApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateScheduleRequestWithBody(server, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateScheduleRequestWithBody generates requests for CreateSchedule with any type of body
+func NewCreateScheduleRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedules")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteScheduleRequest generates requests for DeleteSchedule
+func NewDeleteScheduleRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedules/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetScheduleRequest generates requests for GetSchedule
+func NewGetScheduleRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedules/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateScheduleRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateSchedule builder with application/vnd.api+json body
+func NewUpdateScheduleRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateScheduleApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateScheduleRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateScheduleRequestWithBody generates requests for UpdateSchedule with any type of body
+func NewUpdateScheduleRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedules/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListOverrideShiftsRequest generates requests for ListOverrideShifts
+func NewListOverrideShiftsRequest(server string, scheduleId string, params *ListOverrideShiftsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "schedule_id", runtime.ParamLocationPath, scheduleId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedules/%s/override_shifts", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateOverrideShiftRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateOverrideShift builder with application/vnd.api+json body
+func NewCreateOverrideShiftRequestWithApplicationVndAPIPlusJSONBody(server string, scheduleId string, body CreateOverrideShiftApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateOverrideShiftRequestWithBody(server, scheduleId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateOverrideShiftRequestWithBody generates requests for CreateOverrideShift with any type of body
+func NewCreateOverrideShiftRequestWithBody(server string, scheduleId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "schedule_id", runtime.ParamLocationPath, scheduleId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedules/%s/override_shifts", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListScheduleRotationsRequest generates requests for ListScheduleRotations
+func NewListScheduleRotationsRequest(server string, scheduleId string, params *ListScheduleRotationsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "schedule_id", runtime.ParamLocationPath, scheduleId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedules/%s/schedule_rotations", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateScheduleRotationRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateScheduleRotation builder with application/vnd.api+json body
+func NewCreateScheduleRotationRequestWithApplicationVndAPIPlusJSONBody(server string, scheduleId string, body CreateScheduleRotationApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateScheduleRotationRequestWithBody(server, scheduleId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateScheduleRotationRequestWithBody generates requests for CreateScheduleRotation with any type of body
+func NewCreateScheduleRotationRequestWithBody(server string, scheduleId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "schedule_id", runtime.ParamLocationPath, scheduleId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedules/%s/schedule_rotations", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListSecretsRequest generates requests for ListSecrets
 func NewListSecretsRequest(server string, params *ListSecretsParams) (*http.Request, error) {
 	var err error
@@ -48553,6 +51715,22 @@ func NewListTeamsRequest(server string, params *ListTeamsParams) (*http.Request,
 		if params.FilterName != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[name]", runtime.ParamLocationQuery, *params.FilterName); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterBackstageId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[backstage_id]", runtime.ParamLocationQuery, *params.FilterBackstageId); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 				return nil, err
@@ -52151,6 +55329,17 @@ type ClientWithResponsesInterface interface {
 
 	UpdateUserNotificationRuleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateUserNotificationRuleResponse, error)
 
+	// DeleteOverrideShiftWithResponse request
+	DeleteOverrideShiftWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteOverrideShiftResponse, error)
+
+	// GetOverrideShiftWithResponse request
+	GetOverrideShiftWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetOverrideShiftResponse, error)
+
+	// UpdateOverrideShiftWithBodyWithResponse request with any body
+	UpdateOverrideShiftWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateOverrideShiftResponse, error)
+
+	UpdateOverrideShiftWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateOverrideShiftApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateOverrideShiftResponse, error)
+
 	// DeletePlaybookTaskWithResponse request
 	DeletePlaybookTaskWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeletePlaybookTaskResponse, error)
 
@@ -52302,6 +55491,90 @@ type ClientWithResponsesInterface interface {
 	UpdateRoleWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRoleResponse, error)
 
 	UpdateRoleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateRoleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateRoleResponse, error)
+
+	// DeleteScheduleRotationActiveTimeWithResponse request
+	DeleteScheduleRotationActiveTimeWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteScheduleRotationActiveTimeResponse, error)
+
+	// GetScheduleRotationActiveTimeWithResponse request
+	GetScheduleRotationActiveTimeWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetScheduleRotationActiveTimeResponse, error)
+
+	// UpdateScheduleRotationActiveTimeWithBodyWithResponse request with any body
+	UpdateScheduleRotationActiveTimeWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateScheduleRotationActiveTimeResponse, error)
+
+	UpdateScheduleRotationActiveTimeWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateScheduleRotationActiveTimeResponse, error)
+
+	// DeleteScheduleRotationUserWithResponse request
+	DeleteScheduleRotationUserWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteScheduleRotationUserResponse, error)
+
+	// GetScheduleRotationUserWithResponse request
+	GetScheduleRotationUserWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetScheduleRotationUserResponse, error)
+
+	// UpdateScheduleRotationUserWithBodyWithResponse request with any body
+	UpdateScheduleRotationUserWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateScheduleRotationUserResponse, error)
+
+	UpdateScheduleRotationUserWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateScheduleRotationUserApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateScheduleRotationUserResponse, error)
+
+	// DeleteScheduleRotationWithResponse request
+	DeleteScheduleRotationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteScheduleRotationResponse, error)
+
+	// GetScheduleRotationWithResponse request
+	GetScheduleRotationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetScheduleRotationResponse, error)
+
+	// UpdateScheduleRotationWithBodyWithResponse request with any body
+	UpdateScheduleRotationWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateScheduleRotationResponse, error)
+
+	UpdateScheduleRotationWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateScheduleRotationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateScheduleRotationResponse, error)
+
+	// ListScheduleRotationActiveTimesWithResponse request
+	ListScheduleRotationActiveTimesWithResponse(ctx context.Context, scheduleRotationId string, params *ListScheduleRotationActiveTimesParams, reqEditors ...RequestEditorFn) (*ListScheduleRotationActiveTimesResponse, error)
+
+	// CreateScheduleRotationActiveTimeWithBodyWithResponse request with any body
+	CreateScheduleRotationActiveTimeWithBodyWithResponse(ctx context.Context, scheduleRotationId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateScheduleRotationActiveTimeResponse, error)
+
+	CreateScheduleRotationActiveTimeWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, scheduleRotationId string, body CreateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateScheduleRotationActiveTimeResponse, error)
+
+	// ListScheduleRotationUsersWithResponse request
+	ListScheduleRotationUsersWithResponse(ctx context.Context, scheduleRotationId string, params *ListScheduleRotationUsersParams, reqEditors ...RequestEditorFn) (*ListScheduleRotationUsersResponse, error)
+
+	// CreateScheduleRotationUserWithBodyWithResponse request with any body
+	CreateScheduleRotationUserWithBodyWithResponse(ctx context.Context, scheduleRotationId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateScheduleRotationUserResponse, error)
+
+	CreateScheduleRotationUserWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, scheduleRotationId string, body CreateScheduleRotationUserApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateScheduleRotationUserResponse, error)
+
+	// ListSchedulesWithResponse request
+	ListSchedulesWithResponse(ctx context.Context, params *ListSchedulesParams, reqEditors ...RequestEditorFn) (*ListSchedulesResponse, error)
+
+	// CreateScheduleWithBodyWithResponse request with any body
+	CreateScheduleWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateScheduleResponse, error)
+
+	CreateScheduleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateScheduleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateScheduleResponse, error)
+
+	// DeleteScheduleWithResponse request
+	DeleteScheduleWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteScheduleResponse, error)
+
+	// GetScheduleWithResponse request
+	GetScheduleWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetScheduleResponse, error)
+
+	// UpdateScheduleWithBodyWithResponse request with any body
+	UpdateScheduleWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateScheduleResponse, error)
+
+	UpdateScheduleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateScheduleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateScheduleResponse, error)
+
+	// ListOverrideShiftsWithResponse request
+	ListOverrideShiftsWithResponse(ctx context.Context, scheduleId string, params *ListOverrideShiftsParams, reqEditors ...RequestEditorFn) (*ListOverrideShiftsResponse, error)
+
+	// CreateOverrideShiftWithBodyWithResponse request with any body
+	CreateOverrideShiftWithBodyWithResponse(ctx context.Context, scheduleId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateOverrideShiftResponse, error)
+
+	CreateOverrideShiftWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, scheduleId string, body CreateOverrideShiftApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateOverrideShiftResponse, error)
+
+	// ListScheduleRotationsWithResponse request
+	ListScheduleRotationsWithResponse(ctx context.Context, scheduleId string, params *ListScheduleRotationsParams, reqEditors ...RequestEditorFn) (*ListScheduleRotationsResponse, error)
+
+	// CreateScheduleRotationWithBodyWithResponse request with any body
+	CreateScheduleRotationWithBodyWithResponse(ctx context.Context, scheduleId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateScheduleRotationResponse, error)
+
+	CreateScheduleRotationWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, scheduleId string, body CreateScheduleRotationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateScheduleRotationResponse, error)
 
 	// ListSecretsWithResponse request
 	ListSecretsWithResponse(ctx context.Context, params *ListSecretsParams, reqEditors ...RequestEditorFn) (*ListSecretsResponse, error)
@@ -53759,7 +57032,7 @@ func (r UpdateEnvironmentResponse) StatusCode() int {
 type DeleteEscalationLevelResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *EscalationPolicyLevelResponse
+	ApplicationvndApiJSON200 *EscalationLevelResponse
 	ApplicationvndApiJSON401 *ErrorsList
 }
 
@@ -53782,7 +57055,7 @@ func (r DeleteEscalationLevelResponse) StatusCode() int {
 type GetEscalationLevelResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *EscalationPolicyLevelResponse
+	ApplicationvndApiJSON200 *EscalationLevelResponse
 	ApplicationvndApiJSON401 *ErrorsList
 }
 
@@ -53805,7 +57078,7 @@ func (r GetEscalationLevelResponse) StatusCode() int {
 type UpdateEscalationLevelResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *EscalationPolicyLevelResponse
+	ApplicationvndApiJSON200 *EscalationLevelResponse
 	ApplicationvndApiJSON401 *ErrorsList
 }
 
@@ -53874,7 +57147,7 @@ func (r CreateEscalationPolicyResponse) StatusCode() int {
 type ListEscalationLevelsResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *EscalationPolicyLevelList
+	ApplicationvndApiJSON200 *EscalationLevelList
 }
 
 // Status returns HTTPResponse.Status
@@ -53896,7 +57169,7 @@ func (r ListEscalationLevelsResponse) StatusCode() int {
 type CreateEscalationLevelResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON201 *EscalationPolicyLevelResponse
+	ApplicationvndApiJSON201 *EscalationLevelResponse
 	ApplicationvndApiJSON401 *ErrorsList
 	ApplicationvndApiJSON422 *ErrorsList
 }
@@ -56421,6 +59694,75 @@ func (r UpdateUserNotificationRuleResponse) StatusCode() int {
 	return 0
 }
 
+type DeleteOverrideShiftResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *OverrideShiftResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteOverrideShiftResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteOverrideShiftResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetOverrideShiftResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *OverrideShiftResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetOverrideShiftResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetOverrideShiftResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateOverrideShiftResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *OverrideShiftResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateOverrideShiftResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateOverrideShiftResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type DeletePlaybookTaskResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -57333,6 +60675,512 @@ func (r UpdateRoleResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r UpdateRoleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteScheduleRotationActiveTimeResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ScheduleRotationActiveTimeResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteScheduleRotationActiveTimeResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteScheduleRotationActiveTimeResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetScheduleRotationActiveTimeResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ScheduleRotationActiveTimeResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetScheduleRotationActiveTimeResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetScheduleRotationActiveTimeResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateScheduleRotationActiveTimeResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ScheduleRotationActiveTimeResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateScheduleRotationActiveTimeResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateScheduleRotationActiveTimeResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteScheduleRotationUserResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ScheduleRotationUserResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteScheduleRotationUserResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteScheduleRotationUserResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetScheduleRotationUserResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ScheduleRotationUserResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetScheduleRotationUserResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetScheduleRotationUserResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateScheduleRotationUserResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ScheduleRotationUserResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateScheduleRotationUserResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateScheduleRotationUserResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteScheduleRotationResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ScheduleRotationResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteScheduleRotationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteScheduleRotationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetScheduleRotationResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ScheduleRotationResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetScheduleRotationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetScheduleRotationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateScheduleRotationResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ScheduleRotationResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateScheduleRotationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateScheduleRotationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListScheduleRotationActiveTimesResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ScheduleRotationActiveTimeList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListScheduleRotationActiveTimesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListScheduleRotationActiveTimesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateScheduleRotationActiveTimeResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *ScheduleRotationActiveTimeResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateScheduleRotationActiveTimeResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateScheduleRotationActiveTimeResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListScheduleRotationUsersResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ScheduleRotationUserList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListScheduleRotationUsersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListScheduleRotationUsersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateScheduleRotationUserResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *ScheduleRotationUserResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateScheduleRotationUserResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateScheduleRotationUserResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListSchedulesResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ScheduleList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListSchedulesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListSchedulesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateScheduleResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *ScheduleResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateScheduleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateScheduleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteScheduleResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ScheduleResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteScheduleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteScheduleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetScheduleResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ScheduleResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetScheduleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetScheduleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateScheduleResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ScheduleResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateScheduleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateScheduleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListOverrideShiftsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *OverrideShiftList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListOverrideShiftsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListOverrideShiftsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateOverrideShiftResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *OverrideShiftResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateOverrideShiftResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateOverrideShiftResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListScheduleRotationsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ScheduleRotationList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListScheduleRotationsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListScheduleRotationsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateScheduleRotationResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *ScheduleRotationResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateScheduleRotationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateScheduleRotationResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -61144,6 +64992,41 @@ func (c *ClientWithResponses) UpdateUserNotificationRuleWithApplicationVndAPIPlu
 	return ParseUpdateUserNotificationRuleResponse(rsp)
 }
 
+// DeleteOverrideShiftWithResponse request returning *DeleteOverrideShiftResponse
+func (c *ClientWithResponses) DeleteOverrideShiftWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteOverrideShiftResponse, error) {
+	rsp, err := c.DeleteOverrideShift(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteOverrideShiftResponse(rsp)
+}
+
+// GetOverrideShiftWithResponse request returning *GetOverrideShiftResponse
+func (c *ClientWithResponses) GetOverrideShiftWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetOverrideShiftResponse, error) {
+	rsp, err := c.GetOverrideShift(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetOverrideShiftResponse(rsp)
+}
+
+// UpdateOverrideShiftWithBodyWithResponse request with arbitrary body returning *UpdateOverrideShiftResponse
+func (c *ClientWithResponses) UpdateOverrideShiftWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateOverrideShiftResponse, error) {
+	rsp, err := c.UpdateOverrideShiftWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateOverrideShiftResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateOverrideShiftWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateOverrideShiftApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateOverrideShiftResponse, error) {
+	rsp, err := c.UpdateOverrideShiftWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateOverrideShiftResponse(rsp)
+}
+
 // DeletePlaybookTaskWithResponse request returning *DeletePlaybookTaskResponse
 func (c *ClientWithResponses) DeletePlaybookTaskWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeletePlaybookTaskResponse, error) {
 	rsp, err := c.DeletePlaybookTask(ctx, id, reqEditors...)
@@ -61630,6 +65513,276 @@ func (c *ClientWithResponses) UpdateRoleWithApplicationVndAPIPlusJSONBodyWithRes
 		return nil, err
 	}
 	return ParseUpdateRoleResponse(rsp)
+}
+
+// DeleteScheduleRotationActiveTimeWithResponse request returning *DeleteScheduleRotationActiveTimeResponse
+func (c *ClientWithResponses) DeleteScheduleRotationActiveTimeWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteScheduleRotationActiveTimeResponse, error) {
+	rsp, err := c.DeleteScheduleRotationActiveTime(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteScheduleRotationActiveTimeResponse(rsp)
+}
+
+// GetScheduleRotationActiveTimeWithResponse request returning *GetScheduleRotationActiveTimeResponse
+func (c *ClientWithResponses) GetScheduleRotationActiveTimeWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetScheduleRotationActiveTimeResponse, error) {
+	rsp, err := c.GetScheduleRotationActiveTime(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetScheduleRotationActiveTimeResponse(rsp)
+}
+
+// UpdateScheduleRotationActiveTimeWithBodyWithResponse request with arbitrary body returning *UpdateScheduleRotationActiveTimeResponse
+func (c *ClientWithResponses) UpdateScheduleRotationActiveTimeWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateScheduleRotationActiveTimeResponse, error) {
+	rsp, err := c.UpdateScheduleRotationActiveTimeWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateScheduleRotationActiveTimeResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateScheduleRotationActiveTimeWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateScheduleRotationActiveTimeResponse, error) {
+	rsp, err := c.UpdateScheduleRotationActiveTimeWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateScheduleRotationActiveTimeResponse(rsp)
+}
+
+// DeleteScheduleRotationUserWithResponse request returning *DeleteScheduleRotationUserResponse
+func (c *ClientWithResponses) DeleteScheduleRotationUserWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteScheduleRotationUserResponse, error) {
+	rsp, err := c.DeleteScheduleRotationUser(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteScheduleRotationUserResponse(rsp)
+}
+
+// GetScheduleRotationUserWithResponse request returning *GetScheduleRotationUserResponse
+func (c *ClientWithResponses) GetScheduleRotationUserWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetScheduleRotationUserResponse, error) {
+	rsp, err := c.GetScheduleRotationUser(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetScheduleRotationUserResponse(rsp)
+}
+
+// UpdateScheduleRotationUserWithBodyWithResponse request with arbitrary body returning *UpdateScheduleRotationUserResponse
+func (c *ClientWithResponses) UpdateScheduleRotationUserWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateScheduleRotationUserResponse, error) {
+	rsp, err := c.UpdateScheduleRotationUserWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateScheduleRotationUserResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateScheduleRotationUserWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateScheduleRotationUserApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateScheduleRotationUserResponse, error) {
+	rsp, err := c.UpdateScheduleRotationUserWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateScheduleRotationUserResponse(rsp)
+}
+
+// DeleteScheduleRotationWithResponse request returning *DeleteScheduleRotationResponse
+func (c *ClientWithResponses) DeleteScheduleRotationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteScheduleRotationResponse, error) {
+	rsp, err := c.DeleteScheduleRotation(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteScheduleRotationResponse(rsp)
+}
+
+// GetScheduleRotationWithResponse request returning *GetScheduleRotationResponse
+func (c *ClientWithResponses) GetScheduleRotationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetScheduleRotationResponse, error) {
+	rsp, err := c.GetScheduleRotation(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetScheduleRotationResponse(rsp)
+}
+
+// UpdateScheduleRotationWithBodyWithResponse request with arbitrary body returning *UpdateScheduleRotationResponse
+func (c *ClientWithResponses) UpdateScheduleRotationWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateScheduleRotationResponse, error) {
+	rsp, err := c.UpdateScheduleRotationWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateScheduleRotationResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateScheduleRotationWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateScheduleRotationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateScheduleRotationResponse, error) {
+	rsp, err := c.UpdateScheduleRotationWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateScheduleRotationResponse(rsp)
+}
+
+// ListScheduleRotationActiveTimesWithResponse request returning *ListScheduleRotationActiveTimesResponse
+func (c *ClientWithResponses) ListScheduleRotationActiveTimesWithResponse(ctx context.Context, scheduleRotationId string, params *ListScheduleRotationActiveTimesParams, reqEditors ...RequestEditorFn) (*ListScheduleRotationActiveTimesResponse, error) {
+	rsp, err := c.ListScheduleRotationActiveTimes(ctx, scheduleRotationId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListScheduleRotationActiveTimesResponse(rsp)
+}
+
+// CreateScheduleRotationActiveTimeWithBodyWithResponse request with arbitrary body returning *CreateScheduleRotationActiveTimeResponse
+func (c *ClientWithResponses) CreateScheduleRotationActiveTimeWithBodyWithResponse(ctx context.Context, scheduleRotationId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateScheduleRotationActiveTimeResponse, error) {
+	rsp, err := c.CreateScheduleRotationActiveTimeWithBody(ctx, scheduleRotationId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateScheduleRotationActiveTimeResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateScheduleRotationActiveTimeWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, scheduleRotationId string, body CreateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateScheduleRotationActiveTimeResponse, error) {
+	rsp, err := c.CreateScheduleRotationActiveTimeWithApplicationVndAPIPlusJSONBody(ctx, scheduleRotationId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateScheduleRotationActiveTimeResponse(rsp)
+}
+
+// ListScheduleRotationUsersWithResponse request returning *ListScheduleRotationUsersResponse
+func (c *ClientWithResponses) ListScheduleRotationUsersWithResponse(ctx context.Context, scheduleRotationId string, params *ListScheduleRotationUsersParams, reqEditors ...RequestEditorFn) (*ListScheduleRotationUsersResponse, error) {
+	rsp, err := c.ListScheduleRotationUsers(ctx, scheduleRotationId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListScheduleRotationUsersResponse(rsp)
+}
+
+// CreateScheduleRotationUserWithBodyWithResponse request with arbitrary body returning *CreateScheduleRotationUserResponse
+func (c *ClientWithResponses) CreateScheduleRotationUserWithBodyWithResponse(ctx context.Context, scheduleRotationId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateScheduleRotationUserResponse, error) {
+	rsp, err := c.CreateScheduleRotationUserWithBody(ctx, scheduleRotationId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateScheduleRotationUserResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateScheduleRotationUserWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, scheduleRotationId string, body CreateScheduleRotationUserApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateScheduleRotationUserResponse, error) {
+	rsp, err := c.CreateScheduleRotationUserWithApplicationVndAPIPlusJSONBody(ctx, scheduleRotationId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateScheduleRotationUserResponse(rsp)
+}
+
+// ListSchedulesWithResponse request returning *ListSchedulesResponse
+func (c *ClientWithResponses) ListSchedulesWithResponse(ctx context.Context, params *ListSchedulesParams, reqEditors ...RequestEditorFn) (*ListSchedulesResponse, error) {
+	rsp, err := c.ListSchedules(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListSchedulesResponse(rsp)
+}
+
+// CreateScheduleWithBodyWithResponse request with arbitrary body returning *CreateScheduleResponse
+func (c *ClientWithResponses) CreateScheduleWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateScheduleResponse, error) {
+	rsp, err := c.CreateScheduleWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateScheduleResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateScheduleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateScheduleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateScheduleResponse, error) {
+	rsp, err := c.CreateScheduleWithApplicationVndAPIPlusJSONBody(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateScheduleResponse(rsp)
+}
+
+// DeleteScheduleWithResponse request returning *DeleteScheduleResponse
+func (c *ClientWithResponses) DeleteScheduleWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteScheduleResponse, error) {
+	rsp, err := c.DeleteSchedule(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteScheduleResponse(rsp)
+}
+
+// GetScheduleWithResponse request returning *GetScheduleResponse
+func (c *ClientWithResponses) GetScheduleWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetScheduleResponse, error) {
+	rsp, err := c.GetSchedule(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetScheduleResponse(rsp)
+}
+
+// UpdateScheduleWithBodyWithResponse request with arbitrary body returning *UpdateScheduleResponse
+func (c *ClientWithResponses) UpdateScheduleWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateScheduleResponse, error) {
+	rsp, err := c.UpdateScheduleWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateScheduleResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateScheduleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateScheduleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateScheduleResponse, error) {
+	rsp, err := c.UpdateScheduleWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateScheduleResponse(rsp)
+}
+
+// ListOverrideShiftsWithResponse request returning *ListOverrideShiftsResponse
+func (c *ClientWithResponses) ListOverrideShiftsWithResponse(ctx context.Context, scheduleId string, params *ListOverrideShiftsParams, reqEditors ...RequestEditorFn) (*ListOverrideShiftsResponse, error) {
+	rsp, err := c.ListOverrideShifts(ctx, scheduleId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListOverrideShiftsResponse(rsp)
+}
+
+// CreateOverrideShiftWithBodyWithResponse request with arbitrary body returning *CreateOverrideShiftResponse
+func (c *ClientWithResponses) CreateOverrideShiftWithBodyWithResponse(ctx context.Context, scheduleId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateOverrideShiftResponse, error) {
+	rsp, err := c.CreateOverrideShiftWithBody(ctx, scheduleId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateOverrideShiftResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateOverrideShiftWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, scheduleId string, body CreateOverrideShiftApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateOverrideShiftResponse, error) {
+	rsp, err := c.CreateOverrideShiftWithApplicationVndAPIPlusJSONBody(ctx, scheduleId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateOverrideShiftResponse(rsp)
+}
+
+// ListScheduleRotationsWithResponse request returning *ListScheduleRotationsResponse
+func (c *ClientWithResponses) ListScheduleRotationsWithResponse(ctx context.Context, scheduleId string, params *ListScheduleRotationsParams, reqEditors ...RequestEditorFn) (*ListScheduleRotationsResponse, error) {
+	rsp, err := c.ListScheduleRotations(ctx, scheduleId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListScheduleRotationsResponse(rsp)
+}
+
+// CreateScheduleRotationWithBodyWithResponse request with arbitrary body returning *CreateScheduleRotationResponse
+func (c *ClientWithResponses) CreateScheduleRotationWithBodyWithResponse(ctx context.Context, scheduleId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateScheduleRotationResponse, error) {
+	rsp, err := c.CreateScheduleRotationWithBody(ctx, scheduleId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateScheduleRotationResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateScheduleRotationWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, scheduleId string, body CreateScheduleRotationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateScheduleRotationResponse, error) {
+	rsp, err := c.CreateScheduleRotationWithApplicationVndAPIPlusJSONBody(ctx, scheduleId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateScheduleRotationResponse(rsp)
 }
 
 // ListSecretsWithResponse request returning *ListSecretsResponse
@@ -64209,7 +68362,7 @@ func ParseDeleteEscalationLevelResponse(rsp *http.Response) (*DeleteEscalationLe
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest EscalationPolicyLevelResponse
+		var dest EscalationLevelResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -64242,7 +68395,7 @@ func ParseGetEscalationLevelResponse(rsp *http.Response) (*GetEscalationLevelRes
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest EscalationPolicyLevelResponse
+		var dest EscalationLevelResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -64275,7 +68428,7 @@ func ParseUpdateEscalationLevelResponse(rsp *http.Response) (*UpdateEscalationLe
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest EscalationPolicyLevelResponse
+		var dest EscalationLevelResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -64374,7 +68527,7 @@ func ParseListEscalationLevelsResponse(rsp *http.Response) (*ListEscalationLevel
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest EscalationPolicyLevelList
+		var dest EscalationLevelList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -64400,7 +68553,7 @@ func ParseCreateEscalationLevelResponse(rsp *http.Response) (*CreateEscalationLe
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest EscalationPolicyLevelResponse
+		var dest EscalationLevelResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -68001,6 +72154,105 @@ func ParseUpdateUserNotificationRuleResponse(rsp *http.Response) (*UpdateUserNot
 	return response, nil
 }
 
+// ParseDeleteOverrideShiftResponse parses an HTTP response from a DeleteOverrideShiftWithResponse call
+func ParseDeleteOverrideShiftResponse(rsp *http.Response) (*DeleteOverrideShiftResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteOverrideShiftResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest OverrideShiftResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetOverrideShiftResponse parses an HTTP response from a GetOverrideShiftWithResponse call
+func ParseGetOverrideShiftResponse(rsp *http.Response) (*GetOverrideShiftResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetOverrideShiftResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest OverrideShiftResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateOverrideShiftResponse parses an HTTP response from a UpdateOverrideShiftWithResponse call
+func ParseUpdateOverrideShiftResponse(rsp *http.Response) (*UpdateOverrideShiftResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateOverrideShiftResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest OverrideShiftResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseDeletePlaybookTaskResponse parses an HTTP response from a DeletePlaybookTaskWithResponse call
 func ParseDeletePlaybookTaskResponse(rsp *http.Response) (*DeletePlaybookTaskResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -69301,6 +73553,732 @@ func ParseUpdateRoleResponse(rsp *http.Response) (*UpdateRoleResponse, error) {
 			return nil, err
 		}
 		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteScheduleRotationActiveTimeResponse parses an HTTP response from a DeleteScheduleRotationActiveTimeWithResponse call
+func ParseDeleteScheduleRotationActiveTimeResponse(rsp *http.Response) (*DeleteScheduleRotationActiveTimeResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteScheduleRotationActiveTimeResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ScheduleRotationActiveTimeResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetScheduleRotationActiveTimeResponse parses an HTTP response from a GetScheduleRotationActiveTimeWithResponse call
+func ParseGetScheduleRotationActiveTimeResponse(rsp *http.Response) (*GetScheduleRotationActiveTimeResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetScheduleRotationActiveTimeResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ScheduleRotationActiveTimeResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateScheduleRotationActiveTimeResponse parses an HTTP response from a UpdateScheduleRotationActiveTimeWithResponse call
+func ParseUpdateScheduleRotationActiveTimeResponse(rsp *http.Response) (*UpdateScheduleRotationActiveTimeResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateScheduleRotationActiveTimeResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ScheduleRotationActiveTimeResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteScheduleRotationUserResponse parses an HTTP response from a DeleteScheduleRotationUserWithResponse call
+func ParseDeleteScheduleRotationUserResponse(rsp *http.Response) (*DeleteScheduleRotationUserResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteScheduleRotationUserResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ScheduleRotationUserResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetScheduleRotationUserResponse parses an HTTP response from a GetScheduleRotationUserWithResponse call
+func ParseGetScheduleRotationUserResponse(rsp *http.Response) (*GetScheduleRotationUserResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetScheduleRotationUserResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ScheduleRotationUserResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateScheduleRotationUserResponse parses an HTTP response from a UpdateScheduleRotationUserWithResponse call
+func ParseUpdateScheduleRotationUserResponse(rsp *http.Response) (*UpdateScheduleRotationUserResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateScheduleRotationUserResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ScheduleRotationUserResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteScheduleRotationResponse parses an HTTP response from a DeleteScheduleRotationWithResponse call
+func ParseDeleteScheduleRotationResponse(rsp *http.Response) (*DeleteScheduleRotationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteScheduleRotationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ScheduleRotationResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetScheduleRotationResponse parses an HTTP response from a GetScheduleRotationWithResponse call
+func ParseGetScheduleRotationResponse(rsp *http.Response) (*GetScheduleRotationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetScheduleRotationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ScheduleRotationResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateScheduleRotationResponse parses an HTTP response from a UpdateScheduleRotationWithResponse call
+func ParseUpdateScheduleRotationResponse(rsp *http.Response) (*UpdateScheduleRotationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateScheduleRotationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ScheduleRotationResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListScheduleRotationActiveTimesResponse parses an HTTP response from a ListScheduleRotationActiveTimesWithResponse call
+func ParseListScheduleRotationActiveTimesResponse(rsp *http.Response) (*ListScheduleRotationActiveTimesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListScheduleRotationActiveTimesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ScheduleRotationActiveTimeList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateScheduleRotationActiveTimeResponse parses an HTTP response from a CreateScheduleRotationActiveTimeWithResponse call
+func ParseCreateScheduleRotationActiveTimeResponse(rsp *http.Response) (*CreateScheduleRotationActiveTimeResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateScheduleRotationActiveTimeResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest ScheduleRotationActiveTimeResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListScheduleRotationUsersResponse parses an HTTP response from a ListScheduleRotationUsersWithResponse call
+func ParseListScheduleRotationUsersResponse(rsp *http.Response) (*ListScheduleRotationUsersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListScheduleRotationUsersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ScheduleRotationUserList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateScheduleRotationUserResponse parses an HTTP response from a CreateScheduleRotationUserWithResponse call
+func ParseCreateScheduleRotationUserResponse(rsp *http.Response) (*CreateScheduleRotationUserResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateScheduleRotationUserResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest ScheduleRotationUserResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListSchedulesResponse parses an HTTP response from a ListSchedulesWithResponse call
+func ParseListSchedulesResponse(rsp *http.Response) (*ListSchedulesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListSchedulesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ScheduleList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateScheduleResponse parses an HTTP response from a CreateScheduleWithResponse call
+func ParseCreateScheduleResponse(rsp *http.Response) (*CreateScheduleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateScheduleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest ScheduleResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteScheduleResponse parses an HTTP response from a DeleteScheduleWithResponse call
+func ParseDeleteScheduleResponse(rsp *http.Response) (*DeleteScheduleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteScheduleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ScheduleResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetScheduleResponse parses an HTTP response from a GetScheduleWithResponse call
+func ParseGetScheduleResponse(rsp *http.Response) (*GetScheduleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetScheduleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ScheduleResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateScheduleResponse parses an HTTP response from a UpdateScheduleWithResponse call
+func ParseUpdateScheduleResponse(rsp *http.Response) (*UpdateScheduleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateScheduleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ScheduleResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListOverrideShiftsResponse parses an HTTP response from a ListOverrideShiftsWithResponse call
+func ParseListOverrideShiftsResponse(rsp *http.Response) (*ListOverrideShiftsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListOverrideShiftsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest OverrideShiftList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateOverrideShiftResponse parses an HTTP response from a CreateOverrideShiftWithResponse call
+func ParseCreateOverrideShiftResponse(rsp *http.Response) (*CreateOverrideShiftResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateOverrideShiftResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest OverrideShiftResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListScheduleRotationsResponse parses an HTTP response from a ListScheduleRotationsWithResponse call
+func ParseListScheduleRotationsResponse(rsp *http.Response) (*ListScheduleRotationsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListScheduleRotationsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ScheduleRotationList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateScheduleRotationResponse parses an HTTP response from a CreateScheduleRotationWithResponse call
+func ParseCreateScheduleRotationResponse(rsp *http.Response) (*CreateScheduleRotationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateScheduleRotationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest ScheduleRotationResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
 
 	}
 

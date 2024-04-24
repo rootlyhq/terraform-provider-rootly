@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_create_linear_issue_comment - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow createlinearissue_comment task.
+    Manages workflow create_linear_issue_comment task.
 ---
 
 # Resource (rootly_workflow_task_create_linear_issue_comment)

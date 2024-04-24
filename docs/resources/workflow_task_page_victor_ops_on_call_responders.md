@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_page_victor_ops_on_call_responders - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow pagevictoropsoncall_responders task.
+    Manages workflow page_victor_ops_on_call_responders task.
 ---
 
 # Resource (rootly_workflow_task_page_victor_ops_on_call_responders)

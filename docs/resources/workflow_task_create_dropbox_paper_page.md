@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_create_dropbox_paper_page - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow createdropboxpaper_page task.
+    Manages workflow create_dropbox_paper_page task.
 ---
 
 # Resource (rootly_workflow_task_create_dropbox_paper_page)

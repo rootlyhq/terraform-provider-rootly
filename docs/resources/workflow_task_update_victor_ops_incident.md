@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_update_victor_ops_incident - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow updatevictorops_incident task.
+    Manages workflow update_victor_ops_incident task.
 ---
 
 # Resource (rootly_workflow_task_update_victor_ops_incident)

@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_create_clickup_task - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow createclickuptask task.
+    Manages workflow create_clickup_task task.
 ---
 
 # Resource (rootly_workflow_task_create_clickup_task)

@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_archive_slack_channels - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow archiveslackchannels task.
+    Manages workflow archive_slack_channels task.
 ---
 
 # Resource (rootly_workflow_task_archive_slack_channels)

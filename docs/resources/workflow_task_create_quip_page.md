@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_create_quip_page - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow createquippage task.
+    Manages workflow create_quip_page task.
 ---
 
 # Resource (rootly_workflow_task_create_quip_page)

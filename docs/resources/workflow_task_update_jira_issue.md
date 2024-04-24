@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_update_jira_issue - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow updatejiraissue task.
+    Manages workflow update_jira_issue task.
 ---
 
 # Resource (rootly_workflow_task_update_jira_issue)

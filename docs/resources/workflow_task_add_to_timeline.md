@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_add_to_timeline - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow addtotimeline task.
+    Manages workflow add_to_timeline task.
 ---
 
 # Resource (rootly_workflow_task_add_to_timeline)

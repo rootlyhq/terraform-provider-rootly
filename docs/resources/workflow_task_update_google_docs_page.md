@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_update_google_docs_page - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow updategoogledocs_page task.
+    Manages workflow update_google_docs_page task.
 ---
 
 # Resource (rootly_workflow_task_update_google_docs_page)

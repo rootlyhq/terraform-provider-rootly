@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_tweet_twitter_message - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow tweettwittermessage task.
+    Manages workflow tweet_twitter_message task.
 ---
 
 # Resource (rootly_workflow_task_tweet_twitter_message)

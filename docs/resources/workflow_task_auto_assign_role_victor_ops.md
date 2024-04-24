@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_auto_assign_role_victor_ops - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow autoassignrolevictorops task.
+    Manages workflow auto_assign_role_victor_ops task.
 ---
 
 # Resource (rootly_workflow_task_auto_assign_role_victor_ops)

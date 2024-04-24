@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_create_google_calendar_event - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow creategooglecalendar_event task.
+    Manages workflow create_google_calendar_event task.
 ---
 
 # Resource (rootly_workflow_task_create_google_calendar_event)
@@ -60,7 +60,6 @@ resource "rootly_workflow_task_create_google_calendar_event" "create_google_cale
 
 Required:
 
-- `attendees` (List of String) Emails of attendees
 - `days_until_meeting` (Number) The days until meeting
 - `description` (String) The event description
 - `meeting_duration` (String) Meeting duration in format like '1 hour', '30 minutes'
@@ -69,6 +68,7 @@ Required:
 
 Optional:
 
+- `attendees` (List of String) Emails of attendees
 - `can_guests_invite_others` (Boolean) Value must be one of true or false
 - `can_guests_modify_event` (Boolean) Value must be one of true or false
 - `can_guests_see_other_guests` (Boolean) Value must be one of true or false

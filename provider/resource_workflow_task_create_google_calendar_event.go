@@ -76,7 +76,7 @@ func resourceWorkflowTaskCreateGoogleCalendarEvent() *schema.Resource {
 						"attendees": &schema.Schema{
 							Description: "Emails of attendees",
 							Type:        schema.TypeList,
-							Required:    true,
+							Optional:    true,
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							},

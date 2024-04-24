@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_create_airtable_table_record - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow createairtabletable_record task.
+    Manages workflow create_airtable_table_record task.
 ---
 
 # Resource (rootly_workflow_task_create_airtable_table_record)

@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_add_slack_bookmark - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow addslackbookmark task.
+    Manages workflow add_slack_bookmark task.
 ---
 
 # Resource (rootly_workflow_task_add_slack_bookmark)

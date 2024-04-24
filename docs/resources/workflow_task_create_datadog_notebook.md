@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_create_datadog_notebook - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow createdatadognotebook task.
+    Manages workflow create_datadog_notebook task.
 ---
 
 # Resource (rootly_workflow_task_create_datadog_notebook)
