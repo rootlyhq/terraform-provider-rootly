@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_send_slack_message - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow sendslackmessage task.
+    Manages workflow send_slack_message task.
 ---
 
 # Resource (rootly_workflow_task_send_slack_message)

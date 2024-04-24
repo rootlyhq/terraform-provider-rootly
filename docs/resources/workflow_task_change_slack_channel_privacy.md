@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_change_slack_channel_privacy - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow changeslackchannel_privacy task.
+    Manages workflow change_slack_channel_privacy task.
 ---
 
 # Resource (rootly_workflow_task_change_slack_channel_privacy)

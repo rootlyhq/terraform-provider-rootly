@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_update_notion_page - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow updatenotionpage task.
+    Manages workflow update_notion_page task.
 ---
 
 # Resource (rootly_workflow_task_update_notion_page)

@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_create_zoom_meeting - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow createzoommeeting task.
+    Manages workflow create_zoom_meeting task.
 ---
 
 # Resource (rootly_workflow_task_create_zoom_meeting)

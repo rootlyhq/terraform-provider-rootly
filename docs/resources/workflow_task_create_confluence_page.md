@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_create_confluence_page - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow createconfluencepage task.
+    Manages workflow create_confluence_page task.
 ---
 
 # Resource (rootly_workflow_task_create_confluence_page)

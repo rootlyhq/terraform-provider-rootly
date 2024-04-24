@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_create_jira_subtask - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow createjirasubtask task.
+    Manages workflow create_jira_subtask task.
 ---
 
 # Resource (rootly_workflow_task_create_jira_subtask)

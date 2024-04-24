@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_run_command_heroku - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow runcommandheroku task.
+    Manages workflow run_command_heroku task.
 ---
 
 # Resource (rootly_workflow_task_run_command_heroku)

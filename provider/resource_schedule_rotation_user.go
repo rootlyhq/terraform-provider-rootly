@@ -1,0 +1,149 @@
+package provider
+
+import (
+	"context"
+	"fmt"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/rootlyhq/terraform-provider-rootly/client"
+)
+
+func resourceScheduleRotationUser() *schema.Resource {
+	return &schema.Resource{
+		CreateContext: resourceScheduleRotationUserCreate,
+		ReadContext:   resourceScheduleRotationUserRead,
+		UpdateContext: resourceScheduleRotationUserUpdate,
+		DeleteContext: resourceScheduleRotationUserDelete,
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
+		},
+		Schema: map[string]*schema.Schema{
+
+			"schedule_rotation_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    true,
+				Description: "",
+			},
+
+			"user_id": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
+				Description: "Schedule rotation user",
+			},
+
+			"position": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Position of the user inside rotation",
+			},
+		},
+	}
+}
+
+func resourceScheduleRotationUserCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	c := meta.(*client.Client)
+
+	tflog.Trace(ctx, fmt.Sprintf("Creating ScheduleRotationUser"))
+
+	s := &client.ScheduleRotationUser{}
+
+	if value, ok := d.GetOkExists("schedule_rotation_id"); ok {
+		s.ScheduleRotationId = value.(string)
+	}
+	if value, ok := d.GetOkExists("user_id"); ok {
+		s.UserId = value.(int)
+	}
+	if value, ok := d.GetOkExists("position"); ok {
+		s.Position = value.(int)
+	}
+
+	res, err := c.CreateScheduleRotationUser(s)
+	if err != nil {
+		return diag.Errorf("Error creating schedule_rotation_user: %s", err.Error())
+	}
+
+	d.SetId(res.ID)
+	tflog.Trace(ctx, fmt.Sprintf("created a schedule_rotation_user resource: %s", d.Id()))
+
+	return resourceScheduleRotationUserRead(ctx, d, meta)
+}
+
+func resourceScheduleRotationUserRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	c := meta.(*client.Client)
+	tflog.Trace(ctx, fmt.Sprintf("Reading ScheduleRotationUser: %s", d.Id()))
+
+	item, err := c.GetScheduleRotationUser(d.Id())
+	if err != nil {
+		// In the case of a NotFoundError, it means the resource may have been removed upstream
+		// We just remove it from the state.
+		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+			tflog.Warn(ctx, fmt.Sprintf("ScheduleRotationUser (%s) not found, removing from state", d.Id()))
+			d.SetId("")
+			return nil
+		}
+
+		return diag.Errorf("Error reading schedule_rotation_user: %s", d.Id())
+	}
+
+	d.Set("schedule_rotation_id", item.ScheduleRotationId)
+	d.Set("user_id", item.UserId)
+	d.Set("position", item.Position)
+
+	return nil
+}
+
+func resourceScheduleRotationUserUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	c := meta.(*client.Client)
+	tflog.Trace(ctx, fmt.Sprintf("Updating ScheduleRotationUser: %s", d.Id()))
+
+	s := &client.ScheduleRotationUser{}
+
+	if d.HasChange("schedule_rotation_id") {
+		s.ScheduleRotationId = d.Get("schedule_rotation_id").(string)
+	}
+	if d.HasChange("user_id") {
+		s.UserId = d.Get("user_id").(int)
+	}
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
+	}
+
+	_, err := c.UpdateScheduleRotationUser(d.Id(), s)
+	if err != nil {
+		return diag.Errorf("Error updating schedule_rotation_user: %s", err.Error())
+	}
+
+	return resourceScheduleRotationUserRead(ctx, d, meta)
+}
+
+func resourceScheduleRotationUserDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	c := meta.(*client.Client)
+	tflog.Trace(ctx, fmt.Sprintf("Deleting ScheduleRotationUser: %s", d.Id()))
+
+	err := c.DeleteScheduleRotationUser(d.Id())
+	if err != nil {
+		// In the case of a NotFoundError, it means the resource may have been removed upstream.
+		// We just remove it from the state.
+		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+			tflog.Warn(ctx, fmt.Sprintf("ScheduleRotationUser (%s) not found, removing from state", d.Id()))
+			d.SetId("")
+			return nil
+		}
+		return diag.Errorf("Error deleting schedule_rotation_user: %s", err.Error())
+	}
+
+	d.SetId("")
+
+	return nil
+}

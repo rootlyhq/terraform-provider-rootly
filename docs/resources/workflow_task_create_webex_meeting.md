@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_create_webex_meeting - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow createwebexmeeting task.
+    Manages workflow create_webex_meeting task.
 ---
 
 # Resource (rootly_workflow_task_create_webex_meeting)

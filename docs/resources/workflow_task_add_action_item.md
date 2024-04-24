@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_add_action_item - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow addactionitem task.
+    Manages workflow add_action_item task.
 ---
 
 # Resource (rootly_workflow_task_add_action_item)

@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_create_google_docs_page - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow creategoogledocs_page task.
+    Manages workflow create_google_docs_page task.
 ---
 
 # Resource (rootly_workflow_task_create_google_docs_page)

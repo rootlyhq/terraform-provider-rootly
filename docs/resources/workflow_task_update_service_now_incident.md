@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_update_service_now_incident - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow updateservicenow_incident task.
+    Manages workflow update_service_now_incident task.
 ---
 
 # Resource (rootly_workflow_task_update_service_now_incident)

@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_auto_assign_role_rootly - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow autoassignrole_rootly task.
+    Manages workflow auto_assign_role_rootly task.
 ---
 
 # Resource (rootly_workflow_task_auto_assign_role_rootly)

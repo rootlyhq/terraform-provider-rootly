@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_update_opsgenie_incident - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow updateopsgenieincident task.
+    Manages workflow update_opsgenie_incident task.
 ---
 
 # Resource (rootly_workflow_task_update_opsgenie_incident)

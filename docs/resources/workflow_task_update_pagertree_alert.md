@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_update_pagertree_alert - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow updatepagertreealert task.
+    Manages workflow update_pagertree_alert task.
 ---
 
 # Resource (rootly_workflow_task_update_pagertree_alert)

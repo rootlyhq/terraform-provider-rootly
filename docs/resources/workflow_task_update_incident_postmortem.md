@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_update_incident_postmortem - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow updateincidentpostmortem task.
+    Manages workflow update_incident_postmortem task.
 ---
 
 # Resource (rootly_workflow_task_update_incident_postmortem)

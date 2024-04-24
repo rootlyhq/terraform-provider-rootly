@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_update_pagerduty_incident - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow updatepagerdutyincident task.
+    Manages workflow update_pagerduty_incident task.
 ---
 
 # Resource (rootly_workflow_task_update_pagerduty_incident)

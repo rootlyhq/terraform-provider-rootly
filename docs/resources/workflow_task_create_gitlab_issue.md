@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_create_gitlab_issue - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow creategitlabissue task.
+    Manages workflow create_gitlab_issue task.
 ---
 
 # Resource (rootly_workflow_task_create_gitlab_issue)

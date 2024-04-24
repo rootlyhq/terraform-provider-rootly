@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_invite_to_slack_channel_rootly - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow invitetoslackchannelrootly task.
+    Manages workflow invite_to_slack_channel_rootly task.
 ---
 
 # Resource (rootly_workflow_task_invite_to_slack_channel_rootly)

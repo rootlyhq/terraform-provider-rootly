@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_update_google_calendar_event - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow updategooglecalendar_event task.
+    Manages workflow update_google_calendar_event task.
 ---
 
 # Resource (rootly_workflow_task_update_google_calendar_event)

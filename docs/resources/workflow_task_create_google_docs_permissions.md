@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_create_google_docs_permissions - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow creategoogledocs_permissions task.
+    Manages workflow create_google_docs_permissions task.
 ---
 
 # Resource (rootly_workflow_task_create_google_docs_permissions)

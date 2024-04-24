@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_create_microsoft_teams_meeting - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow createmicrosoftteams_meeting task.
+    Manages workflow create_microsoft_teams_meeting task.
 ---
 
 # Resource (rootly_workflow_task_create_microsoft_teams_meeting)

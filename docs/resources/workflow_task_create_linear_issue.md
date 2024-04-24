@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_create_linear_issue - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow createlinearissue task.
+    Manages workflow create_linear_issue task.
 ---
 
 # Resource (rootly_workflow_task_create_linear_issue)

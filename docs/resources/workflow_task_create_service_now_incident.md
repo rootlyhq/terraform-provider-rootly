@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_create_service_now_incident - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow createservicenow_incident task.
+    Manages workflow create_service_now_incident task.
 ---
 
 # Resource (rootly_workflow_task_create_service_now_incident)

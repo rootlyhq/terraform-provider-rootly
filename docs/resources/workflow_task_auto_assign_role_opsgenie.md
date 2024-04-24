@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_auto_assign_role_opsgenie - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow autoassignrole_opsgenie task.
+    Manages workflow auto_assign_role_opsgenie task.
 ---
 
 # Resource (rootly_workflow_task_auto_assign_role_opsgenie)

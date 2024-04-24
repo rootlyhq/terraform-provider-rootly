@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_update_slack_channel_topic - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow updateslackchannel_topic task.
+    Manages workflow update_slack_channel_topic task.
 ---
 
 # Resource (rootly_workflow_task_update_slack_channel_topic)

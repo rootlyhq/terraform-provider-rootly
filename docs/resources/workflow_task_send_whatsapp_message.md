@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_send_whatsapp_message - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow sendwhatsappmessage task.
+    Manages workflow send_whatsapp_message task.
 ---
 
 # Resource (rootly_workflow_task_send_whatsapp_message)

@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_create_google_meeting - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow creategooglemeeting task.
+    Manages workflow create_google_meeting task.
 ---
 
 # Resource (rootly_workflow_task_create_google_meeting)

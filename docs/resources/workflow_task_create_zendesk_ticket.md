@@ -2,7 +2,7 @@
 page_title: "Resource rootly_workflow_task_create_zendesk_ticket - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow createzendeskticket task.
+    Manages workflow create_zendesk_ticket task.
 ---
 
 # Resource (rootly_workflow_task_create_zendesk_ticket)
