@@ -25,7 +25,7 @@ module.exports = (name, resourceSchema, requiredFields, pathIdField) => {
     ? `"github.com/hashicorp/terraform-plugin-sdk/v2/helper/structure"`
     : "";
   const tools = includeTools(resourceSchema)
-    ? `"github.com/rootlyhq/terraform-provider-rootly/tools"`
+    ? `"github.com/rootlyhq/terraform-provider-rootly/v2/tools"`
     : "";
 
   return `package provider
@@ -37,7 +37,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	${structure}
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/rootlyhq/terraform-provider-rootly/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	${tools}
 )
 

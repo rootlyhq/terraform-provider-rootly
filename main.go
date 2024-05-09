@@ -3,11 +3,11 @@ package main
 import (
 	"context"
 	"flag"
-	"github.com/rootlyhq/terraform-provider-rootly/meta"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/meta"
 	"log"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
-	"github.com/rootlyhq/terraform-provider-rootly/provider"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/provider"
 )
 
 // Run "go generate" to format example terraform files and generate the docs for the registry/website

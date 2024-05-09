@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
+	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type Dashboard struct {

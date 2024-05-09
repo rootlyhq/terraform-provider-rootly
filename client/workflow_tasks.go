@@ -5,7 +5,7 @@ import (
 
 	"github.com/google/jsonapi"
 	"github.com/pkg/errors"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/schema"
+	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type WorkflowTask struct {
