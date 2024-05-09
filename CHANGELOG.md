@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.0.0] -- 2024-05-09
+
+- Replace `rootly_schedule_rotation_active_time` with `rootly_schedule_rotation_active_day`
+
 ## [1.5.0] -- 2024-04-24
 
 - Add On-Call resources
