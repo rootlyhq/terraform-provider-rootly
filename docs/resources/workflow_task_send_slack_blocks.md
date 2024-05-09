@@ -96,8 +96,8 @@ Optional:
 
 Required:
 
-- `name` (String)
 - `id` (String)
+- `name` (String)
 
 
 <a id="nestedblock--task_params--slack_user_groups"></a>
@@ -105,8 +105,8 @@ Required:
 
 Required:
 
-- `name` (String)
 - `id` (String)
+- `name` (String)
 
 
 <a id="nestedblock--task_params--slack_users"></a>
@@ -114,5 +114,5 @@ Required:
 
 Required:
 
-- `name` (String)
 - `id` (String)
+- `name` (String)

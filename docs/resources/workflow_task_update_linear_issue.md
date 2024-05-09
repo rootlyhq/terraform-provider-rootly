@@ -53,5 +53,5 @@ Optional:
 
 Required:
 
-- `name` (String)
 - `id` (String)
+- `name` (String)

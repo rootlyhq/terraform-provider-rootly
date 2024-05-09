@@ -42,8 +42,8 @@ description: |-
 
 Required:
 
-- `name` (String)
 - `id` (String)
+- `name` (String)
 
 
 <a id="nestedblock--slack_channels"></a>
@@ -51,5 +51,5 @@ Required:
 
 Required:
 
-- `name` (String)
 - `id` (String)
+- `name` (String)

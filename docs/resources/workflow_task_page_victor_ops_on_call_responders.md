@@ -44,8 +44,8 @@ Optional:
 
 Required:
 
-- `name` (String)
 - `id` (String)
+- `name` (String)
 
 
 <a id="nestedblock--task_params--users"></a>
@@ -53,5 +53,5 @@ Required:
 
 Required:
 
-- `name` (String)
 - `id` (String)
+- `name` (String)

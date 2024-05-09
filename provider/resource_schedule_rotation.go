@@ -58,14 +58,6 @@ func resourceScheduleRotation() *schema.Resource {
 				Description: "Schedule rotation type. Value must be one of `ScheduleDailyRotation`, `ScheduleWeeklyRotation`, `ScheduleBiweeklyRotation`, `ScheduleMonthlyRotation`, `ScheduleCustomRotation`.",
 			},
 
-			"active_all_day": &schema.Schema{
-				Type:        schema.TypeBool,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Schedule rotation active all day?. Value must be one of true or false",
-			},
-
 			"active_all_week": &schema.Schema{
 				Type:        schema.TypeBool,
 				Computed:    true,
@@ -84,6 +76,35 @@ func resourceScheduleRotation() *schema.Resource {
 				Required:         false,
 				Optional:         true,
 				Description:      "Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
+			},
+
+			"active_time_type": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "",
+			},
+
+			"active_time_attributes": &schema.Schema{
+				Type:        schema.TypeList,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Schedule rotation's active times",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"id": &schema.Schema{
+							Type:     schema.TypeString,
+							Required: true,
+						},
+						"name": &schema.Schema{
+							Type:     schema.TypeString,
+							Required: true,
+						},
+					},
+				},
 			},
 
 			"time_zone": &schema.Schema{
@@ -128,14 +149,17 @@ func resourceScheduleRotationCreate(ctx context.Context, d *schema.ResourceData,
 	if value, ok := d.GetOkExists("schedule_rotationable_type"); ok {
 		s.ScheduleRotationableType = value.(string)
 	}
-	if value, ok := d.GetOkExists("active_all_day"); ok {
-		s.ActiveAllDay = tools.Bool(value.(bool))
-	}
 	if value, ok := d.GetOkExists("active_all_week"); ok {
 		s.ActiveAllWeek = tools.Bool(value.(bool))
 	}
 	if value, ok := d.GetOkExists("active_days"); ok {
 		s.ActiveDays = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("active_time_type"); ok {
+		s.ActiveTimeType = value.(string)
+	}
+	if value, ok := d.GetOkExists("active_time_attributes"); ok {
+		s.ActiveTimeAttributes = value.([]interface{})
 	}
 	if value, ok := d.GetOkExists("time_zone"); ok {
 		s.TimeZone = value.(string)
@@ -176,9 +200,10 @@ func resourceScheduleRotationRead(ctx context.Context, d *schema.ResourceData, m
 	d.Set("name", item.Name)
 	d.Set("position", item.Position)
 	d.Set("schedule_rotationable_type", item.ScheduleRotationableType)
-	d.Set("active_all_day", item.ActiveAllDay)
 	d.Set("active_all_week", item.ActiveAllWeek)
 	d.Set("active_days", item.ActiveDays)
+	d.Set("active_time_type", item.ActiveTimeType)
+	d.Set("active_time_attributes", item.ActiveTimeAttributes)
 	d.Set("time_zone", item.TimeZone)
 	d.Set("schedule_rotationable_attributes", item.ScheduleRotationableAttributes)
 
@@ -203,14 +228,17 @@ func resourceScheduleRotationUpdate(ctx context.Context, d *schema.ResourceData,
 	if d.HasChange("schedule_rotationable_type") {
 		s.ScheduleRotationableType = d.Get("schedule_rotationable_type").(string)
 	}
-	if d.HasChange("active_all_day") {
-		s.ActiveAllDay = tools.Bool(d.Get("active_all_day").(bool))
-	}
 	if d.HasChange("active_all_week") {
 		s.ActiveAllWeek = tools.Bool(d.Get("active_all_week").(bool))
 	}
 	if d.HasChange("active_days") {
 		s.ActiveDays = d.Get("active_days").([]interface{})
+	}
+	if d.HasChange("active_time_type") {
+		s.ActiveTimeType = d.Get("active_time_type").(string)
+	}
+	if d.HasChange("active_time_attributes") {
+		s.ActiveTimeAttributes = d.Get("active_time_attributes").([]interface{})
 	}
 	if d.HasChange("time_zone") {
 		s.TimeZone = d.Get("time_zone").(string)

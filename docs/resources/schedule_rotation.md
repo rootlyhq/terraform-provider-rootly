@@ -21,9 +21,10 @@ description: |-
 
 ### Optional
 
-- `active_all_day` (Boolean) Schedule rotation active all day?. Value must be one of true or false
 - `active_all_week` (Boolean) Schedule rotation active all week?. Value must be one of true or false
 - `active_days` (List of String) Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.
+- `active_time_attributes` (Block List) Schedule rotation's active times (see [below for nested schema](#nestedblock--active_time_attributes))
+- `active_time_type` (String)
 - `position` (Number) Position of the schedule rotation
 - `schedule_id` (String) The ID of parent schedule
 - `schedule_rotationable_type` (String) Schedule rotation type. Value must be one of `ScheduleDailyRotation`, `ScheduleWeeklyRotation`, `ScheduleBiweeklyRotation`, `ScheduleMonthlyRotation`, `ScheduleCustomRotation`.
@@ -32,3 +33,11 @@ description: |-
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--active_time_attributes"></a>
+### Nested Schema for `active_time_attributes`
+
+Required:
+
+- `id` (String)
+- `name` (String)

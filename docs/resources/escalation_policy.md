@@ -37,8 +37,8 @@ description: |-
 
 Required:
 
-- `name` (String)
 - `id` (String)
+- `name` (String)
 
 
 <a id="nestedblock--groups"></a>
@@ -46,8 +46,8 @@ Required:
 
 Required:
 
-- `name` (String)
 - `id` (String)
+- `name` (String)
 
 
 <a id="nestedblock--services"></a>
@@ -55,5 +55,5 @@ Required:
 
 Required:
 
-- `name` (String)
 - `id` (String)
+- `name` (String)

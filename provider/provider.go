@@ -109,7 +109,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_role":                                             resourceRole(),
 				"rootly_schedule":                                         resourceSchedule(),
 				"rootly_schedule_rotation":                                resourceScheduleRotation(),
-				"rootly_schedule_rotation_active_time":                    resourceScheduleRotationActiveTime(),
+				"rootly_schedule_rotation_active_day":                     resourceScheduleRotationActiveDay(),
 				"rootly_schedule_rotation_user":                           resourceScheduleRotationUser(),
 				"rootly_service":                                          resourceService(),
 				"rootly_severity":                                         resourceSeverity(),

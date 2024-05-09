@@ -14,9 +14,10 @@ type ScheduleRotation struct {
   Name string `jsonapi:"attr,name,omitempty"`
   Position int `jsonapi:"attr,position,omitempty"`
   ScheduleRotationableType string `jsonapi:"attr,schedule_rotationable_type,omitempty"`
-  ActiveAllDay *bool `jsonapi:"attr,active_all_day,omitempty"`
   ActiveAllWeek *bool `jsonapi:"attr,active_all_week,omitempty"`
   ActiveDays []interface{} `jsonapi:"attr,active_days,omitempty"`
+  ActiveTimeType string `jsonapi:"attr,active_time_type,omitempty"`
+  ActiveTimeAttributes []interface{} `jsonapi:"attr,active_time_attributes,omitempty"`
   TimeZone string `jsonapi:"attr,time_zone,omitempty"`
   ScheduleRotationableAttributes map[string]interface{} `jsonapi:"attr,schedule_rotationable_attributes,omitempty"`
 }

@@ -2800,9 +2800,20 @@ const (
 	NewScheduleRotationDataTypeScheduleRotations NewScheduleRotationDataType = "schedule_rotations"
 )
 
-// Defines values for NewScheduleRotationActiveTimeDataType.
+// Defines values for NewScheduleRotationActiveDayDataAttributesDayName.
 const (
-	NewScheduleRotationActiveTimeDataTypeScheduleRotationActiveTimes NewScheduleRotationActiveTimeDataType = "schedule_rotation_active_times"
+	NewScheduleRotationActiveDayDataAttributesDayNameF NewScheduleRotationActiveDayDataAttributesDayName = "F"
+	NewScheduleRotationActiveDayDataAttributesDayNameM NewScheduleRotationActiveDayDataAttributesDayName = "M"
+	NewScheduleRotationActiveDayDataAttributesDayNameR NewScheduleRotationActiveDayDataAttributesDayName = "R"
+	NewScheduleRotationActiveDayDataAttributesDayNameS NewScheduleRotationActiveDayDataAttributesDayName = "S"
+	NewScheduleRotationActiveDayDataAttributesDayNameT NewScheduleRotationActiveDayDataAttributesDayName = "T"
+	NewScheduleRotationActiveDayDataAttributesDayNameU NewScheduleRotationActiveDayDataAttributesDayName = "U"
+	NewScheduleRotationActiveDayDataAttributesDayNameW NewScheduleRotationActiveDayDataAttributesDayName = "W"
+)
+
+// Defines values for NewScheduleRotationActiveDayDataType.
+const (
+	NewScheduleRotationActiveDayDataTypeScheduleRotationActiveDays NewScheduleRotationActiveDayDataType = "schedule_rotation_active_days"
 )
 
 // Defines values for NewScheduleRotationUserDataType.
@@ -3791,14 +3802,25 @@ const (
 	ScheduleRotationTimeZoneZurich                    ScheduleRotationTimeZone = "Zurich"
 )
 
-// Defines values for ScheduleRotationActiveTimeListDataType.
+// Defines values for ScheduleRotationActiveDayDayName.
 const (
-	ScheduleRotationActiveTimeListDataTypeScheduleRotationActiveTimes ScheduleRotationActiveTimeListDataType = "schedule_rotation_active_times"
+	ScheduleRotationActiveDayDayNameF ScheduleRotationActiveDayDayName = "F"
+	ScheduleRotationActiveDayDayNameM ScheduleRotationActiveDayDayName = "M"
+	ScheduleRotationActiveDayDayNameR ScheduleRotationActiveDayDayName = "R"
+	ScheduleRotationActiveDayDayNameS ScheduleRotationActiveDayDayName = "S"
+	ScheduleRotationActiveDayDayNameT ScheduleRotationActiveDayDayName = "T"
+	ScheduleRotationActiveDayDayNameU ScheduleRotationActiveDayDayName = "U"
+	ScheduleRotationActiveDayDayNameW ScheduleRotationActiveDayDayName = "W"
 )
 
-// Defines values for ScheduleRotationActiveTimeResponseDataType.
+// Defines values for ScheduleRotationActiveDayListDataType.
 const (
-	ScheduleRotationActiveTimeResponseDataTypeScheduleRotationActiveTimes ScheduleRotationActiveTimeResponseDataType = "schedule_rotation_active_times"
+	ScheduleRotationActiveDayListDataTypeScheduleRotationActiveDays ScheduleRotationActiveDayListDataType = "schedule_rotation_active_days"
+)
+
+// Defines values for ScheduleRotationActiveDayResponseDataType.
+const (
+	ScheduleRotationActiveDayResponseDataTypeScheduleRotationActiveDays ScheduleRotationActiveDayResponseDataType = "schedule_rotation_active_days"
 )
 
 // Defines values for ScheduleRotationListDataType.
@@ -5261,9 +5283,20 @@ const (
 	UpdateScheduleRotationDataTypeScheduleRotations UpdateScheduleRotationDataType = "schedule_rotations"
 )
 
-// Defines values for UpdateScheduleRotationActiveTimeDataType.
+// Defines values for UpdateScheduleRotationActiveDayDataAttributesDayName.
 const (
-	UpdateScheduleRotationActiveTimeDataTypeScheduleRotationActiveTimes UpdateScheduleRotationActiveTimeDataType = "schedule_rotation_active_times"
+	UpdateScheduleRotationActiveDayDataAttributesDayNameF UpdateScheduleRotationActiveDayDataAttributesDayName = "F"
+	UpdateScheduleRotationActiveDayDataAttributesDayNameM UpdateScheduleRotationActiveDayDataAttributesDayName = "M"
+	UpdateScheduleRotationActiveDayDataAttributesDayNameR UpdateScheduleRotationActiveDayDataAttributesDayName = "R"
+	UpdateScheduleRotationActiveDayDataAttributesDayNameS UpdateScheduleRotationActiveDayDataAttributesDayName = "S"
+	UpdateScheduleRotationActiveDayDataAttributesDayNameT UpdateScheduleRotationActiveDayDataAttributesDayName = "T"
+	UpdateScheduleRotationActiveDayDataAttributesDayNameU UpdateScheduleRotationActiveDayDataAttributesDayName = "U"
+	UpdateScheduleRotationActiveDayDataAttributesDayNameW UpdateScheduleRotationActiveDayDataAttributesDayName = "W"
+)
+
+// Defines values for UpdateScheduleRotationActiveDayDataType.
+const (
+	UpdateScheduleRotationActiveDayDataTypeScheduleRotationActiveDays UpdateScheduleRotationActiveDayDataType = "schedule_rotation_active_days"
 )
 
 // Defines values for UpdateScheduleRotationUserDataType.
@@ -5705,13 +5738,13 @@ const (
 
 // Defines values for WorkflowRepeatOn.
 const (
-	F WorkflowRepeatOn = "F"
-	M WorkflowRepeatOn = "M"
-	R WorkflowRepeatOn = "R"
-	S WorkflowRepeatOn = "S"
-	T WorkflowRepeatOn = "T"
-	U WorkflowRepeatOn = "U"
-	W WorkflowRepeatOn = "W"
+	WorkflowRepeatOnF WorkflowRepeatOn = "F"
+	WorkflowRepeatOnM WorkflowRepeatOn = "M"
+	WorkflowRepeatOnR WorkflowRepeatOn = "R"
+	WorkflowRepeatOnS WorkflowRepeatOn = "S"
+	WorkflowRepeatOnT WorkflowRepeatOn = "T"
+	WorkflowRepeatOnU WorkflowRepeatOn = "U"
+	WorkflowRepeatOnW WorkflowRepeatOn = "W"
 )
 
 // Defines values for WorkflowCustomFieldSelectionIncidentCondition.
@@ -11088,12 +11121,19 @@ type NewScheduleDataType string
 type NewScheduleRotation struct {
 	Data struct {
 		Attributes struct {
-			// ActiveAllDay Schedule rotation active all day?
-			ActiveAllDay *bool `json:"active_all_day,omitempty"`
-
 			// ActiveAllWeek Schedule rotation active all week?
 			ActiveAllWeek *bool                                          `json:"active_all_week,omitempty"`
 			ActiveDays    *[]NewScheduleRotationDataAttributesActiveDays `json:"active_days,omitempty"`
+
+			// ActiveTimeAttributes Schedule rotation's active times
+			ActiveTimeAttributes *[]struct {
+				// EndTime End time for schedule rotation active time
+				EndTime string `json:"end_time"`
+
+				// StartTime Start time for schedule rotation active time
+				StartTime string `json:"start_time"`
+			} `json:"active_time_attributes,omitempty"`
+			ActiveTimeType *string `json:"active_time_type,omitempty"`
 
 			// Name The name of the schedule rotation
 			Name string `json:"name"`
@@ -11142,22 +11182,31 @@ type NewScheduleRotationDataAttributesTimeZone string
 // NewScheduleRotationDataType defines model for NewScheduleRotation.Data.Type.
 type NewScheduleRotationDataType string
 
-// NewScheduleRotationActiveTime defines model for new_schedule_rotation_active_time.
-type NewScheduleRotationActiveTime struct {
+// NewScheduleRotationActiveDay defines model for new_schedule_rotation_active_day.
+type NewScheduleRotationActiveDay struct {
 	Data struct {
 		Attributes struct {
-			// EndTime End time for schedule rotation active time
-			EndTime string `json:"end_time"`
+			// ActiveTimeAttributes Schedule rotation active times per day
+			ActiveTimeAttributes []struct {
+				// EndTime End time for schedule rotation active time
+				EndTime *string `json:"end_time,omitempty"`
 
-			// StartTime Start time for schedule rotation active time
-			StartTime string `json:"start_time"`
+				// StartTime Start time for schedule rotation active time
+				StartTime *string `json:"start_time,omitempty"`
+			} `json:"active_time_attributes"`
+
+			// DayName Schedule rotation day name for which active times to be created
+			DayName NewScheduleRotationActiveDayDataAttributesDayName `json:"day_name"`
 		} `json:"attributes"`
-		Type NewScheduleRotationActiveTimeDataType `json:"type"`
+		Type NewScheduleRotationActiveDayDataType `json:"type"`
 	} `json:"data"`
 }
 
-// NewScheduleRotationActiveTimeDataType defines model for NewScheduleRotationActiveTime.Data.Type.
-type NewScheduleRotationActiveTimeDataType string
+// NewScheduleRotationActiveDayDataAttributesDayName Schedule rotation day name for which active times to be created
+type NewScheduleRotationActiveDayDataAttributesDayName string
+
+// NewScheduleRotationActiveDayDataType defines model for NewScheduleRotationActiveDay.Data.Type.
+type NewScheduleRotationActiveDayDataType string
 
 // NewScheduleRotationUser defines model for new_schedule_rotation_user.
 type NewScheduleRotationUser struct {
@@ -12736,12 +12785,19 @@ type ScheduleResponseDataType string
 
 // ScheduleRotation defines model for schedule_rotation.
 type ScheduleRotation struct {
-	// ActiveAllDay Schedule rotation active all day?
-	ActiveAllDay *bool `json:"active_all_day,omitempty"`
-
 	// ActiveAllWeek Schedule rotation active all week?
 	ActiveAllWeek *bool                         `json:"active_all_week,omitempty"`
 	ActiveDays    *[]ScheduleRotationActiveDays `json:"active_days,omitempty"`
+
+	// ActiveTimeAttributes Schedule rotation's active times
+	ActiveTimeAttributes *[]struct {
+		// EndTime End time for schedule rotation active time
+		EndTime string `json:"end_time"`
+
+		// StartTime Start time for schedule rotation active time
+		StartTime string `json:"start_time"`
+	} `json:"active_time_attributes,omitempty"`
+	ActiveTimeType *string `json:"active_time_type,omitempty"`
 
 	// Name The name of the schedule rotation
 	Name string `json:"name"`
@@ -12787,50 +12843,59 @@ type ScheduleRotationScheduleRotationableType string
 // ScheduleRotationTimeZone Schedule Rotation Timezone
 type ScheduleRotationTimeZone string
 
-// ScheduleRotationActiveTime defines model for schedule_rotation_active_time.
-type ScheduleRotationActiveTime struct {
+// ScheduleRotationActiveDay defines model for schedule_rotation_active_day.
+type ScheduleRotationActiveDay struct {
+	// ActiveTimeAttributes Schedule rotation active times per day
+	ActiveTimeAttributes []struct {
+		// EndTime End time for schedule rotation active time
+		EndTime *string `json:"end_time,omitempty"`
+
+		// StartTime Start time for schedule rotation active time
+		StartTime *string `json:"start_time,omitempty"`
+	} `json:"active_time_attributes"`
+
 	// CreatedAt Date of creation
 	CreatedAt string `json:"created_at"`
 
-	// EndTime End time for schedule rotation active time
-	EndTime            string `json:"end_time"`
-	ScheduleRotationId string `json:"schedule_rotation_id"`
-
-	// StartTime Start time for schedule rotation active time
-	StartTime string `json:"start_time"`
+	// DayName Schedule rotation day name for which active times to be created
+	DayName            ScheduleRotationActiveDayDayName `json:"day_name"`
+	ScheduleRotationId string                           `json:"schedule_rotation_id"`
 
 	// UpdatedAt Date of last update
 	UpdatedAt string `json:"updated_at"`
 }
 
-// ScheduleRotationActiveTimeList defines model for schedule_rotation_active_time_list.
-type ScheduleRotationActiveTimeList struct {
+// ScheduleRotationActiveDayDayName Schedule rotation day name for which active times to be created
+type ScheduleRotationActiveDayDayName string
+
+// ScheduleRotationActiveDayList defines model for schedule_rotation_active_day_list.
+type ScheduleRotationActiveDayList struct {
 	Data []struct {
-		Attributes ScheduleRotationActiveTime `json:"attributes"`
+		Attributes ScheduleRotationActiveDay `json:"attributes"`
 
 		// Id Unique ID of the schedule rotation active time
-		Id   string                                 `json:"id"`
-		Type ScheduleRotationActiveTimeListDataType `json:"type"`
+		Id   string                                `json:"id"`
+		Type ScheduleRotationActiveDayListDataType `json:"type"`
 	} `json:"data"`
 	Links Links `json:"links"`
 }
 
-// ScheduleRotationActiveTimeListDataType defines model for ScheduleRotationActiveTimeList.Data.Type.
-type ScheduleRotationActiveTimeListDataType string
+// ScheduleRotationActiveDayListDataType defines model for ScheduleRotationActiveDayList.Data.Type.
+type ScheduleRotationActiveDayListDataType string
 
-// ScheduleRotationActiveTimeResponse defines model for schedule_rotation_active_time_response.
-type ScheduleRotationActiveTimeResponse struct {
+// ScheduleRotationActiveDayResponse defines model for schedule_rotation_active_day_response.
+type ScheduleRotationActiveDayResponse struct {
 	Data *struct {
-		Attributes *ScheduleRotationActiveTime `json:"attributes,omitempty"`
+		Attributes *ScheduleRotationActiveDay `json:"attributes,omitempty"`
 
 		// Id Unique ID of the schedule rotation active time
-		Id   *string                                     `json:"id,omitempty"`
-		Type *ScheduleRotationActiveTimeResponseDataType `json:"type,omitempty"`
+		Id   *string                                    `json:"id,omitempty"`
+		Type *ScheduleRotationActiveDayResponseDataType `json:"type,omitempty"`
 	} `json:"data,omitempty"`
 }
 
-// ScheduleRotationActiveTimeResponseDataType defines model for ScheduleRotationActiveTimeResponse.Data.Type.
-type ScheduleRotationActiveTimeResponseDataType string
+// ScheduleRotationActiveDayResponseDataType defines model for ScheduleRotationActiveDayResponse.Data.Type.
+type ScheduleRotationActiveDayResponseDataType string
 
 // ScheduleRotationList defines model for schedule_rotation_list.
 type ScheduleRotationList struct {
@@ -15502,12 +15567,19 @@ type UpdateScheduleDataType string
 type UpdateScheduleRotation struct {
 	Data struct {
 		Attributes struct {
-			// ActiveAllDay Schedule rotation active all day?
-			ActiveAllDay *bool `json:"active_all_day,omitempty"`
-
 			// ActiveAllWeek Schedule rotation active all week?
 			ActiveAllWeek *bool                                             `json:"active_all_week,omitempty"`
 			ActiveDays    *[]UpdateScheduleRotationDataAttributesActiveDays `json:"active_days,omitempty"`
+
+			// ActiveTimeAttributes Schedule rotation's active times
+			ActiveTimeAttributes *[]struct {
+				// EndTime End time for schedule rotation active time
+				EndTime string `json:"end_time"`
+
+				// StartTime Start time for schedule rotation active time
+				StartTime string `json:"start_time"`
+			} `json:"active_time_attributes,omitempty"`
+			ActiveTimeType *string `json:"active_time_type,omitempty"`
 
 			// Name The name of the schedule rotation
 			Name *string `json:"name,omitempty"`
@@ -15556,22 +15628,31 @@ type UpdateScheduleRotationDataAttributesTimeZone string
 // UpdateScheduleRotationDataType defines model for UpdateScheduleRotation.Data.Type.
 type UpdateScheduleRotationDataType string
 
-// UpdateScheduleRotationActiveTime defines model for update_schedule_rotation_active_time.
-type UpdateScheduleRotationActiveTime struct {
+// UpdateScheduleRotationActiveDay defines model for update_schedule_rotation_active_day.
+type UpdateScheduleRotationActiveDay struct {
 	Data struct {
 		Attributes struct {
-			// EndTime End time for schedule rotation active time
-			EndTime *string `json:"end_time,omitempty"`
+			// ActiveTimeAttributes Schedule rotation active times per day
+			ActiveTimeAttributes *[]struct {
+				// EndTime End time for schedule rotation active time
+				EndTime *string `json:"end_time,omitempty"`
 
-			// StartTime Start time for schedule rotation active time
-			StartTime *string `json:"start_time,omitempty"`
+				// StartTime Start time for schedule rotation active time
+				StartTime *string `json:"start_time,omitempty"`
+			} `json:"active_time_attributes,omitempty"`
+
+			// DayName Schedule rotation day name for which active times to be created
+			DayName *UpdateScheduleRotationActiveDayDataAttributesDayName `json:"day_name,omitempty"`
 		} `json:"attributes"`
-		Type UpdateScheduleRotationActiveTimeDataType `json:"type"`
+		Type UpdateScheduleRotationActiveDayDataType `json:"type"`
 	} `json:"data"`
 }
 
-// UpdateScheduleRotationActiveTimeDataType defines model for UpdateScheduleRotationActiveTime.Data.Type.
-type UpdateScheduleRotationActiveTimeDataType string
+// UpdateScheduleRotationActiveDayDataAttributesDayName Schedule rotation day name for which active times to be created
+type UpdateScheduleRotationActiveDayDataAttributesDayName string
+
+// UpdateScheduleRotationActiveDayDataType defines model for UpdateScheduleRotationActiveDay.Data.Type.
+type UpdateScheduleRotationActiveDayDataType string
 
 // UpdateScheduleRotationUser defines model for update_schedule_rotation_user.
 type UpdateScheduleRotationUser struct {
@@ -17414,8 +17495,8 @@ type ListRolesParams struct {
 	Sort               *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
-// ListScheduleRotationActiveTimesParams defines parameters for ListScheduleRotationActiveTimes.
-type ListScheduleRotationActiveTimesParams struct {
+// ListScheduleRotationActiveDaysParams defines parameters for ListScheduleRotationActiveDays.
+type ListScheduleRotationActiveDaysParams struct {
 	Include    *string `form:"include,omitempty" json:"include,omitempty"`
 	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
@@ -17537,6 +17618,11 @@ type ListTeamsParams struct {
 	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
 	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
 	Sort               *string `form:"sort,omitempty" json:"sort,omitempty"`
+}
+
+// GetTeamIncidentsChartParams defines parameters for GetTeamIncidentsChart.
+type GetTeamIncidentsChartParams struct {
+	Period string `form:"period" json:"period"`
 }
 
 // ListUsersParams defines parameters for ListUsers.
@@ -17899,8 +17985,8 @@ type CreateRoleApplicationVndAPIPlusJSONRequestBody = NewRole
 // UpdateRoleApplicationVndAPIPlusJSONRequestBody defines body for UpdateRole for application/vnd.api+json ContentType.
 type UpdateRoleApplicationVndAPIPlusJSONRequestBody = UpdateRole
 
-// UpdateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody defines body for UpdateScheduleRotationActiveTime for application/vnd.api+json ContentType.
-type UpdateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody = UpdateScheduleRotationActiveTime
+// UpdateScheduleRotationActiveDayApplicationVndAPIPlusJSONRequestBody defines body for UpdateScheduleRotationActiveDay for application/vnd.api+json ContentType.
+type UpdateScheduleRotationActiveDayApplicationVndAPIPlusJSONRequestBody = UpdateScheduleRotationActiveDay
 
 // UpdateScheduleRotationUserApplicationVndAPIPlusJSONRequestBody defines body for UpdateScheduleRotationUser for application/vnd.api+json ContentType.
 type UpdateScheduleRotationUserApplicationVndAPIPlusJSONRequestBody = UpdateScheduleRotationUser
@@ -17908,8 +17994,8 @@ type UpdateScheduleRotationUserApplicationVndAPIPlusJSONRequestBody = UpdateSche
 // UpdateScheduleRotationApplicationVndAPIPlusJSONRequestBody defines body for UpdateScheduleRotation for application/vnd.api+json ContentType.
 type UpdateScheduleRotationApplicationVndAPIPlusJSONRequestBody = UpdateScheduleRotation
 
-// CreateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody defines body for CreateScheduleRotationActiveTime for application/vnd.api+json ContentType.
-type CreateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody = NewScheduleRotationActiveTime
+// CreateScheduleRotationActiveDayApplicationVndAPIPlusJSONRequestBody defines body for CreateScheduleRotationActiveDay for application/vnd.api+json ContentType.
+type CreateScheduleRotationActiveDayApplicationVndAPIPlusJSONRequestBody = NewScheduleRotationActiveDay
 
 // CreateScheduleRotationUserApplicationVndAPIPlusJSONRequestBody defines body for CreateScheduleRotationUser for application/vnd.api+json ContentType.
 type CreateScheduleRotationUserApplicationVndAPIPlusJSONRequestBody = NewScheduleRotationUser
@@ -28916,16 +29002,16 @@ type ClientInterface interface {
 
 	UpdateRoleWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateRoleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// DeleteScheduleRotationActiveTime request
-	DeleteScheduleRotationActiveTime(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// DeleteScheduleRotationActiveDay request
+	DeleteScheduleRotationActiveDay(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetScheduleRotationActiveTime request
-	GetScheduleRotationActiveTime(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetScheduleRotationActiveDay request
+	GetScheduleRotationActiveDay(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// UpdateScheduleRotationActiveTimeWithBody request with any body
-	UpdateScheduleRotationActiveTimeWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// UpdateScheduleRotationActiveDayWithBody request with any body
+	UpdateScheduleRotationActiveDayWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	UpdateScheduleRotationActiveTimeWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	UpdateScheduleRotationActiveDayWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateScheduleRotationActiveDayApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteScheduleRotationUser request
 	DeleteScheduleRotationUser(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -28949,13 +29035,13 @@ type ClientInterface interface {
 
 	UpdateScheduleRotationWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateScheduleRotationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ListScheduleRotationActiveTimes request
-	ListScheduleRotationActiveTimes(ctx context.Context, scheduleRotationId string, params *ListScheduleRotationActiveTimesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// ListScheduleRotationActiveDays request
+	ListScheduleRotationActiveDays(ctx context.Context, scheduleRotationId string, params *ListScheduleRotationActiveDaysParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CreateScheduleRotationActiveTimeWithBody request with any body
-	CreateScheduleRotationActiveTimeWithBody(ctx context.Context, scheduleRotationId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// CreateScheduleRotationActiveDayWithBody request with any body
+	CreateScheduleRotationActiveDayWithBody(ctx context.Context, scheduleRotationId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	CreateScheduleRotationActiveTimeWithApplicationVndAPIPlusJSONBody(ctx context.Context, scheduleRotationId string, body CreateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	CreateScheduleRotationActiveDayWithApplicationVndAPIPlusJSONBody(ctx context.Context, scheduleRotationId string, body CreateScheduleRotationActiveDayApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListScheduleRotationUsers request
 	ListScheduleRotationUsers(ctx context.Context, scheduleRotationId string, params *ListScheduleRotationUsersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -29119,6 +29205,9 @@ type ClientInterface interface {
 	UpdateTeamWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	UpdateTeamWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateTeamApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetTeamIncidentsChart request
+	GetTeamIncidentsChart(ctx context.Context, id string, params *GetTeamIncidentsChartParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteStatusPageTemplate request
 	DeleteStatusPageTemplate(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -32847,8 +32936,8 @@ func (c *Client) UpdateRoleWithApplicationVndAPIPlusJSONBody(ctx context.Context
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteScheduleRotationActiveTime(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDeleteScheduleRotationActiveTimeRequest(c.Server, id)
+func (c *Client) DeleteScheduleRotationActiveDay(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteScheduleRotationActiveDayRequest(c.Server, id)
 	if err != nil {
 		return nil, err
 	}
@@ -32859,8 +32948,8 @@ func (c *Client) DeleteScheduleRotationActiveTime(ctx context.Context, id string
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetScheduleRotationActiveTime(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetScheduleRotationActiveTimeRequest(c.Server, id)
+func (c *Client) GetScheduleRotationActiveDay(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetScheduleRotationActiveDayRequest(c.Server, id)
 	if err != nil {
 		return nil, err
 	}
@@ -32871,8 +32960,8 @@ func (c *Client) GetScheduleRotationActiveTime(ctx context.Context, id string, r
 	return c.Client.Do(req)
 }
 
-func (c *Client) UpdateScheduleRotationActiveTimeWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewUpdateScheduleRotationActiveTimeRequestWithBody(c.Server, id, contentType, body)
+func (c *Client) UpdateScheduleRotationActiveDayWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateScheduleRotationActiveDayRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -32883,8 +32972,8 @@ func (c *Client) UpdateScheduleRotationActiveTimeWithBody(ctx context.Context, i
 	return c.Client.Do(req)
 }
 
-func (c *Client) UpdateScheduleRotationActiveTimeWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewUpdateScheduleRotationActiveTimeRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+func (c *Client) UpdateScheduleRotationActiveDayWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateScheduleRotationActiveDayApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateScheduleRotationActiveDayRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -32991,8 +33080,8 @@ func (c *Client) UpdateScheduleRotationWithApplicationVndAPIPlusJSONBody(ctx con
 	return c.Client.Do(req)
 }
 
-func (c *Client) ListScheduleRotationActiveTimes(ctx context.Context, scheduleRotationId string, params *ListScheduleRotationActiveTimesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewListScheduleRotationActiveTimesRequest(c.Server, scheduleRotationId, params)
+func (c *Client) ListScheduleRotationActiveDays(ctx context.Context, scheduleRotationId string, params *ListScheduleRotationActiveDaysParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListScheduleRotationActiveDaysRequest(c.Server, scheduleRotationId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -33003,8 +33092,8 @@ func (c *Client) ListScheduleRotationActiveTimes(ctx context.Context, scheduleRo
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateScheduleRotationActiveTimeWithBody(ctx context.Context, scheduleRotationId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateScheduleRotationActiveTimeRequestWithBody(c.Server, scheduleRotationId, contentType, body)
+func (c *Client) CreateScheduleRotationActiveDayWithBody(ctx context.Context, scheduleRotationId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateScheduleRotationActiveDayRequestWithBody(c.Server, scheduleRotationId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -33015,8 +33104,8 @@ func (c *Client) CreateScheduleRotationActiveTimeWithBody(ctx context.Context, s
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateScheduleRotationActiveTimeWithApplicationVndAPIPlusJSONBody(ctx context.Context, scheduleRotationId string, body CreateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateScheduleRotationActiveTimeRequestWithApplicationVndAPIPlusJSONBody(c.Server, scheduleRotationId, body)
+func (c *Client) CreateScheduleRotationActiveDayWithApplicationVndAPIPlusJSONBody(ctx context.Context, scheduleRotationId string, body CreateScheduleRotationActiveDayApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateScheduleRotationActiveDayRequestWithApplicationVndAPIPlusJSONBody(c.Server, scheduleRotationId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -33737,6 +33826,18 @@ func (c *Client) UpdateTeamWithBody(ctx context.Context, id string, contentType 
 
 func (c *Client) UpdateTeamWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateTeamApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateTeamRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetTeamIncidentsChart(ctx context.Context, id string, params *GetTeamIncidentsChartParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetTeamIncidentsChartRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
 	}
@@ -48739,8 +48840,8 @@ func NewUpdateRoleRequestWithBody(server string, id string, contentType string, 
 	return req, nil
 }
 
-// NewDeleteScheduleRotationActiveTimeRequest generates requests for DeleteScheduleRotationActiveTime
-func NewDeleteScheduleRotationActiveTimeRequest(server string, id string) (*http.Request, error) {
+// NewDeleteScheduleRotationActiveDayRequest generates requests for DeleteScheduleRotationActiveDay
+func NewDeleteScheduleRotationActiveDayRequest(server string, id string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -48755,7 +48856,7 @@ func NewDeleteScheduleRotationActiveTimeRequest(server string, id string) (*http
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/v1/schedule_rotation_active_times/%s", pathParam0)
+	operationPath := fmt.Sprintf("/v1/schedule_rotation_active_days/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -48773,8 +48874,8 @@ func NewDeleteScheduleRotationActiveTimeRequest(server string, id string) (*http
 	return req, nil
 }
 
-// NewGetScheduleRotationActiveTimeRequest generates requests for GetScheduleRotationActiveTime
-func NewGetScheduleRotationActiveTimeRequest(server string, id string) (*http.Request, error) {
+// NewGetScheduleRotationActiveDayRequest generates requests for GetScheduleRotationActiveDay
+func NewGetScheduleRotationActiveDayRequest(server string, id string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -48789,7 +48890,7 @@ func NewGetScheduleRotationActiveTimeRequest(server string, id string) (*http.Re
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/v1/schedule_rotation_active_times/%s", pathParam0)
+	operationPath := fmt.Sprintf("/v1/schedule_rotation_active_days/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -48807,19 +48908,19 @@ func NewGetScheduleRotationActiveTimeRequest(server string, id string) (*http.Re
 	return req, nil
 }
 
-// NewUpdateScheduleRotationActiveTimeRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateScheduleRotationActiveTime builder with application/vnd.api+json body
-func NewUpdateScheduleRotationActiveTimeRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+// NewUpdateScheduleRotationActiveDayRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateScheduleRotationActiveDay builder with application/vnd.api+json body
+func NewUpdateScheduleRotationActiveDayRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateScheduleRotationActiveDayApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewUpdateScheduleRotationActiveTimeRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+	return NewUpdateScheduleRotationActiveDayRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
 }
 
-// NewUpdateScheduleRotationActiveTimeRequestWithBody generates requests for UpdateScheduleRotationActiveTime with any type of body
-func NewUpdateScheduleRotationActiveTimeRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+// NewUpdateScheduleRotationActiveDayRequestWithBody generates requests for UpdateScheduleRotationActiveDay with any type of body
+func NewUpdateScheduleRotationActiveDayRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -48834,7 +48935,7 @@ func NewUpdateScheduleRotationActiveTimeRequestWithBody(server string, id string
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/v1/schedule_rotation_active_times/%s", pathParam0)
+	operationPath := fmt.Sprintf("/v1/schedule_rotation_active_days/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -49084,8 +49185,8 @@ func NewUpdateScheduleRotationRequestWithBody(server string, id string, contentT
 	return req, nil
 }
 
-// NewListScheduleRotationActiveTimesRequest generates requests for ListScheduleRotationActiveTimes
-func NewListScheduleRotationActiveTimesRequest(server string, scheduleRotationId string, params *ListScheduleRotationActiveTimesParams) (*http.Request, error) {
+// NewListScheduleRotationActiveDaysRequest generates requests for ListScheduleRotationActiveDays
+func NewListScheduleRotationActiveDaysRequest(server string, scheduleRotationId string, params *ListScheduleRotationActiveDaysParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -49100,7 +49201,7 @@ func NewListScheduleRotationActiveTimesRequest(server string, scheduleRotationId
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/v1/schedule_rotations/%s/schedule_rotation_active_times", pathParam0)
+	operationPath := fmt.Sprintf("/v1/schedule_rotations/%s/schedule_rotation_active_days", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -49172,19 +49273,19 @@ func NewListScheduleRotationActiveTimesRequest(server string, scheduleRotationId
 	return req, nil
 }
 
-// NewCreateScheduleRotationActiveTimeRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateScheduleRotationActiveTime builder with application/vnd.api+json body
-func NewCreateScheduleRotationActiveTimeRequestWithApplicationVndAPIPlusJSONBody(server string, scheduleRotationId string, body CreateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+// NewCreateScheduleRotationActiveDayRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateScheduleRotationActiveDay builder with application/vnd.api+json body
+func NewCreateScheduleRotationActiveDayRequestWithApplicationVndAPIPlusJSONBody(server string, scheduleRotationId string, body CreateScheduleRotationActiveDayApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewCreateScheduleRotationActiveTimeRequestWithBody(server, scheduleRotationId, "application/vnd.api+json", bodyReader)
+	return NewCreateScheduleRotationActiveDayRequestWithBody(server, scheduleRotationId, "application/vnd.api+json", bodyReader)
 }
 
-// NewCreateScheduleRotationActiveTimeRequestWithBody generates requests for CreateScheduleRotationActiveTime with any type of body
-func NewCreateScheduleRotationActiveTimeRequestWithBody(server string, scheduleRotationId string, contentType string, body io.Reader) (*http.Request, error) {
+// NewCreateScheduleRotationActiveDayRequestWithBody generates requests for CreateScheduleRotationActiveDay with any type of body
+func NewCreateScheduleRotationActiveDayRequestWithBody(server string, scheduleRotationId string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -49199,7 +49300,7 @@ func NewCreateScheduleRotationActiveTimeRequestWithBody(server string, scheduleR
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/v1/schedule_rotations/%s/schedule_rotation_active_times", pathParam0)
+	operationPath := fmt.Sprintf("/v1/schedule_rotations/%s/schedule_rotation_active_days", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -52002,6 +52103,58 @@ func NewUpdateTeamRequestWithBody(server string, id string, contentType string, 
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGetTeamIncidentsChartRequest generates requests for GetTeamIncidentsChart
+func NewGetTeamIncidentsChartRequest(server string, id string, params *GetTeamIncidentsChartParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/teams/%s/incidents_chart", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "period", runtime.ParamLocationQuery, params.Period); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return req, nil
 }
@@ -55492,16 +55645,16 @@ type ClientWithResponsesInterface interface {
 
 	UpdateRoleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateRoleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateRoleResponse, error)
 
-	// DeleteScheduleRotationActiveTimeWithResponse request
-	DeleteScheduleRotationActiveTimeWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteScheduleRotationActiveTimeResponse, error)
+	// DeleteScheduleRotationActiveDayWithResponse request
+	DeleteScheduleRotationActiveDayWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteScheduleRotationActiveDayResponse, error)
 
-	// GetScheduleRotationActiveTimeWithResponse request
-	GetScheduleRotationActiveTimeWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetScheduleRotationActiveTimeResponse, error)
+	// GetScheduleRotationActiveDayWithResponse request
+	GetScheduleRotationActiveDayWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetScheduleRotationActiveDayResponse, error)
 
-	// UpdateScheduleRotationActiveTimeWithBodyWithResponse request with any body
-	UpdateScheduleRotationActiveTimeWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateScheduleRotationActiveTimeResponse, error)
+	// UpdateScheduleRotationActiveDayWithBodyWithResponse request with any body
+	UpdateScheduleRotationActiveDayWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateScheduleRotationActiveDayResponse, error)
 
-	UpdateScheduleRotationActiveTimeWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateScheduleRotationActiveTimeResponse, error)
+	UpdateScheduleRotationActiveDayWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateScheduleRotationActiveDayApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateScheduleRotationActiveDayResponse, error)
 
 	// DeleteScheduleRotationUserWithResponse request
 	DeleteScheduleRotationUserWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteScheduleRotationUserResponse, error)
@@ -55525,13 +55678,13 @@ type ClientWithResponsesInterface interface {
 
 	UpdateScheduleRotationWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateScheduleRotationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateScheduleRotationResponse, error)
 
-	// ListScheduleRotationActiveTimesWithResponse request
-	ListScheduleRotationActiveTimesWithResponse(ctx context.Context, scheduleRotationId string, params *ListScheduleRotationActiveTimesParams, reqEditors ...RequestEditorFn) (*ListScheduleRotationActiveTimesResponse, error)
+	// ListScheduleRotationActiveDaysWithResponse request
+	ListScheduleRotationActiveDaysWithResponse(ctx context.Context, scheduleRotationId string, params *ListScheduleRotationActiveDaysParams, reqEditors ...RequestEditorFn) (*ListScheduleRotationActiveDaysResponse, error)
 
-	// CreateScheduleRotationActiveTimeWithBodyWithResponse request with any body
-	CreateScheduleRotationActiveTimeWithBodyWithResponse(ctx context.Context, scheduleRotationId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateScheduleRotationActiveTimeResponse, error)
+	// CreateScheduleRotationActiveDayWithBodyWithResponse request with any body
+	CreateScheduleRotationActiveDayWithBodyWithResponse(ctx context.Context, scheduleRotationId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateScheduleRotationActiveDayResponse, error)
 
-	CreateScheduleRotationActiveTimeWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, scheduleRotationId string, body CreateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateScheduleRotationActiveTimeResponse, error)
+	CreateScheduleRotationActiveDayWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, scheduleRotationId string, body CreateScheduleRotationActiveDayApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateScheduleRotationActiveDayResponse, error)
 
 	// ListScheduleRotationUsersWithResponse request
 	ListScheduleRotationUsersWithResponse(ctx context.Context, scheduleRotationId string, params *ListScheduleRotationUsersParams, reqEditors ...RequestEditorFn) (*ListScheduleRotationUsersResponse, error)
@@ -55695,6 +55848,9 @@ type ClientWithResponsesInterface interface {
 	UpdateTeamWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateTeamResponse, error)
 
 	UpdateTeamWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateTeamApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateTeamResponse, error)
+
+	// GetTeamIncidentsChartWithResponse request
+	GetTeamIncidentsChartWithResponse(ctx context.Context, id string, params *GetTeamIncidentsChartParams, reqEditors ...RequestEditorFn) (*GetTeamIncidentsChartResponse, error)
 
 	// DeleteStatusPageTemplateWithResponse request
 	DeleteStatusPageTemplateWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteStatusPageTemplateResponse, error)
@@ -60681,15 +60837,15 @@ func (r UpdateRoleResponse) StatusCode() int {
 	return 0
 }
 
-type DeleteScheduleRotationActiveTimeResponse struct {
+type DeleteScheduleRotationActiveDayResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *ScheduleRotationActiveTimeResponse
+	ApplicationvndApiJSON200 *ScheduleRotationActiveDayResponse
 	ApplicationvndApiJSON401 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
-func (r DeleteScheduleRotationActiveTimeResponse) Status() string {
+func (r DeleteScheduleRotationActiveDayResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -60697,22 +60853,22 @@ func (r DeleteScheduleRotationActiveTimeResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r DeleteScheduleRotationActiveTimeResponse) StatusCode() int {
+func (r DeleteScheduleRotationActiveDayResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetScheduleRotationActiveTimeResponse struct {
+type GetScheduleRotationActiveDayResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *ScheduleRotationActiveTimeResponse
+	ApplicationvndApiJSON200 *ScheduleRotationActiveDayResponse
 	ApplicationvndApiJSON401 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
-func (r GetScheduleRotationActiveTimeResponse) Status() string {
+func (r GetScheduleRotationActiveDayResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -60720,22 +60876,22 @@ func (r GetScheduleRotationActiveTimeResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetScheduleRotationActiveTimeResponse) StatusCode() int {
+func (r GetScheduleRotationActiveDayResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type UpdateScheduleRotationActiveTimeResponse struct {
+type UpdateScheduleRotationActiveDayResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *ScheduleRotationActiveTimeResponse
+	ApplicationvndApiJSON200 *ScheduleRotationActiveDayResponse
 	ApplicationvndApiJSON401 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
-func (r UpdateScheduleRotationActiveTimeResponse) Status() string {
+func (r UpdateScheduleRotationActiveDayResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -60743,7 +60899,7 @@ func (r UpdateScheduleRotationActiveTimeResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r UpdateScheduleRotationActiveTimeResponse) StatusCode() int {
+func (r UpdateScheduleRotationActiveDayResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -60888,14 +61044,14 @@ func (r UpdateScheduleRotationResponse) StatusCode() int {
 	return 0
 }
 
-type ListScheduleRotationActiveTimesResponse struct {
+type ListScheduleRotationActiveDaysResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *ScheduleRotationActiveTimeList
+	ApplicationvndApiJSON200 *ScheduleRotationActiveDayList
 }
 
 // Status returns HTTPResponse.Status
-func (r ListScheduleRotationActiveTimesResponse) Status() string {
+func (r ListScheduleRotationActiveDaysResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -60903,23 +61059,23 @@ func (r ListScheduleRotationActiveTimesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ListScheduleRotationActiveTimesResponse) StatusCode() int {
+func (r ListScheduleRotationActiveDaysResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CreateScheduleRotationActiveTimeResponse struct {
+type CreateScheduleRotationActiveDayResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON201 *ScheduleRotationActiveTimeResponse
+	ApplicationvndApiJSON201 *ScheduleRotationActiveDayResponse
 	ApplicationvndApiJSON401 *ErrorsList
 	ApplicationvndApiJSON422 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
-func (r CreateScheduleRotationActiveTimeResponse) Status() string {
+func (r CreateScheduleRotationActiveDayResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -60927,7 +61083,7 @@ func (r CreateScheduleRotationActiveTimeResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreateScheduleRotationActiveTimeResponse) StatusCode() int {
+func (r CreateScheduleRotationActiveDayResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -61917,6 +62073,29 @@ func (r UpdateTeamResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r UpdateTeamResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetTeamIncidentsChartResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *IncidentsChartResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetTeamIncidentsChartResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetTeamIncidentsChartResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -65515,39 +65694,39 @@ func (c *ClientWithResponses) UpdateRoleWithApplicationVndAPIPlusJSONBodyWithRes
 	return ParseUpdateRoleResponse(rsp)
 }
 
-// DeleteScheduleRotationActiveTimeWithResponse request returning *DeleteScheduleRotationActiveTimeResponse
-func (c *ClientWithResponses) DeleteScheduleRotationActiveTimeWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteScheduleRotationActiveTimeResponse, error) {
-	rsp, err := c.DeleteScheduleRotationActiveTime(ctx, id, reqEditors...)
+// DeleteScheduleRotationActiveDayWithResponse request returning *DeleteScheduleRotationActiveDayResponse
+func (c *ClientWithResponses) DeleteScheduleRotationActiveDayWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteScheduleRotationActiveDayResponse, error) {
+	rsp, err := c.DeleteScheduleRotationActiveDay(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseDeleteScheduleRotationActiveTimeResponse(rsp)
+	return ParseDeleteScheduleRotationActiveDayResponse(rsp)
 }
 
-// GetScheduleRotationActiveTimeWithResponse request returning *GetScheduleRotationActiveTimeResponse
-func (c *ClientWithResponses) GetScheduleRotationActiveTimeWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetScheduleRotationActiveTimeResponse, error) {
-	rsp, err := c.GetScheduleRotationActiveTime(ctx, id, reqEditors...)
+// GetScheduleRotationActiveDayWithResponse request returning *GetScheduleRotationActiveDayResponse
+func (c *ClientWithResponses) GetScheduleRotationActiveDayWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetScheduleRotationActiveDayResponse, error) {
+	rsp, err := c.GetScheduleRotationActiveDay(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetScheduleRotationActiveTimeResponse(rsp)
+	return ParseGetScheduleRotationActiveDayResponse(rsp)
 }
 
-// UpdateScheduleRotationActiveTimeWithBodyWithResponse request with arbitrary body returning *UpdateScheduleRotationActiveTimeResponse
-func (c *ClientWithResponses) UpdateScheduleRotationActiveTimeWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateScheduleRotationActiveTimeResponse, error) {
-	rsp, err := c.UpdateScheduleRotationActiveTimeWithBody(ctx, id, contentType, body, reqEditors...)
+// UpdateScheduleRotationActiveDayWithBodyWithResponse request with arbitrary body returning *UpdateScheduleRotationActiveDayResponse
+func (c *ClientWithResponses) UpdateScheduleRotationActiveDayWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateScheduleRotationActiveDayResponse, error) {
+	rsp, err := c.UpdateScheduleRotationActiveDayWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseUpdateScheduleRotationActiveTimeResponse(rsp)
+	return ParseUpdateScheduleRotationActiveDayResponse(rsp)
 }
 
-func (c *ClientWithResponses) UpdateScheduleRotationActiveTimeWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateScheduleRotationActiveTimeResponse, error) {
-	rsp, err := c.UpdateScheduleRotationActiveTimeWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+func (c *ClientWithResponses) UpdateScheduleRotationActiveDayWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateScheduleRotationActiveDayApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateScheduleRotationActiveDayResponse, error) {
+	rsp, err := c.UpdateScheduleRotationActiveDayWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseUpdateScheduleRotationActiveTimeResponse(rsp)
+	return ParseUpdateScheduleRotationActiveDayResponse(rsp)
 }
 
 // DeleteScheduleRotationUserWithResponse request returning *DeleteScheduleRotationUserResponse
@@ -65620,30 +65799,30 @@ func (c *ClientWithResponses) UpdateScheduleRotationWithApplicationVndAPIPlusJSO
 	return ParseUpdateScheduleRotationResponse(rsp)
 }
 
-// ListScheduleRotationActiveTimesWithResponse request returning *ListScheduleRotationActiveTimesResponse
-func (c *ClientWithResponses) ListScheduleRotationActiveTimesWithResponse(ctx context.Context, scheduleRotationId string, params *ListScheduleRotationActiveTimesParams, reqEditors ...RequestEditorFn) (*ListScheduleRotationActiveTimesResponse, error) {
-	rsp, err := c.ListScheduleRotationActiveTimes(ctx, scheduleRotationId, params, reqEditors...)
+// ListScheduleRotationActiveDaysWithResponse request returning *ListScheduleRotationActiveDaysResponse
+func (c *ClientWithResponses) ListScheduleRotationActiveDaysWithResponse(ctx context.Context, scheduleRotationId string, params *ListScheduleRotationActiveDaysParams, reqEditors ...RequestEditorFn) (*ListScheduleRotationActiveDaysResponse, error) {
+	rsp, err := c.ListScheduleRotationActiveDays(ctx, scheduleRotationId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseListScheduleRotationActiveTimesResponse(rsp)
+	return ParseListScheduleRotationActiveDaysResponse(rsp)
 }
 
-// CreateScheduleRotationActiveTimeWithBodyWithResponse request with arbitrary body returning *CreateScheduleRotationActiveTimeResponse
-func (c *ClientWithResponses) CreateScheduleRotationActiveTimeWithBodyWithResponse(ctx context.Context, scheduleRotationId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateScheduleRotationActiveTimeResponse, error) {
-	rsp, err := c.CreateScheduleRotationActiveTimeWithBody(ctx, scheduleRotationId, contentType, body, reqEditors...)
+// CreateScheduleRotationActiveDayWithBodyWithResponse request with arbitrary body returning *CreateScheduleRotationActiveDayResponse
+func (c *ClientWithResponses) CreateScheduleRotationActiveDayWithBodyWithResponse(ctx context.Context, scheduleRotationId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateScheduleRotationActiveDayResponse, error) {
+	rsp, err := c.CreateScheduleRotationActiveDayWithBody(ctx, scheduleRotationId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreateScheduleRotationActiveTimeResponse(rsp)
+	return ParseCreateScheduleRotationActiveDayResponse(rsp)
 }
 
-func (c *ClientWithResponses) CreateScheduleRotationActiveTimeWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, scheduleRotationId string, body CreateScheduleRotationActiveTimeApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateScheduleRotationActiveTimeResponse, error) {
-	rsp, err := c.CreateScheduleRotationActiveTimeWithApplicationVndAPIPlusJSONBody(ctx, scheduleRotationId, body, reqEditors...)
+func (c *ClientWithResponses) CreateScheduleRotationActiveDayWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, scheduleRotationId string, body CreateScheduleRotationActiveDayApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateScheduleRotationActiveDayResponse, error) {
+	rsp, err := c.CreateScheduleRotationActiveDayWithApplicationVndAPIPlusJSONBody(ctx, scheduleRotationId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreateScheduleRotationActiveTimeResponse(rsp)
+	return ParseCreateScheduleRotationActiveDayResponse(rsp)
 }
 
 // ListScheduleRotationUsersWithResponse request returning *ListScheduleRotationUsersResponse
@@ -66167,6 +66346,15 @@ func (c *ClientWithResponses) UpdateTeamWithApplicationVndAPIPlusJSONBodyWithRes
 		return nil, err
 	}
 	return ParseUpdateTeamResponse(rsp)
+}
+
+// GetTeamIncidentsChartWithResponse request returning *GetTeamIncidentsChartResponse
+func (c *ClientWithResponses) GetTeamIncidentsChartWithResponse(ctx context.Context, id string, params *GetTeamIncidentsChartParams, reqEditors ...RequestEditorFn) (*GetTeamIncidentsChartResponse, error) {
+	rsp, err := c.GetTeamIncidentsChart(ctx, id, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetTeamIncidentsChartResponse(rsp)
 }
 
 // DeleteStatusPageTemplateWithResponse request returning *DeleteStatusPageTemplateResponse
@@ -73559,22 +73747,22 @@ func ParseUpdateRoleResponse(rsp *http.Response) (*UpdateRoleResponse, error) {
 	return response, nil
 }
 
-// ParseDeleteScheduleRotationActiveTimeResponse parses an HTTP response from a DeleteScheduleRotationActiveTimeWithResponse call
-func ParseDeleteScheduleRotationActiveTimeResponse(rsp *http.Response) (*DeleteScheduleRotationActiveTimeResponse, error) {
+// ParseDeleteScheduleRotationActiveDayResponse parses an HTTP response from a DeleteScheduleRotationActiveDayWithResponse call
+func ParseDeleteScheduleRotationActiveDayResponse(rsp *http.Response) (*DeleteScheduleRotationActiveDayResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &DeleteScheduleRotationActiveTimeResponse{
+	response := &DeleteScheduleRotationActiveDayResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ScheduleRotationActiveTimeResponse
+		var dest ScheduleRotationActiveDayResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -73592,22 +73780,22 @@ func ParseDeleteScheduleRotationActiveTimeResponse(rsp *http.Response) (*DeleteS
 	return response, nil
 }
 
-// ParseGetScheduleRotationActiveTimeResponse parses an HTTP response from a GetScheduleRotationActiveTimeWithResponse call
-func ParseGetScheduleRotationActiveTimeResponse(rsp *http.Response) (*GetScheduleRotationActiveTimeResponse, error) {
+// ParseGetScheduleRotationActiveDayResponse parses an HTTP response from a GetScheduleRotationActiveDayWithResponse call
+func ParseGetScheduleRotationActiveDayResponse(rsp *http.Response) (*GetScheduleRotationActiveDayResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetScheduleRotationActiveTimeResponse{
+	response := &GetScheduleRotationActiveDayResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ScheduleRotationActiveTimeResponse
+		var dest ScheduleRotationActiveDayResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -73625,22 +73813,22 @@ func ParseGetScheduleRotationActiveTimeResponse(rsp *http.Response) (*GetSchedul
 	return response, nil
 }
 
-// ParseUpdateScheduleRotationActiveTimeResponse parses an HTTP response from a UpdateScheduleRotationActiveTimeWithResponse call
-func ParseUpdateScheduleRotationActiveTimeResponse(rsp *http.Response) (*UpdateScheduleRotationActiveTimeResponse, error) {
+// ParseUpdateScheduleRotationActiveDayResponse parses an HTTP response from a UpdateScheduleRotationActiveDayWithResponse call
+func ParseUpdateScheduleRotationActiveDayResponse(rsp *http.Response) (*UpdateScheduleRotationActiveDayResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &UpdateScheduleRotationActiveTimeResponse{
+	response := &UpdateScheduleRotationActiveDayResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ScheduleRotationActiveTimeResponse
+		var dest ScheduleRotationActiveDayResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -73856,22 +74044,22 @@ func ParseUpdateScheduleRotationResponse(rsp *http.Response) (*UpdateScheduleRot
 	return response, nil
 }
 
-// ParseListScheduleRotationActiveTimesResponse parses an HTTP response from a ListScheduleRotationActiveTimesWithResponse call
-func ParseListScheduleRotationActiveTimesResponse(rsp *http.Response) (*ListScheduleRotationActiveTimesResponse, error) {
+// ParseListScheduleRotationActiveDaysResponse parses an HTTP response from a ListScheduleRotationActiveDaysWithResponse call
+func ParseListScheduleRotationActiveDaysResponse(rsp *http.Response) (*ListScheduleRotationActiveDaysResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &ListScheduleRotationActiveTimesResponse{
+	response := &ListScheduleRotationActiveDaysResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ScheduleRotationActiveTimeList
+		var dest ScheduleRotationActiveDayList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -73882,22 +74070,22 @@ func ParseListScheduleRotationActiveTimesResponse(rsp *http.Response) (*ListSche
 	return response, nil
 }
 
-// ParseCreateScheduleRotationActiveTimeResponse parses an HTTP response from a CreateScheduleRotationActiveTimeWithResponse call
-func ParseCreateScheduleRotationActiveTimeResponse(rsp *http.Response) (*CreateScheduleRotationActiveTimeResponse, error) {
+// ParseCreateScheduleRotationActiveDayResponse parses an HTTP response from a CreateScheduleRotationActiveDayWithResponse call
+func ParseCreateScheduleRotationActiveDayResponse(rsp *http.Response) (*CreateScheduleRotationActiveDayResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CreateScheduleRotationActiveTimeResponse{
+	response := &CreateScheduleRotationActiveDayResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest ScheduleRotationActiveTimeResponse
+		var dest ScheduleRotationActiveDayResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -75324,6 +75512,39 @@ func ParseUpdateTeamResponse(rsp *http.Response) (*UpdateTeamResponse, error) {
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest TeamResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetTeamIncidentsChartResponse parses an HTTP response from a GetTeamIncidentsChartWithResponse call
+func ParseGetTeamIncidentsChartResponse(rsp *http.Response) (*GetTeamIncidentsChartResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetTeamIncidentsChartResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest IncidentsChartResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
