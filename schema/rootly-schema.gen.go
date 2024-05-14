@@ -1036,9 +1036,9 @@ const (
 	CreateOutlookEventTaskParamsTimeZoneZurich                    CreateOutlookEventTaskParamsTimeZone = "Zurich"
 )
 
-// Defines values for CreatePagerdutyStatusUpdateParamsTaskType.
+// Defines values for CreatePagerdutyStatusUpdateTaskParamsTaskType.
 const (
-	CreatePagerdutyStatusUpdate CreatePagerdutyStatusUpdateParamsTaskType = "create_pagerduty_status_update"
+	CreatePagerdutyStatusUpdate CreatePagerdutyStatusUpdateTaskParamsTaskType = "create_pagerduty_status_update"
 )
 
 // Defines values for CreatePagertreeAlertTaskParamsSeverity.
@@ -1118,9 +1118,9 @@ const (
 	CreateWebexMeeting CreateWebexMeetingTaskParamsTaskType = "create_webex_meeting"
 )
 
-// Defines values for CreateZendeskJiraLinkParamsTaskType.
+// Defines values for CreateZendeskJiraLinkTaskParamsTaskType.
 const (
-	CreateZendeskJiraLink CreateZendeskJiraLinkParamsTaskType = "create_zendesk_jira_link"
+	CreateZendeskJiraLink CreateZendeskJiraLinkTaskParamsTaskType = "create_zendesk_jira_link"
 )
 
 // Defines values for CreateZendeskTicketTaskParamsKind.
@@ -1274,20 +1274,26 @@ const (
 
 // Defines values for FormFieldKind.
 const (
+	FormFieldKindAcknowledgedAt              FormFieldKind = "acknowledged_at"
 	FormFieldKindAttachAlerts                FormFieldKind = "attach_alerts"
 	FormFieldKindCauses                      FormFieldKind = "causes"
 	FormFieldKindCustom                      FormFieldKind = "custom"
+	FormFieldKindDetectedAt                  FormFieldKind = "detected_at"
 	FormFieldKindEnvironments                FormFieldKind = "environments"
 	FormFieldKindFunctionalities             FormFieldKind = "functionalities"
+	FormFieldKindInTriageAt                  FormFieldKind = "in_triage_at"
 	FormFieldKindLabels                      FormFieldKind = "labels"
 	FormFieldKindManualStartingDatetimeField FormFieldKind = "manual_starting_datetime_field"
 	FormFieldKindMarkAsBackfilled            FormFieldKind = "mark_as_backfilled"
 	FormFieldKindMarkAsInTriage              FormFieldKind = "mark_as_in_triage"
 	FormFieldKindMarkAsTest                  FormFieldKind = "mark_as_test"
+	FormFieldKindMitigatedAt                 FormFieldKind = "mitigated_at"
 	FormFieldKindNotifyEmails                FormFieldKind = "notify_emails"
+	FormFieldKindResolvedAt                  FormFieldKind = "resolved_at"
 	FormFieldKindServices                    FormFieldKind = "services"
 	FormFieldKindSeverity                    FormFieldKind = "severity"
 	FormFieldKindShowOngoingIncidents        FormFieldKind = "show_ongoing_incidents"
+	FormFieldKindStartedAt                   FormFieldKind = "started_at"
 	FormFieldKindSummary                     FormFieldKind = "summary"
 	FormFieldKindTeams                       FormFieldKind = "teams"
 	FormFieldKindTitle                       FormFieldKind = "title"
@@ -2090,20 +2096,26 @@ const (
 
 // Defines values for NewFormFieldDataAttributesKind.
 const (
+	NewFormFieldDataAttributesKindAcknowledgedAt              NewFormFieldDataAttributesKind = "acknowledged_at"
 	NewFormFieldDataAttributesKindAttachAlerts                NewFormFieldDataAttributesKind = "attach_alerts"
 	NewFormFieldDataAttributesKindCauses                      NewFormFieldDataAttributesKind = "causes"
 	NewFormFieldDataAttributesKindCustom                      NewFormFieldDataAttributesKind = "custom"
+	NewFormFieldDataAttributesKindDetectedAt                  NewFormFieldDataAttributesKind = "detected_at"
 	NewFormFieldDataAttributesKindEnvironments                NewFormFieldDataAttributesKind = "environments"
 	NewFormFieldDataAttributesKindFunctionalities             NewFormFieldDataAttributesKind = "functionalities"
+	NewFormFieldDataAttributesKindInTriageAt                  NewFormFieldDataAttributesKind = "in_triage_at"
 	NewFormFieldDataAttributesKindLabels                      NewFormFieldDataAttributesKind = "labels"
 	NewFormFieldDataAttributesKindManualStartingDatetimeField NewFormFieldDataAttributesKind = "manual_starting_datetime_field"
 	NewFormFieldDataAttributesKindMarkAsBackfilled            NewFormFieldDataAttributesKind = "mark_as_backfilled"
 	NewFormFieldDataAttributesKindMarkAsInTriage              NewFormFieldDataAttributesKind = "mark_as_in_triage"
 	NewFormFieldDataAttributesKindMarkAsTest                  NewFormFieldDataAttributesKind = "mark_as_test"
+	NewFormFieldDataAttributesKindMitigatedAt                 NewFormFieldDataAttributesKind = "mitigated_at"
 	NewFormFieldDataAttributesKindNotifyEmails                NewFormFieldDataAttributesKind = "notify_emails"
+	NewFormFieldDataAttributesKindResolvedAt                  NewFormFieldDataAttributesKind = "resolved_at"
 	NewFormFieldDataAttributesKindServices                    NewFormFieldDataAttributesKind = "services"
 	NewFormFieldDataAttributesKindSeverity                    NewFormFieldDataAttributesKind = "severity"
 	NewFormFieldDataAttributesKindShowOngoingIncidents        NewFormFieldDataAttributesKind = "show_ongoing_incidents"
+	NewFormFieldDataAttributesKindStartedAt                   NewFormFieldDataAttributesKind = "started_at"
 	NewFormFieldDataAttributesKindSummary                     NewFormFieldDataAttributesKind = "summary"
 	NewFormFieldDataAttributesKindTeams                       NewFormFieldDataAttributesKind = "teams"
 	NewFormFieldDataAttributesKindTitle                       NewFormFieldDataAttributesKind = "title"
@@ -4414,20 +4426,26 @@ const (
 
 // Defines values for UpdateFormFieldDataAttributesKind.
 const (
+	UpdateFormFieldDataAttributesKindAcknowledgedAt              UpdateFormFieldDataAttributesKind = "acknowledged_at"
 	UpdateFormFieldDataAttributesKindAttachAlerts                UpdateFormFieldDataAttributesKind = "attach_alerts"
 	UpdateFormFieldDataAttributesKindCauses                      UpdateFormFieldDataAttributesKind = "causes"
 	UpdateFormFieldDataAttributesKindCustom                      UpdateFormFieldDataAttributesKind = "custom"
+	UpdateFormFieldDataAttributesKindDetectedAt                  UpdateFormFieldDataAttributesKind = "detected_at"
 	UpdateFormFieldDataAttributesKindEnvironments                UpdateFormFieldDataAttributesKind = "environments"
 	UpdateFormFieldDataAttributesKindFunctionalities             UpdateFormFieldDataAttributesKind = "functionalities"
+	UpdateFormFieldDataAttributesKindInTriageAt                  UpdateFormFieldDataAttributesKind = "in_triage_at"
 	UpdateFormFieldDataAttributesKindLabels                      UpdateFormFieldDataAttributesKind = "labels"
 	UpdateFormFieldDataAttributesKindManualStartingDatetimeField UpdateFormFieldDataAttributesKind = "manual_starting_datetime_field"
 	UpdateFormFieldDataAttributesKindMarkAsBackfilled            UpdateFormFieldDataAttributesKind = "mark_as_backfilled"
 	UpdateFormFieldDataAttributesKindMarkAsInTriage              UpdateFormFieldDataAttributesKind = "mark_as_in_triage"
 	UpdateFormFieldDataAttributesKindMarkAsTest                  UpdateFormFieldDataAttributesKind = "mark_as_test"
+	UpdateFormFieldDataAttributesKindMitigatedAt                 UpdateFormFieldDataAttributesKind = "mitigated_at"
 	UpdateFormFieldDataAttributesKindNotifyEmails                UpdateFormFieldDataAttributesKind = "notify_emails"
+	UpdateFormFieldDataAttributesKindResolvedAt                  UpdateFormFieldDataAttributesKind = "resolved_at"
 	UpdateFormFieldDataAttributesKindServices                    UpdateFormFieldDataAttributesKind = "services"
 	UpdateFormFieldDataAttributesKindSeverity                    UpdateFormFieldDataAttributesKind = "severity"
 	UpdateFormFieldDataAttributesKindShowOngoingIncidents        UpdateFormFieldDataAttributesKind = "show_ongoing_incidents"
+	UpdateFormFieldDataAttributesKindStartedAt                   UpdateFormFieldDataAttributesKind = "started_at"
 	UpdateFormFieldDataAttributesKindSummary                     UpdateFormFieldDataAttributesKind = "summary"
 	UpdateFormFieldDataAttributesKindTeams                       UpdateFormFieldDataAttributesKind = "teams"
 	UpdateFormFieldDataAttributesKindTitle                       UpdateFormFieldDataAttributesKind = "title"
@@ -7380,18 +7398,18 @@ type CreateOutlookEventTaskParamsTaskType string
 // CreateOutlookEventTaskParamsTimeZone defines model for CreateOutlookEventTaskParams.TimeZone.
 type CreateOutlookEventTaskParamsTimeZone string
 
-// CreatePagerdutyStatusUpdateParams defines model for create_pagerduty_status_update_params.
-type CreatePagerdutyStatusUpdateParams struct {
+// CreatePagerdutyStatusUpdateTaskParams defines model for create_pagerduty_status_update_task_params.
+type CreatePagerdutyStatusUpdateTaskParams struct {
 	// Message A message outlining the incident's resolution in PagerDuty
 	Message string `json:"message"`
 
 	// PagerdutyIncidentId PagerDuty incident id
-	PagerdutyIncidentId string                                     `json:"pagerduty_incident_id"`
-	TaskType            *CreatePagerdutyStatusUpdateParamsTaskType `json:"task_type,omitempty"`
+	PagerdutyIncidentId string                                         `json:"pagerduty_incident_id"`
+	TaskType            *CreatePagerdutyStatusUpdateTaskParamsTaskType `json:"task_type,omitempty"`
 }
 
-// CreatePagerdutyStatusUpdateParamsTaskType defines model for CreatePagerdutyStatusUpdateParams.TaskType.
-type CreatePagerdutyStatusUpdateParamsTaskType string
+// CreatePagerdutyStatusUpdateTaskParamsTaskType defines model for CreatePagerdutyStatusUpdateTaskParams.TaskType.
+type CreatePagerdutyStatusUpdateTaskParamsTaskType string
 
 // CreatePagertreeAlertTaskParams defines model for create_pagertree_alert_task_params.
 type CreatePagertreeAlertTaskParams struct {
@@ -7640,21 +7658,21 @@ type CreateWebexMeetingTaskParams struct {
 // CreateWebexMeetingTaskParamsTaskType defines model for CreateWebexMeetingTaskParams.TaskType.
 type CreateWebexMeetingTaskParamsTaskType string
 
-// CreateZendeskJiraLinkParams defines model for create_zendesk_jira_link_params.
-type CreateZendeskJiraLinkParams struct {
+// CreateZendeskJiraLinkTaskParams defines model for create_zendesk_jira_link_task_params.
+type CreateZendeskJiraLinkTaskParams struct {
 	// JiraIssueId Jira Issue Id.
 	JiraIssueId string `json:"jira_issue_id"`
 
 	// JiraIssueKey Jira Issue Key.
-	JiraIssueKey string                               `json:"jira_issue_key"`
-	TaskType     *CreateZendeskJiraLinkParamsTaskType `json:"task_type,omitempty"`
+	JiraIssueKey string                                   `json:"jira_issue_key"`
+	TaskType     *CreateZendeskJiraLinkTaskParamsTaskType `json:"task_type,omitempty"`
 
 	// ZendeskTicketId Zendesk Ticket Id.
 	ZendeskTicketId string `json:"zendesk_ticket_id"`
 }
 
-// CreateZendeskJiraLinkParamsTaskType defines model for CreateZendeskJiraLinkParams.TaskType.
-type CreateZendeskJiraLinkParamsTaskType string
+// CreateZendeskJiraLinkTaskParamsTaskType defines model for CreateZendeskJiraLinkTaskParams.TaskType.
+type CreateZendeskJiraLinkTaskParamsTaskType string
 
 // CreateZendeskTicketTaskParams defines model for create_zendesk_ticket_task_params.
 type CreateZendeskTicketTaskParams struct {
@@ -17262,6 +17280,7 @@ type ListIncidentsParams struct {
 	FilterSearch                       *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
 	FilterKind                         *string `form:"filter[kind],omitempty" json:"filter[kind],omitempty"`
 	FilterStatus                       *string `form:"filter[status],omitempty" json:"filter[status],omitempty"`
+	FilterPrivate                      *bool   `form:"filter[private],omitempty" json:"filter[private],omitempty"`
 	FilterUserId                       *int    `form:"filter[user_id],omitempty" json:"filter[user_id],omitempty"`
 	FilterSeverity                     *string `form:"filter[severity],omitempty" json:"filter[severity],omitempty"`
 	FilterSeverityId                   *string `form:"filter[severity_id],omitempty" json:"filter[severity_id],omitempty"`
@@ -19703,22 +19722,22 @@ func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeUpdatePagerdutyInciden
 	return err
 }
 
-// AsCreatePagerdutyStatusUpdateParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a CreatePagerdutyStatusUpdateParams
-func (t NewWorkflowTask_Data_Attributes_TaskParams) AsCreatePagerdutyStatusUpdateParams() (CreatePagerdutyStatusUpdateParams, error) {
-	var body CreatePagerdutyStatusUpdateParams
+// AsCreatePagerdutyStatusUpdateTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a CreatePagerdutyStatusUpdateTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsCreatePagerdutyStatusUpdateTaskParams() (CreatePagerdutyStatusUpdateTaskParams, error) {
+	var body CreatePagerdutyStatusUpdateTaskParams
 	err := json.Unmarshal(t.union, &body)
 	return body, err
 }
 
-// FromCreatePagerdutyStatusUpdateParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided CreatePagerdutyStatusUpdateParams
-func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromCreatePagerdutyStatusUpdateParams(v CreatePagerdutyStatusUpdateParams) error {
+// FromCreatePagerdutyStatusUpdateTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided CreatePagerdutyStatusUpdateTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromCreatePagerdutyStatusUpdateTaskParams(v CreatePagerdutyStatusUpdateTaskParams) error {
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
 }
 
-// MergeCreatePagerdutyStatusUpdateParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided CreatePagerdutyStatusUpdateParams
-func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeCreatePagerdutyStatusUpdateParams(v CreatePagerdutyStatusUpdateParams) error {
+// MergeCreatePagerdutyStatusUpdateTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided CreatePagerdutyStatusUpdateTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeCreatePagerdutyStatusUpdateTaskParams(v CreatePagerdutyStatusUpdateTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -20743,22 +20762,22 @@ func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeCreateZendeskTicketTas
 	return err
 }
 
-// AsCreateZendeskJiraLinkParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a CreateZendeskJiraLinkParams
-func (t NewWorkflowTask_Data_Attributes_TaskParams) AsCreateZendeskJiraLinkParams() (CreateZendeskJiraLinkParams, error) {
-	var body CreateZendeskJiraLinkParams
+// AsCreateZendeskJiraLinkTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a CreateZendeskJiraLinkTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsCreateZendeskJiraLinkTaskParams() (CreateZendeskJiraLinkTaskParams, error) {
+	var body CreateZendeskJiraLinkTaskParams
 	err := json.Unmarshal(t.union, &body)
 	return body, err
 }
 
-// FromCreateZendeskJiraLinkParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided CreateZendeskJiraLinkParams
-func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromCreateZendeskJiraLinkParams(v CreateZendeskJiraLinkParams) error {
+// FromCreateZendeskJiraLinkTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided CreateZendeskJiraLinkTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromCreateZendeskJiraLinkTaskParams(v CreateZendeskJiraLinkTaskParams) error {
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
 }
 
-// MergeCreateZendeskJiraLinkParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided CreateZendeskJiraLinkParams
-func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeCreateZendeskJiraLinkParams(v CreateZendeskJiraLinkParams) error {
+// MergeCreateZendeskJiraLinkTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided CreateZendeskJiraLinkTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeCreateZendeskJiraLinkTaskParams(v CreateZendeskJiraLinkTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -22661,22 +22680,22 @@ func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeUpdatePagerdutyInci
 	return err
 }
 
-// AsCreatePagerdutyStatusUpdateParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a CreatePagerdutyStatusUpdateParams
-func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsCreatePagerdutyStatusUpdateParams() (CreatePagerdutyStatusUpdateParams, error) {
-	var body CreatePagerdutyStatusUpdateParams
+// AsCreatePagerdutyStatusUpdateTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a CreatePagerdutyStatusUpdateTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsCreatePagerdutyStatusUpdateTaskParams() (CreatePagerdutyStatusUpdateTaskParams, error) {
+	var body CreatePagerdutyStatusUpdateTaskParams
 	err := json.Unmarshal(t.union, &body)
 	return body, err
 }
 
-// FromCreatePagerdutyStatusUpdateParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided CreatePagerdutyStatusUpdateParams
-func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromCreatePagerdutyStatusUpdateParams(v CreatePagerdutyStatusUpdateParams) error {
+// FromCreatePagerdutyStatusUpdateTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided CreatePagerdutyStatusUpdateTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromCreatePagerdutyStatusUpdateTaskParams(v CreatePagerdutyStatusUpdateTaskParams) error {
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
 }
 
-// MergeCreatePagerdutyStatusUpdateParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided CreatePagerdutyStatusUpdateParams
-func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeCreatePagerdutyStatusUpdateParams(v CreatePagerdutyStatusUpdateParams) error {
+// MergeCreatePagerdutyStatusUpdateTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided CreatePagerdutyStatusUpdateTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeCreatePagerdutyStatusUpdateTaskParams(v CreatePagerdutyStatusUpdateTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -23701,22 +23720,22 @@ func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeCreateZendeskTicket
 	return err
 }
 
-// AsCreateZendeskJiraLinkParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a CreateZendeskJiraLinkParams
-func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsCreateZendeskJiraLinkParams() (CreateZendeskJiraLinkParams, error) {
-	var body CreateZendeskJiraLinkParams
+// AsCreateZendeskJiraLinkTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a CreateZendeskJiraLinkTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsCreateZendeskJiraLinkTaskParams() (CreateZendeskJiraLinkTaskParams, error) {
+	var body CreateZendeskJiraLinkTaskParams
 	err := json.Unmarshal(t.union, &body)
 	return body, err
 }
 
-// FromCreateZendeskJiraLinkParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided CreateZendeskJiraLinkParams
-func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromCreateZendeskJiraLinkParams(v CreateZendeskJiraLinkParams) error {
+// FromCreateZendeskJiraLinkTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided CreateZendeskJiraLinkTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromCreateZendeskJiraLinkTaskParams(v CreateZendeskJiraLinkTaskParams) error {
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
 }
 
-// MergeCreateZendeskJiraLinkParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided CreateZendeskJiraLinkParams
-func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeCreateZendeskJiraLinkParams(v CreateZendeskJiraLinkParams) error {
+// MergeCreateZendeskJiraLinkTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided CreateZendeskJiraLinkTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeCreateZendeskJiraLinkTaskParams(v CreateZendeskJiraLinkTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -25619,22 +25638,22 @@ func (t *WorkflowTask_TaskParams) MergeUpdatePagerdutyIncidentTaskParams(v Updat
 	return err
 }
 
-// AsCreatePagerdutyStatusUpdateParams returns the union data inside the WorkflowTask_TaskParams as a CreatePagerdutyStatusUpdateParams
-func (t WorkflowTask_TaskParams) AsCreatePagerdutyStatusUpdateParams() (CreatePagerdutyStatusUpdateParams, error) {
-	var body CreatePagerdutyStatusUpdateParams
+// AsCreatePagerdutyStatusUpdateTaskParams returns the union data inside the WorkflowTask_TaskParams as a CreatePagerdutyStatusUpdateTaskParams
+func (t WorkflowTask_TaskParams) AsCreatePagerdutyStatusUpdateTaskParams() (CreatePagerdutyStatusUpdateTaskParams, error) {
+	var body CreatePagerdutyStatusUpdateTaskParams
 	err := json.Unmarshal(t.union, &body)
 	return body, err
 }
 
-// FromCreatePagerdutyStatusUpdateParams overwrites any union data inside the WorkflowTask_TaskParams as the provided CreatePagerdutyStatusUpdateParams
-func (t *WorkflowTask_TaskParams) FromCreatePagerdutyStatusUpdateParams(v CreatePagerdutyStatusUpdateParams) error {
+// FromCreatePagerdutyStatusUpdateTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided CreatePagerdutyStatusUpdateTaskParams
+func (t *WorkflowTask_TaskParams) FromCreatePagerdutyStatusUpdateTaskParams(v CreatePagerdutyStatusUpdateTaskParams) error {
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
 }
 
-// MergeCreatePagerdutyStatusUpdateParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided CreatePagerdutyStatusUpdateParams
-func (t *WorkflowTask_TaskParams) MergeCreatePagerdutyStatusUpdateParams(v CreatePagerdutyStatusUpdateParams) error {
+// MergeCreatePagerdutyStatusUpdateTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided CreatePagerdutyStatusUpdateTaskParams
+func (t *WorkflowTask_TaskParams) MergeCreatePagerdutyStatusUpdateTaskParams(v CreatePagerdutyStatusUpdateTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -26659,22 +26678,22 @@ func (t *WorkflowTask_TaskParams) MergeCreateZendeskTicketTaskParams(v CreateZen
 	return err
 }
 
-// AsCreateZendeskJiraLinkParams returns the union data inside the WorkflowTask_TaskParams as a CreateZendeskJiraLinkParams
-func (t WorkflowTask_TaskParams) AsCreateZendeskJiraLinkParams() (CreateZendeskJiraLinkParams, error) {
-	var body CreateZendeskJiraLinkParams
+// AsCreateZendeskJiraLinkTaskParams returns the union data inside the WorkflowTask_TaskParams as a CreateZendeskJiraLinkTaskParams
+func (t WorkflowTask_TaskParams) AsCreateZendeskJiraLinkTaskParams() (CreateZendeskJiraLinkTaskParams, error) {
+	var body CreateZendeskJiraLinkTaskParams
 	err := json.Unmarshal(t.union, &body)
 	return body, err
 }
 
-// FromCreateZendeskJiraLinkParams overwrites any union data inside the WorkflowTask_TaskParams as the provided CreateZendeskJiraLinkParams
-func (t *WorkflowTask_TaskParams) FromCreateZendeskJiraLinkParams(v CreateZendeskJiraLinkParams) error {
+// FromCreateZendeskJiraLinkTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided CreateZendeskJiraLinkTaskParams
+func (t *WorkflowTask_TaskParams) FromCreateZendeskJiraLinkTaskParams(v CreateZendeskJiraLinkTaskParams) error {
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
 }
 
-// MergeCreateZendeskJiraLinkParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided CreateZendeskJiraLinkParams
-func (t *WorkflowTask_TaskParams) MergeCreateZendeskJiraLinkParams(v CreateZendeskJiraLinkParams) error {
+// MergeCreateZendeskJiraLinkTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided CreateZendeskJiraLinkTaskParams
+func (t *WorkflowTask_TaskParams) MergeCreateZendeskJiraLinkTaskParams(v CreateZendeskJiraLinkTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -43115,6 +43134,22 @@ func NewListIncidentsRequest(server string, params *ListIncidentsParams) (*http.
 		if params.FilterStatus != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[status]", runtime.ParamLocationQuery, *params.FilterStatus); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterPrivate != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[private]", runtime.ParamLocationQuery, *params.FilterPrivate); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 				return nil, err

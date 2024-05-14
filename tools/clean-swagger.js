@@ -5,6 +5,17 @@ const swagger = require(require("path").resolve(
   process.argv[2]
 ));
 
+// Find filter paramters with incorrect "string" type and change to "bool"
+function fixFilterParameterTypes(obj) {
+  if (obj["/v1/incidents"]) {
+    obj["/v1/incidents"].get.parameters.forEach((paramSchema) => {
+      if (paramSchema.name === "filter[private]") {
+        paramSchema.schema.type = 'boolean'
+      }
+    })
+  }
+}
+
 // Terraform doesn't support polymorphism and oapi-codegen doesn't support anyOf
 function stripAnyOf(obj) {
   if (typeof obj === "object" && obj !== null) {
@@ -58,6 +69,7 @@ function renameEscalationPolicyLevelSchemas(obj) {
   }
 }
 
+fixFilterParameterTypes(swagger.paths);
 stripAnyOf(swagger.components.schemas);
 combineOneOf(swagger.components.schemas);
 renameEscalationPolicyLevelSchemas(swagger);

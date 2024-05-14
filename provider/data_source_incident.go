@@ -24,6 +24,12 @@ func dataSourceIncident() *schema.Resource {
 				Optional: true,
 			},
 
+			"private": &schema.Schema{
+				Type:     schema.TypeBool,
+				Computed: true,
+				Optional: true,
+			},
+
 			"severity": &schema.Schema{
 				Type:     schema.TypeString,
 				Computed: true,
@@ -115,6 +121,11 @@ func dataSourceIncidentRead(ctx context.Context, d *schema.ResourceData, meta in
 	if value, ok := d.GetOkExists("kind"); ok {
 		kind := value.(string)
 		params.FilterKind = &kind
+	}
+
+	if value, ok := d.GetOkExists("private"); ok {
+		private := value.(bool)
+		params.FilterPrivate = &private
 	}
 
 	if value, ok := d.GetOkExists("severity"); ok {

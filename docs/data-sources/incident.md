@@ -31,6 +31,7 @@ data "rootly_incident" "my-incident" {
 - `kind` (String)
 - `labels` (String)
 - `mitigated_at` (Map of String) Filter by date range using 'lt' and 'gt'.
+- `private` (Boolean)
 - `resolved_at` (Map of String) Filter by date range using 'lt' and 'gt'.
 - `services` (String)
 - `severity` (String)
