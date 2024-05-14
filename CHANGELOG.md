@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.0] -- 2024-05-14
+
+- Fix type of incident filter "private" parameter
+- Add `workflow_task_create_pagerduty_status_update`
+- Add `rootly_workflow_task_create_zendesk_jira_link`
+
 ## [2.0.0] -- 2024-05-09
 
 - Replace `rootly_schedule_rotation_active_time` with `rootly_schedule_rotation_active_day`
