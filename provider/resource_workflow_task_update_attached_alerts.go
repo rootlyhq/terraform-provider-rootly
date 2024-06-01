@@ -6,9 +6,6 @@ import (
 	"context"
 	"fmt"
 
-	"encoding/json"
-	"reflect"
-
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -17,14 +14,14 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
 
-func resourceWorkflowTaskHttpClient() *schema.Resource {
+func resourceWorkflowTaskUpdateAttachedAlerts() *schema.Resource {
 	return &schema.Resource{
-		Description: "Manages workflow http_client task.",
+		Description: "Manages workflow update_attached_alerts task.",
 
-		CreateContext: resourceWorkflowTaskHttpClientCreate,
-		ReadContext:   resourceWorkflowTaskHttpClientRead,
-		UpdateContext: resourceWorkflowTaskHttpClientUpdate,
-		DeleteContext: resourceWorkflowTaskHttpClientDelete,
+		CreateContext: resourceWorkflowTaskUpdateAttachedAlertsCreate,
+		ReadContext:   resourceWorkflowTaskUpdateAttachedAlertsRead,
+		UpdateContext: resourceWorkflowTaskUpdateAttachedAlertsUpdate,
+		DeleteContext: resourceWorkflowTaskUpdateAttachedAlertsDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -71,109 +68,19 @@ func resourceWorkflowTaskHttpClient() *schema.Resource {
 						"task_type": &schema.Schema{
 							Type:     schema.TypeString,
 							Optional: true,
-							Default:  "http_client",
+							Default:  "update_attached_alerts",
 							ValidateFunc: validation.StringInSlice([]string{
-								"http_client",
+								"update_attached_alerts",
 							}, false),
 						},
-						"headers": &schema.Schema{
-							Description: "JSON map of HTTP headers",
-							Type:        schema.TypeString,
-							Optional:    true,
-							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {
-								var oldJSONAsInterface, newJSONAsInterface interface{}
-
-								if err := json.Unmarshal([]byte(old), &oldJSONAsInterface); err != nil {
-									return false
-								}
-
-								if err := json.Unmarshal([]byte(new), &newJSONAsInterface); err != nil {
-									return false
-								}
-
-								return reflect.DeepEqual(oldJSONAsInterface, newJSONAsInterface)
-							},
-							Default: "{}",
-						},
-						"params": &schema.Schema{
-							Description: "JSON map of HTTP query parameters",
-							Type:        schema.TypeString,
-							Optional:    true,
-							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {
-								var oldJSONAsInterface, newJSONAsInterface interface{}
-
-								if err := json.Unmarshal([]byte(old), &oldJSONAsInterface); err != nil {
-									return false
-								}
-
-								if err := json.Unmarshal([]byte(new), &newJSONAsInterface); err != nil {
-									return false
-								}
-
-								return reflect.DeepEqual(oldJSONAsInterface, newJSONAsInterface)
-							},
-							Default: "{}",
-						},
-						"body": &schema.Schema{
-							Description: "HTTP body",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"url": &schema.Schema{
-							Description: "URL endpoint",
+						"status": &schema.Schema{
+							Description: "Value must be one of `acknowledged`, `resolved`.",
 							Type:        schema.TypeString,
 							Required:    true,
-						},
-						"event_url": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"event_message": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"method": &schema.Schema{
-							Description: "HTTP method. Value must be one of `GET`, `POST`, `PATCH`, `PUT`, `DELETE`, `OPTIONS`.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "GET",
 							ValidateFunc: validation.StringInSlice([]string{
-								"GET",
-								"POST",
-								"PATCH",
-								"PUT",
-								"DELETE",
-								"OPTIONS",
+								"acknowledged",
+								"resolved",
 							}, false),
-						},
-						"succeed_on_status": &schema.Schema{
-							Description: "HTTP status code expected. Can be a regular expression. Eg: 200, 200|203, 20[0-3]",
-							Type:        schema.TypeString,
-							Required:    true,
-						},
-						"post_to_incident_timeline": &schema.Schema{
-							Description: "Value must be one of true or false",
-							Type:        schema.TypeBool,
-							Optional:    true,
-						},
-						"post_to_slack_channels": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
-									},
-									"name": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
-									},
-								},
-							},
 						},
 					},
 				},
@@ -182,7 +89,7 @@ func resourceWorkflowTaskHttpClient() *schema.Resource {
 	}
 }
 
-func resourceWorkflowTaskHttpClientCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskUpdateAttachedAlertsCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
@@ -211,10 +118,10 @@ func resourceWorkflowTaskHttpClientCreate(ctx context.Context, d *schema.Resourc
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created an workflow task resource: %v (%s)", workflowId, d.Id()))
 
-	return resourceWorkflowTaskHttpClientRead(ctx, d, meta)
+	return resourceWorkflowTaskUpdateAttachedAlertsRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskHttpClientRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskUpdateAttachedAlertsRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
@@ -223,7 +130,7 @@ func resourceWorkflowTaskHttpClientRead(ctx context.Context, d *schema.ResourceD
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskHttpClient (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskUpdateAttachedAlerts (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
@@ -243,7 +150,7 @@ func resourceWorkflowTaskHttpClientRead(ctx context.Context, d *schema.ResourceD
 	return nil
 }
 
-func resourceWorkflowTaskHttpClientUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskUpdateAttachedAlertsUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
@@ -269,10 +176,10 @@ func resourceWorkflowTaskHttpClientUpdate(ctx context.Context, d *schema.Resourc
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
 
-	return resourceWorkflowTaskHttpClientRead(ctx, d, meta)
+	return resourceWorkflowTaskUpdateAttachedAlertsRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskHttpClientDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskUpdateAttachedAlertsDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
@@ -281,7 +188,7 @@ func resourceWorkflowTaskHttpClientDelete(ctx context.Context, d *schema.Resourc
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskHttpClient (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskUpdateAttachedAlerts (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}

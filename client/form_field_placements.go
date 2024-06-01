@@ -1,0 +1,116 @@
+package client
+
+import (
+	"reflect"
+	
+	"github.com/pkg/errors"
+	"github.com/google/jsonapi"
+	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+)
+
+type FormFieldPlacement struct {
+	ID string `jsonapi:"primary,form_field_placements"`
+	FormFieldId string `jsonapi:"attr,form_field_id,omitempty"`
+  FormSetId string `jsonapi:"attr,form_set_id,omitempty"`
+  Form string `jsonapi:"attr,form,omitempty"`
+  Position int `jsonapi:"attr,position,omitempty"`
+  Required *bool `jsonapi:"attr,required,omitempty"`
+}
+
+func (c *Client) ListFormFieldPlacements(id string, params *rootlygo.ListFormFieldPlacementsParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListFormFieldPlacementsRequest(c.Rootly.Server, id, params)
+	if err != nil {
+		return nil, errors.Errorf("Error building request: %s", err.Error())
+	}
+
+	resp, err := c.Do(req)
+	if err != nil {
+		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+	}
+
+	form_field_placements, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(FormFieldPlacement)))
+	if err != nil {
+		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+	}
+
+	return form_field_placements, nil
+}
+
+func (c *Client) CreateFormFieldPlacement(d *FormFieldPlacement) (*FormFieldPlacement, error) {
+	buffer, err := MarshalData(d)
+	if err != nil {
+		return nil, errors.Errorf("Error marshaling form_field_placement: %s", err.Error())
+	}
+
+	req, err := rootlygo.NewCreateFormFieldPlacementRequestWithBody(c.Rootly.Server, d.FormFieldId, c.ContentType, buffer)
+	if err != nil {
+		return nil, errors.Errorf("Error building request: %s", err.Error())
+	}
+	resp, err := c.Do(req)
+	if err != nil {
+		return nil, errors.Errorf("Failed to perform request to create form_field_placement: %s", err.Error())
+	}
+
+	data, err := UnmarshalData(resp.Body, new(FormFieldPlacement))
+	if err != nil {
+		return nil, errors.Errorf("Error unmarshaling form_field_placement: %s", err.Error())
+	}
+
+	return data.(*FormFieldPlacement), nil
+}
+
+func (c *Client) GetFormFieldPlacement(id string) (*FormFieldPlacement, error) {
+	req, err := rootlygo.NewGetFormFieldPlacementRequest(c.Rootly.Server, id)
+	if err != nil {
+		return nil, errors.Errorf("Error building request: %s", err.Error())
+	}
+
+	resp, err := c.Do(req)
+	if err != nil {
+		return nil, errors.Errorf("Failed to make request to get form_field_placement: %s", err.Error())
+	}
+
+	data, err := UnmarshalData(resp.Body, new(FormFieldPlacement))
+	if err != nil {
+		return nil, errors.Errorf("Error unmarshaling form_field_placement: %s", err.Error())
+	}
+
+	return data.(*FormFieldPlacement), nil
+}
+
+func (c *Client) UpdateFormFieldPlacement(id string, form_field_placement *FormFieldPlacement) (*FormFieldPlacement, error) {
+	buffer, err := MarshalData(form_field_placement)
+	if err != nil {
+		return nil, errors.Errorf("Error marshaling form_field_placement: %s", err.Error())
+	}
+
+	req, err := rootlygo.NewUpdateFormFieldPlacementRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	if err != nil {
+		return nil, errors.Errorf("Error building request: %s", err.Error())
+	}
+	resp, err := c.Do(req)
+	if err != nil {
+		return nil, errors.Errorf("Failed to make request to update form_field_placement: %s", err.Error())
+	}
+
+	data, err := UnmarshalData(resp.Body, new(FormFieldPlacement))
+	if err != nil {
+		return nil, errors.Errorf("Error unmarshaling form_field_placement: %s", err.Error())
+	}
+
+	return data.(*FormFieldPlacement), nil
+}
+
+func (c *Client) DeleteFormFieldPlacement(id string) error {
+	req, err := rootlygo.NewDeleteFormFieldPlacementRequest(c.Rootly.Server, id)
+	if err != nil {
+		return errors.Errorf("Error building request: %s", err.Error())
+	}
+
+	_, err = c.Do(req)
+	if err != nil {
+		return errors.Errorf("Failed to make request to delete form_field_placement: %s", err.Error())
+	}
+
+	return nil
+}

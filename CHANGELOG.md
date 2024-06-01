@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.2.0] -- 2024-06-01
+
+- Add `form_field_placement` resource.
+- Add `form_field_placement_condition` resource.
+- Add `form_set` resource.
+- Add `form_set_condition` resource.
+- Add `workflow_task_update_attached_alerts` resource.
+- Update dependencies.
+
 ## [2.1.0] -- 2024-05-14
 
 - Fix type of incident filter "private" parameter

@@ -1288,7 +1288,9 @@ const (
 	FormFieldKindMarkAsInTriage              FormFieldKind = "mark_as_in_triage"
 	FormFieldKindMarkAsTest                  FormFieldKind = "mark_as_test"
 	FormFieldKindMitigatedAt                 FormFieldKind = "mitigated_at"
+	FormFieldKindMitigationMessage           FormFieldKind = "mitigation_message"
 	FormFieldKindNotifyEmails                FormFieldKind = "notify_emails"
+	FormFieldKindResolutionMessage           FormFieldKind = "resolution_message"
 	FormFieldKindResolvedAt                  FormFieldKind = "resolved_at"
 	FormFieldKindServices                    FormFieldKind = "services"
 	FormFieldKindSeverity                    FormFieldKind = "severity"
@@ -1323,6 +1325,37 @@ const (
 // Defines values for FormFieldOptionResponseDataType.
 const (
 	FormFieldOptionResponseDataTypeFormFieldOptions FormFieldOptionResponseDataType = "form_field_options"
+)
+
+// Defines values for FormFieldPlacementConditionComparison.
+const (
+	FormFieldPlacementConditionComparisonEqual FormFieldPlacementConditionComparison = "equal"
+)
+
+// Defines values for FormFieldPlacementConditionConditioned.
+const (
+	FormFieldPlacementConditionConditionedPlacement FormFieldPlacementConditionConditioned = "placement"
+	FormFieldPlacementConditionConditionedRequired  FormFieldPlacementConditionConditioned = "required"
+)
+
+// Defines values for FormFieldPlacementConditionListDataType.
+const (
+	FormFieldPlacementConditionListDataTypeFormFieldPlacementConditions FormFieldPlacementConditionListDataType = "form_field_placement_conditions"
+)
+
+// Defines values for FormFieldPlacementConditionResponseDataType.
+const (
+	FormFieldPlacementConditionResponseDataTypeFormFieldPlacementConditions FormFieldPlacementConditionResponseDataType = "form_field_placement_conditions"
+)
+
+// Defines values for FormFieldPlacementListDataType.
+const (
+	FormFieldPlacementListDataTypeFormFieldPlacements FormFieldPlacementListDataType = "form_field_placements"
+)
+
+// Defines values for FormFieldPlacementResponseDataType.
+const (
+	FormFieldPlacementResponseDataTypeFormFieldPlacements FormFieldPlacementResponseDataType = "form_field_placements"
 )
 
 // Defines values for FormFieldPositionForm.
@@ -1361,6 +1394,31 @@ const (
 	FormFieldResponseDataTypeFormFields FormFieldResponseDataType = "form_fields"
 )
 
+// Defines values for FormSetConditionComparison.
+const (
+	FormSetConditionComparisonEqual FormSetConditionComparison = "equal"
+)
+
+// Defines values for FormSetConditionListDataType.
+const (
+	FormSetConditionListDataTypeFormSetConditions FormSetConditionListDataType = "form_set_conditions"
+)
+
+// Defines values for FormSetConditionResponseDataType.
+const (
+	FormSetConditionResponseDataTypeFormSetConditions FormSetConditionResponseDataType = "form_set_conditions"
+)
+
+// Defines values for FormSetListDataType.
+const (
+	FormSetListDataTypeFormSets FormSetListDataType = "form_sets"
+)
+
+// Defines values for FormSetResponseDataType.
+const (
+	FormSetResponseDataTypeFormSets FormSetResponseDataType = "form_sets"
+)
+
 // Defines values for FunctionalityListDataType.
 const (
 	FunctionalityListDataTypeFunctionalities FunctionalityListDataType = "functionalities"
@@ -1396,6 +1454,7 @@ const (
 	DELETE  HttpClientTaskParamsMethod = "DELETE"
 	GET     HttpClientTaskParamsMethod = "GET"
 	OPTIONS HttpClientTaskParamsMethod = "OPTIONS"
+	PATCH   HttpClientTaskParamsMethod = "PATCH"
 	POST    HttpClientTaskParamsMethod = "POST"
 	PUT     HttpClientTaskParamsMethod = "PUT"
 )
@@ -2110,7 +2169,9 @@ const (
 	NewFormFieldDataAttributesKindMarkAsInTriage              NewFormFieldDataAttributesKind = "mark_as_in_triage"
 	NewFormFieldDataAttributesKindMarkAsTest                  NewFormFieldDataAttributesKind = "mark_as_test"
 	NewFormFieldDataAttributesKindMitigatedAt                 NewFormFieldDataAttributesKind = "mitigated_at"
+	NewFormFieldDataAttributesKindMitigationMessage           NewFormFieldDataAttributesKind = "mitigation_message"
 	NewFormFieldDataAttributesKindNotifyEmails                NewFormFieldDataAttributesKind = "notify_emails"
+	NewFormFieldDataAttributesKindResolutionMessage           NewFormFieldDataAttributesKind = "resolution_message"
 	NewFormFieldDataAttributesKindResolvedAt                  NewFormFieldDataAttributesKind = "resolved_at"
 	NewFormFieldDataAttributesKindServices                    NewFormFieldDataAttributesKind = "services"
 	NewFormFieldDataAttributesKindSeverity                    NewFormFieldDataAttributesKind = "severity"
@@ -2142,6 +2203,27 @@ const (
 	NewFormFieldOptionDataTypeFormFieldOptions NewFormFieldOptionDataType = "form_field_options"
 )
 
+// Defines values for NewFormFieldPlacementDataType.
+const (
+	NewFormFieldPlacementDataTypeFormFieldPlacements NewFormFieldPlacementDataType = "form_field_placements"
+)
+
+// Defines values for NewFormFieldPlacementConditionDataAttributesComparison.
+const (
+	NewFormFieldPlacementConditionDataAttributesComparisonEqual NewFormFieldPlacementConditionDataAttributesComparison = "equal"
+)
+
+// Defines values for NewFormFieldPlacementConditionDataAttributesConditioned.
+const (
+	NewFormFieldPlacementConditionDataAttributesConditionedPlacement NewFormFieldPlacementConditionDataAttributesConditioned = "placement"
+	NewFormFieldPlacementConditionDataAttributesConditionedRequired  NewFormFieldPlacementConditionDataAttributesConditioned = "required"
+)
+
+// Defines values for NewFormFieldPlacementConditionDataType.
+const (
+	NewFormFieldPlacementConditionDataTypeFormFieldPlacementConditions NewFormFieldPlacementConditionDataType = "form_field_placement_conditions"
+)
+
 // Defines values for NewFormFieldPositionDataAttributesForm.
 const (
 	NewFormFieldPositionDataAttributesFormIncidentPostMortem               NewFormFieldPositionDataAttributesForm = "incident_post_mortem"
@@ -2166,6 +2248,21 @@ const (
 // Defines values for NewFormFieldPositionDataType.
 const (
 	NewFormFieldPositionDataTypeFormFieldPositions NewFormFieldPositionDataType = "form_field_positions"
+)
+
+// Defines values for NewFormSetDataType.
+const (
+	NewFormSetDataTypeFormSets NewFormSetDataType = "form_sets"
+)
+
+// Defines values for NewFormSetConditionDataAttributesComparison.
+const (
+	NewFormSetConditionDataAttributesComparisonEqual NewFormSetConditionDataAttributesComparison = "equal"
+)
+
+// Defines values for NewFormSetConditionDataType.
+const (
+	NewFormSetConditionDataTypeFormSetConditions NewFormSetConditionDataType = "form_set_conditions"
 )
 
 // Defines values for NewFunctionalityDataAttributesShowUptimeLastDays.
@@ -4300,6 +4397,17 @@ const (
 	UpdateAsanaTask UpdateAsanaTaskTaskParamsTaskType = "update_asana_task"
 )
 
+// Defines values for UpdateAttachedAlertsTaskParamsStatus.
+const (
+	UpdateAttachedAlertsTaskParamsStatusAcknowledged UpdateAttachedAlertsTaskParamsStatus = "acknowledged"
+	UpdateAttachedAlertsTaskParamsStatusResolved     UpdateAttachedAlertsTaskParamsStatus = "resolved"
+)
+
+// Defines values for UpdateAttachedAlertsTaskParamsTaskType.
+const (
+	UpdateAttachedAlerts UpdateAttachedAlertsTaskParamsTaskType = "update_attached_alerts"
+)
+
 // Defines values for UpdateAuthorizationDataAttributesPermissions.
 const (
 	UpdateAuthorizationDataAttributesPermissionsAuthorize UpdateAuthorizationDataAttributesPermissions = "authorize"
@@ -4440,7 +4548,9 @@ const (
 	UpdateFormFieldDataAttributesKindMarkAsInTriage              UpdateFormFieldDataAttributesKind = "mark_as_in_triage"
 	UpdateFormFieldDataAttributesKindMarkAsTest                  UpdateFormFieldDataAttributesKind = "mark_as_test"
 	UpdateFormFieldDataAttributesKindMitigatedAt                 UpdateFormFieldDataAttributesKind = "mitigated_at"
+	UpdateFormFieldDataAttributesKindMitigationMessage           UpdateFormFieldDataAttributesKind = "mitigation_message"
 	UpdateFormFieldDataAttributesKindNotifyEmails                UpdateFormFieldDataAttributesKind = "notify_emails"
+	UpdateFormFieldDataAttributesKindResolutionMessage           UpdateFormFieldDataAttributesKind = "resolution_message"
 	UpdateFormFieldDataAttributesKindResolvedAt                  UpdateFormFieldDataAttributesKind = "resolved_at"
 	UpdateFormFieldDataAttributesKindServices                    UpdateFormFieldDataAttributesKind = "services"
 	UpdateFormFieldDataAttributesKindSeverity                    UpdateFormFieldDataAttributesKind = "severity"
@@ -4472,6 +4582,27 @@ const (
 	UpdateFormFieldOptionDataTypeFormFieldOptions UpdateFormFieldOptionDataType = "form_field_options"
 )
 
+// Defines values for UpdateFormFieldPlacementDataType.
+const (
+	UpdateFormFieldPlacementDataTypeFormFieldPlacements UpdateFormFieldPlacementDataType = "form_field_placements"
+)
+
+// Defines values for UpdateFormFieldPlacementConditionDataAttributesComparison.
+const (
+	UpdateFormFieldPlacementConditionDataAttributesComparisonEqual UpdateFormFieldPlacementConditionDataAttributesComparison = "equal"
+)
+
+// Defines values for UpdateFormFieldPlacementConditionDataAttributesConditioned.
+const (
+	Placement UpdateFormFieldPlacementConditionDataAttributesConditioned = "placement"
+	Required  UpdateFormFieldPlacementConditionDataAttributesConditioned = "required"
+)
+
+// Defines values for UpdateFormFieldPlacementConditionDataType.
+const (
+	UpdateFormFieldPlacementConditionDataTypeFormFieldPlacementConditions UpdateFormFieldPlacementConditionDataType = "form_field_placement_conditions"
+)
+
 // Defines values for UpdateFormFieldPositionDataAttributesForm.
 const (
 	UpdateFormFieldPositionDataAttributesFormIncidentPostMortem               UpdateFormFieldPositionDataAttributesForm = "incident_post_mortem"
@@ -4496,6 +4627,21 @@ const (
 // Defines values for UpdateFormFieldPositionDataType.
 const (
 	UpdateFormFieldPositionDataTypeFormFieldPositions UpdateFormFieldPositionDataType = "form_field_positions"
+)
+
+// Defines values for UpdateFormSetDataType.
+const (
+	UpdateFormSetDataTypeFormSets UpdateFormSetDataType = "form_sets"
+)
+
+// Defines values for UpdateFormSetConditionDataAttributesComparison.
+const (
+	UpdateFormSetConditionDataAttributesComparisonEqual UpdateFormSetConditionDataAttributesComparison = "equal"
+)
+
+// Defines values for UpdateFormSetConditionDataType.
+const (
+	UpdateFormSetConditionDataTypeFormSetConditions UpdateFormSetConditionDataType = "form_set_conditions"
 )
 
 // Defines values for UpdateFunctionalityDataType.
@@ -5339,10 +5485,10 @@ const (
 
 // Defines values for UpdateSeverityDataAttributesSeverity.
 const (
-	Critical UpdateSeverityDataAttributesSeverity = "critical"
-	High     UpdateSeverityDataAttributesSeverity = "high"
-	Low      UpdateSeverityDataAttributesSeverity = "low"
-	Medium   UpdateSeverityDataAttributesSeverity = "medium"
+	UpdateSeverityDataAttributesSeverityCritical UpdateSeverityDataAttributesSeverity = "critical"
+	UpdateSeverityDataAttributesSeverityHigh     UpdateSeverityDataAttributesSeverity = "high"
+	UpdateSeverityDataAttributesSeverityLow      UpdateSeverityDataAttributesSeverity = "low"
+	UpdateSeverityDataAttributesSeverityMedium   UpdateSeverityDataAttributesSeverity = "medium"
 )
 
 // Defines values for UpdateSeverityDataType.
@@ -8298,6 +8444,109 @@ type FormFieldOptionResponse struct {
 // FormFieldOptionResponseDataType defines model for FormFieldOptionResponse.Data.Type.
 type FormFieldOptionResponseDataType string
 
+// FormFieldPlacement defines model for form_field_placement.
+type FormFieldPlacement struct {
+	// Form The form this field is placed on.
+	Form string `json:"form"`
+
+	// FormFieldId The form field that is placed.
+	FormFieldId string `json:"form_field_id"`
+
+	// FormSetId The form set this field is placed in.
+	FormSetId string `json:"form_set_id"`
+
+	// Position The position of the field placement.
+	Position int `json:"position"`
+
+	// Required Whether the field is required on this form.
+	Required bool `json:"required"`
+}
+
+// FormFieldPlacementCondition defines model for form_field_placement_condition.
+type FormFieldPlacementCondition struct {
+	// Comparison The condition comparison.
+	Comparison FormFieldPlacementConditionComparison `json:"comparison"`
+
+	// Conditioned The resource or attribute the condition applies.
+	Conditioned FormFieldPlacementConditionConditioned `json:"conditioned"`
+
+	// FormFieldId The condition field.
+	FormFieldId string `json:"form_field_id"`
+
+	// FormFieldPlacementId The form field placement this condition applies.
+	FormFieldPlacementId string `json:"form_field_placement_id"`
+
+	// Position The condition position.
+	Position int `json:"position"`
+
+	// Values The values for comparison.
+	Values []string `json:"values"`
+}
+
+// FormFieldPlacementConditionComparison The condition comparison.
+type FormFieldPlacementConditionComparison string
+
+// FormFieldPlacementConditionConditioned The resource or attribute the condition applies.
+type FormFieldPlacementConditionConditioned string
+
+// FormFieldPlacementConditionList defines model for form_field_placement_condition_list.
+type FormFieldPlacementConditionList struct {
+	Data []struct {
+		Attributes FormFieldPlacementCondition `json:"attributes"`
+
+		// Id Unique ID of the form set condition
+		Id   string                                  `json:"id"`
+		Type FormFieldPlacementConditionListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// FormFieldPlacementConditionListDataType defines model for FormFieldPlacementConditionList.Data.Type.
+type FormFieldPlacementConditionListDataType string
+
+// FormFieldPlacementConditionResponse defines model for form_field_placement_condition_response.
+type FormFieldPlacementConditionResponse struct {
+	Data struct {
+		Attributes FormFieldPlacementCondition `json:"attributes"`
+
+		// Id Unique ID of the form set condition
+		Id   string                                      `json:"id"`
+		Type FormFieldPlacementConditionResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// FormFieldPlacementConditionResponseDataType defines model for FormFieldPlacementConditionResponse.Data.Type.
+type FormFieldPlacementConditionResponseDataType string
+
+// FormFieldPlacementList defines model for form_field_placement_list.
+type FormFieldPlacementList struct {
+	Data []struct {
+		Attributes FormFieldPlacement `json:"attributes"`
+
+		// Id Unique ID of the form field placement
+		Id   string                         `json:"id"`
+		Type FormFieldPlacementListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// FormFieldPlacementListDataType defines model for FormFieldPlacementList.Data.Type.
+type FormFieldPlacementListDataType string
+
+// FormFieldPlacementResponse defines model for form_field_placement_response.
+type FormFieldPlacementResponse struct {
+	Data struct {
+		Attributes FormFieldPlacement `json:"attributes"`
+
+		// Id Unique ID of the form field placement
+		Id   string                             `json:"id"`
+		Type FormFieldPlacementResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// FormFieldPlacementResponseDataType defines model for FormFieldPlacementResponse.Data.Type.
+type FormFieldPlacementResponseDataType string
+
 // FormFieldPosition defines model for form_field_position.
 type FormFieldPosition struct {
 	// Form The form for the position
@@ -8355,6 +8604,103 @@ type FormFieldResponse struct {
 
 // FormFieldResponseDataType defines model for FormFieldResponse.Data.Type.
 type FormFieldResponseDataType string
+
+// FormSet defines model for form_set.
+type FormSet struct {
+	// CreatedAt Date of creation
+	CreatedAt string `json:"created_at"`
+
+	// Forms The forms included in the form set. Add custom forms using the custom form's `slug` field. Or choose a built-in form: `web_new_incident_form`, `web_update_incident_form`, `web_incident_post_mortem_form`, `web_incident_mitigation_form`, `web_incident_resolution_form`, `web_incident_cancellation_form`, `web_scheduled_incident_form`, `web_update_scheduled_incident_form`, `slack_new_incident_form`, `slack_update_incident_form`, `slack_update_incident_status_form`, `slack_incident_mitigation_form`, `slack_incident_resolution_form`, `slack_incident_cancellation_form`, `slack_scheduled_incident_form`, `slack_update_scheduled_incident_form`
+	Forms []string `json:"forms"`
+
+	// IsDefault Whether the form set is default
+	IsDefault bool `json:"is_default"`
+
+	// Name The name of the form set
+	Name string `json:"name"`
+
+	// Slug The slug of the form set
+	Slug string `json:"slug"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt string `json:"updated_at"`
+}
+
+// FormSetCondition defines model for form_set_condition.
+type FormSetCondition struct {
+	// Comparison The condition comparison.
+	Comparison FormSetConditionComparison `json:"comparison"`
+
+	// FormFieldId The form field this condition applies.
+	FormFieldId string `json:"form_field_id"`
+
+	// FormSetId The form set this condition applies.
+	FormSetId string `json:"form_set_id"`
+
+	// Values The values for comparison.
+	Values []string `json:"values"`
+}
+
+// FormSetConditionComparison The condition comparison.
+type FormSetConditionComparison string
+
+// FormSetConditionList defines model for form_set_condition_list.
+type FormSetConditionList struct {
+	Data []struct {
+		Attributes FormSetCondition `json:"attributes"`
+
+		// Id Unique ID of the form set condition
+		Id   string                       `json:"id"`
+		Type FormSetConditionListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// FormSetConditionListDataType defines model for FormSetConditionList.Data.Type.
+type FormSetConditionListDataType string
+
+// FormSetConditionResponse defines model for form_set_condition_response.
+type FormSetConditionResponse struct {
+	Data struct {
+		Attributes FormSetCondition `json:"attributes"`
+
+		// Id Unique ID of the form set condition
+		Id   string                           `json:"id"`
+		Type FormSetConditionResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// FormSetConditionResponseDataType defines model for FormSetConditionResponse.Data.Type.
+type FormSetConditionResponseDataType string
+
+// FormSetList defines model for form_set_list.
+type FormSetList struct {
+	Data []struct {
+		Attributes FormSet `json:"attributes"`
+
+		// Id Unique ID of the form set
+		Id   string              `json:"id"`
+		Type FormSetListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// FormSetListDataType defines model for FormSetList.Data.Type.
+type FormSetListDataType string
+
+// FormSetResponse defines model for form_set_response.
+type FormSetResponse struct {
+	Data struct {
+		Attributes FormSet `json:"attributes"`
+
+		// Id Unique ID of the form set
+		Id   string                  `json:"id"`
+		Type FormSetResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// FormSetResponseDataType defines model for FormSetResponse.Data.Type.
+type FormSetResponseDataType string
 
 // Functionality defines model for functionality.
 type Functionality struct {
@@ -10249,6 +10595,61 @@ type NewFormFieldOption struct {
 // NewFormFieldOptionDataType defines model for NewFormFieldOption.Data.Type.
 type NewFormFieldOptionDataType string
 
+// NewFormFieldPlacement defines model for new_form_field_placement.
+type NewFormFieldPlacement struct {
+	Data struct {
+		Attributes struct {
+			// Form The form this field is placed on.
+			Form string `json:"form"`
+
+			// FormSetId The form set this field is placed in.
+			FormSetId string `json:"form_set_id"`
+
+			// Position The position of the field placement.
+			Position *int `json:"position,omitempty"`
+
+			// Required Whether the field is required on this form.
+			Required *bool `json:"required,omitempty"`
+		} `json:"attributes"`
+		Type NewFormFieldPlacementDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewFormFieldPlacementDataType defines model for NewFormFieldPlacement.Data.Type.
+type NewFormFieldPlacementDataType string
+
+// NewFormFieldPlacementCondition defines model for new_form_field_placement_condition.
+type NewFormFieldPlacementCondition struct {
+	Data struct {
+		Attributes struct {
+			// Comparison The condition comparison.
+			Comparison NewFormFieldPlacementConditionDataAttributesComparison `json:"comparison"`
+
+			// Conditioned The resource or attribute the condition applies.
+			Conditioned NewFormFieldPlacementConditionDataAttributesConditioned `json:"conditioned"`
+
+			// FormFieldId The condition field.
+			FormFieldId string `json:"form_field_id"`
+
+			// Position The condition position.
+			Position *int `json:"position,omitempty"`
+
+			// Values The values for comparison.
+			Values []string `json:"values"`
+		} `json:"attributes"`
+		Type NewFormFieldPlacementConditionDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewFormFieldPlacementConditionDataAttributesComparison The condition comparison.
+type NewFormFieldPlacementConditionDataAttributesComparison string
+
+// NewFormFieldPlacementConditionDataAttributesConditioned The resource or attribute the condition applies.
+type NewFormFieldPlacementConditionDataAttributesConditioned string
+
+// NewFormFieldPlacementConditionDataType defines model for NewFormFieldPlacementCondition.Data.Type.
+type NewFormFieldPlacementConditionDataType string
+
 // NewFormFieldPosition defines model for new_form_field_position.
 type NewFormFieldPosition struct {
 	Data struct {
@@ -10271,6 +10672,46 @@ type NewFormFieldPositionDataAttributesForm string
 
 // NewFormFieldPositionDataType defines model for NewFormFieldPosition.Data.Type.
 type NewFormFieldPositionDataType string
+
+// NewFormSet defines model for new_form_set.
+type NewFormSet struct {
+	Data struct {
+		Attributes struct {
+			// Forms The forms included in the form set. Add custom forms using the custom form's `slug` field. Or choose a built-in form: `web_new_incident_form`, `web_update_incident_form`, `web_incident_post_mortem_form`, `web_incident_mitigation_form`, `web_incident_resolution_form`, `web_incident_cancellation_form`, `web_scheduled_incident_form`, `web_update_scheduled_incident_form`, `slack_new_incident_form`, `slack_update_incident_form`, `slack_update_incident_status_form`, `slack_incident_mitigation_form`, `slack_incident_resolution_form`, `slack_incident_cancellation_form`, `slack_scheduled_incident_form`, `slack_update_scheduled_incident_form`
+			Forms []string `json:"forms"`
+
+			// Name The name of the form set
+			Name string `json:"name"`
+		} `json:"attributes"`
+		Type NewFormSetDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewFormSetDataType defines model for NewFormSet.Data.Type.
+type NewFormSetDataType string
+
+// NewFormSetCondition defines model for new_form_set_condition.
+type NewFormSetCondition struct {
+	Data struct {
+		Attributes struct {
+			// Comparison The condition comparison.
+			Comparison NewFormSetConditionDataAttributesComparison `json:"comparison"`
+
+			// FormFieldId The form field this condition applies.
+			FormFieldId string `json:"form_field_id"`
+
+			// Values The values for comparison.
+			Values []string `json:"values"`
+		} `json:"attributes"`
+		Type NewFormSetConditionDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewFormSetConditionDataAttributesComparison The condition comparison.
+type NewFormSetConditionDataAttributesComparison string
+
+// NewFormSetConditionDataType defines model for NewFormSetCondition.Data.Type.
+type NewFormSetConditionDataType string
 
 // NewFunctionality defines model for new_functionality.
 type NewFunctionality struct {
@@ -13912,6 +14353,18 @@ type UpdateAsanaTaskTaskParamsDependencyDirection string
 // UpdateAsanaTaskTaskParamsTaskType defines model for UpdateAsanaTaskTaskParams.TaskType.
 type UpdateAsanaTaskTaskParamsTaskType string
 
+// UpdateAttachedAlertsTaskParams defines model for update_attached_alerts_task_params.
+type UpdateAttachedAlertsTaskParams struct {
+	Status   UpdateAttachedAlertsTaskParamsStatus    `json:"status"`
+	TaskType *UpdateAttachedAlertsTaskParamsTaskType `json:"task_type,omitempty"`
+}
+
+// UpdateAttachedAlertsTaskParamsStatus defines model for UpdateAttachedAlertsTaskParams.Status.
+type UpdateAttachedAlertsTaskParamsStatus string
+
+// UpdateAttachedAlertsTaskParamsTaskType defines model for UpdateAttachedAlertsTaskParams.TaskType.
+type UpdateAttachedAlertsTaskParamsTaskType string
+
 // UpdateAuthorization defines model for update_authorization.
 type UpdateAuthorization struct {
 	Data struct {
@@ -14265,6 +14718,61 @@ type UpdateFormFieldOption struct {
 // UpdateFormFieldOptionDataType defines model for UpdateFormFieldOption.Data.Type.
 type UpdateFormFieldOptionDataType string
 
+// UpdateFormFieldPlacement defines model for update_form_field_placement.
+type UpdateFormFieldPlacement struct {
+	Data struct {
+		Attributes struct {
+			// Form The form this field is placed on.
+			Form *string `json:"form,omitempty"`
+
+			// FormSetId The form set this field is placed in.
+			FormSetId *string `json:"form_set_id,omitempty"`
+
+			// Position The position of the field placement.
+			Position *int `json:"position,omitempty"`
+
+			// Required Whether the field is required on this form.
+			Required *bool `json:"required,omitempty"`
+		} `json:"attributes"`
+		Type UpdateFormFieldPlacementDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateFormFieldPlacementDataType defines model for UpdateFormFieldPlacement.Data.Type.
+type UpdateFormFieldPlacementDataType string
+
+// UpdateFormFieldPlacementCondition defines model for update_form_field_placement_condition.
+type UpdateFormFieldPlacementCondition struct {
+	Data struct {
+		Attributes struct {
+			// Comparison The condition comparison.
+			Comparison *UpdateFormFieldPlacementConditionDataAttributesComparison `json:"comparison,omitempty"`
+
+			// Conditioned The resource or attribute the condition applies.
+			Conditioned *UpdateFormFieldPlacementConditionDataAttributesConditioned `json:"conditioned,omitempty"`
+
+			// FormFieldId The condition field.
+			FormFieldId *string `json:"form_field_id,omitempty"`
+
+			// Position The condition position.
+			Position *int `json:"position,omitempty"`
+
+			// Values The values for comparison.
+			Values *[]string `json:"values,omitempty"`
+		} `json:"attributes"`
+		Type UpdateFormFieldPlacementConditionDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateFormFieldPlacementConditionDataAttributesComparison The condition comparison.
+type UpdateFormFieldPlacementConditionDataAttributesComparison string
+
+// UpdateFormFieldPlacementConditionDataAttributesConditioned The resource or attribute the condition applies.
+type UpdateFormFieldPlacementConditionDataAttributesConditioned string
+
+// UpdateFormFieldPlacementConditionDataType defines model for UpdateFormFieldPlacementCondition.Data.Type.
+type UpdateFormFieldPlacementConditionDataType string
+
 // UpdateFormFieldPosition defines model for update_form_field_position.
 type UpdateFormFieldPosition struct {
 	Data struct {
@@ -14287,6 +14795,46 @@ type UpdateFormFieldPositionDataAttributesForm string
 
 // UpdateFormFieldPositionDataType defines model for UpdateFormFieldPosition.Data.Type.
 type UpdateFormFieldPositionDataType string
+
+// UpdateFormSet defines model for update_form_set.
+type UpdateFormSet struct {
+	Data struct {
+		Attributes struct {
+			// Forms The forms included in the form set. Add custom forms using the custom form's `slug` field. Or choose a built-in form: `web_new_incident_form`, `web_update_incident_form`, `web_incident_post_mortem_form`, `web_incident_mitigation_form`, `web_incident_resolution_form`, `web_incident_cancellation_form`, `web_scheduled_incident_form`, `web_update_scheduled_incident_form`, `slack_new_incident_form`, `slack_update_incident_form`, `slack_update_incident_status_form`, `slack_incident_mitigation_form`, `slack_incident_resolution_form`, `slack_incident_cancellation_form`, `slack_scheduled_incident_form`, `slack_update_scheduled_incident_form`
+			Forms *[]string `json:"forms,omitempty"`
+
+			// Name The name of the form set
+			Name *string `json:"name,omitempty"`
+		} `json:"attributes"`
+		Type UpdateFormSetDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateFormSetDataType defines model for UpdateFormSet.Data.Type.
+type UpdateFormSetDataType string
+
+// UpdateFormSetCondition defines model for update_form_set_condition.
+type UpdateFormSetCondition struct {
+	Data struct {
+		Attributes struct {
+			// Comparison The condition comparison.
+			Comparison *UpdateFormSetConditionDataAttributesComparison `json:"comparison,omitempty"`
+
+			// FormFieldId The form field this condition applies.
+			FormFieldId *string `json:"form_field_id,omitempty"`
+
+			// Values The values for comparison.
+			Values *[]string `json:"values,omitempty"`
+		} `json:"attributes"`
+		Type UpdateFormSetConditionDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateFormSetConditionDataAttributesComparison The condition comparison.
+type UpdateFormSetConditionDataAttributesComparison string
+
+// UpdateFormSetConditionDataType defines model for UpdateFormSetCondition.Data.Type.
+type UpdateFormSetConditionDataType string
 
 // UpdateFunctionality defines model for update_functionality.
 type UpdateFunctionality struct {
@@ -17134,6 +17682,14 @@ type ListIncidentEventServicesParams struct {
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
+// ListFormFieldPlacementConditionsParams defines parameters for ListFormFieldPlacementConditions.
+type ListFormFieldPlacementConditionsParams struct {
+	Include           *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterFormFieldId *string `form:"filter[form_field_id],omitempty" json:"filter[form_field_id],omitempty"`
+}
+
 // ListFormFieldsParams defines parameters for ListFormFields.
 type ListFormFieldsParams struct {
 	Include            *string `form:"include,omitempty" json:"include,omitempty"`
@@ -17159,12 +17715,41 @@ type ListFormFieldOptionsParams struct {
 	FilterColor *string `form:"filter[color],omitempty" json:"filter[color],omitempty"`
 }
 
+// ListFormFieldPlacementsParams defines parameters for ListFormFieldPlacements.
+type ListFormFieldPlacementsParams struct {
+	Include           *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterFormFieldId *string `form:"filter[form_field_id],omitempty" json:"filter[form_field_id],omitempty"`
+}
+
 // ListFormFieldPositionsParams defines parameters for ListFormFieldPositions.
 type ListFormFieldPositionsParams struct {
 	Include    *string `form:"include,omitempty" json:"include,omitempty"`
 	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 	FilterForm *string `form:"filter[form],omitempty" json:"filter[form],omitempty"`
+}
+
+// ListFormSetsParams defines parameters for ListFormSets.
+type ListFormSetsParams struct {
+	Include            *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterIsDefault    *bool   `form:"filter[is_default],omitempty" json:"filter[is_default],omitempty"`
+	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+}
+
+// ListFormSetConditionsParams defines parameters for ListFormSetConditions.
+type ListFormSetConditionsParams struct {
+	Include           *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterFormFieldId *string `form:"filter[form_field_id],omitempty" json:"filter[form_field_id],omitempty"`
 }
 
 // ListFunctionalitiesParams defines parameters for ListFunctionalities.
@@ -17824,6 +18409,15 @@ type UpdateIncidentFeedbackApplicationVndAPIPlusJSONRequestBody = UpdateIncident
 // UpdateFormFieldOptionApplicationVndAPIPlusJSONRequestBody defines body for UpdateFormFieldOption for application/vnd.api+json ContentType.
 type UpdateFormFieldOptionApplicationVndAPIPlusJSONRequestBody = UpdateFormFieldOption
 
+// UpdateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody defines body for UpdateFormFieldPlacementCondition for application/vnd.api+json ContentType.
+type UpdateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody = UpdateFormFieldPlacementCondition
+
+// CreateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody defines body for CreateFormFieldPlacementCondition for application/vnd.api+json ContentType.
+type CreateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody = NewFormFieldPlacementCondition
+
+// UpdateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody defines body for UpdateFormFieldPlacement for application/vnd.api+json ContentType.
+type UpdateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody = UpdateFormFieldPlacement
+
 // UpdateFormFieldPositionApplicationVndAPIPlusJSONRequestBody defines body for UpdateFormFieldPosition for application/vnd.api+json ContentType.
 type UpdateFormFieldPositionApplicationVndAPIPlusJSONRequestBody = UpdateFormFieldPosition
 
@@ -17833,11 +18427,26 @@ type CreateFormFieldApplicationVndAPIPlusJSONRequestBody = NewFormField
 // CreateFormFieldOptionApplicationVndAPIPlusJSONRequestBody defines body for CreateFormFieldOption for application/vnd.api+json ContentType.
 type CreateFormFieldOptionApplicationVndAPIPlusJSONRequestBody = NewFormFieldOption
 
+// CreateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody defines body for CreateFormFieldPlacement for application/vnd.api+json ContentType.
+type CreateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody = NewFormFieldPlacement
+
 // CreateFormFieldPositionApplicationVndAPIPlusJSONRequestBody defines body for CreateFormFieldPosition for application/vnd.api+json ContentType.
 type CreateFormFieldPositionApplicationVndAPIPlusJSONRequestBody = NewFormFieldPosition
 
 // UpdateFormFieldApplicationVndAPIPlusJSONRequestBody defines body for UpdateFormField for application/vnd.api+json ContentType.
 type UpdateFormFieldApplicationVndAPIPlusJSONRequestBody = UpdateFormField
+
+// UpdateFormSetConditionApplicationVndAPIPlusJSONRequestBody defines body for UpdateFormSetCondition for application/vnd.api+json ContentType.
+type UpdateFormSetConditionApplicationVndAPIPlusJSONRequestBody = UpdateFormSetCondition
+
+// CreateFormSetApplicationVndAPIPlusJSONRequestBody defines body for CreateFormSet for application/vnd.api+json ContentType.
+type CreateFormSetApplicationVndAPIPlusJSONRequestBody = NewFormSet
+
+// CreateFormSetConditionApplicationVndAPIPlusJSONRequestBody defines body for CreateFormSetCondition for application/vnd.api+json ContentType.
+type CreateFormSetConditionApplicationVndAPIPlusJSONRequestBody = NewFormSetCondition
+
+// UpdateFormSetApplicationVndAPIPlusJSONRequestBody defines body for UpdateFormSet for application/vnd.api+json ContentType.
+type UpdateFormSetApplicationVndAPIPlusJSONRequestBody = UpdateFormSet
 
 // CreateFunctionalityApplicationVndAPIPlusJSONRequestBody defines body for CreateFunctionality for application/vnd.api+json ContentType.
 type CreateFunctionalityApplicationVndAPIPlusJSONRequestBody = NewFunctionality
@@ -22166,6 +22775,32 @@ func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeUpdateZendeskTicketTas
 	return err
 }
 
+// AsUpdateAttachedAlertsTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a UpdateAttachedAlertsTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsUpdateAttachedAlertsTaskParams() (UpdateAttachedAlertsTaskParams, error) {
+	var body UpdateAttachedAlertsTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateAttachedAlertsTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided UpdateAttachedAlertsTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromUpdateAttachedAlertsTaskParams(v UpdateAttachedAlertsTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateAttachedAlertsTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateAttachedAlertsTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeUpdateAttachedAlertsTaskParams(v UpdateAttachedAlertsTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsTriggerWorkflowTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a TriggerWorkflowTaskParams
 func (t NewWorkflowTask_Data_Attributes_TaskParams) AsTriggerWorkflowTaskParams() (TriggerWorkflowTaskParams, error) {
 	var body TriggerWorkflowTaskParams
@@ -25114,6 +25749,32 @@ func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromUpdateZendeskTicketT
 
 // MergeUpdateZendeskTicketTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateZendeskTicketTaskParams
 func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeUpdateZendeskTicketTaskParams(v UpdateZendeskTicketTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsUpdateAttachedAlertsTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a UpdateAttachedAlertsTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsUpdateAttachedAlertsTaskParams() (UpdateAttachedAlertsTaskParams, error) {
+	var body UpdateAttachedAlertsTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateAttachedAlertsTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided UpdateAttachedAlertsTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromUpdateAttachedAlertsTaskParams(v UpdateAttachedAlertsTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateAttachedAlertsTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateAttachedAlertsTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeUpdateAttachedAlertsTaskParams(v UpdateAttachedAlertsTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -28082,6 +28743,32 @@ func (t *WorkflowTask_TaskParams) MergeUpdateZendeskTicketTaskParams(v UpdateZen
 	return err
 }
 
+// AsUpdateAttachedAlertsTaskParams returns the union data inside the WorkflowTask_TaskParams as a UpdateAttachedAlertsTaskParams
+func (t WorkflowTask_TaskParams) AsUpdateAttachedAlertsTaskParams() (UpdateAttachedAlertsTaskParams, error) {
+	var body UpdateAttachedAlertsTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateAttachedAlertsTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided UpdateAttachedAlertsTaskParams
+func (t *WorkflowTask_TaskParams) FromUpdateAttachedAlertsTaskParams(v UpdateAttachedAlertsTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateAttachedAlertsTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided UpdateAttachedAlertsTaskParams
+func (t *WorkflowTask_TaskParams) MergeUpdateAttachedAlertsTaskParams(v UpdateAttachedAlertsTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsTriggerWorkflowTaskParams returns the union data inside the WorkflowTask_TaskParams as a TriggerWorkflowTaskParams
 func (t WorkflowTask_TaskParams) AsTriggerWorkflowTaskParams() (TriggerWorkflowTaskParams, error) {
 	var body TriggerWorkflowTaskParams
@@ -28490,6 +29177,36 @@ type ClientInterface interface {
 
 	UpdateFormFieldOptionWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormFieldOptionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// DeleteFormFieldPlacementCondition request
+	DeleteFormFieldPlacementCondition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetFormFieldPlacementCondition request
+	GetFormFieldPlacementCondition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateFormFieldPlacementConditionWithBody request with any body
+	UpdateFormFieldPlacementConditionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListFormFieldPlacementConditions request
+	ListFormFieldPlacementConditions(ctx context.Context, formFieldPlacementId string, params *ListFormFieldPlacementConditionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateFormFieldPlacementConditionWithBody request with any body
+	CreateFormFieldPlacementConditionWithBody(ctx context.Context, formFieldPlacementId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBody(ctx context.Context, formFieldPlacementId string, body CreateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteFormFieldPlacement request
+	DeleteFormFieldPlacement(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetFormFieldPlacement request
+	GetFormFieldPlacement(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateFormFieldPlacementWithBody request with any body
+	UpdateFormFieldPlacementWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateFormFieldPlacementWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// DeleteFormFieldPosition request
 	DeleteFormFieldPosition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -28517,6 +29234,14 @@ type ClientInterface interface {
 
 	CreateFormFieldOptionWithApplicationVndAPIPlusJSONBody(ctx context.Context, formFieldId string, body CreateFormFieldOptionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListFormFieldPlacements request
+	ListFormFieldPlacements(ctx context.Context, formFieldId string, params *ListFormFieldPlacementsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateFormFieldPlacementWithBody request with any body
+	CreateFormFieldPlacementWithBody(ctx context.Context, formFieldId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateFormFieldPlacementWithApplicationVndAPIPlusJSONBody(ctx context.Context, formFieldId string, body CreateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListFormFieldPositions request
 	ListFormFieldPositions(ctx context.Context, formFieldId string, params *ListFormFieldPositionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -28535,6 +29260,44 @@ type ClientInterface interface {
 	UpdateFormFieldWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	UpdateFormFieldWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormFieldApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteFormSetCondition request
+	DeleteFormSetCondition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetFormSetCondition request
+	GetFormSetCondition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateFormSetConditionWithBody request with any body
+	UpdateFormSetConditionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateFormSetConditionWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormSetConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListFormSets request
+	ListFormSets(ctx context.Context, params *ListFormSetsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateFormSetWithBody request with any body
+	CreateFormSetWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateFormSetWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateFormSetApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListFormSetConditions request
+	ListFormSetConditions(ctx context.Context, formSetId string, params *ListFormSetConditionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateFormSetConditionWithBody request with any body
+	CreateFormSetConditionWithBody(ctx context.Context, formSetId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateFormSetConditionWithApplicationVndAPIPlusJSONBody(ctx context.Context, formSetId string, body CreateFormSetConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteFormSet request
+	DeleteFormSet(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetFormSet request
+	GetFormSet(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateFormSetWithBody request with any body
+	UpdateFormSetWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateFormSetWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormSetApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListFunctionalities request
 	ListFunctionalities(ctx context.Context, params *ListFunctionalitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -30591,6 +31354,138 @@ func (c *Client) UpdateFormFieldOptionWithApplicationVndAPIPlusJSONBody(ctx cont
 	return c.Client.Do(req)
 }
 
+func (c *Client) DeleteFormFieldPlacementCondition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteFormFieldPlacementConditionRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetFormFieldPlacementCondition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetFormFieldPlacementConditionRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateFormFieldPlacementConditionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateFormFieldPlacementConditionRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateFormFieldPlacementConditionRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListFormFieldPlacementConditions(ctx context.Context, formFieldPlacementId string, params *ListFormFieldPlacementConditionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListFormFieldPlacementConditionsRequest(c.Server, formFieldPlacementId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateFormFieldPlacementConditionWithBody(ctx context.Context, formFieldPlacementId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateFormFieldPlacementConditionRequestWithBody(c.Server, formFieldPlacementId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBody(ctx context.Context, formFieldPlacementId string, body CreateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateFormFieldPlacementConditionRequestWithApplicationVndAPIPlusJSONBody(c.Server, formFieldPlacementId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteFormFieldPlacement(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteFormFieldPlacementRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetFormFieldPlacement(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetFormFieldPlacementRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateFormFieldPlacementWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateFormFieldPlacementRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateFormFieldPlacementWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateFormFieldPlacementRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) DeleteFormFieldPosition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteFormFieldPositionRequest(c.Server, id)
 	if err != nil {
@@ -30711,6 +31606,42 @@ func (c *Client) CreateFormFieldOptionWithApplicationVndAPIPlusJSONBody(ctx cont
 	return c.Client.Do(req)
 }
 
+func (c *Client) ListFormFieldPlacements(ctx context.Context, formFieldId string, params *ListFormFieldPlacementsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListFormFieldPlacementsRequest(c.Server, formFieldId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateFormFieldPlacementWithBody(ctx context.Context, formFieldId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateFormFieldPlacementRequestWithBody(c.Server, formFieldId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateFormFieldPlacementWithApplicationVndAPIPlusJSONBody(ctx context.Context, formFieldId string, body CreateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateFormFieldPlacementRequestWithApplicationVndAPIPlusJSONBody(c.Server, formFieldId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) ListFormFieldPositions(ctx context.Context, formFieldId string, params *ListFormFieldPositionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListFormFieldPositionsRequest(c.Server, formFieldId, params)
 	if err != nil {
@@ -30785,6 +31716,174 @@ func (c *Client) UpdateFormFieldWithBody(ctx context.Context, id string, content
 
 func (c *Client) UpdateFormFieldWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormFieldApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateFormFieldRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteFormSetCondition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteFormSetConditionRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetFormSetCondition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetFormSetConditionRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateFormSetConditionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateFormSetConditionRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateFormSetConditionWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormSetConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateFormSetConditionRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListFormSets(ctx context.Context, params *ListFormSetsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListFormSetsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateFormSetWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateFormSetRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateFormSetWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateFormSetApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateFormSetRequestWithApplicationVndAPIPlusJSONBody(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListFormSetConditions(ctx context.Context, formSetId string, params *ListFormSetConditionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListFormSetConditionsRequest(c.Server, formSetId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateFormSetConditionWithBody(ctx context.Context, formSetId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateFormSetConditionRequestWithBody(c.Server, formSetId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateFormSetConditionWithApplicationVndAPIPlusJSONBody(ctx context.Context, formSetId string, body CreateFormSetConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateFormSetConditionRequestWithApplicationVndAPIPlusJSONBody(c.Server, formSetId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteFormSet(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteFormSetRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetFormSet(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetFormSetRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateFormSetWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateFormSetRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateFormSetWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormSetApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateFormSetRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -39218,6 +40317,387 @@ func NewUpdateFormFieldOptionRequestWithBody(server string, id string, contentTy
 	return req, nil
 }
 
+// NewDeleteFormFieldPlacementConditionRequest generates requests for DeleteFormFieldPlacementCondition
+func NewDeleteFormFieldPlacementConditionRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_placement_conditions/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetFormFieldPlacementConditionRequest generates requests for GetFormFieldPlacementCondition
+func NewGetFormFieldPlacementConditionRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_placement_conditions/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateFormFieldPlacementConditionRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateFormFieldPlacementCondition builder with application/vnd.api+json body
+func NewUpdateFormFieldPlacementConditionRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateFormFieldPlacementConditionRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateFormFieldPlacementConditionRequestWithBody generates requests for UpdateFormFieldPlacementCondition with any type of body
+func NewUpdateFormFieldPlacementConditionRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_placement_conditions/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListFormFieldPlacementConditionsRequest generates requests for ListFormFieldPlacementConditions
+func NewListFormFieldPlacementConditionsRequest(server string, formFieldPlacementId string, params *ListFormFieldPlacementConditionsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "form_field_placement_id", runtime.ParamLocationPath, formFieldPlacementId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_placements/%s/conditions", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterFormFieldId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[form_field_id]", runtime.ParamLocationQuery, *params.FilterFormFieldId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateFormFieldPlacementConditionRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateFormFieldPlacementCondition builder with application/vnd.api+json body
+func NewCreateFormFieldPlacementConditionRequestWithApplicationVndAPIPlusJSONBody(server string, formFieldPlacementId string, body CreateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateFormFieldPlacementConditionRequestWithBody(server, formFieldPlacementId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateFormFieldPlacementConditionRequestWithBody generates requests for CreateFormFieldPlacementCondition with any type of body
+func NewCreateFormFieldPlacementConditionRequestWithBody(server string, formFieldPlacementId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "form_field_placement_id", runtime.ParamLocationPath, formFieldPlacementId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_placements/%s/conditions", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteFormFieldPlacementRequest generates requests for DeleteFormFieldPlacement
+func NewDeleteFormFieldPlacementRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_placements/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetFormFieldPlacementRequest generates requests for GetFormFieldPlacement
+func NewGetFormFieldPlacementRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_placements/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateFormFieldPlacementRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateFormFieldPlacement builder with application/vnd.api+json body
+func NewUpdateFormFieldPlacementRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateFormFieldPlacementRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateFormFieldPlacementRequestWithBody generates requests for UpdateFormFieldPlacement with any type of body
+func NewUpdateFormFieldPlacementRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_placements/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewDeleteFormFieldPositionRequest generates requests for DeleteFormFieldPosition
 func NewDeleteFormFieldPositionRequest(server string, id string) (*http.Request, error) {
 	var err error
@@ -39765,6 +41245,157 @@ func NewCreateFormFieldOptionRequestWithBody(server string, formFieldId string, 
 	return req, nil
 }
 
+// NewListFormFieldPlacementsRequest generates requests for ListFormFieldPlacements
+func NewListFormFieldPlacementsRequest(server string, formFieldId string, params *ListFormFieldPlacementsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "form_field_id", runtime.ParamLocationPath, formFieldId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_fields/%s/placements", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterFormFieldId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[form_field_id]", runtime.ParamLocationQuery, *params.FilterFormFieldId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateFormFieldPlacementRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateFormFieldPlacement builder with application/vnd.api+json body
+func NewCreateFormFieldPlacementRequestWithApplicationVndAPIPlusJSONBody(server string, formFieldId string, body CreateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateFormFieldPlacementRequestWithBody(server, formFieldId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateFormFieldPlacementRequestWithBody generates requests for CreateFormFieldPlacement with any type of body
+func NewCreateFormFieldPlacementRequestWithBody(server string, formFieldId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "form_field_id", runtime.ParamLocationPath, formFieldId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_fields/%s/placements", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListFormFieldPositionsRequest generates requests for ListFormFieldPositions
 func NewListFormFieldPositionsRequest(server string, formFieldId string, params *ListFormFieldPositionsParams) (*http.Request, error) {
 	var err error
@@ -40012,6 +41643,604 @@ func NewUpdateFormFieldRequestWithBody(server string, id string, contentType str
 	}
 
 	operationPath := fmt.Sprintf("/v1/form_fields/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteFormSetConditionRequest generates requests for DeleteFormSetCondition
+func NewDeleteFormSetConditionRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_set_conditions/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetFormSetConditionRequest generates requests for GetFormSetCondition
+func NewGetFormSetConditionRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_set_conditions/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateFormSetConditionRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateFormSetCondition builder with application/vnd.api+json body
+func NewUpdateFormSetConditionRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateFormSetConditionApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateFormSetConditionRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateFormSetConditionRequestWithBody generates requests for UpdateFormSetCondition with any type of body
+func NewUpdateFormSetConditionRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_set_conditions/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListFormSetsRequest generates requests for ListFormSets
+func NewListFormSetsRequest(server string, params *ListFormSetsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_sets")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterSlug != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[slug]", runtime.ParamLocationQuery, *params.FilterSlug); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterIsDefault != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[is_default]", runtime.ParamLocationQuery, *params.FilterIsDefault); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gte]", runtime.ParamLocationQuery, *params.FilterCreatedAtGte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lte]", runtime.ParamLocationQuery, *params.FilterCreatedAtLte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateFormSetRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateFormSet builder with application/vnd.api+json body
+func NewCreateFormSetRequestWithApplicationVndAPIPlusJSONBody(server string, body CreateFormSetApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateFormSetRequestWithBody(server, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateFormSetRequestWithBody generates requests for CreateFormSet with any type of body
+func NewCreateFormSetRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_sets")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListFormSetConditionsRequest generates requests for ListFormSetConditions
+func NewListFormSetConditionsRequest(server string, formSetId string, params *ListFormSetConditionsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "form_set_id", runtime.ParamLocationPath, formSetId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_sets/%s/conditions", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterFormFieldId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[form_field_id]", runtime.ParamLocationQuery, *params.FilterFormFieldId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateFormSetConditionRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateFormSetCondition builder with application/vnd.api+json body
+func NewCreateFormSetConditionRequestWithApplicationVndAPIPlusJSONBody(server string, formSetId string, body CreateFormSetConditionApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateFormSetConditionRequestWithBody(server, formSetId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateFormSetConditionRequestWithBody generates requests for CreateFormSetCondition with any type of body
+func NewCreateFormSetConditionRequestWithBody(server string, formSetId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "form_set_id", runtime.ParamLocationPath, formSetId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_sets/%s/conditions", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteFormSetRequest generates requests for DeleteFormSet
+func NewDeleteFormSetRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_sets/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetFormSetRequest generates requests for GetFormSet
+func NewGetFormSetRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_sets/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateFormSetRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateFormSet builder with application/vnd.api+json body
+func NewUpdateFormSetRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateFormSetApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateFormSetRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateFormSetRequestWithBody generates requests for UpdateFormSet with any type of body
+func NewUpdateFormSetRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_sets/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -55149,6 +57378,36 @@ type ClientWithResponsesInterface interface {
 
 	UpdateFormFieldOptionWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormFieldOptionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormFieldOptionResponse, error)
 
+	// DeleteFormFieldPlacementConditionWithResponse request
+	DeleteFormFieldPlacementConditionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldPlacementConditionResponse, error)
+
+	// GetFormFieldPlacementConditionWithResponse request
+	GetFormFieldPlacementConditionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormFieldPlacementConditionResponse, error)
+
+	// UpdateFormFieldPlacementConditionWithBodyWithResponse request with any body
+	UpdateFormFieldPlacementConditionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormFieldPlacementConditionResponse, error)
+
+	UpdateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormFieldPlacementConditionResponse, error)
+
+	// ListFormFieldPlacementConditionsWithResponse request
+	ListFormFieldPlacementConditionsWithResponse(ctx context.Context, formFieldPlacementId string, params *ListFormFieldPlacementConditionsParams, reqEditors ...RequestEditorFn) (*ListFormFieldPlacementConditionsResponse, error)
+
+	// CreateFormFieldPlacementConditionWithBodyWithResponse request with any body
+	CreateFormFieldPlacementConditionWithBodyWithResponse(ctx context.Context, formFieldPlacementId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormFieldPlacementConditionResponse, error)
+
+	CreateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, formFieldPlacementId string, body CreateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFormFieldPlacementConditionResponse, error)
+
+	// DeleteFormFieldPlacementWithResponse request
+	DeleteFormFieldPlacementWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldPlacementResponse, error)
+
+	// GetFormFieldPlacementWithResponse request
+	GetFormFieldPlacementWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormFieldPlacementResponse, error)
+
+	// UpdateFormFieldPlacementWithBodyWithResponse request with any body
+	UpdateFormFieldPlacementWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormFieldPlacementResponse, error)
+
+	UpdateFormFieldPlacementWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormFieldPlacementResponse, error)
+
 	// DeleteFormFieldPositionWithResponse request
 	DeleteFormFieldPositionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldPositionResponse, error)
 
@@ -55176,6 +57435,14 @@ type ClientWithResponsesInterface interface {
 
 	CreateFormFieldOptionWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, formFieldId string, body CreateFormFieldOptionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFormFieldOptionResponse, error)
 
+	// ListFormFieldPlacementsWithResponse request
+	ListFormFieldPlacementsWithResponse(ctx context.Context, formFieldId string, params *ListFormFieldPlacementsParams, reqEditors ...RequestEditorFn) (*ListFormFieldPlacementsResponse, error)
+
+	// CreateFormFieldPlacementWithBodyWithResponse request with any body
+	CreateFormFieldPlacementWithBodyWithResponse(ctx context.Context, formFieldId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormFieldPlacementResponse, error)
+
+	CreateFormFieldPlacementWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, formFieldId string, body CreateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFormFieldPlacementResponse, error)
+
 	// ListFormFieldPositionsWithResponse request
 	ListFormFieldPositionsWithResponse(ctx context.Context, formFieldId string, params *ListFormFieldPositionsParams, reqEditors ...RequestEditorFn) (*ListFormFieldPositionsResponse, error)
 
@@ -55194,6 +57461,44 @@ type ClientWithResponsesInterface interface {
 	UpdateFormFieldWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormFieldResponse, error)
 
 	UpdateFormFieldWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormFieldApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormFieldResponse, error)
+
+	// DeleteFormSetConditionWithResponse request
+	DeleteFormSetConditionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormSetConditionResponse, error)
+
+	// GetFormSetConditionWithResponse request
+	GetFormSetConditionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormSetConditionResponse, error)
+
+	// UpdateFormSetConditionWithBodyWithResponse request with any body
+	UpdateFormSetConditionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormSetConditionResponse, error)
+
+	UpdateFormSetConditionWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormSetConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormSetConditionResponse, error)
+
+	// ListFormSetsWithResponse request
+	ListFormSetsWithResponse(ctx context.Context, params *ListFormSetsParams, reqEditors ...RequestEditorFn) (*ListFormSetsResponse, error)
+
+	// CreateFormSetWithBodyWithResponse request with any body
+	CreateFormSetWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormSetResponse, error)
+
+	CreateFormSetWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateFormSetApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFormSetResponse, error)
+
+	// ListFormSetConditionsWithResponse request
+	ListFormSetConditionsWithResponse(ctx context.Context, formSetId string, params *ListFormSetConditionsParams, reqEditors ...RequestEditorFn) (*ListFormSetConditionsResponse, error)
+
+	// CreateFormSetConditionWithBodyWithResponse request with any body
+	CreateFormSetConditionWithBodyWithResponse(ctx context.Context, formSetId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormSetConditionResponse, error)
+
+	CreateFormSetConditionWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, formSetId string, body CreateFormSetConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFormSetConditionResponse, error)
+
+	// DeleteFormSetWithResponse request
+	DeleteFormSetWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormSetResponse, error)
+
+	// GetFormSetWithResponse request
+	GetFormSetWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormSetResponse, error)
+
+	// UpdateFormSetWithBodyWithResponse request with any body
+	UpdateFormSetWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormSetResponse, error)
+
+	UpdateFormSetWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormSetApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormSetResponse, error)
 
 	// ListFunctionalitiesWithResponse request
 	ListFunctionalitiesWithResponse(ctx context.Context, params *ListFunctionalitiesParams, reqEditors ...RequestEditorFn) (*ListFunctionalitiesResponse, error)
@@ -57726,6 +60031,190 @@ func (r UpdateFormFieldOptionResponse) StatusCode() int {
 	return 0
 }
 
+type DeleteFormFieldPlacementConditionResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormFieldPlacementConditionResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteFormFieldPlacementConditionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteFormFieldPlacementConditionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetFormFieldPlacementConditionResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormFieldPlacementConditionResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetFormFieldPlacementConditionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetFormFieldPlacementConditionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateFormFieldPlacementConditionResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormFieldPlacementConditionResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateFormFieldPlacementConditionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateFormFieldPlacementConditionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListFormFieldPlacementConditionsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormFieldPlacementConditionList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListFormFieldPlacementConditionsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListFormFieldPlacementConditionsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateFormFieldPlacementConditionResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *FormFieldPlacementConditionResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateFormFieldPlacementConditionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateFormFieldPlacementConditionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteFormFieldPlacementResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormFieldPlacementResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteFormFieldPlacementResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteFormFieldPlacementResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetFormFieldPlacementResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormFieldPlacementResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetFormFieldPlacementResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetFormFieldPlacementResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateFormFieldPlacementResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormFieldPlacementResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateFormFieldPlacementResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateFormFieldPlacementResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type DeleteFormFieldPositionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -57887,6 +60376,52 @@ func (r CreateFormFieldOptionResponse) StatusCode() int {
 	return 0
 }
 
+type ListFormFieldPlacementsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormFieldPlacementList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListFormFieldPlacementsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListFormFieldPlacementsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateFormFieldPlacementResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *FormFieldPlacementResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateFormFieldPlacementResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateFormFieldPlacementResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type ListFormFieldPositionsResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -57995,6 +60530,236 @@ func (r UpdateFormFieldResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r UpdateFormFieldResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteFormSetConditionResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormSetConditionResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteFormSetConditionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteFormSetConditionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetFormSetConditionResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormSetConditionResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetFormSetConditionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetFormSetConditionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateFormSetConditionResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormSetConditionResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateFormSetConditionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateFormSetConditionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListFormSetsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormSetList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListFormSetsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListFormSetsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateFormSetResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *FormSetResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateFormSetResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateFormSetResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListFormSetConditionsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormSetConditionList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListFormSetConditionsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListFormSetConditionsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateFormSetConditionResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *FormSetConditionResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateFormSetConditionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateFormSetConditionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteFormSetResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormSetResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteFormSetResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteFormSetResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetFormSetResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormSetResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetFormSetResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetFormSetResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateFormSetResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormSetResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateFormSetResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateFormSetResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -64016,6 +66781,102 @@ func (c *ClientWithResponses) UpdateFormFieldOptionWithApplicationVndAPIPlusJSON
 	return ParseUpdateFormFieldOptionResponse(rsp)
 }
 
+// DeleteFormFieldPlacementConditionWithResponse request returning *DeleteFormFieldPlacementConditionResponse
+func (c *ClientWithResponses) DeleteFormFieldPlacementConditionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldPlacementConditionResponse, error) {
+	rsp, err := c.DeleteFormFieldPlacementCondition(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteFormFieldPlacementConditionResponse(rsp)
+}
+
+// GetFormFieldPlacementConditionWithResponse request returning *GetFormFieldPlacementConditionResponse
+func (c *ClientWithResponses) GetFormFieldPlacementConditionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormFieldPlacementConditionResponse, error) {
+	rsp, err := c.GetFormFieldPlacementCondition(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetFormFieldPlacementConditionResponse(rsp)
+}
+
+// UpdateFormFieldPlacementConditionWithBodyWithResponse request with arbitrary body returning *UpdateFormFieldPlacementConditionResponse
+func (c *ClientWithResponses) UpdateFormFieldPlacementConditionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormFieldPlacementConditionResponse, error) {
+	rsp, err := c.UpdateFormFieldPlacementConditionWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateFormFieldPlacementConditionResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormFieldPlacementConditionResponse, error) {
+	rsp, err := c.UpdateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateFormFieldPlacementConditionResponse(rsp)
+}
+
+// ListFormFieldPlacementConditionsWithResponse request returning *ListFormFieldPlacementConditionsResponse
+func (c *ClientWithResponses) ListFormFieldPlacementConditionsWithResponse(ctx context.Context, formFieldPlacementId string, params *ListFormFieldPlacementConditionsParams, reqEditors ...RequestEditorFn) (*ListFormFieldPlacementConditionsResponse, error) {
+	rsp, err := c.ListFormFieldPlacementConditions(ctx, formFieldPlacementId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListFormFieldPlacementConditionsResponse(rsp)
+}
+
+// CreateFormFieldPlacementConditionWithBodyWithResponse request with arbitrary body returning *CreateFormFieldPlacementConditionResponse
+func (c *ClientWithResponses) CreateFormFieldPlacementConditionWithBodyWithResponse(ctx context.Context, formFieldPlacementId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormFieldPlacementConditionResponse, error) {
+	rsp, err := c.CreateFormFieldPlacementConditionWithBody(ctx, formFieldPlacementId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateFormFieldPlacementConditionResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, formFieldPlacementId string, body CreateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFormFieldPlacementConditionResponse, error) {
+	rsp, err := c.CreateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBody(ctx, formFieldPlacementId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateFormFieldPlacementConditionResponse(rsp)
+}
+
+// DeleteFormFieldPlacementWithResponse request returning *DeleteFormFieldPlacementResponse
+func (c *ClientWithResponses) DeleteFormFieldPlacementWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldPlacementResponse, error) {
+	rsp, err := c.DeleteFormFieldPlacement(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteFormFieldPlacementResponse(rsp)
+}
+
+// GetFormFieldPlacementWithResponse request returning *GetFormFieldPlacementResponse
+func (c *ClientWithResponses) GetFormFieldPlacementWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormFieldPlacementResponse, error) {
+	rsp, err := c.GetFormFieldPlacement(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetFormFieldPlacementResponse(rsp)
+}
+
+// UpdateFormFieldPlacementWithBodyWithResponse request with arbitrary body returning *UpdateFormFieldPlacementResponse
+func (c *ClientWithResponses) UpdateFormFieldPlacementWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormFieldPlacementResponse, error) {
+	rsp, err := c.UpdateFormFieldPlacementWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateFormFieldPlacementResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateFormFieldPlacementWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormFieldPlacementResponse, error) {
+	rsp, err := c.UpdateFormFieldPlacementWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateFormFieldPlacementResponse(rsp)
+}
+
 // DeleteFormFieldPositionWithResponse request returning *DeleteFormFieldPositionResponse
 func (c *ClientWithResponses) DeleteFormFieldPositionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldPositionResponse, error) {
 	rsp, err := c.DeleteFormFieldPosition(ctx, id, reqEditors...)
@@ -64103,6 +66964,32 @@ func (c *ClientWithResponses) CreateFormFieldOptionWithApplicationVndAPIPlusJSON
 	return ParseCreateFormFieldOptionResponse(rsp)
 }
 
+// ListFormFieldPlacementsWithResponse request returning *ListFormFieldPlacementsResponse
+func (c *ClientWithResponses) ListFormFieldPlacementsWithResponse(ctx context.Context, formFieldId string, params *ListFormFieldPlacementsParams, reqEditors ...RequestEditorFn) (*ListFormFieldPlacementsResponse, error) {
+	rsp, err := c.ListFormFieldPlacements(ctx, formFieldId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListFormFieldPlacementsResponse(rsp)
+}
+
+// CreateFormFieldPlacementWithBodyWithResponse request with arbitrary body returning *CreateFormFieldPlacementResponse
+func (c *ClientWithResponses) CreateFormFieldPlacementWithBodyWithResponse(ctx context.Context, formFieldId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormFieldPlacementResponse, error) {
+	rsp, err := c.CreateFormFieldPlacementWithBody(ctx, formFieldId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateFormFieldPlacementResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateFormFieldPlacementWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, formFieldId string, body CreateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFormFieldPlacementResponse, error) {
+	rsp, err := c.CreateFormFieldPlacementWithApplicationVndAPIPlusJSONBody(ctx, formFieldId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateFormFieldPlacementResponse(rsp)
+}
+
 // ListFormFieldPositionsWithResponse request returning *ListFormFieldPositionsResponse
 func (c *ClientWithResponses) ListFormFieldPositionsWithResponse(ctx context.Context, formFieldId string, params *ListFormFieldPositionsParams, reqEditors ...RequestEditorFn) (*ListFormFieldPositionsResponse, error) {
 	rsp, err := c.ListFormFieldPositions(ctx, formFieldId, params, reqEditors...)
@@ -64162,6 +67049,128 @@ func (c *ClientWithResponses) UpdateFormFieldWithApplicationVndAPIPlusJSONBodyWi
 		return nil, err
 	}
 	return ParseUpdateFormFieldResponse(rsp)
+}
+
+// DeleteFormSetConditionWithResponse request returning *DeleteFormSetConditionResponse
+func (c *ClientWithResponses) DeleteFormSetConditionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormSetConditionResponse, error) {
+	rsp, err := c.DeleteFormSetCondition(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteFormSetConditionResponse(rsp)
+}
+
+// GetFormSetConditionWithResponse request returning *GetFormSetConditionResponse
+func (c *ClientWithResponses) GetFormSetConditionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormSetConditionResponse, error) {
+	rsp, err := c.GetFormSetCondition(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetFormSetConditionResponse(rsp)
+}
+
+// UpdateFormSetConditionWithBodyWithResponse request with arbitrary body returning *UpdateFormSetConditionResponse
+func (c *ClientWithResponses) UpdateFormSetConditionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormSetConditionResponse, error) {
+	rsp, err := c.UpdateFormSetConditionWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateFormSetConditionResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateFormSetConditionWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormSetConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormSetConditionResponse, error) {
+	rsp, err := c.UpdateFormSetConditionWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateFormSetConditionResponse(rsp)
+}
+
+// ListFormSetsWithResponse request returning *ListFormSetsResponse
+func (c *ClientWithResponses) ListFormSetsWithResponse(ctx context.Context, params *ListFormSetsParams, reqEditors ...RequestEditorFn) (*ListFormSetsResponse, error) {
+	rsp, err := c.ListFormSets(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListFormSetsResponse(rsp)
+}
+
+// CreateFormSetWithBodyWithResponse request with arbitrary body returning *CreateFormSetResponse
+func (c *ClientWithResponses) CreateFormSetWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormSetResponse, error) {
+	rsp, err := c.CreateFormSetWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateFormSetResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateFormSetWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateFormSetApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFormSetResponse, error) {
+	rsp, err := c.CreateFormSetWithApplicationVndAPIPlusJSONBody(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateFormSetResponse(rsp)
+}
+
+// ListFormSetConditionsWithResponse request returning *ListFormSetConditionsResponse
+func (c *ClientWithResponses) ListFormSetConditionsWithResponse(ctx context.Context, formSetId string, params *ListFormSetConditionsParams, reqEditors ...RequestEditorFn) (*ListFormSetConditionsResponse, error) {
+	rsp, err := c.ListFormSetConditions(ctx, formSetId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListFormSetConditionsResponse(rsp)
+}
+
+// CreateFormSetConditionWithBodyWithResponse request with arbitrary body returning *CreateFormSetConditionResponse
+func (c *ClientWithResponses) CreateFormSetConditionWithBodyWithResponse(ctx context.Context, formSetId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormSetConditionResponse, error) {
+	rsp, err := c.CreateFormSetConditionWithBody(ctx, formSetId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateFormSetConditionResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateFormSetConditionWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, formSetId string, body CreateFormSetConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFormSetConditionResponse, error) {
+	rsp, err := c.CreateFormSetConditionWithApplicationVndAPIPlusJSONBody(ctx, formSetId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateFormSetConditionResponse(rsp)
+}
+
+// DeleteFormSetWithResponse request returning *DeleteFormSetResponse
+func (c *ClientWithResponses) DeleteFormSetWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormSetResponse, error) {
+	rsp, err := c.DeleteFormSet(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteFormSetResponse(rsp)
+}
+
+// GetFormSetWithResponse request returning *GetFormSetResponse
+func (c *ClientWithResponses) GetFormSetWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormSetResponse, error) {
+	rsp, err := c.GetFormSet(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetFormSetResponse(rsp)
+}
+
+// UpdateFormSetWithBodyWithResponse request with arbitrary body returning *UpdateFormSetResponse
+func (c *ClientWithResponses) UpdateFormSetWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormSetResponse, error) {
+	rsp, err := c.UpdateFormSetWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateFormSetResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateFormSetWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormSetApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormSetResponse, error) {
+	rsp, err := c.UpdateFormSetWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateFormSetResponse(rsp)
 }
 
 // ListFunctionalitiesWithResponse request returning *ListFunctionalitiesResponse
@@ -69296,6 +72305,270 @@ func ParseUpdateFormFieldOptionResponse(rsp *http.Response) (*UpdateFormFieldOpt
 	return response, nil
 }
 
+// ParseDeleteFormFieldPlacementConditionResponse parses an HTTP response from a DeleteFormFieldPlacementConditionWithResponse call
+func ParseDeleteFormFieldPlacementConditionResponse(rsp *http.Response) (*DeleteFormFieldPlacementConditionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteFormFieldPlacementConditionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormFieldPlacementConditionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetFormFieldPlacementConditionResponse parses an HTTP response from a GetFormFieldPlacementConditionWithResponse call
+func ParseGetFormFieldPlacementConditionResponse(rsp *http.Response) (*GetFormFieldPlacementConditionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetFormFieldPlacementConditionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormFieldPlacementConditionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateFormFieldPlacementConditionResponse parses an HTTP response from a UpdateFormFieldPlacementConditionWithResponse call
+func ParseUpdateFormFieldPlacementConditionResponse(rsp *http.Response) (*UpdateFormFieldPlacementConditionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateFormFieldPlacementConditionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormFieldPlacementConditionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListFormFieldPlacementConditionsResponse parses an HTTP response from a ListFormFieldPlacementConditionsWithResponse call
+func ParseListFormFieldPlacementConditionsResponse(rsp *http.Response) (*ListFormFieldPlacementConditionsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListFormFieldPlacementConditionsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormFieldPlacementConditionList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateFormFieldPlacementConditionResponse parses an HTTP response from a CreateFormFieldPlacementConditionWithResponse call
+func ParseCreateFormFieldPlacementConditionResponse(rsp *http.Response) (*CreateFormFieldPlacementConditionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateFormFieldPlacementConditionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest FormFieldPlacementConditionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteFormFieldPlacementResponse parses an HTTP response from a DeleteFormFieldPlacementWithResponse call
+func ParseDeleteFormFieldPlacementResponse(rsp *http.Response) (*DeleteFormFieldPlacementResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteFormFieldPlacementResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormFieldPlacementResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetFormFieldPlacementResponse parses an HTTP response from a GetFormFieldPlacementWithResponse call
+func ParseGetFormFieldPlacementResponse(rsp *http.Response) (*GetFormFieldPlacementResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetFormFieldPlacementResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormFieldPlacementResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateFormFieldPlacementResponse parses an HTTP response from a UpdateFormFieldPlacementWithResponse call
+func ParseUpdateFormFieldPlacementResponse(rsp *http.Response) (*UpdateFormFieldPlacementResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateFormFieldPlacementResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormFieldPlacementResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseDeleteFormFieldPositionResponse parses an HTTP response from a DeleteFormFieldPositionWithResponse call
 func ParseDeleteFormFieldPositionResponse(rsp *http.Response) (*DeleteFormFieldPositionResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -69527,6 +72800,72 @@ func ParseCreateFormFieldOptionResponse(rsp *http.Response) (*CreateFormFieldOpt
 	return response, nil
 }
 
+// ParseListFormFieldPlacementsResponse parses an HTTP response from a ListFormFieldPlacementsWithResponse call
+func ParseListFormFieldPlacementsResponse(rsp *http.Response) (*ListFormFieldPlacementsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListFormFieldPlacementsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormFieldPlacementList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateFormFieldPlacementResponse parses an HTTP response from a CreateFormFieldPlacementWithResponse call
+func ParseCreateFormFieldPlacementResponse(rsp *http.Response) (*CreateFormFieldPlacementResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateFormFieldPlacementResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest FormFieldPlacementResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseListFormFieldPositionsResponse parses an HTTP response from a ListFormFieldPositionsWithResponse call
 func ParseListFormFieldPositionsResponse(rsp *http.Response) (*ListFormFieldPositionsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -69668,6 +73007,336 @@ func ParseUpdateFormFieldResponse(rsp *http.Response) (*UpdateFormFieldResponse,
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest FormFieldResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteFormSetConditionResponse parses an HTTP response from a DeleteFormSetConditionWithResponse call
+func ParseDeleteFormSetConditionResponse(rsp *http.Response) (*DeleteFormSetConditionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteFormSetConditionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormSetConditionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetFormSetConditionResponse parses an HTTP response from a GetFormSetConditionWithResponse call
+func ParseGetFormSetConditionResponse(rsp *http.Response) (*GetFormSetConditionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetFormSetConditionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormSetConditionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateFormSetConditionResponse parses an HTTP response from a UpdateFormSetConditionWithResponse call
+func ParseUpdateFormSetConditionResponse(rsp *http.Response) (*UpdateFormSetConditionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateFormSetConditionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormSetConditionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListFormSetsResponse parses an HTTP response from a ListFormSetsWithResponse call
+func ParseListFormSetsResponse(rsp *http.Response) (*ListFormSetsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListFormSetsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormSetList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateFormSetResponse parses an HTTP response from a CreateFormSetWithResponse call
+func ParseCreateFormSetResponse(rsp *http.Response) (*CreateFormSetResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateFormSetResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest FormSetResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListFormSetConditionsResponse parses an HTTP response from a ListFormSetConditionsWithResponse call
+func ParseListFormSetConditionsResponse(rsp *http.Response) (*ListFormSetConditionsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListFormSetConditionsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormSetConditionList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateFormSetConditionResponse parses an HTTP response from a CreateFormSetConditionWithResponse call
+func ParseCreateFormSetConditionResponse(rsp *http.Response) (*CreateFormSetConditionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateFormSetConditionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest FormSetConditionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteFormSetResponse parses an HTTP response from a DeleteFormSetWithResponse call
+func ParseDeleteFormSetResponse(rsp *http.Response) (*DeleteFormSetResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteFormSetResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormSetResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetFormSetResponse parses an HTTP response from a GetFormSetWithResponse call
+func ParseGetFormSetResponse(rsp *http.Response) (*GetFormSetResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetFormSetResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormSetResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateFormSetResponse parses an HTTP response from a UpdateFormSetWithResponse call
+func ParseUpdateFormSetResponse(rsp *http.Response) (*UpdateFormSetResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateFormSetResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormSetResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

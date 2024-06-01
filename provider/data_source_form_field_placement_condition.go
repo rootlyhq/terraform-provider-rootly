@@ -1,0 +1,56 @@
+package provider
+
+import (
+	"context"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+)
+
+func dataSourceFormFieldPlacementCondition() *schema.Resource {
+	return &schema.Resource{
+		ReadContext: dataSourceFormFieldPlacementConditionRead,
+		Schema: map[string]*schema.Schema{
+			"id": &schema.Schema{
+				Type:     schema.TypeString,
+				Computed: true,
+			},
+
+			"form_field_id": &schema.Schema{
+				Type:     schema.TypeString,
+				Computed: true,
+				Optional: true,
+			},
+		},
+	}
+}
+
+func dataSourceFormFieldPlacementConditionRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	c := meta.(*client.Client)
+
+	params := new(rootlygo.ListFormFieldPlacementConditionsParams)
+	page_size := 1
+	params.PageSize = &page_size
+
+	if value, ok := d.GetOkExists("form_field_id"); ok {
+		form_field_id := value.(string)
+		params.FilterFormFieldId = &form_field_id
+	}
+
+	form_field_placement_id := d.Get("form_field_placement_id").(string)
+	items, err := c.ListFormFieldPlacementConditions(form_field_placement_id, params)
+	if err != nil {
+		return diag.FromErr(err)
+	}
+
+	if len(items) == 0 {
+		return diag.Errorf("form_field_placement_condition not found")
+	}
+	item, _ := items[0].(*client.FormFieldPlacementCondition)
+
+	d.SetId(item.ID)
+
+	return nil
+}

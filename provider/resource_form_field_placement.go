@@ -1,0 +1,181 @@
+package provider
+
+import (
+	"context"
+	"fmt"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
+)
+
+func resourceFormFieldPlacement() *schema.Resource {
+	return &schema.Resource{
+		CreateContext: resourceFormFieldPlacementCreate,
+		ReadContext:   resourceFormFieldPlacementRead,
+		UpdateContext: resourceFormFieldPlacementUpdate,
+		DeleteContext: resourceFormFieldPlacementDelete,
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
+		},
+		Schema: map[string]*schema.Schema{
+
+			"form_field_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    true,
+				Description: "The form field that is placed.",
+			},
+
+			"form_set_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
+				Description: "The form set this field is placed in.",
+			},
+
+			"form": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
+				Description: "The form this field is placed on.",
+			},
+
+			"position": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The position of the field placement.",
+			},
+
+			"required": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Whether the field is required on this form.. Value must be one of true or false",
+			},
+		},
+	}
+}
+
+func resourceFormFieldPlacementCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	c := meta.(*client.Client)
+
+	tflog.Trace(ctx, fmt.Sprintf("Creating FormFieldPlacement"))
+
+	s := &client.FormFieldPlacement{}
+
+	if value, ok := d.GetOkExists("form_field_id"); ok {
+		s.FormFieldId = value.(string)
+	}
+	if value, ok := d.GetOkExists("form_set_id"); ok {
+		s.FormSetId = value.(string)
+	}
+	if value, ok := d.GetOkExists("form"); ok {
+		s.Form = value.(string)
+	}
+	if value, ok := d.GetOkExists("position"); ok {
+		s.Position = value.(int)
+	}
+	if value, ok := d.GetOkExists("required"); ok {
+		s.Required = tools.Bool(value.(bool))
+	}
+
+	res, err := c.CreateFormFieldPlacement(s)
+	if err != nil {
+		return diag.Errorf("Error creating form_field_placement: %s", err.Error())
+	}
+
+	d.SetId(res.ID)
+	tflog.Trace(ctx, fmt.Sprintf("created a form_field_placement resource: %s", d.Id()))
+
+	return resourceFormFieldPlacementRead(ctx, d, meta)
+}
+
+func resourceFormFieldPlacementRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	c := meta.(*client.Client)
+	tflog.Trace(ctx, fmt.Sprintf("Reading FormFieldPlacement: %s", d.Id()))
+
+	item, err := c.GetFormFieldPlacement(d.Id())
+	if err != nil {
+		// In the case of a NotFoundError, it means the resource may have been removed upstream
+		// We just remove it from the state.
+		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+			tflog.Warn(ctx, fmt.Sprintf("FormFieldPlacement (%s) not found, removing from state", d.Id()))
+			d.SetId("")
+			return nil
+		}
+
+		return diag.Errorf("Error reading form_field_placement: %s", d.Id())
+	}
+
+	d.Set("form_field_id", item.FormFieldId)
+	d.Set("form_set_id", item.FormSetId)
+	d.Set("form", item.Form)
+	d.Set("position", item.Position)
+	d.Set("required", item.Required)
+
+	return nil
+}
+
+func resourceFormFieldPlacementUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	c := meta.(*client.Client)
+	tflog.Trace(ctx, fmt.Sprintf("Updating FormFieldPlacement: %s", d.Id()))
+
+	s := &client.FormFieldPlacement{}
+
+	if d.HasChange("form_field_id") {
+		s.FormFieldId = d.Get("form_field_id").(string)
+	}
+	if d.HasChange("form_set_id") {
+		s.FormSetId = d.Get("form_set_id").(string)
+	}
+	if d.HasChange("form") {
+		s.Form = d.Get("form").(string)
+	}
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
+	}
+	if d.HasChange("required") {
+		s.Required = tools.Bool(d.Get("required").(bool))
+	}
+
+	_, err := c.UpdateFormFieldPlacement(d.Id(), s)
+	if err != nil {
+		return diag.Errorf("Error updating form_field_placement: %s", err.Error())
+	}
+
+	return resourceFormFieldPlacementRead(ctx, d, meta)
+}
+
+func resourceFormFieldPlacementDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	c := meta.(*client.Client)
+	tflog.Trace(ctx, fmt.Sprintf("Deleting FormFieldPlacement: %s", d.Id()))
+
+	err := c.DeleteFormFieldPlacement(d.Id())
+	if err != nil {
+		// In the case of a NotFoundError, it means the resource may have been removed upstream.
+		// We just remove it from the state.
+		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+			tflog.Warn(ctx, fmt.Sprintf("FormFieldPlacement (%s) not found, removing from state", d.Id()))
+			d.SetId("")
+			return nil
+		}
+		return diag.Errorf("Error deleting form_field_placement: %s", err.Error())
+	}
+
+	d.SetId("")
+
+	return nil
+}

@@ -1,0 +1,201 @@
+package provider
+
+import (
+	"context"
+	"fmt"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
+)
+
+func resourceFormFieldPlacementCondition() *schema.Resource {
+	return &schema.Resource{
+		CreateContext: resourceFormFieldPlacementConditionCreate,
+		ReadContext:   resourceFormFieldPlacementConditionRead,
+		UpdateContext: resourceFormFieldPlacementConditionUpdate,
+		DeleteContext: resourceFormFieldPlacementConditionDelete,
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
+		},
+		Schema: map[string]*schema.Schema{
+
+			"form_field_placement_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    true,
+				Description: "The form field placement this condition applies.",
+			},
+
+			"conditioned": &schema.Schema{
+				Type:        schema.TypeString,
+				Default:     "placement",
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The resource or attribute the condition applies.. Value must be one of `placement`, `required`.",
+			},
+
+			"position": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The condition position.",
+			},
+
+			"form_field_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
+				Description: "The condition field.",
+			},
+
+			"comparison": &schema.Schema{
+				Type:        schema.TypeString,
+				Default:     "equal",
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The condition comparison.. Value must be one of `equal`.",
+			},
+
+			"values": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         false,
+				Required:         true,
+				Optional:         false,
+				Description:      "The values for comparison.",
+			},
+		},
+	}
+}
+
+func resourceFormFieldPlacementConditionCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	c := meta.(*client.Client)
+
+	tflog.Trace(ctx, fmt.Sprintf("Creating FormFieldPlacementCondition"))
+
+	s := &client.FormFieldPlacementCondition{}
+
+	if value, ok := d.GetOkExists("form_field_placement_id"); ok {
+		s.FormFieldPlacementId = value.(string)
+	}
+	if value, ok := d.GetOkExists("conditioned"); ok {
+		s.Conditioned = value.(string)
+	}
+	if value, ok := d.GetOkExists("position"); ok {
+		s.Position = value.(int)
+	}
+	if value, ok := d.GetOkExists("form_field_id"); ok {
+		s.FormFieldId = value.(string)
+	}
+	if value, ok := d.GetOkExists("comparison"); ok {
+		s.Comparison = value.(string)
+	}
+	if value, ok := d.GetOkExists("values"); ok {
+		s.Values = value.([]interface{})
+	}
+
+	res, err := c.CreateFormFieldPlacementCondition(s)
+	if err != nil {
+		return diag.Errorf("Error creating form_field_placement_condition: %s", err.Error())
+	}
+
+	d.SetId(res.ID)
+	tflog.Trace(ctx, fmt.Sprintf("created a form_field_placement_condition resource: %s", d.Id()))
+
+	return resourceFormFieldPlacementConditionRead(ctx, d, meta)
+}
+
+func resourceFormFieldPlacementConditionRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	c := meta.(*client.Client)
+	tflog.Trace(ctx, fmt.Sprintf("Reading FormFieldPlacementCondition: %s", d.Id()))
+
+	item, err := c.GetFormFieldPlacementCondition(d.Id())
+	if err != nil {
+		// In the case of a NotFoundError, it means the resource may have been removed upstream
+		// We just remove it from the state.
+		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+			tflog.Warn(ctx, fmt.Sprintf("FormFieldPlacementCondition (%s) not found, removing from state", d.Id()))
+			d.SetId("")
+			return nil
+		}
+
+		return diag.Errorf("Error reading form_field_placement_condition: %s", d.Id())
+	}
+
+	d.Set("form_field_placement_id", item.FormFieldPlacementId)
+	d.Set("conditioned", item.Conditioned)
+	d.Set("position", item.Position)
+	d.Set("form_field_id", item.FormFieldId)
+	d.Set("comparison", item.Comparison)
+	d.Set("values", item.Values)
+
+	return nil
+}
+
+func resourceFormFieldPlacementConditionUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	c := meta.(*client.Client)
+	tflog.Trace(ctx, fmt.Sprintf("Updating FormFieldPlacementCondition: %s", d.Id()))
+
+	s := &client.FormFieldPlacementCondition{}
+
+	if d.HasChange("form_field_placement_id") {
+		s.FormFieldPlacementId = d.Get("form_field_placement_id").(string)
+	}
+	if d.HasChange("conditioned") {
+		s.Conditioned = d.Get("conditioned").(string)
+	}
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
+	}
+	if d.HasChange("form_field_id") {
+		s.FormFieldId = d.Get("form_field_id").(string)
+	}
+	if d.HasChange("comparison") {
+		s.Comparison = d.Get("comparison").(string)
+	}
+	if d.HasChange("values") {
+		s.Values = d.Get("values").([]interface{})
+	}
+
+	_, err := c.UpdateFormFieldPlacementCondition(d.Id(), s)
+	if err != nil {
+		return diag.Errorf("Error updating form_field_placement_condition: %s", err.Error())
+	}
+
+	return resourceFormFieldPlacementConditionRead(ctx, d, meta)
+}
+
+func resourceFormFieldPlacementConditionDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	c := meta.(*client.Client)
+	tflog.Trace(ctx, fmt.Sprintf("Deleting FormFieldPlacementCondition: %s", d.Id()))
+
+	err := c.DeleteFormFieldPlacementCondition(d.Id())
+	if err != nil {
+		// In the case of a NotFoundError, it means the resource may have been removed upstream.
+		// We just remove it from the state.
+		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+			tflog.Warn(ctx, fmt.Sprintf("FormFieldPlacementCondition (%s) not found, removing from state", d.Id()))
+			d.SetId("")
+			return nil
+		}
+		return diag.Errorf("Error deleting form_field_placement_condition: %s", err.Error())
+	}
+
+	d.SetId("")
+
+	return nil
+}
