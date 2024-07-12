@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.2.0] -- 2024-07-12
+
+- Support for additional API resources
+
 ## [2.1.0] -- 2024-05-14
 
 - Fix type of incident filter "private" parameter
