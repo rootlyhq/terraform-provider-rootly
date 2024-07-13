@@ -18,7 +18,6 @@ description: |-
 
 - `ends_at` (String) End datetime of shift
 - `starts_at` (String) Start datetime of shift
-- `user_id` (Number) User to whom override shift is assigned to
 
 ### Optional
 
@@ -26,6 +25,7 @@ description: |-
 - `rotation_id` (String) ID of rotation
 - `schedule_id` (String) ID of schedule
 - `shift_override` (Map of String) Override metadata
+- `user` (Map of String) User metadata
 
 ### Read-Only
 

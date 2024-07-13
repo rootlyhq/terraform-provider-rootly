@@ -70,6 +70,7 @@ Optional:
 - `message` (String)
 - `priority` (String) PagerDuty incident priority, selecting auto will let Rootly auto map our incident severity
 - `task_type` (String)
+- `title` (String) Incident title.
 - `urgency` (String) Value must be one of `high`, `low`, `auto`.
 - `users` (Block List) (see [below for nested schema](#nestedblock--task_params--users))
 

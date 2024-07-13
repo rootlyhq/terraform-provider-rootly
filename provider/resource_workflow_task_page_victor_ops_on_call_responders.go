@@ -107,6 +107,11 @@ func resourceWorkflowTaskPageVictorOpsOnCallResponders() *schema.Resource {
 								},
 							},
 						},
+						"title": &schema.Schema{
+							Description: "Alert title.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 					},
 				},
 			},

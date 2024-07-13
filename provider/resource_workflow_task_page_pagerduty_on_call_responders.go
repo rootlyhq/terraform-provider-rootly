@@ -112,6 +112,11 @@ func resourceWorkflowTaskPagePagerdutyOnCallResponders() *schema.Resource {
 								},
 							},
 						},
+						"title": &schema.Schema{
+							Description: "Incident title.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 						"message": &schema.Schema{
 							Description: "",
 							Type:        schema.TypeString,

@@ -49,7 +49,7 @@ resource "rootly_form_field_option" "north_america" {
 - `description` (String) The description of the form field
 - `enabled` (Boolean)
 - `input_kind` (String) The input kind of the form field. Value must be one of `text`, `textarea`, `select`, `multi_select`, `date`, `datetime`, `number`, `checkbox`, `tags`, `rich_text`.
-- `kind` (String) The kind of the form field. Value must be one of `custom`, `title`, `summary`, `severity`, `environments`, `types`, `services`, `causes`, `functionalities`, `teams`, `visibility`, `mark_as_test`, `mark_as_backfilled`, `labels`, `notify_emails`, `trigger_manual_workflows`, `show_ongoing_incidents`, `attach_alerts`, `mark_as_in_triage`, `in_triage_at`, `started_at`, `detected_at`, `acknowledged_at`, `mitigated_at`, `resolved_at`, `manual_starting_datetime_field`.
+- `kind` (String) The kind of the form field. Value must be one of `custom`, `title`, `summary`, `mitigation_message`, `resolution_message`, `severity`, `environments`, `types`, `services`, `causes`, `functionalities`, `teams`, `visibility`, `mark_as_test`, `mark_as_backfilled`, `labels`, `notify_emails`, `trigger_manual_workflows`, `show_ongoing_incidents`, `attach_alerts`, `mark_as_in_triage`, `in_triage_at`, `started_at`, `detected_at`, `acknowledged_at`, `mitigated_at`, `resolved_at`, `manual_starting_datetime_field`.
 - `required` (List of String)
 - `show_on_incident_details` (Boolean) Whether the form field is shown on the incident details panel. Value must be one of true or false
 - `shown` (List of String)

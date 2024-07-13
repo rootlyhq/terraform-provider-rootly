@@ -37,6 +37,7 @@ Optional:
 
 - `escalation_policies` (Block List) (see [below for nested schema](#nestedblock--task_params--escalation_policies))
 - `task_type` (String)
+- `title` (String) Alert title.
 - `users` (Block List) (see [below for nested schema](#nestedblock--task_params--users))
 
 <a id="nestedblock--task_params--escalation_policies"></a>

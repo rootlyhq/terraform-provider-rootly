@@ -95,6 +95,14 @@ func resourceWorkflowIncident() *schema.Resource {
 				Optional: true,
 			},
 
+			"locked": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Restricts workflow edits to admins when turned on. Only admins can set this field.. Value must be one of true or false",
+			},
+
 			"position": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    true,
@@ -135,7 +143,7 @@ func resourceWorkflowIncident() *schema.Resource {
 							Computed:         true,
 							Required:         false,
 							Optional:         true,
-							Description:      "Actions that trigger the workflow. One of custom_fields.<slug>.updated, incident_in_triage, incident_created, incident_started, incident_updated, title_updated, summary_updated, status_updated, severity_updated, environments_added, environments_removed, environments_updated, incident_types_added, incident_types_removed, incident_types_updated, services_added, services_removed, services_updated, functionalities_added, functionalities_removed, functionalities_updated, teams_added, teams_removed, teams_updated, causes_added, causes_removed, causes_updated, timeline_updated, status_page_timeline_updated, role_assignments_updated, role_assignments_added, role_assignments_removed, slack_command, slack_channel_created, slack_channel_converted, subscribers_updated, subscribers_added, subscribers_removed, user_joined_slack_channel, user_left_slack_channel",
+							Description:      "Actions that trigger the workflow. One of custom_fields.<slug>.updated, incident_in_triage, incident_created, incident_started, incident_updated, title_updated, summary_updated, status_updated, severity_updated, environments_added, environments_removed, environments_updated, incident_types_added, incident_types_removed, incident_types_updated, services_added, services_removed, services_updated, visibility_updated, functionalities_added, functionalities_removed, functionalities_updated, teams_added, teams_removed, teams_updated, causes_added, causes_removed, causes_updated, timeline_updated, status_page_timeline_updated, role_assignments_updated, role_assignments_added, role_assignments_removed, slack_command, slack_channel_created, slack_channel_converted, subscribers_updated, subscribers_added, subscribers_removed, user_joined_slack_channel, user_left_slack_channel",
 						},
 
 						"incident_visibilities": &schema.Schema{
@@ -480,6 +488,9 @@ func resourceWorkflowIncidentCreate(ctx context.Context, d *schema.ResourceData,
 	if value, ok := d.GetOkExists("enabled"); ok {
 		s.Enabled = tools.Bool(value.(bool))
 	}
+	if value, ok := d.GetOkExists("locked"); ok {
+		s.Locked = tools.Bool(value.(bool))
+	}
 	if value, ok := d.GetOkExists("position"); ok {
 		s.Position = value.(int)
 	}
@@ -551,6 +562,7 @@ func resourceWorkflowIncidentRead(ctx context.Context, d *schema.ResourceData, m
 	d.Set("repeat_every_duration", item.RepeatEveryDuration)
 	d.Set("repeat_on", item.RepeatOn)
 	d.Set("enabled", item.Enabled)
+	d.Set("locked", item.Locked)
 	d.Set("position", item.Position)
 	d.Set("workflow_group_id", item.WorkflowGroupId)
 
@@ -602,6 +614,9 @@ func resourceWorkflowIncidentUpdate(ctx context.Context, d *schema.ResourceData,
 	}
 	if d.HasChange("enabled") {
 		s.Enabled = tools.Bool(d.Get("enabled").(bool))
+	}
+	if d.HasChange("locked") {
+		s.Locked = tools.Bool(d.Get("locked").(bool))
 	}
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)

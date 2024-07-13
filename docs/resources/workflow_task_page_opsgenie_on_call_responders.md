@@ -40,6 +40,7 @@ Optional:
 - `priority` (String) Value must be one of `P1`, `P2`, `P3`, `P4`, `P5`, `auto`.
 - `task_type` (String)
 - `teams` (Block List) (see [below for nested schema](#nestedblock--task_params--teams))
+- `title` (String) Incident title.
 - `users` (Block List) (see [below for nested schema](#nestedblock--task_params--users))
 
 <a id="nestedblock--task_params--teams"></a>

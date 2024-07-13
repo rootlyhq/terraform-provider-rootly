@@ -135,13 +135,14 @@ func resourceWorkflowTaskHttpClient() *schema.Resource {
 							Optional:    true,
 						},
 						"method": &schema.Schema{
-							Description: "HTTP method. Value must be one of `GET`, `POST`, `PUT`, `DELETE`, `OPTIONS`.",
+							Description: "HTTP method. Value must be one of `GET`, `POST`, `PATCH`, `PUT`, `DELETE`, `OPTIONS`.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Default:     "GET",
 							ValidateFunc: validation.StringInSlice([]string{
 								"GET",
 								"POST",
+								"PATCH",
 								"PUT",
 								"DELETE",
 								"OPTIONS",

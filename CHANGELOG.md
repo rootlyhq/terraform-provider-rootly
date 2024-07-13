@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.3.0] -- 2024-07-12
+
+- Support for additional API resources
+
 ## [2.2.0] -- 2024-07-12
 
 - Support for additional API resources

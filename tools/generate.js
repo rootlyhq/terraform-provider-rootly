@@ -34,6 +34,7 @@ const excluded = {
     "retrospective_process",
     "retrospective_step",
     "secret",
+    "shift",
     "user_notification_rule",
     "webhooks_delivery",
     "workflow_run",
@@ -62,6 +63,7 @@ const excluded = {
     "retrospective_process",
     "retrospective_step",
     "secret",
+    "shift",
     "user",
     "user_notification_rule",
     "webhooks_delivery",
@@ -321,6 +323,7 @@ function resourceSchema(name) {
 }
 
 function requiredFields(name) {
+  console.log(name)
   return swagger.components.schemas[`new_${name}`].properties.data.properties
     .attributes.required;
 }

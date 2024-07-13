@@ -42,6 +42,7 @@ resource "rootly_workflow_alert" "my-workflow" {
 - `group_ids` (List of String)
 - `incident_role_ids` (List of String)
 - `incident_type_ids` (List of String)
+- `locked` (Boolean) Restricts workflow edits to admins when turned on. Only admins can set this field.. Value must be one of true or false
 - `position` (Number) The order which the workflow should run with other workflows.
 - `repeat_every_duration` (String) Repeat workflow every duration
 - `repeat_on` (List of String) Repeat on weekdays. Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.

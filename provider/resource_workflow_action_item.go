@@ -95,6 +95,14 @@ func resourceWorkflowActionItem() *schema.Resource {
 				Optional: true,
 			},
 
+			"locked": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Restricts workflow edits to admins when turned on. Only admins can set this field.. Value must be one of true or false",
+			},
+
 			"position": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    true,
@@ -552,6 +560,9 @@ func resourceWorkflowActionItemCreate(ctx context.Context, d *schema.ResourceDat
 	if value, ok := d.GetOkExists("enabled"); ok {
 		s.Enabled = tools.Bool(value.(bool))
 	}
+	if value, ok := d.GetOkExists("locked"); ok {
+		s.Locked = tools.Bool(value.(bool))
+	}
 	if value, ok := d.GetOkExists("position"); ok {
 		s.Position = value.(int)
 	}
@@ -623,6 +634,7 @@ func resourceWorkflowActionItemRead(ctx context.Context, d *schema.ResourceData,
 	d.Set("repeat_every_duration", item.RepeatEveryDuration)
 	d.Set("repeat_on", item.RepeatOn)
 	d.Set("enabled", item.Enabled)
+	d.Set("locked", item.Locked)
 	d.Set("position", item.Position)
 	d.Set("workflow_group_id", item.WorkflowGroupId)
 
@@ -674,6 +686,9 @@ func resourceWorkflowActionItemUpdate(ctx context.Context, d *schema.ResourceDat
 	}
 	if d.HasChange("enabled") {
 		s.Enabled = tools.Bool(d.Get("enabled").(bool))
+	}
+	if d.HasChange("locked") {
+		s.Locked = tools.Bool(d.Get("locked").(bool))
 	}
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)

@@ -13,6 +13,7 @@ type User struct {
 	Email string `jsonapi:"attr,email,omitempty"`
   FullName string `jsonapi:"attr,full_name,omitempty"`
   FullNameWithTeam string `jsonapi:"attr,full_name_with_team,omitempty"`
+  TimeZone string `jsonapi:"attr,time_zone,omitempty"`
 }
 
 func (c *Client) ListUsers(params *rootlygo.ListUsersParams) ([]interface{}, error) {

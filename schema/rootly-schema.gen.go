@@ -638,161 +638,6 @@ const (
 	CreateGoogleCalendarEventTaskParamsTaskTypeCreateGoogleCalendarEvent CreateGoogleCalendarEventTaskParamsTaskType = "create_google_calendar_event"
 )
 
-// Defines values for CreateGoogleCalendarEventTaskParamsTimeZone.
-const (
-	CreateGoogleCalendarEventTaskParamsTimeZoneAbuDhabi                  CreateGoogleCalendarEventTaskParamsTimeZone = "Abu Dhabi"
-	CreateGoogleCalendarEventTaskParamsTimeZoneAdelaide                  CreateGoogleCalendarEventTaskParamsTimeZone = "Adelaide"
-	CreateGoogleCalendarEventTaskParamsTimeZoneAlaska                    CreateGoogleCalendarEventTaskParamsTimeZone = "Alaska"
-	CreateGoogleCalendarEventTaskParamsTimeZoneAlmaty                    CreateGoogleCalendarEventTaskParamsTimeZone = "Almaty"
-	CreateGoogleCalendarEventTaskParamsTimeZoneAmericanSamoa             CreateGoogleCalendarEventTaskParamsTimeZone = "American Samoa"
-	CreateGoogleCalendarEventTaskParamsTimeZoneAmsterdam                 CreateGoogleCalendarEventTaskParamsTimeZone = "Amsterdam"
-	CreateGoogleCalendarEventTaskParamsTimeZoneArizona                   CreateGoogleCalendarEventTaskParamsTimeZone = "Arizona"
-	CreateGoogleCalendarEventTaskParamsTimeZoneAstana                    CreateGoogleCalendarEventTaskParamsTimeZone = "Astana"
-	CreateGoogleCalendarEventTaskParamsTimeZoneAthens                    CreateGoogleCalendarEventTaskParamsTimeZone = "Athens"
-	CreateGoogleCalendarEventTaskParamsTimeZoneAtlanticTimeCanada        CreateGoogleCalendarEventTaskParamsTimeZone = "Atlantic Time (Canada)"
-	CreateGoogleCalendarEventTaskParamsTimeZoneAuckland                  CreateGoogleCalendarEventTaskParamsTimeZone = "Auckland"
-	CreateGoogleCalendarEventTaskParamsTimeZoneAzores                    CreateGoogleCalendarEventTaskParamsTimeZone = "Azores"
-	CreateGoogleCalendarEventTaskParamsTimeZoneBaghdad                   CreateGoogleCalendarEventTaskParamsTimeZone = "Baghdad"
-	CreateGoogleCalendarEventTaskParamsTimeZoneBaku                      CreateGoogleCalendarEventTaskParamsTimeZone = "Baku"
-	CreateGoogleCalendarEventTaskParamsTimeZoneBangkok                   CreateGoogleCalendarEventTaskParamsTimeZone = "Bangkok"
-	CreateGoogleCalendarEventTaskParamsTimeZoneBeijing                   CreateGoogleCalendarEventTaskParamsTimeZone = "Beijing"
-	CreateGoogleCalendarEventTaskParamsTimeZoneBelgrade                  CreateGoogleCalendarEventTaskParamsTimeZone = "Belgrade"
-	CreateGoogleCalendarEventTaskParamsTimeZoneBerlin                    CreateGoogleCalendarEventTaskParamsTimeZone = "Berlin"
-	CreateGoogleCalendarEventTaskParamsTimeZoneBern                      CreateGoogleCalendarEventTaskParamsTimeZone = "Bern"
-	CreateGoogleCalendarEventTaskParamsTimeZoneBogota                    CreateGoogleCalendarEventTaskParamsTimeZone = "Bogota"
-	CreateGoogleCalendarEventTaskParamsTimeZoneBrasilia                  CreateGoogleCalendarEventTaskParamsTimeZone = "Brasilia"
-	CreateGoogleCalendarEventTaskParamsTimeZoneBratislava                CreateGoogleCalendarEventTaskParamsTimeZone = "Bratislava"
-	CreateGoogleCalendarEventTaskParamsTimeZoneBrisbane                  CreateGoogleCalendarEventTaskParamsTimeZone = "Brisbane"
-	CreateGoogleCalendarEventTaskParamsTimeZoneBrussels                  CreateGoogleCalendarEventTaskParamsTimeZone = "Brussels"
-	CreateGoogleCalendarEventTaskParamsTimeZoneBucharest                 CreateGoogleCalendarEventTaskParamsTimeZone = "Bucharest"
-	CreateGoogleCalendarEventTaskParamsTimeZoneBudapest                  CreateGoogleCalendarEventTaskParamsTimeZone = "Budapest"
-	CreateGoogleCalendarEventTaskParamsTimeZoneBuenosAires               CreateGoogleCalendarEventTaskParamsTimeZone = "Buenos Aires"
-	CreateGoogleCalendarEventTaskParamsTimeZoneCairo                     CreateGoogleCalendarEventTaskParamsTimeZone = "Cairo"
-	CreateGoogleCalendarEventTaskParamsTimeZoneCanberra                  CreateGoogleCalendarEventTaskParamsTimeZone = "Canberra"
-	CreateGoogleCalendarEventTaskParamsTimeZoneCapeVerdeIs               CreateGoogleCalendarEventTaskParamsTimeZone = "Cape Verde Is."
-	CreateGoogleCalendarEventTaskParamsTimeZoneCaracas                   CreateGoogleCalendarEventTaskParamsTimeZone = "Caracas"
-	CreateGoogleCalendarEventTaskParamsTimeZoneCasablanca                CreateGoogleCalendarEventTaskParamsTimeZone = "Casablanca"
-	CreateGoogleCalendarEventTaskParamsTimeZoneCentralAmerica            CreateGoogleCalendarEventTaskParamsTimeZone = "Central America"
-	CreateGoogleCalendarEventTaskParamsTimeZoneCentralTimeUSCanada       CreateGoogleCalendarEventTaskParamsTimeZone = "Central Time (US & Canada)"
-	CreateGoogleCalendarEventTaskParamsTimeZoneChathamIs                 CreateGoogleCalendarEventTaskParamsTimeZone = "Chatham Is."
-	CreateGoogleCalendarEventTaskParamsTimeZoneChennai                   CreateGoogleCalendarEventTaskParamsTimeZone = "Chennai"
-	CreateGoogleCalendarEventTaskParamsTimeZoneChihuahua                 CreateGoogleCalendarEventTaskParamsTimeZone = "Chihuahua"
-	CreateGoogleCalendarEventTaskParamsTimeZoneChongqing                 CreateGoogleCalendarEventTaskParamsTimeZone = "Chongqing"
-	CreateGoogleCalendarEventTaskParamsTimeZoneCopenhagen                CreateGoogleCalendarEventTaskParamsTimeZone = "Copenhagen"
-	CreateGoogleCalendarEventTaskParamsTimeZoneDarwin                    CreateGoogleCalendarEventTaskParamsTimeZone = "Darwin"
-	CreateGoogleCalendarEventTaskParamsTimeZoneDhaka                     CreateGoogleCalendarEventTaskParamsTimeZone = "Dhaka"
-	CreateGoogleCalendarEventTaskParamsTimeZoneDublin                    CreateGoogleCalendarEventTaskParamsTimeZone = "Dublin"
-	CreateGoogleCalendarEventTaskParamsTimeZoneEasternTimeUSCanada       CreateGoogleCalendarEventTaskParamsTimeZone = "Eastern Time (US & Canada)"
-	CreateGoogleCalendarEventTaskParamsTimeZoneEdinburgh                 CreateGoogleCalendarEventTaskParamsTimeZone = "Edinburgh"
-	CreateGoogleCalendarEventTaskParamsTimeZoneEkaterinburg              CreateGoogleCalendarEventTaskParamsTimeZone = "Ekaterinburg"
-	CreateGoogleCalendarEventTaskParamsTimeZoneFiji                      CreateGoogleCalendarEventTaskParamsTimeZone = "Fiji"
-	CreateGoogleCalendarEventTaskParamsTimeZoneGeorgetown                CreateGoogleCalendarEventTaskParamsTimeZone = "Georgetown"
-	CreateGoogleCalendarEventTaskParamsTimeZoneGreenland                 CreateGoogleCalendarEventTaskParamsTimeZone = "Greenland"
-	CreateGoogleCalendarEventTaskParamsTimeZoneGuadalajara               CreateGoogleCalendarEventTaskParamsTimeZone = "Guadalajara"
-	CreateGoogleCalendarEventTaskParamsTimeZoneGuam                      CreateGoogleCalendarEventTaskParamsTimeZone = "Guam"
-	CreateGoogleCalendarEventTaskParamsTimeZoneHanoi                     CreateGoogleCalendarEventTaskParamsTimeZone = "Hanoi"
-	CreateGoogleCalendarEventTaskParamsTimeZoneHarare                    CreateGoogleCalendarEventTaskParamsTimeZone = "Harare"
-	CreateGoogleCalendarEventTaskParamsTimeZoneHawaii                    CreateGoogleCalendarEventTaskParamsTimeZone = "Hawaii"
-	CreateGoogleCalendarEventTaskParamsTimeZoneHelsinki                  CreateGoogleCalendarEventTaskParamsTimeZone = "Helsinki"
-	CreateGoogleCalendarEventTaskParamsTimeZoneHobart                    CreateGoogleCalendarEventTaskParamsTimeZone = "Hobart"
-	CreateGoogleCalendarEventTaskParamsTimeZoneHongKong                  CreateGoogleCalendarEventTaskParamsTimeZone = "Hong Kong"
-	CreateGoogleCalendarEventTaskParamsTimeZoneIndianaEast               CreateGoogleCalendarEventTaskParamsTimeZone = "Indiana (East)"
-	CreateGoogleCalendarEventTaskParamsTimeZoneInternationalDateLineWest CreateGoogleCalendarEventTaskParamsTimeZone = "International Date Line West"
-	CreateGoogleCalendarEventTaskParamsTimeZoneIrkutsk                   CreateGoogleCalendarEventTaskParamsTimeZone = "Irkutsk"
-	CreateGoogleCalendarEventTaskParamsTimeZoneIslamabad                 CreateGoogleCalendarEventTaskParamsTimeZone = "Islamabad"
-	CreateGoogleCalendarEventTaskParamsTimeZoneIstanbul                  CreateGoogleCalendarEventTaskParamsTimeZone = "Istanbul"
-	CreateGoogleCalendarEventTaskParamsTimeZoneJakarta                   CreateGoogleCalendarEventTaskParamsTimeZone = "Jakarta"
-	CreateGoogleCalendarEventTaskParamsTimeZoneJerusalem                 CreateGoogleCalendarEventTaskParamsTimeZone = "Jerusalem"
-	CreateGoogleCalendarEventTaskParamsTimeZoneKabul                     CreateGoogleCalendarEventTaskParamsTimeZone = "Kabul"
-	CreateGoogleCalendarEventTaskParamsTimeZoneKaliningrad               CreateGoogleCalendarEventTaskParamsTimeZone = "Kaliningrad"
-	CreateGoogleCalendarEventTaskParamsTimeZoneKamchatka                 CreateGoogleCalendarEventTaskParamsTimeZone = "Kamchatka"
-	CreateGoogleCalendarEventTaskParamsTimeZoneKarachi                   CreateGoogleCalendarEventTaskParamsTimeZone = "Karachi"
-	CreateGoogleCalendarEventTaskParamsTimeZoneKathmandu                 CreateGoogleCalendarEventTaskParamsTimeZone = "Kathmandu"
-	CreateGoogleCalendarEventTaskParamsTimeZoneKolkata                   CreateGoogleCalendarEventTaskParamsTimeZone = "Kolkata"
-	CreateGoogleCalendarEventTaskParamsTimeZoneKrasnoyarsk               CreateGoogleCalendarEventTaskParamsTimeZone = "Krasnoyarsk"
-	CreateGoogleCalendarEventTaskParamsTimeZoneKualaLumpur               CreateGoogleCalendarEventTaskParamsTimeZone = "Kuala Lumpur"
-	CreateGoogleCalendarEventTaskParamsTimeZoneKuwait                    CreateGoogleCalendarEventTaskParamsTimeZone = "Kuwait"
-	CreateGoogleCalendarEventTaskParamsTimeZoneKyiv                      CreateGoogleCalendarEventTaskParamsTimeZone = "Kyiv"
-	CreateGoogleCalendarEventTaskParamsTimeZoneLaPaz                     CreateGoogleCalendarEventTaskParamsTimeZone = "La Paz"
-	CreateGoogleCalendarEventTaskParamsTimeZoneLima                      CreateGoogleCalendarEventTaskParamsTimeZone = "Lima"
-	CreateGoogleCalendarEventTaskParamsTimeZoneLisbon                    CreateGoogleCalendarEventTaskParamsTimeZone = "Lisbon"
-	CreateGoogleCalendarEventTaskParamsTimeZoneLjubljana                 CreateGoogleCalendarEventTaskParamsTimeZone = "Ljubljana"
-	CreateGoogleCalendarEventTaskParamsTimeZoneLondon                    CreateGoogleCalendarEventTaskParamsTimeZone = "London"
-	CreateGoogleCalendarEventTaskParamsTimeZoneMadrid                    CreateGoogleCalendarEventTaskParamsTimeZone = "Madrid"
-	CreateGoogleCalendarEventTaskParamsTimeZoneMagadan                   CreateGoogleCalendarEventTaskParamsTimeZone = "Magadan"
-	CreateGoogleCalendarEventTaskParamsTimeZoneMarshallIs                CreateGoogleCalendarEventTaskParamsTimeZone = "Marshall Is."
-	CreateGoogleCalendarEventTaskParamsTimeZoneMazatlan                  CreateGoogleCalendarEventTaskParamsTimeZone = "Mazatlan"
-	CreateGoogleCalendarEventTaskParamsTimeZoneMelbourne                 CreateGoogleCalendarEventTaskParamsTimeZone = "Melbourne"
-	CreateGoogleCalendarEventTaskParamsTimeZoneMexicoCity                CreateGoogleCalendarEventTaskParamsTimeZone = "Mexico City"
-	CreateGoogleCalendarEventTaskParamsTimeZoneMidAtlantic               CreateGoogleCalendarEventTaskParamsTimeZone = "Mid-Atlantic"
-	CreateGoogleCalendarEventTaskParamsTimeZoneMidwayIsland              CreateGoogleCalendarEventTaskParamsTimeZone = "Midway Island"
-	CreateGoogleCalendarEventTaskParamsTimeZoneMinsk                     CreateGoogleCalendarEventTaskParamsTimeZone = "Minsk"
-	CreateGoogleCalendarEventTaskParamsTimeZoneMonrovia                  CreateGoogleCalendarEventTaskParamsTimeZone = "Monrovia"
-	CreateGoogleCalendarEventTaskParamsTimeZoneMonterrey                 CreateGoogleCalendarEventTaskParamsTimeZone = "Monterrey"
-	CreateGoogleCalendarEventTaskParamsTimeZoneMontevideo                CreateGoogleCalendarEventTaskParamsTimeZone = "Montevideo"
-	CreateGoogleCalendarEventTaskParamsTimeZoneMoscow                    CreateGoogleCalendarEventTaskParamsTimeZone = "Moscow"
-	CreateGoogleCalendarEventTaskParamsTimeZoneMountainTimeUSCanada      CreateGoogleCalendarEventTaskParamsTimeZone = "Mountain Time (US & Canada)"
-	CreateGoogleCalendarEventTaskParamsTimeZoneMumbai                    CreateGoogleCalendarEventTaskParamsTimeZone = "Mumbai"
-	CreateGoogleCalendarEventTaskParamsTimeZoneMuscat                    CreateGoogleCalendarEventTaskParamsTimeZone = "Muscat"
-	CreateGoogleCalendarEventTaskParamsTimeZoneNairobi                   CreateGoogleCalendarEventTaskParamsTimeZone = "Nairobi"
-	CreateGoogleCalendarEventTaskParamsTimeZoneNewCaledonia              CreateGoogleCalendarEventTaskParamsTimeZone = "New Caledonia"
-	CreateGoogleCalendarEventTaskParamsTimeZoneNewDelhi                  CreateGoogleCalendarEventTaskParamsTimeZone = "New Delhi"
-	CreateGoogleCalendarEventTaskParamsTimeZoneNewfoundland              CreateGoogleCalendarEventTaskParamsTimeZone = "Newfoundland"
-	CreateGoogleCalendarEventTaskParamsTimeZoneNovosibirsk               CreateGoogleCalendarEventTaskParamsTimeZone = "Novosibirsk"
-	CreateGoogleCalendarEventTaskParamsTimeZoneNukualofa                 CreateGoogleCalendarEventTaskParamsTimeZone = "Nuku'alofa"
-	CreateGoogleCalendarEventTaskParamsTimeZoneOsaka                     CreateGoogleCalendarEventTaskParamsTimeZone = "Osaka"
-	CreateGoogleCalendarEventTaskParamsTimeZonePacificTimeUSCanada       CreateGoogleCalendarEventTaskParamsTimeZone = "Pacific Time (US & Canada)"
-	CreateGoogleCalendarEventTaskParamsTimeZoneParis                     CreateGoogleCalendarEventTaskParamsTimeZone = "Paris"
-	CreateGoogleCalendarEventTaskParamsTimeZonePerth                     CreateGoogleCalendarEventTaskParamsTimeZone = "Perth"
-	CreateGoogleCalendarEventTaskParamsTimeZonePortMoresby               CreateGoogleCalendarEventTaskParamsTimeZone = "Port Moresby"
-	CreateGoogleCalendarEventTaskParamsTimeZonePrague                    CreateGoogleCalendarEventTaskParamsTimeZone = "Prague"
-	CreateGoogleCalendarEventTaskParamsTimeZonePretoria                  CreateGoogleCalendarEventTaskParamsTimeZone = "Pretoria"
-	CreateGoogleCalendarEventTaskParamsTimeZonePuertoRico                CreateGoogleCalendarEventTaskParamsTimeZone = "Puerto Rico"
-	CreateGoogleCalendarEventTaskParamsTimeZoneQuito                     CreateGoogleCalendarEventTaskParamsTimeZone = "Quito"
-	CreateGoogleCalendarEventTaskParamsTimeZoneRangoon                   CreateGoogleCalendarEventTaskParamsTimeZone = "Rangoon"
-	CreateGoogleCalendarEventTaskParamsTimeZoneRiga                      CreateGoogleCalendarEventTaskParamsTimeZone = "Riga"
-	CreateGoogleCalendarEventTaskParamsTimeZoneRiyadh                    CreateGoogleCalendarEventTaskParamsTimeZone = "Riyadh"
-	CreateGoogleCalendarEventTaskParamsTimeZoneRome                      CreateGoogleCalendarEventTaskParamsTimeZone = "Rome"
-	CreateGoogleCalendarEventTaskParamsTimeZoneSamara                    CreateGoogleCalendarEventTaskParamsTimeZone = "Samara"
-	CreateGoogleCalendarEventTaskParamsTimeZoneSamoa                     CreateGoogleCalendarEventTaskParamsTimeZone = "Samoa"
-	CreateGoogleCalendarEventTaskParamsTimeZoneSantiago                  CreateGoogleCalendarEventTaskParamsTimeZone = "Santiago"
-	CreateGoogleCalendarEventTaskParamsTimeZoneSapporo                   CreateGoogleCalendarEventTaskParamsTimeZone = "Sapporo"
-	CreateGoogleCalendarEventTaskParamsTimeZoneSarajevo                  CreateGoogleCalendarEventTaskParamsTimeZone = "Sarajevo"
-	CreateGoogleCalendarEventTaskParamsTimeZoneSaskatchewan              CreateGoogleCalendarEventTaskParamsTimeZone = "Saskatchewan"
-	CreateGoogleCalendarEventTaskParamsTimeZoneSeoul                     CreateGoogleCalendarEventTaskParamsTimeZone = "Seoul"
-	CreateGoogleCalendarEventTaskParamsTimeZoneSingapore                 CreateGoogleCalendarEventTaskParamsTimeZone = "Singapore"
-	CreateGoogleCalendarEventTaskParamsTimeZoneSkopje                    CreateGoogleCalendarEventTaskParamsTimeZone = "Skopje"
-	CreateGoogleCalendarEventTaskParamsTimeZoneSofia                     CreateGoogleCalendarEventTaskParamsTimeZone = "Sofia"
-	CreateGoogleCalendarEventTaskParamsTimeZoneSolomonIs                 CreateGoogleCalendarEventTaskParamsTimeZone = "Solomon Is."
-	CreateGoogleCalendarEventTaskParamsTimeZoneSrednekolymsk             CreateGoogleCalendarEventTaskParamsTimeZone = "Srednekolymsk"
-	CreateGoogleCalendarEventTaskParamsTimeZoneSriJayawardenepura        CreateGoogleCalendarEventTaskParamsTimeZone = "Sri Jayawardenepura"
-	CreateGoogleCalendarEventTaskParamsTimeZoneStPetersburg              CreateGoogleCalendarEventTaskParamsTimeZone = "St. Petersburg"
-	CreateGoogleCalendarEventTaskParamsTimeZoneStockholm                 CreateGoogleCalendarEventTaskParamsTimeZone = "Stockholm"
-	CreateGoogleCalendarEventTaskParamsTimeZoneSydney                    CreateGoogleCalendarEventTaskParamsTimeZone = "Sydney"
-	CreateGoogleCalendarEventTaskParamsTimeZoneTaipei                    CreateGoogleCalendarEventTaskParamsTimeZone = "Taipei"
-	CreateGoogleCalendarEventTaskParamsTimeZoneTallinn                   CreateGoogleCalendarEventTaskParamsTimeZone = "Tallinn"
-	CreateGoogleCalendarEventTaskParamsTimeZoneTashkent                  CreateGoogleCalendarEventTaskParamsTimeZone = "Tashkent"
-	CreateGoogleCalendarEventTaskParamsTimeZoneTbilisi                   CreateGoogleCalendarEventTaskParamsTimeZone = "Tbilisi"
-	CreateGoogleCalendarEventTaskParamsTimeZoneTehran                    CreateGoogleCalendarEventTaskParamsTimeZone = "Tehran"
-	CreateGoogleCalendarEventTaskParamsTimeZoneTijuana                   CreateGoogleCalendarEventTaskParamsTimeZone = "Tijuana"
-	CreateGoogleCalendarEventTaskParamsTimeZoneTokelauIs                 CreateGoogleCalendarEventTaskParamsTimeZone = "Tokelau Is."
-	CreateGoogleCalendarEventTaskParamsTimeZoneTokyo                     CreateGoogleCalendarEventTaskParamsTimeZone = "Tokyo"
-	CreateGoogleCalendarEventTaskParamsTimeZoneUTC                       CreateGoogleCalendarEventTaskParamsTimeZone = "UTC"
-	CreateGoogleCalendarEventTaskParamsTimeZoneUlaanbaatar               CreateGoogleCalendarEventTaskParamsTimeZone = "Ulaanbaatar"
-	CreateGoogleCalendarEventTaskParamsTimeZoneUrumqi                    CreateGoogleCalendarEventTaskParamsTimeZone = "Urumqi"
-	CreateGoogleCalendarEventTaskParamsTimeZoneVienna                    CreateGoogleCalendarEventTaskParamsTimeZone = "Vienna"
-	CreateGoogleCalendarEventTaskParamsTimeZoneVilnius                   CreateGoogleCalendarEventTaskParamsTimeZone = "Vilnius"
-	CreateGoogleCalendarEventTaskParamsTimeZoneVladivostok               CreateGoogleCalendarEventTaskParamsTimeZone = "Vladivostok"
-	CreateGoogleCalendarEventTaskParamsTimeZoneVolgograd                 CreateGoogleCalendarEventTaskParamsTimeZone = "Volgograd"
-	CreateGoogleCalendarEventTaskParamsTimeZoneWarsaw                    CreateGoogleCalendarEventTaskParamsTimeZone = "Warsaw"
-	CreateGoogleCalendarEventTaskParamsTimeZoneWellington                CreateGoogleCalendarEventTaskParamsTimeZone = "Wellington"
-	CreateGoogleCalendarEventTaskParamsTimeZoneWestCentralAfrica         CreateGoogleCalendarEventTaskParamsTimeZone = "West Central Africa"
-	CreateGoogleCalendarEventTaskParamsTimeZoneYakutsk                   CreateGoogleCalendarEventTaskParamsTimeZone = "Yakutsk"
-	CreateGoogleCalendarEventTaskParamsTimeZoneYerevan                   CreateGoogleCalendarEventTaskParamsTimeZone = "Yerevan"
-	CreateGoogleCalendarEventTaskParamsTimeZoneZagreb                    CreateGoogleCalendarEventTaskParamsTimeZone = "Zagreb"
-	CreateGoogleCalendarEventTaskParamsTimeZoneZurich                    CreateGoogleCalendarEventTaskParamsTimeZone = "Zurich"
-)
-
 // Defines values for CreateGoogleDocsPageTaskParamsTaskType.
 const (
 	CreateGoogleDocsPageTaskParamsTaskTypeCreateGoogleDocsPage CreateGoogleDocsPageTaskParamsTaskType = "create_google_docs_page"
@@ -879,161 +724,6 @@ const (
 // Defines values for CreateOutlookEventTaskParamsTaskType.
 const (
 	CreateOutlookEvent CreateOutlookEventTaskParamsTaskType = "create_outlook_event"
-)
-
-// Defines values for CreateOutlookEventTaskParamsTimeZone.
-const (
-	CreateOutlookEventTaskParamsTimeZoneAbuDhabi                  CreateOutlookEventTaskParamsTimeZone = "Abu Dhabi"
-	CreateOutlookEventTaskParamsTimeZoneAdelaide                  CreateOutlookEventTaskParamsTimeZone = "Adelaide"
-	CreateOutlookEventTaskParamsTimeZoneAlaska                    CreateOutlookEventTaskParamsTimeZone = "Alaska"
-	CreateOutlookEventTaskParamsTimeZoneAlmaty                    CreateOutlookEventTaskParamsTimeZone = "Almaty"
-	CreateOutlookEventTaskParamsTimeZoneAmericanSamoa             CreateOutlookEventTaskParamsTimeZone = "American Samoa"
-	CreateOutlookEventTaskParamsTimeZoneAmsterdam                 CreateOutlookEventTaskParamsTimeZone = "Amsterdam"
-	CreateOutlookEventTaskParamsTimeZoneArizona                   CreateOutlookEventTaskParamsTimeZone = "Arizona"
-	CreateOutlookEventTaskParamsTimeZoneAstana                    CreateOutlookEventTaskParamsTimeZone = "Astana"
-	CreateOutlookEventTaskParamsTimeZoneAthens                    CreateOutlookEventTaskParamsTimeZone = "Athens"
-	CreateOutlookEventTaskParamsTimeZoneAtlanticTimeCanada        CreateOutlookEventTaskParamsTimeZone = "Atlantic Time (Canada)"
-	CreateOutlookEventTaskParamsTimeZoneAuckland                  CreateOutlookEventTaskParamsTimeZone = "Auckland"
-	CreateOutlookEventTaskParamsTimeZoneAzores                    CreateOutlookEventTaskParamsTimeZone = "Azores"
-	CreateOutlookEventTaskParamsTimeZoneBaghdad                   CreateOutlookEventTaskParamsTimeZone = "Baghdad"
-	CreateOutlookEventTaskParamsTimeZoneBaku                      CreateOutlookEventTaskParamsTimeZone = "Baku"
-	CreateOutlookEventTaskParamsTimeZoneBangkok                   CreateOutlookEventTaskParamsTimeZone = "Bangkok"
-	CreateOutlookEventTaskParamsTimeZoneBeijing                   CreateOutlookEventTaskParamsTimeZone = "Beijing"
-	CreateOutlookEventTaskParamsTimeZoneBelgrade                  CreateOutlookEventTaskParamsTimeZone = "Belgrade"
-	CreateOutlookEventTaskParamsTimeZoneBerlin                    CreateOutlookEventTaskParamsTimeZone = "Berlin"
-	CreateOutlookEventTaskParamsTimeZoneBern                      CreateOutlookEventTaskParamsTimeZone = "Bern"
-	CreateOutlookEventTaskParamsTimeZoneBogota                    CreateOutlookEventTaskParamsTimeZone = "Bogota"
-	CreateOutlookEventTaskParamsTimeZoneBrasilia                  CreateOutlookEventTaskParamsTimeZone = "Brasilia"
-	CreateOutlookEventTaskParamsTimeZoneBratislava                CreateOutlookEventTaskParamsTimeZone = "Bratislava"
-	CreateOutlookEventTaskParamsTimeZoneBrisbane                  CreateOutlookEventTaskParamsTimeZone = "Brisbane"
-	CreateOutlookEventTaskParamsTimeZoneBrussels                  CreateOutlookEventTaskParamsTimeZone = "Brussels"
-	CreateOutlookEventTaskParamsTimeZoneBucharest                 CreateOutlookEventTaskParamsTimeZone = "Bucharest"
-	CreateOutlookEventTaskParamsTimeZoneBudapest                  CreateOutlookEventTaskParamsTimeZone = "Budapest"
-	CreateOutlookEventTaskParamsTimeZoneBuenosAires               CreateOutlookEventTaskParamsTimeZone = "Buenos Aires"
-	CreateOutlookEventTaskParamsTimeZoneCairo                     CreateOutlookEventTaskParamsTimeZone = "Cairo"
-	CreateOutlookEventTaskParamsTimeZoneCanberra                  CreateOutlookEventTaskParamsTimeZone = "Canberra"
-	CreateOutlookEventTaskParamsTimeZoneCapeVerdeIs               CreateOutlookEventTaskParamsTimeZone = "Cape Verde Is."
-	CreateOutlookEventTaskParamsTimeZoneCaracas                   CreateOutlookEventTaskParamsTimeZone = "Caracas"
-	CreateOutlookEventTaskParamsTimeZoneCasablanca                CreateOutlookEventTaskParamsTimeZone = "Casablanca"
-	CreateOutlookEventTaskParamsTimeZoneCentralAmerica            CreateOutlookEventTaskParamsTimeZone = "Central America"
-	CreateOutlookEventTaskParamsTimeZoneCentralTimeUSCanada       CreateOutlookEventTaskParamsTimeZone = "Central Time (US & Canada)"
-	CreateOutlookEventTaskParamsTimeZoneChathamIs                 CreateOutlookEventTaskParamsTimeZone = "Chatham Is."
-	CreateOutlookEventTaskParamsTimeZoneChennai                   CreateOutlookEventTaskParamsTimeZone = "Chennai"
-	CreateOutlookEventTaskParamsTimeZoneChihuahua                 CreateOutlookEventTaskParamsTimeZone = "Chihuahua"
-	CreateOutlookEventTaskParamsTimeZoneChongqing                 CreateOutlookEventTaskParamsTimeZone = "Chongqing"
-	CreateOutlookEventTaskParamsTimeZoneCopenhagen                CreateOutlookEventTaskParamsTimeZone = "Copenhagen"
-	CreateOutlookEventTaskParamsTimeZoneDarwin                    CreateOutlookEventTaskParamsTimeZone = "Darwin"
-	CreateOutlookEventTaskParamsTimeZoneDhaka                     CreateOutlookEventTaskParamsTimeZone = "Dhaka"
-	CreateOutlookEventTaskParamsTimeZoneDublin                    CreateOutlookEventTaskParamsTimeZone = "Dublin"
-	CreateOutlookEventTaskParamsTimeZoneEasternTimeUSCanada       CreateOutlookEventTaskParamsTimeZone = "Eastern Time (US & Canada)"
-	CreateOutlookEventTaskParamsTimeZoneEdinburgh                 CreateOutlookEventTaskParamsTimeZone = "Edinburgh"
-	CreateOutlookEventTaskParamsTimeZoneEkaterinburg              CreateOutlookEventTaskParamsTimeZone = "Ekaterinburg"
-	CreateOutlookEventTaskParamsTimeZoneFiji                      CreateOutlookEventTaskParamsTimeZone = "Fiji"
-	CreateOutlookEventTaskParamsTimeZoneGeorgetown                CreateOutlookEventTaskParamsTimeZone = "Georgetown"
-	CreateOutlookEventTaskParamsTimeZoneGreenland                 CreateOutlookEventTaskParamsTimeZone = "Greenland"
-	CreateOutlookEventTaskParamsTimeZoneGuadalajara               CreateOutlookEventTaskParamsTimeZone = "Guadalajara"
-	CreateOutlookEventTaskParamsTimeZoneGuam                      CreateOutlookEventTaskParamsTimeZone = "Guam"
-	CreateOutlookEventTaskParamsTimeZoneHanoi                     CreateOutlookEventTaskParamsTimeZone = "Hanoi"
-	CreateOutlookEventTaskParamsTimeZoneHarare                    CreateOutlookEventTaskParamsTimeZone = "Harare"
-	CreateOutlookEventTaskParamsTimeZoneHawaii                    CreateOutlookEventTaskParamsTimeZone = "Hawaii"
-	CreateOutlookEventTaskParamsTimeZoneHelsinki                  CreateOutlookEventTaskParamsTimeZone = "Helsinki"
-	CreateOutlookEventTaskParamsTimeZoneHobart                    CreateOutlookEventTaskParamsTimeZone = "Hobart"
-	CreateOutlookEventTaskParamsTimeZoneHongKong                  CreateOutlookEventTaskParamsTimeZone = "Hong Kong"
-	CreateOutlookEventTaskParamsTimeZoneIndianaEast               CreateOutlookEventTaskParamsTimeZone = "Indiana (East)"
-	CreateOutlookEventTaskParamsTimeZoneInternationalDateLineWest CreateOutlookEventTaskParamsTimeZone = "International Date Line West"
-	CreateOutlookEventTaskParamsTimeZoneIrkutsk                   CreateOutlookEventTaskParamsTimeZone = "Irkutsk"
-	CreateOutlookEventTaskParamsTimeZoneIslamabad                 CreateOutlookEventTaskParamsTimeZone = "Islamabad"
-	CreateOutlookEventTaskParamsTimeZoneIstanbul                  CreateOutlookEventTaskParamsTimeZone = "Istanbul"
-	CreateOutlookEventTaskParamsTimeZoneJakarta                   CreateOutlookEventTaskParamsTimeZone = "Jakarta"
-	CreateOutlookEventTaskParamsTimeZoneJerusalem                 CreateOutlookEventTaskParamsTimeZone = "Jerusalem"
-	CreateOutlookEventTaskParamsTimeZoneKabul                     CreateOutlookEventTaskParamsTimeZone = "Kabul"
-	CreateOutlookEventTaskParamsTimeZoneKaliningrad               CreateOutlookEventTaskParamsTimeZone = "Kaliningrad"
-	CreateOutlookEventTaskParamsTimeZoneKamchatka                 CreateOutlookEventTaskParamsTimeZone = "Kamchatka"
-	CreateOutlookEventTaskParamsTimeZoneKarachi                   CreateOutlookEventTaskParamsTimeZone = "Karachi"
-	CreateOutlookEventTaskParamsTimeZoneKathmandu                 CreateOutlookEventTaskParamsTimeZone = "Kathmandu"
-	CreateOutlookEventTaskParamsTimeZoneKolkata                   CreateOutlookEventTaskParamsTimeZone = "Kolkata"
-	CreateOutlookEventTaskParamsTimeZoneKrasnoyarsk               CreateOutlookEventTaskParamsTimeZone = "Krasnoyarsk"
-	CreateOutlookEventTaskParamsTimeZoneKualaLumpur               CreateOutlookEventTaskParamsTimeZone = "Kuala Lumpur"
-	CreateOutlookEventTaskParamsTimeZoneKuwait                    CreateOutlookEventTaskParamsTimeZone = "Kuwait"
-	CreateOutlookEventTaskParamsTimeZoneKyiv                      CreateOutlookEventTaskParamsTimeZone = "Kyiv"
-	CreateOutlookEventTaskParamsTimeZoneLaPaz                     CreateOutlookEventTaskParamsTimeZone = "La Paz"
-	CreateOutlookEventTaskParamsTimeZoneLima                      CreateOutlookEventTaskParamsTimeZone = "Lima"
-	CreateOutlookEventTaskParamsTimeZoneLisbon                    CreateOutlookEventTaskParamsTimeZone = "Lisbon"
-	CreateOutlookEventTaskParamsTimeZoneLjubljana                 CreateOutlookEventTaskParamsTimeZone = "Ljubljana"
-	CreateOutlookEventTaskParamsTimeZoneLondon                    CreateOutlookEventTaskParamsTimeZone = "London"
-	CreateOutlookEventTaskParamsTimeZoneMadrid                    CreateOutlookEventTaskParamsTimeZone = "Madrid"
-	CreateOutlookEventTaskParamsTimeZoneMagadan                   CreateOutlookEventTaskParamsTimeZone = "Magadan"
-	CreateOutlookEventTaskParamsTimeZoneMarshallIs                CreateOutlookEventTaskParamsTimeZone = "Marshall Is."
-	CreateOutlookEventTaskParamsTimeZoneMazatlan                  CreateOutlookEventTaskParamsTimeZone = "Mazatlan"
-	CreateOutlookEventTaskParamsTimeZoneMelbourne                 CreateOutlookEventTaskParamsTimeZone = "Melbourne"
-	CreateOutlookEventTaskParamsTimeZoneMexicoCity                CreateOutlookEventTaskParamsTimeZone = "Mexico City"
-	CreateOutlookEventTaskParamsTimeZoneMidAtlantic               CreateOutlookEventTaskParamsTimeZone = "Mid-Atlantic"
-	CreateOutlookEventTaskParamsTimeZoneMidwayIsland              CreateOutlookEventTaskParamsTimeZone = "Midway Island"
-	CreateOutlookEventTaskParamsTimeZoneMinsk                     CreateOutlookEventTaskParamsTimeZone = "Minsk"
-	CreateOutlookEventTaskParamsTimeZoneMonrovia                  CreateOutlookEventTaskParamsTimeZone = "Monrovia"
-	CreateOutlookEventTaskParamsTimeZoneMonterrey                 CreateOutlookEventTaskParamsTimeZone = "Monterrey"
-	CreateOutlookEventTaskParamsTimeZoneMontevideo                CreateOutlookEventTaskParamsTimeZone = "Montevideo"
-	CreateOutlookEventTaskParamsTimeZoneMoscow                    CreateOutlookEventTaskParamsTimeZone = "Moscow"
-	CreateOutlookEventTaskParamsTimeZoneMountainTimeUSCanada      CreateOutlookEventTaskParamsTimeZone = "Mountain Time (US & Canada)"
-	CreateOutlookEventTaskParamsTimeZoneMumbai                    CreateOutlookEventTaskParamsTimeZone = "Mumbai"
-	CreateOutlookEventTaskParamsTimeZoneMuscat                    CreateOutlookEventTaskParamsTimeZone = "Muscat"
-	CreateOutlookEventTaskParamsTimeZoneNairobi                   CreateOutlookEventTaskParamsTimeZone = "Nairobi"
-	CreateOutlookEventTaskParamsTimeZoneNewCaledonia              CreateOutlookEventTaskParamsTimeZone = "New Caledonia"
-	CreateOutlookEventTaskParamsTimeZoneNewDelhi                  CreateOutlookEventTaskParamsTimeZone = "New Delhi"
-	CreateOutlookEventTaskParamsTimeZoneNewfoundland              CreateOutlookEventTaskParamsTimeZone = "Newfoundland"
-	CreateOutlookEventTaskParamsTimeZoneNovosibirsk               CreateOutlookEventTaskParamsTimeZone = "Novosibirsk"
-	CreateOutlookEventTaskParamsTimeZoneNukualofa                 CreateOutlookEventTaskParamsTimeZone = "Nuku'alofa"
-	CreateOutlookEventTaskParamsTimeZoneOsaka                     CreateOutlookEventTaskParamsTimeZone = "Osaka"
-	CreateOutlookEventTaskParamsTimeZonePacificTimeUSCanada       CreateOutlookEventTaskParamsTimeZone = "Pacific Time (US & Canada)"
-	CreateOutlookEventTaskParamsTimeZoneParis                     CreateOutlookEventTaskParamsTimeZone = "Paris"
-	CreateOutlookEventTaskParamsTimeZonePerth                     CreateOutlookEventTaskParamsTimeZone = "Perth"
-	CreateOutlookEventTaskParamsTimeZonePortMoresby               CreateOutlookEventTaskParamsTimeZone = "Port Moresby"
-	CreateOutlookEventTaskParamsTimeZonePrague                    CreateOutlookEventTaskParamsTimeZone = "Prague"
-	CreateOutlookEventTaskParamsTimeZonePretoria                  CreateOutlookEventTaskParamsTimeZone = "Pretoria"
-	CreateOutlookEventTaskParamsTimeZonePuertoRico                CreateOutlookEventTaskParamsTimeZone = "Puerto Rico"
-	CreateOutlookEventTaskParamsTimeZoneQuito                     CreateOutlookEventTaskParamsTimeZone = "Quito"
-	CreateOutlookEventTaskParamsTimeZoneRangoon                   CreateOutlookEventTaskParamsTimeZone = "Rangoon"
-	CreateOutlookEventTaskParamsTimeZoneRiga                      CreateOutlookEventTaskParamsTimeZone = "Riga"
-	CreateOutlookEventTaskParamsTimeZoneRiyadh                    CreateOutlookEventTaskParamsTimeZone = "Riyadh"
-	CreateOutlookEventTaskParamsTimeZoneRome                      CreateOutlookEventTaskParamsTimeZone = "Rome"
-	CreateOutlookEventTaskParamsTimeZoneSamara                    CreateOutlookEventTaskParamsTimeZone = "Samara"
-	CreateOutlookEventTaskParamsTimeZoneSamoa                     CreateOutlookEventTaskParamsTimeZone = "Samoa"
-	CreateOutlookEventTaskParamsTimeZoneSantiago                  CreateOutlookEventTaskParamsTimeZone = "Santiago"
-	CreateOutlookEventTaskParamsTimeZoneSapporo                   CreateOutlookEventTaskParamsTimeZone = "Sapporo"
-	CreateOutlookEventTaskParamsTimeZoneSarajevo                  CreateOutlookEventTaskParamsTimeZone = "Sarajevo"
-	CreateOutlookEventTaskParamsTimeZoneSaskatchewan              CreateOutlookEventTaskParamsTimeZone = "Saskatchewan"
-	CreateOutlookEventTaskParamsTimeZoneSeoul                     CreateOutlookEventTaskParamsTimeZone = "Seoul"
-	CreateOutlookEventTaskParamsTimeZoneSingapore                 CreateOutlookEventTaskParamsTimeZone = "Singapore"
-	CreateOutlookEventTaskParamsTimeZoneSkopje                    CreateOutlookEventTaskParamsTimeZone = "Skopje"
-	CreateOutlookEventTaskParamsTimeZoneSofia                     CreateOutlookEventTaskParamsTimeZone = "Sofia"
-	CreateOutlookEventTaskParamsTimeZoneSolomonIs                 CreateOutlookEventTaskParamsTimeZone = "Solomon Is."
-	CreateOutlookEventTaskParamsTimeZoneSrednekolymsk             CreateOutlookEventTaskParamsTimeZone = "Srednekolymsk"
-	CreateOutlookEventTaskParamsTimeZoneSriJayawardenepura        CreateOutlookEventTaskParamsTimeZone = "Sri Jayawardenepura"
-	CreateOutlookEventTaskParamsTimeZoneStPetersburg              CreateOutlookEventTaskParamsTimeZone = "St. Petersburg"
-	CreateOutlookEventTaskParamsTimeZoneStockholm                 CreateOutlookEventTaskParamsTimeZone = "Stockholm"
-	CreateOutlookEventTaskParamsTimeZoneSydney                    CreateOutlookEventTaskParamsTimeZone = "Sydney"
-	CreateOutlookEventTaskParamsTimeZoneTaipei                    CreateOutlookEventTaskParamsTimeZone = "Taipei"
-	CreateOutlookEventTaskParamsTimeZoneTallinn                   CreateOutlookEventTaskParamsTimeZone = "Tallinn"
-	CreateOutlookEventTaskParamsTimeZoneTashkent                  CreateOutlookEventTaskParamsTimeZone = "Tashkent"
-	CreateOutlookEventTaskParamsTimeZoneTbilisi                   CreateOutlookEventTaskParamsTimeZone = "Tbilisi"
-	CreateOutlookEventTaskParamsTimeZoneTehran                    CreateOutlookEventTaskParamsTimeZone = "Tehran"
-	CreateOutlookEventTaskParamsTimeZoneTijuana                   CreateOutlookEventTaskParamsTimeZone = "Tijuana"
-	CreateOutlookEventTaskParamsTimeZoneTokelauIs                 CreateOutlookEventTaskParamsTimeZone = "Tokelau Is."
-	CreateOutlookEventTaskParamsTimeZoneTokyo                     CreateOutlookEventTaskParamsTimeZone = "Tokyo"
-	CreateOutlookEventTaskParamsTimeZoneUTC                       CreateOutlookEventTaskParamsTimeZone = "UTC"
-	CreateOutlookEventTaskParamsTimeZoneUlaanbaatar               CreateOutlookEventTaskParamsTimeZone = "Ulaanbaatar"
-	CreateOutlookEventTaskParamsTimeZoneUrumqi                    CreateOutlookEventTaskParamsTimeZone = "Urumqi"
-	CreateOutlookEventTaskParamsTimeZoneVienna                    CreateOutlookEventTaskParamsTimeZone = "Vienna"
-	CreateOutlookEventTaskParamsTimeZoneVilnius                   CreateOutlookEventTaskParamsTimeZone = "Vilnius"
-	CreateOutlookEventTaskParamsTimeZoneVladivostok               CreateOutlookEventTaskParamsTimeZone = "Vladivostok"
-	CreateOutlookEventTaskParamsTimeZoneVolgograd                 CreateOutlookEventTaskParamsTimeZone = "Volgograd"
-	CreateOutlookEventTaskParamsTimeZoneWarsaw                    CreateOutlookEventTaskParamsTimeZone = "Warsaw"
-	CreateOutlookEventTaskParamsTimeZoneWellington                CreateOutlookEventTaskParamsTimeZone = "Wellington"
-	CreateOutlookEventTaskParamsTimeZoneWestCentralAfrica         CreateOutlookEventTaskParamsTimeZone = "West Central Africa"
-	CreateOutlookEventTaskParamsTimeZoneYakutsk                   CreateOutlookEventTaskParamsTimeZone = "Yakutsk"
-	CreateOutlookEventTaskParamsTimeZoneYerevan                   CreateOutlookEventTaskParamsTimeZone = "Yerevan"
-	CreateOutlookEventTaskParamsTimeZoneZagreb                    CreateOutlookEventTaskParamsTimeZone = "Zagreb"
-	CreateOutlookEventTaskParamsTimeZoneZurich                    CreateOutlookEventTaskParamsTimeZone = "Zurich"
 )
 
 // Defines values for CreatePagerdutyStatusUpdateTaskParamsTaskType.
@@ -1288,7 +978,9 @@ const (
 	FormFieldKindMarkAsInTriage              FormFieldKind = "mark_as_in_triage"
 	FormFieldKindMarkAsTest                  FormFieldKind = "mark_as_test"
 	FormFieldKindMitigatedAt                 FormFieldKind = "mitigated_at"
+	FormFieldKindMitigationMessage           FormFieldKind = "mitigation_message"
 	FormFieldKindNotifyEmails                FormFieldKind = "notify_emails"
+	FormFieldKindResolutionMessage           FormFieldKind = "resolution_message"
 	FormFieldKindResolvedAt                  FormFieldKind = "resolved_at"
 	FormFieldKindServices                    FormFieldKind = "services"
 	FormFieldKindSeverity                    FormFieldKind = "severity"
@@ -1323,6 +1015,37 @@ const (
 // Defines values for FormFieldOptionResponseDataType.
 const (
 	FormFieldOptionResponseDataTypeFormFieldOptions FormFieldOptionResponseDataType = "form_field_options"
+)
+
+// Defines values for FormFieldPlacementConditionComparison.
+const (
+	FormFieldPlacementConditionComparisonEqual FormFieldPlacementConditionComparison = "equal"
+)
+
+// Defines values for FormFieldPlacementConditionConditioned.
+const (
+	FormFieldPlacementConditionConditionedPlacement FormFieldPlacementConditionConditioned = "placement"
+	FormFieldPlacementConditionConditionedRequired  FormFieldPlacementConditionConditioned = "required"
+)
+
+// Defines values for FormFieldPlacementConditionListDataType.
+const (
+	FormFieldPlacementConditionListDataTypeFormFieldPlacementConditions FormFieldPlacementConditionListDataType = "form_field_placement_conditions"
+)
+
+// Defines values for FormFieldPlacementConditionResponseDataType.
+const (
+	FormFieldPlacementConditionResponseDataTypeFormFieldPlacementConditions FormFieldPlacementConditionResponseDataType = "form_field_placement_conditions"
+)
+
+// Defines values for FormFieldPlacementListDataType.
+const (
+	FormFieldPlacementListDataTypeFormFieldPlacements FormFieldPlacementListDataType = "form_field_placements"
+)
+
+// Defines values for FormFieldPlacementResponseDataType.
+const (
+	FormFieldPlacementResponseDataTypeFormFieldPlacements FormFieldPlacementResponseDataType = "form_field_placements"
 )
 
 // Defines values for FormFieldPositionForm.
@@ -1361,6 +1084,31 @@ const (
 	FormFieldResponseDataTypeFormFields FormFieldResponseDataType = "form_fields"
 )
 
+// Defines values for FormSetConditionComparison.
+const (
+	FormSetConditionComparisonEqual FormSetConditionComparison = "equal"
+)
+
+// Defines values for FormSetConditionListDataType.
+const (
+	FormSetConditionListDataTypeFormSetConditions FormSetConditionListDataType = "form_set_conditions"
+)
+
+// Defines values for FormSetConditionResponseDataType.
+const (
+	FormSetConditionResponseDataTypeFormSetConditions FormSetConditionResponseDataType = "form_set_conditions"
+)
+
+// Defines values for FormSetListDataType.
+const (
+	FormSetListDataTypeFormSets FormSetListDataType = "form_sets"
+)
+
+// Defines values for FormSetResponseDataType.
+const (
+	FormSetResponseDataTypeFormSets FormSetResponseDataType = "form_sets"
+)
+
 // Defines values for FunctionalityListDataType.
 const (
 	FunctionalityListDataTypeFunctionalities FunctionalityListDataType = "functionalities"
@@ -1396,6 +1144,7 @@ const (
 	DELETE  HttpClientTaskParamsMethod = "DELETE"
 	GET     HttpClientTaskParamsMethod = "GET"
 	OPTIONS HttpClientTaskParamsMethod = "OPTIONS"
+	PATCH   HttpClientTaskParamsMethod = "PATCH"
 	POST    HttpClientTaskParamsMethod = "POST"
 	PUT     HttpClientTaskParamsMethod = "PUT"
 )
@@ -1961,7 +1710,7 @@ const (
 
 // Defines values for NewAlertDataType.
 const (
-	Alerts NewAlertDataType = "alerts"
+	NewAlertDataTypeAlerts NewAlertDataType = "alerts"
 )
 
 // Defines values for NewAuthorizationDataAttributesAuthorizableType.
@@ -2110,7 +1859,9 @@ const (
 	NewFormFieldDataAttributesKindMarkAsInTriage              NewFormFieldDataAttributesKind = "mark_as_in_triage"
 	NewFormFieldDataAttributesKindMarkAsTest                  NewFormFieldDataAttributesKind = "mark_as_test"
 	NewFormFieldDataAttributesKindMitigatedAt                 NewFormFieldDataAttributesKind = "mitigated_at"
+	NewFormFieldDataAttributesKindMitigationMessage           NewFormFieldDataAttributesKind = "mitigation_message"
 	NewFormFieldDataAttributesKindNotifyEmails                NewFormFieldDataAttributesKind = "notify_emails"
+	NewFormFieldDataAttributesKindResolutionMessage           NewFormFieldDataAttributesKind = "resolution_message"
 	NewFormFieldDataAttributesKindResolvedAt                  NewFormFieldDataAttributesKind = "resolved_at"
 	NewFormFieldDataAttributesKindServices                    NewFormFieldDataAttributesKind = "services"
 	NewFormFieldDataAttributesKindSeverity                    NewFormFieldDataAttributesKind = "severity"
@@ -2142,6 +1893,27 @@ const (
 	NewFormFieldOptionDataTypeFormFieldOptions NewFormFieldOptionDataType = "form_field_options"
 )
 
+// Defines values for NewFormFieldPlacementDataType.
+const (
+	NewFormFieldPlacementDataTypeFormFieldPlacements NewFormFieldPlacementDataType = "form_field_placements"
+)
+
+// Defines values for NewFormFieldPlacementConditionDataAttributesComparison.
+const (
+	NewFormFieldPlacementConditionDataAttributesComparisonEqual NewFormFieldPlacementConditionDataAttributesComparison = "equal"
+)
+
+// Defines values for NewFormFieldPlacementConditionDataAttributesConditioned.
+const (
+	NewFormFieldPlacementConditionDataAttributesConditionedPlacement NewFormFieldPlacementConditionDataAttributesConditioned = "placement"
+	NewFormFieldPlacementConditionDataAttributesConditionedRequired  NewFormFieldPlacementConditionDataAttributesConditioned = "required"
+)
+
+// Defines values for NewFormFieldPlacementConditionDataType.
+const (
+	NewFormFieldPlacementConditionDataTypeFormFieldPlacementConditions NewFormFieldPlacementConditionDataType = "form_field_placement_conditions"
+)
+
 // Defines values for NewFormFieldPositionDataAttributesForm.
 const (
 	NewFormFieldPositionDataAttributesFormIncidentPostMortem               NewFormFieldPositionDataAttributesForm = "incident_post_mortem"
@@ -2166,6 +1938,21 @@ const (
 // Defines values for NewFormFieldPositionDataType.
 const (
 	NewFormFieldPositionDataTypeFormFieldPositions NewFormFieldPositionDataType = "form_field_positions"
+)
+
+// Defines values for NewFormSetDataType.
+const (
+	NewFormSetDataTypeFormSets NewFormSetDataType = "form_sets"
+)
+
+// Defines values for NewFormSetConditionDataAttributesComparison.
+const (
+	NewFormSetConditionDataAttributesComparisonEqual NewFormSetConditionDataAttributesComparison = "equal"
+)
+
+// Defines values for NewFormSetConditionDataType.
+const (
+	NewFormSetConditionDataTypeFormSetConditions NewFormSetConditionDataType = "form_set_conditions"
 )
 
 // Defines values for NewFunctionalityDataAttributesShowUptimeLastDays.
@@ -2382,6 +2169,17 @@ const (
 // Defines values for NewIncidentTypeDataType.
 const (
 	NewIncidentTypeDataTypeIncidentTypes NewIncidentTypeDataType = "incident_types"
+)
+
+// Defines values for NewOnCallShadowDataAttributesShadowableType.
+const (
+	NewOnCallShadowDataAttributesShadowableTypeSchedule NewOnCallShadowDataAttributesShadowableType = "Schedule"
+	NewOnCallShadowDataAttributesShadowableTypeUser     NewOnCallShadowDataAttributesShadowableType = "User"
+)
+
+// Defines values for NewOnCallShadowDataType.
+const (
+	NewOnCallShadowDataTypeOnCallShadows NewOnCallShadowDataType = "on_call_shadows"
 )
 
 // Defines values for NewOverrideShiftDataType.
@@ -2652,161 +2450,6 @@ const (
 	NewScheduleRotationDataAttributesScheduleRotationableTypeScheduleWeeklyRotation   NewScheduleRotationDataAttributesScheduleRotationableType = "ScheduleWeeklyRotation"
 )
 
-// Defines values for NewScheduleRotationDataAttributesTimeZone.
-const (
-	NewScheduleRotationDataAttributesTimeZoneAbuDhabi                  NewScheduleRotationDataAttributesTimeZone = "Abu Dhabi"
-	NewScheduleRotationDataAttributesTimeZoneAdelaide                  NewScheduleRotationDataAttributesTimeZone = "Adelaide"
-	NewScheduleRotationDataAttributesTimeZoneAlaska                    NewScheduleRotationDataAttributesTimeZone = "Alaska"
-	NewScheduleRotationDataAttributesTimeZoneAlmaty                    NewScheduleRotationDataAttributesTimeZone = "Almaty"
-	NewScheduleRotationDataAttributesTimeZoneAmericanSamoa             NewScheduleRotationDataAttributesTimeZone = "American Samoa"
-	NewScheduleRotationDataAttributesTimeZoneAmsterdam                 NewScheduleRotationDataAttributesTimeZone = "Amsterdam"
-	NewScheduleRotationDataAttributesTimeZoneArizona                   NewScheduleRotationDataAttributesTimeZone = "Arizona"
-	NewScheduleRotationDataAttributesTimeZoneAstana                    NewScheduleRotationDataAttributesTimeZone = "Astana"
-	NewScheduleRotationDataAttributesTimeZoneAthens                    NewScheduleRotationDataAttributesTimeZone = "Athens"
-	NewScheduleRotationDataAttributesTimeZoneAtlanticTimeCanada        NewScheduleRotationDataAttributesTimeZone = "Atlantic Time (Canada)"
-	NewScheduleRotationDataAttributesTimeZoneAuckland                  NewScheduleRotationDataAttributesTimeZone = "Auckland"
-	NewScheduleRotationDataAttributesTimeZoneAzores                    NewScheduleRotationDataAttributesTimeZone = "Azores"
-	NewScheduleRotationDataAttributesTimeZoneBaghdad                   NewScheduleRotationDataAttributesTimeZone = "Baghdad"
-	NewScheduleRotationDataAttributesTimeZoneBaku                      NewScheduleRotationDataAttributesTimeZone = "Baku"
-	NewScheduleRotationDataAttributesTimeZoneBangkok                   NewScheduleRotationDataAttributesTimeZone = "Bangkok"
-	NewScheduleRotationDataAttributesTimeZoneBeijing                   NewScheduleRotationDataAttributesTimeZone = "Beijing"
-	NewScheduleRotationDataAttributesTimeZoneBelgrade                  NewScheduleRotationDataAttributesTimeZone = "Belgrade"
-	NewScheduleRotationDataAttributesTimeZoneBerlin                    NewScheduleRotationDataAttributesTimeZone = "Berlin"
-	NewScheduleRotationDataAttributesTimeZoneBern                      NewScheduleRotationDataAttributesTimeZone = "Bern"
-	NewScheduleRotationDataAttributesTimeZoneBogota                    NewScheduleRotationDataAttributesTimeZone = "Bogota"
-	NewScheduleRotationDataAttributesTimeZoneBrasilia                  NewScheduleRotationDataAttributesTimeZone = "Brasilia"
-	NewScheduleRotationDataAttributesTimeZoneBratislava                NewScheduleRotationDataAttributesTimeZone = "Bratislava"
-	NewScheduleRotationDataAttributesTimeZoneBrisbane                  NewScheduleRotationDataAttributesTimeZone = "Brisbane"
-	NewScheduleRotationDataAttributesTimeZoneBrussels                  NewScheduleRotationDataAttributesTimeZone = "Brussels"
-	NewScheduleRotationDataAttributesTimeZoneBucharest                 NewScheduleRotationDataAttributesTimeZone = "Bucharest"
-	NewScheduleRotationDataAttributesTimeZoneBudapest                  NewScheduleRotationDataAttributesTimeZone = "Budapest"
-	NewScheduleRotationDataAttributesTimeZoneBuenosAires               NewScheduleRotationDataAttributesTimeZone = "Buenos Aires"
-	NewScheduleRotationDataAttributesTimeZoneCairo                     NewScheduleRotationDataAttributesTimeZone = "Cairo"
-	NewScheduleRotationDataAttributesTimeZoneCanberra                  NewScheduleRotationDataAttributesTimeZone = "Canberra"
-	NewScheduleRotationDataAttributesTimeZoneCapeVerdeIs               NewScheduleRotationDataAttributesTimeZone = "Cape Verde Is."
-	NewScheduleRotationDataAttributesTimeZoneCaracas                   NewScheduleRotationDataAttributesTimeZone = "Caracas"
-	NewScheduleRotationDataAttributesTimeZoneCasablanca                NewScheduleRotationDataAttributesTimeZone = "Casablanca"
-	NewScheduleRotationDataAttributesTimeZoneCentralAmerica            NewScheduleRotationDataAttributesTimeZone = "Central America"
-	NewScheduleRotationDataAttributesTimeZoneCentralTimeUSCanada       NewScheduleRotationDataAttributesTimeZone = "Central Time (US & Canada)"
-	NewScheduleRotationDataAttributesTimeZoneChathamIs                 NewScheduleRotationDataAttributesTimeZone = "Chatham Is."
-	NewScheduleRotationDataAttributesTimeZoneChennai                   NewScheduleRotationDataAttributesTimeZone = "Chennai"
-	NewScheduleRotationDataAttributesTimeZoneChihuahua                 NewScheduleRotationDataAttributesTimeZone = "Chihuahua"
-	NewScheduleRotationDataAttributesTimeZoneChongqing                 NewScheduleRotationDataAttributesTimeZone = "Chongqing"
-	NewScheduleRotationDataAttributesTimeZoneCopenhagen                NewScheduleRotationDataAttributesTimeZone = "Copenhagen"
-	NewScheduleRotationDataAttributesTimeZoneDarwin                    NewScheduleRotationDataAttributesTimeZone = "Darwin"
-	NewScheduleRotationDataAttributesTimeZoneDhaka                     NewScheduleRotationDataAttributesTimeZone = "Dhaka"
-	NewScheduleRotationDataAttributesTimeZoneDublin                    NewScheduleRotationDataAttributesTimeZone = "Dublin"
-	NewScheduleRotationDataAttributesTimeZoneEasternTimeUSCanada       NewScheduleRotationDataAttributesTimeZone = "Eastern Time (US & Canada)"
-	NewScheduleRotationDataAttributesTimeZoneEdinburgh                 NewScheduleRotationDataAttributesTimeZone = "Edinburgh"
-	NewScheduleRotationDataAttributesTimeZoneEkaterinburg              NewScheduleRotationDataAttributesTimeZone = "Ekaterinburg"
-	NewScheduleRotationDataAttributesTimeZoneFiji                      NewScheduleRotationDataAttributesTimeZone = "Fiji"
-	NewScheduleRotationDataAttributesTimeZoneGeorgetown                NewScheduleRotationDataAttributesTimeZone = "Georgetown"
-	NewScheduleRotationDataAttributesTimeZoneGreenland                 NewScheduleRotationDataAttributesTimeZone = "Greenland"
-	NewScheduleRotationDataAttributesTimeZoneGuadalajara               NewScheduleRotationDataAttributesTimeZone = "Guadalajara"
-	NewScheduleRotationDataAttributesTimeZoneGuam                      NewScheduleRotationDataAttributesTimeZone = "Guam"
-	NewScheduleRotationDataAttributesTimeZoneHanoi                     NewScheduleRotationDataAttributesTimeZone = "Hanoi"
-	NewScheduleRotationDataAttributesTimeZoneHarare                    NewScheduleRotationDataAttributesTimeZone = "Harare"
-	NewScheduleRotationDataAttributesTimeZoneHawaii                    NewScheduleRotationDataAttributesTimeZone = "Hawaii"
-	NewScheduleRotationDataAttributesTimeZoneHelsinki                  NewScheduleRotationDataAttributesTimeZone = "Helsinki"
-	NewScheduleRotationDataAttributesTimeZoneHobart                    NewScheduleRotationDataAttributesTimeZone = "Hobart"
-	NewScheduleRotationDataAttributesTimeZoneHongKong                  NewScheduleRotationDataAttributesTimeZone = "Hong Kong"
-	NewScheduleRotationDataAttributesTimeZoneIndianaEast               NewScheduleRotationDataAttributesTimeZone = "Indiana (East)"
-	NewScheduleRotationDataAttributesTimeZoneInternationalDateLineWest NewScheduleRotationDataAttributesTimeZone = "International Date Line West"
-	NewScheduleRotationDataAttributesTimeZoneIrkutsk                   NewScheduleRotationDataAttributesTimeZone = "Irkutsk"
-	NewScheduleRotationDataAttributesTimeZoneIslamabad                 NewScheduleRotationDataAttributesTimeZone = "Islamabad"
-	NewScheduleRotationDataAttributesTimeZoneIstanbul                  NewScheduleRotationDataAttributesTimeZone = "Istanbul"
-	NewScheduleRotationDataAttributesTimeZoneJakarta                   NewScheduleRotationDataAttributesTimeZone = "Jakarta"
-	NewScheduleRotationDataAttributesTimeZoneJerusalem                 NewScheduleRotationDataAttributesTimeZone = "Jerusalem"
-	NewScheduleRotationDataAttributesTimeZoneKabul                     NewScheduleRotationDataAttributesTimeZone = "Kabul"
-	NewScheduleRotationDataAttributesTimeZoneKaliningrad               NewScheduleRotationDataAttributesTimeZone = "Kaliningrad"
-	NewScheduleRotationDataAttributesTimeZoneKamchatka                 NewScheduleRotationDataAttributesTimeZone = "Kamchatka"
-	NewScheduleRotationDataAttributesTimeZoneKarachi                   NewScheduleRotationDataAttributesTimeZone = "Karachi"
-	NewScheduleRotationDataAttributesTimeZoneKathmandu                 NewScheduleRotationDataAttributesTimeZone = "Kathmandu"
-	NewScheduleRotationDataAttributesTimeZoneKolkata                   NewScheduleRotationDataAttributesTimeZone = "Kolkata"
-	NewScheduleRotationDataAttributesTimeZoneKrasnoyarsk               NewScheduleRotationDataAttributesTimeZone = "Krasnoyarsk"
-	NewScheduleRotationDataAttributesTimeZoneKualaLumpur               NewScheduleRotationDataAttributesTimeZone = "Kuala Lumpur"
-	NewScheduleRotationDataAttributesTimeZoneKuwait                    NewScheduleRotationDataAttributesTimeZone = "Kuwait"
-	NewScheduleRotationDataAttributesTimeZoneKyiv                      NewScheduleRotationDataAttributesTimeZone = "Kyiv"
-	NewScheduleRotationDataAttributesTimeZoneLaPaz                     NewScheduleRotationDataAttributesTimeZone = "La Paz"
-	NewScheduleRotationDataAttributesTimeZoneLima                      NewScheduleRotationDataAttributesTimeZone = "Lima"
-	NewScheduleRotationDataAttributesTimeZoneLisbon                    NewScheduleRotationDataAttributesTimeZone = "Lisbon"
-	NewScheduleRotationDataAttributesTimeZoneLjubljana                 NewScheduleRotationDataAttributesTimeZone = "Ljubljana"
-	NewScheduleRotationDataAttributesTimeZoneLondon                    NewScheduleRotationDataAttributesTimeZone = "London"
-	NewScheduleRotationDataAttributesTimeZoneMadrid                    NewScheduleRotationDataAttributesTimeZone = "Madrid"
-	NewScheduleRotationDataAttributesTimeZoneMagadan                   NewScheduleRotationDataAttributesTimeZone = "Magadan"
-	NewScheduleRotationDataAttributesTimeZoneMarshallIs                NewScheduleRotationDataAttributesTimeZone = "Marshall Is."
-	NewScheduleRotationDataAttributesTimeZoneMazatlan                  NewScheduleRotationDataAttributesTimeZone = "Mazatlan"
-	NewScheduleRotationDataAttributesTimeZoneMelbourne                 NewScheduleRotationDataAttributesTimeZone = "Melbourne"
-	NewScheduleRotationDataAttributesTimeZoneMexicoCity                NewScheduleRotationDataAttributesTimeZone = "Mexico City"
-	NewScheduleRotationDataAttributesTimeZoneMidAtlantic               NewScheduleRotationDataAttributesTimeZone = "Mid-Atlantic"
-	NewScheduleRotationDataAttributesTimeZoneMidwayIsland              NewScheduleRotationDataAttributesTimeZone = "Midway Island"
-	NewScheduleRotationDataAttributesTimeZoneMinsk                     NewScheduleRotationDataAttributesTimeZone = "Minsk"
-	NewScheduleRotationDataAttributesTimeZoneMonrovia                  NewScheduleRotationDataAttributesTimeZone = "Monrovia"
-	NewScheduleRotationDataAttributesTimeZoneMonterrey                 NewScheduleRotationDataAttributesTimeZone = "Monterrey"
-	NewScheduleRotationDataAttributesTimeZoneMontevideo                NewScheduleRotationDataAttributesTimeZone = "Montevideo"
-	NewScheduleRotationDataAttributesTimeZoneMoscow                    NewScheduleRotationDataAttributesTimeZone = "Moscow"
-	NewScheduleRotationDataAttributesTimeZoneMountainTimeUSCanada      NewScheduleRotationDataAttributesTimeZone = "Mountain Time (US & Canada)"
-	NewScheduleRotationDataAttributesTimeZoneMumbai                    NewScheduleRotationDataAttributesTimeZone = "Mumbai"
-	NewScheduleRotationDataAttributesTimeZoneMuscat                    NewScheduleRotationDataAttributesTimeZone = "Muscat"
-	NewScheduleRotationDataAttributesTimeZoneNairobi                   NewScheduleRotationDataAttributesTimeZone = "Nairobi"
-	NewScheduleRotationDataAttributesTimeZoneNewCaledonia              NewScheduleRotationDataAttributesTimeZone = "New Caledonia"
-	NewScheduleRotationDataAttributesTimeZoneNewDelhi                  NewScheduleRotationDataAttributesTimeZone = "New Delhi"
-	NewScheduleRotationDataAttributesTimeZoneNewfoundland              NewScheduleRotationDataAttributesTimeZone = "Newfoundland"
-	NewScheduleRotationDataAttributesTimeZoneNovosibirsk               NewScheduleRotationDataAttributesTimeZone = "Novosibirsk"
-	NewScheduleRotationDataAttributesTimeZoneNukualofa                 NewScheduleRotationDataAttributesTimeZone = "Nuku'alofa"
-	NewScheduleRotationDataAttributesTimeZoneOsaka                     NewScheduleRotationDataAttributesTimeZone = "Osaka"
-	NewScheduleRotationDataAttributesTimeZonePacificTimeUSCanada       NewScheduleRotationDataAttributesTimeZone = "Pacific Time (US & Canada)"
-	NewScheduleRotationDataAttributesTimeZoneParis                     NewScheduleRotationDataAttributesTimeZone = "Paris"
-	NewScheduleRotationDataAttributesTimeZonePerth                     NewScheduleRotationDataAttributesTimeZone = "Perth"
-	NewScheduleRotationDataAttributesTimeZonePortMoresby               NewScheduleRotationDataAttributesTimeZone = "Port Moresby"
-	NewScheduleRotationDataAttributesTimeZonePrague                    NewScheduleRotationDataAttributesTimeZone = "Prague"
-	NewScheduleRotationDataAttributesTimeZonePretoria                  NewScheduleRotationDataAttributesTimeZone = "Pretoria"
-	NewScheduleRotationDataAttributesTimeZonePuertoRico                NewScheduleRotationDataAttributesTimeZone = "Puerto Rico"
-	NewScheduleRotationDataAttributesTimeZoneQuito                     NewScheduleRotationDataAttributesTimeZone = "Quito"
-	NewScheduleRotationDataAttributesTimeZoneRangoon                   NewScheduleRotationDataAttributesTimeZone = "Rangoon"
-	NewScheduleRotationDataAttributesTimeZoneRiga                      NewScheduleRotationDataAttributesTimeZone = "Riga"
-	NewScheduleRotationDataAttributesTimeZoneRiyadh                    NewScheduleRotationDataAttributesTimeZone = "Riyadh"
-	NewScheduleRotationDataAttributesTimeZoneRome                      NewScheduleRotationDataAttributesTimeZone = "Rome"
-	NewScheduleRotationDataAttributesTimeZoneSamara                    NewScheduleRotationDataAttributesTimeZone = "Samara"
-	NewScheduleRotationDataAttributesTimeZoneSamoa                     NewScheduleRotationDataAttributesTimeZone = "Samoa"
-	NewScheduleRotationDataAttributesTimeZoneSantiago                  NewScheduleRotationDataAttributesTimeZone = "Santiago"
-	NewScheduleRotationDataAttributesTimeZoneSapporo                   NewScheduleRotationDataAttributesTimeZone = "Sapporo"
-	NewScheduleRotationDataAttributesTimeZoneSarajevo                  NewScheduleRotationDataAttributesTimeZone = "Sarajevo"
-	NewScheduleRotationDataAttributesTimeZoneSaskatchewan              NewScheduleRotationDataAttributesTimeZone = "Saskatchewan"
-	NewScheduleRotationDataAttributesTimeZoneSeoul                     NewScheduleRotationDataAttributesTimeZone = "Seoul"
-	NewScheduleRotationDataAttributesTimeZoneSingapore                 NewScheduleRotationDataAttributesTimeZone = "Singapore"
-	NewScheduleRotationDataAttributesTimeZoneSkopje                    NewScheduleRotationDataAttributesTimeZone = "Skopje"
-	NewScheduleRotationDataAttributesTimeZoneSofia                     NewScheduleRotationDataAttributesTimeZone = "Sofia"
-	NewScheduleRotationDataAttributesTimeZoneSolomonIs                 NewScheduleRotationDataAttributesTimeZone = "Solomon Is."
-	NewScheduleRotationDataAttributesTimeZoneSrednekolymsk             NewScheduleRotationDataAttributesTimeZone = "Srednekolymsk"
-	NewScheduleRotationDataAttributesTimeZoneSriJayawardenepura        NewScheduleRotationDataAttributesTimeZone = "Sri Jayawardenepura"
-	NewScheduleRotationDataAttributesTimeZoneStPetersburg              NewScheduleRotationDataAttributesTimeZone = "St. Petersburg"
-	NewScheduleRotationDataAttributesTimeZoneStockholm                 NewScheduleRotationDataAttributesTimeZone = "Stockholm"
-	NewScheduleRotationDataAttributesTimeZoneSydney                    NewScheduleRotationDataAttributesTimeZone = "Sydney"
-	NewScheduleRotationDataAttributesTimeZoneTaipei                    NewScheduleRotationDataAttributesTimeZone = "Taipei"
-	NewScheduleRotationDataAttributesTimeZoneTallinn                   NewScheduleRotationDataAttributesTimeZone = "Tallinn"
-	NewScheduleRotationDataAttributesTimeZoneTashkent                  NewScheduleRotationDataAttributesTimeZone = "Tashkent"
-	NewScheduleRotationDataAttributesTimeZoneTbilisi                   NewScheduleRotationDataAttributesTimeZone = "Tbilisi"
-	NewScheduleRotationDataAttributesTimeZoneTehran                    NewScheduleRotationDataAttributesTimeZone = "Tehran"
-	NewScheduleRotationDataAttributesTimeZoneTijuana                   NewScheduleRotationDataAttributesTimeZone = "Tijuana"
-	NewScheduleRotationDataAttributesTimeZoneTokelauIs                 NewScheduleRotationDataAttributesTimeZone = "Tokelau Is."
-	NewScheduleRotationDataAttributesTimeZoneTokyo                     NewScheduleRotationDataAttributesTimeZone = "Tokyo"
-	NewScheduleRotationDataAttributesTimeZoneUTC                       NewScheduleRotationDataAttributesTimeZone = "UTC"
-	NewScheduleRotationDataAttributesTimeZoneUlaanbaatar               NewScheduleRotationDataAttributesTimeZone = "Ulaanbaatar"
-	NewScheduleRotationDataAttributesTimeZoneUrumqi                    NewScheduleRotationDataAttributesTimeZone = "Urumqi"
-	NewScheduleRotationDataAttributesTimeZoneVienna                    NewScheduleRotationDataAttributesTimeZone = "Vienna"
-	NewScheduleRotationDataAttributesTimeZoneVilnius                   NewScheduleRotationDataAttributesTimeZone = "Vilnius"
-	NewScheduleRotationDataAttributesTimeZoneVladivostok               NewScheduleRotationDataAttributesTimeZone = "Vladivostok"
-	NewScheduleRotationDataAttributesTimeZoneVolgograd                 NewScheduleRotationDataAttributesTimeZone = "Volgograd"
-	NewScheduleRotationDataAttributesTimeZoneWarsaw                    NewScheduleRotationDataAttributesTimeZone = "Warsaw"
-	NewScheduleRotationDataAttributesTimeZoneWellington                NewScheduleRotationDataAttributesTimeZone = "Wellington"
-	NewScheduleRotationDataAttributesTimeZoneWestCentralAfrica         NewScheduleRotationDataAttributesTimeZone = "West Central Africa"
-	NewScheduleRotationDataAttributesTimeZoneYakutsk                   NewScheduleRotationDataAttributesTimeZone = "Yakutsk"
-	NewScheduleRotationDataAttributesTimeZoneYerevan                   NewScheduleRotationDataAttributesTimeZone = "Yerevan"
-	NewScheduleRotationDataAttributesTimeZoneZagreb                    NewScheduleRotationDataAttributesTimeZone = "Zagreb"
-	NewScheduleRotationDataAttributesTimeZoneZurich                    NewScheduleRotationDataAttributesTimeZone = "Zurich"
-)
-
 // Defines values for NewScheduleRotationDataType.
 const (
 	NewScheduleRotationDataTypeScheduleRotations NewScheduleRotationDataType = "schedule_rotations"
@@ -2876,161 +2519,6 @@ const (
 	NewStatusPageDataAttributesShowUptimeLastDaysN360 NewStatusPageDataAttributesShowUptimeLastDays = 360
 	NewStatusPageDataAttributesShowUptimeLastDaysN60  NewStatusPageDataAttributesShowUptimeLastDays = 60
 	NewStatusPageDataAttributesShowUptimeLastDaysN90  NewStatusPageDataAttributesShowUptimeLastDays = 90
-)
-
-// Defines values for NewStatusPageDataAttributesTimeZone.
-const (
-	NewStatusPageDataAttributesTimeZoneAbuDhabi                  NewStatusPageDataAttributesTimeZone = "Abu Dhabi"
-	NewStatusPageDataAttributesTimeZoneAdelaide                  NewStatusPageDataAttributesTimeZone = "Adelaide"
-	NewStatusPageDataAttributesTimeZoneAlaska                    NewStatusPageDataAttributesTimeZone = "Alaska"
-	NewStatusPageDataAttributesTimeZoneAlmaty                    NewStatusPageDataAttributesTimeZone = "Almaty"
-	NewStatusPageDataAttributesTimeZoneAmericanSamoa             NewStatusPageDataAttributesTimeZone = "American Samoa"
-	NewStatusPageDataAttributesTimeZoneAmsterdam                 NewStatusPageDataAttributesTimeZone = "Amsterdam"
-	NewStatusPageDataAttributesTimeZoneArizona                   NewStatusPageDataAttributesTimeZone = "Arizona"
-	NewStatusPageDataAttributesTimeZoneAstana                    NewStatusPageDataAttributesTimeZone = "Astana"
-	NewStatusPageDataAttributesTimeZoneAthens                    NewStatusPageDataAttributesTimeZone = "Athens"
-	NewStatusPageDataAttributesTimeZoneAtlanticTimeCanada        NewStatusPageDataAttributesTimeZone = "Atlantic Time (Canada)"
-	NewStatusPageDataAttributesTimeZoneAuckland                  NewStatusPageDataAttributesTimeZone = "Auckland"
-	NewStatusPageDataAttributesTimeZoneAzores                    NewStatusPageDataAttributesTimeZone = "Azores"
-	NewStatusPageDataAttributesTimeZoneBaghdad                   NewStatusPageDataAttributesTimeZone = "Baghdad"
-	NewStatusPageDataAttributesTimeZoneBaku                      NewStatusPageDataAttributesTimeZone = "Baku"
-	NewStatusPageDataAttributesTimeZoneBangkok                   NewStatusPageDataAttributesTimeZone = "Bangkok"
-	NewStatusPageDataAttributesTimeZoneBeijing                   NewStatusPageDataAttributesTimeZone = "Beijing"
-	NewStatusPageDataAttributesTimeZoneBelgrade                  NewStatusPageDataAttributesTimeZone = "Belgrade"
-	NewStatusPageDataAttributesTimeZoneBerlin                    NewStatusPageDataAttributesTimeZone = "Berlin"
-	NewStatusPageDataAttributesTimeZoneBern                      NewStatusPageDataAttributesTimeZone = "Bern"
-	NewStatusPageDataAttributesTimeZoneBogota                    NewStatusPageDataAttributesTimeZone = "Bogota"
-	NewStatusPageDataAttributesTimeZoneBrasilia                  NewStatusPageDataAttributesTimeZone = "Brasilia"
-	NewStatusPageDataAttributesTimeZoneBratislava                NewStatusPageDataAttributesTimeZone = "Bratislava"
-	NewStatusPageDataAttributesTimeZoneBrisbane                  NewStatusPageDataAttributesTimeZone = "Brisbane"
-	NewStatusPageDataAttributesTimeZoneBrussels                  NewStatusPageDataAttributesTimeZone = "Brussels"
-	NewStatusPageDataAttributesTimeZoneBucharest                 NewStatusPageDataAttributesTimeZone = "Bucharest"
-	NewStatusPageDataAttributesTimeZoneBudapest                  NewStatusPageDataAttributesTimeZone = "Budapest"
-	NewStatusPageDataAttributesTimeZoneBuenosAires               NewStatusPageDataAttributesTimeZone = "Buenos Aires"
-	NewStatusPageDataAttributesTimeZoneCairo                     NewStatusPageDataAttributesTimeZone = "Cairo"
-	NewStatusPageDataAttributesTimeZoneCanberra                  NewStatusPageDataAttributesTimeZone = "Canberra"
-	NewStatusPageDataAttributesTimeZoneCapeVerdeIs               NewStatusPageDataAttributesTimeZone = "Cape Verde Is."
-	NewStatusPageDataAttributesTimeZoneCaracas                   NewStatusPageDataAttributesTimeZone = "Caracas"
-	NewStatusPageDataAttributesTimeZoneCasablanca                NewStatusPageDataAttributesTimeZone = "Casablanca"
-	NewStatusPageDataAttributesTimeZoneCentralAmerica            NewStatusPageDataAttributesTimeZone = "Central America"
-	NewStatusPageDataAttributesTimeZoneCentralTimeUSCanada       NewStatusPageDataAttributesTimeZone = "Central Time (US & Canada)"
-	NewStatusPageDataAttributesTimeZoneChathamIs                 NewStatusPageDataAttributesTimeZone = "Chatham Is."
-	NewStatusPageDataAttributesTimeZoneChennai                   NewStatusPageDataAttributesTimeZone = "Chennai"
-	NewStatusPageDataAttributesTimeZoneChihuahua                 NewStatusPageDataAttributesTimeZone = "Chihuahua"
-	NewStatusPageDataAttributesTimeZoneChongqing                 NewStatusPageDataAttributesTimeZone = "Chongqing"
-	NewStatusPageDataAttributesTimeZoneCopenhagen                NewStatusPageDataAttributesTimeZone = "Copenhagen"
-	NewStatusPageDataAttributesTimeZoneDarwin                    NewStatusPageDataAttributesTimeZone = "Darwin"
-	NewStatusPageDataAttributesTimeZoneDhaka                     NewStatusPageDataAttributesTimeZone = "Dhaka"
-	NewStatusPageDataAttributesTimeZoneDublin                    NewStatusPageDataAttributesTimeZone = "Dublin"
-	NewStatusPageDataAttributesTimeZoneEasternTimeUSCanada       NewStatusPageDataAttributesTimeZone = "Eastern Time (US & Canada)"
-	NewStatusPageDataAttributesTimeZoneEdinburgh                 NewStatusPageDataAttributesTimeZone = "Edinburgh"
-	NewStatusPageDataAttributesTimeZoneEkaterinburg              NewStatusPageDataAttributesTimeZone = "Ekaterinburg"
-	NewStatusPageDataAttributesTimeZoneFiji                      NewStatusPageDataAttributesTimeZone = "Fiji"
-	NewStatusPageDataAttributesTimeZoneGeorgetown                NewStatusPageDataAttributesTimeZone = "Georgetown"
-	NewStatusPageDataAttributesTimeZoneGreenland                 NewStatusPageDataAttributesTimeZone = "Greenland"
-	NewStatusPageDataAttributesTimeZoneGuadalajara               NewStatusPageDataAttributesTimeZone = "Guadalajara"
-	NewStatusPageDataAttributesTimeZoneGuam                      NewStatusPageDataAttributesTimeZone = "Guam"
-	NewStatusPageDataAttributesTimeZoneHanoi                     NewStatusPageDataAttributesTimeZone = "Hanoi"
-	NewStatusPageDataAttributesTimeZoneHarare                    NewStatusPageDataAttributesTimeZone = "Harare"
-	NewStatusPageDataAttributesTimeZoneHawaii                    NewStatusPageDataAttributesTimeZone = "Hawaii"
-	NewStatusPageDataAttributesTimeZoneHelsinki                  NewStatusPageDataAttributesTimeZone = "Helsinki"
-	NewStatusPageDataAttributesTimeZoneHobart                    NewStatusPageDataAttributesTimeZone = "Hobart"
-	NewStatusPageDataAttributesTimeZoneHongKong                  NewStatusPageDataAttributesTimeZone = "Hong Kong"
-	NewStatusPageDataAttributesTimeZoneIndianaEast               NewStatusPageDataAttributesTimeZone = "Indiana (East)"
-	NewStatusPageDataAttributesTimeZoneInternationalDateLineWest NewStatusPageDataAttributesTimeZone = "International Date Line West"
-	NewStatusPageDataAttributesTimeZoneIrkutsk                   NewStatusPageDataAttributesTimeZone = "Irkutsk"
-	NewStatusPageDataAttributesTimeZoneIslamabad                 NewStatusPageDataAttributesTimeZone = "Islamabad"
-	NewStatusPageDataAttributesTimeZoneIstanbul                  NewStatusPageDataAttributesTimeZone = "Istanbul"
-	NewStatusPageDataAttributesTimeZoneJakarta                   NewStatusPageDataAttributesTimeZone = "Jakarta"
-	NewStatusPageDataAttributesTimeZoneJerusalem                 NewStatusPageDataAttributesTimeZone = "Jerusalem"
-	NewStatusPageDataAttributesTimeZoneKabul                     NewStatusPageDataAttributesTimeZone = "Kabul"
-	NewStatusPageDataAttributesTimeZoneKaliningrad               NewStatusPageDataAttributesTimeZone = "Kaliningrad"
-	NewStatusPageDataAttributesTimeZoneKamchatka                 NewStatusPageDataAttributesTimeZone = "Kamchatka"
-	NewStatusPageDataAttributesTimeZoneKarachi                   NewStatusPageDataAttributesTimeZone = "Karachi"
-	NewStatusPageDataAttributesTimeZoneKathmandu                 NewStatusPageDataAttributesTimeZone = "Kathmandu"
-	NewStatusPageDataAttributesTimeZoneKolkata                   NewStatusPageDataAttributesTimeZone = "Kolkata"
-	NewStatusPageDataAttributesTimeZoneKrasnoyarsk               NewStatusPageDataAttributesTimeZone = "Krasnoyarsk"
-	NewStatusPageDataAttributesTimeZoneKualaLumpur               NewStatusPageDataAttributesTimeZone = "Kuala Lumpur"
-	NewStatusPageDataAttributesTimeZoneKuwait                    NewStatusPageDataAttributesTimeZone = "Kuwait"
-	NewStatusPageDataAttributesTimeZoneKyiv                      NewStatusPageDataAttributesTimeZone = "Kyiv"
-	NewStatusPageDataAttributesTimeZoneLaPaz                     NewStatusPageDataAttributesTimeZone = "La Paz"
-	NewStatusPageDataAttributesTimeZoneLima                      NewStatusPageDataAttributesTimeZone = "Lima"
-	NewStatusPageDataAttributesTimeZoneLisbon                    NewStatusPageDataAttributesTimeZone = "Lisbon"
-	NewStatusPageDataAttributesTimeZoneLjubljana                 NewStatusPageDataAttributesTimeZone = "Ljubljana"
-	NewStatusPageDataAttributesTimeZoneLondon                    NewStatusPageDataAttributesTimeZone = "London"
-	NewStatusPageDataAttributesTimeZoneMadrid                    NewStatusPageDataAttributesTimeZone = "Madrid"
-	NewStatusPageDataAttributesTimeZoneMagadan                   NewStatusPageDataAttributesTimeZone = "Magadan"
-	NewStatusPageDataAttributesTimeZoneMarshallIs                NewStatusPageDataAttributesTimeZone = "Marshall Is."
-	NewStatusPageDataAttributesTimeZoneMazatlan                  NewStatusPageDataAttributesTimeZone = "Mazatlan"
-	NewStatusPageDataAttributesTimeZoneMelbourne                 NewStatusPageDataAttributesTimeZone = "Melbourne"
-	NewStatusPageDataAttributesTimeZoneMexicoCity                NewStatusPageDataAttributesTimeZone = "Mexico City"
-	NewStatusPageDataAttributesTimeZoneMidAtlantic               NewStatusPageDataAttributesTimeZone = "Mid-Atlantic"
-	NewStatusPageDataAttributesTimeZoneMidwayIsland              NewStatusPageDataAttributesTimeZone = "Midway Island"
-	NewStatusPageDataAttributesTimeZoneMinsk                     NewStatusPageDataAttributesTimeZone = "Minsk"
-	NewStatusPageDataAttributesTimeZoneMonrovia                  NewStatusPageDataAttributesTimeZone = "Monrovia"
-	NewStatusPageDataAttributesTimeZoneMonterrey                 NewStatusPageDataAttributesTimeZone = "Monterrey"
-	NewStatusPageDataAttributesTimeZoneMontevideo                NewStatusPageDataAttributesTimeZone = "Montevideo"
-	NewStatusPageDataAttributesTimeZoneMoscow                    NewStatusPageDataAttributesTimeZone = "Moscow"
-	NewStatusPageDataAttributesTimeZoneMountainTimeUSCanada      NewStatusPageDataAttributesTimeZone = "Mountain Time (US & Canada)"
-	NewStatusPageDataAttributesTimeZoneMumbai                    NewStatusPageDataAttributesTimeZone = "Mumbai"
-	NewStatusPageDataAttributesTimeZoneMuscat                    NewStatusPageDataAttributesTimeZone = "Muscat"
-	NewStatusPageDataAttributesTimeZoneNairobi                   NewStatusPageDataAttributesTimeZone = "Nairobi"
-	NewStatusPageDataAttributesTimeZoneNewCaledonia              NewStatusPageDataAttributesTimeZone = "New Caledonia"
-	NewStatusPageDataAttributesTimeZoneNewDelhi                  NewStatusPageDataAttributesTimeZone = "New Delhi"
-	NewStatusPageDataAttributesTimeZoneNewfoundland              NewStatusPageDataAttributesTimeZone = "Newfoundland"
-	NewStatusPageDataAttributesTimeZoneNovosibirsk               NewStatusPageDataAttributesTimeZone = "Novosibirsk"
-	NewStatusPageDataAttributesTimeZoneNukualofa                 NewStatusPageDataAttributesTimeZone = "Nuku'alofa"
-	NewStatusPageDataAttributesTimeZoneOsaka                     NewStatusPageDataAttributesTimeZone = "Osaka"
-	NewStatusPageDataAttributesTimeZonePacificTimeUSCanada       NewStatusPageDataAttributesTimeZone = "Pacific Time (US & Canada)"
-	NewStatusPageDataAttributesTimeZoneParis                     NewStatusPageDataAttributesTimeZone = "Paris"
-	NewStatusPageDataAttributesTimeZonePerth                     NewStatusPageDataAttributesTimeZone = "Perth"
-	NewStatusPageDataAttributesTimeZonePortMoresby               NewStatusPageDataAttributesTimeZone = "Port Moresby"
-	NewStatusPageDataAttributesTimeZonePrague                    NewStatusPageDataAttributesTimeZone = "Prague"
-	NewStatusPageDataAttributesTimeZonePretoria                  NewStatusPageDataAttributesTimeZone = "Pretoria"
-	NewStatusPageDataAttributesTimeZonePuertoRico                NewStatusPageDataAttributesTimeZone = "Puerto Rico"
-	NewStatusPageDataAttributesTimeZoneQuito                     NewStatusPageDataAttributesTimeZone = "Quito"
-	NewStatusPageDataAttributesTimeZoneRangoon                   NewStatusPageDataAttributesTimeZone = "Rangoon"
-	NewStatusPageDataAttributesTimeZoneRiga                      NewStatusPageDataAttributesTimeZone = "Riga"
-	NewStatusPageDataAttributesTimeZoneRiyadh                    NewStatusPageDataAttributesTimeZone = "Riyadh"
-	NewStatusPageDataAttributesTimeZoneRome                      NewStatusPageDataAttributesTimeZone = "Rome"
-	NewStatusPageDataAttributesTimeZoneSamara                    NewStatusPageDataAttributesTimeZone = "Samara"
-	NewStatusPageDataAttributesTimeZoneSamoa                     NewStatusPageDataAttributesTimeZone = "Samoa"
-	NewStatusPageDataAttributesTimeZoneSantiago                  NewStatusPageDataAttributesTimeZone = "Santiago"
-	NewStatusPageDataAttributesTimeZoneSapporo                   NewStatusPageDataAttributesTimeZone = "Sapporo"
-	NewStatusPageDataAttributesTimeZoneSarajevo                  NewStatusPageDataAttributesTimeZone = "Sarajevo"
-	NewStatusPageDataAttributesTimeZoneSaskatchewan              NewStatusPageDataAttributesTimeZone = "Saskatchewan"
-	NewStatusPageDataAttributesTimeZoneSeoul                     NewStatusPageDataAttributesTimeZone = "Seoul"
-	NewStatusPageDataAttributesTimeZoneSingapore                 NewStatusPageDataAttributesTimeZone = "Singapore"
-	NewStatusPageDataAttributesTimeZoneSkopje                    NewStatusPageDataAttributesTimeZone = "Skopje"
-	NewStatusPageDataAttributesTimeZoneSofia                     NewStatusPageDataAttributesTimeZone = "Sofia"
-	NewStatusPageDataAttributesTimeZoneSolomonIs                 NewStatusPageDataAttributesTimeZone = "Solomon Is."
-	NewStatusPageDataAttributesTimeZoneSrednekolymsk             NewStatusPageDataAttributesTimeZone = "Srednekolymsk"
-	NewStatusPageDataAttributesTimeZoneSriJayawardenepura        NewStatusPageDataAttributesTimeZone = "Sri Jayawardenepura"
-	NewStatusPageDataAttributesTimeZoneStPetersburg              NewStatusPageDataAttributesTimeZone = "St. Petersburg"
-	NewStatusPageDataAttributesTimeZoneStockholm                 NewStatusPageDataAttributesTimeZone = "Stockholm"
-	NewStatusPageDataAttributesTimeZoneSydney                    NewStatusPageDataAttributesTimeZone = "Sydney"
-	NewStatusPageDataAttributesTimeZoneTaipei                    NewStatusPageDataAttributesTimeZone = "Taipei"
-	NewStatusPageDataAttributesTimeZoneTallinn                   NewStatusPageDataAttributesTimeZone = "Tallinn"
-	NewStatusPageDataAttributesTimeZoneTashkent                  NewStatusPageDataAttributesTimeZone = "Tashkent"
-	NewStatusPageDataAttributesTimeZoneTbilisi                   NewStatusPageDataAttributesTimeZone = "Tbilisi"
-	NewStatusPageDataAttributesTimeZoneTehran                    NewStatusPageDataAttributesTimeZone = "Tehran"
-	NewStatusPageDataAttributesTimeZoneTijuana                   NewStatusPageDataAttributesTimeZone = "Tijuana"
-	NewStatusPageDataAttributesTimeZoneTokelauIs                 NewStatusPageDataAttributesTimeZone = "Tokelau Is."
-	NewStatusPageDataAttributesTimeZoneTokyo                     NewStatusPageDataAttributesTimeZone = "Tokyo"
-	NewStatusPageDataAttributesTimeZoneUTC                       NewStatusPageDataAttributesTimeZone = "UTC"
-	NewStatusPageDataAttributesTimeZoneUlaanbaatar               NewStatusPageDataAttributesTimeZone = "Ulaanbaatar"
-	NewStatusPageDataAttributesTimeZoneUrumqi                    NewStatusPageDataAttributesTimeZone = "Urumqi"
-	NewStatusPageDataAttributesTimeZoneVienna                    NewStatusPageDataAttributesTimeZone = "Vienna"
-	NewStatusPageDataAttributesTimeZoneVilnius                   NewStatusPageDataAttributesTimeZone = "Vilnius"
-	NewStatusPageDataAttributesTimeZoneVladivostok               NewStatusPageDataAttributesTimeZone = "Vladivostok"
-	NewStatusPageDataAttributesTimeZoneVolgograd                 NewStatusPageDataAttributesTimeZone = "Volgograd"
-	NewStatusPageDataAttributesTimeZoneWarsaw                    NewStatusPageDataAttributesTimeZone = "Warsaw"
-	NewStatusPageDataAttributesTimeZoneWellington                NewStatusPageDataAttributesTimeZone = "Wellington"
-	NewStatusPageDataAttributesTimeZoneWestCentralAfrica         NewStatusPageDataAttributesTimeZone = "West Central Africa"
-	NewStatusPageDataAttributesTimeZoneYakutsk                   NewStatusPageDataAttributesTimeZone = "Yakutsk"
-	NewStatusPageDataAttributesTimeZoneYerevan                   NewStatusPageDataAttributesTimeZone = "Yerevan"
-	NewStatusPageDataAttributesTimeZoneZagreb                    NewStatusPageDataAttributesTimeZone = "Zagreb"
-	NewStatusPageDataAttributesTimeZoneZurich                    NewStatusPageDataAttributesTimeZone = "Zurich"
 )
 
 // Defines values for NewStatusPageDataType.
@@ -3168,6 +2656,22 @@ const (
 // Defines values for NewWorkflowTaskDataType.
 const (
 	NewWorkflowTaskDataTypeWorkflowTasks NewWorkflowTaskDataType = "workflow_tasks"
+)
+
+// Defines values for OnCallShadowShadowableType.
+const (
+	OnCallShadowShadowableTypeSchedule OnCallShadowShadowableType = "Schedule"
+	OnCallShadowShadowableTypeUser     OnCallShadowShadowableType = "User"
+)
+
+// Defines values for OnCallShadowResponseDataType.
+const (
+	OnCallShadowResponseDataTypeOnCallShadows OnCallShadowResponseDataType = "on_call_shadows"
+)
+
+// Defines values for OnCallShadowsListDataType.
+const (
+	OnCallShadowsListDataTypeOnCallShadows OnCallShadowsListDataType = "on_call_shadows"
 )
 
 // Defines values for OverrideShiftListDataType.
@@ -3363,6 +2867,11 @@ const (
 // Defines values for RenameSlackChannelTaskParamsTaskType.
 const (
 	RenameSlackChannelTaskParamsTaskTypeRenameSlackChannel RenameSlackChannelTaskParamsTaskType = "rename_slack_channel"
+)
+
+// Defines values for ResolveAlertDataType.
+const (
+	ResolveAlertDataTypeAlerts ResolveAlertDataType = "alerts"
 )
 
 // Defines values for ResolveIncidentDataType.
@@ -3659,161 +3168,6 @@ const (
 	ScheduleRotationScheduleRotationableTypeScheduleWeeklyRotation   ScheduleRotationScheduleRotationableType = "ScheduleWeeklyRotation"
 )
 
-// Defines values for ScheduleRotationTimeZone.
-const (
-	ScheduleRotationTimeZoneAbuDhabi                  ScheduleRotationTimeZone = "Abu Dhabi"
-	ScheduleRotationTimeZoneAdelaide                  ScheduleRotationTimeZone = "Adelaide"
-	ScheduleRotationTimeZoneAlaska                    ScheduleRotationTimeZone = "Alaska"
-	ScheduleRotationTimeZoneAlmaty                    ScheduleRotationTimeZone = "Almaty"
-	ScheduleRotationTimeZoneAmericanSamoa             ScheduleRotationTimeZone = "American Samoa"
-	ScheduleRotationTimeZoneAmsterdam                 ScheduleRotationTimeZone = "Amsterdam"
-	ScheduleRotationTimeZoneArizona                   ScheduleRotationTimeZone = "Arizona"
-	ScheduleRotationTimeZoneAstana                    ScheduleRotationTimeZone = "Astana"
-	ScheduleRotationTimeZoneAthens                    ScheduleRotationTimeZone = "Athens"
-	ScheduleRotationTimeZoneAtlanticTimeCanada        ScheduleRotationTimeZone = "Atlantic Time (Canada)"
-	ScheduleRotationTimeZoneAuckland                  ScheduleRotationTimeZone = "Auckland"
-	ScheduleRotationTimeZoneAzores                    ScheduleRotationTimeZone = "Azores"
-	ScheduleRotationTimeZoneBaghdad                   ScheduleRotationTimeZone = "Baghdad"
-	ScheduleRotationTimeZoneBaku                      ScheduleRotationTimeZone = "Baku"
-	ScheduleRotationTimeZoneBangkok                   ScheduleRotationTimeZone = "Bangkok"
-	ScheduleRotationTimeZoneBeijing                   ScheduleRotationTimeZone = "Beijing"
-	ScheduleRotationTimeZoneBelgrade                  ScheduleRotationTimeZone = "Belgrade"
-	ScheduleRotationTimeZoneBerlin                    ScheduleRotationTimeZone = "Berlin"
-	ScheduleRotationTimeZoneBern                      ScheduleRotationTimeZone = "Bern"
-	ScheduleRotationTimeZoneBogota                    ScheduleRotationTimeZone = "Bogota"
-	ScheduleRotationTimeZoneBrasilia                  ScheduleRotationTimeZone = "Brasilia"
-	ScheduleRotationTimeZoneBratislava                ScheduleRotationTimeZone = "Bratislava"
-	ScheduleRotationTimeZoneBrisbane                  ScheduleRotationTimeZone = "Brisbane"
-	ScheduleRotationTimeZoneBrussels                  ScheduleRotationTimeZone = "Brussels"
-	ScheduleRotationTimeZoneBucharest                 ScheduleRotationTimeZone = "Bucharest"
-	ScheduleRotationTimeZoneBudapest                  ScheduleRotationTimeZone = "Budapest"
-	ScheduleRotationTimeZoneBuenosAires               ScheduleRotationTimeZone = "Buenos Aires"
-	ScheduleRotationTimeZoneCairo                     ScheduleRotationTimeZone = "Cairo"
-	ScheduleRotationTimeZoneCanberra                  ScheduleRotationTimeZone = "Canberra"
-	ScheduleRotationTimeZoneCapeVerdeIs               ScheduleRotationTimeZone = "Cape Verde Is."
-	ScheduleRotationTimeZoneCaracas                   ScheduleRotationTimeZone = "Caracas"
-	ScheduleRotationTimeZoneCasablanca                ScheduleRotationTimeZone = "Casablanca"
-	ScheduleRotationTimeZoneCentralAmerica            ScheduleRotationTimeZone = "Central America"
-	ScheduleRotationTimeZoneCentralTimeUSCanada       ScheduleRotationTimeZone = "Central Time (US & Canada)"
-	ScheduleRotationTimeZoneChathamIs                 ScheduleRotationTimeZone = "Chatham Is."
-	ScheduleRotationTimeZoneChennai                   ScheduleRotationTimeZone = "Chennai"
-	ScheduleRotationTimeZoneChihuahua                 ScheduleRotationTimeZone = "Chihuahua"
-	ScheduleRotationTimeZoneChongqing                 ScheduleRotationTimeZone = "Chongqing"
-	ScheduleRotationTimeZoneCopenhagen                ScheduleRotationTimeZone = "Copenhagen"
-	ScheduleRotationTimeZoneDarwin                    ScheduleRotationTimeZone = "Darwin"
-	ScheduleRotationTimeZoneDhaka                     ScheduleRotationTimeZone = "Dhaka"
-	ScheduleRotationTimeZoneDublin                    ScheduleRotationTimeZone = "Dublin"
-	ScheduleRotationTimeZoneEasternTimeUSCanada       ScheduleRotationTimeZone = "Eastern Time (US & Canada)"
-	ScheduleRotationTimeZoneEdinburgh                 ScheduleRotationTimeZone = "Edinburgh"
-	ScheduleRotationTimeZoneEkaterinburg              ScheduleRotationTimeZone = "Ekaterinburg"
-	ScheduleRotationTimeZoneFiji                      ScheduleRotationTimeZone = "Fiji"
-	ScheduleRotationTimeZoneGeorgetown                ScheduleRotationTimeZone = "Georgetown"
-	ScheduleRotationTimeZoneGreenland                 ScheduleRotationTimeZone = "Greenland"
-	ScheduleRotationTimeZoneGuadalajara               ScheduleRotationTimeZone = "Guadalajara"
-	ScheduleRotationTimeZoneGuam                      ScheduleRotationTimeZone = "Guam"
-	ScheduleRotationTimeZoneHanoi                     ScheduleRotationTimeZone = "Hanoi"
-	ScheduleRotationTimeZoneHarare                    ScheduleRotationTimeZone = "Harare"
-	ScheduleRotationTimeZoneHawaii                    ScheduleRotationTimeZone = "Hawaii"
-	ScheduleRotationTimeZoneHelsinki                  ScheduleRotationTimeZone = "Helsinki"
-	ScheduleRotationTimeZoneHobart                    ScheduleRotationTimeZone = "Hobart"
-	ScheduleRotationTimeZoneHongKong                  ScheduleRotationTimeZone = "Hong Kong"
-	ScheduleRotationTimeZoneIndianaEast               ScheduleRotationTimeZone = "Indiana (East)"
-	ScheduleRotationTimeZoneInternationalDateLineWest ScheduleRotationTimeZone = "International Date Line West"
-	ScheduleRotationTimeZoneIrkutsk                   ScheduleRotationTimeZone = "Irkutsk"
-	ScheduleRotationTimeZoneIslamabad                 ScheduleRotationTimeZone = "Islamabad"
-	ScheduleRotationTimeZoneIstanbul                  ScheduleRotationTimeZone = "Istanbul"
-	ScheduleRotationTimeZoneJakarta                   ScheduleRotationTimeZone = "Jakarta"
-	ScheduleRotationTimeZoneJerusalem                 ScheduleRotationTimeZone = "Jerusalem"
-	ScheduleRotationTimeZoneKabul                     ScheduleRotationTimeZone = "Kabul"
-	ScheduleRotationTimeZoneKaliningrad               ScheduleRotationTimeZone = "Kaliningrad"
-	ScheduleRotationTimeZoneKamchatka                 ScheduleRotationTimeZone = "Kamchatka"
-	ScheduleRotationTimeZoneKarachi                   ScheduleRotationTimeZone = "Karachi"
-	ScheduleRotationTimeZoneKathmandu                 ScheduleRotationTimeZone = "Kathmandu"
-	ScheduleRotationTimeZoneKolkata                   ScheduleRotationTimeZone = "Kolkata"
-	ScheduleRotationTimeZoneKrasnoyarsk               ScheduleRotationTimeZone = "Krasnoyarsk"
-	ScheduleRotationTimeZoneKualaLumpur               ScheduleRotationTimeZone = "Kuala Lumpur"
-	ScheduleRotationTimeZoneKuwait                    ScheduleRotationTimeZone = "Kuwait"
-	ScheduleRotationTimeZoneKyiv                      ScheduleRotationTimeZone = "Kyiv"
-	ScheduleRotationTimeZoneLaPaz                     ScheduleRotationTimeZone = "La Paz"
-	ScheduleRotationTimeZoneLima                      ScheduleRotationTimeZone = "Lima"
-	ScheduleRotationTimeZoneLisbon                    ScheduleRotationTimeZone = "Lisbon"
-	ScheduleRotationTimeZoneLjubljana                 ScheduleRotationTimeZone = "Ljubljana"
-	ScheduleRotationTimeZoneLondon                    ScheduleRotationTimeZone = "London"
-	ScheduleRotationTimeZoneMadrid                    ScheduleRotationTimeZone = "Madrid"
-	ScheduleRotationTimeZoneMagadan                   ScheduleRotationTimeZone = "Magadan"
-	ScheduleRotationTimeZoneMarshallIs                ScheduleRotationTimeZone = "Marshall Is."
-	ScheduleRotationTimeZoneMazatlan                  ScheduleRotationTimeZone = "Mazatlan"
-	ScheduleRotationTimeZoneMelbourne                 ScheduleRotationTimeZone = "Melbourne"
-	ScheduleRotationTimeZoneMexicoCity                ScheduleRotationTimeZone = "Mexico City"
-	ScheduleRotationTimeZoneMidAtlantic               ScheduleRotationTimeZone = "Mid-Atlantic"
-	ScheduleRotationTimeZoneMidwayIsland              ScheduleRotationTimeZone = "Midway Island"
-	ScheduleRotationTimeZoneMinsk                     ScheduleRotationTimeZone = "Minsk"
-	ScheduleRotationTimeZoneMonrovia                  ScheduleRotationTimeZone = "Monrovia"
-	ScheduleRotationTimeZoneMonterrey                 ScheduleRotationTimeZone = "Monterrey"
-	ScheduleRotationTimeZoneMontevideo                ScheduleRotationTimeZone = "Montevideo"
-	ScheduleRotationTimeZoneMoscow                    ScheduleRotationTimeZone = "Moscow"
-	ScheduleRotationTimeZoneMountainTimeUSCanada      ScheduleRotationTimeZone = "Mountain Time (US & Canada)"
-	ScheduleRotationTimeZoneMumbai                    ScheduleRotationTimeZone = "Mumbai"
-	ScheduleRotationTimeZoneMuscat                    ScheduleRotationTimeZone = "Muscat"
-	ScheduleRotationTimeZoneNairobi                   ScheduleRotationTimeZone = "Nairobi"
-	ScheduleRotationTimeZoneNewCaledonia              ScheduleRotationTimeZone = "New Caledonia"
-	ScheduleRotationTimeZoneNewDelhi                  ScheduleRotationTimeZone = "New Delhi"
-	ScheduleRotationTimeZoneNewfoundland              ScheduleRotationTimeZone = "Newfoundland"
-	ScheduleRotationTimeZoneNovosibirsk               ScheduleRotationTimeZone = "Novosibirsk"
-	ScheduleRotationTimeZoneNukualofa                 ScheduleRotationTimeZone = "Nuku'alofa"
-	ScheduleRotationTimeZoneOsaka                     ScheduleRotationTimeZone = "Osaka"
-	ScheduleRotationTimeZonePacificTimeUSCanada       ScheduleRotationTimeZone = "Pacific Time (US & Canada)"
-	ScheduleRotationTimeZoneParis                     ScheduleRotationTimeZone = "Paris"
-	ScheduleRotationTimeZonePerth                     ScheduleRotationTimeZone = "Perth"
-	ScheduleRotationTimeZonePortMoresby               ScheduleRotationTimeZone = "Port Moresby"
-	ScheduleRotationTimeZonePrague                    ScheduleRotationTimeZone = "Prague"
-	ScheduleRotationTimeZonePretoria                  ScheduleRotationTimeZone = "Pretoria"
-	ScheduleRotationTimeZonePuertoRico                ScheduleRotationTimeZone = "Puerto Rico"
-	ScheduleRotationTimeZoneQuito                     ScheduleRotationTimeZone = "Quito"
-	ScheduleRotationTimeZoneRangoon                   ScheduleRotationTimeZone = "Rangoon"
-	ScheduleRotationTimeZoneRiga                      ScheduleRotationTimeZone = "Riga"
-	ScheduleRotationTimeZoneRiyadh                    ScheduleRotationTimeZone = "Riyadh"
-	ScheduleRotationTimeZoneRome                      ScheduleRotationTimeZone = "Rome"
-	ScheduleRotationTimeZoneSamara                    ScheduleRotationTimeZone = "Samara"
-	ScheduleRotationTimeZoneSamoa                     ScheduleRotationTimeZone = "Samoa"
-	ScheduleRotationTimeZoneSantiago                  ScheduleRotationTimeZone = "Santiago"
-	ScheduleRotationTimeZoneSapporo                   ScheduleRotationTimeZone = "Sapporo"
-	ScheduleRotationTimeZoneSarajevo                  ScheduleRotationTimeZone = "Sarajevo"
-	ScheduleRotationTimeZoneSaskatchewan              ScheduleRotationTimeZone = "Saskatchewan"
-	ScheduleRotationTimeZoneSeoul                     ScheduleRotationTimeZone = "Seoul"
-	ScheduleRotationTimeZoneSingapore                 ScheduleRotationTimeZone = "Singapore"
-	ScheduleRotationTimeZoneSkopje                    ScheduleRotationTimeZone = "Skopje"
-	ScheduleRotationTimeZoneSofia                     ScheduleRotationTimeZone = "Sofia"
-	ScheduleRotationTimeZoneSolomonIs                 ScheduleRotationTimeZone = "Solomon Is."
-	ScheduleRotationTimeZoneSrednekolymsk             ScheduleRotationTimeZone = "Srednekolymsk"
-	ScheduleRotationTimeZoneSriJayawardenepura        ScheduleRotationTimeZone = "Sri Jayawardenepura"
-	ScheduleRotationTimeZoneStPetersburg              ScheduleRotationTimeZone = "St. Petersburg"
-	ScheduleRotationTimeZoneStockholm                 ScheduleRotationTimeZone = "Stockholm"
-	ScheduleRotationTimeZoneSydney                    ScheduleRotationTimeZone = "Sydney"
-	ScheduleRotationTimeZoneTaipei                    ScheduleRotationTimeZone = "Taipei"
-	ScheduleRotationTimeZoneTallinn                   ScheduleRotationTimeZone = "Tallinn"
-	ScheduleRotationTimeZoneTashkent                  ScheduleRotationTimeZone = "Tashkent"
-	ScheduleRotationTimeZoneTbilisi                   ScheduleRotationTimeZone = "Tbilisi"
-	ScheduleRotationTimeZoneTehran                    ScheduleRotationTimeZone = "Tehran"
-	ScheduleRotationTimeZoneTijuana                   ScheduleRotationTimeZone = "Tijuana"
-	ScheduleRotationTimeZoneTokelauIs                 ScheduleRotationTimeZone = "Tokelau Is."
-	ScheduleRotationTimeZoneTokyo                     ScheduleRotationTimeZone = "Tokyo"
-	ScheduleRotationTimeZoneUTC                       ScheduleRotationTimeZone = "UTC"
-	ScheduleRotationTimeZoneUlaanbaatar               ScheduleRotationTimeZone = "Ulaanbaatar"
-	ScheduleRotationTimeZoneUrumqi                    ScheduleRotationTimeZone = "Urumqi"
-	ScheduleRotationTimeZoneVienna                    ScheduleRotationTimeZone = "Vienna"
-	ScheduleRotationTimeZoneVilnius                   ScheduleRotationTimeZone = "Vilnius"
-	ScheduleRotationTimeZoneVladivostok               ScheduleRotationTimeZone = "Vladivostok"
-	ScheduleRotationTimeZoneVolgograd                 ScheduleRotationTimeZone = "Volgograd"
-	ScheduleRotationTimeZoneWarsaw                    ScheduleRotationTimeZone = "Warsaw"
-	ScheduleRotationTimeZoneWellington                ScheduleRotationTimeZone = "Wellington"
-	ScheduleRotationTimeZoneWestCentralAfrica         ScheduleRotationTimeZone = "West Central Africa"
-	ScheduleRotationTimeZoneYakutsk                   ScheduleRotationTimeZone = "Yakutsk"
-	ScheduleRotationTimeZoneYerevan                   ScheduleRotationTimeZone = "Yerevan"
-	ScheduleRotationTimeZoneZagreb                    ScheduleRotationTimeZone = "Zagreb"
-	ScheduleRotationTimeZoneZurich                    ScheduleRotationTimeZone = "Zurich"
-)
-
 // Defines values for ScheduleRotationActiveDayDayName.
 const (
 	ScheduleRotationActiveDayDayNameF ScheduleRotationActiveDayDayName = "F"
@@ -3945,6 +3299,11 @@ const (
 	SeverityResponseDataTypeSeverities SeverityResponseDataType = "severities"
 )
 
+// Defines values for ShiftListDataType.
+const (
+	ShiftListDataTypeShifts ShiftListDataType = "shifts"
+)
+
 // Defines values for ShiftOverrideResponseDataType.
 const (
 	ShiftOverrideResponseDataTypeShiftOverride ShiftOverrideResponseDataType = "shift_override"
@@ -4007,161 +3366,6 @@ const (
 	StatusPageShowUptimeLastDaysN360 StatusPageShowUptimeLastDays = 360
 	StatusPageShowUptimeLastDaysN60  StatusPageShowUptimeLastDays = 60
 	StatusPageShowUptimeLastDaysN90  StatusPageShowUptimeLastDays = 90
-)
-
-// Defines values for StatusPageTimeZone.
-const (
-	StatusPageTimeZoneAbuDhabi                  StatusPageTimeZone = "Abu Dhabi"
-	StatusPageTimeZoneAdelaide                  StatusPageTimeZone = "Adelaide"
-	StatusPageTimeZoneAlaska                    StatusPageTimeZone = "Alaska"
-	StatusPageTimeZoneAlmaty                    StatusPageTimeZone = "Almaty"
-	StatusPageTimeZoneAmericanSamoa             StatusPageTimeZone = "American Samoa"
-	StatusPageTimeZoneAmsterdam                 StatusPageTimeZone = "Amsterdam"
-	StatusPageTimeZoneArizona                   StatusPageTimeZone = "Arizona"
-	StatusPageTimeZoneAstana                    StatusPageTimeZone = "Astana"
-	StatusPageTimeZoneAthens                    StatusPageTimeZone = "Athens"
-	StatusPageTimeZoneAtlanticTimeCanada        StatusPageTimeZone = "Atlantic Time (Canada)"
-	StatusPageTimeZoneAuckland                  StatusPageTimeZone = "Auckland"
-	StatusPageTimeZoneAzores                    StatusPageTimeZone = "Azores"
-	StatusPageTimeZoneBaghdad                   StatusPageTimeZone = "Baghdad"
-	StatusPageTimeZoneBaku                      StatusPageTimeZone = "Baku"
-	StatusPageTimeZoneBangkok                   StatusPageTimeZone = "Bangkok"
-	StatusPageTimeZoneBeijing                   StatusPageTimeZone = "Beijing"
-	StatusPageTimeZoneBelgrade                  StatusPageTimeZone = "Belgrade"
-	StatusPageTimeZoneBerlin                    StatusPageTimeZone = "Berlin"
-	StatusPageTimeZoneBern                      StatusPageTimeZone = "Bern"
-	StatusPageTimeZoneBogota                    StatusPageTimeZone = "Bogota"
-	StatusPageTimeZoneBrasilia                  StatusPageTimeZone = "Brasilia"
-	StatusPageTimeZoneBratislava                StatusPageTimeZone = "Bratislava"
-	StatusPageTimeZoneBrisbane                  StatusPageTimeZone = "Brisbane"
-	StatusPageTimeZoneBrussels                  StatusPageTimeZone = "Brussels"
-	StatusPageTimeZoneBucharest                 StatusPageTimeZone = "Bucharest"
-	StatusPageTimeZoneBudapest                  StatusPageTimeZone = "Budapest"
-	StatusPageTimeZoneBuenosAires               StatusPageTimeZone = "Buenos Aires"
-	StatusPageTimeZoneCairo                     StatusPageTimeZone = "Cairo"
-	StatusPageTimeZoneCanberra                  StatusPageTimeZone = "Canberra"
-	StatusPageTimeZoneCapeVerdeIs               StatusPageTimeZone = "Cape Verde Is."
-	StatusPageTimeZoneCaracas                   StatusPageTimeZone = "Caracas"
-	StatusPageTimeZoneCasablanca                StatusPageTimeZone = "Casablanca"
-	StatusPageTimeZoneCentralAmerica            StatusPageTimeZone = "Central America"
-	StatusPageTimeZoneCentralTimeUSCanada       StatusPageTimeZone = "Central Time (US & Canada)"
-	StatusPageTimeZoneChathamIs                 StatusPageTimeZone = "Chatham Is."
-	StatusPageTimeZoneChennai                   StatusPageTimeZone = "Chennai"
-	StatusPageTimeZoneChihuahua                 StatusPageTimeZone = "Chihuahua"
-	StatusPageTimeZoneChongqing                 StatusPageTimeZone = "Chongqing"
-	StatusPageTimeZoneCopenhagen                StatusPageTimeZone = "Copenhagen"
-	StatusPageTimeZoneDarwin                    StatusPageTimeZone = "Darwin"
-	StatusPageTimeZoneDhaka                     StatusPageTimeZone = "Dhaka"
-	StatusPageTimeZoneDublin                    StatusPageTimeZone = "Dublin"
-	StatusPageTimeZoneEasternTimeUSCanada       StatusPageTimeZone = "Eastern Time (US & Canada)"
-	StatusPageTimeZoneEdinburgh                 StatusPageTimeZone = "Edinburgh"
-	StatusPageTimeZoneEkaterinburg              StatusPageTimeZone = "Ekaterinburg"
-	StatusPageTimeZoneFiji                      StatusPageTimeZone = "Fiji"
-	StatusPageTimeZoneGeorgetown                StatusPageTimeZone = "Georgetown"
-	StatusPageTimeZoneGreenland                 StatusPageTimeZone = "Greenland"
-	StatusPageTimeZoneGuadalajara               StatusPageTimeZone = "Guadalajara"
-	StatusPageTimeZoneGuam                      StatusPageTimeZone = "Guam"
-	StatusPageTimeZoneHanoi                     StatusPageTimeZone = "Hanoi"
-	StatusPageTimeZoneHarare                    StatusPageTimeZone = "Harare"
-	StatusPageTimeZoneHawaii                    StatusPageTimeZone = "Hawaii"
-	StatusPageTimeZoneHelsinki                  StatusPageTimeZone = "Helsinki"
-	StatusPageTimeZoneHobart                    StatusPageTimeZone = "Hobart"
-	StatusPageTimeZoneHongKong                  StatusPageTimeZone = "Hong Kong"
-	StatusPageTimeZoneIndianaEast               StatusPageTimeZone = "Indiana (East)"
-	StatusPageTimeZoneInternationalDateLineWest StatusPageTimeZone = "International Date Line West"
-	StatusPageTimeZoneIrkutsk                   StatusPageTimeZone = "Irkutsk"
-	StatusPageTimeZoneIslamabad                 StatusPageTimeZone = "Islamabad"
-	StatusPageTimeZoneIstanbul                  StatusPageTimeZone = "Istanbul"
-	StatusPageTimeZoneJakarta                   StatusPageTimeZone = "Jakarta"
-	StatusPageTimeZoneJerusalem                 StatusPageTimeZone = "Jerusalem"
-	StatusPageTimeZoneKabul                     StatusPageTimeZone = "Kabul"
-	StatusPageTimeZoneKaliningrad               StatusPageTimeZone = "Kaliningrad"
-	StatusPageTimeZoneKamchatka                 StatusPageTimeZone = "Kamchatka"
-	StatusPageTimeZoneKarachi                   StatusPageTimeZone = "Karachi"
-	StatusPageTimeZoneKathmandu                 StatusPageTimeZone = "Kathmandu"
-	StatusPageTimeZoneKolkata                   StatusPageTimeZone = "Kolkata"
-	StatusPageTimeZoneKrasnoyarsk               StatusPageTimeZone = "Krasnoyarsk"
-	StatusPageTimeZoneKualaLumpur               StatusPageTimeZone = "Kuala Lumpur"
-	StatusPageTimeZoneKuwait                    StatusPageTimeZone = "Kuwait"
-	StatusPageTimeZoneKyiv                      StatusPageTimeZone = "Kyiv"
-	StatusPageTimeZoneLaPaz                     StatusPageTimeZone = "La Paz"
-	StatusPageTimeZoneLima                      StatusPageTimeZone = "Lima"
-	StatusPageTimeZoneLisbon                    StatusPageTimeZone = "Lisbon"
-	StatusPageTimeZoneLjubljana                 StatusPageTimeZone = "Ljubljana"
-	StatusPageTimeZoneLondon                    StatusPageTimeZone = "London"
-	StatusPageTimeZoneMadrid                    StatusPageTimeZone = "Madrid"
-	StatusPageTimeZoneMagadan                   StatusPageTimeZone = "Magadan"
-	StatusPageTimeZoneMarshallIs                StatusPageTimeZone = "Marshall Is."
-	StatusPageTimeZoneMazatlan                  StatusPageTimeZone = "Mazatlan"
-	StatusPageTimeZoneMelbourne                 StatusPageTimeZone = "Melbourne"
-	StatusPageTimeZoneMexicoCity                StatusPageTimeZone = "Mexico City"
-	StatusPageTimeZoneMidAtlantic               StatusPageTimeZone = "Mid-Atlantic"
-	StatusPageTimeZoneMidwayIsland              StatusPageTimeZone = "Midway Island"
-	StatusPageTimeZoneMinsk                     StatusPageTimeZone = "Minsk"
-	StatusPageTimeZoneMonrovia                  StatusPageTimeZone = "Monrovia"
-	StatusPageTimeZoneMonterrey                 StatusPageTimeZone = "Monterrey"
-	StatusPageTimeZoneMontevideo                StatusPageTimeZone = "Montevideo"
-	StatusPageTimeZoneMoscow                    StatusPageTimeZone = "Moscow"
-	StatusPageTimeZoneMountainTimeUSCanada      StatusPageTimeZone = "Mountain Time (US & Canada)"
-	StatusPageTimeZoneMumbai                    StatusPageTimeZone = "Mumbai"
-	StatusPageTimeZoneMuscat                    StatusPageTimeZone = "Muscat"
-	StatusPageTimeZoneNairobi                   StatusPageTimeZone = "Nairobi"
-	StatusPageTimeZoneNewCaledonia              StatusPageTimeZone = "New Caledonia"
-	StatusPageTimeZoneNewDelhi                  StatusPageTimeZone = "New Delhi"
-	StatusPageTimeZoneNewfoundland              StatusPageTimeZone = "Newfoundland"
-	StatusPageTimeZoneNovosibirsk               StatusPageTimeZone = "Novosibirsk"
-	StatusPageTimeZoneNukualofa                 StatusPageTimeZone = "Nuku'alofa"
-	StatusPageTimeZoneOsaka                     StatusPageTimeZone = "Osaka"
-	StatusPageTimeZonePacificTimeUSCanada       StatusPageTimeZone = "Pacific Time (US & Canada)"
-	StatusPageTimeZoneParis                     StatusPageTimeZone = "Paris"
-	StatusPageTimeZonePerth                     StatusPageTimeZone = "Perth"
-	StatusPageTimeZonePortMoresby               StatusPageTimeZone = "Port Moresby"
-	StatusPageTimeZonePrague                    StatusPageTimeZone = "Prague"
-	StatusPageTimeZonePretoria                  StatusPageTimeZone = "Pretoria"
-	StatusPageTimeZonePuertoRico                StatusPageTimeZone = "Puerto Rico"
-	StatusPageTimeZoneQuito                     StatusPageTimeZone = "Quito"
-	StatusPageTimeZoneRangoon                   StatusPageTimeZone = "Rangoon"
-	StatusPageTimeZoneRiga                      StatusPageTimeZone = "Riga"
-	StatusPageTimeZoneRiyadh                    StatusPageTimeZone = "Riyadh"
-	StatusPageTimeZoneRome                      StatusPageTimeZone = "Rome"
-	StatusPageTimeZoneSamara                    StatusPageTimeZone = "Samara"
-	StatusPageTimeZoneSamoa                     StatusPageTimeZone = "Samoa"
-	StatusPageTimeZoneSantiago                  StatusPageTimeZone = "Santiago"
-	StatusPageTimeZoneSapporo                   StatusPageTimeZone = "Sapporo"
-	StatusPageTimeZoneSarajevo                  StatusPageTimeZone = "Sarajevo"
-	StatusPageTimeZoneSaskatchewan              StatusPageTimeZone = "Saskatchewan"
-	StatusPageTimeZoneSeoul                     StatusPageTimeZone = "Seoul"
-	StatusPageTimeZoneSingapore                 StatusPageTimeZone = "Singapore"
-	StatusPageTimeZoneSkopje                    StatusPageTimeZone = "Skopje"
-	StatusPageTimeZoneSofia                     StatusPageTimeZone = "Sofia"
-	StatusPageTimeZoneSolomonIs                 StatusPageTimeZone = "Solomon Is."
-	StatusPageTimeZoneSrednekolymsk             StatusPageTimeZone = "Srednekolymsk"
-	StatusPageTimeZoneSriJayawardenepura        StatusPageTimeZone = "Sri Jayawardenepura"
-	StatusPageTimeZoneStPetersburg              StatusPageTimeZone = "St. Petersburg"
-	StatusPageTimeZoneStockholm                 StatusPageTimeZone = "Stockholm"
-	StatusPageTimeZoneSydney                    StatusPageTimeZone = "Sydney"
-	StatusPageTimeZoneTaipei                    StatusPageTimeZone = "Taipei"
-	StatusPageTimeZoneTallinn                   StatusPageTimeZone = "Tallinn"
-	StatusPageTimeZoneTashkent                  StatusPageTimeZone = "Tashkent"
-	StatusPageTimeZoneTbilisi                   StatusPageTimeZone = "Tbilisi"
-	StatusPageTimeZoneTehran                    StatusPageTimeZone = "Tehran"
-	StatusPageTimeZoneTijuana                   StatusPageTimeZone = "Tijuana"
-	StatusPageTimeZoneTokelauIs                 StatusPageTimeZone = "Tokelau Is."
-	StatusPageTimeZoneTokyo                     StatusPageTimeZone = "Tokyo"
-	StatusPageTimeZoneUTC                       StatusPageTimeZone = "UTC"
-	StatusPageTimeZoneUlaanbaatar               StatusPageTimeZone = "Ulaanbaatar"
-	StatusPageTimeZoneUrumqi                    StatusPageTimeZone = "Urumqi"
-	StatusPageTimeZoneVienna                    StatusPageTimeZone = "Vienna"
-	StatusPageTimeZoneVilnius                   StatusPageTimeZone = "Vilnius"
-	StatusPageTimeZoneVladivostok               StatusPageTimeZone = "Vladivostok"
-	StatusPageTimeZoneVolgograd                 StatusPageTimeZone = "Volgograd"
-	StatusPageTimeZoneWarsaw                    StatusPageTimeZone = "Warsaw"
-	StatusPageTimeZoneWellington                StatusPageTimeZone = "Wellington"
-	StatusPageTimeZoneWestCentralAfrica         StatusPageTimeZone = "West Central Africa"
-	StatusPageTimeZoneYakutsk                   StatusPageTimeZone = "Yakutsk"
-	StatusPageTimeZoneYerevan                   StatusPageTimeZone = "Yerevan"
-	StatusPageTimeZoneZagreb                    StatusPageTimeZone = "Zagreb"
-	StatusPageTimeZoneZurich                    StatusPageTimeZone = "Zurich"
 )
 
 // Defines values for StatusPageListDataType.
@@ -4298,6 +3502,17 @@ const (
 // Defines values for UpdateAsanaTaskTaskParamsTaskType.
 const (
 	UpdateAsanaTask UpdateAsanaTaskTaskParamsTaskType = "update_asana_task"
+)
+
+// Defines values for UpdateAttachedAlertsTaskParamsStatus.
+const (
+	UpdateAttachedAlertsTaskParamsStatusAcknowledged UpdateAttachedAlertsTaskParamsStatus = "acknowledged"
+	UpdateAttachedAlertsTaskParamsStatusResolved     UpdateAttachedAlertsTaskParamsStatus = "resolved"
+)
+
+// Defines values for UpdateAttachedAlertsTaskParamsTaskType.
+const (
+	UpdateAttachedAlerts UpdateAttachedAlertsTaskParamsTaskType = "update_attached_alerts"
 )
 
 // Defines values for UpdateAuthorizationDataAttributesPermissions.
@@ -4440,7 +3655,9 @@ const (
 	UpdateFormFieldDataAttributesKindMarkAsInTriage              UpdateFormFieldDataAttributesKind = "mark_as_in_triage"
 	UpdateFormFieldDataAttributesKindMarkAsTest                  UpdateFormFieldDataAttributesKind = "mark_as_test"
 	UpdateFormFieldDataAttributesKindMitigatedAt                 UpdateFormFieldDataAttributesKind = "mitigated_at"
+	UpdateFormFieldDataAttributesKindMitigationMessage           UpdateFormFieldDataAttributesKind = "mitigation_message"
 	UpdateFormFieldDataAttributesKindNotifyEmails                UpdateFormFieldDataAttributesKind = "notify_emails"
+	UpdateFormFieldDataAttributesKindResolutionMessage           UpdateFormFieldDataAttributesKind = "resolution_message"
 	UpdateFormFieldDataAttributesKindResolvedAt                  UpdateFormFieldDataAttributesKind = "resolved_at"
 	UpdateFormFieldDataAttributesKindServices                    UpdateFormFieldDataAttributesKind = "services"
 	UpdateFormFieldDataAttributesKindSeverity                    UpdateFormFieldDataAttributesKind = "severity"
@@ -4472,6 +3689,27 @@ const (
 	UpdateFormFieldOptionDataTypeFormFieldOptions UpdateFormFieldOptionDataType = "form_field_options"
 )
 
+// Defines values for UpdateFormFieldPlacementDataType.
+const (
+	UpdateFormFieldPlacementDataTypeFormFieldPlacements UpdateFormFieldPlacementDataType = "form_field_placements"
+)
+
+// Defines values for UpdateFormFieldPlacementConditionDataAttributesComparison.
+const (
+	UpdateFormFieldPlacementConditionDataAttributesComparisonEqual UpdateFormFieldPlacementConditionDataAttributesComparison = "equal"
+)
+
+// Defines values for UpdateFormFieldPlacementConditionDataAttributesConditioned.
+const (
+	Placement UpdateFormFieldPlacementConditionDataAttributesConditioned = "placement"
+	Required  UpdateFormFieldPlacementConditionDataAttributesConditioned = "required"
+)
+
+// Defines values for UpdateFormFieldPlacementConditionDataType.
+const (
+	UpdateFormFieldPlacementConditionDataTypeFormFieldPlacementConditions UpdateFormFieldPlacementConditionDataType = "form_field_placement_conditions"
+)
+
 // Defines values for UpdateFormFieldPositionDataAttributesForm.
 const (
 	UpdateFormFieldPositionDataAttributesFormIncidentPostMortem               UpdateFormFieldPositionDataAttributesForm = "incident_post_mortem"
@@ -4496,6 +3734,21 @@ const (
 // Defines values for UpdateFormFieldPositionDataType.
 const (
 	UpdateFormFieldPositionDataTypeFormFieldPositions UpdateFormFieldPositionDataType = "form_field_positions"
+)
+
+// Defines values for UpdateFormSetDataType.
+const (
+	UpdateFormSetDataTypeFormSets UpdateFormSetDataType = "form_sets"
+)
+
+// Defines values for UpdateFormSetConditionDataAttributesComparison.
+const (
+	UpdateFormSetConditionDataAttributesComparisonEqual UpdateFormSetConditionDataAttributesComparison = "equal"
+)
+
+// Defines values for UpdateFormSetConditionDataType.
+const (
+	UpdateFormSetConditionDataTypeFormSetConditions UpdateFormSetConditionDataType = "form_set_conditions"
 )
 
 // Defines values for UpdateFunctionalityDataType.
@@ -4788,6 +4041,17 @@ const (
 	UpdateNotionPage UpdateNotionPageTaskParamsTaskType = "update_notion_page"
 )
 
+// Defines values for UpdateOnCallShadowDataAttributesShadowableType.
+const (
+	UpdateOnCallShadowDataAttributesShadowableTypeSchedule UpdateOnCallShadowDataAttributesShadowableType = "Schedule"
+	UpdateOnCallShadowDataAttributesShadowableTypeUser     UpdateOnCallShadowDataAttributesShadowableType = "User"
+)
+
+// Defines values for UpdateOnCallShadowDataType.
+const (
+	UpdateOnCallShadowDataTypeOnCallShadows UpdateOnCallShadowDataType = "on_call_shadows"
+)
+
 // Defines values for UpdateOpsgenieAlertTaskParamsPriority.
 const (
 	UpdateOpsgenieAlertTaskParamsPriorityAuto UpdateOpsgenieAlertTaskParamsPriority = "auto"
@@ -4828,7 +4092,7 @@ const (
 
 // Defines values for UpdateOverrideShiftDataType.
 const (
-	UpdateOverrideShiftDataTypeShifts UpdateOverrideShiftDataType = "shifts"
+	Shifts UpdateOverrideShiftDataType = "shifts"
 )
 
 // Defines values for UpdatePagerdutyIncidentTaskParamsStatus.
@@ -5141,161 +4405,6 @@ const (
 	ScheduleWeeklyRotation   UpdateScheduleRotationDataAttributesScheduleRotationableType = "ScheduleWeeklyRotation"
 )
 
-// Defines values for UpdateScheduleRotationDataAttributesTimeZone.
-const (
-	UpdateScheduleRotationDataAttributesTimeZoneAbuDhabi                  UpdateScheduleRotationDataAttributesTimeZone = "Abu Dhabi"
-	UpdateScheduleRotationDataAttributesTimeZoneAdelaide                  UpdateScheduleRotationDataAttributesTimeZone = "Adelaide"
-	UpdateScheduleRotationDataAttributesTimeZoneAlaska                    UpdateScheduleRotationDataAttributesTimeZone = "Alaska"
-	UpdateScheduleRotationDataAttributesTimeZoneAlmaty                    UpdateScheduleRotationDataAttributesTimeZone = "Almaty"
-	UpdateScheduleRotationDataAttributesTimeZoneAmericanSamoa             UpdateScheduleRotationDataAttributesTimeZone = "American Samoa"
-	UpdateScheduleRotationDataAttributesTimeZoneAmsterdam                 UpdateScheduleRotationDataAttributesTimeZone = "Amsterdam"
-	UpdateScheduleRotationDataAttributesTimeZoneArizona                   UpdateScheduleRotationDataAttributesTimeZone = "Arizona"
-	UpdateScheduleRotationDataAttributesTimeZoneAstana                    UpdateScheduleRotationDataAttributesTimeZone = "Astana"
-	UpdateScheduleRotationDataAttributesTimeZoneAthens                    UpdateScheduleRotationDataAttributesTimeZone = "Athens"
-	UpdateScheduleRotationDataAttributesTimeZoneAtlanticTimeCanada        UpdateScheduleRotationDataAttributesTimeZone = "Atlantic Time (Canada)"
-	UpdateScheduleRotationDataAttributesTimeZoneAuckland                  UpdateScheduleRotationDataAttributesTimeZone = "Auckland"
-	UpdateScheduleRotationDataAttributesTimeZoneAzores                    UpdateScheduleRotationDataAttributesTimeZone = "Azores"
-	UpdateScheduleRotationDataAttributesTimeZoneBaghdad                   UpdateScheduleRotationDataAttributesTimeZone = "Baghdad"
-	UpdateScheduleRotationDataAttributesTimeZoneBaku                      UpdateScheduleRotationDataAttributesTimeZone = "Baku"
-	UpdateScheduleRotationDataAttributesTimeZoneBangkok                   UpdateScheduleRotationDataAttributesTimeZone = "Bangkok"
-	UpdateScheduleRotationDataAttributesTimeZoneBeijing                   UpdateScheduleRotationDataAttributesTimeZone = "Beijing"
-	UpdateScheduleRotationDataAttributesTimeZoneBelgrade                  UpdateScheduleRotationDataAttributesTimeZone = "Belgrade"
-	UpdateScheduleRotationDataAttributesTimeZoneBerlin                    UpdateScheduleRotationDataAttributesTimeZone = "Berlin"
-	UpdateScheduleRotationDataAttributesTimeZoneBern                      UpdateScheduleRotationDataAttributesTimeZone = "Bern"
-	UpdateScheduleRotationDataAttributesTimeZoneBogota                    UpdateScheduleRotationDataAttributesTimeZone = "Bogota"
-	UpdateScheduleRotationDataAttributesTimeZoneBrasilia                  UpdateScheduleRotationDataAttributesTimeZone = "Brasilia"
-	UpdateScheduleRotationDataAttributesTimeZoneBratislava                UpdateScheduleRotationDataAttributesTimeZone = "Bratislava"
-	UpdateScheduleRotationDataAttributesTimeZoneBrisbane                  UpdateScheduleRotationDataAttributesTimeZone = "Brisbane"
-	UpdateScheduleRotationDataAttributesTimeZoneBrussels                  UpdateScheduleRotationDataAttributesTimeZone = "Brussels"
-	UpdateScheduleRotationDataAttributesTimeZoneBucharest                 UpdateScheduleRotationDataAttributesTimeZone = "Bucharest"
-	UpdateScheduleRotationDataAttributesTimeZoneBudapest                  UpdateScheduleRotationDataAttributesTimeZone = "Budapest"
-	UpdateScheduleRotationDataAttributesTimeZoneBuenosAires               UpdateScheduleRotationDataAttributesTimeZone = "Buenos Aires"
-	UpdateScheduleRotationDataAttributesTimeZoneCairo                     UpdateScheduleRotationDataAttributesTimeZone = "Cairo"
-	UpdateScheduleRotationDataAttributesTimeZoneCanberra                  UpdateScheduleRotationDataAttributesTimeZone = "Canberra"
-	UpdateScheduleRotationDataAttributesTimeZoneCapeVerdeIs               UpdateScheduleRotationDataAttributesTimeZone = "Cape Verde Is."
-	UpdateScheduleRotationDataAttributesTimeZoneCaracas                   UpdateScheduleRotationDataAttributesTimeZone = "Caracas"
-	UpdateScheduleRotationDataAttributesTimeZoneCasablanca                UpdateScheduleRotationDataAttributesTimeZone = "Casablanca"
-	UpdateScheduleRotationDataAttributesTimeZoneCentralAmerica            UpdateScheduleRotationDataAttributesTimeZone = "Central America"
-	UpdateScheduleRotationDataAttributesTimeZoneCentralTimeUSCanada       UpdateScheduleRotationDataAttributesTimeZone = "Central Time (US & Canada)"
-	UpdateScheduleRotationDataAttributesTimeZoneChathamIs                 UpdateScheduleRotationDataAttributesTimeZone = "Chatham Is."
-	UpdateScheduleRotationDataAttributesTimeZoneChennai                   UpdateScheduleRotationDataAttributesTimeZone = "Chennai"
-	UpdateScheduleRotationDataAttributesTimeZoneChihuahua                 UpdateScheduleRotationDataAttributesTimeZone = "Chihuahua"
-	UpdateScheduleRotationDataAttributesTimeZoneChongqing                 UpdateScheduleRotationDataAttributesTimeZone = "Chongqing"
-	UpdateScheduleRotationDataAttributesTimeZoneCopenhagen                UpdateScheduleRotationDataAttributesTimeZone = "Copenhagen"
-	UpdateScheduleRotationDataAttributesTimeZoneDarwin                    UpdateScheduleRotationDataAttributesTimeZone = "Darwin"
-	UpdateScheduleRotationDataAttributesTimeZoneDhaka                     UpdateScheduleRotationDataAttributesTimeZone = "Dhaka"
-	UpdateScheduleRotationDataAttributesTimeZoneDublin                    UpdateScheduleRotationDataAttributesTimeZone = "Dublin"
-	UpdateScheduleRotationDataAttributesTimeZoneEasternTimeUSCanada       UpdateScheduleRotationDataAttributesTimeZone = "Eastern Time (US & Canada)"
-	UpdateScheduleRotationDataAttributesTimeZoneEdinburgh                 UpdateScheduleRotationDataAttributesTimeZone = "Edinburgh"
-	UpdateScheduleRotationDataAttributesTimeZoneEkaterinburg              UpdateScheduleRotationDataAttributesTimeZone = "Ekaterinburg"
-	UpdateScheduleRotationDataAttributesTimeZoneFiji                      UpdateScheduleRotationDataAttributesTimeZone = "Fiji"
-	UpdateScheduleRotationDataAttributesTimeZoneGeorgetown                UpdateScheduleRotationDataAttributesTimeZone = "Georgetown"
-	UpdateScheduleRotationDataAttributesTimeZoneGreenland                 UpdateScheduleRotationDataAttributesTimeZone = "Greenland"
-	UpdateScheduleRotationDataAttributesTimeZoneGuadalajara               UpdateScheduleRotationDataAttributesTimeZone = "Guadalajara"
-	UpdateScheduleRotationDataAttributesTimeZoneGuam                      UpdateScheduleRotationDataAttributesTimeZone = "Guam"
-	UpdateScheduleRotationDataAttributesTimeZoneHanoi                     UpdateScheduleRotationDataAttributesTimeZone = "Hanoi"
-	UpdateScheduleRotationDataAttributesTimeZoneHarare                    UpdateScheduleRotationDataAttributesTimeZone = "Harare"
-	UpdateScheduleRotationDataAttributesTimeZoneHawaii                    UpdateScheduleRotationDataAttributesTimeZone = "Hawaii"
-	UpdateScheduleRotationDataAttributesTimeZoneHelsinki                  UpdateScheduleRotationDataAttributesTimeZone = "Helsinki"
-	UpdateScheduleRotationDataAttributesTimeZoneHobart                    UpdateScheduleRotationDataAttributesTimeZone = "Hobart"
-	UpdateScheduleRotationDataAttributesTimeZoneHongKong                  UpdateScheduleRotationDataAttributesTimeZone = "Hong Kong"
-	UpdateScheduleRotationDataAttributesTimeZoneIndianaEast               UpdateScheduleRotationDataAttributesTimeZone = "Indiana (East)"
-	UpdateScheduleRotationDataAttributesTimeZoneInternationalDateLineWest UpdateScheduleRotationDataAttributesTimeZone = "International Date Line West"
-	UpdateScheduleRotationDataAttributesTimeZoneIrkutsk                   UpdateScheduleRotationDataAttributesTimeZone = "Irkutsk"
-	UpdateScheduleRotationDataAttributesTimeZoneIslamabad                 UpdateScheduleRotationDataAttributesTimeZone = "Islamabad"
-	UpdateScheduleRotationDataAttributesTimeZoneIstanbul                  UpdateScheduleRotationDataAttributesTimeZone = "Istanbul"
-	UpdateScheduleRotationDataAttributesTimeZoneJakarta                   UpdateScheduleRotationDataAttributesTimeZone = "Jakarta"
-	UpdateScheduleRotationDataAttributesTimeZoneJerusalem                 UpdateScheduleRotationDataAttributesTimeZone = "Jerusalem"
-	UpdateScheduleRotationDataAttributesTimeZoneKabul                     UpdateScheduleRotationDataAttributesTimeZone = "Kabul"
-	UpdateScheduleRotationDataAttributesTimeZoneKaliningrad               UpdateScheduleRotationDataAttributesTimeZone = "Kaliningrad"
-	UpdateScheduleRotationDataAttributesTimeZoneKamchatka                 UpdateScheduleRotationDataAttributesTimeZone = "Kamchatka"
-	UpdateScheduleRotationDataAttributesTimeZoneKarachi                   UpdateScheduleRotationDataAttributesTimeZone = "Karachi"
-	UpdateScheduleRotationDataAttributesTimeZoneKathmandu                 UpdateScheduleRotationDataAttributesTimeZone = "Kathmandu"
-	UpdateScheduleRotationDataAttributesTimeZoneKolkata                   UpdateScheduleRotationDataAttributesTimeZone = "Kolkata"
-	UpdateScheduleRotationDataAttributesTimeZoneKrasnoyarsk               UpdateScheduleRotationDataAttributesTimeZone = "Krasnoyarsk"
-	UpdateScheduleRotationDataAttributesTimeZoneKualaLumpur               UpdateScheduleRotationDataAttributesTimeZone = "Kuala Lumpur"
-	UpdateScheduleRotationDataAttributesTimeZoneKuwait                    UpdateScheduleRotationDataAttributesTimeZone = "Kuwait"
-	UpdateScheduleRotationDataAttributesTimeZoneKyiv                      UpdateScheduleRotationDataAttributesTimeZone = "Kyiv"
-	UpdateScheduleRotationDataAttributesTimeZoneLaPaz                     UpdateScheduleRotationDataAttributesTimeZone = "La Paz"
-	UpdateScheduleRotationDataAttributesTimeZoneLima                      UpdateScheduleRotationDataAttributesTimeZone = "Lima"
-	UpdateScheduleRotationDataAttributesTimeZoneLisbon                    UpdateScheduleRotationDataAttributesTimeZone = "Lisbon"
-	UpdateScheduleRotationDataAttributesTimeZoneLjubljana                 UpdateScheduleRotationDataAttributesTimeZone = "Ljubljana"
-	UpdateScheduleRotationDataAttributesTimeZoneLondon                    UpdateScheduleRotationDataAttributesTimeZone = "London"
-	UpdateScheduleRotationDataAttributesTimeZoneMadrid                    UpdateScheduleRotationDataAttributesTimeZone = "Madrid"
-	UpdateScheduleRotationDataAttributesTimeZoneMagadan                   UpdateScheduleRotationDataAttributesTimeZone = "Magadan"
-	UpdateScheduleRotationDataAttributesTimeZoneMarshallIs                UpdateScheduleRotationDataAttributesTimeZone = "Marshall Is."
-	UpdateScheduleRotationDataAttributesTimeZoneMazatlan                  UpdateScheduleRotationDataAttributesTimeZone = "Mazatlan"
-	UpdateScheduleRotationDataAttributesTimeZoneMelbourne                 UpdateScheduleRotationDataAttributesTimeZone = "Melbourne"
-	UpdateScheduleRotationDataAttributesTimeZoneMexicoCity                UpdateScheduleRotationDataAttributesTimeZone = "Mexico City"
-	UpdateScheduleRotationDataAttributesTimeZoneMidAtlantic               UpdateScheduleRotationDataAttributesTimeZone = "Mid-Atlantic"
-	UpdateScheduleRotationDataAttributesTimeZoneMidwayIsland              UpdateScheduleRotationDataAttributesTimeZone = "Midway Island"
-	UpdateScheduleRotationDataAttributesTimeZoneMinsk                     UpdateScheduleRotationDataAttributesTimeZone = "Minsk"
-	UpdateScheduleRotationDataAttributesTimeZoneMonrovia                  UpdateScheduleRotationDataAttributesTimeZone = "Monrovia"
-	UpdateScheduleRotationDataAttributesTimeZoneMonterrey                 UpdateScheduleRotationDataAttributesTimeZone = "Monterrey"
-	UpdateScheduleRotationDataAttributesTimeZoneMontevideo                UpdateScheduleRotationDataAttributesTimeZone = "Montevideo"
-	UpdateScheduleRotationDataAttributesTimeZoneMoscow                    UpdateScheduleRotationDataAttributesTimeZone = "Moscow"
-	UpdateScheduleRotationDataAttributesTimeZoneMountainTimeUSCanada      UpdateScheduleRotationDataAttributesTimeZone = "Mountain Time (US & Canada)"
-	UpdateScheduleRotationDataAttributesTimeZoneMumbai                    UpdateScheduleRotationDataAttributesTimeZone = "Mumbai"
-	UpdateScheduleRotationDataAttributesTimeZoneMuscat                    UpdateScheduleRotationDataAttributesTimeZone = "Muscat"
-	UpdateScheduleRotationDataAttributesTimeZoneNairobi                   UpdateScheduleRotationDataAttributesTimeZone = "Nairobi"
-	UpdateScheduleRotationDataAttributesTimeZoneNewCaledonia              UpdateScheduleRotationDataAttributesTimeZone = "New Caledonia"
-	UpdateScheduleRotationDataAttributesTimeZoneNewDelhi                  UpdateScheduleRotationDataAttributesTimeZone = "New Delhi"
-	UpdateScheduleRotationDataAttributesTimeZoneNewfoundland              UpdateScheduleRotationDataAttributesTimeZone = "Newfoundland"
-	UpdateScheduleRotationDataAttributesTimeZoneNovosibirsk               UpdateScheduleRotationDataAttributesTimeZone = "Novosibirsk"
-	UpdateScheduleRotationDataAttributesTimeZoneNukualofa                 UpdateScheduleRotationDataAttributesTimeZone = "Nuku'alofa"
-	UpdateScheduleRotationDataAttributesTimeZoneOsaka                     UpdateScheduleRotationDataAttributesTimeZone = "Osaka"
-	UpdateScheduleRotationDataAttributesTimeZonePacificTimeUSCanada       UpdateScheduleRotationDataAttributesTimeZone = "Pacific Time (US & Canada)"
-	UpdateScheduleRotationDataAttributesTimeZoneParis                     UpdateScheduleRotationDataAttributesTimeZone = "Paris"
-	UpdateScheduleRotationDataAttributesTimeZonePerth                     UpdateScheduleRotationDataAttributesTimeZone = "Perth"
-	UpdateScheduleRotationDataAttributesTimeZonePortMoresby               UpdateScheduleRotationDataAttributesTimeZone = "Port Moresby"
-	UpdateScheduleRotationDataAttributesTimeZonePrague                    UpdateScheduleRotationDataAttributesTimeZone = "Prague"
-	UpdateScheduleRotationDataAttributesTimeZonePretoria                  UpdateScheduleRotationDataAttributesTimeZone = "Pretoria"
-	UpdateScheduleRotationDataAttributesTimeZonePuertoRico                UpdateScheduleRotationDataAttributesTimeZone = "Puerto Rico"
-	UpdateScheduleRotationDataAttributesTimeZoneQuito                     UpdateScheduleRotationDataAttributesTimeZone = "Quito"
-	UpdateScheduleRotationDataAttributesTimeZoneRangoon                   UpdateScheduleRotationDataAttributesTimeZone = "Rangoon"
-	UpdateScheduleRotationDataAttributesTimeZoneRiga                      UpdateScheduleRotationDataAttributesTimeZone = "Riga"
-	UpdateScheduleRotationDataAttributesTimeZoneRiyadh                    UpdateScheduleRotationDataAttributesTimeZone = "Riyadh"
-	UpdateScheduleRotationDataAttributesTimeZoneRome                      UpdateScheduleRotationDataAttributesTimeZone = "Rome"
-	UpdateScheduleRotationDataAttributesTimeZoneSamara                    UpdateScheduleRotationDataAttributesTimeZone = "Samara"
-	UpdateScheduleRotationDataAttributesTimeZoneSamoa                     UpdateScheduleRotationDataAttributesTimeZone = "Samoa"
-	UpdateScheduleRotationDataAttributesTimeZoneSantiago                  UpdateScheduleRotationDataAttributesTimeZone = "Santiago"
-	UpdateScheduleRotationDataAttributesTimeZoneSapporo                   UpdateScheduleRotationDataAttributesTimeZone = "Sapporo"
-	UpdateScheduleRotationDataAttributesTimeZoneSarajevo                  UpdateScheduleRotationDataAttributesTimeZone = "Sarajevo"
-	UpdateScheduleRotationDataAttributesTimeZoneSaskatchewan              UpdateScheduleRotationDataAttributesTimeZone = "Saskatchewan"
-	UpdateScheduleRotationDataAttributesTimeZoneSeoul                     UpdateScheduleRotationDataAttributesTimeZone = "Seoul"
-	UpdateScheduleRotationDataAttributesTimeZoneSingapore                 UpdateScheduleRotationDataAttributesTimeZone = "Singapore"
-	UpdateScheduleRotationDataAttributesTimeZoneSkopje                    UpdateScheduleRotationDataAttributesTimeZone = "Skopje"
-	UpdateScheduleRotationDataAttributesTimeZoneSofia                     UpdateScheduleRotationDataAttributesTimeZone = "Sofia"
-	UpdateScheduleRotationDataAttributesTimeZoneSolomonIs                 UpdateScheduleRotationDataAttributesTimeZone = "Solomon Is."
-	UpdateScheduleRotationDataAttributesTimeZoneSrednekolymsk             UpdateScheduleRotationDataAttributesTimeZone = "Srednekolymsk"
-	UpdateScheduleRotationDataAttributesTimeZoneSriJayawardenepura        UpdateScheduleRotationDataAttributesTimeZone = "Sri Jayawardenepura"
-	UpdateScheduleRotationDataAttributesTimeZoneStPetersburg              UpdateScheduleRotationDataAttributesTimeZone = "St. Petersburg"
-	UpdateScheduleRotationDataAttributesTimeZoneStockholm                 UpdateScheduleRotationDataAttributesTimeZone = "Stockholm"
-	UpdateScheduleRotationDataAttributesTimeZoneSydney                    UpdateScheduleRotationDataAttributesTimeZone = "Sydney"
-	UpdateScheduleRotationDataAttributesTimeZoneTaipei                    UpdateScheduleRotationDataAttributesTimeZone = "Taipei"
-	UpdateScheduleRotationDataAttributesTimeZoneTallinn                   UpdateScheduleRotationDataAttributesTimeZone = "Tallinn"
-	UpdateScheduleRotationDataAttributesTimeZoneTashkent                  UpdateScheduleRotationDataAttributesTimeZone = "Tashkent"
-	UpdateScheduleRotationDataAttributesTimeZoneTbilisi                   UpdateScheduleRotationDataAttributesTimeZone = "Tbilisi"
-	UpdateScheduleRotationDataAttributesTimeZoneTehran                    UpdateScheduleRotationDataAttributesTimeZone = "Tehran"
-	UpdateScheduleRotationDataAttributesTimeZoneTijuana                   UpdateScheduleRotationDataAttributesTimeZone = "Tijuana"
-	UpdateScheduleRotationDataAttributesTimeZoneTokelauIs                 UpdateScheduleRotationDataAttributesTimeZone = "Tokelau Is."
-	UpdateScheduleRotationDataAttributesTimeZoneTokyo                     UpdateScheduleRotationDataAttributesTimeZone = "Tokyo"
-	UpdateScheduleRotationDataAttributesTimeZoneUTC                       UpdateScheduleRotationDataAttributesTimeZone = "UTC"
-	UpdateScheduleRotationDataAttributesTimeZoneUlaanbaatar               UpdateScheduleRotationDataAttributesTimeZone = "Ulaanbaatar"
-	UpdateScheduleRotationDataAttributesTimeZoneUrumqi                    UpdateScheduleRotationDataAttributesTimeZone = "Urumqi"
-	UpdateScheduleRotationDataAttributesTimeZoneVienna                    UpdateScheduleRotationDataAttributesTimeZone = "Vienna"
-	UpdateScheduleRotationDataAttributesTimeZoneVilnius                   UpdateScheduleRotationDataAttributesTimeZone = "Vilnius"
-	UpdateScheduleRotationDataAttributesTimeZoneVladivostok               UpdateScheduleRotationDataAttributesTimeZone = "Vladivostok"
-	UpdateScheduleRotationDataAttributesTimeZoneVolgograd                 UpdateScheduleRotationDataAttributesTimeZone = "Volgograd"
-	UpdateScheduleRotationDataAttributesTimeZoneWarsaw                    UpdateScheduleRotationDataAttributesTimeZone = "Warsaw"
-	UpdateScheduleRotationDataAttributesTimeZoneWellington                UpdateScheduleRotationDataAttributesTimeZone = "Wellington"
-	UpdateScheduleRotationDataAttributesTimeZoneWestCentralAfrica         UpdateScheduleRotationDataAttributesTimeZone = "West Central Africa"
-	UpdateScheduleRotationDataAttributesTimeZoneYakutsk                   UpdateScheduleRotationDataAttributesTimeZone = "Yakutsk"
-	UpdateScheduleRotationDataAttributesTimeZoneYerevan                   UpdateScheduleRotationDataAttributesTimeZone = "Yerevan"
-	UpdateScheduleRotationDataAttributesTimeZoneZagreb                    UpdateScheduleRotationDataAttributesTimeZone = "Zagreb"
-	UpdateScheduleRotationDataAttributesTimeZoneZurich                    UpdateScheduleRotationDataAttributesTimeZone = "Zurich"
-)
-
 // Defines values for UpdateScheduleRotationDataType.
 const (
 	UpdateScheduleRotationDataTypeScheduleRotations UpdateScheduleRotationDataType = "schedule_rotations"
@@ -5339,10 +4448,10 @@ const (
 
 // Defines values for UpdateSeverityDataAttributesSeverity.
 const (
-	Critical UpdateSeverityDataAttributesSeverity = "critical"
-	High     UpdateSeverityDataAttributesSeverity = "high"
-	Low      UpdateSeverityDataAttributesSeverity = "low"
-	Medium   UpdateSeverityDataAttributesSeverity = "medium"
+	UpdateSeverityDataAttributesSeverityCritical UpdateSeverityDataAttributesSeverity = "critical"
+	UpdateSeverityDataAttributesSeverityHigh     UpdateSeverityDataAttributesSeverity = "high"
+	UpdateSeverityDataAttributesSeverityLow      UpdateSeverityDataAttributesSeverity = "low"
+	UpdateSeverityDataAttributesSeverityMedium   UpdateSeverityDataAttributesSeverity = "medium"
 )
 
 // Defines values for UpdateSeverityDataType.
@@ -5372,161 +4481,6 @@ const (
 	N360 UpdateStatusPageDataAttributesShowUptimeLastDays = 360
 	N60  UpdateStatusPageDataAttributesShowUptimeLastDays = 60
 	N90  UpdateStatusPageDataAttributesShowUptimeLastDays = 90
-)
-
-// Defines values for UpdateStatusPageDataAttributesTimeZone.
-const (
-	UpdateStatusPageDataAttributesTimeZoneAbuDhabi                  UpdateStatusPageDataAttributesTimeZone = "Abu Dhabi"
-	UpdateStatusPageDataAttributesTimeZoneAdelaide                  UpdateStatusPageDataAttributesTimeZone = "Adelaide"
-	UpdateStatusPageDataAttributesTimeZoneAlaska                    UpdateStatusPageDataAttributesTimeZone = "Alaska"
-	UpdateStatusPageDataAttributesTimeZoneAlmaty                    UpdateStatusPageDataAttributesTimeZone = "Almaty"
-	UpdateStatusPageDataAttributesTimeZoneAmericanSamoa             UpdateStatusPageDataAttributesTimeZone = "American Samoa"
-	UpdateStatusPageDataAttributesTimeZoneAmsterdam                 UpdateStatusPageDataAttributesTimeZone = "Amsterdam"
-	UpdateStatusPageDataAttributesTimeZoneArizona                   UpdateStatusPageDataAttributesTimeZone = "Arizona"
-	UpdateStatusPageDataAttributesTimeZoneAstana                    UpdateStatusPageDataAttributesTimeZone = "Astana"
-	UpdateStatusPageDataAttributesTimeZoneAthens                    UpdateStatusPageDataAttributesTimeZone = "Athens"
-	UpdateStatusPageDataAttributesTimeZoneAtlanticTimeCanada        UpdateStatusPageDataAttributesTimeZone = "Atlantic Time (Canada)"
-	UpdateStatusPageDataAttributesTimeZoneAuckland                  UpdateStatusPageDataAttributesTimeZone = "Auckland"
-	UpdateStatusPageDataAttributesTimeZoneAzores                    UpdateStatusPageDataAttributesTimeZone = "Azores"
-	UpdateStatusPageDataAttributesTimeZoneBaghdad                   UpdateStatusPageDataAttributesTimeZone = "Baghdad"
-	UpdateStatusPageDataAttributesTimeZoneBaku                      UpdateStatusPageDataAttributesTimeZone = "Baku"
-	UpdateStatusPageDataAttributesTimeZoneBangkok                   UpdateStatusPageDataAttributesTimeZone = "Bangkok"
-	UpdateStatusPageDataAttributesTimeZoneBeijing                   UpdateStatusPageDataAttributesTimeZone = "Beijing"
-	UpdateStatusPageDataAttributesTimeZoneBelgrade                  UpdateStatusPageDataAttributesTimeZone = "Belgrade"
-	UpdateStatusPageDataAttributesTimeZoneBerlin                    UpdateStatusPageDataAttributesTimeZone = "Berlin"
-	UpdateStatusPageDataAttributesTimeZoneBern                      UpdateStatusPageDataAttributesTimeZone = "Bern"
-	UpdateStatusPageDataAttributesTimeZoneBogota                    UpdateStatusPageDataAttributesTimeZone = "Bogota"
-	UpdateStatusPageDataAttributesTimeZoneBrasilia                  UpdateStatusPageDataAttributesTimeZone = "Brasilia"
-	UpdateStatusPageDataAttributesTimeZoneBratislava                UpdateStatusPageDataAttributesTimeZone = "Bratislava"
-	UpdateStatusPageDataAttributesTimeZoneBrisbane                  UpdateStatusPageDataAttributesTimeZone = "Brisbane"
-	UpdateStatusPageDataAttributesTimeZoneBrussels                  UpdateStatusPageDataAttributesTimeZone = "Brussels"
-	UpdateStatusPageDataAttributesTimeZoneBucharest                 UpdateStatusPageDataAttributesTimeZone = "Bucharest"
-	UpdateStatusPageDataAttributesTimeZoneBudapest                  UpdateStatusPageDataAttributesTimeZone = "Budapest"
-	UpdateStatusPageDataAttributesTimeZoneBuenosAires               UpdateStatusPageDataAttributesTimeZone = "Buenos Aires"
-	UpdateStatusPageDataAttributesTimeZoneCairo                     UpdateStatusPageDataAttributesTimeZone = "Cairo"
-	UpdateStatusPageDataAttributesTimeZoneCanberra                  UpdateStatusPageDataAttributesTimeZone = "Canberra"
-	UpdateStatusPageDataAttributesTimeZoneCapeVerdeIs               UpdateStatusPageDataAttributesTimeZone = "Cape Verde Is."
-	UpdateStatusPageDataAttributesTimeZoneCaracas                   UpdateStatusPageDataAttributesTimeZone = "Caracas"
-	UpdateStatusPageDataAttributesTimeZoneCasablanca                UpdateStatusPageDataAttributesTimeZone = "Casablanca"
-	UpdateStatusPageDataAttributesTimeZoneCentralAmerica            UpdateStatusPageDataAttributesTimeZone = "Central America"
-	UpdateStatusPageDataAttributesTimeZoneCentralTimeUSCanada       UpdateStatusPageDataAttributesTimeZone = "Central Time (US & Canada)"
-	UpdateStatusPageDataAttributesTimeZoneChathamIs                 UpdateStatusPageDataAttributesTimeZone = "Chatham Is."
-	UpdateStatusPageDataAttributesTimeZoneChennai                   UpdateStatusPageDataAttributesTimeZone = "Chennai"
-	UpdateStatusPageDataAttributesTimeZoneChihuahua                 UpdateStatusPageDataAttributesTimeZone = "Chihuahua"
-	UpdateStatusPageDataAttributesTimeZoneChongqing                 UpdateStatusPageDataAttributesTimeZone = "Chongqing"
-	UpdateStatusPageDataAttributesTimeZoneCopenhagen                UpdateStatusPageDataAttributesTimeZone = "Copenhagen"
-	UpdateStatusPageDataAttributesTimeZoneDarwin                    UpdateStatusPageDataAttributesTimeZone = "Darwin"
-	UpdateStatusPageDataAttributesTimeZoneDhaka                     UpdateStatusPageDataAttributesTimeZone = "Dhaka"
-	UpdateStatusPageDataAttributesTimeZoneDublin                    UpdateStatusPageDataAttributesTimeZone = "Dublin"
-	UpdateStatusPageDataAttributesTimeZoneEasternTimeUSCanada       UpdateStatusPageDataAttributesTimeZone = "Eastern Time (US & Canada)"
-	UpdateStatusPageDataAttributesTimeZoneEdinburgh                 UpdateStatusPageDataAttributesTimeZone = "Edinburgh"
-	UpdateStatusPageDataAttributesTimeZoneEkaterinburg              UpdateStatusPageDataAttributesTimeZone = "Ekaterinburg"
-	UpdateStatusPageDataAttributesTimeZoneFiji                      UpdateStatusPageDataAttributesTimeZone = "Fiji"
-	UpdateStatusPageDataAttributesTimeZoneGeorgetown                UpdateStatusPageDataAttributesTimeZone = "Georgetown"
-	UpdateStatusPageDataAttributesTimeZoneGreenland                 UpdateStatusPageDataAttributesTimeZone = "Greenland"
-	UpdateStatusPageDataAttributesTimeZoneGuadalajara               UpdateStatusPageDataAttributesTimeZone = "Guadalajara"
-	UpdateStatusPageDataAttributesTimeZoneGuam                      UpdateStatusPageDataAttributesTimeZone = "Guam"
-	UpdateStatusPageDataAttributesTimeZoneHanoi                     UpdateStatusPageDataAttributesTimeZone = "Hanoi"
-	UpdateStatusPageDataAttributesTimeZoneHarare                    UpdateStatusPageDataAttributesTimeZone = "Harare"
-	UpdateStatusPageDataAttributesTimeZoneHawaii                    UpdateStatusPageDataAttributesTimeZone = "Hawaii"
-	UpdateStatusPageDataAttributesTimeZoneHelsinki                  UpdateStatusPageDataAttributesTimeZone = "Helsinki"
-	UpdateStatusPageDataAttributesTimeZoneHobart                    UpdateStatusPageDataAttributesTimeZone = "Hobart"
-	UpdateStatusPageDataAttributesTimeZoneHongKong                  UpdateStatusPageDataAttributesTimeZone = "Hong Kong"
-	UpdateStatusPageDataAttributesTimeZoneIndianaEast               UpdateStatusPageDataAttributesTimeZone = "Indiana (East)"
-	UpdateStatusPageDataAttributesTimeZoneInternationalDateLineWest UpdateStatusPageDataAttributesTimeZone = "International Date Line West"
-	UpdateStatusPageDataAttributesTimeZoneIrkutsk                   UpdateStatusPageDataAttributesTimeZone = "Irkutsk"
-	UpdateStatusPageDataAttributesTimeZoneIslamabad                 UpdateStatusPageDataAttributesTimeZone = "Islamabad"
-	UpdateStatusPageDataAttributesTimeZoneIstanbul                  UpdateStatusPageDataAttributesTimeZone = "Istanbul"
-	UpdateStatusPageDataAttributesTimeZoneJakarta                   UpdateStatusPageDataAttributesTimeZone = "Jakarta"
-	UpdateStatusPageDataAttributesTimeZoneJerusalem                 UpdateStatusPageDataAttributesTimeZone = "Jerusalem"
-	UpdateStatusPageDataAttributesTimeZoneKabul                     UpdateStatusPageDataAttributesTimeZone = "Kabul"
-	UpdateStatusPageDataAttributesTimeZoneKaliningrad               UpdateStatusPageDataAttributesTimeZone = "Kaliningrad"
-	UpdateStatusPageDataAttributesTimeZoneKamchatka                 UpdateStatusPageDataAttributesTimeZone = "Kamchatka"
-	UpdateStatusPageDataAttributesTimeZoneKarachi                   UpdateStatusPageDataAttributesTimeZone = "Karachi"
-	UpdateStatusPageDataAttributesTimeZoneKathmandu                 UpdateStatusPageDataAttributesTimeZone = "Kathmandu"
-	UpdateStatusPageDataAttributesTimeZoneKolkata                   UpdateStatusPageDataAttributesTimeZone = "Kolkata"
-	UpdateStatusPageDataAttributesTimeZoneKrasnoyarsk               UpdateStatusPageDataAttributesTimeZone = "Krasnoyarsk"
-	UpdateStatusPageDataAttributesTimeZoneKualaLumpur               UpdateStatusPageDataAttributesTimeZone = "Kuala Lumpur"
-	UpdateStatusPageDataAttributesTimeZoneKuwait                    UpdateStatusPageDataAttributesTimeZone = "Kuwait"
-	UpdateStatusPageDataAttributesTimeZoneKyiv                      UpdateStatusPageDataAttributesTimeZone = "Kyiv"
-	UpdateStatusPageDataAttributesTimeZoneLaPaz                     UpdateStatusPageDataAttributesTimeZone = "La Paz"
-	UpdateStatusPageDataAttributesTimeZoneLima                      UpdateStatusPageDataAttributesTimeZone = "Lima"
-	UpdateStatusPageDataAttributesTimeZoneLisbon                    UpdateStatusPageDataAttributesTimeZone = "Lisbon"
-	UpdateStatusPageDataAttributesTimeZoneLjubljana                 UpdateStatusPageDataAttributesTimeZone = "Ljubljana"
-	UpdateStatusPageDataAttributesTimeZoneLondon                    UpdateStatusPageDataAttributesTimeZone = "London"
-	UpdateStatusPageDataAttributesTimeZoneMadrid                    UpdateStatusPageDataAttributesTimeZone = "Madrid"
-	UpdateStatusPageDataAttributesTimeZoneMagadan                   UpdateStatusPageDataAttributesTimeZone = "Magadan"
-	UpdateStatusPageDataAttributesTimeZoneMarshallIs                UpdateStatusPageDataAttributesTimeZone = "Marshall Is."
-	UpdateStatusPageDataAttributesTimeZoneMazatlan                  UpdateStatusPageDataAttributesTimeZone = "Mazatlan"
-	UpdateStatusPageDataAttributesTimeZoneMelbourne                 UpdateStatusPageDataAttributesTimeZone = "Melbourne"
-	UpdateStatusPageDataAttributesTimeZoneMexicoCity                UpdateStatusPageDataAttributesTimeZone = "Mexico City"
-	UpdateStatusPageDataAttributesTimeZoneMidAtlantic               UpdateStatusPageDataAttributesTimeZone = "Mid-Atlantic"
-	UpdateStatusPageDataAttributesTimeZoneMidwayIsland              UpdateStatusPageDataAttributesTimeZone = "Midway Island"
-	UpdateStatusPageDataAttributesTimeZoneMinsk                     UpdateStatusPageDataAttributesTimeZone = "Minsk"
-	UpdateStatusPageDataAttributesTimeZoneMonrovia                  UpdateStatusPageDataAttributesTimeZone = "Monrovia"
-	UpdateStatusPageDataAttributesTimeZoneMonterrey                 UpdateStatusPageDataAttributesTimeZone = "Monterrey"
-	UpdateStatusPageDataAttributesTimeZoneMontevideo                UpdateStatusPageDataAttributesTimeZone = "Montevideo"
-	UpdateStatusPageDataAttributesTimeZoneMoscow                    UpdateStatusPageDataAttributesTimeZone = "Moscow"
-	UpdateStatusPageDataAttributesTimeZoneMountainTimeUSCanada      UpdateStatusPageDataAttributesTimeZone = "Mountain Time (US & Canada)"
-	UpdateStatusPageDataAttributesTimeZoneMumbai                    UpdateStatusPageDataAttributesTimeZone = "Mumbai"
-	UpdateStatusPageDataAttributesTimeZoneMuscat                    UpdateStatusPageDataAttributesTimeZone = "Muscat"
-	UpdateStatusPageDataAttributesTimeZoneNairobi                   UpdateStatusPageDataAttributesTimeZone = "Nairobi"
-	UpdateStatusPageDataAttributesTimeZoneNewCaledonia              UpdateStatusPageDataAttributesTimeZone = "New Caledonia"
-	UpdateStatusPageDataAttributesTimeZoneNewDelhi                  UpdateStatusPageDataAttributesTimeZone = "New Delhi"
-	UpdateStatusPageDataAttributesTimeZoneNewfoundland              UpdateStatusPageDataAttributesTimeZone = "Newfoundland"
-	UpdateStatusPageDataAttributesTimeZoneNovosibirsk               UpdateStatusPageDataAttributesTimeZone = "Novosibirsk"
-	UpdateStatusPageDataAttributesTimeZoneNukualofa                 UpdateStatusPageDataAttributesTimeZone = "Nuku'alofa"
-	UpdateStatusPageDataAttributesTimeZoneOsaka                     UpdateStatusPageDataAttributesTimeZone = "Osaka"
-	UpdateStatusPageDataAttributesTimeZonePacificTimeUSCanada       UpdateStatusPageDataAttributesTimeZone = "Pacific Time (US & Canada)"
-	UpdateStatusPageDataAttributesTimeZoneParis                     UpdateStatusPageDataAttributesTimeZone = "Paris"
-	UpdateStatusPageDataAttributesTimeZonePerth                     UpdateStatusPageDataAttributesTimeZone = "Perth"
-	UpdateStatusPageDataAttributesTimeZonePortMoresby               UpdateStatusPageDataAttributesTimeZone = "Port Moresby"
-	UpdateStatusPageDataAttributesTimeZonePrague                    UpdateStatusPageDataAttributesTimeZone = "Prague"
-	UpdateStatusPageDataAttributesTimeZonePretoria                  UpdateStatusPageDataAttributesTimeZone = "Pretoria"
-	UpdateStatusPageDataAttributesTimeZonePuertoRico                UpdateStatusPageDataAttributesTimeZone = "Puerto Rico"
-	UpdateStatusPageDataAttributesTimeZoneQuito                     UpdateStatusPageDataAttributesTimeZone = "Quito"
-	UpdateStatusPageDataAttributesTimeZoneRangoon                   UpdateStatusPageDataAttributesTimeZone = "Rangoon"
-	UpdateStatusPageDataAttributesTimeZoneRiga                      UpdateStatusPageDataAttributesTimeZone = "Riga"
-	UpdateStatusPageDataAttributesTimeZoneRiyadh                    UpdateStatusPageDataAttributesTimeZone = "Riyadh"
-	UpdateStatusPageDataAttributesTimeZoneRome                      UpdateStatusPageDataAttributesTimeZone = "Rome"
-	UpdateStatusPageDataAttributesTimeZoneSamara                    UpdateStatusPageDataAttributesTimeZone = "Samara"
-	UpdateStatusPageDataAttributesTimeZoneSamoa                     UpdateStatusPageDataAttributesTimeZone = "Samoa"
-	UpdateStatusPageDataAttributesTimeZoneSantiago                  UpdateStatusPageDataAttributesTimeZone = "Santiago"
-	UpdateStatusPageDataAttributesTimeZoneSapporo                   UpdateStatusPageDataAttributesTimeZone = "Sapporo"
-	UpdateStatusPageDataAttributesTimeZoneSarajevo                  UpdateStatusPageDataAttributesTimeZone = "Sarajevo"
-	UpdateStatusPageDataAttributesTimeZoneSaskatchewan              UpdateStatusPageDataAttributesTimeZone = "Saskatchewan"
-	UpdateStatusPageDataAttributesTimeZoneSeoul                     UpdateStatusPageDataAttributesTimeZone = "Seoul"
-	UpdateStatusPageDataAttributesTimeZoneSingapore                 UpdateStatusPageDataAttributesTimeZone = "Singapore"
-	UpdateStatusPageDataAttributesTimeZoneSkopje                    UpdateStatusPageDataAttributesTimeZone = "Skopje"
-	UpdateStatusPageDataAttributesTimeZoneSofia                     UpdateStatusPageDataAttributesTimeZone = "Sofia"
-	UpdateStatusPageDataAttributesTimeZoneSolomonIs                 UpdateStatusPageDataAttributesTimeZone = "Solomon Is."
-	UpdateStatusPageDataAttributesTimeZoneSrednekolymsk             UpdateStatusPageDataAttributesTimeZone = "Srednekolymsk"
-	UpdateStatusPageDataAttributesTimeZoneSriJayawardenepura        UpdateStatusPageDataAttributesTimeZone = "Sri Jayawardenepura"
-	UpdateStatusPageDataAttributesTimeZoneStPetersburg              UpdateStatusPageDataAttributesTimeZone = "St. Petersburg"
-	UpdateStatusPageDataAttributesTimeZoneStockholm                 UpdateStatusPageDataAttributesTimeZone = "Stockholm"
-	UpdateStatusPageDataAttributesTimeZoneSydney                    UpdateStatusPageDataAttributesTimeZone = "Sydney"
-	UpdateStatusPageDataAttributesTimeZoneTaipei                    UpdateStatusPageDataAttributesTimeZone = "Taipei"
-	UpdateStatusPageDataAttributesTimeZoneTallinn                   UpdateStatusPageDataAttributesTimeZone = "Tallinn"
-	UpdateStatusPageDataAttributesTimeZoneTashkent                  UpdateStatusPageDataAttributesTimeZone = "Tashkent"
-	UpdateStatusPageDataAttributesTimeZoneTbilisi                   UpdateStatusPageDataAttributesTimeZone = "Tbilisi"
-	UpdateStatusPageDataAttributesTimeZoneTehran                    UpdateStatusPageDataAttributesTimeZone = "Tehran"
-	UpdateStatusPageDataAttributesTimeZoneTijuana                   UpdateStatusPageDataAttributesTimeZone = "Tijuana"
-	UpdateStatusPageDataAttributesTimeZoneTokelauIs                 UpdateStatusPageDataAttributesTimeZone = "Tokelau Is."
-	UpdateStatusPageDataAttributesTimeZoneTokyo                     UpdateStatusPageDataAttributesTimeZone = "Tokyo"
-	UpdateStatusPageDataAttributesTimeZoneUTC                       UpdateStatusPageDataAttributesTimeZone = "UTC"
-	UpdateStatusPageDataAttributesTimeZoneUlaanbaatar               UpdateStatusPageDataAttributesTimeZone = "Ulaanbaatar"
-	UpdateStatusPageDataAttributesTimeZoneUrumqi                    UpdateStatusPageDataAttributesTimeZone = "Urumqi"
-	UpdateStatusPageDataAttributesTimeZoneVienna                    UpdateStatusPageDataAttributesTimeZone = "Vienna"
-	UpdateStatusPageDataAttributesTimeZoneVilnius                   UpdateStatusPageDataAttributesTimeZone = "Vilnius"
-	UpdateStatusPageDataAttributesTimeZoneVladivostok               UpdateStatusPageDataAttributesTimeZone = "Vladivostok"
-	UpdateStatusPageDataAttributesTimeZoneVolgograd                 UpdateStatusPageDataAttributesTimeZone = "Volgograd"
-	UpdateStatusPageDataAttributesTimeZoneWarsaw                    UpdateStatusPageDataAttributesTimeZone = "Warsaw"
-	UpdateStatusPageDataAttributesTimeZoneWellington                UpdateStatusPageDataAttributesTimeZone = "Wellington"
-	UpdateStatusPageDataAttributesTimeZoneWestCentralAfrica         UpdateStatusPageDataAttributesTimeZone = "West Central Africa"
-	UpdateStatusPageDataAttributesTimeZoneYakutsk                   UpdateStatusPageDataAttributesTimeZone = "Yakutsk"
-	UpdateStatusPageDataAttributesTimeZoneYerevan                   UpdateStatusPageDataAttributesTimeZone = "Yerevan"
-	UpdateStatusPageDataAttributesTimeZoneZagreb                    UpdateStatusPageDataAttributesTimeZone = "Zagreb"
-	UpdateStatusPageDataAttributesTimeZoneZurich                    UpdateStatusPageDataAttributesTimeZone = "Zurich"
 )
 
 // Defines values for UpdateStatusPageDataType.
@@ -6944,8 +5898,10 @@ type CreateGoogleCalendarEventTaskParams struct {
 	TaskType *CreateGoogleCalendarEventTaskParamsTaskType `json:"task_type,omitempty"`
 
 	// TimeOfMeeting Time of meeting in format HH:MM
-	TimeOfMeeting string                                       `json:"time_of_meeting"`
-	TimeZone      *CreateGoogleCalendarEventTaskParamsTimeZone `json:"time_zone"`
+	TimeOfMeeting string `json:"time_of_meeting"`
+
+	// TimeZone A valid IANA time zone name.
+	TimeZone *string `json:"time_zone"`
 }
 
 // CreateGoogleCalendarEventTaskParamsConferenceSolutionKey Sets the video conference type attached to the meeting
@@ -6953,9 +5909,6 @@ type CreateGoogleCalendarEventTaskParamsConferenceSolutionKey string
 
 // CreateGoogleCalendarEventTaskParamsTaskType defines model for CreateGoogleCalendarEventTaskParams.TaskType.
 type CreateGoogleCalendarEventTaskParamsTaskType string
-
-// CreateGoogleCalendarEventTaskParamsTimeZone defines model for CreateGoogleCalendarEventTaskParams.TimeZone.
-type CreateGoogleCalendarEventTaskParamsTimeZone string
 
 // CreateGoogleDocsPageTaskParams defines model for create_google_docs_page_task_params.
 type CreateGoogleDocsPageTaskParams struct {
@@ -7388,15 +6341,14 @@ type CreateOutlookEventTaskParams struct {
 	TaskType *CreateOutlookEventTaskParamsTaskType `json:"task_type,omitempty"`
 
 	// TimeOfMeeting Time of meeting in format HH:MM
-	TimeOfMeeting string                                `json:"time_of_meeting"`
-	TimeZone      *CreateOutlookEventTaskParamsTimeZone `json:"time_zone"`
+	TimeOfMeeting string `json:"time_of_meeting"`
+
+	// TimeZone A valid IANA time zone name.
+	TimeZone *string `json:"time_zone"`
 }
 
 // CreateOutlookEventTaskParamsTaskType defines model for CreateOutlookEventTaskParams.TaskType.
 type CreateOutlookEventTaskParamsTaskType string
-
-// CreateOutlookEventTaskParamsTimeZone defines model for CreateOutlookEventTaskParams.TimeZone.
-type CreateOutlookEventTaskParamsTimeZone string
 
 // CreatePagerdutyStatusUpdateTaskParams defines model for create_pagerduty_status_update_task_params.
 type CreatePagerdutyStatusUpdateTaskParams struct {
@@ -8298,6 +7250,109 @@ type FormFieldOptionResponse struct {
 // FormFieldOptionResponseDataType defines model for FormFieldOptionResponse.Data.Type.
 type FormFieldOptionResponseDataType string
 
+// FormFieldPlacement defines model for form_field_placement.
+type FormFieldPlacement struct {
+	// Form The form this field is placed on.
+	Form string `json:"form"`
+
+	// FormFieldId The form field that is placed.
+	FormFieldId string `json:"form_field_id"`
+
+	// FormSetId The form set this field is placed in.
+	FormSetId string `json:"form_set_id"`
+
+	// Position The position of the field placement.
+	Position int `json:"position"`
+
+	// Required Whether the field is required on this form.
+	Required bool `json:"required"`
+}
+
+// FormFieldPlacementCondition defines model for form_field_placement_condition.
+type FormFieldPlacementCondition struct {
+	// Comparison The condition comparison.
+	Comparison FormFieldPlacementConditionComparison `json:"comparison"`
+
+	// Conditioned The resource or attribute the condition applies.
+	Conditioned FormFieldPlacementConditionConditioned `json:"conditioned"`
+
+	// FormFieldId The condition field.
+	FormFieldId string `json:"form_field_id"`
+
+	// FormFieldPlacementId The form field placement this condition applies.
+	FormFieldPlacementId string `json:"form_field_placement_id"`
+
+	// Position The condition position.
+	Position int `json:"position"`
+
+	// Values The values for comparison.
+	Values []string `json:"values"`
+}
+
+// FormFieldPlacementConditionComparison The condition comparison.
+type FormFieldPlacementConditionComparison string
+
+// FormFieldPlacementConditionConditioned The resource or attribute the condition applies.
+type FormFieldPlacementConditionConditioned string
+
+// FormFieldPlacementConditionList defines model for form_field_placement_condition_list.
+type FormFieldPlacementConditionList struct {
+	Data []struct {
+		Attributes FormFieldPlacementCondition `json:"attributes"`
+
+		// Id Unique ID of the form set condition
+		Id   string                                  `json:"id"`
+		Type FormFieldPlacementConditionListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// FormFieldPlacementConditionListDataType defines model for FormFieldPlacementConditionList.Data.Type.
+type FormFieldPlacementConditionListDataType string
+
+// FormFieldPlacementConditionResponse defines model for form_field_placement_condition_response.
+type FormFieldPlacementConditionResponse struct {
+	Data struct {
+		Attributes FormFieldPlacementCondition `json:"attributes"`
+
+		// Id Unique ID of the form set condition
+		Id   string                                      `json:"id"`
+		Type FormFieldPlacementConditionResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// FormFieldPlacementConditionResponseDataType defines model for FormFieldPlacementConditionResponse.Data.Type.
+type FormFieldPlacementConditionResponseDataType string
+
+// FormFieldPlacementList defines model for form_field_placement_list.
+type FormFieldPlacementList struct {
+	Data []struct {
+		Attributes FormFieldPlacement `json:"attributes"`
+
+		// Id Unique ID of the form field placement
+		Id   string                         `json:"id"`
+		Type FormFieldPlacementListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// FormFieldPlacementListDataType defines model for FormFieldPlacementList.Data.Type.
+type FormFieldPlacementListDataType string
+
+// FormFieldPlacementResponse defines model for form_field_placement_response.
+type FormFieldPlacementResponse struct {
+	Data struct {
+		Attributes FormFieldPlacement `json:"attributes"`
+
+		// Id Unique ID of the form field placement
+		Id   string                             `json:"id"`
+		Type FormFieldPlacementResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// FormFieldPlacementResponseDataType defines model for FormFieldPlacementResponse.Data.Type.
+type FormFieldPlacementResponseDataType string
+
 // FormFieldPosition defines model for form_field_position.
 type FormFieldPosition struct {
 	// Form The form for the position
@@ -8355,6 +7410,103 @@ type FormFieldResponse struct {
 
 // FormFieldResponseDataType defines model for FormFieldResponse.Data.Type.
 type FormFieldResponseDataType string
+
+// FormSet defines model for form_set.
+type FormSet struct {
+	// CreatedAt Date of creation
+	CreatedAt string `json:"created_at"`
+
+	// Forms The forms included in the form set. Add custom forms using the custom form's `slug` field. Or choose a built-in form: `web_new_incident_form`, `web_update_incident_form`, `web_incident_post_mortem_form`, `web_incident_mitigation_form`, `web_incident_resolution_form`, `web_incident_cancellation_form`, `web_scheduled_incident_form`, `web_update_scheduled_incident_form`, `slack_new_incident_form`, `slack_update_incident_form`, `slack_update_incident_status_form`, `slack_incident_mitigation_form`, `slack_incident_resolution_form`, `slack_incident_cancellation_form`, `slack_scheduled_incident_form`, `slack_update_scheduled_incident_form`
+	Forms []string `json:"forms"`
+
+	// IsDefault Whether the form set is default
+	IsDefault bool `json:"is_default"`
+
+	// Name The name of the form set
+	Name string `json:"name"`
+
+	// Slug The slug of the form set
+	Slug string `json:"slug"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt string `json:"updated_at"`
+}
+
+// FormSetCondition defines model for form_set_condition.
+type FormSetCondition struct {
+	// Comparison The condition comparison.
+	Comparison FormSetConditionComparison `json:"comparison"`
+
+	// FormFieldId The form field this condition applies.
+	FormFieldId string `json:"form_field_id"`
+
+	// FormSetId The form set this condition applies.
+	FormSetId string `json:"form_set_id"`
+
+	// Values The values for comparison.
+	Values []string `json:"values"`
+}
+
+// FormSetConditionComparison The condition comparison.
+type FormSetConditionComparison string
+
+// FormSetConditionList defines model for form_set_condition_list.
+type FormSetConditionList struct {
+	Data []struct {
+		Attributes FormSetCondition `json:"attributes"`
+
+		// Id Unique ID of the form set condition
+		Id   string                       `json:"id"`
+		Type FormSetConditionListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// FormSetConditionListDataType defines model for FormSetConditionList.Data.Type.
+type FormSetConditionListDataType string
+
+// FormSetConditionResponse defines model for form_set_condition_response.
+type FormSetConditionResponse struct {
+	Data struct {
+		Attributes FormSetCondition `json:"attributes"`
+
+		// Id Unique ID of the form set condition
+		Id   string                           `json:"id"`
+		Type FormSetConditionResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// FormSetConditionResponseDataType defines model for FormSetConditionResponse.Data.Type.
+type FormSetConditionResponseDataType string
+
+// FormSetList defines model for form_set_list.
+type FormSetList struct {
+	Data []struct {
+		Attributes FormSet `json:"attributes"`
+
+		// Id Unique ID of the form set
+		Id   string              `json:"id"`
+		Type FormSetListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// FormSetListDataType defines model for FormSetList.Data.Type.
+type FormSetListDataType string
+
+// FormSetResponse defines model for form_set_response.
+type FormSetResponse struct {
+	Data struct {
+		Attributes FormSet `json:"attributes"`
+
+		// Id Unique ID of the form set
+		Id   string                  `json:"id"`
+		Type FormSetResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// FormSetResponseDataType defines model for FormSetResponse.Data.Type.
+type FormSetResponseDataType string
 
 // Functionality defines model for functionality.
 type Functionality struct {
@@ -8977,12 +8129,13 @@ type IncidentFeedbackResponseDataType string
 // IncidentFormFieldSelection defines model for incident_form_field_selection.
 type IncidentFormFieldSelection struct {
 	// FormFieldId The custom field for this selection
-	FormFieldId        string     `json:"form_field_id"`
-	IncidentId         string     `json:"incident_id"`
-	SelectedGroupIds   *[]string  `json:"selected_group_ids,omitempty"`
-	SelectedOptionIds  *[]string  `json:"selected_option_ids,omitempty"`
-	SelectedServiceIds *[]float32 `json:"selected_service_ids,omitempty"`
-	SelectedUserIds    *[]float32 `json:"selected_user_ids,omitempty"`
+	FormFieldId              string     `json:"form_field_id"`
+	IncidentId               string     `json:"incident_id"`
+	SelectedFunctionalityIds *[]float32 `json:"selected_functionality_ids,omitempty"`
+	SelectedGroupIds         *[]string  `json:"selected_group_ids,omitempty"`
+	SelectedOptionIds        *[]string  `json:"selected_option_ids,omitempty"`
+	SelectedServiceIds       *[]float32 `json:"selected_service_ids,omitempty"`
+	SelectedUserIds          *[]float32 `json:"selected_user_ids,omitempty"`
 
 	// Value The selected value for text kind custom fields
 	Value *string `json:"value"`
@@ -10249,6 +9402,61 @@ type NewFormFieldOption struct {
 // NewFormFieldOptionDataType defines model for NewFormFieldOption.Data.Type.
 type NewFormFieldOptionDataType string
 
+// NewFormFieldPlacement defines model for new_form_field_placement.
+type NewFormFieldPlacement struct {
+	Data struct {
+		Attributes struct {
+			// Form The form this field is placed on.
+			Form string `json:"form"`
+
+			// FormSetId The form set this field is placed in.
+			FormSetId string `json:"form_set_id"`
+
+			// Position The position of the field placement.
+			Position *int `json:"position,omitempty"`
+
+			// Required Whether the field is required on this form.
+			Required *bool `json:"required,omitempty"`
+		} `json:"attributes"`
+		Type NewFormFieldPlacementDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewFormFieldPlacementDataType defines model for NewFormFieldPlacement.Data.Type.
+type NewFormFieldPlacementDataType string
+
+// NewFormFieldPlacementCondition defines model for new_form_field_placement_condition.
+type NewFormFieldPlacementCondition struct {
+	Data struct {
+		Attributes struct {
+			// Comparison The condition comparison.
+			Comparison NewFormFieldPlacementConditionDataAttributesComparison `json:"comparison"`
+
+			// Conditioned The resource or attribute the condition applies.
+			Conditioned NewFormFieldPlacementConditionDataAttributesConditioned `json:"conditioned"`
+
+			// FormFieldId The condition field.
+			FormFieldId string `json:"form_field_id"`
+
+			// Position The condition position.
+			Position *int `json:"position,omitempty"`
+
+			// Values The values for comparison.
+			Values []string `json:"values"`
+		} `json:"attributes"`
+		Type NewFormFieldPlacementConditionDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewFormFieldPlacementConditionDataAttributesComparison The condition comparison.
+type NewFormFieldPlacementConditionDataAttributesComparison string
+
+// NewFormFieldPlacementConditionDataAttributesConditioned The resource or attribute the condition applies.
+type NewFormFieldPlacementConditionDataAttributesConditioned string
+
+// NewFormFieldPlacementConditionDataType defines model for NewFormFieldPlacementCondition.Data.Type.
+type NewFormFieldPlacementConditionDataType string
+
 // NewFormFieldPosition defines model for new_form_field_position.
 type NewFormFieldPosition struct {
 	Data struct {
@@ -10271,6 +9479,46 @@ type NewFormFieldPositionDataAttributesForm string
 
 // NewFormFieldPositionDataType defines model for NewFormFieldPosition.Data.Type.
 type NewFormFieldPositionDataType string
+
+// NewFormSet defines model for new_form_set.
+type NewFormSet struct {
+	Data struct {
+		Attributes struct {
+			// Forms The forms included in the form set. Add custom forms using the custom form's `slug` field. Or choose a built-in form: `web_new_incident_form`, `web_update_incident_form`, `web_incident_post_mortem_form`, `web_incident_mitigation_form`, `web_incident_resolution_form`, `web_incident_cancellation_form`, `web_scheduled_incident_form`, `web_update_scheduled_incident_form`, `slack_new_incident_form`, `slack_update_incident_form`, `slack_update_incident_status_form`, `slack_incident_mitigation_form`, `slack_incident_resolution_form`, `slack_incident_cancellation_form`, `slack_scheduled_incident_form`, `slack_update_scheduled_incident_form`
+			Forms []string `json:"forms"`
+
+			// Name The name of the form set
+			Name string `json:"name"`
+		} `json:"attributes"`
+		Type NewFormSetDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewFormSetDataType defines model for NewFormSet.Data.Type.
+type NewFormSetDataType string
+
+// NewFormSetCondition defines model for new_form_set_condition.
+type NewFormSetCondition struct {
+	Data struct {
+		Attributes struct {
+			// Comparison The condition comparison.
+			Comparison NewFormSetConditionDataAttributesComparison `json:"comparison"`
+
+			// FormFieldId The form field this condition applies.
+			FormFieldId string `json:"form_field_id"`
+
+			// Values The values for comparison.
+			Values []string `json:"values"`
+		} `json:"attributes"`
+		Type NewFormSetConditionDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewFormSetConditionDataAttributesComparison The condition comparison.
+type NewFormSetConditionDataAttributesComparison string
+
+// NewFormSetConditionDataType defines model for NewFormSetCondition.Data.Type.
+type NewFormSetConditionDataType string
 
 // NewFunctionality defines model for new_functionality.
 type NewFunctionality struct {
@@ -10588,12 +9836,13 @@ type NewIncidentFormFieldSelection struct {
 	Data struct {
 		Attributes struct {
 			// FormFieldId The custom field for this selection
-			FormFieldId        string     `json:"form_field_id"`
-			IncidentId         string     `json:"incident_id"`
-			SelectedGroupIds   *[]string  `json:"selected_group_ids,omitempty"`
-			SelectedOptionIds  *[]string  `json:"selected_option_ids,omitempty"`
-			SelectedServiceIds *[]float32 `json:"selected_service_ids,omitempty"`
-			SelectedUserIds    *[]float32 `json:"selected_user_ids,omitempty"`
+			FormFieldId              string     `json:"form_field_id"`
+			IncidentId               string     `json:"incident_id"`
+			SelectedFunctionalityIds *[]float32 `json:"selected_functionality_ids,omitempty"`
+			SelectedGroupIds         *[]string  `json:"selected_group_ids,omitempty"`
+			SelectedOptionIds        *[]string  `json:"selected_option_ids,omitempty"`
+			SelectedServiceIds       *[]float32 `json:"selected_service_ids,omitempty"`
+			SelectedUserIds          *[]float32 `json:"selected_user_ids,omitempty"`
 
 			// Value The selected value for text kind custom fields
 			Value *string `json:"value"`
@@ -10795,6 +10044,33 @@ type NewIncidentType struct {
 
 // NewIncidentTypeDataType defines model for NewIncidentType.Data.Type.
 type NewIncidentTypeDataType string
+
+// NewOnCallShadow defines model for new_on_call_shadow.
+type NewOnCallShadow struct {
+	Data struct {
+		Attributes struct {
+			// EndsAt End datetime for shadow shift
+			EndsAt time.Time `json:"ends_at"`
+
+			// ShadowUserId Which user the shadow shift belongs to.
+			ShadowUserId int `json:"shadow_user_id"`
+
+			// ShadowableId ID of schedule or user the shadow user is shadowing
+			ShadowableId   string                                      `json:"shadowable_id"`
+			ShadowableType NewOnCallShadowDataAttributesShadowableType `json:"shadowable_type"`
+
+			// StartsAt Start datetime of shadow shift
+			StartsAt time.Time `json:"starts_at"`
+		} `json:"attributes"`
+		Type NewOnCallShadowDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewOnCallShadowDataAttributesShadowableType defines model for NewOnCallShadow.Data.Attributes.ShadowableType.
+type NewOnCallShadowDataAttributesShadowableType string
+
+// NewOnCallShadowDataType defines model for NewOnCallShadow.Data.Type.
+type NewOnCallShadowDataType string
 
 // NewOverrideShift defines model for new_override_shift.
 type NewOverrideShift struct {
@@ -11175,8 +10451,8 @@ type NewScheduleRotation struct {
 			// ScheduleRotationableType Schedule rotation type
 			ScheduleRotationableType NewScheduleRotationDataAttributesScheduleRotationableType `json:"schedule_rotationable_type"`
 
-			// TimeZone Schedule Rotation Timezone
-			TimeZone *NewScheduleRotationDataAttributesTimeZone `json:"time_zone,omitempty"`
+			// TimeZone A valid IANA time zone name.
+			TimeZone *string `json:"time_zone,omitempty"`
 		} `json:"attributes"`
 		Type NewScheduleRotationDataType `json:"type"`
 	} `json:"data"`
@@ -11193,9 +10469,6 @@ type NewScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthU
 
 // NewScheduleRotationDataAttributesScheduleRotationableType Schedule rotation type
 type NewScheduleRotationDataAttributesScheduleRotationableType string
-
-// NewScheduleRotationDataAttributesTimeZone Schedule Rotation Timezone
-type NewScheduleRotationDataAttributesTimeZone string
 
 // NewScheduleRotationDataType defines model for NewScheduleRotation.Data.Type.
 type NewScheduleRotationDataType string
@@ -11469,8 +10742,8 @@ type NewStatusPage struct {
 			// SuccessMessage Message showing when all components are operational
 			SuccessMessage *string `json:"success_message"`
 
-			// TimeZone Status Page Timezone
-			TimeZone *NewStatusPageDataAttributesTimeZone `json:"time_zone"`
+			// TimeZone A valid IANA time zone name.
+			TimeZone *string `json:"time_zone"`
 
 			// Title The title of the status page
 			Title string `json:"title"`
@@ -11490,9 +10763,6 @@ type NewStatusPage struct {
 
 // NewStatusPageDataAttributesShowUptimeLastDays Show uptime over x days
 type NewStatusPageDataAttributesShowUptimeLastDays int
-
-// NewStatusPageDataAttributesTimeZone Status Page Timezone
-type NewStatusPageDataAttributesTimeZone string
 
 // NewStatusPageDataType defines model for NewStatusPage.Data.Type.
 type NewStatusPageDataType string
@@ -11637,6 +10907,9 @@ type NewWorkflow struct {
 			GroupIds         *[]string `json:"group_ids,omitempty"`
 			IncidentRoleIds  *[]string `json:"incident_role_ids,omitempty"`
 			IncidentTypeIds  *[]string `json:"incident_type_ids,omitempty"`
+
+			// Locked Restricts workflow edits to admins when turned on. Only admins can set this field.
+			Locked *bool `json:"locked,omitempty"`
 
 			// Name The title of the workflow
 			Name string `json:"name"`
@@ -11870,6 +11143,63 @@ type NewWorkflowTask_Data_Attributes_TaskParams struct {
 // NewWorkflowTaskDataType defines model for NewWorkflowTask.Data.Type.
 type NewWorkflowTaskDataType string
 
+// OnCallShadow defines model for on_call_shadow.
+type OnCallShadow struct {
+	// CreatedAt Date of creation
+	CreatedAt *string `json:"created_at,omitempty"`
+
+	// EndsAt End datetime for shadow shift
+	EndsAt time.Time `json:"ends_at"`
+
+	// ScheduleId ID of schedule the shadow shift belongs to
+	ScheduleId string `json:"schedule_id"`
+
+	// ShadowUserId Which user the shadow shift belongs to.
+	ShadowUserId int `json:"shadow_user_id"`
+
+	// ShadowableId ID of schedule or user the shadow user is shadowing
+	ShadowableId   string                     `json:"shadowable_id"`
+	ShadowableType OnCallShadowShadowableType `json:"shadowable_type"`
+
+	// StartsAt Start datetime of shadow shift
+	StartsAt time.Time `json:"starts_at"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt *string `json:"updated_at,omitempty"`
+}
+
+// OnCallShadowShadowableType defines model for OnCallShadow.ShadowableType.
+type OnCallShadowShadowableType string
+
+// OnCallShadowResponse defines model for on_call_shadow_response.
+type OnCallShadowResponse struct {
+	Data struct {
+		Attributes OnCallShadow `json:"attributes"`
+
+		// Id Unique ID of shadow shift
+		Id   string                       `json:"id"`
+		Type OnCallShadowResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// OnCallShadowResponseDataType defines model for OnCallShadowResponse.Data.Type.
+type OnCallShadowResponseDataType string
+
+// OnCallShadowsList defines model for on_call_shadows_list.
+type OnCallShadowsList struct {
+	Data []struct {
+		Attributes OnCallShadow `json:"attributes"`
+
+		// Id Unique id of the on call shadow shift
+		Id   string                    `json:"id"`
+		Type OnCallShadowsListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// OnCallShadowsListDataType defines model for OnCallShadowsList.Data.Type.
+type OnCallShadowsListDataType string
+
 // OverrideShift defines model for override_shift.
 type OverrideShift struct {
 	// CreatedAt Date of creation
@@ -11896,8 +11226,8 @@ type OverrideShift struct {
 	// UpdatedAt Date of last update
 	UpdatedAt *string `json:"updated_at,omitempty"`
 
-	// UserId User to whom override shift is assigned to
-	UserId int `json:"user_id"`
+	// User User metadata
+	User *UserResponse `json:"user,omitempty"`
 }
 
 // OverrideShiftList defines model for override_shift_list.
@@ -11942,6 +11272,9 @@ type PageOpsgenieOnCallRespondersTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"teams,omitempty"`
+
+	// Title Incident title.
+	Title *string `json:"title"`
 	Users *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -11971,8 +11304,11 @@ type PagePagerdutyOnCallRespondersTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"service"`
 	TaskType *PagePagerdutyOnCallRespondersTaskParamsTaskType `json:"task_type,omitempty"`
-	Urgency  *PagePagerdutyOnCallRespondersTaskParamsUrgency  `json:"urgency,omitempty"`
-	Users    *[]struct {
+
+	// Title Incident title.
+	Title   *string                                         `json:"title"`
+	Urgency *PagePagerdutyOnCallRespondersTaskParamsUrgency `json:"urgency,omitempty"`
+	Users   *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"users,omitempty"`
@@ -12017,7 +11353,10 @@ type PageVictorOpsOnCallRespondersTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"escalation_policies,omitempty"`
 	TaskType *PageVictorOpsOnCallRespondersTaskParamsTaskType `json:"task_type,omitempty"`
-	Users    *[]struct {
+
+	// Title Alert title.
+	Title *string `json:"title"`
+	Users *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"users,omitempty"`
@@ -12401,6 +11740,23 @@ type RenameSlackChannelTaskParams struct {
 
 // RenameSlackChannelTaskParamsTaskType defines model for RenameSlackChannelTaskParams.TaskType.
 type RenameSlackChannelTaskParamsTaskType string
+
+// ResolveAlert defines model for resolve_alert.
+type ResolveAlert struct {
+	Data *struct {
+		Attributes *struct {
+			// ResolutionMessage How was the alert resolved?
+			ResolutionMessage *string `json:"resolution_message"`
+
+			// ResolveRelatedIncidents Resolve all associated incidents
+			ResolveRelatedIncidents *bool `json:"resolve_related_incidents"`
+		} `json:"attributes,omitempty"`
+		Type *ResolveAlertDataType `json:"type,omitempty"`
+	} `json:"data,omitempty"`
+}
+
+// ResolveAlertDataType defines model for ResolveAlert.Data.Type.
+type ResolveAlertDataType string
 
 // ResolveIncident defines model for resolve_incident.
 type ResolveIncident struct {
@@ -12842,8 +12198,8 @@ type ScheduleRotation struct {
 	// ScheduleRotationableType Schedule rotation type
 	ScheduleRotationableType ScheduleRotationScheduleRotationableType `json:"schedule_rotationable_type"`
 
-	// TimeZone Schedule Rotation Timezone
-	TimeZone *ScheduleRotationTimeZone `json:"time_zone,omitempty"`
+	// TimeZone A valid IANA time zone name.
+	TimeZone *string `json:"time_zone,omitempty"`
 }
 
 // ScheduleRotationActiveDays Schedule rotation active days
@@ -12857,9 +12213,6 @@ type ScheduleRotationScheduleRotationableAttributesShiftLengthUnit string
 
 // ScheduleRotationScheduleRotationableType Schedule rotation type
 type ScheduleRotationScheduleRotationableType string
-
-// ScheduleRotationTimeZone Schedule Rotation Timezone
-type ScheduleRotationTimeZone string
 
 // ScheduleRotationActiveDay defines model for schedule_rotation_active_day.
 type ScheduleRotationActiveDay struct {
@@ -13385,6 +12738,44 @@ type SeverityResponse struct {
 // SeverityResponseDataType defines model for SeverityResponse.Data.Type.
 type SeverityResponseDataType string
 
+// Shift defines model for shift.
+type Shift struct {
+	// EndsAt End datetime of shift
+	EndsAt string `json:"ends_at"`
+
+	// IsOverride Denotes shift is an override shift
+	IsOverride bool `json:"is_override"`
+
+	// RotationId ID of rotation
+	RotationId *string `json:"rotation_id"`
+
+	// ScheduleId ID of schedule
+	ScheduleId string `json:"schedule_id"`
+
+	// ShiftOverride Override metadata
+	ShiftOverride *ShiftOverrideResponse `json:"shift_override"`
+
+	// StartsAt Start datetime of shift
+	StartsAt string `json:"starts_at"`
+
+	// User User metadata
+	User *UserResponse `json:"user,omitempty"`
+}
+
+// ShiftList defines model for shift_list.
+type ShiftList struct {
+	Data []struct {
+		Attributes Shift `json:"attributes"`
+
+		// Id Unique ID of the shift
+		Id   string            `json:"id"`
+		Type ShiftListDataType `json:"type"`
+	} `json:"data"`
+}
+
+// ShiftListDataType defines model for ShiftList.Data.Type.
+type ShiftListDataType string
+
 // ShiftOverride defines model for shift_override.
 type ShiftOverride struct {
 	// CreatedAt Date of creation
@@ -13555,8 +12946,8 @@ type StatusPage struct {
 	// SuccessMessage Message showing when all components are operational
 	SuccessMessage *string `json:"success_message"`
 
-	// TimeZone Status Page Timezone
-	TimeZone *StatusPageTimeZone `json:"time_zone"`
+	// TimeZone A valid IANA time zone name.
+	TimeZone *string `json:"time_zone"`
 
 	// Title The title of the status page
 	Title string `json:"title"`
@@ -13576,9 +12967,6 @@ type StatusPage struct {
 
 // StatusPageShowUptimeLastDays Show uptime over x days
 type StatusPageShowUptimeLastDays int
-
-// StatusPageTimeZone Status Page Timezone
-type StatusPageTimeZone string
 
 // StatusPageList defines model for status_page_list.
 type StatusPageList struct {
@@ -13911,6 +13299,18 @@ type UpdateAsanaTaskTaskParamsDependencyDirection string
 
 // UpdateAsanaTaskTaskParamsTaskType defines model for UpdateAsanaTaskTaskParams.TaskType.
 type UpdateAsanaTaskTaskParamsTaskType string
+
+// UpdateAttachedAlertsTaskParams defines model for update_attached_alerts_task_params.
+type UpdateAttachedAlertsTaskParams struct {
+	Status   UpdateAttachedAlertsTaskParamsStatus    `json:"status"`
+	TaskType *UpdateAttachedAlertsTaskParamsTaskType `json:"task_type,omitempty"`
+}
+
+// UpdateAttachedAlertsTaskParamsStatus defines model for UpdateAttachedAlertsTaskParams.Status.
+type UpdateAttachedAlertsTaskParamsStatus string
+
+// UpdateAttachedAlertsTaskParamsTaskType defines model for UpdateAttachedAlertsTaskParams.TaskType.
+type UpdateAttachedAlertsTaskParamsTaskType string
 
 // UpdateAuthorization defines model for update_authorization.
 type UpdateAuthorization struct {
@@ -14265,6 +13665,61 @@ type UpdateFormFieldOption struct {
 // UpdateFormFieldOptionDataType defines model for UpdateFormFieldOption.Data.Type.
 type UpdateFormFieldOptionDataType string
 
+// UpdateFormFieldPlacement defines model for update_form_field_placement.
+type UpdateFormFieldPlacement struct {
+	Data struct {
+		Attributes struct {
+			// Form The form this field is placed on.
+			Form *string `json:"form,omitempty"`
+
+			// FormSetId The form set this field is placed in.
+			FormSetId *string `json:"form_set_id,omitempty"`
+
+			// Position The position of the field placement.
+			Position *int `json:"position,omitempty"`
+
+			// Required Whether the field is required on this form.
+			Required *bool `json:"required,omitempty"`
+		} `json:"attributes"`
+		Type UpdateFormFieldPlacementDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateFormFieldPlacementDataType defines model for UpdateFormFieldPlacement.Data.Type.
+type UpdateFormFieldPlacementDataType string
+
+// UpdateFormFieldPlacementCondition defines model for update_form_field_placement_condition.
+type UpdateFormFieldPlacementCondition struct {
+	Data struct {
+		Attributes struct {
+			// Comparison The condition comparison.
+			Comparison *UpdateFormFieldPlacementConditionDataAttributesComparison `json:"comparison,omitempty"`
+
+			// Conditioned The resource or attribute the condition applies.
+			Conditioned *UpdateFormFieldPlacementConditionDataAttributesConditioned `json:"conditioned,omitempty"`
+
+			// FormFieldId The condition field.
+			FormFieldId *string `json:"form_field_id,omitempty"`
+
+			// Position The condition position.
+			Position *int `json:"position,omitempty"`
+
+			// Values The values for comparison.
+			Values *[]string `json:"values,omitempty"`
+		} `json:"attributes"`
+		Type UpdateFormFieldPlacementConditionDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateFormFieldPlacementConditionDataAttributesComparison The condition comparison.
+type UpdateFormFieldPlacementConditionDataAttributesComparison string
+
+// UpdateFormFieldPlacementConditionDataAttributesConditioned The resource or attribute the condition applies.
+type UpdateFormFieldPlacementConditionDataAttributesConditioned string
+
+// UpdateFormFieldPlacementConditionDataType defines model for UpdateFormFieldPlacementCondition.Data.Type.
+type UpdateFormFieldPlacementConditionDataType string
+
 // UpdateFormFieldPosition defines model for update_form_field_position.
 type UpdateFormFieldPosition struct {
 	Data struct {
@@ -14287,6 +13742,46 @@ type UpdateFormFieldPositionDataAttributesForm string
 
 // UpdateFormFieldPositionDataType defines model for UpdateFormFieldPosition.Data.Type.
 type UpdateFormFieldPositionDataType string
+
+// UpdateFormSet defines model for update_form_set.
+type UpdateFormSet struct {
+	Data struct {
+		Attributes struct {
+			// Forms The forms included in the form set. Add custom forms using the custom form's `slug` field. Or choose a built-in form: `web_new_incident_form`, `web_update_incident_form`, `web_incident_post_mortem_form`, `web_incident_mitigation_form`, `web_incident_resolution_form`, `web_incident_cancellation_form`, `web_scheduled_incident_form`, `web_update_scheduled_incident_form`, `slack_new_incident_form`, `slack_update_incident_form`, `slack_update_incident_status_form`, `slack_incident_mitigation_form`, `slack_incident_resolution_form`, `slack_incident_cancellation_form`, `slack_scheduled_incident_form`, `slack_update_scheduled_incident_form`
+			Forms *[]string `json:"forms,omitempty"`
+
+			// Name The name of the form set
+			Name *string `json:"name,omitempty"`
+		} `json:"attributes"`
+		Type UpdateFormSetDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateFormSetDataType defines model for UpdateFormSet.Data.Type.
+type UpdateFormSetDataType string
+
+// UpdateFormSetCondition defines model for update_form_set_condition.
+type UpdateFormSetCondition struct {
+	Data struct {
+		Attributes struct {
+			// Comparison The condition comparison.
+			Comparison *UpdateFormSetConditionDataAttributesComparison `json:"comparison,omitempty"`
+
+			// FormFieldId The form field this condition applies.
+			FormFieldId *string `json:"form_field_id,omitempty"`
+
+			// Values The values for comparison.
+			Values *[]string `json:"values,omitempty"`
+		} `json:"attributes"`
+		Type UpdateFormSetConditionDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateFormSetConditionDataAttributesComparison The condition comparison.
+type UpdateFormSetConditionDataAttributesComparison string
+
+// UpdateFormSetConditionDataType defines model for UpdateFormSetCondition.Data.Type.
+type UpdateFormSetConditionDataType string
 
 // UpdateFunctionality defines model for update_functionality.
 type UpdateFunctionality struct {
@@ -14692,10 +14187,11 @@ type UpdateIncidentFeedbackDataType string
 type UpdateIncidentFormFieldSelection struct {
 	Data struct {
 		Attributes struct {
-			SelectedGroupIds   *[]string  `json:"selected_group_ids,omitempty"`
-			SelectedOptionIds  *[]string  `json:"selected_option_ids,omitempty"`
-			SelectedServiceIds *[]float32 `json:"selected_service_ids,omitempty"`
-			SelectedUserIds    *[]float32 `json:"selected_user_ids,omitempty"`
+			SelectedFunctionalityIds *[]float32 `json:"selected_functionality_ids,omitempty"`
+			SelectedGroupIds         *[]string  `json:"selected_group_ids,omitempty"`
+			SelectedOptionIds        *[]string  `json:"selected_option_ids,omitempty"`
+			SelectedServiceIds       *[]float32 `json:"selected_service_ids,omitempty"`
+			SelectedUserIds          *[]float32 `json:"selected_user_ids,omitempty"`
 
 			// Value The selected value for text kind custom fields
 			Value *string `json:"value"`
@@ -15115,6 +14611,36 @@ type UpdateNotionPageTaskParams struct {
 
 // UpdateNotionPageTaskParamsTaskType defines model for UpdateNotionPageTaskParams.TaskType.
 type UpdateNotionPageTaskParamsTaskType string
+
+// UpdateOnCallShadow defines model for update_on_call_shadow.
+type UpdateOnCallShadow struct {
+	Data struct {
+		Attributes struct {
+			// EndsAt End datetime for shadow shift
+			EndsAt *time.Time `json:"ends_at,omitempty"`
+
+			// ScheduleId ID of schedule the shadow shift belongs to
+			ScheduleId *string `json:"schedule_id,omitempty"`
+
+			// ShadowUserId Which user the shadow shift belongs to.
+			ShadowUserId *int `json:"shadow_user_id,omitempty"`
+
+			// ShadowableId ID of schedule or user the shadow user is shadowing
+			ShadowableId   *string                                         `json:"shadowable_id,omitempty"`
+			ShadowableType *UpdateOnCallShadowDataAttributesShadowableType `json:"shadowable_type,omitempty"`
+
+			// StartsAt Start datetime of shadow shift
+			StartsAt *time.Time `json:"starts_at,omitempty"`
+		} `json:"attributes"`
+		Type UpdateOnCallShadowDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateOnCallShadowDataAttributesShadowableType defines model for UpdateOnCallShadow.Data.Attributes.ShadowableType.
+type UpdateOnCallShadowDataAttributesShadowableType string
+
+// UpdateOnCallShadowDataType defines model for UpdateOnCallShadow.Data.Type.
+type UpdateOnCallShadowDataType string
 
 // UpdateOpsgenieAlertTaskParams defines model for update_opsgenie_alert_task_params.
 type UpdateOpsgenieAlertTaskParams struct {
@@ -15621,8 +15147,8 @@ type UpdateScheduleRotation struct {
 			// ScheduleRotationableType Schedule rotation type
 			ScheduleRotationableType *UpdateScheduleRotationDataAttributesScheduleRotationableType `json:"schedule_rotationable_type,omitempty"`
 
-			// TimeZone Schedule Rotation Timezone
-			TimeZone *UpdateScheduleRotationDataAttributesTimeZone `json:"time_zone,omitempty"`
+			// TimeZone A valid IANA time zone name.
+			TimeZone *string `json:"time_zone,omitempty"`
 		} `json:"attributes"`
 		Type UpdateScheduleRotationDataType `json:"type"`
 	} `json:"data"`
@@ -15639,9 +15165,6 @@ type UpdateScheduleRotationDataAttributesScheduleRotationableAttributesShiftLeng
 
 // UpdateScheduleRotationDataAttributesScheduleRotationableType Schedule rotation type
 type UpdateScheduleRotationDataAttributesScheduleRotationableType string
-
-// UpdateScheduleRotationDataAttributesTimeZone Schedule Rotation Timezone
-type UpdateScheduleRotationDataAttributesTimeZone string
 
 // UpdateScheduleRotationDataType defines model for UpdateScheduleRotation.Data.Type.
 type UpdateScheduleRotationDataType string
@@ -15994,8 +15517,8 @@ type UpdateStatusPage struct {
 			// SuccessMessage Message showing when all components are operational
 			SuccessMessage *string `json:"success_message"`
 
-			// TimeZone Status Page Timezone
-			TimeZone *UpdateStatusPageDataAttributesTimeZone `json:"time_zone"`
+			// TimeZone A valid IANA time zone name.
+			TimeZone *string `json:"time_zone"`
 
 			// Title The title of the status page
 			Title *string `json:"title,omitempty"`
@@ -16015,9 +15538,6 @@ type UpdateStatusPage struct {
 
 // UpdateStatusPageDataAttributesShowUptimeLastDays Show uptime over x days
 type UpdateStatusPageDataAttributesShowUptimeLastDays int
-
-// UpdateStatusPageDataAttributesTimeZone Status Page Timezone
-type UpdateStatusPageDataAttributesTimeZone string
 
 // UpdateStatusPageDataType defines model for UpdateStatusPage.Data.Type.
 type UpdateStatusPageDataType string
@@ -16229,6 +15749,9 @@ type UpdateWorkflow struct {
 			IncidentRoleIds  *[]string `json:"incident_role_ids,omitempty"`
 			IncidentTypeIds  *[]string `json:"incident_type_ids,omitempty"`
 
+			// Locked Restricts workflow edits to admins when turned on. Only admins can set this field.
+			Locked *bool `json:"locked,omitempty"`
+
 			// Name The title of the workflow
 			Name *string `json:"name,omitempty"`
 
@@ -16412,6 +15935,9 @@ type User struct {
 
 	// FullNameWithTeam The full name with team of the user
 	FullNameWithTeam *string `json:"full_name_with_team"`
+
+	// TimeZone Configured time zone
+	TimeZone *string `json:"time_zone"`
 
 	// UpdatedAt Date of last update
 	UpdatedAt string `json:"updated_at"`
@@ -16626,6 +16152,9 @@ type Workflow struct {
 	GroupIds         *[]string `json:"group_ids,omitempty"`
 	IncidentRoleIds  *[]string `json:"incident_role_ids,omitempty"`
 	IncidentTypeIds  *[]string `json:"incident_type_ids,omitempty"`
+
+	// Locked Restricts workflow edits to admins when turned on. Only admins can set this field.
+	Locked *bool `json:"locked,omitempty"`
 
 	// Name The title of the workflow
 	Name string `json:"name"`
@@ -17134,6 +16663,14 @@ type ListIncidentEventServicesParams struct {
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
+// ListFormFieldPlacementConditionsParams defines parameters for ListFormFieldPlacementConditions.
+type ListFormFieldPlacementConditionsParams struct {
+	Include           *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterFormFieldId *string `form:"filter[form_field_id],omitempty" json:"filter[form_field_id],omitempty"`
+}
+
 // ListFormFieldsParams defines parameters for ListFormFields.
 type ListFormFieldsParams struct {
 	Include            *string `form:"include,omitempty" json:"include,omitempty"`
@@ -17159,12 +16696,41 @@ type ListFormFieldOptionsParams struct {
 	FilterColor *string `form:"filter[color],omitempty" json:"filter[color],omitempty"`
 }
 
+// ListFormFieldPlacementsParams defines parameters for ListFormFieldPlacements.
+type ListFormFieldPlacementsParams struct {
+	Include           *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterFormFieldId *string `form:"filter[form_field_id],omitempty" json:"filter[form_field_id],omitempty"`
+}
+
 // ListFormFieldPositionsParams defines parameters for ListFormFieldPositions.
 type ListFormFieldPositionsParams struct {
 	Include    *string `form:"include,omitempty" json:"include,omitempty"`
 	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 	FilterForm *string `form:"filter[form],omitempty" json:"filter[form],omitempty"`
+}
+
+// ListFormSetsParams defines parameters for ListFormSets.
+type ListFormSetsParams struct {
+	Include            *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterIsDefault    *bool   `form:"filter[is_default],omitempty" json:"filter[is_default],omitempty"`
+	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+}
+
+// ListFormSetConditionsParams defines parameters for ListFormSetConditions.
+type ListFormSetConditionsParams struct {
+	Include           *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterFormFieldId *string `form:"filter[form_field_id],omitempty" json:"filter[form_field_id],omitempty"`
 }
 
 // ListFunctionalitiesParams defines parameters for ListFunctionalities.
@@ -17535,6 +17101,19 @@ type ListSchedulesParams struct {
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
+// GetScheduleShiftsParams defines parameters for GetScheduleShifts.
+type GetScheduleShiftsParams struct {
+	To   *string `form:"to,omitempty" json:"to,omitempty"`
+	From *string `form:"from,omitempty" json:"from,omitempty"`
+}
+
+// ListOnCallShadowsParams defines parameters for ListOnCallShadows.
+type ListOnCallShadowsParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+}
+
 // ListOverrideShiftsParams defines parameters for ListOverrideShifts.
 type ListOverrideShiftsParams struct {
 	Include    *string `form:"include,omitempty" json:"include,omitempty"`
@@ -17598,6 +17177,19 @@ type ListSeveritiesParams struct {
 	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
 	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
 	Sort               *string `form:"sort,omitempty" json:"sort,omitempty"`
+}
+
+// ListShiftsParams defines parameters for ListShifts.
+type ListShiftsParams struct {
+	Include *string `form:"include,omitempty" json:"include,omitempty"`
+
+	// To Start range for shifts
+	To *string `form:"to,omitempty" json:"to,omitempty"`
+
+	// From End range for shifts
+	From        *string   `form:"from,omitempty" json:"from,omitempty"`
+	UserIds     *[]string `form:"user_ids[],omitempty" json:"user_ids[],omitempty"`
+	ScheduleIds *[]string `form:"schedule_ids[],omitempty" json:"schedule_ids[],omitempty"`
 }
 
 // ListStatusPagesParams defines parameters for ListStatusPages.
@@ -17749,6 +17341,9 @@ type UpdateIncidentActionItemApplicationVndAPIPlusJSONRequestBody = UpdateIncide
 // CreateAlertApplicationVndAPIPlusJSONRequestBody defines body for CreateAlert for application/vnd.api+json ContentType.
 type CreateAlertApplicationVndAPIPlusJSONRequestBody = NewAlert
 
+// ResolveAlertApplicationVndAPIPlusJSONRequestBody defines body for ResolveAlert for application/vnd.api+json ContentType.
+type ResolveAlertApplicationVndAPIPlusJSONRequestBody = ResolveAlert
+
 // CreateAuthorizationApplicationVndAPIPlusJSONRequestBody defines body for CreateAuthorization for application/vnd.api+json ContentType.
 type CreateAuthorizationApplicationVndAPIPlusJSONRequestBody = NewAuthorization
 
@@ -17824,6 +17419,15 @@ type UpdateIncidentFeedbackApplicationVndAPIPlusJSONRequestBody = UpdateIncident
 // UpdateFormFieldOptionApplicationVndAPIPlusJSONRequestBody defines body for UpdateFormFieldOption for application/vnd.api+json ContentType.
 type UpdateFormFieldOptionApplicationVndAPIPlusJSONRequestBody = UpdateFormFieldOption
 
+// UpdateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody defines body for UpdateFormFieldPlacementCondition for application/vnd.api+json ContentType.
+type UpdateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody = UpdateFormFieldPlacementCondition
+
+// CreateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody defines body for CreateFormFieldPlacementCondition for application/vnd.api+json ContentType.
+type CreateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody = NewFormFieldPlacementCondition
+
+// UpdateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody defines body for UpdateFormFieldPlacement for application/vnd.api+json ContentType.
+type UpdateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody = UpdateFormFieldPlacement
+
 // UpdateFormFieldPositionApplicationVndAPIPlusJSONRequestBody defines body for UpdateFormFieldPosition for application/vnd.api+json ContentType.
 type UpdateFormFieldPositionApplicationVndAPIPlusJSONRequestBody = UpdateFormFieldPosition
 
@@ -17833,11 +17437,26 @@ type CreateFormFieldApplicationVndAPIPlusJSONRequestBody = NewFormField
 // CreateFormFieldOptionApplicationVndAPIPlusJSONRequestBody defines body for CreateFormFieldOption for application/vnd.api+json ContentType.
 type CreateFormFieldOptionApplicationVndAPIPlusJSONRequestBody = NewFormFieldOption
 
+// CreateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody defines body for CreateFormFieldPlacement for application/vnd.api+json ContentType.
+type CreateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody = NewFormFieldPlacement
+
 // CreateFormFieldPositionApplicationVndAPIPlusJSONRequestBody defines body for CreateFormFieldPosition for application/vnd.api+json ContentType.
 type CreateFormFieldPositionApplicationVndAPIPlusJSONRequestBody = NewFormFieldPosition
 
 // UpdateFormFieldApplicationVndAPIPlusJSONRequestBody defines body for UpdateFormField for application/vnd.api+json ContentType.
 type UpdateFormFieldApplicationVndAPIPlusJSONRequestBody = UpdateFormField
+
+// UpdateFormSetConditionApplicationVndAPIPlusJSONRequestBody defines body for UpdateFormSetCondition for application/vnd.api+json ContentType.
+type UpdateFormSetConditionApplicationVndAPIPlusJSONRequestBody = UpdateFormSetCondition
+
+// CreateFormSetApplicationVndAPIPlusJSONRequestBody defines body for CreateFormSet for application/vnd.api+json ContentType.
+type CreateFormSetApplicationVndAPIPlusJSONRequestBody = NewFormSet
+
+// CreateFormSetConditionApplicationVndAPIPlusJSONRequestBody defines body for CreateFormSetCondition for application/vnd.api+json ContentType.
+type CreateFormSetConditionApplicationVndAPIPlusJSONRequestBody = NewFormSetCondition
+
+// UpdateFormSetApplicationVndAPIPlusJSONRequestBody defines body for UpdateFormSet for application/vnd.api+json ContentType.
+type UpdateFormSetApplicationVndAPIPlusJSONRequestBody = UpdateFormSet
 
 // CreateFunctionalityApplicationVndAPIPlusJSONRequestBody defines body for CreateFunctionality for application/vnd.api+json ContentType.
 type CreateFunctionalityApplicationVndAPIPlusJSONRequestBody = NewFunctionality
@@ -17953,6 +17572,9 @@ type CreateIncidentStatusPageApplicationVndAPIPlusJSONRequestBody = NewIncidentS
 // UpdateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody defines body for UpdateUserNotificationRule for application/vnd.api+json ContentType.
 type UpdateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody = UpdateUserNotificationRule
 
+// UpdateOnCallShadowApplicationVndAPIPlusJSONRequestBody defines body for UpdateOnCallShadow for application/vnd.api+json ContentType.
+type UpdateOnCallShadowApplicationVndAPIPlusJSONRequestBody = UpdateOnCallShadow
+
 // UpdateOverrideShiftApplicationVndAPIPlusJSONRequestBody defines body for UpdateOverrideShift for application/vnd.api+json ContentType.
 type UpdateOverrideShiftApplicationVndAPIPlusJSONRequestBody = UpdateOverrideShift
 
@@ -18024,6 +17646,9 @@ type CreateScheduleApplicationVndAPIPlusJSONRequestBody = NewSchedule
 
 // UpdateScheduleApplicationVndAPIPlusJSONRequestBody defines body for UpdateSchedule for application/vnd.api+json ContentType.
 type UpdateScheduleApplicationVndAPIPlusJSONRequestBody = UpdateSchedule
+
+// CreateOnCallShadowApplicationVndAPIPlusJSONRequestBody defines body for CreateOnCallShadow for application/vnd.api+json ContentType.
+type CreateOnCallShadowApplicationVndAPIPlusJSONRequestBody = NewOnCallShadow
 
 // CreateOverrideShiftApplicationVndAPIPlusJSONRequestBody defines body for CreateOverrideShift for application/vnd.api+json ContentType.
 type CreateOverrideShiftApplicationVndAPIPlusJSONRequestBody = NewOverrideShift
@@ -22166,6 +21791,32 @@ func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeUpdateZendeskTicketTas
 	return err
 }
 
+// AsUpdateAttachedAlertsTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a UpdateAttachedAlertsTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsUpdateAttachedAlertsTaskParams() (UpdateAttachedAlertsTaskParams, error) {
+	var body UpdateAttachedAlertsTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateAttachedAlertsTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided UpdateAttachedAlertsTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromUpdateAttachedAlertsTaskParams(v UpdateAttachedAlertsTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateAttachedAlertsTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateAttachedAlertsTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeUpdateAttachedAlertsTaskParams(v UpdateAttachedAlertsTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsTriggerWorkflowTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a TriggerWorkflowTaskParams
 func (t NewWorkflowTask_Data_Attributes_TaskParams) AsTriggerWorkflowTaskParams() (TriggerWorkflowTaskParams, error) {
 	var body TriggerWorkflowTaskParams
@@ -25114,6 +24765,32 @@ func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromUpdateZendeskTicketT
 
 // MergeUpdateZendeskTicketTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateZendeskTicketTaskParams
 func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeUpdateZendeskTicketTaskParams(v UpdateZendeskTicketTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsUpdateAttachedAlertsTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a UpdateAttachedAlertsTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsUpdateAttachedAlertsTaskParams() (UpdateAttachedAlertsTaskParams, error) {
+	var body UpdateAttachedAlertsTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateAttachedAlertsTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided UpdateAttachedAlertsTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromUpdateAttachedAlertsTaskParams(v UpdateAttachedAlertsTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateAttachedAlertsTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateAttachedAlertsTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeUpdateAttachedAlertsTaskParams(v UpdateAttachedAlertsTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -28082,6 +27759,32 @@ func (t *WorkflowTask_TaskParams) MergeUpdateZendeskTicketTaskParams(v UpdateZen
 	return err
 }
 
+// AsUpdateAttachedAlertsTaskParams returns the union data inside the WorkflowTask_TaskParams as a UpdateAttachedAlertsTaskParams
+func (t WorkflowTask_TaskParams) AsUpdateAttachedAlertsTaskParams() (UpdateAttachedAlertsTaskParams, error) {
+	var body UpdateAttachedAlertsTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateAttachedAlertsTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided UpdateAttachedAlertsTaskParams
+func (t *WorkflowTask_TaskParams) FromUpdateAttachedAlertsTaskParams(v UpdateAttachedAlertsTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateAttachedAlertsTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided UpdateAttachedAlertsTaskParams
+func (t *WorkflowTask_TaskParams) MergeUpdateAttachedAlertsTaskParams(v UpdateAttachedAlertsTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsTriggerWorkflowTaskParams returns the union data inside the WorkflowTask_TaskParams as a TriggerWorkflowTaskParams
 func (t WorkflowTask_TaskParams) AsTriggerWorkflowTaskParams() (TriggerWorkflowTaskParams, error) {
 	var body TriggerWorkflowTaskParams
@@ -28241,6 +27944,14 @@ type ClientInterface interface {
 
 	// GetAlert request
 	GetAlert(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AcknowledgeAlert request
+	AcknowledgeAlert(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ResolveAlertWithBody request with any body
+	ResolveAlertWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	ResolveAlertWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body ResolveAlertApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListAudits request
 	ListAudits(ctx context.Context, params *ListAuditsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -28490,6 +28201,36 @@ type ClientInterface interface {
 
 	UpdateFormFieldOptionWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormFieldOptionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// DeleteFormFieldPlacementCondition request
+	DeleteFormFieldPlacementCondition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetFormFieldPlacementCondition request
+	GetFormFieldPlacementCondition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateFormFieldPlacementConditionWithBody request with any body
+	UpdateFormFieldPlacementConditionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListFormFieldPlacementConditions request
+	ListFormFieldPlacementConditions(ctx context.Context, formFieldPlacementId string, params *ListFormFieldPlacementConditionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateFormFieldPlacementConditionWithBody request with any body
+	CreateFormFieldPlacementConditionWithBody(ctx context.Context, formFieldPlacementId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBody(ctx context.Context, formFieldPlacementId string, body CreateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteFormFieldPlacement request
+	DeleteFormFieldPlacement(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetFormFieldPlacement request
+	GetFormFieldPlacement(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateFormFieldPlacementWithBody request with any body
+	UpdateFormFieldPlacementWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateFormFieldPlacementWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// DeleteFormFieldPosition request
 	DeleteFormFieldPosition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -28517,6 +28258,14 @@ type ClientInterface interface {
 
 	CreateFormFieldOptionWithApplicationVndAPIPlusJSONBody(ctx context.Context, formFieldId string, body CreateFormFieldOptionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListFormFieldPlacements request
+	ListFormFieldPlacements(ctx context.Context, formFieldId string, params *ListFormFieldPlacementsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateFormFieldPlacementWithBody request with any body
+	CreateFormFieldPlacementWithBody(ctx context.Context, formFieldId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateFormFieldPlacementWithApplicationVndAPIPlusJSONBody(ctx context.Context, formFieldId string, body CreateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListFormFieldPositions request
 	ListFormFieldPositions(ctx context.Context, formFieldId string, params *ListFormFieldPositionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -28535,6 +28284,44 @@ type ClientInterface interface {
 	UpdateFormFieldWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	UpdateFormFieldWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormFieldApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteFormSetCondition request
+	DeleteFormSetCondition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetFormSetCondition request
+	GetFormSetCondition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateFormSetConditionWithBody request with any body
+	UpdateFormSetConditionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateFormSetConditionWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormSetConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListFormSets request
+	ListFormSets(ctx context.Context, params *ListFormSetsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateFormSetWithBody request with any body
+	CreateFormSetWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateFormSetWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateFormSetApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListFormSetConditions request
+	ListFormSetConditions(ctx context.Context, formSetId string, params *ListFormSetConditionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateFormSetConditionWithBody request with any body
+	CreateFormSetConditionWithBody(ctx context.Context, formSetId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateFormSetConditionWithApplicationVndAPIPlusJSONBody(ctx context.Context, formSetId string, body CreateFormSetConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteFormSet request
+	DeleteFormSet(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetFormSet request
+	GetFormSet(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateFormSetWithBody request with any body
+	UpdateFormSetWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateFormSetWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormSetApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListFunctionalities request
 	ListFunctionalities(ctx context.Context, params *ListFunctionalitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -28858,6 +28645,17 @@ type ClientInterface interface {
 
 	UpdateUserNotificationRuleWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// DeleteOnCallShadow request
+	DeleteOnCallShadow(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetOnCallShadow request
+	GetOnCallShadow(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateOnCallShadowWithBody request with any body
+	UpdateOnCallShadowWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateOnCallShadowWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateOnCallShadowApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// DeleteOverrideShift request
 	DeleteOverrideShift(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -29089,6 +28887,17 @@ type ClientInterface interface {
 
 	UpdateScheduleWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateScheduleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// GetScheduleShifts request
+	GetScheduleShifts(ctx context.Context, id string, params *GetScheduleShiftsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListOnCallShadows request
+	ListOnCallShadows(ctx context.Context, scheduleId string, params *ListOnCallShadowsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateOnCallShadowWithBody request with any body
+	CreateOnCallShadowWithBody(ctx context.Context, scheduleId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateOnCallShadowWithApplicationVndAPIPlusJSONBody(ctx context.Context, scheduleId string, body CreateOnCallShadowApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListOverrideShifts request
 	ListOverrideShifts(ctx context.Context, scheduleId string, params *ListOverrideShiftsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -29167,6 +28976,9 @@ type ClientInterface interface {
 	UpdateSeverityWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	UpdateSeverityWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateSeverityApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListShifts request
+	ListShifts(ctx context.Context, params *ListShiftsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteIncidentStatusPage request
 	DeleteIncidentStatusPage(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -29489,6 +29301,42 @@ func (c *Client) CreateAlertWithApplicationVndAPIPlusJSONBody(ctx context.Contex
 
 func (c *Client) GetAlert(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetAlertRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AcknowledgeAlert(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAcknowledgeAlertRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ResolveAlertWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewResolveAlertRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ResolveAlertWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body ResolveAlertApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewResolveAlertRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -30591,6 +30439,138 @@ func (c *Client) UpdateFormFieldOptionWithApplicationVndAPIPlusJSONBody(ctx cont
 	return c.Client.Do(req)
 }
 
+func (c *Client) DeleteFormFieldPlacementCondition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteFormFieldPlacementConditionRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetFormFieldPlacementCondition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetFormFieldPlacementConditionRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateFormFieldPlacementConditionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateFormFieldPlacementConditionRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateFormFieldPlacementConditionRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListFormFieldPlacementConditions(ctx context.Context, formFieldPlacementId string, params *ListFormFieldPlacementConditionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListFormFieldPlacementConditionsRequest(c.Server, formFieldPlacementId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateFormFieldPlacementConditionWithBody(ctx context.Context, formFieldPlacementId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateFormFieldPlacementConditionRequestWithBody(c.Server, formFieldPlacementId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBody(ctx context.Context, formFieldPlacementId string, body CreateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateFormFieldPlacementConditionRequestWithApplicationVndAPIPlusJSONBody(c.Server, formFieldPlacementId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteFormFieldPlacement(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteFormFieldPlacementRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetFormFieldPlacement(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetFormFieldPlacementRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateFormFieldPlacementWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateFormFieldPlacementRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateFormFieldPlacementWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateFormFieldPlacementRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) DeleteFormFieldPosition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteFormFieldPositionRequest(c.Server, id)
 	if err != nil {
@@ -30711,6 +30691,42 @@ func (c *Client) CreateFormFieldOptionWithApplicationVndAPIPlusJSONBody(ctx cont
 	return c.Client.Do(req)
 }
 
+func (c *Client) ListFormFieldPlacements(ctx context.Context, formFieldId string, params *ListFormFieldPlacementsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListFormFieldPlacementsRequest(c.Server, formFieldId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateFormFieldPlacementWithBody(ctx context.Context, formFieldId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateFormFieldPlacementRequestWithBody(c.Server, formFieldId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateFormFieldPlacementWithApplicationVndAPIPlusJSONBody(ctx context.Context, formFieldId string, body CreateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateFormFieldPlacementRequestWithApplicationVndAPIPlusJSONBody(c.Server, formFieldId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) ListFormFieldPositions(ctx context.Context, formFieldId string, params *ListFormFieldPositionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListFormFieldPositionsRequest(c.Server, formFieldId, params)
 	if err != nil {
@@ -30785,6 +30801,174 @@ func (c *Client) UpdateFormFieldWithBody(ctx context.Context, id string, content
 
 func (c *Client) UpdateFormFieldWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormFieldApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateFormFieldRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteFormSetCondition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteFormSetConditionRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetFormSetCondition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetFormSetConditionRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateFormSetConditionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateFormSetConditionRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateFormSetConditionWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormSetConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateFormSetConditionRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListFormSets(ctx context.Context, params *ListFormSetsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListFormSetsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateFormSetWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateFormSetRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateFormSetWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateFormSetApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateFormSetRequestWithApplicationVndAPIPlusJSONBody(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListFormSetConditions(ctx context.Context, formSetId string, params *ListFormSetConditionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListFormSetConditionsRequest(c.Server, formSetId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateFormSetConditionWithBody(ctx context.Context, formSetId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateFormSetConditionRequestWithBody(c.Server, formSetId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateFormSetConditionWithApplicationVndAPIPlusJSONBody(ctx context.Context, formSetId string, body CreateFormSetConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateFormSetConditionRequestWithApplicationVndAPIPlusJSONBody(c.Server, formSetId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteFormSet(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteFormSetRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetFormSet(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetFormSetRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateFormSetWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateFormSetRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateFormSetWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormSetApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateFormSetRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -32235,6 +32419,54 @@ func (c *Client) UpdateUserNotificationRuleWithApplicationVndAPIPlusJSONBody(ctx
 	return c.Client.Do(req)
 }
 
+func (c *Client) DeleteOnCallShadow(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteOnCallShadowRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetOnCallShadow(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetOnCallShadowRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateOnCallShadowWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateOnCallShadowRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateOnCallShadowWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateOnCallShadowApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateOnCallShadowRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) DeleteOverrideShift(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteOverrideShiftRequest(c.Server, id)
 	if err != nil {
@@ -33255,6 +33487,54 @@ func (c *Client) UpdateScheduleWithApplicationVndAPIPlusJSONBody(ctx context.Con
 	return c.Client.Do(req)
 }
 
+func (c *Client) GetScheduleShifts(ctx context.Context, id string, params *GetScheduleShiftsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetScheduleShiftsRequest(c.Server, id, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListOnCallShadows(ctx context.Context, scheduleId string, params *ListOnCallShadowsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListOnCallShadowsRequest(c.Server, scheduleId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateOnCallShadowWithBody(ctx context.Context, scheduleId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateOnCallShadowRequestWithBody(c.Server, scheduleId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateOnCallShadowWithApplicationVndAPIPlusJSONBody(ctx context.Context, scheduleId string, body CreateOnCallShadowApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateOnCallShadowRequestWithApplicationVndAPIPlusJSONBody(c.Server, scheduleId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) ListOverrideShifts(ctx context.Context, scheduleId string, params *ListOverrideShiftsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListOverrideShiftsRequest(c.Server, scheduleId, params)
 	if err != nil {
@@ -33593,6 +33873,18 @@ func (c *Client) UpdateSeverityWithBody(ctx context.Context, id string, contentT
 
 func (c *Client) UpdateSeverityWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateSeverityApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateSeverityRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListShifts(ctx context.Context, params *ListShiftsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListShiftsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -35194,6 +35486,87 @@ func NewGetAlertRequest(server string, id string) (*http.Request, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewAcknowledgeAlertRequest generates requests for AcknowledgeAlert
+func NewAcknowledgeAlertRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alerts/%s/acknowledge", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewResolveAlertRequestWithApplicationVndAPIPlusJSONBody calls the generic ResolveAlert builder with application/vnd.api+json body
+func NewResolveAlertRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body ResolveAlertApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewResolveAlertRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewResolveAlertRequestWithBody generates requests for ResolveAlert with any type of body
+func NewResolveAlertRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alerts/%s/resolve", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -39218,6 +39591,387 @@ func NewUpdateFormFieldOptionRequestWithBody(server string, id string, contentTy
 	return req, nil
 }
 
+// NewDeleteFormFieldPlacementConditionRequest generates requests for DeleteFormFieldPlacementCondition
+func NewDeleteFormFieldPlacementConditionRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_placement_conditions/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetFormFieldPlacementConditionRequest generates requests for GetFormFieldPlacementCondition
+func NewGetFormFieldPlacementConditionRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_placement_conditions/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateFormFieldPlacementConditionRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateFormFieldPlacementCondition builder with application/vnd.api+json body
+func NewUpdateFormFieldPlacementConditionRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateFormFieldPlacementConditionRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateFormFieldPlacementConditionRequestWithBody generates requests for UpdateFormFieldPlacementCondition with any type of body
+func NewUpdateFormFieldPlacementConditionRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_placement_conditions/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListFormFieldPlacementConditionsRequest generates requests for ListFormFieldPlacementConditions
+func NewListFormFieldPlacementConditionsRequest(server string, formFieldPlacementId string, params *ListFormFieldPlacementConditionsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "form_field_placement_id", runtime.ParamLocationPath, formFieldPlacementId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_placements/%s/conditions", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterFormFieldId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[form_field_id]", runtime.ParamLocationQuery, *params.FilterFormFieldId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateFormFieldPlacementConditionRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateFormFieldPlacementCondition builder with application/vnd.api+json body
+func NewCreateFormFieldPlacementConditionRequestWithApplicationVndAPIPlusJSONBody(server string, formFieldPlacementId string, body CreateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateFormFieldPlacementConditionRequestWithBody(server, formFieldPlacementId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateFormFieldPlacementConditionRequestWithBody generates requests for CreateFormFieldPlacementCondition with any type of body
+func NewCreateFormFieldPlacementConditionRequestWithBody(server string, formFieldPlacementId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "form_field_placement_id", runtime.ParamLocationPath, formFieldPlacementId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_placements/%s/conditions", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteFormFieldPlacementRequest generates requests for DeleteFormFieldPlacement
+func NewDeleteFormFieldPlacementRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_placements/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetFormFieldPlacementRequest generates requests for GetFormFieldPlacement
+func NewGetFormFieldPlacementRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_placements/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateFormFieldPlacementRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateFormFieldPlacement builder with application/vnd.api+json body
+func NewUpdateFormFieldPlacementRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateFormFieldPlacementRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateFormFieldPlacementRequestWithBody generates requests for UpdateFormFieldPlacement with any type of body
+func NewUpdateFormFieldPlacementRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_placements/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewDeleteFormFieldPositionRequest generates requests for DeleteFormFieldPosition
 func NewDeleteFormFieldPositionRequest(server string, id string) (*http.Request, error) {
 	var err error
@@ -39765,6 +40519,157 @@ func NewCreateFormFieldOptionRequestWithBody(server string, formFieldId string, 
 	return req, nil
 }
 
+// NewListFormFieldPlacementsRequest generates requests for ListFormFieldPlacements
+func NewListFormFieldPlacementsRequest(server string, formFieldId string, params *ListFormFieldPlacementsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "form_field_id", runtime.ParamLocationPath, formFieldId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_fields/%s/placements", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterFormFieldId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[form_field_id]", runtime.ParamLocationQuery, *params.FilterFormFieldId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateFormFieldPlacementRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateFormFieldPlacement builder with application/vnd.api+json body
+func NewCreateFormFieldPlacementRequestWithApplicationVndAPIPlusJSONBody(server string, formFieldId string, body CreateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateFormFieldPlacementRequestWithBody(server, formFieldId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateFormFieldPlacementRequestWithBody generates requests for CreateFormFieldPlacement with any type of body
+func NewCreateFormFieldPlacementRequestWithBody(server string, formFieldId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "form_field_id", runtime.ParamLocationPath, formFieldId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_fields/%s/placements", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListFormFieldPositionsRequest generates requests for ListFormFieldPositions
 func NewListFormFieldPositionsRequest(server string, formFieldId string, params *ListFormFieldPositionsParams) (*http.Request, error) {
 	var err error
@@ -40012,6 +40917,604 @@ func NewUpdateFormFieldRequestWithBody(server string, id string, contentType str
 	}
 
 	operationPath := fmt.Sprintf("/v1/form_fields/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteFormSetConditionRequest generates requests for DeleteFormSetCondition
+func NewDeleteFormSetConditionRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_set_conditions/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetFormSetConditionRequest generates requests for GetFormSetCondition
+func NewGetFormSetConditionRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_set_conditions/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateFormSetConditionRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateFormSetCondition builder with application/vnd.api+json body
+func NewUpdateFormSetConditionRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateFormSetConditionApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateFormSetConditionRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateFormSetConditionRequestWithBody generates requests for UpdateFormSetCondition with any type of body
+func NewUpdateFormSetConditionRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_set_conditions/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListFormSetsRequest generates requests for ListFormSets
+func NewListFormSetsRequest(server string, params *ListFormSetsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_sets")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterSlug != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[slug]", runtime.ParamLocationQuery, *params.FilterSlug); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterIsDefault != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[is_default]", runtime.ParamLocationQuery, *params.FilterIsDefault); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gte]", runtime.ParamLocationQuery, *params.FilterCreatedAtGte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lte]", runtime.ParamLocationQuery, *params.FilterCreatedAtLte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateFormSetRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateFormSet builder with application/vnd.api+json body
+func NewCreateFormSetRequestWithApplicationVndAPIPlusJSONBody(server string, body CreateFormSetApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateFormSetRequestWithBody(server, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateFormSetRequestWithBody generates requests for CreateFormSet with any type of body
+func NewCreateFormSetRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_sets")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListFormSetConditionsRequest generates requests for ListFormSetConditions
+func NewListFormSetConditionsRequest(server string, formSetId string, params *ListFormSetConditionsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "form_set_id", runtime.ParamLocationPath, formSetId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_sets/%s/conditions", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterFormFieldId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[form_field_id]", runtime.ParamLocationQuery, *params.FilterFormFieldId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateFormSetConditionRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateFormSetCondition builder with application/vnd.api+json body
+func NewCreateFormSetConditionRequestWithApplicationVndAPIPlusJSONBody(server string, formSetId string, body CreateFormSetConditionApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateFormSetConditionRequestWithBody(server, formSetId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateFormSetConditionRequestWithBody generates requests for CreateFormSetCondition with any type of body
+func NewCreateFormSetConditionRequestWithBody(server string, formSetId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "form_set_id", runtime.ParamLocationPath, formSetId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_sets/%s/conditions", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteFormSetRequest generates requests for DeleteFormSet
+func NewDeleteFormSetRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_sets/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetFormSetRequest generates requests for GetFormSet
+func NewGetFormSetRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_sets/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateFormSetRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateFormSet builder with application/vnd.api+json body
+func NewUpdateFormSetRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateFormSetApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateFormSetRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateFormSetRequestWithBody generates requests for UpdateFormSet with any type of body
+func NewUpdateFormSetRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_sets/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -45942,6 +47445,121 @@ func NewUpdateUserNotificationRuleRequestWithBody(server string, id string, cont
 	return req, nil
 }
 
+// NewDeleteOnCallShadowRequest generates requests for DeleteOnCallShadow
+func NewDeleteOnCallShadowRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/on_call_shadows/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetOnCallShadowRequest generates requests for GetOnCallShadow
+func NewGetOnCallShadowRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/on_call_shadows/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateOnCallShadowRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateOnCallShadow builder with application/vnd.api+json body
+func NewUpdateOnCallShadowRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateOnCallShadowApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateOnCallShadowRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateOnCallShadowRequestWithBody generates requests for UpdateOnCallShadow with any type of body
+func NewUpdateOnCallShadowRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/on_call_shadows/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewDeleteOverrideShiftRequest generates requests for DeleteOverrideShift
 func NewDeleteOverrideShiftRequest(server string, id string) (*http.Request, error) {
 	var err error
@@ -49726,6 +51344,213 @@ func NewUpdateScheduleRequestWithBody(server string, id string, contentType stri
 	return req, nil
 }
 
+// NewGetScheduleShiftsRequest generates requests for GetScheduleShifts
+func NewGetScheduleShiftsRequest(server string, id string, params *GetScheduleShiftsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedules/%s/shifts", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.To != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "to", runtime.ParamLocationQuery, *params.To); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.From != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "from", runtime.ParamLocationQuery, *params.From); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewListOnCallShadowsRequest generates requests for ListOnCallShadows
+func NewListOnCallShadowsRequest(server string, scheduleId string, params *ListOnCallShadowsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "schedule_id", runtime.ParamLocationPath, scheduleId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedules/%s/on_call_shadows", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateOnCallShadowRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateOnCallShadow builder with application/vnd.api+json body
+func NewCreateOnCallShadowRequestWithApplicationVndAPIPlusJSONBody(server string, scheduleId string, body CreateOnCallShadowApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateOnCallShadowRequestWithBody(server, scheduleId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateOnCallShadowRequestWithBody generates requests for CreateOnCallShadow with any type of body
+func NewCreateOnCallShadowRequestWithBody(server string, scheduleId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "schedule_id", runtime.ParamLocationPath, scheduleId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/schedules/%s/on_call_shadows", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListOverrideShiftsRequest generates requests for ListOverrideShifts
 func NewListOverrideShiftsRequest(server string, scheduleId string, params *ListOverrideShiftsParams) (*http.Request, error) {
 	var err error
@@ -51128,6 +52953,119 @@ func NewUpdateSeverityRequestWithBody(server string, id string, contentType stri
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListShiftsRequest generates requests for ListShifts
+func NewListShiftsRequest(server string, params *ListShiftsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/shifts")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.To != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "to", runtime.ParamLocationQuery, *params.To); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.From != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "from", runtime.ParamLocationQuery, *params.From); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.UserIds != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "user_ids[]", runtime.ParamLocationQuery, *params.UserIds); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.ScheduleIds != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "schedule_ids[]", runtime.ParamLocationQuery, *params.ScheduleIds); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return req, nil
 }
@@ -54901,6 +56839,14 @@ type ClientWithResponsesInterface interface {
 	// GetAlertWithResponse request
 	GetAlertWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetAlertResponse, error)
 
+	// AcknowledgeAlertWithResponse request
+	AcknowledgeAlertWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*AcknowledgeAlertResponse, error)
+
+	// ResolveAlertWithBodyWithResponse request with any body
+	ResolveAlertWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ResolveAlertResponse, error)
+
+	ResolveAlertWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body ResolveAlertApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*ResolveAlertResponse, error)
+
 	// ListAuditsWithResponse request
 	ListAuditsWithResponse(ctx context.Context, params *ListAuditsParams, reqEditors ...RequestEditorFn) (*ListAuditsResponse, error)
 
@@ -55149,6 +57095,36 @@ type ClientWithResponsesInterface interface {
 
 	UpdateFormFieldOptionWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormFieldOptionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormFieldOptionResponse, error)
 
+	// DeleteFormFieldPlacementConditionWithResponse request
+	DeleteFormFieldPlacementConditionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldPlacementConditionResponse, error)
+
+	// GetFormFieldPlacementConditionWithResponse request
+	GetFormFieldPlacementConditionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormFieldPlacementConditionResponse, error)
+
+	// UpdateFormFieldPlacementConditionWithBodyWithResponse request with any body
+	UpdateFormFieldPlacementConditionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormFieldPlacementConditionResponse, error)
+
+	UpdateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormFieldPlacementConditionResponse, error)
+
+	// ListFormFieldPlacementConditionsWithResponse request
+	ListFormFieldPlacementConditionsWithResponse(ctx context.Context, formFieldPlacementId string, params *ListFormFieldPlacementConditionsParams, reqEditors ...RequestEditorFn) (*ListFormFieldPlacementConditionsResponse, error)
+
+	// CreateFormFieldPlacementConditionWithBodyWithResponse request with any body
+	CreateFormFieldPlacementConditionWithBodyWithResponse(ctx context.Context, formFieldPlacementId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormFieldPlacementConditionResponse, error)
+
+	CreateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, formFieldPlacementId string, body CreateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFormFieldPlacementConditionResponse, error)
+
+	// DeleteFormFieldPlacementWithResponse request
+	DeleteFormFieldPlacementWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldPlacementResponse, error)
+
+	// GetFormFieldPlacementWithResponse request
+	GetFormFieldPlacementWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormFieldPlacementResponse, error)
+
+	// UpdateFormFieldPlacementWithBodyWithResponse request with any body
+	UpdateFormFieldPlacementWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormFieldPlacementResponse, error)
+
+	UpdateFormFieldPlacementWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormFieldPlacementResponse, error)
+
 	// DeleteFormFieldPositionWithResponse request
 	DeleteFormFieldPositionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldPositionResponse, error)
 
@@ -55176,6 +57152,14 @@ type ClientWithResponsesInterface interface {
 
 	CreateFormFieldOptionWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, formFieldId string, body CreateFormFieldOptionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFormFieldOptionResponse, error)
 
+	// ListFormFieldPlacementsWithResponse request
+	ListFormFieldPlacementsWithResponse(ctx context.Context, formFieldId string, params *ListFormFieldPlacementsParams, reqEditors ...RequestEditorFn) (*ListFormFieldPlacementsResponse, error)
+
+	// CreateFormFieldPlacementWithBodyWithResponse request with any body
+	CreateFormFieldPlacementWithBodyWithResponse(ctx context.Context, formFieldId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormFieldPlacementResponse, error)
+
+	CreateFormFieldPlacementWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, formFieldId string, body CreateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFormFieldPlacementResponse, error)
+
 	// ListFormFieldPositionsWithResponse request
 	ListFormFieldPositionsWithResponse(ctx context.Context, formFieldId string, params *ListFormFieldPositionsParams, reqEditors ...RequestEditorFn) (*ListFormFieldPositionsResponse, error)
 
@@ -55194,6 +57178,44 @@ type ClientWithResponsesInterface interface {
 	UpdateFormFieldWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormFieldResponse, error)
 
 	UpdateFormFieldWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormFieldApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormFieldResponse, error)
+
+	// DeleteFormSetConditionWithResponse request
+	DeleteFormSetConditionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormSetConditionResponse, error)
+
+	// GetFormSetConditionWithResponse request
+	GetFormSetConditionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormSetConditionResponse, error)
+
+	// UpdateFormSetConditionWithBodyWithResponse request with any body
+	UpdateFormSetConditionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormSetConditionResponse, error)
+
+	UpdateFormSetConditionWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormSetConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormSetConditionResponse, error)
+
+	// ListFormSetsWithResponse request
+	ListFormSetsWithResponse(ctx context.Context, params *ListFormSetsParams, reqEditors ...RequestEditorFn) (*ListFormSetsResponse, error)
+
+	// CreateFormSetWithBodyWithResponse request with any body
+	CreateFormSetWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormSetResponse, error)
+
+	CreateFormSetWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateFormSetApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFormSetResponse, error)
+
+	// ListFormSetConditionsWithResponse request
+	ListFormSetConditionsWithResponse(ctx context.Context, formSetId string, params *ListFormSetConditionsParams, reqEditors ...RequestEditorFn) (*ListFormSetConditionsResponse, error)
+
+	// CreateFormSetConditionWithBodyWithResponse request with any body
+	CreateFormSetConditionWithBodyWithResponse(ctx context.Context, formSetId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormSetConditionResponse, error)
+
+	CreateFormSetConditionWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, formSetId string, body CreateFormSetConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFormSetConditionResponse, error)
+
+	// DeleteFormSetWithResponse request
+	DeleteFormSetWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormSetResponse, error)
+
+	// GetFormSetWithResponse request
+	GetFormSetWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormSetResponse, error)
+
+	// UpdateFormSetWithBodyWithResponse request with any body
+	UpdateFormSetWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormSetResponse, error)
+
+	UpdateFormSetWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormSetApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormSetResponse, error)
 
 	// ListFunctionalitiesWithResponse request
 	ListFunctionalitiesWithResponse(ctx context.Context, params *ListFunctionalitiesParams, reqEditors ...RequestEditorFn) (*ListFunctionalitiesResponse, error)
@@ -55517,6 +57539,17 @@ type ClientWithResponsesInterface interface {
 
 	UpdateUserNotificationRuleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateUserNotificationRuleResponse, error)
 
+	// DeleteOnCallShadowWithResponse request
+	DeleteOnCallShadowWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteOnCallShadowResponse, error)
+
+	// GetOnCallShadowWithResponse request
+	GetOnCallShadowWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetOnCallShadowResponse, error)
+
+	// UpdateOnCallShadowWithBodyWithResponse request with any body
+	UpdateOnCallShadowWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateOnCallShadowResponse, error)
+
+	UpdateOnCallShadowWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateOnCallShadowApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateOnCallShadowResponse, error)
+
 	// DeleteOverrideShiftWithResponse request
 	DeleteOverrideShiftWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteOverrideShiftResponse, error)
 
@@ -55748,6 +57781,17 @@ type ClientWithResponsesInterface interface {
 
 	UpdateScheduleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateScheduleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateScheduleResponse, error)
 
+	// GetScheduleShiftsWithResponse request
+	GetScheduleShiftsWithResponse(ctx context.Context, id string, params *GetScheduleShiftsParams, reqEditors ...RequestEditorFn) (*GetScheduleShiftsResponse, error)
+
+	// ListOnCallShadowsWithResponse request
+	ListOnCallShadowsWithResponse(ctx context.Context, scheduleId string, params *ListOnCallShadowsParams, reqEditors ...RequestEditorFn) (*ListOnCallShadowsResponse, error)
+
+	// CreateOnCallShadowWithBodyWithResponse request with any body
+	CreateOnCallShadowWithBodyWithResponse(ctx context.Context, scheduleId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateOnCallShadowResponse, error)
+
+	CreateOnCallShadowWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, scheduleId string, body CreateOnCallShadowApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateOnCallShadowResponse, error)
+
 	// ListOverrideShiftsWithResponse request
 	ListOverrideShiftsWithResponse(ctx context.Context, scheduleId string, params *ListOverrideShiftsParams, reqEditors ...RequestEditorFn) (*ListOverrideShiftsResponse, error)
 
@@ -55826,6 +57870,9 @@ type ClientWithResponsesInterface interface {
 	UpdateSeverityWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateSeverityResponse, error)
 
 	UpdateSeverityWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateSeverityApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateSeverityResponse, error)
+
+	// ListShiftsWithResponse request
+	ListShiftsWithResponse(ctx context.Context, params *ListShiftsParams, reqEditors ...RequestEditorFn) (*ListShiftsResponse, error)
 
 	// DeleteIncidentStatusPageWithResponse request
 	DeleteIncidentStatusPageWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentStatusPageResponse, error)
@@ -56204,6 +58251,52 @@ func (r GetAlertResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r GetAlertResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type AcknowledgeAlertResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *AlertResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r AcknowledgeAlertResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AcknowledgeAlertResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ResolveAlertResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *AlertResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r ResolveAlertResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ResolveAlertResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -57726,6 +59819,190 @@ func (r UpdateFormFieldOptionResponse) StatusCode() int {
 	return 0
 }
 
+type DeleteFormFieldPlacementConditionResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormFieldPlacementConditionResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteFormFieldPlacementConditionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteFormFieldPlacementConditionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetFormFieldPlacementConditionResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormFieldPlacementConditionResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetFormFieldPlacementConditionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetFormFieldPlacementConditionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateFormFieldPlacementConditionResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormFieldPlacementConditionResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateFormFieldPlacementConditionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateFormFieldPlacementConditionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListFormFieldPlacementConditionsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormFieldPlacementConditionList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListFormFieldPlacementConditionsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListFormFieldPlacementConditionsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateFormFieldPlacementConditionResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *FormFieldPlacementConditionResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateFormFieldPlacementConditionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateFormFieldPlacementConditionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteFormFieldPlacementResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormFieldPlacementResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteFormFieldPlacementResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteFormFieldPlacementResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetFormFieldPlacementResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormFieldPlacementResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetFormFieldPlacementResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetFormFieldPlacementResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateFormFieldPlacementResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormFieldPlacementResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateFormFieldPlacementResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateFormFieldPlacementResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type DeleteFormFieldPositionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -57887,6 +60164,52 @@ func (r CreateFormFieldOptionResponse) StatusCode() int {
 	return 0
 }
 
+type ListFormFieldPlacementsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormFieldPlacementList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListFormFieldPlacementsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListFormFieldPlacementsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateFormFieldPlacementResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *FormFieldPlacementResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateFormFieldPlacementResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateFormFieldPlacementResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type ListFormFieldPositionsResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -57995,6 +60318,236 @@ func (r UpdateFormFieldResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r UpdateFormFieldResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteFormSetConditionResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormSetConditionResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteFormSetConditionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteFormSetConditionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetFormSetConditionResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormSetConditionResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetFormSetConditionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetFormSetConditionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateFormSetConditionResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormSetConditionResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateFormSetConditionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateFormSetConditionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListFormSetsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormSetList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListFormSetsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListFormSetsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateFormSetResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *FormSetResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateFormSetResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateFormSetResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListFormSetConditionsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormSetConditionList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListFormSetConditionsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListFormSetConditionsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateFormSetConditionResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *FormSetConditionResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateFormSetConditionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateFormSetConditionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteFormSetResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormSetResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteFormSetResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteFormSetResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetFormSetResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormSetResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetFormSetResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetFormSetResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateFormSetResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormSetResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateFormSetResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateFormSetResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -59885,6 +62438,75 @@ func (r UpdateUserNotificationRuleResponse) StatusCode() int {
 	return 0
 }
 
+type DeleteOnCallShadowResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *OnCallShadowResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteOnCallShadowResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteOnCallShadowResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetOnCallShadowResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *OnCallShadowResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetOnCallShadowResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetOnCallShadowResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateOnCallShadowResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *OnCallShadowResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateOnCallShadowResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateOnCallShadowResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type DeleteOverrideShiftResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -61286,6 +63908,75 @@ func (r UpdateScheduleResponse) StatusCode() int {
 	return 0
 }
 
+type GetScheduleShiftsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ShiftList
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetScheduleShiftsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetScheduleShiftsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListOnCallShadowsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *OnCallShadowsList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListOnCallShadowsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListOnCallShadowsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateOnCallShadowResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *OnCallShadowResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateOnCallShadowResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateOnCallShadowResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type ListOverrideShiftsResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -61763,6 +64454,29 @@ func (r UpdateSeverityResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r UpdateSeverityResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListShiftsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ShiftList
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListShiftsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListShiftsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -62875,6 +65589,7 @@ type CreateWorkflowResponse struct {
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON201 *WorkflowResponse
 	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON403 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62944,6 +65659,7 @@ type UpdateWorkflowResponse struct {
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *WorkflowResponse
 	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON403 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -63220,6 +65936,32 @@ func (c *ClientWithResponses) GetAlertWithResponse(ctx context.Context, id strin
 		return nil, err
 	}
 	return ParseGetAlertResponse(rsp)
+}
+
+// AcknowledgeAlertWithResponse request returning *AcknowledgeAlertResponse
+func (c *ClientWithResponses) AcknowledgeAlertWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*AcknowledgeAlertResponse, error) {
+	rsp, err := c.AcknowledgeAlert(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAcknowledgeAlertResponse(rsp)
+}
+
+// ResolveAlertWithBodyWithResponse request with arbitrary body returning *ResolveAlertResponse
+func (c *ClientWithResponses) ResolveAlertWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ResolveAlertResponse, error) {
+	rsp, err := c.ResolveAlertWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseResolveAlertResponse(rsp)
+}
+
+func (c *ClientWithResponses) ResolveAlertWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body ResolveAlertApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*ResolveAlertResponse, error) {
+	rsp, err := c.ResolveAlertWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseResolveAlertResponse(rsp)
 }
 
 // ListAuditsWithResponse request returning *ListAuditsResponse
@@ -64016,6 +66758,102 @@ func (c *ClientWithResponses) UpdateFormFieldOptionWithApplicationVndAPIPlusJSON
 	return ParseUpdateFormFieldOptionResponse(rsp)
 }
 
+// DeleteFormFieldPlacementConditionWithResponse request returning *DeleteFormFieldPlacementConditionResponse
+func (c *ClientWithResponses) DeleteFormFieldPlacementConditionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldPlacementConditionResponse, error) {
+	rsp, err := c.DeleteFormFieldPlacementCondition(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteFormFieldPlacementConditionResponse(rsp)
+}
+
+// GetFormFieldPlacementConditionWithResponse request returning *GetFormFieldPlacementConditionResponse
+func (c *ClientWithResponses) GetFormFieldPlacementConditionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormFieldPlacementConditionResponse, error) {
+	rsp, err := c.GetFormFieldPlacementCondition(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetFormFieldPlacementConditionResponse(rsp)
+}
+
+// UpdateFormFieldPlacementConditionWithBodyWithResponse request with arbitrary body returning *UpdateFormFieldPlacementConditionResponse
+func (c *ClientWithResponses) UpdateFormFieldPlacementConditionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormFieldPlacementConditionResponse, error) {
+	rsp, err := c.UpdateFormFieldPlacementConditionWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateFormFieldPlacementConditionResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormFieldPlacementConditionResponse, error) {
+	rsp, err := c.UpdateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateFormFieldPlacementConditionResponse(rsp)
+}
+
+// ListFormFieldPlacementConditionsWithResponse request returning *ListFormFieldPlacementConditionsResponse
+func (c *ClientWithResponses) ListFormFieldPlacementConditionsWithResponse(ctx context.Context, formFieldPlacementId string, params *ListFormFieldPlacementConditionsParams, reqEditors ...RequestEditorFn) (*ListFormFieldPlacementConditionsResponse, error) {
+	rsp, err := c.ListFormFieldPlacementConditions(ctx, formFieldPlacementId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListFormFieldPlacementConditionsResponse(rsp)
+}
+
+// CreateFormFieldPlacementConditionWithBodyWithResponse request with arbitrary body returning *CreateFormFieldPlacementConditionResponse
+func (c *ClientWithResponses) CreateFormFieldPlacementConditionWithBodyWithResponse(ctx context.Context, formFieldPlacementId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormFieldPlacementConditionResponse, error) {
+	rsp, err := c.CreateFormFieldPlacementConditionWithBody(ctx, formFieldPlacementId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateFormFieldPlacementConditionResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, formFieldPlacementId string, body CreateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFormFieldPlacementConditionResponse, error) {
+	rsp, err := c.CreateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBody(ctx, formFieldPlacementId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateFormFieldPlacementConditionResponse(rsp)
+}
+
+// DeleteFormFieldPlacementWithResponse request returning *DeleteFormFieldPlacementResponse
+func (c *ClientWithResponses) DeleteFormFieldPlacementWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldPlacementResponse, error) {
+	rsp, err := c.DeleteFormFieldPlacement(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteFormFieldPlacementResponse(rsp)
+}
+
+// GetFormFieldPlacementWithResponse request returning *GetFormFieldPlacementResponse
+func (c *ClientWithResponses) GetFormFieldPlacementWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormFieldPlacementResponse, error) {
+	rsp, err := c.GetFormFieldPlacement(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetFormFieldPlacementResponse(rsp)
+}
+
+// UpdateFormFieldPlacementWithBodyWithResponse request with arbitrary body returning *UpdateFormFieldPlacementResponse
+func (c *ClientWithResponses) UpdateFormFieldPlacementWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormFieldPlacementResponse, error) {
+	rsp, err := c.UpdateFormFieldPlacementWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateFormFieldPlacementResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateFormFieldPlacementWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormFieldPlacementResponse, error) {
+	rsp, err := c.UpdateFormFieldPlacementWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateFormFieldPlacementResponse(rsp)
+}
+
 // DeleteFormFieldPositionWithResponse request returning *DeleteFormFieldPositionResponse
 func (c *ClientWithResponses) DeleteFormFieldPositionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldPositionResponse, error) {
 	rsp, err := c.DeleteFormFieldPosition(ctx, id, reqEditors...)
@@ -64103,6 +66941,32 @@ func (c *ClientWithResponses) CreateFormFieldOptionWithApplicationVndAPIPlusJSON
 	return ParseCreateFormFieldOptionResponse(rsp)
 }
 
+// ListFormFieldPlacementsWithResponse request returning *ListFormFieldPlacementsResponse
+func (c *ClientWithResponses) ListFormFieldPlacementsWithResponse(ctx context.Context, formFieldId string, params *ListFormFieldPlacementsParams, reqEditors ...RequestEditorFn) (*ListFormFieldPlacementsResponse, error) {
+	rsp, err := c.ListFormFieldPlacements(ctx, formFieldId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListFormFieldPlacementsResponse(rsp)
+}
+
+// CreateFormFieldPlacementWithBodyWithResponse request with arbitrary body returning *CreateFormFieldPlacementResponse
+func (c *ClientWithResponses) CreateFormFieldPlacementWithBodyWithResponse(ctx context.Context, formFieldId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormFieldPlacementResponse, error) {
+	rsp, err := c.CreateFormFieldPlacementWithBody(ctx, formFieldId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateFormFieldPlacementResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateFormFieldPlacementWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, formFieldId string, body CreateFormFieldPlacementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFormFieldPlacementResponse, error) {
+	rsp, err := c.CreateFormFieldPlacementWithApplicationVndAPIPlusJSONBody(ctx, formFieldId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateFormFieldPlacementResponse(rsp)
+}
+
 // ListFormFieldPositionsWithResponse request returning *ListFormFieldPositionsResponse
 func (c *ClientWithResponses) ListFormFieldPositionsWithResponse(ctx context.Context, formFieldId string, params *ListFormFieldPositionsParams, reqEditors ...RequestEditorFn) (*ListFormFieldPositionsResponse, error) {
 	rsp, err := c.ListFormFieldPositions(ctx, formFieldId, params, reqEditors...)
@@ -64162,6 +67026,128 @@ func (c *ClientWithResponses) UpdateFormFieldWithApplicationVndAPIPlusJSONBodyWi
 		return nil, err
 	}
 	return ParseUpdateFormFieldResponse(rsp)
+}
+
+// DeleteFormSetConditionWithResponse request returning *DeleteFormSetConditionResponse
+func (c *ClientWithResponses) DeleteFormSetConditionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormSetConditionResponse, error) {
+	rsp, err := c.DeleteFormSetCondition(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteFormSetConditionResponse(rsp)
+}
+
+// GetFormSetConditionWithResponse request returning *GetFormSetConditionResponse
+func (c *ClientWithResponses) GetFormSetConditionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormSetConditionResponse, error) {
+	rsp, err := c.GetFormSetCondition(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetFormSetConditionResponse(rsp)
+}
+
+// UpdateFormSetConditionWithBodyWithResponse request with arbitrary body returning *UpdateFormSetConditionResponse
+func (c *ClientWithResponses) UpdateFormSetConditionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormSetConditionResponse, error) {
+	rsp, err := c.UpdateFormSetConditionWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateFormSetConditionResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateFormSetConditionWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormSetConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormSetConditionResponse, error) {
+	rsp, err := c.UpdateFormSetConditionWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateFormSetConditionResponse(rsp)
+}
+
+// ListFormSetsWithResponse request returning *ListFormSetsResponse
+func (c *ClientWithResponses) ListFormSetsWithResponse(ctx context.Context, params *ListFormSetsParams, reqEditors ...RequestEditorFn) (*ListFormSetsResponse, error) {
+	rsp, err := c.ListFormSets(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListFormSetsResponse(rsp)
+}
+
+// CreateFormSetWithBodyWithResponse request with arbitrary body returning *CreateFormSetResponse
+func (c *ClientWithResponses) CreateFormSetWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormSetResponse, error) {
+	rsp, err := c.CreateFormSetWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateFormSetResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateFormSetWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateFormSetApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFormSetResponse, error) {
+	rsp, err := c.CreateFormSetWithApplicationVndAPIPlusJSONBody(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateFormSetResponse(rsp)
+}
+
+// ListFormSetConditionsWithResponse request returning *ListFormSetConditionsResponse
+func (c *ClientWithResponses) ListFormSetConditionsWithResponse(ctx context.Context, formSetId string, params *ListFormSetConditionsParams, reqEditors ...RequestEditorFn) (*ListFormSetConditionsResponse, error) {
+	rsp, err := c.ListFormSetConditions(ctx, formSetId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListFormSetConditionsResponse(rsp)
+}
+
+// CreateFormSetConditionWithBodyWithResponse request with arbitrary body returning *CreateFormSetConditionResponse
+func (c *ClientWithResponses) CreateFormSetConditionWithBodyWithResponse(ctx context.Context, formSetId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormSetConditionResponse, error) {
+	rsp, err := c.CreateFormSetConditionWithBody(ctx, formSetId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateFormSetConditionResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateFormSetConditionWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, formSetId string, body CreateFormSetConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFormSetConditionResponse, error) {
+	rsp, err := c.CreateFormSetConditionWithApplicationVndAPIPlusJSONBody(ctx, formSetId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateFormSetConditionResponse(rsp)
+}
+
+// DeleteFormSetWithResponse request returning *DeleteFormSetResponse
+func (c *ClientWithResponses) DeleteFormSetWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormSetResponse, error) {
+	rsp, err := c.DeleteFormSet(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteFormSetResponse(rsp)
+}
+
+// GetFormSetWithResponse request returning *GetFormSetResponse
+func (c *ClientWithResponses) GetFormSetWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormSetResponse, error) {
+	rsp, err := c.GetFormSet(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetFormSetResponse(rsp)
+}
+
+// UpdateFormSetWithBodyWithResponse request with arbitrary body returning *UpdateFormSetResponse
+func (c *ClientWithResponses) UpdateFormSetWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormSetResponse, error) {
+	rsp, err := c.UpdateFormSetWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateFormSetResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateFormSetWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormSetApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormSetResponse, error) {
+	rsp, err := c.UpdateFormSetWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateFormSetResponse(rsp)
 }
 
 // ListFunctionalitiesWithResponse request returning *ListFunctionalitiesResponse
@@ -65206,6 +68192,41 @@ func (c *ClientWithResponses) UpdateUserNotificationRuleWithApplicationVndAPIPlu
 	return ParseUpdateUserNotificationRuleResponse(rsp)
 }
 
+// DeleteOnCallShadowWithResponse request returning *DeleteOnCallShadowResponse
+func (c *ClientWithResponses) DeleteOnCallShadowWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteOnCallShadowResponse, error) {
+	rsp, err := c.DeleteOnCallShadow(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteOnCallShadowResponse(rsp)
+}
+
+// GetOnCallShadowWithResponse request returning *GetOnCallShadowResponse
+func (c *ClientWithResponses) GetOnCallShadowWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetOnCallShadowResponse, error) {
+	rsp, err := c.GetOnCallShadow(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetOnCallShadowResponse(rsp)
+}
+
+// UpdateOnCallShadowWithBodyWithResponse request with arbitrary body returning *UpdateOnCallShadowResponse
+func (c *ClientWithResponses) UpdateOnCallShadowWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateOnCallShadowResponse, error) {
+	rsp, err := c.UpdateOnCallShadowWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateOnCallShadowResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateOnCallShadowWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateOnCallShadowApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateOnCallShadowResponse, error) {
+	rsp, err := c.UpdateOnCallShadowWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateOnCallShadowResponse(rsp)
+}
+
 // DeleteOverrideShiftWithResponse request returning *DeleteOverrideShiftResponse
 func (c *ClientWithResponses) DeleteOverrideShiftWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteOverrideShiftResponse, error) {
 	rsp, err := c.DeleteOverrideShift(ctx, id, reqEditors...)
@@ -65947,6 +68968,41 @@ func (c *ClientWithResponses) UpdateScheduleWithApplicationVndAPIPlusJSONBodyWit
 	return ParseUpdateScheduleResponse(rsp)
 }
 
+// GetScheduleShiftsWithResponse request returning *GetScheduleShiftsResponse
+func (c *ClientWithResponses) GetScheduleShiftsWithResponse(ctx context.Context, id string, params *GetScheduleShiftsParams, reqEditors ...RequestEditorFn) (*GetScheduleShiftsResponse, error) {
+	rsp, err := c.GetScheduleShifts(ctx, id, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetScheduleShiftsResponse(rsp)
+}
+
+// ListOnCallShadowsWithResponse request returning *ListOnCallShadowsResponse
+func (c *ClientWithResponses) ListOnCallShadowsWithResponse(ctx context.Context, scheduleId string, params *ListOnCallShadowsParams, reqEditors ...RequestEditorFn) (*ListOnCallShadowsResponse, error) {
+	rsp, err := c.ListOnCallShadows(ctx, scheduleId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListOnCallShadowsResponse(rsp)
+}
+
+// CreateOnCallShadowWithBodyWithResponse request with arbitrary body returning *CreateOnCallShadowResponse
+func (c *ClientWithResponses) CreateOnCallShadowWithBodyWithResponse(ctx context.Context, scheduleId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateOnCallShadowResponse, error) {
+	rsp, err := c.CreateOnCallShadowWithBody(ctx, scheduleId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateOnCallShadowResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateOnCallShadowWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, scheduleId string, body CreateOnCallShadowApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateOnCallShadowResponse, error) {
+	rsp, err := c.CreateOnCallShadowWithApplicationVndAPIPlusJSONBody(ctx, scheduleId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateOnCallShadowResponse(rsp)
+}
+
 // ListOverrideShiftsWithResponse request returning *ListOverrideShiftsResponse
 func (c *ClientWithResponses) ListOverrideShiftsWithResponse(ctx context.Context, scheduleId string, params *ListOverrideShiftsParams, reqEditors ...RequestEditorFn) (*ListOverrideShiftsResponse, error) {
 	rsp, err := c.ListOverrideShifts(ctx, scheduleId, params, reqEditors...)
@@ -66198,6 +69254,15 @@ func (c *ClientWithResponses) UpdateSeverityWithApplicationVndAPIPlusJSONBodyWit
 		return nil, err
 	}
 	return ParseUpdateSeverityResponse(rsp)
+}
+
+// ListShiftsWithResponse request returning *ListShiftsResponse
+func (c *ClientWithResponses) ListShiftsWithResponse(ctx context.Context, params *ListShiftsParams, reqEditors ...RequestEditorFn) (*ListShiftsResponse, error) {
+	rsp, err := c.ListShifts(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListShiftsResponse(rsp)
 }
 
 // DeleteIncidentStatusPageWithResponse request returning *DeleteIncidentStatusPageResponse
@@ -67108,6 +70173,72 @@ func ParseGetAlertResponse(rsp *http.Response) (*GetAlertResponse, error) {
 	}
 
 	response := &GetAlertResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAcknowledgeAlertResponse parses an HTTP response from a AcknowledgeAlertWithResponse call
+func ParseAcknowledgeAlertResponse(rsp *http.Response) (*AcknowledgeAlertResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AcknowledgeAlertResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseResolveAlertResponse parses an HTTP response from a ResolveAlertWithResponse call
+func ParseResolveAlertResponse(rsp *http.Response) (*ResolveAlertResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ResolveAlertResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -69296,6 +72427,270 @@ func ParseUpdateFormFieldOptionResponse(rsp *http.Response) (*UpdateFormFieldOpt
 	return response, nil
 }
 
+// ParseDeleteFormFieldPlacementConditionResponse parses an HTTP response from a DeleteFormFieldPlacementConditionWithResponse call
+func ParseDeleteFormFieldPlacementConditionResponse(rsp *http.Response) (*DeleteFormFieldPlacementConditionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteFormFieldPlacementConditionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormFieldPlacementConditionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetFormFieldPlacementConditionResponse parses an HTTP response from a GetFormFieldPlacementConditionWithResponse call
+func ParseGetFormFieldPlacementConditionResponse(rsp *http.Response) (*GetFormFieldPlacementConditionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetFormFieldPlacementConditionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormFieldPlacementConditionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateFormFieldPlacementConditionResponse parses an HTTP response from a UpdateFormFieldPlacementConditionWithResponse call
+func ParseUpdateFormFieldPlacementConditionResponse(rsp *http.Response) (*UpdateFormFieldPlacementConditionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateFormFieldPlacementConditionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormFieldPlacementConditionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListFormFieldPlacementConditionsResponse parses an HTTP response from a ListFormFieldPlacementConditionsWithResponse call
+func ParseListFormFieldPlacementConditionsResponse(rsp *http.Response) (*ListFormFieldPlacementConditionsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListFormFieldPlacementConditionsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormFieldPlacementConditionList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateFormFieldPlacementConditionResponse parses an HTTP response from a CreateFormFieldPlacementConditionWithResponse call
+func ParseCreateFormFieldPlacementConditionResponse(rsp *http.Response) (*CreateFormFieldPlacementConditionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateFormFieldPlacementConditionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest FormFieldPlacementConditionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteFormFieldPlacementResponse parses an HTTP response from a DeleteFormFieldPlacementWithResponse call
+func ParseDeleteFormFieldPlacementResponse(rsp *http.Response) (*DeleteFormFieldPlacementResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteFormFieldPlacementResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormFieldPlacementResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetFormFieldPlacementResponse parses an HTTP response from a GetFormFieldPlacementWithResponse call
+func ParseGetFormFieldPlacementResponse(rsp *http.Response) (*GetFormFieldPlacementResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetFormFieldPlacementResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormFieldPlacementResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateFormFieldPlacementResponse parses an HTTP response from a UpdateFormFieldPlacementWithResponse call
+func ParseUpdateFormFieldPlacementResponse(rsp *http.Response) (*UpdateFormFieldPlacementResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateFormFieldPlacementResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormFieldPlacementResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseDeleteFormFieldPositionResponse parses an HTTP response from a DeleteFormFieldPositionWithResponse call
 func ParseDeleteFormFieldPositionResponse(rsp *http.Response) (*DeleteFormFieldPositionResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -69527,6 +72922,72 @@ func ParseCreateFormFieldOptionResponse(rsp *http.Response) (*CreateFormFieldOpt
 	return response, nil
 }
 
+// ParseListFormFieldPlacementsResponse parses an HTTP response from a ListFormFieldPlacementsWithResponse call
+func ParseListFormFieldPlacementsResponse(rsp *http.Response) (*ListFormFieldPlacementsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListFormFieldPlacementsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormFieldPlacementList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateFormFieldPlacementResponse parses an HTTP response from a CreateFormFieldPlacementWithResponse call
+func ParseCreateFormFieldPlacementResponse(rsp *http.Response) (*CreateFormFieldPlacementResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateFormFieldPlacementResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest FormFieldPlacementResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseListFormFieldPositionsResponse parses an HTTP response from a ListFormFieldPositionsWithResponse call
 func ParseListFormFieldPositionsResponse(rsp *http.Response) (*ListFormFieldPositionsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -69668,6 +73129,336 @@ func ParseUpdateFormFieldResponse(rsp *http.Response) (*UpdateFormFieldResponse,
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest FormFieldResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteFormSetConditionResponse parses an HTTP response from a DeleteFormSetConditionWithResponse call
+func ParseDeleteFormSetConditionResponse(rsp *http.Response) (*DeleteFormSetConditionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteFormSetConditionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormSetConditionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetFormSetConditionResponse parses an HTTP response from a GetFormSetConditionWithResponse call
+func ParseGetFormSetConditionResponse(rsp *http.Response) (*GetFormSetConditionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetFormSetConditionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormSetConditionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateFormSetConditionResponse parses an HTTP response from a UpdateFormSetConditionWithResponse call
+func ParseUpdateFormSetConditionResponse(rsp *http.Response) (*UpdateFormSetConditionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateFormSetConditionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormSetConditionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListFormSetsResponse parses an HTTP response from a ListFormSetsWithResponse call
+func ParseListFormSetsResponse(rsp *http.Response) (*ListFormSetsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListFormSetsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormSetList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateFormSetResponse parses an HTTP response from a CreateFormSetWithResponse call
+func ParseCreateFormSetResponse(rsp *http.Response) (*CreateFormSetResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateFormSetResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest FormSetResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListFormSetConditionsResponse parses an HTTP response from a ListFormSetConditionsWithResponse call
+func ParseListFormSetConditionsResponse(rsp *http.Response) (*ListFormSetConditionsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListFormSetConditionsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormSetConditionList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateFormSetConditionResponse parses an HTTP response from a CreateFormSetConditionWithResponse call
+func ParseCreateFormSetConditionResponse(rsp *http.Response) (*CreateFormSetConditionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateFormSetConditionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest FormSetConditionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteFormSetResponse parses an HTTP response from a DeleteFormSetWithResponse call
+func ParseDeleteFormSetResponse(rsp *http.Response) (*DeleteFormSetResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteFormSetResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormSetResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetFormSetResponse parses an HTTP response from a GetFormSetWithResponse call
+func ParseGetFormSetResponse(rsp *http.Response) (*GetFormSetResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetFormSetResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormSetResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateFormSetResponse parses an HTTP response from a UpdateFormSetWithResponse call
+func ParseUpdateFormSetResponse(rsp *http.Response) (*UpdateFormSetResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateFormSetResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormSetResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -72377,6 +76168,105 @@ func ParseUpdateUserNotificationRuleResponse(rsp *http.Response) (*UpdateUserNot
 	return response, nil
 }
 
+// ParseDeleteOnCallShadowResponse parses an HTTP response from a DeleteOnCallShadowWithResponse call
+func ParseDeleteOnCallShadowResponse(rsp *http.Response) (*DeleteOnCallShadowResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteOnCallShadowResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest OnCallShadowResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetOnCallShadowResponse parses an HTTP response from a GetOnCallShadowWithResponse call
+func ParseGetOnCallShadowResponse(rsp *http.Response) (*GetOnCallShadowResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetOnCallShadowResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest OnCallShadowResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateOnCallShadowResponse parses an HTTP response from a UpdateOnCallShadowWithResponse call
+func ParseUpdateOnCallShadowResponse(rsp *http.Response) (*UpdateOnCallShadowResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateOnCallShadowResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest OnCallShadowResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseDeleteOverrideShiftResponse parses an HTTP response from a DeleteOverrideShiftWithResponse call
 func ParseDeleteOverrideShiftResponse(rsp *http.Response) (*DeleteOverrideShiftResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -74376,6 +78266,105 @@ func ParseUpdateScheduleResponse(rsp *http.Response) (*UpdateScheduleResponse, e
 	return response, nil
 }
 
+// ParseGetScheduleShiftsResponse parses an HTTP response from a GetScheduleShiftsWithResponse call
+func ParseGetScheduleShiftsResponse(rsp *http.Response) (*GetScheduleShiftsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetScheduleShiftsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ShiftList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListOnCallShadowsResponse parses an HTTP response from a ListOnCallShadowsWithResponse call
+func ParseListOnCallShadowsResponse(rsp *http.Response) (*ListOnCallShadowsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListOnCallShadowsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest OnCallShadowsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateOnCallShadowResponse parses an HTTP response from a CreateOnCallShadowWithResponse call
+func ParseCreateOnCallShadowResponse(rsp *http.Response) (*CreateOnCallShadowResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateOnCallShadowResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest OnCallShadowResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseListOverrideShiftsResponse parses an HTTP response from a ListOverrideShiftsWithResponse call
 func ParseListOverrideShiftsResponse(rsp *http.Response) (*ListOverrideShiftsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -75052,6 +79041,39 @@ func ParseUpdateSeverityResponse(rsp *http.Response) (*UpdateSeverityResponse, e
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest SeverityResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListShiftsResponse parses an HTTP response from a ListShiftsWithResponse call
+func ParseListShiftsResponse(rsp *http.Response) (*ListShiftsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListShiftsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ShiftList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -76660,6 +80682,13 @@ func ParseCreateWorkflowResponse(rsp *http.Response) (*CreateWorkflowResponse, e
 		}
 		response.ApplicationvndApiJSON401 = &dest
 
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON403 = &dest
+
 	}
 
 	return response, nil
@@ -76758,6 +80787,13 @@ func ParseUpdateWorkflowResponse(rsp *http.Response) (*UpdateWorkflowResponse, e
 			return nil, err
 		}
 		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON403 = &dest
 
 	}
 

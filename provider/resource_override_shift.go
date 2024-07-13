@@ -40,15 +40,6 @@ func resourceOverrideShift() *schema.Resource {
 				Description: "ID of rotation",
 			},
 
-			"user_id": &schema.Schema{
-				Type:        schema.TypeInt,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
-				Description: "User to whom override shift is assigned to",
-			},
-
 			"starts_at": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    false,
@@ -85,6 +76,17 @@ func resourceOverrideShift() *schema.Resource {
 				Optional:    true,
 				Description: "Override metadata",
 			},
+
+			"user": &schema.Schema{
+				Type: schema.TypeMap,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "User metadata",
+			},
 		},
 	}
 }
@@ -102,9 +104,6 @@ func resourceOverrideShiftCreate(ctx context.Context, d *schema.ResourceData, me
 	if value, ok := d.GetOkExists("rotation_id"); ok {
 		s.RotationId = value.(string)
 	}
-	if value, ok := d.GetOkExists("user_id"); ok {
-		s.UserId = value.(int)
-	}
 	if value, ok := d.GetOkExists("starts_at"); ok {
 		s.StartsAt = value.(string)
 	}
@@ -116,6 +115,9 @@ func resourceOverrideShiftCreate(ctx context.Context, d *schema.ResourceData, me
 	}
 	if value, ok := d.GetOkExists("shift_override"); ok {
 		s.ShiftOverride = value.(map[string]interface{})
+	}
+	if value, ok := d.GetOkExists("user"); ok {
+		s.User = value.(map[string]interface{})
 	}
 
 	res, err := c.CreateOverrideShift(s)
@@ -148,11 +150,11 @@ func resourceOverrideShiftRead(ctx context.Context, d *schema.ResourceData, meta
 
 	d.Set("schedule_id", item.ScheduleId)
 	d.Set("rotation_id", item.RotationId)
-	d.Set("user_id", item.UserId)
 	d.Set("starts_at", item.StartsAt)
 	d.Set("ends_at", item.EndsAt)
 	d.Set("is_override", item.IsOverride)
 	d.Set("shift_override", item.ShiftOverride)
+	d.Set("user", item.User)
 
 	return nil
 }
@@ -169,9 +171,6 @@ func resourceOverrideShiftUpdate(ctx context.Context, d *schema.ResourceData, me
 	if d.HasChange("rotation_id") {
 		s.RotationId = d.Get("rotation_id").(string)
 	}
-	if d.HasChange("user_id") {
-		s.UserId = d.Get("user_id").(int)
-	}
 	if d.HasChange("starts_at") {
 		s.StartsAt = d.Get("starts_at").(string)
 	}
@@ -183,6 +182,9 @@ func resourceOverrideShiftUpdate(ctx context.Context, d *schema.ResourceData, me
 	}
 	if d.HasChange("shift_override") {
 		s.ShiftOverride = d.Get("shift_override").(map[string]interface{})
+	}
+	if d.HasChange("user") {
+		s.User = d.Get("user").(map[string]interface{})
 	}
 
 	_, err := c.UpdateOverrideShift(d.Id(), s)
