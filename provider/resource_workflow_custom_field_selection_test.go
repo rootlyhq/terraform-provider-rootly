@@ -30,15 +30,15 @@ resource "rootly_workflow_incident" "test" {
 resource "rootly_custom_field" "test1" {
   	label = "custom-field-test-1"
 	kind = "select"
-	shown = ["incident_form"]
-	required = ["incident_form"]
+	shown = ["incident_form", "incident_slack_form"]
+	required = []
 }
 
 resource "rootly_custom_field" "test2" {
   	label = "custom-field-test-2"
 	kind = "text"
-	shown = ["incident_form"]
-	required = ["incident_form"]
+	shown = ["incident_form", "incident_slack_form"]
+	required = []
 }
 
 resource "rootly_custom_field_option" "test" {

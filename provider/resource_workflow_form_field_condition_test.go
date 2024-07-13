@@ -31,16 +31,16 @@ resource "rootly_form_field" "test1" {
   	name = "form-field-test-1"
 	kind = "custom"
 	input_kind = "select"
-	shown = ["web_new_incident_form"]
-	required = ["web_new_incident_form"]
+	shown = ["web_new_incident_form", "slack_new_incident_form"]
+	required = []
 }
 
 resource "rootly_form_field" "test2" {
   	name = "form-field-test-2"
 	kind = "custom"
 	input_kind = "text"
-	shown = ["web_new_incident_form"]
-	required = ["web_new_incident_form"]
+	shown = ["web_new_incident_form", "slack_new_incident_form"]
+	required = []
 }
 
 resource "rootly_form_field_option" "test" {

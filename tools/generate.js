@@ -77,6 +77,7 @@ const excluded = {
     "retrospective_step",
     "escalation_policy",
     "escalation_level",
+    "form_set",
     "shift_override",
     "schedule",
     "schedule_rotation",

@@ -32,8 +32,8 @@ const testAccResourceFormFieldOption = `
 resource "rootly_form_field" "parent" {
   name = "myformfieldParent"
 	input_kind = "select"
-	shown = ["web_new_incident_form"]
-	required = ["web_new_incident_form"]
+	shown = ["web_new_incident_form", "slack_new_incident_form"]
+	required = []
 }
 
 resource "rootly_form_field_option" "foo" {
@@ -46,8 +46,8 @@ const testAccResourceFormFieldOptionUpdate = `
 resource "rootly_form_field" "parent" {
   name = "myformfieldParent"
 	input_kind = "select"
-	shown = ["web_new_incident_form"]
-	required = ["web_new_incident_form"]
+	shown = ["web_new_incident_form", "slack_new_incident_form"]
+	required = []
 }
 
 resource "rootly_form_field_option" "foo" {

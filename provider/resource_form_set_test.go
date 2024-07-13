@@ -23,6 +23,6 @@ func TestAccResourceFormSet(t *testing.T) {
 const testAccResourceFormSet = `
 resource "rootly_form_set" "test" {
 	name = "test"
-forms = ["foo"]
+	forms = ["web_new_incident_form"]
 }
 `
