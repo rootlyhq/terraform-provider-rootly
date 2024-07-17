@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.3.1] -- 2024-07-12
+
+- Fix post_mortem_template not detecting content updates
+
 ## [2.3.0] -- 2024-07-12
 
 - Support for additional API resources
