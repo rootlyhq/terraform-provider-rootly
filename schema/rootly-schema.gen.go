@@ -15145,7 +15145,7 @@ type UpdateScheduleRotation struct {
 			} `json:"schedule_rotationable_attributes,omitempty"`
 
 			// ScheduleRotationableType Schedule rotation type
-			ScheduleRotationableType *UpdateScheduleRotationDataAttributesScheduleRotationableType `json:"schedule_rotationable_type,omitempty"`
+			ScheduleRotationableType UpdateScheduleRotationDataAttributesScheduleRotationableType `json:"schedule_rotationable_type"`
 
 			// TimeZone A valid IANA time zone name.
 			TimeZone *string `json:"time_zone,omitempty"`

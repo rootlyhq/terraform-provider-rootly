@@ -40,11 +40,11 @@ func resourcePostmortemTemplate() *schema.Resource {
 			},
 
 			"content": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    true,
 				Description: "The postmortem template. Liquid syntax and markdown are supported",
 			},
 

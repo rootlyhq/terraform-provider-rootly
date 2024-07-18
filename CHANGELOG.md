@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.3.2] -- 2024-07-18
+
+- Fixed a bug preventing to update schedule rotation
+
 ## [2.3.1] -- 2024-07-12
 
 - Fix post_mortem_template not detecting content updates
