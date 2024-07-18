@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.3.3] -- 2024-07-18
+
+- Fix incorrect schema attribute names for escalation policy level notification target
+
 ## [2.3.2] -- 2024-07-18
 
 - Fixed a bug preventing to update schedule rotation
