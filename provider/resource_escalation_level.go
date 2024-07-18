@@ -60,7 +60,7 @@ func resourceEscalationLevel() *schema.Resource {
 							Type:     schema.TypeString,
 							Required: true,
 						},
-						"name": &schema.Schema{
+						"type": &schema.Schema{
 							Type:     schema.TypeString,
 							Required: true,
 						},

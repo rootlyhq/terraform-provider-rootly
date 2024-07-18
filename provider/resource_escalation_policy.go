@@ -65,66 +65,6 @@ func resourceEscalationPolicy() *schema.Resource {
 				ForceNew:    false,
 				Description: "User who updated the escalation policy",
 			},
-
-			"escalation_levels": &schema.Schema{
-				Type:        schema.TypeList,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Levels of the escalation policy",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"id": &schema.Schema{
-							Type:     schema.TypeString,
-							Required: true,
-						},
-						"name": &schema.Schema{
-							Type:     schema.TypeString,
-							Required: true,
-						},
-					},
-				},
-			},
-
-			"services": &schema.Schema{
-				Type:        schema.TypeList,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Services of the escalation policy",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"id": &schema.Schema{
-							Type:     schema.TypeString,
-							Required: true,
-						},
-						"name": &schema.Schema{
-							Type:     schema.TypeString,
-							Required: true,
-						},
-					},
-				},
-			},
-
-			"groups": &schema.Schema{
-				Type:        schema.TypeList,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Teams of to the escalation policy",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"id": &schema.Schema{
-							Type:     schema.TypeString,
-							Required: true,
-						},
-						"name": &schema.Schema{
-							Type:     schema.TypeString,
-							Required: true,
-						},
-					},
-				},
-			},
 		},
 	}
 }

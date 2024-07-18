@@ -95,11 +95,11 @@ func resourceScheduleRotation() *schema.Resource {
 				Description: "Schedule rotation's active times",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"id": &schema.Schema{
+						"start_time": &schema.Schema{
 							Type:     schema.TypeString,
 							Required: true,
 						},
-						"name": &schema.Schema{
+						"end_time": &schema.Schema{
 							Type:     schema.TypeString,
 							Required: true,
 						},

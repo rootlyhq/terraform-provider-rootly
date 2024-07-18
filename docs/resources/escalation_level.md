@@ -34,4 +34,4 @@ description: |-
 Required:
 
 - `id` (String)
-- `name` (String)
+- `type` (String)

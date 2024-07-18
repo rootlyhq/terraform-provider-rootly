@@ -22,38 +22,9 @@ description: |-
 
 - `created_by_user_id` (Number) User who created the escalation policy
 - `description` (String) The description of the escalation policy
-- `escalation_levels` (Block List) Levels of the escalation policy (see [below for nested schema](#nestedblock--escalation_levels))
-- `groups` (Block List) Teams of to the escalation policy (see [below for nested schema](#nestedblock--groups))
 - `last_updated_by_user_id` (Number) User who updated the escalation policy
 - `repeat_count` (Number) The number of times this policy will be executed until someone acknowledges the alert
-- `services` (Block List) Services of the escalation policy (see [below for nested schema](#nestedblock--services))
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
-
-<a id="nestedblock--escalation_levels"></a>
-### Nested Schema for `escalation_levels`
-
-Required:
-
-- `id` (String)
-- `name` (String)
-
-
-<a id="nestedblock--groups"></a>
-### Nested Schema for `groups`
-
-Required:
-
-- `id` (String)
-- `name` (String)
-
-
-<a id="nestedblock--services"></a>
-### Nested Schema for `services`
-
-Required:
-
-- `id` (String)
-- `name` (String)

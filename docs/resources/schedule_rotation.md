@@ -39,5 +39,5 @@ description: |-
 
 Required:
 
-- `id` (String)
-- `name` (String)
+- `end_time` (String)
+- `start_time` (String)
