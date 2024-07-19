@@ -32,8 +32,8 @@ const testAccResourceCustomFieldOption = `
 resource "rootly_custom_field" "parent" {
   label = "mycustomfieldParent"
 	kind = "select"
-	shown = ["incident_form"]
-	required = ["incident_form"]
+	shown = ["incident_form", "incident_slack_form"]
+	required = []
 }
 
 resource "rootly_custom_field_option" "foo" {
@@ -46,8 +46,8 @@ const testAccResourceCustomFieldOptionUpdate = `
 resource "rootly_custom_field" "parent" {
   label = "mycustomfieldParent"
 	kind = "select"
-	shown = ["incident_form"]
-	required = ["incident_form"]
+	shown = ["incident_form", "incident_slack_form"]
+	required = []
 }
 
 resource "rootly_custom_field_option" "foo" {

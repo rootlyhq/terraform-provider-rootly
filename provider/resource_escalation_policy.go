@@ -91,15 +91,6 @@ func resourceEscalationPolicyCreate(ctx context.Context, d *schema.ResourceData,
 	if value, ok := d.GetOkExists("last_updated_by_user_id"); ok {
 		s.LastUpdatedByUserId = value.(int)
 	}
-	if value, ok := d.GetOkExists("escalation_levels"); ok {
-		s.EscalationLevels = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("services"); ok {
-		s.Services = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("groups"); ok {
-		s.Groups = value.([]interface{})
-	}
 
 	res, err := c.CreateEscalationPolicy(s)
 	if err != nil {
@@ -134,9 +125,6 @@ func resourceEscalationPolicyRead(ctx context.Context, d *schema.ResourceData, m
 	d.Set("repeat_count", item.RepeatCount)
 	d.Set("created_by_user_id", item.CreatedByUserId)
 	d.Set("last_updated_by_user_id", item.LastUpdatedByUserId)
-	d.Set("escalation_levels", item.EscalationLevels)
-	d.Set("services", item.Services)
-	d.Set("groups", item.Groups)
 
 	return nil
 }
@@ -161,15 +149,6 @@ func resourceEscalationPolicyUpdate(ctx context.Context, d *schema.ResourceData,
 	}
 	if d.HasChange("last_updated_by_user_id") {
 		s.LastUpdatedByUserId = d.Get("last_updated_by_user_id").(int)
-	}
-	if d.HasChange("escalation_levels") {
-		s.EscalationLevels = d.Get("escalation_levels").([]interface{})
-	}
-	if d.HasChange("services") {
-		s.Services = d.Get("services").([]interface{})
-	}
-	if d.HasChange("groups") {
-		s.Groups = d.Get("groups").([]interface{})
 	}
 
 	_, err := c.UpdateEscalationPolicy(d.Id(), s)

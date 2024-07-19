@@ -15,9 +15,6 @@ type EscalationPolicy struct {
   RepeatCount int `jsonapi:"attr,repeat_count,omitempty"`
   CreatedByUserId int `jsonapi:"attr,created_by_user_id,omitempty"`
   LastUpdatedByUserId int `jsonapi:"attr,last_updated_by_user_id,omitempty"`
-  EscalationLevels []interface{} `jsonapi:"attr,escalation_levels,omitempty"`
-  Services []interface{} `jsonapi:"attr,services,omitempty"`
-  Groups []interface{} `jsonapi:"attr,groups,omitempty"`
 }
 
 func (c *Client) ListEscalationPolicies(params *rootlygo.ListEscalationPoliciesParams) ([]interface{}, error) {
