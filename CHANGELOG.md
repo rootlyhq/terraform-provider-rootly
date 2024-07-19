@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.3.4] -- 2024-07-19
+
+- Update tests and escalation policy target validation
+
 ## [2.3.3] -- 2024-07-18
 
 - Fix incorrect schema attribute names for escalation policy level notification target
