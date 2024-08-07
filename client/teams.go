@@ -17,6 +17,7 @@ type Team struct {
   Color string `jsonapi:"attr,color,omitempty"`
   Position int `jsonapi:"attr,position,omitempty"`
   PagerdutyId string `jsonapi:"attr,pagerduty_id,omitempty"`
+  PagerdutyServiceId string `jsonapi:"attr,pagerduty_service_id,omitempty"`
   OpsgenieId string `jsonapi:"attr,opsgenie_id,omitempty"`
   VictorOpsId string `jsonapi:"attr,victor_ops_id,omitempty"`
   PagertreeId string `jsonapi:"attr,pagertree_id,omitempty"`

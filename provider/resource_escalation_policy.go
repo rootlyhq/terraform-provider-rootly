@@ -8,6 +8,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
 
 func resourceEscalationPolicy() *schema.Resource {
@@ -65,6 +66,30 @@ func resourceEscalationPolicy() *schema.Resource {
 				ForceNew:    false,
 				Description: "User who updated the escalation policy",
 			},
+
+			"group_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Associated groups (alerting the group will trigger escalation policy)",
+			},
+
+			"service_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Associated services (alerting the service will trigger escalation policy)",
+			},
 		},
 	}
 }
@@ -90,6 +115,12 @@ func resourceEscalationPolicyCreate(ctx context.Context, d *schema.ResourceData,
 	}
 	if value, ok := d.GetOkExists("last_updated_by_user_id"); ok {
 		s.LastUpdatedByUserId = value.(int)
+	}
+	if value, ok := d.GetOkExists("group_ids"); ok {
+		s.GroupIds = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("service_ids"); ok {
+		s.ServiceIds = value.([]interface{})
 	}
 
 	res, err := c.CreateEscalationPolicy(s)
@@ -125,6 +156,8 @@ func resourceEscalationPolicyRead(ctx context.Context, d *schema.ResourceData, m
 	d.Set("repeat_count", item.RepeatCount)
 	d.Set("created_by_user_id", item.CreatedByUserId)
 	d.Set("last_updated_by_user_id", item.LastUpdatedByUserId)
+	d.Set("group_ids", item.GroupIds)
+	d.Set("service_ids", item.ServiceIds)
 
 	return nil
 }
@@ -149,6 +182,12 @@ func resourceEscalationPolicyUpdate(ctx context.Context, d *schema.ResourceData,
 	}
 	if d.HasChange("last_updated_by_user_id") {
 		s.LastUpdatedByUserId = d.Get("last_updated_by_user_id").(int)
+	}
+	if d.HasChange("group_ids") {
+		s.GroupIds = d.Get("group_ids").([]interface{})
+	}
+	if d.HasChange("service_ids") {
+		s.ServiceIds = d.Get("service_ids").([]interface{})
 	}
 
 	_, err := c.UpdateEscalationPolicy(d.Id(), s)

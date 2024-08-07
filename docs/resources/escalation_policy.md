@@ -22,8 +22,10 @@ description: |-
 
 - `created_by_user_id` (Number) User who created the escalation policy
 - `description` (String) The description of the escalation policy
+- `group_ids` (List of String) Associated groups (alerting the group will trigger escalation policy)
 - `last_updated_by_user_id` (Number) User who updated the escalation policy
 - `repeat_count` (Number) The number of times this policy will be executed until someone acknowledges the alert
+- `service_ids` (List of String) Associated services (alerting the service will trigger escalation policy)
 
 ### Read-Only
 

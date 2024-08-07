@@ -46,7 +46,7 @@ func resourceFormField() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "The value kind of the form field. Value must be one of `inherit`, `group`, `service`, `user`.",
+				Description: "The value kind of the form field. Value must be one of `inherit`, `group`, `service`, `functionality`, `user`.",
 			},
 
 			"name": &schema.Schema{

@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.3.5] -- 2024-08-07
+
+- Add `group_ids`, `service_ids` parameters to escalation policies.
+- Add `pagerduty_service_id` parameter to teams.
+- Upgrade dependencies
+
 ## [2.3.4] -- 2024-07-19
 
 - Update tests and escalation policy target validation

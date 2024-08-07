@@ -996,10 +996,11 @@ const (
 
 // Defines values for FormFieldValueKind.
 const (
-	FormFieldValueKindGroup   FormFieldValueKind = "group"
-	FormFieldValueKindInherit FormFieldValueKind = "inherit"
-	FormFieldValueKindService FormFieldValueKind = "service"
-	FormFieldValueKindUser    FormFieldValueKind = "user"
+	FormFieldValueKindFunctionality FormFieldValueKind = "functionality"
+	FormFieldValueKindGroup         FormFieldValueKind = "group"
+	FormFieldValueKindInherit       FormFieldValueKind = "inherit"
+	FormFieldValueKindService       FormFieldValueKind = "service"
+	FormFieldValueKindUser          FormFieldValueKind = "user"
 )
 
 // Defines values for FormFieldListDataType.
@@ -1877,10 +1878,11 @@ const (
 
 // Defines values for NewFormFieldDataAttributesValueKind.
 const (
-	NewFormFieldDataAttributesValueKindGroup   NewFormFieldDataAttributesValueKind = "group"
-	NewFormFieldDataAttributesValueKindInherit NewFormFieldDataAttributesValueKind = "inherit"
-	NewFormFieldDataAttributesValueKindService NewFormFieldDataAttributesValueKind = "service"
-	NewFormFieldDataAttributesValueKindUser    NewFormFieldDataAttributesValueKind = "user"
+	NewFormFieldDataAttributesValueKindFunctionality NewFormFieldDataAttributesValueKind = "functionality"
+	NewFormFieldDataAttributesValueKindGroup         NewFormFieldDataAttributesValueKind = "group"
+	NewFormFieldDataAttributesValueKindInherit       NewFormFieldDataAttributesValueKind = "inherit"
+	NewFormFieldDataAttributesValueKindService       NewFormFieldDataAttributesValueKind = "service"
+	NewFormFieldDataAttributesValueKindUser          NewFormFieldDataAttributesValueKind = "user"
 )
 
 // Defines values for NewFormFieldDataType.
@@ -3673,10 +3675,11 @@ const (
 
 // Defines values for UpdateFormFieldDataAttributesValueKind.
 const (
-	UpdateFormFieldDataAttributesValueKindGroup   UpdateFormFieldDataAttributesValueKind = "group"
-	UpdateFormFieldDataAttributesValueKindInherit UpdateFormFieldDataAttributesValueKind = "inherit"
-	UpdateFormFieldDataAttributesValueKindService UpdateFormFieldDataAttributesValueKind = "service"
-	UpdateFormFieldDataAttributesValueKindUser    UpdateFormFieldDataAttributesValueKind = "user"
+	UpdateFormFieldDataAttributesValueKindFunctionality UpdateFormFieldDataAttributesValueKind = "functionality"
+	UpdateFormFieldDataAttributesValueKindGroup         UpdateFormFieldDataAttributesValueKind = "group"
+	UpdateFormFieldDataAttributesValueKindInherit       UpdateFormFieldDataAttributesValueKind = "inherit"
+	UpdateFormFieldDataAttributesValueKindService       UpdateFormFieldDataAttributesValueKind = "service"
+	UpdateFormFieldDataAttributesValueKindUser          UpdateFormFieldDataAttributesValueKind = "user"
 )
 
 // Defines values for UpdateFormFieldDataType.
@@ -7088,11 +7091,8 @@ type EscalationPolicy struct {
 	// Description The description of the escalation policy
 	Description *string `json:"description"`
 
-	// EscalationLevels Levels of the escalation policy
-	EscalationLevels *[]EscalationLevelResponse `json:"escalation_levels"`
-
-	// Groups Teams of to the escalation policy
-	Groups *[]TeamResponse `json:"groups"`
+	// GroupIds Associated groups (alerting the group will trigger escalation policy)
+	GroupIds *[]string `json:"group_ids,omitempty"`
 
 	// LastUpdatedByUserId User who updated the escalation policy
 	LastUpdatedByUserId *float32 `json:"last_updated_by_user_id,omitempty"`
@@ -7103,8 +7103,8 @@ type EscalationPolicy struct {
 	// RepeatCount The number of times this policy will be executed until someone acknowledges the alert
 	RepeatCount float32 `json:"repeat_count"`
 
-	// Services Services of the escalation policy
-	Services *[]ServiceResponse `json:"services"`
+	// ServiceIds Associated services (alerting the service will trigger escalation policy)
+	ServiceIds *[]string `json:"service_ids,omitempty"`
 
 	// UpdatedAt Date of last update
 	UpdatedAt *string `json:"updated_at,omitempty"`
@@ -9320,11 +9320,17 @@ type NewEscalationPolicy struct {
 			// Description The description of the escalation policy
 			Description *string `json:"description"`
 
+			// GroupIds Associated groups (alerting the group will trigger escalation policy)
+			GroupIds *[]string `json:"group_ids,omitempty"`
+
 			// Name The name of the escalation policy
 			Name string `json:"name"`
 
 			// RepeatCount The number of times this policy will be executed until someone acknowledges the alert
 			RepeatCount *float32 `json:"repeat_count,omitempty"`
+
+			// ServiceIds Associated services (alerting the service will trigger escalation policy)
+			ServiceIds *[]string `json:"service_ids,omitempty"`
 		} `json:"attributes"`
 		Type NewEscalationPolicyDataType `json:"type"`
 	} `json:"data"`
@@ -10788,6 +10794,9 @@ type NewTeam struct {
 
 			// PagerdutyId The PagerDuty group id associated to this team
 			PagerdutyId *string `json:"pagerduty_id"`
+
+			// PagerdutyServiceId The PagerDuty service id associated to this team
+			PagerdutyServiceId *string `json:"pagerduty_service_id"`
 
 			// PagertreeId The PagerTree group id associated to this team
 			PagertreeId *string `json:"pagertree_id"`
@@ -13083,6 +13092,9 @@ type Team struct {
 	// PagerdutyId The PagerDuty group id associated to this team
 	PagerdutyId *string `json:"pagerduty_id"`
 
+	// PagerdutyServiceId The PagerDuty service id associated to this team
+	PagerdutyServiceId *string `json:"pagerduty_service_id"`
+
 	// PagertreeId The PagerTree group id associated to this team
 	PagertreeId *string `json:"pagertree_id"`
 
@@ -13586,11 +13598,17 @@ type UpdateEscalationPolicy struct {
 			// Description The description of the escalation policy
 			Description *string `json:"description"`
 
+			// GroupIds Associated groups (alerting the group will trigger escalation policy)
+			GroupIds *[]string `json:"group_ids,omitempty"`
+
 			// Name The name of the escalation policy
 			Name *string `json:"name,omitempty"`
 
 			// RepeatCount The number of times this policy will be executed until someone acknowledges the alert
 			RepeatCount *float32 `json:"repeat_count,omitempty"`
+
+			// ServiceIds Associated services (alerting the service will trigger escalation policy)
+			ServiceIds *[]string `json:"service_ids,omitempty"`
 		} `json:"attributes"`
 		Type UpdateEscalationPolicyDataType `json:"type"`
 	} `json:"data"`
@@ -15578,6 +15596,9 @@ type UpdateTeam struct {
 			// PagerdutyId The PagerDuty group id associated to this team
 			PagerdutyId *string `json:"pagerduty_id"`
 
+			// PagerdutyServiceId The PagerDuty service id associated to this team
+			PagerdutyServiceId *string `json:"pagerduty_service_id"`
+
 			// PagertreeId The PagerTree group id associated to this team
 			PagertreeId *string `json:"pagertree_id"`
 
@@ -16520,6 +16541,8 @@ type ListAuditsParams struct {
 	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
 	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
 	FilterUserId       *string `form:"filter[user_id],omitempty" json:"filter[user_id],omitempty"`
+	FilterApiKeyId     *string `form:"filter[api_key_id],omitempty" json:"filter[api_key_id],omitempty"`
+	FilterSource       *string `form:"filter[source],omitempty" json:"filter[source],omitempty"`
 	FilterItemType     *string `form:"filter[item_type],omitempty" json:"filter[item_type],omitempty"`
 	Sort               *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
@@ -35708,6 +35731,38 @@ func NewListAuditsRequest(server string, params *ListAuditsParams) (*http.Reques
 		if params.FilterUserId != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[user_id]", runtime.ParamLocationQuery, *params.FilterUserId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterApiKeyId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[api_key_id]", runtime.ParamLocationQuery, *params.FilterApiKeyId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterSource != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[source]", runtime.ParamLocationQuery, *params.FilterSource); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 				return nil, err

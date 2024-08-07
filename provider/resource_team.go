@@ -88,6 +88,15 @@ func resourceTeam() *schema.Resource {
 				Description: "The PagerDuty group id associated to this team",
 			},
 
+			"pagerduty_service_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The PagerDuty service id associated to this team",
+			},
+
 			"opsgenie_id": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
@@ -198,6 +207,9 @@ func resourceTeamCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	if value, ok := d.GetOkExists("pagerduty_id"); ok {
 		s.PagerdutyId = value.(string)
 	}
+	if value, ok := d.GetOkExists("pagerduty_service_id"); ok {
+		s.PagerdutyServiceId = value.(string)
+	}
 	if value, ok := d.GetOkExists("opsgenie_id"); ok {
 		s.OpsgenieId = value.(string)
 	}
@@ -252,6 +264,7 @@ func resourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	d.Set("color", item.Color)
 	d.Set("position", item.Position)
 	d.Set("pagerduty_id", item.PagerdutyId)
+	d.Set("pagerduty_service_id", item.PagerdutyServiceId)
 	d.Set("opsgenie_id", item.OpsgenieId)
 	d.Set("victor_ops_id", item.VictorOpsId)
 	d.Set("pagertree_id", item.PagertreeId)
@@ -288,6 +301,9 @@ func resourceTeamUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 	}
 	if d.HasChange("pagerduty_id") {
 		s.PagerdutyId = d.Get("pagerduty_id").(string)
+	}
+	if d.HasChange("pagerduty_service_id") {
+		s.PagerdutyServiceId = d.Get("pagerduty_service_id").(string)
 	}
 	if d.HasChange("opsgenie_id") {
 		s.OpsgenieId = d.Get("opsgenie_id").(string)
