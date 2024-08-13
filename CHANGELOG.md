@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.3.6] -- 2024-08-12
+
+- Remove `ForceNew: true` from rootly_post_mortem_template.content
+
 ## [2.3.5] -- 2024-08-07
 
 - Add `group_ids`, `service_ids` parameters to escalation policies.
