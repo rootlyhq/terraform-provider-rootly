@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.3.7] -- 2024-08-26
+
+- Fix crash when missing dashboard_panel.params.legend
+
 ## [2.3.6] -- 2024-08-12
 
 - Remove `ForceNew: true` from rootly_post_mortem_template.content
