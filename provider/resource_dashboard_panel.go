@@ -195,7 +195,10 @@ func flattenParams(params []interface{}) map[string]interface{} {
 	datasets := first_params["datasets"].([]interface{})
 	flattened_params := make(map[string]interface{})
 	flattened_params["display"] = first_params["display"]
-	flattened_params["legend"] = first_params["legend"].([]interface{})[0]
+	legend_params := first_params["legend"].([]interface{})
+	if len(legend_params) == 1 {
+		flattened_params["legend"] = legend_params[0]
+	}
 	flattened_datasets := make([]interface{}, len(datasets), len(datasets))
 	for i, dataset := range datasets {
 		d := dataset.(map[string]interface{})
