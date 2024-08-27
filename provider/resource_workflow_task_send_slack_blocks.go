@@ -194,6 +194,11 @@ func resourceWorkflowTaskSendSlackBlocks() *schema.Resource {
 							Type:        schema.TypeMap,
 							Optional:    true,
 						},
+						"send_only_as_threaded_message": &schema.Schema{
+							Description: "When set to true, if the parent for this threaded message cannot be found the message will be skipped.. Value must be one of true or false",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
 					},
 				},
 			},

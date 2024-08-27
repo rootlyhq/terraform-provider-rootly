@@ -1140,6 +1140,38 @@ const (
 	GetPulses GetPulsesTaskParamsTaskType = "get_pulses"
 )
 
+// Defines values for HeartbeatIntervalUnit.
+const (
+	HeartbeatIntervalUnitHours   HeartbeatIntervalUnit = "hours"
+	HeartbeatIntervalUnitMinutes HeartbeatIntervalUnit = "minutes"
+	HeartbeatIntervalUnitSeconds HeartbeatIntervalUnit = "seconds"
+)
+
+// Defines values for HeartbeatNotificationTargetType.
+const (
+	HeartbeatNotificationTargetTypeEscalationPolicy HeartbeatNotificationTargetType = "EscalationPolicy"
+	HeartbeatNotificationTargetTypeGroup            HeartbeatNotificationTargetType = "Group"
+	HeartbeatNotificationTargetTypeService          HeartbeatNotificationTargetType = "Service"
+	HeartbeatNotificationTargetTypeUser             HeartbeatNotificationTargetType = "User"
+)
+
+// Defines values for HeartbeatStatus.
+const (
+	Active  HeartbeatStatus = "active"
+	Expired HeartbeatStatus = "expired"
+	Waiting HeartbeatStatus = "waiting"
+)
+
+// Defines values for HeartbeatListDataType.
+const (
+	HeartbeatListDataTypeHeartbeats HeartbeatListDataType = "heartbeats"
+)
+
+// Defines values for HeartbeatResponseDataType.
+const (
+	HeartbeatResponseDataTypeHeartbeats HeartbeatResponseDataType = "heartbeats"
+)
+
 // Defines values for HttpClientTaskParamsMethod.
 const (
 	DELETE  HttpClientTaskParamsMethod = "DELETE"
@@ -1967,6 +1999,26 @@ const (
 // Defines values for NewFunctionalityDataType.
 const (
 	NewFunctionalityDataTypeFunctionalities NewFunctionalityDataType = "functionalities"
+)
+
+// Defines values for NewHeartbeatDataAttributesIntervalUnit.
+const (
+	NewHeartbeatDataAttributesIntervalUnitHours   NewHeartbeatDataAttributesIntervalUnit = "hours"
+	NewHeartbeatDataAttributesIntervalUnitMinutes NewHeartbeatDataAttributesIntervalUnit = "minutes"
+	NewHeartbeatDataAttributesIntervalUnitSeconds NewHeartbeatDataAttributesIntervalUnit = "seconds"
+)
+
+// Defines values for NewHeartbeatDataAttributesNotificationTargetType.
+const (
+	NewHeartbeatDataAttributesNotificationTargetTypeEscalationPolicy NewHeartbeatDataAttributesNotificationTargetType = "EscalationPolicy"
+	NewHeartbeatDataAttributesNotificationTargetTypeGroup            NewHeartbeatDataAttributesNotificationTargetType = "Group"
+	NewHeartbeatDataAttributesNotificationTargetTypeService          NewHeartbeatDataAttributesNotificationTargetType = "Service"
+	NewHeartbeatDataAttributesNotificationTargetTypeUser             NewHeartbeatDataAttributesNotificationTargetType = "User"
+)
+
+// Defines values for NewHeartbeatDataType.
+const (
+	NewHeartbeatDataTypeHeartbeats NewHeartbeatDataType = "heartbeats"
 )
 
 // Defines values for NewIncidentDataAttributesKind.
@@ -3795,6 +3847,26 @@ const (
 	UpdateGoogleDocsPage UpdateGoogleDocsPageTaskParamsTaskType = "update_google_docs_page"
 )
 
+// Defines values for UpdateHeartbeatDataAttributesIntervalUnit.
+const (
+	UpdateHeartbeatDataAttributesIntervalUnitHours   UpdateHeartbeatDataAttributesIntervalUnit = "hours"
+	UpdateHeartbeatDataAttributesIntervalUnitMinutes UpdateHeartbeatDataAttributesIntervalUnit = "minutes"
+	UpdateHeartbeatDataAttributesIntervalUnitSeconds UpdateHeartbeatDataAttributesIntervalUnit = "seconds"
+)
+
+// Defines values for UpdateHeartbeatDataAttributesNotificationTargetType.
+const (
+	UpdateHeartbeatDataAttributesNotificationTargetTypeEscalationPolicy UpdateHeartbeatDataAttributesNotificationTargetType = "EscalationPolicy"
+	UpdateHeartbeatDataAttributesNotificationTargetTypeGroup            UpdateHeartbeatDataAttributesNotificationTargetType = "Group"
+	UpdateHeartbeatDataAttributesNotificationTargetTypeService          UpdateHeartbeatDataAttributesNotificationTargetType = "Service"
+	UpdateHeartbeatDataAttributesNotificationTargetTypeUser             UpdateHeartbeatDataAttributesNotificationTargetType = "User"
+)
+
+// Defines values for UpdateHeartbeatDataType.
+const (
+	UpdateHeartbeatDataTypeHeartbeats UpdateHeartbeatDataType = "heartbeats"
+)
+
 // Defines values for UpdateIncidentDataAttributesKind.
 const (
 	UpdateIncidentDataAttributesKindBackfilled UpdateIncidentDataAttributesKind = "backfilled"
@@ -3805,6 +3877,20 @@ const (
 	UpdateIncidentDataAttributesKindScheduled  UpdateIncidentDataAttributesKind = "scheduled"
 	UpdateIncidentDataAttributesKindTest       UpdateIncidentDataAttributesKind = "test"
 	UpdateIncidentDataAttributesKindTestSub    UpdateIncidentDataAttributesKind = "test_sub"
+)
+
+// Defines values for UpdateIncidentDataAttributesStatus.
+const (
+	UpdateIncidentDataAttributesStatusAcknowledged UpdateIncidentDataAttributesStatus = "acknowledged"
+	UpdateIncidentDataAttributesStatusCancelled    UpdateIncidentDataAttributesStatus = "cancelled"
+	UpdateIncidentDataAttributesStatusCompleted    UpdateIncidentDataAttributesStatus = "completed"
+	UpdateIncidentDataAttributesStatusDetected     UpdateIncidentDataAttributesStatus = "detected"
+	UpdateIncidentDataAttributesStatusInProgress   UpdateIncidentDataAttributesStatus = "in_progress"
+	UpdateIncidentDataAttributesStatusInTriage     UpdateIncidentDataAttributesStatus = "in_triage"
+	UpdateIncidentDataAttributesStatusMitigated    UpdateIncidentDataAttributesStatus = "mitigated"
+	UpdateIncidentDataAttributesStatusResolved     UpdateIncidentDataAttributesStatus = "resolved"
+	UpdateIncidentDataAttributesStatusScheduled    UpdateIncidentDataAttributesStatus = "scheduled"
+	UpdateIncidentDataAttributesStatusStarted      UpdateIncidentDataAttributesStatus = "started"
 )
 
 // Defines values for UpdateIncidentDataType.
@@ -4394,9 +4480,9 @@ const (
 
 // Defines values for UpdateScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit.
 const (
-	Days  UpdateScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit = "days"
-	Hours UpdateScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit = "hours"
-	Weeks UpdateScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit = "weeks"
+	UpdateScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnitDays  UpdateScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit = "days"
+	UpdateScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnitHours UpdateScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit = "hours"
+	UpdateScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnitWeeks UpdateScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit = "weeks"
 )
 
 // Defines values for UpdateScheduleRotationDataAttributesScheduleRotationableType.
@@ -4451,10 +4537,10 @@ const (
 
 // Defines values for UpdateSeverityDataAttributesSeverity.
 const (
-	UpdateSeverityDataAttributesSeverityCritical UpdateSeverityDataAttributesSeverity = "critical"
-	UpdateSeverityDataAttributesSeverityHigh     UpdateSeverityDataAttributesSeverity = "high"
-	UpdateSeverityDataAttributesSeverityLow      UpdateSeverityDataAttributesSeverity = "low"
-	UpdateSeverityDataAttributesSeverityMedium   UpdateSeverityDataAttributesSeverity = "medium"
+	Critical UpdateSeverityDataAttributesSeverity = "critical"
+	High     UpdateSeverityDataAttributesSeverity = "high"
+	Low      UpdateSeverityDataAttributesSeverity = "low"
+	Medium   UpdateSeverityDataAttributesSeverity = "medium"
 )
 
 // Defines values for UpdateSeverityDataType.
@@ -7696,6 +7782,76 @@ type GetPulsesTaskParams struct {
 // GetPulsesTaskParamsTaskType defines model for GetPulsesTaskParams.TaskType.
 type GetPulsesTaskParamsTaskType string
 
+// Heartbeat defines model for heartbeat.
+type Heartbeat struct {
+	// AlertSummary Summary of alerts triggered when heartbeat expires.
+	AlertSummary string `json:"alert_summary"`
+
+	// CreatedAt Date of creation
+	CreatedAt string `json:"created_at"`
+
+	// Description The description of the heartbeat
+	Description *string `json:"description"`
+
+	// Enabled Whether to trigger alerts when heartbeat is expired.
+	Enabled bool `json:"enabled"`
+
+	// ExpiresAt When heartbeat expires
+	ExpiresAt    *string               `json:"expires_at"`
+	Interval     int                   `json:"interval"`
+	IntervalUnit HeartbeatIntervalUnit `json:"interval_unit"`
+
+	// LastPingedAt When the heartbeat was last pinged.
+	LastPingedAt *string `json:"last_pinged_at"`
+
+	// Name The name of the heartbeat
+	Name                   string                          `json:"name"`
+	NotificationTargetId   string                          `json:"notification_target_id"`
+	NotificationTargetType HeartbeatNotificationTargetType `json:"notification_target_type"`
+	Status                 HeartbeatStatus                 `json:"status"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt string `json:"updated_at"`
+}
+
+// HeartbeatIntervalUnit defines model for Heartbeat.IntervalUnit.
+type HeartbeatIntervalUnit string
+
+// HeartbeatNotificationTargetType defines model for Heartbeat.NotificationTargetType.
+type HeartbeatNotificationTargetType string
+
+// HeartbeatStatus defines model for Heartbeat.Status.
+type HeartbeatStatus string
+
+// HeartbeatList defines model for heartbeat_list.
+type HeartbeatList struct {
+	Data []struct {
+		Attributes Heartbeat `json:"attributes"`
+
+		// Id Unique ID of the heartbeat
+		Id   string                `json:"id"`
+		Type HeartbeatListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// HeartbeatListDataType defines model for HeartbeatList.Data.Type.
+type HeartbeatListDataType string
+
+// HeartbeatResponse defines model for heartbeat_response.
+type HeartbeatResponse struct {
+	Data struct {
+		Attributes Heartbeat `json:"attributes"`
+
+		// Id Unique ID of the heartbeat
+		Id   string                    `json:"id"`
+		Type HeartbeatResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// HeartbeatResponseDataType defines model for HeartbeatResponse.Data.Type.
+type HeartbeatResponseDataType string
+
 // HttpClientTaskParams defines model for http_client_task_params.
 type HttpClientTaskParams struct {
 	// Body HTTP body
@@ -9594,6 +9750,39 @@ type NewFunctionalityDataAttributesShowUptimeLastDays int
 // NewFunctionalityDataType defines model for NewFunctionality.Data.Type.
 type NewFunctionalityDataType string
 
+// NewHeartbeat defines model for new_heartbeat.
+type NewHeartbeat struct {
+	Data struct {
+		Attributes struct {
+			// AlertSummary Summary of alerts triggered when heartbeat expires.
+			AlertSummary string `json:"alert_summary"`
+
+			// Description The description of the heartbeat
+			Description *string `json:"description"`
+
+			// Enabled Whether to trigger alerts when heartbeat is expired.
+			Enabled      *bool                                  `json:"enabled,omitempty"`
+			Interval     int                                    `json:"interval"`
+			IntervalUnit NewHeartbeatDataAttributesIntervalUnit `json:"interval_unit"`
+
+			// Name The name of the heartbeat
+			Name                   string                                           `json:"name"`
+			NotificationTargetId   string                                           `json:"notification_target_id"`
+			NotificationTargetType NewHeartbeatDataAttributesNotificationTargetType `json:"notification_target_type"`
+		} `json:"attributes"`
+		Type NewHeartbeatDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewHeartbeatDataAttributesIntervalUnit defines model for NewHeartbeat.Data.Attributes.IntervalUnit.
+type NewHeartbeatDataAttributesIntervalUnit string
+
+// NewHeartbeatDataAttributesNotificationTargetType defines model for NewHeartbeat.Data.Attributes.NotificationTargetType.
+type NewHeartbeatDataAttributesNotificationTargetType string
+
+// NewHeartbeatDataType defines model for NewHeartbeat.Data.Type.
+type NewHeartbeatDataType string
+
 // NewIncident defines model for new_incident.
 type NewIncident struct {
 	Data struct {
@@ -9664,7 +9853,7 @@ type NewIncident struct {
 			// StartedAt Date of start
 			StartedAt *string `json:"started_at"`
 
-			// Status The status of the incident event
+			// Status The status of the incident
 			Status *NewIncidentDataAttributesStatus `json:"status,omitempty"`
 
 			// Summary The summary of the incident
@@ -9686,7 +9875,7 @@ type NewIncident struct {
 // NewIncidentDataAttributesKind The kind of the incident
 type NewIncidentDataAttributesKind string
 
-// NewIncidentDataAttributesStatus The status of the incident event
+// NewIncidentDataAttributesStatus The status of the incident
 type NewIncidentDataAttributesStatus string
 
 // NewIncidentDataType defines model for NewIncident.Data.Type.
@@ -12474,7 +12663,10 @@ type SendSlackBlocksTaskParams struct {
 	} `json:"parent_message_thread_task,omitempty"`
 	PinToChannel    *bool `json:"pin_to_channel,omitempty"`
 	SendAsEphemeral *bool `json:"send_as_ephemeral,omitempty"`
-	SlackUserGroups *[]struct {
+
+	// SendOnlyAsThreadedMessage When set to true, if the parent for this threaded message cannot be found the message will be skipped.
+	SendOnlyAsThreadedMessage *bool `json:"send_only_as_threaded_message,omitempty"`
+	SlackUserGroups           *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"slack_user_groups,omitempty"`
@@ -12508,7 +12700,10 @@ type SendSlackMessageTaskParams struct {
 	} `json:"parent_message_thread_task,omitempty"`
 	PinToChannel    *bool `json:"pin_to_channel,omitempty"`
 	SendAsEphemeral *bool `json:"send_as_ephemeral,omitempty"`
-	SlackUserGroups *[]struct {
+
+	// SendOnlyAsThreadedMessage When set to true, if the parent for this threaded message cannot be found the message will be skipped.
+	SendOnlyAsThreadedMessage *bool `json:"send_only_as_threaded_message,omitempty"`
+	SlackUserGroups           *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"slack_user_groups,omitempty"`
@@ -13981,6 +14176,39 @@ type UpdateGoogleDocsPageTaskParams struct {
 // UpdateGoogleDocsPageTaskParamsTaskType defines model for UpdateGoogleDocsPageTaskParams.TaskType.
 type UpdateGoogleDocsPageTaskParamsTaskType string
 
+// UpdateHeartbeat defines model for update_heartbeat.
+type UpdateHeartbeat struct {
+	Data struct {
+		Attributes struct {
+			// AlertSummary Summary of alerts triggered when heartbeat expires.
+			AlertSummary *string `json:"alert_summary,omitempty"`
+
+			// Description The description of the heartbeat
+			Description *string `json:"description"`
+
+			// Enabled Whether to trigger alerts when heartbeat is expired.
+			Enabled      *bool                                      `json:"enabled,omitempty"`
+			Interval     *int                                       `json:"interval,omitempty"`
+			IntervalUnit *UpdateHeartbeatDataAttributesIntervalUnit `json:"interval_unit,omitempty"`
+
+			// Name The name of the heartbeat
+			Name                   *string                                              `json:"name,omitempty"`
+			NotificationTargetId   *string                                              `json:"notification_target_id,omitempty"`
+			NotificationTargetType *UpdateHeartbeatDataAttributesNotificationTargetType `json:"notification_target_type,omitempty"`
+		} `json:"attributes"`
+		Type UpdateHeartbeatDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateHeartbeatDataAttributesIntervalUnit defines model for UpdateHeartbeat.Data.Attributes.IntervalUnit.
+type UpdateHeartbeatDataAttributesIntervalUnit string
+
+// UpdateHeartbeatDataAttributesNotificationTargetType defines model for UpdateHeartbeat.Data.Attributes.NotificationTargetType.
+type UpdateHeartbeatDataAttributesNotificationTargetType string
+
+// UpdateHeartbeatDataType defines model for UpdateHeartbeat.Data.Type.
+type UpdateHeartbeatDataType string
+
 // UpdateIncident defines model for update_incident.
 type UpdateIncident struct {
 	Data struct {
@@ -14054,6 +14282,9 @@ type UpdateIncident struct {
 			// StartedAt Date of start
 			StartedAt *string `json:"started_at"`
 
+			// Status The status of the incident
+			Status *UpdateIncidentDataAttributesStatus `json:"status"`
+
 			// Summary The summary of the incident
 			Summary *string `json:"summary"`
 
@@ -14066,6 +14297,9 @@ type UpdateIncident struct {
 
 // UpdateIncidentDataAttributesKind The kind of the incident
 type UpdateIncidentDataAttributesKind string
+
+// UpdateIncidentDataAttributesStatus The status of the incident
+type UpdateIncidentDataAttributesStatus string
 
 // UpdateIncidentDataType defines model for UpdateIncident.Data.Type.
 type UpdateIncidentDataType string
@@ -16782,6 +17016,20 @@ type GetFunctionalityUptimeChartParams struct {
 	Period *string `form:"period,omitempty" json:"period,omitempty"`
 }
 
+// ListHeartbeatsParams defines parameters for ListHeartbeats.
+type ListHeartbeatsParams struct {
+	Include            *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSearch       *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
+	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+}
+
 // ListIncidentPermissionSetsParams defines parameters for ListIncidentPermissionSets.
 type ListIncidentPermissionSetsParams struct {
 	Include            *string `form:"include,omitempty" json:"include,omitempty"`
@@ -17486,6 +17734,12 @@ type CreateFunctionalityApplicationVndAPIPlusJSONRequestBody = NewFunctionality
 
 // UpdateFunctionalityApplicationVndAPIPlusJSONRequestBody defines body for UpdateFunctionality for application/vnd.api+json ContentType.
 type UpdateFunctionalityApplicationVndAPIPlusJSONRequestBody = UpdateFunctionality
+
+// CreateHeartbeatApplicationVndAPIPlusJSONRequestBody defines body for CreateHeartbeat for application/vnd.api+json ContentType.
+type CreateHeartbeatApplicationVndAPIPlusJSONRequestBody = NewHeartbeat
+
+// UpdateHeartbeatApplicationVndAPIPlusJSONRequestBody defines body for UpdateHeartbeat for application/vnd.api+json ContentType.
+type UpdateHeartbeatApplicationVndAPIPlusJSONRequestBody = UpdateHeartbeat
 
 // UpdateIncidentCustomFieldSelectionApplicationVndAPIPlusJSONRequestBody defines body for UpdateIncidentCustomFieldSelection for application/vnd.api+json ContentType.
 type UpdateIncidentCustomFieldSelectionApplicationVndAPIPlusJSONRequestBody = UpdateIncidentCustomFieldSelection
@@ -28371,6 +28625,28 @@ type ClientInterface interface {
 	// GetFunctionalityUptimeChart request
 	GetFunctionalityUptimeChart(ctx context.Context, id string, params *GetFunctionalityUptimeChartParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListHeartbeats request
+	ListHeartbeats(ctx context.Context, params *ListHeartbeatsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateHeartbeatWithBody request with any body
+	CreateHeartbeatWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateHeartbeatWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateHeartbeatApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PingHeartbeat request
+	PingHeartbeat(ctx context.Context, heartbeatId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteHeartbeat request
+	DeleteHeartbeat(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetHeartbeat request
+	GetHeartbeat(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateHeartbeatWithBody request with any body
+	UpdateHeartbeatWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateHeartbeatWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateHeartbeatApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// DeleteIncidentCustomFieldSelection request
 	DeleteIncidentCustomFieldSelection(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -31100,6 +31376,102 @@ func (c *Client) GetFunctionalityIncidentsChart(ctx context.Context, id string, 
 
 func (c *Client) GetFunctionalityUptimeChart(ctx context.Context, id string, params *GetFunctionalityUptimeChartParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetFunctionalityUptimeChartRequest(c.Server, id, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListHeartbeats(ctx context.Context, params *ListHeartbeatsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListHeartbeatsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateHeartbeatWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateHeartbeatRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateHeartbeatWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateHeartbeatApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateHeartbeatRequestWithApplicationVndAPIPlusJSONBody(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PingHeartbeat(ctx context.Context, heartbeatId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPingHeartbeatRequest(c.Server, heartbeatId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteHeartbeat(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteHeartbeatRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetHeartbeat(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetHeartbeatRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateHeartbeatWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateHeartbeatRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateHeartbeatWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateHeartbeatApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateHeartbeatRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -42073,6 +42445,388 @@ func NewGetFunctionalityUptimeChartRequest(server string, id string, params *Get
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewListHeartbeatsRequest generates requests for ListHeartbeats
+func NewListHeartbeatsRequest(server string, params *ListHeartbeatsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/heartbeats")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterSearch != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[search]", runtime.ParamLocationQuery, *params.FilterSearch); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterSlug != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[slug]", runtime.ParamLocationQuery, *params.FilterSlug); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterName != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[name]", runtime.ParamLocationQuery, *params.FilterName); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gte]", runtime.ParamLocationQuery, *params.FilterCreatedAtGte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lte]", runtime.ParamLocationQuery, *params.FilterCreatedAtLte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateHeartbeatRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateHeartbeat builder with application/vnd.api+json body
+func NewCreateHeartbeatRequestWithApplicationVndAPIPlusJSONBody(server string, body CreateHeartbeatApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateHeartbeatRequestWithBody(server, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateHeartbeatRequestWithBody generates requests for CreateHeartbeat with any type of body
+func NewCreateHeartbeatRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/heartbeats")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewPingHeartbeatRequest generates requests for PingHeartbeat
+func NewPingHeartbeatRequest(server string, heartbeatId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "heartbeat_id", runtime.ParamLocationPath, heartbeatId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/heartbeats/%s/ping", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDeleteHeartbeatRequest generates requests for DeleteHeartbeat
+func NewDeleteHeartbeatRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/heartbeats/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetHeartbeatRequest generates requests for GetHeartbeat
+func NewGetHeartbeatRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/heartbeats/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateHeartbeatRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateHeartbeat builder with application/vnd.api+json body
+func NewUpdateHeartbeatRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateHeartbeatApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateHeartbeatRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateHeartbeatRequestWithBody generates requests for UpdateHeartbeat with any type of body
+func NewUpdateHeartbeatRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/heartbeats/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -57297,6 +58051,28 @@ type ClientWithResponsesInterface interface {
 	// GetFunctionalityUptimeChartWithResponse request
 	GetFunctionalityUptimeChartWithResponse(ctx context.Context, id string, params *GetFunctionalityUptimeChartParams, reqEditors ...RequestEditorFn) (*GetFunctionalityUptimeChartResponse, error)
 
+	// ListHeartbeatsWithResponse request
+	ListHeartbeatsWithResponse(ctx context.Context, params *ListHeartbeatsParams, reqEditors ...RequestEditorFn) (*ListHeartbeatsResponse, error)
+
+	// CreateHeartbeatWithBodyWithResponse request with any body
+	CreateHeartbeatWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateHeartbeatResponse, error)
+
+	CreateHeartbeatWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateHeartbeatApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateHeartbeatResponse, error)
+
+	// PingHeartbeatWithResponse request
+	PingHeartbeatWithResponse(ctx context.Context, heartbeatId string, reqEditors ...RequestEditorFn) (*PingHeartbeatResponse, error)
+
+	// DeleteHeartbeatWithResponse request
+	DeleteHeartbeatWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteHeartbeatResponse, error)
+
+	// GetHeartbeatWithResponse request
+	GetHeartbeatWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetHeartbeatResponse, error)
+
+	// UpdateHeartbeatWithBodyWithResponse request with any body
+	UpdateHeartbeatWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateHeartbeatResponse, error)
+
+	UpdateHeartbeatWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateHeartbeatApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateHeartbeatResponse, error)
+
 	// DeleteIncidentCustomFieldSelectionWithResponse request
 	DeleteIncidentCustomFieldSelectionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentCustomFieldSelectionResponse, error)
 
@@ -60764,6 +61540,143 @@ func (r GetFunctionalityUptimeChartResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r GetFunctionalityUptimeChartResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListHeartbeatsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *HeartbeatList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListHeartbeatsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListHeartbeatsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateHeartbeatResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *HeartbeatResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateHeartbeatResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateHeartbeatResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PingHeartbeatResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r PingHeartbeatResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PingHeartbeatResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteHeartbeatResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *HeartbeatResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteHeartbeatResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteHeartbeatResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetHeartbeatResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *HeartbeatResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetHeartbeatResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetHeartbeatResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateHeartbeatResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *HeartbeatResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateHeartbeatResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateHeartbeatResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -67284,6 +68197,76 @@ func (c *ClientWithResponses) GetFunctionalityUptimeChartWithResponse(ctx contex
 	return ParseGetFunctionalityUptimeChartResponse(rsp)
 }
 
+// ListHeartbeatsWithResponse request returning *ListHeartbeatsResponse
+func (c *ClientWithResponses) ListHeartbeatsWithResponse(ctx context.Context, params *ListHeartbeatsParams, reqEditors ...RequestEditorFn) (*ListHeartbeatsResponse, error) {
+	rsp, err := c.ListHeartbeats(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListHeartbeatsResponse(rsp)
+}
+
+// CreateHeartbeatWithBodyWithResponse request with arbitrary body returning *CreateHeartbeatResponse
+func (c *ClientWithResponses) CreateHeartbeatWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateHeartbeatResponse, error) {
+	rsp, err := c.CreateHeartbeatWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateHeartbeatResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateHeartbeatWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateHeartbeatApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateHeartbeatResponse, error) {
+	rsp, err := c.CreateHeartbeatWithApplicationVndAPIPlusJSONBody(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateHeartbeatResponse(rsp)
+}
+
+// PingHeartbeatWithResponse request returning *PingHeartbeatResponse
+func (c *ClientWithResponses) PingHeartbeatWithResponse(ctx context.Context, heartbeatId string, reqEditors ...RequestEditorFn) (*PingHeartbeatResponse, error) {
+	rsp, err := c.PingHeartbeat(ctx, heartbeatId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePingHeartbeatResponse(rsp)
+}
+
+// DeleteHeartbeatWithResponse request returning *DeleteHeartbeatResponse
+func (c *ClientWithResponses) DeleteHeartbeatWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteHeartbeatResponse, error) {
+	rsp, err := c.DeleteHeartbeat(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteHeartbeatResponse(rsp)
+}
+
+// GetHeartbeatWithResponse request returning *GetHeartbeatResponse
+func (c *ClientWithResponses) GetHeartbeatWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetHeartbeatResponse, error) {
+	rsp, err := c.GetHeartbeat(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetHeartbeatResponse(rsp)
+}
+
+// UpdateHeartbeatWithBodyWithResponse request with arbitrary body returning *UpdateHeartbeatResponse
+func (c *ClientWithResponses) UpdateHeartbeatWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateHeartbeatResponse, error) {
+	rsp, err := c.UpdateHeartbeatWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateHeartbeatResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateHeartbeatWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateHeartbeatApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateHeartbeatResponse, error) {
+	rsp, err := c.UpdateHeartbeatWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateHeartbeatResponse(rsp)
+}
+
 // DeleteIncidentCustomFieldSelectionWithResponse request returning *DeleteIncidentCustomFieldSelectionResponse
 func (c *ClientWithResponses) DeleteIncidentCustomFieldSelectionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentCustomFieldSelectionResponse, error) {
 	rsp, err := c.DeleteIncidentCustomFieldSelection(ctx, id, reqEditors...)
@@ -73745,6 +74728,197 @@ func ParseGetFunctionalityUptimeChartResponse(rsp *http.Response) (*GetFunctiona
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest UptimeChartResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListHeartbeatsResponse parses an HTTP response from a ListHeartbeatsWithResponse call
+func ParseListHeartbeatsResponse(rsp *http.Response) (*ListHeartbeatsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListHeartbeatsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HeartbeatList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateHeartbeatResponse parses an HTTP response from a CreateHeartbeatWithResponse call
+func ParseCreateHeartbeatResponse(rsp *http.Response) (*CreateHeartbeatResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateHeartbeatResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest HeartbeatResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePingHeartbeatResponse parses an HTTP response from a PingHeartbeatWithResponse call
+func ParsePingHeartbeatResponse(rsp *http.Response) (*PingHeartbeatResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PingHeartbeatResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteHeartbeatResponse parses an HTTP response from a DeleteHeartbeatWithResponse call
+func ParseDeleteHeartbeatResponse(rsp *http.Response) (*DeleteHeartbeatResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteHeartbeatResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HeartbeatResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetHeartbeatResponse parses an HTTP response from a GetHeartbeatWithResponse call
+func ParseGetHeartbeatResponse(rsp *http.Response) (*GetHeartbeatResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetHeartbeatResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HeartbeatResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateHeartbeatResponse parses an HTTP response from a UpdateHeartbeatWithResponse call
+func ParseUpdateHeartbeatResponse(rsp *http.Response) (*UpdateHeartbeatResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateHeartbeatResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HeartbeatResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

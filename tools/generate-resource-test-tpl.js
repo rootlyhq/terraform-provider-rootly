@@ -51,6 +51,8 @@ function testParams(name, schema, required) {
             : `${key} = "${val}"`;
         case "number":
           return `${key} = 1`;
+        case "integer":
+          return `${key} = 1`;
         case "array":
           if (
             schema.properties[key].items.type === "object" &&

@@ -86,6 +86,7 @@ Optional:
 - `parent_message_thread_task` (Map of String) Map must contain two fields, `id` and `name`. A hash where [id] is the task id of the parent task that sent a message, and [name] is the name of the parent task
 - `pin_to_channel` (Boolean) Value must be one of true or false
 - `send_as_ephemeral` (Boolean) Value must be one of true or false
+- `send_only_as_threaded_message` (Boolean) When set to true, if the parent for this threaded message cannot be found the message will be skipped.. Value must be one of true or false
 - `slack_user_groups` (Block List) (see [below for nested schema](#nestedblock--task_params--slack_user_groups))
 - `slack_users` (Block List) (see [below for nested schema](#nestedblock--task_params--slack_users))
 - `task_type` (String)

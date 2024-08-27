@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.3.8] -- 2024-08-26
+
+- Add heartbeats resources
+
 ## [2.3.7] -- 2024-08-26
 
 - Fix crash when missing dashboard_panel.params.legend
