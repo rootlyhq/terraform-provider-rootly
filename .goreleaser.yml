@@ -64,4 +64,4 @@ release:
 changelog:
   disable: true
 snapshot:
-  name_template: "{{ .Tag }}-next"
+  version_template: "{{ .Tag }}-next"
