@@ -11520,6 +11520,8 @@ type PagePagerdutyOnCallRespondersTaskParamsUrgency string
 
 // PageRootlyOnCallRespondersTaskParams defines model for page_rootly_on_call_responders_task_params.
 type PageRootlyOnCallRespondersTaskParams struct {
+	// AlertUrgencyId Alert urgency ID
+	AlertUrgencyId         *string `json:"alert_urgency_id,omitempty"`
 	EscalationNote         *string `json:"escalation_note,omitempty"`
 	EscalationPolicyTarget *struct {
 		Id   *string `json:"id,omitempty"`
@@ -58954,7 +58956,7 @@ type DeleteIncidentActionItemResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentActionItemResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -58977,7 +58979,7 @@ type GetIncidentActionItemsResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentActionItemResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59000,7 +59002,7 @@ type UpdateIncidentActionItemResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentActionItemResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59069,7 +59071,7 @@ type GetAlertResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *AlertResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59092,7 +59094,7 @@ type AcknowledgeAlertResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *AlertResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59115,7 +59117,7 @@ type ResolveAlertResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *AlertResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59205,7 +59207,7 @@ type DeleteAuthorizationResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *AuthorizationResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59228,7 +59230,7 @@ type GetAuthorizationResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *AuthorizationResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59251,7 +59253,7 @@ type UpdateAuthorizationResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *AuthorizationResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59320,7 +59322,7 @@ type DeleteCauseResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *CauseResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59343,7 +59345,7 @@ type GetCauseResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *CauseResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59366,7 +59368,7 @@ type UpdateCauseResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *CauseResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59389,7 +59391,7 @@ type DeleteCustomFieldOptionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *CustomFieldOptionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59412,7 +59414,7 @@ type GetCustomFieldOptionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *CustomFieldOptionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59435,7 +59437,7 @@ type UpdateCustomFieldOptionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *CustomFieldOptionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59550,7 +59552,7 @@ type DeleteCustomFieldResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *CustomFieldResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59573,7 +59575,7 @@ type GetCustomFieldResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *CustomFieldResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59596,7 +59598,7 @@ type UpdateCustomFieldResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *CustomFieldResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59666,7 +59668,7 @@ type DeleteCustomFormResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *CustomFormResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59689,7 +59691,7 @@ type GetCustomFormResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *CustomFormResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59712,7 +59714,7 @@ type UpdateCustomFormResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *CustomFormResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59735,7 +59737,7 @@ type DeleteDashboardPanelResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *DashboardPanelResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59758,7 +59760,7 @@ type GetDashboardPanelResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *DashboardPanelResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59781,7 +59783,7 @@ type UpdateDashboardPanelResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *DashboardPanelResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59918,7 +59920,7 @@ type DeleteDashboardResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *DashboardResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59941,7 +59943,7 @@ type GetDashboardResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *DashboardResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -59964,7 +59966,7 @@ type UpdateDashboardResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *DashboardResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60079,7 +60081,7 @@ type DeleteEnvironmentResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *EnvironmentResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60102,7 +60104,7 @@ type GetEnvironmentResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *EnvironmentResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60125,7 +60127,7 @@ type UpdateEnvironmentResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *EnvironmentResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60148,7 +60150,7 @@ type DeleteEscalationLevelResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *EscalationLevelResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60171,7 +60173,7 @@ type GetEscalationLevelResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *EscalationLevelResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60194,7 +60196,7 @@ type UpdateEscalationLevelResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *EscalationLevelResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60309,7 +60311,7 @@ type DeleteEscalationPolicyResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *EscalationPolicyResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60332,7 +60334,7 @@ type GetEscalationPolicyResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *EscalationPolicyResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60355,7 +60357,7 @@ type UpdateEscalationPolicyResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *EscalationPolicyResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60378,7 +60380,7 @@ type DeleteIncidentEventResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentEventResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60401,7 +60403,7 @@ type GetIncidentEventsResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentEventResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60424,7 +60426,7 @@ type UpdateIncidentEventResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentEventResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60539,7 +60541,7 @@ type GetIncidentFeedbacksResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentFeedbackResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60562,7 +60564,7 @@ type UpdateIncidentFeedbackResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentFeedbackResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60585,7 +60587,7 @@ type DeleteFormFieldOptionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FormFieldOptionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60608,7 +60610,7 @@ type GetFormFieldOptionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FormFieldOptionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60631,7 +60633,7 @@ type UpdateFormFieldOptionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FormFieldOptionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60654,7 +60656,7 @@ type DeleteFormFieldPlacementConditionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FormFieldPlacementConditionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60677,7 +60679,7 @@ type GetFormFieldPlacementConditionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FormFieldPlacementConditionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60700,7 +60702,7 @@ type UpdateFormFieldPlacementConditionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FormFieldPlacementConditionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60769,7 +60771,7 @@ type DeleteFormFieldPlacementResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FormFieldPlacementResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60792,7 +60794,7 @@ type GetFormFieldPlacementResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FormFieldPlacementResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60815,7 +60817,7 @@ type UpdateFormFieldPlacementResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FormFieldPlacementResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60838,7 +60840,7 @@ type DeleteFormFieldPositionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FormFieldPositionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60861,7 +60863,7 @@ type GetFormFieldPositionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FormFieldPositionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -60884,7 +60886,7 @@ type UpdateFormFieldPositionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FormFieldPositionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61090,7 +61092,7 @@ type DeleteFormFieldResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FormFieldResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61113,7 +61115,7 @@ type GetFormFieldResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FormFieldResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61136,7 +61138,7 @@ type UpdateFormFieldResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FormFieldResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61159,7 +61161,7 @@ type DeleteFormSetConditionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FormSetConditionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61182,7 +61184,7 @@ type GetFormSetConditionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FormSetConditionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61205,7 +61207,7 @@ type UpdateFormSetConditionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FormSetConditionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61320,7 +61322,7 @@ type DeleteFormSetResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FormSetResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61343,7 +61345,7 @@ type GetFormSetResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FormSetResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61366,7 +61368,7 @@ type UpdateFormSetResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FormSetResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61435,7 +61437,7 @@ type DeleteFunctionalityResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FunctionalityResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61458,7 +61460,7 @@ type GetFunctionalityResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FunctionalityResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61481,7 +61483,7 @@ type UpdateFunctionalityResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FunctionalityResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61504,7 +61506,7 @@ type GetFunctionalityIncidentsChartResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentsChartResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61527,7 +61529,7 @@ type GetFunctionalityUptimeChartResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *UptimeChartResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61595,7 +61597,7 @@ func (r CreateHeartbeatResponse) StatusCode() int {
 type PingHeartbeatResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61618,7 +61620,7 @@ type DeleteHeartbeatResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *HeartbeatResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61641,7 +61643,7 @@ type GetHeartbeatResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *HeartbeatResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61664,7 +61666,7 @@ type UpdateHeartbeatResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *HeartbeatResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61687,7 +61689,7 @@ type DeleteIncidentCustomFieldSelectionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentCustomFieldSelectionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61710,7 +61712,7 @@ type GetIncidentCustomFieldSelectionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentCustomFieldSelectionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61733,7 +61735,7 @@ type UpdateIncidentCustomFieldSelectionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentCustomFieldSelectionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61756,7 +61758,7 @@ type DeleteIncidentEventFunctionalityResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentEventFunctionalityResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61779,7 +61781,7 @@ type GetIncidentEventFunctionalitiesResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentEventFunctionalityResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61802,7 +61804,7 @@ type UpdateIncidentEventFunctionalityResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentEventFunctionalityResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61825,7 +61827,7 @@ type DeleteIncidentEventServiceResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentEventServiceResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61848,7 +61850,7 @@ type GetIncidentEventServicesResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentEventServiceResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61871,7 +61873,7 @@ type UpdateIncidentEventServiceResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentEventServiceResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61894,7 +61896,7 @@ type DeleteIncidentFormFieldSelectionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentFormFieldSelectionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61917,7 +61919,7 @@ type GetIncidentFormFieldSelectionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentFormFieldSelectionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61940,7 +61942,7 @@ type UpdateIncidentFormFieldSelectionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentFormFieldSelectionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61963,7 +61965,7 @@ type DeleteIncidentPermissionSetBooleanResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentPermissionSetBooleanResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -61986,7 +61988,7 @@ type GetIncidentPermissionSetBooleanResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentPermissionSetBooleanResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62009,7 +62011,7 @@ type UpdateIncidentPermissionSetBooleanResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentPermissionSetBooleanResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62032,7 +62034,7 @@ type DeleteIncidentPermissionSetResourceResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentPermissionSetResourceResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62055,7 +62057,7 @@ type GetIncidentPermissionSetResourceResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentPermissionSetResourceResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62078,7 +62080,7 @@ type UpdateIncidentPermissionSetResourceResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentPermissionSetResourceResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62147,7 +62149,7 @@ type DeleteIncidentPermissionSetResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentPermissionSetResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62170,7 +62172,7 @@ type GetIncidentPermissionSetResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentPermissionSetResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62193,7 +62195,7 @@ type UpdateIncidentPermissionSetResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentPermissionSetResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62308,7 +62310,7 @@ type DeleteIncidentRoleTaskResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentRoleTaskResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62331,7 +62333,7 @@ type GetIncidentRoleTaskResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentRoleTaskResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62354,7 +62356,7 @@ type UpdateIncidentRoleTaskResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentRoleTaskResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62423,7 +62425,7 @@ type DeleteIncidentRoleResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentRoleResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62446,7 +62448,7 @@ type GetIncidentRoleResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentRoleResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62469,7 +62471,7 @@ type UpdateIncidentRoleResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentRoleResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62584,7 +62586,7 @@ type DeleteIncidentTypeResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentTypeResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62607,7 +62609,7 @@ type GetIncidentTypeResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentTypeResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62630,7 +62632,7 @@ type UpdateIncidentTypeResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentTypeResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62699,7 +62701,7 @@ type DeleteIncidentResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62722,7 +62724,7 @@ type GetIncidentResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62745,7 +62747,7 @@ type UpdateIncidentResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62768,7 +62770,7 @@ type AddSubscribersToIncidentResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62791,7 +62793,7 @@ type AssignUserToIncidentResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62814,7 +62816,7 @@ type CancelIncidentResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62837,7 +62839,7 @@ type MarkAsDuplicateIncidentResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62860,7 +62862,7 @@ type TriageIncidentResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62883,7 +62885,7 @@ type MitigateIncidentResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62906,7 +62908,7 @@ type RemoveSubscribersToIncidentResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62929,7 +62931,7 @@ type ResolveIncidentResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62952,7 +62954,7 @@ type RestartIncidentResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -62975,7 +62977,7 @@ type RemoveAssignedUserFromIncidentResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -63341,7 +63343,7 @@ type DeleteUserNotificationRuleResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *UserNotificationRuleResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -63364,7 +63366,7 @@ type GetUserNotificationRuleResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *UserNotificationRuleResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -63387,7 +63389,7 @@ type UpdateUserNotificationRuleResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *UserNotificationRuleResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -63410,7 +63412,7 @@ type DeleteOnCallShadowResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *OnCallShadowResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -63433,7 +63435,7 @@ type GetOnCallShadowResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *OnCallShadowResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -63456,7 +63458,7 @@ type UpdateOnCallShadowResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *OnCallShadowResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -63479,7 +63481,7 @@ type DeleteOverrideShiftResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *OverrideShiftResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -63502,7 +63504,7 @@ type GetOverrideShiftResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *OverrideShiftResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -63525,7 +63527,7 @@ type UpdateOverrideShiftResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *OverrideShiftResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -63548,7 +63550,7 @@ type DeletePlaybookTaskResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *PlaybookTaskResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -63571,7 +63573,7 @@ type GetPlaybookTaskResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *PlaybookTaskResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -63594,7 +63596,7 @@ type UpdatePlaybookTaskResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *PlaybookTaskResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -63663,7 +63665,7 @@ type DeletePlaybookResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *PlaybookResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -63686,7 +63688,7 @@ type GetPlaybookResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *PlaybookResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -63709,7 +63711,7 @@ type UpdatePlaybookResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *PlaybookResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -63824,7 +63826,7 @@ type DeletePostmortemTemplateResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *PostMortemTemplateResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -63847,7 +63849,7 @@ type GetPostmortemTemplateResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *PostMortemTemplateResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -63870,7 +63872,7 @@ type UpdatePostmortemTemplateResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *PostMortemTemplateResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -63915,7 +63917,7 @@ type ListIncidentPostmortemResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentPostMortemResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -63938,7 +63940,7 @@ type UpdateIncidentPostmortemResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentPostMortemResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64007,7 +64009,7 @@ type GetPulseResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *PulseResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64030,7 +64032,7 @@ type UpdatePulseResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *PulseResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64075,7 +64077,7 @@ type GetRetrospectiveConfigurationResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *RetrospectiveConfigurationResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64098,7 +64100,7 @@ type UpdateRetrospectiveConfigurationResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *RetrospectiveConfigurationResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64167,7 +64169,7 @@ type DeleteRetrospectiveProcessResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *RetrospectiveProcessResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64190,7 +64192,7 @@ type GetRetrospectiveProcessResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *RetrospectiveProcessResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64213,7 +64215,7 @@ type UpdateRetrospectiveProcessResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *RetrospectiveProcessResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64282,7 +64284,7 @@ type DeleteRetrospectiveStepResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *RetrospectiveStepResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64305,7 +64307,7 @@ type GetRetrospectiveStepResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *RetrospectiveStepResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64328,7 +64330,7 @@ type UpdateRetrospectiveStepResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *RetrospectiveStepResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64397,7 +64399,7 @@ type DeleteRoleResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *RoleResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64420,7 +64422,7 @@ type GetRoleResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *RoleResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64443,7 +64445,7 @@ type UpdateRoleResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *RoleResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64466,7 +64468,7 @@ type DeleteScheduleRotationActiveDayResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *ScheduleRotationActiveDayResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64489,7 +64491,7 @@ type GetScheduleRotationActiveDayResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *ScheduleRotationActiveDayResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64512,7 +64514,7 @@ type UpdateScheduleRotationActiveDayResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *ScheduleRotationActiveDayResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64535,7 +64537,7 @@ type DeleteScheduleRotationUserResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *ScheduleRotationUserResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64558,7 +64560,7 @@ type GetScheduleRotationUserResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *ScheduleRotationUserResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64581,7 +64583,7 @@ type UpdateScheduleRotationUserResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *ScheduleRotationUserResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64604,7 +64606,7 @@ type DeleteScheduleRotationResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *ScheduleRotationResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64627,7 +64629,7 @@ type GetScheduleRotationResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *ScheduleRotationResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64650,7 +64652,7 @@ type UpdateScheduleRotationResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *ScheduleRotationResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64811,7 +64813,7 @@ type DeleteScheduleResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *ScheduleResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64834,7 +64836,7 @@ type GetScheduleResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *ScheduleResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64857,7 +64859,7 @@ type UpdateScheduleResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *ScheduleResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -64880,7 +64882,7 @@ type GetScheduleShiftsResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *ShiftList
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65087,7 +65089,7 @@ type DeleteSecretResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *SecretResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65110,7 +65112,7 @@ type GetSecretResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *SecretResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65133,7 +65135,7 @@ type UpdateSecretResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *SecretResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65202,7 +65204,7 @@ type DeleteServiceResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *ServiceResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65225,7 +65227,7 @@ type GetServiceResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *ServiceResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65248,7 +65250,7 @@ type UpdateServiceResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *ServiceResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65271,7 +65273,7 @@ type GetServiceIncidentsChartResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentsChartResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65294,7 +65296,7 @@ type GetServiceUptimeChartResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *UptimeChartResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65363,7 +65365,7 @@ type DeleteSeverityResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *SeverityResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65386,7 +65388,7 @@ type GetSeverityResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *SeverityResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65409,7 +65411,7 @@ type UpdateSeverityResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *SeverityResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65432,7 +65434,7 @@ type ListShiftsResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *ShiftList
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65455,7 +65457,7 @@ type DeleteIncidentStatusPageResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentStatusPageEventResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65478,7 +65480,7 @@ type GetIncidentStatusPagesResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentStatusPageEventResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65501,7 +65503,7 @@ type UpdateIncidentStatusPageResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentStatusPageEventResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65570,7 +65572,7 @@ type DeleteStatusPageResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *StatusPageResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65593,7 +65595,7 @@ type GetStatusPageResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *StatusPageResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65616,7 +65618,7 @@ type UpdateStatusPageResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *StatusPageResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65731,7 +65733,7 @@ type DeleteTeamResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *TeamResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65754,7 +65756,7 @@ type GetTeamResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *TeamResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65777,7 +65779,7 @@ type UpdateTeamResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *TeamResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65800,7 +65802,7 @@ type GetTeamIncidentsChartResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentsChartResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65823,7 +65825,7 @@ type DeleteStatusPageTemplateResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *StatusPageTemplateResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65846,7 +65848,7 @@ type GetStatusPageTemplateResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *StatusPageTemplateResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65869,7 +65871,7 @@ type UpdateStatusPageTemplateResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *StatusPageTemplateResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65938,7 +65940,7 @@ type DeleteUserResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *UserResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -65961,7 +65963,7 @@ type GetUserResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *UserResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -66030,7 +66032,7 @@ type GetWebhooksDeliveryResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *WebhooksDeliveryResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -66143,7 +66145,7 @@ type DeleteWebhooksEndpointResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *WebhooksEndpointResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -66166,7 +66168,7 @@ type GetWebhooksEndpointResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *WebhooksEndpointResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -66189,7 +66191,7 @@ type UpdateWebhooksEndpointResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *WebhooksEndpointResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -66212,7 +66214,7 @@ type DeleteWorkflowCustomFieldSelectionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *WorkflowCustomFieldSelectionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -66235,7 +66237,7 @@ type GetWorkflowCustomFieldSelectionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *WorkflowCustomFieldSelectionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -66258,7 +66260,7 @@ type UpdateWorkflowCustomFieldSelectionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *WorkflowCustomFieldSelectionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -66281,7 +66283,7 @@ type DeleteWorkflowFormFieldConditionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *WorkflowFormFieldConditionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -66304,7 +66306,7 @@ type GetWorkflowFormFieldConditionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *WorkflowFormFieldConditionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -66327,7 +66329,7 @@ type UpdateWorkflowFormFieldConditionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *WorkflowFormFieldConditionResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -66396,7 +66398,7 @@ type DeleteWorkflowGroupResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *WorkflowGroupResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -66419,7 +66421,7 @@ type GetWorkflowGroupResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *WorkflowGroupResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -66442,7 +66444,7 @@ type UpdateWorkflowGroupResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *WorkflowGroupResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -66465,7 +66467,7 @@ type DeleteWorkflowTaskResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *WorkflowTaskResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -66488,7 +66490,7 @@ type GetWorkflowTaskResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *WorkflowTaskResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -66511,7 +66513,7 @@ type UpdateWorkflowTaskResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *WorkflowTaskResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -66580,7 +66582,7 @@ type DeleteWorkflowResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *WorkflowResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -66603,7 +66605,7 @@ type GetWorkflowResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *WorkflowResponse
-	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -66626,8 +66628,8 @@ type UpdateWorkflowResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *WorkflowResponse
-	ApplicationvndApiJSON401 *ErrorsList
 	ApplicationvndApiJSON403 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -71058,12 +71060,12 @@ func ParseDeleteIncidentActionItemResponse(rsp *http.Response) (*DeleteIncidentA
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -71091,12 +71093,12 @@ func ParseGetIncidentActionItemsResponse(rsp *http.Response) (*GetIncidentAction
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -71124,12 +71126,12 @@ func ParseUpdateIncidentActionItemResponse(rsp *http.Response) (*UpdateIncidentA
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -71223,12 +71225,12 @@ func ParseGetAlertResponse(rsp *http.Response) (*GetAlertResponse, error) {
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -71256,12 +71258,12 @@ func ParseAcknowledgeAlertResponse(rsp *http.Response) (*AcknowledgeAlertRespons
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -71289,12 +71291,12 @@ func ParseResolveAlertResponse(rsp *http.Response) (*ResolveAlertResponse, error
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -71407,12 +71409,12 @@ func ParseDeleteAuthorizationResponse(rsp *http.Response) (*DeleteAuthorizationR
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -71440,12 +71442,12 @@ func ParseGetAuthorizationResponse(rsp *http.Response) (*GetAuthorizationRespons
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -71473,12 +71475,12 @@ func ParseUpdateAuthorizationResponse(rsp *http.Response) (*UpdateAuthorizationR
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -71572,12 +71574,12 @@ func ParseDeleteCauseResponse(rsp *http.Response) (*DeleteCauseResponse, error) 
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -71605,12 +71607,12 @@ func ParseGetCauseResponse(rsp *http.Response) (*GetCauseResponse, error) {
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -71638,12 +71640,12 @@ func ParseUpdateCauseResponse(rsp *http.Response) (*UpdateCauseResponse, error) 
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -71671,12 +71673,12 @@ func ParseDeleteCustomFieldOptionResponse(rsp *http.Response) (*DeleteCustomFiel
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -71704,12 +71706,12 @@ func ParseGetCustomFieldOptionResponse(rsp *http.Response) (*GetCustomFieldOptio
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -71737,12 +71739,12 @@ func ParseUpdateCustomFieldOptionResponse(rsp *http.Response) (*UpdateCustomFiel
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -71902,12 +71904,12 @@ func ParseDeleteCustomFieldResponse(rsp *http.Response) (*DeleteCustomFieldRespo
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -71935,12 +71937,12 @@ func ParseGetCustomFieldResponse(rsp *http.Response) (*GetCustomFieldResponse, e
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -71968,12 +71970,12 @@ func ParseUpdateCustomFieldResponse(rsp *http.Response) (*UpdateCustomFieldRespo
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -72074,12 +72076,12 @@ func ParseDeleteCustomFormResponse(rsp *http.Response) (*DeleteCustomFormRespons
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -72107,12 +72109,12 @@ func ParseGetCustomFormResponse(rsp *http.Response) (*GetCustomFormResponse, err
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -72140,12 +72142,12 @@ func ParseUpdateCustomFormResponse(rsp *http.Response) (*UpdateCustomFormRespons
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -72173,12 +72175,12 @@ func ParseDeleteDashboardPanelResponse(rsp *http.Response) (*DeleteDashboardPane
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -72206,12 +72208,12 @@ func ParseGetDashboardPanelResponse(rsp *http.Response) (*GetDashboardPanelRespo
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -72239,12 +72241,12 @@ func ParseUpdateDashboardPanelResponse(rsp *http.Response) (*UpdateDashboardPane
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -72430,12 +72432,12 @@ func ParseDeleteDashboardResponse(rsp *http.Response) (*DeleteDashboardResponse,
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -72463,12 +72465,12 @@ func ParseGetDashboardResponse(rsp *http.Response) (*GetDashboardResponse, error
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -72496,12 +72498,12 @@ func ParseUpdateDashboardResponse(rsp *http.Response) (*UpdateDashboardResponse,
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -72661,12 +72663,12 @@ func ParseDeleteEnvironmentResponse(rsp *http.Response) (*DeleteEnvironmentRespo
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -72694,12 +72696,12 @@ func ParseGetEnvironmentResponse(rsp *http.Response) (*GetEnvironmentResponse, e
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -72727,12 +72729,12 @@ func ParseUpdateEnvironmentResponse(rsp *http.Response) (*UpdateEnvironmentRespo
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -72760,12 +72762,12 @@ func ParseDeleteEscalationLevelResponse(rsp *http.Response) (*DeleteEscalationLe
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -72793,12 +72795,12 @@ func ParseGetEscalationLevelResponse(rsp *http.Response) (*GetEscalationLevelRes
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -72826,12 +72828,12 @@ func ParseUpdateEscalationLevelResponse(rsp *http.Response) (*UpdateEscalationLe
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -72991,12 +72993,12 @@ func ParseDeleteEscalationPolicyResponse(rsp *http.Response) (*DeleteEscalationP
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -73024,12 +73026,12 @@ func ParseGetEscalationPolicyResponse(rsp *http.Response) (*GetEscalationPolicyR
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -73057,12 +73059,12 @@ func ParseUpdateEscalationPolicyResponse(rsp *http.Response) (*UpdateEscalationP
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -73090,12 +73092,12 @@ func ParseDeleteIncidentEventResponse(rsp *http.Response) (*DeleteIncidentEventR
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -73123,12 +73125,12 @@ func ParseGetIncidentEventsResponse(rsp *http.Response) (*GetIncidentEventsRespo
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -73156,12 +73158,12 @@ func ParseUpdateIncidentEventResponse(rsp *http.Response) (*UpdateIncidentEventR
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -73321,12 +73323,12 @@ func ParseGetIncidentFeedbacksResponse(rsp *http.Response) (*GetIncidentFeedback
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -73354,12 +73356,12 @@ func ParseUpdateIncidentFeedbackResponse(rsp *http.Response) (*UpdateIncidentFee
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -73387,12 +73389,12 @@ func ParseDeleteFormFieldOptionResponse(rsp *http.Response) (*DeleteFormFieldOpt
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -73420,12 +73422,12 @@ func ParseGetFormFieldOptionResponse(rsp *http.Response) (*GetFormFieldOptionRes
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -73453,12 +73455,12 @@ func ParseUpdateFormFieldOptionResponse(rsp *http.Response) (*UpdateFormFieldOpt
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -73486,12 +73488,12 @@ func ParseDeleteFormFieldPlacementConditionResponse(rsp *http.Response) (*Delete
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -73519,12 +73521,12 @@ func ParseGetFormFieldPlacementConditionResponse(rsp *http.Response) (*GetFormFi
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -73552,12 +73554,12 @@ func ParseUpdateFormFieldPlacementConditionResponse(rsp *http.Response) (*Update
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -73651,12 +73653,12 @@ func ParseDeleteFormFieldPlacementResponse(rsp *http.Response) (*DeleteFormField
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -73684,12 +73686,12 @@ func ParseGetFormFieldPlacementResponse(rsp *http.Response) (*GetFormFieldPlacem
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -73717,12 +73719,12 @@ func ParseUpdateFormFieldPlacementResponse(rsp *http.Response) (*UpdateFormField
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -73750,12 +73752,12 @@ func ParseDeleteFormFieldPositionResponse(rsp *http.Response) (*DeleteFormFieldP
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -73783,12 +73785,12 @@ func ParseGetFormFieldPositionResponse(rsp *http.Response) (*GetFormFieldPositio
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -73816,12 +73818,12 @@ func ParseUpdateFormFieldPositionResponse(rsp *http.Response) (*UpdateFormFieldP
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -74106,12 +74108,12 @@ func ParseDeleteFormFieldResponse(rsp *http.Response) (*DeleteFormFieldResponse,
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -74139,12 +74141,12 @@ func ParseGetFormFieldResponse(rsp *http.Response) (*GetFormFieldResponse, error
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -74172,12 +74174,12 @@ func ParseUpdateFormFieldResponse(rsp *http.Response) (*UpdateFormFieldResponse,
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -74205,12 +74207,12 @@ func ParseDeleteFormSetConditionResponse(rsp *http.Response) (*DeleteFormSetCond
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -74238,12 +74240,12 @@ func ParseGetFormSetConditionResponse(rsp *http.Response) (*GetFormSetConditionR
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -74271,12 +74273,12 @@ func ParseUpdateFormSetConditionResponse(rsp *http.Response) (*UpdateFormSetCond
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -74436,12 +74438,12 @@ func ParseDeleteFormSetResponse(rsp *http.Response) (*DeleteFormSetResponse, err
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -74469,12 +74471,12 @@ func ParseGetFormSetResponse(rsp *http.Response) (*GetFormSetResponse, error) {
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -74502,12 +74504,12 @@ func ParseUpdateFormSetResponse(rsp *http.Response) (*UpdateFormSetResponse, err
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -74601,12 +74603,12 @@ func ParseDeleteFunctionalityResponse(rsp *http.Response) (*DeleteFunctionalityR
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -74634,12 +74636,12 @@ func ParseGetFunctionalityResponse(rsp *http.Response) (*GetFunctionalityRespons
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -74667,12 +74669,12 @@ func ParseUpdateFunctionalityResponse(rsp *http.Response) (*UpdateFunctionalityR
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -74700,12 +74702,12 @@ func ParseGetFunctionalityIncidentsChartResponse(rsp *http.Response) (*GetFuncti
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -74733,12 +74735,12 @@ func ParseGetFunctionalityUptimeChartResponse(rsp *http.Response) (*GetFunctiona
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -74825,12 +74827,12 @@ func ParsePingHeartbeatResponse(rsp *http.Response) (*PingHeartbeatResponse, err
 	}
 
 	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -74858,12 +74860,12 @@ func ParseDeleteHeartbeatResponse(rsp *http.Response) (*DeleteHeartbeatResponse,
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -74891,12 +74893,12 @@ func ParseGetHeartbeatResponse(rsp *http.Response) (*GetHeartbeatResponse, error
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -74924,12 +74926,12 @@ func ParseUpdateHeartbeatResponse(rsp *http.Response) (*UpdateHeartbeatResponse,
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -74957,12 +74959,12 @@ func ParseDeleteIncidentCustomFieldSelectionResponse(rsp *http.Response) (*Delet
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -74990,12 +74992,12 @@ func ParseGetIncidentCustomFieldSelectionResponse(rsp *http.Response) (*GetIncid
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -75023,12 +75025,12 @@ func ParseUpdateIncidentCustomFieldSelectionResponse(rsp *http.Response) (*Updat
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -75056,12 +75058,12 @@ func ParseDeleteIncidentEventFunctionalityResponse(rsp *http.Response) (*DeleteI
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -75089,12 +75091,12 @@ func ParseGetIncidentEventFunctionalitiesResponse(rsp *http.Response) (*GetIncid
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -75122,12 +75124,12 @@ func ParseUpdateIncidentEventFunctionalityResponse(rsp *http.Response) (*UpdateI
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -75155,12 +75157,12 @@ func ParseDeleteIncidentEventServiceResponse(rsp *http.Response) (*DeleteInciden
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -75188,12 +75190,12 @@ func ParseGetIncidentEventServicesResponse(rsp *http.Response) (*GetIncidentEven
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -75221,12 +75223,12 @@ func ParseUpdateIncidentEventServiceResponse(rsp *http.Response) (*UpdateInciden
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -75254,12 +75256,12 @@ func ParseDeleteIncidentFormFieldSelectionResponse(rsp *http.Response) (*DeleteI
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -75287,12 +75289,12 @@ func ParseGetIncidentFormFieldSelectionResponse(rsp *http.Response) (*GetInciden
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -75320,12 +75322,12 @@ func ParseUpdateIncidentFormFieldSelectionResponse(rsp *http.Response) (*UpdateI
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -75353,12 +75355,12 @@ func ParseDeleteIncidentPermissionSetBooleanResponse(rsp *http.Response) (*Delet
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -75386,12 +75388,12 @@ func ParseGetIncidentPermissionSetBooleanResponse(rsp *http.Response) (*GetIncid
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -75419,12 +75421,12 @@ func ParseUpdateIncidentPermissionSetBooleanResponse(rsp *http.Response) (*Updat
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -75452,12 +75454,12 @@ func ParseDeleteIncidentPermissionSetResourceResponse(rsp *http.Response) (*Dele
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -75485,12 +75487,12 @@ func ParseGetIncidentPermissionSetResourceResponse(rsp *http.Response) (*GetInci
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -75518,12 +75520,12 @@ func ParseUpdateIncidentPermissionSetResourceResponse(rsp *http.Response) (*Upda
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -75617,12 +75619,12 @@ func ParseDeleteIncidentPermissionSetResponse(rsp *http.Response) (*DeleteIncide
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -75650,12 +75652,12 @@ func ParseGetIncidentPermissionSetResponse(rsp *http.Response) (*GetIncidentPerm
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -75683,12 +75685,12 @@ func ParseUpdateIncidentPermissionSetResponse(rsp *http.Response) (*UpdateIncide
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -75848,12 +75850,12 @@ func ParseDeleteIncidentRoleTaskResponse(rsp *http.Response) (*DeleteIncidentRol
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -75881,12 +75883,12 @@ func ParseGetIncidentRoleTaskResponse(rsp *http.Response) (*GetIncidentRoleTaskR
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -75914,12 +75916,12 @@ func ParseUpdateIncidentRoleTaskResponse(rsp *http.Response) (*UpdateIncidentRol
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -76013,12 +76015,12 @@ func ParseDeleteIncidentRoleResponse(rsp *http.Response) (*DeleteIncidentRoleRes
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -76046,12 +76048,12 @@ func ParseGetIncidentRoleResponse(rsp *http.Response) (*GetIncidentRoleResponse,
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -76079,12 +76081,12 @@ func ParseUpdateIncidentRoleResponse(rsp *http.Response) (*UpdateIncidentRoleRes
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -76244,12 +76246,12 @@ func ParseDeleteIncidentTypeResponse(rsp *http.Response) (*DeleteIncidentTypeRes
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -76277,12 +76279,12 @@ func ParseGetIncidentTypeResponse(rsp *http.Response) (*GetIncidentTypeResponse,
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -76310,12 +76312,12 @@ func ParseUpdateIncidentTypeResponse(rsp *http.Response) (*UpdateIncidentTypeRes
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -76409,12 +76411,12 @@ func ParseDeleteIncidentResponse(rsp *http.Response) (*DeleteIncidentResponse, e
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -76442,12 +76444,12 @@ func ParseGetIncidentResponse(rsp *http.Response) (*GetIncidentResponse, error) 
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -76475,12 +76477,12 @@ func ParseUpdateIncidentResponse(rsp *http.Response) (*UpdateIncidentResponse, e
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -76508,12 +76510,12 @@ func ParseAddSubscribersToIncidentResponse(rsp *http.Response) (*AddSubscribersT
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -76541,12 +76543,12 @@ func ParseAssignUserToIncidentResponse(rsp *http.Response) (*AssignUserToInciden
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -76574,12 +76576,12 @@ func ParseCancelIncidentResponse(rsp *http.Response) (*CancelIncidentResponse, e
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -76607,12 +76609,12 @@ func ParseMarkAsDuplicateIncidentResponse(rsp *http.Response) (*MarkAsDuplicateI
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -76640,12 +76642,12 @@ func ParseTriageIncidentResponse(rsp *http.Response) (*TriageIncidentResponse, e
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -76673,12 +76675,12 @@ func ParseMitigateIncidentResponse(rsp *http.Response) (*MitigateIncidentRespons
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -76706,12 +76708,12 @@ func ParseRemoveSubscribersToIncidentResponse(rsp *http.Response) (*RemoveSubscr
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -76739,12 +76741,12 @@ func ParseResolveIncidentResponse(rsp *http.Response) (*ResolveIncidentResponse,
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -76772,12 +76774,12 @@ func ParseRestartIncidentResponse(rsp *http.Response) (*RestartIncidentResponse,
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -76805,12 +76807,12 @@ func ParseRemoveAssignedUserFromIncidentResponse(rsp *http.Response) (*RemoveAss
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -77319,12 +77321,12 @@ func ParseDeleteUserNotificationRuleResponse(rsp *http.Response) (*DeleteUserNot
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -77352,12 +77354,12 @@ func ParseGetUserNotificationRuleResponse(rsp *http.Response) (*GetUserNotificat
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -77385,12 +77387,12 @@ func ParseUpdateUserNotificationRuleResponse(rsp *http.Response) (*UpdateUserNot
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -77418,12 +77420,12 @@ func ParseDeleteOnCallShadowResponse(rsp *http.Response) (*DeleteOnCallShadowRes
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -77451,12 +77453,12 @@ func ParseGetOnCallShadowResponse(rsp *http.Response) (*GetOnCallShadowResponse,
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -77484,12 +77486,12 @@ func ParseUpdateOnCallShadowResponse(rsp *http.Response) (*UpdateOnCallShadowRes
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -77517,12 +77519,12 @@ func ParseDeleteOverrideShiftResponse(rsp *http.Response) (*DeleteOverrideShiftR
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -77550,12 +77552,12 @@ func ParseGetOverrideShiftResponse(rsp *http.Response) (*GetOverrideShiftRespons
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -77583,12 +77585,12 @@ func ParseUpdateOverrideShiftResponse(rsp *http.Response) (*UpdateOverrideShiftR
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -77616,12 +77618,12 @@ func ParseDeletePlaybookTaskResponse(rsp *http.Response) (*DeletePlaybookTaskRes
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -77649,12 +77651,12 @@ func ParseGetPlaybookTaskResponse(rsp *http.Response) (*GetPlaybookTaskResponse,
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -77682,12 +77684,12 @@ func ParseUpdatePlaybookTaskResponse(rsp *http.Response) (*UpdatePlaybookTaskRes
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -77781,12 +77783,12 @@ func ParseDeletePlaybookResponse(rsp *http.Response) (*DeletePlaybookResponse, e
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -77814,12 +77816,12 @@ func ParseGetPlaybookResponse(rsp *http.Response) (*GetPlaybookResponse, error) 
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -77847,12 +77849,12 @@ func ParseUpdatePlaybookResponse(rsp *http.Response) (*UpdatePlaybookResponse, e
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -78012,12 +78014,12 @@ func ParseDeletePostmortemTemplateResponse(rsp *http.Response) (*DeletePostmorte
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -78045,12 +78047,12 @@ func ParseGetPostmortemTemplateResponse(rsp *http.Response) (*GetPostmortemTempl
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -78078,12 +78080,12 @@ func ParseUpdatePostmortemTemplateResponse(rsp *http.Response) (*UpdatePostmorte
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -78137,12 +78139,12 @@ func ParseListIncidentPostmortemResponse(rsp *http.Response) (*ListIncidentPostm
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -78170,12 +78172,12 @@ func ParseUpdateIncidentPostmortemResponse(rsp *http.Response) (*UpdateIncidentP
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -78269,12 +78271,12 @@ func ParseGetPulseResponse(rsp *http.Response) (*GetPulseResponse, error) {
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -78302,12 +78304,12 @@ func ParseUpdatePulseResponse(rsp *http.Response) (*UpdatePulseResponse, error) 
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -78361,12 +78363,12 @@ func ParseGetRetrospectiveConfigurationResponse(rsp *http.Response) (*GetRetrosp
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -78394,12 +78396,12 @@ func ParseUpdateRetrospectiveConfigurationResponse(rsp *http.Response) (*UpdateR
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -78493,12 +78495,12 @@ func ParseDeleteRetrospectiveProcessResponse(rsp *http.Response) (*DeleteRetrosp
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -78526,12 +78528,12 @@ func ParseGetRetrospectiveProcessResponse(rsp *http.Response) (*GetRetrospective
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -78559,12 +78561,12 @@ func ParseUpdateRetrospectiveProcessResponse(rsp *http.Response) (*UpdateRetrosp
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -78658,12 +78660,12 @@ func ParseDeleteRetrospectiveStepResponse(rsp *http.Response) (*DeleteRetrospect
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -78691,12 +78693,12 @@ func ParseGetRetrospectiveStepResponse(rsp *http.Response) (*GetRetrospectiveSte
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -78724,12 +78726,12 @@ func ParseUpdateRetrospectiveStepResponse(rsp *http.Response) (*UpdateRetrospect
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -78823,12 +78825,12 @@ func ParseDeleteRoleResponse(rsp *http.Response) (*DeleteRoleResponse, error) {
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -78856,12 +78858,12 @@ func ParseGetRoleResponse(rsp *http.Response) (*GetRoleResponse, error) {
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -78889,12 +78891,12 @@ func ParseUpdateRoleResponse(rsp *http.Response) (*UpdateRoleResponse, error) {
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -78922,12 +78924,12 @@ func ParseDeleteScheduleRotationActiveDayResponse(rsp *http.Response) (*DeleteSc
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -78955,12 +78957,12 @@ func ParseGetScheduleRotationActiveDayResponse(rsp *http.Response) (*GetSchedule
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -78988,12 +78990,12 @@ func ParseUpdateScheduleRotationActiveDayResponse(rsp *http.Response) (*UpdateSc
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -79021,12 +79023,12 @@ func ParseDeleteScheduleRotationUserResponse(rsp *http.Response) (*DeleteSchedul
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -79054,12 +79056,12 @@ func ParseGetScheduleRotationUserResponse(rsp *http.Response) (*GetScheduleRotat
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -79087,12 +79089,12 @@ func ParseUpdateScheduleRotationUserResponse(rsp *http.Response) (*UpdateSchedul
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -79120,12 +79122,12 @@ func ParseDeleteScheduleRotationResponse(rsp *http.Response) (*DeleteScheduleRot
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -79153,12 +79155,12 @@ func ParseGetScheduleRotationResponse(rsp *http.Response) (*GetScheduleRotationR
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -79186,12 +79188,12 @@ func ParseUpdateScheduleRotationResponse(rsp *http.Response) (*UpdateScheduleRot
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -79417,12 +79419,12 @@ func ParseDeleteScheduleResponse(rsp *http.Response) (*DeleteScheduleResponse, e
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -79450,12 +79452,12 @@ func ParseGetScheduleResponse(rsp *http.Response) (*GetScheduleResponse, error) 
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -79483,12 +79485,12 @@ func ParseUpdateScheduleResponse(rsp *http.Response) (*UpdateScheduleResponse, e
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -79516,12 +79518,12 @@ func ParseGetScheduleShiftsResponse(rsp *http.Response) (*GetScheduleShiftsRespo
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -79813,12 +79815,12 @@ func ParseDeleteSecretResponse(rsp *http.Response) (*DeleteSecretResponse, error
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -79846,12 +79848,12 @@ func ParseGetSecretResponse(rsp *http.Response) (*GetSecretResponse, error) {
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -79879,12 +79881,12 @@ func ParseUpdateSecretResponse(rsp *http.Response) (*UpdateSecretResponse, error
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -79978,12 +79980,12 @@ func ParseDeleteServiceResponse(rsp *http.Response) (*DeleteServiceResponse, err
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -80011,12 +80013,12 @@ func ParseGetServiceResponse(rsp *http.Response) (*GetServiceResponse, error) {
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -80044,12 +80046,12 @@ func ParseUpdateServiceResponse(rsp *http.Response) (*UpdateServiceResponse, err
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -80077,12 +80079,12 @@ func ParseGetServiceIncidentsChartResponse(rsp *http.Response) (*GetServiceIncid
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -80110,12 +80112,12 @@ func ParseGetServiceUptimeChartResponse(rsp *http.Response) (*GetServiceUptimeCh
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -80209,12 +80211,12 @@ func ParseDeleteSeverityResponse(rsp *http.Response) (*DeleteSeverityResponse, e
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -80242,12 +80244,12 @@ func ParseGetSeverityResponse(rsp *http.Response) (*GetSeverityResponse, error) 
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -80275,12 +80277,12 @@ func ParseUpdateSeverityResponse(rsp *http.Response) (*UpdateSeverityResponse, e
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -80308,12 +80310,12 @@ func ParseListShiftsResponse(rsp *http.Response) (*ListShiftsResponse, error) {
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -80341,12 +80343,12 @@ func ParseDeleteIncidentStatusPageResponse(rsp *http.Response) (*DeleteIncidentS
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -80374,12 +80376,12 @@ func ParseGetIncidentStatusPagesResponse(rsp *http.Response) (*GetIncidentStatus
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -80407,12 +80409,12 @@ func ParseUpdateIncidentStatusPageResponse(rsp *http.Response) (*UpdateIncidentS
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -80506,12 +80508,12 @@ func ParseDeleteStatusPageResponse(rsp *http.Response) (*DeleteStatusPageRespons
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -80539,12 +80541,12 @@ func ParseGetStatusPageResponse(rsp *http.Response) (*GetStatusPageResponse, err
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -80572,12 +80574,12 @@ func ParseUpdateStatusPageResponse(rsp *http.Response) (*UpdateStatusPageRespons
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -80737,12 +80739,12 @@ func ParseDeleteTeamResponse(rsp *http.Response) (*DeleteTeamResponse, error) {
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -80770,12 +80772,12 @@ func ParseGetTeamResponse(rsp *http.Response) (*GetTeamResponse, error) {
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -80803,12 +80805,12 @@ func ParseUpdateTeamResponse(rsp *http.Response) (*UpdateTeamResponse, error) {
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -80836,12 +80838,12 @@ func ParseGetTeamIncidentsChartResponse(rsp *http.Response) (*GetTeamIncidentsCh
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -80869,12 +80871,12 @@ func ParseDeleteStatusPageTemplateResponse(rsp *http.Response) (*DeleteStatusPag
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -80902,12 +80904,12 @@ func ParseGetStatusPageTemplateResponse(rsp *http.Response) (*GetStatusPageTempl
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -80935,12 +80937,12 @@ func ParseUpdateStatusPageTemplateResponse(rsp *http.Response) (*UpdateStatusPag
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -81034,12 +81036,12 @@ func ParseDeleteUserResponse(rsp *http.Response) (*DeleteUserResponse, error) {
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -81067,12 +81069,12 @@ func ParseGetUserResponse(rsp *http.Response) (*GetUserResponse, error) {
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -81166,12 +81168,12 @@ func ParseGetWebhooksDeliveryResponse(rsp *http.Response) (*GetWebhooksDeliveryR
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -81317,12 +81319,12 @@ func ParseDeleteWebhooksEndpointResponse(rsp *http.Response) (*DeleteWebhooksEnd
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -81350,12 +81352,12 @@ func ParseGetWebhooksEndpointResponse(rsp *http.Response) (*GetWebhooksEndpointR
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -81383,12 +81385,12 @@ func ParseUpdateWebhooksEndpointResponse(rsp *http.Response) (*UpdateWebhooksEnd
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -81416,12 +81418,12 @@ func ParseDeleteWorkflowCustomFieldSelectionResponse(rsp *http.Response) (*Delet
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -81449,12 +81451,12 @@ func ParseGetWorkflowCustomFieldSelectionResponse(rsp *http.Response) (*GetWorkf
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -81482,12 +81484,12 @@ func ParseUpdateWorkflowCustomFieldSelectionResponse(rsp *http.Response) (*Updat
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -81515,12 +81517,12 @@ func ParseDeleteWorkflowFormFieldConditionResponse(rsp *http.Response) (*DeleteW
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -81548,12 +81550,12 @@ func ParseGetWorkflowFormFieldConditionResponse(rsp *http.Response) (*GetWorkflo
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -81581,12 +81583,12 @@ func ParseUpdateWorkflowFormFieldConditionResponse(rsp *http.Response) (*UpdateW
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -81680,12 +81682,12 @@ func ParseDeleteWorkflowGroupResponse(rsp *http.Response) (*DeleteWorkflowGroupR
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -81713,12 +81715,12 @@ func ParseGetWorkflowGroupResponse(rsp *http.Response) (*GetWorkflowGroupRespons
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -81746,12 +81748,12 @@ func ParseUpdateWorkflowGroupResponse(rsp *http.Response) (*UpdateWorkflowGroupR
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -81779,12 +81781,12 @@ func ParseDeleteWorkflowTaskResponse(rsp *http.Response) (*DeleteWorkflowTaskRes
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -81812,12 +81814,12 @@ func ParseGetWorkflowTaskResponse(rsp *http.Response) (*GetWorkflowTaskResponse,
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -81845,12 +81847,12 @@ func ParseUpdateWorkflowTaskResponse(rsp *http.Response) (*UpdateWorkflowTaskRes
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -81944,12 +81946,12 @@ func ParseDeleteWorkflowResponse(rsp *http.Response) (*DeleteWorkflowResponse, e
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -81977,12 +81979,12 @@ func ParseGetWorkflowResponse(rsp *http.Response) (*GetWorkflowResponse, error) 
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.ApplicationvndApiJSON401 = &dest
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -82010,19 +82012,19 @@ func ParseUpdateWorkflowResponse(rsp *http.Response) (*UpdateWorkflowResponse, e
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ErrorsList
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.ApplicationvndApiJSON401 = &dest
-
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.ApplicationvndApiJSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 

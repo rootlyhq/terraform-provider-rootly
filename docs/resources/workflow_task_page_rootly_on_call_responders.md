@@ -39,6 +39,7 @@ Required:
 
 Optional:
 
+- `alert_urgency_id` (String) Alert urgency ID
 - `escalation_note` (String)
 - `escalation_policy_target` (Map of String) Map must contain two fields, `id` and `name`.
 - `group_target` (Map of String) Map must contain two fields, `id` and `name`.

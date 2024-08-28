@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.3.9] -- 2024-08-27
+
+- Add `alert_urgency_id` to `workflow_task_page_rootly_on_call_responders` resource.
+- Fix API status codes.
+
 ## [2.3.8] -- 2024-08-26
 
 - Add heartbeats resources
