@@ -181,6 +181,12 @@ function updateResourceFields(name, resourceSchema) {
           schema.type
         )}))
 			}`;
+      } else if (schema.tf_include_unchanged) {
+        return `
+				s.${inflect.camelize(field)} = d.Get("${field}").(${jsonapiToGoType(
+          schema.type
+        )})
+			`;
       } else {
         return `  if d.HasChange("${field}") {
 				s.${inflect.camelize(field)} = d.Get("${field}").(${jsonapiToGoType(
