@@ -78,6 +78,7 @@ const excluded = {
     "escalation_policy",
     "escalation_level",
     "form_set",
+    "heartbeat",
     "shift_override",
     "schedule",
     "schedule_rotation",
