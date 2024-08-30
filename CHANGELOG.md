@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.4.0] -- 2024-08-29
+
+- Add `task_create_motion` & `update_motion_task` resource.
+- Fix issue with `schedule_rotation` resource update.
+
 ## [2.3.9] -- 2024-08-27
 
 - Add `alert_urgency_id` to `workflow_task_page_rootly_on_call_responders` resource.
