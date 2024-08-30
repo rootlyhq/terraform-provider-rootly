@@ -39,7 +39,7 @@ Required:
 
 Optional:
 
-- `escalation_level` (Number) Escalation level of policy attached to incident
+- `escalation_level` (String) Escalation level of policy attached to incident
 - `priority` (String) PagerDuty incident priority, selecting auto will let Rootly auto map our incident severity
 - `resolution` (String) A message outlining the incident's resolution in PagerDuty
 - `status` (String) Value must be one of `resolved`, `acknowledged`, `auto`.

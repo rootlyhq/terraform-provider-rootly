@@ -5,7 +5,10 @@ function includeTools(resourceSchema) {
     if (resourceSchema.properties[key].type === "boolean") {
       return true;
     }
-    if (resourceSchema.properties[key].type === "array" && resourceSchema.properties[key].items?.type !== "object") {
+    if (
+      resourceSchema.properties[key].type === "array" &&
+      resourceSchema.properties[key].items?.type !== "object"
+    ) {
       return true;
     }
   }
@@ -246,7 +249,11 @@ function schemaFields(resourceSchema, requiredFields, taskParamsSchema) {
 }
 
 function annotatedDescription(schema) {
-  const description = (schema.description || (schema.items && schema.items.description) || "").replace(/"/g, '\\"');
+  const description = (
+    schema.description ||
+    (schema.items && schema.items.description) ||
+    ""
+  ).replace(/"/g, '\\"');
   if (schema.enum) {
     return `${
       !!description ? `${description}. ` : ""
@@ -306,10 +313,20 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
 				Description: "${description}",
 			},
 			`;
-    case "number":
+    case "integer":
       return `
 			"${name}": &schema.Schema {
 				Type: schema.TypeInt,
+				Computed: ${optional},
+				Required: ${required},
+				Optional: ${optional},
+				Description: "${description}",
+			},
+			`;
+    case "number":
+      return `
+			"${name}": &schema.Schema {
+				Type: schema.TypeFloat,
 				Computed: ${optional},
 				Required: ${required},
 				Optional: ${optional},

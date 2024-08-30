@@ -14,14 +14,14 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
 
-func resourceWorkflowTaskCreateOutlookEvent() *schema.Resource {
+func resourceWorkflowTaskCreateMotionTask() *schema.Resource {
 	return &schema.Resource{
-		Description: "Manages workflow create_outlook_event task.",
+		Description: "Manages workflow create_motion_task task.",
 
-		CreateContext: resourceWorkflowTaskCreateOutlookEventCreate,
-		ReadContext:   resourceWorkflowTaskCreateOutlookEventRead,
-		UpdateContext: resourceWorkflowTaskCreateOutlookEventUpdate,
-		DeleteContext: resourceWorkflowTaskCreateOutlookEventDelete,
+		CreateContext: resourceWorkflowTaskCreateMotionTaskCreate,
+		ReadContext:   resourceWorkflowTaskCreateMotionTaskRead,
+		UpdateContext: resourceWorkflowTaskCreateMotionTaskUpdate,
+		DeleteContext: resourceWorkflowTaskCreateMotionTaskDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -68,18 +68,38 @@ func resourceWorkflowTaskCreateOutlookEvent() *schema.Resource {
 						"task_type": &schema.Schema{
 							Type:     schema.TypeString,
 							Optional: true,
-							Default:  "create_outlook_event",
+							Default:  "create_motion_task",
 							ValidateFunc: validation.StringInSlice([]string{
-								"create_outlook_event",
+								"create_motion_task",
 							}, false),
 						},
-						"calendar": &schema.Schema{
+						"workspace": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. ",
 							Type:        schema.TypeMap,
 							Required:    true,
 						},
-						"attendees": &schema.Schema{
-							Description: "Emails of attendees",
+						"project": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. ",
+							Type:        schema.TypeMap,
+							Optional:    true,
+						},
+						"status": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. ",
+							Type:        schema.TypeMap,
+							Optional:    true,
+						},
+						"title": &schema.Schema{
+							Description: "The task title",
+							Type:        schema.TypeString,
+							Required:    true,
+						},
+						"description": &schema.Schema{
+							Description: "The task description",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"labels": &schema.Schema{
+							Description: "",
 							Type:        schema.TypeList,
 							Optional:    true,
 							Elem: &schema.Schema{
@@ -87,62 +107,20 @@ func resourceWorkflowTaskCreateOutlookEvent() *schema.Resource {
 							},
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
 						},
-						"time_zone": &schema.Schema{
-							Description: "A valid IANA time zone name.",
+						"priority": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. The priority id and display name",
+							Type:        schema.TypeMap,
+							Optional:    true,
+						},
+						"duration": &schema.Schema{
+							Description: "The duration. Eg.  \"NONE\", \"REMINDER\", or a integer greater than 0.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
-						"days_until_meeting": &schema.Schema{
-							Description: "The days until meeting",
+						"due_date": &schema.Schema{
+							Description: "The due date",
 							Type:        schema.TypeString,
-							Required:    true,
-						},
-						"time_of_meeting": &schema.Schema{
-							Description: "Time of meeting in format HH:MM",
-							Type:        schema.TypeString,
-							Required:    true,
-						},
-						"meeting_duration": &schema.Schema{
-							Description: "Meeting duration in format like '1 hour', '30 minutes'",
-							Type:        schema.TypeString,
-							Required:    true,
-						},
-						"summary": &schema.Schema{
-							Description: "The event summary",
-							Type:        schema.TypeString,
-							Required:    true,
-						},
-						"description": &schema.Schema{
-							Description: "The event description",
-							Type:        schema.TypeString,
-							Required:    true,
-						},
-						"exclude_weekends": &schema.Schema{
-							Description: "Value must be one of true or false",
-							Type:        schema.TypeBool,
 							Optional:    true,
-						},
-						"post_to_incident_timeline": &schema.Schema{
-							Description: "Value must be one of true or false",
-							Type:        schema.TypeBool,
-							Optional:    true,
-						},
-						"post_to_slack_channels": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
-									},
-									"name": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
-									},
-								},
-							},
 						},
 					},
 				},
@@ -151,7 +129,7 @@ func resourceWorkflowTaskCreateOutlookEvent() *schema.Resource {
 	}
 }
 
-func resourceWorkflowTaskCreateOutlookEventCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateMotionTaskCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
@@ -180,10 +158,10 @@ func resourceWorkflowTaskCreateOutlookEventCreate(ctx context.Context, d *schema
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created an workflow task resource: %v (%s)", workflowId, d.Id()))
 
-	return resourceWorkflowTaskCreateOutlookEventRead(ctx, d, meta)
+	return resourceWorkflowTaskCreateMotionTaskRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskCreateOutlookEventRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateMotionTaskRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
@@ -192,7 +170,7 @@ func resourceWorkflowTaskCreateOutlookEventRead(ctx context.Context, d *schema.R
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateOutlookEvent (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateMotionTask (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
@@ -212,7 +190,7 @@ func resourceWorkflowTaskCreateOutlookEventRead(ctx context.Context, d *schema.R
 	return nil
 }
 
-func resourceWorkflowTaskCreateOutlookEventUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateMotionTaskUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
@@ -238,10 +216,10 @@ func resourceWorkflowTaskCreateOutlookEventUpdate(ctx context.Context, d *schema
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
 
-	return resourceWorkflowTaskCreateOutlookEventRead(ctx, d, meta)
+	return resourceWorkflowTaskCreateMotionTaskRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskCreateOutlookEventDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateMotionTaskDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
@@ -250,7 +228,7 @@ func resourceWorkflowTaskCreateOutlookEventDelete(ctx context.Context, d *schema
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateOutlookEvent (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateMotionTask (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}

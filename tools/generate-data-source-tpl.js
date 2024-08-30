@@ -119,8 +119,9 @@ function jsonapiToGoType(type) {
     case "string":
       return "string";
     case "integer":
-    case "number":
       return "int";
+    case "number":
+      return "float32";
     case "boolean":
       return "bool";
     default:
@@ -143,10 +144,17 @@ function schemaField(name, resourceSchema, filterParameters) {
   const schema = resourceSchema.properties[name];
   switch (schema.type) {
     case "integer":
-    case "number":
       return `
 			"${name}": &schema.Schema {
 				Type: schema.TypeInt,
+				Computed: true,
+				Optional: true,
+			},
+			`;
+    case "number":
+      return `
+			"${name}": &schema.Schema {
+				Type: schema.TypeFloat,
 				Computed: true,
 				Optional: true,
 			},

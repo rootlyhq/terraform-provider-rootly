@@ -414,6 +414,11 @@ const (
 	AssignRoleToUserDataTypeIncidents AssignRoleToUserDataType = "incidents"
 )
 
+// Defines values for AttachAlertDataType.
+const (
+	AttachAlertDataTypeAlerts AttachAlertDataType = "alerts"
+)
+
 // Defines values for AttachDatadogDashboardsTaskParamsTaskType.
 const (
 	AttachDatadogDashboards AttachDatadogDashboardsTaskParamsTaskType = "attach_datadog_dashboards"
@@ -699,6 +704,11 @@ const (
 // Defines values for CreateMicrosoftTeamsMeetingTaskParamsTaskType.
 const (
 	CreateMicrosoftTeamsMeeting CreateMicrosoftTeamsMeetingTaskParamsTaskType = "create_microsoft_teams_meeting"
+)
+
+// Defines values for CreateMotionTaskTaskParamsTaskType.
+const (
+	CreateMotionTask CreateMotionTaskTaskParamsTaskType = "create_motion_task"
 )
 
 // Defines values for CreateNotionPageTaskParamsTaskType.
@@ -2925,7 +2935,7 @@ const (
 
 // Defines values for ResolveAlertDataType.
 const (
-	ResolveAlertDataTypeAlerts ResolveAlertDataType = "alerts"
+	Alerts ResolveAlertDataType = "alerts"
 )
 
 // Defines values for ResolveIncidentDataType.
@@ -3469,6 +3479,7 @@ const (
 	TriggerWorkflowTaskParamsAttributeToQueryById                   TriggerWorkflowTaskParamsAttributeToQueryBy = "id"
 	TriggerWorkflowTaskParamsAttributeToQueryByJiraIssueId          TriggerWorkflowTaskParamsAttributeToQueryBy = "jira_issue_id"
 	TriggerWorkflowTaskParamsAttributeToQueryByLinearIssueId        TriggerWorkflowTaskParamsAttributeToQueryBy = "linear_issue_id"
+	TriggerWorkflowTaskParamsAttributeToQueryByMotionTaskId         TriggerWorkflowTaskParamsAttributeToQueryBy = "motion_task_id"
 	TriggerWorkflowTaskParamsAttributeToQueryByOpsgenieIncidentId   TriggerWorkflowTaskParamsAttributeToQueryBy = "opsgenie_incident_id"
 	TriggerWorkflowTaskParamsAttributeToQueryByPagerdutyIncidentId  TriggerWorkflowTaskParamsAttributeToQueryBy = "pagerduty_incident_id"
 	TriggerWorkflowTaskParamsAttributeToQueryBySequentialId         TriggerWorkflowTaskParamsAttributeToQueryBy = "sequential_id"
@@ -3516,6 +3527,7 @@ const (
 	UpdateActionItemTaskParamsAttributeToQueryById                   UpdateActionItemTaskParamsAttributeToQueryBy = "id"
 	UpdateActionItemTaskParamsAttributeToQueryByJiraIssueId          UpdateActionItemTaskParamsAttributeToQueryBy = "jira_issue_id"
 	UpdateActionItemTaskParamsAttributeToQueryByLinearIssueId        UpdateActionItemTaskParamsAttributeToQueryBy = "linear_issue_id"
+	UpdateActionItemTaskParamsAttributeToQueryByMotionTaskId         UpdateActionItemTaskParamsAttributeToQueryBy = "motion_task_id"
 	UpdateActionItemTaskParamsAttributeToQueryByShortcutStoryId      UpdateActionItemTaskParamsAttributeToQueryBy = "shortcut_story_id"
 	UpdateActionItemTaskParamsAttributeToQueryByShortcutTaskId       UpdateActionItemTaskParamsAttributeToQueryBy = "shortcut_task_id"
 	UpdateActionItemTaskParamsAttributeToQueryByTrelloCardId         UpdateActionItemTaskParamsAttributeToQueryBy = "trello_card_id"
@@ -4094,6 +4106,7 @@ const (
 	Id                   UpdateIncidentTaskParamsAttributeToQueryBy = "id"
 	JiraIssueId          UpdateIncidentTaskParamsAttributeToQueryBy = "jira_issue_id"
 	LinearIssueId        UpdateIncidentTaskParamsAttributeToQueryBy = "linear_issue_id"
+	MotionTaskId         UpdateIncidentTaskParamsAttributeToQueryBy = "motion_task_id"
 	OpsgenieIncidentId   UpdateIncidentTaskParamsAttributeToQueryBy = "opsgenie_incident_id"
 	PagerdutyIncidentId  UpdateIncidentTaskParamsAttributeToQueryBy = "pagerduty_incident_id"
 	SequentialId         UpdateIncidentTaskParamsAttributeToQueryBy = "sequential_id"
@@ -4123,6 +4136,11 @@ const (
 // Defines values for UpdateLinearIssueTaskParamsTaskType.
 const (
 	UpdateLinearIssue UpdateLinearIssueTaskParamsTaskType = "update_linear_issue"
+)
+
+// Defines values for UpdateMotionTaskTaskParamsTaskType.
+const (
+	UpdateMotionTask UpdateMotionTaskTaskParamsTaskType = "update_motion_task"
 )
 
 // Defines values for UpdateNotionPageTaskParamsTaskType.
@@ -5381,6 +5399,20 @@ type AssignRoleToUser struct {
 // AssignRoleToUserDataType defines model for AssignRoleToUser.Data.Type.
 type AssignRoleToUserDataType string
 
+// AttachAlert defines model for attach_alert.
+type AttachAlert struct {
+	Data struct {
+		Attributes struct {
+			// AlertIds Alert Id to attach to the incident
+			AlertIds *[]string `json:"alert_ids"`
+		} `json:"attributes"`
+		Type AttachAlertDataType `json:"type"`
+	} `json:"data"`
+}
+
+// AttachAlertDataType defines model for AttachAlert.Data.Type.
+type AttachAlertDataType string
+
 // AttachDatadogDashboardsTaskParams defines model for attach_datadog_dashboards_task_params.
 type AttachDatadogDashboardsTaskParams struct {
 	Dashboards []struct {
@@ -5407,7 +5439,7 @@ type Audit struct {
 	Event string `json:"event"`
 
 	// Id ID of audit
-	Id *float32 `json:"id"`
+	Id *int `json:"id"`
 
 	// ItemId ID of the affected object
 	ItemId *string `json:"item_id"`
@@ -5422,7 +5454,7 @@ type Audit struct {
 	ObjectChanges *map[string]interface{} `json:"object_changes"`
 
 	// UserId The ID of who took action on the object. Together with whodunnit_type can be used to find the user
-	UserId *float32 `json:"user_id"`
+	UserId *int `json:"user_id"`
 }
 
 // AuditItemType Describes the object in which the action was taken on
@@ -5965,7 +5997,7 @@ type CreateGoogleCalendarEventTaskParams struct {
 	ConferenceSolutionKey *CreateGoogleCalendarEventTaskParamsConferenceSolutionKey `json:"conference_solution_key"`
 
 	// DaysUntilMeeting The days until meeting
-	DaysUntilMeeting float32 `json:"days_until_meeting"`
+	DaysUntilMeeting int `json:"days_until_meeting"`
 
 	// Description The event description
 	Description     string `json:"description"`
@@ -6345,6 +6377,44 @@ type CreateMicrosoftTeamsMeetingTaskParams struct {
 // CreateMicrosoftTeamsMeetingTaskParamsTaskType defines model for CreateMicrosoftTeamsMeetingTaskParams.TaskType.
 type CreateMicrosoftTeamsMeetingTaskParamsTaskType string
 
+// CreateMotionTaskTaskParams defines model for create_motion_task_task_params.
+type CreateMotionTaskTaskParams struct {
+	// Description The task description
+	Description *string `json:"description,omitempty"`
+
+	// DueDate The due date
+	DueDate *string `json:"due_date,omitempty"`
+
+	// Duration The duration. Eg.  "NONE", "REMINDER", or a integer greater than 0.
+	Duration *string   `json:"duration,omitempty"`
+	Labels   *[]string `json:"labels,omitempty"`
+
+	// Priority The priority id and display name
+	Priority *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"priority,omitempty"`
+	Project *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"project,omitempty"`
+	Status *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"status,omitempty"`
+	TaskType *CreateMotionTaskTaskParamsTaskType `json:"task_type,omitempty"`
+
+	// Title The task title
+	Title     string `json:"title"`
+	Workspace struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"workspace"`
+}
+
+// CreateMotionTaskTaskParamsTaskType defines model for CreateMotionTaskTaskParams.TaskType.
+type CreateMotionTaskTaskParamsTaskType string
+
 // CreateNotionPageTaskParams defines model for create_notion_page_task_params.
 type CreateNotionPageTaskParams struct {
 	MarkPostMortemAsPublished *bool `json:"mark_post_mortem_as_published,omitempty"`
@@ -6411,7 +6481,7 @@ type CreateOutlookEventTaskParams struct {
 	} `json:"calendar"`
 
 	// DaysUntilMeeting The days until meeting
-	DaysUntilMeeting float32 `json:"days_until_meeting"`
+	DaysUntilMeeting int `json:"days_until_meeting"`
 
 	// Description The event description
 	Description     string `json:"description"`
@@ -6804,7 +6874,7 @@ type CustomField struct {
 	Label string `json:"label"`
 
 	// Position The position of the custom_field
-	Position float32                `json:"position"`
+	Position int                    `json:"position"`
 	Required *[]CustomFieldRequired `json:"required"`
 	Shown    []CustomFieldShown     `json:"shown"`
 
@@ -6845,11 +6915,11 @@ type CustomFieldOption struct {
 	CreatedAt string `json:"created_at"`
 
 	// CustomFieldId The ID of the parent custom field
-	CustomFieldId *float32 `json:"custom_field_id,omitempty"`
-	Default       *bool    `json:"default,omitempty"`
+	CustomFieldId *int  `json:"custom_field_id,omitempty"`
+	Default       *bool `json:"default,omitempty"`
 
 	// Position The position of the custom_field_option
-	Position float32 `json:"position"`
+	Position int `json:"position"`
 
 	// UpdatedAt Date of last update
 	UpdatedAt string `json:"updated_at"`
@@ -6983,13 +7053,13 @@ type Dashboard struct {
 	Range *string `json:"range"`
 
 	// TeamId The dashboard team
-	TeamId *float32 `json:"team_id,omitempty"`
+	TeamId *int `json:"team_id,omitempty"`
 
 	// UpdatedAt Date of last update
 	UpdatedAt *string `json:"updated_at,omitempty"`
 
 	// UserId The dashboard user owner if owner is of type user
-	UserId *float32 `json:"user_id"`
+	UserId *int `json:"user_id"`
 }
 
 // DashboardColor The hex color of the dashboard
@@ -7117,7 +7187,7 @@ type EscalationLevel struct {
 	CreatedAt *string `json:"created_at,omitempty"`
 
 	// Delay Delay before notification targets will be alerted.
-	Delay float32 `json:"delay"`
+	Delay int `json:"delay"`
 
 	// EscalationPolicyId The ID of the escalation policy
 	EscalationPolicyId string `json:"escalation_policy_id"`
@@ -7132,7 +7202,7 @@ type EscalationLevel struct {
 	} `json:"notification_target_params"`
 
 	// Position Position of the escalation policy level
-	Position float32 `json:"position"`
+	Position int `json:"position"`
 
 	// UpdatedAt Date of last update
 	UpdatedAt *string `json:"updated_at,omitempty"`
@@ -7172,7 +7242,7 @@ type EscalationPolicy struct {
 	CreatedAt *string `json:"created_at,omitempty"`
 
 	// CreatedByUserId User who created the escalation policy
-	CreatedByUserId float32 `json:"created_by_user_id"`
+	CreatedByUserId int `json:"created_by_user_id"`
 
 	// Description The description of the escalation policy
 	Description *string `json:"description"`
@@ -7181,13 +7251,13 @@ type EscalationPolicy struct {
 	GroupIds *[]string `json:"group_ids,omitempty"`
 
 	// LastUpdatedByUserId User who updated the escalation policy
-	LastUpdatedByUserId *float32 `json:"last_updated_by_user_id,omitempty"`
+	LastUpdatedByUserId *int `json:"last_updated_by_user_id,omitempty"`
 
 	// Name The name of the escalation policy
 	Name string `json:"name"`
 
 	// RepeatCount The number of times this policy will be executed until someone acknowledges the alert
-	RepeatCount float32 `json:"repeat_count"`
+	RepeatCount int `json:"repeat_count"`
 
 	// ServiceIds Associated services (alerting the service will trigger escalation policy)
 	ServiceIds *[]string `json:"service_ids,omitempty"`
@@ -7298,7 +7368,7 @@ type FormFieldOption struct {
 	FormFieldId *string `json:"form_field_id,omitempty"`
 
 	// Position The position of the form_field_option
-	Position float32 `json:"position"`
+	Position int `json:"position"`
 
 	// UpdatedAt Date of last update
 	UpdatedAt string `json:"updated_at"`
@@ -7448,7 +7518,7 @@ type FormFieldPosition struct {
 	FormFieldId string `json:"form_field_id"`
 
 	// Position The position of the form_field_position
-	Position float32 `json:"position"`
+	Position int `json:"position"`
 }
 
 // FormFieldPositionForm The form for the position
@@ -8057,9 +8127,9 @@ type IncidentActionItemResponseDataType string
 
 // IncidentCustomFieldSelection defines model for incident_custom_field_selection.
 type IncidentCustomFieldSelection struct {
-	CustomFieldId     *float32  `json:"custom_field_id,omitempty"`
-	IncidentId        *string   `json:"incident_id,omitempty"`
-	SelectedOptionIds []float32 `json:"selected_option_ids"`
+	CustomFieldId     *int    `json:"custom_field_id,omitempty"`
+	IncidentId        *string `json:"incident_id,omitempty"`
+	SelectedOptionIds []int   `json:"selected_option_ids"`
 
 	// Value The value of the incident_custom_field_selection
 	Value *string `json:"value"`
@@ -8285,13 +8355,13 @@ type IncidentFeedbackResponseDataType string
 // IncidentFormFieldSelection defines model for incident_form_field_selection.
 type IncidentFormFieldSelection struct {
 	// FormFieldId The custom field for this selection
-	FormFieldId              string     `json:"form_field_id"`
-	IncidentId               string     `json:"incident_id"`
-	SelectedFunctionalityIds *[]float32 `json:"selected_functionality_ids,omitempty"`
-	SelectedGroupIds         *[]string  `json:"selected_group_ids,omitempty"`
-	SelectedOptionIds        *[]string  `json:"selected_option_ids,omitempty"`
-	SelectedServiceIds       *[]float32 `json:"selected_service_ids,omitempty"`
-	SelectedUserIds          *[]float32 `json:"selected_user_ids,omitempty"`
+	FormFieldId              string    `json:"form_field_id"`
+	IncidentId               string    `json:"incident_id"`
+	SelectedFunctionalityIds *[]int    `json:"selected_functionality_ids,omitempty"`
+	SelectedGroupIds         *[]string `json:"selected_group_ids,omitempty"`
+	SelectedOptionIds        *[]string `json:"selected_option_ids,omitempty"`
+	SelectedServiceIds       *[]int    `json:"selected_service_ids,omitempty"`
+	SelectedUserIds          *[]int    `json:"selected_user_ids,omitempty"`
 
 	// Value The selected value for text kind custom fields
 	Value *string `json:"value"`
@@ -9289,7 +9359,7 @@ type NewCustomField struct {
 			Label string `json:"label"`
 
 			// Position The position of the custom_field
-			Position *float32                                `json:"position,omitempty"`
+			Position *int                                    `json:"position,omitempty"`
 			Required *[]NewCustomFieldDataAttributesRequired `json:"required"`
 			Shown    *[]NewCustomFieldDataAttributesShown    `json:"shown,omitempty"`
 		} `json:"attributes"`
@@ -9315,7 +9385,7 @@ type NewCustomFieldOption struct {
 			Default *bool   `json:"default,omitempty"`
 
 			// Position The position of the custom_field_option
-			Position *float32 `json:"position,omitempty"`
+			Position *int `json:"position,omitempty"`
 
 			// Value The value of the custom_field_option
 			Value string `json:"value"`
@@ -9445,7 +9515,7 @@ type NewEscalationLevel struct {
 	Data struct {
 		Attributes struct {
 			// Delay Delay before notification targets will be alerted.
-			Delay *float32 `json:"delay,omitempty"`
+			Delay *int `json:"delay,omitempty"`
 
 			// NotificationTargetParams Escalation level's notification targets
 			NotificationTargetParams []struct {
@@ -9457,7 +9527,7 @@ type NewEscalationLevel struct {
 			} `json:"notification_target_params"`
 
 			// Position Position of the escalation policy level
-			Position float32 `json:"position"`
+			Position int `json:"position"`
 		} `json:"attributes"`
 		Type NewEscalationLevelDataType `json:"type"`
 	} `json:"data"`
@@ -9483,7 +9553,7 @@ type NewEscalationPolicy struct {
 			Name string `json:"name"`
 
 			// RepeatCount The number of times this policy will be executed until someone acknowledges the alert
-			RepeatCount *float32 `json:"repeat_count,omitempty"`
+			RepeatCount *int `json:"repeat_count,omitempty"`
 
 			// ServiceIds Associated services (alerting the service will trigger escalation policy)
 			ServiceIds *[]string `json:"service_ids,omitempty"`
@@ -9552,7 +9622,7 @@ type NewFormFieldOption struct {
 			FormFieldId string `json:"form_field_id"`
 
 			// Position The position of the form_field_option
-			Position *float32 `json:"position,omitempty"`
+			Position *int `json:"position,omitempty"`
 
 			// Value The value of the form_field_option
 			Value string `json:"value"`
@@ -9630,7 +9700,7 @@ type NewFormFieldPosition struct {
 			FormFieldId string `json:"form_field_id"`
 
 			// Position The position of the form_field_position
-			Position float32 `json:"position"`
+			Position int `json:"position"`
 		} `json:"attributes"`
 		Type NewFormFieldPositionDataType `json:"type"`
 	} `json:"data"`
@@ -9924,8 +9994,8 @@ type NewIncidentCustomFieldSelection struct {
 	Data struct {
 		Attributes struct {
 			// CustomFieldId The custom field for this selection
-			CustomFieldId     float32    `json:"custom_field_id"`
-			SelectedOptionIds *[]float32 `json:"selected_option_ids,omitempty"`
+			CustomFieldId     int    `json:"custom_field_id"`
+			SelectedOptionIds *[]int `json:"selected_option_ids,omitempty"`
 
 			// Value The selected value for text kind custom fields
 			Value *string `json:"value"`
@@ -10031,13 +10101,13 @@ type NewIncidentFormFieldSelection struct {
 	Data struct {
 		Attributes struct {
 			// FormFieldId The custom field for this selection
-			FormFieldId              string     `json:"form_field_id"`
-			IncidentId               string     `json:"incident_id"`
-			SelectedFunctionalityIds *[]float32 `json:"selected_functionality_ids,omitempty"`
-			SelectedGroupIds         *[]string  `json:"selected_group_ids,omitempty"`
-			SelectedOptionIds        *[]string  `json:"selected_option_ids,omitempty"`
-			SelectedServiceIds       *[]float32 `json:"selected_service_ids,omitempty"`
-			SelectedUserIds          *[]float32 `json:"selected_user_ids,omitempty"`
+			FormFieldId              string    `json:"form_field_id"`
+			IncidentId               string    `json:"incident_id"`
+			SelectedFunctionalityIds *[]int    `json:"selected_functionality_ids,omitempty"`
+			SelectedGroupIds         *[]string `json:"selected_group_ids,omitempty"`
+			SelectedOptionIds        *[]string `json:"selected_option_ids,omitempty"`
+			SelectedServiceIds       *[]int    `json:"selected_service_ids,omitempty"`
+			SelectedUserIds          *[]int    `json:"selected_user_ids,omitempty"`
 
 			// Value The selected value for text kind custom fields
 			Value *string `json:"value"`
@@ -10637,7 +10707,7 @@ type NewScheduleRotation struct {
 				HandoffTime *string `json:"handoff_time,omitempty"`
 
 				// ShiftLength Shift length for custom rotation
-				ShiftLength *float32 `json:"shift_length,omitempty"`
+				ShiftLength *int `json:"shift_length,omitempty"`
 
 				// ShiftLengthUnit Shift length unit for custom rotation
 				ShiftLengthUnit *NewScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit `json:"shift_length_unit,omitempty"`
@@ -11113,7 +11183,7 @@ type NewWorkflow struct {
 			Name string `json:"name"`
 
 			// Position The order which the workflow should run with other workflows.
-			Position *float32 `json:"position,omitempty"`
+			Position *int `json:"position,omitempty"`
 
 			// Priority Priority
 			Priority *NewWorkflowDataAttributesPriority `json:"priority"`
@@ -11157,11 +11227,11 @@ type NewWorkflowCustomFieldSelection struct {
 	Data struct {
 		Attributes struct {
 			// CustomFieldId The custom field for this selection
-			CustomFieldId float32 `json:"custom_field_id"`
+			CustomFieldId int `json:"custom_field_id"`
 
 			// IncidentCondition The trigger condition
 			IncidentCondition NewWorkflowCustomFieldSelectionDataAttributesIncidentCondition `json:"incident_condition"`
-			SelectedOptionIds *[]float32                                                     `json:"selected_option_ids,omitempty"`
+			SelectedOptionIds *[]int                                                         `json:"selected_option_ids,omitempty"`
 			Values            *[]string                                                      `json:"values,omitempty"`
 
 			// WorkflowId The workflow for this selection
@@ -11187,7 +11257,7 @@ type NewWorkflowFormFieldCondition struct {
 			// IncidentCondition The trigger condition
 			IncidentCondition NewWorkflowFormFieldConditionDataAttributesIncidentCondition `json:"incident_condition"`
 			SelectedOptionIds *[]string                                                    `json:"selected_option_ids,omitempty"`
-			SelectedUserIds   *[]float32                                                   `json:"selected_user_ids,omitempty"`
+			SelectedUserIds   *[]int                                                       `json:"selected_user_ids,omitempty"`
 			Values            *[]string                                                    `json:"values,omitempty"`
 
 			// WorkflowId The workflow for this condition
@@ -11223,7 +11293,7 @@ type NewWorkflowGroup struct {
 			Name string `json:"name"`
 
 			// Position The position of the workflow group
-			Position *float32 `json:"position,omitempty"`
+			Position *int `json:"position,omitempty"`
 		} `json:"attributes"`
 		Type NewWorkflowGroupDataType `json:"type"`
 	} `json:"data"`
@@ -11323,7 +11393,7 @@ type NewWorkflowTask struct {
 			Name *string `json:"name,omitempty"`
 
 			// Position The position of the workflow task
-			Position *float32 `json:"position,omitempty"`
+			Position *int `json:"position,omitempty"`
 
 			// SkipOnFailure Skip workflow task if any failures
 			SkipOnFailure *bool                                      `json:"skip_on_failure,omitempty"`
@@ -12389,7 +12459,7 @@ type ScheduleRotation struct {
 		HandoffTime *string `json:"handoff_time,omitempty"`
 
 		// ShiftLength Shift length for custom rotation
-		ShiftLength *float32 `json:"shift_length,omitempty"`
+		ShiftLength *int `json:"shift_length,omitempty"`
 
 		// ShiftLengthUnit Shift length unit for custom rotation
 		ShiftLengthUnit *ScheduleRotationScheduleRotationableAttributesShiftLengthUnit `json:"shift_length_unit,omitempty"`
@@ -13218,7 +13288,7 @@ type StatusPageTemplate struct {
 	Kind *StatusPageTemplateKind `json:"kind,omitempty"`
 
 	// Position Position of the workflow task
-	Position *float32 `json:"position,omitempty"`
+	Position *int `json:"position,omitempty"`
 
 	// ShouldNotifySubscribers Controls if incident subscribers should be notified
 	ShouldNotifySubscribers *bool  `json:"should_notify_subscribers"`
@@ -13358,7 +13428,7 @@ type TeamResponseDataType string
 
 // TriggerWorkflowTaskParams defines model for trigger_workflow_task_params.
 type TriggerWorkflowTaskParams struct {
-	// AttributeToQueryBy ["(incident) kind can only match [:id, :slug, :sequential_id, :pagerduty_incident_id, :opsgenie_incident_id, :victor_ops_incident_id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(post_mortem) kind can only match [:id]", "(action_item) kind can only match [:id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(pulse) kind can only match [:id]", "(alert) kind can only match [:id]"]
+	// AttributeToQueryBy ["(incident) kind can only match [:id, :slug, :sequential_id, :pagerduty_incident_id, :opsgenie_incident_id, :victor_ops_incident_id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(post_mortem) kind can only match [:id]", "(action_item) kind can only match [:id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(pulse) kind can only match [:id]", "(alert) kind can only match [:id]"]
 	AttributeToQueryBy      TriggerWorkflowTaskParamsAttributeToQueryBy `json:"attribute_to_query_by"`
 	CheckWorkflowConditions *bool                                       `json:"check_workflow_conditions,omitempty"`
 	Kind                    TriggerWorkflowTaskParamsKind               `json:"kind"`
@@ -13373,7 +13443,7 @@ type TriggerWorkflowTaskParams struct {
 	} `json:"workflow"`
 }
 
-// TriggerWorkflowTaskParamsAttributeToQueryBy ["(incident) kind can only match [:id, :slug, :sequential_id, :pagerduty_incident_id, :opsgenie_incident_id, :victor_ops_incident_id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(post_mortem) kind can only match [:id]", "(action_item) kind can only match [:id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(pulse) kind can only match [:id]", "(alert) kind can only match [:id]"]
+// TriggerWorkflowTaskParamsAttributeToQueryBy ["(incident) kind can only match [:id, :slug, :sequential_id, :pagerduty_incident_id, :opsgenie_incident_id, :victor_ops_incident_id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(post_mortem) kind can only match [:id]", "(action_item) kind can only match [:id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(pulse) kind can only match [:id]", "(alert) kind can only match [:id]"]
 type TriggerWorkflowTaskParamsAttributeToQueryBy string
 
 // TriggerWorkflowTaskParamsKind defines model for TriggerWorkflowTaskParams.Kind.
@@ -13605,7 +13675,7 @@ type UpdateCustomField struct {
 			Label *string `json:"label,omitempty"`
 
 			// Position The position of the custom_field
-			Position *float32                                   `json:"position,omitempty"`
+			Position *int                                       `json:"position,omitempty"`
 			Required *[]UpdateCustomFieldDataAttributesRequired `json:"required"`
 			Shown    *[]UpdateCustomFieldDataAttributesShown    `json:"shown,omitempty"`
 
@@ -13634,7 +13704,7 @@ type UpdateCustomFieldOption struct {
 			Default *bool   `json:"default,omitempty"`
 
 			// Position The position of the custom_field_option
-			Position *float32 `json:"position,omitempty"`
+			Position *int `json:"position,omitempty"`
 
 			// Value The value of the custom_field_option
 			Value *string `json:"value,omitempty"`
@@ -13764,7 +13834,7 @@ type UpdateEscalationLevel struct {
 	Data struct {
 		Attributes struct {
 			// Delay Delay before notification targets will be alerted.
-			Delay *float32 `json:"delay,omitempty"`
+			Delay *int `json:"delay,omitempty"`
 
 			// NotificationTargetParams Escalation level's notification targets
 			NotificationTargetParams *[]struct {
@@ -13776,7 +13846,7 @@ type UpdateEscalationLevel struct {
 			} `json:"notification_target_params,omitempty"`
 
 			// Position Position of the escalation policy level
-			Position *float32 `json:"position,omitempty"`
+			Position *int `json:"position,omitempty"`
 		} `json:"attributes"`
 		Type UpdateEscalationLevelDataType `json:"type"`
 	} `json:"data"`
@@ -13802,7 +13872,7 @@ type UpdateEscalationPolicy struct {
 			Name *string `json:"name,omitempty"`
 
 			// RepeatCount The number of times this policy will be executed until someone acknowledges the alert
-			RepeatCount *float32 `json:"repeat_count,omitempty"`
+			RepeatCount *int `json:"repeat_count,omitempty"`
 
 			// ServiceIds Associated services (alerting the service will trigger escalation policy)
 			ServiceIds *[]string `json:"service_ids,omitempty"`
@@ -13868,7 +13938,7 @@ type UpdateFormFieldOption struct {
 			Default *bool   `json:"default,omitempty"`
 
 			// Position The position of the form_field_option
-			Position *float32 `json:"position,omitempty"`
+			Position *int `json:"position,omitempty"`
 
 			// Value The value of the form_field_option
 			Value *string `json:"value,omitempty"`
@@ -13946,7 +14016,7 @@ type UpdateFormFieldPosition struct {
 			FormFieldId *string `json:"form_field_id,omitempty"`
 
 			// Position The position of the form_field_position
-			Position *float32 `json:"position,omitempty"`
+			Position *int `json:"position,omitempty"`
 		} `json:"attributes"`
 		Type UpdateFormFieldPositionDataType `json:"type"`
 	} `json:"data"`
@@ -14113,7 +14183,7 @@ type UpdateGitlabIssueTaskParamsTaskType string
 // UpdateGoogleCalendarEventTaskParams defines model for update_google_calendar_event_task_params.
 type UpdateGoogleCalendarEventTaskParams struct {
 	// AdjustmentDays Days to adjust meeting by
-	AdjustmentDays *float32 `json:"adjustment_days,omitempty"`
+	AdjustmentDays *int `json:"adjustment_days,omitempty"`
 
 	// Attendees Emails of attendees
 	Attendees               *[]string `json:"attendees,omitempty"`
@@ -14348,7 +14418,7 @@ type UpdateIncidentActionItemDataType string
 type UpdateIncidentCustomFieldSelection struct {
 	Data struct {
 		Attributes struct {
-			SelectedOptionIds *[]float32 `json:"selected_option_ids,omitempty"`
+			SelectedOptionIds *[]int `json:"selected_option_ids,omitempty"`
 
 			// Value The selected value for text kind custom fields
 			Value *string `json:"value"`
@@ -14441,11 +14511,11 @@ type UpdateIncidentFeedbackDataType string
 type UpdateIncidentFormFieldSelection struct {
 	Data struct {
 		Attributes struct {
-			SelectedFunctionalityIds *[]float32 `json:"selected_functionality_ids,omitempty"`
-			SelectedGroupIds         *[]string  `json:"selected_group_ids,omitempty"`
-			SelectedOptionIds        *[]string  `json:"selected_option_ids,omitempty"`
-			SelectedServiceIds       *[]float32 `json:"selected_service_ids,omitempty"`
-			SelectedUserIds          *[]float32 `json:"selected_user_ids,omitempty"`
+			SelectedFunctionalityIds *[]int    `json:"selected_functionality_ids,omitempty"`
+			SelectedGroupIds         *[]string `json:"selected_group_ids,omitempty"`
+			SelectedOptionIds        *[]string `json:"selected_option_ids,omitempty"`
+			SelectedServiceIds       *[]int    `json:"selected_service_ids,omitempty"`
+			SelectedUserIds          *[]int    `json:"selected_user_ids,omitempty"`
 
 			// Value The selected value for text kind custom fields
 			Value *string `json:"value"`
@@ -14848,6 +14918,35 @@ type UpdateLinearIssueTaskParams struct {
 // UpdateLinearIssueTaskParamsTaskType defines model for UpdateLinearIssueTaskParams.TaskType.
 type UpdateLinearIssueTaskParamsTaskType string
 
+// UpdateMotionTaskTaskParams defines model for update_motion_task_task_params.
+type UpdateMotionTaskTaskParams struct {
+	// Description The task description
+	Description *string `json:"description,omitempty"`
+
+	// DueDate The due date
+	DueDate *string `json:"due_date,omitempty"`
+
+	// Duration The duration. Eg.  "NONE", "REMINDER", or a integer greater than 0.
+	Duration *string   `json:"duration,omitempty"`
+	Labels   *[]string `json:"labels,omitempty"`
+
+	// Priority The priority id and display name
+	Priority *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"priority,omitempty"`
+
+	// TaskId The task id
+	TaskId   string                              `json:"task_id"`
+	TaskType *UpdateMotionTaskTaskParamsTaskType `json:"task_type,omitempty"`
+
+	// Title The task title
+	Title *string `json:"title,omitempty"`
+}
+
+// UpdateMotionTaskTaskParamsTaskType defines model for UpdateMotionTaskTaskParams.TaskType.
+type UpdateMotionTaskTaskParamsTaskType string
+
 // UpdateNotionPageTaskParams defines model for update_notion_page_task_params.
 type UpdateNotionPageTaskParams struct {
 	// FileId The Notion page ID
@@ -14961,7 +15060,7 @@ type UpdateOverrideShiftDataType string
 // UpdatePagerdutyIncidentTaskParams defines model for update_pagerduty_incident_task_params.
 type UpdatePagerdutyIncidentTaskParams struct {
 	// EscalationLevel Escalation level of policy attached to incident
-	EscalationLevel *float32 `json:"escalation_level,omitempty"`
+	EscalationLevel *int `json:"escalation_level,omitempty"`
 
 	// PagerdutyIncidentId Pagerduty incident id
 	PagerdutyIncidentId string `json:"pagerduty_incident_id"`
@@ -15392,7 +15491,7 @@ type UpdateScheduleRotation struct {
 				HandoffTime *string `json:"handoff_time,omitempty"`
 
 				// ShiftLength Shift length for custom rotation
-				ShiftLength *float32 `json:"shift_length,omitempty"`
+				ShiftLength *int `json:"shift_length,omitempty"`
 
 				// ShiftLengthUnit Shift length unit for custom rotation
 				ShiftLengthUnit *UpdateScheduleRotationDataAttributesScheduleRotationableAttributesShiftLengthUnit `json:"shift_length_unit,omitempty"`
@@ -16013,7 +16112,7 @@ type UpdateWorkflow struct {
 			Name *string `json:"name,omitempty"`
 
 			// Position The order which the workflow should run with other workflows.
-			Position *float32 `json:"position,omitempty"`
+			Position *int `json:"position,omitempty"`
 
 			// RepeatEveryDuration Repeat workflow every duration
 			RepeatEveryDuration *string   `json:"repeat_every_duration"`
@@ -16048,7 +16147,7 @@ type UpdateWorkflowCustomFieldSelection struct {
 		Attributes struct {
 			// IncidentCondition The trigger condition
 			IncidentCondition *UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition `json:"incident_condition,omitempty"`
-			SelectedOptionIds *[]float32                                                         `json:"selected_option_ids,omitempty"`
+			SelectedOptionIds *[]int                                                             `json:"selected_option_ids,omitempty"`
 			Values            *[]string                                                          `json:"values,omitempty"`
 		} `json:"attributes"`
 		Type UpdateWorkflowCustomFieldSelectionDataType `json:"type"`
@@ -16068,7 +16167,7 @@ type UpdateWorkflowFormFieldCondition struct {
 			// IncidentCondition The trigger condition
 			IncidentCondition *UpdateWorkflowFormFieldConditionDataAttributesIncidentCondition `json:"incident_condition,omitempty"`
 			SelectedOptionIds *[]string                                                        `json:"selected_option_ids,omitempty"`
-			SelectedUserIds   *[]float32                                                       `json:"selected_user_ids,omitempty"`
+			SelectedUserIds   *[]int                                                           `json:"selected_user_ids,omitempty"`
 			Values            *[]string                                                        `json:"values,omitempty"`
 		} `json:"attributes"`
 		Type UpdateWorkflowFormFieldConditionDataType `json:"type"`
@@ -16101,7 +16200,7 @@ type UpdateWorkflowGroup struct {
 			Name *string `json:"name,omitempty"`
 
 			// Position The position of the workflow group
-			Position *float32 `json:"position,omitempty"`
+			Position *int `json:"position,omitempty"`
 		} `json:"attributes"`
 		Type UpdateWorkflowGroupDataType `json:"type"`
 	} `json:"data"`
@@ -16124,7 +16223,7 @@ type UpdateWorkflowTask struct {
 			Name *string `json:"name,omitempty"`
 
 			// Position The position of the workflow task
-			Position *float32 `json:"position,omitempty"`
+			Position *int `json:"position,omitempty"`
 
 			// SkipOnFailure Skip workflow task if any failures
 			SkipOnFailure *bool                                          `json:"skip_on_failure,omitempty"`
@@ -16417,7 +16516,7 @@ type Workflow struct {
 	Name string `json:"name"`
 
 	// Position The order which the workflow should run with other workflows.
-	Position *float32 `json:"position,omitempty"`
+	Position *int `json:"position,omitempty"`
 
 	// RepeatEveryDuration Repeat workflow every duration
 	RepeatEveryDuration *string             `json:"repeat_every_duration"`
@@ -16450,11 +16549,11 @@ type Workflow_TriggerParams struct {
 // WorkflowCustomFieldSelection defines model for workflow_custom_field_selection.
 type WorkflowCustomFieldSelection struct {
 	// CustomFieldId The custom field for this selection
-	CustomFieldId float32 `json:"custom_field_id"`
+	CustomFieldId int `json:"custom_field_id"`
 
 	// IncidentCondition The trigger condition
 	IncidentCondition WorkflowCustomFieldSelectionIncidentCondition `json:"incident_condition"`
-	SelectedOptionIds []float32                                     `json:"selected_option_ids"`
+	SelectedOptionIds []int                                         `json:"selected_option_ids"`
 	Values            *[]string                                     `json:"values,omitempty"`
 
 	// WorkflowId The workflow for this selection
@@ -16501,7 +16600,7 @@ type WorkflowFormFieldCondition struct {
 	// IncidentCondition The trigger condition
 	IncidentCondition WorkflowFormFieldConditionIncidentCondition `json:"incident_condition"`
 	SelectedOptionIds []string                                    `json:"selected_option_ids"`
-	SelectedUserIds   []float32                                   `json:"selected_user_ids"`
+	SelectedUserIds   []int                                       `json:"selected_user_ids"`
 	Values            *[]string                                   `json:"values,omitempty"`
 
 	// WorkflowId The workflow for this condition
@@ -16558,7 +16657,7 @@ type WorkflowGroup struct {
 	Name string `json:"name"`
 
 	// Position The position of the workflow group
-	Position float32 `json:"position"`
+	Position int `json:"position"`
 
 	// Slug The slug of the workflow group.
 	Slug *string `json:"slug,omitempty"`
@@ -16689,7 +16788,7 @@ type WorkflowTask struct {
 	Name *string `json:"name,omitempty"`
 
 	// Position The position of the workflow task
-	Position float32 `json:"position"`
+	Position int `json:"position"`
 
 	// SkipOnFailure Skip workflow task if any failures
 	SkipOnFailure bool                    `json:"skip_on_failure"`
@@ -17831,7 +17930,7 @@ type RemoveAssignedUserFromIncidentApplicationVndAPIPlusJSONRequestBody = Unassi
 type CreateIncidentActionItemApplicationVndAPIPlusJSONRequestBody = NewIncidentActionItem
 
 // AttachAlertApplicationVndAPIPlusJSONRequestBody defines body for AttachAlert for application/vnd.api+json ContentType.
-type AttachAlertApplicationVndAPIPlusJSONRequestBody = NewAlert
+type AttachAlertApplicationVndAPIPlusJSONRequestBody = AttachAlert
 
 // CreateIncidentCustomFieldSelectionApplicationVndAPIPlusJSONRequestBody defines body for CreateIncidentCustomFieldSelection for application/vnd.api+json ContentType.
 type CreateIncidentCustomFieldSelectionApplicationVndAPIPlusJSONRequestBody = NewIncidentCustomFieldSelection
@@ -20718,6 +20817,32 @@ func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeCreateClickupTaskTaskP
 	return err
 }
 
+// AsCreateMotionTaskTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a CreateMotionTaskTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsCreateMotionTaskTaskParams() (CreateMotionTaskTaskParams, error) {
+	var body CreateMotionTaskTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateMotionTaskTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided CreateMotionTaskTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromCreateMotionTaskTaskParams(v CreateMotionTaskTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateMotionTaskTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided CreateMotionTaskTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeCreateMotionTaskTaskParams(v CreateMotionTaskTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsCreateZoomMeetingTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a CreateZoomMeetingTaskParams
 func (t NewWorkflowTask_Data_Attributes_TaskParams) AsCreateZoomMeetingTaskParams() (CreateZoomMeetingTaskParams, error) {
 	var body CreateZoomMeetingTaskParams
@@ -22034,6 +22159,32 @@ func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromUpdateClickupTaskTaskPa
 
 // MergeUpdateClickupTaskTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateClickupTaskTaskParams
 func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeUpdateClickupTaskTaskParams(v UpdateClickupTaskTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsUpdateMotionTaskTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a UpdateMotionTaskTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsUpdateMotionTaskTaskParams() (UpdateMotionTaskTaskParams, error) {
+	var body UpdateMotionTaskTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateMotionTaskTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided UpdateMotionTaskTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromUpdateMotionTaskTaskParams(v UpdateMotionTaskTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateMotionTaskTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateMotionTaskTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeUpdateMotionTaskTaskParams(v UpdateMotionTaskTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -23702,6 +23853,32 @@ func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeCreateClickupTaskTa
 	return err
 }
 
+// AsCreateMotionTaskTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a CreateMotionTaskTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsCreateMotionTaskTaskParams() (CreateMotionTaskTaskParams, error) {
+	var body CreateMotionTaskTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateMotionTaskTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided CreateMotionTaskTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromCreateMotionTaskTaskParams(v CreateMotionTaskTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateMotionTaskTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided CreateMotionTaskTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeCreateMotionTaskTaskParams(v CreateMotionTaskTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsCreateZoomMeetingTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a CreateZoomMeetingTaskParams
 func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsCreateZoomMeetingTaskParams() (CreateZoomMeetingTaskParams, error) {
 	var body CreateZoomMeetingTaskParams
@@ -25018,6 +25195,32 @@ func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromUpdateClickupTaskTas
 
 // MergeUpdateClickupTaskTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateClickupTaskTaskParams
 func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeUpdateClickupTaskTaskParams(v UpdateClickupTaskTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsUpdateMotionTaskTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a UpdateMotionTaskTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsUpdateMotionTaskTaskParams() (UpdateMotionTaskTaskParams, error) {
+	var body UpdateMotionTaskTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateMotionTaskTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided UpdateMotionTaskTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromUpdateMotionTaskTaskParams(v UpdateMotionTaskTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateMotionTaskTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateMotionTaskTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeUpdateMotionTaskTaskParams(v UpdateMotionTaskTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -26686,6 +26889,32 @@ func (t *WorkflowTask_TaskParams) MergeCreateClickupTaskTaskParams(v CreateClick
 	return err
 }
 
+// AsCreateMotionTaskTaskParams returns the union data inside the WorkflowTask_TaskParams as a CreateMotionTaskTaskParams
+func (t WorkflowTask_TaskParams) AsCreateMotionTaskTaskParams() (CreateMotionTaskTaskParams, error) {
+	var body CreateMotionTaskTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateMotionTaskTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided CreateMotionTaskTaskParams
+func (t *WorkflowTask_TaskParams) FromCreateMotionTaskTaskParams(v CreateMotionTaskTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateMotionTaskTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided CreateMotionTaskTaskParams
+func (t *WorkflowTask_TaskParams) MergeCreateMotionTaskTaskParams(v CreateMotionTaskTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsCreateZoomMeetingTaskParams returns the union data inside the WorkflowTask_TaskParams as a CreateZoomMeetingTaskParams
 func (t WorkflowTask_TaskParams) AsCreateZoomMeetingTaskParams() (CreateZoomMeetingTaskParams, error) {
 	var body CreateZoomMeetingTaskParams
@@ -28002,6 +28231,32 @@ func (t *WorkflowTask_TaskParams) FromUpdateClickupTaskTaskParams(v UpdateClicku
 
 // MergeUpdateClickupTaskTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided UpdateClickupTaskTaskParams
 func (t *WorkflowTask_TaskParams) MergeUpdateClickupTaskTaskParams(v UpdateClickupTaskTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsUpdateMotionTaskTaskParams returns the union data inside the WorkflowTask_TaskParams as a UpdateMotionTaskTaskParams
+func (t WorkflowTask_TaskParams) AsUpdateMotionTaskTaskParams() (UpdateMotionTaskTaskParams, error) {
+	var body UpdateMotionTaskTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateMotionTaskTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided UpdateMotionTaskTaskParams
+func (t *WorkflowTask_TaskParams) FromUpdateMotionTaskTaskParams(v UpdateMotionTaskTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateMotionTaskTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided UpdateMotionTaskTaskParams
+func (t *WorkflowTask_TaskParams) MergeUpdateMotionTaskTaskParams(v UpdateMotionTaskTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err

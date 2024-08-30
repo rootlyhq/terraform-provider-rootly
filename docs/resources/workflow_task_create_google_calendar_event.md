@@ -60,7 +60,7 @@ resource "rootly_workflow_task_create_google_calendar_event" "create_google_cale
 
 Required:
 
-- `days_until_meeting` (Number) The days until meeting
+- `days_until_meeting` (String) The days until meeting
 - `description` (String) The event description
 - `meeting_duration` (String) Meeting duration in format like '1 hour', '30 minutes'
 - `summary` (String) The event summary

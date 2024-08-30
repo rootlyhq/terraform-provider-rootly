@@ -11,7 +11,10 @@ function includeTools(resourceSchema) {
     if (resourceSchema.properties[key].type === "boolean") {
       return true;
     }
-    if (resourceSchema.properties[key].type === "array" && resourceSchema.properties[key].items?.type !== "object") {
+    if (
+      resourceSchema.properties[key].type === "array" &&
+      resourceSchema.properties[key].items?.type !== "object"
+    ) {
       return true;
     }
   }
@@ -203,8 +206,9 @@ function jsonapiToGoType(type) {
     case "string":
       return "string";
     case "integer":
-    case "number":
       return "int";
+    case "number":
+      return "float32";
     case "boolean":
       return "bool";
     case "array":
@@ -237,9 +241,9 @@ function annotatedDescription(schema) {
   if (
     schema.type === "object" &&
     schema.properties &&
-	schema.properties.id &&
+    schema.properties.id &&
     schema.properties.name
-) {
+  ) {
     return `Map must contain two fields, \`id\` and \`name\`. ${description}`;
   }
   if (schema.type === "array" && schema.items && schema.items.enum) {
@@ -277,14 +281,16 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
     defaultValue = `Computed: ${optional}`;
   }
   const description = annotatedDescription(schema);
-  const forceNew = name === pathIdField || schema.tf_write_only ? "true" : "false";
-  const skipDiff = schema.tf_skip_diff || schema.tf_write_only
-    ? `
+  const forceNew =
+    name === pathIdField || schema.tf_write_only ? "true" : "false";
+  const skipDiff =
+    schema.tf_skip_diff || schema.tf_write_only
+      ? `
 		DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 			return len(old) != 0
 		},
 	`
-    : "";
+      : "";
   const stateFunc = schema.accepts_unordered
     ? `
 		StateFunc: func(v interface{}) string {
@@ -307,10 +313,21 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 			},
 			`;
     case "integer":
+      return `
+		"${name}": &schema.Schema {
+			Type: schema.TypeInt,
+			Computed: ${optional},
+			Required: ${required},
+			Optional: ${optional},
+			ForceNew: ${forceNew},
+			Description: "${description}",
+			${skipDiff}
+		},
+		`;
     case "number":
       return `
 			"${name}": &schema.Schema {
-				Type: schema.TypeInt,
+				Type: schema.TypeFloat,
 				Computed: ${optional},
 				Required: ${required},
 				Optional: ${optional},
@@ -341,8 +358,16 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 			},
 			`;
     case "array":
-      if (schema.items && schema.items.type === "object" && schema.items.properties) {
-        if (Object.values(schema.items.properties).every((obj) => obj.type === "string")) {
+      if (
+        schema.items &&
+        schema.items.type === "object" &&
+        schema.items.properties
+      ) {
+        if (
+          Object.values(schema.items.properties).every(
+            (obj) => obj.type === "string"
+          )
+        ) {
           return `
   				"${name}": &schema.Schema {
   					Type: schema.TypeList,
@@ -352,19 +377,21 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
   					Description: "${description}",
   					Elem: &schema.Resource {
   						Schema: map[string]*schema.Schema {
-                ${Object.keys(schema.items.properties).map((key) => {
-                  return `"${key}": &schema.Schema {
+                ${Object.keys(schema.items.properties)
+                  .map((key) => {
+                    return `"${key}": &schema.Schema {
     								Type: schema.TypeString,
     								Required: true,
-    							},`
-                }).join("\n")}
+    							},`;
+                  })
+                  .join("\n")}
   						},
   					},
   					${stateFunc}
   				},
   				`;
         } else {
-          throw new Error(`schema not supported: ${schema}`)
+          throw new Error(`schema not supported: ${schema}`);
         }
       } else if (schema.items && schema.items.type === "string") {
         return `

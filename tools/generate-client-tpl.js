@@ -173,10 +173,13 @@ function structAttr(name, resourceSchema) {
         name
       )} string \`jsonapi:"attr,${name},omitempty"\``;
     case "integer":
-    case "number":
       return `${inflect.camelize(
         name
       )} int \`jsonapi:"attr,${name},omitempty"\``;
+    case "number":
+      return `${inflect.camelize(
+        name
+      )} float32 \`jsonapi:"attr,${name},omitempty"\``;
     case "boolean":
       return `${inflect.camelize(
         name

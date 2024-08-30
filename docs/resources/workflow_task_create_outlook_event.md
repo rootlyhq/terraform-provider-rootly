@@ -36,7 +36,7 @@ Manages workflow create_outlook_event task.
 Required:
 
 - `calendar` (Map of String) Map must contain two fields, `id` and `name`.
-- `days_until_meeting` (Number) The days until meeting
+- `days_until_meeting` (String) The days until meeting
 - `description` (String) The event description
 - `meeting_duration` (String) Meeting duration in format like '1 hour', '30 minutes'
 - `summary` (String) The event summary

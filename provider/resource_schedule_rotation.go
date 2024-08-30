@@ -225,9 +225,9 @@ func resourceScheduleRotationUpdate(ctx context.Context, d *schema.ResourceData,
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)
 	}
-	if d.HasChange("schedule_rotationable_type") {
-		s.ScheduleRotationableType = d.Get("schedule_rotationable_type").(string)
-	}
+
+	s.ScheduleRotationableType = d.Get("schedule_rotationable_type").(string)
+
 	if d.HasChange("active_all_week") {
 		s.ActiveAllWeek = tools.Bool(d.Get("active_all_week").(bool))
 	}
