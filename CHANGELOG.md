@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.5.0] -- 2024-09-17
+
+- Add `alert_urgency_id` to `rootly_heartbeat` resource
+
 ## [2.4.0] -- 2024-08-29
 
 - Add `task_create_motion` & `update_motion_task` resource.
