@@ -20,6 +20,8 @@ type Service struct {
   BackstageId string `jsonapi:"attr,backstage_id,omitempty"`
   PagerdutyId string `jsonapi:"attr,pagerduty_id,omitempty"`
   OpsgenieId string `jsonapi:"attr,opsgenie_id,omitempty"`
+  CortexId string `jsonapi:"attr,cortex_id,omitempty"`
+  ServiceNowCiSysId string `jsonapi:"attr,service_now_ci_sys_id,omitempty"`
   GithubRepositoryName string `jsonapi:"attr,github_repository_name,omitempty"`
   GithubRepositoryBranch string `jsonapi:"attr,github_repository_branch,omitempty"`
   GitlabRepositoryName string `jsonapi:"attr,gitlab_repository_name,omitempty"`

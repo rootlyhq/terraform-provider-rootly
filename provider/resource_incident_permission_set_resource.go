@@ -37,7 +37,7 @@ func resourceIncidentPermissionSetResource() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "Value must be one of `severities`, `incident_types`, `statuses`.",
+				Description: "Value must be one of `severities`, `incident_types`, `statuses`, `sub_statuses`.",
 			},
 
 			"private": &schema.Schema{

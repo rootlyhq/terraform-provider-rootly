@@ -21,8 +21,7 @@ function stripAnyOf(obj) {
   if (typeof obj === "object" && obj !== null) {
     if (
       obj.hasOwnProperty("anyOf") &&
-      obj.anyOf[0].required &&
-      Object.keys(obj.anyOf[0]).length === 1
+      obj.anyOf[0].required
     ) {
       delete obj.anyOf;
     }

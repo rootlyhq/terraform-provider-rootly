@@ -74,7 +74,7 @@ func resourceWorkflowTaskUpdateStatus() *schema.Resource {
 							}, false),
 						},
 						"status": &schema.Schema{
-							Description: "Value must be one of `in_triage`, `started`, `mitigated`, `resolved`, `cancelled`.",
+							Description: "Value must be one of `in_triage`, `started`, `mitigated`, `resolved`, `closed`, `cancelled`.",
 							Type:        schema.TypeString,
 							Required:    true,
 							ValidateFunc: validation.StringInSlice([]string{
@@ -82,6 +82,7 @@ func resourceWorkflowTaskUpdateStatus() *schema.Resource {
 								"started",
 								"mitigated",
 								"resolved",
+								"closed",
 								"cancelled",
 							}, false),
 						},

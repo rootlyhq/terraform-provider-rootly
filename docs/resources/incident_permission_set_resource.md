@@ -20,7 +20,7 @@ description: |-
 
 ### Optional
 
-- `kind` (String) Value must be one of `severities`, `incident_types`, `statuses`.
+- `kind` (String) Value must be one of `severities`, `incident_types`, `statuses`, `sub_statuses`.
 - `private` (Boolean) Value must be one of true or false
 - `resource_id` (String)
 - `resource_type` (String)

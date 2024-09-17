@@ -60,6 +60,7 @@ resource "rootly_service" "customer_postgresql_prod" {
 
 - `backstage_id` (String) The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
 - `color` (String) The hex color of the service
+- `cortex_id` (String) The Cortex group id associated to this service
 - `description` (String) The description of the service
 - `environment_ids` (List of String) Environments associated with this service
 - `github_repository_branch` (String) The GitHub repository branch associated to this service. eg: main
@@ -74,6 +75,7 @@ resource "rootly_service" "customer_postgresql_prod" {
 - `position` (Number) Position of the service
 - `public_description` (String) The public description of the service
 - `service_ids` (List of String) Services dependent on this service
+- `service_now_ci_sys_id` (String) The Service Now CI sys id associated to this service
 - `slack_aliases` (Block List) Slack Aliases associated with this service (see [below for nested schema](#nestedblock--slack_aliases))
 - `slack_channels` (Block List) Slack Channels associated with this service (see [below for nested schema](#nestedblock--slack_channels))
 - `slug` (String) The slug of the service

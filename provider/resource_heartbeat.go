@@ -49,6 +49,15 @@ func resourceHeartbeat() *schema.Resource {
 				Description: "Summary of alerts triggered when heartbeat expires.",
 			},
 
+			"alert_urgency_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Urgency of alerts triggered when heartbeat expires.",
+			},
+
 			"interval": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    false,
@@ -137,6 +146,9 @@ func resourceHeartbeatCreate(ctx context.Context, d *schema.ResourceData, meta i
 	if value, ok := d.GetOkExists("alert_summary"); ok {
 		s.AlertSummary = value.(string)
 	}
+	if value, ok := d.GetOkExists("alert_urgency_id"); ok {
+		s.AlertUrgencyId = value.(string)
+	}
 	if value, ok := d.GetOkExists("interval"); ok {
 		s.Interval = value.(int)
 	}
@@ -193,6 +205,7 @@ func resourceHeartbeatRead(ctx context.Context, d *schema.ResourceData, meta int
 	d.Set("name", item.Name)
 	d.Set("description", item.Description)
 	d.Set("alert_summary", item.AlertSummary)
+	d.Set("alert_urgency_id", item.AlertUrgencyId)
 	d.Set("interval", item.Interval)
 	d.Set("interval_unit", item.IntervalUnit)
 	d.Set("notification_target_id", item.NotificationTargetId)
@@ -219,6 +232,9 @@ func resourceHeartbeatUpdate(ctx context.Context, d *schema.ResourceData, meta i
 	}
 	if d.HasChange("alert_summary") {
 		s.AlertSummary = d.Get("alert_summary").(string)
+	}
+	if d.HasChange("alert_urgency_id") {
+		s.AlertUrgencyId = d.Get("alert_urgency_id").(string)
 	}
 	if d.HasChange("interval") {
 		s.Interval = d.Get("interval").(int)

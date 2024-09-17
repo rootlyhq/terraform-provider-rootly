@@ -44,6 +44,7 @@ func New(version string) func() *schema.Provider {
 				},
 			},
 			DataSourcesMap: map[string]*schema.Resource{
+				"rootly_alert_urgency":                    dataSourceAlertUrgency(),
 				"rootly_authorization":                    dataSourceAuthorization(),
 				"rootly_cause":                            dataSourceCause(),
 				"rootly_custom_form":                      dataSourceCustomForm(),
@@ -90,6 +91,8 @@ func New(version string) func() *schema.Provider {
 				"rootly_services":                         dataSourceServices(),
 			},
 			ResourcesMap: map[string]*schema.Resource{
+				"rootly_alert_urgency":                                    resourceAlertUrgency(),
+				"rootly_alert_group":                                      resourceAlertGroup(),
 				"rootly_authorization":                                    resourceAuthorization(),
 				"rootly_cause":                                            resourceCause(),
 				"rootly_custom_form":                                      resourceCustomForm(),
@@ -128,7 +131,6 @@ func New(version string) func() *schema.Provider {
 				"rootly_status_page":                                      resourceStatusPage(),
 				"rootly_team":                                             resourceTeam(),
 				"rootly_webhooks_endpoint":                                resourceWebhooksEndpoint(),
-				"rootly_escalation_level":                                 resourceEscalationLevel(),
 				"rootly_custom_field":                                     resourceCustomField(),
 				"rootly_custom_field_option":                              resourceCustomFieldOption(),
 				"rootly_dashboard":                                        resourceDashboard(),

@@ -15,6 +15,7 @@ import (
 	"time"
 
 	"github.com/oapi-codegen/runtime"
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 const (
@@ -281,6 +282,7 @@ const (
 const (
 	ActionItemTriggerParamsIncidentStatusesAcknowledged ActionItemTriggerParamsIncidentStatuses = "acknowledged"
 	ActionItemTriggerParamsIncidentStatusesCancelled    ActionItemTriggerParamsIncidentStatuses = "cancelled"
+	ActionItemTriggerParamsIncidentStatusesClosed       ActionItemTriggerParamsIncidentStatuses = "closed"
 	ActionItemTriggerParamsIncidentStatusesCompleted    ActionItemTriggerParamsIncidentStatuses = "completed"
 	ActionItemTriggerParamsIncidentStatusesDetected     ActionItemTriggerParamsIncidentStatuses = "detected"
 	ActionItemTriggerParamsIncidentStatusesInProgress   ActionItemTriggerParamsIncidentStatuses = "in_progress"
@@ -339,6 +341,16 @@ const (
 // Defines values for AddToTimelineTaskParamsTaskType.
 const (
 	AddToTimeline AddToTimelineTaskParamsTaskType = "add_to_timeline"
+)
+
+// Defines values for AlertGroupListDataType.
+const (
+	AlertGroupListDataTypeAlertGroups AlertGroupListDataType = "alert_groups"
+)
+
+// Defines values for AlertGroupResponseDataType.
+const (
+	AlertGroupResponseDataTypeAlertGroups AlertGroupResponseDataType = "alert_groups"
 )
 
 // Defines values for AlertListDataType.
@@ -404,6 +416,16 @@ const (
 	AlertTriggerParamsTriggersAlertCreated AlertTriggerParamsTriggers = "alert_created"
 )
 
+// Defines values for AlertUrgencyListDataType.
+const (
+	AlertUrgencyListDataTypeAlertUrgencies AlertUrgencyListDataType = "alert_urgencies"
+)
+
+// Defines values for AlertUrgencyResponseDataType.
+const (
+	AlertUrgencyResponseDataTypeAlertUrgencies AlertUrgencyResponseDataType = "alert_urgencies"
+)
+
 // Defines values for ArchiveSlackChannelsTaskParamsTaskType.
 const (
 	ArchiveSlackChannels ArchiveSlackChannelsTaskParamsTaskType = "archive_slack_channels"
@@ -432,6 +454,8 @@ const (
 	AuditItemTypeCustomForm                     AuditItemType = "CustomForm"
 	AuditItemTypeDashboard                      AuditItemType = "Dashboard"
 	AuditItemTypeEnvironment                    AuditItemType = "Environment"
+	AuditItemTypeEscalationPolicy               AuditItemType = "EscalationPolicy"
+	AuditItemTypeEscalationPolicyPath           AuditItemType = "EscalationPolicyPath"
 	AuditItemTypeExportJob                      AuditItemType = "ExportJob"
 	AuditItemTypeFormField                      AuditItemType = "FormField"
 	AuditItemTypeFunctionality                  AuditItemType = "Functionality"
@@ -439,6 +463,7 @@ const (
 	AuditItemTypeGeniusWorkflowGroup            AuditItemType = "GeniusWorkflowGroup"
 	AuditItemTypeGeniusWorkflowRun              AuditItemType = "GeniusWorkflowRun"
 	AuditItemTypeGroup                          AuditItemType = "Group"
+	AuditItemTypeHeartbeat                      AuditItemType = "Heartbeat"
 	AuditItemTypeIncident                       AuditItemType = "Incident"
 	AuditItemTypeIncidentActionItem             AuditItemType = "IncidentActionItem"
 	AuditItemTypeIncidentEvent                  AuditItemType = "IncidentEvent"
@@ -450,9 +475,12 @@ const (
 	AuditItemTypeIncidentStatusPageEvent        AuditItemType = "IncidentStatusPageEvent"
 	AuditItemTypeIncidentTask                   AuditItemType = "IncidentTask"
 	AuditItemTypeIncidentType                   AuditItemType = "IncidentType"
+	AuditItemTypeLiveCallRouter                 AuditItemType = "LiveCallRouter"
+	AuditItemTypeOnCallRole                     AuditItemType = "OnCallRole"
 	AuditItemTypePlaybook                       AuditItemType = "Playbook"
 	AuditItemTypePlaybookTask                   AuditItemType = "PlaybookTask"
 	AuditItemTypeRole                           AuditItemType = "Role"
+	AuditItemTypeSchedule                       AuditItemType = "Schedule"
 	AuditItemTypeService                        AuditItemType = "Service"
 	AuditItemTypeSeverity                       AuditItemType = "Severity"
 	AuditItemTypeStatusPage                     AuditItemType = "StatusPage"
@@ -953,6 +981,11 @@ const (
 	EscalationPolicyListDataTypeEscalationPolicies EscalationPolicyListDataType = "escalation_policies"
 )
 
+// Defines values for EscalationPolicyPathResponseDataType.
+const (
+	EscalationPolicyPathResponseDataTypeEscalationPaths EscalationPolicyPathResponseDataType = "escalation_paths"
+)
+
 // Defines values for EscalationPolicyResponseDataType.
 const (
 	EscalationPolicyResponseDataTypeEscalationPolicies EscalationPolicyResponseDataType = "escalation_policies"
@@ -1167,9 +1200,9 @@ const (
 
 // Defines values for HeartbeatStatus.
 const (
-	Active  HeartbeatStatus = "active"
-	Expired HeartbeatStatus = "expired"
-	Waiting HeartbeatStatus = "waiting"
+	HeartbeatStatusActive  HeartbeatStatus = "active"
+	HeartbeatStatusExpired HeartbeatStatus = "expired"
+	HeartbeatStatusWaiting HeartbeatStatus = "waiting"
 )
 
 // Defines values for HeartbeatListDataType.
@@ -1200,6 +1233,14 @@ const (
 // Defines values for InTriageIncidentDataType.
 const (
 	InTriageIncidentDataTypeIncidents InTriageIncidentDataType = "incidents"
+)
+
+// Defines values for IncidentRetrospectiveProgressStatus.
+const (
+	IncidentRetrospectiveProgressStatusActive     IncidentRetrospectiveProgressStatus = "active"
+	IncidentRetrospectiveProgressStatusCompleted  IncidentRetrospectiveProgressStatus = "completed"
+	IncidentRetrospectiveProgressStatusNotStarted IncidentRetrospectiveProgressStatus = "not_started"
+	IncidentRetrospectiveProgressStatusSkipped    IncidentRetrospectiveProgressStatus = "skipped"
 )
 
 // Defines values for IncidentActionItemKind.
@@ -1374,6 +1415,7 @@ const (
 	IncidentPermissionSetResourceKindIncidentTypes IncidentPermissionSetResourceKind = "incident_types"
 	IncidentPermissionSetResourceKindSeverities    IncidentPermissionSetResourceKind = "severities"
 	IncidentPermissionSetResourceKindStatuses      IncidentPermissionSetResourceKind = "statuses"
+	IncidentPermissionSetResourceKindSubStatuses   IncidentPermissionSetResourceKind = "sub_statuses"
 )
 
 // Defines values for IncidentPermissionSetResourceListDataType.
@@ -1675,6 +1717,7 @@ const (
 const (
 	IncidentTriggerParamsIncidentStatusesAcknowledged IncidentTriggerParamsIncidentStatuses = "acknowledged"
 	IncidentTriggerParamsIncidentStatusesCancelled    IncidentTriggerParamsIncidentStatuses = "cancelled"
+	IncidentTriggerParamsIncidentStatusesClosed       IncidentTriggerParamsIncidentStatuses = "closed"
 	IncidentTriggerParamsIncidentStatusesCompleted    IncidentTriggerParamsIncidentStatuses = "completed"
 	IncidentTriggerParamsIncidentStatusesDetected     IncidentTriggerParamsIncidentStatuses = "detected"
 	IncidentTriggerParamsIncidentStatusesInProgress   IncidentTriggerParamsIncidentStatuses = "in_progress"
@@ -1754,6 +1797,41 @@ const (
 // Defines values for NewAlertDataType.
 const (
 	NewAlertDataTypeAlerts NewAlertDataType = "alerts"
+)
+
+// Defines values for NewAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType.
+const (
+	NewAlertGroupDataAttributesAlertGroupTargetsAttributesTargetTypeEscalationPolicy NewAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType = "EscalationPolicy"
+	NewAlertGroupDataAttributesAlertGroupTargetsAttributesTargetTypeGroup            NewAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType = "Group"
+	NewAlertGroupDataAttributesAlertGroupTargetsAttributesTargetTypeService          NewAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType = "Service"
+)
+
+// Defines values for NewAlertGroupDataAttributesConditionType.
+const (
+	NewAlertGroupDataAttributesConditionTypeAll NewAlertGroupDataAttributesConditionType = "all"
+	NewAlertGroupDataAttributesConditionTypeAny NewAlertGroupDataAttributesConditionType = "any"
+)
+
+// Defines values for NewAlertGroupDataAttributesGroupByAlertTitle.
+const (
+	NewAlertGroupDataAttributesGroupByAlertTitleN0 NewAlertGroupDataAttributesGroupByAlertTitle = 0
+	NewAlertGroupDataAttributesGroupByAlertTitleN1 NewAlertGroupDataAttributesGroupByAlertTitle = 1
+)
+
+// Defines values for NewAlertGroupDataAttributesGroupByAlertUrgency.
+const (
+	NewAlertGroupDataAttributesGroupByAlertUrgencyN0 NewAlertGroupDataAttributesGroupByAlertUrgency = 0
+	NewAlertGroupDataAttributesGroupByAlertUrgencyN1 NewAlertGroupDataAttributesGroupByAlertUrgency = 1
+)
+
+// Defines values for NewAlertGroupDataType.
+const (
+	NewAlertGroupDataTypeAlertGroups NewAlertGroupDataType = "alert_groups"
+)
+
+// Defines values for NewAlertUrgencyDataType.
+const (
+	NewAlertUrgencyDataTypeAlertUrgencies NewAlertUrgencyDataType = "alert_urgencies"
 )
 
 // Defines values for NewAuthorizationDataAttributesAuthorizableType.
@@ -1870,6 +1948,17 @@ const (
 // Defines values for NewEscalationPolicyDataType.
 const (
 	NewEscalationPolicyDataTypeEscalationPolicies NewEscalationPolicyDataType = "escalation_policies"
+)
+
+// Defines values for NewEscalationPolicyPathDataAttributesNotificationType.
+const (
+	NewEscalationPolicyPathDataAttributesNotificationTypeAudible NewEscalationPolicyPathDataAttributesNotificationType = "audible"
+	NewEscalationPolicyPathDataAttributesNotificationTypeQuiet   NewEscalationPolicyPathDataAttributesNotificationType = "quiet"
+)
+
+// Defines values for NewEscalationPolicyPathDataType.
+const (
+	NewEscalationPolicyPathDataTypeEscalationPaths NewEscalationPolicyPathDataType = "escalation_paths"
 )
 
 // Defines values for NewFormFieldDataAttributesInputKind.
@@ -2047,6 +2136,7 @@ const (
 const (
 	NewIncidentDataAttributesStatusAcknowledged NewIncidentDataAttributesStatus = "acknowledged"
 	NewIncidentDataAttributesStatusCancelled    NewIncidentDataAttributesStatus = "cancelled"
+	NewIncidentDataAttributesStatusClosed       NewIncidentDataAttributesStatus = "closed"
 	NewIncidentDataAttributesStatusCompleted    NewIncidentDataAttributesStatus = "completed"
 	NewIncidentDataAttributesStatusDetected     NewIncidentDataAttributesStatus = "detected"
 	NewIncidentDataAttributesStatusInProgress   NewIncidentDataAttributesStatus = "in_progress"
@@ -2189,6 +2279,7 @@ const (
 	NewIncidentPermissionSetResourceDataAttributesKindIncidentTypes NewIncidentPermissionSetResourceDataAttributesKind = "incident_types"
 	NewIncidentPermissionSetResourceDataAttributesKindSeverities    NewIncidentPermissionSetResourceDataAttributesKind = "severities"
 	NewIncidentPermissionSetResourceDataAttributesKindStatuses      NewIncidentPermissionSetResourceDataAttributesKind = "statuses"
+	NewIncidentPermissionSetResourceDataAttributesKindSubStatuses   NewIncidentPermissionSetResourceDataAttributesKind = "sub_statuses"
 )
 
 // Defines values for NewIncidentPermissionSetResourceDataType.
@@ -3559,6 +3650,41 @@ const (
 	UpdateAirtableTableRecord UpdateAirtableTableRecordTaskParamsTaskType = "update_airtable_table_record"
 )
 
+// Defines values for UpdateAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType.
+const (
+	UpdateAlertGroupDataAttributesAlertGroupTargetsAttributesTargetTypeEscalationPolicy UpdateAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType = "EscalationPolicy"
+	UpdateAlertGroupDataAttributesAlertGroupTargetsAttributesTargetTypeGroup            UpdateAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType = "Group"
+	UpdateAlertGroupDataAttributesAlertGroupTargetsAttributesTargetTypeService          UpdateAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType = "Service"
+)
+
+// Defines values for UpdateAlertGroupDataAttributesConditionType.
+const (
+	UpdateAlertGroupDataAttributesConditionTypeAll UpdateAlertGroupDataAttributesConditionType = "all"
+	UpdateAlertGroupDataAttributesConditionTypeAny UpdateAlertGroupDataAttributesConditionType = "any"
+)
+
+// Defines values for UpdateAlertGroupDataAttributesGroupByAlertTitle.
+const (
+	UpdateAlertGroupDataAttributesGroupByAlertTitleN0 UpdateAlertGroupDataAttributesGroupByAlertTitle = 0
+	UpdateAlertGroupDataAttributesGroupByAlertTitleN1 UpdateAlertGroupDataAttributesGroupByAlertTitle = 1
+)
+
+// Defines values for UpdateAlertGroupDataAttributesGroupByAlertUrgency.
+const (
+	UpdateAlertGroupDataAttributesGroupByAlertUrgencyN0 UpdateAlertGroupDataAttributesGroupByAlertUrgency = 0
+	UpdateAlertGroupDataAttributesGroupByAlertUrgencyN1 UpdateAlertGroupDataAttributesGroupByAlertUrgency = 1
+)
+
+// Defines values for UpdateAlertGroupDataType.
+const (
+	UpdateAlertGroupDataTypeAlertGroups UpdateAlertGroupDataType = "alert_groups"
+)
+
+// Defines values for UpdateAlertUrgencyDataType.
+const (
+	UpdateAlertUrgencyDataTypeAlertUrgencies UpdateAlertUrgencyDataType = "alert_urgencies"
+)
+
 // Defines values for UpdateAsanaTaskTaskParamsDependencyDirection.
 const (
 	BlockedBy UpdateAsanaTaskTaskParamsDependencyDirection = "blocked_by"
@@ -3689,6 +3815,17 @@ const (
 // Defines values for UpdateEscalationPolicyDataType.
 const (
 	UpdateEscalationPolicyDataTypeEscalationPolicies UpdateEscalationPolicyDataType = "escalation_policies"
+)
+
+// Defines values for UpdateEscalationPolicyPathDataAttributesNotificationType.
+const (
+	UpdateEscalationPolicyPathDataAttributesNotificationTypeAudible UpdateEscalationPolicyPathDataAttributesNotificationType = "audible"
+	UpdateEscalationPolicyPathDataAttributesNotificationTypeQuiet   UpdateEscalationPolicyPathDataAttributesNotificationType = "quiet"
+)
+
+// Defines values for UpdateEscalationPolicyPathDataType.
+const (
+	EscalationPaths UpdateEscalationPolicyPathDataType = "escalation_paths"
 )
 
 // Defines values for UpdateFormFieldDataAttributesInputKind.
@@ -3895,6 +4032,7 @@ const (
 const (
 	UpdateIncidentDataAttributesStatusAcknowledged UpdateIncidentDataAttributesStatus = "acknowledged"
 	UpdateIncidentDataAttributesStatusCancelled    UpdateIncidentDataAttributesStatus = "cancelled"
+	UpdateIncidentDataAttributesStatusClosed       UpdateIncidentDataAttributesStatus = "closed"
 	UpdateIncidentDataAttributesStatusCompleted    UpdateIncidentDataAttributesStatus = "completed"
 	UpdateIncidentDataAttributesStatusDetected     UpdateIncidentDataAttributesStatus = "detected"
 	UpdateIncidentDataAttributesStatusInProgress   UpdateIncidentDataAttributesStatus = "in_progress"
@@ -4037,6 +4175,7 @@ const (
 	UpdateIncidentPermissionSetResourceDataAttributesKindIncidentTypes UpdateIncidentPermissionSetResourceDataAttributesKind = "incident_types"
 	UpdateIncidentPermissionSetResourceDataAttributesKindSeverities    UpdateIncidentPermissionSetResourceDataAttributesKind = "severities"
 	UpdateIncidentPermissionSetResourceDataAttributesKindStatuses      UpdateIncidentPermissionSetResourceDataAttributesKind = "statuses"
+	UpdateIncidentPermissionSetResourceDataAttributesKindSubStatuses   UpdateIncidentPermissionSetResourceDataAttributesKind = "sub_statuses"
 )
 
 // Defines values for UpdateIncidentPermissionSetResourceDataType.
@@ -4598,6 +4737,7 @@ const (
 // Defines values for UpdateStatusTaskParamsStatus.
 const (
 	UpdateStatusTaskParamsStatusCancelled UpdateStatusTaskParamsStatus = "cancelled"
+	UpdateStatusTaskParamsStatusClosed    UpdateStatusTaskParamsStatus = "closed"
 	UpdateStatusTaskParamsStatusInTriage  UpdateStatusTaskParamsStatus = "in_triage"
 	UpdateStatusTaskParamsStatusMitigated UpdateStatusTaskParamsStatus = "mitigated"
 	UpdateStatusTaskParamsStatusResolved  UpdateStatusTaskParamsStatus = "resolved"
@@ -5298,6 +5438,67 @@ type Alert struct {
 	UpdatedAt string `json:"updated_at"`
 }
 
+// AlertGroup defines model for alert_group.
+type AlertGroup struct {
+	// ConditionType Grouping condition for the alert group
+	ConditionType string `json:"condition_type"`
+
+	// CreatedAt Date of creation
+	CreatedAt string `json:"created_at"`
+
+	// DeletedAt Date or deletion
+	DeletedAt *string `json:"deleted_at"`
+
+	// Description The description of the alert group
+	Description *string `json:"description"`
+
+	// GroupByAlertTitle Whether the alerts are grouped by title or not
+	GroupByAlertTitle bool `json:"group_by_alert_title"`
+
+	// GroupByAlertUrgency Whether the alerts are grouped by urgency or not
+	GroupByAlertUrgency bool `json:"group_by_alert_urgency"`
+
+	// Name The name of the alert group
+	Name string `json:"name"`
+
+	// Slug The slug of the alert group
+	Slug string `json:"slug"`
+
+	// TimeWindow Time window for the alert grouping
+	TimeWindow int `json:"time_window"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt string `json:"updated_at"`
+}
+
+// AlertGroupList defines model for alert_group_list.
+type AlertGroupList struct {
+	Data []struct {
+		Attributes AlertGroup `json:"attributes"`
+
+		// Id Unique ID of the alert group
+		Id   string                 `json:"id"`
+		Type AlertGroupListDataType `json:"type"`
+	} `json:"data"`
+}
+
+// AlertGroupListDataType defines model for AlertGroupList.Data.Type.
+type AlertGroupListDataType string
+
+// AlertGroupResponse defines model for alert_group_response.
+type AlertGroupResponse struct {
+	Data struct {
+		Attributes AlertGroup `json:"attributes"`
+
+		// Id Unique ID of the alert group
+		Id   string                     `json:"id"`
+		Type AlertGroupResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// AlertGroupResponseDataType defines model for AlertGroupResponse.Data.Type.
+type AlertGroupResponseDataType string
+
 // AlertList defines model for alert_list.
 type AlertList struct {
 	Data []struct {
@@ -5369,6 +5570,53 @@ type AlertTriggerParamsTriggerType string
 
 // AlertTriggerParamsTriggers Actions that trigger the workflow
 type AlertTriggerParamsTriggers string
+
+// AlertUrgency defines model for alert_urgency.
+type AlertUrgency struct {
+	// CreatedAt Date of creation
+	CreatedAt string `json:"created_at"`
+
+	// Description The description of the alert urgency
+	Description string `json:"description"`
+
+	// Name The name of the alert urgency
+	Name string `json:"name"`
+
+	// Position Position of the alert urgency
+	Position int `json:"position"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt string `json:"updated_at"`
+}
+
+// AlertUrgencyList defines model for alert_urgency_list.
+type AlertUrgencyList struct {
+	Data []struct {
+		Attributes AlertUrgency `json:"attributes"`
+
+		// Id Unique ID of the alert urgency
+		Id   string                   `json:"id"`
+		Type AlertUrgencyListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// AlertUrgencyListDataType defines model for AlertUrgencyList.Data.Type.
+type AlertUrgencyListDataType string
+
+// AlertUrgencyResponse defines model for alert_urgency_response.
+type AlertUrgencyResponse struct {
+	Data struct {
+		Attributes AlertUrgency `json:"attributes"`
+
+		// Id Unique ID of the alert urgency
+		Id   string                       `json:"id"`
+		Type AlertUrgencyResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// AlertUrgencyResponseDataType defines model for AlertUrgencyResponse.Data.Type.
+type AlertUrgencyResponseDataType string
 
 // ArchiveSlackChannelsTaskParams defines model for archive_slack_channels_task_params.
 type ArchiveSlackChannelsTaskParams struct {
@@ -7281,6 +7529,61 @@ type EscalationPolicyList struct {
 // EscalationPolicyListDataType defines model for EscalationPolicyList.Data.Type.
 type EscalationPolicyListDataType string
 
+// EscalationPolicyPath defines model for escalation_policy_path.
+type EscalationPolicyPath struct {
+	// CreatedAt Date of creation
+	CreatedAt *string `json:"created_at,omitempty"`
+
+	// Default Whether this escalation path is the default path
+	Default bool `json:"default"`
+
+	// EscalationPolicyId The ID of the escalation policy
+	EscalationPolicyId string `json:"escalation_policy_id"`
+
+	// Name The name of the escalation path
+	Name string `json:"name"`
+
+	// NotificationType Notification rule type
+	NotificationType string `json:"notification_type"`
+
+	// Repeat Whether this path should be repeated until someone acknowledges the alert
+	Repeat *bool `json:"repeat"`
+
+	// RepeatCount The number of times this path will be executed until someone acknowledges the alert
+	RepeatCount *int `json:"repeat_count"`
+
+	// Rules Escalation path rules
+	Rules *[]map[string]interface{} `json:"rules,omitempty"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt *string `json:"updated_at,omitempty"`
+}
+
+// EscalationPolicyPathList defines model for escalation_policy_path_list.
+type EscalationPolicyPathList struct {
+	Data []struct {
+		Attributes EscalationPolicyPath `json:"attributes"`
+
+		// Id Unique ID of the escalation policy path
+		Id string `json:"id"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// EscalationPolicyPathResponse defines model for escalation_policy_path_response.
+type EscalationPolicyPathResponse struct {
+	Data struct {
+		Attributes EscalationPolicyPath `json:"attributes"`
+
+		// Id Unique ID of the escalation policy path
+		Id   string                                `json:"id"`
+		Type *EscalationPolicyPathResponseDataType `json:"type,omitempty"`
+	} `json:"data"`
+}
+
+// EscalationPolicyPathResponseDataType defines model for EscalationPolicyPathResponse.Data.Type.
+type EscalationPolicyPathResponseDataType string
+
 // EscalationPolicyResponse defines model for escalation_policy_response.
 type EscalationPolicyResponse struct {
 	Data struct {
@@ -7687,7 +7990,7 @@ type Functionality struct {
 	// OwnersGroupIds Owner Teams associated with this functionality
 	OwnersGroupIds *[]string `json:"owners_group_ids"`
 
-	// OwnersUserIds Owner Users associated with this service
+	// OwnersUserIds Owner Users associated with this functionality
 	OwnersUserIds *[]int `json:"owners_user_ids"`
 
 	// Position Position of the functionality
@@ -7699,7 +8002,7 @@ type Functionality struct {
 	// ServiceIds Services associated with this functionality
 	ServiceIds *[]string `json:"service_ids"`
 
-	// SlackAliases Slack Aliases associated with this service
+	// SlackAliases Slack Aliases associated with this functionality
 	SlackAliases *[]struct {
 		// Id Slack alias ID
 		Id string `json:"id"`
@@ -7708,7 +8011,7 @@ type Functionality struct {
 		Name string `json:"name"`
 	} `json:"slack_aliases"`
 
-	// SlackChannels Slack Channels associated with this service
+	// SlackChannels Slack Channels associated with this functionality
 	SlackChannels *[]struct {
 		// Id Slack channel ID
 		Id string `json:"id"`
@@ -7856,6 +8159,9 @@ type GetPulsesTaskParamsTaskType string
 type Heartbeat struct {
 	// AlertSummary Summary of alerts triggered when heartbeat expires.
 	AlertSummary string `json:"alert_summary"`
+
+	// AlertUrgencyId Urgency of alerts triggered when heartbeat expires.
+	AlertUrgencyId *string `json:"alert_urgency_id"`
 
 	// CreatedAt Date of creation
 	CreatedAt string `json:"created_at"`
@@ -8023,6 +8329,9 @@ type Incident struct {
 	// ResolvedAt Date of resolution
 	ResolvedAt *string `json:"resolved_at"`
 
+	// RetrospectiveProgressStatus The status of the retrospective progress
+	RetrospectiveProgressStatus *IncidentRetrospectiveProgressStatus `json:"retrospective_progress_status"`
+
 	// ScheduledFor Date of when the maintenance begins
 	ScheduledFor *string `json:"scheduled_for"`
 
@@ -8059,6 +8368,9 @@ type Incident struct {
 	// UpdatedAt Date of last update
 	UpdatedAt string `json:"updated_at"`
 }
+
+// IncidentRetrospectiveProgressStatus The status of the retrospective progress
+type IncidentRetrospectiveProgressStatus string
 
 // IncidentActionItem defines model for incident_action_item.
 type IncidentActionItem struct {
@@ -9292,6 +9604,76 @@ type NewAlertDataAttributesStatus string
 // NewAlertDataType defines model for NewAlert.Data.Type.
 type NewAlertDataType string
 
+// NewAlertGroup defines model for new_alert_group.
+type NewAlertGroup struct {
+	Data struct {
+		Attributes struct {
+			// AlertGroupTargetsAttributes Attributes for alert group targets
+			AlertGroupTargetsAttributes struct {
+				// TargetId id for the Group, Service or EscalationPolicy
+				TargetId *openapi_types.UUID `json:"target_id,omitempty"`
+
+				// TargetType The type of the target.
+				TargetType *NewAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType `json:"target_type,omitempty"`
+			} `json:"alert_group_targets_attributes"`
+
+			// ConditionType Group alerts when ANY or ALL of the fields are matching.
+			ConditionType *NewAlertGroupDataAttributesConditionType `json:"condition_type,omitempty"`
+
+			// Description The description of the alert urgency
+			Description *string `json:"description"`
+
+			// GroupByAlertTitle Whether the alerts should be grouped by titles.
+			GroupByAlertTitle *NewAlertGroupDataAttributesGroupByAlertTitle `json:"group_by_alert_title,omitempty"`
+
+			// GroupByAlertUrgency Whether the alerts should be grouped by urgencies.
+			GroupByAlertUrgency *NewAlertGroupDataAttributesGroupByAlertUrgency `json:"group_by_alert_urgency,omitempty"`
+
+			// Name The name of the alert group
+			Name string `json:"name"`
+
+			// TimeWindow The length of time an Alert Group should stay open and accept new alerts
+			TimeWindow *int `json:"time_window,omitempty"`
+		} `json:"attributes"`
+		Type NewAlertGroupDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType The type of the target.
+type NewAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType string
+
+// NewAlertGroupDataAttributesConditionType Group alerts when ANY or ALL of the fields are matching.
+type NewAlertGroupDataAttributesConditionType string
+
+// NewAlertGroupDataAttributesGroupByAlertTitle Whether the alerts should be grouped by titles.
+type NewAlertGroupDataAttributesGroupByAlertTitle int
+
+// NewAlertGroupDataAttributesGroupByAlertUrgency Whether the alerts should be grouped by urgencies.
+type NewAlertGroupDataAttributesGroupByAlertUrgency int
+
+// NewAlertGroupDataType defines model for NewAlertGroup.Data.Type.
+type NewAlertGroupDataType string
+
+// NewAlertUrgency defines model for new_alert_urgency.
+type NewAlertUrgency struct {
+	Data struct {
+		Attributes struct {
+			// Description The description of the alert urgency
+			Description string `json:"description"`
+
+			// Name The name of the alert urgency
+			Name string `json:"name"`
+
+			// Position Position of the alert urgency
+			Position *int `json:"position"`
+		} `json:"attributes"`
+		Type NewAlertUrgencyDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewAlertUrgencyDataType defines model for NewAlertUrgency.Data.Type.
+type NewAlertUrgencyDataType string
+
 // NewAuthorization defines model for new_authorization.
 type NewAuthorization struct {
 	Data struct {
@@ -9565,6 +9947,35 @@ type NewEscalationPolicy struct {
 // NewEscalationPolicyDataType defines model for NewEscalationPolicy.Data.Type.
 type NewEscalationPolicyDataType string
 
+// NewEscalationPolicyPath defines model for new_escalation_policy_path.
+type NewEscalationPolicyPath struct {
+	Data struct {
+		Attributes struct {
+			// Name The name of the escalation path
+			Name string `json:"name"`
+
+			// NotificationType Notification rule type to be used
+			NotificationType *NewEscalationPolicyPathDataAttributesNotificationType `json:"notification_type,omitempty"`
+
+			// Repeat Whether this path should be repeated until someone acknowledges the alert
+			Repeat *bool `json:"repeat"`
+
+			// RepeatCount The number of times this path will be executed until someone acknowledges the alert
+			RepeatCount *int `json:"repeat_count"`
+
+			// RuleParams Escalation path conditions
+			RuleParams []map[string]interface{} `json:"rule_params"`
+		} `json:"attributes"`
+		Type NewEscalationPolicyPathDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewEscalationPolicyPathDataAttributesNotificationType Notification rule type to be used
+type NewEscalationPolicyPathDataAttributesNotificationType string
+
+// NewEscalationPolicyPathDataType defines model for NewEscalationPolicyPath.Data.Type.
+type NewEscalationPolicyPathDataType string
+
 // NewFormField defines model for new_form_field.
 type NewFormField struct {
 	Data struct {
@@ -9756,8 +10167,14 @@ type NewFormSetConditionDataType string
 type NewFunctionality struct {
 	Data struct {
 		Attributes struct {
+			// BackstageId The Backstage entity id associated to this functionality. eg: :namespace/:kind/:entity_name
+			BackstageId *string `json:"backstage_id"`
+
 			// Color The hex color of the functionality
 			Color *string `json:"color"`
+
+			// CortexId The Cortex group id associated to this functionality
+			CortexId *string `json:"cortex_id"`
 
 			// Description The description of the functionality
 			Description *string `json:"description"`
@@ -9771,11 +10188,17 @@ type NewFunctionality struct {
 			// NotifyEmails Emails to attach to the functionality
 			NotifyEmails *[]string `json:"notify_emails"`
 
+			// OpsgenieId The Opsgenie service id associated to this functionality
+			OpsgenieId *string `json:"opsgenie_id"`
+
 			// OwnersGroupIds Owner Teams associated with this functionality
 			OwnersGroupIds *[]string `json:"owners_group_ids"`
 
-			// OwnersUserIds Owner Users associated with this service
+			// OwnersUserIds Owner Users associated with this functionality
 			OwnersUserIds *[]int `json:"owners_user_ids"`
+
+			// PagerdutyId The PagerDuty service id associated to this functionality
+			PagerdutyId *string `json:"pagerduty_id"`
 
 			// Position Position of the functionality
 			Position *int `json:"position"`
@@ -9786,13 +10209,16 @@ type NewFunctionality struct {
 			// ServiceIds Services associated with this functionality
 			ServiceIds *[]string `json:"service_ids"`
 
+			// ServiceNowCiSysId The Service Now CI sys id associated to this functionality
+			ServiceNowCiSysId *string `json:"service_now_ci_sys_id"`
+
 			// ShowUptime Show uptime
 			ShowUptime *bool `json:"show_uptime"`
 
 			// ShowUptimeLastDays Show uptime over x days
 			ShowUptimeLastDays *NewFunctionalityDataAttributesShowUptimeLastDays `json:"show_uptime_last_days"`
 
-			// SlackAliases Slack Aliases associated with this service
+			// SlackAliases Slack Aliases associated with this functionality
 			SlackAliases *[]struct {
 				// Id Slack alias ID
 				Id string `json:"id"`
@@ -9801,7 +10227,7 @@ type NewFunctionality struct {
 				Name string `json:"name"`
 			} `json:"slack_aliases"`
 
-			// SlackChannels Slack Channels associated with this service
+			// SlackChannels Slack Channels associated with this functionality
 			SlackChannels *[]struct {
 				// Id Slack channel ID
 				Id string `json:"id"`
@@ -9826,6 +10252,9 @@ type NewHeartbeat struct {
 		Attributes struct {
 			// AlertSummary Summary of alerts triggered when heartbeat expires.
 			AlertSummary string `json:"alert_summary"`
+
+			// AlertUrgencyId Urgency of alerts triggered when heartbeat expires.
+			AlertUrgencyId *string `json:"alert_urgency_id"`
 
 			// Description The description of the heartbeat
 			Description *string `json:"description"`
@@ -9955,6 +10384,9 @@ type NewIncidentDataType string
 type NewIncidentActionItem struct {
 	Data struct {
 		Attributes struct {
+			// AssignedToUserId ID of user you wish to assign this action item
+			AssignedToUserId *int `json:"assigned_to_user_id,omitempty"`
+
 			// Description The description of the action item
 			Description *string `json:"description"`
 
@@ -10453,7 +10885,10 @@ type NewPulse struct {
 
 			// EnvironmentIds The Environment ID's to attach to the pulse
 			EnvironmentIds *[]string `json:"environment_ids"`
-			Labels         *[]struct {
+
+			// ExternalUrl The external url of the pulse
+			ExternalUrl *string `json:"external_url"`
+			Labels      *[]struct {
 				// Key Key of the tag
 				Key string `json:"key"`
 
@@ -10823,6 +11258,9 @@ type NewService struct {
 			// Color The hex color of the service
 			Color *string `json:"color"`
 
+			// CortexId The Cortex group id associated to this service
+			CortexId *string `json:"cortex_id"`
+
 			// Description The description of the service
 			Description *string `json:"description"`
 
@@ -10867,6 +11305,9 @@ type NewService struct {
 
 			// ServiceIds Services dependent on this service
 			ServiceIds *[]string `json:"service_ids"`
+
+			// ServiceNowCiSysId The Service Now CI sys id associated to this service
+			ServiceNowCiSysId *string `json:"service_now_ci_sys_id"`
 
 			// ShowUptime Show uptime
 			ShowUptime *bool `json:"show_uptime"`
@@ -11039,6 +11480,9 @@ type NewTeam struct {
 			// Color The hex color of the team
 			Color *string `json:"color"`
 
+			// CortexId The Cortex group id associated to this team
+			CortexId *string `json:"cortex_id"`
+
 			// Description The description of the team
 			Description *string `json:"description"`
 
@@ -11062,6 +11506,9 @@ type NewTeam struct {
 
 			// Position Position of the team
 			Position *int `json:"position"`
+
+			// ServiceNowCiSysId The Service Now CI sys id associated to this team
+			ServiceNowCiSysId *string `json:"service_now_ci_sys_id"`
 
 			// SlackAliases Slack Aliases associated with this service
 			SlackAliases *[]struct {
@@ -11854,7 +12301,10 @@ type Pulse struct {
 
 	// Environments Environments attached to the pulse
 	Environments *[]Environment `json:"environments,omitempty"`
-	Labels       *[]struct {
+
+	// ExternalUrl The external url of the pulse
+	ExternalUrl *string `json:"external_url"`
+	Labels      *[]struct {
 		// Key Key of the tag
 		Key string `json:"key"`
 
@@ -12832,6 +13282,9 @@ type Service struct {
 	// Color The hex color of the service
 	Color *string `json:"color"`
 
+	// CortexId The Cortex group id associated to this service
+	CortexId *string `json:"cortex_id"`
+
 	// CreatedAt Date of creation
 	CreatedAt string `json:"created_at"`
 
@@ -12879,6 +13332,9 @@ type Service struct {
 
 	// ServiceIds Services dependent on this service
 	ServiceIds *[]string `json:"service_ids"`
+
+	// ServiceNowCiSysId The Service Now CI sys id associated to this service
+	ServiceNowCiSysId *string `json:"service_now_ci_sys_id"`
 
 	// SlackAliases Slack Aliases associated with this service
 	SlackAliases *[]struct {
@@ -13341,6 +13797,9 @@ type Team struct {
 	// Color The hex color of the team
 	Color *string `json:"color"`
 
+	// CortexId The Cortex group id associated to this team
+	CortexId *string `json:"cortex_id"`
+
 	// CreatedAt Date of creation
 	CreatedAt string `json:"created_at"`
 
@@ -13367,6 +13826,9 @@ type Team struct {
 
 	// Position Position of the team
 	Position *int `json:"position"`
+
+	// ServiceNowCiSysId The Service Now CI sys id associated to this team
+	ServiceNowCiSysId *string `json:"service_now_ci_sys_id"`
 
 	// SlackAliases Slack Aliases associated with this service
 	SlackAliases *[]struct {
@@ -13544,6 +14006,76 @@ type UpdateAirtableTableRecordTaskParams struct {
 
 // UpdateAirtableTableRecordTaskParamsTaskType defines model for UpdateAirtableTableRecordTaskParams.TaskType.
 type UpdateAirtableTableRecordTaskParamsTaskType string
+
+// UpdateAlertGroup defines model for update_alert_group.
+type UpdateAlertGroup struct {
+	Data struct {
+		Attributes struct {
+			// AlertGroupTargetsAttributes Attributes for alert group targets
+			AlertGroupTargetsAttributes *struct {
+				// TargetId id for the Group, Service or EscalationPolicy
+				TargetId *openapi_types.UUID `json:"target_id,omitempty"`
+
+				// TargetType The type of the target.
+				TargetType *UpdateAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType `json:"target_type,omitempty"`
+			} `json:"alert_group_targets_attributes,omitempty"`
+
+			// ConditionType Group alerts when ANY or ALL of the fields are matching.
+			ConditionType *UpdateAlertGroupDataAttributesConditionType `json:"condition_type,omitempty"`
+
+			// Description The description of the alert group
+			Description *string `json:"description"`
+
+			// GroupByAlertTitle Whether the alerts should be grouped by titles.
+			GroupByAlertTitle *UpdateAlertGroupDataAttributesGroupByAlertTitle `json:"group_by_alert_title,omitempty"`
+
+			// GroupByAlertUrgency Whether the alerts should be grouped by urgencies.
+			GroupByAlertUrgency *UpdateAlertGroupDataAttributesGroupByAlertUrgency `json:"group_by_alert_urgency,omitempty"`
+
+			// Name The name of the alert group
+			Name *string `json:"name,omitempty"`
+
+			// TimeWindow The length of time an Alert Group should stay open and accept new alerts
+			TimeWindow *int `json:"time_window,omitempty"`
+		} `json:"attributes"`
+		Type UpdateAlertGroupDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType The type of the target.
+type UpdateAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType string
+
+// UpdateAlertGroupDataAttributesConditionType Group alerts when ANY or ALL of the fields are matching.
+type UpdateAlertGroupDataAttributesConditionType string
+
+// UpdateAlertGroupDataAttributesGroupByAlertTitle Whether the alerts should be grouped by titles.
+type UpdateAlertGroupDataAttributesGroupByAlertTitle int
+
+// UpdateAlertGroupDataAttributesGroupByAlertUrgency Whether the alerts should be grouped by urgencies.
+type UpdateAlertGroupDataAttributesGroupByAlertUrgency int
+
+// UpdateAlertGroupDataType defines model for UpdateAlertGroup.Data.Type.
+type UpdateAlertGroupDataType string
+
+// UpdateAlertUrgency defines model for update_alert_urgency.
+type UpdateAlertUrgency struct {
+	Data struct {
+		Attributes struct {
+			// Description The description of the alert urgency
+			Description *string `json:"description,omitempty"`
+
+			// Name The name of the alert urgency
+			Name *string `json:"name,omitempty"`
+
+			// Position Position of the alert urgency
+			Position *int `json:"position"`
+		} `json:"attributes"`
+		Type UpdateAlertUrgencyDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateAlertUrgencyDataType defines model for UpdateAlertUrgency.Data.Type.
+type UpdateAlertUrgencyDataType string
 
 // UpdateAsanaTaskTaskParams defines model for update_asana_task_task_params.
 type UpdateAsanaTaskTaskParams struct {
@@ -13884,6 +14416,35 @@ type UpdateEscalationPolicy struct {
 // UpdateEscalationPolicyDataType defines model for UpdateEscalationPolicy.Data.Type.
 type UpdateEscalationPolicyDataType string
 
+// UpdateEscalationPolicyPath defines model for update_escalation_policy_path.
+type UpdateEscalationPolicyPath struct {
+	Data struct {
+		Attributes struct {
+			// Name The name of the escalation path
+			Name *string `json:"name,omitempty"`
+
+			// NotificationType Position of the escalation policy level
+			NotificationType *UpdateEscalationPolicyPathDataAttributesNotificationType `json:"notification_type,omitempty"`
+
+			// Repeat Whether this path should be repeated until someone acknowledges the alert
+			Repeat *bool `json:"repeat"`
+
+			// RepeatCount The number of times this path will be executed until someone acknowledges the alert
+			RepeatCount *int `json:"repeat_count"`
+
+			// RuleParams Escalation path conditions
+			RuleParams *[]map[string]interface{} `json:"rule_params,omitempty"`
+		} `json:"attributes"`
+		Type UpdateEscalationPolicyPathDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateEscalationPolicyPathDataAttributesNotificationType Position of the escalation policy level
+type UpdateEscalationPolicyPathDataAttributesNotificationType string
+
+// UpdateEscalationPolicyPathDataType defines model for UpdateEscalationPolicyPath.Data.Type.
+type UpdateEscalationPolicyPathDataType string
+
 // UpdateFormField defines model for update_form_field.
 type UpdateFormField struct {
 	Data struct {
@@ -14090,7 +14651,7 @@ type UpdateFunctionality struct {
 			// OwnersGroupIds Owner Teams associated with this functionality
 			OwnersGroupIds *[]string `json:"owners_group_ids"`
 
-			// OwnersUserIds Owner Users associated with this service
+			// OwnersUserIds Owner Users associated with this functionality
 			OwnersUserIds *[]int `json:"owners_user_ids"`
 
 			// Position Position of the functionality
@@ -14102,7 +14663,7 @@ type UpdateFunctionality struct {
 			// ServiceIds Services associated with this functionality
 			ServiceIds *[]string `json:"service_ids"`
 
-			// SlackAliases Slack Aliases associated with this service
+			// SlackAliases Slack Aliases associated with this functionality
 			SlackAliases *[]struct {
 				// Id Slack alias ID
 				Id string `json:"id"`
@@ -14111,7 +14672,7 @@ type UpdateFunctionality struct {
 				Name string `json:"name"`
 			} `json:"slack_aliases"`
 
-			// SlackChannels Slack Channels associated with this service
+			// SlackChannels Slack Channels associated with this functionality
 			SlackChannels *[]struct {
 				// Id Slack channel ID
 				Id string `json:"id"`
@@ -14255,6 +14816,9 @@ type UpdateHeartbeat struct {
 			// AlertSummary Summary of alerts triggered when heartbeat expires.
 			AlertSummary *string `json:"alert_summary,omitempty"`
 
+			// AlertUrgencyId Urgency of alerts triggered when heartbeat expires.
+			AlertUrgencyId *string `json:"alert_urgency_id"`
+
 			// Description The description of the heartbeat
 			Description *string `json:"description"`
 
@@ -14380,6 +14944,9 @@ type UpdateIncidentDataType string
 type UpdateIncidentActionItem struct {
 	Data struct {
 		Attributes struct {
+			// AssignedToUserId ID of user you wish to assign this action item
+			AssignedToUserId *int `json:"assigned_to_user_id,omitempty"`
+
 			// Description The description of the action item
 			Description *string `json:"description"`
 
@@ -15220,7 +15787,10 @@ type UpdatePulse struct {
 
 			// EnvironmentIds The Environment ID's to attach to the pulse
 			EnvironmentIds *[]string `json:"environment_ids"`
-			Labels         *[]struct {
+
+			// ExternalUrl The external url of the pulse
+			ExternalUrl *string `json:"external_url"`
+			Labels      *[]struct {
 				// Key Key of the tag
 				Key string `json:"key"`
 
@@ -15601,6 +16171,9 @@ type UpdateService struct {
 			// Color The hex color of the service
 			Color *string `json:"color"`
 
+			// CortexId The Cortex group id associated to this service
+			CortexId *string `json:"cortex_id"`
+
 			// Description The description of the service
 			Description *string `json:"description"`
 
@@ -15645,6 +16218,9 @@ type UpdateService struct {
 
 			// ServiceIds Services dependent on this service
 			ServiceIds *[]string `json:"service_ids"`
+
+			// ServiceNowCiSysId The Service Now CI sys id associated to this service
+			ServiceNowCiSysId *string `json:"service_now_ci_sys_id"`
 
 			// SlackAliases Slack Aliases associated with this service
 			SlackAliases *[]struct {
@@ -15916,6 +16492,9 @@ type UpdateTeam struct {
 			// Color The hex color of the team
 			Color *string `json:"color"`
 
+			// CortexId The Cortex group id associated to this team
+			CortexId *string `json:"cortex_id"`
+
 			// Description The description of the team
 			Description *string `json:"description"`
 
@@ -15939,6 +16518,9 @@ type UpdateTeam struct {
 
 			// Position Position of the team
 			Position *int `json:"position"`
+
+			// ServiceNowCiSysId The Service Now CI sys id associated to this team
+			ServiceNowCiSysId *string `json:"service_now_ci_sys_id"`
 
 			// SlackAliases Slack Aliases associated with this service
 			SlackAliases *[]struct {
@@ -16726,19 +17308,20 @@ type WorkflowResponseDataType string
 
 // WorkflowRun defines model for workflow_run.
 type WorkflowRun struct {
-	ActionItemId  *string                `json:"action_item_id"`
-	AlertId       *string                `json:"alert_id"`
-	CanceledAt    *string                `json:"canceled_at"`
-	CompletedAt   *string                `json:"completed_at"`
-	FailedAt      *string                `json:"failed_at"`
-	IncidentId    *string                `json:"incident_id"`
-	PostMortemId  *string                `json:"post_mortem_id"`
-	PulseId       *string                `json:"pulse_id"`
-	StartedAt     *string                `json:"started_at"`
-	Status        WorkflowRunStatus      `json:"status"`
-	StatusMessage *string                `json:"status_message"`
-	TriggeredBy   WorkflowRunTriggeredBy `json:"triggered_by"`
-	WorkflowId    string                 `json:"workflow_id"`
+	ActionItemId  *string                 `json:"action_item_id"`
+	AlertId       *string                 `json:"alert_id"`
+	CanceledAt    *string                 `json:"canceled_at"`
+	CompletedAt   *string                 `json:"completed_at"`
+	Context       *map[string]interface{} `json:"context,omitempty"`
+	FailedAt      *string                 `json:"failed_at"`
+	IncidentId    *string                 `json:"incident_id"`
+	PostMortemId  *string                 `json:"post_mortem_id"`
+	PulseId       *string                 `json:"pulse_id"`
+	StartedAt     *string                 `json:"started_at"`
+	Status        WorkflowRunStatus       `json:"status"`
+	StatusMessage *string                 `json:"status_message"`
+	TriggeredBy   WorkflowRunTriggeredBy  `json:"triggered_by"`
+	WorkflowId    string                  `json:"workflow_id"`
 }
 
 // WorkflowRunStatus defines model for WorkflowRun.Status.
@@ -16857,6 +17440,25 @@ type ListAllIncidentActionItemsParams struct {
 	FilterCreatedAtLt          *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
 	FilterCreatedAtLte         *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
 	Sort                       *string `form:"sort,omitempty" json:"sort,omitempty"`
+}
+
+// ListAlertGroupsParams defines parameters for ListAlertGroups.
+type ListAlertGroupsParams struct {
+	Include *string `form:"include,omitempty" json:"include,omitempty"`
+}
+
+// ListAlertUrgenciesParams defines parameters for ListAlertUrgencies.
+type ListAlertUrgenciesParams struct {
+	Include            *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSearch       *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
+	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	Sort               *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // ListAlertsParams defines parameters for ListAlerts.
@@ -16993,6 +17595,13 @@ type ListEnvironmentsParams struct {
 	Sort               *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
+// ListEscalationLevelsPathsParams defines parameters for ListEscalationLevelsPaths.
+type ListEscalationLevelsPathsParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+}
+
 // ListEscalationPoliciesParams defines parameters for ListEscalationPolicies.
 type ListEscalationPoliciesParams struct {
 	Include    *string `form:"include,omitempty" json:"include,omitempty"`
@@ -17000,8 +17609,15 @@ type ListEscalationPoliciesParams struct {
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
-// ListEscalationLevelsParams defines parameters for ListEscalationLevels.
-type ListEscalationLevelsParams struct {
+// ListEscalationLevelsPoliciesParams defines parameters for ListEscalationLevelsPolicies.
+type ListEscalationLevelsPoliciesParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+}
+
+// ListEscalationPathsParams defines parameters for ListEscalationPaths.
+type ListEscalationPathsParams struct {
 	Include    *string `form:"include,omitempty" json:"include,omitempty"`
 	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
@@ -17284,6 +17900,7 @@ type ListIncidentAlertsParams struct {
 	FilterSource       *string `form:"filter[source],omitempty" json:"filter[source],omitempty"`
 	FilterServices     *string `form:"filter[services],omitempty" json:"filter[services],omitempty"`
 	FilterEnvironments *string `form:"filter[environments],omitempty" json:"filter[environments],omitempty"`
+	FilterGroups       *string `form:"filter[groups],omitempty" json:"filter[groups],omitempty"`
 	FilterLabels       *string `form:"filter[labels],omitempty" json:"filter[labels],omitempty"`
 	FilterStartedAtGt  *string `form:"filter[started_at][gt],omitempty" json:"filter[started_at][gt],omitempty"`
 	FilterStartedAtGte *string `form:"filter[started_at][gte],omitempty" json:"filter[started_at][gte],omitempty"`
@@ -17710,6 +18327,18 @@ type ListWorkflowTasksParams struct {
 // UpdateIncidentActionItemApplicationVndAPIPlusJSONRequestBody defines body for UpdateIncidentActionItem for application/vnd.api+json ContentType.
 type UpdateIncidentActionItemApplicationVndAPIPlusJSONRequestBody = UpdateIncidentActionItem
 
+// CreateAlertGroupApplicationVndAPIPlusJSONRequestBody defines body for CreateAlertGroup for application/vnd.api+json ContentType.
+type CreateAlertGroupApplicationVndAPIPlusJSONRequestBody = NewAlertGroup
+
+// UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody defines body for UpdateAlertGroup for application/vnd.api+json ContentType.
+type UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody = UpdateAlertGroup
+
+// CreateAlertUrgencyApplicationVndAPIPlusJSONRequestBody defines body for CreateAlertUrgency for application/vnd.api+json ContentType.
+type CreateAlertUrgencyApplicationVndAPIPlusJSONRequestBody = NewAlertUrgency
+
+// UpdateAlertUrgencyApplicationVndAPIPlusJSONRequestBody defines body for UpdateAlertUrgency for application/vnd.api+json ContentType.
+type UpdateAlertUrgencyApplicationVndAPIPlusJSONRequestBody = UpdateAlertUrgency
+
 // CreateAlertApplicationVndAPIPlusJSONRequestBody defines body for CreateAlert for application/vnd.api+json ContentType.
 type CreateAlertApplicationVndAPIPlusJSONRequestBody = NewAlert
 
@@ -17767,11 +18396,20 @@ type UpdateEnvironmentApplicationVndAPIPlusJSONRequestBody = UpdateEnvironment
 // UpdateEscalationLevelApplicationVndAPIPlusJSONRequestBody defines body for UpdateEscalationLevel for application/vnd.api+json ContentType.
 type UpdateEscalationLevelApplicationVndAPIPlusJSONRequestBody = UpdateEscalationLevel
 
+// CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody defines body for CreateEscalationLevelPaths for application/vnd.api+json ContentType.
+type CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody = NewEscalationLevel
+
+// UpdateEscalationPathApplicationVndAPIPlusJSONRequestBody defines body for UpdateEscalationPath for application/vnd.api+json ContentType.
+type UpdateEscalationPathApplicationVndAPIPlusJSONRequestBody = UpdateEscalationPolicyPath
+
 // CreateEscalationPolicyApplicationVndAPIPlusJSONRequestBody defines body for CreateEscalationPolicy for application/vnd.api+json ContentType.
 type CreateEscalationPolicyApplicationVndAPIPlusJSONRequestBody = NewEscalationPolicy
 
-// CreateEscalationLevelApplicationVndAPIPlusJSONRequestBody defines body for CreateEscalationLevel for application/vnd.api+json ContentType.
-type CreateEscalationLevelApplicationVndAPIPlusJSONRequestBody = NewEscalationLevel
+// CreateEscalationLevelPoliciesApplicationVndAPIPlusJSONRequestBody defines body for CreateEscalationLevelPolicies for application/vnd.api+json ContentType.
+type CreateEscalationLevelPoliciesApplicationVndAPIPlusJSONRequestBody = NewEscalationLevel
+
+// CreateEscalationPathApplicationVndAPIPlusJSONRequestBody defines body for CreateEscalationPath for application/vnd.api+json ContentType.
+type CreateEscalationPathApplicationVndAPIPlusJSONRequestBody = NewEscalationPolicyPath
 
 // UpdateEscalationPolicyApplicationVndAPIPlusJSONRequestBody defines body for UpdateEscalationPolicy for application/vnd.api+json ContentType.
 type UpdateEscalationPolicyApplicationVndAPIPlusJSONRequestBody = UpdateEscalationPolicy
@@ -28468,6 +29106,44 @@ type ClientInterface interface {
 
 	UpdateIncidentActionItemWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateIncidentActionItemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListAlertGroups request
+	ListAlertGroups(ctx context.Context, params *ListAlertGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateAlertGroupWithBody request with any body
+	CreateAlertGroupWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateAlertGroupWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateAlertGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteAlertGroup request
+	DeleteAlertGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetAlertGroup request
+	GetAlertGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateAlertGroupWithBody request with any body
+	UpdateAlertGroupWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateAlertGroupWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListAlertUrgencies request
+	ListAlertUrgencies(ctx context.Context, params *ListAlertUrgenciesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateAlertUrgencyWithBody request with any body
+	CreateAlertUrgencyWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateAlertUrgencyWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateAlertUrgencyApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteAlertUrgency request
+	DeleteAlertUrgency(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetAlertUrgency request
+	GetAlertUrgency(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateAlertUrgencyWithBody request with any body
+	UpdateAlertUrgencyWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateAlertUrgencyWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAlertUrgencyApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListAlerts request
 	ListAlerts(ctx context.Context, params *ListAlertsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -28662,6 +29338,25 @@ type ClientInterface interface {
 
 	UpdateEscalationLevelWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateEscalationLevelApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListEscalationLevelsPaths request
+	ListEscalationLevelsPaths(ctx context.Context, escalationPolicyPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateEscalationLevelPathsWithBody request with any body
+	CreateEscalationLevelPathsWithBody(ctx context.Context, escalationPolicyPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPolicyPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteEscalationPath request
+	DeleteEscalationPath(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetEscalationPath request
+	GetEscalationPath(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateEscalationPathWithBody request with any body
+	UpdateEscalationPathWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateEscalationPathWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateEscalationPathApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListEscalationPolicies request
 	ListEscalationPolicies(ctx context.Context, params *ListEscalationPoliciesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -28670,13 +29365,21 @@ type ClientInterface interface {
 
 	CreateEscalationPolicyWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateEscalationPolicyApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ListEscalationLevels request
-	ListEscalationLevels(ctx context.Context, escalationPolicyId string, params *ListEscalationLevelsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// ListEscalationLevelsPolicies request
+	ListEscalationLevelsPolicies(ctx context.Context, escalationPolicyId string, params *ListEscalationLevelsPoliciesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CreateEscalationLevelWithBody request with any body
-	CreateEscalationLevelWithBody(ctx context.Context, escalationPolicyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// CreateEscalationLevelPoliciesWithBody request with any body
+	CreateEscalationLevelPoliciesWithBody(ctx context.Context, escalationPolicyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	CreateEscalationLevelWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPolicyId string, body CreateEscalationLevelApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	CreateEscalationLevelPoliciesWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPolicyId string, body CreateEscalationLevelPoliciesApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListEscalationPaths request
+	ListEscalationPaths(ctx context.Context, escalationPolicyId string, params *ListEscalationPathsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateEscalationPathWithBody request with any body
+	CreateEscalationPathWithBody(ctx context.Context, escalationPolicyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateEscalationPathWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPolicyId string, body CreateEscalationPathApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteEscalationPolicy request
 	DeleteEscalationPolicy(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -29819,6 +30522,174 @@ func (c *Client) UpdateIncidentActionItemWithApplicationVndAPIPlusJSONBody(ctx c
 	return c.Client.Do(req)
 }
 
+func (c *Client) ListAlertGroups(ctx context.Context, params *ListAlertGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListAlertGroupsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateAlertGroupWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateAlertGroupRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateAlertGroupWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateAlertGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateAlertGroupRequestWithApplicationVndAPIPlusJSONBody(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteAlertGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteAlertGroupRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetAlertGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAlertGroupRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateAlertGroupWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateAlertGroupRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateAlertGroupWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateAlertGroupRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListAlertUrgencies(ctx context.Context, params *ListAlertUrgenciesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListAlertUrgenciesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateAlertUrgencyWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateAlertUrgencyRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateAlertUrgencyWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateAlertUrgencyApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateAlertUrgencyRequestWithApplicationVndAPIPlusJSONBody(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteAlertUrgency(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteAlertUrgencyRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetAlertUrgency(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAlertUrgencyRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateAlertUrgencyWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateAlertUrgencyRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateAlertUrgencyWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAlertUrgencyApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateAlertUrgencyRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) ListAlerts(ctx context.Context, params *ListAlertsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListAlertsRequest(c.Server, params)
 	if err != nil {
@@ -30671,6 +31542,90 @@ func (c *Client) UpdateEscalationLevelWithApplicationVndAPIPlusJSONBody(ctx cont
 	return c.Client.Do(req)
 }
 
+func (c *Client) ListEscalationLevelsPaths(ctx context.Context, escalationPolicyPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListEscalationLevelsPathsRequest(c.Server, escalationPolicyPathId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateEscalationLevelPathsWithBody(ctx context.Context, escalationPolicyPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateEscalationLevelPathsRequestWithBody(c.Server, escalationPolicyPathId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPolicyPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateEscalationLevelPathsRequestWithApplicationVndAPIPlusJSONBody(c.Server, escalationPolicyPathId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteEscalationPath(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteEscalationPathRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetEscalationPath(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetEscalationPathRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateEscalationPathWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateEscalationPathRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateEscalationPathWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateEscalationPathApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateEscalationPathRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) ListEscalationPolicies(ctx context.Context, params *ListEscalationPoliciesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListEscalationPoliciesRequest(c.Server, params)
 	if err != nil {
@@ -30707,8 +31662,8 @@ func (c *Client) CreateEscalationPolicyWithApplicationVndAPIPlusJSONBody(ctx con
 	return c.Client.Do(req)
 }
 
-func (c *Client) ListEscalationLevels(ctx context.Context, escalationPolicyId string, params *ListEscalationLevelsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewListEscalationLevelsRequest(c.Server, escalationPolicyId, params)
+func (c *Client) ListEscalationLevelsPolicies(ctx context.Context, escalationPolicyId string, params *ListEscalationLevelsPoliciesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListEscalationLevelsPoliciesRequest(c.Server, escalationPolicyId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -30719,8 +31674,8 @@ func (c *Client) ListEscalationLevels(ctx context.Context, escalationPolicyId st
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateEscalationLevelWithBody(ctx context.Context, escalationPolicyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateEscalationLevelRequestWithBody(c.Server, escalationPolicyId, contentType, body)
+func (c *Client) CreateEscalationLevelPoliciesWithBody(ctx context.Context, escalationPolicyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateEscalationLevelPoliciesRequestWithBody(c.Server, escalationPolicyId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -30731,8 +31686,44 @@ func (c *Client) CreateEscalationLevelWithBody(ctx context.Context, escalationPo
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateEscalationLevelWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPolicyId string, body CreateEscalationLevelApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateEscalationLevelRequestWithApplicationVndAPIPlusJSONBody(c.Server, escalationPolicyId, body)
+func (c *Client) CreateEscalationLevelPoliciesWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPolicyId string, body CreateEscalationLevelPoliciesApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateEscalationLevelPoliciesRequestWithApplicationVndAPIPlusJSONBody(c.Server, escalationPolicyId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListEscalationPaths(ctx context.Context, escalationPolicyId string, params *ListEscalationPathsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListEscalationPathsRequest(c.Server, escalationPolicyId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateEscalationPathWithBody(ctx context.Context, escalationPolicyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateEscalationPathRequestWithBody(c.Server, escalationPolicyId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateEscalationPathWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPolicyId string, body CreateEscalationPathApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateEscalationPathRequestWithApplicationVndAPIPlusJSONBody(c.Server, escalationPolicyId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -35987,6 +36978,558 @@ func NewUpdateIncidentActionItemRequestWithBody(server string, id string, conten
 	return req, nil
 }
 
+// NewListAlertGroupsRequest generates requests for ListAlertGroups
+func NewListAlertGroupsRequest(server string, params *ListAlertGroupsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_groups")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateAlertGroupRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateAlertGroup builder with application/vnd.api+json body
+func NewCreateAlertGroupRequestWithApplicationVndAPIPlusJSONBody(server string, body CreateAlertGroupApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateAlertGroupRequestWithBody(server, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateAlertGroupRequestWithBody generates requests for CreateAlertGroup with any type of body
+func NewCreateAlertGroupRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_groups")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteAlertGroupRequest generates requests for DeleteAlertGroup
+func NewDeleteAlertGroupRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_groups/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetAlertGroupRequest generates requests for GetAlertGroup
+func NewGetAlertGroupRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_groups/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateAlertGroupRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateAlertGroup builder with application/vnd.api+json body
+func NewUpdateAlertGroupRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateAlertGroupRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateAlertGroupRequestWithBody generates requests for UpdateAlertGroup with any type of body
+func NewUpdateAlertGroupRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_groups/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PATCH", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListAlertUrgenciesRequest generates requests for ListAlertUrgencies
+func NewListAlertUrgenciesRequest(server string, params *ListAlertUrgenciesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_urgencies")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterSearch != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[search]", runtime.ParamLocationQuery, *params.FilterSearch); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterName != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[name]", runtime.ParamLocationQuery, *params.FilterName); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gte]", runtime.ParamLocationQuery, *params.FilterCreatedAtGte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lte]", runtime.ParamLocationQuery, *params.FilterCreatedAtLte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateAlertUrgencyRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateAlertUrgency builder with application/vnd.api+json body
+func NewCreateAlertUrgencyRequestWithApplicationVndAPIPlusJSONBody(server string, body CreateAlertUrgencyApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateAlertUrgencyRequestWithBody(server, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateAlertUrgencyRequestWithBody generates requests for CreateAlertUrgency with any type of body
+func NewCreateAlertUrgencyRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_urgencies")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteAlertUrgencyRequest generates requests for DeleteAlertUrgency
+func NewDeleteAlertUrgencyRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_urgencies/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetAlertUrgencyRequest generates requests for GetAlertUrgency
+func NewGetAlertUrgencyRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_urgencies/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateAlertUrgencyRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateAlertUrgency builder with application/vnd.api+json body
+func NewUpdateAlertUrgencyRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateAlertUrgencyApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateAlertUrgencyRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateAlertUrgencyRequestWithBody generates requests for UpdateAlertUrgency with any type of body
+func NewUpdateAlertUrgencyRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_urgencies/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListAlertsRequest generates requests for ListAlerts
 func NewListAlertsRequest(server string, params *ListAlertsParams) (*http.Request, error) {
 	var err error
@@ -39323,6 +40866,256 @@ func NewUpdateEscalationLevelRequestWithBody(server string, id string, contentTy
 	return req, nil
 }
 
+// NewListEscalationLevelsPathsRequest generates requests for ListEscalationLevelsPaths
+func NewListEscalationLevelsPathsRequest(server string, escalationPolicyPathId string, params *ListEscalationLevelsPathsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "escalation_policy_path_id", runtime.ParamLocationPath, escalationPolicyPathId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/escalation_paths/%s/escalation_levels", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateEscalationLevelPathsRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateEscalationLevelPaths builder with application/vnd.api+json body
+func NewCreateEscalationLevelPathsRequestWithApplicationVndAPIPlusJSONBody(server string, escalationPolicyPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateEscalationLevelPathsRequestWithBody(server, escalationPolicyPathId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateEscalationLevelPathsRequestWithBody generates requests for CreateEscalationLevelPaths with any type of body
+func NewCreateEscalationLevelPathsRequestWithBody(server string, escalationPolicyPathId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "escalation_policy_path_id", runtime.ParamLocationPath, escalationPolicyPathId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/escalation_paths/%s/escalation_levels", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteEscalationPathRequest generates requests for DeleteEscalationPath
+func NewDeleteEscalationPathRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/escalation_paths/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetEscalationPathRequest generates requests for GetEscalationPath
+func NewGetEscalationPathRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/escalation_paths/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateEscalationPathRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateEscalationPath builder with application/vnd.api+json body
+func NewUpdateEscalationPathRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateEscalationPathApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateEscalationPathRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateEscalationPathRequestWithBody generates requests for UpdateEscalationPath with any type of body
+func NewUpdateEscalationPathRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/escalation_paths/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListEscalationPoliciesRequest generates requests for ListEscalationPolicies
 func NewListEscalationPoliciesRequest(server string, params *ListEscalationPoliciesParams) (*http.Request, error) {
 	var err error
@@ -39444,8 +41237,8 @@ func NewCreateEscalationPolicyRequestWithBody(server string, contentType string,
 	return req, nil
 }
 
-// NewListEscalationLevelsRequest generates requests for ListEscalationLevels
-func NewListEscalationLevelsRequest(server string, escalationPolicyId string, params *ListEscalationLevelsParams) (*http.Request, error) {
+// NewListEscalationLevelsPoliciesRequest generates requests for ListEscalationLevelsPolicies
+func NewListEscalationLevelsPoliciesRequest(server string, escalationPolicyId string, params *ListEscalationLevelsPoliciesParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -39532,19 +41325,19 @@ func NewListEscalationLevelsRequest(server string, escalationPolicyId string, pa
 	return req, nil
 }
 
-// NewCreateEscalationLevelRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateEscalationLevel builder with application/vnd.api+json body
-func NewCreateEscalationLevelRequestWithApplicationVndAPIPlusJSONBody(server string, escalationPolicyId string, body CreateEscalationLevelApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+// NewCreateEscalationLevelPoliciesRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateEscalationLevelPolicies builder with application/vnd.api+json body
+func NewCreateEscalationLevelPoliciesRequestWithApplicationVndAPIPlusJSONBody(server string, escalationPolicyId string, body CreateEscalationLevelPoliciesApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewCreateEscalationLevelRequestWithBody(server, escalationPolicyId, "application/vnd.api+json", bodyReader)
+	return NewCreateEscalationLevelPoliciesRequestWithBody(server, escalationPolicyId, "application/vnd.api+json", bodyReader)
 }
 
-// NewCreateEscalationLevelRequestWithBody generates requests for CreateEscalationLevel with any type of body
-func NewCreateEscalationLevelRequestWithBody(server string, escalationPolicyId string, contentType string, body io.Reader) (*http.Request, error) {
+// NewCreateEscalationLevelPoliciesRequestWithBody generates requests for CreateEscalationLevelPolicies with any type of body
+func NewCreateEscalationLevelPoliciesRequestWithBody(server string, escalationPolicyId string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -39560,6 +41353,141 @@ func NewCreateEscalationLevelRequestWithBody(server string, escalationPolicyId s
 	}
 
 	operationPath := fmt.Sprintf("/v1/escalation_policies/%s/escalation_levels", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListEscalationPathsRequest generates requests for ListEscalationPaths
+func NewListEscalationPathsRequest(server string, escalationPolicyId string, params *ListEscalationPathsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "escalation_policy_id", runtime.ParamLocationPath, escalationPolicyId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/escalation_policies/%s/escalation_paths", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateEscalationPathRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateEscalationPath builder with application/vnd.api+json body
+func NewCreateEscalationPathRequestWithApplicationVndAPIPlusJSONBody(server string, escalationPolicyId string, body CreateEscalationPathApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateEscalationPathRequestWithBody(server, escalationPolicyId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateEscalationPathRequestWithBody generates requests for CreateEscalationPath with any type of body
+func NewCreateEscalationPathRequestWithBody(server string, escalationPolicyId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "escalation_policy_id", runtime.ParamLocationPath, escalationPolicyId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/escalation_policies/%s/escalation_paths", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -47383,6 +49311,22 @@ func NewListIncidentAlertsRequest(server string, incidentId string, params *List
 		if params.FilterEnvironments != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[environments]", runtime.ParamLocationQuery, *params.FilterEnvironments); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterGroups != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[groups]", runtime.ParamLocationQuery, *params.FilterGroups); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 				return nil, err
@@ -57894,6 +59838,44 @@ type ClientWithResponsesInterface interface {
 
 	UpdateIncidentActionItemWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateIncidentActionItemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIncidentActionItemResponse, error)
 
+	// ListAlertGroupsWithResponse request
+	ListAlertGroupsWithResponse(ctx context.Context, params *ListAlertGroupsParams, reqEditors ...RequestEditorFn) (*ListAlertGroupsResponse, error)
+
+	// CreateAlertGroupWithBodyWithResponse request with any body
+	CreateAlertGroupWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateAlertGroupResponse, error)
+
+	CreateAlertGroupWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateAlertGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateAlertGroupResponse, error)
+
+	// DeleteAlertGroupWithResponse request
+	DeleteAlertGroupWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteAlertGroupResponse, error)
+
+	// GetAlertGroupWithResponse request
+	GetAlertGroupWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetAlertGroupResponse, error)
+
+	// UpdateAlertGroupWithBodyWithResponse request with any body
+	UpdateAlertGroupWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAlertGroupResponse, error)
+
+	UpdateAlertGroupWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAlertGroupResponse, error)
+
+	// ListAlertUrgenciesWithResponse request
+	ListAlertUrgenciesWithResponse(ctx context.Context, params *ListAlertUrgenciesParams, reqEditors ...RequestEditorFn) (*ListAlertUrgenciesResponse, error)
+
+	// CreateAlertUrgencyWithBodyWithResponse request with any body
+	CreateAlertUrgencyWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateAlertUrgencyResponse, error)
+
+	CreateAlertUrgencyWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateAlertUrgencyApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateAlertUrgencyResponse, error)
+
+	// DeleteAlertUrgencyWithResponse request
+	DeleteAlertUrgencyWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteAlertUrgencyResponse, error)
+
+	// GetAlertUrgencyWithResponse request
+	GetAlertUrgencyWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetAlertUrgencyResponse, error)
+
+	// UpdateAlertUrgencyWithBodyWithResponse request with any body
+	UpdateAlertUrgencyWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAlertUrgencyResponse, error)
+
+	UpdateAlertUrgencyWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateAlertUrgencyApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAlertUrgencyResponse, error)
+
 	// ListAlertsWithResponse request
 	ListAlertsWithResponse(ctx context.Context, params *ListAlertsParams, reqEditors ...RequestEditorFn) (*ListAlertsResponse, error)
 
@@ -58088,6 +60070,25 @@ type ClientWithResponsesInterface interface {
 
 	UpdateEscalationLevelWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateEscalationLevelApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateEscalationLevelResponse, error)
 
+	// ListEscalationLevelsPathsWithResponse request
+	ListEscalationLevelsPathsWithResponse(ctx context.Context, escalationPolicyPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*ListEscalationLevelsPathsResponse, error)
+
+	// CreateEscalationLevelPathsWithBodyWithResponse request with any body
+	CreateEscalationLevelPathsWithBodyWithResponse(ctx context.Context, escalationPolicyPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error)
+
+	CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPolicyPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error)
+
+	// DeleteEscalationPathWithResponse request
+	DeleteEscalationPathWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteEscalationPathResponse, error)
+
+	// GetEscalationPathWithResponse request
+	GetEscalationPathWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetEscalationPathResponse, error)
+
+	// UpdateEscalationPathWithBodyWithResponse request with any body
+	UpdateEscalationPathWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateEscalationPathResponse, error)
+
+	UpdateEscalationPathWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateEscalationPathApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateEscalationPathResponse, error)
+
 	// ListEscalationPoliciesWithResponse request
 	ListEscalationPoliciesWithResponse(ctx context.Context, params *ListEscalationPoliciesParams, reqEditors ...RequestEditorFn) (*ListEscalationPoliciesResponse, error)
 
@@ -58096,13 +60097,21 @@ type ClientWithResponsesInterface interface {
 
 	CreateEscalationPolicyWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateEscalationPolicyApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationPolicyResponse, error)
 
-	// ListEscalationLevelsWithResponse request
-	ListEscalationLevelsWithResponse(ctx context.Context, escalationPolicyId string, params *ListEscalationLevelsParams, reqEditors ...RequestEditorFn) (*ListEscalationLevelsResponse, error)
+	// ListEscalationLevelsPoliciesWithResponse request
+	ListEscalationLevelsPoliciesWithResponse(ctx context.Context, escalationPolicyId string, params *ListEscalationLevelsPoliciesParams, reqEditors ...RequestEditorFn) (*ListEscalationLevelsPoliciesResponse, error)
 
-	// CreateEscalationLevelWithBodyWithResponse request with any body
-	CreateEscalationLevelWithBodyWithResponse(ctx context.Context, escalationPolicyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationLevelResponse, error)
+	// CreateEscalationLevelPoliciesWithBodyWithResponse request with any body
+	CreateEscalationLevelPoliciesWithBodyWithResponse(ctx context.Context, escalationPolicyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPoliciesResponse, error)
 
-	CreateEscalationLevelWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPolicyId string, body CreateEscalationLevelApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationLevelResponse, error)
+	CreateEscalationLevelPoliciesWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPolicyId string, body CreateEscalationLevelPoliciesApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPoliciesResponse, error)
+
+	// ListEscalationPathsWithResponse request
+	ListEscalationPathsWithResponse(ctx context.Context, escalationPolicyId string, params *ListEscalationPathsParams, reqEditors ...RequestEditorFn) (*ListEscalationPathsResponse, error)
+
+	// CreateEscalationPathWithBodyWithResponse request with any body
+	CreateEscalationPathWithBodyWithResponse(ctx context.Context, escalationPolicyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationPathResponse, error)
+
+	CreateEscalationPathWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPolicyId string, body CreateEscalationPathApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationPathResponse, error)
 
 	// DeleteEscalationPolicyWithResponse request
 	DeleteEscalationPolicyWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteEscalationPolicyResponse, error)
@@ -59270,6 +61279,236 @@ func (r UpdateIncidentActionItemResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r UpdateIncidentActionItemResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListAlertGroupsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *AlertGroupList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListAlertGroupsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListAlertGroupsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateAlertGroupResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *AlertGroupResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateAlertGroupResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateAlertGroupResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteAlertGroupResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *AlertGroupResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteAlertGroupResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteAlertGroupResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetAlertGroupResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *AlertGroupResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetAlertGroupResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetAlertGroupResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateAlertGroupResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *AlertGroupResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateAlertGroupResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateAlertGroupResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListAlertUrgenciesResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *AlertUrgencyList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListAlertUrgenciesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListAlertUrgenciesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateAlertUrgencyResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *AlertUrgencyResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateAlertUrgencyResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateAlertUrgencyResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteAlertUrgencyResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *AlertUrgencyResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteAlertUrgencyResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteAlertUrgencyResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetAlertUrgencyResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *AlertUrgencyResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetAlertUrgencyResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetAlertUrgencyResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateAlertUrgencyResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *AlertUrgencyResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateAlertUrgencyResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateAlertUrgencyResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -60470,6 +62709,121 @@ func (r UpdateEscalationLevelResponse) StatusCode() int {
 	return 0
 }
 
+type ListEscalationLevelsPathsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *EscalationLevelList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListEscalationLevelsPathsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListEscalationLevelsPathsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateEscalationLevelPathsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *EscalationLevelResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateEscalationLevelPathsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateEscalationLevelPathsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteEscalationPathResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *EscalationPolicyPathResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteEscalationPathResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteEscalationPathResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetEscalationPathResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *EscalationPolicyPathResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetEscalationPathResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetEscalationPathResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateEscalationPathResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *EscalationPolicyPathResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateEscalationPathResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateEscalationPathResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type ListEscalationPoliciesResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -60516,14 +62870,14 @@ func (r CreateEscalationPolicyResponse) StatusCode() int {
 	return 0
 }
 
-type ListEscalationLevelsResponse struct {
+type ListEscalationLevelsPoliciesResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *EscalationLevelList
 }
 
 // Status returns HTTPResponse.Status
-func (r ListEscalationLevelsResponse) Status() string {
+func (r ListEscalationLevelsPoliciesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -60531,14 +62885,14 @@ func (r ListEscalationLevelsResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ListEscalationLevelsResponse) StatusCode() int {
+func (r ListEscalationLevelsPoliciesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CreateEscalationLevelResponse struct {
+type CreateEscalationLevelPoliciesResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON201 *EscalationLevelResponse
@@ -60547,7 +62901,7 @@ type CreateEscalationLevelResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreateEscalationLevelResponse) Status() string {
+func (r CreateEscalationLevelPoliciesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -60555,7 +62909,53 @@ func (r CreateEscalationLevelResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreateEscalationLevelResponse) StatusCode() int {
+func (r CreateEscalationLevelPoliciesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListEscalationPathsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *EscalationPolicyPathList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListEscalationPathsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListEscalationPathsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateEscalationPathResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *EscalationPolicyPathResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateEscalationPathResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateEscalationPathResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -67128,6 +69528,128 @@ func (c *ClientWithResponses) UpdateIncidentActionItemWithApplicationVndAPIPlusJ
 	return ParseUpdateIncidentActionItemResponse(rsp)
 }
 
+// ListAlertGroupsWithResponse request returning *ListAlertGroupsResponse
+func (c *ClientWithResponses) ListAlertGroupsWithResponse(ctx context.Context, params *ListAlertGroupsParams, reqEditors ...RequestEditorFn) (*ListAlertGroupsResponse, error) {
+	rsp, err := c.ListAlertGroups(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListAlertGroupsResponse(rsp)
+}
+
+// CreateAlertGroupWithBodyWithResponse request with arbitrary body returning *CreateAlertGroupResponse
+func (c *ClientWithResponses) CreateAlertGroupWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateAlertGroupResponse, error) {
+	rsp, err := c.CreateAlertGroupWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateAlertGroupResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateAlertGroupWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateAlertGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateAlertGroupResponse, error) {
+	rsp, err := c.CreateAlertGroupWithApplicationVndAPIPlusJSONBody(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateAlertGroupResponse(rsp)
+}
+
+// DeleteAlertGroupWithResponse request returning *DeleteAlertGroupResponse
+func (c *ClientWithResponses) DeleteAlertGroupWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteAlertGroupResponse, error) {
+	rsp, err := c.DeleteAlertGroup(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteAlertGroupResponse(rsp)
+}
+
+// GetAlertGroupWithResponse request returning *GetAlertGroupResponse
+func (c *ClientWithResponses) GetAlertGroupWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetAlertGroupResponse, error) {
+	rsp, err := c.GetAlertGroup(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetAlertGroupResponse(rsp)
+}
+
+// UpdateAlertGroupWithBodyWithResponse request with arbitrary body returning *UpdateAlertGroupResponse
+func (c *ClientWithResponses) UpdateAlertGroupWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAlertGroupResponse, error) {
+	rsp, err := c.UpdateAlertGroupWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateAlertGroupResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateAlertGroupWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAlertGroupResponse, error) {
+	rsp, err := c.UpdateAlertGroupWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateAlertGroupResponse(rsp)
+}
+
+// ListAlertUrgenciesWithResponse request returning *ListAlertUrgenciesResponse
+func (c *ClientWithResponses) ListAlertUrgenciesWithResponse(ctx context.Context, params *ListAlertUrgenciesParams, reqEditors ...RequestEditorFn) (*ListAlertUrgenciesResponse, error) {
+	rsp, err := c.ListAlertUrgencies(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListAlertUrgenciesResponse(rsp)
+}
+
+// CreateAlertUrgencyWithBodyWithResponse request with arbitrary body returning *CreateAlertUrgencyResponse
+func (c *ClientWithResponses) CreateAlertUrgencyWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateAlertUrgencyResponse, error) {
+	rsp, err := c.CreateAlertUrgencyWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateAlertUrgencyResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateAlertUrgencyWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateAlertUrgencyApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateAlertUrgencyResponse, error) {
+	rsp, err := c.CreateAlertUrgencyWithApplicationVndAPIPlusJSONBody(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateAlertUrgencyResponse(rsp)
+}
+
+// DeleteAlertUrgencyWithResponse request returning *DeleteAlertUrgencyResponse
+func (c *ClientWithResponses) DeleteAlertUrgencyWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteAlertUrgencyResponse, error) {
+	rsp, err := c.DeleteAlertUrgency(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteAlertUrgencyResponse(rsp)
+}
+
+// GetAlertUrgencyWithResponse request returning *GetAlertUrgencyResponse
+func (c *ClientWithResponses) GetAlertUrgencyWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetAlertUrgencyResponse, error) {
+	rsp, err := c.GetAlertUrgency(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetAlertUrgencyResponse(rsp)
+}
+
+// UpdateAlertUrgencyWithBodyWithResponse request with arbitrary body returning *UpdateAlertUrgencyResponse
+func (c *ClientWithResponses) UpdateAlertUrgencyWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAlertUrgencyResponse, error) {
+	rsp, err := c.UpdateAlertUrgencyWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateAlertUrgencyResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateAlertUrgencyWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateAlertUrgencyApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAlertUrgencyResponse, error) {
+	rsp, err := c.UpdateAlertUrgencyWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateAlertUrgencyResponse(rsp)
+}
+
 // ListAlertsWithResponse request returning *ListAlertsResponse
 func (c *ClientWithResponses) ListAlertsWithResponse(ctx context.Context, params *ListAlertsParams, reqEditors ...RequestEditorFn) (*ListAlertsResponse, error) {
 	rsp, err := c.ListAlerts(ctx, params, reqEditors...)
@@ -67748,6 +70270,67 @@ func (c *ClientWithResponses) UpdateEscalationLevelWithApplicationVndAPIPlusJSON
 	return ParseUpdateEscalationLevelResponse(rsp)
 }
 
+// ListEscalationLevelsPathsWithResponse request returning *ListEscalationLevelsPathsResponse
+func (c *ClientWithResponses) ListEscalationLevelsPathsWithResponse(ctx context.Context, escalationPolicyPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*ListEscalationLevelsPathsResponse, error) {
+	rsp, err := c.ListEscalationLevelsPaths(ctx, escalationPolicyPathId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListEscalationLevelsPathsResponse(rsp)
+}
+
+// CreateEscalationLevelPathsWithBodyWithResponse request with arbitrary body returning *CreateEscalationLevelPathsResponse
+func (c *ClientWithResponses) CreateEscalationLevelPathsWithBodyWithResponse(ctx context.Context, escalationPolicyPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error) {
+	rsp, err := c.CreateEscalationLevelPathsWithBody(ctx, escalationPolicyPathId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateEscalationLevelPathsResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPolicyPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error) {
+	rsp, err := c.CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBody(ctx, escalationPolicyPathId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateEscalationLevelPathsResponse(rsp)
+}
+
+// DeleteEscalationPathWithResponse request returning *DeleteEscalationPathResponse
+func (c *ClientWithResponses) DeleteEscalationPathWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteEscalationPathResponse, error) {
+	rsp, err := c.DeleteEscalationPath(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteEscalationPathResponse(rsp)
+}
+
+// GetEscalationPathWithResponse request returning *GetEscalationPathResponse
+func (c *ClientWithResponses) GetEscalationPathWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetEscalationPathResponse, error) {
+	rsp, err := c.GetEscalationPath(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetEscalationPathResponse(rsp)
+}
+
+// UpdateEscalationPathWithBodyWithResponse request with arbitrary body returning *UpdateEscalationPathResponse
+func (c *ClientWithResponses) UpdateEscalationPathWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateEscalationPathResponse, error) {
+	rsp, err := c.UpdateEscalationPathWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateEscalationPathResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateEscalationPathWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateEscalationPathApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateEscalationPathResponse, error) {
+	rsp, err := c.UpdateEscalationPathWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateEscalationPathResponse(rsp)
+}
+
 // ListEscalationPoliciesWithResponse request returning *ListEscalationPoliciesResponse
 func (c *ClientWithResponses) ListEscalationPoliciesWithResponse(ctx context.Context, params *ListEscalationPoliciesParams, reqEditors ...RequestEditorFn) (*ListEscalationPoliciesResponse, error) {
 	rsp, err := c.ListEscalationPolicies(ctx, params, reqEditors...)
@@ -67774,30 +70357,56 @@ func (c *ClientWithResponses) CreateEscalationPolicyWithApplicationVndAPIPlusJSO
 	return ParseCreateEscalationPolicyResponse(rsp)
 }
 
-// ListEscalationLevelsWithResponse request returning *ListEscalationLevelsResponse
-func (c *ClientWithResponses) ListEscalationLevelsWithResponse(ctx context.Context, escalationPolicyId string, params *ListEscalationLevelsParams, reqEditors ...RequestEditorFn) (*ListEscalationLevelsResponse, error) {
-	rsp, err := c.ListEscalationLevels(ctx, escalationPolicyId, params, reqEditors...)
+// ListEscalationLevelsPoliciesWithResponse request returning *ListEscalationLevelsPoliciesResponse
+func (c *ClientWithResponses) ListEscalationLevelsPoliciesWithResponse(ctx context.Context, escalationPolicyId string, params *ListEscalationLevelsPoliciesParams, reqEditors ...RequestEditorFn) (*ListEscalationLevelsPoliciesResponse, error) {
+	rsp, err := c.ListEscalationLevelsPolicies(ctx, escalationPolicyId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseListEscalationLevelsResponse(rsp)
+	return ParseListEscalationLevelsPoliciesResponse(rsp)
 }
 
-// CreateEscalationLevelWithBodyWithResponse request with arbitrary body returning *CreateEscalationLevelResponse
-func (c *ClientWithResponses) CreateEscalationLevelWithBodyWithResponse(ctx context.Context, escalationPolicyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationLevelResponse, error) {
-	rsp, err := c.CreateEscalationLevelWithBody(ctx, escalationPolicyId, contentType, body, reqEditors...)
+// CreateEscalationLevelPoliciesWithBodyWithResponse request with arbitrary body returning *CreateEscalationLevelPoliciesResponse
+func (c *ClientWithResponses) CreateEscalationLevelPoliciesWithBodyWithResponse(ctx context.Context, escalationPolicyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPoliciesResponse, error) {
+	rsp, err := c.CreateEscalationLevelPoliciesWithBody(ctx, escalationPolicyId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreateEscalationLevelResponse(rsp)
+	return ParseCreateEscalationLevelPoliciesResponse(rsp)
 }
 
-func (c *ClientWithResponses) CreateEscalationLevelWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPolicyId string, body CreateEscalationLevelApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationLevelResponse, error) {
-	rsp, err := c.CreateEscalationLevelWithApplicationVndAPIPlusJSONBody(ctx, escalationPolicyId, body, reqEditors...)
+func (c *ClientWithResponses) CreateEscalationLevelPoliciesWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPolicyId string, body CreateEscalationLevelPoliciesApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPoliciesResponse, error) {
+	rsp, err := c.CreateEscalationLevelPoliciesWithApplicationVndAPIPlusJSONBody(ctx, escalationPolicyId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreateEscalationLevelResponse(rsp)
+	return ParseCreateEscalationLevelPoliciesResponse(rsp)
+}
+
+// ListEscalationPathsWithResponse request returning *ListEscalationPathsResponse
+func (c *ClientWithResponses) ListEscalationPathsWithResponse(ctx context.Context, escalationPolicyId string, params *ListEscalationPathsParams, reqEditors ...RequestEditorFn) (*ListEscalationPathsResponse, error) {
+	rsp, err := c.ListEscalationPaths(ctx, escalationPolicyId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListEscalationPathsResponse(rsp)
+}
+
+// CreateEscalationPathWithBodyWithResponse request with arbitrary body returning *CreateEscalationPathResponse
+func (c *ClientWithResponses) CreateEscalationPathWithBodyWithResponse(ctx context.Context, escalationPolicyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationPathResponse, error) {
+	rsp, err := c.CreateEscalationPathWithBody(ctx, escalationPolicyId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateEscalationPathResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateEscalationPathWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPolicyId string, body CreateEscalationPathApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationPathResponse, error) {
+	rsp, err := c.CreateEscalationPathWithApplicationVndAPIPlusJSONBody(ctx, escalationPolicyId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateEscalationPathResponse(rsp)
 }
 
 // DeleteEscalationPolicyWithResponse request returning *DeleteEscalationPolicyResponse
@@ -71393,6 +74002,336 @@ func ParseUpdateIncidentActionItemResponse(rsp *http.Response) (*UpdateIncidentA
 	return response, nil
 }
 
+// ParseListAlertGroupsResponse parses an HTTP response from a ListAlertGroupsWithResponse call
+func ParseListAlertGroupsResponse(rsp *http.Response) (*ListAlertGroupsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListAlertGroupsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertGroupList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateAlertGroupResponse parses an HTTP response from a CreateAlertGroupWithResponse call
+func ParseCreateAlertGroupResponse(rsp *http.Response) (*CreateAlertGroupResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateAlertGroupResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest AlertGroupResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteAlertGroupResponse parses an HTTP response from a DeleteAlertGroupWithResponse call
+func ParseDeleteAlertGroupResponse(rsp *http.Response) (*DeleteAlertGroupResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteAlertGroupResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertGroupResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetAlertGroupResponse parses an HTTP response from a GetAlertGroupWithResponse call
+func ParseGetAlertGroupResponse(rsp *http.Response) (*GetAlertGroupResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetAlertGroupResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertGroupResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateAlertGroupResponse parses an HTTP response from a UpdateAlertGroupWithResponse call
+func ParseUpdateAlertGroupResponse(rsp *http.Response) (*UpdateAlertGroupResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateAlertGroupResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertGroupResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListAlertUrgenciesResponse parses an HTTP response from a ListAlertUrgenciesWithResponse call
+func ParseListAlertUrgenciesResponse(rsp *http.Response) (*ListAlertUrgenciesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListAlertUrgenciesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertUrgencyList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateAlertUrgencyResponse parses an HTTP response from a CreateAlertUrgencyWithResponse call
+func ParseCreateAlertUrgencyResponse(rsp *http.Response) (*CreateAlertUrgencyResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateAlertUrgencyResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest AlertUrgencyResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteAlertUrgencyResponse parses an HTTP response from a DeleteAlertUrgencyWithResponse call
+func ParseDeleteAlertUrgencyResponse(rsp *http.Response) (*DeleteAlertUrgencyResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteAlertUrgencyResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertUrgencyResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetAlertUrgencyResponse parses an HTTP response from a GetAlertUrgencyWithResponse call
+func ParseGetAlertUrgencyResponse(rsp *http.Response) (*GetAlertUrgencyResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetAlertUrgencyResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertUrgencyResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateAlertUrgencyResponse parses an HTTP response from a UpdateAlertUrgencyWithResponse call
+func ParseUpdateAlertUrgencyResponse(rsp *http.Response) (*UpdateAlertUrgencyResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateAlertUrgencyResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertUrgencyResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseListAlertsResponse parses an HTTP response from a ListAlertsWithResponse call
 func ParseListAlertsResponse(rsp *http.Response) (*ListAlertsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -73095,6 +76034,171 @@ func ParseUpdateEscalationLevelResponse(rsp *http.Response) (*UpdateEscalationLe
 	return response, nil
 }
 
+// ParseListEscalationLevelsPathsResponse parses an HTTP response from a ListEscalationLevelsPathsWithResponse call
+func ParseListEscalationLevelsPathsResponse(rsp *http.Response) (*ListEscalationLevelsPathsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListEscalationLevelsPathsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EscalationLevelList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateEscalationLevelPathsResponse parses an HTTP response from a CreateEscalationLevelPathsWithResponse call
+func ParseCreateEscalationLevelPathsResponse(rsp *http.Response) (*CreateEscalationLevelPathsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateEscalationLevelPathsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest EscalationLevelResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteEscalationPathResponse parses an HTTP response from a DeleteEscalationPathWithResponse call
+func ParseDeleteEscalationPathResponse(rsp *http.Response) (*DeleteEscalationPathResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteEscalationPathResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EscalationPolicyPathResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetEscalationPathResponse parses an HTTP response from a GetEscalationPathWithResponse call
+func ParseGetEscalationPathResponse(rsp *http.Response) (*GetEscalationPathResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetEscalationPathResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EscalationPolicyPathResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateEscalationPathResponse parses an HTTP response from a UpdateEscalationPathWithResponse call
+func ParseUpdateEscalationPathResponse(rsp *http.Response) (*UpdateEscalationPathResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateEscalationPathResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EscalationPolicyPathResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseListEscalationPoliciesResponse parses an HTTP response from a ListEscalationPoliciesWithResponse call
 func ParseListEscalationPoliciesResponse(rsp *http.Response) (*ListEscalationPoliciesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -73161,15 +76265,15 @@ func ParseCreateEscalationPolicyResponse(rsp *http.Response) (*CreateEscalationP
 	return response, nil
 }
 
-// ParseListEscalationLevelsResponse parses an HTTP response from a ListEscalationLevelsWithResponse call
-func ParseListEscalationLevelsResponse(rsp *http.Response) (*ListEscalationLevelsResponse, error) {
+// ParseListEscalationLevelsPoliciesResponse parses an HTTP response from a ListEscalationLevelsPoliciesWithResponse call
+func ParseListEscalationLevelsPoliciesResponse(rsp *http.Response) (*ListEscalationLevelsPoliciesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &ListEscalationLevelsResponse{
+	response := &ListEscalationLevelsPoliciesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -73187,15 +76291,15 @@ func ParseListEscalationLevelsResponse(rsp *http.Response) (*ListEscalationLevel
 	return response, nil
 }
 
-// ParseCreateEscalationLevelResponse parses an HTTP response from a CreateEscalationLevelWithResponse call
-func ParseCreateEscalationLevelResponse(rsp *http.Response) (*CreateEscalationLevelResponse, error) {
+// ParseCreateEscalationLevelPoliciesResponse parses an HTTP response from a CreateEscalationLevelPoliciesWithResponse call
+func ParseCreateEscalationLevelPoliciesResponse(rsp *http.Response) (*CreateEscalationLevelPoliciesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CreateEscalationLevelResponse{
+	response := &CreateEscalationLevelPoliciesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -73203,6 +76307,72 @@ func ParseCreateEscalationLevelResponse(rsp *http.Response) (*CreateEscalationLe
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
 		var dest EscalationLevelResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListEscalationPathsResponse parses an HTTP response from a ListEscalationPathsWithResponse call
+func ParseListEscalationPathsResponse(rsp *http.Response) (*ListEscalationPathsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListEscalationPathsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EscalationPolicyPathList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateEscalationPathResponse parses an HTTP response from a CreateEscalationPathWithResponse call
+func ParseCreateEscalationPathResponse(rsp *http.Response) (*CreateEscalationPathResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateEscalationPathResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest EscalationPolicyPathResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

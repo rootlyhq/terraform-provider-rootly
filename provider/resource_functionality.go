@@ -133,7 +133,7 @@ func resourceFunctionality() *schema.Resource {
 				Computed:         true,
 				Required:         false,
 				Optional:         true,
-				Description:      "Owner Users associated with this service",
+				Description:      "Owner Users associated with this functionality",
 			},
 
 			"slack_channels": &schema.Schema{
@@ -141,7 +141,7 @@ func resourceFunctionality() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
-				Description: "Slack Channels associated with this service",
+				Description: "Slack Channels associated with this functionality",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"id": &schema.Schema{
@@ -161,7 +161,7 @@ func resourceFunctionality() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
-				Description: "Slack Aliases associated with this service",
+				Description: "Slack Aliases associated with this functionality",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"id": &schema.Schema{

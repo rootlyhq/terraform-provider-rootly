@@ -16,8 +16,8 @@ type EscalationLevel struct {
   NotificationTargetParams []interface{} `jsonapi:"attr,notification_target_params,omitempty"`
 }
 
-func (c *Client) ListEscalationLevels(id string, params *rootlygo.ListEscalationLevelsParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListEscalationLevelsRequest(c.Rootly.Server, id, params)
+func (c *Client) ListEscalationLevels(id string, params *rootlygo.ListEscalationLevelsPoliciesParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListEscalationLevelsPoliciesRequest(c.Rootly.Server, id, params)
 	if err != nil {
 		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}
@@ -41,7 +41,7 @@ func (c *Client) CreateEscalationLevel(d *EscalationLevel) (*EscalationLevel, er
 		return nil, errors.Errorf("Error marshaling escalation_level: %s", err.Error())
 	}
 
-	req, err := rootlygo.NewCreateEscalationLevelRequestWithBody(c.Rootly.Server, d.EscalationPolicyId, c.ContentType, buffer)
+	req, err := rootlygo.NewCreateEscalationLevelPoliciesRequestWithBody(c.Rootly.Server, d.EscalationPolicyId, c.ContentType, buffer)
 	if err != nil {
 		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}

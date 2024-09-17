@@ -124,6 +124,24 @@ func resourceTeam() *schema.Resource {
 				Description: "The PagerTree group id associated to this team",
 			},
 
+			"cortex_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The Cortex group id associated to this team",
+			},
+
+			"service_now_ci_sys_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The Service Now CI sys id associated to this team",
+			},
+
 			"user_ids": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -219,6 +237,12 @@ func resourceTeamCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	if value, ok := d.GetOkExists("pagertree_id"); ok {
 		s.PagertreeId = value.(string)
 	}
+	if value, ok := d.GetOkExists("cortex_id"); ok {
+		s.CortexId = value.(string)
+	}
+	if value, ok := d.GetOkExists("service_now_ci_sys_id"); ok {
+		s.ServiceNowCiSysId = value.(string)
+	}
 	if value, ok := d.GetOkExists("user_ids"); ok {
 		s.UserIds = value.([]interface{})
 	}
@@ -268,6 +292,8 @@ func resourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	d.Set("opsgenie_id", item.OpsgenieId)
 	d.Set("victor_ops_id", item.VictorOpsId)
 	d.Set("pagertree_id", item.PagertreeId)
+	d.Set("cortex_id", item.CortexId)
+	d.Set("service_now_ci_sys_id", item.ServiceNowCiSysId)
 	d.Set("user_ids", item.UserIds)
 	d.Set("slack_channels", item.SlackChannels)
 	d.Set("slack_aliases", item.SlackAliases)
@@ -313,6 +339,12 @@ func resourceTeamUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 	}
 	if d.HasChange("pagertree_id") {
 		s.PagertreeId = d.Get("pagertree_id").(string)
+	}
+	if d.HasChange("cortex_id") {
+		s.CortexId = d.Get("cortex_id").(string)
+	}
+	if d.HasChange("service_now_ci_sys_id") {
+		s.ServiceNowCiSysId = d.Get("service_now_ci_sys_id").(string)
 	}
 	if d.HasChange("user_ids") {
 		s.UserIds = d.Get("user_ids").([]interface{})

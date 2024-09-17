@@ -31,6 +31,7 @@ type Incident struct {
   CancellationMessage string `jsonapi:"attr,cancellation_message,omitempty"`
   ScheduledFor string `jsonapi:"attr,scheduled_for,omitempty"`
   ScheduledUntil string `jsonapi:"attr,scheduled_until,omitempty"`
+  RetrospectiveProgressStatus string `jsonapi:"attr,retrospective_progress_status,omitempty"`
   InTriageAt string `jsonapi:"attr,in_triage_at,omitempty"`
   StartedAt string `jsonapi:"attr,started_at,omitempty"`
   DetectedAt string `jsonapi:"attr,detected_at,omitempty"`

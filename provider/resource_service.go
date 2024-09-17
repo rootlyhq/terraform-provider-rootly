@@ -115,6 +115,24 @@ func resourceService() *schema.Resource {
 				Description: "The Opsgenie service id associated to this service",
 			},
 
+			"cortex_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The Cortex group id associated to this service",
+			},
+
+			"service_now_ci_sys_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The Service Now CI sys id associated to this service",
+			},
+
 			"github_repository_name": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
@@ -279,6 +297,12 @@ func resourceServiceCreate(ctx context.Context, d *schema.ResourceData, meta int
 	if value, ok := d.GetOkExists("opsgenie_id"); ok {
 		s.OpsgenieId = value.(string)
 	}
+	if value, ok := d.GetOkExists("cortex_id"); ok {
+		s.CortexId = value.(string)
+	}
+	if value, ok := d.GetOkExists("service_now_ci_sys_id"); ok {
+		s.ServiceNowCiSysId = value.(string)
+	}
 	if value, ok := d.GetOkExists("github_repository_name"); ok {
 		s.GithubRepositoryName = value.(string)
 	}
@@ -348,6 +372,8 @@ func resourceServiceRead(ctx context.Context, d *schema.ResourceData, meta inter
 	d.Set("backstage_id", item.BackstageId)
 	d.Set("pagerduty_id", item.PagerdutyId)
 	d.Set("opsgenie_id", item.OpsgenieId)
+	d.Set("cortex_id", item.CortexId)
+	d.Set("service_now_ci_sys_id", item.ServiceNowCiSysId)
 	d.Set("github_repository_name", item.GithubRepositoryName)
 	d.Set("github_repository_branch", item.GithubRepositoryBranch)
 	d.Set("gitlab_repository_name", item.GitlabRepositoryName)
@@ -397,6 +423,12 @@ func resourceServiceUpdate(ctx context.Context, d *schema.ResourceData, meta int
 	}
 	if d.HasChange("opsgenie_id") {
 		s.OpsgenieId = d.Get("opsgenie_id").(string)
+	}
+	if d.HasChange("cortex_id") {
+		s.CortexId = d.Get("cortex_id").(string)
+	}
+	if d.HasChange("service_now_ci_sys_id") {
+		s.ServiceNowCiSysId = d.Get("service_now_ci_sys_id").(string)
 	}
 	if d.HasChange("github_repository_name") {
 		s.GithubRepositoryName = d.Get("github_repository_name").(string)
