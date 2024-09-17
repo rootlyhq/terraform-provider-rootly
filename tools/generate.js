@@ -80,6 +80,7 @@ const excluded = {
     "form_set",
     "heartbeat",
     "shift_override",
+    "alert_group",
     "schedule",
     "schedule_rotation",
     "schedule_rotation_active_time",
