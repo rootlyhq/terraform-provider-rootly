@@ -98,6 +98,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_custom_form":                                      resourceCustomForm(),
 				"rootly_environment":                                      resourceEnvironment(),
 				"rootly_escalation_policy":                                resourceEscalationPolicy(),
+				"rootly_escalation_level":                                 resourceEscalationLevel(),
 				"rootly_form_field_option":                                resourceFormFieldOption(),
 				"rootly_form_field_placement_condition":                   resourceFormFieldPlacementCondition(),
 				"rootly_form_field_placement":                             resourceFormFieldPlacement(),
