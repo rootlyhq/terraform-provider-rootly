@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.6.0] -- 2024-10-01
+
+- Add `rootly_escalation_level` resource
+
 ## [2.5.0] -- 2024-09-17
 
 - Add `alert_urgency_id` to `rootly_heartbeat` resource
