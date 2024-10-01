@@ -326,7 +326,6 @@ function resourceSchema(name) {
 }
 
 function requiredFields(name) {
-  console.log(name)
   return swagger.components.schemas[`new_${name}`].properties.data.properties
     .attributes.required;
 }
