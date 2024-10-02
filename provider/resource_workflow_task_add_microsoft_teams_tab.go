@@ -14,14 +14,14 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
 
-func resourceWorkflowTaskSendSlackMessage() *schema.Resource {
+func resourceWorkflowTaskAddMicrosoftTeamsTab() *schema.Resource {
 	return &schema.Resource{
-		Description: "Manages workflow send_slack_message task.",
+		Description: "Manages workflow add_microsoft_teams_tab task.",
 
-		CreateContext: resourceWorkflowTaskSendSlackMessageCreate,
-		ReadContext:   resourceWorkflowTaskSendSlackMessageRead,
-		UpdateContext: resourceWorkflowTaskSendSlackMessageUpdate,
-		DeleteContext: resourceWorkflowTaskSendSlackMessageDelete,
+		CreateContext: resourceWorkflowTaskAddMicrosoftTeamsTabCreate,
+		ReadContext:   resourceWorkflowTaskAddMicrosoftTeamsTabRead,
+		UpdateContext: resourceWorkflowTaskAddMicrosoftTeamsTabUpdate,
+		DeleteContext: resourceWorkflowTaskAddMicrosoftTeamsTabDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -68,109 +68,34 @@ func resourceWorkflowTaskSendSlackMessage() *schema.Resource {
 						"task_type": &schema.Schema{
 							Type:     schema.TypeString,
 							Optional: true,
-							Default:  "send_slack_message",
+							Default:  "add_microsoft_teams_tab",
 							ValidateFunc: validation.StringInSlice([]string{
-								"send_slack_message",
+								"add_microsoft_teams_tab",
 							}, false),
 						},
-						"channels": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
-									},
-									"name": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
-									},
-								},
-							},
-						},
-						"slack_users": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
-									},
-									"name": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
-									},
-								},
-							},
-						},
-						"slack_user_groups": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
-									},
-									"name": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
-									},
-								},
-							},
-						},
-						"actionables": &schema.Schema{
-							Description: "Value must be one of `update_summary`, `update_status`, `archive_channel`, `manage_incident_roles`, `update_incident`, `all_commands`, `leave_feedback`, `manage_form_fields`, `manage_action_items`, `view_tasks`, `add_pagerduty_responders`, `add_opsgenie_responders`, `add_victor_ops_responders`, `snooze_reminder`, `pause_reminder`, `restart_reminder`, `update_status_page`, `cancel_incident`, `delete_message`.",
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-							DiffSuppressFunc: tools.EqualIgnoringOrder,
-						},
-						"broadcast_thread_reply_to_channel": &schema.Schema{
-							Description: "Value must be one of true or false",
-							Type:        schema.TypeBool,
-							Optional:    true,
-						},
-						"send_as_ephemeral": &schema.Schema{
-							Description: "Value must be one of true or false",
-							Type:        schema.TypeBool,
-							Optional:    true,
-						},
-						"color": &schema.Schema{
-							Description: "A hex color ",
+						"playbook_id": &schema.Schema{
+							Description: "The playbook id if tab is of an incident playbook",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
-						"pin_to_channel": &schema.Schema{
-							Description: "Value must be one of true or false",
-							Type:        schema.TypeBool,
-							Optional:    true,
-						},
-						"update_parent_message": &schema.Schema{
-							Description: "Value must be one of true or false",
-							Type:        schema.TypeBool,
-							Optional:    true,
-						},
-						"parent_message_thread_task": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. A hash where [id] is the task id of the parent task that sent a message, and [name] is the name of the parent task",
+						"team": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. ",
 							Type:        schema.TypeMap,
-							Optional:    true,
-						},
-						"text": &schema.Schema{
-							Description: "The message text",
-							Type:        schema.TypeString,
 							Required:    true,
 						},
-						"send_only_as_threaded_message": &schema.Schema{
-							Description: "When set to true, if the parent for this threaded message cannot be found the message will be skipped.. Value must be one of true or false",
-							Type:        schema.TypeBool,
+						"channel": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. ",
+							Type:        schema.TypeMap,
+							Required:    true,
+						},
+						"title": &schema.Schema{
+							Description: "The tab title. Required if not a playbook tab",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"link": &schema.Schema{
+							Description: "The tab link. Required if not a playbook tab",
+							Type:        schema.TypeString,
 							Optional:    true,
 						},
 					},
@@ -180,7 +105,7 @@ func resourceWorkflowTaskSendSlackMessage() *schema.Resource {
 	}
 }
 
-func resourceWorkflowTaskSendSlackMessageCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskAddMicrosoftTeamsTabCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
@@ -209,10 +134,10 @@ func resourceWorkflowTaskSendSlackMessageCreate(ctx context.Context, d *schema.R
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created an workflow task resource: %v (%s)", workflowId, d.Id()))
 
-	return resourceWorkflowTaskSendSlackMessageRead(ctx, d, meta)
+	return resourceWorkflowTaskAddMicrosoftTeamsTabRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskSendSlackMessageRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskAddMicrosoftTeamsTabRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
@@ -221,7 +146,7 @@ func resourceWorkflowTaskSendSlackMessageRead(ctx context.Context, d *schema.Res
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskSendSlackMessage (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskAddMicrosoftTeamsTab (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
@@ -241,7 +166,7 @@ func resourceWorkflowTaskSendSlackMessageRead(ctx context.Context, d *schema.Res
 	return nil
 }
 
-func resourceWorkflowTaskSendSlackMessageUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskAddMicrosoftTeamsTabUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
@@ -267,10 +192,10 @@ func resourceWorkflowTaskSendSlackMessageUpdate(ctx context.Context, d *schema.R
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
 
-	return resourceWorkflowTaskSendSlackMessageRead(ctx, d, meta)
+	return resourceWorkflowTaskAddMicrosoftTeamsTabRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskSendSlackMessageDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskAddMicrosoftTeamsTabDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
@@ -279,7 +204,7 @@ func resourceWorkflowTaskSendSlackMessageDelete(ctx context.Context, d *schema.R
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskSendSlackMessage (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskAddMicrosoftTeamsTab (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}

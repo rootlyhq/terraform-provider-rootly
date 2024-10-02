@@ -318,6 +318,11 @@ const (
 	AddActionItem AddActionItemTaskParamsTaskType = "add_action_item"
 )
 
+// Defines values for AddMicrosoftTeamsTabTaskParamsTaskType.
+const (
+	AddMicrosoftTeamsTab AddMicrosoftTeamsTabTaskParamsTaskType = "add_microsoft_teams_tab"
+)
+
 // Defines values for AddRoleTaskParamsTaskType.
 const (
 	AddRole AddRoleTaskParamsTaskType = "add_role"
@@ -343,6 +348,38 @@ const (
 	AddToTimeline AddToTimelineTaskParamsTaskType = "add_to_timeline"
 )
 
+// Defines values for AlertSource.
+const (
+	AlertSourceAlertmanager    AlertSource = "alertmanager"
+	AlertSourceAsana           AlertSource = "asana"
+	AlertSourceAzure           AlertSource = "azure"
+	AlertSourceClickup         AlertSource = "clickup"
+	AlertSourceCloudWatch      AlertSource = "cloud_watch"
+	AlertSourceDatadog         AlertSource = "datadog"
+	AlertSourceEmail           AlertSource = "email"
+	AlertSourceGenericWebhook  AlertSource = "generic_webhook"
+	AlertSourceGoogleCloud     AlertSource = "google_cloud"
+	AlertSourceGrafana         AlertSource = "grafana"
+	AlertSourceHoneycomb       AlertSource = "honeycomb"
+	AlertSourceJira            AlertSource = "jira"
+	AlertSourceLinear          AlertSource = "linear"
+	AlertSourceLiveCallRouting AlertSource = "live_call_routing"
+	AlertSourceManual          AlertSource = "manual"
+	AlertSourceNobl9           AlertSource = "nobl9"
+	AlertSourceOpsgenie        AlertSource = "opsgenie"
+	AlertSourcePagerduty       AlertSource = "pagerduty"
+	AlertSourcePagertree       AlertSource = "pagertree"
+	AlertSourceRollbar         AlertSource = "rollbar"
+	AlertSourceRootly          AlertSource = "rootly"
+	AlertSourceSentry          AlertSource = "sentry"
+	AlertSourceServiceNow      AlertSource = "service_now"
+	AlertSourceSlack           AlertSource = "slack"
+	AlertSourceVictorops       AlertSource = "victorops"
+	AlertSourceWeb             AlertSource = "web"
+	AlertSourceWorkflow        AlertSource = "workflow"
+	AlertSourceZendesk         AlertSource = "zendesk"
+)
+
 // Defines values for AlertGroupListDataType.
 const (
 	AlertGroupListDataTypeAlertGroups AlertGroupListDataType = "alert_groups"
@@ -353,9 +390,73 @@ const (
 	AlertGroupResponseDataTypeAlertGroups AlertGroupResponseDataType = "alert_groups"
 )
 
+// Defines values for AlertListDataSource.
+const (
+	AlertListDataSourceAlertmanager    AlertListDataSource = "alertmanager"
+	AlertListDataSourceAsana           AlertListDataSource = "asana"
+	AlertListDataSourceAzure           AlertListDataSource = "azure"
+	AlertListDataSourceClickup         AlertListDataSource = "clickup"
+	AlertListDataSourceCloudWatch      AlertListDataSource = "cloud_watch"
+	AlertListDataSourceDatadog         AlertListDataSource = "datadog"
+	AlertListDataSourceEmail           AlertListDataSource = "email"
+	AlertListDataSourceGenericWebhook  AlertListDataSource = "generic_webhook"
+	AlertListDataSourceGoogleCloud     AlertListDataSource = "google_cloud"
+	AlertListDataSourceGrafana         AlertListDataSource = "grafana"
+	AlertListDataSourceHoneycomb       AlertListDataSource = "honeycomb"
+	AlertListDataSourceJira            AlertListDataSource = "jira"
+	AlertListDataSourceLinear          AlertListDataSource = "linear"
+	AlertListDataSourceLiveCallRouting AlertListDataSource = "live_call_routing"
+	AlertListDataSourceManual          AlertListDataSource = "manual"
+	AlertListDataSourceNobl9           AlertListDataSource = "nobl9"
+	AlertListDataSourceOpsgenie        AlertListDataSource = "opsgenie"
+	AlertListDataSourcePagerduty       AlertListDataSource = "pagerduty"
+	AlertListDataSourcePagertree       AlertListDataSource = "pagertree"
+	AlertListDataSourceRollbar         AlertListDataSource = "rollbar"
+	AlertListDataSourceRootly          AlertListDataSource = "rootly"
+	AlertListDataSourceSentry          AlertListDataSource = "sentry"
+	AlertListDataSourceServiceNow      AlertListDataSource = "service_now"
+	AlertListDataSourceSlack           AlertListDataSource = "slack"
+	AlertListDataSourceVictorops       AlertListDataSource = "victorops"
+	AlertListDataSourceWeb             AlertListDataSource = "web"
+	AlertListDataSourceWorkflow        AlertListDataSource = "workflow"
+	AlertListDataSourceZendesk         AlertListDataSource = "zendesk"
+)
+
 // Defines values for AlertListDataType.
 const (
 	AlertListDataTypeAlerts AlertListDataType = "alerts"
+)
+
+// Defines values for AlertResponseDataSource.
+const (
+	AlertResponseDataSourceAlertmanager    AlertResponseDataSource = "alertmanager"
+	AlertResponseDataSourceAsana           AlertResponseDataSource = "asana"
+	AlertResponseDataSourceAzure           AlertResponseDataSource = "azure"
+	AlertResponseDataSourceClickup         AlertResponseDataSource = "clickup"
+	AlertResponseDataSourceCloudWatch      AlertResponseDataSource = "cloud_watch"
+	AlertResponseDataSourceDatadog         AlertResponseDataSource = "datadog"
+	AlertResponseDataSourceEmail           AlertResponseDataSource = "email"
+	AlertResponseDataSourceGenericWebhook  AlertResponseDataSource = "generic_webhook"
+	AlertResponseDataSourceGoogleCloud     AlertResponseDataSource = "google_cloud"
+	AlertResponseDataSourceGrafana         AlertResponseDataSource = "grafana"
+	AlertResponseDataSourceHoneycomb       AlertResponseDataSource = "honeycomb"
+	AlertResponseDataSourceJira            AlertResponseDataSource = "jira"
+	AlertResponseDataSourceLinear          AlertResponseDataSource = "linear"
+	AlertResponseDataSourceLiveCallRouting AlertResponseDataSource = "live_call_routing"
+	AlertResponseDataSourceManual          AlertResponseDataSource = "manual"
+	AlertResponseDataSourceNobl9           AlertResponseDataSource = "nobl9"
+	AlertResponseDataSourceOpsgenie        AlertResponseDataSource = "opsgenie"
+	AlertResponseDataSourcePagerduty       AlertResponseDataSource = "pagerduty"
+	AlertResponseDataSourcePagertree       AlertResponseDataSource = "pagertree"
+	AlertResponseDataSourceRollbar         AlertResponseDataSource = "rollbar"
+	AlertResponseDataSourceRootly          AlertResponseDataSource = "rootly"
+	AlertResponseDataSourceSentry          AlertResponseDataSource = "sentry"
+	AlertResponseDataSourceServiceNow      AlertResponseDataSource = "service_now"
+	AlertResponseDataSourceSlack           AlertResponseDataSource = "slack"
+	AlertResponseDataSourceVictorops       AlertResponseDataSource = "victorops"
+	AlertResponseDataSourceWeb             AlertResponseDataSource = "web"
+	AlertResponseDataSourceWorkflow        AlertResponseDataSource = "workflow"
+	AlertResponseDataSourceZendesk         AlertResponseDataSource = "zendesk"
 )
 
 // Defines values for AlertResponseDataType.
@@ -424,6 +525,11 @@ const (
 // Defines values for AlertUrgencyResponseDataType.
 const (
 	AlertUrgencyResponseDataTypeAlertUrgencies AlertUrgencyResponseDataType = "alert_urgencies"
+)
+
+// Defines values for ArchiveMicrosoftTeamsChannelsTaskParamsTaskType.
+const (
+	ArchiveMicrosoftTeamsChannels ArchiveMicrosoftTeamsChannelsTaskParamsTaskType = "archive_microsoft_teams_channels"
 )
 
 // Defines values for ArchiveSlackChannelsTaskParamsTaskType.
@@ -727,6 +833,18 @@ const (
 // Defines values for CreateLinearSubtaskIssueTaskParamsTaskType.
 const (
 	CreateLinearSubtaskIssue CreateLinearSubtaskIssueTaskParamsTaskType = "create_linear_subtask_issue"
+)
+
+// Defines values for CreateMicrosoftTeamsChannelTaskParamsPrivate.
+const (
+	CreateMicrosoftTeamsChannelTaskParamsPrivateAuto  CreateMicrosoftTeamsChannelTaskParamsPrivate = "auto"
+	CreateMicrosoftTeamsChannelTaskParamsPrivateFalse CreateMicrosoftTeamsChannelTaskParamsPrivate = "false"
+	CreateMicrosoftTeamsChannelTaskParamsPrivateTrue  CreateMicrosoftTeamsChannelTaskParamsPrivate = "true"
+)
+
+// Defines values for CreateMicrosoftTeamsChannelTaskParamsTaskType.
+const (
+	CreateMicrosoftTeamsChannel CreateMicrosoftTeamsChannelTaskParamsTaskType = "create_microsoft_teams_channel"
 )
 
 // Defines values for CreateMicrosoftTeamsMeetingTaskParamsTaskType.
@@ -1063,7 +1181,9 @@ const (
 
 // Defines values for FormFieldPlacementConditionComparison.
 const (
-	FormFieldPlacementConditionComparisonEqual FormFieldPlacementConditionComparison = "equal"
+	FormFieldPlacementConditionComparisonEqual    FormFieldPlacementConditionComparison = "equal"
+	FormFieldPlacementConditionComparisonIsNotSet FormFieldPlacementConditionComparison = "is_not_set"
+	FormFieldPlacementConditionComparisonIsSet    FormFieldPlacementConditionComparison = "is_set"
 )
 
 // Defines values for FormFieldPlacementConditionConditioned.
@@ -1509,6 +1629,16 @@ const (
 	IncidentStatusPageEventResponseDataTypeIncidentStatusPageEvents IncidentStatusPageEventResponseDataType = "incident_status_page_events"
 )
 
+// Defines values for IncidentSubStatusListDataType.
+const (
+	IncidentSubStatusListDataTypeIncidentSubStatuses IncidentSubStatusListDataType = "incident_sub_statuses"
+)
+
+// Defines values for IncidentSubStatusResponseDataType.
+const (
+	IncidentSubStatusResponseDataTypeIncidentSubStatuses IncidentSubStatusResponseDataType = "incident_sub_statuses"
+)
+
 // Defines values for IncidentTriggerParamsIncidentCondition.
 const (
 	IncidentTriggerParamsIncidentConditionALL  IncidentTriggerParamsIncidentCondition = "ALL"
@@ -1743,6 +1873,11 @@ const (
 	IncidentTypeResponseDataTypeIncidentTypes IncidentTypeResponseDataType = "incident_types"
 )
 
+// Defines values for InviteToMicrosoftTeamsChannelTaskParamsTaskType.
+const (
+	InviteToMicrosoftTeamsChannel InviteToMicrosoftTeamsChannelTaskParamsTaskType = "invite_to_microsoft_teams_channel"
+)
+
 // Defines values for InviteToSlackChannelOpsgenieTaskParamsTaskType.
 const (
 	InviteToSlackChannelOpsgenie InviteToSlackChannelOpsgenieTaskParamsTaskType = "invite_to_slack_channel_opsgenie"
@@ -1784,6 +1919,38 @@ const (
 	NewAlertDataAttributesNotificationTargetTypeGroup            NewAlertDataAttributesNotificationTargetType = "Group"
 	NewAlertDataAttributesNotificationTargetTypeService          NewAlertDataAttributesNotificationTargetType = "Service"
 	NewAlertDataAttributesNotificationTargetTypeUser             NewAlertDataAttributesNotificationTargetType = "User"
+)
+
+// Defines values for NewAlertDataAttributesSource.
+const (
+	NewAlertDataAttributesSourceAlertmanager    NewAlertDataAttributesSource = "alertmanager"
+	NewAlertDataAttributesSourceAsana           NewAlertDataAttributesSource = "asana"
+	NewAlertDataAttributesSourceAzure           NewAlertDataAttributesSource = "azure"
+	NewAlertDataAttributesSourceClickup         NewAlertDataAttributesSource = "clickup"
+	NewAlertDataAttributesSourceCloudWatch      NewAlertDataAttributesSource = "cloud_watch"
+	NewAlertDataAttributesSourceDatadog         NewAlertDataAttributesSource = "datadog"
+	NewAlertDataAttributesSourceEmail           NewAlertDataAttributesSource = "email"
+	NewAlertDataAttributesSourceGenericWebhook  NewAlertDataAttributesSource = "generic_webhook"
+	NewAlertDataAttributesSourceGoogleCloud     NewAlertDataAttributesSource = "google_cloud"
+	NewAlertDataAttributesSourceGrafana         NewAlertDataAttributesSource = "grafana"
+	NewAlertDataAttributesSourceHoneycomb       NewAlertDataAttributesSource = "honeycomb"
+	NewAlertDataAttributesSourceJira            NewAlertDataAttributesSource = "jira"
+	NewAlertDataAttributesSourceLinear          NewAlertDataAttributesSource = "linear"
+	NewAlertDataAttributesSourceLiveCallRouting NewAlertDataAttributesSource = "live_call_routing"
+	NewAlertDataAttributesSourceManual          NewAlertDataAttributesSource = "manual"
+	NewAlertDataAttributesSourceNobl9           NewAlertDataAttributesSource = "nobl9"
+	NewAlertDataAttributesSourceOpsgenie        NewAlertDataAttributesSource = "opsgenie"
+	NewAlertDataAttributesSourcePagerduty       NewAlertDataAttributesSource = "pagerduty"
+	NewAlertDataAttributesSourcePagertree       NewAlertDataAttributesSource = "pagertree"
+	NewAlertDataAttributesSourceRollbar         NewAlertDataAttributesSource = "rollbar"
+	NewAlertDataAttributesSourceRootly          NewAlertDataAttributesSource = "rootly"
+	NewAlertDataAttributesSourceSentry          NewAlertDataAttributesSource = "sentry"
+	NewAlertDataAttributesSourceServiceNow      NewAlertDataAttributesSource = "service_now"
+	NewAlertDataAttributesSourceSlack           NewAlertDataAttributesSource = "slack"
+	NewAlertDataAttributesSourceVictorops       NewAlertDataAttributesSource = "victorops"
+	NewAlertDataAttributesSourceWeb             NewAlertDataAttributesSource = "web"
+	NewAlertDataAttributesSourceWorkflow        NewAlertDataAttributesSource = "workflow"
+	NewAlertDataAttributesSourceZendesk         NewAlertDataAttributesSource = "zendesk"
 )
 
 // Defines values for NewAlertDataAttributesStatus.
@@ -2033,7 +2200,9 @@ const (
 
 // Defines values for NewFormFieldPlacementConditionDataAttributesComparison.
 const (
-	NewFormFieldPlacementConditionDataAttributesComparisonEqual NewFormFieldPlacementConditionDataAttributesComparison = "equal"
+	NewFormFieldPlacementConditionDataAttributesComparisonEqual    NewFormFieldPlacementConditionDataAttributesComparison = "equal"
+	NewFormFieldPlacementConditionDataAttributesComparisonIsNotSet NewFormFieldPlacementConditionDataAttributesComparison = "is_not_set"
+	NewFormFieldPlacementConditionDataAttributesComparisonIsSet    NewFormFieldPlacementConditionDataAttributesComparison = "is_set"
 )
 
 // Defines values for NewFormFieldPlacementConditionDataAttributesConditioned.
@@ -2321,6 +2490,11 @@ const (
 	NewIncidentStatusPageEventDataTypeIncidentStatusPageEvents NewIncidentStatusPageEventDataType = "incident_status_page_events"
 )
 
+// Defines values for NewIncidentSubStatusDataType.
+const (
+	NewIncidentSubStatusDataTypeIncidentSubStatuses NewIncidentSubStatusDataType = "incident_sub_statuses"
+)
+
 // Defines values for NewIncidentTypeDataType.
 const (
 	NewIncidentTypeDataTypeIncidentTypes NewIncidentTypeDataType = "incident_types"
@@ -2371,6 +2545,16 @@ const (
 // Defines values for NewRetrospectiveProcessDataType.
 const (
 	NewRetrospectiveProcessDataTypeRetrospectiveProcesses NewRetrospectiveProcessDataType = "retrospective_processes"
+)
+
+// Defines values for NewRetrospectiveProcessGroupDataType.
+const (
+	NewRetrospectiveProcessGroupDataTypeRetrospectiveProcessGroups NewRetrospectiveProcessGroupDataType = "retrospective_process_groups"
+)
+
+// Defines values for NewRetrospectiveProcessGroupStepDataType.
+const (
+	NewRetrospectiveProcessGroupStepDataTypeRetrospectiveProcessGroupSteps NewRetrospectiveProcessGroupStepDataType = "retrospective_process_group_steps"
 )
 
 // Defines values for NewRetrospectiveStepDataType.
@@ -2679,6 +2863,17 @@ const (
 // Defines values for NewStatusPageDataType.
 const (
 	NewStatusPageDataTypeStatusPages NewStatusPageDataType = "status_pages"
+)
+
+// Defines values for NewSubStatusDataAttributesParentStatus.
+const (
+	NewSubStatusDataAttributesParentStatusRetrospective NewSubStatusDataAttributesParentStatus = "retrospective"
+	NewSubStatusDataAttributesParentStatusStarted       NewSubStatusDataAttributesParentStatus = "started"
+)
+
+// Defines values for NewSubStatusDataType.
+const (
+	NewSubStatusDataTypeSubStatuses NewSubStatusDataType = "sub_statuses"
 )
 
 // Defines values for NewTeamDataType.
@@ -3019,6 +3214,11 @@ const (
 	RemoveSubscribersDataTypeIncidents RemoveSubscribersDataType = "incidents"
 )
 
+// Defines values for RenameMicrosoftTeamsChannelTaskParamsTaskType.
+const (
+	RenameMicrosoftTeamsChannel RenameMicrosoftTeamsChannelTaskParamsTaskType = "rename_microsoft_teams_channel"
+)
+
 // Defines values for RenameSlackChannelTaskParamsTaskType.
 const (
 	RenameSlackChannelTaskParamsTaskTypeRenameSlackChannel RenameSlackChannelTaskParamsTaskType = "rename_slack_channel"
@@ -3053,6 +3253,26 @@ const (
 // Defines values for RetrospectiveConfigurationResponseDataType.
 const (
 	RetrospectiveConfigurationResponseDataTypeRetrospectiveConfigurations RetrospectiveConfigurationResponseDataType = "retrospective_configurations"
+)
+
+// Defines values for RetrospectiveProcessGroupListDataType.
+const (
+	RetrospectiveProcessGroupListDataTypeRetrospectiveProcessGroups RetrospectiveProcessGroupListDataType = "retrospective_process_groups"
+)
+
+// Defines values for RetrospectiveProcessGroupResponseDataType.
+const (
+	RetrospectiveProcessGroupResponseDataTypeRetrospectiveProcessGroups RetrospectiveProcessGroupResponseDataType = "retrospective_process_groups"
+)
+
+// Defines values for RetrospectiveProcessGroupStepListDataType.
+const (
+	RetrospectiveProcessGroupStepListDataTypeRetrospectiveProcessGroupSteps RetrospectiveProcessGroupStepListDataType = "retrospective_process_group_steps"
+)
+
+// Defines values for RetrospectiveProcessGroupStepResponseDataType.
+const (
+	RetrospectiveProcessGroupStepResponseDataTypeRetrospectiveProcessGroupSteps RetrospectiveProcessGroupStepResponseDataType = "retrospective_process_group_steps"
 )
 
 // Defines values for RetrospectiveProcessListDataType.
@@ -3397,6 +3617,7 @@ const (
 	SendSlackMessageTaskParamsActionablesAllCommands            SendSlackMessageTaskParamsActionables = "all_commands"
 	SendSlackMessageTaskParamsActionablesArchiveChannel         SendSlackMessageTaskParamsActionables = "archive_channel"
 	SendSlackMessageTaskParamsActionablesCancelIncident         SendSlackMessageTaskParamsActionables = "cancel_incident"
+	SendSlackMessageTaskParamsActionablesDeleteMessage          SendSlackMessageTaskParamsActionables = "delete_message"
 	SendSlackMessageTaskParamsActionablesLeaveFeedback          SendSlackMessageTaskParamsActionables = "leave_feedback"
 	SendSlackMessageTaskParamsActionablesManageActionItems      SendSlackMessageTaskParamsActionables = "manage_action_items"
 	SendSlackMessageTaskParamsActionablesManageFormFields       SendSlackMessageTaskParamsActionables = "manage_form_fields"
@@ -3547,6 +3768,28 @@ const (
 // Defines values for StatusPageTemplateResponseDataType.
 const (
 	StatusPageTemplateResponseDataTypeStatusPageTemplates StatusPageTemplateResponseDataType = "status_page_templates"
+)
+
+// Defines values for SubStatusParentStatus.
+const (
+	SubStatusParentStatusCancelled  SubStatusParentStatus = "cancelled"
+	SubStatusParentStatusClosed     SubStatusParentStatus = "closed"
+	SubStatusParentStatusCompleted  SubStatusParentStatus = "completed"
+	SubStatusParentStatusInProgress SubStatusParentStatus = "in_progress"
+	SubStatusParentStatusInTriage   SubStatusParentStatus = "in_triage"
+	SubStatusParentStatusResolved   SubStatusParentStatus = "resolved"
+	SubStatusParentStatusScheduled  SubStatusParentStatus = "scheduled"
+	SubStatusParentStatusStarted    SubStatusParentStatus = "started"
+)
+
+// Defines values for SubStatusListDataType.
+const (
+	SubStatusListDataTypeSubStatuses SubStatusListDataType = "sub_statuses"
+)
+
+// Defines values for SubStatusResponseDataType.
+const (
+	SubStatusResponseDataTypeSubStatuses SubStatusResponseDataType = "sub_statuses"
 )
 
 // Defines values for TeamListDataType.
@@ -3900,7 +4143,9 @@ const (
 
 // Defines values for UpdateFormFieldPlacementConditionDataAttributesComparison.
 const (
-	UpdateFormFieldPlacementConditionDataAttributesComparisonEqual UpdateFormFieldPlacementConditionDataAttributesComparison = "equal"
+	UpdateFormFieldPlacementConditionDataAttributesComparisonEqual    UpdateFormFieldPlacementConditionDataAttributesComparison = "equal"
+	UpdateFormFieldPlacementConditionDataAttributesComparisonIsNotSet UpdateFormFieldPlacementConditionDataAttributesComparison = "is_not_set"
+	UpdateFormFieldPlacementConditionDataAttributesComparisonIsSet    UpdateFormFieldPlacementConditionDataAttributesComparison = "is_set"
 )
 
 // Defines values for UpdateFormFieldPlacementConditionDataAttributesConditioned.
@@ -4233,6 +4478,11 @@ const (
 	UpdateIncidentStatusPageEventDataTypeIncidentStatusPageEvents UpdateIncidentStatusPageEventDataType = "incident_status_page_events"
 )
 
+// Defines values for UpdateIncidentSubStatusDataType.
+const (
+	UpdateIncidentSubStatusDataTypeIncidentSubStatuses UpdateIncidentSubStatusDataType = "incident_sub_statuses"
+)
+
 // Defines values for UpdateIncidentTaskParamsAttributeToQueryBy.
 const (
 	AirtableRecordId     UpdateIncidentTaskParamsAttributeToQueryBy = "airtable_record_id"
@@ -4417,6 +4667,16 @@ const (
 // Defines values for UpdateRetrospectiveProcessDataType.
 const (
 	UpdateRetrospectiveProcessDataTypeRetrospectiveProcesses UpdateRetrospectiveProcessDataType = "retrospective_processes"
+)
+
+// Defines values for UpdateRetrospectiveProcessGroupDataType.
+const (
+	UpdateRetrospectiveProcessGroupDataTypeRetrospectiveProcessGroups UpdateRetrospectiveProcessGroupDataType = "retrospective_process_groups"
+)
+
+// Defines values for UpdateRetrospectiveProcessGroupStepDataType.
+const (
+	UpdateRetrospectiveProcessGroupStepDataTypeRetrospectiveProcessGroupSteps UpdateRetrospectiveProcessGroupStepDataType = "retrospective_process_group_steps"
 )
 
 // Defines values for UpdateRetrospectiveStepDataType.
@@ -4694,10 +4954,10 @@ const (
 
 // Defines values for UpdateSeverityDataAttributesSeverity.
 const (
-	Critical UpdateSeverityDataAttributesSeverity = "critical"
-	High     UpdateSeverityDataAttributesSeverity = "high"
-	Low      UpdateSeverityDataAttributesSeverity = "low"
-	Medium   UpdateSeverityDataAttributesSeverity = "medium"
+	UpdateSeverityDataAttributesSeverityCritical UpdateSeverityDataAttributesSeverity = "critical"
+	UpdateSeverityDataAttributesSeverityHigh     UpdateSeverityDataAttributesSeverity = "high"
+	UpdateSeverityDataAttributesSeverityLow      UpdateSeverityDataAttributesSeverity = "low"
+	UpdateSeverityDataAttributesSeverityMedium   UpdateSeverityDataAttributesSeverity = "medium"
 )
 
 // Defines values for UpdateSeverityDataType.
@@ -4747,6 +5007,11 @@ const (
 // Defines values for UpdateStatusTaskParamsTaskType.
 const (
 	UpdateStatus UpdateStatusTaskParamsTaskType = "update_status"
+)
+
+// Defines values for UpdateSubStatusDataType.
+const (
+	UpdateSubStatusDataTypeSubStatuses UpdateSubStatusDataType = "sub_statuses"
 )
 
 // Defines values for UpdateTeamDataType.
@@ -5311,6 +5576,31 @@ type AddActionItemTaskParamsStatus string
 // AddActionItemTaskParamsTaskType defines model for AddActionItemTaskParams.TaskType.
 type AddActionItemTaskParamsTaskType string
 
+// AddMicrosoftTeamsTabTaskParams defines model for add_microsoft_teams_tab_task_params.
+type AddMicrosoftTeamsTabTaskParams struct {
+	Channel struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"channel"`
+
+	// Link The tab link. Required if not a playbook tab
+	Link *string `json:"link"`
+
+	// PlaybookId The playbook id if tab is of an incident playbook
+	PlaybookId *string                                 `json:"playbook_id,omitempty"`
+	TaskType   *AddMicrosoftTeamsTabTaskParamsTaskType `json:"task_type,omitempty"`
+	Team       struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"team"`
+
+	// Title The tab title. Required if not a playbook tab
+	Title *string `json:"title"`
+}
+
+// AddMicrosoftTeamsTabTaskParamsTaskType defines model for AddMicrosoftTeamsTabTaskParams.TaskType.
+type AddMicrosoftTeamsTabTaskParamsTaskType string
+
 // AddRoleTaskParams defines model for add_role_task_params.
 type AddRoleTaskParams struct {
 	// AssignedToUser  The user this role is assigned to
@@ -5400,6 +5690,9 @@ type AddToTimelineTaskParamsTaskType string
 
 // Alert defines model for alert.
 type Alert struct {
+	// AlertUrgencyId The ID of the alert urgency
+	AlertUrgencyId *string `json:"alert_urgency_id"`
+
 	// CreatedAt Date of creation
 	CreatedAt string `json:"created_at"`
 
@@ -5428,8 +5721,8 @@ type Alert struct {
 	// Services Services attached to the alert
 	Services *[]Service `json:"services,omitempty"`
 
-	// Source The source of the alert (eg: zendesk)
-	Source string `json:"source"`
+	// Source The source of the alert
+	Source AlertSource `json:"source"`
 
 	// Summary The summary of the alert
 	Summary string `json:"summary"`
@@ -5437,6 +5730,9 @@ type Alert struct {
 	// UpdatedAt Date of last update
 	UpdatedAt string `json:"updated_at"`
 }
+
+// AlertSource The source of the alert
+type AlertSource string
 
 // AlertGroup defines model for alert_group.
 type AlertGroup struct {
@@ -5507,12 +5803,15 @@ type AlertList struct {
 		// Id Unique ID of the alert
 		Id string `json:"id"`
 
-		// Source The source of the alert (eg: zendesk)
-		Source *string           `json:"source,omitempty"`
-		Type   AlertListDataType `json:"type"`
+		// Source The source of the alert
+		Source *AlertListDataSource `json:"source,omitempty"`
+		Type   AlertListDataType    `json:"type"`
 	} `json:"data"`
 	Links Links `json:"links"`
 }
+
+// AlertListDataSource The source of the alert
+type AlertListDataSource string
 
 // AlertListDataType defines model for AlertList.Data.Type.
 type AlertListDataType string
@@ -5525,11 +5824,14 @@ type AlertResponse struct {
 		// Id Unique ID of the alert
 		Id string `json:"id"`
 
-		// Source The source of the alert (eg: zendesk)
-		Source *string               `json:"source,omitempty"`
-		Type   AlertResponseDataType `json:"type"`
+		// Source The source of the alert
+		Source *AlertResponseDataSource `json:"source,omitempty"`
+		Type   AlertResponseDataType    `json:"type"`
 	} `json:"data"`
 }
+
+// AlertResponseDataSource The source of the alert
+type AlertResponseDataSource string
 
 // AlertResponseDataType defines model for AlertResponse.Data.Type.
 type AlertResponseDataType string
@@ -5617,6 +5919,22 @@ type AlertUrgencyResponse struct {
 
 // AlertUrgencyResponseDataType defines model for AlertUrgencyResponse.Data.Type.
 type AlertUrgencyResponseDataType string
+
+// ArchiveMicrosoftTeamsChannelsTaskParams defines model for archive_microsoft_teams_channels_task_params.
+type ArchiveMicrosoftTeamsChannelsTaskParams struct {
+	Channels []struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"channels"`
+	TaskType *ArchiveMicrosoftTeamsChannelsTaskParamsTaskType `json:"task_type,omitempty"`
+	Team     struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"team"`
+}
+
+// ArchiveMicrosoftTeamsChannelsTaskParamsTaskType defines model for ArchiveMicrosoftTeamsChannelsTaskParams.TaskType.
+type ArchiveMicrosoftTeamsChannelsTaskParamsTaskType string
 
 // ArchiveSlackChannelsTaskParams defines model for archive_slack_channels_task_params.
 type ArchiveSlackChannelsTaskParams struct {
@@ -6603,6 +6921,27 @@ type CreateLinearSubtaskIssueTaskParams struct {
 
 // CreateLinearSubtaskIssueTaskParamsTaskType defines model for CreateLinearSubtaskIssueTaskParams.TaskType.
 type CreateLinearSubtaskIssueTaskParamsTaskType string
+
+// CreateMicrosoftTeamsChannelTaskParams defines model for create_microsoft_teams_channel_task_params.
+type CreateMicrosoftTeamsChannelTaskParams struct {
+	// Description Microsoft Team channel description
+	Description *string                                        `json:"description,omitempty"`
+	Private     *CreateMicrosoftTeamsChannelTaskParamsPrivate  `json:"private,omitempty"`
+	TaskType    *CreateMicrosoftTeamsChannelTaskParamsTaskType `json:"task_type,omitempty"`
+	Team        *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"team,omitempty"`
+
+	// Title Microsoft Team channel title
+	Title string `json:"title"`
+}
+
+// CreateMicrosoftTeamsChannelTaskParamsPrivate defines model for CreateMicrosoftTeamsChannelTaskParams.Private.
+type CreateMicrosoftTeamsChannelTaskParamsPrivate string
+
+// CreateMicrosoftTeamsChannelTaskParamsTaskType defines model for CreateMicrosoftTeamsChannelTaskParams.TaskType.
+type CreateMicrosoftTeamsChannelTaskParamsTaskType string
 
 // CreateMicrosoftTeamsMeetingTaskParams defines model for create_microsoft_teams_meeting_task_params.
 type CreateMicrosoftTeamsMeetingTaskParams struct {
@@ -9136,6 +9475,43 @@ type IncidentStatusPageEventResponse struct {
 // IncidentStatusPageEventResponseDataType defines model for IncidentStatusPageEventResponse.Data.Type.
 type IncidentStatusPageEventResponseDataType string
 
+// IncidentSubStatus defines model for incident_sub_status.
+type IncidentSubStatus struct {
+	AssignedAt       string `json:"assigned_at"`
+	AssignedByUserId *int   `json:"assigned_by_user_id"`
+	IncidentId       string `json:"incident_id"`
+	SubStatusId      string `json:"sub_status_id"`
+}
+
+// IncidentSubStatusList defines model for incident_sub_status_list.
+type IncidentSubStatusList struct {
+	Data []struct {
+		Attributes IncidentSubStatus `json:"attributes"`
+
+		// Id Unique ID of the incident_sub_status
+		Id   string                        `json:"id"`
+		Type IncidentSubStatusListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// IncidentSubStatusListDataType defines model for IncidentSubStatusList.Data.Type.
+type IncidentSubStatusListDataType string
+
+// IncidentSubStatusResponse defines model for incident_sub_status_response.
+type IncidentSubStatusResponse struct {
+	Data struct {
+		Attributes IncidentSubStatus `json:"attributes"`
+
+		// Id Unique ID of the incident_sub_status
+		Id   string                            `json:"id"`
+		Type IncidentSubStatusResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// IncidentSubStatusResponseDataType defines model for IncidentSubStatusResponse.Data.Type.
+type IncidentSubStatusResponseDataType string
+
 // IncidentTriggerParams defines model for incident_trigger_params.
 type IncidentTriggerParams struct {
 	IncidentCondition               *IncidentTriggerParamsIncidentCondition                `json:"incident_condition,omitempty"`
@@ -9381,6 +9757,25 @@ type IncidentTypeResponseDataType string
 // IncidentsChartResponse defines model for incidents_chart_response.
 type IncidentsChartResponse = map[string]interface{}
 
+// InviteToMicrosoftTeamsChannelTaskParams defines model for invite_to_microsoft_teams_channel_task_params.
+type InviteToMicrosoftTeamsChannelTaskParams struct {
+	Channel struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"channel"`
+
+	// Emails Comma separated list of emails to invite
+	Emails   string                                           `json:"emails"`
+	TaskType *InviteToMicrosoftTeamsChannelTaskParamsTaskType `json:"task_type,omitempty"`
+	Team     *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"team,omitempty"`
+}
+
+// InviteToMicrosoftTeamsChannelTaskParamsTaskType defines model for InviteToMicrosoftTeamsChannelTaskParams.TaskType.
+type InviteToMicrosoftTeamsChannelTaskParamsTaskType string
+
 // InviteToSlackChannelOpsgenieTaskParams defines model for invite_to_slack_channel_opsgenie_task_params.
 type InviteToSlackChannelOpsgenieTaskParams struct {
 	Channels *[]struct {
@@ -9545,6 +9940,9 @@ type MitigateIncidentDataType string
 type NewAlert struct {
 	Data struct {
 		Attributes struct {
+			// AlertUrgencyId The ID of the alert urgency
+			AlertUrgencyId *string `json:"alert_urgency_id"`
+
 			// Data Additional data
 			Data *map[string]interface{} `json:"data"`
 
@@ -9579,8 +9977,8 @@ type NewAlert struct {
 			// ServiceIds The Service ID's to attach to the alert. If your organization has On-Call enabled and your notification target is a Service. This field will be automatically set for you.
 			ServiceIds *[]string `json:"service_ids"`
 
-			// Source The source of the alert (eg: zendesk)
-			Source string `json:"source"`
+			// Source The source of the alert
+			Source NewAlertDataAttributesSource `json:"source"`
 
 			// StartedAt Alert start datetime
 			StartedAt *time.Time `json:"started_at"`
@@ -9597,6 +9995,9 @@ type NewAlert struct {
 
 // NewAlertDataAttributesNotificationTargetType Only available for organizations with Rootly On-Call enabled. Can be one of Group, Service, EscalationPolicy, User.
 type NewAlertDataAttributesNotificationTargetType string
+
+// NewAlertDataAttributesSource The source of the alert
+type NewAlertDataAttributesSource string
 
 // NewAlertDataAttributesStatus Only available for organizations with Rootly On-Call enabled. Can be one of open, triggered, acknowledged or resolved.
 type NewAlertDataAttributesStatus string
@@ -10698,6 +11099,21 @@ type NewIncidentStatusPageEventDataAttributesStatus string
 // NewIncidentStatusPageEventDataType defines model for NewIncidentStatusPageEvent.Data.Type.
 type NewIncidentStatusPageEventDataType string
 
+// NewIncidentSubStatus defines model for new_incident_sub_status.
+type NewIncidentSubStatus struct {
+	Data struct {
+		Attributes struct {
+			AssignedAt       string `json:"assigned_at"`
+			AssignedByUserId *int   `json:"assigned_by_user_id"`
+			SubStatusId      string `json:"sub_status_id"`
+		} `json:"attributes"`
+		Type NewIncidentSubStatusDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewIncidentSubStatusDataType defines model for NewIncidentSubStatus.Data.Type.
+type NewIncidentSubStatusDataType string
+
 // NewIncidentType defines model for new_incident_type.
 type NewIncidentType struct {
 	Data struct {
@@ -10951,6 +11367,34 @@ type NewRetrospectiveProcess struct {
 
 // NewRetrospectiveProcessDataType defines model for NewRetrospectiveProcess.Data.Type.
 type NewRetrospectiveProcessDataType string
+
+// NewRetrospectiveProcessGroup defines model for new_retrospective_process_group.
+type NewRetrospectiveProcessGroup struct {
+	Data struct {
+		Attributes struct {
+			Position    *int   `json:"position,omitempty"`
+			SubStatusId string `json:"sub_status_id"`
+		} `json:"attributes"`
+		Type NewRetrospectiveProcessGroupDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewRetrospectiveProcessGroupDataType defines model for NewRetrospectiveProcessGroup.Data.Type.
+type NewRetrospectiveProcessGroupDataType string
+
+// NewRetrospectiveProcessGroupStep defines model for new_retrospective_process_group_step.
+type NewRetrospectiveProcessGroupStep struct {
+	Data struct {
+		Attributes struct {
+			Position            *int   `json:"position,omitempty"`
+			RetrospectiveStepId string `json:"retrospective_step_id"`
+		} `json:"attributes"`
+		Type NewRetrospectiveProcessGroupStepDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewRetrospectiveProcessGroupStepDataType defines model for NewRetrospectiveProcessGroupStep.Data.Type.
+type NewRetrospectiveProcessGroupStepDataType string
 
 // NewRetrospectiveStep defines model for new_retrospective_step.
 type NewRetrospectiveStep struct {
@@ -11472,6 +11916,26 @@ type NewStatusPageDataAttributesShowUptimeLastDays int
 
 // NewStatusPageDataType defines model for NewStatusPage.Data.Type.
 type NewStatusPageDataType string
+
+// NewSubStatus defines model for new_sub_status.
+type NewSubStatus struct {
+	Data struct {
+		Attributes struct {
+			Description  *string                                `json:"description"`
+			Name         string                                 `json:"name"`
+			ParentStatus NewSubStatusDataAttributesParentStatus `json:"parent_status"`
+			Position     *int                                   `json:"position"`
+			Slug         *string                                `json:"slug,omitempty"`
+		} `json:"attributes"`
+		Type NewSubStatusDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewSubStatusDataAttributesParentStatus defines model for NewSubStatus.Data.Attributes.ParentStatus.
+type NewSubStatusDataAttributesParentStatus string
+
+// NewSubStatusDataType defines model for NewSubStatus.Data.Type.
+type NewSubStatusDataType string
 
 // NewTeam defines model for new_team.
 type NewTeam struct {
@@ -12448,6 +12912,23 @@ type RemoveSubscribers struct {
 // RemoveSubscribersDataType defines model for RemoveSubscribers.Data.Type.
 type RemoveSubscribersDataType string
 
+// RenameMicrosoftTeamsChannelTaskParams defines model for rename_microsoft_teams_channel_task_params.
+type RenameMicrosoftTeamsChannelTaskParams struct {
+	Channel struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"channel"`
+	TaskType *RenameMicrosoftTeamsChannelTaskParamsTaskType `json:"task_type,omitempty"`
+	Team     struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"team"`
+	Title string `json:"title"`
+}
+
+// RenameMicrosoftTeamsChannelTaskParamsTaskType defines model for RenameMicrosoftTeamsChannelTaskParams.TaskType.
+type RenameMicrosoftTeamsChannelTaskParamsTaskType string
+
 // RenameSlackChannelTaskParams defines model for rename_slack_channel_task_params.
 type RenameSlackChannelTaskParams struct {
 	Channel struct {
@@ -12582,6 +13063,78 @@ type RetrospectiveProcess struct {
 	// UpdatedAt Date of last update
 	UpdatedAt *string `json:"updated_at,omitempty"`
 }
+
+// RetrospectiveProcessGroup defines model for retrospective_process_group.
+type RetrospectiveProcessGroup struct {
+	Position               int    `json:"position"`
+	RetrospectiveProcessId string `json:"retrospective_process_id"`
+	SubStatusId            string `json:"sub_status_id"`
+}
+
+// RetrospectiveProcessGroupList defines model for retrospective_process_group_list.
+type RetrospectiveProcessGroupList struct {
+	Data []struct {
+		Attributes RetrospectiveProcessGroup `json:"attributes"`
+
+		// Id Unique ID of the retrospective_process_group
+		Id   string                                `json:"id"`
+		Type RetrospectiveProcessGroupListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// RetrospectiveProcessGroupListDataType defines model for RetrospectiveProcessGroupList.Data.Type.
+type RetrospectiveProcessGroupListDataType string
+
+// RetrospectiveProcessGroupResponse defines model for retrospective_process_group_response.
+type RetrospectiveProcessGroupResponse struct {
+	Data struct {
+		Attributes RetrospectiveProcessGroup `json:"attributes"`
+
+		// Id Unique ID of the retrospective_process_group
+		Id   string                                    `json:"id"`
+		Type RetrospectiveProcessGroupResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// RetrospectiveProcessGroupResponseDataType defines model for RetrospectiveProcessGroupResponse.Data.Type.
+type RetrospectiveProcessGroupResponseDataType string
+
+// RetrospectiveProcessGroupStep defines model for retrospective_process_group_step.
+type RetrospectiveProcessGroupStep struct {
+	Position                    int    `json:"position"`
+	RetrospectiveProcessGroupId string `json:"retrospective_process_group_id"`
+	RetrospectiveStepId         string `json:"retrospective_step_id"`
+}
+
+// RetrospectiveProcessGroupStepList defines model for retrospective_process_group_step_list.
+type RetrospectiveProcessGroupStepList struct {
+	Data []struct {
+		Attributes RetrospectiveProcessGroupStep `json:"attributes"`
+
+		// Id Unique ID of the retrospective_process_group_step
+		Id   string                                    `json:"id"`
+		Type RetrospectiveProcessGroupStepListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// RetrospectiveProcessGroupStepListDataType defines model for RetrospectiveProcessGroupStepList.Data.Type.
+type RetrospectiveProcessGroupStepListDataType string
+
+// RetrospectiveProcessGroupStepResponse defines model for retrospective_process_group_step_response.
+type RetrospectiveProcessGroupStepResponse struct {
+	Data struct {
+		Attributes RetrospectiveProcessGroupStep `json:"attributes"`
+
+		// Id Unique ID of the retrospective_process_group_step
+		Id   string                                        `json:"id"`
+		Type RetrospectiveProcessGroupStepResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// RetrospectiveProcessGroupStepResponseDataType defines model for RetrospectiveProcessGroupStepResponse.Data.Type.
+type RetrospectiveProcessGroupStepResponseDataType string
 
 // RetrospectiveProcessList defines model for retrospective_process_list.
 type RetrospectiveProcessList struct {
@@ -13791,6 +14344,49 @@ type StatusPageTemplateResponse struct {
 
 // StatusPageTemplateResponseDataType defines model for StatusPageTemplateResponse.Data.Type.
 type StatusPageTemplateResponseDataType string
+
+// SubStatus defines model for sub_status.
+type SubStatus struct {
+	CreatedAt    string                `json:"created_at"`
+	Description  *string               `json:"description"`
+	Name         string                `json:"name"`
+	ParentStatus SubStatusParentStatus `json:"parent_status"`
+	Position     *int                  `json:"position"`
+	Slug         *string               `json:"slug,omitempty"`
+	UpdatedAt    string                `json:"updated_at"`
+}
+
+// SubStatusParentStatus defines model for SubStatus.ParentStatus.
+type SubStatusParentStatus string
+
+// SubStatusList defines model for sub_status_list.
+type SubStatusList struct {
+	Data []struct {
+		Attributes SubStatus `json:"attributes"`
+
+		// Id Unique ID of the sub_status
+		Id   string                `json:"id"`
+		Type SubStatusListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// SubStatusListDataType defines model for SubStatusList.Data.Type.
+type SubStatusListDataType string
+
+// SubStatusResponse defines model for sub_status_response.
+type SubStatusResponse struct {
+	Data struct {
+		Attributes SubStatus `json:"attributes"`
+
+		// Id Unique ID of the sub_status
+		Id   string                    `json:"id"`
+		Type SubStatusResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// SubStatusResponseDataType defines model for SubStatusResponse.Data.Type.
+type SubStatusResponseDataType string
 
 // Team defines model for team.
 type Team struct {
@@ -15314,6 +15910,21 @@ type UpdateIncidentStatusPageEventDataAttributesStatus string
 // UpdateIncidentStatusPageEventDataType defines model for UpdateIncidentStatusPageEvent.Data.Type.
 type UpdateIncidentStatusPageEventDataType string
 
+// UpdateIncidentSubStatus defines model for update_incident_sub_status.
+type UpdateIncidentSubStatus struct {
+	Data struct {
+		Attributes struct {
+			AssignedAt       *string `json:"assigned_at,omitempty"`
+			AssignedByUserId *int    `json:"assigned_by_user_id"`
+			SubStatusId      *string `json:"sub_status_id,omitempty"`
+		} `json:"attributes"`
+		Type UpdateIncidentSubStatusDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateIncidentSubStatusDataType defines model for UpdateIncidentSubStatus.Data.Type.
+type UpdateIncidentSubStatusDataType string
+
 // UpdateIncidentTaskParams defines model for update_incident_task_params.
 type UpdateIncidentTaskParams struct {
 	AcknowledgedAt     *string                                     `json:"acknowledged_at"`
@@ -15870,6 +16481,33 @@ type UpdateRetrospectiveProcess struct {
 
 // UpdateRetrospectiveProcessDataType defines model for UpdateRetrospectiveProcess.Data.Type.
 type UpdateRetrospectiveProcessDataType string
+
+// UpdateRetrospectiveProcessGroup defines model for update_retrospective_process_group.
+type UpdateRetrospectiveProcessGroup struct {
+	Data struct {
+		Attributes struct {
+			Position    *int    `json:"position,omitempty"`
+			SubStatusId *string `json:"sub_status_id,omitempty"`
+		} `json:"attributes"`
+		Type UpdateRetrospectiveProcessGroupDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateRetrospectiveProcessGroupDataType defines model for UpdateRetrospectiveProcessGroup.Data.Type.
+type UpdateRetrospectiveProcessGroupDataType string
+
+// UpdateRetrospectiveProcessGroupStep defines model for update_retrospective_process_group_step.
+type UpdateRetrospectiveProcessGroupStep struct {
+	Data struct {
+		Attributes struct {
+			Position *int `json:"position,omitempty"`
+		} `json:"attributes"`
+		Type UpdateRetrospectiveProcessGroupStepDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateRetrospectiveProcessGroupStepDataType defines model for UpdateRetrospectiveProcessGroupStep.Data.Type.
+type UpdateRetrospectiveProcessGroupStepDataType string
 
 // UpdateRetrospectiveStep defines model for update_retrospective_step.
 type UpdateRetrospectiveStep struct {
@@ -16484,6 +17122,22 @@ type UpdateStatusTaskParamsStatus string
 
 // UpdateStatusTaskParamsTaskType defines model for UpdateStatusTaskParams.TaskType.
 type UpdateStatusTaskParamsTaskType string
+
+// UpdateSubStatus defines model for update_sub_status.
+type UpdateSubStatus struct {
+	Data struct {
+		Attributes struct {
+			Description *string `json:"description"`
+			Name        *string `json:"name,omitempty"`
+			Position    *int    `json:"position"`
+			Slug        *string `json:"slug,omitempty"`
+		} `json:"attributes"`
+		Type UpdateSubStatusDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateSubStatusDataType defines model for UpdateSubStatus.Data.Type.
+type UpdateSubStatusDataType string
 
 // UpdateTeam defines model for update_team.
 type UpdateTeam struct {
@@ -17953,6 +18607,18 @@ type ListIncidentStatusPagesParams struct {
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
+// ListIncidentSubStatusesParams defines parameters for ListIncidentSubStatuses.
+type ListIncidentSubStatusesParams struct {
+	Include             *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber          *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize            *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSubStatusId   *string `form:"filter[sub_status_id],omitempty" json:"filter[sub_status_id],omitempty"`
+	FilterAssignedAtGt  *string `form:"filter[assigned_at][gt],omitempty" json:"filter[assigned_at][gt],omitempty"`
+	FilterAssignedAtGte *string `form:"filter[assigned_at][gte],omitempty" json:"filter[assigned_at][gte],omitempty"`
+	FilterAssignedAtLt  *string `form:"filter[assigned_at][lt],omitempty" json:"filter[assigned_at][lt],omitempty"`
+	FilterAssignedAtLte *string `form:"filter[assigned_at][lte],omitempty" json:"filter[assigned_at][lte],omitempty"`
+}
+
 // ListPlaybooksParams defines parameters for ListPlaybooks.
 type ListPlaybooksParams struct {
 	Include    *string `form:"include,omitempty" json:"include,omitempty"`
@@ -18039,11 +18705,35 @@ type ListRetrospectiveConfigurationsParams struct {
 	FilterKind *string `form:"filter[kind],omitempty" json:"filter[kind],omitempty"`
 }
 
+// ListRetrospectiveProcessGroupStepsParams defines parameters for ListRetrospectiveProcessGroupSteps.
+type ListRetrospectiveProcessGroupStepsParams struct {
+	Include                   *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber                *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize                  *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterRetrospectiveStepId *string `form:"filter[retrospective_step_id],omitempty" json:"filter[retrospective_step_id],omitempty"`
+	FilterCreatedAtGt         *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte        *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt         *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte        *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+}
+
 // ListRetrospectiveProcessesParams defines parameters for ListRetrospectiveProcesses.
 type ListRetrospectiveProcessesParams struct {
 	Include    *string `form:"include,omitempty" json:"include,omitempty"`
 	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+}
+
+// ListRetrospectiveProcessGroupsParams defines parameters for ListRetrospectiveProcessGroups.
+type ListRetrospectiveProcessGroupsParams struct {
+	Include            *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSubStatusId  *string `form:"filter[sub_status_id],omitempty" json:"filter[sub_status_id],omitempty"`
+	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
 }
 
 // ListRetrospectiveStepsParams defines parameters for ListRetrospectiveSteps.
@@ -18201,6 +18891,20 @@ type ListStatusPageTemplatesParams struct {
 	Include    *string `form:"include,omitempty" json:"include,omitempty"`
 	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+}
+
+// ListSubStatusesParams defines parameters for ListSubStatuses.
+type ListSubStatusesParams struct {
+	Include            *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterParentStatus *string `form:"filter[parent_status],omitempty" json:"filter[parent_status],omitempty"`
+	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
 }
 
 // ListTeamsParams defines parameters for ListTeams.
@@ -18522,6 +19226,9 @@ type UpdateIncidentRoleApplicationVndAPIPlusJSONRequestBody = UpdateIncidentRole
 // CreateIncidentRoleTaskApplicationVndAPIPlusJSONRequestBody defines body for CreateIncidentRoleTask for application/vnd.api+json ContentType.
 type CreateIncidentRoleTaskApplicationVndAPIPlusJSONRequestBody = NewIncidentRoleTask
 
+// UpdateIncidentSubStatusApplicationVndAPIPlusJSONRequestBody defines body for UpdateIncidentSubStatus for application/vnd.api+json ContentType.
+type UpdateIncidentSubStatusApplicationVndAPIPlusJSONRequestBody = UpdateIncidentSubStatus
+
 // CreateIncidentTypeApplicationVndAPIPlusJSONRequestBody defines body for CreateIncidentType for application/vnd.api+json ContentType.
 type CreateIncidentTypeApplicationVndAPIPlusJSONRequestBody = NewIncidentType
 
@@ -18585,6 +19292,9 @@ type CreateIncidentFormFieldSelectionApplicationVndAPIPlusJSONRequestBody = NewI
 // CreateIncidentStatusPageApplicationVndAPIPlusJSONRequestBody defines body for CreateIncidentStatusPage for application/vnd.api+json ContentType.
 type CreateIncidentStatusPageApplicationVndAPIPlusJSONRequestBody = NewIncidentStatusPageEvent
 
+// CreateIncidentSubStatusApplicationVndAPIPlusJSONRequestBody defines body for CreateIncidentSubStatus for application/vnd.api+json ContentType.
+type CreateIncidentSubStatusApplicationVndAPIPlusJSONRequestBody = NewIncidentSubStatus
+
 // UpdateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody defines body for UpdateUserNotificationRule for application/vnd.api+json ContentType.
 type UpdateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody = UpdateUserNotificationRule
 
@@ -18624,11 +19334,23 @@ type UpdatePulseApplicationVndAPIPlusJSONRequestBody = UpdatePulse
 // UpdateRetrospectiveConfigurationApplicationVndAPIPlusJSONRequestBody defines body for UpdateRetrospectiveConfiguration for application/vnd.api+json ContentType.
 type UpdateRetrospectiveConfigurationApplicationVndAPIPlusJSONRequestBody = UpdateRetrospectiveConfiguration
 
+// UpdateRetrospectiveProcessGroupStepApplicationVndAPIPlusJSONRequestBody defines body for UpdateRetrospectiveProcessGroupStep for application/vnd.api+json ContentType.
+type UpdateRetrospectiveProcessGroupStepApplicationVndAPIPlusJSONRequestBody = UpdateRetrospectiveProcessGroupStep
+
+// UpdateRetrospectiveProcessGroupApplicationVndAPIPlusJSONRequestBody defines body for UpdateRetrospectiveProcessGroup for application/vnd.api+json ContentType.
+type UpdateRetrospectiveProcessGroupApplicationVndAPIPlusJSONRequestBody = UpdateRetrospectiveProcessGroup
+
+// CreateRetrospectiveProcessGroupStepApplicationVndAPIPlusJSONRequestBody defines body for CreateRetrospectiveProcessGroupStep for application/vnd.api+json ContentType.
+type CreateRetrospectiveProcessGroupStepApplicationVndAPIPlusJSONRequestBody = NewRetrospectiveProcessGroupStep
+
 // CreateRetrospectiveProcessApplicationVndAPIPlusJSONRequestBody defines body for CreateRetrospectiveProcess for application/vnd.api+json ContentType.
 type CreateRetrospectiveProcessApplicationVndAPIPlusJSONRequestBody = NewRetrospectiveProcess
 
 // UpdateRetrospectiveProcessApplicationVndAPIPlusJSONRequestBody defines body for UpdateRetrospectiveProcess for application/vnd.api+json ContentType.
 type UpdateRetrospectiveProcessApplicationVndAPIPlusJSONRequestBody = UpdateRetrospectiveProcess
+
+// CreateRetrospectiveProcessGroupApplicationVndAPIPlusJSONRequestBody defines body for CreateRetrospectiveProcessGroup for application/vnd.api+json ContentType.
+type CreateRetrospectiveProcessGroupApplicationVndAPIPlusJSONRequestBody = NewRetrospectiveProcessGroup
 
 // CreateRetrospectiveStepApplicationVndAPIPlusJSONRequestBody defines body for CreateRetrospectiveStep for application/vnd.api+json ContentType.
 type CreateRetrospectiveStepApplicationVndAPIPlusJSONRequestBody = NewRetrospectiveStep
@@ -18701,6 +19423,12 @@ type UpdateStatusPageApplicationVndAPIPlusJSONRequestBody = UpdateStatusPage
 
 // CreateStatusPageTemplateApplicationVndAPIPlusJSONRequestBody defines body for CreateStatusPageTemplate for application/vnd.api+json ContentType.
 type CreateStatusPageTemplateApplicationVndAPIPlusJSONRequestBody = StatusPageTemplate
+
+// CreateSubStatusApplicationVndAPIPlusJSONRequestBody defines body for CreateSubStatus for application/vnd.api+json ContentType.
+type CreateSubStatusApplicationVndAPIPlusJSONRequestBody = NewSubStatus
+
+// UpdateSubStatusApplicationVndAPIPlusJSONRequestBody defines body for UpdateSubStatus for application/vnd.api+json ContentType.
+type UpdateSubStatusApplicationVndAPIPlusJSONRequestBody = UpdateSubStatus
 
 // CreateTeamApplicationVndAPIPlusJSONRequestBody defines body for CreateTeam for application/vnd.api+json ContentType.
 type CreateTeamApplicationVndAPIPlusJSONRequestBody = NewTeam
@@ -21185,6 +21913,136 @@ func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromCreateMicrosoftTeamsMee
 
 // MergeCreateMicrosoftTeamsMeetingTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided CreateMicrosoftTeamsMeetingTaskParams
 func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeCreateMicrosoftTeamsMeetingTaskParams(v CreateMicrosoftTeamsMeetingTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsCreateMicrosoftTeamsChannelTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a CreateMicrosoftTeamsChannelTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsCreateMicrosoftTeamsChannelTaskParams() (CreateMicrosoftTeamsChannelTaskParams, error) {
+	var body CreateMicrosoftTeamsChannelTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateMicrosoftTeamsChannelTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided CreateMicrosoftTeamsChannelTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromCreateMicrosoftTeamsChannelTaskParams(v CreateMicrosoftTeamsChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateMicrosoftTeamsChannelTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided CreateMicrosoftTeamsChannelTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeCreateMicrosoftTeamsChannelTaskParams(v CreateMicrosoftTeamsChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsAddMicrosoftTeamsTabTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a AddMicrosoftTeamsTabTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsAddMicrosoftTeamsTabTaskParams() (AddMicrosoftTeamsTabTaskParams, error) {
+	var body AddMicrosoftTeamsTabTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromAddMicrosoftTeamsTabTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided AddMicrosoftTeamsTabTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromAddMicrosoftTeamsTabTaskParams(v AddMicrosoftTeamsTabTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeAddMicrosoftTeamsTabTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided AddMicrosoftTeamsTabTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeAddMicrosoftTeamsTabTaskParams(v AddMicrosoftTeamsTabTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsArchiveMicrosoftTeamsChannelsTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a ArchiveMicrosoftTeamsChannelsTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsArchiveMicrosoftTeamsChannelsTaskParams() (ArchiveMicrosoftTeamsChannelsTaskParams, error) {
+	var body ArchiveMicrosoftTeamsChannelsTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromArchiveMicrosoftTeamsChannelsTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided ArchiveMicrosoftTeamsChannelsTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromArchiveMicrosoftTeamsChannelsTaskParams(v ArchiveMicrosoftTeamsChannelsTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeArchiveMicrosoftTeamsChannelsTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided ArchiveMicrosoftTeamsChannelsTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeArchiveMicrosoftTeamsChannelsTaskParams(v ArchiveMicrosoftTeamsChannelsTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsRenameMicrosoftTeamsChannelTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a RenameMicrosoftTeamsChannelTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsRenameMicrosoftTeamsChannelTaskParams() (RenameMicrosoftTeamsChannelTaskParams, error) {
+	var body RenameMicrosoftTeamsChannelTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromRenameMicrosoftTeamsChannelTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided RenameMicrosoftTeamsChannelTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromRenameMicrosoftTeamsChannelTaskParams(v RenameMicrosoftTeamsChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeRenameMicrosoftTeamsChannelTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided RenameMicrosoftTeamsChannelTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeRenameMicrosoftTeamsChannelTaskParams(v RenameMicrosoftTeamsChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsInviteToMicrosoftTeamsChannelTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a InviteToMicrosoftTeamsChannelTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsInviteToMicrosoftTeamsChannelTaskParams() (InviteToMicrosoftTeamsChannelTaskParams, error) {
+	var body InviteToMicrosoftTeamsChannelTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromInviteToMicrosoftTeamsChannelTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided InviteToMicrosoftTeamsChannelTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromInviteToMicrosoftTeamsChannelTaskParams(v InviteToMicrosoftTeamsChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeInviteToMicrosoftTeamsChannelTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided InviteToMicrosoftTeamsChannelTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeInviteToMicrosoftTeamsChannelTaskParams(v InviteToMicrosoftTeamsChannelTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -24231,6 +25089,136 @@ func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeCreateMicrosoftTeam
 	return err
 }
 
+// AsCreateMicrosoftTeamsChannelTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a CreateMicrosoftTeamsChannelTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsCreateMicrosoftTeamsChannelTaskParams() (CreateMicrosoftTeamsChannelTaskParams, error) {
+	var body CreateMicrosoftTeamsChannelTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateMicrosoftTeamsChannelTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided CreateMicrosoftTeamsChannelTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromCreateMicrosoftTeamsChannelTaskParams(v CreateMicrosoftTeamsChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateMicrosoftTeamsChannelTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided CreateMicrosoftTeamsChannelTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeCreateMicrosoftTeamsChannelTaskParams(v CreateMicrosoftTeamsChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsAddMicrosoftTeamsTabTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a AddMicrosoftTeamsTabTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsAddMicrosoftTeamsTabTaskParams() (AddMicrosoftTeamsTabTaskParams, error) {
+	var body AddMicrosoftTeamsTabTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromAddMicrosoftTeamsTabTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided AddMicrosoftTeamsTabTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromAddMicrosoftTeamsTabTaskParams(v AddMicrosoftTeamsTabTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeAddMicrosoftTeamsTabTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided AddMicrosoftTeamsTabTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeAddMicrosoftTeamsTabTaskParams(v AddMicrosoftTeamsTabTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsArchiveMicrosoftTeamsChannelsTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a ArchiveMicrosoftTeamsChannelsTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsArchiveMicrosoftTeamsChannelsTaskParams() (ArchiveMicrosoftTeamsChannelsTaskParams, error) {
+	var body ArchiveMicrosoftTeamsChannelsTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromArchiveMicrosoftTeamsChannelsTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided ArchiveMicrosoftTeamsChannelsTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromArchiveMicrosoftTeamsChannelsTaskParams(v ArchiveMicrosoftTeamsChannelsTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeArchiveMicrosoftTeamsChannelsTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided ArchiveMicrosoftTeamsChannelsTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeArchiveMicrosoftTeamsChannelsTaskParams(v ArchiveMicrosoftTeamsChannelsTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsRenameMicrosoftTeamsChannelTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a RenameMicrosoftTeamsChannelTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsRenameMicrosoftTeamsChannelTaskParams() (RenameMicrosoftTeamsChannelTaskParams, error) {
+	var body RenameMicrosoftTeamsChannelTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromRenameMicrosoftTeamsChannelTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided RenameMicrosoftTeamsChannelTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromRenameMicrosoftTeamsChannelTaskParams(v RenameMicrosoftTeamsChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeRenameMicrosoftTeamsChannelTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided RenameMicrosoftTeamsChannelTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeRenameMicrosoftTeamsChannelTaskParams(v RenameMicrosoftTeamsChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsInviteToMicrosoftTeamsChannelTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a InviteToMicrosoftTeamsChannelTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsInviteToMicrosoftTeamsChannelTaskParams() (InviteToMicrosoftTeamsChannelTaskParams, error) {
+	var body InviteToMicrosoftTeamsChannelTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromInviteToMicrosoftTeamsChannelTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided InviteToMicrosoftTeamsChannelTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromInviteToMicrosoftTeamsChannelTaskParams(v InviteToMicrosoftTeamsChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeInviteToMicrosoftTeamsChannelTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided InviteToMicrosoftTeamsChannelTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeInviteToMicrosoftTeamsChannelTaskParams(v InviteToMicrosoftTeamsChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsCreateNotionPageTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a CreateNotionPageTaskParams
 func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsCreateNotionPageTaskParams() (CreateNotionPageTaskParams, error) {
 	var body CreateNotionPageTaskParams
@@ -27267,6 +28255,136 @@ func (t *WorkflowTask_TaskParams) MergeCreateMicrosoftTeamsMeetingTaskParams(v C
 	return err
 }
 
+// AsCreateMicrosoftTeamsChannelTaskParams returns the union data inside the WorkflowTask_TaskParams as a CreateMicrosoftTeamsChannelTaskParams
+func (t WorkflowTask_TaskParams) AsCreateMicrosoftTeamsChannelTaskParams() (CreateMicrosoftTeamsChannelTaskParams, error) {
+	var body CreateMicrosoftTeamsChannelTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateMicrosoftTeamsChannelTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided CreateMicrosoftTeamsChannelTaskParams
+func (t *WorkflowTask_TaskParams) FromCreateMicrosoftTeamsChannelTaskParams(v CreateMicrosoftTeamsChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateMicrosoftTeamsChannelTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided CreateMicrosoftTeamsChannelTaskParams
+func (t *WorkflowTask_TaskParams) MergeCreateMicrosoftTeamsChannelTaskParams(v CreateMicrosoftTeamsChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsAddMicrosoftTeamsTabTaskParams returns the union data inside the WorkflowTask_TaskParams as a AddMicrosoftTeamsTabTaskParams
+func (t WorkflowTask_TaskParams) AsAddMicrosoftTeamsTabTaskParams() (AddMicrosoftTeamsTabTaskParams, error) {
+	var body AddMicrosoftTeamsTabTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromAddMicrosoftTeamsTabTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided AddMicrosoftTeamsTabTaskParams
+func (t *WorkflowTask_TaskParams) FromAddMicrosoftTeamsTabTaskParams(v AddMicrosoftTeamsTabTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeAddMicrosoftTeamsTabTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided AddMicrosoftTeamsTabTaskParams
+func (t *WorkflowTask_TaskParams) MergeAddMicrosoftTeamsTabTaskParams(v AddMicrosoftTeamsTabTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsArchiveMicrosoftTeamsChannelsTaskParams returns the union data inside the WorkflowTask_TaskParams as a ArchiveMicrosoftTeamsChannelsTaskParams
+func (t WorkflowTask_TaskParams) AsArchiveMicrosoftTeamsChannelsTaskParams() (ArchiveMicrosoftTeamsChannelsTaskParams, error) {
+	var body ArchiveMicrosoftTeamsChannelsTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromArchiveMicrosoftTeamsChannelsTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided ArchiveMicrosoftTeamsChannelsTaskParams
+func (t *WorkflowTask_TaskParams) FromArchiveMicrosoftTeamsChannelsTaskParams(v ArchiveMicrosoftTeamsChannelsTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeArchiveMicrosoftTeamsChannelsTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided ArchiveMicrosoftTeamsChannelsTaskParams
+func (t *WorkflowTask_TaskParams) MergeArchiveMicrosoftTeamsChannelsTaskParams(v ArchiveMicrosoftTeamsChannelsTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsRenameMicrosoftTeamsChannelTaskParams returns the union data inside the WorkflowTask_TaskParams as a RenameMicrosoftTeamsChannelTaskParams
+func (t WorkflowTask_TaskParams) AsRenameMicrosoftTeamsChannelTaskParams() (RenameMicrosoftTeamsChannelTaskParams, error) {
+	var body RenameMicrosoftTeamsChannelTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromRenameMicrosoftTeamsChannelTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided RenameMicrosoftTeamsChannelTaskParams
+func (t *WorkflowTask_TaskParams) FromRenameMicrosoftTeamsChannelTaskParams(v RenameMicrosoftTeamsChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeRenameMicrosoftTeamsChannelTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided RenameMicrosoftTeamsChannelTaskParams
+func (t *WorkflowTask_TaskParams) MergeRenameMicrosoftTeamsChannelTaskParams(v RenameMicrosoftTeamsChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsInviteToMicrosoftTeamsChannelTaskParams returns the union data inside the WorkflowTask_TaskParams as a InviteToMicrosoftTeamsChannelTaskParams
+func (t WorkflowTask_TaskParams) AsInviteToMicrosoftTeamsChannelTaskParams() (InviteToMicrosoftTeamsChannelTaskParams, error) {
+	var body InviteToMicrosoftTeamsChannelTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromInviteToMicrosoftTeamsChannelTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided InviteToMicrosoftTeamsChannelTaskParams
+func (t *WorkflowTask_TaskParams) FromInviteToMicrosoftTeamsChannelTaskParams(v InviteToMicrosoftTeamsChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeInviteToMicrosoftTeamsChannelTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided InviteToMicrosoftTeamsChannelTaskParams
+func (t *WorkflowTask_TaskParams) MergeInviteToMicrosoftTeamsChannelTaskParams(v InviteToMicrosoftTeamsChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsCreateNotionPageTaskParams returns the union data inside the WorkflowTask_TaskParams as a CreateNotionPageTaskParams
 func (t WorkflowTask_TaskParams) AsCreateNotionPageTaskParams() (CreateNotionPageTaskParams, error) {
 	var body CreateNotionPageTaskParams
@@ -29746,6 +30864,17 @@ type ClientInterface interface {
 
 	CreateIncidentRoleTaskWithApplicationVndAPIPlusJSONBody(ctx context.Context, incidentRoleId string, body CreateIncidentRoleTaskApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// DeleteIncidentSubStatus request
+	DeleteIncidentSubStatus(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetIncidentSubStatus request
+	GetIncidentSubStatus(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateIncidentSubStatusWithBody request with any body
+	UpdateIncidentSubStatusWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateIncidentSubStatusWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateIncidentSubStatusApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListIncidentTypes request
 	ListIncidentTypes(ctx context.Context, params *ListIncidentTypesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -29890,6 +31019,14 @@ type ClientInterface interface {
 
 	CreateIncidentStatusPageWithApplicationVndAPIPlusJSONBody(ctx context.Context, incidentId string, body CreateIncidentStatusPageApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListIncidentSubStatuses request
+	ListIncidentSubStatuses(ctx context.Context, incidentId string, params *ListIncidentSubStatusesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateIncidentSubStatusWithBody request with any body
+	CreateIncidentSubStatusWithBody(ctx context.Context, incidentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateIncidentSubStatusWithApplicationVndAPIPlusJSONBody(ctx context.Context, incidentId string, body CreateIncidentSubStatusApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// GetIpRanges request
 	GetIpRanges(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -30021,6 +31158,36 @@ type ClientInterface interface {
 
 	UpdateRetrospectiveConfigurationWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateRetrospectiveConfigurationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// DeleteRetrospectiveProcessGroupStep request
+	DeleteRetrospectiveProcessGroupStep(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetRetrospectiveProcessGroupStep request
+	GetRetrospectiveProcessGroupStep(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateRetrospectiveProcessGroupStepWithBody request with any body
+	UpdateRetrospectiveProcessGroupStepWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateRetrospectiveProcessGroupStepWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateRetrospectiveProcessGroupStepApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteRetrospectiveProcessGroup request
+	DeleteRetrospectiveProcessGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetRetrospectiveProcessGroup request
+	GetRetrospectiveProcessGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateRetrospectiveProcessGroupWithBody request with any body
+	UpdateRetrospectiveProcessGroupWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateRetrospectiveProcessGroupWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateRetrospectiveProcessGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListRetrospectiveProcessGroupSteps request
+	ListRetrospectiveProcessGroupSteps(ctx context.Context, retrospectiveProcessGroupId string, params *ListRetrospectiveProcessGroupStepsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateRetrospectiveProcessGroupStepWithBody request with any body
+	CreateRetrospectiveProcessGroupStepWithBody(ctx context.Context, retrospectiveProcessGroupId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateRetrospectiveProcessGroupStepWithApplicationVndAPIPlusJSONBody(ctx context.Context, retrospectiveProcessGroupId string, body CreateRetrospectiveProcessGroupStepApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListRetrospectiveProcesses request
 	ListRetrospectiveProcesses(ctx context.Context, params *ListRetrospectiveProcessesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -30039,6 +31206,14 @@ type ClientInterface interface {
 	UpdateRetrospectiveProcessWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	UpdateRetrospectiveProcessWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateRetrospectiveProcessApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListRetrospectiveProcessGroups request
+	ListRetrospectiveProcessGroups(ctx context.Context, retrospectiveProcessId string, params *ListRetrospectiveProcessGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateRetrospectiveProcessGroupWithBody request with any body
+	CreateRetrospectiveProcessGroupWithBody(ctx context.Context, retrospectiveProcessId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateRetrospectiveProcessGroupWithApplicationVndAPIPlusJSONBody(ctx context.Context, retrospectiveProcessId string, body CreateRetrospectiveProcessGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListRetrospectiveSteps request
 	ListRetrospectiveSteps(ctx context.Context, retrospectiveProcessId string, params *ListRetrospectiveStepsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -30276,6 +31451,25 @@ type ClientInterface interface {
 	CreateStatusPageTemplateWithBody(ctx context.Context, statusPageId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	CreateStatusPageTemplateWithApplicationVndAPIPlusJSONBody(ctx context.Context, statusPageId string, body CreateStatusPageTemplateApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListSubStatuses request
+	ListSubStatuses(ctx context.Context, params *ListSubStatusesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateSubStatusWithBody request with any body
+	CreateSubStatusWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateSubStatusWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateSubStatusApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteSubStatus request
+	DeleteSubStatus(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetSubStatus request
+	GetSubStatus(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateSubStatusWithBody request with any body
+	UpdateSubStatusWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateSubStatusWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateSubStatusApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListTeams request
 	ListTeams(ctx context.Context, params *ListTeamsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -33342,6 +34536,54 @@ func (c *Client) CreateIncidentRoleTaskWithApplicationVndAPIPlusJSONBody(ctx con
 	return c.Client.Do(req)
 }
 
+func (c *Client) DeleteIncidentSubStatus(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteIncidentSubStatusRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetIncidentSubStatus(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetIncidentSubStatusRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateIncidentSubStatusWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateIncidentSubStatusRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateIncidentSubStatusWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateIncidentSubStatusApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateIncidentSubStatusRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) ListIncidentTypes(ctx context.Context, params *ListIncidentTypesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListIncidentTypesRequest(c.Server, params)
 	if err != nil {
@@ -34002,6 +35244,42 @@ func (c *Client) CreateIncidentStatusPageWithApplicationVndAPIPlusJSONBody(ctx c
 	return c.Client.Do(req)
 }
 
+func (c *Client) ListIncidentSubStatuses(ctx context.Context, incidentId string, params *ListIncidentSubStatusesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListIncidentSubStatusesRequest(c.Server, incidentId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateIncidentSubStatusWithBody(ctx context.Context, incidentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateIncidentSubStatusRequestWithBody(c.Server, incidentId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateIncidentSubStatusWithApplicationVndAPIPlusJSONBody(ctx context.Context, incidentId string, body CreateIncidentSubStatusApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateIncidentSubStatusRequestWithApplicationVndAPIPlusJSONBody(c.Server, incidentId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) GetIpRanges(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetIpRangesRequest(c.Server)
 	if err != nil {
@@ -34578,6 +35856,138 @@ func (c *Client) UpdateRetrospectiveConfigurationWithApplicationVndAPIPlusJSONBo
 	return c.Client.Do(req)
 }
 
+func (c *Client) DeleteRetrospectiveProcessGroupStep(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteRetrospectiveProcessGroupStepRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetRetrospectiveProcessGroupStep(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetRetrospectiveProcessGroupStepRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateRetrospectiveProcessGroupStepWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateRetrospectiveProcessGroupStepRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateRetrospectiveProcessGroupStepWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateRetrospectiveProcessGroupStepApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateRetrospectiveProcessGroupStepRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteRetrospectiveProcessGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteRetrospectiveProcessGroupRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetRetrospectiveProcessGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetRetrospectiveProcessGroupRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateRetrospectiveProcessGroupWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateRetrospectiveProcessGroupRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateRetrospectiveProcessGroupWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateRetrospectiveProcessGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateRetrospectiveProcessGroupRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListRetrospectiveProcessGroupSteps(ctx context.Context, retrospectiveProcessGroupId string, params *ListRetrospectiveProcessGroupStepsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListRetrospectiveProcessGroupStepsRequest(c.Server, retrospectiveProcessGroupId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateRetrospectiveProcessGroupStepWithBody(ctx context.Context, retrospectiveProcessGroupId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateRetrospectiveProcessGroupStepRequestWithBody(c.Server, retrospectiveProcessGroupId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateRetrospectiveProcessGroupStepWithApplicationVndAPIPlusJSONBody(ctx context.Context, retrospectiveProcessGroupId string, body CreateRetrospectiveProcessGroupStepApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateRetrospectiveProcessGroupStepRequestWithApplicationVndAPIPlusJSONBody(c.Server, retrospectiveProcessGroupId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) ListRetrospectiveProcesses(ctx context.Context, params *ListRetrospectiveProcessesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListRetrospectiveProcessesRequest(c.Server, params)
 	if err != nil {
@@ -34652,6 +36062,42 @@ func (c *Client) UpdateRetrospectiveProcessWithBody(ctx context.Context, id stri
 
 func (c *Client) UpdateRetrospectiveProcessWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateRetrospectiveProcessApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateRetrospectiveProcessRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListRetrospectiveProcessGroups(ctx context.Context, retrospectiveProcessId string, params *ListRetrospectiveProcessGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListRetrospectiveProcessGroupsRequest(c.Server, retrospectiveProcessId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateRetrospectiveProcessGroupWithBody(ctx context.Context, retrospectiveProcessId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateRetrospectiveProcessGroupRequestWithBody(c.Server, retrospectiveProcessId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateRetrospectiveProcessGroupWithApplicationVndAPIPlusJSONBody(ctx context.Context, retrospectiveProcessId string, body CreateRetrospectiveProcessGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateRetrospectiveProcessGroupRequestWithApplicationVndAPIPlusJSONBody(c.Server, retrospectiveProcessId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -35696,6 +37142,90 @@ func (c *Client) CreateStatusPageTemplateWithBody(ctx context.Context, statusPag
 
 func (c *Client) CreateStatusPageTemplateWithApplicationVndAPIPlusJSONBody(ctx context.Context, statusPageId string, body CreateStatusPageTemplateApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateStatusPageTemplateRequestWithApplicationVndAPIPlusJSONBody(c.Server, statusPageId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListSubStatuses(ctx context.Context, params *ListSubStatusesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListSubStatusesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateSubStatusWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateSubStatusRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateSubStatusWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateSubStatusApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateSubStatusRequestWithApplicationVndAPIPlusJSONBody(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteSubStatus(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteSubStatusRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetSubStatus(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetSubStatusRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateSubStatusWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateSubStatusRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateSubStatusWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateSubStatusApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateSubStatusRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -47162,6 +48692,121 @@ func NewCreateIncidentRoleTaskRequestWithBody(server string, incidentRoleId stri
 	return req, nil
 }
 
+// NewDeleteIncidentSubStatusRequest generates requests for DeleteIncidentSubStatus
+func NewDeleteIncidentSubStatusRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_sub_statuses/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetIncidentSubStatusRequest generates requests for GetIncidentSubStatus
+func NewGetIncidentSubStatusRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_sub_statuses/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateIncidentSubStatusRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateIncidentSubStatus builder with application/vnd.api+json body
+func NewUpdateIncidentSubStatusRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateIncidentSubStatusApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateIncidentSubStatusRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateIncidentSubStatusRequestWithBody generates requests for UpdateIncidentSubStatus with any type of body
+func NewUpdateIncidentSubStatusRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_sub_statuses/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListIncidentTypesRequest generates requests for ListIncidentTypes
 func NewListIncidentTypesRequest(server string, params *ListIncidentTypesParams) (*http.Request, error) {
 	var err error
@@ -50313,6 +51958,221 @@ func NewCreateIncidentStatusPageRequestWithBody(server string, incidentId string
 	return req, nil
 }
 
+// NewListIncidentSubStatusesRequest generates requests for ListIncidentSubStatuses
+func NewListIncidentSubStatusesRequest(server string, incidentId string, params *ListIncidentSubStatusesParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "incident_id", runtime.ParamLocationPath, incidentId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incidents/%s/sub_statuses", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterSubStatusId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[sub_status_id]", runtime.ParamLocationQuery, *params.FilterSubStatusId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterAssignedAtGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[assigned_at][gt]", runtime.ParamLocationQuery, *params.FilterAssignedAtGt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterAssignedAtGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[assigned_at][gte]", runtime.ParamLocationQuery, *params.FilterAssignedAtGte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterAssignedAtLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[assigned_at][lt]", runtime.ParamLocationQuery, *params.FilterAssignedAtLt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterAssignedAtLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[assigned_at][lte]", runtime.ParamLocationQuery, *params.FilterAssignedAtLte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateIncidentSubStatusRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateIncidentSubStatus builder with application/vnd.api+json body
+func NewCreateIncidentSubStatusRequestWithApplicationVndAPIPlusJSONBody(server string, incidentId string, body CreateIncidentSubStatusApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateIncidentSubStatusRequestWithBody(server, incidentId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateIncidentSubStatusRequestWithBody generates requests for CreateIncidentSubStatus with any type of body
+func NewCreateIncidentSubStatusRequestWithBody(server string, incidentId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "incident_id", runtime.ParamLocationPath, incidentId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incidents/%s/sub_statuses", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewGetIpRangesRequest generates requests for GetIpRanges
 func NewGetIpRangesRequest(server string) (*http.Request, error) {
 	var err error
@@ -52637,6 +54497,451 @@ func NewUpdateRetrospectiveConfigurationRequestWithBody(server string, id string
 	return req, nil
 }
 
+// NewDeleteRetrospectiveProcessGroupStepRequest generates requests for DeleteRetrospectiveProcessGroupStep
+func NewDeleteRetrospectiveProcessGroupStepRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/retrospective_process_group_steps/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetRetrospectiveProcessGroupStepRequest generates requests for GetRetrospectiveProcessGroupStep
+func NewGetRetrospectiveProcessGroupStepRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/retrospective_process_group_steps/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateRetrospectiveProcessGroupStepRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateRetrospectiveProcessGroupStep builder with application/vnd.api+json body
+func NewUpdateRetrospectiveProcessGroupStepRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateRetrospectiveProcessGroupStepApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateRetrospectiveProcessGroupStepRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateRetrospectiveProcessGroupStepRequestWithBody generates requests for UpdateRetrospectiveProcessGroupStep with any type of body
+func NewUpdateRetrospectiveProcessGroupStepRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/retrospective_process_group_steps/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteRetrospectiveProcessGroupRequest generates requests for DeleteRetrospectiveProcessGroup
+func NewDeleteRetrospectiveProcessGroupRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/retrospective_process_groups/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetRetrospectiveProcessGroupRequest generates requests for GetRetrospectiveProcessGroup
+func NewGetRetrospectiveProcessGroupRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/retrospective_process_groups/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateRetrospectiveProcessGroupRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateRetrospectiveProcessGroup builder with application/vnd.api+json body
+func NewUpdateRetrospectiveProcessGroupRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateRetrospectiveProcessGroupApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateRetrospectiveProcessGroupRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateRetrospectiveProcessGroupRequestWithBody generates requests for UpdateRetrospectiveProcessGroup with any type of body
+func NewUpdateRetrospectiveProcessGroupRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/retrospective_process_groups/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListRetrospectiveProcessGroupStepsRequest generates requests for ListRetrospectiveProcessGroupSteps
+func NewListRetrospectiveProcessGroupStepsRequest(server string, retrospectiveProcessGroupId string, params *ListRetrospectiveProcessGroupStepsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "retrospective_process_group_id", runtime.ParamLocationPath, retrospectiveProcessGroupId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/retrospective_process_groups/%s/steps", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterRetrospectiveStepId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[retrospective_step_id]", runtime.ParamLocationQuery, *params.FilterRetrospectiveStepId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gte]", runtime.ParamLocationQuery, *params.FilterCreatedAtGte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lte]", runtime.ParamLocationQuery, *params.FilterCreatedAtLte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateRetrospectiveProcessGroupStepRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateRetrospectiveProcessGroupStep builder with application/vnd.api+json body
+func NewCreateRetrospectiveProcessGroupStepRequestWithApplicationVndAPIPlusJSONBody(server string, retrospectiveProcessGroupId string, body CreateRetrospectiveProcessGroupStepApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateRetrospectiveProcessGroupStepRequestWithBody(server, retrospectiveProcessGroupId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateRetrospectiveProcessGroupStepRequestWithBody generates requests for CreateRetrospectiveProcessGroupStep with any type of body
+func NewCreateRetrospectiveProcessGroupStepRequestWithBody(server string, retrospectiveProcessGroupId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "retrospective_process_group_id", runtime.ParamLocationPath, retrospectiveProcessGroupId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/retrospective_process_groups/%s/steps", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListRetrospectiveProcessesRequest generates requests for ListRetrospectiveProcesses
 func NewListRetrospectiveProcessesRequest(server string, params *ListRetrospectiveProcessesParams) (*http.Request, error) {
 	var err error
@@ -52864,6 +55169,221 @@ func NewUpdateRetrospectiveProcessRequestWithBody(server string, id string, cont
 	}
 
 	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListRetrospectiveProcessGroupsRequest generates requests for ListRetrospectiveProcessGroups
+func NewListRetrospectiveProcessGroupsRequest(server string, retrospectiveProcessId string, params *ListRetrospectiveProcessGroupsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "retrospective_process_id", runtime.ParamLocationPath, retrospectiveProcessId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/retrospective_processes/%s/groups", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterSubStatusId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[sub_status_id]", runtime.ParamLocationQuery, *params.FilterSubStatusId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gte]", runtime.ParamLocationQuery, *params.FilterCreatedAtGte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lte]", runtime.ParamLocationQuery, *params.FilterCreatedAtLte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateRetrospectiveProcessGroupRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateRetrospectiveProcessGroup builder with application/vnd.api+json body
+func NewCreateRetrospectiveProcessGroupRequestWithApplicationVndAPIPlusJSONBody(server string, retrospectiveProcessId string, body CreateRetrospectiveProcessGroupApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateRetrospectiveProcessGroupRequestWithBody(server, retrospectiveProcessId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateRetrospectiveProcessGroupRequestWithBody generates requests for CreateRetrospectiveProcessGroup with any type of body
+func NewCreateRetrospectiveProcessGroupRequestWithBody(server string, retrospectiveProcessId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "retrospective_process_id", runtime.ParamLocationPath, retrospectiveProcessId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/retrospective_processes/%s/groups", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -56694,6 +59214,354 @@ func NewCreateStatusPageTemplateRequestWithBody(server string, statusPageId stri
 	return req, nil
 }
 
+// NewListSubStatusesRequest generates requests for ListSubStatuses
+func NewListSubStatusesRequest(server string, params *ListSubStatusesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/sub_statuses")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterSlug != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[slug]", runtime.ParamLocationQuery, *params.FilterSlug); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterName != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[name]", runtime.ParamLocationQuery, *params.FilterName); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterParentStatus != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[parent_status]", runtime.ParamLocationQuery, *params.FilterParentStatus); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gte]", runtime.ParamLocationQuery, *params.FilterCreatedAtGte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lte]", runtime.ParamLocationQuery, *params.FilterCreatedAtLte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateSubStatusRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateSubStatus builder with application/vnd.api+json body
+func NewCreateSubStatusRequestWithApplicationVndAPIPlusJSONBody(server string, body CreateSubStatusApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateSubStatusRequestWithBody(server, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateSubStatusRequestWithBody generates requests for CreateSubStatus with any type of body
+func NewCreateSubStatusRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/sub_statuses")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteSubStatusRequest generates requests for DeleteSubStatus
+func NewDeleteSubStatusRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/sub_statuses/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetSubStatusRequest generates requests for GetSubStatus
+func NewGetSubStatusRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/sub_statuses/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateSubStatusRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateSubStatus builder with application/vnd.api+json body
+func NewUpdateSubStatusRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateSubStatusApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateSubStatusRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateSubStatusRequestWithBody generates requests for UpdateSubStatus with any type of body
+func NewUpdateSubStatusRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/sub_statuses/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListTeamsRequest generates requests for ListTeams
 func NewListTeamsRequest(server string, params *ListTeamsParams) (*http.Request, error) {
 	var err error
@@ -60478,6 +63346,17 @@ type ClientWithResponsesInterface interface {
 
 	CreateIncidentRoleTaskWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, incidentRoleId string, body CreateIncidentRoleTaskApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIncidentRoleTaskResponse, error)
 
+	// DeleteIncidentSubStatusWithResponse request
+	DeleteIncidentSubStatusWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentSubStatusResponse, error)
+
+	// GetIncidentSubStatusWithResponse request
+	GetIncidentSubStatusWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentSubStatusResponse, error)
+
+	// UpdateIncidentSubStatusWithBodyWithResponse request with any body
+	UpdateIncidentSubStatusWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentSubStatusResponse, error)
+
+	UpdateIncidentSubStatusWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateIncidentSubStatusApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIncidentSubStatusResponse, error)
+
 	// ListIncidentTypesWithResponse request
 	ListIncidentTypesWithResponse(ctx context.Context, params *ListIncidentTypesParams, reqEditors ...RequestEditorFn) (*ListIncidentTypesResponse, error)
 
@@ -60622,6 +63501,14 @@ type ClientWithResponsesInterface interface {
 
 	CreateIncidentStatusPageWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, incidentId string, body CreateIncidentStatusPageApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIncidentStatusPageResponse, error)
 
+	// ListIncidentSubStatusesWithResponse request
+	ListIncidentSubStatusesWithResponse(ctx context.Context, incidentId string, params *ListIncidentSubStatusesParams, reqEditors ...RequestEditorFn) (*ListIncidentSubStatusesResponse, error)
+
+	// CreateIncidentSubStatusWithBodyWithResponse request with any body
+	CreateIncidentSubStatusWithBodyWithResponse(ctx context.Context, incidentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentSubStatusResponse, error)
+
+	CreateIncidentSubStatusWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, incidentId string, body CreateIncidentSubStatusApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIncidentSubStatusResponse, error)
+
 	// GetIpRangesWithResponse request
 	GetIpRangesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetIpRangesResponse, error)
 
@@ -60753,6 +63640,36 @@ type ClientWithResponsesInterface interface {
 
 	UpdateRetrospectiveConfigurationWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateRetrospectiveConfigurationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveConfigurationResponse, error)
 
+	// DeleteRetrospectiveProcessGroupStepWithResponse request
+	DeleteRetrospectiveProcessGroupStepWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteRetrospectiveProcessGroupStepResponse, error)
+
+	// GetRetrospectiveProcessGroupStepWithResponse request
+	GetRetrospectiveProcessGroupStepWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetRetrospectiveProcessGroupStepResponse, error)
+
+	// UpdateRetrospectiveProcessGroupStepWithBodyWithResponse request with any body
+	UpdateRetrospectiveProcessGroupStepWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveProcessGroupStepResponse, error)
+
+	UpdateRetrospectiveProcessGroupStepWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateRetrospectiveProcessGroupStepApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveProcessGroupStepResponse, error)
+
+	// DeleteRetrospectiveProcessGroupWithResponse request
+	DeleteRetrospectiveProcessGroupWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteRetrospectiveProcessGroupResponse, error)
+
+	// GetRetrospectiveProcessGroupWithResponse request
+	GetRetrospectiveProcessGroupWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetRetrospectiveProcessGroupResponse, error)
+
+	// UpdateRetrospectiveProcessGroupWithBodyWithResponse request with any body
+	UpdateRetrospectiveProcessGroupWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveProcessGroupResponse, error)
+
+	UpdateRetrospectiveProcessGroupWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateRetrospectiveProcessGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveProcessGroupResponse, error)
+
+	// ListRetrospectiveProcessGroupStepsWithResponse request
+	ListRetrospectiveProcessGroupStepsWithResponse(ctx context.Context, retrospectiveProcessGroupId string, params *ListRetrospectiveProcessGroupStepsParams, reqEditors ...RequestEditorFn) (*ListRetrospectiveProcessGroupStepsResponse, error)
+
+	// CreateRetrospectiveProcessGroupStepWithBodyWithResponse request with any body
+	CreateRetrospectiveProcessGroupStepWithBodyWithResponse(ctx context.Context, retrospectiveProcessGroupId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateRetrospectiveProcessGroupStepResponse, error)
+
+	CreateRetrospectiveProcessGroupStepWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, retrospectiveProcessGroupId string, body CreateRetrospectiveProcessGroupStepApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateRetrospectiveProcessGroupStepResponse, error)
+
 	// ListRetrospectiveProcessesWithResponse request
 	ListRetrospectiveProcessesWithResponse(ctx context.Context, params *ListRetrospectiveProcessesParams, reqEditors ...RequestEditorFn) (*ListRetrospectiveProcessesResponse, error)
 
@@ -60771,6 +63688,14 @@ type ClientWithResponsesInterface interface {
 	UpdateRetrospectiveProcessWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveProcessResponse, error)
 
 	UpdateRetrospectiveProcessWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateRetrospectiveProcessApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveProcessResponse, error)
+
+	// ListRetrospectiveProcessGroupsWithResponse request
+	ListRetrospectiveProcessGroupsWithResponse(ctx context.Context, retrospectiveProcessId string, params *ListRetrospectiveProcessGroupsParams, reqEditors ...RequestEditorFn) (*ListRetrospectiveProcessGroupsResponse, error)
+
+	// CreateRetrospectiveProcessGroupWithBodyWithResponse request with any body
+	CreateRetrospectiveProcessGroupWithBodyWithResponse(ctx context.Context, retrospectiveProcessId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateRetrospectiveProcessGroupResponse, error)
+
+	CreateRetrospectiveProcessGroupWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, retrospectiveProcessId string, body CreateRetrospectiveProcessGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateRetrospectiveProcessGroupResponse, error)
 
 	// ListRetrospectiveStepsWithResponse request
 	ListRetrospectiveStepsWithResponse(ctx context.Context, retrospectiveProcessId string, params *ListRetrospectiveStepsParams, reqEditors ...RequestEditorFn) (*ListRetrospectiveStepsResponse, error)
@@ -61008,6 +63933,25 @@ type ClientWithResponsesInterface interface {
 	CreateStatusPageTemplateWithBodyWithResponse(ctx context.Context, statusPageId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateStatusPageTemplateResponse, error)
 
 	CreateStatusPageTemplateWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, statusPageId string, body CreateStatusPageTemplateApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateStatusPageTemplateResponse, error)
+
+	// ListSubStatusesWithResponse request
+	ListSubStatusesWithResponse(ctx context.Context, params *ListSubStatusesParams, reqEditors ...RequestEditorFn) (*ListSubStatusesResponse, error)
+
+	// CreateSubStatusWithBodyWithResponse request with any body
+	CreateSubStatusWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateSubStatusResponse, error)
+
+	CreateSubStatusWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateSubStatusApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateSubStatusResponse, error)
+
+	// DeleteSubStatusWithResponse request
+	DeleteSubStatusWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteSubStatusResponse, error)
+
+	// GetSubStatusWithResponse request
+	GetSubStatusWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetSubStatusResponse, error)
+
+	// UpdateSubStatusWithBodyWithResponse request with any body
+	UpdateSubStatusWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateSubStatusResponse, error)
+
+	UpdateSubStatusWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateSubStatusApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateSubStatusResponse, error)
 
 	// ListTeamsWithResponse request
 	ListTeamsWithResponse(ctx context.Context, params *ListTeamsParams, reqEditors ...RequestEditorFn) (*ListTeamsResponse, error)
@@ -65191,6 +68135,73 @@ func (r CreateIncidentRoleTaskResponse) StatusCode() int {
 	return 0
 }
 
+type DeleteIncidentSubStatusResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *IncidentSubStatusResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteIncidentSubStatusResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteIncidentSubStatusResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetIncidentSubStatusResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *IncidentSubStatusResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r GetIncidentSubStatusResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetIncidentSubStatusResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateIncidentSubStatusResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *IncidentSubStatusResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateIncidentSubStatusResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateIncidentSubStatusResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type ListIncidentTypesResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -65966,6 +68977,51 @@ func (r CreateIncidentStatusPageResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r CreateIncidentStatusPageResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListIncidentSubStatusesResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *IncidentSubStatusList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListIncidentSubStatusesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListIncidentSubStatusesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateIncidentSubStatusResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *IncidentSubStatusResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateIncidentSubStatusResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateIncidentSubStatusResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -66774,6 +69830,185 @@ func (r UpdateRetrospectiveConfigurationResponse) StatusCode() int {
 	return 0
 }
 
+type DeleteRetrospectiveProcessGroupStepResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *RetrospectiveProcessGroupStepResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteRetrospectiveProcessGroupStepResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteRetrospectiveProcessGroupStepResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetRetrospectiveProcessGroupStepResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *RetrospectiveProcessGroupStepResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r GetRetrospectiveProcessGroupStepResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetRetrospectiveProcessGroupStepResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateRetrospectiveProcessGroupStepResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *RetrospectiveProcessGroupStepResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateRetrospectiveProcessGroupStepResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateRetrospectiveProcessGroupStepResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteRetrospectiveProcessGroupResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *RetrospectiveProcessGroupResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteRetrospectiveProcessGroupResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteRetrospectiveProcessGroupResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetRetrospectiveProcessGroupResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *RetrospectiveProcessGroupResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r GetRetrospectiveProcessGroupResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetRetrospectiveProcessGroupResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateRetrospectiveProcessGroupResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *RetrospectiveProcessGroupResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateRetrospectiveProcessGroupResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateRetrospectiveProcessGroupResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListRetrospectiveProcessGroupStepsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *RetrospectiveProcessGroupStepList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListRetrospectiveProcessGroupStepsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListRetrospectiveProcessGroupStepsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateRetrospectiveProcessGroupStepResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *RetrospectiveProcessGroupStepResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateRetrospectiveProcessGroupStepResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateRetrospectiveProcessGroupStepResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type ListRetrospectiveProcessesResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -66883,6 +70118,51 @@ func (r UpdateRetrospectiveProcessResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r UpdateRetrospectiveProcessResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListRetrospectiveProcessGroupsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *RetrospectiveProcessGroupList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListRetrospectiveProcessGroupsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListRetrospectiveProcessGroupsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateRetrospectiveProcessGroupResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *RetrospectiveProcessGroupResponse
+	ApplicationvndApiJSON401 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateRetrospectiveProcessGroupResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateRetrospectiveProcessGroupResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -68332,6 +71612,121 @@ func (r CreateStatusPageTemplateResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r CreateStatusPageTemplateResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListSubStatusesResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *SubStatusList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListSubStatusesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListSubStatusesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateSubStatusResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *SubStatusResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateSubStatusResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateSubStatusResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteSubStatusResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *SubStatusResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteSubStatusResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteSubStatusResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetSubStatusResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *SubStatusResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetSubStatusResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetSubStatusResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateSubStatusResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *SubStatusResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateSubStatusResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateSubStatusResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -71578,6 +74973,41 @@ func (c *ClientWithResponses) CreateIncidentRoleTaskWithApplicationVndAPIPlusJSO
 	return ParseCreateIncidentRoleTaskResponse(rsp)
 }
 
+// DeleteIncidentSubStatusWithResponse request returning *DeleteIncidentSubStatusResponse
+func (c *ClientWithResponses) DeleteIncidentSubStatusWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentSubStatusResponse, error) {
+	rsp, err := c.DeleteIncidentSubStatus(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteIncidentSubStatusResponse(rsp)
+}
+
+// GetIncidentSubStatusWithResponse request returning *GetIncidentSubStatusResponse
+func (c *ClientWithResponses) GetIncidentSubStatusWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentSubStatusResponse, error) {
+	rsp, err := c.GetIncidentSubStatus(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetIncidentSubStatusResponse(rsp)
+}
+
+// UpdateIncidentSubStatusWithBodyWithResponse request with arbitrary body returning *UpdateIncidentSubStatusResponse
+func (c *ClientWithResponses) UpdateIncidentSubStatusWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentSubStatusResponse, error) {
+	rsp, err := c.UpdateIncidentSubStatusWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateIncidentSubStatusResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateIncidentSubStatusWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateIncidentSubStatusApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIncidentSubStatusResponse, error) {
+	rsp, err := c.UpdateIncidentSubStatusWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateIncidentSubStatusResponse(rsp)
+}
+
 // ListIncidentTypesWithResponse request returning *ListIncidentTypesResponse
 func (c *ClientWithResponses) ListIncidentTypesWithResponse(ctx context.Context, params *ListIncidentTypesParams, reqEditors ...RequestEditorFn) (*ListIncidentTypesResponse, error) {
 	rsp, err := c.ListIncidentTypes(ctx, params, reqEditors...)
@@ -72052,6 +75482,32 @@ func (c *ClientWithResponses) CreateIncidentStatusPageWithApplicationVndAPIPlusJ
 	return ParseCreateIncidentStatusPageResponse(rsp)
 }
 
+// ListIncidentSubStatusesWithResponse request returning *ListIncidentSubStatusesResponse
+func (c *ClientWithResponses) ListIncidentSubStatusesWithResponse(ctx context.Context, incidentId string, params *ListIncidentSubStatusesParams, reqEditors ...RequestEditorFn) (*ListIncidentSubStatusesResponse, error) {
+	rsp, err := c.ListIncidentSubStatuses(ctx, incidentId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListIncidentSubStatusesResponse(rsp)
+}
+
+// CreateIncidentSubStatusWithBodyWithResponse request with arbitrary body returning *CreateIncidentSubStatusResponse
+func (c *ClientWithResponses) CreateIncidentSubStatusWithBodyWithResponse(ctx context.Context, incidentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentSubStatusResponse, error) {
+	rsp, err := c.CreateIncidentSubStatusWithBody(ctx, incidentId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateIncidentSubStatusResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateIncidentSubStatusWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, incidentId string, body CreateIncidentSubStatusApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIncidentSubStatusResponse, error) {
+	rsp, err := c.CreateIncidentSubStatusWithApplicationVndAPIPlusJSONBody(ctx, incidentId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateIncidentSubStatusResponse(rsp)
+}
+
 // GetIpRangesWithResponse request returning *GetIpRangesResponse
 func (c *ClientWithResponses) GetIpRangesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetIpRangesResponse, error) {
 	rsp, err := c.GetIpRanges(ctx, reqEditors...)
@@ -72471,6 +75927,102 @@ func (c *ClientWithResponses) UpdateRetrospectiveConfigurationWithApplicationVnd
 	return ParseUpdateRetrospectiveConfigurationResponse(rsp)
 }
 
+// DeleteRetrospectiveProcessGroupStepWithResponse request returning *DeleteRetrospectiveProcessGroupStepResponse
+func (c *ClientWithResponses) DeleteRetrospectiveProcessGroupStepWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteRetrospectiveProcessGroupStepResponse, error) {
+	rsp, err := c.DeleteRetrospectiveProcessGroupStep(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteRetrospectiveProcessGroupStepResponse(rsp)
+}
+
+// GetRetrospectiveProcessGroupStepWithResponse request returning *GetRetrospectiveProcessGroupStepResponse
+func (c *ClientWithResponses) GetRetrospectiveProcessGroupStepWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetRetrospectiveProcessGroupStepResponse, error) {
+	rsp, err := c.GetRetrospectiveProcessGroupStep(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetRetrospectiveProcessGroupStepResponse(rsp)
+}
+
+// UpdateRetrospectiveProcessGroupStepWithBodyWithResponse request with arbitrary body returning *UpdateRetrospectiveProcessGroupStepResponse
+func (c *ClientWithResponses) UpdateRetrospectiveProcessGroupStepWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveProcessGroupStepResponse, error) {
+	rsp, err := c.UpdateRetrospectiveProcessGroupStepWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateRetrospectiveProcessGroupStepResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateRetrospectiveProcessGroupStepWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateRetrospectiveProcessGroupStepApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveProcessGroupStepResponse, error) {
+	rsp, err := c.UpdateRetrospectiveProcessGroupStepWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateRetrospectiveProcessGroupStepResponse(rsp)
+}
+
+// DeleteRetrospectiveProcessGroupWithResponse request returning *DeleteRetrospectiveProcessGroupResponse
+func (c *ClientWithResponses) DeleteRetrospectiveProcessGroupWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteRetrospectiveProcessGroupResponse, error) {
+	rsp, err := c.DeleteRetrospectiveProcessGroup(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteRetrospectiveProcessGroupResponse(rsp)
+}
+
+// GetRetrospectiveProcessGroupWithResponse request returning *GetRetrospectiveProcessGroupResponse
+func (c *ClientWithResponses) GetRetrospectiveProcessGroupWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetRetrospectiveProcessGroupResponse, error) {
+	rsp, err := c.GetRetrospectiveProcessGroup(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetRetrospectiveProcessGroupResponse(rsp)
+}
+
+// UpdateRetrospectiveProcessGroupWithBodyWithResponse request with arbitrary body returning *UpdateRetrospectiveProcessGroupResponse
+func (c *ClientWithResponses) UpdateRetrospectiveProcessGroupWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveProcessGroupResponse, error) {
+	rsp, err := c.UpdateRetrospectiveProcessGroupWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateRetrospectiveProcessGroupResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateRetrospectiveProcessGroupWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateRetrospectiveProcessGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveProcessGroupResponse, error) {
+	rsp, err := c.UpdateRetrospectiveProcessGroupWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateRetrospectiveProcessGroupResponse(rsp)
+}
+
+// ListRetrospectiveProcessGroupStepsWithResponse request returning *ListRetrospectiveProcessGroupStepsResponse
+func (c *ClientWithResponses) ListRetrospectiveProcessGroupStepsWithResponse(ctx context.Context, retrospectiveProcessGroupId string, params *ListRetrospectiveProcessGroupStepsParams, reqEditors ...RequestEditorFn) (*ListRetrospectiveProcessGroupStepsResponse, error) {
+	rsp, err := c.ListRetrospectiveProcessGroupSteps(ctx, retrospectiveProcessGroupId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListRetrospectiveProcessGroupStepsResponse(rsp)
+}
+
+// CreateRetrospectiveProcessGroupStepWithBodyWithResponse request with arbitrary body returning *CreateRetrospectiveProcessGroupStepResponse
+func (c *ClientWithResponses) CreateRetrospectiveProcessGroupStepWithBodyWithResponse(ctx context.Context, retrospectiveProcessGroupId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateRetrospectiveProcessGroupStepResponse, error) {
+	rsp, err := c.CreateRetrospectiveProcessGroupStepWithBody(ctx, retrospectiveProcessGroupId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateRetrospectiveProcessGroupStepResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateRetrospectiveProcessGroupStepWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, retrospectiveProcessGroupId string, body CreateRetrospectiveProcessGroupStepApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateRetrospectiveProcessGroupStepResponse, error) {
+	rsp, err := c.CreateRetrospectiveProcessGroupStepWithApplicationVndAPIPlusJSONBody(ctx, retrospectiveProcessGroupId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateRetrospectiveProcessGroupStepResponse(rsp)
+}
+
 // ListRetrospectiveProcessesWithResponse request returning *ListRetrospectiveProcessesResponse
 func (c *ClientWithResponses) ListRetrospectiveProcessesWithResponse(ctx context.Context, params *ListRetrospectiveProcessesParams, reqEditors ...RequestEditorFn) (*ListRetrospectiveProcessesResponse, error) {
 	rsp, err := c.ListRetrospectiveProcesses(ctx, params, reqEditors...)
@@ -72530,6 +76082,32 @@ func (c *ClientWithResponses) UpdateRetrospectiveProcessWithApplicationVndAPIPlu
 		return nil, err
 	}
 	return ParseUpdateRetrospectiveProcessResponse(rsp)
+}
+
+// ListRetrospectiveProcessGroupsWithResponse request returning *ListRetrospectiveProcessGroupsResponse
+func (c *ClientWithResponses) ListRetrospectiveProcessGroupsWithResponse(ctx context.Context, retrospectiveProcessId string, params *ListRetrospectiveProcessGroupsParams, reqEditors ...RequestEditorFn) (*ListRetrospectiveProcessGroupsResponse, error) {
+	rsp, err := c.ListRetrospectiveProcessGroups(ctx, retrospectiveProcessId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListRetrospectiveProcessGroupsResponse(rsp)
+}
+
+// CreateRetrospectiveProcessGroupWithBodyWithResponse request with arbitrary body returning *CreateRetrospectiveProcessGroupResponse
+func (c *ClientWithResponses) CreateRetrospectiveProcessGroupWithBodyWithResponse(ctx context.Context, retrospectiveProcessId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateRetrospectiveProcessGroupResponse, error) {
+	rsp, err := c.CreateRetrospectiveProcessGroupWithBody(ctx, retrospectiveProcessId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateRetrospectiveProcessGroupResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateRetrospectiveProcessGroupWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, retrospectiveProcessId string, body CreateRetrospectiveProcessGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateRetrospectiveProcessGroupResponse, error) {
+	rsp, err := c.CreateRetrospectiveProcessGroupWithApplicationVndAPIPlusJSONBody(ctx, retrospectiveProcessId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateRetrospectiveProcessGroupResponse(rsp)
 }
 
 // ListRetrospectiveStepsWithResponse request returning *ListRetrospectiveStepsResponse
@@ -73289,6 +76867,67 @@ func (c *ClientWithResponses) CreateStatusPageTemplateWithApplicationVndAPIPlusJ
 		return nil, err
 	}
 	return ParseCreateStatusPageTemplateResponse(rsp)
+}
+
+// ListSubStatusesWithResponse request returning *ListSubStatusesResponse
+func (c *ClientWithResponses) ListSubStatusesWithResponse(ctx context.Context, params *ListSubStatusesParams, reqEditors ...RequestEditorFn) (*ListSubStatusesResponse, error) {
+	rsp, err := c.ListSubStatuses(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListSubStatusesResponse(rsp)
+}
+
+// CreateSubStatusWithBodyWithResponse request with arbitrary body returning *CreateSubStatusResponse
+func (c *ClientWithResponses) CreateSubStatusWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateSubStatusResponse, error) {
+	rsp, err := c.CreateSubStatusWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateSubStatusResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateSubStatusWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateSubStatusApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateSubStatusResponse, error) {
+	rsp, err := c.CreateSubStatusWithApplicationVndAPIPlusJSONBody(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateSubStatusResponse(rsp)
+}
+
+// DeleteSubStatusWithResponse request returning *DeleteSubStatusResponse
+func (c *ClientWithResponses) DeleteSubStatusWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteSubStatusResponse, error) {
+	rsp, err := c.DeleteSubStatus(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteSubStatusResponse(rsp)
+}
+
+// GetSubStatusWithResponse request returning *GetSubStatusResponse
+func (c *ClientWithResponses) GetSubStatusWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetSubStatusResponse, error) {
+	rsp, err := c.GetSubStatus(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetSubStatusResponse(rsp)
+}
+
+// UpdateSubStatusWithBodyWithResponse request with arbitrary body returning *UpdateSubStatusResponse
+func (c *ClientWithResponses) UpdateSubStatusWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateSubStatusResponse, error) {
+	rsp, err := c.UpdateSubStatusWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateSubStatusResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateSubStatusWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateSubStatusApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateSubStatusResponse, error) {
+	rsp, err := c.UpdateSubStatusWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateSubStatusResponse(rsp)
 }
 
 // ListTeamsWithResponse request returning *ListTeamsResponse
@@ -79584,6 +83223,91 @@ func ParseCreateIncidentRoleTaskResponse(rsp *http.Response) (*CreateIncidentRol
 	return response, nil
 }
 
+// ParseDeleteIncidentSubStatusResponse parses an HTTP response from a DeleteIncidentSubStatusWithResponse call
+func ParseDeleteIncidentSubStatusResponse(rsp *http.Response) (*DeleteIncidentSubStatusResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteIncidentSubStatusResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest IncidentSubStatusResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetIncidentSubStatusResponse parses an HTTP response from a GetIncidentSubStatusWithResponse call
+func ParseGetIncidentSubStatusResponse(rsp *http.Response) (*GetIncidentSubStatusResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetIncidentSubStatusResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest IncidentSubStatusResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateIncidentSubStatusResponse parses an HTTP response from a UpdateIncidentSubStatusWithResponse call
+func ParseUpdateIncidentSubStatusResponse(rsp *http.Response) (*UpdateIncidentSubStatusResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateIncidentSubStatusResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest IncidentSubStatusResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseListIncidentTypesResponse parses an HTTP response from a ListIncidentTypesWithResponse call
 func ParseListIncidentTypesResponse(rsp *http.Response) (*ListIncidentTypesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -80693,6 +84417,65 @@ func ParseCreateIncidentStatusPageResponse(rsp *http.Response) (*CreateIncidentS
 			return nil, err
 		}
 		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListIncidentSubStatusesResponse parses an HTTP response from a ListIncidentSubStatusesWithResponse call
+func ParseListIncidentSubStatusesResponse(rsp *http.Response) (*ListIncidentSubStatusesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListIncidentSubStatusesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest IncidentSubStatusList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateIncidentSubStatusResponse parses an HTTP response from a CreateIncidentSubStatusWithResponse call
+func ParseCreateIncidentSubStatusResponse(rsp *http.Response) (*CreateIncidentSubStatusResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateIncidentSubStatusResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest IncidentSubStatusResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
 
 	}
 
@@ -81833,6 +85616,235 @@ func ParseUpdateRetrospectiveConfigurationResponse(rsp *http.Response) (*UpdateR
 	return response, nil
 }
 
+// ParseDeleteRetrospectiveProcessGroupStepResponse parses an HTTP response from a DeleteRetrospectiveProcessGroupStepWithResponse call
+func ParseDeleteRetrospectiveProcessGroupStepResponse(rsp *http.Response) (*DeleteRetrospectiveProcessGroupStepResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteRetrospectiveProcessGroupStepResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest RetrospectiveProcessGroupStepResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetRetrospectiveProcessGroupStepResponse parses an HTTP response from a GetRetrospectiveProcessGroupStepWithResponse call
+func ParseGetRetrospectiveProcessGroupStepResponse(rsp *http.Response) (*GetRetrospectiveProcessGroupStepResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetRetrospectiveProcessGroupStepResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest RetrospectiveProcessGroupStepResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateRetrospectiveProcessGroupStepResponse parses an HTTP response from a UpdateRetrospectiveProcessGroupStepWithResponse call
+func ParseUpdateRetrospectiveProcessGroupStepResponse(rsp *http.Response) (*UpdateRetrospectiveProcessGroupStepResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateRetrospectiveProcessGroupStepResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest RetrospectiveProcessGroupStepResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteRetrospectiveProcessGroupResponse parses an HTTP response from a DeleteRetrospectiveProcessGroupWithResponse call
+func ParseDeleteRetrospectiveProcessGroupResponse(rsp *http.Response) (*DeleteRetrospectiveProcessGroupResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteRetrospectiveProcessGroupResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest RetrospectiveProcessGroupResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetRetrospectiveProcessGroupResponse parses an HTTP response from a GetRetrospectiveProcessGroupWithResponse call
+func ParseGetRetrospectiveProcessGroupResponse(rsp *http.Response) (*GetRetrospectiveProcessGroupResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetRetrospectiveProcessGroupResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest RetrospectiveProcessGroupResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateRetrospectiveProcessGroupResponse parses an HTTP response from a UpdateRetrospectiveProcessGroupWithResponse call
+func ParseUpdateRetrospectiveProcessGroupResponse(rsp *http.Response) (*UpdateRetrospectiveProcessGroupResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateRetrospectiveProcessGroupResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest RetrospectiveProcessGroupResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListRetrospectiveProcessGroupStepsResponse parses an HTTP response from a ListRetrospectiveProcessGroupStepsWithResponse call
+func ParseListRetrospectiveProcessGroupStepsResponse(rsp *http.Response) (*ListRetrospectiveProcessGroupStepsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListRetrospectiveProcessGroupStepsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest RetrospectiveProcessGroupStepList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateRetrospectiveProcessGroupStepResponse parses an HTTP response from a CreateRetrospectiveProcessGroupStepWithResponse call
+func ParseCreateRetrospectiveProcessGroupStepResponse(rsp *http.Response) (*CreateRetrospectiveProcessGroupStepResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateRetrospectiveProcessGroupStepResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest RetrospectiveProcessGroupStepResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseListRetrospectiveProcessesResponse parses an HTTP response from a ListRetrospectiveProcessesWithResponse call
 func ParseListRetrospectiveProcessesResponse(rsp *http.Response) (*ListRetrospectiveProcessesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -81992,6 +86004,65 @@ func ParseUpdateRetrospectiveProcessResponse(rsp *http.Response) (*UpdateRetrosp
 			return nil, err
 		}
 		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListRetrospectiveProcessGroupsResponse parses an HTTP response from a ListRetrospectiveProcessGroupsWithResponse call
+func ParseListRetrospectiveProcessGroupsResponse(rsp *http.Response) (*ListRetrospectiveProcessGroupsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListRetrospectiveProcessGroupsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest RetrospectiveProcessGroupList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateRetrospectiveProcessGroupResponse parses an HTTP response from a CreateRetrospectiveProcessGroupWithResponse call
+func ParseCreateRetrospectiveProcessGroupResponse(rsp *http.Response) (*CreateRetrospectiveProcessGroupResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateRetrospectiveProcessGroupResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest RetrospectiveProcessGroupResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
 
 	}
 
@@ -84071,6 +88142,171 @@ func ParseCreateStatusPageTemplateResponse(rsp *http.Response) (*CreateStatusPag
 			return nil, err
 		}
 		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListSubStatusesResponse parses an HTTP response from a ListSubStatusesWithResponse call
+func ParseListSubStatusesResponse(rsp *http.Response) (*ListSubStatusesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListSubStatusesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest SubStatusList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateSubStatusResponse parses an HTTP response from a CreateSubStatusWithResponse call
+func ParseCreateSubStatusResponse(rsp *http.Response) (*CreateSubStatusResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateSubStatusResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest SubStatusResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteSubStatusResponse parses an HTTP response from a DeleteSubStatusWithResponse call
+func ParseDeleteSubStatusResponse(rsp *http.Response) (*DeleteSubStatusResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteSubStatusResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest SubStatusResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetSubStatusResponse parses an HTTP response from a GetSubStatusWithResponse call
+func ParseGetSubStatusResponse(rsp *http.Response) (*GetSubStatusResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetSubStatusResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest SubStatusResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateSubStatusResponse parses an HTTP response from a UpdateSubStatusWithResponse call
+func ParseUpdateSubStatusResponse(rsp *http.Response) (*UpdateSubStatusResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateSubStatusResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest SubStatusResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 

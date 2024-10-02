@@ -85,6 +85,7 @@ const excluded = {
     "schedule_rotation",
     "schedule_rotation_active_time",
     "schedule_rotation_user",
+    "sub_status",
   ]
 }
 

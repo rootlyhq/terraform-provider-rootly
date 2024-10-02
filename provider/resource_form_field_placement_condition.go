@@ -64,7 +64,7 @@ func resourceFormFieldPlacementCondition() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "The condition comparison.. Value must be one of `equal`.",
+				Description: "The condition comparison.. Value must be one of `equal`, `is_set`, `is_not_set`.",
 			},
 
 			"values": &schema.Schema{
