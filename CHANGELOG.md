@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.7.0] -- 2024-10-01
+
+- Add `rootly_sub_status` resource
+- Add `rootly_incident_sub_status` resource
+- Add `rootly_retrospective_process_group` resource
+- Add `rootly_retrospective_process_group_step` resource
+- Additional attributes for other resources
+
 ## [2.6.0] -- 2024-10-01
 
 - Add `rootly_escalation_level` resource
