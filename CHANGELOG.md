@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.7.1] -- 2024-10-02
+
+- Fix possible connection leak by closing response body after reading.
+
 ## [2.7.0] -- 2024-10-01
 
 - Add `rootly_sub_status` resource
