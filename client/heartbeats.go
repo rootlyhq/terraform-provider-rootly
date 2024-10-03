@@ -36,6 +36,7 @@ func (c *Client) ListHeartbeats(params *rootlygo.ListHeartbeatsParams) ([]interf
 	}
 
 	heartbeats, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Heartbeat)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -59,6 +60,7 @@ func (c *Client) CreateHeartbeat(d *Heartbeat) (*Heartbeat, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Heartbeat))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling heartbeat: %s", err.Error())
 	}
@@ -78,6 +80,7 @@ func (c *Client) GetHeartbeat(id string) (*Heartbeat, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Heartbeat))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling heartbeat: %s", err.Error())
 	}
@@ -101,6 +104,7 @@ func (c *Client) UpdateHeartbeat(id string, heartbeat *Heartbeat) (*Heartbeat, e
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Heartbeat))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling heartbeat: %s", err.Error())
 	}

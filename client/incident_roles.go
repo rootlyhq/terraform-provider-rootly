@@ -32,6 +32,7 @@ func (c *Client) ListIncidentRoles(params *rootlygo.ListIncidentRolesParams) ([]
 	}
 
 	incident_roles, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(IncidentRole)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -55,6 +56,7 @@ func (c *Client) CreateIncidentRole(d *IncidentRole) (*IncidentRole, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentRole))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling incident_role: %s", err.Error())
 	}
@@ -74,6 +76,7 @@ func (c *Client) GetIncidentRole(id string) (*IncidentRole, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentRole))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling incident_role: %s", err.Error())
 	}
@@ -97,6 +100,7 @@ func (c *Client) UpdateIncidentRole(id string, incident_role *IncidentRole) (*In
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentRole))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling incident_role: %s", err.Error())
 	}

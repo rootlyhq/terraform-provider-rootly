@@ -28,6 +28,7 @@ func (c *Client) ListFormSetConditions(id string, params *rootlygo.ListFormSetCo
 	}
 
 	form_set_conditions, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(FormSetCondition)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -51,6 +52,7 @@ func (c *Client) CreateFormSetCondition(d *FormSetCondition) (*FormSetCondition,
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormSetCondition))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling form_set_condition: %s", err.Error())
 	}
@@ -70,6 +72,7 @@ func (c *Client) GetFormSetCondition(id string) (*FormSetCondition, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormSetCondition))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling form_set_condition: %s", err.Error())
 	}
@@ -93,6 +96,7 @@ func (c *Client) UpdateFormSetCondition(id string, form_set_condition *FormSetCo
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormSetCondition))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling form_set_condition: %s", err.Error())
 	}

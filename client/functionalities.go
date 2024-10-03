@@ -37,6 +37,7 @@ func (c *Client) ListFunctionalities(params *rootlygo.ListFunctionalitiesParams)
 	}
 
 	functionalities, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Functionality)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -60,6 +61,7 @@ func (c *Client) CreateFunctionality(d *Functionality) (*Functionality, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Functionality))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling functionality: %s", err.Error())
 	}
@@ -79,6 +81,7 @@ func (c *Client) GetFunctionality(id string) (*Functionality, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Functionality))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling functionality: %s", err.Error())
 	}
@@ -102,6 +105,7 @@ func (c *Client) UpdateFunctionality(id string, functionality *Functionality) (*
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Functionality))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling functionality: %s", err.Error())
 	}

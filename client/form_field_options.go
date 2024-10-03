@@ -29,6 +29,7 @@ func (c *Client) ListFormFieldOptions(id string, params *rootlygo.ListFormFieldO
 	}
 
 	form_field_options, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(FormFieldOption)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -52,6 +53,7 @@ func (c *Client) CreateFormFieldOption(d *FormFieldOption) (*FormFieldOption, er
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormFieldOption))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling form_field_option: %s", err.Error())
 	}
@@ -71,6 +73,7 @@ func (c *Client) GetFormFieldOption(id string) (*FormFieldOption, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormFieldOption))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling form_field_option: %s", err.Error())
 	}
@@ -94,6 +97,7 @@ func (c *Client) UpdateFormFieldOption(id string, form_field_option *FormFieldOp
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormFieldOption))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling form_field_option: %s", err.Error())
 	}

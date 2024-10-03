@@ -30,6 +30,7 @@ func (c *Client) ListFormFieldPlacementConditions(id string, params *rootlygo.Li
 	}
 
 	form_field_placement_conditions, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(FormFieldPlacementCondition)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -53,6 +54,7 @@ func (c *Client) CreateFormFieldPlacementCondition(d *FormFieldPlacementConditio
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormFieldPlacementCondition))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling form_field_placement_condition: %s", err.Error())
 	}
@@ -72,6 +74,7 @@ func (c *Client) GetFormFieldPlacementCondition(id string) (*FormFieldPlacementC
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormFieldPlacementCondition))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling form_field_placement_condition: %s", err.Error())
 	}
@@ -95,6 +98,7 @@ func (c *Client) UpdateFormFieldPlacementCondition(id string, form_field_placeme
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormFieldPlacementCondition))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling form_field_placement_condition: %s", err.Error())
 	}

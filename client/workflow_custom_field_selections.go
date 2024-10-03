@@ -29,6 +29,7 @@ func (c *Client) ListWorkflowCustomFieldSelections(id string, params *rootlygo.L
 	}
 
 	workflow_custom_field_selections, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(WorkflowCustomFieldSelection)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -52,6 +53,7 @@ func (c *Client) CreateWorkflowCustomFieldSelection(d *WorkflowCustomFieldSelect
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowCustomFieldSelection))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling workflow_custom_field_selection: %s", err.Error())
 	}
@@ -71,6 +73,7 @@ func (c *Client) GetWorkflowCustomFieldSelection(id string) (*WorkflowCustomFiel
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowCustomFieldSelection))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling workflow_custom_field_selection: %s", err.Error())
 	}
@@ -94,6 +97,7 @@ func (c *Client) UpdateWorkflowCustomFieldSelection(id string, workflow_custom_f
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowCustomFieldSelection))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling workflow_custom_field_selection: %s", err.Error())
 	}

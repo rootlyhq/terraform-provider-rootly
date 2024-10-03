@@ -28,6 +28,7 @@ func (c *Client) ListIncidentPermissionSetBooleans(id string, params *rootlygo.L
 	}
 
 	incident_permission_set_booleans, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(IncidentPermissionSetBoolean)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -51,6 +52,7 @@ func (c *Client) CreateIncidentPermissionSetBoolean(d *IncidentPermissionSetBool
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentPermissionSetBoolean))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling incident_permission_set_boolean: %s", err.Error())
 	}
@@ -70,6 +72,7 @@ func (c *Client) GetIncidentPermissionSetBoolean(id string) (*IncidentPermission
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentPermissionSetBoolean))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling incident_permission_set_boolean: %s", err.Error())
 	}
@@ -93,6 +96,7 @@ func (c *Client) UpdateIncidentPermissionSetBoolean(id string, incident_permissi
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentPermissionSetBoolean))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling incident_permission_set_boolean: %s", err.Error())
 	}

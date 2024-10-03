@@ -52,6 +52,7 @@ func (c *Client) ListRoles(params *rootlygo.ListRolesParams) ([]interface{}, err
 	}
 
 	roles, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Role)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -75,6 +76,7 @@ func (c *Client) CreateRole(d *Role) (*Role, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Role))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling role: %s", err.Error())
 	}
@@ -94,6 +96,7 @@ func (c *Client) GetRole(id string) (*Role, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Role))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling role: %s", err.Error())
 	}
@@ -117,6 +120,7 @@ func (c *Client) UpdateRole(id string, role *Role) (*Role, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Role))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling role: %s", err.Error())
 	}

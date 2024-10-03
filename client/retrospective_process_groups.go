@@ -27,6 +27,7 @@ func (c *Client) ListRetrospectiveProcessGroups(id string, params *rootlygo.List
 	}
 
 	retrospective_process_groups, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(RetrospectiveProcessGroup)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -50,6 +51,7 @@ func (c *Client) CreateRetrospectiveProcessGroup(d *RetrospectiveProcessGroup) (
 	}
 
 	data, err := UnmarshalData(resp.Body, new(RetrospectiveProcessGroup))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling retrospective_process_group: %s", err.Error())
 	}
@@ -69,6 +71,7 @@ func (c *Client) GetRetrospectiveProcessGroup(id string) (*RetrospectiveProcessG
 	}
 
 	data, err := UnmarshalData(resp.Body, new(RetrospectiveProcessGroup))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling retrospective_process_group: %s", err.Error())
 	}
@@ -92,6 +95,7 @@ func (c *Client) UpdateRetrospectiveProcessGroup(id string, retrospective_proces
 	}
 
 	data, err := UnmarshalData(resp.Body, new(RetrospectiveProcessGroup))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling retrospective_process_group: %s", err.Error())
 	}

@@ -28,6 +28,7 @@ func (c *Client) ListIncidentSubStatuses(id string, params *rootlygo.ListInciden
 	}
 
 	incident_sub_statuses, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(IncidentSubStatus)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -51,6 +52,7 @@ func (c *Client) CreateIncidentSubStatus(d *IncidentSubStatus) (*IncidentSubStat
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentSubStatus))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling incident_sub_status: %s", err.Error())
 	}
@@ -70,6 +72,7 @@ func (c *Client) GetIncidentSubStatus(id string) (*IncidentSubStatus, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentSubStatus))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling incident_sub_status: %s", err.Error())
 	}
@@ -93,6 +96,7 @@ func (c *Client) UpdateIncidentSubStatus(id string, incident_sub_status *Inciden
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentSubStatus))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling incident_sub_status: %s", err.Error())
 	}

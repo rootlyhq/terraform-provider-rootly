@@ -32,6 +32,7 @@ func (c *Client) ListIncidentTypes(params *rootlygo.ListIncidentTypesParams) ([]
 	}
 
 	incident_types, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(IncidentType)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -55,6 +56,7 @@ func (c *Client) CreateIncidentType(d *IncidentType) (*IncidentType, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentType))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling incident_type: %s", err.Error())
 	}
@@ -74,6 +76,7 @@ func (c *Client) GetIncidentType(id string) (*IncidentType, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentType))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling incident_type: %s", err.Error())
 	}
@@ -97,6 +100,7 @@ func (c *Client) UpdateIncidentType(id string, incident_type *IncidentType) (*In
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentType))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling incident_type: %s", err.Error())
 	}

@@ -31,6 +31,7 @@ func (c *Client) ListEscalationPolicies(params *rootlygo.ListEscalationPoliciesP
 	}
 
 	escalation_policies, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(EscalationPolicy)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -54,6 +55,7 @@ func (c *Client) CreateEscalationPolicy(d *EscalationPolicy) (*EscalationPolicy,
 	}
 
 	data, err := UnmarshalData(resp.Body, new(EscalationPolicy))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling escalation_policy: %s", err.Error())
 	}
@@ -73,6 +75,7 @@ func (c *Client) GetEscalationPolicy(id string) (*EscalationPolicy, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(EscalationPolicy))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling escalation_policy: %s", err.Error())
 	}
@@ -96,6 +99,7 @@ func (c *Client) UpdateEscalationPolicy(id string, escalation_policy *Escalation
 	}
 
 	data, err := UnmarshalData(resp.Body, new(EscalationPolicy))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling escalation_policy: %s", err.Error())
 	}

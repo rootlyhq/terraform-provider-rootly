@@ -41,6 +41,7 @@ func (c *Client) List${nameCamelPlural}(${listFnParams(
 	}
 
 	${namePlural}, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(${nameCamel})))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -67,6 +68,7 @@ func (c *Client) Create${nameCamel}(d *${nameCamel}) (*${nameCamel}, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(${nameCamel}))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling ${name}: %s", err.Error())
 	}
@@ -86,6 +88,7 @@ func (c *Client) Get${nameCamel}(id string) (*${nameCamel}, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(${nameCamel}))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling ${name}: %s", err.Error())
 	}
@@ -109,6 +112,7 @@ func (c *Client) Update${nameCamel}(id string, ${name} *${nameCamel}) (*${nameCa
 	}
 
 	data, err := UnmarshalData(resp.Body, new(${nameCamel}))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling ${name}: %s", err.Error())
 	}

@@ -30,6 +30,7 @@ func (c *Client) ListWebhooksEndpoints(params *rootlygo.ListWebhooksEndpointsPar
 	}
 
 	webhooks_endpoints, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(WebhooksEndpoint)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -53,6 +54,7 @@ func (c *Client) CreateWebhooksEndpoint(d *WebhooksEndpoint) (*WebhooksEndpoint,
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WebhooksEndpoint))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling webhooks_endpoint: %s", err.Error())
 	}
@@ -72,6 +74,7 @@ func (c *Client) GetWebhooksEndpoint(id string) (*WebhooksEndpoint, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WebhooksEndpoint))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling webhooks_endpoint: %s", err.Error())
 	}
@@ -95,6 +98,7 @@ func (c *Client) UpdateWebhooksEndpoint(id string, webhooks_endpoint *WebhooksEn
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WebhooksEndpoint))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling webhooks_endpoint: %s", err.Error())
 	}

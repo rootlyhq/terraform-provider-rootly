@@ -40,6 +40,7 @@ func (c *Client) ListTeams(params *rootlygo.ListTeamsParams) ([]interface{}, err
 	}
 
 	teams, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Team)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -63,6 +64,7 @@ func (c *Client) CreateTeam(d *Team) (*Team, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Team))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling team: %s", err.Error())
 	}
@@ -82,6 +84,7 @@ func (c *Client) GetTeam(id string) (*Team, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Team))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling team: %s", err.Error())
 	}
@@ -105,6 +108,7 @@ func (c *Client) UpdateTeam(id string, team *Team) (*Team, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Team))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling team: %s", err.Error())
 	}

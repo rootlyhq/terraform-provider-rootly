@@ -31,6 +31,7 @@ func (c *Client) ListWorkflowGroups(params *rootlygo.ListWorkflowGroupsParams) (
 	}
 
 	workflow_groups, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(WorkflowGroup)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -54,6 +55,7 @@ func (c *Client) CreateWorkflowGroup(d *WorkflowGroup) (*WorkflowGroup, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowGroup))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling workflow_group: %s", err.Error())
 	}
@@ -73,6 +75,7 @@ func (c *Client) GetWorkflowGroup(id string) (*WorkflowGroup, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowGroup))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling workflow_group: %s", err.Error())
 	}
@@ -96,6 +99,7 @@ func (c *Client) UpdateWorkflowGroup(id string, workflow_group *WorkflowGroup) (
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowGroup))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling workflow_group: %s", err.Error())
 	}

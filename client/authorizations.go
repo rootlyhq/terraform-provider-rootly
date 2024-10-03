@@ -29,6 +29,7 @@ func (c *Client) ListAuthorizations(params *rootlygo.ListAuthorizationsParams) (
 	}
 
 	authorizations, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Authorization)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -52,6 +53,7 @@ func (c *Client) CreateAuthorization(d *Authorization) (*Authorization, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Authorization))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling authorization: %s", err.Error())
 	}
@@ -71,6 +73,7 @@ func (c *Client) GetAuthorization(id string) (*Authorization, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Authorization))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling authorization: %s", err.Error())
 	}
@@ -94,6 +97,7 @@ func (c *Client) UpdateAuthorization(id string, authorization *Authorization) (*
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Authorization))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling authorization: %s", err.Error())
 	}

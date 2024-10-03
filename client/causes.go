@@ -28,6 +28,7 @@ func (c *Client) ListCauses(params *rootlygo.ListCausesParams) ([]interface{}, e
 	}
 
 	causes, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Cause)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -51,6 +52,7 @@ func (c *Client) CreateCause(d *Cause) (*Cause, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Cause))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling cause: %s", err.Error())
 	}
@@ -70,6 +72,7 @@ func (c *Client) GetCause(id string) (*Cause, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Cause))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling cause: %s", err.Error())
 	}
@@ -93,6 +96,7 @@ func (c *Client) UpdateCause(id string, cause *Cause) (*Cause, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Cause))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling cause: %s", err.Error())
 	}

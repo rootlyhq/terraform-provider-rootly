@@ -31,6 +31,7 @@ func (c *Client) ListOverrideShifts(id string, params *rootlygo.ListOverrideShif
 	}
 
 	override_shifts, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(OverrideShift)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -54,6 +55,7 @@ func (c *Client) CreateOverrideShift(d *OverrideShift) (*OverrideShift, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(OverrideShift))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling override_shift: %s", err.Error())
 	}
@@ -73,6 +75,7 @@ func (c *Client) GetOverrideShift(id string) (*OverrideShift, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(OverrideShift))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling override_shift: %s", err.Error())
 	}
@@ -96,6 +99,7 @@ func (c *Client) UpdateOverrideShift(id string, override_shift *OverrideShift) (
 	}
 
 	data, err := UnmarshalData(resp.Body, new(OverrideShift))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling override_shift: %s", err.Error())
 	}

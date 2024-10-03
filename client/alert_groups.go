@@ -32,6 +32,7 @@ func (c *Client) ListAlertGroups(params *rootlygo.ListAlertGroupsParams) ([]inte
 	}
 
 	alert_groups, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(AlertGroup)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -55,6 +56,7 @@ func (c *Client) CreateAlertGroup(d *AlertGroup) (*AlertGroup, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(AlertGroup))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling alert_group: %s", err.Error())
 	}
@@ -74,6 +76,7 @@ func (c *Client) GetAlertGroup(id string) (*AlertGroup, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(AlertGroup))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling alert_group: %s", err.Error())
 	}
@@ -97,6 +100,7 @@ func (c *Client) UpdateAlertGroup(id string, alert_group *AlertGroup) (*AlertGro
 	}
 
 	data, err := UnmarshalData(resp.Body, new(AlertGroup))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling alert_group: %s", err.Error())
 	}

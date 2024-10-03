@@ -29,6 +29,7 @@ func (c *Client) ListIncidentPermissionSetResources(id string, params *rootlygo.
 	}
 
 	incident_permission_set_resources, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(IncidentPermissionSetResource)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -52,6 +53,7 @@ func (c *Client) CreateIncidentPermissionSetResource(d *IncidentPermissionSetRes
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentPermissionSetResource))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling incident_permission_set_resource: %s", err.Error())
 	}
@@ -71,6 +73,7 @@ func (c *Client) GetIncidentPermissionSetResource(id string) (*IncidentPermissio
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentPermissionSetResource))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling incident_permission_set_resource: %s", err.Error())
 	}
@@ -94,6 +97,7 @@ func (c *Client) UpdateIncidentPermissionSetResource(id string, incident_permiss
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentPermissionSetResource))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling incident_permission_set_resource: %s", err.Error())
 	}

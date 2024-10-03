@@ -27,6 +27,7 @@ func (c *Client) ListFormFieldPositions(id string, params *rootlygo.ListFormFiel
 	}
 
 	form_field_positions, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(FormFieldPosition)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -50,6 +51,7 @@ func (c *Client) CreateFormFieldPosition(d *FormFieldPosition) (*FormFieldPositi
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormFieldPosition))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling form_field_position: %s", err.Error())
 	}
@@ -69,6 +71,7 @@ func (c *Client) GetFormFieldPosition(id string) (*FormFieldPosition, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormFieldPosition))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling form_field_position: %s", err.Error())
 	}
@@ -92,6 +95,7 @@ func (c *Client) UpdateFormFieldPosition(id string, form_field_position *FormFie
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormFieldPosition))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling form_field_position: %s", err.Error())
 	}

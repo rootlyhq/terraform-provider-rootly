@@ -6658,7 +6658,7 @@ type CreateGoogleMeetingTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"post_to_slack_channels,omitempty"`
 
-	// RecordMeeting We will invite Rootly Bot to your call and make the transcript available to you
+	// RecordMeeting Rootly AI will record the meeting and automatically generate a transcript and summary from your meeting
 	RecordMeeting *bool `json:"record_meeting,omitempty"`
 
 	// Summary The meeting summary
@@ -6953,7 +6953,7 @@ type CreateMicrosoftTeamsMeetingTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"post_to_slack_channels,omitempty"`
 
-	// RecordMeeting We will invite Rootly Bot to your call and make the transcript available to you
+	// RecordMeeting Rootly AI will record the meeting and automatically generate a transcript and summary from your meeting
 	RecordMeeting *bool `json:"record_meeting,omitempty"`
 
 	// Subject The meeting subject
@@ -7345,7 +7345,7 @@ type CreateWebexMeetingTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"post_to_slack_channels,omitempty"`
 
-	// RecordMeeting We will invite Rootly Bot to your call and make the transcript available to you
+	// RecordMeeting Rootly AI will record the meeting and automatically generate a transcript and summary from your meeting
 	RecordMeeting *bool                                 `json:"record_meeting,omitempty"`
 	TaskType      *CreateWebexMeetingTaskParamsTaskType `json:"task_type,omitempty"`
 
@@ -7426,7 +7426,7 @@ type CreateZoomMeetingTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"post_to_slack_channels,omitempty"`
 
-	// RecordMeeting We will invite Rootly Bot to your call and make the transcript available to you
+	// RecordMeeting Rootly AI will record the meeting and automatically generate a transcript and summary from your meeting
 	RecordMeeting *bool                                `json:"record_meeting,omitempty"`
 	TaskType      *CreateZoomMeetingTaskParamsTaskType `json:"task_type,omitempty"`
 

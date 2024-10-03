@@ -109,7 +109,7 @@ func resourceWorkflowTaskCreateZoomMeeting() *schema.Resource {
 							}, false),
 						},
 						"record_meeting": &schema.Schema{
-							Description: "We will invite Rootly Bot to your call and make the transcript available to you. Value must be one of true or false",
+							Description: "Rootly AI will record the meeting and automatically generate a transcript and summary from your meeting. Value must be one of true or false",
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},

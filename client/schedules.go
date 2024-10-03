@@ -26,6 +26,7 @@ func (c *Client) ListSchedules(params *rootlygo.ListSchedulesParams) ([]interfac
 	}
 
 	schedules, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Schedule)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -49,6 +50,7 @@ func (c *Client) CreateSchedule(d *Schedule) (*Schedule, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Schedule))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling schedule: %s", err.Error())
 	}
@@ -68,6 +70,7 @@ func (c *Client) GetSchedule(id string) (*Schedule, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Schedule))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling schedule: %s", err.Error())
 	}
@@ -91,6 +94,7 @@ func (c *Client) UpdateSchedule(id string, schedule *Schedule) (*Schedule, error
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Schedule))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling schedule: %s", err.Error())
 	}

@@ -30,6 +30,7 @@ func (c *Client) ListOnCallShadows(id string, params *rootlygo.ListOnCallShadows
 	}
 
 	on_call_shadows, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(OnCallShadow)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -53,6 +54,7 @@ func (c *Client) CreateOnCallShadow(d *OnCallShadow) (*OnCallShadow, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(OnCallShadow))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling on_call_shadow: %s", err.Error())
 	}
@@ -72,6 +74,7 @@ func (c *Client) GetOnCallShadow(id string) (*OnCallShadow, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(OnCallShadow))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling on_call_shadow: %s", err.Error())
 	}
@@ -95,6 +98,7 @@ func (c *Client) UpdateOnCallShadow(id string, on_call_shadow *OnCallShadow) (*O
 	}
 
 	data, err := UnmarshalData(resp.Body, new(OnCallShadow))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling on_call_shadow: %s", err.Error())
 	}

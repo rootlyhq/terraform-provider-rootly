@@ -21,7 +21,7 @@ type Client struct {
 func (c *Client) Do(req *http.Request) (*http.Response, error) {
 	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", c.Token))
 	req.Header.Set("Content-Type", c.ContentType)
-	req.Header.Set("User-Agent", "terraform-provider-rootly/v2.4.0")
+	req.Header.Set("User-Agent", "terraform-provider-rootly/v2.7.1")
 
 	res, err := c.Rootly.Client.Do(req)
 	if err != nil {
@@ -33,6 +33,8 @@ func (c *Client) Do(req *http.Request) (*http.Response, error) {
 		if err != nil {
 			return nil, err
 		}
+
+		res.Body.Close()
 
 		if res.StatusCode == http.StatusNotFound {
 			return nil, NewNotFoundError(string(body))

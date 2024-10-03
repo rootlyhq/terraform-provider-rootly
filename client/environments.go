@@ -32,6 +32,7 @@ func (c *Client) ListEnvironments(params *rootlygo.ListEnvironmentsParams) ([]in
 	}
 
 	environments, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Environment)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -55,6 +56,7 @@ func (c *Client) CreateEnvironment(d *Environment) (*Environment, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Environment))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling environment: %s", err.Error())
 	}
@@ -74,6 +76,7 @@ func (c *Client) GetEnvironment(id string) (*Environment, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Environment))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling environment: %s", err.Error())
 	}
@@ -97,6 +100,7 @@ func (c *Client) UpdateEnvironment(id string, environment *Environment) (*Enviro
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Environment))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling environment: %s", err.Error())
 	}

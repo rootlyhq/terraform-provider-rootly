@@ -29,6 +29,7 @@ func (c *Client) ListCustomForms(params *rootlygo.ListCustomFormsParams) ([]inte
 	}
 
 	custom_forms, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(CustomForm)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -52,6 +53,7 @@ func (c *Client) CreateCustomForm(d *CustomForm) (*CustomForm, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(CustomForm))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling custom_form: %s", err.Error())
 	}
@@ -71,6 +73,7 @@ func (c *Client) GetCustomForm(id string) (*CustomForm, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(CustomForm))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling custom_form: %s", err.Error())
 	}
@@ -94,6 +97,7 @@ func (c *Client) UpdateCustomForm(id string, custom_form *CustomForm) (*CustomFo
 	}
 
 	data, err := UnmarshalData(resp.Body, new(CustomForm))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling custom_form: %s", err.Error())
 	}

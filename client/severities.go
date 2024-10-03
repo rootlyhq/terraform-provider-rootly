@@ -33,6 +33,7 @@ func (c *Client) ListSeverities(params *rootlygo.ListSeveritiesParams) ([]interf
 	}
 
 	severities, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Severity)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -56,6 +57,7 @@ func (c *Client) CreateSeverity(d *Severity) (*Severity, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Severity))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling severity: %s", err.Error())
 	}
@@ -75,6 +77,7 @@ func (c *Client) GetSeverity(id string) (*Severity, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Severity))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling severity: %s", err.Error())
 	}
@@ -98,6 +101,7 @@ func (c *Client) UpdateSeverity(id string, severity *Severity) (*Severity, error
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Severity))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling severity: %s", err.Error())
 	}

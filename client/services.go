@@ -46,6 +46,7 @@ func (c *Client) ListServices(params *rootlygo.ListServicesParams) ([]interface{
 	}
 
 	services, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Service)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -69,6 +70,7 @@ func (c *Client) CreateService(d *Service) (*Service, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Service))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling service: %s", err.Error())
 	}
@@ -88,6 +90,7 @@ func (c *Client) GetService(id string) (*Service, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Service))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling service: %s", err.Error())
 	}
@@ -111,6 +114,7 @@ func (c *Client) UpdateService(id string, service *Service) (*Service, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Service))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling service: %s", err.Error())
 	}

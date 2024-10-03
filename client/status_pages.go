@@ -46,6 +46,7 @@ func (c *Client) ListStatusPages(params *rootlygo.ListStatusPagesParams) ([]inte
 	}
 
 	status_pages, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(StatusPage)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -69,6 +70,7 @@ func (c *Client) CreateStatusPage(d *StatusPage) (*StatusPage, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(StatusPage))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling status_page: %s", err.Error())
 	}
@@ -88,6 +90,7 @@ func (c *Client) GetStatusPage(id string) (*StatusPage, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(StatusPage))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling status_page: %s", err.Error())
 	}
@@ -111,6 +114,7 @@ func (c *Client) UpdateStatusPage(id string, status_page *StatusPage) (*StatusPa
 	}
 
 	data, err := UnmarshalData(resp.Body, new(StatusPage))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling status_page: %s", err.Error())
 	}

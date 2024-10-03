@@ -33,6 +33,7 @@ func (c *Client) ListPlaybooks(params *rootlygo.ListPlaybooksParams) ([]interfac
 	}
 
 	playbooks, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Playbook)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -56,6 +57,7 @@ func (c *Client) CreatePlaybook(d *Playbook) (*Playbook, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Playbook))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling playbook: %s", err.Error())
 	}
@@ -75,6 +77,7 @@ func (c *Client) GetPlaybook(id string) (*Playbook, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Playbook))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling playbook: %s", err.Error())
 	}
@@ -98,6 +101,7 @@ func (c *Client) UpdatePlaybook(id string, playbook *Playbook) (*Playbook, error
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Playbook))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling playbook: %s", err.Error())
 	}

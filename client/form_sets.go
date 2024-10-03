@@ -28,6 +28,7 @@ func (c *Client) ListFormSets(params *rootlygo.ListFormSetsParams) ([]interface{
 	}
 
 	form_sets, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(FormSet)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -51,6 +52,7 @@ func (c *Client) CreateFormSet(d *FormSet) (*FormSet, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormSet))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling form_set: %s", err.Error())
 	}
@@ -70,6 +72,7 @@ func (c *Client) GetFormSet(id string) (*FormSet, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormSet))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling form_set: %s", err.Error())
 	}
@@ -93,6 +96,7 @@ func (c *Client) UpdateFormSet(id string, form_set *FormSet) (*FormSet, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormSet))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling form_set: %s", err.Error())
 	}

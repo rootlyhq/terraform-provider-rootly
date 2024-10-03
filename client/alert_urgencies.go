@@ -27,6 +27,7 @@ func (c *Client) ListAlertUrgencies(params *rootlygo.ListAlertUrgenciesParams) (
 	}
 
 	alert_urgencies, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(AlertUrgency)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -50,6 +51,7 @@ func (c *Client) CreateAlertUrgency(d *AlertUrgency) (*AlertUrgency, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(AlertUrgency))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling alert_urgency: %s", err.Error())
 	}
@@ -69,6 +71,7 @@ func (c *Client) GetAlertUrgency(id string) (*AlertUrgency, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(AlertUrgency))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling alert_urgency: %s", err.Error())
 	}
@@ -92,6 +95,7 @@ func (c *Client) UpdateAlertUrgency(id string, alert_urgency *AlertUrgency) (*Al
 	}
 
 	data, err := UnmarshalData(resp.Body, new(AlertUrgency))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling alert_urgency: %s", err.Error())
 	}

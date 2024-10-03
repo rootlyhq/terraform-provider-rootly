@@ -30,6 +30,7 @@ func (c *Client) ListWorkflowFormFieldConditions(id string, params *rootlygo.Lis
 	}
 
 	workflow_form_field_conditions, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(WorkflowFormFieldCondition)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -53,6 +54,7 @@ func (c *Client) CreateWorkflowFormFieldCondition(d *WorkflowFormFieldCondition)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowFormFieldCondition))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling workflow_form_field_condition: %s", err.Error())
 	}
@@ -72,6 +74,7 @@ func (c *Client) GetWorkflowFormFieldCondition(id string) (*WorkflowFormFieldCon
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowFormFieldCondition))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling workflow_form_field_condition: %s", err.Error())
 	}
@@ -95,6 +98,7 @@ func (c *Client) UpdateWorkflowFormFieldCondition(id string, workflow_form_field
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowFormFieldCondition))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling workflow_form_field_condition: %s", err.Error())
 	}

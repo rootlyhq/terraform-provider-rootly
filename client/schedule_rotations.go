@@ -34,6 +34,7 @@ func (c *Client) ListScheduleRotations(id string, params *rootlygo.ListScheduleR
 	}
 
 	schedule_rotations, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(ScheduleRotation)))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
 	}
@@ -57,6 +58,7 @@ func (c *Client) CreateScheduleRotation(d *ScheduleRotation) (*ScheduleRotation,
 	}
 
 	data, err := UnmarshalData(resp.Body, new(ScheduleRotation))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling schedule_rotation: %s", err.Error())
 	}
@@ -76,6 +78,7 @@ func (c *Client) GetScheduleRotation(id string) (*ScheduleRotation, error) {
 	}
 
 	data, err := UnmarshalData(resp.Body, new(ScheduleRotation))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling schedule_rotation: %s", err.Error())
 	}
@@ -99,6 +102,7 @@ func (c *Client) UpdateScheduleRotation(id string, schedule_rotation *ScheduleRo
 	}
 
 	data, err := UnmarshalData(resp.Body, new(ScheduleRotation))
+	resp.Body.Close()
 	if err != nil {
 		return nil, errors.Errorf("Error unmarshaling schedule_rotation: %s", err.Error())
 	}
