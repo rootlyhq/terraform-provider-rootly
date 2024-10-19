@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.8.0] -- 2024-10-18
+
+- Add `rootly_live_call_router` resource
+- Add `rootly_escalation_path` resource
+- Add `resource_workflow_task_update_incident_status_timestamp` resource
+
 ## [2.7.1] -- 2024-10-02
 
 - Fix possible connection leak by closing response body after reading.
