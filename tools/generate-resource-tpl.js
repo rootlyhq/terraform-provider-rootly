@@ -363,36 +363,25 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
         schema.items.type === "object" &&
         schema.items.properties
       ) {
-        if (
-          Object.values(schema.items.properties).every(
-            (obj) => obj.type === "string"
-          )
-        ) {
-          return `
-  				"${name}": &schema.Schema {
-  					Type: schema.TypeList,
-  					Computed: ${optional},
-  					Required: ${required},
-  					Optional: ${optional},
-  					Description: "${description}",
-  					Elem: &schema.Resource {
-  						Schema: map[string]*schema.Schema {
-                ${Object.keys(schema.items.properties)
-                  .map((key) => {
-                    return `"${key}": &schema.Schema {
-    								Type: schema.TypeString,
-    								Required: true,
-    							},`;
-                  })
-                  .join("\n")}
-  						},
-  					},
-  					${stateFunc}
-  				},
-  				`;
-        } else {
-          throw new Error(`schema not supported: ${schema}`);
-        }
+        return `
+				"${name}": &schema.Schema {
+					Type: schema.TypeList,
+					Computed: ${optional},
+					Required: ${required},
+					Optional: ${optional},
+					Description: "${description}",
+					Elem: &schema.Resource {
+						Schema: map[string]*schema.Schema {
+              ${Object.keys(schema.items.properties)
+                .map((key) => {
+                  return schemaField(key, schema.items, [], pathIdField)
+                })
+                .join("\n")}
+						},
+					},
+					${stateFunc}
+				},
+				`;
       } else if (schema.items && schema.items.type === "string") {
         return `
 				"${name}": &schema.Schema {

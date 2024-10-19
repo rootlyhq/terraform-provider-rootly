@@ -21,8 +21,23 @@ function stripAnyOf(obj) {
   if (typeof obj === "object" && obj !== null) {
     if (
       obj.hasOwnProperty("anyOf") &&
-      obj.anyOf[0].required
+      obj.anyOf[0].required &&
+      !obj.properties
     ) {
+      obj.properties = {};
+      obj.anyOf.forEach((child) => {
+        if (child.properties) {
+          Object.keys(child.properties).forEach((child_property_key) => {
+            if (obj.properties[child_property_key]) {
+              if (obj.properties[child_property_key].type === "string" && obj.properties[child_property_key].enum) {
+                obj.properties[child_property_key].enum = obj.properties[child_property_key].enum.concat(child.properties[child_property_key].enum)
+              }
+            } else {
+              obj.properties[child_property_key] = child.properties[child_property_key]
+            }
+          })
+        }
+      })
       delete obj.anyOf;
     }
     Object.keys(obj).forEach(function (key) {
@@ -68,8 +83,31 @@ function renameEscalationPolicyLevelSchemas(obj) {
   }
 }
 
+function renameEscalationPolicyPathSchemas(obj) {
+  for (var key in obj) {
+    let value = obj[key];
+
+    if (key.match(/escalation_policy_path/)) {
+      let newKey = key.replace(/escalation_policy_path/g, "escalation_path")
+      obj[newKey] = obj[key]
+      delete obj[key];
+      key = newKey
+    }
+    if (typeof obj[key] === "string" && obj[key].match(/components\/schemas/)) {
+      obj[key] = obj[key].replace(/escalation_policy_path/g, "escalation_path")
+    } else if (typeof obj[key] === "object" && obj[key] !== null) {
+      renameEscalationPolicyPathSchemas(obj[key])
+    }
+
+    if (typeof value === "string" && value.match(/escalation_policy_path/)) {
+      obj[key] = value.replace(/escalation_policy_path/, "escalation_path")
+    }
+  }
+}
+
 fixFilterParameterTypes(swagger.paths);
 stripAnyOf(swagger.components.schemas);
 combineOneOf(swagger.components.schemas);
 renameEscalationPolicyLevelSchemas(swagger);
+renameEscalationPolicyPathSchemas(swagger);
 fs.writeFileSync(process.argv[2], JSON.stringify(swagger));

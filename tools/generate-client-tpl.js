@@ -5,7 +5,7 @@ module.exports = (name, resourceSchema, pathIdField) => {
   const nameCamel = inflect.camelize(name);
   const nameCamelPlural = inflect.camelize(namePlural);
   const strconvImport =
-    pathIdField && resourceSchema.properties[pathIdField].type === "number"
+    pathIdField && resourceSchema.properties[pathIdField]?.type === "number"
       ? `"strconv"`
       : "";
 

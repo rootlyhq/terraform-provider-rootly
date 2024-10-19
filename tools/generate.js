@@ -16,6 +16,10 @@ const excluded = {
   dataSources: [
     "alert",
     "audit",
+    "catalog",
+    "catalog_field",
+    "catalog_entity",
+    "catalog_entity_property",
     "custom_field_option",
     "custom_field",
     "dashboard_panel",
@@ -43,6 +47,10 @@ const excluded = {
   resources: [
     "alert",
     "audit",
+    "catalog",
+    "catalog_field",
+    "catalog_entity",
+    "catalog_entity_property",
     "custom_field_option",
     "custom_field",
     "dashboard_panel",
