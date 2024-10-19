@@ -35,16 +35,16 @@ description: |-
 <a id="nestedblock--slack_aliases"></a>
 ### Nested Schema for `slack_aliases`
 
-Required:
+Optional:
 
-- `id` (String)
-- `name` (String)
+- `id` (String) Slack alias ID
+- `name` (String) Slack alias name
 
 
 <a id="nestedblock--slack_channels"></a>
 ### Nested Schema for `slack_channels`
 
-Required:
+Optional:
 
-- `id` (String)
-- `name` (String)
+- `id` (String) Slack channel ID
+- `name` (String) Slack channel name

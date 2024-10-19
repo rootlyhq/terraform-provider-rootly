@@ -14,14 +14,14 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
 
-func resourceWorkflowTaskPageRootlyOnCallResponders() *schema.Resource {
+func resourceWorkflowTaskUpdateIncidentStatusTimestamp() *schema.Resource {
 	return &schema.Resource{
-		Description: "Manages workflow page_rootly_on_call_responders task.",
+		Description: "Manages workflow update_incident_status_timestamp task.",
 
-		CreateContext: resourceWorkflowTaskPageRootlyOnCallRespondersCreate,
-		ReadContext:   resourceWorkflowTaskPageRootlyOnCallRespondersRead,
-		UpdateContext: resourceWorkflowTaskPageRootlyOnCallRespondersUpdate,
-		DeleteContext: resourceWorkflowTaskPageRootlyOnCallRespondersDelete,
+		CreateContext: resourceWorkflowTaskUpdateIncidentStatusTimestampCreate,
+		ReadContext:   resourceWorkflowTaskUpdateIncidentStatusTimestampRead,
+		UpdateContext: resourceWorkflowTaskUpdateIncidentStatusTimestampUpdate,
+		DeleteContext: resourceWorkflowTaskUpdateIncidentStatusTimestampDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -68,50 +68,20 @@ func resourceWorkflowTaskPageRootlyOnCallResponders() *schema.Resource {
 						"task_type": &schema.Schema{
 							Type:     schema.TypeString,
 							Optional: true,
-							Default:  "page_rootly_on_call_responders",
+							Default:  "update_incident_status_timestamp",
 							ValidateFunc: validation.StringInSlice([]string{
-								"page_rootly_on_call_responders",
+								"update_incident_status_timestamp",
 							}, false),
 						},
-						"escalation_policy_target": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. ",
-							Type:        schema.TypeMap,
-							Optional:    true,
-						},
-						"service_target": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. ",
-							Type:        schema.TypeMap,
-							Optional:    true,
-						},
-						"user_target": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. ",
-							Type:        schema.TypeMap,
-							Optional:    true,
-						},
-						"group_target": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. ",
-							Type:        schema.TypeMap,
-							Optional:    true,
-						},
-						"alert_urgency_id": &schema.Schema{
-							Description: "Alert urgency ID",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"summary": &schema.Schema{
-							Description: "Alert title",
+						"sub_status_id": &schema.Schema{
+							Description: "Sub-status to update timestamp for",
 							Type:        schema.TypeString,
 							Required:    true,
 						},
-						"description": &schema.Schema{
-							Description: "Alert description",
+						"assigned_at": &schema.Schema{
+							Description: "Timestamp of when the sub-status was assigned",
 							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"escalation_note": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Required:    true,
 						},
 					},
 				},
@@ -120,7 +90,7 @@ func resourceWorkflowTaskPageRootlyOnCallResponders() *schema.Resource {
 	}
 }
 
-func resourceWorkflowTaskPageRootlyOnCallRespondersCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskUpdateIncidentStatusTimestampCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
@@ -149,10 +119,10 @@ func resourceWorkflowTaskPageRootlyOnCallRespondersCreate(ctx context.Context, d
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created an workflow task resource: %v (%s)", workflowId, d.Id()))
 
-	return resourceWorkflowTaskPageRootlyOnCallRespondersRead(ctx, d, meta)
+	return resourceWorkflowTaskUpdateIncidentStatusTimestampRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskPageRootlyOnCallRespondersRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskUpdateIncidentStatusTimestampRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
@@ -161,7 +131,7 @@ func resourceWorkflowTaskPageRootlyOnCallRespondersRead(ctx context.Context, d *
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskPageRootlyOnCallResponders (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskUpdateIncidentStatusTimestamp (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
@@ -181,7 +151,7 @@ func resourceWorkflowTaskPageRootlyOnCallRespondersRead(ctx context.Context, d *
 	return nil
 }
 
-func resourceWorkflowTaskPageRootlyOnCallRespondersUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskUpdateIncidentStatusTimestampUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
@@ -207,10 +177,10 @@ func resourceWorkflowTaskPageRootlyOnCallRespondersUpdate(ctx context.Context, d
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
 
-	return resourceWorkflowTaskPageRootlyOnCallRespondersRead(ctx, d, meta)
+	return resourceWorkflowTaskUpdateIncidentStatusTimestampRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskPageRootlyOnCallRespondersDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskUpdateIncidentStatusTimestampDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
@@ -219,7 +189,7 @@ func resourceWorkflowTaskPageRootlyOnCallRespondersDelete(ctx context.Context, d
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskPageRootlyOnCallResponders (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskUpdateIncidentStatusTimestamp (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}

@@ -30,7 +30,7 @@ description: |-
 <a id="nestedblock--active_time_attributes"></a>
 ### Nested Schema for `active_time_attributes`
 
-Required:
+Optional:
 
-- `end_time` (String)
-- `start_time` (String)
+- `end_time` (String) End time for schedule rotation active time
+- `start_time` (String) Start time for schedule rotation active time

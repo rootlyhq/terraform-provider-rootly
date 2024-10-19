@@ -656,6 +656,70 @@ const (
 	CancelIncidentDataTypeIncidents CancelIncidentDataType = "incidents"
 )
 
+// Defines values for CatalogIcon.
+const (
+	CatalogIconChartBar          CatalogIcon = "chart-bar"
+	CatalogIconCursorArrowRipple CatalogIcon = "cursor-arrow-ripple"
+	CatalogIconGlobeAlt          CatalogIcon = "globe-alt"
+	CatalogIconLightBulb         CatalogIcon = "light-bulb"
+	CatalogIconServerStack       CatalogIcon = "server-stack"
+	CatalogIconShapes            CatalogIcon = "shapes"
+	CatalogIconUserGroup         CatalogIcon = "user-group"
+	CatalogIconUsers             CatalogIcon = "users"
+)
+
+// Defines values for CatalogEntityListDataType.
+const (
+	CatalogEntityListDataTypeCatalogEntities CatalogEntityListDataType = "catalog_entities"
+)
+
+// Defines values for CatalogEntityPropertyKey.
+const (
+	CatalogEntityPropertyKeyCatalogEntity CatalogEntityPropertyKey = "catalog_entity"
+	CatalogEntityPropertyKeyText          CatalogEntityPropertyKey = "text"
+)
+
+// Defines values for CatalogEntityPropertyListDataType.
+const (
+	CatalogEntityPropertyListDataTypeCatalogEntityProperties CatalogEntityPropertyListDataType = "catalog_entity_properties"
+)
+
+// Defines values for CatalogEntityPropertyResponseDataType.
+const (
+	CatalogEntityPropertyResponseDataTypeCatalogEntityProperties CatalogEntityPropertyResponseDataType = "catalog_entity_properties"
+)
+
+// Defines values for CatalogEntityResponseDataType.
+const (
+	CatalogEntityResponseDataTypeCatalogEntities CatalogEntityResponseDataType = "catalog_entities"
+)
+
+// Defines values for CatalogFieldKind.
+const (
+	CatalogFieldKindReference CatalogFieldKind = "reference"
+	CatalogFieldKindText      CatalogFieldKind = "text"
+)
+
+// Defines values for CatalogFieldListDataType.
+const (
+	CatalogFieldListDataTypeCatalogFields CatalogFieldListDataType = "catalog_fields"
+)
+
+// Defines values for CatalogFieldResponseDataType.
+const (
+	CatalogFieldResponseDataTypeCatalogFields CatalogFieldResponseDataType = "catalog_fields"
+)
+
+// Defines values for CatalogListDataType.
+const (
+	CatalogListDataTypeCatalogs CatalogListDataType = "catalogs"
+)
+
+// Defines values for CatalogResponseDataType.
+const (
+	CatalogResponseDataTypeCatalogs CatalogResponseDataType = "catalogs"
+)
+
 // Defines values for CauseListDataType.
 const (
 	CauseListDataTypeCauses CauseListDataType = "causes"
@@ -984,9 +1048,9 @@ const (
 
 // Defines values for CreateZoomMeetingTaskParamsAutoRecording.
 const (
-	Cloud CreateZoomMeetingTaskParamsAutoRecording = "cloud"
-	Local CreateZoomMeetingTaskParamsAutoRecording = "local"
-	None  CreateZoomMeetingTaskParamsAutoRecording = "none"
+	CreateZoomMeetingTaskParamsAutoRecordingCloud CreateZoomMeetingTaskParamsAutoRecording = "cloud"
+	CreateZoomMeetingTaskParamsAutoRecordingLocal CreateZoomMeetingTaskParamsAutoRecording = "local"
+	CreateZoomMeetingTaskParamsAutoRecordingNone  CreateZoomMeetingTaskParamsAutoRecording = "none"
 )
 
 // Defines values for CreateZoomMeetingTaskParamsTaskType.
@@ -1094,14 +1158,29 @@ const (
 	EscalationLevelResponseDataTypeEscalationLevels EscalationLevelResponseDataType = "escalation_levels"
 )
 
+// Defines values for EscalationPathRulesOperator.
+const (
+	EscalationPathRulesOperatorContains       EscalationPathRulesOperator = "contains"
+	EscalationPathRulesOperatorDoesNotContain EscalationPathRulesOperator = "does_not_contain"
+	EscalationPathRulesOperatorIs             EscalationPathRulesOperator = "is"
+	EscalationPathRulesOperatorIsNot          EscalationPathRulesOperator = "is_not"
+)
+
+// Defines values for EscalationPathRulesRuleType.
+const (
+	EscalationPathRulesRuleTypeAlertUrgency EscalationPathRulesRuleType = "alert_urgency"
+	EscalationPathRulesRuleTypeJsonPath     EscalationPathRulesRuleType = "json_path"
+	EscalationPathRulesRuleTypeWorkingHour  EscalationPathRulesRuleType = "working_hour"
+)
+
+// Defines values for EscalationPathResponseDataType.
+const (
+	EscalationPathResponseDataTypeEscalationPaths EscalationPathResponseDataType = "escalation_paths"
+)
+
 // Defines values for EscalationPolicyListDataType.
 const (
 	EscalationPolicyListDataTypeEscalationPolicies EscalationPolicyListDataType = "escalation_policies"
-)
-
-// Defines values for EscalationPolicyPathResponseDataType.
-const (
-	EscalationPolicyPathResponseDataTypeEscalationPaths EscalationPolicyPathResponseDataType = "escalation_paths"
 )
 
 // Defines values for EscalationPolicyResponseDataType.
@@ -1157,6 +1236,7 @@ const (
 
 // Defines values for FormFieldValueKind.
 const (
+	FormFieldValueKindCatalogEntity FormFieldValueKind = "catalog_entity"
 	FormFieldValueKindFunctionality FormFieldValueKind = "functionality"
 	FormFieldValueKindGroup         FormFieldValueKind = "group"
 	FormFieldValueKindInherit       FormFieldValueKind = "inherit"
@@ -1908,6 +1988,44 @@ const (
 	IpRangesResponseDataTypeIpRanges IpRangesResponseDataType = "ip_ranges"
 )
 
+// Defines values for LiveCallRouterCountryCode.
+const (
+	LiveCallRouterCountryCodeAU LiveCallRouterCountryCode = "AU"
+	LiveCallRouterCountryCodeCA LiveCallRouterCountryCode = "CA"
+	LiveCallRouterCountryCodeGB LiveCallRouterCountryCode = "GB"
+	LiveCallRouterCountryCodeNZ LiveCallRouterCountryCode = "NZ"
+	LiveCallRouterCountryCodeUS LiveCallRouterCountryCode = "US"
+)
+
+// Defines values for LiveCallRouterEscalationPolicyTriggerParamsType.
+const (
+	LiveCallRouterEscalationPolicyTriggerParamsTypeEscalationPolicy LiveCallRouterEscalationPolicyTriggerParamsType = "EscalationPolicy"
+	LiveCallRouterEscalationPolicyTriggerParamsTypeGroup            LiveCallRouterEscalationPolicyTriggerParamsType = "Group"
+	LiveCallRouterEscalationPolicyTriggerParamsTypeService          LiveCallRouterEscalationPolicyTriggerParamsType = "Service"
+)
+
+// Defines values for LiveCallRouterKind.
+const (
+	LiveCallRouterKindLive      LiveCallRouterKind = "live"
+	LiveCallRouterKindVoicemail LiveCallRouterKind = "voicemail"
+)
+
+// Defines values for LiveCallRouterPhoneType.
+const (
+	LiveCallRouterPhoneTypeLocal    LiveCallRouterPhoneType = "local"
+	LiveCallRouterPhoneTypeTollFree LiveCallRouterPhoneType = "toll_free"
+)
+
+// Defines values for LiveCallRouterListDataType.
+const (
+	LiveCallRouterListDataTypeLiveCallRouters LiveCallRouterListDataType = "live_call_routers"
+)
+
+// Defines values for LiveCallRouterResponseDataType.
+const (
+	LiveCallRouterResponseDataTypeLiveCallRouters LiveCallRouterResponseDataType = "live_call_routers"
+)
+
 // Defines values for MitigateIncidentDataType.
 const (
 	MitigateIncidentDataTypeIncidents MitigateIncidentDataType = "incidents"
@@ -2025,6 +2143,50 @@ const (
 	NewAuthorizationDataTypeAuthorizations NewAuthorizationDataType = "authorizations"
 )
 
+// Defines values for NewCatalogDataAttributesIcon.
+const (
+	NewCatalogDataAttributesIconChartBar          NewCatalogDataAttributesIcon = "chart-bar"
+	NewCatalogDataAttributesIconCursorArrowRipple NewCatalogDataAttributesIcon = "cursor-arrow-ripple"
+	NewCatalogDataAttributesIconGlobeAlt          NewCatalogDataAttributesIcon = "globe-alt"
+	NewCatalogDataAttributesIconLightBulb         NewCatalogDataAttributesIcon = "light-bulb"
+	NewCatalogDataAttributesIconServerStack       NewCatalogDataAttributesIcon = "server-stack"
+	NewCatalogDataAttributesIconShapes            NewCatalogDataAttributesIcon = "shapes"
+	NewCatalogDataAttributesIconUserGroup         NewCatalogDataAttributesIcon = "user-group"
+	NewCatalogDataAttributesIconUsers             NewCatalogDataAttributesIcon = "users"
+)
+
+// Defines values for NewCatalogDataType.
+const (
+	NewCatalogDataTypeCatalogs NewCatalogDataType = "catalogs"
+)
+
+// Defines values for NewCatalogEntityDataType.
+const (
+	NewCatalogEntityDataTypeCatalogEntities NewCatalogEntityDataType = "catalog_entities"
+)
+
+// Defines values for NewCatalogEntityPropertyDataAttributesKey.
+const (
+	NewCatalogEntityPropertyDataAttributesKeyCatalogEntity NewCatalogEntityPropertyDataAttributesKey = "catalog_entity"
+	NewCatalogEntityPropertyDataAttributesKeyText          NewCatalogEntityPropertyDataAttributesKey = "text"
+)
+
+// Defines values for NewCatalogEntityPropertyDataType.
+const (
+	NewCatalogEntityPropertyDataTypeCatalogEntityProperties NewCatalogEntityPropertyDataType = "catalog_entity_properties"
+)
+
+// Defines values for NewCatalogFieldDataAttributesKind.
+const (
+	NewCatalogFieldDataAttributesKindReference NewCatalogFieldDataAttributesKind = "reference"
+	NewCatalogFieldDataAttributesKindText      NewCatalogFieldDataAttributesKind = "text"
+)
+
+// Defines values for NewCatalogFieldDataType.
+const (
+	NewCatalogFieldDataTypeCatalogFields NewCatalogFieldDataType = "catalog_fields"
+)
+
 // Defines values for NewCauseDataType.
 const (
 	NewCauseDataTypeCauses NewCauseDataType = "causes"
@@ -2112,20 +2274,35 @@ const (
 	NewEscalationLevelDataTypeEscalationLevels NewEscalationLevelDataType = "escalation_levels"
 )
 
+// Defines values for NewEscalationPathDataAttributesNotificationType.
+const (
+	NewEscalationPathDataAttributesNotificationTypeAudible NewEscalationPathDataAttributesNotificationType = "audible"
+	NewEscalationPathDataAttributesNotificationTypeQuiet   NewEscalationPathDataAttributesNotificationType = "quiet"
+)
+
+// Defines values for NewEscalationPathDataAttributesRuleParamsOperator.
+const (
+	NewEscalationPathDataAttributesRuleParamsOperatorContains       NewEscalationPathDataAttributesRuleParamsOperator = "contains"
+	NewEscalationPathDataAttributesRuleParamsOperatorDoesNotContain NewEscalationPathDataAttributesRuleParamsOperator = "does_not_contain"
+	NewEscalationPathDataAttributesRuleParamsOperatorIs             NewEscalationPathDataAttributesRuleParamsOperator = "is"
+	NewEscalationPathDataAttributesRuleParamsOperatorIsNot          NewEscalationPathDataAttributesRuleParamsOperator = "is_not"
+)
+
+// Defines values for NewEscalationPathDataAttributesRuleParamsRuleType.
+const (
+	NewEscalationPathDataAttributesRuleParamsRuleTypeAlertUrgency NewEscalationPathDataAttributesRuleParamsRuleType = "alert_urgency"
+	NewEscalationPathDataAttributesRuleParamsRuleTypeJsonPath     NewEscalationPathDataAttributesRuleParamsRuleType = "json_path"
+	NewEscalationPathDataAttributesRuleParamsRuleTypeWorkingHour  NewEscalationPathDataAttributesRuleParamsRuleType = "working_hour"
+)
+
+// Defines values for NewEscalationPathDataType.
+const (
+	NewEscalationPathDataTypeEscalationPaths NewEscalationPathDataType = "escalation_paths"
+)
+
 // Defines values for NewEscalationPolicyDataType.
 const (
 	NewEscalationPolicyDataTypeEscalationPolicies NewEscalationPolicyDataType = "escalation_policies"
-)
-
-// Defines values for NewEscalationPolicyPathDataAttributesNotificationType.
-const (
-	NewEscalationPolicyPathDataAttributesNotificationTypeAudible NewEscalationPolicyPathDataAttributesNotificationType = "audible"
-	NewEscalationPolicyPathDataAttributesNotificationTypeQuiet   NewEscalationPolicyPathDataAttributesNotificationType = "quiet"
-)
-
-// Defines values for NewEscalationPolicyPathDataType.
-const (
-	NewEscalationPolicyPathDataTypeEscalationPaths NewEscalationPolicyPathDataType = "escalation_paths"
 )
 
 // Defines values for NewFormFieldDataAttributesInputKind.
@@ -2176,6 +2353,7 @@ const (
 
 // Defines values for NewFormFieldDataAttributesValueKind.
 const (
+	NewFormFieldDataAttributesValueKindCatalogEntity NewFormFieldDataAttributesValueKind = "catalog_entity"
 	NewFormFieldDataAttributesValueKindFunctionality NewFormFieldDataAttributesValueKind = "functionality"
 	NewFormFieldDataAttributesValueKindGroup         NewFormFieldDataAttributesValueKind = "group"
 	NewFormFieldDataAttributesValueKindInherit       NewFormFieldDataAttributesValueKind = "inherit"
@@ -2500,6 +2678,39 @@ const (
 	NewIncidentTypeDataTypeIncidentTypes NewIncidentTypeDataType = "incident_types"
 )
 
+// Defines values for NewLiveCallRouterDataAttributesCountryCode.
+const (
+	NewLiveCallRouterDataAttributesCountryCodeAU NewLiveCallRouterDataAttributesCountryCode = "AU"
+	NewLiveCallRouterDataAttributesCountryCodeCA NewLiveCallRouterDataAttributesCountryCode = "CA"
+	NewLiveCallRouterDataAttributesCountryCodeGB NewLiveCallRouterDataAttributesCountryCode = "GB"
+	NewLiveCallRouterDataAttributesCountryCodeNZ NewLiveCallRouterDataAttributesCountryCode = "NZ"
+	NewLiveCallRouterDataAttributesCountryCodeUS NewLiveCallRouterDataAttributesCountryCode = "US"
+)
+
+// Defines values for NewLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType.
+const (
+	NewLiveCallRouterDataAttributesEscalationPolicyTriggerParamsTypeEscalationPolicy NewLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType = "escalation_policy"
+	NewLiveCallRouterDataAttributesEscalationPolicyTriggerParamsTypeGroup            NewLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType = "group"
+	NewLiveCallRouterDataAttributesEscalationPolicyTriggerParamsTypeService          NewLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType = "service"
+)
+
+// Defines values for NewLiveCallRouterDataAttributesKind.
+const (
+	NewLiveCallRouterDataAttributesKindLive      NewLiveCallRouterDataAttributesKind = "live"
+	NewLiveCallRouterDataAttributesKindVoicemail NewLiveCallRouterDataAttributesKind = "voicemail"
+)
+
+// Defines values for NewLiveCallRouterDataAttributesPhoneType.
+const (
+	NewLiveCallRouterDataAttributesPhoneTypeLocal    NewLiveCallRouterDataAttributesPhoneType = "local"
+	NewLiveCallRouterDataAttributesPhoneTypeTollFree NewLiveCallRouterDataAttributesPhoneType = "toll_free"
+)
+
+// Defines values for NewLiveCallRouterDataType.
+const (
+	NewLiveCallRouterDataTypeLiveCallRouters NewLiveCallRouterDataType = "live_call_routers"
+)
+
 // Defines values for NewOnCallShadowDataAttributesShadowableType.
 const (
 	NewOnCallShadowDataAttributesShadowableTypeSchedule NewOnCallShadowDataAttributesShadowableType = "Schedule"
@@ -2560,6 +2771,12 @@ const (
 // Defines values for NewRetrospectiveStepDataType.
 const (
 	NewRetrospectiveStepDataTypeRetrospectiveSteps NewRetrospectiveStepDataType = "retrospective_steps"
+)
+
+// Defines values for NewRoleDataAttributesAlertsPermissions.
+const (
+	NewRoleDataAttributesAlertsPermissionsCreate NewRoleDataAttributesAlertsPermissions = "create"
+	NewRoleDataAttributesAlertsPermissionsRead   NewRoleDataAttributesAlertsPermissions = "read"
 )
 
 // Defines values for NewRoleDataAttributesApiKeysPermissions.
@@ -2680,6 +2897,13 @@ const (
 	NewRoleDataAttributesPrivateIncidentsPermissionsDelete NewRoleDataAttributesPrivateIncidentsPermissions = "delete"
 	NewRoleDataAttributesPrivateIncidentsPermissionsRead   NewRoleDataAttributesPrivateIncidentsPermissions = "read"
 	NewRoleDataAttributesPrivateIncidentsPermissionsUpdate NewRoleDataAttributesPrivateIncidentsPermissions = "update"
+)
+
+// Defines values for NewRoleDataAttributesPulsesPermissions.
+const (
+	NewRoleDataAttributesPulsesPermissionsCreate NewRoleDataAttributesPulsesPermissions = "create"
+	NewRoleDataAttributesPulsesPermissionsRead   NewRoleDataAttributesPulsesPermissions = "read"
+	NewRoleDataAttributesPulsesPermissionsUpdate NewRoleDataAttributesPulsesPermissions = "update"
 )
 
 // Defines values for NewRoleDataAttributesRetrospectivePermissions.
@@ -3295,6 +3519,12 @@ const (
 	RetrospectiveStepResponseDataTypeRetrospectiveSteps RetrospectiveStepResponseDataType = "retrospective_steps"
 )
 
+// Defines values for RoleAlertsPermissions.
+const (
+	RoleAlertsPermissionsCreate RoleAlertsPermissions = "create"
+	RoleAlertsPermissionsRead   RoleAlertsPermissions = "read"
+)
+
 // Defines values for RoleApiKeysPermissions.
 const (
 	RoleApiKeysPermissionsCreate RoleApiKeysPermissions = "create"
@@ -3413,6 +3643,13 @@ const (
 	RolePrivateIncidentsPermissionsDelete RolePrivateIncidentsPermissions = "delete"
 	RolePrivateIncidentsPermissionsRead   RolePrivateIncidentsPermissions = "read"
 	RolePrivateIncidentsPermissionsUpdate RolePrivateIncidentsPermissions = "update"
+)
+
+// Defines values for RolePulsesPermissions.
+const (
+	RolePulsesPermissionsCreate RolePulsesPermissions = "create"
+	RolePulsesPermissionsRead   RolePulsesPermissions = "read"
+	RolePulsesPermissionsUpdate RolePulsesPermissions = "update"
 )
 
 // Defines values for RoleRetrospectivePermissions.
@@ -3963,6 +4200,50 @@ const (
 	UpdateAuthorizationDataTypeAuthorizations UpdateAuthorizationDataType = "authorizations"
 )
 
+// Defines values for UpdateCatalogDataAttributesIcon.
+const (
+	UpdateCatalogDataAttributesIconChartBar          UpdateCatalogDataAttributesIcon = "chart-bar"
+	UpdateCatalogDataAttributesIconCursorArrowRipple UpdateCatalogDataAttributesIcon = "cursor-arrow-ripple"
+	UpdateCatalogDataAttributesIconGlobeAlt          UpdateCatalogDataAttributesIcon = "globe-alt"
+	UpdateCatalogDataAttributesIconLightBulb         UpdateCatalogDataAttributesIcon = "light-bulb"
+	UpdateCatalogDataAttributesIconServerStack       UpdateCatalogDataAttributesIcon = "server-stack"
+	UpdateCatalogDataAttributesIconShapes            UpdateCatalogDataAttributesIcon = "shapes"
+	UpdateCatalogDataAttributesIconUserGroup         UpdateCatalogDataAttributesIcon = "user-group"
+	UpdateCatalogDataAttributesIconUsers             UpdateCatalogDataAttributesIcon = "users"
+)
+
+// Defines values for UpdateCatalogDataType.
+const (
+	UpdateCatalogDataTypeCatalogs UpdateCatalogDataType = "catalogs"
+)
+
+// Defines values for UpdateCatalogEntityDataType.
+const (
+	UpdateCatalogEntityDataTypeCatalogEntities UpdateCatalogEntityDataType = "catalog_entities"
+)
+
+// Defines values for UpdateCatalogEntityPropertyDataAttributesKey.
+const (
+	UpdateCatalogEntityPropertyDataAttributesKeyCatalogEntity UpdateCatalogEntityPropertyDataAttributesKey = "catalog_entity"
+	UpdateCatalogEntityPropertyDataAttributesKeyText          UpdateCatalogEntityPropertyDataAttributesKey = "text"
+)
+
+// Defines values for UpdateCatalogEntityPropertyDataType.
+const (
+	UpdateCatalogEntityPropertyDataTypeCatalogEntityProperties UpdateCatalogEntityPropertyDataType = "catalog_entity_properties"
+)
+
+// Defines values for UpdateCatalogFieldDataAttributesKind.
+const (
+	UpdateCatalogFieldDataAttributesKindReference UpdateCatalogFieldDataAttributesKind = "reference"
+	UpdateCatalogFieldDataAttributesKindText      UpdateCatalogFieldDataAttributesKind = "text"
+)
+
+// Defines values for UpdateCatalogFieldDataType.
+const (
+	UpdateCatalogFieldDataTypeCatalogFields UpdateCatalogFieldDataType = "catalog_fields"
+)
+
 // Defines values for UpdateCauseDataType.
 const (
 	UpdateCauseDataTypeCauses UpdateCauseDataType = "causes"
@@ -4055,20 +4336,35 @@ const (
 	EscalationLevels UpdateEscalationLevelDataType = "escalation_levels"
 )
 
+// Defines values for UpdateEscalationPathDataAttributesNotificationType.
+const (
+	UpdateEscalationPathDataAttributesNotificationTypeAudible UpdateEscalationPathDataAttributesNotificationType = "audible"
+	UpdateEscalationPathDataAttributesNotificationTypeQuiet   UpdateEscalationPathDataAttributesNotificationType = "quiet"
+)
+
+// Defines values for UpdateEscalationPathDataAttributesRuleParamsOperator.
+const (
+	Contains       UpdateEscalationPathDataAttributesRuleParamsOperator = "contains"
+	DoesNotContain UpdateEscalationPathDataAttributesRuleParamsOperator = "does_not_contain"
+	Is             UpdateEscalationPathDataAttributesRuleParamsOperator = "is"
+	IsNot          UpdateEscalationPathDataAttributesRuleParamsOperator = "is_not"
+)
+
+// Defines values for UpdateEscalationPathDataAttributesRuleParamsRuleType.
+const (
+	UpdateEscalationPathDataAttributesRuleParamsRuleTypeAlertUrgency UpdateEscalationPathDataAttributesRuleParamsRuleType = "alert_urgency"
+	UpdateEscalationPathDataAttributesRuleParamsRuleTypeJsonPath     UpdateEscalationPathDataAttributesRuleParamsRuleType = "json_path"
+	UpdateEscalationPathDataAttributesRuleParamsRuleTypeWorkingHour  UpdateEscalationPathDataAttributesRuleParamsRuleType = "working_hour"
+)
+
+// Defines values for UpdateEscalationPathDataType.
+const (
+	EscalationPaths UpdateEscalationPathDataType = "escalation_paths"
+)
+
 // Defines values for UpdateEscalationPolicyDataType.
 const (
 	UpdateEscalationPolicyDataTypeEscalationPolicies UpdateEscalationPolicyDataType = "escalation_policies"
-)
-
-// Defines values for UpdateEscalationPolicyPathDataAttributesNotificationType.
-const (
-	UpdateEscalationPolicyPathDataAttributesNotificationTypeAudible UpdateEscalationPolicyPathDataAttributesNotificationType = "audible"
-	UpdateEscalationPolicyPathDataAttributesNotificationTypeQuiet   UpdateEscalationPolicyPathDataAttributesNotificationType = "quiet"
-)
-
-// Defines values for UpdateEscalationPolicyPathDataType.
-const (
-	EscalationPaths UpdateEscalationPolicyPathDataType = "escalation_paths"
 )
 
 // Defines values for UpdateFormFieldDataAttributesInputKind.
@@ -4119,6 +4415,7 @@ const (
 
 // Defines values for UpdateFormFieldDataAttributesValueKind.
 const (
+	UpdateFormFieldDataAttributesValueKindCatalogEntity UpdateFormFieldDataAttributesValueKind = "catalog_entity"
 	UpdateFormFieldDataAttributesValueKindFunctionality UpdateFormFieldDataAttributesValueKind = "functionality"
 	UpdateFormFieldDataAttributesValueKindGroup         UpdateFormFieldDataAttributesValueKind = "group"
 	UpdateFormFieldDataAttributesValueKindInherit       UpdateFormFieldDataAttributesValueKind = "inherit"
@@ -4478,6 +4775,11 @@ const (
 	UpdateIncidentStatusPageEventDataTypeIncidentStatusPageEvents UpdateIncidentStatusPageEventDataType = "incident_status_page_events"
 )
 
+// Defines values for UpdateIncidentStatusTimestampTaskParamsTaskType.
+const (
+	UpdateIncidentStatusTimestampTaskParamsTaskTypeUpdateStatus UpdateIncidentStatusTimestampTaskParamsTaskType = "update_status"
+)
+
 // Defines values for UpdateIncidentSubStatusDataType.
 const (
 	UpdateIncidentSubStatusDataTypeIncidentSubStatuses UpdateIncidentSubStatusDataType = "incident_sub_statuses"
@@ -4525,6 +4827,39 @@ const (
 // Defines values for UpdateLinearIssueTaskParamsTaskType.
 const (
 	UpdateLinearIssue UpdateLinearIssueTaskParamsTaskType = "update_linear_issue"
+)
+
+// Defines values for UpdateLiveCallRouterDataAttributesCountryCode.
+const (
+	UpdateLiveCallRouterDataAttributesCountryCodeAU UpdateLiveCallRouterDataAttributesCountryCode = "AU"
+	UpdateLiveCallRouterDataAttributesCountryCodeCA UpdateLiveCallRouterDataAttributesCountryCode = "CA"
+	UpdateLiveCallRouterDataAttributesCountryCodeGB UpdateLiveCallRouterDataAttributesCountryCode = "GB"
+	UpdateLiveCallRouterDataAttributesCountryCodeNZ UpdateLiveCallRouterDataAttributesCountryCode = "NZ"
+	UpdateLiveCallRouterDataAttributesCountryCodeUS UpdateLiveCallRouterDataAttributesCountryCode = "US"
+)
+
+// Defines values for UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType.
+const (
+	UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsTypeEscalationPolicy UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType = "EscalationPolicy"
+	UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsTypeGroup            UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType = "Group"
+	UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsTypeService          UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType = "Service"
+)
+
+// Defines values for UpdateLiveCallRouterDataAttributesKind.
+const (
+	Live      UpdateLiveCallRouterDataAttributesKind = "live"
+	Voicemail UpdateLiveCallRouterDataAttributesKind = "voicemail"
+)
+
+// Defines values for UpdateLiveCallRouterDataAttributesPhoneType.
+const (
+	UpdateLiveCallRouterDataAttributesPhoneTypeLocal    UpdateLiveCallRouterDataAttributesPhoneType = "local"
+	UpdateLiveCallRouterDataAttributesPhoneTypeTollFree UpdateLiveCallRouterDataAttributesPhoneType = "toll_free"
+)
+
+// Defines values for UpdateLiveCallRouterDataType.
+const (
+	UpdateLiveCallRouterDataTypeLiveCallRouters UpdateLiveCallRouterDataType = "live_call_routers"
 )
 
 // Defines values for UpdateMotionTaskTaskParamsTaskType.
@@ -5006,7 +5341,7 @@ const (
 
 // Defines values for UpdateStatusTaskParamsTaskType.
 const (
-	UpdateStatus UpdateStatusTaskParamsTaskType = "update_status"
+	UpdateStatusTaskParamsTaskTypeUpdateStatus UpdateStatusTaskParamsTaskType = "update_status"
 )
 
 // Defines values for UpdateSubStatusDataType.
@@ -5170,7 +5505,7 @@ const (
 
 // Defines values for UserResponseDataType.
 const (
-	UserResponseDataTypeUsers UserResponseDataType = "users"
+	Users UserResponseDataType = "users"
 )
 
 // Defines values for WebhooksDeliveryListDataType.
@@ -5338,6 +5673,21 @@ const (
 // Defines values for WorkflowTaskResponseDataType.
 const (
 	WorkflowTaskResponseDataTypeWorkflowTasks WorkflowTaskResponseDataType = "workflow_tasks"
+)
+
+// Defines values for GeneratePhoneNumberLiveCallRouterParamsCountryCode.
+const (
+	GeneratePhoneNumberLiveCallRouterParamsCountryCodeAU GeneratePhoneNumberLiveCallRouterParamsCountryCode = "AU"
+	GeneratePhoneNumberLiveCallRouterParamsCountryCodeCA GeneratePhoneNumberLiveCallRouterParamsCountryCode = "CA"
+	GeneratePhoneNumberLiveCallRouterParamsCountryCodeGB GeneratePhoneNumberLiveCallRouterParamsCountryCode = "GB"
+	GeneratePhoneNumberLiveCallRouterParamsCountryCodeNZ GeneratePhoneNumberLiveCallRouterParamsCountryCode = "NZ"
+	GeneratePhoneNumberLiveCallRouterParamsCountryCodeUS GeneratePhoneNumberLiveCallRouterParamsCountryCode = "US"
+)
+
+// Defines values for GeneratePhoneNumberLiveCallRouterParamsPhoneType.
+const (
+	Local    GeneratePhoneNumberLiveCallRouterParamsPhoneType = "local"
+	TollFree GeneratePhoneNumberLiveCallRouterParamsPhoneType = "toll_free"
 )
 
 // ActionItemTriggerParams defines model for action_item_trigger_params.
@@ -5596,10 +5946,17 @@ type AddMicrosoftTeamsTabTaskParams struct {
 
 	// Title The tab title. Required if not a playbook tab
 	Title *string `json:"title"`
+	union json.RawMessage
 }
 
 // AddMicrosoftTeamsTabTaskParamsTaskType defines model for AddMicrosoftTeamsTabTaskParams.TaskType.
 type AddMicrosoftTeamsTabTaskParamsTaskType string
+
+// AddMicrosoftTeamsTabTaskParams0 defines model for .
+type AddMicrosoftTeamsTabTaskParams0 = interface{}
+
+// AddMicrosoftTeamsTabTaskParams1 defines model for .
+type AddMicrosoftTeamsTabTaskParams1 = interface{}
 
 // AddRoleTaskParams defines model for add_role_task_params.
 type AddRoleTaskParams struct {
@@ -5639,10 +5996,17 @@ type AddSlackBookmarkTaskParams struct {
 
 	// Title The bookmark title. Required if not a playbook bookmark
 	Title *string `json:"title"`
+	union json.RawMessage
 }
 
 // AddSlackBookmarkTaskParamsTaskType defines model for AddSlackBookmarkTaskParams.TaskType.
 type AddSlackBookmarkTaskParamsTaskType string
+
+// AddSlackBookmarkTaskParams0 defines model for .
+type AddSlackBookmarkTaskParams0 = interface{}
+
+// AddSlackBookmarkTaskParams1 defines model for .
+type AddSlackBookmarkTaskParams1 = interface{}
 
 // AddSubscribers defines model for add_subscribers.
 type AddSubscribers struct {
@@ -6129,10 +6493,17 @@ type AutoAssignRolePagerdutyTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"service,omitempty"`
 	TaskType *AutoAssignRolePagerdutyTaskParamsTaskType `json:"task_type,omitempty"`
+	union    json.RawMessage
 }
 
 // AutoAssignRolePagerdutyTaskParamsTaskType defines model for AutoAssignRolePagerdutyTaskParams.TaskType.
 type AutoAssignRolePagerdutyTaskParamsTaskType string
+
+// AutoAssignRolePagerdutyTaskParams0 defines model for .
+type AutoAssignRolePagerdutyTaskParams0 = interface{}
+
+// AutoAssignRolePagerdutyTaskParams1 defines model for .
+type AutoAssignRolePagerdutyTaskParams1 = interface{}
 
 // AutoAssignRoleRootlyTaskParams defines model for auto_assign_role_rootly_task_params.
 type AutoAssignRoleRootlyTaskParams struct {
@@ -6206,6 +6577,183 @@ type CancelIncident struct {
 
 // CancelIncidentDataType defines model for CancelIncident.Data.Type.
 type CancelIncidentDataType string
+
+// Catalog defines model for catalog.
+type Catalog struct {
+	CreatedAt   string      `json:"created_at"`
+	Description *string     `json:"description"`
+	Icon        CatalogIcon `json:"icon"`
+	Name        string      `json:"name"`
+
+	// Position Default position of the catalog when displayed in a list.
+	Position  *int   `json:"position"`
+	UpdatedAt string `json:"updated_at"`
+}
+
+// CatalogIcon defines model for Catalog.Icon.
+type CatalogIcon string
+
+// CatalogEntity defines model for catalog_entity.
+type CatalogEntity struct {
+	CreatedAt   string  `json:"created_at"`
+	Description *string `json:"description"`
+	Name        string  `json:"name"`
+
+	// Position Default position of the item when displayed in a list.
+	Position  *int   `json:"position"`
+	UpdatedAt string `json:"updated_at"`
+}
+
+// CatalogEntityList defines model for catalog_entity_list.
+type CatalogEntityList struct {
+	Data []struct {
+		Attributes CatalogEntity `json:"attributes"`
+
+		// Id Unique ID of the catalog_entity
+		Id   string                    `json:"id"`
+		Type CatalogEntityListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// CatalogEntityListDataType defines model for CatalogEntityList.Data.Type.
+type CatalogEntityListDataType string
+
+// CatalogEntityProperty defines model for catalog_entity_property.
+type CatalogEntityProperty struct {
+	CatalogEntityId string                   `json:"catalog_entity_id"`
+	CatalogFieldId  string                   `json:"catalog_field_id"`
+	CreatedAt       string                   `json:"created_at"`
+	Key             CatalogEntityPropertyKey `json:"key"`
+	UpdatedAt       string                   `json:"updated_at"`
+	Value           string                   `json:"value"`
+}
+
+// CatalogEntityPropertyKey defines model for CatalogEntityProperty.Key.
+type CatalogEntityPropertyKey string
+
+// CatalogEntityPropertyList defines model for catalog_entity_property_list.
+type CatalogEntityPropertyList struct {
+	Data []struct {
+		Attributes CatalogEntityProperty `json:"attributes"`
+
+		// Id Unique ID of the catalog_entity_property
+		Id   string                            `json:"id"`
+		Type CatalogEntityPropertyListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// CatalogEntityPropertyListDataType defines model for CatalogEntityPropertyList.Data.Type.
+type CatalogEntityPropertyListDataType string
+
+// CatalogEntityPropertyResponse defines model for catalog_entity_property_response.
+type CatalogEntityPropertyResponse struct {
+	Data struct {
+		Attributes CatalogEntityProperty `json:"attributes"`
+
+		// Id Unique ID of the catalog_entity_property
+		Id   string                                `json:"id"`
+		Type CatalogEntityPropertyResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// CatalogEntityPropertyResponseDataType defines model for CatalogEntityPropertyResponse.Data.Type.
+type CatalogEntityPropertyResponseDataType string
+
+// CatalogEntityResponse defines model for catalog_entity_response.
+type CatalogEntityResponse struct {
+	Data struct {
+		Attributes CatalogEntity `json:"attributes"`
+
+		// Id Unique ID of the catalog_entity
+		Id   string                        `json:"id"`
+		Type CatalogEntityResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// CatalogEntityResponseDataType defines model for CatalogEntityResponse.Data.Type.
+type CatalogEntityResponseDataType string
+
+// CatalogField defines model for catalog_field.
+type CatalogField struct {
+	CatalogId string           `json:"catalog_id"`
+	CreatedAt string           `json:"created_at"`
+	Kind      CatalogFieldKind `json:"kind"`
+
+	// KindCatalogId Restricts values to items of specified catalog.
+	KindCatalogId *string `json:"kind_catalog_id"`
+
+	// Multiple Whether the attribute accepts multiple values.
+	Multiple bool   `json:"multiple"`
+	Name     string `json:"name"`
+
+	// Position Default position of the item when displayed in a list.
+	Position  *int   `json:"position"`
+	Slug      string `json:"slug"`
+	UpdatedAt string `json:"updated_at"`
+}
+
+// CatalogFieldKind defines model for CatalogField.Kind.
+type CatalogFieldKind string
+
+// CatalogFieldList defines model for catalog_field_list.
+type CatalogFieldList struct {
+	Data []struct {
+		Attributes CatalogField `json:"attributes"`
+
+		// Id Unique ID of the catalog_field
+		Id   string                   `json:"id"`
+		Type CatalogFieldListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// CatalogFieldListDataType defines model for CatalogFieldList.Data.Type.
+type CatalogFieldListDataType string
+
+// CatalogFieldResponse defines model for catalog_field_response.
+type CatalogFieldResponse struct {
+	Data struct {
+		Attributes CatalogField `json:"attributes"`
+
+		// Id Unique ID of the catalog_field
+		Id   string                       `json:"id"`
+		Type CatalogFieldResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// CatalogFieldResponseDataType defines model for CatalogFieldResponse.Data.Type.
+type CatalogFieldResponseDataType string
+
+// CatalogList defines model for catalog_list.
+type CatalogList struct {
+	Data []struct {
+		Attributes Catalog `json:"attributes"`
+
+		// Id Unique ID of the catalog
+		Id   string              `json:"id"`
+		Type CatalogListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// CatalogListDataType defines model for CatalogList.Data.Type.
+type CatalogListDataType string
+
+// CatalogResponse defines model for catalog_response.
+type CatalogResponse struct {
+	Data struct {
+		Attributes Catalog `json:"attributes"`
+
+		// Id Unique ID of the catalog
+		Id   string                  `json:"id"`
+		Type CatalogResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// CatalogResponseDataType defines model for CatalogResponse.Data.Type.
+type CatalogResponseDataType string
 
 // Cause defines model for cause.
 type Cause struct {
@@ -7823,6 +8371,85 @@ type EscalationLevelResponse struct {
 // EscalationLevelResponseDataType defines model for EscalationLevelResponse.Data.Type.
 type EscalationLevelResponseDataType string
 
+// EscalationPath defines model for escalation_path.
+type EscalationPath struct {
+	// CreatedAt Date of creation
+	CreatedAt *string `json:"created_at,omitempty"`
+
+	// Default Whether this escalation path is the default path
+	Default bool `json:"default"`
+
+	// EscalationPolicyId The ID of the escalation policy
+	EscalationPolicyId string `json:"escalation_policy_id"`
+
+	// Name The name of the escalation path
+	Name string `json:"name"`
+
+	// NotificationType Notification rule type
+	NotificationType string `json:"notification_type"`
+
+	// Repeat Whether this path should be repeated until someone acknowledges the alert
+	Repeat *bool `json:"repeat"`
+
+	// RepeatCount The number of times this path will be executed until someone acknowledges the alert
+	RepeatCount *int `json:"repeat_count"`
+
+	// Rules Escalation path rules
+	Rules *[]struct {
+		// JsonPath JSON path to extract value from payload
+		JsonPath *string `json:"json_path,omitempty"`
+
+		// Operator How JSON path value should be matched
+		Operator *EscalationPathRulesOperator `json:"operator,omitempty"`
+
+		// RuleType The type of the escalation path rule
+		RuleType *EscalationPathRulesRuleType `json:"rule_type,omitempty"`
+
+		// UrgencyIds Alert urgency ids for which this escalation path should be used
+		UrgencyIds *[]string `json:"urgency_ids,omitempty"`
+
+		// Value Value with which JSON path value should be matched
+		Value *string `json:"value,omitempty"`
+
+		// WithinWorkingHour Whether the escalation path should be used within working hours
+		WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
+	} `json:"rules,omitempty"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt *string `json:"updated_at,omitempty"`
+}
+
+// EscalationPathRulesOperator How JSON path value should be matched
+type EscalationPathRulesOperator string
+
+// EscalationPathRulesRuleType The type of the escalation path rule
+type EscalationPathRulesRuleType string
+
+// EscalationPathList defines model for escalation_path_list.
+type EscalationPathList struct {
+	Data []struct {
+		Attributes EscalationPath `json:"attributes"`
+
+		// Id Unique ID of the escalation policy path
+		Id string `json:"id"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// EscalationPathResponse defines model for escalation_path_response.
+type EscalationPathResponse struct {
+	Data struct {
+		Attributes EscalationPath `json:"attributes"`
+
+		// Id Unique ID of the escalation policy path
+		Id   string                          `json:"id"`
+		Type *EscalationPathResponseDataType `json:"type,omitempty"`
+	} `json:"data"`
+}
+
+// EscalationPathResponseDataType defines model for EscalationPathResponse.Data.Type.
+type EscalationPathResponseDataType string
+
 // EscalationPolicy defines model for escalation_policy.
 type EscalationPolicy struct {
 	// CreatedAt Date of creation
@@ -7867,61 +8494,6 @@ type EscalationPolicyList struct {
 
 // EscalationPolicyListDataType defines model for EscalationPolicyList.Data.Type.
 type EscalationPolicyListDataType string
-
-// EscalationPolicyPath defines model for escalation_policy_path.
-type EscalationPolicyPath struct {
-	// CreatedAt Date of creation
-	CreatedAt *string `json:"created_at,omitempty"`
-
-	// Default Whether this escalation path is the default path
-	Default bool `json:"default"`
-
-	// EscalationPolicyId The ID of the escalation policy
-	EscalationPolicyId string `json:"escalation_policy_id"`
-
-	// Name The name of the escalation path
-	Name string `json:"name"`
-
-	// NotificationType Notification rule type
-	NotificationType string `json:"notification_type"`
-
-	// Repeat Whether this path should be repeated until someone acknowledges the alert
-	Repeat *bool `json:"repeat"`
-
-	// RepeatCount The number of times this path will be executed until someone acknowledges the alert
-	RepeatCount *int `json:"repeat_count"`
-
-	// Rules Escalation path rules
-	Rules *[]map[string]interface{} `json:"rules,omitempty"`
-
-	// UpdatedAt Date of last update
-	UpdatedAt *string `json:"updated_at,omitempty"`
-}
-
-// EscalationPolicyPathList defines model for escalation_policy_path_list.
-type EscalationPolicyPathList struct {
-	Data []struct {
-		Attributes EscalationPolicyPath `json:"attributes"`
-
-		// Id Unique ID of the escalation policy path
-		Id string `json:"id"`
-	} `json:"data"`
-	Links Links `json:"links"`
-}
-
-// EscalationPolicyPathResponse defines model for escalation_policy_path_response.
-type EscalationPolicyPathResponse struct {
-	Data struct {
-		Attributes EscalationPolicyPath `json:"attributes"`
-
-		// Id Unique ID of the escalation policy path
-		Id   string                                `json:"id"`
-		Type *EscalationPolicyPathResponseDataType `json:"type,omitempty"`
-	} `json:"data"`
-}
-
-// EscalationPolicyPathResponseDataType defines model for EscalationPolicyPathResponse.Data.Type.
-type EscalationPolicyPathResponseDataType string
 
 // EscalationPolicyResponse defines model for escalation_policy_response.
 type EscalationPolicyResponse struct {
@@ -7971,6 +8543,9 @@ type FormField struct {
 
 	// ValueKind The value kind of the form field
 	ValueKind FormFieldValueKind `json:"value_kind"`
+
+	// ValueKindCatalogId The ID of the catalog used when value_kind is `catalog_entity`
+	ValueKindCatalogId *string `json:"value_kind_catalog_id"`
 }
 
 // FormFieldInputKind The input kind of the form field
@@ -8439,10 +9014,17 @@ type GetGithubCommitsTaskParams struct {
 	ServiceIds                 *[]string                           `json:"service_ids,omitempty"`
 	ServicesImpactedByIncident *bool                               `json:"services_impacted_by_incident,omitempty"`
 	TaskType                   *GetGithubCommitsTaskParamsTaskType `json:"task_type,omitempty"`
+	union                      json.RawMessage
 }
 
 // GetGithubCommitsTaskParamsTaskType defines model for GetGithubCommitsTaskParams.TaskType.
 type GetGithubCommitsTaskParamsTaskType string
+
+// GetGithubCommitsTaskParams0 defines model for .
+type GetGithubCommitsTaskParams0 = interface{}
+
+// GetGithubCommitsTaskParams1 defines model for .
+type GetGithubCommitsTaskParams1 = interface{}
 
 // GetGitlabCommitsTaskParams defines model for get_gitlab_commits_task_params.
 type GetGitlabCommitsTaskParams struct {
@@ -8460,10 +9042,17 @@ type GetGitlabCommitsTaskParams struct {
 	ServiceIds                 *[]string                           `json:"service_ids,omitempty"`
 	ServicesImpactedByIncident *bool                               `json:"services_impacted_by_incident,omitempty"`
 	TaskType                   *GetGitlabCommitsTaskParamsTaskType `json:"task_type,omitempty"`
+	union                      json.RawMessage
 }
 
 // GetGitlabCommitsTaskParamsTaskType defines model for GetGitlabCommitsTaskParams.TaskType.
 type GetGitlabCommitsTaskParamsTaskType string
+
+// GetGitlabCommitsTaskParams0 defines model for .
+type GetGitlabCommitsTaskParams0 = interface{}
+
+// GetGitlabCommitsTaskParams1 defines model for .
+type GetGitlabCommitsTaskParams1 = interface{}
 
 // GetPulsesTaskParams defines model for get_pulses_task_params.
 type GetPulsesTaskParams struct {
@@ -9008,10 +9597,11 @@ type IncidentFormFieldSelection struct {
 	// FormFieldId The custom field for this selection
 	FormFieldId              string    `json:"form_field_id"`
 	IncidentId               string    `json:"incident_id"`
-	SelectedFunctionalityIds *[]int    `json:"selected_functionality_ids,omitempty"`
+	SelectedCatalogEntityIds *[]string `json:"selected_catalog_entity_ids,omitempty"`
+	SelectedFunctionalityIds *[]string `json:"selected_functionality_ids,omitempty"`
 	SelectedGroupIds         *[]string `json:"selected_group_ids,omitempty"`
 	SelectedOptionIds        *[]string `json:"selected_option_ids,omitempty"`
-	SelectedServiceIds       *[]int    `json:"selected_service_ids,omitempty"`
+	SelectedServiceIds       *[]string `json:"selected_service_ids,omitempty"`
 	SelectedUserIds          *[]int    `json:"selected_user_ids,omitempty"`
 
 	// Value The selected value for text kind custom fields
@@ -9811,10 +10401,17 @@ type InviteToSlackChannelPagerdutyTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"service,omitempty"`
 	TaskType *InviteToSlackChannelPagerdutyTaskParamsTaskType `json:"task_type,omitempty"`
+	union    json.RawMessage
 }
 
 // InviteToSlackChannelPagerdutyTaskParamsTaskType defines model for InviteToSlackChannelPagerdutyTaskParams.TaskType.
 type InviteToSlackChannelPagerdutyTaskParamsTaskType string
+
+// InviteToSlackChannelPagerdutyTaskParams0 defines model for .
+type InviteToSlackChannelPagerdutyTaskParams0 = interface{}
+
+// InviteToSlackChannelPagerdutyTaskParams1 defines model for .
+type InviteToSlackChannelPagerdutyTaskParams1 = interface{}
 
 // InviteToSlackChannelRootlyTaskParams defines model for invite_to_slack_channel_rootly_task_params.
 type InviteToSlackChannelRootlyTaskParams struct {
@@ -9863,10 +10460,17 @@ type InviteToSlackChannelTaskParams struct {
 		Name *string `json:"name,omitempty"`
 	} `json:"slack_users,omitempty"`
 	TaskType *InviteToSlackChannelTaskParamsTaskType `json:"task_type,omitempty"`
+	union    json.RawMessage
 }
 
 // InviteToSlackChannelTaskParamsTaskType defines model for InviteToSlackChannelTaskParams.TaskType.
 type InviteToSlackChannelTaskParamsTaskType string
+
+// InviteToSlackChannelTaskParams0 defines model for .
+type InviteToSlackChannelTaskParams0 = interface{}
+
+// InviteToSlackChannelTaskParams1 defines model for .
+type InviteToSlackChannelTaskParams1 = interface{}
 
 // InviteToSlackChannelVictorOpsTaskParams defines model for invite_to_slack_channel_victor_ops_task_params.
 type InviteToSlackChannelVictorOpsTaskParams struct {
@@ -9921,6 +10525,105 @@ type Links struct {
 	Prev  *string `json:"prev"`
 	Self  string  `json:"self"`
 }
+
+// LiveCallRouter defines model for live_call_router.
+type LiveCallRouter struct {
+	// AlertUrgencyId This is used in escalation paths to determine who to page
+	AlertUrgencyId *string `json:"alert_urgency_id,omitempty"`
+
+	// CallerGreeting The caller greeting message of the live_call_router
+	CallerGreeting *string `json:"caller_greeting,omitempty"`
+
+	// CountryCode The country code of the live_call_router
+	CountryCode *LiveCallRouterCountryCode `json:"country_code,omitempty"`
+
+	// CreatedAt Date of creation
+	CreatedAt string `json:"created_at"`
+
+	// Enabled Whether the live_call_router is enabled
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// EscalationLevelDelayInSeconds This overrides the delay (seconds) in escalation levels
+	EscalationLevelDelayInSeconds *int `json:"escalation_level_delay_in_seconds,omitempty"`
+	EscalationPolicyTriggerParams *struct {
+		// Id The ID of notification target
+		Id string `json:"id"`
+
+		// Type The type of the notification target
+		Type LiveCallRouterEscalationPolicyTriggerParamsType `json:"type"`
+	} `json:"escalation_policy_trigger_params"`
+
+	// Kind The kind of the live_call_router
+	Kind *LiveCallRouterKind `json:"kind,omitempty"`
+
+	// Name The name of the live_call_router
+	Name string `json:"name"`
+
+	// PhoneNumber You can select a phone number using [generate_phone_number](#//api/v1/live_call_routers/generate_phone_number) API and pass that phone number here to register
+	PhoneNumber *string `json:"phone_number,omitempty"`
+
+	// PhoneType The phone type of the live_call_router
+	PhoneType *LiveCallRouterPhoneType `json:"phone_type,omitempty"`
+
+	// SentToVoicemailDelay The delay (seconds) after which the caller in redirected to voicemail
+	SentToVoicemailDelay *int `json:"sent_to_voicemail_delay,omitempty"`
+
+	// ShouldAutoResolveAlertOnCallEnd This overrides the delay (seconds) in escalation levels
+	ShouldAutoResolveAlertOnCallEnd *bool `json:"should_auto_resolve_alert_on_call_end,omitempty"`
+
+	// ShouldRedirectToVoicemailOnNoAnswer This prompts the caller to choose voicemail or connect live
+	ShouldRedirectToVoicemailOnNoAnswer *bool `json:"should_redirect_to_voicemail_on_no_answer,omitempty"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt string `json:"updated_at"`
+
+	// VoicemailGreeting The voicemail greeting of the live_call_router
+	VoicemailGreeting *string `json:"voicemail_greeting,omitempty"`
+
+	// WaitingMusicUrl The waiting music URL of the live_call_router
+	WaitingMusicUrl *string `json:"waiting_music_url,omitempty"`
+}
+
+// LiveCallRouterCountryCode The country code of the live_call_router
+type LiveCallRouterCountryCode string
+
+// LiveCallRouterEscalationPolicyTriggerParamsType The type of the notification target
+type LiveCallRouterEscalationPolicyTriggerParamsType string
+
+// LiveCallRouterKind The kind of the live_call_router
+type LiveCallRouterKind string
+
+// LiveCallRouterPhoneType The phone type of the live_call_router
+type LiveCallRouterPhoneType string
+
+// LiveCallRouterList defines model for live_call_router_list.
+type LiveCallRouterList struct {
+	Data []struct {
+		Attributes LiveCallRouter `json:"attributes"`
+
+		// Id Unique ID of the live_call_router
+		Id   string                     `json:"id"`
+		Type LiveCallRouterListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// LiveCallRouterListDataType defines model for LiveCallRouterList.Data.Type.
+type LiveCallRouterListDataType string
+
+// LiveCallRouterResponse defines model for live_call_router_response.
+type LiveCallRouterResponse struct {
+	Data struct {
+		Attributes LiveCallRouter `json:"attributes"`
+
+		// Id Unique ID of the live_call_router
+		Id   string                         `json:"id"`
+		Type LiveCallRouterResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// LiveCallRouterResponseDataType defines model for LiveCallRouterResponse.Data.Type.
+type LiveCallRouterResponseDataType string
 
 // MitigateIncident defines model for mitigate_incident.
 type MitigateIncident struct {
@@ -10107,6 +10810,89 @@ type NewAuthorizationDataAttributesPermissions string
 
 // NewAuthorizationDataType defines model for NewAuthorization.Data.Type.
 type NewAuthorizationDataType string
+
+// NewCatalog defines model for new_catalog.
+type NewCatalog struct {
+	Data struct {
+		Attributes struct {
+			Description *string                       `json:"description"`
+			Icon        *NewCatalogDataAttributesIcon `json:"icon,omitempty"`
+			Name        string                        `json:"name"`
+
+			// Position Default position of the catalog when displayed in a list.
+			Position *int `json:"position"`
+		} `json:"attributes"`
+		Type NewCatalogDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewCatalogDataAttributesIcon defines model for NewCatalog.Data.Attributes.Icon.
+type NewCatalogDataAttributesIcon string
+
+// NewCatalogDataType defines model for NewCatalog.Data.Type.
+type NewCatalogDataType string
+
+// NewCatalogEntity defines model for new_catalog_entity.
+type NewCatalogEntity struct {
+	Data struct {
+		Attributes struct {
+			Description *string `json:"description"`
+			Name        string  `json:"name"`
+
+			// Position Default position of the item when displayed in a list.
+			Position *int `json:"position"`
+		} `json:"attributes"`
+		Type NewCatalogEntityDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewCatalogEntityDataType defines model for NewCatalogEntity.Data.Type.
+type NewCatalogEntityDataType string
+
+// NewCatalogEntityProperty defines model for new_catalog_entity_property.
+type NewCatalogEntityProperty struct {
+	Data struct {
+		Attributes struct {
+			CatalogEntityId *string                                   `json:"catalog_entity_id,omitempty"`
+			CatalogFieldId  string                                    `json:"catalog_field_id"`
+			Key             NewCatalogEntityPropertyDataAttributesKey `json:"key"`
+			Value           string                                    `json:"value"`
+		} `json:"attributes"`
+		Type NewCatalogEntityPropertyDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewCatalogEntityPropertyDataAttributesKey defines model for NewCatalogEntityProperty.Data.Attributes.Key.
+type NewCatalogEntityPropertyDataAttributesKey string
+
+// NewCatalogEntityPropertyDataType defines model for NewCatalogEntityProperty.Data.Type.
+type NewCatalogEntityPropertyDataType string
+
+// NewCatalogField defines model for new_catalog_field.
+type NewCatalogField struct {
+	Data struct {
+		Attributes struct {
+			Kind NewCatalogFieldDataAttributesKind `json:"kind"`
+
+			// KindCatalogId Restricts values to items of specified catalog.
+			KindCatalogId *string `json:"kind_catalog_id"`
+
+			// Multiple Whether the attribute accepts multiple values.
+			Multiple *bool  `json:"multiple,omitempty"`
+			Name     string `json:"name"`
+
+			// Position Default position of the item when displayed in a list.
+			Position *int `json:"position"`
+		} `json:"attributes"`
+		Type NewCatalogFieldDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewCatalogFieldDataAttributesKind defines model for NewCatalogField.Data.Attributes.Kind.
+type NewCatalogFieldDataAttributesKind string
+
+// NewCatalogFieldDataType defines model for NewCatalogField.Data.Type.
+type NewCatalogFieldDataType string
 
 // NewCause defines model for new_cause.
 type NewCause struct {
@@ -10322,6 +11108,59 @@ type NewEscalationLevelDataAttributesNotificationTargetParamsType string
 // NewEscalationLevelDataType defines model for NewEscalationLevel.Data.Type.
 type NewEscalationLevelDataType string
 
+// NewEscalationPath defines model for new_escalation_path.
+type NewEscalationPath struct {
+	Data struct {
+		Attributes struct {
+			// Name The name of the escalation path
+			Name string `json:"name"`
+
+			// NotificationType Notification rule type to be used
+			NotificationType *NewEscalationPathDataAttributesNotificationType `json:"notification_type,omitempty"`
+
+			// Repeat Whether this path should be repeated until someone acknowledges the alert
+			Repeat *bool `json:"repeat"`
+
+			// RepeatCount The number of times this path will be executed until someone acknowledges the alert
+			RepeatCount *int `json:"repeat_count"`
+
+			// RuleParams Escalation path conditions
+			RuleParams []struct {
+				// JsonPath JSON path to extract value from payload
+				JsonPath *string `json:"json_path,omitempty"`
+
+				// Operator How JSON path value should be matched
+				Operator *NewEscalationPathDataAttributesRuleParamsOperator `json:"operator,omitempty"`
+
+				// RuleType The type of the escalation path rule
+				RuleType *NewEscalationPathDataAttributesRuleParamsRuleType `json:"rule_type,omitempty"`
+
+				// UrgencyIds Alert urgency ids for which this escalation path should be used
+				UrgencyIds *[]interface{} `json:"urgency_ids,omitempty"`
+
+				// Value Value with which JSON path value should be matched
+				Value *string `json:"value,omitempty"`
+
+				// WithinWorkingHour Whether the escalation path should be used within working hours
+				WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
+			} `json:"rule_params"`
+		} `json:"attributes"`
+		Type NewEscalationPathDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewEscalationPathDataAttributesNotificationType Notification rule type to be used
+type NewEscalationPathDataAttributesNotificationType string
+
+// NewEscalationPathDataAttributesRuleParamsOperator How JSON path value should be matched
+type NewEscalationPathDataAttributesRuleParamsOperator string
+
+// NewEscalationPathDataAttributesRuleParamsRuleType The type of the escalation path rule
+type NewEscalationPathDataAttributesRuleParamsRuleType string
+
+// NewEscalationPathDataType defines model for NewEscalationPath.Data.Type.
+type NewEscalationPathDataType string
+
 // NewEscalationPolicy defines model for new_escalation_policy.
 type NewEscalationPolicy struct {
 	Data struct {
@@ -10347,35 +11186,6 @@ type NewEscalationPolicy struct {
 
 // NewEscalationPolicyDataType defines model for NewEscalationPolicy.Data.Type.
 type NewEscalationPolicyDataType string
-
-// NewEscalationPolicyPath defines model for new_escalation_policy_path.
-type NewEscalationPolicyPath struct {
-	Data struct {
-		Attributes struct {
-			// Name The name of the escalation path
-			Name string `json:"name"`
-
-			// NotificationType Notification rule type to be used
-			NotificationType *NewEscalationPolicyPathDataAttributesNotificationType `json:"notification_type,omitempty"`
-
-			// Repeat Whether this path should be repeated until someone acknowledges the alert
-			Repeat *bool `json:"repeat"`
-
-			// RepeatCount The number of times this path will be executed until someone acknowledges the alert
-			RepeatCount *int `json:"repeat_count"`
-
-			// RuleParams Escalation path conditions
-			RuleParams []map[string]interface{} `json:"rule_params"`
-		} `json:"attributes"`
-		Type NewEscalationPolicyPathDataType `json:"type"`
-	} `json:"data"`
-}
-
-// NewEscalationPolicyPathDataAttributesNotificationType Notification rule type to be used
-type NewEscalationPolicyPathDataAttributesNotificationType string
-
-// NewEscalationPolicyPathDataType defines model for NewEscalationPolicyPath.Data.Type.
-type NewEscalationPolicyPathDataType string
 
 // NewFormField defines model for new_form_field.
 type NewFormField struct {
@@ -10405,6 +11215,9 @@ type NewFormField struct {
 
 			// ValueKind The value kind of the form field
 			ValueKind *NewFormFieldDataAttributesValueKind `json:"value_kind,omitempty"`
+
+			// ValueKindCatalogId The ID of the catalog used when value_kind is `catalog_entity`
+			ValueKindCatalogId *string `json:"value_kind_catalog_id"`
 		} `json:"attributes"`
 		Type NewFormFieldDataType `json:"type"`
 	} `json:"data"`
@@ -10936,10 +11749,11 @@ type NewIncidentFormFieldSelection struct {
 			// FormFieldId The custom field for this selection
 			FormFieldId              string    `json:"form_field_id"`
 			IncidentId               string    `json:"incident_id"`
-			SelectedFunctionalityIds *[]int    `json:"selected_functionality_ids,omitempty"`
+			SelectedCatalogEntityIds *[]string `json:"selected_catalog_entity_ids,omitempty"`
+			SelectedFunctionalityIds *[]string `json:"selected_functionality_ids,omitempty"`
 			SelectedGroupIds         *[]string `json:"selected_group_ids,omitempty"`
 			SelectedOptionIds        *[]string `json:"selected_option_ids,omitempty"`
-			SelectedServiceIds       *[]int    `json:"selected_service_ids,omitempty"`
+			SelectedServiceIds       *[]string `json:"selected_service_ids,omitempty"`
 			SelectedUserIds          *[]int    `json:"selected_user_ids,omitempty"`
 
 			// Value The selected value for text kind custom fields
@@ -11157,6 +11971,78 @@ type NewIncidentType struct {
 
 // NewIncidentTypeDataType defines model for NewIncidentType.Data.Type.
 type NewIncidentTypeDataType string
+
+// NewLiveCallRouter defines model for new_live_call_router.
+type NewLiveCallRouter struct {
+	Data struct {
+		Attributes struct {
+			// AlertUrgencyId This is used in escalation paths to determine who to page
+			AlertUrgencyId *string `json:"alert_urgency_id,omitempty"`
+
+			// CallerGreeting The caller greeting message of the live_call_router
+			CallerGreeting *string `json:"caller_greeting,omitempty"`
+
+			// CountryCode The country code of the live_call_router
+			CountryCode NewLiveCallRouterDataAttributesCountryCode `json:"country_code"`
+
+			// Enabled Whether the live_call_router is enabled
+			Enabled *bool `json:"enabled,omitempty"`
+
+			// EscalationLevelDelayInSeconds This overrides the delay (seconds) in escalation levels
+			EscalationLevelDelayInSeconds *int `json:"escalation_level_delay_in_seconds,omitempty"`
+			EscalationPolicyTriggerParams struct {
+				// Id The ID of notification target
+				Id string `json:"id"`
+
+				// Type The type of the notification target
+				Type NewLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType `json:"type"`
+			} `json:"escalation_policy_trigger_params"`
+
+			// Kind The kind of the live_call_router
+			Kind NewLiveCallRouterDataAttributesKind `json:"kind"`
+
+			// Name The name of the live_call_router
+			Name string `json:"name"`
+
+			// PhoneNumber You can select a phone number using [generate_phone_number](#//api/v1/live_call_routers/generate_phone_number) API and pass that phone number here to register
+			PhoneNumber string `json:"phone_number"`
+
+			// PhoneType The phone type of the live_call_router
+			PhoneType NewLiveCallRouterDataAttributesPhoneType `json:"phone_type"`
+
+			// SentToVoicemailDelay The delay (seconds) after which the caller in redirected to voicemail
+			SentToVoicemailDelay *int `json:"sent_to_voicemail_delay,omitempty"`
+
+			// ShouldAutoResolveAlertOnCallEnd This overrides the delay (seconds) in escalation levels
+			ShouldAutoResolveAlertOnCallEnd *bool `json:"should_auto_resolve_alert_on_call_end,omitempty"`
+
+			// ShouldRedirectToVoicemailOnNoAnswer This prompts the caller to choose voicemail or connect live
+			ShouldRedirectToVoicemailOnNoAnswer *bool `json:"should_redirect_to_voicemail_on_no_answer,omitempty"`
+
+			// VoicemailGreeting The voicemail greeting of the live_call_router
+			VoicemailGreeting *string `json:"voicemail_greeting,omitempty"`
+
+			// WaitingMusicUrl The waiting music URL of the live_call_router
+			WaitingMusicUrl *string `json:"waiting_music_url,omitempty"`
+		} `json:"attributes"`
+		Type NewLiveCallRouterDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewLiveCallRouterDataAttributesCountryCode The country code of the live_call_router
+type NewLiveCallRouterDataAttributesCountryCode string
+
+// NewLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType The type of the notification target
+type NewLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType string
+
+// NewLiveCallRouterDataAttributesKind The kind of the live_call_router
+type NewLiveCallRouterDataAttributesKind string
+
+// NewLiveCallRouterDataAttributesPhoneType The phone type of the live_call_router
+type NewLiveCallRouterDataAttributesPhoneType string
+
+// NewLiveCallRouterDataType defines model for NewLiveCallRouter.Data.Type.
+type NewLiveCallRouterDataType string
 
 // NewOnCallShadow defines model for new_on_call_shadow.
 type NewOnCallShadow struct {
@@ -11429,6 +12315,7 @@ type NewRetrospectiveStepDataType string
 type NewRole struct {
 	Data struct {
 		Attributes struct {
+			AlertsPermissions            *[]NewRoleDataAttributesAlertsPermissions            `json:"alerts_permissions,omitempty"`
 			ApiKeysPermissions           *[]NewRoleDataAttributesApiKeysPermissions           `json:"api_keys_permissions,omitempty"`
 			AuditsPermissions            *[]NewRoleDataAttributesAuditsPermissions            `json:"audits_permissions,omitempty"`
 			BillingPermissions           *[]NewRoleDataAttributesBillingPermissions           `json:"billing_permissions,omitempty"`
@@ -11450,6 +12337,7 @@ type NewRole struct {
 			Name                        string                                              `json:"name"`
 			PlaybooksPermissions        *[]NewRoleDataAttributesPlaybooksPermissions        `json:"playbooks_permissions,omitempty"`
 			PrivateIncidentsPermissions *[]NewRoleDataAttributesPrivateIncidentsPermissions `json:"private_incidents_permissions,omitempty"`
+			PulsesPermissions           *[]NewRoleDataAttributesPulsesPermissions           `json:"pulses_permissions,omitempty"`
 			RetrospectivePermissions    *[]NewRoleDataAttributesRetrospectivePermissions    `json:"retrospective_permissions,omitempty"`
 			RolesPermissions            *[]NewRoleDataAttributesRolesPermissions            `json:"roles_permissions,omitempty"`
 			SecretsPermissions          *[]NewRoleDataAttributesSecretsPermissions          `json:"secrets_permissions,omitempty"`
@@ -11465,6 +12353,9 @@ type NewRole struct {
 		Type NewRoleDataType `json:"type"`
 	} `json:"data"`
 }
+
+// NewRoleDataAttributesAlertsPermissions defines model for NewRole.Data.Attributes.AlertsPermissions.
+type NewRoleDataAttributesAlertsPermissions string
 
 // NewRoleDataAttributesApiKeysPermissions defines model for NewRole.Data.Attributes.ApiKeysPermissions.
 type NewRoleDataAttributesApiKeysPermissions string
@@ -11510,6 +12401,9 @@ type NewRoleDataAttributesPlaybooksPermissions string
 
 // NewRoleDataAttributesPrivateIncidentsPermissions defines model for NewRole.Data.Attributes.PrivateIncidentsPermissions.
 type NewRoleDataAttributesPrivateIncidentsPermissions string
+
+// NewRoleDataAttributesPulsesPermissions defines model for NewRole.Data.Attributes.PulsesPermissions.
+type NewRoleDataAttributesPulsesPermissions string
 
 // NewRoleDataAttributesRetrospectivePermissions defines model for NewRole.Data.Attributes.RetrospectivePermissions.
 type NewRoleDataAttributesRetrospectivePermissions string
@@ -12166,10 +13060,14 @@ type NewWorkflowFormFieldCondition struct {
 			FormFieldId string `json:"form_field_id"`
 
 			// IncidentCondition The trigger condition
-			IncidentCondition NewWorkflowFormFieldConditionDataAttributesIncidentCondition `json:"incident_condition"`
-			SelectedOptionIds *[]string                                                    `json:"selected_option_ids,omitempty"`
-			SelectedUserIds   *[]int                                                       `json:"selected_user_ids,omitempty"`
-			Values            *[]string                                                    `json:"values,omitempty"`
+			IncidentCondition        NewWorkflowFormFieldConditionDataAttributesIncidentCondition `json:"incident_condition"`
+			SelectedCatalogEntityIds *[]string                                                    `json:"selected_catalog_entity_ids,omitempty"`
+			SelectedFunctionalityIds *[]string                                                    `json:"selected_functionality_ids,omitempty"`
+			SelectedGroupIds         *[]string                                                    `json:"selected_group_ids,omitempty"`
+			SelectedOptionIds        *[]string                                                    `json:"selected_option_ids,omitempty"`
+			SelectedServiceIds       *[]string                                                    `json:"selected_service_ids,omitempty"`
+			SelectedUserIds          *[]int                                                       `json:"selected_user_ids,omitempty"`
+			Values                   *[]string                                                    `json:"values,omitempty"`
 
 			// WorkflowId The workflow for this condition
 			WorkflowId *string `json:"workflow_id,omitempty"`
@@ -12502,7 +13400,10 @@ type PagePagerdutyOnCallRespondersTaskParamsUrgency string
 // PageRootlyOnCallRespondersTaskParams defines model for page_rootly_on_call_responders_task_params.
 type PageRootlyOnCallRespondersTaskParams struct {
 	// AlertUrgencyId Alert urgency ID
-	AlertUrgencyId         *string `json:"alert_urgency_id,omitempty"`
+	AlertUrgencyId *string `json:"alert_urgency_id,omitempty"`
+
+	// Description Alert description
+	Description            *string `json:"description,omitempty"`
 	EscalationNote         *string `json:"escalation_note,omitempty"`
 	EscalationPolicyTarget *struct {
 		Id   *string `json:"id,omitempty"`
@@ -12516,6 +13417,8 @@ type PageRootlyOnCallRespondersTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"service_target,omitempty"`
+
+	// Summary Alert title
 	Summary    string                                        `json:"summary"`
 	TaskType   *PageRootlyOnCallRespondersTaskParamsTaskType `json:"task_type,omitempty"`
 	UserTarget *struct {
@@ -12541,10 +13444,17 @@ type PageVictorOpsOnCallRespondersTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"users,omitempty"`
+	union json.RawMessage
 }
 
 // PageVictorOpsOnCallRespondersTaskParamsTaskType defines model for PageVictorOpsOnCallRespondersTaskParams.TaskType.
 type PageVictorOpsOnCallRespondersTaskParamsTaskType string
+
+// PageVictorOpsOnCallRespondersTaskParams0 defines model for .
+type PageVictorOpsOnCallRespondersTaskParams0 = interface{}
+
+// PageVictorOpsOnCallRespondersTaskParams1 defines model for .
+type PageVictorOpsOnCallRespondersTaskParams1 = interface{}
 
 // Playbook defines model for playbook.
 type Playbook struct {
@@ -13227,6 +14137,7 @@ type RetrospectiveStepResponseDataType string
 
 // Role defines model for role.
 type Role struct {
+	AlertsPermissions            *[]RoleAlertsPermissions            `json:"alerts_permissions,omitempty"`
 	ApiKeysPermissions           *[]RoleApiKeysPermissions           `json:"api_keys_permissions,omitempty"`
 	AuditsPermissions            *[]RoleAuditsPermissions            `json:"audits_permissions,omitempty"`
 	BillingPermissions           *[]RoleBillingPermissions           `json:"billing_permissions,omitempty"`
@@ -13255,6 +14166,7 @@ type Role struct {
 	Name                        string                             `json:"name"`
 	PlaybooksPermissions        *[]RolePlaybooksPermissions        `json:"playbooks_permissions,omitempty"`
 	PrivateIncidentsPermissions *[]RolePrivateIncidentsPermissions `json:"private_incidents_permissions,omitempty"`
+	PulsesPermissions           *[]RolePulsesPermissions           `json:"pulses_permissions,omitempty"`
 	RetrospectivePermissions    *[]RoleRetrospectivePermissions    `json:"retrospective_permissions,omitempty"`
 	RolesPermissions            *[]RoleRolesPermissions            `json:"roles_permissions,omitempty"`
 	SecretsPermissions          *[]RoleSecretsPermissions          `json:"secrets_permissions,omitempty"`
@@ -13268,6 +14180,9 @@ type Role struct {
 	WebhooksPermissions    *[]RoleWebhooksPermissions    `json:"webhooks_permissions,omitempty"`
 	WorkflowsPermissions   *[]RoleWorkflowsPermissions   `json:"workflows_permissions,omitempty"`
 }
+
+// RoleAlertsPermissions defines model for Role.AlertsPermissions.
+type RoleAlertsPermissions string
 
 // RoleApiKeysPermissions defines model for Role.ApiKeysPermissions.
 type RoleApiKeysPermissions string
@@ -13313,6 +14228,9 @@ type RolePlaybooksPermissions string
 
 // RolePrivateIncidentsPermissions defines model for Role.PrivateIncidentsPermissions.
 type RolePrivateIncidentsPermissions string
+
+// RolePulsesPermissions defines model for Role.PulsesPermissions.
+type RolePulsesPermissions string
 
 // RoleRetrospectivePermissions defines model for Role.RetrospectivePermissions.
 type RoleRetrospectivePermissions string
@@ -13751,10 +14669,20 @@ type SendSlackBlocksTaskParams struct {
 	} `json:"slack_users,omitempty"`
 	TaskType            *SendSlackBlocksTaskParamsTaskType `json:"task_type,omitempty"`
 	UpdateParentMessage *bool                              `json:"update_parent_message,omitempty"`
+	union               json.RawMessage
 }
 
 // SendSlackBlocksTaskParamsTaskType defines model for SendSlackBlocksTaskParams.TaskType.
 type SendSlackBlocksTaskParamsTaskType string
+
+// SendSlackBlocksTaskParams0 defines model for .
+type SendSlackBlocksTaskParams0 = interface{}
+
+// SendSlackBlocksTaskParams1 defines model for .
+type SendSlackBlocksTaskParams1 = interface{}
+
+// SendSlackBlocksTaskParams2 defines model for .
+type SendSlackBlocksTaskParams2 = interface{}
 
 // SendSlackMessageTaskParams defines model for send_slack_message_task_params.
 type SendSlackMessageTaskParams struct {
@@ -13791,6 +14719,7 @@ type SendSlackMessageTaskParams struct {
 	// Text The message text
 	Text                string `json:"text"`
 	UpdateParentMessage *bool  `json:"update_parent_message,omitempty"`
+	union               json.RawMessage
 }
 
 // SendSlackMessageTaskParamsActionables defines model for SendSlackMessageTaskParams.Actionables.
@@ -13798,6 +14727,15 @@ type SendSlackMessageTaskParamsActionables string
 
 // SendSlackMessageTaskParamsTaskType defines model for SendSlackMessageTaskParams.TaskType.
 type SendSlackMessageTaskParamsTaskType string
+
+// SendSlackMessageTaskParams0 defines model for .
+type SendSlackMessageTaskParams0 = interface{}
+
+// SendSlackMessageTaskParams1 defines model for .
+type SendSlackMessageTaskParams1 = interface{}
+
+// SendSlackMessageTaskParams2 defines model for .
+type SendSlackMessageTaskParams2 = interface{}
 
 // SendSmsTaskParams defines model for send_sms_task_params.
 type SendSmsTaskParams struct {
@@ -14735,6 +15673,85 @@ type UpdateAuthorizationDataAttributesPermissions string
 // UpdateAuthorizationDataType defines model for UpdateAuthorization.Data.Type.
 type UpdateAuthorizationDataType string
 
+// UpdateCatalog defines model for update_catalog.
+type UpdateCatalog struct {
+	Data struct {
+		Attributes struct {
+			Description *string                          `json:"description"`
+			Icon        *UpdateCatalogDataAttributesIcon `json:"icon,omitempty"`
+			Name        *string                          `json:"name,omitempty"`
+
+			// Position Default position of the catalog when displayed in a list.
+			Position *int `json:"position"`
+		} `json:"attributes"`
+		Type UpdateCatalogDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateCatalogDataAttributesIcon defines model for UpdateCatalog.Data.Attributes.Icon.
+type UpdateCatalogDataAttributesIcon string
+
+// UpdateCatalogDataType defines model for UpdateCatalog.Data.Type.
+type UpdateCatalogDataType string
+
+// UpdateCatalogEntity defines model for update_catalog_entity.
+type UpdateCatalogEntity struct {
+	Data struct {
+		Attributes struct {
+			Description *string `json:"description"`
+			Name        *string `json:"name,omitempty"`
+
+			// Position Default position of the item when displayed in a list.
+			Position *int `json:"position"`
+		} `json:"attributes"`
+		Type UpdateCatalogEntityDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateCatalogEntityDataType defines model for UpdateCatalogEntity.Data.Type.
+type UpdateCatalogEntityDataType string
+
+// UpdateCatalogEntityProperty defines model for update_catalog_entity_property.
+type UpdateCatalogEntityProperty struct {
+	Data struct {
+		Attributes struct {
+			Key   *UpdateCatalogEntityPropertyDataAttributesKey `json:"key,omitempty"`
+			Value *string                                       `json:"value,omitempty"`
+		} `json:"attributes"`
+		Type UpdateCatalogEntityPropertyDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateCatalogEntityPropertyDataAttributesKey defines model for UpdateCatalogEntityProperty.Data.Attributes.Key.
+type UpdateCatalogEntityPropertyDataAttributesKey string
+
+// UpdateCatalogEntityPropertyDataType defines model for UpdateCatalogEntityProperty.Data.Type.
+type UpdateCatalogEntityPropertyDataType string
+
+// UpdateCatalogField defines model for update_catalog_field.
+type UpdateCatalogField struct {
+	Data struct {
+		Attributes struct {
+			Kind *UpdateCatalogFieldDataAttributesKind `json:"kind,omitempty"`
+
+			// KindCatalogId Restricts values to items of specified catalog.
+			KindCatalogId *string `json:"kind_catalog_id"`
+			Name          *string `json:"name,omitempty"`
+
+			// Position Default position of the item when displayed in a list.
+			Position *int    `json:"position"`
+			Slug     *string `json:"slug,omitempty"`
+		} `json:"attributes"`
+		Type UpdateCatalogFieldDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateCatalogFieldDataAttributesKind defines model for UpdateCatalogField.Data.Attributes.Kind.
+type UpdateCatalogFieldDataAttributesKind string
+
+// UpdateCatalogFieldDataType defines model for UpdateCatalogField.Data.Type.
+type UpdateCatalogFieldDataType string
+
 // UpdateCause defines model for update_cause.
 type UpdateCause struct {
 	Data struct {
@@ -14986,6 +16003,59 @@ type UpdateEscalationLevelDataAttributesNotificationTargetParamsType string
 // UpdateEscalationLevelDataType defines model for UpdateEscalationLevel.Data.Type.
 type UpdateEscalationLevelDataType string
 
+// UpdateEscalationPath defines model for update_escalation_path.
+type UpdateEscalationPath struct {
+	Data struct {
+		Attributes struct {
+			// Name The name of the escalation path
+			Name *string `json:"name,omitempty"`
+
+			// NotificationType Position of the escalation policy level
+			NotificationType *UpdateEscalationPathDataAttributesNotificationType `json:"notification_type,omitempty"`
+
+			// Repeat Whether this path should be repeated until someone acknowledges the alert
+			Repeat *bool `json:"repeat"`
+
+			// RepeatCount The number of times this path will be executed until someone acknowledges the alert
+			RepeatCount *int `json:"repeat_count"`
+
+			// RuleParams Escalation path conditions
+			RuleParams *[]struct {
+				// JsonPath JSON path to extract value from payload
+				JsonPath *string `json:"json_path,omitempty"`
+
+				// Operator How JSON path value should be matched
+				Operator *UpdateEscalationPathDataAttributesRuleParamsOperator `json:"operator,omitempty"`
+
+				// RuleType The type of the escalation path rule
+				RuleType *UpdateEscalationPathDataAttributesRuleParamsRuleType `json:"rule_type,omitempty"`
+
+				// UrgencyIds Alert urgency ids for which this escalation path should be used
+				UrgencyIds *[]interface{} `json:"urgency_ids,omitempty"`
+
+				// Value Value with which JSON path value should be matched
+				Value *string `json:"value,omitempty"`
+
+				// WithinWorkingHour Whether the escalation path should be used within working hours
+				WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
+			} `json:"rule_params,omitempty"`
+		} `json:"attributes"`
+		Type UpdateEscalationPathDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateEscalationPathDataAttributesNotificationType Position of the escalation policy level
+type UpdateEscalationPathDataAttributesNotificationType string
+
+// UpdateEscalationPathDataAttributesRuleParamsOperator How JSON path value should be matched
+type UpdateEscalationPathDataAttributesRuleParamsOperator string
+
+// UpdateEscalationPathDataAttributesRuleParamsRuleType The type of the escalation path rule
+type UpdateEscalationPathDataAttributesRuleParamsRuleType string
+
+// UpdateEscalationPathDataType defines model for UpdateEscalationPath.Data.Type.
+type UpdateEscalationPathDataType string
+
 // UpdateEscalationPolicy defines model for update_escalation_policy.
 type UpdateEscalationPolicy struct {
 	Data struct {
@@ -15011,35 +16081,6 @@ type UpdateEscalationPolicy struct {
 
 // UpdateEscalationPolicyDataType defines model for UpdateEscalationPolicy.Data.Type.
 type UpdateEscalationPolicyDataType string
-
-// UpdateEscalationPolicyPath defines model for update_escalation_policy_path.
-type UpdateEscalationPolicyPath struct {
-	Data struct {
-		Attributes struct {
-			// Name The name of the escalation path
-			Name *string `json:"name,omitempty"`
-
-			// NotificationType Position of the escalation policy level
-			NotificationType *UpdateEscalationPolicyPathDataAttributesNotificationType `json:"notification_type,omitempty"`
-
-			// Repeat Whether this path should be repeated until someone acknowledges the alert
-			Repeat *bool `json:"repeat"`
-
-			// RepeatCount The number of times this path will be executed until someone acknowledges the alert
-			RepeatCount *int `json:"repeat_count"`
-
-			// RuleParams Escalation path conditions
-			RuleParams *[]map[string]interface{} `json:"rule_params,omitempty"`
-		} `json:"attributes"`
-		Type UpdateEscalationPolicyPathDataType `json:"type"`
-	} `json:"data"`
-}
-
-// UpdateEscalationPolicyPathDataAttributesNotificationType Position of the escalation policy level
-type UpdateEscalationPolicyPathDataAttributesNotificationType string
-
-// UpdateEscalationPolicyPathDataType defines model for UpdateEscalationPolicyPath.Data.Type.
-type UpdateEscalationPolicyPathDataType string
 
 // UpdateFormField defines model for update_form_field.
 type UpdateFormField struct {
@@ -15069,6 +16110,9 @@ type UpdateFormField struct {
 
 			// ValueKind The value kind of the form field
 			ValueKind *UpdateFormFieldDataAttributesValueKind `json:"value_kind,omitempty"`
+
+			// ValueKindCatalogId The ID of the catalog used when value_kind is `catalog_entity`
+			ValueKindCatalogId *string `json:"value_kind_catalog_id"`
 		} `json:"attributes"`
 		Type UpdateFormFieldDataType `json:"type"`
 	} `json:"data"`
@@ -15674,10 +16718,11 @@ type UpdateIncidentFeedbackDataType string
 type UpdateIncidentFormFieldSelection struct {
 	Data struct {
 		Attributes struct {
-			SelectedFunctionalityIds *[]int    `json:"selected_functionality_ids,omitempty"`
+			SelectedCatalogEntityIds *[]string `json:"selected_catalog_entity_ids,omitempty"`
+			SelectedFunctionalityIds *[]string `json:"selected_functionality_ids,omitempty"`
 			SelectedGroupIds         *[]string `json:"selected_group_ids,omitempty"`
 			SelectedOptionIds        *[]string `json:"selected_option_ids,omitempty"`
-			SelectedServiceIds       *[]int    `json:"selected_service_ids,omitempty"`
+			SelectedServiceIds       *[]string `json:"selected_service_ids,omitempty"`
 			SelectedUserIds          *[]int    `json:"selected_user_ids,omitempty"`
 
 			// Value The selected value for text kind custom fields
@@ -15910,6 +16955,19 @@ type UpdateIncidentStatusPageEventDataAttributesStatus string
 // UpdateIncidentStatusPageEventDataType defines model for UpdateIncidentStatusPageEvent.Data.Type.
 type UpdateIncidentStatusPageEventDataType string
 
+// UpdateIncidentStatusTimestampTaskParams defines model for update_incident_status_timestamp_task_params.
+type UpdateIncidentStatusTimestampTaskParams struct {
+	// AssignedAt Timestamp of when the sub-status was assigned
+	AssignedAt string `json:"assigned_at"`
+
+	// SubStatusId Sub-status to update timestamp for
+	SubStatusId string                                           `json:"sub_status_id"`
+	TaskType    *UpdateIncidentStatusTimestampTaskParamsTaskType `json:"task_type,omitempty"`
+}
+
+// UpdateIncidentStatusTimestampTaskParamsTaskType defines model for UpdateIncidentStatusTimestampTaskParams.TaskType.
+type UpdateIncidentStatusTimestampTaskParamsTaskType string
+
 // UpdateIncidentSubStatus defines model for update_incident_sub_status.
 type UpdateIncidentSubStatus struct {
 	Data struct {
@@ -16095,6 +17153,75 @@ type UpdateLinearIssueTaskParams struct {
 
 // UpdateLinearIssueTaskParamsTaskType defines model for UpdateLinearIssueTaskParams.TaskType.
 type UpdateLinearIssueTaskParamsTaskType string
+
+// UpdateLiveCallRouter defines model for update_live_call_router.
+type UpdateLiveCallRouter struct {
+	Data struct {
+		Attributes struct {
+			// AlertUrgencyId This is used in escalation paths to determine who to page
+			AlertUrgencyId *string `json:"alert_urgency_id,omitempty"`
+
+			// CallerGreeting The caller greeting message of the live_call_router
+			CallerGreeting *string `json:"caller_greeting,omitempty"`
+
+			// CountryCode The country code of the live_call_router
+			CountryCode *UpdateLiveCallRouterDataAttributesCountryCode `json:"country_code,omitempty"`
+
+			// Enabled Whether the live_call_router is enabled
+			Enabled *bool `json:"enabled,omitempty"`
+
+			// EscalationLevelDelayInSeconds This overrides the delay (seconds) in escalation levels
+			EscalationLevelDelayInSeconds *int `json:"escalation_level_delay_in_seconds,omitempty"`
+			EscalationPolicyTriggerParams *struct {
+				// Id The ID of notification target
+				Id string `json:"id"`
+
+				// Type The type of the notification target
+				Type UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType `json:"type"`
+			} `json:"escalation_policy_trigger_params"`
+
+			// Kind The kind of the live_call_router
+			Kind *UpdateLiveCallRouterDataAttributesKind `json:"kind,omitempty"`
+
+			// Name The name of the live_call_router
+			Name *string `json:"name,omitempty"`
+
+			// PhoneType The phone type of the live_call_router
+			PhoneType *UpdateLiveCallRouterDataAttributesPhoneType `json:"phone_type,omitempty"`
+
+			// SentToVoicemailDelay The delay (seconds) after which the caller in redirected to voicemail
+			SentToVoicemailDelay *int `json:"sent_to_voicemail_delay,omitempty"`
+
+			// ShouldAutoResolveAlertOnCallEnd This overrides the delay (seconds) in escalation levels
+			ShouldAutoResolveAlertOnCallEnd *bool `json:"should_auto_resolve_alert_on_call_end,omitempty"`
+
+			// ShouldRedirectToVoicemailOnNoAnswer This prompts the caller to choose voicemail or connect live
+			ShouldRedirectToVoicemailOnNoAnswer *bool `json:"should_redirect_to_voicemail_on_no_answer,omitempty"`
+
+			// VoicemailGreeting The voicemail greeting of the live_call_router
+			VoicemailGreeting *string `json:"voicemail_greeting,omitempty"`
+
+			// WaitingMusicUrl The waiting music URL of the live_call_router
+			WaitingMusicUrl *string `json:"waiting_music_url,omitempty"`
+		} `json:"attributes"`
+		Type UpdateLiveCallRouterDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateLiveCallRouterDataAttributesCountryCode The country code of the live_call_router
+type UpdateLiveCallRouterDataAttributesCountryCode string
+
+// UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType The type of the notification target
+type UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType string
+
+// UpdateLiveCallRouterDataAttributesKind The kind of the live_call_router
+type UpdateLiveCallRouterDataAttributesKind string
+
+// UpdateLiveCallRouterDataAttributesPhoneType The phone type of the live_call_router
+type UpdateLiveCallRouterDataAttributesPhoneType string
+
+// UpdateLiveCallRouterDataType defines model for UpdateLiveCallRouter.Data.Type.
+type UpdateLiveCallRouterDataType string
 
 // UpdateMotionTaskTaskParams defines model for update_motion_task_task_params.
 type UpdateMotionTaskTaskParams struct {
@@ -17401,10 +18528,14 @@ type UpdateWorkflowFormFieldCondition struct {
 	Data struct {
 		Attributes struct {
 			// IncidentCondition The trigger condition
-			IncidentCondition *UpdateWorkflowFormFieldConditionDataAttributesIncidentCondition `json:"incident_condition,omitempty"`
-			SelectedOptionIds *[]string                                                        `json:"selected_option_ids,omitempty"`
-			SelectedUserIds   *[]int                                                           `json:"selected_user_ids,omitempty"`
-			Values            *[]string                                                        `json:"values,omitempty"`
+			IncidentCondition        *UpdateWorkflowFormFieldConditionDataAttributesIncidentCondition `json:"incident_condition,omitempty"`
+			SelectedCatalogEntityIds *[]string                                                        `json:"selected_catalog_entity_ids,omitempty"`
+			SelectedFunctionalityIds *[]string                                                        `json:"selected_functionality_ids,omitempty"`
+			SelectedGroupIds         *[]string                                                        `json:"selected_group_ids,omitempty"`
+			SelectedOptionIds        *[]string                                                        `json:"selected_option_ids,omitempty"`
+			SelectedServiceIds       *[]string                                                        `json:"selected_service_ids,omitempty"`
+			SelectedUserIds          *[]int                                                           `json:"selected_user_ids,omitempty"`
+			Values                   *[]string                                                        `json:"values,omitempty"`
 		} `json:"attributes"`
 		Type UpdateWorkflowFormFieldConditionDataType `json:"type"`
 	} `json:"data"`
@@ -17834,10 +18965,14 @@ type WorkflowFormFieldCondition struct {
 	FormFieldId string `json:"form_field_id"`
 
 	// IncidentCondition The trigger condition
-	IncidentCondition WorkflowFormFieldConditionIncidentCondition `json:"incident_condition"`
-	SelectedOptionIds []string                                    `json:"selected_option_ids"`
-	SelectedUserIds   []int                                       `json:"selected_user_ids"`
-	Values            *[]string                                   `json:"values,omitempty"`
+	IncidentCondition        WorkflowFormFieldConditionIncidentCondition `json:"incident_condition"`
+	SelectedCatalogEntityIds []string                                    `json:"selected_catalog_entity_ids"`
+	SelectedFunctionalityIds *[]string                                   `json:"selected_functionality_ids,omitempty"`
+	SelectedGroupIds         *[]string                                   `json:"selected_group_ids,omitempty"`
+	SelectedOptionIds        []string                                    `json:"selected_option_ids"`
+	SelectedServiceIds       *[]string                                   `json:"selected_service_ids,omitempty"`
+	SelectedUserIds          []int                                       `json:"selected_user_ids"`
+	Values                   *[]string                                   `json:"values,omitempty"`
 
 	// WorkflowId The workflow for this condition
 	WorkflowId string `json:"workflow_id"`
@@ -18152,6 +19287,59 @@ type ListAuthorizationsParams struct {
 	FilterCreatedAtLt      *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
 	FilterCreatedAtLte     *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
 	Sort                   *string `form:"sort,omitempty" json:"sort,omitempty"`
+}
+
+// ListCatalogEntityPropertiesParams defines parameters for ListCatalogEntityProperties.
+type ListCatalogEntityPropertiesParams struct {
+	Include              *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber           *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize             *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterCatalogFieldId *string `form:"filter[catalog_field_id],omitempty" json:"filter[catalog_field_id],omitempty"`
+	FilterKey            *string `form:"filter[key],omitempty" json:"filter[key],omitempty"`
+	FilterCreatedAtGt    *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte   *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt    *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte   *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+}
+
+// ListCatalogsParams defines parameters for ListCatalogs.
+type ListCatalogsParams struct {
+	Include            *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+}
+
+// ListCatalogEntitiesParams defines parameters for ListCatalogEntities.
+type ListCatalogEntitiesParams struct {
+	Include            *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+}
+
+// ListCatalogFieldsParams defines parameters for ListCatalogFields.
+type ListCatalogFieldsParams struct {
+	Include            *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterKind         *string `form:"filter[kind],omitempty" json:"filter[kind],omitempty"`
+	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
 }
 
 // ListCausesParams defines parameters for ListCauses.
@@ -18619,6 +19807,33 @@ type ListIncidentSubStatusesParams struct {
 	FilterAssignedAtLte *string `form:"filter[assigned_at][lte],omitempty" json:"filter[assigned_at][lte],omitempty"`
 }
 
+// ListLiveCallRoutersParams defines parameters for ListLiveCallRouters.
+type ListLiveCallRoutersParams struct {
+	Include            *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSearch       *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
+	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	Sort               *string `form:"sort,omitempty" json:"sort,omitempty"`
+}
+
+// GeneratePhoneNumberLiveCallRouterParams defines parameters for GeneratePhoneNumberLiveCallRouter.
+type GeneratePhoneNumberLiveCallRouterParams struct {
+	CountryCode GeneratePhoneNumberLiveCallRouterParamsCountryCode `form:"country_code" json:"country_code"`
+	PhoneType   GeneratePhoneNumberLiveCallRouterParamsPhoneType   `form:"phone_type" json:"phone_type"`
+}
+
+// GeneratePhoneNumberLiveCallRouterParamsCountryCode defines parameters for GeneratePhoneNumberLiveCallRouter.
+type GeneratePhoneNumberLiveCallRouterParamsCountryCode string
+
+// GeneratePhoneNumberLiveCallRouterParamsPhoneType defines parameters for GeneratePhoneNumberLiveCallRouter.
+type GeneratePhoneNumberLiveCallRouterParamsPhoneType string
+
 // ListPlaybooksParams defines parameters for ListPlaybooks.
 type ListPlaybooksParams struct {
 	Include    *string `form:"include,omitempty" json:"include,omitempty"`
@@ -19055,6 +20270,30 @@ type CreateAuthorizationApplicationVndAPIPlusJSONRequestBody = NewAuthorization
 // UpdateAuthorizationApplicationVndAPIPlusJSONRequestBody defines body for UpdateAuthorization for application/vnd.api+json ContentType.
 type UpdateAuthorizationApplicationVndAPIPlusJSONRequestBody = UpdateAuthorization
 
+// CreateCatalogEntityPropertyApplicationVndAPIPlusJSONRequestBody defines body for CreateCatalogEntityProperty for application/vnd.api+json ContentType.
+type CreateCatalogEntityPropertyApplicationVndAPIPlusJSONRequestBody = NewCatalogEntityProperty
+
+// UpdateCatalogEntityApplicationVndAPIPlusJSONRequestBody defines body for UpdateCatalogEntity for application/vnd.api+json ContentType.
+type UpdateCatalogEntityApplicationVndAPIPlusJSONRequestBody = UpdateCatalogEntity
+
+// UpdateCatalogEntityPropertyApplicationVndAPIPlusJSONRequestBody defines body for UpdateCatalogEntityProperty for application/vnd.api+json ContentType.
+type UpdateCatalogEntityPropertyApplicationVndAPIPlusJSONRequestBody = UpdateCatalogEntityProperty
+
+// UpdateCatalogFieldApplicationVndAPIPlusJSONRequestBody defines body for UpdateCatalogField for application/vnd.api+json ContentType.
+type UpdateCatalogFieldApplicationVndAPIPlusJSONRequestBody = UpdateCatalogField
+
+// CreateCatalogApplicationVndAPIPlusJSONRequestBody defines body for CreateCatalog for application/vnd.api+json ContentType.
+type CreateCatalogApplicationVndAPIPlusJSONRequestBody = NewCatalog
+
+// CreateCatalogEntityApplicationVndAPIPlusJSONRequestBody defines body for CreateCatalogEntity for application/vnd.api+json ContentType.
+type CreateCatalogEntityApplicationVndAPIPlusJSONRequestBody = NewCatalogEntity
+
+// CreateCatalogFieldApplicationVndAPIPlusJSONRequestBody defines body for CreateCatalogField for application/vnd.api+json ContentType.
+type CreateCatalogFieldApplicationVndAPIPlusJSONRequestBody = NewCatalogField
+
+// UpdateCatalogApplicationVndAPIPlusJSONRequestBody defines body for UpdateCatalog for application/vnd.api+json ContentType.
+type UpdateCatalogApplicationVndAPIPlusJSONRequestBody = UpdateCatalog
+
 // CreateCauseApplicationVndAPIPlusJSONRequestBody defines body for CreateCause for application/vnd.api+json ContentType.
 type CreateCauseApplicationVndAPIPlusJSONRequestBody = NewCause
 
@@ -19104,7 +20343,7 @@ type UpdateEscalationLevelApplicationVndAPIPlusJSONRequestBody = UpdateEscalatio
 type CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody = NewEscalationLevel
 
 // UpdateEscalationPathApplicationVndAPIPlusJSONRequestBody defines body for UpdateEscalationPath for application/vnd.api+json ContentType.
-type UpdateEscalationPathApplicationVndAPIPlusJSONRequestBody = UpdateEscalationPolicyPath
+type UpdateEscalationPathApplicationVndAPIPlusJSONRequestBody = UpdateEscalationPath
 
 // CreateEscalationPolicyApplicationVndAPIPlusJSONRequestBody defines body for CreateEscalationPolicy for application/vnd.api+json ContentType.
 type CreateEscalationPolicyApplicationVndAPIPlusJSONRequestBody = NewEscalationPolicy
@@ -19113,7 +20352,7 @@ type CreateEscalationPolicyApplicationVndAPIPlusJSONRequestBody = NewEscalationP
 type CreateEscalationLevelPoliciesApplicationVndAPIPlusJSONRequestBody = NewEscalationLevel
 
 // CreateEscalationPathApplicationVndAPIPlusJSONRequestBody defines body for CreateEscalationPath for application/vnd.api+json ContentType.
-type CreateEscalationPathApplicationVndAPIPlusJSONRequestBody = NewEscalationPolicyPath
+type CreateEscalationPathApplicationVndAPIPlusJSONRequestBody = NewEscalationPath
 
 // UpdateEscalationPolicyApplicationVndAPIPlusJSONRequestBody defines body for UpdateEscalationPolicy for application/vnd.api+json ContentType.
 type UpdateEscalationPolicyApplicationVndAPIPlusJSONRequestBody = UpdateEscalationPolicy
@@ -19294,6 +20533,12 @@ type CreateIncidentStatusPageApplicationVndAPIPlusJSONRequestBody = NewIncidentS
 
 // CreateIncidentSubStatusApplicationVndAPIPlusJSONRequestBody defines body for CreateIncidentSubStatus for application/vnd.api+json ContentType.
 type CreateIncidentSubStatusApplicationVndAPIPlusJSONRequestBody = NewIncidentSubStatus
+
+// CreateLiveCallRouterApplicationVndAPIPlusJSONRequestBody defines body for CreateLiveCallRouter for application/vnd.api+json ContentType.
+type CreateLiveCallRouterApplicationVndAPIPlusJSONRequestBody = NewLiveCallRouter
+
+// UpdateLiveCallRouterApplicationVndAPIPlusJSONRequestBody defines body for UpdateLiveCallRouter for application/vnd.api+json ContentType.
+type UpdateLiveCallRouterApplicationVndAPIPlusJSONRequestBody = UpdateLiveCallRouter
 
 // UpdateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody defines body for UpdateUserNotificationRule for application/vnd.api+json ContentType.
 type UpdateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody = UpdateUserNotificationRule
@@ -19977,6 +21222,862 @@ func (t *ActionItemTriggerParams_IncidentInactivityDuration) UnmarshalJSON(b []b
 	return err
 }
 
+// AsAddMicrosoftTeamsTabTaskParams0 returns the union data inside the AddMicrosoftTeamsTabTaskParams as a AddMicrosoftTeamsTabTaskParams0
+func (t AddMicrosoftTeamsTabTaskParams) AsAddMicrosoftTeamsTabTaskParams0() (AddMicrosoftTeamsTabTaskParams0, error) {
+	var body AddMicrosoftTeamsTabTaskParams0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromAddMicrosoftTeamsTabTaskParams0 overwrites any union data inside the AddMicrosoftTeamsTabTaskParams as the provided AddMicrosoftTeamsTabTaskParams0
+func (t *AddMicrosoftTeamsTabTaskParams) FromAddMicrosoftTeamsTabTaskParams0(v AddMicrosoftTeamsTabTaskParams0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeAddMicrosoftTeamsTabTaskParams0 performs a merge with any union data inside the AddMicrosoftTeamsTabTaskParams, using the provided AddMicrosoftTeamsTabTaskParams0
+func (t *AddMicrosoftTeamsTabTaskParams) MergeAddMicrosoftTeamsTabTaskParams0(v AddMicrosoftTeamsTabTaskParams0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsAddMicrosoftTeamsTabTaskParams1 returns the union data inside the AddMicrosoftTeamsTabTaskParams as a AddMicrosoftTeamsTabTaskParams1
+func (t AddMicrosoftTeamsTabTaskParams) AsAddMicrosoftTeamsTabTaskParams1() (AddMicrosoftTeamsTabTaskParams1, error) {
+	var body AddMicrosoftTeamsTabTaskParams1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromAddMicrosoftTeamsTabTaskParams1 overwrites any union data inside the AddMicrosoftTeamsTabTaskParams as the provided AddMicrosoftTeamsTabTaskParams1
+func (t *AddMicrosoftTeamsTabTaskParams) FromAddMicrosoftTeamsTabTaskParams1(v AddMicrosoftTeamsTabTaskParams1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeAddMicrosoftTeamsTabTaskParams1 performs a merge with any union data inside the AddMicrosoftTeamsTabTaskParams, using the provided AddMicrosoftTeamsTabTaskParams1
+func (t *AddMicrosoftTeamsTabTaskParams) MergeAddMicrosoftTeamsTabTaskParams1(v AddMicrosoftTeamsTabTaskParams1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t AddMicrosoftTeamsTabTaskParams) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	object := make(map[string]json.RawMessage)
+	if t.union != nil {
+		err = json.Unmarshal(b, &object)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	object["channel"], err = json.Marshal(t.Channel)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'channel': %w", err)
+	}
+
+	if t.Link != nil {
+		object["link"], err = json.Marshal(t.Link)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'link': %w", err)
+		}
+	}
+
+	if t.PlaybookId != nil {
+		object["playbook_id"], err = json.Marshal(t.PlaybookId)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'playbook_id': %w", err)
+		}
+	}
+
+	if t.TaskType != nil {
+		object["task_type"], err = json.Marshal(t.TaskType)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'task_type': %w", err)
+		}
+	}
+
+	object["team"], err = json.Marshal(t.Team)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'team': %w", err)
+	}
+
+	if t.Title != nil {
+		object["title"], err = json.Marshal(t.Title)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'title': %w", err)
+		}
+	}
+	b, err = json.Marshal(object)
+	return b, err
+}
+
+func (t *AddMicrosoftTeamsTabTaskParams) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	if err != nil {
+		return err
+	}
+	object := make(map[string]json.RawMessage)
+	err = json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["channel"]; found {
+		err = json.Unmarshal(raw, &t.Channel)
+		if err != nil {
+			return fmt.Errorf("error reading 'channel': %w", err)
+		}
+	}
+
+	if raw, found := object["link"]; found {
+		err = json.Unmarshal(raw, &t.Link)
+		if err != nil {
+			return fmt.Errorf("error reading 'link': %w", err)
+		}
+	}
+
+	if raw, found := object["playbook_id"]; found {
+		err = json.Unmarshal(raw, &t.PlaybookId)
+		if err != nil {
+			return fmt.Errorf("error reading 'playbook_id': %w", err)
+		}
+	}
+
+	if raw, found := object["task_type"]; found {
+		err = json.Unmarshal(raw, &t.TaskType)
+		if err != nil {
+			return fmt.Errorf("error reading 'task_type': %w", err)
+		}
+	}
+
+	if raw, found := object["team"]; found {
+		err = json.Unmarshal(raw, &t.Team)
+		if err != nil {
+			return fmt.Errorf("error reading 'team': %w", err)
+		}
+	}
+
+	if raw, found := object["title"]; found {
+		err = json.Unmarshal(raw, &t.Title)
+		if err != nil {
+			return fmt.Errorf("error reading 'title': %w", err)
+		}
+	}
+
+	return err
+}
+
+// AsAddSlackBookmarkTaskParams0 returns the union data inside the AddSlackBookmarkTaskParams as a AddSlackBookmarkTaskParams0
+func (t AddSlackBookmarkTaskParams) AsAddSlackBookmarkTaskParams0() (AddSlackBookmarkTaskParams0, error) {
+	var body AddSlackBookmarkTaskParams0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromAddSlackBookmarkTaskParams0 overwrites any union data inside the AddSlackBookmarkTaskParams as the provided AddSlackBookmarkTaskParams0
+func (t *AddSlackBookmarkTaskParams) FromAddSlackBookmarkTaskParams0(v AddSlackBookmarkTaskParams0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeAddSlackBookmarkTaskParams0 performs a merge with any union data inside the AddSlackBookmarkTaskParams, using the provided AddSlackBookmarkTaskParams0
+func (t *AddSlackBookmarkTaskParams) MergeAddSlackBookmarkTaskParams0(v AddSlackBookmarkTaskParams0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsAddSlackBookmarkTaskParams1 returns the union data inside the AddSlackBookmarkTaskParams as a AddSlackBookmarkTaskParams1
+func (t AddSlackBookmarkTaskParams) AsAddSlackBookmarkTaskParams1() (AddSlackBookmarkTaskParams1, error) {
+	var body AddSlackBookmarkTaskParams1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromAddSlackBookmarkTaskParams1 overwrites any union data inside the AddSlackBookmarkTaskParams as the provided AddSlackBookmarkTaskParams1
+func (t *AddSlackBookmarkTaskParams) FromAddSlackBookmarkTaskParams1(v AddSlackBookmarkTaskParams1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeAddSlackBookmarkTaskParams1 performs a merge with any union data inside the AddSlackBookmarkTaskParams, using the provided AddSlackBookmarkTaskParams1
+func (t *AddSlackBookmarkTaskParams) MergeAddSlackBookmarkTaskParams1(v AddSlackBookmarkTaskParams1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t AddSlackBookmarkTaskParams) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	object := make(map[string]json.RawMessage)
+	if t.union != nil {
+		err = json.Unmarshal(b, &object)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	object["channel"], err = json.Marshal(t.Channel)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'channel': %w", err)
+	}
+
+	if t.Emoji != nil {
+		object["emoji"], err = json.Marshal(t.Emoji)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'emoji': %w", err)
+		}
+	}
+
+	if t.Link != nil {
+		object["link"], err = json.Marshal(t.Link)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'link': %w", err)
+		}
+	}
+
+	if t.PlaybookId != nil {
+		object["playbook_id"], err = json.Marshal(t.PlaybookId)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'playbook_id': %w", err)
+		}
+	}
+
+	if t.TaskType != nil {
+		object["task_type"], err = json.Marshal(t.TaskType)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'task_type': %w", err)
+		}
+	}
+
+	if t.Title != nil {
+		object["title"], err = json.Marshal(t.Title)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'title': %w", err)
+		}
+	}
+	b, err = json.Marshal(object)
+	return b, err
+}
+
+func (t *AddSlackBookmarkTaskParams) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	if err != nil {
+		return err
+	}
+	object := make(map[string]json.RawMessage)
+	err = json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["channel"]; found {
+		err = json.Unmarshal(raw, &t.Channel)
+		if err != nil {
+			return fmt.Errorf("error reading 'channel': %w", err)
+		}
+	}
+
+	if raw, found := object["emoji"]; found {
+		err = json.Unmarshal(raw, &t.Emoji)
+		if err != nil {
+			return fmt.Errorf("error reading 'emoji': %w", err)
+		}
+	}
+
+	if raw, found := object["link"]; found {
+		err = json.Unmarshal(raw, &t.Link)
+		if err != nil {
+			return fmt.Errorf("error reading 'link': %w", err)
+		}
+	}
+
+	if raw, found := object["playbook_id"]; found {
+		err = json.Unmarshal(raw, &t.PlaybookId)
+		if err != nil {
+			return fmt.Errorf("error reading 'playbook_id': %w", err)
+		}
+	}
+
+	if raw, found := object["task_type"]; found {
+		err = json.Unmarshal(raw, &t.TaskType)
+		if err != nil {
+			return fmt.Errorf("error reading 'task_type': %w", err)
+		}
+	}
+
+	if raw, found := object["title"]; found {
+		err = json.Unmarshal(raw, &t.Title)
+		if err != nil {
+			return fmt.Errorf("error reading 'title': %w", err)
+		}
+	}
+
+	return err
+}
+
+// AsAutoAssignRolePagerdutyTaskParams0 returns the union data inside the AutoAssignRolePagerdutyTaskParams as a AutoAssignRolePagerdutyTaskParams0
+func (t AutoAssignRolePagerdutyTaskParams) AsAutoAssignRolePagerdutyTaskParams0() (AutoAssignRolePagerdutyTaskParams0, error) {
+	var body AutoAssignRolePagerdutyTaskParams0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromAutoAssignRolePagerdutyTaskParams0 overwrites any union data inside the AutoAssignRolePagerdutyTaskParams as the provided AutoAssignRolePagerdutyTaskParams0
+func (t *AutoAssignRolePagerdutyTaskParams) FromAutoAssignRolePagerdutyTaskParams0(v AutoAssignRolePagerdutyTaskParams0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeAutoAssignRolePagerdutyTaskParams0 performs a merge with any union data inside the AutoAssignRolePagerdutyTaskParams, using the provided AutoAssignRolePagerdutyTaskParams0
+func (t *AutoAssignRolePagerdutyTaskParams) MergeAutoAssignRolePagerdutyTaskParams0(v AutoAssignRolePagerdutyTaskParams0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsAutoAssignRolePagerdutyTaskParams1 returns the union data inside the AutoAssignRolePagerdutyTaskParams as a AutoAssignRolePagerdutyTaskParams1
+func (t AutoAssignRolePagerdutyTaskParams) AsAutoAssignRolePagerdutyTaskParams1() (AutoAssignRolePagerdutyTaskParams1, error) {
+	var body AutoAssignRolePagerdutyTaskParams1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromAutoAssignRolePagerdutyTaskParams1 overwrites any union data inside the AutoAssignRolePagerdutyTaskParams as the provided AutoAssignRolePagerdutyTaskParams1
+func (t *AutoAssignRolePagerdutyTaskParams) FromAutoAssignRolePagerdutyTaskParams1(v AutoAssignRolePagerdutyTaskParams1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeAutoAssignRolePagerdutyTaskParams1 performs a merge with any union data inside the AutoAssignRolePagerdutyTaskParams, using the provided AutoAssignRolePagerdutyTaskParams1
+func (t *AutoAssignRolePagerdutyTaskParams) MergeAutoAssignRolePagerdutyTaskParams1(v AutoAssignRolePagerdutyTaskParams1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t AutoAssignRolePagerdutyTaskParams) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	object := make(map[string]json.RawMessage)
+	if t.union != nil {
+		err = json.Unmarshal(b, &object)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	if t.EscalationPolicy != nil {
+		object["escalation_policy"], err = json.Marshal(t.EscalationPolicy)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'escalation_policy': %w", err)
+		}
+	}
+
+	object["incident_role_id"], err = json.Marshal(t.IncidentRoleId)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'incident_role_id': %w", err)
+	}
+
+	if t.Schedule != nil {
+		object["schedule"], err = json.Marshal(t.Schedule)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'schedule': %w", err)
+		}
+	}
+
+	if t.Service != nil {
+		object["service"], err = json.Marshal(t.Service)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'service': %w", err)
+		}
+	}
+
+	if t.TaskType != nil {
+		object["task_type"], err = json.Marshal(t.TaskType)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'task_type': %w", err)
+		}
+	}
+	b, err = json.Marshal(object)
+	return b, err
+}
+
+func (t *AutoAssignRolePagerdutyTaskParams) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	if err != nil {
+		return err
+	}
+	object := make(map[string]json.RawMessage)
+	err = json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["escalation_policy"]; found {
+		err = json.Unmarshal(raw, &t.EscalationPolicy)
+		if err != nil {
+			return fmt.Errorf("error reading 'escalation_policy': %w", err)
+		}
+	}
+
+	if raw, found := object["incident_role_id"]; found {
+		err = json.Unmarshal(raw, &t.IncidentRoleId)
+		if err != nil {
+			return fmt.Errorf("error reading 'incident_role_id': %w", err)
+		}
+	}
+
+	if raw, found := object["schedule"]; found {
+		err = json.Unmarshal(raw, &t.Schedule)
+		if err != nil {
+			return fmt.Errorf("error reading 'schedule': %w", err)
+		}
+	}
+
+	if raw, found := object["service"]; found {
+		err = json.Unmarshal(raw, &t.Service)
+		if err != nil {
+			return fmt.Errorf("error reading 'service': %w", err)
+		}
+	}
+
+	if raw, found := object["task_type"]; found {
+		err = json.Unmarshal(raw, &t.TaskType)
+		if err != nil {
+			return fmt.Errorf("error reading 'task_type': %w", err)
+		}
+	}
+
+	return err
+}
+
+// AsGetGithubCommitsTaskParams0 returns the union data inside the GetGithubCommitsTaskParams as a GetGithubCommitsTaskParams0
+func (t GetGithubCommitsTaskParams) AsGetGithubCommitsTaskParams0() (GetGithubCommitsTaskParams0, error) {
+	var body GetGithubCommitsTaskParams0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromGetGithubCommitsTaskParams0 overwrites any union data inside the GetGithubCommitsTaskParams as the provided GetGithubCommitsTaskParams0
+func (t *GetGithubCommitsTaskParams) FromGetGithubCommitsTaskParams0(v GetGithubCommitsTaskParams0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeGetGithubCommitsTaskParams0 performs a merge with any union data inside the GetGithubCommitsTaskParams, using the provided GetGithubCommitsTaskParams0
+func (t *GetGithubCommitsTaskParams) MergeGetGithubCommitsTaskParams0(v GetGithubCommitsTaskParams0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsGetGithubCommitsTaskParams1 returns the union data inside the GetGithubCommitsTaskParams as a GetGithubCommitsTaskParams1
+func (t GetGithubCommitsTaskParams) AsGetGithubCommitsTaskParams1() (GetGithubCommitsTaskParams1, error) {
+	var body GetGithubCommitsTaskParams1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromGetGithubCommitsTaskParams1 overwrites any union data inside the GetGithubCommitsTaskParams as the provided GetGithubCommitsTaskParams1
+func (t *GetGithubCommitsTaskParams) FromGetGithubCommitsTaskParams1(v GetGithubCommitsTaskParams1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeGetGithubCommitsTaskParams1 performs a merge with any union data inside the GetGithubCommitsTaskParams, using the provided GetGithubCommitsTaskParams1
+func (t *GetGithubCommitsTaskParams) MergeGetGithubCommitsTaskParams1(v GetGithubCommitsTaskParams1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t GetGithubCommitsTaskParams) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	object := make(map[string]json.RawMessage)
+	if t.union != nil {
+		err = json.Unmarshal(b, &object)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	object["branch"], err = json.Marshal(t.Branch)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'branch': %w", err)
+	}
+
+	if t.GithubRepositoryNames != nil {
+		object["github_repository_names"], err = json.Marshal(t.GithubRepositoryNames)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'github_repository_names': %w", err)
+		}
+	}
+
+	object["past_duration"], err = json.Marshal(t.PastDuration)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'past_duration': %w", err)
+	}
+
+	if t.PostToIncidentTimeline != nil {
+		object["post_to_incident_timeline"], err = json.Marshal(t.PostToIncidentTimeline)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'post_to_incident_timeline': %w", err)
+		}
+	}
+
+	if t.PostToSlackChannels != nil {
+		object["post_to_slack_channels"], err = json.Marshal(t.PostToSlackChannels)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'post_to_slack_channels': %w", err)
+		}
+	}
+
+	if t.ServiceIds != nil {
+		object["service_ids"], err = json.Marshal(t.ServiceIds)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'service_ids': %w", err)
+		}
+	}
+
+	if t.ServicesImpactedByIncident != nil {
+		object["services_impacted_by_incident"], err = json.Marshal(t.ServicesImpactedByIncident)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'services_impacted_by_incident': %w", err)
+		}
+	}
+
+	if t.TaskType != nil {
+		object["task_type"], err = json.Marshal(t.TaskType)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'task_type': %w", err)
+		}
+	}
+	b, err = json.Marshal(object)
+	return b, err
+}
+
+func (t *GetGithubCommitsTaskParams) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	if err != nil {
+		return err
+	}
+	object := make(map[string]json.RawMessage)
+	err = json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["branch"]; found {
+		err = json.Unmarshal(raw, &t.Branch)
+		if err != nil {
+			return fmt.Errorf("error reading 'branch': %w", err)
+		}
+	}
+
+	if raw, found := object["github_repository_names"]; found {
+		err = json.Unmarshal(raw, &t.GithubRepositoryNames)
+		if err != nil {
+			return fmt.Errorf("error reading 'github_repository_names': %w", err)
+		}
+	}
+
+	if raw, found := object["past_duration"]; found {
+		err = json.Unmarshal(raw, &t.PastDuration)
+		if err != nil {
+			return fmt.Errorf("error reading 'past_duration': %w", err)
+		}
+	}
+
+	if raw, found := object["post_to_incident_timeline"]; found {
+		err = json.Unmarshal(raw, &t.PostToIncidentTimeline)
+		if err != nil {
+			return fmt.Errorf("error reading 'post_to_incident_timeline': %w", err)
+		}
+	}
+
+	if raw, found := object["post_to_slack_channels"]; found {
+		err = json.Unmarshal(raw, &t.PostToSlackChannels)
+		if err != nil {
+			return fmt.Errorf("error reading 'post_to_slack_channels': %w", err)
+		}
+	}
+
+	if raw, found := object["service_ids"]; found {
+		err = json.Unmarshal(raw, &t.ServiceIds)
+		if err != nil {
+			return fmt.Errorf("error reading 'service_ids': %w", err)
+		}
+	}
+
+	if raw, found := object["services_impacted_by_incident"]; found {
+		err = json.Unmarshal(raw, &t.ServicesImpactedByIncident)
+		if err != nil {
+			return fmt.Errorf("error reading 'services_impacted_by_incident': %w", err)
+		}
+	}
+
+	if raw, found := object["task_type"]; found {
+		err = json.Unmarshal(raw, &t.TaskType)
+		if err != nil {
+			return fmt.Errorf("error reading 'task_type': %w", err)
+		}
+	}
+
+	return err
+}
+
+// AsGetGitlabCommitsTaskParams0 returns the union data inside the GetGitlabCommitsTaskParams as a GetGitlabCommitsTaskParams0
+func (t GetGitlabCommitsTaskParams) AsGetGitlabCommitsTaskParams0() (GetGitlabCommitsTaskParams0, error) {
+	var body GetGitlabCommitsTaskParams0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromGetGitlabCommitsTaskParams0 overwrites any union data inside the GetGitlabCommitsTaskParams as the provided GetGitlabCommitsTaskParams0
+func (t *GetGitlabCommitsTaskParams) FromGetGitlabCommitsTaskParams0(v GetGitlabCommitsTaskParams0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeGetGitlabCommitsTaskParams0 performs a merge with any union data inside the GetGitlabCommitsTaskParams, using the provided GetGitlabCommitsTaskParams0
+func (t *GetGitlabCommitsTaskParams) MergeGetGitlabCommitsTaskParams0(v GetGitlabCommitsTaskParams0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsGetGitlabCommitsTaskParams1 returns the union data inside the GetGitlabCommitsTaskParams as a GetGitlabCommitsTaskParams1
+func (t GetGitlabCommitsTaskParams) AsGetGitlabCommitsTaskParams1() (GetGitlabCommitsTaskParams1, error) {
+	var body GetGitlabCommitsTaskParams1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromGetGitlabCommitsTaskParams1 overwrites any union data inside the GetGitlabCommitsTaskParams as the provided GetGitlabCommitsTaskParams1
+func (t *GetGitlabCommitsTaskParams) FromGetGitlabCommitsTaskParams1(v GetGitlabCommitsTaskParams1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeGetGitlabCommitsTaskParams1 performs a merge with any union data inside the GetGitlabCommitsTaskParams, using the provided GetGitlabCommitsTaskParams1
+func (t *GetGitlabCommitsTaskParams) MergeGetGitlabCommitsTaskParams1(v GetGitlabCommitsTaskParams1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t GetGitlabCommitsTaskParams) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	object := make(map[string]json.RawMessage)
+	if t.union != nil {
+		err = json.Unmarshal(b, &object)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	object["branch"], err = json.Marshal(t.Branch)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'branch': %w", err)
+	}
+
+	if t.GitlabRepositoryNames != nil {
+		object["gitlab_repository_names"], err = json.Marshal(t.GitlabRepositoryNames)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'gitlab_repository_names': %w", err)
+		}
+	}
+
+	object["past_duration"], err = json.Marshal(t.PastDuration)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'past_duration': %w", err)
+	}
+
+	if t.PostToIncidentTimeline != nil {
+		object["post_to_incident_timeline"], err = json.Marshal(t.PostToIncidentTimeline)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'post_to_incident_timeline': %w", err)
+		}
+	}
+
+	if t.PostToSlackChannels != nil {
+		object["post_to_slack_channels"], err = json.Marshal(t.PostToSlackChannels)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'post_to_slack_channels': %w", err)
+		}
+	}
+
+	if t.ServiceIds != nil {
+		object["service_ids"], err = json.Marshal(t.ServiceIds)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'service_ids': %w", err)
+		}
+	}
+
+	if t.ServicesImpactedByIncident != nil {
+		object["services_impacted_by_incident"], err = json.Marshal(t.ServicesImpactedByIncident)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'services_impacted_by_incident': %w", err)
+		}
+	}
+
+	if t.TaskType != nil {
+		object["task_type"], err = json.Marshal(t.TaskType)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'task_type': %w", err)
+		}
+	}
+	b, err = json.Marshal(object)
+	return b, err
+}
+
+func (t *GetGitlabCommitsTaskParams) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	if err != nil {
+		return err
+	}
+	object := make(map[string]json.RawMessage)
+	err = json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["branch"]; found {
+		err = json.Unmarshal(raw, &t.Branch)
+		if err != nil {
+			return fmt.Errorf("error reading 'branch': %w", err)
+		}
+	}
+
+	if raw, found := object["gitlab_repository_names"]; found {
+		err = json.Unmarshal(raw, &t.GitlabRepositoryNames)
+		if err != nil {
+			return fmt.Errorf("error reading 'gitlab_repository_names': %w", err)
+		}
+	}
+
+	if raw, found := object["past_duration"]; found {
+		err = json.Unmarshal(raw, &t.PastDuration)
+		if err != nil {
+			return fmt.Errorf("error reading 'past_duration': %w", err)
+		}
+	}
+
+	if raw, found := object["post_to_incident_timeline"]; found {
+		err = json.Unmarshal(raw, &t.PostToIncidentTimeline)
+		if err != nil {
+			return fmt.Errorf("error reading 'post_to_incident_timeline': %w", err)
+		}
+	}
+
+	if raw, found := object["post_to_slack_channels"]; found {
+		err = json.Unmarshal(raw, &t.PostToSlackChannels)
+		if err != nil {
+			return fmt.Errorf("error reading 'post_to_slack_channels': %w", err)
+		}
+	}
+
+	if raw, found := object["service_ids"]; found {
+		err = json.Unmarshal(raw, &t.ServiceIds)
+		if err != nil {
+			return fmt.Errorf("error reading 'service_ids': %w", err)
+		}
+	}
+
+	if raw, found := object["services_impacted_by_incident"]; found {
+		err = json.Unmarshal(raw, &t.ServicesImpactedByIncident)
+		if err != nil {
+			return fmt.Errorf("error reading 'services_impacted_by_incident': %w", err)
+		}
+	}
+
+	if raw, found := object["task_type"]; found {
+		err = json.Unmarshal(raw, &t.TaskType)
+		if err != nil {
+			return fmt.Errorf("error reading 'task_type': %w", err)
+		}
+	}
+
+	return err
+}
+
 // AsIncidentTriggerParamsIncidentConditionAcknowledgedAt0 returns the union data inside the IncidentTriggerParams_IncidentConditionAcknowledgedAt as a IncidentTriggerParamsIncidentConditionAcknowledgedAt0
 func (t IncidentTriggerParams_IncidentConditionAcknowledgedAt) AsIncidentTriggerParamsIncidentConditionAcknowledgedAt0() (IncidentTriggerParamsIncidentConditionAcknowledgedAt0, error) {
 	var body IncidentTriggerParamsIncidentConditionAcknowledgedAt0
@@ -20470,6 +22571,294 @@ func (t IncidentTriggerParams_IncidentInactivityDuration) MarshalJSON() ([]byte,
 
 func (t *IncidentTriggerParams_IncidentInactivityDuration) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsInviteToSlackChannelPagerdutyTaskParams0 returns the union data inside the InviteToSlackChannelPagerdutyTaskParams as a InviteToSlackChannelPagerdutyTaskParams0
+func (t InviteToSlackChannelPagerdutyTaskParams) AsInviteToSlackChannelPagerdutyTaskParams0() (InviteToSlackChannelPagerdutyTaskParams0, error) {
+	var body InviteToSlackChannelPagerdutyTaskParams0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromInviteToSlackChannelPagerdutyTaskParams0 overwrites any union data inside the InviteToSlackChannelPagerdutyTaskParams as the provided InviteToSlackChannelPagerdutyTaskParams0
+func (t *InviteToSlackChannelPagerdutyTaskParams) FromInviteToSlackChannelPagerdutyTaskParams0(v InviteToSlackChannelPagerdutyTaskParams0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeInviteToSlackChannelPagerdutyTaskParams0 performs a merge with any union data inside the InviteToSlackChannelPagerdutyTaskParams, using the provided InviteToSlackChannelPagerdutyTaskParams0
+func (t *InviteToSlackChannelPagerdutyTaskParams) MergeInviteToSlackChannelPagerdutyTaskParams0(v InviteToSlackChannelPagerdutyTaskParams0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsInviteToSlackChannelPagerdutyTaskParams1 returns the union data inside the InviteToSlackChannelPagerdutyTaskParams as a InviteToSlackChannelPagerdutyTaskParams1
+func (t InviteToSlackChannelPagerdutyTaskParams) AsInviteToSlackChannelPagerdutyTaskParams1() (InviteToSlackChannelPagerdutyTaskParams1, error) {
+	var body InviteToSlackChannelPagerdutyTaskParams1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromInviteToSlackChannelPagerdutyTaskParams1 overwrites any union data inside the InviteToSlackChannelPagerdutyTaskParams as the provided InviteToSlackChannelPagerdutyTaskParams1
+func (t *InviteToSlackChannelPagerdutyTaskParams) FromInviteToSlackChannelPagerdutyTaskParams1(v InviteToSlackChannelPagerdutyTaskParams1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeInviteToSlackChannelPagerdutyTaskParams1 performs a merge with any union data inside the InviteToSlackChannelPagerdutyTaskParams, using the provided InviteToSlackChannelPagerdutyTaskParams1
+func (t *InviteToSlackChannelPagerdutyTaskParams) MergeInviteToSlackChannelPagerdutyTaskParams1(v InviteToSlackChannelPagerdutyTaskParams1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t InviteToSlackChannelPagerdutyTaskParams) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	object := make(map[string]json.RawMessage)
+	if t.union != nil {
+		err = json.Unmarshal(b, &object)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	if t.Channels != nil {
+		object["channels"], err = json.Marshal(t.Channels)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'channels': %w", err)
+		}
+	}
+
+	if t.EscalationPolicy != nil {
+		object["escalation_policy"], err = json.Marshal(t.EscalationPolicy)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'escalation_policy': %w", err)
+		}
+	}
+
+	if t.Schedule != nil {
+		object["schedule"], err = json.Marshal(t.Schedule)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'schedule': %w", err)
+		}
+	}
+
+	if t.Service != nil {
+		object["service"], err = json.Marshal(t.Service)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'service': %w", err)
+		}
+	}
+
+	if t.TaskType != nil {
+		object["task_type"], err = json.Marshal(t.TaskType)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'task_type': %w", err)
+		}
+	}
+	b, err = json.Marshal(object)
+	return b, err
+}
+
+func (t *InviteToSlackChannelPagerdutyTaskParams) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	if err != nil {
+		return err
+	}
+	object := make(map[string]json.RawMessage)
+	err = json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["channels"]; found {
+		err = json.Unmarshal(raw, &t.Channels)
+		if err != nil {
+			return fmt.Errorf("error reading 'channels': %w", err)
+		}
+	}
+
+	if raw, found := object["escalation_policy"]; found {
+		err = json.Unmarshal(raw, &t.EscalationPolicy)
+		if err != nil {
+			return fmt.Errorf("error reading 'escalation_policy': %w", err)
+		}
+	}
+
+	if raw, found := object["schedule"]; found {
+		err = json.Unmarshal(raw, &t.Schedule)
+		if err != nil {
+			return fmt.Errorf("error reading 'schedule': %w", err)
+		}
+	}
+
+	if raw, found := object["service"]; found {
+		err = json.Unmarshal(raw, &t.Service)
+		if err != nil {
+			return fmt.Errorf("error reading 'service': %w", err)
+		}
+	}
+
+	if raw, found := object["task_type"]; found {
+		err = json.Unmarshal(raw, &t.TaskType)
+		if err != nil {
+			return fmt.Errorf("error reading 'task_type': %w", err)
+		}
+	}
+
+	return err
+}
+
+// AsInviteToSlackChannelTaskParams0 returns the union data inside the InviteToSlackChannelTaskParams as a InviteToSlackChannelTaskParams0
+func (t InviteToSlackChannelTaskParams) AsInviteToSlackChannelTaskParams0() (InviteToSlackChannelTaskParams0, error) {
+	var body InviteToSlackChannelTaskParams0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromInviteToSlackChannelTaskParams0 overwrites any union data inside the InviteToSlackChannelTaskParams as the provided InviteToSlackChannelTaskParams0
+func (t *InviteToSlackChannelTaskParams) FromInviteToSlackChannelTaskParams0(v InviteToSlackChannelTaskParams0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeInviteToSlackChannelTaskParams0 performs a merge with any union data inside the InviteToSlackChannelTaskParams, using the provided InviteToSlackChannelTaskParams0
+func (t *InviteToSlackChannelTaskParams) MergeInviteToSlackChannelTaskParams0(v InviteToSlackChannelTaskParams0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsInviteToSlackChannelTaskParams1 returns the union data inside the InviteToSlackChannelTaskParams as a InviteToSlackChannelTaskParams1
+func (t InviteToSlackChannelTaskParams) AsInviteToSlackChannelTaskParams1() (InviteToSlackChannelTaskParams1, error) {
+	var body InviteToSlackChannelTaskParams1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromInviteToSlackChannelTaskParams1 overwrites any union data inside the InviteToSlackChannelTaskParams as the provided InviteToSlackChannelTaskParams1
+func (t *InviteToSlackChannelTaskParams) FromInviteToSlackChannelTaskParams1(v InviteToSlackChannelTaskParams1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeInviteToSlackChannelTaskParams1 performs a merge with any union data inside the InviteToSlackChannelTaskParams, using the provided InviteToSlackChannelTaskParams1
+func (t *InviteToSlackChannelTaskParams) MergeInviteToSlackChannelTaskParams1(v InviteToSlackChannelTaskParams1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t InviteToSlackChannelTaskParams) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	object := make(map[string]json.RawMessage)
+	if t.union != nil {
+		err = json.Unmarshal(b, &object)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	object["channel"], err = json.Marshal(t.Channel)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'channel': %w", err)
+	}
+
+	if t.SlackUserGroups != nil {
+		object["slack_user_groups"], err = json.Marshal(t.SlackUserGroups)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'slack_user_groups': %w", err)
+		}
+	}
+
+	if t.SlackUsers != nil {
+		object["slack_users"], err = json.Marshal(t.SlackUsers)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'slack_users': %w", err)
+		}
+	}
+
+	if t.TaskType != nil {
+		object["task_type"], err = json.Marshal(t.TaskType)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'task_type': %w", err)
+		}
+	}
+	b, err = json.Marshal(object)
+	return b, err
+}
+
+func (t *InviteToSlackChannelTaskParams) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	if err != nil {
+		return err
+	}
+	object := make(map[string]json.RawMessage)
+	err = json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["channel"]; found {
+		err = json.Unmarshal(raw, &t.Channel)
+		if err != nil {
+			return fmt.Errorf("error reading 'channel': %w", err)
+		}
+	}
+
+	if raw, found := object["slack_user_groups"]; found {
+		err = json.Unmarshal(raw, &t.SlackUserGroups)
+		if err != nil {
+			return fmt.Errorf("error reading 'slack_user_groups': %w", err)
+		}
+	}
+
+	if raw, found := object["slack_users"]; found {
+		err = json.Unmarshal(raw, &t.SlackUsers)
+		if err != nil {
+			return fmt.Errorf("error reading 'slack_users': %w", err)
+		}
+	}
+
+	if raw, found := object["task_type"]; found {
+		err = json.Unmarshal(raw, &t.TaskType)
+		if err != nil {
+			return fmt.Errorf("error reading 'task_type': %w", err)
+		}
+	}
+
 	return err
 }
 
@@ -23613,6 +26002,32 @@ func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeUpdateStatusTaskParams
 	return err
 }
 
+// AsUpdateIncidentStatusTimestampTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a UpdateIncidentStatusTimestampTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsUpdateIncidentStatusTimestampTaskParams() (UpdateIncidentStatusTimestampTaskParams, error) {
+	var body UpdateIncidentStatusTimestampTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateIncidentStatusTimestampTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided UpdateIncidentStatusTimestampTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromUpdateIncidentStatusTimestampTaskParams(v UpdateIncidentStatusTimestampTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateIncidentStatusTimestampTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateIncidentStatusTimestampTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeUpdateIncidentStatusTimestampTaskParams(v UpdateIncidentStatusTimestampTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsUpdateTrelloCardTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a UpdateTrelloCardTaskParams
 func (t NewWorkflowTask_Data_Attributes_TaskParams) AsUpdateTrelloCardTaskParams() (UpdateTrelloCardTaskParams, error) {
 	var body UpdateTrelloCardTaskParams
@@ -23802,6 +26217,720 @@ func (t NewWorkflowTask_Data_Attributes_TaskParams) MarshalJSON() ([]byte, error
 
 func (t *NewWorkflowTask_Data_Attributes_TaskParams) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsPageVictorOpsOnCallRespondersTaskParams0 returns the union data inside the PageVictorOpsOnCallRespondersTaskParams as a PageVictorOpsOnCallRespondersTaskParams0
+func (t PageVictorOpsOnCallRespondersTaskParams) AsPageVictorOpsOnCallRespondersTaskParams0() (PageVictorOpsOnCallRespondersTaskParams0, error) {
+	var body PageVictorOpsOnCallRespondersTaskParams0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromPageVictorOpsOnCallRespondersTaskParams0 overwrites any union data inside the PageVictorOpsOnCallRespondersTaskParams as the provided PageVictorOpsOnCallRespondersTaskParams0
+func (t *PageVictorOpsOnCallRespondersTaskParams) FromPageVictorOpsOnCallRespondersTaskParams0(v PageVictorOpsOnCallRespondersTaskParams0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergePageVictorOpsOnCallRespondersTaskParams0 performs a merge with any union data inside the PageVictorOpsOnCallRespondersTaskParams, using the provided PageVictorOpsOnCallRespondersTaskParams0
+func (t *PageVictorOpsOnCallRespondersTaskParams) MergePageVictorOpsOnCallRespondersTaskParams0(v PageVictorOpsOnCallRespondersTaskParams0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsPageVictorOpsOnCallRespondersTaskParams1 returns the union data inside the PageVictorOpsOnCallRespondersTaskParams as a PageVictorOpsOnCallRespondersTaskParams1
+func (t PageVictorOpsOnCallRespondersTaskParams) AsPageVictorOpsOnCallRespondersTaskParams1() (PageVictorOpsOnCallRespondersTaskParams1, error) {
+	var body PageVictorOpsOnCallRespondersTaskParams1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromPageVictorOpsOnCallRespondersTaskParams1 overwrites any union data inside the PageVictorOpsOnCallRespondersTaskParams as the provided PageVictorOpsOnCallRespondersTaskParams1
+func (t *PageVictorOpsOnCallRespondersTaskParams) FromPageVictorOpsOnCallRespondersTaskParams1(v PageVictorOpsOnCallRespondersTaskParams1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergePageVictorOpsOnCallRespondersTaskParams1 performs a merge with any union data inside the PageVictorOpsOnCallRespondersTaskParams, using the provided PageVictorOpsOnCallRespondersTaskParams1
+func (t *PageVictorOpsOnCallRespondersTaskParams) MergePageVictorOpsOnCallRespondersTaskParams1(v PageVictorOpsOnCallRespondersTaskParams1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t PageVictorOpsOnCallRespondersTaskParams) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	object := make(map[string]json.RawMessage)
+	if t.union != nil {
+		err = json.Unmarshal(b, &object)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	if t.EscalationPolicies != nil {
+		object["escalation_policies"], err = json.Marshal(t.EscalationPolicies)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'escalation_policies': %w", err)
+		}
+	}
+
+	if t.TaskType != nil {
+		object["task_type"], err = json.Marshal(t.TaskType)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'task_type': %w", err)
+		}
+	}
+
+	if t.Title != nil {
+		object["title"], err = json.Marshal(t.Title)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'title': %w", err)
+		}
+	}
+
+	if t.Users != nil {
+		object["users"], err = json.Marshal(t.Users)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'users': %w", err)
+		}
+	}
+	b, err = json.Marshal(object)
+	return b, err
+}
+
+func (t *PageVictorOpsOnCallRespondersTaskParams) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	if err != nil {
+		return err
+	}
+	object := make(map[string]json.RawMessage)
+	err = json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["escalation_policies"]; found {
+		err = json.Unmarshal(raw, &t.EscalationPolicies)
+		if err != nil {
+			return fmt.Errorf("error reading 'escalation_policies': %w", err)
+		}
+	}
+
+	if raw, found := object["task_type"]; found {
+		err = json.Unmarshal(raw, &t.TaskType)
+		if err != nil {
+			return fmt.Errorf("error reading 'task_type': %w", err)
+		}
+	}
+
+	if raw, found := object["title"]; found {
+		err = json.Unmarshal(raw, &t.Title)
+		if err != nil {
+			return fmt.Errorf("error reading 'title': %w", err)
+		}
+	}
+
+	if raw, found := object["users"]; found {
+		err = json.Unmarshal(raw, &t.Users)
+		if err != nil {
+			return fmt.Errorf("error reading 'users': %w", err)
+		}
+	}
+
+	return err
+}
+
+// AsSendSlackBlocksTaskParams0 returns the union data inside the SendSlackBlocksTaskParams as a SendSlackBlocksTaskParams0
+func (t SendSlackBlocksTaskParams) AsSendSlackBlocksTaskParams0() (SendSlackBlocksTaskParams0, error) {
+	var body SendSlackBlocksTaskParams0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromSendSlackBlocksTaskParams0 overwrites any union data inside the SendSlackBlocksTaskParams as the provided SendSlackBlocksTaskParams0
+func (t *SendSlackBlocksTaskParams) FromSendSlackBlocksTaskParams0(v SendSlackBlocksTaskParams0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeSendSlackBlocksTaskParams0 performs a merge with any union data inside the SendSlackBlocksTaskParams, using the provided SendSlackBlocksTaskParams0
+func (t *SendSlackBlocksTaskParams) MergeSendSlackBlocksTaskParams0(v SendSlackBlocksTaskParams0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsSendSlackBlocksTaskParams1 returns the union data inside the SendSlackBlocksTaskParams as a SendSlackBlocksTaskParams1
+func (t SendSlackBlocksTaskParams) AsSendSlackBlocksTaskParams1() (SendSlackBlocksTaskParams1, error) {
+	var body SendSlackBlocksTaskParams1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromSendSlackBlocksTaskParams1 overwrites any union data inside the SendSlackBlocksTaskParams as the provided SendSlackBlocksTaskParams1
+func (t *SendSlackBlocksTaskParams) FromSendSlackBlocksTaskParams1(v SendSlackBlocksTaskParams1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeSendSlackBlocksTaskParams1 performs a merge with any union data inside the SendSlackBlocksTaskParams, using the provided SendSlackBlocksTaskParams1
+func (t *SendSlackBlocksTaskParams) MergeSendSlackBlocksTaskParams1(v SendSlackBlocksTaskParams1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsSendSlackBlocksTaskParams2 returns the union data inside the SendSlackBlocksTaskParams as a SendSlackBlocksTaskParams2
+func (t SendSlackBlocksTaskParams) AsSendSlackBlocksTaskParams2() (SendSlackBlocksTaskParams2, error) {
+	var body SendSlackBlocksTaskParams2
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromSendSlackBlocksTaskParams2 overwrites any union data inside the SendSlackBlocksTaskParams as the provided SendSlackBlocksTaskParams2
+func (t *SendSlackBlocksTaskParams) FromSendSlackBlocksTaskParams2(v SendSlackBlocksTaskParams2) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeSendSlackBlocksTaskParams2 performs a merge with any union data inside the SendSlackBlocksTaskParams, using the provided SendSlackBlocksTaskParams2
+func (t *SendSlackBlocksTaskParams) MergeSendSlackBlocksTaskParams2(v SendSlackBlocksTaskParams2) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t SendSlackBlocksTaskParams) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	object := make(map[string]json.RawMessage)
+	if t.union != nil {
+		err = json.Unmarshal(b, &object)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	if t.Attachments != nil {
+		object["attachments"], err = json.Marshal(t.Attachments)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'attachments': %w", err)
+		}
+	}
+
+	object["blocks"], err = json.Marshal(t.Blocks)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'blocks': %w", err)
+	}
+
+	if t.BroadcastThreadReplyToChannel != nil {
+		object["broadcast_thread_reply_to_channel"], err = json.Marshal(t.BroadcastThreadReplyToChannel)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'broadcast_thread_reply_to_channel': %w", err)
+		}
+	}
+
+	if t.Channels != nil {
+		object["channels"], err = json.Marshal(t.Channels)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'channels': %w", err)
+		}
+	}
+
+	if t.Message != nil {
+		object["message"], err = json.Marshal(t.Message)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'message': %w", err)
+		}
+	}
+
+	if t.ParentMessageThreadTask != nil {
+		object["parent_message_thread_task"], err = json.Marshal(t.ParentMessageThreadTask)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'parent_message_thread_task': %w", err)
+		}
+	}
+
+	if t.PinToChannel != nil {
+		object["pin_to_channel"], err = json.Marshal(t.PinToChannel)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'pin_to_channel': %w", err)
+		}
+	}
+
+	if t.SendAsEphemeral != nil {
+		object["send_as_ephemeral"], err = json.Marshal(t.SendAsEphemeral)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'send_as_ephemeral': %w", err)
+		}
+	}
+
+	if t.SendOnlyAsThreadedMessage != nil {
+		object["send_only_as_threaded_message"], err = json.Marshal(t.SendOnlyAsThreadedMessage)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'send_only_as_threaded_message': %w", err)
+		}
+	}
+
+	if t.SlackUserGroups != nil {
+		object["slack_user_groups"], err = json.Marshal(t.SlackUserGroups)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'slack_user_groups': %w", err)
+		}
+	}
+
+	if t.SlackUsers != nil {
+		object["slack_users"], err = json.Marshal(t.SlackUsers)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'slack_users': %w", err)
+		}
+	}
+
+	if t.TaskType != nil {
+		object["task_type"], err = json.Marshal(t.TaskType)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'task_type': %w", err)
+		}
+	}
+
+	if t.UpdateParentMessage != nil {
+		object["update_parent_message"], err = json.Marshal(t.UpdateParentMessage)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'update_parent_message': %w", err)
+		}
+	}
+	b, err = json.Marshal(object)
+	return b, err
+}
+
+func (t *SendSlackBlocksTaskParams) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	if err != nil {
+		return err
+	}
+	object := make(map[string]json.RawMessage)
+	err = json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["attachments"]; found {
+		err = json.Unmarshal(raw, &t.Attachments)
+		if err != nil {
+			return fmt.Errorf("error reading 'attachments': %w", err)
+		}
+	}
+
+	if raw, found := object["blocks"]; found {
+		err = json.Unmarshal(raw, &t.Blocks)
+		if err != nil {
+			return fmt.Errorf("error reading 'blocks': %w", err)
+		}
+	}
+
+	if raw, found := object["broadcast_thread_reply_to_channel"]; found {
+		err = json.Unmarshal(raw, &t.BroadcastThreadReplyToChannel)
+		if err != nil {
+			return fmt.Errorf("error reading 'broadcast_thread_reply_to_channel': %w", err)
+		}
+	}
+
+	if raw, found := object["channels"]; found {
+		err = json.Unmarshal(raw, &t.Channels)
+		if err != nil {
+			return fmt.Errorf("error reading 'channels': %w", err)
+		}
+	}
+
+	if raw, found := object["message"]; found {
+		err = json.Unmarshal(raw, &t.Message)
+		if err != nil {
+			return fmt.Errorf("error reading 'message': %w", err)
+		}
+	}
+
+	if raw, found := object["parent_message_thread_task"]; found {
+		err = json.Unmarshal(raw, &t.ParentMessageThreadTask)
+		if err != nil {
+			return fmt.Errorf("error reading 'parent_message_thread_task': %w", err)
+		}
+	}
+
+	if raw, found := object["pin_to_channel"]; found {
+		err = json.Unmarshal(raw, &t.PinToChannel)
+		if err != nil {
+			return fmt.Errorf("error reading 'pin_to_channel': %w", err)
+		}
+	}
+
+	if raw, found := object["send_as_ephemeral"]; found {
+		err = json.Unmarshal(raw, &t.SendAsEphemeral)
+		if err != nil {
+			return fmt.Errorf("error reading 'send_as_ephemeral': %w", err)
+		}
+	}
+
+	if raw, found := object["send_only_as_threaded_message"]; found {
+		err = json.Unmarshal(raw, &t.SendOnlyAsThreadedMessage)
+		if err != nil {
+			return fmt.Errorf("error reading 'send_only_as_threaded_message': %w", err)
+		}
+	}
+
+	if raw, found := object["slack_user_groups"]; found {
+		err = json.Unmarshal(raw, &t.SlackUserGroups)
+		if err != nil {
+			return fmt.Errorf("error reading 'slack_user_groups': %w", err)
+		}
+	}
+
+	if raw, found := object["slack_users"]; found {
+		err = json.Unmarshal(raw, &t.SlackUsers)
+		if err != nil {
+			return fmt.Errorf("error reading 'slack_users': %w", err)
+		}
+	}
+
+	if raw, found := object["task_type"]; found {
+		err = json.Unmarshal(raw, &t.TaskType)
+		if err != nil {
+			return fmt.Errorf("error reading 'task_type': %w", err)
+		}
+	}
+
+	if raw, found := object["update_parent_message"]; found {
+		err = json.Unmarshal(raw, &t.UpdateParentMessage)
+		if err != nil {
+			return fmt.Errorf("error reading 'update_parent_message': %w", err)
+		}
+	}
+
+	return err
+}
+
+// AsSendSlackMessageTaskParams0 returns the union data inside the SendSlackMessageTaskParams as a SendSlackMessageTaskParams0
+func (t SendSlackMessageTaskParams) AsSendSlackMessageTaskParams0() (SendSlackMessageTaskParams0, error) {
+	var body SendSlackMessageTaskParams0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromSendSlackMessageTaskParams0 overwrites any union data inside the SendSlackMessageTaskParams as the provided SendSlackMessageTaskParams0
+func (t *SendSlackMessageTaskParams) FromSendSlackMessageTaskParams0(v SendSlackMessageTaskParams0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeSendSlackMessageTaskParams0 performs a merge with any union data inside the SendSlackMessageTaskParams, using the provided SendSlackMessageTaskParams0
+func (t *SendSlackMessageTaskParams) MergeSendSlackMessageTaskParams0(v SendSlackMessageTaskParams0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsSendSlackMessageTaskParams1 returns the union data inside the SendSlackMessageTaskParams as a SendSlackMessageTaskParams1
+func (t SendSlackMessageTaskParams) AsSendSlackMessageTaskParams1() (SendSlackMessageTaskParams1, error) {
+	var body SendSlackMessageTaskParams1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromSendSlackMessageTaskParams1 overwrites any union data inside the SendSlackMessageTaskParams as the provided SendSlackMessageTaskParams1
+func (t *SendSlackMessageTaskParams) FromSendSlackMessageTaskParams1(v SendSlackMessageTaskParams1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeSendSlackMessageTaskParams1 performs a merge with any union data inside the SendSlackMessageTaskParams, using the provided SendSlackMessageTaskParams1
+func (t *SendSlackMessageTaskParams) MergeSendSlackMessageTaskParams1(v SendSlackMessageTaskParams1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsSendSlackMessageTaskParams2 returns the union data inside the SendSlackMessageTaskParams as a SendSlackMessageTaskParams2
+func (t SendSlackMessageTaskParams) AsSendSlackMessageTaskParams2() (SendSlackMessageTaskParams2, error) {
+	var body SendSlackMessageTaskParams2
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromSendSlackMessageTaskParams2 overwrites any union data inside the SendSlackMessageTaskParams as the provided SendSlackMessageTaskParams2
+func (t *SendSlackMessageTaskParams) FromSendSlackMessageTaskParams2(v SendSlackMessageTaskParams2) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeSendSlackMessageTaskParams2 performs a merge with any union data inside the SendSlackMessageTaskParams, using the provided SendSlackMessageTaskParams2
+func (t *SendSlackMessageTaskParams) MergeSendSlackMessageTaskParams2(v SendSlackMessageTaskParams2) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t SendSlackMessageTaskParams) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	object := make(map[string]json.RawMessage)
+	if t.union != nil {
+		err = json.Unmarshal(b, &object)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	if t.Actionables != nil {
+		object["actionables"], err = json.Marshal(t.Actionables)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'actionables': %w", err)
+		}
+	}
+
+	if t.BroadcastThreadReplyToChannel != nil {
+		object["broadcast_thread_reply_to_channel"], err = json.Marshal(t.BroadcastThreadReplyToChannel)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'broadcast_thread_reply_to_channel': %w", err)
+		}
+	}
+
+	if t.Channels != nil {
+		object["channels"], err = json.Marshal(t.Channels)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'channels': %w", err)
+		}
+	}
+
+	if t.Color != nil {
+		object["color"], err = json.Marshal(t.Color)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'color': %w", err)
+		}
+	}
+
+	if t.ParentMessageThreadTask != nil {
+		object["parent_message_thread_task"], err = json.Marshal(t.ParentMessageThreadTask)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'parent_message_thread_task': %w", err)
+		}
+	}
+
+	if t.PinToChannel != nil {
+		object["pin_to_channel"], err = json.Marshal(t.PinToChannel)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'pin_to_channel': %w", err)
+		}
+	}
+
+	if t.SendAsEphemeral != nil {
+		object["send_as_ephemeral"], err = json.Marshal(t.SendAsEphemeral)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'send_as_ephemeral': %w", err)
+		}
+	}
+
+	if t.SendOnlyAsThreadedMessage != nil {
+		object["send_only_as_threaded_message"], err = json.Marshal(t.SendOnlyAsThreadedMessage)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'send_only_as_threaded_message': %w", err)
+		}
+	}
+
+	if t.SlackUserGroups != nil {
+		object["slack_user_groups"], err = json.Marshal(t.SlackUserGroups)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'slack_user_groups': %w", err)
+		}
+	}
+
+	if t.SlackUsers != nil {
+		object["slack_users"], err = json.Marshal(t.SlackUsers)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'slack_users': %w", err)
+		}
+	}
+
+	if t.TaskType != nil {
+		object["task_type"], err = json.Marshal(t.TaskType)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'task_type': %w", err)
+		}
+	}
+
+	object["text"], err = json.Marshal(t.Text)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'text': %w", err)
+	}
+
+	if t.UpdateParentMessage != nil {
+		object["update_parent_message"], err = json.Marshal(t.UpdateParentMessage)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'update_parent_message': %w", err)
+		}
+	}
+	b, err = json.Marshal(object)
+	return b, err
+}
+
+func (t *SendSlackMessageTaskParams) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	if err != nil {
+		return err
+	}
+	object := make(map[string]json.RawMessage)
+	err = json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["actionables"]; found {
+		err = json.Unmarshal(raw, &t.Actionables)
+		if err != nil {
+			return fmt.Errorf("error reading 'actionables': %w", err)
+		}
+	}
+
+	if raw, found := object["broadcast_thread_reply_to_channel"]; found {
+		err = json.Unmarshal(raw, &t.BroadcastThreadReplyToChannel)
+		if err != nil {
+			return fmt.Errorf("error reading 'broadcast_thread_reply_to_channel': %w", err)
+		}
+	}
+
+	if raw, found := object["channels"]; found {
+		err = json.Unmarshal(raw, &t.Channels)
+		if err != nil {
+			return fmt.Errorf("error reading 'channels': %w", err)
+		}
+	}
+
+	if raw, found := object["color"]; found {
+		err = json.Unmarshal(raw, &t.Color)
+		if err != nil {
+			return fmt.Errorf("error reading 'color': %w", err)
+		}
+	}
+
+	if raw, found := object["parent_message_thread_task"]; found {
+		err = json.Unmarshal(raw, &t.ParentMessageThreadTask)
+		if err != nil {
+			return fmt.Errorf("error reading 'parent_message_thread_task': %w", err)
+		}
+	}
+
+	if raw, found := object["pin_to_channel"]; found {
+		err = json.Unmarshal(raw, &t.PinToChannel)
+		if err != nil {
+			return fmt.Errorf("error reading 'pin_to_channel': %w", err)
+		}
+	}
+
+	if raw, found := object["send_as_ephemeral"]; found {
+		err = json.Unmarshal(raw, &t.SendAsEphemeral)
+		if err != nil {
+			return fmt.Errorf("error reading 'send_as_ephemeral': %w", err)
+		}
+	}
+
+	if raw, found := object["send_only_as_threaded_message"]; found {
+		err = json.Unmarshal(raw, &t.SendOnlyAsThreadedMessage)
+		if err != nil {
+			return fmt.Errorf("error reading 'send_only_as_threaded_message': %w", err)
+		}
+	}
+
+	if raw, found := object["slack_user_groups"]; found {
+		err = json.Unmarshal(raw, &t.SlackUserGroups)
+		if err != nil {
+			return fmt.Errorf("error reading 'slack_user_groups': %w", err)
+		}
+	}
+
+	if raw, found := object["slack_users"]; found {
+		err = json.Unmarshal(raw, &t.SlackUsers)
+		if err != nil {
+			return fmt.Errorf("error reading 'slack_users': %w", err)
+		}
+	}
+
+	if raw, found := object["task_type"]; found {
+		err = json.Unmarshal(raw, &t.TaskType)
+		if err != nil {
+			return fmt.Errorf("error reading 'task_type': %w", err)
+		}
+	}
+
+	if raw, found := object["text"]; found {
+		err = json.Unmarshal(raw, &t.Text)
+		if err != nil {
+			return fmt.Errorf("error reading 'text': %w", err)
+		}
+	}
+
+	if raw, found := object["update_parent_message"]; found {
+		err = json.Unmarshal(raw, &t.UpdateParentMessage)
+		if err != nil {
+			return fmt.Errorf("error reading 'update_parent_message': %w", err)
+		}
+	}
+
 	return err
 }
 
@@ -26769,6 +29898,32 @@ func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromUpdateStatusTaskPara
 
 // MergeUpdateStatusTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateStatusTaskParams
 func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeUpdateStatusTaskParams(v UpdateStatusTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsUpdateIncidentStatusTimestampTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a UpdateIncidentStatusTimestampTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsUpdateIncidentStatusTimestampTaskParams() (UpdateIncidentStatusTimestampTaskParams, error) {
+	var body UpdateIncidentStatusTimestampTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateIncidentStatusTimestampTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided UpdateIncidentStatusTimestampTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromUpdateIncidentStatusTimestampTaskParams(v UpdateIncidentStatusTimestampTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateIncidentStatusTimestampTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateIncidentStatusTimestampTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeUpdateIncidentStatusTimestampTaskParams(v UpdateIncidentStatusTimestampTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -29945,6 +33100,32 @@ func (t *WorkflowTask_TaskParams) MergeUpdateStatusTaskParams(v UpdateStatusTask
 	return err
 }
 
+// AsUpdateIncidentStatusTimestampTaskParams returns the union data inside the WorkflowTask_TaskParams as a UpdateIncidentStatusTimestampTaskParams
+func (t WorkflowTask_TaskParams) AsUpdateIncidentStatusTimestampTaskParams() (UpdateIncidentStatusTimestampTaskParams, error) {
+	var body UpdateIncidentStatusTimestampTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateIncidentStatusTimestampTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided UpdateIncidentStatusTimestampTaskParams
+func (t *WorkflowTask_TaskParams) FromUpdateIncidentStatusTimestampTaskParams(v UpdateIncidentStatusTimestampTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateIncidentStatusTimestampTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided UpdateIncidentStatusTimestampTaskParams
+func (t *WorkflowTask_TaskParams) MergeUpdateIncidentStatusTimestampTaskParams(v UpdateIncidentStatusTimestampTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsUpdateTrelloCardTaskParams returns the union data inside the WorkflowTask_TaskParams as a UpdateTrelloCardTaskParams
 func (t WorkflowTask_TaskParams) AsUpdateTrelloCardTaskParams() (UpdateTrelloCardTaskParams, error) {
 	var body UpdateTrelloCardTaskParams
@@ -30303,6 +33484,82 @@ type ClientInterface interface {
 
 	UpdateAuthorizationWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAuthorizationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListCatalogEntityProperties request
+	ListCatalogEntityProperties(ctx context.Context, catalogEntityId string, params *ListCatalogEntityPropertiesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateCatalogEntityPropertyWithBody request with any body
+	CreateCatalogEntityPropertyWithBody(ctx context.Context, catalogEntityId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateCatalogEntityPropertyWithApplicationVndAPIPlusJSONBody(ctx context.Context, catalogEntityId string, body CreateCatalogEntityPropertyApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteCatalogEntity request
+	DeleteCatalogEntity(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetCatalogEntity request
+	GetCatalogEntity(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateCatalogEntityWithBody request with any body
+	UpdateCatalogEntityWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateCatalogEntityWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateCatalogEntityApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteCatalogEntityProperty request
+	DeleteCatalogEntityProperty(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetCatalogEntityProperty request
+	GetCatalogEntityProperty(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateCatalogEntityPropertyWithBody request with any body
+	UpdateCatalogEntityPropertyWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateCatalogEntityPropertyWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateCatalogEntityPropertyApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteCatalogField request
+	DeleteCatalogField(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetCatalogField request
+	GetCatalogField(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateCatalogFieldWithBody request with any body
+	UpdateCatalogFieldWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateCatalogFieldWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateCatalogFieldApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListCatalogs request
+	ListCatalogs(ctx context.Context, params *ListCatalogsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateCatalogWithBody request with any body
+	CreateCatalogWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateCatalogWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateCatalogApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListCatalogEntities request
+	ListCatalogEntities(ctx context.Context, catalogId string, params *ListCatalogEntitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateCatalogEntityWithBody request with any body
+	CreateCatalogEntityWithBody(ctx context.Context, catalogId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateCatalogEntityWithApplicationVndAPIPlusJSONBody(ctx context.Context, catalogId string, body CreateCatalogEntityApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListCatalogFields request
+	ListCatalogFields(ctx context.Context, catalogId string, params *ListCatalogFieldsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateCatalogFieldWithBody request with any body
+	CreateCatalogFieldWithBody(ctx context.Context, catalogId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateCatalogFieldWithApplicationVndAPIPlusJSONBody(ctx context.Context, catalogId string, body CreateCatalogFieldApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteCatalog request
+	DeleteCatalog(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetCatalog request
+	GetCatalog(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateCatalogWithBody request with any body
+	UpdateCatalogWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateCatalogWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateCatalogApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListCauses request
 	ListCauses(ctx context.Context, params *ListCausesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -30457,12 +33714,12 @@ type ClientInterface interface {
 	UpdateEscalationLevelWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateEscalationLevelApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListEscalationLevelsPaths request
-	ListEscalationLevelsPaths(ctx context.Context, escalationPolicyPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	ListEscalationLevelsPaths(ctx context.Context, escalationPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateEscalationLevelPathsWithBody request with any body
-	CreateEscalationLevelPathsWithBody(ctx context.Context, escalationPolicyPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	CreateEscalationLevelPathsWithBody(ctx context.Context, escalationPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPolicyPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteEscalationPath request
 	DeleteEscalationPath(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -31029,6 +34286,28 @@ type ClientInterface interface {
 
 	// GetIpRanges request
 	GetIpRanges(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListLiveCallRouters request
+	ListLiveCallRouters(ctx context.Context, params *ListLiveCallRoutersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateLiveCallRouterWithBody request with any body
+	CreateLiveCallRouterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateLiveCallRouterWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateLiveCallRouterApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GeneratePhoneNumberLiveCallRouter request
+	GeneratePhoneNumberLiveCallRouter(ctx context.Context, params *GeneratePhoneNumberLiveCallRouterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteLiveCallRouter request
+	DeleteLiveCallRouter(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetLiveCallRouter request
+	GetLiveCallRouter(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateLiveCallRouterWithBody request with any body
+	UpdateLiveCallRouterWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateLiveCallRouterWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateLiveCallRouterApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteUserNotificationRule request
 	DeleteUserNotificationRule(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -32064,6 +35343,342 @@ func (c *Client) UpdateAuthorizationWithApplicationVndAPIPlusJSONBody(ctx contex
 	return c.Client.Do(req)
 }
 
+func (c *Client) ListCatalogEntityProperties(ctx context.Context, catalogEntityId string, params *ListCatalogEntityPropertiesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListCatalogEntityPropertiesRequest(c.Server, catalogEntityId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateCatalogEntityPropertyWithBody(ctx context.Context, catalogEntityId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateCatalogEntityPropertyRequestWithBody(c.Server, catalogEntityId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateCatalogEntityPropertyWithApplicationVndAPIPlusJSONBody(ctx context.Context, catalogEntityId string, body CreateCatalogEntityPropertyApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateCatalogEntityPropertyRequestWithApplicationVndAPIPlusJSONBody(c.Server, catalogEntityId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteCatalogEntity(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteCatalogEntityRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetCatalogEntity(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetCatalogEntityRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateCatalogEntityWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateCatalogEntityRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateCatalogEntityWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateCatalogEntityApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateCatalogEntityRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteCatalogEntityProperty(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteCatalogEntityPropertyRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetCatalogEntityProperty(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetCatalogEntityPropertyRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateCatalogEntityPropertyWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateCatalogEntityPropertyRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateCatalogEntityPropertyWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateCatalogEntityPropertyApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateCatalogEntityPropertyRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteCatalogField(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteCatalogFieldRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetCatalogField(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetCatalogFieldRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateCatalogFieldWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateCatalogFieldRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateCatalogFieldWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateCatalogFieldApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateCatalogFieldRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListCatalogs(ctx context.Context, params *ListCatalogsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListCatalogsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateCatalogWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateCatalogRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateCatalogWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateCatalogApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateCatalogRequestWithApplicationVndAPIPlusJSONBody(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListCatalogEntities(ctx context.Context, catalogId string, params *ListCatalogEntitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListCatalogEntitiesRequest(c.Server, catalogId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateCatalogEntityWithBody(ctx context.Context, catalogId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateCatalogEntityRequestWithBody(c.Server, catalogId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateCatalogEntityWithApplicationVndAPIPlusJSONBody(ctx context.Context, catalogId string, body CreateCatalogEntityApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateCatalogEntityRequestWithApplicationVndAPIPlusJSONBody(c.Server, catalogId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListCatalogFields(ctx context.Context, catalogId string, params *ListCatalogFieldsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListCatalogFieldsRequest(c.Server, catalogId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateCatalogFieldWithBody(ctx context.Context, catalogId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateCatalogFieldRequestWithBody(c.Server, catalogId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateCatalogFieldWithApplicationVndAPIPlusJSONBody(ctx context.Context, catalogId string, body CreateCatalogFieldApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateCatalogFieldRequestWithApplicationVndAPIPlusJSONBody(c.Server, catalogId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteCatalog(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteCatalogRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetCatalog(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetCatalogRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateCatalogWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateCatalogRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateCatalogWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateCatalogApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateCatalogRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) ListCauses(ctx context.Context, params *ListCausesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListCausesRequest(c.Server, params)
 	if err != nil {
@@ -32736,8 +36351,8 @@ func (c *Client) UpdateEscalationLevelWithApplicationVndAPIPlusJSONBody(ctx cont
 	return c.Client.Do(req)
 }
 
-func (c *Client) ListEscalationLevelsPaths(ctx context.Context, escalationPolicyPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewListEscalationLevelsPathsRequest(c.Server, escalationPolicyPathId, params)
+func (c *Client) ListEscalationLevelsPaths(ctx context.Context, escalationPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListEscalationLevelsPathsRequest(c.Server, escalationPathId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -32748,8 +36363,8 @@ func (c *Client) ListEscalationLevelsPaths(ctx context.Context, escalationPolicy
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateEscalationLevelPathsWithBody(ctx context.Context, escalationPolicyPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateEscalationLevelPathsRequestWithBody(c.Server, escalationPolicyPathId, contentType, body)
+func (c *Client) CreateEscalationLevelPathsWithBody(ctx context.Context, escalationPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateEscalationLevelPathsRequestWithBody(c.Server, escalationPathId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -32760,8 +36375,8 @@ func (c *Client) CreateEscalationLevelPathsWithBody(ctx context.Context, escalat
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPolicyPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateEscalationLevelPathsRequestWithApplicationVndAPIPlusJSONBody(c.Server, escalationPolicyPathId, body)
+func (c *Client) CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateEscalationLevelPathsRequestWithApplicationVndAPIPlusJSONBody(c.Server, escalationPathId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -35282,6 +38897,102 @@ func (c *Client) CreateIncidentSubStatusWithApplicationVndAPIPlusJSONBody(ctx co
 
 func (c *Client) GetIpRanges(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetIpRangesRequest(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListLiveCallRouters(ctx context.Context, params *ListLiveCallRoutersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListLiveCallRoutersRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateLiveCallRouterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateLiveCallRouterRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateLiveCallRouterWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateLiveCallRouterApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateLiveCallRouterRequestWithApplicationVndAPIPlusJSONBody(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GeneratePhoneNumberLiveCallRouter(ctx context.Context, params *GeneratePhoneNumberLiveCallRouterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGeneratePhoneNumberLiveCallRouterRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteLiveCallRouter(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteLiveCallRouterRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetLiveCallRouter(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetLiveCallRouterRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateLiveCallRouterWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateLiveCallRouterRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateLiveCallRouterWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateLiveCallRouterApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateLiveCallRouterRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -39901,6 +43612,1392 @@ func NewUpdateAuthorizationRequestWithBody(server string, id string, contentType
 	return req, nil
 }
 
+// NewListCatalogEntityPropertiesRequest generates requests for ListCatalogEntityProperties
+func NewListCatalogEntityPropertiesRequest(server string, catalogEntityId string, params *ListCatalogEntityPropertiesParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "catalog_entity_id", runtime.ParamLocationPath, catalogEntityId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/catalog_entities/%s/properties", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCatalogFieldId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[catalog_field_id]", runtime.ParamLocationQuery, *params.FilterCatalogFieldId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterKey != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[key]", runtime.ParamLocationQuery, *params.FilterKey); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gte]", runtime.ParamLocationQuery, *params.FilterCreatedAtGte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lte]", runtime.ParamLocationQuery, *params.FilterCreatedAtLte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateCatalogEntityPropertyRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateCatalogEntityProperty builder with application/vnd.api+json body
+func NewCreateCatalogEntityPropertyRequestWithApplicationVndAPIPlusJSONBody(server string, catalogEntityId string, body CreateCatalogEntityPropertyApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateCatalogEntityPropertyRequestWithBody(server, catalogEntityId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateCatalogEntityPropertyRequestWithBody generates requests for CreateCatalogEntityProperty with any type of body
+func NewCreateCatalogEntityPropertyRequestWithBody(server string, catalogEntityId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "catalog_entity_id", runtime.ParamLocationPath, catalogEntityId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/catalog_entities/%s/properties", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteCatalogEntityRequest generates requests for DeleteCatalogEntity
+func NewDeleteCatalogEntityRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/catalog_entities/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetCatalogEntityRequest generates requests for GetCatalogEntity
+func NewGetCatalogEntityRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/catalog_entities/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateCatalogEntityRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateCatalogEntity builder with application/vnd.api+json body
+func NewUpdateCatalogEntityRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateCatalogEntityApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateCatalogEntityRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateCatalogEntityRequestWithBody generates requests for UpdateCatalogEntity with any type of body
+func NewUpdateCatalogEntityRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/catalog_entities/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteCatalogEntityPropertyRequest generates requests for DeleteCatalogEntityProperty
+func NewDeleteCatalogEntityPropertyRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/catalog_entity_properties/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetCatalogEntityPropertyRequest generates requests for GetCatalogEntityProperty
+func NewGetCatalogEntityPropertyRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/catalog_entity_properties/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateCatalogEntityPropertyRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateCatalogEntityProperty builder with application/vnd.api+json body
+func NewUpdateCatalogEntityPropertyRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateCatalogEntityPropertyApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateCatalogEntityPropertyRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateCatalogEntityPropertyRequestWithBody generates requests for UpdateCatalogEntityProperty with any type of body
+func NewUpdateCatalogEntityPropertyRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/catalog_entity_properties/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteCatalogFieldRequest generates requests for DeleteCatalogField
+func NewDeleteCatalogFieldRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/catalog_fields/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetCatalogFieldRequest generates requests for GetCatalogField
+func NewGetCatalogFieldRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/catalog_fields/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateCatalogFieldRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateCatalogField builder with application/vnd.api+json body
+func NewUpdateCatalogFieldRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateCatalogFieldApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateCatalogFieldRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateCatalogFieldRequestWithBody generates requests for UpdateCatalogField with any type of body
+func NewUpdateCatalogFieldRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/catalog_fields/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListCatalogsRequest generates requests for ListCatalogs
+func NewListCatalogsRequest(server string, params *ListCatalogsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/catalogs")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterSlug != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[slug]", runtime.ParamLocationQuery, *params.FilterSlug); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterName != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[name]", runtime.ParamLocationQuery, *params.FilterName); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gte]", runtime.ParamLocationQuery, *params.FilterCreatedAtGte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lte]", runtime.ParamLocationQuery, *params.FilterCreatedAtLte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateCatalogRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateCatalog builder with application/vnd.api+json body
+func NewCreateCatalogRequestWithApplicationVndAPIPlusJSONBody(server string, body CreateCatalogApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateCatalogRequestWithBody(server, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateCatalogRequestWithBody generates requests for CreateCatalog with any type of body
+func NewCreateCatalogRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/catalogs")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListCatalogEntitiesRequest generates requests for ListCatalogEntities
+func NewListCatalogEntitiesRequest(server string, catalogId string, params *ListCatalogEntitiesParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "catalog_id", runtime.ParamLocationPath, catalogId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/catalogs/%s/entities", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterSlug != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[slug]", runtime.ParamLocationQuery, *params.FilterSlug); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterName != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[name]", runtime.ParamLocationQuery, *params.FilterName); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gte]", runtime.ParamLocationQuery, *params.FilterCreatedAtGte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lte]", runtime.ParamLocationQuery, *params.FilterCreatedAtLte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateCatalogEntityRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateCatalogEntity builder with application/vnd.api+json body
+func NewCreateCatalogEntityRequestWithApplicationVndAPIPlusJSONBody(server string, catalogId string, body CreateCatalogEntityApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateCatalogEntityRequestWithBody(server, catalogId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateCatalogEntityRequestWithBody generates requests for CreateCatalogEntity with any type of body
+func NewCreateCatalogEntityRequestWithBody(server string, catalogId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "catalog_id", runtime.ParamLocationPath, catalogId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/catalogs/%s/entities", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListCatalogFieldsRequest generates requests for ListCatalogFields
+func NewListCatalogFieldsRequest(server string, catalogId string, params *ListCatalogFieldsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "catalog_id", runtime.ParamLocationPath, catalogId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/catalogs/%s/fields", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterSlug != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[slug]", runtime.ParamLocationQuery, *params.FilterSlug); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterName != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[name]", runtime.ParamLocationQuery, *params.FilterName); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterKind != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[kind]", runtime.ParamLocationQuery, *params.FilterKind); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gte]", runtime.ParamLocationQuery, *params.FilterCreatedAtGte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lte]", runtime.ParamLocationQuery, *params.FilterCreatedAtLte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateCatalogFieldRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateCatalogField builder with application/vnd.api+json body
+func NewCreateCatalogFieldRequestWithApplicationVndAPIPlusJSONBody(server string, catalogId string, body CreateCatalogFieldApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateCatalogFieldRequestWithBody(server, catalogId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateCatalogFieldRequestWithBody generates requests for CreateCatalogField with any type of body
+func NewCreateCatalogFieldRequestWithBody(server string, catalogId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "catalog_id", runtime.ParamLocationPath, catalogId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/catalogs/%s/fields", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteCatalogRequest generates requests for DeleteCatalog
+func NewDeleteCatalogRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/catalogs/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetCatalogRequest generates requests for GetCatalog
+func NewGetCatalogRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/catalogs/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateCatalogRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateCatalog builder with application/vnd.api+json body
+func NewUpdateCatalogRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateCatalogApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateCatalogRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateCatalogRequestWithBody generates requests for UpdateCatalog with any type of body
+func NewUpdateCatalogRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/catalogs/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListCausesRequest generates requests for ListCauses
 func NewListCausesRequest(server string, params *ListCausesParams) (*http.Request, error) {
 	var err error
@@ -42397,12 +47494,12 @@ func NewUpdateEscalationLevelRequestWithBody(server string, id string, contentTy
 }
 
 // NewListEscalationLevelsPathsRequest generates requests for ListEscalationLevelsPaths
-func NewListEscalationLevelsPathsRequest(server string, escalationPolicyPathId string, params *ListEscalationLevelsPathsParams) (*http.Request, error) {
+func NewListEscalationLevelsPathsRequest(server string, escalationPathId string, params *ListEscalationLevelsPathsParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "escalation_policy_path_id", runtime.ParamLocationPath, escalationPolicyPathId)
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "escalation_path_id", runtime.ParamLocationPath, escalationPathId)
 	if err != nil {
 		return nil, err
 	}
@@ -42485,23 +47582,23 @@ func NewListEscalationLevelsPathsRequest(server string, escalationPolicyPathId s
 }
 
 // NewCreateEscalationLevelPathsRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateEscalationLevelPaths builder with application/vnd.api+json body
-func NewCreateEscalationLevelPathsRequestWithApplicationVndAPIPlusJSONBody(server string, escalationPolicyPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+func NewCreateEscalationLevelPathsRequestWithApplicationVndAPIPlusJSONBody(server string, escalationPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewCreateEscalationLevelPathsRequestWithBody(server, escalationPolicyPathId, "application/vnd.api+json", bodyReader)
+	return NewCreateEscalationLevelPathsRequestWithBody(server, escalationPathId, "application/vnd.api+json", bodyReader)
 }
 
 // NewCreateEscalationLevelPathsRequestWithBody generates requests for CreateEscalationLevelPaths with any type of body
-func NewCreateEscalationLevelPathsRequestWithBody(server string, escalationPolicyPathId string, contentType string, body io.Reader) (*http.Request, error) {
+func NewCreateEscalationLevelPathsRequestWithBody(server string, escalationPathId string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "escalation_policy_path_id", runtime.ParamLocationPath, escalationPolicyPathId)
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "escalation_path_id", runtime.ParamLocationPath, escalationPathId)
 	if err != nil {
 		return nil, err
 	}
@@ -52196,6 +57293,427 @@ func NewGetIpRangesRequest(server string) (*http.Request, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewListLiveCallRoutersRequest generates requests for ListLiveCallRouters
+func NewListLiveCallRoutersRequest(server string, params *ListLiveCallRoutersParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/live_call_routers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterSearch != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[search]", runtime.ParamLocationQuery, *params.FilterSearch); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterName != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[name]", runtime.ParamLocationQuery, *params.FilterName); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterSlug != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[slug]", runtime.ParamLocationQuery, *params.FilterSlug); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gte]", runtime.ParamLocationQuery, *params.FilterCreatedAtGte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lte]", runtime.ParamLocationQuery, *params.FilterCreatedAtLte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateLiveCallRouterRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateLiveCallRouter builder with application/vnd.api+json body
+func NewCreateLiveCallRouterRequestWithApplicationVndAPIPlusJSONBody(server string, body CreateLiveCallRouterApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateLiveCallRouterRequestWithBody(server, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateLiveCallRouterRequestWithBody generates requests for CreateLiveCallRouter with any type of body
+func NewCreateLiveCallRouterRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/live_call_routers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGeneratePhoneNumberLiveCallRouterRequest generates requests for GeneratePhoneNumberLiveCallRouter
+func NewGeneratePhoneNumberLiveCallRouterRequest(server string, params *GeneratePhoneNumberLiveCallRouterParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/live_call_routers/generate_phone_number")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "country_code", runtime.ParamLocationQuery, params.CountryCode); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "phone_type", runtime.ParamLocationQuery, params.PhoneType); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDeleteLiveCallRouterRequest generates requests for DeleteLiveCallRouter
+func NewDeleteLiveCallRouterRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/live_call_routers/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetLiveCallRouterRequest generates requests for GetLiveCallRouter
+func NewGetLiveCallRouterRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/live_call_routers/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateLiveCallRouterRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateLiveCallRouter builder with application/vnd.api+json body
+func NewUpdateLiveCallRouterRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateLiveCallRouterApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateLiveCallRouterRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateLiveCallRouterRequestWithBody generates requests for UpdateLiveCallRouter with any type of body
+func NewUpdateLiveCallRouterRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/live_call_routers/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -62785,6 +68303,82 @@ type ClientWithResponsesInterface interface {
 
 	UpdateAuthorizationWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateAuthorizationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAuthorizationResponse, error)
 
+	// ListCatalogEntityPropertiesWithResponse request
+	ListCatalogEntityPropertiesWithResponse(ctx context.Context, catalogEntityId string, params *ListCatalogEntityPropertiesParams, reqEditors ...RequestEditorFn) (*ListCatalogEntityPropertiesResponse, error)
+
+	// CreateCatalogEntityPropertyWithBodyWithResponse request with any body
+	CreateCatalogEntityPropertyWithBodyWithResponse(ctx context.Context, catalogEntityId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCatalogEntityPropertyResponse, error)
+
+	CreateCatalogEntityPropertyWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, catalogEntityId string, body CreateCatalogEntityPropertyApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCatalogEntityPropertyResponse, error)
+
+	// DeleteCatalogEntityWithResponse request
+	DeleteCatalogEntityWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteCatalogEntityResponse, error)
+
+	// GetCatalogEntityWithResponse request
+	GetCatalogEntityWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCatalogEntityResponse, error)
+
+	// UpdateCatalogEntityWithBodyWithResponse request with any body
+	UpdateCatalogEntityWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCatalogEntityResponse, error)
+
+	UpdateCatalogEntityWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateCatalogEntityApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCatalogEntityResponse, error)
+
+	// DeleteCatalogEntityPropertyWithResponse request
+	DeleteCatalogEntityPropertyWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteCatalogEntityPropertyResponse, error)
+
+	// GetCatalogEntityPropertyWithResponse request
+	GetCatalogEntityPropertyWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCatalogEntityPropertyResponse, error)
+
+	// UpdateCatalogEntityPropertyWithBodyWithResponse request with any body
+	UpdateCatalogEntityPropertyWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCatalogEntityPropertyResponse, error)
+
+	UpdateCatalogEntityPropertyWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateCatalogEntityPropertyApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCatalogEntityPropertyResponse, error)
+
+	// DeleteCatalogFieldWithResponse request
+	DeleteCatalogFieldWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteCatalogFieldResponse, error)
+
+	// GetCatalogFieldWithResponse request
+	GetCatalogFieldWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCatalogFieldResponse, error)
+
+	// UpdateCatalogFieldWithBodyWithResponse request with any body
+	UpdateCatalogFieldWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCatalogFieldResponse, error)
+
+	UpdateCatalogFieldWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateCatalogFieldApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCatalogFieldResponse, error)
+
+	// ListCatalogsWithResponse request
+	ListCatalogsWithResponse(ctx context.Context, params *ListCatalogsParams, reqEditors ...RequestEditorFn) (*ListCatalogsResponse, error)
+
+	// CreateCatalogWithBodyWithResponse request with any body
+	CreateCatalogWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCatalogResponse, error)
+
+	CreateCatalogWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateCatalogApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCatalogResponse, error)
+
+	// ListCatalogEntitiesWithResponse request
+	ListCatalogEntitiesWithResponse(ctx context.Context, catalogId string, params *ListCatalogEntitiesParams, reqEditors ...RequestEditorFn) (*ListCatalogEntitiesResponse, error)
+
+	// CreateCatalogEntityWithBodyWithResponse request with any body
+	CreateCatalogEntityWithBodyWithResponse(ctx context.Context, catalogId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCatalogEntityResponse, error)
+
+	CreateCatalogEntityWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, catalogId string, body CreateCatalogEntityApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCatalogEntityResponse, error)
+
+	// ListCatalogFieldsWithResponse request
+	ListCatalogFieldsWithResponse(ctx context.Context, catalogId string, params *ListCatalogFieldsParams, reqEditors ...RequestEditorFn) (*ListCatalogFieldsResponse, error)
+
+	// CreateCatalogFieldWithBodyWithResponse request with any body
+	CreateCatalogFieldWithBodyWithResponse(ctx context.Context, catalogId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCatalogFieldResponse, error)
+
+	CreateCatalogFieldWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, catalogId string, body CreateCatalogFieldApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCatalogFieldResponse, error)
+
+	// DeleteCatalogWithResponse request
+	DeleteCatalogWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteCatalogResponse, error)
+
+	// GetCatalogWithResponse request
+	GetCatalogWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCatalogResponse, error)
+
+	// UpdateCatalogWithBodyWithResponse request with any body
+	UpdateCatalogWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCatalogResponse, error)
+
+	UpdateCatalogWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateCatalogApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCatalogResponse, error)
+
 	// ListCausesWithResponse request
 	ListCausesWithResponse(ctx context.Context, params *ListCausesParams, reqEditors ...RequestEditorFn) (*ListCausesResponse, error)
 
@@ -62939,12 +68533,12 @@ type ClientWithResponsesInterface interface {
 	UpdateEscalationLevelWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateEscalationLevelApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateEscalationLevelResponse, error)
 
 	// ListEscalationLevelsPathsWithResponse request
-	ListEscalationLevelsPathsWithResponse(ctx context.Context, escalationPolicyPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*ListEscalationLevelsPathsResponse, error)
+	ListEscalationLevelsPathsWithResponse(ctx context.Context, escalationPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*ListEscalationLevelsPathsResponse, error)
 
 	// CreateEscalationLevelPathsWithBodyWithResponse request with any body
-	CreateEscalationLevelPathsWithBodyWithResponse(ctx context.Context, escalationPolicyPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error)
+	CreateEscalationLevelPathsWithBodyWithResponse(ctx context.Context, escalationPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error)
 
-	CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPolicyPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error)
+	CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error)
 
 	// DeleteEscalationPathWithResponse request
 	DeleteEscalationPathWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteEscalationPathResponse, error)
@@ -63511,6 +69105,28 @@ type ClientWithResponsesInterface interface {
 
 	// GetIpRangesWithResponse request
 	GetIpRangesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetIpRangesResponse, error)
+
+	// ListLiveCallRoutersWithResponse request
+	ListLiveCallRoutersWithResponse(ctx context.Context, params *ListLiveCallRoutersParams, reqEditors ...RequestEditorFn) (*ListLiveCallRoutersResponse, error)
+
+	// CreateLiveCallRouterWithBodyWithResponse request with any body
+	CreateLiveCallRouterWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateLiveCallRouterResponse, error)
+
+	CreateLiveCallRouterWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateLiveCallRouterApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateLiveCallRouterResponse, error)
+
+	// GeneratePhoneNumberLiveCallRouterWithResponse request
+	GeneratePhoneNumberLiveCallRouterWithResponse(ctx context.Context, params *GeneratePhoneNumberLiveCallRouterParams, reqEditors ...RequestEditorFn) (*GeneratePhoneNumberLiveCallRouterResponse, error)
+
+	// DeleteLiveCallRouterWithResponse request
+	DeleteLiveCallRouterWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteLiveCallRouterResponse, error)
+
+	// GetLiveCallRouterWithResponse request
+	GetLiveCallRouterWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetLiveCallRouterResponse, error)
+
+	// UpdateLiveCallRouterWithBodyWithResponse request with any body
+	UpdateLiveCallRouterWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateLiveCallRouterResponse, error)
+
+	UpdateLiveCallRouterWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateLiveCallRouterApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateLiveCallRouterResponse, error)
 
 	// DeleteUserNotificationRuleWithResponse request
 	DeleteUserNotificationRuleWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteUserNotificationRuleResponse, error)
@@ -64710,6 +70326,466 @@ func (r UpdateAuthorizationResponse) StatusCode() int {
 	return 0
 }
 
+type ListCatalogEntityPropertiesResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *CatalogEntityPropertyList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListCatalogEntityPropertiesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListCatalogEntityPropertiesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateCatalogEntityPropertyResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *CatalogEntityPropertyResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateCatalogEntityPropertyResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateCatalogEntityPropertyResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteCatalogEntityResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *CatalogEntityResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteCatalogEntityResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteCatalogEntityResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetCatalogEntityResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *CatalogEntityResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetCatalogEntityResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetCatalogEntityResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateCatalogEntityResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *CatalogEntityResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateCatalogEntityResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateCatalogEntityResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteCatalogEntityPropertyResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *CatalogEntityPropertyResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteCatalogEntityPropertyResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteCatalogEntityPropertyResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetCatalogEntityPropertyResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *CatalogEntityPropertyResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetCatalogEntityPropertyResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetCatalogEntityPropertyResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateCatalogEntityPropertyResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *CatalogEntityPropertyResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateCatalogEntityPropertyResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateCatalogEntityPropertyResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteCatalogFieldResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *CatalogFieldResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteCatalogFieldResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteCatalogFieldResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetCatalogFieldResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *CatalogFieldResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetCatalogFieldResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetCatalogFieldResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateCatalogFieldResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *CatalogFieldResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateCatalogFieldResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateCatalogFieldResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListCatalogsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *CatalogList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListCatalogsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListCatalogsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateCatalogResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *CatalogResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateCatalogResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateCatalogResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListCatalogEntitiesResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *CatalogEntityList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListCatalogEntitiesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListCatalogEntitiesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateCatalogEntityResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *CatalogEntityResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateCatalogEntityResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateCatalogEntityResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListCatalogFieldsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *CatalogFieldList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListCatalogFieldsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListCatalogFieldsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateCatalogFieldResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *CatalogFieldResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateCatalogFieldResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateCatalogFieldResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteCatalogResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *CatalogResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteCatalogResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteCatalogResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetCatalogResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *CatalogResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetCatalogResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetCatalogResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateCatalogResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *CatalogResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateCatalogResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateCatalogResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type ListCausesResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -65702,7 +71778,7 @@ func (r CreateEscalationLevelPathsResponse) StatusCode() int {
 type DeleteEscalationPathResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *EscalationPolicyPathResponse
+	ApplicationvndApiJSON200 *EscalationPathResponse
 	ApplicationvndApiJSON404 *ErrorsList
 }
 
@@ -65725,7 +71801,7 @@ func (r DeleteEscalationPathResponse) StatusCode() int {
 type GetEscalationPathResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *EscalationPolicyPathResponse
+	ApplicationvndApiJSON200 *EscalationPathResponse
 	ApplicationvndApiJSON404 *ErrorsList
 }
 
@@ -65748,7 +71824,7 @@ func (r GetEscalationPathResponse) StatusCode() int {
 type UpdateEscalationPathResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *EscalationPolicyPathResponse
+	ApplicationvndApiJSON200 *EscalationPathResponse
 	ApplicationvndApiJSON404 *ErrorsList
 }
 
@@ -65863,7 +71939,7 @@ func (r CreateEscalationLevelPoliciesResponse) StatusCode() int {
 type ListEscalationPathsResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *EscalationPolicyPathList
+	ApplicationvndApiJSON200 *EscalationPathList
 }
 
 // Status returns HTTPResponse.Status
@@ -65885,7 +71961,7 @@ func (r ListEscalationPathsResponse) StatusCode() int {
 type CreateEscalationPathResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON201 *EscalationPolicyPathResponse
+	ApplicationvndApiJSON201 *EscalationPathResponse
 	ApplicationvndApiJSON401 *ErrorsList
 	ApplicationvndApiJSON422 *ErrorsList
 }
@@ -69044,6 +75120,143 @@ func (r GetIpRangesResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r GetIpRangesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListLiveCallRoutersResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *LiveCallRouterList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListLiveCallRoutersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListLiveCallRoutersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateLiveCallRouterResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *LiveCallRouterResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateLiveCallRouterResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateLiveCallRouterResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GeneratePhoneNumberLiveCallRouterResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GeneratePhoneNumberLiveCallRouterResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GeneratePhoneNumberLiveCallRouterResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteLiveCallRouterResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *LiveCallRouterResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteLiveCallRouterResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteLiveCallRouterResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetLiveCallRouterResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *LiveCallRouterResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetLiveCallRouterResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetLiveCallRouterResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateLiveCallRouterResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *LiveCallRouterResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateLiveCallRouterResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateLiveCallRouterResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -73176,6 +79389,250 @@ func (c *ClientWithResponses) UpdateAuthorizationWithApplicationVndAPIPlusJSONBo
 	return ParseUpdateAuthorizationResponse(rsp)
 }
 
+// ListCatalogEntityPropertiesWithResponse request returning *ListCatalogEntityPropertiesResponse
+func (c *ClientWithResponses) ListCatalogEntityPropertiesWithResponse(ctx context.Context, catalogEntityId string, params *ListCatalogEntityPropertiesParams, reqEditors ...RequestEditorFn) (*ListCatalogEntityPropertiesResponse, error) {
+	rsp, err := c.ListCatalogEntityProperties(ctx, catalogEntityId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListCatalogEntityPropertiesResponse(rsp)
+}
+
+// CreateCatalogEntityPropertyWithBodyWithResponse request with arbitrary body returning *CreateCatalogEntityPropertyResponse
+func (c *ClientWithResponses) CreateCatalogEntityPropertyWithBodyWithResponse(ctx context.Context, catalogEntityId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCatalogEntityPropertyResponse, error) {
+	rsp, err := c.CreateCatalogEntityPropertyWithBody(ctx, catalogEntityId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateCatalogEntityPropertyResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateCatalogEntityPropertyWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, catalogEntityId string, body CreateCatalogEntityPropertyApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCatalogEntityPropertyResponse, error) {
+	rsp, err := c.CreateCatalogEntityPropertyWithApplicationVndAPIPlusJSONBody(ctx, catalogEntityId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateCatalogEntityPropertyResponse(rsp)
+}
+
+// DeleteCatalogEntityWithResponse request returning *DeleteCatalogEntityResponse
+func (c *ClientWithResponses) DeleteCatalogEntityWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteCatalogEntityResponse, error) {
+	rsp, err := c.DeleteCatalogEntity(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteCatalogEntityResponse(rsp)
+}
+
+// GetCatalogEntityWithResponse request returning *GetCatalogEntityResponse
+func (c *ClientWithResponses) GetCatalogEntityWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCatalogEntityResponse, error) {
+	rsp, err := c.GetCatalogEntity(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetCatalogEntityResponse(rsp)
+}
+
+// UpdateCatalogEntityWithBodyWithResponse request with arbitrary body returning *UpdateCatalogEntityResponse
+func (c *ClientWithResponses) UpdateCatalogEntityWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCatalogEntityResponse, error) {
+	rsp, err := c.UpdateCatalogEntityWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateCatalogEntityResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateCatalogEntityWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateCatalogEntityApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCatalogEntityResponse, error) {
+	rsp, err := c.UpdateCatalogEntityWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateCatalogEntityResponse(rsp)
+}
+
+// DeleteCatalogEntityPropertyWithResponse request returning *DeleteCatalogEntityPropertyResponse
+func (c *ClientWithResponses) DeleteCatalogEntityPropertyWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteCatalogEntityPropertyResponse, error) {
+	rsp, err := c.DeleteCatalogEntityProperty(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteCatalogEntityPropertyResponse(rsp)
+}
+
+// GetCatalogEntityPropertyWithResponse request returning *GetCatalogEntityPropertyResponse
+func (c *ClientWithResponses) GetCatalogEntityPropertyWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCatalogEntityPropertyResponse, error) {
+	rsp, err := c.GetCatalogEntityProperty(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetCatalogEntityPropertyResponse(rsp)
+}
+
+// UpdateCatalogEntityPropertyWithBodyWithResponse request with arbitrary body returning *UpdateCatalogEntityPropertyResponse
+func (c *ClientWithResponses) UpdateCatalogEntityPropertyWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCatalogEntityPropertyResponse, error) {
+	rsp, err := c.UpdateCatalogEntityPropertyWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateCatalogEntityPropertyResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateCatalogEntityPropertyWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateCatalogEntityPropertyApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCatalogEntityPropertyResponse, error) {
+	rsp, err := c.UpdateCatalogEntityPropertyWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateCatalogEntityPropertyResponse(rsp)
+}
+
+// DeleteCatalogFieldWithResponse request returning *DeleteCatalogFieldResponse
+func (c *ClientWithResponses) DeleteCatalogFieldWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteCatalogFieldResponse, error) {
+	rsp, err := c.DeleteCatalogField(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteCatalogFieldResponse(rsp)
+}
+
+// GetCatalogFieldWithResponse request returning *GetCatalogFieldResponse
+func (c *ClientWithResponses) GetCatalogFieldWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCatalogFieldResponse, error) {
+	rsp, err := c.GetCatalogField(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetCatalogFieldResponse(rsp)
+}
+
+// UpdateCatalogFieldWithBodyWithResponse request with arbitrary body returning *UpdateCatalogFieldResponse
+func (c *ClientWithResponses) UpdateCatalogFieldWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCatalogFieldResponse, error) {
+	rsp, err := c.UpdateCatalogFieldWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateCatalogFieldResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateCatalogFieldWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateCatalogFieldApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCatalogFieldResponse, error) {
+	rsp, err := c.UpdateCatalogFieldWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateCatalogFieldResponse(rsp)
+}
+
+// ListCatalogsWithResponse request returning *ListCatalogsResponse
+func (c *ClientWithResponses) ListCatalogsWithResponse(ctx context.Context, params *ListCatalogsParams, reqEditors ...RequestEditorFn) (*ListCatalogsResponse, error) {
+	rsp, err := c.ListCatalogs(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListCatalogsResponse(rsp)
+}
+
+// CreateCatalogWithBodyWithResponse request with arbitrary body returning *CreateCatalogResponse
+func (c *ClientWithResponses) CreateCatalogWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCatalogResponse, error) {
+	rsp, err := c.CreateCatalogWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateCatalogResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateCatalogWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateCatalogApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCatalogResponse, error) {
+	rsp, err := c.CreateCatalogWithApplicationVndAPIPlusJSONBody(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateCatalogResponse(rsp)
+}
+
+// ListCatalogEntitiesWithResponse request returning *ListCatalogEntitiesResponse
+func (c *ClientWithResponses) ListCatalogEntitiesWithResponse(ctx context.Context, catalogId string, params *ListCatalogEntitiesParams, reqEditors ...RequestEditorFn) (*ListCatalogEntitiesResponse, error) {
+	rsp, err := c.ListCatalogEntities(ctx, catalogId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListCatalogEntitiesResponse(rsp)
+}
+
+// CreateCatalogEntityWithBodyWithResponse request with arbitrary body returning *CreateCatalogEntityResponse
+func (c *ClientWithResponses) CreateCatalogEntityWithBodyWithResponse(ctx context.Context, catalogId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCatalogEntityResponse, error) {
+	rsp, err := c.CreateCatalogEntityWithBody(ctx, catalogId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateCatalogEntityResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateCatalogEntityWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, catalogId string, body CreateCatalogEntityApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCatalogEntityResponse, error) {
+	rsp, err := c.CreateCatalogEntityWithApplicationVndAPIPlusJSONBody(ctx, catalogId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateCatalogEntityResponse(rsp)
+}
+
+// ListCatalogFieldsWithResponse request returning *ListCatalogFieldsResponse
+func (c *ClientWithResponses) ListCatalogFieldsWithResponse(ctx context.Context, catalogId string, params *ListCatalogFieldsParams, reqEditors ...RequestEditorFn) (*ListCatalogFieldsResponse, error) {
+	rsp, err := c.ListCatalogFields(ctx, catalogId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListCatalogFieldsResponse(rsp)
+}
+
+// CreateCatalogFieldWithBodyWithResponse request with arbitrary body returning *CreateCatalogFieldResponse
+func (c *ClientWithResponses) CreateCatalogFieldWithBodyWithResponse(ctx context.Context, catalogId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCatalogFieldResponse, error) {
+	rsp, err := c.CreateCatalogFieldWithBody(ctx, catalogId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateCatalogFieldResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateCatalogFieldWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, catalogId string, body CreateCatalogFieldApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCatalogFieldResponse, error) {
+	rsp, err := c.CreateCatalogFieldWithApplicationVndAPIPlusJSONBody(ctx, catalogId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateCatalogFieldResponse(rsp)
+}
+
+// DeleteCatalogWithResponse request returning *DeleteCatalogResponse
+func (c *ClientWithResponses) DeleteCatalogWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteCatalogResponse, error) {
+	rsp, err := c.DeleteCatalog(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteCatalogResponse(rsp)
+}
+
+// GetCatalogWithResponse request returning *GetCatalogResponse
+func (c *ClientWithResponses) GetCatalogWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCatalogResponse, error) {
+	rsp, err := c.GetCatalog(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetCatalogResponse(rsp)
+}
+
+// UpdateCatalogWithBodyWithResponse request with arbitrary body returning *UpdateCatalogResponse
+func (c *ClientWithResponses) UpdateCatalogWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCatalogResponse, error) {
+	rsp, err := c.UpdateCatalogWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateCatalogResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateCatalogWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateCatalogApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCatalogResponse, error) {
+	rsp, err := c.UpdateCatalogWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateCatalogResponse(rsp)
+}
+
 // ListCausesWithResponse request returning *ListCausesResponse
 func (c *ClientWithResponses) ListCausesWithResponse(ctx context.Context, params *ListCausesParams, reqEditors ...RequestEditorFn) (*ListCausesResponse, error) {
 	rsp, err := c.ListCauses(ctx, params, reqEditors...)
@@ -73666,8 +80123,8 @@ func (c *ClientWithResponses) UpdateEscalationLevelWithApplicationVndAPIPlusJSON
 }
 
 // ListEscalationLevelsPathsWithResponse request returning *ListEscalationLevelsPathsResponse
-func (c *ClientWithResponses) ListEscalationLevelsPathsWithResponse(ctx context.Context, escalationPolicyPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*ListEscalationLevelsPathsResponse, error) {
-	rsp, err := c.ListEscalationLevelsPaths(ctx, escalationPolicyPathId, params, reqEditors...)
+func (c *ClientWithResponses) ListEscalationLevelsPathsWithResponse(ctx context.Context, escalationPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*ListEscalationLevelsPathsResponse, error) {
+	rsp, err := c.ListEscalationLevelsPaths(ctx, escalationPathId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -73675,16 +80132,16 @@ func (c *ClientWithResponses) ListEscalationLevelsPathsWithResponse(ctx context.
 }
 
 // CreateEscalationLevelPathsWithBodyWithResponse request with arbitrary body returning *CreateEscalationLevelPathsResponse
-func (c *ClientWithResponses) CreateEscalationLevelPathsWithBodyWithResponse(ctx context.Context, escalationPolicyPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error) {
-	rsp, err := c.CreateEscalationLevelPathsWithBody(ctx, escalationPolicyPathId, contentType, body, reqEditors...)
+func (c *ClientWithResponses) CreateEscalationLevelPathsWithBodyWithResponse(ctx context.Context, escalationPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error) {
+	rsp, err := c.CreateEscalationLevelPathsWithBody(ctx, escalationPathId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateEscalationLevelPathsResponse(rsp)
 }
 
-func (c *ClientWithResponses) CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPolicyPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error) {
-	rsp, err := c.CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBody(ctx, escalationPolicyPathId, body, reqEditors...)
+func (c *ClientWithResponses) CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error) {
+	rsp, err := c.CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBody(ctx, escalationPathId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -75515,6 +81972,76 @@ func (c *ClientWithResponses) GetIpRangesWithResponse(ctx context.Context, reqEd
 		return nil, err
 	}
 	return ParseGetIpRangesResponse(rsp)
+}
+
+// ListLiveCallRoutersWithResponse request returning *ListLiveCallRoutersResponse
+func (c *ClientWithResponses) ListLiveCallRoutersWithResponse(ctx context.Context, params *ListLiveCallRoutersParams, reqEditors ...RequestEditorFn) (*ListLiveCallRoutersResponse, error) {
+	rsp, err := c.ListLiveCallRouters(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListLiveCallRoutersResponse(rsp)
+}
+
+// CreateLiveCallRouterWithBodyWithResponse request with arbitrary body returning *CreateLiveCallRouterResponse
+func (c *ClientWithResponses) CreateLiveCallRouterWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateLiveCallRouterResponse, error) {
+	rsp, err := c.CreateLiveCallRouterWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateLiveCallRouterResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateLiveCallRouterWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateLiveCallRouterApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateLiveCallRouterResponse, error) {
+	rsp, err := c.CreateLiveCallRouterWithApplicationVndAPIPlusJSONBody(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateLiveCallRouterResponse(rsp)
+}
+
+// GeneratePhoneNumberLiveCallRouterWithResponse request returning *GeneratePhoneNumberLiveCallRouterResponse
+func (c *ClientWithResponses) GeneratePhoneNumberLiveCallRouterWithResponse(ctx context.Context, params *GeneratePhoneNumberLiveCallRouterParams, reqEditors ...RequestEditorFn) (*GeneratePhoneNumberLiveCallRouterResponse, error) {
+	rsp, err := c.GeneratePhoneNumberLiveCallRouter(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGeneratePhoneNumberLiveCallRouterResponse(rsp)
+}
+
+// DeleteLiveCallRouterWithResponse request returning *DeleteLiveCallRouterResponse
+func (c *ClientWithResponses) DeleteLiveCallRouterWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteLiveCallRouterResponse, error) {
+	rsp, err := c.DeleteLiveCallRouter(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteLiveCallRouterResponse(rsp)
+}
+
+// GetLiveCallRouterWithResponse request returning *GetLiveCallRouterResponse
+func (c *ClientWithResponses) GetLiveCallRouterWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetLiveCallRouterResponse, error) {
+	rsp, err := c.GetLiveCallRouter(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetLiveCallRouterResponse(rsp)
+}
+
+// UpdateLiveCallRouterWithBodyWithResponse request with arbitrary body returning *UpdateLiveCallRouterResponse
+func (c *ClientWithResponses) UpdateLiveCallRouterWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateLiveCallRouterResponse, error) {
+	rsp, err := c.UpdateLiveCallRouterWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateLiveCallRouterResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateLiveCallRouterWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateLiveCallRouterApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateLiveCallRouterResponse, error) {
+	rsp, err := c.UpdateLiveCallRouterWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateLiveCallRouterResponse(rsp)
 }
 
 // DeleteUserNotificationRuleWithResponse request returning *DeleteUserNotificationRuleResponse
@@ -78320,6 +84847,666 @@ func ParseUpdateAuthorizationResponse(rsp *http.Response) (*UpdateAuthorizationR
 	return response, nil
 }
 
+// ParseListCatalogEntityPropertiesResponse parses an HTTP response from a ListCatalogEntityPropertiesWithResponse call
+func ParseListCatalogEntityPropertiesResponse(rsp *http.Response) (*ListCatalogEntityPropertiesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListCatalogEntityPropertiesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CatalogEntityPropertyList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateCatalogEntityPropertyResponse parses an HTTP response from a CreateCatalogEntityPropertyWithResponse call
+func ParseCreateCatalogEntityPropertyResponse(rsp *http.Response) (*CreateCatalogEntityPropertyResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateCatalogEntityPropertyResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest CatalogEntityPropertyResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteCatalogEntityResponse parses an HTTP response from a DeleteCatalogEntityWithResponse call
+func ParseDeleteCatalogEntityResponse(rsp *http.Response) (*DeleteCatalogEntityResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteCatalogEntityResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CatalogEntityResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetCatalogEntityResponse parses an HTTP response from a GetCatalogEntityWithResponse call
+func ParseGetCatalogEntityResponse(rsp *http.Response) (*GetCatalogEntityResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetCatalogEntityResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CatalogEntityResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateCatalogEntityResponse parses an HTTP response from a UpdateCatalogEntityWithResponse call
+func ParseUpdateCatalogEntityResponse(rsp *http.Response) (*UpdateCatalogEntityResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateCatalogEntityResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CatalogEntityResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteCatalogEntityPropertyResponse parses an HTTP response from a DeleteCatalogEntityPropertyWithResponse call
+func ParseDeleteCatalogEntityPropertyResponse(rsp *http.Response) (*DeleteCatalogEntityPropertyResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteCatalogEntityPropertyResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CatalogEntityPropertyResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetCatalogEntityPropertyResponse parses an HTTP response from a GetCatalogEntityPropertyWithResponse call
+func ParseGetCatalogEntityPropertyResponse(rsp *http.Response) (*GetCatalogEntityPropertyResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetCatalogEntityPropertyResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CatalogEntityPropertyResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateCatalogEntityPropertyResponse parses an HTTP response from a UpdateCatalogEntityPropertyWithResponse call
+func ParseUpdateCatalogEntityPropertyResponse(rsp *http.Response) (*UpdateCatalogEntityPropertyResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateCatalogEntityPropertyResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CatalogEntityPropertyResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteCatalogFieldResponse parses an HTTP response from a DeleteCatalogFieldWithResponse call
+func ParseDeleteCatalogFieldResponse(rsp *http.Response) (*DeleteCatalogFieldResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteCatalogFieldResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CatalogFieldResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetCatalogFieldResponse parses an HTTP response from a GetCatalogFieldWithResponse call
+func ParseGetCatalogFieldResponse(rsp *http.Response) (*GetCatalogFieldResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetCatalogFieldResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CatalogFieldResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateCatalogFieldResponse parses an HTTP response from a UpdateCatalogFieldWithResponse call
+func ParseUpdateCatalogFieldResponse(rsp *http.Response) (*UpdateCatalogFieldResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateCatalogFieldResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CatalogFieldResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListCatalogsResponse parses an HTTP response from a ListCatalogsWithResponse call
+func ParseListCatalogsResponse(rsp *http.Response) (*ListCatalogsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListCatalogsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CatalogList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateCatalogResponse parses an HTTP response from a CreateCatalogWithResponse call
+func ParseCreateCatalogResponse(rsp *http.Response) (*CreateCatalogResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateCatalogResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest CatalogResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListCatalogEntitiesResponse parses an HTTP response from a ListCatalogEntitiesWithResponse call
+func ParseListCatalogEntitiesResponse(rsp *http.Response) (*ListCatalogEntitiesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListCatalogEntitiesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CatalogEntityList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateCatalogEntityResponse parses an HTTP response from a CreateCatalogEntityWithResponse call
+func ParseCreateCatalogEntityResponse(rsp *http.Response) (*CreateCatalogEntityResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateCatalogEntityResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest CatalogEntityResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListCatalogFieldsResponse parses an HTTP response from a ListCatalogFieldsWithResponse call
+func ParseListCatalogFieldsResponse(rsp *http.Response) (*ListCatalogFieldsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListCatalogFieldsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CatalogFieldList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateCatalogFieldResponse parses an HTTP response from a CreateCatalogFieldWithResponse call
+func ParseCreateCatalogFieldResponse(rsp *http.Response) (*CreateCatalogFieldResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateCatalogFieldResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest CatalogFieldResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteCatalogResponse parses an HTTP response from a DeleteCatalogWithResponse call
+func ParseDeleteCatalogResponse(rsp *http.Response) (*DeleteCatalogResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteCatalogResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CatalogResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetCatalogResponse parses an HTTP response from a GetCatalogWithResponse call
+func ParseGetCatalogResponse(rsp *http.Response) (*GetCatalogResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetCatalogResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CatalogResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateCatalogResponse parses an HTTP response from a UpdateCatalogWithResponse call
+func ParseUpdateCatalogResponse(rsp *http.Response) (*UpdateCatalogResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateCatalogResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CatalogResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseListCausesResponse parses an HTTP response from a ListCausesWithResponse call
 func ParseListCausesResponse(rsp *http.Response) (*ListCausesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -79754,7 +86941,7 @@ func ParseDeleteEscalationPathResponse(rsp *http.Response) (*DeleteEscalationPat
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest EscalationPolicyPathResponse
+		var dest EscalationPathResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -79787,7 +86974,7 @@ func ParseGetEscalationPathResponse(rsp *http.Response) (*GetEscalationPathRespo
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest EscalationPolicyPathResponse
+		var dest EscalationPathResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -79820,7 +87007,7 @@ func ParseUpdateEscalationPathResponse(rsp *http.Response) (*UpdateEscalationPat
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest EscalationPolicyPathResponse
+		var dest EscalationPathResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -79985,7 +87172,7 @@ func ParseListEscalationPathsResponse(rsp *http.Response) (*ListEscalationPathsR
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest EscalationPolicyPathList
+		var dest EscalationPathList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -80011,7 +87198,7 @@ func ParseCreateEscalationPathResponse(rsp *http.Response) (*CreateEscalationPat
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest EscalationPolicyPathResponse
+		var dest EscalationPathResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -84502,6 +91689,197 @@ func ParseGetIpRangesResponse(rsp *http.Response) (*GetIpRangesResponse, error) 
 			return nil, err
 		}
 		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListLiveCallRoutersResponse parses an HTTP response from a ListLiveCallRoutersWithResponse call
+func ParseListLiveCallRoutersResponse(rsp *http.Response) (*ListLiveCallRoutersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListLiveCallRoutersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LiveCallRouterList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateLiveCallRouterResponse parses an HTTP response from a CreateLiveCallRouterWithResponse call
+func ParseCreateLiveCallRouterResponse(rsp *http.Response) (*CreateLiveCallRouterResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateLiveCallRouterResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest LiveCallRouterResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGeneratePhoneNumberLiveCallRouterResponse parses an HTTP response from a GeneratePhoneNumberLiveCallRouterWithResponse call
+func ParseGeneratePhoneNumberLiveCallRouterResponse(rsp *http.Response) (*GeneratePhoneNumberLiveCallRouterResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GeneratePhoneNumberLiveCallRouterResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteLiveCallRouterResponse parses an HTTP response from a DeleteLiveCallRouterWithResponse call
+func ParseDeleteLiveCallRouterResponse(rsp *http.Response) (*DeleteLiveCallRouterResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteLiveCallRouterResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LiveCallRouterResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetLiveCallRouterResponse parses an HTTP response from a GetLiveCallRouterWithResponse call
+func ParseGetLiveCallRouterResponse(rsp *http.Response) (*GetLiveCallRouterResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetLiveCallRouterResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LiveCallRouterResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateLiveCallRouterResponse parses an HTTP response from a UpdateLiveCallRouterWithResponse call
+func ParseUpdateLiveCallRouterResponse(rsp *http.Response) (*UpdateLiveCallRouterResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateLiveCallRouterResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LiveCallRouterResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 

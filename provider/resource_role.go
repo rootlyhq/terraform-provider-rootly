@@ -65,6 +65,30 @@ func resourceRole() *schema.Resource {
 				Description: "Whether the role can be edited.. Value must be one of true or false",
 			},
 
+			"alerts_permissions": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Value must be one of `create`, `read`.",
+			},
+
+			"pulses_permissions": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Value must be one of `create`, `update`, `read`.",
+			},
+
 			"api_keys_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -366,6 +390,12 @@ func resourceRoleCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	if value, ok := d.GetOkExists("is_editable"); ok {
 		s.IsEditable = tools.Bool(value.(bool))
 	}
+	if value, ok := d.GetOkExists("alerts_permissions"); ok {
+		s.AlertsPermissions = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("pulses_permissions"); ok {
+		s.PulsesPermissions = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("api_keys_permissions"); ok {
 		s.ApiKeysPermissions = value.([]interface{})
 	}
@@ -469,6 +499,8 @@ func resourceRoleRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	d.Set("incident_permission_set_id", item.IncidentPermissionSetId)
 	d.Set("is_deletable", item.IsDeletable)
 	d.Set("is_editable", item.IsEditable)
+	d.Set("alerts_permissions", item.AlertsPermissions)
+	d.Set("pulses_permissions", item.PulsesPermissions)
 	d.Set("api_keys_permissions", item.ApiKeysPermissions)
 	d.Set("audits_permissions", item.AuditsPermissions)
 	d.Set("billing_permissions", item.BillingPermissions)
@@ -516,6 +548,12 @@ func resourceRoleUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 	}
 	if d.HasChange("is_editable") {
 		s.IsEditable = tools.Bool(d.Get("is_editable").(bool))
+	}
+	if d.HasChange("alerts_permissions") {
+		s.AlertsPermissions = d.Get("alerts_permissions").([]interface{})
+	}
+	if d.HasChange("pulses_permissions") {
+		s.PulsesPermissions = d.Get("pulses_permissions").([]interface{})
 	}
 	if d.HasChange("api_keys_permissions") {
 		s.ApiKeysPermissions = d.Get("api_keys_permissions").([]interface{})

@@ -96,13 +96,23 @@ func resourceSeverity() *schema.Resource {
 				Description: "Slack Channels associated with this severity",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+
 						"id": &schema.Schema{
-							Type:     schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Slack channel ID",
 						},
+
 						"name": &schema.Schema{
-							Type:     schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Slack channel name",
 						},
 					},
 				},
@@ -116,13 +126,23 @@ func resourceSeverity() *schema.Resource {
 				Description: "Slack Aliases associated with this severity",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+
 						"id": &schema.Schema{
-							Type:     schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Slack alias ID",
 						},
+
 						"name": &schema.Schema{
-							Type:     schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Slack alias name",
 						},
 					},
 				},

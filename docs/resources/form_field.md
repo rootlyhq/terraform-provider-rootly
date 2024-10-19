@@ -54,7 +54,8 @@ resource "rootly_form_field_option" "north_america" {
 - `show_on_incident_details` (Boolean) Whether the form field is shown on the incident details panel. Value must be one of true or false
 - `shown` (List of String)
 - `slug` (String) The slug of the form field
-- `value_kind` (String) The value kind of the form field. Value must be one of `inherit`, `group`, `service`, `functionality`, `user`.
+- `value_kind` (String) The value kind of the form field. Value must be one of `inherit`, `group`, `service`, `functionality`, `user`, `catalog_entity`.
+- `value_kind_catalog_id` (String) The ID of the catalog used when value_kind is `catalog_entity`
 
 ### Read-Only
 

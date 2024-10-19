@@ -21,7 +21,11 @@ description: |-
 ### Optional
 
 - `incident_condition` (String) The trigger condition. Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
+- `selected_catalog_entity_ids` (List of String)
+- `selected_functionality_ids` (List of String)
+- `selected_group_ids` (List of String)
 - `selected_option_ids` (List of String)
+- `selected_service_ids` (List of String)
 - `selected_user_ids` (List of Number)
 - `values` (List of String)
 - `workflow_id` (String) The workflow for this condition

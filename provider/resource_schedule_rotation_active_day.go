@@ -47,13 +47,23 @@ func resourceScheduleRotationActiveDay() *schema.Resource {
 				Description: "Schedule rotation active times per day",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
+
 						"start_time": &schema.Schema{
-							Type:     schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Start time for schedule rotation active time",
 						},
+
 						"end_time": &schema.Schema{
-							Type:     schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "End time for schedule rotation active time",
 						},
 					},
 				},

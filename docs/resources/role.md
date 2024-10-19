@@ -20,6 +20,7 @@ description: |-
 
 ### Optional
 
+- `alerts_permissions` (List of String) Value must be one of `create`, `read`.
 - `api_keys_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `audits_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `billing_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
@@ -38,6 +39,7 @@ description: |-
 - `is_editable` (Boolean) Whether the role can be edited.. Value must be one of true or false
 - `playbooks_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `private_incidents_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
+- `pulses_permissions` (List of String) Value must be one of `create`, `update`, `read`.
 - `retrospective_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `roles_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `secrets_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.

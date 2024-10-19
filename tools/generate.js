@@ -87,6 +87,7 @@ const excluded = {
     "escalation_level",
     "form_set",
     "heartbeat",
+    "live_call_router",
     "shift_override",
     "alert_group",
     "schedule",

@@ -61,7 +61,55 @@ func resourceWorkflowFormFieldCondition() *schema.Resource {
 				Description:      "",
 			},
 
+			"selected_catalog_entity_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
+			},
+
+			"selected_functionality_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
+			},
+
+			"selected_group_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
+			},
+
 			"selected_option_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
+			},
+
+			"selected_service_ids": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
@@ -107,8 +155,20 @@ func resourceWorkflowFormFieldConditionCreate(ctx context.Context, d *schema.Res
 	if value, ok := d.GetOkExists("values"); ok {
 		s.Values = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("selected_catalog_entity_ids"); ok {
+		s.SelectedCatalogEntityIds = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("selected_functionality_ids"); ok {
+		s.SelectedFunctionalityIds = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("selected_group_ids"); ok {
+		s.SelectedGroupIds = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("selected_option_ids"); ok {
 		s.SelectedOptionIds = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("selected_service_ids"); ok {
+		s.SelectedServiceIds = value.([]interface{})
 	}
 	if value, ok := d.GetOkExists("selected_user_ids"); ok {
 		s.SelectedUserIds = value.([]interface{})
@@ -146,7 +206,11 @@ func resourceWorkflowFormFieldConditionRead(ctx context.Context, d *schema.Resou
 	d.Set("form_field_id", item.FormFieldId)
 	d.Set("incident_condition", item.IncidentCondition)
 	d.Set("values", item.Values)
+	d.Set("selected_catalog_entity_ids", item.SelectedCatalogEntityIds)
+	d.Set("selected_functionality_ids", item.SelectedFunctionalityIds)
+	d.Set("selected_group_ids", item.SelectedGroupIds)
 	d.Set("selected_option_ids", item.SelectedOptionIds)
+	d.Set("selected_service_ids", item.SelectedServiceIds)
 	d.Set("selected_user_ids", item.SelectedUserIds)
 
 	return nil
@@ -170,8 +234,20 @@ func resourceWorkflowFormFieldConditionUpdate(ctx context.Context, d *schema.Res
 	if d.HasChange("values") {
 		s.Values = d.Get("values").([]interface{})
 	}
+	if d.HasChange("selected_catalog_entity_ids") {
+		s.SelectedCatalogEntityIds = d.Get("selected_catalog_entity_ids").([]interface{})
+	}
+	if d.HasChange("selected_functionality_ids") {
+		s.SelectedFunctionalityIds = d.Get("selected_functionality_ids").([]interface{})
+	}
+	if d.HasChange("selected_group_ids") {
+		s.SelectedGroupIds = d.Get("selected_group_ids").([]interface{})
+	}
 	if d.HasChange("selected_option_ids") {
 		s.SelectedOptionIds = d.Get("selected_option_ids").([]interface{})
+	}
+	if d.HasChange("selected_service_ids") {
+		s.SelectedServiceIds = d.Get("selected_service_ids").([]interface{})
 	}
 	if d.HasChange("selected_user_ids") {
 		s.SelectedUserIds = d.Get("selected_user_ids").([]interface{})

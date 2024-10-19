@@ -46,7 +46,16 @@ func resourceFormField() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "The value kind of the form field. Value must be one of `inherit`, `group`, `service`, `functionality`, `user`.",
+				Description: "The value kind of the form field. Value must be one of `inherit`, `group`, `service`, `functionality`, `user`, `catalog_entity`.",
+			},
+
+			"value_kind_catalog_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The ID of the catalog used when value_kind is `catalog_entity`",
 			},
 
 			"name": &schema.Schema{
@@ -145,6 +154,9 @@ func resourceFormFieldCreate(ctx context.Context, d *schema.ResourceData, meta i
 	if value, ok := d.GetOkExists("value_kind"); ok {
 		s.ValueKind = value.(string)
 	}
+	if value, ok := d.GetOkExists("value_kind_catalog_id"); ok {
+		s.ValueKindCatalogId = value.(string)
+	}
 	if value, ok := d.GetOkExists("name"); ok {
 		s.Name = value.(string)
 	}
@@ -201,6 +213,7 @@ func resourceFormFieldRead(ctx context.Context, d *schema.ResourceData, meta int
 	d.Set("kind", item.Kind)
 	d.Set("input_kind", item.InputKind)
 	d.Set("value_kind", item.ValueKind)
+	d.Set("value_kind_catalog_id", item.ValueKindCatalogId)
 	d.Set("name", item.Name)
 	d.Set("slug", item.Slug)
 	d.Set("description", item.Description)
@@ -227,6 +240,9 @@ func resourceFormFieldUpdate(ctx context.Context, d *schema.ResourceData, meta i
 	}
 	if d.HasChange("value_kind") {
 		s.ValueKind = d.Get("value_kind").(string)
+	}
+	if d.HasChange("value_kind_catalog_id") {
+		s.ValueKindCatalogId = d.Get("value_kind_catalog_id").(string)
 	}
 	if d.HasChange("name") {
 		s.Name = d.Get("name").(string)

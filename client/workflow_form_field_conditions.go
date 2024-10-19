@@ -14,7 +14,11 @@ type WorkflowFormFieldCondition struct {
   FormFieldId string `jsonapi:"attr,form_field_id,omitempty"`
   IncidentCondition string `jsonapi:"attr,incident_condition,omitempty"`
   Values []interface{} `jsonapi:"attr,values,omitempty"`
+  SelectedCatalogEntityIds []interface{} `jsonapi:"attr,selected_catalog_entity_ids,omitempty"`
+  SelectedFunctionalityIds []interface{} `jsonapi:"attr,selected_functionality_ids,omitempty"`
+  SelectedGroupIds []interface{} `jsonapi:"attr,selected_group_ids,omitempty"`
   SelectedOptionIds []interface{} `jsonapi:"attr,selected_option_ids,omitempty"`
+  SelectedServiceIds []interface{} `jsonapi:"attr,selected_service_ids,omitempty"`
   SelectedUserIds []interface{} `jsonapi:"attr,selected_user_ids,omitempty"`
 }
 
