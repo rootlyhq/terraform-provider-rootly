@@ -55,6 +55,7 @@ func resourceRole() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				Description: "Whether the role can be deleted.. Value must be one of true or false",
+				Deprecated:  "This resource is now ignored by the API, and will be removed in the next release.",
 			},
 
 			"is_editable": &schema.Schema{
@@ -63,6 +64,7 @@ func resourceRole() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				Description: "Whether the role can be edited.. Value must be one of true or false",
+				Deprecated:  "This resource is now ignored by the API, and will be removed in the next release.",
 			},
 
 			"alerts_permissions": &schema.Schema{
@@ -384,12 +386,6 @@ func resourceRoleCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	if value, ok := d.GetOkExists("incident_permission_set_id"); ok {
 		s.IncidentPermissionSetId = value.(string)
 	}
-	if value, ok := d.GetOkExists("is_deletable"); ok {
-		s.IsDeletable = tools.Bool(value.(bool))
-	}
-	if value, ok := d.GetOkExists("is_editable"); ok {
-		s.IsEditable = tools.Bool(value.(bool))
-	}
 	if value, ok := d.GetOkExists("alerts_permissions"); ok {
 		s.AlertsPermissions = value.([]interface{})
 	}
@@ -497,8 +493,6 @@ func resourceRoleRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	d.Set("name", item.Name)
 	d.Set("slug", item.Slug)
 	d.Set("incident_permission_set_id", item.IncidentPermissionSetId)
-	d.Set("is_deletable", item.IsDeletable)
-	d.Set("is_editable", item.IsEditable)
 	d.Set("alerts_permissions", item.AlertsPermissions)
 	d.Set("pulses_permissions", item.PulsesPermissions)
 	d.Set("api_keys_permissions", item.ApiKeysPermissions)
@@ -542,12 +536,6 @@ func resourceRoleUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 	}
 	if d.HasChange("incident_permission_set_id") {
 		s.IncidentPermissionSetId = d.Get("incident_permission_set_id").(string)
-	}
-	if d.HasChange("is_deletable") {
-		s.IsDeletable = tools.Bool(d.Get("is_deletable").(bool))
-	}
-	if d.HasChange("is_editable") {
-		s.IsEditable = tools.Bool(d.Get("is_editable").(bool))
 	}
 	if d.HasChange("alerts_permissions") {
 		s.AlertsPermissions = d.Get("alerts_permissions").([]interface{})

@@ -13,8 +13,6 @@ type Role struct {
 	Name string `jsonapi:"attr,name,omitempty"`
   Slug string `jsonapi:"attr,slug,omitempty"`
   IncidentPermissionSetId string `jsonapi:"attr,incident_permission_set_id,omitempty"`
-  IsDeletable *bool `jsonapi:"attr,is_deletable,omitempty"`
-  IsEditable *bool `jsonapi:"attr,is_editable,omitempty"`
   AlertsPermissions []interface{} `jsonapi:"attr,alerts_permissions,omitempty"`
   PulsesPermissions []interface{} `jsonapi:"attr,pulses_permissions,omitempty"`
   ApiKeysPermissions []interface{} `jsonapi:"attr,api_keys_permissions,omitempty"`
