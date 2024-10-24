@@ -6,6 +6,9 @@ import (
 	"context"
 	"fmt"
 
+	"encoding/json"
+	"reflect"
+
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -73,6 +76,20 @@ func resourceWorkflowTaskAddActionItem() *schema.Resource {
 								"add_action_item",
 							}, false),
 						},
+						"attribute_to_query_by": &schema.Schema{
+							Description: "Attribute of the Incident to match against. Value must be one of `jira_issue_id`.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     nil,
+							ValidateFunc: validation.StringInSlice([]string{
+								"jira_issue_id",
+							}, false),
+						},
+						"query_value": &schema.Schema{
+							Description: "Value that attribute_to_query_by to uses to match against",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 						"incident_role_id": &schema.Schema{
 							Description: "The role id this action item is associated with",
 							Type:        schema.TypeString,
@@ -128,6 +145,25 @@ func resourceWorkflowTaskAddActionItem() *schema.Resource {
 							Description: "Value must be one of true or false",
 							Type:        schema.TypeBool,
 							Optional:    true,
+						},
+						"custom_fields_mapping": &schema.Schema{
+							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON",
+							Type:        schema.TypeString,
+							Optional:    true,
+							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {
+								var oldJSONAsInterface, newJSONAsInterface interface{}
+
+								if err := json.Unmarshal([]byte(old), &oldJSONAsInterface); err != nil {
+									return false
+								}
+
+								if err := json.Unmarshal([]byte(new), &newJSONAsInterface); err != nil {
+									return false
+								}
+
+								return reflect.DeepEqual(oldJSONAsInterface, newJSONAsInterface)
+							},
+							Default: "{}",
 						},
 						"post_to_slack_channels": &schema.Schema{
 							Description: "",

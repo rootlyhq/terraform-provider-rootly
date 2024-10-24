@@ -298,6 +298,11 @@ const (
 	ActionItemTriggerParamsTriggerTypeActionItem ActionItemTriggerParamsTriggerType = "action_item"
 )
 
+// Defines values for AddActionItemTaskParamsAttributeToQueryBy.
+const (
+	AddActionItemTaskParamsAttributeToQueryByJiraIssueId AddActionItemTaskParamsAttributeToQueryBy = "jira_issue_id"
+)
+
 // Defines values for AddActionItemTaskParamsPriority.
 const (
 	AddActionItemTaskParamsPriorityHigh   AddActionItemTaskParamsPriority = "high"
@@ -4787,26 +4792,26 @@ const (
 
 // Defines values for UpdateIncidentTaskParamsAttributeToQueryBy.
 const (
-	AirtableRecordId     UpdateIncidentTaskParamsAttributeToQueryBy = "airtable_record_id"
-	AsanaTaskId          UpdateIncidentTaskParamsAttributeToQueryBy = "asana_task_id"
-	ClickupTaskId        UpdateIncidentTaskParamsAttributeToQueryBy = "clickup_task_id"
-	FreshserviceTaskId   UpdateIncidentTaskParamsAttributeToQueryBy = "freshservice_task_id"
-	FreshserviceTicketId UpdateIncidentTaskParamsAttributeToQueryBy = "freshservice_ticket_id"
-	GithubIssueId        UpdateIncidentTaskParamsAttributeToQueryBy = "github_issue_id"
-	GitlabIssueId        UpdateIncidentTaskParamsAttributeToQueryBy = "gitlab_issue_id"
-	Id                   UpdateIncidentTaskParamsAttributeToQueryBy = "id"
-	JiraIssueId          UpdateIncidentTaskParamsAttributeToQueryBy = "jira_issue_id"
-	LinearIssueId        UpdateIncidentTaskParamsAttributeToQueryBy = "linear_issue_id"
-	MotionTaskId         UpdateIncidentTaskParamsAttributeToQueryBy = "motion_task_id"
-	OpsgenieIncidentId   UpdateIncidentTaskParamsAttributeToQueryBy = "opsgenie_incident_id"
-	PagerdutyIncidentId  UpdateIncidentTaskParamsAttributeToQueryBy = "pagerduty_incident_id"
-	SequentialId         UpdateIncidentTaskParamsAttributeToQueryBy = "sequential_id"
-	ShortcutStoryId      UpdateIncidentTaskParamsAttributeToQueryBy = "shortcut_story_id"
-	ShortcutTaskId       UpdateIncidentTaskParamsAttributeToQueryBy = "shortcut_task_id"
-	Slug                 UpdateIncidentTaskParamsAttributeToQueryBy = "slug"
-	TrelloCardId         UpdateIncidentTaskParamsAttributeToQueryBy = "trello_card_id"
-	VictorOpsIncidentId  UpdateIncidentTaskParamsAttributeToQueryBy = "victor_ops_incident_id"
-	ZendeskTicketId      UpdateIncidentTaskParamsAttributeToQueryBy = "zendesk_ticket_id"
+	UpdateIncidentTaskParamsAttributeToQueryByAirtableRecordId     UpdateIncidentTaskParamsAttributeToQueryBy = "airtable_record_id"
+	UpdateIncidentTaskParamsAttributeToQueryByAsanaTaskId          UpdateIncidentTaskParamsAttributeToQueryBy = "asana_task_id"
+	UpdateIncidentTaskParamsAttributeToQueryByClickupTaskId        UpdateIncidentTaskParamsAttributeToQueryBy = "clickup_task_id"
+	UpdateIncidentTaskParamsAttributeToQueryByFreshserviceTaskId   UpdateIncidentTaskParamsAttributeToQueryBy = "freshservice_task_id"
+	UpdateIncidentTaskParamsAttributeToQueryByFreshserviceTicketId UpdateIncidentTaskParamsAttributeToQueryBy = "freshservice_ticket_id"
+	UpdateIncidentTaskParamsAttributeToQueryByGithubIssueId        UpdateIncidentTaskParamsAttributeToQueryBy = "github_issue_id"
+	UpdateIncidentTaskParamsAttributeToQueryByGitlabIssueId        UpdateIncidentTaskParamsAttributeToQueryBy = "gitlab_issue_id"
+	UpdateIncidentTaskParamsAttributeToQueryById                   UpdateIncidentTaskParamsAttributeToQueryBy = "id"
+	UpdateIncidentTaskParamsAttributeToQueryByJiraIssueId          UpdateIncidentTaskParamsAttributeToQueryBy = "jira_issue_id"
+	UpdateIncidentTaskParamsAttributeToQueryByLinearIssueId        UpdateIncidentTaskParamsAttributeToQueryBy = "linear_issue_id"
+	UpdateIncidentTaskParamsAttributeToQueryByMotionTaskId         UpdateIncidentTaskParamsAttributeToQueryBy = "motion_task_id"
+	UpdateIncidentTaskParamsAttributeToQueryByOpsgenieIncidentId   UpdateIncidentTaskParamsAttributeToQueryBy = "opsgenie_incident_id"
+	UpdateIncidentTaskParamsAttributeToQueryByPagerdutyIncidentId  UpdateIncidentTaskParamsAttributeToQueryBy = "pagerduty_incident_id"
+	UpdateIncidentTaskParamsAttributeToQueryBySequentialId         UpdateIncidentTaskParamsAttributeToQueryBy = "sequential_id"
+	UpdateIncidentTaskParamsAttributeToQueryByShortcutStoryId      UpdateIncidentTaskParamsAttributeToQueryBy = "shortcut_story_id"
+	UpdateIncidentTaskParamsAttributeToQueryByShortcutTaskId       UpdateIncidentTaskParamsAttributeToQueryBy = "shortcut_task_id"
+	UpdateIncidentTaskParamsAttributeToQueryBySlug                 UpdateIncidentTaskParamsAttributeToQueryBy = "slug"
+	UpdateIncidentTaskParamsAttributeToQueryByTrelloCardId         UpdateIncidentTaskParamsAttributeToQueryBy = "trello_card_id"
+	UpdateIncidentTaskParamsAttributeToQueryByVictorOpsIncidentId  UpdateIncidentTaskParamsAttributeToQueryBy = "victor_ops_incident_id"
+	UpdateIncidentTaskParamsAttributeToQueryByZendeskTicketId      UpdateIncidentTaskParamsAttributeToQueryBy = "zendesk_ticket_id"
 )
 
 // Defines values for UpdateIncidentTaskParamsTaskType.
@@ -5892,6 +5897,12 @@ type AddActionItemTaskParams struct {
 	// AssignedToUserId [DEPRECATED] Use assigned_to_user attribute instead. The user id this action item is assigned to
 	AssignedToUserId *string `json:"assigned_to_user_id,omitempty"`
 
+	// AttributeToQueryBy Attribute of the Incident to match against
+	AttributeToQueryBy *AddActionItemTaskParamsAttributeToQueryBy `json:"attribute_to_query_by"`
+
+	// CustomFieldsMapping Custom field mappings. Can contain liquid markup and need to be valid JSON
+	CustomFieldsMapping *string `json:"custom_fields_mapping"`
+
 	// Description The action item description
 	Description *string `json:"description,omitempty"`
 
@@ -5909,6 +5920,9 @@ type AddActionItemTaskParams struct {
 	// Priority The action item priority
 	Priority AddActionItemTaskParamsPriority `json:"priority"`
 
+	// QueryValue Value that attribute_to_query_by to uses to match against
+	QueryValue *string `json:"query_value"`
+
 	// Status The action item status
 	Status AddActionItemTaskParamsStatus `json:"status"`
 
@@ -5916,6 +5930,9 @@ type AddActionItemTaskParams struct {
 	Summary  string                           `json:"summary"`
 	TaskType *AddActionItemTaskParamsTaskType `json:"task_type,omitempty"`
 }
+
+// AddActionItemTaskParamsAttributeToQueryBy Attribute of the Incident to match against
+type AddActionItemTaskParamsAttributeToQueryBy string
 
 // AddActionItemTaskParamsPriority The action item priority
 type AddActionItemTaskParamsPriority string

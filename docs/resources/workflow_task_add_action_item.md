@@ -43,11 +43,14 @@ Optional:
 
 - `assigned_to_user` (Map of String) Map must contain two fields, `id` and `name`.  The user this action item is assigned to
 - `assigned_to_user_id` (String) [DEPRECATED] Use assigned_to_user attribute instead. The user id this action item is assigned to
+- `attribute_to_query_by` (String) Attribute of the Incident to match against. Value must be one of `jira_issue_id`.
+- `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON
 - `description` (String) The action item description
 - `incident_role_id` (String) The role id this action item is associated with
 - `kind` (String) The action item kind
 - `post_to_incident_timeline` (Boolean) Value must be one of true or false
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
+- `query_value` (String) Value that attribute_to_query_by to uses to match against
 - `task_type` (String)
 
 <a id="nestedblock--task_params--post_to_slack_channels"></a>
