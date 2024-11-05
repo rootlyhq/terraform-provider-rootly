@@ -81,6 +81,60 @@ func resourceFunctionality() *schema.Resource {
 				Description: "The hex color of the functionality",
 			},
 
+			"backstage_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The Backstage entity id associated to this functionality. eg: :namespace/:kind/:entity_name",
+			},
+
+			"pagerduty_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The PagerDuty service id associated to this functionality",
+			},
+
+			"opsgenie_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The Opsgenie service id associated to this functionality",
+			},
+
+			"opsgenie_team_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The Opsgenie team id associated to this functionality",
+			},
+
+			"cortex_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The Cortex group id associated to this functionality",
+			},
+
+			"service_now_ci_sys_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The Service Now CI sys id associated to this functionality",
+			},
+
 			"position": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    true,
@@ -226,6 +280,24 @@ func resourceFunctionalityCreate(ctx context.Context, d *schema.ResourceData, me
 	if value, ok := d.GetOkExists("color"); ok {
 		s.Color = value.(string)
 	}
+	if value, ok := d.GetOkExists("backstage_id"); ok {
+		s.BackstageId = value.(string)
+	}
+	if value, ok := d.GetOkExists("pagerduty_id"); ok {
+		s.PagerdutyId = value.(string)
+	}
+	if value, ok := d.GetOkExists("opsgenie_id"); ok {
+		s.OpsgenieId = value.(string)
+	}
+	if value, ok := d.GetOkExists("opsgenie_team_id"); ok {
+		s.OpsgenieTeamId = value.(string)
+	}
+	if value, ok := d.GetOkExists("cortex_id"); ok {
+		s.CortexId = value.(string)
+	}
+	if value, ok := d.GetOkExists("service_now_ci_sys_id"); ok {
+		s.ServiceNowCiSysId = value.(string)
+	}
 	if value, ok := d.GetOkExists("position"); ok {
 		s.Position = value.(int)
 	}
@@ -282,6 +354,12 @@ func resourceFunctionalityRead(ctx context.Context, d *schema.ResourceData, meta
 	d.Set("public_description", item.PublicDescription)
 	d.Set("notify_emails", item.NotifyEmails)
 	d.Set("color", item.Color)
+	d.Set("backstage_id", item.BackstageId)
+	d.Set("pagerduty_id", item.PagerdutyId)
+	d.Set("opsgenie_id", item.OpsgenieId)
+	d.Set("opsgenie_team_id", item.OpsgenieTeamId)
+	d.Set("cortex_id", item.CortexId)
+	d.Set("service_now_ci_sys_id", item.ServiceNowCiSysId)
 	d.Set("position", item.Position)
 	d.Set("environment_ids", item.EnvironmentIds)
 	d.Set("service_ids", item.ServiceIds)
@@ -316,6 +394,24 @@ func resourceFunctionalityUpdate(ctx context.Context, d *schema.ResourceData, me
 	}
 	if d.HasChange("color") {
 		s.Color = d.Get("color").(string)
+	}
+	if d.HasChange("backstage_id") {
+		s.BackstageId = d.Get("backstage_id").(string)
+	}
+	if d.HasChange("pagerduty_id") {
+		s.PagerdutyId = d.Get("pagerduty_id").(string)
+	}
+	if d.HasChange("opsgenie_id") {
+		s.OpsgenieId = d.Get("opsgenie_id").(string)
+	}
+	if d.HasChange("opsgenie_team_id") {
+		s.OpsgenieTeamId = d.Get("opsgenie_team_id").(string)
+	}
+	if d.HasChange("cortex_id") {
+		s.CortexId = d.Get("cortex_id").(string)
+	}
+	if d.HasChange("service_now_ci_sys_id") {
+		s.ServiceNowCiSysId = d.Get("service_now_ci_sys_id").(string)
 	}
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)

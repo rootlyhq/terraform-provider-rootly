@@ -71,7 +71,7 @@ func (c *Client) CreateFormField(d *FormField) (*FormField, error) {
 }
 
 func (c *Client) GetFormField(id string) (*FormField, error) {
-	req, err := rootlygo.NewGetFormFieldRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetFormFieldRequest(c.Rootly.Server, id, nil)
 	if err != nil {
 		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}

@@ -59,7 +59,7 @@ func (c *Client) CreateDashboard(dashboard *Dashboard) (*Dashboard, error) {
 }
 
 func (c *Client) GetDashboard(id string) (*Dashboard, error) {
-	req, err := rootlygo.NewGetDashboardRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetDashboardRequest(c.Rootly.Server, id, nil)
 	if err != nil {
 		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}

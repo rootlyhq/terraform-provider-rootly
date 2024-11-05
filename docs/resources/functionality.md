@@ -58,15 +58,21 @@ resource "rootly_functionality" "logging_in" {
 
 ### Optional
 
+- `backstage_id` (String) The Backstage entity id associated to this functionality. eg: :namespace/:kind/:entity_name
 - `color` (String) The hex color of the functionality
+- `cortex_id` (String) The Cortex group id associated to this functionality
 - `description` (String) The description of the functionality
 - `environment_ids` (List of String) Environments associated with this functionality
 - `notify_emails` (List of String) Emails attached to the functionality
+- `opsgenie_id` (String) The Opsgenie service id associated to this functionality
+- `opsgenie_team_id` (String) The Opsgenie team id associated to this functionality
 - `owners_group_ids` (List of String) Owner Teams associated with this functionality
 - `owners_user_ids` (List of Number) Owner Users associated with this functionality
+- `pagerduty_id` (String) The PagerDuty service id associated to this functionality
 - `position` (Number) Position of the functionality
 - `public_description` (String) The public description of the functionality
 - `service_ids` (List of String) Services associated with this functionality
+- `service_now_ci_sys_id` (String) The Service Now CI sys id associated to this functionality
 - `slack_aliases` (Block List) Slack Aliases associated with this functionality (see [below for nested schema](#nestedblock--slack_aliases))
 - `slack_channels` (Block List) Slack Channels associated with this functionality (see [below for nested schema](#nestedblock--slack_channels))
 - `slug` (String) The slug of the functionality

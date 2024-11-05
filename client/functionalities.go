@@ -18,6 +18,12 @@ type Functionality struct {
   PublicDescription string `jsonapi:"attr,public_description,omitempty"`
   NotifyEmails []interface{} `jsonapi:"attr,notify_emails,omitempty"`
   Color string `jsonapi:"attr,color,omitempty"`
+  BackstageId string `jsonapi:"attr,backstage_id,omitempty"`
+  PagerdutyId string `jsonapi:"attr,pagerduty_id,omitempty"`
+  OpsgenieId string `jsonapi:"attr,opsgenie_id,omitempty"`
+  OpsgenieTeamId string `jsonapi:"attr,opsgenie_team_id,omitempty"`
+  CortexId string `jsonapi:"attr,cortex_id,omitempty"`
+  ServiceNowCiSysId string `jsonapi:"attr,service_now_ci_sys_id,omitempty"`
   Position int `jsonapi:"attr,position,omitempty"`
   EnvironmentIds []interface{} `jsonapi:"attr,environment_ids,omitempty"`
   ServiceIds []interface{} `jsonapi:"attr,service_ids,omitempty"`

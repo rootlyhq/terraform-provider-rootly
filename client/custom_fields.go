@@ -64,7 +64,7 @@ func (c *Client) CreateCustomField(d *CustomField) (*CustomField, error) {
 }
 
 func (c *Client) GetCustomField(id string) (*CustomField, error) {
-	req, err := rootlygo.NewGetCustomFieldRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetCustomFieldRequest(c.Rootly.Server, id, nil)
 	if err != nil {
 		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}

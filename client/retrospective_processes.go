@@ -60,7 +60,7 @@ func (c *Client) CreateRetrospectiveProcess(d *RetrospectiveProcess) (*Retrospec
 }
 
 func (c *Client) GetRetrospectiveProcess(id string) (*RetrospectiveProcess, error) {
-	req, err := rootlygo.NewGetRetrospectiveProcessRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetRetrospectiveProcessRequest(c.Rootly.Server, id, nil)
 	if err != nil {
 		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}

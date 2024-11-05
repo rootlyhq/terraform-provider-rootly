@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
 
 func resourceSchedule() *schema.Resource {
@@ -40,6 +41,23 @@ func resourceSchedule() *schema.Resource {
 				ForceNew:    false,
 				Description: "The description of the schedule",
 			},
+
+			"all_time_coverage": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "24/7 coverage of the schedule. Value must be one of true or false",
+			},
+
+			"slack_user_group": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Synced slack group of the schedule",
+			},
 		},
 	}
 }
@@ -56,6 +74,12 @@ func resourceScheduleCreate(ctx context.Context, d *schema.ResourceData, meta in
 	}
 	if value, ok := d.GetOkExists("description"); ok {
 		s.Description = value.(string)
+	}
+	if value, ok := d.GetOkExists("all_time_coverage"); ok {
+		s.AllTimeCoverage = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("slack_user_group"); ok {
+		s.SlackUserGroup = value.(string)
 	}
 
 	res, err := c.CreateSchedule(s)
@@ -88,6 +112,8 @@ func resourceScheduleRead(ctx context.Context, d *schema.ResourceData, meta inte
 
 	d.Set("name", item.Name)
 	d.Set("description", item.Description)
+	d.Set("all_time_coverage", item.AllTimeCoverage)
+	d.Set("slack_user_group", item.SlackUserGroup)
 
 	return nil
 }
@@ -103,6 +129,12 @@ func resourceScheduleUpdate(ctx context.Context, d *schema.ResourceData, meta in
 	}
 	if d.HasChange("description") {
 		s.Description = d.Get("description").(string)
+	}
+	if d.HasChange("all_time_coverage") {
+		s.AllTimeCoverage = tools.Bool(d.Get("all_time_coverage").(bool))
+	}
+	if d.HasChange("slack_user_group") {
+		s.SlackUserGroup = d.Get("slack_user_group").(string)
 	}
 
 	_, err := c.UpdateSchedule(d.Id(), s)

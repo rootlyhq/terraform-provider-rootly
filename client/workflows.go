@@ -80,7 +80,7 @@ func (c *Client) CreateWorkflow(d *Workflow) (*Workflow, error) {
 }
 
 func (c *Client) GetWorkflow(id string) (*Workflow, error) {
-	req, err := rootlygo.NewGetWorkflowRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetWorkflowRequest(c.Rootly.Server, id, nil)
 	if err != nil {
 		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}

@@ -3846,6 +3846,16 @@ const (
 	SendEmail SendEmailTaskParamsTaskType = "send_email"
 )
 
+// Defines values for SendMicrosoftTeamsBlocksTaskParamsTaskType.
+const (
+	SendMicrosoftTeamsBlocks SendMicrosoftTeamsBlocksTaskParamsTaskType = "send_microsoft_teams_blocks"
+)
+
+// Defines values for SendMicrosoftTeamsMessageTaskParamsTaskType.
+const (
+	SendMicrosoftTeamsMessage SendMicrosoftTeamsMessageTaskParamsTaskType = "send_microsoft_teams_message"
+)
+
 // Defines values for SendSlackBlocksTaskParamsTaskType.
 const (
 	SendSlackBlocks SendSlackBlocksTaskParamsTaskType = "send_slack_blocks"
@@ -4364,7 +4374,7 @@ const (
 
 // Defines values for UpdateEscalationPathDataType.
 const (
-	EscalationPaths UpdateEscalationPathDataType = "escalation_paths"
+	UpdateEscalationPathDataTypeEscalationPaths UpdateEscalationPathDataType = "escalation_paths"
 )
 
 // Defines values for UpdateEscalationPolicyDataType.
@@ -4504,7 +4514,7 @@ const (
 
 // Defines values for UpdateFunctionalityDataType.
 const (
-	Functionalities UpdateFunctionalityDataType = "functionalities"
+	UpdateFunctionalityDataTypeFunctionalities UpdateFunctionalityDataType = "functionalities"
 )
 
 // Defines values for UpdateGithubIssueTaskParamsTaskType.
@@ -4821,7 +4831,7 @@ const (
 
 // Defines values for UpdateIncidentTypeDataType.
 const (
-	IncidentTypes UpdateIncidentTypeDataType = "incident_types"
+	UpdateIncidentTypeDataTypeIncidentTypes UpdateIncidentTypeDataType = "incident_types"
 )
 
 // Defines values for UpdateJiraIssueTaskParamsTaskType.
@@ -5647,11 +5657,12 @@ const (
 
 // Defines values for WorkflowRunStatus.
 const (
-	WorkflowRunStatusCanceled  WorkflowRunStatus = "canceled"
-	WorkflowRunStatusCompleted WorkflowRunStatus = "completed"
-	WorkflowRunStatusFailed    WorkflowRunStatus = "failed"
-	WorkflowRunStatusQueued    WorkflowRunStatus = "queued"
-	WorkflowRunStatusStarted   WorkflowRunStatus = "started"
+	WorkflowRunStatusCanceled            WorkflowRunStatus = "canceled"
+	WorkflowRunStatusCompleted           WorkflowRunStatus = "completed"
+	WorkflowRunStatusCompletedWithErrors WorkflowRunStatus = "completed_with_errors"
+	WorkflowRunStatusFailed              WorkflowRunStatus = "failed"
+	WorkflowRunStatusQueued              WorkflowRunStatus = "queued"
+	WorkflowRunStatusStarted             WorkflowRunStatus = "started"
 )
 
 // Defines values for WorkflowRunTriggeredBy.
@@ -5680,6 +5691,218 @@ const (
 	WorkflowTaskResponseDataTypeWorkflowTasks WorkflowTaskResponseDataType = "workflow_tasks"
 )
 
+// Defines values for ListCatalogEntityPropertiesParamsInclude.
+const (
+	ListCatalogEntityPropertiesParamsIncludeCatalogEntity ListCatalogEntityPropertiesParamsInclude = "catalog_entity"
+	ListCatalogEntityPropertiesParamsIncludeCatalogField  ListCatalogEntityPropertiesParamsInclude = "catalog_field"
+)
+
+// Defines values for ListCatalogEntityPropertiesParamsSort.
+const (
+	ListCatalogEntityPropertiesParamsSortCreatedAt      ListCatalogEntityPropertiesParamsSort = "created_at"
+	ListCatalogEntityPropertiesParamsSortMinusCreatedAt ListCatalogEntityPropertiesParamsSort = "-created_at"
+	ListCatalogEntityPropertiesParamsSortMinusUpdatedAt ListCatalogEntityPropertiesParamsSort = "-updated_at"
+	ListCatalogEntityPropertiesParamsSortUpdatedAt      ListCatalogEntityPropertiesParamsSort = "updated_at"
+)
+
+// Defines values for GetCatalogEntityParamsInclude.
+const (
+	GetCatalogEntityParamsIncludeCatalog    GetCatalogEntityParamsInclude = "catalog"
+	GetCatalogEntityParamsIncludeProperties GetCatalogEntityParamsInclude = "properties"
+)
+
+// Defines values for GetCatalogEntityPropertyParamsInclude.
+const (
+	GetCatalogEntityPropertyParamsIncludeCatalogEntity GetCatalogEntityPropertyParamsInclude = "catalog_entity"
+	GetCatalogEntityPropertyParamsIncludeCatalogField  GetCatalogEntityPropertyParamsInclude = "catalog_field"
+)
+
+// Defines values for GetCatalogFieldParamsInclude.
+const (
+	GetCatalogFieldParamsIncludeCatalog GetCatalogFieldParamsInclude = "catalog"
+)
+
+// Defines values for ListCatalogsParamsInclude.
+const (
+	Entities ListCatalogsParamsInclude = "entities"
+	Fields   ListCatalogsParamsInclude = "fields"
+)
+
+// Defines values for ListCatalogsParamsSort.
+const (
+	ListCatalogsParamsSortCreatedAt      ListCatalogsParamsSort = "created_at"
+	ListCatalogsParamsSortMinusCreatedAt ListCatalogsParamsSort = "-created_at"
+	ListCatalogsParamsSortMinusPosition  ListCatalogsParamsSort = "-position"
+	ListCatalogsParamsSortMinusUpdatedAt ListCatalogsParamsSort = "-updated_at"
+	ListCatalogsParamsSortPosition       ListCatalogsParamsSort = "position"
+	ListCatalogsParamsSortUpdatedAt      ListCatalogsParamsSort = "updated_at"
+)
+
+// Defines values for ListCatalogEntitiesParamsInclude.
+const (
+	ListCatalogEntitiesParamsIncludeCatalog    ListCatalogEntitiesParamsInclude = "catalog"
+	ListCatalogEntitiesParamsIncludeProperties ListCatalogEntitiesParamsInclude = "properties"
+)
+
+// Defines values for ListCatalogEntitiesParamsSort.
+const (
+	ListCatalogEntitiesParamsSortCreatedAt      ListCatalogEntitiesParamsSort = "created_at"
+	ListCatalogEntitiesParamsSortMinusCreatedAt ListCatalogEntitiesParamsSort = "-created_at"
+	ListCatalogEntitiesParamsSortMinusPosition  ListCatalogEntitiesParamsSort = "-position"
+	ListCatalogEntitiesParamsSortMinusUpdatedAt ListCatalogEntitiesParamsSort = "-updated_at"
+	ListCatalogEntitiesParamsSortPosition       ListCatalogEntitiesParamsSort = "position"
+	ListCatalogEntitiesParamsSortUpdatedAt      ListCatalogEntitiesParamsSort = "updated_at"
+)
+
+// Defines values for ListCatalogFieldsParamsInclude.
+const (
+	ListCatalogFieldsParamsIncludeCatalog ListCatalogFieldsParamsInclude = "catalog"
+)
+
+// Defines values for ListCatalogFieldsParamsSort.
+const (
+	ListCatalogFieldsParamsSortCreatedAt      ListCatalogFieldsParamsSort = "created_at"
+	ListCatalogFieldsParamsSortMinusCreatedAt ListCatalogFieldsParamsSort = "-created_at"
+	ListCatalogFieldsParamsSortMinusPosition  ListCatalogFieldsParamsSort = "-position"
+	ListCatalogFieldsParamsSortMinusUpdatedAt ListCatalogFieldsParamsSort = "-updated_at"
+	ListCatalogFieldsParamsSortPosition       ListCatalogFieldsParamsSort = "position"
+	ListCatalogFieldsParamsSortUpdatedAt      ListCatalogFieldsParamsSort = "updated_at"
+)
+
+// Defines values for ListCustomFieldsParamsInclude.
+const (
+	ListCustomFieldsParamsIncludeOptions ListCustomFieldsParamsInclude = "options"
+)
+
+// Defines values for ListCustomFieldsParamsSort.
+const (
+	ListCustomFieldsParamsSortCreatedAt      ListCustomFieldsParamsSort = "created_at"
+	ListCustomFieldsParamsSortMinusCreatedAt ListCustomFieldsParamsSort = "-created_at"
+	ListCustomFieldsParamsSortMinusPosition  ListCustomFieldsParamsSort = "-position"
+	ListCustomFieldsParamsSortMinusUpdatedAt ListCustomFieldsParamsSort = "-updated_at"
+	ListCustomFieldsParamsSortPosition       ListCustomFieldsParamsSort = "position"
+	ListCustomFieldsParamsSortUpdatedAt      ListCustomFieldsParamsSort = "updated_at"
+)
+
+// Defines values for GetCustomFieldParamsInclude.
+const (
+	GetCustomFieldParamsIncludeOptions GetCustomFieldParamsInclude = "options"
+)
+
+// Defines values for ListDashboardsParamsInclude.
+const (
+	ListDashboardsParamsIncludePanels ListDashboardsParamsInclude = "panels"
+)
+
+// Defines values for GetDashboardParamsInclude.
+const (
+	GetDashboardParamsIncludePanels GetDashboardParamsInclude = "panels"
+)
+
+// Defines values for GetEscalationPathParamsInclude.
+const (
+	GetEscalationPathParamsIncludeEscalationPolicyLevels GetEscalationPathParamsInclude = "escalation_policy_levels"
+)
+
+// Defines values for ListEscalationPoliciesParamsInclude.
+const (
+	ListEscalationPoliciesParamsIncludeEscalationPaths        ListEscalationPoliciesParamsInclude = "escalation_paths"
+	ListEscalationPoliciesParamsIncludeEscalationPolicyLevels ListEscalationPoliciesParamsInclude = "escalation_policy_levels"
+	ListEscalationPoliciesParamsIncludeGroups                 ListEscalationPoliciesParamsInclude = "groups"
+	ListEscalationPoliciesParamsIncludeServices               ListEscalationPoliciesParamsInclude = "services"
+)
+
+// Defines values for ListEscalationPathsParamsInclude.
+const (
+	ListEscalationPathsParamsIncludeEscalationPolicyLevels ListEscalationPathsParamsInclude = "escalation_policy_levels"
+)
+
+// Defines values for GetEscalationPolicyParamsInclude.
+const (
+	GetEscalationPolicyParamsIncludeEscalationPaths        GetEscalationPolicyParamsInclude = "escalation_paths"
+	GetEscalationPolicyParamsIncludeEscalationPolicyLevels GetEscalationPolicyParamsInclude = "escalation_policy_levels"
+	GetEscalationPolicyParamsIncludeGroups                 GetEscalationPolicyParamsInclude = "groups"
+	GetEscalationPolicyParamsIncludeServices               GetEscalationPolicyParamsInclude = "services"
+)
+
+// Defines values for ListFormFieldsParamsInclude.
+const (
+	ListFormFieldsParamsIncludeOptions   ListFormFieldsParamsInclude = "options"
+	ListFormFieldsParamsIncludePositions ListFormFieldsParamsInclude = "positions"
+)
+
+// Defines values for GetFormFieldParamsInclude.
+const (
+	GetFormFieldParamsIncludeOptions   GetFormFieldParamsInclude = "options"
+	GetFormFieldParamsIncludePositions GetFormFieldParamsInclude = "positions"
+)
+
+// Defines values for GetIncidentSubStatusParamsInclude.
+const (
+	GetIncidentSubStatusParamsIncludeAssignedByUser GetIncidentSubStatusParamsInclude = "assigned_by_user"
+	GetIncidentSubStatusParamsIncludeSubStatus      GetIncidentSubStatusParamsInclude = "sub_status"
+)
+
+// Defines values for ListIncidentsParamsSort.
+const (
+	ListIncidentsParamsSortCreatedAt      ListIncidentsParamsSort = "created_at"
+	ListIncidentsParamsSortMinusCreatedAt ListIncidentsParamsSort = "-created_at"
+	ListIncidentsParamsSortMinusUpdatedAt ListIncidentsParamsSort = "-updated_at"
+	ListIncidentsParamsSortUpdatedAt      ListIncidentsParamsSort = "updated_at"
+)
+
+// Defines values for ListIncidentsParamsInclude.
+const (
+	ListIncidentsParamsIncludeActionItems             ListIncidentsParamsInclude = "action_items"
+	ListIncidentsParamsIncludeCauses                  ListIncidentsParamsInclude = "causes"
+	ListIncidentsParamsIncludeEnvironments            ListIncidentsParamsInclude = "environments"
+	ListIncidentsParamsIncludeEvents                  ListIncidentsParamsInclude = "events"
+	ListIncidentsParamsIncludeFeedbacks               ListIncidentsParamsInclude = "feedbacks"
+	ListIncidentsParamsIncludeFormFieldSelections     ListIncidentsParamsInclude = "form_field_selections"
+	ListIncidentsParamsIncludeFunctionalities         ListIncidentsParamsInclude = "functionalities"
+	ListIncidentsParamsIncludeGroups                  ListIncidentsParamsInclude = "groups"
+	ListIncidentsParamsIncludeIncidentPostMortem      ListIncidentsParamsInclude = "incident_post_mortem"
+	ListIncidentsParamsIncludeIncidentRoleAssignments ListIncidentsParamsInclude = "incident_role_assignments"
+	ListIncidentsParamsIncludeIncidentTypes           ListIncidentsParamsInclude = "incident_types"
+	ListIncidentsParamsIncludeServices                ListIncidentsParamsInclude = "services"
+	ListIncidentsParamsIncludeSubStatuses             ListIncidentsParamsInclude = "sub_statuses"
+	ListIncidentsParamsIncludeSubscribers             ListIncidentsParamsInclude = "subscribers"
+)
+
+// Defines values for GetIncidentParamsInclude.
+const (
+	GetIncidentParamsIncludeActionItems             GetIncidentParamsInclude = "action_items"
+	GetIncidentParamsIncludeCauses                  GetIncidentParamsInclude = "causes"
+	GetIncidentParamsIncludeEnvironments            GetIncidentParamsInclude = "environments"
+	GetIncidentParamsIncludeEvents                  GetIncidentParamsInclude = "events"
+	GetIncidentParamsIncludeFeedbacks               GetIncidentParamsInclude = "feedbacks"
+	GetIncidentParamsIncludeFormFieldSelections     GetIncidentParamsInclude = "form_field_selections"
+	GetIncidentParamsIncludeFunctionalities         GetIncidentParamsInclude = "functionalities"
+	GetIncidentParamsIncludeGroups                  GetIncidentParamsInclude = "groups"
+	GetIncidentParamsIncludeIncidentPostMortem      GetIncidentParamsInclude = "incident_post_mortem"
+	GetIncidentParamsIncludeIncidentRoleAssignments GetIncidentParamsInclude = "incident_role_assignments"
+	GetIncidentParamsIncludeIncidentTypes           GetIncidentParamsInclude = "incident_types"
+	GetIncidentParamsIncludeServices                GetIncidentParamsInclude = "services"
+	GetIncidentParamsIncludeSubStatuses             GetIncidentParamsInclude = "sub_statuses"
+	GetIncidentParamsIncludeSubscribers             GetIncidentParamsInclude = "subscribers"
+)
+
+// Defines values for ListIncidentSubStatusesParamsInclude.
+const (
+	ListIncidentSubStatusesParamsIncludeAssignedByUser ListIncidentSubStatusesParamsInclude = "assigned_by_user"
+	ListIncidentSubStatusesParamsIncludeSubStatus      ListIncidentSubStatusesParamsInclude = "sub_status"
+)
+
+// Defines values for ListIncidentSubStatusesParamsSort.
+const (
+	ListIncidentSubStatusesParamsSortAssignedAt      ListIncidentSubStatusesParamsSort = "assigned_at"
+	ListIncidentSubStatusesParamsSortCreatedAt       ListIncidentSubStatusesParamsSort = "created_at"
+	ListIncidentSubStatusesParamsSortMinusAssignedAt ListIncidentSubStatusesParamsSort = "-assigned_at"
+	ListIncidentSubStatusesParamsSortMinusCreatedAt  ListIncidentSubStatusesParamsSort = "-created_at"
+	ListIncidentSubStatusesParamsSortMinusUpdatedAt  ListIncidentSubStatusesParamsSort = "-updated_at"
+	ListIncidentSubStatusesParamsSortUpdatedAt       ListIncidentSubStatusesParamsSort = "updated_at"
+)
+
 // Defines values for GeneratePhoneNumberLiveCallRouterParamsCountryCode.
 const (
 	GeneratePhoneNumberLiveCallRouterParamsCountryCodeAU GeneratePhoneNumberLiveCallRouterParamsCountryCode = "AU"
@@ -5693,6 +5916,135 @@ const (
 const (
 	Local    GeneratePhoneNumberLiveCallRouterParamsPhoneType = "local"
 	TollFree GeneratePhoneNumberLiveCallRouterParamsPhoneType = "toll_free"
+)
+
+// Defines values for ListPlaybooksParamsInclude.
+const (
+	ListPlaybooksParamsIncludeCauses          ListPlaybooksParamsInclude = "causes"
+	ListPlaybooksParamsIncludeEnvironments    ListPlaybooksParamsInclude = "environments"
+	ListPlaybooksParamsIncludeFunctionalities ListPlaybooksParamsInclude = "functionalities"
+	ListPlaybooksParamsIncludeGroups          ListPlaybooksParamsInclude = "groups"
+	ListPlaybooksParamsIncludeIncidentTypes   ListPlaybooksParamsInclude = "incident_types"
+	ListPlaybooksParamsIncludeServices        ListPlaybooksParamsInclude = "services"
+	ListPlaybooksParamsIncludeSeverities      ListPlaybooksParamsInclude = "severities"
+)
+
+// Defines values for GetPlaybookParamsInclude.
+const (
+	GetPlaybookParamsIncludeCauses          GetPlaybookParamsInclude = "causes"
+	GetPlaybookParamsIncludeEnvironments    GetPlaybookParamsInclude = "environments"
+	GetPlaybookParamsIncludeFunctionalities GetPlaybookParamsInclude = "functionalities"
+	GetPlaybookParamsIncludeGroups          GetPlaybookParamsInclude = "groups"
+	GetPlaybookParamsIncludeIncidentTypes   GetPlaybookParamsInclude = "incident_types"
+	GetPlaybookParamsIncludeServices        GetPlaybookParamsInclude = "services"
+	GetPlaybookParamsIncludeSeverities      GetPlaybookParamsInclude = "severities"
+)
+
+// Defines values for ListRetrospectiveConfigurationsParamsInclude.
+const (
+	ListRetrospectiveConfigurationsParamsIncludeGroups        ListRetrospectiveConfigurationsParamsInclude = "groups"
+	ListRetrospectiveConfigurationsParamsIncludeIncidentTypes ListRetrospectiveConfigurationsParamsInclude = "incident_types"
+	ListRetrospectiveConfigurationsParamsIncludeSeverities    ListRetrospectiveConfigurationsParamsInclude = "severities"
+)
+
+// Defines values for GetRetrospectiveConfigurationParamsInclude.
+const (
+	GetRetrospectiveConfigurationParamsIncludeGroups        GetRetrospectiveConfigurationParamsInclude = "groups"
+	GetRetrospectiveConfigurationParamsIncludeIncidentTypes GetRetrospectiveConfigurationParamsInclude = "incident_types"
+	GetRetrospectiveConfigurationParamsIncludeSeverities    GetRetrospectiveConfigurationParamsInclude = "severities"
+)
+
+// Defines values for GetRetrospectiveProcessGroupParamsInclude.
+const (
+	GetRetrospectiveProcessGroupParamsIncludeRetrospectiveProcessGroupSteps GetRetrospectiveProcessGroupParamsInclude = "retrospective_process_group_steps"
+)
+
+// Defines values for ListRetrospectiveProcessesParamsInclude.
+const (
+	ListRetrospectiveProcessesParamsIncludeGroups             ListRetrospectiveProcessesParamsInclude = "groups"
+	ListRetrospectiveProcessesParamsIncludeIncidentTypes      ListRetrospectiveProcessesParamsInclude = "incident_types"
+	ListRetrospectiveProcessesParamsIncludeRetrospectiveSteps ListRetrospectiveProcessesParamsInclude = "retrospective_steps"
+	ListRetrospectiveProcessesParamsIncludeSeverities         ListRetrospectiveProcessesParamsInclude = "severities"
+)
+
+// Defines values for GetRetrospectiveProcessParamsInclude.
+const (
+	GetRetrospectiveProcessParamsIncludeGroups             GetRetrospectiveProcessParamsInclude = "groups"
+	GetRetrospectiveProcessParamsIncludeIncidentTypes      GetRetrospectiveProcessParamsInclude = "incident_types"
+	GetRetrospectiveProcessParamsIncludeRetrospectiveSteps GetRetrospectiveProcessParamsInclude = "retrospective_steps"
+	GetRetrospectiveProcessParamsIncludeSeverities         GetRetrospectiveProcessParamsInclude = "severities"
+)
+
+// Defines values for ListRetrospectiveProcessGroupsParamsInclude.
+const (
+	ListRetrospectiveProcessGroupsParamsIncludeRetrospectiveProcessGroupSteps ListRetrospectiveProcessGroupsParamsInclude = "retrospective_process_group_steps"
+)
+
+// Defines values for ListRetrospectiveProcessGroupsParamsSort.
+const (
+	ListRetrospectiveProcessGroupsParamsSortCreatedAt      ListRetrospectiveProcessGroupsParamsSort = "created_at"
+	ListRetrospectiveProcessGroupsParamsSortMinusCreatedAt ListRetrospectiveProcessGroupsParamsSort = "-created_at"
+	ListRetrospectiveProcessGroupsParamsSortMinusPosition  ListRetrospectiveProcessGroupsParamsSort = "-position"
+	ListRetrospectiveProcessGroupsParamsSortMinusUpdatedAt ListRetrospectiveProcessGroupsParamsSort = "-updated_at"
+	ListRetrospectiveProcessGroupsParamsSortPosition       ListRetrospectiveProcessGroupsParamsSort = "position"
+	ListRetrospectiveProcessGroupsParamsSortUpdatedAt      ListRetrospectiveProcessGroupsParamsSort = "updated_at"
+)
+
+// Defines values for ListShiftsParamsInclude.
+const (
+	ListShiftsParamsIncludeShiftOverride ListShiftsParamsInclude = "shift_override"
+	ListShiftsParamsIncludeUser          ListShiftsParamsInclude = "user"
+)
+
+// Defines values for ListUsersParamsSort.
+const (
+	ListUsersParamsSortCreatedAt      ListUsersParamsSort = "created_at"
+	ListUsersParamsSortMinusCreatedAt ListUsersParamsSort = "-created_at"
+	ListUsersParamsSortMinusUpdatedAt ListUsersParamsSort = "-updated_at"
+	ListUsersParamsSortUpdatedAt      ListUsersParamsSort = "updated_at"
+)
+
+// Defines values for ListUsersParamsInclude.
+const (
+	ListUsersParamsIncludeDevices        ListUsersParamsInclude = "devices"
+	ListUsersParamsIncludeEmailAddresses ListUsersParamsInclude = "email_addresses"
+	ListUsersParamsIncludePhoneNumbers   ListUsersParamsInclude = "phone_numbers"
+)
+
+// Defines values for GetUserParamsInclude.
+const (
+	GetUserParamsIncludeDevices        GetUserParamsInclude = "devices"
+	GetUserParamsIncludeEmailAddresses GetUserParamsInclude = "email_addresses"
+	GetUserParamsIncludePhoneNumbers   GetUserParamsInclude = "phone_numbers"
+)
+
+// Defines values for ListWorkflowsParamsInclude.
+const (
+	ListWorkflowsParamsIncludeFormFieldConditions ListWorkflowsParamsInclude = "form_field_conditions"
+	ListWorkflowsParamsIncludeGeniusTasks         ListWorkflowsParamsInclude = "genius_tasks"
+	ListWorkflowsParamsIncludeGeniusWorkflowRuns  ListWorkflowsParamsInclude = "genius_workflow_runs"
+)
+
+// Defines values for ListWorkflowsParamsSort.
+const (
+	ListWorkflowsParamsSortCreatedAt      ListWorkflowsParamsSort = "created_at"
+	ListWorkflowsParamsSortMinusCreatedAt ListWorkflowsParamsSort = "-created_at"
+	ListWorkflowsParamsSortMinusPosition  ListWorkflowsParamsSort = "-position"
+	ListWorkflowsParamsSortMinusUpdatedAt ListWorkflowsParamsSort = "-updated_at"
+	ListWorkflowsParamsSortPosition       ListWorkflowsParamsSort = "position"
+	ListWorkflowsParamsSortUpdatedAt      ListWorkflowsParamsSort = "updated_at"
+)
+
+// Defines values for GetWorkflowParamsInclude.
+const (
+	GetWorkflowParamsIncludeFormFieldConditions GetWorkflowParamsInclude = "form_field_conditions"
+	GetWorkflowParamsIncludeGeniusTasks         GetWorkflowParamsInclude = "genius_tasks"
+	GetWorkflowParamsIncludeGeniusWorkflowRuns  GetWorkflowParamsInclude = "genius_workflow_runs"
+)
+
+// Defines values for ListWorkflowRunsParamsInclude.
+const (
+	GeniusTaskRuns ListWorkflowRunsParamsInclude = "genius_task_runs"
 )
 
 // ActionItemTriggerParams defines model for action_item_trigger_params.
@@ -6079,6 +6431,9 @@ type Alert struct {
 
 	// Data Additional data
 	Data *map[string]interface{} `json:"data"`
+
+	// Description The description of the alert
+	Description *string `json:"description"`
 
 	// Environments Environments attached to the alert
 	Environments *[]Environment `json:"environments,omitempty"`
@@ -8900,8 +9255,14 @@ type FormSetResponseDataType string
 
 // Functionality defines model for functionality.
 type Functionality struct {
+	// BackstageId The Backstage entity id associated to this functionality. eg: :namespace/:kind/:entity_name
+	BackstageId *string `json:"backstage_id"`
+
 	// Color The hex color of the functionality
 	Color *string `json:"color"`
+
+	// CortexId The Cortex group id associated to this functionality
+	CortexId *string `json:"cortex_id"`
 
 	// CreatedAt Date of creation
 	CreatedAt string `json:"created_at"`
@@ -8918,11 +9279,20 @@ type Functionality struct {
 	// NotifyEmails Emails attached to the functionality
 	NotifyEmails *[]string `json:"notify_emails"`
 
+	// OpsgenieId The Opsgenie service id associated to this functionality
+	OpsgenieId *string `json:"opsgenie_id"`
+
+	// OpsgenieTeamId The Opsgenie team id associated to this functionality
+	OpsgenieTeamId *string `json:"opsgenie_team_id"`
+
 	// OwnersGroupIds Owner Teams associated with this functionality
 	OwnersGroupIds *[]string `json:"owners_group_ids"`
 
 	// OwnersUserIds Owner Users associated with this functionality
 	OwnersUserIds *[]int `json:"owners_user_ids"`
+
+	// PagerdutyId The PagerDuty service id associated to this functionality
+	PagerdutyId *string `json:"pagerduty_id"`
 
 	// Position Position of the functionality
 	Position *int `json:"position"`
@@ -8932,6 +9302,9 @@ type Functionality struct {
 
 	// ServiceIds Services associated with this functionality
 	ServiceIds *[]string `json:"service_ids"`
+
+	// ServiceNowCiSysId The Service Now CI sys id associated to this functionality
+	ServiceNowCiSysId *string `json:"service_now_ci_sys_id"`
 
 	// SlackAliases Slack Aliases associated with this functionality
 	SlackAliases *[]struct {
@@ -10666,6 +11039,9 @@ type NewAlert struct {
 			// Data Additional data
 			Data *map[string]interface{} `json:"data"`
 
+			// Description The description of the alert
+			Description *string `json:"description"`
+
 			// EndedAt Alert end datetime
 			EndedAt *time.Time `json:"ended_at"`
 
@@ -11421,6 +11797,9 @@ type NewFunctionality struct {
 
 			// OpsgenieId The Opsgenie service id associated to this functionality
 			OpsgenieId *string `json:"opsgenie_id"`
+
+			// OpsgenieTeamId The Opsgenie team id associated to this functionality
+			OpsgenieTeamId *string `json:"opsgenie_team_id"`
 
 			// OwnersGroupIds Owner Teams associated with this functionality
 			OwnersGroupIds *[]string `json:"owners_group_ids"`
@@ -12453,6 +12832,9 @@ type NewRoleDataType string
 type NewSchedule struct {
 	Data struct {
 		Attributes struct {
+			// AllTimeCoverage 24/7 coverage of the schedule
+			AllTimeCoverage *bool `json:"all_time_coverage"`
+
 			// Description The description of the schedule
 			Description *string `json:"description"`
 
@@ -12642,6 +13024,9 @@ type NewService struct {
 
 			// OpsgenieId The Opsgenie service id associated to this service
 			OpsgenieId *string `json:"opsgenie_id"`
+
+			// OpsgenieTeamId The Opsgenie team id associated to this service
+			OpsgenieTeamId *string `json:"opsgenie_team_id"`
 
 			// OwnersGroupIds Owner Teams associated with this service
 			OwnersGroupIds *[]string `json:"owners_group_ids"`
@@ -12869,6 +13254,9 @@ type NewTeam struct {
 
 			// OpsgenieId The Opsgenie group id associated to this team
 			OpsgenieId *string `json:"opsgenie_id"`
+
+			// OpsgenieTeamId The Opsgenie team id associated to this team
+			OpsgenieTeamId *string `json:"opsgenie_team_id"`
 
 			// PagerdutyId The PagerDuty group id associated to this team
 			PagerdutyId *string `json:"pagerduty_id"`
@@ -14323,6 +14711,9 @@ type RunCommandHerokuTaskParamsTaskType string
 
 // Schedule defines model for schedule.
 type Schedule struct {
+	// AllTimeCoverage 24/7 coverage of the schedule
+	AllTimeCoverage *bool `json:"all_time_coverage"`
+
 	// CreatedAt Date of creation
 	CreatedAt string `json:"created_at"`
 
@@ -14331,6 +14722,9 @@ type Schedule struct {
 
 	// Name The name of the schedule
 	Name string `json:"name"`
+
+	// SlackUserGroup Synced slack group of the schedule
+	SlackUserGroup *string `json:"slack_user_group"`
 
 	// UpdatedAt Date of last update
 	UpdatedAt string `json:"updated_at"`
@@ -14651,6 +15045,39 @@ type SendEmailTaskParams struct {
 
 // SendEmailTaskParamsTaskType defines model for SendEmailTaskParams.TaskType.
 type SendEmailTaskParamsTaskType string
+
+// SendMicrosoftTeamsBlocksTaskParams defines model for send_microsoft_teams_blocks_task_params.
+type SendMicrosoftTeamsBlocksTaskParams struct {
+	// Attachments Support liquid markup. Needs to be a valid JSON string after liquid is parsed
+	Attachments string                                      `json:"attachments"`
+	TaskType    *SendMicrosoftTeamsBlocksTaskParamsTaskType `json:"task_type,omitempty"`
+	union       json.RawMessage
+}
+
+// SendMicrosoftTeamsBlocksTaskParamsTaskType defines model for SendMicrosoftTeamsBlocksTaskParams.TaskType.
+type SendMicrosoftTeamsBlocksTaskParamsTaskType string
+
+// SendMicrosoftTeamsBlocksTaskParams0 defines model for .
+type SendMicrosoftTeamsBlocksTaskParams0 = interface{}
+
+// SendMicrosoftTeamsMessageTaskParams defines model for send_microsoft_teams_message_task_params.
+type SendMicrosoftTeamsMessageTaskParams struct {
+	Channels *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"channels,omitempty"`
+	TaskType *SendMicrosoftTeamsMessageTaskParamsTaskType `json:"task_type,omitempty"`
+
+	// Text The message text
+	Text  string `json:"text"`
+	union json.RawMessage
+}
+
+// SendMicrosoftTeamsMessageTaskParamsTaskType defines model for SendMicrosoftTeamsMessageTaskParams.TaskType.
+type SendMicrosoftTeamsMessageTaskParamsTaskType string
+
+// SendMicrosoftTeamsMessageTaskParams0 defines model for .
+type SendMicrosoftTeamsMessageTaskParams0 = interface{}
 
 // SendSlackBlocksTaskParams defines model for send_slack_blocks_task_params.
 type SendSlackBlocksTaskParams struct {
@@ -16290,8 +16717,14 @@ type UpdateFormSetConditionDataType string
 type UpdateFunctionality struct {
 	Data struct {
 		Attributes struct {
+			// BackstageId The Backstage entity id associated to this functionality. eg: :namespace/:kind/:entity_name
+			BackstageId *string `json:"backstage_id"`
+
 			// Color The hex color of the functionality
 			Color *string `json:"color"`
+
+			// CortexId The Cortex group id associated to this functionality
+			CortexId *string `json:"cortex_id"`
 
 			// Description The description of the functionality
 			Description *string `json:"description"`
@@ -16305,11 +16738,20 @@ type UpdateFunctionality struct {
 			// NotifyEmails Emails to attach to the functionality
 			NotifyEmails *[]string `json:"notify_emails"`
 
+			// OpsgenieId The Opsgenie service id associated to this functionality
+			OpsgenieId *string `json:"opsgenie_id"`
+
+			// OpsgenieTeamId The Opsgenie team id associated to this functionality
+			OpsgenieTeamId *string `json:"opsgenie_team_id"`
+
 			// OwnersGroupIds Owner Teams associated with this functionality
 			OwnersGroupIds *[]string `json:"owners_group_ids"`
 
 			// OwnersUserIds Owner Users associated with this functionality
 			OwnersUserIds *[]int `json:"owners_user_ids"`
+
+			// PagerdutyId The PagerDuty service id associated to this functionality
+			PagerdutyId *string `json:"pagerduty_id"`
 
 			// Position Position of the functionality
 			Position *int `json:"position"`
@@ -16319,6 +16761,9 @@ type UpdateFunctionality struct {
 
 			// ServiceIds Services associated with this functionality
 			ServiceIds *[]string `json:"service_ids"`
+
+			// ServiceNowCiSysId The Service Now CI sys id associated to this functionality
+			ServiceNowCiSysId *string `json:"service_now_ci_sys_id"`
 
 			// SlackAliases Slack Aliases associated with this functionality
 			SlackAliases *[]struct {
@@ -17799,6 +18244,9 @@ type UpdateRoleDataType string
 type UpdateSchedule struct {
 	Data struct {
 		Attributes struct {
+			// AllTimeCoverage 24/7 coverage of the schedule
+			AllTimeCoverage *bool `json:"all_time_coverage"`
+
 			// Description The description of the schedule
 			Description *string `json:"description"`
 
@@ -19308,56 +19756,123 @@ type ListAuthorizationsParams struct {
 
 // ListCatalogEntityPropertiesParams defines parameters for ListCatalogEntityProperties.
 type ListCatalogEntityPropertiesParams struct {
-	Include              *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber           *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize             *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
-	FilterCatalogFieldId *string `form:"filter[catalog_field_id],omitempty" json:"filter[catalog_field_id],omitempty"`
-	FilterKey            *string `form:"filter[key],omitempty" json:"filter[key],omitempty"`
-	FilterCreatedAtGt    *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
-	FilterCreatedAtGte   *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
-	FilterCreatedAtLt    *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
-	FilterCreatedAtLte   *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	// Include comma separated if needed. eg: catalog_entity,catalog_field
+	Include *ListCatalogEntityPropertiesParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+
+	// Sort comma separated if needed. eg: created_at,updated_at
+	Sort                 *ListCatalogEntityPropertiesParamsSort `form:"sort,omitempty" json:"sort,omitempty"`
+	PageNumber           *int                                   `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize             *int                                   `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterCatalogFieldId *string                                `form:"filter[catalog_field_id],omitempty" json:"filter[catalog_field_id],omitempty"`
+	FilterKey            *string                                `form:"filter[key],omitempty" json:"filter[key],omitempty"`
+	FilterCreatedAtGt    *string                                `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte   *string                                `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt    *string                                `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte   *string                                `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
 }
+
+// ListCatalogEntityPropertiesParamsInclude defines parameters for ListCatalogEntityProperties.
+type ListCatalogEntityPropertiesParamsInclude string
+
+// ListCatalogEntityPropertiesParamsSort defines parameters for ListCatalogEntityProperties.
+type ListCatalogEntityPropertiesParamsSort string
+
+// GetCatalogEntityParams defines parameters for GetCatalogEntity.
+type GetCatalogEntityParams struct {
+	// Include comma separated if needed. eg: catalog,properties
+	Include *GetCatalogEntityParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+}
+
+// GetCatalogEntityParamsInclude defines parameters for GetCatalogEntity.
+type GetCatalogEntityParamsInclude string
+
+// GetCatalogEntityPropertyParams defines parameters for GetCatalogEntityProperty.
+type GetCatalogEntityPropertyParams struct {
+	// Include comma separated if needed. eg: catalog_entity,catalog_field
+	Include *GetCatalogEntityPropertyParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+}
+
+// GetCatalogEntityPropertyParamsInclude defines parameters for GetCatalogEntityProperty.
+type GetCatalogEntityPropertyParamsInclude string
+
+// GetCatalogFieldParams defines parameters for GetCatalogField.
+type GetCatalogFieldParams struct {
+	// Include comma separated if needed. eg: catalog
+	Include *GetCatalogFieldParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+}
+
+// GetCatalogFieldParamsInclude defines parameters for GetCatalogField.
+type GetCatalogFieldParamsInclude string
 
 // ListCatalogsParams defines parameters for ListCatalogs.
 type ListCatalogsParams struct {
-	Include            *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
-	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
-	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
-	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
-	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
-	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
-	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	// Include comma separated if needed. eg: fields,entities
+	Include *ListCatalogsParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+
+	// Sort comma separated if needed. eg: created_at,updated_at
+	Sort               *ListCatalogsParamsSort `form:"sort,omitempty" json:"sort,omitempty"`
+	PageNumber         *int                    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int                    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSlug         *string                 `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterName         *string                 `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterCreatedAtGt  *string                 `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string                 `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string                 `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string                 `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
 }
+
+// ListCatalogsParamsInclude defines parameters for ListCatalogs.
+type ListCatalogsParamsInclude string
+
+// ListCatalogsParamsSort defines parameters for ListCatalogs.
+type ListCatalogsParamsSort string
 
 // ListCatalogEntitiesParams defines parameters for ListCatalogEntities.
 type ListCatalogEntitiesParams struct {
-	Include            *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
-	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
-	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
-	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
-	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
-	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
-	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	// Include comma separated if needed. eg: catalog,properties
+	Include *ListCatalogEntitiesParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+
+	// Sort comma separated if needed. eg: created_at,updated_at
+	Sort               *ListCatalogEntitiesParamsSort `form:"sort,omitempty" json:"sort,omitempty"`
+	PageNumber         *int                           `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int                           `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSlug         *string                        `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterName         *string                        `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterCreatedAtGt  *string                        `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string                        `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string                        `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string                        `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
 }
+
+// ListCatalogEntitiesParamsInclude defines parameters for ListCatalogEntities.
+type ListCatalogEntitiesParamsInclude string
+
+// ListCatalogEntitiesParamsSort defines parameters for ListCatalogEntities.
+type ListCatalogEntitiesParamsSort string
 
 // ListCatalogFieldsParams defines parameters for ListCatalogFields.
 type ListCatalogFieldsParams struct {
-	Include            *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
-	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
-	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
-	FilterKind         *string `form:"filter[kind],omitempty" json:"filter[kind],omitempty"`
-	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
-	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
-	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
-	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	// Include comma separated if needed. eg: catalog
+	Include *ListCatalogFieldsParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+
+	// Sort comma separated if needed. eg: created_at,updated_at
+	Sort               *ListCatalogFieldsParamsSort `form:"sort,omitempty" json:"sort,omitempty"`
+	PageNumber         *int                         `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int                         `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSlug         *string                      `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterName         *string                      `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterKind         *string                      `form:"filter[kind],omitempty" json:"filter[kind],omitempty"`
+	FilterCreatedAtGt  *string                      `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string                      `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string                      `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string                      `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
 }
+
+// ListCatalogFieldsParamsInclude defines parameters for ListCatalogFields.
+type ListCatalogFieldsParamsInclude string
+
+// ListCatalogFieldsParamsSort defines parameters for ListCatalogFields.
+type ListCatalogFieldsParamsSort string
 
 // ListCausesParams defines parameters for ListCauses.
 type ListCausesParams struct {
@@ -19375,18 +19890,28 @@ type ListCausesParams struct {
 
 // ListCustomFieldsParams defines parameters for ListCustomFields.
 type ListCustomFieldsParams struct {
-	Include            *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
-	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
-	FilterLabel        *string `form:"filter[label],omitempty" json:"filter[label],omitempty"`
-	FilterKind         *string `form:"filter[kind],omitempty" json:"filter[kind],omitempty"`
-	FilterEnabled      *bool   `form:"filter[enabled],omitempty" json:"filter[enabled],omitempty"`
-	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
-	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
-	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
-	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	// Include comma separated if needed. eg: options
+	Include *ListCustomFieldsParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+
+	// Sort comma separated if needed. eg: created_at,updated_at
+	Sort               *ListCustomFieldsParamsSort `form:"sort,omitempty" json:"sort,omitempty"`
+	PageNumber         *int                        `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int                        `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSlug         *string                     `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterLabel        *string                     `form:"filter[label],omitempty" json:"filter[label],omitempty"`
+	FilterKind         *string                     `form:"filter[kind],omitempty" json:"filter[kind],omitempty"`
+	FilterEnabled      *bool                       `form:"filter[enabled],omitempty" json:"filter[enabled],omitempty"`
+	FilterCreatedAtGt  *string                     `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string                     `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string                     `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string                     `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
 }
+
+// ListCustomFieldsParamsInclude defines parameters for ListCustomFields.
+type ListCustomFieldsParamsInclude string
+
+// ListCustomFieldsParamsSort defines parameters for ListCustomFields.
+type ListCustomFieldsParamsSort string
 
 // ListCustomFieldOptionsParams defines parameters for ListCustomFieldOptions.
 type ListCustomFieldOptionsParams struct {
@@ -19396,6 +19921,15 @@ type ListCustomFieldOptionsParams struct {
 	FilterValue *string `form:"filter[value],omitempty" json:"filter[value],omitempty"`
 	FilterColor *string `form:"filter[color],omitempty" json:"filter[color],omitempty"`
 }
+
+// GetCustomFieldParams defines parameters for GetCustomField.
+type GetCustomFieldParams struct {
+	// Include comma separated if needed. eg: options
+	Include *GetCustomFieldParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+}
+
+// GetCustomFieldParamsInclude defines parameters for GetCustomField.
+type GetCustomFieldParamsInclude string
 
 // ListCustomFormsParams defines parameters for ListCustomForms.
 type ListCustomFormsParams struct {
@@ -19426,10 +19960,14 @@ type GetDashboardPanelParams struct {
 
 // ListDashboardsParams defines parameters for ListDashboards.
 type ListDashboardsParams struct {
-	Include    *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	// Include comma separated if needed. eg: panels
+	Include    *ListDashboardsParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int                         `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int                         `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
+
+// ListDashboardsParamsInclude defines parameters for ListDashboards.
+type ListDashboardsParamsInclude string
 
 // ListDashboardPanelsParams defines parameters for ListDashboardPanels.
 type ListDashboardPanelsParams struct {
@@ -19437,6 +19975,15 @@ type ListDashboardPanelsParams struct {
 	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
+
+// GetDashboardParams defines parameters for GetDashboard.
+type GetDashboardParams struct {
+	// Include comma separated if needed. eg: panels
+	Include *GetDashboardParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+}
+
+// GetDashboardParamsInclude defines parameters for GetDashboard.
+type GetDashboardParamsInclude string
 
 // ListEnvironmentsParams defines parameters for ListEnvironments.
 type ListEnvironmentsParams struct {
@@ -19461,12 +20008,25 @@ type ListEscalationLevelsPathsParams struct {
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
+// GetEscalationPathParams defines parameters for GetEscalationPath.
+type GetEscalationPathParams struct {
+	// Include comma separated if needed. eg: escalation_policy_levels
+	Include *GetEscalationPathParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+}
+
+// GetEscalationPathParamsInclude defines parameters for GetEscalationPath.
+type GetEscalationPathParamsInclude string
+
 // ListEscalationPoliciesParams defines parameters for ListEscalationPolicies.
 type ListEscalationPoliciesParams struct {
-	Include    *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	// Include comma separated if needed. eg: escalation_policy_levels,escalation_paths
+	Include    *ListEscalationPoliciesParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int                                 `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int                                 `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
+
+// ListEscalationPoliciesParamsInclude defines parameters for ListEscalationPolicies.
+type ListEscalationPoliciesParamsInclude string
 
 // ListEscalationLevelsPoliciesParams defines parameters for ListEscalationLevelsPolicies.
 type ListEscalationLevelsPoliciesParams struct {
@@ -19477,10 +20037,23 @@ type ListEscalationLevelsPoliciesParams struct {
 
 // ListEscalationPathsParams defines parameters for ListEscalationPaths.
 type ListEscalationPathsParams struct {
-	Include    *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	// Include comma separated if needed. eg: escalation_policy_levels
+	Include    *ListEscalationPathsParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int                              `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int                              `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
+
+// ListEscalationPathsParamsInclude defines parameters for ListEscalationPaths.
+type ListEscalationPathsParamsInclude string
+
+// GetEscalationPolicyParams defines parameters for GetEscalationPolicy.
+type GetEscalationPolicyParams struct {
+	// Include comma separated if needed. eg: escalation_policy_levels,escalation_paths
+	Include *GetEscalationPolicyParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+}
+
+// GetEscalationPolicyParamsInclude defines parameters for GetEscalationPolicy.
+type GetEscalationPolicyParamsInclude string
 
 // ListIncidentEventFunctionalitiesParams defines parameters for ListIncidentEventFunctionalities.
 type ListIncidentEventFunctionalitiesParams struct {
@@ -19506,19 +20079,23 @@ type ListFormFieldPlacementConditionsParams struct {
 
 // ListFormFieldsParams defines parameters for ListFormFields.
 type ListFormFieldsParams struct {
-	Include            *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
-	FilterSearch       *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
-	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
-	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
-	FilterKind         *string `form:"filter[kind],omitempty" json:"filter[kind],omitempty"`
-	FilterEnabled      *bool   `form:"filter[enabled],omitempty" json:"filter[enabled],omitempty"`
-	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
-	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
-	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
-	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	// Include comma separated if needed. eg: options,positions
+	Include            *ListFormFieldsParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber         *int                         `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int                         `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSearch       *string                      `form:"filter[search],omitempty" json:"filter[search],omitempty"`
+	FilterSlug         *string                      `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterName         *string                      `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterKind         *string                      `form:"filter[kind],omitempty" json:"filter[kind],omitempty"`
+	FilterEnabled      *bool                        `form:"filter[enabled],omitempty" json:"filter[enabled],omitempty"`
+	FilterCreatedAtGt  *string                      `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string                      `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string                      `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string                      `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
 }
+
+// ListFormFieldsParamsInclude defines parameters for ListFormFields.
+type ListFormFieldsParamsInclude string
 
 // ListFormFieldOptionsParams defines parameters for ListFormFieldOptions.
 type ListFormFieldOptionsParams struct {
@@ -19544,6 +20121,15 @@ type ListFormFieldPositionsParams struct {
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 	FilterForm *string `form:"filter[form],omitempty" json:"filter[form],omitempty"`
 }
+
+// GetFormFieldParams defines parameters for GetFormField.
+type GetFormFieldParams struct {
+	// Include comma separated if needed. eg: options,positions
+	Include *GetFormFieldParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+}
+
+// GetFormFieldParamsInclude defines parameters for GetFormField.
+type GetFormFieldParamsInclude string
 
 // ListFormSetsParams defines parameters for ListFormSets.
 type ListFormSetsParams struct {
@@ -19670,6 +20256,15 @@ type ListIncidentRoleTasksParams struct {
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
+// GetIncidentSubStatusParams defines parameters for GetIncidentSubStatus.
+type GetIncidentSubStatusParams struct {
+	// Include comma separated if needed. eg: sub_status,assigned_by_user
+	Include *GetIncidentSubStatusParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+}
+
+// GetIncidentSubStatusParamsInclude defines parameters for GetIncidentSubStatus.
+type GetIncidentSubStatusParamsInclude string
+
 // ListIncidentTypesParams defines parameters for ListIncidentTypes.
 type ListIncidentTypesParams struct {
 	Include            *string `form:"include,omitempty" json:"include,omitempty"`
@@ -19687,7 +20282,6 @@ type ListIncidentTypesParams struct {
 
 // ListIncidentsParams defines parameters for ListIncidents.
 type ListIncidentsParams struct {
-	Include                            *string `form:"include,omitempty" json:"include,omitempty"`
 	PageNumber                         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize                           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 	FilterSearch                       *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
@@ -19743,8 +20337,28 @@ type ListIncidentsParams struct {
 	FilterInTriageAtGte                *string `form:"filter[in_triage_at][gte],omitempty" json:"filter[in_triage_at][gte],omitempty"`
 	FilterInTriageAtLt                 *string `form:"filter[in_triage_at][lt],omitempty" json:"filter[in_triage_at][lt],omitempty"`
 	FilterInTriageAtLte                *string `form:"filter[in_triage_at][lte],omitempty" json:"filter[in_triage_at][lte],omitempty"`
-	Sort                               *string `form:"sort,omitempty" json:"sort,omitempty"`
+
+	// Sort comma separated if needed. eg: created_at,updated_at
+	Sort *ListIncidentsParamsSort `form:"sort,omitempty" json:"sort,omitempty"`
+
+	// Include comma separated if needed. eg: sub_statuses,causes,subscribers
+	Include *ListIncidentsParamsInclude `form:"include,omitempty" json:"include,omitempty"`
 }
+
+// ListIncidentsParamsSort defines parameters for ListIncidents.
+type ListIncidentsParamsSort string
+
+// ListIncidentsParamsInclude defines parameters for ListIncidents.
+type ListIncidentsParamsInclude string
+
+// GetIncidentParams defines parameters for GetIncident.
+type GetIncidentParams struct {
+	// Include comma separated if needed. eg: sub_statuses,causes,subscribers
+	Include *GetIncidentParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+}
+
+// GetIncidentParamsInclude defines parameters for GetIncident.
+type GetIncidentParamsInclude string
 
 // ListIncidentActionItemsParams defines parameters for ListIncidentActionItems.
 type ListIncidentActionItemsParams struct {
@@ -19814,15 +20428,25 @@ type ListIncidentStatusPagesParams struct {
 
 // ListIncidentSubStatusesParams defines parameters for ListIncidentSubStatuses.
 type ListIncidentSubStatusesParams struct {
-	Include             *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber          *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize            *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
-	FilterSubStatusId   *string `form:"filter[sub_status_id],omitempty" json:"filter[sub_status_id],omitempty"`
-	FilterAssignedAtGt  *string `form:"filter[assigned_at][gt],omitempty" json:"filter[assigned_at][gt],omitempty"`
-	FilterAssignedAtGte *string `form:"filter[assigned_at][gte],omitempty" json:"filter[assigned_at][gte],omitempty"`
-	FilterAssignedAtLt  *string `form:"filter[assigned_at][lt],omitempty" json:"filter[assigned_at][lt],omitempty"`
-	FilterAssignedAtLte *string `form:"filter[assigned_at][lte],omitempty" json:"filter[assigned_at][lte],omitempty"`
+	// Include comma separated if needed. eg: sub_status,assigned_by_user
+	Include *ListIncidentSubStatusesParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+
+	// Sort comma separated if needed. eg: created_at,updated_at
+	Sort                *ListIncidentSubStatusesParamsSort `form:"sort,omitempty" json:"sort,omitempty"`
+	PageNumber          *int                               `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize            *int                               `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSubStatusId   *string                            `form:"filter[sub_status_id],omitempty" json:"filter[sub_status_id],omitempty"`
+	FilterAssignedAtGt  *string                            `form:"filter[assigned_at][gt],omitempty" json:"filter[assigned_at][gt],omitempty"`
+	FilterAssignedAtGte *string                            `form:"filter[assigned_at][gte],omitempty" json:"filter[assigned_at][gte],omitempty"`
+	FilterAssignedAtLt  *string                            `form:"filter[assigned_at][lt],omitempty" json:"filter[assigned_at][lt],omitempty"`
+	FilterAssignedAtLte *string                            `form:"filter[assigned_at][lte],omitempty" json:"filter[assigned_at][lte],omitempty"`
 }
+
+// ListIncidentSubStatusesParamsInclude defines parameters for ListIncidentSubStatuses.
+type ListIncidentSubStatusesParamsInclude string
+
+// ListIncidentSubStatusesParamsSort defines parameters for ListIncidentSubStatuses.
+type ListIncidentSubStatusesParamsSort string
 
 // ListLiveCallRoutersParams defines parameters for ListLiveCallRouters.
 type ListLiveCallRoutersParams struct {
@@ -19853,10 +20477,23 @@ type GeneratePhoneNumberLiveCallRouterParamsPhoneType string
 
 // ListPlaybooksParams defines parameters for ListPlaybooks.
 type ListPlaybooksParams struct {
-	Include    *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	// Include comma separated if needed. eg: severities,environments,services
+	Include    *ListPlaybooksParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int                        `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int                        `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
+
+// ListPlaybooksParamsInclude defines parameters for ListPlaybooks.
+type ListPlaybooksParamsInclude string
+
+// GetPlaybookParams defines parameters for GetPlaybook.
+type GetPlaybookParams struct {
+	// Include comma separated if needed. eg: severities,environments,services
+	Include *GetPlaybookParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+}
+
+// GetPlaybookParamsInclude defines parameters for GetPlaybook.
+type GetPlaybookParamsInclude string
 
 // ListPlaybookTasksParams defines parameters for ListPlaybookTasks.
 type ListPlaybookTasksParams struct {
@@ -19931,11 +20568,33 @@ type ListPulsesParams struct {
 
 // ListRetrospectiveConfigurationsParams defines parameters for ListRetrospectiveConfigurations.
 type ListRetrospectiveConfigurationsParams struct {
-	Include    *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
-	FilterKind *string `form:"filter[kind],omitempty" json:"filter[kind],omitempty"`
+	// Include comma separated if needed. eg: severities,groups
+	Include    *ListRetrospectiveConfigurationsParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int                                          `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int                                          `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterKind *string                                       `form:"filter[kind],omitempty" json:"filter[kind],omitempty"`
 }
+
+// ListRetrospectiveConfigurationsParamsInclude defines parameters for ListRetrospectiveConfigurations.
+type ListRetrospectiveConfigurationsParamsInclude string
+
+// GetRetrospectiveConfigurationParams defines parameters for GetRetrospectiveConfiguration.
+type GetRetrospectiveConfigurationParams struct {
+	// Include comma separated if needed. eg: severities,groups
+	Include *GetRetrospectiveConfigurationParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+}
+
+// GetRetrospectiveConfigurationParamsInclude defines parameters for GetRetrospectiveConfiguration.
+type GetRetrospectiveConfigurationParamsInclude string
+
+// GetRetrospectiveProcessGroupParams defines parameters for GetRetrospectiveProcessGroup.
+type GetRetrospectiveProcessGroupParams struct {
+	// Include comma separated if needed. eg: retrospective_process_group_steps
+	Include *GetRetrospectiveProcessGroupParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+}
+
+// GetRetrospectiveProcessGroupParamsInclude defines parameters for GetRetrospectiveProcessGroup.
+type GetRetrospectiveProcessGroupParamsInclude string
 
 // ListRetrospectiveProcessGroupStepsParams defines parameters for ListRetrospectiveProcessGroupSteps.
 type ListRetrospectiveProcessGroupStepsParams struct {
@@ -19951,22 +20610,45 @@ type ListRetrospectiveProcessGroupStepsParams struct {
 
 // ListRetrospectiveProcessesParams defines parameters for ListRetrospectiveProcesses.
 type ListRetrospectiveProcessesParams struct {
-	Include    *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	// Include comma separated if needed. eg: retrospective_steps,severities
+	Include    *ListRetrospectiveProcessesParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int                                     `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int                                     `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
+
+// ListRetrospectiveProcessesParamsInclude defines parameters for ListRetrospectiveProcesses.
+type ListRetrospectiveProcessesParamsInclude string
+
+// GetRetrospectiveProcessParams defines parameters for GetRetrospectiveProcess.
+type GetRetrospectiveProcessParams struct {
+	// Include comma separated if needed. eg: retrospective_steps,severities
+	Include *GetRetrospectiveProcessParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+}
+
+// GetRetrospectiveProcessParamsInclude defines parameters for GetRetrospectiveProcess.
+type GetRetrospectiveProcessParamsInclude string
 
 // ListRetrospectiveProcessGroupsParams defines parameters for ListRetrospectiveProcessGroups.
 type ListRetrospectiveProcessGroupsParams struct {
-	Include            *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
-	FilterSubStatusId  *string `form:"filter[sub_status_id],omitempty" json:"filter[sub_status_id],omitempty"`
-	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
-	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
-	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
-	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	// Include comma separated if needed. eg: retrospective_process_group_steps
+	Include *ListRetrospectiveProcessGroupsParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+
+	// Sort comma separated if needed. eg: created_at,updated_at
+	Sort               *ListRetrospectiveProcessGroupsParamsSort `form:"sort,omitempty" json:"sort,omitempty"`
+	PageNumber         *int                                      `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int                                      `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSubStatusId  *string                                   `form:"filter[sub_status_id],omitempty" json:"filter[sub_status_id],omitempty"`
+	FilterCreatedAtGt  *string                                   `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string                                   `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string                                   `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string                                   `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
 }
+
+// ListRetrospectiveProcessGroupsParamsInclude defines parameters for ListRetrospectiveProcessGroups.
+type ListRetrospectiveProcessGroupsParamsInclude string
+
+// ListRetrospectiveProcessGroupsParamsSort defines parameters for ListRetrospectiveProcessGroups.
+type ListRetrospectiveProcessGroupsParamsSort string
 
 // ListRetrospectiveStepsParams defines parameters for ListRetrospectiveSteps.
 type ListRetrospectiveStepsParams struct {
@@ -20092,16 +20774,20 @@ type ListSeveritiesParams struct {
 
 // ListShiftsParams defines parameters for ListShifts.
 type ListShiftsParams struct {
-	Include *string `form:"include,omitempty" json:"include,omitempty"`
+	// Include comma separated if needed. eg: shift_override,user
+	Include *ListShiftsParamsInclude `form:"include,omitempty" json:"include,omitempty"`
 
 	// To Start range for shifts
 	To *string `form:"to,omitempty" json:"to,omitempty"`
 
 	// From End range for shifts
 	From        *string   `form:"from,omitempty" json:"from,omitempty"`
-	UserIds     *[]string `form:"user_ids[],omitempty" json:"user_ids[],omitempty"`
+	UserIds     *[]int    `form:"user_ids[],omitempty" json:"user_ids[],omitempty"`
 	ScheduleIds *[]string `form:"schedule_ids[],omitempty" json:"schedule_ids[],omitempty"`
 }
+
+// ListShiftsParamsInclude defines parameters for ListShifts.
+type ListShiftsParamsInclude string
 
 // ListStatusPagesParams defines parameters for ListStatusPages.
 type ListStatusPagesParams struct {
@@ -20171,8 +20857,28 @@ type ListUsersParams struct {
 	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
 	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
 	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
-	Sort               *string `form:"sort,omitempty" json:"sort,omitempty"`
+
+	// Sort comma separated if needed. eg: created_at,updated_at
+	Sort *ListUsersParamsSort `form:"sort,omitempty" json:"sort,omitempty"`
+
+	// Include comma separated if needed. eg: email_addresses,phone_numbers
+	Include *ListUsersParamsInclude `form:"include,omitempty" json:"include,omitempty"`
 }
+
+// ListUsersParamsSort defines parameters for ListUsers.
+type ListUsersParamsSort string
+
+// ListUsersParamsInclude defines parameters for ListUsers.
+type ListUsersParamsInclude string
+
+// GetUserParams defines parameters for GetUser.
+type GetUserParams struct {
+	// Include comma separated if needed. eg: email_addresses,phone_numbers
+	Include *GetUserParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+}
+
+// GetUserParamsInclude defines parameters for GetUser.
+type GetUserParamsInclude string
 
 // ListUserNotificationRulesParams defines parameters for ListUserNotificationRules.
 type ListUserNotificationRulesParams struct {
@@ -20213,17 +20919,36 @@ type ListWorkflowGroupsParams struct {
 
 // ListWorkflowsParams defines parameters for ListWorkflows.
 type ListWorkflowsParams struct {
-	Include            *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
-	FilterSearch       *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
-	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
-	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
-	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
-	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
-	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
-	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	// Include comma separated if needed. eg: form_field_conditions,genius_tasks
+	Include *ListWorkflowsParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+
+	// Sort comma separated if needed. eg: created_at,updated_at
+	Sort               *ListWorkflowsParamsSort `form:"sort,omitempty" json:"sort,omitempty"`
+	PageNumber         *int                     `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int                     `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSearch       *string                  `form:"filter[search],omitempty" json:"filter[search],omitempty"`
+	FilterName         *string                  `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterSlug         *string                  `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterCreatedAtGt  *string                  `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string                  `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string                  `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string                  `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
 }
+
+// ListWorkflowsParamsInclude defines parameters for ListWorkflows.
+type ListWorkflowsParamsInclude string
+
+// ListWorkflowsParamsSort defines parameters for ListWorkflows.
+type ListWorkflowsParamsSort string
+
+// GetWorkflowParams defines parameters for GetWorkflow.
+type GetWorkflowParams struct {
+	// Include comma separated if needed. eg: form_field_conditions,genius_tasks
+	Include *GetWorkflowParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+}
+
+// GetWorkflowParamsInclude defines parameters for GetWorkflow.
+type GetWorkflowParamsInclude string
 
 // ListWorkflowCustomFieldSelectionsParams defines parameters for ListWorkflowCustomFieldSelections.
 type ListWorkflowCustomFieldSelectionsParams struct {
@@ -20241,14 +20966,18 @@ type ListWorkflowFormFieldConditionsParams struct {
 
 // ListWorkflowRunsParams defines parameters for ListWorkflowRuns.
 type ListWorkflowRunsParams struct {
-	Include            *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
-	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
-	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
-	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
-	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	// Include comma separated if needed. eg: genius_task_runs
+	Include            *ListWorkflowRunsParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber         *int                           `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int                           `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterCreatedAtGt  *string                        `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string                        `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string                        `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string                        `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
 }
+
+// ListWorkflowRunsParamsInclude defines parameters for ListWorkflowRuns.
+type ListWorkflowRunsParamsInclude string
 
 // ListWorkflowTasksParams defines parameters for ListWorkflowTasks.
 type ListWorkflowTasksParams struct {
@@ -24485,6 +25214,58 @@ func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeCreateNotionPageTaskPa
 	return err
 }
 
+// AsSendMicrosoftTeamsMessageTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a SendMicrosoftTeamsMessageTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsSendMicrosoftTeamsMessageTaskParams() (SendMicrosoftTeamsMessageTaskParams, error) {
+	var body SendMicrosoftTeamsMessageTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromSendMicrosoftTeamsMessageTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided SendMicrosoftTeamsMessageTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromSendMicrosoftTeamsMessageTaskParams(v SendMicrosoftTeamsMessageTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeSendMicrosoftTeamsMessageTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided SendMicrosoftTeamsMessageTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeSendMicrosoftTeamsMessageTaskParams(v SendMicrosoftTeamsMessageTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsSendMicrosoftTeamsBlocksTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a SendMicrosoftTeamsBlocksTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsSendMicrosoftTeamsBlocksTaskParams() (SendMicrosoftTeamsBlocksTaskParams, error) {
+	var body SendMicrosoftTeamsBlocksTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromSendMicrosoftTeamsBlocksTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided SendMicrosoftTeamsBlocksTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromSendMicrosoftTeamsBlocksTaskParams(v SendMicrosoftTeamsBlocksTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeSendMicrosoftTeamsBlocksTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided SendMicrosoftTeamsBlocksTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeSendMicrosoftTeamsBlocksTaskParams(v SendMicrosoftTeamsBlocksTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsUpdateNotionPageTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a UpdateNotionPageTaskParams
 func (t NewWorkflowTask_Data_Attributes_TaskParams) AsUpdateNotionPageTaskParams() (UpdateNotionPageTaskParams, error) {
 	var body UpdateNotionPageTaskParams
@@ -26369,6 +27150,185 @@ func (t *PageVictorOpsOnCallRespondersTaskParams) UnmarshalJSON(b []byte) error 
 		err = json.Unmarshal(raw, &t.Users)
 		if err != nil {
 			return fmt.Errorf("error reading 'users': %w", err)
+		}
+	}
+
+	return err
+}
+
+// AsSendMicrosoftTeamsBlocksTaskParams0 returns the union data inside the SendMicrosoftTeamsBlocksTaskParams as a SendMicrosoftTeamsBlocksTaskParams0
+func (t SendMicrosoftTeamsBlocksTaskParams) AsSendMicrosoftTeamsBlocksTaskParams0() (SendMicrosoftTeamsBlocksTaskParams0, error) {
+	var body SendMicrosoftTeamsBlocksTaskParams0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromSendMicrosoftTeamsBlocksTaskParams0 overwrites any union data inside the SendMicrosoftTeamsBlocksTaskParams as the provided SendMicrosoftTeamsBlocksTaskParams0
+func (t *SendMicrosoftTeamsBlocksTaskParams) FromSendMicrosoftTeamsBlocksTaskParams0(v SendMicrosoftTeamsBlocksTaskParams0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeSendMicrosoftTeamsBlocksTaskParams0 performs a merge with any union data inside the SendMicrosoftTeamsBlocksTaskParams, using the provided SendMicrosoftTeamsBlocksTaskParams0
+func (t *SendMicrosoftTeamsBlocksTaskParams) MergeSendMicrosoftTeamsBlocksTaskParams0(v SendMicrosoftTeamsBlocksTaskParams0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t SendMicrosoftTeamsBlocksTaskParams) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	object := make(map[string]json.RawMessage)
+	if t.union != nil {
+		err = json.Unmarshal(b, &object)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	object["attachments"], err = json.Marshal(t.Attachments)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'attachments': %w", err)
+	}
+
+	if t.TaskType != nil {
+		object["task_type"], err = json.Marshal(t.TaskType)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'task_type': %w", err)
+		}
+	}
+	b, err = json.Marshal(object)
+	return b, err
+}
+
+func (t *SendMicrosoftTeamsBlocksTaskParams) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	if err != nil {
+		return err
+	}
+	object := make(map[string]json.RawMessage)
+	err = json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["attachments"]; found {
+		err = json.Unmarshal(raw, &t.Attachments)
+		if err != nil {
+			return fmt.Errorf("error reading 'attachments': %w", err)
+		}
+	}
+
+	if raw, found := object["task_type"]; found {
+		err = json.Unmarshal(raw, &t.TaskType)
+		if err != nil {
+			return fmt.Errorf("error reading 'task_type': %w", err)
+		}
+	}
+
+	return err
+}
+
+// AsSendMicrosoftTeamsMessageTaskParams0 returns the union data inside the SendMicrosoftTeamsMessageTaskParams as a SendMicrosoftTeamsMessageTaskParams0
+func (t SendMicrosoftTeamsMessageTaskParams) AsSendMicrosoftTeamsMessageTaskParams0() (SendMicrosoftTeamsMessageTaskParams0, error) {
+	var body SendMicrosoftTeamsMessageTaskParams0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromSendMicrosoftTeamsMessageTaskParams0 overwrites any union data inside the SendMicrosoftTeamsMessageTaskParams as the provided SendMicrosoftTeamsMessageTaskParams0
+func (t *SendMicrosoftTeamsMessageTaskParams) FromSendMicrosoftTeamsMessageTaskParams0(v SendMicrosoftTeamsMessageTaskParams0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeSendMicrosoftTeamsMessageTaskParams0 performs a merge with any union data inside the SendMicrosoftTeamsMessageTaskParams, using the provided SendMicrosoftTeamsMessageTaskParams0
+func (t *SendMicrosoftTeamsMessageTaskParams) MergeSendMicrosoftTeamsMessageTaskParams0(v SendMicrosoftTeamsMessageTaskParams0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t SendMicrosoftTeamsMessageTaskParams) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	object := make(map[string]json.RawMessage)
+	if t.union != nil {
+		err = json.Unmarshal(b, &object)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	if t.Channels != nil {
+		object["channels"], err = json.Marshal(t.Channels)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'channels': %w", err)
+		}
+	}
+
+	if t.TaskType != nil {
+		object["task_type"], err = json.Marshal(t.TaskType)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'task_type': %w", err)
+		}
+	}
+
+	object["text"], err = json.Marshal(t.Text)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'text': %w", err)
+	}
+
+	b, err = json.Marshal(object)
+	return b, err
+}
+
+func (t *SendMicrosoftTeamsMessageTaskParams) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	if err != nil {
+		return err
+	}
+	object := make(map[string]json.RawMessage)
+	err = json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["channels"]; found {
+		err = json.Unmarshal(raw, &t.Channels)
+		if err != nil {
+			return fmt.Errorf("error reading 'channels': %w", err)
+		}
+	}
+
+	if raw, found := object["task_type"]; found {
+		err = json.Unmarshal(raw, &t.TaskType)
+		if err != nil {
+			return fmt.Errorf("error reading 'task_type': %w", err)
+		}
+	}
+
+	if raw, found := object["text"]; found {
+		err = json.Unmarshal(raw, &t.Text)
+		if err != nil {
+			return fmt.Errorf("error reading 'text': %w", err)
 		}
 	}
 
@@ -28381,6 +29341,58 @@ func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromCreateNotionPageTask
 
 // MergeCreateNotionPageTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided CreateNotionPageTaskParams
 func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeCreateNotionPageTaskParams(v CreateNotionPageTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsSendMicrosoftTeamsMessageTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a SendMicrosoftTeamsMessageTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsSendMicrosoftTeamsMessageTaskParams() (SendMicrosoftTeamsMessageTaskParams, error) {
+	var body SendMicrosoftTeamsMessageTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromSendMicrosoftTeamsMessageTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided SendMicrosoftTeamsMessageTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromSendMicrosoftTeamsMessageTaskParams(v SendMicrosoftTeamsMessageTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeSendMicrosoftTeamsMessageTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided SendMicrosoftTeamsMessageTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeSendMicrosoftTeamsMessageTaskParams(v SendMicrosoftTeamsMessageTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsSendMicrosoftTeamsBlocksTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a SendMicrosoftTeamsBlocksTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsSendMicrosoftTeamsBlocksTaskParams() (SendMicrosoftTeamsBlocksTaskParams, error) {
+	var body SendMicrosoftTeamsBlocksTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromSendMicrosoftTeamsBlocksTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided SendMicrosoftTeamsBlocksTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromSendMicrosoftTeamsBlocksTaskParams(v SendMicrosoftTeamsBlocksTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeSendMicrosoftTeamsBlocksTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided SendMicrosoftTeamsBlocksTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeSendMicrosoftTeamsBlocksTaskParams(v SendMicrosoftTeamsBlocksTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -31583,6 +32595,58 @@ func (t *WorkflowTask_TaskParams) MergeCreateNotionPageTaskParams(v CreateNotion
 	return err
 }
 
+// AsSendMicrosoftTeamsMessageTaskParams returns the union data inside the WorkflowTask_TaskParams as a SendMicrosoftTeamsMessageTaskParams
+func (t WorkflowTask_TaskParams) AsSendMicrosoftTeamsMessageTaskParams() (SendMicrosoftTeamsMessageTaskParams, error) {
+	var body SendMicrosoftTeamsMessageTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromSendMicrosoftTeamsMessageTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided SendMicrosoftTeamsMessageTaskParams
+func (t *WorkflowTask_TaskParams) FromSendMicrosoftTeamsMessageTaskParams(v SendMicrosoftTeamsMessageTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeSendMicrosoftTeamsMessageTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided SendMicrosoftTeamsMessageTaskParams
+func (t *WorkflowTask_TaskParams) MergeSendMicrosoftTeamsMessageTaskParams(v SendMicrosoftTeamsMessageTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsSendMicrosoftTeamsBlocksTaskParams returns the union data inside the WorkflowTask_TaskParams as a SendMicrosoftTeamsBlocksTaskParams
+func (t WorkflowTask_TaskParams) AsSendMicrosoftTeamsBlocksTaskParams() (SendMicrosoftTeamsBlocksTaskParams, error) {
+	var body SendMicrosoftTeamsBlocksTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromSendMicrosoftTeamsBlocksTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided SendMicrosoftTeamsBlocksTaskParams
+func (t *WorkflowTask_TaskParams) FromSendMicrosoftTeamsBlocksTaskParams(v SendMicrosoftTeamsBlocksTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeSendMicrosoftTeamsBlocksTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided SendMicrosoftTeamsBlocksTaskParams
+func (t *WorkflowTask_TaskParams) MergeSendMicrosoftTeamsBlocksTaskParams(v SendMicrosoftTeamsBlocksTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsUpdateNotionPageTaskParams returns the union data inside the WorkflowTask_TaskParams as a UpdateNotionPageTaskParams
 func (t WorkflowTask_TaskParams) AsUpdateNotionPageTaskParams() (UpdateNotionPageTaskParams, error) {
 	var body UpdateNotionPageTaskParams
@@ -33513,7 +34577,7 @@ type ClientInterface interface {
 	DeleteCatalogEntity(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetCatalogEntity request
-	GetCatalogEntity(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetCatalogEntity(ctx context.Context, id string, params *GetCatalogEntityParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateCatalogEntityWithBody request with any body
 	UpdateCatalogEntityWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -33524,7 +34588,7 @@ type ClientInterface interface {
 	DeleteCatalogEntityProperty(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetCatalogEntityProperty request
-	GetCatalogEntityProperty(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetCatalogEntityProperty(ctx context.Context, id string, params *GetCatalogEntityPropertyParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateCatalogEntityPropertyWithBody request with any body
 	UpdateCatalogEntityPropertyWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -33535,7 +34599,7 @@ type ClientInterface interface {
 	DeleteCatalogField(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetCatalogField request
-	GetCatalogField(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetCatalogField(ctx context.Context, id string, params *GetCatalogFieldParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateCatalogFieldWithBody request with any body
 	UpdateCatalogFieldWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -33627,7 +34691,7 @@ type ClientInterface interface {
 	DeleteCustomField(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetCustomField request
-	GetCustomField(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetCustomField(ctx context.Context, id string, params *GetCustomFieldParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateCustomFieldWithBody request with any body
 	UpdateCustomFieldWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -33687,7 +34751,7 @@ type ClientInterface interface {
 	DeleteDashboard(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetDashboard request
-	GetDashboard(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetDashboard(ctx context.Context, id string, params *GetDashboardParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateDashboardWithBody request with any body
 	UpdateDashboardWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -33742,7 +34806,7 @@ type ClientInterface interface {
 	DeleteEscalationPath(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetEscalationPath request
-	GetEscalationPath(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetEscalationPath(ctx context.Context, id string, params *GetEscalationPathParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateEscalationPathWithBody request with any body
 	UpdateEscalationPathWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -33777,7 +34841,7 @@ type ClientInterface interface {
 	DeleteEscalationPolicy(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetEscalationPolicy request
-	GetEscalationPolicy(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetEscalationPolicy(ctx context.Context, id string, params *GetEscalationPolicyParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateEscalationPolicyWithBody request with any body
 	UpdateEscalationPolicyWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -33907,7 +34971,7 @@ type ClientInterface interface {
 	DeleteFormField(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetFormField request
-	GetFormField(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetFormField(ctx context.Context, id string, params *GetFormFieldParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateFormFieldWithBody request with any body
 	UpdateFormFieldWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -34142,7 +35206,7 @@ type ClientInterface interface {
 	DeleteIncidentSubStatus(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetIncidentSubStatus request
-	GetIncidentSubStatus(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetIncidentSubStatus(ctx context.Context, id string, params *GetIncidentSubStatusParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIncidentSubStatusWithBody request with any body
 	UpdateIncidentSubStatusWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -34180,7 +35244,7 @@ type ClientInterface interface {
 	DeleteIncident(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetIncident request
-	GetIncident(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetIncident(ctx context.Context, id string, params *GetIncidentParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIncidentWithBody request with any body
 	UpdateIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -34382,7 +35446,7 @@ type ClientInterface interface {
 	DeletePlaybook(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetPlaybook request
-	GetPlaybook(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetPlaybook(ctx context.Context, id string, params *GetPlaybookParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdatePlaybookWithBody request with any body
 	UpdatePlaybookWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -34447,7 +35511,7 @@ type ClientInterface interface {
 	ListRetrospectiveConfigurations(ctx context.Context, params *ListRetrospectiveConfigurationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetRetrospectiveConfiguration request
-	GetRetrospectiveConfiguration(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetRetrospectiveConfiguration(ctx context.Context, id string, params *GetRetrospectiveConfigurationParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateRetrospectiveConfigurationWithBody request with any body
 	UpdateRetrospectiveConfigurationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -34469,7 +35533,7 @@ type ClientInterface interface {
 	DeleteRetrospectiveProcessGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetRetrospectiveProcessGroup request
-	GetRetrospectiveProcessGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetRetrospectiveProcessGroup(ctx context.Context, id string, params *GetRetrospectiveProcessGroupParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateRetrospectiveProcessGroupWithBody request with any body
 	UpdateRetrospectiveProcessGroupWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -34496,7 +35560,7 @@ type ClientInterface interface {
 	DeleteRetrospectiveProcess(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetRetrospectiveProcess request
-	GetRetrospectiveProcess(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetRetrospectiveProcess(ctx context.Context, id string, params *GetRetrospectiveProcessParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateRetrospectiveProcessWithBody request with any body
 	UpdateRetrospectiveProcessWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -34810,7 +35874,7 @@ type ClientInterface interface {
 	DeleteUser(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetUser request
-	GetUser(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetUser(ctx context.Context, id string, params *GetUserParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListUserNotificationRules request
 	ListUserNotificationRules(ctx context.Context, userId string, params *ListUserNotificationRulesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -34912,7 +35976,7 @@ type ClientInterface interface {
 	DeleteWorkflow(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetWorkflow request
-	GetWorkflow(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetWorkflow(ctx context.Context, id string, params *GetWorkflowParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateWorkflowWithBody request with any body
 	UpdateWorkflowWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -35408,8 +36472,8 @@ func (c *Client) DeleteCatalogEntity(ctx context.Context, id string, reqEditors 
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetCatalogEntity(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetCatalogEntityRequest(c.Server, id)
+func (c *Client) GetCatalogEntity(ctx context.Context, id string, params *GetCatalogEntityParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetCatalogEntityRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
 	}
@@ -35456,8 +36520,8 @@ func (c *Client) DeleteCatalogEntityProperty(ctx context.Context, id string, req
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetCatalogEntityProperty(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetCatalogEntityPropertyRequest(c.Server, id)
+func (c *Client) GetCatalogEntityProperty(ctx context.Context, id string, params *GetCatalogEntityPropertyParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetCatalogEntityPropertyRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
 	}
@@ -35504,8 +36568,8 @@ func (c *Client) DeleteCatalogField(ctx context.Context, id string, reqEditors .
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetCatalogField(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetCatalogFieldRequest(c.Server, id)
+func (c *Client) GetCatalogField(ctx context.Context, id string, params *GetCatalogFieldParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetCatalogFieldRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
 	}
@@ -35912,8 +36976,8 @@ func (c *Client) DeleteCustomField(ctx context.Context, id string, reqEditors ..
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetCustomField(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetCustomFieldRequest(c.Server, id)
+func (c *Client) GetCustomField(ctx context.Context, id string, params *GetCustomFieldParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetCustomFieldRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
 	}
@@ -36176,8 +37240,8 @@ func (c *Client) DeleteDashboard(ctx context.Context, id string, reqEditors ...R
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetDashboard(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetDashboardRequest(c.Server, id)
+func (c *Client) GetDashboard(ctx context.Context, id string, params *GetDashboardParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetDashboardRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
 	}
@@ -36416,8 +37480,8 @@ func (c *Client) DeleteEscalationPath(ctx context.Context, id string, reqEditors
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetEscalationPath(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetEscalationPathRequest(c.Server, id)
+func (c *Client) GetEscalationPath(ctx context.Context, id string, params *GetEscalationPathParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetEscalationPathRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
 	}
@@ -36572,8 +37636,8 @@ func (c *Client) DeleteEscalationPolicy(ctx context.Context, id string, reqEdito
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetEscalationPolicy(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetEscalationPolicyRequest(c.Server, id)
+func (c *Client) GetEscalationPolicy(ctx context.Context, id string, params *GetEscalationPolicyParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetEscalationPolicyRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
 	}
@@ -37148,8 +38212,8 @@ func (c *Client) DeleteFormField(ctx context.Context, id string, reqEditors ...R
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetFormField(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetFormFieldRequest(c.Server, id)
+func (c *Client) GetFormField(ctx context.Context, id string, params *GetFormFieldParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetFormFieldRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
 	}
@@ -38180,8 +39244,8 @@ func (c *Client) DeleteIncidentSubStatus(ctx context.Context, id string, reqEdit
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetIncidentSubStatus(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetIncidentSubStatusRequest(c.Server, id)
+func (c *Client) GetIncidentSubStatus(ctx context.Context, id string, params *GetIncidentSubStatusParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetIncidentSubStatusRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
 	}
@@ -38348,8 +39412,8 @@ func (c *Client) DeleteIncident(ctx context.Context, id string, reqEditors ...Re
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetIncident(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetIncidentRequest(c.Server, id)
+func (c *Client) GetIncident(ctx context.Context, id string, params *GetIncidentParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetIncidentRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
 	}
@@ -39260,8 +40324,8 @@ func (c *Client) DeletePlaybook(ctx context.Context, id string, reqEditors ...Re
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetPlaybook(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetPlaybookRequest(c.Server, id)
+func (c *Client) GetPlaybook(ctx context.Context, id string, params *GetPlaybookParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetPlaybookRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
 	}
@@ -39548,8 +40612,8 @@ func (c *Client) ListRetrospectiveConfigurations(ctx context.Context, params *Li
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetRetrospectiveConfiguration(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetRetrospectiveConfigurationRequest(c.Server, id)
+func (c *Client) GetRetrospectiveConfiguration(ctx context.Context, id string, params *GetRetrospectiveConfigurationParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetRetrospectiveConfigurationRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
 	}
@@ -39644,8 +40708,8 @@ func (c *Client) DeleteRetrospectiveProcessGroup(ctx context.Context, id string,
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetRetrospectiveProcessGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetRetrospectiveProcessGroupRequest(c.Server, id)
+func (c *Client) GetRetrospectiveProcessGroup(ctx context.Context, id string, params *GetRetrospectiveProcessGroupParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetRetrospectiveProcessGroupRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
 	}
@@ -39764,8 +40828,8 @@ func (c *Client) DeleteRetrospectiveProcess(ctx context.Context, id string, reqE
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetRetrospectiveProcess(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetRetrospectiveProcessRequest(c.Server, id)
+func (c *Client) GetRetrospectiveProcess(ctx context.Context, id string, params *GetRetrospectiveProcessParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetRetrospectiveProcessRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
 	}
@@ -41144,8 +42208,8 @@ func (c *Client) DeleteUser(ctx context.Context, id string, reqEditors ...Reques
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetUser(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetUserRequest(c.Server, id)
+func (c *Client) GetUser(ctx context.Context, id string, params *GetUserParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetUserRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
 	}
@@ -41588,8 +42652,8 @@ func (c *Client) DeleteWorkflow(ctx context.Context, id string, reqEditors ...Re
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetWorkflow(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetWorkflowRequest(c.Server, id)
+func (c *Client) GetWorkflow(ctx context.Context, id string, params *GetWorkflowParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetWorkflowRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
 	}
@@ -43674,6 +44738,22 @@ func NewListCatalogEntityPropertiesRequest(server string, catalogEntityId string
 
 		}
 
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
 		if params.PageNumber != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
@@ -43895,7 +44975,7 @@ func NewDeleteCatalogEntityRequest(server string, id string) (*http.Request, err
 }
 
 // NewGetCatalogEntityRequest generates requests for GetCatalogEntity
-func NewGetCatalogEntityRequest(server string, id string) (*http.Request, error) {
+func NewGetCatalogEntityRequest(server string, id string, params *GetCatalogEntityParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -43918,6 +44998,28 @@ func NewGetCatalogEntityRequest(server string, id string) (*http.Request, error)
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -44010,7 +45112,7 @@ func NewDeleteCatalogEntityPropertyRequest(server string, id string) (*http.Requ
 }
 
 // NewGetCatalogEntityPropertyRequest generates requests for GetCatalogEntityProperty
-func NewGetCatalogEntityPropertyRequest(server string, id string) (*http.Request, error) {
+func NewGetCatalogEntityPropertyRequest(server string, id string, params *GetCatalogEntityPropertyParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -44033,6 +45135,28 @@ func NewGetCatalogEntityPropertyRequest(server string, id string) (*http.Request
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -44125,7 +45249,7 @@ func NewDeleteCatalogFieldRequest(server string, id string) (*http.Request, erro
 }
 
 // NewGetCatalogFieldRequest generates requests for GetCatalogField
-func NewGetCatalogFieldRequest(server string, id string) (*http.Request, error) {
+func NewGetCatalogFieldRequest(server string, id string, params *GetCatalogFieldParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -44148,6 +45272,28 @@ func NewGetCatalogFieldRequest(server string, id string) (*http.Request, error) 
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -44230,6 +45376,22 @@ func NewListCatalogsRequest(server string, params *ListCatalogsParams) (*http.Re
 		if params.Include != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 				return nil, err
@@ -44467,6 +45629,22 @@ func NewListCatalogEntitiesRequest(server string, catalogId string, params *List
 
 		}
 
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
 		if params.PageNumber != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
@@ -44685,6 +45863,22 @@ func NewListCatalogFieldsRequest(server string, catalogId string, params *ListCa
 		if params.Include != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 				return nil, err
@@ -45516,6 +46710,22 @@ func NewListCustomFieldsRequest(server string, params *ListCustomFieldsParams) (
 
 		}
 
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
 		if params.PageNumber != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
@@ -45929,7 +47139,7 @@ func NewDeleteCustomFieldRequest(server string, id string) (*http.Request, error
 }
 
 // NewGetCustomFieldRequest generates requests for GetCustomField
-func NewGetCustomFieldRequest(server string, id string) (*http.Request, error) {
+func NewGetCustomFieldRequest(server string, id string, params *GetCustomFieldParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -45952,6 +47162,28 @@ func NewGetCustomFieldRequest(server string, id string) (*http.Request, error) {
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -46867,7 +48099,7 @@ func NewDeleteDashboardRequest(server string, id string) (*http.Request, error) 
 }
 
 // NewGetDashboardRequest generates requests for GetDashboard
-func NewGetDashboardRequest(server string, id string) (*http.Request, error) {
+func NewGetDashboardRequest(server string, id string, params *GetDashboardParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -46890,6 +48122,28 @@ func NewGetDashboardRequest(server string, id string) (*http.Request, error) {
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -47680,7 +48934,7 @@ func NewDeleteEscalationPathRequest(server string, id string) (*http.Request, er
 }
 
 // NewGetEscalationPathRequest generates requests for GetEscalationPath
-func NewGetEscalationPathRequest(server string, id string) (*http.Request, error) {
+func NewGetEscalationPathRequest(server string, id string, params *GetEscalationPathParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -47703,6 +48957,28 @@ func NewGetEscalationPathRequest(server string, id string) (*http.Request, error
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -48186,7 +49462,7 @@ func NewDeleteEscalationPolicyRequest(server string, id string) (*http.Request, 
 }
 
 // NewGetEscalationPolicyRequest generates requests for GetEscalationPolicy
-func NewGetEscalationPolicyRequest(server string, id string) (*http.Request, error) {
+func NewGetEscalationPolicyRequest(server string, id string, params *GetEscalationPolicyParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -48209,6 +49485,28 @@ func NewGetEscalationPolicyRequest(server string, id string) (*http.Request, err
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -50112,7 +51410,7 @@ func NewDeleteFormFieldRequest(server string, id string) (*http.Request, error) 
 }
 
 // NewGetFormFieldRequest generates requests for GetFormField
-func NewGetFormFieldRequest(server string, id string) (*http.Request, error) {
+func NewGetFormFieldRequest(server string, id string, params *GetFormFieldParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -50135,6 +51433,28 @@ func NewGetFormFieldRequest(server string, id string) (*http.Request, error) {
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -53841,7 +55161,7 @@ func NewDeleteIncidentSubStatusRequest(server string, id string) (*http.Request,
 }
 
 // NewGetIncidentSubStatusRequest generates requests for GetIncidentSubStatus
-func NewGetIncidentSubStatusRequest(server string, id string) (*http.Request, error) {
+func NewGetIncidentSubStatusRequest(server string, id string, params *GetIncidentSubStatusParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -53864,6 +55184,28 @@ func NewGetIncidentSubStatusRequest(server string, id string) (*http.Request, er
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -54306,22 +55648,6 @@ func NewListIncidentsRequest(server string, params *ListIncidentsParams) (*http.
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if params.Include != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
 
 		if params.PageNumber != nil {
 
@@ -55219,6 +56545,22 @@ func NewListIncidentsRequest(server string, params *ListIncidentsParams) (*http.
 
 		}
 
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
 		queryURL.RawQuery = queryValues.Encode()
 	}
 
@@ -55305,7 +56647,7 @@ func NewDeleteIncidentRequest(server string, id string) (*http.Request, error) {
 }
 
 // NewGetIncidentRequest generates requests for GetIncident
-func NewGetIncidentRequest(server string, id string) (*http.Request, error) {
+func NewGetIncidentRequest(server string, id string, params *GetIncidentParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -55328,6 +56670,28 @@ func NewGetIncidentRequest(server string, id string) (*http.Request, error) {
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -57117,6 +58481,22 @@ func NewListIncidentSubStatusesRequest(server string, incidentId string, params 
 
 		}
 
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
 		if params.PageNumber != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
@@ -58351,7 +59731,7 @@ func NewDeletePlaybookRequest(server string, id string) (*http.Request, error) {
 }
 
 // NewGetPlaybookRequest generates requests for GetPlaybook
-func NewGetPlaybookRequest(server string, id string) (*http.Request, error) {
+func NewGetPlaybookRequest(server string, id string, params *GetPlaybookParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -58374,6 +59754,28 @@ func NewGetPlaybookRequest(server string, id string) (*http.Request, error) {
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -59952,7 +61354,7 @@ func NewListRetrospectiveConfigurationsRequest(server string, params *ListRetros
 }
 
 // NewGetRetrospectiveConfigurationRequest generates requests for GetRetrospectiveConfiguration
-func NewGetRetrospectiveConfigurationRequest(server string, id string) (*http.Request, error) {
+func NewGetRetrospectiveConfigurationRequest(server string, id string, params *GetRetrospectiveConfigurationParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -59975,6 +61377,28 @@ func NewGetRetrospectiveConfigurationRequest(server string, id string) (*http.Re
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -60182,7 +61606,7 @@ func NewDeleteRetrospectiveProcessGroupRequest(server string, id string) (*http.
 }
 
 // NewGetRetrospectiveProcessGroupRequest generates requests for GetRetrospectiveProcessGroup
-func NewGetRetrospectiveProcessGroupRequest(server string, id string) (*http.Request, error) {
+func NewGetRetrospectiveProcessGroupRequest(server string, id string, params *GetRetrospectiveProcessGroupParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -60205,6 +61629,28 @@ func NewGetRetrospectiveProcessGroupRequest(server string, id string) (*http.Req
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -60633,7 +62079,7 @@ func NewDeleteRetrospectiveProcessRequest(server string, id string) (*http.Reque
 }
 
 // NewGetRetrospectiveProcessRequest generates requests for GetRetrospectiveProcess
-func NewGetRetrospectiveProcessRequest(server string, id string) (*http.Request, error) {
+func NewGetRetrospectiveProcessRequest(server string, id string, params *GetRetrospectiveProcessParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -60656,6 +62102,28 @@ func NewGetRetrospectiveProcessRequest(server string, id string) (*http.Request,
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -60745,6 +62213,22 @@ func NewListRetrospectiveProcessGroupsRequest(server string, retrospectiveProces
 		if params.Include != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 				return nil, err
@@ -65826,6 +67310,22 @@ func NewListUsersRequest(server string, params *ListUsersParams) (*http.Request,
 
 		}
 
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
 		queryURL.RawQuery = queryValues.Encode()
 	}
 
@@ -65899,7 +67399,7 @@ func NewDeleteUserRequest(server string, id string) (*http.Request, error) {
 }
 
 // NewGetUserRequest generates requests for GetUser
-func NewGetUserRequest(server string, id string) (*http.Request, error) {
+func NewGetUserRequest(server string, id string, params *GetUserParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -65922,6 +67422,28 @@ func NewGetUserRequest(server string, id string) (*http.Request, error) {
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -67222,6 +68744,22 @@ func NewListWorkflowsRequest(server string, params *ListWorkflowsParams) (*http.
 
 		}
 
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
 		if params.PageNumber != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
@@ -67452,7 +68990,7 @@ func NewDeleteWorkflowRequest(server string, id string) (*http.Request, error) {
 }
 
 // NewGetWorkflowRequest generates requests for GetWorkflow
-func NewGetWorkflowRequest(server string, id string) (*http.Request, error) {
+func NewGetWorkflowRequest(server string, id string, params *GetWorkflowParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -67475,6 +69013,28 @@ func NewGetWorkflowRequest(server string, id string) (*http.Request, error) {
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -68332,7 +69892,7 @@ type ClientWithResponsesInterface interface {
 	DeleteCatalogEntityWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteCatalogEntityResponse, error)
 
 	// GetCatalogEntityWithResponse request
-	GetCatalogEntityWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCatalogEntityResponse, error)
+	GetCatalogEntityWithResponse(ctx context.Context, id string, params *GetCatalogEntityParams, reqEditors ...RequestEditorFn) (*GetCatalogEntityResponse, error)
 
 	// UpdateCatalogEntityWithBodyWithResponse request with any body
 	UpdateCatalogEntityWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCatalogEntityResponse, error)
@@ -68343,7 +69903,7 @@ type ClientWithResponsesInterface interface {
 	DeleteCatalogEntityPropertyWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteCatalogEntityPropertyResponse, error)
 
 	// GetCatalogEntityPropertyWithResponse request
-	GetCatalogEntityPropertyWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCatalogEntityPropertyResponse, error)
+	GetCatalogEntityPropertyWithResponse(ctx context.Context, id string, params *GetCatalogEntityPropertyParams, reqEditors ...RequestEditorFn) (*GetCatalogEntityPropertyResponse, error)
 
 	// UpdateCatalogEntityPropertyWithBodyWithResponse request with any body
 	UpdateCatalogEntityPropertyWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCatalogEntityPropertyResponse, error)
@@ -68354,7 +69914,7 @@ type ClientWithResponsesInterface interface {
 	DeleteCatalogFieldWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteCatalogFieldResponse, error)
 
 	// GetCatalogFieldWithResponse request
-	GetCatalogFieldWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCatalogFieldResponse, error)
+	GetCatalogFieldWithResponse(ctx context.Context, id string, params *GetCatalogFieldParams, reqEditors ...RequestEditorFn) (*GetCatalogFieldResponse, error)
 
 	// UpdateCatalogFieldWithBodyWithResponse request with any body
 	UpdateCatalogFieldWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCatalogFieldResponse, error)
@@ -68446,7 +70006,7 @@ type ClientWithResponsesInterface interface {
 	DeleteCustomFieldWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteCustomFieldResponse, error)
 
 	// GetCustomFieldWithResponse request
-	GetCustomFieldWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCustomFieldResponse, error)
+	GetCustomFieldWithResponse(ctx context.Context, id string, params *GetCustomFieldParams, reqEditors ...RequestEditorFn) (*GetCustomFieldResponse, error)
 
 	// UpdateCustomFieldWithBodyWithResponse request with any body
 	UpdateCustomFieldWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCustomFieldResponse, error)
@@ -68506,7 +70066,7 @@ type ClientWithResponsesInterface interface {
 	DeleteDashboardWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteDashboardResponse, error)
 
 	// GetDashboardWithResponse request
-	GetDashboardWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetDashboardResponse, error)
+	GetDashboardWithResponse(ctx context.Context, id string, params *GetDashboardParams, reqEditors ...RequestEditorFn) (*GetDashboardResponse, error)
 
 	// UpdateDashboardWithBodyWithResponse request with any body
 	UpdateDashboardWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateDashboardResponse, error)
@@ -68561,7 +70121,7 @@ type ClientWithResponsesInterface interface {
 	DeleteEscalationPathWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteEscalationPathResponse, error)
 
 	// GetEscalationPathWithResponse request
-	GetEscalationPathWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetEscalationPathResponse, error)
+	GetEscalationPathWithResponse(ctx context.Context, id string, params *GetEscalationPathParams, reqEditors ...RequestEditorFn) (*GetEscalationPathResponse, error)
 
 	// UpdateEscalationPathWithBodyWithResponse request with any body
 	UpdateEscalationPathWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateEscalationPathResponse, error)
@@ -68596,7 +70156,7 @@ type ClientWithResponsesInterface interface {
 	DeleteEscalationPolicyWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteEscalationPolicyResponse, error)
 
 	// GetEscalationPolicyWithResponse request
-	GetEscalationPolicyWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetEscalationPolicyResponse, error)
+	GetEscalationPolicyWithResponse(ctx context.Context, id string, params *GetEscalationPolicyParams, reqEditors ...RequestEditorFn) (*GetEscalationPolicyResponse, error)
 
 	// UpdateEscalationPolicyWithBodyWithResponse request with any body
 	UpdateEscalationPolicyWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateEscalationPolicyResponse, error)
@@ -68726,7 +70286,7 @@ type ClientWithResponsesInterface interface {
 	DeleteFormFieldWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldResponse, error)
 
 	// GetFormFieldWithResponse request
-	GetFormFieldWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormFieldResponse, error)
+	GetFormFieldWithResponse(ctx context.Context, id string, params *GetFormFieldParams, reqEditors ...RequestEditorFn) (*GetFormFieldResponse, error)
 
 	// UpdateFormFieldWithBodyWithResponse request with any body
 	UpdateFormFieldWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormFieldResponse, error)
@@ -68961,7 +70521,7 @@ type ClientWithResponsesInterface interface {
 	DeleteIncidentSubStatusWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentSubStatusResponse, error)
 
 	// GetIncidentSubStatusWithResponse request
-	GetIncidentSubStatusWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentSubStatusResponse, error)
+	GetIncidentSubStatusWithResponse(ctx context.Context, id string, params *GetIncidentSubStatusParams, reqEditors ...RequestEditorFn) (*GetIncidentSubStatusResponse, error)
 
 	// UpdateIncidentSubStatusWithBodyWithResponse request with any body
 	UpdateIncidentSubStatusWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentSubStatusResponse, error)
@@ -68999,7 +70559,7 @@ type ClientWithResponsesInterface interface {
 	DeleteIncidentWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentResponse, error)
 
 	// GetIncidentWithResponse request
-	GetIncidentWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentResponse, error)
+	GetIncidentWithResponse(ctx context.Context, id string, params *GetIncidentParams, reqEditors ...RequestEditorFn) (*GetIncidentResponse, error)
 
 	// UpdateIncidentWithBodyWithResponse request with any body
 	UpdateIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentResponse, error)
@@ -69201,7 +70761,7 @@ type ClientWithResponsesInterface interface {
 	DeletePlaybookWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeletePlaybookResponse, error)
 
 	// GetPlaybookWithResponse request
-	GetPlaybookWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetPlaybookResponse, error)
+	GetPlaybookWithResponse(ctx context.Context, id string, params *GetPlaybookParams, reqEditors ...RequestEditorFn) (*GetPlaybookResponse, error)
 
 	// UpdatePlaybookWithBodyWithResponse request with any body
 	UpdatePlaybookWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdatePlaybookResponse, error)
@@ -69266,7 +70826,7 @@ type ClientWithResponsesInterface interface {
 	ListRetrospectiveConfigurationsWithResponse(ctx context.Context, params *ListRetrospectiveConfigurationsParams, reqEditors ...RequestEditorFn) (*ListRetrospectiveConfigurationsResponse, error)
 
 	// GetRetrospectiveConfigurationWithResponse request
-	GetRetrospectiveConfigurationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetRetrospectiveConfigurationResponse, error)
+	GetRetrospectiveConfigurationWithResponse(ctx context.Context, id string, params *GetRetrospectiveConfigurationParams, reqEditors ...RequestEditorFn) (*GetRetrospectiveConfigurationResponse, error)
 
 	// UpdateRetrospectiveConfigurationWithBodyWithResponse request with any body
 	UpdateRetrospectiveConfigurationWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveConfigurationResponse, error)
@@ -69288,7 +70848,7 @@ type ClientWithResponsesInterface interface {
 	DeleteRetrospectiveProcessGroupWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteRetrospectiveProcessGroupResponse, error)
 
 	// GetRetrospectiveProcessGroupWithResponse request
-	GetRetrospectiveProcessGroupWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetRetrospectiveProcessGroupResponse, error)
+	GetRetrospectiveProcessGroupWithResponse(ctx context.Context, id string, params *GetRetrospectiveProcessGroupParams, reqEditors ...RequestEditorFn) (*GetRetrospectiveProcessGroupResponse, error)
 
 	// UpdateRetrospectiveProcessGroupWithBodyWithResponse request with any body
 	UpdateRetrospectiveProcessGroupWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveProcessGroupResponse, error)
@@ -69315,7 +70875,7 @@ type ClientWithResponsesInterface interface {
 	DeleteRetrospectiveProcessWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteRetrospectiveProcessResponse, error)
 
 	// GetRetrospectiveProcessWithResponse request
-	GetRetrospectiveProcessWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetRetrospectiveProcessResponse, error)
+	GetRetrospectiveProcessWithResponse(ctx context.Context, id string, params *GetRetrospectiveProcessParams, reqEditors ...RequestEditorFn) (*GetRetrospectiveProcessResponse, error)
 
 	// UpdateRetrospectiveProcessWithBodyWithResponse request with any body
 	UpdateRetrospectiveProcessWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRetrospectiveProcessResponse, error)
@@ -69629,7 +71189,7 @@ type ClientWithResponsesInterface interface {
 	DeleteUserWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteUserResponse, error)
 
 	// GetUserWithResponse request
-	GetUserWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetUserResponse, error)
+	GetUserWithResponse(ctx context.Context, id string, params *GetUserParams, reqEditors ...RequestEditorFn) (*GetUserResponse, error)
 
 	// ListUserNotificationRulesWithResponse request
 	ListUserNotificationRulesWithResponse(ctx context.Context, userId string, params *ListUserNotificationRulesParams, reqEditors ...RequestEditorFn) (*ListUserNotificationRulesResponse, error)
@@ -69731,7 +71291,7 @@ type ClientWithResponsesInterface interface {
 	DeleteWorkflowWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteWorkflowResponse, error)
 
 	// GetWorkflowWithResponse request
-	GetWorkflowWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetWorkflowResponse, error)
+	GetWorkflowWithResponse(ctx context.Context, id string, params *GetWorkflowParams, reqEditors ...RequestEditorFn) (*GetWorkflowResponse, error)
 
 	// UpdateWorkflowWithBodyWithResponse request with any body
 	UpdateWorkflowWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateWorkflowResponse, error)
@@ -79442,8 +81002,8 @@ func (c *ClientWithResponses) DeleteCatalogEntityWithResponse(ctx context.Contex
 }
 
 // GetCatalogEntityWithResponse request returning *GetCatalogEntityResponse
-func (c *ClientWithResponses) GetCatalogEntityWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCatalogEntityResponse, error) {
-	rsp, err := c.GetCatalogEntity(ctx, id, reqEditors...)
+func (c *ClientWithResponses) GetCatalogEntityWithResponse(ctx context.Context, id string, params *GetCatalogEntityParams, reqEditors ...RequestEditorFn) (*GetCatalogEntityResponse, error) {
+	rsp, err := c.GetCatalogEntity(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -79477,8 +81037,8 @@ func (c *ClientWithResponses) DeleteCatalogEntityPropertyWithResponse(ctx contex
 }
 
 // GetCatalogEntityPropertyWithResponse request returning *GetCatalogEntityPropertyResponse
-func (c *ClientWithResponses) GetCatalogEntityPropertyWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCatalogEntityPropertyResponse, error) {
-	rsp, err := c.GetCatalogEntityProperty(ctx, id, reqEditors...)
+func (c *ClientWithResponses) GetCatalogEntityPropertyWithResponse(ctx context.Context, id string, params *GetCatalogEntityPropertyParams, reqEditors ...RequestEditorFn) (*GetCatalogEntityPropertyResponse, error) {
+	rsp, err := c.GetCatalogEntityProperty(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -79512,8 +81072,8 @@ func (c *ClientWithResponses) DeleteCatalogFieldWithResponse(ctx context.Context
 }
 
 // GetCatalogFieldWithResponse request returning *GetCatalogFieldResponse
-func (c *ClientWithResponses) GetCatalogFieldWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCatalogFieldResponse, error) {
-	rsp, err := c.GetCatalogField(ctx, id, reqEditors...)
+func (c *ClientWithResponses) GetCatalogFieldWithResponse(ctx context.Context, id string, params *GetCatalogFieldParams, reqEditors ...RequestEditorFn) (*GetCatalogFieldResponse, error) {
+	rsp, err := c.GetCatalogField(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -79808,8 +81368,8 @@ func (c *ClientWithResponses) DeleteCustomFieldWithResponse(ctx context.Context,
 }
 
 // GetCustomFieldWithResponse request returning *GetCustomFieldResponse
-func (c *ClientWithResponses) GetCustomFieldWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCustomFieldResponse, error) {
-	rsp, err := c.GetCustomField(ctx, id, reqEditors...)
+func (c *ClientWithResponses) GetCustomFieldWithResponse(ctx context.Context, id string, params *GetCustomFieldParams, reqEditors ...RequestEditorFn) (*GetCustomFieldResponse, error) {
+	rsp, err := c.GetCustomField(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -80000,8 +81560,8 @@ func (c *ClientWithResponses) DeleteDashboardWithResponse(ctx context.Context, i
 }
 
 // GetDashboardWithResponse request returning *GetDashboardResponse
-func (c *ClientWithResponses) GetDashboardWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetDashboardResponse, error) {
-	rsp, err := c.GetDashboard(ctx, id, reqEditors...)
+func (c *ClientWithResponses) GetDashboardWithResponse(ctx context.Context, id string, params *GetDashboardParams, reqEditors ...RequestEditorFn) (*GetDashboardResponse, error) {
+	rsp, err := c.GetDashboard(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -80175,8 +81735,8 @@ func (c *ClientWithResponses) DeleteEscalationPathWithResponse(ctx context.Conte
 }
 
 // GetEscalationPathWithResponse request returning *GetEscalationPathResponse
-func (c *ClientWithResponses) GetEscalationPathWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetEscalationPathResponse, error) {
-	rsp, err := c.GetEscalationPath(ctx, id, reqEditors...)
+func (c *ClientWithResponses) GetEscalationPathWithResponse(ctx context.Context, id string, params *GetEscalationPathParams, reqEditors ...RequestEditorFn) (*GetEscalationPathResponse, error) {
+	rsp, err := c.GetEscalationPath(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -80288,8 +81848,8 @@ func (c *ClientWithResponses) DeleteEscalationPolicyWithResponse(ctx context.Con
 }
 
 // GetEscalationPolicyWithResponse request returning *GetEscalationPolicyResponse
-func (c *ClientWithResponses) GetEscalationPolicyWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetEscalationPolicyResponse, error) {
-	rsp, err := c.GetEscalationPolicy(ctx, id, reqEditors...)
+func (c *ClientWithResponses) GetEscalationPolicyWithResponse(ctx context.Context, id string, params *GetEscalationPolicyParams, reqEditors ...RequestEditorFn) (*GetEscalationPolicyResponse, error) {
+	rsp, err := c.GetEscalationPolicy(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -80706,8 +82266,8 @@ func (c *ClientWithResponses) DeleteFormFieldWithResponse(ctx context.Context, i
 }
 
 // GetFormFieldWithResponse request returning *GetFormFieldResponse
-func (c *ClientWithResponses) GetFormFieldWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormFieldResponse, error) {
-	rsp, err := c.GetFormField(ctx, id, reqEditors...)
+func (c *ClientWithResponses) GetFormFieldWithResponse(ctx context.Context, id string, params *GetFormFieldParams, reqEditors ...RequestEditorFn) (*GetFormFieldResponse, error) {
+	rsp, err := c.GetFormField(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -81457,8 +83017,8 @@ func (c *ClientWithResponses) DeleteIncidentSubStatusWithResponse(ctx context.Co
 }
 
 // GetIncidentSubStatusWithResponse request returning *GetIncidentSubStatusResponse
-func (c *ClientWithResponses) GetIncidentSubStatusWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentSubStatusResponse, error) {
-	rsp, err := c.GetIncidentSubStatus(ctx, id, reqEditors...)
+func (c *ClientWithResponses) GetIncidentSubStatusWithResponse(ctx context.Context, id string, params *GetIncidentSubStatusParams, reqEditors ...RequestEditorFn) (*GetIncidentSubStatusResponse, error) {
+	rsp, err := c.GetIncidentSubStatus(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -81579,8 +83139,8 @@ func (c *ClientWithResponses) DeleteIncidentWithResponse(ctx context.Context, id
 }
 
 // GetIncidentWithResponse request returning *GetIncidentResponse
-func (c *ClientWithResponses) GetIncidentWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentResponse, error) {
-	rsp, err := c.GetIncident(ctx, id, reqEditors...)
+func (c *ClientWithResponses) GetIncidentWithResponse(ctx context.Context, id string, params *GetIncidentParams, reqEditors ...RequestEditorFn) (*GetIncidentResponse, error) {
+	rsp, err := c.GetIncident(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -82237,8 +83797,8 @@ func (c *ClientWithResponses) DeletePlaybookWithResponse(ctx context.Context, id
 }
 
 // GetPlaybookWithResponse request returning *GetPlaybookResponse
-func (c *ClientWithResponses) GetPlaybookWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetPlaybookResponse, error) {
-	rsp, err := c.GetPlaybook(ctx, id, reqEditors...)
+func (c *ClientWithResponses) GetPlaybookWithResponse(ctx context.Context, id string, params *GetPlaybookParams, reqEditors ...RequestEditorFn) (*GetPlaybookResponse, error) {
+	rsp, err := c.GetPlaybook(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -82446,8 +84006,8 @@ func (c *ClientWithResponses) ListRetrospectiveConfigurationsWithResponse(ctx co
 }
 
 // GetRetrospectiveConfigurationWithResponse request returning *GetRetrospectiveConfigurationResponse
-func (c *ClientWithResponses) GetRetrospectiveConfigurationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetRetrospectiveConfigurationResponse, error) {
-	rsp, err := c.GetRetrospectiveConfiguration(ctx, id, reqEditors...)
+func (c *ClientWithResponses) GetRetrospectiveConfigurationWithResponse(ctx context.Context, id string, params *GetRetrospectiveConfigurationParams, reqEditors ...RequestEditorFn) (*GetRetrospectiveConfigurationResponse, error) {
+	rsp, err := c.GetRetrospectiveConfiguration(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -82516,8 +84076,8 @@ func (c *ClientWithResponses) DeleteRetrospectiveProcessGroupWithResponse(ctx co
 }
 
 // GetRetrospectiveProcessGroupWithResponse request returning *GetRetrospectiveProcessGroupResponse
-func (c *ClientWithResponses) GetRetrospectiveProcessGroupWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetRetrospectiveProcessGroupResponse, error) {
-	rsp, err := c.GetRetrospectiveProcessGroup(ctx, id, reqEditors...)
+func (c *ClientWithResponses) GetRetrospectiveProcessGroupWithResponse(ctx context.Context, id string, params *GetRetrospectiveProcessGroupParams, reqEditors ...RequestEditorFn) (*GetRetrospectiveProcessGroupResponse, error) {
+	rsp, err := c.GetRetrospectiveProcessGroup(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -82603,8 +84163,8 @@ func (c *ClientWithResponses) DeleteRetrospectiveProcessWithResponse(ctx context
 }
 
 // GetRetrospectiveProcessWithResponse request returning *GetRetrospectiveProcessResponse
-func (c *ClientWithResponses) GetRetrospectiveProcessWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetRetrospectiveProcessResponse, error) {
-	rsp, err := c.GetRetrospectiveProcess(ctx, id, reqEditors...)
+func (c *ClientWithResponses) GetRetrospectiveProcessWithResponse(ctx context.Context, id string, params *GetRetrospectiveProcessParams, reqEditors ...RequestEditorFn) (*GetRetrospectiveProcessResponse, error) {
+	rsp, err := c.GetRetrospectiveProcess(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -83607,8 +85167,8 @@ func (c *ClientWithResponses) DeleteUserWithResponse(ctx context.Context, id str
 }
 
 // GetUserWithResponse request returning *GetUserResponse
-func (c *ClientWithResponses) GetUserWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetUserResponse, error) {
-	rsp, err := c.GetUser(ctx, id, reqEditors...)
+func (c *ClientWithResponses) GetUserWithResponse(ctx context.Context, id string, params *GetUserParams, reqEditors ...RequestEditorFn) (*GetUserResponse, error) {
+	rsp, err := c.GetUser(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -83931,8 +85491,8 @@ func (c *ClientWithResponses) DeleteWorkflowWithResponse(ctx context.Context, id
 }
 
 // GetWorkflowWithResponse request returning *GetWorkflowResponse
-func (c *ClientWithResponses) GetWorkflowWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetWorkflowResponse, error) {
-	rsp, err := c.GetWorkflow(ctx, id, reqEditors...)
+func (c *ClientWithResponses) GetWorkflowWithResponse(ctx context.Context, id string, params *GetWorkflowParams, reqEditors ...RequestEditorFn) (*GetWorkflowResponse, error) {
+	rsp, err := c.GetWorkflow(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

@@ -62,7 +62,7 @@ func (c *Client) CreateRetrospectiveProcessGroup(d *RetrospectiveProcessGroup) (
 }
 
 func (c *Client) GetRetrospectiveProcessGroup(id string) (*RetrospectiveProcessGroup, error) {
-	req, err := rootlygo.NewGetRetrospectiveProcessGroupRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetRetrospectiveProcessGroupRequest(c.Rootly.Server, id, nil)
 	if err != nil {
 		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}

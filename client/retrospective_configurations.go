@@ -36,7 +36,7 @@ func (c *Client) ListRetrospectiveConfigurations(params *rootlygo.ListRetrospect
 }
 
 func (c *Client) GetRetrospectiveConfiguration(id string) (*RetrospectiveConfiguration, error) {
-	req, err := rootlygo.NewGetRetrospectiveConfigurationRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetRetrospectiveConfigurationRequest(c.Rootly.Server, id, nil)
 	if err != nil {
 		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}

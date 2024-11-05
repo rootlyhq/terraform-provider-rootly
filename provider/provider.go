@@ -210,6 +210,8 @@ func New(version string) func() *schema.Provider {
 				"rootly_workflow_task_rename_microsoft_teams_channel":     resourceWorkflowTaskRenameMicrosoftTeamsChannel(),
 				"rootly_workflow_task_invite_to_microsoft_teams_channel":  resourceWorkflowTaskInviteToMicrosoftTeamsChannel(),
 				"rootly_workflow_task_create_notion_page":                 resourceWorkflowTaskCreateNotionPage(),
+				"rootly_workflow_task_send_microsoft_teams_message":       resourceWorkflowTaskSendMicrosoftTeamsMessage(),
+				"rootly_workflow_task_send_microsoft_teams_blocks":        resourceWorkflowTaskSendMicrosoftTeamsBlocks(),
 				"rootly_workflow_task_update_notion_page":                 resourceWorkflowTaskUpdateNotionPage(),
 				"rootly_workflow_task_create_service_now_incident":        resourceWorkflowTaskCreateServiceNowIncident(),
 				"rootly_workflow_task_create_shortcut_story":              resourceWorkflowTaskCreateShortcutStory(),

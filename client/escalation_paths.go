@@ -66,7 +66,7 @@ func (c *Client) CreateEscalationPath(d *EscalationPath) (*EscalationPath, error
 }
 
 func (c *Client) GetEscalationPath(id string) (*EscalationPath, error) {
-	req, err := rootlygo.NewGetEscalationPathRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetEscalationPathRequest(c.Rootly.Server, id, nil)
 	if err != nil {
 		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}

@@ -32,6 +32,12 @@ func dataSourceFunctionality() *schema.Resource {
 				Optional: true,
 			},
 
+			"backstage_id": &schema.Schema{
+				Type:     schema.TypeString,
+				Computed: true,
+				Optional: true,
+			},
+
 			"created_at": &schema.Schema{
 				Type:        schema.TypeMap,
 				Description: "Filter by date range using 'lt' and 'gt'.",
@@ -51,6 +57,11 @@ func dataSourceFunctionalityRead(ctx context.Context, d *schema.ResourceData, me
 	if value, ok := d.GetOkExists("name"); ok {
 		name := value.(string)
 		params.FilterName = &name
+	}
+
+	if value, ok := d.GetOkExists("backstage_id"); ok {
+		backstage_id := value.(string)
+		params.FilterBackstageId = &backstage_id
 	}
 
 	if value, ok := d.GetOkExists("slug"); ok {
