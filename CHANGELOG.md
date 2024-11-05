@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.9.0] -- 2024-11-04
+
+- Add `service_now_ci_sys_id` to `rootly_functionality` resource.
+
 ## [2.8.0] -- 2024-10-18
 
 - Add `rootly_live_call_router` resource
