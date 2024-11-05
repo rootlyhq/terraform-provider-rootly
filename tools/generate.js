@@ -165,7 +165,7 @@ function generateReadOnlyClient(name) {
     collectionSchema.parameters &&
     collectionSchema.parameters[0] &&
     collectionSchema.parameters[0].name;
-  const code = clientReadOnlyTpl(name, resourceSchema(name), pathIdField);
+  const code = clientReadOnlyTpl(name, resourceSchema(name), pathIdField, hasIncludeParam(name));
   fs.writeFileSync(
     path.resolve(__dirname, "..", "client", `${inflect.pluralize(name)}.go`),
     code
@@ -179,7 +179,7 @@ function generateClient(name) {
     collectionSchema.parameters &&
     collectionSchema.parameters[0] &&
     collectionSchema.parameters[0].name;
-  const code = clientTpl(name, resourceSchema(name), pathIdField);
+  const code = clientTpl(name, resourceSchema(name), pathIdField, hasIncludeParam(name));
   fs.writeFileSync(
     path.resolve(__dirname, "..", "client", `${inflect.pluralize(name)}.go`),
     code
@@ -351,4 +351,21 @@ function collectionPathSchema(name) {
       );
     })
     .map((url) => swagger.paths[url])[0];
+}
+
+function hasIncludeParam(name) {
+  const paramsSchema = Object.keys(swagger.paths)
+    .filter((url) => {
+      const get = swagger.paths[url].get;
+      return (
+        get &&
+        get.operationId.replace(/ /g, "") ===
+          `get${inflect.singularize(inflect.camelize(name))}`
+      );
+    })
+    .map((url) => swagger.paths[url])[0]?.get;
+
+  return paramsSchema &&
+    paramsSchema.parameters &&
+    paramsSchema.parameters.some((param) => param.name === "include");
 }

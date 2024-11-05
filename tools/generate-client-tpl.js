@@ -1,6 +1,6 @@
 const inflect = require("./inflect");
 
-module.exports = (name, resourceSchema, pathIdField) => {
+module.exports = (name, resourceSchema, pathIdField, hasIncludeParam) => {
   const namePlural = inflect.pluralize(name);
   const nameCamel = inflect.camelize(name);
   const nameCamelPlural = inflect.camelize(namePlural);
@@ -79,7 +79,7 @@ func (c *Client) Create${nameCamel}(d *${nameCamel}) (*${nameCamel}, error) {
 }
 
 func (c *Client) Get${nameCamel}(id string) (*${nameCamel}, error) {
-	req, err := rootlygo.NewGet${nameCamel}Request(c.Rootly.Server, id)
+	req, err := rootlygo.NewGet${nameCamel}Request(c.Rootly.Server, id${hasIncludeParam ? ', nil' : ''})
 	if err != nil {
 		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}
