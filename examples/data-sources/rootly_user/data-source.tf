@@ -1,3 +1,3 @@
-data "rootly_cuser" "my-user" {
+data "rootly_user" "my-user" {
   email = "john@acme.com"
 }
