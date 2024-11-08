@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.10.0] -- 2024-11-08
+
+- Add `rootly_on_call_role` resource
+- Add `required_operator` and `placement_operator` to `rootly_form_field_placement`
+
 ## [2.9.0] -- 2024-11-04
 
 - Add `service_now_ci_sys_id` to `rootly_functionality` resource.
