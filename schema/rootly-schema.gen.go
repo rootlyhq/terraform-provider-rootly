@@ -1264,6 +1264,18 @@ const (
 	FormFieldOptionResponseDataTypeFormFieldOptions FormFieldOptionResponseDataType = "form_field_options"
 )
 
+// Defines values for FormFieldPlacementPlacementOperator.
+const (
+	FormFieldPlacementPlacementOperatorAnd FormFieldPlacementPlacementOperator = "and"
+	FormFieldPlacementPlacementOperatorOr  FormFieldPlacementPlacementOperator = "or"
+)
+
+// Defines values for FormFieldPlacementRequiredOperator.
+const (
+	FormFieldPlacementRequiredOperatorAnd FormFieldPlacementRequiredOperator = "and"
+	FormFieldPlacementRequiredOperatorOr  FormFieldPlacementRequiredOperator = "or"
+)
+
 // Defines values for FormFieldPlacementConditionComparison.
 const (
 	FormFieldPlacementConditionComparisonEqual    FormFieldPlacementConditionComparison = "equal"
@@ -2376,6 +2388,18 @@ const (
 	NewFormFieldOptionDataTypeFormFieldOptions NewFormFieldOptionDataType = "form_field_options"
 )
 
+// Defines values for NewFormFieldPlacementDataAttributesPlacementOperator.
+const (
+	NewFormFieldPlacementDataAttributesPlacementOperatorAnd NewFormFieldPlacementDataAttributesPlacementOperator = "and"
+	NewFormFieldPlacementDataAttributesPlacementOperatorOr  NewFormFieldPlacementDataAttributesPlacementOperator = "or"
+)
+
+// Defines values for NewFormFieldPlacementDataAttributesRequiredOperator.
+const (
+	NewFormFieldPlacementDataAttributesRequiredOperatorAnd NewFormFieldPlacementDataAttributesRequiredOperator = "and"
+	NewFormFieldPlacementDataAttributesRequiredOperatorOr  NewFormFieldPlacementDataAttributesRequiredOperator = "or"
+)
+
 // Defines values for NewFormFieldPlacementDataType.
 const (
 	NewFormFieldPlacementDataTypeFormFieldPlacements NewFormFieldPlacementDataType = "form_field_placements"
@@ -2714,6 +2738,140 @@ const (
 // Defines values for NewLiveCallRouterDataType.
 const (
 	NewLiveCallRouterDataTypeLiveCallRouters NewLiveCallRouterDataType = "live_call_routers"
+)
+
+// Defines values for NewOnCallRoleDataAttributesAlertSourcesPermissions.
+const (
+	NewOnCallRoleDataAttributesAlertSourcesPermissionsCreate NewOnCallRoleDataAttributesAlertSourcesPermissions = "create"
+	NewOnCallRoleDataAttributesAlertSourcesPermissionsDelete NewOnCallRoleDataAttributesAlertSourcesPermissions = "delete"
+	NewOnCallRoleDataAttributesAlertSourcesPermissionsUpdate NewOnCallRoleDataAttributesAlertSourcesPermissions = "update"
+)
+
+// Defines values for NewOnCallRoleDataAttributesAlertUrgencyPermissions.
+const (
+	NewOnCallRoleDataAttributesAlertUrgencyPermissionsCreate NewOnCallRoleDataAttributesAlertUrgencyPermissions = "create"
+	NewOnCallRoleDataAttributesAlertUrgencyPermissionsDelete NewOnCallRoleDataAttributesAlertUrgencyPermissions = "delete"
+	NewOnCallRoleDataAttributesAlertUrgencyPermissionsRead   NewOnCallRoleDataAttributesAlertUrgencyPermissions = "read"
+	NewOnCallRoleDataAttributesAlertUrgencyPermissionsUpdate NewOnCallRoleDataAttributesAlertUrgencyPermissions = "update"
+)
+
+// Defines values for NewOnCallRoleDataAttributesAlertsPermissions.
+const (
+	NewOnCallRoleDataAttributesAlertsPermissionsCreate NewOnCallRoleDataAttributesAlertsPermissions = "create"
+	NewOnCallRoleDataAttributesAlertsPermissionsRead   NewOnCallRoleDataAttributesAlertsPermissions = "read"
+	NewOnCallRoleDataAttributesAlertsPermissionsUpdate NewOnCallRoleDataAttributesAlertsPermissions = "update"
+)
+
+// Defines values for NewOnCallRoleDataAttributesApiKeysPermissions.
+const (
+	NewOnCallRoleDataAttributesApiKeysPermissionsCreate NewOnCallRoleDataAttributesApiKeysPermissions = "create"
+	NewOnCallRoleDataAttributesApiKeysPermissionsDelete NewOnCallRoleDataAttributesApiKeysPermissions = "delete"
+	NewOnCallRoleDataAttributesApiKeysPermissionsRead   NewOnCallRoleDataAttributesApiKeysPermissions = "read"
+	NewOnCallRoleDataAttributesApiKeysPermissionsUpdate NewOnCallRoleDataAttributesApiKeysPermissions = "update"
+)
+
+// Defines values for NewOnCallRoleDataAttributesAuditsPermissions.
+const (
+	NewOnCallRoleDataAttributesAuditsPermissionsCreate NewOnCallRoleDataAttributesAuditsPermissions = "create"
+	NewOnCallRoleDataAttributesAuditsPermissionsDelete NewOnCallRoleDataAttributesAuditsPermissions = "delete"
+	NewOnCallRoleDataAttributesAuditsPermissionsRead   NewOnCallRoleDataAttributesAuditsPermissions = "read"
+	NewOnCallRoleDataAttributesAuditsPermissionsUpdate NewOnCallRoleDataAttributesAuditsPermissions = "update"
+)
+
+// Defines values for NewOnCallRoleDataAttributesContactsPermissions.
+const (
+	NewOnCallRoleDataAttributesContactsPermissionsRead NewOnCallRoleDataAttributesContactsPermissions = "read"
+)
+
+// Defines values for NewOnCallRoleDataAttributesEscalationPoliciesPermissions.
+const (
+	NewOnCallRoleDataAttributesEscalationPoliciesPermissionsCreate NewOnCallRoleDataAttributesEscalationPoliciesPermissions = "create"
+	NewOnCallRoleDataAttributesEscalationPoliciesPermissionsDelete NewOnCallRoleDataAttributesEscalationPoliciesPermissions = "delete"
+	NewOnCallRoleDataAttributesEscalationPoliciesPermissionsRead   NewOnCallRoleDataAttributesEscalationPoliciesPermissions = "read"
+	NewOnCallRoleDataAttributesEscalationPoliciesPermissionsUpdate NewOnCallRoleDataAttributesEscalationPoliciesPermissions = "update"
+)
+
+// Defines values for NewOnCallRoleDataAttributesGroupsPermissions.
+const (
+	NewOnCallRoleDataAttributesGroupsPermissionsCreate NewOnCallRoleDataAttributesGroupsPermissions = "create"
+	NewOnCallRoleDataAttributesGroupsPermissionsDelete NewOnCallRoleDataAttributesGroupsPermissions = "delete"
+	NewOnCallRoleDataAttributesGroupsPermissionsRead   NewOnCallRoleDataAttributesGroupsPermissions = "read"
+	NewOnCallRoleDataAttributesGroupsPermissionsUpdate NewOnCallRoleDataAttributesGroupsPermissions = "update"
+)
+
+// Defines values for NewOnCallRoleDataAttributesHeartbeatsPermissions.
+const (
+	NewOnCallRoleDataAttributesHeartbeatsPermissionsCreate NewOnCallRoleDataAttributesHeartbeatsPermissions = "create"
+	NewOnCallRoleDataAttributesHeartbeatsPermissionsDelete NewOnCallRoleDataAttributesHeartbeatsPermissions = "delete"
+	NewOnCallRoleDataAttributesHeartbeatsPermissionsRead   NewOnCallRoleDataAttributesHeartbeatsPermissions = "read"
+	NewOnCallRoleDataAttributesHeartbeatsPermissionsUpdate NewOnCallRoleDataAttributesHeartbeatsPermissions = "update"
+)
+
+// Defines values for NewOnCallRoleDataAttributesIntegrationsPermissions.
+const (
+	NewOnCallRoleDataAttributesIntegrationsPermissionsCreate NewOnCallRoleDataAttributesIntegrationsPermissions = "create"
+	NewOnCallRoleDataAttributesIntegrationsPermissionsDelete NewOnCallRoleDataAttributesIntegrationsPermissions = "delete"
+	NewOnCallRoleDataAttributesIntegrationsPermissionsRead   NewOnCallRoleDataAttributesIntegrationsPermissions = "read"
+	NewOnCallRoleDataAttributesIntegrationsPermissionsUpdate NewOnCallRoleDataAttributesIntegrationsPermissions = "update"
+)
+
+// Defines values for NewOnCallRoleDataAttributesInvitationsPermissions.
+const (
+	NewOnCallRoleDataAttributesInvitationsPermissionsCreate NewOnCallRoleDataAttributesInvitationsPermissions = "create"
+	NewOnCallRoleDataAttributesInvitationsPermissionsDelete NewOnCallRoleDataAttributesInvitationsPermissions = "delete"
+	NewOnCallRoleDataAttributesInvitationsPermissionsRead   NewOnCallRoleDataAttributesInvitationsPermissions = "read"
+	NewOnCallRoleDataAttributesInvitationsPermissionsUpdate NewOnCallRoleDataAttributesInvitationsPermissions = "update"
+)
+
+// Defines values for NewOnCallRoleDataAttributesLiveCallRoutingPermissions.
+const (
+	NewOnCallRoleDataAttributesLiveCallRoutingPermissionsCreate NewOnCallRoleDataAttributesLiveCallRoutingPermissions = "create"
+	NewOnCallRoleDataAttributesLiveCallRoutingPermissionsDelete NewOnCallRoleDataAttributesLiveCallRoutingPermissions = "delete"
+	NewOnCallRoleDataAttributesLiveCallRoutingPermissionsRead   NewOnCallRoleDataAttributesLiveCallRoutingPermissions = "read"
+	NewOnCallRoleDataAttributesLiveCallRoutingPermissionsUpdate NewOnCallRoleDataAttributesLiveCallRoutingPermissions = "update"
+)
+
+// Defines values for NewOnCallRoleDataAttributesScheduleOverridePermissions.
+const (
+	NewOnCallRoleDataAttributesScheduleOverridePermissionsCreate NewOnCallRoleDataAttributesScheduleOverridePermissions = "create"
+	NewOnCallRoleDataAttributesScheduleOverridePermissionsUpdate NewOnCallRoleDataAttributesScheduleOverridePermissions = "update"
+)
+
+// Defines values for NewOnCallRoleDataAttributesSchedulesPermissions.
+const (
+	NewOnCallRoleDataAttributesSchedulesPermissionsCreate NewOnCallRoleDataAttributesSchedulesPermissions = "create"
+	NewOnCallRoleDataAttributesSchedulesPermissionsDelete NewOnCallRoleDataAttributesSchedulesPermissions = "delete"
+	NewOnCallRoleDataAttributesSchedulesPermissionsRead   NewOnCallRoleDataAttributesSchedulesPermissions = "read"
+	NewOnCallRoleDataAttributesSchedulesPermissionsUpdate NewOnCallRoleDataAttributesSchedulesPermissions = "update"
+)
+
+// Defines values for NewOnCallRoleDataAttributesServicesPermissions.
+const (
+	NewOnCallRoleDataAttributesServicesPermissionsCreate NewOnCallRoleDataAttributesServicesPermissions = "create"
+	NewOnCallRoleDataAttributesServicesPermissionsDelete NewOnCallRoleDataAttributesServicesPermissions = "delete"
+	NewOnCallRoleDataAttributesServicesPermissionsRead   NewOnCallRoleDataAttributesServicesPermissions = "read"
+	NewOnCallRoleDataAttributesServicesPermissionsUpdate NewOnCallRoleDataAttributesServicesPermissions = "update"
+)
+
+// Defines values for NewOnCallRoleDataAttributesWebhooksPermissions.
+const (
+	NewOnCallRoleDataAttributesWebhooksPermissionsCreate NewOnCallRoleDataAttributesWebhooksPermissions = "create"
+	NewOnCallRoleDataAttributesWebhooksPermissionsDelete NewOnCallRoleDataAttributesWebhooksPermissions = "delete"
+	NewOnCallRoleDataAttributesWebhooksPermissionsRead   NewOnCallRoleDataAttributesWebhooksPermissions = "read"
+	NewOnCallRoleDataAttributesWebhooksPermissionsUpdate NewOnCallRoleDataAttributesWebhooksPermissions = "update"
+)
+
+// Defines values for NewOnCallRoleDataAttributesWorkflowsPermissions.
+const (
+	NewOnCallRoleDataAttributesWorkflowsPermissionsCreate NewOnCallRoleDataAttributesWorkflowsPermissions = "create"
+	NewOnCallRoleDataAttributesWorkflowsPermissionsDelete NewOnCallRoleDataAttributesWorkflowsPermissions = "delete"
+	NewOnCallRoleDataAttributesWorkflowsPermissionsRead   NewOnCallRoleDataAttributesWorkflowsPermissions = "read"
+	NewOnCallRoleDataAttributesWorkflowsPermissionsUpdate NewOnCallRoleDataAttributesWorkflowsPermissions = "update"
+)
+
+// Defines values for NewOnCallRoleDataType.
+const (
+	NewOnCallRoleDataTypeOnCallRoles NewOnCallRoleDataType = "on_call_roles"
 )
 
 // Defines values for NewOnCallShadowDataAttributesShadowableType.
@@ -3235,6 +3393,145 @@ const (
 // Defines values for NewWorkflowTaskDataType.
 const (
 	NewWorkflowTaskDataTypeWorkflowTasks NewWorkflowTaskDataType = "workflow_tasks"
+)
+
+// Defines values for OnCallRoleAlertSourcesPermissions.
+const (
+	OnCallRoleAlertSourcesPermissionsCreate OnCallRoleAlertSourcesPermissions = "create"
+	OnCallRoleAlertSourcesPermissionsDelete OnCallRoleAlertSourcesPermissions = "delete"
+	OnCallRoleAlertSourcesPermissionsUpdate OnCallRoleAlertSourcesPermissions = "update"
+)
+
+// Defines values for OnCallRoleAlertUrgencyPermissions.
+const (
+	OnCallRoleAlertUrgencyPermissionsCreate OnCallRoleAlertUrgencyPermissions = "create"
+	OnCallRoleAlertUrgencyPermissionsDelete OnCallRoleAlertUrgencyPermissions = "delete"
+	OnCallRoleAlertUrgencyPermissionsRead   OnCallRoleAlertUrgencyPermissions = "read"
+	OnCallRoleAlertUrgencyPermissionsUpdate OnCallRoleAlertUrgencyPermissions = "update"
+)
+
+// Defines values for OnCallRoleAlertsPermissions.
+const (
+	OnCallRoleAlertsPermissionsCreate OnCallRoleAlertsPermissions = "create"
+	OnCallRoleAlertsPermissionsRead   OnCallRoleAlertsPermissions = "read"
+	OnCallRoleAlertsPermissionsUpdate OnCallRoleAlertsPermissions = "update"
+)
+
+// Defines values for OnCallRoleApiKeysPermissions.
+const (
+	OnCallRoleApiKeysPermissionsCreate OnCallRoleApiKeysPermissions = "create"
+	OnCallRoleApiKeysPermissionsDelete OnCallRoleApiKeysPermissions = "delete"
+	OnCallRoleApiKeysPermissionsRead   OnCallRoleApiKeysPermissions = "read"
+	OnCallRoleApiKeysPermissionsUpdate OnCallRoleApiKeysPermissions = "update"
+)
+
+// Defines values for OnCallRoleAuditsPermissions.
+const (
+	OnCallRoleAuditsPermissionsCreate OnCallRoleAuditsPermissions = "create"
+	OnCallRoleAuditsPermissionsDelete OnCallRoleAuditsPermissions = "delete"
+	OnCallRoleAuditsPermissionsRead   OnCallRoleAuditsPermissions = "read"
+	OnCallRoleAuditsPermissionsUpdate OnCallRoleAuditsPermissions = "update"
+)
+
+// Defines values for OnCallRoleContactsPermissions.
+const (
+	OnCallRoleContactsPermissionsRead OnCallRoleContactsPermissions = "read"
+)
+
+// Defines values for OnCallRoleEscalationPoliciesPermissions.
+const (
+	OnCallRoleEscalationPoliciesPermissionsCreate OnCallRoleEscalationPoliciesPermissions = "create"
+	OnCallRoleEscalationPoliciesPermissionsDelete OnCallRoleEscalationPoliciesPermissions = "delete"
+	OnCallRoleEscalationPoliciesPermissionsRead   OnCallRoleEscalationPoliciesPermissions = "read"
+	OnCallRoleEscalationPoliciesPermissionsUpdate OnCallRoleEscalationPoliciesPermissions = "update"
+)
+
+// Defines values for OnCallRoleGroupsPermissions.
+const (
+	OnCallRoleGroupsPermissionsCreate OnCallRoleGroupsPermissions = "create"
+	OnCallRoleGroupsPermissionsDelete OnCallRoleGroupsPermissions = "delete"
+	OnCallRoleGroupsPermissionsRead   OnCallRoleGroupsPermissions = "read"
+	OnCallRoleGroupsPermissionsUpdate OnCallRoleGroupsPermissions = "update"
+)
+
+// Defines values for OnCallRoleHeartbeatsPermissions.
+const (
+	OnCallRoleHeartbeatsPermissionsCreate OnCallRoleHeartbeatsPermissions = "create"
+	OnCallRoleHeartbeatsPermissionsDelete OnCallRoleHeartbeatsPermissions = "delete"
+	OnCallRoleHeartbeatsPermissionsRead   OnCallRoleHeartbeatsPermissions = "read"
+	OnCallRoleHeartbeatsPermissionsUpdate OnCallRoleHeartbeatsPermissions = "update"
+)
+
+// Defines values for OnCallRoleIntegrationsPermissions.
+const (
+	OnCallRoleIntegrationsPermissionsCreate OnCallRoleIntegrationsPermissions = "create"
+	OnCallRoleIntegrationsPermissionsDelete OnCallRoleIntegrationsPermissions = "delete"
+	OnCallRoleIntegrationsPermissionsRead   OnCallRoleIntegrationsPermissions = "read"
+	OnCallRoleIntegrationsPermissionsUpdate OnCallRoleIntegrationsPermissions = "update"
+)
+
+// Defines values for OnCallRoleInvitationsPermissions.
+const (
+	OnCallRoleInvitationsPermissionsCreate OnCallRoleInvitationsPermissions = "create"
+	OnCallRoleInvitationsPermissionsDelete OnCallRoleInvitationsPermissions = "delete"
+	OnCallRoleInvitationsPermissionsRead   OnCallRoleInvitationsPermissions = "read"
+	OnCallRoleInvitationsPermissionsUpdate OnCallRoleInvitationsPermissions = "update"
+)
+
+// Defines values for OnCallRoleLiveCallRoutingPermissions.
+const (
+	OnCallRoleLiveCallRoutingPermissionsCreate OnCallRoleLiveCallRoutingPermissions = "create"
+	OnCallRoleLiveCallRoutingPermissionsDelete OnCallRoleLiveCallRoutingPermissions = "delete"
+	OnCallRoleLiveCallRoutingPermissionsRead   OnCallRoleLiveCallRoutingPermissions = "read"
+	OnCallRoleLiveCallRoutingPermissionsUpdate OnCallRoleLiveCallRoutingPermissions = "update"
+)
+
+// Defines values for OnCallRoleScheduleOverridePermissions.
+const (
+	OnCallRoleScheduleOverridePermissionsCreate OnCallRoleScheduleOverridePermissions = "create"
+	OnCallRoleScheduleOverridePermissionsUpdate OnCallRoleScheduleOverridePermissions = "update"
+)
+
+// Defines values for OnCallRoleSchedulesPermissions.
+const (
+	OnCallRoleSchedulesPermissionsCreate OnCallRoleSchedulesPermissions = "create"
+	OnCallRoleSchedulesPermissionsDelete OnCallRoleSchedulesPermissions = "delete"
+	OnCallRoleSchedulesPermissionsRead   OnCallRoleSchedulesPermissions = "read"
+	OnCallRoleSchedulesPermissionsUpdate OnCallRoleSchedulesPermissions = "update"
+)
+
+// Defines values for OnCallRoleServicesPermissions.
+const (
+	OnCallRoleServicesPermissionsCreate OnCallRoleServicesPermissions = "create"
+	OnCallRoleServicesPermissionsDelete OnCallRoleServicesPermissions = "delete"
+	OnCallRoleServicesPermissionsRead   OnCallRoleServicesPermissions = "read"
+	OnCallRoleServicesPermissionsUpdate OnCallRoleServicesPermissions = "update"
+)
+
+// Defines values for OnCallRoleWebhooksPermissions.
+const (
+	OnCallRoleWebhooksPermissionsCreate OnCallRoleWebhooksPermissions = "create"
+	OnCallRoleWebhooksPermissionsDelete OnCallRoleWebhooksPermissions = "delete"
+	OnCallRoleWebhooksPermissionsRead   OnCallRoleWebhooksPermissions = "read"
+	OnCallRoleWebhooksPermissionsUpdate OnCallRoleWebhooksPermissions = "update"
+)
+
+// Defines values for OnCallRoleWorkflowsPermissions.
+const (
+	OnCallRoleWorkflowsPermissionsCreate OnCallRoleWorkflowsPermissions = "create"
+	OnCallRoleWorkflowsPermissionsDelete OnCallRoleWorkflowsPermissions = "delete"
+	OnCallRoleWorkflowsPermissionsRead   OnCallRoleWorkflowsPermissions = "read"
+	OnCallRoleWorkflowsPermissionsUpdate OnCallRoleWorkflowsPermissions = "update"
+)
+
+// Defines values for OnCallRoleListDataType.
+const (
+	OnCallRoleListDataTypeOnCallRoles OnCallRoleListDataType = "on_call_roles"
+)
+
+// Defines values for OnCallRoleResponseDataType.
+const (
+	OnCallRoleResponseDataTypeOnCallRoles OnCallRoleResponseDataType = "on_call_roles"
 )
 
 // Defines values for OnCallShadowShadowableType.
@@ -4448,6 +4745,18 @@ const (
 	UpdateFormFieldOptionDataTypeFormFieldOptions UpdateFormFieldOptionDataType = "form_field_options"
 )
 
+// Defines values for UpdateFormFieldPlacementDataAttributesPlacementOperator.
+const (
+	UpdateFormFieldPlacementDataAttributesPlacementOperatorAnd UpdateFormFieldPlacementDataAttributesPlacementOperator = "and"
+	UpdateFormFieldPlacementDataAttributesPlacementOperatorOr  UpdateFormFieldPlacementDataAttributesPlacementOperator = "or"
+)
+
+// Defines values for UpdateFormFieldPlacementDataAttributesRequiredOperator.
+const (
+	UpdateFormFieldPlacementDataAttributesRequiredOperatorAnd UpdateFormFieldPlacementDataAttributesRequiredOperator = "and"
+	UpdateFormFieldPlacementDataAttributesRequiredOperatorOr  UpdateFormFieldPlacementDataAttributesRequiredOperator = "or"
+)
+
 // Defines values for UpdateFormFieldPlacementDataType.
 const (
 	UpdateFormFieldPlacementDataTypeFormFieldPlacements UpdateFormFieldPlacementDataType = "form_field_placements"
@@ -4887,6 +5196,140 @@ const (
 	UpdateNotionPage UpdateNotionPageTaskParamsTaskType = "update_notion_page"
 )
 
+// Defines values for UpdateOnCallRoleDataAttributesAlertSourcesPermissions.
+const (
+	UpdateOnCallRoleDataAttributesAlertSourcesPermissionsCreate UpdateOnCallRoleDataAttributesAlertSourcesPermissions = "create"
+	UpdateOnCallRoleDataAttributesAlertSourcesPermissionsDelete UpdateOnCallRoleDataAttributesAlertSourcesPermissions = "delete"
+	UpdateOnCallRoleDataAttributesAlertSourcesPermissionsUpdate UpdateOnCallRoleDataAttributesAlertSourcesPermissions = "update"
+)
+
+// Defines values for UpdateOnCallRoleDataAttributesAlertUrgencyPermissions.
+const (
+	UpdateOnCallRoleDataAttributesAlertUrgencyPermissionsCreate UpdateOnCallRoleDataAttributesAlertUrgencyPermissions = "create"
+	UpdateOnCallRoleDataAttributesAlertUrgencyPermissionsDelete UpdateOnCallRoleDataAttributesAlertUrgencyPermissions = "delete"
+	UpdateOnCallRoleDataAttributesAlertUrgencyPermissionsRead   UpdateOnCallRoleDataAttributesAlertUrgencyPermissions = "read"
+	UpdateOnCallRoleDataAttributesAlertUrgencyPermissionsUpdate UpdateOnCallRoleDataAttributesAlertUrgencyPermissions = "update"
+)
+
+// Defines values for UpdateOnCallRoleDataAttributesAlertsPermissions.
+const (
+	UpdateOnCallRoleDataAttributesAlertsPermissionsCreate UpdateOnCallRoleDataAttributesAlertsPermissions = "create"
+	UpdateOnCallRoleDataAttributesAlertsPermissionsRead   UpdateOnCallRoleDataAttributesAlertsPermissions = "read"
+	UpdateOnCallRoleDataAttributesAlertsPermissionsUpdate UpdateOnCallRoleDataAttributesAlertsPermissions = "update"
+)
+
+// Defines values for UpdateOnCallRoleDataAttributesApiKeysPermissions.
+const (
+	UpdateOnCallRoleDataAttributesApiKeysPermissionsCreate UpdateOnCallRoleDataAttributesApiKeysPermissions = "create"
+	UpdateOnCallRoleDataAttributesApiKeysPermissionsDelete UpdateOnCallRoleDataAttributesApiKeysPermissions = "delete"
+	UpdateOnCallRoleDataAttributesApiKeysPermissionsRead   UpdateOnCallRoleDataAttributesApiKeysPermissions = "read"
+	UpdateOnCallRoleDataAttributesApiKeysPermissionsUpdate UpdateOnCallRoleDataAttributesApiKeysPermissions = "update"
+)
+
+// Defines values for UpdateOnCallRoleDataAttributesAuditsPermissions.
+const (
+	UpdateOnCallRoleDataAttributesAuditsPermissionsCreate UpdateOnCallRoleDataAttributesAuditsPermissions = "create"
+	UpdateOnCallRoleDataAttributesAuditsPermissionsDelete UpdateOnCallRoleDataAttributesAuditsPermissions = "delete"
+	UpdateOnCallRoleDataAttributesAuditsPermissionsRead   UpdateOnCallRoleDataAttributesAuditsPermissions = "read"
+	UpdateOnCallRoleDataAttributesAuditsPermissionsUpdate UpdateOnCallRoleDataAttributesAuditsPermissions = "update"
+)
+
+// Defines values for UpdateOnCallRoleDataAttributesContactsPermissions.
+const (
+	UpdateOnCallRoleDataAttributesContactsPermissionsRead UpdateOnCallRoleDataAttributesContactsPermissions = "read"
+)
+
+// Defines values for UpdateOnCallRoleDataAttributesEscalationPoliciesPermissions.
+const (
+	UpdateOnCallRoleDataAttributesEscalationPoliciesPermissionsCreate UpdateOnCallRoleDataAttributesEscalationPoliciesPermissions = "create"
+	UpdateOnCallRoleDataAttributesEscalationPoliciesPermissionsDelete UpdateOnCallRoleDataAttributesEscalationPoliciesPermissions = "delete"
+	UpdateOnCallRoleDataAttributesEscalationPoliciesPermissionsRead   UpdateOnCallRoleDataAttributesEscalationPoliciesPermissions = "read"
+	UpdateOnCallRoleDataAttributesEscalationPoliciesPermissionsUpdate UpdateOnCallRoleDataAttributesEscalationPoliciesPermissions = "update"
+)
+
+// Defines values for UpdateOnCallRoleDataAttributesGroupsPermissions.
+const (
+	UpdateOnCallRoleDataAttributesGroupsPermissionsCreate UpdateOnCallRoleDataAttributesGroupsPermissions = "create"
+	UpdateOnCallRoleDataAttributesGroupsPermissionsDelete UpdateOnCallRoleDataAttributesGroupsPermissions = "delete"
+	UpdateOnCallRoleDataAttributesGroupsPermissionsRead   UpdateOnCallRoleDataAttributesGroupsPermissions = "read"
+	UpdateOnCallRoleDataAttributesGroupsPermissionsUpdate UpdateOnCallRoleDataAttributesGroupsPermissions = "update"
+)
+
+// Defines values for UpdateOnCallRoleDataAttributesHeartbeatsPermissions.
+const (
+	UpdateOnCallRoleDataAttributesHeartbeatsPermissionsCreate UpdateOnCallRoleDataAttributesHeartbeatsPermissions = "create"
+	UpdateOnCallRoleDataAttributesHeartbeatsPermissionsDelete UpdateOnCallRoleDataAttributesHeartbeatsPermissions = "delete"
+	UpdateOnCallRoleDataAttributesHeartbeatsPermissionsRead   UpdateOnCallRoleDataAttributesHeartbeatsPermissions = "read"
+	UpdateOnCallRoleDataAttributesHeartbeatsPermissionsUpdate UpdateOnCallRoleDataAttributesHeartbeatsPermissions = "update"
+)
+
+// Defines values for UpdateOnCallRoleDataAttributesIntegrationsPermissions.
+const (
+	UpdateOnCallRoleDataAttributesIntegrationsPermissionsCreate UpdateOnCallRoleDataAttributesIntegrationsPermissions = "create"
+	UpdateOnCallRoleDataAttributesIntegrationsPermissionsDelete UpdateOnCallRoleDataAttributesIntegrationsPermissions = "delete"
+	UpdateOnCallRoleDataAttributesIntegrationsPermissionsRead   UpdateOnCallRoleDataAttributesIntegrationsPermissions = "read"
+	UpdateOnCallRoleDataAttributesIntegrationsPermissionsUpdate UpdateOnCallRoleDataAttributesIntegrationsPermissions = "update"
+)
+
+// Defines values for UpdateOnCallRoleDataAttributesInvitationsPermissions.
+const (
+	UpdateOnCallRoleDataAttributesInvitationsPermissionsCreate UpdateOnCallRoleDataAttributesInvitationsPermissions = "create"
+	UpdateOnCallRoleDataAttributesInvitationsPermissionsDelete UpdateOnCallRoleDataAttributesInvitationsPermissions = "delete"
+	UpdateOnCallRoleDataAttributesInvitationsPermissionsRead   UpdateOnCallRoleDataAttributesInvitationsPermissions = "read"
+	UpdateOnCallRoleDataAttributesInvitationsPermissionsUpdate UpdateOnCallRoleDataAttributesInvitationsPermissions = "update"
+)
+
+// Defines values for UpdateOnCallRoleDataAttributesLiveCallRoutingPermissions.
+const (
+	UpdateOnCallRoleDataAttributesLiveCallRoutingPermissionsCreate UpdateOnCallRoleDataAttributesLiveCallRoutingPermissions = "create"
+	UpdateOnCallRoleDataAttributesLiveCallRoutingPermissionsDelete UpdateOnCallRoleDataAttributesLiveCallRoutingPermissions = "delete"
+	UpdateOnCallRoleDataAttributesLiveCallRoutingPermissionsRead   UpdateOnCallRoleDataAttributesLiveCallRoutingPermissions = "read"
+	UpdateOnCallRoleDataAttributesLiveCallRoutingPermissionsUpdate UpdateOnCallRoleDataAttributesLiveCallRoutingPermissions = "update"
+)
+
+// Defines values for UpdateOnCallRoleDataAttributesScheduleOverridePermissions.
+const (
+	UpdateOnCallRoleDataAttributesScheduleOverridePermissionsCreate UpdateOnCallRoleDataAttributesScheduleOverridePermissions = "create"
+	UpdateOnCallRoleDataAttributesScheduleOverridePermissionsUpdate UpdateOnCallRoleDataAttributesScheduleOverridePermissions = "update"
+)
+
+// Defines values for UpdateOnCallRoleDataAttributesSchedulesPermissions.
+const (
+	UpdateOnCallRoleDataAttributesSchedulesPermissionsCreate UpdateOnCallRoleDataAttributesSchedulesPermissions = "create"
+	UpdateOnCallRoleDataAttributesSchedulesPermissionsDelete UpdateOnCallRoleDataAttributesSchedulesPermissions = "delete"
+	UpdateOnCallRoleDataAttributesSchedulesPermissionsRead   UpdateOnCallRoleDataAttributesSchedulesPermissions = "read"
+	UpdateOnCallRoleDataAttributesSchedulesPermissionsUpdate UpdateOnCallRoleDataAttributesSchedulesPermissions = "update"
+)
+
+// Defines values for UpdateOnCallRoleDataAttributesServicesPermissions.
+const (
+	UpdateOnCallRoleDataAttributesServicesPermissionsCreate UpdateOnCallRoleDataAttributesServicesPermissions = "create"
+	UpdateOnCallRoleDataAttributesServicesPermissionsDelete UpdateOnCallRoleDataAttributesServicesPermissions = "delete"
+	UpdateOnCallRoleDataAttributesServicesPermissionsRead   UpdateOnCallRoleDataAttributesServicesPermissions = "read"
+	UpdateOnCallRoleDataAttributesServicesPermissionsUpdate UpdateOnCallRoleDataAttributesServicesPermissions = "update"
+)
+
+// Defines values for UpdateOnCallRoleDataAttributesWebhooksPermissions.
+const (
+	UpdateOnCallRoleDataAttributesWebhooksPermissionsCreate UpdateOnCallRoleDataAttributesWebhooksPermissions = "create"
+	UpdateOnCallRoleDataAttributesWebhooksPermissionsDelete UpdateOnCallRoleDataAttributesWebhooksPermissions = "delete"
+	UpdateOnCallRoleDataAttributesWebhooksPermissionsRead   UpdateOnCallRoleDataAttributesWebhooksPermissions = "read"
+	UpdateOnCallRoleDataAttributesWebhooksPermissionsUpdate UpdateOnCallRoleDataAttributesWebhooksPermissions = "update"
+)
+
+// Defines values for UpdateOnCallRoleDataAttributesWorkflowsPermissions.
+const (
+	UpdateOnCallRoleDataAttributesWorkflowsPermissionsCreate UpdateOnCallRoleDataAttributesWorkflowsPermissions = "create"
+	UpdateOnCallRoleDataAttributesWorkflowsPermissionsDelete UpdateOnCallRoleDataAttributesWorkflowsPermissions = "delete"
+	UpdateOnCallRoleDataAttributesWorkflowsPermissionsRead   UpdateOnCallRoleDataAttributesWorkflowsPermissions = "read"
+	UpdateOnCallRoleDataAttributesWorkflowsPermissionsUpdate UpdateOnCallRoleDataAttributesWorkflowsPermissions = "update"
+)
+
+// Defines values for UpdateOnCallRoleDataType.
+const (
+	UpdateOnCallRoleDataTypeOnCallRoles UpdateOnCallRoleDataType = "on_call_roles"
+)
+
 // Defines values for UpdateOnCallShadowDataAttributesShadowableType.
 const (
 	UpdateOnCallShadowDataAttributesShadowableTypeSchedule UpdateOnCallShadowDataAttributesShadowableType = "Schedule"
@@ -5212,10 +5655,10 @@ const (
 
 // Defines values for UpdateRoleDataAttributesWorkflowsPermissions.
 const (
-	UpdateRoleDataAttributesWorkflowsPermissionsCreate UpdateRoleDataAttributesWorkflowsPermissions = "create"
-	UpdateRoleDataAttributesWorkflowsPermissionsDelete UpdateRoleDataAttributesWorkflowsPermissions = "delete"
-	UpdateRoleDataAttributesWorkflowsPermissionsRead   UpdateRoleDataAttributesWorkflowsPermissions = "read"
-	UpdateRoleDataAttributesWorkflowsPermissionsUpdate UpdateRoleDataAttributesWorkflowsPermissions = "update"
+	Create UpdateRoleDataAttributesWorkflowsPermissions = "create"
+	Delete UpdateRoleDataAttributesWorkflowsPermissions = "delete"
+	Read   UpdateRoleDataAttributesWorkflowsPermissions = "read"
+	Update UpdateRoleDataAttributesWorkflowsPermissions = "update"
 )
 
 // Defines values for UpdateRoleDataType.
@@ -9006,12 +9449,24 @@ type FormFieldPlacement struct {
 	// FormSetId The form set this field is placed in.
 	FormSetId string `json:"form_set_id"`
 
+	// PlacementOperator Logical operator when evaluating multiple form_field_placement_conditions with conditioned=placement
+	PlacementOperator *FormFieldPlacementPlacementOperator `json:"placement_operator,omitempty"`
+
 	// Position The position of the field placement.
 	Position int `json:"position"`
 
-	// Required Whether the field is required on this form.
+	// Required Whether the field is unconditionally required on this form.
 	Required bool `json:"required"`
+
+	// RequiredOperator Logical operator when evaluating multiple form_field_placement_conditions with conditioned=required
+	RequiredOperator *FormFieldPlacementRequiredOperator `json:"required_operator,omitempty"`
 }
+
+// FormFieldPlacementPlacementOperator Logical operator when evaluating multiple form_field_placement_conditions with conditioned=placement
+type FormFieldPlacementPlacementOperator string
+
+// FormFieldPlacementRequiredOperator Logical operator when evaluating multiple form_field_placement_conditions with conditioned=required
+type FormFieldPlacementRequiredOperator string
 
 // FormFieldPlacementCondition defines model for form_field_placement_condition.
 type FormFieldPlacementCondition struct {
@@ -11662,15 +12117,27 @@ type NewFormFieldPlacement struct {
 			// FormSetId The form set this field is placed in.
 			FormSetId string `json:"form_set_id"`
 
+			// PlacementOperator Logical operator when evaluating multiple form_field_placement_conditions with conditioned=placement
+			PlacementOperator *NewFormFieldPlacementDataAttributesPlacementOperator `json:"placement_operator,omitempty"`
+
 			// Position The position of the field placement.
 			Position *int `json:"position,omitempty"`
 
-			// Required Whether the field is required on this form.
+			// Required Whether the field is unconditionally required on this form.
 			Required *bool `json:"required,omitempty"`
+
+			// RequiredOperator Logical operator when evaluating multiple form_field_placement_conditions with conditioned=required
+			RequiredOperator *NewFormFieldPlacementDataAttributesRequiredOperator `json:"required_operator,omitempty"`
 		} `json:"attributes"`
 		Type NewFormFieldPlacementDataType `json:"type"`
 	} `json:"data"`
 }
+
+// NewFormFieldPlacementDataAttributesPlacementOperator Logical operator when evaluating multiple form_field_placement_conditions with conditioned=placement
+type NewFormFieldPlacementDataAttributesPlacementOperator string
+
+// NewFormFieldPlacementDataAttributesRequiredOperator Logical operator when evaluating multiple form_field_placement_conditions with conditioned=required
+type NewFormFieldPlacementDataAttributesRequiredOperator string
 
 // NewFormFieldPlacementDataType defines model for NewFormFieldPlacement.Data.Type.
 type NewFormFieldPlacementDataType string
@@ -12439,6 +12906,95 @@ type NewLiveCallRouterDataAttributesPhoneType string
 
 // NewLiveCallRouterDataType defines model for NewLiveCallRouter.Data.Type.
 type NewLiveCallRouterDataType string
+
+// NewOnCallRole defines model for new_on_call_role.
+type NewOnCallRole struct {
+	Data struct {
+		Attributes struct {
+			AlertSourcesPermissions       *[]NewOnCallRoleDataAttributesAlertSourcesPermissions       `json:"alert_sources_permissions,omitempty"`
+			AlertUrgencyPermissions       *[]NewOnCallRoleDataAttributesAlertUrgencyPermissions       `json:"alert_urgency_permissions,omitempty"`
+			AlertsPermissions             *[]NewOnCallRoleDataAttributesAlertsPermissions             `json:"alerts_permissions,omitempty"`
+			ApiKeysPermissions            *[]NewOnCallRoleDataAttributesApiKeysPermissions            `json:"api_keys_permissions,omitempty"`
+			AuditsPermissions             *[]NewOnCallRoleDataAttributesAuditsPermissions             `json:"audits_permissions,omitempty"`
+			ContactsPermissions           *[]NewOnCallRoleDataAttributesContactsPermissions           `json:"contacts_permissions,omitempty"`
+			EscalationPoliciesPermissions *[]NewOnCallRoleDataAttributesEscalationPoliciesPermissions `json:"escalation_policies_permissions,omitempty"`
+			GroupsPermissions             *[]NewOnCallRoleDataAttributesGroupsPermissions             `json:"groups_permissions,omitempty"`
+			HeartbeatsPermissions         *[]NewOnCallRoleDataAttributesHeartbeatsPermissions         `json:"heartbeats_permissions,omitempty"`
+			IntegrationsPermissions       *[]NewOnCallRoleDataAttributesIntegrationsPermissions       `json:"integrations_permissions,omitempty"`
+			InvitationsPermissions        *[]NewOnCallRoleDataAttributesInvitationsPermissions        `json:"invitations_permissions,omitempty"`
+			LiveCallRoutingPermissions    *[]NewOnCallRoleDataAttributesLiveCallRoutingPermissions    `json:"live_call_routing_permissions,omitempty"`
+
+			// Name The role name.
+			Name                        string                                                    `json:"name"`
+			ScheduleOverridePermissions *[]NewOnCallRoleDataAttributesScheduleOverridePermissions `json:"schedule_override_permissions,omitempty"`
+			SchedulesPermissions        *[]NewOnCallRoleDataAttributesSchedulesPermissions        `json:"schedules_permissions,omitempty"`
+			ServicesPermissions         *[]NewOnCallRoleDataAttributesServicesPermissions         `json:"services_permissions,omitempty"`
+
+			// Slug The role slug.
+			Slug *string `json:"slug,omitempty"`
+
+			// SystemRole The kind of role (user and custom type roles are only editable)
+			SystemRole           string                                             `json:"system_role"`
+			WebhooksPermissions  *[]NewOnCallRoleDataAttributesWebhooksPermissions  `json:"webhooks_permissions,omitempty"`
+			WorkflowsPermissions *[]NewOnCallRoleDataAttributesWorkflowsPermissions `json:"workflows_permissions,omitempty"`
+		} `json:"attributes"`
+		Type NewOnCallRoleDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewOnCallRoleDataAttributesAlertSourcesPermissions defines model for NewOnCallRole.Data.Attributes.AlertSourcesPermissions.
+type NewOnCallRoleDataAttributesAlertSourcesPermissions string
+
+// NewOnCallRoleDataAttributesAlertUrgencyPermissions defines model for NewOnCallRole.Data.Attributes.AlertUrgencyPermissions.
+type NewOnCallRoleDataAttributesAlertUrgencyPermissions string
+
+// NewOnCallRoleDataAttributesAlertsPermissions defines model for NewOnCallRole.Data.Attributes.AlertsPermissions.
+type NewOnCallRoleDataAttributesAlertsPermissions string
+
+// NewOnCallRoleDataAttributesApiKeysPermissions defines model for NewOnCallRole.Data.Attributes.ApiKeysPermissions.
+type NewOnCallRoleDataAttributesApiKeysPermissions string
+
+// NewOnCallRoleDataAttributesAuditsPermissions defines model for NewOnCallRole.Data.Attributes.AuditsPermissions.
+type NewOnCallRoleDataAttributesAuditsPermissions string
+
+// NewOnCallRoleDataAttributesContactsPermissions defines model for NewOnCallRole.Data.Attributes.ContactsPermissions.
+type NewOnCallRoleDataAttributesContactsPermissions string
+
+// NewOnCallRoleDataAttributesEscalationPoliciesPermissions defines model for NewOnCallRole.Data.Attributes.EscalationPoliciesPermissions.
+type NewOnCallRoleDataAttributesEscalationPoliciesPermissions string
+
+// NewOnCallRoleDataAttributesGroupsPermissions defines model for NewOnCallRole.Data.Attributes.GroupsPermissions.
+type NewOnCallRoleDataAttributesGroupsPermissions string
+
+// NewOnCallRoleDataAttributesHeartbeatsPermissions defines model for NewOnCallRole.Data.Attributes.HeartbeatsPermissions.
+type NewOnCallRoleDataAttributesHeartbeatsPermissions string
+
+// NewOnCallRoleDataAttributesIntegrationsPermissions defines model for NewOnCallRole.Data.Attributes.IntegrationsPermissions.
+type NewOnCallRoleDataAttributesIntegrationsPermissions string
+
+// NewOnCallRoleDataAttributesInvitationsPermissions defines model for NewOnCallRole.Data.Attributes.InvitationsPermissions.
+type NewOnCallRoleDataAttributesInvitationsPermissions string
+
+// NewOnCallRoleDataAttributesLiveCallRoutingPermissions defines model for NewOnCallRole.Data.Attributes.LiveCallRoutingPermissions.
+type NewOnCallRoleDataAttributesLiveCallRoutingPermissions string
+
+// NewOnCallRoleDataAttributesScheduleOverridePermissions defines model for NewOnCallRole.Data.Attributes.ScheduleOverridePermissions.
+type NewOnCallRoleDataAttributesScheduleOverridePermissions string
+
+// NewOnCallRoleDataAttributesSchedulesPermissions defines model for NewOnCallRole.Data.Attributes.SchedulesPermissions.
+type NewOnCallRoleDataAttributesSchedulesPermissions string
+
+// NewOnCallRoleDataAttributesServicesPermissions defines model for NewOnCallRole.Data.Attributes.ServicesPermissions.
+type NewOnCallRoleDataAttributesServicesPermissions string
+
+// NewOnCallRoleDataAttributesWebhooksPermissions defines model for NewOnCallRole.Data.Attributes.WebhooksPermissions.
+type NewOnCallRoleDataAttributesWebhooksPermissions string
+
+// NewOnCallRoleDataAttributesWorkflowsPermissions defines model for NewOnCallRole.Data.Attributes.WorkflowsPermissions.
+type NewOnCallRoleDataAttributesWorkflowsPermissions string
+
+// NewOnCallRoleDataType defines model for NewOnCallRole.Data.Type.
+type NewOnCallRoleDataType string
 
 // NewOnCallShadow defines model for new_on_call_shadow.
 type NewOnCallShadow struct {
@@ -13624,6 +14180,118 @@ type NewWorkflowTask_Data_Attributes_TaskParams struct {
 
 // NewWorkflowTaskDataType defines model for NewWorkflowTask.Data.Type.
 type NewWorkflowTaskDataType string
+
+// OnCallRole defines model for on_call_role.
+type OnCallRole struct {
+	AlertSourcesPermissions       *[]OnCallRoleAlertSourcesPermissions       `json:"alert_sources_permissions,omitempty"`
+	AlertUrgencyPermissions       *[]OnCallRoleAlertUrgencyPermissions       `json:"alert_urgency_permissions,omitempty"`
+	AlertsPermissions             *[]OnCallRoleAlertsPermissions             `json:"alerts_permissions,omitempty"`
+	ApiKeysPermissions            *[]OnCallRoleApiKeysPermissions            `json:"api_keys_permissions,omitempty"`
+	AuditsPermissions             *[]OnCallRoleAuditsPermissions             `json:"audits_permissions,omitempty"`
+	ContactsPermissions           *[]OnCallRoleContactsPermissions           `json:"contacts_permissions,omitempty"`
+	CreatedAt                     string                                     `json:"created_at"`
+	EscalationPoliciesPermissions *[]OnCallRoleEscalationPoliciesPermissions `json:"escalation_policies_permissions,omitempty"`
+	GroupsPermissions             *[]OnCallRoleGroupsPermissions             `json:"groups_permissions,omitempty"`
+	HeartbeatsPermissions         *[]OnCallRoleHeartbeatsPermissions         `json:"heartbeats_permissions,omitempty"`
+	IntegrationsPermissions       *[]OnCallRoleIntegrationsPermissions       `json:"integrations_permissions,omitempty"`
+	InvitationsPermissions        *[]OnCallRoleInvitationsPermissions        `json:"invitations_permissions,omitempty"`
+	LiveCallRoutingPermissions    *[]OnCallRoleLiveCallRoutingPermissions    `json:"live_call_routing_permissions,omitempty"`
+
+	// Name The role name.
+	Name                        string                                   `json:"name"`
+	ScheduleOverridePermissions *[]OnCallRoleScheduleOverridePermissions `json:"schedule_override_permissions,omitempty"`
+	SchedulesPermissions        *[]OnCallRoleSchedulesPermissions        `json:"schedules_permissions,omitempty"`
+	ServicesPermissions         *[]OnCallRoleServicesPermissions         `json:"services_permissions,omitempty"`
+
+	// Slug The role slug.
+	Slug string `json:"slug"`
+
+	// SystemRole The kind of role
+	SystemRole           string                            `json:"system_role"`
+	UpdatedAt            string                            `json:"updated_at"`
+	WebhooksPermissions  *[]OnCallRoleWebhooksPermissions  `json:"webhooks_permissions,omitempty"`
+	WorkflowsPermissions *[]OnCallRoleWorkflowsPermissions `json:"workflows_permissions,omitempty"`
+}
+
+// OnCallRoleAlertSourcesPermissions defines model for OnCallRole.AlertSourcesPermissions.
+type OnCallRoleAlertSourcesPermissions string
+
+// OnCallRoleAlertUrgencyPermissions defines model for OnCallRole.AlertUrgencyPermissions.
+type OnCallRoleAlertUrgencyPermissions string
+
+// OnCallRoleAlertsPermissions defines model for OnCallRole.AlertsPermissions.
+type OnCallRoleAlertsPermissions string
+
+// OnCallRoleApiKeysPermissions defines model for OnCallRole.ApiKeysPermissions.
+type OnCallRoleApiKeysPermissions string
+
+// OnCallRoleAuditsPermissions defines model for OnCallRole.AuditsPermissions.
+type OnCallRoleAuditsPermissions string
+
+// OnCallRoleContactsPermissions defines model for OnCallRole.ContactsPermissions.
+type OnCallRoleContactsPermissions string
+
+// OnCallRoleEscalationPoliciesPermissions defines model for OnCallRole.EscalationPoliciesPermissions.
+type OnCallRoleEscalationPoliciesPermissions string
+
+// OnCallRoleGroupsPermissions defines model for OnCallRole.GroupsPermissions.
+type OnCallRoleGroupsPermissions string
+
+// OnCallRoleHeartbeatsPermissions defines model for OnCallRole.HeartbeatsPermissions.
+type OnCallRoleHeartbeatsPermissions string
+
+// OnCallRoleIntegrationsPermissions defines model for OnCallRole.IntegrationsPermissions.
+type OnCallRoleIntegrationsPermissions string
+
+// OnCallRoleInvitationsPermissions defines model for OnCallRole.InvitationsPermissions.
+type OnCallRoleInvitationsPermissions string
+
+// OnCallRoleLiveCallRoutingPermissions defines model for OnCallRole.LiveCallRoutingPermissions.
+type OnCallRoleLiveCallRoutingPermissions string
+
+// OnCallRoleScheduleOverridePermissions defines model for OnCallRole.ScheduleOverridePermissions.
+type OnCallRoleScheduleOverridePermissions string
+
+// OnCallRoleSchedulesPermissions defines model for OnCallRole.SchedulesPermissions.
+type OnCallRoleSchedulesPermissions string
+
+// OnCallRoleServicesPermissions defines model for OnCallRole.ServicesPermissions.
+type OnCallRoleServicesPermissions string
+
+// OnCallRoleWebhooksPermissions defines model for OnCallRole.WebhooksPermissions.
+type OnCallRoleWebhooksPermissions string
+
+// OnCallRoleWorkflowsPermissions defines model for OnCallRole.WorkflowsPermissions.
+type OnCallRoleWorkflowsPermissions string
+
+// OnCallRoleList defines model for on_call_role_list.
+type OnCallRoleList struct {
+	Data []struct {
+		Attributes OnCallRole `json:"attributes"`
+
+		// Id Unique ID of the on_call_role
+		Id   string                 `json:"id"`
+		Type OnCallRoleListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// OnCallRoleListDataType defines model for OnCallRoleList.Data.Type.
+type OnCallRoleListDataType string
+
+// OnCallRoleResponse defines model for on_call_role_response.
+type OnCallRoleResponse struct {
+	Data struct {
+		Attributes OnCallRole `json:"attributes"`
+
+		// Id Unique ID of the on_call_role
+		Id   string                     `json:"id"`
+		Type OnCallRoleResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// OnCallRoleResponseDataType defines model for OnCallRoleResponse.Data.Type.
+type OnCallRoleResponseDataType string
 
 // OnCallShadow defines model for on_call_shadow.
 type OnCallShadow struct {
@@ -16605,15 +17273,27 @@ type UpdateFormFieldPlacement struct {
 			// FormSetId The form set this field is placed in.
 			FormSetId *string `json:"form_set_id,omitempty"`
 
+			// PlacementOperator Logical operator when evaluating multiple form_field_placement_conditions with conditioned=placement
+			PlacementOperator *UpdateFormFieldPlacementDataAttributesPlacementOperator `json:"placement_operator,omitempty"`
+
 			// Position The position of the field placement.
 			Position *int `json:"position,omitempty"`
 
-			// Required Whether the field is required on this form.
+			// Required Whether the field is unconditionally required on this form.
 			Required *bool `json:"required,omitempty"`
+
+			// RequiredOperator Logical operator when evaluating multiple form_field_placement_conditions with conditioned=required
+			RequiredOperator *UpdateFormFieldPlacementDataAttributesRequiredOperator `json:"required_operator,omitempty"`
 		} `json:"attributes"`
 		Type UpdateFormFieldPlacementDataType `json:"type"`
 	} `json:"data"`
 }
+
+// UpdateFormFieldPlacementDataAttributesPlacementOperator Logical operator when evaluating multiple form_field_placement_conditions with conditioned=placement
+type UpdateFormFieldPlacementDataAttributesPlacementOperator string
+
+// UpdateFormFieldPlacementDataAttributesRequiredOperator Logical operator when evaluating multiple form_field_placement_conditions with conditioned=required
+type UpdateFormFieldPlacementDataAttributesRequiredOperator string
 
 // UpdateFormFieldPlacementDataType defines model for UpdateFormFieldPlacement.Data.Type.
 type UpdateFormFieldPlacementDataType string
@@ -17731,6 +18411,95 @@ type UpdateNotionPageTaskParams struct {
 
 // UpdateNotionPageTaskParamsTaskType defines model for UpdateNotionPageTaskParams.TaskType.
 type UpdateNotionPageTaskParamsTaskType string
+
+// UpdateOnCallRole defines model for update_on_call_role.
+type UpdateOnCallRole struct {
+	Data struct {
+		Attributes struct {
+			AlertSourcesPermissions       *[]UpdateOnCallRoleDataAttributesAlertSourcesPermissions       `json:"alert_sources_permissions,omitempty"`
+			AlertUrgencyPermissions       *[]UpdateOnCallRoleDataAttributesAlertUrgencyPermissions       `json:"alert_urgency_permissions,omitempty"`
+			AlertsPermissions             *[]UpdateOnCallRoleDataAttributesAlertsPermissions             `json:"alerts_permissions,omitempty"`
+			ApiKeysPermissions            *[]UpdateOnCallRoleDataAttributesApiKeysPermissions            `json:"api_keys_permissions,omitempty"`
+			AuditsPermissions             *[]UpdateOnCallRoleDataAttributesAuditsPermissions             `json:"audits_permissions,omitempty"`
+			ContactsPermissions           *[]UpdateOnCallRoleDataAttributesContactsPermissions           `json:"contacts_permissions,omitempty"`
+			EscalationPoliciesPermissions *[]UpdateOnCallRoleDataAttributesEscalationPoliciesPermissions `json:"escalation_policies_permissions,omitempty"`
+			GroupsPermissions             *[]UpdateOnCallRoleDataAttributesGroupsPermissions             `json:"groups_permissions,omitempty"`
+			HeartbeatsPermissions         *[]UpdateOnCallRoleDataAttributesHeartbeatsPermissions         `json:"heartbeats_permissions,omitempty"`
+			IntegrationsPermissions       *[]UpdateOnCallRoleDataAttributesIntegrationsPermissions       `json:"integrations_permissions,omitempty"`
+			InvitationsPermissions        *[]UpdateOnCallRoleDataAttributesInvitationsPermissions        `json:"invitations_permissions,omitempty"`
+			LiveCallRoutingPermissions    *[]UpdateOnCallRoleDataAttributesLiveCallRoutingPermissions    `json:"live_call_routing_permissions,omitempty"`
+
+			// Name The role name.
+			Name                        *string                                                      `json:"name,omitempty"`
+			ScheduleOverridePermissions *[]UpdateOnCallRoleDataAttributesScheduleOverridePermissions `json:"schedule_override_permissions,omitempty"`
+			SchedulesPermissions        *[]UpdateOnCallRoleDataAttributesSchedulesPermissions        `json:"schedules_permissions,omitempty"`
+			ServicesPermissions         *[]UpdateOnCallRoleDataAttributesServicesPermissions         `json:"services_permissions,omitempty"`
+
+			// Slug The role slug.
+			Slug *string `json:"slug,omitempty"`
+
+			// SystemRole The kind of role (user and custom type roles are only editable)
+			SystemRole           *string                                               `json:"system_role,omitempty"`
+			WebhooksPermissions  *[]UpdateOnCallRoleDataAttributesWebhooksPermissions  `json:"webhooks_permissions,omitempty"`
+			WorkflowsPermissions *[]UpdateOnCallRoleDataAttributesWorkflowsPermissions `json:"workflows_permissions,omitempty"`
+		} `json:"attributes"`
+		Type UpdateOnCallRoleDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateOnCallRoleDataAttributesAlertSourcesPermissions defines model for UpdateOnCallRole.Data.Attributes.AlertSourcesPermissions.
+type UpdateOnCallRoleDataAttributesAlertSourcesPermissions string
+
+// UpdateOnCallRoleDataAttributesAlertUrgencyPermissions defines model for UpdateOnCallRole.Data.Attributes.AlertUrgencyPermissions.
+type UpdateOnCallRoleDataAttributesAlertUrgencyPermissions string
+
+// UpdateOnCallRoleDataAttributesAlertsPermissions defines model for UpdateOnCallRole.Data.Attributes.AlertsPermissions.
+type UpdateOnCallRoleDataAttributesAlertsPermissions string
+
+// UpdateOnCallRoleDataAttributesApiKeysPermissions defines model for UpdateOnCallRole.Data.Attributes.ApiKeysPermissions.
+type UpdateOnCallRoleDataAttributesApiKeysPermissions string
+
+// UpdateOnCallRoleDataAttributesAuditsPermissions defines model for UpdateOnCallRole.Data.Attributes.AuditsPermissions.
+type UpdateOnCallRoleDataAttributesAuditsPermissions string
+
+// UpdateOnCallRoleDataAttributesContactsPermissions defines model for UpdateOnCallRole.Data.Attributes.ContactsPermissions.
+type UpdateOnCallRoleDataAttributesContactsPermissions string
+
+// UpdateOnCallRoleDataAttributesEscalationPoliciesPermissions defines model for UpdateOnCallRole.Data.Attributes.EscalationPoliciesPermissions.
+type UpdateOnCallRoleDataAttributesEscalationPoliciesPermissions string
+
+// UpdateOnCallRoleDataAttributesGroupsPermissions defines model for UpdateOnCallRole.Data.Attributes.GroupsPermissions.
+type UpdateOnCallRoleDataAttributesGroupsPermissions string
+
+// UpdateOnCallRoleDataAttributesHeartbeatsPermissions defines model for UpdateOnCallRole.Data.Attributes.HeartbeatsPermissions.
+type UpdateOnCallRoleDataAttributesHeartbeatsPermissions string
+
+// UpdateOnCallRoleDataAttributesIntegrationsPermissions defines model for UpdateOnCallRole.Data.Attributes.IntegrationsPermissions.
+type UpdateOnCallRoleDataAttributesIntegrationsPermissions string
+
+// UpdateOnCallRoleDataAttributesInvitationsPermissions defines model for UpdateOnCallRole.Data.Attributes.InvitationsPermissions.
+type UpdateOnCallRoleDataAttributesInvitationsPermissions string
+
+// UpdateOnCallRoleDataAttributesLiveCallRoutingPermissions defines model for UpdateOnCallRole.Data.Attributes.LiveCallRoutingPermissions.
+type UpdateOnCallRoleDataAttributesLiveCallRoutingPermissions string
+
+// UpdateOnCallRoleDataAttributesScheduleOverridePermissions defines model for UpdateOnCallRole.Data.Attributes.ScheduleOverridePermissions.
+type UpdateOnCallRoleDataAttributesScheduleOverridePermissions string
+
+// UpdateOnCallRoleDataAttributesSchedulesPermissions defines model for UpdateOnCallRole.Data.Attributes.SchedulesPermissions.
+type UpdateOnCallRoleDataAttributesSchedulesPermissions string
+
+// UpdateOnCallRoleDataAttributesServicesPermissions defines model for UpdateOnCallRole.Data.Attributes.ServicesPermissions.
+type UpdateOnCallRoleDataAttributesServicesPermissions string
+
+// UpdateOnCallRoleDataAttributesWebhooksPermissions defines model for UpdateOnCallRole.Data.Attributes.WebhooksPermissions.
+type UpdateOnCallRoleDataAttributesWebhooksPermissions string
+
+// UpdateOnCallRoleDataAttributesWorkflowsPermissions defines model for UpdateOnCallRole.Data.Attributes.WorkflowsPermissions.
+type UpdateOnCallRoleDataAttributesWorkflowsPermissions string
+
+// UpdateOnCallRoleDataType defines model for UpdateOnCallRole.Data.Type.
+type UpdateOnCallRoleDataType string
 
 // UpdateOnCallShadow defines model for update_on_call_shadow.
 type UpdateOnCallShadow struct {
@@ -20475,6 +21244,21 @@ type GeneratePhoneNumberLiveCallRouterParamsCountryCode string
 // GeneratePhoneNumberLiveCallRouterParamsPhoneType defines parameters for GeneratePhoneNumberLiveCallRouter.
 type GeneratePhoneNumberLiveCallRouterParamsPhoneType string
 
+// ListOnCallRolesParams defines parameters for ListOnCallRoles.
+type ListOnCallRolesParams struct {
+	Include            *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSearch       *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
+	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
+	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	Sort               *string `form:"sort,omitempty" json:"sort,omitempty"`
+}
+
 // ListPlaybooksParams defines parameters for ListPlaybooks.
 type ListPlaybooksParams struct {
 	// Include comma separated if needed. eg: severities,environments,services
@@ -21288,6 +22072,12 @@ type UpdateLiveCallRouterApplicationVndAPIPlusJSONRequestBody = UpdateLiveCallRo
 
 // UpdateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody defines body for UpdateUserNotificationRule for application/vnd.api+json ContentType.
 type UpdateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody = UpdateUserNotificationRule
+
+// CreateOnCallRoleApplicationVndAPIPlusJSONRequestBody defines body for CreateOnCallRole for application/vnd.api+json ContentType.
+type CreateOnCallRoleApplicationVndAPIPlusJSONRequestBody = NewOnCallRole
+
+// UpdateOnCallRoleApplicationVndAPIPlusJSONRequestBody defines body for UpdateOnCallRole for application/vnd.api+json ContentType.
+type UpdateOnCallRoleApplicationVndAPIPlusJSONRequestBody = UpdateOnCallRole
 
 // UpdateOnCallShadowApplicationVndAPIPlusJSONRequestBody defines body for UpdateOnCallShadow for application/vnd.api+json ContentType.
 type UpdateOnCallShadowApplicationVndAPIPlusJSONRequestBody = UpdateOnCallShadow
@@ -35401,6 +36191,25 @@ type ClientInterface interface {
 
 	UpdateUserNotificationRuleWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListOnCallRoles request
+	ListOnCallRoles(ctx context.Context, params *ListOnCallRolesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateOnCallRoleWithBody request with any body
+	CreateOnCallRoleWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateOnCallRoleWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateOnCallRoleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteOnCallRole request
+	DeleteOnCallRole(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetOnCallRole request
+	GetOnCallRole(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateOnCallRoleWithBody request with any body
+	UpdateOnCallRoleWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateOnCallRoleWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateOnCallRoleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// DeleteOnCallShadow request
 	DeleteOnCallShadow(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -40122,6 +40931,90 @@ func (c *Client) UpdateUserNotificationRuleWithBody(ctx context.Context, id stri
 
 func (c *Client) UpdateUserNotificationRuleWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateUserNotificationRuleRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListOnCallRoles(ctx context.Context, params *ListOnCallRolesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListOnCallRolesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateOnCallRoleWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateOnCallRoleRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateOnCallRoleWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateOnCallRoleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateOnCallRoleRequestWithApplicationVndAPIPlusJSONBody(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteOnCallRole(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteOnCallRoleRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetOnCallRole(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetOnCallRoleRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateOnCallRoleWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateOnCallRoleRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateOnCallRoleWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateOnCallRoleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateOnCallRoleRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -59230,6 +60123,370 @@ func NewUpdateUserNotificationRuleRequestWithBody(server string, id string, cont
 	return req, nil
 }
 
+// NewListOnCallRolesRequest generates requests for ListOnCallRoles
+func NewListOnCallRolesRequest(server string, params *ListOnCallRolesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/on_call_roles")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterSearch != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[search]", runtime.ParamLocationQuery, *params.FilterSearch); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterSlug != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[slug]", runtime.ParamLocationQuery, *params.FilterSlug); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterName != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[name]", runtime.ParamLocationQuery, *params.FilterName); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gte]", runtime.ParamLocationQuery, *params.FilterCreatedAtGte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lte]", runtime.ParamLocationQuery, *params.FilterCreatedAtLte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateOnCallRoleRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateOnCallRole builder with application/vnd.api+json body
+func NewCreateOnCallRoleRequestWithApplicationVndAPIPlusJSONBody(server string, body CreateOnCallRoleApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateOnCallRoleRequestWithBody(server, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateOnCallRoleRequestWithBody generates requests for CreateOnCallRole with any type of body
+func NewCreateOnCallRoleRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/on_call_roles")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteOnCallRoleRequest generates requests for DeleteOnCallRole
+func NewDeleteOnCallRoleRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/on_call_roles/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetOnCallRoleRequest generates requests for GetOnCallRole
+func NewGetOnCallRoleRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/on_call_roles/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateOnCallRoleRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateOnCallRole builder with application/vnd.api+json body
+func NewUpdateOnCallRoleRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateOnCallRoleApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateOnCallRoleRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateOnCallRoleRequestWithBody generates requests for UpdateOnCallRole with any type of body
+func NewUpdateOnCallRoleRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/on_call_roles/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewDeleteOnCallShadowRequest generates requests for DeleteOnCallShadow
 func NewDeleteOnCallShadowRequest(server string, id string) (*http.Request, error) {
 	var err error
@@ -70716,6 +71973,25 @@ type ClientWithResponsesInterface interface {
 
 	UpdateUserNotificationRuleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateUserNotificationRuleResponse, error)
 
+	// ListOnCallRolesWithResponse request
+	ListOnCallRolesWithResponse(ctx context.Context, params *ListOnCallRolesParams, reqEditors ...RequestEditorFn) (*ListOnCallRolesResponse, error)
+
+	// CreateOnCallRoleWithBodyWithResponse request with any body
+	CreateOnCallRoleWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateOnCallRoleResponse, error)
+
+	CreateOnCallRoleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateOnCallRoleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateOnCallRoleResponse, error)
+
+	// DeleteOnCallRoleWithResponse request
+	DeleteOnCallRoleWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteOnCallRoleResponse, error)
+
+	// GetOnCallRoleWithResponse request
+	GetOnCallRoleWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetOnCallRoleResponse, error)
+
+	// UpdateOnCallRoleWithBodyWithResponse request with any body
+	UpdateOnCallRoleWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateOnCallRoleResponse, error)
+
+	UpdateOnCallRoleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateOnCallRoleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateOnCallRoleResponse, error)
+
 	// DeleteOnCallShadowWithResponse request
 	DeleteOnCallShadowWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteOnCallShadowResponse, error)
 
@@ -76903,6 +78179,121 @@ func (r UpdateUserNotificationRuleResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r UpdateUserNotificationRuleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListOnCallRolesResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *OnCallRoleList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListOnCallRolesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListOnCallRolesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateOnCallRoleResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *OnCallRoleResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateOnCallRoleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateOnCallRoleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteOnCallRoleResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *OnCallRoleResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteOnCallRoleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteOnCallRoleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetOnCallRoleResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *OnCallRoleResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetOnCallRoleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetOnCallRoleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateOnCallRoleResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *OnCallRoleResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateOnCallRoleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateOnCallRoleResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -83654,6 +85045,67 @@ func (c *ClientWithResponses) UpdateUserNotificationRuleWithApplicationVndAPIPlu
 		return nil, err
 	}
 	return ParseUpdateUserNotificationRuleResponse(rsp)
+}
+
+// ListOnCallRolesWithResponse request returning *ListOnCallRolesResponse
+func (c *ClientWithResponses) ListOnCallRolesWithResponse(ctx context.Context, params *ListOnCallRolesParams, reqEditors ...RequestEditorFn) (*ListOnCallRolesResponse, error) {
+	rsp, err := c.ListOnCallRoles(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListOnCallRolesResponse(rsp)
+}
+
+// CreateOnCallRoleWithBodyWithResponse request with arbitrary body returning *CreateOnCallRoleResponse
+func (c *ClientWithResponses) CreateOnCallRoleWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateOnCallRoleResponse, error) {
+	rsp, err := c.CreateOnCallRoleWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateOnCallRoleResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateOnCallRoleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateOnCallRoleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateOnCallRoleResponse, error) {
+	rsp, err := c.CreateOnCallRoleWithApplicationVndAPIPlusJSONBody(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateOnCallRoleResponse(rsp)
+}
+
+// DeleteOnCallRoleWithResponse request returning *DeleteOnCallRoleResponse
+func (c *ClientWithResponses) DeleteOnCallRoleWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteOnCallRoleResponse, error) {
+	rsp, err := c.DeleteOnCallRole(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteOnCallRoleResponse(rsp)
+}
+
+// GetOnCallRoleWithResponse request returning *GetOnCallRoleResponse
+func (c *ClientWithResponses) GetOnCallRoleWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetOnCallRoleResponse, error) {
+	rsp, err := c.GetOnCallRole(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetOnCallRoleResponse(rsp)
+}
+
+// UpdateOnCallRoleWithBodyWithResponse request with arbitrary body returning *UpdateOnCallRoleResponse
+func (c *ClientWithResponses) UpdateOnCallRoleWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateOnCallRoleResponse, error) {
+	rsp, err := c.UpdateOnCallRoleWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateOnCallRoleResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateOnCallRoleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateOnCallRoleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateOnCallRoleResponse, error) {
+	rsp, err := c.UpdateOnCallRoleWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateOnCallRoleResponse(rsp)
 }
 
 // DeleteOnCallShadowWithResponse request returning *DeleteOnCallShadowResponse
@@ -93545,6 +94997,171 @@ func ParseUpdateUserNotificationRuleResponse(rsp *http.Response) (*UpdateUserNot
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest UserNotificationRuleResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListOnCallRolesResponse parses an HTTP response from a ListOnCallRolesWithResponse call
+func ParseListOnCallRolesResponse(rsp *http.Response) (*ListOnCallRolesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListOnCallRolesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest OnCallRoleList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateOnCallRoleResponse parses an HTTP response from a CreateOnCallRoleWithResponse call
+func ParseCreateOnCallRoleResponse(rsp *http.Response) (*CreateOnCallRoleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateOnCallRoleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest OnCallRoleResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteOnCallRoleResponse parses an HTTP response from a DeleteOnCallRoleWithResponse call
+func ParseDeleteOnCallRoleResponse(rsp *http.Response) (*DeleteOnCallRoleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteOnCallRoleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest OnCallRoleResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetOnCallRoleResponse parses an HTTP response from a GetOnCallRoleWithResponse call
+func ParseGetOnCallRoleResponse(rsp *http.Response) (*GetOnCallRoleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetOnCallRoleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest OnCallRoleResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateOnCallRoleResponse parses an HTTP response from a UpdateOnCallRoleWithResponse call
+func ParseUpdateOnCallRoleResponse(rsp *http.Response) (*UpdateOnCallRoleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateOnCallRoleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest OnCallRoleResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

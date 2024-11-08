@@ -65,7 +65,25 @@ func resourceFormFieldPlacement() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
-				Description: "Whether the field is required on this form.. Value must be one of true or false",
+				Description: "Whether the field is unconditionally required on this form.. Value must be one of true or false",
+			},
+
+			"required_operator": &schema.Schema{
+				Type:        schema.TypeString,
+				Default:     "and",
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Logical operator when evaluating multiple form_field_placement_conditions with conditioned=required. Value must be one of `and`, `or`.",
+			},
+
+			"placement_operator": &schema.Schema{
+				Type:        schema.TypeString,
+				Default:     "and",
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Logical operator when evaluating multiple form_field_placement_conditions with conditioned=placement. Value must be one of `and`, `or`.",
 			},
 		},
 	}
@@ -92,6 +110,12 @@ func resourceFormFieldPlacementCreate(ctx context.Context, d *schema.ResourceDat
 	}
 	if value, ok := d.GetOkExists("required"); ok {
 		s.Required = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("required_operator"); ok {
+		s.RequiredOperator = value.(string)
+	}
+	if value, ok := d.GetOkExists("placement_operator"); ok {
+		s.PlacementOperator = value.(string)
 	}
 
 	res, err := c.CreateFormFieldPlacement(s)
@@ -127,6 +151,8 @@ func resourceFormFieldPlacementRead(ctx context.Context, d *schema.ResourceData,
 	d.Set("form", item.Form)
 	d.Set("position", item.Position)
 	d.Set("required", item.Required)
+	d.Set("required_operator", item.RequiredOperator)
+	d.Set("placement_operator", item.PlacementOperator)
 
 	return nil
 }
@@ -151,6 +177,12 @@ func resourceFormFieldPlacementUpdate(ctx context.Context, d *schema.ResourceDat
 	}
 	if d.HasChange("required") {
 		s.Required = tools.Bool(d.Get("required").(bool))
+	}
+	if d.HasChange("required_operator") {
+		s.RequiredOperator = d.Get("required_operator").(string)
+	}
+	if d.HasChange("placement_operator") {
+		s.PlacementOperator = d.Get("placement_operator").(string)
 	}
 
 	_, err := c.UpdateFormFieldPlacement(d.Id(), s)
