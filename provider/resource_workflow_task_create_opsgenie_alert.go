@@ -6,6 +6,9 @@ import (
 	"context"
 	"fmt"
 
+	"encoding/json"
+	"reflect"
+
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -164,6 +167,25 @@ func resourceWorkflowTaskCreateOpsgenieAlert() *schema.Resource {
 								"P5",
 								"auto",
 							}, false),
+						},
+						"details": &schema.Schema{
+							Description: "Details payload. Can contain liquid markup and need to be valid JSON",
+							Type:        schema.TypeString,
+							Optional:    true,
+							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {
+								var oldJSONAsInterface, newJSONAsInterface interface{}
+
+								if err := json.Unmarshal([]byte(old), &oldJSONAsInterface); err != nil {
+									return false
+								}
+
+								if err := json.Unmarshal([]byte(new), &newJSONAsInterface); err != nil {
+									return false
+								}
+
+								return reflect.DeepEqual(oldJSONAsInterface, newJSONAsInterface)
+							},
+							Default: "{}",
 						},
 					},
 				},

@@ -532,6 +532,16 @@ const (
 	AlertUrgencyResponseDataTypeAlertUrgencies AlertUrgencyResponseDataType = "alert_urgencies"
 )
 
+// Defines values for AlertsSourceListDataType.
+const (
+	AlertsSourceListDataTypeAlertSources AlertsSourceListDataType = "alert_sources"
+)
+
+// Defines values for AlertsSourceResponseDataType.
+const (
+	AlertsSourceResponseDataTypeAlertSources AlertsSourceResponseDataType = "alert_sources"
+)
+
 // Defines values for ArchiveMicrosoftTeamsChannelsTaskParamsTaskType.
 const (
 	ArchiveMicrosoftTeamsChannels ArchiveMicrosoftTeamsChannelsTaskParamsTaskType = "archive_microsoft_teams_channels"
@@ -2136,6 +2146,43 @@ const (
 	NewAlertUrgencyDataTypeAlertUrgencies NewAlertUrgencyDataType = "alert_urgencies"
 )
 
+// Defines values for NewAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperator.
+const (
+	NewAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperatorContains       NewAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperator = "contains"
+	NewAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperatorDoesNotContain NewAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperator = "does_not_contain"
+	NewAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperatorIs             NewAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperator = "is"
+	NewAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperatorIsNot          NewAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperator = "is_not"
+)
+
+// Defines values for NewAlertsSourceDataAttributesSourceType.
+const (
+	NewAlertsSourceDataAttributesSourceTypeAlertmanager   NewAlertsSourceDataAttributesSourceType = "alertmanager"
+	NewAlertsSourceDataAttributesSourceTypeAzure          NewAlertsSourceDataAttributesSourceType = "azure"
+	NewAlertsSourceDataAttributesSourceTypeCheckly        NewAlertsSourceDataAttributesSourceType = "checkly"
+	NewAlertsSourceDataAttributesSourceTypeCloudWatch     NewAlertsSourceDataAttributesSourceType = "cloud_watch"
+	NewAlertsSourceDataAttributesSourceTypeDatadog        NewAlertsSourceDataAttributesSourceType = "datadog"
+	NewAlertsSourceDataAttributesSourceTypeGenericWebhook NewAlertsSourceDataAttributesSourceType = "generic_webhook"
+	NewAlertsSourceDataAttributesSourceTypeGoogleCloud    NewAlertsSourceDataAttributesSourceType = "google_cloud"
+	NewAlertsSourceDataAttributesSourceTypeGrafana        NewAlertsSourceDataAttributesSourceType = "grafana"
+	NewAlertsSourceDataAttributesSourceTypeNewRelic       NewAlertsSourceDataAttributesSourceType = "new_relic"
+	NewAlertsSourceDataAttributesSourceTypeSentry         NewAlertsSourceDataAttributesSourceType = "sentry"
+)
+
+// Defines values for NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField.
+const (
+	NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesFieldAlertExternalUrl       NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField = "alert_external_url"
+	NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesFieldAlertTitle             NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField = "alert_title"
+	NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesFieldExternalId             NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField = "external_id"
+	NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesFieldNotificationTargetId   NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField = "notification_target_id"
+	NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesFieldNotificationTargetType NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField = "notification_target_type"
+	NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesFieldState                  NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField = "state"
+)
+
+// Defines values for NewAlertsSourceDataType.
+const (
+	NewAlertsSourceDataTypeAlertSources NewAlertsSourceDataType = "alert_sources"
+)
+
 // Defines values for NewAuthorizationDataAttributesAuthorizableType.
 const (
 	NewAuthorizationDataAttributesAuthorizableTypeDashboard NewAuthorizationDataAttributesAuthorizableType = "Dashboard"
@@ -2297,19 +2344,19 @@ const (
 	NewEscalationPathDataAttributesNotificationTypeQuiet   NewEscalationPathDataAttributesNotificationType = "quiet"
 )
 
-// Defines values for NewEscalationPathDataAttributesRuleParamsOperator.
+// Defines values for NewEscalationPathDataAttributesRulesOperator.
 const (
-	NewEscalationPathDataAttributesRuleParamsOperatorContains       NewEscalationPathDataAttributesRuleParamsOperator = "contains"
-	NewEscalationPathDataAttributesRuleParamsOperatorDoesNotContain NewEscalationPathDataAttributesRuleParamsOperator = "does_not_contain"
-	NewEscalationPathDataAttributesRuleParamsOperatorIs             NewEscalationPathDataAttributesRuleParamsOperator = "is"
-	NewEscalationPathDataAttributesRuleParamsOperatorIsNot          NewEscalationPathDataAttributesRuleParamsOperator = "is_not"
+	NewEscalationPathDataAttributesRulesOperatorContains       NewEscalationPathDataAttributesRulesOperator = "contains"
+	NewEscalationPathDataAttributesRulesOperatorDoesNotContain NewEscalationPathDataAttributesRulesOperator = "does_not_contain"
+	NewEscalationPathDataAttributesRulesOperatorIs             NewEscalationPathDataAttributesRulesOperator = "is"
+	NewEscalationPathDataAttributesRulesOperatorIsNot          NewEscalationPathDataAttributesRulesOperator = "is_not"
 )
 
-// Defines values for NewEscalationPathDataAttributesRuleParamsRuleType.
+// Defines values for NewEscalationPathDataAttributesRulesRuleType.
 const (
-	NewEscalationPathDataAttributesRuleParamsRuleTypeAlertUrgency NewEscalationPathDataAttributesRuleParamsRuleType = "alert_urgency"
-	NewEscalationPathDataAttributesRuleParamsRuleTypeJsonPath     NewEscalationPathDataAttributesRuleParamsRuleType = "json_path"
-	NewEscalationPathDataAttributesRuleParamsRuleTypeWorkingHour  NewEscalationPathDataAttributesRuleParamsRuleType = "working_hour"
+	NewEscalationPathDataAttributesRulesRuleTypeAlertUrgency NewEscalationPathDataAttributesRulesRuleType = "alert_urgency"
+	NewEscalationPathDataAttributesRulesRuleTypeJsonPath     NewEscalationPathDataAttributesRulesRuleType = "json_path"
+	NewEscalationPathDataAttributesRulesRuleTypeWorkingHour  NewEscalationPathDataAttributesRulesRuleType = "working_hour"
 )
 
 // Defines values for NewEscalationPathDataType.
@@ -4477,6 +4524,43 @@ const (
 	UpdateAlertUrgencyDataTypeAlertUrgencies UpdateAlertUrgencyDataType = "alert_urgencies"
 )
 
+// Defines values for UpdateAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperator.
+const (
+	UpdateAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperatorContains       UpdateAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperator = "contains"
+	UpdateAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperatorDoesNotContain UpdateAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperator = "does_not_contain"
+	UpdateAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperatorIs             UpdateAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperator = "is"
+	UpdateAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperatorIsNot          UpdateAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperator = "is_not"
+)
+
+// Defines values for UpdateAlertsSourceDataAttributesSourceType.
+const (
+	UpdateAlertsSourceDataAttributesSourceTypeAlertmanager   UpdateAlertsSourceDataAttributesSourceType = "alertmanager"
+	UpdateAlertsSourceDataAttributesSourceTypeAzure          UpdateAlertsSourceDataAttributesSourceType = "azure"
+	UpdateAlertsSourceDataAttributesSourceTypeCheckly        UpdateAlertsSourceDataAttributesSourceType = "checkly"
+	UpdateAlertsSourceDataAttributesSourceTypeCloudWatch     UpdateAlertsSourceDataAttributesSourceType = "cloud_watch"
+	UpdateAlertsSourceDataAttributesSourceTypeDatadog        UpdateAlertsSourceDataAttributesSourceType = "datadog"
+	UpdateAlertsSourceDataAttributesSourceTypeGenericWebhook UpdateAlertsSourceDataAttributesSourceType = "generic_webhook"
+	UpdateAlertsSourceDataAttributesSourceTypeGoogleCloud    UpdateAlertsSourceDataAttributesSourceType = "google_cloud"
+	UpdateAlertsSourceDataAttributesSourceTypeGrafana        UpdateAlertsSourceDataAttributesSourceType = "grafana"
+	UpdateAlertsSourceDataAttributesSourceTypeNewRelic       UpdateAlertsSourceDataAttributesSourceType = "new_relic"
+	UpdateAlertsSourceDataAttributesSourceTypeSentry         UpdateAlertsSourceDataAttributesSourceType = "sentry"
+)
+
+// Defines values for UpdateAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField.
+const (
+	UpdateAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesFieldAlertExternalUrl       UpdateAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField = "alert_external_url"
+	UpdateAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesFieldAlertTitle             UpdateAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField = "alert_title"
+	UpdateAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesFieldExternalId             UpdateAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField = "external_id"
+	UpdateAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesFieldNotificationTargetId   UpdateAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField = "notification_target_id"
+	UpdateAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesFieldNotificationTargetType UpdateAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField = "notification_target_type"
+	UpdateAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesFieldState                  UpdateAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField = "state"
+)
+
+// Defines values for UpdateAlertsSourceDataType.
+const (
+	UpdateAlertsSourceDataTypeAlertSources UpdateAlertsSourceDataType = "alert_sources"
+)
+
 // Defines values for UpdateAsanaTaskTaskParamsDependencyDirection.
 const (
 	BlockedBy UpdateAsanaTaskTaskParamsDependencyDirection = "blocked_by"
@@ -4654,19 +4738,19 @@ const (
 	UpdateEscalationPathDataAttributesNotificationTypeQuiet   UpdateEscalationPathDataAttributesNotificationType = "quiet"
 )
 
-// Defines values for UpdateEscalationPathDataAttributesRuleParamsOperator.
+// Defines values for UpdateEscalationPathDataAttributesRulesOperator.
 const (
-	Contains       UpdateEscalationPathDataAttributesRuleParamsOperator = "contains"
-	DoesNotContain UpdateEscalationPathDataAttributesRuleParamsOperator = "does_not_contain"
-	Is             UpdateEscalationPathDataAttributesRuleParamsOperator = "is"
-	IsNot          UpdateEscalationPathDataAttributesRuleParamsOperator = "is_not"
+	Contains       UpdateEscalationPathDataAttributesRulesOperator = "contains"
+	DoesNotContain UpdateEscalationPathDataAttributesRulesOperator = "does_not_contain"
+	Is             UpdateEscalationPathDataAttributesRulesOperator = "is"
+	IsNot          UpdateEscalationPathDataAttributesRulesOperator = "is_not"
 )
 
-// Defines values for UpdateEscalationPathDataAttributesRuleParamsRuleType.
+// Defines values for UpdateEscalationPathDataAttributesRulesRuleType.
 const (
-	UpdateEscalationPathDataAttributesRuleParamsRuleTypeAlertUrgency UpdateEscalationPathDataAttributesRuleParamsRuleType = "alert_urgency"
-	UpdateEscalationPathDataAttributesRuleParamsRuleTypeJsonPath     UpdateEscalationPathDataAttributesRuleParamsRuleType = "json_path"
-	UpdateEscalationPathDataAttributesRuleParamsRuleTypeWorkingHour  UpdateEscalationPathDataAttributesRuleParamsRuleType = "working_hour"
+	UpdateEscalationPathDataAttributesRulesRuleTypeAlertUrgency UpdateEscalationPathDataAttributesRulesRuleType = "alert_urgency"
+	UpdateEscalationPathDataAttributesRulesRuleTypeJsonPath     UpdateEscalationPathDataAttributesRulesRuleType = "json_path"
+	UpdateEscalationPathDataAttributesRulesRuleTypeWorkingHour  UpdateEscalationPathDataAttributesRulesRuleType = "working_hour"
 )
 
 // Defines values for UpdateEscalationPathDataType.
@@ -7099,6 +7183,62 @@ type AlertUrgencyResponse struct {
 // AlertUrgencyResponseDataType defines model for AlertUrgencyResponse.Data.Type.
 type AlertUrgencyResponseDataType string
 
+// AlertsSource defines model for alerts_source.
+type AlertsSource struct {
+	// CreatedAt Date of creation
+	CreatedAt string `json:"created_at"`
+
+	// Name The name of the alert source
+	Name string `json:"name"`
+
+	// Secret A secret key used to authenticate incoming requests to this alerts source
+	Secret string `json:"secret"`
+
+	// SourceType The alert source type
+	SourceType *string `json:"source_type,omitempty"`
+
+	// SourceableAttributes Additional attributes specific to certain alert sources (e.g., generic_webhook), encapsulating source-specific configurations or details
+	SourceableAttributes *map[string]interface{} `json:"sourceable_attributes,omitempty"`
+
+	// Status The current status of the alert source
+	Status string `json:"status"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt string `json:"updated_at"`
+
+	// WebhookEndpoint The URL endpoint of the alert source
+	WebhookEndpoint string `json:"webhook_endpoint"`
+}
+
+// AlertsSourceList defines model for alerts_source_list.
+type AlertsSourceList struct {
+	Data []struct {
+		Attributes AlertsSource `json:"attributes"`
+
+		// Id Unique ID of the alert source
+		Id   string                   `json:"id"`
+		Type AlertsSourceListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// AlertsSourceListDataType defines model for AlertsSourceList.Data.Type.
+type AlertsSourceListDataType string
+
+// AlertsSourceResponse defines model for alerts_source_response.
+type AlertsSourceResponse struct {
+	Data struct {
+		Attributes AlertsSource `json:"attributes"`
+
+		// Id Unique ID of the alert source
+		Id   string                       `json:"id"`
+		Type AlertsSourceResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// AlertsSourceResponseDataType defines model for AlertsSourceResponse.Data.Type.
+type AlertsSourceResponseDataType string
+
 // ArchiveMicrosoftTeamsChannelsTaskParams defines model for archive_microsoft_teams_channels_task_params.
 type ArchiveMicrosoftTeamsChannelsTaskParams struct {
 	Channels []struct {
@@ -8392,6 +8532,9 @@ type CreateNotionPageTaskParamsTaskType string
 type CreateOpsgenieAlertTaskParams struct {
 	// Description Description field of the alert that is generally used to provide a detailed information about the alert
 	Description *string `json:"description,omitempty"`
+
+	// Details Details payload. Can contain liquid markup and need to be valid JSON
+	Details     *string `json:"details"`
 	Escalations *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -11626,6 +11769,65 @@ type NewAlertUrgency struct {
 // NewAlertUrgencyDataType defines model for NewAlertUrgency.Data.Type.
 type NewAlertUrgencyDataType string
 
+// NewAlertsSource defines model for new_alerts_source.
+type NewAlertsSource struct {
+	Data struct {
+		Attributes struct {
+			// AlertSourceUrgencyRulesAttributes List of rules that define the conditions under which the alert urgency will be set automatically based on the alert payload
+			AlertSourceUrgencyRulesAttributes *[]struct {
+				// JsonPath JSON path expression to extract a specific value from the alert's payload for evaluation
+				JsonPath *string `json:"json_path,omitempty"`
+
+				// Operator Comparison operator used to evaluate the extracted value against the specified condition
+				Operator *NewAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperator `json:"operator,omitempty"`
+
+				// Value Value that the extracted payload data is compared to using the specified operator to determine a match
+				Value *string `json:"value,omitempty"`
+			} `json:"alert_source_urgency_rules_attributes,omitempty"`
+
+			// AlertUrgencyId ID for the default alert urgency assigned to this alert source
+			AlertUrgencyId *string `json:"alert_urgency_id,omitempty"`
+
+			// Name The name of the alert source
+			Name string `json:"name"`
+
+			// SourceType The alert source type
+			SourceType *NewAlertsSourceDataAttributesSourceType `json:"source_type,omitempty"`
+
+			// SourceableAttributes Provide additional attributes for generic_webhook alerts source
+			SourceableAttributes *struct {
+				// AutoResolve Set this to true to auto-resolve alerts based on field_mappings_attributes conditions
+				AutoResolve *bool `json:"auto_resolve,omitempty"`
+
+				// FieldMappingsAttributes Specify rules to auto resolve alerts
+				FieldMappingsAttributes *[]struct {
+					// Field Select the field on which the condition to be evaluated
+					Field *NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField `json:"field,omitempty"`
+
+					// JsonPath JSON path expression to extract a specific value from the alert's payload for evaluation
+					JsonPath *string `json:"json_path,omitempty"`
+				} `json:"field_mappings_attributes,omitempty"`
+
+				// ResolveState This value is matched with the value extracted from alerts payload using JSON path in field_mappings_attributes
+				ResolveState *string `json:"resolve_state,omitempty"`
+			} `json:"sourceable_attributes,omitempty"`
+		} `json:"attributes"`
+		Type NewAlertsSourceDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperator Comparison operator used to evaluate the extracted value against the specified condition
+type NewAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperator string
+
+// NewAlertsSourceDataAttributesSourceType The alert source type
+type NewAlertsSourceDataAttributesSourceType string
+
+// NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField Select the field on which the condition to be evaluated
+type NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField string
+
+// NewAlertsSourceDataType defines model for NewAlertsSource.Data.Type.
+type NewAlertsSourceDataType string
+
 // NewAuthorization defines model for new_authorization.
 type NewAuthorization struct {
 	Data struct {
@@ -11972,16 +12174,16 @@ type NewEscalationPath struct {
 			// RepeatCount The number of times this path will be executed until someone acknowledges the alert
 			RepeatCount *int `json:"repeat_count"`
 
-			// RuleParams Escalation path conditions
-			RuleParams []struct {
+			// Rules Escalation path conditions
+			Rules []struct {
 				// JsonPath JSON path to extract value from payload
 				JsonPath *string `json:"json_path,omitempty"`
 
 				// Operator How JSON path value should be matched
-				Operator *NewEscalationPathDataAttributesRuleParamsOperator `json:"operator,omitempty"`
+				Operator *NewEscalationPathDataAttributesRulesOperator `json:"operator,omitempty"`
 
 				// RuleType The type of the escalation path rule
-				RuleType *NewEscalationPathDataAttributesRuleParamsRuleType `json:"rule_type,omitempty"`
+				RuleType *NewEscalationPathDataAttributesRulesRuleType `json:"rule_type,omitempty"`
 
 				// UrgencyIds Alert urgency ids for which this escalation path should be used
 				UrgencyIds *[]interface{} `json:"urgency_ids,omitempty"`
@@ -11991,7 +12193,7 @@ type NewEscalationPath struct {
 
 				// WithinWorkingHour Whether the escalation path should be used within working hours
 				WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
-			} `json:"rule_params"`
+			} `json:"rules"`
 		} `json:"attributes"`
 		Type NewEscalationPathDataType `json:"type"`
 	} `json:"data"`
@@ -12000,11 +12202,11 @@ type NewEscalationPath struct {
 // NewEscalationPathDataAttributesNotificationType Notification rule type to be used
 type NewEscalationPathDataAttributesNotificationType string
 
-// NewEscalationPathDataAttributesRuleParamsOperator How JSON path value should be matched
-type NewEscalationPathDataAttributesRuleParamsOperator string
+// NewEscalationPathDataAttributesRulesOperator How JSON path value should be matched
+type NewEscalationPathDataAttributesRulesOperator string
 
-// NewEscalationPathDataAttributesRuleParamsRuleType The type of the escalation path rule
-type NewEscalationPathDataAttributesRuleParamsRuleType string
+// NewEscalationPathDataAttributesRulesRuleType The type of the escalation path rule
+type NewEscalationPathDataAttributesRulesRuleType string
 
 // NewEscalationPathDataType defines model for NewEscalationPath.Data.Type.
 type NewEscalationPathDataType string
@@ -12665,6 +12867,19 @@ type NewIncidentPermissionSetBoolean struct {
 			IncidentPermissionSetId string                                            `json:"incident_permission_set_id"`
 			Kind                    NewIncidentPermissionSetBooleanDataAttributesKind `json:"kind"`
 			Private                 *bool                                             `json:"private,omitempty"`
+			SeverityParams          *struct {
+				// AppliesToUnassigned Whether permissions are enabled for incident without severity
+				AppliesToUnassigned *bool `json:"applies_to_unassigned,omitempty"`
+
+				// CreateEnabled Whether permissions are enabled when creating incident
+				CreateEnabled *bool `json:"create_enabled,omitempty"`
+
+				// FullyEnabled Whether permissions are enabled for any severity incident
+				FullyEnabled *bool `json:"fully_enabled,omitempty"`
+
+				// SeverityIds Severity ids that determine if an incident is permitted based on matching severity
+				SeverityIds *[]string `json:"severity_ids"`
+			} `json:"severity_params,omitempty"`
 		} `json:"attributes"`
 		Type NewIncidentPermissionSetBooleanDataType `json:"type"`
 	} `json:"data"`
@@ -12685,6 +12900,16 @@ type NewIncidentPermissionSetResource struct {
 			Private                 *bool                                              `json:"private,omitempty"`
 			ResourceId              *string                                            `json:"resource_id,omitempty"`
 			ResourceType            *string                                            `json:"resource_type,omitempty"`
+			SeverityParams          *struct {
+				// AppliesToUnassigned Whether permissions are enabled for incident without severity
+				AppliesToUnassigned *bool `json:"applies_to_unassigned,omitempty"`
+
+				// FullyEnabled Whether permissions are enabled for any severity incident
+				FullyEnabled *bool `json:"fully_enabled,omitempty"`
+
+				// SeverityIds Severity ids that determine if an incident is permitted based on matching severity
+				SeverityIds *[]string `json:"severity_ids"`
+			} `json:"severity_params,omitempty"`
 		} `json:"attributes"`
 		Type NewIncidentPermissionSetResourceDataType `json:"type"`
 	} `json:"data"`
@@ -13829,7 +14054,7 @@ type NewTeam struct {
 			// ServiceNowCiSysId The Service Now CI sys id associated to this team
 			ServiceNowCiSysId *string `json:"service_now_ci_sys_id"`
 
-			// SlackAliases Slack Aliases associated with this service
+			// SlackAliases Slack Aliases associated with this team
 			SlackAliases *[]struct {
 				// Id Slack alias ID
 				Id string `json:"id"`
@@ -13838,7 +14063,7 @@ type NewTeam struct {
 				Name string `json:"name"`
 			} `json:"slack_aliases"`
 
-			// SlackChannels Slack Channels associated with this service
+			// SlackChannels Slack Channels associated with this team
 			SlackChannels *[]struct {
 				// Id Slack channel ID
 				Id string `json:"id"`
@@ -15879,6 +16104,9 @@ type SendWhatsappMessageTaskParamsTaskType string
 
 // Service defines model for service.
 type Service struct {
+	// AlertUrgencyId The alert urgency id of the service
+	AlertUrgencyId *string `json:"alert_urgency_id"`
+
 	// BackstageId The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
 	BackstageId *string `json:"backstage_id"`
 
@@ -16440,6 +16668,9 @@ type SubStatusResponseDataType string
 
 // Team defines model for team.
 type Team struct {
+	// AlertUrgencyId The alert urgency id of the team
+	AlertUrgencyId *string `json:"alert_urgency_id"`
+
 	// Color The hex color of the team
 	Color *string `json:"color"`
 
@@ -16476,7 +16707,7 @@ type Team struct {
 	// ServiceNowCiSysId The Service Now CI sys id associated to this team
 	ServiceNowCiSysId *string `json:"service_now_ci_sys_id"`
 
-	// SlackAliases Slack Aliases associated with this service
+	// SlackAliases Slack Aliases associated with this team
 	SlackAliases *[]struct {
 		// Id Slack alias ID
 		Id string `json:"id"`
@@ -16485,7 +16716,7 @@ type Team struct {
 		Name string `json:"name"`
 	} `json:"slack_aliases"`
 
-	// SlackChannels Slack Channels associated with this service
+	// SlackChannels Slack Channels associated with this team
 	SlackChannels *[]struct {
 		// Id Slack channel ID
 		Id string `json:"id"`
@@ -16722,6 +16953,65 @@ type UpdateAlertUrgency struct {
 
 // UpdateAlertUrgencyDataType defines model for UpdateAlertUrgency.Data.Type.
 type UpdateAlertUrgencyDataType string
+
+// UpdateAlertsSource defines model for update_alerts_source.
+type UpdateAlertsSource struct {
+	Data struct {
+		Attributes struct {
+			// AlertSourceUrgencyRulesAttributes List of rules that define the conditions under which the alert urgency will be set automatically based on the alert payload
+			AlertSourceUrgencyRulesAttributes *[]struct {
+				// JsonPath JSON path expression to extract a specific value from the alert's payload for evaluation
+				JsonPath *string `json:"json_path,omitempty"`
+
+				// Operator Comparison operator used to evaluate the extracted value against the specified condition
+				Operator *UpdateAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperator `json:"operator,omitempty"`
+
+				// Value Value that the extracted payload data is compared to using the specified operator to determine a match
+				Value *string `json:"value,omitempty"`
+			} `json:"alert_source_urgency_rules_attributes,omitempty"`
+
+			// AlertUrgencyId ID for the default alert urgency assigned to this alert source
+			AlertUrgencyId *string `json:"alert_urgency_id,omitempty"`
+
+			// Name The name of the alert source
+			Name *string `json:"name,omitempty"`
+
+			// SourceType The alert source type
+			SourceType *UpdateAlertsSourceDataAttributesSourceType `json:"source_type,omitempty"`
+
+			// SourceableAttributes Provide additional attributes for generic_webhook alerts source
+			SourceableAttributes *struct {
+				// AutoResolve Set this to true to auto-resolve alerts based on field_mappings_attributes conditions
+				AutoResolve *bool `json:"auto_resolve,omitempty"`
+
+				// FieldMappingsAttributes Specify rules to auto resolve alerts
+				FieldMappingsAttributes *[]struct {
+					// Field Select the field on which the condition to be evaluated
+					Field *UpdateAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField `json:"field,omitempty"`
+
+					// JsonPath JSON path expression to extract a specific value from the alert's payload for evaluation
+					JsonPath *string `json:"json_path,omitempty"`
+				} `json:"field_mappings_attributes,omitempty"`
+
+				// ResolveState This value is matched with the value extracted from alerts payload using JSON path in field_mappings_attributes
+				ResolveState *string `json:"resolve_state,omitempty"`
+			} `json:"sourceable_attributes,omitempty"`
+		} `json:"attributes"`
+		Type UpdateAlertsSourceDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperator Comparison operator used to evaluate the extracted value against the specified condition
+type UpdateAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesOperator string
+
+// UpdateAlertsSourceDataAttributesSourceType The alert source type
+type UpdateAlertsSourceDataAttributesSourceType string
+
+// UpdateAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField Select the field on which the condition to be evaluated
+type UpdateAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField string
+
+// UpdateAlertsSourceDataType defines model for UpdateAlertsSource.Data.Type.
+type UpdateAlertsSourceDataType string
 
 // UpdateAsanaTaskTaskParams defines model for update_asana_task_task_params.
 type UpdateAsanaTaskTaskParams struct {
@@ -17131,16 +17421,16 @@ type UpdateEscalationPath struct {
 			// RepeatCount The number of times this path will be executed until someone acknowledges the alert
 			RepeatCount *int `json:"repeat_count"`
 
-			// RuleParams Escalation path conditions
-			RuleParams *[]struct {
+			// Rules Escalation path conditions
+			Rules *[]struct {
 				// JsonPath JSON path to extract value from payload
 				JsonPath *string `json:"json_path,omitempty"`
 
 				// Operator How JSON path value should be matched
-				Operator *UpdateEscalationPathDataAttributesRuleParamsOperator `json:"operator,omitempty"`
+				Operator *UpdateEscalationPathDataAttributesRulesOperator `json:"operator,omitempty"`
 
 				// RuleType The type of the escalation path rule
-				RuleType *UpdateEscalationPathDataAttributesRuleParamsRuleType `json:"rule_type,omitempty"`
+				RuleType *UpdateEscalationPathDataAttributesRulesRuleType `json:"rule_type,omitempty"`
 
 				// UrgencyIds Alert urgency ids for which this escalation path should be used
 				UrgencyIds *[]interface{} `json:"urgency_ids,omitempty"`
@@ -17150,7 +17440,7 @@ type UpdateEscalationPath struct {
 
 				// WithinWorkingHour Whether the escalation path should be used within working hours
 				WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
-			} `json:"rule_params,omitempty"`
+			} `json:"rules,omitempty"`
 		} `json:"attributes"`
 		Type UpdateEscalationPathDataType `json:"type"`
 	} `json:"data"`
@@ -17159,11 +17449,11 @@ type UpdateEscalationPath struct {
 // UpdateEscalationPathDataAttributesNotificationType Position of the escalation policy level
 type UpdateEscalationPathDataAttributesNotificationType string
 
-// UpdateEscalationPathDataAttributesRuleParamsOperator How JSON path value should be matched
-type UpdateEscalationPathDataAttributesRuleParamsOperator string
+// UpdateEscalationPathDataAttributesRulesOperator How JSON path value should be matched
+type UpdateEscalationPathDataAttributesRulesOperator string
 
-// UpdateEscalationPathDataAttributesRuleParamsRuleType The type of the escalation path rule
-type UpdateEscalationPathDataAttributesRuleParamsRuleType string
+// UpdateEscalationPathDataAttributesRulesRuleType The type of the escalation path rule
+type UpdateEscalationPathDataAttributesRulesRuleType string
 
 // UpdateEscalationPathDataType defines model for UpdateEscalationPath.Data.Type.
 type UpdateEscalationPathDataType string
@@ -17909,9 +18199,19 @@ type UpdateIncidentPermissionSetDataType string
 type UpdateIncidentPermissionSetBoolean struct {
 	Data struct {
 		Attributes struct {
-			Enabled *bool                                                 `json:"enabled,omitempty"`
-			Kind    *UpdateIncidentPermissionSetBooleanDataAttributesKind `json:"kind,omitempty"`
-			Private *bool                                                 `json:"private,omitempty"`
+			Enabled        *bool                                                 `json:"enabled,omitempty"`
+			Kind           *UpdateIncidentPermissionSetBooleanDataAttributesKind `json:"kind,omitempty"`
+			Private        *bool                                                 `json:"private,omitempty"`
+			SeverityParams *struct {
+				// AppliesToUnassigned Whether permissions are enabled for incident without severity
+				AppliesToUnassigned *bool `json:"applies_to_unassigned,omitempty"`
+
+				// FullyEnabled Whether permissions are enabled for any severity incident
+				FullyEnabled *bool `json:"fully_enabled,omitempty"`
+
+				// SeverityIds Severity ids that determine if an incident is permitted based on matching severity
+				SeverityIds *[]string `json:"severity_ids"`
+			} `json:"severity_params,omitempty"`
 		} `json:"attributes"`
 		Type UpdateIncidentPermissionSetBooleanDataType `json:"type"`
 	} `json:"data"`
@@ -17927,10 +18227,23 @@ type UpdateIncidentPermissionSetBooleanDataType string
 type UpdateIncidentPermissionSetResource struct {
 	Data struct {
 		Attributes struct {
-			Kind         *UpdateIncidentPermissionSetResourceDataAttributesKind `json:"kind,omitempty"`
-			Private      *bool                                                  `json:"private,omitempty"`
-			ResourceId   *string                                                `json:"resource_id,omitempty"`
-			ResourceType *string                                                `json:"resource_type,omitempty"`
+			Kind           *UpdateIncidentPermissionSetResourceDataAttributesKind `json:"kind,omitempty"`
+			Private        *bool                                                  `json:"private,omitempty"`
+			ResourceId     *string                                                `json:"resource_id,omitempty"`
+			ResourceType   *string                                                `json:"resource_type,omitempty"`
+			SeverityParams *struct {
+				// AppliesToUnassigned Whether permissions are enabled for incident without severity
+				AppliesToUnassigned *bool `json:"applies_to_unassigned,omitempty"`
+
+				// CreateEnabled Whether permissions are enabled when creating incident
+				CreateEnabled *bool `json:"create_enabled,omitempty"`
+
+				// FullyEnabled Whether permissions are enabled for any severity incident
+				FullyEnabled *bool `json:"fully_enabled,omitempty"`
+
+				// SeverityIds Severity ids that determine if an incident is permitted based on matching severity
+				SeverityIds *[]string `json:"severity_ids"`
+			} `json:"severity_params,omitempty"`
 		} `json:"attributes"`
 		Type UpdateIncidentPermissionSetResourceDataType `json:"type"`
 	} `json:"data"`
@@ -19537,7 +19850,7 @@ type UpdateTeam struct {
 			// ServiceNowCiSysId The Service Now CI sys id associated to this team
 			ServiceNowCiSysId *string `json:"service_now_ci_sys_id"`
 
-			// SlackAliases Slack Aliases associated with this service
+			// SlackAliases Slack Aliases associated with this team
 			SlackAliases *[]struct {
 				// Id Slack alias ID
 				Id string `json:"id"`
@@ -19546,7 +19859,7 @@ type UpdateTeam struct {
 				Name string `json:"name"`
 			} `json:"slack_aliases"`
 
-			// SlackChannels Slack Channels associated with this service
+			// SlackChannels Slack Channels associated with this team
 			SlackChannels *[]struct {
 				// Id Slack channel ID
 				Id string `json:"id"`
@@ -20468,6 +20781,17 @@ type ListAllIncidentActionItemsParams struct {
 // ListAlertGroupsParams defines parameters for ListAlertGroups.
 type ListAlertGroupsParams struct {
 	Include *string `form:"include,omitempty" json:"include,omitempty"`
+}
+
+// ListAlertSourcesParams defines parameters for ListAlertSources.
+type ListAlertSourcesParams struct {
+	Include           *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSearch      *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
+	FilterStatuses    *string `form:"filter[statuses],omitempty" json:"filter[statuses],omitempty"`
+	FilterSourceTypes *string `form:"filter[source_types],omitempty" json:"filter[source_types],omitempty"`
+	Sort              *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // ListAlertUrgenciesParams defines parameters for ListAlertUrgencies.
@@ -21781,6 +22105,12 @@ type CreateAlertGroupApplicationVndAPIPlusJSONRequestBody = NewAlertGroup
 
 // UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody defines body for UpdateAlertGroup for application/vnd.api+json ContentType.
 type UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody = UpdateAlertGroup
+
+// CreateAlertSourceApplicationVndAPIPlusJSONRequestBody defines body for CreateAlertSource for application/vnd.api+json ContentType.
+type CreateAlertSourceApplicationVndAPIPlusJSONRequestBody = NewAlertsSource
+
+// UpdateAlertSourceApplicationVndAPIPlusJSONRequestBody defines body for UpdateAlertSource for application/vnd.api+json ContentType.
+type UpdateAlertSourceApplicationVndAPIPlusJSONRequestBody = UpdateAlertsSource
 
 // CreateAlertUrgencyApplicationVndAPIPlusJSONRequestBody defines body for CreateAlertUrgency for application/vnd.api+json ContentType.
 type CreateAlertUrgencyApplicationVndAPIPlusJSONRequestBody = NewAlertUrgency
@@ -35295,6 +35625,25 @@ type ClientInterface interface {
 
 	UpdateAlertGroupWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListAlertSources request
+	ListAlertSources(ctx context.Context, params *ListAlertSourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateAlertSourceWithBody request with any body
+	CreateAlertSourceWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateAlertSourceWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateAlertSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteAlertSource request
+	DeleteAlertSource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetAlertSource request
+	GetAlertSource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateAlertSourceWithBody request with any body
+	UpdateAlertSourceWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateAlertSourceWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAlertSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListAlertUrgencies request
 	ListAlertUrgencies(ctx context.Context, params *ListAlertUrgenciesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -36959,6 +37308,90 @@ func (c *Client) UpdateAlertGroupWithBody(ctx context.Context, id string, conten
 
 func (c *Client) UpdateAlertGroupWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateAlertGroupRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListAlertSources(ctx context.Context, params *ListAlertSourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListAlertSourcesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateAlertSourceWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateAlertSourceRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateAlertSourceWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateAlertSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateAlertSourceRequestWithApplicationVndAPIPlusJSONBody(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteAlertSource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteAlertSourceRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetAlertSource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAlertSourceRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateAlertSourceWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateAlertSourceRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateAlertSourceWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAlertSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateAlertSourceRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -44388,6 +44821,306 @@ func NewUpdateAlertGroupRequestWithBody(server string, id string, contentType st
 	}
 
 	req, err := http.NewRequest("PATCH", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListAlertSourcesRequest generates requests for ListAlertSources
+func NewListAlertSourcesRequest(server string, params *ListAlertSourcesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_sources")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterSearch != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[search]", runtime.ParamLocationQuery, *params.FilterSearch); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterStatuses != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[statuses]", runtime.ParamLocationQuery, *params.FilterStatuses); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterSourceTypes != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[source_types]", runtime.ParamLocationQuery, *params.FilterSourceTypes); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateAlertSourceRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateAlertSource builder with application/vnd.api+json body
+func NewCreateAlertSourceRequestWithApplicationVndAPIPlusJSONBody(server string, body CreateAlertSourceApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateAlertSourceRequestWithBody(server, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateAlertSourceRequestWithBody generates requests for CreateAlertSource with any type of body
+func NewCreateAlertSourceRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_sources")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteAlertSourceRequest generates requests for DeleteAlertSource
+func NewDeleteAlertSourceRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_sources/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetAlertSourceRequest generates requests for GetAlertSource
+func NewGetAlertSourceRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_sources/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateAlertSourceRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateAlertSource builder with application/vnd.api+json body
+func NewUpdateAlertSourceRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateAlertSourceApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateAlertSourceRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateAlertSourceRequestWithBody generates requests for UpdateAlertSource with any type of body
+func NewUpdateAlertSourceRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_sources/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -71077,6 +71810,25 @@ type ClientWithResponsesInterface interface {
 
 	UpdateAlertGroupWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAlertGroupResponse, error)
 
+	// ListAlertSourcesWithResponse request
+	ListAlertSourcesWithResponse(ctx context.Context, params *ListAlertSourcesParams, reqEditors ...RequestEditorFn) (*ListAlertSourcesResponse, error)
+
+	// CreateAlertSourceWithBodyWithResponse request with any body
+	CreateAlertSourceWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateAlertSourceResponse, error)
+
+	CreateAlertSourceWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateAlertSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateAlertSourceResponse, error)
+
+	// DeleteAlertSourceWithResponse request
+	DeleteAlertSourceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteAlertSourceResponse, error)
+
+	// GetAlertSourceWithResponse request
+	GetAlertSourceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetAlertSourceResponse, error)
+
+	// UpdateAlertSourceWithBodyWithResponse request with any body
+	UpdateAlertSourceWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAlertSourceResponse, error)
+
+	UpdateAlertSourceWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateAlertSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAlertSourceResponse, error)
+
 	// ListAlertUrgenciesWithResponse request
 	ListAlertUrgenciesWithResponse(ctx context.Context, params *ListAlertUrgenciesParams, reqEditors ...RequestEditorFn) (*ListAlertUrgenciesResponse, error)
 
@@ -72813,6 +73565,121 @@ func (r UpdateAlertGroupResponse) StatusCode() int {
 	return 0
 }
 
+type ListAlertSourcesResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *AlertsSourceList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListAlertSourcesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListAlertSourcesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateAlertSourceResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *AlertsSourceResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateAlertSourceResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateAlertSourceResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteAlertSourceResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *AlertsSourceResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteAlertSourceResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteAlertSourceResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetAlertSourceResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *AlertsSourceResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetAlertSourceResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetAlertSourceResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateAlertSourceResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *AlertsSourceResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateAlertSourceResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateAlertSourceResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type ListAlertUrgenciesResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -74104,7 +74971,6 @@ type DeleteDashboardPanelResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *DashboardPanelResponse
-	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -74127,7 +74993,6 @@ type GetDashboardPanelResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *DashboardPanelResponse
-	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -74150,7 +75015,6 @@ type UpdateDashboardPanelResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *DashboardPanelResponse
-	ApplicationvndApiJSON404 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -82165,6 +83029,67 @@ func (c *ClientWithResponses) UpdateAlertGroupWithApplicationVndAPIPlusJSONBodyW
 	return ParseUpdateAlertGroupResponse(rsp)
 }
 
+// ListAlertSourcesWithResponse request returning *ListAlertSourcesResponse
+func (c *ClientWithResponses) ListAlertSourcesWithResponse(ctx context.Context, params *ListAlertSourcesParams, reqEditors ...RequestEditorFn) (*ListAlertSourcesResponse, error) {
+	rsp, err := c.ListAlertSources(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListAlertSourcesResponse(rsp)
+}
+
+// CreateAlertSourceWithBodyWithResponse request with arbitrary body returning *CreateAlertSourceResponse
+func (c *ClientWithResponses) CreateAlertSourceWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateAlertSourceResponse, error) {
+	rsp, err := c.CreateAlertSourceWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateAlertSourceResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateAlertSourceWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateAlertSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateAlertSourceResponse, error) {
+	rsp, err := c.CreateAlertSourceWithApplicationVndAPIPlusJSONBody(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateAlertSourceResponse(rsp)
+}
+
+// DeleteAlertSourceWithResponse request returning *DeleteAlertSourceResponse
+func (c *ClientWithResponses) DeleteAlertSourceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteAlertSourceResponse, error) {
+	rsp, err := c.DeleteAlertSource(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteAlertSourceResponse(rsp)
+}
+
+// GetAlertSourceWithResponse request returning *GetAlertSourceResponse
+func (c *ClientWithResponses) GetAlertSourceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetAlertSourceResponse, error) {
+	rsp, err := c.GetAlertSource(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetAlertSourceResponse(rsp)
+}
+
+// UpdateAlertSourceWithBodyWithResponse request with arbitrary body returning *UpdateAlertSourceResponse
+func (c *ClientWithResponses) UpdateAlertSourceWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAlertSourceResponse, error) {
+	rsp, err := c.UpdateAlertSourceWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateAlertSourceResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateAlertSourceWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateAlertSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAlertSourceResponse, error) {
+	rsp, err := c.UpdateAlertSourceWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateAlertSourceResponse(rsp)
+}
+
 // ListAlertUrgenciesWithResponse request returning *ListAlertUrgenciesResponse
 func (c *ClientWithResponses) ListAlertUrgenciesWithResponse(ctx context.Context, params *ListAlertUrgenciesParams, reqEditors ...RequestEditorFn) (*ListAlertUrgenciesResponse, error) {
 	rsp, err := c.ListAlertUrgencies(ctx, params, reqEditors...)
@@ -87362,6 +88287,171 @@ func ParseUpdateAlertGroupResponse(rsp *http.Response) (*UpdateAlertGroupRespons
 	return response, nil
 }
 
+// ParseListAlertSourcesResponse parses an HTTP response from a ListAlertSourcesWithResponse call
+func ParseListAlertSourcesResponse(rsp *http.Response) (*ListAlertSourcesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListAlertSourcesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertsSourceList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateAlertSourceResponse parses an HTTP response from a CreateAlertSourceWithResponse call
+func ParseCreateAlertSourceResponse(rsp *http.Response) (*CreateAlertSourceResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateAlertSourceResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest AlertsSourceResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteAlertSourceResponse parses an HTTP response from a DeleteAlertSourceWithResponse call
+func ParseDeleteAlertSourceResponse(rsp *http.Response) (*DeleteAlertSourceResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteAlertSourceResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertsSourceResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetAlertSourceResponse parses an HTTP response from a GetAlertSourceWithResponse call
+func ParseGetAlertSourceResponse(rsp *http.Response) (*GetAlertSourceResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetAlertSourceResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertsSourceResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateAlertSourceResponse parses an HTTP response from a UpdateAlertSourceWithResponse call
+func ParseUpdateAlertSourceResponse(rsp *http.Response) (*UpdateAlertSourceResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateAlertSourceResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertsSourceResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseListAlertUrgenciesResponse parses an HTTP response from a ListAlertUrgenciesWithResponse call
 func ParseListAlertUrgenciesResponse(rsp *http.Response) (*ListAlertUrgenciesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -89224,13 +90314,6 @@ func ParseDeleteDashboardPanelResponse(rsp *http.Response) (*DeleteDashboardPane
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ErrorsList
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.ApplicationvndApiJSON404 = &dest
-
 	}
 
 	return response, nil
@@ -89257,13 +90340,6 @@ func ParseGetDashboardPanelResponse(rsp *http.Response) (*GetDashboardPanelRespo
 		}
 		response.ApplicationvndApiJSON200 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ErrorsList
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.ApplicationvndApiJSON404 = &dest
-
 	}
 
 	return response, nil
@@ -89289,13 +90365,6 @@ func ParseUpdateDashboardPanelResponse(rsp *http.Response) (*UpdateDashboardPane
 			return nil, err
 		}
 		response.ApplicationvndApiJSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ErrorsList
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.ApplicationvndApiJSON404 = &dest
 
 	}
 

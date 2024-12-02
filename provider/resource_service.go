@@ -219,6 +219,15 @@ func resourceService() *schema.Resource {
 				Description:      "Owner Users associated with this service",
 			},
 
+			"alert_urgency_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The alert urgency id of the service",
+			},
+
 			"slack_channels": &schema.Schema{
 				Type:        schema.TypeList,
 				Computed:    true,
@@ -349,6 +358,9 @@ func resourceServiceCreate(ctx context.Context, d *schema.ResourceData, meta int
 	if value, ok := d.GetOkExists("owners_user_ids"); ok {
 		s.OwnersUserIds = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("alert_urgency_id"); ok {
+		s.AlertUrgencyId = value.(string)
+	}
 	if value, ok := d.GetOkExists("slack_channels"); ok {
 		s.SlackChannels = value.([]interface{})
 	}
@@ -404,6 +416,7 @@ func resourceServiceRead(ctx context.Context, d *schema.ResourceData, meta inter
 	d.Set("service_ids", item.ServiceIds)
 	d.Set("owners_group_ids", item.OwnersGroupIds)
 	d.Set("owners_user_ids", item.OwnersUserIds)
+	d.Set("alert_urgency_id", item.AlertUrgencyId)
 	d.Set("slack_channels", item.SlackChannels)
 	d.Set("slack_aliases", item.SlackAliases)
 
@@ -475,6 +488,9 @@ func resourceServiceUpdate(ctx context.Context, d *schema.ResourceData, meta int
 	}
 	if d.HasChange("owners_user_ids") {
 		s.OwnersUserIds = d.Get("owners_user_ids").([]interface{})
+	}
+	if d.HasChange("alert_urgency_id") {
+		s.AlertUrgencyId = d.Get("alert_urgency_id").(string)
 	}
 	if d.HasChange("slack_channels") {
 		s.SlackChannels = d.Get("slack_channels").([]interface{})

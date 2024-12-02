@@ -58,6 +58,7 @@ resource "rootly_service" "customer_postgresql_prod" {
 
 ### Optional
 
+- `alert_urgency_id` (String) The alert urgency id of the service
 - `backstage_id` (String) The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
 - `color` (String) The hex color of the service
 - `cortex_id` (String) The Cortex group id associated to this service

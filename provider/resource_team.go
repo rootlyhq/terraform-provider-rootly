@@ -156,12 +156,21 @@ func resourceTeam() *schema.Resource {
 				Description:      "The User ID's members of this team",
 			},
 
+			"alert_urgency_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The alert urgency id of the team",
+			},
+
 			"slack_channels": &schema.Schema{
 				Type:        schema.TypeList,
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
-				Description: "Slack Channels associated with this service",
+				Description: "Slack Channels associated with this team",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
@@ -191,7 +200,7 @@ func resourceTeam() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
-				Description: "Slack Aliases associated with this service",
+				Description: "Slack Aliases associated with this team",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
@@ -268,6 +277,9 @@ func resourceTeamCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	if value, ok := d.GetOkExists("user_ids"); ok {
 		s.UserIds = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("alert_urgency_id"); ok {
+		s.AlertUrgencyId = value.(string)
+	}
 	if value, ok := d.GetOkExists("slack_channels"); ok {
 		s.SlackChannels = value.([]interface{})
 	}
@@ -317,6 +329,7 @@ func resourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	d.Set("cortex_id", item.CortexId)
 	d.Set("service_now_ci_sys_id", item.ServiceNowCiSysId)
 	d.Set("user_ids", item.UserIds)
+	d.Set("alert_urgency_id", item.AlertUrgencyId)
 	d.Set("slack_channels", item.SlackChannels)
 	d.Set("slack_aliases", item.SlackAliases)
 
@@ -370,6 +383,9 @@ func resourceTeamUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 	}
 	if d.HasChange("user_ids") {
 		s.UserIds = d.Get("user_ids").([]interface{})
+	}
+	if d.HasChange("alert_urgency_id") {
+		s.AlertUrgencyId = d.Get("alert_urgency_id").(string)
 	}
 	if d.HasChange("slack_channels") {
 		s.SlackChannels = d.Get("slack_channels").([]interface{})

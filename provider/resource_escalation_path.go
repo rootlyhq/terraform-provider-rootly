@@ -78,9 +78,9 @@ func resourceEscalationPath() *schema.Resource {
 
 			"rules": &schema.Schema{
 				Type:        schema.TypeList,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
 				Description: "Escalation path rules",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{

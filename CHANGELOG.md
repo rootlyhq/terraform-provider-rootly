@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.11.0] -- 2024-12-02
+
+- Add `alert_sources` resources
+
 ## [2.10.0] -- 2024-11-08
 
 - Add `rootly_on_call_role` resource

@@ -20,6 +20,7 @@ description: |-
 
 ### Optional
 
+- `alert_urgency_id` (String) The alert urgency id of the team
 - `color` (String) The hex color of the team
 - `cortex_id` (String) The Cortex group id associated to this team
 - `description` (String) The description of the team
@@ -30,8 +31,8 @@ description: |-
 - `pagertree_id` (String) The PagerTree group id associated to this team
 - `position` (Number) Position of the team
 - `service_now_ci_sys_id` (String) The Service Now CI sys id associated to this team
-- `slack_aliases` (Block List) Slack Aliases associated with this service (see [below for nested schema](#nestedblock--slack_aliases))
-- `slack_channels` (Block List) Slack Channels associated with this service (see [below for nested schema](#nestedblock--slack_channels))
+- `slack_aliases` (Block List) Slack Aliases associated with this team (see [below for nested schema](#nestedblock--slack_aliases))
+- `slack_channels` (Block List) Slack Channels associated with this team (see [below for nested schema](#nestedblock--slack_channels))
 - `slug` (String)
 - `user_ids` (List of Number) The User ID's members of this team
 - `victor_ops_id` (String) The VictorOps group id associated to this team

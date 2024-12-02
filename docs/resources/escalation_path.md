@@ -17,6 +17,7 @@ description: |-
 ### Required
 
 - `name` (String) The name of the escalation path
+- `rules` (Block List, Min: 1) Escalation path rules (see [below for nested schema](#nestedblock--rules))
 
 ### Optional
 
@@ -25,7 +26,6 @@ description: |-
 - `notification_type` (String) Notification rule type
 - `repeat` (Boolean) Whether this path should be repeated until someone acknowledges the alert. Value must be one of true or false
 - `repeat_count` (Number) The number of times this path will be executed until someone acknowledges the alert
-- `rules` (Block List) Escalation path rules (see [below for nested schema](#nestedblock--rules))
 
 ### Read-Only
 
