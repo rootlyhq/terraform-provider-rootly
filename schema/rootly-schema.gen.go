@@ -1687,6 +1687,19 @@ const (
 	IncidentResponseDataTypeIncidents IncidentResponseDataType = "incidents"
 )
 
+// Defines values for IncidentRetrospectiveStepStatus.
+const (
+	IncidentRetrospectiveStepStatusCompleted  IncidentRetrospectiveStepStatus = "completed"
+	IncidentRetrospectiveStepStatusInProgress IncidentRetrospectiveStepStatus = "in_progress"
+	IncidentRetrospectiveStepStatusSkipped    IncidentRetrospectiveStepStatus = "skipped"
+	IncidentRetrospectiveStepStatusTodo       IncidentRetrospectiveStepStatus = "todo"
+)
+
+// Defines values for IncidentRetrospectiveStepResponseDataType.
+const (
+	IncidentRetrospectiveStepResponseDataTypeIncidentRetrospectiveSteps IncidentRetrospectiveStepResponseDataType = "incident_retrospective_steps"
+)
+
 // Defines values for IncidentRoleListDataType.
 const (
 	IncidentRoleListDataTypeIncidentRoles IncidentRoleListDataType = "incident_roles"
@@ -3317,10 +3330,11 @@ const (
 
 // Defines values for NewUserNotificationRuleDataAttributesEnabledContactTypes.
 const (
-	NewUserNotificationRuleDataAttributesEnabledContactTypesCall   NewUserNotificationRuleDataAttributesEnabledContactTypes = "call"
-	NewUserNotificationRuleDataAttributesEnabledContactTypesDevice NewUserNotificationRuleDataAttributesEnabledContactTypes = "device"
-	NewUserNotificationRuleDataAttributesEnabledContactTypesEmail  NewUserNotificationRuleDataAttributesEnabledContactTypes = "email"
-	NewUserNotificationRuleDataAttributesEnabledContactTypesSms    NewUserNotificationRuleDataAttributesEnabledContactTypes = "sms"
+	NewUserNotificationRuleDataAttributesEnabledContactTypesCall              NewUserNotificationRuleDataAttributesEnabledContactTypes = "call"
+	NewUserNotificationRuleDataAttributesEnabledContactTypesDevice            NewUserNotificationRuleDataAttributesEnabledContactTypes = "device"
+	NewUserNotificationRuleDataAttributesEnabledContactTypesEmail             NewUserNotificationRuleDataAttributesEnabledContactTypes = "email"
+	NewUserNotificationRuleDataAttributesEnabledContactTypesNonCriticalDevice NewUserNotificationRuleDataAttributesEnabledContactTypes = "non_critical_device"
+	NewUserNotificationRuleDataAttributesEnabledContactTypesSms               NewUserNotificationRuleDataAttributesEnabledContactTypes = "sms"
 )
 
 // Defines values for NewUserNotificationRuleDataType.
@@ -4968,14 +4982,14 @@ const (
 
 // Defines values for UpdateIncidentDataAttributesKind.
 const (
-	UpdateIncidentDataAttributesKindBackfilled UpdateIncidentDataAttributesKind = "backfilled"
-	UpdateIncidentDataAttributesKindExample    UpdateIncidentDataAttributesKind = "example"
-	UpdateIncidentDataAttributesKindExampleSub UpdateIncidentDataAttributesKind = "example_sub"
-	UpdateIncidentDataAttributesKindNormal     UpdateIncidentDataAttributesKind = "normal"
-	UpdateIncidentDataAttributesKindNormalSub  UpdateIncidentDataAttributesKind = "normal_sub"
-	UpdateIncidentDataAttributesKindScheduled  UpdateIncidentDataAttributesKind = "scheduled"
-	UpdateIncidentDataAttributesKindTest       UpdateIncidentDataAttributesKind = "test"
-	UpdateIncidentDataAttributesKindTestSub    UpdateIncidentDataAttributesKind = "test_sub"
+	Backfilled UpdateIncidentDataAttributesKind = "backfilled"
+	Example    UpdateIncidentDataAttributesKind = "example"
+	ExampleSub UpdateIncidentDataAttributesKind = "example_sub"
+	Normal     UpdateIncidentDataAttributesKind = "normal"
+	NormalSub  UpdateIncidentDataAttributesKind = "normal_sub"
+	Scheduled  UpdateIncidentDataAttributesKind = "scheduled"
+	Test       UpdateIncidentDataAttributesKind = "test"
+	TestSub    UpdateIncidentDataAttributesKind = "test_sub"
 )
 
 // Defines values for UpdateIncidentDataAttributesStatus.
@@ -5147,6 +5161,19 @@ const (
 // Defines values for UpdateIncidentPostmortemTaskParamsTaskType.
 const (
 	UpdateIncidentPostmortem UpdateIncidentPostmortemTaskParamsTaskType = "update_incident_postmortem"
+)
+
+// Defines values for UpdateIncidentRetrospectiveStepDataAttributesStatus.
+const (
+	UpdateIncidentRetrospectiveStepDataAttributesStatusCompleted  UpdateIncidentRetrospectiveStepDataAttributesStatus = "completed"
+	UpdateIncidentRetrospectiveStepDataAttributesStatusInProgress UpdateIncidentRetrospectiveStepDataAttributesStatus = "in_progress"
+	UpdateIncidentRetrospectiveStepDataAttributesStatusSkipped    UpdateIncidentRetrospectiveStepDataAttributesStatus = "skipped"
+	UpdateIncidentRetrospectiveStepDataAttributesStatusTodo       UpdateIncidentRetrospectiveStepDataAttributesStatus = "todo"
+)
+
+// Defines values for UpdateIncidentRetrospectiveStepDataType.
+const (
+	UpdateIncidentRetrospectiveStepDataTypeIncidentRetrospectiveSteps UpdateIncidentRetrospectiveStepDataType = "incident_retrospective_steps"
 )
 
 // Defines values for UpdateIncidentRoleDataType.
@@ -5831,10 +5858,10 @@ const (
 
 // Defines values for UpdateSeverityDataAttributesSeverity.
 const (
-	UpdateSeverityDataAttributesSeverityCritical UpdateSeverityDataAttributesSeverity = "critical"
-	UpdateSeverityDataAttributesSeverityHigh     UpdateSeverityDataAttributesSeverity = "high"
-	UpdateSeverityDataAttributesSeverityLow      UpdateSeverityDataAttributesSeverity = "low"
-	UpdateSeverityDataAttributesSeverityMedium   UpdateSeverityDataAttributesSeverity = "medium"
+	Critical UpdateSeverityDataAttributesSeverity = "critical"
+	High     UpdateSeverityDataAttributesSeverity = "high"
+	Low      UpdateSeverityDataAttributesSeverity = "low"
+	Medium   UpdateSeverityDataAttributesSeverity = "medium"
 )
 
 // Defines values for UpdateSeverityDataType.
@@ -5903,10 +5930,11 @@ const (
 
 // Defines values for UpdateUserNotificationRuleDataAttributesEnabledContactTypes.
 const (
-	UpdateUserNotificationRuleDataAttributesEnabledContactTypesCall   UpdateUserNotificationRuleDataAttributesEnabledContactTypes = "call"
-	UpdateUserNotificationRuleDataAttributesEnabledContactTypesDevice UpdateUserNotificationRuleDataAttributesEnabledContactTypes = "device"
-	UpdateUserNotificationRuleDataAttributesEnabledContactTypesEmail  UpdateUserNotificationRuleDataAttributesEnabledContactTypes = "email"
-	UpdateUserNotificationRuleDataAttributesEnabledContactTypesSms    UpdateUserNotificationRuleDataAttributesEnabledContactTypes = "sms"
+	UpdateUserNotificationRuleDataAttributesEnabledContactTypesCall              UpdateUserNotificationRuleDataAttributesEnabledContactTypes = "call"
+	UpdateUserNotificationRuleDataAttributesEnabledContactTypesDevice            UpdateUserNotificationRuleDataAttributesEnabledContactTypes = "device"
+	UpdateUserNotificationRuleDataAttributesEnabledContactTypesEmail             UpdateUserNotificationRuleDataAttributesEnabledContactTypes = "email"
+	UpdateUserNotificationRuleDataAttributesEnabledContactTypesNonCriticalDevice UpdateUserNotificationRuleDataAttributesEnabledContactTypes = "non_critical_device"
+	UpdateUserNotificationRuleDataAttributesEnabledContactTypesSms               UpdateUserNotificationRuleDataAttributesEnabledContactTypes = "sms"
 )
 
 // Defines values for UpdateUserNotificationRuleDataType.
@@ -6029,10 +6057,11 @@ const (
 
 // Defines values for UserNotificationRuleEnabledContactTypes.
 const (
-	Call   UserNotificationRuleEnabledContactTypes = "call"
-	Device UserNotificationRuleEnabledContactTypes = "device"
-	Email  UserNotificationRuleEnabledContactTypes = "email"
-	Sms    UserNotificationRuleEnabledContactTypes = "sms"
+	Call              UserNotificationRuleEnabledContactTypes = "call"
+	Device            UserNotificationRuleEnabledContactTypes = "device"
+	Email             UserNotificationRuleEnabledContactTypes = "email"
+	NonCriticalDevice UserNotificationRuleEnabledContactTypes = "non_critical_device"
+	Sms               UserNotificationRuleEnabledContactTypes = "sms"
 )
 
 // Defines values for UserNotificationRuleListDataType.
@@ -10290,6 +10319,12 @@ type IncidentRetrospectiveProgressStatus string
 
 // IncidentActionItem defines model for incident_action_item.
 type IncidentActionItem struct {
+	// AssignedToGroupIds IDs of groups you wish to assign this action item
+	AssignedToGroupIds *[]string `json:"assigned_to_group_ids"`
+
+	// AssignedToUserId ID of user you wish to assign this action item
+	AssignedToUserId *int `json:"assigned_to_user_id"`
+
 	// CreatedAt Date of creation
 	CreatedAt string `json:"created_at"`
 
@@ -10885,6 +10920,55 @@ type IncidentResponse struct {
 
 // IncidentResponseDataType defines model for IncidentResponse.Data.Type.
 type IncidentResponseDataType string
+
+// IncidentRetrospectiveStep defines model for incident_retrospective_step.
+type IncidentRetrospectiveStep struct {
+	// CreatedAt Date of creation
+	CreatedAt string `json:"created_at"`
+
+	// Description The description of the step
+	Description *string `json:"description"`
+
+	// DueDate Due date
+	DueDate    *string `json:"due_date"`
+	IncidentId string  `json:"incident_id"`
+
+	// Kind Due date
+	Kind *string `json:"kind"`
+
+	// Position Position of the step
+	Position            *int   `json:"position,omitempty"`
+	RetrospectiveStepId string `json:"retrospective_step_id"`
+
+	// Skippable Is the step skippable?
+	Skippable *bool `json:"skippable,omitempty"`
+
+	// Status Status of the incident retrospective step
+	Status *IncidentRetrospectiveStepStatus `json:"status,omitempty"`
+
+	// Title The name of the step
+	Title string `json:"title"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt string `json:"updated_at"`
+}
+
+// IncidentRetrospectiveStepStatus Status of the incident retrospective step
+type IncidentRetrospectiveStepStatus string
+
+// IncidentRetrospectiveStepResponse defines model for incident_retrospective_step_response.
+type IncidentRetrospectiveStepResponse struct {
+	Data struct {
+		Attributes IncidentRetrospectiveStep `json:"attributes"`
+
+		// Id Unique ID of the step
+		Id   string                                    `json:"id"`
+		Type IncidentRetrospectiveStepResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// IncidentRetrospectiveStepResponseDataType defines model for IncidentRetrospectiveStepResponse.Data.Type.
+type IncidentRetrospectiveStepResponseDataType string
 
 // IncidentRole defines model for incident_role.
 type IncidentRole struct {
@@ -12663,8 +12747,11 @@ type NewIncidentDataType string
 type NewIncidentActionItem struct {
 	Data struct {
 		Attributes struct {
+			// AssignedToGroupIds IDs of groups you wish to assign this action item
+			AssignedToGroupIds *[]string `json:"assigned_to_group_ids,omitempty"`
+
 			// AssignedToUserId ID of user you wish to assign this action item
-			AssignedToUserId *int `json:"assigned_to_user_id,omitempty"`
+			AssignedToUserId *int `json:"assigned_to_user_id"`
 
 			// Description The description of the action item
 			Description *string `json:"description"`
@@ -18016,8 +18103,11 @@ type UpdateIncidentDataType string
 type UpdateIncidentActionItem struct {
 	Data struct {
 		Attributes struct {
+			// AssignedToGroupIds IDs of groups you wish to assign this action item
+			AssignedToGroupIds *[]string `json:"assigned_to_group_ids"`
+
 			// AssignedToUserId ID of user you wish to assign this action item
-			AssignedToUserId *int `json:"assigned_to_user_id,omitempty"`
+			AssignedToUserId *int `json:"assigned_to_user_id"`
 
 			// Description The description of the action item
 			Description *string `json:"description"`
@@ -18330,6 +18420,38 @@ type UpdateIncidentPostmortemTaskParams struct {
 
 // UpdateIncidentPostmortemTaskParamsTaskType defines model for UpdateIncidentPostmortemTaskParams.TaskType.
 type UpdateIncidentPostmortemTaskParamsTaskType string
+
+// UpdateIncidentRetrospectiveStep defines model for update_incident_retrospective_step.
+type UpdateIncidentRetrospectiveStep struct {
+	Data struct {
+		Attributes struct {
+			// Description The description of the incident retrospective step
+			Description *string `json:"description"`
+
+			// DueDate Due date
+			DueDate *string `json:"due_date"`
+
+			// Position Position of the step
+			Position *int `json:"position"`
+
+			// Skippable Is the step skippable?
+			Skippable *bool `json:"skippable,omitempty"`
+
+			// Status Status of the incident retrospective step
+			Status *UpdateIncidentRetrospectiveStepDataAttributesStatus `json:"status,omitempty"`
+
+			// Title The name of the incident retrospective step
+			Title *string `json:"title,omitempty"`
+		} `json:"attributes"`
+		Type UpdateIncidentRetrospectiveStepDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateIncidentRetrospectiveStepDataAttributesStatus Status of the incident retrospective step
+type UpdateIncidentRetrospectiveStepDataAttributesStatus string
+
+// UpdateIncidentRetrospectiveStepDataType defines model for UpdateIncidentRetrospectiveStep.Data.Type.
+type UpdateIncidentRetrospectiveStepDataType string
 
 // UpdateIncidentRole defines model for update_incident_role.
 type UpdateIncidentRole struct {
@@ -22312,6 +22434,9 @@ type CreateIncidentPermissionSetBooleanApplicationVndAPIPlusJSONRequestBody = Ne
 
 // CreateIncidentPermissionSetResourceApplicationVndAPIPlusJSONRequestBody defines body for CreateIncidentPermissionSetResource for application/vnd.api+json ContentType.
 type CreateIncidentPermissionSetResourceApplicationVndAPIPlusJSONRequestBody = NewIncidentPermissionSetResource
+
+// UpdateIncidentRetrospectiveStepApplicationVndAPIPlusJSONRequestBody defines body for UpdateIncidentRetrospectiveStep for application/vnd.api+json ContentType.
+type UpdateIncidentRetrospectiveStepApplicationVndAPIPlusJSONRequestBody = UpdateIncidentRetrospectiveStep
 
 // UpdateIncidentRoleTaskApplicationVndAPIPlusJSONRequestBody defines body for UpdateIncidentRoleTask for application/vnd.api+json ContentType.
 type UpdateIncidentRoleTaskApplicationVndAPIPlusJSONRequestBody = UpdateIncidentRoleTask
@@ -36303,6 +36428,14 @@ type ClientInterface interface {
 
 	CreateIncidentPermissionSetResourceWithApplicationVndAPIPlusJSONBody(ctx context.Context, incidentPermissionSetId string, body CreateIncidentPermissionSetResourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// GetIncidentRetrospectiveStep request
+	GetIncidentRetrospectiveStep(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateIncidentRetrospectiveStepWithBody request with any body
+	UpdateIncidentRetrospectiveStepWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateIncidentRetrospectiveStepWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateIncidentRetrospectiveStepApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// DeleteIncidentRoleTask request
 	DeleteIncidentRoleTask(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -40296,6 +40429,42 @@ func (c *Client) CreateIncidentPermissionSetResourceWithBody(ctx context.Context
 
 func (c *Client) CreateIncidentPermissionSetResourceWithApplicationVndAPIPlusJSONBody(ctx context.Context, incidentPermissionSetId string, body CreateIncidentPermissionSetResourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIncidentPermissionSetResourceRequestWithApplicationVndAPIPlusJSONBody(c.Server, incidentPermissionSetId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetIncidentRetrospectiveStep(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetIncidentRetrospectiveStepRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateIncidentRetrospectiveStepWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateIncidentRetrospectiveStepRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateIncidentRetrospectiveStepWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateIncidentRetrospectiveStepApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateIncidentRetrospectiveStepRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -56113,6 +56282,87 @@ func NewCreateIncidentPermissionSetResourceRequestWithBody(server string, incide
 	}
 
 	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGetIncidentRetrospectiveStepRequest generates requests for GetIncidentRetrospectiveStep
+func NewGetIncidentRetrospectiveStepRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_retrospective_steps/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateIncidentRetrospectiveStepRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateIncidentRetrospectiveStep builder with application/vnd.api+json body
+func NewUpdateIncidentRetrospectiveStepRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateIncidentRetrospectiveStepApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateIncidentRetrospectiveStepRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateIncidentRetrospectiveStepRequestWithBody generates requests for UpdateIncidentRetrospectiveStep with any type of body
+func NewUpdateIncidentRetrospectiveStepRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/incident_retrospective_steps/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -72488,6 +72738,14 @@ type ClientWithResponsesInterface interface {
 
 	CreateIncidentPermissionSetResourceWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, incidentPermissionSetId string, body CreateIncidentPermissionSetResourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIncidentPermissionSetResourceResponse, error)
 
+	// GetIncidentRetrospectiveStepWithResponse request
+	GetIncidentRetrospectiveStepWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentRetrospectiveStepResponse, error)
+
+	// UpdateIncidentRetrospectiveStepWithBodyWithResponse request with any body
+	UpdateIncidentRetrospectiveStepWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentRetrospectiveStepResponse, error)
+
+	UpdateIncidentRetrospectiveStepWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateIncidentRetrospectiveStepApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIncidentRetrospectiveStepResponse, error)
+
 	// DeleteIncidentRoleTaskWithResponse request
 	DeleteIncidentRoleTaskWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentRoleTaskResponse, error)
 
@@ -77692,6 +77950,52 @@ func (r CreateIncidentPermissionSetResourceResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r CreateIncidentPermissionSetResourceResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetIncidentRetrospectiveStepResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *IncidentRetrospectiveStepResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetIncidentRetrospectiveStepResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetIncidentRetrospectiveStepResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateIncidentRetrospectiveStepResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *IncidentRetrospectiveStepResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateIncidentRetrospectiveStepResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateIncidentRetrospectiveStepResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -85199,6 +85503,32 @@ func (c *ClientWithResponses) CreateIncidentPermissionSetResourceWithApplication
 		return nil, err
 	}
 	return ParseCreateIncidentPermissionSetResourceResponse(rsp)
+}
+
+// GetIncidentRetrospectiveStepWithResponse request returning *GetIncidentRetrospectiveStepResponse
+func (c *ClientWithResponses) GetIncidentRetrospectiveStepWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIncidentRetrospectiveStepResponse, error) {
+	rsp, err := c.GetIncidentRetrospectiveStep(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetIncidentRetrospectiveStepResponse(rsp)
+}
+
+// UpdateIncidentRetrospectiveStepWithBodyWithResponse request with arbitrary body returning *UpdateIncidentRetrospectiveStepResponse
+func (c *ClientWithResponses) UpdateIncidentRetrospectiveStepWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentRetrospectiveStepResponse, error) {
+	rsp, err := c.UpdateIncidentRetrospectiveStepWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateIncidentRetrospectiveStepResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateIncidentRetrospectiveStepWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateIncidentRetrospectiveStepApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIncidentRetrospectiveStepResponse, error) {
+	rsp, err := c.UpdateIncidentRetrospectiveStepWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateIncidentRetrospectiveStepResponse(rsp)
 }
 
 // DeleteIncidentRoleTaskWithResponse request returning *DeleteIncidentRoleTaskResponse
@@ -94172,6 +94502,72 @@ func ParseCreateIncidentPermissionSetResourceResponse(rsp *http.Response) (*Crea
 			return nil, err
 		}
 		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetIncidentRetrospectiveStepResponse parses an HTTP response from a GetIncidentRetrospectiveStepWithResponse call
+func ParseGetIncidentRetrospectiveStepResponse(rsp *http.Response) (*GetIncidentRetrospectiveStepResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetIncidentRetrospectiveStepResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest IncidentRetrospectiveStepResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateIncidentRetrospectiveStepResponse parses an HTTP response from a UpdateIncidentRetrospectiveStepWithResponse call
+func ParseUpdateIncidentRetrospectiveStepResponse(rsp *http.Response) (*UpdateIncidentRetrospectiveStepResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateIncidentRetrospectiveStepResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest IncidentRetrospectiveStepResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.12.0] -- 2024-12-09
+
+- Add `incident_retrospective_steps` resources
+
 ## [2.11.0] -- 2024-12-02
 
 - Add `alert_sources` resources
