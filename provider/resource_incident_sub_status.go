@@ -38,7 +38,7 @@ func resourceIncidentSubStatus() *schema.Resource {
 				Required:    true,
 				Optional:    false,
 				ForceNew:    false,
-				Description: "",
+				Description: "Note: To change an incident's sub-status, use the PATCH /incidents/:id endpoint and set the sub_status_id attribute. This endpoint is for modifying the timestamp of when an incident's sub-status was assigned.",
 			},
 
 			"assigned_at": &schema.Schema{

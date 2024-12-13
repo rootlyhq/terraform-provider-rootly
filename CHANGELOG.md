@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.13.0] -- 2024-12-13
+
+- Add `escalation_path_id` attribute to `escalation_level` resource.
+
 ## [2.12.0] -- 2024-12-09
 
 - Add `incident_retrospective_steps` resources

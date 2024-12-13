@@ -9311,6 +9311,9 @@ type EscalationLevel struct {
 	// Delay Delay before notification targets will be alerted.
 	Delay int `json:"delay"`
 
+	// EscalationPathId The ID of the dynamic escalation policy path the level will belong to. If nothing is specified it will add the level to your default path.
+	EscalationPathId *string `json:"escalation_path_id"`
+
 	// EscalationPolicyId The ID of the escalation policy
 	EscalationPolicyId string `json:"escalation_policy_id"`
 
@@ -11142,7 +11145,9 @@ type IncidentSubStatus struct {
 	AssignedAt       string `json:"assigned_at"`
 	AssignedByUserId *int   `json:"assigned_by_user_id"`
 	IncidentId       string `json:"incident_id"`
-	SubStatusId      string `json:"sub_status_id"`
+
+	// SubStatusId Note: To change an incident's sub-status, use the PATCH /incidents/:id endpoint and set the sub_status_id attribute. This endpoint is for modifying the timestamp of when an incident's sub-status was assigned.
+	SubStatusId string `json:"sub_status_id"`
 }
 
 // IncidentSubStatusList defines model for incident_sub_status_list.
@@ -12220,9 +12225,12 @@ type NewEscalationLevel struct {
 			// Delay Delay before notification targets will be alerted.
 			Delay *int `json:"delay,omitempty"`
 
+			// EscalationPathId The ID of the dynamic escalation policy path the level will belong to. If nothing is specified it will add the level to your default path.
+			EscalationPathId *string `json:"escalation_path_id"`
+
 			// NotificationTargetParams Escalation level's notification targets
 			NotificationTargetParams []struct {
-				// Id The ID of notification target
+				// Id The ID of notification target. If Slack channel, then id of the slack channel (eg. C06Q2JK7RQW)
 				Id string `json:"id"`
 
 				// Type The type of the notification target
@@ -12991,6 +12999,9 @@ type NewIncidentPermissionSetResource struct {
 				// AppliesToUnassigned Whether permissions are enabled for incident without severity
 				AppliesToUnassigned *bool `json:"applies_to_unassigned,omitempty"`
 
+				// CreateEnabled Whether permissions are enabled when creating incident
+				CreateEnabled *bool `json:"create_enabled,omitempty"`
+
 				// FullyEnabled Whether permissions are enabled for any severity incident
 				FullyEnabled *bool `json:"fully_enabled,omitempty"`
 
@@ -13094,7 +13105,9 @@ type NewIncidentSubStatus struct {
 		Attributes struct {
 			AssignedAt       string `json:"assigned_at"`
 			AssignedByUserId *int   `json:"assigned_by_user_id"`
-			SubStatusId      string `json:"sub_status_id"`
+
+			// SubStatusId Note: To change an incident's sub-status, use the PATCH /incidents/:id endpoint and set the sub_status_id attribute. This endpoint is for modifying the timestamp of when an incident's sub-status was assigned.
+			SubStatusId string `json:"sub_status_id"`
 		} `json:"attributes"`
 		Type NewIncidentSubStatusDataType `json:"type"`
 	} `json:"data"`
@@ -18296,6 +18309,9 @@ type UpdateIncidentPermissionSetBoolean struct {
 				// AppliesToUnassigned Whether permissions are enabled for incident without severity
 				AppliesToUnassigned *bool `json:"applies_to_unassigned,omitempty"`
 
+				// CreateEnabled Whether permissions are enabled when creating incident
+				CreateEnabled *bool `json:"create_enabled,omitempty"`
+
 				// FullyEnabled Whether permissions are enabled for any severity incident
 				FullyEnabled *bool `json:"fully_enabled,omitempty"`
 
@@ -18551,7 +18567,9 @@ type UpdateIncidentSubStatus struct {
 		Attributes struct {
 			AssignedAt       *string `json:"assigned_at,omitempty"`
 			AssignedByUserId *int    `json:"assigned_by_user_id"`
-			SubStatusId      *string `json:"sub_status_id,omitempty"`
+
+			// SubStatusId Note: To change an incident's sub-status, use the PATCH /incidents/:id endpoint and set the sub_status_id attribute. This endpoint is for modifying the timestamp of when an incident's sub-status was assigned.
+			SubStatusId *string `json:"sub_status_id,omitempty"`
 		} `json:"attributes"`
 		Type UpdateIncidentSubStatusDataType `json:"type"`
 	} `json:"data"`
