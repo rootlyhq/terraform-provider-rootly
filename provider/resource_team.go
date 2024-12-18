@@ -81,6 +81,24 @@ func resourceTeam() *schema.Resource {
 				Description: "Position of the team",
 			},
 
+			"backstage_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The Backstage entity id associated to this team. eg: :namespace/:kind/:entity_name",
+			},
+
+			"external_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The external id associated to this team",
+			},
+
 			"pagerduty_id": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
@@ -253,6 +271,12 @@ func resourceTeamCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	if value, ok := d.GetOkExists("position"); ok {
 		s.Position = value.(int)
 	}
+	if value, ok := d.GetOkExists("backstage_id"); ok {
+		s.BackstageId = value.(string)
+	}
+	if value, ok := d.GetOkExists("external_id"); ok {
+		s.ExternalId = value.(string)
+	}
 	if value, ok := d.GetOkExists("pagerduty_id"); ok {
 		s.PagerdutyId = value.(string)
 	}
@@ -321,6 +345,8 @@ func resourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	d.Set("notify_emails", item.NotifyEmails)
 	d.Set("color", item.Color)
 	d.Set("position", item.Position)
+	d.Set("backstage_id", item.BackstageId)
+	d.Set("external_id", item.ExternalId)
 	d.Set("pagerduty_id", item.PagerdutyId)
 	d.Set("pagerduty_service_id", item.PagerdutyServiceId)
 	d.Set("opsgenie_id", item.OpsgenieId)
@@ -359,6 +385,12 @@ func resourceTeamUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 	}
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)
+	}
+	if d.HasChange("backstage_id") {
+		s.BackstageId = d.Get("backstage_id").(string)
+	}
+	if d.HasChange("external_id") {
+		s.ExternalId = d.Get("external_id").(string)
 	}
 	if d.HasChange("pagerduty_id") {
 		s.PagerdutyId = d.Get("pagerduty_id").(string)

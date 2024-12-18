@@ -18,6 +18,8 @@ type Team struct {
   NotifyEmails []interface{} `jsonapi:"attr,notify_emails,omitempty"`
   Color string `jsonapi:"attr,color,omitempty"`
   Position int `jsonapi:"attr,position,omitempty"`
+  BackstageId string `jsonapi:"attr,backstage_id,omitempty"`
+  ExternalId string `jsonapi:"attr,external_id,omitempty"`
   PagerdutyId string `jsonapi:"attr,pagerduty_id,omitempty"`
   PagerdutyServiceId string `jsonapi:"attr,pagerduty_service_id,omitempty"`
   OpsgenieId string `jsonapi:"attr,opsgenie_id,omitempty"`

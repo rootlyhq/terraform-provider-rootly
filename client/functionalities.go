@@ -19,6 +19,7 @@ type Functionality struct {
   NotifyEmails []interface{} `jsonapi:"attr,notify_emails,omitempty"`
   Color string `jsonapi:"attr,color,omitempty"`
   BackstageId string `jsonapi:"attr,backstage_id,omitempty"`
+  ExternalId string `jsonapi:"attr,external_id,omitempty"`
   PagerdutyId string `jsonapi:"attr,pagerduty_id,omitempty"`
   OpsgenieId string `jsonapi:"attr,opsgenie_id,omitempty"`
   OpsgenieTeamId string `jsonapi:"attr,opsgenie_team_id,omitempty"`

@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.15.0] -- 2024-12-18
+
+- Add `external_id` attribute to `groups`, `services`, `functionalities` resources.
+
 ## [2.14.0] -- 2024-12-18
 
 - Add `owner_user_id` attribute to `schedule` resource.

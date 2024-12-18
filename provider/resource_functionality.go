@@ -90,6 +90,15 @@ func resourceFunctionality() *schema.Resource {
 				Description: "The Backstage entity id associated to this functionality. eg: :namespace/:kind/:entity_name",
 			},
 
+			"external_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The external id associated to this functionality",
+			},
+
 			"pagerduty_id": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
@@ -283,6 +292,9 @@ func resourceFunctionalityCreate(ctx context.Context, d *schema.ResourceData, me
 	if value, ok := d.GetOkExists("backstage_id"); ok {
 		s.BackstageId = value.(string)
 	}
+	if value, ok := d.GetOkExists("external_id"); ok {
+		s.ExternalId = value.(string)
+	}
 	if value, ok := d.GetOkExists("pagerduty_id"); ok {
 		s.PagerdutyId = value.(string)
 	}
@@ -355,6 +367,7 @@ func resourceFunctionalityRead(ctx context.Context, d *schema.ResourceData, meta
 	d.Set("notify_emails", item.NotifyEmails)
 	d.Set("color", item.Color)
 	d.Set("backstage_id", item.BackstageId)
+	d.Set("external_id", item.ExternalId)
 	d.Set("pagerduty_id", item.PagerdutyId)
 	d.Set("opsgenie_id", item.OpsgenieId)
 	d.Set("opsgenie_team_id", item.OpsgenieTeamId)
@@ -397,6 +410,9 @@ func resourceFunctionalityUpdate(ctx context.Context, d *schema.ResourceData, me
 	}
 	if d.HasChange("backstage_id") {
 		s.BackstageId = d.Get("backstage_id").(string)
+	}
+	if d.HasChange("external_id") {
+		s.ExternalId = d.Get("external_id").(string)
 	}
 	if d.HasChange("pagerduty_id") {
 		s.PagerdutyId = d.Get("pagerduty_id").(string)

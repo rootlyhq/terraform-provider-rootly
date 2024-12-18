@@ -22,8 +22,10 @@ data "rootly_team" "my-team" {
 
 ### Optional
 
+- `backstage_id` (String)
 - `color` (String)
 - `created_at` (Map of String) Filter by date range using 'lt' and 'gt'.
+- `external_id` (String)
 - `name` (String)
 - `slug` (String)
 

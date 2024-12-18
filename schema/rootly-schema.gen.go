@@ -9905,6 +9905,9 @@ type Functionality struct {
 	// EnvironmentIds Environments associated with this functionality
 	EnvironmentIds *[]string `json:"environment_ids"`
 
+	// ExternalId The external id associated to this functionality
+	ExternalId *string `json:"external_id"`
+
 	// Name The name of the functionality
 	Name string `json:"name"`
 
@@ -12552,6 +12555,9 @@ type NewFunctionality struct {
 			// EnvironmentIds Environments associated with this functionality
 			EnvironmentIds *[]string `json:"environment_ids"`
 
+			// ExternalId The external id associated to this functionality
+			ExternalId *string `json:"external_id"`
+
 			// Name The name of the functionality
 			Name string `json:"name"`
 
@@ -13890,6 +13896,9 @@ type NewService struct {
 			// EnvironmentIds Environments associated with this service
 			EnvironmentIds *[]string `json:"environment_ids"`
 
+			// ExternalId The external id associated to this service
+			ExternalId *string `json:"external_id"`
+
 			// GithubRepositoryBranch The GitHub repository branch associated to this service. eg: main
 			GithubRepositoryBranch *string `json:"github_repository_branch"`
 
@@ -14123,6 +14132,9 @@ type NewSubStatusDataType string
 type NewTeam struct {
 	Data struct {
 		Attributes struct {
+			// BackstageId The Backstage entity id associated to this team. eg: :namespace/:kind/:entity_name
+			BackstageId *string `json:"backstage_id"`
+
 			// Color The hex color of the team
 			Color *string `json:"color"`
 
@@ -14131,6 +14143,9 @@ type NewTeam struct {
 
 			// Description The description of the team
 			Description *string `json:"description"`
+
+			// ExternalId The external id associated to this team
+			ExternalId *string `json:"external_id"`
 
 			// Name The name of the team
 			Name string `json:"name"`
@@ -16233,6 +16248,9 @@ type Service struct {
 	// EnvironmentIds Environments associated with this service
 	EnvironmentIds *[]string `json:"environment_ids"`
 
+	// ExternalId The external id associated to this service
+	ExternalId *string `json:"external_id"`
+
 	// GithubRepositoryBranch The GitHub repository branch associated to this service. eg: main
 	GithubRepositoryBranch *string `json:"github_repository_branch"`
 
@@ -16779,6 +16797,9 @@ type Team struct {
 	// AlertUrgencyId The alert urgency id of the team
 	AlertUrgencyId *string `json:"alert_urgency_id"`
 
+	// BackstageId The Backstage entity id associated to this team. eg: :namespace/:kind/:entity_name
+	BackstageId *string `json:"backstage_id"`
+
 	// Color The hex color of the team
 	Color *string `json:"color"`
 
@@ -16790,6 +16811,9 @@ type Team struct {
 
 	// Description The description of the team
 	Description *string `json:"description"`
+
+	// ExternalId The external id associated to this team
+	ExternalId *string `json:"external_id"`
 
 	// Name The name of the team
 	Name string `json:"name"`
@@ -17809,6 +17833,9 @@ type UpdateFunctionality struct {
 
 			// EnvironmentIds Environments associated with this functionality
 			EnvironmentIds *[]string `json:"environment_ids"`
+
+			// ExternalId The external id associated to this functionality
+			ExternalId *string `json:"external_id"`
 
 			// Name The name of the functionality
 			Name *string `json:"name,omitempty"`
@@ -19643,6 +19670,9 @@ type UpdateService struct {
 			// EnvironmentIds Environments associated with this service
 			EnvironmentIds *[]string `json:"environment_ids"`
 
+			// ExternalId The external id associated to this service
+			ExternalId *string `json:"external_id"`
+
 			// GithubRepositoryBranch The GitHub repository branch associated to this service. eg: main
 			GithubRepositoryBranch *string `json:"github_repository_branch"`
 
@@ -19968,6 +19998,9 @@ type UpdateSubStatusDataType string
 type UpdateTeam struct {
 	Data struct {
 		Attributes struct {
+			// BackstageId The Backstage entity id associated to this team. eg: :namespace/:kind/:entity_name
+			BackstageId *string `json:"backstage_id"`
+
 			// Color The hex color of the team
 			Color *string `json:"color"`
 
@@ -19976,6 +20009,9 @@ type UpdateTeam struct {
 
 			// Description The description of the team
 			Description *string `json:"description"`
+
+			// ExternalId The external id associated to this team
+			ExternalId *string `json:"external_id"`
 
 			// Name The name of the team
 			Name *string `json:"name,omitempty"`
@@ -21404,6 +21440,7 @@ type ListFunctionalitiesParams struct {
 	FilterSearch       *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
 	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
 	FilterBackstageId  *string `form:"filter[backstage_id],omitempty" json:"filter[backstage_id],omitempty"`
+	FilterExternalId   *string `form:"filter[external_id],omitempty" json:"filter[external_id],omitempty"`
 	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
 	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
 	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
@@ -21997,6 +22034,7 @@ type ListServicesParams struct {
 	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
 	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
 	FilterBackstageId  *string `form:"filter[backstage_id],omitempty" json:"filter[backstage_id],omitempty"`
+	FilterExternalId   *string `form:"filter[external_id],omitempty" json:"filter[external_id],omitempty"`
 	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
 	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
 	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
@@ -22093,6 +22131,7 @@ type ListTeamsParams struct {
 	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
 	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
 	FilterBackstageId  *string `form:"filter[backstage_id],omitempty" json:"filter[backstage_id],omitempty"`
+	FilterExternalId   *string `form:"filter[external_id],omitempty" json:"filter[external_id],omitempty"`
 	FilterColor        *string `form:"filter[color],omitempty" json:"filter[color],omitempty"`
 	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
 	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
@@ -54052,6 +54091,22 @@ func NewListFunctionalitiesRequest(server string, params *ListFunctionalitiesPar
 
 		}
 
+		if params.FilterExternalId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[external_id]", runtime.ParamLocationQuery, *params.FilterExternalId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
 		if params.FilterSlug != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[slug]", runtime.ParamLocationQuery, *params.FilterSlug); err != nil {
@@ -67025,6 +67080,22 @@ func NewListServicesRequest(server string, params *ListServicesParams) (*http.Re
 
 		}
 
+		if params.FilterExternalId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[external_id]", runtime.ParamLocationQuery, *params.FilterExternalId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
 		if params.FilterCreatedAtGt != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
@@ -68971,6 +69042,22 @@ func NewListTeamsRequest(server string, params *ListTeamsParams) (*http.Request,
 		if params.FilterBackstageId != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[backstage_id]", runtime.ParamLocationQuery, *params.FilterBackstageId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterExternalId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[external_id]", runtime.ParamLocationQuery, *params.FilterExternalId); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 				return nil, err

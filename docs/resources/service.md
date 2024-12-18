@@ -64,6 +64,7 @@ resource "rootly_service" "customer_postgresql_prod" {
 - `cortex_id` (String) The Cortex group id associated to this service
 - `description` (String) The description of the service
 - `environment_ids` (List of String) Environments associated with this service
+- `external_id` (String) The external id associated to this service
 - `github_repository_branch` (String) The GitHub repository branch associated to this service. eg: main
 - `github_repository_name` (String) The GitHub repository name associated to this service. eg: rootlyhq/my-service
 - `gitlab_repository_branch` (String) The Gitlab repository branch associated to this service. eg: main

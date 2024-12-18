@@ -24,6 +24,7 @@ data "rootly_service" "my-service" {
 
 - `backstage_id` (String)
 - `created_at` (Map of String) Filter by date range using 'lt' and 'gt'.
+- `external_id` (String)
 - `name` (String)
 - `slug` (String)
 

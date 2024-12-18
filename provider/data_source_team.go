@@ -38,6 +38,18 @@ func dataSourceTeam() *schema.Resource {
 				Optional: true,
 			},
 
+			"backstage_id": &schema.Schema{
+				Type:     schema.TypeString,
+				Computed: true,
+				Optional: true,
+			},
+
+			"external_id": &schema.Schema{
+				Type:     schema.TypeString,
+				Computed: true,
+				Optional: true,
+			},
+
 			"created_at": &schema.Schema{
 				Type:        schema.TypeMap,
 				Description: "Filter by date range using 'lt' and 'gt'.",
@@ -62,6 +74,16 @@ func dataSourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interf
 	if value, ok := d.GetOkExists("name"); ok {
 		name := value.(string)
 		params.FilterName = &name
+	}
+
+	if value, ok := d.GetOkExists("backstage_id"); ok {
+		backstage_id := value.(string)
+		params.FilterBackstageId = &backstage_id
+	}
+
+	if value, ok := d.GetOkExists("external_id"); ok {
+		external_id := value.(string)
+		params.FilterExternalId = &external_id
 	}
 
 	if value, ok := d.GetOkExists("color"); ok {

@@ -21,9 +21,11 @@ description: |-
 ### Optional
 
 - `alert_urgency_id` (String) The alert urgency id of the team
+- `backstage_id` (String) The Backstage entity id associated to this team. eg: :namespace/:kind/:entity_name
 - `color` (String) The hex color of the team
 - `cortex_id` (String) The Cortex group id associated to this team
 - `description` (String) The description of the team
+- `external_id` (String) The external id associated to this team
 - `notify_emails` (List of String) Emails to attach to the team
 - `opsgenie_id` (String) The Opsgenie group id associated to this team
 - `pagerduty_id` (String) The PagerDuty group id associated to this team
