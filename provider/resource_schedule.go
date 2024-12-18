@@ -58,6 +58,15 @@ func resourceSchedule() *schema.Resource {
 				ForceNew:    false,
 				Description: "Synced slack group of the schedule",
 			},
+
+			"owner_user_id": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "ID of user assigned as owner of the schedule",
+			},
 		},
 	}
 }
@@ -80,6 +89,9 @@ func resourceScheduleCreate(ctx context.Context, d *schema.ResourceData, meta in
 	}
 	if value, ok := d.GetOkExists("slack_user_group"); ok {
 		s.SlackUserGroup = value.(string)
+	}
+	if value, ok := d.GetOkExists("owner_user_id"); ok {
+		s.OwnerUserId = value.(int)
 	}
 
 	res, err := c.CreateSchedule(s)
@@ -114,6 +126,7 @@ func resourceScheduleRead(ctx context.Context, d *schema.ResourceData, meta inte
 	d.Set("description", item.Description)
 	d.Set("all_time_coverage", item.AllTimeCoverage)
 	d.Set("slack_user_group", item.SlackUserGroup)
+	d.Set("owner_user_id", item.OwnerUserId)
 
 	return nil
 }
@@ -135,6 +148,9 @@ func resourceScheduleUpdate(ctx context.Context, d *schema.ResourceData, meta in
 	}
 	if d.HasChange("slack_user_group") {
 		s.SlackUserGroup = d.Get("slack_user_group").(string)
+	}
+	if d.HasChange("owner_user_id") {
+		s.OwnerUserId = d.Get("owner_user_id").(int)
 	}
 
 	_, err := c.UpdateSchedule(d.Id(), s)

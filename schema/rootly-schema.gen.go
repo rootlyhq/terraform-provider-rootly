@@ -6419,6 +6419,7 @@ const (
 	ListIncidentsParamsIncludeGroups                  ListIncidentsParamsInclude = "groups"
 	ListIncidentsParamsIncludeIncidentPostMortem      ListIncidentsParamsInclude = "incident_post_mortem"
 	ListIncidentsParamsIncludeIncidentRoleAssignments ListIncidentsParamsInclude = "incident_role_assignments"
+	ListIncidentsParamsIncludeIncidentSlackMessages   ListIncidentsParamsInclude = "incident_slack_messages"
 	ListIncidentsParamsIncludeIncidentTypes           ListIncidentsParamsInclude = "incident_types"
 	ListIncidentsParamsIncludeServices                ListIncidentsParamsInclude = "services"
 	ListIncidentsParamsIncludeSubStatuses             ListIncidentsParamsInclude = "sub_statuses"
@@ -6437,6 +6438,7 @@ const (
 	GetIncidentParamsIncludeGroups                  GetIncidentParamsInclude = "groups"
 	GetIncidentParamsIncludeIncidentPostMortem      GetIncidentParamsInclude = "incident_post_mortem"
 	GetIncidentParamsIncludeIncidentRoleAssignments GetIncidentParamsInclude = "incident_role_assignments"
+	GetIncidentParamsIncludeIncidentSlackMessages   GetIncidentParamsInclude = "incident_slack_messages"
 	GetIncidentParamsIncludeIncidentTypes           GetIncidentParamsInclude = "incident_types"
 	GetIncidentParamsIncludeServices                GetIncidentParamsInclude = "services"
 	GetIncidentParamsIncludeSubStatuses             GetIncidentParamsInclude = "sub_statuses"
@@ -13721,6 +13723,9 @@ type NewSchedule struct {
 
 			// Name The name of the schedule
 			Name string `json:"name"`
+
+			// OwnerUserId ID of the owner of the schedule
+			OwnerUserId *int `json:"owner_user_id"`
 		} `json:"attributes"`
 		Type NewScheduleDataType `json:"type"`
 	} `json:"data"`
@@ -15715,6 +15720,9 @@ type Schedule struct {
 
 	// Name The name of the schedule
 	Name string `json:"name"`
+
+	// OwnerUserId ID of user assigned as owner of the schedule
+	OwnerUserId *int `json:"owner_user_id"`
 
 	// SlackUserGroup Synced slack group of the schedule
 	SlackUserGroup *string `json:"slack_user_group"`
@@ -19474,6 +19482,9 @@ type UpdateSchedule struct {
 
 			// Name The name of the schedule
 			Name *string `json:"name,omitempty"`
+
+			// OwnerUserId ID of the owner of the schedule
+			OwnerUserId *int `json:"owner_user_id"`
 		} `json:"attributes"`
 		Type UpdateScheduleDataType `json:"type"`
 	} `json:"data"`

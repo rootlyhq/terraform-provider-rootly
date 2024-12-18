@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.14.0] -- 2024-12-18
+
+- Add `owner_user_id` attribute to `schedule` resource.
+
 ## [2.13.0] -- 2024-12-13
 
 - Add `escalation_path_id` attribute to `escalation_level` resource.

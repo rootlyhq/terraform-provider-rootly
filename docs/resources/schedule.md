@@ -22,6 +22,7 @@ description: |-
 
 - `all_time_coverage` (Boolean) 24/7 coverage of the schedule. Value must be one of true or false
 - `description` (String) The description of the schedule
+- `owner_user_id` (Number) ID of user assigned as owner of the schedule
 - `slack_user_group` (String) Synced slack group of the schedule
 
 ### Read-Only

@@ -16,6 +16,7 @@ type Schedule struct {
   Description string `jsonapi:"attr,description,omitempty"`
   AllTimeCoverage *bool `jsonapi:"attr,all_time_coverage,omitempty"`
   SlackUserGroup string `jsonapi:"attr,slack_user_group,omitempty"`
+  OwnerUserId int `jsonapi:"attr,owner_user_id,omitempty"`
 }
 
 func (c *Client) ListSchedules(params *rootlygo.ListSchedulesParams) ([]interface{}, error) {
