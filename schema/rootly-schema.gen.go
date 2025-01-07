@@ -13888,6 +13888,12 @@ type NewSecretDataType string
 type NewService struct {
 	Data struct {
 		Attributes struct {
+			// AlertUrgencyId The alert urgency id of the service
+			AlertUrgencyId *string `json:"alert_urgency_id"`
+
+			// AlertsEmailEnabled Enable alerts through email
+			AlertsEmailEnabled *bool `json:"alerts_email_enabled"`
+
 			// BackstageId The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
 			BackstageId *string `json:"backstage_id"`
 
@@ -14139,6 +14145,12 @@ type NewSubStatusDataType string
 type NewTeam struct {
 	Data struct {
 		Attributes struct {
+			// AlertUrgencyId The alert urgency id of the team
+			AlertUrgencyId *string `json:"alert_urgency_id"`
+
+			// AlertsEmailEnabled Enable alerts through email
+			AlertsEmailEnabled *bool `json:"alerts_email_enabled"`
+
 			// BackstageId The Backstage entity id associated to this team. eg: :namespace/:kind/:entity_name
 			BackstageId *string `json:"backstage_id"`
 
@@ -16237,6 +16249,12 @@ type Service struct {
 	// AlertUrgencyId The alert urgency id of the service
 	AlertUrgencyId *string `json:"alert_urgency_id"`
 
+	// AlertsEmailAddress Email generated to send alerts to
+	AlertsEmailAddress *string `json:"alerts_email_address"`
+
+	// AlertsEmailEnabled Enable alerts through email
+	AlertsEmailEnabled *bool `json:"alerts_email_enabled"`
+
 	// BackstageId The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
 	BackstageId *string `json:"backstage_id"`
 
@@ -16803,6 +16821,12 @@ type SubStatusResponseDataType string
 type Team struct {
 	// AlertUrgencyId The alert urgency id of the team
 	AlertUrgencyId *string `json:"alert_urgency_id"`
+
+	// AlertsEmailAddress Email generated to send alerts to
+	AlertsEmailAddress *string `json:"alerts_email_address"`
+
+	// AlertsEmailEnabled Enable alerts through email
+	AlertsEmailEnabled *bool `json:"alerts_email_enabled"`
 
 	// BackstageId The Backstage entity id associated to this team. eg: :namespace/:kind/:entity_name
 	BackstageId *string `json:"backstage_id"`
@@ -19666,6 +19690,12 @@ type UpdateSecretDataType string
 type UpdateService struct {
 	Data struct {
 		Attributes struct {
+			// AlertUrgencyId The alert urgency id of the service
+			AlertUrgencyId *string `json:"alert_urgency_id"`
+
+			// AlertsEmailEnabled Enable alerts through email
+			AlertsEmailEnabled *bool `json:"alerts_email_enabled"`
+
 			// BackstageId The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
 			BackstageId *string `json:"backstage_id"`
 
@@ -20009,6 +20039,12 @@ type UpdateSubStatusDataType string
 type UpdateTeam struct {
 	Data struct {
 		Attributes struct {
+			// AlertUrgencyId The alert urgency id of the team
+			AlertUrgencyId *string `json:"alert_urgency_id"`
+
+			// AlertsEmailEnabled Enable alerts through email
+			AlertsEmailEnabled *bool `json:"alerts_email_enabled"`
+
 			// BackstageId The Backstage entity id associated to this team. eg: :namespace/:kind/:entity_name
 			BackstageId *string `json:"backstage_id"`
 

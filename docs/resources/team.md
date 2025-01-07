@@ -21,6 +21,8 @@ description: |-
 ### Optional
 
 - `alert_urgency_id` (String) The alert urgency id of the team
+- `alerts_email_address` (String) Email generated to send alerts to
+- `alerts_email_enabled` (Boolean) Enable alerts through email. Value must be one of true or false
 - `backstage_id` (String) The Backstage entity id associated to this team. eg: :namespace/:kind/:entity_name
 - `color` (String) The hex color of the team
 - `cortex_id` (String) The Cortex group id associated to this team

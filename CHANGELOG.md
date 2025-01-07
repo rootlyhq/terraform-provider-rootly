@@ -1,8 +1,12 @@
 # Changelog
 
+## [2.16.0] -- 2025-01-07
+
+- Add `alerts_email_enabled` attribute to `teams`, `services` resources.
+
 ## [2.15.0] -- 2024-12-18
 
-- Add `external_id` attribute to `groups`, `services`, `functionalities` resources.
+- Add `external_id` attribute to `teams`, `services`, `functionalities` resources.
 
 ## [2.14.0] -- 2024-12-18
 

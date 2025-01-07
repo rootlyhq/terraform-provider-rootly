@@ -28,6 +28,8 @@ type Team struct {
   CortexId string `jsonapi:"attr,cortex_id,omitempty"`
   ServiceNowCiSysId string `jsonapi:"attr,service_now_ci_sys_id,omitempty"`
   UserIds []interface{} `jsonapi:"attr,user_ids,omitempty"`
+  AlertsEmailEnabled *bool `jsonapi:"attr,alerts_email_enabled,omitempty"`
+  AlertsEmailAddress string `jsonapi:"attr,alerts_email_address,omitempty"`
   AlertUrgencyId string `jsonapi:"attr,alert_urgency_id,omitempty"`
   SlackChannels []interface{} `jsonapi:"attr,slack_channels,omitempty"`
   SlackAliases []interface{} `jsonapi:"attr,slack_aliases,omitempty"`

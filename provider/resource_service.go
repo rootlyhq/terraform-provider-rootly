@@ -237,6 +237,23 @@ func resourceService() *schema.Resource {
 				Description: "The alert urgency id of the service",
 			},
 
+			"alerts_email_enabled": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Enable alerts through email. Value must be one of true or false",
+			},
+
+			"alerts_email_address": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Email generated to send alerts to",
+			},
+
 			"slack_channels": &schema.Schema{
 				Type:        schema.TypeList,
 				Computed:    true,
@@ -373,6 +390,12 @@ func resourceServiceCreate(ctx context.Context, d *schema.ResourceData, meta int
 	if value, ok := d.GetOkExists("alert_urgency_id"); ok {
 		s.AlertUrgencyId = value.(string)
 	}
+	if value, ok := d.GetOkExists("alerts_email_enabled"); ok {
+		s.AlertsEmailEnabled = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("alerts_email_address"); ok {
+		s.AlertsEmailAddress = value.(string)
+	}
 	if value, ok := d.GetOkExists("slack_channels"); ok {
 		s.SlackChannels = value.([]interface{})
 	}
@@ -430,6 +453,8 @@ func resourceServiceRead(ctx context.Context, d *schema.ResourceData, meta inter
 	d.Set("owners_group_ids", item.OwnersGroupIds)
 	d.Set("owners_user_ids", item.OwnersUserIds)
 	d.Set("alert_urgency_id", item.AlertUrgencyId)
+	d.Set("alerts_email_enabled", item.AlertsEmailEnabled)
+	d.Set("alerts_email_address", item.AlertsEmailAddress)
 	d.Set("slack_channels", item.SlackChannels)
 	d.Set("slack_aliases", item.SlackAliases)
 
@@ -507,6 +532,12 @@ func resourceServiceUpdate(ctx context.Context, d *schema.ResourceData, meta int
 	}
 	if d.HasChange("alert_urgency_id") {
 		s.AlertUrgencyId = d.Get("alert_urgency_id").(string)
+	}
+	if d.HasChange("alerts_email_enabled") {
+		s.AlertsEmailEnabled = tools.Bool(d.Get("alerts_email_enabled").(bool))
+	}
+	if d.HasChange("alerts_email_address") {
+		s.AlertsEmailAddress = d.Get("alerts_email_address").(string)
 	}
 	if d.HasChange("slack_channels") {
 		s.SlackChannels = d.Get("slack_channels").([]interface{})
