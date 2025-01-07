@@ -73,6 +73,11 @@ func resourceWorkflowTaskUpdateGoogleCalendarEvent() *schema.Resource {
 								"update_google_calendar_event",
 							}, false),
 						},
+						"calendar_id": &schema.Schema{
+							Description: "",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 						"event_id": &schema.Schema{
 							Description: "The event ID",
 							Type:        schema.TypeString,

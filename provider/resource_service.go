@@ -168,7 +168,7 @@ func resourceService() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "The Gitlab repository name associated to this service. eg: rootlyhq/my-service",
+				Description: "The GitLab repository name associated to this service. eg: rootlyhq/my-service",
 			},
 
 			"gitlab_repository_branch": &schema.Schema{
@@ -177,7 +177,7 @@ func resourceService() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "The Gitlab repository branch associated to this service. eg: main",
+				Description: "The GitLab repository branch associated to this service. eg: main",
 			},
 
 			"environment_ids": &schema.Schema{

@@ -69,6 +69,7 @@ Required:
 Optional:
 
 - `attendees` (List of String) Emails of attendees
+- `calendar_id` (String)
 - `can_guests_invite_others` (Boolean) Value must be one of true or false
 - `can_guests_modify_event` (Boolean) Value must be one of true or false
 - `can_guests_see_other_guests` (Boolean) Value must be one of true or false

@@ -35,12 +35,12 @@ Manages workflow create_google_meeting task.
 
 Required:
 
-- `description` (String) The meeting description
-- `summary` (String) The meeting summary
+- `description` (String) [DEPRECATED] The meeting description
+- `summary` (String) [DEPRECATED] The meeting summary
 
 Optional:
 
-- `conference_solution_key` (String) Sets the video conference type attached to the meeting. Value must be one of `eventHangout`, `eventNamedHangout`, `hangoutsMeet`, `addOn`.
+- `conference_solution_key` (String) [DEPRECATED] Sets the video conference type attached to the meeting. Value must be one of `eventHangout`, `eventNamedHangout`, `hangoutsMeet`, `addOn`.
 - `post_to_incident_timeline` (Boolean) Value must be one of true or false
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
 - `record_meeting` (Boolean) Rootly AI will record the meeting and automatically generate a transcript and summary from your meeting. Value must be one of true or false

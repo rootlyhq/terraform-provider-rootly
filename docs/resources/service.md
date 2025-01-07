@@ -67,8 +67,8 @@ resource "rootly_service" "customer_postgresql_prod" {
 - `external_id` (String) The external id associated to this service
 - `github_repository_branch` (String) The GitHub repository branch associated to this service. eg: main
 - `github_repository_name` (String) The GitHub repository name associated to this service. eg: rootlyhq/my-service
-- `gitlab_repository_branch` (String) The Gitlab repository branch associated to this service. eg: main
-- `gitlab_repository_name` (String) The Gitlab repository name associated to this service. eg: rootlyhq/my-service
+- `gitlab_repository_branch` (String) The GitLab repository branch associated to this service. eg: main
+- `gitlab_repository_name` (String) The GitLab repository name associated to this service. eg: rootlyhq/my-service
 - `notify_emails` (List of String) Emails attached to the service
 - `opsgenie_id` (String) The Opsgenie service id associated to this service
 - `owners_group_ids` (List of String) Owner Teams associated with this service

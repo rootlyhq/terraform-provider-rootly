@@ -87,6 +87,11 @@ func resourceWorkflowTaskCreateGoogleCalendarEvent() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
+						"calendar_id": &schema.Schema{
+							Description: "",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 						"days_until_meeting": &schema.Schema{
 							Description: "The days until meeting",
 							Type:        schema.TypeString,

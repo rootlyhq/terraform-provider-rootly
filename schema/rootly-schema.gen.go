@@ -379,6 +379,7 @@ const (
 	AlertSourceSentry          AlertSource = "sentry"
 	AlertSourceServiceNow      AlertSource = "service_now"
 	AlertSourceSlack           AlertSource = "slack"
+	AlertSourceSplunk          AlertSource = "splunk"
 	AlertSourceVictorops       AlertSource = "victorops"
 	AlertSourceWeb             AlertSource = "web"
 	AlertSourceWorkflow        AlertSource = "workflow"
@@ -421,6 +422,7 @@ const (
 	AlertListDataSourceSentry          AlertListDataSource = "sentry"
 	AlertListDataSourceServiceNow      AlertListDataSource = "service_now"
 	AlertListDataSourceSlack           AlertListDataSource = "slack"
+	AlertListDataSourceSplunk          AlertListDataSource = "splunk"
 	AlertListDataSourceVictorops       AlertListDataSource = "victorops"
 	AlertListDataSourceWeb             AlertListDataSource = "web"
 	AlertListDataSourceWorkflow        AlertListDataSource = "workflow"
@@ -458,6 +460,7 @@ const (
 	AlertResponseDataSourceSentry          AlertResponseDataSource = "sentry"
 	AlertResponseDataSourceServiceNow      AlertResponseDataSource = "service_now"
 	AlertResponseDataSourceSlack           AlertResponseDataSource = "slack"
+	AlertResponseDataSourceSplunk          AlertResponseDataSource = "splunk"
 	AlertResponseDataSourceVictorops       AlertResponseDataSource = "victorops"
 	AlertResponseDataSourceWeb             AlertResponseDataSource = "web"
 	AlertResponseDataSourceWorkflow        AlertResponseDataSource = "workflow"
@@ -2105,6 +2108,7 @@ const (
 	NewAlertDataAttributesSourceSentry          NewAlertDataAttributesSource = "sentry"
 	NewAlertDataAttributesSourceServiceNow      NewAlertDataAttributesSource = "service_now"
 	NewAlertDataAttributesSourceSlack           NewAlertDataAttributesSource = "slack"
+	NewAlertDataAttributesSourceSplunk          NewAlertDataAttributesSource = "splunk"
 	NewAlertDataAttributesSourceVictorops       NewAlertDataAttributesSource = "victorops"
 	NewAlertDataAttributesSourceWeb             NewAlertDataAttributesSource = "web"
 	NewAlertDataAttributesSourceWorkflow        NewAlertDataAttributesSource = "workflow"
@@ -2179,6 +2183,7 @@ const (
 	NewAlertsSourceDataAttributesSourceTypeGrafana        NewAlertsSourceDataAttributesSourceType = "grafana"
 	NewAlertsSourceDataAttributesSourceTypeNewRelic       NewAlertsSourceDataAttributesSourceType = "new_relic"
 	NewAlertsSourceDataAttributesSourceTypeSentry         NewAlertsSourceDataAttributesSourceType = "sentry"
+	NewAlertsSourceDataAttributesSourceTypeSplunk         NewAlertsSourceDataAttributesSourceType = "splunk"
 )
 
 // Defines values for NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField.
@@ -4558,6 +4563,7 @@ const (
 	UpdateAlertsSourceDataAttributesSourceTypeGrafana        UpdateAlertsSourceDataAttributesSourceType = "grafana"
 	UpdateAlertsSourceDataAttributesSourceTypeNewRelic       UpdateAlertsSourceDataAttributesSourceType = "new_relic"
 	UpdateAlertsSourceDataAttributesSourceTypeSentry         UpdateAlertsSourceDataAttributesSourceType = "sentry"
+	UpdateAlertsSourceDataAttributesSourceTypeSplunk         UpdateAlertsSourceDataAttributesSourceType = "splunk"
 )
 
 // Defines values for UpdateAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField.
@@ -8089,6 +8095,7 @@ type CreateGoToMeetingTaskParamsTaskType string
 type CreateGoogleCalendarEventTaskParams struct {
 	// Attendees Emails of attendees
 	Attendees               *[]string `json:"attendees,omitempty"`
+	CalendarId              *string   `json:"calendar_id"`
 	CanGuestsInviteOthers   *bool     `json:"can_guests_invite_others,omitempty"`
 	CanGuestsModifyEvent    *bool     `json:"can_guests_modify_event,omitempty"`
 	CanGuestsSeeOtherGuests *bool     `json:"can_guests_see_other_guests,omitempty"`
@@ -8181,12 +8188,12 @@ type CreateGoogleDocsPermissionsTaskParamsTaskType string
 
 // CreateGoogleMeetingTaskParams defines model for create_google_meeting_task_params.
 type CreateGoogleMeetingTaskParams struct {
-	// ConferenceSolutionKey Sets the video conference type attached to the meeting
-	ConferenceSolutionKey *CreateGoogleMeetingTaskParamsConferenceSolutionKey `json:"conference_solution_key,omitempty"`
+	// ConferenceSolutionKey [DEPRECATED] Sets the video conference type attached to the meeting
+	ConferenceSolutionKey *CreateGoogleMeetingTaskParamsConferenceSolutionKey `json:"conference_solution_key"`
 
-	// Description The meeting description
-	Description            string `json:"description"`
-	PostToIncidentTimeline *bool  `json:"post_to_incident_timeline,omitempty"`
+	// Description [DEPRECATED] The meeting description
+	Description            *string `json:"description"`
+	PostToIncidentTimeline *bool   `json:"post_to_incident_timeline,omitempty"`
 	PostToSlackChannels    *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -8195,12 +8202,12 @@ type CreateGoogleMeetingTaskParams struct {
 	// RecordMeeting Rootly AI will record the meeting and automatically generate a transcript and summary from your meeting
 	RecordMeeting *bool `json:"record_meeting,omitempty"`
 
-	// Summary The meeting summary
-	Summary  string                                 `json:"summary"`
+	// Summary [DEPRECATED] The meeting summary
+	Summary  *string                                `json:"summary"`
 	TaskType *CreateGoogleMeetingTaskParamsTaskType `json:"task_type,omitempty"`
 }
 
-// CreateGoogleMeetingTaskParamsConferenceSolutionKey Sets the video conference type attached to the meeting
+// CreateGoogleMeetingTaskParamsConferenceSolutionKey [DEPRECATED] Sets the video conference type attached to the meeting
 type CreateGoogleMeetingTaskParamsConferenceSolutionKey string
 
 // CreateGoogleMeetingTaskParamsTaskType defines model for CreateGoogleMeetingTaskParams.TaskType.
@@ -13905,10 +13912,10 @@ type NewService struct {
 			// GithubRepositoryName The GitHub repository name associated to this service. eg: rootlyhq/my-service
 			GithubRepositoryName *string `json:"github_repository_name"`
 
-			// GitlabRepositoryBranch The Gitlab repository branch associated to this service. eg: main
+			// GitlabRepositoryBranch The GitLab repository branch associated to this service. eg: main
 			GitlabRepositoryBranch *string `json:"gitlab_repository_branch"`
 
-			// GitlabRepositoryName The Gitlab repository name associated to this service. eg: rootlyhq/my-service
+			// GitlabRepositoryName The GitLab repository name associated to this service. eg: rootlyhq/my-service
 			GitlabRepositoryName *string `json:"gitlab_repository_name"`
 
 			// Name The name of the service
@@ -16257,10 +16264,10 @@ type Service struct {
 	// GithubRepositoryName The GitHub repository name associated to this service. eg: rootlyhq/my-service
 	GithubRepositoryName *string `json:"github_repository_name"`
 
-	// GitlabRepositoryBranch The Gitlab repository branch associated to this service. eg: main
+	// GitlabRepositoryBranch The GitLab repository branch associated to this service. eg: main
 	GitlabRepositoryBranch *string `json:"gitlab_repository_branch"`
 
-	// GitlabRepositoryName The Gitlab repository name associated to this service. eg: rootlyhq/my-service
+	// GitlabRepositoryName The GitLab repository name associated to this service. eg: rootlyhq/my-service
 	GitlabRepositoryName *string `json:"gitlab_repository_name"`
 
 	// Name The name of the service
@@ -17515,6 +17522,9 @@ type UpdateEscalationLevel struct {
 			// Delay Delay before notification targets will be alerted.
 			Delay *int `json:"delay,omitempty"`
 
+			// EscalationPathId The ID of the dynamic escalation policy path the level will belong to. If nothing is specified it will add the level to your default path.
+			EscalationPathId *string `json:"escalation_path_id"`
+
 			// NotificationTargetParams Escalation level's notification targets
 			NotificationTargetParams *[]struct {
 				// Id The ID of notification target
@@ -17955,6 +17965,7 @@ type UpdateGoogleCalendarEventTaskParams struct {
 
 	// Attendees Emails of attendees
 	Attendees               *[]string `json:"attendees,omitempty"`
+	CalendarId              *string   `json:"calendar_id"`
 	CanGuestsInviteOthers   *bool     `json:"can_guests_invite_others,omitempty"`
 	CanGuestsModifyEvent    *bool     `json:"can_guests_modify_event,omitempty"`
 	CanGuestsSeeOtherGuests *bool     `json:"can_guests_see_other_guests,omitempty"`
@@ -19679,10 +19690,10 @@ type UpdateService struct {
 			// GithubRepositoryName The GitHub repository name associated to this service. eg: rootlyhq/my-service
 			GithubRepositoryName *string `json:"github_repository_name"`
 
-			// GitlabRepositoryBranch The Gitlab repository branch associated to this service. eg: main
+			// GitlabRepositoryBranch The GitLab repository branch associated to this service. eg: main
 			GitlabRepositoryBranch *string `json:"gitlab_repository_branch"`
 
-			// GitlabRepositoryName The Gitlab repository name associated to this service. eg: rootlyhq/my-service
+			// GitlabRepositoryName The GitLab repository name associated to this service. eg: rootlyhq/my-service
 			GitlabRepositoryName *string `json:"gitlab_repository_name"`
 
 			// Name The name of the service
@@ -21440,6 +21451,8 @@ type ListFunctionalitiesParams struct {
 	FilterSearch       *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
 	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
 	FilterBackstageId  *string `form:"filter[backstage_id],omitempty" json:"filter[backstage_id],omitempty"`
+	FilterCortexId     *string `form:"filter[cortex_id],omitempty" json:"filter[cortex_id],omitempty"`
+	FilterOpslevelId   *string `form:"filter[opslevel_id],omitempty" json:"filter[opslevel_id],omitempty"`
 	FilterExternalId   *string `form:"filter[external_id],omitempty" json:"filter[external_id],omitempty"`
 	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
 	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
@@ -22034,6 +22047,8 @@ type ListServicesParams struct {
 	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
 	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
 	FilterBackstageId  *string `form:"filter[backstage_id],omitempty" json:"filter[backstage_id],omitempty"`
+	FilterCortexId     *string `form:"filter[cortex_id],omitempty" json:"filter[cortex_id],omitempty"`
+	FilterOpslevelId   *string `form:"filter[opslevel_id],omitempty" json:"filter[opslevel_id],omitempty"`
 	FilterExternalId   *string `form:"filter[external_id],omitempty" json:"filter[external_id],omitempty"`
 	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
 	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
@@ -22131,6 +22146,8 @@ type ListTeamsParams struct {
 	FilterSlug         *string `form:"filter[slug],omitempty" json:"filter[slug],omitempty"`
 	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
 	FilterBackstageId  *string `form:"filter[backstage_id],omitempty" json:"filter[backstage_id],omitempty"`
+	FilterCortexId     *string `form:"filter[cortex_id],omitempty" json:"filter[cortex_id],omitempty"`
+	FilterOpslevelId   *string `form:"filter[opslevel_id],omitempty" json:"filter[opslevel_id],omitempty"`
 	FilterExternalId   *string `form:"filter[external_id],omitempty" json:"filter[external_id],omitempty"`
 	FilterColor        *string `form:"filter[color],omitempty" json:"filter[color],omitempty"`
 	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
@@ -54091,6 +54108,38 @@ func NewListFunctionalitiesRequest(server string, params *ListFunctionalitiesPar
 
 		}
 
+		if params.FilterCortexId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[cortex_id]", runtime.ParamLocationQuery, *params.FilterCortexId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterOpslevelId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[opslevel_id]", runtime.ParamLocationQuery, *params.FilterOpslevelId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
 		if params.FilterExternalId != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[external_id]", runtime.ParamLocationQuery, *params.FilterExternalId); err != nil {
@@ -67080,6 +67129,38 @@ func NewListServicesRequest(server string, params *ListServicesParams) (*http.Re
 
 		}
 
+		if params.FilterCortexId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[cortex_id]", runtime.ParamLocationQuery, *params.FilterCortexId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterOpslevelId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[opslevel_id]", runtime.ParamLocationQuery, *params.FilterOpslevelId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
 		if params.FilterExternalId != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[external_id]", runtime.ParamLocationQuery, *params.FilterExternalId); err != nil {
@@ -69042,6 +69123,38 @@ func NewListTeamsRequest(server string, params *ListTeamsParams) (*http.Request,
 		if params.FilterBackstageId != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[backstage_id]", runtime.ParamLocationQuery, *params.FilterBackstageId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCortexId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[cortex_id]", runtime.ParamLocationQuery, *params.FilterCortexId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterOpslevelId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[opslevel_id]", runtime.ParamLocationQuery, *params.FilterOpslevelId); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 				return nil, err

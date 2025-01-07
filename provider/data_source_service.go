@@ -44,6 +44,12 @@ func dataSourceService() *schema.Resource {
 				Optional: true,
 			},
 
+			"cortex_id": &schema.Schema{
+				Type:     schema.TypeString,
+				Computed: true,
+				Optional: true,
+			},
+
 			"created_at": &schema.Schema{
 				Type:        schema.TypeMap,
 				Description: "Filter by date range using 'lt' and 'gt'.",
@@ -73,6 +79,11 @@ func dataSourceServiceRead(ctx context.Context, d *schema.ResourceData, meta int
 	if value, ok := d.GetOkExists("backstage_id"); ok {
 		backstage_id := value.(string)
 		params.FilterBackstageId = &backstage_id
+	}
+
+	if value, ok := d.GetOkExists("cortex_id"); ok {
+		cortex_id := value.(string)
+		params.FilterCortexId = &cortex_id
 	}
 
 	if value, ok := d.GetOkExists("external_id"); ok {

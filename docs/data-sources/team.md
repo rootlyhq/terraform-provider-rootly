@@ -24,6 +24,7 @@ data "rootly_team" "my-team" {
 
 - `backstage_id` (String)
 - `color` (String)
+- `cortex_id` (String)
 - `created_at` (Map of String) Filter by date range using 'lt' and 'gt'.
 - `external_id` (String)
 - `name` (String)

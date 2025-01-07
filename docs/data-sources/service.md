@@ -23,6 +23,7 @@ data "rootly_service" "my-service" {
 ### Optional
 
 - `backstage_id` (String)
+- `cortex_id` (String)
 - `created_at` (Map of String) Filter by date range using 'lt' and 'gt'.
 - `external_id` (String)
 - `name` (String)

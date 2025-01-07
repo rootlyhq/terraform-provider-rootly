@@ -74,17 +74,17 @@ func resourceWorkflowTaskCreateGoogleMeeting() *schema.Resource {
 							}, false),
 						},
 						"summary": &schema.Schema{
-							Description: "The meeting summary",
+							Description: "[DEPRECATED] The meeting summary",
 							Type:        schema.TypeString,
 							Required:    true,
 						},
 						"description": &schema.Schema{
-							Description: "The meeting description",
+							Description: "[DEPRECATED] The meeting description",
 							Type:        schema.TypeString,
 							Required:    true,
 						},
 						"conference_solution_key": &schema.Schema{
-							Description: "Sets the video conference type attached to the meeting. Value must be one of `eventHangout`, `eventNamedHangout`, `hangoutsMeet`, `addOn`.",
+							Description: "[DEPRECATED] Sets the video conference type attached to the meeting. Value must be one of `eventHangout`, `eventNamedHangout`, `hangoutsMeet`, `addOn`.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Default:     nil,
