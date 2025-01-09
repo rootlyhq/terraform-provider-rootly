@@ -83,6 +83,7 @@ const excluded = {
   tests: [
     "alert_event",
     "alert_group",
+    "alerts_source",
     "authorization",
     "escalation_level",
     "escalation_policy",
