@@ -146,6 +146,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_retrospective_process_group":                      resourceRetrospectiveProcessGroup(),
 				"rootly_retrospective_process_group_step":                 resourceRetrospectiveProcessGroupStep(),
 				"rootly_escalation_level":                                 resourceEscalationLevel(),
+				"rootly_escalation_path":                                  resourceEscalationPath(),
 				"rootly_custom_field":                                     resourceCustomField(),
 				"rootly_custom_field_option":                              resourceCustomFieldOption(),
 				"rootly_dashboard":                                        resourceDashboard(),

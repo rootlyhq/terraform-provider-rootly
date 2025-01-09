@@ -1221,29 +1221,29 @@ const (
 	EscalationLevelResponseDataTypeEscalationLevels EscalationLevelResponseDataType = "escalation_levels"
 )
 
+// Defines values for EscalationPathRulesOperator.
+const (
+	EscalationPathRulesOperatorContains       EscalationPathRulesOperator = "contains"
+	EscalationPathRulesOperatorDoesNotContain EscalationPathRulesOperator = "does_not_contain"
+	EscalationPathRulesOperatorIs             EscalationPathRulesOperator = "is"
+	EscalationPathRulesOperatorIsNot          EscalationPathRulesOperator = "is_not"
+)
+
+// Defines values for EscalationPathRulesRuleType.
+const (
+	EscalationPathRulesRuleTypeAlertUrgency EscalationPathRulesRuleType = "alert_urgency"
+	EscalationPathRulesRuleTypeJsonPath     EscalationPathRulesRuleType = "json_path"
+	EscalationPathRulesRuleTypeWorkingHour  EscalationPathRulesRuleType = "working_hour"
+)
+
+// Defines values for EscalationPathResponseDataType.
+const (
+	EscalationPathResponseDataTypeEscalationPaths EscalationPathResponseDataType = "escalation_paths"
+)
+
 // Defines values for EscalationPolicyListDataType.
 const (
 	EscalationPolicyListDataTypeEscalationPolicies EscalationPolicyListDataType = "escalation_policies"
-)
-
-// Defines values for EscalationPolicyPathRulesOperator.
-const (
-	EscalationPolicyPathRulesOperatorContains       EscalationPolicyPathRulesOperator = "contains"
-	EscalationPolicyPathRulesOperatorDoesNotContain EscalationPolicyPathRulesOperator = "does_not_contain"
-	EscalationPolicyPathRulesOperatorIs             EscalationPolicyPathRulesOperator = "is"
-	EscalationPolicyPathRulesOperatorIsNot          EscalationPolicyPathRulesOperator = "is_not"
-)
-
-// Defines values for EscalationPolicyPathRulesRuleType.
-const (
-	EscalationPolicyPathRulesRuleTypeAlertUrgency EscalationPolicyPathRulesRuleType = "alert_urgency"
-	EscalationPolicyPathRulesRuleTypeJsonPath     EscalationPolicyPathRulesRuleType = "json_path"
-	EscalationPolicyPathRulesRuleTypeWorkingHour  EscalationPolicyPathRulesRuleType = "working_hour"
-)
-
-// Defines values for EscalationPolicyPathResponseDataType.
-const (
-	EscalationPolicyPathResponseDataTypeEscalationPaths EscalationPolicyPathResponseDataType = "escalation_paths"
 )
 
 // Defines values for EscalationPolicyResponseDataType.
@@ -2402,35 +2402,35 @@ const (
 	NewEscalationLevelDataTypeEscalationLevels NewEscalationLevelDataType = "escalation_levels"
 )
 
+// Defines values for NewEscalationPathDataAttributesNotificationType.
+const (
+	NewEscalationPathDataAttributesNotificationTypeAudible NewEscalationPathDataAttributesNotificationType = "audible"
+	NewEscalationPathDataAttributesNotificationTypeQuiet   NewEscalationPathDataAttributesNotificationType = "quiet"
+)
+
+// Defines values for NewEscalationPathDataAttributesRulesOperator.
+const (
+	NewEscalationPathDataAttributesRulesOperatorContains       NewEscalationPathDataAttributesRulesOperator = "contains"
+	NewEscalationPathDataAttributesRulesOperatorDoesNotContain NewEscalationPathDataAttributesRulesOperator = "does_not_contain"
+	NewEscalationPathDataAttributesRulesOperatorIs             NewEscalationPathDataAttributesRulesOperator = "is"
+	NewEscalationPathDataAttributesRulesOperatorIsNot          NewEscalationPathDataAttributesRulesOperator = "is_not"
+)
+
+// Defines values for NewEscalationPathDataAttributesRulesRuleType.
+const (
+	NewEscalationPathDataAttributesRulesRuleTypeAlertUrgency NewEscalationPathDataAttributesRulesRuleType = "alert_urgency"
+	NewEscalationPathDataAttributesRulesRuleTypeJsonPath     NewEscalationPathDataAttributesRulesRuleType = "json_path"
+	NewEscalationPathDataAttributesRulesRuleTypeWorkingHour  NewEscalationPathDataAttributesRulesRuleType = "working_hour"
+)
+
+// Defines values for NewEscalationPathDataType.
+const (
+	NewEscalationPathDataTypeEscalationPaths NewEscalationPathDataType = "escalation_paths"
+)
+
 // Defines values for NewEscalationPolicyDataType.
 const (
 	NewEscalationPolicyDataTypeEscalationPolicies NewEscalationPolicyDataType = "escalation_policies"
-)
-
-// Defines values for NewEscalationPolicyPathDataAttributesNotificationType.
-const (
-	NewEscalationPolicyPathDataAttributesNotificationTypeAudible NewEscalationPolicyPathDataAttributesNotificationType = "audible"
-	NewEscalationPolicyPathDataAttributesNotificationTypeQuiet   NewEscalationPolicyPathDataAttributesNotificationType = "quiet"
-)
-
-// Defines values for NewEscalationPolicyPathDataAttributesRulesOperator.
-const (
-	NewEscalationPolicyPathDataAttributesRulesOperatorContains       NewEscalationPolicyPathDataAttributesRulesOperator = "contains"
-	NewEscalationPolicyPathDataAttributesRulesOperatorDoesNotContain NewEscalationPolicyPathDataAttributesRulesOperator = "does_not_contain"
-	NewEscalationPolicyPathDataAttributesRulesOperatorIs             NewEscalationPolicyPathDataAttributesRulesOperator = "is"
-	NewEscalationPolicyPathDataAttributesRulesOperatorIsNot          NewEscalationPolicyPathDataAttributesRulesOperator = "is_not"
-)
-
-// Defines values for NewEscalationPolicyPathDataAttributesRulesRuleType.
-const (
-	NewEscalationPolicyPathDataAttributesRulesRuleTypeAlertUrgency NewEscalationPolicyPathDataAttributesRulesRuleType = "alert_urgency"
-	NewEscalationPolicyPathDataAttributesRulesRuleTypeJsonPath     NewEscalationPolicyPathDataAttributesRulesRuleType = "json_path"
-	NewEscalationPolicyPathDataAttributesRulesRuleTypeWorkingHour  NewEscalationPolicyPathDataAttributesRulesRuleType = "working_hour"
-)
-
-// Defines values for NewEscalationPolicyPathDataType.
-const (
-	NewEscalationPolicyPathDataTypeEscalationPaths NewEscalationPolicyPathDataType = "escalation_paths"
 )
 
 // Defines values for NewFormFieldDataAttributesInputKind.
@@ -4799,35 +4799,35 @@ const (
 	EscalationLevels UpdateEscalationLevelDataType = "escalation_levels"
 )
 
+// Defines values for UpdateEscalationPathDataAttributesNotificationType.
+const (
+	UpdateEscalationPathDataAttributesNotificationTypeAudible UpdateEscalationPathDataAttributesNotificationType = "audible"
+	UpdateEscalationPathDataAttributesNotificationTypeQuiet   UpdateEscalationPathDataAttributesNotificationType = "quiet"
+)
+
+// Defines values for UpdateEscalationPathDataAttributesRulesOperator.
+const (
+	Contains       UpdateEscalationPathDataAttributesRulesOperator = "contains"
+	DoesNotContain UpdateEscalationPathDataAttributesRulesOperator = "does_not_contain"
+	Is             UpdateEscalationPathDataAttributesRulesOperator = "is"
+	IsNot          UpdateEscalationPathDataAttributesRulesOperator = "is_not"
+)
+
+// Defines values for UpdateEscalationPathDataAttributesRulesRuleType.
+const (
+	UpdateEscalationPathDataAttributesRulesRuleTypeAlertUrgency UpdateEscalationPathDataAttributesRulesRuleType = "alert_urgency"
+	UpdateEscalationPathDataAttributesRulesRuleTypeJsonPath     UpdateEscalationPathDataAttributesRulesRuleType = "json_path"
+	UpdateEscalationPathDataAttributesRulesRuleTypeWorkingHour  UpdateEscalationPathDataAttributesRulesRuleType = "working_hour"
+)
+
+// Defines values for UpdateEscalationPathDataType.
+const (
+	UpdateEscalationPathDataTypeEscalationPaths UpdateEscalationPathDataType = "escalation_paths"
+)
+
 // Defines values for UpdateEscalationPolicyDataType.
 const (
 	UpdateEscalationPolicyDataTypeEscalationPolicies UpdateEscalationPolicyDataType = "escalation_policies"
-)
-
-// Defines values for UpdateEscalationPolicyPathDataAttributesNotificationType.
-const (
-	UpdateEscalationPolicyPathDataAttributesNotificationTypeAudible UpdateEscalationPolicyPathDataAttributesNotificationType = "audible"
-	UpdateEscalationPolicyPathDataAttributesNotificationTypeQuiet   UpdateEscalationPolicyPathDataAttributesNotificationType = "quiet"
-)
-
-// Defines values for UpdateEscalationPolicyPathDataAttributesRulesOperator.
-const (
-	Contains       UpdateEscalationPolicyPathDataAttributesRulesOperator = "contains"
-	DoesNotContain UpdateEscalationPolicyPathDataAttributesRulesOperator = "does_not_contain"
-	Is             UpdateEscalationPolicyPathDataAttributesRulesOperator = "is"
-	IsNot          UpdateEscalationPolicyPathDataAttributesRulesOperator = "is_not"
-)
-
-// Defines values for UpdateEscalationPolicyPathDataAttributesRulesRuleType.
-const (
-	UpdateEscalationPolicyPathDataAttributesRulesRuleTypeAlertUrgency UpdateEscalationPolicyPathDataAttributesRulesRuleType = "alert_urgency"
-	UpdateEscalationPolicyPathDataAttributesRulesRuleTypeJsonPath     UpdateEscalationPolicyPathDataAttributesRulesRuleType = "json_path"
-	UpdateEscalationPolicyPathDataAttributesRulesRuleTypeWorkingHour  UpdateEscalationPolicyPathDataAttributesRulesRuleType = "working_hour"
-)
-
-// Defines values for UpdateEscalationPolicyPathDataType.
-const (
-	EscalationPaths UpdateEscalationPolicyPathDataType = "escalation_paths"
 )
 
 // Defines values for UpdateFormFieldDataAttributesInputKind.
@@ -6416,8 +6416,8 @@ const (
 
 // Defines values for ListEscalationPoliciesParamsInclude.
 const (
+	ListEscalationPoliciesParamsIncludeEscalationPaths        ListEscalationPoliciesParamsInclude = "escalation_paths"
 	ListEscalationPoliciesParamsIncludeEscalationPolicyLevels ListEscalationPoliciesParamsInclude = "escalation_policy_levels"
-	ListEscalationPoliciesParamsIncludeEscalationPolicyPaths  ListEscalationPoliciesParamsInclude = "escalation_policy_paths"
 	ListEscalationPoliciesParamsIncludeGroups                 ListEscalationPoliciesParamsInclude = "groups"
 	ListEscalationPoliciesParamsIncludeServices               ListEscalationPoliciesParamsInclude = "services"
 )
@@ -6429,8 +6429,8 @@ const (
 
 // Defines values for GetEscalationPolicyParamsInclude.
 const (
+	GetEscalationPolicyParamsIncludeEscalationPaths        GetEscalationPolicyParamsInclude = "escalation_paths"
 	GetEscalationPolicyParamsIncludeEscalationPolicyLevels GetEscalationPolicyParamsInclude = "escalation_policy_levels"
-	GetEscalationPolicyParamsIncludeEscalationPolicyPaths  GetEscalationPolicyParamsInclude = "escalation_policy_paths"
 	GetEscalationPolicyParamsIncludeGroups                 GetEscalationPolicyParamsInclude = "groups"
 	GetEscalationPolicyParamsIncludeServices               GetEscalationPolicyParamsInclude = "services"
 )
@@ -6581,10 +6581,10 @@ const (
 
 // Defines values for GetRetrospectiveProcessParamsInclude.
 const (
-	Groups             GetRetrospectiveProcessParamsInclude = "groups"
-	IncidentTypes      GetRetrospectiveProcessParamsInclude = "incident_types"
-	RetrospectiveSteps GetRetrospectiveProcessParamsInclude = "retrospective_steps"
-	Severities         GetRetrospectiveProcessParamsInclude = "severities"
+	GetRetrospectiveProcessParamsIncludeGroups             GetRetrospectiveProcessParamsInclude = "groups"
+	GetRetrospectiveProcessParamsIncludeIncidentTypes      GetRetrospectiveProcessParamsInclude = "incident_types"
+	GetRetrospectiveProcessParamsIncludeRetrospectiveSteps GetRetrospectiveProcessParamsInclude = "retrospective_steps"
+	GetRetrospectiveProcessParamsIncludeSeverities         GetRetrospectiveProcessParamsInclude = "severities"
 )
 
 // Defines values for ListRetrospectiveProcessGroupsParamsInclude.
@@ -9463,6 +9463,85 @@ type EscalationLevelResponse struct {
 // EscalationLevelResponseDataType defines model for EscalationLevelResponse.Data.Type.
 type EscalationLevelResponseDataType string
 
+// EscalationPath defines model for escalation_path.
+type EscalationPath struct {
+	// CreatedAt Date of creation
+	CreatedAt *string `json:"created_at,omitempty"`
+
+	// Default Whether this escalation path is the default path
+	Default bool `json:"default"`
+
+	// EscalationPolicyId The ID of the escalation policy
+	EscalationPolicyId string `json:"escalation_policy_id"`
+
+	// Name The name of the escalation path
+	Name string `json:"name"`
+
+	// NotificationType Notification rule type
+	NotificationType string `json:"notification_type"`
+
+	// Repeat Whether this path should be repeated until someone acknowledges the alert
+	Repeat *bool `json:"repeat"`
+
+	// RepeatCount The number of times this path will be executed until someone acknowledges the alert
+	RepeatCount *int `json:"repeat_count"`
+
+	// Rules Escalation path rules
+	Rules *[]struct {
+		// JsonPath JSON path to extract value from payload
+		JsonPath *string `json:"json_path,omitempty"`
+
+		// Operator How JSON path value should be matched
+		Operator *EscalationPathRulesOperator `json:"operator,omitempty"`
+
+		// RuleType The type of the escalation path rule
+		RuleType *EscalationPathRulesRuleType `json:"rule_type,omitempty"`
+
+		// UrgencyIds Alert urgency ids for which this escalation path should be used
+		UrgencyIds *[]string `json:"urgency_ids,omitempty"`
+
+		// Value Value with which JSON path value should be matched
+		Value *string `json:"value,omitempty"`
+
+		// WithinWorkingHour Whether the escalation path should be used within working hours
+		WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
+	} `json:"rules,omitempty"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt *string `json:"updated_at,omitempty"`
+}
+
+// EscalationPathRulesOperator How JSON path value should be matched
+type EscalationPathRulesOperator string
+
+// EscalationPathRulesRuleType The type of the escalation path rule
+type EscalationPathRulesRuleType string
+
+// EscalationPathList defines model for escalation_path_list.
+type EscalationPathList struct {
+	Data []struct {
+		Attributes EscalationPath `json:"attributes"`
+
+		// Id Unique ID of the escalation policy path
+		Id string `json:"id"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// EscalationPathResponse defines model for escalation_path_response.
+type EscalationPathResponse struct {
+	Data struct {
+		Attributes EscalationPath `json:"attributes"`
+
+		// Id Unique ID of the escalation policy path
+		Id   string                          `json:"id"`
+		Type *EscalationPathResponseDataType `json:"type,omitempty"`
+	} `json:"data"`
+}
+
+// EscalationPathResponseDataType defines model for EscalationPathResponse.Data.Type.
+type EscalationPathResponseDataType string
+
 // EscalationPolicy defines model for escalation_policy.
 type EscalationPolicy struct {
 	// CreatedAt Date of creation
@@ -9507,85 +9586,6 @@ type EscalationPolicyList struct {
 
 // EscalationPolicyListDataType defines model for EscalationPolicyList.Data.Type.
 type EscalationPolicyListDataType string
-
-// EscalationPolicyPath defines model for escalation_policy_path.
-type EscalationPolicyPath struct {
-	// CreatedAt Date of creation
-	CreatedAt *string `json:"created_at,omitempty"`
-
-	// Default Whether this escalation path is the default path
-	Default bool `json:"default"`
-
-	// EscalationPolicyId The ID of the escalation policy
-	EscalationPolicyId string `json:"escalation_policy_id"`
-
-	// Name The name of the escalation path
-	Name string `json:"name"`
-
-	// NotificationType Notification rule type
-	NotificationType string `json:"notification_type"`
-
-	// Repeat Whether this path should be repeated until someone acknowledges the alert
-	Repeat *bool `json:"repeat"`
-
-	// RepeatCount The number of times this path will be executed until someone acknowledges the alert
-	RepeatCount *int `json:"repeat_count"`
-
-	// Rules Escalation path rules
-	Rules *[]struct {
-		// JsonPath JSON path to extract value from payload
-		JsonPath *string `json:"json_path,omitempty"`
-
-		// Operator How JSON path value should be matched
-		Operator *EscalationPolicyPathRulesOperator `json:"operator,omitempty"`
-
-		// RuleType The type of the escalation path rule
-		RuleType *EscalationPolicyPathRulesRuleType `json:"rule_type,omitempty"`
-
-		// UrgencyIds Alert urgency ids for which this escalation path should be used
-		UrgencyIds *[]string `json:"urgency_ids,omitempty"`
-
-		// Value Value with which JSON path value should be matched
-		Value *string `json:"value,omitempty"`
-
-		// WithinWorkingHour Whether the escalation path should be used within working hours
-		WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
-	} `json:"rules,omitempty"`
-
-	// UpdatedAt Date of last update
-	UpdatedAt *string `json:"updated_at,omitempty"`
-}
-
-// EscalationPolicyPathRulesOperator How JSON path value should be matched
-type EscalationPolicyPathRulesOperator string
-
-// EscalationPolicyPathRulesRuleType The type of the escalation path rule
-type EscalationPolicyPathRulesRuleType string
-
-// EscalationPolicyPathList defines model for escalation_policy_path_list.
-type EscalationPolicyPathList struct {
-	Data []struct {
-		Attributes EscalationPolicyPath `json:"attributes"`
-
-		// Id Unique ID of the escalation policy path
-		Id string `json:"id"`
-	} `json:"data"`
-	Links Links `json:"links"`
-}
-
-// EscalationPolicyPathResponse defines model for escalation_policy_path_response.
-type EscalationPolicyPathResponse struct {
-	Data struct {
-		Attributes EscalationPolicyPath `json:"attributes"`
-
-		// Id Unique ID of the escalation policy path
-		Id   string                                `json:"id"`
-		Type *EscalationPolicyPathResponseDataType `json:"type,omitempty"`
-	} `json:"data"`
-}
-
-// EscalationPolicyPathResponseDataType defines model for EscalationPolicyPathResponse.Data.Type.
-type EscalationPolicyPathResponseDataType string
 
 // EscalationPolicyResponse defines model for escalation_policy_response.
 type EscalationPolicyResponse struct {
@@ -12355,6 +12355,59 @@ type NewEscalationLevelDataAttributesNotificationTargetParamsType string
 // NewEscalationLevelDataType defines model for NewEscalationLevel.Data.Type.
 type NewEscalationLevelDataType string
 
+// NewEscalationPath defines model for new_escalation_path.
+type NewEscalationPath struct {
+	Data struct {
+		Attributes struct {
+			// Name The name of the escalation path
+			Name string `json:"name"`
+
+			// NotificationType Notification rule type to be used
+			NotificationType *NewEscalationPathDataAttributesNotificationType `json:"notification_type,omitempty"`
+
+			// Repeat Whether this path should be repeated until someone acknowledges the alert
+			Repeat *bool `json:"repeat"`
+
+			// RepeatCount The number of times this path will be executed until someone acknowledges the alert
+			RepeatCount *int `json:"repeat_count"`
+
+			// Rules Escalation path conditions
+			Rules []struct {
+				// JsonPath JSON path to extract value from payload
+				JsonPath *string `json:"json_path,omitempty"`
+
+				// Operator How JSON path value should be matched
+				Operator *NewEscalationPathDataAttributesRulesOperator `json:"operator,omitempty"`
+
+				// RuleType The type of the escalation path rule
+				RuleType *NewEscalationPathDataAttributesRulesRuleType `json:"rule_type,omitempty"`
+
+				// UrgencyIds Alert urgency ids for which this escalation path should be used
+				UrgencyIds *[]interface{} `json:"urgency_ids,omitempty"`
+
+				// Value Value with which JSON path value should be matched
+				Value *string `json:"value,omitempty"`
+
+				// WithinWorkingHour Whether the escalation path should be used within working hours
+				WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
+			} `json:"rules"`
+		} `json:"attributes"`
+		Type NewEscalationPathDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewEscalationPathDataAttributesNotificationType Notification rule type to be used
+type NewEscalationPathDataAttributesNotificationType string
+
+// NewEscalationPathDataAttributesRulesOperator How JSON path value should be matched
+type NewEscalationPathDataAttributesRulesOperator string
+
+// NewEscalationPathDataAttributesRulesRuleType The type of the escalation path rule
+type NewEscalationPathDataAttributesRulesRuleType string
+
+// NewEscalationPathDataType defines model for NewEscalationPath.Data.Type.
+type NewEscalationPathDataType string
+
 // NewEscalationPolicy defines model for new_escalation_policy.
 type NewEscalationPolicy struct {
 	Data struct {
@@ -12380,59 +12433,6 @@ type NewEscalationPolicy struct {
 
 // NewEscalationPolicyDataType defines model for NewEscalationPolicy.Data.Type.
 type NewEscalationPolicyDataType string
-
-// NewEscalationPolicyPath defines model for new_escalation_policy_path.
-type NewEscalationPolicyPath struct {
-	Data struct {
-		Attributes struct {
-			// Name The name of the escalation path
-			Name string `json:"name"`
-
-			// NotificationType Notification rule type to be used
-			NotificationType *NewEscalationPolicyPathDataAttributesNotificationType `json:"notification_type,omitempty"`
-
-			// Repeat Whether this path should be repeated until someone acknowledges the alert
-			Repeat *bool `json:"repeat"`
-
-			// RepeatCount The number of times this path will be executed until someone acknowledges the alert
-			RepeatCount *int `json:"repeat_count"`
-
-			// Rules Escalation path conditions
-			Rules []struct {
-				// JsonPath JSON path to extract value from payload
-				JsonPath *string `json:"json_path,omitempty"`
-
-				// Operator How JSON path value should be matched
-				Operator *NewEscalationPolicyPathDataAttributesRulesOperator `json:"operator,omitempty"`
-
-				// RuleType The type of the escalation path rule
-				RuleType *NewEscalationPolicyPathDataAttributesRulesRuleType `json:"rule_type,omitempty"`
-
-				// UrgencyIds Alert urgency ids for which this escalation path should be used
-				UrgencyIds *[]interface{} `json:"urgency_ids,omitempty"`
-
-				// Value Value with which JSON path value should be matched
-				Value *string `json:"value,omitempty"`
-
-				// WithinWorkingHour Whether the escalation path should be used within working hours
-				WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
-			} `json:"rules"`
-		} `json:"attributes"`
-		Type NewEscalationPolicyPathDataType `json:"type"`
-	} `json:"data"`
-}
-
-// NewEscalationPolicyPathDataAttributesNotificationType Notification rule type to be used
-type NewEscalationPolicyPathDataAttributesNotificationType string
-
-// NewEscalationPolicyPathDataAttributesRulesOperator How JSON path value should be matched
-type NewEscalationPolicyPathDataAttributesRulesOperator string
-
-// NewEscalationPolicyPathDataAttributesRulesRuleType The type of the escalation path rule
-type NewEscalationPolicyPathDataAttributesRulesRuleType string
-
-// NewEscalationPolicyPathDataType defines model for NewEscalationPolicyPath.Data.Type.
-type NewEscalationPolicyPathDataType string
 
 // NewFormField defines model for new_form_field.
 type NewFormField struct {
@@ -17664,6 +17664,59 @@ type UpdateEscalationLevelDataAttributesNotificationTargetParamsType string
 // UpdateEscalationLevelDataType defines model for UpdateEscalationLevel.Data.Type.
 type UpdateEscalationLevelDataType string
 
+// UpdateEscalationPath defines model for update_escalation_path.
+type UpdateEscalationPath struct {
+	Data struct {
+		Attributes struct {
+			// Name The name of the escalation path
+			Name *string `json:"name,omitempty"`
+
+			// NotificationType Position of the escalation policy level
+			NotificationType *UpdateEscalationPathDataAttributesNotificationType `json:"notification_type,omitempty"`
+
+			// Repeat Whether this path should be repeated until someone acknowledges the alert
+			Repeat *bool `json:"repeat"`
+
+			// RepeatCount The number of times this path will be executed until someone acknowledges the alert
+			RepeatCount *int `json:"repeat_count"`
+
+			// Rules Escalation path conditions
+			Rules *[]struct {
+				// JsonPath JSON path to extract value from payload
+				JsonPath *string `json:"json_path,omitempty"`
+
+				// Operator How JSON path value should be matched
+				Operator *UpdateEscalationPathDataAttributesRulesOperator `json:"operator,omitempty"`
+
+				// RuleType The type of the escalation path rule
+				RuleType *UpdateEscalationPathDataAttributesRulesRuleType `json:"rule_type,omitempty"`
+
+				// UrgencyIds Alert urgency ids for which this escalation path should be used
+				UrgencyIds *[]interface{} `json:"urgency_ids,omitempty"`
+
+				// Value Value with which JSON path value should be matched
+				Value *string `json:"value,omitempty"`
+
+				// WithinWorkingHour Whether the escalation path should be used within working hours
+				WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
+			} `json:"rules,omitempty"`
+		} `json:"attributes"`
+		Type UpdateEscalationPathDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateEscalationPathDataAttributesNotificationType Position of the escalation policy level
+type UpdateEscalationPathDataAttributesNotificationType string
+
+// UpdateEscalationPathDataAttributesRulesOperator How JSON path value should be matched
+type UpdateEscalationPathDataAttributesRulesOperator string
+
+// UpdateEscalationPathDataAttributesRulesRuleType The type of the escalation path rule
+type UpdateEscalationPathDataAttributesRulesRuleType string
+
+// UpdateEscalationPathDataType defines model for UpdateEscalationPath.Data.Type.
+type UpdateEscalationPathDataType string
+
 // UpdateEscalationPolicy defines model for update_escalation_policy.
 type UpdateEscalationPolicy struct {
 	Data struct {
@@ -17689,59 +17742,6 @@ type UpdateEscalationPolicy struct {
 
 // UpdateEscalationPolicyDataType defines model for UpdateEscalationPolicy.Data.Type.
 type UpdateEscalationPolicyDataType string
-
-// UpdateEscalationPolicyPath defines model for update_escalation_policy_path.
-type UpdateEscalationPolicyPath struct {
-	Data struct {
-		Attributes struct {
-			// Name The name of the escalation path
-			Name *string `json:"name,omitempty"`
-
-			// NotificationType Position of the escalation policy level
-			NotificationType *UpdateEscalationPolicyPathDataAttributesNotificationType `json:"notification_type,omitempty"`
-
-			// Repeat Whether this path should be repeated until someone acknowledges the alert
-			Repeat *bool `json:"repeat"`
-
-			// RepeatCount The number of times this path will be executed until someone acknowledges the alert
-			RepeatCount *int `json:"repeat_count"`
-
-			// Rules Escalation path conditions
-			Rules *[]struct {
-				// JsonPath JSON path to extract value from payload
-				JsonPath *string `json:"json_path,omitempty"`
-
-				// Operator How JSON path value should be matched
-				Operator *UpdateEscalationPolicyPathDataAttributesRulesOperator `json:"operator,omitempty"`
-
-				// RuleType The type of the escalation path rule
-				RuleType *UpdateEscalationPolicyPathDataAttributesRulesRuleType `json:"rule_type,omitempty"`
-
-				// UrgencyIds Alert urgency ids for which this escalation path should be used
-				UrgencyIds *[]interface{} `json:"urgency_ids,omitempty"`
-
-				// Value Value with which JSON path value should be matched
-				Value *string `json:"value,omitempty"`
-
-				// WithinWorkingHour Whether the escalation path should be used within working hours
-				WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
-			} `json:"rules,omitempty"`
-		} `json:"attributes"`
-		Type UpdateEscalationPolicyPathDataType `json:"type"`
-	} `json:"data"`
-}
-
-// UpdateEscalationPolicyPathDataAttributesNotificationType Position of the escalation policy level
-type UpdateEscalationPolicyPathDataAttributesNotificationType string
-
-// UpdateEscalationPolicyPathDataAttributesRulesOperator How JSON path value should be matched
-type UpdateEscalationPolicyPathDataAttributesRulesOperator string
-
-// UpdateEscalationPolicyPathDataAttributesRulesRuleType The type of the escalation path rule
-type UpdateEscalationPolicyPathDataAttributesRulesRuleType string
-
-// UpdateEscalationPolicyPathDataType defines model for UpdateEscalationPolicyPath.Data.Type.
-type UpdateEscalationPolicyPathDataType string
 
 // UpdateFormField defines model for update_form_field.
 type UpdateFormField struct {
@@ -21448,7 +21448,7 @@ type GetEscalationPathParamsInclude string
 
 // ListEscalationPoliciesParams defines parameters for ListEscalationPolicies.
 type ListEscalationPoliciesParams struct {
-	// Include comma separated if needed. eg: escalation_policy_levels,escalation_policy_paths
+	// Include comma separated if needed. eg: escalation_policy_levels,escalation_paths
 	Include    *ListEscalationPoliciesParamsInclude `form:"include,omitempty" json:"include,omitempty"`
 	PageNumber *int                                 `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize   *int                                 `form:"page[size],omitempty" json:"page[size],omitempty"`
@@ -21477,7 +21477,7 @@ type ListEscalationPathsParamsInclude string
 
 // GetEscalationPolicyParams defines parameters for GetEscalationPolicy.
 type GetEscalationPolicyParams struct {
-	// Include comma separated if needed. eg: escalation_policy_levels,escalation_policy_paths
+	// Include comma separated if needed. eg: escalation_policy_levels,escalation_paths
 	Include *GetEscalationPolicyParamsInclude `form:"include,omitempty" json:"include,omitempty"`
 }
 
@@ -22548,7 +22548,7 @@ type UpdateEscalationLevelApplicationVndAPIPlusJSONRequestBody = UpdateEscalatio
 type CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody = NewEscalationLevel
 
 // UpdateEscalationPathApplicationVndAPIPlusJSONRequestBody defines body for UpdateEscalationPath for application/vnd.api+json ContentType.
-type UpdateEscalationPathApplicationVndAPIPlusJSONRequestBody = UpdateEscalationPolicyPath
+type UpdateEscalationPathApplicationVndAPIPlusJSONRequestBody = UpdateEscalationPath
 
 // CreateEscalationPolicyApplicationVndAPIPlusJSONRequestBody defines body for CreateEscalationPolicy for application/vnd.api+json ContentType.
 type CreateEscalationPolicyApplicationVndAPIPlusJSONRequestBody = NewEscalationPolicy
@@ -22557,7 +22557,7 @@ type CreateEscalationPolicyApplicationVndAPIPlusJSONRequestBody = NewEscalationP
 type CreateEscalationLevelApplicationVndAPIPlusJSONRequestBody = NewEscalationLevel
 
 // CreateEscalationPathApplicationVndAPIPlusJSONRequestBody defines body for CreateEscalationPath for application/vnd.api+json ContentType.
-type CreateEscalationPathApplicationVndAPIPlusJSONRequestBody = NewEscalationPolicyPath
+type CreateEscalationPathApplicationVndAPIPlusJSONRequestBody = NewEscalationPath
 
 // UpdateEscalationPolicyApplicationVndAPIPlusJSONRequestBody defines body for UpdateEscalationPolicy for application/vnd.api+json ContentType.
 type UpdateEscalationPolicyApplicationVndAPIPlusJSONRequestBody = UpdateEscalationPolicy
@@ -36288,12 +36288,12 @@ type ClientInterface interface {
 	UpdateEscalationLevelWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateEscalationLevelApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListEscalationLevelsPaths request
-	ListEscalationLevelsPaths(ctx context.Context, escalationPolicyPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	ListEscalationLevelsPaths(ctx context.Context, escalationPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateEscalationLevelPathsWithBody request with any body
-	CreateEscalationLevelPathsWithBody(ctx context.Context, escalationPolicyPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	CreateEscalationLevelPathsWithBody(ctx context.Context, escalationPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPolicyPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteEscalationPath request
 	DeleteEscalationPath(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -39060,8 +39060,8 @@ func (c *Client) UpdateEscalationLevelWithApplicationVndAPIPlusJSONBody(ctx cont
 	return c.Client.Do(req)
 }
 
-func (c *Client) ListEscalationLevelsPaths(ctx context.Context, escalationPolicyPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewListEscalationLevelsPathsRequest(c.Server, escalationPolicyPathId, params)
+func (c *Client) ListEscalationLevelsPaths(ctx context.Context, escalationPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListEscalationLevelsPathsRequest(c.Server, escalationPathId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -39072,8 +39072,8 @@ func (c *Client) ListEscalationLevelsPaths(ctx context.Context, escalationPolicy
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateEscalationLevelPathsWithBody(ctx context.Context, escalationPolicyPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateEscalationLevelPathsRequestWithBody(c.Server, escalationPolicyPathId, contentType, body)
+func (c *Client) CreateEscalationLevelPathsWithBody(ctx context.Context, escalationPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateEscalationLevelPathsRequestWithBody(c.Server, escalationPathId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -39084,8 +39084,8 @@ func (c *Client) CreateEscalationLevelPathsWithBody(ctx context.Context, escalat
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPolicyPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateEscalationLevelPathsRequestWithApplicationVndAPIPlusJSONBody(c.Server, escalationPolicyPathId, body)
+func (c *Client) CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateEscalationLevelPathsRequestWithApplicationVndAPIPlusJSONBody(c.Server, escalationPathId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -50967,12 +50967,12 @@ func NewUpdateEscalationLevelRequestWithBody(server string, id string, contentTy
 }
 
 // NewListEscalationLevelsPathsRequest generates requests for ListEscalationLevelsPaths
-func NewListEscalationLevelsPathsRequest(server string, escalationPolicyPathId string, params *ListEscalationLevelsPathsParams) (*http.Request, error) {
+func NewListEscalationLevelsPathsRequest(server string, escalationPathId string, params *ListEscalationLevelsPathsParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "escalation_policy_path_id", runtime.ParamLocationPath, escalationPolicyPathId)
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "escalation_path_id", runtime.ParamLocationPath, escalationPathId)
 	if err != nil {
 		return nil, err
 	}
@@ -51055,23 +51055,23 @@ func NewListEscalationLevelsPathsRequest(server string, escalationPolicyPathId s
 }
 
 // NewCreateEscalationLevelPathsRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateEscalationLevelPaths builder with application/vnd.api+json body
-func NewCreateEscalationLevelPathsRequestWithApplicationVndAPIPlusJSONBody(server string, escalationPolicyPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+func NewCreateEscalationLevelPathsRequestWithApplicationVndAPIPlusJSONBody(server string, escalationPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewCreateEscalationLevelPathsRequestWithBody(server, escalationPolicyPathId, "application/vnd.api+json", bodyReader)
+	return NewCreateEscalationLevelPathsRequestWithBody(server, escalationPathId, "application/vnd.api+json", bodyReader)
 }
 
 // NewCreateEscalationLevelPathsRequestWithBody generates requests for CreateEscalationLevelPaths with any type of body
-func NewCreateEscalationLevelPathsRequestWithBody(server string, escalationPolicyPathId string, contentType string, body io.Reader) (*http.Request, error) {
+func NewCreateEscalationLevelPathsRequestWithBody(server string, escalationPathId string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "escalation_policy_path_id", runtime.ParamLocationPath, escalationPolicyPathId)
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "escalation_path_id", runtime.ParamLocationPath, escalationPathId)
 	if err != nil {
 		return nil, err
 	}
@@ -72926,12 +72926,12 @@ type ClientWithResponsesInterface interface {
 	UpdateEscalationLevelWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateEscalationLevelApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateEscalationLevelResponse, error)
 
 	// ListEscalationLevelsPathsWithResponse request
-	ListEscalationLevelsPathsWithResponse(ctx context.Context, escalationPolicyPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*ListEscalationLevelsPathsResponse, error)
+	ListEscalationLevelsPathsWithResponse(ctx context.Context, escalationPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*ListEscalationLevelsPathsResponse, error)
 
 	// CreateEscalationLevelPathsWithBodyWithResponse request with any body
-	CreateEscalationLevelPathsWithBodyWithResponse(ctx context.Context, escalationPolicyPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error)
+	CreateEscalationLevelPathsWithBodyWithResponse(ctx context.Context, escalationPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error)
 
-	CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPolicyPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error)
+	CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error)
 
 	// DeleteEscalationPathWithResponse request
 	DeleteEscalationPathWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteEscalationPathResponse, error)
@@ -76355,7 +76355,7 @@ func (r CreateEscalationLevelPathsResponse) StatusCode() int {
 type DeleteEscalationPathResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *EscalationPolicyPathResponse
+	ApplicationvndApiJSON200 *EscalationPathResponse
 	ApplicationvndApiJSON404 *ErrorsList
 }
 
@@ -76378,7 +76378,7 @@ func (r DeleteEscalationPathResponse) StatusCode() int {
 type GetEscalationPathResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *EscalationPolicyPathResponse
+	ApplicationvndApiJSON200 *EscalationPathResponse
 	ApplicationvndApiJSON404 *ErrorsList
 }
 
@@ -76401,7 +76401,7 @@ func (r GetEscalationPathResponse) StatusCode() int {
 type UpdateEscalationPathResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *EscalationPolicyPathResponse
+	ApplicationvndApiJSON200 *EscalationPathResponse
 	ApplicationvndApiJSON404 *ErrorsList
 }
 
@@ -76516,7 +76516,7 @@ func (r CreateEscalationLevelResponse) StatusCode() int {
 type ListEscalationPathsResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *EscalationPolicyPathList
+	ApplicationvndApiJSON200 *EscalationPathList
 }
 
 // Status returns HTTPResponse.Status
@@ -76538,7 +76538,7 @@ func (r ListEscalationPathsResponse) StatusCode() int {
 type CreateEscalationPathResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON201 *EscalationPolicyPathResponse
+	ApplicationvndApiJSON201 *EscalationPathResponse
 	ApplicationvndApiJSON401 *ErrorsList
 	ApplicationvndApiJSON422 *ErrorsList
 }
@@ -84940,8 +84940,8 @@ func (c *ClientWithResponses) UpdateEscalationLevelWithApplicationVndAPIPlusJSON
 }
 
 // ListEscalationLevelsPathsWithResponse request returning *ListEscalationLevelsPathsResponse
-func (c *ClientWithResponses) ListEscalationLevelsPathsWithResponse(ctx context.Context, escalationPolicyPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*ListEscalationLevelsPathsResponse, error) {
-	rsp, err := c.ListEscalationLevelsPaths(ctx, escalationPolicyPathId, params, reqEditors...)
+func (c *ClientWithResponses) ListEscalationLevelsPathsWithResponse(ctx context.Context, escalationPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*ListEscalationLevelsPathsResponse, error) {
+	rsp, err := c.ListEscalationLevelsPaths(ctx, escalationPathId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -84949,16 +84949,16 @@ func (c *ClientWithResponses) ListEscalationLevelsPathsWithResponse(ctx context.
 }
 
 // CreateEscalationLevelPathsWithBodyWithResponse request with arbitrary body returning *CreateEscalationLevelPathsResponse
-func (c *ClientWithResponses) CreateEscalationLevelPathsWithBodyWithResponse(ctx context.Context, escalationPolicyPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error) {
-	rsp, err := c.CreateEscalationLevelPathsWithBody(ctx, escalationPolicyPathId, contentType, body, reqEditors...)
+func (c *ClientWithResponses) CreateEscalationLevelPathsWithBodyWithResponse(ctx context.Context, escalationPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error) {
+	rsp, err := c.CreateEscalationLevelPathsWithBody(ctx, escalationPathId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateEscalationLevelPathsResponse(rsp)
 }
 
-func (c *ClientWithResponses) CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPolicyPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error) {
-	rsp, err := c.CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBody(ctx, escalationPolicyPathId, body, reqEditors...)
+func (c *ClientWithResponses) CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error) {
+	rsp, err := c.CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBody(ctx, escalationPathId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -92048,7 +92048,7 @@ func ParseDeleteEscalationPathResponse(rsp *http.Response) (*DeleteEscalationPat
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest EscalationPolicyPathResponse
+		var dest EscalationPathResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -92081,7 +92081,7 @@ func ParseGetEscalationPathResponse(rsp *http.Response) (*GetEscalationPathRespo
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest EscalationPolicyPathResponse
+		var dest EscalationPathResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -92114,7 +92114,7 @@ func ParseUpdateEscalationPathResponse(rsp *http.Response) (*UpdateEscalationPat
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest EscalationPolicyPathResponse
+		var dest EscalationPathResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -92279,7 +92279,7 @@ func ParseListEscalationPathsResponse(rsp *http.Response) (*ListEscalationPathsR
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest EscalationPolicyPathList
+		var dest EscalationPathList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -92305,7 +92305,7 @@ func ParseCreateEscalationPathResponse(rsp *http.Response) (*CreateEscalationPat
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest EscalationPolicyPathResponse
+		var dest EscalationPathResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

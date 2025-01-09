@@ -87,6 +87,21 @@ function renameEscalationPolicyPathSchemas(obj) {
   for (var key in obj) {
     let value = obj[key];
 
+    // TODO: Ignore escalation_policy_(path|level) in codegen and define manually
+    // All the naming for the escalation API resources is inconsistent
+    if (key.match(/escalation_policy_path/) && !obj.delay) {
+      let newKey = key.replace(/escalation_policy_path/g, "escalation_path")
+      obj[newKey] = obj[key]
+      delete obj[key];
+      key = newKey
+    }
+
+    if (typeof obj[key] === "string" && obj[key].match(/components\/schemas/)) {
+      obj[key] = obj[key].replace(/escalation_policy_path/g, "escalation_path")
+    } else if (typeof obj[key] === "object" && obj[key] !== null) {
+      renameEscalationPolicyPathSchemas(obj[key])
+    }
+
     if (typeof value === "string" && value.match(/escalation_policy_path/)) {
       obj[key] = value.replace(/escalation_policy_path/, "escalation_path")
     }

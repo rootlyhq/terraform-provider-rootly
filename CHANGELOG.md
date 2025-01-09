@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.16.2] -- 2025-01-09
+
+- Restore missing `rootly_escalation_path` resource.
+
 ## [2.16.1] -- 2025-01-08
 
 - Fix `rootly_escalation_level` attributes.
