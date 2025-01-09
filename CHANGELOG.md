@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.16.1] -- 2025-01-08
+
+- Fix `rootly_escalation_level` attributes.
+
 ## [2.16.0] -- 2025-01-07
 
 - Add `alerts_email_enabled` attribute to `teams`, `services` resources.
