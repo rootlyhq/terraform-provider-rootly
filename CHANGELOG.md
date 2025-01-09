@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.17.0] -- 2025-01-09
+
+- Add `rootly_alerts_source` resource.
+
 ## [2.16.2] -- 2025-01-09
 
 - Restore missing `rootly_escalation_path` resource.
