@@ -23,6 +23,7 @@ description: |-
 
 - `delay` (Number) Delay before notification targets will be alerted.
 - `escalation_policy_id` (String) The ID of the escalation policy
+- `escalation_policy_path_id` (String) The ID of the dynamic escalation policy path the level will belong to. If nothing is specified it will add the level to your default path.
 
 ### Read-Only
 
@@ -31,7 +32,7 @@ description: |-
 <a id="nestedblock--notification_target_params"></a>
 ### Nested Schema for `notification_target_params`
 
-Required:
+Optional:
 
-- `id` (String)
-- `type` (String)
+- `id` (String) The ID of notification target
+- `type` (String) The type of the notification target. Value must be one of `user`, `schedule`, `slack_channel`.

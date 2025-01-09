@@ -386,6 +386,51 @@ const (
 	AlertSourceZendesk         AlertSource = "zendesk"
 )
 
+// Defines values for AlertEventAction.
+const (
+	AlertEventActionAcknowledged AlertEventAction = "acknowledged"
+	AlertEventActionAdded        AlertEventAction = "added"
+	AlertEventActionAnswered     AlertEventAction = "answered"
+	AlertEventActionAttached     AlertEventAction = "attached"
+	AlertEventActionCalled       AlertEventAction = "called"
+	AlertEventActionCreated      AlertEventAction = "created"
+	AlertEventActionEmailed      AlertEventAction = "emailed"
+	AlertEventActionEscalated    AlertEventAction = "escalated"
+	AlertEventActionNotified     AlertEventAction = "notified"
+	AlertEventActionOpened       AlertEventAction = "opened"
+	AlertEventActionPaged        AlertEventAction = "paged"
+	AlertEventActionRemoved      AlertEventAction = "removed"
+	AlertEventActionResolved     AlertEventAction = "resolved"
+	AlertEventActionRetriggered  AlertEventAction = "retriggered"
+	AlertEventActionSlacked      AlertEventAction = "slacked"
+	AlertEventActionSnoozed      AlertEventAction = "snoozed"
+	AlertEventActionTexted       AlertEventAction = "texted"
+	AlertEventActionTriggered    AlertEventAction = "triggered"
+	AlertEventActionUpdated      AlertEventAction = "updated"
+)
+
+// Defines values for AlertEventKind.
+const (
+	AlertEventKindAction        AlertEventKind = "action"
+	AlertEventKindAlertGrouping AlertEventKind = "alert_grouping"
+	AlertEventKindAlertUrgency  AlertEventKind = "alert_urgency"
+	AlertEventKindInformational AlertEventKind = "informational"
+	AlertEventKindNote          AlertEventKind = "note"
+	AlertEventKindNotification  AlertEventKind = "notification"
+	AlertEventKindRecording     AlertEventKind = "recording"
+	AlertEventKindStatusUpdate  AlertEventKind = "status_update"
+)
+
+// Defines values for AlertEventListDataType.
+const (
+	AlertEventListDataTypeAlertEvents AlertEventListDataType = "alert_events"
+)
+
+// Defines values for AlertEventResponseDataType.
+const (
+	AlertEventResponseDataTypeAlertEvents AlertEventResponseDataType = "alert_events"
+)
+
 // Defines values for AlertGroupListDataType.
 const (
 	AlertGroupListDataTypeAlertGroups AlertGroupListDataType = "alert_groups"
@@ -1176,29 +1221,29 @@ const (
 	EscalationLevelResponseDataTypeEscalationLevels EscalationLevelResponseDataType = "escalation_levels"
 )
 
-// Defines values for EscalationPathRulesOperator.
-const (
-	EscalationPathRulesOperatorContains       EscalationPathRulesOperator = "contains"
-	EscalationPathRulesOperatorDoesNotContain EscalationPathRulesOperator = "does_not_contain"
-	EscalationPathRulesOperatorIs             EscalationPathRulesOperator = "is"
-	EscalationPathRulesOperatorIsNot          EscalationPathRulesOperator = "is_not"
-)
-
-// Defines values for EscalationPathRulesRuleType.
-const (
-	EscalationPathRulesRuleTypeAlertUrgency EscalationPathRulesRuleType = "alert_urgency"
-	EscalationPathRulesRuleTypeJsonPath     EscalationPathRulesRuleType = "json_path"
-	EscalationPathRulesRuleTypeWorkingHour  EscalationPathRulesRuleType = "working_hour"
-)
-
-// Defines values for EscalationPathResponseDataType.
-const (
-	EscalationPathResponseDataTypeEscalationPaths EscalationPathResponseDataType = "escalation_paths"
-)
-
 // Defines values for EscalationPolicyListDataType.
 const (
 	EscalationPolicyListDataTypeEscalationPolicies EscalationPolicyListDataType = "escalation_policies"
+)
+
+// Defines values for EscalationPolicyPathRulesOperator.
+const (
+	EscalationPolicyPathRulesOperatorContains       EscalationPolicyPathRulesOperator = "contains"
+	EscalationPolicyPathRulesOperatorDoesNotContain EscalationPolicyPathRulesOperator = "does_not_contain"
+	EscalationPolicyPathRulesOperatorIs             EscalationPolicyPathRulesOperator = "is"
+	EscalationPolicyPathRulesOperatorIsNot          EscalationPolicyPathRulesOperator = "is_not"
+)
+
+// Defines values for EscalationPolicyPathRulesRuleType.
+const (
+	EscalationPolicyPathRulesRuleTypeAlertUrgency EscalationPolicyPathRulesRuleType = "alert_urgency"
+	EscalationPolicyPathRulesRuleTypeJsonPath     EscalationPolicyPathRulesRuleType = "json_path"
+	EscalationPolicyPathRulesRuleTypeWorkingHour  EscalationPolicyPathRulesRuleType = "working_hour"
+)
+
+// Defines values for EscalationPolicyPathResponseDataType.
+const (
+	EscalationPolicyPathResponseDataTypeEscalationPaths EscalationPolicyPathResponseDataType = "escalation_paths"
 )
 
 // Defines values for EscalationPolicyResponseDataType.
@@ -1225,6 +1270,7 @@ const (
 	FormFieldKindAcknowledgedAt              FormFieldKind = "acknowledged_at"
 	FormFieldKindAttachAlerts                FormFieldKind = "attach_alerts"
 	FormFieldKindCauses                      FormFieldKind = "causes"
+	FormFieldKindClosedAt                    FormFieldKind = "closed_at"
 	FormFieldKindCustom                      FormFieldKind = "custom"
 	FormFieldKindDetectedAt                  FormFieldKind = "detected_at"
 	FormFieldKindEnvironments                FormFieldKind = "environments"
@@ -2356,35 +2402,35 @@ const (
 	NewEscalationLevelDataTypeEscalationLevels NewEscalationLevelDataType = "escalation_levels"
 )
 
-// Defines values for NewEscalationPathDataAttributesNotificationType.
-const (
-	NewEscalationPathDataAttributesNotificationTypeAudible NewEscalationPathDataAttributesNotificationType = "audible"
-	NewEscalationPathDataAttributesNotificationTypeQuiet   NewEscalationPathDataAttributesNotificationType = "quiet"
-)
-
-// Defines values for NewEscalationPathDataAttributesRulesOperator.
-const (
-	NewEscalationPathDataAttributesRulesOperatorContains       NewEscalationPathDataAttributesRulesOperator = "contains"
-	NewEscalationPathDataAttributesRulesOperatorDoesNotContain NewEscalationPathDataAttributesRulesOperator = "does_not_contain"
-	NewEscalationPathDataAttributesRulesOperatorIs             NewEscalationPathDataAttributesRulesOperator = "is"
-	NewEscalationPathDataAttributesRulesOperatorIsNot          NewEscalationPathDataAttributesRulesOperator = "is_not"
-)
-
-// Defines values for NewEscalationPathDataAttributesRulesRuleType.
-const (
-	NewEscalationPathDataAttributesRulesRuleTypeAlertUrgency NewEscalationPathDataAttributesRulesRuleType = "alert_urgency"
-	NewEscalationPathDataAttributesRulesRuleTypeJsonPath     NewEscalationPathDataAttributesRulesRuleType = "json_path"
-	NewEscalationPathDataAttributesRulesRuleTypeWorkingHour  NewEscalationPathDataAttributesRulesRuleType = "working_hour"
-)
-
-// Defines values for NewEscalationPathDataType.
-const (
-	NewEscalationPathDataTypeEscalationPaths NewEscalationPathDataType = "escalation_paths"
-)
-
 // Defines values for NewEscalationPolicyDataType.
 const (
 	NewEscalationPolicyDataTypeEscalationPolicies NewEscalationPolicyDataType = "escalation_policies"
+)
+
+// Defines values for NewEscalationPolicyPathDataAttributesNotificationType.
+const (
+	NewEscalationPolicyPathDataAttributesNotificationTypeAudible NewEscalationPolicyPathDataAttributesNotificationType = "audible"
+	NewEscalationPolicyPathDataAttributesNotificationTypeQuiet   NewEscalationPolicyPathDataAttributesNotificationType = "quiet"
+)
+
+// Defines values for NewEscalationPolicyPathDataAttributesRulesOperator.
+const (
+	NewEscalationPolicyPathDataAttributesRulesOperatorContains       NewEscalationPolicyPathDataAttributesRulesOperator = "contains"
+	NewEscalationPolicyPathDataAttributesRulesOperatorDoesNotContain NewEscalationPolicyPathDataAttributesRulesOperator = "does_not_contain"
+	NewEscalationPolicyPathDataAttributesRulesOperatorIs             NewEscalationPolicyPathDataAttributesRulesOperator = "is"
+	NewEscalationPolicyPathDataAttributesRulesOperatorIsNot          NewEscalationPolicyPathDataAttributesRulesOperator = "is_not"
+)
+
+// Defines values for NewEscalationPolicyPathDataAttributesRulesRuleType.
+const (
+	NewEscalationPolicyPathDataAttributesRulesRuleTypeAlertUrgency NewEscalationPolicyPathDataAttributesRulesRuleType = "alert_urgency"
+	NewEscalationPolicyPathDataAttributesRulesRuleTypeJsonPath     NewEscalationPolicyPathDataAttributesRulesRuleType = "json_path"
+	NewEscalationPolicyPathDataAttributesRulesRuleTypeWorkingHour  NewEscalationPolicyPathDataAttributesRulesRuleType = "working_hour"
+)
+
+// Defines values for NewEscalationPolicyPathDataType.
+const (
+	NewEscalationPolicyPathDataTypeEscalationPaths NewEscalationPolicyPathDataType = "escalation_paths"
 )
 
 // Defines values for NewFormFieldDataAttributesInputKind.
@@ -2406,6 +2452,7 @@ const (
 	NewFormFieldDataAttributesKindAcknowledgedAt              NewFormFieldDataAttributesKind = "acknowledged_at"
 	NewFormFieldDataAttributesKindAttachAlerts                NewFormFieldDataAttributesKind = "attach_alerts"
 	NewFormFieldDataAttributesKindCauses                      NewFormFieldDataAttributesKind = "causes"
+	NewFormFieldDataAttributesKindClosedAt                    NewFormFieldDataAttributesKind = "closed_at"
 	NewFormFieldDataAttributesKindCustom                      NewFormFieldDataAttributesKind = "custom"
 	NewFormFieldDataAttributesKindDetectedAt                  NewFormFieldDataAttributesKind = "detected_at"
 	NewFormFieldDataAttributesKindEnvironments                NewFormFieldDataAttributesKind = "environments"
@@ -4752,35 +4799,35 @@ const (
 	EscalationLevels UpdateEscalationLevelDataType = "escalation_levels"
 )
 
-// Defines values for UpdateEscalationPathDataAttributesNotificationType.
-const (
-	UpdateEscalationPathDataAttributesNotificationTypeAudible UpdateEscalationPathDataAttributesNotificationType = "audible"
-	UpdateEscalationPathDataAttributesNotificationTypeQuiet   UpdateEscalationPathDataAttributesNotificationType = "quiet"
-)
-
-// Defines values for UpdateEscalationPathDataAttributesRulesOperator.
-const (
-	Contains       UpdateEscalationPathDataAttributesRulesOperator = "contains"
-	DoesNotContain UpdateEscalationPathDataAttributesRulesOperator = "does_not_contain"
-	Is             UpdateEscalationPathDataAttributesRulesOperator = "is"
-	IsNot          UpdateEscalationPathDataAttributesRulesOperator = "is_not"
-)
-
-// Defines values for UpdateEscalationPathDataAttributesRulesRuleType.
-const (
-	UpdateEscalationPathDataAttributesRulesRuleTypeAlertUrgency UpdateEscalationPathDataAttributesRulesRuleType = "alert_urgency"
-	UpdateEscalationPathDataAttributesRulesRuleTypeJsonPath     UpdateEscalationPathDataAttributesRulesRuleType = "json_path"
-	UpdateEscalationPathDataAttributesRulesRuleTypeWorkingHour  UpdateEscalationPathDataAttributesRulesRuleType = "working_hour"
-)
-
-// Defines values for UpdateEscalationPathDataType.
-const (
-	UpdateEscalationPathDataTypeEscalationPaths UpdateEscalationPathDataType = "escalation_paths"
-)
-
 // Defines values for UpdateEscalationPolicyDataType.
 const (
 	UpdateEscalationPolicyDataTypeEscalationPolicies UpdateEscalationPolicyDataType = "escalation_policies"
+)
+
+// Defines values for UpdateEscalationPolicyPathDataAttributesNotificationType.
+const (
+	UpdateEscalationPolicyPathDataAttributesNotificationTypeAudible UpdateEscalationPolicyPathDataAttributesNotificationType = "audible"
+	UpdateEscalationPolicyPathDataAttributesNotificationTypeQuiet   UpdateEscalationPolicyPathDataAttributesNotificationType = "quiet"
+)
+
+// Defines values for UpdateEscalationPolicyPathDataAttributesRulesOperator.
+const (
+	Contains       UpdateEscalationPolicyPathDataAttributesRulesOperator = "contains"
+	DoesNotContain UpdateEscalationPolicyPathDataAttributesRulesOperator = "does_not_contain"
+	Is             UpdateEscalationPolicyPathDataAttributesRulesOperator = "is"
+	IsNot          UpdateEscalationPolicyPathDataAttributesRulesOperator = "is_not"
+)
+
+// Defines values for UpdateEscalationPolicyPathDataAttributesRulesRuleType.
+const (
+	UpdateEscalationPolicyPathDataAttributesRulesRuleTypeAlertUrgency UpdateEscalationPolicyPathDataAttributesRulesRuleType = "alert_urgency"
+	UpdateEscalationPolicyPathDataAttributesRulesRuleTypeJsonPath     UpdateEscalationPolicyPathDataAttributesRulesRuleType = "json_path"
+	UpdateEscalationPolicyPathDataAttributesRulesRuleTypeWorkingHour  UpdateEscalationPolicyPathDataAttributesRulesRuleType = "working_hour"
+)
+
+// Defines values for UpdateEscalationPolicyPathDataType.
+const (
+	EscalationPaths UpdateEscalationPolicyPathDataType = "escalation_paths"
 )
 
 // Defines values for UpdateFormFieldDataAttributesInputKind.
@@ -4802,6 +4849,7 @@ const (
 	UpdateFormFieldDataAttributesKindAcknowledgedAt              UpdateFormFieldDataAttributesKind = "acknowledged_at"
 	UpdateFormFieldDataAttributesKindAttachAlerts                UpdateFormFieldDataAttributesKind = "attach_alerts"
 	UpdateFormFieldDataAttributesKindCauses                      UpdateFormFieldDataAttributesKind = "causes"
+	UpdateFormFieldDataAttributesKindClosedAt                    UpdateFormFieldDataAttributesKind = "closed_at"
 	UpdateFormFieldDataAttributesKindCustom                      UpdateFormFieldDataAttributesKind = "custom"
 	UpdateFormFieldDataAttributesKindDetectedAt                  UpdateFormFieldDataAttributesKind = "detected_at"
 	UpdateFormFieldDataAttributesKindEnvironments                UpdateFormFieldDataAttributesKind = "environments"
@@ -4988,14 +5036,14 @@ const (
 
 // Defines values for UpdateIncidentDataAttributesKind.
 const (
-	Backfilled UpdateIncidentDataAttributesKind = "backfilled"
-	Example    UpdateIncidentDataAttributesKind = "example"
-	ExampleSub UpdateIncidentDataAttributesKind = "example_sub"
-	Normal     UpdateIncidentDataAttributesKind = "normal"
-	NormalSub  UpdateIncidentDataAttributesKind = "normal_sub"
-	Scheduled  UpdateIncidentDataAttributesKind = "scheduled"
-	Test       UpdateIncidentDataAttributesKind = "test"
-	TestSub    UpdateIncidentDataAttributesKind = "test_sub"
+	UpdateIncidentDataAttributesKindBackfilled UpdateIncidentDataAttributesKind = "backfilled"
+	UpdateIncidentDataAttributesKindExample    UpdateIncidentDataAttributesKind = "example"
+	UpdateIncidentDataAttributesKindExampleSub UpdateIncidentDataAttributesKind = "example_sub"
+	UpdateIncidentDataAttributesKindNormal     UpdateIncidentDataAttributesKind = "normal"
+	UpdateIncidentDataAttributesKindNormalSub  UpdateIncidentDataAttributesKind = "normal_sub"
+	UpdateIncidentDataAttributesKindScheduled  UpdateIncidentDataAttributesKind = "scheduled"
+	UpdateIncidentDataAttributesKindTest       UpdateIncidentDataAttributesKind = "test"
+	UpdateIncidentDataAttributesKindTestSub    UpdateIncidentDataAttributesKind = "test_sub"
 )
 
 // Defines values for UpdateIncidentDataAttributesStatus.
@@ -6368,8 +6416,8 @@ const (
 
 // Defines values for ListEscalationPoliciesParamsInclude.
 const (
-	ListEscalationPoliciesParamsIncludeEscalationPaths        ListEscalationPoliciesParamsInclude = "escalation_paths"
 	ListEscalationPoliciesParamsIncludeEscalationPolicyLevels ListEscalationPoliciesParamsInclude = "escalation_policy_levels"
+	ListEscalationPoliciesParamsIncludeEscalationPolicyPaths  ListEscalationPoliciesParamsInclude = "escalation_policy_paths"
 	ListEscalationPoliciesParamsIncludeGroups                 ListEscalationPoliciesParamsInclude = "groups"
 	ListEscalationPoliciesParamsIncludeServices               ListEscalationPoliciesParamsInclude = "services"
 )
@@ -6381,8 +6429,8 @@ const (
 
 // Defines values for GetEscalationPolicyParamsInclude.
 const (
-	GetEscalationPolicyParamsIncludeEscalationPaths        GetEscalationPolicyParamsInclude = "escalation_paths"
 	GetEscalationPolicyParamsIncludeEscalationPolicyLevels GetEscalationPolicyParamsInclude = "escalation_policy_levels"
+	GetEscalationPolicyParamsIncludeEscalationPolicyPaths  GetEscalationPolicyParamsInclude = "escalation_policy_paths"
 	GetEscalationPolicyParamsIncludeGroups                 GetEscalationPolicyParamsInclude = "groups"
 	GetEscalationPolicyParamsIncludeServices               GetEscalationPolicyParamsInclude = "services"
 )
@@ -6533,10 +6581,10 @@ const (
 
 // Defines values for GetRetrospectiveProcessParamsInclude.
 const (
-	GetRetrospectiveProcessParamsIncludeGroups             GetRetrospectiveProcessParamsInclude = "groups"
-	GetRetrospectiveProcessParamsIncludeIncidentTypes      GetRetrospectiveProcessParamsInclude = "incident_types"
-	GetRetrospectiveProcessParamsIncludeRetrospectiveSteps GetRetrospectiveProcessParamsInclude = "retrospective_steps"
-	GetRetrospectiveProcessParamsIncludeSeverities         GetRetrospectiveProcessParamsInclude = "severities"
+	Groups             GetRetrospectiveProcessParamsInclude = "groups"
+	IncidentTypes      GetRetrospectiveProcessParamsInclude = "incident_types"
+	RetrospectiveSteps GetRetrospectiveProcessParamsInclude = "retrospective_steps"
+	Severities         GetRetrospectiveProcessParamsInclude = "severities"
 )
 
 // Defines values for ListRetrospectiveProcessGroupsParamsInclude.
@@ -7033,6 +7081,51 @@ type Alert struct {
 
 // AlertSource The source of the alert
 type AlertSource string
+
+// AlertEvent defines model for alert_event.
+type AlertEvent struct {
+	Action    AlertEventAction `json:"action"`
+	CreatedAt string           `json:"created_at"`
+	Details   *string          `json:"details"`
+	Kind      AlertEventKind   `json:"kind"`
+	Source    string           `json:"source"`
+	UpdatedAt string           `json:"updated_at"`
+}
+
+// AlertEventAction defines model for AlertEvent.Action.
+type AlertEventAction string
+
+// AlertEventKind defines model for AlertEvent.Kind.
+type AlertEventKind string
+
+// AlertEventList defines model for alert_event_list.
+type AlertEventList struct {
+	Data []struct {
+		Attributes AlertEvent `json:"attributes"`
+
+		// Id Unique ID of the alert event
+		Id   string                 `json:"id"`
+		Type AlertEventListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// AlertEventListDataType defines model for AlertEventList.Data.Type.
+type AlertEventListDataType string
+
+// AlertEventResponse defines model for alert_event_response.
+type AlertEventResponse struct {
+	Data struct {
+		Attributes AlertEvent `json:"attributes"`
+
+		// Id Unique ID of the alert event
+		Id   string                     `json:"id"`
+		Type AlertEventResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// AlertEventResponseDataType defines model for AlertEventResponse.Data.Type.
+type AlertEventResponseDataType string
 
 // AlertGroup defines model for alert_group.
 type AlertGroup struct {
@@ -9320,11 +9413,11 @@ type EscalationLevel struct {
 	// Delay Delay before notification targets will be alerted.
 	Delay int `json:"delay"`
 
-	// EscalationPathId The ID of the dynamic escalation policy path the level will belong to. If nothing is specified it will add the level to your default path.
-	EscalationPathId *string `json:"escalation_path_id"`
-
 	// EscalationPolicyId The ID of the escalation policy
 	EscalationPolicyId string `json:"escalation_policy_id"`
+
+	// EscalationPolicyPathId The ID of the dynamic escalation policy path the level will belong to. If nothing is specified it will add the level to your default path.
+	EscalationPolicyPathId *string `json:"escalation_policy_path_id"`
 
 	// NotificationTargetParams Escalation level's notification targets
 	NotificationTargetParams []struct {
@@ -9370,85 +9463,6 @@ type EscalationLevelResponse struct {
 // EscalationLevelResponseDataType defines model for EscalationLevelResponse.Data.Type.
 type EscalationLevelResponseDataType string
 
-// EscalationPath defines model for escalation_path.
-type EscalationPath struct {
-	// CreatedAt Date of creation
-	CreatedAt *string `json:"created_at,omitempty"`
-
-	// Default Whether this escalation path is the default path
-	Default bool `json:"default"`
-
-	// EscalationPolicyId The ID of the escalation policy
-	EscalationPolicyId string `json:"escalation_policy_id"`
-
-	// Name The name of the escalation path
-	Name string `json:"name"`
-
-	// NotificationType Notification rule type
-	NotificationType string `json:"notification_type"`
-
-	// Repeat Whether this path should be repeated until someone acknowledges the alert
-	Repeat *bool `json:"repeat"`
-
-	// RepeatCount The number of times this path will be executed until someone acknowledges the alert
-	RepeatCount *int `json:"repeat_count"`
-
-	// Rules Escalation path rules
-	Rules *[]struct {
-		// JsonPath JSON path to extract value from payload
-		JsonPath *string `json:"json_path,omitempty"`
-
-		// Operator How JSON path value should be matched
-		Operator *EscalationPathRulesOperator `json:"operator,omitempty"`
-
-		// RuleType The type of the escalation path rule
-		RuleType *EscalationPathRulesRuleType `json:"rule_type,omitempty"`
-
-		// UrgencyIds Alert urgency ids for which this escalation path should be used
-		UrgencyIds *[]string `json:"urgency_ids,omitempty"`
-
-		// Value Value with which JSON path value should be matched
-		Value *string `json:"value,omitempty"`
-
-		// WithinWorkingHour Whether the escalation path should be used within working hours
-		WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
-	} `json:"rules,omitempty"`
-
-	// UpdatedAt Date of last update
-	UpdatedAt *string `json:"updated_at,omitempty"`
-}
-
-// EscalationPathRulesOperator How JSON path value should be matched
-type EscalationPathRulesOperator string
-
-// EscalationPathRulesRuleType The type of the escalation path rule
-type EscalationPathRulesRuleType string
-
-// EscalationPathList defines model for escalation_path_list.
-type EscalationPathList struct {
-	Data []struct {
-		Attributes EscalationPath `json:"attributes"`
-
-		// Id Unique ID of the escalation policy path
-		Id string `json:"id"`
-	} `json:"data"`
-	Links Links `json:"links"`
-}
-
-// EscalationPathResponse defines model for escalation_path_response.
-type EscalationPathResponse struct {
-	Data struct {
-		Attributes EscalationPath `json:"attributes"`
-
-		// Id Unique ID of the escalation policy path
-		Id   string                          `json:"id"`
-		Type *EscalationPathResponseDataType `json:"type,omitempty"`
-	} `json:"data"`
-}
-
-// EscalationPathResponseDataType defines model for EscalationPathResponse.Data.Type.
-type EscalationPathResponseDataType string
-
 // EscalationPolicy defines model for escalation_policy.
 type EscalationPolicy struct {
 	// CreatedAt Date of creation
@@ -9493,6 +9507,85 @@ type EscalationPolicyList struct {
 
 // EscalationPolicyListDataType defines model for EscalationPolicyList.Data.Type.
 type EscalationPolicyListDataType string
+
+// EscalationPolicyPath defines model for escalation_policy_path.
+type EscalationPolicyPath struct {
+	// CreatedAt Date of creation
+	CreatedAt *string `json:"created_at,omitempty"`
+
+	// Default Whether this escalation path is the default path
+	Default bool `json:"default"`
+
+	// EscalationPolicyId The ID of the escalation policy
+	EscalationPolicyId string `json:"escalation_policy_id"`
+
+	// Name The name of the escalation path
+	Name string `json:"name"`
+
+	// NotificationType Notification rule type
+	NotificationType string `json:"notification_type"`
+
+	// Repeat Whether this path should be repeated until someone acknowledges the alert
+	Repeat *bool `json:"repeat"`
+
+	// RepeatCount The number of times this path will be executed until someone acknowledges the alert
+	RepeatCount *int `json:"repeat_count"`
+
+	// Rules Escalation path rules
+	Rules *[]struct {
+		// JsonPath JSON path to extract value from payload
+		JsonPath *string `json:"json_path,omitempty"`
+
+		// Operator How JSON path value should be matched
+		Operator *EscalationPolicyPathRulesOperator `json:"operator,omitempty"`
+
+		// RuleType The type of the escalation path rule
+		RuleType *EscalationPolicyPathRulesRuleType `json:"rule_type,omitempty"`
+
+		// UrgencyIds Alert urgency ids for which this escalation path should be used
+		UrgencyIds *[]string `json:"urgency_ids,omitempty"`
+
+		// Value Value with which JSON path value should be matched
+		Value *string `json:"value,omitempty"`
+
+		// WithinWorkingHour Whether the escalation path should be used within working hours
+		WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
+	} `json:"rules,omitempty"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt *string `json:"updated_at,omitempty"`
+}
+
+// EscalationPolicyPathRulesOperator How JSON path value should be matched
+type EscalationPolicyPathRulesOperator string
+
+// EscalationPolicyPathRulesRuleType The type of the escalation path rule
+type EscalationPolicyPathRulesRuleType string
+
+// EscalationPolicyPathList defines model for escalation_policy_path_list.
+type EscalationPolicyPathList struct {
+	Data []struct {
+		Attributes EscalationPolicyPath `json:"attributes"`
+
+		// Id Unique ID of the escalation policy path
+		Id string `json:"id"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// EscalationPolicyPathResponse defines model for escalation_policy_path_response.
+type EscalationPolicyPathResponse struct {
+	Data struct {
+		Attributes EscalationPolicyPath `json:"attributes"`
+
+		// Id Unique ID of the escalation policy path
+		Id   string                                `json:"id"`
+		Type *EscalationPolicyPathResponseDataType `json:"type,omitempty"`
+	} `json:"data"`
+}
+
+// EscalationPolicyPathResponseDataType defines model for EscalationPolicyPathResponse.Data.Type.
+type EscalationPolicyPathResponseDataType string
 
 // EscalationPolicyResponse defines model for escalation_policy_response.
 type EscalationPolicyResponse struct {
@@ -12237,8 +12330,8 @@ type NewEscalationLevel struct {
 			// Delay Delay before notification targets will be alerted.
 			Delay *int `json:"delay,omitempty"`
 
-			// EscalationPathId The ID of the dynamic escalation policy path the level will belong to. If nothing is specified it will add the level to your default path.
-			EscalationPathId *string `json:"escalation_path_id"`
+			// EscalationPolicyPathId The ID of the dynamic escalation policy path the level will belong to. If nothing is specified it will add the level to your default path.
+			EscalationPolicyPathId *string `json:"escalation_policy_path_id"`
 
 			// NotificationTargetParams Escalation level's notification targets
 			NotificationTargetParams []struct {
@@ -12261,59 +12354,6 @@ type NewEscalationLevelDataAttributesNotificationTargetParamsType string
 
 // NewEscalationLevelDataType defines model for NewEscalationLevel.Data.Type.
 type NewEscalationLevelDataType string
-
-// NewEscalationPath defines model for new_escalation_path.
-type NewEscalationPath struct {
-	Data struct {
-		Attributes struct {
-			// Name The name of the escalation path
-			Name string `json:"name"`
-
-			// NotificationType Notification rule type to be used
-			NotificationType *NewEscalationPathDataAttributesNotificationType `json:"notification_type,omitempty"`
-
-			// Repeat Whether this path should be repeated until someone acknowledges the alert
-			Repeat *bool `json:"repeat"`
-
-			// RepeatCount The number of times this path will be executed until someone acknowledges the alert
-			RepeatCount *int `json:"repeat_count"`
-
-			// Rules Escalation path conditions
-			Rules []struct {
-				// JsonPath JSON path to extract value from payload
-				JsonPath *string `json:"json_path,omitempty"`
-
-				// Operator How JSON path value should be matched
-				Operator *NewEscalationPathDataAttributesRulesOperator `json:"operator,omitempty"`
-
-				// RuleType The type of the escalation path rule
-				RuleType *NewEscalationPathDataAttributesRulesRuleType `json:"rule_type,omitempty"`
-
-				// UrgencyIds Alert urgency ids for which this escalation path should be used
-				UrgencyIds *[]interface{} `json:"urgency_ids,omitempty"`
-
-				// Value Value with which JSON path value should be matched
-				Value *string `json:"value,omitempty"`
-
-				// WithinWorkingHour Whether the escalation path should be used within working hours
-				WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
-			} `json:"rules"`
-		} `json:"attributes"`
-		Type NewEscalationPathDataType `json:"type"`
-	} `json:"data"`
-}
-
-// NewEscalationPathDataAttributesNotificationType Notification rule type to be used
-type NewEscalationPathDataAttributesNotificationType string
-
-// NewEscalationPathDataAttributesRulesOperator How JSON path value should be matched
-type NewEscalationPathDataAttributesRulesOperator string
-
-// NewEscalationPathDataAttributesRulesRuleType The type of the escalation path rule
-type NewEscalationPathDataAttributesRulesRuleType string
-
-// NewEscalationPathDataType defines model for NewEscalationPath.Data.Type.
-type NewEscalationPathDataType string
 
 // NewEscalationPolicy defines model for new_escalation_policy.
 type NewEscalationPolicy struct {
@@ -12340,6 +12380,59 @@ type NewEscalationPolicy struct {
 
 // NewEscalationPolicyDataType defines model for NewEscalationPolicy.Data.Type.
 type NewEscalationPolicyDataType string
+
+// NewEscalationPolicyPath defines model for new_escalation_policy_path.
+type NewEscalationPolicyPath struct {
+	Data struct {
+		Attributes struct {
+			// Name The name of the escalation path
+			Name string `json:"name"`
+
+			// NotificationType Notification rule type to be used
+			NotificationType *NewEscalationPolicyPathDataAttributesNotificationType `json:"notification_type,omitempty"`
+
+			// Repeat Whether this path should be repeated until someone acknowledges the alert
+			Repeat *bool `json:"repeat"`
+
+			// RepeatCount The number of times this path will be executed until someone acknowledges the alert
+			RepeatCount *int `json:"repeat_count"`
+
+			// Rules Escalation path conditions
+			Rules []struct {
+				// JsonPath JSON path to extract value from payload
+				JsonPath *string `json:"json_path,omitempty"`
+
+				// Operator How JSON path value should be matched
+				Operator *NewEscalationPolicyPathDataAttributesRulesOperator `json:"operator,omitempty"`
+
+				// RuleType The type of the escalation path rule
+				RuleType *NewEscalationPolicyPathDataAttributesRulesRuleType `json:"rule_type,omitempty"`
+
+				// UrgencyIds Alert urgency ids for which this escalation path should be used
+				UrgencyIds *[]interface{} `json:"urgency_ids,omitempty"`
+
+				// Value Value with which JSON path value should be matched
+				Value *string `json:"value,omitempty"`
+
+				// WithinWorkingHour Whether the escalation path should be used within working hours
+				WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
+			} `json:"rules"`
+		} `json:"attributes"`
+		Type NewEscalationPolicyPathDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewEscalationPolicyPathDataAttributesNotificationType Notification rule type to be used
+type NewEscalationPolicyPathDataAttributesNotificationType string
+
+// NewEscalationPolicyPathDataAttributesRulesOperator How JSON path value should be matched
+type NewEscalationPolicyPathDataAttributesRulesOperator string
+
+// NewEscalationPolicyPathDataAttributesRulesRuleType The type of the escalation path rule
+type NewEscalationPolicyPathDataAttributesRulesRuleType string
+
+// NewEscalationPolicyPathDataType defines model for NewEscalationPolicyPath.Data.Type.
+type NewEscalationPolicyPathDataType string
 
 // NewFormField defines model for new_form_field.
 type NewFormField struct {
@@ -17546,8 +17639,8 @@ type UpdateEscalationLevel struct {
 			// Delay Delay before notification targets will be alerted.
 			Delay *int `json:"delay,omitempty"`
 
-			// EscalationPathId The ID of the dynamic escalation policy path the level will belong to. If nothing is specified it will add the level to your default path.
-			EscalationPathId *string `json:"escalation_path_id"`
+			// EscalationPolicyPathId The ID of the dynamic escalation policy path the level will belong to. If nothing is specified it will add the level to your default path.
+			EscalationPolicyPathId *string `json:"escalation_policy_path_id"`
 
 			// NotificationTargetParams Escalation level's notification targets
 			NotificationTargetParams *[]struct {
@@ -17570,59 +17663,6 @@ type UpdateEscalationLevelDataAttributesNotificationTargetParamsType string
 
 // UpdateEscalationLevelDataType defines model for UpdateEscalationLevel.Data.Type.
 type UpdateEscalationLevelDataType string
-
-// UpdateEscalationPath defines model for update_escalation_path.
-type UpdateEscalationPath struct {
-	Data struct {
-		Attributes struct {
-			// Name The name of the escalation path
-			Name *string `json:"name,omitempty"`
-
-			// NotificationType Position of the escalation policy level
-			NotificationType *UpdateEscalationPathDataAttributesNotificationType `json:"notification_type,omitempty"`
-
-			// Repeat Whether this path should be repeated until someone acknowledges the alert
-			Repeat *bool `json:"repeat"`
-
-			// RepeatCount The number of times this path will be executed until someone acknowledges the alert
-			RepeatCount *int `json:"repeat_count"`
-
-			// Rules Escalation path conditions
-			Rules *[]struct {
-				// JsonPath JSON path to extract value from payload
-				JsonPath *string `json:"json_path,omitempty"`
-
-				// Operator How JSON path value should be matched
-				Operator *UpdateEscalationPathDataAttributesRulesOperator `json:"operator,omitempty"`
-
-				// RuleType The type of the escalation path rule
-				RuleType *UpdateEscalationPathDataAttributesRulesRuleType `json:"rule_type,omitempty"`
-
-				// UrgencyIds Alert urgency ids for which this escalation path should be used
-				UrgencyIds *[]interface{} `json:"urgency_ids,omitempty"`
-
-				// Value Value with which JSON path value should be matched
-				Value *string `json:"value,omitempty"`
-
-				// WithinWorkingHour Whether the escalation path should be used within working hours
-				WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
-			} `json:"rules,omitempty"`
-		} `json:"attributes"`
-		Type UpdateEscalationPathDataType `json:"type"`
-	} `json:"data"`
-}
-
-// UpdateEscalationPathDataAttributesNotificationType Position of the escalation policy level
-type UpdateEscalationPathDataAttributesNotificationType string
-
-// UpdateEscalationPathDataAttributesRulesOperator How JSON path value should be matched
-type UpdateEscalationPathDataAttributesRulesOperator string
-
-// UpdateEscalationPathDataAttributesRulesRuleType The type of the escalation path rule
-type UpdateEscalationPathDataAttributesRulesRuleType string
-
-// UpdateEscalationPathDataType defines model for UpdateEscalationPath.Data.Type.
-type UpdateEscalationPathDataType string
 
 // UpdateEscalationPolicy defines model for update_escalation_policy.
 type UpdateEscalationPolicy struct {
@@ -17649,6 +17689,59 @@ type UpdateEscalationPolicy struct {
 
 // UpdateEscalationPolicyDataType defines model for UpdateEscalationPolicy.Data.Type.
 type UpdateEscalationPolicyDataType string
+
+// UpdateEscalationPolicyPath defines model for update_escalation_policy_path.
+type UpdateEscalationPolicyPath struct {
+	Data struct {
+		Attributes struct {
+			// Name The name of the escalation path
+			Name *string `json:"name,omitempty"`
+
+			// NotificationType Position of the escalation policy level
+			NotificationType *UpdateEscalationPolicyPathDataAttributesNotificationType `json:"notification_type,omitempty"`
+
+			// Repeat Whether this path should be repeated until someone acknowledges the alert
+			Repeat *bool `json:"repeat"`
+
+			// RepeatCount The number of times this path will be executed until someone acknowledges the alert
+			RepeatCount *int `json:"repeat_count"`
+
+			// Rules Escalation path conditions
+			Rules *[]struct {
+				// JsonPath JSON path to extract value from payload
+				JsonPath *string `json:"json_path,omitempty"`
+
+				// Operator How JSON path value should be matched
+				Operator *UpdateEscalationPolicyPathDataAttributesRulesOperator `json:"operator,omitempty"`
+
+				// RuleType The type of the escalation path rule
+				RuleType *UpdateEscalationPolicyPathDataAttributesRulesRuleType `json:"rule_type,omitempty"`
+
+				// UrgencyIds Alert urgency ids for which this escalation path should be used
+				UrgencyIds *[]interface{} `json:"urgency_ids,omitempty"`
+
+				// Value Value with which JSON path value should be matched
+				Value *string `json:"value,omitempty"`
+
+				// WithinWorkingHour Whether the escalation path should be used within working hours
+				WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
+			} `json:"rules,omitempty"`
+		} `json:"attributes"`
+		Type UpdateEscalationPolicyPathDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateEscalationPolicyPathDataAttributesNotificationType Position of the escalation policy level
+type UpdateEscalationPolicyPathDataAttributesNotificationType string
+
+// UpdateEscalationPolicyPathDataAttributesRulesOperator How JSON path value should be matched
+type UpdateEscalationPolicyPathDataAttributesRulesOperator string
+
+// UpdateEscalationPolicyPathDataAttributesRulesRuleType The type of the escalation path rule
+type UpdateEscalationPolicyPathDataAttributesRulesRuleType string
+
+// UpdateEscalationPolicyPathDataType defines model for UpdateEscalationPolicyPath.Data.Type.
+type UpdateEscalationPolicyPathDataType string
 
 // UpdateFormField defines model for update_form_field.
 type UpdateFormField struct {
@@ -21049,6 +21142,15 @@ type ListAlertsParams struct {
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
+// ListAlertEventsParams defines parameters for ListAlertEvents.
+type ListAlertEventsParams struct {
+	Include      *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber   *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize     *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterKind   *string `form:"filter[kind],omitempty" json:"filter[kind],omitempty"`
+	FilterAction *string `form:"filter[action],omitempty" json:"filter[action],omitempty"`
+}
+
 // ListAuditsParams defines parameters for ListAudits.
 type ListAuditsParams struct {
 	Include            *string `form:"include,omitempty" json:"include,omitempty"`
@@ -21346,7 +21448,7 @@ type GetEscalationPathParamsInclude string
 
 // ListEscalationPoliciesParams defines parameters for ListEscalationPolicies.
 type ListEscalationPoliciesParams struct {
-	// Include comma separated if needed. eg: escalation_policy_levels,escalation_paths
+	// Include comma separated if needed. eg: escalation_policy_levels,escalation_policy_paths
 	Include    *ListEscalationPoliciesParamsInclude `form:"include,omitempty" json:"include,omitempty"`
 	PageNumber *int                                 `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize   *int                                 `form:"page[size],omitempty" json:"page[size],omitempty"`
@@ -21355,8 +21457,8 @@ type ListEscalationPoliciesParams struct {
 // ListEscalationPoliciesParamsInclude defines parameters for ListEscalationPolicies.
 type ListEscalationPoliciesParamsInclude string
 
-// ListEscalationLevelsPoliciesParams defines parameters for ListEscalationLevelsPolicies.
-type ListEscalationLevelsPoliciesParams struct {
+// ListEscalationLevelsParams defines parameters for ListEscalationLevels.
+type ListEscalationLevelsParams struct {
 	Include    *string `form:"include,omitempty" json:"include,omitempty"`
 	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
@@ -21375,7 +21477,7 @@ type ListEscalationPathsParamsInclude string
 
 // GetEscalationPolicyParams defines parameters for GetEscalationPolicy.
 type GetEscalationPolicyParams struct {
-	// Include comma separated if needed. eg: escalation_policy_levels,escalation_paths
+	// Include comma separated if needed. eg: escalation_policy_levels,escalation_policy_paths
 	Include *GetEscalationPolicyParamsInclude `form:"include,omitempty" json:"include,omitempty"`
 }
 
@@ -22446,16 +22548,16 @@ type UpdateEscalationLevelApplicationVndAPIPlusJSONRequestBody = UpdateEscalatio
 type CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody = NewEscalationLevel
 
 // UpdateEscalationPathApplicationVndAPIPlusJSONRequestBody defines body for UpdateEscalationPath for application/vnd.api+json ContentType.
-type UpdateEscalationPathApplicationVndAPIPlusJSONRequestBody = UpdateEscalationPath
+type UpdateEscalationPathApplicationVndAPIPlusJSONRequestBody = UpdateEscalationPolicyPath
 
 // CreateEscalationPolicyApplicationVndAPIPlusJSONRequestBody defines body for CreateEscalationPolicy for application/vnd.api+json ContentType.
 type CreateEscalationPolicyApplicationVndAPIPlusJSONRequestBody = NewEscalationPolicy
 
-// CreateEscalationLevelPoliciesApplicationVndAPIPlusJSONRequestBody defines body for CreateEscalationLevelPolicies for application/vnd.api+json ContentType.
-type CreateEscalationLevelPoliciesApplicationVndAPIPlusJSONRequestBody = NewEscalationLevel
+// CreateEscalationLevelApplicationVndAPIPlusJSONRequestBody defines body for CreateEscalationLevel for application/vnd.api+json ContentType.
+type CreateEscalationLevelApplicationVndAPIPlusJSONRequestBody = NewEscalationLevel
 
 // CreateEscalationPathApplicationVndAPIPlusJSONRequestBody defines body for CreateEscalationPath for application/vnd.api+json ContentType.
-type CreateEscalationPathApplicationVndAPIPlusJSONRequestBody = NewEscalationPath
+type CreateEscalationPathApplicationVndAPIPlusJSONRequestBody = NewEscalationPolicyPath
 
 // UpdateEscalationPolicyApplicationVndAPIPlusJSONRequestBody defines body for UpdateEscalationPolicy for application/vnd.api+json ContentType.
 type UpdateEscalationPolicyApplicationVndAPIPlusJSONRequestBody = UpdateEscalationPolicy
@@ -35852,6 +35954,9 @@ type ClientInterface interface {
 
 	UpdateIncidentActionItemWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateIncidentActionItemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// GetAlertEvent request
+	GetAlertEvent(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListAlertGroups request
 	ListAlertGroups(ctx context.Context, params *ListAlertGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -35916,6 +36021,9 @@ type ClientInterface interface {
 	CreateAlertWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	CreateAlertWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateAlertApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListAlertEvents request
+	ListAlertEvents(ctx context.Context, alertId string, params *ListAlertEventsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetAlert request
 	GetAlert(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -36180,12 +36288,12 @@ type ClientInterface interface {
 	UpdateEscalationLevelWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateEscalationLevelApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListEscalationLevelsPaths request
-	ListEscalationLevelsPaths(ctx context.Context, escalationPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	ListEscalationLevelsPaths(ctx context.Context, escalationPolicyPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateEscalationLevelPathsWithBody request with any body
-	CreateEscalationLevelPathsWithBody(ctx context.Context, escalationPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	CreateEscalationLevelPathsWithBody(ctx context.Context, escalationPolicyPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPolicyPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteEscalationPath request
 	DeleteEscalationPath(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -36206,13 +36314,13 @@ type ClientInterface interface {
 
 	CreateEscalationPolicyWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateEscalationPolicyApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ListEscalationLevelsPolicies request
-	ListEscalationLevelsPolicies(ctx context.Context, escalationPolicyId string, params *ListEscalationLevelsPoliciesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// ListEscalationLevels request
+	ListEscalationLevels(ctx context.Context, escalationPolicyId string, params *ListEscalationLevelsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CreateEscalationLevelPoliciesWithBody request with any body
-	CreateEscalationLevelPoliciesWithBody(ctx context.Context, escalationPolicyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// CreateEscalationLevelWithBody request with any body
+	CreateEscalationLevelWithBody(ctx context.Context, escalationPolicyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	CreateEscalationLevelPoliciesWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPolicyId string, body CreateEscalationLevelPoliciesApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	CreateEscalationLevelWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPolicyId string, body CreateEscalationLevelApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListEscalationPaths request
 	ListEscalationPaths(ctx context.Context, escalationPolicyId string, params *ListEscalationPathsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -37488,6 +37596,18 @@ func (c *Client) UpdateIncidentActionItemWithApplicationVndAPIPlusJSONBody(ctx c
 	return c.Client.Do(req)
 }
 
+func (c *Client) GetAlertEvent(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAlertEventRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) ListAlertGroups(ctx context.Context, params *ListAlertGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListAlertGroupsRequest(c.Server, params)
 	if err != nil {
@@ -37766,6 +37886,18 @@ func (c *Client) CreateAlertWithBody(ctx context.Context, contentType string, bo
 
 func (c *Client) CreateAlertWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateAlertApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateAlertRequestWithApplicationVndAPIPlusJSONBody(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListAlertEvents(ctx context.Context, alertId string, params *ListAlertEventsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListAlertEventsRequest(c.Server, alertId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -38928,8 +39060,8 @@ func (c *Client) UpdateEscalationLevelWithApplicationVndAPIPlusJSONBody(ctx cont
 	return c.Client.Do(req)
 }
 
-func (c *Client) ListEscalationLevelsPaths(ctx context.Context, escalationPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewListEscalationLevelsPathsRequest(c.Server, escalationPathId, params)
+func (c *Client) ListEscalationLevelsPaths(ctx context.Context, escalationPolicyPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListEscalationLevelsPathsRequest(c.Server, escalationPolicyPathId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -38940,8 +39072,8 @@ func (c *Client) ListEscalationLevelsPaths(ctx context.Context, escalationPathId
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateEscalationLevelPathsWithBody(ctx context.Context, escalationPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateEscalationLevelPathsRequestWithBody(c.Server, escalationPathId, contentType, body)
+func (c *Client) CreateEscalationLevelPathsWithBody(ctx context.Context, escalationPolicyPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateEscalationLevelPathsRequestWithBody(c.Server, escalationPolicyPathId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -38952,8 +39084,8 @@ func (c *Client) CreateEscalationLevelPathsWithBody(ctx context.Context, escalat
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateEscalationLevelPathsRequestWithApplicationVndAPIPlusJSONBody(c.Server, escalationPathId, body)
+func (c *Client) CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPolicyPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateEscalationLevelPathsRequestWithApplicationVndAPIPlusJSONBody(c.Server, escalationPolicyPathId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -39048,8 +39180,8 @@ func (c *Client) CreateEscalationPolicyWithApplicationVndAPIPlusJSONBody(ctx con
 	return c.Client.Do(req)
 }
 
-func (c *Client) ListEscalationLevelsPolicies(ctx context.Context, escalationPolicyId string, params *ListEscalationLevelsPoliciesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewListEscalationLevelsPoliciesRequest(c.Server, escalationPolicyId, params)
+func (c *Client) ListEscalationLevels(ctx context.Context, escalationPolicyId string, params *ListEscalationLevelsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListEscalationLevelsRequest(c.Server, escalationPolicyId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -39060,8 +39192,8 @@ func (c *Client) ListEscalationLevelsPolicies(ctx context.Context, escalationPol
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateEscalationLevelPoliciesWithBody(ctx context.Context, escalationPolicyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateEscalationLevelPoliciesRequestWithBody(c.Server, escalationPolicyId, contentType, body)
+func (c *Client) CreateEscalationLevelWithBody(ctx context.Context, escalationPolicyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateEscalationLevelRequestWithBody(c.Server, escalationPolicyId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -39072,8 +39204,8 @@ func (c *Client) CreateEscalationLevelPoliciesWithBody(ctx context.Context, esca
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateEscalationLevelPoliciesWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPolicyId string, body CreateEscalationLevelPoliciesApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateEscalationLevelPoliciesRequestWithApplicationVndAPIPlusJSONBody(c.Server, escalationPolicyId, body)
+func (c *Client) CreateEscalationLevelWithApplicationVndAPIPlusJSONBody(ctx context.Context, escalationPolicyId string, body CreateEscalationLevelApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateEscalationLevelRequestWithApplicationVndAPIPlusJSONBody(c.Server, escalationPolicyId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -44916,6 +45048,40 @@ func NewUpdateIncidentActionItemRequestWithBody(server string, id string, conten
 	return req, nil
 }
 
+// NewGetAlertEventRequest generates requests for GetAlertEvent
+func NewGetAlertEventRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_events/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewListAlertGroupsRequest generates requests for ListAlertGroups
 func NewListAlertGroupsRequest(server string, params *ListAlertGroupsParams) (*http.Request, error) {
 	var err error
@@ -45885,6 +46051,126 @@ func NewCreateAlertRequestWithBody(server string, contentType string, body io.Re
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListAlertEventsRequest generates requests for ListAlertEvents
+func NewListAlertEventsRequest(server string, alertId string, params *ListAlertEventsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "alert_id", runtime.ParamLocationPath, alertId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alerts/%s/events", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterKind != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[kind]", runtime.ParamLocationQuery, *params.FilterKind); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterAction != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[action]", runtime.ParamLocationQuery, *params.FilterAction); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return req, nil
 }
@@ -50681,12 +50967,12 @@ func NewUpdateEscalationLevelRequestWithBody(server string, id string, contentTy
 }
 
 // NewListEscalationLevelsPathsRequest generates requests for ListEscalationLevelsPaths
-func NewListEscalationLevelsPathsRequest(server string, escalationPathId string, params *ListEscalationLevelsPathsParams) (*http.Request, error) {
+func NewListEscalationLevelsPathsRequest(server string, escalationPolicyPathId string, params *ListEscalationLevelsPathsParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "escalation_path_id", runtime.ParamLocationPath, escalationPathId)
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "escalation_policy_path_id", runtime.ParamLocationPath, escalationPolicyPathId)
 	if err != nil {
 		return nil, err
 	}
@@ -50769,23 +51055,23 @@ func NewListEscalationLevelsPathsRequest(server string, escalationPathId string,
 }
 
 // NewCreateEscalationLevelPathsRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateEscalationLevelPaths builder with application/vnd.api+json body
-func NewCreateEscalationLevelPathsRequestWithApplicationVndAPIPlusJSONBody(server string, escalationPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+func NewCreateEscalationLevelPathsRequestWithApplicationVndAPIPlusJSONBody(server string, escalationPolicyPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewCreateEscalationLevelPathsRequestWithBody(server, escalationPathId, "application/vnd.api+json", bodyReader)
+	return NewCreateEscalationLevelPathsRequestWithBody(server, escalationPolicyPathId, "application/vnd.api+json", bodyReader)
 }
 
 // NewCreateEscalationLevelPathsRequestWithBody generates requests for CreateEscalationLevelPaths with any type of body
-func NewCreateEscalationLevelPathsRequestWithBody(server string, escalationPathId string, contentType string, body io.Reader) (*http.Request, error) {
+func NewCreateEscalationLevelPathsRequestWithBody(server string, escalationPolicyPathId string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "escalation_path_id", runtime.ParamLocationPath, escalationPathId)
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "escalation_policy_path_id", runtime.ParamLocationPath, escalationPolicyPathId)
 	if err != nil {
 		return nil, err
 	}
@@ -51073,8 +51359,8 @@ func NewCreateEscalationPolicyRequestWithBody(server string, contentType string,
 	return req, nil
 }
 
-// NewListEscalationLevelsPoliciesRequest generates requests for ListEscalationLevelsPolicies
-func NewListEscalationLevelsPoliciesRequest(server string, escalationPolicyId string, params *ListEscalationLevelsPoliciesParams) (*http.Request, error) {
+// NewListEscalationLevelsRequest generates requests for ListEscalationLevels
+func NewListEscalationLevelsRequest(server string, escalationPolicyId string, params *ListEscalationLevelsParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -51161,19 +51447,19 @@ func NewListEscalationLevelsPoliciesRequest(server string, escalationPolicyId st
 	return req, nil
 }
 
-// NewCreateEscalationLevelPoliciesRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateEscalationLevelPolicies builder with application/vnd.api+json body
-func NewCreateEscalationLevelPoliciesRequestWithApplicationVndAPIPlusJSONBody(server string, escalationPolicyId string, body CreateEscalationLevelPoliciesApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+// NewCreateEscalationLevelRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateEscalationLevel builder with application/vnd.api+json body
+func NewCreateEscalationLevelRequestWithApplicationVndAPIPlusJSONBody(server string, escalationPolicyId string, body CreateEscalationLevelApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewCreateEscalationLevelPoliciesRequestWithBody(server, escalationPolicyId, "application/vnd.api+json", bodyReader)
+	return NewCreateEscalationLevelRequestWithBody(server, escalationPolicyId, "application/vnd.api+json", bodyReader)
 }
 
-// NewCreateEscalationLevelPoliciesRequestWithBody generates requests for CreateEscalationLevelPolicies with any type of body
-func NewCreateEscalationLevelPoliciesRequestWithBody(server string, escalationPolicyId string, contentType string, body io.Reader) (*http.Request, error) {
+// NewCreateEscalationLevelRequestWithBody generates requests for CreateEscalationLevel with any type of body
+func NewCreateEscalationLevelRequestWithBody(server string, escalationPolicyId string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -72306,6 +72592,9 @@ type ClientWithResponsesInterface interface {
 
 	UpdateIncidentActionItemWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateIncidentActionItemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIncidentActionItemResponse, error)
 
+	// GetAlertEventWithResponse request
+	GetAlertEventWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetAlertEventResponse, error)
+
 	// ListAlertGroupsWithResponse request
 	ListAlertGroupsWithResponse(ctx context.Context, params *ListAlertGroupsParams, reqEditors ...RequestEditorFn) (*ListAlertGroupsResponse, error)
 
@@ -72370,6 +72659,9 @@ type ClientWithResponsesInterface interface {
 	CreateAlertWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateAlertResponse, error)
 
 	CreateAlertWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateAlertApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateAlertResponse, error)
+
+	// ListAlertEventsWithResponse request
+	ListAlertEventsWithResponse(ctx context.Context, alertId string, params *ListAlertEventsParams, reqEditors ...RequestEditorFn) (*ListAlertEventsResponse, error)
 
 	// GetAlertWithResponse request
 	GetAlertWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetAlertResponse, error)
@@ -72634,12 +72926,12 @@ type ClientWithResponsesInterface interface {
 	UpdateEscalationLevelWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateEscalationLevelApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateEscalationLevelResponse, error)
 
 	// ListEscalationLevelsPathsWithResponse request
-	ListEscalationLevelsPathsWithResponse(ctx context.Context, escalationPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*ListEscalationLevelsPathsResponse, error)
+	ListEscalationLevelsPathsWithResponse(ctx context.Context, escalationPolicyPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*ListEscalationLevelsPathsResponse, error)
 
 	// CreateEscalationLevelPathsWithBodyWithResponse request with any body
-	CreateEscalationLevelPathsWithBodyWithResponse(ctx context.Context, escalationPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error)
+	CreateEscalationLevelPathsWithBodyWithResponse(ctx context.Context, escalationPolicyPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error)
 
-	CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error)
+	CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPolicyPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error)
 
 	// DeleteEscalationPathWithResponse request
 	DeleteEscalationPathWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteEscalationPathResponse, error)
@@ -72660,13 +72952,13 @@ type ClientWithResponsesInterface interface {
 
 	CreateEscalationPolicyWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateEscalationPolicyApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationPolicyResponse, error)
 
-	// ListEscalationLevelsPoliciesWithResponse request
-	ListEscalationLevelsPoliciesWithResponse(ctx context.Context, escalationPolicyId string, params *ListEscalationLevelsPoliciesParams, reqEditors ...RequestEditorFn) (*ListEscalationLevelsPoliciesResponse, error)
+	// ListEscalationLevelsWithResponse request
+	ListEscalationLevelsWithResponse(ctx context.Context, escalationPolicyId string, params *ListEscalationLevelsParams, reqEditors ...RequestEditorFn) (*ListEscalationLevelsResponse, error)
 
-	// CreateEscalationLevelPoliciesWithBodyWithResponse request with any body
-	CreateEscalationLevelPoliciesWithBodyWithResponse(ctx context.Context, escalationPolicyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPoliciesResponse, error)
+	// CreateEscalationLevelWithBodyWithResponse request with any body
+	CreateEscalationLevelWithBodyWithResponse(ctx context.Context, escalationPolicyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationLevelResponse, error)
 
-	CreateEscalationLevelPoliciesWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPolicyId string, body CreateEscalationLevelPoliciesApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPoliciesResponse, error)
+	CreateEscalationLevelWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPolicyId string, body CreateEscalationLevelApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationLevelResponse, error)
 
 	// ListEscalationPathsWithResponse request
 	ListEscalationPathsWithResponse(ctx context.Context, escalationPolicyId string, params *ListEscalationPathsParams, reqEditors ...RequestEditorFn) (*ListEscalationPathsResponse, error)
@@ -73973,6 +74265,29 @@ func (r UpdateIncidentActionItemResponse) StatusCode() int {
 	return 0
 }
 
+type GetAlertEventResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *AlertEventResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetAlertEventResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetAlertEventResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type ListAlertGroupsResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -74358,6 +74673,28 @@ func (r CreateAlertResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r CreateAlertResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListAlertEventsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *AlertEventList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListAlertEventsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListAlertEventsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -76018,7 +76355,7 @@ func (r CreateEscalationLevelPathsResponse) StatusCode() int {
 type DeleteEscalationPathResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *EscalationPathResponse
+	ApplicationvndApiJSON200 *EscalationPolicyPathResponse
 	ApplicationvndApiJSON404 *ErrorsList
 }
 
@@ -76041,7 +76378,7 @@ func (r DeleteEscalationPathResponse) StatusCode() int {
 type GetEscalationPathResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *EscalationPathResponse
+	ApplicationvndApiJSON200 *EscalationPolicyPathResponse
 	ApplicationvndApiJSON404 *ErrorsList
 }
 
@@ -76064,7 +76401,7 @@ func (r GetEscalationPathResponse) StatusCode() int {
 type UpdateEscalationPathResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *EscalationPathResponse
+	ApplicationvndApiJSON200 *EscalationPolicyPathResponse
 	ApplicationvndApiJSON404 *ErrorsList
 }
 
@@ -76130,14 +76467,14 @@ func (r CreateEscalationPolicyResponse) StatusCode() int {
 	return 0
 }
 
-type ListEscalationLevelsPoliciesResponse struct {
+type ListEscalationLevelsResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *EscalationLevelList
 }
 
 // Status returns HTTPResponse.Status
-func (r ListEscalationLevelsPoliciesResponse) Status() string {
+func (r ListEscalationLevelsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -76145,14 +76482,14 @@ func (r ListEscalationLevelsPoliciesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ListEscalationLevelsPoliciesResponse) StatusCode() int {
+func (r ListEscalationLevelsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CreateEscalationLevelPoliciesResponse struct {
+type CreateEscalationLevelResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON201 *EscalationLevelResponse
@@ -76161,7 +76498,7 @@ type CreateEscalationLevelPoliciesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreateEscalationLevelPoliciesResponse) Status() string {
+func (r CreateEscalationLevelResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -76169,7 +76506,7 @@ func (r CreateEscalationLevelPoliciesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreateEscalationLevelPoliciesResponse) StatusCode() int {
+func (r CreateEscalationLevelResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -76179,7 +76516,7 @@ func (r CreateEscalationLevelPoliciesResponse) StatusCode() int {
 type ListEscalationPathsResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *EscalationPathList
+	ApplicationvndApiJSON200 *EscalationPolicyPathList
 }
 
 // Status returns HTTPResponse.Status
@@ -76201,7 +76538,7 @@ func (r ListEscalationPathsResponse) StatusCode() int {
 type CreateEscalationPathResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
-	ApplicationvndApiJSON201 *EscalationPathResponse
+	ApplicationvndApiJSON201 *EscalationPolicyPathResponse
 	ApplicationvndApiJSON401 *ErrorsList
 	ApplicationvndApiJSON422 *ErrorsList
 }
@@ -83537,6 +83874,15 @@ func (c *ClientWithResponses) UpdateIncidentActionItemWithApplicationVndAPIPlusJ
 	return ParseUpdateIncidentActionItemResponse(rsp)
 }
 
+// GetAlertEventWithResponse request returning *GetAlertEventResponse
+func (c *ClientWithResponses) GetAlertEventWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetAlertEventResponse, error) {
+	rsp, err := c.GetAlertEvent(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetAlertEventResponse(rsp)
+}
+
 // ListAlertGroupsWithResponse request returning *ListAlertGroupsResponse
 func (c *ClientWithResponses) ListAlertGroupsWithResponse(ctx context.Context, params *ListAlertGroupsParams, reqEditors ...RequestEditorFn) (*ListAlertGroupsResponse, error) {
 	rsp, err := c.ListAlertGroups(ctx, params, reqEditors...)
@@ -83744,6 +84090,15 @@ func (c *ClientWithResponses) CreateAlertWithApplicationVndAPIPlusJSONBodyWithRe
 		return nil, err
 	}
 	return ParseCreateAlertResponse(rsp)
+}
+
+// ListAlertEventsWithResponse request returning *ListAlertEventsResponse
+func (c *ClientWithResponses) ListAlertEventsWithResponse(ctx context.Context, alertId string, params *ListAlertEventsParams, reqEditors ...RequestEditorFn) (*ListAlertEventsResponse, error) {
+	rsp, err := c.ListAlertEvents(ctx, alertId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListAlertEventsResponse(rsp)
 }
 
 // GetAlertWithResponse request returning *GetAlertResponse
@@ -84585,8 +84940,8 @@ func (c *ClientWithResponses) UpdateEscalationLevelWithApplicationVndAPIPlusJSON
 }
 
 // ListEscalationLevelsPathsWithResponse request returning *ListEscalationLevelsPathsResponse
-func (c *ClientWithResponses) ListEscalationLevelsPathsWithResponse(ctx context.Context, escalationPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*ListEscalationLevelsPathsResponse, error) {
-	rsp, err := c.ListEscalationLevelsPaths(ctx, escalationPathId, params, reqEditors...)
+func (c *ClientWithResponses) ListEscalationLevelsPathsWithResponse(ctx context.Context, escalationPolicyPathId string, params *ListEscalationLevelsPathsParams, reqEditors ...RequestEditorFn) (*ListEscalationLevelsPathsResponse, error) {
+	rsp, err := c.ListEscalationLevelsPaths(ctx, escalationPolicyPathId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -84594,16 +84949,16 @@ func (c *ClientWithResponses) ListEscalationLevelsPathsWithResponse(ctx context.
 }
 
 // CreateEscalationLevelPathsWithBodyWithResponse request with arbitrary body returning *CreateEscalationLevelPathsResponse
-func (c *ClientWithResponses) CreateEscalationLevelPathsWithBodyWithResponse(ctx context.Context, escalationPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error) {
-	rsp, err := c.CreateEscalationLevelPathsWithBody(ctx, escalationPathId, contentType, body, reqEditors...)
+func (c *ClientWithResponses) CreateEscalationLevelPathsWithBodyWithResponse(ctx context.Context, escalationPolicyPathId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error) {
+	rsp, err := c.CreateEscalationLevelPathsWithBody(ctx, escalationPolicyPathId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateEscalationLevelPathsResponse(rsp)
 }
 
-func (c *ClientWithResponses) CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error) {
-	rsp, err := c.CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBody(ctx, escalationPathId, body, reqEditors...)
+func (c *ClientWithResponses) CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPolicyPathId string, body CreateEscalationLevelPathsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPathsResponse, error) {
+	rsp, err := c.CreateEscalationLevelPathsWithApplicationVndAPIPlusJSONBody(ctx, escalationPolicyPathId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -84671,30 +85026,30 @@ func (c *ClientWithResponses) CreateEscalationPolicyWithApplicationVndAPIPlusJSO
 	return ParseCreateEscalationPolicyResponse(rsp)
 }
 
-// ListEscalationLevelsPoliciesWithResponse request returning *ListEscalationLevelsPoliciesResponse
-func (c *ClientWithResponses) ListEscalationLevelsPoliciesWithResponse(ctx context.Context, escalationPolicyId string, params *ListEscalationLevelsPoliciesParams, reqEditors ...RequestEditorFn) (*ListEscalationLevelsPoliciesResponse, error) {
-	rsp, err := c.ListEscalationLevelsPolicies(ctx, escalationPolicyId, params, reqEditors...)
+// ListEscalationLevelsWithResponse request returning *ListEscalationLevelsResponse
+func (c *ClientWithResponses) ListEscalationLevelsWithResponse(ctx context.Context, escalationPolicyId string, params *ListEscalationLevelsParams, reqEditors ...RequestEditorFn) (*ListEscalationLevelsResponse, error) {
+	rsp, err := c.ListEscalationLevels(ctx, escalationPolicyId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseListEscalationLevelsPoliciesResponse(rsp)
+	return ParseListEscalationLevelsResponse(rsp)
 }
 
-// CreateEscalationLevelPoliciesWithBodyWithResponse request with arbitrary body returning *CreateEscalationLevelPoliciesResponse
-func (c *ClientWithResponses) CreateEscalationLevelPoliciesWithBodyWithResponse(ctx context.Context, escalationPolicyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPoliciesResponse, error) {
-	rsp, err := c.CreateEscalationLevelPoliciesWithBody(ctx, escalationPolicyId, contentType, body, reqEditors...)
+// CreateEscalationLevelWithBodyWithResponse request with arbitrary body returning *CreateEscalationLevelResponse
+func (c *ClientWithResponses) CreateEscalationLevelWithBodyWithResponse(ctx context.Context, escalationPolicyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateEscalationLevelResponse, error) {
+	rsp, err := c.CreateEscalationLevelWithBody(ctx, escalationPolicyId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreateEscalationLevelPoliciesResponse(rsp)
+	return ParseCreateEscalationLevelResponse(rsp)
 }
 
-func (c *ClientWithResponses) CreateEscalationLevelPoliciesWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPolicyId string, body CreateEscalationLevelPoliciesApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationLevelPoliciesResponse, error) {
-	rsp, err := c.CreateEscalationLevelPoliciesWithApplicationVndAPIPlusJSONBody(ctx, escalationPolicyId, body, reqEditors...)
+func (c *ClientWithResponses) CreateEscalationLevelWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, escalationPolicyId string, body CreateEscalationLevelApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateEscalationLevelResponse, error) {
+	rsp, err := c.CreateEscalationLevelWithApplicationVndAPIPlusJSONBody(ctx, escalationPolicyId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreateEscalationLevelPoliciesResponse(rsp)
+	return ParseCreateEscalationLevelResponse(rsp)
 }
 
 // ListEscalationPathsWithResponse request returning *ListEscalationPathsResponse
@@ -88717,6 +89072,39 @@ func ParseUpdateIncidentActionItemResponse(rsp *http.Response) (*UpdateIncidentA
 	return response, nil
 }
 
+// ParseGetAlertEventResponse parses an HTTP response from a GetAlertEventWithResponse call
+func ParseGetAlertEventResponse(rsp *http.Response) (*GetAlertEventResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetAlertEventResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertEventResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseListAlertGroupsResponse parses an HTTP response from a ListAlertGroupsWithResponse call
 func ParseListAlertGroupsResponse(rsp *http.Response) (*ListAlertGroupsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -89272,6 +89660,32 @@ func ParseCreateAlertResponse(rsp *http.Response) (*CreateAlertResponse, error) 
 			return nil, err
 		}
 		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListAlertEventsResponse parses an HTTP response from a ListAlertEventsWithResponse call
+func ParseListAlertEventsResponse(rsp *http.Response) (*ListAlertEventsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListAlertEventsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertEventList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
 
 	}
 
@@ -91634,7 +92048,7 @@ func ParseDeleteEscalationPathResponse(rsp *http.Response) (*DeleteEscalationPat
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest EscalationPathResponse
+		var dest EscalationPolicyPathResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -91667,7 +92081,7 @@ func ParseGetEscalationPathResponse(rsp *http.Response) (*GetEscalationPathRespo
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest EscalationPathResponse
+		var dest EscalationPolicyPathResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -91700,7 +92114,7 @@ func ParseUpdateEscalationPathResponse(rsp *http.Response) (*UpdateEscalationPat
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest EscalationPathResponse
+		var dest EscalationPolicyPathResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -91784,15 +92198,15 @@ func ParseCreateEscalationPolicyResponse(rsp *http.Response) (*CreateEscalationP
 	return response, nil
 }
 
-// ParseListEscalationLevelsPoliciesResponse parses an HTTP response from a ListEscalationLevelsPoliciesWithResponse call
-func ParseListEscalationLevelsPoliciesResponse(rsp *http.Response) (*ListEscalationLevelsPoliciesResponse, error) {
+// ParseListEscalationLevelsResponse parses an HTTP response from a ListEscalationLevelsWithResponse call
+func ParseListEscalationLevelsResponse(rsp *http.Response) (*ListEscalationLevelsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &ListEscalationLevelsPoliciesResponse{
+	response := &ListEscalationLevelsResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -91810,15 +92224,15 @@ func ParseListEscalationLevelsPoliciesResponse(rsp *http.Response) (*ListEscalat
 	return response, nil
 }
 
-// ParseCreateEscalationLevelPoliciesResponse parses an HTTP response from a CreateEscalationLevelPoliciesWithResponse call
-func ParseCreateEscalationLevelPoliciesResponse(rsp *http.Response) (*CreateEscalationLevelPoliciesResponse, error) {
+// ParseCreateEscalationLevelResponse parses an HTTP response from a CreateEscalationLevelWithResponse call
+func ParseCreateEscalationLevelResponse(rsp *http.Response) (*CreateEscalationLevelResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CreateEscalationLevelPoliciesResponse{
+	response := &CreateEscalationLevelResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -91865,7 +92279,7 @@ func ParseListEscalationPathsResponse(rsp *http.Response) (*ListEscalationPathsR
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest EscalationPathList
+		var dest EscalationPolicyPathList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -91891,7 +92305,7 @@ func ParseCreateEscalationPathResponse(rsp *http.Response) (*CreateEscalationPat
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest EscalationPathResponse
+		var dest EscalationPolicyPathResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

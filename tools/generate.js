@@ -15,6 +15,7 @@ const swagger = require(path.resolve(swaggerPath));
 const excluded = {
   dataSources: [
     "alert",
+    "alert_event",
     "audit",
     "catalog",
     "catalog_field",
@@ -46,6 +47,7 @@ const excluded = {
   ],
   resources: [
     "alert",
+    "alert_event",
     "audit",
     "catalog",
     "catalog_field",
@@ -79,6 +81,7 @@ const excluded = {
     "workflow_task",
   ],
   tests: [
+    "alert_event",
     "alert_group",
     "authorization",
     "escalation_level",
