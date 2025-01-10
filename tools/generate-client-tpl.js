@@ -22,7 +22,7 @@ import (
 )
 
 type ${nameCamel} struct {
-	ID string \`jsonapi:"primary,${name === "team" ? "groups" : namePlural}"\`
+	ID string \`jsonapi:"primary,${clientJsonApiResourceType(name)}"\`
 	${structAttrs(resourceSchema)}
 }
 
@@ -137,6 +137,12 @@ func (c *Client) Delete${nameCamel}(id string) error {
 }
 `;
 };
+
+function clientJsonApiResourceType(name) {
+  if (name === "team") return "groups";
+  if (name === "alerts_source") return "alert_sources";
+  return inflect.pluralize(name);
+}
 
 function listFnParams(nameCamelPlural, nested) {
   if (nested) {

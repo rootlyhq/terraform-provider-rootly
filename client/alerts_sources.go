@@ -11,7 +11,7 @@ import (
 )
 
 type AlertsSource struct {
-	ID string `jsonapi:"primary,alerts_sources"`
+	ID string `jsonapi:"primary,alert_sources"`
 	Name string `jsonapi:"attr,name,omitempty"`
   SourceType string `jsonapi:"attr,source_type,omitempty"`
   Status string `jsonapi:"attr,status,omitempty"`
