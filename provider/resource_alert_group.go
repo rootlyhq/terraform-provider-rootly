@@ -85,6 +85,57 @@ func resourceAlertGroup() *schema.Resource {
 				Description: "Whether the alerts are grouped by urgency or not. Value must be one of true or false",
 			},
 
+			"targets": &schema.Schema{
+				Type:        schema.TypeList,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+
+						"target_type": &schema.Schema{
+							Type:        schema.TypeString,
+							Default:     "Group",
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "The type of the target.. Value must be one of `Group`, `Service`, `EscalationPolicy`.",
+						},
+
+						"target_id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "id for the Group, Service or EscalationPolicy",
+						},
+					},
+				},
+			},
+
+			"attributes": &schema.Schema{
+				Type:        schema.TypeList,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+
+						"json_path": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "The JSON path to the value to group by.",
+						},
+					},
+				},
+			},
+
 			"deleted_at": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
@@ -125,6 +176,12 @@ func resourceAlertGroupCreate(ctx context.Context, d *schema.ResourceData, meta 
 	if value, ok := d.GetOkExists("group_by_alert_urgency"); ok {
 		s.GroupByAlertUrgency = tools.Bool(value.(bool))
 	}
+	if value, ok := d.GetOkExists("targets"); ok {
+		s.Targets = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("attributes"); ok {
+		s.Attributes = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("deleted_at"); ok {
 		s.DeletedAt = value.(string)
 	}
@@ -164,6 +221,8 @@ func resourceAlertGroupRead(ctx context.Context, d *schema.ResourceData, meta in
 	d.Set("time_window", item.TimeWindow)
 	d.Set("group_by_alert_title", item.GroupByAlertTitle)
 	d.Set("group_by_alert_urgency", item.GroupByAlertUrgency)
+	d.Set("targets", item.Targets)
+	d.Set("attributes", item.Attributes)
 	d.Set("deleted_at", item.DeletedAt)
 
 	return nil
@@ -195,6 +254,12 @@ func resourceAlertGroupUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	}
 	if d.HasChange("group_by_alert_urgency") {
 		s.GroupByAlertUrgency = tools.Bool(d.Get("group_by_alert_urgency").(bool))
+	}
+	if d.HasChange("targets") {
+		s.Targets = d.Get("targets").([]interface{})
+	}
+	if d.HasChange("attributes") {
+		s.Attributes = d.Get("attributes").([]interface{})
 	}
 	if d.HasChange("deleted_at") {
 		s.DeletedAt = d.Get("deleted_at").(string)

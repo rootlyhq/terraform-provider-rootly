@@ -431,6 +431,13 @@ const (
 	AlertEventResponseDataTypeAlertEvents AlertEventResponseDataType = "alert_events"
 )
 
+// Defines values for AlertGroupTargetsTargetType.
+const (
+	AlertGroupTargetsTargetTypeEscalationPolicy AlertGroupTargetsTargetType = "EscalationPolicy"
+	AlertGroupTargetsTargetTypeGroup            AlertGroupTargetsTargetType = "Group"
+	AlertGroupTargetsTargetTypeService          AlertGroupTargetsTargetType = "Service"
+)
+
 // Defines values for AlertGroupListDataType.
 const (
 	AlertGroupListDataTypeAlertGroups AlertGroupListDataType = "alert_groups"
@@ -2174,13 +2181,6 @@ const (
 	NewAlertDataTypeAlerts NewAlertDataType = "alerts"
 )
 
-// Defines values for NewAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType.
-const (
-	NewAlertGroupDataAttributesAlertGroupTargetsAttributesTargetTypeEscalationPolicy NewAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType = "EscalationPolicy"
-	NewAlertGroupDataAttributesAlertGroupTargetsAttributesTargetTypeGroup            NewAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType = "Group"
-	NewAlertGroupDataAttributesAlertGroupTargetsAttributesTargetTypeService          NewAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType = "Service"
-)
-
 // Defines values for NewAlertGroupDataAttributesConditionType.
 const (
 	NewAlertGroupDataAttributesConditionTypeAll NewAlertGroupDataAttributesConditionType = "all"
@@ -2197,6 +2197,13 @@ const (
 const (
 	NewAlertGroupDataAttributesGroupByAlertUrgencyN0 NewAlertGroupDataAttributesGroupByAlertUrgency = 0
 	NewAlertGroupDataAttributesGroupByAlertUrgencyN1 NewAlertGroupDataAttributesGroupByAlertUrgency = 1
+)
+
+// Defines values for NewAlertGroupDataAttributesTargetsTargetType.
+const (
+	NewAlertGroupDataAttributesTargetsTargetTypeEscalationPolicy NewAlertGroupDataAttributesTargetsTargetType = "EscalationPolicy"
+	NewAlertGroupDataAttributesTargetsTargetTypeGroup            NewAlertGroupDataAttributesTargetsTargetType = "Group"
+	NewAlertGroupDataAttributesTargetsTargetTypeService          NewAlertGroupDataAttributesTargetsTargetType = "Service"
 )
 
 // Defines values for NewAlertGroupDataType.
@@ -4555,13 +4562,6 @@ const (
 	UpdateAirtableTableRecord UpdateAirtableTableRecordTaskParamsTaskType = "update_airtable_table_record"
 )
 
-// Defines values for UpdateAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType.
-const (
-	UpdateAlertGroupDataAttributesAlertGroupTargetsAttributesTargetTypeEscalationPolicy UpdateAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType = "EscalationPolicy"
-	UpdateAlertGroupDataAttributesAlertGroupTargetsAttributesTargetTypeGroup            UpdateAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType = "Group"
-	UpdateAlertGroupDataAttributesAlertGroupTargetsAttributesTargetTypeService          UpdateAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType = "Service"
-)
-
 // Defines values for UpdateAlertGroupDataAttributesConditionType.
 const (
 	UpdateAlertGroupDataAttributesConditionTypeAll UpdateAlertGroupDataAttributesConditionType = "all"
@@ -4578,6 +4578,13 @@ const (
 const (
 	UpdateAlertGroupDataAttributesGroupByAlertUrgencyN0 UpdateAlertGroupDataAttributesGroupByAlertUrgency = 0
 	UpdateAlertGroupDataAttributesGroupByAlertUrgencyN1 UpdateAlertGroupDataAttributesGroupByAlertUrgency = 1
+)
+
+// Defines values for UpdateAlertGroupDataAttributesTargetsTargetType.
+const (
+	UpdateAlertGroupDataAttributesTargetsTargetTypeEscalationPolicy UpdateAlertGroupDataAttributesTargetsTargetType = "EscalationPolicy"
+	UpdateAlertGroupDataAttributesTargetsTargetTypeGroup            UpdateAlertGroupDataAttributesTargetsTargetType = "Group"
+	UpdateAlertGroupDataAttributesTargetsTargetTypeService          UpdateAlertGroupDataAttributesTargetsTargetType = "Service"
 )
 
 // Defines values for UpdateAlertGroupDataType.
@@ -7129,6 +7136,11 @@ type AlertEventResponseDataType string
 
 // AlertGroup defines model for alert_group.
 type AlertGroup struct {
+	Attributes *[]struct {
+		// JsonPath The JSON path to the value to group by.
+		JsonPath *string `json:"json_path,omitempty"`
+	} `json:"attributes,omitempty"`
+
 	// ConditionType Grouping condition for the alert group
 	ConditionType string `json:"condition_type"`
 
@@ -7151,7 +7163,14 @@ type AlertGroup struct {
 	Name string `json:"name"`
 
 	// Slug The slug of the alert group
-	Slug string `json:"slug"`
+	Slug    string `json:"slug"`
+	Targets *[]struct {
+		// TargetId id for the Group, Service or EscalationPolicy
+		TargetId *openapi_types.UUID `json:"target_id,omitempty"`
+
+		// TargetType The type of the target.
+		TargetType *AlertGroupTargetsTargetType `json:"target_type,omitempty"`
+	} `json:"targets,omitempty"`
 
 	// TimeWindow Time window for the alert grouping
 	TimeWindow int `json:"time_window"`
@@ -7159,6 +7178,9 @@ type AlertGroup struct {
 	// UpdatedAt Date of last update
 	UpdatedAt string `json:"updated_at"`
 }
+
+// AlertGroupTargetsTargetType The type of the target.
+type AlertGroupTargetsTargetType string
 
 // AlertGroupList defines model for alert_group_list.
 type AlertGroupList struct {
@@ -11897,14 +11919,10 @@ type NewAlertDataType string
 type NewAlertGroup struct {
 	Data struct {
 		Attributes struct {
-			// AlertGroupTargetsAttributes Attributes for alert group targets
-			AlertGroupTargetsAttributes struct {
-				// TargetId id for the Group, Service or EscalationPolicy
-				TargetId *openapi_types.UUID `json:"target_id,omitempty"`
-
-				// TargetType The type of the target.
-				TargetType *NewAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType `json:"target_type,omitempty"`
-			} `json:"alert_group_targets_attributes"`
+			Attributes *[]struct {
+				// JsonPath The JSON path to the value to group by.
+				JsonPath *string `json:"json_path,omitempty"`
+			} `json:"attributes,omitempty"`
 
 			// ConditionType Group alerts when ANY or ALL of the fields are matching.
 			ConditionType *NewAlertGroupDataAttributesConditionType `json:"condition_type,omitempty"`
@@ -11919,7 +11937,14 @@ type NewAlertGroup struct {
 			GroupByAlertUrgency *NewAlertGroupDataAttributesGroupByAlertUrgency `json:"group_by_alert_urgency,omitempty"`
 
 			// Name The name of the alert group
-			Name string `json:"name"`
+			Name    string `json:"name"`
+			Targets []struct {
+				// TargetId id for the Group, Service or EscalationPolicy
+				TargetId *openapi_types.UUID `json:"target_id,omitempty"`
+
+				// TargetType The type of the target.
+				TargetType *NewAlertGroupDataAttributesTargetsTargetType `json:"target_type,omitempty"`
+			} `json:"targets"`
 
 			// TimeWindow The length of time an Alert Group should stay open and accept new alerts
 			TimeWindow *int `json:"time_window,omitempty"`
@@ -11927,9 +11952,6 @@ type NewAlertGroup struct {
 		Type NewAlertGroupDataType `json:"type"`
 	} `json:"data"`
 }
-
-// NewAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType The type of the target.
-type NewAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType string
 
 // NewAlertGroupDataAttributesConditionType Group alerts when ANY or ALL of the fields are matching.
 type NewAlertGroupDataAttributesConditionType string
@@ -11939,6 +11961,9 @@ type NewAlertGroupDataAttributesGroupByAlertTitle int
 
 // NewAlertGroupDataAttributesGroupByAlertUrgency Whether the alerts should be grouped by urgencies.
 type NewAlertGroupDataAttributesGroupByAlertUrgency int
+
+// NewAlertGroupDataAttributesTargetsTargetType The type of the target.
+type NewAlertGroupDataAttributesTargetsTargetType string
 
 // NewAlertGroupDataType defines model for NewAlertGroup.Data.Type.
 type NewAlertGroupDataType string
@@ -17144,14 +17169,10 @@ type UpdateAirtableTableRecordTaskParamsTaskType string
 type UpdateAlertGroup struct {
 	Data struct {
 		Attributes struct {
-			// AlertGroupTargetsAttributes Attributes for alert group targets
-			AlertGroupTargetsAttributes *struct {
-				// TargetId id for the Group, Service or EscalationPolicy
-				TargetId *openapi_types.UUID `json:"target_id,omitempty"`
-
-				// TargetType The type of the target.
-				TargetType *UpdateAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType `json:"target_type,omitempty"`
-			} `json:"alert_group_targets_attributes,omitempty"`
+			Attributes *[]struct {
+				// JsonPath The JSON path to the value to group by.
+				JsonPath *string `json:"json_path,omitempty"`
+			} `json:"attributes,omitempty"`
 
 			// ConditionType Group alerts when ANY or ALL of the fields are matching.
 			ConditionType *UpdateAlertGroupDataAttributesConditionType `json:"condition_type,omitempty"`
@@ -17166,7 +17187,14 @@ type UpdateAlertGroup struct {
 			GroupByAlertUrgency *UpdateAlertGroupDataAttributesGroupByAlertUrgency `json:"group_by_alert_urgency,omitempty"`
 
 			// Name The name of the alert group
-			Name *string `json:"name,omitempty"`
+			Name    *string `json:"name,omitempty"`
+			Targets *[]struct {
+				// TargetId id for the Group, Service or EscalationPolicy
+				TargetId *openapi_types.UUID `json:"target_id,omitempty"`
+
+				// TargetType The type of the target.
+				TargetType *UpdateAlertGroupDataAttributesTargetsTargetType `json:"target_type,omitempty"`
+			} `json:"targets,omitempty"`
 
 			// TimeWindow The length of time an Alert Group should stay open and accept new alerts
 			TimeWindow *int `json:"time_window,omitempty"`
@@ -17174,9 +17202,6 @@ type UpdateAlertGroup struct {
 		Type UpdateAlertGroupDataType `json:"type"`
 	} `json:"data"`
 }
-
-// UpdateAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType The type of the target.
-type UpdateAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType string
 
 // UpdateAlertGroupDataAttributesConditionType Group alerts when ANY or ALL of the fields are matching.
 type UpdateAlertGroupDataAttributesConditionType string
@@ -17186,6 +17211,9 @@ type UpdateAlertGroupDataAttributesGroupByAlertTitle int
 
 // UpdateAlertGroupDataAttributesGroupByAlertUrgency Whether the alerts should be grouped by urgencies.
 type UpdateAlertGroupDataAttributesGroupByAlertUrgency int
+
+// UpdateAlertGroupDataAttributesTargetsTargetType The type of the target.
+type UpdateAlertGroupDataAttributesTargetsTargetType string
 
 // UpdateAlertGroupDataType defines model for UpdateAlertGroup.Data.Type.
 type UpdateAlertGroupDataType string

@@ -19,6 +19,8 @@ type AlertGroup struct {
   TimeWindow int `jsonapi:"attr,time_window,omitempty"`
   GroupByAlertTitle *bool `jsonapi:"attr,group_by_alert_title,omitempty"`
   GroupByAlertUrgency *bool `jsonapi:"attr,group_by_alert_urgency,omitempty"`
+  Targets []interface{} `jsonapi:"attr,targets,omitempty"`
+  Attributes []interface{} `jsonapi:"attr,attributes,omitempty"`
   DeletedAt string `jsonapi:"attr,deleted_at,omitempty"`
 }
 

@@ -17,9 +17,11 @@ description: |-
 ### Required
 
 - `name` (String) The name of the alert group
+- `targets` (Block List, Min: 1) (see [below for nested schema](#nestedblock--targets))
 
 ### Optional
 
+- `attributes` (Block List) (see [below for nested schema](#nestedblock--attributes))
 - `condition_type` (String) Grouping condition for the alert group
 - `deleted_at` (String) Date or deletion
 - `description` (String) The description of the alert group
@@ -31,3 +33,19 @@ description: |-
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--targets"></a>
+### Nested Schema for `targets`
+
+Optional:
+
+- `target_id` (String) id for the Group, Service or EscalationPolicy
+- `target_type` (String) The type of the target.. Value must be one of `Group`, `Service`, `EscalationPolicy`.
+
+
+<a id="nestedblock--attributes"></a>
+### Nested Schema for `attributes`
+
+Optional:
+
+- `json_path` (String) The JSON path to the value to group by.
