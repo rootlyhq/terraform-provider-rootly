@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.17.1] -- 2025-01-10
+
+- Fix `rootly_alerts_source` `sourceable_attributes` schema
+
 ## [2.17.0] -- 2025-01-09
 
 - Add `rootly_alerts_source` resource.
