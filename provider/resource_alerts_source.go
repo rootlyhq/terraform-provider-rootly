@@ -69,13 +69,48 @@ func resourceAlertsSource() *schema.Resource {
 			},
 
 			"sourceable_attributes": &schema.Schema{
-				Type: schema.TypeMap,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
+				Type:     schema.TypeList,
+				Optional: true,
+				MinItems: 0,
+				MaxItems: 1,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"auto_resolve": &schema.Schema{
+							Type:     schema.TypeBool,
+							Default:  false,
+							Required: false,
+							Optional: true,
+						},
+
+						"resolve_state": &schema.Schema{
+							Type:        schema.TypeString,
+							Required:    false,
+							Optional:    true,
+							Description: "This value is matched with the value extracted from alerts payload using JSON path in field_mappings_attributes",
+						},
+
+						"field_mappings_attributes": &schema.Schema{
+							Type:     schema.TypeList,
+							Optional: true,
+							MinItems: 0,
+							MaxItems: 25,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"field": &schema.Schema{
+										Type:     schema.TypeString,
+										Required: false,
+										Optional: true,
+									},
+									"json_path": &schema.Schema{
+										Type:     schema.TypeString,
+										Required: false,
+										Optional: true,
+									},
+								},
+							},
+						},
+					},
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
 				Description: "Additional attributes specific to certain alert sources (e.g., generic_webhook), encapsulating source-specific configurations or details",
 			},
 		},
@@ -105,7 +140,7 @@ func resourceAlertsSourceCreate(ctx context.Context, d *schema.ResourceData, met
 		s.WebhookEndpoint = value.(string)
 	}
 	if value, ok := d.GetOkExists("sourceable_attributes"); ok {
-		s.SourceableAttributes = value.(map[string]interface{})
+		s.SourceableAttributes = value.([]interface{})[0].(map[string]interface{})
 	}
 
 	res, err := c.CreateAlertsSource(s)
@@ -141,7 +176,9 @@ func resourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, meta 
 	d.Set("status", item.Status)
 	d.Set("secret", item.Secret)
 	d.Set("webhook_endpoint", item.WebhookEndpoint)
-	d.Set("sourceable_attributes", item.SourceableAttributes)
+	tps := make([]interface{}, 1, 1)
+	tps[0] = item.SourceableAttributes
+	d.Set("sourceable_attributes", tps)
 
 	return nil
 }
@@ -168,7 +205,10 @@ func resourceAlertsSourceUpdate(ctx context.Context, d *schema.ResourceData, met
 		s.WebhookEndpoint = d.Get("webhook_endpoint").(string)
 	}
 	if d.HasChange("sourceable_attributes") {
-		s.SourceableAttributes = d.Get("sourceable_attributes").(map[string]interface{})
+		tps := d.Get("sourceable_attributes").([]interface{})
+		for _, tpsi := range tps {
+			s.SourceableAttributes = tpsi.(map[string]interface{})
+		}
 	}
 
 	_, err := c.UpdateAlertsSource(d.Id(), s)

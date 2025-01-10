@@ -22,10 +22,27 @@ description: |-
 
 - `secret` (String) A secret key used to authenticate incoming requests to this alerts source
 - `source_type` (String) The alert source type
-- `sourceable_attributes` (Map of String) Additional attributes specific to certain alert sources (e.g., generic_webhook), encapsulating source-specific configurations or details
+- `sourceable_attributes` (Block List, Max: 1) Additional attributes specific to certain alert sources (e.g., generic_webhook), encapsulating source-specific configurations or details (see [below for nested schema](#nestedblock--sourceable_attributes))
 - `status` (String) The current status of the alert source
 - `webhook_endpoint` (String) The URL endpoint of the alert source
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--sourceable_attributes"></a>
+### Nested Schema for `sourceable_attributes`
+
+Optional:
+
+- `auto_resolve` (Boolean)
+- `field_mappings_attributes` (Block List, Max: 25) (see [below for nested schema](#nestedblock--sourceable_attributes--field_mappings_attributes))
+- `resolve_state` (String) This value is matched with the value extracted from alerts payload using JSON path in field_mappings_attributes
+
+<a id="nestedblock--sourceable_attributes--field_mappings_attributes"></a>
+### Nested Schema for `sourceable_attributes.field_mappings_attributes`
+
+Optional:
+
+- `field` (String)
+- `json_path` (String)
