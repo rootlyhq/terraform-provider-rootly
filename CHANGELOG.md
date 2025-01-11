@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.18.2] -- 2025-01-10
+
+- Updated examples.
+
 ## [2.18.1] -- 2025-01-10
 
 - Add alert template fields to `rootly_alerts_source`.
