@@ -1,7 +1,6 @@
 resource "rootly_alerts_source" "example" {
   name = "Generic webhook source"
   source_type = "generic_webhook"
-  alert_urgency_id = "066ee186-fc93-45ce-a316-c2a9ac788880"
 
   alert_template_attributes {
     title = "Server exploded"
