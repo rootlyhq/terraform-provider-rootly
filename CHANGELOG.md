@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.17.2] -- TBD
+## [2.18.0] -- 2025-01-10
 
 - Add `rootly_alert_group` resource.
 
