@@ -1,28 +1,5 @@
-package provider
-
-import (
-	"testing"
-
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-)
-
-func TestAccResourceAlertsSource(t *testing.T) {
-	resource.UnitTest(t, resource.TestCase{
-		PreCheck: func() {
-			testAccPreCheck(t)
-		},
-		ProviderFactories: providerFactories,
-		Steps: []resource.TestStep{
-			{
-				Config: testAccResourceAlertsSource,
-			},
-		},
-	})
-}
-
-const testAccResourceAlertsSource = `
-resource "rootly_alerts_source" "test" {
-  name = "Generic!!!!!!!!!!"
+resource "rootly_alerts_source" "example" {
+  name = "Generic webhook source"
   source_type = "generic_webhook"
   alert_urgency_id = "066ee186-fc93-45ce-a316-c2a9ac788880"
 
@@ -47,4 +24,4 @@ resource "rootly_alerts_source" "test" {
     }
   }
 }
-`
+

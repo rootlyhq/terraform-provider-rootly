@@ -263,16 +263,16 @@ func resourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, meta 
 		field_mappings = append(field_mappings, field_mapping)
 	}
 	sourceables[0] = map[string]interface{}{
-		"auto_resolve": item.SourceableAttributes["auto_resolve"],
-		"resolve_state": item.SourceableAttributes["resolve_state"],
+		"auto_resolve":              item.SourceableAttributes["auto_resolve"],
+		"resolve_state":             item.SourceableAttributes["resolve_state"],
 		"field_mappings_attributes": field_mappings,
 	}
 	d.Set("sourceable_attributes", sourceables)
 
 	alert_templates := make([]interface{}, 1, 1)
 	alert_templates[0] = map[string]interface{}{
-		"title": item.AlertTemplateAttributes["title"],
-		"description": item.AlertTemplateAttributes["description"],
+		"title":        item.AlertTemplateAttributes["title"],
+		"description":  item.AlertTemplateAttributes["description"],
 		"external_url": item.AlertTemplateAttributes["external_url"],
 	}
 	d.Set("alert_template_attributes", alert_templates)

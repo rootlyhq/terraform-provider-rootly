@@ -20,6 +20,9 @@ description: |-
 
 ### Optional
 
+- `alert_source_urgency_rules_attributes` (Block List) (see [below for nested schema](#nestedblock--alert_source_urgency_rules_attributes))
+- `alert_template_attributes` (Block List, Max: 1) (see [below for nested schema](#nestedblock--alert_template_attributes))
+- `alert_urgency_id` (String) The alert urgency ID
 - `secret` (String) A secret key used to authenticate incoming requests to this alerts source
 - `source_type` (String) The alert source type
 - `sourceable_attributes` (Block List, Max: 1) Additional attributes specific to certain alert sources (e.g., generic_webhook), encapsulating source-specific configurations or details (see [below for nested schema](#nestedblock--sourceable_attributes))
@@ -29,6 +32,27 @@ description: |-
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--alert_source_urgency_rules_attributes"></a>
+### Nested Schema for `alert_source_urgency_rules_attributes`
+
+Required:
+
+- `alert_urgency_id` (String)
+- `json_path` (String)
+- `operator` (String)
+- `value` (String)
+
+
+<a id="nestedblock--alert_template_attributes"></a>
+### Nested Schema for `alert_template_attributes`
+
+Optional:
+
+- `description` (String)
+- `external_url` (String)
+- `title` (String)
+
 
 <a id="nestedblock--sourceable_attributes"></a>
 ### Nested Schema for `sourceable_attributes`

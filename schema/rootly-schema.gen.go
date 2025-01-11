@@ -7337,6 +7337,9 @@ type AlertUrgencyResponseDataType string
 
 // AlertsSource defines model for alerts_source.
 type AlertsSource struct {
+	// AlertUrgencyId ID for the default alert urgency assigned to this alert source
+	AlertUrgencyId *string `json:"alert_urgency_id,omitempty"`
+
 	// CreatedAt Date of creation
 	CreatedAt string `json:"created_at"`
 
@@ -12003,6 +12006,16 @@ type NewAlertsSource struct {
 				// Value Value that the extracted payload data is compared to using the specified operator to determine a match
 				Value *string `json:"value,omitempty"`
 			} `json:"alert_source_urgency_rules_attributes,omitempty"`
+			AlertTemplateAttributes *struct {
+				// Description The alert description.
+				Description *string `json:"description"`
+
+				// ExternalUrl The alert URL.
+				ExternalUrl *string `json:"external_url"`
+
+				// Title The alert title.
+				Title *string `json:"title"`
+			} `json:"alert_template_attributes,omitempty"`
 
 			// AlertUrgencyId ID for the default alert urgency assigned to this alert source
 			AlertUrgencyId *string `json:"alert_urgency_id,omitempty"`
@@ -17253,6 +17266,16 @@ type UpdateAlertsSource struct {
 				// Value Value that the extracted payload data is compared to using the specified operator to determine a match
 				Value *string `json:"value,omitempty"`
 			} `json:"alert_source_urgency_rules_attributes,omitempty"`
+			AlertTemplateAttributes *struct {
+				// Description The alert description.
+				Description *string `json:"description"`
+
+				// ExternalUrl The alert URL.
+				ExternalUrl *string `json:"external_url"`
+
+				// Title The alert title.
+				Title *string `json:"title"`
+			} `json:"alert_template_attributes,omitempty"`
 
 			// AlertUrgencyId ID for the default alert urgency assigned to this alert source
 			AlertUrgencyId *string `json:"alert_urgency_id,omitempty"`
