@@ -567,6 +567,18 @@ const (
 	AlertTriggerParamsAlertConditionSourceUNSET        AlertTriggerParamsAlertConditionSource = "UNSET"
 )
 
+// Defines values for AlertTriggerParamsAlertConditionStatus.
+const (
+	AlertTriggerParamsAlertConditionStatusANY          AlertTriggerParamsAlertConditionStatus = "ANY"
+	AlertTriggerParamsAlertConditionStatusCONTAINS     AlertTriggerParamsAlertConditionStatus = "CONTAINS"
+	AlertTriggerParamsAlertConditionStatusCONTAINSALL  AlertTriggerParamsAlertConditionStatus = "CONTAINS_ALL"
+	AlertTriggerParamsAlertConditionStatusCONTAINSNONE AlertTriggerParamsAlertConditionStatus = "CONTAINS_NONE"
+	AlertTriggerParamsAlertConditionStatusIS           AlertTriggerParamsAlertConditionStatus = "IS"
+	AlertTriggerParamsAlertConditionStatusNONE         AlertTriggerParamsAlertConditionStatus = "NONE"
+	AlertTriggerParamsAlertConditionStatusSET          AlertTriggerParamsAlertConditionStatus = "SET"
+	AlertTriggerParamsAlertConditionStatusUNSET        AlertTriggerParamsAlertConditionStatus = "UNSET"
+)
+
 // Defines values for AlertTriggerParamsTriggerType.
 const (
 	AlertTriggerParamsTriggerTypeAlert AlertTriggerParamsTriggerType = "alert"
@@ -574,7 +586,8 @@ const (
 
 // Defines values for AlertTriggerParamsTriggers.
 const (
-	AlertTriggerParamsTriggersAlertCreated AlertTriggerParamsTriggers = "alert_created"
+	AlertTriggerParamsTriggersAlertCreated       AlertTriggerParamsTriggers = "alert_created"
+	AlertTriggerParamsTriggersAlertStatusUpdated AlertTriggerParamsTriggers = "alert_status_updated"
 )
 
 // Defines values for AlertUrgencyListDataType.
@@ -6222,14 +6235,14 @@ const (
 
 // Defines values for WorkflowFormFieldConditionIncidentCondition.
 const (
-	ANY          WorkflowFormFieldConditionIncidentCondition = "ANY"
-	CONTAINS     WorkflowFormFieldConditionIncidentCondition = "CONTAINS"
-	CONTAINSALL  WorkflowFormFieldConditionIncidentCondition = "CONTAINS_ALL"
-	CONTAINSNONE WorkflowFormFieldConditionIncidentCondition = "CONTAINS_NONE"
-	IS           WorkflowFormFieldConditionIncidentCondition = "IS"
-	NONE         WorkflowFormFieldConditionIncidentCondition = "NONE"
-	SET          WorkflowFormFieldConditionIncidentCondition = "SET"
-	UNSET        WorkflowFormFieldConditionIncidentCondition = "UNSET"
+	WorkflowFormFieldConditionIncidentConditionANY          WorkflowFormFieldConditionIncidentCondition = "ANY"
+	WorkflowFormFieldConditionIncidentConditionCONTAINS     WorkflowFormFieldConditionIncidentCondition = "CONTAINS"
+	WorkflowFormFieldConditionIncidentConditionCONTAINSALL  WorkflowFormFieldConditionIncidentCondition = "CONTAINS_ALL"
+	WorkflowFormFieldConditionIncidentConditionCONTAINSNONE WorkflowFormFieldConditionIncidentCondition = "CONTAINS_NONE"
+	WorkflowFormFieldConditionIncidentConditionIS           WorkflowFormFieldConditionIncidentCondition = "IS"
+	WorkflowFormFieldConditionIncidentConditionNONE         WorkflowFormFieldConditionIncidentCondition = "NONE"
+	WorkflowFormFieldConditionIncidentConditionSET          WorkflowFormFieldConditionIncidentCondition = "SET"
+	WorkflowFormFieldConditionIncidentConditionUNSET        WorkflowFormFieldConditionIncidentCondition = "UNSET"
 )
 
 // Defines values for WorkflowFormFieldConditionListDataType.
@@ -6470,40 +6483,40 @@ const (
 
 // Defines values for ListIncidentsParamsInclude.
 const (
-	ListIncidentsParamsIncludeActionItems             ListIncidentsParamsInclude = "action_items"
-	ListIncidentsParamsIncludeCauses                  ListIncidentsParamsInclude = "causes"
-	ListIncidentsParamsIncludeEnvironments            ListIncidentsParamsInclude = "environments"
-	ListIncidentsParamsIncludeEvents                  ListIncidentsParamsInclude = "events"
-	ListIncidentsParamsIncludeFeedbacks               ListIncidentsParamsInclude = "feedbacks"
-	ListIncidentsParamsIncludeFormFieldSelections     ListIncidentsParamsInclude = "form_field_selections"
-	ListIncidentsParamsIncludeFunctionalities         ListIncidentsParamsInclude = "functionalities"
-	ListIncidentsParamsIncludeGroups                  ListIncidentsParamsInclude = "groups"
-	ListIncidentsParamsIncludeIncidentPostMortem      ListIncidentsParamsInclude = "incident_post_mortem"
-	ListIncidentsParamsIncludeIncidentRoleAssignments ListIncidentsParamsInclude = "incident_role_assignments"
-	ListIncidentsParamsIncludeIncidentSlackMessages   ListIncidentsParamsInclude = "incident_slack_messages"
-	ListIncidentsParamsIncludeIncidentTypes           ListIncidentsParamsInclude = "incident_types"
-	ListIncidentsParamsIncludeServices                ListIncidentsParamsInclude = "services"
-	ListIncidentsParamsIncludeSubStatuses             ListIncidentsParamsInclude = "sub_statuses"
-	ListIncidentsParamsIncludeSubscribers             ListIncidentsParamsInclude = "subscribers"
+	ListIncidentsParamsIncludeActionItems           ListIncidentsParamsInclude = "action_items"
+	ListIncidentsParamsIncludeCauses                ListIncidentsParamsInclude = "causes"
+	ListIncidentsParamsIncludeCustomFieldSelections ListIncidentsParamsInclude = "custom_field_selections"
+	ListIncidentsParamsIncludeEnvironments          ListIncidentsParamsInclude = "environments"
+	ListIncidentsParamsIncludeEvents                ListIncidentsParamsInclude = "events"
+	ListIncidentsParamsIncludeFeedbacks             ListIncidentsParamsInclude = "feedbacks"
+	ListIncidentsParamsIncludeFunctionalities       ListIncidentsParamsInclude = "functionalities"
+	ListIncidentsParamsIncludeGroups                ListIncidentsParamsInclude = "groups"
+	ListIncidentsParamsIncludeIncidentPostMortem    ListIncidentsParamsInclude = "incident_post_mortem"
+	ListIncidentsParamsIncludeIncidentSlackMessages ListIncidentsParamsInclude = "incident_slack_messages"
+	ListIncidentsParamsIncludeIncidentTypes         ListIncidentsParamsInclude = "incident_types"
+	ListIncidentsParamsIncludeRoles                 ListIncidentsParamsInclude = "roles"
+	ListIncidentsParamsIncludeServices              ListIncidentsParamsInclude = "services"
+	ListIncidentsParamsIncludeSubStatuses           ListIncidentsParamsInclude = "sub_statuses"
+	ListIncidentsParamsIncludeSubscribers           ListIncidentsParamsInclude = "subscribers"
 )
 
 // Defines values for GetIncidentParamsInclude.
 const (
-	GetIncidentParamsIncludeActionItems             GetIncidentParamsInclude = "action_items"
-	GetIncidentParamsIncludeCauses                  GetIncidentParamsInclude = "causes"
-	GetIncidentParamsIncludeEnvironments            GetIncidentParamsInclude = "environments"
-	GetIncidentParamsIncludeEvents                  GetIncidentParamsInclude = "events"
-	GetIncidentParamsIncludeFeedbacks               GetIncidentParamsInclude = "feedbacks"
-	GetIncidentParamsIncludeFormFieldSelections     GetIncidentParamsInclude = "form_field_selections"
-	GetIncidentParamsIncludeFunctionalities         GetIncidentParamsInclude = "functionalities"
-	GetIncidentParamsIncludeGroups                  GetIncidentParamsInclude = "groups"
-	GetIncidentParamsIncludeIncidentPostMortem      GetIncidentParamsInclude = "incident_post_mortem"
-	GetIncidentParamsIncludeIncidentRoleAssignments GetIncidentParamsInclude = "incident_role_assignments"
-	GetIncidentParamsIncludeIncidentSlackMessages   GetIncidentParamsInclude = "incident_slack_messages"
-	GetIncidentParamsIncludeIncidentTypes           GetIncidentParamsInclude = "incident_types"
-	GetIncidentParamsIncludeServices                GetIncidentParamsInclude = "services"
-	GetIncidentParamsIncludeSubStatuses             GetIncidentParamsInclude = "sub_statuses"
-	GetIncidentParamsIncludeSubscribers             GetIncidentParamsInclude = "subscribers"
+	GetIncidentParamsIncludeActionItems           GetIncidentParamsInclude = "action_items"
+	GetIncidentParamsIncludeCauses                GetIncidentParamsInclude = "causes"
+	GetIncidentParamsIncludeCustomFieldSelections GetIncidentParamsInclude = "custom_field_selections"
+	GetIncidentParamsIncludeEnvironments          GetIncidentParamsInclude = "environments"
+	GetIncidentParamsIncludeEvents                GetIncidentParamsInclude = "events"
+	GetIncidentParamsIncludeFeedbacks             GetIncidentParamsInclude = "feedbacks"
+	GetIncidentParamsIncludeFunctionalities       GetIncidentParamsInclude = "functionalities"
+	GetIncidentParamsIncludeGroups                GetIncidentParamsInclude = "groups"
+	GetIncidentParamsIncludeIncidentPostMortem    GetIncidentParamsInclude = "incident_post_mortem"
+	GetIncidentParamsIncludeIncidentSlackMessages GetIncidentParamsInclude = "incident_slack_messages"
+	GetIncidentParamsIncludeIncidentTypes         GetIncidentParamsInclude = "incident_types"
+	GetIncidentParamsIncludeRoles                 GetIncidentParamsInclude = "roles"
+	GetIncidentParamsIncludeServices              GetIncidentParamsInclude = "services"
+	GetIncidentParamsIncludeSubStatuses           GetIncidentParamsInclude = "sub_statuses"
+	GetIncidentParamsIncludeSubscribers           GetIncidentParamsInclude = "subscribers"
 )
 
 // Defines values for ListIncidentSubStatusesParamsInclude.
@@ -7260,12 +7273,15 @@ type AlertTriggerParams struct {
 	AlertConditionPayloadUseRegexp *bool                                    `json:"alert_condition_payload_use_regexp,omitempty"`
 	AlertConditionSource           *AlertTriggerParamsAlertConditionSource  `json:"alert_condition_source,omitempty"`
 	AlertConditionSourceUseRegexp  *bool                                    `json:"alert_condition_source_use_regexp,omitempty"`
+	AlertConditionStatus           *AlertTriggerParamsAlertConditionStatus  `json:"alert_condition_status,omitempty"`
+	AlertConditionStatusUseRegexp  *bool                                    `json:"alert_condition_status_use_regexp,omitempty"`
 	AlertLabels                    *[]string                                `json:"alert_labels,omitempty"`
 	AlertPayload                   *[]string                                `json:"alert_payload,omitempty"`
 
 	// AlertQueryPayload You can use jsonpath syntax. eg: $.incident.teams[*]
 	AlertQueryPayload *string                       `json:"alert_query_payload"`
 	AlertSources      *[]string                     `json:"alert_sources,omitempty"`
+	AlertStatuses     *[]string                     `json:"alert_statuses,omitempty"`
 	TriggerType       AlertTriggerParamsTriggerType `json:"trigger_type"`
 	Triggers          *[]AlertTriggerParamsTriggers `json:"triggers,omitempty"`
 }
@@ -7281,6 +7297,9 @@ type AlertTriggerParamsAlertConditionPayload string
 
 // AlertTriggerParamsAlertConditionSource defines model for AlertTriggerParams.AlertConditionSource.
 type AlertTriggerParamsAlertConditionSource string
+
+// AlertTriggerParamsAlertConditionStatus defines model for AlertTriggerParams.AlertConditionStatus.
+type AlertTriggerParamsAlertConditionStatus string
 
 // AlertTriggerParamsTriggerType defines model for AlertTriggerParams.TriggerType.
 type AlertTriggerParamsTriggerType string
@@ -9504,6 +9523,9 @@ type EscalationPath struct {
 
 	// NotificationType Notification rule type
 	NotificationType string `json:"notification_type"`
+
+	// Position The position of this path in the paths for this EP.
+	Position *int `json:"position,omitempty"`
 
 	// Repeat Whether this path should be repeated until someone acknowledges the alert
 	Repeat *bool `json:"repeat"`
@@ -12402,6 +12424,9 @@ type NewEscalationPath struct {
 
 			// NotificationType Notification rule type to be used
 			NotificationType *NewEscalationPathDataAttributesNotificationType `json:"notification_type,omitempty"`
+
+			// Position The position of this path in the paths for this EP.
+			Position *int `json:"position,omitempty"`
 
 			// Repeat Whether this path should be repeated until someone acknowledges the alert
 			Repeat *bool `json:"repeat"`
@@ -17724,6 +17749,9 @@ type UpdateEscalationPath struct {
 
 			// NotificationType Position of the escalation policy level
 			NotificationType *UpdateEscalationPathDataAttributesNotificationType `json:"notification_type,omitempty"`
+
+			// Position The position of this path in the paths for this EP.
+			Position *int `json:"position,omitempty"`
 
 			// Repeat Whether this path should be repeated until someone acknowledges the alert
 			Repeat *bool `json:"repeat"`

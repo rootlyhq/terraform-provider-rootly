@@ -24,6 +24,7 @@ description: |-
 - `default` (Boolean) Whether this escalation path is the default path. Value must be one of true or false
 - `escalation_policy_id` (String) The ID of the escalation policy
 - `notification_type` (String) Notification rule type
+- `position` (Number) The position of this path in the paths for this EP.
 - `repeat` (Boolean) Whether this path should be repeated until someone acknowledges the alert. Value must be one of true or false
 - `repeat_count` (Number) The number of times this path will be executed until someone acknowledges the alert
 

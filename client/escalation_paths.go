@@ -16,6 +16,7 @@ type EscalationPath struct {
   Default *bool `jsonapi:"attr,default,omitempty"`
   NotificationType string `jsonapi:"attr,notification_type,omitempty"`
   EscalationPolicyId string `jsonapi:"attr,escalation_policy_id,omitempty"`
+  Position int `jsonapi:"attr,position,omitempty"`
   Repeat *bool `jsonapi:"attr,repeat,omitempty"`
   RepeatCount int `jsonapi:"attr,repeat_count,omitempty"`
   Rules []interface{} `jsonapi:"attr,rules,omitempty"`

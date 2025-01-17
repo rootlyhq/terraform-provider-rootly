@@ -59,6 +59,15 @@ func resourceEscalationPath() *schema.Resource {
 				Description: "The ID of the escalation policy",
 			},
 
+			"position": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The position of this path in the paths for this EP.",
+			},
+
 			"repeat": &schema.Schema{
 				Type:        schema.TypeBool,
 				Computed:    true,
@@ -166,6 +175,9 @@ func resourceEscalationPathCreate(ctx context.Context, d *schema.ResourceData, m
 	if value, ok := d.GetOkExists("escalation_policy_id"); ok {
 		s.EscalationPolicyId = value.(string)
 	}
+	if value, ok := d.GetOkExists("position"); ok {
+		s.Position = value.(int)
+	}
 	if value, ok := d.GetOkExists("repeat"); ok {
 		s.Repeat = tools.Bool(value.(bool))
 	}
@@ -208,6 +220,7 @@ func resourceEscalationPathRead(ctx context.Context, d *schema.ResourceData, met
 	d.Set("default", item.Default)
 	d.Set("notification_type", item.NotificationType)
 	d.Set("escalation_policy_id", item.EscalationPolicyId)
+	d.Set("position", item.Position)
 	d.Set("repeat", item.Repeat)
 	d.Set("repeat_count", item.RepeatCount)
 	d.Set("rules", item.Rules)
@@ -232,6 +245,9 @@ func resourceEscalationPathUpdate(ctx context.Context, d *schema.ResourceData, m
 	}
 	if d.HasChange("escalation_policy_id") {
 		s.EscalationPolicyId = d.Get("escalation_policy_id").(string)
+	}
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
 	}
 	if d.HasChange("repeat") {
 		s.Repeat = tools.Bool(d.Get("repeat").(bool))

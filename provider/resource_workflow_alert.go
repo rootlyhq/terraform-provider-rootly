@@ -145,7 +145,7 @@ func resourceWorkflowAlert() *schema.Resource {
 							Computed:         true,
 							Required:         false,
 							Optional:         true,
-							Description:      "Actions that trigger the workflow. Value must be one of `alert_created`.",
+							Description:      "Actions that trigger the workflow. Value must be one of `alert_created`, `alert_status_updated`.",
 						},
 
 						"alert_condition": &schema.Schema{
@@ -198,6 +198,34 @@ func resourceWorkflowAlert() *schema.Resource {
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one of true or false",
+						},
+
+						"alert_condition_status": &schema.Schema{
+							Type:        schema.TypeString,
+							Default:     "ANY",
+							Required:    false,
+							Optional:    true,
+							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+						},
+
+						"alert_condition_status_use_regexp": &schema.Schema{
+							Type:        schema.TypeBool,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Description: "Value must be one of true or false",
+						},
+
+						"alert_statuses": &schema.Schema{
+							Type: schema.TypeList,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "",
 						},
 
 						"alert_labels": &schema.Schema{
