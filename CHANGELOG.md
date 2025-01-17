@@ -1,6 +1,6 @@
 # Changelog
 
-## [TBD]
+## [2.18.4] -- 2025-01-17
 
 - Fix `slack_user_group` field schema for `rootly_schedule`
 
