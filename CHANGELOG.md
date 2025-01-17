@@ -1,5 +1,9 @@
 # Changelog
 
+## [TBD]
+
+- Fix `slack_user_group` field schema for `rootly_schedule`
+
 ## [2.18.3] -- 2025-01-16
 
 - Add `position` field to `rootly_escalation_path`

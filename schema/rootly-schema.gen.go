@@ -13894,7 +13894,14 @@ type NewSchedule struct {
 			Name string `json:"name"`
 
 			// OwnerUserId ID of the owner of the schedule
-			OwnerUserId *int `json:"owner_user_id"`
+			OwnerUserId    *int `json:"owner_user_id"`
+			SlackUserGroup *struct {
+				// Id Slack channel ID
+				Id *string `json:"id,omitempty"`
+
+				// Name Slack channel name
+				Name *string `json:"name,omitempty"`
+			} `json:"slack_user_group,omitempty"`
 		} `json:"attributes"`
 		Type NewScheduleDataType `json:"type"`
 	} `json:"data"`
@@ -15915,7 +15922,13 @@ type Schedule struct {
 	OwnerUserId *int `json:"owner_user_id"`
 
 	// SlackUserGroup Synced slack group of the schedule
-	SlackUserGroup *string `json:"slack_user_group"`
+	SlackUserGroup *struct {
+		// Id Slack channel ID
+		Id *string `json:"id,omitempty"`
+
+		// Name Slack channel name
+		Name *string `json:"name,omitempty"`
+	} `json:"slack_user_group"`
 
 	// UpdatedAt Date of last update
 	UpdatedAt string `json:"updated_at"`
@@ -19718,7 +19731,14 @@ type UpdateSchedule struct {
 			Name *string `json:"name,omitempty"`
 
 			// OwnerUserId ID of the owner of the schedule
-			OwnerUserId *int `json:"owner_user_id"`
+			OwnerUserId    *int `json:"owner_user_id"`
+			SlackUserGroup *struct {
+				// Id Slack channel ID
+				Id *string `json:"id,omitempty"`
+
+				// Name Slack channel name
+				Name *string `json:"name,omitempty"`
+			} `json:"slack_user_group,omitempty"`
 		} `json:"attributes"`
 		Type UpdateScheduleDataType `json:"type"`
 	} `json:"data"`
