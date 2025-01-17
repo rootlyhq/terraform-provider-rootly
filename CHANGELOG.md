@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.18.3] -- 2025-01-16
+
+- Add `position` field to `rootly_escalation_path`
+
 ## [2.18.2] -- 2025-01-10
 
 - Updated examples.
