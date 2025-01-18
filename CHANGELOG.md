@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.18.5] -- 2025-01-17
+
+- Supress diff on `heartbeat` `status` field.
+
 ## [2.18.4] -- 2025-01-17
 
 - Fix `slack_user_group` field schema for `rootly_schedule`

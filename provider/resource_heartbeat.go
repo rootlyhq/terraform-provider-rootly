@@ -109,6 +109,10 @@ func resourceHeartbeat() *schema.Resource {
 				Optional:    true,
 				ForceNew:    false,
 				Description: "Value must be one of `waiting`, `active`, `expired`.",
+
+				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+					return len(old) != 0
+				},
 			},
 
 			"last_pinged_at": &schema.Schema{
