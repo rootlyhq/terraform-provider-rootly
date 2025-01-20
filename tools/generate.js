@@ -75,6 +75,7 @@ const excluded = {
     "retrospective_process",
     "retrospective_step",
     "secret",
+    "schedule", // cannot auto-generate because of schema upgrade logic
     "shift",
     "user",
     "user_notification_rule",

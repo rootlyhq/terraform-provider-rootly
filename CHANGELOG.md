@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.18.6] -- TBD
+
+- Fix tfstate schema conflict with rootly_schedule.slack_user_group.
+
 ## [2.18.5] -- 2025-01-17
 
 - Supress diff on `heartbeat` `status` field.
