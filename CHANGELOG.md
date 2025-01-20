@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.18.6] -- TBD
+## [2.18.6] -- 2025-01-20
 
 - Fix tfstate schema conflict with rootly_schedule.slack_user_group.
 
