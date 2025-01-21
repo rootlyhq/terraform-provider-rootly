@@ -277,7 +277,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
   let defaultValue;
   if (schema.default) {
     defaultValue = `Default: "${schema.default}"`;
-  } else if (schema.enum && schema.enum.length > 0) {
+  } else if (schema.enum && schema.enum.length > 0 && !schema.anyOfChild) {
     defaultValue = `Default: "${schema.enum[0]}"`;
   } else {
     defaultValue = `Computed: ${optional}`;

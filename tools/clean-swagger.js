@@ -35,6 +35,7 @@ function stripAnyOf(obj) {
             } else {
               obj.properties[child_property_key] = child.properties[child_property_key]
             }
+            obj.properties[child_property_key].anyOfChild = true
           })
         }
       })

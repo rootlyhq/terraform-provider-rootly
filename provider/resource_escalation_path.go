@@ -96,7 +96,7 @@ func resourceEscalationPath() *schema.Resource {
 
 						"rule_type": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "alert_urgency",
+							Computed:    true,
 							Required:    false,
 							Optional:    true,
 							ForceNew:    false,
@@ -134,7 +134,7 @@ func resourceEscalationPath() *schema.Resource {
 
 						"operator": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "is",
+							Computed:    true,
 							Required:    false,
 							Optional:    true,
 							ForceNew:    false,
