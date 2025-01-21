@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.18.7] -- TBD
+## [2.18.7] -- 2025-01-21
 
 - Remove rootly_escalation_path.operator default value to match API schema.
 
