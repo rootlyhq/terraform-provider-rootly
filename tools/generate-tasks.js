@@ -343,6 +343,7 @@ function genTaskSchemaProperty(property_name, property_schema, required_props) {
 							DiffSuppressFunc: tools.EqualIgnoringOrder,`;
     } else if (property_schema.items.type === "object") {
       a = `${a}
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema {
 									"id": &schema.Schema {

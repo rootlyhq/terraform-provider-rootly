@@ -74,9 +74,10 @@ func resourceWorkflowTaskSnapshotLookerLook() *schema.Resource {
 							}, false),
 						},
 						"dashboards": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
-							Required:    true,
+							Description:      "",
+							Type:             schema.TypeList,
+							Required:         true,
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"id": &schema.Schema{
@@ -96,9 +97,10 @@ func resourceWorkflowTaskSnapshotLookerLook() *schema.Resource {
 							Optional:    true,
 						},
 						"post_to_slack_channels": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
+							Description:      "",
+							Type:             schema.TypeList,
+							Optional:         true,
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"id": &schema.Schema{

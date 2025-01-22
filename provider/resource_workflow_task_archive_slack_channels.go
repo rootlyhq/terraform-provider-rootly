@@ -74,9 +74,10 @@ func resourceWorkflowTaskArchiveSlackChannels() *schema.Resource {
 							}, false),
 						},
 						"channels": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
-							Required:    true,
+							Description:      "",
+							Type:             schema.TypeList,
+							Required:         true,
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"id": &schema.Schema{

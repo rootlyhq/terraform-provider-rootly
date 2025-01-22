@@ -89,9 +89,10 @@ func resourceWorkflowTaskPageOpsgenieOnCallResponders() *schema.Resource {
 							Optional:    true,
 						},
 						"teams": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
+							Description:      "",
+							Type:             schema.TypeList,
+							Optional:         true,
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"id": &schema.Schema{
@@ -106,9 +107,10 @@ func resourceWorkflowTaskPageOpsgenieOnCallResponders() *schema.Resource {
 							},
 						},
 						"users": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
+							Description:      "",
+							Type:             schema.TypeList,
+							Optional:         true,
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"id": &schema.Schema{

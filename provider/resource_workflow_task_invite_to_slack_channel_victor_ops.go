@@ -74,9 +74,10 @@ func resourceWorkflowTaskInviteToSlackChannelVictorOps() *schema.Resource {
 							}, false),
 						},
 						"channels": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
+							Description:      "",
+							Type:             schema.TypeList,
+							Optional:         true,
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"id": &schema.Schema{

@@ -119,9 +119,10 @@ func resourceWorkflowTaskSendSlackBlocks() *schema.Resource {
 							Default: "{}",
 						},
 						"channels": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
+							Description:      "",
+							Type:             schema.TypeList,
+							Optional:         true,
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"id": &schema.Schema{
@@ -136,9 +137,10 @@ func resourceWorkflowTaskSendSlackBlocks() *schema.Resource {
 							},
 						},
 						"slack_users": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
+							Description:      "",
+							Type:             schema.TypeList,
+							Optional:         true,
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"id": &schema.Schema{
@@ -153,9 +155,10 @@ func resourceWorkflowTaskSendSlackBlocks() *schema.Resource {
 							},
 						},
 						"slack_user_groups": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
+							Description:      "",
+							Type:             schema.TypeList,
+							Optional:         true,
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"id": &schema.Schema{

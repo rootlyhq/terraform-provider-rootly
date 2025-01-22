@@ -99,9 +99,10 @@ func resourceWorkflowTaskCreateTrelloCard() *schema.Resource {
 							Required:    true,
 						},
 						"labels": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
+							Description:      "",
+							Type:             schema.TypeList,
+							Optional:         true,
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"id": &schema.Schema{
