@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.19.1] -- 2025-01-21
+
+- Ignore order when diffing list attributes in workflow task resources.
+
 ## [2.19.0] -- 2025-01-21
 
 - Add repeat condition attributes to workflow resources.
