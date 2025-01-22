@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.19.0] -- 2025-01-21
+
+- Add repeat condition attributes to workflow resources.
+- Ignore order of lists of maps when diffing configuration.
+- Add intregrations_permissions attribute to role schema.
+
 ## [2.18.7] -- 2025-01-21
 
 - Remove rootly_escalation_path.operator default value to match API schema.
