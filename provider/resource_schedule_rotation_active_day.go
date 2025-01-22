@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
 
 func resourceScheduleRotationActiveDay() *schema.Resource {
@@ -42,11 +43,12 @@ func resourceScheduleRotationActiveDay() *schema.Resource {
 			},
 
 			"active_time_attributes": &schema.Schema{
-				Type:        schema.TypeList,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				Description: "Schedule rotation active times per day",
+				Type:             schema.TypeList,
+				Computed:         false,
+				Required:         true,
+				Optional:         false,
+				Description:      "Schedule rotation active times per day",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 

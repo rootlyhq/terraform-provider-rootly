@@ -86,11 +86,12 @@ func resourceEscalationPath() *schema.Resource {
 			},
 
 			"rules": &schema.Schema{
-				Type:        schema.TypeList,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				Description: "Escalation path rules",
+				Type:             schema.TypeList,
+				Computed:         false,
+				Required:         true,
+				Optional:         false,
+				Description:      "Escalation path rules",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 

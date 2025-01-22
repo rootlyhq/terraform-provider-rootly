@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
 
 func resourceEscalationLevel() *schema.Resource {
@@ -60,11 +61,12 @@ func resourceEscalationLevel() *schema.Resource {
 			},
 
 			"notification_target_params": &schema.Schema{
-				Type:        schema.TypeList,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				Description: "Escalation level's notification targets",
+				Type:             schema.TypeList,
+				Computed:         false,
+				Required:         true,
+				Optional:         false,
+				Description:      "Escalation level's notification targets",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 

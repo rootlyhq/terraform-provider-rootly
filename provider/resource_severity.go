@@ -91,11 +91,12 @@ func resourceSeverity() *schema.Resource {
 			},
 
 			"slack_channels": &schema.Schema{
-				Type:        schema.TypeList,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Slack Channels associated with this severity",
+				Type:             schema.TypeList,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Slack Channels associated with this severity",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
@@ -121,11 +122,12 @@ func resourceSeverity() *schema.Resource {
 			},
 
 			"slack_aliases": &schema.Schema{
-				Type:        schema.TypeList,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Slack Aliases associated with this severity",
+				Type:             schema.TypeList,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Slack Aliases associated with this severity",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 

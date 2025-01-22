@@ -12,8 +12,7 @@ function includeTools(resourceSchema) {
       return true;
     }
     if (
-      resourceSchema.properties[key].type === "array" &&
-      resourceSchema.properties[key].items?.type !== "object"
+      resourceSchema.properties[key].type === "array"
     ) {
       return true;
     }
@@ -372,6 +371,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 					Required: ${required},
 					Optional: ${optional},
 					Description: "${description}",
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
 					Elem: &schema.Resource {
 						Schema: map[string]*schema.Schema {
               ${Object.keys(schema.items.properties)

@@ -90,11 +90,12 @@ func resourceScheduleRotation() *schema.Resource {
 			},
 
 			"active_time_attributes": &schema.Schema{
-				Type:        schema.TypeList,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Schedule rotation's active times",
+				Type:             schema.TypeList,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Schedule rotation's active times",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 

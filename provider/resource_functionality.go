@@ -202,11 +202,12 @@ func resourceFunctionality() *schema.Resource {
 			},
 
 			"slack_channels": &schema.Schema{
-				Type:        schema.TypeList,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Slack Channels associated with this functionality",
+				Type:             schema.TypeList,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Slack Channels associated with this functionality",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
@@ -232,11 +233,12 @@ func resourceFunctionality() *schema.Resource {
 			},
 
 			"slack_aliases": &schema.Schema{
-				Type:        schema.TypeList,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Slack Aliases associated with this functionality",
+				Type:             schema.TypeList,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Slack Aliases associated with this functionality",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 

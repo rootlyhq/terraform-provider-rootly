@@ -86,11 +86,12 @@ func resourceAlertGroup() *schema.Resource {
 			},
 
 			"targets": &schema.Schema{
-				Type:        schema.TypeList,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				Description: "",
+				Type:             schema.TypeList,
+				Computed:         false,
+				Required:         true,
+				Optional:         false,
+				Description:      "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
@@ -116,11 +117,12 @@ func resourceAlertGroup() *schema.Resource {
 			},
 
 			"attributes": &schema.Schema{
-				Type:        schema.TypeList,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
+				Type:             schema.TypeList,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
