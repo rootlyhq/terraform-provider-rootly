@@ -358,6 +358,7 @@ const (
 	AlertSourceAlertmanager    AlertSource = "alertmanager"
 	AlertSourceAsana           AlertSource = "asana"
 	AlertSourceAzure           AlertSource = "azure"
+	AlertSourceChronosphere    AlertSource = "chronosphere"
 	AlertSourceClickup         AlertSource = "clickup"
 	AlertSourceCloudWatch      AlertSource = "cloud_watch"
 	AlertSourceDatadog         AlertSource = "datadog"
@@ -453,6 +454,7 @@ const (
 	AlertListDataSourceAlertmanager    AlertListDataSource = "alertmanager"
 	AlertListDataSourceAsana           AlertListDataSource = "asana"
 	AlertListDataSourceAzure           AlertListDataSource = "azure"
+	AlertListDataSourceChronosphere    AlertListDataSource = "chronosphere"
 	AlertListDataSourceClickup         AlertListDataSource = "clickup"
 	AlertListDataSourceCloudWatch      AlertListDataSource = "cloud_watch"
 	AlertListDataSourceDatadog         AlertListDataSource = "datadog"
@@ -491,6 +493,7 @@ const (
 	AlertResponseDataSourceAlertmanager    AlertResponseDataSource = "alertmanager"
 	AlertResponseDataSourceAsana           AlertResponseDataSource = "asana"
 	AlertResponseDataSourceAzure           AlertResponseDataSource = "azure"
+	AlertResponseDataSourceChronosphere    AlertResponseDataSource = "chronosphere"
 	AlertResponseDataSourceClickup         AlertResponseDataSource = "clickup"
 	AlertResponseDataSourceCloudWatch      AlertResponseDataSource = "cloud_watch"
 	AlertResponseDataSourceDatadog         AlertResponseDataSource = "datadog"
@@ -2153,6 +2156,7 @@ const (
 	NewAlertDataAttributesSourceAlertmanager    NewAlertDataAttributesSource = "alertmanager"
 	NewAlertDataAttributesSourceAsana           NewAlertDataAttributesSource = "asana"
 	NewAlertDataAttributesSourceAzure           NewAlertDataAttributesSource = "azure"
+	NewAlertDataAttributesSourceChronosphere    NewAlertDataAttributesSource = "chronosphere"
 	NewAlertDataAttributesSourceClickup         NewAlertDataAttributesSource = "clickup"
 	NewAlertDataAttributesSourceCloudWatch      NewAlertDataAttributesSource = "cloud_watch"
 	NewAlertDataAttributesSourceDatadog         NewAlertDataAttributesSource = "datadog"
@@ -2242,6 +2246,7 @@ const (
 	NewAlertsSourceDataAttributesSourceTypeAlertmanager   NewAlertsSourceDataAttributesSourceType = "alertmanager"
 	NewAlertsSourceDataAttributesSourceTypeAzure          NewAlertsSourceDataAttributesSourceType = "azure"
 	NewAlertsSourceDataAttributesSourceTypeCheckly        NewAlertsSourceDataAttributesSourceType = "checkly"
+	NewAlertsSourceDataAttributesSourceTypeChronosphere   NewAlertsSourceDataAttributesSourceType = "chronosphere"
 	NewAlertsSourceDataAttributesSourceTypeCloudWatch     NewAlertsSourceDataAttributesSourceType = "cloud_watch"
 	NewAlertsSourceDataAttributesSourceTypeDatadog        NewAlertsSourceDataAttributesSourceType = "datadog"
 	NewAlertsSourceDataAttributesSourceTypeGenericWebhook NewAlertsSourceDataAttributesSourceType = "generic_webhook"
@@ -3170,6 +3175,14 @@ const (
 	NewRoleDataAttributesIncidentsPermissionsUpdate NewRoleDataAttributesIncidentsPermissions = "update"
 )
 
+// Defines values for NewRoleDataAttributesIntegrationsPermissions.
+const (
+	NewRoleDataAttributesIntegrationsPermissionsCreate NewRoleDataAttributesIntegrationsPermissions = "create"
+	NewRoleDataAttributesIntegrationsPermissionsDelete NewRoleDataAttributesIntegrationsPermissions = "delete"
+	NewRoleDataAttributesIntegrationsPermissionsRead   NewRoleDataAttributesIntegrationsPermissions = "read"
+	NewRoleDataAttributesIntegrationsPermissionsUpdate NewRoleDataAttributesIntegrationsPermissions = "update"
+)
+
 // Defines values for NewRoleDataAttributesInvitationsPermissions.
 const (
 	NewRoleDataAttributesInvitationsPermissionsCreate NewRoleDataAttributesInvitationsPermissions = "create"
@@ -4056,6 +4069,14 @@ const (
 	RoleIncidentsPermissionsUpdate RoleIncidentsPermissions = "update"
 )
 
+// Defines values for RoleIntegrationsPermissions.
+const (
+	RoleIntegrationsPermissionsCreate RoleIntegrationsPermissions = "create"
+	RoleIntegrationsPermissionsDelete RoleIntegrationsPermissions = "delete"
+	RoleIntegrationsPermissionsRead   RoleIntegrationsPermissions = "read"
+	RoleIntegrationsPermissionsUpdate RoleIntegrationsPermissions = "update"
+)
+
 // Defines values for RoleInvitationsPermissions.
 const (
 	RoleInvitationsPermissionsCreate RoleInvitationsPermissions = "create"
@@ -4623,6 +4644,7 @@ const (
 	UpdateAlertsSourceDataAttributesSourceTypeAlertmanager   UpdateAlertsSourceDataAttributesSourceType = "alertmanager"
 	UpdateAlertsSourceDataAttributesSourceTypeAzure          UpdateAlertsSourceDataAttributesSourceType = "azure"
 	UpdateAlertsSourceDataAttributesSourceTypeCheckly        UpdateAlertsSourceDataAttributesSourceType = "checkly"
+	UpdateAlertsSourceDataAttributesSourceTypeChronosphere   UpdateAlertsSourceDataAttributesSourceType = "chronosphere"
 	UpdateAlertsSourceDataAttributesSourceTypeCloudWatch     UpdateAlertsSourceDataAttributesSourceType = "cloud_watch"
 	UpdateAlertsSourceDataAttributesSourceTypeDatadog        UpdateAlertsSourceDataAttributesSourceType = "datadog"
 	UpdateAlertsSourceDataAttributesSourceTypeGenericWebhook UpdateAlertsSourceDataAttributesSourceType = "generic_webhook"
@@ -5758,6 +5780,14 @@ const (
 	UpdateRoleDataAttributesIncidentsPermissionsUpdate UpdateRoleDataAttributesIncidentsPermissions = "update"
 )
 
+// Defines values for UpdateRoleDataAttributesIntegrationsPermissions.
+const (
+	UpdateRoleDataAttributesIntegrationsPermissionsCreate UpdateRoleDataAttributesIntegrationsPermissions = "create"
+	UpdateRoleDataAttributesIntegrationsPermissionsDelete UpdateRoleDataAttributesIntegrationsPermissions = "delete"
+	UpdateRoleDataAttributesIntegrationsPermissionsRead   UpdateRoleDataAttributesIntegrationsPermissions = "read"
+	UpdateRoleDataAttributesIntegrationsPermissionsUpdate UpdateRoleDataAttributesIntegrationsPermissions = "update"
+)
+
 // Defines values for UpdateRoleDataAttributesInvitationsPermissions.
 const (
 	UpdateRoleDataAttributesInvitationsPermissionsCreate UpdateRoleDataAttributesInvitationsPermissions = "create"
@@ -5840,10 +5870,10 @@ const (
 
 // Defines values for UpdateRoleDataAttributesWorkflowsPermissions.
 const (
-	Create UpdateRoleDataAttributesWorkflowsPermissions = "create"
-	Delete UpdateRoleDataAttributesWorkflowsPermissions = "delete"
-	Read   UpdateRoleDataAttributesWorkflowsPermissions = "read"
-	Update UpdateRoleDataAttributesWorkflowsPermissions = "update"
+	UpdateRoleDataAttributesWorkflowsPermissionsCreate UpdateRoleDataAttributesWorkflowsPermissions = "create"
+	UpdateRoleDataAttributesWorkflowsPermissionsDelete UpdateRoleDataAttributesWorkflowsPermissions = "delete"
+	UpdateRoleDataAttributesWorkflowsPermissionsRead   UpdateRoleDataAttributesWorkflowsPermissions = "read"
+	UpdateRoleDataAttributesWorkflowsPermissionsUpdate UpdateRoleDataAttributesWorkflowsPermissions = "update"
 )
 
 // Defines values for UpdateRoleDataType.
@@ -8576,6 +8606,10 @@ type CreateLinearSubtaskIssueTaskParams struct {
 
 	// Description The issue description
 	Description *string `json:"description,omitempty"`
+	Labels      *[]struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"labels,omitempty"`
 
 	// ParentIssueId The parent issue
 	ParentIssueId string `json:"parent_issue_id"`
@@ -13779,6 +13813,7 @@ type NewRole struct {
 			IncidentRolesPermissions *[]NewRoleDataAttributesIncidentRolesPermissions `json:"incident_roles_permissions,omitempty"`
 			IncidentTypesPermissions *[]NewRoleDataAttributesIncidentTypesPermissions `json:"incident_types_permissions,omitempty"`
 			IncidentsPermissions     *[]NewRoleDataAttributesIncidentsPermissions     `json:"incidents_permissions,omitempty"`
+			IntegrationsPermissions  *[]NewRoleDataAttributesIntegrationsPermissions  `json:"integrations_permissions,omitempty"`
 			InvitationsPermissions   *[]NewRoleDataAttributesInvitationsPermissions   `json:"invitations_permissions,omitempty"`
 
 			// Name The role name.
@@ -13840,6 +13875,9 @@ type NewRoleDataAttributesIncidentTypesPermissions string
 
 // NewRoleDataAttributesIncidentsPermissions defines model for NewRole.Data.Attributes.IncidentsPermissions.
 type NewRoleDataAttributesIncidentsPermissions string
+
+// NewRoleDataAttributesIntegrationsPermissions defines model for NewRole.Data.Attributes.IntegrationsPermissions.
+type NewRoleDataAttributesIntegrationsPermissions string
 
 // NewRoleDataAttributesInvitationsPermissions defines model for NewRole.Data.Attributes.InvitationsPermissions.
 type NewRoleDataAttributesInvitationsPermissions string
@@ -14460,6 +14498,9 @@ type NewWorkflow struct {
 			// CommandFeedbackEnabled This will notify you back when the workflow is starting
 			CommandFeedbackEnabled *bool `json:"command_feedback_enabled"`
 
+			// ContinuouslyRepeat When continuously repeat is true, repeat workflows aren't automatically stopped when conditions aren't met. This setting won't override your conditions set by repeat_condition_duration_since_first_run and repeat_condition_number_of_repeats parameters.
+			ContinuouslyRepeat *bool `json:"continuously_repeat,omitempty"`
+
 			// Description The description of the workflow
 			Description      *string   `json:"description"`
 			Enabled          *bool     `json:"enabled,omitempty"`
@@ -14480,6 +14521,12 @@ type NewWorkflow struct {
 
 			// Priority Priority
 			Priority *NewWorkflowDataAttributesPriority `json:"priority"`
+
+			// RepeatConditionDurationSinceFirstRun The workflow will stop repeating if its runtime since it's first workflow run exceeds the duration set in this field
+			RepeatConditionDurationSinceFirstRun *string `json:"repeat_condition_duration_since_first_run"`
+
+			// RepeatConditionNumberOfRepeats The workflow will stop repeating if the number of repeats exceeds the value set in this field
+			RepeatConditionNumberOfRepeats *int `json:"repeat_condition_number_of_repeats,omitempty"`
 
 			// RepeatEveryDuration Repeat workflow every duration
 			RepeatEveryDuration *string                              `json:"repeat_every_duration"`
@@ -15754,6 +15801,7 @@ type Role struct {
 	IncidentRolesPermissions *[]RoleIncidentRolesPermissions `json:"incident_roles_permissions,omitempty"`
 	IncidentTypesPermissions *[]RoleIncidentTypesPermissions `json:"incident_types_permissions,omitempty"`
 	IncidentsPermissions     *[]RoleIncidentsPermissions     `json:"incidents_permissions,omitempty"`
+	IntegrationsPermissions  *[]RoleIntegrationsPermissions  `json:"integrations_permissions,omitempty"`
 	InvitationsPermissions   *[]RoleInvitationsPermissions   `json:"invitations_permissions,omitempty"`
 
 	// IsDeletable Whether the role can be deleted.
@@ -15819,6 +15867,9 @@ type RoleIncidentTypesPermissions string
 
 // RoleIncidentsPermissions defines model for Role.IncidentsPermissions.
 type RoleIncidentsPermissions string
+
+// RoleIntegrationsPermissions defines model for Role.IntegrationsPermissions.
+type RoleIntegrationsPermissions string
 
 // RoleInvitationsPermissions defines model for Role.InvitationsPermissions.
 type RoleInvitationsPermissions string
@@ -19623,6 +19674,7 @@ type UpdateRole struct {
 			IncidentRolesPermissions *[]UpdateRoleDataAttributesIncidentRolesPermissions `json:"incident_roles_permissions,omitempty"`
 			IncidentTypesPermissions *[]UpdateRoleDataAttributesIncidentTypesPermissions `json:"incident_types_permissions,omitempty"`
 			IncidentsPermissions     *[]UpdateRoleDataAttributesIncidentsPermissions     `json:"incidents_permissions,omitempty"`
+			IntegrationsPermissions  *[]UpdateRoleDataAttributesIntegrationsPermissions  `json:"integrations_permissions,omitempty"`
 			InvitationsPermissions   *[]UpdateRoleDataAttributesInvitationsPermissions   `json:"invitations_permissions,omitempty"`
 
 			// Name The role name.
@@ -19680,6 +19732,9 @@ type UpdateRoleDataAttributesIncidentTypesPermissions string
 
 // UpdateRoleDataAttributesIncidentsPermissions defines model for UpdateRole.Data.Attributes.IncidentsPermissions.
 type UpdateRoleDataAttributesIncidentsPermissions string
+
+// UpdateRoleDataAttributesIntegrationsPermissions defines model for UpdateRole.Data.Attributes.IntegrationsPermissions.
+type UpdateRoleDataAttributesIntegrationsPermissions string
 
 // UpdateRoleDataAttributesInvitationsPermissions defines model for UpdateRole.Data.Attributes.InvitationsPermissions.
 type UpdateRoleDataAttributesInvitationsPermissions string
@@ -20432,6 +20487,9 @@ type UpdateWorkflow struct {
 			// CommandFeedbackEnabled This will notify you back when the workflow is starting
 			CommandFeedbackEnabled *bool `json:"command_feedback_enabled"`
 
+			// ContinuouslyRepeat When continuously repeat is true, repeat workflows aren't automatically stopped when conditions aren't met. This setting won't override your conditions set by repeat_condition_duration_since_first_run and repeat_condition_number_of_repeats parameters.
+			ContinuouslyRepeat *bool `json:"continuously_repeat,omitempty"`
+
 			// Description The description of the workflow
 			Description      *string   `json:"description"`
 			Enabled          *bool     `json:"enabled,omitempty"`
@@ -20449,6 +20507,12 @@ type UpdateWorkflow struct {
 
 			// Position The order which the workflow should run with other workflows.
 			Position *int `json:"position,omitempty"`
+
+			// RepeatConditionDurationSinceFirstRun The workflow will stop repeating if its runtime since it's first workflow run exceeds the duration set in this field
+			RepeatConditionDurationSinceFirstRun *string `json:"repeat_condition_duration_since_first_run"`
+
+			// RepeatConditionNumberOfRepeats The workflow will stop repeating if the number of repeats exceeds the value set in this field
+			RepeatConditionNumberOfRepeats *int `json:"repeat_condition_number_of_repeats,omitempty"`
 
 			// RepeatEveryDuration Repeat workflow every duration
 			RepeatEveryDuration *string   `json:"repeat_every_duration"`
@@ -20837,6 +20901,9 @@ type Workflow struct {
 	// CommandFeedbackEnabled This will notify you back when the workflow is starting
 	CommandFeedbackEnabled *bool `json:"command_feedback_enabled"`
 
+	// ContinuouslyRepeat When continuously repeat is true, repeat workflows aren't automatically stopped when conditions aren't met. This setting won't override your conditions set by repeat_condition_duration_since_first_run and repeat_condition_number_of_repeats parameters.
+	ContinuouslyRepeat *bool `json:"continuously_repeat,omitempty"`
+
 	// CreatedAt Date of creation
 	CreatedAt string `json:"created_at"`
 
@@ -20857,6 +20924,12 @@ type Workflow struct {
 
 	// Position The order which the workflow should run with other workflows.
 	Position *int `json:"position,omitempty"`
+
+	// RepeatConditionDurationSinceFirstRun The workflow will stop repeating if its runtime since it's first workflow run exceeds the duration set in this field
+	RepeatConditionDurationSinceFirstRun *string `json:"repeat_condition_duration_since_first_run"`
+
+	// RepeatConditionNumberOfRepeats The workflow will stop repeating if the number of repeats exceeds the value set in this field
+	RepeatConditionNumberOfRepeats *int `json:"repeat_condition_number_of_repeats,omitempty"`
 
 	// RepeatEveryDuration Repeat workflow every duration
 	RepeatEveryDuration *string             `json:"repeat_every_duration"`

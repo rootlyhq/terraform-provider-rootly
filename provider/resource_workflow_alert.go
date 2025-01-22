@@ -79,6 +79,30 @@ func resourceWorkflowAlert() *schema.Resource {
 				Description: "Repeat workflow every duration",
 			},
 
+			"repeat_condition_duration_since_first_run": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "The workflow will stop repeating if its runtime since it's first workflow run exceeds the duration set in this field",
+			},
+
+			"repeat_condition_number_of_repeats": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "The workflow will stop repeating if the number of repeats exceeds the value set in this field",
+			},
+
+			"continuously_repeat": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "When continuously repeat is true, repeat workflows aren't automatically stopped when conditions aren't met. This setting won't override your conditions set by repeat_condition_duration_since_first_run and repeat_condition_number_of_repeats parameters.. Value must be one of true or false",
+			},
+
 			"repeat_on": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -408,6 +432,15 @@ func resourceWorkflowAlertCreate(ctx context.Context, d *schema.ResourceData, me
 	if value, ok := d.GetOkExists("repeat_every_duration"); ok {
 		s.RepeatEveryDuration = value.(string)
 	}
+	if value, ok := d.GetOkExists("repeat_condition_duration_since_first_run"); ok {
+		s.RepeatConditionDurationSinceFirstRun = value.(string)
+	}
+	if value, ok := d.GetOkExists("repeat_condition_number_of_repeats"); ok {
+		s.RepeatConditionNumberOfRepeats = value.(int)
+	}
+	if value, ok := d.GetOkExists("continuously_repeat"); ok {
+		s.ContinuouslyRepeat = tools.Bool(value.(bool))
+	}
 	if value, ok := d.GetOkExists("repeat_on"); ok {
 		s.RepeatOn = value.([]interface{})
 	}
@@ -486,6 +519,9 @@ func resourceWorkflowAlertRead(ctx context.Context, d *schema.ResourceData, meta
 	d.Set("command_feedback_enabled", item.CommandFeedbackEnabled)
 	d.Set("wait", item.Wait)
 	d.Set("repeat_every_duration", item.RepeatEveryDuration)
+	d.Set("repeat_condition_duration_since_first_run", item.RepeatConditionDurationSinceFirstRun)
+	d.Set("repeat_condition_number_of_repeats", item.RepeatConditionNumberOfRepeats)
+	d.Set("continuously_repeat", item.ContinuouslyRepeat)
 	d.Set("repeat_on", item.RepeatOn)
 	d.Set("enabled", item.Enabled)
 	d.Set("locked", item.Locked)
@@ -534,6 +570,15 @@ func resourceWorkflowAlertUpdate(ctx context.Context, d *schema.ResourceData, me
 	}
 	if d.HasChange("repeat_every_duration") {
 		s.RepeatEveryDuration = d.Get("repeat_every_duration").(string)
+	}
+	if d.HasChange("repeat_condition_duration_since_first_run") {
+		s.RepeatConditionDurationSinceFirstRun = d.Get("repeat_condition_duration_since_first_run").(string)
+	}
+	if d.HasChange("repeat_condition_number_of_repeats") {
+		s.RepeatConditionNumberOfRepeats = d.Get("repeat_condition_number_of_repeats").(int)
+	}
+	if d.HasChange("continuously_repeat") {
+		s.ContinuouslyRepeat = tools.Bool(d.Get("continuously_repeat").(bool))
 	}
 	if d.HasChange("repeat_on") {
 		s.RepeatOn = d.Get("repeat_on").([]interface{})

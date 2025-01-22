@@ -18,7 +18,6 @@ type Role struct {
   IsDeletable *bool `jsonapi:"attr,is_deletable,omitempty"`
   IsEditable *bool `jsonapi:"attr,is_editable,omitempty"`
   AlertsPermissions []interface{} `jsonapi:"attr,alerts_permissions,omitempty"`
-  PulsesPermissions []interface{} `jsonapi:"attr,pulses_permissions,omitempty"`
   ApiKeysPermissions []interface{} `jsonapi:"attr,api_keys_permissions,omitempty"`
   AuditsPermissions []interface{} `jsonapi:"attr,audits_permissions,omitempty"`
   BillingPermissions []interface{} `jsonapi:"attr,billing_permissions,omitempty"`
@@ -31,9 +30,11 @@ type Role struct {
   IncidentRolesPermissions []interface{} `jsonapi:"attr,incident_roles_permissions,omitempty"`
   IncidentTypesPermissions []interface{} `jsonapi:"attr,incident_types_permissions,omitempty"`
   IncidentsPermissions []interface{} `jsonapi:"attr,incidents_permissions,omitempty"`
+  IntegrationsPermissions []interface{} `jsonapi:"attr,integrations_permissions,omitempty"`
   InvitationsPermissions []interface{} `jsonapi:"attr,invitations_permissions,omitempty"`
   PlaybooksPermissions []interface{} `jsonapi:"attr,playbooks_permissions,omitempty"`
   PrivateIncidentsPermissions []interface{} `jsonapi:"attr,private_incidents_permissions,omitempty"`
+  PulsesPermissions []interface{} `jsonapi:"attr,pulses_permissions,omitempty"`
   RetrospectivePermissions []interface{} `jsonapi:"attr,retrospective_permissions,omitempty"`
   RolesPermissions []interface{} `jsonapi:"attr,roles_permissions,omitempty"`
   SecretsPermissions []interface{} `jsonapi:"attr,secrets_permissions,omitempty"`

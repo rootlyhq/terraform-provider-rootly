@@ -79,18 +79,6 @@ func resourceRole() *schema.Resource {
 				Description:      "Value must be one of `create`, `read`.",
 			},
 
-			"pulses_permissions": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Value must be one of `create`, `update`, `read`.",
-			},
-
 			"api_keys_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -235,6 +223,18 @@ func resourceRole() *schema.Resource {
 				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
 			},
 
+			"integrations_permissions": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
+			},
+
 			"invitations_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -269,6 +269,18 @@ func resourceRole() *schema.Resource {
 				Required:         false,
 				Optional:         true,
 				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
+			},
+
+			"pulses_permissions": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Value must be one of `create`, `update`, `read`.",
 			},
 
 			"retrospective_permissions": &schema.Schema{
@@ -395,9 +407,6 @@ func resourceRoleCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	if value, ok := d.GetOkExists("alerts_permissions"); ok {
 		s.AlertsPermissions = value.([]interface{})
 	}
-	if value, ok := d.GetOkExists("pulses_permissions"); ok {
-		s.PulsesPermissions = value.([]interface{})
-	}
 	if value, ok := d.GetOkExists("api_keys_permissions"); ok {
 		s.ApiKeysPermissions = value.([]interface{})
 	}
@@ -434,6 +443,9 @@ func resourceRoleCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	if value, ok := d.GetOkExists("incidents_permissions"); ok {
 		s.IncidentsPermissions = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("integrations_permissions"); ok {
+		s.IntegrationsPermissions = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("invitations_permissions"); ok {
 		s.InvitationsPermissions = value.([]interface{})
 	}
@@ -442,6 +454,9 @@ func resourceRoleCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	}
 	if value, ok := d.GetOkExists("private_incidents_permissions"); ok {
 		s.PrivateIncidentsPermissions = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("pulses_permissions"); ok {
+		s.PulsesPermissions = value.([]interface{})
 	}
 	if value, ok := d.GetOkExists("retrospective_permissions"); ok {
 		s.RetrospectivePermissions = value.([]interface{})
@@ -502,7 +517,6 @@ func resourceRoleRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	d.Set("is_deletable", item.IsDeletable)
 	d.Set("is_editable", item.IsEditable)
 	d.Set("alerts_permissions", item.AlertsPermissions)
-	d.Set("pulses_permissions", item.PulsesPermissions)
 	d.Set("api_keys_permissions", item.ApiKeysPermissions)
 	d.Set("audits_permissions", item.AuditsPermissions)
 	d.Set("billing_permissions", item.BillingPermissions)
@@ -515,9 +529,11 @@ func resourceRoleRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	d.Set("incident_roles_permissions", item.IncidentRolesPermissions)
 	d.Set("incident_types_permissions", item.IncidentTypesPermissions)
 	d.Set("incidents_permissions", item.IncidentsPermissions)
+	d.Set("integrations_permissions", item.IntegrationsPermissions)
 	d.Set("invitations_permissions", item.InvitationsPermissions)
 	d.Set("playbooks_permissions", item.PlaybooksPermissions)
 	d.Set("private_incidents_permissions", item.PrivateIncidentsPermissions)
+	d.Set("pulses_permissions", item.PulsesPermissions)
 	d.Set("retrospective_permissions", item.RetrospectivePermissions)
 	d.Set("roles_permissions", item.RolesPermissions)
 	d.Set("secrets_permissions", item.SecretsPermissions)
@@ -553,9 +569,6 @@ func resourceRoleUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 	}
 	if d.HasChange("alerts_permissions") {
 		s.AlertsPermissions = d.Get("alerts_permissions").([]interface{})
-	}
-	if d.HasChange("pulses_permissions") {
-		s.PulsesPermissions = d.Get("pulses_permissions").([]interface{})
 	}
 	if d.HasChange("api_keys_permissions") {
 		s.ApiKeysPermissions = d.Get("api_keys_permissions").([]interface{})
@@ -593,6 +606,9 @@ func resourceRoleUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 	if d.HasChange("incidents_permissions") {
 		s.IncidentsPermissions = d.Get("incidents_permissions").([]interface{})
 	}
+	if d.HasChange("integrations_permissions") {
+		s.IntegrationsPermissions = d.Get("integrations_permissions").([]interface{})
+	}
 	if d.HasChange("invitations_permissions") {
 		s.InvitationsPermissions = d.Get("invitations_permissions").([]interface{})
 	}
@@ -601,6 +617,9 @@ func resourceRoleUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 	}
 	if d.HasChange("private_incidents_permissions") {
 		s.PrivateIncidentsPermissions = d.Get("private_incidents_permissions").([]interface{})
+	}
+	if d.HasChange("pulses_permissions") {
+		s.PulsesPermissions = d.Get("pulses_permissions").([]interface{})
 	}
 	if d.HasChange("retrospective_permissions") {
 		s.RetrospectivePermissions = d.Get("retrospective_permissions").([]interface{})

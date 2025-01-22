@@ -43,5 +43,14 @@ Optional:
 
 - `assign_user_email` (String) The assigned user's email
 - `description` (String) The issue description
+- `labels` (Block List) (see [below for nested schema](#nestedblock--task_params--labels))
 - `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name
 - `task_type` (String)
+
+<a id="nestedblock--task_params--labels"></a>
+### Nested Schema for `task_params.labels`
+
+Required:
+
+- `id` (String)
+- `name` (String)

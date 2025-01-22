@@ -34,6 +34,7 @@ description: |-
 - `incident_roles_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `incident_types_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `incidents_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
+- `integrations_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `invitations_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `is_deletable` (Boolean) Whether the role can be deleted.. Value must be one of true or false
 - `is_editable` (Boolean) Whether the role can be edited.. Value must be one of true or false
