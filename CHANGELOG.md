@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.20.0] -- TBD
+## [2.20.0] -- 2025-01-31
 
 - Add support for `admin_ids` and schedule `owner_group_ids` attributes.
 
