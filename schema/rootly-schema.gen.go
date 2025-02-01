@@ -356,8 +356,12 @@ const (
 // Defines values for AlertSource.
 const (
 	AlertSourceAlertmanager    AlertSource = "alertmanager"
+	AlertSourceAppDynamics     AlertSource = "app_dynamics"
+	AlertSourceAppOptics       AlertSource = "app_optics"
 	AlertSourceAsana           AlertSource = "asana"
 	AlertSourceAzure           AlertSource = "azure"
+	AlertSourceBugSnag         AlertSource = "bug_snag"
+	AlertSourceCatchpoint      AlertSource = "catchpoint"
 	AlertSourceChronosphere    AlertSource = "chronosphere"
 	AlertSourceClickup         AlertSource = "clickup"
 	AlertSourceCloudWatch      AlertSource = "cloud_watch"
@@ -371,10 +375,13 @@ const (
 	AlertSourceLinear          AlertSource = "linear"
 	AlertSourceLiveCallRouting AlertSource = "live_call_routing"
 	AlertSourceManual          AlertSource = "manual"
+	AlertSourceMonteCarlo      AlertSource = "monte_carlo"
+	AlertSourceNagios          AlertSource = "nagios"
 	AlertSourceNobl9           AlertSource = "nobl9"
 	AlertSourceOpsgenie        AlertSource = "opsgenie"
 	AlertSourcePagerduty       AlertSource = "pagerduty"
 	AlertSourcePagertree       AlertSource = "pagertree"
+	AlertSourcePrtg            AlertSource = "prtg"
 	AlertSourceRollbar         AlertSource = "rollbar"
 	AlertSourceRootly          AlertSource = "rootly"
 	AlertSourceSentry          AlertSource = "sentry"
@@ -452,8 +459,12 @@ const (
 // Defines values for AlertListDataSource.
 const (
 	AlertListDataSourceAlertmanager    AlertListDataSource = "alertmanager"
+	AlertListDataSourceAppDynamics     AlertListDataSource = "app_dynamics"
+	AlertListDataSourceAppOptics       AlertListDataSource = "app_optics"
 	AlertListDataSourceAsana           AlertListDataSource = "asana"
 	AlertListDataSourceAzure           AlertListDataSource = "azure"
+	AlertListDataSourceBugSnag         AlertListDataSource = "bug_snag"
+	AlertListDataSourceCatchpoint      AlertListDataSource = "catchpoint"
 	AlertListDataSourceChronosphere    AlertListDataSource = "chronosphere"
 	AlertListDataSourceClickup         AlertListDataSource = "clickup"
 	AlertListDataSourceCloudWatch      AlertListDataSource = "cloud_watch"
@@ -467,10 +478,13 @@ const (
 	AlertListDataSourceLinear          AlertListDataSource = "linear"
 	AlertListDataSourceLiveCallRouting AlertListDataSource = "live_call_routing"
 	AlertListDataSourceManual          AlertListDataSource = "manual"
+	AlertListDataSourceMonteCarlo      AlertListDataSource = "monte_carlo"
+	AlertListDataSourceNagios          AlertListDataSource = "nagios"
 	AlertListDataSourceNobl9           AlertListDataSource = "nobl9"
 	AlertListDataSourceOpsgenie        AlertListDataSource = "opsgenie"
 	AlertListDataSourcePagerduty       AlertListDataSource = "pagerduty"
 	AlertListDataSourcePagertree       AlertListDataSource = "pagertree"
+	AlertListDataSourcePrtg            AlertListDataSource = "prtg"
 	AlertListDataSourceRollbar         AlertListDataSource = "rollbar"
 	AlertListDataSourceRootly          AlertListDataSource = "rootly"
 	AlertListDataSourceSentry          AlertListDataSource = "sentry"
@@ -491,8 +505,12 @@ const (
 // Defines values for AlertResponseDataSource.
 const (
 	AlertResponseDataSourceAlertmanager    AlertResponseDataSource = "alertmanager"
+	AlertResponseDataSourceAppDynamics     AlertResponseDataSource = "app_dynamics"
+	AlertResponseDataSourceAppOptics       AlertResponseDataSource = "app_optics"
 	AlertResponseDataSourceAsana           AlertResponseDataSource = "asana"
 	AlertResponseDataSourceAzure           AlertResponseDataSource = "azure"
+	AlertResponseDataSourceBugSnag         AlertResponseDataSource = "bug_snag"
+	AlertResponseDataSourceCatchpoint      AlertResponseDataSource = "catchpoint"
 	AlertResponseDataSourceChronosphere    AlertResponseDataSource = "chronosphere"
 	AlertResponseDataSourceClickup         AlertResponseDataSource = "clickup"
 	AlertResponseDataSourceCloudWatch      AlertResponseDataSource = "cloud_watch"
@@ -506,10 +524,13 @@ const (
 	AlertResponseDataSourceLinear          AlertResponseDataSource = "linear"
 	AlertResponseDataSourceLiveCallRouting AlertResponseDataSource = "live_call_routing"
 	AlertResponseDataSourceManual          AlertResponseDataSource = "manual"
+	AlertResponseDataSourceMonteCarlo      AlertResponseDataSource = "monte_carlo"
+	AlertResponseDataSourceNagios          AlertResponseDataSource = "nagios"
 	AlertResponseDataSourceNobl9           AlertResponseDataSource = "nobl9"
 	AlertResponseDataSourceOpsgenie        AlertResponseDataSource = "opsgenie"
 	AlertResponseDataSourcePagerduty       AlertResponseDataSource = "pagerduty"
 	AlertResponseDataSourcePagertree       AlertResponseDataSource = "pagertree"
+	AlertResponseDataSourcePrtg            AlertResponseDataSource = "prtg"
 	AlertResponseDataSourceRollbar         AlertResponseDataSource = "rollbar"
 	AlertResponseDataSourceRootly          AlertResponseDataSource = "rootly"
 	AlertResponseDataSourceSentry          AlertResponseDataSource = "sentry"
@@ -1685,13 +1706,18 @@ const (
 
 // Defines values for IncidentPermissionSetBooleanKind.
 const (
-	IncidentPermissionSetBooleanKindAssignIncidentRoles IncidentPermissionSetBooleanKind = "assign_incident_roles"
-	IncidentPermissionSetBooleanKindInviteSubscribers   IncidentPermissionSetBooleanKind = "invite_subscribers"
-	IncidentPermissionSetBooleanKindModifyCustomFields  IncidentPermissionSetBooleanKind = "modify_custom_fields"
-	IncidentPermissionSetBooleanKindPublishToStatusPage IncidentPermissionSetBooleanKind = "publish_to_status_page"
-	IncidentPermissionSetBooleanKindTriggerWorkflows    IncidentPermissionSetBooleanKind = "trigger_workflows"
-	IncidentPermissionSetBooleanKindUpdateSummary       IncidentPermissionSetBooleanKind = "update_summary"
-	IncidentPermissionSetBooleanKindUpdateTimeline      IncidentPermissionSetBooleanKind = "update_timeline"
+	IncidentPermissionSetBooleanKindAssignIncidentRoles  IncidentPermissionSetBooleanKind = "assign_incident_roles"
+	IncidentPermissionSetBooleanKindCreateCommunications IncidentPermissionSetBooleanKind = "create_communications"
+	IncidentPermissionSetBooleanKindDeleteCommunications IncidentPermissionSetBooleanKind = "delete_communications"
+	IncidentPermissionSetBooleanKindInviteSubscribers    IncidentPermissionSetBooleanKind = "invite_subscribers"
+	IncidentPermissionSetBooleanKindModifyCustomFields   IncidentPermissionSetBooleanKind = "modify_custom_fields"
+	IncidentPermissionSetBooleanKindPublishToStatusPage  IncidentPermissionSetBooleanKind = "publish_to_status_page"
+	IncidentPermissionSetBooleanKindReadCommunications   IncidentPermissionSetBooleanKind = "read_communications"
+	IncidentPermissionSetBooleanKindSendCommunications   IncidentPermissionSetBooleanKind = "send_communications"
+	IncidentPermissionSetBooleanKindTriggerWorkflows     IncidentPermissionSetBooleanKind = "trigger_workflows"
+	IncidentPermissionSetBooleanKindUpdateCommunications IncidentPermissionSetBooleanKind = "update_communications"
+	IncidentPermissionSetBooleanKindUpdateSummary        IncidentPermissionSetBooleanKind = "update_summary"
+	IncidentPermissionSetBooleanKindUpdateTimeline       IncidentPermissionSetBooleanKind = "update_timeline"
 )
 
 // Defines values for IncidentPermissionSetBooleanListDataType.
@@ -2154,8 +2180,12 @@ const (
 // Defines values for NewAlertDataAttributesSource.
 const (
 	NewAlertDataAttributesSourceAlertmanager    NewAlertDataAttributesSource = "alertmanager"
+	NewAlertDataAttributesSourceAppDynamics     NewAlertDataAttributesSource = "app_dynamics"
+	NewAlertDataAttributesSourceAppOptics       NewAlertDataAttributesSource = "app_optics"
 	NewAlertDataAttributesSourceAsana           NewAlertDataAttributesSource = "asana"
 	NewAlertDataAttributesSourceAzure           NewAlertDataAttributesSource = "azure"
+	NewAlertDataAttributesSourceBugSnag         NewAlertDataAttributesSource = "bug_snag"
+	NewAlertDataAttributesSourceCatchpoint      NewAlertDataAttributesSource = "catchpoint"
 	NewAlertDataAttributesSourceChronosphere    NewAlertDataAttributesSource = "chronosphere"
 	NewAlertDataAttributesSourceClickup         NewAlertDataAttributesSource = "clickup"
 	NewAlertDataAttributesSourceCloudWatch      NewAlertDataAttributesSource = "cloud_watch"
@@ -2169,10 +2199,13 @@ const (
 	NewAlertDataAttributesSourceLinear          NewAlertDataAttributesSource = "linear"
 	NewAlertDataAttributesSourceLiveCallRouting NewAlertDataAttributesSource = "live_call_routing"
 	NewAlertDataAttributesSourceManual          NewAlertDataAttributesSource = "manual"
+	NewAlertDataAttributesSourceMonteCarlo      NewAlertDataAttributesSource = "monte_carlo"
+	NewAlertDataAttributesSourceNagios          NewAlertDataAttributesSource = "nagios"
 	NewAlertDataAttributesSourceNobl9           NewAlertDataAttributesSource = "nobl9"
 	NewAlertDataAttributesSourceOpsgenie        NewAlertDataAttributesSource = "opsgenie"
 	NewAlertDataAttributesSourcePagerduty       NewAlertDataAttributesSource = "pagerduty"
 	NewAlertDataAttributesSourcePagertree       NewAlertDataAttributesSource = "pagertree"
+	NewAlertDataAttributesSourcePrtg            NewAlertDataAttributesSource = "prtg"
 	NewAlertDataAttributesSourceRollbar         NewAlertDataAttributesSource = "rollbar"
 	NewAlertDataAttributesSourceRootly          NewAlertDataAttributesSource = "rootly"
 	NewAlertDataAttributesSourceSentry          NewAlertDataAttributesSource = "sentry"
@@ -2244,7 +2277,11 @@ const (
 // Defines values for NewAlertsSourceDataAttributesSourceType.
 const (
 	NewAlertsSourceDataAttributesSourceTypeAlertmanager   NewAlertsSourceDataAttributesSourceType = "alertmanager"
+	NewAlertsSourceDataAttributesSourceTypeAppDynamics    NewAlertsSourceDataAttributesSourceType = "app_dynamics"
+	NewAlertsSourceDataAttributesSourceTypeAppOptics      NewAlertsSourceDataAttributesSourceType = "app_optics"
 	NewAlertsSourceDataAttributesSourceTypeAzure          NewAlertsSourceDataAttributesSourceType = "azure"
+	NewAlertsSourceDataAttributesSourceTypeBugSnag        NewAlertsSourceDataAttributesSourceType = "bug_snag"
+	NewAlertsSourceDataAttributesSourceTypeCatchpoint     NewAlertsSourceDataAttributesSourceType = "catchpoint"
 	NewAlertsSourceDataAttributesSourceTypeCheckly        NewAlertsSourceDataAttributesSourceType = "checkly"
 	NewAlertsSourceDataAttributesSourceTypeChronosphere   NewAlertsSourceDataAttributesSourceType = "chronosphere"
 	NewAlertsSourceDataAttributesSourceTypeCloudWatch     NewAlertsSourceDataAttributesSourceType = "cloud_watch"
@@ -2252,7 +2289,11 @@ const (
 	NewAlertsSourceDataAttributesSourceTypeGenericWebhook NewAlertsSourceDataAttributesSourceType = "generic_webhook"
 	NewAlertsSourceDataAttributesSourceTypeGoogleCloud    NewAlertsSourceDataAttributesSourceType = "google_cloud"
 	NewAlertsSourceDataAttributesSourceTypeGrafana        NewAlertsSourceDataAttributesSourceType = "grafana"
+	NewAlertsSourceDataAttributesSourceTypeHoneycomb      NewAlertsSourceDataAttributesSourceType = "honeycomb"
+	NewAlertsSourceDataAttributesSourceTypeMonteCarlo     NewAlertsSourceDataAttributesSourceType = "monte_carlo"
+	NewAlertsSourceDataAttributesSourceTypeNagios         NewAlertsSourceDataAttributesSourceType = "nagios"
 	NewAlertsSourceDataAttributesSourceTypeNewRelic       NewAlertsSourceDataAttributesSourceType = "new_relic"
+	NewAlertsSourceDataAttributesSourceTypePrtg           NewAlertsSourceDataAttributesSourceType = "prtg"
 	NewAlertsSourceDataAttributesSourceTypeSentry         NewAlertsSourceDataAttributesSourceType = "sentry"
 	NewAlertsSourceDataAttributesSourceTypeSplunk         NewAlertsSourceDataAttributesSourceType = "splunk"
 )
@@ -2773,13 +2814,18 @@ const (
 
 // Defines values for NewIncidentPermissionSetBooleanDataAttributesKind.
 const (
-	NewIncidentPermissionSetBooleanDataAttributesKindAssignIncidentRoles NewIncidentPermissionSetBooleanDataAttributesKind = "assign_incident_roles"
-	NewIncidentPermissionSetBooleanDataAttributesKindInviteSubscribers   NewIncidentPermissionSetBooleanDataAttributesKind = "invite_subscribers"
-	NewIncidentPermissionSetBooleanDataAttributesKindModifyCustomFields  NewIncidentPermissionSetBooleanDataAttributesKind = "modify_custom_fields"
-	NewIncidentPermissionSetBooleanDataAttributesKindPublishToStatusPage NewIncidentPermissionSetBooleanDataAttributesKind = "publish_to_status_page"
-	NewIncidentPermissionSetBooleanDataAttributesKindTriggerWorkflows    NewIncidentPermissionSetBooleanDataAttributesKind = "trigger_workflows"
-	NewIncidentPermissionSetBooleanDataAttributesKindUpdateSummary       NewIncidentPermissionSetBooleanDataAttributesKind = "update_summary"
-	NewIncidentPermissionSetBooleanDataAttributesKindUpdateTimeline      NewIncidentPermissionSetBooleanDataAttributesKind = "update_timeline"
+	NewIncidentPermissionSetBooleanDataAttributesKindAssignIncidentRoles  NewIncidentPermissionSetBooleanDataAttributesKind = "assign_incident_roles"
+	NewIncidentPermissionSetBooleanDataAttributesKindCreateCommunications NewIncidentPermissionSetBooleanDataAttributesKind = "create_communications"
+	NewIncidentPermissionSetBooleanDataAttributesKindDeleteCommunications NewIncidentPermissionSetBooleanDataAttributesKind = "delete_communications"
+	NewIncidentPermissionSetBooleanDataAttributesKindInviteSubscribers    NewIncidentPermissionSetBooleanDataAttributesKind = "invite_subscribers"
+	NewIncidentPermissionSetBooleanDataAttributesKindModifyCustomFields   NewIncidentPermissionSetBooleanDataAttributesKind = "modify_custom_fields"
+	NewIncidentPermissionSetBooleanDataAttributesKindPublishToStatusPage  NewIncidentPermissionSetBooleanDataAttributesKind = "publish_to_status_page"
+	NewIncidentPermissionSetBooleanDataAttributesKindReadCommunications   NewIncidentPermissionSetBooleanDataAttributesKind = "read_communications"
+	NewIncidentPermissionSetBooleanDataAttributesKindSendCommunications   NewIncidentPermissionSetBooleanDataAttributesKind = "send_communications"
+	NewIncidentPermissionSetBooleanDataAttributesKindTriggerWorkflows     NewIncidentPermissionSetBooleanDataAttributesKind = "trigger_workflows"
+	NewIncidentPermissionSetBooleanDataAttributesKindUpdateCommunications NewIncidentPermissionSetBooleanDataAttributesKind = "update_communications"
+	NewIncidentPermissionSetBooleanDataAttributesKindUpdateSummary        NewIncidentPermissionSetBooleanDataAttributesKind = "update_summary"
+	NewIncidentPermissionSetBooleanDataAttributesKindUpdateTimeline       NewIncidentPermissionSetBooleanDataAttributesKind = "update_timeline"
 )
 
 // Defines values for NewIncidentPermissionSetBooleanDataType.
@@ -4642,7 +4688,11 @@ const (
 // Defines values for UpdateAlertsSourceDataAttributesSourceType.
 const (
 	UpdateAlertsSourceDataAttributesSourceTypeAlertmanager   UpdateAlertsSourceDataAttributesSourceType = "alertmanager"
+	UpdateAlertsSourceDataAttributesSourceTypeAppDynamics    UpdateAlertsSourceDataAttributesSourceType = "app_dynamics"
+	UpdateAlertsSourceDataAttributesSourceTypeAppOptics      UpdateAlertsSourceDataAttributesSourceType = "app_optics"
 	UpdateAlertsSourceDataAttributesSourceTypeAzure          UpdateAlertsSourceDataAttributesSourceType = "azure"
+	UpdateAlertsSourceDataAttributesSourceTypeBugSnag        UpdateAlertsSourceDataAttributesSourceType = "bug_snag"
+	UpdateAlertsSourceDataAttributesSourceTypeCatchpoint     UpdateAlertsSourceDataAttributesSourceType = "catchpoint"
 	UpdateAlertsSourceDataAttributesSourceTypeCheckly        UpdateAlertsSourceDataAttributesSourceType = "checkly"
 	UpdateAlertsSourceDataAttributesSourceTypeChronosphere   UpdateAlertsSourceDataAttributesSourceType = "chronosphere"
 	UpdateAlertsSourceDataAttributesSourceTypeCloudWatch     UpdateAlertsSourceDataAttributesSourceType = "cloud_watch"
@@ -4650,7 +4700,11 @@ const (
 	UpdateAlertsSourceDataAttributesSourceTypeGenericWebhook UpdateAlertsSourceDataAttributesSourceType = "generic_webhook"
 	UpdateAlertsSourceDataAttributesSourceTypeGoogleCloud    UpdateAlertsSourceDataAttributesSourceType = "google_cloud"
 	UpdateAlertsSourceDataAttributesSourceTypeGrafana        UpdateAlertsSourceDataAttributesSourceType = "grafana"
+	UpdateAlertsSourceDataAttributesSourceTypeHoneycomb      UpdateAlertsSourceDataAttributesSourceType = "honeycomb"
+	UpdateAlertsSourceDataAttributesSourceTypeMonteCarlo     UpdateAlertsSourceDataAttributesSourceType = "monte_carlo"
+	UpdateAlertsSourceDataAttributesSourceTypeNagios         UpdateAlertsSourceDataAttributesSourceType = "nagios"
 	UpdateAlertsSourceDataAttributesSourceTypeNewRelic       UpdateAlertsSourceDataAttributesSourceType = "new_relic"
+	UpdateAlertsSourceDataAttributesSourceTypePrtg           UpdateAlertsSourceDataAttributesSourceType = "prtg"
 	UpdateAlertsSourceDataAttributesSourceTypeSentry         UpdateAlertsSourceDataAttributesSourceType = "sentry"
 	UpdateAlertsSourceDataAttributesSourceTypeSplunk         UpdateAlertsSourceDataAttributesSourceType = "splunk"
 )
@@ -5216,13 +5270,18 @@ const (
 
 // Defines values for UpdateIncidentPermissionSetBooleanDataAttributesKind.
 const (
-	UpdateIncidentPermissionSetBooleanDataAttributesKindAssignIncidentRoles UpdateIncidentPermissionSetBooleanDataAttributesKind = "assign_incident_roles"
-	UpdateIncidentPermissionSetBooleanDataAttributesKindInviteSubscribers   UpdateIncidentPermissionSetBooleanDataAttributesKind = "invite_subscribers"
-	UpdateIncidentPermissionSetBooleanDataAttributesKindModifyCustomFields  UpdateIncidentPermissionSetBooleanDataAttributesKind = "modify_custom_fields"
-	UpdateIncidentPermissionSetBooleanDataAttributesKindPublishToStatusPage UpdateIncidentPermissionSetBooleanDataAttributesKind = "publish_to_status_page"
-	UpdateIncidentPermissionSetBooleanDataAttributesKindTriggerWorkflows    UpdateIncidentPermissionSetBooleanDataAttributesKind = "trigger_workflows"
-	UpdateIncidentPermissionSetBooleanDataAttributesKindUpdateSummary       UpdateIncidentPermissionSetBooleanDataAttributesKind = "update_summary"
-	UpdateIncidentPermissionSetBooleanDataAttributesKindUpdateTimeline      UpdateIncidentPermissionSetBooleanDataAttributesKind = "update_timeline"
+	UpdateIncidentPermissionSetBooleanDataAttributesKindAssignIncidentRoles  UpdateIncidentPermissionSetBooleanDataAttributesKind = "assign_incident_roles"
+	UpdateIncidentPermissionSetBooleanDataAttributesKindCreateCommunications UpdateIncidentPermissionSetBooleanDataAttributesKind = "create_communications"
+	UpdateIncidentPermissionSetBooleanDataAttributesKindDeleteCommunications UpdateIncidentPermissionSetBooleanDataAttributesKind = "delete_communications"
+	UpdateIncidentPermissionSetBooleanDataAttributesKindInviteSubscribers    UpdateIncidentPermissionSetBooleanDataAttributesKind = "invite_subscribers"
+	UpdateIncidentPermissionSetBooleanDataAttributesKindModifyCustomFields   UpdateIncidentPermissionSetBooleanDataAttributesKind = "modify_custom_fields"
+	UpdateIncidentPermissionSetBooleanDataAttributesKindPublishToStatusPage  UpdateIncidentPermissionSetBooleanDataAttributesKind = "publish_to_status_page"
+	UpdateIncidentPermissionSetBooleanDataAttributesKindReadCommunications   UpdateIncidentPermissionSetBooleanDataAttributesKind = "read_communications"
+	UpdateIncidentPermissionSetBooleanDataAttributesKindSendCommunications   UpdateIncidentPermissionSetBooleanDataAttributesKind = "send_communications"
+	UpdateIncidentPermissionSetBooleanDataAttributesKindTriggerWorkflows     UpdateIncidentPermissionSetBooleanDataAttributesKind = "trigger_workflows"
+	UpdateIncidentPermissionSetBooleanDataAttributesKindUpdateCommunications UpdateIncidentPermissionSetBooleanDataAttributesKind = "update_communications"
+	UpdateIncidentPermissionSetBooleanDataAttributesKindUpdateSummary        UpdateIncidentPermissionSetBooleanDataAttributesKind = "update_summary"
+	UpdateIncidentPermissionSetBooleanDataAttributesKindUpdateTimeline       UpdateIncidentPermissionSetBooleanDataAttributesKind = "update_timeline"
 )
 
 // Defines values for UpdateIncidentPermissionSetBooleanDataType.
@@ -13931,6 +13990,9 @@ type NewSchedule struct {
 			// Name The name of the schedule
 			Name string `json:"name"`
 
+			// OwnerGroupIds Owning teams.
+			OwnerGroupIds *[]string `json:"owner_group_ids,omitempty"`
+
 			// OwnerUserId ID of the owner of the schedule
 			OwnerUserId    *int `json:"owner_user_id"`
 			SlackUserGroup *struct {
@@ -14346,6 +14408,9 @@ type NewSubStatusDataType string
 type NewTeam struct {
 	Data struct {
 		Attributes struct {
+			// AdminIds The user ids of the admins of this team. These users must also be present in user_ids attribute.
+			AdminIds *[]int `json:"admin_ids"`
+
 			// AlertUrgencyId The alert urgency id of the team
 			AlertUrgencyId *string `json:"alert_urgency_id"`
 
@@ -14412,7 +14477,7 @@ type NewTeam struct {
 				Name string `json:"name"`
 			} `json:"slack_channels"`
 
-			// UserIds The User ID's members of this team
+			// UserIds The user ids of the members of this team.
 			UserIds *[]int `json:"user_ids"`
 
 			// VictorOpsId The VictorOps group id associated to this team
@@ -15969,6 +16034,9 @@ type Schedule struct {
 	// Name The name of the schedule
 	Name string `json:"name"`
 
+	// OwnerGroupIds Owning teams.
+	OwnerGroupIds *[]string `json:"owner_group_ids,omitempty"`
+
 	// OwnerUserId ID of user assigned as owner of the schedule
 	OwnerUserId *int `json:"owner_user_id"`
 
@@ -17039,6 +17107,9 @@ type SubStatusResponseDataType string
 
 // Team defines model for team.
 type Team struct {
+	// AdminIds The user ids of the admins of this team. These users must also be present in user_ids attribute.
+	AdminIds *[]int `json:"admin_ids"`
+
 	// AlertUrgencyId The alert urgency id of the team
 	AlertUrgencyId *string `json:"alert_urgency_id"`
 
@@ -17112,7 +17183,7 @@ type Team struct {
 	// UpdatedAt Date of last update
 	UpdatedAt string `json:"updated_at"`
 
-	// UserIds The User ID's members of this team
+	// UserIds The user ids of the members of this team.
 	UserIds *[]int `json:"user_ids"`
 
 	// VictorOpsId The VictorOps group id associated to this team
@@ -19785,6 +19856,9 @@ type UpdateSchedule struct {
 			// Name The name of the schedule
 			Name *string `json:"name,omitempty"`
 
+			// OwnerGroupIds Owning teams.
+			OwnerGroupIds *[]string `json:"owner_group_ids,omitempty"`
+
 			// OwnerUserId ID of the owner of the schedule
 			OwnerUserId    *int `json:"owner_user_id"`
 			SlackUserGroup *struct {
@@ -20286,6 +20360,9 @@ type UpdateSubStatusDataType string
 type UpdateTeam struct {
 	Data struct {
 		Attributes struct {
+			// AdminIds The user ids of the admins of this team. These users must also be present in user_ids attribute.
+			AdminIds *[]int `json:"admin_ids"`
+
 			// AlertUrgencyId The alert urgency id of the team
 			AlertUrgencyId *string `json:"alert_urgency_id"`
 
@@ -20349,7 +20426,7 @@ type UpdateTeam struct {
 				Name string `json:"name"`
 			} `json:"slack_channels"`
 
-			// UserIds The User ID's members of this team
+			// UserIds The user ids of the members of this team.
 			UserIds *[]int `json:"user_ids"`
 
 			// VictorOpsId The VictorOps group id associated to this team

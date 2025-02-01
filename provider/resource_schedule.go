@@ -86,6 +86,18 @@ func resourceSchedule() *schema.Resource {
 				Description: "Map must contain two fields, `id` and `name`. Synced slack group of the schedule",
 			},
 
+			"owner_group_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeInt,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "The owning teams for this schedules.",
+			},
+
 			"owner_user_id": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    true,
@@ -116,6 +128,9 @@ func resourceScheduleCreate(ctx context.Context, d *schema.ResourceData, meta in
 	}
 	if value, ok := d.GetOkExists("slack_user_group"); ok {
 		s.SlackUserGroup = value.(map[string]interface{})
+	}
+	if value, ok := d.GetOkExists("owner_group_ids"); ok {
+		s.OwnerGroupIds = value.([]interface{})
 	}
 	if value, ok := d.GetOkExists("owner_user_id"); ok {
 		s.OwnerUserId = value.(int)
@@ -153,6 +168,7 @@ func resourceScheduleRead(ctx context.Context, d *schema.ResourceData, meta inte
 	d.Set("description", item.Description)
 	d.Set("all_time_coverage", item.AllTimeCoverage)
 	d.Set("slack_user_group", item.SlackUserGroup)
+	d.Set("owner_group_ids", item.OwnerGroupIds)
 	d.Set("owner_user_id", item.OwnerUserId)
 
 	return nil
@@ -175,6 +191,9 @@ func resourceScheduleUpdate(ctx context.Context, d *schema.ResourceData, meta in
 	}
 	if d.HasChange("slack_user_group") {
 		s.SlackUserGroup = d.Get("slack_user_group").(map[string]interface{})
+	}
+	if d.HasChange("owner_group_ids") {
+		s.OwnerGroupIds = d.Get("owner_group_ids").([]interface{})
 	}
 	if d.HasChange("owner_user_id") {
 		s.OwnerUserId = d.Get("owner_user_id").(int)

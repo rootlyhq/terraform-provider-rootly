@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.20.0] -- TBD
+
+- Add support for `admin_ids` and schedule `owner_group_ids` attributes.
+
 ## [2.19.1] -- 2025-01-21
 
 - Ignore order when diffing list attributes in workflow task resources.

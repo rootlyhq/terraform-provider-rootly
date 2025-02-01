@@ -171,7 +171,19 @@ func resourceTeam() *schema.Resource {
 				Computed:         true,
 				Required:         false,
 				Optional:         true,
-				Description:      "The User ID's members of this team",
+				Description:      "The user ids of the members of this team.",
+			},
+
+			"admin_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeInt,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "The user ids of the admins of this team. These users must also be present in user_ids attribute.",
 			},
 
 			"alerts_email_enabled": &schema.Schema{
@@ -320,6 +332,9 @@ func resourceTeamCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	if value, ok := d.GetOkExists("user_ids"); ok {
 		s.UserIds = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("admin_ids"); ok {
+		s.AdminIds = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("alerts_email_enabled"); ok {
 		s.AlertsEmailEnabled = tools.Bool(value.(bool))
 	}
@@ -380,6 +395,7 @@ func resourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	d.Set("cortex_id", item.CortexId)
 	d.Set("service_now_ci_sys_id", item.ServiceNowCiSysId)
 	d.Set("user_ids", item.UserIds)
+	d.Set("admin_ids", item.AdminIds)
 	d.Set("alerts_email_enabled", item.AlertsEmailEnabled)
 	d.Set("alerts_email_address", item.AlertsEmailAddress)
 	d.Set("alert_urgency_id", item.AlertUrgencyId)
@@ -442,6 +458,9 @@ func resourceTeamUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 	}
 	if d.HasChange("user_ids") {
 		s.UserIds = d.Get("user_ids").([]interface{})
+	}
+	if d.HasChange("admin_ids") {
+		s.AdminIds = d.Get("admin_ids").([]interface{})
 	}
 	if d.HasChange("alerts_email_enabled") {
 		s.AlertsEmailEnabled = tools.Bool(d.Get("alerts_email_enabled").(bool))

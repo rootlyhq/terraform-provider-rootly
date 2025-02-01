@@ -16,6 +16,7 @@ type Schedule struct {
   Description string `jsonapi:"attr,description,omitempty"`
   AllTimeCoverage *bool `jsonapi:"attr,all_time_coverage,omitempty"`
   SlackUserGroup map[string]interface{} `jsonapi:"attr,slack_user_group,omitempty"`
+  OwnerGroupIds []interface{} `jsonapi:"attr,owner_group_ids,omitempty"`
   OwnerUserId int `jsonapi:"attr,owner_user_id,omitempty"`
 }
 

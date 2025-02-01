@@ -21,7 +21,7 @@ description: |-
 ### Optional
 
 - `enabled` (Boolean)
-- `kind` (String) Value must be one of `publish_to_status_page`, `assign_incident_roles`, `invite_subscribers`, `update_summary`, `update_timeline`, `trigger_workflows`, `modify_custom_fields`.
+- `kind` (String) Value must be one of `publish_to_status_page`, `assign_incident_roles`, `invite_subscribers`, `update_summary`, `update_timeline`, `trigger_workflows`, `create_communications`, `read_communications`, `update_communications`, `delete_communications`, `send_communications`, `modify_custom_fields`.
 - `private` (Boolean) Value must be one of true or false
 
 ### Read-Only

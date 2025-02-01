@@ -20,6 +20,7 @@ description: |-
 
 ### Optional
 
+- `admin_ids` (List of Number) The user ids of the admins of this team. These users must also be present in user_ids attribute.
 - `alert_urgency_id` (String) The alert urgency id of the team
 - `alerts_email_address` (String) Email generated to send alerts to
 - `alerts_email_enabled` (Boolean) Enable alerts through email. Value must be one of true or false
@@ -38,7 +39,7 @@ description: |-
 - `slack_aliases` (Block List) Slack Aliases associated with this team (see [below for nested schema](#nestedblock--slack_aliases))
 - `slack_channels` (Block List) Slack Channels associated with this team (see [below for nested schema](#nestedblock--slack_channels))
 - `slug` (String)
-- `user_ids` (List of Number) The User ID's members of this team
+- `user_ids` (List of Number) The user ids of the members of this team.
 - `victor_ops_id` (String) The VictorOps group id associated to this team
 
 ### Read-Only
