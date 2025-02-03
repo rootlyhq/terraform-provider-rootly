@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.20.1] -- 2025-02-03
+
+- Fix type of schedule `owner_group_ids` (should be string not integer)
+
 ## [2.20.0] -- 2025-01-31
 
 - Add support for `admin_ids` and schedule `owner_group_ids` attributes.
