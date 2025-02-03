@@ -89,7 +89,7 @@ func resourceSchedule() *schema.Resource {
 			"owner_group_ids": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeInt,
+					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
