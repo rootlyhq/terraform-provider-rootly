@@ -52,6 +52,7 @@ resource "rootly_workflow_alert" "my-workflow" {
 - `service_ids` (List of String)
 - `severity_ids` (List of String)
 - `slug` (String) The slug of the workflow
+- `sub_status_ids` (List of String)
 - `trigger_params` (Block List, Max: 1) (see [below for nested schema](#nestedblock--trigger_params))
 - `wait` (String) Wait this duration before executing
 - `workflow_group_id` (String) The group this workflow belongs to.

@@ -35,4 +35,5 @@ description: |-
 Optional:
 
 - `id` (String) The ID of notification target
-- `type` (String) The type of the notification target. Value must be one of `user`, `schedule`, `slack_channel`.
+- `team_members` (String) Value must be one of `all`, `admins`.
+- `type` (String) The type of the notification target. Value must be one of `team`, `user`, `schedule`, `slack_channel`.

@@ -59,6 +59,15 @@ func resourceEscalationPath() *schema.Resource {
 				Description: "The ID of the escalation policy",
 			},
 
+			"match_mode": &schema.Schema{
+				Type:        schema.TypeString,
+				Default:     "match-all-rules",
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "How path rules are matched.. Value must be one of `match-all-rules`, `match-any-rule`.",
+			},
+
 			"position": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    true,
@@ -176,6 +185,9 @@ func resourceEscalationPathCreate(ctx context.Context, d *schema.ResourceData, m
 	if value, ok := d.GetOkExists("escalation_policy_id"); ok {
 		s.EscalationPolicyId = value.(string)
 	}
+	if value, ok := d.GetOkExists("match_mode"); ok {
+		s.MatchMode = value.(string)
+	}
 	if value, ok := d.GetOkExists("position"); ok {
 		s.Position = value.(int)
 	}
@@ -221,6 +233,7 @@ func resourceEscalationPathRead(ctx context.Context, d *schema.ResourceData, met
 	d.Set("default", item.Default)
 	d.Set("notification_type", item.NotificationType)
 	d.Set("escalation_policy_id", item.EscalationPolicyId)
+	d.Set("match_mode", item.MatchMode)
 	d.Set("position", item.Position)
 	d.Set("repeat", item.Repeat)
 	d.Set("repeat_count", item.RepeatCount)
@@ -246,6 +259,9 @@ func resourceEscalationPathUpdate(ctx context.Context, d *schema.ResourceData, m
 	}
 	if d.HasChange("escalation_policy_id") {
 		s.EscalationPolicyId = d.Get("escalation_policy_id").(string)
+	}
+	if d.HasChange("match_mode") {
+		s.MatchMode = d.Get("match_mode").(string)
 	}
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)

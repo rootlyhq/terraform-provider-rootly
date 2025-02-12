@@ -23,6 +23,7 @@ description: |-
 
 - `default` (Boolean) Whether this escalation path is the default path. Value must be one of true or false
 - `escalation_policy_id` (String) The ID of the escalation policy
+- `match_mode` (String) How path rules are matched.. Value must be one of `match-all-rules`, `match-any-rule`.
 - `notification_type` (String) Notification rule type
 - `position` (Number) The position of this path in the paths for this EP.
 - `repeat` (Boolean) Whether this path should be repeated until someone acknowledges the alert. Value must be one of true or false

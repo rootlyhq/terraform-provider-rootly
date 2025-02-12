@@ -61,6 +61,7 @@ resource "rootly_workflow_incident" "my-workflow" {
 - `service_ids` (List of String)
 - `severity_ids` (List of String)
 - `slug` (String) The slug of the workflow
+- `sub_status_ids` (List of String)
 - `trigger_params` (Block List, Max: 1) (see [below for nested schema](#nestedblock--trigger_params))
 - `wait` (String) Wait this duration before executing
 - `workflow_group_id` (String) The group this workflow belongs to.
@@ -90,6 +91,7 @@ Optional:
 - `incident_condition_severity` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `incident_condition_started_at` (String)
 - `incident_condition_status` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
+- `incident_condition_sub_status` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `incident_condition_summary` (String)
 - `incident_condition_visibility` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `incident_conditional_inactivity` (String)

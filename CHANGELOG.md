@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.21.0] -- 2025-02-12
+
+- `rootly_escalation_path.match_mode` support
+- `rootly_escalation_level.notification_target_params.team_members` support
+
 ## [2.20.1] -- 2025-02-03
 
 - Fix type of schedule `owner_group_ids` (should be string not integer)

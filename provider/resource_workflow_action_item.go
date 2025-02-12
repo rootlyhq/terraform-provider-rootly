@@ -248,6 +248,14 @@ func resourceWorkflowActionItem() *schema.Resource {
 							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
+						"incident_condition_sub_status": &schema.Schema{
+							Type:        schema.TypeString,
+							Default:     "ANY",
+							Required:    false,
+							Optional:    true,
+							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+						},
+
 						"incident_condition_environment": &schema.Schema{
 							Type:        schema.TypeString,
 							Default:     "ANY",
@@ -548,6 +556,18 @@ func resourceWorkflowActionItem() *schema.Resource {
 				Optional:         true,
 				Description:      "",
 			},
+
+			"sub_status_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
+			},
 		},
 	}
 }
@@ -631,6 +651,9 @@ func resourceWorkflowActionItemCreate(ctx context.Context, d *schema.ResourceDat
 	if value, ok := d.GetOkExists("cause_ids"); ok {
 		s.CauseIds = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("sub_status_ids"); ok {
+		s.SubStatusIds = value.([]interface{})
+	}
 
 	res, err := c.CreateWorkflow(s)
 	if err != nil {
@@ -688,6 +711,7 @@ func resourceWorkflowActionItemRead(ctx context.Context, d *schema.ResourceData,
 	d.Set("functionality_ids", item.FunctionalityIds)
 	d.Set("group_ids", item.GroupIds)
 	d.Set("cause_ids", item.CauseIds)
+	d.Set("sub_status_ids", item.SubStatusIds)
 
 	return nil
 }
@@ -773,6 +797,9 @@ func resourceWorkflowActionItemUpdate(ctx context.Context, d *schema.ResourceDat
 	}
 	if d.HasChange("cause_ids") {
 		s.CauseIds = d.Get("cause_ids").([]interface{})
+	}
+	if d.HasChange("sub_status_ids") {
+		s.SubStatusIds = d.Get("sub_status_ids").([]interface{})
 	}
 
 	_, err := c.UpdateWorkflow(d.Id(), s)

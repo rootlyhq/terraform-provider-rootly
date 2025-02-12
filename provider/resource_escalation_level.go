@@ -81,11 +81,20 @@ func resourceEscalationLevel() *schema.Resource {
 
 						"type": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "user",
+							Default:     "team",
 							Required:    false,
 							Optional:    true,
 							ForceNew:    false,
-							Description: "The type of the notification target. Value must be one of `user`, `schedule`, `slack_channel`.",
+							Description: "The type of the notification target. Value must be one of `team`, `user`, `schedule`, `slack_channel`.",
+						},
+
+						"team_members": &schema.Schema{
+							Type:        schema.TypeString,
+							Default:     "all",
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Value must be one of `all`, `admins`.",
 						},
 					},
 				},

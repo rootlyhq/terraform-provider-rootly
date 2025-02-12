@@ -243,6 +243,18 @@ const (
 	ActionItemTriggerParamsIncidentConditionStatusUNSET        ActionItemTriggerParamsIncidentConditionStatus = "UNSET"
 )
 
+// Defines values for ActionItemTriggerParamsIncidentConditionSubStatus.
+const (
+	ActionItemTriggerParamsIncidentConditionSubStatusANY          ActionItemTriggerParamsIncidentConditionSubStatus = "ANY"
+	ActionItemTriggerParamsIncidentConditionSubStatusCONTAINS     ActionItemTriggerParamsIncidentConditionSubStatus = "CONTAINS"
+	ActionItemTriggerParamsIncidentConditionSubStatusCONTAINSALL  ActionItemTriggerParamsIncidentConditionSubStatus = "CONTAINS_ALL"
+	ActionItemTriggerParamsIncidentConditionSubStatusCONTAINSNONE ActionItemTriggerParamsIncidentConditionSubStatus = "CONTAINS_NONE"
+	ActionItemTriggerParamsIncidentConditionSubStatusIS           ActionItemTriggerParamsIncidentConditionSubStatus = "IS"
+	ActionItemTriggerParamsIncidentConditionSubStatusNONE         ActionItemTriggerParamsIncidentConditionSubStatus = "NONE"
+	ActionItemTriggerParamsIncidentConditionSubStatusSET          ActionItemTriggerParamsIncidentConditionSubStatus = "SET"
+	ActionItemTriggerParamsIncidentConditionSubStatusUNSET        ActionItemTriggerParamsIncidentConditionSubStatus = "UNSET"
+)
+
 // Defines values for ActionItemTriggerParamsIncidentConditionSummary1.
 const (
 	ActionItemTriggerParamsIncidentConditionSummary1SET   ActionItemTriggerParamsIncidentConditionSummary1 = "SET"
@@ -1253,16 +1265,29 @@ const (
 	EnvironmentResponseDataTypeEnvironments EnvironmentResponseDataType = "environments"
 )
 
+// Defines values for EscalationLevelNotificationTargetParamsTeamMembers.
+const (
+	EscalationLevelNotificationTargetParamsTeamMembersAdmins EscalationLevelNotificationTargetParamsTeamMembers = "admins"
+	EscalationLevelNotificationTargetParamsTeamMembersAll    EscalationLevelNotificationTargetParamsTeamMembers = "all"
+)
+
 // Defines values for EscalationLevelNotificationTargetParamsType.
 const (
 	EscalationLevelNotificationTargetParamsTypeSchedule     EscalationLevelNotificationTargetParamsType = "schedule"
 	EscalationLevelNotificationTargetParamsTypeSlackChannel EscalationLevelNotificationTargetParamsType = "slack_channel"
+	EscalationLevelNotificationTargetParamsTypeTeam         EscalationLevelNotificationTargetParamsType = "team"
 	EscalationLevelNotificationTargetParamsTypeUser         EscalationLevelNotificationTargetParamsType = "user"
 )
 
 // Defines values for EscalationLevelResponseDataType.
 const (
 	EscalationLevelResponseDataTypeEscalationLevels EscalationLevelResponseDataType = "escalation_levels"
+)
+
+// Defines values for EscalationPathMatchMode.
+const (
+	EscalationPathMatchModeMatchAllRules EscalationPathMatchMode = "match-all-rules"
+	EscalationPathMatchModeMatchAnyRule  EscalationPathMatchMode = "match-any-rule"
 )
 
 // Defines values for EscalationPathRulesOperator.
@@ -2014,6 +2039,18 @@ const (
 	IncidentTriggerParamsIncidentConditionStatusUNSET        IncidentTriggerParamsIncidentConditionStatus = "UNSET"
 )
 
+// Defines values for IncidentTriggerParamsIncidentConditionSubStatus.
+const (
+	IncidentTriggerParamsIncidentConditionSubStatusANY          IncidentTriggerParamsIncidentConditionSubStatus = "ANY"
+	IncidentTriggerParamsIncidentConditionSubStatusCONTAINS     IncidentTriggerParamsIncidentConditionSubStatus = "CONTAINS"
+	IncidentTriggerParamsIncidentConditionSubStatusCONTAINSALL  IncidentTriggerParamsIncidentConditionSubStatus = "CONTAINS_ALL"
+	IncidentTriggerParamsIncidentConditionSubStatusCONTAINSNONE IncidentTriggerParamsIncidentConditionSubStatus = "CONTAINS_NONE"
+	IncidentTriggerParamsIncidentConditionSubStatusIS           IncidentTriggerParamsIncidentConditionSubStatus = "IS"
+	IncidentTriggerParamsIncidentConditionSubStatusNONE         IncidentTriggerParamsIncidentConditionSubStatus = "NONE"
+	IncidentTriggerParamsIncidentConditionSubStatusSET          IncidentTriggerParamsIncidentConditionSubStatus = "SET"
+	IncidentTriggerParamsIncidentConditionSubStatusUNSET        IncidentTriggerParamsIncidentConditionSubStatus = "UNSET"
+)
+
 // Defines values for IncidentTriggerParamsIncidentConditionSummary1.
 const (
 	IncidentTriggerParamsIncidentConditionSummary1SET   IncidentTriggerParamsIncidentConditionSummary1 = "SET"
@@ -2456,16 +2493,29 @@ const (
 	NewEnvironmentDataTypeEnvironments NewEnvironmentDataType = "environments"
 )
 
+// Defines values for NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembers.
+const (
+	NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembersAdmins NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembers = "admins"
+	NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembersAll    NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembers = "all"
+)
+
 // Defines values for NewEscalationLevelDataAttributesNotificationTargetParamsType.
 const (
 	NewEscalationLevelDataAttributesNotificationTargetParamsTypeSchedule     NewEscalationLevelDataAttributesNotificationTargetParamsType = "schedule"
 	NewEscalationLevelDataAttributesNotificationTargetParamsTypeSlackChannel NewEscalationLevelDataAttributesNotificationTargetParamsType = "slack_channel"
+	NewEscalationLevelDataAttributesNotificationTargetParamsTypeTeam         NewEscalationLevelDataAttributesNotificationTargetParamsType = "team"
 	NewEscalationLevelDataAttributesNotificationTargetParamsTypeUser         NewEscalationLevelDataAttributesNotificationTargetParamsType = "user"
 )
 
 // Defines values for NewEscalationLevelDataType.
 const (
 	NewEscalationLevelDataTypeEscalationLevels NewEscalationLevelDataType = "escalation_levels"
+)
+
+// Defines values for NewEscalationPathDataAttributesMatchMode.
+const (
+	NewEscalationPathDataAttributesMatchModeMatchAllRules NewEscalationPathDataAttributesMatchMode = "match-all-rules"
+	NewEscalationPathDataAttributesMatchModeMatchAnyRule  NewEscalationPathDataAttributesMatchMode = "match-any-rule"
 )
 
 // Defines values for NewEscalationPathDataAttributesNotificationType.
@@ -4883,16 +4933,29 @@ const (
 	UpdateEnvironmentDataTypeEnvironments UpdateEnvironmentDataType = "environments"
 )
 
+// Defines values for UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers.
+const (
+	Admins UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers = "admins"
+	All    UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers = "all"
+)
+
 // Defines values for UpdateEscalationLevelDataAttributesNotificationTargetParamsType.
 const (
 	UpdateEscalationLevelDataAttributesNotificationTargetParamsTypeSchedule     UpdateEscalationLevelDataAttributesNotificationTargetParamsType = "schedule"
 	UpdateEscalationLevelDataAttributesNotificationTargetParamsTypeSlackChannel UpdateEscalationLevelDataAttributesNotificationTargetParamsType = "slack_channel"
+	UpdateEscalationLevelDataAttributesNotificationTargetParamsTypeTeam         UpdateEscalationLevelDataAttributesNotificationTargetParamsType = "team"
 	UpdateEscalationLevelDataAttributesNotificationTargetParamsTypeUser         UpdateEscalationLevelDataAttributesNotificationTargetParamsType = "user"
 )
 
 // Defines values for UpdateEscalationLevelDataType.
 const (
 	EscalationLevels UpdateEscalationLevelDataType = "escalation_levels"
+)
+
+// Defines values for UpdateEscalationPathDataAttributesMatchMode.
+const (
+	MatchAllRules UpdateEscalationPathDataAttributesMatchMode = "match-all-rules"
+	MatchAnyRule  UpdateEscalationPathDataAttributesMatchMode = "match-any-rule"
 )
 
 // Defines values for UpdateEscalationPathDataAttributesNotificationType.
@@ -6794,6 +6857,7 @@ type ActionItemTriggerParams struct {
 	IncidentConditionSeverity           *ActionItemTriggerParamsIncidentConditionSeverity           `json:"incident_condition_severity,omitempty"`
 	IncidentConditionStartedAt          *ActionItemTriggerParams_IncidentConditionStartedAt         `json:"incident_condition_started_at,omitempty"`
 	IncidentConditionStatus             *ActionItemTriggerParamsIncidentConditionStatus             `json:"incident_condition_status,omitempty"`
+	IncidentConditionSubStatus          *ActionItemTriggerParamsIncidentConditionSubStatus          `json:"incident_condition_sub_status,omitempty"`
 	IncidentConditionSummary            *ActionItemTriggerParams_IncidentConditionSummary           `json:"incident_condition_summary,omitempty"`
 	IncidentConditionVisibility         *ActionItemTriggerParamsIncidentConditionVisibility         `json:"incident_condition_visibility,omitempty"`
 	IncidentConditionalInactivity       *ActionItemTriggerParams_IncidentConditionalInactivity      `json:"incident_conditional_inactivity,omitempty"`
@@ -6913,6 +6977,9 @@ type ActionItemTriggerParams_IncidentConditionStartedAt struct {
 
 // ActionItemTriggerParamsIncidentConditionStatus defines model for ActionItemTriggerParams.IncidentConditionStatus.
 type ActionItemTriggerParamsIncidentConditionStatus string
+
+// ActionItemTriggerParamsIncidentConditionSubStatus defines model for ActionItemTriggerParams.IncidentConditionSubStatus.
+type ActionItemTriggerParamsIncidentConditionSubStatus string
 
 // ActionItemTriggerParamsIncidentConditionSummary0 defines model for .
 type ActionItemTriggerParamsIncidentConditionSummary0 = interface{}
@@ -9559,7 +9626,8 @@ type EscalationLevel struct {
 	// NotificationTargetParams Escalation level's notification targets
 	NotificationTargetParams []struct {
 		// Id The ID of notification target
-		Id string `json:"id"`
+		Id          string                                              `json:"id"`
+		TeamMembers *EscalationLevelNotificationTargetParamsTeamMembers `json:"team_members"`
 
 		// Type The type of the notification target
 		Type EscalationLevelNotificationTargetParamsType `json:"type"`
@@ -9571,6 +9639,9 @@ type EscalationLevel struct {
 	// UpdatedAt Date of last update
 	UpdatedAt *string `json:"updated_at,omitempty"`
 }
+
+// EscalationLevelNotificationTargetParamsTeamMembers defines model for EscalationLevel.NotificationTargetParams.TeamMembers.
+type EscalationLevelNotificationTargetParamsTeamMembers string
 
 // EscalationLevelNotificationTargetParamsType The type of the notification target
 type EscalationLevelNotificationTargetParamsType string
@@ -9611,6 +9682,9 @@ type EscalationPath struct {
 	// EscalationPolicyId The ID of the escalation policy
 	EscalationPolicyId string `json:"escalation_policy_id"`
 
+	// MatchMode How path rules are matched.
+	MatchMode *EscalationPathMatchMode `json:"match_mode,omitempty"`
+
 	// Name The name of the escalation path
 	Name string `json:"name"`
 
@@ -9650,6 +9724,9 @@ type EscalationPath struct {
 	// UpdatedAt Date of last update
 	UpdatedAt *string `json:"updated_at,omitempty"`
 }
+
+// EscalationPathMatchMode How path rules are matched.
+type EscalationPathMatchMode string
 
 // EscalationPathRulesOperator How JSON path value should be matched
 type EscalationPathRulesOperator string
@@ -10582,6 +10659,12 @@ type IncidentActionItem struct {
 	// DueDate The due date of the action item
 	DueDate *string `json:"due_date"`
 
+	// JiraIssueId The Jira issue ID.
+	JiraIssueId *string `json:"jira_issue_id"`
+
+	// JiraIssueUrl The Jira issue URL.
+	JiraIssueUrl *string `json:"jira_issue_url"`
+
 	// Kind The kind of the action item
 	Kind *IncidentActionItemKind `json:"kind,omitempty"`
 
@@ -11442,6 +11525,7 @@ type IncidentTriggerParams struct {
 	IncidentConditionSeverity       *IncidentTriggerParamsIncidentConditionSeverity        `json:"incident_condition_severity,omitempty"`
 	IncidentConditionStartedAt      *IncidentTriggerParams_IncidentConditionStartedAt      `json:"incident_condition_started_at,omitempty"`
 	IncidentConditionStatus         *IncidentTriggerParamsIncidentConditionStatus          `json:"incident_condition_status,omitempty"`
+	IncidentConditionSubStatus      *IncidentTriggerParamsIncidentConditionSubStatus       `json:"incident_condition_sub_status,omitempty"`
 	IncidentConditionSummary        *IncidentTriggerParams_IncidentConditionSummary        `json:"incident_condition_summary,omitempty"`
 	IncidentConditionVisibility     *IncidentTriggerParamsIncidentConditionVisibility      `json:"incident_condition_visibility,omitempty"`
 	IncidentConditionalInactivity   *IncidentTriggerParams_IncidentConditionalInactivity   `json:"incident_conditional_inactivity,omitempty"`
@@ -11543,6 +11627,9 @@ type IncidentTriggerParams_IncidentConditionStartedAt struct {
 
 // IncidentTriggerParamsIncidentConditionStatus defines model for IncidentTriggerParams.IncidentConditionStatus.
 type IncidentTriggerParamsIncidentConditionStatus string
+
+// IncidentTriggerParamsIncidentConditionSubStatus defines model for IncidentTriggerParams.IncidentConditionSubStatus.
+type IncidentTriggerParamsIncidentConditionSubStatus string
 
 // IncidentTriggerParamsIncidentConditionSummary0 defines model for .
 type IncidentTriggerParamsIncidentConditionSummary0 = interface{}
@@ -12489,7 +12576,8 @@ type NewEscalationLevel struct {
 			// NotificationTargetParams Escalation level's notification targets
 			NotificationTargetParams []struct {
 				// Id The ID of notification target. If Slack channel, then id of the slack channel (eg. C06Q2JK7RQW)
-				Id string `json:"id"`
+				Id          string                                                               `json:"id"`
+				TeamMembers *NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembers `json:"team_members"`
 
 				// Type The type of the notification target
 				Type NewEscalationLevelDataAttributesNotificationTargetParamsType `json:"type"`
@@ -12502,6 +12590,9 @@ type NewEscalationLevel struct {
 	} `json:"data"`
 }
 
+// NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembers defines model for NewEscalationLevel.Data.Attributes.NotificationTargetParams.TeamMembers.
+type NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembers string
+
 // NewEscalationLevelDataAttributesNotificationTargetParamsType The type of the notification target
 type NewEscalationLevelDataAttributesNotificationTargetParamsType string
 
@@ -12512,6 +12603,12 @@ type NewEscalationLevelDataType string
 type NewEscalationPath struct {
 	Data struct {
 		Attributes struct {
+			// Default Whether this escalation path is the default path
+			Default *bool `json:"default"`
+
+			// MatchMode How path rules are matched.
+			MatchMode *NewEscalationPathDataAttributesMatchMode `json:"match_mode,omitempty"`
+
 			// Name The name of the escalation path
 			Name string `json:"name"`
 
@@ -12551,6 +12648,9 @@ type NewEscalationPath struct {
 		Type NewEscalationPathDataType `json:"type"`
 	} `json:"data"`
 }
+
+// NewEscalationPathDataAttributesMatchMode How path rules are matched.
+type NewEscalationPathDataAttributesMatchMode string
 
 // NewEscalationPathDataAttributesNotificationType Notification rule type to be used
 type NewEscalationPathDataAttributesNotificationType string
@@ -13030,6 +13130,12 @@ type NewIncidentActionItem struct {
 
 			// DueDate The due date of the action item
 			DueDate *string `json:"due_date"`
+
+			// JiraIssueId The Jira issue ID.
+			JiraIssueId *string `json:"jira_issue_id"`
+
+			// JiraIssueUrl The Jira issue URL.
+			JiraIssueUrl *string `json:"jira_issue_url"`
 
 			// Kind The kind of the action item
 			Kind *NewIncidentActionItemDataAttributesKind `json:"kind,omitempty"`
@@ -14601,6 +14707,7 @@ type NewWorkflow struct {
 
 			// Slug The slug of the workflow
 			Slug          *string                                    `json:"slug,omitempty"`
+			SubStatusIds  *[]string                                  `json:"sub_status_ids,omitempty"`
 			TriggerParams *NewWorkflow_Data_Attributes_TriggerParams `json:"trigger_params,omitempty"`
 
 			// Wait Wait this duration before executing
@@ -17856,7 +17963,8 @@ type UpdateEscalationLevel struct {
 			// NotificationTargetParams Escalation level's notification targets
 			NotificationTargetParams *[]struct {
 				// Id The ID of notification target
-				Id string `json:"id"`
+				Id          string                                                                  `json:"id"`
+				TeamMembers *UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers `json:"team_members"`
 
 				// Type The type of the notification target
 				Type UpdateEscalationLevelDataAttributesNotificationTargetParamsType `json:"type"`
@@ -17869,6 +17977,9 @@ type UpdateEscalationLevel struct {
 	} `json:"data"`
 }
 
+// UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers defines model for UpdateEscalationLevel.Data.Attributes.NotificationTargetParams.TeamMembers.
+type UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers string
+
 // UpdateEscalationLevelDataAttributesNotificationTargetParamsType The type of the notification target
 type UpdateEscalationLevelDataAttributesNotificationTargetParamsType string
 
@@ -17879,6 +17990,12 @@ type UpdateEscalationLevelDataType string
 type UpdateEscalationPath struct {
 	Data struct {
 		Attributes struct {
+			// Default Whether this escalation path is the default path
+			Default *bool `json:"default"`
+
+			// MatchMode How path rules are matched.
+			MatchMode *UpdateEscalationPathDataAttributesMatchMode `json:"match_mode,omitempty"`
+
 			// Name The name of the escalation path
 			Name *string `json:"name,omitempty"`
 
@@ -17918,6 +18035,9 @@ type UpdateEscalationPath struct {
 		Type UpdateEscalationPathDataType `json:"type"`
 	} `json:"data"`
 }
+
+// UpdateEscalationPathDataAttributesMatchMode How path rules are matched.
+type UpdateEscalationPathDataAttributesMatchMode string
 
 // UpdateEscalationPathDataAttributesNotificationType Position of the escalation policy level
 type UpdateEscalationPathDataAttributesNotificationType string
@@ -18504,6 +18624,12 @@ type UpdateIncidentActionItem struct {
 
 			// DueDate The due date of the action item
 			DueDate *string `json:"due_date"`
+
+			// JiraIssueId The Jira issue ID.
+			JiraIssueId *string `json:"jira_issue_id"`
+
+			// JiraIssueUrl The Jira issue URL.
+			JiraIssueUrl *string `json:"jira_issue_url"`
 
 			// Kind The kind of the action item
 			Kind *UpdateIncidentActionItemDataAttributesKind `json:"kind,omitempty"`
@@ -20598,6 +20724,7 @@ type UpdateWorkflow struct {
 
 			// Slug The slug of the workflow
 			Slug          *string                                       `json:"slug,omitempty"`
+			SubStatusIds  *[]string                                     `json:"sub_status_ids,omitempty"`
 			TriggerParams *UpdateWorkflow_Data_Attributes_TriggerParams `json:"trigger_params,omitempty"`
 
 			// Wait Wait this duration before executing
@@ -21016,6 +21143,7 @@ type Workflow struct {
 
 	// Slug The slug of the workflow
 	Slug          *string                 `json:"slug,omitempty"`
+	SubStatusIds  *[]string               `json:"sub_status_ids,omitempty"`
 	TriggerParams *Workflow_TriggerParams `json:"trigger_params,omitempty"`
 
 	// UpdatedAt Date of last update

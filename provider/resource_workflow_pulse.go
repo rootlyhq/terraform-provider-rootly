@@ -372,6 +372,18 @@ func resourceWorkflowPulse() *schema.Resource {
 				Optional:         true,
 				Description:      "",
 			},
+
+			"sub_status_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "",
+			},
 		},
 	}
 }
@@ -455,6 +467,9 @@ func resourceWorkflowPulseCreate(ctx context.Context, d *schema.ResourceData, me
 	if value, ok := d.GetOkExists("cause_ids"); ok {
 		s.CauseIds = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("sub_status_ids"); ok {
+		s.SubStatusIds = value.([]interface{})
+	}
 
 	res, err := c.CreateWorkflow(s)
 	if err != nil {
@@ -512,6 +527,7 @@ func resourceWorkflowPulseRead(ctx context.Context, d *schema.ResourceData, meta
 	d.Set("functionality_ids", item.FunctionalityIds)
 	d.Set("group_ids", item.GroupIds)
 	d.Set("cause_ids", item.CauseIds)
+	d.Set("sub_status_ids", item.SubStatusIds)
 
 	return nil
 }
@@ -597,6 +613,9 @@ func resourceWorkflowPulseUpdate(ctx context.Context, d *schema.ResourceData, me
 	}
 	if d.HasChange("cause_ids") {
 		s.CauseIds = d.Get("cause_ids").([]interface{})
+	}
+	if d.HasChange("sub_status_ids") {
+		s.SubStatusIds = d.Get("sub_status_ids").([]interface{})
 	}
 
 	_, err := c.UpdateWorkflow(d.Id(), s)
