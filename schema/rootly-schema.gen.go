@@ -2255,14 +2255,6 @@ const (
 	NewAlertDataAttributesSourceZendesk         NewAlertDataAttributesSource = "zendesk"
 )
 
-// Defines values for NewAlertDataAttributesStatus.
-const (
-	NewAlertDataAttributesStatusAcknowledged NewAlertDataAttributesStatus = "acknowledged"
-	NewAlertDataAttributesStatusOpen         NewAlertDataAttributesStatus = "open"
-	NewAlertDataAttributesStatusResolved     NewAlertDataAttributesStatus = "resolved"
-	NewAlertDataAttributesStatusTriggered    NewAlertDataAttributesStatus = "triggered"
-)
-
 // Defines values for NewAlertDataType.
 const (
 	NewAlertDataTypeAlerts NewAlertDataType = "alerts"
@@ -5195,14 +5187,14 @@ const (
 
 // Defines values for UpdateIncidentDataAttributesKind.
 const (
-	UpdateIncidentDataAttributesKindBackfilled UpdateIncidentDataAttributesKind = "backfilled"
-	UpdateIncidentDataAttributesKindExample    UpdateIncidentDataAttributesKind = "example"
-	UpdateIncidentDataAttributesKindExampleSub UpdateIncidentDataAttributesKind = "example_sub"
-	UpdateIncidentDataAttributesKindNormal     UpdateIncidentDataAttributesKind = "normal"
-	UpdateIncidentDataAttributesKindNormalSub  UpdateIncidentDataAttributesKind = "normal_sub"
-	UpdateIncidentDataAttributesKindScheduled  UpdateIncidentDataAttributesKind = "scheduled"
-	UpdateIncidentDataAttributesKindTest       UpdateIncidentDataAttributesKind = "test"
-	UpdateIncidentDataAttributesKindTestSub    UpdateIncidentDataAttributesKind = "test_sub"
+	Backfilled UpdateIncidentDataAttributesKind = "backfilled"
+	Example    UpdateIncidentDataAttributesKind = "example"
+	ExampleSub UpdateIncidentDataAttributesKind = "example_sub"
+	Normal     UpdateIncidentDataAttributesKind = "normal"
+	NormalSub  UpdateIncidentDataAttributesKind = "normal_sub"
+	Scheduled  UpdateIncidentDataAttributesKind = "scheduled"
+	Test       UpdateIncidentDataAttributesKind = "test"
+	TestSub    UpdateIncidentDataAttributesKind = "test_sub"
 )
 
 // Defines values for UpdateIncidentDataAttributesStatus.
@@ -10560,6 +10552,9 @@ type Incident struct {
 	// DetectedAt Date of detection
 	DetectedAt *string `json:"detected_at"`
 
+	// DuplicateIncidentId ID of duplicated incident
+	DuplicateIncidentId *string `json:"duplicate_incident_id"`
+
 	// Environments The Environments of the incident
 	Environments *[]EnvironmentResponse `json:"environments"`
 
@@ -11777,10 +11772,10 @@ type InviteToMicrosoftTeamsChannelTaskParamsTaskType string
 
 // InviteToSlackChannelOpsgenieTaskParams defines model for invite_to_slack_channel_opsgenie_task_params.
 type InviteToSlackChannelOpsgenieTaskParams struct {
-	Channels *[]struct {
+	Channels []struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
-	} `json:"channels,omitempty"`
+	} `json:"channels"`
 	Schedule struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -11793,10 +11788,10 @@ type InviteToSlackChannelOpsgenieTaskParamsTaskType string
 
 // InviteToSlackChannelPagerdutyTaskParams defines model for invite_to_slack_channel_pagerduty_task_params.
 type InviteToSlackChannelPagerdutyTaskParams struct {
-	Channels *[]struct {
+	Channels []struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
-	} `json:"channels,omitempty"`
+	} `json:"channels"`
 	EscalationPolicy *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -11824,10 +11819,10 @@ type InviteToSlackChannelPagerdutyTaskParams1 = interface{}
 
 // InviteToSlackChannelRootlyTaskParams defines model for invite_to_slack_channel_rootly_task_params.
 type InviteToSlackChannelRootlyTaskParams struct {
-	Channels *[]struct {
+	Channels []struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
-	} `json:"channels,omitempty"`
+	} `json:"channels"`
 	EscalationPolicyTarget *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -11883,10 +11878,10 @@ type InviteToSlackChannelTaskParams1 = interface{}
 
 // InviteToSlackChannelVictorOpsTaskParams defines model for invite_to_slack_channel_victor_ops_task_params.
 type InviteToSlackChannelVictorOpsTaskParams struct {
-	Channels *[]struct {
+	Channels []struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
-	} `json:"channels,omitempty"`
+	} `json:"channels"`
 	TaskType *InviteToSlackChannelVictorOpsTaskParamsTaskType `json:"task_type,omitempty"`
 	Team     struct {
 		Id   *string `json:"id,omitempty"`
@@ -12098,9 +12093,6 @@ type NewAlert struct {
 			// StartedAt Alert start datetime
 			StartedAt *time.Time `json:"started_at"`
 
-			// Status Only available for organizations with Rootly On-Call enabled. Can be one of open, triggered, acknowledged or resolved.
-			Status *NewAlertDataAttributesStatus `json:"status,omitempty"`
-
 			// Summary The summary of the alert
 			Summary string `json:"summary"`
 		} `json:"attributes"`
@@ -12113,9 +12105,6 @@ type NewAlertDataAttributesNotificationTargetType string
 
 // NewAlertDataAttributesSource The source of the alert
 type NewAlertDataAttributesSource string
-
-// NewAlertDataAttributesStatus Only available for organizations with Rootly On-Call enabled. Can be one of open, triggered, acknowledged or resolved.
-type NewAlertDataAttributesStatus string
 
 // NewAlertDataType defines model for NewAlert.Data.Type.
 type NewAlertDataType string
@@ -13032,6 +13021,9 @@ type NewIncident struct {
 
 			// DetectedAt Date of detection
 			DetectedAt *string `json:"detected_at"`
+
+			// DuplicateIncidentId ID of duplicated incident
+			DuplicateIncidentId *string `json:"duplicate_incident_id"`
 
 			// EnvironmentIds The Environment ID's to attach to the incident
 			EnvironmentIds *[]string `json:"environment_ids"`
@@ -18529,6 +18521,9 @@ type UpdateIncident struct {
 
 			// DetectedAt Date of detection
 			DetectedAt *string `json:"detected_at"`
+
+			// DuplicateIncidentId ID of duplicated incident
+			DuplicateIncidentId *string `json:"duplicate_incident_id"`
 
 			// EnvironmentIds The Environment ID's to attach to the incident
 			EnvironmentIds *[]string `json:"environment_ids"`
@@ -25230,11 +25225,9 @@ func (t InviteToSlackChannelPagerdutyTaskParams) MarshalJSON() ([]byte, error) {
 		}
 	}
 
-	if t.Channels != nil {
-		object["channels"], err = json.Marshal(t.Channels)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'channels': %w", err)
-		}
+	object["channels"], err = json.Marshal(t.Channels)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'channels': %w", err)
 	}
 
 	if t.EscalationPolicy != nil {

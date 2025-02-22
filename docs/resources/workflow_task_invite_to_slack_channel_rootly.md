@@ -33,9 +33,12 @@ Manages workflow invite_to_slack_channel_rootly task.
 <a id="nestedblock--task_params"></a>
 ### Nested Schema for `task_params`
 
+Required:
+
+- `channels` (Block List, Min: 1) (see [below for nested schema](#nestedblock--task_params--channels))
+
 Optional:
 
-- `channels` (Block List) (see [below for nested schema](#nestedblock--task_params--channels))
 - `escalation_policy_target` (Map of String) Map must contain two fields, `id` and `name`.
 - `group_target` (Map of String) Map must contain two fields, `id` and `name`.
 - `schedule_target` (Map of String) Map must contain two fields, `id` and `name`.

@@ -35,11 +35,11 @@ Manages workflow invite_to_slack_channel_opsgenie task.
 
 Required:
 
+- `channels` (Block List, Min: 1) (see [below for nested schema](#nestedblock--task_params--channels))
 - `schedule` (Map of String) Map must contain two fields, `id` and `name`.
 
 Optional:
 
-- `channels` (Block List) (see [below for nested schema](#nestedblock--task_params--channels))
 - `task_type` (String)
 
 <a id="nestedblock--task_params--channels"></a>

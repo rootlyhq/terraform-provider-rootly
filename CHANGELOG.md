@@ -1,13 +1,17 @@
 # Changelog
 
+## [2.21.1] -- 2025-02-22
+
+- Fix some required parameters.
+
 ## [2.21.0] -- 2025-02-12
 
-- `rootly_escalation_path.match_mode` support
-- `rootly_escalation_level.notification_target_params.team_members` support
+- `rootly_escalation_path.match_mode` support.
+- `rootly_escalation_level.notification_target_params.team_members` support.
 
 ## [2.20.1] -- 2025-02-03
 
-- Fix type of schedule `owner_group_ids` (should be string not integer)
+- Fix type of schedule `owner_group_ids` (should be string not integer).
 
 ## [2.20.0] -- 2025-01-31
 
@@ -37,11 +41,11 @@
 
 ## [2.18.4] -- 2025-01-17
 
-- Fix `slack_user_group` field schema for `rootly_schedule`
+- Fix `slack_user_group` field schema for `rootly_schedule`.
 
 ## [2.18.3] -- 2025-01-16
 
-- Add `position` field to `rootly_escalation_path`
+- Add `position` field to `rootly_escalation_path`.
 
 ## [2.18.2] -- 2025-01-10
 

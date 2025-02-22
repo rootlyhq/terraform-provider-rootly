@@ -35,11 +35,11 @@ Manages workflow invite_to_slack_channel_victor_ops task.
 
 Required:
 
+- `channels` (Block List, Min: 1) (see [below for nested schema](#nestedblock--task_params--channels))
 - `team` (Map of String) Map must contain two fields, `id` and `name`.
 
 Optional:
 
-- `channels` (Block List) (see [below for nested schema](#nestedblock--task_params--channels))
 - `task_type` (String)
 
 <a id="nestedblock--task_params--channels"></a>

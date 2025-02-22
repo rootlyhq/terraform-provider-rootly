@@ -16,6 +16,7 @@ type Incident struct {
   Kind string `jsonapi:"attr,kind,omitempty"`
   Slug string `jsonapi:"attr,slug,omitempty"`
   ParentIncidentId string `jsonapi:"attr,parent_incident_id,omitempty"`
+  DuplicateIncidentId string `jsonapi:"attr,duplicate_incident_id,omitempty"`
   Summary string `jsonapi:"attr,summary,omitempty"`
   Private *bool `jsonapi:"attr,private,omitempty"`
   Severity map[string]interface{} `jsonapi:"attr,severity,omitempty"`

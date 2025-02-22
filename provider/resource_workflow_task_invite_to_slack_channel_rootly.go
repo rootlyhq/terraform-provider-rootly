@@ -76,7 +76,7 @@ func resourceWorkflowTaskInviteToSlackChannelRootly() *schema.Resource {
 						"channels": &schema.Schema{
 							Description:      "",
 							Type:             schema.TypeList,
-							Optional:         true,
+							Required:         true,
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
