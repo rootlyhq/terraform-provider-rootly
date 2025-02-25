@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.21.2] -- 2025-02-25
+
+- Fix alert source w/o sourceable attributes crashing.
+
 ## [2.21.1] -- 2025-02-22
 
 - Fix some required parameters.
