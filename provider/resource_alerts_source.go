@@ -8,6 +8,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
 
 func resourceAlertsSource() *schema.Resource {
@@ -61,7 +62,7 @@ func resourceAlertsSource() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
-				ForceNew:    false,
+				ForceNew:    true,
 				Description: "A secret key used to authenticate incoming requests to this alerts source",
 			},
 
@@ -155,6 +156,7 @@ func resourceAlertsSource() *schema.Resource {
 							Optional: true,
 							MinItems: 0,
 							MaxItems: 25,
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"field": &schema.Schema{
@@ -248,34 +250,37 @@ func resourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, meta 
 	d.Set("secret", item.Secret)
 	d.Set("webhook_endpoint", item.WebhookEndpoint)
 	d.Set("alert_source_urgency_rules_attributes", item.AlertSourceUrgencyRulesAttributes)
-	sourceables := make([]interface{}, 1, 1)
-	item_field_mappings := item.SourceableAttributes["field_mappings_attributes"].([]interface{})
-	field_mappings := make([]map[string]interface{}, 0)
-	for _, fma := range item_field_mappings {
-		field_mapping := make(map[string]interface{}, 0)
-		if fmaMap, ok := fma.(map[string]interface{}); ok {
-			for key, val := range fmaMap {
-				if key == "field" || key == "json_path" {
-					field_mapping[key] = val
+	if item_field_mappings, ok := item.SourceableAttributes["field_mappings_attributes"].([]interface{}); ok {
+		sourceables := make([]interface{}, 1, 1)
+		field_mappings := make([]map[string]interface{}, 0)
+		for _, fma := range item_field_mappings {
+			field_mapping := make(map[string]interface{}, 0)
+			if fmaMap, ok := fma.(map[string]interface{}); ok {
+				for key, val := range fmaMap {
+					if key == "field" || key == "json_path" {
+						field_mapping[key] = val
+					}
 				}
 			}
+			field_mappings = append(field_mappings, field_mapping)
 		}
-		field_mappings = append(field_mappings, field_mapping)
+		sourceables[0] = map[string]interface{}{
+			"auto_resolve":              item.SourceableAttributes["auto_resolve"],
+			"resolve_state":             item.SourceableAttributes["resolve_state"],
+			"field_mappings_attributes": field_mappings,
+		}
+		d.Set("sourceable_attributes", sourceables)
 	}
-	sourceables[0] = map[string]interface{}{
-		"auto_resolve":              item.SourceableAttributes["auto_resolve"],
-		"resolve_state":             item.SourceableAttributes["resolve_state"],
-		"field_mappings_attributes": field_mappings,
-	}
-	d.Set("sourceable_attributes", sourceables)
 
-	alert_templates := make([]interface{}, 1, 1)
-	alert_templates[0] = map[string]interface{}{
-		"title":        item.AlertTemplateAttributes["title"],
-		"description":  item.AlertTemplateAttributes["description"],
-		"external_url": item.AlertTemplateAttributes["external_url"],
+	if item.AlertTemplateAttributes["title"] != nil || item.AlertTemplateAttributes["description"] != nil || item.AlertTemplateAttributes["external_url"] != nil {
+		alert_templates := make([]interface{}, 1, 1)
+		alert_templates[0] = map[string]interface{}{
+			"title":        item.AlertTemplateAttributes["title"],
+			"description":  item.AlertTemplateAttributes["description"],
+			"external_url": item.AlertTemplateAttributes["external_url"],
+		}
+		d.Set("alert_template_attributes", alert_templates)
 	}
-	d.Set("alert_template_attributes", alert_templates)
 
 	return nil
 }
