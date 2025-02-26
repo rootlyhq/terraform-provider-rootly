@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -21,18 +21,18 @@ type IncidentSubStatus struct {
 func (c *Client) ListIncidentSubStatuses(id string, params *rootlygo.ListIncidentSubStatusesParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListIncidentSubStatusesRequest(c.Rootly.Server, id, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	incident_sub_statuses, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(IncidentSubStatus)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return incident_sub_statuses, nil
@@ -41,22 +41,22 @@ func (c *Client) ListIncidentSubStatuses(id string, params *rootlygo.ListInciden
 func (c *Client) CreateIncidentSubStatus(d *IncidentSubStatus) (*IncidentSubStatus, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling incident_sub_status: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling incident_sub_status: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateIncidentSubStatusRequestWithBody(c.Rootly.Server, d.IncidentId, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create incident_sub_status: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create incident_sub_status: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentSubStatus))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling incident_sub_status: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling incident_sub_status: %w", err)
 	}
 
 	return data.(*IncidentSubStatus), nil
@@ -65,18 +65,18 @@ func (c *Client) CreateIncidentSubStatus(d *IncidentSubStatus) (*IncidentSubStat
 func (c *Client) GetIncidentSubStatus(id string) (*IncidentSubStatus, error) {
 	req, err := rootlygo.NewGetIncidentSubStatusRequest(c.Rootly.Server, id, nil)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get incident_sub_status: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get incident_sub_status: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentSubStatus))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling incident_sub_status: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling incident_sub_status: %w", err)
 	}
 
 	return data.(*IncidentSubStatus), nil
@@ -85,22 +85,22 @@ func (c *Client) GetIncidentSubStatus(id string) (*IncidentSubStatus, error) {
 func (c *Client) UpdateIncidentSubStatus(id string, incident_sub_status *IncidentSubStatus) (*IncidentSubStatus, error) {
 	buffer, err := MarshalData(incident_sub_status)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling incident_sub_status: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling incident_sub_status: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateIncidentSubStatusRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update incident_sub_status: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update incident_sub_status: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentSubStatus))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling incident_sub_status: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling incident_sub_status: %w", err)
 	}
 
 	return data.(*IncidentSubStatus), nil
@@ -109,12 +109,12 @@ func (c *Client) UpdateIncidentSubStatus(id string, incident_sub_status *Inciden
 func (c *Client) DeleteIncidentSubStatus(id string) error {
 	req, err := rootlygo.NewDeleteIncidentSubStatusRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete incident_sub_status: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete incident_sub_status: %w", err)
 	}
 
 	return nil

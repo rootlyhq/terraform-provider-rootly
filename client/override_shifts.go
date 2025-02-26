@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -24,18 +24,18 @@ type OverrideShift struct {
 func (c *Client) ListOverrideShifts(id string, params *rootlygo.ListOverrideShiftsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListOverrideShiftsRequest(c.Rootly.Server, id, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	override_shifts, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(OverrideShift)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return override_shifts, nil
@@ -44,22 +44,22 @@ func (c *Client) ListOverrideShifts(id string, params *rootlygo.ListOverrideShif
 func (c *Client) CreateOverrideShift(d *OverrideShift) (*OverrideShift, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling override_shift: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling override_shift: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateOverrideShiftRequestWithBody(c.Rootly.Server, d.ScheduleId, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create override_shift: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create override_shift: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(OverrideShift))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling override_shift: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling override_shift: %w", err)
 	}
 
 	return data.(*OverrideShift), nil
@@ -68,18 +68,18 @@ func (c *Client) CreateOverrideShift(d *OverrideShift) (*OverrideShift, error) {
 func (c *Client) GetOverrideShift(id string) (*OverrideShift, error) {
 	req, err := rootlygo.NewGetOverrideShiftRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get override_shift: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get override_shift: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(OverrideShift))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling override_shift: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling override_shift: %w", err)
 	}
 
 	return data.(*OverrideShift), nil
@@ -88,22 +88,22 @@ func (c *Client) GetOverrideShift(id string) (*OverrideShift, error) {
 func (c *Client) UpdateOverrideShift(id string, override_shift *OverrideShift) (*OverrideShift, error) {
 	buffer, err := MarshalData(override_shift)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling override_shift: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling override_shift: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateOverrideShiftRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update override_shift: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update override_shift: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(OverrideShift))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling override_shift: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling override_shift: %w", err)
 	}
 
 	return data.(*OverrideShift), nil
@@ -112,12 +112,12 @@ func (c *Client) UpdateOverrideShift(id string, override_shift *OverrideShift) (
 func (c *Client) DeleteOverrideShift(id string) error {
 	req, err := rootlygo.NewDeleteOverrideShiftRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete override_shift: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete override_shift: %w", err)
 	}
 
 	return nil

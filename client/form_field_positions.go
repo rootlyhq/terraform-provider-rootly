@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -20,18 +20,18 @@ type FormFieldPosition struct {
 func (c *Client) ListFormFieldPositions(id string, params *rootlygo.ListFormFieldPositionsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListFormFieldPositionsRequest(c.Rootly.Server, id, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	form_field_positions, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(FormFieldPosition)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return form_field_positions, nil
@@ -40,22 +40,22 @@ func (c *Client) ListFormFieldPositions(id string, params *rootlygo.ListFormFiel
 func (c *Client) CreateFormFieldPosition(d *FormFieldPosition) (*FormFieldPosition, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling form_field_position: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling form_field_position: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateFormFieldPositionRequestWithBody(c.Rootly.Server, d.FormFieldId, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create form_field_position: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create form_field_position: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormFieldPosition))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling form_field_position: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling form_field_position: %w", err)
 	}
 
 	return data.(*FormFieldPosition), nil
@@ -64,18 +64,18 @@ func (c *Client) CreateFormFieldPosition(d *FormFieldPosition) (*FormFieldPositi
 func (c *Client) GetFormFieldPosition(id string) (*FormFieldPosition, error) {
 	req, err := rootlygo.NewGetFormFieldPositionRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get form_field_position: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get form_field_position: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormFieldPosition))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling form_field_position: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling form_field_position: %w", err)
 	}
 
 	return data.(*FormFieldPosition), nil
@@ -84,22 +84,22 @@ func (c *Client) GetFormFieldPosition(id string) (*FormFieldPosition, error) {
 func (c *Client) UpdateFormFieldPosition(id string, form_field_position *FormFieldPosition) (*FormFieldPosition, error) {
 	buffer, err := MarshalData(form_field_position)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling form_field_position: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling form_field_position: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateFormFieldPositionRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update form_field_position: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update form_field_position: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormFieldPosition))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling form_field_position: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling form_field_position: %w", err)
 	}
 
 	return data.(*FormFieldPosition), nil
@@ -108,12 +108,12 @@ func (c *Client) UpdateFormFieldPosition(id string, form_field_position *FormFie
 func (c *Client) DeleteFormFieldPosition(id string) error {
 	req, err := rootlygo.NewDeleteFormFieldPositionRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete form_field_position: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete form_field_position: %w", err)
 	}
 
 	return nil

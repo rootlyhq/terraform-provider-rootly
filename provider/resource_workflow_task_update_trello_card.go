@@ -4,8 +4,9 @@ package provider
 
 import (
 	"context"
+	"errors"
 	"fmt"
-
+	
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -26,105 +27,105 @@ func resourceWorkflowTaskUpdateTrelloCard() *schema.Resource {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
-		Schema: map[string]*schema.Schema{
+		Schema: map[string]*schema.Schema {
 			"workflow_id": {
-				Description: "The ID of the parent workflow",
-				Type:        schema.TypeString,
-				Required:    true,
-				ForceNew:    true,
+				Description:  "The ID of the parent workflow",
+				Type:         schema.TypeString,
+				Required:     true,
+				ForceNew:     true,
 			},
 			"name": {
-				Description: "Name of the workflow task",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
+				Description:  "Name of the workflow task",
+				Type:         schema.TypeString,
+				Optional:     true,
+				Computed:     true,
 			},
 			"position": {
-				Description: "The position of the workflow task (1 being top of list)",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Computed:    true,
+				Description:  "The position of the workflow task (1 being top of list)",
+				Type:         schema.TypeInt,
+				Optional:     true,
+				Computed:     true,
 			},
 			"skip_on_failure": {
-				Description: "Skip workflow task if any failures",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Default:     false,
+				Description:  "Skip workflow task if any failures",
+				Type:         schema.TypeBool,
+				Optional:     true,
+				Default:      false,
 			},
 			"enabled": {
-				Description: "Enable/disable this workflow task",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Default:     true,
+				Description:  "Enable/disable this workflow task",
+				Type:         schema.TypeBool,
+				Optional:     true,
+				Default:      true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type:        schema.TypeList,
-				Required:    true,
-				MinItems:    1,
-				MaxItems:    1,
+				Type: schema.TypeList,
+				Required: true,
+				MinItems: 1,
+				MaxItems: 1,
 				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"task_type": &schema.Schema{
-							Type:     schema.TypeString,
+					Schema: map[string]*schema.Schema {
+						"task_type": &schema.Schema {
+							Type: schema.TypeString,
 							Optional: true,
-							Default:  "update_trello_card",
-							ValidateFunc: validation.StringInSlice([]string{
+							Default: "update_trello_card",
+							ValidateFunc: validation.StringInSlice([]string {
 								"update_trello_card",
 							}, false),
 						},
-						"card_id": &schema.Schema{
+						"card_id": &schema.Schema {
 							Description: "The card id",
-							Type:        schema.TypeString,
-							Required:    true,
+							Type: schema.TypeString,
+							Required: true,
 						},
-						"title": &schema.Schema{
+						"title": &schema.Schema {
 							Description: "The card title",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"description": &schema.Schema{
+						"description": &schema.Schema {
 							Description: "The card description",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"due_date": &schema.Schema{
+						"due_date": &schema.Schema {
 							Description: "The due date",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"board": &schema.Schema{
+						"board": &schema.Schema {
 							Description: "Map must contain two fields, `id` and `name`. The board id and display name",
-							Type:        schema.TypeMap,
-							Optional:    true,
+							Type: schema.TypeMap,
+							Optional: true,
 						},
-						"list": &schema.Schema{
+						"list": &schema.Schema {
 							Description: "Map must contain two fields, `id` and `name`. The list id and display name",
-							Type:        schema.TypeMap,
-							Optional:    true,
+							Type: schema.TypeMap,
+							Optional: true,
 						},
-						"labels": &schema.Schema{
-							Description:      "",
-							Type:             schema.TypeList,
-							Optional:         true,
+						"labels": &schema.Schema {
+							Description: "",
+							Type: schema.TypeList,
+							Optional: true,
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type:     schema.TypeString,
+								Schema: map[string]*schema.Schema {
+									"id": &schema.Schema {
+										Type: schema.TypeString,
 										Required: true,
 									},
-									"name": &schema.Schema{
-										Type:     schema.TypeString,
+									"name": &schema.Schema {
+										Type: schema.TypeString,
 										Required: true,
 									},
 								},
 							},
 						},
-						"archivation": &schema.Schema{
+						"archivation": &schema.Schema {
 							Description: "Map must contain two fields, `id` and `name`. The archivation id and display name",
-							Type:        schema.TypeMap,
-							Required:    true,
+							Type: schema.TypeMap,
+							Required: true,
 						},
 					},
 				},
@@ -146,12 +147,12 @@ func resourceWorkflowTaskUpdateTrelloCardCreate(ctx context.Context, d *schema.R
 	tflog.Trace(ctx, fmt.Sprintf("Creating workflow task: %s", workflowId))
 
 	s := &client.WorkflowTask{
-		WorkflowId:    workflowId,
-		Name:          name,
-		Position:      position,
+		WorkflowId: workflowId,
+		Name: name,
+		Position: position,
 		SkipOnFailure: skipOnFailure,
-		Enabled:       enabled,
-		TaskParams:    taskParams,
+		Enabled: enabled,
+		TaskParams: taskParams,
 	}
 
 	res, err := c.CreateWorkflowTask(s)
@@ -173,7 +174,7 @@ func resourceWorkflowTaskUpdateTrelloCardRead(ctx context.Context, d *schema.Res
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskUpdateTrelloCard (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
@@ -206,12 +207,12 @@ func resourceWorkflowTaskUpdateTrelloCardUpdate(ctx context.Context, d *schema.R
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	s := &client.WorkflowTask{
-		WorkflowId:    workflowId,
-		Name:          name,
-		Position:      position,
+		WorkflowId: workflowId,
+		Name: name,
+		Position: position,
 		SkipOnFailure: skipOnFailure,
-		Enabled:       enabled,
-		TaskParams:    taskParams,
+		Enabled: enabled,
+		TaskParams: taskParams,
 	}
 
 	tflog.Debug(ctx, fmt.Sprintf("adding value: %#v", s))
@@ -231,7 +232,7 @@ func resourceWorkflowTaskUpdateTrelloCardDelete(ctx context.Context, d *schema.R
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskUpdateTrelloCard (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil

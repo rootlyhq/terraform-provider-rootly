@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -25,18 +25,18 @@ type Environment struct {
 func (c *Client) ListEnvironments(params *rootlygo.ListEnvironmentsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListEnvironmentsRequest(c.Rootly.Server, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	environments, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Environment)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return environments, nil
@@ -45,22 +45,22 @@ func (c *Client) ListEnvironments(params *rootlygo.ListEnvironmentsParams) ([]in
 func (c *Client) CreateEnvironment(d *Environment) (*Environment, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling environment: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling environment: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateEnvironmentRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create environment: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create environment: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Environment))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling environment: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling environment: %w", err)
 	}
 
 	return data.(*Environment), nil
@@ -69,18 +69,18 @@ func (c *Client) CreateEnvironment(d *Environment) (*Environment, error) {
 func (c *Client) GetEnvironment(id string) (*Environment, error) {
 	req, err := rootlygo.NewGetEnvironmentRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get environment: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get environment: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Environment))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling environment: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling environment: %w", err)
 	}
 
 	return data.(*Environment), nil
@@ -89,22 +89,22 @@ func (c *Client) GetEnvironment(id string) (*Environment, error) {
 func (c *Client) UpdateEnvironment(id string, environment *Environment) (*Environment, error) {
 	buffer, err := MarshalData(environment)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling environment: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling environment: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateEnvironmentRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update environment: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update environment: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Environment))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling environment: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling environment: %w", err)
 	}
 
 	return data.(*Environment), nil
@@ -113,12 +113,12 @@ func (c *Client) UpdateEnvironment(id string, environment *Environment) (*Enviro
 func (c *Client) DeleteEnvironment(id string) error {
 	req, err := rootlygo.NewDeleteEnvironmentRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete environment: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete environment: %w", err)
 	}
 
 	return nil

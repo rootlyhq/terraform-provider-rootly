@@ -4,11 +4,12 @@ package provider
 
 import (
 	"context"
+	"errors"
 	"fmt"
-
-	"encoding/json"
+	
 	"reflect"
-
+  "encoding/json"
+	
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -29,70 +30,70 @@ func resourceWorkflowTaskCreateAirtableTableRecord() *schema.Resource {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
-		Schema: map[string]*schema.Schema{
+		Schema: map[string]*schema.Schema {
 			"workflow_id": {
-				Description: "The ID of the parent workflow",
-				Type:        schema.TypeString,
-				Required:    true,
-				ForceNew:    true,
+				Description:  "The ID of the parent workflow",
+				Type:         schema.TypeString,
+				Required:     true,
+				ForceNew:     true,
 			},
 			"name": {
-				Description: "Name of the workflow task",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
+				Description:  "Name of the workflow task",
+				Type:         schema.TypeString,
+				Optional:     true,
+				Computed:     true,
 			},
 			"position": {
-				Description: "The position of the workflow task (1 being top of list)",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Computed:    true,
+				Description:  "The position of the workflow task (1 being top of list)",
+				Type:         schema.TypeInt,
+				Optional:     true,
+				Computed:     true,
 			},
 			"skip_on_failure": {
-				Description: "Skip workflow task if any failures",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Default:     false,
+				Description:  "Skip workflow task if any failures",
+				Type:         schema.TypeBool,
+				Optional:     true,
+				Default:      false,
 			},
 			"enabled": {
-				Description: "Enable/disable this workflow task",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Default:     true,
+				Description:  "Enable/disable this workflow task",
+				Type:         schema.TypeBool,
+				Optional:     true,
+				Default:      true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type:        schema.TypeList,
-				Required:    true,
-				MinItems:    1,
-				MaxItems:    1,
+				Type: schema.TypeList,
+				Required: true,
+				MinItems: 1,
+				MaxItems: 1,
 				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"task_type": &schema.Schema{
-							Type:     schema.TypeString,
+					Schema: map[string]*schema.Schema {
+						"task_type": &schema.Schema {
+							Type: schema.TypeString,
 							Optional: true,
-							Default:  "create_airtable_table_record",
-							ValidateFunc: validation.StringInSlice([]string{
+							Default: "create_airtable_table_record",
+							ValidateFunc: validation.StringInSlice([]string {
 								"create_airtable_table_record",
 							}, false),
 						},
-						"base": &schema.Schema{
+						"base": &schema.Schema {
 							Description: "Map must contain two fields, `id` and `name`. ",
-							Type:        schema.TypeMap,
-							Required:    true,
+							Type: schema.TypeMap,
+							Required: true,
 						},
-						"table": &schema.Schema{
+						"table": &schema.Schema {
 							Description: "Map must contain two fields, `id` and `name`. ",
-							Type:        schema.TypeMap,
-							Required:    true,
+							Type: schema.TypeMap,
+							Required: true,
 						},
-						"custom_fields_mapping": &schema.Schema{
+						"custom_fields_mapping": &schema.Schema {
 							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {
 								var oldJSONAsInterface, newJSONAsInterface interface{}
-
+							
 								if err := json.Unmarshal([]byte(old), &oldJSONAsInterface); err != nil {
 									return false
 								}
@@ -125,12 +126,12 @@ func resourceWorkflowTaskCreateAirtableTableRecordCreate(ctx context.Context, d 
 	tflog.Trace(ctx, fmt.Sprintf("Creating workflow task: %s", workflowId))
 
 	s := &client.WorkflowTask{
-		WorkflowId:    workflowId,
-		Name:          name,
-		Position:      position,
+		WorkflowId: workflowId,
+		Name: name,
+		Position: position,
 		SkipOnFailure: skipOnFailure,
-		Enabled:       enabled,
-		TaskParams:    taskParams,
+		Enabled: enabled,
+		TaskParams: taskParams,
 	}
 
 	res, err := c.CreateWorkflowTask(s)
@@ -152,7 +153,7 @@ func resourceWorkflowTaskCreateAirtableTableRecordRead(ctx context.Context, d *s
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateAirtableTableRecord (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
@@ -185,12 +186,12 @@ func resourceWorkflowTaskCreateAirtableTableRecordUpdate(ctx context.Context, d 
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	s := &client.WorkflowTask{
-		WorkflowId:    workflowId,
-		Name:          name,
-		Position:      position,
+		WorkflowId: workflowId,
+		Name: name,
+		Position: position,
 		SkipOnFailure: skipOnFailure,
-		Enabled:       enabled,
-		TaskParams:    taskParams,
+		Enabled: enabled,
+		TaskParams: taskParams,
 	}
 
 	tflog.Debug(ctx, fmt.Sprintf("adding value: %#v", s))
@@ -210,7 +211,7 @@ func resourceWorkflowTaskCreateAirtableTableRecordDelete(ctx context.Context, d 
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateAirtableTableRecord (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil

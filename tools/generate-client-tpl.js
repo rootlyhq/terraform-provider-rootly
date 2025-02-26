@@ -14,9 +14,9 @@ module.exports = (name, resourceSchema, pathIdField, hasIncludeParam) => {
 package client
 
 import (
+    "fmt"
 	"reflect"
 	${strconvImport}
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -34,18 +34,18 @@ func (c *Client) List${nameCamelPlural}(${listFnParams(
     pathIdField
   )})
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	${namePlural}, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(${nameCamel})))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return ${namePlural}, nil
@@ -54,7 +54,7 @@ func (c *Client) List${nameCamelPlural}(${listFnParams(
 func (c *Client) Create${nameCamel}(d *${nameCamel}) (*${nameCamel}, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling ${name}: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling ${name}: %w", err)
 	}
 
 	req, err := rootlygo.NewCreate${nameCamel}RequestWithBody(${createParams(
@@ -62,17 +62,17 @@ func (c *Client) Create${nameCamel}(d *${nameCamel}) (*${nameCamel}, error) {
     resourceSchema
   )})
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create ${name}: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create ${name}: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(${nameCamel}))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling ${name}: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling ${name}: %w", err)
 	}
 
 	return data.(*${nameCamel}), nil
@@ -81,18 +81,18 @@ func (c *Client) Create${nameCamel}(d *${nameCamel}) (*${nameCamel}, error) {
 func (c *Client) Get${nameCamel}(id string) (*${nameCamel}, error) {
 	req, err := rootlygo.NewGet${nameCamel}Request(c.Rootly.Server, id${hasIncludeParam ? ', nil' : ''})
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get ${name}: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get ${name}: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(${nameCamel}))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling ${name}: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling ${name}: %w", err)
 	}
 
 	return data.(*${nameCamel}), nil
@@ -101,22 +101,22 @@ func (c *Client) Get${nameCamel}(id string) (*${nameCamel}, error) {
 func (c *Client) Update${nameCamel}(id string, ${name} *${nameCamel}) (*${nameCamel}, error) {
 	buffer, err := MarshalData(${name})
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling ${name}: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling ${name}: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdate${nameCamel}RequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update ${name}: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update ${name}: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(${nameCamel}))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling ${name}: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling ${name}: %w", err)
 	}
 
 	return data.(*${nameCamel}), nil
@@ -125,12 +125,12 @@ func (c *Client) Update${nameCamel}(id string, ${name} *${nameCamel}) (*${nameCa
 func (c *Client) Delete${nameCamel}(id string) error {
 	req, err := rootlygo.NewDelete${nameCamel}Request(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete ${name}: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete ${name}: %w", err)
 	}
 
 	return nil

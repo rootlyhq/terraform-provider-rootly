@@ -4,10 +4,11 @@ package provider
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
@@ -16,75 +17,89 @@ import (
 func resourceFormFieldPlacement() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceFormFieldPlacementCreate,
-		ReadContext:   resourceFormFieldPlacementRead,
+		ReadContext: resourceFormFieldPlacementRead,
 		UpdateContext: resourceFormFieldPlacementUpdate,
 		DeleteContext: resourceFormFieldPlacementDelete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
-
-			"form_field_id": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    true,
+		Schema: map[string]*schema.Schema {
+			
+			"form_field_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: true,
 				Description: "The form field that is placed.",
+				
 			},
+			
 
-			"form_set_id": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+			"form_set_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The form set this field is placed in.",
+				
 			},
+			
 
-			"form": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+			"form": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The form this field is placed on.",
+				
 			},
+			
 
-			"position": &schema.Schema{
-				Type:        schema.TypeInt,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The position of the field placement.",
-			},
+		"position": &schema.Schema {
+			Type: schema.TypeInt,
+			Computed: true,
+			Required: false,
+			Optional: true,
+			ForceNew: false,
+			Description: "The position of the field placement.",
+			
+		},
+		
 
-			"required": &schema.Schema{
-				Type:        schema.TypeBool,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
+			"required": &schema.Schema {
+				Type: schema.TypeBool,
+				Computed: true,
+				Required: false,
+				Optional: true,
 				Description: "Whether the field is unconditionally required on this form.. Value must be one of true or false",
+				
 			},
+			
 
-			"required_operator": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "and",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"required_operator": &schema.Schema {
+				Type: schema.TypeString,
+				Default: "and",
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "Logical operator when evaluating multiple form_field_placement_conditions with conditioned=required. Value must be one of `and`, `or`.",
+				
 			},
+			
 
-			"placement_operator": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "and",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"placement_operator": &schema.Schema {
+				Type: schema.TypeString,
+				Default: "and",
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "Logical operator when evaluating multiple form_field_placement_conditions with conditioned=placement. Value must be one of `and`, `or`.",
+				
 			},
+			
 		},
 	}
 }
@@ -96,27 +111,27 @@ func resourceFormFieldPlacementCreate(ctx context.Context, d *schema.ResourceDat
 
 	s := &client.FormFieldPlacement{}
 
-	if value, ok := d.GetOkExists("form_field_id"); ok {
-		s.FormFieldId = value.(string)
-	}
-	if value, ok := d.GetOkExists("form_set_id"); ok {
-		s.FormSetId = value.(string)
-	}
-	if value, ok := d.GetOkExists("form"); ok {
-		s.Form = value.(string)
-	}
-	if value, ok := d.GetOkExists("position"); ok {
-		s.Position = value.(int)
-	}
-	if value, ok := d.GetOkExists("required"); ok {
-		s.Required = tools.Bool(value.(bool))
-	}
-	if value, ok := d.GetOkExists("required_operator"); ok {
-		s.RequiredOperator = value.(string)
-	}
-	if value, ok := d.GetOkExists("placement_operator"); ok {
-		s.PlacementOperator = value.(string)
-	}
+	  if value, ok := d.GetOkExists("form_field_id"); ok {
+				s.FormFieldId = value.(string)
+			}
+    if value, ok := d.GetOkExists("form_set_id"); ok {
+				s.FormSetId = value.(string)
+			}
+    if value, ok := d.GetOkExists("form"); ok {
+				s.Form = value.(string)
+			}
+    if value, ok := d.GetOkExists("position"); ok {
+				s.Position = value.(int)
+			}
+    if value, ok := d.GetOkExists("required"); ok {
+				s.Required = tools.Bool(value.(bool))
+			}
+    if value, ok := d.GetOkExists("required_operator"); ok {
+				s.RequiredOperator = value.(string)
+			}
+    if value, ok := d.GetOkExists("placement_operator"); ok {
+				s.PlacementOperator = value.(string)
+			}
 
 	res, err := c.CreateFormFieldPlacement(s)
 	if err != nil {
@@ -137,7 +152,7 @@ func resourceFormFieldPlacementRead(ctx context.Context, d *schema.ResourceData,
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("FormFieldPlacement (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
@@ -147,12 +162,12 @@ func resourceFormFieldPlacementRead(ctx context.Context, d *schema.ResourceData,
 	}
 
 	d.Set("form_field_id", item.FormFieldId)
-	d.Set("form_set_id", item.FormSetId)
-	d.Set("form", item.Form)
-	d.Set("position", item.Position)
-	d.Set("required", item.Required)
-	d.Set("required_operator", item.RequiredOperator)
-	d.Set("placement_operator", item.PlacementOperator)
+  d.Set("form_set_id", item.FormSetId)
+  d.Set("form", item.Form)
+  d.Set("position", item.Position)
+  d.Set("required", item.Required)
+  d.Set("required_operator", item.RequiredOperator)
+  d.Set("placement_operator", item.PlacementOperator)
 
 	return nil
 }
@@ -163,27 +178,27 @@ func resourceFormFieldPlacementUpdate(ctx context.Context, d *schema.ResourceDat
 
 	s := &client.FormFieldPlacement{}
 
-	if d.HasChange("form_field_id") {
-		s.FormFieldId = d.Get("form_field_id").(string)
-	}
-	if d.HasChange("form_set_id") {
-		s.FormSetId = d.Get("form_set_id").(string)
-	}
-	if d.HasChange("form") {
-		s.Form = d.Get("form").(string)
-	}
-	if d.HasChange("position") {
-		s.Position = d.Get("position").(int)
-	}
-	if d.HasChange("required") {
-		s.Required = tools.Bool(d.Get("required").(bool))
-	}
-	if d.HasChange("required_operator") {
-		s.RequiredOperator = d.Get("required_operator").(string)
-	}
-	if d.HasChange("placement_operator") {
-		s.PlacementOperator = d.Get("placement_operator").(string)
-	}
+	  if d.HasChange("form_field_id") {
+				s.FormFieldId = d.Get("form_field_id").(string)
+			}
+    if d.HasChange("form_set_id") {
+				s.FormSetId = d.Get("form_set_id").(string)
+			}
+    if d.HasChange("form") {
+				s.Form = d.Get("form").(string)
+			}
+    if d.HasChange("position") {
+				s.Position = d.Get("position").(int)
+			}
+    if d.HasChange("required") {
+				s.Required = tools.Bool(d.Get("required").(bool))
+			}
+    if d.HasChange("required_operator") {
+				s.RequiredOperator = d.Get("required_operator").(string)
+			}
+    if d.HasChange("placement_operator") {
+				s.PlacementOperator = d.Get("placement_operator").(string)
+			}
 
 	_, err := c.UpdateFormFieldPlacement(d.Id(), s)
 	if err != nil {
@@ -201,7 +216,7 @@ func resourceFormFieldPlacementDelete(ctx context.Context, d *schema.ResourceDat
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("FormFieldPlacement (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil

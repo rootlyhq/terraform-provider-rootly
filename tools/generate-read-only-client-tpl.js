@@ -14,9 +14,9 @@ module.exports = (name, resourceSchema, pathIdField) => {
 package client
 
 import (
+    "fmt"
 	"reflect"
 	${strconvImport}
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -34,17 +34,17 @@ func (c *Client) List${nameCamelPlural}(${listFnParams(
     pathIdField
   )})
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	${namePlural}, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(${nameCamel})))
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshalling: %w", err)
 	}
 
 	return ${namePlural}, nil

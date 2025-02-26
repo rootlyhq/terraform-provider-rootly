@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -27,18 +27,18 @@ type AlertGroup struct {
 func (c *Client) ListAlertGroups(params *rootlygo.ListAlertGroupsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListAlertGroupsRequest(c.Rootly.Server, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	alert_groups, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(AlertGroup)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return alert_groups, nil
@@ -47,22 +47,22 @@ func (c *Client) ListAlertGroups(params *rootlygo.ListAlertGroupsParams) ([]inte
 func (c *Client) CreateAlertGroup(d *AlertGroup) (*AlertGroup, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling alert_group: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling alert_group: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateAlertGroupRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create alert_group: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create alert_group: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(AlertGroup))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling alert_group: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling alert_group: %w", err)
 	}
 
 	return data.(*AlertGroup), nil
@@ -71,18 +71,18 @@ func (c *Client) CreateAlertGroup(d *AlertGroup) (*AlertGroup, error) {
 func (c *Client) GetAlertGroup(id string) (*AlertGroup, error) {
 	req, err := rootlygo.NewGetAlertGroupRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get alert_group: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get alert_group: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(AlertGroup))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling alert_group: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling alert_group: %w", err)
 	}
 
 	return data.(*AlertGroup), nil
@@ -91,22 +91,22 @@ func (c *Client) GetAlertGroup(id string) (*AlertGroup, error) {
 func (c *Client) UpdateAlertGroup(id string, alert_group *AlertGroup) (*AlertGroup, error) {
 	buffer, err := MarshalData(alert_group)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling alert_group: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling alert_group: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateAlertGroupRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update alert_group: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update alert_group: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(AlertGroup))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling alert_group: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling alert_group: %w", err)
 	}
 
 	return data.(*AlertGroup), nil
@@ -115,12 +115,12 @@ func (c *Client) UpdateAlertGroup(id string, alert_group *AlertGroup) (*AlertGro
 func (c *Client) DeleteAlertGroup(id string) error {
 	req, err := rootlygo.NewDeleteAlertGroupRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete alert_group: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete alert_group: %w", err)
 	}
 
 	return nil

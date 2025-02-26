@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -26,18 +26,18 @@ type Severity struct {
 func (c *Client) ListSeverities(params *rootlygo.ListSeveritiesParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListSeveritiesRequest(c.Rootly.Server, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	severities, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Severity)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return severities, nil
@@ -46,22 +46,22 @@ func (c *Client) ListSeverities(params *rootlygo.ListSeveritiesParams) ([]interf
 func (c *Client) CreateSeverity(d *Severity) (*Severity, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling severity: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling severity: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateSeverityRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create severity: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create severity: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Severity))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling severity: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling severity: %w", err)
 	}
 
 	return data.(*Severity), nil
@@ -70,18 +70,18 @@ func (c *Client) CreateSeverity(d *Severity) (*Severity, error) {
 func (c *Client) GetSeverity(id string) (*Severity, error) {
 	req, err := rootlygo.NewGetSeverityRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get severity: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get severity: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Severity))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling severity: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling severity: %w", err)
 	}
 
 	return data.(*Severity), nil
@@ -90,22 +90,22 @@ func (c *Client) GetSeverity(id string) (*Severity, error) {
 func (c *Client) UpdateSeverity(id string, severity *Severity) (*Severity, error) {
 	buffer, err := MarshalData(severity)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling severity: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling severity: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateSeverityRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update severity: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update severity: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Severity))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling severity: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling severity: %w", err)
 	}
 
 	return data.(*Severity), nil
@@ -114,12 +114,12 @@ func (c *Client) UpdateSeverity(id string, severity *Severity) (*Severity, error
 func (c *Client) DeleteSeverity(id string) error {
 	req, err := rootlygo.NewDeleteSeverityRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete severity: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete severity: %w", err)
 	}
 
 	return nil

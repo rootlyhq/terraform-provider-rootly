@@ -4,8 +4,9 @@ package provider
 
 import (
 	"context"
+	"errors"
 	"fmt"
-
+	
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -26,116 +27,116 @@ func resourceWorkflowTaskPageOpsgenieOnCallResponders() *schema.Resource {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
-		Schema: map[string]*schema.Schema{
+		Schema: map[string]*schema.Schema {
 			"workflow_id": {
-				Description: "The ID of the parent workflow",
-				Type:        schema.TypeString,
-				Required:    true,
-				ForceNew:    true,
+				Description:  "The ID of the parent workflow",
+				Type:         schema.TypeString,
+				Required:     true,
+				ForceNew:     true,
 			},
 			"name": {
-				Description: "Name of the workflow task",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
+				Description:  "Name of the workflow task",
+				Type:         schema.TypeString,
+				Optional:     true,
+				Computed:     true,
 			},
 			"position": {
-				Description: "The position of the workflow task (1 being top of list)",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Computed:    true,
+				Description:  "The position of the workflow task (1 being top of list)",
+				Type:         schema.TypeInt,
+				Optional:     true,
+				Computed:     true,
 			},
 			"skip_on_failure": {
-				Description: "Skip workflow task if any failures",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Default:     false,
+				Description:  "Skip workflow task if any failures",
+				Type:         schema.TypeBool,
+				Optional:     true,
+				Default:      false,
 			},
 			"enabled": {
-				Description: "Enable/disable this workflow task",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Default:     true,
+				Description:  "Enable/disable this workflow task",
+				Type:         schema.TypeBool,
+				Optional:     true,
+				Default:      true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type:        schema.TypeList,
-				Required:    true,
-				MinItems:    1,
-				MaxItems:    1,
+				Type: schema.TypeList,
+				Required: true,
+				MinItems: 1,
+				MaxItems: 1,
 				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"task_type": &schema.Schema{
-							Type:     schema.TypeString,
+					Schema: map[string]*schema.Schema {
+						"task_type": &schema.Schema {
+							Type: schema.TypeString,
 							Optional: true,
-							Default:  "page_opsgenie_on_call_responders",
-							ValidateFunc: validation.StringInSlice([]string{
+							Default: "page_opsgenie_on_call_responders",
+							ValidateFunc: validation.StringInSlice([]string {
 								"page_opsgenie_on_call_responders",
 							}, false),
 						},
-						"title": &schema.Schema{
+						"title": &schema.Schema {
 							Description: "Incident title.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"message": &schema.Schema{
+						"message": &schema.Schema {
 							Description: "Message of the incident",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"description": &schema.Schema{
+						"description": &schema.Schema {
 							Description: "Description field of the incident that is generally used to provide a detailed information about the incident",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"teams": &schema.Schema{
-							Description:      "",
-							Type:             schema.TypeList,
-							Optional:         true,
+						"teams": &schema.Schema {
+							Description: "",
+							Type: schema.TypeList,
+							Optional: true,
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type:     schema.TypeString,
+								Schema: map[string]*schema.Schema {
+									"id": &schema.Schema {
+										Type: schema.TypeString,
 										Required: true,
 									},
-									"name": &schema.Schema{
-										Type:     schema.TypeString,
+									"name": &schema.Schema {
+										Type: schema.TypeString,
 										Required: true,
 									},
 								},
 							},
 						},
-						"users": &schema.Schema{
-							Description:      "",
-							Type:             schema.TypeList,
-							Optional:         true,
+						"users": &schema.Schema {
+							Description: "",
+							Type: schema.TypeList,
+							Optional: true,
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type:     schema.TypeString,
+								Schema: map[string]*schema.Schema {
+									"id": &schema.Schema {
+										Type: schema.TypeString,
 										Required: true,
 									},
-									"name": &schema.Schema{
-										Type:     schema.TypeString,
+									"name": &schema.Schema {
+										Type: schema.TypeString,
 										Required: true,
 									},
 								},
 							},
 						},
-						"priority": &schema.Schema{
+						"priority": &schema.Schema {
 							Description: "Value must be one of `P1`, `P2`, `P3`, `P4`, `P5`, `auto`.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "P1",
+							Type: schema.TypeString,
+							Optional: true,
+							Default: "P1",
 							ValidateFunc: validation.StringInSlice([]string{
 								"P1",
-								"P2",
-								"P3",
-								"P4",
-								"P5",
-								"auto",
+"P2",
+"P3",
+"P4",
+"P5",
+"auto",
 							}, false),
 						},
 					},
@@ -158,12 +159,12 @@ func resourceWorkflowTaskPageOpsgenieOnCallRespondersCreate(ctx context.Context,
 	tflog.Trace(ctx, fmt.Sprintf("Creating workflow task: %s", workflowId))
 
 	s := &client.WorkflowTask{
-		WorkflowId:    workflowId,
-		Name:          name,
-		Position:      position,
+		WorkflowId: workflowId,
+		Name: name,
+		Position: position,
 		SkipOnFailure: skipOnFailure,
-		Enabled:       enabled,
-		TaskParams:    taskParams,
+		Enabled: enabled,
+		TaskParams: taskParams,
 	}
 
 	res, err := c.CreateWorkflowTask(s)
@@ -185,7 +186,7 @@ func resourceWorkflowTaskPageOpsgenieOnCallRespondersRead(ctx context.Context, d
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskPageOpsgenieOnCallResponders (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
@@ -218,12 +219,12 @@ func resourceWorkflowTaskPageOpsgenieOnCallRespondersUpdate(ctx context.Context,
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	s := &client.WorkflowTask{
-		WorkflowId:    workflowId,
-		Name:          name,
-		Position:      position,
+		WorkflowId: workflowId,
+		Name: name,
+		Position: position,
 		SkipOnFailure: skipOnFailure,
-		Enabled:       enabled,
-		TaskParams:    taskParams,
+		Enabled: enabled,
+		TaskParams: taskParams,
 	}
 
 	tflog.Debug(ctx, fmt.Sprintf("adding value: %#v", s))
@@ -243,7 +244,7 @@ func resourceWorkflowTaskPageOpsgenieOnCallRespondersDelete(ctx context.Context,
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskPageOpsgenieOnCallResponders (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil

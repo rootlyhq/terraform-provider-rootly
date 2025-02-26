@@ -4,8 +4,9 @@ package provider
 
 import (
 	"context"
+	"errors"
 	"fmt"
-
+	
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -26,105 +27,105 @@ func resourceWorkflowTaskTriggerWorkflow() *schema.Resource {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
-		Schema: map[string]*schema.Schema{
+		Schema: map[string]*schema.Schema {
 			"workflow_id": {
-				Description: "The ID of the parent workflow",
-				Type:        schema.TypeString,
-				Required:    true,
-				ForceNew:    true,
+				Description:  "The ID of the parent workflow",
+				Type:         schema.TypeString,
+				Required:     true,
+				ForceNew:     true,
 			},
 			"name": {
-				Description: "Name of the workflow task",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
+				Description:  "Name of the workflow task",
+				Type:         schema.TypeString,
+				Optional:     true,
+				Computed:     true,
 			},
 			"position": {
-				Description: "The position of the workflow task (1 being top of list)",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Computed:    true,
+				Description:  "The position of the workflow task (1 being top of list)",
+				Type:         schema.TypeInt,
+				Optional:     true,
+				Computed:     true,
 			},
 			"skip_on_failure": {
-				Description: "Skip workflow task if any failures",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Default:     false,
+				Description:  "Skip workflow task if any failures",
+				Type:         schema.TypeBool,
+				Optional:     true,
+				Default:      false,
 			},
 			"enabled": {
-				Description: "Enable/disable this workflow task",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Default:     true,
+				Description:  "Enable/disable this workflow task",
+				Type:         schema.TypeBool,
+				Optional:     true,
+				Default:      true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type:        schema.TypeList,
-				Required:    true,
-				MinItems:    1,
-				MaxItems:    1,
+				Type: schema.TypeList,
+				Required: true,
+				MinItems: 1,
+				MaxItems: 1,
 				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"task_type": &schema.Schema{
-							Type:     schema.TypeString,
+					Schema: map[string]*schema.Schema {
+						"task_type": &schema.Schema {
+							Type: schema.TypeString,
 							Optional: true,
-							Default:  "trigger_workflow",
-							ValidateFunc: validation.StringInSlice([]string{
+							Default: "trigger_workflow",
+							ValidateFunc: validation.StringInSlice([]string {
 								"trigger_workflow",
 							}, false),
 						},
-						"kind": &schema.Schema{
+						"kind": &schema.Schema {
 							Description: "Value must be one of `incident`, `post_mortem`, `action_item`, `pulse`, `alert`.",
-							Type:        schema.TypeString,
-							Required:    true,
+							Type: schema.TypeString,
+							Required: true,
 							ValidateFunc: validation.StringInSlice([]string{
 								"incident",
-								"post_mortem",
-								"action_item",
-								"pulse",
-								"alert",
+"post_mortem",
+"action_item",
+"pulse",
+"alert",
 							}, false),
 						},
-						"attribute_to_query_by": &schema.Schema{
+						"attribute_to_query_by": &schema.Schema {
 							Description: "[\"(incident) kind can only match [:id, :slug, :sequential_id, :pagerduty_incident_id, :opsgenie_incident_id, :victor_ops_incident_id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]\", \"(post_mortem) kind can only match [:id]\", \"(action_item) kind can only match [:id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]\", \"(pulse) kind can only match [:id]\", \"(alert) kind can only match [:id]\"]. Value must be one of `id`, `slug`, `sequential_id`, `pagerduty_incident_id`, `opsgenie_incident_id`, `victor_ops_incident_id`, `jira_issue_id`, `asana_task_id`, `shortcut_task_id`, `linear_issue_id`, `zendesk_ticket_id`, `motion_task_id`, `trello_card_id`, `airtable_record_id`, `shortcut_story_id`, `github_issue_id`, `freshservice_ticket_id`, `freshservice_task_id`, `clickup_task_id`.",
-							Type:        schema.TypeString,
-							Required:    true,
+							Type: schema.TypeString,
+							Required: true,
 							ValidateFunc: validation.StringInSlice([]string{
 								"id",
-								"slug",
-								"sequential_id",
-								"pagerduty_incident_id",
-								"opsgenie_incident_id",
-								"victor_ops_incident_id",
-								"jira_issue_id",
-								"asana_task_id",
-								"shortcut_task_id",
-								"linear_issue_id",
-								"zendesk_ticket_id",
-								"motion_task_id",
-								"trello_card_id",
-								"airtable_record_id",
-								"shortcut_story_id",
-								"github_issue_id",
-								"freshservice_ticket_id",
-								"freshservice_task_id",
-								"clickup_task_id",
+"slug",
+"sequential_id",
+"pagerduty_incident_id",
+"opsgenie_incident_id",
+"victor_ops_incident_id",
+"jira_issue_id",
+"asana_task_id",
+"shortcut_task_id",
+"linear_issue_id",
+"zendesk_ticket_id",
+"motion_task_id",
+"trello_card_id",
+"airtable_record_id",
+"shortcut_story_id",
+"github_issue_id",
+"freshservice_ticket_id",
+"freshservice_task_id",
+"clickup_task_id",
 							}, false),
 						},
-						"resource": &schema.Schema{
+						"resource": &schema.Schema {
 							Description: "Map must contain two fields, `id` and `name`. ",
-							Type:        schema.TypeMap,
-							Required:    true,
+							Type: schema.TypeMap,
+							Required: true,
 						},
-						"workflow": &schema.Schema{
+						"workflow": &schema.Schema {
 							Description: "Map must contain two fields, `id` and `name`. ",
-							Type:        schema.TypeMap,
-							Required:    true,
+							Type: schema.TypeMap,
+							Required: true,
 						},
-						"check_workflow_conditions": &schema.Schema{
+						"check_workflow_conditions": &schema.Schema {
 							Description: "Value must be one of true or false",
-							Type:        schema.TypeBool,
-							Optional:    true,
+							Type: schema.TypeBool,
+							Optional: true,
 						},
 					},
 				},
@@ -146,12 +147,12 @@ func resourceWorkflowTaskTriggerWorkflowCreate(ctx context.Context, d *schema.Re
 	tflog.Trace(ctx, fmt.Sprintf("Creating workflow task: %s", workflowId))
 
 	s := &client.WorkflowTask{
-		WorkflowId:    workflowId,
-		Name:          name,
-		Position:      position,
+		WorkflowId: workflowId,
+		Name: name,
+		Position: position,
 		SkipOnFailure: skipOnFailure,
-		Enabled:       enabled,
-		TaskParams:    taskParams,
+		Enabled: enabled,
+		TaskParams: taskParams,
 	}
 
 	res, err := c.CreateWorkflowTask(s)
@@ -173,7 +174,7 @@ func resourceWorkflowTaskTriggerWorkflowRead(ctx context.Context, d *schema.Reso
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskTriggerWorkflow (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
@@ -206,12 +207,12 @@ func resourceWorkflowTaskTriggerWorkflowUpdate(ctx context.Context, d *schema.Re
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	s := &client.WorkflowTask{
-		WorkflowId:    workflowId,
-		Name:          name,
-		Position:      position,
+		WorkflowId: workflowId,
+		Name: name,
+		Position: position,
 		SkipOnFailure: skipOnFailure,
-		Enabled:       enabled,
-		TaskParams:    taskParams,
+		Enabled: enabled,
+		TaskParams: taskParams,
 	}
 
 	tflog.Debug(ctx, fmt.Sprintf("adding value: %#v", s))
@@ -231,7 +232,7 @@ func resourceWorkflowTaskTriggerWorkflowDelete(ctx context.Context, d *schema.Re
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskTriggerWorkflow (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil

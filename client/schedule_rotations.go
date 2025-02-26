@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -27,18 +27,18 @@ type ScheduleRotation struct {
 func (c *Client) ListScheduleRotations(id string, params *rootlygo.ListScheduleRotationsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListScheduleRotationsRequest(c.Rootly.Server, id, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	schedule_rotations, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(ScheduleRotation)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return schedule_rotations, nil
@@ -47,22 +47,22 @@ func (c *Client) ListScheduleRotations(id string, params *rootlygo.ListScheduleR
 func (c *Client) CreateScheduleRotation(d *ScheduleRotation) (*ScheduleRotation, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling schedule_rotation: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling schedule_rotation: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateScheduleRotationRequestWithBody(c.Rootly.Server, d.ScheduleId, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create schedule_rotation: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create schedule_rotation: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(ScheduleRotation))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling schedule_rotation: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling schedule_rotation: %w", err)
 	}
 
 	return data.(*ScheduleRotation), nil
@@ -71,18 +71,18 @@ func (c *Client) CreateScheduleRotation(d *ScheduleRotation) (*ScheduleRotation,
 func (c *Client) GetScheduleRotation(id string) (*ScheduleRotation, error) {
 	req, err := rootlygo.NewGetScheduleRotationRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get schedule_rotation: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get schedule_rotation: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(ScheduleRotation))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling schedule_rotation: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling schedule_rotation: %w", err)
 	}
 
 	return data.(*ScheduleRotation), nil
@@ -91,22 +91,22 @@ func (c *Client) GetScheduleRotation(id string) (*ScheduleRotation, error) {
 func (c *Client) UpdateScheduleRotation(id string, schedule_rotation *ScheduleRotation) (*ScheduleRotation, error) {
 	buffer, err := MarshalData(schedule_rotation)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling schedule_rotation: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling schedule_rotation: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateScheduleRotationRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update schedule_rotation: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update schedule_rotation: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(ScheduleRotation))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling schedule_rotation: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling schedule_rotation: %w", err)
 	}
 
 	return data.(*ScheduleRotation), nil
@@ -115,12 +115,12 @@ func (c *Client) UpdateScheduleRotation(id string, schedule_rotation *ScheduleRo
 func (c *Client) DeleteScheduleRotation(id string) error {
 	req, err := rootlygo.NewDeleteScheduleRotationRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete schedule_rotation: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete schedule_rotation: %w", err)
 	}
 
 	return nil
