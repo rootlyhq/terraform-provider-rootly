@@ -4,8 +4,9 @@ package provider
 
 import (
 	"context"
+	"errors"
 	"fmt"
-
+	
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -26,89 +27,89 @@ func resourceWorkflowTaskCreateDatadogNotebook() *schema.Resource {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
-		Schema: map[string]*schema.Schema{
+		Schema: map[string]*schema.Schema {
 			"workflow_id": {
-				Description: "The ID of the parent workflow",
-				Type:        schema.TypeString,
-				Required:    true,
-				ForceNew:    true,
+				Description:  "The ID of the parent workflow",
+				Type:         schema.TypeString,
+				Required:     true,
+				ForceNew:     true,
 			},
 			"name": {
-				Description: "Name of the workflow task",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
+				Description:  "Name of the workflow task",
+				Type:         schema.TypeString,
+				Optional:     true,
+				Computed:     true,
 			},
 			"position": {
-				Description: "The position of the workflow task (1 being top of list)",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Computed:    true,
+				Description:  "The position of the workflow task (1 being top of list)",
+				Type:         schema.TypeInt,
+				Optional:     true,
+				Computed:     true,
 			},
 			"skip_on_failure": {
-				Description: "Skip workflow task if any failures",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Default:     false,
+				Description:  "Skip workflow task if any failures",
+				Type:         schema.TypeBool,
+				Optional:     true,
+				Default:      false,
 			},
 			"enabled": {
-				Description: "Enable/disable this workflow task",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Default:     true,
+				Description:  "Enable/disable this workflow task",
+				Type:         schema.TypeBool,
+				Optional:     true,
+				Default:      true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type:        schema.TypeList,
-				Required:    true,
-				MinItems:    1,
-				MaxItems:    1,
+				Type: schema.TypeList,
+				Required: true,
+				MinItems: 1,
+				MaxItems: 1,
 				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"task_type": &schema.Schema{
-							Type:     schema.TypeString,
+					Schema: map[string]*schema.Schema {
+						"task_type": &schema.Schema {
+							Type: schema.TypeString,
 							Optional: true,
-							Default:  "create_datadog_notebook",
-							ValidateFunc: validation.StringInSlice([]string{
+							Default: "create_datadog_notebook",
+							ValidateFunc: validation.StringInSlice([]string {
 								"create_datadog_notebook",
 							}, false),
 						},
-						"post_mortem_template_id": &schema.Schema{
+						"post_mortem_template_id": &schema.Schema {
 							Description: "Retrospective template to use when creating notebook, if desired",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"mark_post_mortem_as_published": &schema.Schema{
+						"mark_post_mortem_as_published": &schema.Schema {
 							Description: "Value must be one of true or false",
-							Type:        schema.TypeBool,
-							Optional:    true,
+							Type: schema.TypeBool,
+							Optional: true,
 						},
-						"template": &schema.Schema{
+						"template": &schema.Schema {
 							Description: "Map must contain two fields, `id` and `name`. ",
-							Type:        schema.TypeMap,
-							Optional:    true,
+							Type: schema.TypeMap,
+							Optional: true,
 						},
-						"title": &schema.Schema{
+						"title": &schema.Schema {
 							Description: "The notebook title",
-							Type:        schema.TypeString,
-							Required:    true,
+							Type: schema.TypeString,
+							Required: true,
 						},
-						"kind": &schema.Schema{
+						"kind": &schema.Schema {
 							Description: "The notebook kind. Value must be one of `postmortem`, `runbook`, `investigation`, `documentation`, `report`.",
-							Type:        schema.TypeString,
-							Required:    true,
+							Type: schema.TypeString,
+							Required: true,
 							ValidateFunc: validation.StringInSlice([]string{
 								"postmortem",
-								"runbook",
-								"investigation",
-								"documentation",
-								"report",
+"runbook",
+"investigation",
+"documentation",
+"report",
 							}, false),
 						},
-						"content": &schema.Schema{
+						"content": &schema.Schema {
 							Description: "The notebook content",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
 					},
 				},
@@ -130,12 +131,12 @@ func resourceWorkflowTaskCreateDatadogNotebookCreate(ctx context.Context, d *sch
 	tflog.Trace(ctx, fmt.Sprintf("Creating workflow task: %s", workflowId))
 
 	s := &client.WorkflowTask{
-		WorkflowId:    workflowId,
-		Name:          name,
-		Position:      position,
+		WorkflowId: workflowId,
+		Name: name,
+		Position: position,
 		SkipOnFailure: skipOnFailure,
-		Enabled:       enabled,
-		TaskParams:    taskParams,
+		Enabled: enabled,
+		TaskParams: taskParams,
 	}
 
 	res, err := c.CreateWorkflowTask(s)
@@ -157,7 +158,7 @@ func resourceWorkflowTaskCreateDatadogNotebookRead(ctx context.Context, d *schem
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateDatadogNotebook (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
@@ -190,12 +191,12 @@ func resourceWorkflowTaskCreateDatadogNotebookUpdate(ctx context.Context, d *sch
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	s := &client.WorkflowTask{
-		WorkflowId:    workflowId,
-		Name:          name,
-		Position:      position,
+		WorkflowId: workflowId,
+		Name: name,
+		Position: position,
 		SkipOnFailure: skipOnFailure,
-		Enabled:       enabled,
-		TaskParams:    taskParams,
+		Enabled: enabled,
+		TaskParams: taskParams,
 	}
 
 	tflog.Debug(ctx, fmt.Sprintf("adding value: %#v", s))
@@ -215,7 +216,7 @@ func resourceWorkflowTaskCreateDatadogNotebookDelete(ctx context.Context, d *sch
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateDatadogNotebook (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil

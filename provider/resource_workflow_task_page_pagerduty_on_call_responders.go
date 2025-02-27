@@ -4,8 +4,9 @@ package provider
 
 import (
 	"context"
+	"errors"
 	"fmt"
-
+	
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -26,124 +27,124 @@ func resourceWorkflowTaskPagePagerdutyOnCallResponders() *schema.Resource {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
-		Schema: map[string]*schema.Schema{
+		Schema: map[string]*schema.Schema {
 			"workflow_id": {
-				Description: "The ID of the parent workflow",
-				Type:        schema.TypeString,
-				Required:    true,
-				ForceNew:    true,
+				Description:  "The ID of the parent workflow",
+				Type:         schema.TypeString,
+				Required:     true,
+				ForceNew:     true,
 			},
 			"name": {
-				Description: "Name of the workflow task",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
+				Description:  "Name of the workflow task",
+				Type:         schema.TypeString,
+				Optional:     true,
+				Computed:     true,
 			},
 			"position": {
-				Description: "The position of the workflow task (1 being top of list)",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Computed:    true,
+				Description:  "The position of the workflow task (1 being top of list)",
+				Type:         schema.TypeInt,
+				Optional:     true,
+				Computed:     true,
 			},
 			"skip_on_failure": {
-				Description: "Skip workflow task if any failures",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Default:     false,
+				Description:  "Skip workflow task if any failures",
+				Type:         schema.TypeBool,
+				Optional:     true,
+				Default:      false,
 			},
 			"enabled": {
-				Description: "Enable/disable this workflow task",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Default:     true,
+				Description:  "Enable/disable this workflow task",
+				Type:         schema.TypeBool,
+				Optional:     true,
+				Default:      true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type:        schema.TypeList,
-				Required:    true,
-				MinItems:    1,
-				MaxItems:    1,
+				Type: schema.TypeList,
+				Required: true,
+				MinItems: 1,
+				MaxItems: 1,
 				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"task_type": &schema.Schema{
-							Type:     schema.TypeString,
+					Schema: map[string]*schema.Schema {
+						"task_type": &schema.Schema {
+							Type: schema.TypeString,
 							Optional: true,
-							Default:  "page_pagerduty_on_call_responders",
-							ValidateFunc: validation.StringInSlice([]string{
+							Default: "page_pagerduty_on_call_responders",
+							ValidateFunc: validation.StringInSlice([]string {
 								"page_pagerduty_on_call_responders",
 							}, false),
 						},
-						"service": &schema.Schema{
+						"service": &schema.Schema {
 							Description: "Map must contain two fields, `id` and `name`. ",
-							Type:        schema.TypeMap,
-							Required:    true,
+							Type: schema.TypeMap,
+							Required: true,
 						},
-						"escalation_policies": &schema.Schema{
-							Description:      "",
-							Type:             schema.TypeList,
-							Optional:         true,
-							DiffSuppressFunc: tools.EqualIgnoringOrder,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
-									},
-									"name": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
-									},
-								},
-							},
-						},
-						"users": &schema.Schema{
-							Description:      "",
-							Type:             schema.TypeList,
-							Optional:         true,
-							DiffSuppressFunc: tools.EqualIgnoringOrder,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
-									},
-									"name": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
-									},
-								},
-							},
-						},
-						"title": &schema.Schema{
-							Description: "Incident title.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"message": &schema.Schema{
+						"escalation_policies": &schema.Schema {
 							Description: "",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeList,
+							Optional: true,
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema {
+									"id": &schema.Schema {
+										Type: schema.TypeString,
+										Required: true,
+									},
+									"name": &schema.Schema {
+										Type: schema.TypeString,
+										Required: true,
+									},
+								},
+							},
 						},
-						"urgency": &schema.Schema{
+						"users": &schema.Schema {
+							Description: "",
+							Type: schema.TypeList,
+							Optional: true,
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema {
+									"id": &schema.Schema {
+										Type: schema.TypeString,
+										Required: true,
+									},
+									"name": &schema.Schema {
+										Type: schema.TypeString,
+										Required: true,
+									},
+								},
+							},
+						},
+						"title": &schema.Schema {
+							Description: "Incident title.",
+							Type: schema.TypeString,
+							Optional: true,
+						},
+						"message": &schema.Schema {
+							Description: "",
+							Type: schema.TypeString,
+							Optional: true,
+						},
+						"urgency": &schema.Schema {
 							Description: "Value must be one of `high`, `low`, `auto`.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "high",
+							Type: schema.TypeString,
+							Optional: true,
+							Default: "high",
 							ValidateFunc: validation.StringInSlice([]string{
 								"high",
-								"low",
-								"auto",
+"low",
+"auto",
 							}, false),
 						},
-						"priority": &schema.Schema{
+						"priority": &schema.Schema {
 							Description: "PagerDuty incident priority, selecting auto will let Rootly auto map our incident severity",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"create_new_incident_on_conflict": &schema.Schema{
+						"create_new_incident_on_conflict": &schema.Schema {
 							Description: "Rootly only supports linking to a single PagerDuty incident. If this feature is disabled Rootly will add responders from any additional pages to the existing PagerDuty incident that is linked to the Rootly incident. If enabled, Rootly will create a new PagerDuty incident that is not linked to any Rootly incidents. Value must be one of true or false",
-							Type:        schema.TypeBool,
-							Optional:    true,
+							Type: schema.TypeBool,
+							Optional: true,
 						},
 					},
 				},
@@ -165,12 +166,12 @@ func resourceWorkflowTaskPagePagerdutyOnCallRespondersCreate(ctx context.Context
 	tflog.Trace(ctx, fmt.Sprintf("Creating workflow task: %s", workflowId))
 
 	s := &client.WorkflowTask{
-		WorkflowId:    workflowId,
-		Name:          name,
-		Position:      position,
+		WorkflowId: workflowId,
+		Name: name,
+		Position: position,
 		SkipOnFailure: skipOnFailure,
-		Enabled:       enabled,
-		TaskParams:    taskParams,
+		Enabled: enabled,
+		TaskParams: taskParams,
 	}
 
 	res, err := c.CreateWorkflowTask(s)
@@ -192,7 +193,7 @@ func resourceWorkflowTaskPagePagerdutyOnCallRespondersRead(ctx context.Context, 
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskPagePagerdutyOnCallResponders (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
@@ -225,12 +226,12 @@ func resourceWorkflowTaskPagePagerdutyOnCallRespondersUpdate(ctx context.Context
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	s := &client.WorkflowTask{
-		WorkflowId:    workflowId,
-		Name:          name,
-		Position:      position,
+		WorkflowId: workflowId,
+		Name: name,
+		Position: position,
 		SkipOnFailure: skipOnFailure,
-		Enabled:       enabled,
-		TaskParams:    taskParams,
+		Enabled: enabled,
+		TaskParams: taskParams,
 	}
 
 	tflog.Debug(ctx, fmt.Sprintf("adding value: %#v", s))
@@ -250,7 +251,7 @@ func resourceWorkflowTaskPagePagerdutyOnCallRespondersDelete(ctx context.Context
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskPagePagerdutyOnCallResponders (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil

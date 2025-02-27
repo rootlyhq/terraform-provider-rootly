@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -21,17 +21,17 @@ type User struct {
 func (c *Client) ListUsers(params *rootlygo.ListUsersParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListUsersRequest(c.Rootly.Server, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	users, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(User)))
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshalling: %w", err)
 	}
 
 	return users, nil

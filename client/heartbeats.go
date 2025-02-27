@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -29,18 +29,18 @@ type Heartbeat struct {
 func (c *Client) ListHeartbeats(params *rootlygo.ListHeartbeatsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListHeartbeatsRequest(c.Rootly.Server, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	heartbeats, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Heartbeat)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return heartbeats, nil
@@ -49,22 +49,22 @@ func (c *Client) ListHeartbeats(params *rootlygo.ListHeartbeatsParams) ([]interf
 func (c *Client) CreateHeartbeat(d *Heartbeat) (*Heartbeat, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling heartbeat: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling heartbeat: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateHeartbeatRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create heartbeat: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create heartbeat: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Heartbeat))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling heartbeat: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling heartbeat: %w", err)
 	}
 
 	return data.(*Heartbeat), nil
@@ -73,18 +73,18 @@ func (c *Client) CreateHeartbeat(d *Heartbeat) (*Heartbeat, error) {
 func (c *Client) GetHeartbeat(id string) (*Heartbeat, error) {
 	req, err := rootlygo.NewGetHeartbeatRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get heartbeat: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get heartbeat: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Heartbeat))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling heartbeat: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling heartbeat: %w", err)
 	}
 
 	return data.(*Heartbeat), nil
@@ -93,22 +93,22 @@ func (c *Client) GetHeartbeat(id string) (*Heartbeat, error) {
 func (c *Client) UpdateHeartbeat(id string, heartbeat *Heartbeat) (*Heartbeat, error) {
 	buffer, err := MarshalData(heartbeat)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling heartbeat: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling heartbeat: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateHeartbeatRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update heartbeat: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update heartbeat: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Heartbeat))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling heartbeat: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling heartbeat: %w", err)
 	}
 
 	return data.(*Heartbeat), nil
@@ -117,12 +117,12 @@ func (c *Client) UpdateHeartbeat(id string, heartbeat *Heartbeat) (*Heartbeat, e
 func (c *Client) DeleteHeartbeat(id string) error {
 	req, err := rootlygo.NewDeleteHeartbeatRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete heartbeat: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete heartbeat: %w", err)
 	}
 
 	return nil

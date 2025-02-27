@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -22,18 +22,18 @@ type CustomForm struct {
 func (c *Client) ListCustomForms(params *rootlygo.ListCustomFormsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListCustomFormsRequest(c.Rootly.Server, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	custom_forms, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(CustomForm)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return custom_forms, nil
@@ -42,22 +42,22 @@ func (c *Client) ListCustomForms(params *rootlygo.ListCustomFormsParams) ([]inte
 func (c *Client) CreateCustomForm(d *CustomForm) (*CustomForm, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling custom_form: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling custom_form: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateCustomFormRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create custom_form: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create custom_form: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(CustomForm))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling custom_form: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling custom_form: %w", err)
 	}
 
 	return data.(*CustomForm), nil
@@ -66,18 +66,18 @@ func (c *Client) CreateCustomForm(d *CustomForm) (*CustomForm, error) {
 func (c *Client) GetCustomForm(id string) (*CustomForm, error) {
 	req, err := rootlygo.NewGetCustomFormRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get custom_form: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get custom_form: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(CustomForm))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling custom_form: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling custom_form: %w", err)
 	}
 
 	return data.(*CustomForm), nil
@@ -86,22 +86,22 @@ func (c *Client) GetCustomForm(id string) (*CustomForm, error) {
 func (c *Client) UpdateCustomForm(id string, custom_form *CustomForm) (*CustomForm, error) {
 	buffer, err := MarshalData(custom_form)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling custom_form: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling custom_form: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateCustomFormRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update custom_form: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update custom_form: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(CustomForm))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling custom_form: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling custom_form: %w", err)
 	}
 
 	return data.(*CustomForm), nil
@@ -110,12 +110,12 @@ func (c *Client) UpdateCustomForm(id string, custom_form *CustomForm) (*CustomFo
 func (c *Client) DeleteCustomForm(id string) error {
 	req, err := rootlygo.NewDeleteCustomFormRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete custom_form: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete custom_form: %w", err)
 	}
 
 	return nil

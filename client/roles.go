@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -48,18 +48,18 @@ type Role struct {
 func (c *Client) ListRoles(params *rootlygo.ListRolesParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListRolesRequest(c.Rootly.Server, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	roles, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Role)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return roles, nil
@@ -68,22 +68,22 @@ func (c *Client) ListRoles(params *rootlygo.ListRolesParams) ([]interface{}, err
 func (c *Client) CreateRole(d *Role) (*Role, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling role: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling role: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateRoleRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create role: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create role: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Role))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling role: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling role: %w", err)
 	}
 
 	return data.(*Role), nil
@@ -92,18 +92,18 @@ func (c *Client) CreateRole(d *Role) (*Role, error) {
 func (c *Client) GetRole(id string) (*Role, error) {
 	req, err := rootlygo.NewGetRoleRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get role: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get role: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Role))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling role: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling role: %w", err)
 	}
 
 	return data.(*Role), nil
@@ -112,22 +112,22 @@ func (c *Client) GetRole(id string) (*Role, error) {
 func (c *Client) UpdateRole(id string, role *Role) (*Role, error) {
 	buffer, err := MarshalData(role)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling role: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling role: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateRoleRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update role: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update role: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Role))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling role: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling role: %w", err)
 	}
 
 	return data.(*Role), nil
@@ -136,12 +136,12 @@ func (c *Client) UpdateRole(id string, role *Role) (*Role, error) {
 func (c *Client) DeleteRole(id string) error {
 	req, err := rootlygo.NewDeleteRoleRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete role: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete role: %w", err)
 	}
 
 	return nil

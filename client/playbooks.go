@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -26,18 +26,18 @@ type Playbook struct {
 func (c *Client) ListPlaybooks(params *rootlygo.ListPlaybooksParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListPlaybooksRequest(c.Rootly.Server, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	playbooks, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Playbook)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return playbooks, nil
@@ -46,22 +46,22 @@ func (c *Client) ListPlaybooks(params *rootlygo.ListPlaybooksParams) ([]interfac
 func (c *Client) CreatePlaybook(d *Playbook) (*Playbook, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling playbook: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling playbook: %w", err)
 	}
 
 	req, err := rootlygo.NewCreatePlaybookRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create playbook: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create playbook: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Playbook))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling playbook: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling playbook: %w", err)
 	}
 
 	return data.(*Playbook), nil
@@ -70,18 +70,18 @@ func (c *Client) CreatePlaybook(d *Playbook) (*Playbook, error) {
 func (c *Client) GetPlaybook(id string) (*Playbook, error) {
 	req, err := rootlygo.NewGetPlaybookRequest(c.Rootly.Server, id, nil)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get playbook: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get playbook: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Playbook))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling playbook: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling playbook: %w", err)
 	}
 
 	return data.(*Playbook), nil
@@ -90,22 +90,22 @@ func (c *Client) GetPlaybook(id string) (*Playbook, error) {
 func (c *Client) UpdatePlaybook(id string, playbook *Playbook) (*Playbook, error) {
 	buffer, err := MarshalData(playbook)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling playbook: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling playbook: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdatePlaybookRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update playbook: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update playbook: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Playbook))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling playbook: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling playbook: %w", err)
 	}
 
 	return data.(*Playbook), nil
@@ -114,12 +114,12 @@ func (c *Client) UpdatePlaybook(id string, playbook *Playbook) (*Playbook, error
 func (c *Client) DeletePlaybook(id string) error {
 	req, err := rootlygo.NewDeletePlaybookRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete playbook: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete playbook: %w", err)
 	}
 
 	return nil

@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -24,18 +24,18 @@ type WorkflowGroup struct {
 func (c *Client) ListWorkflowGroups(params *rootlygo.ListWorkflowGroupsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListWorkflowGroupsRequest(c.Rootly.Server, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	workflow_groups, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(WorkflowGroup)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return workflow_groups, nil
@@ -44,22 +44,22 @@ func (c *Client) ListWorkflowGroups(params *rootlygo.ListWorkflowGroupsParams) (
 func (c *Client) CreateWorkflowGroup(d *WorkflowGroup) (*WorkflowGroup, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling workflow_group: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling workflow_group: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateWorkflowGroupRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create workflow_group: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create workflow_group: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowGroup))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling workflow_group: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling workflow_group: %w", err)
 	}
 
 	return data.(*WorkflowGroup), nil
@@ -68,18 +68,18 @@ func (c *Client) CreateWorkflowGroup(d *WorkflowGroup) (*WorkflowGroup, error) {
 func (c *Client) GetWorkflowGroup(id string) (*WorkflowGroup, error) {
 	req, err := rootlygo.NewGetWorkflowGroupRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get workflow_group: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get workflow_group: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowGroup))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling workflow_group: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling workflow_group: %w", err)
 	}
 
 	return data.(*WorkflowGroup), nil
@@ -88,22 +88,22 @@ func (c *Client) GetWorkflowGroup(id string) (*WorkflowGroup, error) {
 func (c *Client) UpdateWorkflowGroup(id string, workflow_group *WorkflowGroup) (*WorkflowGroup, error) {
 	buffer, err := MarshalData(workflow_group)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling workflow_group: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling workflow_group: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateWorkflowGroupRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update workflow_group: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update workflow_group: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowGroup))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling workflow_group: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling workflow_group: %w", err)
 	}
 
 	return data.(*WorkflowGroup), nil
@@ -112,12 +112,12 @@ func (c *Client) UpdateWorkflowGroup(id string, workflow_group *WorkflowGroup) (
 func (c *Client) DeleteWorkflowGroup(id string) error {
 	req, err := rootlygo.NewDeleteWorkflowGroupRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete workflow_group: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete workflow_group: %w", err)
 	}
 
 	return nil

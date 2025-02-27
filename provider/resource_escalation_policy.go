@@ -4,10 +4,11 @@ package provider
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
@@ -16,82 +17,96 @@ import (
 func resourceEscalationPolicy() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceEscalationPolicyCreate,
-		ReadContext:   resourceEscalationPolicyRead,
+		ReadContext: resourceEscalationPolicyRead,
 		UpdateContext: resourceEscalationPolicyUpdate,
 		DeleteContext: resourceEscalationPolicyDelete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
-
-			"name": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+		Schema: map[string]*schema.Schema {
+			
+			"name": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The name of the escalation policy",
+				
 			},
+			
 
-			"description": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"description": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "The description of the escalation policy",
+				
 			},
+			
 
-			"repeat_count": &schema.Schema{
-				Type:        schema.TypeInt,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The number of times this policy will be executed until someone acknowledges the alert",
-			},
+		"repeat_count": &schema.Schema {
+			Type: schema.TypeInt,
+			Computed: true,
+			Required: false,
+			Optional: true,
+			ForceNew: false,
+			Description: "The number of times this policy will be executed until someone acknowledges the alert",
+			
+		},
+		
 
-			"created_by_user_id": &schema.Schema{
-				Type:        schema.TypeInt,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "User who created the escalation policy",
-			},
+		"created_by_user_id": &schema.Schema {
+			Type: schema.TypeInt,
+			Computed: true,
+			Required: false,
+			Optional: true,
+			ForceNew: false,
+			Description: "User who created the escalation policy",
+			
+		},
+		
 
-			"last_updated_by_user_id": &schema.Schema{
-				Type:        schema.TypeInt,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "User who updated the escalation policy",
-			},
+		"last_updated_by_user_id": &schema.Schema {
+			Type: schema.TypeInt,
+			Computed: true,
+			Required: false,
+			Optional: true,
+			ForceNew: false,
+			Description: "User who updated the escalation policy",
+			
+		},
+		
 
-			"group_ids": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
+				"group_ids": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Associated groups (alerting the group will trigger escalation policy)",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Associated groups (alerting the group will trigger escalation policy)",
-			},
+				
 
-			"service_ids": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
+				"service_ids": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Associated services (alerting the service will trigger escalation policy)",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Associated services (alerting the service will trigger escalation policy)",
-			},
+				
 		},
 	}
 }
@@ -103,27 +118,27 @@ func resourceEscalationPolicyCreate(ctx context.Context, d *schema.ResourceData,
 
 	s := &client.EscalationPolicy{}
 
-	if value, ok := d.GetOkExists("name"); ok {
-		s.Name = value.(string)
-	}
-	if value, ok := d.GetOkExists("description"); ok {
-		s.Description = value.(string)
-	}
-	if value, ok := d.GetOkExists("repeat_count"); ok {
-		s.RepeatCount = value.(int)
-	}
-	if value, ok := d.GetOkExists("created_by_user_id"); ok {
-		s.CreatedByUserId = value.(int)
-	}
-	if value, ok := d.GetOkExists("last_updated_by_user_id"); ok {
-		s.LastUpdatedByUserId = value.(int)
-	}
-	if value, ok := d.GetOkExists("group_ids"); ok {
-		s.GroupIds = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("service_ids"); ok {
-		s.ServiceIds = value.([]interface{})
-	}
+	  if value, ok := d.GetOkExists("name"); ok {
+				s.Name = value.(string)
+			}
+    if value, ok := d.GetOkExists("description"); ok {
+				s.Description = value.(string)
+			}
+    if value, ok := d.GetOkExists("repeat_count"); ok {
+				s.RepeatCount = value.(int)
+			}
+    if value, ok := d.GetOkExists("created_by_user_id"); ok {
+				s.CreatedByUserId = value.(int)
+			}
+    if value, ok := d.GetOkExists("last_updated_by_user_id"); ok {
+				s.LastUpdatedByUserId = value.(int)
+			}
+    if value, ok := d.GetOkExists("group_ids"); ok {
+				s.GroupIds = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("service_ids"); ok {
+				s.ServiceIds = value.([]interface{})
+			}
 
 	res, err := c.CreateEscalationPolicy(s)
 	if err != nil {
@@ -144,7 +159,7 @@ func resourceEscalationPolicyRead(ctx context.Context, d *schema.ResourceData, m
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("EscalationPolicy (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
@@ -154,12 +169,12 @@ func resourceEscalationPolicyRead(ctx context.Context, d *schema.ResourceData, m
 	}
 
 	d.Set("name", item.Name)
-	d.Set("description", item.Description)
-	d.Set("repeat_count", item.RepeatCount)
-	d.Set("created_by_user_id", item.CreatedByUserId)
-	d.Set("last_updated_by_user_id", item.LastUpdatedByUserId)
-	d.Set("group_ids", item.GroupIds)
-	d.Set("service_ids", item.ServiceIds)
+  d.Set("description", item.Description)
+  d.Set("repeat_count", item.RepeatCount)
+  d.Set("created_by_user_id", item.CreatedByUserId)
+  d.Set("last_updated_by_user_id", item.LastUpdatedByUserId)
+  d.Set("group_ids", item.GroupIds)
+  d.Set("service_ids", item.ServiceIds)
 
 	return nil
 }
@@ -170,27 +185,27 @@ func resourceEscalationPolicyUpdate(ctx context.Context, d *schema.ResourceData,
 
 	s := &client.EscalationPolicy{}
 
-	if d.HasChange("name") {
-		s.Name = d.Get("name").(string)
-	}
-	if d.HasChange("description") {
-		s.Description = d.Get("description").(string)
-	}
-	if d.HasChange("repeat_count") {
-		s.RepeatCount = d.Get("repeat_count").(int)
-	}
-	if d.HasChange("created_by_user_id") {
-		s.CreatedByUserId = d.Get("created_by_user_id").(int)
-	}
-	if d.HasChange("last_updated_by_user_id") {
-		s.LastUpdatedByUserId = d.Get("last_updated_by_user_id").(int)
-	}
-	if d.HasChange("group_ids") {
-		s.GroupIds = d.Get("group_ids").([]interface{})
-	}
-	if d.HasChange("service_ids") {
-		s.ServiceIds = d.Get("service_ids").([]interface{})
-	}
+	  if d.HasChange("name") {
+				s.Name = d.Get("name").(string)
+			}
+    if d.HasChange("description") {
+				s.Description = d.Get("description").(string)
+			}
+    if d.HasChange("repeat_count") {
+				s.RepeatCount = d.Get("repeat_count").(int)
+			}
+    if d.HasChange("created_by_user_id") {
+				s.CreatedByUserId = d.Get("created_by_user_id").(int)
+			}
+    if d.HasChange("last_updated_by_user_id") {
+				s.LastUpdatedByUserId = d.Get("last_updated_by_user_id").(int)
+			}
+    if d.HasChange("group_ids") {
+				s.GroupIds = d.Get("group_ids").([]interface{})
+			}
+    if d.HasChange("service_ids") {
+				s.ServiceIds = d.Get("service_ids").([]interface{})
+			}
 
 	_, err := c.UpdateEscalationPolicy(d.Id(), s)
 	if err != nil {
@@ -208,7 +223,7 @@ func resourceEscalationPolicyDelete(ctx context.Context, d *schema.ResourceData,
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("EscalationPolicy (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil

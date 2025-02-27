@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -22,18 +22,18 @@ type FormFieldOption struct {
 func (c *Client) ListFormFieldOptions(id string, params *rootlygo.ListFormFieldOptionsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListFormFieldOptionsRequest(c.Rootly.Server, id, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	form_field_options, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(FormFieldOption)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return form_field_options, nil
@@ -42,22 +42,22 @@ func (c *Client) ListFormFieldOptions(id string, params *rootlygo.ListFormFieldO
 func (c *Client) CreateFormFieldOption(d *FormFieldOption) (*FormFieldOption, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling form_field_option: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling form_field_option: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateFormFieldOptionRequestWithBody(c.Rootly.Server, d.FormFieldId, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create form_field_option: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create form_field_option: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormFieldOption))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling form_field_option: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling form_field_option: %w", err)
 	}
 
 	return data.(*FormFieldOption), nil
@@ -66,18 +66,18 @@ func (c *Client) CreateFormFieldOption(d *FormFieldOption) (*FormFieldOption, er
 func (c *Client) GetFormFieldOption(id string) (*FormFieldOption, error) {
 	req, err := rootlygo.NewGetFormFieldOptionRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get form_field_option: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get form_field_option: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormFieldOption))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling form_field_option: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling form_field_option: %w", err)
 	}
 
 	return data.(*FormFieldOption), nil
@@ -86,22 +86,22 @@ func (c *Client) GetFormFieldOption(id string) (*FormFieldOption, error) {
 func (c *Client) UpdateFormFieldOption(id string, form_field_option *FormFieldOption) (*FormFieldOption, error) {
 	buffer, err := MarshalData(form_field_option)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling form_field_option: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling form_field_option: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateFormFieldOptionRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update form_field_option: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update form_field_option: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormFieldOption))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling form_field_option: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling form_field_option: %w", err)
 	}
 
 	return data.(*FormFieldOption), nil
@@ -110,12 +110,12 @@ func (c *Client) UpdateFormFieldOption(id string, form_field_option *FormFieldOp
 func (c *Client) DeleteFormFieldOption(id string) error {
 	req, err := rootlygo.NewDeleteFormFieldOptionRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete form_field_option: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete form_field_option: %w", err)
 	}
 
 	return nil

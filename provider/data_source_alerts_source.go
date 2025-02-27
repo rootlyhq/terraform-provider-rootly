@@ -36,7 +36,7 @@ func dataSourceAlertsSource() *schema.Resource {
 func dataSourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
-	params := new(rootlygo.ListAlertsSourcesParams)
+	params := new(rootlygo.ListAlertSourcesParams)
 	page_size := 1
 	params.PageSize = &page_size
 

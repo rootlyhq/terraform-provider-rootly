@@ -4,8 +4,9 @@ package provider
 
 import (
 	"context"
+	"errors"
 	"fmt"
-
+	
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -26,90 +27,90 @@ func resourceWorkflowTaskSendDashboardReport() *schema.Resource {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
-		Schema: map[string]*schema.Schema{
+		Schema: map[string]*schema.Schema {
 			"workflow_id": {
-				Description: "The ID of the parent workflow",
-				Type:        schema.TypeString,
-				Required:    true,
-				ForceNew:    true,
+				Description:  "The ID of the parent workflow",
+				Type:         schema.TypeString,
+				Required:     true,
+				ForceNew:     true,
 			},
 			"name": {
-				Description: "Name of the workflow task",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
+				Description:  "Name of the workflow task",
+				Type:         schema.TypeString,
+				Optional:     true,
+				Computed:     true,
 			},
 			"position": {
-				Description: "The position of the workflow task (1 being top of list)",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Computed:    true,
+				Description:  "The position of the workflow task (1 being top of list)",
+				Type:         schema.TypeInt,
+				Optional:     true,
+				Computed:     true,
 			},
 			"skip_on_failure": {
-				Description: "Skip workflow task if any failures",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Default:     false,
+				Description:  "Skip workflow task if any failures",
+				Type:         schema.TypeBool,
+				Optional:     true,
+				Default:      false,
 			},
 			"enabled": {
-				Description: "Enable/disable this workflow task",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Default:     true,
+				Description:  "Enable/disable this workflow task",
+				Type:         schema.TypeBool,
+				Optional:     true,
+				Default:      true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type:        schema.TypeList,
-				Required:    true,
-				MinItems:    1,
-				MaxItems:    1,
+				Type: schema.TypeList,
+				Required: true,
+				MinItems: 1,
+				MaxItems: 1,
 				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"task_type": &schema.Schema{
-							Type:     schema.TypeString,
+					Schema: map[string]*schema.Schema {
+						"task_type": &schema.Schema {
+							Type: schema.TypeString,
 							Optional: true,
-							Default:  "send_dashboard_report",
-							ValidateFunc: validation.StringInSlice([]string{
+							Default: "send_dashboard_report",
+							ValidateFunc: validation.StringInSlice([]string {
 								"send_dashboard_report",
 							}, false),
 						},
-						"dashboard_ids": &schema.Schema{
+						"dashboard_ids": &schema.Schema {
 							Description: "",
-							Type:        schema.TypeList,
-							Required:    true,
-							Elem: &schema.Schema{
+							Type: schema.TypeList,
+							Required: true,
+							Elem: &schema.Schema {
 								Type: schema.TypeString,
 							},
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
 						},
-						"from": &schema.Schema{
+						"from": &schema.Schema {
 							Description: "The from email address. Need to use SMTP integration if different than rootly.com",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"to": &schema.Schema{
+						"to": &schema.Schema {
 							Description: "",
-							Type:        schema.TypeList,
-							Required:    true,
-							Elem: &schema.Schema{
+							Type: schema.TypeList,
+							Required: true,
+							Elem: &schema.Schema {
 								Type: schema.TypeString,
 							},
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
 						},
-						"subject": &schema.Schema{
+						"subject": &schema.Schema {
 							Description: "The subject",
-							Type:        schema.TypeString,
-							Required:    true,
+							Type: schema.TypeString,
+							Required: true,
 						},
-						"preheader": &schema.Schema{
+						"preheader": &schema.Schema {
 							Description: "The preheader",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"body": &schema.Schema{
+						"body": &schema.Schema {
 							Description: "The email body",
-							Type:        schema.TypeString,
-							Required:    true,
+							Type: schema.TypeString,
+							Required: true,
 						},
 					},
 				},
@@ -131,12 +132,12 @@ func resourceWorkflowTaskSendDashboardReportCreate(ctx context.Context, d *schem
 	tflog.Trace(ctx, fmt.Sprintf("Creating workflow task: %s", workflowId))
 
 	s := &client.WorkflowTask{
-		WorkflowId:    workflowId,
-		Name:          name,
-		Position:      position,
+		WorkflowId: workflowId,
+		Name: name,
+		Position: position,
 		SkipOnFailure: skipOnFailure,
-		Enabled:       enabled,
-		TaskParams:    taskParams,
+		Enabled: enabled,
+		TaskParams: taskParams,
 	}
 
 	res, err := c.CreateWorkflowTask(s)
@@ -158,7 +159,7 @@ func resourceWorkflowTaskSendDashboardReportRead(ctx context.Context, d *schema.
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskSendDashboardReport (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
@@ -191,12 +192,12 @@ func resourceWorkflowTaskSendDashboardReportUpdate(ctx context.Context, d *schem
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	s := &client.WorkflowTask{
-		WorkflowId:    workflowId,
-		Name:          name,
-		Position:      position,
+		WorkflowId: workflowId,
+		Name: name,
+		Position: position,
 		SkipOnFailure: skipOnFailure,
-		Enabled:       enabled,
-		TaskParams:    taskParams,
+		Enabled: enabled,
+		TaskParams: taskParams,
 	}
 
 	tflog.Debug(ctx, fmt.Sprintf("adding value: %#v", s))
@@ -216,7 +217,7 @@ func resourceWorkflowTaskSendDashboardReportDelete(ctx context.Context, d *schem
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskSendDashboardReport (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil

@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -23,18 +23,18 @@ type WebhooksEndpoint struct {
 func (c *Client) ListWebhooksEndpoints(params *rootlygo.ListWebhooksEndpointsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListWebhooksEndpointsRequest(c.Rootly.Server, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	webhooks_endpoints, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(WebhooksEndpoint)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return webhooks_endpoints, nil
@@ -43,22 +43,22 @@ func (c *Client) ListWebhooksEndpoints(params *rootlygo.ListWebhooksEndpointsPar
 func (c *Client) CreateWebhooksEndpoint(d *WebhooksEndpoint) (*WebhooksEndpoint, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling webhooks_endpoint: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling webhooks_endpoint: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateWebhooksEndpointRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create webhooks_endpoint: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create webhooks_endpoint: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WebhooksEndpoint))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling webhooks_endpoint: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling webhooks_endpoint: %w", err)
 	}
 
 	return data.(*WebhooksEndpoint), nil
@@ -67,18 +67,18 @@ func (c *Client) CreateWebhooksEndpoint(d *WebhooksEndpoint) (*WebhooksEndpoint,
 func (c *Client) GetWebhooksEndpoint(id string) (*WebhooksEndpoint, error) {
 	req, err := rootlygo.NewGetWebhooksEndpointRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get webhooks_endpoint: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get webhooks_endpoint: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WebhooksEndpoint))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling webhooks_endpoint: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling webhooks_endpoint: %w", err)
 	}
 
 	return data.(*WebhooksEndpoint), nil
@@ -87,22 +87,22 @@ func (c *Client) GetWebhooksEndpoint(id string) (*WebhooksEndpoint, error) {
 func (c *Client) UpdateWebhooksEndpoint(id string, webhooks_endpoint *WebhooksEndpoint) (*WebhooksEndpoint, error) {
 	buffer, err := MarshalData(webhooks_endpoint)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling webhooks_endpoint: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling webhooks_endpoint: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateWebhooksEndpointRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update webhooks_endpoint: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update webhooks_endpoint: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WebhooksEndpoint))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling webhooks_endpoint: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling webhooks_endpoint: %w", err)
 	}
 
 	return data.(*WebhooksEndpoint), nil
@@ -111,12 +111,12 @@ func (c *Client) UpdateWebhooksEndpoint(id string, webhooks_endpoint *WebhooksEn
 func (c *Client) DeleteWebhooksEndpoint(id string) error {
 	req, err := rootlygo.NewDeleteWebhooksEndpointRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete webhooks_endpoint: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete webhooks_endpoint: %w", err)
 	}
 
 	return nil

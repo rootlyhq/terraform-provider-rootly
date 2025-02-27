@@ -4,10 +4,11 @@ package provider
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
@@ -16,129 +17,152 @@ import (
 func resourceScheduleRotation() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceScheduleRotationCreate,
-		ReadContext:   resourceScheduleRotationRead,
+		ReadContext: resourceScheduleRotationRead,
 		UpdateContext: resourceScheduleRotationUpdate,
 		DeleteContext: resourceScheduleRotationDelete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
-
-			"schedule_id": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    true,
+		Schema: map[string]*schema.Schema {
+			
+			"schedule_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: true,
 				Description: "The ID of parent schedule",
+				
 			},
+			
 
-			"name": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+			"name": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The name of the schedule rotation",
+				
 			},
+			
 
-			"position": &schema.Schema{
-				Type:        schema.TypeInt,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "Position of the schedule rotation",
-			},
+		"position": &schema.Schema {
+			Type: schema.TypeInt,
+			Computed: true,
+			Required: false,
+			Optional: true,
+			ForceNew: false,
+			Description: "Position of the schedule rotation",
+			
+		},
+		
 
-			"schedule_rotationable_type": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "ScheduleDailyRotation",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"schedule_rotationable_type": &schema.Schema {
+				Type: schema.TypeString,
+				Default: "ScheduleDailyRotation",
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "Schedule rotation type. Value must be one of `ScheduleDailyRotation`, `ScheduleWeeklyRotation`, `ScheduleBiweeklyRotation`, `ScheduleMonthlyRotation`, `ScheduleCustomRotation`.",
+				
 			},
+			
 
-			"active_all_week": &schema.Schema{
-				Type:        schema.TypeBool,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
+			"active_all_week": &schema.Schema {
+				Type: schema.TypeBool,
+				Computed: true,
+				Required: false,
+				Optional: true,
 				Description: "Schedule rotation active all week?. Value must be one of true or false",
+				
 			},
+			
 
-			"active_days": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
+				"active_days": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
-			},
+				
 
-			"active_time_type": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"active_time_type": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "",
+				
 			},
+			
 
-			"active_time_attributes": &schema.Schema{
-				Type:             schema.TypeList,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Schedule rotation's active times",
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
+				"active_time_attributes": &schema.Schema {
+					Type: schema.TypeList,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Schedule rotation's active times",
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Elem: &schema.Resource {
+						Schema: map[string]*schema.Schema {
+              
+			"start_time": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "Start time for schedule rotation active time",
+				
+			},
+			
 
-						"start_time": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "Start time for schedule rotation active time",
-						},
-
-						"end_time": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "End time for schedule rotation active time",
+			"end_time": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "End time for schedule rotation active time",
+				
+			},
+			
 						},
 					},
+					
 				},
-			},
+				
 
-			"time_zone": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "Etc/UTC",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"time_zone": &schema.Schema {
+				Type: schema.TypeString,
+				Default: "Etc/UTC",
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "A valid IANA time zone name.",
+				
 			},
+			
 
-			"schedule_rotationable_attributes": &schema.Schema{
+			"schedule_rotationable_attributes": &schema.Schema {
 				Type: schema.TypeMap,
-				Elem: &schema.Schema{
+				Elem: &schema.Schema {
 					Type: schema.TypeString,
 				},
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
+				Computed: false,
+				Required: true,
+				Optional: false,
 				Description: "",
 			},
+			
 		},
 	}
 }
@@ -150,36 +174,36 @@ func resourceScheduleRotationCreate(ctx context.Context, d *schema.ResourceData,
 
 	s := &client.ScheduleRotation{}
 
-	if value, ok := d.GetOkExists("schedule_id"); ok {
-		s.ScheduleId = value.(string)
-	}
-	if value, ok := d.GetOkExists("name"); ok {
-		s.Name = value.(string)
-	}
-	if value, ok := d.GetOkExists("position"); ok {
-		s.Position = value.(int)
-	}
-	if value, ok := d.GetOkExists("schedule_rotationable_type"); ok {
-		s.ScheduleRotationableType = value.(string)
-	}
-	if value, ok := d.GetOkExists("active_all_week"); ok {
-		s.ActiveAllWeek = tools.Bool(value.(bool))
-	}
-	if value, ok := d.GetOkExists("active_days"); ok {
-		s.ActiveDays = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("active_time_type"); ok {
-		s.ActiveTimeType = value.(string)
-	}
-	if value, ok := d.GetOkExists("active_time_attributes"); ok {
-		s.ActiveTimeAttributes = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("time_zone"); ok {
-		s.TimeZone = value.(string)
-	}
-	if value, ok := d.GetOkExists("schedule_rotationable_attributes"); ok {
-		s.ScheduleRotationableAttributes = value.(map[string]interface{})
-	}
+	  if value, ok := d.GetOkExists("schedule_id"); ok {
+				s.ScheduleId = value.(string)
+			}
+    if value, ok := d.GetOkExists("name"); ok {
+				s.Name = value.(string)
+			}
+    if value, ok := d.GetOkExists("position"); ok {
+				s.Position = value.(int)
+			}
+    if value, ok := d.GetOkExists("schedule_rotationable_type"); ok {
+				s.ScheduleRotationableType = value.(string)
+			}
+    if value, ok := d.GetOkExists("active_all_week"); ok {
+				s.ActiveAllWeek = tools.Bool(value.(bool))
+			}
+    if value, ok := d.GetOkExists("active_days"); ok {
+				s.ActiveDays = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("active_time_type"); ok {
+				s.ActiveTimeType = value.(string)
+			}
+    if value, ok := d.GetOkExists("active_time_attributes"); ok {
+				s.ActiveTimeAttributes = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("time_zone"); ok {
+				s.TimeZone = value.(string)
+			}
+    if value, ok := d.GetOkExists("schedule_rotationable_attributes"); ok {
+				s.ScheduleRotationableAttributes = value.(map[string]interface{})
+			}
 
 	res, err := c.CreateScheduleRotation(s)
 	if err != nil {
@@ -200,7 +224,7 @@ func resourceScheduleRotationRead(ctx context.Context, d *schema.ResourceData, m
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("ScheduleRotation (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
@@ -210,15 +234,15 @@ func resourceScheduleRotationRead(ctx context.Context, d *schema.ResourceData, m
 	}
 
 	d.Set("schedule_id", item.ScheduleId)
-	d.Set("name", item.Name)
-	d.Set("position", item.Position)
-	d.Set("schedule_rotationable_type", item.ScheduleRotationableType)
-	d.Set("active_all_week", item.ActiveAllWeek)
-	d.Set("active_days", item.ActiveDays)
-	d.Set("active_time_type", item.ActiveTimeType)
-	d.Set("active_time_attributes", item.ActiveTimeAttributes)
-	d.Set("time_zone", item.TimeZone)
-	d.Set("schedule_rotationable_attributes", item.ScheduleRotationableAttributes)
+  d.Set("name", item.Name)
+  d.Set("position", item.Position)
+  d.Set("schedule_rotationable_type", item.ScheduleRotationableType)
+  d.Set("active_all_week", item.ActiveAllWeek)
+  d.Set("active_days", item.ActiveDays)
+  d.Set("active_time_type", item.ActiveTimeType)
+  d.Set("active_time_attributes", item.ActiveTimeAttributes)
+  d.Set("time_zone", item.TimeZone)
+  d.Set("schedule_rotationable_attributes", item.ScheduleRotationableAttributes)
 
 	return nil
 }
@@ -229,36 +253,36 @@ func resourceScheduleRotationUpdate(ctx context.Context, d *schema.ResourceData,
 
 	s := &client.ScheduleRotation{}
 
-	if d.HasChange("schedule_id") {
-		s.ScheduleId = d.Get("schedule_id").(string)
-	}
-	if d.HasChange("name") {
-		s.Name = d.Get("name").(string)
-	}
-	if d.HasChange("position") {
-		s.Position = d.Get("position").(int)
-	}
-
-	s.ScheduleRotationableType = d.Get("schedule_rotationable_type").(string)
-
-	if d.HasChange("active_all_week") {
-		s.ActiveAllWeek = tools.Bool(d.Get("active_all_week").(bool))
-	}
-	if d.HasChange("active_days") {
-		s.ActiveDays = d.Get("active_days").([]interface{})
-	}
-	if d.HasChange("active_time_type") {
-		s.ActiveTimeType = d.Get("active_time_type").(string)
-	}
-	if d.HasChange("active_time_attributes") {
-		s.ActiveTimeAttributes = d.Get("active_time_attributes").([]interface{})
-	}
-	if d.HasChange("time_zone") {
-		s.TimeZone = d.Get("time_zone").(string)
-	}
-	if d.HasChange("schedule_rotationable_attributes") {
-		s.ScheduleRotationableAttributes = d.Get("schedule_rotationable_attributes").(map[string]interface{})
-	}
+	  if d.HasChange("schedule_id") {
+				s.ScheduleId = d.Get("schedule_id").(string)
+			}
+    if d.HasChange("name") {
+				s.Name = d.Get("name").(string)
+			}
+    if d.HasChange("position") {
+				s.Position = d.Get("position").(int)
+			}
+  
+				s.ScheduleRotationableType = d.Get("schedule_rotationable_type").(string)
+			
+    if d.HasChange("active_all_week") {
+				s.ActiveAllWeek = tools.Bool(d.Get("active_all_week").(bool))
+			}
+    if d.HasChange("active_days") {
+				s.ActiveDays = d.Get("active_days").([]interface{})
+			}
+    if d.HasChange("active_time_type") {
+				s.ActiveTimeType = d.Get("active_time_type").(string)
+			}
+    if d.HasChange("active_time_attributes") {
+				s.ActiveTimeAttributes = d.Get("active_time_attributes").([]interface{})
+			}
+    if d.HasChange("time_zone") {
+				s.TimeZone = d.Get("time_zone").(string)
+			}
+    if d.HasChange("schedule_rotationable_attributes") {
+				s.ScheduleRotationableAttributes = d.Get("schedule_rotationable_attributes").(map[string]interface{})
+			}
 
 	_, err := c.UpdateScheduleRotation(d.Id(), s)
 	if err != nil {
@@ -276,7 +300,7 @@ func resourceScheduleRotationDelete(ctx context.Context, d *schema.ResourceData,
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("ScheduleRotation (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil

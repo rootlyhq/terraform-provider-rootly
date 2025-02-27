@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -22,18 +22,18 @@ type SubStatus struct {
 func (c *Client) ListSubStatuses(params *rootlygo.ListSubStatusesParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListSubStatusesRequest(c.Rootly.Server, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	sub_statuses, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(SubStatus)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return sub_statuses, nil
@@ -42,22 +42,22 @@ func (c *Client) ListSubStatuses(params *rootlygo.ListSubStatusesParams) ([]inte
 func (c *Client) CreateSubStatus(d *SubStatus) (*SubStatus, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling sub_status: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling sub_status: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateSubStatusRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create sub_status: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create sub_status: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(SubStatus))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling sub_status: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling sub_status: %w", err)
 	}
 
 	return data.(*SubStatus), nil
@@ -66,18 +66,18 @@ func (c *Client) CreateSubStatus(d *SubStatus) (*SubStatus, error) {
 func (c *Client) GetSubStatus(id string) (*SubStatus, error) {
 	req, err := rootlygo.NewGetSubStatusRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get sub_status: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get sub_status: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(SubStatus))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling sub_status: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling sub_status: %w", err)
 	}
 
 	return data.(*SubStatus), nil
@@ -86,22 +86,22 @@ func (c *Client) GetSubStatus(id string) (*SubStatus, error) {
 func (c *Client) UpdateSubStatus(id string, sub_status *SubStatus) (*SubStatus, error) {
 	buffer, err := MarshalData(sub_status)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling sub_status: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling sub_status: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateSubStatusRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update sub_status: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update sub_status: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(SubStatus))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling sub_status: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling sub_status: %w", err)
 	}
 
 	return data.(*SubStatus), nil
@@ -110,12 +110,12 @@ func (c *Client) UpdateSubStatus(id string, sub_status *SubStatus) (*SubStatus, 
 func (c *Client) DeleteSubStatus(id string) error {
 	req, err := rootlygo.NewDeleteSubStatusRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete sub_status: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete sub_status: %w", err)
 	}
 
 	return nil

@@ -4,51 +4,59 @@ package provider
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	
 )
 
 func resourceAlertUrgency() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceAlertUrgencyCreate,
-		ReadContext:   resourceAlertUrgencyRead,
+		ReadContext: resourceAlertUrgencyRead,
 		UpdateContext: resourceAlertUrgencyUpdate,
 		DeleteContext: resourceAlertUrgencyDelete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
-
-			"name": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+		Schema: map[string]*schema.Schema {
+			
+			"name": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The name of the alert urgency",
+				
 			},
+			
 
-			"description": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+			"description": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The description of the alert urgency",
+				
 			},
+			
 
-			"position": &schema.Schema{
-				Type:        schema.TypeInt,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "Position of the alert urgency",
-			},
+		"position": &schema.Schema {
+			Type: schema.TypeInt,
+			Computed: true,
+			Required: false,
+			Optional: true,
+			ForceNew: false,
+			Description: "Position of the alert urgency",
+			
+		},
+		
 		},
 	}
 }
@@ -60,15 +68,15 @@ func resourceAlertUrgencyCreate(ctx context.Context, d *schema.ResourceData, met
 
 	s := &client.AlertUrgency{}
 
-	if value, ok := d.GetOkExists("name"); ok {
-		s.Name = value.(string)
-	}
-	if value, ok := d.GetOkExists("description"); ok {
-		s.Description = value.(string)
-	}
-	if value, ok := d.GetOkExists("position"); ok {
-		s.Position = value.(int)
-	}
+	  if value, ok := d.GetOkExists("name"); ok {
+				s.Name = value.(string)
+			}
+    if value, ok := d.GetOkExists("description"); ok {
+				s.Description = value.(string)
+			}
+    if value, ok := d.GetOkExists("position"); ok {
+				s.Position = value.(int)
+			}
 
 	res, err := c.CreateAlertUrgency(s)
 	if err != nil {
@@ -89,7 +97,7 @@ func resourceAlertUrgencyRead(ctx context.Context, d *schema.ResourceData, meta 
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("AlertUrgency (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
@@ -99,8 +107,8 @@ func resourceAlertUrgencyRead(ctx context.Context, d *schema.ResourceData, meta 
 	}
 
 	d.Set("name", item.Name)
-	d.Set("description", item.Description)
-	d.Set("position", item.Position)
+  d.Set("description", item.Description)
+  d.Set("position", item.Position)
 
 	return nil
 }
@@ -111,15 +119,15 @@ func resourceAlertUrgencyUpdate(ctx context.Context, d *schema.ResourceData, met
 
 	s := &client.AlertUrgency{}
 
-	if d.HasChange("name") {
-		s.Name = d.Get("name").(string)
-	}
-	if d.HasChange("description") {
-		s.Description = d.Get("description").(string)
-	}
-	if d.HasChange("position") {
-		s.Position = d.Get("position").(int)
-	}
+	  if d.HasChange("name") {
+				s.Name = d.Get("name").(string)
+			}
+    if d.HasChange("description") {
+				s.Description = d.Get("description").(string)
+			}
+    if d.HasChange("position") {
+				s.Position = d.Get("position").(int)
+			}
 
 	_, err := c.UpdateAlertUrgency(d.Id(), s)
 	if err != nil {
@@ -137,7 +145,7 @@ func resourceAlertUrgencyDelete(ctx context.Context, d *schema.ResourceData, met
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("AlertUrgency (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil

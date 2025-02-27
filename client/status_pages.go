@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -39,18 +39,18 @@ type StatusPage struct {
 func (c *Client) ListStatusPages(params *rootlygo.ListStatusPagesParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListStatusPagesRequest(c.Rootly.Server, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	status_pages, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(StatusPage)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return status_pages, nil
@@ -59,22 +59,22 @@ func (c *Client) ListStatusPages(params *rootlygo.ListStatusPagesParams) ([]inte
 func (c *Client) CreateStatusPage(d *StatusPage) (*StatusPage, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling status_page: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling status_page: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateStatusPageRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create status_page: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create status_page: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(StatusPage))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling status_page: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling status_page: %w", err)
 	}
 
 	return data.(*StatusPage), nil
@@ -83,18 +83,18 @@ func (c *Client) CreateStatusPage(d *StatusPage) (*StatusPage, error) {
 func (c *Client) GetStatusPage(id string) (*StatusPage, error) {
 	req, err := rootlygo.NewGetStatusPageRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get status_page: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get status_page: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(StatusPage))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling status_page: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling status_page: %w", err)
 	}
 
 	return data.(*StatusPage), nil
@@ -103,22 +103,22 @@ func (c *Client) GetStatusPage(id string) (*StatusPage, error) {
 func (c *Client) UpdateStatusPage(id string, status_page *StatusPage) (*StatusPage, error) {
 	buffer, err := MarshalData(status_page)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling status_page: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling status_page: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateStatusPageRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update status_page: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update status_page: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(StatusPage))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling status_page: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling status_page: %w", err)
 	}
 
 	return data.(*StatusPage), nil
@@ -127,12 +127,12 @@ func (c *Client) UpdateStatusPage(id string, status_page *StatusPage) (*StatusPa
 func (c *Client) DeleteStatusPage(id string) error {
 	req, err := rootlygo.NewDeleteStatusPageRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete status_page: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete status_page: %w", err)
 	}
 
 	return nil

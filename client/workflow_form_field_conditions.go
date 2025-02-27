@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -27,18 +27,18 @@ type WorkflowFormFieldCondition struct {
 func (c *Client) ListWorkflowFormFieldConditions(id string, params *rootlygo.ListWorkflowFormFieldConditionsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListWorkflowFormFieldConditionsRequest(c.Rootly.Server, id, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	workflow_form_field_conditions, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(WorkflowFormFieldCondition)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return workflow_form_field_conditions, nil
@@ -47,22 +47,22 @@ func (c *Client) ListWorkflowFormFieldConditions(id string, params *rootlygo.Lis
 func (c *Client) CreateWorkflowFormFieldCondition(d *WorkflowFormFieldCondition) (*WorkflowFormFieldCondition, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling workflow_form_field_condition: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling workflow_form_field_condition: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateWorkflowFormFieldConditionRequestWithBody(c.Rootly.Server, d.WorkflowId, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create workflow_form_field_condition: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create workflow_form_field_condition: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowFormFieldCondition))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling workflow_form_field_condition: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling workflow_form_field_condition: %w", err)
 	}
 
 	return data.(*WorkflowFormFieldCondition), nil
@@ -71,18 +71,18 @@ func (c *Client) CreateWorkflowFormFieldCondition(d *WorkflowFormFieldCondition)
 func (c *Client) GetWorkflowFormFieldCondition(id string) (*WorkflowFormFieldCondition, error) {
 	req, err := rootlygo.NewGetWorkflowFormFieldConditionRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get workflow_form_field_condition: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get workflow_form_field_condition: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowFormFieldCondition))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling workflow_form_field_condition: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling workflow_form_field_condition: %w", err)
 	}
 
 	return data.(*WorkflowFormFieldCondition), nil
@@ -91,22 +91,22 @@ func (c *Client) GetWorkflowFormFieldCondition(id string) (*WorkflowFormFieldCon
 func (c *Client) UpdateWorkflowFormFieldCondition(id string, workflow_form_field_condition *WorkflowFormFieldCondition) (*WorkflowFormFieldCondition, error) {
 	buffer, err := MarshalData(workflow_form_field_condition)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling workflow_form_field_condition: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling workflow_form_field_condition: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateWorkflowFormFieldConditionRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update workflow_form_field_condition: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update workflow_form_field_condition: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowFormFieldCondition))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling workflow_form_field_condition: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling workflow_form_field_condition: %w", err)
 	}
 
 	return data.(*WorkflowFormFieldCondition), nil
@@ -115,12 +115,12 @@ func (c *Client) UpdateWorkflowFormFieldCondition(id string, workflow_form_field
 func (c *Client) DeleteWorkflowFormFieldCondition(id string) error {
 	req, err := rootlygo.NewDeleteWorkflowFormFieldConditionRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete workflow_form_field_condition: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete workflow_form_field_condition: %w", err)
 	}
 
 	return nil

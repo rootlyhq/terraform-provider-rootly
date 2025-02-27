@@ -4,8 +4,9 @@ package provider
 
 import (
 	"context"
+	"errors"
 	"fmt"
-
+	
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -26,82 +27,82 @@ func resourceWorkflowTaskUpdateShortcutStory() *schema.Resource {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
-		Schema: map[string]*schema.Schema{
+		Schema: map[string]*schema.Schema {
 			"workflow_id": {
-				Description: "The ID of the parent workflow",
-				Type:        schema.TypeString,
-				Required:    true,
-				ForceNew:    true,
+				Description:  "The ID of the parent workflow",
+				Type:         schema.TypeString,
+				Required:     true,
+				ForceNew:     true,
 			},
 			"name": {
-				Description: "Name of the workflow task",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
+				Description:  "Name of the workflow task",
+				Type:         schema.TypeString,
+				Optional:     true,
+				Computed:     true,
 			},
 			"position": {
-				Description: "The position of the workflow task (1 being top of list)",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Computed:    true,
+				Description:  "The position of the workflow task (1 being top of list)",
+				Type:         schema.TypeInt,
+				Optional:     true,
+				Computed:     true,
 			},
 			"skip_on_failure": {
-				Description: "Skip workflow task if any failures",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Default:     false,
+				Description:  "Skip workflow task if any failures",
+				Type:         schema.TypeBool,
+				Optional:     true,
+				Default:      false,
 			},
 			"enabled": {
-				Description: "Enable/disable this workflow task",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Default:     true,
+				Description:  "Enable/disable this workflow task",
+				Type:         schema.TypeBool,
+				Optional:     true,
+				Default:      true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type:        schema.TypeList,
-				Required:    true,
-				MinItems:    1,
-				MaxItems:    1,
+				Type: schema.TypeList,
+				Required: true,
+				MinItems: 1,
+				MaxItems: 1,
 				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"task_type": &schema.Schema{
-							Type:     schema.TypeString,
+					Schema: map[string]*schema.Schema {
+						"task_type": &schema.Schema {
+							Type: schema.TypeString,
 							Optional: true,
-							Default:  "update_shortcut_story",
-							ValidateFunc: validation.StringInSlice([]string{
+							Default: "update_shortcut_story",
+							ValidateFunc: validation.StringInSlice([]string {
 								"update_shortcut_story",
 							}, false),
 						},
-						"story_id": &schema.Schema{
+						"story_id": &schema.Schema {
 							Description: "The story id",
-							Type:        schema.TypeString,
-							Required:    true,
+							Type: schema.TypeString,
+							Required: true,
 						},
-						"title": &schema.Schema{
+						"title": &schema.Schema {
 							Description: "The incident title",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"description": &schema.Schema{
+						"description": &schema.Schema {
 							Description: "The incident description",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"labels": &schema.Schema{
+						"labels": &schema.Schema {
 							Description: "The story labels",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"due_date": &schema.Schema{
+						"due_date": &schema.Schema {
 							Description: "The due date",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"archivation": &schema.Schema{
+						"archivation": &schema.Schema {
 							Description: "Map must contain two fields, `id` and `name`. The archivation id and display name",
-							Type:        schema.TypeMap,
-							Required:    true,
+							Type: schema.TypeMap,
+							Required: true,
 						},
 					},
 				},
@@ -123,12 +124,12 @@ func resourceWorkflowTaskUpdateShortcutStoryCreate(ctx context.Context, d *schem
 	tflog.Trace(ctx, fmt.Sprintf("Creating workflow task: %s", workflowId))
 
 	s := &client.WorkflowTask{
-		WorkflowId:    workflowId,
-		Name:          name,
-		Position:      position,
+		WorkflowId: workflowId,
+		Name: name,
+		Position: position,
 		SkipOnFailure: skipOnFailure,
-		Enabled:       enabled,
-		TaskParams:    taskParams,
+		Enabled: enabled,
+		TaskParams: taskParams,
 	}
 
 	res, err := c.CreateWorkflowTask(s)
@@ -150,7 +151,7 @@ func resourceWorkflowTaskUpdateShortcutStoryRead(ctx context.Context, d *schema.
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskUpdateShortcutStory (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
@@ -183,12 +184,12 @@ func resourceWorkflowTaskUpdateShortcutStoryUpdate(ctx context.Context, d *schem
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	s := &client.WorkflowTask{
-		WorkflowId:    workflowId,
-		Name:          name,
-		Position:      position,
+		WorkflowId: workflowId,
+		Name: name,
+		Position: position,
 		SkipOnFailure: skipOnFailure,
-		Enabled:       enabled,
-		TaskParams:    taskParams,
+		Enabled: enabled,
+		TaskParams: taskParams,
 	}
 
 	tflog.Debug(ctx, fmt.Sprintf("adding value: %#v", s))
@@ -208,7 +209,7 @@ func resourceWorkflowTaskUpdateShortcutStoryDelete(ctx context.Context, d *schem
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskUpdateShortcutStory (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil

@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -37,18 +37,18 @@ type Functionality struct {
 func (c *Client) ListFunctionalities(params *rootlygo.ListFunctionalitiesParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListFunctionalitiesRequest(c.Rootly.Server, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	functionalities, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Functionality)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return functionalities, nil
@@ -57,22 +57,22 @@ func (c *Client) ListFunctionalities(params *rootlygo.ListFunctionalitiesParams)
 func (c *Client) CreateFunctionality(d *Functionality) (*Functionality, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling functionality: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling functionality: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateFunctionalityRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create functionality: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create functionality: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Functionality))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling functionality: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling functionality: %w", err)
 	}
 
 	return data.(*Functionality), nil
@@ -81,18 +81,18 @@ func (c *Client) CreateFunctionality(d *Functionality) (*Functionality, error) {
 func (c *Client) GetFunctionality(id string) (*Functionality, error) {
 	req, err := rootlygo.NewGetFunctionalityRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get functionality: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get functionality: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Functionality))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling functionality: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling functionality: %w", err)
 	}
 
 	return data.(*Functionality), nil
@@ -101,22 +101,22 @@ func (c *Client) GetFunctionality(id string) (*Functionality, error) {
 func (c *Client) UpdateFunctionality(id string, functionality *Functionality) (*Functionality, error) {
 	buffer, err := MarshalData(functionality)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling functionality: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling functionality: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateFunctionalityRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update functionality: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update functionality: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Functionality))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling functionality: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling functionality: %w", err)
 	}
 
 	return data.(*Functionality), nil
@@ -125,12 +125,12 @@ func (c *Client) UpdateFunctionality(id string, functionality *Functionality) (*
 func (c *Client) DeleteFunctionality(id string) error {
 	req, err := rootlygo.NewDeleteFunctionalityRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete functionality: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete functionality: %w", err)
 	}
 
 	return nil

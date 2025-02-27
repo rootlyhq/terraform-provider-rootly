@@ -4,7 +4,7 @@ package provider
 
 import (
 	"context"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
@@ -12,49 +12,55 @@ import (
 )
 
 func dataSourceService() *schema.Resource {
-	return &schema.Resource{
+	return &schema.Resource {
 		ReadContext: dataSourceServiceRead,
-		Schema: map[string]*schema.Schema{
-			"id": &schema.Schema{
-				Type:     schema.TypeString,
+		Schema: map[string]*schema.Schema {
+			"id": &schema.Schema {
+				Type: schema.TypeString,
 				Computed: true,
 			},
-
-			"name": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
-				Optional: true,
-			},
-
-			"slug": &schema.Schema{
-				Type:     schema.TypeString,
+			
+			"name": &schema.Schema {
+				Type: schema.TypeString,
 				Computed: true,
 				Optional: true,
 			},
+			
 
-			"backstage_id": &schema.Schema{
-				Type:     schema.TypeString,
+			"slug": &schema.Schema {
+				Type: schema.TypeString,
 				Computed: true,
 				Optional: true,
 			},
+			
 
-			"external_id": &schema.Schema{
-				Type:     schema.TypeString,
+			"backstage_id": &schema.Schema {
+				Type: schema.TypeString,
 				Computed: true,
 				Optional: true,
 			},
+			
 
-			"cortex_id": &schema.Schema{
-				Type:     schema.TypeString,
+			"external_id": &schema.Schema {
+				Type: schema.TypeString,
 				Computed: true,
 				Optional: true,
 			},
+			
 
-			"created_at": &schema.Schema{
-				Type:        schema.TypeMap,
-				Description: "Filter by date range using 'lt' and 'gt'.",
-				Optional:    true,
+			"cortex_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Optional: true,
 			},
+			
+
+				"created_at": &schema.Schema {
+					Type: schema.TypeMap,
+					Description: "Filter by date range using 'lt' and 'gt'.",
+					Optional: true,
+				},
+				
 		},
 	}
 }
@@ -66,42 +72,50 @@ func dataSourceServiceRead(ctx context.Context, d *schema.ResourceData, meta int
 	page_size := 1
 	params.PageSize = &page_size
 
-	if value, ok := d.GetOkExists("name"); ok {
-		name := value.(string)
-		params.FilterName = &name
-	}
+	
+				if value, ok := d.GetOkExists("name"); ok {
+					name := value.(string)
+					params.FilterName = &name
+				}
+			
 
-	if value, ok := d.GetOkExists("slug"); ok {
-		slug := value.(string)
-		params.FilterSlug = &slug
-	}
+				if value, ok := d.GetOkExists("slug"); ok {
+					slug := value.(string)
+					params.FilterSlug = &slug
+				}
+			
 
-	if value, ok := d.GetOkExists("backstage_id"); ok {
-		backstage_id := value.(string)
-		params.FilterBackstageId = &backstage_id
-	}
+				if value, ok := d.GetOkExists("backstage_id"); ok {
+					backstage_id := value.(string)
+					params.FilterBackstageId = &backstage_id
+				}
+			
 
-	if value, ok := d.GetOkExists("cortex_id"); ok {
-		cortex_id := value.(string)
-		params.FilterCortexId = &cortex_id
-	}
+				if value, ok := d.GetOkExists("cortex_id"); ok {
+					cortex_id := value.(string)
+					params.FilterCortexId = &cortex_id
+				}
+			
 
-	if value, ok := d.GetOkExists("external_id"); ok {
-		external_id := value.(string)
-		params.FilterExternalId = &external_id
-	}
+				if value, ok := d.GetOkExists("external_id"); ok {
+					external_id := value.(string)
+					params.FilterExternalId = &external_id
+				}
+			
 
-	created_at_gt := d.Get("created_at").(map[string]interface{})
-	if value, exists := created_at_gt["gt"]; exists {
-		v := value.(string)
-		params.FilterCreatedAtGt = &v
-	}
+				created_at_gt := d.Get("created_at").(map[string]interface{})
+				if value, exists := created_at_gt["gt"]; exists {
+					v := value.(string)
+					params.FilterCreatedAtGt = &v
+				}
+			
 
-	created_at_lt := d.Get("created_at").(map[string]interface{})
-	if value, exists := created_at_lt["lt"]; exists {
-		v := value.(string)
-		params.FilterCreatedAtLt = &v
-	}
+				created_at_lt := d.Get("created_at").(map[string]interface{})
+				if value, exists := created_at_lt["lt"]; exists {
+					v := value.(string)
+					params.FilterCreatedAtLt = &v
+				}
+			
 
 	items, err := c.ListServices(params)
 	if err != nil {
