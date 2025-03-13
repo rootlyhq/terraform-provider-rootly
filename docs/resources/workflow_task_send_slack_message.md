@@ -77,6 +77,7 @@ Optional:
 - `slack_user_groups` (Block List) (see [below for nested schema](#nestedblock--task_params--slack_user_groups))
 - `slack_users` (Block List) (see [below for nested schema](#nestedblock--task_params--slack_users))
 - `task_type` (String)
+- `thread_ts` (String) The thread to send the message into
 - `update_parent_message` (Boolean) Value must be one of true or false
 
 <a id="nestedblock--task_params--channels"></a>

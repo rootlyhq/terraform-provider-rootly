@@ -187,6 +187,11 @@ func resourceWorkflowTaskSendSlackBlocks() *schema.Resource {
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},
+						"thread_ts": &schema.Schema{
+							Description: "The thread to send the message into",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 						"update_parent_message": &schema.Schema{
 							Description: "Value must be one of true or false",
 							Type:        schema.TypeBool,

@@ -365,6 +365,12 @@ const (
 	AddToTimeline AddToTimelineTaskParamsTaskType = "add_to_timeline"
 )
 
+// Defines values for AlertNoise.
+const (
+	AlertNoiseNoise    AlertNoise = "noise"
+	AlertNoiseNotNoise AlertNoise = "not_noise"
+)
+
 // Defines values for AlertSource.
 const (
 	AlertSourceAlertmanager    AlertSource = "alertmanager"
@@ -406,6 +412,14 @@ const (
 	AlertSourceZendesk         AlertSource = "zendesk"
 )
 
+// Defines values for AlertStatus.
+const (
+	AlertStatusAcknowledged AlertStatus = "acknowledged"
+	AlertStatusOpen         AlertStatus = "open"
+	AlertStatusResolved     AlertStatus = "resolved"
+	AlertStatusTriggered    AlertStatus = "triggered"
+)
+
 // Defines values for AlertEventAction.
 const (
 	AlertEventActionAcknowledged AlertEventAction = "acknowledged"
@@ -416,6 +430,9 @@ const (
 	AlertEventActionCreated      AlertEventAction = "created"
 	AlertEventActionEmailed      AlertEventAction = "emailed"
 	AlertEventActionEscalated    AlertEventAction = "escalated"
+	AlertEventActionMarked       AlertEventAction = "marked"
+	AlertEventActionMuted        AlertEventAction = "muted"
+	AlertEventActionNotMarked    AlertEventAction = "not_marked"
 	AlertEventActionNotified     AlertEventAction = "notified"
 	AlertEventActionOpened       AlertEventAction = "opened"
 	AlertEventActionPaged        AlertEventAction = "paged"
@@ -435,6 +452,8 @@ const (
 	AlertEventKindAlertGrouping AlertEventKind = "alert_grouping"
 	AlertEventKindAlertUrgency  AlertEventKind = "alert_urgency"
 	AlertEventKindInformational AlertEventKind = "informational"
+	AlertEventKindMaintenance   AlertEventKind = "maintenance"
+	AlertEventKindNoise         AlertEventKind = "noise"
 	AlertEventKindNote          AlertEventKind = "note"
 	AlertEventKindNotification  AlertEventKind = "notification"
 	AlertEventKindRecording     AlertEventKind = "recording"
@@ -2206,6 +2225,12 @@ const (
 	MitigateIncidentDataTypeIncidents MitigateIncidentDataType = "incidents"
 )
 
+// Defines values for NewAlertDataAttributesNoise.
+const (
+	Noise    NewAlertDataAttributesNoise = "noise"
+	NotNoise NewAlertDataAttributesNoise = "not_noise"
+)
+
 // Defines values for NewAlertDataAttributesNotificationTargetType.
 const (
 	NewAlertDataAttributesNotificationTargetTypeEscalationPolicy NewAlertDataAttributesNotificationTargetType = "EscalationPolicy"
@@ -2253,6 +2278,12 @@ const (
 	NewAlertDataAttributesSourceWeb             NewAlertDataAttributesSource = "web"
 	NewAlertDataAttributesSourceWorkflow        NewAlertDataAttributesSource = "workflow"
 	NewAlertDataAttributesSourceZendesk         NewAlertDataAttributesSource = "zendesk"
+)
+
+// Defines values for NewAlertDataAttributesStatus.
+const (
+	NewAlertDataAttributesStatusOpen      NewAlertDataAttributesStatus = "open"
+	NewAlertDataAttributesStatusTriggered NewAlertDataAttributesStatus = "triggered"
 )
 
 // Defines values for NewAlertDataType.
@@ -2315,6 +2346,7 @@ const (
 	NewAlertsSourceDataAttributesSourceTypeChronosphere   NewAlertsSourceDataAttributesSourceType = "chronosphere"
 	NewAlertsSourceDataAttributesSourceTypeCloudWatch     NewAlertsSourceDataAttributesSourceType = "cloud_watch"
 	NewAlertsSourceDataAttributesSourceTypeDatadog        NewAlertsSourceDataAttributesSourceType = "datadog"
+	NewAlertsSourceDataAttributesSourceTypeEmail          NewAlertsSourceDataAttributesSourceType = "email"
 	NewAlertsSourceDataAttributesSourceTypeGenericWebhook NewAlertsSourceDataAttributesSourceType = "generic_webhook"
 	NewAlertsSourceDataAttributesSourceTypeGoogleCloud    NewAlertsSourceDataAttributesSourceType = "google_cloud"
 	NewAlertsSourceDataAttributesSourceTypeGrafana        NewAlertsSourceDataAttributesSourceType = "grafana"
@@ -4739,6 +4771,7 @@ const (
 	UpdateAlertsSourceDataAttributesSourceTypeChronosphere   UpdateAlertsSourceDataAttributesSourceType = "chronosphere"
 	UpdateAlertsSourceDataAttributesSourceTypeCloudWatch     UpdateAlertsSourceDataAttributesSourceType = "cloud_watch"
 	UpdateAlertsSourceDataAttributesSourceTypeDatadog        UpdateAlertsSourceDataAttributesSourceType = "datadog"
+	UpdateAlertsSourceDataAttributesSourceTypeEmail          UpdateAlertsSourceDataAttributesSourceType = "email"
 	UpdateAlertsSourceDataAttributesSourceTypeGenericWebhook UpdateAlertsSourceDataAttributesSourceType = "generic_webhook"
 	UpdateAlertsSourceDataAttributesSourceTypeGoogleCloud    UpdateAlertsSourceDataAttributesSourceType = "google_cloud"
 	UpdateAlertsSourceDataAttributesSourceTypeGrafana        UpdateAlertsSourceDataAttributesSourceType = "grafana"
@@ -6441,8 +6474,9 @@ const (
 
 // Defines values for WorkflowRunTriggeredBy.
 const (
-	WorkflowRunTriggeredBySystem WorkflowRunTriggeredBy = "system"
-	WorkflowRunTriggeredByUser   WorkflowRunTriggeredBy = "user"
+	WorkflowRunTriggeredBySystem   WorkflowRunTriggeredBy = "system"
+	WorkflowRunTriggeredByUser     WorkflowRunTriggeredBy = "user"
+	WorkflowRunTriggeredByWorkflow WorkflowRunTriggeredBy = "workflow"
 )
 
 // Defines values for WorkflowRunResponseDataType.
@@ -6636,10 +6670,10 @@ const (
 	ListIncidentsParamsIncludeFunctionalities       ListIncidentsParamsInclude = "functionalities"
 	ListIncidentsParamsIncludeGroups                ListIncidentsParamsInclude = "groups"
 	ListIncidentsParamsIncludeIncidentPostMortem    ListIncidentsParamsInclude = "incident_post_mortem"
-	ListIncidentsParamsIncludeIncidentSlackMessages ListIncidentsParamsInclude = "incident_slack_messages"
 	ListIncidentsParamsIncludeIncidentTypes         ListIncidentsParamsInclude = "incident_types"
 	ListIncidentsParamsIncludeRoles                 ListIncidentsParamsInclude = "roles"
 	ListIncidentsParamsIncludeServices              ListIncidentsParamsInclude = "services"
+	ListIncidentsParamsIncludeSlackMessages         ListIncidentsParamsInclude = "slack_messages"
 	ListIncidentsParamsIncludeSubStatuses           ListIncidentsParamsInclude = "sub_statuses"
 	ListIncidentsParamsIncludeSubscribers           ListIncidentsParamsInclude = "subscribers"
 )
@@ -6655,10 +6689,10 @@ const (
 	GetIncidentParamsIncludeFunctionalities       GetIncidentParamsInclude = "functionalities"
 	GetIncidentParamsIncludeGroups                GetIncidentParamsInclude = "groups"
 	GetIncidentParamsIncludeIncidentPostMortem    GetIncidentParamsInclude = "incident_post_mortem"
-	GetIncidentParamsIncludeIncidentSlackMessages GetIncidentParamsInclude = "incident_slack_messages"
 	GetIncidentParamsIncludeIncidentTypes         GetIncidentParamsInclude = "incident_types"
 	GetIncidentParamsIncludeRoles                 GetIncidentParamsInclude = "roles"
 	GetIncidentParamsIncludeServices              GetIncidentParamsInclude = "services"
+	GetIncidentParamsIncludeSlackMessages         GetIncidentParamsInclude = "slack_messages"
 	GetIncidentParamsIncludeSubStatuses           GetIncidentParamsInclude = "sub_statuses"
 	GetIncidentParamsIncludeSubscribers           GetIncidentParamsInclude = "subscribers"
 )
@@ -7234,11 +7268,17 @@ type Alert struct {
 		Value string `json:"value"`
 	} `json:"labels,omitempty"`
 
+	// Noise Whether the alert is marked as noise
+	Noise *AlertNoise `json:"noise"`
+
 	// Services Services attached to the alert
 	Services *[]Service `json:"services,omitempty"`
 
 	// Source The source of the alert
 	Source AlertSource `json:"source"`
+
+	// Status The status of the alert
+	Status *AlertStatus `json:"status,omitempty"`
 
 	// Summary The summary of the alert
 	Summary string `json:"summary"`
@@ -7247,8 +7287,14 @@ type Alert struct {
 	UpdatedAt string `json:"updated_at"`
 }
 
+// AlertNoise Whether the alert is marked as noise
+type AlertNoise string
+
 // AlertSource The source of the alert
 type AlertSource string
+
+// AlertStatus The status of the alert
+type AlertStatus string
 
 // AlertEvent defines model for alert_event.
 type AlertEvent struct {
@@ -12078,6 +12124,9 @@ type NewAlert struct {
 				Value string `json:"value"`
 			} `json:"labels,omitempty"`
 
+			// Noise Whether the alert is marked as noise
+			Noise *NewAlertDataAttributesNoise `json:"noise"`
+
 			// NotificationTargetId Only available for organizations with Rootly On-Call enabled. The _identifier_ of the notification target object.
 			NotificationTargetId *string `json:"notification_target_id"`
 
@@ -12093,6 +12142,9 @@ type NewAlert struct {
 			// StartedAt Alert start datetime
 			StartedAt *time.Time `json:"started_at"`
 
+			// Status Only available for organizations with Rootly On-Call enabled. Can be one of open, triggered, acknowledged or resolved.
+			Status *NewAlertDataAttributesStatus `json:"status,omitempty"`
+
 			// Summary The summary of the alert
 			Summary string `json:"summary"`
 		} `json:"attributes"`
@@ -12100,11 +12152,17 @@ type NewAlert struct {
 	} `json:"data"`
 }
 
+// NewAlertDataAttributesNoise Whether the alert is marked as noise
+type NewAlertDataAttributesNoise string
+
 // NewAlertDataAttributesNotificationTargetType Only available for organizations with Rootly On-Call enabled. Can be one of Group, Service, EscalationPolicy, User.
 type NewAlertDataAttributesNotificationTargetType string
 
 // NewAlertDataAttributesSource The source of the alert
 type NewAlertDataAttributesSource string
+
+// NewAlertDataAttributesStatus Only available for organizations with Rootly On-Call enabled. Can be one of open, triggered, acknowledged or resolved.
+type NewAlertDataAttributesStatus string
 
 // NewAlertDataType defines model for NewAlert.Data.Type.
 type NewAlertDataType string
@@ -12614,7 +12672,7 @@ type NewEscalationPath struct {
 			RepeatCount *int `json:"repeat_count"`
 
 			// Rules Escalation path conditions
-			Rules []struct {
+			Rules *[]struct {
 				// JsonPath JSON path to extract value from payload
 				JsonPath *string `json:"json_path,omitempty"`
 
@@ -12632,7 +12690,7 @@ type NewEscalationPath struct {
 
 				// WithinWorkingHour Whether the escalation path should be used within working hours
 				WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
-			} `json:"rules"`
+			} `json:"rules,omitempty"`
 		} `json:"attributes"`
 		Type NewEscalationPathDataType `json:"type"`
 	} `json:"data"`
@@ -14824,7 +14882,8 @@ type NewWorkflowRun struct {
 // NewWorkflowRunDataAttributes0 defines model for .
 type NewWorkflowRunDataAttributes0 struct {
 	// CheckConditions If true, this will check conditions. If conditions are not satisfied the run will not be created.
-	CheckConditions *bool `json:"check_conditions"`
+	CheckConditions *bool                   `json:"check_conditions"`
+	Context         *map[string]interface{} `json:"context,omitempty"`
 
 	// Immediate If false, this will respect wait time configured on the workflow.
 	Immediate *bool `json:"immediate"`
@@ -14833,7 +14892,8 @@ type NewWorkflowRunDataAttributes0 struct {
 // NewWorkflowRunDataAttributes1 defines model for .
 type NewWorkflowRunDataAttributes1 struct {
 	// CheckConditions If true, this will check conditions. If conditions are not satisfied the run will not be created
-	CheckConditions *bool `json:"check_conditions"`
+	CheckConditions *bool                   `json:"check_conditions"`
+	Context         *map[string]interface{} `json:"context,omitempty"`
 
 	// Immediate If false, this will respect wait time configured on the workflow
 	Immediate  *bool  `json:"immediate"`
@@ -14843,7 +14903,8 @@ type NewWorkflowRunDataAttributes1 struct {
 // NewWorkflowRunDataAttributes2 defines model for .
 type NewWorkflowRunDataAttributes2 struct {
 	// CheckConditions If true, this will check conditions. If conditions are not satisfied the run will not be created
-	CheckConditions *bool `json:"check_conditions"`
+	CheckConditions *bool                   `json:"check_conditions"`
+	Context         *map[string]interface{} `json:"context,omitempty"`
 
 	// Immediate If false, this will respect wait time configured on the workflow
 	Immediate    *bool  `json:"immediate"`
@@ -14855,7 +14916,8 @@ type NewWorkflowRunDataAttributes3 struct {
 	ActionItemId string `json:"action_item_id"`
 
 	// CheckConditions If true, this will check conditions. If conditions are not satisfied the run will not be created
-	CheckConditions *bool `json:"check_conditions"`
+	CheckConditions *bool                   `json:"check_conditions"`
+	Context         *map[string]interface{} `json:"context,omitempty"`
 
 	// Immediate If false, this will respect wait time configured on the workflow
 	Immediate *bool `json:"immediate"`
@@ -14866,7 +14928,8 @@ type NewWorkflowRunDataAttributes4 struct {
 	AlertId string `json:"alert_id"`
 
 	// CheckConditions If true, this will check conditions. If conditions are not satisfied the run will not be created
-	CheckConditions *bool `json:"check_conditions"`
+	CheckConditions *bool                   `json:"check_conditions"`
+	Context         *map[string]interface{} `json:"context,omitempty"`
 
 	// Immediate If false, this will respect wait time configured on the workflow
 	Immediate *bool `json:"immediate"`
@@ -14875,7 +14938,8 @@ type NewWorkflowRunDataAttributes4 struct {
 // NewWorkflowRunDataAttributes5 defines model for .
 type NewWorkflowRunDataAttributes5 struct {
 	// CheckConditions If true, this will check conditions. If conditions are not satisfied the run will not be created
-	CheckConditions *bool `json:"check_conditions"`
+	CheckConditions *bool                   `json:"check_conditions"`
+	Context         *map[string]interface{} `json:"context,omitempty"`
 
 	// Immediate If false, this will respect wait time configured on the workflow
 	Immediate *bool  `json:"immediate"`
@@ -16533,8 +16597,11 @@ type SendSlackBlocksTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"slack_users,omitempty"`
-	TaskType            *SendSlackBlocksTaskParamsTaskType `json:"task_type,omitempty"`
-	UpdateParentMessage *bool                              `json:"update_parent_message,omitempty"`
+	TaskType *SendSlackBlocksTaskParamsTaskType `json:"task_type,omitempty"`
+
+	// ThreadTs The thread to send the message into
+	ThreadTs            *string `json:"thread_ts,omitempty"`
+	UpdateParentMessage *bool   `json:"update_parent_message,omitempty"`
 	union               json.RawMessage
 }
 
@@ -16583,8 +16650,11 @@ type SendSlackMessageTaskParams struct {
 	TaskType *SendSlackMessageTaskParamsTaskType `json:"task_type,omitempty"`
 
 	// Text The message text
-	Text                string `json:"text"`
-	UpdateParentMessage *bool  `json:"update_parent_message,omitempty"`
+	Text string `json:"text"`
+
+	// ThreadTs The thread to send the message into
+	ThreadTs            *string `json:"thread_ts,omitempty"`
+	UpdateParentMessage *bool   `json:"update_parent_message,omitempty"`
 	union               json.RawMessage
 }
 
@@ -21482,8 +21552,8 @@ type ListAlertGroupsParams struct {
 	Include *string `form:"include,omitempty" json:"include,omitempty"`
 }
 
-// ListAlertsSourcesParams defines parameters for ListAlertsSources.
-type ListAlertsSourcesParams struct {
+// ListAlertSourcesParams defines parameters for ListAlertSources.
+type ListAlertSourcesParams struct {
 	Include           *string `form:"include,omitempty" json:"include,omitempty"`
 	PageNumber        *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize          *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
@@ -22137,6 +22207,10 @@ type ListIncidentsParams struct {
 	FilterResolvedAtGte                *string `form:"filter[resolved_at][gte],omitempty" json:"filter[resolved_at][gte],omitempty"`
 	FilterResolvedAtLt                 *string `form:"filter[resolved_at][lt],omitempty" json:"filter[resolved_at][lt],omitempty"`
 	FilterResolvedAtLte                *string `form:"filter[resolved_at][lte],omitempty" json:"filter[resolved_at][lte],omitempty"`
+	FilterClosedAtGt                   *string `form:"filter[closed_at][gt],omitempty" json:"filter[closed_at][gt],omitempty"`
+	FilterClosedAtGte                  *string `form:"filter[closed_at][gte],omitempty" json:"filter[closed_at][gte],omitempty"`
+	FilterClosedAtLt                   *string `form:"filter[closed_at][lt],omitempty" json:"filter[closed_at][lt],omitempty"`
+	FilterClosedAtLte                  *string `form:"filter[closed_at][lte],omitempty" json:"filter[closed_at][lte],omitempty"`
 	FilterInTriageAtGt                 *string `form:"filter[in_triage_at][gt],omitempty" json:"filter[in_triage_at][gt],omitempty"`
 	FilterInTriageAtGte                *string `form:"filter[in_triage_at][gte],omitempty" json:"filter[in_triage_at][gte],omitempty"`
 	FilterInTriageAtLt                 *string `form:"filter[in_triage_at][lt],omitempty" json:"filter[in_triage_at][lt],omitempty"`
@@ -22823,11 +22897,11 @@ type CreateAlertGroupApplicationVndAPIPlusJSONRequestBody = NewAlertGroup
 // UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody defines body for UpdateAlertGroup for application/vnd.api+json ContentType.
 type UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody = UpdateAlertGroup
 
-// CreateAlertsSourceApplicationVndAPIPlusJSONRequestBody defines body for CreateAlertsSource for application/vnd.api+json ContentType.
-type CreateAlertsSourceApplicationVndAPIPlusJSONRequestBody = NewAlertsSource
+// CreateAlertSourceApplicationVndAPIPlusJSONRequestBody defines body for CreateAlertSource for application/vnd.api+json ContentType.
+type CreateAlertSourceApplicationVndAPIPlusJSONRequestBody = NewAlertsSource
 
-// UpdateAlertsSourceApplicationVndAPIPlusJSONRequestBody defines body for UpdateAlertsSource for application/vnd.api+json ContentType.
-type UpdateAlertsSourceApplicationVndAPIPlusJSONRequestBody = UpdateAlertsSource
+// UpdateAlertSourceApplicationVndAPIPlusJSONRequestBody defines body for UpdateAlertSource for application/vnd.api+json ContentType.
+type UpdateAlertSourceApplicationVndAPIPlusJSONRequestBody = UpdateAlertsSource
 
 // CreateAlertUrgencyApplicationVndAPIPlusJSONRequestBody defines body for CreateAlertUrgency for application/vnd.api+json ContentType.
 type CreateAlertUrgencyApplicationVndAPIPlusJSONRequestBody = NewAlertUrgency
@@ -29346,6 +29420,13 @@ func (t SendSlackBlocksTaskParams) MarshalJSON() ([]byte, error) {
 		}
 	}
 
+	if t.ThreadTs != nil {
+		object["thread_ts"], err = json.Marshal(t.ThreadTs)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'thread_ts': %w", err)
+		}
+	}
+
 	if t.UpdateParentMessage != nil {
 		object["update_parent_message"], err = json.Marshal(t.UpdateParentMessage)
 		if err != nil {
@@ -29448,6 +29529,13 @@ func (t *SendSlackBlocksTaskParams) UnmarshalJSON(b []byte) error {
 		err = json.Unmarshal(raw, &t.TaskType)
 		if err != nil {
 			return fmt.Errorf("error reading 'task_type': %w", err)
+		}
+	}
+
+	if raw, found := object["thread_ts"]; found {
+		err = json.Unmarshal(raw, &t.ThreadTs)
+		if err != nil {
+			return fmt.Errorf("error reading 'thread_ts': %w", err)
 		}
 	}
 
@@ -29634,6 +29722,13 @@ func (t SendSlackMessageTaskParams) MarshalJSON() ([]byte, error) {
 		return nil, fmt.Errorf("error marshaling 'text': %w", err)
 	}
 
+	if t.ThreadTs != nil {
+		object["thread_ts"], err = json.Marshal(t.ThreadTs)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'thread_ts': %w", err)
+		}
+	}
+
 	if t.UpdateParentMessage != nil {
 		object["update_parent_message"], err = json.Marshal(t.UpdateParentMessage)
 		if err != nil {
@@ -29736,6 +29831,13 @@ func (t *SendSlackMessageTaskParams) UnmarshalJSON(b []byte) error {
 		err = json.Unmarshal(raw, &t.Text)
 		if err != nil {
 			return fmt.Errorf("error reading 'text': %w", err)
+		}
+	}
+
+	if raw, found := object["thread_ts"]; found {
+		err = json.Unmarshal(raw, &t.ThreadTs)
+		if err != nil {
+			return fmt.Errorf("error reading 'thread_ts': %w", err)
 		}
 	}
 
@@ -36346,24 +36448,24 @@ type ClientInterface interface {
 
 	UpdateAlertGroupWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ListAlertsSources request
-	ListAlertsSources(ctx context.Context, params *ListAlertsSourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// ListAlertSources request
+	ListAlertSources(ctx context.Context, params *ListAlertSourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CreateAlertsSourceWithBody request with any body
-	CreateAlertsSourceWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// CreateAlertSourceWithBody request with any body
+	CreateAlertSourceWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	CreateAlertsSourceWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateAlertsSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	CreateAlertSourceWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateAlertSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// DeleteAlertsSource request
-	DeleteAlertsSource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// DeleteAlertSource request
+	DeleteAlertSource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetAlertsSource request
-	GetAlertsSource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetAlertSource request
+	GetAlertSource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// UpdateAlertsSourceWithBody request with any body
-	UpdateAlertsSourceWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// UpdateAlertSourceWithBody request with any body
+	UpdateAlertSourceWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	UpdateAlertsSourceWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAlertsSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	UpdateAlertSourceWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAlertSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListAlertUrgencies request
 	ListAlertUrgencies(ctx context.Context, params *ListAlertUrgenciesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -38062,8 +38164,8 @@ func (c *Client) UpdateAlertGroupWithApplicationVndAPIPlusJSONBody(ctx context.C
 	return c.Client.Do(req)
 }
 
-func (c *Client) ListAlertsSources(ctx context.Context, params *ListAlertsSourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewListAlertsSourcesRequest(c.Server, params)
+func (c *Client) ListAlertSources(ctx context.Context, params *ListAlertSourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListAlertSourcesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -38074,8 +38176,8 @@ func (c *Client) ListAlertsSources(ctx context.Context, params *ListAlertsSource
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateAlertsSourceWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateAlertsSourceRequestWithBody(c.Server, contentType, body)
+func (c *Client) CreateAlertSourceWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateAlertSourceRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -38086,8 +38188,8 @@ func (c *Client) CreateAlertsSourceWithBody(ctx context.Context, contentType str
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateAlertsSourceWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateAlertsSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateAlertsSourceRequestWithApplicationVndAPIPlusJSONBody(c.Server, body)
+func (c *Client) CreateAlertSourceWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateAlertSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateAlertSourceRequestWithApplicationVndAPIPlusJSONBody(c.Server, body)
 	if err != nil {
 		return nil, err
 	}
@@ -38098,8 +38200,8 @@ func (c *Client) CreateAlertsSourceWithApplicationVndAPIPlusJSONBody(ctx context
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteAlertsSource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDeleteAlertsSourceRequest(c.Server, id)
+func (c *Client) DeleteAlertSource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteAlertSourceRequest(c.Server, id)
 	if err != nil {
 		return nil, err
 	}
@@ -38110,8 +38212,8 @@ func (c *Client) DeleteAlertsSource(ctx context.Context, id string, reqEditors .
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetAlertsSource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetAlertsSourceRequest(c.Server, id)
+func (c *Client) GetAlertSource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAlertSourceRequest(c.Server, id)
 	if err != nil {
 		return nil, err
 	}
@@ -38122,8 +38224,8 @@ func (c *Client) GetAlertsSource(ctx context.Context, id string, reqEditors ...R
 	return c.Client.Do(req)
 }
 
-func (c *Client) UpdateAlertsSourceWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewUpdateAlertsSourceRequestWithBody(c.Server, id, contentType, body)
+func (c *Client) UpdateAlertSourceWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateAlertSourceRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -38134,8 +38236,8 @@ func (c *Client) UpdateAlertsSourceWithBody(ctx context.Context, id string, cont
 	return c.Client.Do(req)
 }
 
-func (c *Client) UpdateAlertsSourceWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAlertsSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewUpdateAlertsSourceRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+func (c *Client) UpdateAlertSourceWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAlertSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateAlertSourceRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -45656,8 +45758,8 @@ func NewUpdateAlertGroupRequestWithBody(server string, id string, contentType st
 	return req, nil
 }
 
-// NewListAlertsSourcesRequest generates requests for ListAlertsSources
-func NewListAlertsSourcesRequest(server string, params *ListAlertsSourcesParams) (*http.Request, error) {
+// NewListAlertSourcesRequest generates requests for ListAlertSources
+func NewListAlertSourcesRequest(server string, params *ListAlertSourcesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -45801,19 +45903,19 @@ func NewListAlertsSourcesRequest(server string, params *ListAlertsSourcesParams)
 	return req, nil
 }
 
-// NewCreateAlertsSourceRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateAlertsSource builder with application/vnd.api+json body
-func NewCreateAlertsSourceRequestWithApplicationVndAPIPlusJSONBody(server string, body CreateAlertsSourceApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+// NewCreateAlertSourceRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateAlertSource builder with application/vnd.api+json body
+func NewCreateAlertSourceRequestWithApplicationVndAPIPlusJSONBody(server string, body CreateAlertSourceApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewCreateAlertsSourceRequestWithBody(server, "application/vnd.api+json", bodyReader)
+	return NewCreateAlertSourceRequestWithBody(server, "application/vnd.api+json", bodyReader)
 }
 
-// NewCreateAlertsSourceRequestWithBody generates requests for CreateAlertsSource with any type of body
-func NewCreateAlertsSourceRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+// NewCreateAlertSourceRequestWithBody generates requests for CreateAlertSource with any type of body
+func NewCreateAlertSourceRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -45841,8 +45943,8 @@ func NewCreateAlertsSourceRequestWithBody(server string, contentType string, bod
 	return req, nil
 }
 
-// NewDeleteAlertsSourceRequest generates requests for DeleteAlertsSource
-func NewDeleteAlertsSourceRequest(server string, id string) (*http.Request, error) {
+// NewDeleteAlertSourceRequest generates requests for DeleteAlertSource
+func NewDeleteAlertSourceRequest(server string, id string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -45875,8 +45977,8 @@ func NewDeleteAlertsSourceRequest(server string, id string) (*http.Request, erro
 	return req, nil
 }
 
-// NewGetAlertsSourceRequest generates requests for GetAlertsSource
-func NewGetAlertsSourceRequest(server string, id string) (*http.Request, error) {
+// NewGetAlertSourceRequest generates requests for GetAlertSource
+func NewGetAlertSourceRequest(server string, id string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -45909,19 +46011,19 @@ func NewGetAlertsSourceRequest(server string, id string) (*http.Request, error) 
 	return req, nil
 }
 
-// NewUpdateAlertsSourceRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateAlertsSource builder with application/vnd.api+json body
-func NewUpdateAlertsSourceRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateAlertsSourceApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+// NewUpdateAlertSourceRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateAlertSource builder with application/vnd.api+json body
+func NewUpdateAlertSourceRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateAlertSourceApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewUpdateAlertsSourceRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+	return NewUpdateAlertSourceRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
 }
 
-// NewUpdateAlertsSourceRequestWithBody generates requests for UpdateAlertsSource with any type of body
-func NewUpdateAlertsSourceRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+// NewUpdateAlertSourceRequestWithBody generates requests for UpdateAlertSource with any type of body
+func NewUpdateAlertSourceRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -59153,6 +59255,70 @@ func NewListIncidentsRequest(server string, params *ListIncidentsParams) (*http.
 		if params.FilterResolvedAtLte != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[resolved_at][lte]", runtime.ParamLocationQuery, *params.FilterResolvedAtLte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterClosedAtGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[closed_at][gt]", runtime.ParamLocationQuery, *params.FilterClosedAtGt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterClosedAtGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[closed_at][gte]", runtime.ParamLocationQuery, *params.FilterClosedAtGte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterClosedAtLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[closed_at][lt]", runtime.ParamLocationQuery, *params.FilterClosedAtLt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterClosedAtLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[closed_at][lte]", runtime.ParamLocationQuery, *params.FilterClosedAtLte); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 				return nil, err
@@ -72984,24 +73150,24 @@ type ClientWithResponsesInterface interface {
 
 	UpdateAlertGroupWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAlertGroupResponse, error)
 
-	// ListAlertsSourcesWithResponse request
-	ListAlertsSourcesWithResponse(ctx context.Context, params *ListAlertsSourcesParams, reqEditors ...RequestEditorFn) (*ListAlertsSourcesResponse, error)
+	// ListAlertSourcesWithResponse request
+	ListAlertSourcesWithResponse(ctx context.Context, params *ListAlertSourcesParams, reqEditors ...RequestEditorFn) (*ListAlertSourcesResponse, error)
 
-	// CreateAlertsSourceWithBodyWithResponse request with any body
-	CreateAlertsSourceWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateAlertsSourceResponse, error)
+	// CreateAlertSourceWithBodyWithResponse request with any body
+	CreateAlertSourceWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateAlertSourceResponse, error)
 
-	CreateAlertsSourceWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateAlertsSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateAlertsSourceResponse, error)
+	CreateAlertSourceWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateAlertSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateAlertSourceResponse, error)
 
-	// DeleteAlertsSourceWithResponse request
-	DeleteAlertsSourceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteAlertsSourceResponse, error)
+	// DeleteAlertSourceWithResponse request
+	DeleteAlertSourceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteAlertSourceResponse, error)
 
-	// GetAlertsSourceWithResponse request
-	GetAlertsSourceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetAlertsSourceResponse, error)
+	// GetAlertSourceWithResponse request
+	GetAlertSourceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetAlertSourceResponse, error)
 
-	// UpdateAlertsSourceWithBodyWithResponse request with any body
-	UpdateAlertsSourceWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAlertsSourceResponse, error)
+	// UpdateAlertSourceWithBodyWithResponse request with any body
+	UpdateAlertSourceWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAlertSourceResponse, error)
 
-	UpdateAlertsSourceWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateAlertsSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAlertsSourceResponse, error)
+	UpdateAlertSourceWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateAlertSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAlertSourceResponse, error)
 
 	// ListAlertUrgenciesWithResponse request
 	ListAlertUrgenciesWithResponse(ctx context.Context, params *ListAlertUrgenciesParams, reqEditors ...RequestEditorFn) (*ListAlertUrgenciesResponse, error)
@@ -74773,14 +74939,14 @@ func (r UpdateAlertGroupResponse) StatusCode() int {
 	return 0
 }
 
-type ListAlertsSourcesResponse struct {
+type ListAlertSourcesResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *AlertsSourceList
 }
 
 // Status returns HTTPResponse.Status
-func (r ListAlertsSourcesResponse) Status() string {
+func (r ListAlertSourcesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -74788,14 +74954,14 @@ func (r ListAlertsSourcesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ListAlertsSourcesResponse) StatusCode() int {
+func (r ListAlertSourcesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CreateAlertsSourceResponse struct {
+type CreateAlertSourceResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON201 *AlertsSourceResponse
@@ -74804,7 +74970,7 @@ type CreateAlertsSourceResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreateAlertsSourceResponse) Status() string {
+func (r CreateAlertSourceResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -74812,14 +74978,14 @@ func (r CreateAlertsSourceResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreateAlertsSourceResponse) StatusCode() int {
+func (r CreateAlertSourceResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type DeleteAlertsSourceResponse struct {
+type DeleteAlertSourceResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *AlertsSourceResponse
@@ -74827,7 +74993,7 @@ type DeleteAlertsSourceResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r DeleteAlertsSourceResponse) Status() string {
+func (r DeleteAlertSourceResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -74835,14 +75001,14 @@ func (r DeleteAlertsSourceResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r DeleteAlertsSourceResponse) StatusCode() int {
+func (r DeleteAlertSourceResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetAlertsSourceResponse struct {
+type GetAlertSourceResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *AlertsSourceResponse
@@ -74850,7 +75016,7 @@ type GetAlertsSourceResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetAlertsSourceResponse) Status() string {
+func (r GetAlertSourceResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -74858,14 +75024,14 @@ func (r GetAlertsSourceResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetAlertsSourceResponse) StatusCode() int {
+func (r GetAlertSourceResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type UpdateAlertsSourceResponse struct {
+type UpdateAlertSourceResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *AlertsSourceResponse
@@ -74873,7 +75039,7 @@ type UpdateAlertsSourceResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r UpdateAlertsSourceResponse) Status() string {
+func (r UpdateAlertSourceResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -74881,7 +75047,7 @@ func (r UpdateAlertsSourceResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r UpdateAlertsSourceResponse) StatusCode() int {
+func (r UpdateAlertSourceResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -84314,65 +84480,65 @@ func (c *ClientWithResponses) UpdateAlertGroupWithApplicationVndAPIPlusJSONBodyW
 	return ParseUpdateAlertGroupResponse(rsp)
 }
 
-// ListAlertsSourcesWithResponse request returning *ListAlertsSourcesResponse
-func (c *ClientWithResponses) ListAlertsSourcesWithResponse(ctx context.Context, params *ListAlertsSourcesParams, reqEditors ...RequestEditorFn) (*ListAlertsSourcesResponse, error) {
-	rsp, err := c.ListAlertsSources(ctx, params, reqEditors...)
+// ListAlertSourcesWithResponse request returning *ListAlertSourcesResponse
+func (c *ClientWithResponses) ListAlertSourcesWithResponse(ctx context.Context, params *ListAlertSourcesParams, reqEditors ...RequestEditorFn) (*ListAlertSourcesResponse, error) {
+	rsp, err := c.ListAlertSources(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseListAlertsSourcesResponse(rsp)
+	return ParseListAlertSourcesResponse(rsp)
 }
 
-// CreateAlertsSourceWithBodyWithResponse request with arbitrary body returning *CreateAlertsSourceResponse
-func (c *ClientWithResponses) CreateAlertsSourceWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateAlertsSourceResponse, error) {
-	rsp, err := c.CreateAlertsSourceWithBody(ctx, contentType, body, reqEditors...)
+// CreateAlertSourceWithBodyWithResponse request with arbitrary body returning *CreateAlertSourceResponse
+func (c *ClientWithResponses) CreateAlertSourceWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateAlertSourceResponse, error) {
+	rsp, err := c.CreateAlertSourceWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreateAlertsSourceResponse(rsp)
+	return ParseCreateAlertSourceResponse(rsp)
 }
 
-func (c *ClientWithResponses) CreateAlertsSourceWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateAlertsSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateAlertsSourceResponse, error) {
-	rsp, err := c.CreateAlertsSourceWithApplicationVndAPIPlusJSONBody(ctx, body, reqEditors...)
+func (c *ClientWithResponses) CreateAlertSourceWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateAlertSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateAlertSourceResponse, error) {
+	rsp, err := c.CreateAlertSourceWithApplicationVndAPIPlusJSONBody(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreateAlertsSourceResponse(rsp)
+	return ParseCreateAlertSourceResponse(rsp)
 }
 
-// DeleteAlertsSourceWithResponse request returning *DeleteAlertsSourceResponse
-func (c *ClientWithResponses) DeleteAlertsSourceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteAlertsSourceResponse, error) {
-	rsp, err := c.DeleteAlertsSource(ctx, id, reqEditors...)
+// DeleteAlertSourceWithResponse request returning *DeleteAlertSourceResponse
+func (c *ClientWithResponses) DeleteAlertSourceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteAlertSourceResponse, error) {
+	rsp, err := c.DeleteAlertSource(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseDeleteAlertsSourceResponse(rsp)
+	return ParseDeleteAlertSourceResponse(rsp)
 }
 
-// GetAlertsSourceWithResponse request returning *GetAlertsSourceResponse
-func (c *ClientWithResponses) GetAlertsSourceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetAlertsSourceResponse, error) {
-	rsp, err := c.GetAlertsSource(ctx, id, reqEditors...)
+// GetAlertSourceWithResponse request returning *GetAlertSourceResponse
+func (c *ClientWithResponses) GetAlertSourceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetAlertSourceResponse, error) {
+	rsp, err := c.GetAlertSource(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetAlertsSourceResponse(rsp)
+	return ParseGetAlertSourceResponse(rsp)
 }
 
-// UpdateAlertsSourceWithBodyWithResponse request with arbitrary body returning *UpdateAlertsSourceResponse
-func (c *ClientWithResponses) UpdateAlertsSourceWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAlertsSourceResponse, error) {
-	rsp, err := c.UpdateAlertsSourceWithBody(ctx, id, contentType, body, reqEditors...)
+// UpdateAlertSourceWithBodyWithResponse request with arbitrary body returning *UpdateAlertSourceResponse
+func (c *ClientWithResponses) UpdateAlertSourceWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAlertSourceResponse, error) {
+	rsp, err := c.UpdateAlertSourceWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseUpdateAlertsSourceResponse(rsp)
+	return ParseUpdateAlertSourceResponse(rsp)
 }
 
-func (c *ClientWithResponses) UpdateAlertsSourceWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateAlertsSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAlertsSourceResponse, error) {
-	rsp, err := c.UpdateAlertsSourceWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+func (c *ClientWithResponses) UpdateAlertSourceWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateAlertSourceApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAlertSourceResponse, error) {
+	rsp, err := c.UpdateAlertSourceWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseUpdateAlertsSourceResponse(rsp)
+	return ParseUpdateAlertSourceResponse(rsp)
 }
 
 // ListAlertUrgenciesWithResponse request returning *ListAlertUrgenciesResponse
@@ -89640,15 +89806,15 @@ func ParseUpdateAlertGroupResponse(rsp *http.Response) (*UpdateAlertGroupRespons
 	return response, nil
 }
 
-// ParseListAlertsSourcesResponse parses an HTTP response from a ListAlertsSourcesWithResponse call
-func ParseListAlertsSourcesResponse(rsp *http.Response) (*ListAlertsSourcesResponse, error) {
+// ParseListAlertSourcesResponse parses an HTTP response from a ListAlertSourcesWithResponse call
+func ParseListAlertSourcesResponse(rsp *http.Response) (*ListAlertSourcesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &ListAlertsSourcesResponse{
+	response := &ListAlertSourcesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -89666,15 +89832,15 @@ func ParseListAlertsSourcesResponse(rsp *http.Response) (*ListAlertsSourcesRespo
 	return response, nil
 }
 
-// ParseCreateAlertsSourceResponse parses an HTTP response from a CreateAlertsSourceWithResponse call
-func ParseCreateAlertsSourceResponse(rsp *http.Response) (*CreateAlertsSourceResponse, error) {
+// ParseCreateAlertSourceResponse parses an HTTP response from a CreateAlertSourceWithResponse call
+func ParseCreateAlertSourceResponse(rsp *http.Response) (*CreateAlertSourceResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CreateAlertsSourceResponse{
+	response := &CreateAlertSourceResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -89706,15 +89872,15 @@ func ParseCreateAlertsSourceResponse(rsp *http.Response) (*CreateAlertsSourceRes
 	return response, nil
 }
 
-// ParseDeleteAlertsSourceResponse parses an HTTP response from a DeleteAlertsSourceWithResponse call
-func ParseDeleteAlertsSourceResponse(rsp *http.Response) (*DeleteAlertsSourceResponse, error) {
+// ParseDeleteAlertSourceResponse parses an HTTP response from a DeleteAlertSourceWithResponse call
+func ParseDeleteAlertSourceResponse(rsp *http.Response) (*DeleteAlertSourceResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &DeleteAlertsSourceResponse{
+	response := &DeleteAlertSourceResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -89739,15 +89905,15 @@ func ParseDeleteAlertsSourceResponse(rsp *http.Response) (*DeleteAlertsSourceRes
 	return response, nil
 }
 
-// ParseGetAlertsSourceResponse parses an HTTP response from a GetAlertsSourceWithResponse call
-func ParseGetAlertsSourceResponse(rsp *http.Response) (*GetAlertsSourceResponse, error) {
+// ParseGetAlertSourceResponse parses an HTTP response from a GetAlertSourceWithResponse call
+func ParseGetAlertSourceResponse(rsp *http.Response) (*GetAlertSourceResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetAlertsSourceResponse{
+	response := &GetAlertSourceResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -89772,15 +89938,15 @@ func ParseGetAlertsSourceResponse(rsp *http.Response) (*GetAlertsSourceResponse,
 	return response, nil
 }
 
-// ParseUpdateAlertsSourceResponse parses an HTTP response from a UpdateAlertsSourceWithResponse call
-func ParseUpdateAlertsSourceResponse(rsp *http.Response) (*UpdateAlertsSourceResponse, error) {
+// ParseUpdateAlertSourceResponse parses an HTTP response from a UpdateAlertSourceWithResponse call
+func ParseUpdateAlertSourceResponse(rsp *http.Response) (*UpdateAlertSourceResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &UpdateAlertsSourceResponse{
+	response := &UpdateAlertSourceResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

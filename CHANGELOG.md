@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.22.0] -- TBD
+
+- Add paging_strategy_configuration_strategy and paging_strategy_configuration_schedule_strategy
+- Remove minimum escalation path conditions, to allow creating default paths
+
 ## [2.21.2] -- 2025-02-25
 
 - Fix alert source w/o sourceable attributes crashing.

@@ -23,8 +23,8 @@ type AlertsSource struct {
 	SourceableAttributes map[string]interface{} `jsonapi:"attr,sourceable_attributes,omitempty"`
 }
 
-func (c *Client) ListAlertsSources(params *rootlygo.ListAlertsSourcesParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListAlertsSourcesRequest(c.Rootly.Server, params)
+func (c *Client) ListAlertsSources(params *rootlygo.ListAlertSourcesParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListAlertSourcesRequest(c.Rootly.Server, params)
 	if err != nil {
 		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}
@@ -49,7 +49,7 @@ func (c *Client) CreateAlertsSource(d *AlertsSource) (*AlertsSource, error) {
 		return nil, errors.Errorf("Error marshaling alerts_source: %s", err.Error())
 	}
 
-	req, err := rootlygo.NewCreateAlertsSourceRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
+	req, err := rootlygo.NewCreateAlertSourceRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
 		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}
@@ -68,7 +68,7 @@ func (c *Client) CreateAlertsSource(d *AlertsSource) (*AlertsSource, error) {
 }
 
 func (c *Client) GetAlertsSource(id string) (*AlertsSource, error) {
-	req, err := rootlygo.NewGetAlertsSourceRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetAlertSourceRequest(c.Rootly.Server, id)
 	if err != nil {
 		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}
@@ -93,7 +93,7 @@ func (c *Client) UpdateAlertsSource(id string, alerts_source *AlertsSource) (*Al
 		return nil, errors.Errorf("Error marshaling alerts_source: %s", err.Error())
 	}
 
-	req, err := rootlygo.NewUpdateAlertsSourceRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateAlertSourceRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
 		return nil, errors.Errorf("Error building request: %s", err.Error())
 	}
@@ -112,7 +112,7 @@ func (c *Client) UpdateAlertsSource(id string, alerts_source *AlertsSource) (*Al
 }
 
 func (c *Client) DeleteAlertsSource(id string) error {
-	req, err := rootlygo.NewDeleteAlertsSourceRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteAlertSourceRequest(c.Rootly.Server, id)
 	if err != nil {
 		return errors.Errorf("Error building request: %s", err.Error())
 	}

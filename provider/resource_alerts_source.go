@@ -152,10 +152,10 @@ func resourceAlertsSource() *schema.Resource {
 						},
 
 						"field_mappings_attributes": &schema.Schema{
-							Type:     schema.TypeList,
-							Optional: true,
-							MinItems: 0,
-							MaxItems: 25,
+							Type:             schema.TypeList,
+							Optional:         true,
+							MinItems:         0,
+							MaxItems:         25,
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{

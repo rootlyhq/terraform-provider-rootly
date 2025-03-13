@@ -239,6 +239,18 @@ func dataSourceIncidentRead(ctx context.Context, d *schema.ResourceData, meta in
 		params.FilterResolvedAtLt = &v
 	}
 
+	closed_at_gt := d.Get("closed_at").(map[string]interface{})
+	if value, exists := closed_at_gt["gt"]; exists {
+		v := value.(string)
+		params.FilterClosedAtGt = &v
+	}
+
+	closed_at_lt := d.Get("closed_at").(map[string]interface{})
+	if value, exists := closed_at_lt["lt"]; exists {
+		v := value.(string)
+		params.FilterClosedAtLt = &v
+	}
+
 	in_triage_at_gt := d.Get("in_triage_at").(map[string]interface{})
 	if value, exists := in_triage_at_gt["gt"]; exists {
 		v := value.(string)
