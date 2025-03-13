@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.22.0] -- TBD
+## [2.22.0] -- 2025-03-13
 
 - Add paging_strategy_configuration_strategy and paging_strategy_configuration_schedule_strategy
 - Remove minimum escalation path conditions, to allow creating default paths
