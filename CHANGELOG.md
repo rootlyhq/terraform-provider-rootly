@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.22.1] -- 2025-03-13
+
+- Upload on-call docs on TF.
+
 ## [2.22.0] -- 2025-03-13
 
 - Add paging_strategy_configuration_strategy and paging_strategy_configuration_schedule_strategy

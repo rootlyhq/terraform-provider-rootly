@@ -44,20 +44,20 @@ func resourceEscalationLevel() *schema.Resource {
 
 			"paging_strategy_configuration_strategy": &schema.Schema{
 				Type:        schema.TypeString,
-				Computed:    true,
+				Default:     "default",
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "Value must be one of `default`, `everyone`, `random`, `alert`, or `cycle`.",
+				Description: "Value must be one of `default`, `everyone`, `random`, `cycle`, `alert`.",
 			},
 
 			"paging_strategy_configuration_schedule_strategy": &schema.Schema{
 				Type:        schema.TypeString,
-				Computed:    true,
+				Default:     "on_call_only",
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "Value must be one of `on_call_only`, or `everyone`.",
+				Description: "Value must be one of `on_call_only`, `everyone`.",
 			},
 
 			"delay": &schema.Schema{
@@ -112,7 +112,7 @@ func resourceEscalationLevel() *schema.Resource {
 							Required:    false,
 							Optional:    true,
 							ForceNew:    false,
-							Description: "Value must be one of `all`, `admins`.",
+							Description: "For targets with type=team, controls whether to notify admins or all team members.. Value must be one of `all`, `admins`.",
 						},
 					},
 				},
@@ -134,6 +134,12 @@ func resourceEscalationLevelCreate(ctx context.Context, d *schema.ResourceData, 
 	if value, ok := d.GetOkExists("escalation_policy_path_id"); ok {
 		s.EscalationPolicyPathId = value.(string)
 	}
+	if value, ok := d.GetOkExists("paging_strategy_configuration_strategy"); ok {
+		s.PagingStrategyConfigurationStrategy = value.(string)
+	}
+	if value, ok := d.GetOkExists("paging_strategy_configuration_schedule_strategy"); ok {
+		s.PagingStrategyConfigurationScheduleStrategy = value.(string)
+	}
 	if value, ok := d.GetOkExists("delay"); ok {
 		s.Delay = value.(int)
 	}
@@ -142,12 +148,6 @@ func resourceEscalationLevelCreate(ctx context.Context, d *schema.ResourceData, 
 	}
 	if value, ok := d.GetOkExists("notification_target_params"); ok {
 		s.NotificationTargetParams = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("paging_strategy_configuration_strategy"); ok {
-		s.PagingStrategyConfigurationStrategy = value.(string)
-	}
-	if value, ok := d.GetOkExists("paging_strategy_configuration_schedule_strategy"); ok {
-		s.PagingStrategyConfigurationScheduleStrategy = value.(string)
 	}
 
 	res, err := c.CreateEscalationLevel(s)
@@ -180,11 +180,11 @@ func resourceEscalationLevelRead(ctx context.Context, d *schema.ResourceData, me
 
 	d.Set("escalation_policy_id", item.EscalationPolicyId)
 	d.Set("escalation_policy_path_id", item.EscalationPolicyPathId)
+	d.Set("paging_strategy_configuration_strategy", item.PagingStrategyConfigurationStrategy)
+	d.Set("paging_strategy_configuration_schedule_strategy", item.PagingStrategyConfigurationScheduleStrategy)
 	d.Set("delay", item.Delay)
 	d.Set("position", item.Position)
 	d.Set("notification_target_params", item.NotificationTargetParams)
-	d.Set("paging_strategy_configuration_strategy", item.PagingStrategyConfigurationStrategy)
-	d.Set("paging_strategy_configuration_schedule_strategy", item.PagingStrategyConfigurationScheduleStrategy)
 
 	return nil
 }
@@ -201,6 +201,12 @@ func resourceEscalationLevelUpdate(ctx context.Context, d *schema.ResourceData, 
 	if d.HasChange("escalation_policy_path_id") {
 		s.EscalationPolicyPathId = d.Get("escalation_policy_path_id").(string)
 	}
+	if d.HasChange("paging_strategy_configuration_strategy") {
+		s.PagingStrategyConfigurationStrategy = d.Get("paging_strategy_configuration_strategy").(string)
+	}
+	if d.HasChange("paging_strategy_configuration_schedule_strategy") {
+		s.PagingStrategyConfigurationScheduleStrategy = d.Get("paging_strategy_configuration_schedule_strategy").(string)
+	}
 	if d.HasChange("delay") {
 		s.Delay = d.Get("delay").(int)
 	}
@@ -209,12 +215,6 @@ func resourceEscalationLevelUpdate(ctx context.Context, d *schema.ResourceData, 
 	}
 	if d.HasChange("notification_target_params") {
 		s.NotificationTargetParams = d.Get("notification_target_params").([]interface{})
-	}
-	if d.HasChange("paging_strategy_configuration_strategy") {
-		s.PagingStrategyConfigurationStrategy = d.Get("paging_strategy_configuration_strategy").(string)
-	}
-	if d.HasChange("paging_strategy_configuration_schedule_strategy") {
-		s.PagingStrategyConfigurationScheduleStrategy = d.Get("paging_strategy_configuration_schedule_strategy").(string)
 	}
 
 	_, err := c.UpdateEscalationLevel(d.Id(), s)

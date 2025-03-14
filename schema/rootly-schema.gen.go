@@ -1298,6 +1298,21 @@ const (
 	EscalationLevelNotificationTargetParamsTypeUser         EscalationLevelNotificationTargetParamsType = "user"
 )
 
+// Defines values for EscalationLevelPagingStrategyConfigurationScheduleStrategy.
+const (
+	EscalationLevelPagingStrategyConfigurationScheduleStrategyEveryone   EscalationLevelPagingStrategyConfigurationScheduleStrategy = "everyone"
+	EscalationLevelPagingStrategyConfigurationScheduleStrategyOnCallOnly EscalationLevelPagingStrategyConfigurationScheduleStrategy = "on_call_only"
+)
+
+// Defines values for EscalationLevelPagingStrategyConfigurationStrategy.
+const (
+	EscalationLevelPagingStrategyConfigurationStrategyAlert    EscalationLevelPagingStrategyConfigurationStrategy = "alert"
+	EscalationLevelPagingStrategyConfigurationStrategyCycle    EscalationLevelPagingStrategyConfigurationStrategy = "cycle"
+	EscalationLevelPagingStrategyConfigurationStrategyDefault  EscalationLevelPagingStrategyConfigurationStrategy = "default"
+	EscalationLevelPagingStrategyConfigurationStrategyEveryone EscalationLevelPagingStrategyConfigurationStrategy = "everyone"
+	EscalationLevelPagingStrategyConfigurationStrategyRandom   EscalationLevelPagingStrategyConfigurationStrategy = "random"
+)
+
 // Defines values for EscalationLevelResponseDataType.
 const (
 	EscalationLevelResponseDataTypeEscalationLevels EscalationLevelResponseDataType = "escalation_levels"
@@ -2529,6 +2544,21 @@ const (
 	NewEscalationLevelDataAttributesNotificationTargetParamsTypeSlackChannel NewEscalationLevelDataAttributesNotificationTargetParamsType = "slack_channel"
 	NewEscalationLevelDataAttributesNotificationTargetParamsTypeTeam         NewEscalationLevelDataAttributesNotificationTargetParamsType = "team"
 	NewEscalationLevelDataAttributesNotificationTargetParamsTypeUser         NewEscalationLevelDataAttributesNotificationTargetParamsType = "user"
+)
+
+// Defines values for NewEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy.
+const (
+	NewEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategyEveryone   NewEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy = "everyone"
+	NewEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategyOnCallOnly NewEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy = "on_call_only"
+)
+
+// Defines values for NewEscalationLevelDataAttributesPagingStrategyConfigurationStrategy.
+const (
+	NewEscalationLevelDataAttributesPagingStrategyConfigurationStrategyAlert    NewEscalationLevelDataAttributesPagingStrategyConfigurationStrategy = "alert"
+	NewEscalationLevelDataAttributesPagingStrategyConfigurationStrategyCycle    NewEscalationLevelDataAttributesPagingStrategyConfigurationStrategy = "cycle"
+	NewEscalationLevelDataAttributesPagingStrategyConfigurationStrategyDefault  NewEscalationLevelDataAttributesPagingStrategyConfigurationStrategy = "default"
+	NewEscalationLevelDataAttributesPagingStrategyConfigurationStrategyEveryone NewEscalationLevelDataAttributesPagingStrategyConfigurationStrategy = "everyone"
+	NewEscalationLevelDataAttributesPagingStrategyConfigurationStrategyRandom   NewEscalationLevelDataAttributesPagingStrategyConfigurationStrategy = "random"
 )
 
 // Defines values for NewEscalationLevelDataType.
@@ -4972,6 +5002,21 @@ const (
 	UpdateEscalationLevelDataAttributesNotificationTargetParamsTypeUser         UpdateEscalationLevelDataAttributesNotificationTargetParamsType = "user"
 )
 
+// Defines values for UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy.
+const (
+	UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategyEveryone   UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy = "everyone"
+	UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategyOnCallOnly UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy = "on_call_only"
+)
+
+// Defines values for UpdateEscalationLevelDataAttributesPagingStrategyConfigurationStrategy.
+const (
+	UpdateEscalationLevelDataAttributesPagingStrategyConfigurationStrategyAlert    UpdateEscalationLevelDataAttributesPagingStrategyConfigurationStrategy = "alert"
+	UpdateEscalationLevelDataAttributesPagingStrategyConfigurationStrategyCycle    UpdateEscalationLevelDataAttributesPagingStrategyConfigurationStrategy = "cycle"
+	UpdateEscalationLevelDataAttributesPagingStrategyConfigurationStrategyDefault  UpdateEscalationLevelDataAttributesPagingStrategyConfigurationStrategy = "default"
+	UpdateEscalationLevelDataAttributesPagingStrategyConfigurationStrategyEveryone UpdateEscalationLevelDataAttributesPagingStrategyConfigurationStrategy = "everyone"
+	UpdateEscalationLevelDataAttributesPagingStrategyConfigurationStrategyRandom   UpdateEscalationLevelDataAttributesPagingStrategyConfigurationStrategy = "random"
+)
+
 // Defines values for UpdateEscalationLevelDataType.
 const (
 	EscalationLevels UpdateEscalationLevelDataType = "escalation_levels"
@@ -5252,8 +5297,8 @@ const (
 
 // Defines values for UpdateIncidentActionItemDataAttributesKind.
 const (
-	UpdateIncidentActionItemDataAttributesKindFollowUp UpdateIncidentActionItemDataAttributesKind = "follow_up"
-	UpdateIncidentActionItemDataAttributesKindTask     UpdateIncidentActionItemDataAttributesKind = "task"
+	FollowUp UpdateIncidentActionItemDataAttributesKind = "follow_up"
+	Task     UpdateIncidentActionItemDataAttributesKind = "task"
 )
 
 // Defines values for UpdateIncidentActionItemDataAttributesPriority.
@@ -9664,12 +9709,16 @@ type EscalationLevel struct {
 	// NotificationTargetParams Escalation level's notification targets
 	NotificationTargetParams []struct {
 		// Id The ID of notification target
-		Id          string                                              `json:"id"`
+		Id string `json:"id"`
+
+		// TeamMembers For targets with type=team, controls whether to notify admins or all team members.
 		TeamMembers *EscalationLevelNotificationTargetParamsTeamMembers `json:"team_members"`
 
 		// Type The type of the notification target
 		Type EscalationLevelNotificationTargetParamsType `json:"type"`
 	} `json:"notification_target_params"`
+	PagingStrategyConfigurationScheduleStrategy *EscalationLevelPagingStrategyConfigurationScheduleStrategy `json:"paging_strategy_configuration_schedule_strategy"`
+	PagingStrategyConfigurationStrategy         *EscalationLevelPagingStrategyConfigurationStrategy         `json:"paging_strategy_configuration_strategy"`
 
 	// Position Position of the escalation policy level
 	Position int `json:"position"`
@@ -9678,11 +9727,17 @@ type EscalationLevel struct {
 	UpdatedAt *string `json:"updated_at,omitempty"`
 }
 
-// EscalationLevelNotificationTargetParamsTeamMembers defines model for EscalationLevel.NotificationTargetParams.TeamMembers.
+// EscalationLevelNotificationTargetParamsTeamMembers For targets with type=team, controls whether to notify admins or all team members.
 type EscalationLevelNotificationTargetParamsTeamMembers string
 
 // EscalationLevelNotificationTargetParamsType The type of the notification target
 type EscalationLevelNotificationTargetParamsType string
+
+// EscalationLevelPagingStrategyConfigurationScheduleStrategy defines model for EscalationLevel.PagingStrategyConfigurationScheduleStrategy.
+type EscalationLevelPagingStrategyConfigurationScheduleStrategy string
+
+// EscalationLevelPagingStrategyConfigurationStrategy defines model for EscalationLevel.PagingStrategyConfigurationStrategy.
+type EscalationLevelPagingStrategyConfigurationStrategy string
 
 // EscalationLevelList defines model for escalation_level_list.
 type EscalationLevelList struct {
@@ -12623,12 +12678,16 @@ type NewEscalationLevel struct {
 			// NotificationTargetParams Escalation level's notification targets
 			NotificationTargetParams []struct {
 				// Id The ID of notification target. If Slack channel, then id of the slack channel (eg. C06Q2JK7RQW)
-				Id          string                                                               `json:"id"`
+				Id string `json:"id"`
+
+				// TeamMembers For targets with type=team, controls whether to notify admins or all team members.
 				TeamMembers *NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembers `json:"team_members"`
 
 				// Type The type of the notification target
 				Type NewEscalationLevelDataAttributesNotificationTargetParamsType `json:"type"`
 			} `json:"notification_target_params"`
+			PagingStrategyConfigurationScheduleStrategy *NewEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy `json:"paging_strategy_configuration_schedule_strategy"`
+			PagingStrategyConfigurationStrategy         *NewEscalationLevelDataAttributesPagingStrategyConfigurationStrategy         `json:"paging_strategy_configuration_strategy"`
 
 			// Position Position of the escalation policy level
 			Position int `json:"position"`
@@ -12637,11 +12696,17 @@ type NewEscalationLevel struct {
 	} `json:"data"`
 }
 
-// NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembers defines model for NewEscalationLevel.Data.Attributes.NotificationTargetParams.TeamMembers.
+// NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembers For targets with type=team, controls whether to notify admins or all team members.
 type NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembers string
 
 // NewEscalationLevelDataAttributesNotificationTargetParamsType The type of the notification target
 type NewEscalationLevelDataAttributesNotificationTargetParamsType string
+
+// NewEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy defines model for NewEscalationLevel.Data.Attributes.PagingStrategyConfigurationScheduleStrategy.
+type NewEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy string
+
+// NewEscalationLevelDataAttributesPagingStrategyConfigurationStrategy defines model for NewEscalationLevel.Data.Attributes.PagingStrategyConfigurationStrategy.
+type NewEscalationLevelDataAttributesPagingStrategyConfigurationStrategy string
 
 // NewEscalationLevelDataType defines model for NewEscalationLevel.Data.Type.
 type NewEscalationLevelDataType string
@@ -18025,12 +18090,16 @@ type UpdateEscalationLevel struct {
 			// NotificationTargetParams Escalation level's notification targets
 			NotificationTargetParams *[]struct {
 				// Id The ID of notification target
-				Id          string                                                                  `json:"id"`
+				Id string `json:"id"`
+
+				// TeamMembers For targets with type=team, controls whether to notify admins or all team members.
 				TeamMembers *UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers `json:"team_members"`
 
 				// Type The type of the notification target
 				Type UpdateEscalationLevelDataAttributesNotificationTargetParamsType `json:"type"`
 			} `json:"notification_target_params,omitempty"`
+			PagingStrategyConfigurationScheduleStrategy *UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy `json:"paging_strategy_configuration_schedule_strategy"`
+			PagingStrategyConfigurationStrategy         *UpdateEscalationLevelDataAttributesPagingStrategyConfigurationStrategy         `json:"paging_strategy_configuration_strategy"`
 
 			// Position Position of the escalation policy level
 			Position *int `json:"position,omitempty"`
@@ -18039,11 +18108,17 @@ type UpdateEscalationLevel struct {
 	} `json:"data"`
 }
 
-// UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers defines model for UpdateEscalationLevel.Data.Attributes.NotificationTargetParams.TeamMembers.
+// UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers For targets with type=team, controls whether to notify admins or all team members.
 type UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers string
 
 // UpdateEscalationLevelDataAttributesNotificationTargetParamsType The type of the notification target
 type UpdateEscalationLevelDataAttributesNotificationTargetParamsType string
+
+// UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy defines model for UpdateEscalationLevel.Data.Attributes.PagingStrategyConfigurationScheduleStrategy.
+type UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy string
+
+// UpdateEscalationLevelDataAttributesPagingStrategyConfigurationStrategy defines model for UpdateEscalationLevel.Data.Attributes.PagingStrategyConfigurationStrategy.
+type UpdateEscalationLevelDataAttributesPagingStrategyConfigurationStrategy string
 
 // UpdateEscalationLevelDataType defines model for UpdateEscalationLevel.Data.Type.
 type UpdateEscalationLevelDataType string

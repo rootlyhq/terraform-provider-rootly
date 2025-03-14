@@ -100,8 +100,6 @@ func resourceEscalationPath() *schema.Resource {
 				Required:         false,
 				Optional:         true,
 				Description:      "Escalation path rules",
-				MinItems:         0,
-				MaxItems:         100,
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
