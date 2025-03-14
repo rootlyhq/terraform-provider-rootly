@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.22.2] -- 2025-03-14
+
+- Resources deleted out-of-bounds should be recreated.
+
 ## [2.22.1] -- 2025-03-13
 
 - Upload on-call docs on TF.
