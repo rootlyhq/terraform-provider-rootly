@@ -3,41 +3,41 @@
 package client
 
 import (
+	"fmt"
 	"reflect"
-	
-	"github.com/pkg/errors"
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type AlertsSource struct {
-	ID string `jsonapi:"primary,alert_sources"`
-	AlertUrgencyId string `jsonapi:"attr,alert_urgency_id,omitempty"`
-	Name string `jsonapi:"attr,name,omitempty"`
-	SourceType string `jsonapi:"attr,source_type,omitempty"`
-	Status string `jsonapi:"attr,status,omitempty"`
-	Secret string `jsonapi:"attr,secret,omitempty"`
-	WebhookEndpoint string `jsonapi:"attr,webhook_endpoint,omitempty"`
-	AlertSourceUrgencyRulesAttributes []interface{} `jsonapi:"attr,alert_source_urgency_rules_attributes,omitempty"`
-	AlertTemplateAttributes map[string]interface{} `jsonapi:"attr,alert_template_attributes,omitempty"`
-	SourceableAttributes map[string]interface{} `jsonapi:"attr,sourceable_attributes,omitempty"`
+	ID                                string                 `jsonapi:"primary,alert_sources"`
+	AlertUrgencyId                    string                 `jsonapi:"attr,alert_urgency_id,omitempty"`
+	Name                              string                 `jsonapi:"attr,name,omitempty"`
+	SourceType                        string                 `jsonapi:"attr,source_type,omitempty"`
+	Status                            string                 `jsonapi:"attr,status,omitempty"`
+	Secret                            string                 `jsonapi:"attr,secret,omitempty"`
+	WebhookEndpoint                   string                 `jsonapi:"attr,webhook_endpoint,omitempty"`
+	AlertSourceUrgencyRulesAttributes []interface{}          `jsonapi:"attr,alert_source_urgency_rules_attributes,omitempty"`
+	AlertTemplateAttributes           map[string]interface{} `jsonapi:"attr,alert_template_attributes,omitempty"`
+	SourceableAttributes              map[string]interface{} `jsonapi:"attr,sourceable_attributes,omitempty"`
 }
 
 func (c *Client) ListAlertsSources(params *rootlygo.ListAlertSourcesParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListAlertSourcesRequest(c.Rootly.Server, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	alerts_sources, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(AlertsSource)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return alerts_sources, nil
@@ -46,22 +46,22 @@ func (c *Client) ListAlertsSources(params *rootlygo.ListAlertSourcesParams) ([]i
 func (c *Client) CreateAlertsSource(d *AlertsSource) (*AlertsSource, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling alerts_source: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling alerts_source: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateAlertSourceRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create alerts_source: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create alerts_source: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(AlertsSource))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling alerts_source: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling alerts_source: %w", err)
 	}
 
 	return data.(*AlertsSource), nil
@@ -70,18 +70,18 @@ func (c *Client) CreateAlertsSource(d *AlertsSource) (*AlertsSource, error) {
 func (c *Client) GetAlertsSource(id string) (*AlertsSource, error) {
 	req, err := rootlygo.NewGetAlertSourceRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get alerts_source: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get alerts_source: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(AlertsSource))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling alerts_source: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling alerts_source: %w", err)
 	}
 
 	return data.(*AlertsSource), nil
@@ -90,22 +90,22 @@ func (c *Client) GetAlertsSource(id string) (*AlertsSource, error) {
 func (c *Client) UpdateAlertsSource(id string, alerts_source *AlertsSource) (*AlertsSource, error) {
 	buffer, err := MarshalData(alerts_source)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling alerts_source: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling alerts_source: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateAlertSourceRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update alerts_source: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update alerts_source: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(AlertsSource))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling alerts_source: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling alerts_source: %w", err)
 	}
 
 	return data.(*AlertsSource), nil
@@ -114,12 +114,12 @@ func (c *Client) UpdateAlertsSource(id string, alerts_source *AlertsSource) (*Al
 func (c *Client) DeleteAlertsSource(id string) error {
 	req, err := rootlygo.NewDeleteAlertSourceRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete alerts_source: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete alerts_source: %w", err)
 	}
 
 	return nil

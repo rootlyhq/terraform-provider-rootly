@@ -4,6 +4,7 @@ package provider
 
 import (
 	"context"
+	"errors"
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-log/tflog"
@@ -108,6 +109,11 @@ func resourceWorkflowTaskCreateShortcutStory() *schema.Resource {
 							Type:        schema.TypeMap,
 							Required:    true,
 						},
+						"group": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. The group id and display name",
+							Type:        schema.TypeMap,
+							Optional:    true,
+						},
 						"project": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. The project id and display name",
 							Type:        schema.TypeMap,
@@ -160,7 +166,7 @@ func resourceWorkflowTaskCreateShortcutStoryRead(ctx context.Context, d *schema.
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateShortcutStory (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
@@ -218,7 +224,7 @@ func resourceWorkflowTaskCreateShortcutStoryDelete(ctx context.Context, d *schem
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateShortcutStory (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil

@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -22,18 +22,18 @@ type WorkflowCustomFieldSelection struct {
 func (c *Client) ListWorkflowCustomFieldSelections(id string, params *rootlygo.ListWorkflowCustomFieldSelectionsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListWorkflowCustomFieldSelectionsRequest(c.Rootly.Server, id, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	workflow_custom_field_selections, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(WorkflowCustomFieldSelection)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return workflow_custom_field_selections, nil
@@ -42,22 +42,22 @@ func (c *Client) ListWorkflowCustomFieldSelections(id string, params *rootlygo.L
 func (c *Client) CreateWorkflowCustomFieldSelection(d *WorkflowCustomFieldSelection) (*WorkflowCustomFieldSelection, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling workflow_custom_field_selection: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling workflow_custom_field_selection: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateWorkflowCustomFieldSelectionRequestWithBody(c.Rootly.Server, d.WorkflowId, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create workflow_custom_field_selection: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create workflow_custom_field_selection: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowCustomFieldSelection))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling workflow_custom_field_selection: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling workflow_custom_field_selection: %w", err)
 	}
 
 	return data.(*WorkflowCustomFieldSelection), nil
@@ -66,18 +66,18 @@ func (c *Client) CreateWorkflowCustomFieldSelection(d *WorkflowCustomFieldSelect
 func (c *Client) GetWorkflowCustomFieldSelection(id string) (*WorkflowCustomFieldSelection, error) {
 	req, err := rootlygo.NewGetWorkflowCustomFieldSelectionRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get workflow_custom_field_selection: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get workflow_custom_field_selection: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowCustomFieldSelection))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling workflow_custom_field_selection: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling workflow_custom_field_selection: %w", err)
 	}
 
 	return data.(*WorkflowCustomFieldSelection), nil
@@ -86,22 +86,22 @@ func (c *Client) GetWorkflowCustomFieldSelection(id string) (*WorkflowCustomFiel
 func (c *Client) UpdateWorkflowCustomFieldSelection(id string, workflow_custom_field_selection *WorkflowCustomFieldSelection) (*WorkflowCustomFieldSelection, error) {
 	buffer, err := MarshalData(workflow_custom_field_selection)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling workflow_custom_field_selection: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling workflow_custom_field_selection: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateWorkflowCustomFieldSelectionRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update workflow_custom_field_selection: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update workflow_custom_field_selection: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowCustomFieldSelection))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling workflow_custom_field_selection: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling workflow_custom_field_selection: %w", err)
 	}
 
 	return data.(*WorkflowCustomFieldSelection), nil
@@ -110,12 +110,12 @@ func (c *Client) UpdateWorkflowCustomFieldSelection(id string, workflow_custom_f
 func (c *Client) DeleteWorkflowCustomFieldSelection(id string) error {
 	req, err := rootlygo.NewDeleteWorkflowCustomFieldSelectionRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete workflow_custom_field_selection: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete workflow_custom_field_selection: %w", err)
 	}
 
 	return nil

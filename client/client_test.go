@@ -8,8 +8,6 @@ import (
 	"net/http"
 	"strings"
 	"testing"
-
-	"github.com/pkg/errors"
 )
 
 type requestTesterFunc func(r *http.Request) error
@@ -24,7 +22,7 @@ func (rt testRoundTripper) RoundTrip(r *http.Request) (*http.Response, error) {
 	if rt.requestTester != nil {
 		err := rt.requestTester(r)
 		if err != nil {
-			return nil, errors.Wrap(err, "request tester failed")
+			return nil, fmt.Errorf("request tester failed %w", err)
 		}
 	}
 

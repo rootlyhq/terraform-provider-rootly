@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -24,18 +24,18 @@ type EscalationPolicy struct {
 func (c *Client) ListEscalationPolicies(params *rootlygo.ListEscalationPoliciesParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListEscalationPoliciesRequest(c.Rootly.Server, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	escalation_policies, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(EscalationPolicy)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return escalation_policies, nil
@@ -44,22 +44,22 @@ func (c *Client) ListEscalationPolicies(params *rootlygo.ListEscalationPoliciesP
 func (c *Client) CreateEscalationPolicy(d *EscalationPolicy) (*EscalationPolicy, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling escalation_policy: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling escalation_policy: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateEscalationPolicyRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create escalation_policy: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create escalation_policy: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(EscalationPolicy))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling escalation_policy: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling escalation_policy: %w", err)
 	}
 
 	return data.(*EscalationPolicy), nil
@@ -68,18 +68,18 @@ func (c *Client) CreateEscalationPolicy(d *EscalationPolicy) (*EscalationPolicy,
 func (c *Client) GetEscalationPolicy(id string) (*EscalationPolicy, error) {
 	req, err := rootlygo.NewGetEscalationPolicyRequest(c.Rootly.Server, id, nil)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get escalation_policy: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get escalation_policy: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(EscalationPolicy))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling escalation_policy: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling escalation_policy: %w", err)
 	}
 
 	return data.(*EscalationPolicy), nil
@@ -88,22 +88,22 @@ func (c *Client) GetEscalationPolicy(id string) (*EscalationPolicy, error) {
 func (c *Client) UpdateEscalationPolicy(id string, escalation_policy *EscalationPolicy) (*EscalationPolicy, error) {
 	buffer, err := MarshalData(escalation_policy)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling escalation_policy: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling escalation_policy: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateEscalationPolicyRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update escalation_policy: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update escalation_policy: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(EscalationPolicy))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling escalation_policy: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling escalation_policy: %w", err)
 	}
 
 	return data.(*EscalationPolicy), nil
@@ -112,12 +112,12 @@ func (c *Client) UpdateEscalationPolicy(id string, escalation_policy *Escalation
 func (c *Client) DeleteEscalationPolicy(id string) error {
 	req, err := rootlygo.NewDeleteEscalationPolicyRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete escalation_policy: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete escalation_policy: %w", err)
 	}
 
 	return nil

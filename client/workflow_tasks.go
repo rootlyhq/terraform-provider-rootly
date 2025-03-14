@@ -3,8 +3,8 @@ package client
 import (
 	"reflect"
 
+	"fmt"
 	"github.com/google/jsonapi"
-	"github.com/pkg/errors"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
@@ -21,17 +21,17 @@ type WorkflowTask struct {
 func (c *Client) ListWorkflowTasks(workflowId string, params *rootlygo.ListWorkflowTasksParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListWorkflowTasksRequest(c.Rootly.Server, workflowId, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	workflow_tasks, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(WorkflowTask)))
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return workflow_tasks, nil
@@ -40,21 +40,21 @@ func (c *Client) ListWorkflowTasks(workflowId string, params *rootlygo.ListWorkf
 func (c *Client) CreateWorkflowTask(i *WorkflowTask) (*WorkflowTask, error) {
 	buffer, err := MarshalData(i)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling workflow_task: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling workflow_task: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateWorkflowTaskRequestWithBody(c.Rootly.Server, i.WorkflowId, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create workflow_task: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create workflow_task: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowTask))
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling workflow_task: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling workflow_task: %w", err)
 	}
 
 	return data.(*WorkflowTask), nil
@@ -63,17 +63,17 @@ func (c *Client) CreateWorkflowTask(i *WorkflowTask) (*WorkflowTask, error) {
 func (c *Client) GetWorkflowTask(id string) (*WorkflowTask, error) {
 	req, err := rootlygo.NewGetWorkflowTaskRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get workflow_task: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get workflow_task: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowTask))
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling workflow_task: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling workflow_task: %w", err)
 	}
 
 	return data.(*WorkflowTask), nil
@@ -82,21 +82,21 @@ func (c *Client) GetWorkflowTask(id string) (*WorkflowTask, error) {
 func (c *Client) UpdateWorkflowTask(id string, i *WorkflowTask) (*WorkflowTask, error) {
 	buffer, err := MarshalData(i)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling workflow_task: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling workflow_task: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateWorkflowTaskRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update workflow_task: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update workflow_task: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(WorkflowTask))
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling workflow_task: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling workflow_task: %w", err)
 	}
 
 	return data.(*WorkflowTask), nil
@@ -105,12 +105,12 @@ func (c *Client) UpdateWorkflowTask(id string, i *WorkflowTask) (*WorkflowTask, 
 func (c *Client) DeleteWorkflowTask(id string) error {
 	req, err := rootlygo.NewDeleteWorkflowTaskRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete workflow_task: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete workflow_task: %w", err)
 	}
 
 	return nil

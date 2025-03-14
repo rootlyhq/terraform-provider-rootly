@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -39,18 +39,18 @@ type Team struct {
 func (c *Client) ListTeams(params *rootlygo.ListTeamsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListTeamsRequest(c.Rootly.Server, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	teams, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Team)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return teams, nil
@@ -59,22 +59,22 @@ func (c *Client) ListTeams(params *rootlygo.ListTeamsParams) ([]interface{}, err
 func (c *Client) CreateTeam(d *Team) (*Team, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling team: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling team: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateTeamRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create team: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create team: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Team))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling team: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling team: %w", err)
 	}
 
 	return data.(*Team), nil
@@ -83,18 +83,18 @@ func (c *Client) CreateTeam(d *Team) (*Team, error) {
 func (c *Client) GetTeam(id string) (*Team, error) {
 	req, err := rootlygo.NewGetTeamRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get team: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get team: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Team))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling team: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling team: %w", err)
 	}
 
 	return data.(*Team), nil
@@ -103,22 +103,22 @@ func (c *Client) GetTeam(id string) (*Team, error) {
 func (c *Client) UpdateTeam(id string, team *Team) (*Team, error) {
 	buffer, err := MarshalData(team)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling team: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling team: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateTeamRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update team: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update team: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Team))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling team: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling team: %w", err)
 	}
 
 	return data.(*Team), nil
@@ -127,12 +127,12 @@ func (c *Client) UpdateTeam(id string, team *Team) (*Team, error) {
 func (c *Client) DeleteTeam(id string) error {
 	req, err := rootlygo.NewDeleteTeamRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete team: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete team: %w", err)
 	}
 
 	return nil

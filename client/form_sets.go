@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -21,18 +21,18 @@ type FormSet struct {
 func (c *Client) ListFormSets(params *rootlygo.ListFormSetsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListFormSetsRequest(c.Rootly.Server, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	form_sets, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(FormSet)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return form_sets, nil
@@ -41,22 +41,22 @@ func (c *Client) ListFormSets(params *rootlygo.ListFormSetsParams) ([]interface{
 func (c *Client) CreateFormSet(d *FormSet) (*FormSet, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling form_set: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling form_set: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateFormSetRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create form_set: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create form_set: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormSet))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling form_set: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling form_set: %w", err)
 	}
 
 	return data.(*FormSet), nil
@@ -65,18 +65,18 @@ func (c *Client) CreateFormSet(d *FormSet) (*FormSet, error) {
 func (c *Client) GetFormSet(id string) (*FormSet, error) {
 	req, err := rootlygo.NewGetFormSetRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get form_set: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get form_set: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormSet))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling form_set: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling form_set: %w", err)
 	}
 
 	return data.(*FormSet), nil
@@ -85,22 +85,22 @@ func (c *Client) GetFormSet(id string) (*FormSet, error) {
 func (c *Client) UpdateFormSet(id string, form_set *FormSet) (*FormSet, error) {
 	buffer, err := MarshalData(form_set)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling form_set: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling form_set: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateFormSetRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update form_set: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update form_set: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(FormSet))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling form_set: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling form_set: %w", err)
 	}
 
 	return data.(*FormSet), nil
@@ -109,12 +109,12 @@ func (c *Client) UpdateFormSet(id string, form_set *FormSet) (*FormSet, error) {
 func (c *Client) DeleteFormSet(id string) error {
 	req, err := rootlygo.NewDeleteFormSetRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete form_set: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete form_set: %w", err)
 	}
 
 	return nil

@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -47,17 +47,17 @@ type Incident struct {
 func (c *Client) ListIncidents(params *rootlygo.ListIncidentsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListIncidentsRequest(c.Rootly.Server, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	incidents, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Incident)))
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshalling: %w", err)
 	}
 
 	return incidents, nil

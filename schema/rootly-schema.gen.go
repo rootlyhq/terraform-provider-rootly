@@ -9160,8 +9160,14 @@ type CreateShortcutStoryTaskParams struct {
 	Description *string `json:"description,omitempty"`
 
 	// DueDate The due date
-	DueDate *string                           `json:"due_date,omitempty"`
-	Kind    CreateShortcutStoryTaskParamsKind `json:"kind"`
+	DueDate *string `json:"due_date,omitempty"`
+
+	// Group The group id and display name
+	Group *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"group,omitempty"`
+	Kind CreateShortcutStoryTaskParamsKind `json:"kind"`
 
 	// Labels The story labels
 	Labels *string `json:"labels,omitempty"`

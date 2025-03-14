@@ -4,6 +4,7 @@ package provider
 
 import (
 	"context"
+	"errors"
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-log/tflog"
@@ -161,7 +162,7 @@ func resourceWorkflowTaskUpdateOpsgenieIncidentRead(ctx context.Context, d *sche
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskUpdateOpsgenieIncident (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
@@ -219,7 +220,7 @@ func resourceWorkflowTaskUpdateOpsgenieIncidentDelete(ctx context.Context, d *sc
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskUpdateOpsgenieIncident (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil

@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -21,18 +21,18 @@ type IncidentRoleTask struct {
 func (c *Client) ListIncidentRoleTasks(id string, params *rootlygo.ListIncidentRoleTasksParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListIncidentRoleTasksRequest(c.Rootly.Server, id, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	incident_role_tasks, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(IncidentRoleTask)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return incident_role_tasks, nil
@@ -41,22 +41,22 @@ func (c *Client) ListIncidentRoleTasks(id string, params *rootlygo.ListIncidentR
 func (c *Client) CreateIncidentRoleTask(d *IncidentRoleTask) (*IncidentRoleTask, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling incident_role_task: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling incident_role_task: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateIncidentRoleTaskRequestWithBody(c.Rootly.Server, d.IncidentRoleId, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create incident_role_task: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create incident_role_task: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentRoleTask))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling incident_role_task: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling incident_role_task: %w", err)
 	}
 
 	return data.(*IncidentRoleTask), nil
@@ -65,18 +65,18 @@ func (c *Client) CreateIncidentRoleTask(d *IncidentRoleTask) (*IncidentRoleTask,
 func (c *Client) GetIncidentRoleTask(id string) (*IncidentRoleTask, error) {
 	req, err := rootlygo.NewGetIncidentRoleTaskRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get incident_role_task: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get incident_role_task: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentRoleTask))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling incident_role_task: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling incident_role_task: %w", err)
 	}
 
 	return data.(*IncidentRoleTask), nil
@@ -85,22 +85,22 @@ func (c *Client) GetIncidentRoleTask(id string) (*IncidentRoleTask, error) {
 func (c *Client) UpdateIncidentRoleTask(id string, incident_role_task *IncidentRoleTask) (*IncidentRoleTask, error) {
 	buffer, err := MarshalData(incident_role_task)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling incident_role_task: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling incident_role_task: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateIncidentRoleTaskRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update incident_role_task: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update incident_role_task: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentRoleTask))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling incident_role_task: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling incident_role_task: %w", err)
 	}
 
 	return data.(*IncidentRoleTask), nil
@@ -109,12 +109,12 @@ func (c *Client) UpdateIncidentRoleTask(id string, incident_role_task *IncidentR
 func (c *Client) DeleteIncidentRoleTask(id string) error {
 	req, err := rootlygo.NewDeleteIncidentRoleTaskRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete incident_role_task: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete incident_role_task: %w", err)
 	}
 
 	return nil

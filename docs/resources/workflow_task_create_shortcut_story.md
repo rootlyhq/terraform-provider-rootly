@@ -44,5 +44,6 @@ Optional:
 
 - `description` (String) The incident description
 - `due_date` (String) The due date
+- `group` (Map of String) Map must contain two fields, `id` and `name`. The group id and display name
 - `labels` (String) The story labels
 - `task_type` (String)

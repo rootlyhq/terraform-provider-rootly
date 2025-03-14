@@ -4,6 +4,7 @@ package provider
 
 import (
 	"context"
+	"errors"
 	"fmt"
 
 	"encoding/json"
@@ -216,7 +217,7 @@ func resourceWorkflowTaskCreateJiraIssueRead(ctx context.Context, d *schema.Reso
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateJiraIssue (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
@@ -274,7 +275,7 @@ func resourceWorkflowTaskCreateJiraIssueDelete(ctx context.Context, d *schema.Re
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateJiraIssue (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil

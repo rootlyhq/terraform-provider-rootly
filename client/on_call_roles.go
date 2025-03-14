@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -37,18 +37,18 @@ type OnCallRole struct {
 func (c *Client) ListOnCallRoles(params *rootlygo.ListOnCallRolesParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListOnCallRolesRequest(c.Rootly.Server, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	on_call_roles, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(OnCallRole)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return on_call_roles, nil
@@ -57,22 +57,22 @@ func (c *Client) ListOnCallRoles(params *rootlygo.ListOnCallRolesParams) ([]inte
 func (c *Client) CreateOnCallRole(d *OnCallRole) (*OnCallRole, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling on_call_role: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling on_call_role: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateOnCallRoleRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create on_call_role: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create on_call_role: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(OnCallRole))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling on_call_role: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling on_call_role: %w", err)
 	}
 
 	return data.(*OnCallRole), nil
@@ -81,18 +81,18 @@ func (c *Client) CreateOnCallRole(d *OnCallRole) (*OnCallRole, error) {
 func (c *Client) GetOnCallRole(id string) (*OnCallRole, error) {
 	req, err := rootlygo.NewGetOnCallRoleRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get on_call_role: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get on_call_role: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(OnCallRole))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling on_call_role: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling on_call_role: %w", err)
 	}
 
 	return data.(*OnCallRole), nil
@@ -101,22 +101,22 @@ func (c *Client) GetOnCallRole(id string) (*OnCallRole, error) {
 func (c *Client) UpdateOnCallRole(id string, on_call_role *OnCallRole) (*OnCallRole, error) {
 	buffer, err := MarshalData(on_call_role)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling on_call_role: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling on_call_role: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateOnCallRoleRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update on_call_role: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update on_call_role: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(OnCallRole))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling on_call_role: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling on_call_role: %w", err)
 	}
 
 	return data.(*OnCallRole), nil
@@ -125,12 +125,12 @@ func (c *Client) UpdateOnCallRole(id string, on_call_role *OnCallRole) (*OnCallR
 func (c *Client) DeleteOnCallRole(id string) error {
 	req, err := rootlygo.NewDeleteOnCallRoleRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete on_call_role: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete on_call_role: %w", err)
 	}
 
 	return nil

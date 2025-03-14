@@ -4,37 +4,38 @@ package client
 
 import (
 	"reflect"
-	
-	"github.com/pkg/errors"
+
+	"fmt"
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type Schedule struct {
-	ID string `jsonapi:"primary,schedules"`
-	Name string `jsonapi:"attr,name,omitempty"`
-  Description string `jsonapi:"attr,description,omitempty"`
-  AllTimeCoverage *bool `jsonapi:"attr,all_time_coverage,omitempty"`
-  SlackUserGroup map[string]interface{} `jsonapi:"attr,slack_user_group,omitempty"`
-  OwnerGroupIds []interface{} `jsonapi:"attr,owner_group_ids,omitempty"`
-  OwnerUserId int `jsonapi:"attr,owner_user_id,omitempty"`
+	ID              string                 `jsonapi:"primary,schedules"`
+	Name            string                 `jsonapi:"attr,name,omitempty"`
+	Description     string                 `jsonapi:"attr,description,omitempty"`
+	AllTimeCoverage *bool                  `jsonapi:"attr,all_time_coverage,omitempty"`
+	SlackUserGroup  map[string]interface{} `jsonapi:"attr,slack_user_group,omitempty"`
+	OwnerGroupIds   []interface{}          `jsonapi:"attr,owner_group_ids,omitempty"`
+	OwnerUserId     int                    `jsonapi:"attr,owner_user_id,omitempty"`
 }
 
 func (c *Client) ListSchedules(params *rootlygo.ListSchedulesParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListSchedulesRequest(c.Rootly.Server, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	schedules, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Schedule)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return schedules, nil
@@ -43,22 +44,22 @@ func (c *Client) ListSchedules(params *rootlygo.ListSchedulesParams) ([]interfac
 func (c *Client) CreateSchedule(d *Schedule) (*Schedule, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling schedule: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling schedule: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateScheduleRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create schedule: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create schedule: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Schedule))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling schedule: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling schedule: %w", err)
 	}
 
 	return data.(*Schedule), nil
@@ -67,18 +68,18 @@ func (c *Client) CreateSchedule(d *Schedule) (*Schedule, error) {
 func (c *Client) GetSchedule(id string) (*Schedule, error) {
 	req, err := rootlygo.NewGetScheduleRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get schedule: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get schedule: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Schedule))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling schedule: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling schedule: %w", err)
 	}
 
 	return data.(*Schedule), nil
@@ -87,22 +88,22 @@ func (c *Client) GetSchedule(id string) (*Schedule, error) {
 func (c *Client) UpdateSchedule(id string, schedule *Schedule) (*Schedule, error) {
 	buffer, err := MarshalData(schedule)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling schedule: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling schedule: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateScheduleRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update schedule: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update schedule: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Schedule))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling schedule: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling schedule: %w", err)
 	}
 
 	return data.(*Schedule), nil
@@ -111,12 +112,12 @@ func (c *Client) UpdateSchedule(id string, schedule *Schedule) (*Schedule, error
 func (c *Client) DeleteSchedule(id string) error {
 	req, err := rootlygo.NewDeleteScheduleRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete schedule: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete schedule: %w", err)
 	}
 
 	return nil

@@ -2,6 +2,7 @@ package provider
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -112,7 +113,7 @@ func resourceCustomFieldOptionRead(ctx context.Context, d *schema.ResourceData, 
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("CustomFieldOption (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
@@ -168,7 +169,7 @@ func resourceCustomFieldOptionDelete(ctx context.Context, d *schema.ResourceData
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
-		if _, ok := err.(client.NotFoundError); ok && !d.IsNewResource() {
+		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("CustomFieldOption (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil

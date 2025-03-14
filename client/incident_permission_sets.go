@@ -3,9 +3,9 @@
 package client
 
 import (
+    "fmt"
 	"reflect"
 	
-	"github.com/pkg/errors"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -22,18 +22,18 @@ type IncidentPermissionSet struct {
 func (c *Client) ListIncidentPermissionSets(params *rootlygo.ListIncidentPermissionSetsParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListIncidentPermissionSetsRequest(c.Rootly.Server, params)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
 
 	incident_permission_sets, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(IncidentPermissionSet)))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
 	return incident_permission_sets, nil
@@ -42,22 +42,22 @@ func (c *Client) ListIncidentPermissionSets(params *rootlygo.ListIncidentPermiss
 func (c *Client) CreateIncidentPermissionSet(d *IncidentPermissionSet) (*IncidentPermissionSet, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling incident_permission_set: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling incident_permission_set: %w", err)
 	}
 
 	req, err := rootlygo.NewCreateIncidentPermissionSetRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to perform request to create incident_permission_set: %s", err.Error())
+		return nil, fmt.Errorf("Failed to perform request to create incident_permission_set: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentPermissionSet))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling incident_permission_set: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling incident_permission_set: %w", err)
 	}
 
 	return data.(*IncidentPermissionSet), nil
@@ -66,18 +66,18 @@ func (c *Client) CreateIncidentPermissionSet(d *IncidentPermissionSet) (*Inciden
 func (c *Client) GetIncidentPermissionSet(id string) (*IncidentPermissionSet, error) {
 	req, err := rootlygo.NewGetIncidentPermissionSetRequest(c.Rootly.Server, id)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to get incident_permission_set: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to get incident_permission_set: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentPermissionSet))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling incident_permission_set: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling incident_permission_set: %w", err)
 	}
 
 	return data.(*IncidentPermissionSet), nil
@@ -86,22 +86,22 @@ func (c *Client) GetIncidentPermissionSet(id string) (*IncidentPermissionSet, er
 func (c *Client) UpdateIncidentPermissionSet(id string, incident_permission_set *IncidentPermissionSet) (*IncidentPermissionSet, error) {
 	buffer, err := MarshalData(incident_permission_set)
 	if err != nil {
-		return nil, errors.Errorf("Error marshaling incident_permission_set: %s", err.Error())
+		return nil, fmt.Errorf("Error marshaling incident_permission_set: %w", err)
 	}
 
 	req, err := rootlygo.NewUpdateIncidentPermissionSetRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
 	if err != nil {
-		return nil, errors.Errorf("Error building request: %s", err.Error())
+		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, errors.Errorf("Failed to make request to update incident_permission_set: %s", err.Error())
+		return nil, fmt.Errorf("Failed to make request to update incident_permission_set: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(IncidentPermissionSet))
 	resp.Body.Close()
 	if err != nil {
-		return nil, errors.Errorf("Error unmarshaling incident_permission_set: %s", err.Error())
+		return nil, fmt.Errorf("Error unmarshaling incident_permission_set: %w", err)
 	}
 
 	return data.(*IncidentPermissionSet), nil
@@ -110,12 +110,12 @@ func (c *Client) UpdateIncidentPermissionSet(id string, incident_permission_set 
 func (c *Client) DeleteIncidentPermissionSet(id string) error {
 	req, err := rootlygo.NewDeleteIncidentPermissionSetRequest(c.Rootly.Server, id)
 	if err != nil {
-		return errors.Errorf("Error building request: %s", err.Error())
+		return fmt.Errorf("Error building request: %w", err)
 	}
 
 	_, err = c.Do(req)
 	if err != nil {
-		return errors.Errorf("Failed to make request to delete incident_permission_set: %s", err.Error())
+		return fmt.Errorf("Failed to make request to delete incident_permission_set: %w", err)
 	}
 
 	return nil
