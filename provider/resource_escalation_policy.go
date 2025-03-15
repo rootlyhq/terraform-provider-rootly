@@ -93,6 +93,17 @@ func resourceEscalationPolicy() *schema.Resource {
 				Optional:         true,
 				Description:      "Associated services (alerting the service will trigger escalation policy)",
 			},
+
+			"business_hours": &schema.Schema{
+				Type: schema.TypeMap,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "",
+			},
 		},
 	}
 }
@@ -124,6 +135,9 @@ func resourceEscalationPolicyCreate(ctx context.Context, d *schema.ResourceData,
 	}
 	if value, ok := d.GetOkExists("service_ids"); ok {
 		s.ServiceIds = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("business_hours"); ok {
+		s.BusinessHours = value.(map[string]interface{})
 	}
 
 	res, err := c.CreateEscalationPolicy(s)
@@ -161,6 +175,7 @@ func resourceEscalationPolicyRead(ctx context.Context, d *schema.ResourceData, m
 	d.Set("last_updated_by_user_id", item.LastUpdatedByUserId)
 	d.Set("group_ids", item.GroupIds)
 	d.Set("service_ids", item.ServiceIds)
+	d.Set("business_hours", item.BusinessHours)
 
 	return nil
 }
@@ -191,6 +206,9 @@ func resourceEscalationPolicyUpdate(ctx context.Context, d *schema.ResourceData,
 	}
 	if d.HasChange("service_ids") {
 		s.ServiceIds = d.Get("service_ids").([]interface{})
+	}
+	if d.HasChange("business_hours") {
+		s.BusinessHours = d.Get("business_hours").(map[string]interface{})
 	}
 
 	_, err := c.UpdateEscalationPolicy(d.Id(), s)

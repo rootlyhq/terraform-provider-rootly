@@ -1344,6 +1344,17 @@ const (
 	EscalationPathResponseDataTypeEscalationPaths EscalationPathResponseDataType = "escalation_paths"
 )
 
+// Defines values for EscalationPolicyBusinessHoursDays.
+const (
+	EscalationPolicyBusinessHoursDaysF EscalationPolicyBusinessHoursDays = "F"
+	EscalationPolicyBusinessHoursDaysM EscalationPolicyBusinessHoursDays = "M"
+	EscalationPolicyBusinessHoursDaysR EscalationPolicyBusinessHoursDays = "R"
+	EscalationPolicyBusinessHoursDaysS EscalationPolicyBusinessHoursDays = "S"
+	EscalationPolicyBusinessHoursDaysT EscalationPolicyBusinessHoursDays = "T"
+	EscalationPolicyBusinessHoursDaysU EscalationPolicyBusinessHoursDays = "U"
+	EscalationPolicyBusinessHoursDaysW EscalationPolicyBusinessHoursDays = "W"
+)
+
 // Defines values for EscalationPolicyListDataType.
 const (
 	EscalationPolicyListDataTypeEscalationPolicies EscalationPolicyListDataType = "escalation_policies"
@@ -2596,6 +2607,17 @@ const (
 // Defines values for NewEscalationPathDataType.
 const (
 	NewEscalationPathDataTypeEscalationPaths NewEscalationPathDataType = "escalation_paths"
+)
+
+// Defines values for NewEscalationPolicyDataAttributesBusinessHoursDays.
+const (
+	NewEscalationPolicyDataAttributesBusinessHoursDaysF NewEscalationPolicyDataAttributesBusinessHoursDays = "F"
+	NewEscalationPolicyDataAttributesBusinessHoursDaysM NewEscalationPolicyDataAttributesBusinessHoursDays = "M"
+	NewEscalationPolicyDataAttributesBusinessHoursDaysR NewEscalationPolicyDataAttributesBusinessHoursDays = "R"
+	NewEscalationPolicyDataAttributesBusinessHoursDaysS NewEscalationPolicyDataAttributesBusinessHoursDays = "S"
+	NewEscalationPolicyDataAttributesBusinessHoursDaysT NewEscalationPolicyDataAttributesBusinessHoursDays = "T"
+	NewEscalationPolicyDataAttributesBusinessHoursDaysU NewEscalationPolicyDataAttributesBusinessHoursDays = "U"
+	NewEscalationPolicyDataAttributesBusinessHoursDaysW NewEscalationPolicyDataAttributesBusinessHoursDays = "W"
 )
 
 // Defines values for NewEscalationPolicyDataType.
@@ -5054,6 +5076,17 @@ const (
 	UpdateEscalationPathDataTypeEscalationPaths UpdateEscalationPathDataType = "escalation_paths"
 )
 
+// Defines values for UpdateEscalationPolicyDataAttributesBusinessHoursDays.
+const (
+	UpdateEscalationPolicyDataAttributesBusinessHoursDaysF UpdateEscalationPolicyDataAttributesBusinessHoursDays = "F"
+	UpdateEscalationPolicyDataAttributesBusinessHoursDaysM UpdateEscalationPolicyDataAttributesBusinessHoursDays = "M"
+	UpdateEscalationPolicyDataAttributesBusinessHoursDaysR UpdateEscalationPolicyDataAttributesBusinessHoursDays = "R"
+	UpdateEscalationPolicyDataAttributesBusinessHoursDaysS UpdateEscalationPolicyDataAttributesBusinessHoursDays = "S"
+	UpdateEscalationPolicyDataAttributesBusinessHoursDaysT UpdateEscalationPolicyDataAttributesBusinessHoursDays = "T"
+	UpdateEscalationPolicyDataAttributesBusinessHoursDaysU UpdateEscalationPolicyDataAttributesBusinessHoursDays = "U"
+	UpdateEscalationPolicyDataAttributesBusinessHoursDaysW UpdateEscalationPolicyDataAttributesBusinessHoursDays = "W"
+)
+
 // Defines values for UpdateEscalationPolicyDataType.
 const (
 	UpdateEscalationPolicyDataTypeEscalationPolicies UpdateEscalationPolicyDataType = "escalation_policies"
@@ -6424,13 +6457,13 @@ const (
 
 // Defines values for WorkflowRepeatOn.
 const (
-	WorkflowRepeatOnF WorkflowRepeatOn = "F"
-	WorkflowRepeatOnM WorkflowRepeatOn = "M"
-	WorkflowRepeatOnR WorkflowRepeatOn = "R"
-	WorkflowRepeatOnS WorkflowRepeatOn = "S"
-	WorkflowRepeatOnT WorkflowRepeatOn = "T"
-	WorkflowRepeatOnU WorkflowRepeatOn = "U"
-	WorkflowRepeatOnW WorkflowRepeatOn = "W"
+	F WorkflowRepeatOn = "F"
+	M WorkflowRepeatOn = "M"
+	R WorkflowRepeatOn = "R"
+	S WorkflowRepeatOn = "S"
+	T WorkflowRepeatOn = "T"
+	U WorkflowRepeatOn = "U"
+	W WorkflowRepeatOn = "W"
 )
 
 // Defines values for WorkflowCustomFieldSelectionIncidentCondition.
@@ -9860,6 +9893,20 @@ type EscalationPathResponseDataType string
 
 // EscalationPolicy defines model for escalation_policy.
 type EscalationPolicy struct {
+	BusinessHours *struct {
+		// Days Business days
+		Days *[]EscalationPolicyBusinessHoursDays `json:"days"`
+
+		// EndTime End time for business hours (HH:MM)
+		EndTime *string `json:"end_time"`
+
+		// StartTime Start time for business hours (HH:MM)
+		StartTime *string `json:"start_time"`
+
+		// TimeZone Time zone for business hours
+		TimeZone *string `json:"time_zone"`
+	} `json:"business_hours"`
+
 	// CreatedAt Date of creation
 	CreatedAt *string `json:"created_at,omitempty"`
 
@@ -9887,6 +9934,9 @@ type EscalationPolicy struct {
 	// UpdatedAt Date of last update
 	UpdatedAt *string `json:"updated_at,omitempty"`
 }
+
+// EscalationPolicyBusinessHoursDays defines model for EscalationPolicy.BusinessHours.Days.
+type EscalationPolicyBusinessHoursDays string
 
 // EscalationPolicyList defines model for escalation_policy_list.
 type EscalationPolicyList struct {
@@ -12786,6 +12836,20 @@ type NewEscalationPathDataType string
 type NewEscalationPolicy struct {
 	Data struct {
 		Attributes struct {
+			BusinessHours *struct {
+				// Days Business days
+				Days *[]NewEscalationPolicyDataAttributesBusinessHoursDays `json:"days"`
+
+				// EndTime End time for business hours (HH:MM)
+				EndTime *string `json:"end_time"`
+
+				// StartTime Start time for business hours (HH:MM)
+				StartTime *string `json:"start_time"`
+
+				// TimeZone Time zone for business hours
+				TimeZone *string `json:"time_zone"`
+			} `json:"business_hours"`
+
 			// Description The description of the escalation policy
 			Description *string `json:"description"`
 
@@ -12804,6 +12868,9 @@ type NewEscalationPolicy struct {
 		Type NewEscalationPolicyDataType `json:"type"`
 	} `json:"data"`
 }
+
+// NewEscalationPolicyDataAttributesBusinessHoursDays defines model for NewEscalationPolicy.Data.Attributes.BusinessHours.Days.
+type NewEscalationPolicyDataAttributesBusinessHoursDays string
 
 // NewEscalationPolicyDataType defines model for NewEscalationPolicy.Data.Type.
 type NewEscalationPolicyDataType string
@@ -18198,6 +18265,20 @@ type UpdateEscalationPathDataType string
 type UpdateEscalationPolicy struct {
 	Data struct {
 		Attributes struct {
+			BusinessHours *struct {
+				// Days Business days
+				Days *[]UpdateEscalationPolicyDataAttributesBusinessHoursDays `json:"days"`
+
+				// EndTime End time for business hours (HH:MM)
+				EndTime *string `json:"end_time"`
+
+				// StartTime Start time for business hours (HH:MM)
+				StartTime *string `json:"start_time"`
+
+				// TimeZone Time zone for business hours
+				TimeZone *string `json:"time_zone"`
+			} `json:"business_hours"`
+
 			// Description The description of the escalation policy
 			Description *string `json:"description"`
 
@@ -18216,6 +18297,9 @@ type UpdateEscalationPolicy struct {
 		Type UpdateEscalationPolicyDataType `json:"type"`
 	} `json:"data"`
 }
+
+// UpdateEscalationPolicyDataAttributesBusinessHoursDays defines model for UpdateEscalationPolicy.Data.Attributes.BusinessHours.Days.
+type UpdateEscalationPolicyDataAttributesBusinessHoursDays string
 
 // UpdateEscalationPolicyDataType defines model for UpdateEscalationPolicy.Data.Type.
 type UpdateEscalationPolicyDataType string

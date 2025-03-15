@@ -19,6 +19,7 @@ type EscalationPolicy struct {
   LastUpdatedByUserId int `jsonapi:"attr,last_updated_by_user_id,omitempty"`
   GroupIds []interface{} `jsonapi:"attr,group_ids,omitempty"`
   ServiceIds []interface{} `jsonapi:"attr,service_ids,omitempty"`
+  BusinessHours map[string]interface{} `jsonapi:"attr,business_hours,omitempty"`
 }
 
 func (c *Client) ListEscalationPolicies(params *rootlygo.ListEscalationPoliciesParams) ([]interface{}, error) {

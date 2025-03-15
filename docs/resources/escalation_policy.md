@@ -176,6 +176,7 @@ resource "rootly_escalation_level" "second" {
 
 ### Optional
 
+- `business_hours` (Map of String)
 - `created_by_user_id` (Number) User who created the escalation policy
 - `description` (String) The description of the escalation policy
 - `group_ids` (List of String) Associated groups (alerting the group will trigger escalation policy)
