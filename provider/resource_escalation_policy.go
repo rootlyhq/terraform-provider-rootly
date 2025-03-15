@@ -95,14 +95,56 @@ func resourceEscalationPolicy() *schema.Resource {
 			},
 
 			"business_hours": &schema.Schema{
-				Type: schema.TypeMap,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
+				Type:        schema.TypeList,
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
 				Description: "",
+				MinItems:    0,
+				MaxItems:    1,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+
+						"time_zone": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Time zone for business hours",
+						},
+
+						"days": &schema.Schema{
+							Type: schema.TypeList,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "Business days. Value must be one of `M`, `T`, `W`, `R`, `F`, `U`, `S`.",
+						},
+
+						"start_time": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Start time for business hours (HH:MM)",
+						},
+
+						"end_time": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "End time for business hours (HH:MM)",
+						},
+					},
+				},
 			},
 		},
 	}

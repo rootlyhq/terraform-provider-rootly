@@ -176,7 +176,7 @@ resource "rootly_escalation_level" "second" {
 
 ### Optional
 
-- `business_hours` (Map of String)
+- `business_hours` (Block List, Max: 1) (see [below for nested schema](#nestedblock--business_hours))
 - `created_by_user_id` (Number) User who created the escalation policy
 - `description` (String) The description of the escalation policy
 - `group_ids` (List of String) Associated groups (alerting the group will trigger escalation policy)
@@ -187,3 +187,13 @@ resource "rootly_escalation_level" "second" {
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--business_hours"></a>
+### Nested Schema for `business_hours`
+
+Optional:
+
+- `days` (List of String) Business days. Value must be one of `M`, `T`, `W`, `R`, `F`, `U`, `S`.
+- `end_time` (String) End time for business hours (HH:MM)
+- `start_time` (String) Start time for business hours (HH:MM)
+- `time_zone` (String) Time zone for business hours

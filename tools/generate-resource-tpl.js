@@ -436,6 +436,28 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
       }
     case "object":
     default:
+      if (schema.properties && !name.match(/_(params|attributes)$/)) {
+        return `
+   			"${name}": &schema.Schema {
+	 				Type: schema.TypeList,
+	 				Computed: ${optional},
+	 				Required: ${required},
+	 				Optional: ${optional},
+	 				Description: "${description}",
+						MinItems: 0,
+						MaxItems: 1,
+	 					Elem: &schema.Resource {
+							Schema: map[string]*schema.Schema {
+	 							${Object.keys(schema.properties)
+									.map((key) => {
+	 									return schemaField(key, schema, [], pathIdField)
+									})
+									.join("\n")}
+							},
+	 					},
+	 				},
+   			`;
+      }
       return `
 			"${name}": &schema.Schema {
 				Type: schema.TypeMap,
