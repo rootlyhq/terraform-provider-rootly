@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.23.0] -- 2025-03-14
+
+- Add business_hours configuration to escalation policy.
+
 ## [2.22.2] -- 2025-03-14
 
 - Resources deleted out-of-bounds should be recreated.
