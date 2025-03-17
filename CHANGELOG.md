@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.24.0] -- 2025-03-17
+
+- Add schedules and escalation policy data sources.
+
 ## [2.23.0] -- 2025-03-14
 
 - Add business_hours configuration to escalation policy.
