@@ -49,7 +49,7 @@ func resourceEscalationLevel() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "Value must be one of `default`, `everyone`, `random`, `cycle`, `alert`.",
+				Description: "Value must be one of `default`, `random`, `cycle`, `alert`.",
 			},
 
 			"paging_strategy_configuration_schedule_strategy": &schema.Schema{

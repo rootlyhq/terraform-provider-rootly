@@ -87,6 +87,7 @@ ${resources
 				"rootly_retrospective_step": resourceRetrospectiveStep(),
 				"rootly_post_mortem_template": resourcePostmortemTemplate(),
 				"rootly_schedule": resourceSchedule(),
+				"rootly_schedule_rotation": resourceScheduleRotation(),
 				"rootly_secret": resourceSecret(),
 				"rootly_workflow_incident": resourceWorkflowIncident(),
 				"rootly_workflow_action_item": resourceWorkflowActionItem(),

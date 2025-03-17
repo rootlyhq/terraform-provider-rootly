@@ -173,7 +173,7 @@ resource "rootly_escalation_level" "second" {
 ### Required
 
 - `name` (String) The name of the schedule rotation
-- `schedule_rotationable_attributes` (Map of String)
+- `schedule_rotationable_attributes` (Map of String) Please see API docs for options: https://docs.rootly.com/api-reference/schedulerotations/creates-a-schedule-rotation#response-data-attributes-schedule-rotationable-attributes
 
 ### Optional
 

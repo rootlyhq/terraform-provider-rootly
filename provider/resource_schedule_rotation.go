@@ -138,7 +138,7 @@ func resourceScheduleRotation() *schema.Resource {
 				Computed:    false,
 				Required:    true,
 				Optional:    false,
-				Description: "",
+				Description: "Please see API docs for options: https://docs.rootly.com/api-reference/schedulerotations/creates-a-schedule-rotation#response-data-attributes-schedule-rotationable-attributes",
 			},
 		},
 	}

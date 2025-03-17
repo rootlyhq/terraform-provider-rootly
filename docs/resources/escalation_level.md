@@ -181,7 +181,7 @@ resource "rootly_escalation_level" "second" {
 - `escalation_policy_id` (String) The ID of the escalation policy
 - `escalation_policy_path_id` (String) The ID of the dynamic escalation policy path the level will belong to. If nothing is specified it will add the level to your default path.
 - `paging_strategy_configuration_schedule_strategy` (String) Value must be one of `on_call_only`, `everyone`.
-- `paging_strategy_configuration_strategy` (String) Value must be one of `default`, `everyone`, `random`, `cycle`, `alert`.
+- `paging_strategy_configuration_strategy` (String) Value must be one of `default`, `random`, `cycle`, `alert`.
 
 ### Read-Only
 
