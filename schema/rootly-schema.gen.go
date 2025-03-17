@@ -450,6 +450,7 @@ const (
 const (
 	AlertEventKindAction        AlertEventKind = "action"
 	AlertEventKindAlertGrouping AlertEventKind = "alert_grouping"
+	AlertEventKindAlertRouting  AlertEventKind = "alert_routing"
 	AlertEventKindAlertUrgency  AlertEventKind = "alert_urgency"
 	AlertEventKindInformational AlertEventKind = "informational"
 	AlertEventKindMaintenance   AlertEventKind = "maintenance"
@@ -577,6 +578,41 @@ const (
 // Defines values for AlertResponseDataType.
 const (
 	AlertResponseDataTypeAlerts AlertResponseDataType = "alerts"
+)
+
+// Defines values for AlertRoutingRuleAttributesConditionType.
+const (
+	AlertRoutingRuleAttributesConditionTypeAll AlertRoutingRuleAttributesConditionType = "all"
+	AlertRoutingRuleAttributesConditionTypeAny AlertRoutingRuleAttributesConditionType = "any"
+)
+
+// Defines values for AlertRoutingRuleAttributesConditionsPropertyFieldConditionType.
+const (
+	AlertRoutingRuleAttributesConditionsPropertyFieldConditionTypeContains       AlertRoutingRuleAttributesConditionsPropertyFieldConditionType = "contains"
+	AlertRoutingRuleAttributesConditionsPropertyFieldConditionTypeDoesNotContain AlertRoutingRuleAttributesConditionsPropertyFieldConditionType = "does_not_contain"
+	AlertRoutingRuleAttributesConditionsPropertyFieldConditionTypeEndsWith       AlertRoutingRuleAttributesConditionsPropertyFieldConditionType = "ends_with"
+	AlertRoutingRuleAttributesConditionsPropertyFieldConditionTypeIs             AlertRoutingRuleAttributesConditionsPropertyFieldConditionType = "is"
+	AlertRoutingRuleAttributesConditionsPropertyFieldConditionTypeIsNot          AlertRoutingRuleAttributesConditionsPropertyFieldConditionType = "is_not"
+	AlertRoutingRuleAttributesConditionsPropertyFieldConditionTypeMatchesRegex   AlertRoutingRuleAttributesConditionsPropertyFieldConditionType = "matches_regex"
+	AlertRoutingRuleAttributesConditionsPropertyFieldConditionTypeStartsWith     AlertRoutingRuleAttributesConditionsPropertyFieldConditionType = "starts_with"
+)
+
+// Defines values for AlertRoutingRuleAttributesConditionsPropertyFieldType.
+const (
+	AlertRoutingRuleAttributesConditionsPropertyFieldTypeAttribute AlertRoutingRuleAttributesConditionsPropertyFieldType = "attribute"
+	AlertRoutingRuleAttributesConditionsPropertyFieldTypePayload   AlertRoutingRuleAttributesConditionsPropertyFieldType = "payload"
+)
+
+// Defines values for AlertRoutingRuleAttributesDestinationTargetType.
+const (
+	AlertRoutingRuleAttributesDestinationTargetTypeEscalationPolicy AlertRoutingRuleAttributesDestinationTargetType = "EscalationPolicy"
+	AlertRoutingRuleAttributesDestinationTargetTypeGroup            AlertRoutingRuleAttributesDestinationTargetType = "Group"
+	AlertRoutingRuleAttributesDestinationTargetTypeService          AlertRoutingRuleAttributesDestinationTargetType = "Service"
+)
+
+// Defines values for AlertRoutingRuleType.
+const (
+	AlertRoutingRuleTypeAlertRoutingRules AlertRoutingRuleType = "alert_routing_rules"
 )
 
 // Defines values for AlertTriggerParamsAlertCondition.
@@ -2345,6 +2381,41 @@ const (
 // Defines values for NewAlertGroupDataType.
 const (
 	NewAlertGroupDataTypeAlertGroups NewAlertGroupDataType = "alert_groups"
+)
+
+// Defines values for NewAlertRoutingRuleDataAttributesConditionType.
+const (
+	NewAlertRoutingRuleDataAttributesConditionTypeAll NewAlertRoutingRuleDataAttributesConditionType = "all"
+	NewAlertRoutingRuleDataAttributesConditionTypeAny NewAlertRoutingRuleDataAttributesConditionType = "any"
+)
+
+// Defines values for NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType.
+const (
+	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeContains       NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "contains"
+	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeDoesNotContain NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "does_not_contain"
+	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeEndsWith       NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "ends_with"
+	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIs             NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is"
+	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIsNot          NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is_not"
+	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeMatchesRegex   NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "matches_regex"
+	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeStartsWith     NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "starts_with"
+)
+
+// Defines values for NewAlertRoutingRuleDataAttributesConditionsPropertyFieldType.
+const (
+	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldTypeAttribute NewAlertRoutingRuleDataAttributesConditionsPropertyFieldType = "attribute"
+	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldTypePayload   NewAlertRoutingRuleDataAttributesConditionsPropertyFieldType = "payload"
+)
+
+// Defines values for NewAlertRoutingRuleDataAttributesDestinationTargetType.
+const (
+	NewAlertRoutingRuleDataAttributesDestinationTargetTypeEscalationPolicy NewAlertRoutingRuleDataAttributesDestinationTargetType = "EscalationPolicy"
+	NewAlertRoutingRuleDataAttributesDestinationTargetTypeGroup            NewAlertRoutingRuleDataAttributesDestinationTargetType = "Group"
+	NewAlertRoutingRuleDataAttributesDestinationTargetTypeService          NewAlertRoutingRuleDataAttributesDestinationTargetType = "Service"
+)
+
+// Defines values for NewAlertRoutingRuleDataType.
+const (
+	NewAlertRoutingRuleDataTypeAlertRoutingRules NewAlertRoutingRuleDataType = "alert_routing_rules"
 )
 
 // Defines values for NewAlertUrgencyDataType.
@@ -4798,6 +4869,41 @@ const (
 	UpdateAlertGroupDataTypeAlertGroups UpdateAlertGroupDataType = "alert_groups"
 )
 
+// Defines values for UpdateAlertRoutingRuleDataAttributesConditionType.
+const (
+	UpdateAlertRoutingRuleDataAttributesConditionTypeAll UpdateAlertRoutingRuleDataAttributesConditionType = "all"
+	UpdateAlertRoutingRuleDataAttributesConditionTypeAny UpdateAlertRoutingRuleDataAttributesConditionType = "any"
+)
+
+// Defines values for UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType.
+const (
+	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeContains       UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "contains"
+	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeDoesNotContain UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "does_not_contain"
+	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeEndsWith       UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "ends_with"
+	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIs             UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is"
+	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIsNot          UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is_not"
+	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeMatchesRegex   UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "matches_regex"
+	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeStartsWith     UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "starts_with"
+)
+
+// Defines values for UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldType.
+const (
+	Attribute UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldType = "attribute"
+	Payload   UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldType = "payload"
+)
+
+// Defines values for UpdateAlertRoutingRuleDataAttributesDestinationTargetType.
+const (
+	UpdateAlertRoutingRuleDataAttributesDestinationTargetTypeEscalationPolicy UpdateAlertRoutingRuleDataAttributesDestinationTargetType = "EscalationPolicy"
+	UpdateAlertRoutingRuleDataAttributesDestinationTargetTypeGroup            UpdateAlertRoutingRuleDataAttributesDestinationTargetType = "Group"
+	UpdateAlertRoutingRuleDataAttributesDestinationTargetTypeService          UpdateAlertRoutingRuleDataAttributesDestinationTargetType = "Service"
+)
+
+// Defines values for UpdateAlertRoutingRuleDataType.
+const (
+	AlertRoutingRules UpdateAlertRoutingRuleDataType = "alert_routing_rules"
+)
+
 // Defines values for UpdateAlertUrgencyDataType.
 const (
 	UpdateAlertUrgencyDataTypeAlertUrgencies UpdateAlertUrgencyDataType = "alert_urgencies"
@@ -5012,8 +5118,8 @@ const (
 
 // Defines values for UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers.
 const (
-	Admins UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers = "admins"
-	All    UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers = "all"
+	UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembersAdmins UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers = "admins"
+	UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembersAll    UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers = "all"
 )
 
 // Defines values for UpdateEscalationLevelDataAttributesNotificationTargetParamsType.
@@ -5058,10 +5164,10 @@ const (
 
 // Defines values for UpdateEscalationPathDataAttributesRulesOperator.
 const (
-	Contains       UpdateEscalationPathDataAttributesRulesOperator = "contains"
-	DoesNotContain UpdateEscalationPathDataAttributesRulesOperator = "does_not_contain"
-	Is             UpdateEscalationPathDataAttributesRulesOperator = "is"
-	IsNot          UpdateEscalationPathDataAttributesRulesOperator = "is_not"
+	UpdateEscalationPathDataAttributesRulesOperatorContains       UpdateEscalationPathDataAttributesRulesOperator = "contains"
+	UpdateEscalationPathDataAttributesRulesOperatorDoesNotContain UpdateEscalationPathDataAttributesRulesOperator = "does_not_contain"
+	UpdateEscalationPathDataAttributesRulesOperatorIs             UpdateEscalationPathDataAttributesRulesOperator = "is"
+	UpdateEscalationPathDataAttributesRulesOperatorIsNot          UpdateEscalationPathDataAttributesRulesOperator = "is_not"
 )
 
 // Defines values for UpdateEscalationPathDataAttributesRulesRuleType.
@@ -7535,6 +7641,88 @@ type AlertResponseDataSource string
 
 // AlertResponseDataType defines model for AlertResponse.Data.Type.
 type AlertResponseDataType string
+
+// AlertRoutingRule defines model for alert_routing_rule.
+type AlertRoutingRule struct {
+	Attributes struct {
+		// AlertsSourceId The ID of the alerts source
+		AlertsSourceId openapi_types.UUID `json:"alerts_source_id"`
+
+		// ConditionType The type of condition for the alert routing rule
+		ConditionType AlertRoutingRuleAttributesConditionType `json:"condition_type"`
+
+		// Conditions The conditions for the alert routing rule
+		Conditions *[]struct {
+			// PropertyFieldConditionType The condition type of the property field
+			PropertyFieldConditionType *AlertRoutingRuleAttributesConditionsPropertyFieldConditionType `json:"property_field_condition_type,omitempty"`
+
+			// PropertyFieldName The name of the property field
+			PropertyFieldName *string `json:"property_field_name,omitempty"`
+
+			// PropertyFieldType The type of the property field
+			PropertyFieldType *AlertRoutingRuleAttributesConditionsPropertyFieldType `json:"property_field_type,omitempty"`
+
+			// PropertyFieldValue The value of the property field
+			PropertyFieldValue *string `json:"property_field_value,omitempty"`
+		} `json:"conditions,omitempty"`
+
+		// CreatedAt Date of creation
+		CreatedAt string `json:"created_at"`
+
+		// Destination The destinations for the alert routing rule
+		Destination struct {
+			// TargetId The ID of the target
+			TargetId *openapi_types.UUID `json:"target_id,omitempty"`
+
+			// TargetType The type of the target
+			TargetType *AlertRoutingRuleAttributesDestinationTargetType `json:"target_type,omitempty"`
+		} `json:"destination"`
+
+		// Enabled Whether the alert routing rule is enabled
+		Enabled bool `json:"enabled"`
+
+		// Name The name of the alert routing rule
+		Name string `json:"name"`
+
+		// UpdatedAt Date of last update
+		UpdatedAt string `json:"updated_at"`
+	} `json:"attributes"`
+
+	// Id Unique ID of the alert routing rule
+	Id            string `json:"id"`
+	Relationships struct {
+		OwningTeams *struct {
+			Data *[]openapi_types.UUID `json:"data,omitempty"`
+		} `json:"owning_teams,omitempty"`
+	} `json:"relationships"`
+	Type AlertRoutingRuleType `json:"type"`
+}
+
+// AlertRoutingRuleAttributesConditionType The type of condition for the alert routing rule
+type AlertRoutingRuleAttributesConditionType string
+
+// AlertRoutingRuleAttributesConditionsPropertyFieldConditionType The condition type of the property field
+type AlertRoutingRuleAttributesConditionsPropertyFieldConditionType string
+
+// AlertRoutingRuleAttributesConditionsPropertyFieldType The type of the property field
+type AlertRoutingRuleAttributesConditionsPropertyFieldType string
+
+// AlertRoutingRuleAttributesDestinationTargetType The type of the target
+type AlertRoutingRuleAttributesDestinationTargetType string
+
+// AlertRoutingRuleType defines model for AlertRoutingRule.Type.
+type AlertRoutingRuleType string
+
+// AlertRoutingRuleList defines model for alert_routing_rule_list.
+type AlertRoutingRuleList struct {
+	Data  []AlertRoutingRule `json:"data"`
+	Links Links              `json:"links"`
+}
+
+// AlertRoutingRuleResponse defines model for alert_routing_rule_response.
+type AlertRoutingRuleResponse struct {
+	Data AlertRoutingRule `json:"data"`
+}
 
 // AlertTriggerParams defines model for alert_trigger_params.
 type AlertTriggerParams struct {
@@ -12330,6 +12518,64 @@ type NewAlertGroupDataAttributesTargetsTargetType string
 
 // NewAlertGroupDataType defines model for NewAlertGroup.Data.Type.
 type NewAlertGroupDataType string
+
+// NewAlertRoutingRule defines model for new_alert_routing_rule.
+type NewAlertRoutingRule struct {
+	Data struct {
+		Attributes struct {
+			// AlertsSourceId The ID of the alerts source
+			AlertsSourceId openapi_types.UUID `json:"alerts_source_id"`
+
+			// ConditionType The type of condition for the alert routing rule
+			ConditionType *NewAlertRoutingRuleDataAttributesConditionType `json:"condition_type,omitempty"`
+			Conditions    *[]struct {
+				// PropertyFieldConditionType The condition type of the property field
+				PropertyFieldConditionType NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType `json:"property_field_condition_type"`
+
+				// PropertyFieldName The name of the property field
+				PropertyFieldName string `json:"property_field_name"`
+
+				// PropertyFieldType The type of the property field
+				PropertyFieldType NewAlertRoutingRuleDataAttributesConditionsPropertyFieldType `json:"property_field_type"`
+
+				// PropertyFieldValue The value of the property field
+				PropertyFieldValue string `json:"property_field_value"`
+			} `json:"conditions,omitempty"`
+			Destination struct {
+				// TargetId The ID of the target
+				TargetId openapi_types.UUID `json:"target_id"`
+
+				// TargetType The type of the target
+				TargetType NewAlertRoutingRuleDataAttributesDestinationTargetType `json:"target_type"`
+			} `json:"destination"`
+
+			// Enabled Whether the alert routing rule is enabled
+			Enabled *bool `json:"enabled,omitempty"`
+
+			// Name The name of the alert routing rule
+			Name string `json:"name"`
+
+			// OwnerTeamIds The IDs of the teams which own the alert routing rule. If the user don't have Alert Routing Create Permission in On Call Roles, then this field is required and can contain Team IDs the user is an admin of.
+			OwnerTeamIds *[]openapi_types.UUID `json:"owner_team_ids,omitempty"`
+		} `json:"attributes"`
+		Type NewAlertRoutingRuleDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewAlertRoutingRuleDataAttributesConditionType The type of condition for the alert routing rule
+type NewAlertRoutingRuleDataAttributesConditionType string
+
+// NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType The condition type of the property field
+type NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType string
+
+// NewAlertRoutingRuleDataAttributesConditionsPropertyFieldType The type of the property field
+type NewAlertRoutingRuleDataAttributesConditionsPropertyFieldType string
+
+// NewAlertRoutingRuleDataAttributesDestinationTargetType The type of the target
+type NewAlertRoutingRuleDataAttributesDestinationTargetType string
+
+// NewAlertRoutingRuleDataType defines model for NewAlertRoutingRule.Data.Type.
+type NewAlertRoutingRuleDataType string
 
 // NewAlertUrgency defines model for new_alert_urgency.
 type NewAlertUrgency struct {
@@ -17698,6 +17944,67 @@ type UpdateAlertGroupDataAttributesTargetsTargetType string
 // UpdateAlertGroupDataType defines model for UpdateAlertGroup.Data.Type.
 type UpdateAlertGroupDataType string
 
+// UpdateAlertRoutingRule defines model for update_alert_routing_rule.
+type UpdateAlertRoutingRule struct {
+	Data struct {
+		Attributes struct {
+			// AlertsSourceId The ID of the alerts source
+			AlertsSourceId *openapi_types.UUID `json:"alerts_source_id,omitempty"`
+
+			// ConditionType The type of condition for the alert routing rule
+			ConditionType *UpdateAlertRoutingRuleDataAttributesConditionType `json:"condition_type,omitempty"`
+			Conditions    *[]struct {
+				// Id The ID of the alert routing rule condition
+				Id *openapi_types.UUID `json:"id,omitempty"`
+
+				// PropertyFieldConditionType The condition type of the property field
+				PropertyFieldConditionType *UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType `json:"property_field_condition_type,omitempty"`
+
+				// PropertyFieldName The name of the property field
+				PropertyFieldName *string `json:"property_field_name,omitempty"`
+
+				// PropertyFieldType The type of the property field
+				PropertyFieldType *UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldType `json:"property_field_type,omitempty"`
+
+				// PropertyFieldValue The value of the property field
+				PropertyFieldValue *string `json:"property_field_value,omitempty"`
+			} `json:"conditions,omitempty"`
+			Destination *struct {
+				// TargetId The ID of the target
+				TargetId *openapi_types.UUID `json:"target_id,omitempty"`
+
+				// TargetType The type of the target
+				TargetType *UpdateAlertRoutingRuleDataAttributesDestinationTargetType `json:"target_type,omitempty"`
+			} `json:"destination,omitempty"`
+
+			// Enabled Whether the alert routing rule is enabled
+			Enabled *bool `json:"enabled,omitempty"`
+
+			// Name The name of the alert routing rule
+			Name *string `json:"name,omitempty"`
+
+			// OwnerTeamIds The IDs of the teams that own the alert routing rule
+			OwnerTeamIds *[]openapi_types.UUID `json:"owner_team_ids,omitempty"`
+		} `json:"attributes"`
+		Type UpdateAlertRoutingRuleDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateAlertRoutingRuleDataAttributesConditionType The type of condition for the alert routing rule
+type UpdateAlertRoutingRuleDataAttributesConditionType string
+
+// UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType The condition type of the property field
+type UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType string
+
+// UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldType The type of the property field
+type UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldType string
+
+// UpdateAlertRoutingRuleDataAttributesDestinationTargetType The type of the target
+type UpdateAlertRoutingRuleDataAttributesDestinationTargetType string
+
+// UpdateAlertRoutingRuleDataType defines model for UpdateAlertRoutingRule.Data.Type.
+type UpdateAlertRoutingRuleDataType string
+
 // UpdateAlertUrgency defines model for update_alert_urgency.
 type UpdateAlertUrgency struct {
 	Data struct {
@@ -21717,6 +22024,20 @@ type ListAlertGroupsParams struct {
 	Include *string `form:"include,omitempty" json:"include,omitempty"`
 }
 
+// ListAlertRoutingRulesParams defines parameters for ListAlertRoutingRules.
+type ListAlertRoutingRulesParams struct {
+	Include            *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterSearch       *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
+	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	Sort               *string `form:"sort,omitempty" json:"sort,omitempty"`
+}
+
 // ListAlertSourcesParams defines parameters for ListAlertSources.
 type ListAlertSourcesParams struct {
 	Include           *string `form:"include,omitempty" json:"include,omitempty"`
@@ -22056,9 +22377,15 @@ type GetEscalationPathParamsInclude string
 // ListEscalationPoliciesParams defines parameters for ListEscalationPolicies.
 type ListEscalationPoliciesParams struct {
 	// Include comma separated if needed. eg: escalation_policy_levels,escalation_paths
-	Include    *ListEscalationPoliciesParamsInclude `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber *int                                 `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize   *int                                 `form:"page[size],omitempty" json:"page[size],omitempty"`
+	Include            *ListEscalationPoliciesParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+	FilterSearch       *string                              `form:"filter[search],omitempty" json:"filter[search],omitempty"`
+	FilterName         *string                              `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterCreatedAtGt  *string                              `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string                              `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string                              `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string                              `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	PageNumber         *int                                 `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int                                 `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
 // ListEscalationPoliciesParamsInclude defines parameters for ListEscalationPolicies.
@@ -22747,9 +23074,15 @@ type ListScheduleRotationUsersParams struct {
 
 // ListSchedulesParams defines parameters for ListSchedules.
 type ListSchedulesParams struct {
-	Include    *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	Include            *string `form:"include,omitempty" json:"include,omitempty"`
+	FilterSearch       *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
+	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
 // GetScheduleShiftsParams defines parameters for GetScheduleShifts.
@@ -23061,6 +23394,12 @@ type CreateAlertGroupApplicationVndAPIPlusJSONRequestBody = NewAlertGroup
 
 // UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody defines body for UpdateAlertGroup for application/vnd.api+json ContentType.
 type UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody = UpdateAlertGroup
+
+// CreateAlertRoutingRuleApplicationVndAPIPlusJSONRequestBody defines body for CreateAlertRoutingRule for application/vnd.api+json ContentType.
+type CreateAlertRoutingRuleApplicationVndAPIPlusJSONRequestBody = NewAlertRoutingRule
+
+// UpdateAlertRoutingRuleApplicationVndAPIPlusJSONRequestBody defines body for UpdateAlertRoutingRule for application/vnd.api+json ContentType.
+type UpdateAlertRoutingRuleApplicationVndAPIPlusJSONRequestBody = UpdateAlertRoutingRule
 
 // CreateAlertSourceApplicationVndAPIPlusJSONRequestBody defines body for CreateAlertSource for application/vnd.api+json ContentType.
 type CreateAlertSourceApplicationVndAPIPlusJSONRequestBody = NewAlertsSource
@@ -36613,6 +36952,25 @@ type ClientInterface interface {
 
 	UpdateAlertGroupWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListAlertRoutingRules request
+	ListAlertRoutingRules(ctx context.Context, params *ListAlertRoutingRulesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateAlertRoutingRuleWithBody request with any body
+	CreateAlertRoutingRuleWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateAlertRoutingRuleWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateAlertRoutingRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteAlertRoutingRule request
+	DeleteAlertRoutingRule(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetAlertRoutingRule request
+	GetAlertRoutingRule(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateAlertRoutingRuleWithBody request with any body
+	UpdateAlertRoutingRuleWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateAlertRoutingRuleWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAlertRoutingRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListAlertSources request
 	ListAlertSources(ctx context.Context, params *ListAlertSourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -38319,6 +38677,90 @@ func (c *Client) UpdateAlertGroupWithBody(ctx context.Context, id string, conten
 
 func (c *Client) UpdateAlertGroupWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateAlertGroupRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListAlertRoutingRules(ctx context.Context, params *ListAlertRoutingRulesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListAlertRoutingRulesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateAlertRoutingRuleWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateAlertRoutingRuleRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateAlertRoutingRuleWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateAlertRoutingRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateAlertRoutingRuleRequestWithApplicationVndAPIPlusJSONBody(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteAlertRoutingRule(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteAlertRoutingRuleRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetAlertRoutingRule(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAlertRoutingRuleRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateAlertRoutingRuleWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateAlertRoutingRuleRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateAlertRoutingRuleWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAlertRoutingRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateAlertRoutingRuleRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -45923,6 +46365,354 @@ func NewUpdateAlertGroupRequestWithBody(server string, id string, contentType st
 	return req, nil
 }
 
+// NewListAlertRoutingRulesRequest generates requests for ListAlertRoutingRules
+func NewListAlertRoutingRulesRequest(server string, params *ListAlertRoutingRulesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_routing_rules")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[size]", runtime.ParamLocationQuery, *params.PageSize); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterSearch != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[search]", runtime.ParamLocationQuery, *params.FilterSearch); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterName != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[name]", runtime.ParamLocationQuery, *params.FilterName); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gte]", runtime.ParamLocationQuery, *params.FilterCreatedAtGte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lte]", runtime.ParamLocationQuery, *params.FilterCreatedAtLte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateAlertRoutingRuleRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateAlertRoutingRule builder with application/vnd.api+json body
+func NewCreateAlertRoutingRuleRequestWithApplicationVndAPIPlusJSONBody(server string, body CreateAlertRoutingRuleApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateAlertRoutingRuleRequestWithBody(server, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateAlertRoutingRuleRequestWithBody generates requests for CreateAlertRoutingRule with any type of body
+func NewCreateAlertRoutingRuleRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_routing_rules")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteAlertRoutingRuleRequest generates requests for DeleteAlertRoutingRule
+func NewDeleteAlertRoutingRuleRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_routing_rules/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetAlertRoutingRuleRequest generates requests for GetAlertRoutingRule
+func NewGetAlertRoutingRuleRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_routing_rules/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateAlertRoutingRuleRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateAlertRoutingRule builder with application/vnd.api+json body
+func NewUpdateAlertRoutingRuleRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateAlertRoutingRuleApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateAlertRoutingRuleRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateAlertRoutingRuleRequestWithBody generates requests for UpdateAlertRoutingRule with any type of body
+func NewUpdateAlertRoutingRuleRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_routing_rules/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListAlertSourcesRequest generates requests for ListAlertSources
 func NewListAlertSourcesRequest(server string, params *ListAlertSourcesParams) (*http.Request, error) {
 	var err error
@@ -51900,6 +52690,102 @@ func NewListEscalationPoliciesRequest(server string, params *ListEscalationPolic
 		if params.Include != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterSearch != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[search]", runtime.ParamLocationQuery, *params.FilterSearch); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterName != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[name]", runtime.ParamLocationQuery, *params.FilterName); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gte]", runtime.ParamLocationQuery, *params.FilterCreatedAtGte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lte]", runtime.ParamLocationQuery, *params.FilterCreatedAtLte); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 				return nil, err
@@ -67091,6 +67977,102 @@ func NewListSchedulesRequest(server string, params *ListSchedulesParams) (*http.
 
 		}
 
+		if params.FilterSearch != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[search]", runtime.ParamLocationQuery, *params.FilterSearch); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterName != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[name]", runtime.ParamLocationQuery, *params.FilterName); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gt]", runtime.ParamLocationQuery, *params.FilterCreatedAtGt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][gte]", runtime.ParamLocationQuery, *params.FilterCreatedAtGte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lt]", runtime.ParamLocationQuery, *params.FilterCreatedAtLt); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[created_at][lte]", runtime.ParamLocationQuery, *params.FilterCreatedAtLte); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
 		if params.PageNumber != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page[number]", runtime.ParamLocationQuery, *params.PageNumber); err != nil {
@@ -73315,6 +74297,25 @@ type ClientWithResponsesInterface interface {
 
 	UpdateAlertGroupWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAlertGroupResponse, error)
 
+	// ListAlertRoutingRulesWithResponse request
+	ListAlertRoutingRulesWithResponse(ctx context.Context, params *ListAlertRoutingRulesParams, reqEditors ...RequestEditorFn) (*ListAlertRoutingRulesResponse, error)
+
+	// CreateAlertRoutingRuleWithBodyWithResponse request with any body
+	CreateAlertRoutingRuleWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateAlertRoutingRuleResponse, error)
+
+	CreateAlertRoutingRuleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateAlertRoutingRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateAlertRoutingRuleResponse, error)
+
+	// DeleteAlertRoutingRuleWithResponse request
+	DeleteAlertRoutingRuleWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteAlertRoutingRuleResponse, error)
+
+	// GetAlertRoutingRuleWithResponse request
+	GetAlertRoutingRuleWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetAlertRoutingRuleResponse, error)
+
+	// UpdateAlertRoutingRuleWithBodyWithResponse request with any body
+	UpdateAlertRoutingRuleWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAlertRoutingRuleResponse, error)
+
+	UpdateAlertRoutingRuleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateAlertRoutingRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAlertRoutingRuleResponse, error)
+
 	// ListAlertSourcesWithResponse request
 	ListAlertSourcesWithResponse(ctx context.Context, params *ListAlertSourcesParams, reqEditors ...RequestEditorFn) (*ListAlertSourcesResponse, error)
 
@@ -75098,6 +76099,121 @@ func (r UpdateAlertGroupResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r UpdateAlertGroupResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListAlertRoutingRulesResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *AlertRoutingRuleList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListAlertRoutingRulesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListAlertRoutingRulesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateAlertRoutingRuleResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *AlertRoutingRuleResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateAlertRoutingRuleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateAlertRoutingRuleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteAlertRoutingRuleResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *AlertRoutingRuleResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteAlertRoutingRuleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteAlertRoutingRuleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetAlertRoutingRuleResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *AlertRoutingRuleResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetAlertRoutingRuleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetAlertRoutingRuleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateAlertRoutingRuleResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *AlertRoutingRuleResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateAlertRoutingRuleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateAlertRoutingRuleResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -84645,6 +85761,67 @@ func (c *ClientWithResponses) UpdateAlertGroupWithApplicationVndAPIPlusJSONBodyW
 	return ParseUpdateAlertGroupResponse(rsp)
 }
 
+// ListAlertRoutingRulesWithResponse request returning *ListAlertRoutingRulesResponse
+func (c *ClientWithResponses) ListAlertRoutingRulesWithResponse(ctx context.Context, params *ListAlertRoutingRulesParams, reqEditors ...RequestEditorFn) (*ListAlertRoutingRulesResponse, error) {
+	rsp, err := c.ListAlertRoutingRules(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListAlertRoutingRulesResponse(rsp)
+}
+
+// CreateAlertRoutingRuleWithBodyWithResponse request with arbitrary body returning *CreateAlertRoutingRuleResponse
+func (c *ClientWithResponses) CreateAlertRoutingRuleWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateAlertRoutingRuleResponse, error) {
+	rsp, err := c.CreateAlertRoutingRuleWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateAlertRoutingRuleResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateAlertRoutingRuleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateAlertRoutingRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateAlertRoutingRuleResponse, error) {
+	rsp, err := c.CreateAlertRoutingRuleWithApplicationVndAPIPlusJSONBody(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateAlertRoutingRuleResponse(rsp)
+}
+
+// DeleteAlertRoutingRuleWithResponse request returning *DeleteAlertRoutingRuleResponse
+func (c *ClientWithResponses) DeleteAlertRoutingRuleWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteAlertRoutingRuleResponse, error) {
+	rsp, err := c.DeleteAlertRoutingRule(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteAlertRoutingRuleResponse(rsp)
+}
+
+// GetAlertRoutingRuleWithResponse request returning *GetAlertRoutingRuleResponse
+func (c *ClientWithResponses) GetAlertRoutingRuleWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetAlertRoutingRuleResponse, error) {
+	rsp, err := c.GetAlertRoutingRule(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetAlertRoutingRuleResponse(rsp)
+}
+
+// UpdateAlertRoutingRuleWithBodyWithResponse request with arbitrary body returning *UpdateAlertRoutingRuleResponse
+func (c *ClientWithResponses) UpdateAlertRoutingRuleWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAlertRoutingRuleResponse, error) {
+	rsp, err := c.UpdateAlertRoutingRuleWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateAlertRoutingRuleResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateAlertRoutingRuleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateAlertRoutingRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAlertRoutingRuleResponse, error) {
+	rsp, err := c.UpdateAlertRoutingRuleWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateAlertRoutingRuleResponse(rsp)
+}
+
 // ListAlertSourcesWithResponse request returning *ListAlertSourcesResponse
 func (c *ClientWithResponses) ListAlertSourcesWithResponse(ctx context.Context, params *ListAlertSourcesParams, reqEditors ...RequestEditorFn) (*ListAlertSourcesResponse, error) {
 	rsp, err := c.ListAlertSources(ctx, params, reqEditors...)
@@ -89954,6 +91131,171 @@ func ParseUpdateAlertGroupResponse(rsp *http.Response) (*UpdateAlertGroupRespons
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest AlertGroupResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListAlertRoutingRulesResponse parses an HTTP response from a ListAlertRoutingRulesWithResponse call
+func ParseListAlertRoutingRulesResponse(rsp *http.Response) (*ListAlertRoutingRulesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListAlertRoutingRulesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertRoutingRuleList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateAlertRoutingRuleResponse parses an HTTP response from a CreateAlertRoutingRuleWithResponse call
+func ParseCreateAlertRoutingRuleResponse(rsp *http.Response) (*CreateAlertRoutingRuleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateAlertRoutingRuleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest AlertRoutingRuleResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteAlertRoutingRuleResponse parses an HTTP response from a DeleteAlertRoutingRuleWithResponse call
+func ParseDeleteAlertRoutingRuleResponse(rsp *http.Response) (*DeleteAlertRoutingRuleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteAlertRoutingRuleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertRoutingRuleResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetAlertRoutingRuleResponse parses an HTTP response from a GetAlertRoutingRuleWithResponse call
+func ParseGetAlertRoutingRuleResponse(rsp *http.Response) (*GetAlertRoutingRuleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetAlertRoutingRuleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertRoutingRuleResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateAlertRoutingRuleResponse parses an HTTP response from a UpdateAlertRoutingRuleWithResponse call
+func ParseUpdateAlertRoutingRuleResponse(rsp *http.Response) (*UpdateAlertRoutingRuleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateAlertRoutingRuleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertRoutingRuleResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

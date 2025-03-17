@@ -16,6 +16,7 @@ const excluded = {
   dataSources: [
     "alert",
     "alert_event",
+    "alert_routing_rule",
     "alerts_source",
     "audit",
     "catalog",
@@ -39,6 +40,7 @@ const excluded = {
     "retrospective_configuration",
     "retrospective_process",
     "retrospective_step",
+    "schedule", // cannot auto-generate because of schema upgrade logic
     "secret",
     "shift",
     "user_notification_rule",
@@ -49,6 +51,7 @@ const excluded = {
   resources: [
     "alert",
     "alert_event",
+    "alert_routing_rule",
     "alerts_source",
     "audit",
     "catalog",
@@ -86,6 +89,7 @@ const excluded = {
   tests: [
     "alert_event",
     "alert_group",
+    "alert_routing_rule",
     "alerts_source",
     "authorization",
     "escalation_level",

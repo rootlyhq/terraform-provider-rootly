@@ -51,6 +51,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_cause":                            dataSourceCause(),
 				"rootly_custom_form":                      dataSourceCustomForm(),
 				"rootly_environment":                      dataSourceEnvironment(),
+				"rootly_escalation_policy":                dataSourceEscalationPolicy(),
 				"rootly_form_field_option":                dataSourceFormFieldOption(),
 				"rootly_form_field_placement_condition":   dataSourceFormFieldPlacementCondition(),
 				"rootly_form_field_placement":             dataSourceFormFieldPlacement(),
@@ -97,6 +98,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_teams":                            dataSourceTeams(),
 				"rootly_severities":                       dataSourceSeverities(),
 				"rootly_services":                         dataSourceServices(),
+				"rootly_schedule":                         dataSourceSchedule(),
 			},
 			ResourcesMap: map[string]*schema.Resource{
 				"rootly_alert_urgency":                                    resourceAlertUrgency(),
