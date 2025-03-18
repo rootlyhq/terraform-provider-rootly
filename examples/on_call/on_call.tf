@@ -1,9 +1,7 @@
 terraform {
   required_providers {
     rootly = {
-      # source = "rootlyhq/rootly"
-      source  = "terraform.local/local/rootly"
-      version = "1.0.0"
+      source = "rootlyhq/rootly"
     }
   }
 }
