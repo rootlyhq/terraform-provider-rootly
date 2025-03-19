@@ -1,13 +1,3 @@
-terraform {
-  required_providers {
-    rootly = {
-      source = "rootlyhq/rootly"
-    }
-  }
-}
-
-provider "rootly" {}
-
 data "rootly_user" "john" {
   email = "demo@rootly.com"
 }

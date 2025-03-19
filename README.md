@@ -12,7 +12,7 @@ The [Rootly](https://rootly.com/) provider is used to interact with the resource
 
 ## Example Usage
 
-Provider
+### Provider
 
 ```terraform
 terraform {
@@ -63,7 +63,7 @@ resource "rootly_workflow_task_send_sms" "sms_oncall" {
 }
 ```
 
-Custom form fields
+###Custom form fields
 
 ```terraform
 # Custom form Fields
@@ -91,7 +91,7 @@ resource "rootly_form_field_option" "north_america" {
 }
 ```
 
-Workflows
+### Workflows
 
 ```terraform
 # Jira workflow
@@ -127,7 +127,7 @@ resource "rootly_workflow_task_create_jira_issue" "jira" {
 }
 ```
 
-Dashboards
+### Dashboards
 
 ```terraform
 resource "rootly_dashboard" "overview" {
@@ -161,9 +161,9 @@ resource "rootly_dashboard_panel" "incidents_by_severity" {
 }
 ```
 
-On-Call
+### On-Call
 
-```
+```terraform
 data "rootly_user" "john" {
   email = "demo@rootly.com"
 }
