@@ -380,12 +380,14 @@ const (
 	AlertSourceAzure           AlertSource = "azure"
 	AlertSourceBugSnag         AlertSource = "bug_snag"
 	AlertSourceCatchpoint      AlertSource = "catchpoint"
+	AlertSourceCheckly         AlertSource = "checkly"
 	AlertSourceChronosphere    AlertSource = "chronosphere"
 	AlertSourceClickup         AlertSource = "clickup"
 	AlertSourceCloudWatch      AlertSource = "cloud_watch"
 	AlertSourceDatadog         AlertSource = "datadog"
 	AlertSourceEmail           AlertSource = "email"
 	AlertSourceGenericWebhook  AlertSource = "generic_webhook"
+	AlertSourceGitlab          AlertSource = "gitlab"
 	AlertSourceGoogleCloud     AlertSource = "google_cloud"
 	AlertSourceGrafana         AlertSource = "grafana"
 	AlertSourceHoneycomb       AlertSource = "honeycomb"
@@ -395,6 +397,7 @@ const (
 	AlertSourceManual          AlertSource = "manual"
 	AlertSourceMonteCarlo      AlertSource = "monte_carlo"
 	AlertSourceNagios          AlertSource = "nagios"
+	AlertSourceNewRelic        AlertSource = "new_relic"
 	AlertSourceNobl9           AlertSource = "nobl9"
 	AlertSourceOpsgenie        AlertSource = "opsgenie"
 	AlertSourcePagerduty       AlertSource = "pagerduty"
@@ -497,12 +500,14 @@ const (
 	AlertListDataSourceAzure           AlertListDataSource = "azure"
 	AlertListDataSourceBugSnag         AlertListDataSource = "bug_snag"
 	AlertListDataSourceCatchpoint      AlertListDataSource = "catchpoint"
+	AlertListDataSourceCheckly         AlertListDataSource = "checkly"
 	AlertListDataSourceChronosphere    AlertListDataSource = "chronosphere"
 	AlertListDataSourceClickup         AlertListDataSource = "clickup"
 	AlertListDataSourceCloudWatch      AlertListDataSource = "cloud_watch"
 	AlertListDataSourceDatadog         AlertListDataSource = "datadog"
 	AlertListDataSourceEmail           AlertListDataSource = "email"
 	AlertListDataSourceGenericWebhook  AlertListDataSource = "generic_webhook"
+	AlertListDataSourceGitlab          AlertListDataSource = "gitlab"
 	AlertListDataSourceGoogleCloud     AlertListDataSource = "google_cloud"
 	AlertListDataSourceGrafana         AlertListDataSource = "grafana"
 	AlertListDataSourceHoneycomb       AlertListDataSource = "honeycomb"
@@ -512,6 +517,7 @@ const (
 	AlertListDataSourceManual          AlertListDataSource = "manual"
 	AlertListDataSourceMonteCarlo      AlertListDataSource = "monte_carlo"
 	AlertListDataSourceNagios          AlertListDataSource = "nagios"
+	AlertListDataSourceNewRelic        AlertListDataSource = "new_relic"
 	AlertListDataSourceNobl9           AlertListDataSource = "nobl9"
 	AlertListDataSourceOpsgenie        AlertListDataSource = "opsgenie"
 	AlertListDataSourcePagerduty       AlertListDataSource = "pagerduty"
@@ -543,12 +549,14 @@ const (
 	AlertResponseDataSourceAzure           AlertResponseDataSource = "azure"
 	AlertResponseDataSourceBugSnag         AlertResponseDataSource = "bug_snag"
 	AlertResponseDataSourceCatchpoint      AlertResponseDataSource = "catchpoint"
+	AlertResponseDataSourceCheckly         AlertResponseDataSource = "checkly"
 	AlertResponseDataSourceChronosphere    AlertResponseDataSource = "chronosphere"
 	AlertResponseDataSourceClickup         AlertResponseDataSource = "clickup"
 	AlertResponseDataSourceCloudWatch      AlertResponseDataSource = "cloud_watch"
 	AlertResponseDataSourceDatadog         AlertResponseDataSource = "datadog"
 	AlertResponseDataSourceEmail           AlertResponseDataSource = "email"
 	AlertResponseDataSourceGenericWebhook  AlertResponseDataSource = "generic_webhook"
+	AlertResponseDataSourceGitlab          AlertResponseDataSource = "gitlab"
 	AlertResponseDataSourceGoogleCloud     AlertResponseDataSource = "google_cloud"
 	AlertResponseDataSourceGrafana         AlertResponseDataSource = "grafana"
 	AlertResponseDataSourceHoneycomb       AlertResponseDataSource = "honeycomb"
@@ -558,6 +566,7 @@ const (
 	AlertResponseDataSourceManual          AlertResponseDataSource = "manual"
 	AlertResponseDataSourceMonteCarlo      AlertResponseDataSource = "monte_carlo"
 	AlertResponseDataSourceNagios          AlertResponseDataSource = "nagios"
+	AlertResponseDataSourceNewRelic        AlertResponseDataSource = "new_relic"
 	AlertResponseDataSourceNobl9           AlertResponseDataSource = "nobl9"
 	AlertResponseDataSourceOpsgenie        AlertResponseDataSource = "opsgenie"
 	AlertResponseDataSourcePagerduty       AlertResponseDataSource = "pagerduty"
@@ -2309,12 +2318,14 @@ const (
 	NewAlertDataAttributesSourceAzure           NewAlertDataAttributesSource = "azure"
 	NewAlertDataAttributesSourceBugSnag         NewAlertDataAttributesSource = "bug_snag"
 	NewAlertDataAttributesSourceCatchpoint      NewAlertDataAttributesSource = "catchpoint"
+	NewAlertDataAttributesSourceCheckly         NewAlertDataAttributesSource = "checkly"
 	NewAlertDataAttributesSourceChronosphere    NewAlertDataAttributesSource = "chronosphere"
 	NewAlertDataAttributesSourceClickup         NewAlertDataAttributesSource = "clickup"
 	NewAlertDataAttributesSourceCloudWatch      NewAlertDataAttributesSource = "cloud_watch"
 	NewAlertDataAttributesSourceDatadog         NewAlertDataAttributesSource = "datadog"
 	NewAlertDataAttributesSourceEmail           NewAlertDataAttributesSource = "email"
 	NewAlertDataAttributesSourceGenericWebhook  NewAlertDataAttributesSource = "generic_webhook"
+	NewAlertDataAttributesSourceGitlab          NewAlertDataAttributesSource = "gitlab"
 	NewAlertDataAttributesSourceGoogleCloud     NewAlertDataAttributesSource = "google_cloud"
 	NewAlertDataAttributesSourceGrafana         NewAlertDataAttributesSource = "grafana"
 	NewAlertDataAttributesSourceHoneycomb       NewAlertDataAttributesSource = "honeycomb"
@@ -2324,6 +2335,7 @@ const (
 	NewAlertDataAttributesSourceManual          NewAlertDataAttributesSource = "manual"
 	NewAlertDataAttributesSourceMonteCarlo      NewAlertDataAttributesSource = "monte_carlo"
 	NewAlertDataAttributesSourceNagios          NewAlertDataAttributesSource = "nagios"
+	NewAlertDataAttributesSourceNewRelic        NewAlertDataAttributesSource = "new_relic"
 	NewAlertDataAttributesSourceNobl9           NewAlertDataAttributesSource = "nobl9"
 	NewAlertDataAttributesSourceOpsgenie        NewAlertDataAttributesSource = "opsgenie"
 	NewAlertDataAttributesSourcePagerduty       NewAlertDataAttributesSource = "pagerduty"
@@ -12529,7 +12541,7 @@ type NewAlertRoutingRule struct {
 				// PropertyFieldConditionType The condition type of the property field
 				PropertyFieldConditionType NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType `json:"property_field_condition_type"`
 
-				// PropertyFieldName The name of the property field
+				// PropertyFieldName The name of the property field. If the property field type is selected as 'attribute', then the allowed property field names are 'summary' (for Title), 'description', 'alert_urgency' and 'external_url' (for Alert Source URL). If the property field type is selected as 'payload', then the property field name should be supplied in JSON Path syntax.
 				PropertyFieldName string `json:"property_field_name"`
 
 				// PropertyFieldType The type of the property field
@@ -12552,8 +12564,8 @@ type NewAlertRoutingRule struct {
 			// Name The name of the alert routing rule
 			Name string `json:"name"`
 
-			// OwnerTeamIds The IDs of the teams which own the alert routing rule. If the user don't have Alert Routing Create Permission in On Call Roles, then this field is required and can contain Team IDs the user is an admin of.
-			OwnerTeamIds *[]openapi_types.UUID `json:"owner_team_ids,omitempty"`
+			// OwningTeamIds The IDs of the teams which own the alert routing rule. If the user don't have Alert Routing Create Permission in On Call Roles, then this field is required and can contain Team IDs the user is an admin of.
+			OwningTeamIds *[]openapi_types.UUID `json:"owning_team_ids,omitempty"`
 		} `json:"attributes"`
 		Type NewAlertRoutingRuleDataType `json:"type"`
 	} `json:"data"`
@@ -17957,7 +17969,7 @@ type UpdateAlertRoutingRule struct {
 				// PropertyFieldConditionType The condition type of the property field
 				PropertyFieldConditionType *UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType `json:"property_field_condition_type,omitempty"`
 
-				// PropertyFieldName The name of the property field
+				// PropertyFieldName The name of the property field. If the property field type is selected as 'attribute', then the allowed property field names are 'summary' (for Title), 'description', 'alert_urgency' and 'external_url' (for Alert Source URL). If the property field type is selected as 'payload', then the property field name should be supplied in JSON Path syntax.
 				PropertyFieldName *string `json:"property_field_name,omitempty"`
 
 				// PropertyFieldType The type of the property field
@@ -17980,8 +17992,8 @@ type UpdateAlertRoutingRule struct {
 			// Name The name of the alert routing rule
 			Name *string `json:"name,omitempty"`
 
-			// OwnerTeamIds The IDs of the teams that own the alert routing rule
-			OwnerTeamIds *[]openapi_types.UUID `json:"owner_team_ids,omitempty"`
+			// OwningTeamIds The IDs of the teams that own the alert routing rule
+			OwningTeamIds *[]openapi_types.UUID `json:"owning_team_ids,omitempty"`
 		} `json:"attributes"`
 		Type UpdateAlertRoutingRuleDataType `json:"type"`
 	} `json:"data"`

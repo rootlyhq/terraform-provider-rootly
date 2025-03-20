@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.24.2] -- 2025-03-20
+
+- Update documentation.
+
 ## [2.24.1] -- 2025-03-17
 
 - Update documentation.
