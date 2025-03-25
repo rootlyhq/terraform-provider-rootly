@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.24.3] -- 2025-03-25
+
+- Fix: service pagerduty_id should not be marked computed
+
 ## [2.24.2] -- 2025-03-20
 
 - Update documentation.
