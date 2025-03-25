@@ -183,7 +183,7 @@ function structAttr(name, resourceSchema) {
     case "string":
       return `${inflect.camelize(
         name
-      )} string \`jsonapi:"attr,${name},omitempty"\``;
+      )} string \`jsonapi:"attr,${name}${schema.tf_computed === false ? "" : ",omitempty"}"\``;
     case "integer":
       return `${inflect.camelize(
         name

@@ -19,12 +19,12 @@ type Service struct {
   NotifyEmails []interface{} `jsonapi:"attr,notify_emails,omitempty"`
   Color string `jsonapi:"attr,color,omitempty"`
   Position int `jsonapi:"attr,position,omitempty"`
-  BackstageId string `jsonapi:"attr,backstage_id,omitempty"`
-  ExternalId string `jsonapi:"attr,external_id,omitempty"`
-  PagerdutyId string `jsonapi:"attr,pagerduty_id,omitempty"`
-  OpsgenieId string `jsonapi:"attr,opsgenie_id,omitempty"`
-  CortexId string `jsonapi:"attr,cortex_id,omitempty"`
-  ServiceNowCiSysId string `jsonapi:"attr,service_now_ci_sys_id,omitempty"`
+  BackstageId string `jsonapi:"attr,backstage_id"`
+  ExternalId string `jsonapi:"attr,external_id"`
+  PagerdutyId string `jsonapi:"attr,pagerduty_id"`
+  OpsgenieId string `jsonapi:"attr,opsgenie_id"`
+  CortexId string `jsonapi:"attr,cortex_id"`
+  ServiceNowCiSysId string `jsonapi:"attr,service_now_ci_sys_id"`
   GithubRepositoryName string `jsonapi:"attr,github_repository_name,omitempty"`
   GithubRepositoryBranch string `jsonapi:"attr,github_repository_branch,omitempty"`
   GitlabRepositoryName string `jsonapi:"attr,gitlab_repository_name,omitempty"`
