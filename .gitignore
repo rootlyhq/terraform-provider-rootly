@@ -42,3 +42,4 @@ schema/swagger.json
 node_modules/
 
 terraform-provider-rootly
+.aider*
