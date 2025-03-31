@@ -220,6 +220,18 @@ func resourceStatusPage() *schema.Resource {
 				Description:      "Functionalities attached to the status page",
 			},
 
+			"external_domain_names": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "External domain names attached to the status page",
+			},
+
 			"enabled": &schema.Schema{
 				Type:     schema.TypeBool,
 				Default:  true,
@@ -299,6 +311,9 @@ func resourceStatusPageCreate(ctx context.Context, d *schema.ResourceData, meta 
 	if value, ok := d.GetOkExists("functionality_ids"); ok {
 		s.FunctionalityIds = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("external_domain_names"); ok {
+		s.ExternalDomainNames = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("enabled"); ok {
 		s.Enabled = tools.Bool(value.(bool))
 	}
@@ -352,6 +367,7 @@ func resourceStatusPageRead(ctx context.Context, d *schema.ResourceData, meta in
 	d.Set("public", item.Public)
 	d.Set("service_ids", item.ServiceIds)
 	d.Set("functionality_ids", item.FunctionalityIds)
+	d.Set("external_domain_names", item.ExternalDomainNames)
 	d.Set("enabled", item.Enabled)
 
 	return nil
@@ -425,6 +441,9 @@ func resourceStatusPageUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	}
 	if d.HasChange("functionality_ids") {
 		s.FunctionalityIds = d.Get("functionality_ids").([]interface{})
+	}
+	if d.HasChange("external_domain_names") {
+		s.ExternalDomainNames = d.Get("external_domain_names").([]interface{})
 	}
 	if d.HasChange("enabled") {
 		s.Enabled = tools.Bool(d.Get("enabled").(bool))

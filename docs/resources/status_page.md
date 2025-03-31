@@ -25,6 +25,7 @@ description: |-
 - `authentication_password` (String) Authentication password
 - `description` (String) The description of the status page
 - `enabled` (Boolean)
+- `external_domain_names` (List of String) External domain names attached to the status page
 - `failure_message` (String) Message showing when at least one component is not operational
 - `footer_color` (String) The color of the footer. Eg. "#1F2F41"
 - `functionality_ids` (List of String) Functionalities attached to the status page

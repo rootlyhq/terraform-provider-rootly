@@ -33,6 +33,7 @@ type StatusPage struct {
   Public *bool `jsonapi:"attr,public,omitempty"`
   ServiceIds []interface{} `jsonapi:"attr,service_ids,omitempty"`
   FunctionalityIds []interface{} `jsonapi:"attr,functionality_ids,omitempty"`
+  ExternalDomainNames []interface{} `jsonapi:"attr,external_domain_names,omitempty"`
   Enabled *bool `jsonapi:"attr,enabled,omitempty"`
 }
 
