@@ -178,6 +178,63 @@ func resourceAlertsSource() *schema.Resource {
 				},
 				Description: "Additional attributes specific to certain alert sources (e.g., generic_webhook), encapsulating source-specific configurations or details",
 			},
+
+			"resolution_rule_attributes": &schema.Schema{
+				Type:     schema.TypeList,
+				Optional: true,
+				MinItems: 0,
+				MaxItems: 1,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"enabled": &schema.Schema{
+							Type:     schema.TypeBool,
+							Required: false,
+							Optional: true,
+						},
+						"condition_type": &schema.Schema{
+							Type:     schema.TypeString,
+							Required: false,
+							Optional: true,
+						},
+						"identifier_json_path": &schema.Schema{
+							Type:     schema.TypeString,
+							Required: false,
+							Optional: true,
+						},
+						"identifier_value_regex": &schema.Schema{
+							Type:     schema.TypeString,
+							Required: false,
+							Optional: true
+						},
+						"conditions_attributes": &schema.Schema{
+							Type:             schema.TypeList,
+							Optional:         true,
+							MinItems:         0,
+							MaxItems:         25,
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"field": &schema.Schema{
+										Type:     schema.TypeString,
+										Required: false,
+										Optional: true,
+									},
+									"operator": &schema.Schema{
+										Type:     schema.TypeString,
+										Required: false,
+										Optional: true,
+									},
+									"value": &schema.Schema{
+										Type:     schema.TypeString,
+										Required: false,
+										Optional: true,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
 		},
 	}
 }
