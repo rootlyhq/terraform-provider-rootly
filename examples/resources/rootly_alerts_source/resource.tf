@@ -22,4 +22,21 @@ resource "rootly_alerts_source" "example" {
       json_path = "$.my_id_attribute"
     }
   }
+
+  resolution_rule_attributes {
+    enabled                = true
+    condition_type         = "and"
+    identifier_json_path   = "$.email.subject"
+    identifier_value_regex = "ID:\\s*(\\w+)"
+    conditions_attributes {
+      field    = "$.email.body"
+      operator = "contains"
+      value    = "RESOLVED"
+    }
+    conditions_attributes {
+      field    = "$.email.body"
+      operator = "does_not_contain"
+      value    = "ERROR"
+    }
+  }
 }
