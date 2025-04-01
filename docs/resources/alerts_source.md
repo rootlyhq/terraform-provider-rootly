@@ -36,6 +36,23 @@ resource "rootly_alerts_source" "example" {
       json_path = "$.my_id_attribute"
     }
   }
+
+  resolution_rule_attributes {
+    enabled                = true
+    condition_type         = "and"
+    identifier_json_path   = "$.email.subject"
+    identifier_value_regex = "ID:\\s*(\\w+)"
+    conditions_attributes {
+      field    = "$.email.body"
+      operator = "contains"
+      value    = "RESOLVED"
+    }
+    conditions_attributes {
+      field    = "$.email.body"
+      operator = "does_not_contain"
+      value    = "ERROR"
+    }
+  }
 }
 ```
 
@@ -51,6 +68,7 @@ resource "rootly_alerts_source" "example" {
 - `alert_source_urgency_rules_attributes` (Block List) (see [below for nested schema](#nestedblock--alert_source_urgency_rules_attributes))
 - `alert_template_attributes` (Block List, Max: 1) (see [below for nested schema](#nestedblock--alert_template_attributes))
 - `alert_urgency_id` (String) The alert urgency ID
+- `resolution_rule_attributes` (Block List, Max: 1) (see [below for nested schema](#nestedblock--resolution_rule_attributes))
 - `secret` (String) A secret key used to authenticate incoming requests to this alerts source
 - `source_type` (String) The alert source type
 - `sourceable_attributes` (Block List, Max: 1) Additional attributes specific to certain alert sources (e.g., generic_webhook), encapsulating source-specific configurations or details (see [below for nested schema](#nestedblock--sourceable_attributes))
@@ -80,6 +98,28 @@ Optional:
 - `description` (String)
 - `external_url` (String)
 - `title` (String)
+
+
+<a id="nestedblock--resolution_rule_attributes"></a>
+### Nested Schema for `resolution_rule_attributes`
+
+Optional:
+
+- `condition_type` (String)
+- `conditions_attributes` (Block List, Max: 25) (see [below for nested schema](#nestedblock--resolution_rule_attributes--conditions_attributes))
+- `enabled` (Boolean)
+- `identifier_json_path` (String)
+- `identifier_value_regex` (String)
+
+<a id="nestedblock--resolution_rule_attributes--conditions_attributes"></a>
+### Nested Schema for `resolution_rule_attributes.conditions_attributes`
+
+Optional:
+
+- `field` (String)
+- `operator` (String)
+- `value` (String)
+
 
 
 <a id="nestedblock--sourceable_attributes"></a>
