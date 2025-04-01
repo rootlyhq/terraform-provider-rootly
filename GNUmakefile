@@ -19,7 +19,6 @@ docs:
 	terraform fmt -recursive examples
 	go get github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
 	go run github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
-	cp docs/index.md README.md
 	mv ./docs/data-sources/ip_ranges.md ./docs/data-sources/ip_range.md
 	rm ./docs/data-sources/*s.md
 	mv ./docs/data-sources/ip_range.md ./docs/data-sources/ip_ranges.md
