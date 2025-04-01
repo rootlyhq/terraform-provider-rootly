@@ -204,7 +204,7 @@ func resourceAlertsSource() *schema.Resource {
 						"identifier_value_regex": &schema.Schema{
 							Type:     schema.TypeString,
 							Required: false,
-							Optional: true
+							Optional: true,
 						},
 						"conditions_attributes": &schema.Schema{
 							Type:             schema.TypeList,
