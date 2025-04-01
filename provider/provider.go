@@ -46,6 +46,7 @@ func New(version string) func() *schema.Provider {
 				},
 			},
 			DataSourcesMap: map[string]*schema.Resource{
+				"rootly_alert_routing_rule":               dataSourceAlertRoutingRule(),
 				"rootly_alert_urgency":                    dataSourceAlertUrgency(),
 				"rootly_authorization":                    dataSourceAuthorization(),
 				"rootly_cause":                            dataSourceCause(),
@@ -101,6 +102,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_schedule":                         dataSourceSchedule(),
 			},
 			ResourcesMap: map[string]*schema.Resource{
+				"rootly_alert_routing_rule":                                 resourceAlertRoutingRule(),
 				"rootly_alert_urgency":                                      resourceAlertUrgency(),
 				"rootly_alert_group":                                        resourceAlertGroup(),
 				"rootly_authorization":                                      resourceAuthorization(),

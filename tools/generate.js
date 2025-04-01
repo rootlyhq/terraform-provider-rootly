@@ -16,7 +16,6 @@ const excluded = {
   dataSources: [
     "alert",
     "alert_event",
-    "alert_routing_rule",
     "alerts_source",
     "audit",
     "catalog",
@@ -52,7 +51,6 @@ const excluded = {
   resources: [
     "alert",
     "alert_event",
-    "alert_routing_rule",
     "alerts_source",
     "audit",
     "catalog",
