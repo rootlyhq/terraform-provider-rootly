@@ -132,7 +132,11 @@ func resourceRetrospectiveProcessCreate(ctx context.Context, d *schema.ResourceD
 		s.IsDefault = tools.Bool(value.(bool))
 	}
 	if value, ok := d.GetOkExists("retrospective_process_matching_criteria"); ok {
-		s.RetrospectiveProcessMatchingCriteria = value.([]interface{})[0].(map[string]interface{})
+		if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
+			if mapValue, ok := valueList[0].(map[string]interface{}); ok {
+				s.RetrospectiveProcessMatchingCriteria = mapValue
+			}
+		}
 	}
 
 	res, err := c.CreateRetrospectiveProcess(s)
@@ -167,9 +171,11 @@ func resourceRetrospectiveProcessRead(ctx context.Context, d *schema.ResourceDat
 	d.Set("description", item.Description)
 	d.Set("is_default", item.IsDefault)
 
-	tps := make([]interface{}, 1, 1)
-	tps[0] = item.RetrospectiveProcessMatchingCriteria
-	d.Set("retrospective_process_matching_criteria", tps)
+	if item.RetrospectiveProcessMatchingCriteria != nil {
+		tps := make([]interface{}, 1, 1)
+		tps[0] = item.RetrospectiveProcessMatchingCriteria
+		d.Set("retrospective_process_matching_criteria", tps)
+	}
 
 	return nil
 }
@@ -190,9 +196,12 @@ func resourceRetrospectiveProcessUpdate(ctx context.Context, d *schema.ResourceD
 		s.IsDefault = tools.Bool(d.Get("is_default").(bool))
 	}
 	if d.HasChange("retrospective_process_matching_criteria") {
-		tps := d.Get("retrospective_process_matching_criteria").([]interface{})
-		for _, tpsi := range tps {
-			s.RetrospectiveProcessMatchingCriteria = tpsi.(map[string]interface{})
+		if value, ok := d.GetOk("retrospective_process_matching_criteria"); ok {
+			if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
+				if mapValue, ok := valueList[0].(map[string]interface{}); ok {
+					s.RetrospectiveProcessMatchingCriteria = mapValue
+				}
+			}
 		}
 	}
 
