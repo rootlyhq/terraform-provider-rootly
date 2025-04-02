@@ -270,6 +270,9 @@ func resourceAlertsSourceCreate(ctx context.Context, d *schema.ResourceData, met
 	if value, ok := d.GetOkExists("sourceable_attributes"); ok {
 		s.SourceableAttributes = value.([]interface{})[0].(map[string]interface{})
 	}
+	if value, ok := d.GetOkExists("resolution_rule_attributes"); ok {
+		s.ResolutionRuleAttributes = value.([]interface{})[0].(map[string]interface{})
+	}
 	if value, ok := d.GetOkExists("alert_template_attributes"); ok {
 		s.AlertTemplateAttributes = value.([]interface{})[0].(map[string]interface{})
 	}
@@ -331,6 +334,35 @@ func resourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, meta 
 		d.Set("sourceable_attributes", sourceables)
 	}
 
+	if item.ResolutionRuleAttributes != nil {
+		resolution_rules := make([]interface{}, 1)
+		resolution_rule := make(map[string]interface{})
+
+		resolution_rule["enabled"] = item.ResolutionRuleAttributes["enabled"]
+		resolution_rule["condition_type"] = item.ResolutionRuleAttributes["condition_type"]
+		resolution_rule["identifier_json_path"] = item.ResolutionRuleAttributes["identifier_json_path"]
+		resolution_rule["identifier_value_regex"] = item.ResolutionRuleAttributes["identifier_value_regex"]
+
+		if conditions, ok := item.ResolutionRuleAttributes["conditions_attributes"].([]interface{}); ok {
+			filtered_conditions := make([]map[string]interface{}, 0)
+			for _, cond := range conditions {
+				if condMap, ok := cond.(map[string]interface{}); ok {
+					condition := make(map[string]interface{})
+					for key, val := range condMap {
+						if key == "field" || key == "operator" || key == "value" {
+							condition[key] = val
+						}
+					}
+					filtered_conditions = append(filtered_conditions, condition)
+				}
+			}
+			resolution_rule["conditions_attributes"] = filtered_conditions
+		}
+
+		resolution_rules[0] = resolution_rule
+		d.Set("resolution_rule_attributes", resolution_rules)
+	}
+
 	if item.AlertTemplateAttributes["title"] != nil || item.AlertTemplateAttributes["description"] != nil || item.AlertTemplateAttributes["external_url"] != nil {
 		alert_templates := make([]interface{}, 1, 1)
 		alert_templates[0] = map[string]interface{}{
@@ -381,6 +413,12 @@ func resourceAlertsSourceUpdate(ctx context.Context, d *schema.ResourceData, met
 		tps := d.Get("sourceable_attributes").([]interface{})
 		for _, tpsi := range tps {
 			s.SourceableAttributes = tpsi.(map[string]interface{})
+		}
+	}
+	if d.HasChange("resolution_rule_attributes") {
+		tps := d.Get("resolution_rule_attributes").([]interface{})
+		for _, tpsi := range tps {
+			s.ResolutionRuleAttributes = tpsi.(map[string]interface{})
 		}
 	}
 
