@@ -1,12 +1,16 @@
 # Changelog
 
+## [2.26.0] -- 2025-04-02
+
+- Feat: Add `alert_source` resource.
+
 ## [2.25.0] -- 2025-03-31
 
-- Feat: Add `resolution_rule_attributes` to `rootly_alerts_source`
+- Feat: Add `resolution_rule_attributes` to `rootly_alerts_source`.
 
 ## [2.24.3] -- 2025-03-25
 
-- Fix: service pagerduty_id should not be marked computed
+- Fix: service pagerduty_id should not be marked computed.
 
 ## [2.24.2] -- 2025-03-20
 

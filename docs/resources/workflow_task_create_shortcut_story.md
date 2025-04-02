@@ -37,7 +37,6 @@ Required:
 
 - `archivation` (Map of String) Map must contain two fields, `id` and `name`. The archivation id and display name
 - `kind` (String) Value must be one of `bug`, `chore`, `feature`.
-- `project` (Map of String) Map must contain two fields, `id` and `name`. The project id and display name
 - `title` (String) The incident title
 
 Optional:
@@ -46,4 +45,6 @@ Optional:
 - `due_date` (String) The due date
 - `group` (Map of String) Map must contain two fields, `id` and `name`. The group id and display name
 - `labels` (String) The story labels
+- `project` (Map of String) Map must contain two fields, `id` and `name`. The project id and display name
 - `task_type` (String)
+- `workflow_state` (Map of String) Map must contain two fields, `id` and `name`. The workflow state id workflow state name

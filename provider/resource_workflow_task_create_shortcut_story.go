@@ -117,7 +117,12 @@ func resourceWorkflowTaskCreateShortcutStory() *schema.Resource {
 						"project": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. The project id and display name",
 							Type:        schema.TypeMap,
-							Required:    true,
+							Optional:    true,
+						},
+						"workflow_state": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. The workflow state id workflow state name",
+							Type:        schema.TypeMap,
+							Optional:    true,
 						},
 					},
 				},

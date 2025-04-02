@@ -9551,14 +9551,21 @@ type CreateShortcutStoryTaskParams struct {
 	Labels *string `json:"labels,omitempty"`
 
 	// Project The project id and display name
-	Project struct {
+	Project *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
-	} `json:"project"`
+	} `json:"project,omitempty"`
 	TaskType *CreateShortcutStoryTaskParamsTaskType `json:"task_type,omitempty"`
 
 	// Title The incident title
 	Title string `json:"title"`
+
+	// WorkflowState The workflow state id workflow state name
+	WorkflowState *struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"workflow_state,omitempty"`
+	union json.RawMessage
 }
 
 // CreateShortcutStoryTaskParamsKind defines model for CreateShortcutStoryTaskParams.Kind.
@@ -9566,6 +9573,12 @@ type CreateShortcutStoryTaskParamsKind string
 
 // CreateShortcutStoryTaskParamsTaskType defines model for CreateShortcutStoryTaskParams.TaskType.
 type CreateShortcutStoryTaskParamsTaskType string
+
+// CreateShortcutStoryTaskParams0 defines model for .
+type CreateShortcutStoryTaskParams0 = interface{}
+
+// CreateShortcutStoryTaskParams1 defines model for .
+type CreateShortcutStoryTaskParams1 = interface{}
 
 // CreateShortcutTaskTaskParams defines model for create_shortcut_task_task_params.
 type CreateShortcutTaskTaskParams struct {
@@ -25211,6 +25224,222 @@ func (t *AutoAssignRolePagerdutyTaskParams) UnmarshalJSON(b []byte) error {
 		err = json.Unmarshal(raw, &t.TaskType)
 		if err != nil {
 			return fmt.Errorf("error reading 'task_type': %w", err)
+		}
+	}
+
+	return err
+}
+
+// AsCreateShortcutStoryTaskParams0 returns the union data inside the CreateShortcutStoryTaskParams as a CreateShortcutStoryTaskParams0
+func (t CreateShortcutStoryTaskParams) AsCreateShortcutStoryTaskParams0() (CreateShortcutStoryTaskParams0, error) {
+	var body CreateShortcutStoryTaskParams0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateShortcutStoryTaskParams0 overwrites any union data inside the CreateShortcutStoryTaskParams as the provided CreateShortcutStoryTaskParams0
+func (t *CreateShortcutStoryTaskParams) FromCreateShortcutStoryTaskParams0(v CreateShortcutStoryTaskParams0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateShortcutStoryTaskParams0 performs a merge with any union data inside the CreateShortcutStoryTaskParams, using the provided CreateShortcutStoryTaskParams0
+func (t *CreateShortcutStoryTaskParams) MergeCreateShortcutStoryTaskParams0(v CreateShortcutStoryTaskParams0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsCreateShortcutStoryTaskParams1 returns the union data inside the CreateShortcutStoryTaskParams as a CreateShortcutStoryTaskParams1
+func (t CreateShortcutStoryTaskParams) AsCreateShortcutStoryTaskParams1() (CreateShortcutStoryTaskParams1, error) {
+	var body CreateShortcutStoryTaskParams1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateShortcutStoryTaskParams1 overwrites any union data inside the CreateShortcutStoryTaskParams as the provided CreateShortcutStoryTaskParams1
+func (t *CreateShortcutStoryTaskParams) FromCreateShortcutStoryTaskParams1(v CreateShortcutStoryTaskParams1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateShortcutStoryTaskParams1 performs a merge with any union data inside the CreateShortcutStoryTaskParams, using the provided CreateShortcutStoryTaskParams1
+func (t *CreateShortcutStoryTaskParams) MergeCreateShortcutStoryTaskParams1(v CreateShortcutStoryTaskParams1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t CreateShortcutStoryTaskParams) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	object := make(map[string]json.RawMessage)
+	if t.union != nil {
+		err = json.Unmarshal(b, &object)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	object["archivation"], err = json.Marshal(t.Archivation)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'archivation': %w", err)
+	}
+
+	if t.Description != nil {
+		object["description"], err = json.Marshal(t.Description)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'description': %w", err)
+		}
+	}
+
+	if t.DueDate != nil {
+		object["due_date"], err = json.Marshal(t.DueDate)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'due_date': %w", err)
+		}
+	}
+
+	if t.Group != nil {
+		object["group"], err = json.Marshal(t.Group)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'group': %w", err)
+		}
+	}
+
+	object["kind"], err = json.Marshal(t.Kind)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'kind': %w", err)
+	}
+
+	if t.Labels != nil {
+		object["labels"], err = json.Marshal(t.Labels)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'labels': %w", err)
+		}
+	}
+
+	if t.Project != nil {
+		object["project"], err = json.Marshal(t.Project)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'project': %w", err)
+		}
+	}
+
+	if t.TaskType != nil {
+		object["task_type"], err = json.Marshal(t.TaskType)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'task_type': %w", err)
+		}
+	}
+
+	object["title"], err = json.Marshal(t.Title)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'title': %w", err)
+	}
+
+	if t.WorkflowState != nil {
+		object["workflow_state"], err = json.Marshal(t.WorkflowState)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'workflow_state': %w", err)
+		}
+	}
+	b, err = json.Marshal(object)
+	return b, err
+}
+
+func (t *CreateShortcutStoryTaskParams) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	if err != nil {
+		return err
+	}
+	object := make(map[string]json.RawMessage)
+	err = json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["archivation"]; found {
+		err = json.Unmarshal(raw, &t.Archivation)
+		if err != nil {
+			return fmt.Errorf("error reading 'archivation': %w", err)
+		}
+	}
+
+	if raw, found := object["description"]; found {
+		err = json.Unmarshal(raw, &t.Description)
+		if err != nil {
+			return fmt.Errorf("error reading 'description': %w", err)
+		}
+	}
+
+	if raw, found := object["due_date"]; found {
+		err = json.Unmarshal(raw, &t.DueDate)
+		if err != nil {
+			return fmt.Errorf("error reading 'due_date': %w", err)
+		}
+	}
+
+	if raw, found := object["group"]; found {
+		err = json.Unmarshal(raw, &t.Group)
+		if err != nil {
+			return fmt.Errorf("error reading 'group': %w", err)
+		}
+	}
+
+	if raw, found := object["kind"]; found {
+		err = json.Unmarshal(raw, &t.Kind)
+		if err != nil {
+			return fmt.Errorf("error reading 'kind': %w", err)
+		}
+	}
+
+	if raw, found := object["labels"]; found {
+		err = json.Unmarshal(raw, &t.Labels)
+		if err != nil {
+			return fmt.Errorf("error reading 'labels': %w", err)
+		}
+	}
+
+	if raw, found := object["project"]; found {
+		err = json.Unmarshal(raw, &t.Project)
+		if err != nil {
+			return fmt.Errorf("error reading 'project': %w", err)
+		}
+	}
+
+	if raw, found := object["task_type"]; found {
+		err = json.Unmarshal(raw, &t.TaskType)
+		if err != nil {
+			return fmt.Errorf("error reading 'task_type': %w", err)
+		}
+	}
+
+	if raw, found := object["title"]; found {
+		err = json.Unmarshal(raw, &t.Title)
+		if err != nil {
+			return fmt.Errorf("error reading 'title': %w", err)
+		}
+	}
+
+	if raw, found := object["workflow_state"]; found {
+		err = json.Unmarshal(raw, &t.WorkflowState)
+		if err != nil {
+			return fmt.Errorf("error reading 'workflow_state': %w", err)
 		}
 	}
 
