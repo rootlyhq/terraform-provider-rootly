@@ -603,6 +603,8 @@ const (
 	AlertRoutingRuleConditionsPropertyFieldConditionTypeIs             AlertRoutingRuleConditionsPropertyFieldConditionType = "is"
 	AlertRoutingRuleConditionsPropertyFieldConditionTypeIsEmpty        AlertRoutingRuleConditionsPropertyFieldConditionType = "is_empty"
 	AlertRoutingRuleConditionsPropertyFieldConditionTypeIsNot          AlertRoutingRuleConditionsPropertyFieldConditionType = "is_not"
+	AlertRoutingRuleConditionsPropertyFieldConditionTypeIsNotOneOf     AlertRoutingRuleConditionsPropertyFieldConditionType = "is_not_one_of"
+	AlertRoutingRuleConditionsPropertyFieldConditionTypeIsOneOf        AlertRoutingRuleConditionsPropertyFieldConditionType = "is_one_of"
 	AlertRoutingRuleConditionsPropertyFieldConditionTypeMatchesRegex   AlertRoutingRuleConditionsPropertyFieldConditionType = "matches_regex"
 	AlertRoutingRuleConditionsPropertyFieldConditionTypeStartsWith     AlertRoutingRuleConditionsPropertyFieldConditionType = "starts_with"
 )
@@ -2429,6 +2431,8 @@ const (
 	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIs             NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is"
 	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIsEmpty        NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is_empty"
 	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIsNot          NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is_not"
+	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIsNotOneOf     NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is_not_one_of"
+	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIsOneOf        NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is_one_of"
 	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeMatchesRegex   NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "matches_regex"
 	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeStartsWith     NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "starts_with"
 )
@@ -4991,6 +4995,8 @@ const (
 	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIs             UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is"
 	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIsEmpty        UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is_empty"
 	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIsNot          UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is_not"
+	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIsNotOneOf     UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is_not_one_of"
+	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIsOneOf        UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is_one_of"
 	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeMatchesRegex   UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "matches_regex"
 	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeStartsWith     UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "starts_with"
 )
