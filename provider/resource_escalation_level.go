@@ -185,7 +185,26 @@ func resourceEscalationLevelRead(ctx context.Context, d *schema.ResourceData, me
 	d.Set("paging_strategy_configuration_schedule_strategy", item.PagingStrategyConfigurationScheduleStrategy)
 	d.Set("delay", item.Delay)
 	d.Set("position", item.Position)
-	d.Set("notification_target_params", item.NotificationTargetParams)
+
+	if item.NotificationTargetParams != nil {
+		processedItems := make([]map[string]interface{}, 0)
+
+		for _, c := range item.NotificationTargetParams {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processedItem := map[string]interface{}{
+					"id":           rawItem["id"],
+					"type":         rawItem["type"],
+					"team_members": rawItem["team_members"],
+				}
+				processedItems = append(processedItems, processedItem)
+			}
+		}
+
+		d.Set("notification_target_params", processedItems)
+	} else {
+		d.Set("notification_target_params", nil)
+	}
 
 	return nil
 }

@@ -164,15 +164,6 @@ resource "rootly_dashboard_panel" "incidents_by_severity" {
 ### On-Call
 
 ```terraform
-terraform {
-  required_providers {
-    rootly = {
-      source  = "terraform.local/local/rootly"
-      version = "1.0.0"
-    }
-  }
-}
-
 data "rootly_user" "john" {
   email = "demo@rootly.com"
 }
@@ -188,22 +179,6 @@ data "rootly_alert_urgency" "low" {
 resource "rootly_team" "sre" {
   name     = "SREs On-Call"
   user_ids = [data.rootly_user.john.id, data.rootly_user.jane.id]
-}
-
-resource "rootly_alert_routing_rule" "all" {
-  name             = "All alerts"
-  alerts_source_id = "ea41d0a5-fba5-4c2e-9b0f-6d81eed72e2b"
-  destination {
-    target_id   = rootly_team.sre.id
-    target_type = "Group"
-  }
-  condition_type = "all"
-  conditions {
-    property_field_condition_type = "is"
-    property_field_name           = "environment"
-    property_field_type           = "payload"
-    property_field_value          = "production"
-  }
 }
 
 resource "rootly_schedule" "primary" {
@@ -316,6 +291,11 @@ resource "rootly_escalation_level" "first" {
   escalation_policy_path_id = rootly_escalation_path.default.id
   escalation_policy_id      = rootly_escalation_policy.primary.id
   position                  = 1
+  notification_target_params {
+    team_members = "all"
+    type         = "slack_channel"
+    id           = "C06D4QHLAUE"
+  }
   notification_target_params {
     type         = "schedule"
     id           = rootly_schedule.primary.id

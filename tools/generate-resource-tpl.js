@@ -151,9 +151,32 @@ function setResourceFields(name, resourceSchema) {
     .filter(excludeDateFields)
     .map((field) => {
       const schema = resourceSchema.properties[field];
-      if (schema.type == "object" && schema.properties && !name.match(/_(params|attributes)$/)) {
+      if (schema.type == "array" && schema.items.type == "object" && schema.items.properties) {
+        return `
+          if item.${inflect.camelize(field)} != nil {
+              processedItems := make([]map[string]interface{}, 0)
+
+              for _, c := range item.${inflect.camelize(field)} {
+                  if rawItem, ok := c.(map[string]interface{}); ok {
+                      // Create a new map with only the fields defined in the schema
+                      processedItem := map[string]interface{}{
+                          ${Object.keys(schema.items.properties).map((key) => `"${key}": rawItem["${key}"]`).join(",\n")},
+                      }
+                      processedItems = append(processedItems, processedItem)
+                  }
+              }
+
+              d.Set("${field}", processedItems)
+          } else {
+              d.Set("${field}", nil)
+          }
+        `;
+      } else if (schema.type == "object" && schema.properties && !name.match(/_(params|attributes)$/)) {
         return `singleton_list := make([]interface{}, 1, 1)
-          singleton_list[0] = item.${inflect.camelize(field)}
+          processedItem := map[string]interface{}{
+            ${Object.keys(schema.properties).map((key) => `"${key}": item.${inflect.camelize(field)}["${key}"]`).join(",\n")},
+          }
+          singleton_list[0] = processedItem
           d.Set("${field}", singleton_list)
         `;
       }

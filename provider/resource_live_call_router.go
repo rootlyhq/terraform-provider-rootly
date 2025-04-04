@@ -260,7 +260,11 @@ func resourceLiveCallRouterRead(ctx context.Context, d *schema.ResourceData, met
 	d.Set("should_auto_resolve_alert_on_call_end", item.ShouldAutoResolveAlertOnCallEnd)
 	d.Set("alert_urgency_id", item.AlertUrgencyId)
 	singleton_list := make([]interface{}, 1, 1)
-	singleton_list[0] = item.EscalationPolicyTriggerParams
+	processedItem := map[string]interface{}{
+		"id":   item.EscalationPolicyTriggerParams["id"],
+		"type": item.EscalationPolicyTriggerParams["type"],
+	}
+	singleton_list[0] = processedItem
 	d.Set("escalation_policy_trigger_params", singleton_list)
 
 	return nil

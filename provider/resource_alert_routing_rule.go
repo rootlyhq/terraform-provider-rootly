@@ -204,9 +204,34 @@ func resourceAlertRoutingRuleRead(ctx context.Context, d *schema.ResourceData, m
 	d.Set("enabled", item.Enabled)
 	d.Set("alerts_source_id", item.AlertsSourceId)
 	d.Set("condition_type", item.ConditionType)
-	d.Set("conditions", item.Conditions)
+
+	if item.Conditions != nil {
+		processedItems := make([]map[string]interface{}, 0)
+
+		for _, c := range item.Conditions {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processedItem := map[string]interface{}{
+					"property_field_type":           rawItem["property_field_type"],
+					"property_field_name":           rawItem["property_field_name"],
+					"property_field_condition_type": rawItem["property_field_condition_type"],
+					"property_field_value":          rawItem["property_field_value"],
+				}
+				processedItems = append(processedItems, processedItem)
+			}
+		}
+
+		d.Set("conditions", processedItems)
+	} else {
+		d.Set("conditions", nil)
+	}
+
 	singleton_list := make([]interface{}, 1, 1)
-	singleton_list[0] = item.Destination
+	processedItem := map[string]interface{}{
+		"target_type": item.Destination["target_type"],
+		"target_id":   item.Destination["target_id"],
+	}
+	singleton_list[0] = processedItem
 	d.Set("destination", singleton_list)
 
 	return nil

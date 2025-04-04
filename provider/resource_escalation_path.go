@@ -238,7 +238,29 @@ func resourceEscalationPathRead(ctx context.Context, d *schema.ResourceData, met
 	d.Set("position", item.Position)
 	d.Set("repeat", item.Repeat)
 	d.Set("repeat_count", item.RepeatCount)
-	d.Set("rules", item.Rules)
+
+	if item.Rules != nil {
+		processedItems := make([]map[string]interface{}, 0)
+
+		for _, c := range item.Rules {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processedItem := map[string]interface{}{
+					"rule_type":           rawItem["rule_type"],
+					"urgency_ids":         rawItem["urgency_ids"],
+					"within_working_hour": rawItem["within_working_hour"],
+					"json_path":           rawItem["json_path"],
+					"operator":            rawItem["operator"],
+					"value":               rawItem["value"],
+				}
+				processedItems = append(processedItems, processedItem)
+			}
+		}
+
+		d.Set("rules", processedItems)
+	} else {
+		d.Set("rules", nil)
+	}
 
 	return nil
 }

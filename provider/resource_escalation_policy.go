@@ -222,7 +222,13 @@ func resourceEscalationPolicyRead(ctx context.Context, d *schema.ResourceData, m
 	d.Set("group_ids", item.GroupIds)
 	d.Set("service_ids", item.ServiceIds)
 	singleton_list := make([]interface{}, 1, 1)
-	singleton_list[0] = item.BusinessHours
+	processedItem := map[string]interface{}{
+		"time_zone":  item.BusinessHours["time_zone"],
+		"days":       item.BusinessHours["days"],
+		"start_time": item.BusinessHours["start_time"],
+		"end_time":   item.BusinessHours["end_time"],
+	}
+	singleton_list[0] = processedItem
 	d.Set("business_hours", singleton_list)
 
 	return nil
