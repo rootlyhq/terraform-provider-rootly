@@ -54,6 +54,7 @@ ${dataSources
     return `				"rootly_${name}": dataSource${inflect.camelize(name)}(),`;
   })
   .join("\n")}
+				"rootly_alerts_source": dataSourceAlertsSource(),
 				"rootly_custom_field": dataSourceCustomField(),
 				"rootly_custom_field_option": dataSourceCustomFieldOption(),
 				"rootly_causes": dataSourceCauses(),
