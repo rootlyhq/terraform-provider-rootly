@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.26.2] -- 2025-04-03
+
+- Fix: `alert_routing_rule` resource conditions field.
+
 ## [2.26.0] -- 2025-04-02
 
 - Feat: Add `alert_source` resource.

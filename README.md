@@ -5,7 +5,6 @@ The [Rootly](https://rootly.com/) provider is used to interact with the resource
 ## Usage
 
 Please see the [Terraform Registry documentation](https://registry.terraform.io/providers/rootlyhq/rootly/latest/docs) or [examples/](examples).
-}
 
 ## Develop
 
@@ -14,6 +13,12 @@ Please see the [Terraform Registry documentation](https://registry.terraform.io/
 Exclude API resources from the provider by adding them to the ignore-list in `tools/generate.js`.
 
 ### Local build
+
+```
+# build local terraform provider, note every time you make a change
+go build -o terraform-provider-rootly
+
+```
 
 Configure a local Terraform registry `terraform.local` in `~/.terraform.rc`
 
@@ -31,6 +36,10 @@ provider_installation {
 After building, copy the plugin to the local registry. Change the architecture label as necessary.
 
 ```
+# make the directory
+mkdir -p ~/.terraform.d/plugins/terraform.local/local/rootly/1.0.0/darwin_arm64/
+
+# copy the provider
 cp terraform-provider-rootly ~/.terraform.d/plugins/terraform.local/local/rootly/1.0.0/darwin_arm64/terraform-provider-rootly_v1.0.0
 ```
 

@@ -165,7 +165,11 @@ func resourceAlertRoutingRuleCreate(ctx context.Context, d *schema.ResourceData,
 		s.Conditions = value.([]interface{})
 	}
 	if value, ok := d.GetOkExists("destination"); ok {
-		s.Destination = value.(map[string]interface{})
+		if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
+			if mapValue, ok := valueList[0].(map[string]interface{}); ok {
+				s.Destination = mapValue
+			}
+		}
 	}
 
 	res, err := c.CreateAlertRoutingRule(s)
@@ -200,8 +204,35 @@ func resourceAlertRoutingRuleRead(ctx context.Context, d *schema.ResourceData, m
 	d.Set("enabled", item.Enabled)
 	d.Set("alerts_source_id", item.AlertsSourceId)
 	d.Set("condition_type", item.ConditionType)
-	d.Set("conditions", item.Conditions)
-	d.Set("destination", item.Destination)
+
+	if item.Conditions != nil {
+		processedItems := make([]map[string]interface{}, 0)
+
+		for _, c := range item.Conditions {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processedItem := map[string]interface{}{
+					"property_field_type":           rawItem["property_field_type"],
+					"property_field_name":           rawItem["property_field_name"],
+					"property_field_condition_type": rawItem["property_field_condition_type"],
+					"property_field_value":          rawItem["property_field_value"],
+				}
+				processedItems = append(processedItems, processedItem)
+			}
+		}
+
+		d.Set("conditions", processedItems)
+	} else {
+		d.Set("conditions", nil)
+	}
+
+	singleton_list := make([]interface{}, 1, 1)
+	processedItem := map[string]interface{}{
+		"target_type": item.Destination["target_type"],
+		"target_id":   item.Destination["target_id"],
+	}
+	singleton_list[0] = processedItem
+	d.Set("destination", singleton_list)
 
 	return nil
 }
@@ -228,7 +259,10 @@ func resourceAlertRoutingRuleUpdate(ctx context.Context, d *schema.ResourceData,
 		s.Conditions = d.Get("conditions").([]interface{})
 	}
 	if d.HasChange("destination") {
-		s.Destination = d.Get("destination").(map[string]interface{})
+		tps := d.Get("destination").([]interface{})
+		for _, tpsi := range tps {
+			s.Destination = tpsi.(map[string]interface{})
+		}
 	}
 
 	_, err := c.UpdateAlertRoutingRule(d.Id(), s)

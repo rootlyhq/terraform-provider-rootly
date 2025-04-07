@@ -464,8 +464,44 @@ func resourceServiceRead(ctx context.Context, d *schema.ResourceData, meta inter
 	d.Set("alert_urgency_id", item.AlertUrgencyId)
 	d.Set("alerts_email_enabled", item.AlertsEmailEnabled)
 	d.Set("alerts_email_address", item.AlertsEmailAddress)
-	d.Set("slack_channels", item.SlackChannels)
-	d.Set("slack_aliases", item.SlackAliases)
+
+	if item.SlackChannels != nil {
+		processedItems := make([]map[string]interface{}, 0)
+
+		for _, c := range item.SlackChannels {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processedItem := map[string]interface{}{
+					"id":   rawItem["id"],
+					"name": rawItem["name"],
+				}
+				processedItems = append(processedItems, processedItem)
+			}
+		}
+
+		d.Set("slack_channels", processedItems)
+	} else {
+		d.Set("slack_channels", nil)
+	}
+
+	if item.SlackAliases != nil {
+		processedItems := make([]map[string]interface{}, 0)
+
+		for _, c := range item.SlackAliases {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processedItem := map[string]interface{}{
+					"id":   rawItem["id"],
+					"name": rawItem["name"],
+				}
+				processedItems = append(processedItems, processedItem)
+			}
+		}
+
+		d.Set("slack_aliases", processedItems)
+	} else {
+		d.Set("slack_aliases", nil)
+	}
 
 	return nil
 }

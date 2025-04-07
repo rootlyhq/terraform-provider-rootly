@@ -179,7 +179,11 @@ func resourceEscalationPolicyCreate(ctx context.Context, d *schema.ResourceData,
 		s.ServiceIds = value.([]interface{})
 	}
 	if value, ok := d.GetOkExists("business_hours"); ok {
-		s.BusinessHours = value.(map[string]interface{})
+		if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
+			if mapValue, ok := valueList[0].(map[string]interface{}); ok {
+				s.BusinessHours = mapValue
+			}
+		}
 	}
 
 	res, err := c.CreateEscalationPolicy(s)
@@ -217,7 +221,15 @@ func resourceEscalationPolicyRead(ctx context.Context, d *schema.ResourceData, m
 	d.Set("last_updated_by_user_id", item.LastUpdatedByUserId)
 	d.Set("group_ids", item.GroupIds)
 	d.Set("service_ids", item.ServiceIds)
-	d.Set("business_hours", item.BusinessHours)
+	singleton_list := make([]interface{}, 1, 1)
+	processedItem := map[string]interface{}{
+		"time_zone":  item.BusinessHours["time_zone"],
+		"days":       item.BusinessHours["days"],
+		"start_time": item.BusinessHours["start_time"],
+		"end_time":   item.BusinessHours["end_time"],
+	}
+	singleton_list[0] = processedItem
+	d.Set("business_hours", singleton_list)
 
 	return nil
 }
@@ -250,7 +262,10 @@ func resourceEscalationPolicyUpdate(ctx context.Context, d *schema.ResourceData,
 		s.ServiceIds = d.Get("service_ids").([]interface{})
 	}
 	if d.HasChange("business_hours") {
-		s.BusinessHours = d.Get("business_hours").(map[string]interface{})
+		tps := d.Get("business_hours").([]interface{})
+		for _, tpsi := range tps {
+			s.BusinessHours = tpsi.(map[string]interface{})
+		}
 	}
 
 	_, err := c.UpdateEscalationPolicy(d.Id(), s)

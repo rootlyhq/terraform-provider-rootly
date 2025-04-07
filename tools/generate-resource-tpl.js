@@ -150,6 +150,36 @@ function setResourceFields(name, resourceSchema) {
   return Object.keys(resourceSchema.properties)
     .filter(excludeDateFields)
     .map((field) => {
+      const schema = resourceSchema.properties[field];
+      if (schema.type == "array" && schema.items.type == "object" && schema.items.properties) {
+        return `
+          if item.${inflect.camelize(field)} != nil {
+              processedItems := make([]map[string]interface{}, 0)
+
+              for _, c := range item.${inflect.camelize(field)} {
+                  if rawItem, ok := c.(map[string]interface{}); ok {
+                      // Create a new map with only the fields defined in the schema
+                      processedItem := map[string]interface{}{
+                          ${Object.keys(schema.items.properties).map((key) => `"${key}": rawItem["${key}"]`).join(",\n")},
+                      }
+                      processedItems = append(processedItems, processedItem)
+                  }
+              }
+
+              d.Set("${field}", processedItems)
+          } else {
+              d.Set("${field}", nil)
+          }
+        `;
+      } else if (schema.type == "object" && schema.properties && !name.match(/_(params|attributes)$/)) {
+        return `singleton_list := make([]interface{}, 1, 1)
+          processedItem := map[string]interface{}{
+            ${Object.keys(schema.properties).map((key) => `"${key}": item.${inflect.camelize(field)}["${key}"]`).join(",\n")},
+          }
+          singleton_list[0] = processedItem
+          d.Set("${field}", singleton_list)
+        `;
+      }
       return `d.Set("${field}", item.${inflect.camelize(field)})`;
     })
     .join("\n  ");
@@ -165,6 +195,14 @@ function createResourceFields(name, resourceSchema) {
 				s.${inflect.camelize(field)} = tools.Bool(value.(${jsonapiToGoType(
           schema.type
         )}))
+			}`;
+      } else if (schema.type == "object" && schema.properties && !name.match(/_(params|attributes)$/)) {
+        return `  if value, ok := d.GetOkExists("${field}"); ok {
+				if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
+          if mapValue, ok := valueList[0].(map[string]interface{}); ok {
+    				s.${inflect.camelize(field)} = mapValue
+          }
+        }
 			}`;
       } else {
         return `  if value, ok := d.GetOkExists("${field}"); ok {
@@ -186,6 +224,14 @@ function updateResourceFields(name, resourceSchema) {
           schema.type
         )}))
 			}`;
+      } else if (schema.type == "object" && schema.properties && !name.match(/_(params|attributes)$/)) {
+        return `  if d.HasChange("${field}") {
+      		tps := d.Get("${field}").([]interface{})
+      		for _, tpsi := range tps {
+      			s.${inflect.camelize(field)} = tpsi.(map[string]interface{})
+      		}
+      	}
+			`;
       } else if (schema.tf_include_unchanged) {
         return `
 				s.${inflect.camelize(field)} = d.Get("${field}").(${jsonapiToGoType(

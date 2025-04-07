@@ -124,7 +124,25 @@ func resourceScheduleRotationActiveDayRead(ctx context.Context, d *schema.Resour
 
 	d.Set("schedule_rotation_id", item.ScheduleRotationId)
 	d.Set("day_name", item.DayName)
-	d.Set("active_time_attributes", item.ActiveTimeAttributes)
+
+	if item.ActiveTimeAttributes != nil {
+		processedItems := make([]map[string]interface{}, 0)
+
+		for _, c := range item.ActiveTimeAttributes {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processedItem := map[string]interface{}{
+					"start_time": rawItem["start_time"],
+					"end_time":   rawItem["end_time"],
+				}
+				processedItems = append(processedItems, processedItem)
+			}
+		}
+
+		d.Set("active_time_attributes", processedItems)
+	} else {
+		d.Set("active_time_attributes", nil)
+	}
 
 	return nil
 }

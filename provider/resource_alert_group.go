@@ -224,8 +224,44 @@ func resourceAlertGroupRead(ctx context.Context, d *schema.ResourceData, meta in
 	d.Set("time_window", item.TimeWindow)
 	d.Set("group_by_alert_title", item.GroupByAlertTitle)
 	d.Set("group_by_alert_urgency", item.GroupByAlertUrgency)
-	d.Set("targets", item.Targets)
-	d.Set("attributes", item.Attributes)
+
+	if item.Targets != nil {
+		processedItems := make([]map[string]interface{}, 0)
+
+		for _, c := range item.Targets {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processedItem := map[string]interface{}{
+					"target_type": rawItem["target_type"],
+					"target_id":   rawItem["target_id"],
+				}
+				processedItems = append(processedItems, processedItem)
+			}
+		}
+
+		d.Set("targets", processedItems)
+	} else {
+		d.Set("targets", nil)
+	}
+
+	if item.Attributes != nil {
+		processedItems := make([]map[string]interface{}, 0)
+
+		for _, c := range item.Attributes {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processedItem := map[string]interface{}{
+					"json_path": rawItem["json_path"],
+				}
+				processedItems = append(processedItems, processedItem)
+			}
+		}
+
+		d.Set("attributes", processedItems)
+	} else {
+		d.Set("attributes", nil)
+	}
+
 	d.Set("deleted_at", item.DeletedAt)
 
 	return nil

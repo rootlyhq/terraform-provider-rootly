@@ -210,7 +210,11 @@ func resourceLiveCallRouterCreate(ctx context.Context, d *schema.ResourceData, m
 		s.AlertUrgencyId = value.(string)
 	}
 	if value, ok := d.GetOkExists("escalation_policy_trigger_params"); ok {
-		s.EscalationPolicyTriggerParams = value.(map[string]interface{})
+		if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
+			if mapValue, ok := valueList[0].(map[string]interface{}); ok {
+				s.EscalationPolicyTriggerParams = mapValue
+			}
+		}
 	}
 
 	res, err := c.CreateLiveCallRouter(s)
@@ -255,7 +259,13 @@ func resourceLiveCallRouterRead(ctx context.Context, d *schema.ResourceData, met
 	d.Set("escalation_level_delay_in_seconds", item.EscalationLevelDelayInSeconds)
 	d.Set("should_auto_resolve_alert_on_call_end", item.ShouldAutoResolveAlertOnCallEnd)
 	d.Set("alert_urgency_id", item.AlertUrgencyId)
-	d.Set("escalation_policy_trigger_params", item.EscalationPolicyTriggerParams)
+	singleton_list := make([]interface{}, 1, 1)
+	processedItem := map[string]interface{}{
+		"id":   item.EscalationPolicyTriggerParams["id"],
+		"type": item.EscalationPolicyTriggerParams["type"],
+	}
+	singleton_list[0] = processedItem
+	d.Set("escalation_policy_trigger_params", singleton_list)
 
 	return nil
 }
@@ -309,7 +319,10 @@ func resourceLiveCallRouterUpdate(ctx context.Context, d *schema.ResourceData, m
 		s.AlertUrgencyId = d.Get("alert_urgency_id").(string)
 	}
 	if d.HasChange("escalation_policy_trigger_params") {
-		s.EscalationPolicyTriggerParams = d.Get("escalation_policy_trigger_params").(map[string]interface{})
+		tps := d.Get("escalation_policy_trigger_params").([]interface{})
+		for _, tpsi := range tps {
+			s.EscalationPolicyTriggerParams = tpsi.(map[string]interface{})
+		}
 	}
 
 	_, err := c.UpdateLiveCallRouter(d.Id(), s)

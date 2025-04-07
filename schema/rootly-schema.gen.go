@@ -745,6 +745,7 @@ const (
 
 // Defines values for AuditItemType.
 const (
+	AuditItemTypeApiKey                         AuditItemType = "ApiKey"
 	AuditItemTypeCause                          AuditItemType = "Cause"
 	AuditItemTypeCustomField                    AuditItemType = "CustomField"
 	AuditItemTypeCustomFieldOption              AuditItemType = "CustomFieldOption"
@@ -1608,6 +1609,11 @@ const (
 // Defines values for GeniusCreateOpenaiChatCompletionTaskParamsTaskType.
 const (
 	GeniusOpenaiChatCompletion GeniusCreateOpenaiChatCompletionTaskParamsTaskType = "genius_openai_chat_completion"
+)
+
+// Defines values for GeniusCreateWatsonxChatCompletionTaskParamsTaskType.
+const (
+	GeniusCreateWatsonxChatCompletionTask GeniusCreateWatsonxChatCompletionTaskParamsTaskType = "genius_create_watsonx_chat_completion_task"
 )
 
 // Defines values for GetAlertsTaskParamsTaskType.
@@ -10835,6 +10841,21 @@ type GeniusCreateOpenaiChatCompletionTaskParams struct {
 // GeniusCreateOpenaiChatCompletionTaskParamsTaskType defines model for GeniusCreateOpenaiChatCompletionTaskParams.TaskType.
 type GeniusCreateOpenaiChatCompletionTaskParamsTaskType string
 
+// GeniusCreateWatsonxChatCompletionTaskParams defines model for genius_create_watsonx_chat_completion_task_params.
+type GeniusCreateWatsonxChatCompletionTaskParams struct {
+	// Model The WatsonX model. eg: ibm/granite-3-b8b-instruct
+	Model struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"model"`
+	ProjectId string                                               `json:"project_id"`
+	Prompt    string                                               `json:"prompt"`
+	TaskType  *GeniusCreateWatsonxChatCompletionTaskParamsTaskType `json:"task_type,omitempty"`
+}
+
+// GeniusCreateWatsonxChatCompletionTaskParamsTaskType defines model for GeniusCreateWatsonxChatCompletionTaskParams.TaskType.
+type GeniusCreateWatsonxChatCompletionTaskParamsTaskType string
+
 // GetAlertsTaskParams defines model for get_alerts_task_params.
 type GetAlertsTaskParams struct {
 	EnvironmentIds                 *[]string `json:"environment_ids,omitempty"`
@@ -16087,6 +16108,9 @@ type PostMortemTemplate struct {
 
 	// Name The name of the postmortem template
 	Name string `json:"name"`
+
+	// Slug The slugified name of the postmortem template
+	Slug *string `json:"slug,omitempty"`
 
 	// UpdatedAt Date of last update
 	UpdatedAt string `json:"updated_at"`
@@ -30034,6 +30058,32 @@ func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeGeniusCreateOpenaiChat
 	return err
 }
 
+// AsGeniusCreateWatsonxChatCompletionTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a GeniusCreateWatsonxChatCompletionTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsGeniusCreateWatsonxChatCompletionTaskParams() (GeniusCreateWatsonxChatCompletionTaskParams, error) {
+	var body GeniusCreateWatsonxChatCompletionTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromGeniusCreateWatsonxChatCompletionTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided GeniusCreateWatsonxChatCompletionTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromGeniusCreateWatsonxChatCompletionTaskParams(v GeniusCreateWatsonxChatCompletionTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeGeniusCreateWatsonxChatCompletionTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided GeniusCreateWatsonxChatCompletionTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeGeniusCreateWatsonxChatCompletionTaskParams(v GeniusCreateWatsonxChatCompletionTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 func (t NewWorkflowTask_Data_Attributes_TaskParams) MarshalJSON() ([]byte, error) {
 	b, err := t.union.MarshalJSON()
 	return b, err
@@ -34225,6 +34275,32 @@ func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeGeniusCreateOpenaiC
 	return err
 }
 
+// AsGeniusCreateWatsonxChatCompletionTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a GeniusCreateWatsonxChatCompletionTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsGeniusCreateWatsonxChatCompletionTaskParams() (GeniusCreateWatsonxChatCompletionTaskParams, error) {
+	var body GeniusCreateWatsonxChatCompletionTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromGeniusCreateWatsonxChatCompletionTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided GeniusCreateWatsonxChatCompletionTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromGeniusCreateWatsonxChatCompletionTaskParams(v GeniusCreateWatsonxChatCompletionTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeGeniusCreateWatsonxChatCompletionTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided GeniusCreateWatsonxChatCompletionTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeGeniusCreateWatsonxChatCompletionTaskParams(v GeniusCreateWatsonxChatCompletionTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 func (t UpdateWorkflowTask_Data_Attributes_TaskParams) MarshalJSON() ([]byte, error) {
 	b, err := t.union.MarshalJSON()
 	return b, err
@@ -37485,6 +37561,32 @@ func (t *WorkflowTask_TaskParams) FromGeniusCreateOpenaiChatCompletionTaskParams
 
 // MergeGeniusCreateOpenaiChatCompletionTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided GeniusCreateOpenaiChatCompletionTaskParams
 func (t *WorkflowTask_TaskParams) MergeGeniusCreateOpenaiChatCompletionTaskParams(v GeniusCreateOpenaiChatCompletionTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsGeniusCreateWatsonxChatCompletionTaskParams returns the union data inside the WorkflowTask_TaskParams as a GeniusCreateWatsonxChatCompletionTaskParams
+func (t WorkflowTask_TaskParams) AsGeniusCreateWatsonxChatCompletionTaskParams() (GeniusCreateWatsonxChatCompletionTaskParams, error) {
+	var body GeniusCreateWatsonxChatCompletionTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromGeniusCreateWatsonxChatCompletionTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided GeniusCreateWatsonxChatCompletionTaskParams
+func (t *WorkflowTask_TaskParams) FromGeniusCreateWatsonxChatCompletionTaskParams(v GeniusCreateWatsonxChatCompletionTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeGeniusCreateWatsonxChatCompletionTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided GeniusCreateWatsonxChatCompletionTaskParams
+func (t *WorkflowTask_TaskParams) MergeGeniusCreateWatsonxChatCompletionTaskParams(v GeniusCreateWatsonxChatCompletionTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
