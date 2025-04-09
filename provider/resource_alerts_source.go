@@ -311,7 +311,28 @@ func resourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, meta 
 	d.Set("status", item.Status)
 	d.Set("secret", item.Secret)
 	d.Set("webhook_endpoint", item.WebhookEndpoint)
-	d.Set("alert_source_urgency_rules_attributes", item.AlertSourceUrgencyRulesAttributes)
+
+	if item.AlertSourceUrgencyRulesAttributes != nil {
+		processedItems := make([]map[string]interface{}, 0)
+
+		for _, c := range item.AlertSourceUrgencyRulesAttributes {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processedItem := map[string]interface{}{
+					"alert_urgency_id": rawItem["alert_urgency_id"],
+					"json_path":        rawItem["json_path"],
+					"operator":         rawItem["operator"],
+					"value":            rawItem["value"],
+				}
+				processedItems = append(processedItems, processedItem)
+			}
+		}
+
+		d.Set("alert_source_urgency_rules_attributes", processedItems)
+	} else {
+		d.Set("alert_source_urgency_rules_attributes", nil)
+	}
+
 	if item_field_mappings, ok := item.SourceableAttributes["field_mappings_attributes"].([]interface{}); ok {
 		sourceables := make([]interface{}, 1, 1)
 		field_mappings := make([]map[string]interface{}, 0)
