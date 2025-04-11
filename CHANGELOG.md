@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.26.5] -- 2024-04-03
+
+- Enhance: Improved documentation for `alert_routing_rule` property field names.
+- Enhance: Added documentation for WatsonX chat completion task prompt.
+- Feat: Added `accept_threaded_emails` and `owner_group_ids` to alert source attributes.
+
 ## [2.26.2] -- 2025-04-03
 
 - Fix: `alert_routing_rule` resource conditions field.

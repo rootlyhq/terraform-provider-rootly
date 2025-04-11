@@ -83,7 +83,7 @@ func resourceAlertRoutingRule() *schema.Resource {
 							Required:    false,
 							Optional:    true,
 							ForceNew:    false,
-							Description: "The name of the property field",
+							Description: "The name of the property field. If the property field type is selected as 'attribute', then the allowed property field names are 'summary' (for Title), 'description', 'alert_urgency' and 'external_url' (for Alert Source URL). If the property field type is selected as 'payload', then the property field name should be supplied in JSON Path syntax.",
 						},
 
 						"property_field_condition_type": &schema.Schema{

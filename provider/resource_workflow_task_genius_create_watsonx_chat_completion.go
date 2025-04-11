@@ -80,7 +80,7 @@ func resourceWorkflowTaskGeniusCreateWatsonxChatCompletion() *schema.Resource {
 							Required:    true,
 						},
 						"prompt": &schema.Schema{
-							Description: "",
+							Description: "The prompt to send to WatsonX",
 							Type:        schema.TypeString,
 							Required:    true,
 						},

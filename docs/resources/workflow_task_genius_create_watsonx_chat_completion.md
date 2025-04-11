@@ -37,7 +37,7 @@ Required:
 
 - `model` (Map of String) Map must contain two fields, `id` and `name`. The WatsonX model. eg: ibm/granite-3-b8b-instruct
 - `project_id` (String)
-- `prompt` (String)
+- `prompt` (String) The prompt to send to WatsonX
 
 Optional:
 
