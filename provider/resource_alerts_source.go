@@ -68,6 +68,18 @@ func resourceAlertsSource() *schema.Resource {
 				Description: "A secret key used to authenticate incoming requests to this alerts source",
 			},
 
+			"owner_group_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "The group IDS owning this alert source. Note, groups are rootly_team resource in Terraform.",
+			},
+
 			"webhook_endpoint": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
@@ -264,6 +276,9 @@ func resourceAlertsSourceCreate(ctx context.Context, d *schema.ResourceData, met
 	if value, ok := d.GetOkExists("webhook_endpoint"); ok {
 		s.WebhookEndpoint = value.(string)
 	}
+	if value, ok := d.GetOkExists("owner_group_ids"); ok {
+		s.OwnerGroupIds = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("alert_source_urgency_rules_attributes"); ok {
 		s.AlertSourceUrgencyRulesAttributes = value.([]interface{})
 	}
@@ -311,6 +326,7 @@ func resourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, meta 
 	d.Set("status", item.Status)
 	d.Set("secret", item.Secret)
 	d.Set("webhook_endpoint", item.WebhookEndpoint)
+	d.Set("owner_group_ids", item.OwnerGroupIds)
 
 	if item.AlertSourceUrgencyRulesAttributes != nil {
 		processedItems := make([]map[string]interface{}, 0)
@@ -420,6 +436,9 @@ func resourceAlertsSourceUpdate(ctx context.Context, d *schema.ResourceData, met
 	}
 	if d.HasChange("webhook_endpoint") {
 		s.WebhookEndpoint = d.Get("webhook_endpoint").(string)
+	}
+	if d.HasChange("owner_group_ids") {
+		s.OwnerGroupIds = d.Get("owner_group_ids").([]interface{})
 	}
 	if d.HasChange("alert_source_urgency_rules_attributes") {
 		s.AlertSourceUrgencyRulesAttributes = d.Get("alert_source_urgency_rules_attributes").([]interface{})

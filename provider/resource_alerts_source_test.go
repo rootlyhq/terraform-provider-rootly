@@ -22,6 +22,11 @@ func TestAccResourceAlertsSource(t *testing.T) {
 }
 
 const testAccResourceAlertsSource = `
+resource "rootly_team" "tf" {
+	name = "tf"
+	description = "tf"
+}
+
 resource "rootly_alert_urgency" "tf" {
 	name = "tf"
 	description = "tf"
@@ -32,6 +37,7 @@ resource "rootly_alerts_source" "tf" {
   name = "TF"
 
   source_type = "generic_webhook"
+  owner_group_ids = [rootly_team.tf.id]
 
   alert_source_urgency_rules_attributes {
 	alert_urgency_id = rootly_alert_urgency.tf.id

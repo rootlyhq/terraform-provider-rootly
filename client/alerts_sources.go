@@ -22,6 +22,7 @@ type AlertsSource struct {
 	AlertTemplateAttributes           map[string]interface{} `jsonapi:"attr,alert_template_attributes,omitempty"`
 	SourceableAttributes              map[string]interface{} `jsonapi:"attr,sourceable_attributes,omitempty"`
 	ResolutionRuleAttributes          map[string]interface{} `jsonapi:"attr,resolution_rule_attributes,omitempty"`
+	OwnerGroupIds                     []interface{}          `jsonapi:"attr,owner_group_ids,omitempty"`
 }
 
 func (c *Client) ListAlertsSources(params *rootlygo.ListAlertSourcesParams) ([]interface{}, error) {
