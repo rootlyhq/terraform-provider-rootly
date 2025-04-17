@@ -10178,6 +10178,9 @@ type EscalationPath struct {
 	// EscalationPolicyId The ID of the escalation policy
 	EscalationPolicyId string `json:"escalation_policy_id"`
 
+	// InitialDelay Initial delay for escalation path in minutes.
+	InitialDelay *int `json:"initial_delay,omitempty"`
+
 	// MatchMode How path rules are matched.
 	MatchMode *EscalationPathMatchMode `json:"match_mode,omitempty"`
 
@@ -13289,6 +13292,9 @@ type NewEscalationPath struct {
 			// Default Whether this escalation path is the default path
 			Default *bool `json:"default"`
 
+			// InitialDelay Initial delay for escalation path in minutes.
+			InitialDelay *int `json:"initial_delay,omitempty"`
+
 			// MatchMode How path rules are matched.
 			MatchMode *NewEscalationPathDataAttributesMatchMode `json:"match_mode,omitempty"`
 
@@ -14846,7 +14852,7 @@ type NewScheduleRotation struct {
 				// HandoffDay Hand off day for monthly rotation
 				HandoffDay *NewScheduleRotationDataAttributesScheduleRotationableAttributesHandoffDay `json:"handoff_day,omitempty"`
 
-				// HandoffTime Hand off time for custom rotation
+				// HandoffTime Hand off time for custom rotation. Required for daily and weekly shift units.
 				HandoffTime *string `json:"handoff_time,omitempty"`
 
 				// ShiftLength Shift length for custom rotation
@@ -18903,6 +18909,9 @@ type UpdateEscalationPath struct {
 		Attributes struct {
 			// Default Whether this escalation path is the default path
 			Default *bool `json:"default"`
+
+			// InitialDelay Initial delay for escalation path in minutes.
+			InitialDelay *int `json:"initial_delay,omitempty"`
 
 			// MatchMode How path rules are matched.
 			MatchMode *UpdateEscalationPathDataAttributesMatchMode `json:"match_mode,omitempty"`

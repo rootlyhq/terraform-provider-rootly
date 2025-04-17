@@ -20,6 +20,7 @@ type EscalationPath struct {
   Position int `jsonapi:"attr,position,omitempty"`
   Repeat *bool `jsonapi:"attr,repeat,omitempty"`
   RepeatCount int `jsonapi:"attr,repeat_count,omitempty"`
+  InitialDelay int `jsonapi:"attr,initial_delay,omitempty"`
   Rules []interface{} `jsonapi:"attr,rules,omitempty"`
 }
 

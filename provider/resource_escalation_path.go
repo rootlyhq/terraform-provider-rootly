@@ -95,6 +95,15 @@ func resourceEscalationPath() *schema.Resource {
 				Description: "The number of times this path will be executed until someone acknowledges the alert",
 			},
 
+			"initial_delay": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Initial delay for escalation path in minutes.",
+			},
+
 			"rules": &schema.Schema{
 				Type:             schema.TypeList,
 				Computed:         true,
@@ -198,6 +207,9 @@ func resourceEscalationPathCreate(ctx context.Context, d *schema.ResourceData, m
 	if value, ok := d.GetOkExists("repeat_count"); ok {
 		s.RepeatCount = value.(int)
 	}
+	if value, ok := d.GetOkExists("initial_delay"); ok {
+		s.InitialDelay = value.(int)
+	}
 	if value, ok := d.GetOkExists("rules"); ok {
 		s.Rules = value.([]interface{})
 	}
@@ -238,6 +250,7 @@ func resourceEscalationPathRead(ctx context.Context, d *schema.ResourceData, met
 	d.Set("position", item.Position)
 	d.Set("repeat", item.Repeat)
 	d.Set("repeat_count", item.RepeatCount)
+	d.Set("initial_delay", item.InitialDelay)
 
 	if item.Rules != nil {
 		processedItems := make([]map[string]interface{}, 0)
@@ -294,6 +307,9 @@ func resourceEscalationPathUpdate(ctx context.Context, d *schema.ResourceData, m
 	}
 	if d.HasChange("repeat_count") {
 		s.RepeatCount = d.Get("repeat_count").(int)
+	}
+	if d.HasChange("initial_delay") {
+		s.InitialDelay = d.Get("initial_delay").(int)
 	}
 	if d.HasChange("rules") {
 		s.Rules = d.Get("rules").([]interface{})

@@ -68,6 +68,7 @@ resource "rootly_alerts_source" "example" {
 - `alert_source_urgency_rules_attributes` (Block List) (see [below for nested schema](#nestedblock--alert_source_urgency_rules_attributes))
 - `alert_template_attributes` (Block List, Max: 1) (see [below for nested schema](#nestedblock--alert_template_attributes))
 - `alert_urgency_id` (String) The alert urgency ID
+- `owner_group_ids` (List of String) The group IDS owning this alert source. Note, groups are rootly_team resource in Terraform.
 - `resolution_rule_attributes` (Block List, Max: 1) (see [below for nested schema](#nestedblock--resolution_rule_attributes))
 - `secret` (String) A secret key used to authenticate incoming requests to this alerts source
 - `source_type` (String) The alert source type
