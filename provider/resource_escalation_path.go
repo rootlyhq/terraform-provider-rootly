@@ -101,7 +101,7 @@ func resourceEscalationPath() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "Initial delay for escalation path in minutes.",
+				Description: "Initial delay for escalation path in minutes. Maximum 1 week (10080).",
 			},
 
 			"rules": &schema.Schema{

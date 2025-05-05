@@ -178,7 +178,7 @@ resource "rootly_escalation_level" "second" {
 
 - `default` (Boolean) Whether this escalation path is the default path. Value must be one of true or false
 - `escalation_policy_id` (String) The ID of the escalation policy
-- `initial_delay` (Number) Initial delay for escalation path in minutes.
+- `initial_delay` (Number) Initial delay for escalation path in minutes. Maximum 1 week (10080).
 - `match_mode` (String) How path rules are matched.. Value must be one of `match-all-rules`, `match-any-rule`.
 - `notification_type` (String) Notification rule type
 - `position` (Number) The position of this path in the paths for this EP.

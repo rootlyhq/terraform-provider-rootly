@@ -88,11 +88,11 @@ func resourceAlertRoutingRule() *schema.Resource {
 
 						"property_field_condition_type": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "is",
+							Default:     "is_one_of",
 							Required:    false,
 							Optional:    true,
 							ForceNew:    false,
-							Description: "The condition type of the property field. Value must be one of `is`, `is_not`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is_empty`, `is_one_of`, `is_not_one_of`.",
+							Description: "The condition type of the property field. Value must be one of `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is`, `is_not`, `is_empty`.",
 						},
 
 						"property_field_value": &schema.Schema{

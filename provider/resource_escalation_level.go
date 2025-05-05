@@ -104,7 +104,7 @@ func resourceEscalationLevel() *schema.Resource {
 							Required:    false,
 							Optional:    true,
 							ForceNew:    false,
-							Description: "The type of the notification target. Value must be one of `team`, `user`, `schedule`, `slack_channel`.",
+							Description: "The type of the notification target. Value must be one of `team`, `user`, `schedule`, `slack_channel`, `service`.",
 						},
 
 						"team_members": &schema.Schema{
@@ -113,7 +113,7 @@ func resourceEscalationLevel() *schema.Resource {
 							Required:    false,
 							Optional:    true,
 							ForceNew:    false,
-							Description: "For targets with type=team, controls whether to notify admins or all team members.. Value must be one of `all`, `admins`.",
+							Description: "For targets with type=team, controls whether to notify admins, all team members, or escalate to team EP.. Value must be one of `all`, `admins`, `escalate`.",
 						},
 					},
 				},

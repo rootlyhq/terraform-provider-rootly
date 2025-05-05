@@ -374,6 +374,7 @@ const (
 // Defines values for AlertSource.
 const (
 	AlertSourceAlertmanager    AlertSource = "alertmanager"
+	AlertSourceApi             AlertSource = "api"
 	AlertSourceAppDynamics     AlertSource = "app_dynamics"
 	AlertSourceAppOptics       AlertSource = "app_optics"
 	AlertSourceAsana           AlertSource = "asana"
@@ -494,6 +495,7 @@ const (
 // Defines values for AlertListDataSource.
 const (
 	AlertListDataSourceAlertmanager    AlertListDataSource = "alertmanager"
+	AlertListDataSourceApi             AlertListDataSource = "api"
 	AlertListDataSourceAppDynamics     AlertListDataSource = "app_dynamics"
 	AlertListDataSourceAppOptics       AlertListDataSource = "app_optics"
 	AlertListDataSourceAsana           AlertListDataSource = "asana"
@@ -543,6 +545,7 @@ const (
 // Defines values for AlertResponseDataSource.
 const (
 	AlertResponseDataSourceAlertmanager    AlertResponseDataSource = "alertmanager"
+	AlertResponseDataSourceApi             AlertResponseDataSource = "api"
 	AlertResponseDataSourceAppDynamics     AlertResponseDataSource = "app_dynamics"
 	AlertResponseDataSourceAppOptics       AlertResponseDataSource = "app_optics"
 	AlertResponseDataSourceAsana           AlertResponseDataSource = "asana"
@@ -1340,13 +1343,15 @@ const (
 
 // Defines values for EscalationLevelNotificationTargetParamsTeamMembers.
 const (
-	EscalationLevelNotificationTargetParamsTeamMembersAdmins EscalationLevelNotificationTargetParamsTeamMembers = "admins"
-	EscalationLevelNotificationTargetParamsTeamMembersAll    EscalationLevelNotificationTargetParamsTeamMembers = "all"
+	EscalationLevelNotificationTargetParamsTeamMembersAdmins   EscalationLevelNotificationTargetParamsTeamMembers = "admins"
+	EscalationLevelNotificationTargetParamsTeamMembersAll      EscalationLevelNotificationTargetParamsTeamMembers = "all"
+	EscalationLevelNotificationTargetParamsTeamMembersEscalate EscalationLevelNotificationTargetParamsTeamMembers = "escalate"
 )
 
 // Defines values for EscalationLevelNotificationTargetParamsType.
 const (
 	EscalationLevelNotificationTargetParamsTypeSchedule     EscalationLevelNotificationTargetParamsType = "schedule"
+	EscalationLevelNotificationTargetParamsTypeService      EscalationLevelNotificationTargetParamsType = "service"
 	EscalationLevelNotificationTargetParamsTypeSlackChannel EscalationLevelNotificationTargetParamsType = "slack_channel"
 	EscalationLevelNotificationTargetParamsTypeTeam         EscalationLevelNotificationTargetParamsType = "team"
 	EscalationLevelNotificationTargetParamsTypeUser         EscalationLevelNotificationTargetParamsType = "user"
@@ -2331,6 +2336,7 @@ const (
 // Defines values for NewAlertDataAttributesSource.
 const (
 	NewAlertDataAttributesSourceAlertmanager    NewAlertDataAttributesSource = "alertmanager"
+	NewAlertDataAttributesSourceApi             NewAlertDataAttributesSource = "api"
 	NewAlertDataAttributesSourceAppDynamics     NewAlertDataAttributesSource = "app_dynamics"
 	NewAlertDataAttributesSourceAppOptics       NewAlertDataAttributesSource = "app_optics"
 	NewAlertDataAttributesSourceAsana           NewAlertDataAttributesSource = "asana"
@@ -2675,13 +2681,15 @@ const (
 
 // Defines values for NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembers.
 const (
-	NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembersAdmins NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembers = "admins"
-	NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembersAll    NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembers = "all"
+	NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembersAdmins   NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembers = "admins"
+	NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembersAll      NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembers = "all"
+	NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembersEscalate NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembers = "escalate"
 )
 
 // Defines values for NewEscalationLevelDataAttributesNotificationTargetParamsType.
 const (
 	NewEscalationLevelDataAttributesNotificationTargetParamsTypeSchedule     NewEscalationLevelDataAttributesNotificationTargetParamsType = "schedule"
+	NewEscalationLevelDataAttributesNotificationTargetParamsTypeService      NewEscalationLevelDataAttributesNotificationTargetParamsType = "service"
 	NewEscalationLevelDataAttributesNotificationTargetParamsTypeSlackChannel NewEscalationLevelDataAttributesNotificationTargetParamsType = "slack_channel"
 	NewEscalationLevelDataAttributesNotificationTargetParamsTypeTeam         NewEscalationLevelDataAttributesNotificationTargetParamsType = "team"
 	NewEscalationLevelDataAttributesNotificationTargetParamsTypeUser         NewEscalationLevelDataAttributesNotificationTargetParamsType = "user"
@@ -3730,29 +3738,32 @@ const (
 
 // Defines values for NewWebhooksEndpointDataAttributesEventTypes.
 const (
-	NewWebhooksEndpointDataAttributesEventTypesAlertCreated                NewWebhooksEndpointDataAttributesEventTypes = "alert.created"
-	NewWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunCanceled   NewWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.canceled"
-	NewWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunCompleted  NewWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.completed"
-	NewWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunFailed     NewWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.failed"
-	NewWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunQueued     NewWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.queued"
-	NewWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunStarted    NewWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.started"
-	NewWebhooksEndpointDataAttributesEventTypesIncidentCancelled           NewWebhooksEndpointDataAttributesEventTypes = "incident.cancelled"
-	NewWebhooksEndpointDataAttributesEventTypesIncidentCreated             NewWebhooksEndpointDataAttributesEventTypes = "incident.created"
-	NewWebhooksEndpointDataAttributesEventTypesIncidentDeleted             NewWebhooksEndpointDataAttributesEventTypes = "incident.deleted"
-	NewWebhooksEndpointDataAttributesEventTypesIncidentInTriage            NewWebhooksEndpointDataAttributesEventTypes = "incident.in_triage"
-	NewWebhooksEndpointDataAttributesEventTypesIncidentMitigated           NewWebhooksEndpointDataAttributesEventTypes = "incident.mitigated"
-	NewWebhooksEndpointDataAttributesEventTypesIncidentPostMortemCreated   NewWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.created"
-	NewWebhooksEndpointDataAttributesEventTypesIncidentPostMortemDeleted   NewWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.deleted"
-	NewWebhooksEndpointDataAttributesEventTypesIncidentPostMortemPublished NewWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.published"
-	NewWebhooksEndpointDataAttributesEventTypesIncidentPostMortemUpdated   NewWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.updated"
-	NewWebhooksEndpointDataAttributesEventTypesIncidentResolved            NewWebhooksEndpointDataAttributesEventTypes = "incident.resolved"
-	NewWebhooksEndpointDataAttributesEventTypesIncidentScheduledCompleted  NewWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.completed"
-	NewWebhooksEndpointDataAttributesEventTypesIncidentScheduledCreated    NewWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.created"
-	NewWebhooksEndpointDataAttributesEventTypesIncidentScheduledDeleted    NewWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.deleted"
-	NewWebhooksEndpointDataAttributesEventTypesIncidentScheduledInProgress NewWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.in_progress"
-	NewWebhooksEndpointDataAttributesEventTypesIncidentScheduledUpdated    NewWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.updated"
-	NewWebhooksEndpointDataAttributesEventTypesIncidentUpdated             NewWebhooksEndpointDataAttributesEventTypes = "incident.updated"
-	NewWebhooksEndpointDataAttributesEventTypesPulseCreated                NewWebhooksEndpointDataAttributesEventTypes = "pulse.created"
+	NewWebhooksEndpointDataAttributesEventTypesAlertCreated                   NewWebhooksEndpointDataAttributesEventTypes = "alert.created"
+	NewWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunCanceled      NewWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.canceled"
+	NewWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunCompleted     NewWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.completed"
+	NewWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunFailed        NewWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.failed"
+	NewWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunQueued        NewWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.queued"
+	NewWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunStarted       NewWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.started"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentCancelled              NewWebhooksEndpointDataAttributesEventTypes = "incident.cancelled"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentCreated                NewWebhooksEndpointDataAttributesEventTypes = "incident.created"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentDeleted                NewWebhooksEndpointDataAttributesEventTypes = "incident.deleted"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentInTriage               NewWebhooksEndpointDataAttributesEventTypes = "incident.in_triage"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentMitigated              NewWebhooksEndpointDataAttributesEventTypes = "incident.mitigated"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentPostMortemCreated      NewWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.created"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentPostMortemDeleted      NewWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.deleted"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentPostMortemPublished    NewWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.published"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentPostMortemUpdated      NewWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.updated"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentResolved               NewWebhooksEndpointDataAttributesEventTypes = "incident.resolved"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentScheduledCompleted     NewWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.completed"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentScheduledCreated       NewWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.created"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentScheduledDeleted       NewWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.deleted"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentScheduledInProgress    NewWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.in_progress"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentScheduledUpdated       NewWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.updated"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentStatusPageEventCreated NewWebhooksEndpointDataAttributesEventTypes = "incident_status_page_event.created"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentStatusPageEventDeleted NewWebhooksEndpointDataAttributesEventTypes = "incident_status_page_event.deleted"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentStatusPageEventUpdated NewWebhooksEndpointDataAttributesEventTypes = "incident_status_page_event.updated"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentUpdated                NewWebhooksEndpointDataAttributesEventTypes = "incident.updated"
+	NewWebhooksEndpointDataAttributesEventTypesPulseCreated                   NewWebhooksEndpointDataAttributesEventTypes = "pulse.created"
 )
 
 // Defines values for NewWebhooksEndpointDataType.
@@ -4906,6 +4917,7 @@ const (
 // Defines values for UpdateAlertDataAttributesSource.
 const (
 	UpdateAlertDataAttributesSourceAlertmanager    UpdateAlertDataAttributesSource = "alertmanager"
+	UpdateAlertDataAttributesSourceApi             UpdateAlertDataAttributesSource = "api"
 	UpdateAlertDataAttributesSourceAppDynamics     UpdateAlertDataAttributesSource = "app_dynamics"
 	UpdateAlertDataAttributesSourceAppOptics       UpdateAlertDataAttributesSource = "app_optics"
 	UpdateAlertDataAttributesSourceAsana           UpdateAlertDataAttributesSource = "asana"
@@ -5255,13 +5267,15 @@ const (
 
 // Defines values for UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers.
 const (
-	UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembersAdmins UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers = "admins"
-	UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembersAll    UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers = "all"
+	UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembersAdmins   UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers = "admins"
+	UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembersAll      UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers = "all"
+	UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembersEscalate UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers = "escalate"
 )
 
 // Defines values for UpdateEscalationLevelDataAttributesNotificationTargetParamsType.
 const (
 	UpdateEscalationLevelDataAttributesNotificationTargetParamsTypeSchedule     UpdateEscalationLevelDataAttributesNotificationTargetParamsType = "schedule"
+	UpdateEscalationLevelDataAttributesNotificationTargetParamsTypeService      UpdateEscalationLevelDataAttributesNotificationTargetParamsType = "service"
 	UpdateEscalationLevelDataAttributesNotificationTargetParamsTypeSlackChannel UpdateEscalationLevelDataAttributesNotificationTargetParamsType = "slack_channel"
 	UpdateEscalationLevelDataAttributesNotificationTargetParamsTypeTeam         UpdateEscalationLevelDataAttributesNotificationTargetParamsType = "team"
 	UpdateEscalationLevelDataAttributesNotificationTargetParamsTypeUser         UpdateEscalationLevelDataAttributesNotificationTargetParamsType = "user"
@@ -6527,29 +6541,32 @@ const (
 
 // Defines values for UpdateWebhooksEndpointDataAttributesEventTypes.
 const (
-	UpdateWebhooksEndpointDataAttributesEventTypesAlertCreated                UpdateWebhooksEndpointDataAttributesEventTypes = "alert.created"
-	UpdateWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunCanceled   UpdateWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.canceled"
-	UpdateWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunCompleted  UpdateWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.completed"
-	UpdateWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunFailed     UpdateWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.failed"
-	UpdateWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunQueued     UpdateWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.queued"
-	UpdateWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunStarted    UpdateWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.started"
-	UpdateWebhooksEndpointDataAttributesEventTypesIncidentCancelled           UpdateWebhooksEndpointDataAttributesEventTypes = "incident.cancelled"
-	UpdateWebhooksEndpointDataAttributesEventTypesIncidentCreated             UpdateWebhooksEndpointDataAttributesEventTypes = "incident.created"
-	UpdateWebhooksEndpointDataAttributesEventTypesIncidentDeleted             UpdateWebhooksEndpointDataAttributesEventTypes = "incident.deleted"
-	UpdateWebhooksEndpointDataAttributesEventTypesIncidentInTriage            UpdateWebhooksEndpointDataAttributesEventTypes = "incident.in_triage"
-	UpdateWebhooksEndpointDataAttributesEventTypesIncidentMitigated           UpdateWebhooksEndpointDataAttributesEventTypes = "incident.mitigated"
-	UpdateWebhooksEndpointDataAttributesEventTypesIncidentPostMortemCreated   UpdateWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.created"
-	UpdateWebhooksEndpointDataAttributesEventTypesIncidentPostMortemDeleted   UpdateWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.deleted"
-	UpdateWebhooksEndpointDataAttributesEventTypesIncidentPostMortemPublished UpdateWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.published"
-	UpdateWebhooksEndpointDataAttributesEventTypesIncidentPostMortemUpdated   UpdateWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.updated"
-	UpdateWebhooksEndpointDataAttributesEventTypesIncidentResolved            UpdateWebhooksEndpointDataAttributesEventTypes = "incident.resolved"
-	UpdateWebhooksEndpointDataAttributesEventTypesIncidentScheduledCompleted  UpdateWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.completed"
-	UpdateWebhooksEndpointDataAttributesEventTypesIncidentScheduledCreated    UpdateWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.created"
-	UpdateWebhooksEndpointDataAttributesEventTypesIncidentScheduledDeleted    UpdateWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.deleted"
-	UpdateWebhooksEndpointDataAttributesEventTypesIncidentScheduledInProgress UpdateWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.in_progress"
-	UpdateWebhooksEndpointDataAttributesEventTypesIncidentScheduledUpdated    UpdateWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.updated"
-	UpdateWebhooksEndpointDataAttributesEventTypesIncidentUpdated             UpdateWebhooksEndpointDataAttributesEventTypes = "incident.updated"
-	UpdateWebhooksEndpointDataAttributesEventTypesPulseCreated                UpdateWebhooksEndpointDataAttributesEventTypes = "pulse.created"
+	UpdateWebhooksEndpointDataAttributesEventTypesAlertCreated                   UpdateWebhooksEndpointDataAttributesEventTypes = "alert.created"
+	UpdateWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunCanceled      UpdateWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.canceled"
+	UpdateWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunCompleted     UpdateWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.completed"
+	UpdateWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunFailed        UpdateWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.failed"
+	UpdateWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunQueued        UpdateWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.queued"
+	UpdateWebhooksEndpointDataAttributesEventTypesGeniusWorkflowRunStarted       UpdateWebhooksEndpointDataAttributesEventTypes = "genius_workflow_run.started"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentCancelled              UpdateWebhooksEndpointDataAttributesEventTypes = "incident.cancelled"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentCreated                UpdateWebhooksEndpointDataAttributesEventTypes = "incident.created"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentDeleted                UpdateWebhooksEndpointDataAttributesEventTypes = "incident.deleted"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentInTriage               UpdateWebhooksEndpointDataAttributesEventTypes = "incident.in_triage"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentMitigated              UpdateWebhooksEndpointDataAttributesEventTypes = "incident.mitigated"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentPostMortemCreated      UpdateWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.created"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentPostMortemDeleted      UpdateWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.deleted"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentPostMortemPublished    UpdateWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.published"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentPostMortemUpdated      UpdateWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.updated"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentResolved               UpdateWebhooksEndpointDataAttributesEventTypes = "incident.resolved"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentScheduledCompleted     UpdateWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.completed"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentScheduledCreated       UpdateWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.created"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentScheduledDeleted       UpdateWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.deleted"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentScheduledInProgress    UpdateWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.in_progress"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentScheduledUpdated       UpdateWebhooksEndpointDataAttributesEventTypes = "incident.scheduled.updated"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentStatusPageEventCreated UpdateWebhooksEndpointDataAttributesEventTypes = "incident_status_page_event.created"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentStatusPageEventDeleted UpdateWebhooksEndpointDataAttributesEventTypes = "incident_status_page_event.deleted"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentStatusPageEventUpdated UpdateWebhooksEndpointDataAttributesEventTypes = "incident_status_page_event.updated"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentUpdated                UpdateWebhooksEndpointDataAttributesEventTypes = "incident.updated"
+	UpdateWebhooksEndpointDataAttributesEventTypesPulseCreated                   UpdateWebhooksEndpointDataAttributesEventTypes = "pulse.created"
 )
 
 // Defines values for UpdateWebhooksEndpointDataType.
@@ -6662,29 +6679,32 @@ const (
 
 // Defines values for WebhooksEndpointEventTypes.
 const (
-	AlertCreated                WebhooksEndpointEventTypes = "alert.created"
-	GeniusWorkflowRunCanceled   WebhooksEndpointEventTypes = "genius_workflow_run.canceled"
-	GeniusWorkflowRunCompleted  WebhooksEndpointEventTypes = "genius_workflow_run.completed"
-	GeniusWorkflowRunFailed     WebhooksEndpointEventTypes = "genius_workflow_run.failed"
-	GeniusWorkflowRunQueued     WebhooksEndpointEventTypes = "genius_workflow_run.queued"
-	GeniusWorkflowRunStarted    WebhooksEndpointEventTypes = "genius_workflow_run.started"
-	IncidentCancelled           WebhooksEndpointEventTypes = "incident.cancelled"
-	IncidentCreated             WebhooksEndpointEventTypes = "incident.created"
-	IncidentDeleted             WebhooksEndpointEventTypes = "incident.deleted"
-	IncidentInTriage            WebhooksEndpointEventTypes = "incident.in_triage"
-	IncidentMitigated           WebhooksEndpointEventTypes = "incident.mitigated"
-	IncidentPostMortemCreated   WebhooksEndpointEventTypes = "incident_post_mortem.created"
-	IncidentPostMortemDeleted   WebhooksEndpointEventTypes = "incident_post_mortem.deleted"
-	IncidentPostMortemPublished WebhooksEndpointEventTypes = "incident_post_mortem.published"
-	IncidentPostMortemUpdated   WebhooksEndpointEventTypes = "incident_post_mortem.updated"
-	IncidentResolved            WebhooksEndpointEventTypes = "incident.resolved"
-	IncidentScheduledCompleted  WebhooksEndpointEventTypes = "incident.scheduled.completed"
-	IncidentScheduledCreated    WebhooksEndpointEventTypes = "incident.scheduled.created"
-	IncidentScheduledDeleted    WebhooksEndpointEventTypes = "incident.scheduled.deleted"
-	IncidentScheduledInProgress WebhooksEndpointEventTypes = "incident.scheduled.in_progress"
-	IncidentScheduledUpdated    WebhooksEndpointEventTypes = "incident.scheduled.updated"
-	IncidentUpdated             WebhooksEndpointEventTypes = "incident.updated"
-	PulseCreated                WebhooksEndpointEventTypes = "pulse.created"
+	AlertCreated                   WebhooksEndpointEventTypes = "alert.created"
+	GeniusWorkflowRunCanceled      WebhooksEndpointEventTypes = "genius_workflow_run.canceled"
+	GeniusWorkflowRunCompleted     WebhooksEndpointEventTypes = "genius_workflow_run.completed"
+	GeniusWorkflowRunFailed        WebhooksEndpointEventTypes = "genius_workflow_run.failed"
+	GeniusWorkflowRunQueued        WebhooksEndpointEventTypes = "genius_workflow_run.queued"
+	GeniusWorkflowRunStarted       WebhooksEndpointEventTypes = "genius_workflow_run.started"
+	IncidentCancelled              WebhooksEndpointEventTypes = "incident.cancelled"
+	IncidentCreated                WebhooksEndpointEventTypes = "incident.created"
+	IncidentDeleted                WebhooksEndpointEventTypes = "incident.deleted"
+	IncidentInTriage               WebhooksEndpointEventTypes = "incident.in_triage"
+	IncidentMitigated              WebhooksEndpointEventTypes = "incident.mitigated"
+	IncidentPostMortemCreated      WebhooksEndpointEventTypes = "incident_post_mortem.created"
+	IncidentPostMortemDeleted      WebhooksEndpointEventTypes = "incident_post_mortem.deleted"
+	IncidentPostMortemPublished    WebhooksEndpointEventTypes = "incident_post_mortem.published"
+	IncidentPostMortemUpdated      WebhooksEndpointEventTypes = "incident_post_mortem.updated"
+	IncidentResolved               WebhooksEndpointEventTypes = "incident.resolved"
+	IncidentScheduledCompleted     WebhooksEndpointEventTypes = "incident.scheduled.completed"
+	IncidentScheduledCreated       WebhooksEndpointEventTypes = "incident.scheduled.created"
+	IncidentScheduledDeleted       WebhooksEndpointEventTypes = "incident.scheduled.deleted"
+	IncidentScheduledInProgress    WebhooksEndpointEventTypes = "incident.scheduled.in_progress"
+	IncidentScheduledUpdated       WebhooksEndpointEventTypes = "incident.scheduled.updated"
+	IncidentStatusPageEventCreated WebhooksEndpointEventTypes = "incident_status_page_event.created"
+	IncidentStatusPageEventDeleted WebhooksEndpointEventTypes = "incident_status_page_event.deleted"
+	IncidentStatusPageEventUpdated WebhooksEndpointEventTypes = "incident_status_page_event.updated"
+	IncidentUpdated                WebhooksEndpointEventTypes = "incident.updated"
+	PulseCreated                   WebhooksEndpointEventTypes = "pulse.created"
 )
 
 // Defines values for WebhooksEndpointListDataType.
@@ -10114,7 +10134,7 @@ type EscalationLevel struct {
 		// Id The ID of notification target
 		Id string `json:"id"`
 
-		// TeamMembers For targets with type=team, controls whether to notify admins or all team members.
+		// TeamMembers For targets with type=team, controls whether to notify admins, all team members, or escalate to team EP.
 		TeamMembers *EscalationLevelNotificationTargetParamsTeamMembers `json:"team_members"`
 
 		// Type The type of the notification target
@@ -10130,7 +10150,7 @@ type EscalationLevel struct {
 	UpdatedAt *string `json:"updated_at,omitempty"`
 }
 
-// EscalationLevelNotificationTargetParamsTeamMembers For targets with type=team, controls whether to notify admins or all team members.
+// EscalationLevelNotificationTargetParamsTeamMembers For targets with type=team, controls whether to notify admins, all team members, or escalate to team EP.
 type EscalationLevelNotificationTargetParamsTeamMembers string
 
 // EscalationLevelNotificationTargetParamsType The type of the notification target
@@ -10178,7 +10198,7 @@ type EscalationPath struct {
 	// EscalationPolicyId The ID of the escalation policy
 	EscalationPolicyId string `json:"escalation_policy_id"`
 
-	// InitialDelay Initial delay for escalation path in minutes.
+	// InitialDelay Initial delay for escalation path in minutes. Maximum 1 week (10080).
 	InitialDelay *int `json:"initial_delay,omitempty"`
 
 	// MatchMode How path rules are matched.
@@ -12653,7 +12673,7 @@ type NewAlert struct {
 			// StartedAt Alert start datetime
 			StartedAt *time.Time `json:"started_at"`
 
-			// Status Only available for organizations with Rootly On-Call enabled. Can be one of open, triggered, acknowledged or resolved.
+			// Status Only available for organizations with Rootly On-Call enabled. Can be one of open, triggered.
 			Status *NewAlertDataAttributesStatus `json:"status,omitempty"`
 
 			// Summary The summary of the alert
@@ -12672,7 +12692,7 @@ type NewAlertDataAttributesNotificationTargetType string
 // NewAlertDataAttributesSource The source of the alert
 type NewAlertDataAttributesSource string
 
-// NewAlertDataAttributesStatus Only available for organizations with Rootly On-Call enabled. Can be one of open, triggered, acknowledged or resolved.
+// NewAlertDataAttributesStatus Only available for organizations with Rootly On-Call enabled. Can be one of open, triggered.
 type NewAlertDataAttributesStatus string
 
 // NewAlertDataType defines model for NewAlert.Data.Type.
@@ -12788,7 +12808,7 @@ type NewAlertRoutingRule struct {
 			// Name The name of the alert routing rule
 			Name string `json:"name"`
 
-			// OwningTeamIds The IDs of the teams which own the alert routing rule. If the user don't have Alert Routing Create Permission in On Call Roles, then this field is required and can contain Team IDs the user is an admin of.
+			// OwningTeamIds The IDs of the teams which own the alert routing rule. If the user doesn't have Alert Routing Create Permission in On-Call Roles, then this field is required and can contain Team IDs the user is an admin of.
 			OwningTeamIds *[]openapi_types.UUID `json:"owning_team_ids,omitempty"`
 		} `json:"attributes"`
 		Type NewAlertRoutingRuleDataType `json:"type"`
@@ -13254,7 +13274,7 @@ type NewEscalationLevel struct {
 				// Id The ID of notification target. If Slack channel, then id of the slack channel (eg. C06Q2JK7RQW)
 				Id string `json:"id"`
 
-				// TeamMembers For targets with type=team, controls whether to notify admins or all team members.
+				// TeamMembers For targets with type=team, controls whether to notify admins, all team members, or escalate to team EP.
 				TeamMembers *NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembers `json:"team_members"`
 
 				// Type The type of the notification target
@@ -13270,7 +13290,7 @@ type NewEscalationLevel struct {
 	} `json:"data"`
 }
 
-// NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembers For targets with type=team, controls whether to notify admins or all team members.
+// NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembers For targets with type=team, controls whether to notify admins, all team members, or escalate to team EP.
 type NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembers string
 
 // NewEscalationLevelDataAttributesNotificationTargetParamsType The type of the notification target
@@ -13292,7 +13312,7 @@ type NewEscalationPath struct {
 			// Default Whether this escalation path is the default path
 			Default *bool `json:"default"`
 
-			// InitialDelay Initial delay for escalation path in minutes.
+			// InitialDelay Initial delay for escalation path in minutes. Maximum 1 week (10080).
 			InitialDelay *int `json:"initial_delay,omitempty"`
 
 			// MatchMode How path rules are matched.
@@ -14852,7 +14872,7 @@ type NewScheduleRotation struct {
 				// HandoffDay Hand off day for monthly rotation
 				HandoffDay *NewScheduleRotationDataAttributesScheduleRotationableAttributesHandoffDay `json:"handoff_day,omitempty"`
 
-				// HandoffTime Hand off time for custom rotation. Required for daily and weekly shift units.
+				// HandoffTime Hand off time for custom rotation.
 				HandoffTime *string `json:"handoff_time,omitempty"`
 
 				// ShiftLength Shift length for custom rotation
@@ -15801,7 +15821,7 @@ type OnCallShadowsList struct {
 	Data []struct {
 		Attributes OnCallShadow `json:"attributes"`
 
-		// Id Unique id of the on call shadow shift
+		// Id Unique id of the on-call shadow shift
 		Id   string                    `json:"id"`
 		Type OnCallShadowsListDataType `json:"type"`
 	} `json:"data"`
@@ -16935,7 +16955,7 @@ type ScheduleRotation struct {
 		// HandoffDay Hand off day for monthly rotation
 		HandoffDay *ScheduleRotationScheduleRotationableAttributesHandoffDay `json:"handoff_day,omitempty"`
 
-		// HandoffTime Hand off time for custom rotation
+		// HandoffTime Hand off time for custom rotation.
 		HandoffTime *string `json:"handoff_time,omitempty"`
 
 		// ShiftLength Shift length for custom rotation
@@ -18872,7 +18892,7 @@ type UpdateEscalationLevel struct {
 				// Id The ID of notification target
 				Id string `json:"id"`
 
-				// TeamMembers For targets with type=team, controls whether to notify admins or all team members.
+				// TeamMembers For targets with type=team, controls whether to notify admins, all team members, or escalate to team EP.
 				TeamMembers *UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers `json:"team_members"`
 
 				// Type The type of the notification target
@@ -18888,7 +18908,7 @@ type UpdateEscalationLevel struct {
 	} `json:"data"`
 }
 
-// UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers For targets with type=team, controls whether to notify admins or all team members.
+// UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers For targets with type=team, controls whether to notify admins, all team members, or escalate to team EP.
 type UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers string
 
 // UpdateEscalationLevelDataAttributesNotificationTargetParamsType The type of the notification target
@@ -18910,7 +18930,7 @@ type UpdateEscalationPath struct {
 			// Default Whether this escalation path is the default path
 			Default *bool `json:"default"`
 
-			// InitialDelay Initial delay for escalation path in minutes.
+			// InitialDelay Initial delay for escalation path in minutes. Maximum 1 week (10080).
 			InitialDelay *int `json:"initial_delay,omitempty"`
 
 			// MatchMode How path rules are matched.
@@ -20969,7 +20989,7 @@ type UpdateScheduleRotation struct {
 				// HandoffDay Hand off day for monthly rotation
 				HandoffDay *UpdateScheduleRotationDataAttributesScheduleRotationableAttributesHandoffDay `json:"handoff_day,omitempty"`
 
-				// HandoffTime Hand off time for custom rotation
+				// HandoffTime Hand off time for custom rotation.
 				HandoffTime *string `json:"handoff_time,omitempty"`
 
 				// ShiftLength Shift length for custom rotation
@@ -22468,9 +22488,10 @@ type ListAlertUrgenciesParams struct {
 
 // ListAlertsParams defines parameters for ListAlerts.
 type ListAlertsParams struct {
-	Include    *string `form:"include,omitempty" json:"include,omitempty"`
-	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
-	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	Include      *string `form:"include,omitempty" json:"include,omitempty"`
+	FilterStatus *string `form:"filter[status],omitempty" json:"filter[status],omitempty"`
+	PageNumber   *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize     *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
 // ListAlertEventsParams defines parameters for ListAlertEvents.
@@ -48353,6 +48374,22 @@ func NewListAlertsRequest(server string, params *ListAlertsParams) (*http.Reques
 		if params.Include != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include", runtime.ParamLocationQuery, *params.Include); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterStatus != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter[status]", runtime.ParamLocationQuery, *params.FilterStatus); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 				return nil, err

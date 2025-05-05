@@ -193,5 +193,5 @@ resource "rootly_escalation_level" "second" {
 Optional:
 
 - `id` (String) The ID of notification target
-- `team_members` (String) For targets with type=team, controls whether to notify admins or all team members.. Value must be one of `all`, `admins`.
-- `type` (String) The type of the notification target. Value must be one of `team`, `user`, `schedule`, `slack_channel`.
+- `team_members` (String) For targets with type=team, controls whether to notify admins, all team members, or escalate to team EP.. Value must be one of `all`, `admins`, `escalate`.
+- `type` (String) The type of the notification target. Value must be one of `team`, `user`, `schedule`, `slack_channel`, `service`.
