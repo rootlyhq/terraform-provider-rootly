@@ -88,9 +88,9 @@ func resourceAlertGroup() *schema.Resource {
 
 			"targets": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         false,
-				Required:         true,
-				Optional:         false,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
 				Description:      "",
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Elem: &schema.Resource{

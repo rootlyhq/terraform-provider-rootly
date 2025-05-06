@@ -35,7 +35,6 @@ resource "rootly_alert_group" "example" {
 ### Required
 
 - `name` (String) The name of the alert group
-- `targets` (Block List, Min: 1) (see [below for nested schema](#nestedblock--targets))
 
 ### Optional
 
@@ -46,11 +45,20 @@ resource "rootly_alert_group" "example" {
 - `group_by_alert_title` (Boolean) Whether the alerts are grouped by title or not. Value must be one of true or false
 - `group_by_alert_urgency` (Boolean) Whether the alerts are grouped by urgency or not. Value must be one of true or false
 - `slug` (String) The slug of the alert group
+- `targets` (Block List) (see [below for nested schema](#nestedblock--targets))
 - `time_window` (Number) Time window for the alert grouping
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--attributes"></a>
+### Nested Schema for `attributes`
+
+Optional:
+
+- `json_path` (String) The JSON path to the value to group by.
+
 
 <a id="nestedblock--targets"></a>
 ### Nested Schema for `targets`
@@ -59,11 +67,3 @@ Optional:
 
 - `target_id` (String) id for the Group, Service or EscalationPolicy
 - `target_type` (String) The type of the target.. Value must be one of `Group`, `Service`, `EscalationPolicy`.
-
-
-<a id="nestedblock--attributes"></a>
-### Nested Schema for `attributes`
-
-Optional:
-
-- `json_path` (String) The JSON path to the value to group by.

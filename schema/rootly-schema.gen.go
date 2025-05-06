@@ -7727,10 +7727,10 @@ type AlertGroup struct {
 	Slug    string `json:"slug"`
 	Targets *[]struct {
 		// TargetId id for the Group, Service or EscalationPolicy
-		TargetId *openapi_types.UUID `json:"target_id,omitempty"`
+		TargetId openapi_types.UUID `json:"target_id"`
 
 		// TargetType The type of the target.
-		TargetType *AlertGroupTargetsTargetType `json:"target_type,omitempty"`
+		TargetType AlertGroupTargetsTargetType `json:"target_type"`
 	} `json:"targets,omitempty"`
 
 	// TimeWindow Time window for the alert grouping
@@ -12742,13 +12742,13 @@ type NewAlertGroup struct {
 
 			// Name The name of the alert group
 			Name    string `json:"name"`
-			Targets []struct {
+			Targets *[]struct {
 				// TargetId id for the Group, Service or EscalationPolicy
-				TargetId *openapi_types.UUID `json:"target_id,omitempty"`
+				TargetId openapi_types.UUID `json:"target_id"`
 
 				// TargetType The type of the target.
-				TargetType *NewAlertGroupDataAttributesTargetsTargetType `json:"target_type,omitempty"`
-			} `json:"targets"`
+				TargetType NewAlertGroupDataAttributesTargetsTargetType `json:"target_type"`
+			} `json:"targets,omitempty"`
 
 			// TimeWindow The length of time an Alert Group should stay open and accept new alerts
 			TimeWindow *int `json:"time_window,omitempty"`
@@ -18297,10 +18297,10 @@ type UpdateAlertGroup struct {
 			Name    *string `json:"name,omitempty"`
 			Targets *[]struct {
 				// TargetId id for the Group, Service or EscalationPolicy
-				TargetId *openapi_types.UUID `json:"target_id,omitempty"`
+				TargetId openapi_types.UUID `json:"target_id"`
 
 				// TargetType The type of the target.
-				TargetType *UpdateAlertGroupDataAttributesTargetsTargetType `json:"target_type,omitempty"`
+				TargetType UpdateAlertGroupDataAttributesTargetsTargetType `json:"target_type"`
 			} `json:"targets,omitempty"`
 
 			// TimeWindow The length of time an Alert Group should stay open and accept new alerts
