@@ -22,6 +22,8 @@ type Heartbeat struct {
   NotificationTargetType string `jsonapi:"attr,notification_target_type,omitempty"`
   Enabled *bool `jsonapi:"attr,enabled,omitempty"`
   Status string `jsonapi:"attr,status,omitempty"`
+  PingUrl string `jsonapi:"attr,ping_url,omitempty"`
+  Secret string `jsonapi:"attr,secret,omitempty"`
   LastPingedAt string `jsonapi:"attr,last_pinged_at,omitempty"`
   ExpiresAt string `jsonapi:"attr,expires_at,omitempty"`
 }

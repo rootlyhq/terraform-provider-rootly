@@ -116,6 +116,24 @@ func resourceHeartbeat() *schema.Resource {
 				},
 			},
 
+			"ping_url": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "URL to receive heartbeat pings.",
+			},
+
+			"secret": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Secret used as bearer token when pinging heartbeat.",
+			},
+
 			"last_pinged_at": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
@@ -174,6 +192,12 @@ func resourceHeartbeatCreate(ctx context.Context, d *schema.ResourceData, meta i
 	if value, ok := d.GetOkExists("status"); ok {
 		s.Status = value.(string)
 	}
+	if value, ok := d.GetOkExists("ping_url"); ok {
+		s.PingUrl = value.(string)
+	}
+	if value, ok := d.GetOkExists("secret"); ok {
+		s.Secret = value.(string)
+	}
 	if value, ok := d.GetOkExists("last_pinged_at"); ok {
 		s.LastPingedAt = value.(string)
 	}
@@ -219,6 +243,8 @@ func resourceHeartbeatRead(ctx context.Context, d *schema.ResourceData, meta int
 	d.Set("notification_target_type", item.NotificationTargetType)
 	d.Set("enabled", item.Enabled)
 	d.Set("status", item.Status)
+	d.Set("ping_url", item.PingUrl)
+	d.Set("secret", item.Secret)
 	d.Set("last_pinged_at", item.LastPingedAt)
 	d.Set("expires_at", item.ExpiresAt)
 
@@ -260,6 +286,12 @@ func resourceHeartbeatUpdate(ctx context.Context, d *schema.ResourceData, meta i
 	}
 	if d.HasChange("status") {
 		s.Status = d.Get("status").(string)
+	}
+	if d.HasChange("ping_url") {
+		s.PingUrl = d.Get("ping_url").(string)
+	}
+	if d.HasChange("secret") {
+		s.Secret = d.Get("secret").(string)
 	}
 	if d.HasChange("last_pinged_at") {
 		s.LastPingedAt = d.Get("last_pinged_at").(string)

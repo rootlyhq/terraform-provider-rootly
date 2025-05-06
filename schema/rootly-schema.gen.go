@@ -11023,7 +11023,13 @@ type Heartbeat struct {
 	Name                   string                          `json:"name"`
 	NotificationTargetId   string                          `json:"notification_target_id"`
 	NotificationTargetType HeartbeatNotificationTargetType `json:"notification_target_type"`
-	Status                 HeartbeatStatus                 `json:"status"`
+
+	// PingUrl URL to receive heartbeat pings.
+	PingUrl *string `json:"ping_url"`
+
+	// Secret Secret used as bearer token when pinging heartbeat.
+	Secret *string         `json:"secret"`
+	Status HeartbeatStatus `json:"status"`
 
 	// UpdatedAt Date of last update
 	UpdatedAt string `json:"updated_at"`

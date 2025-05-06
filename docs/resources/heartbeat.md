@@ -30,6 +30,8 @@ description: |-
 - `interval_unit` (String) Value must be one of `seconds`, `minutes`, `hours`.
 - `last_pinged_at` (String) When the heartbeat was last pinged.
 - `notification_target_type` (String) Value must be one of `User`, `Group`, `Service`, `EscalationPolicy`.
+- `ping_url` (String) URL to receive heartbeat pings.
+- `secret` (String) Secret used as bearer token when pinging heartbeat.
 - `status` (String) Value must be one of `waiting`, `active`, `expired`.
 
 ### Read-Only
