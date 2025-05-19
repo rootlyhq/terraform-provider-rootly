@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.27.1] -- 2024-04-04
+
+- Improve: Made import examples in documentation more user-friendly.
+
 ## [2.26.5] -- 2024-04-03
 
 - Enhance: Improved documentation for `alert_routing_rule` property field names.
