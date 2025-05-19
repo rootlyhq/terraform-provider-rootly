@@ -92,7 +92,7 @@ func resourceAlertRoutingRule() *schema.Resource {
 							Required:    false,
 							Optional:    true,
 							ForceNew:    false,
-							Description: "The condition type of the property field. Value must be one of `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is`, `is_not`, `is_empty`.",
+							Description: "The condition type of the property field. Value must be one of `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is_empty`.",
 						},
 
 						"property_field_value": &schema.Schema{
@@ -101,7 +101,19 @@ func resourceAlertRoutingRule() *schema.Resource {
 							Required:    false,
 							Optional:    true,
 							ForceNew:    false,
-							Description: "The value of the property field",
+							Description: "The value of the property field. Can be null if the property field condition type is 'is_one_of' or 'is_not_one_of'",
+						},
+
+						"property_field_values": &schema.Schema{
+							Type: schema.TypeList,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "The values of the property field. Used if the property field condition type is 'is_one_of' or 'is_not_one_of' except for when property field name is 'alert_urgency'",
 						},
 					},
 				},
@@ -216,6 +228,7 @@ func resourceAlertRoutingRuleRead(ctx context.Context, d *schema.ResourceData, m
 					"property_field_name":           rawItem["property_field_name"],
 					"property_field_condition_type": rawItem["property_field_condition_type"],
 					"property_field_value":          rawItem["property_field_value"],
+					"property_field_values":         rawItem["property_field_values"],
 				}
 				processedItems = append(processedItems, processedItem)
 			}

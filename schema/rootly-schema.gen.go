@@ -603,9 +603,7 @@ const (
 	AlertRoutingRuleConditionsPropertyFieldConditionTypeContains       AlertRoutingRuleConditionsPropertyFieldConditionType = "contains"
 	AlertRoutingRuleConditionsPropertyFieldConditionTypeDoesNotContain AlertRoutingRuleConditionsPropertyFieldConditionType = "does_not_contain"
 	AlertRoutingRuleConditionsPropertyFieldConditionTypeEndsWith       AlertRoutingRuleConditionsPropertyFieldConditionType = "ends_with"
-	AlertRoutingRuleConditionsPropertyFieldConditionTypeIs             AlertRoutingRuleConditionsPropertyFieldConditionType = "is"
 	AlertRoutingRuleConditionsPropertyFieldConditionTypeIsEmpty        AlertRoutingRuleConditionsPropertyFieldConditionType = "is_empty"
-	AlertRoutingRuleConditionsPropertyFieldConditionTypeIsNot          AlertRoutingRuleConditionsPropertyFieldConditionType = "is_not"
 	AlertRoutingRuleConditionsPropertyFieldConditionTypeIsNotOneOf     AlertRoutingRuleConditionsPropertyFieldConditionType = "is_not_one_of"
 	AlertRoutingRuleConditionsPropertyFieldConditionTypeIsOneOf        AlertRoutingRuleConditionsPropertyFieldConditionType = "is_one_of"
 	AlertRoutingRuleConditionsPropertyFieldConditionTypeMatchesRegex   AlertRoutingRuleConditionsPropertyFieldConditionType = "matches_regex"
@@ -966,6 +964,11 @@ const (
 // Defines values for CreateClickupTaskTaskParamsTaskType.
 const (
 	CreateClickupTask CreateClickupTaskTaskParamsTaskType = "create_clickup_task"
+)
+
+// Defines values for CreateCodaPageTaskParamsTaskType.
+const (
+	CreateCodaPage CreateCodaPageTaskParamsTaskType = "create_coda_page"
 )
 
 // Defines values for CreateConfluencePageTaskParamsTaskType.
@@ -2440,9 +2443,7 @@ const (
 	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeContains       NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "contains"
 	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeDoesNotContain NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "does_not_contain"
 	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeEndsWith       NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "ends_with"
-	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIs             NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is"
 	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIsEmpty        NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is_empty"
-	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIsNot          NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is_not"
 	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIsNotOneOf     NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is_not_one_of"
 	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIsOneOf        NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is_one_of"
 	NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeMatchesRegex   NewAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "matches_regex"
@@ -3987,6 +3988,11 @@ const (
 	OnCallRoleListDataTypeOnCallRoles OnCallRoleListDataType = "on_call_roles"
 )
 
+// Defines values for OnCallRoleRelationshipDataType.
+const (
+	OnCallRoleRelationshipDataTypeOnCallRoles OnCallRoleRelationshipDataType = "on_call_roles"
+)
+
 // Defines values for OnCallRoleResponseDataType.
 const (
 	OnCallRoleResponseDataTypeOnCallRoles OnCallRoleResponseDataType = "on_call_roles"
@@ -4487,6 +4493,11 @@ const (
 // Defines values for RoleListDataType.
 const (
 	RoleListDataTypeRoles RoleListDataType = "roles"
+)
+
+// Defines values for RoleRelationshipDataType.
+const (
+	RoleRelationshipDataTypeRoles RoleRelationshipDataType = "roles"
 )
 
 // Defines values for RoleResponseDataType.
@@ -5010,9 +5021,7 @@ const (
 	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeContains       UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "contains"
 	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeDoesNotContain UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "does_not_contain"
 	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeEndsWith       UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "ends_with"
-	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIs             UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is"
 	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIsEmpty        UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is_empty"
-	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIsNot          UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is_not"
 	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIsNotOneOf     UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is_not_one_of"
 	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeIsOneOf        UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "is_one_of"
 	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionTypeMatchesRegex   UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldConditionType = "matches_regex"
@@ -5193,6 +5202,11 @@ const (
 // Defines values for UpdateClickupTaskTaskParamsTaskType.
 const (
 	UpdateClickupTask UpdateClickupTaskTaskParamsTaskType = "update_clickup_task"
+)
+
+// Defines values for UpdateCodaPageTaskParamsTaskType.
+const (
+	UpdateCodaPage UpdateCodaPageTaskParamsTaskType = "update_coda_page"
 )
 
 // Defines values for UpdateCustomFieldDataAttributesRequired.
@@ -6015,7 +6029,7 @@ const (
 
 // Defines values for UpdateOnCallRoleDataType.
 const (
-	UpdateOnCallRoleDataTypeOnCallRoles UpdateOnCallRoleDataType = "on_call_roles"
+	OnCallRoles UpdateOnCallRoleDataType = "on_call_roles"
 )
 
 // Defines values for UpdateOnCallShadowDataAttributesShadowableType.
@@ -6359,7 +6373,7 @@ const (
 
 // Defines values for UpdateRoleDataType.
 const (
-	UpdateRoleDataTypeRoles UpdateRoleDataType = "roles"
+	Roles UpdateRoleDataType = "roles"
 )
 
 // Defines values for UpdateScheduleDataType.
@@ -6513,6 +6527,11 @@ const (
 	UpdateTrelloCard UpdateTrelloCardTaskParamsTaskType = "update_trello_card"
 )
 
+// Defines values for UpdateUserDataType.
+const (
+	UpdateUserDataTypeUsers UpdateUserDataType = "users"
+)
+
 // Defines values for UpdateUserNotificationRuleDataAttributesEnabledContactTypes.
 const (
 	UpdateUserNotificationRuleDataAttributesEnabledContactTypesCall              UpdateUserNotificationRuleDataAttributesEnabledContactTypes = "call"
@@ -6664,7 +6683,7 @@ const (
 
 // Defines values for UserResponseDataType.
 const (
-	Users UserResponseDataType = "users"
+	UserResponseDataTypeUsers UserResponseDataType = "users"
 )
 
 // Defines values for WebhooksDeliveryListDataType.
@@ -7158,14 +7177,18 @@ const (
 const (
 	ListUsersParamsIncludeDevices        ListUsersParamsInclude = "devices"
 	ListUsersParamsIncludeEmailAddresses ListUsersParamsInclude = "email_addresses"
+	ListUsersParamsIncludeOnCallRole     ListUsersParamsInclude = "on_call_role"
 	ListUsersParamsIncludePhoneNumbers   ListUsersParamsInclude = "phone_numbers"
+	ListUsersParamsIncludeRole           ListUsersParamsInclude = "role"
 )
 
 // Defines values for GetUserParamsInclude.
 const (
 	GetUserParamsIncludeDevices        GetUserParamsInclude = "devices"
 	GetUserParamsIncludeEmailAddresses GetUserParamsInclude = "email_addresses"
+	GetUserParamsIncludeOnCallRole     GetUserParamsInclude = "on_call_role"
 	GetUserParamsIncludePhoneNumbers   GetUserParamsInclude = "phone_numbers"
+	GetUserParamsIncludeRole           GetUserParamsInclude = "role"
 )
 
 // Defines values for ListWorkflowsParamsInclude.
@@ -7831,8 +7854,11 @@ type AlertRoutingRule struct {
 		// PropertyFieldType The type of the property field
 		PropertyFieldType AlertRoutingRuleConditionsPropertyFieldType `json:"property_field_type"`
 
-		// PropertyFieldValue The value of the property field
-		PropertyFieldValue string `json:"property_field_value"`
+		// PropertyFieldValue The value of the property field. Can be null if the property field condition type is 'is_one_of' or 'is_not_one_of'
+		PropertyFieldValue *string `json:"property_field_value"`
+
+		// PropertyFieldValues The values of the property field. Used if the property field condition type is 'is_one_of' or 'is_not_one_of' except for when property field name is 'alert_urgency'
+		PropertyFieldValues *[]string `json:"property_field_values,omitempty"`
 	} `json:"conditions,omitempty"`
 
 	// CreatedAt Date of creation
@@ -8715,6 +8741,34 @@ type CreateClickupTaskTaskParams struct {
 
 // CreateClickupTaskTaskParamsTaskType defines model for CreateClickupTaskTaskParams.TaskType.
 type CreateClickupTaskTaskParamsTaskType string
+
+// CreateCodaPageTaskParams defines model for create_coda_page_task_params.
+type CreateCodaPageTaskParams struct {
+	// Content The Coda page content
+	Content *string `json:"content,omitempty"`
+
+	// FolderId The Coda folder id
+	FolderId                  *string `json:"folder_id,omitempty"`
+	MarkPostMortemAsPublished *bool   `json:"mark_post_mortem_as_published,omitempty"`
+
+	// PostMortemTemplateId Retrospective template to use when creating page, if desired
+	PostMortemTemplateId *string `json:"post_mortem_template_id,omitempty"`
+
+	// Subtitle The Coda page subtitle
+	Subtitle *string                           `json:"subtitle,omitempty"`
+	TaskType *CreateCodaPageTaskParamsTaskType `json:"task_type,omitempty"`
+	Template *struct {
+		// Id Combined doc_id/page_id in format 'doc_id/page_id'
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"template,omitempty"`
+
+	// Title The Coda page title
+	Title string `json:"title"`
+}
+
+// CreateCodaPageTaskParamsTaskType defines model for CreateCodaPageTaskParams.TaskType.
+type CreateCodaPageTaskParamsTaskType string
 
 // CreateConfluencePageTaskParams defines model for create_confluence_page_task_params.
 type CreateConfluencePageTaskParams struct {
@@ -12438,6 +12492,9 @@ type InviteToSlackChannelTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"channel"`
+
+	// SlackEmails Comma separated list of emails to invite to the channel
+	SlackEmails     *string `json:"slack_emails,omitempty"`
 	SlackUserGroups *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -12458,6 +12515,9 @@ type InviteToSlackChannelTaskParams0 = interface{}
 
 // InviteToSlackChannelTaskParams1 defines model for .
 type InviteToSlackChannelTaskParams1 = interface{}
+
+// InviteToSlackChannelTaskParams2 defines model for .
+type InviteToSlackChannelTaskParams2 = interface{}
 
 // InviteToSlackChannelVictorOpsTaskParams defines model for invite_to_slack_channel_victor_ops_task_params.
 type InviteToSlackChannelVictorOpsTaskParams struct {
@@ -12797,8 +12857,11 @@ type NewAlertRoutingRule struct {
 				// PropertyFieldType The type of the property field
 				PropertyFieldType NewAlertRoutingRuleDataAttributesConditionsPropertyFieldType `json:"property_field_type"`
 
-				// PropertyFieldValue The value of the property field
-				PropertyFieldValue string `json:"property_field_value"`
+				// PropertyFieldValue The value of the property field. Can be null if the property field condition type is 'is_one_of' or 'is_not_one_of'
+				PropertyFieldValue *string `json:"property_field_value,omitempty"`
+
+				// PropertyFieldValues The values of the property field. Need to be passed if the property field condition type is 'is_one_of' or 'is_not_one_of' except for when property field name is 'alert_urgency'
+				PropertyFieldValues *[]string `json:"property_field_values,omitempty"`
 			} `json:"conditions,omitempty"`
 			Destination struct {
 				// TargetId The ID of the target
@@ -14878,7 +14941,7 @@ type NewScheduleRotation struct {
 				// HandoffDay Hand off day for monthly rotation
 				HandoffDay *NewScheduleRotationDataAttributesScheduleRotationableAttributesHandoffDay `json:"handoff_day,omitempty"`
 
-				// HandoffTime Hand off time for custom rotation.
+				// HandoffTime Hand off time for custom rotation. Use minutes for hourly rotation.
 				HandoffTime *string `json:"handoff_time,omitempty"`
 
 				// ShiftLength Shift length for custom rotation
@@ -15765,6 +15828,17 @@ type OnCallRoleList struct {
 
 // OnCallRoleListDataType defines model for OnCallRoleList.Data.Type.
 type OnCallRoleListDataType string
+
+// OnCallRoleRelationship defines model for on_call_role_relationship.
+type OnCallRoleRelationship struct {
+	Data *struct {
+		Id   *string                         `json:"id,omitempty"`
+		Type *OnCallRoleRelationshipDataType `json:"type,omitempty"`
+	} `json:"data"`
+}
+
+// OnCallRoleRelationshipDataType defines model for OnCallRoleRelationship.Data.Type.
+type OnCallRoleRelationshipDataType string
 
 // OnCallRoleResponse defines model for on_call_role_response.
 type OnCallRoleResponse struct {
@@ -16838,6 +16912,17 @@ type RoleList struct {
 // RoleListDataType defines model for RoleList.Data.Type.
 type RoleListDataType string
 
+// RoleRelationship defines model for role_relationship.
+type RoleRelationship struct {
+	Data *struct {
+		Id   *string                   `json:"id,omitempty"`
+		Type *RoleRelationshipDataType `json:"type,omitempty"`
+	} `json:"data"`
+}
+
+// RoleRelationshipDataType defines model for RoleRelationship.Data.Type.
+type RoleRelationshipDataType string
+
 // RoleResponse defines model for role_response.
 type RoleResponse struct {
 	Data struct {
@@ -16961,7 +17046,7 @@ type ScheduleRotation struct {
 		// HandoffDay Hand off day for monthly rotation
 		HandoffDay *ScheduleRotationScheduleRotationableAttributesHandoffDay `json:"handoff_day,omitempty"`
 
-		// HandoffTime Hand off time for custom rotation.
+		// HandoffTime Hand off time for custom rotation. Use minutes for hourly rotation.
 		HandoffTime *string `json:"handoff_time,omitempty"`
 
 		// ShiftLength Shift length for custom rotation
@@ -18353,8 +18438,11 @@ type UpdateAlertRoutingRule struct {
 				// PropertyFieldType The type of the property field
 				PropertyFieldType *UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldType `json:"property_field_type,omitempty"`
 
-				// PropertyFieldValue The value of the property field
-				PropertyFieldValue *string `json:"property_field_value,omitempty"`
+				// PropertyFieldValue The value of the property field. Can be null if the property field condition type is 'is_one_of' or 'is_not_one_of'
+				PropertyFieldValue *string `json:"property_field_value"`
+
+				// PropertyFieldValues The values of the property field. Used if the property field condition type is 'is_one_of' or 'is_not_one_of' except for when property field name is 'alert_urgency'
+				PropertyFieldValues *[]string `json:"property_field_values,omitempty"`
 			} `json:"conditions,omitempty"`
 			Destination *struct {
 				// TargetId The ID of the target
@@ -18714,6 +18802,33 @@ type UpdateClickupTaskTaskParams struct {
 
 // UpdateClickupTaskTaskParamsTaskType defines model for UpdateClickupTaskTaskParams.TaskType.
 type UpdateClickupTaskTaskParamsTaskType string
+
+// UpdateCodaPageTaskParams defines model for update_coda_page_task_params.
+type UpdateCodaPageTaskParams struct {
+	// Content The Coda page content
+	Content *string `json:"content,omitempty"`
+
+	// DocId The Coda doc id
+	DocId *string `json:"doc_id,omitempty"`
+
+	// PageId The Coda page id
+	PageId string `json:"page_id"`
+
+	// Subtitle The Coda page subtitle
+	Subtitle *string                           `json:"subtitle,omitempty"`
+	TaskType *UpdateCodaPageTaskParamsTaskType `json:"task_type,omitempty"`
+	Template *struct {
+		// Id Combined doc_id/page_id in format 'doc_id/page_id'
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"template,omitempty"`
+
+	// Title The Coda page title
+	Title *string `json:"title,omitempty"`
+}
+
+// UpdateCodaPageTaskParamsTaskType defines model for UpdateCodaPageTaskParams.TaskType.
+type UpdateCodaPageTaskParamsTaskType string
 
 // UpdateCustomField defines model for update_custom_field.
 type UpdateCustomField struct {
@@ -20995,7 +21110,7 @@ type UpdateScheduleRotation struct {
 				// HandoffDay Hand off day for monthly rotation
 				HandoffDay *UpdateScheduleRotationDataAttributesScheduleRotationableAttributesHandoffDay `json:"handoff_day,omitempty"`
 
-				// HandoffTime Hand off time for custom rotation.
+				// HandoffTime Hand off time for custom rotation. Use minutes for hourly rotation.
 				HandoffTime *string `json:"handoff_time,omitempty"`
 
 				// ShiftLength Shift length for custom rotation
@@ -21572,6 +21687,29 @@ type UpdateTrelloCardTaskParams struct {
 // UpdateTrelloCardTaskParamsTaskType defines model for UpdateTrelloCardTaskParams.TaskType.
 type UpdateTrelloCardTaskParamsTaskType string
 
+// UpdateUser defines model for update_user.
+type UpdateUser struct {
+	Data struct {
+		Attributes struct {
+			// FirstName First name of the user
+			FirstName *string `json:"first_name"`
+
+			// LastName Last name of the user
+			LastName *string `json:"last_name"`
+
+			// OnCallRoleId ID of the on-call role to assign
+			OnCallRoleId *string `json:"on_call_role_id"`
+
+			// RoleId ID of the role to assign
+			RoleId *string `json:"role_id"`
+		} `json:"attributes"`
+		Type UpdateUserDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateUserDataType defines model for UpdateUser.Data.Type.
+type UpdateUserDataType string
+
 // UpdateUserNotificationRule defines model for update_user_notification_rule.
 type UpdateUserNotificationRule struct {
 	Data struct {
@@ -21860,11 +21998,17 @@ type User struct {
 	// Email The email of the user
 	Email string `json:"email"`
 
+	// FirstName First name of the user
+	FirstName *string `json:"first_name"`
+
 	// FullName The full name of the user
 	FullName *string `json:"full_name"`
 
 	// FullNameWithTeam The full name with team of the user
 	FullNameWithTeam *string `json:"full_name_with_team"`
+
+	// LastName Last name of the user
+	LastName *string `json:"last_name"`
 
 	// TimeZone Configured time zone
 	TimeZone *string `json:"time_zone"`
@@ -21879,8 +22023,9 @@ type UserList struct {
 		Attributes User `json:"attributes"`
 
 		// Id Unique ID of the user
-		Id   string           `json:"id"`
-		Type UserListDataType `json:"type"`
+		Id            string             `json:"id"`
+		Relationships *UserRelationships `json:"relationships,omitempty"`
+		Type          UserListDataType   `json:"type"`
 	} `json:"data"`
 	Links Links `json:"links"`
 }
@@ -21951,14 +22096,21 @@ type UserNotificationRuleResponse struct {
 // UserNotificationRuleResponseDataType defines model for UserNotificationRuleResponse.Data.Type.
 type UserNotificationRuleResponseDataType string
 
+// UserRelationships defines model for user_relationships.
+type UserRelationships struct {
+	OnCallRole *OnCallRoleRelationship `json:"on_call_role,omitempty"`
+	Role       *RoleRelationship       `json:"role,omitempty"`
+}
+
 // UserResponse defines model for user_response.
 type UserResponse struct {
 	Data struct {
 		Attributes User `json:"attributes"`
 
 		// Id Unique ID of the user
-		Id   string               `json:"id"`
-		Type UserResponseDataType `json:"type"`
+		Id            string               `json:"id"`
+		Relationships *UserRelationships   `json:"relationships,omitempty"`
+		Type          UserResponseDataType `json:"type"`
 	} `json:"data"`
 }
 
@@ -24287,6 +24439,9 @@ type UpdateTeamApplicationVndAPIPlusJSONRequestBody = UpdateTeam
 // UpdateStatusPageTemplateApplicationVndAPIPlusJSONRequestBody defines body for UpdateStatusPageTemplate for application/vnd.api+json ContentType.
 type UpdateStatusPageTemplateApplicationVndAPIPlusJSONRequestBody = StatusPageTemplate
 
+// UpdateUserApplicationVndAPIPlusJSONRequestBody defines body for UpdateUser for application/vnd.api+json ContentType.
+type UpdateUserApplicationVndAPIPlusJSONRequestBody = UpdateUser
+
 // CreateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody defines body for CreateUserNotificationRule for application/vnd.api+json ContentType.
 type CreateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody = NewUserNotificationRule
 
@@ -26595,6 +26750,32 @@ func (t *InviteToSlackChannelTaskParams) MergeInviteToSlackChannelTaskParams1(v 
 	return err
 }
 
+// AsInviteToSlackChannelTaskParams2 returns the union data inside the InviteToSlackChannelTaskParams as a InviteToSlackChannelTaskParams2
+func (t InviteToSlackChannelTaskParams) AsInviteToSlackChannelTaskParams2() (InviteToSlackChannelTaskParams2, error) {
+	var body InviteToSlackChannelTaskParams2
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromInviteToSlackChannelTaskParams2 overwrites any union data inside the InviteToSlackChannelTaskParams as the provided InviteToSlackChannelTaskParams2
+func (t *InviteToSlackChannelTaskParams) FromInviteToSlackChannelTaskParams2(v InviteToSlackChannelTaskParams2) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeInviteToSlackChannelTaskParams2 performs a merge with any union data inside the InviteToSlackChannelTaskParams, using the provided InviteToSlackChannelTaskParams2
+func (t *InviteToSlackChannelTaskParams) MergeInviteToSlackChannelTaskParams2(v InviteToSlackChannelTaskParams2) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 func (t InviteToSlackChannelTaskParams) MarshalJSON() ([]byte, error) {
 	b, err := t.union.MarshalJSON()
 	if err != nil {
@@ -26611,6 +26792,13 @@ func (t InviteToSlackChannelTaskParams) MarshalJSON() ([]byte, error) {
 	object["channel"], err = json.Marshal(t.Channel)
 	if err != nil {
 		return nil, fmt.Errorf("error marshaling 'channel': %w", err)
+	}
+
+	if t.SlackEmails != nil {
+		object["slack_emails"], err = json.Marshal(t.SlackEmails)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'slack_emails': %w", err)
+		}
 	}
 
 	if t.SlackUserGroups != nil {
@@ -26652,6 +26840,13 @@ func (t *InviteToSlackChannelTaskParams) UnmarshalJSON(b []byte) error {
 		err = json.Unmarshal(raw, &t.Channel)
 		if err != nil {
 			return fmt.Errorf("error reading 'channel': %w", err)
+		}
+	}
+
+	if raw, found := object["slack_emails"]; found {
+		err = json.Unmarshal(raw, &t.SlackEmails)
+		if err != nil {
+			return fmt.Errorf("error reading 'slack_emails': %w", err)
 		}
 	}
 
@@ -27557,6 +27752,32 @@ func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeCreateDatadogNotebookT
 	return err
 }
 
+// AsCreateCodaPageTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a CreateCodaPageTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsCreateCodaPageTaskParams() (CreateCodaPageTaskParams, error) {
+	var body CreateCodaPageTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateCodaPageTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided CreateCodaPageTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromCreateCodaPageTaskParams(v CreateCodaPageTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateCodaPageTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided CreateCodaPageTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeCreateCodaPageTaskParams(v CreateCodaPageTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsCreateDropboxPaperPageTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a CreateDropboxPaperPageTaskParams
 func (t NewWorkflowTask_Data_Attributes_TaskParams) AsCreateDropboxPaperPageTaskParams() (CreateDropboxPaperPageTaskParams, error) {
 	var body CreateDropboxPaperPageTaskParams
@@ -27703,6 +27924,32 @@ func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromUpdateGoogleDocsPageTas
 
 // MergeUpdateGoogleDocsPageTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateGoogleDocsPageTaskParams
 func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeUpdateGoogleDocsPageTaskParams(v UpdateGoogleDocsPageTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsUpdateCodaPageTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a UpdateCodaPageTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsUpdateCodaPageTaskParams() (UpdateCodaPageTaskParams, error) {
+	var body UpdateCodaPageTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateCodaPageTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided UpdateCodaPageTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromUpdateCodaPageTaskParams(v UpdateCodaPageTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateCodaPageTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateCodaPageTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeUpdateCodaPageTaskParams(v UpdateCodaPageTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -31774,6 +32021,32 @@ func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeCreateDatadogNotebo
 	return err
 }
 
+// AsCreateCodaPageTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a CreateCodaPageTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsCreateCodaPageTaskParams() (CreateCodaPageTaskParams, error) {
+	var body CreateCodaPageTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateCodaPageTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided CreateCodaPageTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromCreateCodaPageTaskParams(v CreateCodaPageTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateCodaPageTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided CreateCodaPageTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeCreateCodaPageTaskParams(v CreateCodaPageTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsCreateDropboxPaperPageTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a CreateDropboxPaperPageTaskParams
 func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsCreateDropboxPaperPageTaskParams() (CreateDropboxPaperPageTaskParams, error) {
 	var body CreateDropboxPaperPageTaskParams
@@ -31920,6 +32193,32 @@ func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromUpdateGoogleDocsPage
 
 // MergeUpdateGoogleDocsPageTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateGoogleDocsPageTaskParams
 func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeUpdateGoogleDocsPageTaskParams(v UpdateGoogleDocsPageTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsUpdateCodaPageTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a UpdateCodaPageTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsUpdateCodaPageTaskParams() (UpdateCodaPageTaskParams, error) {
+	var body UpdateCodaPageTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateCodaPageTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided UpdateCodaPageTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromUpdateCodaPageTaskParams(v UpdateCodaPageTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateCodaPageTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateCodaPageTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeUpdateCodaPageTaskParams(v UpdateCodaPageTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -35070,6 +35369,32 @@ func (t *WorkflowTask_TaskParams) MergeCreateDatadogNotebookTaskParams(v CreateD
 	return err
 }
 
+// AsCreateCodaPageTaskParams returns the union data inside the WorkflowTask_TaskParams as a CreateCodaPageTaskParams
+func (t WorkflowTask_TaskParams) AsCreateCodaPageTaskParams() (CreateCodaPageTaskParams, error) {
+	var body CreateCodaPageTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateCodaPageTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided CreateCodaPageTaskParams
+func (t *WorkflowTask_TaskParams) FromCreateCodaPageTaskParams(v CreateCodaPageTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateCodaPageTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided CreateCodaPageTaskParams
+func (t *WorkflowTask_TaskParams) MergeCreateCodaPageTaskParams(v CreateCodaPageTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsCreateDropboxPaperPageTaskParams returns the union data inside the WorkflowTask_TaskParams as a CreateDropboxPaperPageTaskParams
 func (t WorkflowTask_TaskParams) AsCreateDropboxPaperPageTaskParams() (CreateDropboxPaperPageTaskParams, error) {
 	var body CreateDropboxPaperPageTaskParams
@@ -35216,6 +35541,32 @@ func (t *WorkflowTask_TaskParams) FromUpdateGoogleDocsPageTaskParams(v UpdateGoo
 
 // MergeUpdateGoogleDocsPageTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided UpdateGoogleDocsPageTaskParams
 func (t *WorkflowTask_TaskParams) MergeUpdateGoogleDocsPageTaskParams(v UpdateGoogleDocsPageTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsUpdateCodaPageTaskParams returns the union data inside the WorkflowTask_TaskParams as a UpdateCodaPageTaskParams
+func (t WorkflowTask_TaskParams) AsUpdateCodaPageTaskParams() (UpdateCodaPageTaskParams, error) {
+	var body UpdateCodaPageTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateCodaPageTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided UpdateCodaPageTaskParams
+func (t *WorkflowTask_TaskParams) FromUpdateCodaPageTaskParams(v UpdateCodaPageTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateCodaPageTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided UpdateCodaPageTaskParams
+func (t *WorkflowTask_TaskParams) MergeUpdateCodaPageTaskParams(v UpdateCodaPageTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -39219,6 +39570,11 @@ type ClientInterface interface {
 
 	// GetUser request
 	GetUser(ctx context.Context, id string, params *GetUserParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateUserWithBody request with any body
+	UpdateUserWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateUserWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateUserApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListUserNotificationRules request
 	ListUserNotificationRules(ctx context.Context, userId string, params *ListUserNotificationRulesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -45950,6 +46306,30 @@ func (c *Client) DeleteUser(ctx context.Context, id string, reqEditors ...Reques
 
 func (c *Client) GetUser(ctx context.Context, id string, params *GetUserParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetUserRequest(c.Server, id, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateUserWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateUserRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateUserWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateUserApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateUserRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -73032,6 +73412,53 @@ func NewGetUserRequest(server string, id string, params *GetUserParams) (*http.R
 	return req, nil
 }
 
+// NewUpdateUserRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateUser builder with application/vnd.api+json body
+func NewUpdateUserRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateUserApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateUserRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateUserRequestWithBody generates requests for UpdateUser with any type of body
+func NewUpdateUserRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/users/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListUserNotificationRulesRequest generates requests for ListUserNotificationRules
 func NewListUserNotificationRulesRequest(server string, userId string, params *ListUserNotificationRulesParams) (*http.Request, error) {
 	var err error
@@ -76857,6 +77284,11 @@ type ClientWithResponsesInterface interface {
 
 	// GetUserWithResponse request
 	GetUserWithResponse(ctx context.Context, id string, params *GetUserParams, reqEditors ...RequestEditorFn) (*GetUserResponse, error)
+
+	// UpdateUserWithBodyWithResponse request with any body
+	UpdateUserWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateUserResponse, error)
+
+	UpdateUserWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateUserApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateUserResponse, error)
 
 	// ListUserNotificationRulesWithResponse request
 	ListUserNotificationRulesWithResponse(ctx context.Context, userId string, params *ListUserNotificationRulesParams, reqEditors ...RequestEditorFn) (*ListUserNotificationRulesResponse, error)
@@ -86013,6 +86445,29 @@ func (r GetUserResponse) StatusCode() int {
 	return 0
 }
 
+type UpdateUserResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *UserResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateUserResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateUserResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type ListUserNotificationRulesResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -91651,6 +92106,23 @@ func (c *ClientWithResponses) GetUserWithResponse(ctx context.Context, id string
 		return nil, err
 	}
 	return ParseGetUserResponse(rsp)
+}
+
+// UpdateUserWithBodyWithResponse request with arbitrary body returning *UpdateUserResponse
+func (c *ClientWithResponses) UpdateUserWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateUserResponse, error) {
+	rsp, err := c.UpdateUserWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateUserResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateUserWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateUserApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateUserResponse, error) {
+	rsp, err := c.UpdateUserWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateUserResponse(rsp)
 }
 
 // ListUserNotificationRulesWithResponse request returning *ListUserNotificationRulesResponse
@@ -104875,6 +105347,39 @@ func ParseGetUserResponse(rsp *http.Response) (*GetUserResponse, error) {
 	}
 
 	response := &GetUserResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest UserResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateUserResponse parses an HTTP response from a UpdateUserWithResponse call
+func ParseUpdateUserResponse(rsp *http.Response) (*UpdateUserResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateUserResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

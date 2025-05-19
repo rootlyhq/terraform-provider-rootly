@@ -15,14 +15,14 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
 
-func resourceWorkflowTaskInviteToSlackChannel() *schema.Resource {
+func resourceWorkflowTaskUpdateCodaPage() *schema.Resource {
 	return &schema.Resource{
-		Description: "Manages workflow invite_to_slack_channel task.",
+		Description: "Manages workflow update_coda_page task.",
 
-		CreateContext: resourceWorkflowTaskInviteToSlackChannelCreate,
-		ReadContext:   resourceWorkflowTaskInviteToSlackChannelRead,
-		UpdateContext: resourceWorkflowTaskInviteToSlackChannelUpdate,
-		DeleteContext: resourceWorkflowTaskInviteToSlackChannelDelete,
+		CreateContext: resourceWorkflowTaskUpdateCodaPageCreate,
+		ReadContext:   resourceWorkflowTaskUpdateCodaPageRead,
+		UpdateContext: resourceWorkflowTaskUpdateCodaPageUpdate,
+		DeleteContext: resourceWorkflowTaskUpdateCodaPageDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -69,55 +69,39 @@ func resourceWorkflowTaskInviteToSlackChannel() *schema.Resource {
 						"task_type": &schema.Schema{
 							Type:     schema.TypeString,
 							Optional: true,
-							Default:  "invite_to_slack_channel",
+							Default:  "update_coda_page",
 							ValidateFunc: validation.StringInSlice([]string{
-								"invite_to_slack_channel",
+								"update_coda_page",
 							}, false),
 						},
-						"channel": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. ",
-							Type:        schema.TypeMap,
+						"doc_id": &schema.Schema{
+							Description: "The Coda doc id",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"page_id": &schema.Schema{
+							Description: "The Coda page id",
+							Type:        schema.TypeString,
 							Required:    true,
 						},
-						"slack_users": &schema.Schema{
-							Description:      "",
-							Type:             schema.TypeList,
-							Optional:         true,
-							DiffSuppressFunc: tools.EqualIgnoringOrder,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
-									},
-									"name": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
-									},
-								},
-							},
-						},
-						"slack_user_groups": &schema.Schema{
-							Description:      "",
-							Type:             schema.TypeList,
-							Optional:         true,
-							DiffSuppressFunc: tools.EqualIgnoringOrder,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
-									},
-									"name": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
-									},
-								},
-							},
-						},
-						"slack_emails": &schema.Schema{
-							Description: "Comma separated list of emails to invite to the channel",
+						"title": &schema.Schema{
+							Description: "The Coda page title",
 							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"subtitle": &schema.Schema{
+							Description: "The Coda page subtitle",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"content": &schema.Schema{
+							Description: "The Coda page content",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"template": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. ",
+							Type:        schema.TypeMap,
 							Optional:    true,
 						},
 					},
@@ -127,7 +111,7 @@ func resourceWorkflowTaskInviteToSlackChannel() *schema.Resource {
 	}
 }
 
-func resourceWorkflowTaskInviteToSlackChannelCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskUpdateCodaPageCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
@@ -156,10 +140,10 @@ func resourceWorkflowTaskInviteToSlackChannelCreate(ctx context.Context, d *sche
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created an workflow task resource: %v (%s)", workflowId, d.Id()))
 
-	return resourceWorkflowTaskInviteToSlackChannelRead(ctx, d, meta)
+	return resourceWorkflowTaskUpdateCodaPageRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskInviteToSlackChannelRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskUpdateCodaPageRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
@@ -168,7 +152,7 @@ func resourceWorkflowTaskInviteToSlackChannelRead(ctx context.Context, d *schema
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskInviteToSlackChannel (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskUpdateCodaPage (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
@@ -188,7 +172,7 @@ func resourceWorkflowTaskInviteToSlackChannelRead(ctx context.Context, d *schema
 	return nil
 }
 
-func resourceWorkflowTaskInviteToSlackChannelUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskUpdateCodaPageUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
@@ -214,10 +198,10 @@ func resourceWorkflowTaskInviteToSlackChannelUpdate(ctx context.Context, d *sche
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
 
-	return resourceWorkflowTaskInviteToSlackChannelRead(ctx, d, meta)
+	return resourceWorkflowTaskUpdateCodaPageRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskInviteToSlackChannelDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskUpdateCodaPageDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
@@ -226,7 +210,7 @@ func resourceWorkflowTaskInviteToSlackChannelDelete(ctx context.Context, d *sche
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskInviteToSlackChannel (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskUpdateCodaPage (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}

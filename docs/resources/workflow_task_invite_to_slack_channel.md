@@ -65,6 +65,7 @@ Required:
 
 Optional:
 
+- `slack_emails` (String) Comma separated list of emails to invite to the channel
 - `slack_user_groups` (Block List) (see [below for nested schema](#nestedblock--task_params--slack_user_groups))
 - `slack_users` (Block List) (see [below for nested schema](#nestedblock--task_params--slack_users))
 - `task_type` (String)

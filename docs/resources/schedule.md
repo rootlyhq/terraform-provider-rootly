@@ -185,20 +185,3 @@ resource "rootly_escalation_level" "second" {
 ### Read-Only
 
 - `id` (String) The ID of this resource.
-
-### Import
-
-In Terraform v1.5.0 and later, use an [`import` block](https://developer.hashicorp.com/terraform/language/import) to import Schedules using the `id`. For example:
-
-```terraform
-import {
-  to rootly_schedule.primary
-  id = "00000000-0000-0000-0000-000000000000"
-}
-```
-
-Using `terraform import`, import Schedules using the `id`. For example:
-
-```console
-% terraform import rootly_schedule.primary 00000000-0000-0000-0000-000000000000
-```

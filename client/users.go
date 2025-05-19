@@ -13,6 +13,8 @@ import (
 type User struct {
 	ID string `jsonapi:"primary,users"`
 	Email string `jsonapi:"attr,email,omitempty"`
+  FirstName string `jsonapi:"attr,first_name,omitempty"`
+  LastName string `jsonapi:"attr,last_name,omitempty"`
   FullName string `jsonapi:"attr,full_name,omitempty"`
   FullNameWithTeam string `jsonapi:"attr,full_name_with_team,omitempty"`
   TimeZone string `jsonapi:"attr,time_zone,omitempty"`
