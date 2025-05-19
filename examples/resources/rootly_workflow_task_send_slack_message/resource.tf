@@ -9,6 +9,16 @@ resource "rootly_workflow_incident" "notify_slack_channels" {
   enabled = true
 }
 
+# Import examples:
+# 1. Using import block (Terraform v1.5.0 and later):
+# import {
+#   to rootly_workflow_task_send_slack_message.send_slack_message
+#   id = "00000000-0000-0000-0000-000000000000"
+# }
+#
+# 2. Using terraform import command:
+# terraform import rootly_workflow_task_send_slack_message.send_slack_message 00000000-0000-0000-0000-000000000000
+
 resource "rootly_workflow_task_send_slack_message" "send_slack_message" {
   workflow_id     = rootly_workflow_incident.notify_slack_channels.id
   skip_on_failure = false
