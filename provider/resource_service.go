@@ -211,7 +211,20 @@ func resourceService() *schema.Resource {
 				Description:      "Services dependent on this service",
 			},
 
-			"owners_group_ids": &schema.Schema{
+			"owners_group_ids": &schema.Schema{ 
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Owner Teams associated with this service(deprecated)",
+				Deprecated: 	  "Use owner_group_ids instead",
+			},
+
+			"owner_group_ids": &schema.Schema{ 
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
@@ -392,6 +405,8 @@ func resourceServiceCreate(ctx context.Context, d *schema.ResourceData, meta int
 	}
 	if value, ok := d.GetOkExists("owners_group_ids"); ok {
 		s.OwnersGroupIds = value.([]interface{})
+	} else if value, ok := d.GetOkExists("owner_group_ids"); ok {
+		s.OwnersGroupIds = value.([]interface{})
 	}
 	if value, ok := d.GetOkExists("owners_user_ids"); ok {
 		s.OwnersUserIds = value.([]interface{})
@@ -459,7 +474,7 @@ func resourceServiceRead(ctx context.Context, d *schema.ResourceData, meta inter
 	d.Set("gitlab_repository_branch", item.GitlabRepositoryBranch)
 	d.Set("environment_ids", item.EnvironmentIds)
 	d.Set("service_ids", item.ServiceIds)
-	d.Set("owners_group_ids", item.OwnersGroupIds)
+	d.Set("owner_group_ids", item.OwnersGroupIds)
 	d.Set("owners_user_ids", item.OwnersUserIds)
 	d.Set("alert_urgency_id", item.AlertUrgencyId)
 	d.Set("alerts_email_enabled", item.AlertsEmailEnabled)
@@ -569,8 +584,15 @@ func resourceServiceUpdate(ctx context.Context, d *schema.ResourceData, meta int
 	if d.HasChange("service_ids") {
 		s.ServiceIds = d.Get("service_ids").([]interface{})
 	}
-	if d.HasChange("owners_group_ids") {
-		s.OwnersGroupIds = d.Get("owners_group_ids").([]interface{})
+	var ownersGroupIds []interface{}
+	if d.HasChange("owners_group_ids") && d.Get("owners_group_ids") != nil {
+		ownersGroupIds = d.Get("owners_group_ids").([]interface{})
+	} else if d.HasChange("owner_group_ids") && d.Get("owner_group_ids") != nil {
+		ownersGroupIds = d.Get("owner_group_ids").([]interface{})
+	}
+
+	if ownersGroupIds != nil {
+		s.OwnersGroupIds = ownersGroupIds
 	}
 	if d.HasChange("owners_user_ids") {
 		s.OwnersUserIds = d.Get("owners_user_ids").([]interface{})
