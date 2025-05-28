@@ -45,7 +45,7 @@ resource "rootly_alert_routing_rule" "terraform" {
   }
   condition_type = "all"
   conditions {
-    property_field_condition_type = "is"
+    property_field_condition_type = "is_one_of"
     property_field_name = "environment"
     property_field_type = "payload"
     property_field_value = "production"
