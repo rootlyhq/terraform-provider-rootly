@@ -8,9 +8,17 @@ Please see the [Terraform Registry documentation](https://registry.terraform.io/
 
 ## Develop
 
+### Updating provider
+
 `make build` auto-generates code from Rootly's JSON-API schema, compiles provider code, and regenerates docs.
 
-Exclude API resources from the provider by adding them to the ignore-list in `tools/generate.js`.
+Some API resources are excluded from code generation if they are in the ignore-lists in `tools/generate.js`. If so, those resources will need to be updated manually.
+
+Tests are often not able to be code generated. If so, add them to the ignore-list in `tools/generate.js` and implement manually.
+
+### Release
+
+Tag a new release to automatically build and publish to the Terraform Registry.
 
 ### Local build
 
@@ -57,7 +65,3 @@ terraform {
 ```
 
 Now running `terraform init` will install the local build.
-
-## Release
-
-Tag a new release to automatically build and publish to the Terraform Registry.
