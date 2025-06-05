@@ -79,6 +79,7 @@ const excluded = {
     "secret",
     "schedule", // cannot auto-generate because of schema upgrade logic
     "schedule_rotation",
+    "service", // don't generate to preserve deprecation notices
     "shift",
     "user",
     "user_notification_rule",
