@@ -172,6 +172,64 @@ func resourceEscalationPath() *schema.Resource {
 					},
 				},
 			},
+
+			"time_restriction_time_zone": &schema.Schema{
+				Type:        schema.TypeString,
+				Default:     "International Date Line West",
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Time zone used for time restrictions.. Value must be one of `International Date Line West`, `Etc/GMT+12`, `American Samoa`, `Pacific/Pago_Pago`, `Midway Island`, `Pacific/Midway`, `Hawaii`, `Pacific/Honolulu`, `Alaska`, `America/Juneau`, `Pacific Time (US & Canada)`, `America/Los_Angeles`, `Tijuana`, `America/Tijuana`, `Arizona`, `America/Phoenix`, `Mazatlan`, `America/Mazatlan`, `Mountain Time (US & Canada)`, `America/Denver`, `Central America`, `America/Guatemala`, `Central Time (US & Canada)`, `America/Chicago`, `Chihuahua`, `America/Chihuahua`, `Guadalajara`, `America/Mexico_City`, `Mexico City`, `America/Mexico_City`, `Monterrey`, `America/Monterrey`, `Saskatchewan`, `America/Regina`, `Bogota`, `America/Bogota`, `Eastern Time (US & Canada)`, `America/New_York`, `Indiana (East)`, `America/Indiana/Indianapolis`, `Lima`, `America/Lima`, `Quito`, `America/Lima`, `Atlantic Time (Canada)`, `America/Halifax`, `Caracas`, `America/Caracas`, `Georgetown`, `America/Guyana`, `La Paz`, `America/La_Paz`, `Puerto Rico`, `America/Puerto_Rico`, `Santiago`, `America/Santiago`, `Newfoundland`, `America/St_Johns`, `Brasilia`, `America/Sao_Paulo`, `Buenos Aires`, `America/Argentina/Buenos_Aires`, `Montevideo`, `America/Montevideo`, `Greenland`, `America/Godthab`, `Mid-Atlantic`, `Atlantic/South_Georgia`, `Azores`, `Atlantic/Azores`, `Cape Verde Is.`, `Atlantic/Cape_Verde`, `Edinburgh`, `Europe/London`, `Lisbon`, `Europe/Lisbon`, `London`, `Europe/London`, `Monrovia`, `Africa/Monrovia`, `UTC`, `Etc/UTC`, `Amsterdam`, `Europe/Amsterdam`, `Belgrade`, `Europe/Belgrade`, `Berlin`, `Europe/Berlin`, `Bern`, `Europe/Zurich`, `Bratislava`, `Europe/Bratislava`, `Brussels`, `Europe/Brussels`, `Budapest`, `Europe/Budapest`, `Casablanca`, `Africa/Casablanca`, `Copenhagen`, `Europe/Copenhagen`, `Dublin`, `Europe/Dublin`, `Ljubljana`, `Europe/Ljubljana`, `Madrid`, `Europe/Madrid`, `Paris`, `Europe/Paris`, `Prague`, `Europe/Prague`, `Rome`, `Europe/Rome`, `Sarajevo`, `Europe/Sarajevo`, `Skopje`, `Europe/Skopje`, `Stockholm`, `Europe/Stockholm`, `Vienna`, `Europe/Vienna`, `Warsaw`, `Europe/Warsaw`, `West Central Africa`, `Africa/Algiers`, `Zagreb`, `Europe/Zagreb`, `Zurich`, `Europe/Zurich`, `Athens`, `Europe/Athens`, `Bucharest`, `Europe/Bucharest`, `Cairo`, `Africa/Cairo`, `Harare`, `Africa/Harare`, `Helsinki`, `Europe/Helsinki`, `Jerusalem`, `Asia/Jerusalem`, `Kaliningrad`, `Europe/Kaliningrad`, `Kyiv`, `Europe/Kiev`, `Pretoria`, `Africa/Johannesburg`, `Riga`, `Europe/Riga`, `Sofia`, `Europe/Sofia`, `Tallinn`, `Europe/Tallinn`, `Vilnius`, `Europe/Vilnius`, `Baghdad`, `Asia/Baghdad`, `Istanbul`, `Europe/Istanbul`, `Kuwait`, `Asia/Kuwait`, `Minsk`, `Europe/Minsk`, `Moscow`, `Europe/Moscow`, `Nairobi`, `Africa/Nairobi`, `Riyadh`, `Asia/Riyadh`, `St. Petersburg`, `Europe/Moscow`, `Volgograd`, `Europe/Volgograd`, `Tehran`, `Asia/Tehran`, `Abu Dhabi`, `Asia/Muscat`, `Baku`, `Asia/Baku`, `Muscat`, `Asia/Muscat`, `Samara`, `Europe/Samara`, `Tbilisi`, `Asia/Tbilisi`, `Yerevan`, `Asia/Yerevan`, `Kabul`, `Asia/Kabul`, `Almaty`, `Asia/Almaty`, `Astana`, `Asia/Almaty`, `Ekaterinburg`, `Asia/Yekaterinburg`, `Islamabad`, `Asia/Karachi`, `Karachi`, `Asia/Karachi`, `Tashkent`, `Asia/Tashkent`, `Chennai`, `Asia/Kolkata`, `Kolkata`, `Asia/Kolkata`, `Mumbai`, `Asia/Kolkata`, `New Delhi`, `Asia/Kolkata`, `Sri Jayawardenepura`, `Asia/Colombo`, `Kathmandu`, `Asia/Kathmandu`, `Dhaka`, `Asia/Dhaka`, `Urumqi`, `Asia/Urumqi`, `Rangoon`, `Asia/Rangoon`, `Bangkok`, `Asia/Bangkok`, `Hanoi`, `Asia/Bangkok`, `Jakarta`, `Asia/Jakarta`, `Krasnoyarsk`, `Asia/Krasnoyarsk`, `Novosibirsk`, `Asia/Novosibirsk`, `Beijing`, `Asia/Shanghai`, `Chongqing`, `Asia/Chongqing`, `Hong Kong`, `Asia/Hong_Kong`, `Irkutsk`, `Asia/Irkutsk`, `Kuala Lumpur`, `Asia/Kuala_Lumpur`, `Perth`, `Australia/Perth`, `Singapore`, `Asia/Singapore`, `Taipei`, `Asia/Taipei`, `Ulaanbaatar`, `Asia/Ulaanbaatar`, `Osaka`, `Asia/Tokyo`, `Sapporo`, `Asia/Tokyo`, `Seoul`, `Asia/Seoul`, `Tokyo`, `Asia/Tokyo`, `Yakutsk`, `Asia/Yakutsk`, `Adelaide`, `Australia/Adelaide`, `Darwin`, `Australia/Darwin`, `Brisbane`, `Australia/Brisbane`, `Canberra`, `Australia/Canberra`, `Guam`, `Pacific/Guam`, `Hobart`, `Australia/Hobart`, `Melbourne`, `Australia/Melbourne`, `Port Moresby`, `Pacific/Port_Moresby`, `Sydney`, `Australia/Sydney`, `Vladivostok`, `Asia/Vladivostok`, `Magadan`, `Asia/Magadan`, `New Caledonia`, `Pacific/Noumea`, `Solomon Is.`, `Pacific/Guadalcanal`, `Srednekolymsk`, `Asia/Srednekolymsk`, `Auckland`, `Pacific/Auckland`, `Fiji`, `Pacific/Fiji`, `Kamchatka`, `Asia/Kamchatka`, `Marshall Is.`, `Pacific/Majuro`, `Wellington`, `Pacific/Auckland`, `Chatham Is.`, `Pacific/Chatham`, `Nuku'alofa`, `Pacific/Tongatapu`, `Samoa`, `Pacific/Apia`, `Tokelau Is.`, `Pacific/Fakaofo`.",
+			},
+
+			"time_restrictions": &schema.Schema{
+				Type:             schema.TypeList,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "If time restrictions are set, alerts will follow this path when they arrive within the specified time ranges and meet the rules.",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+
+						"start_day": &schema.Schema{
+							Type:        schema.TypeString,
+							Default:     "monday",
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Value must be one of `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`.",
+						},
+
+						"start_time": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Formatted as HH:MM",
+						},
+
+						"end_day": &schema.Schema{
+							Type:        schema.TypeString,
+							Default:     "monday",
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Value must be one of `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`.",
+						},
+
+						"end_time": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Formatted as HH:MM",
+						},
+					},
+				},
+			},
 		},
 	}
 }
@@ -212,6 +270,12 @@ func resourceEscalationPathCreate(ctx context.Context, d *schema.ResourceData, m
 	}
 	if value, ok := d.GetOkExists("rules"); ok {
 		s.Rules = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("time_restriction_time_zone"); ok {
+		s.TimeRestrictionTimeZone = value.(string)
+	}
+	if value, ok := d.GetOkExists("time_restrictions"); ok {
+		s.TimeRestrictions = value.([]interface{})
 	}
 
 	res, err := c.CreateEscalationPath(s)
@@ -275,6 +339,29 @@ func resourceEscalationPathRead(ctx context.Context, d *schema.ResourceData, met
 		d.Set("rules", nil)
 	}
 
+	d.Set("time_restriction_time_zone", item.TimeRestrictionTimeZone)
+
+	if item.TimeRestrictions != nil {
+		processedItems := make([]map[string]interface{}, 0)
+
+		for _, c := range item.TimeRestrictions {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processedItem := map[string]interface{}{
+					"start_day":  rawItem["start_day"],
+					"start_time": rawItem["start_time"],
+					"end_day":    rawItem["end_day"],
+					"end_time":   rawItem["end_time"],
+				}
+				processedItems = append(processedItems, processedItem)
+			}
+		}
+
+		d.Set("time_restrictions", processedItems)
+	} else {
+		d.Set("time_restrictions", nil)
+	}
+
 	return nil
 }
 
@@ -313,6 +400,12 @@ func resourceEscalationPathUpdate(ctx context.Context, d *schema.ResourceData, m
 	}
 	if d.HasChange("rules") {
 		s.Rules = d.Get("rules").([]interface{})
+	}
+	if d.HasChange("time_restriction_time_zone") {
+		s.TimeRestrictionTimeZone = d.Get("time_restriction_time_zone").(string)
+	}
+	if d.HasChange("time_restrictions") {
+		s.TimeRestrictions = d.Get("time_restrictions").([]interface{})
 	}
 
 	_, err := c.UpdateEscalationPath(d.Id(), s)

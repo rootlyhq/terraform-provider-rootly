@@ -426,28 +426,29 @@ const (
 
 // Defines values for AlertEventAction.
 const (
-	AlertEventActionAcknowledged AlertEventAction = "acknowledged"
-	AlertEventActionAdded        AlertEventAction = "added"
-	AlertEventActionAnswered     AlertEventAction = "answered"
-	AlertEventActionAttached     AlertEventAction = "attached"
-	AlertEventActionCalled       AlertEventAction = "called"
-	AlertEventActionCreated      AlertEventAction = "created"
-	AlertEventActionEmailed      AlertEventAction = "emailed"
-	AlertEventActionEscalated    AlertEventAction = "escalated"
-	AlertEventActionMarked       AlertEventAction = "marked"
-	AlertEventActionMuted        AlertEventAction = "muted"
-	AlertEventActionNotMarked    AlertEventAction = "not_marked"
-	AlertEventActionNotified     AlertEventAction = "notified"
-	AlertEventActionOpened       AlertEventAction = "opened"
-	AlertEventActionPaged        AlertEventAction = "paged"
-	AlertEventActionRemoved      AlertEventAction = "removed"
-	AlertEventActionResolved     AlertEventAction = "resolved"
-	AlertEventActionRetriggered  AlertEventAction = "retriggered"
-	AlertEventActionSlacked      AlertEventAction = "slacked"
-	AlertEventActionSnoozed      AlertEventAction = "snoozed"
-	AlertEventActionTexted       AlertEventAction = "texted"
-	AlertEventActionTriggered    AlertEventAction = "triggered"
-	AlertEventActionUpdated      AlertEventAction = "updated"
+	AlertEventActionAcknowledged          AlertEventAction = "acknowledged"
+	AlertEventActionAdded                 AlertEventAction = "added"
+	AlertEventActionAnswered              AlertEventAction = "answered"
+	AlertEventActionAttached              AlertEventAction = "attached"
+	AlertEventActionCalled                AlertEventAction = "called"
+	AlertEventActionCreated               AlertEventAction = "created"
+	AlertEventActionEmailed               AlertEventAction = "emailed"
+	AlertEventActionEscalated             AlertEventAction = "escalated"
+	AlertEventActionEscalationPolicyPaged AlertEventAction = "escalation_policy_paged"
+	AlertEventActionMarked                AlertEventAction = "marked"
+	AlertEventActionMuted                 AlertEventAction = "muted"
+	AlertEventActionNotMarked             AlertEventAction = "not_marked"
+	AlertEventActionNotified              AlertEventAction = "notified"
+	AlertEventActionOpened                AlertEventAction = "opened"
+	AlertEventActionPaged                 AlertEventAction = "paged"
+	AlertEventActionRemoved               AlertEventAction = "removed"
+	AlertEventActionResolved              AlertEventAction = "resolved"
+	AlertEventActionRetriggered           AlertEventAction = "retriggered"
+	AlertEventActionSlacked               AlertEventAction = "slacked"
+	AlertEventActionSnoozed               AlertEventAction = "snoozed"
+	AlertEventActionTexted                AlertEventAction = "texted"
+	AlertEventActionTriggered             AlertEventAction = "triggered"
+	AlertEventActionUpdated               AlertEventAction = "updated"
 )
 
 // Defines values for AlertEventKind.
@@ -473,6 +474,25 @@ const (
 // Defines values for AlertEventResponseDataType.
 const (
 	AlertEventResponseDataTypeAlertEvents AlertEventResponseDataType = "alert_events"
+)
+
+// Defines values for AlertGroupConditionsPropertyFieldConditionType.
+const (
+	AlertGroupConditionsPropertyFieldConditionTypeContains             AlertGroupConditionsPropertyFieldConditionType = "contains"
+	AlertGroupConditionsPropertyFieldConditionTypeDoesNotContain       AlertGroupConditionsPropertyFieldConditionType = "does_not_contain"
+	AlertGroupConditionsPropertyFieldConditionTypeEndsWith             AlertGroupConditionsPropertyFieldConditionType = "ends_with"
+	AlertGroupConditionsPropertyFieldConditionTypeIsEmpty              AlertGroupConditionsPropertyFieldConditionType = "is_empty"
+	AlertGroupConditionsPropertyFieldConditionTypeIsNotOneOf           AlertGroupConditionsPropertyFieldConditionType = "is_not_one_of"
+	AlertGroupConditionsPropertyFieldConditionTypeIsOneOf              AlertGroupConditionsPropertyFieldConditionType = "is_one_of"
+	AlertGroupConditionsPropertyFieldConditionTypeMatchesExistingAlert AlertGroupConditionsPropertyFieldConditionType = "matches_existing_alert"
+	AlertGroupConditionsPropertyFieldConditionTypeMatchesRegex         AlertGroupConditionsPropertyFieldConditionType = "matches_regex"
+	AlertGroupConditionsPropertyFieldConditionTypeStartsWith           AlertGroupConditionsPropertyFieldConditionType = "starts_with"
+)
+
+// Defines values for AlertGroupConditionsPropertyFieldType.
+const (
+	AlertGroupConditionsPropertyFieldTypeAttribute AlertGroupConditionsPropertyFieldType = "attribute"
+	AlertGroupConditionsPropertyFieldTypePayload   AlertGroupConditionsPropertyFieldType = "payload"
 )
 
 // Defines values for AlertGroupTargetsTargetType.
@@ -1400,6 +1420,319 @@ const (
 	EscalationPathRulesRuleTypeWorkingHour  EscalationPathRulesRuleType = "working_hour"
 )
 
+// Defines values for EscalationPathTimeRestrictionTimeZone.
+const (
+	EscalationPathTimeRestrictionTimeZoneAbuDhabi                    EscalationPathTimeRestrictionTimeZone = "Abu Dhabi"
+	EscalationPathTimeRestrictionTimeZoneAdelaide                    EscalationPathTimeRestrictionTimeZone = "Adelaide"
+	EscalationPathTimeRestrictionTimeZoneAfricaAlgiers               EscalationPathTimeRestrictionTimeZone = "Africa/Algiers"
+	EscalationPathTimeRestrictionTimeZoneAfricaCairo                 EscalationPathTimeRestrictionTimeZone = "Africa/Cairo"
+	EscalationPathTimeRestrictionTimeZoneAfricaCasablanca            EscalationPathTimeRestrictionTimeZone = "Africa/Casablanca"
+	EscalationPathTimeRestrictionTimeZoneAfricaHarare                EscalationPathTimeRestrictionTimeZone = "Africa/Harare"
+	EscalationPathTimeRestrictionTimeZoneAfricaJohannesburg          EscalationPathTimeRestrictionTimeZone = "Africa/Johannesburg"
+	EscalationPathTimeRestrictionTimeZoneAfricaMonrovia              EscalationPathTimeRestrictionTimeZone = "Africa/Monrovia"
+	EscalationPathTimeRestrictionTimeZoneAfricaNairobi               EscalationPathTimeRestrictionTimeZone = "Africa/Nairobi"
+	EscalationPathTimeRestrictionTimeZoneAlaska                      EscalationPathTimeRestrictionTimeZone = "Alaska"
+	EscalationPathTimeRestrictionTimeZoneAlmaty                      EscalationPathTimeRestrictionTimeZone = "Almaty"
+	EscalationPathTimeRestrictionTimeZoneAmericaArgentinaBuenosAires EscalationPathTimeRestrictionTimeZone = "America/Argentina/Buenos_Aires"
+	EscalationPathTimeRestrictionTimeZoneAmericaBogota               EscalationPathTimeRestrictionTimeZone = "America/Bogota"
+	EscalationPathTimeRestrictionTimeZoneAmericaCaracas              EscalationPathTimeRestrictionTimeZone = "America/Caracas"
+	EscalationPathTimeRestrictionTimeZoneAmericaChicago              EscalationPathTimeRestrictionTimeZone = "America/Chicago"
+	EscalationPathTimeRestrictionTimeZoneAmericaChihuahua            EscalationPathTimeRestrictionTimeZone = "America/Chihuahua"
+	EscalationPathTimeRestrictionTimeZoneAmericaDenver               EscalationPathTimeRestrictionTimeZone = "America/Denver"
+	EscalationPathTimeRestrictionTimeZoneAmericaGodthab              EscalationPathTimeRestrictionTimeZone = "America/Godthab"
+	EscalationPathTimeRestrictionTimeZoneAmericaGuatemala            EscalationPathTimeRestrictionTimeZone = "America/Guatemala"
+	EscalationPathTimeRestrictionTimeZoneAmericaGuyana               EscalationPathTimeRestrictionTimeZone = "America/Guyana"
+	EscalationPathTimeRestrictionTimeZoneAmericaHalifax              EscalationPathTimeRestrictionTimeZone = "America/Halifax"
+	EscalationPathTimeRestrictionTimeZoneAmericaIndianaIndianapolis  EscalationPathTimeRestrictionTimeZone = "America/Indiana/Indianapolis"
+	EscalationPathTimeRestrictionTimeZoneAmericaJuneau               EscalationPathTimeRestrictionTimeZone = "America/Juneau"
+	EscalationPathTimeRestrictionTimeZoneAmericaLaPaz                EscalationPathTimeRestrictionTimeZone = "America/La_Paz"
+	EscalationPathTimeRestrictionTimeZoneAmericaLima                 EscalationPathTimeRestrictionTimeZone = "America/Lima"
+	EscalationPathTimeRestrictionTimeZoneAmericaLosAngeles           EscalationPathTimeRestrictionTimeZone = "America/Los_Angeles"
+	EscalationPathTimeRestrictionTimeZoneAmericaMazatlan             EscalationPathTimeRestrictionTimeZone = "America/Mazatlan"
+	EscalationPathTimeRestrictionTimeZoneAmericaMexicoCity           EscalationPathTimeRestrictionTimeZone = "America/Mexico_City"
+	EscalationPathTimeRestrictionTimeZoneAmericaMonterrey            EscalationPathTimeRestrictionTimeZone = "America/Monterrey"
+	EscalationPathTimeRestrictionTimeZoneAmericaMontevideo           EscalationPathTimeRestrictionTimeZone = "America/Montevideo"
+	EscalationPathTimeRestrictionTimeZoneAmericaNewYork              EscalationPathTimeRestrictionTimeZone = "America/New_York"
+	EscalationPathTimeRestrictionTimeZoneAmericaPhoenix              EscalationPathTimeRestrictionTimeZone = "America/Phoenix"
+	EscalationPathTimeRestrictionTimeZoneAmericaPuertoRico           EscalationPathTimeRestrictionTimeZone = "America/Puerto_Rico"
+	EscalationPathTimeRestrictionTimeZoneAmericaRegina               EscalationPathTimeRestrictionTimeZone = "America/Regina"
+	EscalationPathTimeRestrictionTimeZoneAmericaSantiago             EscalationPathTimeRestrictionTimeZone = "America/Santiago"
+	EscalationPathTimeRestrictionTimeZoneAmericaSaoPaulo             EscalationPathTimeRestrictionTimeZone = "America/Sao_Paulo"
+	EscalationPathTimeRestrictionTimeZoneAmericaStJohns              EscalationPathTimeRestrictionTimeZone = "America/St_Johns"
+	EscalationPathTimeRestrictionTimeZoneAmericaTijuana              EscalationPathTimeRestrictionTimeZone = "America/Tijuana"
+	EscalationPathTimeRestrictionTimeZoneAmericanSamoa               EscalationPathTimeRestrictionTimeZone = "American Samoa"
+	EscalationPathTimeRestrictionTimeZoneAmsterdam                   EscalationPathTimeRestrictionTimeZone = "Amsterdam"
+	EscalationPathTimeRestrictionTimeZoneArizona                     EscalationPathTimeRestrictionTimeZone = "Arizona"
+	EscalationPathTimeRestrictionTimeZoneAsiaAlmaty                  EscalationPathTimeRestrictionTimeZone = "Asia/Almaty"
+	EscalationPathTimeRestrictionTimeZoneAsiaBaghdad                 EscalationPathTimeRestrictionTimeZone = "Asia/Baghdad"
+	EscalationPathTimeRestrictionTimeZoneAsiaBaku                    EscalationPathTimeRestrictionTimeZone = "Asia/Baku"
+	EscalationPathTimeRestrictionTimeZoneAsiaBangkok                 EscalationPathTimeRestrictionTimeZone = "Asia/Bangkok"
+	EscalationPathTimeRestrictionTimeZoneAsiaChongqing               EscalationPathTimeRestrictionTimeZone = "Asia/Chongqing"
+	EscalationPathTimeRestrictionTimeZoneAsiaColombo                 EscalationPathTimeRestrictionTimeZone = "Asia/Colombo"
+	EscalationPathTimeRestrictionTimeZoneAsiaDhaka                   EscalationPathTimeRestrictionTimeZone = "Asia/Dhaka"
+	EscalationPathTimeRestrictionTimeZoneAsiaHongKong                EscalationPathTimeRestrictionTimeZone = "Asia/Hong_Kong"
+	EscalationPathTimeRestrictionTimeZoneAsiaIrkutsk                 EscalationPathTimeRestrictionTimeZone = "Asia/Irkutsk"
+	EscalationPathTimeRestrictionTimeZoneAsiaJakarta                 EscalationPathTimeRestrictionTimeZone = "Asia/Jakarta"
+	EscalationPathTimeRestrictionTimeZoneAsiaJerusalem               EscalationPathTimeRestrictionTimeZone = "Asia/Jerusalem"
+	EscalationPathTimeRestrictionTimeZoneAsiaKabul                   EscalationPathTimeRestrictionTimeZone = "Asia/Kabul"
+	EscalationPathTimeRestrictionTimeZoneAsiaKamchatka               EscalationPathTimeRestrictionTimeZone = "Asia/Kamchatka"
+	EscalationPathTimeRestrictionTimeZoneAsiaKarachi                 EscalationPathTimeRestrictionTimeZone = "Asia/Karachi"
+	EscalationPathTimeRestrictionTimeZoneAsiaKathmandu               EscalationPathTimeRestrictionTimeZone = "Asia/Kathmandu"
+	EscalationPathTimeRestrictionTimeZoneAsiaKolkata                 EscalationPathTimeRestrictionTimeZone = "Asia/Kolkata"
+	EscalationPathTimeRestrictionTimeZoneAsiaKrasnoyarsk             EscalationPathTimeRestrictionTimeZone = "Asia/Krasnoyarsk"
+	EscalationPathTimeRestrictionTimeZoneAsiaKualaLumpur             EscalationPathTimeRestrictionTimeZone = "Asia/Kuala_Lumpur"
+	EscalationPathTimeRestrictionTimeZoneAsiaKuwait                  EscalationPathTimeRestrictionTimeZone = "Asia/Kuwait"
+	EscalationPathTimeRestrictionTimeZoneAsiaMagadan                 EscalationPathTimeRestrictionTimeZone = "Asia/Magadan"
+	EscalationPathTimeRestrictionTimeZoneAsiaMuscat                  EscalationPathTimeRestrictionTimeZone = "Asia/Muscat"
+	EscalationPathTimeRestrictionTimeZoneAsiaNovosibirsk             EscalationPathTimeRestrictionTimeZone = "Asia/Novosibirsk"
+	EscalationPathTimeRestrictionTimeZoneAsiaRangoon                 EscalationPathTimeRestrictionTimeZone = "Asia/Rangoon"
+	EscalationPathTimeRestrictionTimeZoneAsiaRiyadh                  EscalationPathTimeRestrictionTimeZone = "Asia/Riyadh"
+	EscalationPathTimeRestrictionTimeZoneAsiaSeoul                   EscalationPathTimeRestrictionTimeZone = "Asia/Seoul"
+	EscalationPathTimeRestrictionTimeZoneAsiaShanghai                EscalationPathTimeRestrictionTimeZone = "Asia/Shanghai"
+	EscalationPathTimeRestrictionTimeZoneAsiaSingapore               EscalationPathTimeRestrictionTimeZone = "Asia/Singapore"
+	EscalationPathTimeRestrictionTimeZoneAsiaSrednekolymsk           EscalationPathTimeRestrictionTimeZone = "Asia/Srednekolymsk"
+	EscalationPathTimeRestrictionTimeZoneAsiaTaipei                  EscalationPathTimeRestrictionTimeZone = "Asia/Taipei"
+	EscalationPathTimeRestrictionTimeZoneAsiaTashkent                EscalationPathTimeRestrictionTimeZone = "Asia/Tashkent"
+	EscalationPathTimeRestrictionTimeZoneAsiaTbilisi                 EscalationPathTimeRestrictionTimeZone = "Asia/Tbilisi"
+	EscalationPathTimeRestrictionTimeZoneAsiaTehran                  EscalationPathTimeRestrictionTimeZone = "Asia/Tehran"
+	EscalationPathTimeRestrictionTimeZoneAsiaTokyo                   EscalationPathTimeRestrictionTimeZone = "Asia/Tokyo"
+	EscalationPathTimeRestrictionTimeZoneAsiaUlaanbaatar             EscalationPathTimeRestrictionTimeZone = "Asia/Ulaanbaatar"
+	EscalationPathTimeRestrictionTimeZoneAsiaUrumqi                  EscalationPathTimeRestrictionTimeZone = "Asia/Urumqi"
+	EscalationPathTimeRestrictionTimeZoneAsiaVladivostok             EscalationPathTimeRestrictionTimeZone = "Asia/Vladivostok"
+	EscalationPathTimeRestrictionTimeZoneAsiaYakutsk                 EscalationPathTimeRestrictionTimeZone = "Asia/Yakutsk"
+	EscalationPathTimeRestrictionTimeZoneAsiaYekaterinburg           EscalationPathTimeRestrictionTimeZone = "Asia/Yekaterinburg"
+	EscalationPathTimeRestrictionTimeZoneAsiaYerevan                 EscalationPathTimeRestrictionTimeZone = "Asia/Yerevan"
+	EscalationPathTimeRestrictionTimeZoneAstana                      EscalationPathTimeRestrictionTimeZone = "Astana"
+	EscalationPathTimeRestrictionTimeZoneAthens                      EscalationPathTimeRestrictionTimeZone = "Athens"
+	EscalationPathTimeRestrictionTimeZoneAtlanticAzores              EscalationPathTimeRestrictionTimeZone = "Atlantic/Azores"
+	EscalationPathTimeRestrictionTimeZoneAtlanticCapeVerde           EscalationPathTimeRestrictionTimeZone = "Atlantic/Cape_Verde"
+	EscalationPathTimeRestrictionTimeZoneAtlanticSouthGeorgia        EscalationPathTimeRestrictionTimeZone = "Atlantic/South_Georgia"
+	EscalationPathTimeRestrictionTimeZoneAtlanticTimeCanada          EscalationPathTimeRestrictionTimeZone = "Atlantic Time (Canada)"
+	EscalationPathTimeRestrictionTimeZoneAuckland                    EscalationPathTimeRestrictionTimeZone = "Auckland"
+	EscalationPathTimeRestrictionTimeZoneAustraliaAdelaide           EscalationPathTimeRestrictionTimeZone = "Australia/Adelaide"
+	EscalationPathTimeRestrictionTimeZoneAustraliaBrisbane           EscalationPathTimeRestrictionTimeZone = "Australia/Brisbane"
+	EscalationPathTimeRestrictionTimeZoneAustraliaCanberra           EscalationPathTimeRestrictionTimeZone = "Australia/Canberra"
+	EscalationPathTimeRestrictionTimeZoneAustraliaDarwin             EscalationPathTimeRestrictionTimeZone = "Australia/Darwin"
+	EscalationPathTimeRestrictionTimeZoneAustraliaHobart             EscalationPathTimeRestrictionTimeZone = "Australia/Hobart"
+	EscalationPathTimeRestrictionTimeZoneAustraliaMelbourne          EscalationPathTimeRestrictionTimeZone = "Australia/Melbourne"
+	EscalationPathTimeRestrictionTimeZoneAustraliaPerth              EscalationPathTimeRestrictionTimeZone = "Australia/Perth"
+	EscalationPathTimeRestrictionTimeZoneAustraliaSydney             EscalationPathTimeRestrictionTimeZone = "Australia/Sydney"
+	EscalationPathTimeRestrictionTimeZoneAzores                      EscalationPathTimeRestrictionTimeZone = "Azores"
+	EscalationPathTimeRestrictionTimeZoneBaghdad                     EscalationPathTimeRestrictionTimeZone = "Baghdad"
+	EscalationPathTimeRestrictionTimeZoneBaku                        EscalationPathTimeRestrictionTimeZone = "Baku"
+	EscalationPathTimeRestrictionTimeZoneBangkok                     EscalationPathTimeRestrictionTimeZone = "Bangkok"
+	EscalationPathTimeRestrictionTimeZoneBeijing                     EscalationPathTimeRestrictionTimeZone = "Beijing"
+	EscalationPathTimeRestrictionTimeZoneBelgrade                    EscalationPathTimeRestrictionTimeZone = "Belgrade"
+	EscalationPathTimeRestrictionTimeZoneBerlin                      EscalationPathTimeRestrictionTimeZone = "Berlin"
+	EscalationPathTimeRestrictionTimeZoneBern                        EscalationPathTimeRestrictionTimeZone = "Bern"
+	EscalationPathTimeRestrictionTimeZoneBogota                      EscalationPathTimeRestrictionTimeZone = "Bogota"
+	EscalationPathTimeRestrictionTimeZoneBrasilia                    EscalationPathTimeRestrictionTimeZone = "Brasilia"
+	EscalationPathTimeRestrictionTimeZoneBratislava                  EscalationPathTimeRestrictionTimeZone = "Bratislava"
+	EscalationPathTimeRestrictionTimeZoneBrisbane                    EscalationPathTimeRestrictionTimeZone = "Brisbane"
+	EscalationPathTimeRestrictionTimeZoneBrussels                    EscalationPathTimeRestrictionTimeZone = "Brussels"
+	EscalationPathTimeRestrictionTimeZoneBucharest                   EscalationPathTimeRestrictionTimeZone = "Bucharest"
+	EscalationPathTimeRestrictionTimeZoneBudapest                    EscalationPathTimeRestrictionTimeZone = "Budapest"
+	EscalationPathTimeRestrictionTimeZoneBuenosAires                 EscalationPathTimeRestrictionTimeZone = "Buenos Aires"
+	EscalationPathTimeRestrictionTimeZoneCairo                       EscalationPathTimeRestrictionTimeZone = "Cairo"
+	EscalationPathTimeRestrictionTimeZoneCanberra                    EscalationPathTimeRestrictionTimeZone = "Canberra"
+	EscalationPathTimeRestrictionTimeZoneCapeVerdeIs                 EscalationPathTimeRestrictionTimeZone = "Cape Verde Is."
+	EscalationPathTimeRestrictionTimeZoneCaracas                     EscalationPathTimeRestrictionTimeZone = "Caracas"
+	EscalationPathTimeRestrictionTimeZoneCasablanca                  EscalationPathTimeRestrictionTimeZone = "Casablanca"
+	EscalationPathTimeRestrictionTimeZoneCentralAmerica              EscalationPathTimeRestrictionTimeZone = "Central America"
+	EscalationPathTimeRestrictionTimeZoneCentralTimeUSCanada         EscalationPathTimeRestrictionTimeZone = "Central Time (US & Canada)"
+	EscalationPathTimeRestrictionTimeZoneChathamIs                   EscalationPathTimeRestrictionTimeZone = "Chatham Is."
+	EscalationPathTimeRestrictionTimeZoneChennai                     EscalationPathTimeRestrictionTimeZone = "Chennai"
+	EscalationPathTimeRestrictionTimeZoneChihuahua                   EscalationPathTimeRestrictionTimeZone = "Chihuahua"
+	EscalationPathTimeRestrictionTimeZoneChongqing                   EscalationPathTimeRestrictionTimeZone = "Chongqing"
+	EscalationPathTimeRestrictionTimeZoneCopenhagen                  EscalationPathTimeRestrictionTimeZone = "Copenhagen"
+	EscalationPathTimeRestrictionTimeZoneDarwin                      EscalationPathTimeRestrictionTimeZone = "Darwin"
+	EscalationPathTimeRestrictionTimeZoneDhaka                       EscalationPathTimeRestrictionTimeZone = "Dhaka"
+	EscalationPathTimeRestrictionTimeZoneDublin                      EscalationPathTimeRestrictionTimeZone = "Dublin"
+	EscalationPathTimeRestrictionTimeZoneEasternTimeUSCanada         EscalationPathTimeRestrictionTimeZone = "Eastern Time (US & Canada)"
+	EscalationPathTimeRestrictionTimeZoneEdinburgh                   EscalationPathTimeRestrictionTimeZone = "Edinburgh"
+	EscalationPathTimeRestrictionTimeZoneEkaterinburg                EscalationPathTimeRestrictionTimeZone = "Ekaterinburg"
+	EscalationPathTimeRestrictionTimeZoneEtcGMT12                    EscalationPathTimeRestrictionTimeZone = "Etc/GMT+12"
+	EscalationPathTimeRestrictionTimeZoneEtcUTC                      EscalationPathTimeRestrictionTimeZone = "Etc/UTC"
+	EscalationPathTimeRestrictionTimeZoneEuropeAmsterdam             EscalationPathTimeRestrictionTimeZone = "Europe/Amsterdam"
+	EscalationPathTimeRestrictionTimeZoneEuropeAthens                EscalationPathTimeRestrictionTimeZone = "Europe/Athens"
+	EscalationPathTimeRestrictionTimeZoneEuropeBelgrade              EscalationPathTimeRestrictionTimeZone = "Europe/Belgrade"
+	EscalationPathTimeRestrictionTimeZoneEuropeBerlin                EscalationPathTimeRestrictionTimeZone = "Europe/Berlin"
+	EscalationPathTimeRestrictionTimeZoneEuropeBratislava            EscalationPathTimeRestrictionTimeZone = "Europe/Bratislava"
+	EscalationPathTimeRestrictionTimeZoneEuropeBrussels              EscalationPathTimeRestrictionTimeZone = "Europe/Brussels"
+	EscalationPathTimeRestrictionTimeZoneEuropeBucharest             EscalationPathTimeRestrictionTimeZone = "Europe/Bucharest"
+	EscalationPathTimeRestrictionTimeZoneEuropeBudapest              EscalationPathTimeRestrictionTimeZone = "Europe/Budapest"
+	EscalationPathTimeRestrictionTimeZoneEuropeCopenhagen            EscalationPathTimeRestrictionTimeZone = "Europe/Copenhagen"
+	EscalationPathTimeRestrictionTimeZoneEuropeDublin                EscalationPathTimeRestrictionTimeZone = "Europe/Dublin"
+	EscalationPathTimeRestrictionTimeZoneEuropeHelsinki              EscalationPathTimeRestrictionTimeZone = "Europe/Helsinki"
+	EscalationPathTimeRestrictionTimeZoneEuropeIstanbul              EscalationPathTimeRestrictionTimeZone = "Europe/Istanbul"
+	EscalationPathTimeRestrictionTimeZoneEuropeKaliningrad           EscalationPathTimeRestrictionTimeZone = "Europe/Kaliningrad"
+	EscalationPathTimeRestrictionTimeZoneEuropeKiev                  EscalationPathTimeRestrictionTimeZone = "Europe/Kiev"
+	EscalationPathTimeRestrictionTimeZoneEuropeLisbon                EscalationPathTimeRestrictionTimeZone = "Europe/Lisbon"
+	EscalationPathTimeRestrictionTimeZoneEuropeLjubljana             EscalationPathTimeRestrictionTimeZone = "Europe/Ljubljana"
+	EscalationPathTimeRestrictionTimeZoneEuropeLondon                EscalationPathTimeRestrictionTimeZone = "Europe/London"
+	EscalationPathTimeRestrictionTimeZoneEuropeMadrid                EscalationPathTimeRestrictionTimeZone = "Europe/Madrid"
+	EscalationPathTimeRestrictionTimeZoneEuropeMinsk                 EscalationPathTimeRestrictionTimeZone = "Europe/Minsk"
+	EscalationPathTimeRestrictionTimeZoneEuropeMoscow                EscalationPathTimeRestrictionTimeZone = "Europe/Moscow"
+	EscalationPathTimeRestrictionTimeZoneEuropeParis                 EscalationPathTimeRestrictionTimeZone = "Europe/Paris"
+	EscalationPathTimeRestrictionTimeZoneEuropePrague                EscalationPathTimeRestrictionTimeZone = "Europe/Prague"
+	EscalationPathTimeRestrictionTimeZoneEuropeRiga                  EscalationPathTimeRestrictionTimeZone = "Europe/Riga"
+	EscalationPathTimeRestrictionTimeZoneEuropeRome                  EscalationPathTimeRestrictionTimeZone = "Europe/Rome"
+	EscalationPathTimeRestrictionTimeZoneEuropeSamara                EscalationPathTimeRestrictionTimeZone = "Europe/Samara"
+	EscalationPathTimeRestrictionTimeZoneEuropeSarajevo              EscalationPathTimeRestrictionTimeZone = "Europe/Sarajevo"
+	EscalationPathTimeRestrictionTimeZoneEuropeSkopje                EscalationPathTimeRestrictionTimeZone = "Europe/Skopje"
+	EscalationPathTimeRestrictionTimeZoneEuropeSofia                 EscalationPathTimeRestrictionTimeZone = "Europe/Sofia"
+	EscalationPathTimeRestrictionTimeZoneEuropeStockholm             EscalationPathTimeRestrictionTimeZone = "Europe/Stockholm"
+	EscalationPathTimeRestrictionTimeZoneEuropeTallinn               EscalationPathTimeRestrictionTimeZone = "Europe/Tallinn"
+	EscalationPathTimeRestrictionTimeZoneEuropeVienna                EscalationPathTimeRestrictionTimeZone = "Europe/Vienna"
+	EscalationPathTimeRestrictionTimeZoneEuropeVilnius               EscalationPathTimeRestrictionTimeZone = "Europe/Vilnius"
+	EscalationPathTimeRestrictionTimeZoneEuropeVolgograd             EscalationPathTimeRestrictionTimeZone = "Europe/Volgograd"
+	EscalationPathTimeRestrictionTimeZoneEuropeWarsaw                EscalationPathTimeRestrictionTimeZone = "Europe/Warsaw"
+	EscalationPathTimeRestrictionTimeZoneEuropeZagreb                EscalationPathTimeRestrictionTimeZone = "Europe/Zagreb"
+	EscalationPathTimeRestrictionTimeZoneEuropeZurich                EscalationPathTimeRestrictionTimeZone = "Europe/Zurich"
+	EscalationPathTimeRestrictionTimeZoneFiji                        EscalationPathTimeRestrictionTimeZone = "Fiji"
+	EscalationPathTimeRestrictionTimeZoneGeorgetown                  EscalationPathTimeRestrictionTimeZone = "Georgetown"
+	EscalationPathTimeRestrictionTimeZoneGreenland                   EscalationPathTimeRestrictionTimeZone = "Greenland"
+	EscalationPathTimeRestrictionTimeZoneGuadalajara                 EscalationPathTimeRestrictionTimeZone = "Guadalajara"
+	EscalationPathTimeRestrictionTimeZoneGuam                        EscalationPathTimeRestrictionTimeZone = "Guam"
+	EscalationPathTimeRestrictionTimeZoneHanoi                       EscalationPathTimeRestrictionTimeZone = "Hanoi"
+	EscalationPathTimeRestrictionTimeZoneHarare                      EscalationPathTimeRestrictionTimeZone = "Harare"
+	EscalationPathTimeRestrictionTimeZoneHawaii                      EscalationPathTimeRestrictionTimeZone = "Hawaii"
+	EscalationPathTimeRestrictionTimeZoneHelsinki                    EscalationPathTimeRestrictionTimeZone = "Helsinki"
+	EscalationPathTimeRestrictionTimeZoneHobart                      EscalationPathTimeRestrictionTimeZone = "Hobart"
+	EscalationPathTimeRestrictionTimeZoneHongKong                    EscalationPathTimeRestrictionTimeZone = "Hong Kong"
+	EscalationPathTimeRestrictionTimeZoneIndianaEast                 EscalationPathTimeRestrictionTimeZone = "Indiana (East)"
+	EscalationPathTimeRestrictionTimeZoneInternationalDateLineWest   EscalationPathTimeRestrictionTimeZone = "International Date Line West"
+	EscalationPathTimeRestrictionTimeZoneIrkutsk                     EscalationPathTimeRestrictionTimeZone = "Irkutsk"
+	EscalationPathTimeRestrictionTimeZoneIslamabad                   EscalationPathTimeRestrictionTimeZone = "Islamabad"
+	EscalationPathTimeRestrictionTimeZoneIstanbul                    EscalationPathTimeRestrictionTimeZone = "Istanbul"
+	EscalationPathTimeRestrictionTimeZoneJakarta                     EscalationPathTimeRestrictionTimeZone = "Jakarta"
+	EscalationPathTimeRestrictionTimeZoneJerusalem                   EscalationPathTimeRestrictionTimeZone = "Jerusalem"
+	EscalationPathTimeRestrictionTimeZoneKabul                       EscalationPathTimeRestrictionTimeZone = "Kabul"
+	EscalationPathTimeRestrictionTimeZoneKaliningrad                 EscalationPathTimeRestrictionTimeZone = "Kaliningrad"
+	EscalationPathTimeRestrictionTimeZoneKamchatka                   EscalationPathTimeRestrictionTimeZone = "Kamchatka"
+	EscalationPathTimeRestrictionTimeZoneKarachi                     EscalationPathTimeRestrictionTimeZone = "Karachi"
+	EscalationPathTimeRestrictionTimeZoneKathmandu                   EscalationPathTimeRestrictionTimeZone = "Kathmandu"
+	EscalationPathTimeRestrictionTimeZoneKolkata                     EscalationPathTimeRestrictionTimeZone = "Kolkata"
+	EscalationPathTimeRestrictionTimeZoneKrasnoyarsk                 EscalationPathTimeRestrictionTimeZone = "Krasnoyarsk"
+	EscalationPathTimeRestrictionTimeZoneKualaLumpur                 EscalationPathTimeRestrictionTimeZone = "Kuala Lumpur"
+	EscalationPathTimeRestrictionTimeZoneKuwait                      EscalationPathTimeRestrictionTimeZone = "Kuwait"
+	EscalationPathTimeRestrictionTimeZoneKyiv                        EscalationPathTimeRestrictionTimeZone = "Kyiv"
+	EscalationPathTimeRestrictionTimeZoneLaPaz                       EscalationPathTimeRestrictionTimeZone = "La Paz"
+	EscalationPathTimeRestrictionTimeZoneLima                        EscalationPathTimeRestrictionTimeZone = "Lima"
+	EscalationPathTimeRestrictionTimeZoneLisbon                      EscalationPathTimeRestrictionTimeZone = "Lisbon"
+	EscalationPathTimeRestrictionTimeZoneLjubljana                   EscalationPathTimeRestrictionTimeZone = "Ljubljana"
+	EscalationPathTimeRestrictionTimeZoneLondon                      EscalationPathTimeRestrictionTimeZone = "London"
+	EscalationPathTimeRestrictionTimeZoneMadrid                      EscalationPathTimeRestrictionTimeZone = "Madrid"
+	EscalationPathTimeRestrictionTimeZoneMagadan                     EscalationPathTimeRestrictionTimeZone = "Magadan"
+	EscalationPathTimeRestrictionTimeZoneMarshallIs                  EscalationPathTimeRestrictionTimeZone = "Marshall Is."
+	EscalationPathTimeRestrictionTimeZoneMazatlan                    EscalationPathTimeRestrictionTimeZone = "Mazatlan"
+	EscalationPathTimeRestrictionTimeZoneMelbourne                   EscalationPathTimeRestrictionTimeZone = "Melbourne"
+	EscalationPathTimeRestrictionTimeZoneMexicoCity                  EscalationPathTimeRestrictionTimeZone = "Mexico City"
+	EscalationPathTimeRestrictionTimeZoneMidAtlantic                 EscalationPathTimeRestrictionTimeZone = "Mid-Atlantic"
+	EscalationPathTimeRestrictionTimeZoneMidwayIsland                EscalationPathTimeRestrictionTimeZone = "Midway Island"
+	EscalationPathTimeRestrictionTimeZoneMinsk                       EscalationPathTimeRestrictionTimeZone = "Minsk"
+	EscalationPathTimeRestrictionTimeZoneMonrovia                    EscalationPathTimeRestrictionTimeZone = "Monrovia"
+	EscalationPathTimeRestrictionTimeZoneMonterrey                   EscalationPathTimeRestrictionTimeZone = "Monterrey"
+	EscalationPathTimeRestrictionTimeZoneMontevideo                  EscalationPathTimeRestrictionTimeZone = "Montevideo"
+	EscalationPathTimeRestrictionTimeZoneMoscow                      EscalationPathTimeRestrictionTimeZone = "Moscow"
+	EscalationPathTimeRestrictionTimeZoneMountainTimeUSCanada        EscalationPathTimeRestrictionTimeZone = "Mountain Time (US & Canada)"
+	EscalationPathTimeRestrictionTimeZoneMumbai                      EscalationPathTimeRestrictionTimeZone = "Mumbai"
+	EscalationPathTimeRestrictionTimeZoneMuscat                      EscalationPathTimeRestrictionTimeZone = "Muscat"
+	EscalationPathTimeRestrictionTimeZoneNairobi                     EscalationPathTimeRestrictionTimeZone = "Nairobi"
+	EscalationPathTimeRestrictionTimeZoneNewCaledonia                EscalationPathTimeRestrictionTimeZone = "New Caledonia"
+	EscalationPathTimeRestrictionTimeZoneNewDelhi                    EscalationPathTimeRestrictionTimeZone = "New Delhi"
+	EscalationPathTimeRestrictionTimeZoneNewfoundland                EscalationPathTimeRestrictionTimeZone = "Newfoundland"
+	EscalationPathTimeRestrictionTimeZoneNovosibirsk                 EscalationPathTimeRestrictionTimeZone = "Novosibirsk"
+	EscalationPathTimeRestrictionTimeZoneNukualofa                   EscalationPathTimeRestrictionTimeZone = "Nuku'alofa"
+	EscalationPathTimeRestrictionTimeZoneOsaka                       EscalationPathTimeRestrictionTimeZone = "Osaka"
+	EscalationPathTimeRestrictionTimeZonePacificApia                 EscalationPathTimeRestrictionTimeZone = "Pacific/Apia"
+	EscalationPathTimeRestrictionTimeZonePacificAuckland             EscalationPathTimeRestrictionTimeZone = "Pacific/Auckland"
+	EscalationPathTimeRestrictionTimeZonePacificChatham              EscalationPathTimeRestrictionTimeZone = "Pacific/Chatham"
+	EscalationPathTimeRestrictionTimeZonePacificFakaofo              EscalationPathTimeRestrictionTimeZone = "Pacific/Fakaofo"
+	EscalationPathTimeRestrictionTimeZonePacificFiji                 EscalationPathTimeRestrictionTimeZone = "Pacific/Fiji"
+	EscalationPathTimeRestrictionTimeZonePacificGuadalcanal          EscalationPathTimeRestrictionTimeZone = "Pacific/Guadalcanal"
+	EscalationPathTimeRestrictionTimeZonePacificGuam                 EscalationPathTimeRestrictionTimeZone = "Pacific/Guam"
+	EscalationPathTimeRestrictionTimeZonePacificHonolulu             EscalationPathTimeRestrictionTimeZone = "Pacific/Honolulu"
+	EscalationPathTimeRestrictionTimeZonePacificMajuro               EscalationPathTimeRestrictionTimeZone = "Pacific/Majuro"
+	EscalationPathTimeRestrictionTimeZonePacificMidway               EscalationPathTimeRestrictionTimeZone = "Pacific/Midway"
+	EscalationPathTimeRestrictionTimeZonePacificNoumea               EscalationPathTimeRestrictionTimeZone = "Pacific/Noumea"
+	EscalationPathTimeRestrictionTimeZonePacificPagoPago             EscalationPathTimeRestrictionTimeZone = "Pacific/Pago_Pago"
+	EscalationPathTimeRestrictionTimeZonePacificPortMoresby          EscalationPathTimeRestrictionTimeZone = "Pacific/Port_Moresby"
+	EscalationPathTimeRestrictionTimeZonePacificTimeUSCanada         EscalationPathTimeRestrictionTimeZone = "Pacific Time (US & Canada)"
+	EscalationPathTimeRestrictionTimeZonePacificTongatapu            EscalationPathTimeRestrictionTimeZone = "Pacific/Tongatapu"
+	EscalationPathTimeRestrictionTimeZoneParis                       EscalationPathTimeRestrictionTimeZone = "Paris"
+	EscalationPathTimeRestrictionTimeZonePerth                       EscalationPathTimeRestrictionTimeZone = "Perth"
+	EscalationPathTimeRestrictionTimeZonePortMoresby                 EscalationPathTimeRestrictionTimeZone = "Port Moresby"
+	EscalationPathTimeRestrictionTimeZonePrague                      EscalationPathTimeRestrictionTimeZone = "Prague"
+	EscalationPathTimeRestrictionTimeZonePretoria                    EscalationPathTimeRestrictionTimeZone = "Pretoria"
+	EscalationPathTimeRestrictionTimeZonePuertoRico                  EscalationPathTimeRestrictionTimeZone = "Puerto Rico"
+	EscalationPathTimeRestrictionTimeZoneQuito                       EscalationPathTimeRestrictionTimeZone = "Quito"
+	EscalationPathTimeRestrictionTimeZoneRangoon                     EscalationPathTimeRestrictionTimeZone = "Rangoon"
+	EscalationPathTimeRestrictionTimeZoneRiga                        EscalationPathTimeRestrictionTimeZone = "Riga"
+	EscalationPathTimeRestrictionTimeZoneRiyadh                      EscalationPathTimeRestrictionTimeZone = "Riyadh"
+	EscalationPathTimeRestrictionTimeZoneRome                        EscalationPathTimeRestrictionTimeZone = "Rome"
+	EscalationPathTimeRestrictionTimeZoneSamara                      EscalationPathTimeRestrictionTimeZone = "Samara"
+	EscalationPathTimeRestrictionTimeZoneSamoa                       EscalationPathTimeRestrictionTimeZone = "Samoa"
+	EscalationPathTimeRestrictionTimeZoneSantiago                    EscalationPathTimeRestrictionTimeZone = "Santiago"
+	EscalationPathTimeRestrictionTimeZoneSapporo                     EscalationPathTimeRestrictionTimeZone = "Sapporo"
+	EscalationPathTimeRestrictionTimeZoneSarajevo                    EscalationPathTimeRestrictionTimeZone = "Sarajevo"
+	EscalationPathTimeRestrictionTimeZoneSaskatchewan                EscalationPathTimeRestrictionTimeZone = "Saskatchewan"
+	EscalationPathTimeRestrictionTimeZoneSeoul                       EscalationPathTimeRestrictionTimeZone = "Seoul"
+	EscalationPathTimeRestrictionTimeZoneSingapore                   EscalationPathTimeRestrictionTimeZone = "Singapore"
+	EscalationPathTimeRestrictionTimeZoneSkopje                      EscalationPathTimeRestrictionTimeZone = "Skopje"
+	EscalationPathTimeRestrictionTimeZoneSofia                       EscalationPathTimeRestrictionTimeZone = "Sofia"
+	EscalationPathTimeRestrictionTimeZoneSolomonIs                   EscalationPathTimeRestrictionTimeZone = "Solomon Is."
+	EscalationPathTimeRestrictionTimeZoneSrednekolymsk               EscalationPathTimeRestrictionTimeZone = "Srednekolymsk"
+	EscalationPathTimeRestrictionTimeZoneSriJayawardenepura          EscalationPathTimeRestrictionTimeZone = "Sri Jayawardenepura"
+	EscalationPathTimeRestrictionTimeZoneStPetersburg                EscalationPathTimeRestrictionTimeZone = "St. Petersburg"
+	EscalationPathTimeRestrictionTimeZoneStockholm                   EscalationPathTimeRestrictionTimeZone = "Stockholm"
+	EscalationPathTimeRestrictionTimeZoneSydney                      EscalationPathTimeRestrictionTimeZone = "Sydney"
+	EscalationPathTimeRestrictionTimeZoneTaipei                      EscalationPathTimeRestrictionTimeZone = "Taipei"
+	EscalationPathTimeRestrictionTimeZoneTallinn                     EscalationPathTimeRestrictionTimeZone = "Tallinn"
+	EscalationPathTimeRestrictionTimeZoneTashkent                    EscalationPathTimeRestrictionTimeZone = "Tashkent"
+	EscalationPathTimeRestrictionTimeZoneTbilisi                     EscalationPathTimeRestrictionTimeZone = "Tbilisi"
+	EscalationPathTimeRestrictionTimeZoneTehran                      EscalationPathTimeRestrictionTimeZone = "Tehran"
+	EscalationPathTimeRestrictionTimeZoneTijuana                     EscalationPathTimeRestrictionTimeZone = "Tijuana"
+	EscalationPathTimeRestrictionTimeZoneTokelauIs                   EscalationPathTimeRestrictionTimeZone = "Tokelau Is."
+	EscalationPathTimeRestrictionTimeZoneTokyo                       EscalationPathTimeRestrictionTimeZone = "Tokyo"
+	EscalationPathTimeRestrictionTimeZoneUTC                         EscalationPathTimeRestrictionTimeZone = "UTC"
+	EscalationPathTimeRestrictionTimeZoneUlaanbaatar                 EscalationPathTimeRestrictionTimeZone = "Ulaanbaatar"
+	EscalationPathTimeRestrictionTimeZoneUrumqi                      EscalationPathTimeRestrictionTimeZone = "Urumqi"
+	EscalationPathTimeRestrictionTimeZoneVienna                      EscalationPathTimeRestrictionTimeZone = "Vienna"
+	EscalationPathTimeRestrictionTimeZoneVilnius                     EscalationPathTimeRestrictionTimeZone = "Vilnius"
+	EscalationPathTimeRestrictionTimeZoneVladivostok                 EscalationPathTimeRestrictionTimeZone = "Vladivostok"
+	EscalationPathTimeRestrictionTimeZoneVolgograd                   EscalationPathTimeRestrictionTimeZone = "Volgograd"
+	EscalationPathTimeRestrictionTimeZoneWarsaw                      EscalationPathTimeRestrictionTimeZone = "Warsaw"
+	EscalationPathTimeRestrictionTimeZoneWellington                  EscalationPathTimeRestrictionTimeZone = "Wellington"
+	EscalationPathTimeRestrictionTimeZoneWestCentralAfrica           EscalationPathTimeRestrictionTimeZone = "West Central Africa"
+	EscalationPathTimeRestrictionTimeZoneYakutsk                     EscalationPathTimeRestrictionTimeZone = "Yakutsk"
+	EscalationPathTimeRestrictionTimeZoneYerevan                     EscalationPathTimeRestrictionTimeZone = "Yerevan"
+	EscalationPathTimeRestrictionTimeZoneZagreb                      EscalationPathTimeRestrictionTimeZone = "Zagreb"
+	EscalationPathTimeRestrictionTimeZoneZurich                      EscalationPathTimeRestrictionTimeZone = "Zurich"
+)
+
+// Defines values for EscalationPathTimeRestrictionsEndDay.
+const (
+	EscalationPathTimeRestrictionsEndDayFriday    EscalationPathTimeRestrictionsEndDay = "friday"
+	EscalationPathTimeRestrictionsEndDayMonday    EscalationPathTimeRestrictionsEndDay = "monday"
+	EscalationPathTimeRestrictionsEndDaySaturday  EscalationPathTimeRestrictionsEndDay = "saturday"
+	EscalationPathTimeRestrictionsEndDaySunday    EscalationPathTimeRestrictionsEndDay = "sunday"
+	EscalationPathTimeRestrictionsEndDayThursday  EscalationPathTimeRestrictionsEndDay = "thursday"
+	EscalationPathTimeRestrictionsEndDayTuesday   EscalationPathTimeRestrictionsEndDay = "tuesday"
+	EscalationPathTimeRestrictionsEndDayWednesday EscalationPathTimeRestrictionsEndDay = "wednesday"
+)
+
+// Defines values for EscalationPathTimeRestrictionsStartDay.
+const (
+	EscalationPathTimeRestrictionsStartDayFriday    EscalationPathTimeRestrictionsStartDay = "friday"
+	EscalationPathTimeRestrictionsStartDayMonday    EscalationPathTimeRestrictionsStartDay = "monday"
+	EscalationPathTimeRestrictionsStartDaySaturday  EscalationPathTimeRestrictionsStartDay = "saturday"
+	EscalationPathTimeRestrictionsStartDaySunday    EscalationPathTimeRestrictionsStartDay = "sunday"
+	EscalationPathTimeRestrictionsStartDayThursday  EscalationPathTimeRestrictionsStartDay = "thursday"
+	EscalationPathTimeRestrictionsStartDayTuesday   EscalationPathTimeRestrictionsStartDay = "tuesday"
+	EscalationPathTimeRestrictionsStartDayWednesday EscalationPathTimeRestrictionsStartDay = "wednesday"
+)
+
 // Defines values for EscalationPathResponseDataType.
 const (
 	EscalationPathResponseDataTypeEscalationPaths EscalationPathResponseDataType = "escalation_paths"
@@ -1612,6 +1945,16 @@ const (
 // Defines values for FunctionalityResponseDataType.
 const (
 	FunctionalityResponseDataTypeFunctionalities FunctionalityResponseDataType = "functionalities"
+)
+
+// Defines values for GeniusCreateAnthropicChatCompletionTaskParamsTaskType.
+const (
+	GeniusCreateAnthropicChatCompletionTask GeniusCreateAnthropicChatCompletionTaskParamsTaskType = "genius_create_anthropic_chat_completion_task"
+)
+
+// Defines values for GeniusCreateGoogleGeminiChatCompletionTaskParamsTaskType.
+const (
+	GeniusCreateGoogleGeminiChatCompletionTask GeniusCreateGoogleGeminiChatCompletionTaskParamsTaskType = "genius_create_google_gemini_chat_completion_task"
 )
 
 // Defines values for GeniusCreateOpenaiChatCompletionTaskParamsTaskType.
@@ -2408,6 +2751,25 @@ const (
 	NewAlertGroupDataAttributesConditionTypeAny NewAlertGroupDataAttributesConditionType = "any"
 )
 
+// Defines values for NewAlertGroupDataAttributesConditionsPropertyFieldConditionType.
+const (
+	NewAlertGroupDataAttributesConditionsPropertyFieldConditionTypeContains             NewAlertGroupDataAttributesConditionsPropertyFieldConditionType = "contains"
+	NewAlertGroupDataAttributesConditionsPropertyFieldConditionTypeDoesNotContain       NewAlertGroupDataAttributesConditionsPropertyFieldConditionType = "does_not_contain"
+	NewAlertGroupDataAttributesConditionsPropertyFieldConditionTypeEndsWith             NewAlertGroupDataAttributesConditionsPropertyFieldConditionType = "ends_with"
+	NewAlertGroupDataAttributesConditionsPropertyFieldConditionTypeIsEmpty              NewAlertGroupDataAttributesConditionsPropertyFieldConditionType = "is_empty"
+	NewAlertGroupDataAttributesConditionsPropertyFieldConditionTypeIsNotOneOf           NewAlertGroupDataAttributesConditionsPropertyFieldConditionType = "is_not_one_of"
+	NewAlertGroupDataAttributesConditionsPropertyFieldConditionTypeIsOneOf              NewAlertGroupDataAttributesConditionsPropertyFieldConditionType = "is_one_of"
+	NewAlertGroupDataAttributesConditionsPropertyFieldConditionTypeMatchesExistingAlert NewAlertGroupDataAttributesConditionsPropertyFieldConditionType = "matches_existing_alert"
+	NewAlertGroupDataAttributesConditionsPropertyFieldConditionTypeMatchesRegex         NewAlertGroupDataAttributesConditionsPropertyFieldConditionType = "matches_regex"
+	NewAlertGroupDataAttributesConditionsPropertyFieldConditionTypeStartsWith           NewAlertGroupDataAttributesConditionsPropertyFieldConditionType = "starts_with"
+)
+
+// Defines values for NewAlertGroupDataAttributesConditionsPropertyFieldType.
+const (
+	NewAlertGroupDataAttributesConditionsPropertyFieldTypeAttribute NewAlertGroupDataAttributesConditionsPropertyFieldType = "attribute"
+	NewAlertGroupDataAttributesConditionsPropertyFieldTypePayload   NewAlertGroupDataAttributesConditionsPropertyFieldType = "payload"
+)
+
 // Defines values for NewAlertGroupDataAttributesGroupByAlertTitle.
 const (
 	NewAlertGroupDataAttributesGroupByAlertTitleN0 NewAlertGroupDataAttributesGroupByAlertTitle = 0
@@ -2740,6 +3102,319 @@ const (
 	NewEscalationPathDataAttributesRulesRuleTypeAlertUrgency NewEscalationPathDataAttributesRulesRuleType = "alert_urgency"
 	NewEscalationPathDataAttributesRulesRuleTypeJsonPath     NewEscalationPathDataAttributesRulesRuleType = "json_path"
 	NewEscalationPathDataAttributesRulesRuleTypeWorkingHour  NewEscalationPathDataAttributesRulesRuleType = "working_hour"
+)
+
+// Defines values for NewEscalationPathDataAttributesTimeRestrictionTimeZone.
+const (
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAbuDhabi                    NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Abu Dhabi"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAdelaide                    NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Adelaide"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAfricaAlgiers               NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Africa/Algiers"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAfricaCairo                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Africa/Cairo"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAfricaCasablanca            NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Africa/Casablanca"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAfricaHarare                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Africa/Harare"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAfricaJohannesburg          NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Africa/Johannesburg"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAfricaMonrovia              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Africa/Monrovia"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAfricaNairobi               NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Africa/Nairobi"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAlaska                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Alaska"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAlmaty                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Almaty"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaArgentinaBuenosAires NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Argentina/Buenos_Aires"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaBogota               NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Bogota"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaCaracas              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Caracas"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaChicago              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Chicago"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaChihuahua            NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Chihuahua"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaDenver               NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Denver"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaGodthab              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Godthab"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaGuatemala            NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Guatemala"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaGuyana               NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Guyana"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaHalifax              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Halifax"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaIndianaIndianapolis  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Indiana/Indianapolis"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaJuneau               NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Juneau"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaLaPaz                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/La_Paz"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaLima                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Lima"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaLosAngeles           NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Los_Angeles"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaMazatlan             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Mazatlan"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaMexicoCity           NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Mexico_City"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaMonterrey            NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Monterrey"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaMontevideo           NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Montevideo"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaNewYork              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/New_York"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaPhoenix              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Phoenix"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaPuertoRico           NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Puerto_Rico"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaRegina               NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Regina"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaSantiago             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Santiago"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaSaoPaulo             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Sao_Paulo"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaStJohns              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/St_Johns"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericaTijuana              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Tijuana"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmericanSamoa               NewEscalationPathDataAttributesTimeRestrictionTimeZone = "American Samoa"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAmsterdam                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Amsterdam"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneArizona                     NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Arizona"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaAlmaty                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Almaty"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaBaghdad                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Baghdad"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaBaku                    NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Baku"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaBangkok                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Bangkok"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaChongqing               NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Chongqing"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaColombo                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Colombo"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaDhaka                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Dhaka"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaHongKong                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Hong_Kong"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaIrkutsk                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Irkutsk"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaJakarta                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Jakarta"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaJerusalem               NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Jerusalem"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaKabul                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Kabul"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaKamchatka               NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Kamchatka"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaKarachi                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Karachi"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaKathmandu               NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Kathmandu"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaKolkata                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Kolkata"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaKrasnoyarsk             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Krasnoyarsk"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaKualaLumpur             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Kuala_Lumpur"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaKuwait                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Kuwait"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaMagadan                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Magadan"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaMuscat                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Muscat"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaNovosibirsk             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Novosibirsk"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaRangoon                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Rangoon"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaRiyadh                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Riyadh"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaSeoul                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Seoul"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaShanghai                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Shanghai"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaSingapore               NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Singapore"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaSrednekolymsk           NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Srednekolymsk"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaTaipei                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Taipei"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaTashkent                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Tashkent"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaTbilisi                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Tbilisi"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaTehran                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Tehran"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaTokyo                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Tokyo"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaUlaanbaatar             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Ulaanbaatar"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaUrumqi                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Urumqi"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaVladivostok             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Vladivostok"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaYakutsk                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Yakutsk"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaYekaterinburg           NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Yekaterinburg"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaYerevan                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Yerevan"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAstana                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Astana"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAthens                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Athens"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAtlanticAzores              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Atlantic/Azores"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAtlanticCapeVerde           NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Atlantic/Cape_Verde"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAtlanticSouthGeorgia        NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Atlantic/South_Georgia"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAtlanticTimeCanada          NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Atlantic Time (Canada)"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAuckland                    NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Auckland"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAustraliaAdelaide           NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Australia/Adelaide"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAustraliaBrisbane           NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Australia/Brisbane"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAustraliaCanberra           NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Australia/Canberra"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAustraliaDarwin             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Australia/Darwin"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAustraliaHobart             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Australia/Hobart"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAustraliaMelbourne          NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Australia/Melbourne"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAustraliaPerth              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Australia/Perth"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAustraliaSydney             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Australia/Sydney"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAzores                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Azores"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneBaghdad                     NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Baghdad"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneBaku                        NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Baku"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneBangkok                     NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Bangkok"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneBeijing                     NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Beijing"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneBelgrade                    NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Belgrade"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneBerlin                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Berlin"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneBern                        NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Bern"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneBogota                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Bogota"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneBrasilia                    NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Brasilia"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneBratislava                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Bratislava"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneBrisbane                    NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Brisbane"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneBrussels                    NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Brussels"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneBucharest                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Bucharest"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneBudapest                    NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Budapest"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneBuenosAires                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Buenos Aires"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneCairo                       NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Cairo"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneCanberra                    NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Canberra"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneCapeVerdeIs                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Cape Verde Is."
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneCaracas                     NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Caracas"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneCasablanca                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Casablanca"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneCentralAmerica              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Central America"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneCentralTimeUSCanada         NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Central Time (US & Canada)"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneChathamIs                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Chatham Is."
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneChennai                     NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Chennai"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneChihuahua                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Chihuahua"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneChongqing                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Chongqing"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneCopenhagen                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Copenhagen"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneDarwin                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Darwin"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneDhaka                       NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Dhaka"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneDublin                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Dublin"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEasternTimeUSCanada         NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Eastern Time (US & Canada)"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEdinburgh                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Edinburgh"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEkaterinburg                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Ekaterinburg"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEtcGMT12                    NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Etc/GMT+12"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEtcUTC                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Etc/UTC"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeAmsterdam             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Amsterdam"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeAthens                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Athens"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeBelgrade              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Belgrade"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeBerlin                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Berlin"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeBratislava            NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Bratislava"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeBrussels              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Brussels"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeBucharest             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Bucharest"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeBudapest              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Budapest"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeCopenhagen            NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Copenhagen"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeDublin                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Dublin"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeHelsinki              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Helsinki"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeIstanbul              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Istanbul"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeKaliningrad           NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Kaliningrad"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeKiev                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Kiev"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeLisbon                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Lisbon"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeLjubljana             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Ljubljana"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeLondon                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/London"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeMadrid                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Madrid"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeMinsk                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Minsk"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeMoscow                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Moscow"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeParis                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Paris"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropePrague                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Prague"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeRiga                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Riga"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeRome                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Rome"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeSamara                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Samara"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeSarajevo              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Sarajevo"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeSkopje                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Skopje"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeSofia                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Sofia"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeStockholm             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Stockholm"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeTallinn               NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Tallinn"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeVienna                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Vienna"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeVilnius               NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Vilnius"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeVolgograd             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Volgograd"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeWarsaw                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Warsaw"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeZagreb                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Zagreb"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeZurich                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Zurich"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneFiji                        NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Fiji"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneGeorgetown                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Georgetown"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneGreenland                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Greenland"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneGuadalajara                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Guadalajara"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneGuam                        NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Guam"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneHanoi                       NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Hanoi"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneHarare                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Harare"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneHawaii                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Hawaii"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneHelsinki                    NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Helsinki"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneHobart                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Hobart"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneHongKong                    NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Hong Kong"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneIndianaEast                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Indiana (East)"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneInternationalDateLineWest   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "International Date Line West"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneIrkutsk                     NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Irkutsk"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneIslamabad                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Islamabad"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneIstanbul                    NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Istanbul"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneJakarta                     NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Jakarta"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneJerusalem                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Jerusalem"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneKabul                       NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Kabul"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneKaliningrad                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Kaliningrad"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneKamchatka                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Kamchatka"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneKarachi                     NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Karachi"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneKathmandu                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Kathmandu"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneKolkata                     NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Kolkata"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneKrasnoyarsk                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Krasnoyarsk"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneKualaLumpur                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Kuala Lumpur"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneKuwait                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Kuwait"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneKyiv                        NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Kyiv"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneLaPaz                       NewEscalationPathDataAttributesTimeRestrictionTimeZone = "La Paz"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneLima                        NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Lima"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneLisbon                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Lisbon"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneLjubljana                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Ljubljana"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneLondon                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "London"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneMadrid                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Madrid"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneMagadan                     NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Magadan"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneMarshallIs                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Marshall Is."
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneMazatlan                    NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Mazatlan"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneMelbourne                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Melbourne"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneMexicoCity                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Mexico City"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneMidAtlantic                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Mid-Atlantic"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneMidwayIsland                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Midway Island"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneMinsk                       NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Minsk"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneMonrovia                    NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Monrovia"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneMonterrey                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Monterrey"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneMontevideo                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Montevideo"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneMoscow                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Moscow"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneMountainTimeUSCanada        NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Mountain Time (US & Canada)"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneMumbai                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Mumbai"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneMuscat                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Muscat"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneNairobi                     NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Nairobi"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneNewCaledonia                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "New Caledonia"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneNewDelhi                    NewEscalationPathDataAttributesTimeRestrictionTimeZone = "New Delhi"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneNewfoundland                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Newfoundland"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneNovosibirsk                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Novosibirsk"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneNukualofa                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Nuku'alofa"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneOsaka                       NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Osaka"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZonePacificApia                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Apia"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZonePacificAuckland             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Auckland"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZonePacificChatham              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Chatham"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZonePacificFakaofo              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Fakaofo"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZonePacificFiji                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Fiji"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZonePacificGuadalcanal          NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Guadalcanal"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZonePacificGuam                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Guam"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZonePacificHonolulu             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Honolulu"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZonePacificMajuro               NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Majuro"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZonePacificMidway               NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Midway"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZonePacificNoumea               NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Noumea"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZonePacificPagoPago             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Pago_Pago"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZonePacificPortMoresby          NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Port_Moresby"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZonePacificTimeUSCanada         NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific Time (US & Canada)"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZonePacificTongatapu            NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Tongatapu"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneParis                       NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Paris"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZonePerth                       NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Perth"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZonePortMoresby                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Port Moresby"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZonePrague                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Prague"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZonePretoria                    NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Pretoria"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZonePuertoRico                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Puerto Rico"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneQuito                       NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Quito"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneRangoon                     NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Rangoon"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneRiga                        NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Riga"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneRiyadh                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Riyadh"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneRome                        NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Rome"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneSamara                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Samara"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneSamoa                       NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Samoa"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneSantiago                    NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Santiago"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneSapporo                     NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Sapporo"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneSarajevo                    NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Sarajevo"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneSaskatchewan                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Saskatchewan"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneSeoul                       NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Seoul"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneSingapore                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Singapore"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneSkopje                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Skopje"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneSofia                       NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Sofia"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneSolomonIs                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Solomon Is."
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneSrednekolymsk               NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Srednekolymsk"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneSriJayawardenepura          NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Sri Jayawardenepura"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneStPetersburg                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "St. Petersburg"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneStockholm                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Stockholm"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneSydney                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Sydney"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneTaipei                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Taipei"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneTallinn                     NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Tallinn"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneTashkent                    NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Tashkent"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneTbilisi                     NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Tbilisi"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneTehran                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Tehran"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneTijuana                     NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Tijuana"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneTokelauIs                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Tokelau Is."
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneTokyo                       NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Tokyo"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneUTC                         NewEscalationPathDataAttributesTimeRestrictionTimeZone = "UTC"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneUlaanbaatar                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Ulaanbaatar"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneUrumqi                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Urumqi"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneVienna                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Vienna"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneVilnius                     NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Vilnius"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneVladivostok                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Vladivostok"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneVolgograd                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Volgograd"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneWarsaw                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Warsaw"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneWellington                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Wellington"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneWestCentralAfrica           NewEscalationPathDataAttributesTimeRestrictionTimeZone = "West Central Africa"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneYakutsk                     NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Yakutsk"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneYerevan                     NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Yerevan"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneZagreb                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Zagreb"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneZurich                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Zurich"
+)
+
+// Defines values for NewEscalationPathDataAttributesTimeRestrictionsEndDay.
+const (
+	NewEscalationPathDataAttributesTimeRestrictionsEndDayFriday    NewEscalationPathDataAttributesTimeRestrictionsEndDay = "friday"
+	NewEscalationPathDataAttributesTimeRestrictionsEndDayMonday    NewEscalationPathDataAttributesTimeRestrictionsEndDay = "monday"
+	NewEscalationPathDataAttributesTimeRestrictionsEndDaySaturday  NewEscalationPathDataAttributesTimeRestrictionsEndDay = "saturday"
+	NewEscalationPathDataAttributesTimeRestrictionsEndDaySunday    NewEscalationPathDataAttributesTimeRestrictionsEndDay = "sunday"
+	NewEscalationPathDataAttributesTimeRestrictionsEndDayThursday  NewEscalationPathDataAttributesTimeRestrictionsEndDay = "thursday"
+	NewEscalationPathDataAttributesTimeRestrictionsEndDayTuesday   NewEscalationPathDataAttributesTimeRestrictionsEndDay = "tuesday"
+	NewEscalationPathDataAttributesTimeRestrictionsEndDayWednesday NewEscalationPathDataAttributesTimeRestrictionsEndDay = "wednesday"
+)
+
+// Defines values for NewEscalationPathDataAttributesTimeRestrictionsStartDay.
+const (
+	NewEscalationPathDataAttributesTimeRestrictionsStartDayFriday    NewEscalationPathDataAttributesTimeRestrictionsStartDay = "friday"
+	NewEscalationPathDataAttributesTimeRestrictionsStartDayMonday    NewEscalationPathDataAttributesTimeRestrictionsStartDay = "monday"
+	NewEscalationPathDataAttributesTimeRestrictionsStartDaySaturday  NewEscalationPathDataAttributesTimeRestrictionsStartDay = "saturday"
+	NewEscalationPathDataAttributesTimeRestrictionsStartDaySunday    NewEscalationPathDataAttributesTimeRestrictionsStartDay = "sunday"
+	NewEscalationPathDataAttributesTimeRestrictionsStartDayThursday  NewEscalationPathDataAttributesTimeRestrictionsStartDay = "thursday"
+	NewEscalationPathDataAttributesTimeRestrictionsStartDayTuesday   NewEscalationPathDataAttributesTimeRestrictionsStartDay = "tuesday"
+	NewEscalationPathDataAttributesTimeRestrictionsStartDayWednesday NewEscalationPathDataAttributesTimeRestrictionsStartDay = "wednesday"
 )
 
 // Defines values for NewEscalationPathDataType.
@@ -3723,6 +4398,11 @@ const (
 	NewTeamDataTypeGroups NewTeamDataType = "groups"
 )
 
+// Defines values for NewUserEmailAddressDataType.
+const (
+	NewUserEmailAddressDataTypeUserEmailAddresses NewUserEmailAddressDataType = "user_email_addresses"
+)
+
 // Defines values for NewUserNotificationRuleDataAttributesEnabledContactTypes.
 const (
 	NewUserNotificationRuleDataAttributesEnabledContactTypesCall              NewUserNotificationRuleDataAttributesEnabledContactTypes = "call"
@@ -3737,6 +4417,11 @@ const (
 	NewUserNotificationRuleDataTypeUserNotificationRules NewUserNotificationRuleDataType = "user_notification_rules"
 )
 
+// Defines values for NewUserPhoneNumberDataType.
+const (
+	NewUserPhoneNumberDataTypeUserPhoneNumbers NewUserPhoneNumberDataType = "user_phone_numbers"
+)
+
 // Defines values for NewWebhooksEndpointDataAttributesEventTypes.
 const (
 	NewWebhooksEndpointDataAttributesEventTypesAlertCreated                   NewWebhooksEndpointDataAttributesEventTypes = "alert.created"
@@ -3748,6 +4433,9 @@ const (
 	NewWebhooksEndpointDataAttributesEventTypesIncidentCancelled              NewWebhooksEndpointDataAttributesEventTypes = "incident.cancelled"
 	NewWebhooksEndpointDataAttributesEventTypesIncidentCreated                NewWebhooksEndpointDataAttributesEventTypes = "incident.created"
 	NewWebhooksEndpointDataAttributesEventTypesIncidentDeleted                NewWebhooksEndpointDataAttributesEventTypes = "incident.deleted"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentEventCreated           NewWebhooksEndpointDataAttributesEventTypes = "incident_event.created"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentEventDeleted           NewWebhooksEndpointDataAttributesEventTypes = "incident_event.deleted"
+	NewWebhooksEndpointDataAttributesEventTypesIncidentEventUpdated           NewWebhooksEndpointDataAttributesEventTypes = "incident_event.updated"
 	NewWebhooksEndpointDataAttributesEventTypesIncidentInTriage               NewWebhooksEndpointDataAttributesEventTypes = "incident.in_triage"
 	NewWebhooksEndpointDataAttributesEventTypesIncidentMitigated              NewWebhooksEndpointDataAttributesEventTypes = "incident.mitigated"
 	NewWebhooksEndpointDataAttributesEventTypesIncidentPostMortemCreated      NewWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.created"
@@ -4986,6 +5674,25 @@ const (
 	UpdateAlertGroupDataAttributesConditionTypeAny UpdateAlertGroupDataAttributesConditionType = "any"
 )
 
+// Defines values for UpdateAlertGroupDataAttributesConditionsPropertyFieldConditionType.
+const (
+	UpdateAlertGroupDataAttributesConditionsPropertyFieldConditionTypeContains             UpdateAlertGroupDataAttributesConditionsPropertyFieldConditionType = "contains"
+	UpdateAlertGroupDataAttributesConditionsPropertyFieldConditionTypeDoesNotContain       UpdateAlertGroupDataAttributesConditionsPropertyFieldConditionType = "does_not_contain"
+	UpdateAlertGroupDataAttributesConditionsPropertyFieldConditionTypeEndsWith             UpdateAlertGroupDataAttributesConditionsPropertyFieldConditionType = "ends_with"
+	UpdateAlertGroupDataAttributesConditionsPropertyFieldConditionTypeIsEmpty              UpdateAlertGroupDataAttributesConditionsPropertyFieldConditionType = "is_empty"
+	UpdateAlertGroupDataAttributesConditionsPropertyFieldConditionTypeIsNotOneOf           UpdateAlertGroupDataAttributesConditionsPropertyFieldConditionType = "is_not_one_of"
+	UpdateAlertGroupDataAttributesConditionsPropertyFieldConditionTypeIsOneOf              UpdateAlertGroupDataAttributesConditionsPropertyFieldConditionType = "is_one_of"
+	UpdateAlertGroupDataAttributesConditionsPropertyFieldConditionTypeMatchesExistingAlert UpdateAlertGroupDataAttributesConditionsPropertyFieldConditionType = "matches_existing_alert"
+	UpdateAlertGroupDataAttributesConditionsPropertyFieldConditionTypeMatchesRegex         UpdateAlertGroupDataAttributesConditionsPropertyFieldConditionType = "matches_regex"
+	UpdateAlertGroupDataAttributesConditionsPropertyFieldConditionTypeStartsWith           UpdateAlertGroupDataAttributesConditionsPropertyFieldConditionType = "starts_with"
+)
+
+// Defines values for UpdateAlertGroupDataAttributesConditionsPropertyFieldType.
+const (
+	UpdateAlertGroupDataAttributesConditionsPropertyFieldTypeAttribute UpdateAlertGroupDataAttributesConditionsPropertyFieldType = "attribute"
+	UpdateAlertGroupDataAttributesConditionsPropertyFieldTypePayload   UpdateAlertGroupDataAttributesConditionsPropertyFieldType = "payload"
+)
+
 // Defines values for UpdateAlertGroupDataAttributesGroupByAlertTitle.
 const (
 	UpdateAlertGroupDataAttributesGroupByAlertTitleN0 UpdateAlertGroupDataAttributesGroupByAlertTitle = 0
@@ -5030,8 +5737,8 @@ const (
 
 // Defines values for UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldType.
 const (
-	Attribute UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldType = "attribute"
-	Payload   UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldType = "payload"
+	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldTypeAttribute UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldType = "attribute"
+	UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldTypePayload   UpdateAlertRoutingRuleDataAttributesConditionsPropertyFieldType = "payload"
 )
 
 // Defines values for UpdateAlertRoutingRuleDataAttributesDestinationTargetType.
@@ -5328,10 +6035,10 @@ const (
 
 // Defines values for UpdateEscalationPathDataAttributesRulesOperator.
 const (
-	UpdateEscalationPathDataAttributesRulesOperatorContains       UpdateEscalationPathDataAttributesRulesOperator = "contains"
-	UpdateEscalationPathDataAttributesRulesOperatorDoesNotContain UpdateEscalationPathDataAttributesRulesOperator = "does_not_contain"
-	UpdateEscalationPathDataAttributesRulesOperatorIs             UpdateEscalationPathDataAttributesRulesOperator = "is"
-	UpdateEscalationPathDataAttributesRulesOperatorIsNot          UpdateEscalationPathDataAttributesRulesOperator = "is_not"
+	Contains       UpdateEscalationPathDataAttributesRulesOperator = "contains"
+	DoesNotContain UpdateEscalationPathDataAttributesRulesOperator = "does_not_contain"
+	Is             UpdateEscalationPathDataAttributesRulesOperator = "is"
+	IsNot          UpdateEscalationPathDataAttributesRulesOperator = "is_not"
 )
 
 // Defines values for UpdateEscalationPathDataAttributesRulesRuleType.
@@ -5339,6 +6046,319 @@ const (
 	UpdateEscalationPathDataAttributesRulesRuleTypeAlertUrgency UpdateEscalationPathDataAttributesRulesRuleType = "alert_urgency"
 	UpdateEscalationPathDataAttributesRulesRuleTypeJsonPath     UpdateEscalationPathDataAttributesRulesRuleType = "json_path"
 	UpdateEscalationPathDataAttributesRulesRuleTypeWorkingHour  UpdateEscalationPathDataAttributesRulesRuleType = "working_hour"
+)
+
+// Defines values for UpdateEscalationPathDataAttributesTimeRestrictionTimeZone.
+const (
+	AbuDhabi                    UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Abu Dhabi"
+	Adelaide                    UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Adelaide"
+	AfricaAlgiers               UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Africa/Algiers"
+	AfricaCairo                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Africa/Cairo"
+	AfricaCasablanca            UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Africa/Casablanca"
+	AfricaHarare                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Africa/Harare"
+	AfricaJohannesburg          UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Africa/Johannesburg"
+	AfricaMonrovia              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Africa/Monrovia"
+	AfricaNairobi               UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Africa/Nairobi"
+	Alaska                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Alaska"
+	Almaty                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Almaty"
+	AmericaArgentinaBuenosAires UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Argentina/Buenos_Aires"
+	AmericaBogota               UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Bogota"
+	AmericaCaracas              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Caracas"
+	AmericaChicago              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Chicago"
+	AmericaChihuahua            UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Chihuahua"
+	AmericaDenver               UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Denver"
+	AmericaGodthab              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Godthab"
+	AmericaGuatemala            UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Guatemala"
+	AmericaGuyana               UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Guyana"
+	AmericaHalifax              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Halifax"
+	AmericaIndianaIndianapolis  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Indiana/Indianapolis"
+	AmericaJuneau               UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Juneau"
+	AmericaLaPaz                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/La_Paz"
+	AmericaLima                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Lima"
+	AmericaLosAngeles           UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Los_Angeles"
+	AmericaMazatlan             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Mazatlan"
+	AmericaMexicoCity           UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Mexico_City"
+	AmericaMonterrey            UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Monterrey"
+	AmericaMontevideo           UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Montevideo"
+	AmericaNewYork              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/New_York"
+	AmericaPhoenix              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Phoenix"
+	AmericaPuertoRico           UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Puerto_Rico"
+	AmericaRegina               UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Regina"
+	AmericaSantiago             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Santiago"
+	AmericaSaoPaulo             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Sao_Paulo"
+	AmericaStJohns              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/St_Johns"
+	AmericaTijuana              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "America/Tijuana"
+	AmericanSamoa               UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "American Samoa"
+	Amsterdam                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Amsterdam"
+	Arizona                     UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Arizona"
+	AsiaAlmaty                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Almaty"
+	AsiaBaghdad                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Baghdad"
+	AsiaBaku                    UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Baku"
+	AsiaBangkok                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Bangkok"
+	AsiaChongqing               UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Chongqing"
+	AsiaColombo                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Colombo"
+	AsiaDhaka                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Dhaka"
+	AsiaHongKong                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Hong_Kong"
+	AsiaIrkutsk                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Irkutsk"
+	AsiaJakarta                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Jakarta"
+	AsiaJerusalem               UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Jerusalem"
+	AsiaKabul                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Kabul"
+	AsiaKamchatka               UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Kamchatka"
+	AsiaKarachi                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Karachi"
+	AsiaKathmandu               UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Kathmandu"
+	AsiaKolkata                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Kolkata"
+	AsiaKrasnoyarsk             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Krasnoyarsk"
+	AsiaKualaLumpur             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Kuala_Lumpur"
+	AsiaKuwait                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Kuwait"
+	AsiaMagadan                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Magadan"
+	AsiaMuscat                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Muscat"
+	AsiaNovosibirsk             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Novosibirsk"
+	AsiaRangoon                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Rangoon"
+	AsiaRiyadh                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Riyadh"
+	AsiaSeoul                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Seoul"
+	AsiaShanghai                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Shanghai"
+	AsiaSingapore               UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Singapore"
+	AsiaSrednekolymsk           UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Srednekolymsk"
+	AsiaTaipei                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Taipei"
+	AsiaTashkent                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Tashkent"
+	AsiaTbilisi                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Tbilisi"
+	AsiaTehran                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Tehran"
+	AsiaTokyo                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Tokyo"
+	AsiaUlaanbaatar             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Ulaanbaatar"
+	AsiaUrumqi                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Urumqi"
+	AsiaVladivostok             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Vladivostok"
+	AsiaYakutsk                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Yakutsk"
+	AsiaYekaterinburg           UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Yekaterinburg"
+	AsiaYerevan                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Yerevan"
+	Astana                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Astana"
+	Athens                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Athens"
+	AtlanticAzores              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Atlantic/Azores"
+	AtlanticCapeVerde           UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Atlantic/Cape_Verde"
+	AtlanticSouthGeorgia        UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Atlantic/South_Georgia"
+	AtlanticTimeCanada          UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Atlantic Time (Canada)"
+	Auckland                    UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Auckland"
+	AustraliaAdelaide           UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Australia/Adelaide"
+	AustraliaBrisbane           UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Australia/Brisbane"
+	AustraliaCanberra           UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Australia/Canberra"
+	AustraliaDarwin             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Australia/Darwin"
+	AustraliaHobart             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Australia/Hobart"
+	AustraliaMelbourne          UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Australia/Melbourne"
+	AustraliaPerth              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Australia/Perth"
+	AustraliaSydney             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Australia/Sydney"
+	Azores                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Azores"
+	Baghdad                     UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Baghdad"
+	Baku                        UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Baku"
+	Bangkok                     UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Bangkok"
+	Beijing                     UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Beijing"
+	Belgrade                    UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Belgrade"
+	Berlin                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Berlin"
+	Bern                        UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Bern"
+	Bogota                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Bogota"
+	Brasilia                    UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Brasilia"
+	Bratislava                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Bratislava"
+	Brisbane                    UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Brisbane"
+	Brussels                    UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Brussels"
+	Bucharest                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Bucharest"
+	Budapest                    UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Budapest"
+	BuenosAires                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Buenos Aires"
+	Cairo                       UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Cairo"
+	Canberra                    UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Canberra"
+	CapeVerdeIs                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Cape Verde Is."
+	Caracas                     UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Caracas"
+	Casablanca                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Casablanca"
+	CentralAmerica              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Central America"
+	CentralTimeUSCanada         UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Central Time (US & Canada)"
+	ChathamIs                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Chatham Is."
+	Chennai                     UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Chennai"
+	Chihuahua                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Chihuahua"
+	Chongqing                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Chongqing"
+	Copenhagen                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Copenhagen"
+	Darwin                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Darwin"
+	Dhaka                       UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Dhaka"
+	Dublin                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Dublin"
+	EasternTimeUSCanada         UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Eastern Time (US & Canada)"
+	Edinburgh                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Edinburgh"
+	Ekaterinburg                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Ekaterinburg"
+	EtcGMT12                    UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Etc/GMT+12"
+	EtcUTC                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Etc/UTC"
+	EuropeAmsterdam             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Amsterdam"
+	EuropeAthens                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Athens"
+	EuropeBelgrade              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Belgrade"
+	EuropeBerlin                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Berlin"
+	EuropeBratislava            UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Bratislava"
+	EuropeBrussels              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Brussels"
+	EuropeBucharest             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Bucharest"
+	EuropeBudapest              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Budapest"
+	EuropeCopenhagen            UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Copenhagen"
+	EuropeDublin                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Dublin"
+	EuropeHelsinki              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Helsinki"
+	EuropeIstanbul              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Istanbul"
+	EuropeKaliningrad           UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Kaliningrad"
+	EuropeKiev                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Kiev"
+	EuropeLisbon                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Lisbon"
+	EuropeLjubljana             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Ljubljana"
+	EuropeLondon                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/London"
+	EuropeMadrid                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Madrid"
+	EuropeMinsk                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Minsk"
+	EuropeMoscow                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Moscow"
+	EuropeParis                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Paris"
+	EuropePrague                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Prague"
+	EuropeRiga                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Riga"
+	EuropeRome                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Rome"
+	EuropeSamara                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Samara"
+	EuropeSarajevo              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Sarajevo"
+	EuropeSkopje                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Skopje"
+	EuropeSofia                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Sofia"
+	EuropeStockholm             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Stockholm"
+	EuropeTallinn               UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Tallinn"
+	EuropeVienna                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Vienna"
+	EuropeVilnius               UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Vilnius"
+	EuropeVolgograd             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Volgograd"
+	EuropeWarsaw                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Warsaw"
+	EuropeZagreb                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Zagreb"
+	EuropeZurich                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Zurich"
+	Fiji                        UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Fiji"
+	Georgetown                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Georgetown"
+	Greenland                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Greenland"
+	Guadalajara                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Guadalajara"
+	Guam                        UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Guam"
+	Hanoi                       UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Hanoi"
+	Harare                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Harare"
+	Hawaii                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Hawaii"
+	Helsinki                    UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Helsinki"
+	Hobart                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Hobart"
+	HongKong                    UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Hong Kong"
+	IndianaEast                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Indiana (East)"
+	InternationalDateLineWest   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "International Date Line West"
+	Irkutsk                     UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Irkutsk"
+	Islamabad                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Islamabad"
+	Istanbul                    UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Istanbul"
+	Jakarta                     UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Jakarta"
+	Jerusalem                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Jerusalem"
+	Kabul                       UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Kabul"
+	Kaliningrad                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Kaliningrad"
+	Kamchatka                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Kamchatka"
+	Karachi                     UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Karachi"
+	Kathmandu                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Kathmandu"
+	Kolkata                     UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Kolkata"
+	Krasnoyarsk                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Krasnoyarsk"
+	KualaLumpur                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Kuala Lumpur"
+	Kuwait                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Kuwait"
+	Kyiv                        UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Kyiv"
+	LaPaz                       UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "La Paz"
+	Lima                        UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Lima"
+	Lisbon                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Lisbon"
+	Ljubljana                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Ljubljana"
+	London                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "London"
+	Madrid                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Madrid"
+	Magadan                     UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Magadan"
+	MarshallIs                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Marshall Is."
+	Mazatlan                    UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Mazatlan"
+	Melbourne                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Melbourne"
+	MexicoCity                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Mexico City"
+	MidAtlantic                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Mid-Atlantic"
+	MidwayIsland                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Midway Island"
+	Minsk                       UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Minsk"
+	Monrovia                    UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Monrovia"
+	Monterrey                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Monterrey"
+	Montevideo                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Montevideo"
+	Moscow                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Moscow"
+	MountainTimeUSCanada        UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Mountain Time (US & Canada)"
+	Mumbai                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Mumbai"
+	Muscat                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Muscat"
+	Nairobi                     UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Nairobi"
+	NewCaledonia                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "New Caledonia"
+	NewDelhi                    UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "New Delhi"
+	Newfoundland                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Newfoundland"
+	Novosibirsk                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Novosibirsk"
+	Nukualofa                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Nuku'alofa"
+	Osaka                       UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Osaka"
+	PacificApia                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Apia"
+	PacificAuckland             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Auckland"
+	PacificChatham              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Chatham"
+	PacificFakaofo              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Fakaofo"
+	PacificFiji                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Fiji"
+	PacificGuadalcanal          UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Guadalcanal"
+	PacificGuam                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Guam"
+	PacificHonolulu             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Honolulu"
+	PacificMajuro               UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Majuro"
+	PacificMidway               UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Midway"
+	PacificNoumea               UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Noumea"
+	PacificPagoPago             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Pago_Pago"
+	PacificPortMoresby          UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Port_Moresby"
+	PacificTimeUSCanada         UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific Time (US & Canada)"
+	PacificTongatapu            UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Pacific/Tongatapu"
+	Paris                       UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Paris"
+	Perth                       UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Perth"
+	PortMoresby                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Port Moresby"
+	Prague                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Prague"
+	Pretoria                    UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Pretoria"
+	PuertoRico                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Puerto Rico"
+	Quito                       UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Quito"
+	Rangoon                     UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Rangoon"
+	Riga                        UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Riga"
+	Riyadh                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Riyadh"
+	Rome                        UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Rome"
+	Samara                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Samara"
+	Samoa                       UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Samoa"
+	Santiago                    UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Santiago"
+	Sapporo                     UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Sapporo"
+	Sarajevo                    UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Sarajevo"
+	Saskatchewan                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Saskatchewan"
+	Seoul                       UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Seoul"
+	Singapore                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Singapore"
+	Skopje                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Skopje"
+	Sofia                       UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Sofia"
+	SolomonIs                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Solomon Is."
+	Srednekolymsk               UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Srednekolymsk"
+	SriJayawardenepura          UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Sri Jayawardenepura"
+	StPetersburg                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "St. Petersburg"
+	Stockholm                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Stockholm"
+	Sydney                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Sydney"
+	Taipei                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Taipei"
+	Tallinn                     UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Tallinn"
+	Tashkent                    UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Tashkent"
+	Tbilisi                     UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Tbilisi"
+	Tehran                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Tehran"
+	Tijuana                     UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Tijuana"
+	TokelauIs                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Tokelau Is."
+	Tokyo                       UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Tokyo"
+	UTC                         UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "UTC"
+	Ulaanbaatar                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Ulaanbaatar"
+	Urumqi                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Urumqi"
+	Vienna                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Vienna"
+	Vilnius                     UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Vilnius"
+	Vladivostok                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Vladivostok"
+	Volgograd                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Volgograd"
+	Warsaw                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Warsaw"
+	Wellington                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Wellington"
+	WestCentralAfrica           UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "West Central Africa"
+	Yakutsk                     UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Yakutsk"
+	Yerevan                     UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Yerevan"
+	Zagreb                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Zagreb"
+	Zurich                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Zurich"
+)
+
+// Defines values for UpdateEscalationPathDataAttributesTimeRestrictionsEndDay.
+const (
+	UpdateEscalationPathDataAttributesTimeRestrictionsEndDayFriday    UpdateEscalationPathDataAttributesTimeRestrictionsEndDay = "friday"
+	UpdateEscalationPathDataAttributesTimeRestrictionsEndDayMonday    UpdateEscalationPathDataAttributesTimeRestrictionsEndDay = "monday"
+	UpdateEscalationPathDataAttributesTimeRestrictionsEndDaySaturday  UpdateEscalationPathDataAttributesTimeRestrictionsEndDay = "saturday"
+	UpdateEscalationPathDataAttributesTimeRestrictionsEndDaySunday    UpdateEscalationPathDataAttributesTimeRestrictionsEndDay = "sunday"
+	UpdateEscalationPathDataAttributesTimeRestrictionsEndDayThursday  UpdateEscalationPathDataAttributesTimeRestrictionsEndDay = "thursday"
+	UpdateEscalationPathDataAttributesTimeRestrictionsEndDayTuesday   UpdateEscalationPathDataAttributesTimeRestrictionsEndDay = "tuesday"
+	UpdateEscalationPathDataAttributesTimeRestrictionsEndDayWednesday UpdateEscalationPathDataAttributesTimeRestrictionsEndDay = "wednesday"
+)
+
+// Defines values for UpdateEscalationPathDataAttributesTimeRestrictionsStartDay.
+const (
+	UpdateEscalationPathDataAttributesTimeRestrictionsStartDayFriday    UpdateEscalationPathDataAttributesTimeRestrictionsStartDay = "friday"
+	UpdateEscalationPathDataAttributesTimeRestrictionsStartDayMonday    UpdateEscalationPathDataAttributesTimeRestrictionsStartDay = "monday"
+	UpdateEscalationPathDataAttributesTimeRestrictionsStartDaySaturday  UpdateEscalationPathDataAttributesTimeRestrictionsStartDay = "saturday"
+	UpdateEscalationPathDataAttributesTimeRestrictionsStartDaySunday    UpdateEscalationPathDataAttributesTimeRestrictionsStartDay = "sunday"
+	UpdateEscalationPathDataAttributesTimeRestrictionsStartDayThursday  UpdateEscalationPathDataAttributesTimeRestrictionsStartDay = "thursday"
+	UpdateEscalationPathDataAttributesTimeRestrictionsStartDayTuesday   UpdateEscalationPathDataAttributesTimeRestrictionsStartDay = "tuesday"
+	UpdateEscalationPathDataAttributesTimeRestrictionsStartDayWednesday UpdateEscalationPathDataAttributesTimeRestrictionsStartDay = "wednesday"
 )
 
 // Defines values for UpdateEscalationPathDataType.
@@ -6532,6 +7552,11 @@ const (
 	UpdateUserDataTypeUsers UpdateUserDataType = "users"
 )
 
+// Defines values for UpdateUserEmailAddressDataType.
+const (
+	UpdateUserEmailAddressDataTypeUserEmailAddresses UpdateUserEmailAddressDataType = "user_email_addresses"
+)
+
 // Defines values for UpdateUserNotificationRuleDataAttributesEnabledContactTypes.
 const (
 	UpdateUserNotificationRuleDataAttributesEnabledContactTypesCall              UpdateUserNotificationRuleDataAttributesEnabledContactTypes = "call"
@@ -6544,6 +7569,11 @@ const (
 // Defines values for UpdateUserNotificationRuleDataType.
 const (
 	UpdateUserNotificationRuleDataTypeUserNotificationRules UpdateUserNotificationRuleDataType = "user_notification_rules"
+)
+
+// Defines values for UpdateUserPhoneNumberDataType.
+const (
+	UpdateUserPhoneNumberDataTypeUserPhoneNumbers UpdateUserPhoneNumberDataType = "user_phone_numbers"
 )
 
 // Defines values for UpdateVictorOpsIncidentTaskParamsStatus.
@@ -6569,6 +7599,9 @@ const (
 	UpdateWebhooksEndpointDataAttributesEventTypesIncidentCancelled              UpdateWebhooksEndpointDataAttributesEventTypes = "incident.cancelled"
 	UpdateWebhooksEndpointDataAttributesEventTypesIncidentCreated                UpdateWebhooksEndpointDataAttributesEventTypes = "incident.created"
 	UpdateWebhooksEndpointDataAttributesEventTypesIncidentDeleted                UpdateWebhooksEndpointDataAttributesEventTypes = "incident.deleted"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentEventCreated           UpdateWebhooksEndpointDataAttributesEventTypes = "incident_event.created"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentEventDeleted           UpdateWebhooksEndpointDataAttributesEventTypes = "incident_event.deleted"
+	UpdateWebhooksEndpointDataAttributesEventTypesIncidentEventUpdated           UpdateWebhooksEndpointDataAttributesEventTypes = "incident_event.updated"
 	UpdateWebhooksEndpointDataAttributesEventTypesIncidentInTriage               UpdateWebhooksEndpointDataAttributesEventTypes = "incident.in_triage"
 	UpdateWebhooksEndpointDataAttributesEventTypesIncidentMitigated              UpdateWebhooksEndpointDataAttributesEventTypes = "incident.mitigated"
 	UpdateWebhooksEndpointDataAttributesEventTypesIncidentPostMortemCreated      UpdateWebhooksEndpointDataAttributesEventTypes = "incident_post_mortem.created"
@@ -6657,6 +7690,16 @@ const (
 	UpdateZendeskTicket UpdateZendeskTicketTaskParamsTaskType = "update_zendesk_ticket"
 )
 
+// Defines values for UserEmailAddressListDataType.
+const (
+	UserEmailAddressListDataTypeUserEmailAddresses UserEmailAddressListDataType = "user_email_addresses"
+)
+
+// Defines values for UserEmailAddressResponseDataType.
+const (
+	UserEmailAddressResponseDataTypeUserEmailAddresses UserEmailAddressResponseDataType = "user_email_addresses"
+)
+
 // Defines values for UserListDataType.
 const (
 	UserListDataTypeUsers UserListDataType = "users"
@@ -6679,6 +7722,16 @@ const (
 // Defines values for UserNotificationRuleResponseDataType.
 const (
 	UserNotificationRuleResponseDataTypeUserNotificationRules UserNotificationRuleResponseDataType = "user_notification_rules"
+)
+
+// Defines values for UserPhoneNumberListDataType.
+const (
+	UserPhoneNumberListDataTypeUserPhoneNumbers UserPhoneNumberListDataType = "user_phone_numbers"
+)
+
+// Defines values for UserPhoneNumberResponseDataType.
+const (
+	UserPhoneNumberResponseDataTypeUserPhoneNumbers UserPhoneNumberResponseDataType = "user_phone_numbers"
 )
 
 // Defines values for UserResponseDataType.
@@ -6707,6 +7760,9 @@ const (
 	IncidentCancelled              WebhooksEndpointEventTypes = "incident.cancelled"
 	IncidentCreated                WebhooksEndpointEventTypes = "incident.created"
 	IncidentDeleted                WebhooksEndpointEventTypes = "incident.deleted"
+	IncidentEventCreated           WebhooksEndpointEventTypes = "incident_event.created"
+	IncidentEventDeleted           WebhooksEndpointEventTypes = "incident_event.deleted"
+	IncidentEventUpdated           WebhooksEndpointEventTypes = "incident_event.updated"
 	IncidentInTriage               WebhooksEndpointEventTypes = "incident.in_triage"
 	IncidentMitigated              WebhooksEndpointEventTypes = "incident.mitigated"
 	IncidentPostMortemCreated      WebhooksEndpointEventTypes = "incident_post_mortem.created"
@@ -7728,6 +8784,31 @@ type AlertGroup struct {
 	// ConditionType Grouping condition for the alert group
 	ConditionType string `json:"condition_type"`
 
+	// Conditions The conditions for the alert group
+	Conditions *[]struct {
+		// PropertyFieldConditionType The condition type of the property field
+		PropertyFieldConditionType AlertGroupConditionsPropertyFieldConditionType `json:"property_field_condition_type"`
+
+		// PropertyFieldName The name of the property field. If the property field type is selected as 'attribute', then the allowed property field names are 'summary' (for Title), 'description', 'alert_urgency' and 'external_url' (for Alert Source URL). If the property field type is selected as 'payload', then the property field name should be supplied in JSON Path syntax.
+		PropertyFieldName string `json:"property_field_name"`
+
+		// PropertyFieldType The type of the property field
+		PropertyFieldType AlertGroupConditionsPropertyFieldType `json:"property_field_type"`
+
+		// PropertyFieldValue The value of the property field. Can be null if the property field condition type is 'is_one_of' or 'is_not_one_of'
+		PropertyFieldValue *string `json:"property_field_value"`
+
+		// PropertyFieldValues The values of the property field. Used if the property field condition type is 'is_one_of' or 'is_not_one_of' except for when property field name is 'alert_urgency'
+		PropertyFieldValues *[]string `json:"property_field_values,omitempty"`
+		Values              *[]struct {
+			// RecordId ID of the Alert Urgency to set.
+			RecordId string `json:"record_id"`
+
+			// RecordType Should be "AlertUrgency".
+			RecordType string `json:"record_type"`
+		} `json:"values,omitempty"`
+	} `json:"conditions,omitempty"`
+
 	// CreatedAt Date of creation
 	CreatedAt string `json:"created_at"`
 
@@ -7738,10 +8819,10 @@ type AlertGroup struct {
 	Description *string `json:"description"`
 
 	// GroupByAlertTitle Whether the alerts are grouped by title or not
-	GroupByAlertTitle bool `json:"group_by_alert_title"`
+	GroupByAlertTitle *bool `json:"group_by_alert_title,omitempty"`
 
 	// GroupByAlertUrgency Whether the alerts are grouped by urgency or not
-	GroupByAlertUrgency bool `json:"group_by_alert_urgency"`
+	GroupByAlertUrgency *bool `json:"group_by_alert_urgency,omitempty"`
 
 	// Name The name of the alert group
 	Name string `json:"name"`
@@ -7762,6 +8843,12 @@ type AlertGroup struct {
 	// UpdatedAt Date of last update
 	UpdatedAt string `json:"updated_at"`
 }
+
+// AlertGroupConditionsPropertyFieldConditionType The condition type of the property field
+type AlertGroupConditionsPropertyFieldConditionType string
+
+// AlertGroupConditionsPropertyFieldType The type of the property field
+type AlertGroupConditionsPropertyFieldType string
 
 // AlertGroupTargetsTargetType The type of the target.
 type AlertGroupTargetsTargetType string
@@ -10294,6 +11381,21 @@ type EscalationPath struct {
 		WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
 	} `json:"rules,omitempty"`
 
+	// TimeRestrictionTimeZone Time zone used for time restrictions.
+	TimeRestrictionTimeZone *EscalationPathTimeRestrictionTimeZone `json:"time_restriction_time_zone"`
+
+	// TimeRestrictions If time restrictions are set, alerts will follow this path when they arrive within the specified time ranges and meet the rules.
+	TimeRestrictions *[]struct {
+		EndDay *EscalationPathTimeRestrictionsEndDay `json:"end_day,omitempty"`
+
+		// EndTime Formatted as HH:MM
+		EndTime  *string                                 `json:"end_time,omitempty"`
+		StartDay *EscalationPathTimeRestrictionsStartDay `json:"start_day,omitempty"`
+
+		// StartTime Formatted as HH:MM
+		StartTime *string `json:"start_time,omitempty"`
+	} `json:"time_restrictions,omitempty"`
+
 	// UpdatedAt Date of last update
 	UpdatedAt *string `json:"updated_at,omitempty"`
 }
@@ -10306,6 +11408,15 @@ type EscalationPathRulesOperator string
 
 // EscalationPathRulesRuleType The type of the escalation path rule
 type EscalationPathRulesRuleType string
+
+// EscalationPathTimeRestrictionTimeZone Time zone used for time restrictions.
+type EscalationPathTimeRestrictionTimeZone string
+
+// EscalationPathTimeRestrictionsEndDay defines model for EscalationPath.TimeRestrictions.EndDay.
+type EscalationPathTimeRestrictionsEndDay string
+
+// EscalationPathTimeRestrictionsStartDay defines model for EscalationPath.TimeRestrictions.StartDay.
+type EscalationPathTimeRestrictionsStartDay string
 
 // EscalationPathList defines model for escalation_path_list.
 type EscalationPathList struct {
@@ -10902,6 +12013,44 @@ type FunctionalityResponse struct {
 // FunctionalityResponseDataType defines model for FunctionalityResponse.Data.Type.
 type FunctionalityResponseDataType string
 
+// GeniusCreateAnthropicChatCompletionTaskParams defines model for genius_create_anthropic_chat_completion_task_params.
+type GeniusCreateAnthropicChatCompletionTaskParams struct {
+	// Model The Anthropic model. eg: claude-3-5-sonnet-20241022
+	Model struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"model"`
+
+	// Prompt The prompt to send to Anthropic
+	Prompt string `json:"prompt"`
+
+	// SystemPrompt The system prompt to send to Anthropic (optional)
+	SystemPrompt *string                                                `json:"system_prompt,omitempty"`
+	TaskType     *GeniusCreateAnthropicChatCompletionTaskParamsTaskType `json:"task_type,omitempty"`
+}
+
+// GeniusCreateAnthropicChatCompletionTaskParamsTaskType defines model for GeniusCreateAnthropicChatCompletionTaskParams.TaskType.
+type GeniusCreateAnthropicChatCompletionTaskParamsTaskType string
+
+// GeniusCreateGoogleGeminiChatCompletionTaskParams defines model for genius_create_google_gemini_chat_completion_task_params.
+type GeniusCreateGoogleGeminiChatCompletionTaskParams struct {
+	// Model The Gemini model. eg: gemini-2.0-flash
+	Model struct {
+		Id   *string `json:"id,omitempty"`
+		Name *string `json:"name,omitempty"`
+	} `json:"model"`
+
+	// Prompt The prompt to send to Gemini
+	Prompt string `json:"prompt"`
+
+	// SystemPrompt The system prompt to send to Gemini (optional)
+	SystemPrompt *string                                                   `json:"system_prompt,omitempty"`
+	TaskType     *GeniusCreateGoogleGeminiChatCompletionTaskParamsTaskType `json:"task_type,omitempty"`
+}
+
+// GeniusCreateGoogleGeminiChatCompletionTaskParamsTaskType defines model for GeniusCreateGoogleGeminiChatCompletionTaskParams.TaskType.
+type GeniusCreateGoogleGeminiChatCompletionTaskParamsTaskType string
+
 // GeniusCreateOpenaiChatCompletionTaskParams defines model for genius_create_openai_chat_completion_task_params.
 type GeniusCreateOpenaiChatCompletionTaskParams struct {
 	// Model The OpenAI model. eg: gpt-4o-mini
@@ -10911,8 +12060,11 @@ type GeniusCreateOpenaiChatCompletionTaskParams struct {
 	} `json:"model"`
 
 	// Prompt The prompt to send to OpenAI
-	Prompt   string                                              `json:"prompt"`
-	TaskType *GeniusCreateOpenaiChatCompletionTaskParamsTaskType `json:"task_type,omitempty"`
+	Prompt string `json:"prompt"`
+
+	// SystemPrompt The system prompt to send to OpenAI (optional)
+	SystemPrompt *string                                             `json:"system_prompt,omitempty"`
+	TaskType     *GeniusCreateOpenaiChatCompletionTaskParamsTaskType `json:"task_type,omitempty"`
 }
 
 // GeniusCreateOpenaiChatCompletionTaskParamsTaskType defines model for GeniusCreateOpenaiChatCompletionTaskParams.TaskType.
@@ -10928,8 +12080,11 @@ type GeniusCreateWatsonxChatCompletionTaskParams struct {
 	ProjectId string `json:"project_id"`
 
 	// Prompt The prompt to send to WatsonX
-	Prompt   string                                               `json:"prompt"`
-	TaskType *GeniusCreateWatsonxChatCompletionTaskParamsTaskType `json:"task_type,omitempty"`
+	Prompt string `json:"prompt"`
+
+	// SystemPrompt The system prompt to send to WatsonX (optional)
+	SystemPrompt *string                                              `json:"system_prompt,omitempty"`
+	TaskType     *GeniusCreateWatsonxChatCompletionTaskParamsTaskType `json:"task_type,omitempty"`
 }
 
 // GeniusCreateWatsonxChatCompletionTaskParamsTaskType defines model for GeniusCreateWatsonxChatCompletionTaskParams.TaskType.
@@ -11276,11 +12431,11 @@ type IncidentRetrospectiveProgressStatus string
 
 // IncidentActionItem defines model for incident_action_item.
 type IncidentActionItem struct {
+	// AssignedTo User assigned to this action item
+	AssignedTo *UserFlatResponse `json:"assigned_to"`
+
 	// AssignedToGroupIds IDs of groups you wish to assign this action item
 	AssignedToGroupIds *[]string `json:"assigned_to_group_ids"`
-
-	// AssignedToUserId ID of user you wish to assign this action item
-	AssignedToUserId *int `json:"assigned_to_user_id"`
 
 	// CreatedAt Date of creation
 	CreatedAt string `json:"created_at"`
@@ -12796,6 +13951,25 @@ type NewAlertGroup struct {
 
 			// ConditionType Group alerts when ANY or ALL of the fields are matching.
 			ConditionType *NewAlertGroupDataAttributesConditionType `json:"condition_type,omitempty"`
+			Conditions    *[]struct {
+				// AlertUrgencyIds The Alert Urgency ID's to check in the condition. Only need to be set when the property field type is 'attribute', the property field name is 'alert_urgency' and the property field condition type is 'is_one_of' or 'is_not_one_of'
+				AlertUrgencyIds *[]string `json:"alert_urgency_ids"`
+
+				// PropertyFieldConditionType The condition type of the property field
+				PropertyFieldConditionType NewAlertGroupDataAttributesConditionsPropertyFieldConditionType `json:"property_field_condition_type"`
+
+				// PropertyFieldName The name of the property field. If the property field type is selected as 'attribute', then the allowed property field names are 'summary' (for Title), 'description', 'alert_urgency' and 'external_url' (for Alert Source URL). If the property field type is selected as 'payload', then the property field name should be supplied in JSON Path syntax.
+				PropertyFieldName string `json:"property_field_name"`
+
+				// PropertyFieldType The type of the property field
+				PropertyFieldType NewAlertGroupDataAttributesConditionsPropertyFieldType `json:"property_field_type"`
+
+				// PropertyFieldValue The value of the property field. Can be null if the property field condition type is 'is_one_of' or 'is_not_one_of'
+				PropertyFieldValue *string `json:"property_field_value,omitempty"`
+
+				// PropertyFieldValues The values of the property field. Need to be passed if the property field condition type is 'is_one_of' or 'is_not_one_of' except for when property field name is 'alert_urgency'
+				PropertyFieldValues *[]string `json:"property_field_values,omitempty"`
+			} `json:"conditions,omitempty"`
 
 			// Description The description of the alert urgency
 			Description *string `json:"description"`
@@ -12825,6 +13999,12 @@ type NewAlertGroup struct {
 
 // NewAlertGroupDataAttributesConditionType Group alerts when ANY or ALL of the fields are matching.
 type NewAlertGroupDataAttributesConditionType string
+
+// NewAlertGroupDataAttributesConditionsPropertyFieldConditionType The condition type of the property field
+type NewAlertGroupDataAttributesConditionsPropertyFieldConditionType string
+
+// NewAlertGroupDataAttributesConditionsPropertyFieldType The type of the property field
+type NewAlertGroupDataAttributesConditionsPropertyFieldType string
 
 // NewAlertGroupDataAttributesGroupByAlertTitle Whether the alerts should be grouped by titles.
 type NewAlertGroupDataAttributesGroupByAlertTitle int
@@ -13422,6 +14602,21 @@ type NewEscalationPath struct {
 				// WithinWorkingHour Whether the escalation path should be used within working hours
 				WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
 			} `json:"rules,omitempty"`
+
+			// TimeRestrictionTimeZone Time zone used for time restrictions.
+			TimeRestrictionTimeZone *NewEscalationPathDataAttributesTimeRestrictionTimeZone `json:"time_restriction_time_zone"`
+
+			// TimeRestrictions If time restrictions are set, alerts will follow this path when they arrive within the specified time ranges and meet the rules.
+			TimeRestrictions *[]struct {
+				EndDay NewEscalationPathDataAttributesTimeRestrictionsEndDay `json:"end_day"`
+
+				// EndTime Formatted as HH:MM
+				EndTime  string                                                  `json:"end_time"`
+				StartDay NewEscalationPathDataAttributesTimeRestrictionsStartDay `json:"start_day"`
+
+				// StartTime Formatted as HH:MM
+				StartTime string `json:"start_time"`
+			} `json:"time_restrictions,omitempty"`
 		} `json:"attributes"`
 		Type NewEscalationPathDataType `json:"type"`
 	} `json:"data"`
@@ -13438,6 +14633,15 @@ type NewEscalationPathDataAttributesRulesOperator string
 
 // NewEscalationPathDataAttributesRulesRuleType The type of the escalation path rule
 type NewEscalationPathDataAttributesRulesRuleType string
+
+// NewEscalationPathDataAttributesTimeRestrictionTimeZone Time zone used for time restrictions.
+type NewEscalationPathDataAttributesTimeRestrictionTimeZone string
+
+// NewEscalationPathDataAttributesTimeRestrictionsEndDay defines model for NewEscalationPath.Data.Attributes.TimeRestrictions.EndDay.
+type NewEscalationPathDataAttributesTimeRestrictionsEndDay string
+
+// NewEscalationPathDataAttributesTimeRestrictionsStartDay defines model for NewEscalationPath.Data.Attributes.TimeRestrictions.StartDay.
+type NewEscalationPathDataAttributesTimeRestrictionsStartDay string
 
 // NewEscalationPathDataType defines model for NewEscalationPath.Data.Type.
 type NewEscalationPathDataType string
@@ -15394,6 +16598,20 @@ type NewTeam struct {
 // NewTeamDataType defines model for NewTeam.Data.Type.
 type NewTeamDataType string
 
+// NewUserEmailAddress defines model for new_user_email_address.
+type NewUserEmailAddress struct {
+	Data struct {
+		Attributes struct {
+			// Email Email address
+			Email string `json:"email"`
+		} `json:"attributes"`
+		Type NewUserEmailAddressDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewUserEmailAddressDataType defines model for NewUserEmailAddress.Data.Type.
+type NewUserEmailAddressDataType string
+
 // NewUserNotificationRule defines model for new_user_notification_rule.
 type NewUserNotificationRule struct {
 	Data struct {
@@ -15428,6 +16646,20 @@ type NewUserNotificationRuleDataAttributesEnabledContactTypes string
 
 // NewUserNotificationRuleDataType defines model for NewUserNotificationRule.Data.Type.
 type NewUserNotificationRuleDataType string
+
+// NewUserPhoneNumber defines model for new_user_phone_number.
+type NewUserPhoneNumber struct {
+	Data struct {
+		Attributes struct {
+			// Phone Phone number in international format
+			Phone string `json:"phone"`
+		} `json:"attributes"`
+		Type NewUserPhoneNumberDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewUserPhoneNumberDataType defines model for NewUserPhoneNumber.Data.Type.
+type NewUserPhoneNumberDataType string
 
 // NewWebhooksEndpoint defines model for new_webhooks_endpoint.
 type NewWebhooksEndpoint struct {
@@ -17890,6 +19122,9 @@ type StatusPage struct {
 	// ShowUptimeLastDays Show uptime over x days
 	ShowUptimeLastDays *StatusPageShowUptimeLastDays `json:"show_uptime_last_days"`
 
+	// Slug The slug of the status page
+	Slug *string `json:"slug,omitempty"`
+
 	// SuccessMessage Message showing when all components are operational
 	SuccessMessage *string `json:"success_message"`
 
@@ -18374,6 +19609,28 @@ type UpdateAlertGroup struct {
 
 			// ConditionType Group alerts when ANY or ALL of the fields are matching.
 			ConditionType *UpdateAlertGroupDataAttributesConditionType `json:"condition_type,omitempty"`
+			Conditions    *[]struct {
+				// AlertUrgencyIds The Alert Urgency ID's to check in the condition. Only need to be set when the property field type is 'attribute', the property field name is 'alert_urgency' and the property field condition type is 'is_one_of' or 'is_not_one_of'
+				AlertUrgencyIds *[]string `json:"alert_urgency_ids"`
+
+				// Id The ID of the alert group condition
+				Id *openapi_types.UUID `json:"id,omitempty"`
+
+				// PropertyFieldConditionType The condition type of the property field
+				PropertyFieldConditionType UpdateAlertGroupDataAttributesConditionsPropertyFieldConditionType `json:"property_field_condition_type"`
+
+				// PropertyFieldName The name of the property field. If the property field type is selected as 'attribute', then the allowed property field names are 'summary' (for Title), 'description', 'alert_urgency' and 'external_url' (for Alert Source URL). If the property field type is selected as 'payload', then the property field name should be supplied in JSON Path syntax.
+				PropertyFieldName string `json:"property_field_name"`
+
+				// PropertyFieldType The type of the property field
+				PropertyFieldType UpdateAlertGroupDataAttributesConditionsPropertyFieldType `json:"property_field_type"`
+
+				// PropertyFieldValue The value of the property field. Can be null if the property field condition type is 'is_one_of' or 'is_not_one_of'
+				PropertyFieldValue *string `json:"property_field_value,omitempty"`
+
+				// PropertyFieldValues The values of the property field. Need to be passed if the property field condition type is 'is_one_of' or 'is_not_one_of' except for when property field name is 'alert_urgency'
+				PropertyFieldValues *[]string `json:"property_field_values,omitempty"`
+			} `json:"conditions,omitempty"`
 
 			// Description The description of the alert group
 			Description *string `json:"description"`
@@ -18403,6 +19660,12 @@ type UpdateAlertGroup struct {
 
 // UpdateAlertGroupDataAttributesConditionType Group alerts when ANY or ALL of the fields are matching.
 type UpdateAlertGroupDataAttributesConditionType string
+
+// UpdateAlertGroupDataAttributesConditionsPropertyFieldConditionType The condition type of the property field
+type UpdateAlertGroupDataAttributesConditionsPropertyFieldConditionType string
+
+// UpdateAlertGroupDataAttributesConditionsPropertyFieldType The type of the property field
+type UpdateAlertGroupDataAttributesConditionsPropertyFieldType string
 
 // UpdateAlertGroupDataAttributesGroupByAlertTitle Whether the alerts should be grouped by titles.
 type UpdateAlertGroupDataAttributesGroupByAlertTitle int
@@ -19092,6 +20355,21 @@ type UpdateEscalationPath struct {
 				// WithinWorkingHour Whether the escalation path should be used within working hours
 				WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
 			} `json:"rules,omitempty"`
+
+			// TimeRestrictionTimeZone Time zone used for time restrictions.
+			TimeRestrictionTimeZone *UpdateEscalationPathDataAttributesTimeRestrictionTimeZone `json:"time_restriction_time_zone"`
+
+			// TimeRestrictions If time restrictions are set, alerts will follow this path when they arrive within the specified time ranges and meet the rules.
+			TimeRestrictions *[]struct {
+				EndDay *UpdateEscalationPathDataAttributesTimeRestrictionsEndDay `json:"end_day,omitempty"`
+
+				// EndTime Formatted as HH:MM
+				EndTime  *string                                                     `json:"end_time,omitempty"`
+				StartDay *UpdateEscalationPathDataAttributesTimeRestrictionsStartDay `json:"start_day,omitempty"`
+
+				// StartTime Formatted as HH:MM
+				StartTime *string `json:"start_time,omitempty"`
+			} `json:"time_restrictions,omitempty"`
 		} `json:"attributes"`
 		Type UpdateEscalationPathDataType `json:"type"`
 	} `json:"data"`
@@ -19108,6 +20386,15 @@ type UpdateEscalationPathDataAttributesRulesOperator string
 
 // UpdateEscalationPathDataAttributesRulesRuleType The type of the escalation path rule
 type UpdateEscalationPathDataAttributesRulesRuleType string
+
+// UpdateEscalationPathDataAttributesTimeRestrictionTimeZone Time zone used for time restrictions.
+type UpdateEscalationPathDataAttributesTimeRestrictionTimeZone string
+
+// UpdateEscalationPathDataAttributesTimeRestrictionsEndDay defines model for UpdateEscalationPath.Data.Attributes.TimeRestrictions.EndDay.
+type UpdateEscalationPathDataAttributesTimeRestrictionsEndDay string
+
+// UpdateEscalationPathDataAttributesTimeRestrictionsStartDay defines model for UpdateEscalationPath.Data.Attributes.TimeRestrictions.StartDay.
+type UpdateEscalationPathDataAttributesTimeRestrictionsStartDay string
 
 // UpdateEscalationPathDataType defines model for UpdateEscalationPath.Data.Type.
 type UpdateEscalationPathDataType string
@@ -21710,6 +22997,20 @@ type UpdateUser struct {
 // UpdateUserDataType defines model for UpdateUser.Data.Type.
 type UpdateUserDataType string
 
+// UpdateUserEmailAddress defines model for update_user_email_address.
+type UpdateUserEmailAddress struct {
+	Data struct {
+		Attributes struct {
+			// Email Email address
+			Email *string `json:"email,omitempty"`
+		} `json:"attributes"`
+		Type UpdateUserEmailAddressDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateUserEmailAddressDataType defines model for UpdateUserEmailAddress.Data.Type.
+type UpdateUserEmailAddressDataType string
+
 // UpdateUserNotificationRule defines model for update_user_notification_rule.
 type UpdateUserNotificationRule struct {
 	Data struct {
@@ -21744,6 +23045,20 @@ type UpdateUserNotificationRuleDataAttributesEnabledContactTypes string
 
 // UpdateUserNotificationRuleDataType defines model for UpdateUserNotificationRule.Data.Type.
 type UpdateUserNotificationRuleDataType string
+
+// UpdateUserPhoneNumber defines model for update_user_phone_number.
+type UpdateUserPhoneNumber struct {
+	Data struct {
+		Attributes struct {
+			// Phone Phone number in international format
+			Phone *string `json:"phone,omitempty"`
+		} `json:"attributes"`
+		Type UpdateUserPhoneNumberDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateUserPhoneNumberDataType defines model for UpdateUserPhoneNumber.Data.Type.
+type UpdateUserPhoneNumberDataType string
 
 // UpdateVictorOpsIncidentTaskParams defines model for update_victor_ops_incident_task_params.
 type UpdateVictorOpsIncidentTaskParams struct {
@@ -22017,6 +23332,81 @@ type User struct {
 	UpdatedAt string `json:"updated_at"`
 }
 
+// UserEmailAddress defines model for user_email_address.
+type UserEmailAddress struct {
+	// CreatedAt Date of creation
+	CreatedAt *string `json:"created_at,omitempty"`
+
+	// Email Email address
+	Email *string `json:"email,omitempty"`
+
+	// Primary Whether this is the primary email address
+	Primary *bool `json:"primary,omitempty"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt *string `json:"updated_at,omitempty"`
+	UserId    *int    `json:"user_id,omitempty"`
+}
+
+// UserEmailAddressList defines model for user_email_address_list.
+type UserEmailAddressList struct {
+	Data []struct {
+		Attributes UserEmailAddress `json:"attributes"`
+
+		// Id Unique ID of the email address
+		Id   string                       `json:"id"`
+		Type UserEmailAddressListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// UserEmailAddressListDataType defines model for UserEmailAddressList.Data.Type.
+type UserEmailAddressListDataType string
+
+// UserEmailAddressResponse defines model for user_email_address_response.
+type UserEmailAddressResponse struct {
+	Data struct {
+		Attributes UserEmailAddress `json:"attributes"`
+
+		// Id Unique ID of the email address
+		Id   string                           `json:"id"`
+		Type UserEmailAddressResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UserEmailAddressResponseDataType defines model for UserEmailAddressResponse.Data.Type.
+type UserEmailAddressResponseDataType string
+
+// UserFlatResponse Flat user object as returned by serializer
+type UserFlatResponse struct {
+	// CreatedAt User creation timestamp
+	CreatedAt string `json:"created_at"`
+
+	// Email User email
+	Email string `json:"email"`
+
+	// FirstName User first name
+	FirstName *string `json:"first_name"`
+
+	// FullName User full name
+	FullName *string `json:"full_name"`
+
+	// FullNameWithTeam User full name with team
+	FullNameWithTeam *string `json:"full_name_with_team"`
+
+	// Id User ID
+	Id int `json:"id"`
+
+	// LastName User last name
+	LastName *string `json:"last_name"`
+
+	// TimeZone User time zone
+	TimeZone *string `json:"time_zone"`
+
+	// UpdatedAt User last update timestamp
+	UpdatedAt string `json:"updated_at"`
+}
+
 // UserList defines model for user_list.
 type UserList struct {
 	Data []struct {
@@ -22095,6 +23485,51 @@ type UserNotificationRuleResponse struct {
 
 // UserNotificationRuleResponseDataType defines model for UserNotificationRuleResponse.Data.Type.
 type UserNotificationRuleResponseDataType string
+
+// UserPhoneNumber defines model for user_phone_number.
+type UserPhoneNumber struct {
+	// CreatedAt Date of creation
+	CreatedAt *string `json:"created_at,omitempty"`
+
+	// Phone Phone number in international format
+	Phone *string `json:"phone,omitempty"`
+
+	// Primary Whether this is the primary phone number
+	Primary *bool `json:"primary,omitempty"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt *string `json:"updated_at,omitempty"`
+	UserId    *int    `json:"user_id,omitempty"`
+}
+
+// UserPhoneNumberList defines model for user_phone_number_list.
+type UserPhoneNumberList struct {
+	Data []struct {
+		Attributes UserPhoneNumber `json:"attributes"`
+
+		// Id Unique ID of the phone number
+		Id   string                      `json:"id"`
+		Type UserPhoneNumberListDataType `json:"type"`
+	} `json:"data"`
+	Links Links `json:"links"`
+}
+
+// UserPhoneNumberListDataType defines model for UserPhoneNumberList.Data.Type.
+type UserPhoneNumberListDataType string
+
+// UserPhoneNumberResponse defines model for user_phone_number_response.
+type UserPhoneNumberResponse struct {
+	Data struct {
+		Attributes UserPhoneNumber `json:"attributes"`
+
+		// Id Unique ID of the phone number
+		Id   string                          `json:"id"`
+		Type UserPhoneNumberResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UserPhoneNumberResponseDataType defines model for UserPhoneNumberResponse.Data.Type.
+type UserPhoneNumberResponseDataType string
 
 // UserRelationships defines model for user_relationships.
 type UserRelationships struct {
@@ -24076,6 +25511,9 @@ type CreateDashboardPanelApplicationVndAPIPlusJSONRequestBody = NewDashboardPane
 // UpdateDashboardApplicationVndAPIPlusJSONRequestBody defines body for UpdateDashboard for application/vnd.api+json ContentType.
 type UpdateDashboardApplicationVndAPIPlusJSONRequestBody = UpdateDashboard
 
+// UpdateUserEmailAddressApplicationVndAPIPlusJSONRequestBody defines body for UpdateUserEmailAddress for application/vnd.api+json ContentType.
+type UpdateUserEmailAddressApplicationVndAPIPlusJSONRequestBody = UpdateUserEmailAddress
+
 // CreateEnvironmentApplicationVndAPIPlusJSONRequestBody defines body for CreateEnvironment for application/vnd.api+json ContentType.
 type CreateEnvironmentApplicationVndAPIPlusJSONRequestBody = NewEnvironment
 
@@ -24304,6 +25742,9 @@ type UpdateOnCallShadowApplicationVndAPIPlusJSONRequestBody = UpdateOnCallShadow
 // UpdateOverrideShiftApplicationVndAPIPlusJSONRequestBody defines body for UpdateOverrideShift for application/vnd.api+json ContentType.
 type UpdateOverrideShiftApplicationVndAPIPlusJSONRequestBody = UpdateOverrideShift
 
+// UpdateUserPhoneNumberApplicationVndAPIPlusJSONRequestBody defines body for UpdateUserPhoneNumber for application/vnd.api+json ContentType.
+type UpdateUserPhoneNumberApplicationVndAPIPlusJSONRequestBody = UpdateUserPhoneNumber
+
 // UpdatePlaybookTaskApplicationVndAPIPlusJSONRequestBody defines body for UpdatePlaybookTask for application/vnd.api+json ContentType.
 type UpdatePlaybookTaskApplicationVndAPIPlusJSONRequestBody = UpdatePlaybookTask
 
@@ -24442,8 +25883,14 @@ type UpdateStatusPageTemplateApplicationVndAPIPlusJSONRequestBody = StatusPageTe
 // UpdateUserApplicationVndAPIPlusJSONRequestBody defines body for UpdateUser for application/vnd.api+json ContentType.
 type UpdateUserApplicationVndAPIPlusJSONRequestBody = UpdateUser
 
+// CreateUserEmailAddressApplicationVndAPIPlusJSONRequestBody defines body for CreateUserEmailAddress for application/vnd.api+json ContentType.
+type CreateUserEmailAddressApplicationVndAPIPlusJSONRequestBody = NewUserEmailAddress
+
 // CreateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody defines body for CreateUserNotificationRule for application/vnd.api+json ContentType.
 type CreateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody = NewUserNotificationRule
+
+// CreateUserPhoneNumberApplicationVndAPIPlusJSONRequestBody defines body for CreateUserPhoneNumber for application/vnd.api+json ContentType.
+type CreateUserPhoneNumberApplicationVndAPIPlusJSONRequestBody = NewUserPhoneNumber
 
 // CreateWebhooksEndpointApplicationVndAPIPlusJSONRequestBody defines body for CreateWebhooksEndpoint for application/vnd.api+json ContentType.
 type CreateWebhooksEndpointApplicationVndAPIPlusJSONRequestBody = NewWebhooksEndpoint
@@ -30378,6 +31825,58 @@ func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeGeniusCreateWatsonxCha
 	return err
 }
 
+// AsGeniusCreateGoogleGeminiChatCompletionTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a GeniusCreateGoogleGeminiChatCompletionTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsGeniusCreateGoogleGeminiChatCompletionTaskParams() (GeniusCreateGoogleGeminiChatCompletionTaskParams, error) {
+	var body GeniusCreateGoogleGeminiChatCompletionTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromGeniusCreateGoogleGeminiChatCompletionTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided GeniusCreateGoogleGeminiChatCompletionTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromGeniusCreateGoogleGeminiChatCompletionTaskParams(v GeniusCreateGoogleGeminiChatCompletionTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeGeniusCreateGoogleGeminiChatCompletionTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided GeniusCreateGoogleGeminiChatCompletionTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeGeniusCreateGoogleGeminiChatCompletionTaskParams(v GeniusCreateGoogleGeminiChatCompletionTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsGeniusCreateAnthropicChatCompletionTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a GeniusCreateAnthropicChatCompletionTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsGeniusCreateAnthropicChatCompletionTaskParams() (GeniusCreateAnthropicChatCompletionTaskParams, error) {
+	var body GeniusCreateAnthropicChatCompletionTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromGeniusCreateAnthropicChatCompletionTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided GeniusCreateAnthropicChatCompletionTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromGeniusCreateAnthropicChatCompletionTaskParams(v GeniusCreateAnthropicChatCompletionTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeGeniusCreateAnthropicChatCompletionTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided GeniusCreateAnthropicChatCompletionTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeGeniusCreateAnthropicChatCompletionTaskParams(v GeniusCreateAnthropicChatCompletionTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 func (t NewWorkflowTask_Data_Attributes_TaskParams) MarshalJSON() ([]byte, error) {
 	b, err := t.union.MarshalJSON()
 	return b, err
@@ -34647,6 +36146,58 @@ func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeGeniusCreateWatsonx
 	return err
 }
 
+// AsGeniusCreateGoogleGeminiChatCompletionTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a GeniusCreateGoogleGeminiChatCompletionTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsGeniusCreateGoogleGeminiChatCompletionTaskParams() (GeniusCreateGoogleGeminiChatCompletionTaskParams, error) {
+	var body GeniusCreateGoogleGeminiChatCompletionTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromGeniusCreateGoogleGeminiChatCompletionTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided GeniusCreateGoogleGeminiChatCompletionTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromGeniusCreateGoogleGeminiChatCompletionTaskParams(v GeniusCreateGoogleGeminiChatCompletionTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeGeniusCreateGoogleGeminiChatCompletionTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided GeniusCreateGoogleGeminiChatCompletionTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeGeniusCreateGoogleGeminiChatCompletionTaskParams(v GeniusCreateGoogleGeminiChatCompletionTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsGeniusCreateAnthropicChatCompletionTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a GeniusCreateAnthropicChatCompletionTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsGeniusCreateAnthropicChatCompletionTaskParams() (GeniusCreateAnthropicChatCompletionTaskParams, error) {
+	var body GeniusCreateAnthropicChatCompletionTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromGeniusCreateAnthropicChatCompletionTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided GeniusCreateAnthropicChatCompletionTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromGeniusCreateAnthropicChatCompletionTaskParams(v GeniusCreateAnthropicChatCompletionTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeGeniusCreateAnthropicChatCompletionTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided GeniusCreateAnthropicChatCompletionTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeGeniusCreateAnthropicChatCompletionTaskParams(v GeniusCreateAnthropicChatCompletionTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 func (t UpdateWorkflowTask_Data_Attributes_TaskParams) MarshalJSON() ([]byte, error) {
 	b, err := t.union.MarshalJSON()
 	return b, err
@@ -37995,6 +39546,58 @@ func (t *WorkflowTask_TaskParams) MergeGeniusCreateWatsonxChatCompletionTaskPara
 	return err
 }
 
+// AsGeniusCreateGoogleGeminiChatCompletionTaskParams returns the union data inside the WorkflowTask_TaskParams as a GeniusCreateGoogleGeminiChatCompletionTaskParams
+func (t WorkflowTask_TaskParams) AsGeniusCreateGoogleGeminiChatCompletionTaskParams() (GeniusCreateGoogleGeminiChatCompletionTaskParams, error) {
+	var body GeniusCreateGoogleGeminiChatCompletionTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromGeniusCreateGoogleGeminiChatCompletionTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided GeniusCreateGoogleGeminiChatCompletionTaskParams
+func (t *WorkflowTask_TaskParams) FromGeniusCreateGoogleGeminiChatCompletionTaskParams(v GeniusCreateGoogleGeminiChatCompletionTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeGeniusCreateGoogleGeminiChatCompletionTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided GeniusCreateGoogleGeminiChatCompletionTaskParams
+func (t *WorkflowTask_TaskParams) MergeGeniusCreateGoogleGeminiChatCompletionTaskParams(v GeniusCreateGoogleGeminiChatCompletionTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsGeniusCreateAnthropicChatCompletionTaskParams returns the union data inside the WorkflowTask_TaskParams as a GeniusCreateAnthropicChatCompletionTaskParams
+func (t WorkflowTask_TaskParams) AsGeniusCreateAnthropicChatCompletionTaskParams() (GeniusCreateAnthropicChatCompletionTaskParams, error) {
+	var body GeniusCreateAnthropicChatCompletionTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromGeniusCreateAnthropicChatCompletionTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided GeniusCreateAnthropicChatCompletionTaskParams
+func (t *WorkflowTask_TaskParams) FromGeniusCreateAnthropicChatCompletionTaskParams(v GeniusCreateAnthropicChatCompletionTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeGeniusCreateAnthropicChatCompletionTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided GeniusCreateAnthropicChatCompletionTaskParams
+func (t *WorkflowTask_TaskParams) MergeGeniusCreateAnthropicChatCompletionTaskParams(v GeniusCreateAnthropicChatCompletionTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 func (t WorkflowTask_TaskParams) MarshalJSON() ([]byte, error) {
 	b, err := t.union.MarshalJSON()
 	return b, err
@@ -38431,6 +40034,17 @@ type ClientInterface interface {
 
 	// SetDefaultDashboard request
 	SetDefaultDashboard(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteUserEmailAddress request
+	DeleteUserEmailAddress(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ShowUserEmailAddress request
+	ShowUserEmailAddress(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateUserEmailAddressWithBody request with any body
+	UpdateUserEmailAddressWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateUserEmailAddressWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateUserEmailAddressApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListEnvironments request
 	ListEnvironments(ctx context.Context, params *ListEnvironmentsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -39118,6 +40732,17 @@ type ClientInterface interface {
 
 	UpdateOverrideShiftWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateOverrideShiftApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// DeleteUserPhoneNumber request
+	DeleteUserPhoneNumber(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ShowUserPhoneNumber request
+	ShowUserPhoneNumber(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateUserPhoneNumberWithBody request with any body
+	UpdateUserPhoneNumberWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateUserPhoneNumberWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateUserPhoneNumberApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// DeletePlaybookTask request
 	DeletePlaybookTask(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -39576,6 +41201,14 @@ type ClientInterface interface {
 
 	UpdateUserWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateUserApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// GetUserEmailAddresses request
+	GetUserEmailAddresses(ctx context.Context, userId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateUserEmailAddressWithBody request with any body
+	CreateUserEmailAddressWithBody(ctx context.Context, userId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateUserEmailAddressWithApplicationVndAPIPlusJSONBody(ctx context.Context, userId string, body CreateUserEmailAddressApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListUserNotificationRules request
 	ListUserNotificationRules(ctx context.Context, userId string, params *ListUserNotificationRulesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -39583,6 +41216,14 @@ type ClientInterface interface {
 	CreateUserNotificationRuleWithBody(ctx context.Context, userId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	CreateUserNotificationRuleWithApplicationVndAPIPlusJSONBody(ctx context.Context, userId string, body CreateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetUserPhoneNumbers request
+	GetUserPhoneNumbers(ctx context.Context, userId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateUserPhoneNumberWithBody request with any body
+	CreateUserPhoneNumberWithBody(ctx context.Context, userId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateUserPhoneNumberWithApplicationVndAPIPlusJSONBody(ctx context.Context, userId string, body CreateUserPhoneNumberApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetWebhooksDelivery request
 	GetWebhooksDelivery(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -41266,6 +42907,54 @@ func (c *Client) DuplicateDashboard(ctx context.Context, id string, reqEditors .
 
 func (c *Client) SetDefaultDashboard(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewSetDefaultDashboardRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteUserEmailAddress(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteUserEmailAddressRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ShowUserEmailAddress(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewShowUserEmailAddressRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateUserEmailAddressWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateUserEmailAddressRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateUserEmailAddressWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateUserEmailAddressApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateUserEmailAddressRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -44324,6 +46013,54 @@ func (c *Client) UpdateOverrideShiftWithApplicationVndAPIPlusJSONBody(ctx contex
 	return c.Client.Do(req)
 }
 
+func (c *Client) DeleteUserPhoneNumber(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteUserPhoneNumberRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ShowUserPhoneNumber(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewShowUserPhoneNumberRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateUserPhoneNumberWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateUserPhoneNumberRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateUserPhoneNumberWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateUserPhoneNumberApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateUserPhoneNumberRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) DeletePlaybookTask(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeletePlaybookTaskRequest(c.Server, id)
 	if err != nil {
@@ -46340,6 +48077,42 @@ func (c *Client) UpdateUserWithApplicationVndAPIPlusJSONBody(ctx context.Context
 	return c.Client.Do(req)
 }
 
+func (c *Client) GetUserEmailAddresses(ctx context.Context, userId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetUserEmailAddressesRequest(c.Server, userId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateUserEmailAddressWithBody(ctx context.Context, userId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateUserEmailAddressRequestWithBody(c.Server, userId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateUserEmailAddressWithApplicationVndAPIPlusJSONBody(ctx context.Context, userId string, body CreateUserEmailAddressApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateUserEmailAddressRequestWithApplicationVndAPIPlusJSONBody(c.Server, userId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) ListUserNotificationRules(ctx context.Context, userId string, params *ListUserNotificationRulesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListUserNotificationRulesRequest(c.Server, userId, params)
 	if err != nil {
@@ -46366,6 +48139,42 @@ func (c *Client) CreateUserNotificationRuleWithBody(ctx context.Context, userId 
 
 func (c *Client) CreateUserNotificationRuleWithApplicationVndAPIPlusJSONBody(ctx context.Context, userId string, body CreateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateUserNotificationRuleRequestWithApplicationVndAPIPlusJSONBody(c.Server, userId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetUserPhoneNumbers(ctx context.Context, userId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetUserPhoneNumbersRequest(c.Server, userId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateUserPhoneNumberWithBody(ctx context.Context, userId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateUserPhoneNumberRequestWithBody(c.Server, userId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateUserPhoneNumberWithApplicationVndAPIPlusJSONBody(ctx context.Context, userId string, body CreateUserPhoneNumberApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateUserPhoneNumberRequestWithApplicationVndAPIPlusJSONBody(c.Server, userId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -53378,6 +55187,121 @@ func NewSetDefaultDashboardRequest(server string, id string) (*http.Request, err
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewDeleteUserEmailAddressRequest generates requests for DeleteUserEmailAddress
+func NewDeleteUserEmailAddressRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/email_addresses/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewShowUserEmailAddressRequest generates requests for ShowUserEmailAddress
+func NewShowUserEmailAddressRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/email_addresses/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateUserEmailAddressRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateUserEmailAddress builder with application/vnd.api+json body
+func NewUpdateUserEmailAddressRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateUserEmailAddressApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateUserEmailAddressRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateUserEmailAddressRequestWithBody generates requests for UpdateUserEmailAddress with any type of body
+func NewUpdateUserEmailAddressRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/email_addresses/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -65226,6 +67150,121 @@ func NewUpdateOverrideShiftRequestWithBody(server string, id string, contentType
 	return req, nil
 }
 
+// NewDeleteUserPhoneNumberRequest generates requests for DeleteUserPhoneNumber
+func NewDeleteUserPhoneNumberRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/phone_numbers/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewShowUserPhoneNumberRequest generates requests for ShowUserPhoneNumber
+func NewShowUserPhoneNumberRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/phone_numbers/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateUserPhoneNumberRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateUserPhoneNumber builder with application/vnd.api+json body
+func NewUpdateUserPhoneNumberRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateUserPhoneNumberApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateUserPhoneNumberRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateUserPhoneNumberRequestWithBody generates requests for UpdateUserPhoneNumber with any type of body
+func NewUpdateUserPhoneNumberRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/phone_numbers/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewDeletePlaybookTaskRequest generates requests for DeletePlaybookTask
 func NewDeletePlaybookTaskRequest(server string, id string) (*http.Request, error) {
 	var err error
@@ -73459,6 +75498,87 @@ func NewUpdateUserRequestWithBody(server string, id string, contentType string, 
 	return req, nil
 }
 
+// NewGetUserEmailAddressesRequest generates requests for GetUserEmailAddresses
+func NewGetUserEmailAddressesRequest(server string, userId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "user_id", runtime.ParamLocationPath, userId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/users/%s/email_addresses", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateUserEmailAddressRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateUserEmailAddress builder with application/vnd.api+json body
+func NewCreateUserEmailAddressRequestWithApplicationVndAPIPlusJSONBody(server string, userId string, body CreateUserEmailAddressApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateUserEmailAddressRequestWithBody(server, userId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateUserEmailAddressRequestWithBody generates requests for CreateUserEmailAddress with any type of body
+func NewCreateUserEmailAddressRequestWithBody(server string, userId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "user_id", runtime.ParamLocationPath, userId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/users/%s/email_addresses", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListUserNotificationRulesRequest generates requests for ListUserNotificationRules
 func NewListUserNotificationRulesRequest(server string, userId string, params *ListUserNotificationRulesParams) (*http.Request, error) {
 	var err error
@@ -73591,6 +75711,87 @@ func NewCreateUserNotificationRuleRequestWithBody(server string, userId string, 
 	}
 
 	operationPath := fmt.Sprintf("/v1/users/%s/notification_rules", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGetUserPhoneNumbersRequest generates requests for GetUserPhoneNumbers
+func NewGetUserPhoneNumbersRequest(server string, userId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "user_id", runtime.ParamLocationPath, userId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/users/%s/phone_numbers", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateUserPhoneNumberRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateUserPhoneNumber builder with application/vnd.api+json body
+func NewCreateUserPhoneNumberRequestWithApplicationVndAPIPlusJSONBody(server string, userId string, body CreateUserPhoneNumberApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateUserPhoneNumberRequestWithBody(server, userId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateUserPhoneNumberRequestWithBody generates requests for CreateUserPhoneNumber with any type of body
+func NewCreateUserPhoneNumberRequestWithBody(server string, userId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "user_id", runtime.ParamLocationPath, userId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/users/%s/phone_numbers", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -76146,6 +78347,17 @@ type ClientWithResponsesInterface interface {
 	// SetDefaultDashboardWithResponse request
 	SetDefaultDashboardWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*SetDefaultDashboardResponse, error)
 
+	// DeleteUserEmailAddressWithResponse request
+	DeleteUserEmailAddressWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteUserEmailAddressResponse, error)
+
+	// ShowUserEmailAddressWithResponse request
+	ShowUserEmailAddressWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*ShowUserEmailAddressResponse, error)
+
+	// UpdateUserEmailAddressWithBodyWithResponse request with any body
+	UpdateUserEmailAddressWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateUserEmailAddressResponse, error)
+
+	UpdateUserEmailAddressWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateUserEmailAddressApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateUserEmailAddressResponse, error)
+
 	// ListEnvironmentsWithResponse request
 	ListEnvironmentsWithResponse(ctx context.Context, params *ListEnvironmentsParams, reqEditors ...RequestEditorFn) (*ListEnvironmentsResponse, error)
 
@@ -76832,6 +79044,17 @@ type ClientWithResponsesInterface interface {
 
 	UpdateOverrideShiftWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateOverrideShiftApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateOverrideShiftResponse, error)
 
+	// DeleteUserPhoneNumberWithResponse request
+	DeleteUserPhoneNumberWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteUserPhoneNumberResponse, error)
+
+	// ShowUserPhoneNumberWithResponse request
+	ShowUserPhoneNumberWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*ShowUserPhoneNumberResponse, error)
+
+	// UpdateUserPhoneNumberWithBodyWithResponse request with any body
+	UpdateUserPhoneNumberWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateUserPhoneNumberResponse, error)
+
+	UpdateUserPhoneNumberWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateUserPhoneNumberApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateUserPhoneNumberResponse, error)
+
 	// DeletePlaybookTaskWithResponse request
 	DeletePlaybookTaskWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeletePlaybookTaskResponse, error)
 
@@ -77290,6 +79513,14 @@ type ClientWithResponsesInterface interface {
 
 	UpdateUserWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateUserApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateUserResponse, error)
 
+	// GetUserEmailAddressesWithResponse request
+	GetUserEmailAddressesWithResponse(ctx context.Context, userId string, reqEditors ...RequestEditorFn) (*GetUserEmailAddressesResponse, error)
+
+	// CreateUserEmailAddressWithBodyWithResponse request with any body
+	CreateUserEmailAddressWithBodyWithResponse(ctx context.Context, userId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateUserEmailAddressResponse, error)
+
+	CreateUserEmailAddressWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, userId string, body CreateUserEmailAddressApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateUserEmailAddressResponse, error)
+
 	// ListUserNotificationRulesWithResponse request
 	ListUserNotificationRulesWithResponse(ctx context.Context, userId string, params *ListUserNotificationRulesParams, reqEditors ...RequestEditorFn) (*ListUserNotificationRulesResponse, error)
 
@@ -77297,6 +79528,14 @@ type ClientWithResponsesInterface interface {
 	CreateUserNotificationRuleWithBodyWithResponse(ctx context.Context, userId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateUserNotificationRuleResponse, error)
 
 	CreateUserNotificationRuleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, userId string, body CreateUserNotificationRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateUserNotificationRuleResponse, error)
+
+	// GetUserPhoneNumbersWithResponse request
+	GetUserPhoneNumbersWithResponse(ctx context.Context, userId string, reqEditors ...RequestEditorFn) (*GetUserPhoneNumbersResponse, error)
+
+	// CreateUserPhoneNumberWithBodyWithResponse request with any body
+	CreateUserPhoneNumberWithBodyWithResponse(ctx context.Context, userId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateUserPhoneNumberResponse, error)
+
+	CreateUserPhoneNumberWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, userId string, body CreateUserPhoneNumberApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateUserPhoneNumberResponse, error)
 
 	// GetWebhooksDeliveryWithResponse request
 	GetWebhooksDeliveryWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetWebhooksDeliveryResponse, error)
@@ -79578,6 +81817,79 @@ func (r SetDefaultDashboardResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r SetDefaultDashboardResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteUserEmailAddressResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *UserEmailAddressResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteUserEmailAddressResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteUserEmailAddressResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ShowUserEmailAddressResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *UserEmailAddressResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r ShowUserEmailAddressResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ShowUserEmailAddressResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateUserEmailAddressResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *UserEmailAddressResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateUserEmailAddressResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateUserEmailAddressResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -83670,6 +85982,79 @@ func (r UpdateOverrideShiftResponse) StatusCode() int {
 	return 0
 }
 
+type DeleteUserPhoneNumberResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *UserPhoneNumberResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteUserPhoneNumberResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteUserPhoneNumberResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ShowUserPhoneNumberResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *UserPhoneNumberResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r ShowUserPhoneNumberResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ShowUserPhoneNumberResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateUserPhoneNumberResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *UserPhoneNumberResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateUserPhoneNumberResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateUserPhoneNumberResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type DeletePlaybookTaskResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -86468,6 +88853,55 @@ func (r UpdateUserResponse) StatusCode() int {
 	return 0
 }
 
+type GetUserEmailAddressesResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *UserEmailAddressList
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetUserEmailAddressesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetUserEmailAddressesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateUserEmailAddressResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *UserEmailAddressResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateUserEmailAddressResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateUserEmailAddressResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type ListUserNotificationRulesResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -86508,6 +88942,55 @@ func (r CreateUserNotificationRuleResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r CreateUserNotificationRuleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetUserPhoneNumbersResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *UserPhoneNumberList
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetUserPhoneNumbersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetUserPhoneNumbersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateUserPhoneNumberResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *UserPhoneNumberResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateUserPhoneNumberResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateUserPhoneNumberResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -88447,6 +90930,41 @@ func (c *ClientWithResponses) SetDefaultDashboardWithResponse(ctx context.Contex
 		return nil, err
 	}
 	return ParseSetDefaultDashboardResponse(rsp)
+}
+
+// DeleteUserEmailAddressWithResponse request returning *DeleteUserEmailAddressResponse
+func (c *ClientWithResponses) DeleteUserEmailAddressWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteUserEmailAddressResponse, error) {
+	rsp, err := c.DeleteUserEmailAddress(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteUserEmailAddressResponse(rsp)
+}
+
+// ShowUserEmailAddressWithResponse request returning *ShowUserEmailAddressResponse
+func (c *ClientWithResponses) ShowUserEmailAddressWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*ShowUserEmailAddressResponse, error) {
+	rsp, err := c.ShowUserEmailAddress(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseShowUserEmailAddressResponse(rsp)
+}
+
+// UpdateUserEmailAddressWithBodyWithResponse request with arbitrary body returning *UpdateUserEmailAddressResponse
+func (c *ClientWithResponses) UpdateUserEmailAddressWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateUserEmailAddressResponse, error) {
+	rsp, err := c.UpdateUserEmailAddressWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateUserEmailAddressResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateUserEmailAddressWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateUserEmailAddressApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateUserEmailAddressResponse, error) {
+	rsp, err := c.UpdateUserEmailAddressWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateUserEmailAddressResponse(rsp)
 }
 
 // ListEnvironmentsWithResponse request returning *ListEnvironmentsResponse
@@ -90659,6 +93177,41 @@ func (c *ClientWithResponses) UpdateOverrideShiftWithApplicationVndAPIPlusJSONBo
 	return ParseUpdateOverrideShiftResponse(rsp)
 }
 
+// DeleteUserPhoneNumberWithResponse request returning *DeleteUserPhoneNumberResponse
+func (c *ClientWithResponses) DeleteUserPhoneNumberWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteUserPhoneNumberResponse, error) {
+	rsp, err := c.DeleteUserPhoneNumber(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteUserPhoneNumberResponse(rsp)
+}
+
+// ShowUserPhoneNumberWithResponse request returning *ShowUserPhoneNumberResponse
+func (c *ClientWithResponses) ShowUserPhoneNumberWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*ShowUserPhoneNumberResponse, error) {
+	rsp, err := c.ShowUserPhoneNumber(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseShowUserPhoneNumberResponse(rsp)
+}
+
+// UpdateUserPhoneNumberWithBodyWithResponse request with arbitrary body returning *UpdateUserPhoneNumberResponse
+func (c *ClientWithResponses) UpdateUserPhoneNumberWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateUserPhoneNumberResponse, error) {
+	rsp, err := c.UpdateUserPhoneNumberWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateUserPhoneNumberResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateUserPhoneNumberWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateUserPhoneNumberApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateUserPhoneNumberResponse, error) {
+	rsp, err := c.UpdateUserPhoneNumberWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateUserPhoneNumberResponse(rsp)
+}
+
 // DeletePlaybookTaskWithResponse request returning *DeletePlaybookTaskResponse
 func (c *ClientWithResponses) DeletePlaybookTaskWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeletePlaybookTaskResponse, error) {
 	rsp, err := c.DeletePlaybookTask(ctx, id, reqEditors...)
@@ -92125,6 +94678,32 @@ func (c *ClientWithResponses) UpdateUserWithApplicationVndAPIPlusJSONBodyWithRes
 	return ParseUpdateUserResponse(rsp)
 }
 
+// GetUserEmailAddressesWithResponse request returning *GetUserEmailAddressesResponse
+func (c *ClientWithResponses) GetUserEmailAddressesWithResponse(ctx context.Context, userId string, reqEditors ...RequestEditorFn) (*GetUserEmailAddressesResponse, error) {
+	rsp, err := c.GetUserEmailAddresses(ctx, userId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetUserEmailAddressesResponse(rsp)
+}
+
+// CreateUserEmailAddressWithBodyWithResponse request with arbitrary body returning *CreateUserEmailAddressResponse
+func (c *ClientWithResponses) CreateUserEmailAddressWithBodyWithResponse(ctx context.Context, userId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateUserEmailAddressResponse, error) {
+	rsp, err := c.CreateUserEmailAddressWithBody(ctx, userId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateUserEmailAddressResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateUserEmailAddressWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, userId string, body CreateUserEmailAddressApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateUserEmailAddressResponse, error) {
+	rsp, err := c.CreateUserEmailAddressWithApplicationVndAPIPlusJSONBody(ctx, userId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateUserEmailAddressResponse(rsp)
+}
+
 // ListUserNotificationRulesWithResponse request returning *ListUserNotificationRulesResponse
 func (c *ClientWithResponses) ListUserNotificationRulesWithResponse(ctx context.Context, userId string, params *ListUserNotificationRulesParams, reqEditors ...RequestEditorFn) (*ListUserNotificationRulesResponse, error) {
 	rsp, err := c.ListUserNotificationRules(ctx, userId, params, reqEditors...)
@@ -92149,6 +94728,32 @@ func (c *ClientWithResponses) CreateUserNotificationRuleWithApplicationVndAPIPlu
 		return nil, err
 	}
 	return ParseCreateUserNotificationRuleResponse(rsp)
+}
+
+// GetUserPhoneNumbersWithResponse request returning *GetUserPhoneNumbersResponse
+func (c *ClientWithResponses) GetUserPhoneNumbersWithResponse(ctx context.Context, userId string, reqEditors ...RequestEditorFn) (*GetUserPhoneNumbersResponse, error) {
+	rsp, err := c.GetUserPhoneNumbers(ctx, userId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetUserPhoneNumbersResponse(rsp)
+}
+
+// CreateUserPhoneNumberWithBodyWithResponse request with arbitrary body returning *CreateUserPhoneNumberResponse
+func (c *ClientWithResponses) CreateUserPhoneNumberWithBodyWithResponse(ctx context.Context, userId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateUserPhoneNumberResponse, error) {
+	rsp, err := c.CreateUserPhoneNumberWithBody(ctx, userId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateUserPhoneNumberResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateUserPhoneNumberWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, userId string, body CreateUserPhoneNumberApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateUserPhoneNumberResponse, error) {
+	rsp, err := c.CreateUserPhoneNumberWithApplicationVndAPIPlusJSONBody(ctx, userId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateUserPhoneNumberResponse(rsp)
 }
 
 // GetWebhooksDeliveryWithResponse request returning *GetWebhooksDeliveryResponse
@@ -95610,6 +98215,133 @@ func ParseSetDefaultDashboardResponse(rsp *http.Response) (*SetDefaultDashboardR
 			return nil, err
 		}
 		response.ApplicationvndApiJSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteUserEmailAddressResponse parses an HTTP response from a DeleteUserEmailAddressWithResponse call
+func ParseDeleteUserEmailAddressResponse(rsp *http.Response) (*DeleteUserEmailAddressResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteUserEmailAddressResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest UserEmailAddressResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseShowUserEmailAddressResponse parses an HTTP response from a ShowUserEmailAddressWithResponse call
+func ParseShowUserEmailAddressResponse(rsp *http.Response) (*ShowUserEmailAddressResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ShowUserEmailAddressResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest UserEmailAddressResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateUserEmailAddressResponse parses an HTTP response from a UpdateUserEmailAddressWithResponse call
+func ParseUpdateUserEmailAddressResponse(rsp *http.Response) (*UpdateUserEmailAddressResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateUserEmailAddressResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest UserEmailAddressResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
 
 	}
 
@@ -101434,6 +104166,133 @@ func ParseUpdateOverrideShiftResponse(rsp *http.Response) (*UpdateOverrideShiftR
 	return response, nil
 }
 
+// ParseDeleteUserPhoneNumberResponse parses an HTTP response from a DeleteUserPhoneNumberWithResponse call
+func ParseDeleteUserPhoneNumberResponse(rsp *http.Response) (*DeleteUserPhoneNumberResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteUserPhoneNumberResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest UserPhoneNumberResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseShowUserPhoneNumberResponse parses an HTTP response from a ShowUserPhoneNumberWithResponse call
+func ParseShowUserPhoneNumberResponse(rsp *http.Response) (*ShowUserPhoneNumberResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ShowUserPhoneNumberResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest UserPhoneNumberResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateUserPhoneNumberResponse parses an HTTP response from a UpdateUserPhoneNumberWithResponse call
+func ParseUpdateUserPhoneNumberResponse(rsp *http.Response) (*UpdateUserPhoneNumberResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateUserPhoneNumberResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest UserPhoneNumberResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseDeletePlaybookTaskResponse parses an HTTP response from a DeletePlaybookTaskWithResponse call
 func ParseDeletePlaybookTaskResponse(rsp *http.Response) (*DeletePlaybookTaskResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -105404,6 +108263,93 @@ func ParseUpdateUserResponse(rsp *http.Response) (*UpdateUserResponse, error) {
 	return response, nil
 }
 
+// ParseGetUserEmailAddressesResponse parses an HTTP response from a GetUserEmailAddressesWithResponse call
+func ParseGetUserEmailAddressesResponse(rsp *http.Response) (*GetUserEmailAddressesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetUserEmailAddressesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest UserEmailAddressList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateUserEmailAddressResponse parses an HTTP response from a CreateUserEmailAddressWithResponse call
+func ParseCreateUserEmailAddressResponse(rsp *http.Response) (*CreateUserEmailAddressResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateUserEmailAddressResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest UserEmailAddressResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseListUserNotificationRulesResponse parses an HTTP response from a ListUserNotificationRulesWithResponse call
 func ParseListUserNotificationRulesResponse(rsp *http.Response) (*ListUserNotificationRulesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -105457,6 +108403,93 @@ func ParseCreateUserNotificationRuleResponse(rsp *http.Response) (*CreateUserNot
 			return nil, err
 		}
 		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetUserPhoneNumbersResponse parses an HTTP response from a GetUserPhoneNumbersWithResponse call
+func ParseGetUserPhoneNumbersResponse(rsp *http.Response) (*GetUserPhoneNumbersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetUserPhoneNumbersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest UserPhoneNumberList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateUserPhoneNumberResponse parses an HTTP response from a CreateUserPhoneNumberWithResponse call
+func ParseCreateUserPhoneNumberResponse(rsp *http.Response) (*CreateUserPhoneNumberResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateUserPhoneNumberResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest UserPhoneNumberResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
 		var dest ErrorsList
