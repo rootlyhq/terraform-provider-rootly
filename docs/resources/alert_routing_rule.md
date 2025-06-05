@@ -53,7 +53,7 @@ Using `terraform import`, import rootly_alert_routing_rule using the `id`. For e
 Optional:
 
 - `target_id` (String) The ID of the target
-- `target_type` (String) The type of the target. Value must be one of `Group`, `Service`, `EscalationPolicy`.
+- `target_type` (String) The type of the target. Value must be one of `Service`, `Group`, `EscalationPolicy`.
 
 
 <a id="nestedblock--conditions"></a>

@@ -23,6 +23,7 @@ data "rootly_status_page" "my-status-page" {
 ### Optional
 
 - `created_at` (Map of String) Filter by date range using 'lt' and 'gt'.
+- `slug` (String)
 
 ### Read-Only
 

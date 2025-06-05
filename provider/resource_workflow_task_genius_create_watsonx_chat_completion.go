@@ -79,6 +79,11 @@ func resourceWorkflowTaskGeniusCreateWatsonxChatCompletion() *schema.Resource {
 							Type:        schema.TypeMap,
 							Required:    true,
 						},
+						"system_prompt": &schema.Schema{
+							Description: "The system prompt to send to WatsonX (optional)",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 						"prompt": &schema.Schema{
 							Description: "The prompt to send to WatsonX",
 							Type:        schema.TypeString,

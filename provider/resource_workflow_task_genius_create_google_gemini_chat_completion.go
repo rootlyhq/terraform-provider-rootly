@@ -15,14 +15,14 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
 
-func resourceWorkflowTaskGeniusCreateOpenaiChatCompletion() *schema.Resource {
+func resourceWorkflowTaskGeniusCreateGoogleGeminiChatCompletion() *schema.Resource {
 	return &schema.Resource{
-		Description: "Manages workflow genius_create_openai_chat_completion task.",
+		Description: "Manages workflow genius_create_google_gemini_chat_completion task.",
 
-		CreateContext: resourceWorkflowTaskGeniusCreateOpenaiChatCompletionCreate,
-		ReadContext:   resourceWorkflowTaskGeniusCreateOpenaiChatCompletionRead,
-		UpdateContext: resourceWorkflowTaskGeniusCreateOpenaiChatCompletionUpdate,
-		DeleteContext: resourceWorkflowTaskGeniusCreateOpenaiChatCompletionDelete,
+		CreateContext: resourceWorkflowTaskGeniusCreateGoogleGeminiChatCompletionCreate,
+		ReadContext:   resourceWorkflowTaskGeniusCreateGoogleGeminiChatCompletionRead,
+		UpdateContext: resourceWorkflowTaskGeniusCreateGoogleGeminiChatCompletionUpdate,
+		DeleteContext: resourceWorkflowTaskGeniusCreateGoogleGeminiChatCompletionDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -69,23 +69,23 @@ func resourceWorkflowTaskGeniusCreateOpenaiChatCompletion() *schema.Resource {
 						"task_type": &schema.Schema{
 							Type:     schema.TypeString,
 							Optional: true,
-							Default:  "genius_create_openai_chat_completion",
+							Default:  "genius_create_google_gemini_chat_completion",
 							ValidateFunc: validation.StringInSlice([]string{
-								"genius_create_openai_chat_completion",
+								"genius_create_google_gemini_chat_completion",
 							}, false),
 						},
 						"model": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. The OpenAI model. eg: gpt-4o-mini",
+							Description: "Map must contain two fields, `id` and `name`. The Gemini model. eg: gemini-2.0-flash",
 							Type:        schema.TypeMap,
 							Required:    true,
 						},
 						"system_prompt": &schema.Schema{
-							Description: "The system prompt to send to OpenAI (optional)",
+							Description: "The system prompt to send to Gemini (optional)",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
 						"prompt": &schema.Schema{
-							Description: "The prompt to send to OpenAI",
+							Description: "The prompt to send to Gemini",
 							Type:        schema.TypeString,
 							Required:    true,
 						},
@@ -96,7 +96,7 @@ func resourceWorkflowTaskGeniusCreateOpenaiChatCompletion() *schema.Resource {
 	}
 }
 
-func resourceWorkflowTaskGeniusCreateOpenaiChatCompletionCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskGeniusCreateGoogleGeminiChatCompletionCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
@@ -125,10 +125,10 @@ func resourceWorkflowTaskGeniusCreateOpenaiChatCompletionCreate(ctx context.Cont
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created an workflow task resource: %v (%s)", workflowId, d.Id()))
 
-	return resourceWorkflowTaskGeniusCreateOpenaiChatCompletionRead(ctx, d, meta)
+	return resourceWorkflowTaskGeniusCreateGoogleGeminiChatCompletionRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskGeniusCreateOpenaiChatCompletionRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskGeniusCreateGoogleGeminiChatCompletionRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
@@ -137,7 +137,7 @@ func resourceWorkflowTaskGeniusCreateOpenaiChatCompletionRead(ctx context.Contex
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskGeniusCreateOpenaiChatCompletion (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskGeniusCreateGoogleGeminiChatCompletion (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
@@ -157,7 +157,7 @@ func resourceWorkflowTaskGeniusCreateOpenaiChatCompletionRead(ctx context.Contex
 	return nil
 }
 
-func resourceWorkflowTaskGeniusCreateOpenaiChatCompletionUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskGeniusCreateGoogleGeminiChatCompletionUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
@@ -183,10 +183,10 @@ func resourceWorkflowTaskGeniusCreateOpenaiChatCompletionUpdate(ctx context.Cont
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
 
-	return resourceWorkflowTaskGeniusCreateOpenaiChatCompletionRead(ctx, d, meta)
+	return resourceWorkflowTaskGeniusCreateGoogleGeminiChatCompletionRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskGeniusCreateOpenaiChatCompletionDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskGeniusCreateGoogleGeminiChatCompletionDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
@@ -195,7 +195,7 @@ func resourceWorkflowTaskGeniusCreateOpenaiChatCompletionDelete(ctx context.Cont
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskGeniusCreateOpenaiChatCompletion (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskGeniusCreateGoogleGeminiChatCompletion (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
