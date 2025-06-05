@@ -34,6 +34,15 @@ func resourceStatusPage() *schema.Resource {
 				Description: "The title of the status page",
 			},
 
+			"slug": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The slug of the status page",
+			},
+
 			"public_title": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
@@ -251,6 +260,9 @@ func resourceStatusPageCreate(ctx context.Context, d *schema.ResourceData, meta 
 	if value, ok := d.GetOkExists("title"); ok {
 		s.Title = value.(string)
 	}
+	if value, ok := d.GetOkExists("slug"); ok {
+		s.Slug = value.(string)
+	}
 	if value, ok := d.GetOkExists("public_title"); ok {
 		s.PublicTitle = value.(string)
 	}
@@ -347,6 +359,7 @@ func resourceStatusPageRead(ctx context.Context, d *schema.ResourceData, meta in
 	}
 
 	d.Set("title", item.Title)
+	d.Set("slug", item.Slug)
 	d.Set("public_title", item.PublicTitle)
 	d.Set("description", item.Description)
 	d.Set("public_description", item.PublicDescription)
@@ -381,6 +394,9 @@ func resourceStatusPageUpdate(ctx context.Context, d *schema.ResourceData, meta 
 
 	if d.HasChange("title") {
 		s.Title = d.Get("title").(string)
+	}
+	if d.HasChange("slug") {
+		s.Slug = d.Get("slug").(string)
 	}
 	if d.HasChange("public_title") {
 		s.PublicTitle = d.Get("public_title").(string)

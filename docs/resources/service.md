@@ -90,7 +90,7 @@ Using `terraform import`, import rootly_service using the `id`. For example:
 - `gitlab_repository_name` (String) The GitLab repository name associated to this service. eg: rootlyhq/my-service
 - `notify_emails` (List of String) Emails attached to the service
 - `opsgenie_id` (String) The Opsgenie service id associated to this service
-- `owner_group_ids` (List of String) Owner Teams associated with this service
+- `owners_group_ids` (List of String) Owner Teams associated with this service
 - `owners_user_ids` (List of Number) Owner Users associated with this service
 - `pagerduty_id` (String) The PagerDuty service id associated to this service
 - `position` (Number) Position of the service

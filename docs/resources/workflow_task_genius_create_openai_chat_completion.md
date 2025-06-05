@@ -57,4 +57,5 @@ Required:
 
 Optional:
 
+- `system_prompt` (String) The system prompt to send to OpenAI (optional)
 - `task_type` (String)
