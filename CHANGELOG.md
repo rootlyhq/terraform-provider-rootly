@@ -8,7 +8,19 @@
 
 ### Changed
 
-- **Breaking:** `owners_group_ids` to `owner_group_ids`.
+- **Breaking:** `owners_group_ids` to `owner_group_ids` to `rootly_service`.
+
+## [2.29.1] -- 2025-05-05
+
+### Fixed
+
+- Reverted accidental breaking change of `owners_group_ids` back to `owner_group_ids` for `rootly_service`.
+
+## [2.29.0] -- 2025-05-05
+
+### Added
+
+- Add `time_restrictions` attribute to `rootly_escalation_path`.
 
 ## [2.27.1] -- 2025-04-04
 
