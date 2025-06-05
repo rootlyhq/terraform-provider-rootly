@@ -22,6 +22,8 @@ type EscalationPath struct {
   RepeatCount int `jsonapi:"attr,repeat_count,omitempty"`
   InitialDelay int `jsonapi:"attr,initial_delay,omitempty"`
   Rules []interface{} `jsonapi:"attr,rules,omitempty"`
+  TimeRestrictionTimeZone string `jsonapi:"attr,time_restriction_time_zone,omitempty"`
+  TimeRestrictions []interface{} `jsonapi:"attr,time_restrictions,omitempty"`
 }
 
 func (c *Client) ListEscalationPaths(id string, params *rootlygo.ListEscalationPathsParams) ([]interface{}, error) {
