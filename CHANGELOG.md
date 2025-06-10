@@ -1,10 +1,32 @@
 # Changelog
 
-## [2.27.1] -- 2024-04-04
+## [3.0.0] -- 2025-05-05
+
+### Added
+
+- Add `time_restrictions` attribute to `rootly_escalation_path`.
+
+### Changed
+
+- **Breaking:** `owners_group_ids` to `owner_group_ids` to `rootly_service`.
+
+## [2.29.1] -- 2025-05-05
+
+### Fixed
+
+- Reverted accidental breaking change of `owners_group_ids` back to `owner_group_ids` for `rootly_service`.
+
+## [2.29.0] -- 2025-05-05
+
+### Added
+
+- Add `time_restrictions` attribute to `rootly_escalation_path`.
+
+## [2.27.1] -- 2025-04-04
 
 - Improve: Made import examples in documentation more user-friendly.
 
-## [2.26.5] -- 2024-04-03
+## [2.26.5] -- 2025-04-03
 
 - Enhance: Improved documentation for `alert_routing_rule` property field names.
 - Enhance: Added documentation for WatsonX chat completion task prompt.
