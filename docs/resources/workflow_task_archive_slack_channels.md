@@ -49,6 +49,8 @@ import {
 }
 ```
 
+Locate the resource id in the web app, or retrieve it by listing resources through the API if it's not visible in the web app.
+
 You can generate HCL from the import block using the `-generate-config-out` flag:
 
 ```console

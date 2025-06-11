@@ -18,9 +18,11 @@ In Terraform v1.5.0 and later, use an [`import` block](https://developer.hashico
 ```terraform
 import {
   to = rootly_custom_field.my-resource
-  id = "my-resource-slug"
+  id = "00000000-0000-0000-0000-000000000000"
 }
 ```
+
+Locate the resource id in the web app, or retrieve it by listing resources through the API if it's not visible in the web app.
 
 You can generate HCL from the import block using the `-generate-config-out` flag:
 
