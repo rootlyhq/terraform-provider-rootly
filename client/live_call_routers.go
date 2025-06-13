@@ -26,6 +26,8 @@ type LiveCallRouter struct {
   EscalationLevelDelayInSeconds int `jsonapi:"attr,escalation_level_delay_in_seconds,omitempty"`
   ShouldAutoResolveAlertOnCallEnd *bool `jsonapi:"attr,should_auto_resolve_alert_on_call_end,omitempty"`
   AlertUrgencyId string `jsonapi:"attr,alert_urgency_id,omitempty"`
+  CallingTreePrompt string `jsonapi:"attr,calling_tree_prompt,omitempty"`
+  NotificationTargets []interface{} `jsonapi:"attr,notification_targets,omitempty"`
   EscalationPolicyTriggerParams map[string]interface{} `jsonapi:"attr,escalation_policy_trigger_params,omitempty"`
 }
 

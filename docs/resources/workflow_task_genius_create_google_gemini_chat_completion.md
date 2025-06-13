@@ -1,23 +1,23 @@
 ---
-page_title: "Resource rootly_workflow_task_genius_create_openai_chat_completion - terraform-provider-rootly"
+page_title: "Resource rootly_workflow_task_genius_create_google_gemini_chat_completion - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow genius_create_openai_chat_completion task.
+    Manages workflow genius_create_google_gemini_chat_completion task.
 ---
 
-# Resource (rootly_workflow_task_genius_create_openai_chat_completion)
+# Resource (rootly_workflow_task_genius_create_google_gemini_chat_completion)
 
-Manages workflow genius_create_openai_chat_completion task.
+Manages workflow genius_create_google_gemini_chat_completion task.
 
 
 
 ## Import
 
-In Terraform v1.5.0 and later, use an [`import` block](https://developer.hashicorp.com/terraform/language/import) to import rootly_workflow_task_genius_create_openai_chat_completion using the `id`. For example:
+In Terraform v1.5.0 and later, use an [`import` block](https://developer.hashicorp.com/terraform/language/import) to import rootly_workflow_task_genius_create_google_gemini_chat_completion using the `id`. For example:
 
 ```terraform
 import {
-  to = rootly_workflow_task_genius_create_openai_chat_completion.my-resource
+  to = rootly_workflow_task_genius_create_google_gemini_chat_completion.my-resource
   id = "00000000-0000-0000-0000-000000000000"
 }
 ```
@@ -54,10 +54,10 @@ terraform plan -generate-config-out=generated.tf
 
 Required:
 
-- `model` (Map of String) Map must contain two fields, `id` and `name`. The OpenAI model. eg: gpt-4o-mini
-- `prompt` (String) The prompt to send to OpenAI
+- `model` (Map of String) Map must contain two fields, `id` and `name`. The Gemini model. eg: gemini-2.0-flash
+- `prompt` (String) The prompt to send to Gemini
 
 Optional:
 
-- `system_prompt` (String) The system prompt to send to OpenAI (optional)
+- `system_prompt` (String) The system prompt to send to Gemini (optional)
 - `task_type` (String)

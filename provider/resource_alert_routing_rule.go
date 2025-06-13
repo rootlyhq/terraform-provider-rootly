@@ -132,11 +132,11 @@ func resourceAlertRoutingRule() *schema.Resource {
 
 						"target_type": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "Group",
+							Default:     "Service",
 							Required:    false,
 							Optional:    true,
 							ForceNew:    false,
-							Description: "The type of the target. Value must be one of `Group`, `Service`, `EscalationPolicy`.",
+							Description: "The type of the target. Value must be one of `Service`, `Group`, `EscalationPolicy`.",
 						},
 
 						"target_id": &schema.Schema{

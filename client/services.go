@@ -31,8 +31,8 @@ type Service struct {
   GitlabRepositoryBranch string `jsonapi:"attr,gitlab_repository_branch,omitempty"`
   EnvironmentIds []interface{} `jsonapi:"attr,environment_ids,omitempty"`
   ServiceIds []interface{} `jsonapi:"attr,service_ids,omitempty"`
-  OwnersGroupIds []interface{} `jsonapi:"attr,owners_group_ids,omitempty"`
-  OwnersUserIds []interface{} `jsonapi:"attr,owners_user_ids,omitempty"`
+  OwnerGroupIds []interface{} `jsonapi:"attr,owner_group_ids,omitempty"`
+  OwnerUserIds []interface{} `jsonapi:"attr,owner_user_ids,omitempty"`
   AlertUrgencyId string `jsonapi:"attr,alert_urgency_id,omitempty"`
   AlertsEmailEnabled *bool `jsonapi:"attr,alerts_email_enabled,omitempty"`
   AlertsEmailAddress string `jsonapi:"attr,alerts_email_address,omitempty"`

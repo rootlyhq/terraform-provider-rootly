@@ -20,6 +20,12 @@ func dataSourceStatusPage() *schema.Resource {
 				Computed: true,
 			},
 
+			"slug": &schema.Schema{
+				Type:     schema.TypeString,
+				Computed: true,
+				Optional: true,
+			},
+
 			"created_at": &schema.Schema{
 				Type:        schema.TypeMap,
 				Description: "Filter by date range using 'lt' and 'gt'.",
@@ -35,6 +41,11 @@ func dataSourceStatusPageRead(ctx context.Context, d *schema.ResourceData, meta 
 	params := new(rootlygo.ListStatusPagesParams)
 	page_size := 1
 	params.PageSize = &page_size
+
+	if value, ok := d.GetOkExists("slug"); ok {
+		slug := value.(string)
+		params.FilterSlug = &slug
+	}
 
 	created_at_gt := d.Get("created_at").(map[string]interface{})
 	if value, exists := created_at_gt["gt"]; exists {

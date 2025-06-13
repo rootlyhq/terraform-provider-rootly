@@ -86,8 +86,8 @@ terraform plan -generate-config-out=generated.tf
 - `notify_emails` (List of String) Emails attached to the functionality
 - `opsgenie_id` (String) The Opsgenie service id associated to this functionality
 - `opsgenie_team_id` (String) The Opsgenie team id associated to this functionality
-- `owners_group_ids` (List of String) Owner Teams associated with this functionality
-- `owners_user_ids` (List of Number) Owner Users associated with this functionality
+- `owner_group_ids` (List of String) Owner Teams associated with this functionality
+- `owner_user_ids` (List of Number) Owner Users associated with this functionality
 - `pagerduty_id` (String) The PagerDuty service id associated to this functionality
 - `position` (Number) Position of the functionality
 - `public_description` (String) The public description of the functionality
