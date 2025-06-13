@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.1] -- 2025-05-12
+
+### Changed
+
+- Fixed import examples in documentation.
+
 ## [3.0.0] -- 2025-05-05
 
 ### Added
