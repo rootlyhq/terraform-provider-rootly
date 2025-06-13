@@ -2,7 +2,7 @@
 page_title: "Resource rootly_status_page - terraform-provider-rootly"
 subcategory:
 description: |-
-
+    
 ---
 
 # Resource (rootly_status_page)
@@ -55,7 +55,7 @@ terraform plan -generate-config-out=generated.tf
 - `public_title` (String) The public title of the status page
 - `service_ids` (List of String) Services attached to the status page
 - `show_uptime` (Boolean) Show uptime. Value must be one of true or false
-- `show_uptime_last_days` (Number) Show uptime over x days. Value must be one of `30`, `60`, `90`, `180`, `360`.
+- `show_uptime_last_days` (Number) Show uptime over x days. Value must be one of `30`, `60`, `90`.
 - `slug` (String) The slug of the status page
 - `success_message` (String) Message showing when all components are operational
 - `time_zone` (String) A valid IANA time zone name.

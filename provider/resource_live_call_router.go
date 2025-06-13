@@ -146,14 +146,63 @@ func resourceLiveCallRouter() *schema.Resource {
 				Description: "This is used in escalation paths to determine who to page",
 			},
 
+			"calling_tree_prompt": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The audio instructions callers will hear when they call this number, prompting them to select from available options to route their call",
+			},
+
+			"notification_targets": &schema.Schema{
+				Type:             schema.TypeList,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Notification targets that callers can select from when this live call router is configured as a phone tree.",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+
+						"id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "The ID of notification target",
+						},
+
+						"type": &schema.Schema{
+							Type:        schema.TypeString,
+							Default:     "service",
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "The type of the notification target. Value must be one of `service`, `team`, `escalation_policy`.",
+						},
+
+						"alert_urgency_id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "This is used in escalation paths to determine who to page",
+						},
+					},
+				},
+			},
+
 			"escalation_policy_trigger_params": &schema.Schema{
 				Type: schema.TypeMap,
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
 				Description: "",
 			},
 		},
@@ -209,6 +258,12 @@ func resourceLiveCallRouterCreate(ctx context.Context, d *schema.ResourceData, m
 	if value, ok := d.GetOkExists("alert_urgency_id"); ok {
 		s.AlertUrgencyId = value.(string)
 	}
+	if value, ok := d.GetOkExists("calling_tree_prompt"); ok {
+		s.CallingTreePrompt = value.(string)
+	}
+	if value, ok := d.GetOkExists("notification_targets"); ok {
+		s.NotificationTargets = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("escalation_policy_trigger_params"); ok {
 		if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
 			if mapValue, ok := valueList[0].(map[string]interface{}); ok {
@@ -259,6 +314,28 @@ func resourceLiveCallRouterRead(ctx context.Context, d *schema.ResourceData, met
 	d.Set("escalation_level_delay_in_seconds", item.EscalationLevelDelayInSeconds)
 	d.Set("should_auto_resolve_alert_on_call_end", item.ShouldAutoResolveAlertOnCallEnd)
 	d.Set("alert_urgency_id", item.AlertUrgencyId)
+	d.Set("calling_tree_prompt", item.CallingTreePrompt)
+
+	if item.NotificationTargets != nil {
+		processedItems := make([]map[string]interface{}, 0)
+
+		for _, c := range item.NotificationTargets {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processedItem := map[string]interface{}{
+					"id":               rawItem["id"],
+					"type":             rawItem["type"],
+					"alert_urgency_id": rawItem["alert_urgency_id"],
+				}
+				processedItems = append(processedItems, processedItem)
+			}
+		}
+
+		d.Set("notification_targets", processedItems)
+	} else {
+		d.Set("notification_targets", nil)
+	}
+
 	singleton_list := make([]interface{}, 1, 1)
 	processedItem := map[string]interface{}{
 		"id":   item.EscalationPolicyTriggerParams["id"],
@@ -317,6 +394,12 @@ func resourceLiveCallRouterUpdate(ctx context.Context, d *schema.ResourceData, m
 	}
 	if d.HasChange("alert_urgency_id") {
 		s.AlertUrgencyId = d.Get("alert_urgency_id").(string)
+	}
+	if d.HasChange("calling_tree_prompt") {
+		s.CallingTreePrompt = d.Get("calling_tree_prompt").(string)
+	}
+	if d.HasChange("notification_targets") {
+		s.NotificationTargets = d.Get("notification_targets").([]interface{})
 	}
 	if d.HasChange("escalation_policy_trigger_params") {
 		tps := d.Get("escalation_policy_trigger_params").([]interface{})

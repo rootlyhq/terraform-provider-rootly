@@ -35,7 +35,6 @@ terraform plan -generate-config-out=generated.tf
 
 ### Required
 
-- `escalation_policy_trigger_params` (Map of String)
 - `name` (String) The name of the live_call_router
 - `phone_number` (String) You can select a phone number using [generate_phone_number](#//api/v1/live_call_routers/generate_phone_number) API and pass that phone number here to register
 
@@ -43,10 +42,13 @@ terraform plan -generate-config-out=generated.tf
 
 - `alert_urgency_id` (String) This is used in escalation paths to determine who to page
 - `caller_greeting` (String) The caller greeting message of the live_call_router
+- `calling_tree_prompt` (String) The audio instructions callers will hear when they call this number, prompting them to select from available options to route their call
 - `country_code` (String) The country code of the live_call_router. Value must be one of `US`, `GB`, `NZ`, `CA`, `AU`.
 - `enabled` (Boolean)
 - `escalation_level_delay_in_seconds` (Number) This overrides the delay (seconds) in escalation levels
+- `escalation_policy_trigger_params` (Map of String)
 - `kind` (String) The kind of the live_call_router. Value must be one of `voicemail`, `live`.
+- `notification_targets` (Block List) Notification targets that callers can select from when this live call router is configured as a phone tree. (see [below for nested schema](#nestedblock--notification_targets))
 - `phone_type` (String) The phone type of the live_call_router. Value must be one of `local`, `toll_free`.
 - `sent_to_voicemail_delay` (Number) The delay (seconds) after which the caller in redirected to voicemail
 - `should_auto_resolve_alert_on_call_end` (Boolean) This overrides the delay (seconds) in escalation levels. Value must be one of true or false
@@ -57,3 +59,12 @@ terraform plan -generate-config-out=generated.tf
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--notification_targets"></a>
+### Nested Schema for `notification_targets`
+
+Optional:
+
+- `alert_urgency_id` (String) This is used in escalation paths to determine who to page
+- `id` (String) The ID of notification target
+- `type` (String) The type of the notification target. Value must be one of `service`, `team`, `escalation_policy`.

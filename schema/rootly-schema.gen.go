@@ -2644,6 +2644,13 @@ const (
 	LiveCallRouterKindVoicemail LiveCallRouterKind = "voicemail"
 )
 
+// Defines values for LiveCallRouterNotificationTargetsType.
+const (
+	LiveCallRouterNotificationTargetsTypeEscalationPolicy LiveCallRouterNotificationTargetsType = "escalation_policy"
+	LiveCallRouterNotificationTargetsTypeService          LiveCallRouterNotificationTargetsType = "service"
+	LiveCallRouterNotificationTargetsTypeTeam             LiveCallRouterNotificationTargetsType = "team"
+)
+
 // Defines values for LiveCallRouterPhoneType.
 const (
 	LiveCallRouterPhoneTypeLocal    LiveCallRouterPhoneType = "local"
@@ -3851,6 +3858,13 @@ const (
 	NewLiveCallRouterDataAttributesKindVoicemail NewLiveCallRouterDataAttributesKind = "voicemail"
 )
 
+// Defines values for NewLiveCallRouterDataAttributesNotificationTargetsType.
+const (
+	NewLiveCallRouterDataAttributesNotificationTargetsTypeEscalationPolicy NewLiveCallRouterDataAttributesNotificationTargetsType = "escalation_policy"
+	NewLiveCallRouterDataAttributesNotificationTargetsTypeService          NewLiveCallRouterDataAttributesNotificationTargetsType = "service"
+	NewLiveCallRouterDataAttributesNotificationTargetsTypeTeam             NewLiveCallRouterDataAttributesNotificationTargetsType = "team"
+)
+
 // Defines values for NewLiveCallRouterDataAttributesPhoneType.
 const (
 	NewLiveCallRouterDataAttributesPhoneTypeLocal    NewLiveCallRouterDataAttributesPhoneType = "local"
@@ -4370,11 +4384,9 @@ const (
 
 // Defines values for NewStatusPageDataAttributesShowUptimeLastDays.
 const (
-	NewStatusPageDataAttributesShowUptimeLastDaysN180 NewStatusPageDataAttributesShowUptimeLastDays = 180
-	NewStatusPageDataAttributesShowUptimeLastDaysN30  NewStatusPageDataAttributesShowUptimeLastDays = 30
-	NewStatusPageDataAttributesShowUptimeLastDaysN360 NewStatusPageDataAttributesShowUptimeLastDays = 360
-	NewStatusPageDataAttributesShowUptimeLastDaysN60  NewStatusPageDataAttributesShowUptimeLastDays = 60
-	NewStatusPageDataAttributesShowUptimeLastDaysN90  NewStatusPageDataAttributesShowUptimeLastDays = 90
+	NewStatusPageDataAttributesShowUptimeLastDaysN30 NewStatusPageDataAttributesShowUptimeLastDays = 30
+	NewStatusPageDataAttributesShowUptimeLastDaysN60 NewStatusPageDataAttributesShowUptimeLastDays = 60
+	NewStatusPageDataAttributesShowUptimeLastDaysN90 NewStatusPageDataAttributesShowUptimeLastDays = 90
 )
 
 // Defines values for NewStatusPageDataType.
@@ -5451,11 +5463,9 @@ const (
 
 // Defines values for StatusPageShowUptimeLastDays.
 const (
-	StatusPageShowUptimeLastDaysN180 StatusPageShowUptimeLastDays = 180
-	StatusPageShowUptimeLastDaysN30  StatusPageShowUptimeLastDays = 30
-	StatusPageShowUptimeLastDaysN360 StatusPageShowUptimeLastDays = 360
-	StatusPageShowUptimeLastDaysN60  StatusPageShowUptimeLastDays = 60
-	StatusPageShowUptimeLastDaysN90  StatusPageShowUptimeLastDays = 90
+	StatusPageShowUptimeLastDaysN30 StatusPageShowUptimeLastDays = 30
+	StatusPageShowUptimeLastDaysN60 StatusPageShowUptimeLastDays = 60
+	StatusPageShowUptimeLastDaysN90 StatusPageShowUptimeLastDays = 90
 )
 
 // Defines values for StatusPageListDataType.
@@ -6897,6 +6907,13 @@ const (
 	Voicemail UpdateLiveCallRouterDataAttributesKind = "voicemail"
 )
 
+// Defines values for UpdateLiveCallRouterDataAttributesNotificationTargetsType.
+const (
+	UpdateLiveCallRouterDataAttributesNotificationTargetsTypeEscalationPolicy UpdateLiveCallRouterDataAttributesNotificationTargetsType = "escalation_policy"
+	UpdateLiveCallRouterDataAttributesNotificationTargetsTypeService          UpdateLiveCallRouterDataAttributesNotificationTargetsType = "service"
+	UpdateLiveCallRouterDataAttributesNotificationTargetsTypeTeam             UpdateLiveCallRouterDataAttributesNotificationTargetsType = "team"
+)
+
 // Defines values for UpdateLiveCallRouterDataAttributesPhoneType.
 const (
 	UpdateLiveCallRouterDataAttributesPhoneTypeLocal    UpdateLiveCallRouterDataAttributesPhoneType = "local"
@@ -7505,11 +7522,9 @@ const (
 
 // Defines values for UpdateStatusPageDataAttributesShowUptimeLastDays.
 const (
-	N180 UpdateStatusPageDataAttributesShowUptimeLastDays = 180
-	N30  UpdateStatusPageDataAttributesShowUptimeLastDays = 30
-	N360 UpdateStatusPageDataAttributesShowUptimeLastDays = 360
-	N60  UpdateStatusPageDataAttributesShowUptimeLastDays = 60
-	N90  UpdateStatusPageDataAttributesShowUptimeLastDays = 90
+	N30 UpdateStatusPageDataAttributesShowUptimeLastDays = 30
+	N60 UpdateStatusPageDataAttributesShowUptimeLastDays = 60
+	N90 UpdateStatusPageDataAttributesShowUptimeLastDays = 90
 )
 
 // Defines values for UpdateStatusPageDataType.
@@ -9103,6 +9118,9 @@ type AlertUrgencyResponseDataType string
 
 // AlertsSource defines model for alerts_source.
 type AlertsSource struct {
+	// AlertSourceFieldsAttributes List of alert fields to be added to alert source
+	AlertSourceFieldsAttributes *[]interface{} `json:"alert_source_fields_attributes,omitempty"`
+
 	// AlertUrgencyId ID for the default alert urgency assigned to this alert source
 	AlertUrgencyId *string `json:"alert_urgency_id,omitempty"`
 
@@ -11938,11 +11956,11 @@ type Functionality struct {
 	// OpsgenieTeamId The Opsgenie team id associated to this functionality
 	OpsgenieTeamId *string `json:"opsgenie_team_id"`
 
-	// OwnersGroupIds Owner Teams associated with this functionality
-	OwnersGroupIds *[]string `json:"owners_group_ids"`
+	// OwnerGroupIds Owner Teams associated with this functionality
+	OwnerGroupIds *[]string `json:"owner_group_ids"`
 
-	// OwnersUserIds Owner Users associated with this functionality
-	OwnersUserIds *[]int `json:"owners_user_ids"`
+	// OwnerUserIds Owner Users associated with this functionality
+	OwnerUserIds *[]int `json:"owner_user_ids"`
 
 	// PagerdutyId The PagerDuty service id associated to this functionality
 	PagerdutyId *string `json:"pagerduty_id"`
@@ -13736,6 +13754,9 @@ type LiveCallRouter struct {
 	// CallerGreeting The caller greeting message of the live_call_router
 	CallerGreeting *string `json:"caller_greeting,omitempty"`
 
+	// CallingTreePrompt The audio instructions callers will hear when they call this number, prompting them to select from available options to route their call
+	CallingTreePrompt *string `json:"calling_tree_prompt,omitempty"`
+
 	// CountryCode The country code of the live_call_router
 	CountryCode *LiveCallRouterCountryCode `json:"country_code,omitempty"`
 
@@ -13753,13 +13774,25 @@ type LiveCallRouter struct {
 
 		// Type The type of the notification target
 		Type LiveCallRouterEscalationPolicyTriggerParamsType `json:"type"`
-	} `json:"escalation_policy_trigger_params"`
+	} `json:"escalation_policy_trigger_params,omitempty"`
 
 	// Kind The kind of the live_call_router
 	Kind *LiveCallRouterKind `json:"kind,omitempty"`
 
 	// Name The name of the live_call_router
 	Name string `json:"name"`
+
+	// NotificationTargets Notification targets that callers can select from when this live call router is configured as a phone tree.
+	NotificationTargets *[]struct {
+		// AlertUrgencyId This is used in escalation paths to determine who to page
+		AlertUrgencyId string `json:"alert_urgency_id"`
+
+		// Id The ID of notification target
+		Id string `json:"id"`
+
+		// Type The type of the notification target
+		Type LiveCallRouterNotificationTargetsType `json:"type"`
+	} `json:"notification_targets,omitempty"`
 
 	// PhoneNumber You can select a phone number using [generate_phone_number](#//api/v1/live_call_routers/generate_phone_number) API and pass that phone number here to register
 	PhoneNumber *string `json:"phone_number,omitempty"`
@@ -13794,6 +13827,9 @@ type LiveCallRouterEscalationPolicyTriggerParamsType string
 
 // LiveCallRouterKind The kind of the live_call_router
 type LiveCallRouterKind string
+
+// LiveCallRouterNotificationTargetsType The type of the notification target
+type LiveCallRouterNotificationTargetsType string
 
 // LiveCallRouterPhoneType The phone type of the live_call_router
 type LiveCallRouterPhoneType string
@@ -14103,6 +14139,15 @@ type NewAlertUrgencyDataType string
 type NewAlertsSource struct {
 	Data struct {
 		Attributes struct {
+			// AlertSourceFieldsAttributes List of alert fields to be added to the alert source
+			AlertSourceFieldsAttributes *[]struct {
+				// AlertFieldId The ID of the alert field
+				AlertFieldId *string `json:"alert_field_id,omitempty"`
+
+				// TemplateBody Liquid expression to extract a specific value from the alert's payload for evaluation
+				TemplateBody *string `json:"template_body,omitempty"`
+			} `json:"alert_source_fields_attributes,omitempty"`
+
 			// AlertSourceUrgencyRulesAttributes List of rules that define the conditions under which the alert urgency will be set automatically based on the alert payload
 			AlertSourceUrgencyRulesAttributes *[]struct {
 				// JsonPath JSON path expression to extract a specific value from the alert's payload for evaluation
@@ -14925,11 +14970,11 @@ type NewFunctionality struct {
 			// OpsgenieTeamId The Opsgenie team id associated to this functionality
 			OpsgenieTeamId *string `json:"opsgenie_team_id"`
 
-			// OwnersGroupIds Owner Teams associated with this functionality
-			OwnersGroupIds *[]string `json:"owners_group_ids"`
+			// OwnerGroupIds Owner Teams associated with this functionality
+			OwnerGroupIds *[]string `json:"owner_group_ids"`
 
-			// OwnersUserIds Owner Users associated with this functionality
-			OwnersUserIds *[]int `json:"owners_user_ids"`
+			// OwnerUserIds Owner Users associated with this functionality
+			OwnerUserIds *[]int `json:"owner_user_ids"`
 
 			// PagerdutyId The PagerDuty service id associated to this functionality
 			PagerdutyId *string `json:"pagerduty_id"`
@@ -15542,6 +15587,9 @@ type NewLiveCallRouter struct {
 			// CallerGreeting The caller greeting message of the live_call_router
 			CallerGreeting *string `json:"caller_greeting,omitempty"`
 
+			// CallingTreePrompt The audio instructions callers will hear when they call this number, prompting them to select from available options to route their call
+			CallingTreePrompt *string `json:"calling_tree_prompt,omitempty"`
+
 			// CountryCode The country code of the live_call_router
 			CountryCode NewLiveCallRouterDataAttributesCountryCode `json:"country_code"`
 
@@ -15550,19 +15598,31 @@ type NewLiveCallRouter struct {
 
 			// EscalationLevelDelayInSeconds This overrides the delay (seconds) in escalation levels
 			EscalationLevelDelayInSeconds *int `json:"escalation_level_delay_in_seconds,omitempty"`
-			EscalationPolicyTriggerParams struct {
+			EscalationPolicyTriggerParams *struct {
 				// Id The ID of notification target
 				Id string `json:"id"`
 
 				// Type The type of the notification target
 				Type NewLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType `json:"type"`
-			} `json:"escalation_policy_trigger_params"`
+			} `json:"escalation_policy_trigger_params,omitempty"`
 
 			// Kind The kind of the live_call_router
 			Kind NewLiveCallRouterDataAttributesKind `json:"kind"`
 
 			// Name The name of the live_call_router
 			Name string `json:"name"`
+
+			// NotificationTargets Notification targets that callers can select from when this live call router is configured as a phone tree.
+			NotificationTargets *[]struct {
+				// AlertUrgencyId This is used in escalation paths to determine who to page
+				AlertUrgencyId string `json:"alert_urgency_id"`
+
+				// Id The ID of notification target
+				Id string `json:"id"`
+
+				// Type The type of the notification target
+				Type NewLiveCallRouterDataAttributesNotificationTargetsType `json:"type"`
+			} `json:"notification_targets,omitempty"`
 
 			// PhoneNumber You can select a phone number using [generate_phone_number](#//api/v1/live_call_routers/generate_phone_number) API and pass that phone number here to register
 			PhoneNumber string `json:"phone_number"`
@@ -15597,6 +15657,9 @@ type NewLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType string
 
 // NewLiveCallRouterDataAttributesKind The kind of the live_call_router
 type NewLiveCallRouterDataAttributesKind string
+
+// NewLiveCallRouterDataAttributesNotificationTargetsType The type of the notification target
+type NewLiveCallRouterDataAttributesNotificationTargetsType string
 
 // NewLiveCallRouterDataAttributesPhoneType The phone type of the live_call_router
 type NewLiveCallRouterDataAttributesPhoneType string
@@ -16307,11 +16370,11 @@ type NewService struct {
 			// OpsgenieTeamId The Opsgenie team id associated to this service
 			OpsgenieTeamId *string `json:"opsgenie_team_id"`
 
-			// OwnersGroupIds Owner Teams associated with this service
-			OwnersGroupIds *[]string `json:"owners_group_ids"`
+			// OwnerGroupIds Owner Teams associated with this service
+			OwnerGroupIds *[]string `json:"owner_group_ids"`
 
-			// OwnersUserIds Owner Users associated with this service
-			OwnersUserIds *[]int `json:"owners_user_ids"`
+			// OwnerUserIds Owner Users associated with this service
+			OwnerUserIds *[]int `json:"owner_user_ids"`
 
 			// PagerdutyId The PagerDuty service id associated to this service
 			PagerdutyId *string `json:"pagerduty_id"`
@@ -18759,11 +18822,11 @@ type Service struct {
 	// OpsgenieId The Opsgenie service id associated to this service
 	OpsgenieId *string `json:"opsgenie_id"`
 
-	// OwnersGroupIds Owner Teams associated with this service
-	OwnersGroupIds *[]string `json:"owners_group_ids"`
+	// OwnerGroupIds Owner Teams associated with this service
+	OwnerGroupIds *[]string `json:"owner_group_ids"`
 
-	// OwnersUserIds Owner Users associated with this service
-	OwnersUserIds *[]int `json:"owners_user_ids"`
+	// OwnerUserIds Owner Users associated with this service
+	OwnerUserIds *[]int `json:"owner_user_ids"`
 
 	// PagerdutyId The PagerDuty service id associated to this service
 	PagerdutyId *string `json:"pagerduty_id"`
@@ -19767,6 +19830,15 @@ type UpdateAlertUrgencyDataType string
 type UpdateAlertsSource struct {
 	Data struct {
 		Attributes struct {
+			// AlertSourceFieldsAttributes List of alert fields to be added to the alert source
+			AlertSourceFieldsAttributes *[]struct {
+				// AlertFieldId The ID of the alert field
+				AlertFieldId *string `json:"alert_field_id,omitempty"`
+
+				// TemplateBody Liquid expression to extract a specific value from the alert's payload for evaluation
+				TemplateBody *string `json:"template_body,omitempty"`
+			} `json:"alert_source_fields_attributes,omitempty"`
+
 			// AlertSourceUrgencyRulesAttributes List of rules that define the conditions under which the alert urgency will be set automatically based on the alert payload
 			AlertSourceUrgencyRulesAttributes *[]struct {
 				// JsonPath JSON path expression to extract a specific value from the alert's payload for evaluation
@@ -20675,11 +20747,11 @@ type UpdateFunctionality struct {
 			// OpsgenieTeamId The Opsgenie team id associated to this functionality
 			OpsgenieTeamId *string `json:"opsgenie_team_id"`
 
-			// OwnersGroupIds Owner Teams associated with this functionality
-			OwnersGroupIds *[]string `json:"owners_group_ids"`
+			// OwnerGroupIds Owner Teams associated with this functionality
+			OwnerGroupIds *[]string `json:"owner_group_ids"`
 
-			// OwnersUserIds Owner Users associated with this functionality
-			OwnersUserIds *[]int `json:"owners_user_ids"`
+			// OwnerUserIds Owner Users associated with this functionality
+			OwnerUserIds *[]int `json:"owner_user_ids"`
 
 			// PagerdutyId The PagerDuty service id associated to this functionality
 			PagerdutyId *string `json:"pagerduty_id"`
@@ -21630,6 +21702,9 @@ type UpdateLiveCallRouter struct {
 			// CallerGreeting The caller greeting message of the live_call_router
 			CallerGreeting *string `json:"caller_greeting,omitempty"`
 
+			// CallingTreePrompt The audio instructions callers will hear when they call this number, prompting them to select from available options to route their call
+			CallingTreePrompt *string `json:"calling_tree_prompt,omitempty"`
+
 			// CountryCode The country code of the live_call_router
 			CountryCode *UpdateLiveCallRouterDataAttributesCountryCode `json:"country_code,omitempty"`
 
@@ -21644,13 +21719,25 @@ type UpdateLiveCallRouter struct {
 
 				// Type The type of the notification target
 				Type UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType `json:"type"`
-			} `json:"escalation_policy_trigger_params"`
+			} `json:"escalation_policy_trigger_params,omitempty"`
 
 			// Kind The kind of the live_call_router
 			Kind *UpdateLiveCallRouterDataAttributesKind `json:"kind,omitempty"`
 
 			// Name The name of the live_call_router
 			Name *string `json:"name,omitempty"`
+
+			// NotificationTargets Notification targets that callers can select from when this live call router is configured as a phone tree.
+			NotificationTargets *[]struct {
+				// AlertUrgencyId This is used in escalation paths to determine who to page
+				AlertUrgencyId string `json:"alert_urgency_id"`
+
+				// Id The ID of notification target
+				Id string `json:"id"`
+
+				// Type The type of the notification target
+				Type UpdateLiveCallRouterDataAttributesNotificationTargetsType `json:"type"`
+			} `json:"notification_targets,omitempty"`
 
 			// PhoneType The phone type of the live_call_router
 			PhoneType *UpdateLiveCallRouterDataAttributesPhoneType `json:"phone_type,omitempty"`
@@ -21682,6 +21769,9 @@ type UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType string
 
 // UpdateLiveCallRouterDataAttributesKind The kind of the live_call_router
 type UpdateLiveCallRouterDataAttributesKind string
+
+// UpdateLiveCallRouterDataAttributesNotificationTargetsType The type of the notification target
+type UpdateLiveCallRouterDataAttributesNotificationTargetsType string
 
 // UpdateLiveCallRouterDataAttributesPhoneType The phone type of the live_call_router
 type UpdateLiveCallRouterDataAttributesPhoneType string
@@ -22550,11 +22640,11 @@ type UpdateService struct {
 			// OpsgenieId The Opsgenie service id associated to this service
 			OpsgenieId *string `json:"opsgenie_id"`
 
-			// OwnersGroupIds Owner Teams associated with this service
-			OwnersGroupIds *[]string `json:"owners_group_ids"`
+			// OwnerGroupIds Owner Teams associated with this service
+			OwnerGroupIds *[]string `json:"owner_group_ids"`
 
-			// OwnersUserIds Owner Users associated with this service
-			OwnersUserIds *[]int `json:"owners_user_ids"`
+			// OwnerUserIds Owner Users associated with this service
+			OwnerUserIds *[]int `json:"owner_user_ids"`
 
 			// PagerdutyId The PagerDuty service id associated to this service
 			PagerdutyId *string `json:"pagerduty_id"`
@@ -83693,6 +83783,7 @@ type UpdateHeartbeatResponse struct {
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *HeartbeatResponse
 	ApplicationvndApiJSON404 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -100935,6 +101026,13 @@ func ParseUpdateHeartbeatResponse(rsp *http.Response) (*UpdateHeartbeatResponse,
 			return nil, err
 		}
 		response.ApplicationvndApiJSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
 
 	}
 

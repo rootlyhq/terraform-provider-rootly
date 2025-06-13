@@ -211,7 +211,7 @@ func resourceService() *schema.Resource {
 				Description:      "Services dependent on this service",
 			},
 
-			"owners_group_ids": &schema.Schema{
+			"owner_group_ids": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
@@ -223,7 +223,7 @@ func resourceService() *schema.Resource {
 				Description:      "Owner Teams associated with this service",
 			},
 
-			"owners_user_ids": &schema.Schema{
+			"owner_user_ids": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
 					Type: schema.TypeInt,
@@ -390,11 +390,11 @@ func resourceServiceCreate(ctx context.Context, d *schema.ResourceData, meta int
 	if value, ok := d.GetOkExists("service_ids"); ok {
 		s.ServiceIds = value.([]interface{})
 	}
-	if value, ok := d.GetOkExists("owners_group_ids"); ok {
-		s.OwnersGroupIds = value.([]interface{})
+	if value, ok := d.GetOkExists("owner_group_ids"); ok {
+		s.OwnerGroupIds = value.([]interface{})
 	}
-	if value, ok := d.GetOkExists("owners_user_ids"); ok {
-		s.OwnersUserIds = value.([]interface{})
+	if value, ok := d.GetOkExists("owner_user_ids"); ok {
+		s.OwnerUserIds = value.([]interface{})
 	}
 	if value, ok := d.GetOkExists("alert_urgency_id"); ok {
 		s.AlertUrgencyId = value.(string)
@@ -459,8 +459,8 @@ func resourceServiceRead(ctx context.Context, d *schema.ResourceData, meta inter
 	d.Set("gitlab_repository_branch", item.GitlabRepositoryBranch)
 	d.Set("environment_ids", item.EnvironmentIds)
 	d.Set("service_ids", item.ServiceIds)
-	d.Set("owners_group_ids", item.OwnersGroupIds)
-	d.Set("owners_user_ids", item.OwnersUserIds)
+	d.Set("owner_group_ids", item.OwnerGroupIds)
+	d.Set("owner_user_ids", item.OwnerUserIds)
 	d.Set("alert_urgency_id", item.AlertUrgencyId)
 	d.Set("alerts_email_enabled", item.AlertsEmailEnabled)
 	d.Set("alerts_email_address", item.AlertsEmailAddress)
@@ -569,11 +569,11 @@ func resourceServiceUpdate(ctx context.Context, d *schema.ResourceData, meta int
 	if d.HasChange("service_ids") {
 		s.ServiceIds = d.Get("service_ids").([]interface{})
 	}
-	if d.HasChange("owners_group_ids") {
-		s.OwnersGroupIds = d.Get("owners_group_ids").([]interface{})
+	if d.HasChange("owner_group_ids") {
+		s.OwnerGroupIds = d.Get("owner_group_ids").([]interface{})
 	}
-	if d.HasChange("owners_user_ids") {
-		s.OwnersUserIds = d.Get("owners_user_ids").([]interface{})
+	if d.HasChange("owner_user_ids") {
+		s.OwnerUserIds = d.Get("owner_user_ids").([]interface{})
 	}
 	if d.HasChange("alert_urgency_id") {
 		s.AlertUrgencyId = d.Get("alert_urgency_id").(string)

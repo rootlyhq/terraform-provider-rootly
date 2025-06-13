@@ -2,7 +2,7 @@
 page_title: "Resource rootly_service - terraform-provider-rootly"
 subcategory:
 description: |-
-
+    
 ---
 
 # Resource (rootly_service)
@@ -93,8 +93,7 @@ terraform plan -generate-config-out=generated.tf
 - `notify_emails` (List of String) Emails attached to the service
 - `opsgenie_id` (String) The Opsgenie service id associated to this service
 - `owner_group_ids` (List of String) Owner Teams associated with this service
-- `owners_group_ids` (List of String, Deprecated) Owner Teams associated with this service(deprecated)
-- `owners_user_ids` (List of Number) Owner Users associated with this service
+- `owner_user_ids` (List of Number) Owner Users associated with this service
 - `pagerduty_id` (String) The PagerDuty service id associated to this service
 - `position` (Number) Position of the service
 - `public_description` (String) The public description of the service
