@@ -16,9 +16,9 @@ Some API resources are excluded from code generation if they are in the ignore-l
 
 Tests are often not able to be code generated. If so, add them to the ignore-list in `tools/generate.js` and implement manually.
 
-### Release
+### Release / Publish to Terraform Registry
 
-Tag a new release to automatically build and publish to the Terraform Registry.
+Releases are automatically published to Terraform Registry when a new tag is pushed to main. Tags are [semantic versions](https://semver.org). Before tagging a new release, please update the changelog.
 
 ### Local build
 
