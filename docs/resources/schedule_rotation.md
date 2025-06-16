@@ -199,7 +199,7 @@ terraform plan -generate-config-out=generated.tf
 - `active_all_week` (Boolean) Schedule rotation active all week?. Value must be one of true or false
 - `active_days` (List of String) Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.
 - `active_time_attributes` (Block List) Schedule rotation's active times (see [below for nested schema](#nestedblock--active_time_attributes))
-- `active_time_type` (String)
+- `active_time_type` (String) Value must be one of `all_day`, `same_time`, or `custom`.
 - `position` (Number) Position of the schedule rotation
 - `schedule_id` (String) The ID of parent schedule
 - `schedule_rotationable_type` (String) Schedule rotation type. Value must be one of `ScheduleDailyRotation`, `ScheduleWeeklyRotation`, `ScheduleBiweeklyRotation`, `ScheduleMonthlyRotation`, `ScheduleCustomRotation`.

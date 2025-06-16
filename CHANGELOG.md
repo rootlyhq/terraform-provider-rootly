@@ -1,12 +1,18 @@
 # Changelog
 
-## [3.0.1] -- 2025-05-12
+## [3.0.2] -- 2025-06-16
+
+### Fixed
+
+- Added valid rootly_schedule_rotation.active_time_type values to documentation.
+
+## [3.0.1] -- 2025-06-12
 
 ### Changed
 
 - Fixed import examples in documentation.
 
-## [3.0.0] -- 2025-05-05
+## [3.0.0] -- 2025-06-05
 
 ### Added
 
@@ -16,13 +22,13 @@
 
 - **Breaking:** `owners_group_ids` to `owner_group_ids` to `rootly_service`.
 
-## [2.29.1] -- 2025-05-05
+## [2.29.1] -- 2025-06-05
 
 ### Fixed
 
 - Reverted accidental breaking change of `owners_group_ids` back to `owner_group_ids` for `rootly_service`.
 
-## [2.29.0] -- 2025-05-05
+## [2.29.0] -- 2025-06-05
 
 ### Added
 

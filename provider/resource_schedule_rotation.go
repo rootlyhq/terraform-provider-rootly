@@ -87,7 +87,7 @@ func resourceScheduleRotation() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "",
+				Description: "Value must be one of `all_day`, `same_time`, or `custom`.",
 			},
 
 			"active_time_attributes": &schema.Schema{
