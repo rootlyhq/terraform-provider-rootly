@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.3] -- 2025-06-16
+
+### Fixed
+
+- Documented rootly_live_call_router waiting_music_url values.
+
 ## [3.0.2] -- 2025-06-16
 
 ### Fixed
