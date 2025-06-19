@@ -35,7 +35,6 @@ terraform plan -generate-config-out=generated.tf
 
 ### Required
 
-- `escalation_policy_trigger_params` (Map of String)
 - `name` (String) The name of the live_call_router
 - `phone_number` (String) You can select a phone number using [generate_phone_number](#//api/v1/live_call_routers/generate_phone_number) API and pass that phone number here to register
 
@@ -43,10 +42,13 @@ terraform plan -generate-config-out=generated.tf
 
 - `alert_urgency_id` (String) This is used in escalation paths to determine who to page
 - `caller_greeting` (String) The caller greeting message of the live_call_router
+- `calling_tree_prompt` (String) The audio instructions callers will hear when they call this number, prompting them to select from available options to route their call
 - `country_code` (String) The country code of the live_call_router. Value must be one of `US`, `GB`, `NZ`, `CA`, `AU`.
 - `enabled` (Boolean)
 - `escalation_level_delay_in_seconds` (Number) This overrides the delay (seconds) in escalation levels
+- `escalation_policy_trigger_params` (Map of String)
 - `kind` (String) The kind of the live_call_router. Value must be one of `voicemail`, `live`.
+- `paging_targets` (Block List) Paging targets that callers can select from when this live call router is configured as a phone tree. (see [below for nested schema](#nestedblock--paging_targets))
 - `phone_type` (String) The phone type of the live_call_router. Value must be one of `local`, `toll_free`.
 - `sent_to_voicemail_delay` (Number) The delay (seconds) after which the caller in redirected to voicemail
 - `should_auto_resolve_alert_on_call_end` (Boolean) This overrides the delay (seconds) in escalation levels. Value must be one of true or false
@@ -54,7 +56,15 @@ terraform plan -generate-config-out=generated.tf
 - `voicemail_greeting` (String) The voicemail greeting of the live_call_router
 - `waiting_music_url` (String) The waiting music URL of the live_call_router. Value must be one of `https://storage.rootly.com/twilio/voicemail/ClockworkWaltz.mp3`, `https://storage.rootly.com/twilio/voicemail/ith_brahms-116-4.mp3`, `https://storage.rootly.com/twilio/voicemail/Mellotroniac_-_Flight_Of_Young_Hearts_Flute.mp3`, `https://storage.rootly.com/twilio/voicemail/BusyStrings.mp3`, `https://storage.rootly.com/twilio/voicemail/oldDog_-_endless_goodbye_%28instr.%29.mp3`, `https://storage.rootly.com/twilio/voicemail/MARKOVICHAMP-Borghestral.mp3`, `https://storage.rootly.com/twilio/voicemail/ith_chopin-15-2.mp3`.
 
-
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--paging_targets"></a>
+### Nested Schema for `paging_targets`
+
+Optional:
+
+- `alert_urgency_id` (String) This is used in escalation paths to determine who to page
+- `id` (String) The ID of paging target
+- `type` (String) The type of the paging target. Value must be one of `service`, `team`, `escalation_policy`.
