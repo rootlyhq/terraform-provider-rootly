@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
@@ -17,79 +17,91 @@ import (
 func resourceOverrideShift() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceOverrideShiftCreate,
-		ReadContext:   resourceOverrideShiftRead,
+		ReadContext: resourceOverrideShiftRead,
 		UpdateContext: resourceOverrideShiftUpdate,
 		DeleteContext: resourceOverrideShiftDelete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
-
-			"schedule_id": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    true,
+		Schema: map[string]*schema.Schema {
+			
+			"schedule_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: true,
 				Description: "ID of schedule",
+				
 			},
+			
 
-			"rotation_id": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"rotation_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "ID of rotation",
+				
 			},
+			
 
-			"starts_at": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+			"starts_at": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "Start datetime of shift",
+				
 			},
+			
 
-			"ends_at": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+			"ends_at": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "End datetime of shift",
+				
 			},
+			
 
-			"is_override": &schema.Schema{
-				Type:        schema.TypeBool,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
+			"is_override": &schema.Schema {
+				Type: schema.TypeBool,
+				Computed: true,
+				Required: false,
+				Optional: true,
 				Description: "Denotes shift is an override shift. Value must be one of true or false",
+				
 			},
+			
 
-			"shift_override": &schema.Schema{
+			"shift_override": &schema.Schema {
 				Type: schema.TypeMap,
-				Elem: &schema.Schema{
+				Elem: &schema.Schema {
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
+				Computed: true,
+				Required: false,
+				Optional: true,
 				Description: "Override metadata",
 			},
+			
 
-			"user": &schema.Schema{
+			"user": &schema.Schema {
 				Type: schema.TypeMap,
-				Elem: &schema.Schema{
+				Elem: &schema.Schema {
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
+				Computed: true,
+				Required: false,
+				Optional: true,
 				Description: "User metadata",
 			},
+			
 		},
 	}
 }
@@ -101,27 +113,27 @@ func resourceOverrideShiftCreate(ctx context.Context, d *schema.ResourceData, me
 
 	s := &client.OverrideShift{}
 
-	if value, ok := d.GetOkExists("schedule_id"); ok {
-		s.ScheduleId = value.(string)
-	}
-	if value, ok := d.GetOkExists("rotation_id"); ok {
-		s.RotationId = value.(string)
-	}
-	if value, ok := d.GetOkExists("starts_at"); ok {
-		s.StartsAt = value.(string)
-	}
-	if value, ok := d.GetOkExists("ends_at"); ok {
-		s.EndsAt = value.(string)
-	}
-	if value, ok := d.GetOkExists("is_override"); ok {
-		s.IsOverride = tools.Bool(value.(bool))
-	}
-	if value, ok := d.GetOkExists("shift_override"); ok {
-		s.ShiftOverride = value.(map[string]interface{})
-	}
-	if value, ok := d.GetOkExists("user"); ok {
-		s.User = value.(map[string]interface{})
-	}
+	  if value, ok := d.GetOkExists("schedule_id"); ok {
+				s.ScheduleId = value.(string)
+			}
+    if value, ok := d.GetOkExists("rotation_id"); ok {
+				s.RotationId = value.(string)
+			}
+    if value, ok := d.GetOkExists("starts_at"); ok {
+				s.StartsAt = value.(string)
+			}
+    if value, ok := d.GetOkExists("ends_at"); ok {
+				s.EndsAt = value.(string)
+			}
+    if value, ok := d.GetOkExists("is_override"); ok {
+				s.IsOverride = tools.Bool(value.(bool))
+			}
+    if value, ok := d.GetOkExists("shift_override"); ok {
+				s.ShiftOverride = value.(map[string]interface{})
+			}
+    if value, ok := d.GetOkExists("user"); ok {
+				s.User = value.(map[string]interface{})
+			}
 
 	res, err := c.CreateOverrideShift(s)
 	if err != nil {
@@ -152,12 +164,12 @@ func resourceOverrideShiftRead(ctx context.Context, d *schema.ResourceData, meta
 	}
 
 	d.Set("schedule_id", item.ScheduleId)
-	d.Set("rotation_id", item.RotationId)
-	d.Set("starts_at", item.StartsAt)
-	d.Set("ends_at", item.EndsAt)
-	d.Set("is_override", item.IsOverride)
-	d.Set("shift_override", item.ShiftOverride)
-	d.Set("user", item.User)
+  d.Set("rotation_id", item.RotationId)
+  d.Set("starts_at", item.StartsAt)
+  d.Set("ends_at", item.EndsAt)
+  d.Set("is_override", item.IsOverride)
+  d.Set("shift_override", item.ShiftOverride)
+  d.Set("user", item.User)
 
 	return nil
 }
@@ -168,27 +180,27 @@ func resourceOverrideShiftUpdate(ctx context.Context, d *schema.ResourceData, me
 
 	s := &client.OverrideShift{}
 
-	if d.HasChange("schedule_id") {
-		s.ScheduleId = d.Get("schedule_id").(string)
-	}
-	if d.HasChange("rotation_id") {
-		s.RotationId = d.Get("rotation_id").(string)
-	}
-	if d.HasChange("starts_at") {
-		s.StartsAt = d.Get("starts_at").(string)
-	}
-	if d.HasChange("ends_at") {
-		s.EndsAt = d.Get("ends_at").(string)
-	}
-	if d.HasChange("is_override") {
-		s.IsOverride = tools.Bool(d.Get("is_override").(bool))
-	}
-	if d.HasChange("shift_override") {
-		s.ShiftOverride = d.Get("shift_override").(map[string]interface{})
-	}
-	if d.HasChange("user") {
-		s.User = d.Get("user").(map[string]interface{})
-	}
+	  if d.HasChange("schedule_id") {
+				s.ScheduleId = d.Get("schedule_id").(string)
+			}
+    if d.HasChange("rotation_id") {
+				s.RotationId = d.Get("rotation_id").(string)
+			}
+    if d.HasChange("starts_at") {
+				s.StartsAt = d.Get("starts_at").(string)
+			}
+    if d.HasChange("ends_at") {
+				s.EndsAt = d.Get("ends_at").(string)
+			}
+    if d.HasChange("is_override") {
+				s.IsOverride = tools.Bool(d.Get("is_override").(bool))
+			}
+    if d.HasChange("shift_override") {
+				s.ShiftOverride = d.Get("shift_override").(map[string]interface{})
+			}
+    if d.HasChange("user") {
+				s.User = d.Get("user").(map[string]interface{})
+			}
 
 	_, err := c.UpdateOverrideShift(d.Id(), s)
 	if err != nil {

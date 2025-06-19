@@ -8,48 +8,55 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	
 )
 
 func resourceScheduleRotationUser() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceScheduleRotationUserCreate,
-		ReadContext:   resourceScheduleRotationUserRead,
+		ReadContext: resourceScheduleRotationUserRead,
 		UpdateContext: resourceScheduleRotationUserUpdate,
 		DeleteContext: resourceScheduleRotationUserDelete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
-
-			"schedule_rotation_id": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    true,
+		Schema: map[string]*schema.Schema {
+			
+			"schedule_rotation_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: true,
 				Description: "",
+				
 			},
+			
 
-			"user_id": &schema.Schema{
-				Type:        schema.TypeInt,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
-				Description: "Schedule rotation user",
-			},
+		"user_id": &schema.Schema {
+			Type: schema.TypeInt,
+			Computed: false,
+			Required: true,
+			Optional: false,
+			ForceNew: false,
+			Description: "Schedule rotation user",
+			
+		},
+		
 
-			"position": &schema.Schema{
-				Type:        schema.TypeInt,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "Position of the user inside rotation",
-			},
+		"position": &schema.Schema {
+			Type: schema.TypeInt,
+			Computed: true,
+			Required: false,
+			Optional: true,
+			ForceNew: false,
+			Description: "Position of the user inside rotation",
+			
+		},
+		
 		},
 	}
 }
@@ -61,15 +68,15 @@ func resourceScheduleRotationUserCreate(ctx context.Context, d *schema.ResourceD
 
 	s := &client.ScheduleRotationUser{}
 
-	if value, ok := d.GetOkExists("schedule_rotation_id"); ok {
-		s.ScheduleRotationId = value.(string)
-	}
-	if value, ok := d.GetOkExists("user_id"); ok {
-		s.UserId = value.(int)
-	}
-	if value, ok := d.GetOkExists("position"); ok {
-		s.Position = value.(int)
-	}
+	  if value, ok := d.GetOkExists("schedule_rotation_id"); ok {
+				s.ScheduleRotationId = value.(string)
+			}
+    if value, ok := d.GetOkExists("user_id"); ok {
+				s.UserId = value.(int)
+			}
+    if value, ok := d.GetOkExists("position"); ok {
+				s.Position = value.(int)
+			}
 
 	res, err := c.CreateScheduleRotationUser(s)
 	if err != nil {
@@ -100,8 +107,8 @@ func resourceScheduleRotationUserRead(ctx context.Context, d *schema.ResourceDat
 	}
 
 	d.Set("schedule_rotation_id", item.ScheduleRotationId)
-	d.Set("user_id", item.UserId)
-	d.Set("position", item.Position)
+  d.Set("user_id", item.UserId)
+  d.Set("position", item.Position)
 
 	return nil
 }
@@ -112,15 +119,15 @@ func resourceScheduleRotationUserUpdate(ctx context.Context, d *schema.ResourceD
 
 	s := &client.ScheduleRotationUser{}
 
-	if d.HasChange("schedule_rotation_id") {
-		s.ScheduleRotationId = d.Get("schedule_rotation_id").(string)
-	}
-	if d.HasChange("user_id") {
-		s.UserId = d.Get("user_id").(int)
-	}
-	if d.HasChange("position") {
-		s.Position = d.Get("position").(int)
-	}
+	  if d.HasChange("schedule_rotation_id") {
+				s.ScheduleRotationId = d.Get("schedule_rotation_id").(string)
+			}
+    if d.HasChange("user_id") {
+				s.UserId = d.Get("user_id").(int)
+			}
+    if d.HasChange("position") {
+				s.Position = d.Get("position").(int)
+			}
 
 	_, err := c.UpdateScheduleRotationUser(d.Id(), s)
 	if err != nil {

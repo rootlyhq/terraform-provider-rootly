@@ -15,6 +15,7 @@ type AlertRoutingRule struct {
 	Name string `jsonapi:"attr,name,omitempty"`
   Enabled *bool `jsonapi:"attr,enabled,omitempty"`
   AlertsSourceId string `jsonapi:"attr,alerts_source_id,omitempty"`
+  Position int `jsonapi:"attr,position,omitempty"`
   ConditionType string `jsonapi:"attr,condition_type,omitempty"`
   Conditions []interface{} `jsonapi:"attr,conditions,omitempty"`
   Destination map[string]interface{} `jsonapi:"attr,destination,omitempty"`

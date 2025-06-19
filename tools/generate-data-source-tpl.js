@@ -1,5 +1,13 @@
 const inflect = require("./inflect");
 
+function filterCamelize(name) {
+  return inflect.camelize(name.replace(/[\[\]]+/g, "_").replace(/_$/, ""));
+}
+
+function filterUnderscore(name) {
+  return inflect.underscore(filterCamelize(name)).replace("filter_", "");
+}
+
 module.exports = (name, resourceSchema, filterParameters, pathIdField) => {
   const namePlural = inflect.pluralize(name);
   const nameCamel = inflect.camelize(name);
@@ -75,14 +83,6 @@ function listFn(nameCamelPlural, resourceSchema, pathIdField) {
   }
 }
 
-function filterCamelize(name) {
-  return inflect.camelize(name.replace(/[\[\]]+/g, "_").replace(/_$/, ""));
-}
-
-function filterUnderscore(name) {
-  return inflect.underscore(filterCamelize(name)).replace("filter_", "");
-}
-
 function setFilterFields(name, resourceSchema, filterParameters) {
   return (filterParameters || [])
     .filter((paramSchema) => {
@@ -92,12 +92,25 @@ function setFilterFields(name, resourceSchema, filterParameters) {
       const filterField = filterUnderscore(paramSchema.name);
       const fieldSchema = resourceSchema.properties[filterField];
       if (fieldSchema) {
-        return `
+        if (fieldSchema.type === 'boolean') {
+          return `
+				if value, ok := d.GetOkExists("${filterField}"); ok {
+					${filterField} := value.(bool)
+					${filterField}_str := "false"
+					if ${filterField} {
+						${filterField}_str = "true"
+					}
+					params.${filterCamelize(paramSchema.name)} = &${filterField}_str
+				}
+			`;
+        } else {
+          return `
 				if value, ok := d.GetOkExists("${filterField}"); ok {
 					${filterField} := value.(${jsonapiToGoType(fieldSchema.type)})
 					params.${filterCamelize(paramSchema.name)} = &${filterField}
 				}
 			`;
+        }
       } else if (paramSchema.name.match(/(lt|gt)\]/)) {
         const rangeKey = filterField.split("_").pop();
         return `
@@ -134,7 +147,7 @@ function jsonapiToGoType(type) {
 function schemaFields(resourceSchema, filterParameters) {
   return Object.keys(resourceSchema.properties)
     .filter((name) => {
-      return filterParameters.some((param) => param.name.match(name));
+      return name !== "id" && filterParameters.some((param) => param.name.match(name));
     })
     .map((name) => {
       return schemaField(name, resourceSchema);

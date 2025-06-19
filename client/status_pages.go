@@ -13,6 +13,7 @@ import (
 type StatusPage struct {
 	ID string `jsonapi:"primary,status_pages"`
 	Title string `jsonapi:"attr,title,omitempty"`
+  Slug string `jsonapi:"attr,slug,omitempty"`
   PublicTitle string `jsonapi:"attr,public_title,omitempty"`
   Description string `jsonapi:"attr,description,omitempty"`
   PublicDescription string `jsonapi:"attr,public_description,omitempty"`

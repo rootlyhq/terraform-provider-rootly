@@ -76,9 +76,33 @@ Workflow tasks are special resources with dynamic generation based on OpenAPI sc
 4. **Testing**: Always run `make testacc` before submitting changes. Tests require valid Rootly API credentials.
 5. **Local Testing**: Use the local installation process above to test provider changes against real Terraform configurations.
 
+## Version Management
+
+The project uses semantic versioning with git tags and GoReleaser:
+
+### Version Commands
+```bash
+make version-show      # Show current and next versions
+make version-patch     # Bump patch version (1.2.3 → 1.2.4)
+make version-minor     # Bump minor version (1.2.3 → 1.3.0)  
+make version-major     # Bump major version (1.2.3 → 2.0.0)
+make release-patch     # Bump patch + create release
+make release-minor     # Bump minor + create release
+make release-major     # Bump major + create release
+```
+
+### Version Flow
+1. **Version Bumping**: `make version-*` commands create and push git tags
+2. **Release Building**: GoReleaser detects new tags and builds releases
+3. **Version Injection**: GoReleaser sets the version in `meta/version.go` during build
+4. **UserAgent**: The provider dynamically uses the version for HTTP UserAgent headers
+
+The version flows through: `git tag` → `GoReleaser` → `meta.GetVersion()` → `provider.New()` → `RootlyUserAgent()` → `client.UserAgent`
+
 ## Important Notes
 
 - **Generated Files**: Files marked with "DO NOT MODIFY" headers are auto-generated. Changes should be made to templates in `tools/` directory.
 - **Schema Configuration**: `schema/oapi-config.yml` controls OpenAPI code generation, including schema exclusions.
 - **Release Process**: New releases are triggered by Git tags and automatically published to Terraform Registry.
 - **Node.js Dependency**: Code generation requires Node.js for JavaScript-based template processing.
+- **Version Management**: Use `make version-*` commands instead of manually creating git tags.

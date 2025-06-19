@@ -6,7 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-
+	
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -27,111 +27,111 @@ func resourceWorkflowTaskCreateZoomMeeting() *schema.Resource {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
-		Schema: map[string]*schema.Schema{
+		Schema: map[string]*schema.Schema {
 			"workflow_id": {
-				Description: "The ID of the parent workflow",
-				Type:        schema.TypeString,
-				Required:    true,
-				ForceNew:    true,
+				Description:  "The ID of the parent workflow",
+				Type:         schema.TypeString,
+				Required:     true,
+				ForceNew:     true,
 			},
 			"name": {
-				Description: "Name of the workflow task",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
+				Description:  "Name of the workflow task",
+				Type:         schema.TypeString,
+				Optional:     true,
+				Computed:     true,
 			},
 			"position": {
-				Description: "The position of the workflow task (1 being top of list)",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Computed:    true,
+				Description:  "The position of the workflow task (1 being top of list)",
+				Type:         schema.TypeInt,
+				Optional:     true,
+				Computed:     true,
 			},
 			"skip_on_failure": {
-				Description: "Skip workflow task if any failures",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Default:     false,
+				Description:  "Skip workflow task if any failures",
+				Type:         schema.TypeBool,
+				Optional:     true,
+				Default:      false,
 			},
 			"enabled": {
-				Description: "Enable/disable this workflow task",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Default:     true,
+				Description:  "Enable/disable this workflow task",
+				Type:         schema.TypeBool,
+				Optional:     true,
+				Default:      true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type:        schema.TypeList,
-				Required:    true,
-				MinItems:    1,
-				MaxItems:    1,
+				Type: schema.TypeList,
+				Required: true,
+				MinItems: 1,
+				MaxItems: 1,
 				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"task_type": &schema.Schema{
-							Type:     schema.TypeString,
+					Schema: map[string]*schema.Schema {
+						"task_type": &schema.Schema {
+							Type: schema.TypeString,
 							Optional: true,
-							Default:  "create_zoom_meeting",
-							ValidateFunc: validation.StringInSlice([]string{
+							Default: "create_zoom_meeting",
+							ValidateFunc: validation.StringInSlice([]string {
 								"create_zoom_meeting",
 							}, false),
 						},
-						"topic": &schema.Schema{
+						"topic": &schema.Schema {
 							Description: "The meeting topic",
-							Type:        schema.TypeString,
-							Required:    true,
+							Type: schema.TypeString,
+							Required: true,
 						},
-						"password": &schema.Schema{
+						"password": &schema.Schema {
 							Description: "The meeting password",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"create_as_email": &schema.Schema{
+						"create_as_email": &schema.Schema {
 							Description: "The email to use if creating as email",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"alternative_hosts": &schema.Schema{
+						"alternative_hosts": &schema.Schema {
 							Description: "",
-							Type:        schema.TypeList,
-							Optional:    true,
-							Elem: &schema.Schema{
+							Type: schema.TypeList,
+							Optional: true,
+							Elem: &schema.Schema {
 								Type: schema.TypeString,
 							},
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
 						},
-						"auto_recording": &schema.Schema{
+						"auto_recording": &schema.Schema {
 							Description: "Value must be one of `none`, `local`, `cloud`.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "none",
+							Type: schema.TypeString,
+							Optional: true,
+							Default: "none",
 							ValidateFunc: validation.StringInSlice([]string{
 								"none",
-								"local",
-								"cloud",
+"local",
+"cloud",
 							}, false),
 						},
-						"record_meeting": &schema.Schema{
+						"record_meeting": &schema.Schema {
 							Description: "Rootly AI will record the meeting and automatically generate a transcript and summary from your meeting. Value must be one of true or false",
-							Type:        schema.TypeBool,
-							Optional:    true,
+							Type: schema.TypeBool,
+							Optional: true,
 						},
-						"post_to_incident_timeline": &schema.Schema{
+						"post_to_incident_timeline": &schema.Schema {
 							Description: "Value must be one of true or false",
-							Type:        schema.TypeBool,
-							Optional:    true,
+							Type: schema.TypeBool,
+							Optional: true,
 						},
-						"post_to_slack_channels": &schema.Schema{
-							Description:      "",
-							Type:             schema.TypeList,
-							Optional:         true,
+						"post_to_slack_channels": &schema.Schema {
+							Description: "",
+							Type: schema.TypeList,
+							Optional: true,
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type:     schema.TypeString,
+								Schema: map[string]*schema.Schema {
+									"id": &schema.Schema {
+										Type: schema.TypeString,
 										Required: true,
 									},
-									"name": &schema.Schema{
-										Type:     schema.TypeString,
+									"name": &schema.Schema {
+										Type: schema.TypeString,
 										Required: true,
 									},
 								},
@@ -157,12 +157,12 @@ func resourceWorkflowTaskCreateZoomMeetingCreate(ctx context.Context, d *schema.
 	tflog.Trace(ctx, fmt.Sprintf("Creating workflow task: %s", workflowId))
 
 	s := &client.WorkflowTask{
-		WorkflowId:    workflowId,
-		Name:          name,
-		Position:      position,
+		WorkflowId: workflowId,
+		Name: name,
+		Position: position,
 		SkipOnFailure: skipOnFailure,
-		Enabled:       enabled,
-		TaskParams:    taskParams,
+		Enabled: enabled,
+		TaskParams: taskParams,
 	}
 
 	res, err := c.CreateWorkflowTask(s)
@@ -217,12 +217,12 @@ func resourceWorkflowTaskCreateZoomMeetingUpdate(ctx context.Context, d *schema.
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	s := &client.WorkflowTask{
-		WorkflowId:    workflowId,
-		Name:          name,
-		Position:      position,
+		WorkflowId: workflowId,
+		Name: name,
+		Position: position,
 		SkipOnFailure: skipOnFailure,
-		Enabled:       enabled,
-		TaskParams:    taskParams,
+		Enabled: enabled,
+		TaskParams: taskParams,
 	}
 
 	tflog.Debug(ctx, fmt.Sprintf("adding value: %#v", s))

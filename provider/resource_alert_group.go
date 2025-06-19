@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
@@ -17,228 +17,272 @@ import (
 func resourceAlertGroup() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceAlertGroupCreate,
-		ReadContext:   resourceAlertGroupRead,
+		ReadContext: resourceAlertGroupRead,
 		UpdateContext: resourceAlertGroupUpdate,
 		DeleteContext: resourceAlertGroupDelete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
-
-			"name": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+		Schema: map[string]*schema.Schema {
+			
+			"name": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The name of the alert group",
+				
 			},
+			
 
-			"description": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"description": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "The description of the alert group",
+				
 			},
+			
 
-			"slug": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"slug": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "The slug of the alert group",
+				
 			},
+			
 
-			"condition_type": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"condition_type": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "Grouping condition for the alert group",
+				
 			},
+			
 
-			"time_window": &schema.Schema{
-				Type:        schema.TypeInt,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "Time window for the alert grouping",
-			},
+		"time_window": &schema.Schema {
+			Type: schema.TypeInt,
+			Computed: true,
+			Required: false,
+			Optional: true,
+			ForceNew: false,
+			Description: "Time window for the alert grouping",
+			
+		},
+		
 
-			"group_by_alert_title": &schema.Schema{
-				Type:        schema.TypeBool,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
+			"group_by_alert_title": &schema.Schema {
+				Type: schema.TypeBool,
+				Computed: true,
+				Required: false,
+				Optional: true,
 				Description: "Whether the alerts are grouped by title or not. Value must be one of true or false",
+				
 			},
+			
 
-			"group_by_alert_urgency": &schema.Schema{
-				Type:        schema.TypeBool,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
+			"group_by_alert_urgency": &schema.Schema {
+				Type: schema.TypeBool,
+				Computed: true,
+				Required: false,
+				Optional: true,
 				Description: "Whether the alerts are grouped by urgency or not. Value must be one of true or false",
+				
 			},
+			
 
-			"targets": &schema.Schema{
-				Type:             schema.TypeList,
-				Computed:         false,
-				Required:         true,
-				Optional:         false,
-				Description:      "",
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
+				"targets": &schema.Schema {
+					Type: schema.TypeList,
+					Computed: false,
+					Required: true,
+					Optional: false,
+					Description: "",
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Elem: &schema.Resource {
+						Schema: map[string]*schema.Schema {
+              
+			"target_type": &schema.Schema {
+				Type: schema.TypeString,
+				Default: "Group",
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The type of the target.. Value must be one of `Group`, `Service`, `EscalationPolicy`.",
+				
+			},
+			
 
-						"target_type": &schema.Schema{
-							Type:        schema.TypeString,
-							Default:     "Group",
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "The type of the target.. Value must be one of `Group`, `Service`, `EscalationPolicy`.",
-						},
-
-						"target_id": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "id for the Group, Service or EscalationPolicy",
+			"target_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "id for the Group, Service or EscalationPolicy",
+				
+			},
+			
 						},
 					},
+					
 				},
+				
+
+				"attributes": &schema.Schema {
+					Type: schema.TypeList,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "",
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Elem: &schema.Resource {
+						Schema: map[string]*schema.Schema {
+              
+			"json_path": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The JSON path to the value to group by.",
+				
 			},
-
-			"attributes": &schema.Schema{
-				Type:             schema.TypeList,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "",
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-
-						"json_path": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "The JSON path to the value to group by.",
+			
 						},
 					},
+					
 				},
+				
+
+				"conditions": &schema.Schema {
+					Type: schema.TypeList,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "The conditions for the alert group",
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Elem: &schema.Resource {
+						Schema: map[string]*schema.Schema {
+              
+			"property_field_type": &schema.Schema {
+				Type: schema.TypeString,
+				Default: "attribute",
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The type of the property field. Value must be one of `attribute`, `payload`, `alert_field`.",
+				
 			},
+			
 
-			"conditions": &schema.Schema{
-				Type:             schema.TypeList,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "The conditions for the alert group",
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
+			"property_field_name": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The name of the property field. If the property field type is selected as 'attribute', then the allowed property field names are 'summary' (for Title), 'description', 'alert_urgency' and 'external_url' (for Alert Source URL). If the property field type is selected as 'payload', then the property field name should be supplied in JSON Path syntax.",
+				
+			},
+			
 
-						"property_field_type": &schema.Schema{
-							Type:        schema.TypeString,
-							Default:     "attribute",
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "The type of the property field. Value must be one of `attribute`, `payload`.",
-						},
+			"property_field_condition_type": &schema.Schema {
+				Type: schema.TypeString,
+				Default: "is_one_of",
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The condition type of the property field. Value must be one of `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is_empty`, `matches_existing_alert`.",
+				
+			},
+			
 
-						"property_field_name": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "The name of the property field. If the property field type is selected as 'attribute', then the allowed property field names are 'summary' (for Title), 'description', 'alert_urgency' and 'external_url' (for Alert Source URL). If the property field type is selected as 'payload', then the property field name should be supplied in JSON Path syntax.",
-						},
+			"property_field_value": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The value of the property field. Can be null if the property field condition type is 'is_one_of' or 'is_not_one_of'",
+				
+			},
+			
 
-						"property_field_condition_type": &schema.Schema{
-							Type:        schema.TypeString,
-							Default:     "is_one_of",
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "The condition type of the property field. Value must be one of `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is_empty`, `matches_existing_alert`.",
-						},
+				"property_field_values": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "The values of the property field. Used if the property field condition type is 'is_one_of' or 'is_not_one_of' except for when property field name is 'alert_urgency'",
+					
+				},
+				
 
-						"property_field_value": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "The value of the property field. Can be null if the property field condition type is 'is_one_of' or 'is_not_one_of'",
-						},
+				"values": &schema.Schema {
+					Type: schema.TypeList,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "",
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Elem: &schema.Resource {
+						Schema: map[string]*schema.Schema {
+              
+			"record_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "ID of the Alert Urgency to set.",
+				
+			},
+			
 
-						"property_field_values": &schema.Schema{
-							Type: schema.TypeList,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-							DiffSuppressFunc: tools.EqualIgnoringOrder,
-							Computed:         true,
-							Required:         false,
-							Optional:         true,
-							Description:      "The values of the property field. Used if the property field condition type is 'is_one_of' or 'is_not_one_of' except for when property field name is 'alert_urgency'",
-						},
-
-						"values": &schema.Schema{
-							Type:             schema.TypeList,
-							Computed:         true,
-							Required:         false,
-							Optional:         true,
-							Description:      "",
-							DiffSuppressFunc: tools.EqualIgnoringOrder,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-
-									"record_id": &schema.Schema{
-										Type:        schema.TypeString,
-										Computed:    true,
-										Required:    false,
-										Optional:    true,
-										ForceNew:    false,
-										Description: "ID of the Alert Urgency to set.",
-									},
-
-									"record_type": &schema.Schema{
-										Type:        schema.TypeString,
-										Computed:    true,
-										Required:    false,
-										Optional:    true,
-										ForceNew:    false,
-										Description: "Should be \"AlertUrgency\".",
-									},
-								},
-							},
+			"record_type": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "Should be \"AlertUrgency\".",
+				
+			},
+			
 						},
 					},
+					
 				},
-			},
+				
+						},
+					},
+					
+				},
+				
 
-			"deleted_at": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"deleted_at": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "Date or deletion",
+				
 			},
+			
 		},
 	}
 }
@@ -250,39 +294,39 @@ func resourceAlertGroupCreate(ctx context.Context, d *schema.ResourceData, meta 
 
 	s := &client.AlertGroup{}
 
-	if value, ok := d.GetOkExists("name"); ok {
-		s.Name = value.(string)
-	}
-	if value, ok := d.GetOkExists("description"); ok {
-		s.Description = value.(string)
-	}
-	if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
-	}
-	if value, ok := d.GetOkExists("condition_type"); ok {
-		s.ConditionType = value.(string)
-	}
-	if value, ok := d.GetOkExists("time_window"); ok {
-		s.TimeWindow = value.(int)
-	}
-	if value, ok := d.GetOkExists("group_by_alert_title"); ok {
-		s.GroupByAlertTitle = tools.Bool(value.(bool))
-	}
-	if value, ok := d.GetOkExists("group_by_alert_urgency"); ok {
-		s.GroupByAlertUrgency = tools.Bool(value.(bool))
-	}
-	if value, ok := d.GetOkExists("targets"); ok {
-		s.Targets = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("attributes"); ok {
-		s.Attributes = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("conditions"); ok {
-		s.Conditions = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("deleted_at"); ok {
-		s.DeletedAt = value.(string)
-	}
+	  if value, ok := d.GetOkExists("name"); ok {
+				s.Name = value.(string)
+			}
+    if value, ok := d.GetOkExists("description"); ok {
+				s.Description = value.(string)
+			}
+    if value, ok := d.GetOkExists("slug"); ok {
+				s.Slug = value.(string)
+			}
+    if value, ok := d.GetOkExists("condition_type"); ok {
+				s.ConditionType = value.(string)
+			}
+    if value, ok := d.GetOkExists("time_window"); ok {
+				s.TimeWindow = value.(int)
+			}
+    if value, ok := d.GetOkExists("group_by_alert_title"); ok {
+				s.GroupByAlertTitle = tools.Bool(value.(bool))
+			}
+    if value, ok := d.GetOkExists("group_by_alert_urgency"); ok {
+				s.GroupByAlertUrgency = tools.Bool(value.(bool))
+			}
+    if value, ok := d.GetOkExists("targets"); ok {
+				s.Targets = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("attributes"); ok {
+				s.Attributes = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("conditions"); ok {
+				s.Conditions = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("deleted_at"); ok {
+				s.DeletedAt = value.(string)
+			}
 
 	res, err := c.CreateAlertGroup(s)
 	if err != nil {
@@ -313,74 +357,76 @@ func resourceAlertGroupRead(ctx context.Context, d *schema.ResourceData, meta in
 	}
 
 	d.Set("name", item.Name)
-	d.Set("description", item.Description)
-	d.Set("slug", item.Slug)
-	d.Set("condition_type", item.ConditionType)
-	d.Set("time_window", item.TimeWindow)
-	d.Set("group_by_alert_title", item.GroupByAlertTitle)
-	d.Set("group_by_alert_urgency", item.GroupByAlertUrgency)
+  d.Set("description", item.Description)
+  d.Set("slug", item.Slug)
+  d.Set("condition_type", item.ConditionType)
+  d.Set("time_window", item.TimeWindow)
+  d.Set("group_by_alert_title", item.GroupByAlertTitle)
+  d.Set("group_by_alert_urgency", item.GroupByAlertUrgency)
+  
+          if item.Targets != nil {
+              processedItems := make([]map[string]interface{}, 0)
 
-	if item.Targets != nil {
-		processedItems := make([]map[string]interface{}, 0)
+              for _, c := range item.Targets {
+                  if rawItem, ok := c.(map[string]interface{}); ok {
+                      // Create a new map with only the fields defined in the schema
+                      processedItem := map[string]interface{}{
+                          "target_type": rawItem["target_type"],
+"target_id": rawItem["target_id"],
+                      }
+                      processedItems = append(processedItems, processedItem)
+                  }
+              }
 
-		for _, c := range item.Targets {
-			if rawItem, ok := c.(map[string]interface{}); ok {
-				// Create a new map with only the fields defined in the schema
-				processedItem := map[string]interface{}{
-					"target_type": rawItem["target_type"],
-					"target_id":   rawItem["target_id"],
-				}
-				processedItems = append(processedItems, processedItem)
-			}
-		}
+              d.Set("targets", processedItems)
+          } else {
+              d.Set("targets", nil)
+          }
+        
+  
+          if item.Attributes != nil {
+              processedItems := make([]map[string]interface{}, 0)
 
-		d.Set("targets", processedItems)
-	} else {
-		d.Set("targets", nil)
-	}
+              for _, c := range item.Attributes {
+                  if rawItem, ok := c.(map[string]interface{}); ok {
+                      // Create a new map with only the fields defined in the schema
+                      processedItem := map[string]interface{}{
+                          "json_path": rawItem["json_path"],
+                      }
+                      processedItems = append(processedItems, processedItem)
+                  }
+              }
 
-	if item.Attributes != nil {
-		processedItems := make([]map[string]interface{}, 0)
+              d.Set("attributes", processedItems)
+          } else {
+              d.Set("attributes", nil)
+          }
+        
+  
+          if item.Conditions != nil {
+              processedItems := make([]map[string]interface{}, 0)
 
-		for _, c := range item.Attributes {
-			if rawItem, ok := c.(map[string]interface{}); ok {
-				// Create a new map with only the fields defined in the schema
-				processedItem := map[string]interface{}{
-					"json_path": rawItem["json_path"],
-				}
-				processedItems = append(processedItems, processedItem)
-			}
-		}
+              for _, c := range item.Conditions {
+                  if rawItem, ok := c.(map[string]interface{}); ok {
+                      // Create a new map with only the fields defined in the schema
+                      processedItem := map[string]interface{}{
+                          "property_field_type": rawItem["property_field_type"],
+"property_field_name": rawItem["property_field_name"],
+"property_field_condition_type": rawItem["property_field_condition_type"],
+"property_field_value": rawItem["property_field_value"],
+"property_field_values": rawItem["property_field_values"],
+"values": rawItem["values"],
+                      }
+                      processedItems = append(processedItems, processedItem)
+                  }
+              }
 
-		d.Set("attributes", processedItems)
-	} else {
-		d.Set("attributes", nil)
-	}
-
-	if item.Conditions != nil {
-		processedItems := make([]map[string]interface{}, 0)
-
-		for _, c := range item.Conditions {
-			if rawItem, ok := c.(map[string]interface{}); ok {
-				// Create a new map with only the fields defined in the schema
-				processedItem := map[string]interface{}{
-					"property_field_type":           rawItem["property_field_type"],
-					"property_field_name":           rawItem["property_field_name"],
-					"property_field_condition_type": rawItem["property_field_condition_type"],
-					"property_field_value":          rawItem["property_field_value"],
-					"property_field_values":         rawItem["property_field_values"],
-					"values":                        rawItem["values"],
-				}
-				processedItems = append(processedItems, processedItem)
-			}
-		}
-
-		d.Set("conditions", processedItems)
-	} else {
-		d.Set("conditions", nil)
-	}
-
-	d.Set("deleted_at", item.DeletedAt)
+              d.Set("conditions", processedItems)
+          } else {
+              d.Set("conditions", nil)
+          }
+        
+  d.Set("deleted_at", item.DeletedAt)
 
 	return nil
 }
@@ -391,39 +437,39 @@ func resourceAlertGroupUpdate(ctx context.Context, d *schema.ResourceData, meta 
 
 	s := &client.AlertGroup{}
 
-	if d.HasChange("name") {
-		s.Name = d.Get("name").(string)
-	}
-	if d.HasChange("description") {
-		s.Description = d.Get("description").(string)
-	}
-	if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
-	}
-	if d.HasChange("condition_type") {
-		s.ConditionType = d.Get("condition_type").(string)
-	}
-	if d.HasChange("time_window") {
-		s.TimeWindow = d.Get("time_window").(int)
-	}
-	if d.HasChange("group_by_alert_title") {
-		s.GroupByAlertTitle = tools.Bool(d.Get("group_by_alert_title").(bool))
-	}
-	if d.HasChange("group_by_alert_urgency") {
-		s.GroupByAlertUrgency = tools.Bool(d.Get("group_by_alert_urgency").(bool))
-	}
-	if d.HasChange("targets") {
-		s.Targets = d.Get("targets").([]interface{})
-	}
-	if d.HasChange("attributes") {
-		s.Attributes = d.Get("attributes").([]interface{})
-	}
-	if d.HasChange("conditions") {
-		s.Conditions = d.Get("conditions").([]interface{})
-	}
-	if d.HasChange("deleted_at") {
-		s.DeletedAt = d.Get("deleted_at").(string)
-	}
+	  if d.HasChange("name") {
+				s.Name = d.Get("name").(string)
+			}
+    if d.HasChange("description") {
+				s.Description = d.Get("description").(string)
+			}
+    if d.HasChange("slug") {
+				s.Slug = d.Get("slug").(string)
+			}
+    if d.HasChange("condition_type") {
+				s.ConditionType = d.Get("condition_type").(string)
+			}
+    if d.HasChange("time_window") {
+				s.TimeWindow = d.Get("time_window").(int)
+			}
+    if d.HasChange("group_by_alert_title") {
+				s.GroupByAlertTitle = tools.Bool(d.Get("group_by_alert_title").(bool))
+			}
+    if d.HasChange("group_by_alert_urgency") {
+				s.GroupByAlertUrgency = tools.Bool(d.Get("group_by_alert_urgency").(bool))
+			}
+    if d.HasChange("targets") {
+				s.Targets = d.Get("targets").([]interface{})
+			}
+    if d.HasChange("attributes") {
+				s.Attributes = d.Get("attributes").([]interface{})
+			}
+    if d.HasChange("conditions") {
+				s.Conditions = d.Get("conditions").([]interface{})
+			}
+    if d.HasChange("deleted_at") {
+				s.DeletedAt = d.Get("deleted_at").(string)
+			}
 
 	_, err := c.UpdateAlertGroup(d.Id(), s)
 	if err != nil {

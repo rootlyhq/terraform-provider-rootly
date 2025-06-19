@@ -8,48 +8,55 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	
 )
 
 func resourceRetrospectiveProcessGroupStep() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceRetrospectiveProcessGroupStepCreate,
-		ReadContext:   resourceRetrospectiveProcessGroupStepRead,
+		ReadContext: resourceRetrospectiveProcessGroupStepRead,
 		UpdateContext: resourceRetrospectiveProcessGroupStepUpdate,
 		DeleteContext: resourceRetrospectiveProcessGroupStepDelete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
-
-			"retrospective_process_group_id": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    true,
+		Schema: map[string]*schema.Schema {
+			
+			"retrospective_process_group_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: true,
 				Description: "",
+				
 			},
+			
 
-			"retrospective_step_id": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+			"retrospective_step_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "",
+				
 			},
+			
 
-			"position": &schema.Schema{
-				Type:        schema.TypeInt,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "",
-			},
+		"position": &schema.Schema {
+			Type: schema.TypeInt,
+			Computed: true,
+			Required: false,
+			Optional: true,
+			ForceNew: false,
+			Description: "",
+			
+		},
+		
 		},
 	}
 }
@@ -61,15 +68,15 @@ func resourceRetrospectiveProcessGroupStepCreate(ctx context.Context, d *schema.
 
 	s := &client.RetrospectiveProcessGroupStep{}
 
-	if value, ok := d.GetOkExists("retrospective_process_group_id"); ok {
-		s.RetrospectiveProcessGroupId = value.(string)
-	}
-	if value, ok := d.GetOkExists("retrospective_step_id"); ok {
-		s.RetrospectiveStepId = value.(string)
-	}
-	if value, ok := d.GetOkExists("position"); ok {
-		s.Position = value.(int)
-	}
+	  if value, ok := d.GetOkExists("retrospective_process_group_id"); ok {
+				s.RetrospectiveProcessGroupId = value.(string)
+			}
+    if value, ok := d.GetOkExists("retrospective_step_id"); ok {
+				s.RetrospectiveStepId = value.(string)
+			}
+    if value, ok := d.GetOkExists("position"); ok {
+				s.Position = value.(int)
+			}
 
 	res, err := c.CreateRetrospectiveProcessGroupStep(s)
 	if err != nil {
@@ -100,8 +107,8 @@ func resourceRetrospectiveProcessGroupStepRead(ctx context.Context, d *schema.Re
 	}
 
 	d.Set("retrospective_process_group_id", item.RetrospectiveProcessGroupId)
-	d.Set("retrospective_step_id", item.RetrospectiveStepId)
-	d.Set("position", item.Position)
+  d.Set("retrospective_step_id", item.RetrospectiveStepId)
+  d.Set("position", item.Position)
 
 	return nil
 }
@@ -112,15 +119,15 @@ func resourceRetrospectiveProcessGroupStepUpdate(ctx context.Context, d *schema.
 
 	s := &client.RetrospectiveProcessGroupStep{}
 
-	if d.HasChange("retrospective_process_group_id") {
-		s.RetrospectiveProcessGroupId = d.Get("retrospective_process_group_id").(string)
-	}
-	if d.HasChange("retrospective_step_id") {
-		s.RetrospectiveStepId = d.Get("retrospective_step_id").(string)
-	}
-	if d.HasChange("position") {
-		s.Position = d.Get("position").(int)
-	}
+	  if d.HasChange("retrospective_process_group_id") {
+				s.RetrospectiveProcessGroupId = d.Get("retrospective_process_group_id").(string)
+			}
+    if d.HasChange("retrospective_step_id") {
+				s.RetrospectiveStepId = d.Get("retrospective_step_id").(string)
+			}
+    if d.HasChange("position") {
+				s.Position = d.Get("position").(int)
+			}
 
 	_, err := c.UpdateRetrospectiveProcessGroupStep(d.Id(), s)
 	if err != nil {

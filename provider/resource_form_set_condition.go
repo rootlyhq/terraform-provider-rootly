@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
@@ -17,52 +17,60 @@ import (
 func resourceFormSetCondition() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceFormSetConditionCreate,
-		ReadContext:   resourceFormSetConditionRead,
+		ReadContext: resourceFormSetConditionRead,
 		UpdateContext: resourceFormSetConditionUpdate,
 		DeleteContext: resourceFormSetConditionDelete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
-
-			"form_set_id": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    true,
+		Schema: map[string]*schema.Schema {
+			
+			"form_set_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: true,
 				Description: "The form set this condition applies.",
+				
 			},
+			
 
-			"form_field_id": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+			"form_field_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The form field this condition applies.",
+				
 			},
+			
 
-			"comparison": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "equal",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"comparison": &schema.Schema {
+				Type: schema.TypeString,
+				Default: "equal",
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "The condition comparison.. Value must be one of `equal`.",
+				
 			},
+			
 
-			"values": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
+				"values": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: false,
+					Required: true,
+					Optional: false,
+					Description: "The values for comparison.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         false,
-				Required:         true,
-				Optional:         false,
-				Description:      "The values for comparison.",
-			},
+				
 		},
 	}
 }
@@ -74,18 +82,18 @@ func resourceFormSetConditionCreate(ctx context.Context, d *schema.ResourceData,
 
 	s := &client.FormSetCondition{}
 
-	if value, ok := d.GetOkExists("form_set_id"); ok {
-		s.FormSetId = value.(string)
-	}
-	if value, ok := d.GetOkExists("form_field_id"); ok {
-		s.FormFieldId = value.(string)
-	}
-	if value, ok := d.GetOkExists("comparison"); ok {
-		s.Comparison = value.(string)
-	}
-	if value, ok := d.GetOkExists("values"); ok {
-		s.Values = value.([]interface{})
-	}
+	  if value, ok := d.GetOkExists("form_set_id"); ok {
+				s.FormSetId = value.(string)
+			}
+    if value, ok := d.GetOkExists("form_field_id"); ok {
+				s.FormFieldId = value.(string)
+			}
+    if value, ok := d.GetOkExists("comparison"); ok {
+				s.Comparison = value.(string)
+			}
+    if value, ok := d.GetOkExists("values"); ok {
+				s.Values = value.([]interface{})
+			}
 
 	res, err := c.CreateFormSetCondition(s)
 	if err != nil {
@@ -116,9 +124,9 @@ func resourceFormSetConditionRead(ctx context.Context, d *schema.ResourceData, m
 	}
 
 	d.Set("form_set_id", item.FormSetId)
-	d.Set("form_field_id", item.FormFieldId)
-	d.Set("comparison", item.Comparison)
-	d.Set("values", item.Values)
+  d.Set("form_field_id", item.FormFieldId)
+  d.Set("comparison", item.Comparison)
+  d.Set("values", item.Values)
 
 	return nil
 }
@@ -129,18 +137,18 @@ func resourceFormSetConditionUpdate(ctx context.Context, d *schema.ResourceData,
 
 	s := &client.FormSetCondition{}
 
-	if d.HasChange("form_set_id") {
-		s.FormSetId = d.Get("form_set_id").(string)
-	}
-	if d.HasChange("form_field_id") {
-		s.FormFieldId = d.Get("form_field_id").(string)
-	}
-	if d.HasChange("comparison") {
-		s.Comparison = d.Get("comparison").(string)
-	}
-	if d.HasChange("values") {
-		s.Values = d.Get("values").([]interface{})
-	}
+	  if d.HasChange("form_set_id") {
+				s.FormSetId = d.Get("form_set_id").(string)
+			}
+    if d.HasChange("form_field_id") {
+				s.FormFieldId = d.Get("form_field_id").(string)
+			}
+    if d.HasChange("comparison") {
+				s.Comparison = d.Get("comparison").(string)
+			}
+    if d.HasChange("values") {
+				s.Values = d.Get("values").([]interface{})
+			}
 
 	_, err := c.UpdateFormSetCondition(d.Id(), s)
 	if err != nil {
