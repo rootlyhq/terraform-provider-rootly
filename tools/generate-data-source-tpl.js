@@ -84,6 +84,11 @@ function listFn(nameCamelPlural, resourceSchema, pathIdField) {
 }
 
 function setFilterFields(name, resourceSchema, filterParameters) {
+  // Some API boolean filters expect strings instead of booleans
+  const booleanAsStringFilters = {
+    'communications_group': ['is_private']
+  };
+
   return (filterParameters || [])
     .filter((paramSchema) => {
       return paramSchema.name.match(/^filter/);
@@ -93,7 +98,12 @@ function setFilterFields(name, resourceSchema, filterParameters) {
       const fieldSchema = resourceSchema.properties[filterField];
       if (fieldSchema) {
         if (fieldSchema.type === 'boolean') {
-          return `
+          // Check if this boolean field should be converted to string for this resource
+          const shouldConvertToString = booleanAsStringFilters[name] && 
+            booleanAsStringFilters[name].includes(filterField);
+          
+          if (shouldConvertToString) {
+            return `
 				if value, ok := d.GetOkExists("${filterField}"); ok {
 					${filterField} := value.(bool)
 					${filterField}_str := "false"
@@ -103,6 +113,14 @@ function setFilterFields(name, resourceSchema, filterParameters) {
 					params.${filterCamelize(paramSchema.name)} = &${filterField}_str
 				}
 			`;
+          } else {
+            return `
+				if value, ok := d.GetOkExists("${filterField}"); ok {
+					${filterField} := value.(bool)
+					params.${filterCamelize(paramSchema.name)} = &${filterField}
+				}
+			`;
+          }
         } else {
           return `
 				if value, ok := d.GetOkExists("${filterField}"); ok {

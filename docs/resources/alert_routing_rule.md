@@ -44,6 +44,7 @@ terraform plan -generate-config-out=generated.tf
 - `condition_type` (String) The type of condition for the alert routing rule. Value must be one of `all`, `any`.
 - `conditions` (Block List) The conditions for the alert routing rule (see [below for nested schema](#nestedblock--conditions))
 - `enabled` (Boolean)
+- `position` (Number) The position of the alert routing rule for ordering evaluation
 
 ### Read-Only
 
@@ -55,7 +56,7 @@ terraform plan -generate-config-out=generated.tf
 Optional:
 
 - `target_id` (String) The ID of the target
-- `target_type` (String) The type of the target. Value must be one of `Group`, `Service`, `EscalationPolicy`.
+- `target_type` (String) The type of the target. Value must be one of `Service`, `Group`, `EscalationPolicy`.
 
 
 <a id="nestedblock--conditions"></a>
@@ -65,6 +66,6 @@ Optional:
 
 - `property_field_condition_type` (String) The condition type of the property field. Value must be one of `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is_empty`.
 - `property_field_name` (String) The name of the property field. If the property field type is selected as 'attribute', then the allowed property field names are 'summary' (for Title), 'description', 'alert_urgency' and 'external_url' (for Alert Source URL). If the property field type is selected as 'payload', then the property field name should be supplied in JSON Path syntax.
-- `property_field_type` (String) The type of the property field. Value must be one of `attribute`, `payload`.
+- `property_field_type` (String) The type of the property field. Value must be one of `attribute`, `payload`, `alert_field`.
 - `property_field_value` (String) The value of the property field. Can be null if the property field condition type is 'is_one_of' or 'is_not_one_of'
 - `property_field_values` (List of String) The values of the property field. Used if the property field condition type is 'is_one_of' or 'is_not_one_of' except for when property field name is 'alert_urgency'

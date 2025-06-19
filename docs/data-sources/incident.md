@@ -23,6 +23,7 @@ data "rootly_incident" "my-incident" {
 ### Optional
 
 - `acknowledged_at` (Map of String) Filter by date range using 'lt' and 'gt'.
+- `closed_at` (Map of String) Filter by date range using 'lt' and 'gt'.
 - `created_at` (Map of String) Filter by date range using 'lt' and 'gt'.
 - `detected_at` (Map of String) Filter by date range using 'lt' and 'gt'.
 - `environments` (String)
@@ -36,7 +37,9 @@ data "rootly_incident" "my-incident" {
 - `services` (String)
 - `severity` (String)
 - `started_at` (Map of String) Filter by date range using 'lt' and 'gt'.
+- `status` (String)
 - `updated_at` (Map of String) Filter by date range using 'lt' and 'gt'.
+- `user` (String)
 
 ### Read-Only
 

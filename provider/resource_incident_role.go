@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-	
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
@@ -17,96 +17,80 @@ import (
 func resourceIncidentRole() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceIncidentRoleCreate,
-		ReadContext: resourceIncidentRoleRead,
+		ReadContext:   resourceIncidentRoleRead,
 		UpdateContext: resourceIncidentRoleUpdate,
 		DeleteContext: resourceIncidentRoleDelete,
-		Importer: &schema.ResourceImporter {
+		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema {
-			
-			"name": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+		Schema: map[string]*schema.Schema{
+
+			"name": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The name of the incident role",
-				
 			},
-			
 
-			"slug": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"slug": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The slug of the incident role",
-				
 			},
-			
 
-			"summary": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"summary": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The summary of the incident role",
-				
 			},
-			
 
-			"description": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"description": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The description of the incident role",
-				
 			},
-			
 
-		"position": &schema.Schema {
-			Type: schema.TypeInt,
-			Computed: true,
-			Required: false,
-			Optional: true,
-			ForceNew: false,
-			Description: "Position of the incident role",
-			
-		},
-		
+			"position": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Position of the incident role",
+			},
 
-			"optional": &schema.Schema {
-				Type: schema.TypeBool,
-				Computed: true,
-				Required: false,
-				Optional: true,
+			"optional": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
 				Description: "Value must be one of true or false",
-				
 			},
-			
 
-				"enabled": &schema.Schema {
-					Type: schema.TypeBool,
-					Default: true,
-					Optional: true,
-					
-				},
-				
-
-			"allow_multi_user_assignment": &schema.Schema {
-				Type: schema.TypeBool,
-				Computed: true,
-				Required: false,
+			"enabled": &schema.Schema{
+				Type:     schema.TypeBool,
+				Default:  true,
 				Optional: true,
-				Description: "Value must be one of true or false",
-				
 			},
-			
+
+			"allow_multi_user_assignment": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Value must be one of true or false",
+			},
 		},
 	}
 }
@@ -118,30 +102,30 @@ func resourceIncidentRoleCreate(ctx context.Context, d *schema.ResourceData, met
 
 	s := &client.IncidentRole{}
 
-	  if value, ok := d.GetOkExists("name"); ok {
-				s.Name = value.(string)
-			}
-    if value, ok := d.GetOkExists("slug"); ok {
-				s.Slug = value.(string)
-			}
-    if value, ok := d.GetOkExists("summary"); ok {
-				s.Summary = value.(string)
-			}
-    if value, ok := d.GetOkExists("description"); ok {
-				s.Description = value.(string)
-			}
-    if value, ok := d.GetOkExists("position"); ok {
-				s.Position = value.(int)
-			}
-    if value, ok := d.GetOkExists("optional"); ok {
-				s.Optional = tools.Bool(value.(bool))
-			}
-    if value, ok := d.GetOkExists("enabled"); ok {
-				s.Enabled = tools.Bool(value.(bool))
-			}
-    if value, ok := d.GetOkExists("allow_multi_user_assignment"); ok {
-				s.AllowMultiUserAssignment = tools.Bool(value.(bool))
-			}
+	if value, ok := d.GetOkExists("name"); ok {
+		s.Name = value.(string)
+	}
+	if value, ok := d.GetOkExists("slug"); ok {
+		s.Slug = value.(string)
+	}
+	if value, ok := d.GetOkExists("summary"); ok {
+		s.Summary = value.(string)
+	}
+	if value, ok := d.GetOkExists("description"); ok {
+		s.Description = value.(string)
+	}
+	if value, ok := d.GetOkExists("position"); ok {
+		s.Position = value.(int)
+	}
+	if value, ok := d.GetOkExists("optional"); ok {
+		s.Optional = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("enabled"); ok {
+		s.Enabled = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("allow_multi_user_assignment"); ok {
+		s.AllowMultiUserAssignment = tools.Bool(value.(bool))
+	}
 
 	res, err := c.CreateIncidentRole(s)
 	if err != nil {
@@ -172,13 +156,13 @@ func resourceIncidentRoleRead(ctx context.Context, d *schema.ResourceData, meta 
 	}
 
 	d.Set("name", item.Name)
-  d.Set("slug", item.Slug)
-  d.Set("summary", item.Summary)
-  d.Set("description", item.Description)
-  d.Set("position", item.Position)
-  d.Set("optional", item.Optional)
-  d.Set("enabled", item.Enabled)
-  d.Set("allow_multi_user_assignment", item.AllowMultiUserAssignment)
+	d.Set("slug", item.Slug)
+	d.Set("summary", item.Summary)
+	d.Set("description", item.Description)
+	d.Set("position", item.Position)
+	d.Set("optional", item.Optional)
+	d.Set("enabled", item.Enabled)
+	d.Set("allow_multi_user_assignment", item.AllowMultiUserAssignment)
 
 	return nil
 }
@@ -189,30 +173,30 @@ func resourceIncidentRoleUpdate(ctx context.Context, d *schema.ResourceData, met
 
 	s := &client.IncidentRole{}
 
-	  if d.HasChange("name") {
-				s.Name = d.Get("name").(string)
-			}
-    if d.HasChange("slug") {
-				s.Slug = d.Get("slug").(string)
-			}
-    if d.HasChange("summary") {
-				s.Summary = d.Get("summary").(string)
-			}
-    if d.HasChange("description") {
-				s.Description = d.Get("description").(string)
-			}
-    if d.HasChange("position") {
-				s.Position = d.Get("position").(int)
-			}
-    if d.HasChange("optional") {
-				s.Optional = tools.Bool(d.Get("optional").(bool))
-			}
-    if d.HasChange("enabled") {
-				s.Enabled = tools.Bool(d.Get("enabled").(bool))
-			}
-    if d.HasChange("allow_multi_user_assignment") {
-				s.AllowMultiUserAssignment = tools.Bool(d.Get("allow_multi_user_assignment").(bool))
-			}
+	if d.HasChange("name") {
+		s.Name = d.Get("name").(string)
+	}
+	if d.HasChange("slug") {
+		s.Slug = d.Get("slug").(string)
+	}
+	if d.HasChange("summary") {
+		s.Summary = d.Get("summary").(string)
+	}
+	if d.HasChange("description") {
+		s.Description = d.Get("description").(string)
+	}
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
+	}
+	if d.HasChange("optional") {
+		s.Optional = tools.Bool(d.Get("optional").(bool))
+	}
+	if d.HasChange("enabled") {
+		s.Enabled = tools.Bool(d.Get("enabled").(bool))
+	}
+	if d.HasChange("allow_multi_user_assignment") {
+		s.AllowMultiUserAssignment = tools.Bool(d.Get("allow_multi_user_assignment").(bool))
+	}
 
 	_, err := c.UpdateIncidentRole(d.Id(), s)
 	if err != nil {

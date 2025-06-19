@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-	
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
@@ -17,67 +17,57 @@ import (
 func resourceFormFieldOption() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceFormFieldOptionCreate,
-		ReadContext: resourceFormFieldOptionRead,
+		ReadContext:   resourceFormFieldOptionRead,
 		UpdateContext: resourceFormFieldOptionUpdate,
 		DeleteContext: resourceFormFieldOptionDelete,
-		Importer: &schema.ResourceImporter {
+		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema {
-			
-			"form_field_id": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: true,
+		Schema: map[string]*schema.Schema{
+
+			"form_field_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    true,
 				Description: "The ID of the parent custom field",
-				
 			},
-			
 
-			"value": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+			"value": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The value of the form_field_option",
-				
 			},
-			
 
-			"color": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"color": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The hex color of the form_field_option",
-				
 			},
-			
 
-			"default": &schema.Schema {
-				Type: schema.TypeBool,
-				Computed: true,
-				Required: false,
-				Optional: true,
+			"default": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
 				Description: "Value must be one of true or false",
-				
 			},
-			
 
-		"position": &schema.Schema {
-			Type: schema.TypeInt,
-			Computed: true,
-			Required: false,
-			Optional: true,
-			ForceNew: false,
-			Description: "The position of the form_field_option",
-			
-		},
-		
+			"position": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The position of the form_field_option",
+			},
 		},
 	}
 }
@@ -89,21 +79,21 @@ func resourceFormFieldOptionCreate(ctx context.Context, d *schema.ResourceData, 
 
 	s := &client.FormFieldOption{}
 
-	  if value, ok := d.GetOkExists("form_field_id"); ok {
-				s.FormFieldId = value.(string)
-			}
-    if value, ok := d.GetOkExists("value"); ok {
-				s.Value = value.(string)
-			}
-    if value, ok := d.GetOkExists("color"); ok {
-				s.Color = value.(string)
-			}
-    if value, ok := d.GetOkExists("default"); ok {
-				s.Default = tools.Bool(value.(bool))
-			}
-    if value, ok := d.GetOkExists("position"); ok {
-				s.Position = value.(int)
-			}
+	if value, ok := d.GetOkExists("form_field_id"); ok {
+		s.FormFieldId = value.(string)
+	}
+	if value, ok := d.GetOkExists("value"); ok {
+		s.Value = value.(string)
+	}
+	if value, ok := d.GetOkExists("color"); ok {
+		s.Color = value.(string)
+	}
+	if value, ok := d.GetOkExists("default"); ok {
+		s.Default = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("position"); ok {
+		s.Position = value.(int)
+	}
 
 	res, err := c.CreateFormFieldOption(s)
 	if err != nil {
@@ -134,10 +124,10 @@ func resourceFormFieldOptionRead(ctx context.Context, d *schema.ResourceData, me
 	}
 
 	d.Set("form_field_id", item.FormFieldId)
-  d.Set("value", item.Value)
-  d.Set("color", item.Color)
-  d.Set("default", item.Default)
-  d.Set("position", item.Position)
+	d.Set("value", item.Value)
+	d.Set("color", item.Color)
+	d.Set("default", item.Default)
+	d.Set("position", item.Position)
 
 	return nil
 }
@@ -148,21 +138,21 @@ func resourceFormFieldOptionUpdate(ctx context.Context, d *schema.ResourceData, 
 
 	s := &client.FormFieldOption{}
 
-	  if d.HasChange("form_field_id") {
-				s.FormFieldId = d.Get("form_field_id").(string)
-			}
-    if d.HasChange("value") {
-				s.Value = d.Get("value").(string)
-			}
-    if d.HasChange("color") {
-				s.Color = d.Get("color").(string)
-			}
-    if d.HasChange("default") {
-				s.Default = tools.Bool(d.Get("default").(bool))
-			}
-    if d.HasChange("position") {
-				s.Position = d.Get("position").(int)
-			}
+	if d.HasChange("form_field_id") {
+		s.FormFieldId = d.Get("form_field_id").(string)
+	}
+	if d.HasChange("value") {
+		s.Value = d.Get("value").(string)
+	}
+	if d.HasChange("color") {
+		s.Color = d.Get("color").(string)
+	}
+	if d.HasChange("default") {
+		s.Default = tools.Bool(d.Get("default").(bool))
+	}
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
+	}
 
 	_, err := c.UpdateFormFieldOption(d.Id(), s)
 	if err != nil {

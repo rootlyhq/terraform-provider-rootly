@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-	
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
@@ -17,263 +17,219 @@ import (
 func resourceEscalationPath() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceEscalationPathCreate,
-		ReadContext: resourceEscalationPathRead,
+		ReadContext:   resourceEscalationPathRead,
 		UpdateContext: resourceEscalationPathUpdate,
 		DeleteContext: resourceEscalationPathDelete,
-		Importer: &schema.ResourceImporter {
+		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema {
-			
-			"name": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+		Schema: map[string]*schema.Schema{
+
+			"name": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The name of the escalation path",
-				
 			},
-			
 
-			"default": &schema.Schema {
-				Type: schema.TypeBool,
-				Computed: true,
-				Required: false,
-				Optional: true,
+			"default": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
 				Description: "Whether this escalation path is the default path. Value must be one of true or false",
-				
 			},
-			
 
-			"notification_type": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"notification_type": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "Notification rule type",
-				
 			},
-			
 
-			"escalation_policy_id": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: true,
+			"escalation_policy_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    true,
 				Description: "The ID of the escalation policy",
-				
 			},
-			
 
-			"match_mode": &schema.Schema {
-				Type: schema.TypeString,
-				Default: "match-all-rules",
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"match_mode": &schema.Schema{
+				Type:        schema.TypeString,
+				Default:     "match-all-rules",
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "How path rules are matched.. Value must be one of `match-all-rules`, `match-any-rule`.",
-				
 			},
-			
 
-		"position": &schema.Schema {
-			Type: schema.TypeInt,
-			Computed: true,
-			Required: false,
-			Optional: true,
-			ForceNew: false,
-			Description: "The position of this path in the paths for this EP.",
-			
-		},
-		
+			"position": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The position of this path in the paths for this EP.",
+			},
 
-			"repeat": &schema.Schema {
-				Type: schema.TypeBool,
-				Computed: true,
-				Required: false,
-				Optional: true,
+			"repeat": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
 				Description: "Whether this path should be repeated until someone acknowledges the alert. Value must be one of true or false",
-				
 			},
-			
 
-		"repeat_count": &schema.Schema {
-			Type: schema.TypeInt,
-			Computed: true,
-			Required: false,
-			Optional: true,
-			ForceNew: false,
-			Description: "The number of times this path will be executed until someone acknowledges the alert",
-			
-		},
-		
-
-		"initial_delay": &schema.Schema {
-			Type: schema.TypeInt,
-			Computed: true,
-			Required: false,
-			Optional: true,
-			ForceNew: false,
-			Description: "Initial delay for escalation path in minutes. Maximum 1 week (10080).",
-			
-		},
-		
-
-				"rules": &schema.Schema {
-					Type: schema.TypeList,
-					Computed: true,
-					Required: false,
-					Optional: true,
-					Description: "Escalation path rules",
-					DiffSuppressFunc: tools.EqualIgnoringOrder,
-					Elem: &schema.Resource {
-						Schema: map[string]*schema.Schema {
-              
-			"rule_type": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "The type of the escalation path rule. Value must be one of `alert_urgency`, `working_hour`, `json_path`.",
-				
+			"repeat_count": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The number of times this path will be executed until someone acknowledges the alert",
 			},
-			
 
-				"urgency_ids": &schema.Schema {
-					Type: schema.TypeList,
-					Elem: &schema.Schema {
-						Type: schema.TypeString,
-					},
-					DiffSuppressFunc: tools.EqualIgnoringOrder,
-					Computed: true,
-					Required: false,
-					Optional: true,
-					Description: "Alert urgency ids for which this escalation path should be used",
-					
-				},
-				
-
-			"within_working_hour": &schema.Schema {
-				Type: schema.TypeBool,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				Description: "Whether the escalation path should be used within working hours. Value must be one of true or false",
-				
+			"initial_delay": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Initial delay for escalation path in minutes. Maximum 1 week (10080).",
 			},
-			
 
-			"json_path": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "JSON path to extract value from payload",
-				
-			},
-			
+			"rules": &schema.Schema{
+				Type:             schema.TypeList,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Escalation path rules",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
 
-			"operator": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "How JSON path value should be matched. Value must be one of `is`, `is_not`, `contains`, `does_not_contain`.",
-				
-			},
-			
+						"rule_type": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "The type of the escalation path rule. Value must be one of `alert_urgency`, `working_hour`, `json_path`.",
+						},
 
-			"value": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Value with which JSON path value should be matched",
-				
-			},
-			
+						"urgency_ids": &schema.Schema{
+							Type: schema.TypeList,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "Alert urgency ids for which this escalation path should be used",
+						},
+
+						"within_working_hour": &schema.Schema{
+							Type:        schema.TypeBool,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Description: "Whether the escalation path should be used within working hours. Value must be one of true or false",
+						},
+
+						"json_path": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "JSON path to extract value from payload",
+						},
+
+						"operator": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "How JSON path value should be matched. Value must be one of `is`, `is_not`, `contains`, `does_not_contain`.",
+						},
+
+						"value": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Value with which JSON path value should be matched",
 						},
 					},
-					
 				},
-				
+			},
 
-			"time_restriction_time_zone": &schema.Schema {
-				Type: schema.TypeString,
-				Default: "International Date Line West",
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"time_restriction_time_zone": &schema.Schema{
+				Type:        schema.TypeString,
+				Default:     "International Date Line West",
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "Time zone used for time restrictions.. Value must be one of `International Date Line West`, `Etc/GMT+12`, `American Samoa`, `Pacific/Pago_Pago`, `Midway Island`, `Pacific/Midway`, `Hawaii`, `Pacific/Honolulu`, `Alaska`, `America/Juneau`, `Pacific Time (US & Canada)`, `America/Los_Angeles`, `Tijuana`, `America/Tijuana`, `Arizona`, `America/Phoenix`, `Mazatlan`, `America/Mazatlan`, `Mountain Time (US & Canada)`, `America/Denver`, `Central America`, `America/Guatemala`, `Central Time (US & Canada)`, `America/Chicago`, `Chihuahua`, `America/Chihuahua`, `Guadalajara`, `America/Mexico_City`, `Mexico City`, `America/Mexico_City`, `Monterrey`, `America/Monterrey`, `Saskatchewan`, `America/Regina`, `Bogota`, `America/Bogota`, `Eastern Time (US & Canada)`, `America/New_York`, `Indiana (East)`, `America/Indiana/Indianapolis`, `Lima`, `America/Lima`, `Quito`, `America/Lima`, `Atlantic Time (Canada)`, `America/Halifax`, `Caracas`, `America/Caracas`, `Georgetown`, `America/Guyana`, `La Paz`, `America/La_Paz`, `Puerto Rico`, `America/Puerto_Rico`, `Santiago`, `America/Santiago`, `Newfoundland`, `America/St_Johns`, `Brasilia`, `America/Sao_Paulo`, `Buenos Aires`, `America/Argentina/Buenos_Aires`, `Montevideo`, `America/Montevideo`, `Greenland`, `America/Godthab`, `Mid-Atlantic`, `Atlantic/South_Georgia`, `Azores`, `Atlantic/Azores`, `Cape Verde Is.`, `Atlantic/Cape_Verde`, `Edinburgh`, `Europe/London`, `Lisbon`, `Europe/Lisbon`, `London`, `Europe/London`, `Monrovia`, `Africa/Monrovia`, `UTC`, `Etc/UTC`, `Amsterdam`, `Europe/Amsterdam`, `Belgrade`, `Europe/Belgrade`, `Berlin`, `Europe/Berlin`, `Bern`, `Europe/Zurich`, `Bratislava`, `Europe/Bratislava`, `Brussels`, `Europe/Brussels`, `Budapest`, `Europe/Budapest`, `Casablanca`, `Africa/Casablanca`, `Copenhagen`, `Europe/Copenhagen`, `Dublin`, `Europe/Dublin`, `Ljubljana`, `Europe/Ljubljana`, `Madrid`, `Europe/Madrid`, `Paris`, `Europe/Paris`, `Prague`, `Europe/Prague`, `Rome`, `Europe/Rome`, `Sarajevo`, `Europe/Sarajevo`, `Skopje`, `Europe/Skopje`, `Stockholm`, `Europe/Stockholm`, `Vienna`, `Europe/Vienna`, `Warsaw`, `Europe/Warsaw`, `West Central Africa`, `Africa/Algiers`, `Zagreb`, `Europe/Zagreb`, `Zurich`, `Europe/Zurich`, `Athens`, `Europe/Athens`, `Bucharest`, `Europe/Bucharest`, `Cairo`, `Africa/Cairo`, `Harare`, `Africa/Harare`, `Helsinki`, `Europe/Helsinki`, `Jerusalem`, `Asia/Jerusalem`, `Kaliningrad`, `Europe/Kaliningrad`, `Kyiv`, `Europe/Kiev`, `Pretoria`, `Africa/Johannesburg`, `Riga`, `Europe/Riga`, `Sofia`, `Europe/Sofia`, `Tallinn`, `Europe/Tallinn`, `Vilnius`, `Europe/Vilnius`, `Baghdad`, `Asia/Baghdad`, `Istanbul`, `Europe/Istanbul`, `Kuwait`, `Asia/Kuwait`, `Minsk`, `Europe/Minsk`, `Moscow`, `Europe/Moscow`, `Nairobi`, `Africa/Nairobi`, `Riyadh`, `Asia/Riyadh`, `St. Petersburg`, `Europe/Moscow`, `Volgograd`, `Europe/Volgograd`, `Tehran`, `Asia/Tehran`, `Abu Dhabi`, `Asia/Muscat`, `Baku`, `Asia/Baku`, `Muscat`, `Asia/Muscat`, `Samara`, `Europe/Samara`, `Tbilisi`, `Asia/Tbilisi`, `Yerevan`, `Asia/Yerevan`, `Kabul`, `Asia/Kabul`, `Almaty`, `Asia/Almaty`, `Astana`, `Asia/Almaty`, `Ekaterinburg`, `Asia/Yekaterinburg`, `Islamabad`, `Asia/Karachi`, `Karachi`, `Asia/Karachi`, `Tashkent`, `Asia/Tashkent`, `Chennai`, `Asia/Kolkata`, `Kolkata`, `Asia/Kolkata`, `Mumbai`, `Asia/Kolkata`, `New Delhi`, `Asia/Kolkata`, `Sri Jayawardenepura`, `Asia/Colombo`, `Kathmandu`, `Asia/Kathmandu`, `Dhaka`, `Asia/Dhaka`, `Urumqi`, `Asia/Urumqi`, `Rangoon`, `Asia/Rangoon`, `Bangkok`, `Asia/Bangkok`, `Hanoi`, `Asia/Bangkok`, `Jakarta`, `Asia/Jakarta`, `Krasnoyarsk`, `Asia/Krasnoyarsk`, `Novosibirsk`, `Asia/Novosibirsk`, `Beijing`, `Asia/Shanghai`, `Chongqing`, `Asia/Chongqing`, `Hong Kong`, `Asia/Hong_Kong`, `Irkutsk`, `Asia/Irkutsk`, `Kuala Lumpur`, `Asia/Kuala_Lumpur`, `Perth`, `Australia/Perth`, `Singapore`, `Asia/Singapore`, `Taipei`, `Asia/Taipei`, `Ulaanbaatar`, `Asia/Ulaanbaatar`, `Osaka`, `Asia/Tokyo`, `Sapporo`, `Asia/Tokyo`, `Seoul`, `Asia/Seoul`, `Tokyo`, `Asia/Tokyo`, `Yakutsk`, `Asia/Yakutsk`, `Adelaide`, `Australia/Adelaide`, `Darwin`, `Australia/Darwin`, `Brisbane`, `Australia/Brisbane`, `Canberra`, `Australia/Canberra`, `Guam`, `Pacific/Guam`, `Hobart`, `Australia/Hobart`, `Melbourne`, `Australia/Melbourne`, `Port Moresby`, `Pacific/Port_Moresby`, `Sydney`, `Australia/Sydney`, `Vladivostok`, `Asia/Vladivostok`, `Magadan`, `Asia/Magadan`, `New Caledonia`, `Pacific/Noumea`, `Solomon Is.`, `Pacific/Guadalcanal`, `Srednekolymsk`, `Asia/Srednekolymsk`, `Auckland`, `Pacific/Auckland`, `Fiji`, `Pacific/Fiji`, `Kamchatka`, `Asia/Kamchatka`, `Marshall Is.`, `Pacific/Majuro`, `Wellington`, `Pacific/Auckland`, `Chatham Is.`, `Pacific/Chatham`, `Nuku'alofa`, `Pacific/Tongatapu`, `Samoa`, `Pacific/Apia`, `Tokelau Is.`, `Pacific/Fakaofo`.",
-				
 			},
-			
 
-				"time_restrictions": &schema.Schema {
-					Type: schema.TypeList,
-					Computed: true,
-					Required: false,
-					Optional: true,
-					Description: "If time restrictions are set, alerts will follow this path when they arrive within the specified time ranges and meet the rules.",
-					DiffSuppressFunc: tools.EqualIgnoringOrder,
-					Elem: &schema.Resource {
-						Schema: map[string]*schema.Schema {
-              
-			"start_day": &schema.Schema {
-				Type: schema.TypeString,
-				Default: "monday",
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Value must be one of `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`.",
-				
-			},
-			
+			"time_restrictions": &schema.Schema{
+				Type:             schema.TypeList,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "If time restrictions are set, alerts will follow this path when they arrive within the specified time ranges and meet the rules.",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
 
-			"start_time": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Formatted as HH:MM",
-				
-			},
-			
+						"start_day": &schema.Schema{
+							Type:        schema.TypeString,
+							Default:     "monday",
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Value must be one of `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`.",
+						},
 
-			"end_day": &schema.Schema {
-				Type: schema.TypeString,
-				Default: "monday",
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Value must be one of `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`.",
-				
-			},
-			
+						"start_time": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Formatted as HH:MM",
+						},
 
-			"end_time": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Formatted as HH:MM",
-				
-			},
-			
+						"end_day": &schema.Schema{
+							Type:        schema.TypeString,
+							Default:     "monday",
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Value must be one of `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`.",
+						},
+
+						"end_time": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Formatted as HH:MM",
 						},
 					},
-					
 				},
-				
+			},
 		},
 	}
 }
@@ -285,42 +241,42 @@ func resourceEscalationPathCreate(ctx context.Context, d *schema.ResourceData, m
 
 	s := &client.EscalationPath{}
 
-	  if value, ok := d.GetOkExists("name"); ok {
-				s.Name = value.(string)
-			}
-    if value, ok := d.GetOkExists("default"); ok {
-				s.Default = tools.Bool(value.(bool))
-			}
-    if value, ok := d.GetOkExists("notification_type"); ok {
-				s.NotificationType = value.(string)
-			}
-    if value, ok := d.GetOkExists("escalation_policy_id"); ok {
-				s.EscalationPolicyId = value.(string)
-			}
-    if value, ok := d.GetOkExists("match_mode"); ok {
-				s.MatchMode = value.(string)
-			}
-    if value, ok := d.GetOkExists("position"); ok {
-				s.Position = value.(int)
-			}
-    if value, ok := d.GetOkExists("repeat"); ok {
-				s.Repeat = tools.Bool(value.(bool))
-			}
-    if value, ok := d.GetOkExists("repeat_count"); ok {
-				s.RepeatCount = value.(int)
-			}
-    if value, ok := d.GetOkExists("initial_delay"); ok {
-				s.InitialDelay = value.(int)
-			}
-    if value, ok := d.GetOkExists("rules"); ok {
-				s.Rules = value.([]interface{})
-			}
-    if value, ok := d.GetOkExists("time_restriction_time_zone"); ok {
-				s.TimeRestrictionTimeZone = value.(string)
-			}
-    if value, ok := d.GetOkExists("time_restrictions"); ok {
-				s.TimeRestrictions = value.([]interface{})
-			}
+	if value, ok := d.GetOkExists("name"); ok {
+		s.Name = value.(string)
+	}
+	if value, ok := d.GetOkExists("default"); ok {
+		s.Default = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("notification_type"); ok {
+		s.NotificationType = value.(string)
+	}
+	if value, ok := d.GetOkExists("escalation_policy_id"); ok {
+		s.EscalationPolicyId = value.(string)
+	}
+	if value, ok := d.GetOkExists("match_mode"); ok {
+		s.MatchMode = value.(string)
+	}
+	if value, ok := d.GetOkExists("position"); ok {
+		s.Position = value.(int)
+	}
+	if value, ok := d.GetOkExists("repeat"); ok {
+		s.Repeat = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("repeat_count"); ok {
+		s.RepeatCount = value.(int)
+	}
+	if value, ok := d.GetOkExists("initial_delay"); ok {
+		s.InitialDelay = value.(int)
+	}
+	if value, ok := d.GetOkExists("rules"); ok {
+		s.Rules = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("time_restriction_time_zone"); ok {
+		s.TimeRestrictionTimeZone = value.(string)
+	}
+	if value, ok := d.GetOkExists("time_restrictions"); ok {
+		s.TimeRestrictions = value.([]interface{})
+	}
 
 	res, err := c.CreateEscalationPath(s)
 	if err != nil {
@@ -351,61 +307,60 @@ func resourceEscalationPathRead(ctx context.Context, d *schema.ResourceData, met
 	}
 
 	d.Set("name", item.Name)
-  d.Set("default", item.Default)
-  d.Set("notification_type", item.NotificationType)
-  d.Set("escalation_policy_id", item.EscalationPolicyId)
-  d.Set("match_mode", item.MatchMode)
-  d.Set("position", item.Position)
-  d.Set("repeat", item.Repeat)
-  d.Set("repeat_count", item.RepeatCount)
-  d.Set("initial_delay", item.InitialDelay)
-  
-          if item.Rules != nil {
-              processedItems := make([]map[string]interface{}, 0)
+	d.Set("default", item.Default)
+	d.Set("notification_type", item.NotificationType)
+	d.Set("escalation_policy_id", item.EscalationPolicyId)
+	d.Set("match_mode", item.MatchMode)
+	d.Set("position", item.Position)
+	d.Set("repeat", item.Repeat)
+	d.Set("repeat_count", item.RepeatCount)
+	d.Set("initial_delay", item.InitialDelay)
 
-              for _, c := range item.Rules {
-                  if rawItem, ok := c.(map[string]interface{}); ok {
-                      // Create a new map with only the fields defined in the schema
-                      processedItem := map[string]interface{}{
-                          "rule_type": rawItem["rule_type"],
-"urgency_ids": rawItem["urgency_ids"],
-"within_working_hour": rawItem["within_working_hour"],
-"json_path": rawItem["json_path"],
-"operator": rawItem["operator"],
-"value": rawItem["value"],
-                      }
-                      processedItems = append(processedItems, processedItem)
-                  }
-              }
+	if item.Rules != nil {
+		processedItems := make([]map[string]interface{}, 0)
 
-              d.Set("rules", processedItems)
-          } else {
-              d.Set("rules", nil)
-          }
-        
-  d.Set("time_restriction_time_zone", item.TimeRestrictionTimeZone)
-  
-          if item.TimeRestrictions != nil {
-              processedItems := make([]map[string]interface{}, 0)
+		for _, c := range item.Rules {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processedItem := map[string]interface{}{
+					"rule_type":           rawItem["rule_type"],
+					"urgency_ids":         rawItem["urgency_ids"],
+					"within_working_hour": rawItem["within_working_hour"],
+					"json_path":           rawItem["json_path"],
+					"operator":            rawItem["operator"],
+					"value":               rawItem["value"],
+				}
+				processedItems = append(processedItems, processedItem)
+			}
+		}
 
-              for _, c := range item.TimeRestrictions {
-                  if rawItem, ok := c.(map[string]interface{}); ok {
-                      // Create a new map with only the fields defined in the schema
-                      processedItem := map[string]interface{}{
-                          "start_day": rawItem["start_day"],
-"start_time": rawItem["start_time"],
-"end_day": rawItem["end_day"],
-"end_time": rawItem["end_time"],
-                      }
-                      processedItems = append(processedItems, processedItem)
-                  }
-              }
+		d.Set("rules", processedItems)
+	} else {
+		d.Set("rules", nil)
+	}
 
-              d.Set("time_restrictions", processedItems)
-          } else {
-              d.Set("time_restrictions", nil)
-          }
-        
+	d.Set("time_restriction_time_zone", item.TimeRestrictionTimeZone)
+
+	if item.TimeRestrictions != nil {
+		processedItems := make([]map[string]interface{}, 0)
+
+		for _, c := range item.TimeRestrictions {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processedItem := map[string]interface{}{
+					"start_day":  rawItem["start_day"],
+					"start_time": rawItem["start_time"],
+					"end_day":    rawItem["end_day"],
+					"end_time":   rawItem["end_time"],
+				}
+				processedItems = append(processedItems, processedItem)
+			}
+		}
+
+		d.Set("time_restrictions", processedItems)
+	} else {
+		d.Set("time_restrictions", nil)
+	}
 
 	return nil
 }
@@ -416,42 +371,42 @@ func resourceEscalationPathUpdate(ctx context.Context, d *schema.ResourceData, m
 
 	s := &client.EscalationPath{}
 
-	  if d.HasChange("name") {
-				s.Name = d.Get("name").(string)
-			}
-    if d.HasChange("default") {
-				s.Default = tools.Bool(d.Get("default").(bool))
-			}
-    if d.HasChange("notification_type") {
-				s.NotificationType = d.Get("notification_type").(string)
-			}
-    if d.HasChange("escalation_policy_id") {
-				s.EscalationPolicyId = d.Get("escalation_policy_id").(string)
-			}
-    if d.HasChange("match_mode") {
-				s.MatchMode = d.Get("match_mode").(string)
-			}
-    if d.HasChange("position") {
-				s.Position = d.Get("position").(int)
-			}
-    if d.HasChange("repeat") {
-				s.Repeat = tools.Bool(d.Get("repeat").(bool))
-			}
-    if d.HasChange("repeat_count") {
-				s.RepeatCount = d.Get("repeat_count").(int)
-			}
-    if d.HasChange("initial_delay") {
-				s.InitialDelay = d.Get("initial_delay").(int)
-			}
-    if d.HasChange("rules") {
-				s.Rules = d.Get("rules").([]interface{})
-			}
-    if d.HasChange("time_restriction_time_zone") {
-				s.TimeRestrictionTimeZone = d.Get("time_restriction_time_zone").(string)
-			}
-    if d.HasChange("time_restrictions") {
-				s.TimeRestrictions = d.Get("time_restrictions").([]interface{})
-			}
+	if d.HasChange("name") {
+		s.Name = d.Get("name").(string)
+	}
+	if d.HasChange("default") {
+		s.Default = tools.Bool(d.Get("default").(bool))
+	}
+	if d.HasChange("notification_type") {
+		s.NotificationType = d.Get("notification_type").(string)
+	}
+	if d.HasChange("escalation_policy_id") {
+		s.EscalationPolicyId = d.Get("escalation_policy_id").(string)
+	}
+	if d.HasChange("match_mode") {
+		s.MatchMode = d.Get("match_mode").(string)
+	}
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
+	}
+	if d.HasChange("repeat") {
+		s.Repeat = tools.Bool(d.Get("repeat").(bool))
+	}
+	if d.HasChange("repeat_count") {
+		s.RepeatCount = d.Get("repeat_count").(int)
+	}
+	if d.HasChange("initial_delay") {
+		s.InitialDelay = d.Get("initial_delay").(int)
+	}
+	if d.HasChange("rules") {
+		s.Rules = d.Get("rules").([]interface{})
+	}
+	if d.HasChange("time_restriction_time_zone") {
+		s.TimeRestrictionTimeZone = d.Get("time_restriction_time_zone").(string)
+	}
+	if d.HasChange("time_restrictions") {
+		s.TimeRestrictions = d.Get("time_restrictions").([]interface{})
+	}
 
 	_, err := c.UpdateEscalationPath(d.Id(), s)
 	if err != nil {

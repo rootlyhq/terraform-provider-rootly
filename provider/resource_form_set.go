@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-	
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
@@ -17,59 +17,51 @@ import (
 func resourceFormSet() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceFormSetCreate,
-		ReadContext: resourceFormSetRead,
+		ReadContext:   resourceFormSetRead,
 		UpdateContext: resourceFormSetUpdate,
 		DeleteContext: resourceFormSetDelete,
-		Importer: &schema.ResourceImporter {
+		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema {
-			
-			"name": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+		Schema: map[string]*schema.Schema{
+
+			"name": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The name of the form set",
-				
 			},
-			
 
-			"slug": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"slug": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The slug of the form set",
-				
 			},
-			
 
-			"is_default": &schema.Schema {
-				Type: schema.TypeBool,
-				Computed: true,
-				Required: false,
-				Optional: true,
+			"is_default": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
 				Description: "Whether the form set is default. Value must be one of true or false",
-				
 			},
-			
 
-				"forms": &schema.Schema {
-					Type: schema.TypeList,
-					Elem: &schema.Schema {
-						Type: schema.TypeString,
-					},
-					DiffSuppressFunc: tools.EqualIgnoringOrder,
-					Computed: false,
-					Required: true,
-					Optional: false,
-					Description: "The forms included in the form set. Add custom forms using the custom form's `slug` field. Or choose a built-in form: `web_new_incident_form`, `web_update_incident_form`, `web_incident_post_mortem_form`, `web_incident_mitigation_form`, `web_incident_resolution_form`, `web_incident_cancellation_form`, `web_scheduled_incident_form`, `web_update_scheduled_incident_form`, `slack_new_incident_form`, `slack_update_incident_form`, `slack_update_incident_status_form`, `slack_incident_mitigation_form`, `slack_incident_resolution_form`, `slack_incident_cancellation_form`, `slack_scheduled_incident_form`, `slack_update_scheduled_incident_form`",
-					
+			"forms": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
 				},
-				
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         false,
+				Required:         true,
+				Optional:         false,
+				Description:      "The forms included in the form set. Add custom forms using the custom form's `slug` field. Or choose a built-in form: `web_new_incident_form`, `web_update_incident_form`, `web_incident_post_mortem_form`, `web_incident_mitigation_form`, `web_incident_resolution_form`, `web_incident_cancellation_form`, `web_scheduled_incident_form`, `web_update_scheduled_incident_form`, `slack_new_incident_form`, `slack_update_incident_form`, `slack_update_incident_status_form`, `slack_incident_mitigation_form`, `slack_incident_resolution_form`, `slack_incident_cancellation_form`, `slack_scheduled_incident_form`, `slack_update_scheduled_incident_form`",
+			},
 		},
 	}
 }
@@ -81,18 +73,18 @@ func resourceFormSetCreate(ctx context.Context, d *schema.ResourceData, meta int
 
 	s := &client.FormSet{}
 
-	  if value, ok := d.GetOkExists("name"); ok {
-				s.Name = value.(string)
-			}
-    if value, ok := d.GetOkExists("slug"); ok {
-				s.Slug = value.(string)
-			}
-    if value, ok := d.GetOkExists("is_default"); ok {
-				s.IsDefault = tools.Bool(value.(bool))
-			}
-    if value, ok := d.GetOkExists("forms"); ok {
-				s.Forms = value.([]interface{})
-			}
+	if value, ok := d.GetOkExists("name"); ok {
+		s.Name = value.(string)
+	}
+	if value, ok := d.GetOkExists("slug"); ok {
+		s.Slug = value.(string)
+	}
+	if value, ok := d.GetOkExists("is_default"); ok {
+		s.IsDefault = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("forms"); ok {
+		s.Forms = value.([]interface{})
+	}
 
 	res, err := c.CreateFormSet(s)
 	if err != nil {
@@ -123,9 +115,9 @@ func resourceFormSetRead(ctx context.Context, d *schema.ResourceData, meta inter
 	}
 
 	d.Set("name", item.Name)
-  d.Set("slug", item.Slug)
-  d.Set("is_default", item.IsDefault)
-  d.Set("forms", item.Forms)
+	d.Set("slug", item.Slug)
+	d.Set("is_default", item.IsDefault)
+	d.Set("forms", item.Forms)
 
 	return nil
 }
@@ -136,18 +128,18 @@ func resourceFormSetUpdate(ctx context.Context, d *schema.ResourceData, meta int
 
 	s := &client.FormSet{}
 
-	  if d.HasChange("name") {
-				s.Name = d.Get("name").(string)
-			}
-    if d.HasChange("slug") {
-				s.Slug = d.Get("slug").(string)
-			}
-    if d.HasChange("is_default") {
-				s.IsDefault = tools.Bool(d.Get("is_default").(bool))
-			}
-    if d.HasChange("forms") {
-				s.Forms = d.Get("forms").([]interface{})
-			}
+	if d.HasChange("name") {
+		s.Name = d.Get("name").(string)
+	}
+	if d.HasChange("slug") {
+		s.Slug = d.Get("slug").(string)
+	}
+	if d.HasChange("is_default") {
+		s.IsDefault = tools.Bool(d.Get("is_default").(bool))
+	}
+	if d.HasChange("forms") {
+		s.Forms = d.Get("forms").([]interface{})
+	}
 
 	_, err := c.UpdateFormSet(d.Id(), s)
 	if err != nil {

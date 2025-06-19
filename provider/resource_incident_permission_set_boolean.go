@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-	
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
@@ -17,53 +17,45 @@ import (
 func resourceIncidentPermissionSetBoolean() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceIncidentPermissionSetBooleanCreate,
-		ReadContext: resourceIncidentPermissionSetBooleanRead,
+		ReadContext:   resourceIncidentPermissionSetBooleanRead,
 		UpdateContext: resourceIncidentPermissionSetBooleanUpdate,
 		DeleteContext: resourceIncidentPermissionSetBooleanDelete,
-		Importer: &schema.ResourceImporter {
+		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema {
-			
-			"incident_permission_set_id": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: true,
+		Schema: map[string]*schema.Schema{
+
+			"incident_permission_set_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    true,
 				Description: "",
-				
 			},
-			
 
-			"kind": &schema.Schema {
-				Type: schema.TypeString,
-				Default: "publish_to_status_page",
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"kind": &schema.Schema{
+				Type:        schema.TypeString,
+				Default:     "publish_to_status_page",
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "Value must be one of `publish_to_status_page`, `assign_incident_roles`, `invite_subscribers`, `update_summary`, `update_timeline`, `trigger_workflows`, `create_communications`, `read_communications`, `update_communications`, `delete_communications`, `send_communications`, `modify_custom_fields`.",
-				
 			},
-			
 
-			"private": &schema.Schema {
-				Type: schema.TypeBool,
-				Computed: true,
-				Required: false,
-				Optional: true,
+			"private": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
 				Description: "Value must be one of true or false",
-				
 			},
-			
 
-				"enabled": &schema.Schema {
-					Type: schema.TypeBool,
-					Default: true,
-					Optional: true,
-					
-				},
-				
+			"enabled": &schema.Schema{
+				Type:     schema.TypeBool,
+				Default:  true,
+				Optional: true,
+			},
 		},
 	}
 }
@@ -75,18 +67,18 @@ func resourceIncidentPermissionSetBooleanCreate(ctx context.Context, d *schema.R
 
 	s := &client.IncidentPermissionSetBoolean{}
 
-	  if value, ok := d.GetOkExists("incident_permission_set_id"); ok {
-				s.IncidentPermissionSetId = value.(string)
-			}
-    if value, ok := d.GetOkExists("kind"); ok {
-				s.Kind = value.(string)
-			}
-    if value, ok := d.GetOkExists("private"); ok {
-				s.Private = tools.Bool(value.(bool))
-			}
-    if value, ok := d.GetOkExists("enabled"); ok {
-				s.Enabled = tools.Bool(value.(bool))
-			}
+	if value, ok := d.GetOkExists("incident_permission_set_id"); ok {
+		s.IncidentPermissionSetId = value.(string)
+	}
+	if value, ok := d.GetOkExists("kind"); ok {
+		s.Kind = value.(string)
+	}
+	if value, ok := d.GetOkExists("private"); ok {
+		s.Private = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("enabled"); ok {
+		s.Enabled = tools.Bool(value.(bool))
+	}
 
 	res, err := c.CreateIncidentPermissionSetBoolean(s)
 	if err != nil {
@@ -117,9 +109,9 @@ func resourceIncidentPermissionSetBooleanRead(ctx context.Context, d *schema.Res
 	}
 
 	d.Set("incident_permission_set_id", item.IncidentPermissionSetId)
-  d.Set("kind", item.Kind)
-  d.Set("private", item.Private)
-  d.Set("enabled", item.Enabled)
+	d.Set("kind", item.Kind)
+	d.Set("private", item.Private)
+	d.Set("enabled", item.Enabled)
 
 	return nil
 }
@@ -130,18 +122,18 @@ func resourceIncidentPermissionSetBooleanUpdate(ctx context.Context, d *schema.R
 
 	s := &client.IncidentPermissionSetBoolean{}
 
-	  if d.HasChange("incident_permission_set_id") {
-				s.IncidentPermissionSetId = d.Get("incident_permission_set_id").(string)
-			}
-    if d.HasChange("kind") {
-				s.Kind = d.Get("kind").(string)
-			}
-    if d.HasChange("private") {
-				s.Private = tools.Bool(d.Get("private").(bool))
-			}
-    if d.HasChange("enabled") {
-				s.Enabled = tools.Bool(d.Get("enabled").(bool))
-			}
+	if d.HasChange("incident_permission_set_id") {
+		s.IncidentPermissionSetId = d.Get("incident_permission_set_id").(string)
+	}
+	if d.HasChange("kind") {
+		s.Kind = d.Get("kind").(string)
+	}
+	if d.HasChange("private") {
+		s.Private = tools.Bool(d.Get("private").(bool))
+	}
+	if d.HasChange("enabled") {
+		s.Enabled = tools.Bool(d.Get("enabled").(bool))
+	}
 
 	_, err := c.UpdateIncidentPermissionSetBoolean(d.Id(), s)
 	if err != nil {

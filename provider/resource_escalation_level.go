@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-	
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
@@ -17,127 +17,107 @@ import (
 func resourceEscalationLevel() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceEscalationLevelCreate,
-		ReadContext: resourceEscalationLevelRead,
+		ReadContext:   resourceEscalationLevelRead,
 		UpdateContext: resourceEscalationLevelUpdate,
 		DeleteContext: resourceEscalationLevelDelete,
-		Importer: &schema.ResourceImporter {
+		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema {
-			
-			"escalation_policy_id": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: true,
+		Schema: map[string]*schema.Schema{
+
+			"escalation_policy_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    true,
 				Description: "The ID of the escalation policy",
-				
 			},
-			
 
-			"escalation_policy_path_id": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"escalation_policy_path_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The ID of the dynamic escalation policy path the level will belong to. If nothing is specified it will add the level to your default path.",
-				
 			},
-			
 
-			"paging_strategy_configuration_strategy": &schema.Schema {
-				Type: schema.TypeString,
-				Default: "default",
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"paging_strategy_configuration_strategy": &schema.Schema{
+				Type:        schema.TypeString,
+				Default:     "default",
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "Value must be one of `default`, `random`, `cycle`, `alert`.",
-				
 			},
-			
 
-			"paging_strategy_configuration_schedule_strategy": &schema.Schema {
-				Type: schema.TypeString,
-				Default: "on_call_only",
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"paging_strategy_configuration_schedule_strategy": &schema.Schema{
+				Type:        schema.TypeString,
+				Default:     "on_call_only",
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "Value must be one of `on_call_only`, `everyone`.",
-				
 			},
-			
 
-		"delay": &schema.Schema {
-			Type: schema.TypeInt,
-			Computed: true,
-			Required: false,
-			Optional: true,
-			ForceNew: false,
-			Description: "Delay before notification targets will be alerted.",
-			
-		},
-		
-
-		"position": &schema.Schema {
-			Type: schema.TypeInt,
-			Computed: false,
-			Required: true,
-			Optional: false,
-			ForceNew: false,
-			Description: "Position of the escalation policy level",
-			
-		},
-		
-
-				"notification_target_params": &schema.Schema {
-					Type: schema.TypeList,
-					Computed: false,
-					Required: true,
-					Optional: false,
-					Description: "Escalation level's notification targets",
-					DiffSuppressFunc: tools.EqualIgnoringOrder,
-					Elem: &schema.Resource {
-						Schema: map[string]*schema.Schema {
-              
-			"id": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "The ID of notification target",
-				
+			"delay": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Delay before notification targets will be alerted.",
 			},
-			
 
-			"type": &schema.Schema {
-				Type: schema.TypeString,
-				Default: "team",
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "The type of the notification target. Value must be one of `team`, `user`, `schedule`, `slack_channel`, `service`.",
-				
+			"position": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
+				Description: "Position of the escalation policy level",
 			},
-			
 
-			"team_members": &schema.Schema {
-				Type: schema.TypeString,
-				Default: "all",
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "For targets with type=team, controls whether to notify admins, all team members, or escalate to team EP.. Value must be one of `all`, `admins`, `escalate`.",
-				
-			},
-			
+			"notification_target_params": &schema.Schema{
+				Type:             schema.TypeList,
+				Computed:         false,
+				Required:         true,
+				Optional:         false,
+				Description:      "Escalation level's notification targets",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+
+						"id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "The ID of notification target",
+						},
+
+						"type": &schema.Schema{
+							Type:        schema.TypeString,
+							Default:     "team",
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "The type of the notification target. Value must be one of `team`, `user`, `schedule`, `slack_channel`, `service`.",
+						},
+
+						"team_members": &schema.Schema{
+							Type:        schema.TypeString,
+							Default:     "all",
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "For targets with type=team, controls whether to notify admins, all team members, or escalate to team EP.. Value must be one of `all`, `admins`, `escalate`.",
 						},
 					},
-					
 				},
-				
+			},
 		},
 	}
 }
@@ -149,27 +129,27 @@ func resourceEscalationLevelCreate(ctx context.Context, d *schema.ResourceData, 
 
 	s := &client.EscalationLevel{}
 
-	  if value, ok := d.GetOkExists("escalation_policy_id"); ok {
-				s.EscalationPolicyId = value.(string)
-			}
-    if value, ok := d.GetOkExists("escalation_policy_path_id"); ok {
-				s.EscalationPolicyPathId = value.(string)
-			}
-    if value, ok := d.GetOkExists("paging_strategy_configuration_strategy"); ok {
-				s.PagingStrategyConfigurationStrategy = value.(string)
-			}
-    if value, ok := d.GetOkExists("paging_strategy_configuration_schedule_strategy"); ok {
-				s.PagingStrategyConfigurationScheduleStrategy = value.(string)
-			}
-    if value, ok := d.GetOkExists("delay"); ok {
-				s.Delay = value.(int)
-			}
-    if value, ok := d.GetOkExists("position"); ok {
-				s.Position = value.(int)
-			}
-    if value, ok := d.GetOkExists("notification_target_params"); ok {
-				s.NotificationTargetParams = value.([]interface{})
-			}
+	if value, ok := d.GetOkExists("escalation_policy_id"); ok {
+		s.EscalationPolicyId = value.(string)
+	}
+	if value, ok := d.GetOkExists("escalation_policy_path_id"); ok {
+		s.EscalationPolicyPathId = value.(string)
+	}
+	if value, ok := d.GetOkExists("paging_strategy_configuration_strategy"); ok {
+		s.PagingStrategyConfigurationStrategy = value.(string)
+	}
+	if value, ok := d.GetOkExists("paging_strategy_configuration_schedule_strategy"); ok {
+		s.PagingStrategyConfigurationScheduleStrategy = value.(string)
+	}
+	if value, ok := d.GetOkExists("delay"); ok {
+		s.Delay = value.(int)
+	}
+	if value, ok := d.GetOkExists("position"); ok {
+		s.Position = value.(int)
+	}
+	if value, ok := d.GetOkExists("notification_target_params"); ok {
+		s.NotificationTargetParams = value.([]interface{})
+	}
 
 	res, err := c.CreateEscalationLevel(s)
 	if err != nil {
@@ -200,32 +180,31 @@ func resourceEscalationLevelRead(ctx context.Context, d *schema.ResourceData, me
 	}
 
 	d.Set("escalation_policy_id", item.EscalationPolicyId)
-  d.Set("escalation_policy_path_id", item.EscalationPolicyPathId)
-  d.Set("paging_strategy_configuration_strategy", item.PagingStrategyConfigurationStrategy)
-  d.Set("paging_strategy_configuration_schedule_strategy", item.PagingStrategyConfigurationScheduleStrategy)
-  d.Set("delay", item.Delay)
-  d.Set("position", item.Position)
-  
-          if item.NotificationTargetParams != nil {
-              processedItems := make([]map[string]interface{}, 0)
+	d.Set("escalation_policy_path_id", item.EscalationPolicyPathId)
+	d.Set("paging_strategy_configuration_strategy", item.PagingStrategyConfigurationStrategy)
+	d.Set("paging_strategy_configuration_schedule_strategy", item.PagingStrategyConfigurationScheduleStrategy)
+	d.Set("delay", item.Delay)
+	d.Set("position", item.Position)
 
-              for _, c := range item.NotificationTargetParams {
-                  if rawItem, ok := c.(map[string]interface{}); ok {
-                      // Create a new map with only the fields defined in the schema
-                      processedItem := map[string]interface{}{
-                          "id": rawItem["id"],
-"type": rawItem["type"],
-"team_members": rawItem["team_members"],
-                      }
-                      processedItems = append(processedItems, processedItem)
-                  }
-              }
+	if item.NotificationTargetParams != nil {
+		processedItems := make([]map[string]interface{}, 0)
 
-              d.Set("notification_target_params", processedItems)
-          } else {
-              d.Set("notification_target_params", nil)
-          }
-        
+		for _, c := range item.NotificationTargetParams {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processedItem := map[string]interface{}{
+					"id":           rawItem["id"],
+					"type":         rawItem["type"],
+					"team_members": rawItem["team_members"],
+				}
+				processedItems = append(processedItems, processedItem)
+			}
+		}
+
+		d.Set("notification_target_params", processedItems)
+	} else {
+		d.Set("notification_target_params", nil)
+	}
 
 	return nil
 }
@@ -236,27 +215,27 @@ func resourceEscalationLevelUpdate(ctx context.Context, d *schema.ResourceData, 
 
 	s := &client.EscalationLevel{}
 
-	  if d.HasChange("escalation_policy_id") {
-				s.EscalationPolicyId = d.Get("escalation_policy_id").(string)
-			}
-    if d.HasChange("escalation_policy_path_id") {
-				s.EscalationPolicyPathId = d.Get("escalation_policy_path_id").(string)
-			}
-    if d.HasChange("paging_strategy_configuration_strategy") {
-				s.PagingStrategyConfigurationStrategy = d.Get("paging_strategy_configuration_strategy").(string)
-			}
-    if d.HasChange("paging_strategy_configuration_schedule_strategy") {
-				s.PagingStrategyConfigurationScheduleStrategy = d.Get("paging_strategy_configuration_schedule_strategy").(string)
-			}
-    if d.HasChange("delay") {
-				s.Delay = d.Get("delay").(int)
-			}
-    if d.HasChange("position") {
-				s.Position = d.Get("position").(int)
-			}
-    if d.HasChange("notification_target_params") {
-				s.NotificationTargetParams = d.Get("notification_target_params").([]interface{})
-			}
+	if d.HasChange("escalation_policy_id") {
+		s.EscalationPolicyId = d.Get("escalation_policy_id").(string)
+	}
+	if d.HasChange("escalation_policy_path_id") {
+		s.EscalationPolicyPathId = d.Get("escalation_policy_path_id").(string)
+	}
+	if d.HasChange("paging_strategy_configuration_strategy") {
+		s.PagingStrategyConfigurationStrategy = d.Get("paging_strategy_configuration_strategy").(string)
+	}
+	if d.HasChange("paging_strategy_configuration_schedule_strategy") {
+		s.PagingStrategyConfigurationScheduleStrategy = d.Get("paging_strategy_configuration_schedule_strategy").(string)
+	}
+	if d.HasChange("delay") {
+		s.Delay = d.Get("delay").(int)
+	}
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
+	}
+	if d.HasChange("notification_target_params") {
+		s.NotificationTargetParams = d.Get("notification_target_params").([]interface{})
+	}
 
 	_, err := c.UpdateEscalationLevel(d.Id(), s)
 	if err != nil {
