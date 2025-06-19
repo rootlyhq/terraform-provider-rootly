@@ -40,6 +40,7 @@ func resourceLiveCallRouter() *schema.Resource {
 				Optional: true,
 			},
 
+
 			"name": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    false,
@@ -49,6 +50,7 @@ func resourceLiveCallRouter() *schema.Resource {
 				Description: "The name of the live_call_router",
 			},
 
+
 			"country_code": &schema.Schema{
 				Type:        schema.TypeString,
 				Default:     "US",
@@ -57,6 +59,7 @@ func resourceLiveCallRouter() *schema.Resource {
 				ForceNew:    false,
 				Description: "The country code of the live_call_router. Value must be one of `US`, `GB`, `NZ`, `CA`, `AU`.",
 			},
+
 
 			"phone_type": &schema.Schema{
 				Type:        schema.TypeString,
@@ -75,6 +78,7 @@ func resourceLiveCallRouter() *schema.Resource {
 				ForceNew:    false,
 				Description: "You can select a phone number using [generate_phone_number](#//api/v1/live_call_routers/generate_phone_number) API and pass that phone number here to register",
 			},
+
 
 			"voicemail_greeting": &schema.Schema{
 				Type:        schema.TypeString,
@@ -100,8 +104,9 @@ func resourceLiveCallRouter() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "The waiting music URL of the live_call_router",
+				Description: "The waiting music URL of the live_call_router. Value must be one of `https://storage.rootly.com/twilio/voicemail/ClockworkWaltz.mp3`, `https://storage.rootly.com/twilio/voicemail/ith_brahms-116-4.mp3`, `https://storage.rootly.com/twilio/voicemail/Mellotroniac_-_Flight_Of_Young_Hearts_Flute.mp3`, `https://storage.rootly.com/twilio/voicemail/BusyStrings.mp3`, `https://storage.rootly.com/twilio/voicemail/oldDog_-_endless_goodbye_%28instr.%29.mp3`, `https://storage.rootly.com/twilio/voicemail/MARKOVICHAMP-Borghestral.mp3`, `https://storage.rootly.com/twilio/voicemail/ith_chopin-15-2.mp3`.",
 			},
+
 
 			"sent_to_voicemail_delay": &schema.Schema{
 				Type:        schema.TypeInt,
@@ -144,6 +149,56 @@ func resourceLiveCallRouter() *schema.Resource {
 				Optional:    true,
 				ForceNew:    false,
 				Description: "This is used in escalation paths to determine who to page",
+			},
+
+			"calling_tree_prompt": &schema.Schema{
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The audio instructions callers will hear when they call this number, prompting them to select from available options to route their call",
+			},
+
+			"paging_targets": &schema.Schema {
+				Type:        schema.TypeList,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Paging targets that callers can select from when this live call router is configured as a phone tree.",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource {
+					Schema: map[string]*schema.Schema{
+						"id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "The ID of paging target",
+						},
+
+						"type": &schema.Schema{
+							Type: schema.TypeString,
+							Default: "service",
+							Required: false,
+							Optional: true,
+							ForceNew: false,
+							Description: "The type of the paging target. Value must be one of `service`, `team`, `escalation_policy`.",
+
+						},
+
+						"alert_urgency_id": &schema.Schema {
+							Type: schema.TypeString,
+							Computed: true,
+							Required: false,
+							Optional: true,
+							ForceNew: false,
+							Description: "This is used in escalation paths to determine who to page",
+						},
+					},
+				},
+
 			},
 
 			"escalation_policy_trigger_params": &schema.Schema{
@@ -209,6 +264,12 @@ func resourceLiveCallRouterCreate(ctx context.Context, d *schema.ResourceData, m
 	if value, ok := d.GetOkExists("alert_urgency_id"); ok {
 		s.AlertUrgencyId = value.(string)
 	}
+	if value, ok := d.GetOkExists("calling_tree_prompt"); ok {
+		s.CallingTreePrompt = value.(string)
+	}
+    if value, ok := d.GetOkExists("paging_targets"); ok {
+		s.PagingTargets = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("escalation_policy_trigger_params"); ok {
 		if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
 			if mapValue, ok := valueList[0].(map[string]interface{}); ok {
@@ -259,7 +320,26 @@ func resourceLiveCallRouterRead(ctx context.Context, d *schema.ResourceData, met
 	d.Set("escalation_level_delay_in_seconds", item.EscalationLevelDelayInSeconds)
 	d.Set("should_auto_resolve_alert_on_call_end", item.ShouldAutoResolveAlertOnCallEnd)
 	d.Set("alert_urgency_id", item.AlertUrgencyId)
-	singleton_list := make([]interface{}, 1, 1)
+  	d.Set("calling_tree_prompt", item.CallingTreePrompt)
+    if item.PagingTargets != nil {
+        processedItems := make([]map[string]interface{}, 0)
+        for _, c := range item.PagingTargets {
+            if rawItem, ok := c.(map[string]interface{}); ok {
+                // Create a new map with only the fields defined in the schema
+                processedItem := map[string]interface{}{
+                    "id": rawItem["id"],
+                    "type": rawItem["type"],
+                    "alert_urgency_id": rawItem["alert_urgency_id"],
+                }
+                processedItems = append(processedItems, processedItem)
+            }
+        }
+
+        d.Set("paging_targets", processedItems)
+    } else {
+        d.Set("paging_targets", nil)
+    }
+    singleton_list := make([]interface{}, 1, 1)
 	processedItem := map[string]interface{}{
 		"id":   item.EscalationPolicyTriggerParams["id"],
 		"type": item.EscalationPolicyTriggerParams["type"],
@@ -317,6 +397,12 @@ func resourceLiveCallRouterUpdate(ctx context.Context, d *schema.ResourceData, m
 	}
 	if d.HasChange("alert_urgency_id") {
 		s.AlertUrgencyId = d.Get("alert_urgency_id").(string)
+	}
+    if d.HasChange("calling_tree_prompt") {
+		s.CallingTreePrompt = d.Get("calling_tree_prompt").(string)
+	}
+    if d.HasChange("paging_targets") {
+		s.PagingTargets = d.Get("paging_targets").([]interface{})
 	}
 	if d.HasChange("escalation_policy_trigger_params") {
 		tps := d.Get("escalation_policy_trigger_params").([]interface{})
