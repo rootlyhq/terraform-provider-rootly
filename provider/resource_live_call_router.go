@@ -267,7 +267,7 @@ func resourceLiveCallRouterCreate(ctx context.Context, d *schema.ResourceData, m
 	if value, ok := d.GetOkExists("calling_tree_prompt"); ok {
 		s.CallingTreePrompt = value.(string)
 	}
-    if value, ok := d.GetOkExists("paging_targets"); ok {
+	if value, ok := d.GetOkExists("paging_targets"); ok {
 		s.PagingTargets = value.([]interface{})
 	}
 	if value, ok := d.GetOkExists("escalation_policy_trigger_params"); ok {
@@ -320,26 +320,26 @@ func resourceLiveCallRouterRead(ctx context.Context, d *schema.ResourceData, met
 	d.Set("escalation_level_delay_in_seconds", item.EscalationLevelDelayInSeconds)
 	d.Set("should_auto_resolve_alert_on_call_end", item.ShouldAutoResolveAlertOnCallEnd)
 	d.Set("alert_urgency_id", item.AlertUrgencyId)
-  	d.Set("calling_tree_prompt", item.CallingTreePrompt)
-    if item.PagingTargets != nil {
-        processedItems := make([]map[string]interface{}, 0)
-        for _, c := range item.PagingTargets {
-            if rawItem, ok := c.(map[string]interface{}); ok {
-                // Create a new map with only the fields defined in the schema
-                processedItem := map[string]interface{}{
-                    "id": rawItem["id"],
-                    "type": rawItem["type"],
-                    "alert_urgency_id": rawItem["alert_urgency_id"],
-                }
-                processedItems = append(processedItems, processedItem)
-            }
-        }
+	d.Set("calling_tree_prompt", item.CallingTreePrompt)
+	if item.PagingTargets != nil {
+		processedItems := make([]map[string]interface{}, 0)
+		for _, c := range item.PagingTargets {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processedItem := map[string]interface{}{
+					"id": rawItem["id"],
+					"type": rawItem["type"],
+					"alert_urgency_id": rawItem["alert_urgency_id"],
+				}
+				processedItems = append(processedItems, processedItem)
+			}
+		}
 
-        d.Set("paging_targets", processedItems)
-    } else {
-        d.Set("paging_targets", nil)
-    }
-    singleton_list := make([]interface{}, 1, 1)
+		d.Set("paging_targets", processedItems)
+	} else {
+		d.Set("paging_targets", nil)
+	}
+	singleton_list := make([]interface{}, 1, 1)
 	processedItem := map[string]interface{}{
 		"id":   item.EscalationPolicyTriggerParams["id"],
 		"type": item.EscalationPolicyTriggerParams["type"],
@@ -398,10 +398,10 @@ func resourceLiveCallRouterUpdate(ctx context.Context, d *schema.ResourceData, m
 	if d.HasChange("alert_urgency_id") {
 		s.AlertUrgencyId = d.Get("alert_urgency_id").(string)
 	}
-    if d.HasChange("calling_tree_prompt") {
+	if d.HasChange("calling_tree_prompt") {
 		s.CallingTreePrompt = d.Get("calling_tree_prompt").(string)
 	}
-    if d.HasChange("paging_targets") {
+	if d.HasChange("paging_targets") {
 		s.PagingTargets = d.Get("paging_targets").([]interface{})
 	}
 	if d.HasChange("escalation_policy_trigger_params") {
