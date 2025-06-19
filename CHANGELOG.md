@@ -12,6 +12,7 @@
 - Added `rootly_communications_type` resource and data source
 - Added `rootly_workflow_task_genius_create_anthropic_chat_completion` resource
 - Added `rootly_workflow_task_genius_create_google_gemini_chat_completion` resource
+- Added `position` attribute to `rootly_alert_routing_rule` for ordering evaluation
 
 ### Fixed
 
