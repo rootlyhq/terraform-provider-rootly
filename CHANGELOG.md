@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.4] -- 2025-06-19
+
+### Added
+
+- Added support for `paging_targets` and `calling_tree_prompt` attribute to `rootly_live_call_router`.
+
 ## [3.0.3] -- 2025-06-16
 
 ### Fixed
