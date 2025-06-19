@@ -2644,10 +2644,28 @@ const (
 	LiveCallRouterKindVoicemail LiveCallRouterKind = "voicemail"
 )
 
+// Defines values for LiveCallRouterPagingTargetsType.
+const (
+	LiveCallRouterPagingTargetsTypeEscalationPolicy LiveCallRouterPagingTargetsType = "escalation_policy"
+	LiveCallRouterPagingTargetsTypeService          LiveCallRouterPagingTargetsType = "service"
+	LiveCallRouterPagingTargetsTypeTeam             LiveCallRouterPagingTargetsType = "team"
+)
+
 // Defines values for LiveCallRouterPhoneType.
 const (
 	LiveCallRouterPhoneTypeLocal    LiveCallRouterPhoneType = "local"
 	LiveCallRouterPhoneTypeTollFree LiveCallRouterPhoneType = "toll_free"
+)
+
+// Defines values for LiveCallRouterWaitingMusicUrl.
+const (
+	LiveCallRouterWaitingMusicUrlHttpsstorageRootlyComtwiliovoicemailBusyStringsMp3                          LiveCallRouterWaitingMusicUrl = "https://storage.rootly.com/twilio/voicemail/BusyStrings.mp3"
+	LiveCallRouterWaitingMusicUrlHttpsstorageRootlyComtwiliovoicemailClockworkWaltzMp3                       LiveCallRouterWaitingMusicUrl = "https://storage.rootly.com/twilio/voicemail/ClockworkWaltz.mp3"
+	LiveCallRouterWaitingMusicUrlHttpsstorageRootlyComtwiliovoicemailMARKOVICHAMPBorghestralMp3              LiveCallRouterWaitingMusicUrl = "https://storage.rootly.com/twilio/voicemail/MARKOVICHAMP-Borghestral.mp3"
+	LiveCallRouterWaitingMusicUrlHttpsstorageRootlyComtwiliovoicemailMellotroniacFlightOfYoungHeartsFluteMp3 LiveCallRouterWaitingMusicUrl = "https://storage.rootly.com/twilio/voicemail/Mellotroniac_-_Flight_Of_Young_Hearts_Flute.mp3"
+	LiveCallRouterWaitingMusicUrlHttpsstorageRootlyComtwiliovoicemailithBrahms1164Mp3                        LiveCallRouterWaitingMusicUrl = "https://storage.rootly.com/twilio/voicemail/ith_brahms-116-4.mp3"
+	LiveCallRouterWaitingMusicUrlHttpsstorageRootlyComtwiliovoicemailithChopin152Mp3                         LiveCallRouterWaitingMusicUrl = "https://storage.rootly.com/twilio/voicemail/ith_chopin-15-2.mp3"
+	LiveCallRouterWaitingMusicUrlHttpsstorageRootlyComtwiliovoicemailoldDogEndlessGoodbye28instr29Mp3        LiveCallRouterWaitingMusicUrl = "https://storage.rootly.com/twilio/voicemail/oldDog_-_endless_goodbye_%28instr.%29.mp3"
 )
 
 // Defines values for LiveCallRouterListDataType.
@@ -3851,10 +3869,28 @@ const (
 	NewLiveCallRouterDataAttributesKindVoicemail NewLiveCallRouterDataAttributesKind = "voicemail"
 )
 
+// Defines values for NewLiveCallRouterDataAttributesPagingTargetsType.
+const (
+	NewLiveCallRouterDataAttributesPagingTargetsTypeEscalationPolicy NewLiveCallRouterDataAttributesPagingTargetsType = "escalation_policy"
+	NewLiveCallRouterDataAttributesPagingTargetsTypeService          NewLiveCallRouterDataAttributesPagingTargetsType = "service"
+	NewLiveCallRouterDataAttributesPagingTargetsTypeTeam             NewLiveCallRouterDataAttributesPagingTargetsType = "team"
+)
+
 // Defines values for NewLiveCallRouterDataAttributesPhoneType.
 const (
 	NewLiveCallRouterDataAttributesPhoneTypeLocal    NewLiveCallRouterDataAttributesPhoneType = "local"
 	NewLiveCallRouterDataAttributesPhoneTypeTollFree NewLiveCallRouterDataAttributesPhoneType = "toll_free"
+)
+
+// Defines values for NewLiveCallRouterDataAttributesWaitingMusicUrl.
+const (
+	NewLiveCallRouterDataAttributesWaitingMusicUrlHttpsstorageRootlyComtwiliovoicemailBusyStringsMp3                          NewLiveCallRouterDataAttributesWaitingMusicUrl = "https://storage.rootly.com/twilio/voicemail/BusyStrings.mp3"
+	NewLiveCallRouterDataAttributesWaitingMusicUrlHttpsstorageRootlyComtwiliovoicemailClockworkWaltzMp3                       NewLiveCallRouterDataAttributesWaitingMusicUrl = "https://storage.rootly.com/twilio/voicemail/ClockworkWaltz.mp3"
+	NewLiveCallRouterDataAttributesWaitingMusicUrlHttpsstorageRootlyComtwiliovoicemailMARKOVICHAMPBorghestralMp3              NewLiveCallRouterDataAttributesWaitingMusicUrl = "https://storage.rootly.com/twilio/voicemail/MARKOVICHAMP-Borghestral.mp3"
+	NewLiveCallRouterDataAttributesWaitingMusicUrlHttpsstorageRootlyComtwiliovoicemailMellotroniacFlightOfYoungHeartsFluteMp3 NewLiveCallRouterDataAttributesWaitingMusicUrl = "https://storage.rootly.com/twilio/voicemail/Mellotroniac_-_Flight_Of_Young_Hearts_Flute.mp3"
+	NewLiveCallRouterDataAttributesWaitingMusicUrlHttpsstorageRootlyComtwiliovoicemailithBrahms1164Mp3                        NewLiveCallRouterDataAttributesWaitingMusicUrl = "https://storage.rootly.com/twilio/voicemail/ith_brahms-116-4.mp3"
+	NewLiveCallRouterDataAttributesWaitingMusicUrlHttpsstorageRootlyComtwiliovoicemailithChopin152Mp3                         NewLiveCallRouterDataAttributesWaitingMusicUrl = "https://storage.rootly.com/twilio/voicemail/ith_chopin-15-2.mp3"
+	NewLiveCallRouterDataAttributesWaitingMusicUrlHttpsstorageRootlyComtwiliovoicemailoldDogEndlessGoodbye28instr29Mp3        NewLiveCallRouterDataAttributesWaitingMusicUrl = "https://storage.rootly.com/twilio/voicemail/oldDog_-_endless_goodbye_%28instr.%29.mp3"
 )
 
 // Defines values for NewLiveCallRouterDataType.
@@ -6897,10 +6933,28 @@ const (
 	Voicemail UpdateLiveCallRouterDataAttributesKind = "voicemail"
 )
 
+// Defines values for UpdateLiveCallRouterDataAttributesPagingTargetsType.
+const (
+	UpdateLiveCallRouterDataAttributesPagingTargetsTypeEscalationPolicy UpdateLiveCallRouterDataAttributesPagingTargetsType = "escalation_policy"
+	UpdateLiveCallRouterDataAttributesPagingTargetsTypeService          UpdateLiveCallRouterDataAttributesPagingTargetsType = "service"
+	UpdateLiveCallRouterDataAttributesPagingTargetsTypeTeam             UpdateLiveCallRouterDataAttributesPagingTargetsType = "team"
+)
+
 // Defines values for UpdateLiveCallRouterDataAttributesPhoneType.
 const (
 	UpdateLiveCallRouterDataAttributesPhoneTypeLocal    UpdateLiveCallRouterDataAttributesPhoneType = "local"
 	UpdateLiveCallRouterDataAttributesPhoneTypeTollFree UpdateLiveCallRouterDataAttributesPhoneType = "toll_free"
+)
+
+// Defines values for UpdateLiveCallRouterDataAttributesWaitingMusicUrl.
+const (
+	HttpsstorageRootlyComtwiliovoicemailBusyStringsMp3                          UpdateLiveCallRouterDataAttributesWaitingMusicUrl = "https://storage.rootly.com/twilio/voicemail/BusyStrings.mp3"
+	HttpsstorageRootlyComtwiliovoicemailClockworkWaltzMp3                       UpdateLiveCallRouterDataAttributesWaitingMusicUrl = "https://storage.rootly.com/twilio/voicemail/ClockworkWaltz.mp3"
+	HttpsstorageRootlyComtwiliovoicemailMARKOVICHAMPBorghestralMp3              UpdateLiveCallRouterDataAttributesWaitingMusicUrl = "https://storage.rootly.com/twilio/voicemail/MARKOVICHAMP-Borghestral.mp3"
+	HttpsstorageRootlyComtwiliovoicemailMellotroniacFlightOfYoungHeartsFluteMp3 UpdateLiveCallRouterDataAttributesWaitingMusicUrl = "https://storage.rootly.com/twilio/voicemail/Mellotroniac_-_Flight_Of_Young_Hearts_Flute.mp3"
+	HttpsstorageRootlyComtwiliovoicemailithBrahms1164Mp3                        UpdateLiveCallRouterDataAttributesWaitingMusicUrl = "https://storage.rootly.com/twilio/voicemail/ith_brahms-116-4.mp3"
+	HttpsstorageRootlyComtwiliovoicemailithChopin152Mp3                         UpdateLiveCallRouterDataAttributesWaitingMusicUrl = "https://storage.rootly.com/twilio/voicemail/ith_chopin-15-2.mp3"
+	HttpsstorageRootlyComtwiliovoicemailoldDogEndlessGoodbye28instr29Mp3        UpdateLiveCallRouterDataAttributesWaitingMusicUrl = "https://storage.rootly.com/twilio/voicemail/oldDog_-_endless_goodbye_%28instr.%29.mp3"
 )
 
 // Defines values for UpdateLiveCallRouterDataType.
@@ -13736,6 +13790,9 @@ type LiveCallRouter struct {
 	// CallerGreeting The caller greeting message of the live_call_router
 	CallerGreeting *string `json:"caller_greeting,omitempty"`
 
+	// CallingTreePrompt The audio instructions callers will hear when they call this number, prompting them to select from available options to route their call
+	CallingTreePrompt *string `json:"calling_tree_prompt,omitempty"`
+
 	// CountryCode The country code of the live_call_router
 	CountryCode *LiveCallRouterCountryCode `json:"country_code,omitempty"`
 
@@ -13753,13 +13810,25 @@ type LiveCallRouter struct {
 
 		// Type The type of the notification target
 		Type LiveCallRouterEscalationPolicyTriggerParamsType `json:"type"`
-	} `json:"escalation_policy_trigger_params"`
+	} `json:"escalation_policy_trigger_params,omitempty"`
 
 	// Kind The kind of the live_call_router
 	Kind *LiveCallRouterKind `json:"kind,omitempty"`
 
 	// Name The name of the live_call_router
 	Name string `json:"name"`
+
+	// PagingTargets Paging targets that callers can select from when this live call router is configured as a phone tree.
+	PagingTargets *[]struct {
+		// AlertUrgencyId This is used in escalation paths to determine who to page
+		AlertUrgencyId string `json:"alert_urgency_id"`
+
+		// Id The ID of paging target
+		Id string `json:"id"`
+
+		// Type The type of the paging target
+		Type LiveCallRouterPagingTargetsType `json:"type"`
+	} `json:"paging_targets,omitempty"`
 
 	// PhoneNumber You can select a phone number using [generate_phone_number](#//api/v1/live_call_routers/generate_phone_number) API and pass that phone number here to register
 	PhoneNumber *string `json:"phone_number,omitempty"`
@@ -13783,7 +13852,7 @@ type LiveCallRouter struct {
 	VoicemailGreeting *string `json:"voicemail_greeting,omitempty"`
 
 	// WaitingMusicUrl The waiting music URL of the live_call_router
-	WaitingMusicUrl *string `json:"waiting_music_url,omitempty"`
+	WaitingMusicUrl *LiveCallRouterWaitingMusicUrl `json:"waiting_music_url,omitempty"`
 }
 
 // LiveCallRouterCountryCode The country code of the live_call_router
@@ -13795,8 +13864,14 @@ type LiveCallRouterEscalationPolicyTriggerParamsType string
 // LiveCallRouterKind The kind of the live_call_router
 type LiveCallRouterKind string
 
+// LiveCallRouterPagingTargetsType The type of the paging target
+type LiveCallRouterPagingTargetsType string
+
 // LiveCallRouterPhoneType The phone type of the live_call_router
 type LiveCallRouterPhoneType string
+
+// LiveCallRouterWaitingMusicUrl The waiting music URL of the live_call_router
+type LiveCallRouterWaitingMusicUrl string
 
 // LiveCallRouterList defines model for live_call_router_list.
 type LiveCallRouterList struct {
@@ -15542,6 +15617,9 @@ type NewLiveCallRouter struct {
 			// CallerGreeting The caller greeting message of the live_call_router
 			CallerGreeting *string `json:"caller_greeting,omitempty"`
 
+			// CallingTreePrompt The audio instructions callers will hear when they call this number, prompting them to select from available options to route their call
+			CallingTreePrompt *string `json:"calling_tree_prompt,omitempty"`
+
 			// CountryCode The country code of the live_call_router
 			CountryCode NewLiveCallRouterDataAttributesCountryCode `json:"country_code"`
 
@@ -15550,19 +15628,31 @@ type NewLiveCallRouter struct {
 
 			// EscalationLevelDelayInSeconds This overrides the delay (seconds) in escalation levels
 			EscalationLevelDelayInSeconds *int `json:"escalation_level_delay_in_seconds,omitempty"`
-			EscalationPolicyTriggerParams struct {
+			EscalationPolicyTriggerParams *struct {
 				// Id The ID of notification target
 				Id string `json:"id"`
 
 				// Type The type of the notification target
 				Type NewLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType `json:"type"`
-			} `json:"escalation_policy_trigger_params"`
+			} `json:"escalation_policy_trigger_params,omitempty"`
 
 			// Kind The kind of the live_call_router
 			Kind NewLiveCallRouterDataAttributesKind `json:"kind"`
 
 			// Name The name of the live_call_router
 			Name string `json:"name"`
+
+			// PagingTargets Paging targets that callers can select from when this live call router is configured as a phone tree.
+			PagingTargets *[]struct {
+				// AlertUrgencyId This is used in escalation paths to determine who to page
+				AlertUrgencyId string `json:"alert_urgency_id"`
+
+				// Id The ID of paging target
+				Id string `json:"id"`
+
+				// Type The type of the paging target
+				Type NewLiveCallRouterDataAttributesPagingTargetsType `json:"type"`
+			} `json:"paging_targets,omitempty"`
 
 			// PhoneNumber You can select a phone number using [generate_phone_number](#//api/v1/live_call_routers/generate_phone_number) API and pass that phone number here to register
 			PhoneNumber string `json:"phone_number"`
@@ -15583,7 +15673,7 @@ type NewLiveCallRouter struct {
 			VoicemailGreeting *string `json:"voicemail_greeting,omitempty"`
 
 			// WaitingMusicUrl The waiting music URL of the live_call_router
-			WaitingMusicUrl *string `json:"waiting_music_url,omitempty"`
+			WaitingMusicUrl *NewLiveCallRouterDataAttributesWaitingMusicUrl `json:"waiting_music_url,omitempty"`
 		} `json:"attributes"`
 		Type NewLiveCallRouterDataType `json:"type"`
 	} `json:"data"`
@@ -15598,8 +15688,14 @@ type NewLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType string
 // NewLiveCallRouterDataAttributesKind The kind of the live_call_router
 type NewLiveCallRouterDataAttributesKind string
 
+// NewLiveCallRouterDataAttributesPagingTargetsType The type of the paging target
+type NewLiveCallRouterDataAttributesPagingTargetsType string
+
 // NewLiveCallRouterDataAttributesPhoneType The phone type of the live_call_router
 type NewLiveCallRouterDataAttributesPhoneType string
+
+// NewLiveCallRouterDataAttributesWaitingMusicUrl The waiting music URL of the live_call_router
+type NewLiveCallRouterDataAttributesWaitingMusicUrl string
 
 // NewLiveCallRouterDataType defines model for NewLiveCallRouter.Data.Type.
 type NewLiveCallRouterDataType string
@@ -21644,13 +21740,25 @@ type UpdateLiveCallRouter struct {
 
 				// Type The type of the notification target
 				Type UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType `json:"type"`
-			} `json:"escalation_policy_trigger_params"`
+			} `json:"escalation_policy_trigger_params,omitempty"`
 
 			// Kind The kind of the live_call_router
 			Kind *UpdateLiveCallRouterDataAttributesKind `json:"kind,omitempty"`
 
 			// Name The name of the live_call_router
 			Name *string `json:"name,omitempty"`
+
+			// PagingTargets Paging targets that callers can select from when this live call router is configured as a phone tree.
+			PagingTargets *[]struct {
+				// AlertUrgencyId This is used in escalation paths to determine who to page
+				AlertUrgencyId string `json:"alert_urgency_id"`
+
+				// Id The ID of paging target
+				Id string `json:"id"`
+
+				// Type The type of the paging target
+				Type UpdateLiveCallRouterDataAttributesPagingTargetsType `json:"type"`
+			} `json:"paging_targets,omitempty"`
 
 			// PhoneType The phone type of the live_call_router
 			PhoneType *UpdateLiveCallRouterDataAttributesPhoneType `json:"phone_type,omitempty"`
@@ -21668,7 +21776,7 @@ type UpdateLiveCallRouter struct {
 			VoicemailGreeting *string `json:"voicemail_greeting,omitempty"`
 
 			// WaitingMusicUrl The waiting music URL of the live_call_router
-			WaitingMusicUrl *string `json:"waiting_music_url,omitempty"`
+			WaitingMusicUrl *UpdateLiveCallRouterDataAttributesWaitingMusicUrl `json:"waiting_music_url,omitempty"`
 		} `json:"attributes"`
 		Type UpdateLiveCallRouterDataType `json:"type"`
 	} `json:"data"`
@@ -21683,8 +21791,14 @@ type UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType string
 // UpdateLiveCallRouterDataAttributesKind The kind of the live_call_router
 type UpdateLiveCallRouterDataAttributesKind string
 
+// UpdateLiveCallRouterDataAttributesPagingTargetsType The type of the paging target
+type UpdateLiveCallRouterDataAttributesPagingTargetsType string
+
 // UpdateLiveCallRouterDataAttributesPhoneType The phone type of the live_call_router
 type UpdateLiveCallRouterDataAttributesPhoneType string
+
+// UpdateLiveCallRouterDataAttributesWaitingMusicUrl The waiting music URL of the live_call_router
+type UpdateLiveCallRouterDataAttributesWaitingMusicUrl string
 
 // UpdateLiveCallRouterDataType defines model for UpdateLiveCallRouter.Data.Type.
 type UpdateLiveCallRouterDataType string
