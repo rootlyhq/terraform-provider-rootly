@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.1.0] -- 2025-06-19
+
+### Added
+
+- Added `rootly_alert_group` resource.
+
 ## [3.0.4] -- 2025-06-19
 
 ### Added
