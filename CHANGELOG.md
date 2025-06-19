@@ -1,5 +1,32 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+
+- Added comprehensive version management system with Makefile targets (`version-patch`, `version-minor`, `version-major`, `release-patch`, `release-minor`, `release-major`)
+- Added `scripts/bump-version.sh` for semantic versioning with git tags
+- Added `rootly_communications_group` resource and data source
+- Added `rootly_communications_stage` resource and data source  
+- Added `rootly_communications_template` resource and data source
+- Added `rootly_communications_type` resource and data source
+- Added `rootly_workflow_task_genius_create_anthropic_chat_completion` resource
+- Added `rootly_workflow_task_genius_create_google_gemini_chat_completion` resource
+
+### Fixed
+
+- Fixed data source boolean filter type mismatches where some API endpoints expect `*bool` while others expect `*string`
+- Fixed template generator to handle API boolean filter inconsistencies with resource-specific mappings
+- Fixed UserAgent to use dynamic version from build system instead of hardcoded version
+- Fixed duplicate "id" field generation in data source templates
+- Regenerated all provider resources and data sources from latest API schema
+
+### Changed
+
+- Version management now integrates with existing GoReleaser CI/CD workflow
+- UserAgent format simplified to `terraform-provider-rootly/vX.Y.Z` 
+- Boolean filter parameters now properly handle API inconsistencies across different resources
+
 ## [3.1.0] -- 2025-06-19
 
 ### Added
