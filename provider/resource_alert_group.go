@@ -88,9 +88,9 @@ func resourceAlertGroup() *schema.Resource {
 
 			"targets": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
+				Computed:         false,
+				Required:         true,
+				Optional:         false,
 				Description:      "",
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Elem: &schema.Resource{
@@ -134,6 +134,98 @@ func resourceAlertGroup() *schema.Resource {
 							Optional:    true,
 							ForceNew:    false,
 							Description: "The JSON path to the value to group by.",
+						},
+					},
+				},
+			},
+
+			"conditions": &schema.Schema{
+				Type:             schema.TypeList,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "The conditions for the alert group",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+
+						"property_field_type": &schema.Schema{
+							Type:        schema.TypeString,
+							Default:     "attribute",
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "The type of the property field. Value must be one of `attribute`, `payload`.",
+						},
+
+						"property_field_name": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "The name of the property field. If the property field type is selected as 'attribute', then the allowed property field names are 'summary' (for Title), 'description', 'alert_urgency' and 'external_url' (for Alert Source URL). If the property field type is selected as 'payload', then the property field name should be supplied in JSON Path syntax.",
+						},
+
+						"property_field_condition_type": &schema.Schema{
+							Type:        schema.TypeString,
+							Default:     "is_one_of",
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "The condition type of the property field. Value must be one of `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is_empty`, `matches_existing_alert`.",
+						},
+
+						"property_field_value": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "The value of the property field. Can be null if the property field condition type is 'is_one_of' or 'is_not_one_of'",
+						},
+
+						"property_field_values": &schema.Schema{
+							Type: schema.TypeList,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "The values of the property field. Used if the property field condition type is 'is_one_of' or 'is_not_one_of' except for when property field name is 'alert_urgency'",
+						},
+
+						"values": &schema.Schema{
+							Type:             schema.TypeList,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+
+									"record_id": &schema.Schema{
+										Type:        schema.TypeString,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "ID of the Alert Urgency to set.",
+									},
+
+									"record_type": &schema.Schema{
+										Type:        schema.TypeString,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "Should be \"AlertUrgency\".",
+									},
+								},
+							},
 						},
 					},
 				},
@@ -184,6 +276,9 @@ func resourceAlertGroupCreate(ctx context.Context, d *schema.ResourceData, meta 
 	}
 	if value, ok := d.GetOkExists("attributes"); ok {
 		s.Attributes = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("conditions"); ok {
+		s.Conditions = value.([]interface{})
 	}
 	if value, ok := d.GetOkExists("deleted_at"); ok {
 		s.DeletedAt = value.(string)
@@ -262,6 +357,29 @@ func resourceAlertGroupRead(ctx context.Context, d *schema.ResourceData, meta in
 		d.Set("attributes", nil)
 	}
 
+	if item.Conditions != nil {
+		processedItems := make([]map[string]interface{}, 0)
+
+		for _, c := range item.Conditions {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processedItem := map[string]interface{}{
+					"property_field_type":           rawItem["property_field_type"],
+					"property_field_name":           rawItem["property_field_name"],
+					"property_field_condition_type": rawItem["property_field_condition_type"],
+					"property_field_value":          rawItem["property_field_value"],
+					"property_field_values":         rawItem["property_field_values"],
+					"values":                        rawItem["values"],
+				}
+				processedItems = append(processedItems, processedItem)
+			}
+		}
+
+		d.Set("conditions", processedItems)
+	} else {
+		d.Set("conditions", nil)
+	}
+
 	d.Set("deleted_at", item.DeletedAt)
 
 	return nil
@@ -299,6 +417,9 @@ func resourceAlertGroupUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	}
 	if d.HasChange("attributes") {
 		s.Attributes = d.Get("attributes").([]interface{})
+	}
+	if d.HasChange("conditions") {
+		s.Conditions = d.Get("conditions").([]interface{})
 	}
 	if d.HasChange("deleted_at") {
 		s.DeletedAt = d.Get("deleted_at").(string)

@@ -54,22 +54,32 @@ terraform plan -generate-config-out=generated.tf
 ### Required
 
 - `name` (String) The name of the alert group
+- `targets` (Block List, Min: 1) (see [below for nested schema](#nestedblock--targets))
 
 ### Optional
 
 - `attributes` (Block List) (see [below for nested schema](#nestedblock--attributes))
 - `condition_type` (String) Grouping condition for the alert group
+- `conditions` (Block List) The conditions for the alert group (see [below for nested schema](#nestedblock--conditions))
 - `deleted_at` (String) Date or deletion
 - `description` (String) The description of the alert group
 - `group_by_alert_title` (Boolean) Whether the alerts are grouped by title or not. Value must be one of true or false
 - `group_by_alert_urgency` (Boolean) Whether the alerts are grouped by urgency or not. Value must be one of true or false
 - `slug` (String) The slug of the alert group
-- `targets` (Block List) (see [below for nested schema](#nestedblock--targets))
 - `time_window` (Number) Time window for the alert grouping
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--targets"></a>
+### Nested Schema for `targets`
+
+Optional:
+
+- `target_id` (String) id for the Group, Service or EscalationPolicy
+- `target_type` (String) The type of the target.. Value must be one of `Group`, `Service`, `EscalationPolicy`.
+
 
 <a id="nestedblock--attributes"></a>
 ### Nested Schema for `attributes`
@@ -79,10 +89,22 @@ Optional:
 - `json_path` (String) The JSON path to the value to group by.
 
 
-<a id="nestedblock--targets"></a>
-### Nested Schema for `targets`
+<a id="nestedblock--conditions"></a>
+### Nested Schema for `conditions`
 
 Optional:
 
-- `target_id` (String) id for the Group, Service or EscalationPolicy
-- `target_type` (String) The type of the target.. Value must be one of `Group`, `Service`, `EscalationPolicy`.
+- `property_field_condition_type` (String) The condition type of the property field. Value must be one of `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is_empty`, `matches_existing_alert`.
+- `property_field_name` (String) The name of the property field. If the property field type is selected as 'attribute', then the allowed property field names are 'summary' (for Title), 'description', 'alert_urgency' and 'external_url' (for Alert Source URL). If the property field type is selected as 'payload', then the property field name should be supplied in JSON Path syntax.
+- `property_field_type` (String) The type of the property field. Value must be one of `attribute`, `payload`.
+- `property_field_value` (String) The value of the property field. Can be null if the property field condition type is 'is_one_of' or 'is_not_one_of'
+- `property_field_values` (List of String) The values of the property field. Used if the property field condition type is 'is_one_of' or 'is_not_one_of' except for when property field name is 'alert_urgency'
+- `values` (Block List) (see [below for nested schema](#nestedblock--conditions--values))
+
+<a id="nestedblock--conditions--values"></a>
+### Nested Schema for `conditions.values`
+
+Optional:
+
+- `record_id` (String) ID of the Alert Urgency to set.
+- `record_type` (String) Should be "AlertUrgency".
