@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 )
 
@@ -52,12 +53,13 @@ func resourceIncidentRoleTask() *schema.Resource {
 			},
 
 			"priority": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "high",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The priority of the incident task. Value must be one of `high`, `medium`, `low`.",
+				Type:         schema.TypeString,
+				Default:      "high",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "The priority of the incident task. Value must be one of `high`, `medium`, `low`.",
+				ValidateFunc: validation.StringInSlice([]string{"high", "medium", "low"}, false),
 			},
 		},
 	}

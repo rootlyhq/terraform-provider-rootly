@@ -43,13 +43,13 @@ terraform plan -generate-config-out=generated.tf
 - `alert_urgency_id` (String) This is used in escalation paths to determine who to page
 - `caller_greeting` (String) The caller greeting message of the live_call_router
 - `calling_tree_prompt` (String) The audio instructions callers will hear when they call this number, prompting them to select from available options to route their call
-- `country_code` (String) The country code of the live_call_router. Value must be one of `US`, `GB`, `NZ`, `CA`, `AU`.
+- `country_code` (String) The country code of the live_call_router. Value must be one of `US`, `GB`, `NZ`, `CA`, `AU`, `NL`.
 - `enabled` (Boolean)
 - `escalation_level_delay_in_seconds` (Number) This overrides the delay (seconds) in escalation levels
 - `escalation_policy_trigger_params` (Map of String)
 - `kind` (String) The kind of the live_call_router. Value must be one of `voicemail`, `live`.
 - `paging_targets` (Block List) Paging targets that callers can select from when this live call router is configured as a phone tree. (see [below for nested schema](#nestedblock--paging_targets))
-- `phone_type` (String) The phone type of the live_call_router. Value must be one of `local`, `toll_free`.
+- `phone_type` (String) The phone type of the live_call_router. Value must be one of `local`, `toll_free`, `mobile`.
 - `sent_to_voicemail_delay` (Number) The delay (seconds) after which the caller in redirected to voicemail
 - `should_auto_resolve_alert_on_call_end` (Boolean) This overrides the delay (seconds) in escalation levels. Value must be one of true or false
 - `should_redirect_to_voicemail_on_no_answer` (Boolean) This prompts the caller to choose voicemail or connect live. Value must be one of true or false

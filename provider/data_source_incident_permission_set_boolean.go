@@ -7,6 +7,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
@@ -21,9 +22,10 @@ func dataSourceIncidentPermissionSetBoolean() *schema.Resource {
 			},
 
 			"kind": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
-				Optional: true,
+				Type:         schema.TypeString,
+				Computed:     true,
+				Optional:     true,
+				ValidateFunc: validation.StringInSlice([]string{"publish_to_status_page", "assign_incident_roles", "invite_subscribers", "update_summary", "update_timeline", "trigger_workflows", "create_communications", "read_communications", "update_communications", "delete_communications", "send_communications", "modify_custom_fields"}, false),
 			},
 
 			"created_at": &schema.Schema{

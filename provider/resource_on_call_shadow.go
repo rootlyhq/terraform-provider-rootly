@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 )
 
@@ -34,12 +35,13 @@ func resourceOnCallShadow() *schema.Resource {
 			},
 
 			"shadowable_type": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "User",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "Value must be one of `User`, `Schedule`.",
+				Type:         schema.TypeString,
+				Default:      "User",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "Value must be one of `User`, `Schedule`.",
+				ValidateFunc: validation.StringInSlice([]string{"User", "Schedule"}, false),
 			},
 
 			"shadowable_id": &schema.Schema{

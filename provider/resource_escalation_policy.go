@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -117,7 +118,8 @@ func resourceEscalationPolicy() *schema.Resource {
 						"days": &schema.Schema{
 							Type: schema.TypeList,
 							Elem: &schema.Schema{
-								Type: schema.TypeString,
+								Type:         schema.TypeString,
+								ValidateFunc: validation.StringInSlice([]string{"M", "T", "W", "R", "F", "U", "S"}, false),
 							},
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Computed:         true,

@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -44,12 +45,13 @@ func resourceFormSetCondition() *schema.Resource {
 			},
 
 			"comparison": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "equal",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The condition comparison.. Value must be one of `equal`.",
+				Type:         schema.TypeString,
+				Default:      "equal",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "The condition comparison.. Value must be one of `equal`.",
+				ValidateFunc: validation.StringInSlice([]string{"equal"}, false),
 			},
 
 			"values": &schema.Schema{

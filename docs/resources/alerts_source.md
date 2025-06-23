@@ -84,77 +84,16 @@ terraform plan -generate-config-out=generated.tf
 
 ### Optional
 
-- `alert_source_urgency_rules_attributes` (Block List) (see [below for nested schema](#nestedblock--alert_source_urgency_rules_attributes))
-- `alert_template_attributes` (Block List, Max: 1) (see [below for nested schema](#nestedblock--alert_template_attributes))
-- `alert_urgency_id` (String) The alert urgency ID
-- `owner_group_ids` (List of String) The group IDS owning this alert source. Note, groups are rootly_team resource in Terraform.
-- `resolution_rule_attributes` (Block List, Max: 1) (see [below for nested schema](#nestedblock--resolution_rule_attributes))
+- `alert_urgency_id` (String) ID for the default alert urgency assigned to this alert source
+- `email` (String) The email address of the alert source
+- `owner_group_ids` (List of String) List of team IDs that will own the alert source
+- `resolution_rule_attributes` (Map of String) Additional attributes for email alerts source
 - `secret` (String) A secret key used to authenticate incoming requests to this alerts source
-- `source_type` (String) The alert source type
-- `sourceable_attributes` (Block List, Max: 1) Additional attributes specific to certain alert sources (e.g., generic_webhook), encapsulating source-specific configurations or details (see [below for nested schema](#nestedblock--sourceable_attributes))
+- `source_type` (String) The alert source type. Value must be one of `email`, `app_dynamics`, `catchpoint`, `datadog`, `alertmanager`, `google_cloud`, `grafana`, `sentry`, `generic_webhook`, `cloud_watch`, `checkly`, `azure`, `new_relic`, `splunk`, `chronosphere`, `app_optics`, `bug_snag`, `honeycomb`, `monte_carlo`, `nagios`, `prtg`.
+- `sourceable_attributes` (Map of String) Additional attributes specific to certain alert sources (e.g., generic_webhook), encapsulating source-specific configurations or details
 - `status` (String) The current status of the alert source
 - `webhook_endpoint` (String) The URL endpoint of the alert source
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
-
-<a id="nestedblock--alert_source_urgency_rules_attributes"></a>
-### Nested Schema for `alert_source_urgency_rules_attributes`
-
-Required:
-
-- `alert_urgency_id` (String)
-- `json_path` (String)
-- `operator` (String)
-- `value` (String)
-
-
-<a id="nestedblock--alert_template_attributes"></a>
-### Nested Schema for `alert_template_attributes`
-
-Optional:
-
-- `description` (String)
-- `external_url` (String)
-- `title` (String)
-
-
-<a id="nestedblock--resolution_rule_attributes"></a>
-### Nested Schema for `resolution_rule_attributes`
-
-Optional:
-
-- `condition_type` (String)
-- `conditions_attributes` (Block List, Max: 25) (see [below for nested schema](#nestedblock--resolution_rule_attributes--conditions_attributes))
-- `enabled` (Boolean)
-- `identifier_json_path` (String)
-- `identifier_value_regex` (String)
-
-<a id="nestedblock--resolution_rule_attributes--conditions_attributes"></a>
-### Nested Schema for `resolution_rule_attributes.conditions_attributes`
-
-Optional:
-
-- `field` (String)
-- `operator` (String)
-- `value` (String)
-
-
-
-<a id="nestedblock--sourceable_attributes"></a>
-### Nested Schema for `sourceable_attributes`
-
-Optional:
-
-- `auto_resolve` (Boolean)
-- `field_mappings_attributes` (Block List, Max: 25) (see [below for nested schema](#nestedblock--sourceable_attributes--field_mappings_attributes))
-- `resolve_state` (String) This value is matched with the value extracted from alerts payload using JSON path in field_mappings_attributes
-
-<a id="nestedblock--sourceable_attributes--field_mappings_attributes"></a>
-### Nested Schema for `sourceable_attributes.field_mappings_attributes`
-
-Optional:
-
-- `field` (String)
-- `json_path` (String)

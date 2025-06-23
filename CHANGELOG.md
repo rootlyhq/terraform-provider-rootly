@@ -1,5 +1,31 @@
 # Changelog
 
+## [3.3.0] -- 2025-06-23
+
+### Added
+
+- Added comprehensive enum validation system for all auto-generated resources and data sources
+- Added automatic `ValidateFunc` generation for enum fields in Terraform schemas
+- Added `alerts_source` resource and data source auto-generation with full enum validation
+- Added enum validation for `source_type` field in alerts_source resources (resolves GitHub issue #98)
+- Added smart validation import detection to only import validation library when enum validation is used
+
+### Fixed
+
+- Fixed GitHub issue #98: Alert source enum validation - now provides client-side validation with helpful error messages instead of confusing 404 API errors
+- Fixed operationIds in OpenAPI spec for alerts_source to enable proper auto-generation (`listAlertSources` → `listAlertsSources`, etc.)
+- Fixed duplicate provider registration entries for alerts_source resource and data source
+- Fixed array items null check in resource template generator to prevent build errors
+- Fixed hard-coded alerts_source entries in provider template that were causing duplicate registrations
+
+### Changed
+
+- Enhanced generator templates to automatically detect and validate enum fields from OpenAPI schema
+- Improved error messages for invalid enum values to include complete list of valid options
+- Converted alerts_source from manual implementation to auto-generated with full schema compliance
+- Updated alerts_source field descriptions to include valid enum value lists
+- Updated generator system to support comprehensive enum validation across all resources
+
 ## [3.2.0] -- 2025-06-19
 
 ### Added

@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -71,12 +72,13 @@ func resourceHeartbeat() *schema.Resource {
 			},
 
 			"interval_unit": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "seconds",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "Value must be one of `seconds`, `minutes`, `hours`.",
+				Type:         schema.TypeString,
+				Default:      "seconds",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "Value must be one of `seconds`, `minutes`, `hours`.",
+				ValidateFunc: validation.StringInSlice([]string{"seconds", "minutes", "hours"}, false),
 			},
 
 			"notification_target_id": &schema.Schema{
@@ -89,12 +91,13 @@ func resourceHeartbeat() *schema.Resource {
 			},
 
 			"notification_target_type": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "User",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "Value must be one of `User`, `Group`, `Service`, `EscalationPolicy`.",
+				Type:         schema.TypeString,
+				Default:      "User",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "Value must be one of `User`, `Group`, `Service`, `EscalationPolicy`.",
+				ValidateFunc: validation.StringInSlice([]string{"User", "Group", "Service", "EscalationPolicy"}, false),
 			},
 
 			"enabled": &schema.Schema{
@@ -104,12 +107,13 @@ func resourceHeartbeat() *schema.Resource {
 			},
 
 			"status": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "waiting",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "Value must be one of `waiting`, `active`, `expired`.",
+				Type:         schema.TypeString,
+				Default:      "waiting",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "Value must be one of `waiting`, `active`, `expired`.",
+				ValidateFunc: validation.StringInSlice([]string{"waiting", "active", "expired"}, false),
 
 				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 					return len(old) != 0

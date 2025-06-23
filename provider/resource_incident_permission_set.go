@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -55,7 +56,8 @@ func resourceIncidentPermissionSet() *schema.Resource {
 			"private_incident_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -67,7 +69,8 @@ func resourceIncidentPermissionSet() *schema.Resource {
 			"public_incident_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,

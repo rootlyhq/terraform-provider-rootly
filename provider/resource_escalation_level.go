@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -44,21 +45,23 @@ func resourceEscalationLevel() *schema.Resource {
 			},
 
 			"paging_strategy_configuration_strategy": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "default",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "Value must be one of `default`, `random`, `cycle`, `alert`.",
+				Type:         schema.TypeString,
+				Default:      "default",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "Value must be one of `default`, `random`, `cycle`, `alert`.",
+				ValidateFunc: validation.StringInSlice([]string{"default", "random", "cycle", "alert"}, false),
 			},
 
 			"paging_strategy_configuration_schedule_strategy": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "on_call_only",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "Value must be one of `on_call_only`, `everyone`.",
+				Type:         schema.TypeString,
+				Default:      "on_call_only",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "Value must be one of `on_call_only`, `everyone`.",
+				ValidateFunc: validation.StringInSlice([]string{"on_call_only", "everyone"}, false),
 			},
 
 			"delay": &schema.Schema{
@@ -99,21 +102,23 @@ func resourceEscalationLevel() *schema.Resource {
 						},
 
 						"type": &schema.Schema{
-							Type:        schema.TypeString,
-							Default:     "team",
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "The type of the notification target. Value must be one of `team`, `user`, `schedule`, `slack_channel`, `service`.",
+							Type:         schema.TypeString,
+							Default:      "team",
+							Required:     false,
+							Optional:     true,
+							ForceNew:     false,
+							Description:  "The type of the notification target. Value must be one of `team`, `user`, `schedule`, `slack_channel`, `service`.",
+							ValidateFunc: validation.StringInSlice([]string{"team", "user", "schedule", "slack_channel", "service"}, false),
 						},
 
 						"team_members": &schema.Schema{
-							Type:        schema.TypeString,
-							Default:     "all",
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "For targets with type=team, controls whether to notify admins, all team members, or escalate to team EP.. Value must be one of `all`, `admins`, `escalate`.",
+							Type:         schema.TypeString,
+							Default:      "all",
+							Required:     false,
+							Optional:     true,
+							ForceNew:     false,
+							Description:  "For targets with type=team, controls whether to notify admins, all team members, or escalate to team EP.. Value must be one of `all`, `admins`, `escalate`.",
+							ValidateFunc: validation.StringInSlice([]string{"all", "admins", "escalate"}, false),
 						},
 					},
 				},

@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -71,7 +72,8 @@ func resourceRole() *schema.Resource {
 			"alerts_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -83,7 +85,8 @@ func resourceRole() *schema.Resource {
 			"api_keys_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -95,7 +98,8 @@ func resourceRole() *schema.Resource {
 			"audits_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -107,7 +111,8 @@ func resourceRole() *schema.Resource {
 			"billing_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -119,7 +124,8 @@ func resourceRole() *schema.Resource {
 			"environments_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -131,7 +137,8 @@ func resourceRole() *schema.Resource {
 			"form_fields_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -143,7 +150,8 @@ func resourceRole() *schema.Resource {
 			"functionalities_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -155,7 +163,8 @@ func resourceRole() *schema.Resource {
 			"groups_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -167,7 +176,8 @@ func resourceRole() *schema.Resource {
 			"incident_causes_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -179,7 +189,8 @@ func resourceRole() *schema.Resource {
 			"incident_feedbacks_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -191,7 +202,8 @@ func resourceRole() *schema.Resource {
 			"incident_roles_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -203,7 +215,8 @@ func resourceRole() *schema.Resource {
 			"incident_types_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -215,7 +228,8 @@ func resourceRole() *schema.Resource {
 			"incidents_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -227,7 +241,8 @@ func resourceRole() *schema.Resource {
 			"integrations_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -239,7 +254,8 @@ func resourceRole() *schema.Resource {
 			"invitations_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -251,7 +267,8 @@ func resourceRole() *schema.Resource {
 			"playbooks_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -263,7 +280,8 @@ func resourceRole() *schema.Resource {
 			"private_incidents_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -275,7 +293,8 @@ func resourceRole() *schema.Resource {
 			"pulses_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "update", "read"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -287,7 +306,8 @@ func resourceRole() *schema.Resource {
 			"retrospective_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -299,7 +319,8 @@ func resourceRole() *schema.Resource {
 			"roles_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -311,7 +332,8 @@ func resourceRole() *schema.Resource {
 			"secrets_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -323,7 +345,8 @@ func resourceRole() *schema.Resource {
 			"services_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -335,7 +358,8 @@ func resourceRole() *schema.Resource {
 			"severities_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -347,7 +371,8 @@ func resourceRole() *schema.Resource {
 			"status_pages_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -359,7 +384,8 @@ func resourceRole() *schema.Resource {
 			"webhooks_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -371,7 +397,8 @@ func resourceRole() *schema.Resource {
 			"workflows_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,

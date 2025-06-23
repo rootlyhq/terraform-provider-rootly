@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -53,12 +54,13 @@ func resourceSeverity() *schema.Resource {
 			},
 
 			"severity": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "critical",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The severity of the severity. Value must be one of `critical`, `high`, `medium`, `low`.",
+				Type:         schema.TypeString,
+				Default:      "critical",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "The severity of the severity. Value must be one of `critical`, `high`, `medium`, `low`.",
+				ValidateFunc: validation.StringInSlice([]string{"critical", "high", "medium", "low"}, false),
 			},
 
 			"color": &schema.Schema{

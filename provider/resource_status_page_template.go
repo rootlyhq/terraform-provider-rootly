@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -62,12 +63,13 @@ func resourceStatusPageTemplate() *schema.Resource {
 			},
 
 			"kind": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "normal",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The kind of the status page template. Value must be one of `normal`, `scheduled`.",
+				Type:         schema.TypeString,
+				Default:      "normal",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "The kind of the status page template. Value must be one of `normal`, `scheduled`.",
+				ValidateFunc: validation.StringInSlice([]string{"normal", "scheduled"}, false),
 			},
 
 			"should_notify_subscribers": &schema.Schema{

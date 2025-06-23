@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -26,30 +27,33 @@ func resourceFormField() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 
 			"kind": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "custom",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The kind of the form field. Value must be one of `custom`, `title`, `summary`, `mitigation_message`, `resolution_message`, `severity`, `environments`, `types`, `services`, `causes`, `functionalities`, `teams`, `visibility`, `mark_as_test`, `mark_as_backfilled`, `labels`, `notify_emails`, `trigger_manual_workflows`, `show_ongoing_incidents`, `attach_alerts`, `mark_as_in_triage`, `in_triage_at`, `started_at`, `detected_at`, `acknowledged_at`, `mitigated_at`, `resolved_at`, `closed_at`, `manual_starting_datetime_field`.",
+				Type:         schema.TypeString,
+				Default:      "custom",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "The kind of the form field. Value must be one of `custom`, `title`, `summary`, `mitigation_message`, `resolution_message`, `severity`, `environments`, `types`, `services`, `causes`, `functionalities`, `teams`, `visibility`, `mark_as_test`, `mark_as_backfilled`, `labels`, `notify_emails`, `trigger_manual_workflows`, `show_ongoing_incidents`, `attach_alerts`, `mark_as_in_triage`, `in_triage_at`, `started_at`, `detected_at`, `acknowledged_at`, `mitigated_at`, `resolved_at`, `closed_at`, `manual_starting_datetime_field`.",
+				ValidateFunc: validation.StringInSlice([]string{"custom", "title", "summary", "mitigation_message", "resolution_message", "severity", "environments", "types", "services", "causes", "functionalities", "teams", "visibility", "mark_as_test", "mark_as_backfilled", "labels", "notify_emails", "trigger_manual_workflows", "show_ongoing_incidents", "attach_alerts", "mark_as_in_triage", "in_triage_at", "started_at", "detected_at", "acknowledged_at", "mitigated_at", "resolved_at", "closed_at", "manual_starting_datetime_field"}, false),
 			},
 
 			"input_kind": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "text",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The input kind of the form field. Value must be one of `text`, `textarea`, `select`, `multi_select`, `date`, `datetime`, `number`, `checkbox`, `tags`, `rich_text`.",
+				Type:         schema.TypeString,
+				Default:      "text",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "The input kind of the form field. Value must be one of `text`, `textarea`, `select`, `multi_select`, `date`, `datetime`, `number`, `checkbox`, `tags`, `rich_text`.",
+				ValidateFunc: validation.StringInSlice([]string{"text", "textarea", "select", "multi_select", "date", "datetime", "number", "checkbox", "tags", "rich_text"}, false),
 			},
 
 			"value_kind": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "inherit",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The value kind of the form field. Value must be one of `inherit`, `group`, `service`, `functionality`, `user`, `catalog_entity`.",
+				Type:         schema.TypeString,
+				Default:      "inherit",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "The value kind of the form field. Value must be one of `inherit`, `group`, `service`, `functionality`, `user`, `catalog_entity`.",
+				ValidateFunc: validation.StringInSlice([]string{"inherit", "group", "service", "functionality", "user", "catalog_entity"}, false),
 			},
 
 			"value_kind_catalog_id": &schema.Schema{

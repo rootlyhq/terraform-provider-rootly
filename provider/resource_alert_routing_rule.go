@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -59,12 +60,13 @@ func resourceAlertRoutingRule() *schema.Resource {
 			},
 
 			"condition_type": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "all",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The type of condition for the alert routing rule. Value must be one of `all`, `any`.",
+				Type:         schema.TypeString,
+				Default:      "all",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "The type of condition for the alert routing rule. Value must be one of `all`, `any`.",
+				ValidateFunc: validation.StringInSlice([]string{"all", "any"}, false),
 			},
 
 			"conditions": &schema.Schema{
@@ -78,12 +80,13 @@ func resourceAlertRoutingRule() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 
 						"property_field_type": &schema.Schema{
-							Type:        schema.TypeString,
-							Default:     "attribute",
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "The type of the property field. Value must be one of `attribute`, `payload`, `alert_field`.",
+							Type:         schema.TypeString,
+							Default:      "attribute",
+							Required:     false,
+							Optional:     true,
+							ForceNew:     false,
+							Description:  "The type of the property field. Value must be one of `attribute`, `payload`, `alert_field`.",
+							ValidateFunc: validation.StringInSlice([]string{"attribute", "payload", "alert_field"}, false),
 						},
 
 						"property_field_name": &schema.Schema{
@@ -96,12 +99,13 @@ func resourceAlertRoutingRule() *schema.Resource {
 						},
 
 						"property_field_condition_type": &schema.Schema{
-							Type:        schema.TypeString,
-							Default:     "is_one_of",
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "The condition type of the property field. Value must be one of `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is_empty`.",
+							Type:         schema.TypeString,
+							Default:      "is_one_of",
+							Required:     false,
+							Optional:     true,
+							ForceNew:     false,
+							Description:  "The condition type of the property field. Value must be one of `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is_empty`.",
+							ValidateFunc: validation.StringInSlice([]string{"is_one_of", "is_not_one_of", "contains", "does_not_contain", "starts_with", "ends_with", "matches_regex", "is_empty"}, false),
 						},
 
 						"property_field_value": &schema.Schema{
@@ -140,12 +144,13 @@ func resourceAlertRoutingRule() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 
 						"target_type": &schema.Schema{
-							Type:        schema.TypeString,
-							Default:     "Service",
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "The type of the target. Value must be one of `Service`, `Group`, `EscalationPolicy`.",
+							Type:         schema.TypeString,
+							Default:      "Service",
+							Required:     false,
+							Optional:     true,
+							ForceNew:     false,
+							Description:  "The type of the target. Value must be one of `Service`, `Group`, `EscalationPolicy`.",
+							ValidateFunc: validation.StringInSlice([]string{"Service", "Group", "EscalationPolicy"}, false),
 						},
 
 						"target_id": &schema.Schema{

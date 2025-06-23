@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -35,12 +36,13 @@ func resourceIncidentPermissionSetResource() *schema.Resource {
 			},
 
 			"kind": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "severities",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "Value must be one of `severities`, `incident_types`, `statuses`, `sub_statuses`.",
+				Type:         schema.TypeString,
+				Default:      "severities",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "Value must be one of `severities`, `incident_types`, `statuses`, `sub_statuses`.",
+				ValidateFunc: validation.StringInSlice([]string{"severities", "incident_types", "statuses", "sub_statuses"}, false),
 			},
 
 			"private": &schema.Schema{

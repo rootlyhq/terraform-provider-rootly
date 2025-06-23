@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -35,12 +36,13 @@ func resourceScheduleRotationActiveDay() *schema.Resource {
 			},
 
 			"day_name": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "S",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "Schedule rotation day name for which active times to be created. Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
+				Type:         schema.TypeString,
+				Default:      "S",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "Schedule rotation day name for which active times to be created. Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
+				ValidateFunc: validation.StringInSlice([]string{"S", "M", "T", "W", "R", "F", "U"}, false),
 			},
 
 			"active_time_attributes": &schema.Schema{

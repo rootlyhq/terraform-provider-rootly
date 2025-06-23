@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -26,12 +27,13 @@ func resourceWorkflowGroup() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 
 			"kind": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "simple",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The kind of the workflow group. Value must be one of `simple`, `incident`, `post_mortem`, `action_item`, `pulse`, `alert`.",
+				Type:         schema.TypeString,
+				Default:      "simple",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "The kind of the workflow group. Value must be one of `simple`, `incident`, `post_mortem`, `action_item`, `pulse`, `alert`.",
+				ValidateFunc: validation.StringInSlice([]string{"simple", "incident", "post_mortem", "action_item", "pulse", "alert"}, false),
 			},
 
 			"name": &schema.Schema{

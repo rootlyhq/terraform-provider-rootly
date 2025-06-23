@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -35,12 +36,13 @@ func resourceAuthorization() *schema.Resource {
 			},
 
 			"authorizable_type": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "Dashboard",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The type of resource being accessed.. Value must be one of `Dashboard`.",
+				Type:         schema.TypeString,
+				Default:      "Dashboard",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "The type of resource being accessed.. Value must be one of `Dashboard`.",
+				ValidateFunc: validation.StringInSlice([]string{"Dashboard"}, false),
 			},
 
 			"grantee_id": &schema.Schema{
@@ -53,18 +55,20 @@ func resourceAuthorization() *schema.Resource {
 			},
 
 			"grantee_type": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "User",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The type of resource granted access.. Value must be one of `User`, `Team`.",
+				Type:         schema.TypeString,
+				Default:      "User",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "The type of resource granted access.. Value must be one of `User`, `Team`.",
+				ValidateFunc: validation.StringInSlice([]string{"User", "Team"}, false),
 			},
 
 			"permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"read", "update", "authorize", "destroy"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         false,

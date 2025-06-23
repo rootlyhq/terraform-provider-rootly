@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -35,12 +36,13 @@ func resourceFormFieldPlacementCondition() *schema.Resource {
 			},
 
 			"conditioned": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "placement",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The resource or attribute the condition applies.. Value must be one of `placement`, `required`.",
+				Type:         schema.TypeString,
+				Default:      "placement",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "The resource or attribute the condition applies.. Value must be one of `placement`, `required`.",
+				ValidateFunc: validation.StringInSlice([]string{"placement", "required"}, false),
 			},
 
 			"position": &schema.Schema{
@@ -62,12 +64,13 @@ func resourceFormFieldPlacementCondition() *schema.Resource {
 			},
 
 			"comparison": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "equal",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The condition comparison.. Value must be one of `equal`, `is_set`, `is_not_set`.",
+				Type:         schema.TypeString,
+				Default:      "equal",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "The condition comparison.. Value must be one of `equal`, `is_set`, `is_not_set`.",
+				ValidateFunc: validation.StringInSlice([]string{"equal", "is_set", "is_not_set"}, false),
 			},
 
 			"values": &schema.Schema{

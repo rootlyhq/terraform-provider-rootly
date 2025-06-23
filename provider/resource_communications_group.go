@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -70,12 +71,13 @@ func resourceCommunicationsGroup() *schema.Resource {
 			},
 
 			"condition_type": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "any",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "Condition type. Value must be one of `any`, `all`.",
+				Type:         schema.TypeString,
+				Default:      "any",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "Condition type. Value must be one of `any`, `all`.",
+				ValidateFunc: validation.StringInSlice([]string{"any", "all"}, false),
 			},
 
 			"sms_channel": &schema.Schema{
@@ -123,12 +125,13 @@ func resourceCommunicationsGroup() *schema.Resource {
 						},
 
 						"property_type": &schema.Schema{
-							Type:        schema.TypeString,
-							Default:     "service",
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "Property type. Value must be one of `service`, `severity`, `functionality`, `group`, `incident_type`.",
+							Type:         schema.TypeString,
+							Default:      "service",
+							Required:     false,
+							Optional:     true,
+							ForceNew:     false,
+							Description:  "Property type. Value must be one of `service`, `severity`, `functionality`, `group`, `incident_type`.",
+							ValidateFunc: validation.StringInSlice([]string{"service", "severity", "functionality", "group", "incident_type"}, false),
 						},
 
 						"properties": &schema.Schema{

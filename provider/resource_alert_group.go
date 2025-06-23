@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -97,12 +98,13 @@ func resourceAlertGroup() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 
 						"target_type": &schema.Schema{
-							Type:        schema.TypeString,
-							Default:     "Group",
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "The type of the target.. Value must be one of `Group`, `Service`, `EscalationPolicy`.",
+							Type:         schema.TypeString,
+							Default:      "Group",
+							Required:     false,
+							Optional:     true,
+							ForceNew:     false,
+							Description:  "The type of the target.. Value must be one of `Group`, `Service`, `EscalationPolicy`.",
+							ValidateFunc: validation.StringInSlice([]string{"Group", "Service", "EscalationPolicy"}, false),
 						},
 
 						"target_id": &schema.Schema{
@@ -150,12 +152,13 @@ func resourceAlertGroup() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 
 						"property_field_type": &schema.Schema{
-							Type:        schema.TypeString,
-							Default:     "attribute",
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "The type of the property field. Value must be one of `attribute`, `payload`, `alert_field`.",
+							Type:         schema.TypeString,
+							Default:      "attribute",
+							Required:     false,
+							Optional:     true,
+							ForceNew:     false,
+							Description:  "The type of the property field. Value must be one of `attribute`, `payload`, `alert_field`.",
+							ValidateFunc: validation.StringInSlice([]string{"attribute", "payload", "alert_field"}, false),
 						},
 
 						"property_field_name": &schema.Schema{
@@ -168,12 +171,13 @@ func resourceAlertGroup() *schema.Resource {
 						},
 
 						"property_field_condition_type": &schema.Schema{
-							Type:        schema.TypeString,
-							Default:     "is_one_of",
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "The condition type of the property field. Value must be one of `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is_empty`, `matches_existing_alert`.",
+							Type:         schema.TypeString,
+							Default:      "is_one_of",
+							Required:     false,
+							Optional:     true,
+							ForceNew:     false,
+							Description:  "The condition type of the property field. Value must be one of `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is_empty`, `matches_existing_alert`.",
+							ValidateFunc: validation.StringInSlice([]string{"is_one_of", "is_not_one_of", "contains", "does_not_contain", "starts_with", "ends_with", "matches_regex", "is_empty", "matches_existing_alert"}, false),
 						},
 
 						"property_field_value": &schema.Schema{

@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -44,12 +45,13 @@ func resourceWorkflowFormFieldCondition() *schema.Resource {
 			},
 
 			"incident_condition": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "ANY",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The trigger condition. Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+				Type:         schema.TypeString,
+				Default:      "ANY",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "The trigger condition. Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+				ValidateFunc: validation.StringInSlice([]string{"IS", "ANY", "CONTAINS", "CONTAINS_ALL", "CONTAINS_NONE", "NONE", "SET", "UNSET"}, false),
 			},
 
 			"values": &schema.Schema{

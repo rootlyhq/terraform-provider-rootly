@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -26,12 +27,13 @@ func resourceLiveCallRouter() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 
 			"kind": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "voicemail",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The kind of the live_call_router. Value must be one of `voicemail`, `live`.",
+				Type:         schema.TypeString,
+				Default:      "voicemail",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "The kind of the live_call_router. Value must be one of `voicemail`, `live`.",
+				ValidateFunc: validation.StringInSlice([]string{"voicemail", "live"}, false),
 			},
 
 			"enabled": &schema.Schema{
@@ -50,21 +52,23 @@ func resourceLiveCallRouter() *schema.Resource {
 			},
 
 			"country_code": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "US",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The country code of the live_call_router. Value must be one of `US`, `GB`, `NZ`, `CA`, `AU`.",
+				Type:         schema.TypeString,
+				Default:      "US",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "The country code of the live_call_router. Value must be one of `US`, `GB`, `NZ`, `CA`, `AU`, `NL`.",
+				ValidateFunc: validation.StringInSlice([]string{"US", "GB", "NZ", "CA", "AU", "NL"}, false),
 			},
 
 			"phone_type": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "local",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The phone type of the live_call_router. Value must be one of `local`, `toll_free`.",
+				Type:         schema.TypeString,
+				Default:      "local",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "The phone type of the live_call_router. Value must be one of `local`, `toll_free`, `mobile`.",
+				ValidateFunc: validation.StringInSlice([]string{"local", "toll_free", "mobile"}, false),
 			},
 
 			"phone_number": &schema.Schema{
@@ -95,12 +99,13 @@ func resourceLiveCallRouter() *schema.Resource {
 			},
 
 			"waiting_music_url": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "https://storage.rootly.com/twilio/voicemail/ClockworkWaltz.mp3",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The waiting music URL of the live_call_router. Value must be one of `https://storage.rootly.com/twilio/voicemail/ClockworkWaltz.mp3`, `https://storage.rootly.com/twilio/voicemail/ith_brahms-116-4.mp3`, `https://storage.rootly.com/twilio/voicemail/Mellotroniac_-_Flight_Of_Young_Hearts_Flute.mp3`, `https://storage.rootly.com/twilio/voicemail/BusyStrings.mp3`, `https://storage.rootly.com/twilio/voicemail/oldDog_-_endless_goodbye_%28instr.%29.mp3`, `https://storage.rootly.com/twilio/voicemail/MARKOVICHAMP-Borghestral.mp3`, `https://storage.rootly.com/twilio/voicemail/ith_chopin-15-2.mp3`.",
+				Type:         schema.TypeString,
+				Default:      "https://storage.rootly.com/twilio/voicemail/ClockworkWaltz.mp3",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "The waiting music URL of the live_call_router. Value must be one of `https://storage.rootly.com/twilio/voicemail/ClockworkWaltz.mp3`, `https://storage.rootly.com/twilio/voicemail/ith_brahms-116-4.mp3`, `https://storage.rootly.com/twilio/voicemail/Mellotroniac_-_Flight_Of_Young_Hearts_Flute.mp3`, `https://storage.rootly.com/twilio/voicemail/BusyStrings.mp3`, `https://storage.rootly.com/twilio/voicemail/oldDog_-_endless_goodbye_%28instr.%29.mp3`, `https://storage.rootly.com/twilio/voicemail/MARKOVICHAMP-Borghestral.mp3`, `https://storage.rootly.com/twilio/voicemail/ith_chopin-15-2.mp3`.",
+				ValidateFunc: validation.StringInSlice([]string{"https://storage.rootly.com/twilio/voicemail/ClockworkWaltz.mp3", "https://storage.rootly.com/twilio/voicemail/ith_brahms-116-4.mp3", "https://storage.rootly.com/twilio/voicemail/Mellotroniac_-_Flight_Of_Young_Hearts_Flute.mp3", "https://storage.rootly.com/twilio/voicemail/BusyStrings.mp3", "https://storage.rootly.com/twilio/voicemail/oldDog_-_endless_goodbye_%28instr.%29.mp3", "https://storage.rootly.com/twilio/voicemail/MARKOVICHAMP-Borghestral.mp3", "https://storage.rootly.com/twilio/voicemail/ith_chopin-15-2.mp3"}, false),
 			},
 
 			"sent_to_voicemail_delay": &schema.Schema{
@@ -175,12 +180,13 @@ func resourceLiveCallRouter() *schema.Resource {
 						},
 
 						"type": &schema.Schema{
-							Type:        schema.TypeString,
-							Default:     "service",
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "The type of the paging target. Value must be one of `service`, `team`, `escalation_policy`.",
+							Type:         schema.TypeString,
+							Default:      "service",
+							Required:     false,
+							Optional:     true,
+							ForceNew:     false,
+							Description:  "The type of the paging target. Value must be one of `service`, `team`, `escalation_policy`.",
+							ValidateFunc: validation.StringInSlice([]string{"service", "team", "escalation_policy"}, false),
 						},
 
 						"alert_urgency_id": &schema.Schema{

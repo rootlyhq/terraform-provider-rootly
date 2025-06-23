@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 )
 
@@ -52,12 +53,13 @@ func resourceSubStatus() *schema.Resource {
 			},
 
 			"parent_status": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "in_triage",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "Value must be one of `in_triage`, `started`, `resolved`, `closed`, `cancelled`, `scheduled`, `in_progress`, `completed`.",
+				Type:         schema.TypeString,
+				Default:      "in_triage",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "Value must be one of `in_triage`, `started`, `resolved`, `closed`, `cancelled`, `scheduled`, `in_progress`, `completed`.",
+				ValidateFunc: validation.StringInSlice([]string{"in_triage", "started", "resolved", "closed", "cancelled", "scheduled", "in_progress", "completed"}, false),
 			},
 
 			"position": &schema.Schema{

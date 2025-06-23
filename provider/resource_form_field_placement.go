@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -70,21 +71,23 @@ func resourceFormFieldPlacement() *schema.Resource {
 			},
 
 			"required_operator": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "and",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "Logical operator when evaluating multiple form_field_placement_conditions with conditioned=required. Value must be one of `and`, `or`.",
+				Type:         schema.TypeString,
+				Default:      "and",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "Logical operator when evaluating multiple form_field_placement_conditions with conditioned=required. Value must be one of `and`, `or`.",
+				ValidateFunc: validation.StringInSlice([]string{"and", "or"}, false),
 			},
 
 			"placement_operator": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "and",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "Logical operator when evaluating multiple form_field_placement_conditions with conditioned=placement. Value must be one of `and`, `or`.",
+				Type:         schema.TypeString,
+				Default:      "and",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "Logical operator when evaluating multiple form_field_placement_conditions with conditioned=placement. Value must be one of `and`, `or`.",
+				ValidateFunc: validation.StringInSlice([]string{"and", "or"}, false),
 			},
 		},
 	}

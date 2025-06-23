@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -35,12 +36,13 @@ func resourceIncidentPermissionSetBoolean() *schema.Resource {
 			},
 
 			"kind": &schema.Schema{
-				Type:        schema.TypeString,
-				Default:     "publish_to_status_page",
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "Value must be one of `publish_to_status_page`, `assign_incident_roles`, `invite_subscribers`, `update_summary`, `update_timeline`, `trigger_workflows`, `create_communications`, `read_communications`, `update_communications`, `delete_communications`, `send_communications`, `modify_custom_fields`.",
+				Type:         schema.TypeString,
+				Default:      "publish_to_status_page",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "Value must be one of `publish_to_status_page`, `assign_incident_roles`, `invite_subscribers`, `update_summary`, `update_timeline`, `trigger_workflows`, `create_communications`, `read_communications`, `update_communications`, `delete_communications`, `send_communications`, `modify_custom_fields`.",
+				ValidateFunc: validation.StringInSlice([]string{"publish_to_status_page", "assign_incident_roles", "invite_subscribers", "update_summary", "update_timeline", "trigger_workflows", "create_communications", "read_communications", "update_communications", "delete_communications", "send_communications", "modify_custom_fields"}, false),
 			},
 
 			"private": &schema.Schema{
