@@ -123,6 +123,37 @@ func resourceAlertsSource() *schema.Resource {
 				Optional:    true,
 				Description: "Additional attributes for email alerts source",
 			},
+
+			"alert_source_fields_attributes": &schema.Schema{
+				Type:             schema.TypeList,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "List of alert fields to be added to alert source",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+
+						"alert_field_id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "The ID of the alert field",
+						},
+
+						"template_body": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Liquid expression to extract a specific value from the alert's payload for evaluation",
+						},
+					},
+				},
+			},
 		},
 	}
 }
@@ -206,7 +237,25 @@ func resourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, meta 
 	d.Set("owner_group_ids", item.OwnerGroupIds)
 	d.Set("sourceable_attributes", item.SourceableAttributes)
 	d.Set("resolution_rule_attributes", item.ResolutionRuleAttributes)
-	d.Set("alert_source_fields_attributes", item.AlertSourceFieldsAttributes)
+
+	if item.AlertSourceFieldsAttributes != nil {
+		processedItems := make([]map[string]interface{}, 0)
+
+		for _, c := range item.AlertSourceFieldsAttributes {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processedItem := map[string]interface{}{
+					"alert_field_id": rawItem["alert_field_id"],
+					"template_body":  rawItem["template_body"],
+				}
+				processedItems = append(processedItems, processedItem)
+			}
+		}
+
+		d.Set("alert_source_fields_attributes", processedItems)
+	} else {
+		d.Set("alert_source_fields_attributes", nil)
+	}
 
 	return nil
 }

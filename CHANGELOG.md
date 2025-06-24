@@ -1,5 +1,12 @@
 # Changelog
 
+## [Unreleased]
+
+### Fixed
+
+- Fixed `alert_source_fields_attributes` field generation by adding proper items schema definition in alerts_sources_schema.rb
+- Fixed CI panic "Invalid address to set: []string{"alert_source_fields_attributes"}" by ensuring proper schema definition
+
 ## [3.3.0] -- 2025-06-23
 
 ### Added

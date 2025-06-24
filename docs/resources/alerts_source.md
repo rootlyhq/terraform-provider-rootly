@@ -84,6 +84,7 @@ terraform plan -generate-config-out=generated.tf
 
 ### Optional
 
+- `alert_source_fields_attributes` (Block List) List of alert fields to be added to alert source (see [below for nested schema](#nestedblock--alert_source_fields_attributes))
 - `alert_urgency_id` (String) ID for the default alert urgency assigned to this alert source
 - `email` (String) The email address of the alert source
 - `owner_group_ids` (List of String) List of team IDs that will own the alert source
@@ -97,3 +98,11 @@ terraform plan -generate-config-out=generated.tf
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--alert_source_fields_attributes"></a>
+### Nested Schema for `alert_source_fields_attributes`
+
+Optional:
+
+- `alert_field_id` (String) The ID of the alert field
+- `template_body` (String) Liquid expression to extract a specific value from the alert's payload for evaluation
