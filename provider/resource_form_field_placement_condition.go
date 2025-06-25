@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
@@ -18,72 +18,84 @@ import (
 func resourceFormFieldPlacementCondition() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceFormFieldPlacementConditionCreate,
-		ReadContext:   resourceFormFieldPlacementConditionRead,
+		ReadContext: resourceFormFieldPlacementConditionRead,
 		UpdateContext: resourceFormFieldPlacementConditionUpdate,
 		DeleteContext: resourceFormFieldPlacementConditionDelete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
-
-			"form_field_placement_id": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    true,
+		Schema: map[string]*schema.Schema {
+			
+			"form_field_placement_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: true,
 				Description: "The form field placement this condition applies.",
+				
 			},
+			
 
-			"conditioned": &schema.Schema{
-				Type:         schema.TypeString,
-				Default:      "placement",
-				Required:     false,
-				Optional:     true,
-				ForceNew:     false,
-				Description:  "The resource or attribute the condition applies.. Value must be one of `placement`, `required`.",
-				ValidateFunc: validation.StringInSlice([]string{"placement", "required"}, false),
+			"conditioned": &schema.Schema {
+				Type: schema.TypeString,
+				Default: "placement",
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The resource or attribute the condition applies.. Value must be one of `placement`, `required`.",
+		ValidateFunc: validation.StringInSlice([]string{"placement", "required"}, false),
+				
 			},
+			
 
-			"position": &schema.Schema{
-				Type:        schema.TypeInt,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The condition position.",
-			},
+		"position": &schema.Schema {
+			Type: schema.TypeInt,
+			Computed: true,
+			Required: false,
+			Optional: true,
+			ForceNew: false,
+			Description: "The condition position.",
+			
+		},
+		
 
-			"form_field_id": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+			"form_field_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The condition field.",
+				
 			},
+			
 
-			"comparison": &schema.Schema{
-				Type:         schema.TypeString,
-				Default:      "equal",
-				Required:     false,
-				Optional:     true,
-				ForceNew:     false,
-				Description:  "The condition comparison.. Value must be one of `equal`, `is_set`, `is_not_set`.",
-				ValidateFunc: validation.StringInSlice([]string{"equal", "is_set", "is_not_set"}, false),
+			"comparison": &schema.Schema {
+				Type: schema.TypeString,
+				Default: "equal",
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The condition comparison.. Value must be one of `equal`, `is_set`, `is_not_set`.",
+		ValidateFunc: validation.StringInSlice([]string{"equal", "is_set", "is_not_set"}, false),
+				
 			},
+			
 
-			"values": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
+				"values": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: false,
+					Required: true,
+					Optional: false,
+					Description: "The values for comparison.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         false,
-				Required:         true,
-				Optional:         false,
-				Description:      "The values for comparison.",
-			},
+				
 		},
 	}
 }
@@ -95,24 +107,24 @@ func resourceFormFieldPlacementConditionCreate(ctx context.Context, d *schema.Re
 
 	s := &client.FormFieldPlacementCondition{}
 
-	if value, ok := d.GetOkExists("form_field_placement_id"); ok {
-		s.FormFieldPlacementId = value.(string)
-	}
-	if value, ok := d.GetOkExists("conditioned"); ok {
-		s.Conditioned = value.(string)
-	}
-	if value, ok := d.GetOkExists("position"); ok {
-		s.Position = value.(int)
-	}
-	if value, ok := d.GetOkExists("form_field_id"); ok {
-		s.FormFieldId = value.(string)
-	}
-	if value, ok := d.GetOkExists("comparison"); ok {
-		s.Comparison = value.(string)
-	}
-	if value, ok := d.GetOkExists("values"); ok {
-		s.Values = value.([]interface{})
-	}
+	  if value, ok := d.GetOkExists("form_field_placement_id"); ok {
+				s.FormFieldPlacementId = value.(string)
+			}
+    if value, ok := d.GetOkExists("conditioned"); ok {
+				s.Conditioned = value.(string)
+			}
+    if value, ok := d.GetOkExists("position"); ok {
+				s.Position = value.(int)
+			}
+    if value, ok := d.GetOkExists("form_field_id"); ok {
+				s.FormFieldId = value.(string)
+			}
+    if value, ok := d.GetOkExists("comparison"); ok {
+				s.Comparison = value.(string)
+			}
+    if value, ok := d.GetOkExists("values"); ok {
+				s.Values = value.([]interface{})
+			}
 
 	res, err := c.CreateFormFieldPlacementCondition(s)
 	if err != nil {
@@ -143,11 +155,11 @@ func resourceFormFieldPlacementConditionRead(ctx context.Context, d *schema.Reso
 	}
 
 	d.Set("form_field_placement_id", item.FormFieldPlacementId)
-	d.Set("conditioned", item.Conditioned)
-	d.Set("position", item.Position)
-	d.Set("form_field_id", item.FormFieldId)
-	d.Set("comparison", item.Comparison)
-	d.Set("values", item.Values)
+  d.Set("conditioned", item.Conditioned)
+  d.Set("position", item.Position)
+  d.Set("form_field_id", item.FormFieldId)
+  d.Set("comparison", item.Comparison)
+  d.Set("values", item.Values)
 
 	return nil
 }
@@ -158,24 +170,24 @@ func resourceFormFieldPlacementConditionUpdate(ctx context.Context, d *schema.Re
 
 	s := &client.FormFieldPlacementCondition{}
 
-	if d.HasChange("form_field_placement_id") {
-		s.FormFieldPlacementId = d.Get("form_field_placement_id").(string)
-	}
-	if d.HasChange("conditioned") {
-		s.Conditioned = d.Get("conditioned").(string)
-	}
-	if d.HasChange("position") {
-		s.Position = d.Get("position").(int)
-	}
-	if d.HasChange("form_field_id") {
-		s.FormFieldId = d.Get("form_field_id").(string)
-	}
-	if d.HasChange("comparison") {
-		s.Comparison = d.Get("comparison").(string)
-	}
-	if d.HasChange("values") {
-		s.Values = d.Get("values").([]interface{})
-	}
+	  if d.HasChange("form_field_placement_id") {
+				s.FormFieldPlacementId = d.Get("form_field_placement_id").(string)
+			}
+    if d.HasChange("conditioned") {
+				s.Conditioned = d.Get("conditioned").(string)
+			}
+    if d.HasChange("position") {
+				s.Position = d.Get("position").(int)
+			}
+    if d.HasChange("form_field_id") {
+				s.FormFieldId = d.Get("form_field_id").(string)
+			}
+    if d.HasChange("comparison") {
+				s.Comparison = d.Get("comparison").(string)
+			}
+    if d.HasChange("values") {
+				s.Values = d.Get("values").([]interface{})
+			}
 
 	_, err := c.UpdateFormFieldPlacementCondition(d.Id(), s)
 	if err != nil {

@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
@@ -18,66 +18,76 @@ import (
 func resourceIncidentPermissionSet() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceIncidentPermissionSetCreate,
-		ReadContext:   resourceIncidentPermissionSetRead,
+		ReadContext: resourceIncidentPermissionSetRead,
 		UpdateContext: resourceIncidentPermissionSetUpdate,
 		DeleteContext: resourceIncidentPermissionSetDelete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
-
-			"name": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+		Schema: map[string]*schema.Schema {
+			
+			"name": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The incident permission set name.",
+				
 			},
+			
 
-			"slug": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"slug": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "The incident permission set slug.",
+				
 			},
+			
 
-			"description": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"description": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "The incident permission set description.",
+				
 			},
+			
 
-			"private_incident_permissions": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type:         schema.TypeString,
+				"private_incident_permissions": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
 					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Value must be one of `create`, `read`, `update`, `delete`.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
-			},
+				
 
-			"public_incident_permissions": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type:         schema.TypeString,
+				"public_incident_permissions": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
 					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Value must be one of `create`, `read`, `update`, `delete`.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
-			},
+				
 		},
 	}
 }
@@ -89,21 +99,21 @@ func resourceIncidentPermissionSetCreate(ctx context.Context, d *schema.Resource
 
 	s := &client.IncidentPermissionSet{}
 
-	if value, ok := d.GetOkExists("name"); ok {
-		s.Name = value.(string)
-	}
-	if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
-	}
-	if value, ok := d.GetOkExists("description"); ok {
-		s.Description = value.(string)
-	}
-	if value, ok := d.GetOkExists("private_incident_permissions"); ok {
-		s.PrivateIncidentPermissions = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("public_incident_permissions"); ok {
-		s.PublicIncidentPermissions = value.([]interface{})
-	}
+	  if value, ok := d.GetOkExists("name"); ok {
+				s.Name = value.(string)
+			}
+    if value, ok := d.GetOkExists("slug"); ok {
+				s.Slug = value.(string)
+			}
+    if value, ok := d.GetOkExists("description"); ok {
+				s.Description = value.(string)
+			}
+    if value, ok := d.GetOkExists("private_incident_permissions"); ok {
+				s.PrivateIncidentPermissions = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("public_incident_permissions"); ok {
+				s.PublicIncidentPermissions = value.([]interface{})
+			}
 
 	res, err := c.CreateIncidentPermissionSet(s)
 	if err != nil {
@@ -134,10 +144,10 @@ func resourceIncidentPermissionSetRead(ctx context.Context, d *schema.ResourceDa
 	}
 
 	d.Set("name", item.Name)
-	d.Set("slug", item.Slug)
-	d.Set("description", item.Description)
-	d.Set("private_incident_permissions", item.PrivateIncidentPermissions)
-	d.Set("public_incident_permissions", item.PublicIncidentPermissions)
+  d.Set("slug", item.Slug)
+  d.Set("description", item.Description)
+  d.Set("private_incident_permissions", item.PrivateIncidentPermissions)
+  d.Set("public_incident_permissions", item.PublicIncidentPermissions)
 
 	return nil
 }
@@ -148,21 +158,21 @@ func resourceIncidentPermissionSetUpdate(ctx context.Context, d *schema.Resource
 
 	s := &client.IncidentPermissionSet{}
 
-	if d.HasChange("name") {
-		s.Name = d.Get("name").(string)
-	}
-	if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
-	}
-	if d.HasChange("description") {
-		s.Description = d.Get("description").(string)
-	}
-	if d.HasChange("private_incident_permissions") {
-		s.PrivateIncidentPermissions = d.Get("private_incident_permissions").([]interface{})
-	}
-	if d.HasChange("public_incident_permissions") {
-		s.PublicIncidentPermissions = d.Get("public_incident_permissions").([]interface{})
-	}
+	  if d.HasChange("name") {
+				s.Name = d.Get("name").(string)
+			}
+    if d.HasChange("slug") {
+				s.Slug = d.Get("slug").(string)
+			}
+    if d.HasChange("description") {
+				s.Description = d.Get("description").(string)
+			}
+    if d.HasChange("private_incident_permissions") {
+				s.PrivateIncidentPermissions = d.Get("private_incident_permissions").([]interface{})
+			}
+    if d.HasChange("public_incident_permissions") {
+				s.PublicIncidentPermissions = d.Get("public_incident_permissions").([]interface{})
+			}
 
 	_, err := c.UpdateIncidentPermissionSet(d.Id(), s)
 	if err != nil {

@@ -10,8 +10,7 @@ import (
 
 func TestAccResourceAlertsSource(t *testing.T) {
 	resource.UnitTest(t, resource.TestCase{
-		IsUnitTest: false,
-		PreCheck: func() {
+		PreCheck:          func() {
 			testAccPreCheck(t)
 		},
 		ProviderFactories: providerFactories,
@@ -25,6 +24,6 @@ func TestAccResourceAlertsSource(t *testing.T) {
 
 const testAccResourceAlertsSource = `
 resource "rootly_alerts_source" "test" {
-	name = "tf-test-alerts-source"
+	name = "test"
 }
 `

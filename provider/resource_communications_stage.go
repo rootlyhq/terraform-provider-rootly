@@ -8,58 +8,67 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
+	
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	
 )
 
 func resourceCommunicationsStage() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceCommunicationsStageCreate,
-		ReadContext:   resourceCommunicationsStageRead,
+		ReadContext: resourceCommunicationsStageRead,
 		UpdateContext: resourceCommunicationsStageUpdate,
 		DeleteContext: resourceCommunicationsStageDelete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
-
-			"name": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+		Schema: map[string]*schema.Schema {
+			
+			"name": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The name of the communications stage",
+				
 			},
+			
 
-			"slug": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"slug": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "The slug of the communications stage",
+				
 			},
+			
 
-			"description": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"description": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "The description of the communications stage",
+				
 			},
+			
 
-			"position": &schema.Schema{
-				Type:        schema.TypeInt,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "Position of the communications stage",
-			},
+		"position": &schema.Schema {
+			Type: schema.TypeInt,
+			Computed: true,
+			Required: false,
+			Optional: true,
+			ForceNew: false,
+			Description: "Position of the communications stage",
+			
+		},
+		
 		},
 	}
 }
@@ -71,18 +80,18 @@ func resourceCommunicationsStageCreate(ctx context.Context, d *schema.ResourceDa
 
 	s := &client.CommunicationsStage{}
 
-	if value, ok := d.GetOkExists("name"); ok {
-		s.Name = value.(string)
-	}
-	if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
-	}
-	if value, ok := d.GetOkExists("description"); ok {
-		s.Description = value.(string)
-	}
-	if value, ok := d.GetOkExists("position"); ok {
-		s.Position = value.(int)
-	}
+	  if value, ok := d.GetOkExists("name"); ok {
+				s.Name = value.(string)
+			}
+    if value, ok := d.GetOkExists("slug"); ok {
+				s.Slug = value.(string)
+			}
+    if value, ok := d.GetOkExists("description"); ok {
+				s.Description = value.(string)
+			}
+    if value, ok := d.GetOkExists("position"); ok {
+				s.Position = value.(int)
+			}
 
 	res, err := c.CreateCommunicationsStage(s)
 	if err != nil {
@@ -113,9 +122,9 @@ func resourceCommunicationsStageRead(ctx context.Context, d *schema.ResourceData
 	}
 
 	d.Set("name", item.Name)
-	d.Set("slug", item.Slug)
-	d.Set("description", item.Description)
-	d.Set("position", item.Position)
+  d.Set("slug", item.Slug)
+  d.Set("description", item.Description)
+  d.Set("position", item.Position)
 
 	return nil
 }
@@ -126,18 +135,18 @@ func resourceCommunicationsStageUpdate(ctx context.Context, d *schema.ResourceDa
 
 	s := &client.CommunicationsStage{}
 
-	if d.HasChange("name") {
-		s.Name = d.Get("name").(string)
-	}
-	if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
-	}
-	if d.HasChange("description") {
-		s.Description = d.Get("description").(string)
-	}
-	if d.HasChange("position") {
-		s.Position = d.Get("position").(int)
-	}
+	  if d.HasChange("name") {
+				s.Name = d.Get("name").(string)
+			}
+    if d.HasChange("slug") {
+				s.Slug = d.Get("slug").(string)
+			}
+    if d.HasChange("description") {
+				s.Description = d.Get("description").(string)
+			}
+    if d.HasChange("position") {
+				s.Position = d.Get("position").(int)
+			}
 
 	_, err := c.UpdateCommunicationsStage(d.Id(), s)
 	if err != nil {

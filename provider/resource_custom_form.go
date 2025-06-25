@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
+	
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -18,55 +18,65 @@ import (
 func resourceCustomForm() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceCustomFormCreate,
-		ReadContext:   resourceCustomFormRead,
+		ReadContext: resourceCustomFormRead,
 		UpdateContext: resourceCustomFormUpdate,
 		DeleteContext: resourceCustomFormDelete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
-
-			"name": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+		Schema: map[string]*schema.Schema {
+			
+			"name": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The name of the custom form.",
+				
 			},
+			
 
-			"slug": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The custom form slug. Add this to form_field.shown or form_field.required to associate form fields with custom forms.",
-			},
-
-			"description": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "",
-			},
-
-			"enabled": &schema.Schema{
-				Type:     schema.TypeBool,
-				Default:  true,
+			"slug": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
 				Optional: true,
+				ForceNew: false,
+				Description: "The custom form slug. Add this to form_field.shown or form_field.required to associate form fields with custom forms.",
+				
 			},
+			
 
-			"command": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
-				Description: "The Slack command used to trigger this form.",
+			"description": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "",
+				
 			},
+			
+
+				"enabled": &schema.Schema {
+					Type: schema.TypeBool,
+					Default: true,
+					Optional: true,
+					
+				},
+				
+
+			"command": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
+				Description: "The Slack command used to trigger this form.",
+				
+			},
+			
 		},
 	}
 }
@@ -78,21 +88,21 @@ func resourceCustomFormCreate(ctx context.Context, d *schema.ResourceData, meta 
 
 	s := &client.CustomForm{}
 
-	if value, ok := d.GetOkExists("name"); ok {
-		s.Name = value.(string)
-	}
-	if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
-	}
-	if value, ok := d.GetOkExists("description"); ok {
-		s.Description = value.(string)
-	}
-	if value, ok := d.GetOkExists("enabled"); ok {
-		s.Enabled = tools.Bool(value.(bool))
-	}
-	if value, ok := d.GetOkExists("command"); ok {
-		s.Command = value.(string)
-	}
+	  if value, ok := d.GetOkExists("name"); ok {
+				s.Name = value.(string)
+			}
+    if value, ok := d.GetOkExists("slug"); ok {
+				s.Slug = value.(string)
+			}
+    if value, ok := d.GetOkExists("description"); ok {
+				s.Description = value.(string)
+			}
+    if value, ok := d.GetOkExists("enabled"); ok {
+				s.Enabled = tools.Bool(value.(bool))
+			}
+    if value, ok := d.GetOkExists("command"); ok {
+				s.Command = value.(string)
+			}
 
 	res, err := c.CreateCustomForm(s)
 	if err != nil {
@@ -123,10 +133,10 @@ func resourceCustomFormRead(ctx context.Context, d *schema.ResourceData, meta in
 	}
 
 	d.Set("name", item.Name)
-	d.Set("slug", item.Slug)
-	d.Set("description", item.Description)
-	d.Set("enabled", item.Enabled)
-	d.Set("command", item.Command)
+  d.Set("slug", item.Slug)
+  d.Set("description", item.Description)
+  d.Set("enabled", item.Enabled)
+  d.Set("command", item.Command)
 
 	return nil
 }
@@ -137,21 +147,21 @@ func resourceCustomFormUpdate(ctx context.Context, d *schema.ResourceData, meta 
 
 	s := &client.CustomForm{}
 
-	if d.HasChange("name") {
-		s.Name = d.Get("name").(string)
-	}
-	if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
-	}
-	if d.HasChange("description") {
-		s.Description = d.Get("description").(string)
-	}
-	if d.HasChange("enabled") {
-		s.Enabled = tools.Bool(d.Get("enabled").(bool))
-	}
-	if d.HasChange("command") {
-		s.Command = d.Get("command").(string)
-	}
+	  if d.HasChange("name") {
+				s.Name = d.Get("name").(string)
+			}
+    if d.HasChange("slug") {
+				s.Slug = d.Get("slug").(string)
+			}
+    if d.HasChange("description") {
+				s.Description = d.Get("description").(string)
+			}
+    if d.HasChange("enabled") {
+				s.Enabled = tools.Bool(d.Get("enabled").(bool))
+			}
+    if d.HasChange("command") {
+				s.Command = d.Get("command").(string)
+			}
 
 	_, err := c.UpdateCustomForm(d.Id(), s)
 	if err != nil {

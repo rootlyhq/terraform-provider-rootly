@@ -1,5 +1,25 @@
 # Changelog
 
+## [Unreleased]
+
+### Fixed
+
+- Fixed test generator to use creation schemas (`new_*`) instead of read schemas for generating valid test data
+- Fixed `communications_template` test by adding support for `communication_type_id` field in test generation
+- Fixed `communications_type` test by using proper CSS hex color format (`#FF0000`) instead of plain text
+- Fixed test parameter generation to handle `_id` fields with proper UUID format and `color` fields with hex format
+- Fixed test generator fallback logic to gracefully handle resources without corresponding `new_*` schemas
+
+### Added
+
+- Added `communication_type_id` field to `communications_template` resource schema for better API consistency
+- Added intelligent test data generation based on field naming patterns (UUIDs for string `_id` fields, integers for numeric `_id` fields, hex for `color` fields)
+
+### Changed
+
+- Enhanced test generator to prioritize creation API schemas over read schemas for more accurate test data
+- Updated OpenAPI client method signatures to support additional query parameters (upstream generator change)
+
 ## [3.4.0] -- 2025-06-24
 
 ### Fixed

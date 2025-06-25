@@ -4,7 +4,7 @@ package provider
 
 import (
 	"context"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
@@ -13,26 +13,28 @@ import (
 )
 
 func dataSourceIncidentPermissionSetBoolean() *schema.Resource {
-	return &schema.Resource{
+	return &schema.Resource {
 		ReadContext: dataSourceIncidentPermissionSetBooleanRead,
-		Schema: map[string]*schema.Schema{
-			"id": &schema.Schema{
-				Type:     schema.TypeString,
+		Schema: map[string]*schema.Schema {
+			"id": &schema.Schema {
+				Type: schema.TypeString,
 				Computed: true,
 			},
-
-			"kind": &schema.Schema{
-				Type:         schema.TypeString,
-				Computed:     true,
-				Optional:     true,
-				ValidateFunc: validation.StringInSlice([]string{"publish_to_status_page", "assign_incident_roles", "invite_subscribers", "update_summary", "update_timeline", "trigger_workflows", "create_communications", "read_communications", "update_communications", "delete_communications", "send_communications", "modify_custom_fields"}, false),
+			
+			"kind": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Optional: true,
+		ValidateFunc: validation.StringInSlice([]string{"publish_to_status_page", "assign_incident_roles", "invite_subscribers", "update_summary", "update_timeline", "trigger_workflows", "create_communications", "read_communications", "update_communications", "delete_communications", "send_communications", "modify_custom_fields"}, false),
 			},
+			
 
-			"created_at": &schema.Schema{
-				Type:        schema.TypeMap,
-				Description: "Filter by date range using 'lt' and 'gt'.",
-				Optional:    true,
-			},
+				"created_at": &schema.Schema {
+					Type: schema.TypeMap,
+					Description: "Filter by date range using 'lt' and 'gt'.",
+					Optional: true,
+				},
+				
 		},
 	}
 }
@@ -44,25 +46,29 @@ func dataSourceIncidentPermissionSetBooleanRead(ctx context.Context, d *schema.R
 	page_size := 1
 	params.PageSize = &page_size
 
-	if value, ok := d.GetOkExists("kind"); ok {
-		kind := value.(string)
-		params.FilterKind = &kind
-	}
+	
+				if value, ok := d.GetOkExists("kind"); ok {
+					kind := value.(string)
+					params.FilterKind = &kind
+				}
+			
 
-	created_at_gt := d.Get("created_at").(map[string]interface{})
-	if value, exists := created_at_gt["gt"]; exists {
-		v := value.(string)
-		params.FilterCreatedAtGt = &v
-	}
+				created_at_gt := d.Get("created_at").(map[string]interface{})
+				if value, exists := created_at_gt["gt"]; exists {
+					v := value.(string)
+					params.FilterCreatedAtGt = &v
+				}
+			
 
-	created_at_lt := d.Get("created_at").(map[string]interface{})
-	if value, exists := created_at_lt["lt"]; exists {
-		v := value.(string)
-		params.FilterCreatedAtLt = &v
-	}
+				created_at_lt := d.Get("created_at").(map[string]interface{})
+				if value, exists := created_at_lt["lt"]; exists {
+					v := value.(string)
+					params.FilterCreatedAtLt = &v
+				}
+			
 
 	incident_permission_set_id := d.Get("incident_permission_set_id").(string)
-	items, err := c.ListIncidentPermissionSetBooleans(incident_permission_set_id, params)
+			items, err := c.ListIncidentPermissionSetBooleans(incident_permission_set_id, params)
 	if err != nil {
 		return diag.FromErr(err)
 	}

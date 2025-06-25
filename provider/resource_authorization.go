@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
@@ -18,64 +18,74 @@ import (
 func resourceAuthorization() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceAuthorizationCreate,
-		ReadContext:   resourceAuthorizationRead,
+		ReadContext: resourceAuthorizationRead,
 		UpdateContext: resourceAuthorizationUpdate,
 		DeleteContext: resourceAuthorizationDelete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
-
-			"authorizable_id": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+		Schema: map[string]*schema.Schema {
+			
+			"authorizable_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The id of the resource being accessed.",
+				
 			},
+			
 
-			"authorizable_type": &schema.Schema{
-				Type:         schema.TypeString,
-				Default:      "Dashboard",
-				Required:     false,
-				Optional:     true,
-				ForceNew:     false,
-				Description:  "The type of resource being accessed.. Value must be one of `Dashboard`.",
-				ValidateFunc: validation.StringInSlice([]string{"Dashboard"}, false),
+			"authorizable_type": &schema.Schema {
+				Type: schema.TypeString,
+				Default: "Dashboard",
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The type of resource being accessed.. Value must be one of `Dashboard`.",
+		ValidateFunc: validation.StringInSlice([]string{"Dashboard"}, false),
+				
 			},
+			
 
-			"grantee_id": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+			"grantee_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The resource id granted access.",
+				
 			},
+			
 
-			"grantee_type": &schema.Schema{
-				Type:         schema.TypeString,
-				Default:      "User",
-				Required:     false,
-				Optional:     true,
-				ForceNew:     false,
-				Description:  "The type of resource granted access.. Value must be one of `User`, `Team`.",
-				ValidateFunc: validation.StringInSlice([]string{"User", "Team"}, false),
+			"grantee_type": &schema.Schema {
+				Type: schema.TypeString,
+				Default: "User",
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The type of resource granted access.. Value must be one of `User`, `Team`.",
+		ValidateFunc: validation.StringInSlice([]string{"User", "Team"}, false),
+				
 			},
+			
 
-			"permissions": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type:         schema.TypeString,
+				"permissions": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
 					ValidateFunc: validation.StringInSlice([]string{"read", "update", "authorize", "destroy"}, false),
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: false,
+					Required: true,
+					Optional: false,
+					Description: "Value must be one of `read`, `update`, `authorize`, `destroy`.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         false,
-				Required:         true,
-				Optional:         false,
-				Description:      "Value must be one of `read`, `update`, `authorize`, `destroy`.",
-			},
+				
 		},
 	}
 }
@@ -87,21 +97,21 @@ func resourceAuthorizationCreate(ctx context.Context, d *schema.ResourceData, me
 
 	s := &client.Authorization{}
 
-	if value, ok := d.GetOkExists("authorizable_id"); ok {
-		s.AuthorizableId = value.(string)
-	}
-	if value, ok := d.GetOkExists("authorizable_type"); ok {
-		s.AuthorizableType = value.(string)
-	}
-	if value, ok := d.GetOkExists("grantee_id"); ok {
-		s.GranteeId = value.(string)
-	}
-	if value, ok := d.GetOkExists("grantee_type"); ok {
-		s.GranteeType = value.(string)
-	}
-	if value, ok := d.GetOkExists("permissions"); ok {
-		s.Permissions = value.([]interface{})
-	}
+	  if value, ok := d.GetOkExists("authorizable_id"); ok {
+				s.AuthorizableId = value.(string)
+			}
+    if value, ok := d.GetOkExists("authorizable_type"); ok {
+				s.AuthorizableType = value.(string)
+			}
+    if value, ok := d.GetOkExists("grantee_id"); ok {
+				s.GranteeId = value.(string)
+			}
+    if value, ok := d.GetOkExists("grantee_type"); ok {
+				s.GranteeType = value.(string)
+			}
+    if value, ok := d.GetOkExists("permissions"); ok {
+				s.Permissions = value.([]interface{})
+			}
 
 	res, err := c.CreateAuthorization(s)
 	if err != nil {
@@ -132,10 +142,10 @@ func resourceAuthorizationRead(ctx context.Context, d *schema.ResourceData, meta
 	}
 
 	d.Set("authorizable_id", item.AuthorizableId)
-	d.Set("authorizable_type", item.AuthorizableType)
-	d.Set("grantee_id", item.GranteeId)
-	d.Set("grantee_type", item.GranteeType)
-	d.Set("permissions", item.Permissions)
+  d.Set("authorizable_type", item.AuthorizableType)
+  d.Set("grantee_id", item.GranteeId)
+  d.Set("grantee_type", item.GranteeType)
+  d.Set("permissions", item.Permissions)
 
 	return nil
 }
@@ -146,21 +156,21 @@ func resourceAuthorizationUpdate(ctx context.Context, d *schema.ResourceData, me
 
 	s := &client.Authorization{}
 
-	if d.HasChange("authorizable_id") {
-		s.AuthorizableId = d.Get("authorizable_id").(string)
-	}
-	if d.HasChange("authorizable_type") {
-		s.AuthorizableType = d.Get("authorizable_type").(string)
-	}
-	if d.HasChange("grantee_id") {
-		s.GranteeId = d.Get("grantee_id").(string)
-	}
-	if d.HasChange("grantee_type") {
-		s.GranteeType = d.Get("grantee_type").(string)
-	}
-	if d.HasChange("permissions") {
-		s.Permissions = d.Get("permissions").([]interface{})
-	}
+	  if d.HasChange("authorizable_id") {
+				s.AuthorizableId = d.Get("authorizable_id").(string)
+			}
+    if d.HasChange("authorizable_type") {
+				s.AuthorizableType = d.Get("authorizable_type").(string)
+			}
+    if d.HasChange("grantee_id") {
+				s.GranteeId = d.Get("grantee_id").(string)
+			}
+    if d.HasChange("grantee_type") {
+				s.GranteeType = d.Get("grantee_type").(string)
+			}
+    if d.HasChange("permissions") {
+				s.Permissions = d.Get("permissions").([]interface{})
+			}
 
 	_, err := c.UpdateAuthorization(d.Id(), s)
 	if err != nil {

@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
@@ -18,142 +18,166 @@ import (
 func resourceAlertsSource() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceAlertsSourceCreate,
-		ReadContext:   resourceAlertsSourceRead,
+		ReadContext: resourceAlertsSourceRead,
 		UpdateContext: resourceAlertsSourceUpdate,
 		DeleteContext: resourceAlertsSourceDelete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
-
-			"alert_urgency_id": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+		Schema: map[string]*schema.Schema {
+			
+			"alert_urgency_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "ID for the default alert urgency assigned to this alert source",
+				
 			},
+			
 
-			"name": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+			"name": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The name of the alert source",
+				
 			},
+			
 
-			"source_type": &schema.Schema{
-				Type:         schema.TypeString,
-				Default:      "email",
-				Required:     false,
-				Optional:     true,
-				ForceNew:     false,
-				Description:  "The alert source type. Value must be one of `email`, `app_dynamics`, `catchpoint`, `datadog`, `alertmanager`, `google_cloud`, `grafana`, `sentry`, `generic_webhook`, `cloud_watch`, `checkly`, `azure`, `new_relic`, `splunk`, `chronosphere`, `app_optics`, `bug_snag`, `honeycomb`, `monte_carlo`, `nagios`, `prtg`.",
-				ValidateFunc: validation.StringInSlice([]string{"email", "app_dynamics", "catchpoint", "datadog", "alertmanager", "google_cloud", "grafana", "sentry", "generic_webhook", "cloud_watch", "checkly", "azure", "new_relic", "splunk", "chronosphere", "app_optics", "bug_snag", "honeycomb", "monte_carlo", "nagios", "prtg"}, false),
+			"source_type": &schema.Schema {
+				Type: schema.TypeString,
+				Default: "email",
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The alert source type. Value must be one of `email`, `app_dynamics`, `catchpoint`, `datadog`, `alertmanager`, `google_cloud`, `grafana`, `sentry`, `generic_webhook`, `cloud_watch`, `checkly`, `azure`, `new_relic`, `splunk`, `chronosphere`, `app_optics`, `bug_snag`, `honeycomb`, `monte_carlo`, `nagios`, `prtg`.",
+		ValidateFunc: validation.StringInSlice([]string{"email", "app_dynamics", "catchpoint", "datadog", "alertmanager", "google_cloud", "grafana", "sentry", "generic_webhook", "cloud_watch", "checkly", "azure", "new_relic", "splunk", "chronosphere", "app_optics", "bug_snag", "honeycomb", "monte_carlo", "nagios", "prtg"}, false),
+				
 			},
+			
 
-			"status": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"status": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "The current status of the alert source",
+				
 			},
+			
 
-			"secret": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"secret": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "A secret key used to authenticate incoming requests to this alerts source",
+				
 			},
+			
 
-			"webhook_endpoint": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"webhook_endpoint": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "The URL endpoint of the alert source",
+				
 			},
+			
 
-			"email": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"email": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "The email address of the alert source",
+				
 			},
+			
 
-			"owner_group_ids": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
+				"owner_group_ids": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "List of team IDs that will own the alert source",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "List of team IDs that will own the alert source",
-			},
+				
 
-			"sourceable_attributes": &schema.Schema{
+			"sourceable_attributes": &schema.Schema {
 				Type: schema.TypeMap,
-				Elem: &schema.Schema{
+				Elem: &schema.Schema {
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
+				Computed: true,
+				Required: false,
+				Optional: true,
 				Description: "Additional attributes specific to certain alert sources (e.g., generic_webhook), encapsulating source-specific configurations or details",
 			},
+			
 
-			"resolution_rule_attributes": &schema.Schema{
+			"resolution_rule_attributes": &schema.Schema {
 				Type: schema.TypeMap,
-				Elem: &schema.Schema{
+				Elem: &schema.Schema {
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
+				Computed: true,
+				Required: false,
+				Optional: true,
 				Description: "Additional attributes for email alerts source",
 			},
+			
 
-			"alert_source_fields_attributes": &schema.Schema{
-				Type:             schema.TypeList,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "List of alert fields to be added to alert source",
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
+				"alert_source_fields_attributes": &schema.Schema {
+					Type: schema.TypeList,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "List of alert fields to be added to alert source",
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Elem: &schema.Resource {
+						Schema: map[string]*schema.Schema {
+              
+			"alert_field_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The ID of the alert field",
+				
+			},
+			
 
-						"alert_field_id": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "The ID of the alert field",
-						},
-
-						"template_body": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "Liquid expression to extract a specific value from the alert's payload for evaluation",
+			"template_body": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "Liquid expression to extract a specific value from the alert's payload for evaluation",
+				
+			},
+			
 						},
 					},
+					
 				},
-			},
+				
 		},
 	}
 }
@@ -165,39 +189,39 @@ func resourceAlertsSourceCreate(ctx context.Context, d *schema.ResourceData, met
 
 	s := &client.AlertsSource{}
 
-	if value, ok := d.GetOkExists("alert_urgency_id"); ok {
-		s.AlertUrgencyId = value.(string)
-	}
-	if value, ok := d.GetOkExists("name"); ok {
-		s.Name = value.(string)
-	}
-	if value, ok := d.GetOkExists("source_type"); ok {
-		s.SourceType = value.(string)
-	}
-	if value, ok := d.GetOkExists("status"); ok {
-		s.Status = value.(string)
-	}
-	if value, ok := d.GetOkExists("secret"); ok {
-		s.Secret = value.(string)
-	}
-	if value, ok := d.GetOkExists("webhook_endpoint"); ok {
-		s.WebhookEndpoint = value.(string)
-	}
-	if value, ok := d.GetOkExists("email"); ok {
-		s.Email = value.(string)
-	}
-	if value, ok := d.GetOkExists("owner_group_ids"); ok {
-		s.OwnerGroupIds = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("sourceable_attributes"); ok {
-		s.SourceableAttributes = value.(map[string]interface{})
-	}
-	if value, ok := d.GetOkExists("resolution_rule_attributes"); ok {
-		s.ResolutionRuleAttributes = value.(map[string]interface{})
-	}
-	if value, ok := d.GetOkExists("alert_source_fields_attributes"); ok {
-		s.AlertSourceFieldsAttributes = value.([]interface{})
-	}
+	  if value, ok := d.GetOkExists("alert_urgency_id"); ok {
+				s.AlertUrgencyId = value.(string)
+			}
+    if value, ok := d.GetOkExists("name"); ok {
+				s.Name = value.(string)
+			}
+    if value, ok := d.GetOkExists("source_type"); ok {
+				s.SourceType = value.(string)
+			}
+    if value, ok := d.GetOkExists("status"); ok {
+				s.Status = value.(string)
+			}
+    if value, ok := d.GetOkExists("secret"); ok {
+				s.Secret = value.(string)
+			}
+    if value, ok := d.GetOkExists("webhook_endpoint"); ok {
+				s.WebhookEndpoint = value.(string)
+			}
+    if value, ok := d.GetOkExists("email"); ok {
+				s.Email = value.(string)
+			}
+    if value, ok := d.GetOkExists("owner_group_ids"); ok {
+				s.OwnerGroupIds = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("sourceable_attributes"); ok {
+				s.SourceableAttributes = value.(map[string]interface{})
+			}
+    if value, ok := d.GetOkExists("resolution_rule_attributes"); ok {
+				s.ResolutionRuleAttributes = value.(map[string]interface{})
+			}
+    if value, ok := d.GetOkExists("alert_source_fields_attributes"); ok {
+				s.AlertSourceFieldsAttributes = value.([]interface{})
+			}
 
 	res, err := c.CreateAlertsSource(s)
 	if err != nil {
@@ -228,34 +252,35 @@ func resourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, meta 
 	}
 
 	d.Set("alert_urgency_id", item.AlertUrgencyId)
-	d.Set("name", item.Name)
-	d.Set("source_type", item.SourceType)
-	d.Set("status", item.Status)
-	d.Set("secret", item.Secret)
-	d.Set("webhook_endpoint", item.WebhookEndpoint)
-	d.Set("email", item.Email)
-	d.Set("owner_group_ids", item.OwnerGroupIds)
-	d.Set("sourceable_attributes", item.SourceableAttributes)
-	d.Set("resolution_rule_attributes", item.ResolutionRuleAttributes)
+  d.Set("name", item.Name)
+  d.Set("source_type", item.SourceType)
+  d.Set("status", item.Status)
+  d.Set("secret", item.Secret)
+  d.Set("webhook_endpoint", item.WebhookEndpoint)
+  d.Set("email", item.Email)
+  d.Set("owner_group_ids", item.OwnerGroupIds)
+  d.Set("sourceable_attributes", item.SourceableAttributes)
+  d.Set("resolution_rule_attributes", item.ResolutionRuleAttributes)
+  
+          if item.AlertSourceFieldsAttributes != nil {
+              processedItems := make([]map[string]interface{}, 0)
 
-	if item.AlertSourceFieldsAttributes != nil {
-		processedItems := make([]map[string]interface{}, 0)
+              for _, c := range item.AlertSourceFieldsAttributes {
+                  if rawItem, ok := c.(map[string]interface{}); ok {
+                      // Create a new map with only the fields defined in the schema
+                      processedItem := map[string]interface{}{
+                          "alert_field_id": rawItem["alert_field_id"],
+"template_body": rawItem["template_body"],
+                      }
+                      processedItems = append(processedItems, processedItem)
+                  }
+              }
 
-		for _, c := range item.AlertSourceFieldsAttributes {
-			if rawItem, ok := c.(map[string]interface{}); ok {
-				// Create a new map with only the fields defined in the schema
-				processedItem := map[string]interface{}{
-					"alert_field_id": rawItem["alert_field_id"],
-					"template_body":  rawItem["template_body"],
-				}
-				processedItems = append(processedItems, processedItem)
-			}
-		}
-
-		d.Set("alert_source_fields_attributes", processedItems)
-	} else {
-		d.Set("alert_source_fields_attributes", nil)
-	}
+              d.Set("alert_source_fields_attributes", processedItems)
+          } else {
+              d.Set("alert_source_fields_attributes", nil)
+          }
+        
 
 	return nil
 }
@@ -266,39 +291,39 @@ func resourceAlertsSourceUpdate(ctx context.Context, d *schema.ResourceData, met
 
 	s := &client.AlertsSource{}
 
-	if d.HasChange("alert_urgency_id") {
-		s.AlertUrgencyId = d.Get("alert_urgency_id").(string)
-	}
-	if d.HasChange("name") {
-		s.Name = d.Get("name").(string)
-	}
-	if d.HasChange("source_type") {
-		s.SourceType = d.Get("source_type").(string)
-	}
-	if d.HasChange("status") {
-		s.Status = d.Get("status").(string)
-	}
-	if d.HasChange("secret") {
-		s.Secret = d.Get("secret").(string)
-	}
-	if d.HasChange("webhook_endpoint") {
-		s.WebhookEndpoint = d.Get("webhook_endpoint").(string)
-	}
-	if d.HasChange("email") {
-		s.Email = d.Get("email").(string)
-	}
-	if d.HasChange("owner_group_ids") {
-		s.OwnerGroupIds = d.Get("owner_group_ids").([]interface{})
-	}
-	if d.HasChange("sourceable_attributes") {
-		s.SourceableAttributes = d.Get("sourceable_attributes").(map[string]interface{})
-	}
-	if d.HasChange("resolution_rule_attributes") {
-		s.ResolutionRuleAttributes = d.Get("resolution_rule_attributes").(map[string]interface{})
-	}
-	if d.HasChange("alert_source_fields_attributes") {
-		s.AlertSourceFieldsAttributes = d.Get("alert_source_fields_attributes").([]interface{})
-	}
+	  if d.HasChange("alert_urgency_id") {
+				s.AlertUrgencyId = d.Get("alert_urgency_id").(string)
+			}
+    if d.HasChange("name") {
+				s.Name = d.Get("name").(string)
+			}
+    if d.HasChange("source_type") {
+				s.SourceType = d.Get("source_type").(string)
+			}
+    if d.HasChange("status") {
+				s.Status = d.Get("status").(string)
+			}
+    if d.HasChange("secret") {
+				s.Secret = d.Get("secret").(string)
+			}
+    if d.HasChange("webhook_endpoint") {
+				s.WebhookEndpoint = d.Get("webhook_endpoint").(string)
+			}
+    if d.HasChange("email") {
+				s.Email = d.Get("email").(string)
+			}
+    if d.HasChange("owner_group_ids") {
+				s.OwnerGroupIds = d.Get("owner_group_ids").([]interface{})
+			}
+    if d.HasChange("sourceable_attributes") {
+				s.SourceableAttributes = d.Get("sourceable_attributes").(map[string]interface{})
+			}
+    if d.HasChange("resolution_rule_attributes") {
+				s.ResolutionRuleAttributes = d.Get("resolution_rule_attributes").(map[string]interface{})
+			}
+    if d.HasChange("alert_source_fields_attributes") {
+				s.AlertSourceFieldsAttributes = d.Get("alert_source_fields_attributes").([]interface{})
+			}
 
 	_, err := c.UpdateAlertsSource(d.Id(), s)
 	if err != nil {

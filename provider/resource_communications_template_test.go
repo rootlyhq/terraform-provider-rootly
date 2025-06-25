@@ -10,7 +10,7 @@ import (
 
 func TestAccResourceCommunicationsTemplate(t *testing.T) {
 	resource.UnitTest(t, resource.TestCase{
-		PreCheck: func() {
+		PreCheck:          func() {
 			testAccPreCheck(t)
 		},
 		ProviderFactories: providerFactories,
@@ -25,5 +25,6 @@ func TestAccResourceCommunicationsTemplate(t *testing.T) {
 const testAccResourceCommunicationsTemplate = `
 resource "rootly_communications_template" "test" {
 	name = "test"
+communication_type_id = "01234567-89ab-cdef-0123-456789abcdef"
 }
 `

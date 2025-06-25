@@ -4,34 +4,36 @@ package provider
 
 import (
 	"context"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
+	
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 func dataSourceWebhooksEndpoint() *schema.Resource {
-	return &schema.Resource{
+	return &schema.Resource {
 		ReadContext: dataSourceWebhooksEndpointRead,
-		Schema: map[string]*schema.Schema{
-			"id": &schema.Schema{
-				Type:     schema.TypeString,
+		Schema: map[string]*schema.Schema {
+			"id": &schema.Schema {
+				Type: schema.TypeString,
 				Computed: true,
 			},
-
-			"name": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
-				Optional: true,
-			},
-
-			"slug": &schema.Schema{
-				Type:     schema.TypeString,
+			
+			"name": &schema.Schema {
+				Type: schema.TypeString,
 				Computed: true,
 				Optional: true,
 			},
+			
+
+			"slug": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Optional: true,
+			},
+			
 		},
 	}
 }
@@ -43,15 +45,18 @@ func dataSourceWebhooksEndpointRead(ctx context.Context, d *schema.ResourceData,
 	page_size := 1
 	params.PageSize = &page_size
 
-	if value, ok := d.GetOkExists("slug"); ok {
-		slug := value.(string)
-		params.FilterSlug = &slug
-	}
+	
+				if value, ok := d.GetOkExists("slug"); ok {
+					slug := value.(string)
+					params.FilterSlug = &slug
+				}
+			
 
-	if value, ok := d.GetOkExists("name"); ok {
-		name := value.(string)
-		params.FilterName = &name
-	}
+				if value, ok := d.GetOkExists("name"); ok {
+					name := value.(string)
+					params.FilterName = &name
+				}
+			
 
 	items, err := c.ListWebhooksEndpoints(params)
 	if err != nil {

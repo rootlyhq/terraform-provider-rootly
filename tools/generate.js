@@ -335,7 +335,8 @@ function generateResourceTest(name) {
       name,
       resourceSchema(name),
       requiredFields(name),
-      pathIdField
+      pathIdField,
+      swagger
     );
     fs.writeFileSync(
       path.resolve(__dirname, "..", "provider", `resource_${name}_test.go`),

@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
@@ -18,136 +18,159 @@ import (
 func resourceEscalationPolicy() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceEscalationPolicyCreate,
-		ReadContext:   resourceEscalationPolicyRead,
+		ReadContext: resourceEscalationPolicyRead,
 		UpdateContext: resourceEscalationPolicyUpdate,
 		DeleteContext: resourceEscalationPolicyDelete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
-
-			"name": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+		Schema: map[string]*schema.Schema {
+			
+			"name": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The name of the escalation policy",
+				
 			},
+			
 
-			"description": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"description": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "The description of the escalation policy",
+				
 			},
+			
 
-			"repeat_count": &schema.Schema{
-				Type:        schema.TypeInt,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The number of times this policy will be executed until someone acknowledges the alert",
-			},
+		"repeat_count": &schema.Schema {
+			Type: schema.TypeInt,
+			Computed: true,
+			Required: false,
+			Optional: true,
+			ForceNew: false,
+			Description: "The number of times this policy will be executed until someone acknowledges the alert",
+			
+		},
+		
 
-			"created_by_user_id": &schema.Schema{
-				Type:        schema.TypeInt,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "User who created the escalation policy",
-			},
+		"created_by_user_id": &schema.Schema {
+			Type: schema.TypeInt,
+			Computed: true,
+			Required: false,
+			Optional: true,
+			ForceNew: false,
+			Description: "User who created the escalation policy",
+			
+		},
+		
 
-			"last_updated_by_user_id": &schema.Schema{
-				Type:        schema.TypeInt,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "User who updated the escalation policy",
-			},
+		"last_updated_by_user_id": &schema.Schema {
+			Type: schema.TypeInt,
+			Computed: true,
+			Required: false,
+			Optional: true,
+			ForceNew: false,
+			Description: "User who updated the escalation policy",
+			
+		},
+		
 
-			"group_ids": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Associated groups (alerting the group will trigger escalation policy)",
-			},
-
-			"service_ids": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Associated services (alerting the service will trigger escalation policy)",
-			},
-
-			"business_hours": &schema.Schema{
-				Type:        schema.TypeList,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "",
-				MinItems:    0,
-				MaxItems:    1,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-
-						"time_zone": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "Time zone for business hours",
-						},
-
-						"days": &schema.Schema{
-							Type: schema.TypeList,
-							Elem: &schema.Schema{
-								Type:         schema.TypeString,
-								ValidateFunc: validation.StringInSlice([]string{"M", "T", "W", "R", "F", "U", "S"}, false),
-							},
-							DiffSuppressFunc: tools.EqualIgnoringOrder,
-							Computed:         true,
-							Required:         false,
-							Optional:         true,
-							Description:      "Business days. Value must be one of `M`, `T`, `W`, `R`, `F`, `U`, `S`.",
-						},
-
-						"start_time": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "Start time for business hours (HH:MM)",
-						},
-
-						"end_time": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "End time for business hours (HH:MM)",
-						},
+				"group_ids": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
 					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Associated groups (alerting the group will trigger escalation policy)",
+					
 				},
+				
+
+				"service_ids": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Associated services (alerting the service will trigger escalation policy)",
+					
+				},
+				
+
+   			"business_hours": &schema.Schema {
+	 				Type: schema.TypeList,
+	 				Computed: true,
+	 				Required: false,
+	 				Optional: true,
+	 				Description: "",
+						MinItems: 0,
+						MaxItems: 1,
+	 					Elem: &schema.Resource {
+							Schema: map[string]*schema.Schema {
+	 							
+			"time_zone": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "Time zone for business hours",
+				
 			},
+			
+
+				"days": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"M", "T", "W", "R", "F", "U", "S"}, false),
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Business days. Value must be one of `M`, `T`, `W`, `R`, `F`, `U`, `S`.",
+					
+				},
+				
+
+			"start_time": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "Start time for business hours (HH:MM)",
+				
+			},
+			
+
+			"end_time": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "End time for business hours (HH:MM)",
+				
+			},
+			
+							},
+	 					},
+	 				},
+   			
 		},
 	}
 }
@@ -159,34 +182,34 @@ func resourceEscalationPolicyCreate(ctx context.Context, d *schema.ResourceData,
 
 	s := &client.EscalationPolicy{}
 
-	if value, ok := d.GetOkExists("name"); ok {
-		s.Name = value.(string)
-	}
-	if value, ok := d.GetOkExists("description"); ok {
-		s.Description = value.(string)
-	}
-	if value, ok := d.GetOkExists("repeat_count"); ok {
-		s.RepeatCount = value.(int)
-	}
-	if value, ok := d.GetOkExists("created_by_user_id"); ok {
-		s.CreatedByUserId = value.(int)
-	}
-	if value, ok := d.GetOkExists("last_updated_by_user_id"); ok {
-		s.LastUpdatedByUserId = value.(int)
-	}
-	if value, ok := d.GetOkExists("group_ids"); ok {
-		s.GroupIds = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("service_ids"); ok {
-		s.ServiceIds = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("business_hours"); ok {
-		if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
-			if mapValue, ok := valueList[0].(map[string]interface{}); ok {
-				s.BusinessHours = mapValue
+	  if value, ok := d.GetOkExists("name"); ok {
+				s.Name = value.(string)
 			}
-		}
-	}
+    if value, ok := d.GetOkExists("description"); ok {
+				s.Description = value.(string)
+			}
+    if value, ok := d.GetOkExists("repeat_count"); ok {
+				s.RepeatCount = value.(int)
+			}
+    if value, ok := d.GetOkExists("created_by_user_id"); ok {
+				s.CreatedByUserId = value.(int)
+			}
+    if value, ok := d.GetOkExists("last_updated_by_user_id"); ok {
+				s.LastUpdatedByUserId = value.(int)
+			}
+    if value, ok := d.GetOkExists("group_ids"); ok {
+				s.GroupIds = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("service_ids"); ok {
+				s.ServiceIds = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("business_hours"); ok {
+				if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
+          if mapValue, ok := valueList[0].(map[string]interface{}); ok {
+    				s.BusinessHours = mapValue
+          }
+        }
+			}
 
 	res, err := c.CreateEscalationPolicy(s)
 	if err != nil {
@@ -217,21 +240,22 @@ func resourceEscalationPolicyRead(ctx context.Context, d *schema.ResourceData, m
 	}
 
 	d.Set("name", item.Name)
-	d.Set("description", item.Description)
-	d.Set("repeat_count", item.RepeatCount)
-	d.Set("created_by_user_id", item.CreatedByUserId)
-	d.Set("last_updated_by_user_id", item.LastUpdatedByUserId)
-	d.Set("group_ids", item.GroupIds)
-	d.Set("service_ids", item.ServiceIds)
-	singleton_list := make([]interface{}, 1, 1)
-	processedItem := map[string]interface{}{
-		"time_zone":  item.BusinessHours["time_zone"],
-		"days":       item.BusinessHours["days"],
-		"start_time": item.BusinessHours["start_time"],
-		"end_time":   item.BusinessHours["end_time"],
-	}
-	singleton_list[0] = processedItem
-	d.Set("business_hours", singleton_list)
+  d.Set("description", item.Description)
+  d.Set("repeat_count", item.RepeatCount)
+  d.Set("created_by_user_id", item.CreatedByUserId)
+  d.Set("last_updated_by_user_id", item.LastUpdatedByUserId)
+  d.Set("group_ids", item.GroupIds)
+  d.Set("service_ids", item.ServiceIds)
+  singleton_list := make([]interface{}, 1, 1)
+          processedItem := map[string]interface{}{
+            "time_zone": item.BusinessHours["time_zone"],
+"days": item.BusinessHours["days"],
+"start_time": item.BusinessHours["start_time"],
+"end_time": item.BusinessHours["end_time"],
+          }
+          singleton_list[0] = processedItem
+          d.Set("business_hours", singleton_list)
+        
 
 	return nil
 }
@@ -242,33 +266,34 @@ func resourceEscalationPolicyUpdate(ctx context.Context, d *schema.ResourceData,
 
 	s := &client.EscalationPolicy{}
 
-	if d.HasChange("name") {
-		s.Name = d.Get("name").(string)
-	}
-	if d.HasChange("description") {
-		s.Description = d.Get("description").(string)
-	}
-	if d.HasChange("repeat_count") {
-		s.RepeatCount = d.Get("repeat_count").(int)
-	}
-	if d.HasChange("created_by_user_id") {
-		s.CreatedByUserId = d.Get("created_by_user_id").(int)
-	}
-	if d.HasChange("last_updated_by_user_id") {
-		s.LastUpdatedByUserId = d.Get("last_updated_by_user_id").(int)
-	}
-	if d.HasChange("group_ids") {
-		s.GroupIds = d.Get("group_ids").([]interface{})
-	}
-	if d.HasChange("service_ids") {
-		s.ServiceIds = d.Get("service_ids").([]interface{})
-	}
-	if d.HasChange("business_hours") {
-		tps := d.Get("business_hours").([]interface{})
-		for _, tpsi := range tps {
-			s.BusinessHours = tpsi.(map[string]interface{})
-		}
-	}
+	  if d.HasChange("name") {
+				s.Name = d.Get("name").(string)
+			}
+    if d.HasChange("description") {
+				s.Description = d.Get("description").(string)
+			}
+    if d.HasChange("repeat_count") {
+				s.RepeatCount = d.Get("repeat_count").(int)
+			}
+    if d.HasChange("created_by_user_id") {
+				s.CreatedByUserId = d.Get("created_by_user_id").(int)
+			}
+    if d.HasChange("last_updated_by_user_id") {
+				s.LastUpdatedByUserId = d.Get("last_updated_by_user_id").(int)
+			}
+    if d.HasChange("group_ids") {
+				s.GroupIds = d.Get("group_ids").([]interface{})
+			}
+    if d.HasChange("service_ids") {
+				s.ServiceIds = d.Get("service_ids").([]interface{})
+			}
+    if d.HasChange("business_hours") {
+      		tps := d.Get("business_hours").([]interface{})
+      		for _, tpsi := range tps {
+      			s.BusinessHours = tpsi.(map[string]interface{})
+      		}
+      	}
+			
 
 	_, err := c.UpdateEscalationPolicy(d.Id(), s)
 	if err != nil {

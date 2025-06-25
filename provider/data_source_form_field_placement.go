@@ -4,34 +4,36 @@ package provider
 
 import (
 	"context"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
+	
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 func dataSourceFormFieldPlacement() *schema.Resource {
-	return &schema.Resource{
+	return &schema.Resource {
 		ReadContext: dataSourceFormFieldPlacementRead,
-		Schema: map[string]*schema.Schema{
-			"id": &schema.Schema{
-				Type:     schema.TypeString,
+		Schema: map[string]*schema.Schema {
+			"id": &schema.Schema {
+				Type: schema.TypeString,
 				Computed: true,
 			},
-
-			"form_field_id": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
-				Optional: true,
-			},
-
-			"form": &schema.Schema{
-				Type:     schema.TypeString,
+			
+			"form_field_id": &schema.Schema {
+				Type: schema.TypeString,
 				Computed: true,
 				Optional: true,
 			},
+			
+
+			"form": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Optional: true,
+			},
+			
 		},
 	}
 }
@@ -43,13 +45,15 @@ func dataSourceFormFieldPlacementRead(ctx context.Context, d *schema.ResourceDat
 	page_size := 1
 	params.PageSize = &page_size
 
-	if value, ok := d.GetOkExists("form_field_id"); ok {
-		form_field_id := value.(string)
-		params.FilterFormFieldId = &form_field_id
-	}
+	
+				if value, ok := d.GetOkExists("form_field_id"); ok {
+					form_field_id := value.(string)
+					params.FilterFormFieldId = &form_field_id
+				}
+			
 
 	form_field_id := d.Get("form_field_id").(string)
-	items, err := c.ListFormFieldPlacements(form_field_id, params)
+			items, err := c.ListFormFieldPlacements(form_field_id, params)
 	if err != nil {
 		return diag.FromErr(err)
 	}

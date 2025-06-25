@@ -81,7 +81,7 @@ func (c *Client) CreateTeam(d *Team) (*Team, error) {
 }
 
 func (c *Client) GetTeam(id string) (*Team, error) {
-	req, err := rootlygo.NewGetTeamRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetTeamRequest(c.Rootly.Server, id, nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}

@@ -4,7 +4,7 @@ package provider
 
 import (
 	"context"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
@@ -13,26 +13,28 @@ import (
 )
 
 func dataSourceAlertsSource() *schema.Resource {
-	return &schema.Resource{
+	return &schema.Resource {
 		ReadContext: dataSourceAlertsSourceRead,
-		Schema: map[string]*schema.Schema{
-			"id": &schema.Schema{
-				Type:     schema.TypeString,
+		Schema: map[string]*schema.Schema {
+			"id": &schema.Schema {
+				Type: schema.TypeString,
 				Computed: true,
 			},
-
-			"source_type": &schema.Schema{
-				Type:         schema.TypeString,
-				Computed:     true,
-				Optional:     true,
-				ValidateFunc: validation.StringInSlice([]string{"email", "app_dynamics", "catchpoint", "datadog", "alertmanager", "google_cloud", "grafana", "sentry", "generic_webhook", "cloud_watch", "checkly", "azure", "new_relic", "splunk", "chronosphere", "app_optics", "bug_snag", "honeycomb", "monte_carlo", "nagios", "prtg"}, false),
+			
+			"source_type": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Optional: true,
+		ValidateFunc: validation.StringInSlice([]string{"email", "app_dynamics", "catchpoint", "datadog", "alertmanager", "google_cloud", "grafana", "sentry", "generic_webhook", "cloud_watch", "checkly", "azure", "new_relic", "splunk", "chronosphere", "app_optics", "bug_snag", "honeycomb", "monte_carlo", "nagios", "prtg"}, false),
 			},
+			
 
-			"status": &schema.Schema{
-				Type:     schema.TypeString,
+			"status": &schema.Schema {
+				Type: schema.TypeString,
 				Computed: true,
 				Optional: true,
 			},
+			
 		},
 	}
 }
@@ -43,6 +45,8 @@ func dataSourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, met
 	params := new(rootlygo.ListAlertsSourcesParams)
 	page_size := 1
 	params.PageSize = &page_size
+
+	
 
 	items, err := c.ListAlertsSources(params)
 	if err != nil {

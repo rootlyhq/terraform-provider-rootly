@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
@@ -18,261 +18,301 @@ import (
 func resourceOnCallRole() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceOnCallRoleCreate,
-		ReadContext:   resourceOnCallRoleRead,
+		ReadContext: resourceOnCallRoleRead,
 		UpdateContext: resourceOnCallRoleUpdate,
 		DeleteContext: resourceOnCallRoleDelete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
-
-			"name": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+		Schema: map[string]*schema.Schema {
+			
+			"name": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The role name.",
+				
 			},
+			
 
-			"slug": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
+			"slug": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
 				Description: "The role slug.",
+				
 			},
+			
 
-			"system_role": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+			"system_role": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The kind of role",
+				
 			},
+			
 
-			"alert_sources_permissions": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type:         schema.TypeString,
+				"alert_sources_permissions": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
 					ValidateFunc: validation.StringInSlice([]string{"create", "update", "delete"}, false),
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Value must be one of `create`, `update`, `delete`.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Value must be one of `create`, `update`, `delete`.",
-			},
+				
 
-			"alert_urgency_permissions": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type:         schema.TypeString,
+				"alert_urgency_permissions": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
 					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Value must be one of `create`, `read`, `update`, `delete`.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
-			},
+				
 
-			"alerts_permissions": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type:         schema.TypeString,
+				"alerts_permissions": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
 					ValidateFunc: validation.StringInSlice([]string{"create", "update", "read"}, false),
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Value must be one of `create`, `update`, `read`.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Value must be one of `create`, `update`, `read`.",
-			},
+				
 
-			"api_keys_permissions": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type:         schema.TypeString,
+				"api_keys_permissions": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
 					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Value must be one of `create`, `read`, `update`, `delete`.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
-			},
+				
 
-			"audits_permissions": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type:         schema.TypeString,
+				"audits_permissions": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
 					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Value must be one of `create`, `read`, `update`, `delete`.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
-			},
+				
 
-			"contacts_permissions": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type:         schema.TypeString,
+				"contacts_permissions": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
 					ValidateFunc: validation.StringInSlice([]string{"read"}, false),
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Value must be one of `read`.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Value must be one of `read`.",
-			},
+				
 
-			"escalation_policies_permissions": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type:         schema.TypeString,
+				"escalation_policies_permissions": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
 					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Value must be one of `create`, `read`, `update`, `delete`.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
-			},
+				
 
-			"groups_permissions": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type:         schema.TypeString,
+				"groups_permissions": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
 					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Value must be one of `create`, `read`, `update`, `delete`.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
-			},
+				
 
-			"heartbeats_permissions": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type:         schema.TypeString,
+				"heartbeats_permissions": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
 					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Value must be one of `create`, `read`, `update`, `delete`.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
-			},
+				
 
-			"integrations_permissions": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type:         schema.TypeString,
+				"integrations_permissions": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
 					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Value must be one of `create`, `read`, `update`, `delete`.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
-			},
+				
 
-			"invitations_permissions": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type:         schema.TypeString,
+				"invitations_permissions": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
 					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Value must be one of `create`, `read`, `update`, `delete`.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
-			},
+				
 
-			"live_call_routing_permissions": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type:         schema.TypeString,
+				"live_call_routing_permissions": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
 					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Value must be one of `create`, `read`, `update`, `delete`.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
-			},
+				
 
-			"schedule_override_permissions": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type:         schema.TypeString,
+				"schedule_override_permissions": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
 					ValidateFunc: validation.StringInSlice([]string{"create", "update"}, false),
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Value must be one of `create`, `update`.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Value must be one of `create`, `update`.",
-			},
+				
 
-			"schedules_permissions": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type:         schema.TypeString,
+				"schedules_permissions": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
 					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Value must be one of `create`, `read`, `update`, `delete`.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
-			},
+				
 
-			"services_permissions": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type:         schema.TypeString,
+				"services_permissions": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
 					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Value must be one of `create`, `read`, `update`, `delete`.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
-			},
+				
 
-			"webhooks_permissions": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type:         schema.TypeString,
+				"webhooks_permissions": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
 					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Value must be one of `create`, `read`, `update`, `delete`.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
-			},
+				
 
-			"workflows_permissions": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type:         schema.TypeString,
+				"workflows_permissions": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
 					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "Value must be one of `create`, `read`, `update`, `delete`.",
+					
 				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
-			},
+				
 		},
 	}
 }
@@ -284,66 +324,66 @@ func resourceOnCallRoleCreate(ctx context.Context, d *schema.ResourceData, meta 
 
 	s := &client.OnCallRole{}
 
-	if value, ok := d.GetOkExists("name"); ok {
-		s.Name = value.(string)
-	}
-	if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
-	}
-	if value, ok := d.GetOkExists("system_role"); ok {
-		s.SystemRole = value.(string)
-	}
-	if value, ok := d.GetOkExists("alert_sources_permissions"); ok {
-		s.AlertSourcesPermissions = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("alert_urgency_permissions"); ok {
-		s.AlertUrgencyPermissions = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("alerts_permissions"); ok {
-		s.AlertsPermissions = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("api_keys_permissions"); ok {
-		s.ApiKeysPermissions = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("audits_permissions"); ok {
-		s.AuditsPermissions = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("contacts_permissions"); ok {
-		s.ContactsPermissions = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("escalation_policies_permissions"); ok {
-		s.EscalationPoliciesPermissions = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("groups_permissions"); ok {
-		s.GroupsPermissions = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("heartbeats_permissions"); ok {
-		s.HeartbeatsPermissions = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("integrations_permissions"); ok {
-		s.IntegrationsPermissions = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("invitations_permissions"); ok {
-		s.InvitationsPermissions = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("live_call_routing_permissions"); ok {
-		s.LiveCallRoutingPermissions = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("schedule_override_permissions"); ok {
-		s.ScheduleOverridePermissions = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("schedules_permissions"); ok {
-		s.SchedulesPermissions = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("services_permissions"); ok {
-		s.ServicesPermissions = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("webhooks_permissions"); ok {
-		s.WebhooksPermissions = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("workflows_permissions"); ok {
-		s.WorkflowsPermissions = value.([]interface{})
-	}
+	  if value, ok := d.GetOkExists("name"); ok {
+				s.Name = value.(string)
+			}
+    if value, ok := d.GetOkExists("slug"); ok {
+				s.Slug = value.(string)
+			}
+    if value, ok := d.GetOkExists("system_role"); ok {
+				s.SystemRole = value.(string)
+			}
+    if value, ok := d.GetOkExists("alert_sources_permissions"); ok {
+				s.AlertSourcesPermissions = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("alert_urgency_permissions"); ok {
+				s.AlertUrgencyPermissions = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("alerts_permissions"); ok {
+				s.AlertsPermissions = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("api_keys_permissions"); ok {
+				s.ApiKeysPermissions = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("audits_permissions"); ok {
+				s.AuditsPermissions = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("contacts_permissions"); ok {
+				s.ContactsPermissions = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("escalation_policies_permissions"); ok {
+				s.EscalationPoliciesPermissions = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("groups_permissions"); ok {
+				s.GroupsPermissions = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("heartbeats_permissions"); ok {
+				s.HeartbeatsPermissions = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("integrations_permissions"); ok {
+				s.IntegrationsPermissions = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("invitations_permissions"); ok {
+				s.InvitationsPermissions = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("live_call_routing_permissions"); ok {
+				s.LiveCallRoutingPermissions = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("schedule_override_permissions"); ok {
+				s.ScheduleOverridePermissions = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("schedules_permissions"); ok {
+				s.SchedulesPermissions = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("services_permissions"); ok {
+				s.ServicesPermissions = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("webhooks_permissions"); ok {
+				s.WebhooksPermissions = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("workflows_permissions"); ok {
+				s.WorkflowsPermissions = value.([]interface{})
+			}
 
 	res, err := c.CreateOnCallRole(s)
 	if err != nil {
@@ -374,25 +414,25 @@ func resourceOnCallRoleRead(ctx context.Context, d *schema.ResourceData, meta in
 	}
 
 	d.Set("name", item.Name)
-	d.Set("slug", item.Slug)
-	d.Set("system_role", item.SystemRole)
-	d.Set("alert_sources_permissions", item.AlertSourcesPermissions)
-	d.Set("alert_urgency_permissions", item.AlertUrgencyPermissions)
-	d.Set("alerts_permissions", item.AlertsPermissions)
-	d.Set("api_keys_permissions", item.ApiKeysPermissions)
-	d.Set("audits_permissions", item.AuditsPermissions)
-	d.Set("contacts_permissions", item.ContactsPermissions)
-	d.Set("escalation_policies_permissions", item.EscalationPoliciesPermissions)
-	d.Set("groups_permissions", item.GroupsPermissions)
-	d.Set("heartbeats_permissions", item.HeartbeatsPermissions)
-	d.Set("integrations_permissions", item.IntegrationsPermissions)
-	d.Set("invitations_permissions", item.InvitationsPermissions)
-	d.Set("live_call_routing_permissions", item.LiveCallRoutingPermissions)
-	d.Set("schedule_override_permissions", item.ScheduleOverridePermissions)
-	d.Set("schedules_permissions", item.SchedulesPermissions)
-	d.Set("services_permissions", item.ServicesPermissions)
-	d.Set("webhooks_permissions", item.WebhooksPermissions)
-	d.Set("workflows_permissions", item.WorkflowsPermissions)
+  d.Set("slug", item.Slug)
+  d.Set("system_role", item.SystemRole)
+  d.Set("alert_sources_permissions", item.AlertSourcesPermissions)
+  d.Set("alert_urgency_permissions", item.AlertUrgencyPermissions)
+  d.Set("alerts_permissions", item.AlertsPermissions)
+  d.Set("api_keys_permissions", item.ApiKeysPermissions)
+  d.Set("audits_permissions", item.AuditsPermissions)
+  d.Set("contacts_permissions", item.ContactsPermissions)
+  d.Set("escalation_policies_permissions", item.EscalationPoliciesPermissions)
+  d.Set("groups_permissions", item.GroupsPermissions)
+  d.Set("heartbeats_permissions", item.HeartbeatsPermissions)
+  d.Set("integrations_permissions", item.IntegrationsPermissions)
+  d.Set("invitations_permissions", item.InvitationsPermissions)
+  d.Set("live_call_routing_permissions", item.LiveCallRoutingPermissions)
+  d.Set("schedule_override_permissions", item.ScheduleOverridePermissions)
+  d.Set("schedules_permissions", item.SchedulesPermissions)
+  d.Set("services_permissions", item.ServicesPermissions)
+  d.Set("webhooks_permissions", item.WebhooksPermissions)
+  d.Set("workflows_permissions", item.WorkflowsPermissions)
 
 	return nil
 }
@@ -403,66 +443,66 @@ func resourceOnCallRoleUpdate(ctx context.Context, d *schema.ResourceData, meta 
 
 	s := &client.OnCallRole{}
 
-	if d.HasChange("name") {
-		s.Name = d.Get("name").(string)
-	}
-	if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
-	}
-	if d.HasChange("system_role") {
-		s.SystemRole = d.Get("system_role").(string)
-	}
-	if d.HasChange("alert_sources_permissions") {
-		s.AlertSourcesPermissions = d.Get("alert_sources_permissions").([]interface{})
-	}
-	if d.HasChange("alert_urgency_permissions") {
-		s.AlertUrgencyPermissions = d.Get("alert_urgency_permissions").([]interface{})
-	}
-	if d.HasChange("alerts_permissions") {
-		s.AlertsPermissions = d.Get("alerts_permissions").([]interface{})
-	}
-	if d.HasChange("api_keys_permissions") {
-		s.ApiKeysPermissions = d.Get("api_keys_permissions").([]interface{})
-	}
-	if d.HasChange("audits_permissions") {
-		s.AuditsPermissions = d.Get("audits_permissions").([]interface{})
-	}
-	if d.HasChange("contacts_permissions") {
-		s.ContactsPermissions = d.Get("contacts_permissions").([]interface{})
-	}
-	if d.HasChange("escalation_policies_permissions") {
-		s.EscalationPoliciesPermissions = d.Get("escalation_policies_permissions").([]interface{})
-	}
-	if d.HasChange("groups_permissions") {
-		s.GroupsPermissions = d.Get("groups_permissions").([]interface{})
-	}
-	if d.HasChange("heartbeats_permissions") {
-		s.HeartbeatsPermissions = d.Get("heartbeats_permissions").([]interface{})
-	}
-	if d.HasChange("integrations_permissions") {
-		s.IntegrationsPermissions = d.Get("integrations_permissions").([]interface{})
-	}
-	if d.HasChange("invitations_permissions") {
-		s.InvitationsPermissions = d.Get("invitations_permissions").([]interface{})
-	}
-	if d.HasChange("live_call_routing_permissions") {
-		s.LiveCallRoutingPermissions = d.Get("live_call_routing_permissions").([]interface{})
-	}
-	if d.HasChange("schedule_override_permissions") {
-		s.ScheduleOverridePermissions = d.Get("schedule_override_permissions").([]interface{})
-	}
-	if d.HasChange("schedules_permissions") {
-		s.SchedulesPermissions = d.Get("schedules_permissions").([]interface{})
-	}
-	if d.HasChange("services_permissions") {
-		s.ServicesPermissions = d.Get("services_permissions").([]interface{})
-	}
-	if d.HasChange("webhooks_permissions") {
-		s.WebhooksPermissions = d.Get("webhooks_permissions").([]interface{})
-	}
-	if d.HasChange("workflows_permissions") {
-		s.WorkflowsPermissions = d.Get("workflows_permissions").([]interface{})
-	}
+	  if d.HasChange("name") {
+				s.Name = d.Get("name").(string)
+			}
+    if d.HasChange("slug") {
+				s.Slug = d.Get("slug").(string)
+			}
+    if d.HasChange("system_role") {
+				s.SystemRole = d.Get("system_role").(string)
+			}
+    if d.HasChange("alert_sources_permissions") {
+				s.AlertSourcesPermissions = d.Get("alert_sources_permissions").([]interface{})
+			}
+    if d.HasChange("alert_urgency_permissions") {
+				s.AlertUrgencyPermissions = d.Get("alert_urgency_permissions").([]interface{})
+			}
+    if d.HasChange("alerts_permissions") {
+				s.AlertsPermissions = d.Get("alerts_permissions").([]interface{})
+			}
+    if d.HasChange("api_keys_permissions") {
+				s.ApiKeysPermissions = d.Get("api_keys_permissions").([]interface{})
+			}
+    if d.HasChange("audits_permissions") {
+				s.AuditsPermissions = d.Get("audits_permissions").([]interface{})
+			}
+    if d.HasChange("contacts_permissions") {
+				s.ContactsPermissions = d.Get("contacts_permissions").([]interface{})
+			}
+    if d.HasChange("escalation_policies_permissions") {
+				s.EscalationPoliciesPermissions = d.Get("escalation_policies_permissions").([]interface{})
+			}
+    if d.HasChange("groups_permissions") {
+				s.GroupsPermissions = d.Get("groups_permissions").([]interface{})
+			}
+    if d.HasChange("heartbeats_permissions") {
+				s.HeartbeatsPermissions = d.Get("heartbeats_permissions").([]interface{})
+			}
+    if d.HasChange("integrations_permissions") {
+				s.IntegrationsPermissions = d.Get("integrations_permissions").([]interface{})
+			}
+    if d.HasChange("invitations_permissions") {
+				s.InvitationsPermissions = d.Get("invitations_permissions").([]interface{})
+			}
+    if d.HasChange("live_call_routing_permissions") {
+				s.LiveCallRoutingPermissions = d.Get("live_call_routing_permissions").([]interface{})
+			}
+    if d.HasChange("schedule_override_permissions") {
+				s.ScheduleOverridePermissions = d.Get("schedule_override_permissions").([]interface{})
+			}
+    if d.HasChange("schedules_permissions") {
+				s.SchedulesPermissions = d.Get("schedules_permissions").([]interface{})
+			}
+    if d.HasChange("services_permissions") {
+				s.ServicesPermissions = d.Get("services_permissions").([]interface{})
+			}
+    if d.HasChange("webhooks_permissions") {
+				s.WebhooksPermissions = d.Get("webhooks_permissions").([]interface{})
+			}
+    if d.HasChange("workflows_permissions") {
+				s.WorkflowsPermissions = d.Get("workflows_permissions").([]interface{})
+			}
 
 	_, err := c.UpdateOnCallRole(d.Id(), s)
 	if err != nil {

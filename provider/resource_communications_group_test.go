@@ -10,7 +10,7 @@ import (
 
 func TestAccResourceCommunicationsGroup(t *testing.T) {
 	resource.UnitTest(t, resource.TestCase{
-		PreCheck: func() {
+		PreCheck:          func() {
 			testAccPreCheck(t)
 		},
 		ProviderFactories: providerFactories,
@@ -25,6 +25,6 @@ func TestAccResourceCommunicationsGroup(t *testing.T) {
 const testAccResourceCommunicationsGroup = `
 resource "rootly_communications_group" "test" {
 	name = "test"
-communication_type_id = "test"
+communication_type_id = "01234567-89ab-cdef-0123-456789abcdef"
 }
 `

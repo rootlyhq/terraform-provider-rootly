@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
@@ -18,129 +18,153 @@ import (
 func resourceFormField() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceFormFieldCreate,
-		ReadContext:   resourceFormFieldRead,
+		ReadContext: resourceFormFieldRead,
 		UpdateContext: resourceFormFieldUpdate,
 		DeleteContext: resourceFormFieldDelete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
-
-			"kind": &schema.Schema{
-				Type:         schema.TypeString,
-				Default:      "custom",
-				Required:     false,
-				Optional:     true,
-				ForceNew:     false,
-				Description:  "The kind of the form field. Value must be one of `custom`, `title`, `summary`, `mitigation_message`, `resolution_message`, `severity`, `environments`, `types`, `services`, `causes`, `functionalities`, `teams`, `visibility`, `mark_as_test`, `mark_as_backfilled`, `labels`, `notify_emails`, `trigger_manual_workflows`, `show_ongoing_incidents`, `attach_alerts`, `mark_as_in_triage`, `in_triage_at`, `started_at`, `detected_at`, `acknowledged_at`, `mitigated_at`, `resolved_at`, `closed_at`, `manual_starting_datetime_field`.",
-				ValidateFunc: validation.StringInSlice([]string{"custom", "title", "summary", "mitigation_message", "resolution_message", "severity", "environments", "types", "services", "causes", "functionalities", "teams", "visibility", "mark_as_test", "mark_as_backfilled", "labels", "notify_emails", "trigger_manual_workflows", "show_ongoing_incidents", "attach_alerts", "mark_as_in_triage", "in_triage_at", "started_at", "detected_at", "acknowledged_at", "mitigated_at", "resolved_at", "closed_at", "manual_starting_datetime_field"}, false),
-			},
-
-			"input_kind": &schema.Schema{
-				Type:         schema.TypeString,
-				Default:      "text",
-				Required:     false,
-				Optional:     true,
-				ForceNew:     false,
-				Description:  "The input kind of the form field. Value must be one of `text`, `textarea`, `select`, `multi_select`, `date`, `datetime`, `number`, `checkbox`, `tags`, `rich_text`.",
-				ValidateFunc: validation.StringInSlice([]string{"text", "textarea", "select", "multi_select", "date", "datetime", "number", "checkbox", "tags", "rich_text"}, false),
-			},
-
-			"value_kind": &schema.Schema{
-				Type:         schema.TypeString,
-				Default:      "inherit",
-				Required:     false,
-				Optional:     true,
-				ForceNew:     false,
-				Description:  "The value kind of the form field. Value must be one of `inherit`, `group`, `service`, `functionality`, `user`, `catalog_entity`.",
-				ValidateFunc: validation.StringInSlice([]string{"inherit", "group", "service", "functionality", "user", "catalog_entity"}, false),
-			},
-
-			"value_kind_catalog_id": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The ID of the catalog used when value_kind is `catalog_entity`",
-			},
-
-			"name": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
-				Description: "The name of the form field",
-			},
-
-			"slug": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The slug of the form field",
-			},
-
-			"description": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The description of the form field",
-			},
-
-			"shown": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "",
-			},
-
-			"required": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "",
-			},
-
-			"show_on_incident_details": &schema.Schema{
-				Type:        schema.TypeBool,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Description: "Whether the form field is shown on the incident details panel. Value must be one of true or false",
-			},
-
-			"enabled": &schema.Schema{
-				Type:     schema.TypeBool,
-				Default:  true,
+		Schema: map[string]*schema.Schema {
+			
+			"kind": &schema.Schema {
+				Type: schema.TypeString,
+				Default: "custom",
+				Required: false,
 				Optional: true,
+				ForceNew: false,
+				Description: "The kind of the form field. Value must be one of `custom`, `title`, `summary`, `mitigation_message`, `resolution_message`, `severity`, `environments`, `types`, `services`, `causes`, `functionalities`, `teams`, `visibility`, `mark_as_test`, `mark_as_backfilled`, `labels`, `notify_emails`, `trigger_manual_workflows`, `show_ongoing_incidents`, `attach_alerts`, `mark_as_in_triage`, `in_triage_at`, `started_at`, `detected_at`, `acknowledged_at`, `mitigated_at`, `resolved_at`, `closed_at`, `manual_starting_datetime_field`.",
+		ValidateFunc: validation.StringInSlice([]string{"custom", "title", "summary", "mitigation_message", "resolution_message", "severity", "environments", "types", "services", "causes", "functionalities", "teams", "visibility", "mark_as_test", "mark_as_backfilled", "labels", "notify_emails", "trigger_manual_workflows", "show_ongoing_incidents", "attach_alerts", "mark_as_in_triage", "in_triage_at", "started_at", "detected_at", "acknowledged_at", "mitigated_at", "resolved_at", "closed_at", "manual_starting_datetime_field"}, false),
+				
 			},
+			
 
-			"default_values": &schema.Schema{
-				Type: schema.TypeList,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "",
+			"input_kind": &schema.Schema {
+				Type: schema.TypeString,
+				Default: "text",
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The input kind of the form field. Value must be one of `text`, `textarea`, `select`, `multi_select`, `date`, `datetime`, `number`, `checkbox`, `tags`, `rich_text`.",
+		ValidateFunc: validation.StringInSlice([]string{"text", "textarea", "select", "multi_select", "date", "datetime", "number", "checkbox", "tags", "rich_text"}, false),
+				
 			},
+			
+
+			"value_kind": &schema.Schema {
+				Type: schema.TypeString,
+				Default: "inherit",
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The value kind of the form field. Value must be one of `inherit`, `group`, `service`, `functionality`, `user`, `catalog_entity`.",
+		ValidateFunc: validation.StringInSlice([]string{"inherit", "group", "service", "functionality", "user", "catalog_entity"}, false),
+				
+			},
+			
+
+			"value_kind_catalog_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The ID of the catalog used when value_kind is `catalog_entity`",
+				
+			},
+			
+
+			"name": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
+				Description: "The name of the form field",
+				
+			},
+			
+
+			"slug": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The slug of the form field",
+				
+			},
+			
+
+			"description": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The description of the form field",
+				
+			},
+			
+
+				"shown": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "",
+					
+				},
+				
+
+				"required": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "",
+					
+				},
+				
+
+			"show_on_incident_details": &schema.Schema {
+				Type: schema.TypeBool,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				Description: "Whether the form field is shown on the incident details panel. Value must be one of true or false",
+				
+			},
+			
+
+				"enabled": &schema.Schema {
+					Type: schema.TypeBool,
+					Default: true,
+					Optional: true,
+					
+				},
+				
+
+				"default_values": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "",
+					
+				},
+				
 		},
 	}
 }
@@ -152,42 +176,42 @@ func resourceFormFieldCreate(ctx context.Context, d *schema.ResourceData, meta i
 
 	s := &client.FormField{}
 
-	if value, ok := d.GetOkExists("kind"); ok {
-		s.Kind = value.(string)
-	}
-	if value, ok := d.GetOkExists("input_kind"); ok {
-		s.InputKind = value.(string)
-	}
-	if value, ok := d.GetOkExists("value_kind"); ok {
-		s.ValueKind = value.(string)
-	}
-	if value, ok := d.GetOkExists("value_kind_catalog_id"); ok {
-		s.ValueKindCatalogId = value.(string)
-	}
-	if value, ok := d.GetOkExists("name"); ok {
-		s.Name = value.(string)
-	}
-	if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
-	}
-	if value, ok := d.GetOkExists("description"); ok {
-		s.Description = value.(string)
-	}
-	if value, ok := d.GetOkExists("shown"); ok {
-		s.Shown = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("required"); ok {
-		s.Required = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("show_on_incident_details"); ok {
-		s.ShowOnIncidentDetails = tools.Bool(value.(bool))
-	}
-	if value, ok := d.GetOkExists("enabled"); ok {
-		s.Enabled = tools.Bool(value.(bool))
-	}
-	if value, ok := d.GetOkExists("default_values"); ok {
-		s.DefaultValues = value.([]interface{})
-	}
+	  if value, ok := d.GetOkExists("kind"); ok {
+				s.Kind = value.(string)
+			}
+    if value, ok := d.GetOkExists("input_kind"); ok {
+				s.InputKind = value.(string)
+			}
+    if value, ok := d.GetOkExists("value_kind"); ok {
+				s.ValueKind = value.(string)
+			}
+    if value, ok := d.GetOkExists("value_kind_catalog_id"); ok {
+				s.ValueKindCatalogId = value.(string)
+			}
+    if value, ok := d.GetOkExists("name"); ok {
+				s.Name = value.(string)
+			}
+    if value, ok := d.GetOkExists("slug"); ok {
+				s.Slug = value.(string)
+			}
+    if value, ok := d.GetOkExists("description"); ok {
+				s.Description = value.(string)
+			}
+    if value, ok := d.GetOkExists("shown"); ok {
+				s.Shown = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("required"); ok {
+				s.Required = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("show_on_incident_details"); ok {
+				s.ShowOnIncidentDetails = tools.Bool(value.(bool))
+			}
+    if value, ok := d.GetOkExists("enabled"); ok {
+				s.Enabled = tools.Bool(value.(bool))
+			}
+    if value, ok := d.GetOkExists("default_values"); ok {
+				s.DefaultValues = value.([]interface{})
+			}
 
 	res, err := c.CreateFormField(s)
 	if err != nil {
@@ -218,17 +242,17 @@ func resourceFormFieldRead(ctx context.Context, d *schema.ResourceData, meta int
 	}
 
 	d.Set("kind", item.Kind)
-	d.Set("input_kind", item.InputKind)
-	d.Set("value_kind", item.ValueKind)
-	d.Set("value_kind_catalog_id", item.ValueKindCatalogId)
-	d.Set("name", item.Name)
-	d.Set("slug", item.Slug)
-	d.Set("description", item.Description)
-	d.Set("shown", item.Shown)
-	d.Set("required", item.Required)
-	d.Set("show_on_incident_details", item.ShowOnIncidentDetails)
-	d.Set("enabled", item.Enabled)
-	d.Set("default_values", item.DefaultValues)
+  d.Set("input_kind", item.InputKind)
+  d.Set("value_kind", item.ValueKind)
+  d.Set("value_kind_catalog_id", item.ValueKindCatalogId)
+  d.Set("name", item.Name)
+  d.Set("slug", item.Slug)
+  d.Set("description", item.Description)
+  d.Set("shown", item.Shown)
+  d.Set("required", item.Required)
+  d.Set("show_on_incident_details", item.ShowOnIncidentDetails)
+  d.Set("enabled", item.Enabled)
+  d.Set("default_values", item.DefaultValues)
 
 	return nil
 }
@@ -239,42 +263,42 @@ func resourceFormFieldUpdate(ctx context.Context, d *schema.ResourceData, meta i
 
 	s := &client.FormField{}
 
-	if d.HasChange("kind") {
-		s.Kind = d.Get("kind").(string)
-	}
-	if d.HasChange("input_kind") {
-		s.InputKind = d.Get("input_kind").(string)
-	}
-	if d.HasChange("value_kind") {
-		s.ValueKind = d.Get("value_kind").(string)
-	}
-	if d.HasChange("value_kind_catalog_id") {
-		s.ValueKindCatalogId = d.Get("value_kind_catalog_id").(string)
-	}
-	if d.HasChange("name") {
-		s.Name = d.Get("name").(string)
-	}
-	if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
-	}
-	if d.HasChange("description") {
-		s.Description = d.Get("description").(string)
-	}
-	if d.HasChange("shown") {
-		s.Shown = d.Get("shown").([]interface{})
-	}
-	if d.HasChange("required") {
-		s.Required = d.Get("required").([]interface{})
-	}
-	if d.HasChange("show_on_incident_details") {
-		s.ShowOnIncidentDetails = tools.Bool(d.Get("show_on_incident_details").(bool))
-	}
-	if d.HasChange("enabled") {
-		s.Enabled = tools.Bool(d.Get("enabled").(bool))
-	}
-	if d.HasChange("default_values") {
-		s.DefaultValues = d.Get("default_values").([]interface{})
-	}
+	  if d.HasChange("kind") {
+				s.Kind = d.Get("kind").(string)
+			}
+    if d.HasChange("input_kind") {
+				s.InputKind = d.Get("input_kind").(string)
+			}
+    if d.HasChange("value_kind") {
+				s.ValueKind = d.Get("value_kind").(string)
+			}
+    if d.HasChange("value_kind_catalog_id") {
+				s.ValueKindCatalogId = d.Get("value_kind_catalog_id").(string)
+			}
+    if d.HasChange("name") {
+				s.Name = d.Get("name").(string)
+			}
+    if d.HasChange("slug") {
+				s.Slug = d.Get("slug").(string)
+			}
+    if d.HasChange("description") {
+				s.Description = d.Get("description").(string)
+			}
+    if d.HasChange("shown") {
+				s.Shown = d.Get("shown").([]interface{})
+			}
+    if d.HasChange("required") {
+				s.Required = d.Get("required").([]interface{})
+			}
+    if d.HasChange("show_on_incident_details") {
+				s.ShowOnIncidentDetails = tools.Bool(d.Get("show_on_incident_details").(bool))
+			}
+    if d.HasChange("enabled") {
+				s.Enabled = tools.Bool(d.Get("enabled").(bool))
+			}
+    if d.HasChange("default_values") {
+				s.DefaultValues = d.Get("default_values").([]interface{})
+			}
 
 	_, err := c.UpdateFormField(d.Id(), s)
 	if err != nil {

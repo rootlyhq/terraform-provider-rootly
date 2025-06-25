@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
@@ -18,63 +18,73 @@ import (
 func resourceScheduleRotationActiveDay() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceScheduleRotationActiveDayCreate,
-		ReadContext:   resourceScheduleRotationActiveDayRead,
+		ReadContext: resourceScheduleRotationActiveDayRead,
 		UpdateContext: resourceScheduleRotationActiveDayUpdate,
 		DeleteContext: resourceScheduleRotationActiveDayDelete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
-
-			"schedule_rotation_id": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    true,
+		Schema: map[string]*schema.Schema {
+			
+			"schedule_rotation_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: true,
 				Description: "",
+				
 			},
+			
 
-			"day_name": &schema.Schema{
-				Type:         schema.TypeString,
-				Default:      "S",
-				Required:     false,
-				Optional:     true,
-				ForceNew:     false,
-				Description:  "Schedule rotation day name for which active times to be created. Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
-				ValidateFunc: validation.StringInSlice([]string{"S", "M", "T", "W", "R", "F", "U"}, false),
+			"day_name": &schema.Schema {
+				Type: schema.TypeString,
+				Default: "S",
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "Schedule rotation day name for which active times to be created. Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.",
+		ValidateFunc: validation.StringInSlice([]string{"S", "M", "T", "W", "R", "F", "U"}, false),
+				
 			},
+			
 
-			"active_time_attributes": &schema.Schema{
-				Type:             schema.TypeList,
-				Computed:         false,
-				Required:         true,
-				Optional:         false,
-				Description:      "Schedule rotation active times per day",
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
+				"active_time_attributes": &schema.Schema {
+					Type: schema.TypeList,
+					Computed: false,
+					Required: true,
+					Optional: false,
+					Description: "Schedule rotation active times per day",
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Elem: &schema.Resource {
+						Schema: map[string]*schema.Schema {
+              
+			"start_time": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "Start time for schedule rotation active time",
+				
+			},
+			
 
-						"start_time": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "Start time for schedule rotation active time",
-						},
-
-						"end_time": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "End time for schedule rotation active time",
+			"end_time": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "End time for schedule rotation active time",
+				
+			},
+			
 						},
 					},
+					
 				},
-			},
+				
 		},
 	}
 }
@@ -86,15 +96,15 @@ func resourceScheduleRotationActiveDayCreate(ctx context.Context, d *schema.Reso
 
 	s := &client.ScheduleRotationActiveDay{}
 
-	if value, ok := d.GetOkExists("schedule_rotation_id"); ok {
-		s.ScheduleRotationId = value.(string)
-	}
-	if value, ok := d.GetOkExists("day_name"); ok {
-		s.DayName = value.(string)
-	}
-	if value, ok := d.GetOkExists("active_time_attributes"); ok {
-		s.ActiveTimeAttributes = value.([]interface{})
-	}
+	  if value, ok := d.GetOkExists("schedule_rotation_id"); ok {
+				s.ScheduleRotationId = value.(string)
+			}
+    if value, ok := d.GetOkExists("day_name"); ok {
+				s.DayName = value.(string)
+			}
+    if value, ok := d.GetOkExists("active_time_attributes"); ok {
+				s.ActiveTimeAttributes = value.([]interface{})
+			}
 
 	res, err := c.CreateScheduleRotationActiveDay(s)
 	if err != nil {
@@ -125,26 +135,27 @@ func resourceScheduleRotationActiveDayRead(ctx context.Context, d *schema.Resour
 	}
 
 	d.Set("schedule_rotation_id", item.ScheduleRotationId)
-	d.Set("day_name", item.DayName)
+  d.Set("day_name", item.DayName)
+  
+          if item.ActiveTimeAttributes != nil {
+              processedItems := make([]map[string]interface{}, 0)
 
-	if item.ActiveTimeAttributes != nil {
-		processedItems := make([]map[string]interface{}, 0)
+              for _, c := range item.ActiveTimeAttributes {
+                  if rawItem, ok := c.(map[string]interface{}); ok {
+                      // Create a new map with only the fields defined in the schema
+                      processedItem := map[string]interface{}{
+                          "start_time": rawItem["start_time"],
+"end_time": rawItem["end_time"],
+                      }
+                      processedItems = append(processedItems, processedItem)
+                  }
+              }
 
-		for _, c := range item.ActiveTimeAttributes {
-			if rawItem, ok := c.(map[string]interface{}); ok {
-				// Create a new map with only the fields defined in the schema
-				processedItem := map[string]interface{}{
-					"start_time": rawItem["start_time"],
-					"end_time":   rawItem["end_time"],
-				}
-				processedItems = append(processedItems, processedItem)
-			}
-		}
-
-		d.Set("active_time_attributes", processedItems)
-	} else {
-		d.Set("active_time_attributes", nil)
-	}
+              d.Set("active_time_attributes", processedItems)
+          } else {
+              d.Set("active_time_attributes", nil)
+          }
+        
 
 	return nil
 }
@@ -155,15 +166,15 @@ func resourceScheduleRotationActiveDayUpdate(ctx context.Context, d *schema.Reso
 
 	s := &client.ScheduleRotationActiveDay{}
 
-	if d.HasChange("schedule_rotation_id") {
-		s.ScheduleRotationId = d.Get("schedule_rotation_id").(string)
-	}
-	if d.HasChange("day_name") {
-		s.DayName = d.Get("day_name").(string)
-	}
-	if d.HasChange("active_time_attributes") {
-		s.ActiveTimeAttributes = d.Get("active_time_attributes").([]interface{})
-	}
+	  if d.HasChange("schedule_rotation_id") {
+				s.ScheduleRotationId = d.Get("schedule_rotation_id").(string)
+			}
+    if d.HasChange("day_name") {
+				s.DayName = d.Get("day_name").(string)
+			}
+    if d.HasChange("active_time_attributes") {
+				s.ActiveTimeAttributes = d.Get("active_time_attributes").([]interface{})
+			}
 
 	_, err := c.UpdateScheduleRotationActiveDay(d.Id(), s)
 	if err != nil {

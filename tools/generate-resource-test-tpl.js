@@ -1,6 +1,7 @@
 const inflect = require("./inflect");
+const path = require("path");
 
-module.exports = (name, resourceSchema, requiredFields, pathIdField) => {
+module.exports = (name, resourceSchema, requiredFields, pathIdField, swagger) => {
   const namePlural = inflect.pluralize(name);
   const nameCamel = inflect.camelize(name);
   const nameCamelPlural = inflect.camelize(namePlural);
@@ -31,7 +32,7 @@ func TestAccResource${nameCamel}(t *testing.T) {
 
 const testAccResource${nameCamel} = \`
 resource "rootly_${name}" "test" {
-	${testParams(name, resourceSchema, requiredFields || [])}
+	${testParams(name, getCreationSchema(name, resourceSchema, swagger), requiredFields || [])}
 }
 \`
 `;
@@ -48,12 +49,25 @@ function testParams(name, schema, required) {
         case "boolean":
           return `${key} = false`;
         case "string":
-          return key == "url"
-            ? `	url = "https://rootly.com/dummy"`
-            : `${key} = "${val}"`;
+          if (key == "url") {
+            return `	url = "https://rootly.com/dummy"`;
+          } else if (key.endsWith("_id")) {
+            // Handle ID fields - could be UUID string or integer
+            // Use string UUID format for safety since most APIs expect strings
+            return `${key} = "01234567-89ab-cdef-0123-456789abcdef"`;
+          } else if (key == "color") {
+            // Handle color fields with hex format (when required)
+            return `${key} = "#FF0000"`;
+          } else {
+            return `${key} = "${val}"`;
+          }
         case "number":
           return `${key} = 1`;
         case "integer":
+          if (key.endsWith("_id")) {
+            // Handle integer ID fields
+            return `${key} = 1`;
+          }
           return `${key} = 1`;
         case "array":
           if (
@@ -74,4 +88,22 @@ function testParams(name, schema, required) {
       }
     })
     .join("\n");
+}
+
+function getCreationSchema(name, resourceSchema, swagger) {
+  // Try to get the creation schema (new_*) first, fallback to resource schema
+  const creationSchemaName = `new_${name}`;
+  if (swagger.components && swagger.components.schemas && swagger.components.schemas[creationSchemaName]) {
+    const creationSchema = swagger.components.schemas[creationSchemaName];
+    // Navigate to the attributes properties in the creation schema
+    if (creationSchema.properties && 
+        creationSchema.properties.data && 
+        creationSchema.properties.data.properties && 
+        creationSchema.properties.data.properties.attributes &&
+        creationSchema.properties.data.properties.attributes.properties) {
+      return creationSchema.properties.data.properties.attributes;
+    }
+  }
+  // Fallback to resource schema if creation schema not found or malformed
+  return resourceSchema;
 }

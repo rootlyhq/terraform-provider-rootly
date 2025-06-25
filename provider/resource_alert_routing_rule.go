@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
+	
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
@@ -18,152 +18,179 @@ import (
 func resourceAlertRoutingRule() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceAlertRoutingRuleCreate,
-		ReadContext:   resourceAlertRoutingRuleRead,
+		ReadContext: resourceAlertRoutingRuleRead,
 		UpdateContext: resourceAlertRoutingRuleUpdate,
 		DeleteContext: resourceAlertRoutingRuleDelete,
-		Importer: &schema.ResourceImporter{
+		Importer: &schema.ResourceImporter {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema{
-
-			"name": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+		Schema: map[string]*schema.Schema {
+			
+			"name": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The name of the alert routing rule",
+				
 			},
+			
 
-			"enabled": &schema.Schema{
-				Type:     schema.TypeBool,
-				Default:  true,
-				Optional: true,
-			},
+				"enabled": &schema.Schema {
+					Type: schema.TypeBool,
+					Default: true,
+					Optional: true,
+					
+				},
+				
 
-			"alerts_source_id": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				ForceNew:    false,
+			"alerts_source_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: false,
+				Required: true,
+				Optional: false,
+				ForceNew: false,
 				Description: "The ID of the alerts source",
+				
 			},
+			
 
-			"position": &schema.Schema{
-				Type:        schema.TypeInt,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The position of the alert routing rule for ordering evaluation",
+		"position": &schema.Schema {
+			Type: schema.TypeInt,
+			Computed: true,
+			Required: false,
+			Optional: true,
+			ForceNew: false,
+			Description: "The position of the alert routing rule for ordering evaluation",
+			
+		},
+		
+
+			"condition_type": &schema.Schema {
+				Type: schema.TypeString,
+				Default: "all",
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The type of condition for the alert routing rule. Value must be one of `all`, `any`.",
+		ValidateFunc: validation.StringInSlice([]string{"all", "any"}, false),
+				
 			},
+			
 
-			"condition_type": &schema.Schema{
-				Type:         schema.TypeString,
-				Default:      "all",
-				Required:     false,
-				Optional:     true,
-				ForceNew:     false,
-				Description:  "The type of condition for the alert routing rule. Value must be one of `all`, `any`.",
-				ValidateFunc: validation.StringInSlice([]string{"all", "any"}, false),
+				"conditions": &schema.Schema {
+					Type: schema.TypeList,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "The conditions for the alert routing rule",
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Elem: &schema.Resource {
+						Schema: map[string]*schema.Schema {
+              
+			"property_field_type": &schema.Schema {
+				Type: schema.TypeString,
+				Default: "attribute",
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The type of the property field. Value must be one of `attribute`, `payload`, `alert_field`.",
+		ValidateFunc: validation.StringInSlice([]string{"attribute", "payload", "alert_field"}, false),
+				
 			},
+			
 
-			"conditions": &schema.Schema{
-				Type:             schema.TypeList,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Description:      "The conditions for the alert routing rule",
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
+			"property_field_name": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The name of the property field. If the property field type is selected as 'attribute', then the allowed property field names are 'summary' (for Title), 'description', 'alert_urgency' and 'external_url' (for Alert Source URL). If the property field type is selected as 'payload', then the property field name should be supplied in JSON Path syntax.",
+				
+			},
+			
 
-						"property_field_type": &schema.Schema{
-							Type:         schema.TypeString,
-							Default:      "attribute",
-							Required:     false,
-							Optional:     true,
-							ForceNew:     false,
-							Description:  "The type of the property field. Value must be one of `attribute`, `payload`, `alert_field`.",
-							ValidateFunc: validation.StringInSlice([]string{"attribute", "payload", "alert_field"}, false),
+			"property_field_condition_type": &schema.Schema {
+				Type: schema.TypeString,
+				Default: "is_one_of",
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The condition type of the property field. Value must be one of `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is_empty`.",
+		ValidateFunc: validation.StringInSlice([]string{"is_one_of", "is_not_one_of", "contains", "does_not_contain", "starts_with", "ends_with", "matches_regex", "is_empty"}, false),
+				
+			},
+			
+
+			"property_field_value": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The value of the property field. Can be null if the property field condition type is 'is_one_of' or 'is_not_one_of'",
+				
+			},
+			
+
+				"property_field_values": &schema.Schema {
+					Type: schema.TypeList,
+					Elem: &schema.Schema {
+						Type: schema.TypeString,
+					},
+					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					Computed: true,
+					Required: false,
+					Optional: true,
+					Description: "The values of the property field. Used if the property field condition type is 'is_one_of' or 'is_not_one_of' except for when property field name is 'alert_urgency'",
+					
+				},
+				
 						},
+					},
+					
+				},
+				
 
-						"property_field_name": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "The name of the property field. If the property field type is selected as 'attribute', then the allowed property field names are 'summary' (for Title), 'description', 'alert_urgency' and 'external_url' (for Alert Source URL). If the property field type is selected as 'payload', then the property field name should be supplied in JSON Path syntax.",
-						},
+   			"destination": &schema.Schema {
+	 				Type: schema.TypeList,
+	 				Computed: false,
+	 				Required: true,
+	 				Optional: false,
+	 				Description: "The destinations for the alert routing rule",
+						MinItems: 0,
+						MaxItems: 1,
+	 					Elem: &schema.Resource {
+							Schema: map[string]*schema.Schema {
+	 							
+			"target_type": &schema.Schema {
+				Type: schema.TypeString,
+				Default: "Service",
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The type of the target. Value must be one of `Service`, `Group`, `EscalationPolicy`.",
+		ValidateFunc: validation.StringInSlice([]string{"Service", "Group", "EscalationPolicy"}, false),
+				
+			},
+			
 
-						"property_field_condition_type": &schema.Schema{
-							Type:         schema.TypeString,
-							Default:      "is_one_of",
-							Required:     false,
-							Optional:     true,
-							ForceNew:     false,
-							Description:  "The condition type of the property field. Value must be one of `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is_empty`.",
-							ValidateFunc: validation.StringInSlice([]string{"is_one_of", "is_not_one_of", "contains", "does_not_contain", "starts_with", "ends_with", "matches_regex", "is_empty"}, false),
-						},
-
-						"property_field_value": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "The value of the property field. Can be null if the property field condition type is 'is_one_of' or 'is_not_one_of'",
-						},
-
-						"property_field_values": &schema.Schema{
-							Type: schema.TypeList,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
+			"target_id": &schema.Schema {
+				Type: schema.TypeString,
+				Computed: true,
+				Required: false,
+				Optional: true,
+				ForceNew: false,
+				Description: "The ID of the target",
+				
+			},
+			
 							},
-							DiffSuppressFunc: tools.EqualIgnoringOrder,
-							Computed:         true,
-							Required:         false,
-							Optional:         true,
-							Description:      "The values of the property field. Used if the property field condition type is 'is_one_of' or 'is_not_one_of' except for when property field name is 'alert_urgency'",
-						},
-					},
-				},
-			},
-
-			"destination": &schema.Schema{
-				Type:        schema.TypeList,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
-				Description: "The destinations for the alert routing rule",
-				MinItems:    0,
-				MaxItems:    1,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-
-						"target_type": &schema.Schema{
-							Type:         schema.TypeString,
-							Default:      "Service",
-							Required:     false,
-							Optional:     true,
-							ForceNew:     false,
-							Description:  "The type of the target. Value must be one of `Service`, `Group`, `EscalationPolicy`.",
-							ValidateFunc: validation.StringInSlice([]string{"Service", "Group", "EscalationPolicy"}, false),
-						},
-
-						"target_id": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "The ID of the target",
-						},
-					},
-				},
-			},
+	 					},
+	 				},
+   			
 		},
 	}
 }
@@ -175,31 +202,31 @@ func resourceAlertRoutingRuleCreate(ctx context.Context, d *schema.ResourceData,
 
 	s := &client.AlertRoutingRule{}
 
-	if value, ok := d.GetOkExists("name"); ok {
-		s.Name = value.(string)
-	}
-	if value, ok := d.GetOkExists("enabled"); ok {
-		s.Enabled = tools.Bool(value.(bool))
-	}
-	if value, ok := d.GetOkExists("alerts_source_id"); ok {
-		s.AlertsSourceId = value.(string)
-	}
-	if value, ok := d.GetOkExists("position"); ok {
-		s.Position = value.(int)
-	}
-	if value, ok := d.GetOkExists("condition_type"); ok {
-		s.ConditionType = value.(string)
-	}
-	if value, ok := d.GetOkExists("conditions"); ok {
-		s.Conditions = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("destination"); ok {
-		if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
-			if mapValue, ok := valueList[0].(map[string]interface{}); ok {
-				s.Destination = mapValue
+	  if value, ok := d.GetOkExists("name"); ok {
+				s.Name = value.(string)
 			}
-		}
-	}
+    if value, ok := d.GetOkExists("enabled"); ok {
+				s.Enabled = tools.Bool(value.(bool))
+			}
+    if value, ok := d.GetOkExists("alerts_source_id"); ok {
+				s.AlertsSourceId = value.(string)
+			}
+    if value, ok := d.GetOkExists("position"); ok {
+				s.Position = value.(int)
+			}
+    if value, ok := d.GetOkExists("condition_type"); ok {
+				s.ConditionType = value.(string)
+			}
+    if value, ok := d.GetOkExists("conditions"); ok {
+				s.Conditions = value.([]interface{})
+			}
+    if value, ok := d.GetOkExists("destination"); ok {
+				if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
+          if mapValue, ok := valueList[0].(map[string]interface{}); ok {
+    				s.Destination = mapValue
+          }
+        }
+			}
 
 	res, err := c.CreateAlertRoutingRule(s)
 	if err != nil {
@@ -230,40 +257,41 @@ func resourceAlertRoutingRuleRead(ctx context.Context, d *schema.ResourceData, m
 	}
 
 	d.Set("name", item.Name)
-	d.Set("enabled", item.Enabled)
-	d.Set("alerts_source_id", item.AlertsSourceId)
-	d.Set("position", item.Position)
-	d.Set("condition_type", item.ConditionType)
+  d.Set("enabled", item.Enabled)
+  d.Set("alerts_source_id", item.AlertsSourceId)
+  d.Set("position", item.Position)
+  d.Set("condition_type", item.ConditionType)
+  
+          if item.Conditions != nil {
+              processedItems := make([]map[string]interface{}, 0)
 
-	if item.Conditions != nil {
-		processedItems := make([]map[string]interface{}, 0)
+              for _, c := range item.Conditions {
+                  if rawItem, ok := c.(map[string]interface{}); ok {
+                      // Create a new map with only the fields defined in the schema
+                      processedItem := map[string]interface{}{
+                          "property_field_type": rawItem["property_field_type"],
+"property_field_name": rawItem["property_field_name"],
+"property_field_condition_type": rawItem["property_field_condition_type"],
+"property_field_value": rawItem["property_field_value"],
+"property_field_values": rawItem["property_field_values"],
+                      }
+                      processedItems = append(processedItems, processedItem)
+                  }
+              }
 
-		for _, c := range item.Conditions {
-			if rawItem, ok := c.(map[string]interface{}); ok {
-				// Create a new map with only the fields defined in the schema
-				processedItem := map[string]interface{}{
-					"property_field_type":           rawItem["property_field_type"],
-					"property_field_name":           rawItem["property_field_name"],
-					"property_field_condition_type": rawItem["property_field_condition_type"],
-					"property_field_value":          rawItem["property_field_value"],
-					"property_field_values":         rawItem["property_field_values"],
-				}
-				processedItems = append(processedItems, processedItem)
-			}
-		}
-
-		d.Set("conditions", processedItems)
-	} else {
-		d.Set("conditions", nil)
-	}
-
-	singleton_list := make([]interface{}, 1, 1)
-	processedItem := map[string]interface{}{
-		"target_type": item.Destination["target_type"],
-		"target_id":   item.Destination["target_id"],
-	}
-	singleton_list[0] = processedItem
-	d.Set("destination", singleton_list)
+              d.Set("conditions", processedItems)
+          } else {
+              d.Set("conditions", nil)
+          }
+        
+  singleton_list := make([]interface{}, 1, 1)
+          processedItem := map[string]interface{}{
+            "target_type": item.Destination["target_type"],
+"target_id": item.Destination["target_id"],
+          }
+          singleton_list[0] = processedItem
+          d.Set("destination", singleton_list)
+        
 
 	return nil
 }
@@ -274,30 +302,31 @@ func resourceAlertRoutingRuleUpdate(ctx context.Context, d *schema.ResourceData,
 
 	s := &client.AlertRoutingRule{}
 
-	if d.HasChange("name") {
-		s.Name = d.Get("name").(string)
-	}
-	if d.HasChange("enabled") {
-		s.Enabled = tools.Bool(d.Get("enabled").(bool))
-	}
-	if d.HasChange("alerts_source_id") {
-		s.AlertsSourceId = d.Get("alerts_source_id").(string)
-	}
-	if d.HasChange("position") {
-		s.Position = d.Get("position").(int)
-	}
-	if d.HasChange("condition_type") {
-		s.ConditionType = d.Get("condition_type").(string)
-	}
-	if d.HasChange("conditions") {
-		s.Conditions = d.Get("conditions").([]interface{})
-	}
-	if d.HasChange("destination") {
-		tps := d.Get("destination").([]interface{})
-		for _, tpsi := range tps {
-			s.Destination = tpsi.(map[string]interface{})
-		}
-	}
+	  if d.HasChange("name") {
+				s.Name = d.Get("name").(string)
+			}
+    if d.HasChange("enabled") {
+				s.Enabled = tools.Bool(d.Get("enabled").(bool))
+			}
+    if d.HasChange("alerts_source_id") {
+				s.AlertsSourceId = d.Get("alerts_source_id").(string)
+			}
+    if d.HasChange("position") {
+				s.Position = d.Get("position").(int)
+			}
+    if d.HasChange("condition_type") {
+				s.ConditionType = d.Get("condition_type").(string)
+			}
+    if d.HasChange("conditions") {
+				s.Conditions = d.Get("conditions").([]interface{})
+			}
+    if d.HasChange("destination") {
+      		tps := d.Get("destination").([]interface{})
+      		for _, tpsi := range tps {
+      			s.Destination = tpsi.(map[string]interface{})
+      		}
+      	}
+			
 
 	_, err := c.UpdateAlertRoutingRule(d.Id(), s)
 	if err != nil {
