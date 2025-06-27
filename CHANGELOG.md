@@ -4,6 +4,7 @@
 
 ### Fixed
 
+- Fixed crash when schedule_rotationable_attributes shift_length attribute is use
 - Fixed test generator to use creation schemas (`new_*`) instead of read schemas for generating valid test data
 - Fixed `communications_template` test by adding support for `communication_type_id` field in test generation
 - Fixed `communications_type` test by using proper CSS hex color format (`#FF0000`) instead of plain text

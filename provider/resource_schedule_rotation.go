@@ -219,7 +219,22 @@ func resourceScheduleRotationRead(ctx context.Context, d *schema.ResourceData, m
 	d.Set("active_time_type", item.ActiveTimeType)
 	d.Set("active_time_attributes", item.ActiveTimeAttributes)
 	d.Set("time_zone", item.TimeZone)
-	d.Set("schedule_rotationable_attributes", item.ScheduleRotationableAttributes)
+
+	// Convert any numeric values to strings for schedule_rotationable_attributes
+	if item.ScheduleRotationableAttributes != nil {
+		convertedAttrs := make(map[string]interface{})
+		for k, v := range item.ScheduleRotationableAttributes {
+			switch val := v.(type) {
+			case int, int32, int64:
+				convertedAttrs[k] = fmt.Sprintf("%d", val)
+			case float32, float64:
+				convertedAttrs[k] = fmt.Sprintf("%g", val)
+			default:
+				convertedAttrs[k] = fmt.Sprintf("%v", val)
+			}
+		}
+		d.Set("schedule_rotationable_attributes", convertedAttrs)
+	}
 
 	return nil
 }
