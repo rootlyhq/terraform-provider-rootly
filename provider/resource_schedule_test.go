@@ -39,15 +39,6 @@ resource "rootly_schedule_rotation" "tf" {
 	schedule_id     = rootly_schedule.tf.id
 	name            = "test-initial"
 	active_all_week = true
-	active_days = [
-		"S",
-		"M",
-		"T",
-		"W",
-		"R",
-		"F",
-		"U",
-	]
 	active_time_type = "all_day"
 	position         = 1
 	schedule_rotationable_attributes = {
@@ -68,15 +59,6 @@ resource "rootly_schedule_rotation" "tf" {
 	schedule_id     = rootly_schedule.tf.id
 	name            = "test-updated"
 	active_all_week = true
-	active_days = [
-		"S",
-		"M",
-		"T",
-		"W",
-		"R",
-		"F",
-		"U"
-	]
 	active_time_type = "all_day"
 	position         = 1
 	schedule_rotationable_attributes = {
