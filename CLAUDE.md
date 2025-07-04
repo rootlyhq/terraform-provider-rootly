@@ -68,6 +68,16 @@ Provider supports:
 ### Workflow Tasks Architecture
 Workflow tasks are special resources with dynamic generation based on OpenAPI schema task definitions. They follow a pattern of `workflow_task_<action>_<integration>` and are automatically generated from the API schema.
 
+### Terraform Schema Flags
+The provider uses custom OpenAPI schema annotations to control Terraform resource generation behavior. These flags are processed in the JavaScript template files during code generation:
+
+- **`tf_skip_diff`** - Prevents Terraform from detecting differences on a field. Adds a `DiffSuppressFunc` that suppresses diffs when an old value exists. Used for sensitive fields like secrets or computed status fields.
+- **`tf_write_only`** - Marks a field as write-only for create/update operations but not read back from the API. Sets `ForceNew: true` and adds diff suppression. Used for passwords or fields that can't be retrieved.
+- **`tf_computed`** - Controls whether a field is computed by Terraform (`true`) or must be explicitly set (`false`). Affects JSON serialization and whether the field gets the `omitempty` tag.
+- **`tf_include_unchanged`** - Forces a field to be included in update operations even if it hasn't changed. Bypasses the normal `d.HasChange()` check. Used for fields the API requires in every update request.
+
+These flags are added to OpenAPI schema properties and processed by `tools/generate-resource-tpl.js` to customize Terraform field behavior.
+
 ## Development Workflow
 
 1. **Adding New Resources**: Most resources are auto-generated. Add exclusions in `tools/generate.js` only if manual implementation is needed.
