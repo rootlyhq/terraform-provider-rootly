@@ -138,7 +138,7 @@ func resourceScheduleRotation() *schema.Resource {
 				Computed:    false,
 				Required:    true,
 				Optional:    false,
-				Description: "Please see API docs for options: https://docs.rootly.com/api-reference/schedulerotations/creates-a-schedule-rotation#response-data-attributes-schedule-rotationable-attributes",
+				Description: "handoff_time and/or handoff_day may be required, depending on schedule_rotationable_type. Please see API docs for options based on schedule_rotationable_type: https://docs.rootly.com/api-reference/schedulerotations/creates-a-schedule-rotation#response-data-attributes-schedule-rotationable-attributes",
 			},
 		},
 	}

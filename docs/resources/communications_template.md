@@ -35,6 +35,7 @@ terraform plan -generate-config-out=generated.tf
 
 ### Required
 
+- `communication_type_id` (String) The communication type ID
 - `name` (String) The name of the communications template
 
 ### Optional
