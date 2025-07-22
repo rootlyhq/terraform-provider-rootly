@@ -89,6 +89,8 @@ const excluded = {
     "alert_group",
     "alert_routing_rule",
     "authorization",
+    "communication_groups",
+    "communications_template",
     "escalation_level",
     "escalation_policy",
     "form_set",
