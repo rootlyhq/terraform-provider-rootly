@@ -21,6 +21,8 @@ type ScheduleRotation struct {
   ActiveTimeType string `jsonapi:"attr,active_time_type,omitempty"`
   ActiveTimeAttributes []interface{} `jsonapi:"attr,active_time_attributes,omitempty"`
   TimeZone string `jsonapi:"attr,time_zone,omitempty"`
+  StartTime string `jsonapi:"attr,start_time,omitempty"`
+  EndTime string `jsonapi:"attr,end_time,omitempty"`
   ScheduleRotationableAttributes map[string]interface{} `jsonapi:"attr,schedule_rotationable_attributes,omitempty"`
 }
 

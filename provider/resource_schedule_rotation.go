@@ -130,6 +130,22 @@ func resourceScheduleRotation() *schema.Resource {
 				Description: "A valid IANA time zone name.",
 			},
 
+			"start_time": &schema.Schema{
+				Type:        schema.TypeString,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "ISO8601 date and time when rotation starts. Shifts will only be created after this time.",
+			},
+
+			"end_time": &schema.Schema{
+				Type:        schema.TypeString,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "ISO8601 date and time when rotation ends. Shifts will only be created before this time.",
+			},
+
 			"schedule_rotationable_attributes": &schema.Schema{
 				Type: schema.TypeMap,
 				Elem: &schema.Schema{
@@ -178,6 +194,12 @@ func resourceScheduleRotationCreate(ctx context.Context, d *schema.ResourceData,
 	if value, ok := d.GetOkExists("time_zone"); ok {
 		s.TimeZone = value.(string)
 	}
+	if value, ok := d.GetOkExists("start_time"); ok {
+		s.StartTime = value.(string)
+	}
+	if value, ok := d.GetOkExists("end_time"); ok {
+		s.EndTime = value.(string)
+	}
 	if value, ok := d.GetOkExists("schedule_rotationable_attributes"); ok {
 		s.ScheduleRotationableAttributes = value.(map[string]interface{})
 	}
@@ -219,6 +241,8 @@ func resourceScheduleRotationRead(ctx context.Context, d *schema.ResourceData, m
 	d.Set("active_time_type", item.ActiveTimeType)
 	d.Set("active_time_attributes", item.ActiveTimeAttributes)
 	d.Set("time_zone", item.TimeZone)
+	d.Set("start_time", item.StartTime)
+	d.Set("end_time", item.EndTime)
 
 	// Convert any numeric values to strings for schedule_rotationable_attributes
 	if item.ScheduleRotationableAttributes != nil {
@@ -271,6 +295,12 @@ func resourceScheduleRotationUpdate(ctx context.Context, d *schema.ResourceData,
 	}
 	if d.HasChange("time_zone") {
 		s.TimeZone = d.Get("time_zone").(string)
+	}
+	if d.HasChange("start_time") {
+		s.StartTime = d.Get("start_time").(string)
+	}
+	if d.HasChange("end_time") {
+		s.EndTime = d.Get("end_time").(string)
 	}
 	if d.HasChange("schedule_rotationable_attributes") {
 		s.ScheduleRotationableAttributes = d.Get("schedule_rotationable_attributes").(map[string]interface{})

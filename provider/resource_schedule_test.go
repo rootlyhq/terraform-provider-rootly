@@ -41,6 +41,7 @@ resource "rootly_schedule_rotation" "tf" {
 	active_all_week = true
 	active_time_type = "all_day"
 	position         = 1
+	start_time       = "2025-06-20T00:00:00Z"
 	schedule_rotationable_attributes = {
 		shift_length = 5
 		shift_length_unit = "days"
@@ -61,6 +62,7 @@ resource "rootly_schedule_rotation" "tf" {
 	active_all_week = true
 	active_time_type = "all_day"
 	position         = 1
+	start_time       = "2025-07-20T00:00:00Z"
 	schedule_rotationable_attributes = {
 		shift_length = 5
 		shift_length_unit = "days"
