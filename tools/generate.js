@@ -7,7 +7,6 @@ const clientTpl = require("./generate-client-tpl");
 const clientReadOnlyTpl = require("./generate-read-only-client-tpl");
 const dataSourceTpl = require("./generate-data-source-tpl");
 const resourceTpl = require("./generate-resource-tpl");
-const resourceTestTpl = require("./generate-resource-test-tpl");
 const workflowTpl = require("./generate-workflow-tpl");
 const generateWorkflowTaskResources = require("./generate-tasks");
 const swagger = require(path.resolve(swaggerPath));
@@ -83,29 +82,6 @@ const excluded = {
     "webhooks_delivery",
     "workflow_run",
     "workflow_task",
-  ],
-  tests: [
-    "alert_event",
-    "alert_group",
-    "alert_routing_rule",
-    "authorization",
-    "communication_groups",
-    "communications_template",
-    "escalation_level",
-    "escalation_policy",
-    "form_set",
-    "heartbeat",
-    "live_call_router",
-    "on_call_role",
-    "retrospective_configuration",
-    "retrospective_process",
-    "retrospective_step",
-    "schedule",
-    "schedule_rotation",
-    "schedule_rotation_active_time",
-    "schedule_rotation_user",
-    "shift_override",
-    "sub_status",
   ]
 }
 
@@ -114,7 +90,6 @@ function main() {
   generateClients()
   generateResources()
   generateWorkflowTaskResources(workflowTaskResources(), swagger)
-  generateResourceTests()
   generateDataSources()
 }
 
@@ -159,10 +134,6 @@ function generateClients() {
 
 function generateResources() {
   resources().forEach(generateResource)
-}
-
-function generateResourceTests() {
-  resources().filter((name) => !excluded.tests.includes(name)).forEach(generateResourceTest)
 }
 
 function generateDataSources() {
@@ -322,28 +293,6 @@ function generateResource(name) {
     );
     const docMetaPath = path.resolve(__dirname, "..", "docs", "resources", `${name}.meta.json`);
     fs.writeFileSync(docMetaPath, JSON.stringify({ HasSlug: !!hasSlug }, null, 2));
-  }
-}
-
-function generateResourceTest(name) {
-  const collectionSchema = collectionPathSchema(name);
-  const pathIdField =
-    collectionSchema &&
-    collectionSchema.parameters &&
-    collectionSchema.parameters[0] &&
-    collectionSchema.parameters[0].name;
-  if (name !== "workflow" && !pathIdField) {
-    code = resourceTestTpl(
-      name,
-      resourceSchema(name),
-      requiredFields(name),
-      pathIdField,
-      swagger
-    );
-    fs.writeFileSync(
-      path.resolve(__dirname, "..", "provider", `resource_${name}_test.go`),
-      code
-    );
   }
 }
 
