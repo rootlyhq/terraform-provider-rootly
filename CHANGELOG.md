@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [3.5.0]
 
 ### Fixed
 
@@ -13,6 +13,7 @@
 
 ### Added
 
+- Added `start_time`/`end_time` to `rootly_schedule_rotation`
 - Added `communication_type_id` field to `communications_template` resource schema for better API consistency
 - Added intelligent test data generation based on field naming patterns (UUIDs for string `_id` fields, integers for numeric `_id` fields, hex for `color` fields)
 
