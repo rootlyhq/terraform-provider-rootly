@@ -200,9 +200,11 @@ terraform plan -generate-config-out=generated.tf
 - `active_days` (List of String) Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.
 - `active_time_attributes` (Block List) Schedule rotation's active times (see [below for nested schema](#nestedblock--active_time_attributes))
 - `active_time_type` (String) Value must be one of `all_day`, `same_time`, or `custom`.
+- `end_time` (String) ISO8601 date and time when rotation ends. Shifts will only be created before this time.
 - `position` (Number) Position of the schedule rotation
 - `schedule_id` (String) The ID of parent schedule
 - `schedule_rotationable_type` (String) Schedule rotation type. Value must be one of `ScheduleDailyRotation`, `ScheduleWeeklyRotation`, `ScheduleBiweeklyRotation`, `ScheduleMonthlyRotation`, `ScheduleCustomRotation`.
+- `start_time` (String) ISO8601 date and time when rotation starts. Shifts will only be created after this time.
 - `time_zone` (String) A valid IANA time zone name.
 
 ### Read-Only
