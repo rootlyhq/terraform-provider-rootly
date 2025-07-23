@@ -1,6 +1,12 @@
 # Changelog
 
-## [3.5.0]
+## [3.5.1] -- 2025-07-23
+
+### Fixed
+
+- Updated docs to include `start_time`/`end_time` attributes for `rootly_schedule_rotation` added in version 3.5.0
+
+## [3.5.0] -- 2025-07-22
 
 ### Fixed
 
