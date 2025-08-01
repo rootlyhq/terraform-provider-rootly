@@ -65,16 +65,18 @@ resource "rootly_alerts_source" "example" {
 
 ### Optional
 
-- `alert_source_fields_attributes` (Block List) List of alert fields to be added to alert source (see [below for nested schema](#nestedblock--alert_source_fields_attributes))
+- `alert_source_fields_attributes` (Block List) List of alert fields to be added to the alert source (see [below for nested schema](#nestedblock--alert_source_fields_attributes))
+- `alert_source_urgency_rules_attributes` (Block List) List of rules that define the conditions under which the alert urgency will be set automatically based on the alert payload (see [below for nested schema](#nestedblock--alert_source_urgency_rules_attributes))
+- `alert_template_attributes` (Block List, Max: 1) (see [below for nested schema](#nestedblock--alert_template_attributes))
 - `alert_urgency_id` (String) ID for the default alert urgency assigned to this alert source
-- `email` (String) The email address of the alert source
+- `email` (String) The email generated for email alert sources
 - `owner_group_ids` (List of String) List of team IDs that will own the alert source
-- `resolution_rule_attributes` (Map of String) Additional attributes for email alerts source
-- `secret` (String) A secret key used to authenticate incoming requests to this alerts source
+- `resolution_rule_attributes` (Block List, Max: 1) Provide additional attributes for email alerts source (see [below for nested schema](#nestedblock--resolution_rule_attributes))
+- `secret` (String) The secret used to authenticate non-email alert sources
 - `source_type` (String) The alert source type. Value must be one of `email`, `app_dynamics`, `catchpoint`, `datadog`, `alertmanager`, `google_cloud`, `grafana`, `sentry`, `generic_webhook`, `cloud_watch`, `checkly`, `azure`, `new_relic`, `splunk`, `chronosphere`, `app_optics`, `bug_snag`, `honeycomb`, `monte_carlo`, `nagios`, `prtg`.
-- `sourceable_attributes` (Map of String) Additional attributes specific to certain alert sources (e.g., generic_webhook), encapsulating source-specific configurations or details
-- `status` (String) The current status of the alert source
-- `webhook_endpoint` (String) The URL endpoint of the alert source
+- `sourceable_attributes` (Block List, Max: 1) Provide additional attributes for generic_webhook alerts source (see [below for nested schema](#nestedblock--sourceable_attributes))
+- `status` (String) The status of the alert source. Value must be one of `connected`, `setup_complete`, `setup_incomplete`.
+- `webhook_endpoint` (String) The webhook URL generated for non-email alert sources
 
 ### Read-Only
 
@@ -87,6 +89,77 @@ Optional:
 
 - `alert_field_id` (String) The ID of the alert field
 - `template_body` (String) Liquid expression to extract a specific value from the alert's payload for evaluation
+
+
+<a id="nestedblock--alert_source_urgency_rules_attributes"></a>
+### Nested Schema for `alert_source_urgency_rules_attributes`
+
+Optional:
+
+- `alert_urgency_id` (String) The ID of the alert urgency
+- `conditionable_id` (String) The ID of the conditionable. If conditionable_type is AlertField, this is the ID of the alert field.
+- `conditionable_type` (String) The type of the conditionable. Value must be one of `AlertField`.
+- `json_path` (String) JSON path expression to extract a specific value from the alert's payload for evaluation
+- `kind` (String) The kind of the conditionable. Value must be one of `payload`, `alert_field`.
+- `operator` (String) Comparison operator used to evaluate the extracted value against the specified condition. Value must be one of `is`, `is_not`, `contains`, `does_not_contain`.
+- `value` (String) Value that the extracted payload data is compared to using the specified operator to determine a match
+
+
+<a id="nestedblock--alert_template_attributes"></a>
+### Nested Schema for `alert_template_attributes`
+
+Optional:
+
+- `description` (String) The alert description.
+- `external_url` (String) The alert URL.
+- `title` (String) The alert title.
+
+
+<a id="nestedblock--resolution_rule_attributes"></a>
+### Nested Schema for `resolution_rule_attributes`
+
+Optional:
+
+- `condition_type` (String) The type of condition to evaluate to apply auto resolution rule. Value must be one of `all`, `any`.
+- `conditions_attributes` (Block List) List of conditions to evaluate for auto resolution (see [below for nested schema](#nestedblock--resolution_rule_attributes--conditions_attributes))
+- `enabled` (Boolean)
+- `identifier_json_path` (String) JSON path expression to extract unique alert identifier used to match triggered alerts with resolving alerts
+- `identifier_matchable_id` (String) The ID of the identifier matchable. If identifier_matchable_type is AlertField, this is the ID of the alert field.
+- `identifier_matchable_type` (String) The type of the identifier matchable. Value must be one of `AlertField`.
+- `identifier_reference_kind` (String) The kind of the identifier reference. Value must be one of `payload`, `alert_field`.
+- `identifier_value_regex` (String) Regex group to further specify the part of the string used as a unique identifier
+
+<a id="nestedblock--resolution_rule_attributes--conditions_attributes"></a>
+### Nested Schema for `resolution_rule_attributes.conditions_attributes`
+
+Optional:
+
+- `conditionable_id` (String) The ID of the conditionable. If conditionable_type is AlertField, this is the ID of the alert field.
+- `conditionable_type` (String) The type of the conditionable. Value must be one of `AlertField`.
+- `field` (String) JSON path expression to extract a specific value from the alert's payload for evaluation
+- `kind` (String) The kind of the conditionable. Value must be one of `payload`, `alert_field`.
+- `operator` (String) Comparison operator used to evaluate the extracted value against the specified condition. Value must be one of `is`, `is_not`, `contains`, `does_not_contain`, `starts_with`, `ends_with`.
+- `value` (String) Value that the extracted payload data is compared to using the specified operator to determine a match
+
+
+
+<a id="nestedblock--sourceable_attributes"></a>
+### Nested Schema for `sourceable_attributes`
+
+Optional:
+
+- `accept_threaded_emails` (Boolean) Set this to false to reject threaded emails. Value must be one of true or false
+- `auto_resolve` (Boolean) Set this to true to auto-resolve alerts based on field_mappings_attributes conditions. Value must be one of true or false
+- `field_mappings_attributes` (Block List) Specify rules to auto resolve alerts (see [below for nested schema](#nestedblock--sourceable_attributes--field_mappings_attributes))
+- `resolve_state` (String) This value is matched with the value extracted from alerts payload using JSON path in field_mappings_attributes
+
+<a id="nestedblock--sourceable_attributes--field_mappings_attributes"></a>
+### Nested Schema for `sourceable_attributes.field_mappings_attributes`
+
+Optional:
+
+- `field` (String) Select the field on which the condition to be evaluated. Value must be one of `external_id`, `state`, `alert_title`, `alert_external_url`, `notification_target_type`, `notification_target_id`.
+- `json_path` (String) JSON path expression to extract a specific value from the alert's payload for evaluation
 
 ## Import
 
