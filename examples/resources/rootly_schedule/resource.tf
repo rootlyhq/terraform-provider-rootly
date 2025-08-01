@@ -6,15 +6,6 @@ data "rootly_user" "jane" {
   email = "demo1@rootly.com"
 }
 
-data "rootly_alert_urgency" "low" {
-  name = "Low"
-}
-
-resource "rootly_team" "sre" {
-  name     = "SREs On-Call"
-  user_ids = [data.rootly_user.john.id, data.rootly_user.jane.id]
-}
-
 resource "rootly_schedule" "primary" {
   name              = "Primary On-Call Schedule"
   owner_user_id     = data.rootly_user.john.id
@@ -35,9 +26,10 @@ resource "rootly_schedule_rotation" "weekdays" {
   active_time_type = "custom"
   position         = 1
   schedule_rotationable_attributes = {
+    handoff_time = "T",
     handoff_time = "10:00"
   }
-  schedule_rotationable_type = "ScheduleDailyRotation"
+  schedule_rotationable_type = "ScheduleWeeklyRotation"
   time_zone                  = "America/Toronto"
 }
 
@@ -98,56 +90,4 @@ resource "rootly_schedule_rotation_user" "jane" {
   schedule_rotation_id = rootly_schedule_rotation.weekdays.id
   position             = 2
   user_id              = data.rootly_user.jane.id
-}
-
-resource "rootly_escalation_policy" "primary" {
-  name      = "Primary"
-  group_ids = [rootly_team.sre.id]
-}
-
-resource "rootly_escalation_path" "default" {
-  name                 = "Default"
-  default              = true
-  escalation_policy_id = rootly_escalation_policy.primary.id
-}
-
-resource "rootly_escalation_path" "ignore" {
-  name                 = "Ignore"
-  default              = false
-  escalation_policy_id = rootly_escalation_policy.primary.id
-  rules {
-    rule_type   = "alert_urgency"
-    urgency_ids = [data.rootly_alert_urgency.low.id]
-  }
-}
-
-resource "rootly_escalation_level" "first" {
-  escalation_policy_path_id = rootly_escalation_path.default.id
-  escalation_policy_id      = rootly_escalation_policy.primary.id
-  position                  = 1
-  notification_target_params {
-    team_members = "all"
-    type         = "slack_channel"
-    id           = "C06D4QHLAUE"
-  }
-  notification_target_params {
-    type         = "schedule"
-    id           = rootly_schedule.primary.id
-    team_members = "all"
-  }
-}
-
-# cycle-based round-robin everyone on the schedule
-resource "rootly_escalation_level" "second" {
-  escalation_policy_path_id                       = rootly_escalation_path.default.id
-  escalation_policy_id                            = rootly_escalation_policy.primary.id
-  position                                        = 2
-  delay                                           = 5
-  paging_strategy_configuration_strategy          = "cycle"
-  paging_strategy_configuration_schedule_strategy = "everyone"
-  notification_target_params {
-    type         = "schedule"
-    id           = rootly_schedule.primary.id
-    team_members = "all"
-  }
 }

@@ -12,7 +12,7 @@ text = text.replace(
 // Replace import block
 text = text.replace(
   /import \{\s*\n\s*to ([^\n]+)\.primary\n\s*id = "[^"]+"\s*\n\}/,
-    'import {\n  to $1.my-resource\n  id = "00000000-0000-0000-0000-000000000000"\n}'
+    'import {\n  to $1.primary\n  id = "a816421c-6ceb-481a-87c4-585e47451f24"\n}'
 );
 // Replace terraform import command
 text = text.replace(
