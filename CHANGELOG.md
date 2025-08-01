@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.5.2] -- 2025-08-01
+
+### Fixed
+
+- Removing `rootly_schedule.slack_user_group` from Terraform configuration should remove in Rootly
+
+### Changed
+
+- Default `rootly_schedule.slack_user_group` to empty map.
+
 ## [3.5.1] -- 2025-07-23
 
 ### Fixed
