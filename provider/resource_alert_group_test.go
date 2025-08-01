@@ -48,10 +48,6 @@ resource "rootly_alert_group" "tf1" {
 resource "rootly_alert_group" "tf2" {
 	name = "tf-test2"
 	description = "tf"
-	targets {
-		target_type = "Group"
-		target_id = rootly_team.tf.id
-	}
 	conditions {
 		property_field_type = "attribute"
 		property_field_name = "alert_urgency"

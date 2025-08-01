@@ -1,5 +1,9 @@
 const inflect = require("./inflect");
 
+function forceMapFor(name) {
+  return name.match(/_(params|attributes)$/) && !["resolution_rule_attributes", "alert_template_attributes", "sourceable_attributes"].includes(name)
+}
+
 function includeStructure(resourceSchema) {
   return (
     resourceSchema.properties && resourceSchema.properties.accepts_unordered
@@ -185,7 +189,7 @@ function setResourceFields(name, resourceSchema) {
               d.Set("${field}", nil)
           }
         `;
-      } else if (schema.type == "object" && schema.properties && !name.match(/_(params|attributes)$/)) {
+      } else if (schema.type == "object" && schema.properties && !forceMapFor(name)) {
         return `singleton_list_${field} := make([]interface{}, 1, 1)
           processed_item_${field} := map[string]interface{}{
             ${Object.keys(schema.properties).map((key) => `"${key}": item.${inflect.camelize(field)}["${key}"]`).join(",\n")},
@@ -210,7 +214,7 @@ function createResourceFields(name, resourceSchema) {
           schema.type
         )}))
 			}`;
-      } else if (schema.type == "object" && schema.properties && !name.match(/_(params|attributes)$/)) {
+      } else if (schema.type == "object" && schema.properties && !forceMapFor(name)) {
         return `  if value, ok := d.GetOkExists("${field}"); ok {
 				if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
           if mapValue, ok := valueList[0].(map[string]interface{}); ok {
@@ -238,7 +242,7 @@ function updateResourceFields(name, resourceSchema) {
           schema.type
         )}))
 			}`;
-      } else if (schema.type == "object" && schema.properties && !name.match(/_(params|attributes)$/)) {
+      } else if (schema.type == "object" && schema.properties && !forceMapFor(name)) {
         return `  if d.HasChange("${field}") {
       		tps := d.Get("${field}").([]interface{})
       		for _, tpsi := range tps {
@@ -351,7 +355,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
   let defaultValue;
   if (schema.default) {
     defaultValue = `Default: "${schema.default}"`;
-  } else if (schema.enum && schema.enum.length > 0 && !schema.anyOfChild) {
+  } else if (schema.enum && schema.enum.length > 0 && !schema.anyOfChild && name !== "status") {
     defaultValue = `Default: "${schema.enum[0]}"`;
   } else if (schema.tf_computed === false) {
     defaultValue = `Default: nil,\n				Computed: false`
@@ -516,7 +520,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
       }
     case "object":
     default:
-      if (schema.properties && !name.match(/_(params|attributes)$/)) {
+      if (schema.properties && !forceMapFor(name)) {
         return `
    			"${name}": &schema.Schema {
 	 				Type: schema.TypeList,
