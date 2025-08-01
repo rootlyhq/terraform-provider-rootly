@@ -35,13 +35,13 @@ func New(version string) func() *schema.Provider {
 		p := &schema.Provider{
 			Schema: map[string]*schema.Schema {
 				"api_host": {
-					Description: "The Rootly API host. Defaults to https://api.rootly.com. Can also be sourced from the ROOTLY_API_URL environment variable.",
+					Description: "The Rootly API host. Defaults to https://api.rootly.com. Can also be sourced from the \`ROOTLY_API_URL\` environment variable.",
 					Type:        schema.TypeString,
 					Optional:    true,
 					DefaultFunc: schema.EnvDefaultFunc("ROOTLY_API_URL", "https://api.rootly.com"),
 				},
 				"api_token": {
-					Description: "The Rootly API Token. Generate it from your account at https://rootly.com/account. It must be provided but can also be sourced from the ROOTLY_API_TOKEN environment variable.",
+					Description: "The Rootly API Token. Generate it from your account at https://rootly.com/account. It must be provided but can also be sourced from the \`ROOTLY_API_TOKEN\` environment variable.",
 					Type:        schema.TypeString,
 					Optional:    true,
 					Sensitive:   true,

@@ -168,30 +168,30 @@ function setResourceFields(name, resourceSchema) {
       if (schema.type == "array" && schema.items && schema.items.type == "object" && schema.items.properties) {
         return `
           if item.${inflect.camelize(field)} != nil {
-              processedItems := make([]map[string]interface{}, 0)
+              processed_items_${field} := make([]map[string]interface{}, 0)
 
               for _, c := range item.${inflect.camelize(field)} {
                   if rawItem, ok := c.(map[string]interface{}); ok {
                       // Create a new map with only the fields defined in the schema
-                      processedItem := map[string]interface{}{
+                      processed_item_${field} := map[string]interface{}{
                           ${Object.keys(schema.items.properties).map((key) => `"${key}": rawItem["${key}"]`).join(",\n")},
                       }
-                      processedItems = append(processedItems, processedItem)
+                      processed_items_${field} = append(processed_items_${field}, processed_item_${field})
                   }
               }
 
-              d.Set("${field}", processedItems)
+              d.Set("${field}", processed_items_${field})
           } else {
               d.Set("${field}", nil)
           }
         `;
       } else if (schema.type == "object" && schema.properties && !name.match(/_(params|attributes)$/)) {
-        return `singleton_list := make([]interface{}, 1, 1)
-          processedItem := map[string]interface{}{
+        return `singleton_list_${field} := make([]interface{}, 1, 1)
+          processed_item_${field} := map[string]interface{}{
             ${Object.keys(schema.properties).map((key) => `"${key}": item.${inflect.camelize(field)}["${key}"]`).join(",\n")},
           }
-          singleton_list[0] = processedItem
-          d.Set("${field}", singleton_list)
+          singleton_list_${field}[0] = processed_item_${field}
+          d.Set("${field}", singleton_list_${field})
         `;
       }
       return `d.Set("${field}", item.${inflect.camelize(field)})`;
