@@ -17,12 +17,15 @@ func TestAccResourceSchedule(t *testing.T) {
 				Config: testAccResourceScheduleCreated,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_schedule.tf", "name", "test-initial"),
+					resource.TestCheckResourceAttr("rootly_schedule.tf", "slack_user_group.id", "123XYZ"),
+					resource.TestCheckResourceAttr("rootly_schedule.tf", "slack_user_group.name", "test"),
 					resource.TestCheckResourceAttr("rootly_schedule_rotation.tf", "name", "test-initial"),
 				),
 			},
 			{
 				Config: testAccResourceScheduleUpdated,
 				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckNoResourceAttr("rootly_schedule.tf", "slack_user_group.id"),
 					resource.TestCheckResourceAttr("rootly_schedule.tf", "name", "test-updated"),
 					resource.TestCheckResourceAttr("rootly_schedule_rotation.tf", "name", "test-updated"),
 				),
@@ -34,6 +37,10 @@ func TestAccResourceSchedule(t *testing.T) {
 const testAccResourceScheduleCreated = `
 resource "rootly_schedule" "tf" {
 	name = "test-initial"
+	slack_user_group = {
+		id = "123XYZ"
+		name = "test"
+	}
 }
 resource "rootly_schedule_rotation" "tf" {
 	schedule_id     = rootly_schedule.tf.id

@@ -82,8 +82,7 @@ func resourceSchedule() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Computed:    true,
-				Required:    false,
+				Default:  map[string]interface{}{},
 				Optional:    true,
 				Description: "Map must contain two fields, `id` and `name`. Synced slack group of the schedule",
 			},
@@ -129,7 +128,14 @@ func resourceScheduleCreate(ctx context.Context, d *schema.ResourceData, meta in
 		s.AllTimeCoverage = tools.Bool(value.(bool))
 	}
 	if value, ok := d.GetOkExists("slack_user_group"); ok {
-		s.SlackUserGroup = value.(map[string]interface{})
+		slackUserGroup := value.(map[string]interface{})
+		if len(slackUserGroup) == 0 {
+			s.SlackUserGroup = map[string]interface{}{}
+		} else {
+			s.SlackUserGroup = slackUserGroup
+		}
+	} else {
+		s.SlackUserGroup = map[string]interface{}{}
 	}
 	if value, ok := d.GetOkExists("owner_group_ids"); ok {
 		s.OwnerGroupIds = value.([]interface{})
@@ -192,7 +198,16 @@ func resourceScheduleUpdate(ctx context.Context, d *schema.ResourceData, meta in
 		s.AllTimeCoverage = tools.Bool(d.Get("all_time_coverage").(bool))
 	}
 	if d.HasChange("slack_user_group") {
-		s.SlackUserGroup = d.Get("slack_user_group").(map[string]interface{})
+		if value := d.Get("slack_user_group"); value != nil {
+			slackUserGroup := value.(map[string]interface{})
+			if len(slackUserGroup) == 0 {
+				s.SlackUserGroup = map[string]interface{}{}
+			} else {
+				s.SlackUserGroup = slackUserGroup
+			}
+		} else {
+			s.SlackUserGroup = map[string]interface{}{}
+		}
 	}
 	if d.HasChange("owner_group_ids") {
 		s.OwnerGroupIds = d.Get("owner_group_ids").([]interface{})
