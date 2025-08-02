@@ -3,19 +3,19 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type Cause struct {
-	ID string `jsonapi:"primary,causes"`
-	Name string `jsonapi:"attr,name,omitempty"`
-  Slug string `jsonapi:"attr,slug,omitempty"`
-  Description string `jsonapi:"attr,description,omitempty"`
-  Position int `jsonapi:"attr,position,omitempty"`
+	ID          string `jsonapi:"primary,causes"`
+	Name        string `jsonapi:"attr,name,omitempty"`
+	Slug        string `jsonapi:"attr,slug,omitempty"`
+	Description string `jsonapi:"attr,description,omitempty"`
+	Position    int    `jsonapi:"attr,position,omitempty"`
 }
 
 func (c *Client) ListCauses(params *rootlygo.ListCausesParams) ([]interface{}, error) {

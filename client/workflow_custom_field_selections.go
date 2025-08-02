@@ -3,20 +3,20 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type WorkflowCustomFieldSelection struct {
-	ID string `jsonapi:"primary,workflow_custom_field_selections"`
-	WorkflowId string `jsonapi:"attr,workflow_id,omitempty"`
-  CustomFieldId int `jsonapi:"attr,custom_field_id,omitempty"`
-  IncidentCondition string `jsonapi:"attr,incident_condition,omitempty"`
-  Values []interface{} `jsonapi:"attr,values,omitempty"`
-  SelectedOptionIds []interface{} `jsonapi:"attr,selected_option_ids,omitempty"`
+	ID                string        `jsonapi:"primary,workflow_custom_field_selections"`
+	WorkflowId        string        `jsonapi:"attr,workflow_id,omitempty"`
+	CustomFieldId     int           `jsonapi:"attr,custom_field_id,omitempty"`
+	IncidentCondition string        `jsonapi:"attr,incident_condition,omitempty"`
+	Values            []interface{} `jsonapi:"attr,values,omitempty"`
+	SelectedOptionIds []interface{} `jsonapi:"attr,selected_option_ids,omitempty"`
 }
 
 func (c *Client) ListWorkflowCustomFieldSelections(id string, params *rootlygo.ListWorkflowCustomFieldSelectionsParams) ([]interface{}, error) {

@@ -665,9 +665,14 @@ func resourceAlertsSourceUpdate(ctx context.Context, d *schema.ResourceData, met
 	if d.HasChange("alert_urgency_id") {
 		s.AlertUrgencyId = d.Get("alert_urgency_id").(string)
 	}
-	if d.HasChange("owner_group_ids") {
-		s.OwnerGroupIds = d.Get("owner_group_ids").([]interface{})
+
+	s.OwnerGroupIds = []interface{}{}
+	if value, ok := d.GetOk("owner_group_ids"); value != nil && ok {
+		if d.HasChange("owner_group_ids") {
+			s.OwnerGroupIds = value.([]interface{})
+		}
 	}
+
 	if d.HasChange("alert_template_attributes") {
 		tps := d.Get("alert_template_attributes").([]interface{})
 		for _, tpsi := range tps {
@@ -675,9 +680,13 @@ func resourceAlertsSourceUpdate(ctx context.Context, d *schema.ResourceData, met
 		}
 	}
 
-	if d.HasChange("alert_source_urgency_rules_attributes") {
-		s.AlertSourceUrgencyRulesAttributes = d.Get("alert_source_urgency_rules_attributes").([]interface{})
+	s.AlertSourceUrgencyRulesAttributes = []interface{}{}
+	if value, ok := d.GetOk("alert_source_urgency_rules_attributes"); value != nil && ok {
+		if d.HasChange("alert_source_urgency_rules_attributes") {
+			s.AlertSourceUrgencyRulesAttributes = value.([]interface{})
+		}
 	}
+
 	if d.HasChange("sourceable_attributes") {
 		tps := d.Get("sourceable_attributes").([]interface{})
 		for _, tpsi := range tps {
@@ -692,9 +701,13 @@ func resourceAlertsSourceUpdate(ctx context.Context, d *schema.ResourceData, met
 		}
 	}
 
-	if d.HasChange("alert_source_fields_attributes") {
-		s.AlertSourceFieldsAttributes = d.Get("alert_source_fields_attributes").([]interface{})
+	s.AlertSourceFieldsAttributes = []interface{}{}
+	if value, ok := d.GetOk("alert_source_fields_attributes"); value != nil && ok {
+		if d.HasChange("alert_source_fields_attributes") {
+			s.AlertSourceFieldsAttributes = value.([]interface{})
+		}
 	}
+
 	if d.HasChange("status") {
 		s.Status = d.Get("status").(string)
 	}

@@ -3,27 +3,27 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type EscalationPath struct {
-	ID string `jsonapi:"primary,escalation_paths"`
-	Name string `jsonapi:"attr,name,omitempty"`
-  Default *bool `jsonapi:"attr,default,omitempty"`
-  NotificationType string `jsonapi:"attr,notification_type,omitempty"`
-  EscalationPolicyId string `jsonapi:"attr,escalation_policy_id,omitempty"`
-  MatchMode string `jsonapi:"attr,match_mode,omitempty"`
-  Position int `jsonapi:"attr,position,omitempty"`
-  Repeat *bool `jsonapi:"attr,repeat,omitempty"`
-  RepeatCount int `jsonapi:"attr,repeat_count,omitempty"`
-  InitialDelay int `jsonapi:"attr,initial_delay,omitempty"`
-  Rules []interface{} `jsonapi:"attr,rules,omitempty"`
-  TimeRestrictionTimeZone string `jsonapi:"attr,time_restriction_time_zone,omitempty"`
-  TimeRestrictions []interface{} `jsonapi:"attr,time_restrictions,omitempty"`
+	ID                      string        `jsonapi:"primary,escalation_paths"`
+	Name                    string        `jsonapi:"attr,name,omitempty"`
+	Default                 *bool         `jsonapi:"attr,default,omitempty"`
+	NotificationType        string        `jsonapi:"attr,notification_type,omitempty"`
+	EscalationPolicyId      string        `jsonapi:"attr,escalation_policy_id,omitempty"`
+	MatchMode               string        `jsonapi:"attr,match_mode,omitempty"`
+	Position                int           `jsonapi:"attr,position,omitempty"`
+	Repeat                  *bool         `jsonapi:"attr,repeat,omitempty"`
+	RepeatCount             int           `jsonapi:"attr,repeat_count,omitempty"`
+	InitialDelay            int           `jsonapi:"attr,initial_delay,omitempty"`
+	Rules                   []interface{} `jsonapi:"attr,rules,omitempty"`
+	TimeRestrictionTimeZone string        `jsonapi:"attr,time_restriction_time_zone,omitempty"`
+	TimeRestrictions        []interface{} `jsonapi:"attr,time_restrictions,omitempty"`
 }
 
 func (c *Client) ListEscalationPaths(id string, params *rootlygo.ListEscalationPathsParams) ([]interface{}, error) {

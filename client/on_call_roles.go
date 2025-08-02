@@ -3,35 +3,35 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type OnCallRole struct {
-	ID string `jsonapi:"primary,on_call_roles"`
-	Name string `jsonapi:"attr,name,omitempty"`
-  Slug string `jsonapi:"attr,slug,omitempty"`
-  SystemRole string `jsonapi:"attr,system_role,omitempty"`
-  AlertSourcesPermissions []interface{} `jsonapi:"attr,alert_sources_permissions,omitempty"`
-  AlertUrgencyPermissions []interface{} `jsonapi:"attr,alert_urgency_permissions,omitempty"`
-  AlertsPermissions []interface{} `jsonapi:"attr,alerts_permissions,omitempty"`
-  ApiKeysPermissions []interface{} `jsonapi:"attr,api_keys_permissions,omitempty"`
-  AuditsPermissions []interface{} `jsonapi:"attr,audits_permissions,omitempty"`
-  ContactsPermissions []interface{} `jsonapi:"attr,contacts_permissions,omitempty"`
-  EscalationPoliciesPermissions []interface{} `jsonapi:"attr,escalation_policies_permissions,omitempty"`
-  GroupsPermissions []interface{} `jsonapi:"attr,groups_permissions,omitempty"`
-  HeartbeatsPermissions []interface{} `jsonapi:"attr,heartbeats_permissions,omitempty"`
-  IntegrationsPermissions []interface{} `jsonapi:"attr,integrations_permissions,omitempty"`
-  InvitationsPermissions []interface{} `jsonapi:"attr,invitations_permissions,omitempty"`
-  LiveCallRoutingPermissions []interface{} `jsonapi:"attr,live_call_routing_permissions,omitempty"`
-  ScheduleOverridePermissions []interface{} `jsonapi:"attr,schedule_override_permissions,omitempty"`
-  SchedulesPermissions []interface{} `jsonapi:"attr,schedules_permissions,omitempty"`
-  ServicesPermissions []interface{} `jsonapi:"attr,services_permissions,omitempty"`
-  WebhooksPermissions []interface{} `jsonapi:"attr,webhooks_permissions,omitempty"`
-  WorkflowsPermissions []interface{} `jsonapi:"attr,workflows_permissions,omitempty"`
+	ID                            string        `jsonapi:"primary,on_call_roles"`
+	Name                          string        `jsonapi:"attr,name,omitempty"`
+	Slug                          string        `jsonapi:"attr,slug,omitempty"`
+	SystemRole                    string        `jsonapi:"attr,system_role,omitempty"`
+	AlertSourcesPermissions       []interface{} `jsonapi:"attr,alert_sources_permissions,omitempty"`
+	AlertUrgencyPermissions       []interface{} `jsonapi:"attr,alert_urgency_permissions,omitempty"`
+	AlertsPermissions             []interface{} `jsonapi:"attr,alerts_permissions,omitempty"`
+	ApiKeysPermissions            []interface{} `jsonapi:"attr,api_keys_permissions,omitempty"`
+	AuditsPermissions             []interface{} `jsonapi:"attr,audits_permissions,omitempty"`
+	ContactsPermissions           []interface{} `jsonapi:"attr,contacts_permissions,omitempty"`
+	EscalationPoliciesPermissions []interface{} `jsonapi:"attr,escalation_policies_permissions,omitempty"`
+	GroupsPermissions             []interface{} `jsonapi:"attr,groups_permissions,omitempty"`
+	HeartbeatsPermissions         []interface{} `jsonapi:"attr,heartbeats_permissions,omitempty"`
+	IntegrationsPermissions       []interface{} `jsonapi:"attr,integrations_permissions,omitempty"`
+	InvitationsPermissions        []interface{} `jsonapi:"attr,invitations_permissions,omitempty"`
+	LiveCallRoutingPermissions    []interface{} `jsonapi:"attr,live_call_routing_permissions,omitempty"`
+	ScheduleOverridePermissions   []interface{} `jsonapi:"attr,schedule_override_permissions,omitempty"`
+	SchedulesPermissions          []interface{} `jsonapi:"attr,schedules_permissions,omitempty"`
+	ServicesPermissions           []interface{} `jsonapi:"attr,services_permissions,omitempty"`
+	WebhooksPermissions           []interface{} `jsonapi:"attr,webhooks_permissions,omitempty"`
+	WorkflowsPermissions          []interface{} `jsonapi:"attr,workflows_permissions,omitempty"`
 }
 
 func (c *Client) ListOnCallRoles(params *rootlygo.ListOnCallRolesParams) ([]interface{}, error) {

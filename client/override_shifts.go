@@ -3,22 +3,22 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type OverrideShift struct {
-	ID string `jsonapi:"primary,override_shifts"`
-	ScheduleId string `jsonapi:"attr,schedule_id,omitempty"`
-  RotationId string `jsonapi:"attr,rotation_id,omitempty"`
-  StartsAt string `jsonapi:"attr,starts_at,omitempty"`
-  EndsAt string `jsonapi:"attr,ends_at,omitempty"`
-  IsOverride *bool `jsonapi:"attr,is_override,omitempty"`
-  ShiftOverride map[string]interface{} `jsonapi:"attr,shift_override,omitempty"`
-  User map[string]interface{} `jsonapi:"attr,user,omitempty"`
+	ID            string                 `jsonapi:"primary,override_shifts"`
+	ScheduleId    string                 `jsonapi:"attr,schedule_id,omitempty"`
+	RotationId    string                 `jsonapi:"attr,rotation_id,omitempty"`
+	StartsAt      string                 `jsonapi:"attr,starts_at,omitempty"`
+	EndsAt        string                 `jsonapi:"attr,ends_at,omitempty"`
+	IsOverride    *bool                  `jsonapi:"attr,is_override,omitempty"`
+	ShiftOverride map[string]interface{} `jsonapi:"attr,shift_override,omitempty"`
+	User          map[string]interface{} `jsonapi:"attr,user,omitempty"`
 }
 
 func (c *Client) ListOverrideShifts(id string, params *rootlygo.ListOverrideShiftsParams) ([]interface{}, error) {

@@ -416,15 +416,28 @@ func resourceAlertGroupUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	if d.HasChange("group_by_alert_urgency") {
 		s.GroupByAlertUrgency = tools.Bool(d.Get("group_by_alert_urgency").(bool))
 	}
-	if d.HasChange("targets") {
-		s.Targets = d.Get("targets").([]interface{})
+
+	s.Targets = []interface{}{}
+	if value, ok := d.GetOk("targets"); value != nil && ok {
+		if d.HasChange("targets") {
+			s.Targets = value.([]interface{})
+		}
 	}
-	if d.HasChange("attributes") {
-		s.Attributes = d.Get("attributes").([]interface{})
+
+	s.Attributes = []interface{}{}
+	if value, ok := d.GetOk("attributes"); value != nil && ok {
+		if d.HasChange("attributes") {
+			s.Attributes = value.([]interface{})
+		}
 	}
-	if d.HasChange("conditions") {
-		s.Conditions = d.Get("conditions").([]interface{})
+
+	s.Conditions = []interface{}{}
+	if value, ok := d.GetOk("conditions"); value != nil && ok {
+		if d.HasChange("conditions") {
+			s.Conditions = value.([]interface{})
+		}
 	}
+
 	if d.HasChange("deleted_at") {
 		s.DeletedAt = d.Get("deleted_at").(string)
 	}

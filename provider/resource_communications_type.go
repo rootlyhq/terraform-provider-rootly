@@ -8,78 +8,67 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-	
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	
+
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
-	
 )
 
 func resourceCommunicationsType() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceCommunicationsTypeCreate,
-		ReadContext: resourceCommunicationsTypeRead,
+		ReadContext:   resourceCommunicationsTypeRead,
 		UpdateContext: resourceCommunicationsTypeUpdate,
 		DeleteContext: resourceCommunicationsTypeDelete,
-		Importer: &schema.ResourceImporter {
+		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema {
-			
-			"name": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+		Schema: map[string]*schema.Schema{
+
+			"name": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The name of the communications type",
-				
 			},
-			
 
-			"slug": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"slug": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The slug of the communications type",
-				
 			},
-			
 
-			"description": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"description": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The description of the communications type",
-				
 			},
-			
 
-			"color": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+			"color": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The color of the communications type",
-				
 			},
-			
 
-		"position": &schema.Schema {
-			Type: schema.TypeInt,
-			Computed: true,
-			Required: false,
-			Optional: true,
-			ForceNew: false,
-			Description: "Position of the communications type",
-			
-		},
-		
+			"position": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Position of the communications type",
+			},
 		},
 	}
 }
@@ -91,21 +80,21 @@ func resourceCommunicationsTypeCreate(ctx context.Context, d *schema.ResourceDat
 
 	s := &client.CommunicationsType{}
 
-	  if value, ok := d.GetOkExists("name"); ok {
-				s.Name = value.(string)
-			}
-    if value, ok := d.GetOkExists("slug"); ok {
-				s.Slug = value.(string)
-			}
-    if value, ok := d.GetOkExists("description"); ok {
-				s.Description = value.(string)
-			}
-    if value, ok := d.GetOkExists("color"); ok {
-				s.Color = value.(string)
-			}
-    if value, ok := d.GetOkExists("position"); ok {
-				s.Position = value.(int)
-			}
+	if value, ok := d.GetOkExists("name"); ok {
+		s.Name = value.(string)
+	}
+	if value, ok := d.GetOkExists("slug"); ok {
+		s.Slug = value.(string)
+	}
+	if value, ok := d.GetOkExists("description"); ok {
+		s.Description = value.(string)
+	}
+	if value, ok := d.GetOkExists("color"); ok {
+		s.Color = value.(string)
+	}
+	if value, ok := d.GetOkExists("position"); ok {
+		s.Position = value.(int)
+	}
 
 	res, err := c.CreateCommunicationsType(s)
 	if err != nil {
@@ -136,10 +125,10 @@ func resourceCommunicationsTypeRead(ctx context.Context, d *schema.ResourceData,
 	}
 
 	d.Set("name", item.Name)
-  d.Set("slug", item.Slug)
-  d.Set("description", item.Description)
-  d.Set("color", item.Color)
-  d.Set("position", item.Position)
+	d.Set("slug", item.Slug)
+	d.Set("description", item.Description)
+	d.Set("color", item.Color)
+	d.Set("position", item.Position)
 
 	return nil
 }
@@ -150,21 +139,21 @@ func resourceCommunicationsTypeUpdate(ctx context.Context, d *schema.ResourceDat
 
 	s := &client.CommunicationsType{}
 
-	  if d.HasChange("name") {
-				s.Name = d.Get("name").(string)
-			}
-    if d.HasChange("slug") {
-				s.Slug = d.Get("slug").(string)
-			}
-    if d.HasChange("description") {
-				s.Description = d.Get("description").(string)
-			}
-    if d.HasChange("color") {
-				s.Color = d.Get("color").(string)
-			}
-    if d.HasChange("position") {
-				s.Position = d.Get("position").(int)
-			}
+	if d.HasChange("name") {
+		s.Name = d.Get("name").(string)
+	}
+	if d.HasChange("slug") {
+		s.Slug = d.Get("slug").(string)
+	}
+	if d.HasChange("description") {
+		s.Description = d.Get("description").(string)
+	}
+	if d.HasChange("color") {
+		s.Color = d.Get("color").(string)
+	}
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
+	}
 
 	_, err := c.UpdateCommunicationsType(d.Id(), s)
 	if err != nil {

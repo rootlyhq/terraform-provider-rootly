@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-	
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
@@ -18,90 +18,76 @@ import (
 func resourceWorkflowGroup() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceWorkflowGroupCreate,
-		ReadContext: resourceWorkflowGroupRead,
+		ReadContext:   resourceWorkflowGroupRead,
 		UpdateContext: resourceWorkflowGroupUpdate,
 		DeleteContext: resourceWorkflowGroupDelete,
-		Importer: &schema.ResourceImporter {
+		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema {
-			
-			"kind": &schema.Schema {
-				Type: schema.TypeString,
-				Default: "simple",
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "The kind of the workflow group. Value must be one of `simple`, `incident`, `post_mortem`, `action_item`, `pulse`, `alert`.",
-		ValidateFunc: validation.StringInSlice([]string{"simple", "incident", "post_mortem", "action_item", "pulse", "alert"}, false),
-				
-			},
-			
+		Schema: map[string]*schema.Schema{
 
-			"name": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+			"kind": &schema.Schema{
+				Type:         schema.TypeString,
+				Default:      "simple",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "The kind of the workflow group. Value must be one of `simple`, `incident`, `post_mortem`, `action_item`, `pulse`, `alert`.",
+				ValidateFunc: validation.StringInSlice([]string{"simple", "incident", "post_mortem", "action_item", "pulse", "alert"}, false),
+			},
+
+			"name": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The name of the workflow group.",
-				
 			},
-			
 
-			"slug": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"slug": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The slug of the workflow group.",
-				
 			},
-			
 
-			"description": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"description": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "A description of the workflow group.",
-				
 			},
-			
 
-			"icon": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"icon": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "An emoji icon displayed next to the workflow group.",
-				
 			},
-			
 
-			"expanded": &schema.Schema {
-				Type: schema.TypeBool,
-				Computed: true,
-				Required: false,
-				Optional: true,
+			"expanded": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
 				Description: "Whether the group is expanded or collapsed.. Value must be one of true or false",
-				
 			},
-			
 
-		"position": &schema.Schema {
-			Type: schema.TypeInt,
-			Computed: true,
-			Required: false,
-			Optional: true,
-			ForceNew: false,
-			Description: "The position of the workflow group",
-			
-		},
-		
+			"position": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The position of the workflow group",
+			},
 		},
 	}
 }
@@ -113,27 +99,27 @@ func resourceWorkflowGroupCreate(ctx context.Context, d *schema.ResourceData, me
 
 	s := &client.WorkflowGroup{}
 
-	  if value, ok := d.GetOkExists("kind"); ok {
-				s.Kind = value.(string)
-			}
-    if value, ok := d.GetOkExists("name"); ok {
-				s.Name = value.(string)
-			}
-    if value, ok := d.GetOkExists("slug"); ok {
-				s.Slug = value.(string)
-			}
-    if value, ok := d.GetOkExists("description"); ok {
-				s.Description = value.(string)
-			}
-    if value, ok := d.GetOkExists("icon"); ok {
-				s.Icon = value.(string)
-			}
-    if value, ok := d.GetOkExists("expanded"); ok {
-				s.Expanded = tools.Bool(value.(bool))
-			}
-    if value, ok := d.GetOkExists("position"); ok {
-				s.Position = value.(int)
-			}
+	if value, ok := d.GetOkExists("kind"); ok {
+		s.Kind = value.(string)
+	}
+	if value, ok := d.GetOkExists("name"); ok {
+		s.Name = value.(string)
+	}
+	if value, ok := d.GetOkExists("slug"); ok {
+		s.Slug = value.(string)
+	}
+	if value, ok := d.GetOkExists("description"); ok {
+		s.Description = value.(string)
+	}
+	if value, ok := d.GetOkExists("icon"); ok {
+		s.Icon = value.(string)
+	}
+	if value, ok := d.GetOkExists("expanded"); ok {
+		s.Expanded = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("position"); ok {
+		s.Position = value.(int)
+	}
 
 	res, err := c.CreateWorkflowGroup(s)
 	if err != nil {
@@ -164,12 +150,12 @@ func resourceWorkflowGroupRead(ctx context.Context, d *schema.ResourceData, meta
 	}
 
 	d.Set("kind", item.Kind)
-  d.Set("name", item.Name)
-  d.Set("slug", item.Slug)
-  d.Set("description", item.Description)
-  d.Set("icon", item.Icon)
-  d.Set("expanded", item.Expanded)
-  d.Set("position", item.Position)
+	d.Set("name", item.Name)
+	d.Set("slug", item.Slug)
+	d.Set("description", item.Description)
+	d.Set("icon", item.Icon)
+	d.Set("expanded", item.Expanded)
+	d.Set("position", item.Position)
 
 	return nil
 }
@@ -180,27 +166,27 @@ func resourceWorkflowGroupUpdate(ctx context.Context, d *schema.ResourceData, me
 
 	s := &client.WorkflowGroup{}
 
-	  if d.HasChange("kind") {
-				s.Kind = d.Get("kind").(string)
-			}
-    if d.HasChange("name") {
-				s.Name = d.Get("name").(string)
-			}
-    if d.HasChange("slug") {
-				s.Slug = d.Get("slug").(string)
-			}
-    if d.HasChange("description") {
-				s.Description = d.Get("description").(string)
-			}
-    if d.HasChange("icon") {
-				s.Icon = d.Get("icon").(string)
-			}
-    if d.HasChange("expanded") {
-				s.Expanded = tools.Bool(d.Get("expanded").(bool))
-			}
-    if d.HasChange("position") {
-				s.Position = d.Get("position").(int)
-			}
+	if d.HasChange("kind") {
+		s.Kind = d.Get("kind").(string)
+	}
+	if d.HasChange("name") {
+		s.Name = d.Get("name").(string)
+	}
+	if d.HasChange("slug") {
+		s.Slug = d.Get("slug").(string)
+	}
+	if d.HasChange("description") {
+		s.Description = d.Get("description").(string)
+	}
+	if d.HasChange("icon") {
+		s.Icon = d.Get("icon").(string)
+	}
+	if d.HasChange("expanded") {
+		s.Expanded = tools.Bool(d.Get("expanded").(bool))
+	}
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
+	}
 
 	_, err := c.UpdateWorkflowGroup(d.Id(), s)
 	if err != nil {

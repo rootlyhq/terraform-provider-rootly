@@ -82,7 +82,7 @@ func resourceSchedule() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Default:  map[string]interface{}{},
+				Default:     map[string]interface{}{},
 				Optional:    true,
 				Description: "Map must contain two fields, `id` and `name`. Synced slack group of the schedule",
 			},

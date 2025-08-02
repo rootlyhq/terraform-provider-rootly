@@ -36,6 +36,8 @@ resource "rootly_team" "sre" {
 ### Optional
 
 - `admin_ids` (List of Number) The user ids of the admins of this team. These users must also be present in user_ids attribute.
+- `alert_broadcast_channel` (Block List, Max: 1) Map must contain two fields, `id` and `name`. Slack channel to broadcast alerts to (see [below for nested schema](#nestedblock--alert_broadcast_channel))
+- `alert_broadcast_enabled` (Boolean) Enable alerts to be broadcasted to a specific channel. Value must be one of true or false
 - `alert_urgency_id` (String) The alert urgency id of the team
 - `alerts_email_address` (String) Email generated to send alerts to
 - `alerts_email_enabled` (Boolean) Enable alerts through email. Value must be one of true or false
@@ -44,6 +46,8 @@ resource "rootly_team" "sre" {
 - `cortex_id` (String) The Cortex group id associated to this team
 - `description` (String) The description of the team
 - `external_id` (String) The external id associated to this team
+- `incident_broadcast_channel` (Block List, Max: 1) Map must contain two fields, `id` and `name`. Slack channel to broadcast incidents to (see [below for nested schema](#nestedblock--incident_broadcast_channel))
+- `incident_broadcast_enabled` (Boolean) Enable incidents to be broadcasted to a specific channel. Value must be one of true or false
 - `notify_emails` (List of String) Emails to attach to the team
 - `opsgenie_id` (String) The Opsgenie group id associated to this team
 - `pagerduty_id` (String) The PagerDuty group id associated to this team
@@ -60,6 +64,24 @@ resource "rootly_team" "sre" {
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--alert_broadcast_channel"></a>
+### Nested Schema for `alert_broadcast_channel`
+
+Optional:
+
+- `id` (String) Slack channel ID
+- `name` (String) Slack channel name
+
+
+<a id="nestedblock--incident_broadcast_channel"></a>
+### Nested Schema for `incident_broadcast_channel`
+
+Optional:
+
+- `id` (String) Slack channel ID
+- `name` (String) Slack channel name
+
 
 <a id="nestedblock--slack_aliases"></a>
 ### Nested Schema for `slack_aliases`

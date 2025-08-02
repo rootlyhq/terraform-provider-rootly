@@ -3,20 +3,20 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type IncidentPermissionSetResource struct {
-	ID string `jsonapi:"primary,incident_permission_set_resources"`
+	ID                      string `jsonapi:"primary,incident_permission_set_resources"`
 	IncidentPermissionSetId string `jsonapi:"attr,incident_permission_set_id,omitempty"`
-  Kind string `jsonapi:"attr,kind,omitempty"`
-  Private *bool `jsonapi:"attr,private,omitempty"`
-  ResourceId string `jsonapi:"attr,resource_id,omitempty"`
-  ResourceType string `jsonapi:"attr,resource_type,omitempty"`
+	Kind                    string `jsonapi:"attr,kind,omitempty"`
+	Private                 *bool  `jsonapi:"attr,private,omitempty"`
+	ResourceId              string `jsonapi:"attr,resource_id,omitempty"`
+	ResourceType            string `jsonapi:"attr,resource_type,omitempty"`
 }
 
 func (c *Client) ListIncidentPermissionSetResources(id string, params *rootlygo.ListIncidentPermissionSetResourcesParams) ([]interface{}, error) {

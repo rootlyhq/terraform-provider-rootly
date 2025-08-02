@@ -3,18 +3,18 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type AlertUrgency struct {
-	ID string `jsonapi:"primary,alert_urgencies"`
-	Name string `jsonapi:"attr,name,omitempty"`
-  Description string `jsonapi:"attr,description,omitempty"`
-  Position int `jsonapi:"attr,position,omitempty"`
+	ID          string `jsonapi:"primary,alert_urgencies"`
+	Name        string `jsonapi:"attr,name,omitempty"`
+	Description string `jsonapi:"attr,description,omitempty"`
+	Position    int    `jsonapi:"attr,position,omitempty"`
 }
 
 func (c *Client) ListAlertUrgencies(params *rootlygo.ListAlertUrgenciesParams) ([]interface{}, error) {

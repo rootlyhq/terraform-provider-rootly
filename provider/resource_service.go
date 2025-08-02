@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-	
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	
+
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -18,371 +18,391 @@ import (
 func resourceService() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceServiceCreate,
-		ReadContext: resourceServiceRead,
+		ReadContext:   resourceServiceRead,
 		UpdateContext: resourceServiceUpdate,
 		DeleteContext: resourceServiceDelete,
-		Importer: &schema.ResourceImporter {
+		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema {
-			
-			"name": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+		Schema: map[string]*schema.Schema{
+
+			"name": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The name of the service",
-				
 			},
-			
 
-			"slug": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"slug": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The slug of the service",
-				
 			},
-			
 
-			"description": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"description": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The description of the service",
-				
 			},
-			
 
-			"public_description": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"public_description": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The public description of the service",
-				
 			},
-			
 
-				"notify_emails": &schema.Schema {
-					Type: schema.TypeList,
-					Elem: &schema.Schema {
-						Type: schema.TypeString,
-					},
-					DiffSuppressFunc: tools.EqualIgnoringOrder,
-					Computed: true,
-					Required: false,
-					Optional: true,
-					Description: "Emails attached to the service",
-					
+			"notify_emails": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
 				},
-				
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Emails attached to the service",
+			},
 
-			"color": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"color": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The hex color of the service",
-				
 			},
-			
 
-		"position": &schema.Schema {
-			Type: schema.TypeInt,
-			Computed: true,
-			Required: false,
-			Optional: true,
-			ForceNew: false,
-			Description: "Position of the service",
-			
-		},
-		
+			"position": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Position of the service",
+			},
 
-			"backstage_id": &schema.Schema {
-				Type: schema.TypeString,
-				Default: nil,
-				Computed: false,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"backstage_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Default:     nil,
+				Computed:    false,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name",
-				
 			},
-			
 
-			"external_id": &schema.Schema {
-				Type: schema.TypeString,
-				Default: nil,
-				Computed: false,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"external_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Default:     nil,
+				Computed:    false,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The external id associated to this service",
-				
 			},
-			
 
-			"pagerduty_id": &schema.Schema {
-				Type: schema.TypeString,
-				Default: nil,
-				Computed: false,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"pagerduty_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Default:     nil,
+				Computed:    false,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The PagerDuty service id associated to this service",
-				
 			},
-			
 
-			"opsgenie_id": &schema.Schema {
-				Type: schema.TypeString,
-				Default: nil,
-				Computed: false,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"opsgenie_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Default:     nil,
+				Computed:    false,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The Opsgenie service id associated to this service",
-				
 			},
-			
 
-			"cortex_id": &schema.Schema {
-				Type: schema.TypeString,
-				Default: nil,
-				Computed: false,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"cortex_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Default:     nil,
+				Computed:    false,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The Cortex group id associated to this service",
-				
 			},
-			
 
-			"service_now_ci_sys_id": &schema.Schema {
-				Type: schema.TypeString,
-				Default: nil,
-				Computed: false,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"service_now_ci_sys_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Default:     nil,
+				Computed:    false,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The Service Now CI sys id associated to this service",
-				
 			},
-			
 
-			"github_repository_name": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"github_repository_name": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The GitHub repository name associated to this service. eg: rootlyhq/my-service",
-				
 			},
-			
 
-			"github_repository_branch": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"github_repository_branch": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The GitHub repository branch associated to this service. eg: main",
-				
 			},
-			
 
-			"gitlab_repository_name": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"gitlab_repository_name": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The GitLab repository name associated to this service. eg: rootlyhq/my-service",
-				
 			},
-			
 
-			"gitlab_repository_branch": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"gitlab_repository_branch": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The GitLab repository branch associated to this service. eg: main",
-				
 			},
-			
 
-				"environment_ids": &schema.Schema {
-					Type: schema.TypeList,
-					Elem: &schema.Schema {
-						Type: schema.TypeString,
-					},
-					DiffSuppressFunc: tools.EqualIgnoringOrder,
-					Computed: true,
-					Required: false,
-					Optional: true,
-					Description: "Environments associated with this service",
-					
+			"environment_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
 				},
-				
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Environments associated with this service",
+			},
 
-				"service_ids": &schema.Schema {
-					Type: schema.TypeList,
-					Elem: &schema.Schema {
-						Type: schema.TypeString,
-					},
-					DiffSuppressFunc: tools.EqualIgnoringOrder,
-					Computed: true,
-					Required: false,
-					Optional: true,
-					Description: "Services dependent on this service",
-					
+			"service_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
 				},
-				
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Services dependent on this service",
+			},
 
-				"owner_group_ids": &schema.Schema {
-					Type: schema.TypeList,
-					Elem: &schema.Schema {
-						Type: schema.TypeString,
-					},
-					DiffSuppressFunc: tools.EqualIgnoringOrder,
-					Computed: true,
-					Required: false,
-					Optional: true,
-					Description: "Owner Teams associated with this service",
-					
+			"owner_group_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
 				},
-				
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Owner Teams associated with this service",
+			},
 
-				"owner_user_ids": &schema.Schema {
-					Type: schema.TypeList,
-					Elem: &schema.Schema {
-						Type: schema.TypeInt,
-					},
-					DiffSuppressFunc: tools.EqualIgnoringOrder,
-					Computed: true,
-					Required: false,
-					Optional: true,
-					Description: "Owner Users associated with this service",
-					
+			"owner_user_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeInt,
 				},
-				
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Owner Users associated with this service",
+			},
 
-			"alert_urgency_id": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"alert_urgency_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The alert urgency id of the service",
-				
 			},
-			
 
-			"alerts_email_enabled": &schema.Schema {
-				Type: schema.TypeBool,
-				Computed: true,
-				Required: false,
-				Optional: true,
+			"alerts_email_enabled": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
 				Description: "Enable alerts through email. Value must be one of true or false",
-				
 			},
-			
 
-			"alerts_email_address": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"alerts_email_address": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "Email generated to send alerts to",
-				
 			},
-			
 
-				"slack_channels": &schema.Schema {
-					Type: schema.TypeList,
-					Computed: true,
-					Required: false,
-					Optional: true,
-					Description: "Slack Channels associated with this service",
-					DiffSuppressFunc: tools.EqualIgnoringOrder,
-					Elem: &schema.Resource {
-						Schema: map[string]*schema.Schema {
-              
-			"id": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Slack channel ID",
-				
-			},
-			
+			"slack_channels": &schema.Schema{
+				Type:             schema.TypeList,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Slack Channels associated with this service",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
 
-			"name": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Slack channel name",
-				
-			},
-			
+						"id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Slack channel ID",
+						},
+
+						"name": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Slack channel name",
 						},
 					},
-					
 				},
-				
-
-				"slack_aliases": &schema.Schema {
-					Type: schema.TypeList,
-					Computed: true,
-					Required: false,
-					Optional: true,
-					Description: "Slack Aliases associated with this service",
-					DiffSuppressFunc: tools.EqualIgnoringOrder,
-					Elem: &schema.Resource {
-						Schema: map[string]*schema.Schema {
-              
-			"id": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Slack alias ID",
-				
 			},
-			
 
-			"name": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Slack alias name",
-				
-			},
-			
+			"slack_aliases": &schema.Schema{
+				Type:             schema.TypeList,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Slack Aliases associated with this service",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+
+						"id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Slack alias ID",
+						},
+
+						"name": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Slack alias name",
 						},
 					},
-					
 				},
-				
+			},
+
+			"alert_broadcast_enabled": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Enable alerts to be broadcasted to a specific channel. Value must be one of true or false",
+			},
+
+			"alert_broadcast_channel": &schema.Schema{
+				Type:        schema.TypeList,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Map must contain two fields, `id` and `name`. Slack channel to broadcast alerts to",
+				MinItems:    0,
+				MaxItems:    1,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+
+						"id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Slack channel ID",
+						},
+
+						"name": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Slack channel name",
+						},
+					},
+				},
+			},
+
+			"incident_broadcast_enabled": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Enable incidents to be broadcasted to a specific channel. Value must be one of true or false",
+			},
+
+			"incident_broadcast_channel": &schema.Schema{
+				Type:        schema.TypeList,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Map must contain two fields, `id` and `name`. Slack channel to broadcast incidents to",
+				MinItems:    0,
+				MaxItems:    1,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+
+						"id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Slack channel ID",
+						},
+
+						"name": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Slack channel name",
+						},
+					},
+				},
+			},
 		},
 	}
 }
@@ -394,84 +414,104 @@ func resourceServiceCreate(ctx context.Context, d *schema.ResourceData, meta int
 
 	s := &client.Service{}
 
-	  if value, ok := d.GetOkExists("name"); ok {
-				s.Name = value.(string)
+	if value, ok := d.GetOkExists("name"); ok {
+		s.Name = value.(string)
+	}
+	if value, ok := d.GetOkExists("slug"); ok {
+		s.Slug = value.(string)
+	}
+	if value, ok := d.GetOkExists("description"); ok {
+		s.Description = value.(string)
+	}
+	if value, ok := d.GetOkExists("public_description"); ok {
+		s.PublicDescription = value.(string)
+	}
+	if value, ok := d.GetOkExists("notify_emails"); ok {
+		s.NotifyEmails = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("color"); ok {
+		s.Color = value.(string)
+	}
+	if value, ok := d.GetOkExists("position"); ok {
+		s.Position = value.(int)
+	}
+	if value, ok := d.GetOkExists("backstage_id"); ok {
+		s.BackstageId = value.(string)
+	}
+	if value, ok := d.GetOkExists("external_id"); ok {
+		s.ExternalId = value.(string)
+	}
+	if value, ok := d.GetOkExists("pagerduty_id"); ok {
+		s.PagerdutyId = value.(string)
+	}
+	if value, ok := d.GetOkExists("opsgenie_id"); ok {
+		s.OpsgenieId = value.(string)
+	}
+	if value, ok := d.GetOkExists("cortex_id"); ok {
+		s.CortexId = value.(string)
+	}
+	if value, ok := d.GetOkExists("service_now_ci_sys_id"); ok {
+		s.ServiceNowCiSysId = value.(string)
+	}
+	if value, ok := d.GetOkExists("github_repository_name"); ok {
+		s.GithubRepositoryName = value.(string)
+	}
+	if value, ok := d.GetOkExists("github_repository_branch"); ok {
+		s.GithubRepositoryBranch = value.(string)
+	}
+	if value, ok := d.GetOkExists("gitlab_repository_name"); ok {
+		s.GitlabRepositoryName = value.(string)
+	}
+	if value, ok := d.GetOkExists("gitlab_repository_branch"); ok {
+		s.GitlabRepositoryBranch = value.(string)
+	}
+	if value, ok := d.GetOkExists("environment_ids"); ok {
+		s.EnvironmentIds = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("service_ids"); ok {
+		s.ServiceIds = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("owner_group_ids"); ok {
+		s.OwnerGroupIds = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("owner_user_ids"); ok {
+		s.OwnerUserIds = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("alert_urgency_id"); ok {
+		s.AlertUrgencyId = value.(string)
+	}
+	if value, ok := d.GetOkExists("alerts_email_enabled"); ok {
+		s.AlertsEmailEnabled = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("alerts_email_address"); ok {
+		s.AlertsEmailAddress = value.(string)
+	}
+	if value, ok := d.GetOkExists("slack_channels"); ok {
+		s.SlackChannels = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("slack_aliases"); ok {
+		s.SlackAliases = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("alert_broadcast_enabled"); ok {
+		s.AlertBroadcastEnabled = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("alert_broadcast_channel"); ok {
+		if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
+			if mapValue, ok := valueList[0].(map[string]interface{}); ok {
+				s.AlertBroadcastChannel = mapValue
 			}
-    if value, ok := d.GetOkExists("slug"); ok {
-				s.Slug = value.(string)
+		}
+	}
+	if value, ok := d.GetOkExists("incident_broadcast_enabled"); ok {
+		s.IncidentBroadcastEnabled = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("incident_broadcast_channel"); ok {
+		if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
+			if mapValue, ok := valueList[0].(map[string]interface{}); ok {
+				s.IncidentBroadcastChannel = mapValue
 			}
-    if value, ok := d.GetOkExists("description"); ok {
-				s.Description = value.(string)
-			}
-    if value, ok := d.GetOkExists("public_description"); ok {
-				s.PublicDescription = value.(string)
-			}
-    if value, ok := d.GetOkExists("notify_emails"); ok {
-				s.NotifyEmails = value.([]interface{})
-			}
-    if value, ok := d.GetOkExists("color"); ok {
-				s.Color = value.(string)
-			}
-    if value, ok := d.GetOkExists("position"); ok {
-				s.Position = value.(int)
-			}
-    if value, ok := d.GetOkExists("backstage_id"); ok {
-				s.BackstageId = value.(string)
-			}
-    if value, ok := d.GetOkExists("external_id"); ok {
-				s.ExternalId = value.(string)
-			}
-    if value, ok := d.GetOkExists("pagerduty_id"); ok {
-				s.PagerdutyId = value.(string)
-			}
-    if value, ok := d.GetOkExists("opsgenie_id"); ok {
-				s.OpsgenieId = value.(string)
-			}
-    if value, ok := d.GetOkExists("cortex_id"); ok {
-				s.CortexId = value.(string)
-			}
-    if value, ok := d.GetOkExists("service_now_ci_sys_id"); ok {
-				s.ServiceNowCiSysId = value.(string)
-			}
-    if value, ok := d.GetOkExists("github_repository_name"); ok {
-				s.GithubRepositoryName = value.(string)
-			}
-    if value, ok := d.GetOkExists("github_repository_branch"); ok {
-				s.GithubRepositoryBranch = value.(string)
-			}
-    if value, ok := d.GetOkExists("gitlab_repository_name"); ok {
-				s.GitlabRepositoryName = value.(string)
-			}
-    if value, ok := d.GetOkExists("gitlab_repository_branch"); ok {
-				s.GitlabRepositoryBranch = value.(string)
-			}
-    if value, ok := d.GetOkExists("environment_ids"); ok {
-				s.EnvironmentIds = value.([]interface{})
-			}
-    if value, ok := d.GetOkExists("service_ids"); ok {
-				s.ServiceIds = value.([]interface{})
-			}
-    if value, ok := d.GetOkExists("owner_group_ids"); ok {
-				s.OwnerGroupIds = value.([]interface{})
-			}
-    if value, ok := d.GetOkExists("owner_user_ids"); ok {
-				s.OwnerUserIds = value.([]interface{})
-			}
-    if value, ok := d.GetOkExists("alert_urgency_id"); ok {
-				s.AlertUrgencyId = value.(string)
-			}
-    if value, ok := d.GetOkExists("alerts_email_enabled"); ok {
-				s.AlertsEmailEnabled = tools.Bool(value.(bool))
-			}
-    if value, ok := d.GetOkExists("alerts_email_address"); ok {
-				s.AlertsEmailAddress = value.(string)
-			}
-    if value, ok := d.GetOkExists("slack_channels"); ok {
-				s.SlackChannels = value.([]interface{})
-			}
-    if value, ok := d.GetOkExists("slack_aliases"); ok {
-				s.SlackAliases = value.([]interface{})
-			}
+		}
+	}
 
 	res, err := c.CreateService(s)
 	if err != nil {
@@ -502,69 +542,85 @@ func resourceServiceRead(ctx context.Context, d *schema.ResourceData, meta inter
 	}
 
 	d.Set("name", item.Name)
-  d.Set("slug", item.Slug)
-  d.Set("description", item.Description)
-  d.Set("public_description", item.PublicDescription)
-  d.Set("notify_emails", item.NotifyEmails)
-  d.Set("color", item.Color)
-  d.Set("position", item.Position)
-  d.Set("backstage_id", item.BackstageId)
-  d.Set("external_id", item.ExternalId)
-  d.Set("pagerduty_id", item.PagerdutyId)
-  d.Set("opsgenie_id", item.OpsgenieId)
-  d.Set("cortex_id", item.CortexId)
-  d.Set("service_now_ci_sys_id", item.ServiceNowCiSysId)
-  d.Set("github_repository_name", item.GithubRepositoryName)
-  d.Set("github_repository_branch", item.GithubRepositoryBranch)
-  d.Set("gitlab_repository_name", item.GitlabRepositoryName)
-  d.Set("gitlab_repository_branch", item.GitlabRepositoryBranch)
-  d.Set("environment_ids", item.EnvironmentIds)
-  d.Set("service_ids", item.ServiceIds)
-  d.Set("owner_group_ids", item.OwnerGroupIds)
-  d.Set("owner_user_ids", item.OwnerUserIds)
-  d.Set("alert_urgency_id", item.AlertUrgencyId)
-  d.Set("alerts_email_enabled", item.AlertsEmailEnabled)
-  d.Set("alerts_email_address", item.AlertsEmailAddress)
-  
-          if item.SlackChannels != nil {
-              processedItems := make([]map[string]interface{}, 0)
+	d.Set("slug", item.Slug)
+	d.Set("description", item.Description)
+	d.Set("public_description", item.PublicDescription)
+	d.Set("notify_emails", item.NotifyEmails)
+	d.Set("color", item.Color)
+	d.Set("position", item.Position)
+	d.Set("backstage_id", item.BackstageId)
+	d.Set("external_id", item.ExternalId)
+	d.Set("pagerduty_id", item.PagerdutyId)
+	d.Set("opsgenie_id", item.OpsgenieId)
+	d.Set("cortex_id", item.CortexId)
+	d.Set("service_now_ci_sys_id", item.ServiceNowCiSysId)
+	d.Set("github_repository_name", item.GithubRepositoryName)
+	d.Set("github_repository_branch", item.GithubRepositoryBranch)
+	d.Set("gitlab_repository_name", item.GitlabRepositoryName)
+	d.Set("gitlab_repository_branch", item.GitlabRepositoryBranch)
+	d.Set("environment_ids", item.EnvironmentIds)
+	d.Set("service_ids", item.ServiceIds)
+	d.Set("owner_group_ids", item.OwnerGroupIds)
+	d.Set("owner_user_ids", item.OwnerUserIds)
+	d.Set("alert_urgency_id", item.AlertUrgencyId)
+	d.Set("alerts_email_enabled", item.AlertsEmailEnabled)
+	d.Set("alerts_email_address", item.AlertsEmailAddress)
 
-              for _, c := range item.SlackChannels {
-                  if rawItem, ok := c.(map[string]interface{}); ok {
-                      // Create a new map with only the fields defined in the schema
-                      processedItem := map[string]interface{}{
-                          "id": rawItem["id"],
-"name": rawItem["name"],
-                      }
-                      processedItems = append(processedItems, processedItem)
-                  }
-              }
+	if item.SlackChannels != nil {
+		processed_items_slack_channels := make([]map[string]interface{}, 0)
 
-              d.Set("slack_channels", processedItems)
-          } else {
-              d.Set("slack_channels", nil)
-          }
-        
-  
-          if item.SlackAliases != nil {
-              processedItems := make([]map[string]interface{}, 0)
+		for _, c := range item.SlackChannels {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processed_item_slack_channels := map[string]interface{}{
+					"id":   rawItem["id"],
+					"name": rawItem["name"],
+				}
+				processed_items_slack_channels = append(processed_items_slack_channels, processed_item_slack_channels)
+			}
+		}
 
-              for _, c := range item.SlackAliases {
-                  if rawItem, ok := c.(map[string]interface{}); ok {
-                      // Create a new map with only the fields defined in the schema
-                      processedItem := map[string]interface{}{
-                          "id": rawItem["id"],
-"name": rawItem["name"],
-                      }
-                      processedItems = append(processedItems, processedItem)
-                  }
-              }
+		d.Set("slack_channels", processed_items_slack_channels)
+	} else {
+		d.Set("slack_channels", nil)
+	}
 
-              d.Set("slack_aliases", processedItems)
-          } else {
-              d.Set("slack_aliases", nil)
-          }
-        
+	if item.SlackAliases != nil {
+		processed_items_slack_aliases := make([]map[string]interface{}, 0)
+
+		for _, c := range item.SlackAliases {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processed_item_slack_aliases := map[string]interface{}{
+					"id":   rawItem["id"],
+					"name": rawItem["name"],
+				}
+				processed_items_slack_aliases = append(processed_items_slack_aliases, processed_item_slack_aliases)
+			}
+		}
+
+		d.Set("slack_aliases", processed_items_slack_aliases)
+	} else {
+		d.Set("slack_aliases", nil)
+	}
+
+	d.Set("alert_broadcast_enabled", item.AlertBroadcastEnabled)
+	singleton_list_alert_broadcast_channel := make([]interface{}, 1, 1)
+	processed_item_alert_broadcast_channel := map[string]interface{}{
+		"id":   item.AlertBroadcastChannel["id"],
+		"name": item.AlertBroadcastChannel["name"],
+	}
+	singleton_list_alert_broadcast_channel[0] = processed_item_alert_broadcast_channel
+	d.Set("alert_broadcast_channel", singleton_list_alert_broadcast_channel)
+
+	d.Set("incident_broadcast_enabled", item.IncidentBroadcastEnabled)
+	singleton_list_incident_broadcast_channel := make([]interface{}, 1, 1)
+	processed_item_incident_broadcast_channel := map[string]interface{}{
+		"id":   item.IncidentBroadcastChannel["id"],
+		"name": item.IncidentBroadcastChannel["name"],
+	}
+	singleton_list_incident_broadcast_channel[0] = processed_item_incident_broadcast_channel
+	d.Set("incident_broadcast_channel", singleton_list_incident_broadcast_channel)
 
 	return nil
 }
@@ -575,84 +631,134 @@ func resourceServiceUpdate(ctx context.Context, d *schema.ResourceData, meta int
 
 	s := &client.Service{}
 
-	  if d.HasChange("name") {
-				s.Name = d.Get("name").(string)
-			}
-    if d.HasChange("slug") {
-				s.Slug = d.Get("slug").(string)
-			}
-    if d.HasChange("description") {
-				s.Description = d.Get("description").(string)
-			}
-    if d.HasChange("public_description") {
-				s.PublicDescription = d.Get("public_description").(string)
-			}
-    if d.HasChange("notify_emails") {
-				s.NotifyEmails = d.Get("notify_emails").([]interface{})
-			}
-    if d.HasChange("color") {
-				s.Color = d.Get("color").(string)
-			}
-    if d.HasChange("position") {
-				s.Position = d.Get("position").(int)
-			}
-    if d.HasChange("backstage_id") {
-				s.BackstageId = d.Get("backstage_id").(string)
-			}
-    if d.HasChange("external_id") {
-				s.ExternalId = d.Get("external_id").(string)
-			}
-    if d.HasChange("pagerduty_id") {
-				s.PagerdutyId = d.Get("pagerduty_id").(string)
-			}
-    if d.HasChange("opsgenie_id") {
-				s.OpsgenieId = d.Get("opsgenie_id").(string)
-			}
-    if d.HasChange("cortex_id") {
-				s.CortexId = d.Get("cortex_id").(string)
-			}
-    if d.HasChange("service_now_ci_sys_id") {
-				s.ServiceNowCiSysId = d.Get("service_now_ci_sys_id").(string)
-			}
-    if d.HasChange("github_repository_name") {
-				s.GithubRepositoryName = d.Get("github_repository_name").(string)
-			}
-    if d.HasChange("github_repository_branch") {
-				s.GithubRepositoryBranch = d.Get("github_repository_branch").(string)
-			}
-    if d.HasChange("gitlab_repository_name") {
-				s.GitlabRepositoryName = d.Get("gitlab_repository_name").(string)
-			}
-    if d.HasChange("gitlab_repository_branch") {
-				s.GitlabRepositoryBranch = d.Get("gitlab_repository_branch").(string)
-			}
-    if d.HasChange("environment_ids") {
-				s.EnvironmentIds = d.Get("environment_ids").([]interface{})
-			}
-    if d.HasChange("service_ids") {
-				s.ServiceIds = d.Get("service_ids").([]interface{})
-			}
-    if d.HasChange("owner_group_ids") {
-				s.OwnerGroupIds = d.Get("owner_group_ids").([]interface{})
-			}
-    if d.HasChange("owner_user_ids") {
-				s.OwnerUserIds = d.Get("owner_user_ids").([]interface{})
-			}
-    if d.HasChange("alert_urgency_id") {
-				s.AlertUrgencyId = d.Get("alert_urgency_id").(string)
-			}
-    if d.HasChange("alerts_email_enabled") {
-				s.AlertsEmailEnabled = tools.Bool(d.Get("alerts_email_enabled").(bool))
-			}
-    if d.HasChange("alerts_email_address") {
-				s.AlertsEmailAddress = d.Get("alerts_email_address").(string)
-			}
-    if d.HasChange("slack_channels") {
-				s.SlackChannels = d.Get("slack_channels").([]interface{})
-			}
-    if d.HasChange("slack_aliases") {
-				s.SlackAliases = d.Get("slack_aliases").([]interface{})
-			}
+	if d.HasChange("name") {
+		s.Name = d.Get("name").(string)
+	}
+	if d.HasChange("slug") {
+		s.Slug = d.Get("slug").(string)
+	}
+	if d.HasChange("description") {
+		s.Description = d.Get("description").(string)
+	}
+	if d.HasChange("public_description") {
+		s.PublicDescription = d.Get("public_description").(string)
+	}
+
+	s.NotifyEmails = []interface{}{}
+	if value, ok := d.GetOk("notify_emails"); value != nil && ok {
+		if d.HasChange("notify_emails") {
+			s.NotifyEmails = value.([]interface{})
+		}
+	}
+
+	if d.HasChange("color") {
+		s.Color = d.Get("color").(string)
+	}
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
+	}
+	if d.HasChange("backstage_id") {
+		s.BackstageId = d.Get("backstage_id").(string)
+	}
+	if d.HasChange("external_id") {
+		s.ExternalId = d.Get("external_id").(string)
+	}
+	if d.HasChange("pagerduty_id") {
+		s.PagerdutyId = d.Get("pagerduty_id").(string)
+	}
+	if d.HasChange("opsgenie_id") {
+		s.OpsgenieId = d.Get("opsgenie_id").(string)
+	}
+	if d.HasChange("cortex_id") {
+		s.CortexId = d.Get("cortex_id").(string)
+	}
+	if d.HasChange("service_now_ci_sys_id") {
+		s.ServiceNowCiSysId = d.Get("service_now_ci_sys_id").(string)
+	}
+	if d.HasChange("github_repository_name") {
+		s.GithubRepositoryName = d.Get("github_repository_name").(string)
+	}
+	if d.HasChange("github_repository_branch") {
+		s.GithubRepositoryBranch = d.Get("github_repository_branch").(string)
+	}
+	if d.HasChange("gitlab_repository_name") {
+		s.GitlabRepositoryName = d.Get("gitlab_repository_name").(string)
+	}
+	if d.HasChange("gitlab_repository_branch") {
+		s.GitlabRepositoryBranch = d.Get("gitlab_repository_branch").(string)
+	}
+
+	s.EnvironmentIds = []interface{}{}
+	if value, ok := d.GetOk("environment_ids"); value != nil && ok {
+		if d.HasChange("environment_ids") {
+			s.EnvironmentIds = value.([]interface{})
+		}
+	}
+
+	s.ServiceIds = []interface{}{}
+	if value, ok := d.GetOk("service_ids"); value != nil && ok {
+		if d.HasChange("service_ids") {
+			s.ServiceIds = value.([]interface{})
+		}
+	}
+
+	s.OwnerGroupIds = []interface{}{}
+	if value, ok := d.GetOk("owner_group_ids"); value != nil && ok {
+		if d.HasChange("owner_group_ids") {
+			s.OwnerGroupIds = value.([]interface{})
+		}
+	}
+
+	s.OwnerUserIds = []interface{}{}
+	if value, ok := d.GetOk("owner_user_ids"); value != nil && ok {
+		if d.HasChange("owner_user_ids") {
+			s.OwnerUserIds = value.([]interface{})
+		}
+	}
+
+	if d.HasChange("alert_urgency_id") {
+		s.AlertUrgencyId = d.Get("alert_urgency_id").(string)
+	}
+	if d.HasChange("alerts_email_enabled") {
+		s.AlertsEmailEnabled = tools.Bool(d.Get("alerts_email_enabled").(bool))
+	}
+	if d.HasChange("alerts_email_address") {
+		s.AlertsEmailAddress = d.Get("alerts_email_address").(string)
+	}
+
+	s.SlackChannels = []interface{}{}
+	if value, ok := d.GetOk("slack_channels"); value != nil && ok {
+		if d.HasChange("slack_channels") {
+			s.SlackChannels = value.([]interface{})
+		}
+	}
+
+	s.SlackAliases = []interface{}{}
+	if value, ok := d.GetOk("slack_aliases"); value != nil && ok {
+		if d.HasChange("slack_aliases") {
+			s.SlackAliases = value.([]interface{})
+		}
+	}
+
+	if d.HasChange("alert_broadcast_enabled") {
+		s.AlertBroadcastEnabled = tools.Bool(d.Get("alert_broadcast_enabled").(bool))
+	}
+	if d.HasChange("alert_broadcast_channel") {
+		tps := d.Get("alert_broadcast_channel").([]interface{})
+		for _, tpsi := range tps {
+			s.AlertBroadcastChannel = tpsi.(map[string]interface{})
+		}
+	}
+
+	if d.HasChange("incident_broadcast_enabled") {
+		s.IncidentBroadcastEnabled = tools.Bool(d.Get("incident_broadcast_enabled").(bool))
+	}
+	if d.HasChange("incident_broadcast_channel") {
+		tps := d.Get("incident_broadcast_channel").([]interface{})
+		for _, tpsi := range tps {
+			s.IncidentBroadcastChannel = tpsi.(map[string]interface{})
+		}
+	}
 
 	_, err := c.UpdateService(d.Id(), s)
 	if err != nil {

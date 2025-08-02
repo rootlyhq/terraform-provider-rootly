@@ -3,22 +3,22 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type FormFieldPlacement struct {
-	ID string `jsonapi:"primary,form_field_placements"`
-	FormFieldId string `jsonapi:"attr,form_field_id,omitempty"`
-  FormSetId string `jsonapi:"attr,form_set_id,omitempty"`
-  Form string `jsonapi:"attr,form,omitempty"`
-  Position int `jsonapi:"attr,position,omitempty"`
-  Required *bool `jsonapi:"attr,required,omitempty"`
-  RequiredOperator string `jsonapi:"attr,required_operator,omitempty"`
-  PlacementOperator string `jsonapi:"attr,placement_operator,omitempty"`
+	ID                string `jsonapi:"primary,form_field_placements"`
+	FormFieldId       string `jsonapi:"attr,form_field_id,omitempty"`
+	FormSetId         string `jsonapi:"attr,form_set_id,omitempty"`
+	Form              string `jsonapi:"attr,form,omitempty"`
+	Position          int    `jsonapi:"attr,position,omitempty"`
+	Required          *bool  `jsonapi:"attr,required,omitempty"`
+	RequiredOperator  string `jsonapi:"attr,required_operator,omitempty"`
+	PlacementOperator string `jsonapi:"attr,placement_operator,omitempty"`
 }
 
 func (c *Client) ListFormFieldPlacements(id string, params *rootlygo.ListFormFieldPlacementsParams) ([]interface{}, error) {

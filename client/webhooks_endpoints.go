@@ -3,21 +3,21 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type WebhooksEndpoint struct {
-	ID string `jsonapi:"primary,webhooks_endpoints"`
-	Name string `jsonapi:"attr,name,omitempty"`
-  Slug string `jsonapi:"attr,slug,omitempty"`
-  Url string `jsonapi:"attr,url,omitempty"`
-  EventTypes []interface{} `jsonapi:"attr,event_types,omitempty"`
-  Secret string `jsonapi:"attr,secret,omitempty"`
-  Enabled *bool `jsonapi:"attr,enabled,omitempty"`
+	ID         string        `jsonapi:"primary,webhooks_endpoints"`
+	Name       string        `jsonapi:"attr,name,omitempty"`
+	Slug       string        `jsonapi:"attr,slug,omitempty"`
+	Url        string        `jsonapi:"attr,url,omitempty"`
+	EventTypes []interface{} `jsonapi:"attr,event_types,omitempty"`
+	Secret     string        `jsonapi:"attr,secret,omitempty"`
+	Enabled    *bool         `jsonapi:"attr,enabled,omitempty"`
 }
 
 func (c *Client) ListWebhooksEndpoints(params *rootlygo.ListWebhooksEndpointsParams) ([]interface{}, error) {

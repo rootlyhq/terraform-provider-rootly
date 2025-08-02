@@ -3,22 +3,22 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type WorkflowGroup struct {
-	ID string `jsonapi:"primary,workflow_groups"`
-	Kind string `jsonapi:"attr,kind,omitempty"`
-  Name string `jsonapi:"attr,name,omitempty"`
-  Slug string `jsonapi:"attr,slug,omitempty"`
-  Description string `jsonapi:"attr,description,omitempty"`
-  Icon string `jsonapi:"attr,icon,omitempty"`
-  Expanded *bool `jsonapi:"attr,expanded,omitempty"`
-  Position int `jsonapi:"attr,position,omitempty"`
+	ID          string `jsonapi:"primary,workflow_groups"`
+	Kind        string `jsonapi:"attr,kind,omitempty"`
+	Name        string `jsonapi:"attr,name,omitempty"`
+	Slug        string `jsonapi:"attr,slug,omitempty"`
+	Description string `jsonapi:"attr,description,omitempty"`
+	Icon        string `jsonapi:"attr,icon,omitempty"`
+	Expanded    *bool  `jsonapi:"attr,expanded,omitempty"`
+	Position    int    `jsonapi:"attr,position,omitempty"`
 }
 
 func (c *Client) ListWorkflowGroups(params *rootlygo.ListWorkflowGroupsParams) ([]interface{}, error) {

@@ -3,19 +3,19 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type FormSet struct {
-	ID string `jsonapi:"primary,form_sets"`
-	Name string `jsonapi:"attr,name,omitempty"`
-  Slug string `jsonapi:"attr,slug,omitempty"`
-  IsDefault *bool `jsonapi:"attr,is_default,omitempty"`
-  Forms []interface{} `jsonapi:"attr,forms,omitempty"`
+	ID        string        `jsonapi:"primary,form_sets"`
+	Name      string        `jsonapi:"attr,name,omitempty"`
+	Slug      string        `jsonapi:"attr,slug,omitempty"`
+	IsDefault *bool         `jsonapi:"attr,is_default,omitempty"`
+	Forms     []interface{} `jsonapi:"attr,forms,omitempty"`
 }
 
 func (c *Client) ListFormSets(params *rootlygo.ListFormSetsParams) ([]interface{}, error) {

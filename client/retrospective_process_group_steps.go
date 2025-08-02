@@ -3,18 +3,18 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type RetrospectiveProcessGroupStep struct {
-	ID string `jsonapi:"primary,retrospective_process_group_steps"`
+	ID                          string `jsonapi:"primary,retrospective_process_group_steps"`
 	RetrospectiveProcessGroupId string `jsonapi:"attr,retrospective_process_group_id,omitempty"`
-  RetrospectiveStepId string `jsonapi:"attr,retrospective_step_id,omitempty"`
-  Position int `jsonapi:"attr,position,omitempty"`
+	RetrospectiveStepId         string `jsonapi:"attr,retrospective_step_id,omitempty"`
+	Position                    int    `jsonapi:"attr,position,omitempty"`
 }
 
 func (c *Client) ListRetrospectiveProcessGroupSteps(id string, params *rootlygo.ListRetrospectiveProcessGroupStepsParams) ([]interface{}, error) {

@@ -3,40 +3,40 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type Workflow struct {
-	ID string `jsonapi:"primary,workflows"`
-	Name string `jsonapi:"attr,name,omitempty"`
-  Slug string `jsonapi:"attr,slug,omitempty"`
-  Description string `jsonapi:"attr,description,omitempty"`
-  Command string `jsonapi:"attr,command,omitempty"`
-  CommandFeedbackEnabled *bool `jsonapi:"attr,command_feedback_enabled,omitempty"`
-  Wait string `jsonapi:"attr,wait,omitempty"`
-  RepeatEveryDuration string `jsonapi:"attr,repeat_every_duration,omitempty"`
-  RepeatConditionDurationSinceFirstRun string `jsonapi:"attr,repeat_condition_duration_since_first_run,omitempty"`
-  RepeatConditionNumberOfRepeats int `jsonapi:"attr,repeat_condition_number_of_repeats,omitempty"`
-  ContinuouslyRepeat *bool `jsonapi:"attr,continuously_repeat,omitempty"`
-  RepeatOn []interface{} `jsonapi:"attr,repeat_on,omitempty"`
-  Enabled *bool `jsonapi:"attr,enabled,omitempty"`
-  Locked *bool `jsonapi:"attr,locked,omitempty"`
-  Position int `jsonapi:"attr,position,omitempty"`
-  WorkflowGroupId string `jsonapi:"attr,workflow_group_id,omitempty"`
-  TriggerParams map[string]interface{} `jsonapi:"attr,trigger_params,omitempty"`
-  EnvironmentIds []interface{} `jsonapi:"attr,environment_ids,omitempty"`
-  SeverityIds []interface{} `jsonapi:"attr,severity_ids,omitempty"`
-  IncidentTypeIds []interface{} `jsonapi:"attr,incident_type_ids,omitempty"`
-  IncidentRoleIds []interface{} `jsonapi:"attr,incident_role_ids,omitempty"`
-  ServiceIds []interface{} `jsonapi:"attr,service_ids,omitempty"`
-  FunctionalityIds []interface{} `jsonapi:"attr,functionality_ids,omitempty"`
-  GroupIds []interface{} `jsonapi:"attr,group_ids,omitempty"`
-  CauseIds []interface{} `jsonapi:"attr,cause_ids,omitempty"`
-  SubStatusIds []interface{} `jsonapi:"attr,sub_status_ids,omitempty"`
+	ID                                   string                 `jsonapi:"primary,workflows"`
+	Name                                 string                 `jsonapi:"attr,name,omitempty"`
+	Slug                                 string                 `jsonapi:"attr,slug,omitempty"`
+	Description                          string                 `jsonapi:"attr,description,omitempty"`
+	Command                              string                 `jsonapi:"attr,command,omitempty"`
+	CommandFeedbackEnabled               *bool                  `jsonapi:"attr,command_feedback_enabled,omitempty"`
+	Wait                                 string                 `jsonapi:"attr,wait,omitempty"`
+	RepeatEveryDuration                  string                 `jsonapi:"attr,repeat_every_duration,omitempty"`
+	RepeatConditionDurationSinceFirstRun string                 `jsonapi:"attr,repeat_condition_duration_since_first_run,omitempty"`
+	RepeatConditionNumberOfRepeats       int                    `jsonapi:"attr,repeat_condition_number_of_repeats,omitempty"`
+	ContinuouslyRepeat                   *bool                  `jsonapi:"attr,continuously_repeat,omitempty"`
+	RepeatOn                             []interface{}          `jsonapi:"attr,repeat_on,omitempty"`
+	Enabled                              *bool                  `jsonapi:"attr,enabled,omitempty"`
+	Locked                               *bool                  `jsonapi:"attr,locked,omitempty"`
+	Position                             int                    `jsonapi:"attr,position,omitempty"`
+	WorkflowGroupId                      string                 `jsonapi:"attr,workflow_group_id,omitempty"`
+	TriggerParams                        map[string]interface{} `jsonapi:"attr,trigger_params,omitempty"`
+	EnvironmentIds                       []interface{}          `jsonapi:"attr,environment_ids,omitempty"`
+	SeverityIds                          []interface{}          `jsonapi:"attr,severity_ids,omitempty"`
+	IncidentTypeIds                      []interface{}          `jsonapi:"attr,incident_type_ids,omitempty"`
+	IncidentRoleIds                      []interface{}          `jsonapi:"attr,incident_role_ids,omitempty"`
+	ServiceIds                           []interface{}          `jsonapi:"attr,service_ids,omitempty"`
+	FunctionalityIds                     []interface{}          `jsonapi:"attr,functionality_ids,omitempty"`
+	GroupIds                             []interface{}          `jsonapi:"attr,group_ids,omitempty"`
+	CauseIds                             []interface{}          `jsonapi:"attr,cause_ids,omitempty"`
+	SubStatusIds                         []interface{}          `jsonapi:"attr,sub_status_ids,omitempty"`
 }
 
 func (c *Client) ListWorkflows(params *rootlygo.ListWorkflowsParams) ([]interface{}, error) {

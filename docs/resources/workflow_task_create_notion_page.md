@@ -40,6 +40,7 @@ Required:
 
 Optional:
 
+- `content` (String) Custom page content with liquid templating support. When provided, only this content will be rendered (no default sections)
 - `mark_post_mortem_as_published` (Boolean) Value must be one of true or false
 - `post_mortem_template_id` (String) Retrospective template to use when creating page task, if desired
 - `show_action_items_as_table` (Boolean) Value must be one of true or false

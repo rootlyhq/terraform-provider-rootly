@@ -3,37 +3,41 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type Team struct {
-	ID string `jsonapi:"primary,groups"`
-	Name string `jsonapi:"attr,name,omitempty"`
-  Slug string `jsonapi:"attr,slug,omitempty"`
-  Description string `jsonapi:"attr,description,omitempty"`
-  NotifyEmails []interface{} `jsonapi:"attr,notify_emails,omitempty"`
-  Color string `jsonapi:"attr,color,omitempty"`
-  Position int `jsonapi:"attr,position,omitempty"`
-  BackstageId string `jsonapi:"attr,backstage_id,omitempty"`
-  ExternalId string `jsonapi:"attr,external_id,omitempty"`
-  PagerdutyId string `jsonapi:"attr,pagerduty_id,omitempty"`
-  PagerdutyServiceId string `jsonapi:"attr,pagerduty_service_id,omitempty"`
-  OpsgenieId string `jsonapi:"attr,opsgenie_id,omitempty"`
-  VictorOpsId string `jsonapi:"attr,victor_ops_id,omitempty"`
-  PagertreeId string `jsonapi:"attr,pagertree_id,omitempty"`
-  CortexId string `jsonapi:"attr,cortex_id,omitempty"`
-  ServiceNowCiSysId string `jsonapi:"attr,service_now_ci_sys_id,omitempty"`
-  UserIds []interface{} `jsonapi:"attr,user_ids,omitempty"`
-  AdminIds []interface{} `jsonapi:"attr,admin_ids,omitempty"`
-  AlertsEmailEnabled *bool `jsonapi:"attr,alerts_email_enabled,omitempty"`
-  AlertsEmailAddress string `jsonapi:"attr,alerts_email_address,omitempty"`
-  AlertUrgencyId string `jsonapi:"attr,alert_urgency_id,omitempty"`
-  SlackChannels []interface{} `jsonapi:"attr,slack_channels,omitempty"`
-  SlackAliases []interface{} `jsonapi:"attr,slack_aliases,omitempty"`
+	ID                       string                 `jsonapi:"primary,groups"`
+	Name                     string                 `jsonapi:"attr,name,omitempty"`
+	Slug                     string                 `jsonapi:"attr,slug,omitempty"`
+	Description              string                 `jsonapi:"attr,description,omitempty"`
+	NotifyEmails             []interface{}          `jsonapi:"attr,notify_emails,omitempty"`
+	Color                    string                 `jsonapi:"attr,color,omitempty"`
+	Position                 int                    `jsonapi:"attr,position,omitempty"`
+	BackstageId              string                 `jsonapi:"attr,backstage_id,omitempty"`
+	ExternalId               string                 `jsonapi:"attr,external_id,omitempty"`
+	PagerdutyId              string                 `jsonapi:"attr,pagerduty_id,omitempty"`
+	PagerdutyServiceId       string                 `jsonapi:"attr,pagerduty_service_id,omitempty"`
+	OpsgenieId               string                 `jsonapi:"attr,opsgenie_id,omitempty"`
+	VictorOpsId              string                 `jsonapi:"attr,victor_ops_id,omitempty"`
+	PagertreeId              string                 `jsonapi:"attr,pagertree_id,omitempty"`
+	CortexId                 string                 `jsonapi:"attr,cortex_id,omitempty"`
+	ServiceNowCiSysId        string                 `jsonapi:"attr,service_now_ci_sys_id,omitempty"`
+	UserIds                  []interface{}          `jsonapi:"attr,user_ids,omitempty"`
+	AdminIds                 []interface{}          `jsonapi:"attr,admin_ids,omitempty"`
+	AlertsEmailEnabled       *bool                  `jsonapi:"attr,alerts_email_enabled,omitempty"`
+	AlertsEmailAddress       string                 `jsonapi:"attr,alerts_email_address,omitempty"`
+	AlertUrgencyId           string                 `jsonapi:"attr,alert_urgency_id,omitempty"`
+	SlackChannels            []interface{}          `jsonapi:"attr,slack_channels,omitempty"`
+	SlackAliases             []interface{}          `jsonapi:"attr,slack_aliases,omitempty"`
+	AlertBroadcastEnabled    *bool                  `jsonapi:"attr,alert_broadcast_enabled,omitempty"`
+	AlertBroadcastChannel    map[string]interface{} `jsonapi:"attr,alert_broadcast_channel,omitempty"`
+	IncidentBroadcastEnabled *bool                  `jsonapi:"attr,incident_broadcast_enabled,omitempty"`
+	IncidentBroadcastChannel map[string]interface{} `jsonapi:"attr,incident_broadcast_channel,omitempty"`
 }
 
 func (c *Client) ListTeams(params *rootlygo.ListTeamsParams) ([]interface{}, error) {

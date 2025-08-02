@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-	
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	
+
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -18,186 +18,157 @@ import (
 func resourceCommunicationsTemplate() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceCommunicationsTemplateCreate,
-		ReadContext: resourceCommunicationsTemplateRead,
+		ReadContext:   resourceCommunicationsTemplateRead,
 		UpdateContext: resourceCommunicationsTemplateUpdate,
 		DeleteContext: resourceCommunicationsTemplateDelete,
-		Importer: &schema.ResourceImporter {
+		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema {
-			
-			"name": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+		Schema: map[string]*schema.Schema{
+
+			"name": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The name of the communications template",
-				
 			},
-			
 
-			"slug": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"slug": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The slug of the communications template",
-				
 			},
-			
 
-			"description": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"description": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The description of the communications template",
-				
 			},
-			
 
-		"position": &schema.Schema {
-			Type: schema.TypeInt,
-			Computed: true,
-			Required: false,
-			Optional: true,
-			ForceNew: false,
-			Description: "Position of the communications template",
-			
-		},
-		
+			"position": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Position of the communications template",
+			},
 
-			"communication_type_id": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+			"communication_type_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The communication type ID",
-				
 			},
-			
 
-				"communication_template_stages": &schema.Schema {
-					Type: schema.TypeList,
-					Computed: true,
-					Required: false,
-					Optional: true,
-					Description: "Communication template stages",
-					DiffSuppressFunc: tools.EqualIgnoringOrder,
-					Elem: &schema.Resource {
-						Schema: map[string]*schema.Schema {
-              
-			"id": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "ID of the communication template stage",
-				
-			},
-			
+			"communication_template_stages": &schema.Schema{
+				Type:             schema.TypeList,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Communication template stages",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
 
-			"communication_stage_id": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "The communication stage ID",
-				
-			},
-			
+						"id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "ID of the communication template stage",
+						},
 
-			"sms_content": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "SMS content for the stage",
-				
-			},
-			
+						"communication_stage_id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "The communication stage ID",
+						},
 
-			"email_subject": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Email subject for the stage",
-				
-			},
-			
+						"sms_content": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "SMS content for the stage",
+						},
 
-			"email_body": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Email body for the stage",
-				
-			},
-			
+						"email_subject": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Email subject for the stage",
+						},
 
-			"slack_content": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Slack content for the stage",
-				
-			},
-			
+						"email_body": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Email body for the stage",
+						},
+
+						"slack_content": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Slack content for the stage",
 						},
 					},
-					
 				},
-				
-
-   			"communication_type": &schema.Schema {
-	 				Type: schema.TypeList,
-	 				Computed: true,
-	 				Required: false,
-	 				Optional: true,
-	 				Description: "Map must contain two fields, `id` and `name`. ",
-						MinItems: 0,
-						MaxItems: 1,
-	 					Elem: &schema.Resource {
-							Schema: map[string]*schema.Schema {
-	 							
-			"id": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "ID of the communication type",
-				
 			},
-			
 
-			"name": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Name of the communication type",
-				
+			"communication_type": &schema.Schema{
+				Type:        schema.TypeList,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Map must contain two fields, `id` and `name`. ",
+				MinItems:    0,
+				MaxItems:    1,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+
+						"id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "ID of the communication type",
+						},
+
+						"name": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Name of the communication type",
+						},
+					},
+				},
 			},
-			
-							},
-	 					},
-	 				},
-   			
 		},
 	}
 }
@@ -209,31 +180,31 @@ func resourceCommunicationsTemplateCreate(ctx context.Context, d *schema.Resourc
 
 	s := &client.CommunicationsTemplate{}
 
-	  if value, ok := d.GetOkExists("name"); ok {
-				s.Name = value.(string)
+	if value, ok := d.GetOkExists("name"); ok {
+		s.Name = value.(string)
+	}
+	if value, ok := d.GetOkExists("slug"); ok {
+		s.Slug = value.(string)
+	}
+	if value, ok := d.GetOkExists("description"); ok {
+		s.Description = value.(string)
+	}
+	if value, ok := d.GetOkExists("position"); ok {
+		s.Position = value.(int)
+	}
+	if value, ok := d.GetOkExists("communication_type_id"); ok {
+		s.CommunicationTypeId = value.(string)
+	}
+	if value, ok := d.GetOkExists("communication_template_stages"); ok {
+		s.CommunicationTemplateStages = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("communication_type"); ok {
+		if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
+			if mapValue, ok := valueList[0].(map[string]interface{}); ok {
+				s.CommunicationType = mapValue
 			}
-    if value, ok := d.GetOkExists("slug"); ok {
-				s.Slug = value.(string)
-			}
-    if value, ok := d.GetOkExists("description"); ok {
-				s.Description = value.(string)
-			}
-    if value, ok := d.GetOkExists("position"); ok {
-				s.Position = value.(int)
-			}
-    if value, ok := d.GetOkExists("communication_type_id"); ok {
-				s.CommunicationTypeId = value.(string)
-			}
-    if value, ok := d.GetOkExists("communication_template_stages"); ok {
-				s.CommunicationTemplateStages = value.([]interface{})
-			}
-    if value, ok := d.GetOkExists("communication_type"); ok {
-				if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
-          if mapValue, ok := valueList[0].(map[string]interface{}); ok {
-    				s.CommunicationType = mapValue
-          }
-        }
-			}
+		}
+	}
 
 	res, err := c.CreateCommunicationsTemplate(s)
 	if err != nil {
@@ -264,42 +235,41 @@ func resourceCommunicationsTemplateRead(ctx context.Context, d *schema.ResourceD
 	}
 
 	d.Set("name", item.Name)
-  d.Set("slug", item.Slug)
-  d.Set("description", item.Description)
-  d.Set("position", item.Position)
-  d.Set("communication_type_id", item.CommunicationTypeId)
-  
-          if item.CommunicationTemplateStages != nil {
-              processedItems := make([]map[string]interface{}, 0)
+	d.Set("slug", item.Slug)
+	d.Set("description", item.Description)
+	d.Set("position", item.Position)
+	d.Set("communication_type_id", item.CommunicationTypeId)
 
-              for _, c := range item.CommunicationTemplateStages {
-                  if rawItem, ok := c.(map[string]interface{}); ok {
-                      // Create a new map with only the fields defined in the schema
-                      processedItem := map[string]interface{}{
-                          "id": rawItem["id"],
-"communication_stage_id": rawItem["communication_stage_id"],
-"sms_content": rawItem["sms_content"],
-"email_subject": rawItem["email_subject"],
-"email_body": rawItem["email_body"],
-"slack_content": rawItem["slack_content"],
-                      }
-                      processedItems = append(processedItems, processedItem)
-                  }
-              }
+	if item.CommunicationTemplateStages != nil {
+		processed_items_communication_template_stages := make([]map[string]interface{}, 0)
 
-              d.Set("communication_template_stages", processedItems)
-          } else {
-              d.Set("communication_template_stages", nil)
-          }
-        
-  singleton_list := make([]interface{}, 1, 1)
-          processedItem := map[string]interface{}{
-            "id": item.CommunicationType["id"],
-"name": item.CommunicationType["name"],
-          }
-          singleton_list[0] = processedItem
-          d.Set("communication_type", singleton_list)
-        
+		for _, c := range item.CommunicationTemplateStages {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processed_item_communication_template_stages := map[string]interface{}{
+					"id":                     rawItem["id"],
+					"communication_stage_id": rawItem["communication_stage_id"],
+					"sms_content":            rawItem["sms_content"],
+					"email_subject":          rawItem["email_subject"],
+					"email_body":             rawItem["email_body"],
+					"slack_content":          rawItem["slack_content"],
+				}
+				processed_items_communication_template_stages = append(processed_items_communication_template_stages, processed_item_communication_template_stages)
+			}
+		}
+
+		d.Set("communication_template_stages", processed_items_communication_template_stages)
+	} else {
+		d.Set("communication_template_stages", nil)
+	}
+
+	singleton_list_communication_type := make([]interface{}, 1, 1)
+	processed_item_communication_type := map[string]interface{}{
+		"id":   item.CommunicationType["id"],
+		"name": item.CommunicationType["name"],
+	}
+	singleton_list_communication_type[0] = processed_item_communication_type
+	d.Set("communication_type", singleton_list_communication_type)
 
 	return nil
 }
@@ -310,31 +280,35 @@ func resourceCommunicationsTemplateUpdate(ctx context.Context, d *schema.Resourc
 
 	s := &client.CommunicationsTemplate{}
 
-	  if d.HasChange("name") {
-				s.Name = d.Get("name").(string)
-			}
-    if d.HasChange("slug") {
-				s.Slug = d.Get("slug").(string)
-			}
-    if d.HasChange("description") {
-				s.Description = d.Get("description").(string)
-			}
-    if d.HasChange("position") {
-				s.Position = d.Get("position").(int)
-			}
-    if d.HasChange("communication_type_id") {
-				s.CommunicationTypeId = d.Get("communication_type_id").(string)
-			}
-    if d.HasChange("communication_template_stages") {
-				s.CommunicationTemplateStages = d.Get("communication_template_stages").([]interface{})
-			}
-    if d.HasChange("communication_type") {
-      		tps := d.Get("communication_type").([]interface{})
-      		for _, tpsi := range tps {
-      			s.CommunicationType = tpsi.(map[string]interface{})
-      		}
-      	}
-			
+	if d.HasChange("name") {
+		s.Name = d.Get("name").(string)
+	}
+	if d.HasChange("slug") {
+		s.Slug = d.Get("slug").(string)
+	}
+	if d.HasChange("description") {
+		s.Description = d.Get("description").(string)
+	}
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
+	}
+	if d.HasChange("communication_type_id") {
+		s.CommunicationTypeId = d.Get("communication_type_id").(string)
+	}
+
+	s.CommunicationTemplateStages = []interface{}{}
+	if value, ok := d.GetOk("communication_template_stages"); value != nil && ok {
+		if d.HasChange("communication_template_stages") {
+			s.CommunicationTemplateStages = value.([]interface{})
+		}
+	}
+
+	if d.HasChange("communication_type") {
+		tps := d.Get("communication_type").([]interface{})
+		for _, tpsi := range tps {
+			s.CommunicationType = tpsi.(map[string]interface{})
+		}
+	}
 
 	_, err := c.UpdateCommunicationsTemplate(d.Id(), s)
 	if err != nil {

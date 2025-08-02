@@ -4,7 +4,7 @@ package provider
 
 import (
 	"context"
-	
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
@@ -13,56 +13,50 @@ import (
 )
 
 func dataSourceCommunicationsGroup() *schema.Resource {
-	return &schema.Resource {
+	return &schema.Resource{
 		ReadContext: dataSourceCommunicationsGroupRead,
-		Schema: map[string]*schema.Schema {
-			"id": &schema.Schema {
-				Type: schema.TypeString,
+		Schema: map[string]*schema.Schema{
+			"id": &schema.Schema{
+				Type:     schema.TypeString,
 				Computed: true,
 			},
-			
-			"name": &schema.Schema {
-				Type: schema.TypeString,
+
+			"name": &schema.Schema{
+				Type:     schema.TypeString,
 				Computed: true,
 				Optional: true,
 			},
-			
 
-			"slug": &schema.Schema {
-				Type: schema.TypeString,
+			"slug": &schema.Schema{
+				Type:     schema.TypeString,
 				Computed: true,
 				Optional: true,
 			},
-			
 
-			"communication_type_id": &schema.Schema {
-				Type: schema.TypeString,
+			"communication_type_id": &schema.Schema{
+				Type:     schema.TypeString,
 				Computed: true,
 				Optional: true,
 			},
-			
 
-			"is_private": &schema.Schema {
-				Type: schema.TypeBool,
+			"is_private": &schema.Schema{
+				Type:     schema.TypeBool,
 				Computed: true,
 				Optional: true,
 			},
-			
 
-			"condition_type": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Optional: true,
-		ValidateFunc: validation.StringInSlice([]string{"any", "all"}, false),
+			"condition_type": &schema.Schema{
+				Type:         schema.TypeString,
+				Computed:     true,
+				Optional:     true,
+				ValidateFunc: validation.StringInSlice([]string{"any", "all"}, false),
 			},
-			
 
-				"created_at": &schema.Schema {
-					Type: schema.TypeMap,
-					Description: "Filter by date range using 'lt' and 'gt'.",
-					Optional: true,
-				},
-				
+			"created_at": &schema.Schema{
+				Type:        schema.TypeMap,
+				Description: "Filter by date range using 'lt' and 'gt'.",
+				Optional:    true,
+			},
 		},
 	}
 }
@@ -74,54 +68,46 @@ func dataSourceCommunicationsGroupRead(ctx context.Context, d *schema.ResourceDa
 	page_size := 1
 	params.PageSize = &page_size
 
-	
-				if value, ok := d.GetOkExists("name"); ok {
-					name := value.(string)
-					params.FilterName = &name
-				}
-			
+	if value, ok := d.GetOkExists("name"); ok {
+		name := value.(string)
+		params.FilterName = &name
+	}
 
-				if value, ok := d.GetOkExists("slug"); ok {
-					slug := value.(string)
-					params.FilterSlug = &slug
-				}
-			
+	if value, ok := d.GetOkExists("slug"); ok {
+		slug := value.(string)
+		params.FilterSlug = &slug
+	}
 
-				if value, ok := d.GetOkExists("is_private"); ok {
-					is_private := value.(bool)
-					is_private_str := "false"
-					if is_private {
-						is_private_str = "true"
-					}
-					params.FilterIsPrivate = &is_private_str
-				}
-			
+	if value, ok := d.GetOkExists("is_private"); ok {
+		is_private := value.(bool)
+		is_private_str := "false"
+		if is_private {
+			is_private_str = "true"
+		}
+		params.FilterIsPrivate = &is_private_str
+	}
 
-				if value, ok := d.GetOkExists("communication_type_id"); ok {
-					communication_type_id := value.(string)
-					params.FilterCommunicationTypeId = &communication_type_id
-				}
-			
+	if value, ok := d.GetOkExists("communication_type_id"); ok {
+		communication_type_id := value.(string)
+		params.FilterCommunicationTypeId = &communication_type_id
+	}
 
-				if value, ok := d.GetOkExists("condition_type"); ok {
-					condition_type := value.(string)
-					params.FilterConditionType = &condition_type
-				}
-			
+	if value, ok := d.GetOkExists("condition_type"); ok {
+		condition_type := value.(string)
+		params.FilterConditionType = &condition_type
+	}
 
-				created_at_gt := d.Get("created_at").(map[string]interface{})
-				if value, exists := created_at_gt["gt"]; exists {
-					v := value.(string)
-					params.FilterCreatedAtGt = &v
-				}
-			
+	created_at_gt := d.Get("created_at").(map[string]interface{})
+	if value, exists := created_at_gt["gt"]; exists {
+		v := value.(string)
+		params.FilterCreatedAtGt = &v
+	}
 
-				created_at_lt := d.Get("created_at").(map[string]interface{})
-				if value, exists := created_at_lt["lt"]; exists {
-					v := value.(string)
-					params.FilterCreatedAtLt = &v
-				}
-			
+	created_at_lt := d.Get("created_at").(map[string]interface{})
+	if value, exists := created_at_lt["lt"]; exists {
+		v := value.(string)
+		params.FilterCreatedAtLt = &v
+	}
 
 	items, err := c.ListCommunicationsGroups(params)
 	if err != nil {

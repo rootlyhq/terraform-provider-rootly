@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-	
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
@@ -18,303 +18,253 @@ import (
 func resourceCommunicationsGroup() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceCommunicationsGroupCreate,
-		ReadContext: resourceCommunicationsGroupRead,
+		ReadContext:   resourceCommunicationsGroupRead,
 		UpdateContext: resourceCommunicationsGroupUpdate,
 		DeleteContext: resourceCommunicationsGroupDelete,
-		Importer: &schema.ResourceImporter {
+		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema {
-			
-			"name": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+		Schema: map[string]*schema.Schema{
+
+			"name": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The name of the communications group",
-				
 			},
-			
 
-			"slug": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"slug": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The slug of the communications group",
-				
 			},
-			
 
-			"description": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"description": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The description of the communications group",
-				
 			},
-			
 
-			"communication_type_id": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+			"communication_type_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The communication type ID",
-				
 			},
-			
 
-			"is_private": &schema.Schema {
-				Type: schema.TypeBool,
-				Computed: true,
-				Required: false,
-				Optional: true,
+			"is_private": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
 				Description: "Whether the group is private. Value must be one of true or false",
-				
 			},
-			
 
-			"condition_type": &schema.Schema {
-				Type: schema.TypeString,
-				Default: "any",
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Condition type. Value must be one of `any`, `all`.",
-		ValidateFunc: validation.StringInSlice([]string{"any", "all"}, false),
-				
+			"condition_type": &schema.Schema{
+				Type:         schema.TypeString,
+				Default:      "any",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "Condition type. Value must be one of `any`, `all`.",
+				ValidateFunc: validation.StringInSlice([]string{"any", "all"}, false),
 			},
-			
 
-			"sms_channel": &schema.Schema {
-				Type: schema.TypeBool,
-				Computed: true,
-				Required: false,
-				Optional: true,
+			"sms_channel": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
 				Description: "SMS channel enabled. Value must be one of true or false",
-				
 			},
-			
 
-			"email_channel": &schema.Schema {
-				Type: schema.TypeBool,
-				Computed: true,
-				Required: false,
-				Optional: true,
+			"email_channel": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
 				Description: "Email channel enabled. Value must be one of true or false",
-				
 			},
-			
 
-				"communication_group_conditions": &schema.Schema {
-					Type: schema.TypeList,
-					Computed: true,
-					Required: false,
-					Optional: true,
-					Description: "Group conditions",
-					DiffSuppressFunc: tools.EqualIgnoringOrder,
-					Elem: &schema.Resource {
-						Schema: map[string]*schema.Schema {
-              
-			"id": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "ID of the condition",
-				
-			},
-			
+			"communication_group_conditions": &schema.Schema{
+				Type:             schema.TypeList,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Group conditions",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
 
-			"condition": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Condition",
-				
-			},
-			
+						"id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "ID of the condition",
+						},
 
-			"property_type": &schema.Schema {
-				Type: schema.TypeString,
-				Default: "service",
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Property type. Value must be one of `service`, `severity`, `functionality`, `group`, `incident_type`.",
-		ValidateFunc: validation.StringInSlice([]string{"service", "severity", "functionality", "group", "incident_type"}, false),
-				
-			},
-			
+						"condition": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Condition",
+						},
 
-				"properties": &schema.Schema {
-					Type: schema.TypeList,
-					Computed: true,
-					Required: false,
-					Optional: true,
-					Description: "Properties",
-					DiffSuppressFunc: tools.EqualIgnoringOrder,
-					Elem: &schema.Resource {
-						Schema: map[string]*schema.Schema {
-              
-			"name": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "",
-				
-			},
-			
+						"property_type": &schema.Schema{
+							Type:         schema.TypeString,
+							Default:      "service",
+							Required:     false,
+							Optional:     true,
+							ForceNew:     false,
+							Description:  "Property type. Value must be one of `service`, `severity`, `functionality`, `group`, `incident_type`.",
+							ValidateFunc: validation.StringInSlice([]string{"service", "severity", "functionality", "group", "incident_type"}, false),
+						},
 
-			"id": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "",
-				
-			},
-			
+						"properties": &schema.Schema{
+							Type:             schema.TypeList,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "Properties",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+
+									"name": &schema.Schema{
+										Type:        schema.TypeString,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "",
+									},
+
+									"id": &schema.Schema{
+										Type:        schema.TypeString,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "",
+									},
+								},
+							},
 						},
 					},
-					
 				},
-				
+			},
+
+			"communication_group_members": &schema.Schema{
+				Type:             schema.TypeList,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Group members",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+
+						"id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "ID of the group member",
+						},
+
+						"user_id": &schema.Schema{
+							Type:        schema.TypeInt,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "User ID",
+						},
+
+						"name": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Name of the group member",
+						},
+
+						"email": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Email of the group member",
 						},
 					},
-					
 				},
-				
-
-				"communication_group_members": &schema.Schema {
-					Type: schema.TypeList,
-					Computed: true,
-					Required: false,
-					Optional: true,
-					Description: "Group members",
-					DiffSuppressFunc: tools.EqualIgnoringOrder,
-					Elem: &schema.Resource {
-						Schema: map[string]*schema.Schema {
-              
-			"id": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "ID of the group member",
-				
 			},
-			
 
-		"user_id": &schema.Schema {
-			Type: schema.TypeInt,
-			Computed: true,
-			Required: false,
-			Optional: true,
-			ForceNew: false,
-			Description: "User ID",
-			
-		},
-		
+			"communication_external_group_members": &schema.Schema{
+				Type:             schema.TypeList,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "External group members",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
 
-			"name": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Name of the group member",
-				
-			},
-			
+						"id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "ID of the external group member",
+						},
 
-			"email": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Email of the group member",
-				
-			},
-			
+						"name": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Name of the external member",
+						},
+
+						"email": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Email of the external member",
+						},
+
+						"phone_number": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Phone number of the external member",
 						},
 					},
-					
 				},
-				
-
-				"communication_external_group_members": &schema.Schema {
-					Type: schema.TypeList,
-					Computed: true,
-					Required: false,
-					Optional: true,
-					Description: "External group members",
-					DiffSuppressFunc: tools.EqualIgnoringOrder,
-					Elem: &schema.Resource {
-						Schema: map[string]*schema.Schema {
-              
-			"id": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "ID of the external group member",
-				
 			},
-			
-
-			"name": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Name of the external member",
-				
-			},
-			
-
-			"email": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Email of the external member",
-				
-			},
-			
-
-			"phone_number": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Phone number of the external member",
-				
-			},
-			
-						},
-					},
-					
-				},
-				
 		},
 	}
 }
@@ -326,39 +276,39 @@ func resourceCommunicationsGroupCreate(ctx context.Context, d *schema.ResourceDa
 
 	s := &client.CommunicationsGroup{}
 
-	  if value, ok := d.GetOkExists("name"); ok {
-				s.Name = value.(string)
-			}
-    if value, ok := d.GetOkExists("slug"); ok {
-				s.Slug = value.(string)
-			}
-    if value, ok := d.GetOkExists("description"); ok {
-				s.Description = value.(string)
-			}
-    if value, ok := d.GetOkExists("communication_type_id"); ok {
-				s.CommunicationTypeId = value.(string)
-			}
-    if value, ok := d.GetOkExists("is_private"); ok {
-				s.IsPrivate = tools.Bool(value.(bool))
-			}
-    if value, ok := d.GetOkExists("condition_type"); ok {
-				s.ConditionType = value.(string)
-			}
-    if value, ok := d.GetOkExists("sms_channel"); ok {
-				s.SmsChannel = tools.Bool(value.(bool))
-			}
-    if value, ok := d.GetOkExists("email_channel"); ok {
-				s.EmailChannel = tools.Bool(value.(bool))
-			}
-    if value, ok := d.GetOkExists("communication_group_conditions"); ok {
-				s.CommunicationGroupConditions = value.([]interface{})
-			}
-    if value, ok := d.GetOkExists("communication_group_members"); ok {
-				s.CommunicationGroupMembers = value.([]interface{})
-			}
-    if value, ok := d.GetOkExists("communication_external_group_members"); ok {
-				s.CommunicationExternalGroupMembers = value.([]interface{})
-			}
+	if value, ok := d.GetOkExists("name"); ok {
+		s.Name = value.(string)
+	}
+	if value, ok := d.GetOkExists("slug"); ok {
+		s.Slug = value.(string)
+	}
+	if value, ok := d.GetOkExists("description"); ok {
+		s.Description = value.(string)
+	}
+	if value, ok := d.GetOkExists("communication_type_id"); ok {
+		s.CommunicationTypeId = value.(string)
+	}
+	if value, ok := d.GetOkExists("is_private"); ok {
+		s.IsPrivate = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("condition_type"); ok {
+		s.ConditionType = value.(string)
+	}
+	if value, ok := d.GetOkExists("sms_channel"); ok {
+		s.SmsChannel = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("email_channel"); ok {
+		s.EmailChannel = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("communication_group_conditions"); ok {
+		s.CommunicationGroupConditions = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("communication_group_members"); ok {
+		s.CommunicationGroupMembers = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("communication_external_group_members"); ok {
+		s.CommunicationExternalGroupMembers = value.([]interface{})
+	}
 
 	res, err := c.CreateCommunicationsGroup(s)
 	if err != nil {
@@ -389,79 +339,76 @@ func resourceCommunicationsGroupRead(ctx context.Context, d *schema.ResourceData
 	}
 
 	d.Set("name", item.Name)
-  d.Set("slug", item.Slug)
-  d.Set("description", item.Description)
-  d.Set("communication_type_id", item.CommunicationTypeId)
-  d.Set("is_private", item.IsPrivate)
-  d.Set("condition_type", item.ConditionType)
-  d.Set("sms_channel", item.SmsChannel)
-  d.Set("email_channel", item.EmailChannel)
-  
-          if item.CommunicationGroupConditions != nil {
-              processedItems := make([]map[string]interface{}, 0)
+	d.Set("slug", item.Slug)
+	d.Set("description", item.Description)
+	d.Set("communication_type_id", item.CommunicationTypeId)
+	d.Set("is_private", item.IsPrivate)
+	d.Set("condition_type", item.ConditionType)
+	d.Set("sms_channel", item.SmsChannel)
+	d.Set("email_channel", item.EmailChannel)
 
-              for _, c := range item.CommunicationGroupConditions {
-                  if rawItem, ok := c.(map[string]interface{}); ok {
-                      // Create a new map with only the fields defined in the schema
-                      processedItem := map[string]interface{}{
-                          "id": rawItem["id"],
-"condition": rawItem["condition"],
-"property_type": rawItem["property_type"],
-"properties": rawItem["properties"],
-                      }
-                      processedItems = append(processedItems, processedItem)
-                  }
-              }
+	if item.CommunicationGroupConditions != nil {
+		processed_items_communication_group_conditions := make([]map[string]interface{}, 0)
 
-              d.Set("communication_group_conditions", processedItems)
-          } else {
-              d.Set("communication_group_conditions", nil)
-          }
-        
-  
-          if item.CommunicationGroupMembers != nil {
-              processedItems := make([]map[string]interface{}, 0)
+		for _, c := range item.CommunicationGroupConditions {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processed_item_communication_group_conditions := map[string]interface{}{
+					"id":            rawItem["id"],
+					"condition":     rawItem["condition"],
+					"property_type": rawItem["property_type"],
+					"properties":    rawItem["properties"],
+				}
+				processed_items_communication_group_conditions = append(processed_items_communication_group_conditions, processed_item_communication_group_conditions)
+			}
+		}
 
-              for _, c := range item.CommunicationGroupMembers {
-                  if rawItem, ok := c.(map[string]interface{}); ok {
-                      // Create a new map with only the fields defined in the schema
-                      processedItem := map[string]interface{}{
-                          "id": rawItem["id"],
-"user_id": rawItem["user_id"],
-"name": rawItem["name"],
-"email": rawItem["email"],
-                      }
-                      processedItems = append(processedItems, processedItem)
-                  }
-              }
+		d.Set("communication_group_conditions", processed_items_communication_group_conditions)
+	} else {
+		d.Set("communication_group_conditions", nil)
+	}
 
-              d.Set("communication_group_members", processedItems)
-          } else {
-              d.Set("communication_group_members", nil)
-          }
-        
-  
-          if item.CommunicationExternalGroupMembers != nil {
-              processedItems := make([]map[string]interface{}, 0)
+	if item.CommunicationGroupMembers != nil {
+		processed_items_communication_group_members := make([]map[string]interface{}, 0)
 
-              for _, c := range item.CommunicationExternalGroupMembers {
-                  if rawItem, ok := c.(map[string]interface{}); ok {
-                      // Create a new map with only the fields defined in the schema
-                      processedItem := map[string]interface{}{
-                          "id": rawItem["id"],
-"name": rawItem["name"],
-"email": rawItem["email"],
-"phone_number": rawItem["phone_number"],
-                      }
-                      processedItems = append(processedItems, processedItem)
-                  }
-              }
+		for _, c := range item.CommunicationGroupMembers {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processed_item_communication_group_members := map[string]interface{}{
+					"id":      rawItem["id"],
+					"user_id": rawItem["user_id"],
+					"name":    rawItem["name"],
+					"email":   rawItem["email"],
+				}
+				processed_items_communication_group_members = append(processed_items_communication_group_members, processed_item_communication_group_members)
+			}
+		}
 
-              d.Set("communication_external_group_members", processedItems)
-          } else {
-              d.Set("communication_external_group_members", nil)
-          }
-        
+		d.Set("communication_group_members", processed_items_communication_group_members)
+	} else {
+		d.Set("communication_group_members", nil)
+	}
+
+	if item.CommunicationExternalGroupMembers != nil {
+		processed_items_communication_external_group_members := make([]map[string]interface{}, 0)
+
+		for _, c := range item.CommunicationExternalGroupMembers {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processed_item_communication_external_group_members := map[string]interface{}{
+					"id":           rawItem["id"],
+					"name":         rawItem["name"],
+					"email":        rawItem["email"],
+					"phone_number": rawItem["phone_number"],
+				}
+				processed_items_communication_external_group_members = append(processed_items_communication_external_group_members, processed_item_communication_external_group_members)
+			}
+		}
+
+		d.Set("communication_external_group_members", processed_items_communication_external_group_members)
+	} else {
+		d.Set("communication_external_group_members", nil)
+	}
 
 	return nil
 }
@@ -472,39 +419,51 @@ func resourceCommunicationsGroupUpdate(ctx context.Context, d *schema.ResourceDa
 
 	s := &client.CommunicationsGroup{}
 
-	  if d.HasChange("name") {
-				s.Name = d.Get("name").(string)
-			}
-    if d.HasChange("slug") {
-				s.Slug = d.Get("slug").(string)
-			}
-    if d.HasChange("description") {
-				s.Description = d.Get("description").(string)
-			}
-    if d.HasChange("communication_type_id") {
-				s.CommunicationTypeId = d.Get("communication_type_id").(string)
-			}
-    if d.HasChange("is_private") {
-				s.IsPrivate = tools.Bool(d.Get("is_private").(bool))
-			}
-    if d.HasChange("condition_type") {
-				s.ConditionType = d.Get("condition_type").(string)
-			}
-    if d.HasChange("sms_channel") {
-				s.SmsChannel = tools.Bool(d.Get("sms_channel").(bool))
-			}
-    if d.HasChange("email_channel") {
-				s.EmailChannel = tools.Bool(d.Get("email_channel").(bool))
-			}
-    if d.HasChange("communication_group_conditions") {
-				s.CommunicationGroupConditions = d.Get("communication_group_conditions").([]interface{})
-			}
-    if d.HasChange("communication_group_members") {
-				s.CommunicationGroupMembers = d.Get("communication_group_members").([]interface{})
-			}
-    if d.HasChange("communication_external_group_members") {
-				s.CommunicationExternalGroupMembers = d.Get("communication_external_group_members").([]interface{})
-			}
+	if d.HasChange("name") {
+		s.Name = d.Get("name").(string)
+	}
+	if d.HasChange("slug") {
+		s.Slug = d.Get("slug").(string)
+	}
+	if d.HasChange("description") {
+		s.Description = d.Get("description").(string)
+	}
+	if d.HasChange("communication_type_id") {
+		s.CommunicationTypeId = d.Get("communication_type_id").(string)
+	}
+	if d.HasChange("is_private") {
+		s.IsPrivate = tools.Bool(d.Get("is_private").(bool))
+	}
+	if d.HasChange("condition_type") {
+		s.ConditionType = d.Get("condition_type").(string)
+	}
+	if d.HasChange("sms_channel") {
+		s.SmsChannel = tools.Bool(d.Get("sms_channel").(bool))
+	}
+	if d.HasChange("email_channel") {
+		s.EmailChannel = tools.Bool(d.Get("email_channel").(bool))
+	}
+
+	s.CommunicationGroupConditions = []interface{}{}
+	if value, ok := d.GetOk("communication_group_conditions"); value != nil && ok {
+		if d.HasChange("communication_group_conditions") {
+			s.CommunicationGroupConditions = value.([]interface{})
+		}
+	}
+
+	s.CommunicationGroupMembers = []interface{}{}
+	if value, ok := d.GetOk("communication_group_members"); value != nil && ok {
+		if d.HasChange("communication_group_members") {
+			s.CommunicationGroupMembers = value.([]interface{})
+		}
+	}
+
+	s.CommunicationExternalGroupMembers = []interface{}{}
+	if value, ok := d.GetOk("communication_external_group_members"); value != nil && ok {
+		if d.HasChange("communication_external_group_members") {
+			s.CommunicationExternalGroupMembers = value.([]interface{})
+		}
+	}
 
 	_, err := c.UpdateCommunicationsGroup(d.Id(), s)
 	if err != nil {

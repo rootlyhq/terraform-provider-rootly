@@ -3,22 +3,22 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type AlertRoutingRule struct {
-	ID string `jsonapi:"primary,alert_routing_rules"`
-	Name string `jsonapi:"attr,name,omitempty"`
-  Enabled *bool `jsonapi:"attr,enabled,omitempty"`
-  AlertsSourceId string `jsonapi:"attr,alerts_source_id,omitempty"`
-  Position int `jsonapi:"attr,position,omitempty"`
-  ConditionType string `jsonapi:"attr,condition_type,omitempty"`
-  Conditions []interface{} `jsonapi:"attr,conditions,omitempty"`
-  Destination map[string]interface{} `jsonapi:"attr,destination,omitempty"`
+	ID             string                 `jsonapi:"primary,alert_routing_rules"`
+	Name           string                 `jsonapi:"attr,name,omitempty"`
+	Enabled        *bool                  `jsonapi:"attr,enabled,omitempty"`
+	AlertsSourceId string                 `jsonapi:"attr,alerts_source_id,omitempty"`
+	Position       int                    `jsonapi:"attr,position,omitempty"`
+	ConditionType  string                 `jsonapi:"attr,condition_type,omitempty"`
+	Conditions     []interface{}          `jsonapi:"attr,conditions,omitempty"`
+	Destination    map[string]interface{} `jsonapi:"attr,destination,omitempty"`
 }
 
 func (c *Client) ListAlertRoutingRules(params *rootlygo.ListAlertRoutingRulesParams) ([]interface{}, error) {

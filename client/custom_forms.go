@@ -3,20 +3,20 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type CustomForm struct {
-	ID string `jsonapi:"primary,custom_forms"`
-	Name string `jsonapi:"attr,name,omitempty"`
-  Slug string `jsonapi:"attr,slug,omitempty"`
-  Description string `jsonapi:"attr,description,omitempty"`
-  Enabled *bool `jsonapi:"attr,enabled,omitempty"`
-  Command string `jsonapi:"attr,command,omitempty"`
+	ID          string `jsonapi:"primary,custom_forms"`
+	Name        string `jsonapi:"attr,name,omitempty"`
+	Slug        string `jsonapi:"attr,slug,omitempty"`
+	Description string `jsonapi:"attr,description,omitempty"`
+	Enabled     *bool  `jsonapi:"attr,enabled,omitempty"`
+	Command     string `jsonapi:"attr,command,omitempty"`
 }
 
 func (c *Client) ListCustomForms(params *rootlygo.ListCustomFormsParams) ([]interface{}, error) {

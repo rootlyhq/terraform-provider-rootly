@@ -3,19 +3,19 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type FormSetCondition struct {
-	ID string `jsonapi:"primary,form_set_conditions"`
-	FormSetId string `jsonapi:"attr,form_set_id,omitempty"`
-  FormFieldId string `jsonapi:"attr,form_field_id,omitempty"`
-  Comparison string `jsonapi:"attr,comparison,omitempty"`
-  Values []interface{} `jsonapi:"attr,values,omitempty"`
+	ID          string        `jsonapi:"primary,form_set_conditions"`
+	FormSetId   string        `jsonapi:"attr,form_set_id,omitempty"`
+	FormFieldId string        `jsonapi:"attr,form_field_id,omitempty"`
+	Comparison  string        `jsonapi:"attr,comparison,omitempty"`
+	Values      []interface{} `jsonapi:"attr,values,omitempty"`
 }
 
 func (c *Client) ListFormSetConditions(id string, params *rootlygo.ListFormSetConditionsParams) ([]interface{}, error) {

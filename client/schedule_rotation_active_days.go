@@ -3,18 +3,18 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type ScheduleRotationActiveDay struct {
-	ID string `jsonapi:"primary,schedule_rotation_active_days"`
-	ScheduleRotationId string `jsonapi:"attr,schedule_rotation_id,omitempty"`
-  DayName string `jsonapi:"attr,day_name,omitempty"`
-  ActiveTimeAttributes []interface{} `jsonapi:"attr,active_time_attributes,omitempty"`
+	ID                   string        `jsonapi:"primary,schedule_rotation_active_days"`
+	ScheduleRotationId   string        `jsonapi:"attr,schedule_rotation_id,omitempty"`
+	DayName              string        `jsonapi:"attr,day_name,omitempty"`
+	ActiveTimeAttributes []interface{} `jsonapi:"attr,active_time_attributes,omitempty"`
 }
 
 func (c *Client) ListScheduleRotationActiveDays(id string, params *rootlygo.ListScheduleRotationActiveDaysParams) ([]interface{}, error) {

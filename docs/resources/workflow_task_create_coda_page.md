@@ -40,6 +40,7 @@ Required:
 Optional:
 
 - `content` (String) The Coda page content
+- `doc` (Map of String) Map must contain two fields, `id` and `name`. The Coda doc object with id and name
 - `folder_id` (String) The Coda folder id
 - `mark_post_mortem_as_published` (Boolean) Value must be one of true or false
 - `post_mortem_template_id` (String) Retrospective template to use when creating page, if desired

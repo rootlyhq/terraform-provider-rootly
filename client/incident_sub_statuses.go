@@ -3,19 +3,19 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type IncidentSubStatus struct {
-	ID string `jsonapi:"primary,incident_sub_statuses"`
-	IncidentId string `jsonapi:"attr,incident_id,omitempty"`
-  SubStatusId string `jsonapi:"attr,sub_status_id,omitempty"`
-  AssignedAt string `jsonapi:"attr,assigned_at,omitempty"`
-  AssignedByUserId int `jsonapi:"attr,assigned_by_user_id,omitempty"`
+	ID               string `jsonapi:"primary,incident_sub_statuses"`
+	IncidentId       string `jsonapi:"attr,incident_id,omitempty"`
+	SubStatusId      string `jsonapi:"attr,sub_status_id,omitempty"`
+	AssignedAt       string `jsonapi:"attr,assigned_at,omitempty"`
+	AssignedByUserId int    `jsonapi:"attr,assigned_by_user_id,omitempty"`
 }
 
 func (c *Client) ListIncidentSubStatuses(id string, params *rootlygo.ListIncidentSubStatusesParams) ([]interface{}, error) {

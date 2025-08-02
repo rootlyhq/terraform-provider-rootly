@@ -3,21 +3,21 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type OnCallShadow struct {
-	ID string `jsonapi:"primary,on_call_shadows"`
-	ScheduleId string `jsonapi:"attr,schedule_id,omitempty"`
-  ShadowableType string `jsonapi:"attr,shadowable_type,omitempty"`
-  ShadowableId string `jsonapi:"attr,shadowable_id,omitempty"`
-  ShadowUserId int `jsonapi:"attr,shadow_user_id,omitempty"`
-  StartsAt string `jsonapi:"attr,starts_at,omitempty"`
-  EndsAt string `jsonapi:"attr,ends_at,omitempty"`
+	ID             string `jsonapi:"primary,on_call_shadows"`
+	ScheduleId     string `jsonapi:"attr,schedule_id,omitempty"`
+	ShadowableType string `jsonapi:"attr,shadowable_type,omitempty"`
+	ShadowableId   string `jsonapi:"attr,shadowable_id,omitempty"`
+	ShadowUserId   int    `jsonapi:"attr,shadow_user_id,omitempty"`
+	StartsAt       string `jsonapi:"attr,starts_at,omitempty"`
+	EndsAt         string `jsonapi:"attr,ends_at,omitempty"`
 }
 
 func (c *Client) ListOnCallShadows(id string, params *rootlygo.ListOnCallShadowsParams) ([]interface{}, error) {

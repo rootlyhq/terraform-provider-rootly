@@ -4,7 +4,7 @@ package provider
 
 import (
 	"context"
-	
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
@@ -13,49 +13,44 @@ import (
 )
 
 func dataSourceWorkflowGroup() *schema.Resource {
-	return &schema.Resource {
+	return &schema.Resource{
 		ReadContext: dataSourceWorkflowGroupRead,
-		Schema: map[string]*schema.Schema {
-			"id": &schema.Schema {
-				Type: schema.TypeString,
+		Schema: map[string]*schema.Schema{
+			"id": &schema.Schema{
+				Type:     schema.TypeString,
 				Computed: true,
 			},
-			
-			"kind": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Optional: true,
-		ValidateFunc: validation.StringInSlice([]string{"simple", "incident", "post_mortem", "action_item", "pulse", "alert"}, false),
-			},
-			
 
-			"name": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Optional: true,
+			"kind": &schema.Schema{
+				Type:         schema.TypeString,
+				Computed:     true,
+				Optional:     true,
+				ValidateFunc: validation.StringInSlice([]string{"simple", "incident", "post_mortem", "action_item", "pulse", "alert"}, false),
 			},
-			
 
-			"slug": &schema.Schema {
-				Type: schema.TypeString,
+			"name": &schema.Schema{
+				Type:     schema.TypeString,
 				Computed: true,
 				Optional: true,
 			},
-			
 
-			"expanded": &schema.Schema {
-				Type: schema.TypeBool,
+			"slug": &schema.Schema{
+				Type:     schema.TypeString,
 				Computed: true,
 				Optional: true,
 			},
-			
 
-			"position": &schema.Schema {
-				Type: schema.TypeInt,
+			"expanded": &schema.Schema{
+				Type:     schema.TypeBool,
 				Computed: true,
 				Optional: true,
 			},
-			
+
+			"position": &schema.Schema{
+				Type:     schema.TypeInt,
+				Computed: true,
+				Optional: true,
+			},
 		},
 	}
 }
@@ -67,36 +62,30 @@ func dataSourceWorkflowGroupRead(ctx context.Context, d *schema.ResourceData, me
 	page_size := 1
 	params.PageSize = &page_size
 
-	
-				if value, ok := d.GetOkExists("name"); ok {
-					name := value.(string)
-					params.FilterName = &name
-				}
-			
+	if value, ok := d.GetOkExists("name"); ok {
+		name := value.(string)
+		params.FilterName = &name
+	}
 
-				if value, ok := d.GetOkExists("slug"); ok {
-					slug := value.(string)
-					params.FilterSlug = &slug
-				}
-			
+	if value, ok := d.GetOkExists("slug"); ok {
+		slug := value.(string)
+		params.FilterSlug = &slug
+	}
 
-				if value, ok := d.GetOkExists("kind"); ok {
-					kind := value.(string)
-					params.FilterKind = &kind
-				}
-			
+	if value, ok := d.GetOkExists("kind"); ok {
+		kind := value.(string)
+		params.FilterKind = &kind
+	}
 
-				if value, ok := d.GetOkExists("expanded"); ok {
-					expanded := value.(bool)
-					params.FilterExpanded = &expanded
-				}
-			
+	if value, ok := d.GetOkExists("expanded"); ok {
+		expanded := value.(bool)
+		params.FilterExpanded = &expanded
+	}
 
-				if value, ok := d.GetOkExists("position"); ok {
-					position := value.(int)
-					params.FilterPosition = &position
-				}
-			
+	if value, ok := d.GetOkExists("position"); ok {
+		position := value.(int)
+		params.FilterPosition = &position
+	}
 
 	items, err := c.ListWorkflowGroups(params)
 	if err != nil {

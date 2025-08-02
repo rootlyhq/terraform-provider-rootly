@@ -4,71 +4,76 @@ package provider
 
 import (
 	"context"
-	
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	
+
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 func dataSourceTeam() *schema.Resource {
-	return &schema.Resource {
+	return &schema.Resource{
 		ReadContext: dataSourceTeamRead,
-		Schema: map[string]*schema.Schema {
-			"id": &schema.Schema {
-				Type: schema.TypeString,
+		Schema: map[string]*schema.Schema{
+			"id": &schema.Schema{
+				Type:     schema.TypeString,
 				Computed: true,
 			},
-			
-			"name": &schema.Schema {
-				Type: schema.TypeString,
+
+			"name": &schema.Schema{
+				Type:     schema.TypeString,
 				Computed: true,
 				Optional: true,
 			},
-			
 
-			"slug": &schema.Schema {
-				Type: schema.TypeString,
+			"slug": &schema.Schema{
+				Type:     schema.TypeString,
 				Computed: true,
 				Optional: true,
 			},
-			
 
-			"color": &schema.Schema {
-				Type: schema.TypeString,
+			"color": &schema.Schema{
+				Type:     schema.TypeString,
 				Computed: true,
 				Optional: true,
 			},
-			
 
-			"backstage_id": &schema.Schema {
-				Type: schema.TypeString,
+			"backstage_id": &schema.Schema{
+				Type:     schema.TypeString,
 				Computed: true,
 				Optional: true,
 			},
-			
 
-			"external_id": &schema.Schema {
-				Type: schema.TypeString,
+			"external_id": &schema.Schema{
+				Type:     schema.TypeString,
 				Computed: true,
 				Optional: true,
 			},
-			
 
-			"cortex_id": &schema.Schema {
-				Type: schema.TypeString,
+			"cortex_id": &schema.Schema{
+				Type:     schema.TypeString,
 				Computed: true,
 				Optional: true,
 			},
-			
 
-				"created_at": &schema.Schema {
-					Type: schema.TypeMap,
-					Description: "Filter by date range using 'lt' and 'gt'.",
-					Optional: true,
-				},
-				
+			"alert_broadcast_enabled": &schema.Schema{
+				Type:     schema.TypeBool,
+				Computed: true,
+				Optional: true,
+			},
+
+			"incident_broadcast_enabled": &schema.Schema{
+				Type:     schema.TypeBool,
+				Computed: true,
+				Optional: true,
+			},
+
+			"created_at": &schema.Schema{
+				Type:        schema.TypeMap,
+				Description: "Filter by date range using 'lt' and 'gt'.",
+				Optional:    true,
+			},
 		},
 	}
 }
@@ -80,56 +85,57 @@ func dataSourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interf
 	page_size := 1
 	params.PageSize = &page_size
 
-	
-				if value, ok := d.GetOkExists("slug"); ok {
-					slug := value.(string)
-					params.FilterSlug = &slug
-				}
-			
+	if value, ok := d.GetOkExists("slug"); ok {
+		slug := value.(string)
+		params.FilterSlug = &slug
+	}
 
-				if value, ok := d.GetOkExists("name"); ok {
-					name := value.(string)
-					params.FilterName = &name
-				}
-			
+	if value, ok := d.GetOkExists("name"); ok {
+		name := value.(string)
+		params.FilterName = &name
+	}
 
-				if value, ok := d.GetOkExists("backstage_id"); ok {
-					backstage_id := value.(string)
-					params.FilterBackstageId = &backstage_id
-				}
-			
+	if value, ok := d.GetOkExists("backstage_id"); ok {
+		backstage_id := value.(string)
+		params.FilterBackstageId = &backstage_id
+	}
 
-				if value, ok := d.GetOkExists("cortex_id"); ok {
-					cortex_id := value.(string)
-					params.FilterCortexId = &cortex_id
-				}
-			
+	if value, ok := d.GetOkExists("cortex_id"); ok {
+		cortex_id := value.(string)
+		params.FilterCortexId = &cortex_id
+	}
 
-				if value, ok := d.GetOkExists("external_id"); ok {
-					external_id := value.(string)
-					params.FilterExternalId = &external_id
-				}
-			
+	if value, ok := d.GetOkExists("external_id"); ok {
+		external_id := value.(string)
+		params.FilterExternalId = &external_id
+	}
 
-				if value, ok := d.GetOkExists("color"); ok {
-					color := value.(string)
-					params.FilterColor = &color
-				}
-			
+	if value, ok := d.GetOkExists("color"); ok {
+		color := value.(string)
+		params.FilterColor = &color
+	}
 
-				created_at_gt := d.Get("created_at").(map[string]interface{})
-				if value, exists := created_at_gt["gt"]; exists {
-					v := value.(string)
-					params.FilterCreatedAtGt = &v
-				}
-			
+	if value, ok := d.GetOkExists("alert_broadcast_enabled"); ok {
+		alert_broadcast_enabled := value.(bool)
+		params.FilterAlertBroadcastEnabled = &alert_broadcast_enabled
+	}
 
-				created_at_lt := d.Get("created_at").(map[string]interface{})
-				if value, exists := created_at_lt["lt"]; exists {
-					v := value.(string)
-					params.FilterCreatedAtLt = &v
-				}
-			
+	if value, ok := d.GetOkExists("incident_broadcast_enabled"); ok {
+		incident_broadcast_enabled := value.(bool)
+		params.FilterIncidentBroadcastEnabled = &incident_broadcast_enabled
+	}
+
+	created_at_gt := d.Get("created_at").(map[string]interface{})
+	if value, exists := created_at_gt["gt"]; exists {
+		v := value.(string)
+		params.FilterCreatedAtGt = &v
+	}
+
+	created_at_lt := d.Get("created_at").(map[string]interface{})
+	if value, exists := created_at_lt["lt"]; exists {
+		v := value.(string)
+		params.FilterCreatedAtLt = &v
+	}
 
 	items, err := c.ListTeams(params)
 	if err != nil {

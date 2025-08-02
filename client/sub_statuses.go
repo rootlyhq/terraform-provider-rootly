@@ -3,20 +3,20 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type SubStatus struct {
-	ID string `jsonapi:"primary,sub_statuses"`
-	Name string `jsonapi:"attr,name,omitempty"`
-  Slug string `jsonapi:"attr,slug,omitempty"`
-  Description string `jsonapi:"attr,description,omitempty"`
-  ParentStatus string `jsonapi:"attr,parent_status,omitempty"`
-  Position int `jsonapi:"attr,position,omitempty"`
+	ID           string `jsonapi:"primary,sub_statuses"`
+	Name         string `jsonapi:"attr,name,omitempty"`
+	Slug         string `jsonapi:"attr,slug,omitempty"`
+	Description  string `jsonapi:"attr,description,omitempty"`
+	ParentStatus string `jsonapi:"attr,parent_status,omitempty"`
+	Position     int    `jsonapi:"attr,position,omitempty"`
 }
 
 func (c *Client) ListSubStatuses(params *rootlygo.ListSubStatusesParams) ([]interface{}, error) {

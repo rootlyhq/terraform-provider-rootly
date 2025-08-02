@@ -242,6 +242,15 @@ function updateResourceFields(name, resourceSchema) {
           schema.type
         )}))
 			}`;
+      } else if (schema.type == "array") {
+        return `
+          s.${inflect.camelize(field)} = []interface{}{}
+          if value, ok := d.GetOk("${field}"); value != nil && ok {
+            if d.HasChange("${field}") {
+              s.${inflect.camelize(field)} = value.([]interface{})
+            }
+          }
+			`;
       } else if (schema.type == "object" && schema.properties && !forceMapFor(name)) {
         return `  if d.HasChange("${field}") {
       		tps := d.Get("${field}").([]interface{})

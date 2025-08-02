@@ -24,7 +24,7 @@ description: |-
 - `alert_urgency_id` (String) This is used in escalation paths to determine who to page
 - `caller_greeting` (String) The caller greeting message of the live_call_router
 - `calling_tree_prompt` (String) The audio instructions callers will hear when they call this number, prompting them to select from available options to route their call
-- `country_code` (String) The country code of the live_call_router. Value must be one of `AU`, `CA`, `NL`, `NZ`, `GB`, `US`.
+- `country_code` (String) The country code of the live_call_router. Value must be one of `AU`, `CA`, `DE`, `NL`, `NZ`, `GB`, `US`.
 - `enabled` (Boolean)
 - `escalation_level_delay_in_seconds` (Number) This overrides the delay (seconds) in escalation levels
 - `escalation_policy_trigger_params` (Map of String)

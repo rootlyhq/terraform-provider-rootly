@@ -8,68 +8,59 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-	
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
-	
 )
 
 func resourceIncidentRoleTask() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceIncidentRoleTaskCreate,
-		ReadContext: resourceIncidentRoleTaskRead,
+		ReadContext:   resourceIncidentRoleTaskRead,
 		UpdateContext: resourceIncidentRoleTaskUpdate,
 		DeleteContext: resourceIncidentRoleTaskDelete,
-		Importer: &schema.ResourceImporter {
+		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema {
-			
-			"incident_role_id": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: true,
+		Schema: map[string]*schema.Schema{
+
+			"incident_role_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    true,
 				Description: "",
-				
 			},
-			
 
-			"task": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+			"task": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The task of the incident task",
-				
 			},
-			
 
-			"description": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"description": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The description of incident task",
-				
 			},
-			
 
-			"priority": &schema.Schema {
-				Type: schema.TypeString,
-				Default: "high",
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "The priority of the incident task. Value must be one of `high`, `medium`, `low`.",
-		ValidateFunc: validation.StringInSlice([]string{"high", "medium", "low"}, false),
-				
+			"priority": &schema.Schema{
+				Type:         schema.TypeString,
+				Default:      "high",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "The priority of the incident task. Value must be one of `high`, `medium`, `low`.",
+				ValidateFunc: validation.StringInSlice([]string{"high", "medium", "low"}, false),
 			},
-			
 		},
 	}
 }
@@ -81,18 +72,18 @@ func resourceIncidentRoleTaskCreate(ctx context.Context, d *schema.ResourceData,
 
 	s := &client.IncidentRoleTask{}
 
-	  if value, ok := d.GetOkExists("incident_role_id"); ok {
-				s.IncidentRoleId = value.(string)
-			}
-    if value, ok := d.GetOkExists("task"); ok {
-				s.Task = value.(string)
-			}
-    if value, ok := d.GetOkExists("description"); ok {
-				s.Description = value.(string)
-			}
-    if value, ok := d.GetOkExists("priority"); ok {
-				s.Priority = value.(string)
-			}
+	if value, ok := d.GetOkExists("incident_role_id"); ok {
+		s.IncidentRoleId = value.(string)
+	}
+	if value, ok := d.GetOkExists("task"); ok {
+		s.Task = value.(string)
+	}
+	if value, ok := d.GetOkExists("description"); ok {
+		s.Description = value.(string)
+	}
+	if value, ok := d.GetOkExists("priority"); ok {
+		s.Priority = value.(string)
+	}
 
 	res, err := c.CreateIncidentRoleTask(s)
 	if err != nil {
@@ -123,9 +114,9 @@ func resourceIncidentRoleTaskRead(ctx context.Context, d *schema.ResourceData, m
 	}
 
 	d.Set("incident_role_id", item.IncidentRoleId)
-  d.Set("task", item.Task)
-  d.Set("description", item.Description)
-  d.Set("priority", item.Priority)
+	d.Set("task", item.Task)
+	d.Set("description", item.Description)
+	d.Set("priority", item.Priority)
 
 	return nil
 }
@@ -136,18 +127,18 @@ func resourceIncidentRoleTaskUpdate(ctx context.Context, d *schema.ResourceData,
 
 	s := &client.IncidentRoleTask{}
 
-	  if d.HasChange("incident_role_id") {
-				s.IncidentRoleId = d.Get("incident_role_id").(string)
-			}
-    if d.HasChange("task") {
-				s.Task = d.Get("task").(string)
-			}
-    if d.HasChange("description") {
-				s.Description = d.Get("description").(string)
-			}
-    if d.HasChange("priority") {
-				s.Priority = d.Get("priority").(string)
-			}
+	if d.HasChange("incident_role_id") {
+		s.IncidentRoleId = d.Get("incident_role_id").(string)
+	}
+	if d.HasChange("task") {
+		s.Task = d.Get("task").(string)
+	}
+	if d.HasChange("description") {
+		s.Description = d.Get("description").(string)
+	}
+	if d.HasChange("priority") {
+		s.Priority = d.Get("priority").(string)
+	}
 
 	_, err := c.UpdateIncidentRoleTask(d.Id(), s)
 	if err != nil {

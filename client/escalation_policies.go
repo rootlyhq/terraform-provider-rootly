@@ -3,23 +3,23 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type EscalationPolicy struct {
-	ID string `jsonapi:"primary,escalation_policies"`
-	Name string `jsonapi:"attr,name,omitempty"`
-  Description string `jsonapi:"attr,description,omitempty"`
-  RepeatCount int `jsonapi:"attr,repeat_count,omitempty"`
-  CreatedByUserId int `jsonapi:"attr,created_by_user_id,omitempty"`
-  LastUpdatedByUserId int `jsonapi:"attr,last_updated_by_user_id,omitempty"`
-  GroupIds []interface{} `jsonapi:"attr,group_ids,omitempty"`
-  ServiceIds []interface{} `jsonapi:"attr,service_ids,omitempty"`
-  BusinessHours map[string]interface{} `jsonapi:"attr,business_hours,omitempty"`
+	ID                  string                 `jsonapi:"primary,escalation_policies"`
+	Name                string                 `jsonapi:"attr,name,omitempty"`
+	Description         string                 `jsonapi:"attr,description,omitempty"`
+	RepeatCount         int                    `jsonapi:"attr,repeat_count,omitempty"`
+	CreatedByUserId     int                    `jsonapi:"attr,created_by_user_id,omitempty"`
+	LastUpdatedByUserId int                    `jsonapi:"attr,last_updated_by_user_id,omitempty"`
+	GroupIds            []interface{}          `jsonapi:"attr,group_ids,omitempty"`
+	ServiceIds          []interface{}          `jsonapi:"attr,service_ids,omitempty"`
+	BusinessHours       map[string]interface{} `jsonapi:"attr,business_hours,omitempty"`
 }
 
 func (c *Client) ListEscalationPolicies(params *rootlygo.ListEscalationPoliciesParams) ([]interface{}, error) {

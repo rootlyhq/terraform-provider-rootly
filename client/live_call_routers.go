@@ -3,32 +3,32 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type LiveCallRouter struct {
-	ID string `jsonapi:"primary,live_call_routers"`
-	Kind string `jsonapi:"attr,kind,omitempty"`
-  Enabled *bool `jsonapi:"attr,enabled,omitempty"`
-  Name string `jsonapi:"attr,name,omitempty"`
-  CountryCode string `jsonapi:"attr,country_code,omitempty"`
-  PhoneType string `jsonapi:"attr,phone_type,omitempty"`
-  PhoneNumber string `jsonapi:"attr,phone_number,omitempty"`
-  VoicemailGreeting string `jsonapi:"attr,voicemail_greeting,omitempty"`
-  CallerGreeting string `jsonapi:"attr,caller_greeting,omitempty"`
-  WaitingMusicUrl string `jsonapi:"attr,waiting_music_url,omitempty"`
-  SentToVoicemailDelay int `jsonapi:"attr,sent_to_voicemail_delay,omitempty"`
-  ShouldRedirectToVoicemailOnNoAnswer *bool `jsonapi:"attr,should_redirect_to_voicemail_on_no_answer,omitempty"`
-  EscalationLevelDelayInSeconds int `jsonapi:"attr,escalation_level_delay_in_seconds,omitempty"`
-  ShouldAutoResolveAlertOnCallEnd *bool `jsonapi:"attr,should_auto_resolve_alert_on_call_end,omitempty"`
-  AlertUrgencyId string `jsonapi:"attr,alert_urgency_id,omitempty"`
-  CallingTreePrompt string `jsonapi:"attr,calling_tree_prompt,omitempty"`
-  PagingTargets []interface{} `jsonapi:"attr,paging_targets,omitempty"`
-  EscalationPolicyTriggerParams map[string]interface{} `jsonapi:"attr,escalation_policy_trigger_params,omitempty"`
+	ID                                  string                 `jsonapi:"primary,live_call_routers"`
+	Kind                                string                 `jsonapi:"attr,kind,omitempty"`
+	Enabled                             *bool                  `jsonapi:"attr,enabled,omitempty"`
+	Name                                string                 `jsonapi:"attr,name,omitempty"`
+	CountryCode                         string                 `jsonapi:"attr,country_code,omitempty"`
+	PhoneType                           string                 `jsonapi:"attr,phone_type,omitempty"`
+	PhoneNumber                         string                 `jsonapi:"attr,phone_number,omitempty"`
+	VoicemailGreeting                   string                 `jsonapi:"attr,voicemail_greeting,omitempty"`
+	CallerGreeting                      string                 `jsonapi:"attr,caller_greeting,omitempty"`
+	WaitingMusicUrl                     string                 `jsonapi:"attr,waiting_music_url,omitempty"`
+	SentToVoicemailDelay                int                    `jsonapi:"attr,sent_to_voicemail_delay,omitempty"`
+	ShouldRedirectToVoicemailOnNoAnswer *bool                  `jsonapi:"attr,should_redirect_to_voicemail_on_no_answer,omitempty"`
+	EscalationLevelDelayInSeconds       int                    `jsonapi:"attr,escalation_level_delay_in_seconds,omitempty"`
+	ShouldAutoResolveAlertOnCallEnd     *bool                  `jsonapi:"attr,should_auto_resolve_alert_on_call_end,omitempty"`
+	AlertUrgencyId                      string                 `jsonapi:"attr,alert_urgency_id,omitempty"`
+	CallingTreePrompt                   string                 `jsonapi:"attr,calling_tree_prompt,omitempty"`
+	PagingTargets                       []interface{}          `jsonapi:"attr,paging_targets,omitempty"`
+	EscalationPolicyTriggerParams       map[string]interface{} `jsonapi:"attr,escalation_policy_trigger_params,omitempty"`
 }
 
 func (c *Client) ListLiveCallRouters(params *rootlygo.ListLiveCallRoutersParams) ([]interface{}, error) {

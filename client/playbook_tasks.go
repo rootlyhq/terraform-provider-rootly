@@ -3,19 +3,19 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type PlaybookTask struct {
-	ID string `jsonapi:"primary,playbook_tasks"`
-	PlaybookId string `jsonapi:"attr,playbook_id,omitempty"`
-  Task string `jsonapi:"attr,task,omitempty"`
-  Description string `jsonapi:"attr,description,omitempty"`
-  Position int `jsonapi:"attr,position,omitempty"`
+	ID          string `jsonapi:"primary,playbook_tasks"`
+	PlaybookId  string `jsonapi:"attr,playbook_id,omitempty"`
+	Task        string `jsonapi:"attr,task,omitempty"`
+	Description string `jsonapi:"attr,description,omitempty"`
+	Position    int    `jsonapi:"attr,position,omitempty"`
 }
 
 func (c *Client) ListPlaybookTasks(id string, params *rootlygo.ListPlaybookTasksParams) ([]interface{}, error) {

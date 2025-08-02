@@ -3,28 +3,28 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type AlertsSource struct {
-	ID string `jsonapi:"primary,alert_sources"`
-	Name string `jsonapi:"attr,name,omitempty"`
-  SourceType string `jsonapi:"attr,source_type,omitempty"`
-  AlertUrgencyId string `jsonapi:"attr,alert_urgency_id,omitempty"`
-  OwnerGroupIds []interface{} `jsonapi:"attr,owner_group_ids,omitempty"`
-  AlertTemplateAttributes map[string]interface{} `jsonapi:"attr,alert_template_attributes,omitempty"`
-  AlertSourceUrgencyRulesAttributes []interface{} `jsonapi:"attr,alert_source_urgency_rules_attributes,omitempty"`
-  SourceableAttributes map[string]interface{} `jsonapi:"attr,sourceable_attributes,omitempty"`
-  ResolutionRuleAttributes map[string]interface{} `jsonapi:"attr,resolution_rule_attributes,omitempty"`
-  AlertSourceFieldsAttributes []interface{} `jsonapi:"attr,alert_source_fields_attributes,omitempty"`
-  Status string `jsonapi:"attr,status,omitempty"`
-  Secret string `jsonapi:"attr,secret,omitempty"`
-  Email string `jsonapi:"attr,email,omitempty"`
-  WebhookEndpoint string `jsonapi:"attr,webhook_endpoint,omitempty"`
+	ID                                string                 `jsonapi:"primary,alert_sources"`
+	Name                              string                 `jsonapi:"attr,name,omitempty"`
+	SourceType                        string                 `jsonapi:"attr,source_type,omitempty"`
+	AlertUrgencyId                    string                 `jsonapi:"attr,alert_urgency_id,omitempty"`
+	OwnerGroupIds                     []interface{}          `jsonapi:"attr,owner_group_ids,omitempty"`
+	AlertTemplateAttributes           map[string]interface{} `jsonapi:"attr,alert_template_attributes,omitempty"`
+	AlertSourceUrgencyRulesAttributes []interface{}          `jsonapi:"attr,alert_source_urgency_rules_attributes,omitempty"`
+	SourceableAttributes              map[string]interface{} `jsonapi:"attr,sourceable_attributes,omitempty"`
+	ResolutionRuleAttributes          map[string]interface{} `jsonapi:"attr,resolution_rule_attributes,omitempty"`
+	AlertSourceFieldsAttributes       []interface{}          `jsonapi:"attr,alert_source_fields_attributes,omitempty"`
+	Status                            string                 `jsonapi:"attr,status,omitempty"`
+	Secret                            string                 `jsonapi:"attr,secret,omitempty"`
+	Email                             string                 `jsonapi:"attr,email,omitempty"`
+	WebhookEndpoint                   string                 `jsonapi:"attr,webhook_endpoint,omitempty"`
 }
 
 func (c *Client) ListAlertsSources(params *rootlygo.ListAlertsSourcesParams) ([]interface{}, error) {

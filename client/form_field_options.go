@@ -3,20 +3,20 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type FormFieldOption struct {
-	ID string `jsonapi:"primary,form_field_options"`
+	ID          string `jsonapi:"primary,form_field_options"`
 	FormFieldId string `jsonapi:"attr,form_field_id,omitempty"`
-  Value string `jsonapi:"attr,value,omitempty"`
-  Color string `jsonapi:"attr,color,omitempty"`
-  Default *bool `jsonapi:"attr,default,omitempty"`
-  Position int `jsonapi:"attr,position,omitempty"`
+	Value       string `jsonapi:"attr,value,omitempty"`
+	Color       string `jsonapi:"attr,color,omitempty"`
+	Default     *bool  `jsonapi:"attr,default,omitempty"`
+	Position    int    `jsonapi:"attr,position,omitempty"`
 }
 
 func (c *Client) ListFormFieldOptions(id string, params *rootlygo.ListFormFieldOptionsParams) ([]interface{}, error) {

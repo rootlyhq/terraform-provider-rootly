@@ -3,41 +3,45 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type Service struct {
-	ID string `jsonapi:"primary,services"`
-	Name string `jsonapi:"attr,name,omitempty"`
-  Slug string `jsonapi:"attr,slug,omitempty"`
-  Description string `jsonapi:"attr,description,omitempty"`
-  PublicDescription string `jsonapi:"attr,public_description,omitempty"`
-  NotifyEmails []interface{} `jsonapi:"attr,notify_emails,omitempty"`
-  Color string `jsonapi:"attr,color,omitempty"`
-  Position int `jsonapi:"attr,position,omitempty"`
-  BackstageId string `jsonapi:"attr,backstage_id"`
-  ExternalId string `jsonapi:"attr,external_id"`
-  PagerdutyId string `jsonapi:"attr,pagerduty_id"`
-  OpsgenieId string `jsonapi:"attr,opsgenie_id"`
-  CortexId string `jsonapi:"attr,cortex_id"`
-  ServiceNowCiSysId string `jsonapi:"attr,service_now_ci_sys_id"`
-  GithubRepositoryName string `jsonapi:"attr,github_repository_name,omitempty"`
-  GithubRepositoryBranch string `jsonapi:"attr,github_repository_branch,omitempty"`
-  GitlabRepositoryName string `jsonapi:"attr,gitlab_repository_name,omitempty"`
-  GitlabRepositoryBranch string `jsonapi:"attr,gitlab_repository_branch,omitempty"`
-  EnvironmentIds []interface{} `jsonapi:"attr,environment_ids,omitempty"`
-  ServiceIds []interface{} `jsonapi:"attr,service_ids,omitempty"`
-  OwnerGroupIds []interface{} `jsonapi:"attr,owner_group_ids,omitempty"`
-  OwnerUserIds []interface{} `jsonapi:"attr,owner_user_ids,omitempty"`
-  AlertUrgencyId string `jsonapi:"attr,alert_urgency_id,omitempty"`
-  AlertsEmailEnabled *bool `jsonapi:"attr,alerts_email_enabled,omitempty"`
-  AlertsEmailAddress string `jsonapi:"attr,alerts_email_address,omitempty"`
-  SlackChannels []interface{} `jsonapi:"attr,slack_channels,omitempty"`
-  SlackAliases []interface{} `jsonapi:"attr,slack_aliases,omitempty"`
+	ID                       string                 `jsonapi:"primary,services"`
+	Name                     string                 `jsonapi:"attr,name,omitempty"`
+	Slug                     string                 `jsonapi:"attr,slug,omitempty"`
+	Description              string                 `jsonapi:"attr,description,omitempty"`
+	PublicDescription        string                 `jsonapi:"attr,public_description,omitempty"`
+	NotifyEmails             []interface{}          `jsonapi:"attr,notify_emails,omitempty"`
+	Color                    string                 `jsonapi:"attr,color,omitempty"`
+	Position                 int                    `jsonapi:"attr,position,omitempty"`
+	BackstageId              string                 `jsonapi:"attr,backstage_id"`
+	ExternalId               string                 `jsonapi:"attr,external_id"`
+	PagerdutyId              string                 `jsonapi:"attr,pagerduty_id"`
+	OpsgenieId               string                 `jsonapi:"attr,opsgenie_id"`
+	CortexId                 string                 `jsonapi:"attr,cortex_id"`
+	ServiceNowCiSysId        string                 `jsonapi:"attr,service_now_ci_sys_id"`
+	GithubRepositoryName     string                 `jsonapi:"attr,github_repository_name,omitempty"`
+	GithubRepositoryBranch   string                 `jsonapi:"attr,github_repository_branch,omitempty"`
+	GitlabRepositoryName     string                 `jsonapi:"attr,gitlab_repository_name,omitempty"`
+	GitlabRepositoryBranch   string                 `jsonapi:"attr,gitlab_repository_branch,omitempty"`
+	EnvironmentIds           []interface{}          `jsonapi:"attr,environment_ids,omitempty"`
+	ServiceIds               []interface{}          `jsonapi:"attr,service_ids,omitempty"`
+	OwnerGroupIds            []interface{}          `jsonapi:"attr,owner_group_ids,omitempty"`
+	OwnerUserIds             []interface{}          `jsonapi:"attr,owner_user_ids,omitempty"`
+	AlertUrgencyId           string                 `jsonapi:"attr,alert_urgency_id,omitempty"`
+	AlertsEmailEnabled       *bool                  `jsonapi:"attr,alerts_email_enabled,omitempty"`
+	AlertsEmailAddress       string                 `jsonapi:"attr,alerts_email_address,omitempty"`
+	SlackChannels            []interface{}          `jsonapi:"attr,slack_channels,omitempty"`
+	SlackAliases             []interface{}          `jsonapi:"attr,slack_aliases,omitempty"`
+	AlertBroadcastEnabled    *bool                  `jsonapi:"attr,alert_broadcast_enabled,omitempty"`
+	AlertBroadcastChannel    map[string]interface{} `jsonapi:"attr,alert_broadcast_channel,omitempty"`
+	IncidentBroadcastEnabled *bool                  `jsonapi:"attr,incident_broadcast_enabled,omitempty"`
+	IncidentBroadcastChannel map[string]interface{} `jsonapi:"attr,incident_broadcast_channel,omitempty"`
 }
 
 func (c *Client) ListServices(params *rootlygo.ListServicesParams) ([]interface{}, error) {

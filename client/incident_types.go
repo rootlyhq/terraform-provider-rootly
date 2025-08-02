@@ -3,23 +3,23 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type IncidentType struct {
-	ID string `jsonapi:"primary,incident_types"`
-	Name string `jsonapi:"attr,name,omitempty"`
-  Slug string `jsonapi:"attr,slug,omitempty"`
-  Description string `jsonapi:"attr,description,omitempty"`
-  Color string `jsonapi:"attr,color,omitempty"`
-  Position int `jsonapi:"attr,position,omitempty"`
-  NotifyEmails []interface{} `jsonapi:"attr,notify_emails,omitempty"`
-  SlackChannels []interface{} `jsonapi:"attr,slack_channels,omitempty"`
-  SlackAliases []interface{} `jsonapi:"attr,slack_aliases,omitempty"`
+	ID            string        `jsonapi:"primary,incident_types"`
+	Name          string        `jsonapi:"attr,name,omitempty"`
+	Slug          string        `jsonapi:"attr,slug,omitempty"`
+	Description   string        `jsonapi:"attr,description,omitempty"`
+	Color         string        `jsonapi:"attr,color,omitempty"`
+	Position      int           `jsonapi:"attr,position,omitempty"`
+	NotifyEmails  []interface{} `jsonapi:"attr,notify_emails,omitempty"`
+	SlackChannels []interface{} `jsonapi:"attr,slack_channels,omitempty"`
+	SlackAliases  []interface{} `jsonapi:"attr,slack_aliases,omitempty"`
 }
 
 func (c *Client) ListIncidentTypes(params *rootlygo.ListIncidentTypesParams) ([]interface{}, error) {

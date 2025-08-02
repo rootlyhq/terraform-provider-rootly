@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-	
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
@@ -18,171 +18,143 @@ import (
 func resourceHeartbeat() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceHeartbeatCreate,
-		ReadContext: resourceHeartbeatRead,
+		ReadContext:   resourceHeartbeatRead,
 		UpdateContext: resourceHeartbeatUpdate,
 		DeleteContext: resourceHeartbeatDelete,
-		Importer: &schema.ResourceImporter {
+		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		Schema: map[string]*schema.Schema {
-			
-			"name": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+		Schema: map[string]*schema.Schema{
+
+			"name": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "The name of the heartbeat",
-				
 			},
-			
 
-			"description": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"description": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "The description of the heartbeat",
-				
 			},
-			
 
-			"alert_summary": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+			"alert_summary": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "Summary of alerts triggered when heartbeat expires.",
-				
 			},
-			
 
-			"alert_urgency_id": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"alert_urgency_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "Urgency of alerts triggered when heartbeat expires.",
-				
 			},
-			
 
-		"interval": &schema.Schema {
-			Type: schema.TypeInt,
-			Computed: false,
-			Required: true,
-			Optional: false,
-			ForceNew: false,
-			Description: "",
-			
-		},
-		
-
-			"interval_unit": &schema.Schema {
-				Type: schema.TypeString,
-				Default: "seconds",
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Value must be one of `seconds`, `minutes`, `hours`.",
-		ValidateFunc: validation.StringInSlice([]string{"seconds", "minutes", "hours"}, false),
-				
-			},
-			
-
-			"notification_target_id": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: false,
-				Required: true,
-				Optional: false,
-				ForceNew: false,
+			"interval": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
 				Description: "",
-				
 			},
-			
 
-			"notification_target_type": &schema.Schema {
-				Type: schema.TypeString,
-				Default: "User",
-				Required: false,
+			"interval_unit": &schema.Schema{
+				Type:         schema.TypeString,
+				Default:      "seconds",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "Value must be one of `seconds`, `minutes`, `hours`.",
+				ValidateFunc: validation.StringInSlice([]string{"seconds", "minutes", "hours"}, false),
+			},
+
+			"notification_target_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				ForceNew:    false,
+				Description: "",
+			},
+
+			"notification_target_type": &schema.Schema{
+				Type:         schema.TypeString,
+				Default:      "User",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "Value must be one of `User`, `Group`, `Service`, `EscalationPolicy`.",
+				ValidateFunc: validation.StringInSlice([]string{"User", "Group", "Service", "EscalationPolicy"}, false),
+			},
+
+			"enabled": &schema.Schema{
+				Type:     schema.TypeBool,
+				Default:  true,
 				Optional: true,
-				ForceNew: false,
-				Description: "Value must be one of `User`, `Group`, `Service`, `EscalationPolicy`.",
-		ValidateFunc: validation.StringInSlice([]string{"User", "Group", "Service", "EscalationPolicy"}, false),
-				
 			},
-			
 
-				"enabled": &schema.Schema {
-					Type: schema.TypeBool,
-					Default: true,
-					Optional: true,
-					
+			"status": &schema.Schema{
+				Type:         schema.TypeString,
+				Computed:     true,
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "Value must be one of `waiting`, `active`, `expired`.",
+				ValidateFunc: validation.StringInSlice([]string{"waiting", "active", "expired"}, false),
+
+				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+					return len(old) != 0
 				},
-				
-
-			"status": &schema.Schema {
-				Type: schema.TypeString,
-				Default: "waiting",
-				Required: false,
-				Optional: true,
-				ForceNew: false,
-				Description: "Value must be one of `waiting`, `active`, `expired`.",
-		ValidateFunc: validation.StringInSlice([]string{"waiting", "active", "expired"}, false),
-				
-		DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-			return len(old) != 0
-		},
-	
 			},
-			
 
-			"ping_url": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"ping_url": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "URL to receive heartbeat pings.",
-				
 			},
-			
 
-			"secret": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"secret": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "Secret used as bearer token when pinging heartbeat.",
-				
 			},
-			
 
-			"last_pinged_at": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"last_pinged_at": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "When the heartbeat was last pinged.",
-				
 			},
-			
 
-			"expires_at": &schema.Schema {
-				Type: schema.TypeString,
-				Computed: true,
-				Required: false,
-				Optional: true,
-				ForceNew: false,
+			"expires_at": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
 				Description: "When heartbeat expires",
-				
 			},
-			
 		},
 	}
 }
@@ -194,48 +166,48 @@ func resourceHeartbeatCreate(ctx context.Context, d *schema.ResourceData, meta i
 
 	s := &client.Heartbeat{}
 
-	  if value, ok := d.GetOkExists("name"); ok {
-				s.Name = value.(string)
-			}
-    if value, ok := d.GetOkExists("description"); ok {
-				s.Description = value.(string)
-			}
-    if value, ok := d.GetOkExists("alert_summary"); ok {
-				s.AlertSummary = value.(string)
-			}
-    if value, ok := d.GetOkExists("alert_urgency_id"); ok {
-				s.AlertUrgencyId = value.(string)
-			}
-    if value, ok := d.GetOkExists("interval"); ok {
-				s.Interval = value.(int)
-			}
-    if value, ok := d.GetOkExists("interval_unit"); ok {
-				s.IntervalUnit = value.(string)
-			}
-    if value, ok := d.GetOkExists("notification_target_id"); ok {
-				s.NotificationTargetId = value.(string)
-			}
-    if value, ok := d.GetOkExists("notification_target_type"); ok {
-				s.NotificationTargetType = value.(string)
-			}
-    if value, ok := d.GetOkExists("enabled"); ok {
-				s.Enabled = tools.Bool(value.(bool))
-			}
-    if value, ok := d.GetOkExists("status"); ok {
-				s.Status = value.(string)
-			}
-    if value, ok := d.GetOkExists("ping_url"); ok {
-				s.PingUrl = value.(string)
-			}
-    if value, ok := d.GetOkExists("secret"); ok {
-				s.Secret = value.(string)
-			}
-    if value, ok := d.GetOkExists("last_pinged_at"); ok {
-				s.LastPingedAt = value.(string)
-			}
-    if value, ok := d.GetOkExists("expires_at"); ok {
-				s.ExpiresAt = value.(string)
-			}
+	if value, ok := d.GetOkExists("name"); ok {
+		s.Name = value.(string)
+	}
+	if value, ok := d.GetOkExists("description"); ok {
+		s.Description = value.(string)
+	}
+	if value, ok := d.GetOkExists("alert_summary"); ok {
+		s.AlertSummary = value.(string)
+	}
+	if value, ok := d.GetOkExists("alert_urgency_id"); ok {
+		s.AlertUrgencyId = value.(string)
+	}
+	if value, ok := d.GetOkExists("interval"); ok {
+		s.Interval = value.(int)
+	}
+	if value, ok := d.GetOkExists("interval_unit"); ok {
+		s.IntervalUnit = value.(string)
+	}
+	if value, ok := d.GetOkExists("notification_target_id"); ok {
+		s.NotificationTargetId = value.(string)
+	}
+	if value, ok := d.GetOkExists("notification_target_type"); ok {
+		s.NotificationTargetType = value.(string)
+	}
+	if value, ok := d.GetOkExists("enabled"); ok {
+		s.Enabled = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("status"); ok {
+		s.Status = value.(string)
+	}
+	if value, ok := d.GetOkExists("ping_url"); ok {
+		s.PingUrl = value.(string)
+	}
+	if value, ok := d.GetOkExists("secret"); ok {
+		s.Secret = value.(string)
+	}
+	if value, ok := d.GetOkExists("last_pinged_at"); ok {
+		s.LastPingedAt = value.(string)
+	}
+	if value, ok := d.GetOkExists("expires_at"); ok {
+		s.ExpiresAt = value.(string)
+	}
 
 	res, err := c.CreateHeartbeat(s)
 	if err != nil {
@@ -266,19 +238,19 @@ func resourceHeartbeatRead(ctx context.Context, d *schema.ResourceData, meta int
 	}
 
 	d.Set("name", item.Name)
-  d.Set("description", item.Description)
-  d.Set("alert_summary", item.AlertSummary)
-  d.Set("alert_urgency_id", item.AlertUrgencyId)
-  d.Set("interval", item.Interval)
-  d.Set("interval_unit", item.IntervalUnit)
-  d.Set("notification_target_id", item.NotificationTargetId)
-  d.Set("notification_target_type", item.NotificationTargetType)
-  d.Set("enabled", item.Enabled)
-  d.Set("status", item.Status)
-  d.Set("ping_url", item.PingUrl)
-  d.Set("secret", item.Secret)
-  d.Set("last_pinged_at", item.LastPingedAt)
-  d.Set("expires_at", item.ExpiresAt)
+	d.Set("description", item.Description)
+	d.Set("alert_summary", item.AlertSummary)
+	d.Set("alert_urgency_id", item.AlertUrgencyId)
+	d.Set("interval", item.Interval)
+	d.Set("interval_unit", item.IntervalUnit)
+	d.Set("notification_target_id", item.NotificationTargetId)
+	d.Set("notification_target_type", item.NotificationTargetType)
+	d.Set("enabled", item.Enabled)
+	d.Set("status", item.Status)
+	d.Set("ping_url", item.PingUrl)
+	d.Set("secret", item.Secret)
+	d.Set("last_pinged_at", item.LastPingedAt)
+	d.Set("expires_at", item.ExpiresAt)
 
 	return nil
 }
@@ -289,48 +261,48 @@ func resourceHeartbeatUpdate(ctx context.Context, d *schema.ResourceData, meta i
 
 	s := &client.Heartbeat{}
 
-	  if d.HasChange("name") {
-				s.Name = d.Get("name").(string)
-			}
-    if d.HasChange("description") {
-				s.Description = d.Get("description").(string)
-			}
-    if d.HasChange("alert_summary") {
-				s.AlertSummary = d.Get("alert_summary").(string)
-			}
-    if d.HasChange("alert_urgency_id") {
-				s.AlertUrgencyId = d.Get("alert_urgency_id").(string)
-			}
-    if d.HasChange("interval") {
-				s.Interval = d.Get("interval").(int)
-			}
-    if d.HasChange("interval_unit") {
-				s.IntervalUnit = d.Get("interval_unit").(string)
-			}
-    if d.HasChange("notification_target_id") {
-				s.NotificationTargetId = d.Get("notification_target_id").(string)
-			}
-    if d.HasChange("notification_target_type") {
-				s.NotificationTargetType = d.Get("notification_target_type").(string)
-			}
-    if d.HasChange("enabled") {
-				s.Enabled = tools.Bool(d.Get("enabled").(bool))
-			}
-    if d.HasChange("status") {
-				s.Status = d.Get("status").(string)
-			}
-    if d.HasChange("ping_url") {
-				s.PingUrl = d.Get("ping_url").(string)
-			}
-    if d.HasChange("secret") {
-				s.Secret = d.Get("secret").(string)
-			}
-    if d.HasChange("last_pinged_at") {
-				s.LastPingedAt = d.Get("last_pinged_at").(string)
-			}
-    if d.HasChange("expires_at") {
-				s.ExpiresAt = d.Get("expires_at").(string)
-			}
+	if d.HasChange("name") {
+		s.Name = d.Get("name").(string)
+	}
+	if d.HasChange("description") {
+		s.Description = d.Get("description").(string)
+	}
+	if d.HasChange("alert_summary") {
+		s.AlertSummary = d.Get("alert_summary").(string)
+	}
+	if d.HasChange("alert_urgency_id") {
+		s.AlertUrgencyId = d.Get("alert_urgency_id").(string)
+	}
+	if d.HasChange("interval") {
+		s.Interval = d.Get("interval").(int)
+	}
+	if d.HasChange("interval_unit") {
+		s.IntervalUnit = d.Get("interval_unit").(string)
+	}
+	if d.HasChange("notification_target_id") {
+		s.NotificationTargetId = d.Get("notification_target_id").(string)
+	}
+	if d.HasChange("notification_target_type") {
+		s.NotificationTargetType = d.Get("notification_target_type").(string)
+	}
+	if d.HasChange("enabled") {
+		s.Enabled = tools.Bool(d.Get("enabled").(bool))
+	}
+	if d.HasChange("status") {
+		s.Status = d.Get("status").(string)
+	}
+	if d.HasChange("ping_url") {
+		s.PingUrl = d.Get("ping_url").(string)
+	}
+	if d.HasChange("secret") {
+		s.Secret = d.Get("secret").(string)
+	}
+	if d.HasChange("last_pinged_at") {
+		s.LastPingedAt = d.Get("last_pinged_at").(string)
+	}
+	if d.HasChange("expires_at") {
+		s.ExpiresAt = d.Get("expires_at").(string)
+	}
 
 	_, err := c.UpdateHeartbeat(d.Id(), s)
 	if err != nil {

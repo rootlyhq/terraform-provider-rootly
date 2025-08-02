@@ -3,26 +3,26 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type AlertGroup struct {
-	ID string `jsonapi:"primary,alert_groups"`
-	Name string `jsonapi:"attr,name,omitempty"`
-  Description string `jsonapi:"attr,description,omitempty"`
-  Slug string `jsonapi:"attr,slug,omitempty"`
-  ConditionType string `jsonapi:"attr,condition_type,omitempty"`
-  TimeWindow int `jsonapi:"attr,time_window,omitempty"`
-  GroupByAlertTitle *bool `jsonapi:"attr,group_by_alert_title,omitempty"`
-  GroupByAlertUrgency *bool `jsonapi:"attr,group_by_alert_urgency,omitempty"`
-  Targets []interface{} `jsonapi:"attr,targets,omitempty"`
-  Attributes []interface{} `jsonapi:"attr,attributes,omitempty"`
-  Conditions []interface{} `jsonapi:"attr,conditions,omitempty"`
-  DeletedAt string `jsonapi:"attr,deleted_at,omitempty"`
+	ID                  string        `jsonapi:"primary,alert_groups"`
+	Name                string        `jsonapi:"attr,name,omitempty"`
+	Description         string        `jsonapi:"attr,description,omitempty"`
+	Slug                string        `jsonapi:"attr,slug,omitempty"`
+	ConditionType       string        `jsonapi:"attr,condition_type,omitempty"`
+	TimeWindow          int           `jsonapi:"attr,time_window,omitempty"`
+	GroupByAlertTitle   *bool         `jsonapi:"attr,group_by_alert_title,omitempty"`
+	GroupByAlertUrgency *bool         `jsonapi:"attr,group_by_alert_urgency,omitempty"`
+	Targets             []interface{} `jsonapi:"attr,targets,omitempty"`
+	Attributes          []interface{} `jsonapi:"attr,attributes,omitempty"`
+	Conditions          []interface{} `jsonapi:"attr,conditions,omitempty"`
+	DeletedAt           string        `jsonapi:"attr,deleted_at,omitempty"`
 }
 
 func (c *Client) ListAlertGroups(params *rootlygo.ListAlertGroupsParams) ([]interface{}, error) {

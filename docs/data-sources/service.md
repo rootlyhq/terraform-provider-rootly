@@ -22,10 +22,12 @@ data "rootly_service" "my-service" {
 
 ### Optional
 
+- `alert_broadcast_enabled` (Boolean)
 - `backstage_id` (String)
 - `cortex_id` (String)
 - `created_at` (Map of String) Filter by date range using 'lt' and 'gt'.
 - `external_id` (String)
+- `incident_broadcast_enabled` (Boolean)
 - `name` (String)
 - `slug` (String)
 

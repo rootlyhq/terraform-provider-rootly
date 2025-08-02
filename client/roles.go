@@ -3,46 +3,46 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type Role struct {
-	ID string `jsonapi:"primary,roles"`
-	Name string `jsonapi:"attr,name,omitempty"`
-  Slug string `jsonapi:"attr,slug,omitempty"`
-  IncidentPermissionSetId string `jsonapi:"attr,incident_permission_set_id,omitempty"`
-  IsDeletable *bool `jsonapi:"attr,is_deletable,omitempty"`
-  IsEditable *bool `jsonapi:"attr,is_editable,omitempty"`
-  AlertsPermissions []interface{} `jsonapi:"attr,alerts_permissions,omitempty"`
-  ApiKeysPermissions []interface{} `jsonapi:"attr,api_keys_permissions,omitempty"`
-  AuditsPermissions []interface{} `jsonapi:"attr,audits_permissions,omitempty"`
-  BillingPermissions []interface{} `jsonapi:"attr,billing_permissions,omitempty"`
-  EnvironmentsPermissions []interface{} `jsonapi:"attr,environments_permissions,omitempty"`
-  FormFieldsPermissions []interface{} `jsonapi:"attr,form_fields_permissions,omitempty"`
-  FunctionalitiesPermissions []interface{} `jsonapi:"attr,functionalities_permissions,omitempty"`
-  GroupsPermissions []interface{} `jsonapi:"attr,groups_permissions,omitempty"`
-  IncidentCausesPermissions []interface{} `jsonapi:"attr,incident_causes_permissions,omitempty"`
-  IncidentFeedbacksPermissions []interface{} `jsonapi:"attr,incident_feedbacks_permissions,omitempty"`
-  IncidentRolesPermissions []interface{} `jsonapi:"attr,incident_roles_permissions,omitempty"`
-  IncidentTypesPermissions []interface{} `jsonapi:"attr,incident_types_permissions,omitempty"`
-  IncidentsPermissions []interface{} `jsonapi:"attr,incidents_permissions,omitempty"`
-  IntegrationsPermissions []interface{} `jsonapi:"attr,integrations_permissions,omitempty"`
-  InvitationsPermissions []interface{} `jsonapi:"attr,invitations_permissions,omitempty"`
-  PlaybooksPermissions []interface{} `jsonapi:"attr,playbooks_permissions,omitempty"`
-  PrivateIncidentsPermissions []interface{} `jsonapi:"attr,private_incidents_permissions,omitempty"`
-  PulsesPermissions []interface{} `jsonapi:"attr,pulses_permissions,omitempty"`
-  RetrospectivePermissions []interface{} `jsonapi:"attr,retrospective_permissions,omitempty"`
-  RolesPermissions []interface{} `jsonapi:"attr,roles_permissions,omitempty"`
-  SecretsPermissions []interface{} `jsonapi:"attr,secrets_permissions,omitempty"`
-  ServicesPermissions []interface{} `jsonapi:"attr,services_permissions,omitempty"`
-  SeveritiesPermissions []interface{} `jsonapi:"attr,severities_permissions,omitempty"`
-  StatusPagesPermissions []interface{} `jsonapi:"attr,status_pages_permissions,omitempty"`
-  WebhooksPermissions []interface{} `jsonapi:"attr,webhooks_permissions,omitempty"`
-  WorkflowsPermissions []interface{} `jsonapi:"attr,workflows_permissions,omitempty"`
+	ID                           string        `jsonapi:"primary,roles"`
+	Name                         string        `jsonapi:"attr,name,omitempty"`
+	Slug                         string        `jsonapi:"attr,slug,omitempty"`
+	IncidentPermissionSetId      string        `jsonapi:"attr,incident_permission_set_id,omitempty"`
+	IsDeletable                  *bool         `jsonapi:"attr,is_deletable,omitempty"`
+	IsEditable                   *bool         `jsonapi:"attr,is_editable,omitempty"`
+	AlertsPermissions            []interface{} `jsonapi:"attr,alerts_permissions,omitempty"`
+	ApiKeysPermissions           []interface{} `jsonapi:"attr,api_keys_permissions,omitempty"`
+	AuditsPermissions            []interface{} `jsonapi:"attr,audits_permissions,omitempty"`
+	BillingPermissions           []interface{} `jsonapi:"attr,billing_permissions,omitempty"`
+	EnvironmentsPermissions      []interface{} `jsonapi:"attr,environments_permissions,omitempty"`
+	FormFieldsPermissions        []interface{} `jsonapi:"attr,form_fields_permissions,omitempty"`
+	FunctionalitiesPermissions   []interface{} `jsonapi:"attr,functionalities_permissions,omitempty"`
+	GroupsPermissions            []interface{} `jsonapi:"attr,groups_permissions,omitempty"`
+	IncidentCausesPermissions    []interface{} `jsonapi:"attr,incident_causes_permissions,omitempty"`
+	IncidentFeedbacksPermissions []interface{} `jsonapi:"attr,incident_feedbacks_permissions,omitempty"`
+	IncidentRolesPermissions     []interface{} `jsonapi:"attr,incident_roles_permissions,omitempty"`
+	IncidentTypesPermissions     []interface{} `jsonapi:"attr,incident_types_permissions,omitempty"`
+	IncidentsPermissions         []interface{} `jsonapi:"attr,incidents_permissions,omitempty"`
+	IntegrationsPermissions      []interface{} `jsonapi:"attr,integrations_permissions,omitempty"`
+	InvitationsPermissions       []interface{} `jsonapi:"attr,invitations_permissions,omitempty"`
+	PlaybooksPermissions         []interface{} `jsonapi:"attr,playbooks_permissions,omitempty"`
+	PrivateIncidentsPermissions  []interface{} `jsonapi:"attr,private_incidents_permissions,omitempty"`
+	PulsesPermissions            []interface{} `jsonapi:"attr,pulses_permissions,omitempty"`
+	RetrospectivePermissions     []interface{} `jsonapi:"attr,retrospective_permissions,omitempty"`
+	RolesPermissions             []interface{} `jsonapi:"attr,roles_permissions,omitempty"`
+	SecretsPermissions           []interface{} `jsonapi:"attr,secrets_permissions,omitempty"`
+	ServicesPermissions          []interface{} `jsonapi:"attr,services_permissions,omitempty"`
+	SeveritiesPermissions        []interface{} `jsonapi:"attr,severities_permissions,omitempty"`
+	StatusPagesPermissions       []interface{} `jsonapi:"attr,status_pages_permissions,omitempty"`
+	WebhooksPermissions          []interface{} `jsonapi:"attr,webhooks_permissions,omitempty"`
+	WorkflowsPermissions         []interface{} `jsonapi:"attr,workflows_permissions,omitempty"`
 }
 
 func (c *Client) ListRoles(params *rootlygo.ListRolesParams) ([]interface{}, error) {

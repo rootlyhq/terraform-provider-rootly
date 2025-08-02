@@ -3,19 +3,19 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type IncidentRoleTask struct {
-	ID string `jsonapi:"primary,incident_role_tasks"`
+	ID             string `jsonapi:"primary,incident_role_tasks"`
 	IncidentRoleId string `jsonapi:"attr,incident_role_id,omitempty"`
-  Task string `jsonapi:"attr,task,omitempty"`
-  Description string `jsonapi:"attr,description,omitempty"`
-  Priority string `jsonapi:"attr,priority,omitempty"`
+	Task           string `jsonapi:"attr,task,omitempty"`
+	Description    string `jsonapi:"attr,description,omitempty"`
+	Priority       string `jsonapi:"attr,priority,omitempty"`
 }
 
 func (c *Client) ListIncidentRoleTasks(id string, params *rootlygo.ListIncidentRoleTasksParams) ([]interface{}, error) {

@@ -3,26 +3,26 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type CommunicationsGroup struct {
-	ID string `jsonapi:"primary,communications_groups"`
-	Name string `jsonapi:"attr,name,omitempty"`
-  Slug string `jsonapi:"attr,slug,omitempty"`
-  Description string `jsonapi:"attr,description,omitempty"`
-  CommunicationTypeId string `jsonapi:"attr,communication_type_id,omitempty"`
-  IsPrivate *bool `jsonapi:"attr,is_private,omitempty"`
-  ConditionType string `jsonapi:"attr,condition_type,omitempty"`
-  SmsChannel *bool `jsonapi:"attr,sms_channel,omitempty"`
-  EmailChannel *bool `jsonapi:"attr,email_channel,omitempty"`
-  CommunicationGroupConditions []interface{} `jsonapi:"attr,communication_group_conditions,omitempty"`
-  CommunicationGroupMembers []interface{} `jsonapi:"attr,communication_group_members,omitempty"`
-  CommunicationExternalGroupMembers []interface{} `jsonapi:"attr,communication_external_group_members,omitempty"`
+	ID                                string        `jsonapi:"primary,communications_groups"`
+	Name                              string        `jsonapi:"attr,name,omitempty"`
+	Slug                              string        `jsonapi:"attr,slug,omitempty"`
+	Description                       string        `jsonapi:"attr,description,omitempty"`
+	CommunicationTypeId               string        `jsonapi:"attr,communication_type_id,omitempty"`
+	IsPrivate                         *bool         `jsonapi:"attr,is_private,omitempty"`
+	ConditionType                     string        `jsonapi:"attr,condition_type,omitempty"`
+	SmsChannel                        *bool         `jsonapi:"attr,sms_channel,omitempty"`
+	EmailChannel                      *bool         `jsonapi:"attr,email_channel,omitempty"`
+	CommunicationGroupConditions      []interface{} `jsonapi:"attr,communication_group_conditions,omitempty"`
+	CommunicationGroupMembers         []interface{} `jsonapi:"attr,communication_group_members,omitempty"`
+	CommunicationExternalGroupMembers []interface{} `jsonapi:"attr,communication_external_group_members,omitempty"`
 }
 
 func (c *Client) ListCommunicationsGroups(params *rootlygo.ListCommunicationsGroupsParams) ([]interface{}, error) {

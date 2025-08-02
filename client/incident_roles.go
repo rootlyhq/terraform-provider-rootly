@@ -3,23 +3,23 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type IncidentRole struct {
-	ID string `jsonapi:"primary,incident_roles"`
-	Name string `jsonapi:"attr,name,omitempty"`
-  Slug string `jsonapi:"attr,slug,omitempty"`
-  Summary string `jsonapi:"attr,summary,omitempty"`
-  Description string `jsonapi:"attr,description,omitempty"`
-  Position int `jsonapi:"attr,position,omitempty"`
-  Optional *bool `jsonapi:"attr,optional,omitempty"`
-  Enabled *bool `jsonapi:"attr,enabled,omitempty"`
-  AllowMultiUserAssignment *bool `jsonapi:"attr,allow_multi_user_assignment,omitempty"`
+	ID                       string `jsonapi:"primary,incident_roles"`
+	Name                     string `jsonapi:"attr,name,omitempty"`
+	Slug                     string `jsonapi:"attr,slug,omitempty"`
+	Summary                  string `jsonapi:"attr,summary,omitempty"`
+	Description              string `jsonapi:"attr,description,omitempty"`
+	Position                 int    `jsonapi:"attr,position,omitempty"`
+	Optional                 *bool  `jsonapi:"attr,optional,omitempty"`
+	Enabled                  *bool  `jsonapi:"attr,enabled,omitempty"`
+	AllowMultiUserAssignment *bool  `jsonapi:"attr,allow_multi_user_assignment,omitempty"`
 }
 
 func (c *Client) ListIncidentRoles(params *rootlygo.ListIncidentRolesParams) ([]interface{}, error) {

@@ -3,20 +3,20 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type Authorization struct {
-	ID string `jsonapi:"primary,authorizations"`
-	AuthorizableId string `jsonapi:"attr,authorizable_id,omitempty"`
-  AuthorizableType string `jsonapi:"attr,authorizable_type,omitempty"`
-  GranteeId string `jsonapi:"attr,grantee_id,omitempty"`
-  GranteeType string `jsonapi:"attr,grantee_type,omitempty"`
-  Permissions []interface{} `jsonapi:"attr,permissions,omitempty"`
+	ID               string        `jsonapi:"primary,authorizations"`
+	AuthorizableId   string        `jsonapi:"attr,authorizable_id,omitempty"`
+	AuthorizableType string        `jsonapi:"attr,authorizable_type,omitempty"`
+	GranteeId        string        `jsonapi:"attr,grantee_id,omitempty"`
+	GranteeType      string        `jsonapi:"attr,grantee_type,omitempty"`
+	Permissions      []interface{} `jsonapi:"attr,permissions,omitempty"`
 }
 
 func (c *Client) ListAuthorizations(params *rootlygo.ListAuthorizationsParams) ([]interface{}, error) {

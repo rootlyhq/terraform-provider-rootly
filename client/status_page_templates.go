@@ -3,23 +3,23 @@
 package client
 
 import (
-    "fmt"
+	"fmt"
 	"reflect"
-	
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type StatusPageTemplate struct {
-	ID string `jsonapi:"primary,status_page_templates"`
-	StatusPageId string `jsonapi:"attr,status_page_id,omitempty"`
-  Title string `jsonapi:"attr,title,omitempty"`
-  Body string `jsonapi:"attr,body,omitempty"`
-  UpdateStatus string `jsonapi:"attr,update_status,omitempty"`
-  Kind string `jsonapi:"attr,kind,omitempty"`
-  ShouldNotifySubscribers *bool `jsonapi:"attr,should_notify_subscribers,omitempty"`
-  Enabled *bool `jsonapi:"attr,enabled,omitempty"`
-  Position int `jsonapi:"attr,position,omitempty"`
+	ID                      string `jsonapi:"primary,status_page_templates"`
+	StatusPageId            string `jsonapi:"attr,status_page_id,omitempty"`
+	Title                   string `jsonapi:"attr,title,omitempty"`
+	Body                    string `jsonapi:"attr,body,omitempty"`
+	UpdateStatus            string `jsonapi:"attr,update_status,omitempty"`
+	Kind                    string `jsonapi:"attr,kind,omitempty"`
+	ShouldNotifySubscribers *bool  `jsonapi:"attr,should_notify_subscribers,omitempty"`
+	Enabled                 *bool  `jsonapi:"attr,enabled,omitempty"`
+	Position                int    `jsonapi:"attr,position,omitempty"`
 }
 
 func (c *Client) ListStatusPageTemplates(id string, params *rootlygo.ListStatusPageTemplatesParams) ([]interface{}, error) {

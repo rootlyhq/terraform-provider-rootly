@@ -45,6 +45,7 @@ Required:
 Optional:
 
 - `attendees` (List of String) Emails of attendees
+- `enable_online_meeting` (Boolean) Enable Microsoft Teams online meeting. Value must be one of true or false
 - `exclude_weekends` (Boolean) Value must be one of true or false
 - `post_to_incident_timeline` (Boolean) Value must be one of true or false
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
