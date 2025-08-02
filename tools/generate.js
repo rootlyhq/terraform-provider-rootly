@@ -207,7 +207,6 @@ function generateResource(name) {
     collectionSchema.parameters[0] &&
     collectionSchema.parameters[0].name;
   const schema = resourceSchema(name);
-  const hasSlug = schema && schema.properties && schema.properties.slug;
   let code;
   if (name === "workflow") {
     code = workflowTpl(
@@ -291,8 +290,6 @@ function generateResource(name) {
       path.resolve(__dirname, "..", "provider", `resource_${name}.go`),
       code
     );
-    const docMetaPath = path.resolve(__dirname, "..", "docs", "resources", `${name}.meta.json`);
-    fs.writeFileSync(docMetaPath, JSON.stringify({ HasSlug: !!hasSlug }, null, 2));
   }
 }
 

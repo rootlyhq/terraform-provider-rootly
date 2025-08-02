@@ -13,7 +13,7 @@ Please see the [Terraform Registry documentation](https://registry.terraform.io/
 | Command | Description |
 |---------|-------------|
 | `make build` | Complete build: generate code, compile provider, regenerate docs |
-| `make generate` | Download schema and auto-generate client code and provider resources |
+| `make codegen` | Download schema and auto-generate client code and provider resources |
 | `make docs` | Regenerate Terraform documentation from provider schemas |
 | `make test` | Run unit tests |
 | `make testacc` | Run acceptance tests |

@@ -10,10 +10,9 @@ OS_ARCH=darwin_amd64
 default: testacc
 
 # Run acceptance tests
-.PHONY: testacc generate build release install test docs
-build: generate docs
+.PHONY: testacc codegen build release install test docs
+build: codegen docs
 	go build -o ${BINARY}
-	go fmt provider/*
 
 docs:
 	terraform fmt -recursive examples
@@ -52,11 +51,13 @@ test:
 testacc:
 	TF_ACC=1 go test $(TEST) -v $(TESTARGS) -timeout 120m
 
-generate:
+codegen:
 	curl $(SWAGGER_URL) -o schema/swagger.json
 	node tools/clean-swagger.js schema/swagger.json
 	cd schema && oapi-codegen --config=oapi-config.yml swagger.json
 	node tools/generate.js schema/swagger.json
+	go fmt provider/*
+	go fmt client/*
 
 # Version management targets
 # These targets manage semantic versioning using git tags
@@ -121,7 +122,7 @@ help:
 	@echo ""
 	@echo "Build & Development:"
 	@echo "  make build           - Generate code and build provider"
-	@echo "  make generate        - Download schema and regenerate code"
+	@echo "  make codegen         - Download schema and regenerate code"
 	@echo "  make docs            - Generate documentation"
 	@echo "  make test            - Run unit tests"
 	@echo "  make testacc         - Run acceptance tests"
