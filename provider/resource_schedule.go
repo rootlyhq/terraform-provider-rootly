@@ -93,7 +93,6 @@ func resourceSchedule() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
 				Required:         false,
 				Optional:         true,
 				Description:      "The owning teams for this schedules.",

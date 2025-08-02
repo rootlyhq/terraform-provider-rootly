@@ -162,7 +162,7 @@ func resourceLiveCallRouter() *schema.Resource {
 
 			"paging_targets": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Paging targets that callers can select from when this live call router is configured as a phone tree.",
@@ -405,10 +405,11 @@ func resourceLiveCallRouterUpdate(ctx context.Context, d *schema.ResourceData, m
 		s.CallingTreePrompt = d.Get("calling_tree_prompt").(string)
 	}
 
-	s.PagingTargets = []interface{}{}
-	if value, ok := d.GetOk("paging_targets"); value != nil && ok {
-		if d.HasChange("paging_targets") {
+	if d.HasChange("paging_targets") {
+		if value, ok := d.GetOk("paging_targets"); value != nil && ok {
 			s.PagingTargets = value.([]interface{})
+		} else {
+			s.PagingTargets = []interface{}{}
 		}
 	}
 

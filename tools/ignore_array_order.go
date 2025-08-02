@@ -28,6 +28,11 @@ func EqualIgnoringOrder(key, oldValue, newValue string, d *schema.ResourceData) 
  		return false
  	}
 
+ 	// Workaround to detect lists being removed from plan
+ 	if oldValue != newValue && newValue == "0" && oldArray[0] != "0" {
+ 		return false
+ 	}
+
 	return listsAreEqual(oldArray, newArray)
 }
 

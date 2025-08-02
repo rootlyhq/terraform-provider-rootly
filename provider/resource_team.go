@@ -59,7 +59,7 @@ func resourceTeam() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Emails to attach to the team",
@@ -170,7 +170,7 @@ func resourceTeam() *schema.Resource {
 					Type: schema.TypeInt,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "The user ids of the members of this team.",
@@ -182,7 +182,7 @@ func resourceTeam() *schema.Resource {
 					Type: schema.TypeInt,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "The user ids of the admins of this team. These users must also be present in user_ids attribute.",
@@ -216,7 +216,7 @@ func resourceTeam() *schema.Resource {
 
 			"slack_channels": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Slack Channels associated with this team",
@@ -247,7 +247,7 @@ func resourceTeam() *schema.Resource {
 
 			"slack_aliases": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Slack Aliases associated with this team",
@@ -577,10 +577,11 @@ func resourceTeamUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 		s.Description = d.Get("description").(string)
 	}
 
-	s.NotifyEmails = []interface{}{}
-	if value, ok := d.GetOk("notify_emails"); value != nil && ok {
-		if d.HasChange("notify_emails") {
+	if d.HasChange("notify_emails") {
+		if value, ok := d.GetOk("notify_emails"); value != nil && ok {
 			s.NotifyEmails = value.([]interface{})
+		} else {
+			s.NotifyEmails = []interface{}{}
 		}
 	}
 
@@ -618,17 +619,19 @@ func resourceTeamUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 		s.ServiceNowCiSysId = d.Get("service_now_ci_sys_id").(string)
 	}
 
-	s.UserIds = []interface{}{}
-	if value, ok := d.GetOk("user_ids"); value != nil && ok {
-		if d.HasChange("user_ids") {
+	if d.HasChange("user_ids") {
+		if value, ok := d.GetOk("user_ids"); value != nil && ok {
 			s.UserIds = value.([]interface{})
+		} else {
+			s.UserIds = []interface{}{}
 		}
 	}
 
-	s.AdminIds = []interface{}{}
-	if value, ok := d.GetOk("admin_ids"); value != nil && ok {
-		if d.HasChange("admin_ids") {
+	if d.HasChange("admin_ids") {
+		if value, ok := d.GetOk("admin_ids"); value != nil && ok {
 			s.AdminIds = value.([]interface{})
+		} else {
+			s.AdminIds = []interface{}{}
 		}
 	}
 
@@ -642,17 +645,19 @@ func resourceTeamUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 		s.AlertUrgencyId = d.Get("alert_urgency_id").(string)
 	}
 
-	s.SlackChannels = []interface{}{}
-	if value, ok := d.GetOk("slack_channels"); value != nil && ok {
-		if d.HasChange("slack_channels") {
+	if d.HasChange("slack_channels") {
+		if value, ok := d.GetOk("slack_channels"); value != nil && ok {
 			s.SlackChannels = value.([]interface{})
+		} else {
+			s.SlackChannels = []interface{}{}
 		}
 	}
 
-	s.SlackAliases = []interface{}{}
-	if value, ok := d.GetOk("slack_aliases"); value != nil && ok {
-		if d.HasChange("slack_aliases") {
+	if d.HasChange("slack_aliases") {
+		if value, ok := d.GetOk("slack_aliases"); value != nil && ok {
 			s.SlackAliases = value.([]interface{})
+		} else {
+			s.SlackAliases = []interface{}{}
 		}
 	}
 

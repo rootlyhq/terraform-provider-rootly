@@ -60,7 +60,7 @@ func resourceAlertsSource() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "List of team IDs that will own the alert source",
@@ -109,7 +109,7 @@ func resourceAlertsSource() *schema.Resource {
 
 			"alert_source_urgency_rules_attributes": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "List of rules that define the conditions under which the alert urgency will be set automatically based on the alert payload",
@@ -224,7 +224,7 @@ func resourceAlertsSource() *schema.Resource {
 
 						"field_mappings_attributes": &schema.Schema{
 							Type:             schema.TypeList,
-							Computed:         true,
+							Computed:         false,
 							Required:         false,
 							Optional:         true,
 							Description:      "Specify rules to auto resolve alerts",
@@ -333,7 +333,7 @@ func resourceAlertsSource() *schema.Resource {
 
 						"conditions_attributes": &schema.Schema{
 							Type:             schema.TypeList,
-							Computed:         true,
+							Computed:         false,
 							Required:         false,
 							Optional:         true,
 							Description:      "List of conditions to evaluate for auto resolution",
@@ -406,7 +406,7 @@ func resourceAlertsSource() *schema.Resource {
 
 			"alert_source_fields_attributes": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "List of alert fields to be added to the alert source",
@@ -666,10 +666,11 @@ func resourceAlertsSourceUpdate(ctx context.Context, d *schema.ResourceData, met
 		s.AlertUrgencyId = d.Get("alert_urgency_id").(string)
 	}
 
-	s.OwnerGroupIds = []interface{}{}
-	if value, ok := d.GetOk("owner_group_ids"); value != nil && ok {
-		if d.HasChange("owner_group_ids") {
+	if d.HasChange("owner_group_ids") {
+		if value, ok := d.GetOk("owner_group_ids"); value != nil && ok {
 			s.OwnerGroupIds = value.([]interface{})
+		} else {
+			s.OwnerGroupIds = []interface{}{}
 		}
 	}
 
@@ -680,10 +681,11 @@ func resourceAlertsSourceUpdate(ctx context.Context, d *schema.ResourceData, met
 		}
 	}
 
-	s.AlertSourceUrgencyRulesAttributes = []interface{}{}
-	if value, ok := d.GetOk("alert_source_urgency_rules_attributes"); value != nil && ok {
-		if d.HasChange("alert_source_urgency_rules_attributes") {
+	if d.HasChange("alert_source_urgency_rules_attributes") {
+		if value, ok := d.GetOk("alert_source_urgency_rules_attributes"); value != nil && ok {
 			s.AlertSourceUrgencyRulesAttributes = value.([]interface{})
+		} else {
+			s.AlertSourceUrgencyRulesAttributes = []interface{}{}
 		}
 	}
 
@@ -701,10 +703,11 @@ func resourceAlertsSourceUpdate(ctx context.Context, d *schema.ResourceData, met
 		}
 	}
 
-	s.AlertSourceFieldsAttributes = []interface{}{}
-	if value, ok := d.GetOk("alert_source_fields_attributes"); value != nil && ok {
-		if d.HasChange("alert_source_fields_attributes") {
+	if d.HasChange("alert_source_fields_attributes") {
+		if value, ok := d.GetOk("alert_source_fields_attributes"); value != nil && ok {
 			s.AlertSourceFieldsAttributes = value.([]interface{})
+		} else {
+			s.AlertSourceFieldsAttributes = []interface{}{}
 		}
 	}
 

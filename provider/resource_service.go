@@ -68,7 +68,7 @@ func resourceService() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Emails attached to the service",
@@ -194,7 +194,7 @@ func resourceService() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Environments associated with this service",
@@ -206,7 +206,7 @@ func resourceService() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Services dependent on this service",
@@ -218,7 +218,7 @@ func resourceService() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Owner Teams associated with this service",
@@ -230,7 +230,7 @@ func resourceService() *schema.Resource {
 					Type: schema.TypeInt,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Owner Users associated with this service",
@@ -264,7 +264,7 @@ func resourceService() *schema.Resource {
 
 			"slack_channels": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Slack Channels associated with this service",
@@ -295,7 +295,7 @@ func resourceService() *schema.Resource {
 
 			"slack_aliases": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Slack Aliases associated with this service",
@@ -644,10 +644,11 @@ func resourceServiceUpdate(ctx context.Context, d *schema.ResourceData, meta int
 		s.PublicDescription = d.Get("public_description").(string)
 	}
 
-	s.NotifyEmails = []interface{}{}
-	if value, ok := d.GetOk("notify_emails"); value != nil && ok {
-		if d.HasChange("notify_emails") {
+	if d.HasChange("notify_emails") {
+		if value, ok := d.GetOk("notify_emails"); value != nil && ok {
 			s.NotifyEmails = value.([]interface{})
+		} else {
+			s.NotifyEmails = []interface{}{}
 		}
 	}
 
@@ -688,31 +689,35 @@ func resourceServiceUpdate(ctx context.Context, d *schema.ResourceData, meta int
 		s.GitlabRepositoryBranch = d.Get("gitlab_repository_branch").(string)
 	}
 
-	s.EnvironmentIds = []interface{}{}
-	if value, ok := d.GetOk("environment_ids"); value != nil && ok {
-		if d.HasChange("environment_ids") {
+	if d.HasChange("environment_ids") {
+		if value, ok := d.GetOk("environment_ids"); value != nil && ok {
 			s.EnvironmentIds = value.([]interface{})
+		} else {
+			s.EnvironmentIds = []interface{}{}
 		}
 	}
 
-	s.ServiceIds = []interface{}{}
-	if value, ok := d.GetOk("service_ids"); value != nil && ok {
-		if d.HasChange("service_ids") {
+	if d.HasChange("service_ids") {
+		if value, ok := d.GetOk("service_ids"); value != nil && ok {
 			s.ServiceIds = value.([]interface{})
+		} else {
+			s.ServiceIds = []interface{}{}
 		}
 	}
 
-	s.OwnerGroupIds = []interface{}{}
-	if value, ok := d.GetOk("owner_group_ids"); value != nil && ok {
-		if d.HasChange("owner_group_ids") {
+	if d.HasChange("owner_group_ids") {
+		if value, ok := d.GetOk("owner_group_ids"); value != nil && ok {
 			s.OwnerGroupIds = value.([]interface{})
+		} else {
+			s.OwnerGroupIds = []interface{}{}
 		}
 	}
 
-	s.OwnerUserIds = []interface{}{}
-	if value, ok := d.GetOk("owner_user_ids"); value != nil && ok {
-		if d.HasChange("owner_user_ids") {
+	if d.HasChange("owner_user_ids") {
+		if value, ok := d.GetOk("owner_user_ids"); value != nil && ok {
 			s.OwnerUserIds = value.([]interface{})
+		} else {
+			s.OwnerUserIds = []interface{}{}
 		}
 	}
 
@@ -726,17 +731,19 @@ func resourceServiceUpdate(ctx context.Context, d *schema.ResourceData, meta int
 		s.AlertsEmailAddress = d.Get("alerts_email_address").(string)
 	}
 
-	s.SlackChannels = []interface{}{}
-	if value, ok := d.GetOk("slack_channels"); value != nil && ok {
-		if d.HasChange("slack_channels") {
+	if d.HasChange("slack_channels") {
+		if value, ok := d.GetOk("slack_channels"); value != nil && ok {
 			s.SlackChannels = value.([]interface{})
+		} else {
+			s.SlackChannels = []interface{}{}
 		}
 	}
 
-	s.SlackAliases = []interface{}{}
-	if value, ok := d.GetOk("slack_aliases"); value != nil && ok {
-		if d.HasChange("slack_aliases") {
+	if d.HasChange("slack_aliases") {
+		if value, ok := d.GetOk("slack_aliases"); value != nil && ok {
 			s.SlackAliases = value.([]interface{})
+		} else {
+			s.SlackAliases = []interface{}{}
 		}
 	}
 

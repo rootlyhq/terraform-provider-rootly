@@ -596,185 +596,211 @@ func resourceRoleUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 		s.IsEditable = tools.Bool(d.Get("is_editable").(bool))
 	}
 
-	s.AlertsPermissions = []interface{}{}
-	if value, ok := d.GetOk("alerts_permissions"); value != nil && ok {
-		if d.HasChange("alerts_permissions") {
+	if d.HasChange("alerts_permissions") {
+		if value, ok := d.GetOk("alerts_permissions"); value != nil && ok {
 			s.AlertsPermissions = value.([]interface{})
+		} else {
+			s.AlertsPermissions = []interface{}{}
 		}
 	}
 
-	s.ApiKeysPermissions = []interface{}{}
-	if value, ok := d.GetOk("api_keys_permissions"); value != nil && ok {
-		if d.HasChange("api_keys_permissions") {
+	if d.HasChange("api_keys_permissions") {
+		if value, ok := d.GetOk("api_keys_permissions"); value != nil && ok {
 			s.ApiKeysPermissions = value.([]interface{})
+		} else {
+			s.ApiKeysPermissions = []interface{}{}
 		}
 	}
 
-	s.AuditsPermissions = []interface{}{}
-	if value, ok := d.GetOk("audits_permissions"); value != nil && ok {
-		if d.HasChange("audits_permissions") {
+	if d.HasChange("audits_permissions") {
+		if value, ok := d.GetOk("audits_permissions"); value != nil && ok {
 			s.AuditsPermissions = value.([]interface{})
+		} else {
+			s.AuditsPermissions = []interface{}{}
 		}
 	}
 
-	s.BillingPermissions = []interface{}{}
-	if value, ok := d.GetOk("billing_permissions"); value != nil && ok {
-		if d.HasChange("billing_permissions") {
+	if d.HasChange("billing_permissions") {
+		if value, ok := d.GetOk("billing_permissions"); value != nil && ok {
 			s.BillingPermissions = value.([]interface{})
+		} else {
+			s.BillingPermissions = []interface{}{}
 		}
 	}
 
-	s.EnvironmentsPermissions = []interface{}{}
-	if value, ok := d.GetOk("environments_permissions"); value != nil && ok {
-		if d.HasChange("environments_permissions") {
+	if d.HasChange("environments_permissions") {
+		if value, ok := d.GetOk("environments_permissions"); value != nil && ok {
 			s.EnvironmentsPermissions = value.([]interface{})
+		} else {
+			s.EnvironmentsPermissions = []interface{}{}
 		}
 	}
 
-	s.FormFieldsPermissions = []interface{}{}
-	if value, ok := d.GetOk("form_fields_permissions"); value != nil && ok {
-		if d.HasChange("form_fields_permissions") {
+	if d.HasChange("form_fields_permissions") {
+		if value, ok := d.GetOk("form_fields_permissions"); value != nil && ok {
 			s.FormFieldsPermissions = value.([]interface{})
+		} else {
+			s.FormFieldsPermissions = []interface{}{}
 		}
 	}
 
-	s.FunctionalitiesPermissions = []interface{}{}
-	if value, ok := d.GetOk("functionalities_permissions"); value != nil && ok {
-		if d.HasChange("functionalities_permissions") {
+	if d.HasChange("functionalities_permissions") {
+		if value, ok := d.GetOk("functionalities_permissions"); value != nil && ok {
 			s.FunctionalitiesPermissions = value.([]interface{})
+		} else {
+			s.FunctionalitiesPermissions = []interface{}{}
 		}
 	}
 
-	s.GroupsPermissions = []interface{}{}
-	if value, ok := d.GetOk("groups_permissions"); value != nil && ok {
-		if d.HasChange("groups_permissions") {
+	if d.HasChange("groups_permissions") {
+		if value, ok := d.GetOk("groups_permissions"); value != nil && ok {
 			s.GroupsPermissions = value.([]interface{})
+		} else {
+			s.GroupsPermissions = []interface{}{}
 		}
 	}
 
-	s.IncidentCausesPermissions = []interface{}{}
-	if value, ok := d.GetOk("incident_causes_permissions"); value != nil && ok {
-		if d.HasChange("incident_causes_permissions") {
+	if d.HasChange("incident_causes_permissions") {
+		if value, ok := d.GetOk("incident_causes_permissions"); value != nil && ok {
 			s.IncidentCausesPermissions = value.([]interface{})
+		} else {
+			s.IncidentCausesPermissions = []interface{}{}
 		}
 	}
 
-	s.IncidentFeedbacksPermissions = []interface{}{}
-	if value, ok := d.GetOk("incident_feedbacks_permissions"); value != nil && ok {
-		if d.HasChange("incident_feedbacks_permissions") {
+	if d.HasChange("incident_feedbacks_permissions") {
+		if value, ok := d.GetOk("incident_feedbacks_permissions"); value != nil && ok {
 			s.IncidentFeedbacksPermissions = value.([]interface{})
+		} else {
+			s.IncidentFeedbacksPermissions = []interface{}{}
 		}
 	}
 
-	s.IncidentRolesPermissions = []interface{}{}
-	if value, ok := d.GetOk("incident_roles_permissions"); value != nil && ok {
-		if d.HasChange("incident_roles_permissions") {
+	if d.HasChange("incident_roles_permissions") {
+		if value, ok := d.GetOk("incident_roles_permissions"); value != nil && ok {
 			s.IncidentRolesPermissions = value.([]interface{})
+		} else {
+			s.IncidentRolesPermissions = []interface{}{}
 		}
 	}
 
-	s.IncidentTypesPermissions = []interface{}{}
-	if value, ok := d.GetOk("incident_types_permissions"); value != nil && ok {
-		if d.HasChange("incident_types_permissions") {
+	if d.HasChange("incident_types_permissions") {
+		if value, ok := d.GetOk("incident_types_permissions"); value != nil && ok {
 			s.IncidentTypesPermissions = value.([]interface{})
+		} else {
+			s.IncidentTypesPermissions = []interface{}{}
 		}
 	}
 
-	s.IncidentsPermissions = []interface{}{}
-	if value, ok := d.GetOk("incidents_permissions"); value != nil && ok {
-		if d.HasChange("incidents_permissions") {
+	if d.HasChange("incidents_permissions") {
+		if value, ok := d.GetOk("incidents_permissions"); value != nil && ok {
 			s.IncidentsPermissions = value.([]interface{})
+		} else {
+			s.IncidentsPermissions = []interface{}{}
 		}
 	}
 
-	s.IntegrationsPermissions = []interface{}{}
-	if value, ok := d.GetOk("integrations_permissions"); value != nil && ok {
-		if d.HasChange("integrations_permissions") {
+	if d.HasChange("integrations_permissions") {
+		if value, ok := d.GetOk("integrations_permissions"); value != nil && ok {
 			s.IntegrationsPermissions = value.([]interface{})
+		} else {
+			s.IntegrationsPermissions = []interface{}{}
 		}
 	}
 
-	s.InvitationsPermissions = []interface{}{}
-	if value, ok := d.GetOk("invitations_permissions"); value != nil && ok {
-		if d.HasChange("invitations_permissions") {
+	if d.HasChange("invitations_permissions") {
+		if value, ok := d.GetOk("invitations_permissions"); value != nil && ok {
 			s.InvitationsPermissions = value.([]interface{})
+		} else {
+			s.InvitationsPermissions = []interface{}{}
 		}
 	}
 
-	s.PlaybooksPermissions = []interface{}{}
-	if value, ok := d.GetOk("playbooks_permissions"); value != nil && ok {
-		if d.HasChange("playbooks_permissions") {
+	if d.HasChange("playbooks_permissions") {
+		if value, ok := d.GetOk("playbooks_permissions"); value != nil && ok {
 			s.PlaybooksPermissions = value.([]interface{})
+		} else {
+			s.PlaybooksPermissions = []interface{}{}
 		}
 	}
 
-	s.PrivateIncidentsPermissions = []interface{}{}
-	if value, ok := d.GetOk("private_incidents_permissions"); value != nil && ok {
-		if d.HasChange("private_incidents_permissions") {
+	if d.HasChange("private_incidents_permissions") {
+		if value, ok := d.GetOk("private_incidents_permissions"); value != nil && ok {
 			s.PrivateIncidentsPermissions = value.([]interface{})
+		} else {
+			s.PrivateIncidentsPermissions = []interface{}{}
 		}
 	}
 
-	s.PulsesPermissions = []interface{}{}
-	if value, ok := d.GetOk("pulses_permissions"); value != nil && ok {
-		if d.HasChange("pulses_permissions") {
+	if d.HasChange("pulses_permissions") {
+		if value, ok := d.GetOk("pulses_permissions"); value != nil && ok {
 			s.PulsesPermissions = value.([]interface{})
+		} else {
+			s.PulsesPermissions = []interface{}{}
 		}
 	}
 
-	s.RetrospectivePermissions = []interface{}{}
-	if value, ok := d.GetOk("retrospective_permissions"); value != nil && ok {
-		if d.HasChange("retrospective_permissions") {
+	if d.HasChange("retrospective_permissions") {
+		if value, ok := d.GetOk("retrospective_permissions"); value != nil && ok {
 			s.RetrospectivePermissions = value.([]interface{})
+		} else {
+			s.RetrospectivePermissions = []interface{}{}
 		}
 	}
 
-	s.RolesPermissions = []interface{}{}
-	if value, ok := d.GetOk("roles_permissions"); value != nil && ok {
-		if d.HasChange("roles_permissions") {
+	if d.HasChange("roles_permissions") {
+		if value, ok := d.GetOk("roles_permissions"); value != nil && ok {
 			s.RolesPermissions = value.([]interface{})
+		} else {
+			s.RolesPermissions = []interface{}{}
 		}
 	}
 
-	s.SecretsPermissions = []interface{}{}
-	if value, ok := d.GetOk("secrets_permissions"); value != nil && ok {
-		if d.HasChange("secrets_permissions") {
+	if d.HasChange("secrets_permissions") {
+		if value, ok := d.GetOk("secrets_permissions"); value != nil && ok {
 			s.SecretsPermissions = value.([]interface{})
+		} else {
+			s.SecretsPermissions = []interface{}{}
 		}
 	}
 
-	s.ServicesPermissions = []interface{}{}
-	if value, ok := d.GetOk("services_permissions"); value != nil && ok {
-		if d.HasChange("services_permissions") {
+	if d.HasChange("services_permissions") {
+		if value, ok := d.GetOk("services_permissions"); value != nil && ok {
 			s.ServicesPermissions = value.([]interface{})
+		} else {
+			s.ServicesPermissions = []interface{}{}
 		}
 	}
 
-	s.SeveritiesPermissions = []interface{}{}
-	if value, ok := d.GetOk("severities_permissions"); value != nil && ok {
-		if d.HasChange("severities_permissions") {
+	if d.HasChange("severities_permissions") {
+		if value, ok := d.GetOk("severities_permissions"); value != nil && ok {
 			s.SeveritiesPermissions = value.([]interface{})
+		} else {
+			s.SeveritiesPermissions = []interface{}{}
 		}
 	}
 
-	s.StatusPagesPermissions = []interface{}{}
-	if value, ok := d.GetOk("status_pages_permissions"); value != nil && ok {
-		if d.HasChange("status_pages_permissions") {
+	if d.HasChange("status_pages_permissions") {
+		if value, ok := d.GetOk("status_pages_permissions"); value != nil && ok {
 			s.StatusPagesPermissions = value.([]interface{})
+		} else {
+			s.StatusPagesPermissions = []interface{}{}
 		}
 	}
 
-	s.WebhooksPermissions = []interface{}{}
-	if value, ok := d.GetOk("webhooks_permissions"); value != nil && ok {
-		if d.HasChange("webhooks_permissions") {
+	if d.HasChange("webhooks_permissions") {
+		if value, ok := d.GetOk("webhooks_permissions"); value != nil && ok {
 			s.WebhooksPermissions = value.([]interface{})
+		} else {
+			s.WebhooksPermissions = []interface{}{}
 		}
 	}
 
-	s.WorkflowsPermissions = []interface{}{}
-	if value, ok := d.GetOk("workflows_permissions"); value != nil && ok {
-		if d.HasChange("workflows_permissions") {
+	if d.HasChange("workflows_permissions") {
+		if value, ok := d.GetOk("workflows_permissions"); value != nil && ok {
 			s.WorkflowsPermissions = value.([]interface{})
+		} else {
+			s.WorkflowsPermissions = []interface{}{}
 		}
 	}
 

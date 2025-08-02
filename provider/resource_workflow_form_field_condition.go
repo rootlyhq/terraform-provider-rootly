@@ -60,7 +60,7 @@ func resourceWorkflowFormFieldCondition() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "",
@@ -72,7 +72,7 @@ func resourceWorkflowFormFieldCondition() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "",
@@ -84,7 +84,7 @@ func resourceWorkflowFormFieldCondition() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "",
@@ -96,7 +96,7 @@ func resourceWorkflowFormFieldCondition() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "",
@@ -108,7 +108,7 @@ func resourceWorkflowFormFieldCondition() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "",
@@ -120,7 +120,7 @@ func resourceWorkflowFormFieldCondition() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "",
@@ -132,7 +132,7 @@ func resourceWorkflowFormFieldCondition() *schema.Resource {
 					Type: schema.TypeInt,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "",
@@ -237,52 +237,59 @@ func resourceWorkflowFormFieldConditionUpdate(ctx context.Context, d *schema.Res
 		s.IncidentCondition = d.Get("incident_condition").(string)
 	}
 
-	s.Values = []interface{}{}
-	if value, ok := d.GetOk("values"); value != nil && ok {
-		if d.HasChange("values") {
+	if d.HasChange("values") {
+		if value, ok := d.GetOk("values"); value != nil && ok {
 			s.Values = value.([]interface{})
+		} else {
+			s.Values = []interface{}{}
 		}
 	}
 
-	s.SelectedCatalogEntityIds = []interface{}{}
-	if value, ok := d.GetOk("selected_catalog_entity_ids"); value != nil && ok {
-		if d.HasChange("selected_catalog_entity_ids") {
+	if d.HasChange("selected_catalog_entity_ids") {
+		if value, ok := d.GetOk("selected_catalog_entity_ids"); value != nil && ok {
 			s.SelectedCatalogEntityIds = value.([]interface{})
+		} else {
+			s.SelectedCatalogEntityIds = []interface{}{}
 		}
 	}
 
-	s.SelectedFunctionalityIds = []interface{}{}
-	if value, ok := d.GetOk("selected_functionality_ids"); value != nil && ok {
-		if d.HasChange("selected_functionality_ids") {
+	if d.HasChange("selected_functionality_ids") {
+		if value, ok := d.GetOk("selected_functionality_ids"); value != nil && ok {
 			s.SelectedFunctionalityIds = value.([]interface{})
+		} else {
+			s.SelectedFunctionalityIds = []interface{}{}
 		}
 	}
 
-	s.SelectedGroupIds = []interface{}{}
-	if value, ok := d.GetOk("selected_group_ids"); value != nil && ok {
-		if d.HasChange("selected_group_ids") {
+	if d.HasChange("selected_group_ids") {
+		if value, ok := d.GetOk("selected_group_ids"); value != nil && ok {
 			s.SelectedGroupIds = value.([]interface{})
+		} else {
+			s.SelectedGroupIds = []interface{}{}
 		}
 	}
 
-	s.SelectedOptionIds = []interface{}{}
-	if value, ok := d.GetOk("selected_option_ids"); value != nil && ok {
-		if d.HasChange("selected_option_ids") {
+	if d.HasChange("selected_option_ids") {
+		if value, ok := d.GetOk("selected_option_ids"); value != nil && ok {
 			s.SelectedOptionIds = value.([]interface{})
+		} else {
+			s.SelectedOptionIds = []interface{}{}
 		}
 	}
 
-	s.SelectedServiceIds = []interface{}{}
-	if value, ok := d.GetOk("selected_service_ids"); value != nil && ok {
-		if d.HasChange("selected_service_ids") {
+	if d.HasChange("selected_service_ids") {
+		if value, ok := d.GetOk("selected_service_ids"); value != nil && ok {
 			s.SelectedServiceIds = value.([]interface{})
+		} else {
+			s.SelectedServiceIds = []interface{}{}
 		}
 	}
 
-	s.SelectedUserIds = []interface{}{}
-	if value, ok := d.GetOk("selected_user_ids"); value != nil && ok {
-		if d.HasChange("selected_user_ids") {
+	if d.HasChange("selected_user_ids") {
+		if value, ok := d.GetOk("selected_user_ids"); value != nil && ok {
 			s.SelectedUserIds = value.([]interface{})
+		} else {
+			s.SelectedUserIds = []interface{}{}
 		}
 	}
 

@@ -59,7 +59,7 @@ func resourcePlaybook() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "The Severity ID's to attach to the incident",
@@ -71,7 +71,7 @@ func resourcePlaybook() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "The Environment ID's to attach to the incident",
@@ -83,7 +83,7 @@ func resourcePlaybook() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "The Functionality ID's to attach to the incident",
@@ -95,7 +95,7 @@ func resourcePlaybook() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "The Service ID's to attach to the incident",
@@ -107,7 +107,7 @@ func resourcePlaybook() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "The Team ID's to attach to the incident",
@@ -119,7 +119,7 @@ func resourcePlaybook() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "The Incident Type ID's to attach to the incident",
@@ -220,45 +220,51 @@ func resourcePlaybookUpdate(ctx context.Context, d *schema.ResourceData, meta in
 		s.ExternalUrl = d.Get("external_url").(string)
 	}
 
-	s.SeverityIds = []interface{}{}
-	if value, ok := d.GetOk("severity_ids"); value != nil && ok {
-		if d.HasChange("severity_ids") {
+	if d.HasChange("severity_ids") {
+		if value, ok := d.GetOk("severity_ids"); value != nil && ok {
 			s.SeverityIds = value.([]interface{})
+		} else {
+			s.SeverityIds = []interface{}{}
 		}
 	}
 
-	s.EnvironmentIds = []interface{}{}
-	if value, ok := d.GetOk("environment_ids"); value != nil && ok {
-		if d.HasChange("environment_ids") {
+	if d.HasChange("environment_ids") {
+		if value, ok := d.GetOk("environment_ids"); value != nil && ok {
 			s.EnvironmentIds = value.([]interface{})
+		} else {
+			s.EnvironmentIds = []interface{}{}
 		}
 	}
 
-	s.FunctionalityIds = []interface{}{}
-	if value, ok := d.GetOk("functionality_ids"); value != nil && ok {
-		if d.HasChange("functionality_ids") {
+	if d.HasChange("functionality_ids") {
+		if value, ok := d.GetOk("functionality_ids"); value != nil && ok {
 			s.FunctionalityIds = value.([]interface{})
+		} else {
+			s.FunctionalityIds = []interface{}{}
 		}
 	}
 
-	s.ServiceIds = []interface{}{}
-	if value, ok := d.GetOk("service_ids"); value != nil && ok {
-		if d.HasChange("service_ids") {
+	if d.HasChange("service_ids") {
+		if value, ok := d.GetOk("service_ids"); value != nil && ok {
 			s.ServiceIds = value.([]interface{})
+		} else {
+			s.ServiceIds = []interface{}{}
 		}
 	}
 
-	s.GroupIds = []interface{}{}
-	if value, ok := d.GetOk("group_ids"); value != nil && ok {
-		if d.HasChange("group_ids") {
+	if d.HasChange("group_ids") {
+		if value, ok := d.GetOk("group_ids"); value != nil && ok {
 			s.GroupIds = value.([]interface{})
+		} else {
+			s.GroupIds = []interface{}{}
 		}
 	}
 
-	s.IncidentTypeIds = []interface{}{}
-	if value, ok := d.GetOk("incident_type_ids"); value != nil && ok {
-		if d.HasChange("incident_type_ids") {
+	if d.HasChange("incident_type_ids") {
+		if value, ok := d.GetOk("incident_type_ids"); value != nil && ok {
 			s.IncidentTypeIds = value.([]interface{})
+		} else {
+			s.IncidentTypeIds = []interface{}{}
 		}
 	}
 

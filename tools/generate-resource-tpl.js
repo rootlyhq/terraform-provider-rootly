@@ -37,7 +37,6 @@ module.exports = (name, resourceSchema, requiredFields, pathIdField) => {
   const tools = includeTools(resourceSchema)
     ? `"github.com/rootlyhq/terraform-provider-rootly/v2/tools"`
     : "";
-  const useSlug = hasSlug(resourceSchema);
   
   // Generate all schema fields first to see if any use validation
   const allSchemaFields = schemaFields(resourceSchema, requiredFields, pathIdField);
@@ -244,10 +243,11 @@ function updateResourceFields(name, resourceSchema) {
 			}`;
       } else if (schema.type == "array") {
         return `
-          s.${inflect.camelize(field)} = []interface{}{}
-          if value, ok := d.GetOk("${field}"); value != nil && ok {
-            if d.HasChange("${field}") {
+          if d.HasChange("${field}") {
+            if value, ok := d.GetOk("${field}"); value != nil && ok {
               s.${inflect.camelize(field)} = value.([]interface{})
+            } else {
+              s.${inflect.camelize(field)} = []interface{}{}
             }
           }
 			`;
@@ -458,7 +458,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
         return `
 				"${name}": &schema.Schema {
 					Type: schema.TypeList,
-					Computed: ${optional},
+					Computed: ${schema.tf_computed ? "true" : "false"},
 					Required: ${required},
 					Optional: ${optional},
 					Description: "${description}",
@@ -486,7 +486,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 						Type: schema.TypeString,${elemValidateFunc}
 					},
 					DiffSuppressFunc: tools.EqualIgnoringOrder,
-					Computed: ${optional},
+					Computed: ${schema.tf_computed ? "true" : "false"},
 					Required: ${required},
 					Optional: ${optional},
 					Description: "${description}",
@@ -501,7 +501,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 						Type: schema.TypeInt,
 					},
 					DiffSuppressFunc: tools.EqualIgnoringOrder,
-					Computed: ${optional},
+					Computed: ${schema.tf_computed ? "true" : "false"},
 					Required: ${required},
 					Optional: ${optional},
 					Description: "${description}",
@@ -516,7 +516,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 						Type: schema.TypeInt,
 					},
 					DiffSuppressFunc: tools.EqualIgnoringOrder,
-					Computed: ${optional},
+					Computed: ${schema.tf_computed ? "true" : "false"},
 					Required: ${required},
 					Optional: ${optional},
 					Description: "${description}",

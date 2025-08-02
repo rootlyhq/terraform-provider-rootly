@@ -77,7 +77,7 @@ func resourceEscalationPolicy() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Associated groups (alerting the group will trigger escalation policy)",
@@ -89,7 +89,7 @@ func resourceEscalationPolicy() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Associated services (alerting the service will trigger escalation policy)",
@@ -122,7 +122,7 @@ func resourceEscalationPolicy() *schema.Resource {
 								ValidateFunc: validation.StringInSlice([]string{"M", "T", "W", "R", "F", "U", "S"}, false),
 							},
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
-							Computed:         true,
+							Computed:         false,
 							Required:         false,
 							Optional:         true,
 							Description:      "Business days. Value must be one of `M`, `T`, `W`, `R`, `F`, `U`, `S`.",
@@ -258,17 +258,19 @@ func resourceEscalationPolicyUpdate(ctx context.Context, d *schema.ResourceData,
 		s.LastUpdatedByUserId = d.Get("last_updated_by_user_id").(int)
 	}
 
-	s.GroupIds = []interface{}{}
-	if value, ok := d.GetOk("group_ids"); value != nil && ok {
-		if d.HasChange("group_ids") {
+	if d.HasChange("group_ids") {
+		if value, ok := d.GetOk("group_ids"); value != nil && ok {
 			s.GroupIds = value.([]interface{})
+		} else {
+			s.GroupIds = []interface{}{}
 		}
 	}
 
-	s.ServiceIds = []interface{}{}
-	if value, ok := d.GetOk("service_ids"); value != nil && ok {
-		if d.HasChange("service_ids") {
+	if d.HasChange("service_ids") {
+		if value, ok := d.GetOk("service_ids"); value != nil && ok {
 			s.ServiceIds = value.([]interface{})
+		} else {
+			s.ServiceIds = []interface{}{}
 		}
 	}
 

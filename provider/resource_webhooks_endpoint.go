@@ -60,7 +60,7 @@ func resourceWebhooksEndpoint() *schema.Resource {
 					ValidateFunc: validation.StringInSlice([]string{"incident.created", "incident.updated", "incident.in_triage", "incident.mitigated", "incident.resolved", "incident.cancelled", "incident.deleted", "incident.scheduled.created", "incident.scheduled.updated", "incident.scheduled.in_progress", "incident.scheduled.completed", "incident.scheduled.deleted", "incident_post_mortem.created", "incident_post_mortem.updated", "incident_post_mortem.published", "incident_post_mortem.deleted", "incident_status_page_event.created", "incident_status_page_event.updated", "incident_status_page_event.deleted", "incident_event.created", "incident_event.updated", "incident_event.deleted", "alert.created", "pulse.created", "genius_workflow_run.queued", "genius_workflow_run.started", "genius_workflow_run.completed", "genius_workflow_run.failed", "genius_workflow_run.canceled"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Value must be one of `incident.created`, `incident.updated`, `incident.in_triage`, `incident.mitigated`, `incident.resolved`, `incident.cancelled`, `incident.deleted`, `incident.scheduled.created`, `incident.scheduled.updated`, `incident.scheduled.in_progress`, `incident.scheduled.completed`, `incident.scheduled.deleted`, `incident_post_mortem.created`, `incident_post_mortem.updated`, `incident_post_mortem.published`, `incident_post_mortem.deleted`, `incident_status_page_event.created`, `incident_status_page_event.updated`, `incident_status_page_event.deleted`, `incident_event.created`, `incident_event.updated`, `incident_event.deleted`, `alert.created`, `pulse.created`, `genius_workflow_run.queued`, `genius_workflow_run.started`, `genius_workflow_run.completed`, `genius_workflow_run.failed`, `genius_workflow_run.canceled`.",
@@ -164,10 +164,11 @@ func resourceWebhooksEndpointUpdate(ctx context.Context, d *schema.ResourceData,
 		s.Url = d.Get("url").(string)
 	}
 
-	s.EventTypes = []interface{}{}
-	if value, ok := d.GetOk("event_types"); value != nil && ok {
-		if d.HasChange("event_types") {
+	if d.HasChange("event_types") {
+		if value, ok := d.GetOk("event_types"); value != nil && ok {
 			s.EventTypes = value.([]interface{})
+		} else {
+			s.EventTypes = []interface{}{}
 		}
 	}
 

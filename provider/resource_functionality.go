@@ -68,7 +68,7 @@ func resourceFunctionality() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Emails attached to the functionality",
@@ -161,7 +161,7 @@ func resourceFunctionality() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Environments associated with this functionality",
@@ -173,7 +173,7 @@ func resourceFunctionality() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Services associated with this functionality",
@@ -185,7 +185,7 @@ func resourceFunctionality() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Owner Teams associated with this functionality",
@@ -197,7 +197,7 @@ func resourceFunctionality() *schema.Resource {
 					Type: schema.TypeInt,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Owner Users associated with this functionality",
@@ -205,7 +205,7 @@ func resourceFunctionality() *schema.Resource {
 
 			"slack_channels": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Slack Channels associated with this functionality",
@@ -236,7 +236,7 @@ func resourceFunctionality() *schema.Resource {
 
 			"slack_aliases": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Slack Aliases associated with this functionality",
@@ -443,10 +443,11 @@ func resourceFunctionalityUpdate(ctx context.Context, d *schema.ResourceData, me
 		s.PublicDescription = d.Get("public_description").(string)
 	}
 
-	s.NotifyEmails = []interface{}{}
-	if value, ok := d.GetOk("notify_emails"); value != nil && ok {
-		if d.HasChange("notify_emails") {
+	if d.HasChange("notify_emails") {
+		if value, ok := d.GetOk("notify_emails"); value != nil && ok {
 			s.NotifyEmails = value.([]interface{})
+		} else {
+			s.NotifyEmails = []interface{}{}
 		}
 	}
 
@@ -478,45 +479,51 @@ func resourceFunctionalityUpdate(ctx context.Context, d *schema.ResourceData, me
 		s.Position = d.Get("position").(int)
 	}
 
-	s.EnvironmentIds = []interface{}{}
-	if value, ok := d.GetOk("environment_ids"); value != nil && ok {
-		if d.HasChange("environment_ids") {
+	if d.HasChange("environment_ids") {
+		if value, ok := d.GetOk("environment_ids"); value != nil && ok {
 			s.EnvironmentIds = value.([]interface{})
+		} else {
+			s.EnvironmentIds = []interface{}{}
 		}
 	}
 
-	s.ServiceIds = []interface{}{}
-	if value, ok := d.GetOk("service_ids"); value != nil && ok {
-		if d.HasChange("service_ids") {
+	if d.HasChange("service_ids") {
+		if value, ok := d.GetOk("service_ids"); value != nil && ok {
 			s.ServiceIds = value.([]interface{})
+		} else {
+			s.ServiceIds = []interface{}{}
 		}
 	}
 
-	s.OwnerGroupIds = []interface{}{}
-	if value, ok := d.GetOk("owner_group_ids"); value != nil && ok {
-		if d.HasChange("owner_group_ids") {
+	if d.HasChange("owner_group_ids") {
+		if value, ok := d.GetOk("owner_group_ids"); value != nil && ok {
 			s.OwnerGroupIds = value.([]interface{})
+		} else {
+			s.OwnerGroupIds = []interface{}{}
 		}
 	}
 
-	s.OwnerUserIds = []interface{}{}
-	if value, ok := d.GetOk("owner_user_ids"); value != nil && ok {
-		if d.HasChange("owner_user_ids") {
+	if d.HasChange("owner_user_ids") {
+		if value, ok := d.GetOk("owner_user_ids"); value != nil && ok {
 			s.OwnerUserIds = value.([]interface{})
+		} else {
+			s.OwnerUserIds = []interface{}{}
 		}
 	}
 
-	s.SlackChannels = []interface{}{}
-	if value, ok := d.GetOk("slack_channels"); value != nil && ok {
-		if d.HasChange("slack_channels") {
+	if d.HasChange("slack_channels") {
+		if value, ok := d.GetOk("slack_channels"); value != nil && ok {
 			s.SlackChannels = value.([]interface{})
+		} else {
+			s.SlackChannels = []interface{}{}
 		}
 	}
 
-	s.SlackAliases = []interface{}{}
-	if value, ok := d.GetOk("slack_aliases"); value != nil && ok {
-		if d.HasChange("slack_aliases") {
+	if d.HasChange("slack_aliases") {
+		if value, ok := d.GetOk("slack_aliases"); value != nil && ok {
 			s.SlackAliases = value.([]interface{})
+		} else {
+			s.SlackAliases = []interface{}{}
 		}
 	}
 

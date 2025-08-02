@@ -139,10 +139,11 @@ func resourceFormSetUpdate(ctx context.Context, d *schema.ResourceData, meta int
 		s.IsDefault = tools.Bool(d.Get("is_default").(bool))
 	}
 
-	s.Forms = []interface{}{}
-	if value, ok := d.GetOk("forms"); value != nil && ok {
-		if d.HasChange("forms") {
+	if d.HasChange("forms") {
+		if value, ok := d.GetOk("forms"); value != nil && ok {
 			s.Forms = value.([]interface{})
+		} else {
+			s.Forms = []interface{}{}
 		}
 	}
 

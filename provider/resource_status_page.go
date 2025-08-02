@@ -212,7 +212,7 @@ func resourceStatusPage() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Services attached to the status page",
@@ -224,7 +224,7 @@ func resourceStatusPage() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Functionalities attached to the status page",
@@ -236,7 +236,7 @@ func resourceStatusPage() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "External domain names attached to the status page",
@@ -454,24 +454,27 @@ func resourceStatusPageUpdate(ctx context.Context, d *schema.ResourceData, meta 
 		s.Public = tools.Bool(d.Get("public").(bool))
 	}
 
-	s.ServiceIds = []interface{}{}
-	if value, ok := d.GetOk("service_ids"); value != nil && ok {
-		if d.HasChange("service_ids") {
+	if d.HasChange("service_ids") {
+		if value, ok := d.GetOk("service_ids"); value != nil && ok {
 			s.ServiceIds = value.([]interface{})
+		} else {
+			s.ServiceIds = []interface{}{}
 		}
 	}
 
-	s.FunctionalityIds = []interface{}{}
-	if value, ok := d.GetOk("functionality_ids"); value != nil && ok {
-		if d.HasChange("functionality_ids") {
+	if d.HasChange("functionality_ids") {
+		if value, ok := d.GetOk("functionality_ids"); value != nil && ok {
 			s.FunctionalityIds = value.([]interface{})
+		} else {
+			s.FunctionalityIds = []interface{}{}
 		}
 	}
 
-	s.ExternalDomainNames = []interface{}{}
-	if value, ok := d.GetOk("external_domain_names"); value != nil && ok {
-		if d.HasChange("external_domain_names") {
+	if d.HasChange("external_domain_names") {
+		if value, ok := d.GetOk("external_domain_names"); value != nil && ok {
 			s.ExternalDomainNames = value.([]interface{})
+		} else {
+			s.ExternalDomainNames = []interface{}{}
 		}
 	}
 

@@ -239,10 +239,11 @@ func resourceEscalationLevelUpdate(ctx context.Context, d *schema.ResourceData, 
 		s.Position = d.Get("position").(int)
 	}
 
-	s.NotificationTargetParams = []interface{}{}
-	if value, ok := d.GetOk("notification_target_params"); value != nil && ok {
-		if d.HasChange("notification_target_params") {
+	if d.HasChange("notification_target_params") {
+		if value, ok := d.GetOk("notification_target_params"); value != nil && ok {
 			s.NotificationTargetParams = value.([]interface{})
+		} else {
+			s.NotificationTargetParams = []interface{}{}
 		}
 	}
 

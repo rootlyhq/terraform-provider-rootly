@@ -71,7 +71,7 @@ func resourceAlertRoutingRule() *schema.Resource {
 
 			"conditions": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "The conditions for the alert routing rule",
@@ -123,7 +123,7 @@ func resourceAlertRoutingRule() *schema.Resource {
 								Type: schema.TypeString,
 							},
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
-							Computed:         true,
+							Computed:         false,
 							Required:         false,
 							Optional:         true,
 							Description:      "The values of the property field. Used if the property field condition type is 'is_one_of' or 'is_not_one_of' except for when property field name is 'alert_urgency'",
@@ -290,10 +290,11 @@ func resourceAlertRoutingRuleUpdate(ctx context.Context, d *schema.ResourceData,
 		s.ConditionType = d.Get("condition_type").(string)
 	}
 
-	s.Conditions = []interface{}{}
-	if value, ok := d.GetOk("conditions"); value != nil && ok {
-		if d.HasChange("conditions") {
+	if d.HasChange("conditions") {
+		if value, ok := d.GetOk("conditions"); value != nil && ok {
 			s.Conditions = value.([]interface{})
+		} else {
+			s.Conditions = []interface{}{}
 		}
 	}
 

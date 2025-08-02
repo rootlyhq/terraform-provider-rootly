@@ -141,10 +141,11 @@ func resourceFormSetConditionUpdate(ctx context.Context, d *schema.ResourceData,
 		s.Comparison = d.Get("comparison").(string)
 	}
 
-	s.Values = []interface{}{}
-	if value, ok := d.GetOk("values"); value != nil && ok {
-		if d.HasChange("values") {
+	if d.HasChange("values") {
+		if value, ok := d.GetOk("values"); value != nil && ok {
 			s.Values = value.([]interface{})
+		} else {
+			s.Values = []interface{}{}
 		}
 	}
 

@@ -98,7 +98,7 @@ func resourceCommunicationsGroup() *schema.Resource {
 
 			"communication_group_conditions": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Group conditions",
@@ -136,7 +136,7 @@ func resourceCommunicationsGroup() *schema.Resource {
 
 						"properties": &schema.Schema{
 							Type:             schema.TypeList,
-							Computed:         true,
+							Computed:         false,
 							Required:         false,
 							Optional:         true,
 							Description:      "Properties",
@@ -170,7 +170,7 @@ func resourceCommunicationsGroup() *schema.Resource {
 
 			"communication_group_members": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Group members",
@@ -219,7 +219,7 @@ func resourceCommunicationsGroup() *schema.Resource {
 
 			"communication_external_group_members": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "External group members",
@@ -444,24 +444,27 @@ func resourceCommunicationsGroupUpdate(ctx context.Context, d *schema.ResourceDa
 		s.EmailChannel = tools.Bool(d.Get("email_channel").(bool))
 	}
 
-	s.CommunicationGroupConditions = []interface{}{}
-	if value, ok := d.GetOk("communication_group_conditions"); value != nil && ok {
-		if d.HasChange("communication_group_conditions") {
+	if d.HasChange("communication_group_conditions") {
+		if value, ok := d.GetOk("communication_group_conditions"); value != nil && ok {
 			s.CommunicationGroupConditions = value.([]interface{})
+		} else {
+			s.CommunicationGroupConditions = []interface{}{}
 		}
 	}
 
-	s.CommunicationGroupMembers = []interface{}{}
-	if value, ok := d.GetOk("communication_group_members"); value != nil && ok {
-		if d.HasChange("communication_group_members") {
+	if d.HasChange("communication_group_members") {
+		if value, ok := d.GetOk("communication_group_members"); value != nil && ok {
 			s.CommunicationGroupMembers = value.([]interface{})
+		} else {
+			s.CommunicationGroupMembers = []interface{}{}
 		}
 	}
 
-	s.CommunicationExternalGroupMembers = []interface{}{}
-	if value, ok := d.GetOk("communication_external_group_members"); value != nil && ok {
-		if d.HasChange("communication_external_group_members") {
+	if d.HasChange("communication_external_group_members") {
+		if value, ok := d.GetOk("communication_external_group_members"); value != nil && ok {
 			s.CommunicationExternalGroupMembers = value.([]interface{})
+		} else {
+			s.CommunicationExternalGroupMembers = []interface{}{}
 		}
 	}
 

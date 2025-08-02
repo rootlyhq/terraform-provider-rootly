@@ -98,7 +98,7 @@ func resourceFormField() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "",
@@ -110,7 +110,7 @@ func resourceFormField() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "",
@@ -136,7 +136,7 @@ func resourceFormField() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "",
@@ -261,17 +261,19 @@ func resourceFormFieldUpdate(ctx context.Context, d *schema.ResourceData, meta i
 		s.Description = d.Get("description").(string)
 	}
 
-	s.Shown = []interface{}{}
-	if value, ok := d.GetOk("shown"); value != nil && ok {
-		if d.HasChange("shown") {
+	if d.HasChange("shown") {
+		if value, ok := d.GetOk("shown"); value != nil && ok {
 			s.Shown = value.([]interface{})
+		} else {
+			s.Shown = []interface{}{}
 		}
 	}
 
-	s.Required = []interface{}{}
-	if value, ok := d.GetOk("required"); value != nil && ok {
-		if d.HasChange("required") {
+	if d.HasChange("required") {
+		if value, ok := d.GetOk("required"); value != nil && ok {
 			s.Required = value.([]interface{})
+		} else {
+			s.Required = []interface{}{}
 		}
 	}
 
@@ -282,10 +284,11 @@ func resourceFormFieldUpdate(ctx context.Context, d *schema.ResourceData, meta i
 		s.Enabled = tools.Bool(d.Get("enabled").(bool))
 	}
 
-	s.DefaultValues = []interface{}{}
-	if value, ok := d.GetOk("default_values"); value != nil && ok {
-		if d.HasChange("default_values") {
+	if d.HasChange("default_values") {
+		if value, ok := d.GetOk("default_values"); value != nil && ok {
 			s.DefaultValues = value.([]interface{})
+		} else {
+			s.DefaultValues = []interface{}{}
 		}
 	}
 

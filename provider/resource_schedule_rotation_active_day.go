@@ -162,10 +162,11 @@ func resourceScheduleRotationActiveDayUpdate(ctx context.Context, d *schema.Reso
 		s.DayName = d.Get("day_name").(string)
 	}
 
-	s.ActiveTimeAttributes = []interface{}{}
-	if value, ok := d.GetOk("active_time_attributes"); value != nil && ok {
-		if d.HasChange("active_time_attributes") {
+	if d.HasChange("active_time_attributes") {
+		if value, ok := d.GetOk("active_time_attributes"); value != nil && ok {
 			s.ActiveTimeAttributes = value.([]interface{})
+		} else {
+			s.ActiveTimeAttributes = []interface{}{}
 		}
 	}
 

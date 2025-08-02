@@ -60,7 +60,7 @@ func resourceWorkflowCustomFieldSelection() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "",
@@ -72,7 +72,7 @@ func resourceWorkflowCustomFieldSelection() *schema.Resource {
 					Type: schema.TypeInt,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "",
@@ -157,17 +157,19 @@ func resourceWorkflowCustomFieldSelectionUpdate(ctx context.Context, d *schema.R
 		s.IncidentCondition = d.Get("incident_condition").(string)
 	}
 
-	s.Values = []interface{}{}
-	if value, ok := d.GetOk("values"); value != nil && ok {
-		if d.HasChange("values") {
+	if d.HasChange("values") {
+		if value, ok := d.GetOk("values"); value != nil && ok {
 			s.Values = value.([]interface{})
+		} else {
+			s.Values = []interface{}{}
 		}
 	}
 
-	s.SelectedOptionIds = []interface{}{}
-	if value, ok := d.GetOk("selected_option_ids"); value != nil && ok {
-		if d.HasChange("selected_option_ids") {
+	if d.HasChange("selected_option_ids") {
+		if value, ok := d.GetOk("selected_option_ids"); value != nil && ok {
 			s.SelectedOptionIds = value.([]interface{})
+		} else {
+			s.SelectedOptionIds = []interface{}{}
 		}
 	}
 

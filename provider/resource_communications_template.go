@@ -73,7 +73,7 @@ func resourceCommunicationsTemplate() *schema.Resource {
 
 			"communication_template_stages": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Communication template stages",
@@ -296,10 +296,11 @@ func resourceCommunicationsTemplateUpdate(ctx context.Context, d *schema.Resourc
 		s.CommunicationTypeId = d.Get("communication_type_id").(string)
 	}
 
-	s.CommunicationTemplateStages = []interface{}{}
-	if value, ok := d.GetOk("communication_template_stages"); value != nil && ok {
-		if d.HasChange("communication_template_stages") {
+	if d.HasChange("communication_template_stages") {
+		if value, ok := d.GetOk("communication_template_stages"); value != nil && ok {
 			s.CommunicationTemplateStages = value.([]interface{})
+		} else {
+			s.CommunicationTemplateStages = []interface{}{}
 		}
 	}
 

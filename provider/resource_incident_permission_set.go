@@ -158,17 +158,19 @@ func resourceIncidentPermissionSetUpdate(ctx context.Context, d *schema.Resource
 		s.Description = d.Get("description").(string)
 	}
 
-	s.PrivateIncidentPermissions = []interface{}{}
-	if value, ok := d.GetOk("private_incident_permissions"); value != nil && ok {
-		if d.HasChange("private_incident_permissions") {
+	if d.HasChange("private_incident_permissions") {
+		if value, ok := d.GetOk("private_incident_permissions"); value != nil && ok {
 			s.PrivateIncidentPermissions = value.([]interface{})
+		} else {
+			s.PrivateIncidentPermissions = []interface{}{}
 		}
 	}
 
-	s.PublicIncidentPermissions = []interface{}{}
-	if value, ok := d.GetOk("public_incident_permissions"); value != nil && ok {
-		if d.HasChange("public_incident_permissions") {
+	if d.HasChange("public_incident_permissions") {
+		if value, ok := d.GetOk("public_incident_permissions"); value != nil && ok {
 			s.PublicIncidentPermissions = value.([]interface{})
+		} else {
+			s.PublicIncidentPermissions = []interface{}{}
 		}
 	}
 

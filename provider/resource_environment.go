@@ -59,7 +59,7 @@ func resourceEnvironment() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Emails attached to the environment",
@@ -85,7 +85,7 @@ func resourceEnvironment() *schema.Resource {
 
 			"slack_channels": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Slack Channels associated with this environment",
@@ -116,7 +116,7 @@ func resourceEnvironment() *schema.Resource {
 
 			"slack_aliases": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Slack Aliases associated with this environment",
@@ -272,10 +272,11 @@ func resourceEnvironmentUpdate(ctx context.Context, d *schema.ResourceData, meta
 		s.Description = d.Get("description").(string)
 	}
 
-	s.NotifyEmails = []interface{}{}
-	if value, ok := d.GetOk("notify_emails"); value != nil && ok {
-		if d.HasChange("notify_emails") {
+	if d.HasChange("notify_emails") {
+		if value, ok := d.GetOk("notify_emails"); value != nil && ok {
 			s.NotifyEmails = value.([]interface{})
+		} else {
+			s.NotifyEmails = []interface{}{}
 		}
 	}
 
@@ -286,17 +287,19 @@ func resourceEnvironmentUpdate(ctx context.Context, d *schema.ResourceData, meta
 		s.Position = d.Get("position").(int)
 	}
 
-	s.SlackChannels = []interface{}{}
-	if value, ok := d.GetOk("slack_channels"); value != nil && ok {
-		if d.HasChange("slack_channels") {
+	if d.HasChange("slack_channels") {
+		if value, ok := d.GetOk("slack_channels"); value != nil && ok {
 			s.SlackChannels = value.([]interface{})
+		} else {
+			s.SlackChannels = []interface{}{}
 		}
 	}
 
-	s.SlackAliases = []interface{}{}
-	if value, ok := d.GetOk("slack_aliases"); value != nil && ok {
-		if d.HasChange("slack_aliases") {
+	if d.HasChange("slack_aliases") {
+		if value, ok := d.GetOk("slack_aliases"); value != nil && ok {
 			s.SlackAliases = value.([]interface{})
+		} else {
+			s.SlackAliases = []interface{}{}
 		}
 	}
 

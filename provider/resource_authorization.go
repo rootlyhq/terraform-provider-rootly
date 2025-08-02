@@ -159,10 +159,11 @@ func resourceAuthorizationUpdate(ctx context.Context, d *schema.ResourceData, me
 		s.GranteeType = d.Get("grantee_type").(string)
 	}
 
-	s.Permissions = []interface{}{}
-	if value, ok := d.GetOk("permissions"); value != nil && ok {
-		if d.HasChange("permissions") {
+	if d.HasChange("permissions") {
+		if value, ok := d.GetOk("permissions"); value != nil && ok {
 			s.Permissions = value.([]interface{})
+		} else {
+			s.Permissions = []interface{}{}
 		}
 	}
 

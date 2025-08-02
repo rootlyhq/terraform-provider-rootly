@@ -89,7 +89,7 @@ func resourceAlertGroup() *schema.Resource {
 
 			"targets": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "",
@@ -121,7 +121,7 @@ func resourceAlertGroup() *schema.Resource {
 
 			"attributes": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "",
@@ -143,7 +143,7 @@ func resourceAlertGroup() *schema.Resource {
 
 			"conditions": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "The conditions for the alert group",
@@ -195,7 +195,7 @@ func resourceAlertGroup() *schema.Resource {
 								Type: schema.TypeString,
 							},
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
-							Computed:         true,
+							Computed:         false,
 							Required:         false,
 							Optional:         true,
 							Description:      "The values of the property field. Used if the property field condition type is 'is_one_of' or 'is_not_one_of' except for when property field name is 'alert_urgency'",
@@ -203,7 +203,7 @@ func resourceAlertGroup() *schema.Resource {
 
 						"values": &schema.Schema{
 							Type:             schema.TypeList,
-							Computed:         true,
+							Computed:         false,
 							Required:         false,
 							Optional:         true,
 							Description:      "",
@@ -417,24 +417,27 @@ func resourceAlertGroupUpdate(ctx context.Context, d *schema.ResourceData, meta 
 		s.GroupByAlertUrgency = tools.Bool(d.Get("group_by_alert_urgency").(bool))
 	}
 
-	s.Targets = []interface{}{}
-	if value, ok := d.GetOk("targets"); value != nil && ok {
-		if d.HasChange("targets") {
+	if d.HasChange("targets") {
+		if value, ok := d.GetOk("targets"); value != nil && ok {
 			s.Targets = value.([]interface{})
+		} else {
+			s.Targets = []interface{}{}
 		}
 	}
 
-	s.Attributes = []interface{}{}
-	if value, ok := d.GetOk("attributes"); value != nil && ok {
-		if d.HasChange("attributes") {
+	if d.HasChange("attributes") {
+		if value, ok := d.GetOk("attributes"); value != nil && ok {
 			s.Attributes = value.([]interface{})
+		} else {
+			s.Attributes = []interface{}{}
 		}
 	}
 
-	s.Conditions = []interface{}{}
-	if value, ok := d.GetOk("conditions"); value != nil && ok {
-		if d.HasChange("conditions") {
+	if d.HasChange("conditions") {
+		if value, ok := d.GetOk("conditions"); value != nil && ok {
 			s.Conditions = value.([]interface{})
+		} else {
+			s.Conditions = []interface{}{}
 		}
 	}
 

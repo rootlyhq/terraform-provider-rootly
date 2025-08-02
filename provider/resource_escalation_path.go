@@ -108,7 +108,7 @@ func resourceEscalationPath() *schema.Resource {
 
 			"rules": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "Escalation path rules",
@@ -132,7 +132,7 @@ func resourceEscalationPath() *schema.Resource {
 								Type: schema.TypeString,
 							},
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
-							Computed:         true,
+							Computed:         false,
 							Required:         false,
 							Optional:         true,
 							Description:      "Alert urgency ids for which this escalation path should be used",
@@ -189,7 +189,7 @@ func resourceEscalationPath() *schema.Resource {
 
 			"time_restrictions": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
+				Computed:         false,
 				Required:         false,
 				Optional:         true,
 				Description:      "If time restrictions are set, alerts will follow this path when they arrive within the specified time ranges and meet the rules.",
@@ -406,10 +406,11 @@ func resourceEscalationPathUpdate(ctx context.Context, d *schema.ResourceData, m
 		s.InitialDelay = d.Get("initial_delay").(int)
 	}
 
-	s.Rules = []interface{}{}
-	if value, ok := d.GetOk("rules"); value != nil && ok {
-		if d.HasChange("rules") {
+	if d.HasChange("rules") {
+		if value, ok := d.GetOk("rules"); value != nil && ok {
 			s.Rules = value.([]interface{})
+		} else {
+			s.Rules = []interface{}{}
 		}
 	}
 
@@ -417,10 +418,11 @@ func resourceEscalationPathUpdate(ctx context.Context, d *schema.ResourceData, m
 		s.TimeRestrictionTimeZone = d.Get("time_restriction_time_zone").(string)
 	}
 
-	s.TimeRestrictions = []interface{}{}
-	if value, ok := d.GetOk("time_restrictions"); value != nil && ok {
-		if d.HasChange("time_restrictions") {
+	if d.HasChange("time_restrictions") {
+		if value, ok := d.GetOk("time_restrictions"); value != nil && ok {
 			s.TimeRestrictions = value.([]interface{})
+		} else {
+			s.TimeRestrictions = []interface{}{}
 		}
 	}
 
