@@ -1,5 +1,22 @@
 # Changelog
 
+## [3.6.0] -- 2025-08-02
+
+### Added
+
+- Add `alert_broadcast_enabled` and `alert_broadcast_channel` to services and teams
+
+### Changed
+
+- Change list attributes erroneously marked computed to non-computed
+- Mark `rootly_alerts_source.status` as computed
+- Don't require `rootly_alert_group.targets`
+
+### Fixed
+
+- Fixed list/nested resource attributes not updating provider
+- Fixed attributes marked as computed as non-computed (and vice versa)
+
 ## [3.5.2] -- 2025-08-01
 
 ### Fixed
