@@ -38,7 +38,7 @@ resource "rootly_alert_group" "example" {
 
 ### Optional
 
-- `attributes` (Block List) (see [below for nested schema](#nestedblock--attributes))
+- `attributes` (Block List) This field is deprecated. Please use the `conditions` field instead, `attributes` will be removed in the future. (see [below for nested schema](#nestedblock--attributes))
 - `condition_type` (String) Grouping condition for the alert group
 - `conditions` (Block List) The conditions for the alert group (see [below for nested schema](#nestedblock--conditions))
 - `deleted_at` (String) Date or deletion

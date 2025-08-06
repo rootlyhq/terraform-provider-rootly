@@ -12,8 +12,8 @@ description: |-
 ## Example Usage
 
 ```shell
-data "rootly_schedule" "my-schedule" {
-  name = "my-schedule"
+data "rootly_escalation_policy" "my-escalation-policy" {
+  name = "my-escalation-policy"
 }
 ```
 

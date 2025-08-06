@@ -124,7 +124,7 @@ func resourceAlertGroup() *schema.Resource {
 				Computed:         false,
 				Required:         false,
 				Optional:         true,
-				Description:      "",
+				Description:      "This field is deprecated. Please use the `conditions` field instead, `attributes` will be removed in the future.",
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
