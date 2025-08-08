@@ -16,15 +16,39 @@ func TestAccResourceOnCallRole(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceOnCallRole,
+				Config: testAccResourceOnCallRoleCreate,
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_on_call_role.test", "alert_sources_permissions.0", "read"),
+					resource.TestCheckResourceAttr("rootly_on_call_role.test", "alert_sources_permissions.1", "create"),
+					resource.TestCheckResourceAttr("rootly_on_call_role.test", "alert_sources_permissions.2", "update"),
+					resource.TestCheckNoResourceAttr("rootly_on_call_role.test", "alert_sources_permissions.3"),
+				),
+			},
+			{
+				Config: testAccResourceOnCallRoleUpdate,
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_on_call_role.test", "alert_sources_permissions.0", "read"),
+					resource.TestCheckResourceAttr("rootly_on_call_role.test", "alert_sources_permissions.1", "create"),
+					resource.TestCheckResourceAttr("rootly_on_call_role.test", "alert_sources_permissions.2", "update"),
+					resource.TestCheckResourceAttr("rootly_on_call_role.test", "alert_sources_permissions.3", "delete"),
+				),
 			},
 		},
 	})
 }
 
-const testAccResourceOnCallRole = `
+const testAccResourceOnCallRoleCreate = `
 resource "rootly_on_call_role" "test" {
-	name = "test"
+	name = "test different name"
 	system_role = "custom"
+	alert_sources_permissions = ["read", "create", "update"]
+}
+`
+
+const testAccResourceOnCallRoleUpdate = `
+resource "rootly_on_call_role" "test" {
+	name = "test different name"
+	system_role = "custom"
+	alert_sources_permissions = ["read", "create", "update", "delete"]
 }
 `
