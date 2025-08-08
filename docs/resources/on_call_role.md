@@ -21,7 +21,7 @@ description: |-
 
 ### Optional
 
-- `alert_sources_permissions` (List of String) Value must be one of `create`, `update`, `delete`.
+- `alert_sources_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `alert_urgency_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `alerts_permissions` (List of String) Value must be one of `create`, `update`, `read`.
 - `api_keys_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.

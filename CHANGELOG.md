@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.7.0] -- TBD
+
+### Changed
+
+- Added support for `delete` permission to `rootly_on_call_role.alert_sources_permissions`
+
 ## [3.6.0] -- 2025-08-02
 
 ### Added
