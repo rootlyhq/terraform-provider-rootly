@@ -46,11 +46,12 @@ func resourceOnCallRole() *schema.Resource {
 
 			"system_role": &schema.Schema{
 				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
+				Computed:    true,
+				Required:    false,
 				Optional:    false,
 				ForceNew:    false,
-				Description: "The kind of role",
+				Default:     "custom",
+				Description: "The kind of role. Always defaults to 'custom' for this resource.",
 			},
 
 			"alert_sources_permissions": &schema.Schema{
@@ -290,9 +291,7 @@ func resourceOnCallRoleCreate(ctx context.Context, d *schema.ResourceData, meta 
 	if value, ok := d.GetOkExists("slug"); ok {
 		s.Slug = value.(string)
 	}
-	if value, ok := d.GetOkExists("system_role"); ok {
-		s.SystemRole = value.(string)
-	}
+	s.SystemRole = "custom"
 	if value, ok := d.GetOkExists("alert_sources_permissions"); ok {
 		s.AlertSourcesPermissions = value.([]interface{})
 	}
@@ -408,9 +407,6 @@ func resourceOnCallRoleUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	}
 	if d.HasChange("slug") {
 		s.Slug = d.Get("slug").(string)
-	}
-	if d.HasChange("system_role") {
-		s.SystemRole = d.Get("system_role").(string)
 	}
 
 	if d.HasChange("alert_sources_permissions") {
