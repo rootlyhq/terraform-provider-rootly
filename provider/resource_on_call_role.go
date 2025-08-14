@@ -58,13 +58,13 @@ func resourceOnCallRole() *schema.Resource {
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
 					Type:         schema.TypeString,
-					ValidateFunc: validation.StringInSlice([]string{"create", "update", "delete"}, false),
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
 				Required:         false,
 				Optional:         true,
-				Description:      "Value must be one of `create`, `update`, `delete`.",
+				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
 			},
 
 			"alert_urgency_permissions": &schema.Schema{
