@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.6.1] -- 2025-08-14
+
+### Added
+
+- Add `rootly_workflow_task_create_anthropic_chat_completion` resource
+- Add `rootly_workflow_task_create_google_gemini_chat_completion` resource
+- Add `rootly_workflow_task_create_openai_chat_completion` resource
+- Add `rootly_workflow_task_create_watsonx_chat_completion` resource
+
+### Changed
+
+- Rename workflow tasks from `genius_create_*` to `create_*` pattern for consistency with other task naming
+- Update `rootly_on_call_role.alert_sources_permissions` to include `read` permission option
+
 ## [3.6.0] -- 2025-08-02
 
 ### Added
