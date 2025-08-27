@@ -110,10 +110,12 @@ function renameEscalationPolicyPathSchemas(obj) {
 }
 
 function stripParameterAnyOf(obj) {
-  if (obj.anyOf && obj.anyOf.every(item => item.type === "string")) {
-    return {"type": "string"};
+  if (typeof obj === "object" && obj !== null) {
+    if (obj.anyOf && obj.anyOf.every(item => item.type === "string")) {
+      return {"type": "string"};
+    }
+    return obj;
   }
-  return obj;
 }
 
 fixFilterParameterTypes(swagger.paths);
