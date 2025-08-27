@@ -123,21 +123,28 @@ function stripParameterAnyOf(obj) {
   return obj;
 }
 
-fixFilterParameterTypes(swagger.paths);
-stripAnyOf(swagger.components.schemas);
-combineOneOf(swagger.components.schemas);
-
-// Process path parameters to strip anyOf that causes oapi-codegen issues
-Object.keys(swagger.paths).forEach(path => {
-  if (swagger.paths[path].parameters) {
-    swagger.paths[path].parameters.forEach(param => {
-      if (param.schema) {
-        param.schema = stripParameterAnyOf(param.schema);
+// Fix oapi-codegen duplicate type generation issues caused by anyOf path parameters
+// oapi-codegen v2.4.1 generates separate types (Id0, Id1) for each anyOf variant,
+// causing "redeclared in this block" errors when multiple operations share the same path.
+// This function converts anyOf parameters with all string types to simple string type.
+function processPathParametersAnyOf(paths) {
+  if (typeof paths === "object" && paths !== null) {
+    Object.keys(paths).forEach(path => {
+      if (paths[path].parameters) {
+        paths[path].parameters.forEach(param => {
+          if (param.schema) {
+            param.schema = stripParameterAnyOf(param.schema);
+          }
+        });
       }
     });
   }
-});
+}
 
+fixFilterParameterTypes(swagger.paths);
+stripAnyOf(swagger.components.schemas);
+combineOneOf(swagger.components.schemas);
+processPathParametersAnyOf(swagger.paths);
 renameEscalationPolicyLevelSchemas(swagger);
 renameEscalationPolicyPathSchemas(swagger);
 fs.writeFileSync(process.argv[2], JSON.stringify(swagger));
