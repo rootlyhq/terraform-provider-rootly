@@ -109,9 +109,17 @@ function renameEscalationPolicyPathSchemas(obj) {
   }
 }
 
+function stripParameterAnyOf(obj) {
+  if (obj.anyOf && obj.anyOf.every(item => item.type === "string")) {
+    return {"type": "string"};
+  }
+  return obj;
+}
+
 fixFilterParameterTypes(swagger.paths);
 stripAnyOf(swagger.components.schemas);
 combineOneOf(swagger.components.schemas);
+stripParameterAnyOf(swagger.components.parameters);
 renameEscalationPolicyLevelSchemas(swagger);
 renameEscalationPolicyPathSchemas(swagger);
 fs.writeFileSync(process.argv[2], JSON.stringify(swagger));
