@@ -114,14 +114,30 @@ function stripParameterAnyOf(obj) {
     if (obj.anyOf && obj.anyOf.every(item => item.type === "string")) {
       return {"type": "string"};
     }
-    return obj;
+
+    // Recursively process nested objects
+    Object.keys(obj).forEach(function (key) {
+      obj[key] = stripParameterAnyOf(obj[key]);
+    });
   }
+  return obj;
 }
 
 fixFilterParameterTypes(swagger.paths);
 stripAnyOf(swagger.components.schemas);
 combineOneOf(swagger.components.schemas);
-stripParameterAnyOf(swagger.components.parameters);
+
+// Process path parameters to strip anyOf that causes oapi-codegen issues
+Object.keys(swagger.paths).forEach(path => {
+  if (swagger.paths[path].parameters) {
+    swagger.paths[path].parameters.forEach(param => {
+      if (param.schema) {
+        param.schema = stripParameterAnyOf(param.schema);
+      }
+    });
+  }
+});
+
 renameEscalationPolicyLevelSchemas(swagger);
 renameEscalationPolicyPathSchemas(swagger);
 fs.writeFileSync(process.argv[2], JSON.stringify(swagger));
