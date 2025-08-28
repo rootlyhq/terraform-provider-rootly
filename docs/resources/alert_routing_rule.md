@@ -22,7 +22,6 @@ description: |-
 
 ### Optional
 
-- `condition_groups` (Block List) The condition groups for the alert routing rule (see [below for nested schema](#nestedblock--condition_groups))
 - `condition_type` (String) The type of condition for the alert routing rule. Value must be one of `all`, `any`.
 - `conditions` (Block List) The conditions for the alert routing rule (see [below for nested schema](#nestedblock--conditions))
 - `enabled` (Boolean)
@@ -39,35 +38,6 @@ Optional:
 
 - `target_id` (String) The ID of the target
 - `target_type` (String) The type of the target. Value must be one of `Service`, `Group`, `EscalationPolicy`.
-
-
-<a id="nestedblock--condition_groups"></a>
-### Nested Schema for `condition_groups`
-
-Optional:
-
-- `conditions` (Block List) The conditions within this group (see [below for nested schema](#nestedblock--condition_groups--conditions))
-- `created_at` (String) Date of creation
-- `id` (String) Unique ID of the condition group
-- `position` (Number) The position of the condition group for ordering
-- `updated_at` (String) Date of last update
-
-<a id="nestedblock--condition_groups--conditions"></a>
-### Nested Schema for `condition_groups.conditions`
-
-Optional:
-
-- `conditionable_id` (String) The ID of the conditionable object
-- `conditionable_type` (String) The type of the conditionable object
-- `created_at` (String) Date of creation
-- `id` (String) Unique ID of the condition
-- `property_field_condition_type` (String) The condition type of the property field. Value must be one of `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is_empty`.
-- `property_field_name` (String) The name of the property field
-- `property_field_type` (String) The type of the property field. Value must be one of `attribute`, `payload`.
-- `property_field_value` (String) The value of the property field
-- `property_field_values` (List of String) The values of the property field
-- `updated_at` (String) Date of last update
-
 
 
 <a id="nestedblock--conditions"></a>
