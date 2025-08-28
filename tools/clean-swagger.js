@@ -109,9 +109,42 @@ function renameEscalationPolicyPathSchemas(obj) {
   }
 }
 
+function stripParameterAnyOf(obj) {
+  if (typeof obj === "object" && obj !== null) {
+    if (obj.anyOf && obj.anyOf.every(item => item.type === "string")) {
+      return {"type": "string"};
+    }
+
+    // Recursively process nested objects
+    Object.keys(obj).forEach(function (key) {
+      obj[key] = stripParameterAnyOf(obj[key]);
+    });
+  }
+  return obj;
+}
+
+// Fix oapi-codegen duplicate type generation issues caused by anyOf path parameters
+// oapi-codegen v2.4.1 generates separate types (Id0, Id1) for each anyOf variant,
+// causing "redeclared in this block" errors when multiple operations share the same path.
+// This function converts anyOf parameters with all string types to simple string type.
+function processPathParametersAnyOf(paths) {
+  if (typeof paths === "object" && paths !== null) {
+    Object.keys(paths).forEach(path => {
+      if (paths[path].parameters) {
+        paths[path].parameters.forEach(param => {
+          if (param.schema) {
+            param.schema = stripParameterAnyOf(param.schema);
+          }
+        });
+      }
+    });
+  }
+}
+
 fixFilterParameterTypes(swagger.paths);
 stripAnyOf(swagger.components.schemas);
 combineOneOf(swagger.components.schemas);
+processPathParametersAnyOf(swagger.paths);
 renameEscalationPolicyLevelSchemas(swagger);
 renameEscalationPolicyPathSchemas(swagger);
 fs.writeFileSync(process.argv[2], JSON.stringify(swagger));
