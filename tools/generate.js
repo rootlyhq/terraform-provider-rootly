@@ -306,17 +306,11 @@ function collectionPathSchema(name) {
   return Object.keys(swagger.paths)
     .filter((url) => {
       const get = swagger.paths[url].get;
-      if (!get) return false;
-
-      const operationId = get.operationId.replace(/ /g, "");
-      const expectedListId = `list${inflect.pluralize(inflect.camelize(name))}`;
-
-      // Handle special case for alert_route which uses getAlertRoutes instead of listAlertRoutes
-      if (name === 'alert_route') {
-        return operationId === 'getAlertRoutes';
-      }
-
-      return operationId === expectedListId;
+      return (
+        get &&
+        get.operationId.replace(/ /g, "") ===
+          `list${inflect.pluralize(inflect.camelize(name))}`
+      );
     })
     .map((url) => swagger.paths[url])[0];
 }
