@@ -25,7 +25,7 @@ func dataSourceFormField() *schema.Resource {
 				Type:         schema.TypeString,
 				Computed:     true,
 				Optional:     true,
-				ValidateFunc: validation.StringInSlice([]string{"custom", "title", "summary", "mitigation_message", "resolution_message", "severity", "environments", "types", "services", "causes", "functionalities", "teams", "visibility", "mark_as_test", "mark_as_backfilled", "labels", "notify_emails", "trigger_manual_workflows", "show_ongoing_incidents", "attach_alerts", "mark_as_in_triage", "in_triage_at", "started_at", "detected_at", "acknowledged_at", "mitigated_at", "resolved_at", "closed_at", "custom_sub_status", "manual_starting_datetime_field"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"custom", "title", "summary", "mitigation_message", "resolution_message", "severity", "environments", "types", "services", "causes", "functionalities", "teams", "visibility", "mark_as_test", "mark_as_backfilled", "labels", "notify_emails", "trigger_manual_workflows", "show_ongoing_incidents", "attach_alerts", "mark_as_in_triage", "in_triage_at", "started_at", "detected_at", "acknowledged_at", "mitigated_at", "resolved_at", "closed_at", "manual_starting_datetime_field"}, false),
 			},
 
 			"name": &schema.Schema{
