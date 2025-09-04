@@ -29,7 +29,6 @@ func TestAccDataSourceAlertField(t *testing.T) {
 const testAccDataSourceAlertField = `
 resource "rootly_alert_field" "test" {
 	name = "test-field"
-	kind = "text"
 }
 
 data "rootly_alert_field" "test" {

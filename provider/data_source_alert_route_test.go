@@ -27,21 +27,19 @@ func TestAccDataSourceAlertRoute(t *testing.T) {
 }
 
 const testAccDataSourceAlertRoute = `
-resource "rootly_team" "tf" {
-	name = "tf"
-	description = "tf"
+data "rootly_alerts_source" "test" {
+  source_type = "generic_webhook"
 }
 
-resource "rootly_alerts_source" "tf" {
-	name = "tf"
-	source_type = "generic_webhook"
+resource "rootly_team" "test" {
+	name = "Test Team Alert Route Data Source"
 }
 
 resource "rootly_alert_route" "test" {
 	name = "test-route"
 	enabled = true
-	alerts_source_ids = [rootly_alerts_source.tf.id]
-	owner_group_ids = [rootly_team.tf.id]
+	alerts_source_ids = [data.rootly_alerts_source.test.id]
+	owner_group_ids = [rootly_team.test.id]
 }
 
 data "rootly_alert_route" "test" {

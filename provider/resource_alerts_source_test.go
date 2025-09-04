@@ -31,13 +31,13 @@ func TestAccResourceAlertsSource(t *testing.T) {
 }
 
 const testAccResourceAlertsSourceCreate = `
-resource "rootly_team" "tf" {
-	name = "tf"
+resource "rootly_team" "test" {
+	name = "Test Team Alerts Source"
 	description = "tf"
 }
 
-resource "rootly_alert_urgency" "tf" {
-	name = "tf"
+resource "rootly_alert_urgency" "test" {
+	name = "Test Urgency Alerts Source"
 	description = "tf"
 	position = 1
 }
@@ -46,10 +46,10 @@ resource "rootly_alerts_source" with-template {
   name = "TF: with template"
 
   source_type = "generic_webhook"
-  owner_group_ids = [rootly_team.tf.id]
+  owner_group_ids = [rootly_team.test.id]
 
   alert_source_urgency_rules_attributes {
-	alert_urgency_id = rootly_alert_urgency.tf.id
+	alert_urgency_id = rootly_alert_urgency.test.id
 	json_path = "test"
 	operator = "is"
 	value = "P1"
@@ -69,13 +69,13 @@ resource "rootly_alerts_source" with-template {
 `
 
 const testAccResourceAlertsSourceUpdate = `
-resource "rootly_team" "tf" {
-	name = "tf"
+resource "rootly_team" "test" {
+	name = "Test Team Alerts Source"
 	description = "tf"
 }
 
-resource "rootly_alert_urgency" "tf" {
-	name = "tf"
+resource "rootly_alert_urgency" "test" {
+	name = "Test Urgency Alerts Source"
 	description = "tf"
 	position = 1
 }
@@ -84,10 +84,10 @@ resource "rootly_alerts_source" with-template {
   name = "TF: with template"
 
   source_type = "generic_webhook"
-  owner_group_ids = [rootly_team.tf.id]
+  owner_group_ids = [rootly_team.test.id]
 
   alert_source_urgency_rules_attributes {
-	alert_urgency_id = rootly_alert_urgency.tf.id
+	alert_urgency_id = rootly_alert_urgency.test.id
 	json_path = "test"
 	operator = "is"
 	value = "P1"
