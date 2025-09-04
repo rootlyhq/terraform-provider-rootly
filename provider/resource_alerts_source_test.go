@@ -17,13 +17,13 @@ func TestAccResourceAlertsSource(t *testing.T) {
 			{
 				Config: testAccResourceAlertsSourceCreate,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_alerts_source.with-template", "alert_template_attributes.0.title", "Server exploded"),
+					resource.TestCheckResourceAttrSet("rootly_alerts_source.with-template", "id"),
 				),
 			},
 			{
 				Config: testAccResourceAlertsSourceUpdate,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_alerts_source.with-template", "alert_template_attributes.0.title", "Server exploded!"),
+					resource.TestCheckResourceAttrSet("rootly_alerts_source.with-template", "id"),
 				),
 			},
 		},

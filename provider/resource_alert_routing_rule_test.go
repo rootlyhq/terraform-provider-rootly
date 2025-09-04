@@ -54,12 +54,13 @@ resource "rootly_alert_routing_rule" "test" {
     target_id   = rootly_team.test.id
     target_type = "Group"
   }
-  condition_type = "all"
-  conditions {
-    property_field_condition_type = "contains"
-    property_field_name = "environment"
-    property_field_type = "payload"
-    property_field_value = "production"
+  condition_groups {
+    conditions {
+      property_field_condition_type = "contains"
+      property_field_name = "environment"
+      property_field_type = "payload"
+      property_field_value = "production"
+    }
   }
 }
 `
@@ -86,12 +87,13 @@ resource "rootly_alert_routing_rule" "test" {
     target_id   = rootly_team.test.id
     target_type = "Group"
   }
-  condition_type = "all"
-  conditions {
-    property_field_condition_type = "contains"
-    property_field_name = "environment"
-    property_field_type = "payload"
-    property_field_value = "production"
+  condition_groups {
+    conditions {
+      property_field_condition_type = "contains"
+      property_field_name = "environment"
+      property_field_type = "payload"
+      property_field_value = "production"
+    }
   }
 }
 `

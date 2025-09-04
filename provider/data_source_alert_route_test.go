@@ -19,7 +19,7 @@ func TestAccDataSourceAlertRoute(t *testing.T) {
 			{
 				Config: testAccDataSourceAlertRoute,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("data.rootly_alert_route.test", "name", "test-route"),
+					resource.TestCheckResourceAttr("data.rootly_alert_route.test", "name", "test-route-data-source"),
 				),
 			},
 		},
@@ -36,7 +36,7 @@ resource "rootly_team" "test" {
 }
 
 resource "rootly_alert_route" "test" {
-	name = "test-route"
+	name = "test-route-data-source"
 	enabled = true
 	alerts_source_ids = [data.rootly_alerts_source.test.id]
 	owner_group_ids = [rootly_team.test.id]
