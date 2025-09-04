@@ -126,6 +126,8 @@ func resourceAlertRouteRead(ctx context.Context, d *schema.ResourceData, meta in
 	d.Set("enabled", item.Enabled)
 	d.Set("alerts_source_ids", item.AlertsSourceIds)
 	d.Set("owner_group_ids", item.OwnerGroupIds)
+	d.Set("alert_routing_rules", item.AlertRoutingRules)
+	d.Set("alert_routing_rule_targets", item.AlertRoutingRuleTargets)
 
 	return nil
 }
