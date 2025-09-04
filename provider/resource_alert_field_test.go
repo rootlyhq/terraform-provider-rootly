@@ -19,14 +19,14 @@ func TestAccResourceAlertField(t *testing.T) {
 				Config: testAccResourceAlertFieldCreate,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_alert_field.test", "name", "test-field"),
-					resource.TestCheckResourceAttr("rootly_alert_field.test", "kind", "text"),
+					resource.TestCheckResourceAttr("rootly_alert_field.test", "kind", "custom"),
 				),
 			},
 			{
 				Config: testAccResourceAlertFieldUpdate,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_alert_field.test", "name", "test-field-updated"),
-					resource.TestCheckResourceAttr("rootly_alert_field.test", "kind", "number"),
+					resource.TestCheckResourceAttr("rootly_alert_field.test", "kind", "title"),
 				),
 			},
 		},
