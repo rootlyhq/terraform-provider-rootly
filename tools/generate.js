@@ -58,6 +58,7 @@ const excluded = {
     "custom_field",
     "dashboard_panel",
     "dashboard",
+    "escalation_path",
     "incident_action_item",
     "incident_custom_field_selection",
     "incident_event_functionality",
