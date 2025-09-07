@@ -54,6 +54,7 @@ resource "rootly_alert_routing_rule" "test" {
     target_id   = rootly_team.test.id
     target_type = "Group"
   }
+  condition_type = "all"
   conditions {
     property_field_condition_type = "contains"
     property_field_name = "environment"
@@ -85,6 +86,7 @@ resource "rootly_alert_routing_rule" "test" {
     target_id   = rootly_team.test.id
     target_type = "Group"
   }
+  condition_type = "all"
   conditions {
     property_field_condition_type = "contains"
     property_field_name = "environment"
