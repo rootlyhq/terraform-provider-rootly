@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.6.2] -- 2025-09-05
+
+### Fixed
+
+- Fixed rootly_escalation_path.initial_delay so it can be updated with value of `0`
+
 ## [3.6.1] -- 2025-08-14
 
 ### Added

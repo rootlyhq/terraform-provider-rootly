@@ -17,6 +17,10 @@ func TestAccResourceSchedule(t *testing.T) {
 				Config: testAccResourceScheduleCreated,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_schedule.tf", "name", "test-initial"),
+					resource.TestCheckResourceAttr("rootly_schedule.tf", "description", "test description"),
+					resource.TestCheckResourceAttr("rootly_schedule.tf", "all_time_coverage", "true"),
+					resource.TestCheckResourceAttr("rootly_schedule.tf", "owner_user_id", "4261"),
+					resource.TestCheckResourceAttr("rootly_schedule.tf", "owner_group_ids.0", "a19ce0d4-8033-410b-97dd-c51164eadfc6"),
 					resource.TestCheckResourceAttr("rootly_schedule.tf", "slack_user_group.id", "123XYZ"),
 					resource.TestCheckResourceAttr("rootly_schedule.tf", "slack_user_group.name", "test"),
 					resource.TestCheckResourceAttr("rootly_schedule_rotation.tf", "name", "test-initial"),
@@ -27,6 +31,10 @@ func TestAccResourceSchedule(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckNoResourceAttr("rootly_schedule.tf", "slack_user_group.id"),
 					resource.TestCheckResourceAttr("rootly_schedule.tf", "name", "test-updated"),
+					resource.TestCheckResourceAttr("rootly_schedule.tf", "description", "test updated description"),
+					resource.TestCheckResourceAttr("rootly_schedule.tf", "owner_user_id", "117092"),
+					resource.TestCheckResourceAttr("rootly_schedule.tf", "owner_group_ids.0", "868f05dd-3c8f-4fe8-8aa7-6c4851b72c15"),
+					resource.TestCheckResourceAttr("rootly_schedule.tf", "all_time_coverage", "false"),
 					resource.TestCheckResourceAttr("rootly_schedule_rotation.tf", "name", "test-updated"),
 				),
 			},
@@ -37,6 +45,10 @@ func TestAccResourceSchedule(t *testing.T) {
 const testAccResourceScheduleCreated = `
 resource "rootly_schedule" "tf" {
 	name = "test-initial"
+	description = "test description"
+	owner_group_ids = ["a19ce0d4-8033-410b-97dd-c51164eadfc6"]
+	owner_user_id = 4261
+	all_time_coverage = true
 	slack_user_group = {
 		id = "123XYZ"
 		name = "test"
@@ -62,6 +74,10 @@ resource "rootly_schedule_rotation" "tf" {
 const testAccResourceScheduleUpdated = `
 resource "rootly_schedule" "tf" {
 	name = "test-updated"
+	description     = "test updated description"
+	all_time_coverage = false
+	owner_group_ids = ["868f05dd-3c8f-4fe8-8aa7-6c4851b72c15"]
+	owner_user_id = 117092
 }
 resource "rootly_schedule_rotation" "tf" {
 	schedule_id     = rootly_schedule.tf.id
