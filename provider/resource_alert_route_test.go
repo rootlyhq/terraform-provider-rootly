@@ -33,11 +33,11 @@ data "rootly_alerts_source" "test" {
 }
 
 resource "rootly_team" "test" {
-	name = "Test Team"
+	name = "Test Alert Route in Terraform Team"
 }
 
 resource "rootly_alert_route" "test" {
-	name = "test"
+	name = "Test Alert Route in Terraform"
 	enabled = true
 	alerts_source_ids = [data.rootly_alerts_source.test.id]
 	owner_group_ids = [rootly_team.test.id]
