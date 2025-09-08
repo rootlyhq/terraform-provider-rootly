@@ -32,16 +32,14 @@ data "rootly_alerts_source" "test" {
   source_type = "generic_webhook"
 }
 
-resource "rootly_team" "tf" {
-	name = "tf"
-	description = "tf"
+resource "rootly_team" "test" {
+	name = "Test Team"
 }
 
 resource "rootly_alert_route" "test" {
 	name = "test"
 	enabled = true
 	alerts_source_ids = [data.rootly_alerts_source.test.id]
-	owner_group_ids = [rootly_team.tf.id]
+	owner_group_ids = [rootly_team.test.id]
 }
 `
-
