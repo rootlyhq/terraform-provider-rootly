@@ -7,6 +7,7 @@ import (
 )
 
 func TestAccResourceAlertRoutingRule(t *testing.T) {
+	t.Skip("Alert routing rule resource is deprecated - routing rules are now managed through alert routes")
 	resource.UnitTest(t, resource.TestCase{
 		IsUnitTest: false,
 		PreCheck: func() {

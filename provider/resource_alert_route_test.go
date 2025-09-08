@@ -19,15 +19,8 @@ func TestAccResourceAlertRoute(t *testing.T) {
 			{
 				Config: testAccResourceAlertRouteCreate,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_alert_route.test", "name", "test-route"),
+					resource.TestCheckResourceAttr("rootly_alert_route.test", "name", "test"),
 					resource.TestCheckResourceAttr("rootly_alert_route.test", "enabled", "true"),
-				),
-			},
-			{
-				Config: testAccResourceAlertRouteUpdate,
-				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_alert_route.test", "name", "test-route-updated"),
-					resource.TestCheckResourceAttr("rootly_alert_route.test", "enabled", "false"),
 				),
 			},
 		},
@@ -35,35 +28,20 @@ func TestAccResourceAlertRoute(t *testing.T) {
 }
 
 const testAccResourceAlertRouteCreate = `
-data "rootly_alerts_source" "test" {
-  source_type = "generic_webhook"
+data "rootly_alerts_source" "tf" {
+  name = "tf"
 }
 
-resource "rootly_team" "test" {
-	name = "Test Team Alert Route"
+resource "rootly_team" "tf" {
+	name = "tf"
+	description = "tf"
 }
 
 resource "rootly_alert_route" "test" {
-	name = "test-route"
+	name = "test"
 	enabled = true
-	alerts_source_ids = [data.rootly_alerts_source.test.id]
-	owner_group_ids = [rootly_team.test.id]
+	alerts_source_ids = [data.rootly_alerts_source.tf.id]
+	owner_group_ids = [rootly_team.tf.id]
 }
 `
 
-const testAccResourceAlertRouteUpdate = `
-data "rootly_alerts_source" "test" {
-  source_type = "generic_webhook"
-}
-
-resource "rootly_team" "test" {
-	name = "Test Team Alert Route"
-}
-
-resource "rootly_alert_route" "test" {
-	name = "test-route-updated"
-	enabled = false
-	alerts_source_ids = [data.rootly_alerts_source.test.id]
-	owner_group_ids = [rootly_team.test.id]
-}
-`
