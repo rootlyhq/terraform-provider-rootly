@@ -28,8 +28,8 @@ func TestAccResourceAlertRoute(t *testing.T) {
 }
 
 const testAccResourceAlertRouteCreate = `
-data "rootly_alerts_source" "tf" {
-  name = "tf"
+data "rootly_alerts_source" "test" {
+  source_type = "generic_webhook"
 }
 
 resource "rootly_team" "tf" {
@@ -40,7 +40,7 @@ resource "rootly_team" "tf" {
 resource "rootly_alert_route" "test" {
 	name = "test"
 	enabled = true
-	alerts_source_ids = [data.rootly_alerts_source.tf.id]
+	alerts_source_ids = [data.rootly_alerts_source.test.id]
 	owner_group_ids = [rootly_team.tf.id]
 }
 `
