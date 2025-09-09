@@ -87,8 +87,8 @@ func resourceAlertRouteCreate(ctx context.Context, d *schema.ResourceData, meta 
 	if value, ok := d.GetOkExists("owner_group_ids"); ok {
 		s.OwnerGroupIds = value.([]interface{})
 	}
-	if value, ok := d.GetOkExists("alert_routing_rules_attributes"); ok {
-		s.AlertRoutingRulesAttributes = value.([]interface{})
+	if value, ok := d.GetOkExists("alert_routing_rules"); ok {
+		s.AlertRoutingRules = value.([]interface{})
 	}
 
 	res, err := c.CreateAlertRoute(s)
@@ -123,7 +123,7 @@ func resourceAlertRouteRead(ctx context.Context, d *schema.ResourceData, meta in
 	d.Set("enabled", item.Enabled)
 	d.Set("alerts_source_ids", item.AlertsSourceIds)
 	d.Set("owner_group_ids", item.OwnerGroupIds)
-	d.Set("alert_routing_rules_attributes", item.AlertRoutingRulesAttributes)
+	d.Set("alert_routing_rules", item.AlertRoutingRules)
 
 	return nil
 }
@@ -157,11 +157,11 @@ func resourceAlertRouteUpdate(ctx context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if d.HasChange("alert_routing_rules_attributes") {
-		if value, ok := d.GetOk("alert_routing_rules_attributes"); value != nil && ok {
-			s.AlertRoutingRulesAttributes = value.([]interface{})
+	if d.HasChange("alert_routing_rules") {
+		if value, ok := d.GetOk("alert_routing_rules"); value != nil && ok {
+			s.AlertRoutingRules = value.([]interface{})
 		} else {
-			s.AlertRoutingRulesAttributes = []interface{}{}
+			s.AlertRoutingRules = []interface{}{}
 		}
 	}
 
