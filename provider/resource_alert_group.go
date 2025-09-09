@@ -231,6 +231,37 @@ func resourceAlertGroup() *schema.Resource {
 								},
 							},
 						},
+
+						"alert_urgency_ids": &schema.Schema{
+							Type: schema.TypeList,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         false,
+							Required:         false,
+							Optional:         true,
+							Description:      "The Alert Urgency ID's to check in the condition. Only need to be set when the property field type is 'attribute', the property field name is 'alert_urgency' and the property field condition type is 'is_one_of' or 'is_not_one_of'",
+						},
+
+						"conditionable_type": &schema.Schema{
+							Type:         schema.TypeString,
+							Default:      "AlertField",
+							Required:     false,
+							Optional:     true,
+							ForceNew:     false,
+							Description:  "The type of the conditionable. Value must be one of `AlertField`.",
+							ValidateFunc: validation.StringInSlice([]string{"AlertField"}, false),
+						},
+
+						"conditionable_id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "The ID of the conditionable. If conditionable_type is AlertField, this is the ID of the alert field.",
+						},
 					},
 				},
 			},
@@ -374,6 +405,9 @@ func resourceAlertGroupRead(ctx context.Context, d *schema.ResourceData, meta in
 					"property_field_value":          rawItem["property_field_value"],
 					"property_field_values":         rawItem["property_field_values"],
 					"values":                        rawItem["values"],
+					"alert_urgency_ids":             rawItem["alert_urgency_ids"],
+					"conditionable_type":            rawItem["conditionable_type"],
+					"conditionable_id":              rawItem["conditionable_id"],
 				}
 				processed_items_conditions = append(processed_items_conditions, processed_item_conditions)
 			}
