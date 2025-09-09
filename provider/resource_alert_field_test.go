@@ -18,14 +18,14 @@ func TestAccResourceAlertField(t *testing.T) {
 				Config: testAccResourceAlertFieldCreate,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_alert_field.test", "name", "Test Alert Field"),
-					resource.TestCheckResourceAttr("rootly_alert_field.test", "kind", "text"),
+					resource.TestCheckResourceAttr("rootly_alert_field.test", "kind", "custom"),
 				),
 			},
 			{
 				Config: testAccResourceAlertFieldUpdate,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_alert_field.test", "name", "Updated Alert Field"),
-					resource.TestCheckResourceAttr("rootly_alert_field.test", "kind", "select"),
+					resource.TestCheckResourceAttr("rootly_alert_field.test", "kind", "custom"),
 				),
 			},
 		},
@@ -35,13 +35,11 @@ func TestAccResourceAlertField(t *testing.T) {
 const testAccResourceAlertFieldCreate = `
 resource "rootly_alert_field" "test" {
 	name = "Test Alert Field"
-	kind = "text"
 }
 `
 
 const testAccResourceAlertFieldUpdate = `
 resource "rootly_alert_field" "test" {
 	name = "Updated Alert Field"
-	kind = "select"
 }
 `
