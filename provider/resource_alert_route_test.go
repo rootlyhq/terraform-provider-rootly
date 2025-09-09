@@ -48,16 +48,7 @@ resource "rootly_alert_route" "test" {
 	name = "Test Alert Route"
 	enabled = true
 	alerts_source_ids = [rootly_alerts_source.test.id]
-	targets {
-		target_type = "Group"
-		target_id = rootly_team.test.id
-	}
-	conditions {
-		property_field_type = "payload"
-		property_field_name = "severity"
-		property_field_condition_type = "equals"
-		values = ["high"]
-	}
+	owner_group_ids = [rootly_team.test.id]
 }
 `
 
@@ -77,15 +68,6 @@ resource "rootly_alert_route" "test" {
 	name = "Updated Alert Route"
 	enabled = false
 	alerts_source_ids = [rootly_alerts_source.test.id]
-	targets {
-		target_type = "Group"
-		target_id = rootly_team.test.id
-	}
-	conditions {
-		property_field_type = "payload"
-		property_field_name = "severity"
-		property_field_condition_type = "equals"
-		values = ["critical"]
-	}
+	owner_group_ids = [rootly_team.test.id]
 }
 `
