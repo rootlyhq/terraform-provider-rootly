@@ -49,6 +49,23 @@ resource "rootly_alert_route" "test" {
 	enabled = true
 	alerts_source_ids = [rootly_alerts_source.test.id]
 	owner_group_ids = [rootly_team.test.id]
+	alert_routing_rules_attributes {
+		name = "Test Routing Rule"
+		enabled = true
+		condition_type = "all"
+		alert_routing_rule_targets {
+			target_type = "Group"
+			target_id = rootly_team.test.id
+		}
+		alert_routing_rule_condition_groups {
+			alert_routing_rule_conditions {
+				property_field_type = "payload"
+				property_field_name = "severity"
+				property_field_condition_type = "contains"
+				property_field_value = "high"
+			}
+		}
+	}
 }
 `
 
@@ -69,5 +86,22 @@ resource "rootly_alert_route" "test" {
 	enabled = false
 	alerts_source_ids = [rootly_alerts_source.test.id]
 	owner_group_ids = [rootly_team.test.id]
+	alert_routing_rules_attributes {
+		name = "Updated Routing Rule"
+		enabled = true
+		condition_type = "any"
+		alert_routing_rule_targets {
+			target_type = "Group"
+			target_id = rootly_team.test.id
+		}
+		alert_routing_rule_condition_groups {
+			alert_routing_rule_conditions {
+				property_field_type = "payload"
+				property_field_name = "severity"
+				property_field_condition_type = "contains"
+				property_field_value = "critical"
+			}
+		}
+	}
 }
 `
