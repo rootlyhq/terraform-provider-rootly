@@ -16,6 +16,7 @@ description: |-
 
 ### Required
 
+- `alert_routing_rules_attributes` (Block List, Min: 1) (see [below for nested schema](#nestedblock--alert_routing_rules_attributes))
 - `alerts_source_ids` (List of String)
 - `name` (String) The name of the alert route
 
@@ -27,6 +28,65 @@ description: |-
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--alert_routing_rules_attributes"></a>
+### Nested Schema for `alert_routing_rules_attributes`
+
+Optional:
+
+- `alert_routing_rule_condition_groups` (Block List) (see [below for nested schema](#nestedblock--alert_routing_rules_attributes--alert_routing_rule_condition_groups))
+- `alert_routing_rule_targets` (Block List) (see [below for nested schema](#nestedblock--alert_routing_rules_attributes--alert_routing_rule_targets))
+- `condition_type` (String) The type of condition for the alert routing rule. Value must be one of `all`, `any`.
+- `created_at` (String) Date of creation
+- `enabled` (Boolean)
+- `fallback_rule` (Boolean) Whether this is a fallback rule. Value must be one of true or false
+- `id` (String) Unique ID of the alert routing rule
+- `name` (String) The name of the alert routing rule
+- `position` (Number) The position of the alert routing rule for ordering evaluation
+- `updated_at` (String) Date of last update
+
+<a id="nestedblock--alert_routing_rules_attributes--alert_routing_rule_condition_groups"></a>
+### Nested Schema for `alert_routing_rules_attributes.alert_routing_rule_condition_groups`
+
+Optional:
+
+- `alert_routing_rule_conditions` (Block List) (see [below for nested schema](#nestedblock--alert_routing_rules_attributes--alert_routing_rule_condition_groups--alert_routing_rule_conditions))
+- `created_at` (String) Date of creation
+- `id` (String) Unique ID of the condition group
+- `position` (Number) The position of the condition group
+- `updated_at` (String) Date of last update
+
+<a id="nestedblock--alert_routing_rules_attributes--alert_routing_rule_condition_groups--alert_routing_rule_conditions"></a>
+### Nested Schema for `alert_routing_rules_attributes.alert_routing_rule_condition_groups.alert_routing_rule_conditions`
+
+Optional:
+
+- `alert_urgency_ids` (List of String) The Alert Urgency IDs to check in the condition
+- `conditionable_id` (String) The ID of the conditionable
+- `conditionable_type` (String) The type of the conditionable. Value must be one of `AlertField`.
+- `created_at` (String) Date of creation
+- `id` (String) Unique ID of the condition
+- `property_class` (String) The class context for the property (e.g., 'Alert')
+- `property_field_condition_type` (String) Value must be one of `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is_empty`.
+- `property_field_name` (String) The name of the property field
+- `property_field_type` (String) Value must be one of `attribute`, `payload`, `alert_field`.
+- `property_field_value` (String) The value of the property field
+- `property_field_values` (List of String)
+- `updated_at` (String) Date of last update
+
+
+
+<a id="nestedblock--alert_routing_rules_attributes--alert_routing_rule_targets"></a>
+### Nested Schema for `alert_routing_rules_attributes.alert_routing_rule_targets`
+
+Optional:
+
+- `created_at` (String) Date of creation
+- `id` (String) Unique ID of the target
+- `name` (String) The name of the alert routing rule target
+- `target_id` (String) The ID of the target
+- `target_type` (String) The type of the target. Value must be one of `Service`, `Group`, `EscalationPolicy`.
+- `updated_at` (String) Date of last update
 
 ## Import
 

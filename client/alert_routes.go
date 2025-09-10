@@ -11,12 +11,12 @@ import (
 )
 
 type AlertRoute struct {
-	ID                string        `jsonapi:"primary,alert_routes"`
-	Name              string        `jsonapi:"attr,name,omitempty"`
-	Enabled           *bool         `jsonapi:"attr,enabled,omitempty"`
-	AlertsSourceIds   []interface{} `jsonapi:"attr,alerts_source_ids,omitempty"`
-	OwnerGroupIds     []interface{} `jsonapi:"attr,owner_group_ids,omitempty"`
-	AlertRoutingRules []interface{} `jsonapi:"attr,alert_routing_rules,omitempty"`
+	ID                          string        `jsonapi:"primary,alert_routes"`
+	Name                        string        `jsonapi:"attr,name,omitempty"`
+	Enabled                     *bool         `jsonapi:"attr,enabled,omitempty"`
+	AlertsSourceIds             []interface{} `jsonapi:"attr,alerts_source_ids,omitempty"`
+	OwnerGroupIds               []interface{} `jsonapi:"attr,owner_group_ids,omitempty"`
+	AlertRoutingRulesAttributes []interface{} `jsonapi:"attr,alert_routing_rules_attributes,omitempty"`
 }
 
 func (c *Client) ListAlertRoutes(params *rootlygo.ListAlertRoutesParams) ([]interface{}, error) {

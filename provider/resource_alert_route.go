@@ -10,7 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -64,6 +64,335 @@ func resourceAlertRoute() *schema.Resource {
 				Optional:         true,
 				Description:      "",
 			},
+
+			"alert_routing_rules_attributes": &schema.Schema{
+				Type:             schema.TypeList,
+				Computed:         false,
+				Required:         true,
+				Optional:         false,
+				Description:      "",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+
+						"id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Unique ID of the alert routing rule",
+						},
+
+						"name": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "The name of the alert routing rule",
+						},
+
+						"enabled": &schema.Schema{
+							Type:     schema.TypeBool,
+							Default:  true,
+							Optional: true,
+						},
+
+						"position": &schema.Schema{
+							Type:        schema.TypeInt,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "The position of the alert routing rule for ordering evaluation",
+						},
+
+						"condition_type": &schema.Schema{
+							Type:         schema.TypeString,
+							Default:      "all",
+							Required:     false,
+							Optional:     true,
+							ForceNew:     false,
+							Description:  "The type of condition for the alert routing rule. Value must be one of `all`, `any`.",
+							ValidateFunc: validation.StringInSlice([]string{"all", "any"}, false),
+						},
+
+						"fallback_rule": &schema.Schema{
+							Type:        schema.TypeBool,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Description: "Whether this is a fallback rule. Value must be one of true or false",
+						},
+
+						"alert_routing_rule_targets": &schema.Schema{
+							Type:             schema.TypeList,
+							Computed:         false,
+							Required:         false,
+							Optional:         true,
+							Description:      "",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+
+									"id": &schema.Schema{
+										Type:        schema.TypeString,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "Unique ID of the target",
+									},
+
+									"name": &schema.Schema{
+										Type:        schema.TypeString,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "The name of the alert routing rule target",
+									},
+
+									"target_type": &schema.Schema{
+										Type:         schema.TypeString,
+										Default:      "Service",
+										Required:     false,
+										Optional:     true,
+										ForceNew:     false,
+										Description:  "The type of the target. Value must be one of `Service`, `Group`, `EscalationPolicy`.",
+										ValidateFunc: validation.StringInSlice([]string{"Service", "Group", "EscalationPolicy"}, false),
+									},
+
+									"target_id": &schema.Schema{
+										Type:        schema.TypeString,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "The ID of the target",
+									},
+
+									"created_at": &schema.Schema{
+										Type:        schema.TypeString,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "Date of creation",
+									},
+
+									"updated_at": &schema.Schema{
+										Type:        schema.TypeString,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "Date of last update",
+									},
+								},
+							},
+						},
+
+						"alert_routing_rule_condition_groups": &schema.Schema{
+							Type:             schema.TypeList,
+							Computed:         false,
+							Required:         false,
+							Optional:         true,
+							Description:      "",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+
+									"id": &schema.Schema{
+										Type:        schema.TypeString,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "Unique ID of the condition group",
+									},
+
+									"position": &schema.Schema{
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "The position of the condition group",
+									},
+
+									"alert_routing_rule_conditions": &schema.Schema{
+										Type:             schema.TypeList,
+										Computed:         false,
+										Required:         false,
+										Optional:         true,
+										Description:      "",
+										DiffSuppressFunc: tools.EqualIgnoringOrder,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+
+												"id": &schema.Schema{
+													Type:        schema.TypeString,
+													Computed:    true,
+													Required:    false,
+													Optional:    true,
+													ForceNew:    false,
+													Description: "Unique ID of the condition",
+												},
+
+												"property_class": &schema.Schema{
+													Type:        schema.TypeString,
+													Computed:    true,
+													Required:    false,
+													Optional:    true,
+													ForceNew:    false,
+													Description: "The class context for the property (e.g., 'Alert')",
+												},
+
+												"property_field_condition_type": &schema.Schema{
+													Type:         schema.TypeString,
+													Default:      "is_one_of",
+													Required:     false,
+													Optional:     true,
+													ForceNew:     false,
+													Description:  "Value must be one of `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is_empty`.",
+													ValidateFunc: validation.StringInSlice([]string{"is_one_of", "is_not_one_of", "contains", "does_not_contain", "starts_with", "ends_with", "matches_regex", "is_empty"}, false),
+												},
+
+												"property_field_name": &schema.Schema{
+													Type:        schema.TypeString,
+													Computed:    true,
+													Required:    false,
+													Optional:    true,
+													ForceNew:    false,
+													Description: "The name of the property field",
+												},
+
+												"property_field_type": &schema.Schema{
+													Type:         schema.TypeString,
+													Default:      "attribute",
+													Required:     false,
+													Optional:     true,
+													ForceNew:     false,
+													Description:  "Value must be one of `attribute`, `payload`, `alert_field`.",
+													ValidateFunc: validation.StringInSlice([]string{"attribute", "payload", "alert_field"}, false),
+												},
+
+												"property_field_value": &schema.Schema{
+													Type:        schema.TypeString,
+													Computed:    true,
+													Required:    false,
+													Optional:    true,
+													ForceNew:    false,
+													Description: "The value of the property field",
+												},
+
+												"property_field_values": &schema.Schema{
+													Type: schema.TypeList,
+													Elem: &schema.Schema{
+														Type: schema.TypeString,
+													},
+													DiffSuppressFunc: tools.EqualIgnoringOrder,
+													Computed:         false,
+													Required:         false,
+													Optional:         true,
+													Description:      "",
+												},
+
+												"alert_urgency_ids": &schema.Schema{
+													Type: schema.TypeList,
+													Elem: &schema.Schema{
+														Type: schema.TypeString,
+													},
+													DiffSuppressFunc: tools.EqualIgnoringOrder,
+													Computed:         false,
+													Required:         false,
+													Optional:         true,
+													Description:      "The Alert Urgency IDs to check in the condition",
+												},
+
+												"conditionable_type": &schema.Schema{
+													Type:         schema.TypeString,
+													Default:      "AlertField",
+													Required:     false,
+													Optional:     true,
+													ForceNew:     false,
+													Description:  "The type of the conditionable. Value must be one of `AlertField`.",
+													ValidateFunc: validation.StringInSlice([]string{"AlertField"}, false),
+												},
+
+												"conditionable_id": &schema.Schema{
+													Type:        schema.TypeString,
+													Computed:    true,
+													Required:    false,
+													Optional:    true,
+													ForceNew:    false,
+													Description: "The ID of the conditionable",
+												},
+
+												"created_at": &schema.Schema{
+													Type:        schema.TypeString,
+													Computed:    true,
+													Required:    false,
+													Optional:    true,
+													ForceNew:    false,
+													Description: "Date of creation",
+												},
+
+												"updated_at": &schema.Schema{
+													Type:        schema.TypeString,
+													Computed:    true,
+													Required:    false,
+													Optional:    true,
+													ForceNew:    false,
+													Description: "Date of last update",
+												},
+											},
+										},
+									},
+
+									"created_at": &schema.Schema{
+										Type:        schema.TypeString,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "Date of creation",
+									},
+
+									"updated_at": &schema.Schema{
+										Type:        schema.TypeString,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "Date of last update",
+									},
+								},
+							},
+						},
+
+						"created_at": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Date of creation",
+						},
+
+						"updated_at": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Date of last update",
+						},
+					},
+				},
+			},
 		},
 	}
 }
@@ -87,8 +416,8 @@ func resourceAlertRouteCreate(ctx context.Context, d *schema.ResourceData, meta 
 	if value, ok := d.GetOkExists("owner_group_ids"); ok {
 		s.OwnerGroupIds = value.([]interface{})
 	}
-	if value, ok := d.GetOkExists("alert_routing_rules"); ok {
-		s.AlertRoutingRules = value.([]interface{})
+	if value, ok := d.GetOkExists("alert_routing_rules_attributes"); ok {
+		s.AlertRoutingRulesAttributes = value.([]interface{})
 	}
 
 	res, err := c.CreateAlertRoute(s)
@@ -123,7 +452,33 @@ func resourceAlertRouteRead(ctx context.Context, d *schema.ResourceData, meta in
 	d.Set("enabled", item.Enabled)
 	d.Set("alerts_source_ids", item.AlertsSourceIds)
 	d.Set("owner_group_ids", item.OwnerGroupIds)
-	d.Set("alert_routing_rules", item.AlertRoutingRules)
+
+	if item.AlertRoutingRulesAttributes != nil {
+		processed_items_alert_routing_rules_attributes := make([]map[string]interface{}, 0)
+
+		for _, c := range item.AlertRoutingRulesAttributes {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processed_item_alert_routing_rules_attributes := map[string]interface{}{
+					"id":                                  rawItem["id"],
+					"name":                                rawItem["name"],
+					"enabled":                             rawItem["enabled"],
+					"position":                            rawItem["position"],
+					"condition_type":                      rawItem["condition_type"],
+					"fallback_rule":                       rawItem["fallback_rule"],
+					"alert_routing_rule_targets":          rawItem["alert_routing_rule_targets"],
+					"alert_routing_rule_condition_groups": rawItem["alert_routing_rule_condition_groups"],
+					"created_at":                          rawItem["created_at"],
+					"updated_at":                          rawItem["updated_at"],
+				}
+				processed_items_alert_routing_rules_attributes = append(processed_items_alert_routing_rules_attributes, processed_item_alert_routing_rules_attributes)
+			}
+		}
+
+		d.Set("alert_routing_rules_attributes", processed_items_alert_routing_rules_attributes)
+	} else {
+		d.Set("alert_routing_rules_attributes", nil)
+	}
 
 	return nil
 }
@@ -157,11 +512,11 @@ func resourceAlertRouteUpdate(ctx context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if d.HasChange("alert_routing_rules") {
-		if value, ok := d.GetOk("alert_routing_rules"); value != nil && ok {
-			s.AlertRoutingRules = value.([]interface{})
+	if d.HasChange("alert_routing_rules_attributes") {
+		if value, ok := d.GetOk("alert_routing_rules_attributes"); value != nil && ok {
+			s.AlertRoutingRulesAttributes = value.([]interface{})
 		} else {
-			s.AlertRoutingRules = []interface{}{}
+			s.AlertRoutingRulesAttributes = []interface{}{}
 		}
 	}
 
