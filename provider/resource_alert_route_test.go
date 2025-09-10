@@ -50,10 +50,8 @@ resource "rootly_alert_route" "test" {
 	alerts_source_ids = [rootly_alerts_source.test.id]
 	owner_group_ids = [rootly_team.test.id]
 	alert_routing_rules_attributes {
-		name = "Test Routing Rule"
 		enabled = true
-		condition_type = "all"
-		fallback_rule = false
+		fallback_rule = true
 		alert_routing_rule_targets {
 			target_type = "Group"
 			target_id = rootly_team.test.id
@@ -80,10 +78,8 @@ resource "rootly_alert_route" "test" {
 	alerts_source_ids = [rootly_alerts_source.test.id]
 	owner_group_ids = [rootly_team.test.id]
 	alert_routing_rules_attributes {
-		name = "Updated Routing Rule"
-		enabled = true
-		condition_type = "any"
-		fallback_rule = false
+		enabled = false
+		fallback_rule = true
 		alert_routing_rule_targets {
 			target_type = "Group"
 			target_id = rootly_team.test.id
