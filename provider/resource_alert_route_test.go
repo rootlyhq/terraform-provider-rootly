@@ -20,7 +20,7 @@ func TestAccResourceAlertRoute(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_alert_route.test", "name", "Test Alert Route"),
 					resource.TestCheckResourceAttr("rootly_alert_route.test", "enabled", "true"),
 					resource.TestCheckResourceAttr("rootly_alert_route.test", "rules.0.name", "Production Alerts"),
-					resource.TestCheckResourceAttr("rootly_alert_route.test", "rules.0.destinations.0.target_type", "Group"),
+					resource.TestCheckResourceAttr("rootly_alert_route.test", "rules.0.destinations.0.target_type", "EscalationPolicy"),
 					resource.TestCheckResourceAttr("rootly_alert_route.test", "rules.0.condition_groups.0.conditions.0.property_field_condition_type", "contains"),
 					resource.TestCheckResourceAttr("rootly_alert_route.test", "rules.0.condition_groups.0.conditions.0.property_field_name", "environment"),
 					resource.TestCheckResourceAttr("rootly_alert_route.test", "rules.0.condition_groups.0.conditions.0.property_field_type", "payload"),
@@ -33,9 +33,9 @@ func TestAccResourceAlertRoute(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_alert_route.test", "name", "Updated Alert Route"),
 					resource.TestCheckResourceAttr("rootly_alert_route.test", "enabled", "true"),
 					resource.TestCheckResourceAttr("rootly_alert_route.test", "rules.0.name", "Critical Production Alerts"),
-					resource.TestCheckResourceAttr("rootly_alert_route.test", "rules.0.destinations.0.target_type", "Group"),
-					resource.TestCheckResourceAttr("rootly_alert_route.test", "rules.0.condition_groups.0.conditions.0.property_field_condition_type", "is_one_of"),
-					resource.TestCheckResourceAttr("rootly_alert_route.test", "rules.0.condition_groups.0.conditions.0.property_field_name", "severity"),
+					resource.TestCheckResourceAttr("rootly_alert_route.test", "rules.0.destinations.0.target_type", "EscalationPolicy"),
+					resource.TestCheckResourceAttr("rootly_alert_route.test", "rules.0.condition_groups.0.conditions.0.property_field_condition_type", "contains"),
+					resource.TestCheckResourceAttr("rootly_alert_route.test", "rules.0.condition_groups.0.conditions.0.property_field_name", "summary"),
 					resource.TestCheckResourceAttr("rootly_alert_route.test", "rules.0.condition_groups.0.conditions.0.property_field_type", "attribute"),
 				),
 			},
@@ -93,6 +93,11 @@ resource "rootly_team" "test" {
   description = "Test team for alert routing"
 }
 
+resource "rootly_escalation_policy" "test" {
+  name = "Test Escalation Policy"
+  group_ids = [rootly_team.test.id]
+}
+
 resource "rootly_alerts_source" "test" {
   name = "Test Alerts Source"
   source_type = "generic_webhook"
@@ -111,8 +116,8 @@ resource "rootly_alert_route" "test" {
     fallback_rule = false
     
     destinations {
-      target_type = "Group"
-      target_id = rootly_team.test.id
+      target_type = "EscalationPolicy"
+      target_id = rootly_escalation_policy.test.id
     }
     
     condition_groups {
@@ -134,6 +139,11 @@ resource "rootly_team" "test" {
   description = "Test team for alert routing"
 }
 
+resource "rootly_escalation_policy" "test" {
+  name = "Test Escalation Policy"
+  group_ids = [rootly_team.test.id]
+}
+
 resource "rootly_alerts_source" "test" {
   name = "Test Alerts Source"
   source_type = "generic_webhook"
@@ -152,17 +162,17 @@ resource "rootly_alert_route" "test" {
     fallback_rule = false
     
     destinations {
-      target_type = "Group"
-      target_id = rootly_team.test.id
+      target_type = "EscalationPolicy"
+      target_id = rootly_escalation_policy.test.id
     }
     
     condition_groups {
       position = 1
       conditions {
-        property_field_condition_type = "is_one_of"
-        property_field_name = "severity"
+        property_field_condition_type = "contains"
+        property_field_name = "summary"
         property_field_type = "attribute"
-        property_field_values = ["critical", "high"]
+        property_field_value = "critical"
       }
     }
   }
@@ -178,6 +188,16 @@ resource "rootly_team" "test_primary" {
 resource "rootly_team" "test_fallback" {
   name = "Fallback Team"
   description = "Fallback team for alerts"
+}
+
+resource "rootly_escalation_policy" "test_primary" {
+  name = "Primary Escalation Policy"
+  group_ids = [rootly_team.test_primary.id]
+}
+
+resource "rootly_escalation_policy" "test_fallback" {
+  name = "Fallback Escalation Policy"
+  group_ids = [rootly_team.test_fallback.id]
 }
 
 resource "rootly_alerts_source" "test" {
@@ -198,8 +218,8 @@ resource "rootly_alert_route" "complex" {
     fallback_rule = false
     
     destinations {
-      target_type = "Group"
-      target_id = rootly_team.test_primary.id
+      target_type = "EscalationPolicy"
+      target_id = rootly_escalation_policy.test_primary.id
     }
     
     condition_groups {
@@ -215,10 +235,10 @@ resource "rootly_alert_route" "complex" {
     condition_groups {
       position = 2
       conditions {
-        property_field_condition_type = "is_one_of"
-        property_field_name = "severity"
+        property_field_condition_type = "contains"
+        property_field_name = "summary"
         property_field_type = "attribute"
-        property_field_values = ["critical", "high"]
+        property_field_value = "critical"
       }
     }
   }
@@ -229,16 +249,17 @@ resource "rootly_alert_route" "complex" {
     fallback_rule = true
     
     destinations {
-      target_type = "Group"
-      target_id = rootly_team.test_fallback.id
+      target_type = "EscalationPolicy"
+      target_id = rootly_escalation_policy.test_fallback.id
     }
     
     condition_groups {
       position = 1
       conditions {
-        property_field_condition_type = "is_empty"
-        property_field_name = "assignee"
+        property_field_condition_type = "contains"
+        property_field_name = "description"
         property_field_type = "attribute"
+        property_field_value = "fallback"
       }
     }
   }
@@ -249,6 +270,11 @@ const testAccResourceAlertRouteWithAlertField = `
 resource "rootly_team" "test" {
   name = "Test Team"
   description = "Test team for alert routing"
+}
+
+resource "rootly_escalation_policy" "test" {
+  name = "Test Escalation Policy"
+  group_ids = [rootly_team.test.id]
 }
 
 resource "rootly_alerts_source" "test" {
@@ -273,8 +299,8 @@ resource "rootly_alert_route" "with_field" {
     fallback_rule = false
     
     destinations {
-      target_type = "Group"
-      target_id = rootly_team.test.id
+      target_type = "EscalationPolicy"
+      target_id = rootly_escalation_policy.test.id
     }
     
     condition_groups {
