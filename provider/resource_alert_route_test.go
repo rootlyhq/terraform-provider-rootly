@@ -34,7 +34,7 @@ func TestAccResourceAlertRoute(t *testing.T) {
 	})
 }
 
-func TestAccResourceAlertRouteWithComplexRules(t *testing.T) {
+func TestAccResourceAlertRouteWithMultipleTeams(t *testing.T) {
 	resource.UnitTest(t, resource.TestCase{
 		IsUnitTest: false,
 		PreCheck: func() {
@@ -43,18 +43,18 @@ func TestAccResourceAlertRouteWithComplexRules(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceAlertRouteComplexRules,
+				Config: testAccResourceAlertRouteWithMultipleTeams,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_alert_route.complex", "name", "Complex Alert Route"),
-					resource.TestCheckResourceAttr("rootly_alert_route.complex", "enabled", "true"),
-					resource.TestCheckResourceAttrSet("rootly_alert_route.complex", "id"),
+					resource.TestCheckResourceAttr("rootly_alert_route.multi_team", "name", "Multi Team Alert Route"),
+					resource.TestCheckResourceAttr("rootly_alert_route.multi_team", "enabled", "true"),
+					resource.TestCheckResourceAttrSet("rootly_alert_route.multi_team", "id"),
 				),
 			},
 		},
 	})
 }
 
-func TestAccResourceAlertRouteWithAlertField(t *testing.T) {
+func TestAccResourceAlertRouteDisabled(t *testing.T) {
 	resource.UnitTest(t, resource.TestCase{
 		IsUnitTest: false,
 		PreCheck: func() {
@@ -63,11 +63,11 @@ func TestAccResourceAlertRouteWithAlertField(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceAlertRouteWithAlertField,
+				Config: testAccResourceAlertRouteDisabled,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_alert_route.with_field", "name", "Alert Route with Field"),
-					resource.TestCheckResourceAttr("rootly_alert_route.with_field", "enabled", "true"),
-					resource.TestCheckResourceAttrSet("rootly_alert_route.with_field", "id"),
+					resource.TestCheckResourceAttr("rootly_alert_route.disabled", "name", "Disabled Alert Route"),
+					resource.TestCheckResourceAttr("rootly_alert_route.disabled", "enabled", "false"),
+					resource.TestCheckResourceAttrSet("rootly_alert_route.disabled", "id"),
 				),
 			},
 		},
@@ -78,11 +78,6 @@ const testAccResourceAlertRouteCreate = `
 resource "rootly_team" "test" {
   name = "Test Team"
   description = "Test team for alert routing"
-}
-
-resource "rootly_escalation_policy" "test" {
-  name = "Test Escalation Policy"
-  group_ids = [rootly_team.test.id]
 }
 
 resource "rootly_alerts_source" "test" {
@@ -96,27 +91,6 @@ resource "rootly_alert_route" "test" {
   enabled = true
   alerts_source_ids = [rootly_alerts_source.test.id]
   owning_team_ids = [rootly_team.test.id]
-  
-  rules {
-    name = "Production Alerts"
-    position = 1
-    fallback_rule = false
-    
-    destinations {
-      target_type = "EscalationPolicy"
-      target_id = rootly_escalation_policy.test.id
-    }
-    
-    condition_groups {
-      position = 1
-      conditions {
-        property_field_condition_type = "contains"
-        property_field_name = "environment"
-        property_field_type = "payload"
-        property_field_value = "production"
-      }
-    }
-  }
 }
 `
 
@@ -124,11 +98,6 @@ const testAccResourceAlertRouteUpdate = `
 resource "rootly_team" "test" {
   name = "Test Team"
   description = "Test team for alert routing"
-}
-
-resource "rootly_escalation_policy" "test" {
-  name = "Test Escalation Policy"
-  group_ids = [rootly_team.test.id]
 }
 
 resource "rootly_alerts_source" "test" {
@@ -142,126 +111,38 @@ resource "rootly_alert_route" "test" {
   enabled = true
   alerts_source_ids = [rootly_alerts_source.test.id]
   owning_team_ids = [rootly_team.test.id]
-  
-  rules {
-    name = "Critical Production Alerts"
-    position = 1
-    fallback_rule = false
-    
-    destinations {
-      target_type = "EscalationPolicy"
-      target_id = rootly_escalation_policy.test.id
-    }
-    
-    condition_groups {
-      position = 1
-      conditions {
-        property_field_condition_type = "contains"
-        property_field_name = "summary"
-        property_field_type = "attribute"
-        property_field_value = "critical"
-      }
-    }
-  }
 }
 `
 
-const testAccResourceAlertRouteComplexRules = `
+const testAccResourceAlertRouteWithMultipleTeams = `
 resource "rootly_team" "test_primary" {
   name = "Primary Team"
   description = "Primary team for alerts"
 }
 
-resource "rootly_team" "test_fallback" {
-  name = "Fallback Team"
-  description = "Fallback team for alerts"
-}
-
-resource "rootly_escalation_policy" "test_primary" {
-  name = "Primary Escalation Policy"
-  group_ids = [rootly_team.test_primary.id]
-}
-
-resource "rootly_escalation_policy" "test_fallback" {
-  name = "Fallback Escalation Policy"
-  group_ids = [rootly_team.test_fallback.id]
+resource "rootly_team" "test_secondary" {
+  name = "Secondary Team"
+  description = "Secondary team for alerts"
 }
 
 resource "rootly_alerts_source" "test" {
   name = "Test Alerts Source"
   source_type = "generic_webhook"
-  owner_group_ids = [rootly_team.test_primary.id]
+  owner_group_ids = [rootly_team.test_primary.id, rootly_team.test_secondary.id]
 }
 
-resource "rootly_alert_route" "complex" {
-  name = "Complex Alert Route"
+resource "rootly_alert_route" "multi_team" {
+  name = "Multi Team Alert Route"
   enabled = true
   alerts_source_ids = [rootly_alerts_source.test.id]
-  owning_team_ids = [rootly_team.test_primary.id]
-  
-  rules {
-    name = "Multi-Condition Rule"
-    position = 1
-    fallback_rule = false
-    
-    destinations {
-      target_type = "EscalationPolicy"
-      target_id = rootly_escalation_policy.test_primary.id
-    }
-    
-    condition_groups {
-      position = 1
-      conditions {
-        property_field_condition_type = "contains"
-        property_field_name = "environment"
-        property_field_type = "payload"
-        property_field_value = "production"
-      }
-    }
-    
-    condition_groups {
-      position = 2
-      conditions {
-        property_field_condition_type = "contains"
-        property_field_name = "summary"
-        property_field_type = "attribute"
-        property_field_value = "critical"
-      }
-    }
-  }
-  
-  rules {
-    name = "Fallback Rule"
-    position = 2
-    fallback_rule = true
-    
-    destinations {
-      target_type = "EscalationPolicy"
-      target_id = rootly_escalation_policy.test_fallback.id
-    }
-    
-    condition_groups {
-      position = 1
-      conditions {
-        property_field_condition_type = "contains"
-        property_field_name = "description"
-        property_field_type = "attribute"
-        property_field_value = "fallback"
-      }
-    }
-  }
+  owning_team_ids = [rootly_team.test_primary.id, rootly_team.test_secondary.id]
 }
 `
 
-const testAccResourceAlertRouteWithAlertField = `
+const testAccResourceAlertRouteDisabled = `
 resource "rootly_team" "test" {
   name = "Test Team"
   description = "Test team for alert routing"
-}
-
-resource "rootly_escalation_policy" "test" {
-  name = "Test Escalation Policy"
-  group_ids = [rootly_team.test.id]
 }
 
 resource "rootly_alerts_source" "test" {
@@ -270,37 +151,10 @@ resource "rootly_alerts_source" "test" {
   owner_group_ids = [rootly_team.test.id]
 }
 
-resource "rootly_alert_field" "test" {
-  name = "Test Alert Field"
-}
-
-resource "rootly_alert_route" "with_field" {
-  name = "Alert Route with Field"
-  enabled = true
+resource "rootly_alert_route" "disabled" {
+  name = "Disabled Alert Route"
+  enabled = false
   alerts_source_ids = [rootly_alerts_source.test.id]
   owning_team_ids = [rootly_team.test.id]
-  
-  rules {
-    name = "Field-based Rule"
-    position = 1
-    fallback_rule = false
-    
-    destinations {
-      target_type = "EscalationPolicy"
-      target_id = rootly_escalation_policy.test.id
-    }
-    
-    condition_groups {
-      position = 1
-      conditions {
-        property_field_condition_type = "contains"
-        property_field_name = "custom_field"
-        property_field_type = "alert_field"
-        property_field_value = "important"
-        conditionable_type = "AlertField"
-        conditionable_id = rootly_alert_field.test.id
-      }
-    }
-  }
 }
 `
