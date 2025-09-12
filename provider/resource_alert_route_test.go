@@ -88,19 +88,21 @@ func TestAccResourceAlertRouteWithAlertField(t *testing.T) {
 }
 
 const testAccResourceAlertRouteCreate = `
-data "rootly_alerts_source" "test" {
-  source_type = "generic_webhook"
-}
-
 resource "rootly_team" "test" {
   name = "Test Team"
   description = "Test team for alert routing"
 }
 
+resource "rootly_alerts_source" "test" {
+  name = "Test Alerts Source"
+  source_type = "generic_webhook"
+  owner_group_ids = [rootly_team.test.id]
+}
+
 resource "rootly_alert_route" "test" {
   name = "Test Alert Route"
   enabled = true
-  alerts_source_ids = [data.rootly_alerts_source.test.id]
+  alerts_source_ids = [rootly_alerts_source.test.id]
   owning_team_ids = [rootly_team.test.id]
   
   rules {
@@ -127,19 +129,21 @@ resource "rootly_alert_route" "test" {
 `
 
 const testAccResourceAlertRouteUpdate = `
-data "rootly_alerts_source" "test" {
-  source_type = "generic_webhook"
-}
-
 resource "rootly_team" "test" {
   name = "Test Team"
   description = "Test team for alert routing"
 }
 
+resource "rootly_alerts_source" "test" {
+  name = "Test Alerts Source"
+  source_type = "generic_webhook"
+  owner_group_ids = [rootly_team.test.id]
+}
+
 resource "rootly_alert_route" "test" {
   name = "Updated Alert Route"
   enabled = true
-  alerts_source_ids = [data.rootly_alerts_source.test.id]
+  alerts_source_ids = [rootly_alerts_source.test.id]
   owning_team_ids = [rootly_team.test.id]
   
   rules {
@@ -166,10 +170,6 @@ resource "rootly_alert_route" "test" {
 `
 
 const testAccResourceAlertRouteComplexRules = `
-data "rootly_alerts_source" "test" {
-  source_type = "generic_webhook"
-}
-
 resource "rootly_team" "test_primary" {
   name = "Primary Team"
   description = "Primary team for alerts"
@@ -180,10 +180,16 @@ resource "rootly_team" "test_fallback" {
   description = "Fallback team for alerts"
 }
 
+resource "rootly_alerts_source" "test" {
+  name = "Test Alerts Source"
+  source_type = "generic_webhook"
+  owner_group_ids = [rootly_team.test_primary.id]
+}
+
 resource "rootly_alert_route" "complex" {
   name = "Complex Alert Route"
   enabled = true
-  alerts_source_ids = [data.rootly_alerts_source.test.id]
+  alerts_source_ids = [rootly_alerts_source.test.id]
   owning_team_ids = [rootly_team.test_primary.id]
   
   rules {
@@ -240,13 +246,15 @@ resource "rootly_alert_route" "complex" {
 `
 
 const testAccResourceAlertRouteWithAlertField = `
-data "rootly_alerts_source" "test" {
-  source_type = "generic_webhook"
-}
-
 resource "rootly_team" "test" {
   name = "Test Team"
   description = "Test team for alert routing"
+}
+
+resource "rootly_alerts_source" "test" {
+  name = "Test Alerts Source"
+  source_type = "generic_webhook"
+  owner_group_ids = [rootly_team.test.id]
 }
 
 resource "rootly_alert_field" "test" {
@@ -256,7 +264,7 @@ resource "rootly_alert_field" "test" {
 resource "rootly_alert_route" "with_field" {
   name = "Alert Route with Field"
   enabled = true
-  alerts_source_ids = [data.rootly_alerts_source.test.id]
+  alerts_source_ids = [rootly_alerts_source.test.id]
   owning_team_ids = [rootly_team.test.id]
   
   rules {
