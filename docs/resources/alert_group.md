@@ -66,6 +66,9 @@ Optional:
 
 Optional:
 
+- `alert_urgency_ids` (List of String) The Alert Urgency ID's to check in the condition. Only need to be set when the property field type is 'attribute', the property field name is 'alert_urgency' and the property field condition type is 'is_one_of' or 'is_not_one_of'
+- `conditionable_id` (String) The ID of the conditionable. If conditionable_type is AlertField, this is the ID of the alert field.
+- `conditionable_type` (String) The type of the conditionable. Value must be one of `AlertField`.
 - `property_field_condition_type` (String) The condition type of the property field. Value must be one of `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is_empty`, `matches_existing_alert`.
 - `property_field_name` (String) The name of the property field. If the property field type is selected as 'attribute', then the allowed property field names are 'summary' (for Title), 'description', 'alert_urgency' and 'external_url' (for Alert Source URL). If the property field type is selected as 'payload', then the property field name should be supplied in JSON Path syntax.
 - `property_field_type` (String) The type of the property field. Value must be one of `attribute`, `payload`, `alert_field`.
