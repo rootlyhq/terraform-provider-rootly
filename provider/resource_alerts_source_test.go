@@ -42,7 +42,7 @@ resource "rootly_alert_urgency" "tf" {
 	position = 1
 }
 
-resource "rootly_alerts_source" with-template {
+resource "rootly_alerts_source" "with-template" {
   name = "TF: with template"
 
   source_type = "generic_webhook"
@@ -80,7 +80,7 @@ resource "rootly_alert_urgency" "tf" {
 	position = 1
 }
 
-resource "rootly_alerts_source" with-template {
+resource "rootly_alerts_source" "with-template" {
   name = "TF: with template"
 
   source_type = "generic_webhook"
