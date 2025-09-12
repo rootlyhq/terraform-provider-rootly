@@ -80,10 +80,28 @@ resource "rootly_team" "test" {
   description = "Test team for alert routing"
 }
 
+resource "rootly_alert_urgency" "test" {
+  name = "Test Alert Urgency"
+  description = "Test urgency for alerts"
+  position = 1
+}
+
 resource "rootly_alerts_source" "test" {
   name = "Test Alerts Source"
   source_type = "generic_webhook"
   owner_group_ids = [rootly_team.test.id]
+
+  alert_source_urgency_rules_attributes {
+    alert_urgency_id = rootly_alert_urgency.test.id
+    json_path = "severity"
+    operator = "is"
+    value = "critical"
+  }
+
+  sourceable_attributes {
+    auto_resolve = false
+    resolve_state = "$.resolved"
+  }
 }
 
 resource "rootly_alert_route" "test" {
@@ -100,10 +118,28 @@ resource "rootly_team" "test" {
   description = "Test team for alert routing"
 }
 
+resource "rootly_alert_urgency" "test" {
+  name = "Test Alert Urgency"
+  description = "Test urgency for alerts"
+  position = 1
+}
+
 resource "rootly_alerts_source" "test" {
   name = "Test Alerts Source"
   source_type = "generic_webhook"
   owner_group_ids = [rootly_team.test.id]
+
+  alert_source_urgency_rules_attributes {
+    alert_urgency_id = rootly_alert_urgency.test.id
+    json_path = "severity"
+    operator = "is"
+    value = "critical"
+  }
+
+  sourceable_attributes {
+    auto_resolve = false
+    resolve_state = "$.resolved"
+  }
 }
 
 resource "rootly_alert_route" "test" {
@@ -125,10 +161,28 @@ resource "rootly_team" "test_secondary" {
   description = "Secondary team for alerts"
 }
 
+resource "rootly_alert_urgency" "test" {
+  name = "Test Alert Urgency"
+  description = "Test urgency for alerts"
+  position = 1
+}
+
 resource "rootly_alerts_source" "test" {
   name = "Test Alerts Source"
   source_type = "generic_webhook"
   owner_group_ids = [rootly_team.test_primary.id, rootly_team.test_secondary.id]
+
+  alert_source_urgency_rules_attributes {
+    alert_urgency_id = rootly_alert_urgency.test.id
+    json_path = "severity"
+    operator = "is"
+    value = "critical"
+  }
+
+  sourceable_attributes {
+    auto_resolve = false
+    resolve_state = "$.resolved"
+  }
 }
 
 resource "rootly_alert_route" "multi_team" {
@@ -145,10 +199,28 @@ resource "rootly_team" "test" {
   description = "Test team for alert routing"
 }
 
+resource "rootly_alert_urgency" "test" {
+  name = "Test Alert Urgency"
+  description = "Test urgency for alerts"
+  position = 1
+}
+
 resource "rootly_alerts_source" "test" {
   name = "Test Alerts Source"
   source_type = "generic_webhook"
   owner_group_ids = [rootly_team.test.id]
+
+  alert_source_urgency_rules_attributes {
+    alert_urgency_id = rootly_alert_urgency.test.id
+    json_path = "severity"
+    operator = "is"
+    value = "critical"
+  }
+
+  sourceable_attributes {
+    auto_resolve = false
+    resolve_state = "$.resolved"
+  }
 }
 
 resource "rootly_alert_route" "disabled" {
