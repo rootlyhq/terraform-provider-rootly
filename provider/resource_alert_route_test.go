@@ -21,6 +21,7 @@ func TestAccResourceAlertRoute(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_alert_route.test", "enabled", "true"),
 					resource.TestCheckResourceAttrSet("rootly_alert_route.test", "id"),
 				),
+				ExpectNonEmptyPlan: true,
 			},
 			{
 				Config: testAccResourceAlertRouteUpdate,
@@ -29,6 +30,7 @@ func TestAccResourceAlertRoute(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_alert_route.test", "enabled", "true"),
 					resource.TestCheckResourceAttrSet("rootly_alert_route.test", "id"),
 				),
+				ExpectNonEmptyPlan: true,
 			},
 		},
 	})
@@ -49,6 +51,7 @@ func TestAccResourceAlertRouteWithMultipleTeams(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_alert_route.multi_team", "enabled", "true"),
 					resource.TestCheckResourceAttrSet("rootly_alert_route.multi_team", "id"),
 				),
+				ExpectNonEmptyPlan: true,
 			},
 		},
 	})
@@ -69,6 +72,7 @@ func TestAccResourceAlertRouteDisabled(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_alert_route.disabled", "enabled", "false"),
 					resource.TestCheckResourceAttrSet("rootly_alert_route.disabled", "id"),
 				),
+				ExpectNonEmptyPlan: true,
 			},
 		},
 	})
