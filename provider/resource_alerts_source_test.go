@@ -20,8 +20,8 @@ func TestAccResourceAlertsSource(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_alerts_source.test", "name", "Test Alerts Source"),
 					resource.TestCheckResourceAttr("rootly_alerts_source.test", "source_type", "generic_webhook"),
 					resource.TestCheckResourceAttrSet("rootly_alerts_source.test", "id"),
-					ExpectNonEmptyPlan: true,
 				),
+				ExpectNonEmptyPlan: true,
 			},
 			{
 				Config: testAccResourceAlertsSourceUpdate,
@@ -29,8 +29,8 @@ func TestAccResourceAlertsSource(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_alerts_source.test", "name", "Test Alerts Source"),
 					resource.TestCheckResourceAttr("rootly_alerts_source.test", "source_type", "generic_webhook"),
 					resource.TestCheckResourceAttrSet("rootly_alerts_source.test", "id"),
-					ExpectNonEmptyPlan: true,
 				),
+				ExpectNonEmptyPlan: true,
 			},
 		},
 	})
