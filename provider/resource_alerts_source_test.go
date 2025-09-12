@@ -61,6 +61,18 @@ resource "rootly_alerts_source" "with-template" {
     external_url = "https://rootly.com"
   }
 
+  alert_source_fields_attributes {
+    alert_field_id = "c726ab51-c954-4d1f-bdf6-d1fac7cacb77"
+  }
+  
+  alert_source_fields_attributes {
+    alert_field_id = "97995df1-d0e3-409c-b129-850c653baf0c"
+  }
+  
+  alert_source_fields_attributes {
+    alert_field_id = "e1a8fc8b-c0cc-4a44-a37f-160f7d8e55de"
+  }
+
   sourceable_attributes {
     auto_resolve  = false
     resolve_state = "$.status"
@@ -97,6 +109,18 @@ resource "rootly_alerts_source" "with-template" {
     title        = "Server exploded!"
     description  = "Datacenter is burning down."
     external_url = "https://rootly.com"
+  }
+
+  alert_source_fields_attributes {
+    alert_field_id = "c726ab51-c954-4d1f-bdf6-d1fac7cacb77"
+  }
+  
+  alert_source_fields_attributes {
+    alert_field_id = "97995df1-d0e3-409c-b129-850c653baf0c"
+  }
+  
+  alert_source_fields_attributes {
+    alert_field_id = "e1a8fc8b-c0cc-4a44-a37f-160f7d8e55de"
   }
 
   sourceable_attributes {
