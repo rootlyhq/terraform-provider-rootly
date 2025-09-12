@@ -25,6 +25,5 @@ func TestAccResourceOnCallRole(t *testing.T) {
 const testAccResourceOnCallRole = `
 resource "rootly_on_call_role" "test" {
 	name = "test"
-	system_role = "custom"
 }
 `
