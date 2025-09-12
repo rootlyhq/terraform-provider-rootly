@@ -19,6 +19,7 @@ type FormFieldPlacement struct {
 	Required          *bool  `jsonapi:"attr,required,omitempty"`
 	RequiredOperator  string `jsonapi:"attr,required_operator,omitempty"`
 	PlacementOperator string `jsonapi:"attr,placement_operator,omitempty"`
+	NonEditable       *bool  `jsonapi:"attr,non_editable,omitempty"`
 }
 
 func (c *Client) ListFormFieldPlacements(id string, params *rootlygo.ListFormFieldPlacementsParams) ([]interface{}, error) {

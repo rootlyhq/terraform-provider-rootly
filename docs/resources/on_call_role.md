@@ -17,7 +17,6 @@ description: |-
 ### Required
 
 - `name` (String) The role name.
-- `system_role` (String) The kind of role
 
 ### Optional
 
@@ -43,6 +42,7 @@ description: |-
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `system_role` (String) The kind of role is "custom".
 
 ## Import
 
