@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.1.0] -- 2025-09-15
+
+### Added
+
+- Add `non_editable` attribute to `rootly_form_field_placement` resource
+- Add `alert_description` attribute to `rootly_heartbeat` resource
+
+### Changed
+
+- Enhanced OpenAPI schema generation and client code regeneration
+- Updated resource documentation with latest field descriptions
+- Improved test configurations for alert resources
+
 ## [4.0.0] -- 2025-09-15
 
 ### Added
