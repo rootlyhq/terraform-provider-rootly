@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.0.0] -- 2025-09-15
+
+### Added
+
+- Add `rootly_alert_field` resource and data source
+- Add `rootly_alert_route` resource and data source
+
+### Changed
+
+- Updated `rootly_alert_group` schema with additional attributes
+- Enhanced `rootly_alert_routing_rule` resource with new fields
+
 ## [3.6.2] -- 2025-09-05
 
 ### Fixed
