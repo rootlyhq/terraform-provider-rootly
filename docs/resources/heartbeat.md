@@ -23,6 +23,7 @@ description: |-
 
 ### Optional
 
+- `alert_description` (String) Description of alerts triggered when heartbeat expires.
 - `alert_urgency_id` (String) Urgency of alerts triggered when heartbeat expires.
 - `description` (String) The description of the heartbeat
 - `enabled` (Boolean)

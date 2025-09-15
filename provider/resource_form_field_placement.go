@@ -89,6 +89,14 @@ func resourceFormFieldPlacement() *schema.Resource {
 				Description:  "Logical operator when evaluating multiple form_field_placement_conditions with conditioned=placement. Value must be one of `and`, `or`.",
 				ValidateFunc: validation.StringInSlice([]string{"and", "or"}, false),
 			},
+
+			"non_editable": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Whether the field is read-only and cannot be edited by users.. Value must be one of true or false",
+			},
 		},
 	}
 }
@@ -120,6 +128,9 @@ func resourceFormFieldPlacementCreate(ctx context.Context, d *schema.ResourceDat
 	}
 	if value, ok := d.GetOkExists("placement_operator"); ok {
 		s.PlacementOperator = value.(string)
+	}
+	if value, ok := d.GetOkExists("non_editable"); ok {
+		s.NonEditable = tools.Bool(value.(bool))
 	}
 
 	res, err := c.CreateFormFieldPlacement(s)
@@ -157,6 +168,7 @@ func resourceFormFieldPlacementRead(ctx context.Context, d *schema.ResourceData,
 	d.Set("required", item.Required)
 	d.Set("required_operator", item.RequiredOperator)
 	d.Set("placement_operator", item.PlacementOperator)
+	d.Set("non_editable", item.NonEditable)
 
 	return nil
 }
@@ -187,6 +199,9 @@ func resourceFormFieldPlacementUpdate(ctx context.Context, d *schema.ResourceDat
 	}
 	if d.HasChange("placement_operator") {
 		s.PlacementOperator = d.Get("placement_operator").(string)
+	}
+	if d.HasChange("non_editable") {
+		s.NonEditable = tools.Bool(d.Get("non_editable").(bool))
 	}
 
 	_, err := c.UpdateFormFieldPlacement(d.Id(), s)

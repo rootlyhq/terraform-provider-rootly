@@ -15,6 +15,7 @@ type Heartbeat struct {
 	Name                   string `jsonapi:"attr,name,omitempty"`
 	Description            string `jsonapi:"attr,description,omitempty"`
 	AlertSummary           string `jsonapi:"attr,alert_summary,omitempty"`
+	AlertDescription       string `jsonapi:"attr,alert_description,omitempty"`
 	AlertUrgencyId         string `jsonapi:"attr,alert_urgency_id,omitempty"`
 	Interval               int    `jsonapi:"attr,interval,omitempty"`
 	IntervalUnit           string `jsonapi:"attr,interval_unit,omitempty"`
