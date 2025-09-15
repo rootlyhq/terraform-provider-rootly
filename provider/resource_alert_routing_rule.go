@@ -164,6 +164,163 @@ func resourceAlertRoutingRule() *schema.Resource {
 					},
 				},
 			},
+
+			"condition_groups": &schema.Schema{
+				Type:             schema.TypeList,
+				Computed:         false,
+				Required:         false,
+				Optional:         true,
+				Description:      "The condition groups for the alert routing rule",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+
+						"id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Unique ID of the condition group",
+						},
+
+						"position": &schema.Schema{
+							Type:        schema.TypeInt,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "The position of the condition group for ordering",
+						},
+
+						"conditions": &schema.Schema{
+							Type:             schema.TypeList,
+							Computed:         false,
+							Required:         false,
+							Optional:         true,
+							Description:      "The conditions within this group",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+
+									"id": &schema.Schema{
+										Type:        schema.TypeString,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "Unique ID of the condition",
+									},
+
+									"property_field_type": &schema.Schema{
+										Type:         schema.TypeString,
+										Default:      "attribute",
+										Required:     false,
+										Optional:     true,
+										ForceNew:     false,
+										Description:  "The type of the property field. Value must be one of `attribute`, `payload`.",
+										ValidateFunc: validation.StringInSlice([]string{"attribute", "payload"}, false),
+									},
+
+									"property_field_name": &schema.Schema{
+										Type:        schema.TypeString,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "The name of the property field",
+									},
+
+									"property_field_condition_type": &schema.Schema{
+										Type:         schema.TypeString,
+										Default:      "is_one_of",
+										Required:     false,
+										Optional:     true,
+										ForceNew:     false,
+										Description:  "The condition type of the property field. Value must be one of `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is_empty`.",
+										ValidateFunc: validation.StringInSlice([]string{"is_one_of", "is_not_one_of", "contains", "does_not_contain", "starts_with", "ends_with", "matches_regex", "is_empty"}, false),
+									},
+
+									"property_field_value": &schema.Schema{
+										Type:        schema.TypeString,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "The value of the property field",
+									},
+
+									"property_field_values": &schema.Schema{
+										Type: schema.TypeList,
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
+										DiffSuppressFunc: tools.EqualIgnoringOrder,
+										Computed:         false,
+										Required:         false,
+										Optional:         true,
+										Description:      "The values of the property field",
+									},
+
+									"conditionable_id": &schema.Schema{
+										Type:        schema.TypeString,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "The ID of the conditionable object",
+									},
+
+									"conditionable_type": &schema.Schema{
+										Type:        schema.TypeString,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "The type of the conditionable object",
+									},
+
+									"created_at": &schema.Schema{
+										Type:        schema.TypeString,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "Date of creation",
+									},
+
+									"updated_at": &schema.Schema{
+										Type:        schema.TypeString,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "Date of last update",
+									},
+								},
+							},
+						},
+
+						"created_at": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Date of creation",
+						},
+
+						"updated_at": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Date of last update",
+						},
+					},
+				},
+			},
 		},
 	}
 }
@@ -199,6 +356,9 @@ func resourceAlertRoutingRuleCreate(ctx context.Context, d *schema.ResourceData,
 				s.Destination = mapValue
 			}
 		}
+	}
+	if value, ok := d.GetOkExists("condition_groups"); ok {
+		s.ConditionGroups = value.([]interface{})
 	}
 
 	res, err := c.CreateAlertRoutingRule(s)
@@ -265,6 +425,28 @@ func resourceAlertRoutingRuleRead(ctx context.Context, d *schema.ResourceData, m
 	singleton_list_destination[0] = processed_item_destination
 	d.Set("destination", singleton_list_destination)
 
+	if item.ConditionGroups != nil {
+		processed_items_condition_groups := make([]map[string]interface{}, 0)
+
+		for _, c := range item.ConditionGroups {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processed_item_condition_groups := map[string]interface{}{
+					"id":         rawItem["id"],
+					"position":   rawItem["position"],
+					"conditions": rawItem["conditions"],
+					"created_at": rawItem["created_at"],
+					"updated_at": rawItem["updated_at"],
+				}
+				processed_items_condition_groups = append(processed_items_condition_groups, processed_item_condition_groups)
+			}
+		}
+
+		d.Set("condition_groups", processed_items_condition_groups)
+	} else {
+		d.Set("condition_groups", nil)
+	}
+
 	return nil
 }
 
@@ -302,6 +484,14 @@ func resourceAlertRoutingRuleUpdate(ctx context.Context, d *schema.ResourceData,
 		tps := d.Get("destination").([]interface{})
 		for _, tpsi := range tps {
 			s.Destination = tpsi.(map[string]interface{})
+		}
+	}
+
+	if d.HasChange("condition_groups") {
+		if value, ok := d.GetOk("condition_groups"); value != nil && ok {
+			s.ConditionGroups = value.([]interface{})
+		} else {
+			s.ConditionGroups = []interface{}{}
 		}
 	}
 

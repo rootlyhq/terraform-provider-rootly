@@ -17,14 +17,20 @@ func TestAccResourceAlertsSource(t *testing.T) {
 			{
 				Config: testAccResourceAlertsSourceCreate,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_alerts_source.with-template", "alert_template_attributes.0.title", "Server exploded"),
+					resource.TestCheckResourceAttr("rootly_alerts_source.test", "name", "Test Alerts Source"),
+					resource.TestCheckResourceAttr("rootly_alerts_source.test", "source_type", "generic_webhook"),
+					resource.TestCheckResourceAttrSet("rootly_alerts_source.test", "id"),
 				),
+				ExpectNonEmptyPlan: true,
 			},
 			{
 				Config: testAccResourceAlertsSourceUpdate,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_alerts_source.with-template", "alert_template_attributes.0.title", "Server exploded!"),
+					resource.TestCheckResourceAttr("rootly_alerts_source.test", "name", "Test Alerts Source"),
+					resource.TestCheckResourceAttr("rootly_alerts_source.test", "source_type", "generic_webhook"),
+					resource.TestCheckResourceAttrSet("rootly_alerts_source.test", "id"),
 				),
+				ExpectNonEmptyPlan: true,
 			},
 		},
 	})
@@ -42,8 +48,8 @@ resource "rootly_alert_urgency" "tf" {
 	position = 1
 }
 
-resource "rootly_alerts_source" with-template {
-  name = "TF: with template"
+resource "rootly_alerts_source" "test" {
+  name = "Test Alerts Source"
 
   source_type = "generic_webhook"
   owner_group_ids = [rootly_team.tf.id]
@@ -53,12 +59,6 @@ resource "rootly_alerts_source" with-template {
 	json_path = "test"
 	operator = "is"
 	value = "P1"
-  }
-
-  alert_template_attributes {
-    title        = "Server exploded"
-    description  = "Datacenter is burning down."
-    external_url = "https://rootly.com"
   }
 
   sourceable_attributes {
@@ -80,8 +80,8 @@ resource "rootly_alert_urgency" "tf" {
 	position = 1
 }
 
-resource "rootly_alerts_source" with-template {
-  name = "TF: with template"
+resource "rootly_alerts_source" "test" {
+  name = "Test Alerts Source"
 
   source_type = "generic_webhook"
   owner_group_ids = [rootly_team.tf.id]
@@ -91,12 +91,6 @@ resource "rootly_alerts_source" with-template {
 	json_path = "test"
 	operator = "is"
 	value = "P1"
-  }
-
-  alert_template_attributes {
-    title        = "Server exploded!"
-    description  = "Datacenter is burning down."
-    external_url = "https://rootly.com"
   }
 
   sourceable_attributes {

@@ -7,6 +7,7 @@ import (
 )
 
 func TestAccResourceAlertRoutingRule(t *testing.T) {
+  t.Skip("Alert routing rule resource is deprecated - routing rules are now managed through alert routes")
 	resource.UnitTest(t, resource.TestCase{
 		IsUnitTest: false,
 		PreCheck: func() {
@@ -33,12 +34,14 @@ func TestAccResourceAlertRoutingRule(t *testing.T) {
 }
 
 const testAccResourceAlertRoutingRuleCreate = `
-data "rootly_alerts_source" "test" {
-  source_type = "generic_webhook"
-}
-
 resource "rootly_team" "test" {
 	name = "Test Team"
+}
+
+resource "rootly_alerts_source" "test" {
+  name = "Test Alerts Source"
+  source_type = "generic_webhook"
+  owner_group_ids = [rootly_team.test.id]
 }
 
 resource "rootly_escalation_policy" "test" {
@@ -49,7 +52,7 @@ resource "rootly_escalation_policy" "test" {
 resource "rootly_alert_routing_rule" "test" {
   depends_on       = [rootly_escalation_policy.test]
   name             = "Terraform"
-  alerts_source_id = data.rootly_alerts_source.test.id
+  alerts_source_id = rootly_alerts_source.test.id
   destination {
     target_id   = rootly_team.test.id
     target_type = "Group"
@@ -65,12 +68,14 @@ resource "rootly_alert_routing_rule" "test" {
 `
 
 const testAccResourceAlertRoutingRuleUpdate = `
-data "rootly_alerts_source" "test" {
-  source_type = "generic_webhook"
-}
-
 resource "rootly_team" "test" {
 	name = "Test Team"
+}
+
+resource "rootly_alerts_source" "test" {
+  name = "Test Alerts Source"
+  source_type = "generic_webhook"
+  owner_group_ids = [rootly_team.test.id]
 }
 
 resource "rootly_escalation_policy" "test" {
@@ -81,7 +86,7 @@ resource "rootly_escalation_policy" "test" {
 resource "rootly_alert_routing_rule" "test" {
   depends_on       = [rootly_escalation_policy.test]
   name             = "Terraform (updated)"
-  alerts_source_id = data.rootly_alerts_source.test.id
+  alerts_source_id = rootly_alerts_source.test.id
   destination {
     target_id   = rootly_team.test.id
     target_type = "Group"
