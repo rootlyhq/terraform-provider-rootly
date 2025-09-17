@@ -46,9 +46,9 @@ func resourceOnCallRole() *schema.Resource {
 
 			"system_role": &schema.Schema{
 				Type:        schema.TypeString,
-				Computed:    true,
+				Default:     "custom",
 				Required:    false,
-				Optional:    false,
+				Optional:    true,
 				ForceNew:    false,
 				Description: "The kind of role",
 			},

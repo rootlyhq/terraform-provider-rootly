@@ -90,13 +90,12 @@ func resourceFormFieldPlacement() *schema.Resource {
 				ValidateFunc: validation.StringInSlice([]string{"and", "or"}, false),
 			},
 
-			"non_editable": &schema.Schema {
-				Type: schema.TypeBool,
-				Computed: true,
-				Required: false,
-				Optional: true,
+			"non_editable": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
 				Description: "Whether the field is read-only and cannot be edited by users.. Value must be one of true or false",
-				
 			},
 		},
 	}
