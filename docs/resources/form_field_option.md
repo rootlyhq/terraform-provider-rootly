@@ -42,17 +42,14 @@ resource "rootly_form_field_option" "north_america" {
 ### Required
 
 - `form_field_id` (String) The ID of the parent custom field
-- `value` (String) The value of the form_field_option
+- `value` (String) The value of the form field option
 
 ### Optional
 
-- `color` (String) The hex color of the form_field_option
+- `color` (String) The hex color of the form field option
 - `default` (Boolean) Value must be one of true or false
-- `position` (Number) The position of the form_field_option
-
-### Read-Only
-
-- `id` (String) The ID of this resource.
+- `id` (String) Unique ID of the form field option
+- `position` (Number) The position of the form field option
 
 ## Import
 

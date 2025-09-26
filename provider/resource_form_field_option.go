@@ -26,6 +26,15 @@ func resourceFormFieldOption() *schema.Resource {
 		},
 		Schema: map[string]*schema.Schema{
 
+			"id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Unique ID of the form field option",
+			},
+
 			"form_field_id": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    false,
@@ -41,7 +50,7 @@ func resourceFormFieldOption() *schema.Resource {
 				Required:    true,
 				Optional:    false,
 				ForceNew:    false,
-				Description: "The value of the form_field_option",
+				Description: "The value of the form field option",
 			},
 
 			"color": &schema.Schema{
@@ -50,7 +59,7 @@ func resourceFormFieldOption() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "The hex color of the form_field_option",
+				Description: "The hex color of the form field option",
 			},
 
 			"default": &schema.Schema{
@@ -67,7 +76,7 @@ func resourceFormFieldOption() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "The position of the form_field_option",
+				Description: "The position of the form field option",
 			},
 		},
 	}
@@ -80,6 +89,9 @@ func resourceFormFieldOptionCreate(ctx context.Context, d *schema.ResourceData, 
 
 	s := &client.FormFieldOption{}
 
+	if value, ok := d.GetOkExists("id"); ok {
+		s.Id = value.(string)
+	}
 	if value, ok := d.GetOkExists("form_field_id"); ok {
 		s.FormFieldId = value.(string)
 	}
@@ -124,6 +136,7 @@ func resourceFormFieldOptionRead(ctx context.Context, d *schema.ResourceData, me
 		return diag.Errorf("Error reading form_field_option: %s", d.Id())
 	}
 
+	d.Set("id", item.Id)
 	d.Set("form_field_id", item.FormFieldId)
 	d.Set("value", item.Value)
 	d.Set("color", item.Color)
@@ -139,6 +152,9 @@ func resourceFormFieldOptionUpdate(ctx context.Context, d *schema.ResourceData, 
 
 	s := &client.FormFieldOption{}
 
+	if d.HasChange("id") {
+		s.Id = d.Get("id").(string)
+	}
 	if d.HasChange("form_field_id") {
 		s.FormFieldId = d.Get("form_field_id").(string)
 	}

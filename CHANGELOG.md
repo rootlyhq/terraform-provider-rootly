@@ -1,5 +1,23 @@
 # Changelog
 
+## [4.1.1] -- 2025-09-25
+
+### Added
+
+- Add `id` attribute to `rootly_form_field_option` resource
+
+### Changed
+
+- Updated Node.js version from 21.7.2 to 20.9.0 and added yarn 1.22.22 to tool-versions
+- Updated dependency versions in go.mod and go.sum
+- Enhanced form field option documentation with improved descriptions
+- Updated OpenAPI schema generation (oapi-codegen v2.5.0)
+
+### Fixed
+
+- Fixed form field option schema to include optional `id` field
+- Improved form field option attribute descriptions for clarity
+
 ## [4.1.0] -- 2025-09-15
 
 ### Added
