@@ -25,6 +25,7 @@ type Heartbeat struct {
 	Status                 string `jsonapi:"attr,status,omitempty"`
 	PingUrl                string `jsonapi:"attr,ping_url,omitempty"`
 	Secret                 string `jsonapi:"attr,secret,omitempty"`
+	EmailAddress           string `jsonapi:"attr,email_address,omitempty"`
 	LastPingedAt           string `jsonapi:"attr,last_pinged_at,omitempty"`
 	ExpiresAt              string `jsonapi:"attr,expires_at,omitempty"`
 }

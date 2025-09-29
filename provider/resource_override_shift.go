@@ -31,7 +31,9 @@ func resourceOverrideShift() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    true,
+				WriteOnly:   false,
 				Description: "ID of schedule",
 			},
 
@@ -40,7 +42,9 @@ func resourceOverrideShift() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "ID of rotation",
 			},
 
@@ -49,7 +53,9 @@ func resourceOverrideShift() *schema.Resource {
 				Computed:    false,
 				Required:    true,
 				Optional:    false,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Start datetime of shift",
 			},
 
@@ -58,7 +64,9 @@ func resourceOverrideShift() *schema.Resource {
 				Computed:    false,
 				Required:    true,
 				Optional:    false,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "End datetime of shift",
 			},
 
@@ -67,6 +75,9 @@ func resourceOverrideShift() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Denotes shift is an override shift. Value must be one of true or false",
 			},
 

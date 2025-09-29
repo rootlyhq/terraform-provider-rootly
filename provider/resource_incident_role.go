@@ -31,7 +31,9 @@ func resourceIncidentRole() *schema.Resource {
 				Computed:    false,
 				Required:    true,
 				Optional:    false,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The name of the incident role",
 			},
 
@@ -40,7 +42,9 @@ func resourceIncidentRole() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The slug of the incident role",
 			},
 
@@ -49,7 +53,9 @@ func resourceIncidentRole() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The summary of the incident role",
 			},
 
@@ -58,7 +64,9 @@ func resourceIncidentRole() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The description of the incident role",
 			},
 
@@ -67,7 +75,9 @@ func resourceIncidentRole() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Position of the incident role",
 			},
 
@@ -76,13 +86,19 @@ func resourceIncidentRole() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Value must be one of true or false",
 			},
 
 			"enabled": &schema.Schema{
-				Type:     schema.TypeBool,
-				Default:  true,
-				Optional: true,
+				Type:      schema.TypeBool,
+				Default:   true,
+				Optional:  true,
+				Sensitive: false,
+				ForceNew:  false,
+				WriteOnly: false,
 			},
 
 			"allow_multi_user_assignment": &schema.Schema{
@@ -90,6 +106,9 @@ func resourceIncidentRole() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Value must be one of true or false",
 			},
 		},

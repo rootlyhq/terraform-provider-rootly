@@ -31,7 +31,9 @@ func resourceCustomForm() *schema.Resource {
 				Computed:    false,
 				Required:    true,
 				Optional:    false,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The name of the custom form.",
 			},
 
@@ -40,7 +42,9 @@ func resourceCustomForm() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The custom form slug. Add this to form_field.shown or form_field.required to associate form fields with custom forms.",
 			},
 
@@ -49,14 +53,19 @@ func resourceCustomForm() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "",
 			},
 
 			"enabled": &schema.Schema{
-				Type:     schema.TypeBool,
-				Default:  true,
-				Optional: true,
+				Type:      schema.TypeBool,
+				Default:   true,
+				Optional:  true,
+				Sensitive: false,
+				ForceNew:  false,
+				WriteOnly: false,
 			},
 
 			"command": &schema.Schema{
@@ -64,7 +73,9 @@ func resourceCustomForm() *schema.Resource {
 				Computed:    false,
 				Required:    true,
 				Optional:    false,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The Slack command used to trigger this form.",
 			},
 		},

@@ -26,6 +26,7 @@ description: |-
 - `alert_description` (String) Description of alerts triggered when heartbeat expires.
 - `alert_urgency_id` (String) Urgency of alerts triggered when heartbeat expires.
 - `description` (String) The description of the heartbeat
+- `email_address` (String) Email address to receive heartbeat pings.
 - `enabled` (Boolean)
 - `expires_at` (String) When heartbeat expires
 - `interval_unit` (String) Value must be one of `seconds`, `minutes`, `hours`.

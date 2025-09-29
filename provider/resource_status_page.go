@@ -10,7 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -31,7 +31,9 @@ func resourceStatusPage() *schema.Resource {
 				Computed:    false,
 				Required:    true,
 				Optional:    false,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The title of the status page",
 			},
 
@@ -40,7 +42,9 @@ func resourceStatusPage() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The slug of the status page",
 			},
 
@@ -49,7 +53,9 @@ func resourceStatusPage() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The public title of the status page",
 			},
 
@@ -58,7 +64,9 @@ func resourceStatusPage() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The description of the status page",
 			},
 
@@ -67,7 +75,9 @@ func resourceStatusPage() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The public description of the status page",
 			},
 
@@ -76,7 +86,9 @@ func resourceStatusPage() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The color of the header. Eg. \"#0061F2\"",
 			},
 
@@ -85,7 +97,9 @@ func resourceStatusPage() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The color of the footer. Eg. \"#1F2F41\"",
 			},
 
@@ -94,6 +108,9 @@ func resourceStatusPage() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Allow search engines to include your public status page in search results. Value must be one of true or false",
 			},
 
@@ -102,6 +119,9 @@ func resourceStatusPage() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Show uptime. Value must be one of true or false",
 			},
 
@@ -110,7 +130,9 @@ func resourceStatusPage() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Show uptime over x days. Value must be one of `30`, `60`, `90`.",
 			},
 
@@ -119,7 +141,9 @@ func resourceStatusPage() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Message showing when all components are operational",
 			},
 
@@ -128,8 +152,22 @@ func resourceStatusPage() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Message showing when at least one component is not operational",
+			},
+
+			"authentication_method": &schema.Schema{
+				Type:         schema.TypeString,
+				Default:      "none",
+				Required:     false,
+				Optional:     true,
+				Sensitive:    false,
+				ForceNew:     false,
+				WriteOnly:    false,
+				Description:  "Authentication method. Value must be one of `none`, `password`, `saml`.",
+				ValidateFunc: validation.StringInSlice([]string{"none", "password", "saml"}, false),
 			},
 
 			"authentication_enabled": &schema.Schema{
@@ -137,7 +175,10 @@ func resourceStatusPage() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
-				Description: "Enable authentication. Value must be one of true or false",
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Enable authentication (deprecated - use authentication_method instead). Value must be one of true or false",
 			},
 
 			"authentication_password": &schema.Schema{
@@ -145,7 +186,9 @@ func resourceStatusPage() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Authentication password",
 
 				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
@@ -153,12 +196,74 @@ func resourceStatusPage() *schema.Resource {
 				},
 			},
 
+			"saml_idp_sso_service_url": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "SAML IdP SSO service URL",
+			},
+
+			"saml_idp_slo_service_url": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "SAML IdP SLO service URL",
+			},
+
+			"saml_idp_cert": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "SAML IdP certificate",
+
+				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+					return len(old) != 0
+				},
+			},
+
+			"saml_idp_cert_fingerprint": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "SAML IdP certificate fingerprint",
+			},
+
+			"saml_name_identifier_format": &schema.Schema{
+				Type:         schema.TypeString,
+				Default:      "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+				Required:     false,
+				Optional:     true,
+				Sensitive:    false,
+				ForceNew:     false,
+				WriteOnly:    false,
+				Description:  "SAML name identifier format. Value must be one of `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`, `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`, `urn:oasis:names:tc:SAML:2.0:nameid-format:transient`, `urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified`.",
+				ValidateFunc: validation.StringInSlice([]string{"urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress", "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent", "urn:oasis:names:tc:SAML:2.0:nameid-format:transient", "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"}, false),
+			},
+
 			"website_url": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Website URL",
 			},
 
@@ -167,7 +272,9 @@ func resourceStatusPage() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Website Privacy URL",
 			},
 
@@ -176,7 +283,9 @@ func resourceStatusPage() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Website Support URL",
 			},
 
@@ -185,7 +294,9 @@ func resourceStatusPage() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Google Analytics tracking ID",
 			},
 
@@ -194,7 +305,9 @@ func resourceStatusPage() *schema.Resource {
 				Default:     "Etc/UTC",
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "A valid IANA time zone name.",
 			},
 
@@ -203,6 +316,9 @@ func resourceStatusPage() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Make the status page accessible to the public. Value must be one of true or false",
 			},
 
@@ -215,6 +331,9 @@ func resourceStatusPage() *schema.Resource {
 				Computed:         false,
 				Required:         false,
 				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
 				Description:      "Services attached to the status page",
 			},
 
@@ -227,6 +346,9 @@ func resourceStatusPage() *schema.Resource {
 				Computed:         false,
 				Required:         false,
 				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
 				Description:      "Functionalities attached to the status page",
 			},
 
@@ -239,13 +361,19 @@ func resourceStatusPage() *schema.Resource {
 				Computed:         false,
 				Required:         false,
 				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
 				Description:      "External domain names attached to the status page",
 			},
 
 			"enabled": &schema.Schema{
-				Type:     schema.TypeBool,
-				Default:  true,
-				Optional: true,
+				Type:      schema.TypeBool,
+				Default:   true,
+				Optional:  true,
+				Sensitive: false,
+				ForceNew:  false,
+				WriteOnly: false,
 			},
 		},
 	}
@@ -294,11 +422,29 @@ func resourceStatusPageCreate(ctx context.Context, d *schema.ResourceData, meta 
 	if value, ok := d.GetOkExists("failure_message"); ok {
 		s.FailureMessage = value.(string)
 	}
+	if value, ok := d.GetOkExists("authentication_method"); ok {
+		s.AuthenticationMethod = value.(string)
+	}
 	if value, ok := d.GetOkExists("authentication_enabled"); ok {
 		s.AuthenticationEnabled = tools.Bool(value.(bool))
 	}
 	if value, ok := d.GetOkExists("authentication_password"); ok {
 		s.AuthenticationPassword = value.(string)
+	}
+	if value, ok := d.GetOkExists("saml_idp_sso_service_url"); ok {
+		s.SamlIdpSsoServiceUrl = value.(string)
+	}
+	if value, ok := d.GetOkExists("saml_idp_slo_service_url"); ok {
+		s.SamlIdpSloServiceUrl = value.(string)
+	}
+	if value, ok := d.GetOkExists("saml_idp_cert"); ok {
+		s.SamlIdpCert = value.(string)
+	}
+	if value, ok := d.GetOkExists("saml_idp_cert_fingerprint"); ok {
+		s.SamlIdpCertFingerprint = value.(string)
+	}
+	if value, ok := d.GetOkExists("saml_name_identifier_format"); ok {
+		s.SamlNameIdentifierFormat = value.(string)
 	}
 	if value, ok := d.GetOkExists("website_url"); ok {
 		s.WebsiteUrl = value.(string)
@@ -371,8 +517,14 @@ func resourceStatusPageRead(ctx context.Context, d *schema.ResourceData, meta in
 	d.Set("show_uptime_last_days", item.ShowUptimeLastDays)
 	d.Set("success_message", item.SuccessMessage)
 	d.Set("failure_message", item.FailureMessage)
+	d.Set("authentication_method", item.AuthenticationMethod)
 	d.Set("authentication_enabled", item.AuthenticationEnabled)
 	d.Set("authentication_password", item.AuthenticationPassword)
+	d.Set("saml_idp_sso_service_url", item.SamlIdpSsoServiceUrl)
+	d.Set("saml_idp_slo_service_url", item.SamlIdpSloServiceUrl)
+	d.Set("saml_idp_cert", item.SamlIdpCert)
+	d.Set("saml_idp_cert_fingerprint", item.SamlIdpCertFingerprint)
+	d.Set("saml_name_identifier_format", item.SamlNameIdentifierFormat)
 	d.Set("website_url", item.WebsiteUrl)
 	d.Set("website_privacy_url", item.WebsitePrivacyUrl)
 	d.Set("website_support_url", item.WebsiteSupportUrl)
@@ -429,11 +581,29 @@ func resourceStatusPageUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	if d.HasChange("failure_message") {
 		s.FailureMessage = d.Get("failure_message").(string)
 	}
+	if d.HasChange("authentication_method") {
+		s.AuthenticationMethod = d.Get("authentication_method").(string)
+	}
 	if d.HasChange("authentication_enabled") {
 		s.AuthenticationEnabled = tools.Bool(d.Get("authentication_enabled").(bool))
 	}
 	if d.HasChange("authentication_password") {
 		s.AuthenticationPassword = d.Get("authentication_password").(string)
+	}
+	if d.HasChange("saml_idp_sso_service_url") {
+		s.SamlIdpSsoServiceUrl = d.Get("saml_idp_sso_service_url").(string)
+	}
+	if d.HasChange("saml_idp_slo_service_url") {
+		s.SamlIdpSloServiceUrl = d.Get("saml_idp_slo_service_url").(string)
+	}
+	if d.HasChange("saml_idp_cert") {
+		s.SamlIdpCert = d.Get("saml_idp_cert").(string)
+	}
+	if d.HasChange("saml_idp_cert_fingerprint") {
+		s.SamlIdpCertFingerprint = d.Get("saml_idp_cert_fingerprint").(string)
+	}
+	if d.HasChange("saml_name_identifier_format") {
+		s.SamlNameIdentifierFormat = d.Get("saml_name_identifier_format").(string)
 	}
 	if d.HasChange("website_url") {
 		s.WebsiteUrl = d.Get("website_url").(string)

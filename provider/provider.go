@@ -304,6 +304,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_workflow_task_create_openai_chat_completion":        resourceWorkflowTaskCreateOpenaiChatCompletion(),
 				"rootly_workflow_task_create_watsonx_chat_completion":       resourceWorkflowTaskCreateWatsonxChatCompletion(),
 				"rootly_workflow_task_create_google_gemini_chat_completion": resourceWorkflowTaskCreateGoogleGeminiChatCompletion(),
+				"rootly_workflow_task_create_mistral_chat_completion":       resourceWorkflowTaskCreateMistralChatCompletion(),
 				"rootly_workflow_task_create_anthropic_chat_completion":     resourceWorkflowTaskCreateAnthropicChatCompletion(),
 			},
 		}
