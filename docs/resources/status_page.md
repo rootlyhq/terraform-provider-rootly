@@ -21,7 +21,8 @@ description: |-
 ### Optional
 
 - `allow_search_engine_index` (Boolean) Allow search engines to include your public status page in search results. Value must be one of true or false
-- `authentication_enabled` (Boolean) Enable authentication. Value must be one of true or false
+- `authentication_enabled` (Boolean) Enable authentication (deprecated - use authentication_method instead). Value must be one of true or false
+- `authentication_method` (String) Authentication method. Value must be one of `none`, `password`, `saml`.
 - `authentication_password` (String) Authentication password
 - `description` (String) The description of the status page
 - `enabled` (Boolean)
@@ -34,6 +35,11 @@ description: |-
 - `public` (Boolean) Make the status page accessible to the public. Value must be one of true or false
 - `public_description` (String) The public description of the status page
 - `public_title` (String) The public title of the status page
+- `saml_idp_cert` (String) SAML IdP certificate
+- `saml_idp_cert_fingerprint` (String) SAML IdP certificate fingerprint
+- `saml_idp_slo_service_url` (String) SAML IdP SLO service URL
+- `saml_idp_sso_service_url` (String) SAML IdP SSO service URL
+- `saml_name_identifier_format` (String) SAML name identifier format. Value must be one of `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`, `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`, `urn:oasis:names:tc:SAML:2.0:nameid-format:transient`, `urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified`.
 - `service_ids` (List of String) Services attached to the status page
 - `show_uptime` (Boolean) Show uptime. Value must be one of true or false
 - `show_uptime_last_days` (Number) Show uptime over x days. Value must be one of `30`, `60`, `90`.

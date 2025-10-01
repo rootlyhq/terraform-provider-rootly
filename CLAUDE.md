@@ -72,7 +72,9 @@ Workflow tasks are special resources with dynamic generation based on OpenAPI sc
 The provider uses custom OpenAPI schema annotations to control Terraform resource generation behavior. These flags are processed in the JavaScript template files during code generation:
 
 - **`tf_skip_diff`** - Prevents Terraform from detecting differences on a field. Adds a `DiffSuppressFunc` that suppresses diffs when an old value exists. Used for sensitive fields like secrets or computed status fields.
-- **`tf_write_only`** - Marks a field as write-only for create/update operations but not read back from the API. Sets `ForceNew: true` and adds diff suppression. Used for passwords or fields that can't be retrieved.
+- **`tf_sensitive`** - Ensures that the attribute's value does not get displayed in logs or regular output.
+- **`tf_force_new`** - Indicates that any change in this field requires the resource to be destroyed and recreated.
+- **`tf_write_only`** - Used for arguments that handle secret values that do not need to be persisted in Terraform plan or state, such as passwords, API keys, etc. Write-only argument values are not sent to Terraform and do not persist in the Terraform plan or state artifact.
 - **`tf_computed`** - Controls whether a field is computed by Terraform (`true`) or must be explicitly set (`false`). Affects JSON serialization and whether the field gets the `omitempty` tag.
 - **`tf_include_unchanged`** - Forces a field to be included in update operations even if it hasn't changed. Bypasses the normal `d.HasChange()` check. Used for fields the API requires in every update request.
 

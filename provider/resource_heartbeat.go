@@ -31,7 +31,9 @@ func resourceHeartbeat() *schema.Resource {
 				Computed:    false,
 				Required:    true,
 				Optional:    false,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The name of the heartbeat",
 			},
 
@@ -40,7 +42,9 @@ func resourceHeartbeat() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The description of the heartbeat",
 			},
 
@@ -49,7 +53,9 @@ func resourceHeartbeat() *schema.Resource {
 				Computed:    false,
 				Required:    true,
 				Optional:    false,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Summary of alerts triggered when heartbeat expires.",
 			},
 
@@ -58,7 +64,9 @@ func resourceHeartbeat() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Description of alerts triggered when heartbeat expires.",
 			},
 
@@ -67,7 +75,9 @@ func resourceHeartbeat() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Urgency of alerts triggered when heartbeat expires.",
 			},
 
@@ -76,7 +86,9 @@ func resourceHeartbeat() *schema.Resource {
 				Computed:    false,
 				Required:    true,
 				Optional:    false,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "",
 			},
 
@@ -85,7 +97,9 @@ func resourceHeartbeat() *schema.Resource {
 				Default:      "seconds",
 				Required:     false,
 				Optional:     true,
+				Sensitive:    false,
 				ForceNew:     false,
+				WriteOnly:    false,
 				Description:  "Value must be one of `seconds`, `minutes`, `hours`.",
 				ValidateFunc: validation.StringInSlice([]string{"seconds", "minutes", "hours"}, false),
 			},
@@ -95,7 +109,9 @@ func resourceHeartbeat() *schema.Resource {
 				Computed:    false,
 				Required:    true,
 				Optional:    false,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "",
 			},
 
@@ -104,15 +120,20 @@ func resourceHeartbeat() *schema.Resource {
 				Default:      "User",
 				Required:     false,
 				Optional:     true,
+				Sensitive:    false,
 				ForceNew:     false,
+				WriteOnly:    false,
 				Description:  "Value must be one of `User`, `Group`, `Service`, `EscalationPolicy`.",
 				ValidateFunc: validation.StringInSlice([]string{"User", "Group", "Service", "EscalationPolicy"}, false),
 			},
 
 			"enabled": &schema.Schema{
-				Type:     schema.TypeBool,
-				Default:  true,
-				Optional: true,
+				Type:      schema.TypeBool,
+				Default:   true,
+				Optional:  true,
+				Sensitive: false,
+				ForceNew:  false,
+				WriteOnly: false,
 			},
 
 			"status": &schema.Schema{
@@ -120,7 +141,9 @@ func resourceHeartbeat() *schema.Resource {
 				Computed:     true,
 				Required:     false,
 				Optional:     true,
+				Sensitive:    false,
 				ForceNew:     false,
+				WriteOnly:    false,
 				Description:  "Value must be one of `waiting`, `active`, `expired`.",
 				ValidateFunc: validation.StringInSlice([]string{"waiting", "active", "expired"}, false),
 
@@ -134,7 +157,9 @@ func resourceHeartbeat() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "URL to receive heartbeat pings.",
 			},
 
@@ -143,8 +168,21 @@ func resourceHeartbeat() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Secret used as bearer token when pinging heartbeat.",
+			},
+
+			"email_address": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Email address to receive heartbeat pings.",
 			},
 
 			"last_pinged_at": &schema.Schema{
@@ -152,7 +190,9 @@ func resourceHeartbeat() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "When the heartbeat was last pinged.",
 			},
 
@@ -161,7 +201,9 @@ func resourceHeartbeat() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "When heartbeat expires",
 			},
 		},
@@ -214,6 +256,9 @@ func resourceHeartbeatCreate(ctx context.Context, d *schema.ResourceData, meta i
 	if value, ok := d.GetOkExists("secret"); ok {
 		s.Secret = value.(string)
 	}
+	if value, ok := d.GetOkExists("email_address"); ok {
+		s.EmailAddress = value.(string)
+	}
 	if value, ok := d.GetOkExists("last_pinged_at"); ok {
 		s.LastPingedAt = value.(string)
 	}
@@ -262,6 +307,7 @@ func resourceHeartbeatRead(ctx context.Context, d *schema.ResourceData, meta int
 	d.Set("status", item.Status)
 	d.Set("ping_url", item.PingUrl)
 	d.Set("secret", item.Secret)
+	d.Set("email_address", item.EmailAddress)
 	d.Set("last_pinged_at", item.LastPingedAt)
 	d.Set("expires_at", item.ExpiresAt)
 
@@ -312,6 +358,9 @@ func resourceHeartbeatUpdate(ctx context.Context, d *schema.ResourceData, meta i
 	}
 	if d.HasChange("secret") {
 		s.Secret = d.Get("secret").(string)
+	}
+	if d.HasChange("email_address") {
+		s.EmailAddress = d.Get("email_address").(string)
 	}
 	if d.HasChange("last_pinged_at") {
 		s.LastPingedAt = d.Get("last_pinged_at").(string)

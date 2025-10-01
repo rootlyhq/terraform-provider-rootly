@@ -372,10 +372,12 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
     defaultValue = `Computed: ${optional}`;
   }
   const description = annotatedDescription(schema);
+  const sensitive = schema.tf_sensitive ? "true" : "false";
   const forceNew =
-    name === pathIdField || schema.tf_write_only ? "true" : "false";
+    name === pathIdField || schema.tf_force_new ? "true" : "false";
+  const writeOnly = schema.tf_write_only ? "true" : "false";
   const skipDiff =
-    schema.tf_skip_diff || schema.tf_write_only
+    schema.tf_skip_diff
       ? `
 		DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 			return len(old) != 0
@@ -399,23 +401,27 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 				${defaultValue},
 				Required: ${required},
 				Optional: ${optional},
+        Sensitive: ${sensitive},
 				ForceNew: ${forceNew},
+        WriteOnly: ${writeOnly},
 				Description: "${description}",${validateFunc}
 				${skipDiff}
 			},
 			`;
     case "integer":
       return `
-		"${name}": &schema.Schema {
-			Type: schema.TypeInt,
-			Computed: ${optional},
-			Required: ${required},
-			Optional: ${optional},
-			ForceNew: ${forceNew},
-			Description: "${description}",
-			${skipDiff}
-		},
-		`;
+      "${name}": &schema.Schema {
+        Type: schema.TypeInt,
+        Computed: ${optional},
+        Required: ${required},
+        Optional: ${optional},
+        Sensitive: ${sensitive},
+        ForceNew: ${forceNew},
+        WriteOnly: ${writeOnly},
+        Description: "${description}",
+        ${skipDiff}
+      },
+      `;
     case "number":
       return `
 			"${name}": &schema.Schema {
@@ -423,7 +429,9 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 				Computed: ${optional},
 				Required: ${required},
 				Optional: ${optional},
+        Sensitive: ${sensitive},
 				ForceNew: ${forceNew},
+        WriteOnly: ${writeOnly},
 				Description: "${description}",
 				${skipDiff}
 			},
@@ -435,20 +443,26 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 					Type: schema.TypeBool,
 					Default: true,
 					Optional: true,
+          Sensitive: ${sensitive},
+          ForceNew: ${forceNew},
+          WriteOnly: ${writeOnly},
 					${skipDiff}
 				},
 				`;
       }
       return `
-			"${name}": &schema.Schema {
-				Type: schema.TypeBool,
-				Computed: ${optional},
-				Required: ${required},
-				Optional: ${optional},
-				Description: "${description}",
-				${skipDiff}
-			},
-			`;
+        "${name}": &schema.Schema {
+          Type: schema.TypeBool,
+          Computed: ${optional},
+          Required: ${required},
+          Optional: ${optional},
+          Sensitive: ${sensitive},
+          ForceNew: ${forceNew},
+          WriteOnly: ${writeOnly},
+          Description: "${description}",
+          ${skipDiff}
+        },
+        `;
     case "array":
       if (
         schema.items &&
@@ -461,6 +475,9 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 					Computed: ${schema.tf_computed ? "true" : "false"},
 					Required: ${required},
 					Optional: ${optional},
+          Sensitive: ${sensitive},
+          ForceNew: ${forceNew},
+          WriteOnly: ${writeOnly},
 					Description: "${description}",
 					DiffSuppressFunc: tools.EqualIgnoringOrder,
 					Elem: &schema.Resource {
@@ -489,6 +506,9 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 					Computed: ${schema.tf_computed ? "true" : "false"},
 					Required: ${required},
 					Optional: ${optional},
+          Sensitive: ${sensitive},
+          ForceNew: ${forceNew},
+          WriteOnly: ${writeOnly},
 					Description: "${description}",
 					${stateFunc}
 				},
@@ -504,6 +524,9 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 					Computed: ${schema.tf_computed ? "true" : "false"},
 					Required: ${required},
 					Optional: ${optional},
+          Sensitive: ${sensitive},
+          ForceNew: ${forceNew},
+          WriteOnly: ${writeOnly},
 					Description: "${description}",
 					${stateFunc}
 				},
@@ -519,6 +542,9 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 					Computed: ${schema.tf_computed ? "true" : "false"},
 					Required: ${required},
 					Optional: ${optional},
+          Sensitive: ${sensitive},
+          ForceNew: ${forceNew},
+          WriteOnly: ${writeOnly},
 					Description: "${description}",
 					${stateFunc}
 				},
@@ -536,6 +562,9 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 	 				Computed: ${optional},
 	 				Required: ${required},
 	 				Optional: ${optional},
+          Sensitive: ${sensitive},
+          ForceNew: ${forceNew},
+          WriteOnly: ${writeOnly},
 	 				Description: "${description}",
 						MinItems: 0,
 						MaxItems: 1,

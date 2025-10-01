@@ -11,31 +11,37 @@ import (
 )
 
 type StatusPage struct {
-	ID                     string        `jsonapi:"primary,status_pages"`
-	Title                  string        `jsonapi:"attr,title,omitempty"`
-	Slug                   string        `jsonapi:"attr,slug,omitempty"`
-	PublicTitle            string        `jsonapi:"attr,public_title,omitempty"`
-	Description            string        `jsonapi:"attr,description,omitempty"`
-	PublicDescription      string        `jsonapi:"attr,public_description,omitempty"`
-	HeaderColor            string        `jsonapi:"attr,header_color,omitempty"`
-	FooterColor            string        `jsonapi:"attr,footer_color,omitempty"`
-	AllowSearchEngineIndex *bool         `jsonapi:"attr,allow_search_engine_index,omitempty"`
-	ShowUptime             *bool         `jsonapi:"attr,show_uptime,omitempty"`
-	ShowUptimeLastDays     int           `jsonapi:"attr,show_uptime_last_days,omitempty"`
-	SuccessMessage         string        `jsonapi:"attr,success_message,omitempty"`
-	FailureMessage         string        `jsonapi:"attr,failure_message,omitempty"`
-	AuthenticationEnabled  *bool         `jsonapi:"attr,authentication_enabled,omitempty"`
-	AuthenticationPassword string        `jsonapi:"attr,authentication_password,omitempty"`
-	WebsiteUrl             string        `jsonapi:"attr,website_url,omitempty"`
-	WebsitePrivacyUrl      string        `jsonapi:"attr,website_privacy_url,omitempty"`
-	WebsiteSupportUrl      string        `jsonapi:"attr,website_support_url,omitempty"`
-	GaTrackingId           string        `jsonapi:"attr,ga_tracking_id,omitempty"`
-	TimeZone               string        `jsonapi:"attr,time_zone,omitempty"`
-	Public                 *bool         `jsonapi:"attr,public,omitempty"`
-	ServiceIds             []interface{} `jsonapi:"attr,service_ids,omitempty"`
-	FunctionalityIds       []interface{} `jsonapi:"attr,functionality_ids,omitempty"`
-	ExternalDomainNames    []interface{} `jsonapi:"attr,external_domain_names,omitempty"`
-	Enabled                *bool         `jsonapi:"attr,enabled,omitempty"`
+	ID                       string        `jsonapi:"primary,status_pages"`
+	Title                    string        `jsonapi:"attr,title,omitempty"`
+	Slug                     string        `jsonapi:"attr,slug,omitempty"`
+	PublicTitle              string        `jsonapi:"attr,public_title,omitempty"`
+	Description              string        `jsonapi:"attr,description,omitempty"`
+	PublicDescription        string        `jsonapi:"attr,public_description,omitempty"`
+	HeaderColor              string        `jsonapi:"attr,header_color,omitempty"`
+	FooterColor              string        `jsonapi:"attr,footer_color,omitempty"`
+	AllowSearchEngineIndex   *bool         `jsonapi:"attr,allow_search_engine_index,omitempty"`
+	ShowUptime               *bool         `jsonapi:"attr,show_uptime,omitempty"`
+	ShowUptimeLastDays       int           `jsonapi:"attr,show_uptime_last_days,omitempty"`
+	SuccessMessage           string        `jsonapi:"attr,success_message,omitempty"`
+	FailureMessage           string        `jsonapi:"attr,failure_message,omitempty"`
+	AuthenticationMethod     string        `jsonapi:"attr,authentication_method,omitempty"`
+	AuthenticationEnabled    *bool         `jsonapi:"attr,authentication_enabled,omitempty"`
+	AuthenticationPassword   string        `jsonapi:"attr,authentication_password,omitempty"`
+	SamlIdpSsoServiceUrl     string        `jsonapi:"attr,saml_idp_sso_service_url,omitempty"`
+	SamlIdpSloServiceUrl     string        `jsonapi:"attr,saml_idp_slo_service_url,omitempty"`
+	SamlIdpCert              string        `jsonapi:"attr,saml_idp_cert,omitempty"`
+	SamlIdpCertFingerprint   string        `jsonapi:"attr,saml_idp_cert_fingerprint,omitempty"`
+	SamlNameIdentifierFormat string        `jsonapi:"attr,saml_name_identifier_format,omitempty"`
+	WebsiteUrl               string        `jsonapi:"attr,website_url,omitempty"`
+	WebsitePrivacyUrl        string        `jsonapi:"attr,website_privacy_url,omitempty"`
+	WebsiteSupportUrl        string        `jsonapi:"attr,website_support_url,omitempty"`
+	GaTrackingId             string        `jsonapi:"attr,ga_tracking_id,omitempty"`
+	TimeZone                 string        `jsonapi:"attr,time_zone,omitempty"`
+	Public                   *bool         `jsonapi:"attr,public,omitempty"`
+	ServiceIds               []interface{} `jsonapi:"attr,service_ids,omitempty"`
+	FunctionalityIds         []interface{} `jsonapi:"attr,functionality_ids,omitempty"`
+	ExternalDomainNames      []interface{} `jsonapi:"attr,external_domain_names,omitempty"`
+	Enabled                  *bool         `jsonapi:"attr,enabled,omitempty"`
 }
 
 func (c *Client) ListStatusPages(params *rootlygo.ListStatusPagesParams) ([]interface{}, error) {
