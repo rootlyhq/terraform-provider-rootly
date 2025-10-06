@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.3.0] -- 2025-10-06
+
+### Added
+
+- Add alert deduplication fields to `rootly_alerts_source`
+
 ## [4.2.0] -- 2025-09-25
 
 ### Added
