@@ -20,6 +20,10 @@ func TestAccResourceAlertsSource(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_alerts_source.test", "name", "Test Alerts Source"),
 					resource.TestCheckResourceAttr("rootly_alerts_source.test", "source_type", "generic_webhook"),
 					resource.TestCheckResourceAttrSet("rootly_alerts_source.test", "id"),
+					resource.TestCheckResourceAttr("rootly_alerts_source.test", "deduplicate_alerts_by_key", "true"),
+					resource.TestCheckResourceAttr("rootly_alerts_source.test", "deduplication_key_kind", "payload"),
+					resource.TestCheckResourceAttr("rootly_alerts_source.test", "deduplication_key_kind", "payload"),
+					resource.TestCheckResourceAttr("rootly_alerts_source.test", "deduplication_key_path", "$.id"),
 				),
 				ExpectNonEmptyPlan: true,
 			},
@@ -29,6 +33,9 @@ func TestAccResourceAlertsSource(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_alerts_source.test", "name", "Test Alerts Source"),
 					resource.TestCheckResourceAttr("rootly_alerts_source.test", "source_type", "generic_webhook"),
 					resource.TestCheckResourceAttrSet("rootly_alerts_source.test", "id"),
+					resource.TestCheckResourceAttr("rootly_alerts_source.test", "deduplicate_alerts_by_key", "false"),
+					resource.TestCheckResourceAttr("rootly_alerts_source.test", "deduplication_key_kind", "payload"),
+					resource.TestCheckResourceAttr("rootly_alerts_source.test", "deduplication_key_path", "$.id"),
 				),
 				ExpectNonEmptyPlan: true,
 			},
@@ -53,6 +60,9 @@ resource "rootly_alerts_source" "test" {
 
   source_type = "generic_webhook"
   owner_group_ids = [rootly_team.tf.id]
+
+  deduplicate_alerts_by_key = true
+  deduplication_key_path = "$.id"
 
   alert_source_urgency_rules_attributes {
 	alert_urgency_id = rootly_alert_urgency.tf.id
@@ -85,6 +95,9 @@ resource "rootly_alerts_source" "test" {
 
   source_type = "generic_webhook"
   owner_group_ids = [rootly_team.tf.id]
+
+  deduplicate_alerts_by_key = false
+  deduplication_key_path = "$.id"
 
   alert_source_urgency_rules_attributes {
 	alert_urgency_id = rootly_alert_urgency.tf.id

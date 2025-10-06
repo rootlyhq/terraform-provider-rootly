@@ -60,6 +60,51 @@ func resourceAlertsSource() *schema.Resource {
 				Description: "ID for the default alert urgency assigned to this alert source",
 			},
 
+			"deduplicate_alerts_by_key": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Toggle alert deduplication using deduplication key. If enabled, deduplication_key_kind and deduplication_key_path are required.. Value must be one of true or false",
+			},
+
+			"deduplication_key_kind": &schema.Schema{
+				Type:         schema.TypeString,
+				Default:      "payload",
+				Required:     false,
+				Optional:     true,
+				Sensitive:    false,
+				ForceNew:     false,
+				WriteOnly:    false,
+				Description:  "Kind of deduplication key.. Value must be one of `payload`.",
+				ValidateFunc: validation.StringInSlice([]string{"payload"}, false),
+			},
+
+			"deduplication_key_path": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Path to deduplication key. This is a JSON Path to extract the deduplication key from the request body.",
+			},
+
+			"deduplication_key_regexp": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Regular expression to extract key from value found at key path.",
+			},
+
 			"owner_group_ids": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -592,6 +637,18 @@ func resourceAlertsSourceCreate(ctx context.Context, d *schema.ResourceData, met
 	if value, ok := d.GetOkExists("alert_urgency_id"); ok {
 		s.AlertUrgencyId = value.(string)
 	}
+	if value, ok := d.GetOkExists("deduplicate_alerts_by_key"); ok {
+		s.DeduplicateAlertsByKey = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("deduplication_key_kind"); ok {
+		s.DeduplicationKeyKind = value.(string)
+	}
+	if value, ok := d.GetOkExists("deduplication_key_path"); ok {
+		s.DeduplicationKeyPath = value.(string)
+	}
+	if value, ok := d.GetOkExists("deduplication_key_regexp"); ok {
+		s.DeduplicationKeyRegexp = value.(string)
+	}
 	if value, ok := d.GetOkExists("owner_group_ids"); ok {
 		s.OwnerGroupIds = value.([]interface{})
 	}
@@ -666,6 +723,10 @@ func resourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, meta 
 	d.Set("name", item.Name)
 	d.Set("source_type", item.SourceType)
 	d.Set("alert_urgency_id", item.AlertUrgencyId)
+	d.Set("deduplicate_alerts_by_key", item.DeduplicateAlertsByKey)
+	d.Set("deduplication_key_kind", item.DeduplicationKeyKind)
+	d.Set("deduplication_key_path", item.DeduplicationKeyPath)
+	d.Set("deduplication_key_regexp", item.DeduplicationKeyRegexp)
 	d.Set("owner_group_ids", item.OwnerGroupIds)
 	singleton_list_alert_template_attributes := make([]interface{}, 1, 1)
 	processed_item_alert_template_attributes := map[string]interface{}{
@@ -700,12 +761,28 @@ func resourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, meta 
 		d.Set("alert_source_urgency_rules_attributes", nil)
 	}
 
+	// Process field_mappings_attributes to include only schema-defined fields
+	var processed_field_mappings_attributes []map[string]interface{}
+	if fieldMappings, ok := item.SourceableAttributes["field_mappings_attributes"].([]interface{}); ok && fieldMappings != nil {
+		processed_field_mappings_attributes = make([]map[string]interface{}, 0)
+		for _, fm := range fieldMappings {
+			if rawItem, ok := fm.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processed_item := map[string]interface{}{
+					"field":     rawItem["field"],
+					"json_path": rawItem["json_path"],
+				}
+				processed_field_mappings_attributes = append(processed_field_mappings_attributes, processed_item)
+			}
+		}
+	}
+
 	singleton_list_sourceable_attributes := make([]interface{}, 1, 1)
 	processed_item_sourceable_attributes := map[string]interface{}{
 		"auto_resolve":              item.SourceableAttributes["auto_resolve"],
 		"resolve_state":             item.SourceableAttributes["resolve_state"],
 		"accept_threaded_emails":    item.SourceableAttributes["accept_threaded_emails"],
-		"field_mappings_attributes": item.SourceableAttributes["field_mappings_attributes"],
+		"field_mappings_attributes": processed_field_mappings_attributes,
 	}
 	singleton_list_sourceable_attributes[0] = processed_item_sourceable_attributes
 	d.Set("sourceable_attributes", singleton_list_sourceable_attributes)
@@ -765,6 +842,18 @@ func resourceAlertsSourceUpdate(ctx context.Context, d *schema.ResourceData, met
 	}
 	if d.HasChange("alert_urgency_id") {
 		s.AlertUrgencyId = d.Get("alert_urgency_id").(string)
+	}
+	if d.HasChange("deduplicate_alerts_by_key") {
+		s.DeduplicateAlertsByKey = tools.Bool(d.Get("deduplicate_alerts_by_key").(bool))
+	}
+	if d.HasChange("deduplication_key_kind") {
+		s.DeduplicationKeyKind = d.Get("deduplication_key_kind").(string)
+	}
+	if d.HasChange("deduplication_key_path") {
+		s.DeduplicationKeyPath = d.Get("deduplication_key_path").(string)
+	}
+	if d.HasChange("deduplication_key_regexp") {
+		s.DeduplicationKeyRegexp = d.Get("deduplication_key_regexp").(string)
 	}
 
 	if d.HasChange("owner_group_ids") {
