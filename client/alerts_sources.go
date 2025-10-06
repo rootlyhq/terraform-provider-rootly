@@ -15,6 +15,10 @@ type AlertsSource struct {
 	Name                              string                 `jsonapi:"attr,name,omitempty"`
 	SourceType                        string                 `jsonapi:"attr,source_type,omitempty"`
 	AlertUrgencyId                    string                 `jsonapi:"attr,alert_urgency_id,omitempty"`
+	DeduplicateAlertsByKey            *bool                  `jsonapi:"attr,deduplicate_alerts_by_key,omitempty"`
+	DeduplicationKeyKind              string                 `jsonapi:"attr,deduplication_key_kind,omitempty"`
+	DeduplicationKeyPath              string                 `jsonapi:"attr,deduplication_key_path,omitempty"`
+	DeduplicationKeyRegexp            string                 `jsonapi:"attr,deduplication_key_regexp,omitempty"`
 	OwnerGroupIds                     []interface{}          `jsonapi:"attr,owner_group_ids,omitempty"`
 	AlertTemplateAttributes           map[string]interface{} `jsonapi:"attr,alert_template_attributes,omitempty"`
 	AlertSourceUrgencyRulesAttributes []interface{}          `jsonapi:"attr,alert_source_urgency_rules_attributes,omitempty"`
