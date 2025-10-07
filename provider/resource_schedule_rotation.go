@@ -87,7 +87,7 @@ func resourceScheduleRotation() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "Value must be one of `all_day`, `same_time`, or `custom`. The value chosen will override active_time_attributes in any schedule_rotation_active_day resources linked to this schedule rotation.",
+				Description: "Value must be one of `all_day`, `same_time`, or `custom`. The value chosen will override `active_time_attributes` in any `rootly_schedule_rotation_active_day` resources linked to this `rootly_schedule_rotation`.",
 			},
 
 			"active_time_attributes": &schema.Schema{
