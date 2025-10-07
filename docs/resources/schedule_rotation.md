@@ -181,7 +181,7 @@ resource "rootly_escalation_level" "second" {
 - `active_all_week` (Boolean) Schedule rotation active all week?. Value must be one of true or false
 - `active_days` (List of String) Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.
 - `active_time_attributes` (Block List) Schedule rotation's active times (see [below for nested schema](#nestedblock--active_time_attributes))
-- `active_time_type` (String) Value must be one of `all_day`, `same_time`, or `custom`. The value chosen will override active_time_attributes in any rootly_schedule_rotation_active_day resources linked to this schedule rotation.
+- `active_time_type` (String) Value must be one of `all_day`, `same_time`, or `custom`. The value chosen will override active_time_attributes in any schedule_rotation_active_day resources linked to this schedule rotation.
 - `end_time` (String) ISO8601 date and time when rotation ends. Shifts will only be created before this time.
 - `position` (Number) Position of the schedule rotation
 - `schedule_rotationable_type` (String) Schedule rotation type. Value must be one of `ScheduleDailyRotation`, `ScheduleWeeklyRotation`, `ScheduleBiweeklyRotation`, `ScheduleMonthlyRotation`, `ScheduleCustomRotation`.
