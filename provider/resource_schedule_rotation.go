@@ -27,9 +27,9 @@ func resourceScheduleRotation() *schema.Resource {
 
 			"schedule_id": &schema.Schema{
 				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
 				ForceNew:    true,
 				Description: "The ID of parent schedule",
 			},
@@ -87,7 +87,7 @@ func resourceScheduleRotation() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "Value must be one of `all_day`, `same_time`, or `custom`.",
+				Description: "Value must be one of `all_day`, `same_time`, or `custom`. The value chosen will override active_time_attributes in any rootly_schedule_rotation_active_day resources linked to this schedule rotation.",
 			},
 
 			"active_time_attributes": &schema.Schema{
