@@ -761,28 +761,12 @@ func resourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, meta 
 		d.Set("alert_source_urgency_rules_attributes", nil)
 	}
 
-	// Process field_mappings_attributes to include only schema-defined fields
-	var processed_field_mappings_attributes []map[string]interface{}
-	if fieldMappings, ok := item.SourceableAttributes["field_mappings_attributes"].([]interface{}); ok && fieldMappings != nil {
-		processed_field_mappings_attributes = make([]map[string]interface{}, 0)
-		for _, fm := range fieldMappings {
-			if rawItem, ok := fm.(map[string]interface{}); ok {
-				// Create a new map with only the fields defined in the schema
-				processed_item := map[string]interface{}{
-					"field":     rawItem["field"],
-					"json_path": rawItem["json_path"],
-				}
-				processed_field_mappings_attributes = append(processed_field_mappings_attributes, processed_item)
-			}
-		}
-	}
-
 	singleton_list_sourceable_attributes := make([]interface{}, 1, 1)
 	processed_item_sourceable_attributes := map[string]interface{}{
 		"auto_resolve":              item.SourceableAttributes["auto_resolve"],
 		"resolve_state":             item.SourceableAttributes["resolve_state"],
 		"accept_threaded_emails":    item.SourceableAttributes["accept_threaded_emails"],
-		"field_mappings_attributes": processed_field_mappings_attributes,
+		"field_mappings_attributes": item.SourceableAttributes["field_mappings_attributes"],
 	}
 	singleton_list_sourceable_attributes[0] = processed_item_sourceable_attributes
 	d.Set("sourceable_attributes", singleton_list_sourceable_attributes)

@@ -37,7 +37,7 @@ func dataSourceSubStatus() *schema.Resource {
 				Type:         schema.TypeString,
 				Computed:     true,
 				Optional:     true,
-				ValidateFunc: validation.StringInSlice([]string{"in_triage", "started", "resolved", "closed", "cancelled", "scheduled", "in_progress", "completed"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"in_triage", "started", "resolved", "closed", "cancelled", "planning", "scheduled", "in_progress", "verifying", "completed"}, false),
 			},
 
 			"created_at": &schema.Schema{
