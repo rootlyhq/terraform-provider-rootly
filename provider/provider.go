@@ -227,6 +227,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_workflow_task_create_linear_issue_comment":          resourceWorkflowTaskCreateLinearIssueComment(),
 				"rootly_workflow_task_create_microsoft_teams_meeting":       resourceWorkflowTaskCreateMicrosoftTeamsMeeting(),
 				"rootly_workflow_task_create_microsoft_teams_channel":       resourceWorkflowTaskCreateMicrosoftTeamsChannel(),
+				"rootly_workflow_task_create_microsoft_teams_chat":          resourceWorkflowTaskCreateMicrosoftTeamsChat(),
 				"rootly_workflow_task_add_microsoft_teams_tab":              resourceWorkflowTaskAddMicrosoftTeamsTab(),
 				"rootly_workflow_task_archive_microsoft_teams_channels":     resourceWorkflowTaskArchiveMicrosoftTeamsChannels(),
 				"rootly_workflow_task_rename_microsoft_teams_channel":       resourceWorkflowTaskRenameMicrosoftTeamsChannel(),
