@@ -1,0 +1,66 @@
+name: update-provider
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *" # run at 00:00 (midnight) every day
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  codegen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: "go.mod"
+
+      - uses: actions/setup-node@v5
+        with:
+          check-latest: true
+      - run: yarn install --frozen-lockfile
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+
+      - name: Update provider
+        run: make codegen
+      - name: Update docs
+        run: make docs
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: update-provider
+          commit-message: |
+            chore: update Terraform provider and generated code
+
+            - Ran `make codegen` to regenerate resources and data sources.
+            - Updated documentation via `make docs`.
+            - Automated update to keep provider and generated documentation in sync.
+          title: |
+            chore: Automated update of provider code and documentation
+          body: |
+            ## What
+            - Run code generation to update provider resources and data sources.
+            - Regenerate documentation to reflect the current state of the provider.
+            - This PR was created automatically by a scheduled GitHub workflow.
+
+            ## Why
+            - Ensures up-to-date generated code after latest provider or API changes.
+            - Keeps documentation synced with provider implementation.
+            - Reduces manual maintenance effort.
+
+            ## How to Review
+            - Review changes to `.go` files and generated documentation (`docs/`, etc).
+            - No manual changes are included in this PR.
+            - CI tests should pass.
+
+            ---
+
+            _This PR was created by a scheduled [GitHub Actions workflow](https://github.com/rootlyhq/terraform-provider-rootly/actions/workflows/update-provider.yml)_
