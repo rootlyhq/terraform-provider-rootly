@@ -69,6 +69,10 @@ resource "rootly_alerts_source" "example" {
 - `alert_source_urgency_rules_attributes` (Block List) List of rules that define the conditions under which the alert urgency will be set automatically based on the alert payload (see [below for nested schema](#nestedblock--alert_source_urgency_rules_attributes))
 - `alert_template_attributes` (Block List, Max: 1) (see [below for nested schema](#nestedblock--alert_template_attributes))
 - `alert_urgency_id` (String) ID for the default alert urgency assigned to this alert source
+- `deduplicate_alerts_by_key` (Boolean) Toggle alert deduplication using deduplication key. If enabled, deduplication_key_kind and deduplication_key_path are required.. Value must be one of true or false
+- `deduplication_key_kind` (String) Kind of deduplication key.. Value must be one of `payload`.
+- `deduplication_key_path` (String) Path to deduplication key. This is a JSON Path to extract the deduplication key from the request body.
+- `deduplication_key_regexp` (String) Regular expression to extract key from value found at key path.
 - `email` (String) The email generated for email alert sources
 - `owner_group_ids` (List of String) List of team IDs that will own the alert source
 - `resolution_rule_attributes` (Block List, Max: 1) Provide additional attributes for email alerts source (see [below for nested schema](#nestedblock--resolution_rule_attributes))

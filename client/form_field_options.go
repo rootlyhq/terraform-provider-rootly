@@ -12,6 +12,7 @@ import (
 
 type FormFieldOption struct {
 	ID          string `jsonapi:"primary,form_field_options"`
+	Id          string `jsonapi:"attr,id,omitempty"`
 	FormFieldId string `jsonapi:"attr,form_field_id,omitempty"`
 	Value       string `jsonapi:"attr,value,omitempty"`
 	Color       string `jsonapi:"attr,color,omitempty"`

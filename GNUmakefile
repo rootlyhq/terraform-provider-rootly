@@ -16,14 +16,13 @@ build: codegen docs
 
 docs:
 	terraform fmt -recursive examples
-	go get github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
-	go run github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
+	go tool tfplugindocs
 	mv ./docs/data-sources/ip_ranges.md ./docs/data-sources/ip_range.md
 	rm ./docs/data-sources/*s.md
 	mv ./docs/data-sources/ip_range.md ./docs/data-sources/ip_ranges.md
 	find ./docs/resources/*.md -type f -exec node tools/clean-docs.js {} \;
-	find ./docs/resources/workflow_task_*.md -type f -print0 | xargs -0 sed -i '' 's/subcategory:$$/subcategory: Workflow Tasks/g'
-	find ./docs/resources/workflow_*.md -type f -print0 | xargs -0 sed -i '' 's/subcategory:$$/subcategory: Workflows/g'
+	find ./docs/resources/ -type f -name 'workflow_task_*.md' -exec perl -pi -e 's/subcategory:$$/subcategory: Workflow Tasks/g' {} +
+	find ./docs/resources/ -type f -name 'workflow_*.md' -exec perl -pi -e 's/subcategory:$$/subcategory: Workflows/g' {} +
 
 release:
 	@echo "Note: Actual release building is handled by CI/GoReleaser"
@@ -54,7 +53,7 @@ testacc:
 codegen:
 	curl $(SWAGGER_URL) -o schema/swagger.json
 	node tools/clean-swagger.js schema/swagger.json
-	cd schema && oapi-codegen --config=oapi-config.yml swagger.json
+	cd schema && go tool oapi-codegen --config=oapi-config.yml swagger.json
 	node tools/generate.js schema/swagger.json
 	go fmt provider/*
 	go fmt client/*

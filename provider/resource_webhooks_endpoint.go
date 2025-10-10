@@ -31,7 +31,9 @@ func resourceWebhooksEndpoint() *schema.Resource {
 				Computed:    false,
 				Required:    true,
 				Optional:    false,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The name of the endpoint",
 			},
 
@@ -40,7 +42,9 @@ func resourceWebhooksEndpoint() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The slug of the endpoint",
 			},
 
@@ -49,7 +53,9 @@ func resourceWebhooksEndpoint() *schema.Resource {
 				Computed:    false,
 				Required:    true,
 				Optional:    false,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The URL of the endpoint.",
 			},
 
@@ -63,6 +69,9 @@ func resourceWebhooksEndpoint() *schema.Resource {
 				Computed:         false,
 				Required:         false,
 				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
 				Description:      "Value must be one of `incident.created`, `incident.updated`, `incident.in_triage`, `incident.mitigated`, `incident.resolved`, `incident.cancelled`, `incident.deleted`, `incident.scheduled.created`, `incident.scheduled.updated`, `incident.scheduled.in_progress`, `incident.scheduled.completed`, `incident.scheduled.deleted`, `incident_post_mortem.created`, `incident_post_mortem.updated`, `incident_post_mortem.published`, `incident_post_mortem.deleted`, `incident_status_page_event.created`, `incident_status_page_event.updated`, `incident_status_page_event.deleted`, `incident_event.created`, `incident_event.updated`, `incident_event.deleted`, `alert.created`, `pulse.created`, `genius_workflow_run.queued`, `genius_workflow_run.started`, `genius_workflow_run.completed`, `genius_workflow_run.failed`, `genius_workflow_run.canceled`.",
 			},
 
@@ -71,14 +80,19 @@ func resourceWebhooksEndpoint() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The webhook signing secret used to verify webhook requests.",
 			},
 
 			"enabled": &schema.Schema{
-				Type:     schema.TypeBool,
-				Default:  true,
-				Optional: true,
+				Type:      schema.TypeBool,
+				Default:   true,
+				Optional:  true,
+				Sensitive: false,
+				ForceNew:  false,
+				WriteOnly: false,
 			},
 		},
 	}

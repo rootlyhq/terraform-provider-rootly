@@ -31,7 +31,9 @@ func resourceAlertsSource() *schema.Resource {
 				Computed:    false,
 				Required:    true,
 				Optional:    false,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The name of the alert source",
 			},
 
@@ -40,7 +42,9 @@ func resourceAlertsSource() *schema.Resource {
 				Default:      "email",
 				Required:     false,
 				Optional:     true,
-				ForceNew:     false,
+				Sensitive:    false,
+				ForceNew:     true,
+				WriteOnly:    false,
 				Description:  "The alert source type. Value must be one of `email`, `app_dynamics`, `catchpoint`, `datadog`, `alertmanager`, `google_cloud`, `grafana`, `sentry`, `generic_webhook`, `cloud_watch`, `checkly`, `azure`, `new_relic`, `splunk`, `chronosphere`, `app_optics`, `bug_snag`, `honeycomb`, `monte_carlo`, `nagios`, `prtg`.",
 				ValidateFunc: validation.StringInSlice([]string{"email", "app_dynamics", "catchpoint", "datadog", "alertmanager", "google_cloud", "grafana", "sentry", "generic_webhook", "cloud_watch", "checkly", "azure", "new_relic", "splunk", "chronosphere", "app_optics", "bug_snag", "honeycomb", "monte_carlo", "nagios", "prtg"}, false),
 			},
@@ -50,8 +54,55 @@ func resourceAlertsSource() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "ID for the default alert urgency assigned to this alert source",
+			},
+
+			"deduplicate_alerts_by_key": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Toggle alert deduplication using deduplication key. If enabled, deduplication_key_kind and deduplication_key_path are required.. Value must be one of true or false",
+			},
+
+			"deduplication_key_kind": &schema.Schema{
+				Type:         schema.TypeString,
+				Default:      "payload",
+				Required:     false,
+				Optional:     true,
+				Sensitive:    false,
+				ForceNew:     false,
+				WriteOnly:    false,
+				Description:  "Kind of deduplication key.. Value must be one of `payload`.",
+				ValidateFunc: validation.StringInSlice([]string{"payload"}, false),
+			},
+
+			"deduplication_key_path": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Path to deduplication key. This is a JSON Path to extract the deduplication key from the request body.",
+			},
+
+			"deduplication_key_regexp": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Regular expression to extract key from value found at key path.",
 			},
 
 			"owner_group_ids": &schema.Schema{
@@ -63,6 +114,9 @@ func resourceAlertsSource() *schema.Resource {
 				Computed:         false,
 				Required:         false,
 				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
 				Description:      "List of team IDs that will own the alert source",
 			},
 
@@ -71,6 +125,9 @@ func resourceAlertsSource() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "",
 				MinItems:    0,
 				MaxItems:    1,
@@ -82,7 +139,9 @@ func resourceAlertsSource() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
+							Sensitive:   false,
 							ForceNew:    false,
+							WriteOnly:   false,
 							Description: "The alert title.",
 						},
 
@@ -91,7 +150,9 @@ func resourceAlertsSource() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
+							Sensitive:   false,
 							ForceNew:    false,
+							WriteOnly:   false,
 							Description: "The alert description.",
 						},
 
@@ -100,7 +161,9 @@ func resourceAlertsSource() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
+							Sensitive:   false,
 							ForceNew:    false,
+							WriteOnly:   false,
 							Description: "The alert URL.",
 						},
 					},
@@ -112,6 +175,9 @@ func resourceAlertsSource() *schema.Resource {
 				Computed:         false,
 				Required:         false,
 				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
 				Description:      "List of rules that define the conditions under which the alert urgency will be set automatically based on the alert payload",
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Elem: &schema.Resource{
@@ -122,7 +188,9 @@ func resourceAlertsSource() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
+							Sensitive:   false,
 							ForceNew:    false,
+							WriteOnly:   false,
 							Description: "JSON path expression to extract a specific value from the alert's payload for evaluation",
 						},
 
@@ -131,7 +199,9 @@ func resourceAlertsSource() *schema.Resource {
 							Default:      "is",
 							Required:     false,
 							Optional:     true,
+							Sensitive:    false,
 							ForceNew:     false,
+							WriteOnly:    false,
 							Description:  "Comparison operator used to evaluate the extracted value against the specified condition. Value must be one of `is`, `is_not`, `contains`, `does_not_contain`.",
 							ValidateFunc: validation.StringInSlice([]string{"is", "is_not", "contains", "does_not_contain"}, false),
 						},
@@ -141,7 +211,9 @@ func resourceAlertsSource() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
+							Sensitive:   false,
 							ForceNew:    false,
+							WriteOnly:   false,
 							Description: "Value that the extracted payload data is compared to using the specified operator to determine a match",
 						},
 
@@ -150,7 +222,9 @@ func resourceAlertsSource() *schema.Resource {
 							Default:      "AlertField",
 							Required:     false,
 							Optional:     true,
+							Sensitive:    false,
 							ForceNew:     false,
+							WriteOnly:    false,
 							Description:  "The type of the conditionable. Value must be one of `AlertField`.",
 							ValidateFunc: validation.StringInSlice([]string{"AlertField"}, false),
 						},
@@ -160,7 +234,9 @@ func resourceAlertsSource() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
+							Sensitive:   false,
 							ForceNew:    false,
+							WriteOnly:   false,
 							Description: "The ID of the conditionable. If conditionable_type is AlertField, this is the ID of the alert field.",
 						},
 
@@ -169,7 +245,9 @@ func resourceAlertsSource() *schema.Resource {
 							Default:      "payload",
 							Required:     false,
 							Optional:     true,
+							Sensitive:    false,
 							ForceNew:     false,
+							WriteOnly:    false,
 							Description:  "The kind of the conditionable. Value must be one of `payload`, `alert_field`.",
 							ValidateFunc: validation.StringInSlice([]string{"payload", "alert_field"}, false),
 						},
@@ -179,7 +257,9 @@ func resourceAlertsSource() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
+							Sensitive:   false,
 							ForceNew:    false,
+							WriteOnly:   false,
 							Description: "The ID of the alert urgency",
 						},
 					},
@@ -191,6 +271,9 @@ func resourceAlertsSource() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Provide additional attributes for generic_webhook alerts source",
 				MinItems:    0,
 				MaxItems:    1,
@@ -202,6 +285,9 @@ func resourceAlertsSource() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
 							Description: "Set this to true to auto-resolve alerts based on field_mappings_attributes conditions. Value must be one of true or false",
 						},
 
@@ -210,7 +296,9 @@ func resourceAlertsSource() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
+							Sensitive:   false,
 							ForceNew:    false,
+							WriteOnly:   false,
 							Description: "This value is matched with the value extracted from alerts payload using JSON path in field_mappings_attributes",
 						},
 
@@ -219,6 +307,9 @@ func resourceAlertsSource() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
 							Description: "Set this to false to reject threaded emails. Value must be one of true or false",
 						},
 
@@ -227,6 +318,9 @@ func resourceAlertsSource() *schema.Resource {
 							Computed:         false,
 							Required:         false,
 							Optional:         true,
+							Sensitive:        false,
+							ForceNew:         false,
+							WriteOnly:        false,
 							Description:      "Specify rules to auto resolve alerts",
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
@@ -237,7 +331,9 @@ func resourceAlertsSource() *schema.Resource {
 										Default:      "external_id",
 										Required:     false,
 										Optional:     true,
+										Sensitive:    false,
 										ForceNew:     false,
+										WriteOnly:    false,
 										Description:  "Select the field on which the condition to be evaluated. Value must be one of `external_id`, `state`, `alert_title`, `alert_external_url`, `notification_target_type`, `notification_target_id`.",
 										ValidateFunc: validation.StringInSlice([]string{"external_id", "state", "alert_title", "alert_external_url", "notification_target_type", "notification_target_id"}, false),
 									},
@@ -247,7 +343,9 @@ func resourceAlertsSource() *schema.Resource {
 										Computed:    true,
 										Required:    false,
 										Optional:    true,
+										Sensitive:   false,
 										ForceNew:    false,
+										WriteOnly:   false,
 										Description: "JSON path expression to extract a specific value from the alert's payload for evaluation",
 									},
 								},
@@ -262,6 +360,9 @@ func resourceAlertsSource() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Provide additional attributes for email alerts source",
 				MinItems:    0,
 				MaxItems:    1,
@@ -269,9 +370,12 @@ func resourceAlertsSource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 
 						"enabled": &schema.Schema{
-							Type:     schema.TypeBool,
-							Default:  true,
-							Optional: true,
+							Type:      schema.TypeBool,
+							Default:   true,
+							Optional:  true,
+							Sensitive: false,
+							ForceNew:  false,
+							WriteOnly: false,
 						},
 
 						"condition_type": &schema.Schema{
@@ -279,7 +383,9 @@ func resourceAlertsSource() *schema.Resource {
 							Default:      "all",
 							Required:     false,
 							Optional:     true,
+							Sensitive:    false,
 							ForceNew:     false,
+							WriteOnly:    false,
 							Description:  "The type of condition to evaluate to apply auto resolution rule. Value must be one of `all`, `any`.",
 							ValidateFunc: validation.StringInSlice([]string{"all", "any"}, false),
 						},
@@ -289,7 +395,9 @@ func resourceAlertsSource() *schema.Resource {
 							Default:      "AlertField",
 							Required:     false,
 							Optional:     true,
+							Sensitive:    false,
 							ForceNew:     false,
+							WriteOnly:    false,
 							Description:  "The type of the identifier matchable. Value must be one of `AlertField`.",
 							ValidateFunc: validation.StringInSlice([]string{"AlertField"}, false),
 						},
@@ -299,7 +407,9 @@ func resourceAlertsSource() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
+							Sensitive:   false,
 							ForceNew:    false,
+							WriteOnly:   false,
 							Description: "The ID of the identifier matchable. If identifier_matchable_type is AlertField, this is the ID of the alert field.",
 						},
 
@@ -308,7 +418,9 @@ func resourceAlertsSource() *schema.Resource {
 							Default:      "payload",
 							Required:     false,
 							Optional:     true,
+							Sensitive:    false,
 							ForceNew:     false,
+							WriteOnly:    false,
 							Description:  "The kind of the identifier reference. Value must be one of `payload`, `alert_field`.",
 							ValidateFunc: validation.StringInSlice([]string{"payload", "alert_field"}, false),
 						},
@@ -318,7 +430,9 @@ func resourceAlertsSource() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
+							Sensitive:   false,
 							ForceNew:    false,
+							WriteOnly:   false,
 							Description: "JSON path expression to extract unique alert identifier used to match triggered alerts with resolving alerts",
 						},
 
@@ -327,7 +441,9 @@ func resourceAlertsSource() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
+							Sensitive:   false,
 							ForceNew:    false,
+							WriteOnly:   false,
 							Description: "Regex group to further specify the part of the string used as a unique identifier",
 						},
 
@@ -336,6 +452,9 @@ func resourceAlertsSource() *schema.Resource {
 							Computed:         false,
 							Required:         false,
 							Optional:         true,
+							Sensitive:        false,
+							ForceNew:         false,
+							WriteOnly:        false,
 							Description:      "List of conditions to evaluate for auto resolution",
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
@@ -346,7 +465,9 @@ func resourceAlertsSource() *schema.Resource {
 										Computed:    true,
 										Required:    false,
 										Optional:    true,
+										Sensitive:   false,
 										ForceNew:    false,
+										WriteOnly:   false,
 										Description: "JSON path expression to extract a specific value from the alert's payload for evaluation",
 									},
 
@@ -355,7 +476,9 @@ func resourceAlertsSource() *schema.Resource {
 										Default:      "is",
 										Required:     false,
 										Optional:     true,
+										Sensitive:    false,
 										ForceNew:     false,
+										WriteOnly:    false,
 										Description:  "Comparison operator used to evaluate the extracted value against the specified condition. Value must be one of `is`, `is_not`, `contains`, `does_not_contain`, `starts_with`, `ends_with`.",
 										ValidateFunc: validation.StringInSlice([]string{"is", "is_not", "contains", "does_not_contain", "starts_with", "ends_with"}, false),
 									},
@@ -365,7 +488,9 @@ func resourceAlertsSource() *schema.Resource {
 										Computed:    true,
 										Required:    false,
 										Optional:    true,
+										Sensitive:   false,
 										ForceNew:    false,
+										WriteOnly:   false,
 										Description: "Value that the extracted payload data is compared to using the specified operator to determine a match",
 									},
 
@@ -374,7 +499,9 @@ func resourceAlertsSource() *schema.Resource {
 										Default:      "AlertField",
 										Required:     false,
 										Optional:     true,
+										Sensitive:    false,
 										ForceNew:     false,
+										WriteOnly:    false,
 										Description:  "The type of the conditionable. Value must be one of `AlertField`.",
 										ValidateFunc: validation.StringInSlice([]string{"AlertField"}, false),
 									},
@@ -384,7 +511,9 @@ func resourceAlertsSource() *schema.Resource {
 										Computed:    true,
 										Required:    false,
 										Optional:    true,
+										Sensitive:   false,
 										ForceNew:    false,
+										WriteOnly:   false,
 										Description: "The ID of the conditionable. If conditionable_type is AlertField, this is the ID of the alert field.",
 									},
 
@@ -393,7 +522,9 @@ func resourceAlertsSource() *schema.Resource {
 										Default:      "payload",
 										Required:     false,
 										Optional:     true,
+										Sensitive:    false,
 										ForceNew:     false,
+										WriteOnly:    false,
 										Description:  "The kind of the conditionable. Value must be one of `payload`, `alert_field`.",
 										ValidateFunc: validation.StringInSlice([]string{"payload", "alert_field"}, false),
 									},
@@ -409,6 +540,9 @@ func resourceAlertsSource() *schema.Resource {
 				Computed:         false,
 				Required:         false,
 				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
 				Description:      "List of alert fields to be added to the alert source",
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Elem: &schema.Resource{
@@ -419,7 +553,9 @@ func resourceAlertsSource() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
+							Sensitive:   false,
 							ForceNew:    false,
+							WriteOnly:   false,
 							Description: "The ID of the alert field",
 						},
 
@@ -428,7 +564,9 @@ func resourceAlertsSource() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
+							Sensitive:   false,
 							ForceNew:    false,
+							WriteOnly:   false,
 							Description: "Liquid expression to extract a specific value from the alert's payload for evaluation",
 						},
 					},
@@ -440,7 +578,9 @@ func resourceAlertsSource() *schema.Resource {
 				Computed:     true,
 				Required:     false,
 				Optional:     true,
+				Sensitive:    false,
 				ForceNew:     false,
+				WriteOnly:    false,
 				Description:  "The status of the alert source. Value must be one of `connected`, `setup_complete`, `setup_incomplete`.",
 				ValidateFunc: validation.StringInSlice([]string{"connected", "setup_complete", "setup_incomplete"}, false),
 			},
@@ -450,7 +590,9 @@ func resourceAlertsSource() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The secret used to authenticate non-email alert sources",
 			},
 
@@ -459,7 +601,9 @@ func resourceAlertsSource() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The email generated for email alert sources",
 			},
 
@@ -468,7 +612,9 @@ func resourceAlertsSource() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The webhook URL generated for non-email alert sources",
 			},
 		},
@@ -490,6 +636,18 @@ func resourceAlertsSourceCreate(ctx context.Context, d *schema.ResourceData, met
 	}
 	if value, ok := d.GetOkExists("alert_urgency_id"); ok {
 		s.AlertUrgencyId = value.(string)
+	}
+	if value, ok := d.GetOkExists("deduplicate_alerts_by_key"); ok {
+		s.DeduplicateAlertsByKey = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("deduplication_key_kind"); ok {
+		s.DeduplicationKeyKind = value.(string)
+	}
+	if value, ok := d.GetOkExists("deduplication_key_path"); ok {
+		s.DeduplicationKeyPath = value.(string)
+	}
+	if value, ok := d.GetOkExists("deduplication_key_regexp"); ok {
+		s.DeduplicationKeyRegexp = value.(string)
 	}
 	if value, ok := d.GetOkExists("owner_group_ids"); ok {
 		s.OwnerGroupIds = value.([]interface{})
@@ -565,6 +723,10 @@ func resourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, meta 
 	d.Set("name", item.Name)
 	d.Set("source_type", item.SourceType)
 	d.Set("alert_urgency_id", item.AlertUrgencyId)
+	d.Set("deduplicate_alerts_by_key", item.DeduplicateAlertsByKey)
+	d.Set("deduplication_key_kind", item.DeduplicationKeyKind)
+	d.Set("deduplication_key_path", item.DeduplicationKeyPath)
+	d.Set("deduplication_key_regexp", item.DeduplicationKeyRegexp)
 	d.Set("owner_group_ids", item.OwnerGroupIds)
 	singleton_list_alert_template_attributes := make([]interface{}, 1, 1)
 	processed_item_alert_template_attributes := map[string]interface{}{
@@ -599,12 +761,28 @@ func resourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, meta 
 		d.Set("alert_source_urgency_rules_attributes", nil)
 	}
 
+	// Process field_mappings_attributes to include only schema-defined fields
+	var processed_field_mappings_attributes []map[string]interface{}
+	if fieldMappings, ok := item.SourceableAttributes["field_mappings_attributes"].([]interface{}); ok && fieldMappings != nil {
+		processed_field_mappings_attributes = make([]map[string]interface{}, 0)
+		for _, fm := range fieldMappings {
+			if rawItem, ok := fm.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processed_item := map[string]interface{}{
+					"field":     rawItem["field"],
+					"json_path": rawItem["json_path"],
+				}
+				processed_field_mappings_attributes = append(processed_field_mappings_attributes, processed_item)
+			}
+		}
+	}
+
 	singleton_list_sourceable_attributes := make([]interface{}, 1, 1)
 	processed_item_sourceable_attributes := map[string]interface{}{
 		"auto_resolve":              item.SourceableAttributes["auto_resolve"],
 		"resolve_state":             item.SourceableAttributes["resolve_state"],
 		"accept_threaded_emails":    item.SourceableAttributes["accept_threaded_emails"],
-		"field_mappings_attributes": item.SourceableAttributes["field_mappings_attributes"],
+		"field_mappings_attributes": processed_field_mappings_attributes,
 	}
 	singleton_list_sourceable_attributes[0] = processed_item_sourceable_attributes
 	d.Set("sourceable_attributes", singleton_list_sourceable_attributes)
@@ -664,6 +842,18 @@ func resourceAlertsSourceUpdate(ctx context.Context, d *schema.ResourceData, met
 	}
 	if d.HasChange("alert_urgency_id") {
 		s.AlertUrgencyId = d.Get("alert_urgency_id").(string)
+	}
+	if d.HasChange("deduplicate_alerts_by_key") {
+		s.DeduplicateAlertsByKey = tools.Bool(d.Get("deduplicate_alerts_by_key").(bool))
+	}
+	if d.HasChange("deduplication_key_kind") {
+		s.DeduplicationKeyKind = d.Get("deduplication_key_kind").(string)
+	}
+	if d.HasChange("deduplication_key_path") {
+		s.DeduplicationKeyPath = d.Get("deduplication_key_path").(string)
+	}
+	if d.HasChange("deduplication_key_regexp") {
+		s.DeduplicationKeyRegexp = d.Get("deduplication_key_regexp").(string)
 	}
 
 	if d.HasChange("owner_group_ids") {
