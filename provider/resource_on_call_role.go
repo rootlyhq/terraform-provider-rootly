@@ -347,9 +347,8 @@ func resourceOnCallRoleCreate(ctx context.Context, d *schema.ResourceData, meta 
 	if value, ok := d.GetOkExists("slug"); ok {
 		s.Slug = value.(string)
 	}
-	if value, ok := d.GetOkExists("system_role"); ok {
-		s.SystemRole = value.(string)
-	}
+	// Always set system_role to "custom" for user-created roles
+	s.SystemRole = "custom"
 	if value, ok := d.GetOkExists("alert_sources_permissions"); ok {
 		s.AlertSourcesPermissions = value.([]interface{})
 	}
@@ -465,9 +464,6 @@ func resourceOnCallRoleUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	}
 	if d.HasChange("slug") {
 		s.Slug = d.Get("slug").(string)
-	}
-	if d.HasChange("system_role") {
-		s.SystemRole = d.Get("system_role").(string)
 	}
 
 	if d.HasChange("alert_sources_permissions") {
