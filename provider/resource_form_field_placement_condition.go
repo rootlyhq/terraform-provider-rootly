@@ -79,8 +79,8 @@ func resourceFormFieldPlacementCondition() *schema.Resource {
 				Sensitive:    false,
 				ForceNew:     false,
 				WriteOnly:    false,
-				Description:  "The condition comparison.. Value must be one of `equal`, `is_set`, `is_not_set`.",
-				ValidateFunc: validation.StringInSlice([]string{"equal", "is_set", "is_not_set"}, false),
+				Description:  "The condition comparison.. Value must be one of `equal`, `not_equal`, `is_set`, `is_not_set`.",
+				ValidateFunc: validation.StringInSlice([]string{"equal", "not_equal", "is_set", "is_not_set"}, false),
 			},
 
 			"values": &schema.Schema{
