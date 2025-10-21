@@ -433,6 +433,17 @@ func resourceTeam() *schema.Resource {
 					},
 				},
 			},
+
+			"auto_add_members_when_attached": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Auto add members to incident channel when team is attached. Value must be one of true or false",
+			},
 		},
 	}
 }
@@ -529,6 +540,9 @@ func resourceTeamCreate(ctx context.Context, d *schema.ResourceData, meta interf
 				s.IncidentBroadcastChannel = mapValue
 			}
 		}
+	}
+	if value, ok := d.GetOkExists("auto_add_members_when_attached"); ok {
+		s.AutoAddMembersWhenAttached = tools.Bool(value.(bool))
 	}
 
 	res, err := c.CreateTeam(s)
@@ -635,6 +649,8 @@ func resourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	}
 	singleton_list_incident_broadcast_channel[0] = processed_item_incident_broadcast_channel
 	d.Set("incident_broadcast_channel", singleton_list_incident_broadcast_channel)
+
+	d.Set("auto_add_members_when_attached", item.AutoAddMembersWhenAttached)
 
 	return nil
 }
@@ -757,6 +773,10 @@ func resourceTeamUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 		for _, tpsi := range tps {
 			s.IncidentBroadcastChannel = tpsi.(map[string]interface{})
 		}
+	}
+
+	if d.HasChange("auto_add_members_when_attached") {
+		s.AutoAddMembersWhenAttached = tools.Bool(d.Get("auto_add_members_when_attached").(bool))
 	}
 
 	_, err := c.UpdateTeam(d.Id(), s)

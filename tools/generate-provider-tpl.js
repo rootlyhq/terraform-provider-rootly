@@ -77,6 +77,7 @@ ${resources
     return `				"rootly_${name}": resource${inflect.camelize(name)}(),`;
   })
   .join("\n")}
+				"rootly_alerts_source": resourceAlertsSource(),
 				"rootly_custom_field": resourceCustomField(),
 				"rootly_custom_field_option": resourceCustomFieldOption(),
 				"rootly_dashboard": resourceDashboard(),

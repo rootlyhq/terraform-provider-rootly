@@ -93,7 +93,7 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 							Optional:    true,
 						},
 						"status": &schema.Schema{
-							Description: "Value must be one of `investigating`, `identified`, `monitoring`, `resolved`, `scheduled`, `in_progress`, `verifying`, `completed`.",
+							Description: "Value must be one of `investigating`, `identified`, `monitoring`, `resolved`, `scheduled`, `in_progress`, `completed`.",
 							Type:        schema.TypeString,
 							Required:    true,
 							ValidateFunc: validation.StringInSlice([]string{
@@ -103,7 +103,6 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 								"resolved",
 								"scheduled",
 								"in_progress",
-								"verifying",
 								"completed",
 							}, false),
 						},

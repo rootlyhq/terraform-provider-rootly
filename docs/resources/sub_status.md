@@ -21,7 +21,7 @@ description: |-
 ### Optional
 
 - `description` (String)
-- `parent_status` (String) Value must be one of `in_triage`, `started`, `resolved`, `closed`, `cancelled`, `scheduled`, `in_progress`, `completed`.
+- `parent_status` (String) Value must be one of `in_triage`, `started`, `resolved`, `closed`, `cancelled`, `planning`, `scheduled`, `in_progress`, `verifying`, `completed`.
 - `position` (Number)
 - `slug` (String)
 

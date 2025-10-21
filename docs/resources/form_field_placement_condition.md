@@ -21,7 +21,7 @@ description: |-
 
 ### Optional
 
-- `comparison` (String) The condition comparison.. Value must be one of `equal`, `is_set`, `is_not_set`.
+- `comparison` (String) The condition comparison.. Value must be one of `equal`, `not_equal`, `is_set`, `is_not_set`.
 - `conditioned` (String) The resource or attribute the condition applies.. Value must be one of `placement`, `required`.
 - `form_field_placement_id` (String) The form field placement this condition applies.
 - `position` (Number) The condition position.
