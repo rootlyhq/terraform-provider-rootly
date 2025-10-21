@@ -43,7 +43,6 @@ description: |-
 ### Read-Only
 
 - `id` (String) The ID of this resource.
-- `system_role` (String) The kind of role is "custom".
 
 ## Import
 

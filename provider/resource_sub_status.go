@@ -66,8 +66,8 @@ func resourceSubStatus() *schema.Resource {
 				Sensitive:    false,
 				ForceNew:     false,
 				WriteOnly:    false,
-				Description:  "Value must be one of `in_triage`, `started`, `resolved`, `closed`, `cancelled`, `scheduled`, `in_progress`, `completed`.",
-				ValidateFunc: validation.StringInSlice([]string{"in_triage", "started", "resolved", "closed", "cancelled", "scheduled", "in_progress", "completed"}, false),
+				Description:  "Value must be one of `in_triage`, `started`, `resolved`, `closed`, `cancelled`, `planning`, `scheduled`, `in_progress`, `verifying`, `completed`.",
+				ValidateFunc: validation.StringInSlice([]string{"in_triage", "started", "resolved", "closed", "cancelled", "planning", "scheduled", "in_progress", "verifying", "completed"}, false),
 			},
 
 			"position": &schema.Schema{

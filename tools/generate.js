@@ -49,6 +49,7 @@ const excluded = {
   resources: [
     "alert",
     "alert_event",
+    "alerts_source",
     "audit",
     "catalog",
     "catalog_field",
@@ -86,6 +87,12 @@ const excluded = {
     "workflow_task",
   ]
 }
+
+const readOnlyCollections = [
+  "incident_post_mortem",
+  "incident",
+  "user",
+]
 
 function main() {
   generateProvider(resources(), workflowTaskResources(), dataSources())
@@ -128,10 +135,13 @@ function generateProvider(resources, taskResources, dataSources) {
 }
 
 function generateClients() {
-  resources().forEach(generateClient)
-  dataSources()
-    .filter((name) => !resources().includes(name))
-    .forEach(generateReadOnlyClient)
+  new Set([...resources(), ...dataSources()]).forEach((name) => {
+    if (readOnlyCollections.includes(name)) {
+      generateReadOnlyClient(name)
+    } else {
+      generateClient(name)
+    }
+  })
 }
 
 function generateResources() {
