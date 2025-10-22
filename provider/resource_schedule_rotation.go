@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -156,6 +157,53 @@ func resourceScheduleRotation() *schema.Resource {
 				Optional:    false,
 				Description: "handoff_time and/or handoff_day may be required, depending on schedule_rotationable_type. Please see API docs for options based on schedule_rotationable_type: https://docs.rootly.com/api-reference/schedulerotations/creates-a-schedule-rotation#response-data-attributes-schedule-rotationable-attributes",
 			},
+
+			"schedule_rotation_members_attributes": &schema.Schema{
+				Type:             schema.TypeList,
+				Computed:         false,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Schedule rotation members. You can only add schedule rotation members if your account has schedule nesting feature enabled.",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"member_id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    false,
+							Required:    true,
+							Optional:    false,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "ID of the member",
+						},
+						"member_type": &schema.Schema{
+							Type:         schema.TypeString,
+							Computed:     false,
+							Required:     true,
+							Optional:     false,
+							Sensitive:    false,
+							ForceNew:     false,
+							WriteOnly:    false,
+							Description:  "Type of member. Value must be one of `Schedule` or `User`.",
+							ValidateFunc: validation.StringInSlice([]string{"Schedule", "User"}, false),
+						},
+						"position": &schema.Schema{
+							Type:        schema.TypeInt,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "Position of the member in rotation",
+						},
+					},
+				},
+			},
 		},
 	}
 }
@@ -203,6 +251,9 @@ func resourceScheduleRotationCreate(ctx context.Context, d *schema.ResourceData,
 	if value, ok := d.GetOkExists("schedule_rotationable_attributes"); ok {
 		s.ScheduleRotationableAttributes = value.(map[string]interface{})
 	}
+	if value, ok := d.GetOkExists("schedule_rotation_members_attributes"); ok {
+		s.ScheduleRotationMembersAttributes = value.([]interface{})
+	}
 
 	res, err := c.CreateScheduleRotation(s)
 	if err != nil {
@@ -243,6 +294,7 @@ func resourceScheduleRotationRead(ctx context.Context, d *schema.ResourceData, m
 	d.Set("time_zone", item.TimeZone)
 	d.Set("start_time", item.StartTime)
 	d.Set("end_time", item.EndTime)
+	d.Set("schedule_rotation_members_attributes", item.ScheduleRotationMembersAttributes)
 
 	// Convert any numeric values to strings for schedule_rotationable_attributes
 	if item.ScheduleRotationableAttributes != nil {
@@ -304,6 +356,13 @@ func resourceScheduleRotationUpdate(ctx context.Context, d *schema.ResourceData,
 	}
 	if d.HasChange("schedule_rotationable_attributes") {
 		s.ScheduleRotationableAttributes = d.Get("schedule_rotationable_attributes").(map[string]interface{})
+	}
+	if d.HasChange("schedule_rotation_members_attributes") {
+		if value, ok := d.GetOk("schedule_rotation_members_attributes"); value != nil && ok {
+			s.ScheduleRotationMembersAttributes = value.([]interface{})
+		} else {
+			s.ScheduleRotationMembersAttributes = []interface{}{}
+		}
 	}
 
 	_, err := c.UpdateScheduleRotation(d.Id(), s)

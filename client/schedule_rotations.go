@@ -11,19 +11,20 @@ import (
 )
 
 type ScheduleRotation struct {
-	ID                             string                 `jsonapi:"primary,schedule_rotations"`
-	ScheduleId                     string                 `jsonapi:"attr,schedule_id,omitempty"`
-	Name                           string                 `jsonapi:"attr,name,omitempty"`
-	Position                       int                    `jsonapi:"attr,position,omitempty"`
-	ScheduleRotationableType       string                 `jsonapi:"attr,schedule_rotationable_type,omitempty"`
-	ActiveAllWeek                  *bool                  `jsonapi:"attr,active_all_week,omitempty"`
-	ActiveDays                     []interface{}          `jsonapi:"attr,active_days,omitempty"`
-	ActiveTimeType                 string                 `jsonapi:"attr,active_time_type,omitempty"`
-	ActiveTimeAttributes           []interface{}          `jsonapi:"attr,active_time_attributes,omitempty"`
-	TimeZone                       string                 `jsonapi:"attr,time_zone,omitempty"`
-	StartTime                      string                 `jsonapi:"attr,start_time,omitempty"`
-	EndTime                        string                 `jsonapi:"attr,end_time,omitempty"`
-	ScheduleRotationableAttributes map[string]interface{} `jsonapi:"attr,schedule_rotationable_attributes,omitempty"`
+	ID                                string                 `jsonapi:"primary,schedule_rotations"`
+	ScheduleId                        string                 `jsonapi:"attr,schedule_id,omitempty"`
+	Name                              string                 `jsonapi:"attr,name,omitempty"`
+	Position                          int                    `jsonapi:"attr,position,omitempty"`
+	ScheduleRotationableType          string                 `jsonapi:"attr,schedule_rotationable_type,omitempty"`
+	ActiveAllWeek                     *bool                  `jsonapi:"attr,active_all_week,omitempty"`
+	ActiveDays                        []interface{}          `jsonapi:"attr,active_days,omitempty"`
+	ActiveTimeType                    string                 `jsonapi:"attr,active_time_type,omitempty"`
+	ActiveTimeAttributes              []interface{}          `jsonapi:"attr,active_time_attributes,omitempty"`
+	TimeZone                          string                 `jsonapi:"attr,time_zone,omitempty"`
+	StartTime                         string                 `jsonapi:"attr,start_time,omitempty"`
+	EndTime                           string                 `jsonapi:"attr,end_time,omitempty"`
+	ScheduleRotationMembersAttributes []interface{}          `jsonapi:"attr,schedule_rotation_members_attributes,omitempty"`
+	ScheduleRotationableAttributes    map[string]interface{} `jsonapi:"attr,schedule_rotationable_attributes,omitempty"`
 }
 
 func (c *Client) ListScheduleRotations(id string, params *rootlygo.ListScheduleRotationsParams) ([]interface{}, error) {

@@ -184,6 +184,7 @@ resource "rootly_escalation_level" "second" {
 - `active_time_type` (String) Value must be one of `all_day`, `same_time`, or `custom`. The value chosen will override `active_time_attributes` in any `rootly_schedule_rotation_active_day` resources linked to this `rootly_schedule_rotation`.
 - `end_time` (String) ISO8601 date and time when rotation ends. Shifts will only be created before this time.
 - `position` (Number) Position of the schedule rotation
+- `schedule_rotation_members_attributes` (Block List) Schedule rotation members. You can only add schedule rotation members if your account has schedule nesting feature enabled. (see [below for nested schema](#nestedblock--schedule_rotation_members_attributes))
 - `schedule_rotationable_type` (String) Schedule rotation type. Value must be one of `ScheduleDailyRotation`, `ScheduleWeeklyRotation`, `ScheduleBiweeklyRotation`, `ScheduleMonthlyRotation`, `ScheduleCustomRotation`.
 - `start_time` (String) ISO8601 date and time when rotation starts. Shifts will only be created after this time.
 - `time_zone` (String) A valid IANA time zone name.
@@ -199,6 +200,19 @@ Optional:
 
 - `end_time` (String) End time for schedule rotation active time
 - `start_time` (String) Start time for schedule rotation active time
+
+
+<a id="nestedblock--schedule_rotation_members_attributes"></a>
+### Nested Schema for `schedule_rotation_members_attributes`
+
+Required:
+
+- `member_id` (String) ID of the member
+- `member_type` (String) Type of member. Value must be one of `Schedule` or `User`.
+
+Optional:
+
+- `position` (Number) Position of the member in rotation
 
 ## Import
 
