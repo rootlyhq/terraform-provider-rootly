@@ -1,1 +1,0 @@
-*Note: If you are an advanced alert routing user, you should use the Alert Routes resource/data source instead of this one. If you don't know whether you are an advanced alert routing user, please contact Rootly customer support.*
