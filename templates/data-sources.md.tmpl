@@ -9,11 +9,7 @@ description: |-
 
 {{ .Description | trimspace }}
 
-{{- $additionalSectionsFile := printf "docs/additional_sections/%s.md" .Name }}
-{{- if fileExists $additionalSectionsFile }}
-
-{{ codefile "markdown" $additionalSectionsFile }}
-{{- end }}
+{{ codefile "markdown" (printf "docs/additional_sections/%s.md" .Name) }}
 
 {{ if .HasExample -}}
 ## Example Usage
