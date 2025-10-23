@@ -2,14 +2,14 @@
 page_title: "Resource rootly_alert_route - terraform-provider-rootly"
 subcategory:
 description: |-
-
+    
 ---
 
 # Resource (rootly_alert_route)
 
 
 
-
+*Note: This resource/data source requires access to Advanced Alert Routing. If you're unsure whether you have access to this feature, please contact Rootly customer support.*
 
 ## Example Usage
 
