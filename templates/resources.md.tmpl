@@ -9,14 +9,10 @@ description: |-
 
 {{ .Description | trimspace }}
 
-{{- if eq .Name "rootly_alert_route" }}
+{{- $additionalSectionsFile := printf "docs/additional_sections/%s.md" .Name }}
+{{- if fileExists $additionalSectionsFile }}
 
-*Note: This resource requires access to Advanced Alert Routing. If you're unsure whether you have access to this feature, please contact Rootly customer support.*
-{{- end }}
-
-{{- if eq .Name "rootly_alert_routing_rule" }}
-
-*Note: If you are an advanced alert routing user, you should use the Alert Routes resource instead of this one. If you don't know whether you are an advanced alert routing user, please contact Rootly customer support.*
+{{ codefile "markdown" $additionalSectionsFile }}
 {{- end }}
 
 {{ if .HasExample -}}

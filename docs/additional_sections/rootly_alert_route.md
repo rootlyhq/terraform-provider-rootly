@@ -1,0 +1,1 @@
+*Note: This resource/data source requires access to Advanced Alert Routing. If you're unsure whether you have access to this feature, please contact Rootly customer support.*
