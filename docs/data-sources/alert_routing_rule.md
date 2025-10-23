@@ -2,12 +2,13 @@
 page_title: "Data Source rootly_alert_routing_rule - terraform-provider-rootly"
 subcategory:
 description: |-
-    
+
 ---
 
 # Data Source (rootly_alert_routing_rule)
 
 
+*Note: If you are an advanced alert routing user, you should use the Alert Routes data source instead of this one. If you don’t know whether you are an advanced alert routing user, please contact Rootly customer support.*
 
 
 
