@@ -69,6 +69,7 @@ resource "rootly_alerts_source" "monitoring_source" {
 resource "rootly_alert_route" "production_route" {
   name              = "Production Alert Routing"
   alerts_source_ids = [resource.rootly_alerts_source.monitoring_source.id]
+  owning_team_ids   = [resource.rootly_team.on_call_team.id]
   enabled           = true
 
   rules {
