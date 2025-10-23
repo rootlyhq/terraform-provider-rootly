@@ -10,7 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -75,236 +75,6 @@ func resourceAlertRoute() *schema.Resource {
 				WriteOnly:        false,
 				Description:      "",
 			},
-
-			"rules": &schema.Schema{
-				Type:             schema.TypeList,
-				Computed:         false,
-				Required:         false,
-				Optional:         true,
-				Sensitive:        false,
-				ForceNew:         false,
-				WriteOnly:        false,
-				Description:      "",
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-
-						"name": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Sensitive:   false,
-							ForceNew:    false,
-							WriteOnly:   false,
-							Description: "The name of the alert routing rule",
-						},
-
-						"position": &schema.Schema{
-							Type:        schema.TypeInt,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Sensitive:   false,
-							ForceNew:    false,
-							WriteOnly:   false,
-							Description: "The position of the alert routing rule for ordering evaluation",
-						},
-
-						"fallback_rule": &schema.Schema{
-							Type:        schema.TypeBool,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Sensitive:   false,
-							ForceNew:    false,
-							WriteOnly:   false,
-							Description: "Whether this is a fallback rule. Value must be one of true or false",
-						},
-
-						"destinations": &schema.Schema{
-							Type:             schema.TypeList,
-							Computed:         false,
-							Required:         false,
-							Optional:         true,
-							Sensitive:        false,
-							ForceNew:         false,
-							WriteOnly:        false,
-							Description:      "",
-							DiffSuppressFunc: tools.EqualIgnoringOrder,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-
-									"target_type": &schema.Schema{
-										Type:         schema.TypeString,
-										Default:      "Service",
-										Required:     false,
-										Optional:     true,
-										Sensitive:    false,
-										ForceNew:     false,
-										WriteOnly:    false,
-										Description:  "The type of the target. Value must be one of `Service`, `Group`, `EscalationPolicy`.",
-										ValidateFunc: validation.StringInSlice([]string{"Service", "Group", "EscalationPolicy"}, false),
-									},
-
-									"target_id": &schema.Schema{
-										Type:        schema.TypeString,
-										Computed:    true,
-										Required:    false,
-										Optional:    true,
-										Sensitive:   false,
-										ForceNew:    false,
-										WriteOnly:   false,
-										Description: "The ID of the target",
-									},
-								},
-							},
-						},
-
-						"condition_groups": &schema.Schema{
-							Type:             schema.TypeList,
-							Computed:         false,
-							Required:         false,
-							Optional:         true,
-							Sensitive:        false,
-							ForceNew:         false,
-							WriteOnly:        false,
-							Description:      "",
-							DiffSuppressFunc: tools.EqualIgnoringOrder,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-
-									"position": &schema.Schema{
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Required:    false,
-										Optional:    true,
-										Sensitive:   false,
-										ForceNew:    false,
-										WriteOnly:   false,
-										Description: "The position of the condition group",
-									},
-
-									"conditions": &schema.Schema{
-										Type:             schema.TypeList,
-										Computed:         false,
-										Required:         false,
-										Optional:         true,
-										Sensitive:        false,
-										ForceNew:         false,
-										WriteOnly:        false,
-										Description:      "",
-										DiffSuppressFunc: tools.EqualIgnoringOrder,
-										Elem: &schema.Resource{
-											Schema: map[string]*schema.Schema{
-
-												"property_field_condition_type": &schema.Schema{
-													Type:         schema.TypeString,
-													Default:      "is_one_of",
-													Required:     false,
-													Optional:     true,
-													Sensitive:    false,
-													ForceNew:     false,
-													WriteOnly:    false,
-													Description:  "Value must be one of `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is_empty`.",
-													ValidateFunc: validation.StringInSlice([]string{"is_one_of", "is_not_one_of", "contains", "does_not_contain", "starts_with", "ends_with", "matches_regex", "is_empty"}, false),
-												},
-
-												"property_field_name": &schema.Schema{
-													Type:        schema.TypeString,
-													Computed:    true,
-													Required:    false,
-													Optional:    true,
-													Sensitive:   false,
-													ForceNew:    false,
-													WriteOnly:   false,
-													Description: "The name of the property field",
-												},
-
-												"property_field_type": &schema.Schema{
-													Type:         schema.TypeString,
-													Default:      "attribute",
-													Required:     false,
-													Optional:     true,
-													Sensitive:    false,
-													ForceNew:     false,
-													WriteOnly:    false,
-													Description:  "Value must be one of `attribute`, `payload`, `alert_field`.",
-													ValidateFunc: validation.StringInSlice([]string{"attribute", "payload", "alert_field"}, false),
-												},
-
-												"property_field_value": &schema.Schema{
-													Type:        schema.TypeString,
-													Computed:    true,
-													Required:    false,
-													Optional:    true,
-													Sensitive:   false,
-													ForceNew:    false,
-													WriteOnly:   false,
-													Description: "The value of the property field",
-												},
-
-												"property_field_values": &schema.Schema{
-													Type: schema.TypeList,
-													Elem: &schema.Schema{
-														Type: schema.TypeString,
-													},
-													DiffSuppressFunc: tools.EqualIgnoringOrder,
-													Computed:         false,
-													Required:         false,
-													Optional:         true,
-													Sensitive:        false,
-													ForceNew:         false,
-													WriteOnly:        false,
-													Description:      "",
-												},
-
-												"alert_urgency_ids": &schema.Schema{
-													Type: schema.TypeList,
-													Elem: &schema.Schema{
-														Type: schema.TypeString,
-													},
-													DiffSuppressFunc: tools.EqualIgnoringOrder,
-													Computed:         false,
-													Required:         false,
-													Optional:         true,
-													Sensitive:        false,
-													ForceNew:         false,
-													WriteOnly:        false,
-													Description:      "The Alert Urgency IDs to check in the condition",
-												},
-
-												"conditionable_type": &schema.Schema{
-													Type:         schema.TypeString,
-													Default:      "AlertField",
-													Required:     false,
-													Optional:     true,
-													Sensitive:    false,
-													ForceNew:     false,
-													WriteOnly:    false,
-													Description:  "The type of the conditionable. Value must be one of `AlertField`.",
-													ValidateFunc: validation.StringInSlice([]string{"AlertField"}, false),
-												},
-
-												"conditionable_id": &schema.Schema{
-													Type:        schema.TypeString,
-													Computed:    true,
-													Required:    false,
-													Optional:    true,
-													Sensitive:   false,
-													ForceNew:    false,
-													WriteOnly:   false,
-													Description: "The ID of the conditionable",
-												},
-											},
-										},
-									},
-								},
-							},
-						},
-					},
-				},
-			},
 		},
 	}
 }
@@ -327,9 +97,6 @@ func resourceAlertRouteCreate(ctx context.Context, d *schema.ResourceData, meta 
 	}
 	if value, ok := d.GetOkExists("owning_team_ids"); ok {
 		s.OwningTeamIds = value.([]interface{})
-	}
-	if value, ok := d.GetOkExists("rules"); ok {
-		s.Rules = value.([]interface{})
 	}
 
 	res, err := c.CreateAlertRoute(s)
@@ -365,28 +132,6 @@ func resourceAlertRouteRead(ctx context.Context, d *schema.ResourceData, meta in
 	d.Set("alerts_source_ids", item.AlertsSourceIds)
 	d.Set("owning_team_ids", item.OwningTeamIds)
 
-	if item.Rules != nil {
-		processed_items_rules := make([]map[string]interface{}, 0)
-
-		for _, c := range item.Rules {
-			if rawItem, ok := c.(map[string]interface{}); ok {
-				// Create a new map with only the fields defined in the schema
-				processed_item_rules := map[string]interface{}{
-					"name":             rawItem["name"],
-					"position":         rawItem["position"],
-					"fallback_rule":    rawItem["fallback_rule"],
-					"destinations":     rawItem["destinations"],
-					"condition_groups": rawItem["condition_groups"],
-				}
-				processed_items_rules = append(processed_items_rules, processed_item_rules)
-			}
-		}
-
-		d.Set("rules", processed_items_rules)
-	} else {
-		d.Set("rules", nil)
-	}
-
 	return nil
 }
 
@@ -416,14 +161,6 @@ func resourceAlertRouteUpdate(ctx context.Context, d *schema.ResourceData, meta 
 			s.OwningTeamIds = value.([]interface{})
 		} else {
 			s.OwningTeamIds = []interface{}{}
-		}
-	}
-
-	if d.HasChange("rules") {
-		if value, ok := d.GetOk("rules"); value != nil && ok {
-			s.Rules = value.([]interface{})
-		} else {
-			s.Rules = []interface{}{}
 		}
 	}
 
