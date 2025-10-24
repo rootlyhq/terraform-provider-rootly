@@ -1,0 +1,20 @@
+---
+page_title: "{{.Type}} {{.Name}} - {{.ProviderName}}"
+subcategory:
+description: |-
+  {{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Type}} ({{.Name}})
+
+{{ .Description | trimspace }}
+
+*Note: This resource/data source requires access to Advanced Alert Routing. If you're unsure whether you have access to this feature, please contact Rootly customer support.*
+
+{{ if .HasExample -}}
+## Example Usage
+
+{{ codefile "shell" .ExampleFile }}
+{{- end }}
+
+{{ .SchemaMarkdown | trimspace }}
