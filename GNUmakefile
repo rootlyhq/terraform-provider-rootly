@@ -55,8 +55,10 @@ codegen:
 	node tools/clean-swagger.js schema/swagger.json
 	cd schema && go tool oapi-codegen --config=oapi-config.yml swagger.json
 	node tools/generate.js schema/swagger.json
-	go fmt provider/*
 	go fmt client/*
+	go fmt provider/*
+	go tool goimports -w provider/*
+	go tool goimports -w client/*
 
 # Version management targets
 # These targets manage semantic versioning using git tags
