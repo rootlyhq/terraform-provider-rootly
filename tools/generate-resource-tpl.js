@@ -1,7 +1,14 @@
 const inflect = require("./inflect");
 
 function forceMapFor(name) {
-  return name.match(/_(params|attributes)$/) && !["resolution_rule_attributes", "alert_template_attributes", "sourceable_attributes"].includes(name)
+  return (
+    name.match(/_(params|attributes)$/) &&
+    ![
+      "resolution_rule_attributes",
+      "alert_template_attributes",
+      "sourceable_attributes",
+    ].includes(name)
+  );
 }
 
 module.exports = (name, resourceSchema, requiredFields, pathIdField) => {
@@ -21,6 +28,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/structure"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
 
@@ -129,7 +137,12 @@ function setResourceFields(name, resourceSchema) {
     .filter(excludeDateFields)
     .map((field) => {
       const schema = resourceSchema.properties[field];
-      if (schema.type == "array" && schema.items && schema.items.type == "object" && schema.items.properties) {
+      if (
+        schema.type == "array" &&
+        schema.items &&
+        schema.items.type == "object" &&
+        schema.items.properties
+      ) {
         return `
           if item.${inflect.camelize(field)} != nil {
               processed_items_${field} := make([]map[string]interface{}, 0)
@@ -138,7 +151,9 @@ function setResourceFields(name, resourceSchema) {
                   if rawItem, ok := c.(map[string]interface{}); ok {
                       // Create a new map with only the fields defined in the schema
                       processed_item_${field} := map[string]interface{}{
-                          ${Object.keys(schema.items.properties).map((key) => `"${key}": rawItem["${key}"]`).join(",\n")},
+                          ${Object.keys(schema.items.properties)
+                            .map((key) => `"${key}": rawItem["${key}"]`)
+                            .join(",\n")},
                       }
                       processed_items_${field} = append(processed_items_${field}, processed_item_${field})
                   }
@@ -149,10 +164,18 @@ function setResourceFields(name, resourceSchema) {
               d.Set("${field}", nil)
           }
         `;
-      } else if (schema.type == "object" && schema.properties && !forceMapFor(name)) {
+      } else if (
+        schema.type == "object" &&
+        schema.properties &&
+        !forceMapFor(name)
+      ) {
         return `singleton_list_${field} := make([]interface{}, 1, 1)
           processed_item_${field} := map[string]interface{}{
-            ${Object.keys(schema.properties).map((key) => `"${key}": item.${inflect.camelize(field)}["${key}"]`).join(",\n")},
+            ${Object.keys(schema.properties)
+              .map(
+                (key) => `"${key}": item.${inflect.camelize(field)}["${key}"]`
+              )
+              .join(",\n")},
           }
           singleton_list_${field}[0] = processed_item_${field}
           d.Set("${field}", singleton_list_${field})
@@ -174,7 +197,11 @@ function createResourceFields(name, resourceSchema) {
           schema.type
         )}))
 			}`;
-      } else if (schema.type == "object" && schema.properties && !forceMapFor(name)) {
+      } else if (
+        schema.type == "object" &&
+        schema.properties &&
+        !forceMapFor(name)
+      ) {
         return `  if value, ok := d.GetOkExists("${field}"); ok {
 				if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
           if mapValue, ok := valueList[0].(map[string]interface{}); ok {
@@ -212,7 +239,11 @@ function updateResourceFields(name, resourceSchema) {
             }
           }
 			`;
-      } else if (schema.type == "object" && schema.properties && !forceMapFor(name)) {
+      } else if (
+        schema.type == "object" &&
+        schema.properties &&
+        !forceMapFor(name)
+      ) {
         return `  if d.HasChange("${field}") {
       		tps := d.Get("${field}").([]interface{})
       		for _, tpsi := range tps {
@@ -300,12 +331,17 @@ function annotatedDescription(schema) {
 
 function generateValidateFunc(schema) {
   if (schema.enum && schema.enum.length > 0) {
-    const enumValues = schema.enum.map(val => `"${val}"`).join(", ");
+    const enumValues = schema.enum.map((val) => `"${val}"`).join(", ");
     return `
 		ValidateFunc: validation.StringInSlice([]string{${enumValues}}, false),`;
   }
-  if (schema.type === "array" && schema.items && schema.items.enum && schema.items.enum.length > 0) {
-    const enumValues = schema.items.enum.map(val => `"${val}"`).join(", ");
+  if (
+    schema.type === "array" &&
+    schema.items &&
+    schema.items.enum &&
+    schema.items.enum.length > 0
+  ) {
+    const enumValues = schema.items.enum.map((val) => `"${val}"`).join(", ");
     return `
 		ValidateFunc: validation.StringInSlice([]string{${enumValues}}, false),`;
   }
@@ -325,10 +361,15 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
   let defaultValue;
   if (schema.default) {
     defaultValue = `Default: "${schema.default}"`;
-  } else if (schema.enum && schema.enum.length > 0 && !schema.anyOfChild && name !== "status") {
+  } else if (
+    schema.enum &&
+    schema.enum.length > 0 &&
+    !schema.anyOfChild &&
+    name !== "status"
+  ) {
     defaultValue = `Default: "${schema.enum[0]}"`;
   } else if (schema.tf_computed === false) {
-    defaultValue = `Default: nil,\n				Computed: false`
+    defaultValue = `Default: nil,\n				Computed: false`;
   } else {
     defaultValue = `Computed: ${optional}`;
   }
@@ -337,14 +378,16 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
   const forceNew =
     name === pathIdField || schema.tf_force_new ? "true" : "false";
   const writeOnly = schema.tf_write_only ? "true" : "false";
-  const skipDiff =
-    schema.tf_skip_diff
-      ? `
-		DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-			return len(old) != 0
-		},
-	`
-      : "";
+
+  const diffSuppressFunc = schema.tf_diff_suppress_func
+    ? schema.tf_diff_suppress_func
+    : schema.tf_skip_diff // TODO: Change the spec to emit {"tf_diff_suppress_func": "diffsuppressfunc.Skip"} instead of {"tf_skip_diff": true}
+    ? "diffsuppressfunc.Skip"
+    : null;
+  const diffSuppressFuncField = diffSuppressFunc
+    ? `\nDiffSuppressFunc: ${diffSuppressFunc},`
+    : "";
+
   const stateFunc = schema.accepts_unordered
     ? `
 		StateFunc: func(v interface{}) string {
@@ -365,8 +408,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
         Sensitive: ${sensitive},
 				ForceNew: ${forceNew},
         WriteOnly: ${writeOnly},
-				Description: "${description}",${validateFunc}
-				${skipDiff}
+				Description: "${description}",${validateFunc}${diffSuppressFuncField}
 			},
 			`;
     case "integer":
@@ -380,7 +422,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
         ForceNew: ${forceNew},
         WriteOnly: ${writeOnly},
         Description: "${description}",
-        ${skipDiff}
+        ${diffSuppressFuncField}
       },
       `;
     case "number":
@@ -394,7 +436,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 				ForceNew: ${forceNew},
         WriteOnly: ${writeOnly},
 				Description: "${description}",
-				${skipDiff}
+				${diffSuppressFuncField}
 			},
 			`;
     case "boolean":
@@ -407,7 +449,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
           Sensitive: ${sensitive},
           ForceNew: ${forceNew},
           WriteOnly: ${writeOnly},
-					${skipDiff}
+					${diffSuppressFuncField}
 				},
 				`;
       }
@@ -421,7 +463,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
           ForceNew: ${forceNew},
           WriteOnly: ${writeOnly},
           Description: "${description}",
-          ${skipDiff}
+          ${diffSuppressFuncField}
         },
         `;
     case "array":
@@ -445,7 +487,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 						Schema: map[string]*schema.Schema {
               ${Object.keys(schema.items.properties)
                 .map((key) => {
-                  return schemaField(key, schema.items, [], pathIdField)
+                  return schemaField(key, schema.items, [], pathIdField);
                 })
                 .join("\n")}
 						},
@@ -454,9 +496,12 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 				},
 				`;
       } else if (schema.items && schema.items.type === "string") {
-        const elemValidateFunc = schema.items.enum && schema.items.enum.length > 0 
-          ? `\n\t\t\t\t\tValidateFunc: validation.StringInSlice([]string{${schema.items.enum.map(val => `"${val}"`).join(", ")}}, false),`
-          : "";
+        const elemValidateFunc =
+          schema.items.enum && schema.items.enum.length > 0
+            ? `\n\t\t\t\t\tValidateFunc: validation.StringInSlice([]string{${schema.items.enum
+                .map((val) => `"${val}"`)
+                .join(", ")}}, false),`
+            : "";
         return `
 				"${name}": &schema.Schema {
 					Type: schema.TypeList,
@@ -532,10 +577,10 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 	 					Elem: &schema.Resource {
 							Schema: map[string]*schema.Schema {
 	 							${Object.keys(schema.properties)
-									.map((key) => {
-	 									return schemaField(key, schema, [], pathIdField)
-									})
-									.join("\n")}
+                  .map((key) => {
+                    return schemaField(key, schema, [], pathIdField);
+                  })
+                  .join("\n")}
 							},
 	 					},
 	 				},

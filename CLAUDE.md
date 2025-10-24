@@ -71,7 +71,8 @@ Workflow tasks are special resources with dynamic generation based on OpenAPI sc
 ### Terraform Schema Flags
 The provider uses custom OpenAPI schema annotations to control Terraform resource generation behavior. These flags are processed in the JavaScript template files during code generation:
 
-- **`tf_skip_diff`** - Prevents Terraform from detecting differences on a field. Adds a `DiffSuppressFunc` that suppresses diffs when an old value exists. Used for sensitive fields like secrets or computed status fields.
+- **`tf_diff_suppress_func`** - A custom diff suppressor function. Diff functions should be implemented in the `github.com/rootlyhq/terraform-provider-rootly/v2/internal/diffsuppressfunc` package.
+- **`tf_skip_diff`** - Prevents Terraform from detecting differences on a field. Adds a `DiffSuppressFunc` that suppresses diffs when an old value exists. Used for sensitive fields like secrets or computed status fields. Deprecated. Use `tf_diff_suppress_func` instead with `diffsuppressfunc.Skip`.
 - **`tf_sensitive`** - Ensures that the attribute's value does not get displayed in logs or regular output.
 - **`tf_force_new`** - Indicates that any change in this field requires the resource to be destroyed and recreated.
 - **`tf_write_only`** - Used for arguments that handle secret values that do not need to be persisted in Terraform plan or state, such as passwords, API keys, etc. Write-only argument values are not sent to Terraform and do not persist in the Terraform plan or state artifact.
