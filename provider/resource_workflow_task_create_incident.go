@@ -4,10 +4,9 @@ package provider
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
-
-	"encoding/json"
 	"reflect"
 
 	"github.com/hashicorp/terraform-plugin-log/tflog"
@@ -102,7 +101,7 @@ func resourceWorkflowTaskCreateIncident() *schema.Resource {
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
 						},
 						"service_ids": &schema.Schema{
-							Description: "",
+							Description: "Array of service UUIDs",
 							Type:        schema.TypeList,
 							Optional:    true,
 							Elem: &schema.Schema{
@@ -111,7 +110,7 @@ func resourceWorkflowTaskCreateIncident() *schema.Resource {
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
 						},
 						"functionality_ids": &schema.Schema{
-							Description: "",
+							Description: "Array of functionality UUIDs",
 							Type:        schema.TypeList,
 							Optional:    true,
 							Elem: &schema.Schema{
@@ -129,7 +128,7 @@ func resourceWorkflowTaskCreateIncident() *schema.Resource {
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
 						},
 						"group_ids": &schema.Schema{
-							Description: "",
+							Description: "Array of group/team UUIDs",
 							Type:        schema.TypeList,
 							Optional:    true,
 							Elem: &schema.Schema{
@@ -143,7 +142,7 @@ func resourceWorkflowTaskCreateIncident() *schema.Resource {
 							Optional:    true,
 						},
 						"custom_fields_mapping": &schema.Schema{
-							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON",
+							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON. Use 'services', 'functionalities', or 'groups' keys with arrays of names/slugs for name/slug lookup",
 							Type:        schema.TypeString,
 							Optional:    true,
 							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {

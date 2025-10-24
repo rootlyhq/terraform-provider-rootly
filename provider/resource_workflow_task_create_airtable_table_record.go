@@ -4,10 +4,9 @@ package provider
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
-
-	"encoding/json"
 	"reflect"
 
 	"github.com/hashicorp/terraform-plugin-log/tflog"

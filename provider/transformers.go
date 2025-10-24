@@ -1,8 +1,9 @@
 package provider
 
 import (
-	"github.com/buxizhizhoum/inflection"
 	"reflect"
+
+	"github.com/buxizhizhoum/inflection"
 )
 
 func structToLowerFirstMap(in interface{}) map[string]interface{} {

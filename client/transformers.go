@@ -2,8 +2,9 @@ package client
 
 import (
 	"bytes"
-	"github.com/google/jsonapi"
 	"io"
+
+	"github.com/google/jsonapi"
 )
 
 func MarshalData(entity interface{}) (io.Reader, error) {

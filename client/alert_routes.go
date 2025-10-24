@@ -16,7 +16,6 @@ type AlertRoute struct {
 	Enabled         *bool         `jsonapi:"attr,enabled,omitempty"`
 	AlertsSourceIds []interface{} `jsonapi:"attr,alerts_source_ids,omitempty"`
 	OwningTeamIds   []interface{} `jsonapi:"attr,owning_team_ids,omitempty"`
-	Rules           []interface{} `jsonapi:"attr,rules,omitempty"`
 }
 
 func (c *Client) ListAlertRoutes(params *rootlygo.ListAlertRoutesParams) ([]interface{}, error) {
