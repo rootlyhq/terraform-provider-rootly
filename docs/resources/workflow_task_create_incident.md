@@ -39,13 +39,13 @@ Required:
 
 Optional:
 
-- `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON
+- `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON. Use 'services', 'functionalities', or 'groups' keys with arrays of names/slugs for name/slug lookup
 - `environment_ids` (List of String)
-- `functionality_ids` (List of String)
-- `group_ids` (List of String)
+- `functionality_ids` (List of String) Array of functionality UUIDs
+- `group_ids` (List of String) Array of group/team UUIDs
 - `incident_type_ids` (List of String)
 - `private` (Boolean) Value must be one of true or false
-- `service_ids` (List of String)
+- `service_ids` (List of String) Array of service UUIDs
 - `severity_id` (String)
 - `summary` (String) The incident summary
 - `task_type` (String)
