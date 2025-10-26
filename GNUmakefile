@@ -54,7 +54,7 @@ codegen:
 	curl $(SWAGGER_URL) -o schema/swagger.json
 	node tools/clean-swagger.js schema/swagger.json
 	cd schema && go tool oapi-codegen --config=oapi-config.yml swagger.json
-	node tools/generate.js schema/swagger.json
+	yarn run generate schema/swagger.json
 	go fmt client/*
 	go fmt provider/*
 	go tool goimports -w provider/*
