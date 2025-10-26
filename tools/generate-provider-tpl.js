@@ -81,7 +81,6 @@ ${resources
 				"rootly_custom_field": resourceCustomField(),
 				"rootly_custom_field_option": resourceCustomFieldOption(),
 				"rootly_dashboard": resourceDashboard(),
-				"rootly_dashboard_panel": resourceDashboardPanel(),
 				"rootly_escalation_path": resourceEscalationPath(),
 				"rootly_retrospective_configuration": resourceRetrospectiveConfiguration(),
 				"rootly_retrospective_process": resourceRetrospectiveProcess(),
