@@ -7,6 +7,8 @@ import (
 )
 
 func TestAccResourceDashboardPanel(t *testing.T) {
+	resName := "rootly_dashboard_panel.foo"
+
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck: func() {
 			testAccPreCheck(t)
@@ -15,8 +17,62 @@ func TestAccResourceDashboardPanel(t *testing.T) {
 		Steps: []resource.TestStep{
 			{
 				Config: testAccResourceDashboardPanel,
-				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_dashboard_panel.foo", "name", "test"),
+				Check: resource.ComposeAggregateTestCheckFunc(
+					resource.TestCheckResourceAttr(resName, "name", "test"),
+					resource.TestCheckResourceAttr(resName, "position.#", "1"),
+					resource.TestCheckResourceAttr(resName, "position.0.x", "3"),
+					resource.TestCheckResourceAttr(resName, "position.0.y", "4"),
+					resource.TestCheckResourceAttr(resName, "position.0.h", "5"),
+					resource.TestCheckResourceAttr(resName, "position.0.w", "6"),
+					resource.TestCheckResourceAttr(resName, "params.#", "1"),
+					resource.TestCheckResourceAttr(resName, "params.0.display", "line_chart"),
+					resource.TestCheckResourceAttr(resName, "params.0.description", "description"),
+					resource.TestCheckResourceAttr(resName, "params.0.legend.#", "1"),
+					resource.TestCheckResourceAttr(resName, "params.0.legend.0.groups", "charted"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.#", "1"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.collection", "incidents"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.filter.#", "1"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.filter.0.operation", "and"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.filter.0.rules.#", "1"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.filter.0.rules.0.operation", "and"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.filter.0.rules.0.condition", "="),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.filter.0.rules.0.key", "status"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.filter.0.rules.0.value", "started"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.group_by", "severity"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.aggregate.#", "1"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.aggregate.0.cumulative", "false"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.aggregate.0.key", "results"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.aggregate.0.operation", "count"),
+				),
+			},
+			{
+				Config: testAccResourceDashboardPanelUpdated,
+				Check: resource.ComposeAggregateTestCheckFunc(
+					resource.TestCheckResourceAttr(resName, "name", "test-updated"),
+					resource.TestCheckResourceAttr(resName, "position.#", "1"),
+					resource.TestCheckResourceAttr(resName, "position.0.x", "30"),
+					resource.TestCheckResourceAttr(resName, "position.0.y", "40"),
+					resource.TestCheckResourceAttr(resName, "position.0.h", "50"),
+					resource.TestCheckResourceAttr(resName, "position.0.w", "60"),
+					resource.TestCheckResourceAttr(resName, "params.#", "1"),
+					resource.TestCheckResourceAttr(resName, "params.0.display", "line_chart"),
+					resource.TestCheckResourceAttr(resName, "params.0.description", "description-updated"),
+					resource.TestCheckResourceAttr(resName, "params.0.legend.#", "1"),
+					resource.TestCheckResourceAttr(resName, "params.0.legend.0.groups", "charted"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.#", "1"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.collection", "incidents"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.filter.#", "1"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.filter.0.operation", "or"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.filter.0.rules.#", "1"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.filter.0.rules.0.operation", "or"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.filter.0.rules.0.condition", "="),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.filter.0.rules.0.key", "status"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.filter.0.rules.0.value", "started"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.group_by", "severity"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.aggregate.#", "1"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.aggregate.0.cumulative", "true"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.aggregate.0.key", "results"),
+					resource.TestCheckResourceAttr(resName, "params.0.datasets.0.aggregate.0.operation", "count"),
 				),
 			},
 		},
@@ -25,20 +81,21 @@ func TestAccResourceDashboardPanel(t *testing.T) {
 
 const testAccResourceDashboardPanel = `
 resource "rootly_dashboard" "foo" {
-  name = "my-dashboard-with-panel"
+	name = "my-dashboard-with-panel"
 }
 
 resource "rootly_dashboard_panel" "foo" {
-  dashboard_id = rootly_dashboard.foo.id
+	dashboard_id = rootly_dashboard.foo.id
 	name = "test"
 	position {
 		x = 3
-		y = 3
-		h = 3
-		w = 12
+		y = 4
+		h = 5
+		w = 6
 	}
 	params {
 		display = "line_chart"
+		description = "description"
 		legend {
 			groups = "charted"
 		}
@@ -56,6 +113,48 @@ resource "rootly_dashboard_panel" "foo" {
 			group_by = "severity"
 			aggregate {
 				cumulative = false
+				key = "results"
+				operation = "count"
+			}
+		}
+	}
+}
+`
+
+const testAccResourceDashboardPanelUpdated = `
+resource "rootly_dashboard" "foo" {
+	name = "my-dashboard-with-panel"
+}
+
+resource "rootly_dashboard_panel" "foo" {
+	dashboard_id = rootly_dashboard.foo.id
+	name = "test-updated"
+	position {
+		x = 30
+		y = 40
+		h = 50
+		w = 60
+	}
+	params {
+		display = "line_chart"
+		description = "description-updated"
+		legend {
+			groups = "charted"
+		}
+		datasets {
+			collection = "incidents"
+			filter {
+				operation = "or"
+				rules {
+					operation = "or"
+					condition = "="
+					key = "status"
+					value = "started"
+				}
+			}
+			group_by = "severity"
+			aggregate {
+				cumulative = true
 				key = "results"
 				operation = "count"
 			}

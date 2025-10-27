@@ -1,4 +1,5 @@
-const inflect = require("./inflect");
+import inflect from "inflect";
+import { v2Resources } from "./schema-mods";
 
 function forceMapFor(name) {
   return (
@@ -28,6 +29,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/structure"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/converter"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -133,10 +135,35 @@ function excludeDateFields(field) {
 }
 
 function setResourceFields(name, resourceSchema) {
+  const isV2Resource = v2Resources.includes(name);
+
   return Object.keys(resourceSchema.properties)
     .filter(excludeDateFields)
     .map((field) => {
       const schema = resourceSchema.properties[field];
+
+      // NEW
+      if (isV2Resource) {
+        if (["array", "object"].includes(schema.type)) {
+          return `
+          if v, err := converter.Expand(item.${inflect.camelize(
+            field
+          )}, resource${inflect.camelize(
+            name
+          )}().Schema["${field}"]); err == nil {
+            d.Set("${field}", v)
+          } else {
+            return diag.Errorf("Error expanding ${field}: %s", err.Error())
+          }
+          `;
+        } else {
+          return `
+          d.Set("${field}", item.${inflect.camelize(field)})
+          `;
+        }
+      }
+
+      // OLD
       if (
         schema.type == "array" &&
         schema.items &&
@@ -187,10 +214,49 @@ function setResourceFields(name, resourceSchema) {
 }
 
 function createResourceFields(name, resourceSchema) {
+  const isV2Resource = v2Resources.includes(name);
+
   return Object.keys(resourceSchema.properties)
     .filter(excludeDateFields)
     .map((field) => {
       const schema = resourceSchema.properties[field];
+
+      // NEW
+      if (isV2Resource) {
+        if (["array", "object"].includes(schema.type)) {
+          return `
+          if value, ok := d.GetOkExists("${field}"); ok {
+            flattened, err := converter.Flatten(value, resource${inflect.camelize(
+              name
+            )}().Schema["${field}"])
+            if err != nil {
+              return diag.Errorf("Error flattening ${field}: %s", err.Error())
+            }
+
+            if flattened, ok := flattened.(map[string]any); ok {
+              s.${inflect.camelize(field)} = flattened
+            }
+          }
+          `;
+        } else if (schema.type === "boolean") {
+          return `
+          if value, ok := d.GetOkExists("${field}"); ok {
+            s.${inflect.camelize(field)} = tools.Bool(value.(${jsonapiToGoType(
+            schema.type
+          )}))
+          }`;
+        } else {
+          return `
+          if value, ok := d.GetOkExists("${field}"); ok {
+            s.${inflect.camelize(field)} = value.(${jsonapiToGoType(
+            schema.type
+          )})
+          }
+          `;
+        }
+      }
+
+      // OLD
       if (schema.type === "boolean") {
         return `  if value, ok := d.GetOkExists("${field}"); ok {
 				s.${inflect.camelize(field)} = tools.Bool(value.(${jsonapiToGoType(
@@ -205,7 +271,7 @@ function createResourceFields(name, resourceSchema) {
         return `  if value, ok := d.GetOkExists("${field}"); ok {
 				if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
           if mapValue, ok := valueList[0].(map[string]interface{}); ok {
-    				s.${inflect.camelize(field)} = mapValue
+            s.${inflect.camelize(field)} = mapValue
           }
         }
 			}`;
@@ -219,10 +285,54 @@ function createResourceFields(name, resourceSchema) {
 }
 
 function updateResourceFields(name, resourceSchema) {
+  const isV2Resource = v2Resources.includes(name);
+
   return Object.keys(resourceSchema.properties)
     .filter(excludeDateFields)
     .map((field) => {
       const schema = resourceSchema.properties[field];
+
+      // NEW
+      if (isV2Resource) {
+        if (["array", "object"].includes(schema.type)) {
+          return `
+          if d.HasChange("${field}") {
+            flattened, err := converter.Flatten(d.Get("${field}"), resource${inflect.camelize(
+            name
+          )}().Schema["${field}"])
+            if err != nil {
+              return diag.Errorf("Error flattening ${field}: %s", err.Error())
+            }
+
+            if flattened, ok := flattened.(map[string]any); ok {
+              s.${inflect.camelize(field)} = flattened
+            }
+          }
+          `;
+        } else if (schema.type === "boolean") {
+          return `
+          if d.HasChange("${field}") {
+            s.${inflect.camelize(
+              field
+            )} = tools.Bool(d.Get("${field}").(${jsonapiToGoType(schema.type)}))
+          }`;
+        } else if (schema.tf_include_unchanged) {
+          return `
+          s.${inflect.camelize(field)} = d.Get("${field}").(${jsonapiToGoType(
+            schema.type
+          )})
+          `;
+        } else {
+          return `
+          if d.HasChange("${field}") {
+            s.${inflect.camelize(field)} = d.Get("${field}").(${jsonapiToGoType(
+            schema.type
+          )})
+          }`;
+        }
+      }
+
+      // OLD
       if (schema.type === "boolean") {
         return `  if d.HasChange("${field}") {
 				s.${inflect.camelize(field)} = tools.Bool(d.Get("${field}").(${jsonapiToGoType(
