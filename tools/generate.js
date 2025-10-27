@@ -9,7 +9,9 @@ const dataSourceTpl = require("./generate-data-source-tpl");
 const resourceTpl = require("./generate-resource-tpl");
 const workflowTpl = require("./generate-workflow-tpl");
 const generateWorkflowTaskResources = require("./generate-tasks");
-const swagger = require(path.resolve(swaggerPath));
+const mods = require("./schema-mods");
+const originalSwagger = require(path.resolve(swaggerPath));
+const swagger = mods.SchemaMods.reduce((schema, mod) => mod(schema), originalSwagger);
 
 const excluded = {
   dataSources: [
