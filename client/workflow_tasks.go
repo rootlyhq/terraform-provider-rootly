@@ -4,6 +4,7 @@ import (
 	"reflect"
 
 	"fmt"
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )

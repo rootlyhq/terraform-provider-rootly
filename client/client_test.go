@@ -2,12 +2,13 @@ package client
 
 import (
 	"fmt"
-	"github.com/hashicorp/go-cleanhttp"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 	"io/ioutil"
 	"net/http"
 	"strings"
 	"testing"
+
+	"github.com/hashicorp/go-cleanhttp"
+	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type requestTesterFunc func(r *http.Request) error
