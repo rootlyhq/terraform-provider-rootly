@@ -366,9 +366,9 @@ func resourceDashboardPanel() *schema.Resource {
 
 						"x": &schema.Schema{
 							Type:        schema.TypeFloat,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
+							Computed:    false,
+							Required:    true,
+							Optional:    false,
 							Sensitive:   false,
 							ForceNew:    false,
 							WriteOnly:   false,
@@ -377,9 +377,9 @@ func resourceDashboardPanel() *schema.Resource {
 
 						"y": &schema.Schema{
 							Type:        schema.TypeFloat,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
+							Computed:    false,
+							Required:    true,
+							Optional:    false,
 							Sensitive:   false,
 							ForceNew:    false,
 							WriteOnly:   false,
@@ -388,9 +388,9 @@ func resourceDashboardPanel() *schema.Resource {
 
 						"w": &schema.Schema{
 							Type:        schema.TypeFloat,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
+							Computed:    false,
+							Required:    true,
+							Optional:    false,
 							Sensitive:   false,
 							ForceNew:    false,
 							WriteOnly:   false,
@@ -399,9 +399,9 @@ func resourceDashboardPanel() *schema.Resource {
 
 						"h": &schema.Schema{
 							Type:        schema.TypeFloat,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
+							Computed:    false,
+							Required:    true,
+							Optional:    false,
 							Sensitive:   false,
 							ForceNew:    false,
 							WriteOnly:   false,

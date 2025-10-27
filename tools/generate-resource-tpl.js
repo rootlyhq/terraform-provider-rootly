@@ -688,7 +688,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 							Schema: map[string]*schema.Schema {
 	 							${Object.keys(schema.properties)
                   .map((key) => {
-                    return schemaField(key, schema, [], pathIdField);
+                    return schemaField(key, schema, schema.required, pathIdField);
                   })
                   .join("\n")}
 							},

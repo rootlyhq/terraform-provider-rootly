@@ -134,7 +134,7 @@ Optional:
 <a id="nestedblock--position"></a>
 ### Nested Schema for `position`
 
-Optional:
+Required:
 
 - `h` (Number)
 - `w` (Number)
