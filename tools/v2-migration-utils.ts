@@ -29,6 +29,7 @@ export const SchemaMods: SchemaMod[] = [
       fixDatasetsGroupByParam(target);
     }
 
+    // Dashboard panel data is not saved to state
     delete schema.components.schemas["dashboard_panel"].properties["data"];
 
     return schema;

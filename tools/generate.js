@@ -9,9 +9,8 @@ const dataSourceTpl = require("./generate-data-source-tpl");
 const resourceTpl = require("./generate-resource-tpl");
 const workflowTpl = require("./generate-workflow-tpl");
 const generateWorkflowTaskResources = require("./generate-tasks");
-const mods = require("./schema-mods");
-const originalSwagger = require(path.resolve(swaggerPath));
-const swagger = mods.SchemaMods.reduce((schema, mod) => mod(schema), originalSwagger);
+const v2MigrationUtils = require("./v2-migration-utils");
+const swagger = v2MigrationUtils.SchemaMods.reduce((schema, mod) => mod(schema), require(path.resolve(swaggerPath)));
 
 const excluded = {
   dataSources: [

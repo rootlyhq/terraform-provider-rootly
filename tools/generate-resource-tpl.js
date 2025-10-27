@@ -1,5 +1,5 @@
 import inflect from "inflect";
-import { v2Resources } from "./schema-mods";
+import { v2Resources } from "./v2-migration-utils";
 
 function forceMapFor(name) {
   return (
@@ -688,7 +688,12 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 							Schema: map[string]*schema.Schema {
 	 							${Object.keys(schema.properties)
                   .map((key) => {
-                    return schemaField(key, schema, schema.required, pathIdField);
+                    return schemaField(
+                      key,
+                      schema,
+                      schema.required,
+                      pathIdField
+                    );
                   })
                   .join("\n")}
 							},
