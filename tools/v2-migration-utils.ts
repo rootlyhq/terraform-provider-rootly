@@ -32,6 +32,11 @@ export const SchemaMods: SchemaMod[] = [
     // Dashboard panel data is not saved to state
     delete schema.components.schemas["dashboard_panel"].properties["data"];
 
+    // Dashboard panel requires dashboard_id
+    schema.components.schemas["new_dashboard_panel"].properties[
+      "data"
+    ].properties["attributes"].required.push("dashboard_id");
+
     return schema;
   },
 ];

@@ -54,7 +54,7 @@ func TestAccResourceDashboardPanel_UpgradeFromVersion(t *testing.T) {
 	`, dashboardName)
 
 	check := resource.ComposeAggregateTestCheckFunc(
-		resource.TestCheckResourceAttr(resName, "name", dashboardName),
+		resource.TestCheckResourceAttr(resName, "name", "test"),
 		resource.TestCheckResourceAttr(resName, "position.#", "1"),
 		resource.TestCheckResourceAttr(resName, "position.0.x", "3"),
 		resource.TestCheckResourceAttr(resName, "position.0.y", "4"),

@@ -48,11 +48,11 @@ resource "rootly_dashboard_panel" "incidents_by_severity" {
 
 ### Required
 
+- `dashboard_id` (String) The panel dashboard
 - `params` (Block List, Min: 1, Max: 1) (see [below for nested schema](#nestedblock--params))
 
 ### Optional
 
-- `dashboard_id` (String) The panel dashboard
 - `name` (String) The name of the dashboard_panel
 - `position` (Block List, Max: 1) (see [below for nested schema](#nestedblock--position))
 
