@@ -129,10 +129,54 @@ resource "rootly_alert_route" "production_route" {
 
 - `enabled` (Boolean)
 - `owning_team_ids` (List of String)
+- `rules` (Block List) (see [below for nested schema](#nestedblock--rules))
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--rules"></a>
+### Nested Schema for `rules`
+
+Optional:
+
+- `condition_groups` (Block List) (see [below for nested schema](#nestedblock--rules--condition_groups))
+- `destinations` (Block List) (see [below for nested schema](#nestedblock--rules--destinations))
+- `fallback_rule` (Boolean) Whether this is a fallback rule. Value must be one of true or false
+- `name` (String) The name of the alert routing rule
+- `position` (Number) The position of the alert routing rule for ordering evaluation
+
+<a id="nestedblock--rules--condition_groups"></a>
+### Nested Schema for `rules.condition_groups`
+
+Optional:
+
+- `conditions` (Block List) (see [below for nested schema](#nestedblock--rules--condition_groups--conditions))
+- `position` (Number) The position of the condition group
+
+<a id="nestedblock--rules--condition_groups--conditions"></a>
+### Nested Schema for `rules.condition_groups.conditions`
+
+Optional:
+
+- `alert_urgency_ids` (List of String) The Alert Urgency IDs to check in the condition
+- `conditionable_id` (String) The ID of the conditionable
+- `conditionable_type` (String) The type of the conditionable. Value must be one of `AlertField`.
+- `property_field_condition_type` (String) Value must be one of `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is_empty`.
+- `property_field_name` (String) The name of the property field
+- `property_field_type` (String) Value must be one of `attribute`, `payload`, `alert_field`.
+- `property_field_value` (String) The value of the property field
+- `property_field_values` (List of String)
+
+
+
+<a id="nestedblock--rules--destinations"></a>
+### Nested Schema for `rules.destinations`
+
+Optional:
+
+- `target_id` (String) The ID of the target
+- `target_type` (String) The type of the target. Value must be one of `Service`, `Group`, `EscalationPolicy`.
 
 ## Import
 
