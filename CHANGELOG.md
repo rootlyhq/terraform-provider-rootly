@@ -1,10 +1,44 @@
 # Changelog
 
+## [4.3.3] -- 2025-10-23
+
+### Added
+
+- Add `rootly_workflow_task_create_microsoft_teams_chat` resource
+
+### Fixed
+
+- Fixed codegen drift - regenerated provider code from latest OpenAPI schema (#132)
+- Restored accidentally removed `rootly_alerts_source` resource (#132)
+- Fixed schema inconsistencies in escalation policy, form field placement conditions, and sub status resources
+
+## [4.3.2] -- 2025-10-23
+
+### Added
+
+- Add automated provider updates scheduled for midnight (#130)
+- Add `non_editable` attribute support to `rootly_form_field_placement` resource (#122)
+
+### Changed
+
+- Updated `rootly_on_call_role` to support custom configuration (#122)
+
+## [4.3.1] -- 2025-10-23
+
+### Fixed
+
+- Fixed schedule rotation resource documentation discrepancies (#128)
+
 ## [4.3.0] -- 2025-10-06
 
 ### Added
 
-- Add alert deduplication fields to `rootly_alerts_source`
+- Add alert deduplication fields to `rootly_alerts_source` (#127)
+
+### Changed
+
+- Updated generator (#124)
+- Removed package.lock as it conflicts with yarn.lock (#125)
 
 ## [4.2.0] -- 2025-09-25
 
