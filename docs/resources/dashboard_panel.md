@@ -2,12 +2,12 @@
 page_title: "Resource rootly_dashboard_panel - terraform-provider-rootly"
 subcategory:
 description: |-
-    Manages dashboard_panels.
+    
 ---
 
 # Resource (rootly_dashboard_panel)
 
-Manages dashboard_panels.
+
 
 ## Example Usage
 
@@ -48,8 +48,8 @@ resource "rootly_dashboard_panel" "incidents_by_severity" {
 
 ### Required
 
-- `dashboard_id` (String) The id of the parent dashboard
-- `params` (Block List, Min: 1, Max: 1) The params JSON of the dashboard_panel. See rootly API docs for schema. (see [below for nested schema](#nestedblock--params))
+- `dashboard_id` (String) The panel dashboard
+- `params` (Block List, Min: 1, Max: 1) (see [below for nested schema](#nestedblock--params))
 
 ### Optional
 
@@ -63,25 +63,30 @@ resource "rootly_dashboard_panel" "incidents_by_severity" {
 <a id="nestedblock--params"></a>
 ### Nested Schema for `params`
 
-Required:
+Optional:
 
-- `display` (String)
+- `datalabels` (Block List, Max: 1) (see [below for nested schema](#nestedblock--params--datalabels))
+- `datasets` (Block List) (see [below for nested schema](#nestedblock--params--datasets))
+- `description` (String)
+- `display` (String) Value must be one of `line_chart`, `line_stepped_chart`, `column_chart`, `stacked_column_chart`, `monitoring_chart`, `pie_chart`, `table`, `aggregate_value`.
+- `legend` (Block List, Max: 1) (see [below for nested schema](#nestedblock--params--legend))
+- `table_fields` (List of String)
+
+<a id="nestedblock--params--datalabels"></a>
+### Nested Schema for `params.datalabels`
 
 Optional:
 
-- `datasets` (Block List) (see [below for nested schema](#nestedblock--params--datasets))
-- `legend` (Block List, Max: 1) (see [below for nested schema](#nestedblock--params--legend))
+- `enabled` (Boolean)
+
 
 <a id="nestedblock--params--datasets"></a>
 ### Nested Schema for `params.datasets`
 
-Required:
-
-- `collection` (String)
-
 Optional:
 
 - `aggregate` (Block List, Max: 1) (see [below for nested schema](#nestedblock--params--datasets--aggregate))
+- `collection` (String) Value must be one of `alerts`, `incidents`, `incident_post_mortems`, `incident_action_items`, `users`.
 - `filter` (Block List) (see [below for nested schema](#nestedblock--params--datasets--filter))
 - `group_by` (String)
 - `name` (String)
@@ -89,32 +94,29 @@ Optional:
 <a id="nestedblock--params--datasets--aggregate"></a>
 ### Nested Schema for `params.datasets.aggregate`
 
-Required:
+Optional:
 
-- `cumulative` (Boolean)
+- `cumulative` (Boolean) Value must be one of true or false
 - `key` (String)
-- `operation` (String)
+- `operation` (String) Value must be one of `count`, `sum`, `average`.
 
 
 <a id="nestedblock--params--datasets--filter"></a>
 ### Nested Schema for `params.datasets.filter`
 
-Required:
-
-- `operation` (String)
-
 Optional:
 
+- `operation` (String) Value must be one of `and`, `or`.
 - `rules` (Block List) (see [below for nested schema](#nestedblock--params--datasets--filter--rules))
 
 <a id="nestedblock--params--datasets--filter--rules"></a>
 ### Nested Schema for `params.datasets.filter.rules`
 
-Required:
+Optional:
 
-- `condition` (String)
+- `condition` (String) Value must be one of `=`, `!=`, `>=`, `<=`, `exists`, `not_exists`, `contains`, `not_contains`, `assigned`, `unassigned`.
 - `key` (String)
-- `operation` (String)
+- `operation` (String) Value must be one of `and`, `or`.
 - `value` (String)
 
 
@@ -123,9 +125,9 @@ Required:
 <a id="nestedblock--params--legend"></a>
 ### Nested Schema for `params.legend`
 
-Required:
+Optional:
 
-- `groups` (String)
+- `groups` (String) Value must be one of `all`, `charted`.
 
 
 

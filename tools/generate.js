@@ -9,7 +9,8 @@ const dataSourceTpl = require("./generate-data-source-tpl");
 const resourceTpl = require("./generate-resource-tpl");
 const workflowTpl = require("./generate-workflow-tpl");
 const generateWorkflowTaskResources = require("./generate-tasks");
-const swagger = require(path.resolve(swaggerPath));
+const v2MigrationUtils = require("./v2-migration-utils");
+const swagger = v2MigrationUtils.SchemaMods.reduce((schema, mod) => mod(schema), require(path.resolve(swaggerPath)));
 
 const excluded = {
   dataSources: [
@@ -22,7 +23,6 @@ const excluded = {
     "catalog_entity_property",
     "custom_field_option",
     "custom_field",
-    "dashboard_panel",
     "dashboard",
     "incident_action_item",
     "incident_custom_field_selection",
@@ -57,7 +57,6 @@ const excluded = {
     "catalog_entity_property",
     "custom_field_option",
     "custom_field",
-    "dashboard_panel",
     "dashboard",
     "escalation_path",
     "incident_action_item",
@@ -159,7 +158,7 @@ function generateReadOnlyClient(name) {
     collectionSchema.parameters &&
     collectionSchema.parameters[0] &&
     collectionSchema.parameters[0].name;
-  const code = clientReadOnlyTpl(name, resourceSchema(name), pathIdField, hasIncludeParam(name));
+  const code = clientReadOnlyTpl(name, resourceSchema(name), pathIdField, hasQueryParam(name));
   fs.writeFileSync(
     path.resolve(__dirname, "..", "client", `${inflect.pluralize(name)}.go`),
     code
@@ -173,7 +172,7 @@ function generateClient(name) {
     collectionSchema.parameters &&
     collectionSchema.parameters[0] &&
     collectionSchema.parameters[0].name;
-  const code = clientTpl(name, resourceSchema(name), pathIdField, hasIncludeParam(name));
+  const code = clientTpl(name, resourceSchema(name), pathIdField, hasQueryParam(name));
   fs.writeFileSync(
     path.resolve(__dirname, "..", "client", `${inflect.pluralize(name)}.go`),
     code
@@ -327,7 +326,7 @@ function collectionPathSchema(name) {
     .map((url) => swagger.paths[url])[0];
 }
 
-function hasIncludeParam(name) {
+function hasQueryParam(name) {
   const paramsSchema = Object.keys(swagger.paths)
     .filter((url) => {
       const get = swagger.paths[url].get;
@@ -341,5 +340,5 @@ function hasIncludeParam(name) {
 
   return paramsSchema &&
     paramsSchema.parameters &&
-    paramsSchema.parameters.some((param) => param.name === "include");
+    paramsSchema.parameters.some((param) => param.in === "query");
 }
