@@ -38,7 +38,7 @@ func resourceWorkflowCustomFieldSelection() *schema.Resource {
 			},
 
 			"custom_field_id": &schema.Schema{
-				Type:        schema.TypeInt,
+				Type:        schema.TypeString,
 				Computed:    false,
 				Required:    true,
 				Optional:    false,
@@ -104,7 +104,7 @@ func resourceWorkflowCustomFieldSelectionCreate(ctx context.Context, d *schema.R
 		s.WorkflowId = value.(string)
 	}
 	if value, ok := d.GetOkExists("custom_field_id"); ok {
-		s.CustomFieldId = value.(int)
+		s.CustomFieldId = value.(string)
 	}
 	if value, ok := d.GetOkExists("incident_condition"); ok {
 		s.IncidentCondition = value.(string)
@@ -163,7 +163,7 @@ func resourceWorkflowCustomFieldSelectionUpdate(ctx context.Context, d *schema.R
 		s.WorkflowId = d.Get("workflow_id").(string)
 	}
 	if d.HasChange("custom_field_id") {
-		s.CustomFieldId = d.Get("custom_field_id").(int)
+		s.CustomFieldId = d.Get("custom_field_id").(string)
 	}
 	if d.HasChange("incident_condition") {
 		s.IncidentCondition = d.Get("incident_condition").(string)
