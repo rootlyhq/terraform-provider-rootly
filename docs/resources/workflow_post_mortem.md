@@ -80,7 +80,7 @@ Optional:
 - `incident_post_mortem_condition_cause` (String) [DEPRECATED] Use incident_condition_cause instead. Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `incident_post_mortem_condition_status` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `incident_post_mortem_statuses` (List of String) Value must be one of `draft`, `published`.
-- `incident_statuses` (List of String) Value must be one of `in_triage`, `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `closed`, `cancelled`, `scheduled`, `in_progress`, `completed`.
+- `incident_statuses` (List of String) Value must be one of `in_triage`, `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `closed`, `cancelled`, `planning`, `scheduled`, `in_progress`, `verifying`, `completed`.
 - `incident_visibilities` (List of String)
 - `trigger_type` (String) Value must be one off `post_mortem`.
 - `triggers` (List of String) Actions that trigger the workflow. One of custom_fields.<slug>.updated, post_mortem_created, post_mortem_updated, status_updated, slack_command
