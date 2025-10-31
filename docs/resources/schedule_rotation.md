@@ -205,13 +205,10 @@ Optional:
 <a id="nestedblock--schedule_rotation_members"></a>
 ### Nested Schema for `schedule_rotation_members`
 
-Required:
+Optional:
 
 - `member_id` (String) ID of the member
 - `member_type` (String) Type of member. Value must be one of `Schedule` or `User`.
-
-Optional:
-
 - `position` (Number) Position of the member in rotation
 
 ## Import

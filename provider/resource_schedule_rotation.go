@@ -161,7 +161,7 @@ func resourceScheduleRotation() *schema.Resource {
 
 			"schedule_rotation_members": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         false,
+				Computed:         true,
 				Required:         false,
 				Optional:         true,
 				Sensitive:        false,
@@ -173,9 +173,9 @@ func resourceScheduleRotation() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"member_id": &schema.Schema{
 							Type:        schema.TypeString,
-							Computed:    false,
-							Required:    true,
-							Optional:    false,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
 							Sensitive:   false,
 							ForceNew:    false,
 							WriteOnly:   false,
@@ -183,9 +183,9 @@ func resourceScheduleRotation() *schema.Resource {
 						},
 						"member_type": &schema.Schema{
 							Type:         schema.TypeString,
-							Computed:     false,
-							Required:     true,
-							Optional:     false,
+							Computed:     true,
+							Required:     false,
+							Optional:     true,
 							Sensitive:    false,
 							ForceNew:     false,
 							WriteOnly:    false,
@@ -295,7 +295,25 @@ func resourceScheduleRotationRead(ctx context.Context, d *schema.ResourceData, m
 	d.Set("time_zone", item.TimeZone)
 	d.Set("start_time", item.StartTime)
 	d.Set("end_time", item.EndTime)
-	d.Set("schedule_rotation_members", item.ScheduleRotationMembers)
+	if item.ScheduleRotationMembers != nil {
+		processed_items_schedule_rotation_members := make([]map[string]interface{}, 0)
+
+		for _, c := range item.ScheduleRotationMembers {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processed_item_schedule_rotation_members := map[string]interface{}{
+					"member_id":   rawItem["member_id"],
+					"member_type": rawItem["member_type"],
+					"position":    rawItem["position"],
+				}
+				processed_items_schedule_rotation_members = append(processed_items_schedule_rotation_members, processed_item_schedule_rotation_members)
+			}
+		}
+
+		d.Set("schedule_rotation_members", processed_items_schedule_rotation_members)
+	} else {
+		d.Set("schedule_rotation_members", nil)
+	}
 
 	// Convert any numeric values to strings for schedule_rotationable_attributes
 	if item.ScheduleRotationableAttributes != nil {

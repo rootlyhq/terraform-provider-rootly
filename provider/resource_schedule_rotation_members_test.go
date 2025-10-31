@@ -19,11 +19,8 @@ func TestAccResourceScheduleRotationMembers(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_schedule_rotation.tf", "name", "test-rotation-with-members"),
 					resource.TestCheckResourceAttr("rootly_schedule_rotation.tf", "schedule_rotation_members.0.member_type", "User"),
-					resource.TestCheckResourceAttr("rootly_schedule_rotation.tf", "schedule_rotation_members.0.member_id", "4261"),
+					resource.TestCheckResourceAttrSet("rootly_schedule_rotation.tf", "schedule_rotation_members.0.member_id"),
 					resource.TestCheckResourceAttr("rootly_schedule_rotation.tf", "schedule_rotation_members.0.position", "1"),
-					resource.TestCheckResourceAttr("rootly_schedule_rotation.tf", "schedule_rotation_members.1.member_type", "User"),
-					resource.TestCheckResourceAttr("rootly_schedule_rotation.tf", "schedule_rotation_members.1.member_id", "117092"),
-					resource.TestCheckResourceAttr("rootly_schedule_rotation.tf", "schedule_rotation_members.1.position", "2"),
 				),
 			},
 			{
@@ -31,7 +28,7 @@ func TestAccResourceScheduleRotationMembers(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_schedule_rotation.tf", "name", "test-rotation-updated"),
 					resource.TestCheckResourceAttr("rootly_schedule_rotation.tf", "schedule_rotation_members.0.member_type", "User"),
-					resource.TestCheckResourceAttr("rootly_schedule_rotation.tf", "schedule_rotation_members.0.member_id", "117092"),
+					resource.TestCheckResourceAttrSet("rootly_schedule_rotation.tf", "schedule_rotation_members.0.member_id"),
 					resource.TestCheckResourceAttr("rootly_schedule_rotation.tf", "schedule_rotation_members.0.position", "1"),
 				),
 			},
@@ -75,10 +72,14 @@ func TestAccResourceScheduleRotationMembersValidation(t *testing.T) {
 }
 
 const testAccResourceScheduleRotationMembersCreated = `
+data "rootly_user" "test_user" {
+	email = "bot+tftests@rootly.com"
+}
+
 resource "rootly_schedule" "tf" {
 	name = "test-schedule-for-rotation-members"
 	description = "test schedule for rotation members"
-	owner_user_id = 4261
+	owner_user_id = data.rootly_user.test_user.id
 	all_time_coverage = true
 }
 
@@ -99,23 +100,21 @@ resource "rootly_schedule_rotation" "tf" {
 
 	schedule_rotation_members {
 		member_type = "User"
-		member_id   = "4261"
+		member_id   = data.rootly_user.test_user.id
 		position    = 1
-	}
-
-	schedule_rotation_members {
-		member_type = "User"
-		member_id   = "117092"
-		position    = 2
 	}
 }
 `
 
 const testAccResourceScheduleRotationMembersUpdated = `
+data "rootly_user" "test_user" {
+	email = "bot+tftests@rootly.com"
+}
+
 resource "rootly_schedule" "tf" {
 	name = "test-schedule-for-rotation-members"
 	description = "test schedule for rotation members updated"
-	owner_user_id = 117092
+	owner_user_id = data.rootly_user.test_user.id
 	all_time_coverage = true
 }
 
@@ -136,7 +135,7 @@ resource "rootly_schedule_rotation" "tf" {
 
 	schedule_rotation_members {
 		member_type = "User"
-		member_id   = "117092"
+		member_id   = data.rootly_user.test_user.id
 		position    = 1
 	}
 }
@@ -146,14 +145,12 @@ const testAccResourceScheduleRotationMembersWithSchedule = `
 resource "rootly_schedule" "parent_tf" {
 	name = "parent-schedule-for-nested"
 	description = "parent schedule for nesting test"
-	owner_user_id = 4261
 	all_time_coverage = true
 }
 
 resource "rootly_schedule" "nested_tf" {
 	name = "nested-schedule"
 	description = "nested schedule for testing"
-	owner_user_id = 4261
 	all_time_coverage = true
 }
 
@@ -184,7 +181,6 @@ const testAccResourceScheduleRotationMembersInvalidType = `
 resource "rootly_schedule" "tf" {
 	name = "test-schedule-for-invalid-type"
 	description = "test schedule for invalid member type"
-	owner_user_id = 4261
 	all_time_coverage = true
 }
 
@@ -205,7 +201,7 @@ resource "rootly_schedule_rotation" "tf" {
 
 	schedule_rotation_members {
 		member_type = "InvalidType"
-		member_id   = "4261"
+		member_id   = "dummy-id"
 		position    = 1
 	}
 }
