@@ -13,7 +13,7 @@ import (
 type WorkflowCustomFieldSelection struct {
 	ID                string        `jsonapi:"primary,workflow_custom_field_selections"`
 	WorkflowId        string        `jsonapi:"attr,workflow_id,omitempty"`
-	CustomFieldId     int           `jsonapi:"attr,custom_field_id,omitempty"`
+	CustomFieldId     string        `jsonapi:"attr,custom_field_id,omitempty"`
 	IncidentCondition string        `jsonapi:"attr,incident_condition,omitempty"`
 	Values            []interface{} `jsonapi:"attr,values,omitempty"`
 	SelectedOptionIds []interface{} `jsonapi:"attr,selected_option_ids,omitempty"`

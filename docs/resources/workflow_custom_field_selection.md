@@ -16,7 +16,7 @@ description: |-
 
 ### Required
 
-- `custom_field_id` (Number) The custom field for this selection
+- `custom_field_id` (String) The custom field UUID for this selection
 
 ### Optional
 
