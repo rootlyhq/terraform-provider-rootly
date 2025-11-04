@@ -16,7 +16,7 @@ description: |-
 When configuring alert sources, the following alert source fields are **required** and **cannot be deleted**:
 - `title` - Alert title field
 - `description` - Alert description field
-- `external_url` - Alert source URL/External URL field
+- `external_url` - Alert source URL/external URL field
 
 **Important:** You must use **data sources** (not resources) to reference these required alert fields, as they cannot be modified or deleted by users. See the example below for the correct implementation.
 
