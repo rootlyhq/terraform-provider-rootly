@@ -1,0 +1,54 @@
+---
+page_title: "{{.Type}} {{.Name}} - {{.ProviderName}}"
+subcategory:
+description: |-
+  {{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Type}} ({{.Name}})
+
+{{ .Description | trimspace }}
+
+## Important Notes
+
+### Required Alert Source Fields
+
+When configuring alert source fields, the following fields are **required** and **cannot be deleted**:
+- `title` - Alert title field
+- `description` - Alert description field
+- `external_url` - Alert external URL field
+
+**Important:** You must use **data sources** (not resources) to reference these required alert fields, as they cannot be modified or deleted by users.
+
+{{ if .HasExample -}}
+## Example Usage
+
+{{ codefile "shell" .ExampleFile }}
+{{- end }}
+
+{{ .SchemaMarkdown | trimspace }}
+
+## Import
+
+{{.Name}} can be imported using the [`import` command](https://developer.hashicorp.com/terraform/cli/commands/import).
+
+```sh
+terraform import {{.Name}}.primary a816421c-6ceb-481a-87c4-585e47451f24
+```
+
+Or using an [`import` block](https://developer.hashicorp.com/terraform/language/import).
+
+```terraform
+import {
+  to = {{.Name}}.primary
+  id = "a816421c-6ceb-481a-87c4-585e47451f24"
+}
+```
+
+Locate the resource id in the web app, or retrieve it by listing resources through the API if it's not visible in the web app.
+
+HCL can be generated from the import block using the `-generate-config-out` flag.
+
+```sh
+terraform plan -generate-config-out=generated.tf
+```
