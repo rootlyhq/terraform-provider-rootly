@@ -107,10 +107,34 @@ resource "rootly_alert_urgency" "test" {
   position = 1
 }
 
+data "rootly_alert_field" "title_field" {
+  kind = "title"
+}
+
+data "rootly_alert_field" "description_field" {
+  kind = "description"
+}
+
+data "rootly_alert_field" "source_link_field" {
+  kind = "external_url"
+}
+
 resource "rootly_alerts_source" "test" {
   name = "Test Alerts Source"
   source_type = "generic_webhook"
   owner_group_ids = [rootly_team.test.id]
+
+  alert_source_fields_attributes {
+    alert_field_id = data.rootly_alert_field.title_field.id
+  }
+
+  alert_source_fields_attributes {
+    alert_field_id = data.rootly_alert_field.description_field.id
+  }
+
+  alert_source_fields_attributes {
+    alert_field_id = data.rootly_alert_field.source_link_field.id
+  }
 
   alert_source_urgency_rules_attributes {
     alert_urgency_id = rootly_alert_urgency.test.id
@@ -145,10 +169,34 @@ resource "rootly_alert_urgency" "test" {
   position = 1
 }
 
+data "rootly_alert_field" "title_field" {
+  kind = "title"
+}
+
+data "rootly_alert_field" "description_field" {
+  kind = "description"
+}
+
+data "rootly_alert_field" "source_link_field" {
+  kind = "external_url"
+}
+
 resource "rootly_alerts_source" "test" {
   name = "Test Alerts Source"
   source_type = "generic_webhook"
   owner_group_ids = [rootly_team.test.id]
+
+  alert_source_fields_attributes {
+    alert_field_id = data.rootly_alert_field.title_field.id
+  }
+
+  alert_source_fields_attributes {
+    alert_field_id = data.rootly_alert_field.description_field.id
+  }
+
+  alert_source_fields_attributes {
+    alert_field_id = data.rootly_alert_field.source_link_field.id
+  }
 
   alert_source_urgency_rules_attributes {
     alert_urgency_id = rootly_alert_urgency.test.id
@@ -188,10 +236,34 @@ resource "rootly_alert_urgency" "test" {
   position = 1
 }
 
+data "rootly_alert_field" "title_field" {
+  kind = "title"
+}
+
+data "rootly_alert_field" "description_field" {
+  kind = "description"
+}
+
+data "rootly_alert_field" "source_link_field" {
+  kind = "external_url"
+}
+
 resource "rootly_alerts_source" "test" {
   name = "Test Alerts Source"
   source_type = "generic_webhook"
   owner_group_ids = [rootly_team.test_primary.id, rootly_team.test_secondary.id]
+
+  alert_source_fields_attributes {
+    alert_field_id = data.rootly_alert_field.title_field.id
+  }
+
+  alert_source_fields_attributes {
+    alert_field_id = data.rootly_alert_field.description_field.id
+  }
+
+  alert_source_fields_attributes {
+    alert_field_id = data.rootly_alert_field.source_link_field.id
+  }
 
   alert_source_urgency_rules_attributes {
     alert_urgency_id = rootly_alert_urgency.test.id
