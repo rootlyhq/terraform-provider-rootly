@@ -22,6 +22,10 @@ func TestAccResourceAlertRoute(t *testing.T) {
 					resource.TestCheckResourceAttr(resName, "name", "Test Alert Route"),
 					resource.TestCheckResourceAttr(resName, "enabled", "true"),
 					resource.TestCheckResourceAttrSet(resName, "id"),
+					resource.TestCheckResourceAttr(resName, "rules.#", "1"),
+					resource.TestCheckResourceAttr(resName, "rules.0.name", "High Priority Rule"),
+					resource.TestCheckResourceAttr(resName, "rules.0.position", "1"),
+					resource.TestCheckResourceAttr(resName, "rules.0.fallback_rule", "false"),
 				),
 			},
 			{
@@ -30,6 +34,10 @@ func TestAccResourceAlertRoute(t *testing.T) {
 					resource.TestCheckResourceAttr(resName, "name", "Updated Alert Route"),
 					resource.TestCheckResourceAttr(resName, "enabled", "true"),
 					resource.TestCheckResourceAttrSet(resName, "id"),
+					resource.TestCheckResourceAttr(resName, "rules.#", "1"),
+					resource.TestCheckResourceAttr(resName, "rules.0.name", "Updated High Priority Rule"),
+					resource.TestCheckResourceAttr(resName, "rules.0.position", "1"),
+					resource.TestCheckResourceAttr(resName, "rules.0.fallback_rule", "false"),
 				),
 			},
       {
@@ -101,6 +109,11 @@ resource "rootly_team" "test" {
   description = "Test team for alert routing"
 }
 
+resource "rootly_service" "test" {
+  name = "Test Service"
+  description = "Test service for alert routing"
+}
+
 resource "rootly_alert_urgency" "test" {
   name = "Test Alert Urgency"
   description = "Test urgency for alerts"
@@ -154,6 +167,28 @@ resource "rootly_alert_route" "test" {
   enabled = true
   alerts_source_ids = [rootly_alerts_source.test.id]
   owning_team_ids = [rootly_team.test.id]
+
+  rules {
+    name = "High Priority Rule"
+    position = 1
+    fallback_rule = false
+
+    destinations {
+      target_type = "Service"
+      target_id = rootly_service.test.id
+    }
+
+    condition_groups {
+      position = 1
+
+      conditions {
+        property_field_condition_type = "is_one_of"
+        property_field_name = "$.severity"
+        property_field_type = "payload"
+        property_field_values = ["critical"]
+      }
+    }
+  }
 }
 `
 
@@ -161,6 +196,11 @@ const testAccResourceAlertRouteUpdate = `
 resource "rootly_team" "test" {
   name = "Test Team"
   description = "Test team for alert routing"
+}
+
+resource "rootly_service" "test" {
+  name = "Test Service"
+  description = "Test service for alert routing"
 }
 
 resource "rootly_alert_urgency" "test" {
@@ -216,6 +256,28 @@ resource "rootly_alert_route" "test" {
   enabled = true
   alerts_source_ids = [rootly_alerts_source.test.id]
   owning_team_ids = [rootly_team.test.id]
+
+  rules {
+    name = "Updated High Priority Rule"
+    position = 1
+    fallback_rule = false
+
+    destinations {
+      target_type = "Service"
+      target_id = rootly_service.test.id
+    }
+
+    condition_groups {
+      position = 1
+
+      conditions {
+        property_field_condition_type = "contains"
+        property_field_name = "$.title"
+        property_field_type = "payload"
+        property_field_value = "error"
+      }
+    }
+  }
 }
 `
 
