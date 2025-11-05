@@ -22,7 +22,7 @@ func TestAccResourceAlertRoute(t *testing.T) {
 					resource.TestCheckResourceAttr(resName, "name", "Test Alert Route"),
 					resource.TestCheckResourceAttr(resName, "enabled", "true"),
 					resource.TestCheckResourceAttrSet(resName, "id"),
-				)
+				),
 			},
 			{
 				Config: testAccResourceAlertRouteUpdate,
@@ -30,7 +30,7 @@ func TestAccResourceAlertRoute(t *testing.T) {
 					resource.TestCheckResourceAttr(resName, "name", "Updated Alert Route"),
 					resource.TestCheckResourceAttr(resName, "enabled", "true"),
 					resource.TestCheckResourceAttrSet(resName, "id"),
-				)
+				),
 			},
       {
 				ResourceName: resName,
@@ -57,7 +57,7 @@ func TestAccResourceAlertRouteWithMultipleTeams(t *testing.T) {
 					resource.TestCheckResourceAttr(resName, "name", "Multi Team Alert Route"),
 					resource.TestCheckResourceAttr(resName, "enabled", "true"),
 					resource.TestCheckResourceAttrSet(resName, "id"),
-				)
+				),
 			},
       {
 				ResourceName: resName,
@@ -84,7 +84,7 @@ func TestAccResourceAlertRouteDisabled(t *testing.T) {
 					resource.TestCheckResourceAttr(resName, "name", "Disabled Alert Route"),
 					resource.TestCheckResourceAttr(resName, "enabled", "false"),
 					resource.TestCheckResourceAttrSet(resName, "id"),
-				)
+				),
 			},
       {
 				ResourceName: resName,
