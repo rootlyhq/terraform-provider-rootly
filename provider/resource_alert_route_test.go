@@ -7,6 +7,8 @@ import (
 )
 
 func TestAccResourceAlertRoute(t *testing.T) {
+  resName := "rootly_alert_route.test"
+
 	resource.UnitTest(t, resource.TestCase{
 		IsUnitTest: false,
 		PreCheck: func() {
@@ -17,26 +19,31 @@ func TestAccResourceAlertRoute(t *testing.T) {
 			{
 				Config: testAccResourceAlertRouteCreate,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_alert_route.test", "name", "Test Alert Route"),
-					resource.TestCheckResourceAttr("rootly_alert_route.test", "enabled", "true"),
-					resource.TestCheckResourceAttrSet("rootly_alert_route.test", "id"),
-				),
-				ExpectNonEmptyPlan: true,
+					resource.TestCheckResourceAttr(resName, "name", "Test Alert Route"),
+					resource.TestCheckResourceAttr(resName, "enabled", "true"),
+					resource.TestCheckResourceAttrSet(resName, "id"),
+				)
 			},
 			{
 				Config: testAccResourceAlertRouteUpdate,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_alert_route.test", "name", "Updated Alert Route"),
-					resource.TestCheckResourceAttr("rootly_alert_route.test", "enabled", "true"),
-					resource.TestCheckResourceAttrSet("rootly_alert_route.test", "id"),
-				),
-				ExpectNonEmptyPlan: true,
+					resource.TestCheckResourceAttr(resName, "name", "Updated Alert Route"),
+					resource.TestCheckResourceAttr(resName, "enabled", "true"),
+					resource.TestCheckResourceAttrSet(resName, "id"),
+				)
+			},
+      {
+				ResourceName: resName,
+				ImportState: true,
+				ImportStateVerify: true,
 			},
 		},
 	})
 }
 
 func TestAccResourceAlertRouteWithMultipleTeams(t *testing.T) {
+  resName := "rootly_alert_route.multi_team"
+
 	resource.UnitTest(t, resource.TestCase{
 		IsUnitTest: false,
 		PreCheck: func() {
@@ -47,17 +54,23 @@ func TestAccResourceAlertRouteWithMultipleTeams(t *testing.T) {
 			{
 				Config: testAccResourceAlertRouteWithMultipleTeams,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_alert_route.multi_team", "name", "Multi Team Alert Route"),
-					resource.TestCheckResourceAttr("rootly_alert_route.multi_team", "enabled", "true"),
-					resource.TestCheckResourceAttrSet("rootly_alert_route.multi_team", "id"),
-				),
-				ExpectNonEmptyPlan: true,
+					resource.TestCheckResourceAttr(resName, "name", "Multi Team Alert Route"),
+					resource.TestCheckResourceAttr(resName, "enabled", "true"),
+					resource.TestCheckResourceAttrSet(resName, "id"),
+				)
+			},
+      {
+				ResourceName: resName,
+				ImportState: true,
+				ImportStateVerify: true,
 			},
 		},
 	})
 }
 
 func TestAccResourceAlertRouteDisabled(t *testing.T) {
+  resName := "rootly_alert_route.disabled"
+
 	resource.UnitTest(t, resource.TestCase{
 		IsUnitTest: false,
 		PreCheck: func() {
@@ -68,11 +81,15 @@ func TestAccResourceAlertRouteDisabled(t *testing.T) {
 			{
 				Config: testAccResourceAlertRouteDisabled,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_alert_route.disabled", "name", "Disabled Alert Route"),
-					resource.TestCheckResourceAttr("rootly_alert_route.disabled", "enabled", "false"),
-					resource.TestCheckResourceAttrSet("rootly_alert_route.disabled", "id"),
-				),
-				ExpectNonEmptyPlan: true,
+					resource.TestCheckResourceAttr(resName, "name", "Disabled Alert Route"),
+					resource.TestCheckResourceAttr(resName, "enabled", "false"),
+					resource.TestCheckResourceAttrSet(resName, "id"),
+				)
+			},
+      {
+				ResourceName: resName,
+				ImportState: true,
+				ImportStateVerify: true,
 			},
 		},
 	})
