@@ -109,9 +109,9 @@ resource "rootly_team" "test" {
   description = "Test team for alert routing"
 }
 
-resource "rootly_service" "test" {
-  name = "Test Service"
-  description = "Test service for alert routing"
+resource "rootly_escalation_policy" "production_ep" {
+  name      = "Production Escalation"
+  group_ids = [rootly_team.test.id]
 }
 
 resource "rootly_alert_urgency" "test" {
@@ -174,8 +174,8 @@ resource "rootly_alert_route" "test" {
     fallback_rule = false
 
     destinations {
-      target_type = "Service"
-      target_id = rootly_service.test.id
+      target_type = "EscalationPolicy"
+      target_id = rootly_escalation_policy.production_ep.id
     }
 
     condition_groups {
@@ -198,9 +198,9 @@ resource "rootly_team" "test" {
   description = "Test team for alert routing"
 }
 
-resource "rootly_service" "test" {
-  name = "Test Service"
-  description = "Test service for alert routing"
+resource "rootly_escalation_policy" "production_ep" {
+  name      = "Production Escalation"
+  group_ids = [rootly_team.test.id]
 }
 
 resource "rootly_alert_urgency" "test" {
@@ -263,8 +263,8 @@ resource "rootly_alert_route" "test" {
     fallback_rule = false
 
     destinations {
-      target_type = "Service"
-      target_id = rootly_service.test.id
+      target_type = "EscalationPolicy"
+      target_id = rootly_escalation_policy.production_ep.id
     }
 
     condition_groups {
