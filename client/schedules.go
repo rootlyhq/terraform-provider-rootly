@@ -3,9 +3,8 @@
 package client
 
 import (
-	"reflect"
-
 	"fmt"
+	"reflect"
 
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
@@ -16,7 +15,8 @@ type Schedule struct {
 	Name            string                 `jsonapi:"attr,name,omitempty"`
 	Description     string                 `jsonapi:"attr,description,omitempty"`
 	AllTimeCoverage *bool                  `jsonapi:"attr,all_time_coverage,omitempty"`
-	SlackUserGroup  map[string]interface{} `jsonapi:"attr,slack_user_group"`
+	SlackUserGroup  map[string]interface{} `jsonapi:"attr,slack_user_group,omitempty"`
+	SlackChannel    map[string]interface{} `jsonapi:"attr,slack_channel,omitempty"`
 	OwnerGroupIds   []interface{}          `jsonapi:"attr,owner_group_ids,omitempty"`
 	OwnerUserId     int                    `jsonapi:"attr,owner_user_id,omitempty"`
 }
@@ -53,7 +53,7 @@ func (c *Client) CreateSchedule(d *Schedule) (*Schedule, error) {
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		return nil, fmt.Errorf("Failed to perform request to create schedule: %w", err)
+		return nil, fmt.Errorf("Failed to perform request to create schedule: %s", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(Schedule))

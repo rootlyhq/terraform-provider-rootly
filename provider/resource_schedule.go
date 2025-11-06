@@ -87,6 +87,16 @@ func resourceSchedule() *schema.Resource {
 				Description: "Map must contain two fields, `id` and `name`. Synced slack group of the schedule",
 			},
 
+			"slack_channel": &schema.Schema{
+				Type: schema.TypeMap,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Default:     map[string]interface{}{},
+				Optional:    true,
+				Description: "Map must contain two fields, `id` and `name`. Synced slack channel of the schedule",
+			},
+
 			"owner_group_ids": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -136,6 +146,16 @@ func resourceScheduleCreate(ctx context.Context, d *schema.ResourceData, meta in
 	} else {
 		s.SlackUserGroup = map[string]interface{}{}
 	}
+	if value, ok := d.GetOkExists("slack_channel"); ok {
+		slackChannel := value.(map[string]interface{})
+		if len(slackChannel) == 0 {
+			s.SlackChannel = map[string]interface{}{}
+		} else {
+			s.SlackChannel = slackChannel
+		}
+	} else {
+		s.SlackChannel = map[string]interface{}{}
+	}
 	if value, ok := d.GetOkExists("owner_group_ids"); ok {
 		s.OwnerGroupIds = value.([]interface{})
 	}
@@ -175,6 +195,7 @@ func resourceScheduleRead(ctx context.Context, d *schema.ResourceData, meta inte
 	d.Set("description", item.Description)
 	d.Set("all_time_coverage", item.AllTimeCoverage)
 	d.Set("slack_user_group", item.SlackUserGroup)
+	d.Set("slack_channel", item.SlackChannel)
 	d.Set("owner_group_ids", item.OwnerGroupIds)
 	d.Set("owner_user_id", item.OwnerUserId)
 
@@ -206,6 +227,18 @@ func resourceScheduleUpdate(ctx context.Context, d *schema.ResourceData, meta in
 			}
 		} else {
 			s.SlackUserGroup = map[string]interface{}{}
+		}
+	}
+	if d.HasChange("slack_channel") {
+		if value := d.Get("slack_channel"); value != nil {
+			slackChannel := value.(map[string]interface{})
+			if len(slackChannel) == 0 {
+				s.SlackChannel = map[string]interface{}{}
+			} else {
+				s.SlackChannel = slackChannel
+			}
+		} else {
+			s.SlackChannel = map[string]interface{}{}
 		}
 	}
 	if d.HasChange("owner_group_ids") {
