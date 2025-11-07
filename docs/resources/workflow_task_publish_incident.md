@@ -72,7 +72,7 @@ Required:
 
 - `incident` (Map of String) Map must contain two fields, `id` and `name`.
 - `public_title` (String)
-- `status` (String) Value must be one of `investigating`, `identified`, `monitoring`, `resolved`, `scheduled`, `in_progress`, `completed`.
+- `status` (String) Value must be one of `investigating`, `identified`, `monitoring`, `resolved`, `planning`, `scheduled`, `in_progress`, `verifying`, `completed`, `cancelled`.
 - `status_page_id` (String)
 
 Optional:
