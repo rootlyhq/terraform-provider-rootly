@@ -120,6 +120,7 @@ resource "rootly_schedule_rotation_user" "jane" {
 - `description` (String) The description of the schedule
 - `owner_group_ids` (List of String) The owning teams for this schedules.
 - `owner_user_id` (Number) ID of user assigned as owner of the schedule
+- `slack_channel` (Map of String) Map must contain two fields, `id` and `name`. Synced slack channel of the schedule
 - `slack_user_group` (Map of String) Map must contain two fields, `id` and `name`. Synced slack group of the schedule
 
 ### Read-Only
