@@ -22,6 +22,11 @@ func Expand(i any, s *schema.Schema) (any, error) {
 			return nil, errors.New("not a map")
 		}
 
+		// If it's an empty object {}, assume nil
+		if len(ii) == 0 {
+			return nil, nil
+		}
+
 		res := s.Elem.(*schema.Resource)
 		m := make(map[string]any, len(res.Schema))
 		for k, s := range res.Schema {
