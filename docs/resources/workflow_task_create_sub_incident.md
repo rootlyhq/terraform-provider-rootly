@@ -1,13 +1,13 @@
 ---
-page_title: "Resource rootly_workflow_task_create_incident - terraform-provider-rootly"
+page_title: "Resource rootly_workflow_task_create_sub_incident - terraform-provider-rootly"
 subcategory: Workflow Tasks
 description: |-
-    Manages workflow create_incident task.
+    Manages workflow create_sub_incident task.
 ---
 
-# Resource (rootly_workflow_task_create_incident)
+# Resource (rootly_workflow_task_create_sub_incident)
 
-Manages workflow create_incident task.
+Manages workflow create_sub_incident task.
 
 
 
@@ -35,34 +35,26 @@ Manages workflow create_incident task.
 
 Required:
 
-- `title` (String) The incident title
+- `title` (String) The sub incident title
 
 Optional:
 
-- `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON. Use 'services', 'functionalities', or 'groups' keys with arrays of names/slugs for name/slug lookup
-- `environment_ids` (List of String)
-- `functionality_ids` (List of String) Array of functionality UUIDs
-- `group_ids` (List of String) Array of group/team UUIDs
-- `incident_type_ids` (List of String)
-- `private` (Boolean) Value must be one of true or false
-- `service_ids` (List of String) Array of service UUIDs
-- `severity_id` (String)
-- `summary` (String) The incident summary
+- `summary` (String) The sub incident summary
 - `task_type` (String)
 
 ## Import
 
-rootly_workflow_task_create_incident can be imported using the [`import` command](https://developer.hashicorp.com/terraform/cli/commands/import).
+rootly_workflow_task_create_sub_incident can be imported using the [`import` command](https://developer.hashicorp.com/terraform/cli/commands/import).
 
 ```sh
-terraform import rootly_workflow_task_create_incident.primary a816421c-6ceb-481a-87c4-585e47451f24
+terraform import rootly_workflow_task_create_sub_incident.primary a816421c-6ceb-481a-87c4-585e47451f24
 ```
 
 Or using an [`import` block](https://developer.hashicorp.com/terraform/language/import).
 
 ```terraform
 import {
-  to = rootly_workflow_task_create_incident.primary
+  to = rootly_workflow_task_create_sub_incident.primary
   id = "a816421c-6ceb-481a-87c4-585e47451f24"
 }
 ```
