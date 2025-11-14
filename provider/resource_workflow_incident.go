@@ -195,7 +195,7 @@ func resourceWorkflowIncident() *schema.Resource {
 							Computed:         true,
 							Required:         false,
 							Optional:         true,
-							Description:      "Value must be one of `test`, `test_sub`, `example`, `example_sub`, `normal`, `normal_sub`, `backfilled`, `scheduled`.",
+							Description:      "Value must be one of `test`, `test_sub`, `example`, `example_sub`, `normal`, `normal_sub`, `backfilled`, `scheduled`, `scheduled_sub`.",
 						},
 
 						"incident_statuses": &schema.Schema{
