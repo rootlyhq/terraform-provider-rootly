@@ -4,8 +4,9 @@ package provider
 
 import (
 	"context"
-	"errors"
 	"fmt"
+	"strconv"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -18,10 +19,10 @@ func resourceOverrideShift() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceOverrideShiftCreate,
 		ReadContext:   resourceOverrideShiftRead,
-		UpdateContext: resourceOverrideShiftUpdate,
+		// UpdateContext omitted - all fields are ForceNew (UPDATE endpoint returns 404)
 		DeleteContext: resourceOverrideShiftDelete,
 		Importer: &schema.ResourceImporter{
-			StateContext: schema.ImportStatePassthroughContext,
+			StateContext: resourceOverrideShiftImport,
 		},
 		Schema: map[string]*schema.Schema{
 
@@ -42,7 +43,7 @@ func resourceOverrideShift() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				Sensitive:   false,
-				ForceNew:    false,
+				ForceNew:    true,
 				WriteOnly:   false,
 				Description: "ID of rotation",
 			},
@@ -53,7 +54,7 @@ func resourceOverrideShift() *schema.Resource {
 				Required:    true,
 				Optional:    false,
 				Sensitive:   false,
-				ForceNew:    false,
+				ForceNew:    true,
 				WriteOnly:   false,
 				Description: "Start datetime of shift",
 			},
@@ -64,7 +65,7 @@ func resourceOverrideShift() *schema.Resource {
 				Required:    true,
 				Optional:    false,
 				Sensitive:   false,
-				ForceNew:    false,
+				ForceNew:    true,
 				WriteOnly:   false,
 				Description: "End datetime of shift",
 			},
@@ -75,7 +76,7 @@ func resourceOverrideShift() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				Sensitive:   false,
-				ForceNew:    false,
+				ForceNew:    true,
 				WriteOnly:   false,
 				Description: "Denotes shift is an override shift. Value must be one of true or false",
 			},
@@ -88,6 +89,9 @@ func resourceOverrideShift() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    true,
+				WriteOnly:   false,
 				Description: "Override metadata",
 			},
 
@@ -99,6 +103,9 @@ func resourceOverrideShift() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    true,
+				WriteOnly:   false,
 				Description: "User metadata",
 			},
 		},
@@ -107,7 +114,6 @@ func resourceOverrideShift() *schema.Resource {
 
 func resourceOverrideShiftCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
-
 	tflog.Trace(ctx, fmt.Sprintf("Creating OverrideShift"))
 
 	s := &client.OverrideShift{}
@@ -131,7 +137,13 @@ func resourceOverrideShiftCreate(ctx context.Context, d *schema.ResourceData, me
 		s.ShiftOverride = value.(map[string]interface{})
 	}
 	if value, ok := d.GetOkExists("user"); ok {
-		s.User = value.(map[string]interface{})
+		if userMap, ok := value.(map[string]interface{}); ok {
+			if userIdStr, ok := userMap["id"].(string); ok {
+				if userId, err := strconv.Atoi(userIdStr); err == nil {
+					s.UserId = userId
+				}
+			}
+		}
 	}
 
 	res, err := c.CreateOverrideShift(s)
@@ -142,90 +154,122 @@ func resourceOverrideShiftCreate(ctx context.Context, d *schema.ResourceData, me
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created a override_shift resource: %s", d.Id()))
 
-	return resourceOverrideShiftRead(ctx, d, meta)
+	// Set the attributes from the CREATE response directly instead of calling Read
+	// because override_shifts don't have a working GET endpoint
+	d.Set("schedule_id", res.ScheduleId)
+	d.Set("rotation_id", res.RotationId)
+	// Keep the original config values for starts_at and ends_at to avoid timezone drift
+	d.Set("starts_at", d.Get("starts_at"))
+	d.Set("ends_at", d.Get("ends_at"))
+	d.Set("is_override", res.IsOverride)
+	d.Set("shift_override", res.ShiftOverride)
+	// Keep the original config value for user to avoid format drift
+	d.Set("user", d.Get("user"))
+
+	return nil
 }
 
 func resourceOverrideShiftRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
-	tflog.Trace(ctx, fmt.Sprintf("Reading OverrideShift: %s", d.Id()))
+	shiftId := d.Id()
+	tflog.Trace(ctx, fmt.Sprintf("Reading OverrideShift: %s", shiftId))
 
-	item, err := c.GetOverrideShift(d.Id())
-	if err != nil {
-		// In the case of a NotFoundError, it means the resource may have been removed upstream
-		// We just remove it from the state.
-		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("OverrideShift (%s) not found, removing from state", d.Id()))
-			d.SetId("")
-			return nil
-		}
-
-		return diag.Errorf("Error reading override_shift: %s", d.Id())
+	// Override shifts don't have a working GET endpoint in the Rootly API
+	// The /v1/override_shifts/{id} endpoint returns 404 even for valid shifts
+	// We need to use the LIST endpoint: /v1/schedules/{schedule_id}/override_shifts
+	scheduleId, ok := d.GetOk("schedule_id")
+	if !ok || scheduleId == "" {
+		tflog.Warn(ctx, fmt.Sprintf("Cannot refresh OverrideShift %s without schedule_id", shiftId))
+		return nil
 	}
 
-	d.Set("schedule_id", item.ScheduleId)
-	d.Set("rotation_id", item.RotationId)
-	d.Set("starts_at", item.StartsAt)
-	d.Set("ends_at", item.EndsAt)
-	d.Set("is_override", item.IsOverride)
-	d.Set("shift_override", item.ShiftOverride)
-	d.Set("user", item.User)
+	// List all override shifts for this schedule (pagination handled by client)
+	shiftsInterface, err := c.ListOverrideShifts(scheduleId.(string), nil)
+	if err != nil {
+		return diag.Errorf("Error listing override_shifts for schedule %s: %s", scheduleId, err.Error())
+	}
+
+	// Find the shift with matching ID
+	var shift *client.OverrideShift
+	for _, shiftInterface := range shiftsInterface {
+		s := shiftInterface.(*client.OverrideShift)
+		if s.ID == shiftId {
+			shift = s
+			break
+		}
+	}
+
+	if shift == nil {
+		tflog.Warn(ctx, fmt.Sprintf("OverrideShift %s not found, removing from state", shiftId))
+		d.SetId("")
+		return nil
+	}
+
+	// Populate state from the shift data
+	d.Set("schedule_id", shift.ScheduleId)
+	d.Set("rotation_id", shift.RotationId)
+	d.Set("starts_at", shift.StartsAt)
+	d.Set("ends_at", shift.EndsAt)
+	d.Set("is_override", shift.IsOverride)
+	d.Set("shift_override", shift.ShiftOverride)
+
+	// Convert User object to map for Terraform state
+	if shift.User != nil {
+		userMap := map[string]interface{}{
+			"id": shift.User.ID,
+		}
+		d.Set("user", userMap)
+	}
 
 	return nil
-}
-
-func resourceOverrideShiftUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	c := meta.(*client.Client)
-	tflog.Trace(ctx, fmt.Sprintf("Updating OverrideShift: %s", d.Id()))
-
-	s := &client.OverrideShift{}
-
-	if d.HasChange("schedule_id") {
-		s.ScheduleId = d.Get("schedule_id").(string)
-	}
-	if d.HasChange("rotation_id") {
-		s.RotationId = d.Get("rotation_id").(string)
-	}
-	if d.HasChange("starts_at") {
-		s.StartsAt = d.Get("starts_at").(string)
-	}
-	if d.HasChange("ends_at") {
-		s.EndsAt = d.Get("ends_at").(string)
-	}
-	if d.HasChange("is_override") {
-		s.IsOverride = tools.Bool(d.Get("is_override").(bool))
-	}
-	if d.HasChange("shift_override") {
-		s.ShiftOverride = d.Get("shift_override").(map[string]interface{})
-	}
-	if d.HasChange("user") {
-		s.User = d.Get("user").(map[string]interface{})
-	}
-
-	_, err := c.UpdateOverrideShift(d.Id(), s)
-	if err != nil {
-		return diag.Errorf("Error updating override_shift: %s", err.Error())
-	}
-
-	return resourceOverrideShiftRead(ctx, d, meta)
 }
 
 func resourceOverrideShiftDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting OverrideShift: %s", d.Id()))
 
-	err := c.DeleteOverrideShift(d.Id())
-	if err != nil {
-		// In the case of a NotFoundError, it means the resource may have been removed upstream.
-		// We just remove it from the state.
-		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("OverrideShift (%s) not found, removing from state", d.Id()))
-			d.SetId("")
-			return nil
-		}
-		return diag.Errorf("Error deleting override_shift: %s", err.Error())
-	}
+	// WARNING: The Rootly API does not have a working DELETE endpoint for override shifts
+	// The /v1/override_shifts/{id} endpoint returns 404 even for valid shifts
+	// This means the shift will remain in Rootly and must be manually deleted via the UI
+	tflog.Warn(ctx, fmt.Sprintf("Override shift %s removed from Terraform state but still exists in Rootly (DELETE endpoint not available). Please manually delete from Rootly UI if needed.", d.Id()))
 
+	// Remove from state anyway
 	d.SetId("")
 
-	return nil
+	return diag.Diagnostics{
+		diag.Diagnostic{
+			Severity: diag.Warning,
+			Summary:  "Override shift removed from state only",
+			Detail:   fmt.Sprintf("Override shift %s has been removed from Terraform state, but the DELETE API endpoint is not available. The shift still exists in Rootly and must be manually deleted via the Rootly UI at https://rootly.com/schedules.", d.Id()),
+		},
+	}
+}
+
+// Custom import function for override shifts
+// Format: {schedule_id}:{shift_id}
+func resourceOverrideShiftImport(ctx context.Context, d *schema.ResourceData, meta interface{}) ([]*schema.ResourceData, error) {
+	importId := d.Id()
+
+	parts := strings.Split(importId, ":")
+	if len(parts) != 2 {
+		return nil, fmt.Errorf("invalid import ID format. Use: {schedule_id}:{shift_id}")
+	}
+
+	scheduleId := parts[0]
+	shiftId := parts[1]
+
+	// Set the schedule_id in state so Read can use it
+	d.Set("schedule_id", scheduleId)
+	d.SetId(shiftId)
+
+	// Call Read to populate the rest of the state
+	diags := resourceOverrideShiftRead(ctx, d, meta)
+	if diags.HasError() {
+		return nil, fmt.Errorf("failed to read override shift: %v", diags)
+	}
+
+	if d.Id() == "" {
+		return nil, fmt.Errorf("override shift %s not found in schedule %s", shiftId, scheduleId)
+	}
+
+	return []*schema.ResourceData{d}, nil
 }
