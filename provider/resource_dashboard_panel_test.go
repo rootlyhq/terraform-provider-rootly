@@ -104,6 +104,62 @@ func TestAccResourceDashboardPanel_UpgradeFromVersion(t *testing.T) {
 	})
 }
 
+func TestAccResourceDashboardPanel_Import(t *testing.T) {
+	resName := "rootly_dashboard_panel.foo"
+	dashboardName := acctest.RandomWithPrefix("tf-dashboard")
+
+	config := fmt.Sprintf(`
+		resource "rootly_dashboard" "foo" {
+			name = "%[1]s"
+		}
+
+		resource "rootly_dashboard_panel" "foo" {
+			dashboard_id = rootly_dashboard.foo.id
+			name = "test"
+			position {
+				x = 3
+				y = 4
+				h = 5
+				w = 6
+			}
+			params {
+				display = "line_chart"
+			}
+		}
+	`, dashboardName)
+
+	check := resource.ComposeAggregateTestCheckFunc(
+		resource.TestCheckResourceAttr(resName, "name", "test"),
+		resource.TestCheckResourceAttr(resName, "position.#", "1"),
+		resource.TestCheckResourceAttr(resName, "position.0.x", "3"),
+		resource.TestCheckResourceAttr(resName, "position.0.y", "4"),
+		resource.TestCheckResourceAttr(resName, "position.0.h", "5"),
+		resource.TestCheckResourceAttr(resName, "position.0.w", "6"),
+		resource.TestCheckResourceAttr(resName, "params.#", "1"),
+		resource.TestCheckResourceAttr(resName, "params.0.display", "line_chart"),
+		resource.TestCheckResourceAttr(resName, "params.0.legend.#", "0"),
+		resource.TestCheckResourceAttr(resName, "params.0.datasets.#", "0"),
+	)
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck: func() {
+			testAccPreCheck(t)
+		},
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: config,
+				Check:  check,
+			},
+			{
+				ResourceName:      resName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
+	})
+}
+
 func TestAccResourceDashboardPanel(t *testing.T) {
 	resName := "rootly_dashboard_panel.foo"
 
