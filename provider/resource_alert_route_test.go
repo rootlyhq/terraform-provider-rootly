@@ -7,7 +7,7 @@ import (
 )
 
 func TestAccResourceAlertRoute(t *testing.T) {
-  resName := "rootly_alert_route.test"
+	resName := "rootly_alert_route.test"
 
 	resource.UnitTest(t, resource.TestCase{
 		IsUnitTest: false,
@@ -40,9 +40,9 @@ func TestAccResourceAlertRoute(t *testing.T) {
 					resource.TestCheckResourceAttr(resName, "rules.0.fallback_rule", "false"),
 				),
 			},
-      {
-				ResourceName: resName,
-				ImportState: true,
+			{
+				ResourceName:      resName,
+				ImportState:       true,
 				ImportStateVerify: true,
 			},
 		},
@@ -50,7 +50,7 @@ func TestAccResourceAlertRoute(t *testing.T) {
 }
 
 func TestAccResourceAlertRouteWithMultipleTeams(t *testing.T) {
-  resName := "rootly_alert_route.multi_team"
+	resName := "rootly_alert_route.multi_team"
 
 	resource.UnitTest(t, resource.TestCase{
 		IsUnitTest: false,
@@ -67,9 +67,9 @@ func TestAccResourceAlertRouteWithMultipleTeams(t *testing.T) {
 					resource.TestCheckResourceAttrSet(resName, "id"),
 				),
 			},
-      {
-				ResourceName: resName,
-				ImportState: true,
+			{
+				ResourceName:      resName,
+				ImportState:       true,
 				ImportStateVerify: true,
 			},
 		},
@@ -77,7 +77,7 @@ func TestAccResourceAlertRouteWithMultipleTeams(t *testing.T) {
 }
 
 func TestAccResourceAlertRouteDisabled(t *testing.T) {
-  resName := "rootly_alert_route.disabled"
+	resName := "rootly_alert_route.disabled"
 
 	resource.UnitTest(t, resource.TestCase{
 		IsUnitTest: false,
@@ -94,9 +94,9 @@ func TestAccResourceAlertRouteDisabled(t *testing.T) {
 					resource.TestCheckResourceAttrSet(resName, "id"),
 				),
 			},
-      {
-				ResourceName: resName,
-				ImportState: true,
+			{
+				ResourceName:      resName,
+				ImportState:       true,
 				ImportStateVerify: true,
 			},
 		},
