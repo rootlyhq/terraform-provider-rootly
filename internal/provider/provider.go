@@ -81,7 +81,11 @@ func (p *RootlyProvider) Configure(ctx context.Context, req provider.ConfigureRe
 		return
 	}
 
-	client, err := rootly.NewClientWithResponses(apiHost)
+	client, err := rootly.NewClientWithResponses(
+		apiHost,
+		// Piggyback on the legacy client's HTTP client. Inherits the same headers, authentication, and retry logic.
+		rootly.WithHTTPClient(legacyClient),
+	)
 	if err != nil {
 		resp.Diagnostics.AddError("Unable to create Rootly client", "Unable to authenticate user for authenticated Rootly client")
 		return
