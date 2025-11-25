@@ -136,16 +136,16 @@ ${name === 'override_shift' ? generateOverrideShiftImport(nameCamel) : ''}
 `;
 };
 
-function excludeDateFields(field) {
-  return field !== "created_at" && field !== "updated_at";
+function excludeIgnoredProperties([field, schema]) {
+  return field !== "created_at" && field !== "updated_at" && !schema.tf_ignore;
 }
 
 function setResourceFields(name, resourceSchema) {
   const isV2Resource = v2Resources.includes(name);
 
-  return Object.keys(resourceSchema.properties)
-    .filter(excludeDateFields)
-    .map((field) => {
+  return Object.entries(resourceSchema.properties)
+    .filter(excludeIgnoredProperties)
+    .map(([field]) => {
       const schema = resourceSchema.properties[field];
 
       // NEW
@@ -222,9 +222,9 @@ function setResourceFields(name, resourceSchema) {
 function createResourceFields(name, resourceSchema) {
   const isV2Resource = v2Resources.includes(name);
 
-  return Object.keys(resourceSchema.properties)
-    .filter(excludeDateFields)
-    .map((field) => {
+  return Object.entries(resourceSchema.properties)
+    .filter(excludeIgnoredProperties)
+    .map(([field]) => {
       const schema = resourceSchema.properties[field];
 
       // NEW
@@ -293,9 +293,9 @@ function createResourceFields(name, resourceSchema) {
 function updateResourceFields(name, resourceSchema) {
   const isV2Resource = v2Resources.includes(name);
 
-  return Object.keys(resourceSchema.properties)
-    .filter(excludeDateFields)
-    .map((field) => {
+  return Object.entries(resourceSchema.properties)
+    .filter(excludeIgnoredProperties)
+    .map(([field]) => {
       const schema = resourceSchema.properties[field];
 
       // NEW
@@ -404,9 +404,9 @@ function jsonapiToGoType(type) {
 }
 
 function schemaFields(resourceName, resourceSchema, requiredFields, pathIdField) {
-  return Object.keys(resourceSchema.properties)
-    .filter(excludeDateFields)
-    .map((field) => {
+  return Object.entries(resourceSchema.properties)
+    .filter(excludeIgnoredProperties)
+    .map(([field]) => {
       return schemaField(resourceName, field, resourceSchema, requiredFields, pathIdField);
     })
     .join("\n");

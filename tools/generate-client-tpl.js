@@ -245,11 +245,11 @@ function structAttr(name, resourceSchema) {
 }
 
 function structAttrs(resourceSchema, resourceName) {
-  return Object.keys(resourceSchema.properties)
-    .filter((name) => {
-      return name !== "created_at" && name !== "updated_at";
+  return Object.entries(resourceSchema.properties)
+    .filter(([name, schema]) => {
+      return name !== "created_at" && name !== "updated_at" && !schema.tf_ignore;
     })
-    .map((name) => {
+    .map(([name]) => {
       // Special case: override_shift uses user_id for create/update, and user as a relation for read
       if (resourceName === "override_shift" && name === "user") {
         return `UserId        int    \`jsonapi:"attr,user_id,omitempty"\`\n\tUser          *User  \`jsonapi:"relation,user,omitempty"\``;
