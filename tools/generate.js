@@ -71,6 +71,7 @@ const excluded = {
     "incident",
     "ip_ranges",
     "on_call_role",
+    "override_shift",
     "post_mortem_template",
     "pulse",
     "retrospective_configuration",
