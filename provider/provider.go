@@ -145,7 +145,6 @@ func New(version string) func() *schema.Provider {
 				"rootly_incident_role":                                      resourceIncidentRole(),
 				"rootly_incident_type":                                      resourceIncidentType(),
 				"rootly_on_call_shadow":                                     resourceOnCallShadow(),
-				"rootly_override_shift":                                     resourceOverrideShift(),
 				"rootly_playbook_task":                                      resourcePlaybookTask(),
 				"rootly_playbook":                                           resourcePlaybook(),
 				"rootly_role":                                               resourceRole(),
