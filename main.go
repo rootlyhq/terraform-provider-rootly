@@ -3,11 +3,17 @@ package main
 import (
 	"context"
 	"flag"
-	"github.com/rootlyhq/terraform-provider-rootly/v2/meta"
 	"log"
 
-	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
-	"github.com/rootlyhq/terraform-provider-rootly/v2/provider"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/meta"
+
+	"github.com/hashicorp/terraform-plugin-framework/providerserver"
+	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
+	"github.com/hashicorp/terraform-plugin-go/tfprotov6/tf6server"
+	"github.com/hashicorp/terraform-plugin-mux/tf5to6server"
+	"github.com/hashicorp/terraform-plugin-mux/tf6muxserver"
+	framework_provider "github.com/rootlyhq/terraform-provider-rootly/v2/internal/provider"
+	sdkv2_provider "github.com/rootlyhq/terraform-provider-rootly/v2/provider"
 )
 
 // Run "go generate" to format example terraform files and generate the docs for the registry/website
@@ -21,20 +27,44 @@ import (
 //go:generate go run github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
 
 func main() {
-	var debugMode bool
+	ctx := context.Background()
 
-	flag.BoolVar(&debugMode, "debug", false, "set to true to run the provider with support for debuggers like delve")
+	var debug bool
+
+	flag.BoolVar(&debug, "debug", false, "set to true to run the provider with support for debuggers like delve")
 	flag.Parse()
 
-	opts := &plugin.ServeOpts{ProviderFunc: provider.New(meta.GetVersion())}
-
-	if debugMode {
-		err := plugin.Debug(context.Background(), "registry.terraform.io/rootlyhq/rootly", opts)
-		if err != nil {
-			log.Fatal(err.Error())
-		}
-		return
+	upgradedSdkServer, err := tf5to6server.UpgradeServer(
+		ctx,
+		sdkv2_provider.New(meta.GetVersion())().GRPCProvider,
+	)
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	plugin.Serve(opts)
+	providers := []func() tfprotov6.ProviderServer{
+		providerserver.NewProtocol6(framework_provider.New(meta.GetVersion())()),
+		func() tfprotov6.ProviderServer {
+			return upgradedSdkServer
+		},
+	}
+
+	muxServer, err := tf6muxserver.NewMuxServer(ctx, providers...)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var serveOpts []tf6server.ServeOpt
+	if debug {
+		serveOpts = append(serveOpts, tf6server.WithManagedDebug())
+	}
+
+	err = tf6server.Serve(
+		"registry.terraform.io/rootlyhq/rootly",
+		muxServer.ProviderServer,
+		serveOpts...,
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
