@@ -19,6 +19,20 @@ Please see the [Terraform Registry documentation](https://registry.terraform.io/
 | `make testacc` | Run acceptance tests |
 | `make help` | Show all available commands |
 
+### Test your changes
+
+Test your changes by running the acceptance tests.
+
+For example, to test alerts source resource in `provider/resource_alerts_source_test.go`:
+
+```
+ROOTLY_API_TOKEN="xxx" make testacc TESTARGS="-run TestAccResourceAlertsSource"
+```
+
+To run the tests pointed at an API URL of your choice set the `ROOTLY_API_URL` environment variable.
+
+To enable debug logs set `TF_LOG=DEBUG`.
+
 ### Updating provider
 
 `make build` auto-generates code from Rootly's JSON-API schema, compiles provider code, and regenerates docs.
@@ -72,49 +86,3 @@ Releases are automatically published to Terraform Registry when a new tag is pus
 2. **CI Trigger**: Pushed tags trigger CI/GoReleaser workflow 
 3. **Automatic Release**: CI builds and publishes releases to GitHub and Terraform Registry
 4. **Version Injection**: The correct version is automatically set in the provider binary during CI build
-
-### Local build
-
-```
-# build local terraform provider, note every time you make a change
-go build -o terraform-provider-rootly
-
-```
-
-Configure a local Terraform registry `terraform.local` in `~/.terraform.rc`
-
-```
-provider_installation {
-  filesystem_mirror {
-    path    = "~/.terraform.d/plugins"
-  }
-  direct {
-    exclude = ["terraform.local/*/*"]
-  }
-}
-```
-
-After building, copy the plugin to the local registry. Change the architecture label as necessary.
-
-```
-# make the directory
-mkdir -p ~/.terraform.d/plugins/terraform.local/local/rootly/1.0.0/darwin_arm64/
-
-# copy the provider
-cp terraform-provider-rootly ~/.terraform.d/plugins/terraform.local/local/rootly/1.0.0/darwin_arm64/terraform-provider-rootly_v1.0.0
-```
-
-In your Terraform configuration, specify the local plugin and version 1.0.0:
-
-```
-terraform {
-  required_providers {
-    rootly = {
-      source = "terraform.local/local/rootly"
-      version = "1.0.0"
-    }
-  }
-}
-```
-
-Now running `terraform init` will install the local build.
