@@ -18,7 +18,7 @@ type OverrideShift struct {
 	EndsAt        string                 `jsonapi:"attr,ends_at,omitempty"`
 	IsOverride    *bool                  `jsonapi:"attr,is_override,omitempty"`
 	ShiftOverride map[string]interface{} `jsonapi:"attr,shift_override,omitempty"`
-	User          map[string]interface{} `jsonapi:"attr,user,omitempty"`
+	UserId        int                    `jsonapi:"attr,user_id,omitempty"`
 }
 
 func (c *Client) ListOverrideShifts(id string, params *rootlygo.ListOverrideShiftsParams) ([]interface{}, error) {

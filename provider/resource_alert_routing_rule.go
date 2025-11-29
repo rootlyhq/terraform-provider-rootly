@@ -185,9 +185,9 @@ func resourceAlertRoutingRule() *schema.Resource {
 
 						"target_id": &schema.Schema{
 							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
+							Computed:    false,
+							Required:    true,
+							Optional:    false,
 							Sensitive:   false,
 							ForceNew:    false,
 							WriteOnly:   false,
