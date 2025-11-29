@@ -3,42 +3,68 @@
 package client
 
 import (
-	"fmt"
 	"reflect"
+
+	"fmt"
 
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type OverrideShift struct {
-	ID            string                 `jsonapi:"primary,override_shifts"`
+	ID            string                 `jsonapi:"primary,shifts"`
 	ScheduleId    string                 `jsonapi:"attr,schedule_id,omitempty"`
 	RotationId    string                 `jsonapi:"attr,rotation_id,omitempty"`
 	StartsAt      string                 `jsonapi:"attr,starts_at,omitempty"`
 	EndsAt        string                 `jsonapi:"attr,ends_at,omitempty"`
 	IsOverride    *bool                  `jsonapi:"attr,is_override,omitempty"`
 	ShiftOverride map[string]interface{} `jsonapi:"attr,shift_override,omitempty"`
-	User          map[string]interface{} `jsonapi:"attr,user,omitempty"`
+	UserId        int                    `jsonapi:"attr,user_id,omitempty"`
+	User          *User                  `jsonapi:"relation,user,omitempty"`
 }
 
 func (c *Client) ListOverrideShifts(id string, params *rootlygo.ListOverrideShiftsParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListOverrideShiftsRequest(c.Rootly.Server, id, params)
-	if err != nil {
-		return nil, fmt.Errorf("Error building request: %w", err)
+	var allItems []interface{}
+	page := 1
+
+	// If params is nil, initialize it
+	if params == nil {
+		params = &rootlygo.ListOverrideShiftsParams{}
 	}
 
-	resp, err := c.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("Failed to make request: %w", err)
+	for {
+		// Set the current page number
+		params.PageNumber = &page
+
+		req, err := rootlygo.NewListOverrideShiftsRequest(c.Rootly.Server, id, params)
+		if err != nil {
+			return nil, fmt.Errorf("Error building request: %w", err)
+		}
+
+		resp, err := c.Do(req)
+		if err != nil {
+			return nil, fmt.Errorf("Failed to make request: %w", err)
+		}
+
+		override_shifts, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(OverrideShift)))
+		resp.Body.Close()
+		if err != nil {
+			return nil, fmt.Errorf("Error unmarshaling: %w", err)
+		}
+
+		// Add the items from this page to our collection
+		allItems = append(allItems, override_shifts...)
+
+		// If we got fewer items than a full page, we're done
+		// (assuming default page size is around 25-100)
+		if len(override_shifts) == 0 || len(override_shifts) < 25 {
+			break
+		}
+
+		page++
 	}
 
-	override_shifts, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(OverrideShift)))
-	resp.Body.Close()
-	if err != nil {
-		return nil, fmt.Errorf("Error unmarshaling: %w", err)
-	}
-
-	return override_shifts, nil
+	return allItems, nil
 }
 
 func (c *Client) CreateOverrideShift(d *OverrideShift) (*OverrideShift, error) {
@@ -66,6 +92,8 @@ func (c *Client) CreateOverrideShift(d *OverrideShift) (*OverrideShift, error) {
 }
 
 func (c *Client) GetOverrideShift(id string) (*OverrideShift, error) {
+	// NOTE: This GET endpoint is broken in the Rootly API and returns 404 for valid shifts
+	// The provider uses ListOverrideShifts instead. This function is kept for backwards compatibility.
 	req, err := rootlygo.NewGetOverrideShiftRequest(c.Rootly.Server, id)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
