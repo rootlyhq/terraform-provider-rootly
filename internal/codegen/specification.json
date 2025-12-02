@@ -1,0 +1,185 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hashicorp/terraform-plugin-codegen-spec/main/spec/v0.1/schema.json",
+  "version": "0.1",
+  "provider": {
+    "name": "rootly",
+    "schema": {
+      "attributes": [
+        {
+          "name": "api_host",
+          "string": {
+            "description": "The Rootly API host. Defaults to https://api.rootly.com. Can also be sourced from the `ROOTLY_API_URL` environment variable.",
+            "optional_required": "optional"
+          }
+        },
+        {
+          "name": "api_token",
+          "string": {
+            "description": "The Rootly API Token. Generate it from your account at https://rootly.com/account. It must be provided but can also be sourced from the `ROOTLY_API_TOKEN` environment variable.",
+            "optional_required": "optional",
+            "sensitive": true
+          }
+        }
+      ]
+    }
+  },
+  "resources": [
+    {
+      "name": "override_shift",
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "string": {
+              "description": "The unique identifier of this resource.",
+              "computed_optional_required": "computed"
+            }
+          },
+          {
+            "name": "schedule_id",
+            "string": {
+              "description": "ID of schedule",
+              "computed_optional_required": "optional"
+            }
+          },
+          {
+            "name": "rotation_id",
+            "string": {
+              "description": "ID of rotation",
+              "computed_optional_required": "optional"
+            }
+          },
+          {
+            "name": "starts_at",
+            "string": {
+              "description": "Start datetime of shift",
+              "computed_optional_required": "required",
+              "custom_type": {
+                "import": {
+                  "path": "github.com/rootlyhq/terraform-provider-rootly/v2/internal/rootlytypes"
+                },
+                "type": "rootlytypes.RFC3339Type{}",
+                "value_type": "rootlytypes.RFC3339"
+              }
+            }
+          },
+          {
+            "name": "ends_at",
+            "string": {
+              "description": "End datetime of shift",
+              "computed_optional_required": "required",
+              "custom_type": {
+                "import": {
+                  "path": "github.com/rootlyhq/terraform-provider-rootly/v2/internal/rootlytypes"
+                },
+                "type": "rootlytypes.RFC3339Type{}",
+                "value_type": "rootlytypes.RFC3339"
+              }
+            }
+          },
+          {
+            "name": "is_override",
+            "bool": {
+              "description": "Denotes shift is an override shift",
+              "computed_optional_required": "optional"
+            }
+          },
+          {
+            "name": "shift_override",
+            "single_nested": {
+              "computed_optional_required": "optional",
+              "attributes": [
+                {
+                  "name": "id",
+                  "string": {
+                    "description": "Unique ID of the shift override",
+                    "computed_optional_required": "optional"
+                  }
+                },
+                {
+                  "name": "shift_id",
+                  "string": {
+                    "description": "ID of shift",
+                    "computed_optional_required": "optional"
+                  }
+                },
+                {
+                  "name": "created_by_user_id",
+                  "int64": {
+                    "description": "User who created the override",
+                    "computed_optional_required": "optional"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "user_id",
+            "int64": {
+              "description": "Override shift user",
+              "computed_optional_required": "required"
+            }
+          },
+          {
+            "name": "user",
+            "single_nested": {
+              "computed_optional_required": "optional",
+              "attributes": [
+                {
+                  "name": "id",
+                  "string": {
+                    "description": "Unique ID of the user",
+                    "computed_optional_required": "optional"
+                  }
+                },
+                {
+                  "name": "email",
+                  "string": {
+                    "description": "The email of the user",
+                    "computed_optional_required": "optional"
+                  }
+                },
+                {
+                  "name": "first_name",
+                  "string": {
+                    "description": "First name of the user",
+                    "computed_optional_required": "optional"
+                  }
+                },
+                {
+                  "name": "last_name",
+                  "string": {
+                    "description": "Last name of the user",
+                    "computed_optional_required": "optional"
+                  }
+                },
+                {
+                  "name": "full_name",
+                  "string": {
+                    "description": "The full name of the user",
+                    "computed_optional_required": "optional"
+                  }
+                },
+                {
+                  "name": "full_name_with_team",
+                  "string": {
+                    "description": "The full name with team of the user",
+                    "computed_optional_required": "optional"
+                  }
+                },
+                {
+                  "name": "time_zone",
+                  "string": {
+                    "description": "Configured time zone",
+                    "computed_optional_required": "optional"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "data_sources": []
+}

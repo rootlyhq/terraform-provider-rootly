@@ -195,7 +195,7 @@ func resourceWorkflowIncident() *schema.Resource {
 							Computed:         true,
 							Required:         false,
 							Optional:         true,
-							Description:      "Value must be one of `test`, `test_sub`, `example`, `example_sub`, `normal`, `normal_sub`, `backfilled`, `scheduled`.",
+							Description:      "Value must be one of `test`, `test_sub`, `example`, `example_sub`, `normal`, `normal_sub`, `backfilled`, `scheduled`, `scheduled_sub`.",
 						},
 
 						"incident_statuses": &schema.Schema{
@@ -207,7 +207,7 @@ func resourceWorkflowIncident() *schema.Resource {
 							Computed:         true,
 							Required:         false,
 							Optional:         true,
-							Description:      "Value must be one of `in_triage`, `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `closed`, `cancelled`, `planning`, `scheduled`, `in_progress`, `verifying`, `completed`.",
+							Description:      "Value must be one of `in_triage`, `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `closed`, `cancelled`, `scheduled`, `in_progress`, `completed`.",
 						},
 
 						"incident_inactivity_duration": &schema.Schema{

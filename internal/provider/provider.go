@@ -6,18 +6,12 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/provider"
-	"github.com/hashicorp/terraform-plugin-framework/provider/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/provider/provider_rootly"
 	sdkv2_provider "github.com/rootlyhq/terraform-provider-rootly/v2/provider"
 	rootly "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
-
-type RootlyProviderModel struct {
-	ApiHost  types.String `tfsdk:"api_host"`
-	ApiToken types.String `tfsdk:"api_token"`
-}
 
 type RootlyProviderData struct {
 	Client       *rootly.ClientWithResponses
@@ -36,23 +30,11 @@ func (p *RootlyProvider) Metadata(ctx context.Context, req provider.MetadataRequ
 }
 
 func (p *RootlyProvider) Schema(ctx context.Context, req provider.SchemaRequest, resp *provider.SchemaResponse) {
-	resp.Schema = schema.Schema{
-		Attributes: map[string]schema.Attribute{
-			"api_host": schema.StringAttribute{
-				MarkdownDescription: "The Rootly API host. Defaults to https://api.rootly.com. Can also be sourced from the `ROOTLY_API_URL` environment variable.",
-				Optional:            true,
-			},
-			"api_token": schema.StringAttribute{
-				MarkdownDescription: "The Rootly API Token. Generate it from your account at https://rootly.com/account. It must be provided but can also be sourced from the `ROOTLY_API_TOKEN` environment variable.",
-				Optional:            true,
-				Sensitive:           true,
-			},
-		},
-	}
+	resp.Schema = provider_rootly.RootlyProviderSchema(ctx)
 }
 
 func (p *RootlyProvider) Configure(ctx context.Context, req provider.ConfigureRequest, resp *provider.ConfigureResponse) {
-	var data RootlyProviderModel
+	var data provider_rootly.RootlyModel
 
 	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
@@ -107,7 +89,9 @@ func (p *RootlyProvider) DataSources(ctx context.Context) []func() datasource.Da
 
 // Resources implements provider.Provider.
 func (p *RootlyProvider) Resources(ctx context.Context) []func() resource.Resource {
-	return []func() resource.Resource{}
+	return []func() resource.Resource{
+		NewOverrideShiftResource,
+	}
 }
 
 func New(version string) func() provider.Provider {

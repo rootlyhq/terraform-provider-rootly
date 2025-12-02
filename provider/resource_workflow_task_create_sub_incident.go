@@ -15,14 +15,14 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
 
-func resourceWorkflowTaskCreateOpenaiChatCompletion() *schema.Resource {
+func resourceWorkflowTaskCreateSubIncident() *schema.Resource {
 	return &schema.Resource{
-		Description: "Manages workflow create_openai_chat_completion task.",
+		Description: "Manages workflow create_sub_incident task.",
 
-		CreateContext: resourceWorkflowTaskCreateOpenaiChatCompletionCreate,
-		ReadContext:   resourceWorkflowTaskCreateOpenaiChatCompletionRead,
-		UpdateContext: resourceWorkflowTaskCreateOpenaiChatCompletionUpdate,
-		DeleteContext: resourceWorkflowTaskCreateOpenaiChatCompletionDelete,
+		CreateContext: resourceWorkflowTaskCreateSubIncidentCreate,
+		ReadContext:   resourceWorkflowTaskCreateSubIncidentRead,
+		UpdateContext: resourceWorkflowTaskCreateSubIncidentUpdate,
+		DeleteContext: resourceWorkflowTaskCreateSubIncidentDelete,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -69,65 +69,20 @@ func resourceWorkflowTaskCreateOpenaiChatCompletion() *schema.Resource {
 						"task_type": &schema.Schema{
 							Type:     schema.TypeString,
 							Optional: true,
-							Default:  "create_openai_chat_completion",
+							Default:  "create_sub_incident",
 							ValidateFunc: validation.StringInSlice([]string{
-								"create_openai_chat_completion",
+								"create_sub_incident",
 							}, false),
 						},
-						"model": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. The OpenAI model. eg: gpt-4o-mini",
-							Type:        schema.TypeMap,
-							Required:    true,
-						},
-						"system_prompt": &schema.Schema{
-							Description: "The system prompt to send to OpenAI (optional)",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"prompt": &schema.Schema{
-							Description: "The prompt to send to OpenAI",
+						"title": &schema.Schema{
+							Description: "The sub incident title",
 							Type:        schema.TypeString,
 							Required:    true,
 						},
-						"temperature": &schema.Schema{
-							Description: "Controls randomness in the response. Higher values make output more random",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     nil,
-						},
-						"max_tokens": &schema.Schema{
-							Description: "Maximum number of tokens to generate in the response",
+						"summary": &schema.Schema{
+							Description: "The sub incident summary",
 							Type:        schema.TypeString,
 							Optional:    true,
-						},
-						"top_p": &schema.Schema{
-							Description: "Controls diversity via nucleus sampling. Lower values make output more focused",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     nil,
-						},
-						"reasoning_effort": &schema.Schema{
-							Description: "Constrains effort on reasoning for GPT-5 and o-series models. Value must be one of `minimal`, `low`, `medium`, `high`.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     nil,
-							ValidateFunc: validation.StringInSlice([]string{
-								"minimal",
-								"low",
-								"medium",
-								"high",
-							}, false),
-						},
-						"reasoning_summary": &schema.Schema{
-							Description: "Summary of the reasoning performed by the model for GPT-5 and o-series models. Value must be one of `auto`, `concise`, `detailed`.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     nil,
-							ValidateFunc: validation.StringInSlice([]string{
-								"auto",
-								"concise",
-								"detailed",
-							}, false),
 						},
 					},
 				},
@@ -136,7 +91,7 @@ func resourceWorkflowTaskCreateOpenaiChatCompletion() *schema.Resource {
 	}
 }
 
-func resourceWorkflowTaskCreateOpenaiChatCompletionCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateSubIncidentCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
 	workflowId := d.Get("workflow_id").(string)
@@ -165,10 +120,10 @@ func resourceWorkflowTaskCreateOpenaiChatCompletionCreate(ctx context.Context, d
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created an workflow task resource: %v (%s)", workflowId, d.Id()))
 
-	return resourceWorkflowTaskCreateOpenaiChatCompletionRead(ctx, d, meta)
+	return resourceWorkflowTaskCreateSubIncidentRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskCreateOpenaiChatCompletionRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateSubIncidentRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
@@ -177,7 +132,7 @@ func resourceWorkflowTaskCreateOpenaiChatCompletionRead(ctx context.Context, d *
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
 		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateOpenaiChatCompletion (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateSubIncident (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}
@@ -197,7 +152,7 @@ func resourceWorkflowTaskCreateOpenaiChatCompletionRead(ctx context.Context, d *
 	return nil
 }
 
-func resourceWorkflowTaskCreateOpenaiChatCompletionUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateSubIncidentUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating workflow task: %s", d.Id()))
 
@@ -223,10 +178,10 @@ func resourceWorkflowTaskCreateOpenaiChatCompletionUpdate(ctx context.Context, d
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
 
-	return resourceWorkflowTaskCreateOpenaiChatCompletionRead(ctx, d, meta)
+	return resourceWorkflowTaskCreateSubIncidentRead(ctx, d, meta)
 }
 
-func resourceWorkflowTaskCreateOpenaiChatCompletionDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func resourceWorkflowTaskCreateSubIncidentDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
@@ -235,7 +190,7 @@ func resourceWorkflowTaskCreateOpenaiChatCompletionDelete(ctx context.Context, d
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
 		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateOpenaiChatCompletion (%s) not found, removing from state", d.Id()))
+			tflog.Warn(ctx, fmt.Sprintf("WorkflowTaskCreateSubIncident (%s) not found, removing from state", d.Id()))
 			d.SetId("")
 			return nil
 		}

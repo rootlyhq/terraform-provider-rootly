@@ -17,6 +17,16 @@ require (
 )
 
 require (
+	github.com/hashicorp/terraform-plugin-codegen-framework v0.4.1 // indirect
+	github.com/hashicorp/terraform-plugin-codegen-spec v0.2.0 // indirect
+	github.com/hashicorp/terraform-plugin-framework-timetypes v0.5.0 // indirect
+	github.com/sanity-io/litter v1.5.8 // indirect
+	github.com/xeipuuv/gojsonpointer v0.0.0-20190905194746-02993c407bfb // indirect
+	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect
+	github.com/xeipuuv/gojsonschema v1.2.0 // indirect
+)
+
+require (
 	dario.cat/mergo v1.0.2 // indirect
 	github.com/BurntSushi/toml v1.5.0 // indirect
 	github.com/Kunde21/markdownfmt/v3 v3.1.0 // indirect
@@ -54,7 +64,7 @@ require (
 	github.com/hashicorp/logutils v1.0.0 // indirect
 	github.com/hashicorp/terraform-exec v0.23.1 // indirect
 	github.com/hashicorp/terraform-json v0.27.0 // indirect
-	github.com/hashicorp/terraform-plugin-framework v1.16.1 // indirect
+	github.com/hashicorp/terraform-plugin-framework v1.16.1
 	github.com/hashicorp/terraform-plugin-testing v1.13.3
 	github.com/hashicorp/terraform-registry-address v0.4.0 // indirect
 	github.com/hashicorp/terraform-svchost v0.1.1 // indirect
@@ -109,6 +119,7 @@ require (
 replace github.com/imdario/mergo => github.com/imdario/mergo v0.3.16
 
 tool (
+	github.com/hashicorp/terraform-plugin-codegen-framework/cmd/tfplugingen-framework
 	github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
 	github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen
 	golang.org/x/tools/cmd/goimports

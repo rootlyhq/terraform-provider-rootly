@@ -1,0 +1,16 @@
+{
+  "name": "codegen",
+  "module": "index.ts",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "openapi3-ts": "^4.5.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@apidevtools/json-schema-ref-parser": "^15.1.2"
+  }
+}
