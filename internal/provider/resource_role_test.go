@@ -22,7 +22,7 @@ func TestAccResourceRole_UpgradeFromVersion(t *testing.T) {
 	}
 
 	resource.UnitTest(t, resource.TestCase{
-		PreCheck: func() { acctest.PreCheck(t) },
+		PreCheck: func() { testAccPreCheck(t) },
 		Steps: []resource.TestStep{
 			{
 				ExternalProviders: map[string]resource.ExternalProvider{
@@ -35,7 +35,7 @@ func TestAccResourceRole_UpgradeFromVersion(t *testing.T) {
 				ConfigStateChecks: configStateChecks,
 			},
 			{
-				ProtoV6ProviderFactories: acctest.TestAccProtoV6ProviderFactories,
+				ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 				Config:                   testAccResourceRole(roleName),
 				ConfigStateChecks:        configStateChecks,
 			},
@@ -53,8 +53,8 @@ func TestAccResourceRole(t *testing.T) {
 	}
 
 	resource.UnitTest(t, resource.TestCase{
-		PreCheck:                 func() { acctest.PreCheck(t) },
-		ProtoV6ProviderFactories: acctest.TestAccProtoV6ProviderFactories,
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccResourceRole(roleName),
