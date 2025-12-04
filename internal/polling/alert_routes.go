@@ -17,9 +17,7 @@ type AsyncRuleCreationStatusFunc func(alertRouteID, requestId string) (*AsyncRul
 
 type RefetchAlertRouteFunc func() error
 
-func WaitForAsyncRuleCreation(ctx context.Context, alertRouteID, requestId string,
-	checkStatusFunc AsyncRuleCreationStatusFunc, refetchFunc RefetchAlertRouteFunc) error {
-
+func WaitForAsyncRuleCreation(ctx context.Context, alertRouteID, requestId string, checkStatusFunc AsyncRuleCreationStatusFunc) error {
 	return retry.RetryContext(ctx, 5*time.Minute, func() *retry.RetryError {
 		status, err := checkStatusFunc(alertRouteID, requestId)
 		if err != nil {
@@ -28,12 +26,7 @@ func WaitForAsyncRuleCreation(ctx context.Context, alertRouteID, requestId strin
 
 		switch status.Status {
 		case "success":
-			if err := refetchFunc(); err != nil {
-				return retry.NonRetryableError(fmt.Errorf("error refetching alert route: %w", err))
-			}
 			return nil
-		case "skip":
-			return nil // We should skip polling if it's not required. This is in the case when rules are not created async for a particular org.
 		case "pending":
 			return retry.RetryableError(fmt.Errorf("async rule creation still in progress"))
 		case "error":
