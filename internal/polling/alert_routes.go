@@ -33,7 +33,7 @@ func WaitForAsyncRuleCreation(ctx context.Context, alertRouteID, requestId strin
 			}
 			return nil
 		case "skip":
-			return nil
+			return nil // We should skip polling if it's not required. This is in the case when rules are not created async for a particular org.
 		case "pending":
 			return retry.RetryableError(fmt.Errorf("async rule creation still in progress"))
 		case "error":
