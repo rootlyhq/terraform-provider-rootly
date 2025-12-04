@@ -4,9 +4,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/apiclient"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/meta"
-	sdkv2_provider "github.com/rootlyhq/terraform-provider-rootly/v2/provider"
 	rootly "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
@@ -28,18 +27,9 @@ func init() {
 		TestApiToken = v
 	}
 
-	legacyClient, err := client.NewClient(TestApiHost, TestApiToken, sdkv2_provider.RootlyUserAgent(meta.GetVersion()))
+	_, client, err := apiclient.New(TestApiHost, TestApiToken, meta.GetVersion())
 	if err != nil {
-		log.Fatalf("Unable to create Rootly client: %v", err)
-	}
-
-	client, err := rootly.NewClientWithResponses(
-		TestApiHost,
-		// Piggyback on the legacy client's HTTP client. Inherits the same headers, authentication, and retry logic.
-		rootly.WithHTTPClient(legacyClient),
-	)
-	if err != nil {
-		log.Fatalf("Unable to create Rootly client: %v", err)
+		log.Fatalln(err.Error())
 	}
 
 	SharedClient = client

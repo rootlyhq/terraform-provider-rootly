@@ -10,7 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
-	sdkv2_provider "github.com/rootlyhq/terraform-provider-rootly/v2/provider"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/apiclient"
 	rootly "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
@@ -75,19 +75,9 @@ func (p *RootlyProvider) Configure(ctx context.Context, req provider.ConfigureRe
 		apiToken = v
 	}
 
-	legacyClient, err := client.NewClient(apiHost, apiToken, sdkv2_provider.RootlyUserAgent(p.version))
+	legacyClient, client, err := apiclient.New(apiHost, apiToken, p.version)
 	if err != nil {
-		resp.Diagnostics.AddError("Unable to create Rootly client", "Unable to authenticate user for authenticated Rootly client")
-		return
-	}
-
-	client, err := rootly.NewClientWithResponses(
-		apiHost,
-		// Piggyback on the legacy client's HTTP client. Inherits the same headers, authentication, and retry logic.
-		rootly.WithHTTPClient(legacyClient),
-	)
-	if err != nil {
-		resp.Diagnostics.AddError("Unable to create Rootly client", "Unable to authenticate user for authenticated Rootly client")
+		resp.Diagnostics.AddError("Unable to create Rootly client", err.Error())
 		return
 	}
 
