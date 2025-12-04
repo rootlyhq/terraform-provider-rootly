@@ -1,12 +1,11 @@
-import {
-  camelize,
-  humanize,
-  pluralize,
-  singularize,
-  underscore,
-} from "inflection";
+import { camelize, pluralize, underscore } from "inflection";
 import { match } from "ts-pattern";
-import { toIR, type IRObject, type IRResource, type IRType } from "./ir";
+import {
+  generateResourceIR,
+  type IRObject,
+  type IRResource,
+  type IRType,
+} from "./ir";
 import { SWAGGER_MODS } from "./swagger-mods";
 
 const RESOURCES = ["alert_route", "dashboard_panel"];
@@ -880,7 +879,6 @@ function generateClientModel({ ir, name }: { ir: IRType; name: string }) {
   }
 
   const modelStructLines: string[] = [];
-  const fillModelLines: string[] = [];
   const nested: string[] = [];
 
   const modelName =
@@ -930,79 +928,6 @@ package apiclient
 
 ${generateClientModel({ ir, name: modelName })}
 `;
-}
-
-function generateResourceIR({ swagger, name }: { swagger: any; name: string }) {
-  const resourceSchema = swagger.components.schemas[name];
-  if (!resourceSchema) {
-    throw new Error(`Resource ${name} not found`);
-  }
-
-  const newResourceSchema = swagger.components.schemas[`new_${name}`];
-  if (!newResourceSchema) {
-    throw new Error(`New resource ${name} not found`);
-  }
-
-  const collectionSchema = Object.entries(
-    swagger.paths as Record<string, any>
-  ).find(
-    ([_, pathSchema]) =>
-      pathSchema.get &&
-      pathSchema.get.operationId === `list${camelize(pluralize(name))}`
-  )?.[1];
-  if (!collectionSchema) {
-    throw new Error(`List path for ${name} not found`);
-  }
-
-  const getSchema = Object.entries(swagger.paths as Record<string, any>).find(
-    ([_, pathSchema]) =>
-      pathSchema.get &&
-      pathSchema.get.operationId === `get${camelize(singularize(name))}`
-  )?.[1]?.get;
-  if (!getSchema) {
-    throw new Error(`Get path for ${name} not found`);
-  }
-
-  // Get path ID parameter
-  const pathIdParameter = collectionSchema?.parameters?.[0]?.name as
-    | string
-    | undefined;
-  const pathIdIR = pathIdParameter
-    ? toIR({
-        schema: resourceSchema.properties[pathIdParameter],
-        required: null,
-      })
-    : null;
-
-  const getHasQueryParams =
-    getSchema?.parameters?.some((param) => param.in === "query") ?? false;
-
-  // Generate immediate representation of the resource
-  const irFields = toIR({
-    schema: resourceSchema,
-    required: newResourceSchema.required,
-  });
-  if (irFields.kind !== "object") {
-    throw new Error("Resource root must be an object");
-  }
-
-  const ir: IRResource = {
-    kind: "resource",
-    resourceType: name,
-    listPathIdParam:
-      pathIdParameter && pathIdIR
-        ? { name: pathIdParameter, element: pathIdIR }
-        : null,
-    getHasQueryParams,
-    idElement: {
-      kind: "string",
-      computedOptionalRequired: "computed",
-      description: `The ID of the ${humanize(name, true)}`,
-    },
-    fields: irFields.fields,
-  };
-
-  return ir;
 }
 
 async function writeAndFormatGoFile(destination: URL, code: string) {
