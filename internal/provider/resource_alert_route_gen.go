@@ -309,9 +309,24 @@ func (m *AlertRouteModel) ToClientModel(ctx context.Context) (*apiclient.AlertRo
 		out.Enabled = m.Enabled.ValueBool()
 	}
 
-	// TODO
-	// TODO
-	// TODO
+	if !m.AlertsSourceIds.IsNull() {
+		out.AlertsSourceIds = m.AlertsSourceIds.MustGet(ctx)
+	}
+
+	if !m.OwningTeamIds.IsNull() {
+		out.OwningTeamIds = m.OwningTeamIds.MustGet(ctx)
+	}
+
+	if !m.Rules.IsNull() {
+		for _, item := range m.Rules.MustGet(ctx) {
+			itemClientModel, err := item.ToClientModel(ctx)
+			if err != nil {
+				return nil, err
+			}
+			out.Rules = append(out.Rules, *itemClientModel)
+		}
+	}
+
 	return &out, nil
 }
 
@@ -338,8 +353,26 @@ func (m *AlertRouteModelRulesItem) ToClientModel(ctx context.Context) (*apiclien
 		out.FallbackRule = m.FallbackRule.ValueBool()
 	}
 
-	// TODO
-	// TODO
+	if !m.Destinations.IsNull() {
+		for _, item := range m.Destinations.MustGet(ctx) {
+			itemClientModel, err := item.ToClientModel(ctx)
+			if err != nil {
+				return nil, err
+			}
+			out.Destinations = append(out.Destinations, *itemClientModel)
+		}
+	}
+
+	if !m.ConditionGroups.IsNull() {
+		for _, item := range m.ConditionGroups.MustGet(ctx) {
+			itemClientModel, err := item.ToClientModel(ctx)
+			if err != nil {
+				return nil, err
+			}
+			out.ConditionGroups = append(out.ConditionGroups, *itemClientModel)
+		}
+	}
+
 	return &out, nil
 }
 
@@ -374,7 +407,16 @@ func (m *AlertRouteModelRulesItemConditionGroupsItem) ToClientModel(ctx context.
 		out.Position = m.Position.ValueInt64()
 	}
 
-	// TODO
+	if !m.Conditions.IsNull() {
+		for _, item := range m.Conditions.MustGet(ctx) {
+			itemClientModel, err := item.ToClientModel(ctx)
+			if err != nil {
+				return nil, err
+			}
+			out.Conditions = append(out.Conditions, *itemClientModel)
+		}
+	}
+
 	return &out, nil
 }
 
@@ -408,8 +450,13 @@ func (m *AlertRouteModelRulesItemConditionGroupsItemConditionsItem) ToClientMode
 		out.PropertyFieldValue = m.PropertyFieldValue.ValueString()
 	}
 
-	// TODO
-	// TODO
+	if !m.PropertyFieldValues.IsNull() {
+		out.PropertyFieldValues = m.PropertyFieldValues.MustGet(ctx)
+	}
+
+	if !m.AlertUrgencyIds.IsNull() {
+		out.AlertUrgencyIds = m.AlertUrgencyIds.MustGet(ctx)
+	}
 
 	if !m.ConditionableType.IsNull() {
 		out.ConditionableType = m.ConditionableType.ValueString()
@@ -420,4 +467,98 @@ func (m *AlertRouteModelRulesItemConditionGroupsItemConditionsItem) ToClientMode
 	}
 
 	return &out, nil
+}
+
+func FillAlertRouteModel(ctx context.Context, in apiclient.AlertRouteModel, out *AlertRouteModel) error {
+	out.Id = types.StringValue(in.Id)
+	out.Name = types.StringValue(in.Name)
+	out.Enabled = types.BoolValue(in.Enabled)
+	out.AlertsSourceIds = supertypes.NewListValueOfSlice(ctx, in.AlertsSourceIds)
+	out.OwningTeamIds = supertypes.NewListValueOfSlice(ctx, in.OwningTeamIds)
+
+	{
+		var elements []AlertRouteModelRulesItem
+		for _, item := range in.Rules {
+			var element AlertRouteModelRulesItem
+			err := FillAlertRouteModelRulesItem(ctx, item, &element)
+			if err != nil {
+				return err
+			}
+			elements = append(elements, element)
+		}
+		out.Rules = supertypes.NewListNestedObjectValueOfValueSlice(ctx, elements)
+	}
+
+	return nil
+}
+
+func FillAlertRouteModelRulesItem(ctx context.Context, in apiclient.AlertRouteModelRulesItem, out *AlertRouteModelRulesItem) error {
+	out.Name = types.StringValue(in.Name)
+	out.Position = types.Int64Value(in.Position)
+	out.FallbackRule = types.BoolValue(in.FallbackRule)
+
+	{
+		var elements []AlertRouteModelRulesItemDestinationsItem
+		for _, item := range in.Destinations {
+			var element AlertRouteModelRulesItemDestinationsItem
+			err := FillAlertRouteModelRulesItemDestinationsItem(ctx, item, &element)
+			if err != nil {
+				return err
+			}
+			elements = append(elements, element)
+		}
+		out.Destinations = supertypes.NewListNestedObjectValueOfValueSlice(ctx, elements)
+	}
+
+	{
+		var elements []AlertRouteModelRulesItemConditionGroupsItem
+		for _, item := range in.ConditionGroups {
+			var element AlertRouteModelRulesItemConditionGroupsItem
+			err := FillAlertRouteModelRulesItemConditionGroupsItem(ctx, item, &element)
+			if err != nil {
+				return err
+			}
+			elements = append(elements, element)
+		}
+		out.ConditionGroups = supertypes.NewListNestedObjectValueOfValueSlice(ctx, elements)
+	}
+
+	return nil
+}
+
+func FillAlertRouteModelRulesItemDestinationsItem(ctx context.Context, in apiclient.AlertRouteModelRulesItemDestinationsItem, out *AlertRouteModelRulesItemDestinationsItem) error {
+	out.TargetType = types.StringValue(in.TargetType)
+	out.TargetId = types.StringValue(in.TargetId)
+	return nil
+}
+
+func FillAlertRouteModelRulesItemConditionGroupsItem(ctx context.Context, in apiclient.AlertRouteModelRulesItemConditionGroupsItem, out *AlertRouteModelRulesItemConditionGroupsItem) error {
+	out.Position = types.Int64Value(in.Position)
+
+	{
+		var elements []AlertRouteModelRulesItemConditionGroupsItemConditionsItem
+		for _, item := range in.Conditions {
+			var element AlertRouteModelRulesItemConditionGroupsItemConditionsItem
+			err := FillAlertRouteModelRulesItemConditionGroupsItemConditionsItem(ctx, item, &element)
+			if err != nil {
+				return err
+			}
+			elements = append(elements, element)
+		}
+		out.Conditions = supertypes.NewListNestedObjectValueOfValueSlice(ctx, elements)
+	}
+
+	return nil
+}
+
+func FillAlertRouteModelRulesItemConditionGroupsItemConditionsItem(ctx context.Context, in apiclient.AlertRouteModelRulesItemConditionGroupsItemConditionsItem, out *AlertRouteModelRulesItemConditionGroupsItemConditionsItem) error {
+	out.PropertyFieldConditionType = types.StringValue(in.PropertyFieldConditionType)
+	out.PropertyFieldName = types.StringValue(in.PropertyFieldName)
+	out.PropertyFieldType = types.StringValue(in.PropertyFieldType)
+	out.PropertyFieldValue = types.StringValue(in.PropertyFieldValue)
+	out.PropertyFieldValues = supertypes.NewListValueOfSlice(ctx, in.PropertyFieldValues)
+	out.AlertUrgencyIds = supertypes.NewListValueOfSlice(ctx, in.AlertUrgencyIds)
+	out.ConditionableType = types.StringValue(in.ConditionableType)
+	out.ConditionableId = types.StringValue(in.ConditionableId)
+	return nil
 }
