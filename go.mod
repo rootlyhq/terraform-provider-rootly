@@ -54,13 +54,14 @@ require (
 	github.com/hashicorp/logutils v1.0.0 // indirect
 	github.com/hashicorp/terraform-exec v0.23.1 // indirect
 	github.com/hashicorp/terraform-json v0.27.0 // indirect
-	github.com/hashicorp/terraform-plugin-framework v1.16.1 // indirect
+	github.com/hashicorp/terraform-plugin-framework v1.16.1
 	github.com/hashicorp/terraform-plugin-testing v1.13.3
 	github.com/hashicorp/terraform-registry-address v0.4.0 // indirect
 	github.com/hashicorp/terraform-svchost v0.1.1 // indirect
 	github.com/hashicorp/yamux v0.1.2 // indirect
 	github.com/huandu/xstrings v1.5.0 // indirect
 	github.com/invopop/yaml v0.3.1 // indirect
+	github.com/jianyuan/go-utils v0.0.0-20250223213401-62c93a9e0b6c
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
