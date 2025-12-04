@@ -31,19 +31,19 @@ export interface IRInt extends IRBaseWithComputedOptionalRequired {
 
 export interface IRObject extends IRBaseWithComputedOptionalRequired {
   kind: "object";
-  fields: Record<string, IRType>;
+  fields: Record<string, Exclude<IRType, IRResource>>;
 }
 
 export interface IRArray extends IRBaseWithComputedOptionalRequired {
   kind: "array";
-  element: IRType;
+  element: Exclude<IRType, IRResource>;
 }
 
 export interface IRResource extends IRBase {
   kind: "resource";
   resourceType: string;
-  idElement: IRType;
-  fields: Record<string, IRType>;
+  idElement: IRString;
+  fields: Record<string, Exclude<IRType, IRResource>>;
 }
 
 // TODO: Handle computed
@@ -53,14 +53,14 @@ export function toIR({
 }: {
   schema: any;
   required: boolean | null;
-}): IRType {
+}): Exclude<IRType, IRResource> {
   const common = {
     computedOptionalRequired: required ? "required" : "optional",
     description: schema.description,
   } as const;
 
   return match(schema)
-    .returnType<IRType>()
+    .returnType<Exclude<IRType, IRResource>>()
     .with({ type: "string" }, () => ({
       kind: "string",
       ...common,

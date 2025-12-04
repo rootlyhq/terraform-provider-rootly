@@ -1,5 +1,5 @@
 import { camelize, humanize, pluralize, underscore } from "inflection";
-import { match, P } from "ts-pattern";
+import { match } from "ts-pattern";
 import { toIR, type IRObject, type IRResource, type IRType } from "./ir";
 
 const RESOURCES = ["alert_route"];
@@ -193,29 +193,28 @@ function generateModelValuer({
 }): {
   output: string;
   nested: string[];
+  hasErr: boolean;
 } {
   return match(ir)
     .returnType<{
       output: string;
       nested: string[];
+      hasErr: boolean;
     }>()
     .with({ kind: "string" }, () => ({
-      output: `out.${camelize(
-        field
-      )} = supertypes.NewStringValueOrNull(in.${camelize(field)})`,
+      output: `supertypes.NewStringValueOrNull(in.${camelize(field)})`,
       nested: [],
+      hasErr: false,
     }))
     .with({ kind: "bool" }, () => ({
-      output: `out.${camelize(field)} = supertypes.NewBoolValue(in.${camelize(
-        field
-      )})`,
+      output: `supertypes.NewBoolValue(in.${camelize(field)})`,
       nested: [],
+      hasErr: false,
     }))
     .with({ kind: "int" }, () => ({
-      output: `out.${camelize(field)} = supertypes.NewInt64Value(in.${camelize(
-        field
-      )})`,
+      output: `supertypes.NewInt64Value(in.${camelize(field)})`,
       nested: [],
+      hasErr: false,
     }))
     .with({ kind: "array", element: { kind: "object" } }, (ir) => {
       const inner = generateModelValuer({
@@ -223,26 +222,24 @@ function generateModelValuer({
         field: "Item",
         ir: ir.element,
       });
+      const itemType = camelize(`${parent}_${field}_item`);
       return {
         output: `
-          {
-            var elements []${camelize(`${parent}_${field}`)}Item
+          func() (supertypes.ListNestedObjectValueOf[${itemType}], error) {
+            var elements []${itemType}
             for _, item := range in.${camelize(field)} {
-              var element ${camelize(`${parent}_${field}`)}Item
-              err := Fill${camelize(
-                `${parent}_${field}`
-              )}Item(ctx, item, &element)
+              var element ${itemType}
+              err := Fill${itemType}(ctx, item, &element)
               if err != nil {
-                return err
+                return supertypes.NewListNestedObjectValueOfNull[${itemType}](ctx), err
               }
               elements = append(elements, element)
             }
-            out.${camelize(
-              field
-            )} = supertypes.NewListNestedObjectValueOfValueSlice(ctx, elements)
-          }
-        `,
+            return supertypes.NewListNestedObjectValueOfValueSlice(ctx, elements), nil
+          }()
+        `.trim(),
         nested: inner.nested,
+        hasErr: true,
       };
     })
     .with({ kind: "array" }, (ir) => {
@@ -252,10 +249,9 @@ function generateModelValuer({
         ir: ir.element,
       });
       return {
-        output: `out.${camelize(
-          field
-        )} = supertypes.NewListValueOfSlice(ctx, in.${camelize(field)})`,
+        output: `supertypes.NewListValueOfSlice(ctx, in.${camelize(field)})`,
         nested: inner.nested,
+        hasErr: false,
       };
     })
     .with({ kind: "object" }, (ir) => {
@@ -264,6 +260,7 @@ function generateModelValuer({
       return {
         output: structName,
         nested: [struct],
+        hasErr: false,
       };
     })
     .otherwise(() => {
@@ -359,7 +356,7 @@ function generateFillModel({ name, ir }: { name: string; ir: IRType }) {
       field: "id",
       ir: ir.idElement,
     });
-    fillModelLines.push(modelValuer.output);
+    fillModelLines.push(`out.Id = ${modelValuer.output}`);
   }
 
   for (const [field, fieldIR] of Object.entries(ir.fields)) {
@@ -370,7 +367,20 @@ function generateFillModel({ name, ir }: { name: string; ir: IRType }) {
     });
 
     nested.push(...modelValuer.nested);
-    fillModelLines.push(modelValuer.output);
+
+    if (modelValuer.hasErr) {
+      fillModelLines.push("{");
+      fillModelLines.push("var err error");
+      fillModelLines.push(
+        `out.${camelize(field)}, err = ${modelValuer.output}`
+      );
+      fillModelLines.push("if err != nil {");
+      fillModelLines.push("return err");
+      fillModelLines.push("}");
+      fillModelLines.push("}");
+    } else {
+      fillModelLines.push(`out.${camelize(field)} = ${modelValuer.output}`);
+    }
   }
 
   const struct = `
@@ -410,41 +420,40 @@ function generateAttribute({
   }
   const common = commonLines.join("\n");
 
-  return (
-    match(ir)
-      .returnType<string>()
-      .with({ kind: "string" }, () => {
-        return `schema.StringAttribute{
+  return match(ir)
+    .returnType<string>()
+    .with({ kind: "string" }, () => {
+      return `schema.StringAttribute{
           ${common}
           CustomType: supertypes.StringType{},
         }`;
-      })
-      .with({ kind: "bool" }, () => {
-        return `schema.BoolAttribute{
+    })
+    .with({ kind: "bool" }, () => {
+      return `schema.BoolAttribute{
           ${common}
           CustomType: supertypes.BoolType{},
         }`;
-      })
-      .with({ kind: "int" }, () => {
-        return `schema.Int64Attribute{
+    })
+    .with({ kind: "int" }, () => {
+      return `schema.Int64Attribute{
           ${common}
           CustomType: supertypes.Int64Type{},
         }`;
-      })
-      .with({ kind: "array", element: { kind: "object" } }, (ir) => {
-        const structType = camelize(`${parent}_${field}_item`);
+    })
+    .with({ kind: "array", element: { kind: "object" } }, (ir) => {
+      const structType = camelize(`${parent}_${field}_item`);
 
-        const attrs = Object.entries(ir.element.fields)
-          .map(([fieldName, fieldIR]) => {
-            return `"${underscore(fieldName)}": ${generateAttribute({
-              parent: structType,
-              field: fieldName,
-              ir: fieldIR,
-            })},`;
-          })
-          .join("\n");
+      const attrs = Object.entries(ir.element.fields)
+        .map(([fieldName, fieldIR]) => {
+          return `"${underscore(fieldName)}": ${generateAttribute({
+            parent: structType,
+            field: fieldName,
+            ir: fieldIR,
+          })},`;
+        })
+        .join("\n");
 
-        return `schema.ListNestedAttribute{
+      return `schema.ListNestedAttribute{
           ${common}
           CustomType: supertypes.NewListNestedObjectTypeOf[${structType}](ctx),
           NestedObject: schema.NestedAttributeObject{
@@ -453,32 +462,22 @@ function generateAttribute({
             },
           },
         }`;
-      })
-      .with({ kind: "array" }, ({ element }) => {
-        const primitiveType = generatePrimitiveType({
-          parent,
-          field,
-          ir: element,
-        });
+    })
+    .with({ kind: "array" }, ({ element }) => {
+      const primitiveType = generatePrimitiveType({
+        parent,
+        field,
+        ir: element,
+      });
 
-        return `schema.ListAttribute{
+      return `schema.ListAttribute{
           ${common}
           CustomType: supertypes.NewListTypeOf[${primitiveType.output}](ctx),
         }`;
-      })
-      // .with({ kind: "object" }, () => {
-      //   const nestedName = camelize(`${parentName}_${fieldName}`);
-      //   const struct = generateModelStruct({
-      //     name: nestedName,
-      //     schema,
-      //   });
-
-      //   return `${nestedName}`;
-      // })
-      .otherwise(() => {
-        throw new Error(`Unsupported IR type: ${JSON.stringify(ir)}`);
-      })
-  );
+    })
+    .otherwise(() => {
+      throw new Error(`Unsupported IR type: ${JSON.stringify(ir)}`);
+    });
 }
 
 function generateResourceSchema({ name, ir }: { name: string; ir: IRType }) {

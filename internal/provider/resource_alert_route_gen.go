@@ -605,20 +605,24 @@ func FillAlertRouteModel(ctx context.Context, in apiclient.AlertRouteModel, out 
 	out.Enabled = supertypes.NewBoolValue(in.Enabled)
 	out.AlertsSourceIds = supertypes.NewListValueOfSlice(ctx, in.AlertsSourceIds)
 	out.OwningTeamIds = supertypes.NewListValueOfSlice(ctx, in.OwningTeamIds)
-
 	{
-		var elements []AlertRouteModelRulesItem
-		for _, item := range in.Rules {
-			var element AlertRouteModelRulesItem
-			err := FillAlertRouteModelRulesItem(ctx, item, &element)
-			if err != nil {
-				return err
+		var err error
+		out.Rules, err = func() (supertypes.ListNestedObjectValueOf[AlertRouteModelRulesItem], error) {
+			var elements []AlertRouteModelRulesItem
+			for _, item := range in.Rules {
+				var element AlertRouteModelRulesItem
+				err := FillAlertRouteModelRulesItem(ctx, item, &element)
+				if err != nil {
+					return supertypes.NewListNestedObjectValueOfNull[AlertRouteModelRulesItem](ctx), err
+				}
+				elements = append(elements, element)
 			}
-			elements = append(elements, element)
+			return supertypes.NewListNestedObjectValueOfValueSlice(ctx, elements), nil
+		}()
+		if err != nil {
+			return err
 		}
-		out.Rules = supertypes.NewListNestedObjectValueOfValueSlice(ctx, elements)
 	}
-
 	return nil
 }
 
@@ -626,33 +630,42 @@ func FillAlertRouteModelRulesItem(ctx context.Context, in apiclient.AlertRouteMo
 	out.Name = supertypes.NewStringValueOrNull(in.Name)
 	out.Position = supertypes.NewInt64Value(in.Position)
 	out.FallbackRule = supertypes.NewBoolValue(in.FallbackRule)
-
 	{
-		var elements []AlertRouteModelRulesItemDestinationsItem
-		for _, item := range in.Destinations {
-			var element AlertRouteModelRulesItemDestinationsItem
-			err := FillAlertRouteModelRulesItemDestinationsItem(ctx, item, &element)
-			if err != nil {
-				return err
+		var err error
+		out.Destinations, err = func() (supertypes.ListNestedObjectValueOf[AlertRouteModelRulesItemDestinationsItem], error) {
+			var elements []AlertRouteModelRulesItemDestinationsItem
+			for _, item := range in.Destinations {
+				var element AlertRouteModelRulesItemDestinationsItem
+				err := FillAlertRouteModelRulesItemDestinationsItem(ctx, item, &element)
+				if err != nil {
+					return supertypes.NewListNestedObjectValueOfNull[AlertRouteModelRulesItemDestinationsItem](ctx), err
+				}
+				elements = append(elements, element)
 			}
-			elements = append(elements, element)
+			return supertypes.NewListNestedObjectValueOfValueSlice(ctx, elements), nil
+		}()
+		if err != nil {
+			return err
 		}
-		out.Destinations = supertypes.NewListNestedObjectValueOfValueSlice(ctx, elements)
 	}
-
 	{
-		var elements []AlertRouteModelRulesItemConditionGroupsItem
-		for _, item := range in.ConditionGroups {
-			var element AlertRouteModelRulesItemConditionGroupsItem
-			err := FillAlertRouteModelRulesItemConditionGroupsItem(ctx, item, &element)
-			if err != nil {
-				return err
+		var err error
+		out.ConditionGroups, err = func() (supertypes.ListNestedObjectValueOf[AlertRouteModelRulesItemConditionGroupsItem], error) {
+			var elements []AlertRouteModelRulesItemConditionGroupsItem
+			for _, item := range in.ConditionGroups {
+				var element AlertRouteModelRulesItemConditionGroupsItem
+				err := FillAlertRouteModelRulesItemConditionGroupsItem(ctx, item, &element)
+				if err != nil {
+					return supertypes.NewListNestedObjectValueOfNull[AlertRouteModelRulesItemConditionGroupsItem](ctx), err
+				}
+				elements = append(elements, element)
 			}
-			elements = append(elements, element)
+			return supertypes.NewListNestedObjectValueOfValueSlice(ctx, elements), nil
+		}()
+		if err != nil {
+			return err
 		}
-		out.ConditionGroups = supertypes.NewListNestedObjectValueOfValueSlice(ctx, elements)
 	}
-
 	return nil
 }
 
@@ -664,20 +677,24 @@ func FillAlertRouteModelRulesItemDestinationsItem(ctx context.Context, in apicli
 
 func FillAlertRouteModelRulesItemConditionGroupsItem(ctx context.Context, in apiclient.AlertRouteModelRulesItemConditionGroupsItem, out *AlertRouteModelRulesItemConditionGroupsItem) error {
 	out.Position = supertypes.NewInt64Value(in.Position)
-
 	{
-		var elements []AlertRouteModelRulesItemConditionGroupsItemConditionsItem
-		for _, item := range in.Conditions {
-			var element AlertRouteModelRulesItemConditionGroupsItemConditionsItem
-			err := FillAlertRouteModelRulesItemConditionGroupsItemConditionsItem(ctx, item, &element)
-			if err != nil {
-				return err
+		var err error
+		out.Conditions, err = func() (supertypes.ListNestedObjectValueOf[AlertRouteModelRulesItemConditionGroupsItemConditionsItem], error) {
+			var elements []AlertRouteModelRulesItemConditionGroupsItemConditionsItem
+			for _, item := range in.Conditions {
+				var element AlertRouteModelRulesItemConditionGroupsItemConditionsItem
+				err := FillAlertRouteModelRulesItemConditionGroupsItemConditionsItem(ctx, item, &element)
+				if err != nil {
+					return supertypes.NewListNestedObjectValueOfNull[AlertRouteModelRulesItemConditionGroupsItemConditionsItem](ctx), err
+				}
+				elements = append(elements, element)
 			}
-			elements = append(elements, element)
+			return supertypes.NewListNestedObjectValueOfValueSlice(ctx, elements), nil
+		}()
+		if err != nil {
+			return err
 		}
-		out.Conditions = supertypes.NewListNestedObjectValueOfValueSlice(ctx, elements)
 	}
-
 	return nil
 }
 
