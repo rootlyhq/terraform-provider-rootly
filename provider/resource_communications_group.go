@@ -237,28 +237,6 @@ func resourceCommunicationsGroup() *schema.Resource {
 							WriteOnly:   false,
 							Description: "User ID",
 						},
-
-						"name": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Sensitive:   false,
-							ForceNew:    false,
-							WriteOnly:   false,
-							Description: "Name of the group member",
-						},
-
-						"email": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Sensitive:   false,
-							ForceNew:    false,
-							WriteOnly:   false,
-							Description: "Email of the group member",
-						},
 					},
 				},
 			},
@@ -434,8 +412,6 @@ func resourceCommunicationsGroupRead(ctx context.Context, d *schema.ResourceData
 				processed_item_communication_group_members := map[string]interface{}{
 					"id":      rawItem["id"],
 					"user_id": rawItem["user_id"],
-					"name":    rawItem["name"],
-					"email":   rawItem["email"],
 				}
 				processed_items_communication_group_members = append(processed_items_communication_group_members, processed_item_communication_group_members)
 			}
