@@ -403,7 +403,6 @@ type AlertRouteModel struct {
 
 func (m *AlertRouteModel) ToClientModel(ctx context.Context) (*apiclient.AlertRouteModel, error) {
 	var out apiclient.AlertRouteModel
-
 	if !m.Name.IsNull() {
 		out.Name = m.Name.ValueString()
 	}
@@ -421,12 +420,20 @@ func (m *AlertRouteModel) ToClientModel(ctx context.Context) (*apiclient.AlertRo
 	}
 
 	if !m.Rules.IsNull() {
-		for _, item := range m.Rules.MustGet(ctx) {
-			itemClientModel, err := item.ToClientModel(ctx)
-			if err != nil {
-				return nil, err
+		var err error
+		out.Rules, err = func() ([]apiclient.AlertRouteModelRulesItem, error) {
+			var itemClientModels []apiclient.AlertRouteModelRulesItem
+			for _, item := range m.Rules.MustGet(ctx) {
+				itemClientModel, err := item.ToClientModel(ctx)
+				if err != nil {
+					return nil, err
+				}
+				itemClientModels = append(itemClientModels, *itemClientModel)
 			}
-			out.Rules = append(out.Rules, *itemClientModel)
+			return itemClientModels, nil
+		}()
+		if err != nil {
+			return nil, err
 		}
 	}
 
@@ -443,7 +450,6 @@ type AlertRouteModelRulesItem struct {
 
 func (m *AlertRouteModelRulesItem) ToClientModel(ctx context.Context) (*apiclient.AlertRouteModelRulesItem, error) {
 	var out apiclient.AlertRouteModelRulesItem
-
 	if !m.Name.IsNull() {
 		out.Name = m.Name.ValueString()
 	}
@@ -457,22 +463,38 @@ func (m *AlertRouteModelRulesItem) ToClientModel(ctx context.Context) (*apiclien
 	}
 
 	if !m.Destinations.IsNull() {
-		for _, item := range m.Destinations.MustGet(ctx) {
-			itemClientModel, err := item.ToClientModel(ctx)
-			if err != nil {
-				return nil, err
+		var err error
+		out.Destinations, err = func() ([]apiclient.AlertRouteModelRulesItemDestinationsItem, error) {
+			var itemClientModels []apiclient.AlertRouteModelRulesItemDestinationsItem
+			for _, item := range m.Destinations.MustGet(ctx) {
+				itemClientModel, err := item.ToClientModel(ctx)
+				if err != nil {
+					return nil, err
+				}
+				itemClientModels = append(itemClientModels, *itemClientModel)
 			}
-			out.Destinations = append(out.Destinations, *itemClientModel)
+			return itemClientModels, nil
+		}()
+		if err != nil {
+			return nil, err
 		}
 	}
 
 	if !m.ConditionGroups.IsNull() {
-		for _, item := range m.ConditionGroups.MustGet(ctx) {
-			itemClientModel, err := item.ToClientModel(ctx)
-			if err != nil {
-				return nil, err
+		var err error
+		out.ConditionGroups, err = func() ([]apiclient.AlertRouteModelRulesItemConditionGroupsItem, error) {
+			var itemClientModels []apiclient.AlertRouteModelRulesItemConditionGroupsItem
+			for _, item := range m.ConditionGroups.MustGet(ctx) {
+				itemClientModel, err := item.ToClientModel(ctx)
+				if err != nil {
+					return nil, err
+				}
+				itemClientModels = append(itemClientModels, *itemClientModel)
 			}
-			out.ConditionGroups = append(out.ConditionGroups, *itemClientModel)
+			return itemClientModels, nil
+		}()
+		if err != nil {
+			return nil, err
 		}
 	}
 
@@ -486,7 +508,6 @@ type AlertRouteModelRulesItemDestinationsItem struct {
 
 func (m *AlertRouteModelRulesItemDestinationsItem) ToClientModel(ctx context.Context) (*apiclient.AlertRouteModelRulesItemDestinationsItem, error) {
 	var out apiclient.AlertRouteModelRulesItemDestinationsItem
-
 	if !m.TargetType.IsNull() {
 		out.TargetType = m.TargetType.ValueString()
 	}
@@ -505,18 +526,25 @@ type AlertRouteModelRulesItemConditionGroupsItem struct {
 
 func (m *AlertRouteModelRulesItemConditionGroupsItem) ToClientModel(ctx context.Context) (*apiclient.AlertRouteModelRulesItemConditionGroupsItem, error) {
 	var out apiclient.AlertRouteModelRulesItemConditionGroupsItem
-
 	if !m.Position.IsNull() {
 		out.Position = m.Position.ValueInt64()
 	}
 
 	if !m.Conditions.IsNull() {
-		for _, item := range m.Conditions.MustGet(ctx) {
-			itemClientModel, err := item.ToClientModel(ctx)
-			if err != nil {
-				return nil, err
+		var err error
+		out.Conditions, err = func() ([]apiclient.AlertRouteModelRulesItemConditionGroupsItemConditionsItem, error) {
+			var itemClientModels []apiclient.AlertRouteModelRulesItemConditionGroupsItemConditionsItem
+			for _, item := range m.Conditions.MustGet(ctx) {
+				itemClientModel, err := item.ToClientModel(ctx)
+				if err != nil {
+					return nil, err
+				}
+				itemClientModels = append(itemClientModels, *itemClientModel)
 			}
-			out.Conditions = append(out.Conditions, *itemClientModel)
+			return itemClientModels, nil
+		}()
+		if err != nil {
+			return nil, err
 		}
 	}
 
@@ -536,7 +564,6 @@ type AlertRouteModelRulesItemConditionGroupsItemConditionsItem struct {
 
 func (m *AlertRouteModelRulesItemConditionGroupsItemConditionsItem) ToClientModel(ctx context.Context) (*apiclient.AlertRouteModelRulesItemConditionGroupsItemConditionsItem, error) {
 	var out apiclient.AlertRouteModelRulesItemConditionGroupsItemConditionsItem
-
 	if !m.PropertyFieldConditionType.IsNull() {
 		out.PropertyFieldConditionType = m.PropertyFieldConditionType.ValueString()
 	}

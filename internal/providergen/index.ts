@@ -45,7 +45,7 @@ function generateTerraformValuer({
           var itemClientModels []apiclient.${camelize(
             `${parent}_${field}_item`
           )}
-          for _, item := range plan.${camelize(field)}.MustGet(ctx) {
+          for _, item := range ${prefix}${camelize(field)}.MustGet(ctx) {
             itemClientModel, err := item.ToClientModel(ctx)
             if err != nil {
               return nil, err
@@ -66,177 +66,42 @@ function generateTerraformValuer({
     });
 }
 
-interface GenerateGoTypeResult {
-  output: string;
-  nested: string[];
-}
-
-function generateGoType({
-  mode,
+function generateTerraformType({
   parent,
   field,
   ir,
 }: {
-  mode: "terraform" | "primitive" | "terraform_valuer" | "fill_model";
   parent: string;
   field: string;
   ir: IRType;
-}): GenerateGoTypeResult {
-  console.log({ mode, parent, field, ir });
-  return match([mode, ir])
-    .returnType<GenerateGoTypeResult>()
-    .with(["terraform", { kind: "string" }], () => ({
+}): { output: string; nested: string[] } {
+  return match(ir)
+    .returnType<{ output: string; nested: string[] }>()
+    .with({ kind: "string" }, () => ({
       output: "supertypes.StringValue",
       nested: [],
     }))
-    .with(["terraform_valuer", { kind: "string" }], () => ({
-      output: `
-        if !m.${camelize(field)}.IsNull() {
-          out.${camelize(field)} = m.${camelize(field)}.ValueString()
-        }
-      `,
-      nested: [],
-    }))
-    .with(["fill_model", { kind: "string" }], () => ({
-      output: `out.${camelize(
-        field
-      )} = supertypes.NewStringValueOrNull(in.${camelize(field)})`,
-      nested: [],
-    }))
-    .with(["primitive", { kind: "string" }], () => ({
-      output: "string",
-      nested: [],
-    }))
-    .with(["terraform", { kind: "bool" }], () => ({
+    .with({ kind: "bool" }, () => ({
       output: "supertypes.BoolValue",
       nested: [],
     }))
-    .with(["terraform_valuer", { kind: "bool" }], () => ({
-      output: `
-        if !m.${camelize(field)}.IsNull() {
-          out.${camelize(field)} = m.${camelize(field)}.ValueBool()
-        }
-      `,
-      nested: [],
-    }))
-    .with(["fill_model", { kind: "bool" }], () => ({
-      output: `out.${camelize(field)} = supertypes.NewBoolValue(in.${camelize(
-        field
-      )})`,
-      nested: [],
-    }))
-    .with(["primitive", { kind: "bool" }], () => ({
-      output: "bool",
-      nested: [],
-    }))
-    .with(["terraform", { kind: "int" }], () => ({
+    .with({ kind: "int" }, () => ({
       output: "supertypes.Int64Value",
       nested: [],
     }))
-    .with(["terraform_valuer", { kind: "int" }], () => ({
-      output: `
-        if !m.${camelize(field)}.IsNull() {
-          out.${camelize(field)} = m.${camelize(field)}.ValueInt64()
-        }
-      `,
-      nested: [],
-    }))
-    .with(["fill_model", { kind: "int" }], () => ({
-      output: `out.${camelize(field)} = supertypes.NewInt64Value(in.${camelize(
-        field
-      )})`,
-      nested: [],
-    }))
-    .with(["primitive", { kind: "int" }], () => ({
-      output: "int64",
-      nested: [],
-    }))
-    .with(
-      ["terraform", { kind: "array", element: { kind: "object" } }],
-      ([_, ir]) => {
-        const inner = generateGoType({
-          mode,
-          parent: camelize(`${parent}_${field}`),
-          field: "Item",
-          ir: ir.element,
-        });
-        return {
-          output: `supertypes.ListNestedObjectValueOf[${inner.output}]`,
-          nested: inner.nested,
-        };
-      }
-    )
-    .with(
-      ["terraform_valuer", { kind: "array", element: { kind: "object" } }],
-      () => {
-        return {
-          output: `
-            if !m.${camelize(field)}.IsNull() {
-              for _, item := range m.${camelize(field)}.MustGet(ctx) {
-                itemClientModel, err := item.ToClientModel(ctx)
-                if err != nil {
-                  return nil, err
-                }
-                out.${camelize(field)} = append(out.${camelize(
-            field
-          )}, *itemClientModel)
-              }
-            }
-          `,
-          nested: [],
-        };
-      }
-    )
-    .with(
-      ["fill_model", { kind: "array", element: { kind: "object" } }],
-      ([_, ir]) => {
-        const inner = generateGoType({
-          mode,
-          parent: camelize(`${parent}_${field}`),
-          field: "Item",
-          ir: ir.element,
-        });
-        return {
-          output: `
-            {
-              var elements []${camelize(`${parent}_${field}`)}Item
-              for _, item := range in.${camelize(field)} {
-                var element ${camelize(`${parent}_${field}`)}Item
-                err := Fill${camelize(
-                  `${parent}_${field}`
-                )}Item(ctx, item, &element)
-                if err != nil {
-                  return err
-                }
-                elements = append(elements, element)
-              }
-              out.${camelize(
-                field
-              )} = supertypes.NewListNestedObjectValueOfValueSlice(ctx, elements)
-            }
-          `,
-          nested: inner.nested,
-        };
-      }
-    )
-    .with(
-      ["primitive", { kind: "array", element: { kind: "object" } }],
-      ([_, ir]) => {
-        const inner = generateGoType({
-          mode,
-          parent: camelize(`${parent}_${field}`),
-          field: "Item",
-          ir: ir.element,
-        });
-        return {
-          output: `[]${inner.output}`,
-          nested: inner.nested,
-        };
-      }
-    )
-    .with(["terraform", { kind: "array" }], ([_, ir]) => {
-      const inner = generateGoType({
-        mode: "primitive",
+    .with({ kind: "array", element: { kind: "object" } }, (ir) => {
+      const inner = generateTerraformType({
+        parent: camelize(`${parent}_${field}`),
+        field: "Item",
+        ir: ir.element,
+      });
+      return {
+        output: `supertypes.ListNestedObjectValueOf[${inner.output}]`,
+        nested: inner.nested,
+      };
+    })
+    .with({ kind: "array" }, (ir) => {
+      const inner = generatePrimitiveType({
         parent: camelize(`${parent}_${field}`),
         field: "Item",
         ir: ir.element,
@@ -246,25 +111,142 @@ function generateGoType({
         nested: inner.nested,
       };
     })
-    .with(["terraform_valuer", { kind: "array" }], ([_, ir]) => {
-      const inner = generateGoType({
-        mode: "primitive",
+    .with({ kind: "object" }, (ir) => {
+      const structName = camelize(`${parent}_${field}`);
+      const struct = generateModel({ name: structName, ir });
+      return {
+        output: structName,
+        nested: [struct],
+      };
+    })
+    .otherwise(() => {
+      throw new Error(`Unsupported IR type: ${JSON.stringify(ir)}`);
+    });
+}
+
+function generatePrimitiveType({
+  parent,
+  field,
+  ir,
+}: {
+  parent: string;
+  field: string;
+  ir: IRType;
+}): { output: string; nested: string[] } {
+  return match(ir)
+    .returnType<{ output: string; nested: string[] }>()
+    .with({ kind: "string" }, () => ({
+      output: "string",
+      nested: [],
+    }))
+    .with({ kind: "bool" }, () => ({
+      output: "bool",
+      nested: [],
+    }))
+    .with({ kind: "int" }, () => ({
+      output: "int64",
+      nested: [],
+    }))
+    .with({ kind: "array", element: { kind: "object" } }, (ir) => {
+      const inner = generatePrimitiveType({
+        parent: camelize(`${parent}_${field}`),
+        field: "Item",
+        ir: ir.element,
+      });
+      return {
+        output: `[]${inner.output}`,
+        nested: inner.nested,
+      };
+    })
+    .with({ kind: "array" }, (ir) => {
+      const inner = generatePrimitiveType({
+        parent: camelize(`${parent}_${field}`),
+        field: "Item",
+        ir: ir.element,
+      });
+      return {
+        output: `[]${inner.output}`,
+        nested: inner.nested,
+      };
+    })
+    .with({ kind: "object" }, (ir) => {
+      const structName = camelize(`${parent}_${field}`);
+      const struct = generateClientModel({ name: structName, ir });
+      return {
+        output: structName,
+        nested: [struct],
+      };
+    })
+    .otherwise(() => {
+      throw new Error(`Unsupported IR type: ${JSON.stringify(ir)}`);
+    });
+}
+
+function generateModelValuer({
+  parent,
+  field,
+  ir,
+}: {
+  parent: string;
+  field: string;
+  ir: IRType;
+}): {
+  output: string;
+  nested: string[];
+} {
+  return match(ir)
+    .returnType<{
+      output: string;
+      nested: string[];
+    }>()
+    .with({ kind: "string" }, () => ({
+      output: `out.${camelize(
+        field
+      )} = supertypes.NewStringValueOrNull(in.${camelize(field)})`,
+      nested: [],
+    }))
+    .with({ kind: "bool" }, () => ({
+      output: `out.${camelize(field)} = supertypes.NewBoolValue(in.${camelize(
+        field
+      )})`,
+      nested: [],
+    }))
+    .with({ kind: "int" }, () => ({
+      output: `out.${camelize(field)} = supertypes.NewInt64Value(in.${camelize(
+        field
+      )})`,
+      nested: [],
+    }))
+    .with({ kind: "array", element: { kind: "object" } }, (ir) => {
+      const inner = generateModelValuer({
         parent: camelize(`${parent}_${field}`),
         field: "Item",
         ir: ir.element,
       });
       return {
         output: `
-          if !m.${camelize(field)}.IsNull() {
-            out.${camelize(field)} = m.${camelize(field)}.MustGet(ctx)
+          {
+            var elements []${camelize(`${parent}_${field}`)}Item
+            for _, item := range in.${camelize(field)} {
+              var element ${camelize(`${parent}_${field}`)}Item
+              err := Fill${camelize(
+                `${parent}_${field}`
+              )}Item(ctx, item, &element)
+              if err != nil {
+                return err
+              }
+              elements = append(elements, element)
+            }
+            out.${camelize(
+              field
+            )} = supertypes.NewListNestedObjectValueOfValueSlice(ctx, elements)
           }
         `,
         nested: inner.nested,
       };
     })
-    .with(["fill_model", { kind: "array" }], ([_, ir]) => {
-      const inner = generateGoType({
-        mode,
+    .with({ kind: "array" }, (ir) => {
+      const inner = generateModelValuer({
         parent: camelize(`${parent}_${field}`),
         field: "Item",
         ir: ir.element,
@@ -276,27 +258,7 @@ function generateGoType({
         nested: inner.nested,
       };
     })
-    .with(["primitive", { kind: "array" }], ([_, ir]) => {
-      const inner = generateGoType({
-        mode,
-        parent: camelize(`${parent}_${field}`),
-        field: "Item",
-        ir: ir.element,
-      });
-      return {
-        output: `[]${inner.output}`,
-        nested: inner.nested,
-      };
-    })
-    .with(["terraform", { kind: "object" }], ([_, ir]) => {
-      const structName = camelize(`${parent}_${field}`);
-      const struct = generateModel({ name: structName, ir });
-      return {
-        output: structName,
-        nested: [struct],
-      };
-    })
-    .with(["fill_model", { kind: "object" }], ([_, ir]) => {
+    .with({ kind: "object" }, (ir) => {
       const structName = camelize(`${parent}_${field}`);
       const struct = generateFillModel({ name: structName, ir });
       return {
@@ -304,20 +266,8 @@ function generateGoType({
         nested: [struct],
       };
     })
-    .with(["primitive", { kind: "object" }], ([_, ir]) => {
-      const structName = camelize(`${parent}_${field}`);
-      const struct = generateClientModel({ name: structName, ir });
-      return {
-        output: structName,
-        nested: [struct],
-      };
-    })
     .otherwise(() => {
-      throw new Error(
-        `Unsupported IR type for field ${parent}.${field}, mode ${mode}: ${JSON.stringify(
-          ir
-        )}`
-      );
+      throw new Error(`Unsupported IR type: ${JSON.stringify(ir)}`);
     });
 }
 
@@ -333,24 +283,22 @@ function generateModel({
   const nested: string[] = [];
 
   if (ir.kind === "resource") {
-    const { output } = generateGoType({
-      mode: "terraform",
+    const terraformType = generateTerraformType({
       parent: name,
       field: "id",
       ir: ir.idElement,
     });
-    modelStructLines.push(`Id ${output} \`tfsdk:"id"\``);
+    modelStructLines.push(`Id ${terraformType.output} \`tfsdk:"id"\``);
   }
 
   for (const [field, fieldIR] of Object.entries(ir.fields)) {
-    const terraformType = generateGoType({
-      mode: "terraform",
+    const terraformType = generateTerraformType({
       parent: name,
       field,
       ir: fieldIR,
     });
-    const terraformValuerType = generateGoType({
-      mode: "terraform_valuer",
+    const terraformValuer = generateTerraformValuer({
+      prefix: "m.",
       parent: name,
       field,
       ir: fieldIR,
@@ -362,7 +310,24 @@ function generateModel({
         field
       )}"\``
     );
-    toClientModelLines.push(terraformValuerType.output);
+
+    toClientModelLines.push(`if !m.${camelize(field)}.IsNull() {`);
+    if (terraformValuer.hasErr) {
+      toClientModelLines.push(
+        `
+          var err error
+          out.${camelize(field)}, err = ${terraformValuer.output}
+          if err != nil {
+            return nil, err
+          }
+        `.trim()
+      );
+    } else {
+      toClientModelLines.push(
+        `out.${camelize(field)} = ${terraformValuer.output}`
+      );
+    }
+    toClientModelLines.push(`}\n`);
   }
 
   const struct = `
@@ -389,25 +354,23 @@ function generateFillModel({ name, ir }: { name: string; ir: IRType }) {
   const nested: string[] = [];
 
   if (ir.kind === "resource") {
-    const { output } = generateGoType({
-      mode: "fill_model",
+    const modelValuer = generateModelValuer({
       parent: name,
       field: "id",
       ir: ir.idElement,
     });
-    fillModelLines.push(output);
+    fillModelLines.push(modelValuer.output);
   }
 
   for (const [field, fieldIR] of Object.entries(ir.fields)) {
-    const result = generateGoType({
-      mode: "fill_model",
+    const modelValuer = generateModelValuer({
       parent: name,
       field,
       ir: fieldIR,
     });
 
-    nested.push(...result.nested);
-    fillModelLines.push(result.output);
+    nested.push(...modelValuer.nested);
+    fillModelLines.push(modelValuer.output);
   }
 
   const struct = `
@@ -492,8 +455,7 @@ function generateAttribute({
         }`;
       })
       .with({ kind: "array" }, ({ element }) => {
-        const { output: type } = generateGoType({
-          mode: "primitive",
+        const primitiveType = generatePrimitiveType({
           parent,
           field,
           ir: element,
@@ -501,7 +463,7 @@ function generateAttribute({
 
         return `schema.ListAttribute{
           ${common}
-          CustomType: supertypes.NewListTypeOf[${type}](ctx),
+          CustomType: supertypes.NewListTypeOf[${primitiveType.output}](ctx),
         }`;
       })
       // .with({ kind: "object" }, () => {
@@ -837,29 +799,29 @@ function generateClientModel({ ir, name }: { ir: IRType; name: string }) {
     ir.kind === "resource" ? `${camelize(name)}Model` : camelize(name);
 
   if (ir.kind === "resource") {
-    const { output: type } = generateGoType({
-      mode: "primitive",
+    const primitiveType = generatePrimitiveType({
       parent: modelName,
       field: "ir",
       ir: ir.idElement,
     });
     modelStructLines.push(
-      `Id ${type} \`jsonapi:"primary,${pluralize(ir.resourceType)},omitempty"\``
+      `Id ${primitiveType.output} \`jsonapi:"primary,${pluralize(
+        ir.resourceType
+      )},omitempty"\``
     );
   }
 
   for (const [field, fieldIR] of Object.entries(ir.fields)) {
-    const { output: type, nested: nx } = generateGoType({
-      mode: "primitive",
+    const primitiveType = generatePrimitiveType({
       parent: modelName,
       field,
       ir: fieldIR,
     });
-    nested.push(...nx);
+    nested.push(...primitiveType.nested);
     modelStructLines.push(
-      `${camelize(field)} ${type} \`jsonapi:"attribute" json:"${underscore(
-        field
-      )},omitempty"\``
+      `${camelize(field)} ${
+        primitiveType.output
+      } \`jsonapi:"attribute" json:"${underscore(field)},omitempty"\``
     );
   }
 
