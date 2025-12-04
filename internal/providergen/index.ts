@@ -11,21 +11,25 @@ async function getRootlySwagger() {
   return (await response.json()) as any;
 }
 
+interface GenerateGoTypeResult {
+  output: string;
+  nested: string[];
+}
+
 function generateGoType({
   mode,
   parent,
   field,
   ir,
 }: {
-  mode: "terraform" | "primitive" | "terraform_valuer";
+  mode: "terraform" | "primitive" | "terraform_valuer" | "fill_model";
   parent: string;
   field: string;
   ir: IRType;
-}): {
-  output: string;
-  nested: string[];
-} {
+}): GenerateGoTypeResult {
+  console.log({ mode, parent, field, ir });
   return match([mode, ir])
+    .returnType<GenerateGoTypeResult>()
     .with(["terraform", { kind: "string" }], () => ({
       output: "types.String",
       nested: [],
@@ -36,6 +40,12 @@ function generateGoType({
           out.${camelize(field)} = m.${camelize(field)}.ValueString()
         }
       `,
+      nested: [],
+    }))
+    .with(["fill_model", { kind: "string" }], () => ({
+      output: `out.${camelize(field)} = types.StringValue(in.${camelize(
+        field
+      )})`,
       nested: [],
     }))
     .with(["primitive", { kind: "string" }], () => ({
@@ -54,6 +64,10 @@ function generateGoType({
       `,
       nested: [],
     }))
+    .with(["fill_model", { kind: "bool" }], () => ({
+      output: `out.${camelize(field)} = types.BoolValue(in.${camelize(field)})`,
+      nested: [],
+    }))
     .with(["primitive", { kind: "bool" }], () => ({
       output: "bool",
       nested: [],
@@ -68,6 +82,12 @@ function generateGoType({
           out.${camelize(field)} = m.${camelize(field)}.ValueInt64()
         }
       `,
+      nested: [],
+    }))
+    .with(["fill_model", { kind: "int" }], () => ({
+      output: `out.${camelize(field)} = types.Int64Value(in.${camelize(
+        field
+      )})`,
       nested: [],
     }))
     .with(["primitive", { kind: "int" }], () => ({
@@ -91,6 +111,27 @@ function generateGoType({
     )
     .with(
       ["terraform_valuer", { kind: "array", element: { kind: "object" } }],
+      () => {
+        return {
+          output: `
+            if !m.${camelize(field)}.IsNull() {
+              for _, item := range m.${camelize(field)}.MustGet(ctx) {
+                itemClientModel, err := item.ToClientModel(ctx)
+                if err != nil {
+                  return nil, err
+                }
+                out.${camelize(field)} = append(out.${camelize(
+            field
+          )}, *itemClientModel)			
+              }
+            }
+          `,
+          nested: [],
+        };
+      }
+    )
+    .with(
+      ["fill_model", { kind: "array", element: { kind: "object" } }],
       ([_, ir]) => {
         const inner = generateGoType({
           mode,
@@ -99,7 +140,24 @@ function generateGoType({
           ir: ir.element,
         });
         return {
-          output: `// TODO`,
+          output: `
+            {
+              var elements []${camelize(`${parent}_${field}`)}Item
+              for _, item := range in.${camelize(field)} {
+                var element ${camelize(`${parent}_${field}`)}Item
+                err := Fill${camelize(
+                  `${parent}_${field}`
+                )}Item(ctx, item, &element)
+                if err != nil {
+                  return err
+                }
+                elements = append(elements, element)
+              }
+              out.${camelize(
+                field
+              )} = supertypes.NewListNestedObjectValueOfValueSlice(ctx, elements)
+            }
+          `,
           nested: inner.nested,
         };
       }
@@ -120,7 +178,6 @@ function generateGoType({
       }
     )
     .with(["terraform", { kind: "array" }], ([_, ir]) => {
-      // TODO: validate primitive type
       const inner = generateGoType({
         mode: "primitive",
         parent: camelize(`${parent}_${field}`),
@@ -133,7 +190,6 @@ function generateGoType({
       };
     })
     .with(["terraform_valuer", { kind: "array" }], ([_, ir]) => {
-      // TODO: validate primitive type
       const inner = generateGoType({
         mode: "primitive",
         parent: camelize(`${parent}_${field}`),
@@ -141,7 +197,25 @@ function generateGoType({
         ir: ir.element,
       });
       return {
-        output: `// TODO`,
+        output: `
+          if !m.${camelize(field)}.IsNull() {
+            out.${camelize(field)} = m.${camelize(field)}.MustGet(ctx)
+          }
+        `,
+        nested: inner.nested,
+      };
+    })
+    .with(["fill_model", { kind: "array" }], ([_, ir]) => {
+      const inner = generateGoType({
+        mode,
+        parent: camelize(`${parent}_${field}`),
+        field: "Item",
+        ir: ir.element,
+      });
+      return {
+        output: `out.${camelize(
+          field
+        )} = supertypes.NewListValueOfSlice(ctx, in.${camelize(field)})`,
         nested: inner.nested,
       };
     })
@@ -165,16 +239,12 @@ function generateGoType({
         nested: [struct],
       };
     })
-    .with(["terraform_valuer", { kind: "object" }], ([_, ir]) => {
-      // const structName = camelize(`${parent}_${field}`);
-      // const struct = generateModel({ name: structName, ir });
-      // return {
-      //   output: structName,
-      //   nested: [struct],
-      // };
+    .with(["fill_model", { kind: "object" }], ([_, ir]) => {
+      const structName = camelize(`${parent}_${field}`);
+      const struct = generateFillModel({ name: structName, ir });
       return {
-        output: `// TODO`,
-        nested: [],
+        output: structName,
+        nested: [struct],
       };
     })
     .with(["primitive", { kind: "object" }], ([_, ir]) => {
@@ -186,227 +256,13 @@ function generateGoType({
       };
     })
     .otherwise(() => {
-      throw new Error(`Unsupported IR type for ${mode}: ${JSON.stringify(ir)}`);
+      throw new Error(
+        `Unsupported IR type for field ${parent}.${field}, mode ${mode}: ${JSON.stringify(
+          ir
+        )}`
+      );
     });
 }
-
-// interface Hints {
-//   requiredAttributes?: string[];
-// }
-
-// function generateResourceSchemaAttribute({
-//   swagger,
-//   name,
-//   schema,
-//   hints,
-// }: {
-//   swagger: any;
-//   name: string;
-//   schema: any;
-//   hints: Hints;
-// }) {
-//   const isRequired = hints.requiredAttributes?.includes(name) ?? false;
-
-//   const common = `
-//     ${isRequired ? "Required: true," : "Optional: true,"}
-//     ${
-//       schema.description
-//         ? `Description: ${JSON.stringify(schema.description)},`
-//         : ""
-//     }
-//     ${
-//       schema.description
-//         ? `MarkdownDescription: ${JSON.stringify(schema.description)},`
-//         : ""
-//     }
-//   `;
-
-//   return match(schema)
-//     .with({ type: "string" }, () => {
-//       return `schema.StringAttribute{
-//         ${common}
-//       }`;
-//     })
-//     .with({ type: "boolean" }, () => {
-//       return `schema.BoolAttribute{
-//         ${common}
-//       }`;
-//     })
-//     .with({ type: "integer" }, () => {
-//       return `schema.Int64Attribute{
-//         ${common}
-//       }`;
-//     })
-//     .with({ type: "array", items: { type: "string" } }, () => {
-//       return `schema.ListAttribute{
-//         ${common}
-//         CustomType: supertypes.NewListTypeOf[string](ctx),
-//       }`;
-//     })
-//     .with({ type: "array", items: { type: "object" } }, () => {
-//       return `schema.ListNestedAttribute{
-//         ${common}
-//         NestedObject: schema.NestedAttributeObject{
-//           Attributes: map[string]schema.Attribute{
-//             ${Object.entries(schema.items.properties)
-//               .map(([name, propertySchema]) => {
-//                 const hints: Hints = {
-//                   requiredAttributes: schema.items.required,
-//                 };
-//                 try {
-//                   return `"${name}": ${generateResourceSchemaAttribute({
-//                     swagger,
-//                     name,
-//                     schema: propertySchema,
-//                     hints,
-//                   })},`;
-//                 } catch (e) {
-//                   console.error(e);
-//                   return `// TODO: Unsupported type ${name}: ${schema.type}`;
-//                 }
-//               })
-//               .join("\n")}
-//           },
-//         },
-//       }`;
-//     })
-//     .otherwise(() => {
-//       throw new Error(`Unsupported type ${schema.type}`);
-//     });
-// }
-
-// function generateResourceSchemav1({
-//   swagger,
-//   name,
-// }: {
-//   swagger: any;
-//   name: string;
-// }) {
-//   const resourceSchema = swagger.components.schemas[name];
-//   if (!resourceSchema) {
-//     throw new Error(`Resource ${name} not found`);
-//   }
-
-//   const newResourceSchema = swagger.components.schemas[`new_${name}`];
-//   if (!newResourceSchema) {
-//     throw new Error(`New resource ${name} not found`);
-//   }
-
-//   const requiredAttributes =
-//     newResourceSchema.properties.data.properties.attributes.required;
-//   const hints: Hints = {
-//     requiredAttributes,
-//   };
-
-//   return `
-// schema.Schema{
-//   Attributes: map[string]schema.Attribute{
-//     ${Object.entries(resourceSchema.properties)
-//       .map(([name, schema]) => {
-//         try {
-//           return `"${underscore(name)}": ${generateResourceSchemaAttribute({
-//             swagger,
-//             name,
-//             schema,
-//             hints,
-//           })},`;
-//         } catch (e) {
-//           console.error(e);
-//           return `// TODO: Unsupported type ${name}: ${schema.type}`;
-//         }
-//       })
-//       .join("\n")}
-//   },
-// }
-// `;
-// }
-
-// function generateModelType({
-//   parentName,
-//   fieldName,
-//   schema,
-// }: {
-//   parentName: string;
-//   fieldName: string;
-//   schema: any;
-// }): {
-//   type: string;
-//   nested: string[];
-// } {
-//   return match(schema)
-//     .with({ type: "string" }, () => ({
-//       type: "types.String",
-//       nested: [],
-//     }))
-//     .with({ type: "boolean" }, () => ({
-//       type: "types.Bool",
-//       nested: [],
-//     }))
-//     .with({ type: "integer" }, () => ({
-//       type: "types.Int64",
-//       nested: [],
-//     }))
-//     .with({ type: "array", items: { type: "string" } }, () => ({
-//       type: "supertypes.ListValueOf[string]",
-//       nested: [],
-//     }))
-//     .with({ type: "array", items: { type: "object" } }, ({ items }) => {
-//       const nestedName = camelize(`${parentName}_${fieldName}_item`);
-//       const struct = generateModelStruct({
-//         name: nestedName,
-//         schema: items,
-//       });
-
-//       return {
-//         type: `supertypes.ListNestedObjectValueOf[${nestedName}]`,
-//         nested: [struct],
-//       };
-//     })
-//     .with({ type: "object" }, () => {
-//       const nestedName = camelize(`${parentName}_${fieldName}`);
-//       const struct = generateModelStruct({
-//         name: nestedName,
-//         schema,
-//       });
-
-//       return {
-//         type: nestedName,
-//         nested: [struct],
-//       };
-//     })
-
-//     .otherwise(() => {
-//       throw new Error(`Unsupported type in recursive model: ${schema.type}`);
-//     });
-// }
-
-// function generateModelStruct({ name, schema }: { name: string; schema: any }) {
-//   const props = schema.properties ?? [];
-//   const lines: string[] = [];
-//   const extraStructs: string[] = [];
-
-//   for (const [fieldName, fieldSchema] of Object.entries(props)) {
-//     const { type, nested } = generateModelType({
-//       parentName: name,
-//       fieldName,
-//       schema: fieldSchema,
-//     });
-
-//     lines.push(
-//       `${camelize(fieldName)} ${type} \`tfsdk:"${underscore(fieldName)}"\``
-//     );
-
-//     extraStructs.push(...nested);
-//   }
-
-//   const struct = `
-// type ${name} struct {
-//   ${lines.join("\n  ")}
-// }
-// `;
-
-//   return [struct, ...extraStructs].join("\n");
-// }
 
 function generateModel({ name, ir }: { name: string; ir: IRType }) {
   if (ir.kind !== "object" && ir.kind !== "resource") {
@@ -457,8 +313,48 @@ type ${name} struct {
 
 func (m *${name}) ToClientModel(ctx context.Context) (*apiclient.${name}, error) {
   var out apiclient.${name}
-  ${toClientModelLines.join("\n  ")}
+  ${toClientModelLines.join("\n")}
   return &out, nil
+}
+`;
+
+  return [struct, ...nested].join("\n");
+}
+
+function generateFillModel({ name, ir }: { name: string; ir: IRType }) {
+  if (ir.kind !== "object" && ir.kind !== "resource") {
+    throw new Error("Model root must be an object");
+  }
+
+  const fillModelLines: string[] = [];
+  const nested: string[] = [];
+
+  if (ir.kind === "resource") {
+    const { output } = generateGoType({
+      mode: "fill_model",
+      parent: name,
+      field: "id",
+      ir: ir.idElement,
+    });
+    fillModelLines.push(output);
+  }
+
+  for (const [field, fieldIR] of Object.entries(ir.fields)) {
+    const result = generateGoType({
+      mode: "fill_model",
+      parent: name,
+      field,
+      ir: fieldIR,
+    });
+
+    nested.push(...result.nested);
+    fillModelLines.push(result.output);
+  }
+
+  const struct = `
+func Fill${name}(ctx context.Context, in apiclient.${name}, out *${name}) error {
+  ${fillModelLines.join("\n")}
+  return nil
 }
 `;
 
@@ -717,6 +613,7 @@ func (r *${resourceName}) ImportState(ctx context.Context, req resource.ImportSt
 }
 
 ${generateModel({ name: modelName, ir })}
+${generateFillModel({ name: modelName, ir })}
 `;
 }
 
@@ -725,7 +622,8 @@ function generateClientModel({ ir, name }: { ir: IRType; name: string }) {
     throw new Error("Model root must be a resource");
   }
 
-  const lines: string[] = [];
+  const modelStructLines: string[] = [];
+  const fillModelLines: string[] = [];
   const nested: string[] = [];
 
   const modelName =
@@ -738,7 +636,7 @@ function generateClientModel({ ir, name }: { ir: IRType; name: string }) {
       field: "ir",
       ir: ir.idElement,
     });
-    lines.push(
+    modelStructLines.push(
       `Id ${type} \`jsonapi:"primary,${pluralize(ir.resourceType)},omitempty"\``
     );
   }
@@ -751,7 +649,7 @@ function generateClientModel({ ir, name }: { ir: IRType; name: string }) {
       ir: fieldIR,
     });
     nested.push(...nx);
-    lines.push(
+    modelStructLines.push(
       `${camelize(field)} ${type} \`jsonapi:"attribute" json:"${underscore(
         field
       )},omitempty"\``
@@ -760,7 +658,7 @@ function generateClientModel({ ir, name }: { ir: IRType; name: string }) {
 
   const struct = `
 type ${modelName} struct {
-  ${lines.join("\n")}
+  ${modelStructLines.join("\n")}
 }
 `;
   return [struct, ...nested].join("\n");
