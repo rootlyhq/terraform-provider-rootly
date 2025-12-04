@@ -77,6 +77,23 @@ func TestAccResourceCommunicationsGroup(t *testing.T) {
 					resource.TestCheckResourceAttrSet("rootly_communications_group.test", "communication_group_members.2.user_id"),
 				),
 			},
+			{
+				Config: testAccResourceCommunicationsGroupUpdateRemoveConditions,
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "name", "TF test group (updated removed conditions)"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "condition_type", "all"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.#", "0"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_external_group_members.#", "2"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_external_group_members.0.email", "test-bot+3@rootly.com"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_external_group_members.0.name", "test-bot+3"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_external_group_members.1.email", "test-bot+5@rootly.com"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_external_group_members.1.name", "test-bot+5"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_members.#", "3"),
+					resource.TestCheckResourceAttrSet("rootly_communications_group.test", "communication_group_members.0.user_id"),
+					resource.TestCheckResourceAttrSet("rootly_communications_group.test", "communication_group_members.1.user_id"),
+					resource.TestCheckResourceAttrSet("rootly_communications_group.test", "communication_group_members.2.user_id"),
+				),
+			},
 		},
 	})
 }
@@ -327,6 +344,86 @@ const testAccResourceCommunicationsGroupUpdate = `
 			}
 			property_type = "incident_type"
 		}
+
+		communication_external_group_members {
+			email = "test-bot+3@rootly.com"
+			name = "test-bot+3"
+		}
+
+		communication_external_group_members {
+			email = "test-bot+5@rootly.com"
+			name = "test-bot+5"
+		}
+
+		communication_group_members {
+			user_id = data.rootly_user.test1.id
+		}
+
+		communication_group_members {
+			user_id = data.rootly_user.test3.id
+		}
+
+		communication_group_members {
+			user_id = data.rootly_user.test4.id
+		}
+	}
+`
+
+const testAccResourceCommunicationsGroupUpdateRemoveConditions = `
+	data rootly_user test1 {
+		email = "bot-tftests+1@rootly.com"
+	}
+
+	data rootly_user test2 {
+		email = "bot-tftests+2@rootly.com"
+	}
+
+	data rootly_user test3 {
+		email = "bot-tftests+3@rootly.com"
+	}
+
+	data rootly_user test4 {
+		email = "bot-tftests+4@rootly.com"
+	}
+
+	resource rootly_service test1 {
+		name = "TF test service 1"
+	}
+
+	resource rootly_service test2 {
+		name = "TF test service 2"
+	}
+
+	resource rootly_service test3 {
+		name = "TF test service 3"
+	}
+
+	resource rootly_severity test1 {
+		name = "TF test severity 1"
+	}
+
+	resource rootly_functionality test1 {
+		name = "TF test functionality 1"
+	}
+
+	resource rootly_incident_type test1 {
+		name = "TF test incident type 1"
+	}
+
+	resource rootly_team test {
+		name = "TF test group"
+	}
+
+	resource rootly_communications_type test {
+		name = "TF test type"
+		color = "#FFFFFF"
+	}
+
+	resource rootly_communications_group test {
+		name = "TF test group (updated removed conditions)"
+		communication_type_id = rootly_communications_type.test.id
+		email_channel = true
+		condition_type = "all"
 
 		communication_external_group_members {
 			email = "test-bot+3@rootly.com"
