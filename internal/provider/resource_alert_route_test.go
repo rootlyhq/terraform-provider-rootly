@@ -72,8 +72,45 @@ func TestAccResourceAlertRouteV2(t *testing.T) {
 
 	configStateChecks := []statecheck.StateCheck{
 		statecheck.ExpectKnownValue(resName, tfjsonpath.New("id"), knownvalue.NotNull()),
-		statecheck.ExpectKnownValue(resName, tfjsonpath.New("name"), knownvalue.StringExact(alertRouteName)),
 		statecheck.ExpectKnownValue(resName, tfjsonpath.New("enabled"), knownvalue.Bool(true)),
+		statecheck.ExpectKnownValue(resName, tfjsonpath.New("alerts_source_ids"), knownvalue.ListExact([]knownvalue.Check{
+			knownvalue.NotNull(),
+		})),
+		statecheck.ExpectKnownValue(resName, tfjsonpath.New("owning_team_ids"), knownvalue.ListExact([]knownvalue.Check{
+			knownvalue.NotNull(),
+		})),
+		statecheck.ExpectKnownValue(resName, tfjsonpath.New("rules"), knownvalue.ListExact([]knownvalue.Check{
+			knownvalue.ObjectExact(map[string]knownvalue.Check{
+				"name":          knownvalue.StringExact("High Priority Rule"),
+				"position":      knownvalue.Int64Exact(1),
+				"fallback_rule": knownvalue.Bool(false),
+				"destinations": knownvalue.ListExact([]knownvalue.Check{
+					knownvalue.ObjectExact(map[string]knownvalue.Check{
+						"target_type": knownvalue.StringExact("EscalationPolicy"),
+						"target_id":   knownvalue.NotNull(),
+					}),
+				}),
+				"condition_groups": knownvalue.ListExact([]knownvalue.Check{
+					knownvalue.ObjectExact(map[string]knownvalue.Check{
+						"position": knownvalue.Int64Exact(1),
+						"conditions": knownvalue.ListExact([]knownvalue.Check{
+							knownvalue.ObjectExact(map[string]knownvalue.Check{
+								"property_field_condition_type": knownvalue.StringExact("is_one_of"),
+								"property_field_name":           knownvalue.StringExact("$.severity"),
+								"property_field_type":           knownvalue.StringExact("payload"),
+								"property_field_value":          knownvalue.Null(),
+								"property_field_values": knownvalue.ListExact([]knownvalue.Check{
+									knownvalue.StringExact("critical"),
+								}),
+								"alert_urgency_ids":  knownvalue.Null(),
+								"conditionable_id":   knownvalue.Null(),
+								"conditionable_type": knownvalue.Null(),
+							}),
+						}),
+					}),
+				}),
+			}),
+		})),
 	}
 
 	resource.UnitTest(t, resource.TestCase{
@@ -81,12 +118,16 @@ func TestAccResourceAlertRouteV2(t *testing.T) {
 		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			{
-				Config:            testAccResourceAlertRoute(teamName, escalationPolicyName, alertUrgencyName, alertsSourceName, alertRouteName),
-				ConfigStateChecks: append(configStateChecks),
+				Config: testAccResourceAlertRoute(teamName, escalationPolicyName, alertUrgencyName, alertsSourceName, alertRouteName),
+				ConfigStateChecks: append(
+					configStateChecks,
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("name"), knownvalue.StringExact(alertRouteName))),
 			},
 			{
-				Config:            testAccResourceAlertRoute(teamName, escalationPolicyName, alertUrgencyName, alertsSourceName, alertRouteName),
-				ConfigStateChecks: append(configStateChecks),
+				Config: testAccResourceAlertRoute(teamName, escalationPolicyName, alertUrgencyName, alertsSourceName, alertRouteName+"-updated"),
+				ConfigStateChecks: append(
+					configStateChecks,
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("name"), knownvalue.StringExact(alertRouteName+"-updated"))),
 			},
 			{
 				ResourceName:      resName,

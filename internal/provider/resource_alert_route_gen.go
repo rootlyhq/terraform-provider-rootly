@@ -24,7 +24,6 @@ func NewAlertRouteResource() resource.Resource {
 
 type AlertRouteResource struct {
 	baseResource
-	extendableResource[AlertRouteModel]
 }
 
 func (r *AlertRouteResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -289,7 +288,71 @@ func (r *AlertRouteResource) Update(ctx context.Context, req resource.UpdateRequ
 	}
 
 	// Update API call logic
-	r.update(ctx, plan, &data, resp)
+	var modelIn apiclient.AlertRouteModel
+
+	if !data.Name.Equal(plan.Name) {
+		modelIn.Name = plan.Name.ValueString()
+	}
+
+	if !data.Enabled.Equal(plan.Enabled) {
+		modelIn.Enabled = plan.Enabled.ValueBool()
+	}
+
+	if !data.AlertsSourceIds.Equal(plan.AlertsSourceIds) {
+		modelIn.AlertsSourceIds = plan.AlertsSourceIds.MustGet(ctx)
+	}
+
+	if !data.OwningTeamIds.Equal(plan.OwningTeamIds) {
+		modelIn.OwningTeamIds = plan.OwningTeamIds.MustGet(ctx)
+	}
+
+	if !data.Rules.Equal(plan.Rules) {
+		var err error
+		modelIn.Rules, err = func() ([]apiclient.AlertRouteModelRulesItem, error) {
+			var itemClientModels []apiclient.AlertRouteModelRulesItem
+			for _, item := range plan.Rules.MustGet(ctx) {
+				itemClientModel, err := item.ToClientModel(ctx)
+				if err != nil {
+					return nil, err
+				}
+				itemClientModels = append(itemClientModels, *itemClientModel)
+			}
+			return itemClientModels, nil
+		}()
+		if err != nil {
+			resp.Diagnostics.AddError("Provider Error", fmt.Sprintf("Unable to convert plan to model: %v", err))
+			return
+		}
+	}
+
+	b, err := jsonapi.Marshal(&modelIn, jsonapi.MarshalClientMode())
+	if err != nil {
+		resp.Diagnostics.AddError("Provider Error", fmt.Sprintf("Unable to marshal model to JSON: %v", err))
+		return
+	}
+
+	httpResp, err := r.client.UpdateAlertRouteWithBodyWithResponse(ctx, data.Id.ValueString(), "application/vnd.api+json", bytes.NewReader(b))
+	if err != nil {
+		resp.Diagnostics.AddError("API Error", err.Error())
+		return
+	} else if httpResp.StatusCode() < 200 || httpResp.StatusCode() >= 300 {
+		resp.Diagnostics.AddError("API Error", fmt.Sprintf("Unable to update, got status code: %d", httpResp.StatusCode()))
+		return
+	} else if httpResp.Body == nil {
+		resp.Diagnostics.AddError("API Error", "Unable to read, got empty response")
+		return
+	}
+
+	var modelOut apiclient.AlertRouteModel
+	if err := jsonapi.Unmarshal(httpResp.Body, &modelOut); err != nil {
+		resp.Diagnostics.AddError("Provider Error", fmt.Sprintf("Unable to unmarshal response: %v", err))
+		return
+	}
+
+	if err := FillAlertRouteModel(ctx, modelOut, &data); err != nil {
+		resp.Diagnostics.AddError("Provider Error", fmt.Sprintf("Unable to fill model: %v", err))
+		return
+	}
 
 	if resp.Diagnostics.HasError() {
 		return
