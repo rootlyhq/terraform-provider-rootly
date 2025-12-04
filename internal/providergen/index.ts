@@ -1,10 +1,15 @@
-import { camelize, humanize, pluralize, underscore } from "inflection";
+import {
+  camelize,
+  humanize,
+  pluralize,
+  singularize,
+  underscore,
+} from "inflection";
 import { match } from "ts-pattern";
 import { toIR, type IRObject, type IRResource, type IRType } from "./ir";
-import { unwrapSingleAllOfDeep } from "./utils";
-import { dereference } from "@apidevtools/json-schema-ref-parser";
+import { SWAGGER_MODS } from "./swagger-mods";
 
-const RESOURCES = ["alert_route"];
+const RESOURCES = ["alert_route", "dashboard_panel"];
 
 async function getRootlySwagger() {
   const response = await fetch(
@@ -71,6 +76,10 @@ function generateTerraformValuer({
             return apiclient.${camelize(
               `${parent}_${field}`
             )}{}, fmt.Errorf("%v", diags.Errors())
+          } else if model == nil {
+            return apiclient.${camelize(
+              `${parent}_${field}`
+            )}{}, fmt.Errorf("model is nil")
           }
           clientModel, err := model.ToClientModel(ctx)
           if err != nil {
@@ -673,7 +682,23 @@ func (r *${resourceName}) Create(ctx context.Context, req resource.CreateRequest
     return
   }
 
-  httpResp, err := r.client.Create${baseName}WithBodyWithResponse(ctx, "application/vnd.api+json", bytes.NewReader(b))
+  httpResp, err := r.client.Create${baseName}WithBodyWithResponse(
+    ctx,
+    ${
+      ir.listPathIdParam
+        ? `${
+            generateTerraformValuer({
+              prefix: "data.",
+              parent: "",
+              field: ir.listPathIdParam.name,
+              ir: ir.listPathIdParam.element,
+            }).output
+          },`
+        : ""
+    }
+    "application/vnd.api+json",
+    bytes.NewReader(b),
+  )
   if err != nil {
     resp.Diagnostics.AddError("API Error", err.Error())
     return
@@ -715,7 +740,11 @@ func (r *${resourceName}) Read(ctx context.Context, req resource.ReadRequest, re
   }
 
   // Read API call logic
-  httpResp, err := r.client.Get${baseName}WithResponse(ctx, data.Id.ValueString())
+  httpResp, err := r.client.Get${baseName}WithResponse(
+    ctx,
+    data.Id.ValueString(),
+    ${ir.getHasQueryParams ? "nil," : ""}
+  )
   if err != nil {
     resp.Diagnostics.AddError("API Error", err.Error())
     return
@@ -774,7 +803,12 @@ func (r *${resourceName}) Update(ctx context.Context, req resource.UpdateRequest
     return
   }
 
-	httpResp, err := r.client.Update${baseName}WithBodyWithResponse(ctx, data.Id.ValueString(), "application/vnd.api+json", bytes.NewReader(b))
+	httpResp, err := r.client.Update${baseName}WithBodyWithResponse(
+    ctx,
+    data.Id.ValueString(),
+    "application/vnd.api+json",
+    bytes.NewReader(b),
+  )
 	if err != nil {
 		resp.Diagnostics.AddError("API Error", err.Error())
 		return
@@ -898,6 +932,79 @@ ${generateClientModel({ ir, name: modelName })}
 `;
 }
 
+function generateResourceIR({ swagger, name }: { swagger: any; name: string }) {
+  const resourceSchema = swagger.components.schemas[name];
+  if (!resourceSchema) {
+    throw new Error(`Resource ${name} not found`);
+  }
+
+  const newResourceSchema = swagger.components.schemas[`new_${name}`];
+  if (!newResourceSchema) {
+    throw new Error(`New resource ${name} not found`);
+  }
+
+  const collectionSchema = Object.entries(
+    swagger.paths as Record<string, any>
+  ).find(
+    ([_, pathSchema]) =>
+      pathSchema.get &&
+      pathSchema.get.operationId === `list${camelize(pluralize(name))}`
+  )?.[1];
+  if (!collectionSchema) {
+    throw new Error(`List path for ${name} not found`);
+  }
+
+  const getSchema = Object.entries(swagger.paths as Record<string, any>).find(
+    ([_, pathSchema]) =>
+      pathSchema.get &&
+      pathSchema.get.operationId === `get${camelize(singularize(name))}`
+  )?.[1]?.get;
+  if (!getSchema) {
+    throw new Error(`Get path for ${name} not found`);
+  }
+
+  // Get path ID parameter
+  const pathIdParameter = collectionSchema?.parameters?.[0]?.name as
+    | string
+    | undefined;
+  const pathIdIR = pathIdParameter
+    ? toIR({
+        schema: resourceSchema.properties[pathIdParameter],
+        required: null,
+      })
+    : null;
+
+  const getHasQueryParams =
+    getSchema?.parameters?.some((param) => param.in === "query") ?? false;
+
+  // Generate immediate representation of the resource
+  const irFields = toIR({
+    schema: resourceSchema,
+    required: newResourceSchema.required,
+  });
+  if (irFields.kind !== "object") {
+    throw new Error("Resource root must be an object");
+  }
+
+  const ir: IRResource = {
+    kind: "resource",
+    resourceType: name,
+    listPathIdParam:
+      pathIdParameter && pathIdIR
+        ? { name: pathIdParameter, element: pathIdIR }
+        : null,
+    getHasQueryParams,
+    idElement: {
+      kind: "string",
+      computedOptionalRequired: "computed",
+      description: `The ID of the ${humanize(name, true)}`,
+    },
+    fields: irFields.fields,
+  };
+
+  return ir;
+}
+
 async function writeAndFormatGoFile(destination: URL, code: string) {
   await Bun.write(destination, code);
   await Bun.$`go fmt ${destination.pathname}`;
@@ -907,8 +1014,11 @@ async function writeAndFormatGoFile(destination: URL, code: string) {
 async function main() {
   console.log("🚀 Fetching Rootly Swagger...");
   let swagger = await getRootlySwagger();
-  swagger = await dereference(swagger);
-  swagger = unwrapSingleAllOfDeep(swagger);
+
+  console.log("🚀 Modifying Rootly Swagger...");
+  for (const mod of SWAGGER_MODS) {
+    swagger = await mod(swagger);
+  }
 
   await Bun.write(
     new URL("swagger.json", import.meta.url),
@@ -916,37 +1026,7 @@ async function main() {
   );
 
   for (const name of RESOURCES) {
-    const resourceSchema = swagger.components.schemas[name];
-    if (!resourceSchema) {
-      throw new Error(`Resource ${name} not found`);
-    }
-
-    const newResourceSchema = swagger.components.schemas[`new_${name}`];
-    if (!newResourceSchema) {
-      throw new Error(`New resource ${name} not found`);
-    }
-
-    // Generate immediate representation of the resource
-    const irFields = toIR({
-      schema: resourceSchema,
-      required: newResourceSchema.required,
-    });
-    if (irFields.kind !== "object") {
-      throw new Error("Resource root must be an object");
-    }
-
-    const ir: IRResource = {
-      kind: "resource",
-      resourceType: name,
-      idElement: {
-        kind: "string",
-        computedOptionalRequired: "computed",
-        description: `The ID of the ${humanize(name, true)}`,
-      },
-      fields: irFields.fields,
-    };
-
-    console.log(JSON.stringify(ir, null, 2));
+    const ir = generateResourceIR({ swagger, name });
 
     // Client
     {

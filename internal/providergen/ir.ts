@@ -42,6 +42,11 @@ export interface IRArray extends IRBaseWithComputedOptionalRequired {
 export interface IRResource extends IRBase {
   kind: "resource";
   resourceType: string;
+  listPathIdParam: {
+    name: string;
+    element: Exclude<IRType, IRResource>;
+  } | null;
+  getHasQueryParams: boolean;
   idElement: IRString;
   fields: Record<string, Exclude<IRType, IRResource>>;
 }
@@ -69,7 +74,7 @@ export function toIR({
       kind: "bool",
       ...common,
     }))
-    .with({ type: "integer" }, () => ({
+    .with({ type: "integer" }, { type: "number" }, () => ({
       kind: "int",
       ...common,
     }))
