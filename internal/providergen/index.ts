@@ -1,6 +1,8 @@
 import { camelize, humanize, pluralize, underscore } from "inflection";
 import { match } from "ts-pattern";
 import { toIR, type IRObject, type IRResource, type IRType } from "./ir";
+import { unwrapSingleAllOfDeep } from "./utils";
+import { dereference } from "@apidevtools/json-schema-ref-parser";
 
 const RESOURCES = ["alert_route"];
 
@@ -61,6 +63,24 @@ function generateTerraformValuer({
       output: `${prefix}${camelize(field)}.MustGet(ctx)`,
       hasErr: false,
     }))
+    .with({ kind: "object" }, () => ({
+      output: `
+        func() (apiclient.${camelize(`${parent}_${field}`)}, error) {
+          model, diags := ${prefix}${camelize(field)}.Get(ctx)
+          if diags.HasError() {
+            return apiclient.${camelize(
+              `${parent}_${field}`
+            )}{}, fmt.Errorf("%v", diags.Errors())
+          }
+          clientModel, err := model.ToClientModel(ctx)
+          if err != nil {
+            return apiclient.${camelize(`${parent}_${field}`)}{}, err
+          }
+          return *clientModel, nil
+        }()
+      `.trim(),
+      hasErr: true,
+    }))
     .otherwise(() => {
       throw new Error(`Unsupported IR type: ${JSON.stringify(ir)}`);
     });
@@ -70,10 +90,12 @@ function generateTerraformType({
   parent,
   field,
   ir,
+  inObject,
 }: {
   parent: string;
   field: string;
   ir: IRType;
+  inObject?: boolean;
 }): { output: string; nested: string[] } {
   return match(ir)
     .returnType<{ output: string; nested: string[] }>()
@@ -91,6 +113,7 @@ function generateTerraformType({
     }))
     .with({ kind: "array", element: { kind: "object" } }, (ir) => {
       const inner = generateTerraformType({
+        inObject: true,
         parent: camelize(`${parent}_${field}`),
         field: "Item",
         ir: ir.element,
@@ -115,7 +138,9 @@ function generateTerraformType({
       const structName = camelize(`${parent}_${field}`);
       const struct = generateModel({ name: structName, ir });
       return {
-        output: structName,
+        output: inObject
+          ? structName
+          : `supertypes.SingleNestedObjectValueOf[${structName}]`,
         nested: [struct],
       };
     })
@@ -258,9 +283,18 @@ function generateModelValuer({
       const structName = camelize(`${parent}_${field}`);
       const struct = generateFillModel({ name: structName, ir });
       return {
-        output: structName,
+        output: `
+          func() (supertypes.SingleNestedObjectValueOf[${structName}], error) {
+            var out ${structName}
+            err := Fill${structName}(ctx, in.${camelize(field)}, &out)
+            if err != nil {
+              return supertypes.NewSingleNestedObjectValueOfNull[${structName}](ctx), err
+            }
+            return supertypes.NewSingleNestedObjectValueOf(ctx, &out), nil
+          }()
+        `.trim(),
         nested: [struct],
-        hasErr: false,
+        hasErr: true,
       };
     })
     .otherwise(() => {
@@ -473,6 +507,27 @@ function generateAttribute({
       return `schema.ListAttribute{
           ${common}
           CustomType: supertypes.NewListTypeOf[${primitiveType.output}](ctx),
+        }`;
+    })
+    .with({ kind: "object" }, ({ fields }) => {
+      const structType = camelize(`${parent}_${field}`);
+
+      const attrs = Object.entries(fields)
+        .map(([fieldName, fieldIR]) => {
+          return `"${underscore(fieldName)}": ${generateAttribute({
+            parent: structType,
+            field: fieldName,
+            ir: fieldIR,
+          })},`;
+        })
+        .join("\n");
+
+      return `schema.SingleNestedAttribute{
+          ${common}
+          CustomType: supertypes.NewSingleNestedObjectTypeOf[${structType}](ctx),
+          Attributes: map[string]schema.Attribute{
+            ${attrs}
+          },
         }`;
     })
     .otherwise(() => {
@@ -851,7 +906,9 @@ async function writeAndFormatGoFile(destination: URL, code: string) {
 
 async function main() {
   console.log("🚀 Fetching Rootly Swagger...");
-  const swagger = await getRootlySwagger();
+  let swagger = await getRootlySwagger();
+  swagger = await dereference(swagger);
+  swagger = unwrapSingleAllOfDeep(swagger);
 
   await Bun.write(
     new URL("swagger.json", import.meta.url),
