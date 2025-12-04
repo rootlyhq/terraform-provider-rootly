@@ -336,7 +336,7 @@ func resourceAlertRouteCreate(ctx context.Context, d *schema.ResourceData, meta 
 	// Generate request ID if rules are present (for async processing tracking)
 	var requestID string
 	if rules := d.Get("rules").([]interface{}); len(rules) > 0 {
-		requestID = polling.GenerateJobID()
+		requestID = polling.GenerateRequestId()
 		s.RequestId = requestID
 		tflog.Debug(ctx, fmt.Sprintf("Including request_id %s for async rule creation", requestID))
 	}
@@ -466,7 +466,7 @@ func resourceAlertRouteUpdate(ctx context.Context, d *schema.ResourceData, meta 
 		if value, ok := d.GetOk("rules"); value != nil && ok {
 			s.Rules = value.([]interface{})
 			if rules := value.([]interface{}); len(rules) > 0 {
-				requestID = polling.GenerateJobID()
+				requestID = polling.GenerateRequestId()
 				s.RequestId = requestID
 				tflog.Debug(ctx, fmt.Sprintf("Including request_id %s for async rule update", requestID))
 			}
