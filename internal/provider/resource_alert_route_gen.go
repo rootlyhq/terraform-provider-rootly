@@ -7,7 +7,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	supertypes "github.com/orange-cloudavenue/terraform-plugin-framework-supertypes"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/apiclient"
 )
@@ -33,160 +32,131 @@ func (r *AlertRouteResource) Schema(ctx context.Context, req resource.SchemaRequ
 		schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"id": schema.StringAttribute{
-
 					Computed:            true,
 					Description:         "The ID of the alert route",
 					MarkdownDescription: "The ID of the alert route",
+					CustomType:          supertypes.StringType{},
 				},
 				"name": schema.StringAttribute{
-
-					Required: true,
-
+					Required:            true,
 					Description:         "The name of the alert route",
 					MarkdownDescription: "The name of the alert route",
+					CustomType:          supertypes.StringType{},
 				},
 				"enabled": schema.BoolAttribute{
-
-					Optional: true,
-
+					Optional:            true,
 					Description:         "Whether the alert route is enabled",
 					MarkdownDescription: "Whether the alert route is enabled",
+					CustomType:          supertypes.BoolType{},
 				},
 				"alerts_source_ids": schema.ListAttribute{
-
-					Required: true,
-
+					Required:   true,
 					CustomType: supertypes.NewListTypeOf[string](ctx),
 				},
 				"owning_team_ids": schema.ListAttribute{
-
-					Optional: true,
-
+					Optional:   true,
 					CustomType: supertypes.NewListTypeOf[string](ctx),
 				},
 				"rules": schema.ListNestedAttribute{
-
-					Optional: true,
-
+					Optional:   true,
 					CustomType: supertypes.NewListNestedObjectTypeOf[AlertRouteModelRulesItem](ctx),
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-
-								Required: true,
-
+								Required:            true,
 								Description:         "The name of the alert routing rule",
 								MarkdownDescription: "The name of the alert routing rule",
+								CustomType:          supertypes.StringType{},
 							},
 							"position": schema.Int64Attribute{
-
-								Optional: true,
-
+								Optional:            true,
 								Description:         "The position of the alert routing rule for ordering evaluation",
 								MarkdownDescription: "The position of the alert routing rule for ordering evaluation",
+								CustomType:          supertypes.Int64Type{},
 							},
 							"fallback_rule": schema.BoolAttribute{
-
-								Optional: true,
-
+								Optional:            true,
 								Description:         "Whether this is a fallback rule",
 								MarkdownDescription: "Whether this is a fallback rule",
+								CustomType:          supertypes.BoolType{},
 							},
 							"destinations": schema.ListNestedAttribute{
-
-								Required: true,
-
+								Required:   true,
 								CustomType: supertypes.NewListNestedObjectTypeOf[AlertRouteModelRulesItemDestinationsItem](ctx),
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"target_type": schema.StringAttribute{
-
-											Required: true,
-
+											Required:            true,
 											Description:         "The type of the target",
 											MarkdownDescription: "The type of the target",
+											CustomType:          supertypes.StringType{},
 										},
 										"target_id": schema.StringAttribute{
-
-											Required: true,
-
+											Required:            true,
 											Description:         "The ID of the target",
 											MarkdownDescription: "The ID of the target",
+											CustomType:          supertypes.StringType{},
 										},
 									},
 								},
 							},
 							"condition_groups": schema.ListNestedAttribute{
-
-								Required: true,
-
+								Required:   true,
 								CustomType: supertypes.NewListNestedObjectTypeOf[AlertRouteModelRulesItemConditionGroupsItem](ctx),
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"position": schema.Int64Attribute{
-
-											Optional: true,
-
+											Optional:            true,
 											Description:         "The position of the condition group",
 											MarkdownDescription: "The position of the condition group",
+											CustomType:          supertypes.Int64Type{},
 										},
 										"conditions": schema.ListNestedAttribute{
-
-											Required: true,
-
+											Required:   true,
 											CustomType: supertypes.NewListNestedObjectTypeOf[AlertRouteModelRulesItemConditionGroupsItemConditionsItem](ctx),
 											NestedObject: schema.NestedAttributeObject{
 												Attributes: map[string]schema.Attribute{
 													"property_field_condition_type": schema.StringAttribute{
-
-														Required: true,
+														Required:   true,
+														CustomType: supertypes.StringType{},
 													},
 													"property_field_name": schema.StringAttribute{
-
-														Optional: true,
-
+														Optional:            true,
 														Description:         "The name of the property field",
 														MarkdownDescription: "The name of the property field",
+														CustomType:          supertypes.StringType{},
 													},
 													"property_field_type": schema.StringAttribute{
-
-														Required: true,
+														Required:   true,
+														CustomType: supertypes.StringType{},
 													},
 													"property_field_value": schema.StringAttribute{
-
-														Optional: true,
-
+														Optional:            true,
 														Description:         "The value of the property field",
 														MarkdownDescription: "The value of the property field",
+														CustomType:          supertypes.StringType{},
 													},
 													"property_field_values": schema.ListAttribute{
-
-														Optional: true,
-
+														Optional:   true,
 														CustomType: supertypes.NewListTypeOf[string](ctx),
 													},
 													"alert_urgency_ids": schema.ListAttribute{
-
-														Optional: true,
-
+														Optional:            true,
 														Description:         "The Alert Urgency IDs to check in the condition",
 														MarkdownDescription: "The Alert Urgency IDs to check in the condition",
-
-														CustomType: supertypes.NewListTypeOf[string](ctx),
+														CustomType:          supertypes.NewListTypeOf[string](ctx),
 													},
 													"conditionable_type": schema.StringAttribute{
-
-														Optional: true,
-
+														Optional:            true,
 														Description:         "The type of the conditionable",
 														MarkdownDescription: "The type of the conditionable",
+														CustomType:          supertypes.StringType{},
 													},
 													"conditionable_id": schema.StringAttribute{
-
-														Optional: true,
-
+														Optional:            true,
 														Description:         "The ID of the conditionable",
 														MarkdownDescription: "The ID of the conditionable",
+														CustomType:          supertypes.StringType{},
 													},
 												},
 											},
@@ -290,9 +260,9 @@ func (r *AlertRouteResource) ImportState(ctx context.Context, req resource.Impor
 }
 
 type AlertRouteModel struct {
-	Id              types.String                                                 `tfsdk:"id"`
-	Name            types.String                                                 `tfsdk:"name"`
-	Enabled         types.Bool                                                   `tfsdk:"enabled"`
+	Id              supertypes.StringValue                                       `tfsdk:"id"`
+	Name            supertypes.StringValue                                       `tfsdk:"name"`
+	Enabled         supertypes.BoolValue                                         `tfsdk:"enabled"`
 	AlertsSourceIds supertypes.ListValueOf[string]                               `tfsdk:"alerts_source_ids"`
 	OwningTeamIds   supertypes.ListValueOf[string]                               `tfsdk:"owning_team_ids"`
 	Rules           supertypes.ListNestedObjectValueOf[AlertRouteModelRulesItem] `tfsdk:"rules"`
@@ -331,9 +301,9 @@ func (m *AlertRouteModel) ToClientModel(ctx context.Context) (*apiclient.AlertRo
 }
 
 type AlertRouteModelRulesItem struct {
-	Name            types.String                                                                    `tfsdk:"name"`
-	Position        types.Int64                                                                     `tfsdk:"position"`
-	FallbackRule    types.Bool                                                                      `tfsdk:"fallback_rule"`
+	Name            supertypes.StringValue                                                          `tfsdk:"name"`
+	Position        supertypes.Int64Value                                                           `tfsdk:"position"`
+	FallbackRule    supertypes.BoolValue                                                            `tfsdk:"fallback_rule"`
 	Destinations    supertypes.ListNestedObjectValueOf[AlertRouteModelRulesItemDestinationsItem]    `tfsdk:"destinations"`
 	ConditionGroups supertypes.ListNestedObjectValueOf[AlertRouteModelRulesItemConditionGroupsItem] `tfsdk:"condition_groups"`
 }
@@ -377,8 +347,8 @@ func (m *AlertRouteModelRulesItem) ToClientModel(ctx context.Context) (*apiclien
 }
 
 type AlertRouteModelRulesItemDestinationsItem struct {
-	TargetType types.String `tfsdk:"target_type"`
-	TargetId   types.String `tfsdk:"target_id"`
+	TargetType supertypes.StringValue `tfsdk:"target_type"`
+	TargetId   supertypes.StringValue `tfsdk:"target_id"`
 }
 
 func (m *AlertRouteModelRulesItemDestinationsItem) ToClientModel(ctx context.Context) (*apiclient.AlertRouteModelRulesItemDestinationsItem, error) {
@@ -396,7 +366,7 @@ func (m *AlertRouteModelRulesItemDestinationsItem) ToClientModel(ctx context.Con
 }
 
 type AlertRouteModelRulesItemConditionGroupsItem struct {
-	Position   types.Int64                                                                                   `tfsdk:"position"`
+	Position   supertypes.Int64Value                                                                         `tfsdk:"position"`
 	Conditions supertypes.ListNestedObjectValueOf[AlertRouteModelRulesItemConditionGroupsItemConditionsItem] `tfsdk:"conditions"`
 }
 
@@ -421,14 +391,14 @@ func (m *AlertRouteModelRulesItemConditionGroupsItem) ToClientModel(ctx context.
 }
 
 type AlertRouteModelRulesItemConditionGroupsItemConditionsItem struct {
-	PropertyFieldConditionType types.String                   `tfsdk:"property_field_condition_type"`
-	PropertyFieldName          types.String                   `tfsdk:"property_field_name"`
-	PropertyFieldType          types.String                   `tfsdk:"property_field_type"`
-	PropertyFieldValue         types.String                   `tfsdk:"property_field_value"`
+	PropertyFieldConditionType supertypes.StringValue         `tfsdk:"property_field_condition_type"`
+	PropertyFieldName          supertypes.StringValue         `tfsdk:"property_field_name"`
+	PropertyFieldType          supertypes.StringValue         `tfsdk:"property_field_type"`
+	PropertyFieldValue         supertypes.StringValue         `tfsdk:"property_field_value"`
 	PropertyFieldValues        supertypes.ListValueOf[string] `tfsdk:"property_field_values"`
 	AlertUrgencyIds            supertypes.ListValueOf[string] `tfsdk:"alert_urgency_ids"`
-	ConditionableType          types.String                   `tfsdk:"conditionable_type"`
-	ConditionableId            types.String                   `tfsdk:"conditionable_id"`
+	ConditionableType          supertypes.StringValue         `tfsdk:"conditionable_type"`
+	ConditionableId            supertypes.StringValue         `tfsdk:"conditionable_id"`
 }
 
 func (m *AlertRouteModelRulesItemConditionGroupsItemConditionsItem) ToClientModel(ctx context.Context) (*apiclient.AlertRouteModelRulesItemConditionGroupsItemConditionsItem, error) {
@@ -470,9 +440,9 @@ func (m *AlertRouteModelRulesItemConditionGroupsItemConditionsItem) ToClientMode
 }
 
 func FillAlertRouteModel(ctx context.Context, in apiclient.AlertRouteModel, out *AlertRouteModel) error {
-	out.Id = types.StringValue(in.Id)
-	out.Name = types.StringValue(in.Name)
-	out.Enabled = types.BoolValue(in.Enabled)
+	out.Id = supertypes.NewStringValueOrNull(in.Id)
+	out.Name = supertypes.NewStringValueOrNull(in.Name)
+	out.Enabled = supertypes.NewBoolValue(in.Enabled)
 	out.AlertsSourceIds = supertypes.NewListValueOfSlice(ctx, in.AlertsSourceIds)
 	out.OwningTeamIds = supertypes.NewListValueOfSlice(ctx, in.OwningTeamIds)
 
@@ -493,9 +463,9 @@ func FillAlertRouteModel(ctx context.Context, in apiclient.AlertRouteModel, out 
 }
 
 func FillAlertRouteModelRulesItem(ctx context.Context, in apiclient.AlertRouteModelRulesItem, out *AlertRouteModelRulesItem) error {
-	out.Name = types.StringValue(in.Name)
-	out.Position = types.Int64Value(in.Position)
-	out.FallbackRule = types.BoolValue(in.FallbackRule)
+	out.Name = supertypes.NewStringValueOrNull(in.Name)
+	out.Position = supertypes.NewInt64Value(in.Position)
+	out.FallbackRule = supertypes.NewBoolValue(in.FallbackRule)
 
 	{
 		var elements []AlertRouteModelRulesItemDestinationsItem
@@ -527,13 +497,13 @@ func FillAlertRouteModelRulesItem(ctx context.Context, in apiclient.AlertRouteMo
 }
 
 func FillAlertRouteModelRulesItemDestinationsItem(ctx context.Context, in apiclient.AlertRouteModelRulesItemDestinationsItem, out *AlertRouteModelRulesItemDestinationsItem) error {
-	out.TargetType = types.StringValue(in.TargetType)
-	out.TargetId = types.StringValue(in.TargetId)
+	out.TargetType = supertypes.NewStringValueOrNull(in.TargetType)
+	out.TargetId = supertypes.NewStringValueOrNull(in.TargetId)
 	return nil
 }
 
 func FillAlertRouteModelRulesItemConditionGroupsItem(ctx context.Context, in apiclient.AlertRouteModelRulesItemConditionGroupsItem, out *AlertRouteModelRulesItemConditionGroupsItem) error {
-	out.Position = types.Int64Value(in.Position)
+	out.Position = supertypes.NewInt64Value(in.Position)
 
 	{
 		var elements []AlertRouteModelRulesItemConditionGroupsItemConditionsItem
@@ -552,13 +522,13 @@ func FillAlertRouteModelRulesItemConditionGroupsItem(ctx context.Context, in api
 }
 
 func FillAlertRouteModelRulesItemConditionGroupsItemConditionsItem(ctx context.Context, in apiclient.AlertRouteModelRulesItemConditionGroupsItemConditionsItem, out *AlertRouteModelRulesItemConditionGroupsItemConditionsItem) error {
-	out.PropertyFieldConditionType = types.StringValue(in.PropertyFieldConditionType)
-	out.PropertyFieldName = types.StringValue(in.PropertyFieldName)
-	out.PropertyFieldType = types.StringValue(in.PropertyFieldType)
-	out.PropertyFieldValue = types.StringValue(in.PropertyFieldValue)
+	out.PropertyFieldConditionType = supertypes.NewStringValueOrNull(in.PropertyFieldConditionType)
+	out.PropertyFieldName = supertypes.NewStringValueOrNull(in.PropertyFieldName)
+	out.PropertyFieldType = supertypes.NewStringValueOrNull(in.PropertyFieldType)
+	out.PropertyFieldValue = supertypes.NewStringValueOrNull(in.PropertyFieldValue)
 	out.PropertyFieldValues = supertypes.NewListValueOfSlice(ctx, in.PropertyFieldValues)
 	out.AlertUrgencyIds = supertypes.NewListValueOfSlice(ctx, in.AlertUrgencyIds)
-	out.ConditionableType = types.StringValue(in.ConditionableType)
-	out.ConditionableId = types.StringValue(in.ConditionableId)
+	out.ConditionableType = supertypes.NewStringValueOrNull(in.ConditionableType)
+	out.ConditionableId = supertypes.NewStringValueOrNull(in.ConditionableId)
 	return nil
 }

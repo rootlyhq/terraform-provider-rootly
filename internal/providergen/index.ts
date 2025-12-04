@@ -31,7 +31,7 @@ function generateGoType({
   return match([mode, ir])
     .returnType<GenerateGoTypeResult>()
     .with(["terraform", { kind: "string" }], () => ({
-      output: "types.String",
+      output: "supertypes.StringValue",
       nested: [],
     }))
     .with(["terraform_valuer", { kind: "string" }], () => ({
@@ -43,9 +43,9 @@ function generateGoType({
       nested: [],
     }))
     .with(["fill_model", { kind: "string" }], () => ({
-      output: `out.${camelize(field)} = types.StringValue(in.${camelize(
+      output: `out.${camelize(
         field
-      )})`,
+      )} = supertypes.NewStringValueOrNull(in.${camelize(field)})`,
       nested: [],
     }))
     .with(["primitive", { kind: "string" }], () => ({
@@ -53,7 +53,7 @@ function generateGoType({
       nested: [],
     }))
     .with(["terraform", { kind: "bool" }], () => ({
-      output: "types.Bool",
+      output: "supertypes.BoolValue",
       nested: [],
     }))
     .with(["terraform_valuer", { kind: "bool" }], () => ({
@@ -65,7 +65,9 @@ function generateGoType({
       nested: [],
     }))
     .with(["fill_model", { kind: "bool" }], () => ({
-      output: `out.${camelize(field)} = types.BoolValue(in.${camelize(field)})`,
+      output: `out.${camelize(field)} = supertypes.NewBoolValue(in.${camelize(
+        field
+      )})`,
       nested: [],
     }))
     .with(["primitive", { kind: "bool" }], () => ({
@@ -73,7 +75,7 @@ function generateGoType({
       nested: [],
     }))
     .with(["terraform", { kind: "int" }], () => ({
-      output: "types.Int64",
+      output: "supertypes.Int64Value",
       nested: [],
     }))
     .with(["terraform_valuer", { kind: "int" }], () => ({
@@ -85,7 +87,7 @@ function generateGoType({
       nested: [],
     }))
     .with(["fill_model", { kind: "int" }], () => ({
-      output: `out.${camelize(field)} = types.Int64Value(in.${camelize(
+      output: `out.${camelize(field)} = supertypes.NewInt64Value(in.${camelize(
         field
       )})`,
       nested: [],
@@ -374,32 +376,42 @@ function generateAttribute({
     throw new Error("Resource field cannot be an attribute");
   }
 
-  const common = `
-    ${ir.computedOptionalRequired === "required" ? "Required: true," : ""}
-    ${ir.computedOptionalRequired === "optional" ? "Optional: true," : ""}
-    ${ir.computedOptionalRequired === "computed" ? "Computed: true," : ""}
-    ${ir.description ? `Description: ${JSON.stringify(ir.description)},` : ""}
-    ${
-      ir.description
-        ? `MarkdownDescription: ${JSON.stringify(ir.description)},`
-        : ""
-    }
-  `;
+  const commonLines: string[] = [];
+  if (ir.computedOptionalRequired === "required") {
+    commonLines.push("Required: true,");
+  }
+  if (ir.computedOptionalRequired === "optional") {
+    commonLines.push("Optional: true,");
+  }
+  if (ir.computedOptionalRequired === "computed") {
+    commonLines.push("Computed: true,");
+  }
+  if (ir.description) {
+    commonLines.push(`Description: ${JSON.stringify(ir.description)},`);
+  }
+  if (ir.description) {
+    commonLines.push(`MarkdownDescription: ${JSON.stringify(ir.description)},`);
+  }
+  const common = commonLines.join("\n");
+
   return (
     match(ir)
       .with({ kind: "string" }, () => {
         return `schema.StringAttribute{
           ${common}
+          CustomType: supertypes.StringType{},
         }`;
       })
       .with({ kind: "bool" }, () => {
         return `schema.BoolAttribute{
           ${common}
+          CustomType: supertypes.BoolType{},
         }`;
       })
       .with({ kind: "int" }, () => {
         return `schema.Int64Attribute{
           ${common}
+          CustomType: supertypes.Int64Type{},
         }`;
       })
       .with({ kind: "array", element: { kind: "object" } }, (ir) => {
