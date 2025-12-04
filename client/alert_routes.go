@@ -3,7 +3,10 @@
 package client
 
 import (
+	"encoding/json"
 	"fmt"
+	"net/http"
+	"net/url"
 	"reflect"
 
 	"github.com/google/jsonapi"
@@ -119,4 +122,41 @@ func (c *Client) DeleteAlertRoute(id string) error {
 	}
 
 	return nil
+}
+
+// AsyncRuleCreationStatus represents the response from async rule creation status endpoint
+type AsyncRuleCreationStatus struct {
+	Status string `json:"status"`
+	Error  string `json:"error,omitempty"`
+}
+
+// GetAsyncRuleCreationStatus checks the status of async rule creation for an alert route
+func (c *Client) GetAsyncRuleCreationStatus(alertRouteID, jobID string) (*AsyncRuleCreationStatus, error) {
+	// Construct the URL manually since this endpoint isn't in the OpenAPI schema
+	baseURL, err := url.Parse(c.Rootly.Server)
+	if err != nil {
+		return nil, fmt.Errorf("Error parsing server URL: %w", err)
+	}
+	
+	endpoint := fmt.Sprintf("/api/v1/alert_routes/%s/async_rule_creation_status/%s", alertRouteID, jobID)
+	fullURL := baseURL.ResolveReference(&url.URL{Path: endpoint})
+	
+	req, err := http.NewRequest("GET", fullURL.String(), nil)
+	if err != nil {
+		return nil, fmt.Errorf("Error building request: %w", err)
+	}
+
+	resp, err := c.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("Failed to make request to get async rule creation status: %w", err)
+	}
+	defer resp.Body.Close()
+
+	var status AsyncRuleCreationStatus
+	err = json.NewDecoder(resp.Body).Decode(&status)
+	if err != nil {
+		return nil, fmt.Errorf("Error unmarshaling async rule creation status: %w", err)
+	}
+
+	return &status, nil
 }
