@@ -24,6 +24,20 @@ func resourceCommunicationsGroup() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
+		CustomizeDiff: func(ctx context.Context, d *schema.ResourceDiff, meta interface{}) error {
+			emailChannel, emailSet := d.GetOk("email_channel")
+			smsChannel, smsSet := d.GetOk("sms_channel")
+
+			// Check if at least one channel is explicitly set to true
+			hasEmailChannel := emailSet && emailChannel.(bool)
+			hasSmsChannel := smsSet && smsChannel.(bool)
+
+			if !hasEmailChannel && !hasSmsChannel {
+				return fmt.Errorf("at least one of 'email_channel' or 'sms_channel' must be set to true")
+			}
+
+			return nil
+		},
 		Schema: map[string]*schema.Schema{
 
 			"name": &schema.Schema{
