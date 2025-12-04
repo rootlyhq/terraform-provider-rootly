@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.3.11] -- 2025-12-03
+
+### Fixed
+
+- Fixed communications group `communication_group_conditions` attribute.
+
 ## [4.3.10] -- 2025-12-02
 
 ### Added
