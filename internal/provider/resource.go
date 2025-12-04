@@ -36,8 +36,5 @@ func (r *baseResource) Configure(ctx context.Context, req resource.ConfigureRequ
 }
 
 type extendableResource[T any] interface {
-	create(ctx context.Context, data *T, resp *resource.CreateResponse)
-	read(ctx context.Context, data *T, resp *resource.ReadResponse)
 	update(ctx context.Context, plan T, data *T, resp *resource.UpdateResponse)
-	delete(ctx context.Context, data *T, resp *resource.DeleteResponse)
 }

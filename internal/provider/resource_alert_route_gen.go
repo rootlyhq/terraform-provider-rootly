@@ -2,8 +2,12 @@
 package provider
 
 import (
+	"bytes"
 	"context"
+	"fmt"
+	"net/http"
 
+	"github.com/DataDog/jsonapi"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -182,7 +186,40 @@ func (r *AlertRouteResource) Create(ctx context.Context, req resource.CreateRequ
 	}
 
 	// Create API call logic
-	r.create(ctx, &data, resp)
+	modelIn, err := data.ToClientModel(ctx)
+	if err != nil {
+		resp.Diagnostics.AddError("Provider Error", fmt.Sprintf("Unable to client model: %v", err))
+		return
+	}
+
+	b, err := jsonapi.Marshal(&modelIn, jsonapi.MarshalClientMode())
+	if err != nil {
+		resp.Diagnostics.AddError("Provider Error", fmt.Sprintf("Unable to marshal model to JSON: %v", err))
+		return
+	}
+
+	httpResp, err := r.client.CreateAlertRouteWithBodyWithResponse(ctx, "application/vnd.api+json", bytes.NewReader(b))
+	if err != nil {
+		resp.Diagnostics.AddError("API Error", err.Error())
+		return
+	} else if httpResp.StatusCode() < 200 || httpResp.StatusCode() >= 300 {
+		resp.Diagnostics.AddError("API Error", fmt.Sprintf("Unable to create, got status code: %d", httpResp.StatusCode()))
+		return
+	} else if httpResp.Body == nil {
+		resp.Diagnostics.AddError("API Error", "Unable to create, got empty response")
+		return
+	}
+
+	var modelOut apiclient.AlertRouteModel
+	if err := jsonapi.Unmarshal(httpResp.Body, &modelOut); err != nil {
+		resp.Diagnostics.AddError("Provider Error", fmt.Sprintf("Unable to unmarshal response: %v", err))
+		return
+	}
+
+	if err := FillAlertRouteModel(ctx, modelOut, &data); err != nil {
+		resp.Diagnostics.AddError("Provider Error", fmt.Sprintf("Unable to fill model: %v", err))
+		return
+	}
 
 	if resp.Diagnostics.HasError() {
 		return
@@ -203,7 +240,28 @@ func (r *AlertRouteResource) Read(ctx context.Context, req resource.ReadRequest,
 	}
 
 	// Read API call logic
-	r.read(ctx, &data, resp)
+	httpResp, err := r.client.GetAlertRouteWithResponse(ctx, data.Id.ValueString())
+	if err != nil {
+		resp.Diagnostics.AddError("API Error", err.Error())
+		return
+	} else if httpResp.StatusCode() < 200 || httpResp.StatusCode() >= 300 {
+		resp.Diagnostics.AddError("API Error", fmt.Sprintf("Unable to read, got status code: %d", httpResp.StatusCode()))
+		return
+	} else if httpResp.Body == nil {
+		resp.Diagnostics.AddError("API Error", "Unable to read, got empty response")
+		return
+	}
+
+	var modelOut apiclient.AlertRouteModel
+	if err := jsonapi.Unmarshal(httpResp.Body, &modelOut); err != nil {
+		resp.Diagnostics.AddError("Provider Error", fmt.Sprintf("Unable to unmarshal response: %v", err))
+		return
+	}
+
+	if err := FillAlertRouteModel(ctx, modelOut, &data); err != nil {
+		resp.Diagnostics.AddError("Provider Error", fmt.Sprintf("Unable to fill model: %v", err))
+		return
+	}
 
 	if resp.Diagnostics.HasError() {
 		return
@@ -252,7 +310,19 @@ func (r *AlertRouteResource) Delete(ctx context.Context, req resource.DeleteRequ
 	}
 
 	// Delete API call logic
-	r.delete(ctx, &data, resp)
+	httpResp, err := r.client.DeleteAlertRouteWithResponse(
+		ctx,
+		data.Id.ValueString(),
+	)
+	if err != nil {
+		resp.Diagnostics.AddError("API Error", err.Error())
+		return
+	} else if httpResp.StatusCode() == http.StatusNotFound {
+		return
+	} else if httpResp.StatusCode() < 200 || httpResp.StatusCode() >= 300 {
+		resp.Diagnostics.AddError("API Error", fmt.Sprintf("Unable to delete, got status code: %d", httpResp.StatusCode()))
+		return
+	}
 }
 
 func (r *AlertRouteResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
