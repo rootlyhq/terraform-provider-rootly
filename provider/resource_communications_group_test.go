@@ -27,6 +27,12 @@ func TestAccResourceCommunicationsGroup(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.1.condition", "is"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.1.property_type", "group"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.1.properties.0.name", "TF test group"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.2.property_type", "severity"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.2.properties.0.name", "TF test severity 1"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.3.property_type", "functionality"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.3.properties.0.name", "TF test functionality 1"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.4.property_type", "incident_type"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.4.properties.0.name", "TF test incident type 1"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_external_group_members.#", "3"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_external_group_members.0.email", "test-bot+1@rootly.com"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_external_group_members.0.name", "test-bot+1"),
@@ -54,6 +60,12 @@ func TestAccResourceCommunicationsGroup(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.1.condition", "is"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.1.property_type", "group"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.1.properties.0.name", "TF test group"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.2.property_type", "severity"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.2.properties.0.name", "TF test severity 1"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.3.property_type", "functionality"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.3.properties.0.name", "TF test functionality 1"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.4.property_type", "incident_type"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.4.properties.0.name", "TF test incident type 1"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_external_group_members.#", "2"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_external_group_members.0.email", "test-bot+3@rootly.com"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_external_group_members.0.name", "test-bot+3"),
@@ -98,6 +110,18 @@ const testAccResourceCommunicationsGroupCreate = `
 		name = "TF test service 3"
 	}
 
+	resource rootly_severity test1 {
+		name = "TF test severity 1"
+	}
+
+	resource rootly_functionality test1 {
+		name = "TF test functionality 1"
+	}
+
+	resource rootly_incident_type test1 {
+		name = "TF test incident type 1"
+	}
+
 	resource rootly_team test {
 		name = "TF test group"
 	}
@@ -137,6 +161,33 @@ const testAccResourceCommunicationsGroupCreate = `
 				name = rootly_team.test.name
 			}
 			property_type = "group"
+		}
+
+		communication_group_conditions {
+			condition = "is"
+			properties {
+				id = rootly_severity.test1.id
+				name = rootly_severity.test1.name
+			}
+			property_type = "severity"
+		}
+
+		communication_group_conditions {
+			condition = "is"
+			properties {
+				id = rootly_functionality.test1.id
+				name = rootly_functionality.test1.name
+			}
+			property_type = "functionality"
+		}
+
+		communication_group_conditions {
+			condition = "is"
+			properties {
+				id = rootly_incident_type.test1.id
+				name = rootly_incident_type.test1.name
+			}
+			property_type = "incident_type"
 		}
 
 		communication_external_group_members {
@@ -201,6 +252,18 @@ const testAccResourceCommunicationsGroupUpdate = `
 		name = "TF test service 3"
 	}
 
+	resource rootly_severity test1 {
+		name = "TF test severity 1"
+	}
+
+	resource rootly_functionality test1 {
+		name = "TF test functionality 1"
+	}
+
+	resource rootly_incident_type test1 {
+		name = "TF test incident type 1"
+	}
+
 	resource rootly_team test {
 		name = "TF test group"
 	}
@@ -236,6 +299,33 @@ const testAccResourceCommunicationsGroupUpdate = `
 				name = rootly_team.test.name
 			}
 			property_type = "group"
+		}
+
+		communication_group_conditions {
+			condition = "is"
+			properties {
+				id = rootly_severity.test1.id
+				name = rootly_severity.test1.name
+			}
+			property_type = "severity"
+		}
+
+		communication_group_conditions {
+			condition = "is"
+			properties {
+				id = rootly_functionality.test1.id
+				name = rootly_functionality.test1.name
+			}
+			property_type = "functionality"
+		}
+
+		communication_group_conditions {
+			condition = "is"
+			properties {
+				id = rootly_incident_type.test1.id
+				name = rootly_incident_type.test1.name
+			}
+			property_type = "incident_type"
 		}
 
 		communication_external_group_members {
