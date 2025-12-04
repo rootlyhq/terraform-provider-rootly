@@ -110,7 +110,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_schedule":                         dataSourceSchedule(),
 			},
 			ResourcesMap: map[string]*schema.Resource{
-				"rootly_alert_route":                                        resourceAlertRoute(),
+				// "rootly_alert_route":                                        resourceAlertRoute(),
 				"rootly_alert_routing_rule":                                 resourceAlertRoutingRule(),
 				"rootly_alert_field":                                        resourceAlertField(),
 				"rootly_alert_urgency":                                      resourceAlertUrgency(),

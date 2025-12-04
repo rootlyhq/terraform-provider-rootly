@@ -3,6 +3,7 @@ module github.com/rootlyhq/terraform-provider-rootly/v2
 go 1.24.0
 
 require (
+	github.com/DataDog/jsonapi v0.13.0
 	github.com/buxizhizhoum/inflection v1.0.4
 	github.com/google/jsonapi v1.0.0
 	github.com/hashicorp/go-cleanhttp v0.5.2
@@ -13,7 +14,17 @@ require (
 	github.com/hashicorp/terraform-plugin-mux v0.21.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.37.0
 	github.com/oapi-codegen/runtime v1.1.2
+	github.com/orange-cloudavenue/terraform-plugin-framework-supertypes v1.2.0
 	github.com/stretchr/testify v1.10.0
+)
+
+require (
+	github.com/hashicorp/terraform-plugin-codegen-framework v0.4.1 // indirect
+	github.com/hashicorp/terraform-plugin-codegen-spec v0.2.0 // indirect
+	github.com/iancoleman/strcase v0.3.0 // indirect
+	github.com/xeipuuv/gojsonpointer v0.0.0-20190905194746-02993c407bfb // indirect
+	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect
+	github.com/xeipuuv/gojsonschema v1.2.0 // indirect
 )
 
 require (
@@ -110,6 +121,7 @@ require (
 replace github.com/imdario/mergo => github.com/imdario/mergo v0.3.16
 
 tool (
+	github.com/hashicorp/terraform-plugin-codegen-framework/cmd/tfplugingen-framework
 	github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
 	github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen
 	golang.org/x/tools/cmd/goimports
