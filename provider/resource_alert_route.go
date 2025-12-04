@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/polling"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
 
@@ -340,6 +341,26 @@ func resourceAlertRouteCreate(ctx context.Context, d *schema.ResourceData, meta 
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created a alert_route resource: %s", d.Id()))
 
+	// Special handling for alert_route: Poll until rules are created if rules were specified
+	if rules := d.Get("rules").([]interface{}); len(rules) > 0 {
+		tflog.Debug(ctx, fmt.Sprintf("Waiting for %d rules to be created for alert route %s", len(rules), d.Id()))
+		
+		getRulesFunc := func() ([]interface{}, error) {
+			item, err := c.GetAlertRoute(d.Id())
+			if err != nil {
+				return nil, err
+			}
+			return item.Rules, nil
+		}
+		
+		err = polling.WaitForAlertRouteRules(ctx, getRulesFunc, len(rules))
+		if err != nil {
+			return diag.Errorf("Error waiting for alert route rules to be created: %s", err.Error())
+		}
+		
+		tflog.Debug(ctx, fmt.Sprintf("Alert route rules creation completed for %s", d.Id()))
+	}
+
 	return resourceAlertRouteRead(ctx, d, meta)
 }
 
@@ -430,6 +451,28 @@ func resourceAlertRouteUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	_, err := c.UpdateAlertRoute(d.Id(), s)
 	if err != nil {
 		return diag.Errorf("Error updating alert_route: %s", err.Error())
+	}
+
+	// Special handling for alert_route: Poll until rules are updated if rules were changed
+	if d.HasChange("rules") {
+		if rules := d.Get("rules").([]interface{}); len(rules) > 0 {
+			tflog.Debug(ctx, fmt.Sprintf("Waiting for %d rules to be updated for alert route %s", len(rules), d.Id()))
+			
+			getRulesFunc := func() ([]interface{}, error) {
+				item, err := c.GetAlertRoute(d.Id())
+				if err != nil {
+					return nil, err
+				}
+				return item.Rules, nil
+			}
+			
+			err = polling.WaitForAlertRouteRules(ctx, getRulesFunc, len(rules))
+			if err != nil {
+				return diag.Errorf("Error waiting for alert route rules to be updated: %s", err.Error())
+			}
+			
+			tflog.Debug(ctx, fmt.Sprintf("Alert route rules update completed for %s", d.Id()))
+		}
 	}
 
 	return resourceAlertRouteRead(ctx, d, meta)
