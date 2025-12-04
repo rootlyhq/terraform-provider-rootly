@@ -333,6 +333,14 @@ func resourceAlertRouteCreate(ctx context.Context, d *schema.ResourceData, meta 
 		s.Rules = value.([]interface{})
 	}
 
+	// Generate request ID if rules are present (for async processing tracking)
+	var requestID string
+	if rules := d.Get("rules").([]interface{}); len(rules) > 0 {
+		requestID = polling.GenerateJobID()
+		s.RequestId = requestID
+		tflog.Debug(ctx, fmt.Sprintf("Including request_id %s for async rule creation", requestID))
+	}
+
 	res, err := c.CreateAlertRoute(s)
 	if err != nil {
 		return diag.Errorf("Error creating alert_route: %s", err.Error())
@@ -342,16 +350,12 @@ func resourceAlertRouteCreate(ctx context.Context, d *schema.ResourceData, meta 
 	tflog.Trace(ctx, fmt.Sprintf("created a alert_route resource: %s", d.Id()))
 
 	// Special handling for alert_route: Poll until rules are created if rules were specified
-	if rules := d.Get("rules").([]interface{}); len(rules) > 0 {
-		tflog.Debug(ctx, fmt.Sprintf("Waiting for %d rules to be created for alert route %s", len(rules), d.Id()))
-		
-		// Generate a unique job ID for tracking this async operation
-		jobID := polling.GenerateJobID()
-		tflog.Debug(ctx, fmt.Sprintf("Generated job ID %s for alert route %s rule creation", jobID, d.Id()))
+	if requestID != "" {
+		tflog.Debug(ctx, fmt.Sprintf("Waiting for async rule creation to complete for alert route %s with request_id %s", d.Id(), requestID))
 		
 		// Define the status checking function
-		checkStatusFunc := func(alertRouteID, jobID string) (*polling.AsyncRuleCreationStatus, error) {
-			clientStatus, err := c.GetAsyncRuleCreationStatus(alertRouteID, jobID)
+		checkStatusFunc := func(alertRouteID, requestID string) (*polling.AsyncRuleCreationStatus, error) {
+			clientStatus, err := c.GetAsyncRuleCreationStatus(alertRouteID, requestID)
 			if err != nil {
 				return nil, err
 			}
@@ -369,7 +373,7 @@ func resourceAlertRouteCreate(ctx context.Context, d *schema.ResourceData, meta 
 			return nil
 		}
 		
-		err = polling.WaitForAsyncRuleCreation(ctx, d.Id(), jobID, checkStatusFunc, refetchFunc)
+		err = polling.WaitForAsyncRuleCreation(ctx, d.Id(), requestID, checkStatusFunc, refetchFunc)
 		if err != nil {
 			return diag.Errorf("Error waiting for alert route rules to be created: %s", err.Error())
 		}
@@ -456,9 +460,16 @@ func resourceAlertRouteUpdate(ctx context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
+	// Generate request ID if rules are being changed (for async processing tracking)
+	var requestID string
 	if d.HasChange("rules") {
 		if value, ok := d.GetOk("rules"); value != nil && ok {
 			s.Rules = value.([]interface{})
+			if rules := value.([]interface{}); len(rules) > 0 {
+				requestID = polling.GenerateJobID()
+				s.RequestId = requestID
+				tflog.Debug(ctx, fmt.Sprintf("Including request_id %s for async rule update", requestID))
+			}
 		} else {
 			s.Rules = []interface{}{}
 		}
@@ -470,41 +481,35 @@ func resourceAlertRouteUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	}
 
 	// Special handling for alert_route: Poll until rules are updated if rules were changed
-	if d.HasChange("rules") {
-		if rules := d.Get("rules").([]interface{}); len(rules) > 0 {
-			tflog.Debug(ctx, fmt.Sprintf("Waiting for %d rules to be updated for alert route %s", len(rules), d.Id()))
-			
-			// Generate a unique job ID for tracking this async operation
-			jobID := polling.GenerateJobID()
-			tflog.Debug(ctx, fmt.Sprintf("Generated job ID %s for alert route %s rule update", jobID, d.Id()))
-			
-			// Define the status checking function
-			checkStatusFunc := func(alertRouteID, jobID string) (*polling.AsyncRuleCreationStatus, error) {
-				clientStatus, err := c.GetAsyncRuleCreationStatus(alertRouteID, jobID)
-				if err != nil {
-					return nil, err
-				}
-				// Convert client.AsyncRuleCreationStatus to polling.AsyncRuleCreationStatus
-				return &polling.AsyncRuleCreationStatus{
-					Status: clientStatus.Status,
-					Error:  clientStatus.Error,
-				}, nil
-			}
-			
-			// Define the refetch function
-			refetchFunc := func() error {
-				// This will be called when status is "success" to refetch the alert route
-				// We don't need to do anything special here since resourceAlertRouteRead will be called next
-				return nil
-			}
-			
-			err = polling.WaitForAsyncRuleCreation(ctx, d.Id(), jobID, checkStatusFunc, refetchFunc)
+	if requestID != "" {
+		tflog.Debug(ctx, fmt.Sprintf("Waiting for async rule update to complete for alert route %s with request_id %s", d.Id(), requestID))
+		
+		// Define the status checking function
+		checkStatusFunc := func(alertRouteID, requestID string) (*polling.AsyncRuleCreationStatus, error) {
+			clientStatus, err := c.GetAsyncRuleCreationStatus(alertRouteID, requestID)
 			if err != nil {
-				return diag.Errorf("Error waiting for alert route rules to be updated: %s", err.Error())
+				return nil, err
 			}
-			
-			tflog.Debug(ctx, fmt.Sprintf("Alert route rules update completed for %s", d.Id()))
+			// Convert client.AsyncRuleCreationStatus to polling.AsyncRuleCreationStatus
+			return &polling.AsyncRuleCreationStatus{
+				Status: clientStatus.Status,
+				Error:  clientStatus.Error,
+			}, nil
 		}
+		
+		// Define the refetch function
+		refetchFunc := func() error {
+			// This will be called when status is "success" to refetch the alert route
+			// We don't need to do anything special here since resourceAlertRouteRead will be called next
+			return nil
+		}
+		
+		err = polling.WaitForAsyncRuleCreation(ctx, d.Id(), requestID, checkStatusFunc, refetchFunc)
+		if err != nil {
+			return diag.Errorf("Error waiting for alert route rules to be updated: %s", err.Error())
+		}
+		
+		tflog.Debug(ctx, fmt.Sprintf("Alert route rules update completed for %s", d.Id()))
 	}
 
 	return resourceAlertRouteRead(ctx, d, meta)

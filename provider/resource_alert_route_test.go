@@ -122,7 +122,7 @@ func TestAccResourceAlertRouteWithMultipleRules(t *testing.T) {
 					resource.TestCheckResourceAttr(resName, "rules.#", "3"),
 					resource.TestCheckResourceAttr(resName, "rules.0.name", "Critical Rule"),
 					resource.TestCheckResourceAttr(resName, "rules.1.name", "Warning Rule"),
-					resource.TestCheckResourceAttr(resName, "rules.2.name", "Fallback Rule"),
+					resource.TestCheckResourceAttr(resName, "rules.2.name", "Fallback Rule for Multi Rules Alert Route"),
 					resource.TestCheckResourceAttr(resName, "rules.2.fallback_rule", "true"),
 				),
 			},
@@ -593,7 +593,6 @@ resource "rootly_alert_route" "multi_rules" {
   }
 
   rules {
-    name = "Fallback Rule"
     position = 3
     fallback_rule = true
 
