@@ -1,6 +1,6 @@
 import { camelize, humanize, pluralize, underscore } from "inflection";
 import { match, P } from "ts-pattern";
-import { toIR, type IRResource, type IRType } from "./ir";
+import { toIR, type IRObject, type IRResource, type IRType } from "./ir";
 
 const RESOURCES = ["alert_route"];
 
@@ -9,6 +9,61 @@ async function getRootlySwagger() {
     "https://rootly-heroku.s3.amazonaws.com/swagger/v1/swagger.tf.json"
   );
   return (await response.json()) as any;
+}
+
+function generateTerraformValuer({
+  prefix,
+  parent,
+  field,
+  ir,
+}: {
+  prefix: string;
+  parent: string;
+  field: string;
+  ir: IRType;
+}): {
+  output: string;
+  hasErr: boolean;
+} {
+  return match(ir)
+    .returnType<{ output: string; hasErr: boolean }>()
+    .with({ kind: "string" }, () => ({
+      output: `${prefix}${camelize(field)}.ValueString()`,
+      hasErr: false,
+    }))
+    .with({ kind: "bool" }, () => ({
+      output: `${prefix}${camelize(field)}.ValueBool()`,
+      hasErr: false,
+    }))
+    .with({ kind: "int" }, () => ({
+      output: `${prefix}${camelize(field)}.ValueInt64()`,
+      hasErr: false,
+    }))
+    .with({ kind: "array", element: { kind: "object" } }, () => ({
+      output: `
+        func() ([]apiclient.${camelize(`${parent}_${field}_item`)}, error) {
+          var itemClientModels []apiclient.${camelize(
+            `${parent}_${field}_item`
+          )}
+          for _, item := range plan.${camelize(field)}.MustGet(ctx) {
+            itemClientModel, err := item.ToClientModel(ctx)
+            if err != nil {
+              return nil, err
+            }
+            itemClientModels = append(itemClientModels, *itemClientModel)
+          }
+          return itemClientModels, nil
+        }()
+      `.trim(),
+      hasErr: true,
+    }))
+    .with({ kind: "array" }, () => ({
+      output: `${prefix}${camelize(field)}.MustGet(ctx)`,
+      hasErr: false,
+    }))
+    .otherwise(() => {
+      throw new Error(`Unsupported IR type: ${JSON.stringify(ir)}`);
+    });
 }
 
 interface GenerateGoTypeResult {
@@ -266,11 +321,13 @@ function generateGoType({
     });
 }
 
-function generateModel({ name, ir }: { name: string; ir: IRType }) {
-  if (ir.kind !== "object" && ir.kind !== "resource") {
-    throw new Error("Model root must be an object");
-  }
-
+function generateModel({
+  name,
+  ir,
+}: {
+  name: string;
+  ir: IRResource | IRObject;
+}) {
   const modelStructLines: string[] = [];
   const toClientModelLines: string[] = [];
   const nested: string[] = [];
@@ -370,12 +427,8 @@ function generateAttribute({
 }: {
   parent: string;
   field: string;
-  ir: IRType;
+  ir: Exclude<IRType, IRResource>;
 }): string {
-  if (ir.kind === "resource") {
-    throw new Error("Resource field cannot be an attribute");
-  }
-
   const commonLines: string[] = [];
   if (ir.computedOptionalRequired === "required") {
     commonLines.push("Required: true,");
@@ -500,7 +553,46 @@ schema.Schema{
 }`;
 }
 
-function generateResource({ ir, name }: { ir: IRType; name: string }) {
+function generateResourceUpdateDiff({
+  ir,
+  name,
+}: {
+  ir: IRResource;
+  name: string;
+}) {
+  const lines: string[] = [];
+
+  for (const [field, fieldIR] of Object.entries(ir.fields)) {
+    const terraformValuer = generateTerraformValuer({
+      prefix: "plan.",
+      parent: name,
+      field,
+      ir: fieldIR,
+    });
+    lines.push(`if !data.${camelize(field)}.Equal(plan.${camelize(field)}) {`);
+
+    if (terraformValuer.hasErr) {
+      lines.push(
+        `
+          var err error
+          modelIn.${camelize(field)}, err = ${terraformValuer.output}
+          if err != nil {
+            resp.Diagnostics.AddError("Provider Error", fmt.Sprintf("Unable to convert plan to model: %v", err))
+            return
+          }
+        `.trim()
+      );
+    } else {
+      lines.push(`modelIn.${camelize(field)} = ${terraformValuer.output}`);
+    }
+
+    lines.push(`}\n`);
+  }
+
+  return lines.join("\n");
+}
+
+function generateResource({ ir, name }: { ir: IRResource; name: string }) {
   const baseName = camelize(name);
   const resourceName = `${baseName}Resource`;
   const modelName = `${baseName}Model`;
@@ -532,7 +624,6 @@ func New${resourceName}() resource.Resource {
 
 type ${resourceName} struct {
   baseResource
-  extendableResource[${modelName}] 
 }
 
 func (r *${resourceName}) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -657,7 +748,38 @@ func (r *${resourceName}) Update(ctx context.Context, req resource.UpdateRequest
   }
 
   // Update API call logic
-  r.update(ctx, plan, &data, resp)
+  var modelIn apiclient.${modelName}
+
+  ${generateResourceUpdateDiff({ name: modelName, ir })}
+
+  b, err := jsonapi.Marshal(&modelIn, jsonapi.MarshalClientMode())
+  if err != nil {
+    resp.Diagnostics.AddError("Provider Error", fmt.Sprintf("Unable to marshal model to JSON: %v", err))
+    return
+  }
+
+	httpResp, err := r.client.Update${baseName}WithBodyWithResponse(ctx, data.Id.ValueString(), "application/vnd.api+json", bytes.NewReader(b))
+	if err != nil {
+		resp.Diagnostics.AddError("API Error", err.Error())
+		return
+	} else if httpResp.StatusCode() < 200 || httpResp.StatusCode() >= 300 {
+		resp.Diagnostics.AddError("API Error", fmt.Sprintf("Unable to update, got status code: %d", httpResp.StatusCode()))
+		return
+  } else if httpResp.Body == nil {
+    resp.Diagnostics.AddError("API Error", "Unable to read, got empty response")
+    return
+  }
+
+  var modelOut apiclient.${modelName}
+  if err := jsonapi.Unmarshal(httpResp.Body, &modelOut); err != nil {
+    resp.Diagnostics.AddError("Provider Error", fmt.Sprintf("Unable to unmarshal response: %v", err))
+    return
+  }
+
+  if err := Fill${modelName}(ctx, modelOut, &data); err != nil {
+    resp.Diagnostics.AddError("Provider Error", fmt.Sprintf("Unable to fill model: %v", err))
+    return
+  }
 
   if resp.Diagnostics.HasError() {
     return
