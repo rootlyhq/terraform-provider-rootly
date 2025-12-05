@@ -536,11 +536,13 @@ func (m *${name}) ToClientModel(ctx context.Context) (*apiclient.${name}, diag.D
   return [struct, ...nested].join("\n");
 }
 
-function generateFillModel({ name, ir }: { name: string; ir: IRType }) {
-  if (ir.kind !== "object" && ir.kind !== "resource") {
-    throw new Error("Model root must be an object");
-  }
-
+function generateFillModel({
+  name,
+  ir,
+}: {
+  name: string;
+  ir: IRResource | IRObject;
+}) {
   const fillModelLines: string[] = [];
   const nested: string[] = [];
 
@@ -705,11 +707,13 @@ function generateAttribute({
     });
 }
 
-function generateResourceSchema({ name, ir }: { name: string; ir: IRType }) {
-  if (ir.kind !== "resource") {
-    throw new Error("Resource schema must be a resource");
-  }
-
+function generateResourceSchema({
+  name,
+  ir,
+}: {
+  name: string;
+  ir: IRResource;
+}) {
   const attrs: string[] = [];
 
   attrs.push(
@@ -1039,11 +1043,13 @@ ${generateFillModel({ name: modelName, ir })}
 `;
 }
 
-function generateClientModel({ ir, name }: { ir: IRType; name: string }) {
-  if (ir.kind !== "resource" && ir.kind !== "object") {
-    throw new Error("Model root must be a resource");
-  }
-
+function generateClientModel({
+  ir,
+  name,
+}: {
+  ir: IRResource | IRObject;
+  name: string;
+}) {
   const modelStructLines: string[] = [];
   const nested: string[] = [];
 
@@ -1085,7 +1091,13 @@ type ${modelName} struct {
   return [struct, ...nested].join("\n");
 }
 
-function generateClientModelFile({ ir, name }: { ir: IRType; name: string }) {
+function generateClientModelFile({
+  ir,
+  name,
+}: {
+  ir: IRResource;
+  name: string;
+}) {
   const modelName = camelize(name);
 
   return `
