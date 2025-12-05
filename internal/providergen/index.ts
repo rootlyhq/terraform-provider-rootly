@@ -39,6 +39,8 @@ async function main() {
   );
 
   for (const name of RESOURCES) {
+    console.log(`🚀 Generating ${name}...`);
+
     let ir = generateResourceIR({ swagger, name });
     await Bun.write(
       new URL(`out/ir_${name}.original.json`, import.meta.url),
@@ -58,7 +60,7 @@ async function main() {
       const code = generateClientModelFile({ ir, name });
 
       await writeAndFormatGoFile(
-        new URL(`../apiclient/model_${name}_gen.go`, import.meta.url),
+        new URL(`../apiclient/model_resource_${name}_gen.go`, import.meta.url),
         code
       );
     }
@@ -72,16 +74,16 @@ async function main() {
         code
       );
     }
+  }
 
-    // Provider
-    {
-      const code = generateProvider({ resources: RESOURCES });
+  // Provider
+  {
+    const code = generateProvider({ resources: RESOURCES });
 
-      await writeAndFormatGoFile(
-        new URL(`../provider/provider_gen.go`, import.meta.url),
-        code
-      );
-    }
+    await writeAndFormatGoFile(
+      new URL(`../provider/provider_gen.go`, import.meta.url),
+      code
+    );
   }
 }
 

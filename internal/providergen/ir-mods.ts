@@ -28,9 +28,4 @@ export const IR_MODS: {
   [K in (typeof RESOURCES)[number]]?: (
     ir: IRResource
   ) => IRResource | Promise<IRResource>;
-} = {
-  dashboard_panel: (ir) => {
-    ir = withLegacyBlocks(ir);
-    return ir;
-  },
-};
+} = {};
