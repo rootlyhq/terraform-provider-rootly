@@ -38,6 +38,7 @@ export interface IRObject extends IRBase {
 export interface IRArray extends IRBase {
   kind: "array";
   element: IRType;
+  blocks: boolean;
   distinct: boolean;
 }
 
@@ -102,6 +103,7 @@ function toIR({
       {
         type: "array",
         items: P.record(P.string, P.any),
+        tf_blocks: P.boolean.optional(),
         tf_distinct: P.boolean.optional(),
       },
       (schema) => {
@@ -119,6 +121,7 @@ function toIR({
         return {
           kind: "array",
           ...common,
+          blocks: schema.tf_blocks ?? false,
           distinct: schema.tf_distinct ?? false,
           element,
         };

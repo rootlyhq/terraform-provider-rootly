@@ -605,22 +605,25 @@ function generateAttribute({
   field: string;
   ir: Exclude<IRType, IRResource>;
 }): string {
-  const commonLines: string[] = [];
+  const computedOptionalRequiredLines: string[] = [];
   if (ir.computedOptionalRequired === "required") {
-    commonLines.push("Required: true,");
+    computedOptionalRequiredLines.push("Required: true,");
   }
   if (
     ir.computedOptionalRequired === "optional" ||
     ir.computedOptionalRequired === "computed_optional"
   ) {
-    commonLines.push("Optional: true,");
+    computedOptionalRequiredLines.push("Optional: true,");
   }
   if (
     ir.computedOptionalRequired === "computed" ||
     ir.computedOptionalRequired === "computed_optional"
   ) {
-    commonLines.push("Computed: true,");
+    computedOptionalRequiredLines.push("Computed: true,");
   }
+  const computedOptionalRequired = computedOptionalRequiredLines.join("\n");
+
+  const commonLines: string[] = [];
   if (ir.description) {
     commonLines.push(`Description: ${JSON.stringify(ir.description)},`);
   }
@@ -640,6 +643,7 @@ function generateAttribute({
           },`
         : "";
       return `schema.StringAttribute{
+          ${computedOptionalRequired}
           ${common}
           CustomType: supertypes.StringType{},
           ${validators}
@@ -647,39 +651,49 @@ function generateAttribute({
     })
     .with({ kind: "bool" }, () => {
       return `schema.BoolAttribute{
+          ${computedOptionalRequired}
           ${common}
           CustomType: supertypes.BoolType{},
         }`;
     })
     .with({ kind: "int" }, () => {
       return `schema.Int64Attribute{
+          ${computedOptionalRequired}
           ${common}
           CustomType: supertypes.Int64Type{},
         }`;
     })
-    .with({ kind: "array", element: { kind: "object" } }, (ir) => {
-      const fieldType = ir.distinct ? "Set" : "List";
-      const structType = camelize(`${parent}_${field}_item`);
-      const attrs = Object.entries(ir.element.fields)
-        .map(([fieldName, fieldIR]) => {
-          return `"${underscore(fieldName)}": ${generateAttribute({
-            parent: structType,
-            field: fieldName,
-            ir: fieldIR,
-          })},`;
-        })
-        .join("\n");
+    .with(
+      { kind: "array", blocks: false, element: { kind: "object" } },
+      (ir) => {
+        const fieldType = ir.distinct ? "Set" : "List";
+        const structType = camelize(`${parent}_${field}_item`);
 
-      return `schema.${fieldType}NestedAttribute{
+        return `schema.${fieldType}NestedAttribute{
+          ${computedOptionalRequired}
           ${common}
           CustomType: supertypes.New${fieldType}NestedObjectTypeOf[${structType}](ctx),
           NestedObject: schema.NestedAttributeObject{
-            Attributes: map[string]schema.Attribute{
-              ${attrs}
-            },
+            ${generateAttributesBlocks({ name: structType, ir: ir.element })}
           },
         }`;
-    })
+      }
+    )
+    .with(
+      { kind: "array", blocks: true, element: { kind: "object" } },
+      (ir) => {
+        const fieldType = ir.distinct ? "Set" : "List";
+        const structType = camelize(`${parent}_${field}_item`);
+
+        return `schema.${fieldType}NestedBlock{
+          ${common}
+          CustomType: supertypes.New${fieldType}NestedObjectTypeOf[${structType}](ctx),
+          NestedObject: schema.NestedBlockObject{
+            ${generateAttributesBlocks({ name: structType, ir: ir.element })}
+          },
+        }`;
+      }
+    )
     .with({ kind: "array" }, (ir) => {
       const fieldType = ir.distinct ? "Set" : "List";
       const primitiveType = generatePrimitiveType({
@@ -689,6 +703,7 @@ function generateAttribute({
       });
 
       return `schema.${fieldType}Attribute{
+          ${computedOptionalRequired}
           ${common}
           CustomType: supertypes.New${fieldType}TypeOf[${primitiveType.output}](ctx),
         }`;
@@ -707,6 +722,7 @@ function generateAttribute({
         .join("\n");
 
       return `schema.SingleNestedAttribute{
+          ${computedOptionalRequired}
           ${common}
           CustomType: supertypes.NewSingleNestedObjectTypeOf[${structType}](ctx),
           Attributes: map[string]schema.Attribute{
@@ -719,6 +735,65 @@ function generateAttribute({
     });
 }
 
+function generateAttributesBlocks({
+  name,
+  ir,
+}: {
+  name: string;
+  ir: IRResource | IRObject;
+}) {
+  const attributes: string[] = [];
+  const blocks: string[] = [];
+
+  if (ir.kind === "resource") {
+    attributes.push(
+      `"id": ${generateAttribute({
+        parent: name,
+        field: "id",
+        ir: ir.idElement,
+      })},`
+    );
+  }
+
+  for (const [fieldName, fieldIR] of Object.entries(ir.fields)) {
+    const output = `"${underscore(fieldName)}": ${generateAttribute({
+      parent: name,
+      field: fieldName,
+      ir: fieldIR,
+    })},`;
+
+    match(fieldIR)
+      .with({ blocks: true }, () => {
+        blocks.push(output);
+      })
+      .otherwise(() => {
+        attributes.push(output);
+      });
+  }
+
+  const lines: string[] = [];
+
+  if (attributes.length > 0) {
+    lines.push(
+      `Attributes: map[string]schema.Attribute{
+        ${attributes.join("\n")}
+      },
+    `.trim()
+    );
+  }
+
+  if (blocks.length > 0) {
+    lines.push(
+      `Blocks: map[string]schema.Block{
+        ${blocks.join("\n")}
+      },
+    `.trim()
+    );
+  }
+
+  return lines.join("\n");
+}
+
 function generateResourceSchema({
   name,
   ir,
@@ -726,32 +801,9 @@ function generateResourceSchema({
   name: string;
   ir: IRResource;
 }) {
-  const attrs: string[] = [];
-
-  attrs.push(
-    `"id": ${generateAttribute({
-      parent: name,
-      field: "id",
-      ir: ir.idElement,
-    })},`
-  );
-
-  attrs.push(
-    ...Object.entries(ir.fields).map(
-      ([fieldName, fieldIR]) =>
-        `"${underscore(fieldName)}": ${generateAttribute({
-          parent: name,
-          field: fieldName,
-          ir: fieldIR,
-        })},`
-    )
-  );
-
   return `
 schema.Schema{
-  Attributes: map[string]schema.Attribute{
-    ${attrs.join("\n")}
-  },
+  ${generateAttributesBlocks({ name, ir })}
 }`;
 }
 

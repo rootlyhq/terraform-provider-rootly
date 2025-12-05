@@ -1,1 +1,1 @@
-export const RESOURCES = ["alert_route", "dashboard_panel"] as const;
+export const RESOURCES = ["alert_route"] as const;
