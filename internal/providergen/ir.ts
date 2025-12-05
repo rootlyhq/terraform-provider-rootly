@@ -7,13 +7,7 @@ type ComputedOptionalRequired =
   | "computed_optional"
   | "required";
 
-export type IRType =
-  | IRString
-  | IRBool
-  | IRInt
-  | IRObject
-  | IRArray
-  | IRResource;
+export type IRType = IRString | IRBool | IRInt | IRObject | IRArray;
 
 interface IRBase {
   kind: string;
@@ -37,12 +31,12 @@ export interface IRInt extends IRBase {
 
 export interface IRObject extends IRBase {
   kind: "object";
-  fields: Record<string, Exclude<IRType, IRResource>>;
+  fields: Record<string, IRType>;
 }
 
 export interface IRArray extends IRBase {
   kind: "array";
-  element: Exclude<IRType, IRResource>;
+  element: IRType;
 }
 
 export interface IRResource extends IRBase {
@@ -50,14 +44,13 @@ export interface IRResource extends IRBase {
   resourceType: string;
   listPathIdParam: {
     name: string;
-    element: Exclude<IRType, IRResource>;
+    element: IRType;
   } | null;
   getHasQueryParams: boolean;
   idElement: IRString;
-  fields: Record<string, Exclude<IRType, IRResource>>;
+  fields: Record<string, IRType>;
 }
 
-// TODO: Handle computed
 function toIR({
   schema,
   newSchema,
@@ -68,15 +61,15 @@ function toIR({
   newSchema: any;
   updateSchema: any;
   computedOptionalRequired: ComputedOptionalRequired;
-}): Exclude<IRType, IRResource> {
-  const common = {
+}): IRType {
+  const common: Omit<IRBase, "kind"> = {
     computedOptionalRequired,
     description: schema.description,
     nullable: schema.nullable ?? false,
-  } as const;
+  };
 
   return match(schema)
-    .returnType<Exclude<IRType, IRResource>>()
+    .returnType<IRType>()
     .with({ type: "string" }, () => {
       return {
         kind: "string",
