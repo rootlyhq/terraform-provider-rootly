@@ -1,14 +1,11 @@
 import { camelize, humanize, pluralize, singularize } from "inflection";
 import { match, P } from "ts-pattern";
 
-interface IRBase {
-  kind: string;
-  description?: string;
-}
-
-interface IRBaseWithComputedOptionalRequired extends IRBase {
-  computedOptionalRequired: "computed" | "optional" | "required";
-}
+type ComputedOptionalRequired =
+  | "computed"
+  | "optional"
+  | "computed_optional"
+  | "required";
 
 export type IRType =
   | IRString
@@ -18,24 +15,30 @@ export type IRType =
   | IRArray
   | IRResource;
 
-export interface IRString extends IRBaseWithComputedOptionalRequired {
+interface IRBase {
+  kind: string;
+  description?: string;
+  computedOptionalRequired: ComputedOptionalRequired;
+}
+
+export interface IRString extends IRBase {
   kind: "string";
 }
 
-export interface IRBool extends IRBaseWithComputedOptionalRequired {
+export interface IRBool extends IRBase {
   kind: "bool";
 }
 
-export interface IRInt extends IRBaseWithComputedOptionalRequired {
+export interface IRInt extends IRBase {
   kind: "int";
 }
 
-export interface IRObject extends IRBaseWithComputedOptionalRequired {
+export interface IRObject extends IRBase {
   kind: "object";
   fields: Record<string, Exclude<IRType, IRResource>>;
 }
 
-export interface IRArray extends IRBaseWithComputedOptionalRequired {
+export interface IRArray extends IRBase {
   kind: "array";
   element: Exclude<IRType, IRResource>;
 }
@@ -53,15 +56,19 @@ export interface IRResource extends IRBase {
 }
 
 // TODO: Handle computed
-export function toIR({
+function toIR({
   schema,
-  required,
+  newSchema,
+  updateSchema,
+  computedOptionalRequired,
 }: {
   schema: any;
-  required: boolean | null;
+  newSchema: any;
+  updateSchema: any;
+  computedOptionalRequired: ComputedOptionalRequired;
 }): Exclude<IRType, IRResource> {
   const common = {
-    computedOptionalRequired: required ? "required" : "optional",
+    computedOptionalRequired,
     description: schema.description,
   } as const;
 
@@ -82,7 +89,12 @@ export function toIR({
     .with({ type: "array", items: P.record(P.string, P.any) }, (schema) => ({
       kind: "array",
       ...common,
-      element: toIR({ schema: schema.items, required: null }),
+      element: toIR({
+        schema: schema.items,
+        newSchema: newSchema.items,
+        updateSchema: updateSchema.items,
+        computedOptionalRequired: "required", // TODO: Investigate
+      }),
     }))
     .with(
       {
@@ -100,7 +112,14 @@ export function toIR({
                 propertyName,
                 toIR({
                   schema: propertySchema,
-                  required: schema.required?.includes(propertyName) ?? null,
+                  newSchema: newSchema.properties[propertyName],
+                  updateSchema: updateSchema.properties[propertyName],
+                  computedOptionalRequired: toComputedOptionalRequired({
+                    field: propertyName,
+                    schema,
+                    newSchema,
+                    updateSchema,
+                  }),
                 }),
               ]
             )
@@ -113,6 +132,55 @@ export function toIR({
         `Unsupported swagger schema type: ${JSON.stringify(schema)}`
       );
     });
+}
+
+function toComputedOptionalRequired({
+  field,
+  schema,
+  newSchema,
+  updateSchema,
+}: {
+  field: string;
+  schema: any;
+  newSchema: any;
+  updateSchema: any;
+}): ComputedOptionalRequired {
+  if (field === "dashboard_id") {
+    console.log({ schema, newSchema, updateSchema });
+  }
+  const inRead = field in schema.properties;
+  const inCreate = field in newSchema.properties;
+  const inUpdate = field in updateSchema.properties;
+  const reqCreate = newSchema.required?.includes(field);
+  const reqUpdate = updateSchema.required?.includes(field);
+
+  if (reqCreate || reqUpdate) {
+    return "required";
+  }
+
+  if (inRead && !inCreate && !inUpdate) {
+    return "computed";
+  }
+
+  if (inCreate || inUpdate) {
+    if (inRead) {
+      return "computed_optional";
+    } else {
+      return "optional";
+    }
+  }
+
+  if (inRead) {
+    return "computed";
+  }
+
+  throw new Error(
+    `Unsupported computedOptionalRequired for field ${field}: ${JSON.stringify({
+      schema,
+      newSchema,
+      updateSchema,
+    })}`
+  );
 }
 
 export function generateResourceIR({
@@ -130,6 +198,11 @@ export function generateResourceIR({
   const newResourceSchema = swagger.components.schemas[`new_${name}`];
   if (!newResourceSchema) {
     throw new Error(`New resource ${name} not found`);
+  }
+
+  const updateResourceSchema = swagger.components.schemas[`update_${name}`];
+  if (!updateResourceSchema) {
+    throw new Error(`Update resource ${name} not found`);
   }
 
   const collectionSchema = Object.entries(
@@ -159,17 +232,23 @@ export function generateResourceIR({
   const pathIdIR = pathIdParameter
     ? toIR({
         schema: resourceSchema.properties[pathIdParameter],
-        required: null,
+        newSchema: null,
+        updateSchema: null,
+        computedOptionalRequired: "required",
       })
     : null;
 
   const getHasQueryParams =
     getSchema?.parameters?.some((param: any) => param.in === "query") ?? false;
 
+  console.log(newResourceSchema);
+
   // Generate immediate representation of the resource
   const irFields = toIR({
     schema: resourceSchema,
-    required: newResourceSchema.required,
+    newSchema: newResourceSchema.properties.data.properties.attributes,
+    updateSchema: updateResourceSchema.properties.data.properties.attributes,
+    computedOptionalRequired: "required",
   });
   if (irFields.kind !== "object") {
     throw new Error("Resource root must be an object");
@@ -190,6 +269,8 @@ export function generateResourceIR({
     },
     fields: irFields.fields,
   };
+
+  console.log(ir);
 
   return ir;
 }
