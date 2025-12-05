@@ -18,6 +18,7 @@ export type IRType =
 interface IRBase {
   kind: string;
   description?: string;
+  nullable: boolean;
   computedOptionalRequired: ComputedOptionalRequired;
 }
 
@@ -70,6 +71,7 @@ function toIR({
   const common = {
     computedOptionalRequired,
     description: schema.description,
+    nullable: schema.nullable ?? false,
   } as const;
 
   return match(schema)
@@ -257,6 +259,8 @@ export function generateResourceIR({
   const ir: IRResource = {
     kind: "resource",
     resourceType: name,
+    nullable: false,
+    computedOptionalRequired: "required",
     listPathIdParam:
       pathIdParameter && pathIdIR
         ? { name: pathIdParameter, element: pathIdIR }
@@ -266,6 +270,7 @@ export function generateResourceIR({
       kind: "string",
       computedOptionalRequired: "computed",
       description: `The ID of the ${humanize(name, true)}`,
+      nullable: false,
     },
     fields: irFields.fields,
   };
