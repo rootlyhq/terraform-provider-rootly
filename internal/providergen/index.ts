@@ -195,6 +195,7 @@ function generateTerraformType({
       nested: [],
     }))
     .with({ kind: "array", element: { kind: "object" } }, (ir) => {
+      const fieldType = ir.distinct ? "Set" : "List";
       const inner = generateTerraformType({
         inObject: true,
         parent: camelize(`${parent}_${field}`),
@@ -202,18 +203,19 @@ function generateTerraformType({
         ir: ir.element,
       });
       return {
-        output: `supertypes.ListNestedObjectValueOf[${inner.output}]`,
+        output: `supertypes.${fieldType}NestedObjectValueOf[${inner.output}]`,
         nested: inner.nested,
       };
     })
     .with({ kind: "array" }, (ir) => {
+      const fieldType = ir.distinct ? "Set" : "List";
       const inner = generatePrimitiveType({
         parent,
         field,
         ir: ir.element,
       });
       return {
-        output: `supertypes.ListValueOf[${inner.output}]`,
+        output: `supertypes.${fieldType}ValueOf[${inner.output}]`,
         nested: inner.nested,
       };
     })
@@ -345,6 +347,7 @@ function generateModelValuer({
       hasDiags: false,
     }))
     .with({ kind: "array", element: { kind: "object" } }, (ir) => {
+      const fieldType = ir.distinct ? "Set" : "List";
       const inner = generateModelValuer({
         parent: camelize(`${parent}_${field}`),
         field: "Item",
@@ -353,7 +356,7 @@ function generateModelValuer({
       const itemType = camelize(`${parent}_${field}_item`);
       return {
         output: `
-          func() (supertypes.ListNestedObjectValueOf[${itemType}], diag.Diagnostics) {
+          func() (supertypes.${fieldType}NestedObjectValueOf[${itemType}], diag.Diagnostics) {
             var diags diag.Diagnostics
             var elements []${itemType}
             for _, item := range in.${camelize(field)} {
@@ -363,9 +366,9 @@ function generateModelValuer({
             }
 
             if diags.HasError() {
-              return supertypes.NewListNestedObjectValueOfNull[${itemType}](ctx), diags
+              return supertypes.New${fieldType}NestedObjectValueOfNull[${itemType}](ctx), diags
             }
-            return supertypes.NewListNestedObjectValueOfValueSlice(ctx, elements), nil
+            return supertypes.New${fieldType}NestedObjectValueOfValueSlice(ctx, elements), nil
           }()
         `.trim(),
         nested: inner.nested,
@@ -373,18 +376,22 @@ function generateModelValuer({
       };
     })
     .with({ kind: "array", nullable: false }, (ir) => {
+      const fieldType = ir.distinct ? "Set" : "List";
       const inner = generateModelValuer({
         parent,
         field,
         ir: ir.element,
       });
       return {
-        output: `supertypes.NewListValueOfSlice(ctx, in.${camelize(field)})`,
+        output: `supertypes.New${fieldType}ValueOfSlice(ctx, in.${camelize(
+          field
+        )})`,
         nested: inner.nested,
         hasDiags: false,
       };
     })
     .with({ kind: "array", nullable: true }, (ir) => {
+      const fieldType = ir.distinct ? "Set" : "List";
       const primitive = generatePrimitiveType({
         parent,
         field,
@@ -397,11 +404,15 @@ function generateModelValuer({
       });
       return {
         output: `
-          func() supertypes.ListValueOf[${primitive.output}] {
+          func() supertypes.${fieldType}ValueOf[${primitive.output}] {
             if in.${camelize(field)} == nil {
-              return supertypes.NewListValueOfNull[${primitive.output}](ctx)
+              return supertypes.New${fieldType}ValueOfNull[${
+          primitive.output
+        }](ctx)
             }
-            return supertypes.NewListValueOfSlice(ctx, *in.${camelize(field)})
+            return supertypes.New${fieldType}ValueOfSlice(ctx, *in.${camelize(
+          field
+        )})
           }()
         `.trim(),
         nested: inner.nested,
@@ -647,8 +658,8 @@ function generateAttribute({
         }`;
     })
     .with({ kind: "array", element: { kind: "object" } }, (ir) => {
+      const fieldType = ir.distinct ? "Set" : "List";
       const structType = camelize(`${parent}_${field}_item`);
-
       const attrs = Object.entries(ir.element.fields)
         .map(([fieldName, fieldIR]) => {
           return `"${underscore(fieldName)}": ${generateAttribute({
@@ -659,9 +670,9 @@ function generateAttribute({
         })
         .join("\n");
 
-      return `schema.ListNestedAttribute{
+      return `schema.${fieldType}NestedAttribute{
           ${common}
-          CustomType: supertypes.NewListNestedObjectTypeOf[${structType}](ctx),
+          CustomType: supertypes.New${fieldType}NestedObjectTypeOf[${structType}](ctx),
           NestedObject: schema.NestedAttributeObject{
             Attributes: map[string]schema.Attribute{
               ${attrs}
@@ -669,16 +680,17 @@ function generateAttribute({
           },
         }`;
     })
-    .with({ kind: "array" }, ({ element }) => {
+    .with({ kind: "array" }, (ir) => {
+      const fieldType = ir.distinct ? "Set" : "List";
       const primitiveType = generatePrimitiveType({
         parent,
         field,
-        ir: element,
+        ir: ir.element,
       });
 
-      return `schema.ListAttribute{
+      return `schema.${fieldType}Attribute{
           ${common}
-          CustomType: supertypes.NewListTypeOf[${primitiveType.output}](ctx),
+          CustomType: supertypes.New${fieldType}TypeOf[${primitiveType.output}](ctx),
         }`;
     })
     .with({ kind: "object" }, ({ fields }) => {
