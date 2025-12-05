@@ -7,8 +7,8 @@ import {
   type IRType,
 } from "./ir";
 import { SWAGGER_MODS } from "./swagger-mods";
-
-const RESOURCES = ["alert_route", "dashboard_panel"];
+import { IR_MODS } from "./ir-mods";
+import { RESOURCES } from "./settings";
 
 async function getRootlySwagger() {
   const response = await fetch(
@@ -1117,7 +1117,6 @@ async function writeAndFormatGoFile(destination: URL, code: string) {
 async function main() {
   console.log("🚀 Fetching Rootly Swagger...");
   let swagger = await getRootlySwagger();
-
   await Bun.write(
     new URL("out/swagger.original.json", import.meta.url),
     JSON.stringify(swagger, null, 2)
@@ -1127,17 +1126,23 @@ async function main() {
   for (const mod of SWAGGER_MODS) {
     swagger = await mod(swagger);
   }
-
   await Bun.write(
     new URL("out/swagger.modified.json", import.meta.url),
     JSON.stringify(swagger, null, 2)
   );
 
   for (const name of RESOURCES) {
-    const ir = generateResourceIR({ swagger, name });
-
+    let ir = generateResourceIR({ swagger, name });
     await Bun.write(
-      new URL(`out/ir_${name}.json`, import.meta.url),
+      new URL(`out/ir_${name}.original.json`, import.meta.url),
+      JSON.stringify(ir, null, 2)
+    );
+
+    if (IR_MODS[name]) {
+      ir = await IR_MODS[name](ir);
+    }
+    await Bun.write(
+      new URL(`out/ir_${name}.modified.json`, import.meta.url),
       JSON.stringify(ir, null, 2)
     );
 

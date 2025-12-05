@@ -37,6 +37,7 @@ export interface IRObject extends IRBase {
 export interface IRArray extends IRBase {
   kind: "array";
   element: IRType;
+  distinct: boolean;
 }
 
 export interface IRResource extends IRBase {
@@ -61,7 +62,11 @@ function toIR({
   newSchema: any;
   updateSchema: any;
   computedOptionalRequired: ComputedOptionalRequired;
-}): IRType {
+}): IRType | null {
+  if (schema.tf_ignore) {
+    return null;
+  }
+
   const common: Omit<IRBase, "kind"> = {
     computedOptionalRequired,
     description: schema.description,
@@ -92,16 +97,32 @@ function toIR({
       kind: "int",
       ...common,
     }))
-    .with({ type: "array", items: P.record(P.string, P.any) }, (schema) => ({
-      kind: "array",
-      ...common,
-      element: toIR({
-        schema: schema.items,
-        newSchema: newSchema.items,
-        updateSchema: updateSchema.items,
-        computedOptionalRequired: "required", // TODO: Investigate
-      }),
-    }))
+    .with(
+      {
+        type: "array",
+        items: P.record(P.string, P.any),
+        tf_distinct: P.boolean.optional(),
+      },
+      (schema) => {
+        const element = toIR({
+          schema: schema.items,
+          newSchema: newSchema.items,
+          updateSchema: updateSchema.items,
+          computedOptionalRequired: "required", // TODO: Investigate
+        });
+
+        if (!element) {
+          throw new Error("Array element is null");
+        }
+
+        return {
+          kind: "array",
+          ...common,
+          distinct: schema.tf_distinct ?? false,
+          element,
+        };
+      }
+    )
     .with(
       {
         type: "object",
@@ -113,8 +134,8 @@ function toIR({
           kind: "object",
           ...common,
           fields: Object.fromEntries(
-            Object.entries(schema.properties).map(
-              ([propertyName, propertySchema]) => [
+            Object.entries(schema.properties)
+              .map(([propertyName, propertySchema]) => [
                 propertyName,
                 toIR({
                   schema: propertySchema,
@@ -127,8 +148,8 @@ function toIR({
                     updateSchema,
                   }),
                 }),
-              ]
-            )
+              ])
+              .filter(([_, ir]) => ir !== null)
           ),
         };
       }
