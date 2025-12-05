@@ -223,10 +223,12 @@ function generatePrimitiveType({
   parent,
   field,
   ir,
+  nestedGenerator,
 }: {
   parent: string;
   field: string;
   ir: IRType;
+  nestedGenerator?: ({ name, ir }: { name: string; ir: IRType }) => string;
 }): { output: string; nested: string[] } {
   const result = match(ir)
     .returnType<{ output: string; nested: string[] }>()
@@ -247,6 +249,7 @@ function generatePrimitiveType({
         parent: camelize(`${parent}_${field}`),
         field: "Item",
         ir: ir.element,
+        nestedGenerator,
       });
       return {
         output: `[]${inner.output}`,
@@ -258,6 +261,7 @@ function generatePrimitiveType({
         parent,
         field,
         ir: ir.element,
+        nestedGenerator,
       });
       return {
         output: `[]${inner.output}`,
@@ -266,10 +270,12 @@ function generatePrimitiveType({
     })
     .with({ kind: "object" }, (ir) => {
       const structName = camelize(`${parent}_${field}`);
-      const struct = generateClientModel({ name: structName, ir });
+      const nested = nestedGenerator
+        ? [nestedGenerator({ name: structName, ir })]
+        : [];
       return {
         output: structName,
-        nested: [struct],
+        nested,
       };
     })
     .otherwise(() => {
@@ -823,13 +829,7 @@ function generateResourceUpdateDiff({
   return lines.join("\n");
 }
 
-function generateClientModel({
-  ir,
-  name,
-}: {
-  ir: IRResource | IRObject;
-  name: string;
-}) {
+function generateClientModel({ ir, name }: { ir: IRObject; name: string }) {
   const modelStructLines: string[] = [];
   const nested: string[] = [];
 
@@ -854,6 +854,14 @@ function generateClientModel({
       parent: modelName,
       field,
       ir: fieldIR,
+      nestedGenerator: ({ name, ir }) => {
+        if (ir.kind !== "object") {
+          throw new Error(
+            `Unsupported IR type: ${JSON.stringify(ir)} for field ${name}`
+          );
+        }
+        return generateClientModel({ ir, name });
+      },
     });
     nested.push(...primitiveType.nested);
     modelStructLines.push(
