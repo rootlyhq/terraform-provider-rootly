@@ -1,1 +1,1 @@
-export const RESOURCES = ["dashboard_panel"] as const;
+export const RESOURCES = [] as const;

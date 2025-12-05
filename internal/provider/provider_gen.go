@@ -3,6 +3,4 @@ package provider
 
 import "github.com/hashicorp/terraform-plugin-framework/resource"
 
-var RootlyProviderGeneratedResources = []func() resource.Resource{
-	NewAlertRouteResource,
-}
+var RootlyProviderGeneratedResources = []func() resource.Resource{}
