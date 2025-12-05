@@ -11,6 +11,7 @@ function withLegacyBlocks<T extends IRResource | IRType>(ir: T): T {
   return match(ir as IRResource | IRType)
     .with({ kind: "resource" }, { kind: "object" }, (ir) => ({
       ...ir,
+      blocks: true,
       fields: Object.fromEntries(
         Object.entries(ir.fields).map(([k, v]) => [k, withLegacyBlocks(v)])
       ),
@@ -28,11 +29,8 @@ export const IR_MODS: {
     ir: IRResource
   ) => IRResource | Promise<IRResource>;
 } = {
-  alert_route: (ir) => {
+  dashboard_panel: (ir) => {
     ir = withLegacyBlocks(ir);
-    ir.fields["alerts_source_ids"].distinct = true;
-    ir.fields["owning_team_ids"].distinct = true;
-    ir.fields["rules"].distinct = true;
     return ir;
   },
 };

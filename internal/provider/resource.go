@@ -35,6 +35,6 @@ func (r *baseResource) Configure(ctx context.Context, req resource.ConfigureRequ
 	r.legacyClient = providerData.LegacyClient
 }
 
-type extendableResource[T any] interface {
-	update(ctx context.Context, plan T, data *T, resp *resource.UpdateResponse)
+type modifySchemaResponseExtension interface {
+	modifySchemaResponse(ctx context.Context, resp *resource.SchemaResponse)
 }
