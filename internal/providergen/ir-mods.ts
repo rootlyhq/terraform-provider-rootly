@@ -1,4 +1,4 @@
-import type { IRResource } from "./ir";
+import type { IRArray, IRResource } from "./ir";
 import type { RESOURCES } from "./settings";
 
 export const IR_MODS: {
@@ -6,7 +6,10 @@ export const IR_MODS: {
     ir: IRResource
   ) => IRResource | Promise<IRResource>;
 } = {
-  dashboard_panel: (ir) => {
+  alert_route: (ir) => {
+    (ir.fields["alerts_source_ids"] as IRArray).distinct = true;
+    (ir.fields["owning_team_ids"] as IRArray).distinct = true;
+    (ir.fields["rules"] as IRArray).distinct = true;
     return ir;
   },
 };

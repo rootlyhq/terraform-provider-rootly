@@ -31,6 +31,7 @@ export interface IRInt extends IRBase {
 
 export interface IRObject extends IRBase {
   kind: "object";
+  blocks: boolean;
   fields: Record<string, IRType>;
 }
 
@@ -128,11 +129,13 @@ function toIR({
         type: "object",
         properties: P.record(P.string, P.any),
         required: P.array(P.string).optional(),
+        tf_blocks: P.boolean.optional(),
       },
       (schema) => {
         return {
           kind: "object",
           ...common,
+          blocks: schema.tf_blocks ?? false,
           fields: Object.fromEntries(
             Object.entries(schema.properties)
               .map(([propertyName, propertySchema]) => [
@@ -272,7 +275,7 @@ export function generateResourceIR({
     updateSchema: updateResourceSchema.properties.data.properties.attributes,
     computedOptionalRequired: "required",
   });
-  if (irFields.kind !== "object") {
+  if (!irFields || irFields.kind !== "object") {
     throw new Error("Resource root must be an object");
   }
 
