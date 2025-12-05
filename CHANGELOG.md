@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.3.13] -- 2025-12-04
+
+### Changed
+
+- Deprecated communications group condition properties name field.
+
 ## [4.3.12] -- 2025-12-04
 
 ### Fixed
