@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/polling"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
 
@@ -332,6 +333,12 @@ func resourceAlertRouteCreate(ctx context.Context, d *schema.ResourceData, meta 
 		s.Rules = value.([]interface{})
 	}
 
+	var requestID string
+	if rules := d.Get("rules").([]interface{}); len(rules) > 0 {
+		requestID = polling.GenerateRequestId()
+		s.RequestId = requestID
+	}
+
 	res, err := c.CreateAlertRoute(s)
 	if err != nil {
 		return diag.Errorf("Error creating alert_route: %s", err.Error())
@@ -339,6 +346,29 @@ func resourceAlertRouteCreate(ctx context.Context, d *schema.ResourceData, meta 
 
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created a alert_route resource: %s", d.Id()))
+
+	if requestID != "" {
+		tflog.Debug(ctx, fmt.Sprintf("Waiting for asynchronous rule creation to complete for alert route %s with request_id %s", d.Id(), requestID))
+
+		checkStatusFunc := func(alertRouteID, requestID string) (*polling.AsyncRuleCreationStatus, error) {
+			clientStatus, err := c.GetAsyncRuleCreationStatus(alertRouteID, requestID)
+			if err != nil {
+				return nil, err
+			}
+
+			return &polling.AsyncRuleCreationStatus{
+				Status: clientStatus.Status,
+				Error:  clientStatus.Error,
+			}, nil
+		}
+
+		err = polling.WaitForAsyncRuleCreation(ctx, d.Id(), requestID, checkStatusFunc)
+		if err != nil {
+			return diag.Errorf("Error waiting for alert route rules to be created: %s", err.Error())
+		}
+
+		tflog.Debug(ctx, fmt.Sprintf("Alert route rules creation completed for %s", d.Id()))
+	}
 
 	return resourceAlertRouteRead(ctx, d, meta)
 }
@@ -419,9 +449,15 @@ func resourceAlertRouteUpdate(ctx context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
+	var requestID string
 	if d.HasChange("rules") {
 		if value, ok := d.GetOk("rules"); value != nil && ok {
 			s.Rules = value.([]interface{})
+			if rules := value.([]interface{}); len(rules) > 0 {
+				requestID = polling.GenerateRequestId()
+				s.RequestId = requestID
+				tflog.Debug(ctx, fmt.Sprintf("Including request_id %s for asynchronous rule update", requestID))
+			}
 		} else {
 			s.Rules = []interface{}{}
 		}
@@ -430,6 +466,28 @@ func resourceAlertRouteUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	_, err := c.UpdateAlertRoute(d.Id(), s)
 	if err != nil {
 		return diag.Errorf("Error updating alert_route: %s", err.Error())
+	}
+
+	if requestID != "" {
+		tflog.Debug(ctx, fmt.Sprintf("Waiting for asynchronous rule update to complete for alert route %s with request_id %s", d.Id(), requestID))
+
+		checkStatusFunc := func(alertRouteID, requestID string) (*polling.AsyncRuleCreationStatus, error) {
+			clientStatus, err := c.GetAsyncRuleCreationStatus(alertRouteID, requestID)
+			if err != nil {
+				return nil, err
+			}
+			return &polling.AsyncRuleCreationStatus{
+				Status: clientStatus.Status,
+				Error:  clientStatus.Error,
+			}, nil
+		}
+
+		err = polling.WaitForAsyncRuleCreation(ctx, d.Id(), requestID, checkStatusFunc)
+		if err != nil {
+			return diag.Errorf("Error waiting for alert route rules to be updated: %s", err.Error())
+		}
+
+		tflog.Debug(ctx, fmt.Sprintf("Alert route rules update completed for %s", d.Id()))
 	}
 
 	return resourceAlertRouteRead(ctx, d, meta)
