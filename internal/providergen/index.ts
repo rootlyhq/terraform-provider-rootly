@@ -33,16 +33,28 @@ function generateTerraformValuer({
 } {
   return match(ir)
     .returnType<{ output: string; hasErr: boolean }>()
-    .with({ kind: "string" }, () => ({
+    .with({ kind: "string", nullable: false }, () => ({
       output: `${prefix}${camelize(field)}.ValueString()`,
       hasErr: false,
     }))
-    .with({ kind: "bool" }, () => ({
+    .with({ kind: "string", nullable: true }, () => ({
+      output: `${prefix}${camelize(field)}.ValueStringPointer()`,
+      hasErr: false,
+    }))
+    .with({ kind: "bool", nullable: false }, () => ({
       output: `${prefix}${camelize(field)}.ValueBool()`,
       hasErr: false,
     }))
-    .with({ kind: "int" }, () => ({
+    .with({ kind: "bool", nullable: true }, () => ({
+      output: `${prefix}${camelize(field)}.ValueBoolPointer()`,
+      hasErr: false,
+    }))
+    .with({ kind: "int", nullable: false }, () => ({
       output: `${prefix}${camelize(field)}.ValueInt64()`,
+      hasErr: false,
+    }))
+    .with({ kind: "int", nullable: true }, () => ({
+      output: `${prefix}${camelize(field)}.ValueInt64Pointer()`,
       hasErr: false,
     }))
     .with({ kind: "array", element: { kind: "object" } }, () => ({
@@ -168,16 +180,28 @@ function generatePrimitiveType({
 }): { output: string; nested: string[] } {
   return match(ir)
     .returnType<{ output: string; nested: string[] }>()
-    .with({ kind: "string" }, () => ({
+    .with({ kind: "string", nullable: false }, () => ({
       output: "string",
       nested: [],
     }))
-    .with({ kind: "bool" }, () => ({
+    .with({ kind: "string", nullable: true }, () => ({
+      output: "*string",
+      nested: [],
+    }))
+    .with({ kind: "bool", nullable: false }, () => ({
       output: "bool",
       nested: [],
     }))
-    .with({ kind: "int" }, () => ({
+    .with({ kind: "bool", nullable: true }, () => ({
+      output: "*bool",
+      nested: [],
+    }))
+    .with({ kind: "int", nullable: false }, () => ({
       output: "int64",
+      nested: [],
+    }))
+    .with({ kind: "int", nullable: true }, () => ({
+      output: "*int64",
       nested: [],
     }))
     .with({ kind: "array", element: { kind: "object" } }, (ir) => {
@@ -234,18 +258,33 @@ function generateModelValuer({
       nested: string[];
       hasErr: boolean;
     }>()
-    .with({ kind: "string" }, () => ({
+    .with({ kind: "string", nullable: false }, () => ({
       output: `supertypes.NewStringValueOrNull(in.${camelize(field)})`,
       nested: [],
       hasErr: false,
     }))
-    .with({ kind: "bool" }, () => ({
+    .with({ kind: "string", nullable: true }, () => ({
+      output: `supertypes.NewStringPointerValueOrNull(in.${camelize(field)})`,
+      nested: [],
+      hasErr: false,
+    }))
+    .with({ kind: "bool", nullable: false }, () => ({
       output: `supertypes.NewBoolValue(in.${camelize(field)})`,
       nested: [],
       hasErr: false,
     }))
-    .with({ kind: "int" }, () => ({
+    .with({ kind: "bool", nullable: true }, () => ({
+      output: `supertypes.NewBoolPointerValueOrNull(in.${camelize(field)})`,
+      nested: [],
+      hasErr: false,
+    }))
+    .with({ kind: "int", nullable: false }, () => ({
       output: `supertypes.NewInt64Value(in.${camelize(field)})`,
+      nested: [],
+      hasErr: false,
+    }))
+    .with({ kind: "int", nullable: true }, () => ({
+      output: `supertypes.NewInt64PointerValueOrNull(in.${camelize(field)})`,
       nested: [],
       hasErr: false,
     }))
