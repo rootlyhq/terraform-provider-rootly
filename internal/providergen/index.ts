@@ -57,32 +57,78 @@ function generateTerraformValuer({
       output: `${prefix}${camelize(field)}.ValueInt64Pointer()`,
       hasDiags: false,
     }))
-    .with({ kind: "array", element: { kind: "object" } }, () => {
-      const structName = camelize(`${parent}_${field}_item`);
-      const fieldName = `${prefix}${camelize(field)}`;
-      return {
-        output: `
-        func() ([]apiclient.${structName}, diag.Diagnostics) {
-          var diags diag.Diagnostics
-          var itemClientModels []apiclient.${structName}
-          for _, item := range ${fieldName}.DiagsGet(ctx, diags) {
-            itemClientModel := tfutils.MergeDiagnostics(item.ToClientModel(ctx))(&diags)
-            itemClientModels = append(itemClientModels, *itemClientModel)
-          }
-          if diags.HasError() {
-            return nil, diags
-          }
-          return itemClientModels, nil
-        }()
-      `.trim(),
-        hasDiags: true,
-      };
-    })
-    .with({ kind: "array" }, () => ({
+    .with(
+      { kind: "array", element: { kind: "object" }, nullable: false },
+      () => {
+        const structName = camelize(`${parent}_${field}_item`);
+        const fieldName = `${prefix}${camelize(field)}`;
+        return {
+          output: `
+          func() ([]apiclient.${structName}, diag.Diagnostics) {
+            var diags diag.Diagnostics
+            var itemClientModels []apiclient.${structName}
+            for _, item := range ${fieldName}.DiagsGet(ctx, diags) {
+              itemClientModel := tfutils.MergeDiagnostics(item.ToClientModel(ctx))(&diags)
+              itemClientModels = append(itemClientModels, *itemClientModel)
+            }
+            if diags.HasError() {
+              return nil, diags
+            }
+            return itemClientModels, nil
+          }()
+        `.trim(),
+          hasDiags: true,
+        };
+      }
+    )
+    .with(
+      { kind: "array", element: { kind: "object" }, nullable: true },
+      () => {
+        const structName = camelize(`${parent}_${field}_item`);
+        const fieldName = `${prefix}${camelize(field)}`;
+        return {
+          output: `
+          func() (*[]apiclient.${structName}, diag.Diagnostics) {
+            var diags diag.Diagnostics
+            var itemClientModels []apiclient.${structName}
+            for _, item := range ${fieldName}.DiagsGet(ctx, diags) {
+              itemClientModel := tfutils.MergeDiagnostics(item.ToClientModel(ctx))(&diags)
+              itemClientModels = append(itemClientModels, *itemClientModel)
+            }
+            if diags.HasError() {
+              return nil, diags
+            }
+            return &itemClientModels, nil
+          }()
+        `.trim(),
+          hasDiags: true,
+        };
+      }
+    )
+    .with({ kind: "array", nullable: false }, () => ({
       output: `${prefix}${camelize(field)}.Get(ctx)`,
       hasDiags: true,
     }))
-    .with({ kind: "object" }, () => ({
+    .with({ kind: "array", nullable: true }, (ir) => {
+      const inner = generatePrimitiveType({
+        parent,
+        field,
+        ir,
+      });
+      return {
+        output: `
+          func() (${inner.output}, diag.Diagnostics) {
+            v, diags := ${prefix}${camelize(field)}.Get(ctx)
+            if diags.HasError() {
+              return nil, diags
+            }
+            return ptr.Ptr(v), nil
+          }()
+        `.trim(),
+        hasDiags: true,
+      };
+    })
+    .with({ kind: "object", nullable: false }, () => ({
       output: `
         func() (apiclient.${camelize(`${parent}_${field}`)}, diag.Diagnostics) {
           var diags diag.Diagnostics
@@ -95,6 +141,25 @@ function generateTerraformValuer({
             return apiclient.${camelize(`${parent}_${field}`)}{}, diags
           }
           return *clientModel, nil
+        }()
+      `.trim(),
+      hasDiags: true,
+    }))
+    .with({ kind: "object", nullable: true }, () => ({
+      output: `
+        func() (*apiclient.${camelize(
+          `${parent}_${field}`
+        )}, diag.Diagnostics) {
+          var diags diag.Diagnostics
+          model := ${prefix}${camelize(field)}.DiagsGet(ctx, diags)
+          if diags.HasError() {
+            return nil, diags
+          }
+          clientModel := tfutils.MergeDiagnostics(model.ToClientModel(ctx))(&diags)
+          if diags.HasError() {
+            return nil, diags
+          }
+          return clientModel, nil
         }()
       `.trim(),
       hasDiags: true,
@@ -143,8 +208,8 @@ function generateTerraformType({
     })
     .with({ kind: "array" }, (ir) => {
       const inner = generatePrimitiveType({
-        parent: camelize(`${parent}_${field}`),
-        field: "Item",
+        parent,
+        field,
         ir: ir.element,
       });
       return {
@@ -176,30 +241,18 @@ function generatePrimitiveType({
   field: string;
   ir: IRType;
 }): { output: string; nested: string[] } {
-  return match(ir)
+  const result = match(ir)
     .returnType<{ output: string; nested: string[] }>()
-    .with({ kind: "string", nullable: false }, () => ({
+    .with({ kind: "string" }, () => ({
       output: "string",
       nested: [],
     }))
-    .with({ kind: "string", nullable: true }, () => ({
-      output: "*string",
-      nested: [],
-    }))
-    .with({ kind: "bool", nullable: false }, () => ({
+    .with({ kind: "bool" }, () => ({
       output: "bool",
       nested: [],
     }))
-    .with({ kind: "bool", nullable: true }, () => ({
-      output: "*bool",
-      nested: [],
-    }))
-    .with({ kind: "int", nullable: false }, () => ({
+    .with({ kind: "int" }, () => ({
       output: "int64",
-      nested: [],
-    }))
-    .with({ kind: "int", nullable: true }, () => ({
-      output: "*int64",
       nested: [],
     }))
     .with({ kind: "array", element: { kind: "object" } }, (ir) => {
@@ -215,8 +268,8 @@ function generatePrimitiveType({
     })
     .with({ kind: "array" }, (ir) => {
       const inner = generatePrimitiveType({
-        parent: camelize(`${parent}_${field}`),
-        field: "Item",
+        parent,
+        field,
         ir: ir.element,
       });
       return {
@@ -235,6 +288,11 @@ function generatePrimitiveType({
     .otherwise(() => {
       throw new Error(`Unsupported IR type: ${JSON.stringify(ir)}`);
     });
+
+  return {
+    output: ir.nullable ? `*${result.output}` : result.output,
+    nested: result.nested,
+  };
 }
 
 function generateModelValuer({
@@ -314,10 +372,10 @@ function generateModelValuer({
         hasDiags: true,
       };
     })
-    .with({ kind: "array" }, (ir) => {
+    .with({ kind: "array", nullable: false }, (ir) => {
       const inner = generateModelValuer({
-        parent: camelize(`${parent}_${field}`),
-        field: "Item",
+        parent,
+        field,
         ir: ir.element,
       });
       return {
@@ -326,7 +384,31 @@ function generateModelValuer({
         hasDiags: false,
       };
     })
-    .with({ kind: "object" }, (ir) => {
+    .with({ kind: "array", nullable: true }, (ir) => {
+      const primitive = generatePrimitiveType({
+        parent,
+        field,
+        ir: ir.element,
+      });
+      const inner = generateModelValuer({
+        parent,
+        field,
+        ir: ir.element,
+      });
+      return {
+        output: `
+          func() supertypes.ListValueOf[${primitive.output}] {
+            if in.${camelize(field)} == nil {
+              return supertypes.NewListValueOfNull[${primitive.output}](ctx)
+            }
+            return supertypes.NewListValueOfSlice(ctx, *in.${camelize(field)})
+          }()
+        `.trim(),
+        nested: inner.nested,
+        hasDiags: false,
+      };
+    })
+    .with({ kind: "object", nullable: false }, (ir) => {
       const structName = camelize(`${parent}_${field}`);
       const struct = generateFillModel({ name: structName, ir });
       return {
@@ -335,6 +417,33 @@ function generateModelValuer({
             var diags diag.Diagnostics
             var out ${structName}
             diags.Append(Fill${structName}(ctx, in.${camelize(field)}, &out)...)
+
+            if diags.HasError() {
+              return supertypes.NewSingleNestedObjectValueOfNull[${structName}](ctx), diags
+            }
+            return supertypes.NewSingleNestedObjectValueOf(ctx, &out), nil
+          }()
+        `.trim(),
+        nested: [struct],
+        hasDiags: true,
+      };
+    })
+    .with({ kind: "object", nullable: true }, (ir) => {
+      const structName = camelize(`${parent}_${field}`);
+      const struct = generateFillModel({ name: structName, ir });
+      return {
+        output: `
+          func() (supertypes.SingleNestedObjectValueOf[${structName}], diag.Diagnostics) {
+            var diags diag.Diagnostics
+
+            if in.${camelize(field)} == nil {
+              return supertypes.NewSingleNestedObjectValueOfNull[${structName}](ctx), diags
+            }
+
+            var out ${structName}
+            diags.Append(Fill${structName}(ctx, *in.${camelize(
+          field
+        )}, &out)...)
 
             if diags.HasError() {
               return supertypes.NewSingleNestedObjectValueOfNull[${structName}](ctx), diags
@@ -666,18 +775,20 @@ function generateResource({ ir, name }: { ir: IRResource; name: string }) {
 package provider
 
 import (
-  "bytes"
-  "context"
-  "fmt"
-  "net/http"
+	"bytes"
+	"context"
+	"fmt"
+	"net/http"
 
-  "github.com/DataDog/jsonapi"
-  "github.com/hashicorp/terraform-plugin-framework/diag"
-  "github.com/hashicorp/terraform-plugin-framework/path"
-  "github.com/hashicorp/terraform-plugin-framework/resource"
-  "github.com/hashicorp/terraform-plugin-framework/resource/schema"
-  supertypes "github.com/orange-cloudavenue/terraform-plugin-framework-supertypes"
-  "github.com/rootlyhq/terraform-provider-rootly/v2/internal/apiclient"
+	"github.com/DataDog/jsonapi"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
+	"github.com/hashicorp/terraform-plugin-framework/path"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/jianyuan/go-utils/ptr"
+	supertypes "github.com/orange-cloudavenue/terraform-plugin-framework-supertypes"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/apiclient"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/tfutils"
 )
 
 var _ resource.Resource = (*${resourceName})(nil)
