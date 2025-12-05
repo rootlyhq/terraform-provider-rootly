@@ -29,77 +29,75 @@ function generateTerraformValuer({
   ir: IRType;
 }): {
   output: string;
-  hasErr: boolean;
+  hasDiags: boolean;
 } {
   return match(ir)
-    .returnType<{ output: string; hasErr: boolean }>()
+    .returnType<{ output: string; hasDiags: boolean }>()
     .with({ kind: "string", nullable: false }, () => ({
       output: `${prefix}${camelize(field)}.ValueString()`,
-      hasErr: false,
+      hasDiags: false,
     }))
     .with({ kind: "string", nullable: true }, () => ({
       output: `${prefix}${camelize(field)}.ValueStringPointer()`,
-      hasErr: false,
+      hasDiags: false,
     }))
     .with({ kind: "bool", nullable: false }, () => ({
       output: `${prefix}${camelize(field)}.ValueBool()`,
-      hasErr: false,
+      hasDiags: false,
     }))
     .with({ kind: "bool", nullable: true }, () => ({
       output: `${prefix}${camelize(field)}.ValueBoolPointer()`,
-      hasErr: false,
+      hasDiags: false,
     }))
     .with({ kind: "int", nullable: false }, () => ({
       output: `${prefix}${camelize(field)}.ValueInt64()`,
-      hasErr: false,
+      hasDiags: false,
     }))
     .with({ kind: "int", nullable: true }, () => ({
       output: `${prefix}${camelize(field)}.ValueInt64Pointer()`,
-      hasErr: false,
+      hasDiags: false,
     }))
-    .with({ kind: "array", element: { kind: "object" } }, () => ({
-      output: `
-        func() ([]apiclient.${camelize(`${parent}_${field}_item`)}, error) {
-          var itemClientModels []apiclient.${camelize(
-            `${parent}_${field}_item`
-          )}
-          for _, item := range ${prefix}${camelize(field)}.MustGet(ctx) {
-            itemClientModel, err := item.ToClientModel(ctx)
-            if err != nil {
-              return nil, err
-            }
+    .with({ kind: "array", element: { kind: "object" } }, () => {
+      const structName = camelize(`${parent}_${field}_item`);
+      const fieldName = `${prefix}${camelize(field)}`;
+      return {
+        output: `
+        func() ([]apiclient.${structName}, diag.Diagnostics) {
+          var diags diag.Diagnostics
+          var itemClientModels []apiclient.${structName}
+          for _, item := range ${fieldName}.DiagsGet(ctx, diags) {
+            itemClientModel := tfutils.MergeDiagnostics(item.ToClientModel(ctx))(&diags)
             itemClientModels = append(itemClientModels, *itemClientModel)
+          }
+          if diags.HasError() {
+            return nil, diags
           }
           return itemClientModels, nil
         }()
       `.trim(),
-      hasErr: true,
-    }))
+        hasDiags: true,
+      };
+    })
     .with({ kind: "array" }, () => ({
-      output: `${prefix}${camelize(field)}.MustGet(ctx)`,
-      hasErr: false,
+      output: `${prefix}${camelize(field)}.Get(ctx)`,
+      hasDiags: true,
     }))
     .with({ kind: "object" }, () => ({
       output: `
-        func() (apiclient.${camelize(`${parent}_${field}`)}, error) {
-          model, diags := ${prefix}${camelize(field)}.Get(ctx)
+        func() (apiclient.${camelize(`${parent}_${field}`)}, diag.Diagnostics) {
+          var diags diag.Diagnostics
+          model := ${prefix}${camelize(field)}.DiagsGet(ctx, diags)
           if diags.HasError() {
-            return apiclient.${camelize(
-              `${parent}_${field}`
-            )}{}, fmt.Errorf("%v", diags.Errors())
-          } else if model == nil {
-            return apiclient.${camelize(
-              `${parent}_${field}`
-            )}{}, fmt.Errorf("model is nil")
+            return apiclient.${camelize(`${parent}_${field}`)}{}, diags
           }
-          clientModel, err := model.ToClientModel(ctx)
-          if err != nil {
-            return apiclient.${camelize(`${parent}_${field}`)}{}, err
+          clientModel := tfutils.MergeDiagnostics(model.ToClientModel(ctx))(&diags)
+          if diags.HasError() {
+            return apiclient.${camelize(`${parent}_${field}`)}{}, diags
           }
           return *clientModel, nil
         }()
       `.trim(),
-      hasErr: true,
+      hasDiags: true,
     }))
     .otherwise(() => {
       throw new Error(`Unsupported IR type: ${JSON.stringify(ir)}`);
@@ -250,43 +248,43 @@ function generateModelValuer({
 }): {
   output: string;
   nested: string[];
-  hasErr: boolean;
+  hasDiags: boolean;
 } {
   return match(ir)
     .returnType<{
       output: string;
       nested: string[];
-      hasErr: boolean;
+      hasDiags: boolean;
     }>()
     .with({ kind: "string", nullable: false }, () => ({
       output: `supertypes.NewStringValueOrNull(in.${camelize(field)})`,
       nested: [],
-      hasErr: false,
+      hasDiags: false,
     }))
     .with({ kind: "string", nullable: true }, () => ({
       output: `supertypes.NewStringPointerValueOrNull(in.${camelize(field)})`,
       nested: [],
-      hasErr: false,
+      hasDiags: false,
     }))
     .with({ kind: "bool", nullable: false }, () => ({
       output: `supertypes.NewBoolValue(in.${camelize(field)})`,
       nested: [],
-      hasErr: false,
+      hasDiags: false,
     }))
     .with({ kind: "bool", nullable: true }, () => ({
       output: `supertypes.NewBoolPointerValueOrNull(in.${camelize(field)})`,
       nested: [],
-      hasErr: false,
+      hasDiags: false,
     }))
     .with({ kind: "int", nullable: false }, () => ({
       output: `supertypes.NewInt64Value(in.${camelize(field)})`,
       nested: [],
-      hasErr: false,
+      hasDiags: false,
     }))
     .with({ kind: "int", nullable: true }, () => ({
       output: `supertypes.NewInt64PointerValueOrNull(in.${camelize(field)})`,
       nested: [],
-      hasErr: false,
+      hasDiags: false,
     }))
     .with({ kind: "array", element: { kind: "object" } }, (ir) => {
       const inner = generateModelValuer({
@@ -297,21 +295,23 @@ function generateModelValuer({
       const itemType = camelize(`${parent}_${field}_item`);
       return {
         output: `
-          func() (supertypes.ListNestedObjectValueOf[${itemType}], error) {
+          func() (supertypes.ListNestedObjectValueOf[${itemType}], diag.Diagnostics) {
+            var diags diag.Diagnostics
             var elements []${itemType}
             for _, item := range in.${camelize(field)} {
               var element ${itemType}
-              err := Fill${itemType}(ctx, item, &element)
-              if err != nil {
-                return supertypes.NewListNestedObjectValueOfNull[${itemType}](ctx), err
-              }
+              diags.Append(Fill${itemType}(ctx, item, &element)...)
               elements = append(elements, element)
+            }
+
+            if diags.HasError() {
+              return supertypes.NewListNestedObjectValueOfNull[${itemType}](ctx), diags
             }
             return supertypes.NewListNestedObjectValueOfValueSlice(ctx, elements), nil
           }()
         `.trim(),
         nested: inner.nested,
-        hasErr: true,
+        hasDiags: true,
       };
     })
     .with({ kind: "array" }, (ir) => {
@@ -323,7 +323,7 @@ function generateModelValuer({
       return {
         output: `supertypes.NewListValueOfSlice(ctx, in.${camelize(field)})`,
         nested: inner.nested,
-        hasErr: false,
+        hasDiags: false,
       };
     })
     .with({ kind: "object" }, (ir) => {
@@ -331,17 +331,19 @@ function generateModelValuer({
       const struct = generateFillModel({ name: structName, ir });
       return {
         output: `
-          func() (supertypes.SingleNestedObjectValueOf[${structName}], error) {
+          func() (supertypes.SingleNestedObjectValueOf[${structName}], diag.Diagnostics) {
+            var diags diag.Diagnostics
             var out ${structName}
-            err := Fill${structName}(ctx, in.${camelize(field)}, &out)
-            if err != nil {
-              return supertypes.NewSingleNestedObjectValueOfNull[${structName}](ctx), err
+            diags.Append(Fill${structName}(ctx, in.${camelize(field)}, &out)...)
+
+            if diags.HasError() {
+              return supertypes.NewSingleNestedObjectValueOfNull[${structName}](ctx), diags
             }
             return supertypes.NewSingleNestedObjectValueOf(ctx, &out), nil
           }()
         `.trim(),
         nested: [struct],
-        hasErr: true,
+        hasDiags: true,
       };
     })
     .otherwise(() => {
@@ -392,15 +394,11 @@ function generateModel({
     toClientModelLines.push(
       `if !m.${camelize(field)}.IsNull() && !m.${camelize(field)}.IsUnknown() {`
     );
-    if (terraformValuer.hasErr) {
+    if (terraformValuer.hasDiags) {
       toClientModelLines.push(
-        `
-          var err error
-          out.${camelize(field)}, err = ${terraformValuer.output}
-          if err != nil {
-            return nil, err
-          }
-        `.trim()
+        `out.${camelize(field)} = tfutils.MergeDiagnostics(${
+          terraformValuer.output
+        })(&diags)`
       );
     } else {
       toClientModelLines.push(
@@ -415,9 +413,13 @@ type ${name} struct {
   ${modelStructLines.join("\n")}
 }
 
-func (m *${name}) ToClientModel(ctx context.Context) (*apiclient.${name}, error) {
+func (m *${name}) ToClientModel(ctx context.Context) (*apiclient.${name}, diag.Diagnostics) {
+  var diags diag.Diagnostics
   var out apiclient.${name}
   ${toClientModelLines.join("\n")}
+  if diags.HasError() {
+    return nil, diags
+  }
   return &out, nil
 }
 `;
@@ -451,25 +453,21 @@ function generateFillModel({ name, ir }: { name: string; ir: IRType }) {
 
     nested.push(...modelValuer.nested);
 
-    if (modelValuer.hasErr) {
-      fillModelLines.push("{");
-      fillModelLines.push("var err error");
+    if (modelValuer.hasDiags) {
       fillModelLines.push(
-        `out.${camelize(field)}, err = ${modelValuer.output}`
+        `out.${camelize(field)} = tfutils.MergeDiagnostics(${
+          modelValuer.output
+        })(&diags)`
       );
-      fillModelLines.push("if err != nil {");
-      fillModelLines.push("return err");
-      fillModelLines.push("}");
-      fillModelLines.push("}");
     } else {
       fillModelLines.push(`out.${camelize(field)} = ${modelValuer.output}`);
     }
   }
 
   const struct = `
-func Fill${name}(ctx context.Context, in apiclient.${name}, out *${name}) error {
+func Fill${name}(ctx context.Context, in apiclient.${name}, out *${name}) (diags diag.Diagnostics) {
   ${fillModelLines.join("\n")}
-  return nil
+  return
 }
 `;
 
@@ -642,16 +640,11 @@ function generateResourceUpdateDiff({
     });
     lines.push(`if !data.${camelize(field)}.Equal(plan.${camelize(field)}) {`);
 
-    if (terraformValuer.hasErr) {
+    if (terraformValuer.hasDiags) {
       lines.push(
-        `
-          var err error
-          modelIn.${camelize(field)}, err = ${terraformValuer.output}
-          if err != nil {
-            resp.Diagnostics.AddError("Provider Error", fmt.Sprintf("Unable to convert plan to model: %v", err))
-            return
-          }
-        `.trim()
+        `modelIn.${camelize(field)} = tfutils.MergeDiagnostics(${
+          terraformValuer.output
+        })(&resp.Diagnostics)`
       );
     } else {
       lines.push(`modelIn.${camelize(field)} = ${terraformValuer.output}`);
@@ -673,17 +666,18 @@ function generateResource({ ir, name }: { ir: IRResource; name: string }) {
 package provider
 
 import (
-	"bytes"
-	"context"
-	"fmt"
-	"net/http"
+  "bytes"
+  "context"
+  "fmt"
+  "net/http"
 
-	"github.com/DataDog/jsonapi"
-	"github.com/hashicorp/terraform-plugin-framework/path"
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	supertypes "github.com/orange-cloudavenue/terraform-plugin-framework-supertypes"
-	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/apiclient"
+  "github.com/DataDog/jsonapi"
+  "github.com/hashicorp/terraform-plugin-framework/diag"
+  "github.com/hashicorp/terraform-plugin-framework/path"
+  "github.com/hashicorp/terraform-plugin-framework/resource"
+  "github.com/hashicorp/terraform-plugin-framework/resource/schema"
+  supertypes "github.com/orange-cloudavenue/terraform-plugin-framework-supertypes"
+  "github.com/rootlyhq/terraform-provider-rootly/v2/internal/apiclient"
 )
 
 var _ resource.Resource = (*${resourceName})(nil)
@@ -716,9 +710,9 @@ func (r *${resourceName}) Create(ctx context.Context, req resource.CreateRequest
   }
 
   // Create API call logic
-  modelIn, err := data.ToClientModel(ctx)
-  if err != nil {
-    resp.Diagnostics.AddError("Provider Error", fmt.Sprintf("Unable to client model: %v", err))
+  modelIn := tfutils.MergeDiagnostics(data.ToClientModel(ctx))(&resp.Diagnostics)
+
+  if resp.Diagnostics.HasError() {
     return
   }
 
@@ -843,24 +837,28 @@ func (r *${resourceName}) Update(ctx context.Context, req resource.UpdateRequest
 
   ${generateResourceUpdateDiff({ name: modelName, ir })}
 
+  if resp.Diagnostics.HasError() {
+    return
+  }
+
   b, err := jsonapi.Marshal(&modelIn, jsonapi.MarshalClientMode())
   if err != nil {
     resp.Diagnostics.AddError("Provider Error", fmt.Sprintf("Unable to marshal model to JSON: %v", err))
     return
   }
 
-	httpResp, err := r.client.Update${baseName}WithBodyWithResponse(
+  httpResp, err := r.client.Update${baseName}WithBodyWithResponse(
     ctx,
     data.Id.ValueString(),
     "application/vnd.api+json",
     bytes.NewReader(b),
   )
-	if err != nil {
-		resp.Diagnostics.AddError("API Error", err.Error())
-		return
-	} else if httpResp.StatusCode() < 200 || httpResp.StatusCode() >= 300 {
-		resp.Diagnostics.AddError("API Error", fmt.Sprintf("Unable to update, got status code: %d", httpResp.StatusCode()))
-		return
+  if err != nil {
+    resp.Diagnostics.AddError("API Error", err.Error())
+    return
+  } else if httpResp.StatusCode() < 200 || httpResp.StatusCode() >= 300 {
+    resp.Diagnostics.AddError("API Error", fmt.Sprintf("Unable to update, got status code: %d", httpResp.StatusCode()))
+    return
   } else if httpResp.Body == nil {
     resp.Diagnostics.AddError("API Error", "Unable to read, got empty response")
     return
