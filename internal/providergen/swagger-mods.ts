@@ -43,12 +43,46 @@ export const SWAGGER_MODS: ((swagger: T) => T | Promise<T>)[] = [
   dereference,
   // Fix dashboard_panel
   function fixDashboardPanel(swagger: any) {
-    swagger.components.schemas.dashboard_panel.properties.params.properties.datasets.items.properties.group_by =
-      {
-        type: "string",
-        nullable: true,
+    // Converts {"oneOf": [{"type": "string"}, {"type": "object"}]} to {"type": "string"}
+    function fixDatasetsGroupByParam(paramsSchema: any) {
+      const datasetsItemsProperties =
+        paramsSchema.properties["datasets"].items.properties;
+      const groupBySchema = datasetsItemsProperties["group_by"];
+      const { oneOf, ...rest } = groupBySchema;
+      datasetsItemsProperties["group_by"] = {
+        ...oneOf[0],
+        ...rest,
       };
-    delete swagger.components.schemas.dashboard_panel.properties.data;
+    }
+
+    const dashboardPanel = swagger.components.schemas["dashboard_panel"];
+    const newDashboardPanel = swagger.components.schemas["new_dashboard_panel"];
+    const updateDashboardPanel =
+      swagger.components.schemas["update_dashboard_panel"];
+
+    const targets = [
+      dashboardPanel.properties["params"],
+      newDashboardPanel.properties["data"].properties["attributes"].properties[
+        "params"
+      ],
+      updateDashboardPanel.properties["data"].properties["attributes"]
+        .properties["params"],
+    ];
+
+    for (const target of targets) {
+      fixDatasetsGroupByParam(target);
+    }
+
+    // Dashboard panel data is not saved to state
+    delete dashboardPanel.properties["data"];
+
+    // Dashboard panel requires dashboard_id
+    newDashboardPanel.properties["data"].properties["attributes"].required = [
+      ...(newDashboardPanel.properties["data"].properties["attributes"]
+        .required ?? []),
+      "dashboard_id",
+    ];
+
     return swagger;
   },
 ];

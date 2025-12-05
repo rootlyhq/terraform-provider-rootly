@@ -350,7 +350,9 @@ function generateModel({
       )}"\``
     );
 
-    toClientModelLines.push(`if !m.${camelize(field)}.IsNull() {`);
+    toClientModelLines.push(
+      `if !m.${camelize(field)}.IsNull() && !m.${camelize(field)}.IsUnknown() {`
+    );
     if (terraformValuer.hasErr) {
       toClientModelLines.push(
         `
@@ -448,10 +450,16 @@ function generateAttribute({
   if (ir.computedOptionalRequired === "required") {
     commonLines.push("Required: true,");
   }
-  if (ir.computedOptionalRequired === "optional") {
+  if (
+    ir.computedOptionalRequired === "optional" ||
+    ir.computedOptionalRequired === "computed_optional"
+  ) {
     commonLines.push("Optional: true,");
   }
-  if (ir.computedOptionalRequired === "computed") {
+  if (
+    ir.computedOptionalRequired === "computed" ||
+    ir.computedOptionalRequired === "computed_optional"
+  ) {
     commonLines.push("Computed: true,");
   }
   if (ir.description) {
