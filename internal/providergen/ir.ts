@@ -24,6 +24,7 @@ interface IRBase {
 
 export interface IRString extends IRBase {
   kind: "string";
+  choices?: string[];
 }
 
 export interface IRBool extends IRBase {
@@ -76,10 +77,20 @@ function toIR({
 
   return match(schema)
     .returnType<Exclude<IRType, IRResource>>()
-    .with({ type: "string" }, () => ({
-      kind: "string",
-      ...common,
-    }))
+    .with({ type: "string" }, () => {
+      return {
+        kind: "string",
+        choices: schema.enum,
+        ...common,
+        description: `${schema.description ? `${schema.description} ` : ""}${
+          schema.enum
+            ? `Value must be one of ${schema.enum
+                .map((v: string) => `\`${v}\``)
+                .join(", ")}.`
+            : ""
+        }`,
+      };
+    })
     .with({ type: "boolean" }, () => ({
       kind: "bool",
       ...common,
@@ -147,9 +158,6 @@ function toComputedOptionalRequired({
   newSchema: any;
   updateSchema: any;
 }): ComputedOptionalRequired {
-  if (field === "dashboard_id") {
-    console.log({ schema, newSchema, updateSchema });
-  }
   const inRead = field in schema.properties;
   const inCreate = field in newSchema.properties;
   const inUpdate = field in updateSchema.properties;
@@ -243,8 +251,6 @@ export function generateResourceIR({
   const getHasQueryParams =
     getSchema?.parameters?.some((param: any) => param.in === "query") ?? false;
 
-  console.log(newResourceSchema);
-
   // Generate immediate representation of the resource
   const irFields = toIR({
     schema: resourceSchema,
@@ -274,8 +280,6 @@ export function generateResourceIR({
     },
     fields: irFields.fields,
   };
-
-  console.log(ir);
 
   return ir;
 }

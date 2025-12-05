@@ -618,10 +618,18 @@ function generateAttribute({
 
   return match(ir)
     .returnType<string>()
-    .with({ kind: "string" }, () => {
+    .with({ kind: "string" }, (ir) => {
+      const validators = ir.choices
+        ? `Validators: []validator.String{
+            stringvalidator.OneOf(${ir.choices
+              .map((choice) => JSON.stringify(choice))
+              .join(", ")}),
+          },`
+        : "";
       return `schema.StringAttribute{
           ${common}
           CustomType: supertypes.StringType{},
+          ${validators}
         }`;
     })
     .with({ kind: "bool" }, () => {
@@ -781,10 +789,12 @@ import (
 	"net/http"
 
 	"github.com/DataDog/jsonapi"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/jianyuan/go-utils/ptr"
 	supertypes "github.com/orange-cloudavenue/terraform-plugin-framework-supertypes"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/apiclient"
@@ -1096,18 +1106,28 @@ async function main() {
   console.log("🚀 Fetching Rootly Swagger...");
   let swagger = await getRootlySwagger();
 
+  await Bun.write(
+    new URL("out/swagger.original.json", import.meta.url),
+    JSON.stringify(swagger, null, 2)
+  );
+
   console.log("🚀 Modifying Rootly Swagger...");
   for (const mod of SWAGGER_MODS) {
     swagger = await mod(swagger);
   }
 
   await Bun.write(
-    new URL("swagger.json", import.meta.url),
+    new URL("out/swagger.modified.json", import.meta.url),
     JSON.stringify(swagger, null, 2)
   );
 
   for (const name of RESOURCES) {
     const ir = generateResourceIR({ swagger, name });
+
+    await Bun.write(
+      new URL(`out/ir_${name}.json`, import.meta.url),
+      JSON.stringify(ir, null, 2)
+    );
 
     // Client
     {
