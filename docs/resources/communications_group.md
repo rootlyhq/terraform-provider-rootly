@@ -62,7 +62,7 @@ Optional:
 Optional:
 
 - `id` (String)
-- `name` (String)
+- `name` (String, Deprecated)
 
 
 
