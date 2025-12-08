@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.3.13] -- 2025-12-04
+
+### Changed
+
+- Deprecated communications group condition properties name field.
+
+## [4.3.12] -- 2025-12-04
+
+### Fixed
+
+- Set computed for schedule rotation start and end time attributes. Fixes unintended plans for rotations that had a start time before these fields were added to the provider, and where existing configuration does not have a value specified. 
+
 ## [4.3.11] -- 2025-12-03
 
 ### Fixed

@@ -10,8 +10,53 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
+
+// filterPropertiesName removes the deprecated 'name' field from communication_group_conditions properties
+func filterPropertiesName(conditions []interface{}) []interface{} {
+	if conditions == nil {
+		return nil
+	}
+
+	filtered := make([]interface{}, len(conditions))
+	for i, c := range conditions {
+		if conditionMap, ok := c.(map[string]interface{}); ok {
+			// Create a copy of the condition map
+			filteredCondition := make(map[string]interface{})
+			for k, v := range conditionMap {
+				filteredCondition[k] = v
+			}
+
+			// Filter the properties array
+			if props, ok := conditionMap["properties"].([]interface{}); ok {
+				filteredProps := make([]interface{}, len(props))
+				for j, p := range props {
+					if propMap, ok := p.(map[string]interface{}); ok {
+						// Create a copy without the 'name' field
+						filteredProp := make(map[string]interface{})
+						for k, v := range propMap {
+							if k != "name" {
+								filteredProp[k] = v
+							}
+						}
+						filteredProps[j] = filteredProp
+					} else {
+						filteredProps[j] = p
+					}
+				}
+				filteredCondition["properties"] = filteredProps
+			}
+
+			filtered[i] = filteredCondition
+		} else {
+			filtered[i] = c
+		}
+	}
+
+	return filtered
+}
 
 func resourceCommunicationsGroup() *schema.Resource {
 	return &schema.Resource{
@@ -188,14 +233,16 @@ func resourceCommunicationsGroup() *schema.Resource {
 								Schema: map[string]*schema.Schema{
 
 									"name": &schema.Schema{
-										Type:        schema.TypeString,
-										Computed:    true,
-										Required:    false,
-										Optional:    true,
-										Sensitive:   false,
-										ForceNew:    false,
-										WriteOnly:   false,
-										Description: "",
+										Type:             schema.TypeString,
+										Computed:         true,
+										Required:         false,
+										Optional:         true,
+										Sensitive:        false,
+										ForceNew:         false,
+										WriteOnly:        false,
+										Description:      "",
+										Deprecated:       "This field is deprecated and will be removed in a future version",
+										DiffSuppressFunc: diffsuppressfunc.Skip,
 									},
 
 									"id": &schema.Schema{
@@ -348,7 +395,7 @@ func resourceCommunicationsGroupCreate(ctx context.Context, d *schema.ResourceDa
 		s.EmailChannel = tools.Bool(value.(bool))
 	}
 	if value, ok := d.GetOkExists("communication_group_conditions"); ok {
-		s.CommunicationGroupConditions = value.([]interface{})
+		s.CommunicationGroupConditions = filterPropertiesName(value.([]interface{}))
 	}
 	if value, ok := d.GetOkExists("communication_group_members"); ok {
 		s.CommunicationGroupMembers = value.([]interface{})
@@ -491,7 +538,7 @@ func resourceCommunicationsGroupUpdate(ctx context.Context, d *schema.ResourceDa
 
 	if d.HasChange("communication_group_conditions") {
 		if value, ok := d.GetOk("communication_group_conditions"); value != nil && ok {
-			s.CommunicationGroupConditions = value.([]interface{})
+			s.CommunicationGroupConditions = filterPropertiesName(value.([]interface{}))
 		} else {
 			s.CommunicationGroupConditions = []interface{}{}
 		}
