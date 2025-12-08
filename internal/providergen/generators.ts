@@ -1,897 +1,505 @@
 import { match } from "ts-pattern";
-import type { IRObject, IRResource, IRType } from "./ir";
+import type { IRObject, IRResource, IRType, ResourceIR } from "./ir";
 import { camelize, pluralize, underscore } from "inflection";
+import dedent from "dedent";
 
-function generateTerraformValuer({
-  prefix,
+function generateTerraformValueType({
   parent,
-  field,
-  ir,
-}: {
-  prefix: string;
-  parent: string;
-  field: string;
-  ir: IRType;
-}): {
-  output: string;
-  hasDiags: boolean;
-} {
-  return match(ir)
-    .returnType<{ output: string; hasDiags: boolean }>()
-    .with({ kind: "string", nullable: false }, () => ({
-      output: `${prefix}${camelize(field)}.ValueString()`,
-      hasDiags: false,
-    }))
-    .with({ kind: "string", nullable: true }, () => ({
-      output: `${prefix}${camelize(field)}.ValueStringPointer()`,
-      hasDiags: false,
-    }))
-    .with({ kind: "bool", nullable: false }, () => ({
-      output: `${prefix}${camelize(field)}.ValueBool()`,
-      hasDiags: false,
-    }))
-    .with({ kind: "bool", nullable: true }, () => ({
-      output: `${prefix}${camelize(field)}.ValueBoolPointer()`,
-      hasDiags: false,
-    }))
-    .with({ kind: "int", nullable: false }, () => ({
-      output: `${prefix}${camelize(field)}.ValueInt64()`,
-      hasDiags: false,
-    }))
-    .with({ kind: "int", nullable: true }, () => ({
-      output: `${prefix}${camelize(field)}.ValueInt64Pointer()`,
-      hasDiags: false,
-    }))
-    .with(
-      { kind: "array", element: { kind: "object" }, nullable: false },
-      () => {
-        const structName = camelize(`${parent}_${field}_item`);
-        const fieldName = `${prefix}${camelize(field)}`;
-        return {
-          output: `
-          func() ([]apiclient.${structName}, diag.Diagnostics) {
-            var diags diag.Diagnostics
-            var itemClientModels []apiclient.${structName}
-            for _, item := range ${fieldName}.DiagsGet(ctx, diags) {
-              itemClientModel := tfutils.MergeDiagnostics(item.ToClientModel(ctx))(&diags)
-              itemClientModels = append(itemClientModels, *itemClientModel)
-            }
-            if diags.HasError() {
-              return nil, diags
-            }
-            return itemClientModels, nil
-          }()
-        `.trim(),
-          hasDiags: true,
-        };
-      }
-    )
-    .with(
-      { kind: "array", element: { kind: "object" }, nullable: true },
-      () => {
-        const structName = camelize(`${parent}_${field}_item`);
-        const fieldName = `${prefix}${camelize(field)}`;
-        return {
-          output: `
-          func() (*[]apiclient.${structName}, diag.Diagnostics) {
-            var diags diag.Diagnostics
-            var itemClientModels []apiclient.${structName}
-            for _, item := range ${fieldName}.DiagsGet(ctx, diags) {
-              itemClientModel := tfutils.MergeDiagnostics(item.ToClientModel(ctx))(&diags)
-              itemClientModels = append(itemClientModels, *itemClientModel)
-            }
-            if diags.HasError() {
-              return nil, diags
-            }
-            return &itemClientModels, nil
-          }()
-        `.trim(),
-          hasDiags: true,
-        };
-      }
-    )
-    .with({ kind: "array", nullable: false }, () => ({
-      output: `${prefix}${camelize(field)}.Get(ctx)`,
-      hasDiags: true,
-    }))
-    .with({ kind: "array", nullable: true }, (ir) => {
-      const inner = generatePrimitiveType({
-        parent,
-        field,
-        ir,
-      });
-      return {
-        output: `
-          func() (${inner.output}, diag.Diagnostics) {
-            v, diags := ${prefix}${camelize(field)}.Get(ctx)
-            if diags.HasError() {
-              return nil, diags
-            }
-            return ptr.Ptr(v), nil
-          }()
-        `.trim(),
-        hasDiags: true,
-      };
-    })
-    .with({ kind: "object", nullable: false }, () => ({
-      output: `
-        func() (apiclient.${camelize(`${parent}_${field}`)}, diag.Diagnostics) {
-          var diags diag.Diagnostics
-          model := ${prefix}${camelize(field)}.DiagsGet(ctx, diags)
-          if diags.HasError() {
-            return apiclient.${camelize(`${parent}_${field}`)}{}, diags
-          }
-          clientModel := tfutils.MergeDiagnostics(model.ToClientModel(ctx))(&diags)
-          if diags.HasError() {
-            return apiclient.${camelize(`${parent}_${field}`)}{}, diags
-          }
-          return *clientModel, nil
-        }()
-      `.trim(),
-      hasDiags: true,
-    }))
-    .with({ kind: "object", nullable: true }, () => ({
-      output: `
-        func() (*apiclient.${camelize(
-          `${parent}_${field}`
-        )}, diag.Diagnostics) {
-          var diags diag.Diagnostics
-          model := ${prefix}${camelize(field)}.DiagsGet(ctx, diags)
-          if diags.HasError() {
-            return nil, diags
-          }
-          clientModel := tfutils.MergeDiagnostics(model.ToClientModel(ctx))(&diags)
-          if diags.HasError() {
-            return nil, diags
-          }
-          return clientModel, nil
-        }()
-      `.trim(),
-      hasDiags: true,
-    }))
-    .otherwise(() => {
-      throw new Error(`Unsupported IR type: ${JSON.stringify(ir)}`);
-    });
-}
-
-function generateTerraformType({
-  parent,
-  field,
-  ir,
-  inObject,
+  attribute,
 }: {
   parent: string;
-  field: string;
-  ir: IRType;
-  inObject?: boolean;
-}): { output: string; nested: string[] } {
-  return match(ir)
-    .returnType<{ output: string; nested: string[] }>()
-    .with({ kind: "string" }, () => ({
-      output: "supertypes.StringValue",
-      nested: [],
-    }))
-    .with({ kind: "bool" }, () => ({
-      output: "supertypes.BoolValue",
-      nested: [],
-    }))
-    .with({ kind: "int" }, () => ({
-      output: "supertypes.Int64Value",
-      nested: [],
-    }))
-    .with({ kind: "array", element: { kind: "object" } }, (ir) => {
-      const fieldType = ir.distinct ? "Set" : "List";
-      const inner = generateTerraformType({
-        inObject: true,
-        parent: camelize(`${parent}_${field}`),
-        field: "Item",
-        ir: ir.element,
-      });
-      return {
-        output: `supertypes.${fieldType}NestedObjectValueOf[${inner.output}]`,
-        nested: inner.nested,
-      };
-    })
-    .with({ kind: "array" }, (ir) => {
-      const fieldType = ir.distinct ? "Set" : "List";
-      const inner = generatePrimitiveType({
-        parent,
-        field,
-        ir: ir.element,
-      });
-      return {
-        output: `supertypes.${fieldType}ValueOf[${inner.output}]`,
-        nested: inner.nested,
-      };
-    })
-    .with({ kind: "object" }, (ir) => {
-      const structName = camelize(`${parent}_${field}`);
-      const struct = generateModel({ name: structName, ir });
-      return {
-        output: inObject
-          ? structName
-          : `supertypes.SingleNestedObjectValueOf[${structName}]`,
-        nested: [struct],
-      };
-    })
-    .otherwise(() => {
-      throw new Error(`Unsupported IR type: ${JSON.stringify(ir)}`);
-    });
-}
-
-function generatePrimitiveType({
-  parent,
-  field,
-  ir,
-  nestedGenerator,
-}: {
-  parent: string;
-  field: string;
-  ir: IRType;
-  nestedGenerator?: ({ name, ir }: { name: string; ir: IRType }) => string;
-}): { output: string; nested: string[] } {
-  const result = match(ir)
-    .returnType<{ output: string; nested: string[] }>()
-    .with({ kind: "string" }, () => ({
-      output: "string",
-      nested: [],
-    }))
-    .with({ kind: "bool" }, () => ({
-      output: "bool",
-      nested: [],
-    }))
-    .with({ kind: "int" }, () => ({
-      output: "int64",
-      nested: [],
-    }))
-    .with({ kind: "array", element: { kind: "object" } }, (ir) => {
-      const inner = generatePrimitiveType({
-        parent: camelize(`${parent}_${field}`),
-        field: "Item",
-        ir: ir.element,
-        nestedGenerator,
-      });
-      return {
-        output: `[]${inner.output}`,
-        nested: inner.nested,
-      };
-    })
-    .with({ kind: "array" }, (ir) => {
-      const inner = generatePrimitiveType({
-        parent,
-        field,
-        ir: ir.element,
-        nestedGenerator,
-      });
-      return {
-        output: `[]${inner.output}`,
-        nested: inner.nested,
-      };
-    })
-    .with({ kind: "object" }, (ir) => {
-      const structName = camelize(`${parent}_${field}`);
-      const nested = nestedGenerator
-        ? [nestedGenerator({ name: structName, ir })]
-        : [];
-      return {
-        output: structName,
-        nested,
-      };
-    })
-    .otherwise(() => {
-      throw new Error(`Unsupported IR type: ${JSON.stringify(ir)}`);
-    });
-
-  return {
-    output: ir.nullable ? `*${result.output}` : result.output,
-    nested: result.nested,
-  };
-}
-
-function generateModelValuer({
-  parent,
-  field,
-  ir,
-}: {
-  parent: string;
-  field: string;
-  ir: IRType;
-}): {
-  output: string;
-  nested: string[];
-  hasDiags: boolean;
-} {
-  return match(ir)
-    .returnType<{
-      output: string;
-      nested: string[];
-      hasDiags: boolean;
-    }>()
-    .with({ kind: "string", nullable: false }, () => ({
-      output: `supertypes.NewStringValueOrNull(in.${camelize(field)})`,
-      nested: [],
-      hasDiags: false,
-    }))
-    .with({ kind: "string", nullable: true }, () => ({
-      output: `supertypes.NewStringPointerValueOrNull(in.${camelize(field)})`,
-      nested: [],
-      hasDiags: false,
-    }))
-    .with({ kind: "bool", nullable: false }, () => ({
-      output: `supertypes.NewBoolValue(in.${camelize(field)})`,
-      nested: [],
-      hasDiags: false,
-    }))
-    .with({ kind: "bool", nullable: true }, () => ({
-      output: `supertypes.NewBoolPointerValueOrNull(in.${camelize(field)})`,
-      nested: [],
-      hasDiags: false,
-    }))
-    .with({ kind: "int", nullable: false }, () => ({
-      output: `supertypes.NewInt64Value(in.${camelize(field)})`,
-      nested: [],
-      hasDiags: false,
-    }))
-    .with({ kind: "int", nullable: true }, () => ({
-      output: `supertypes.NewInt64PointerValueOrNull(in.${camelize(field)})`,
-      nested: [],
-      hasDiags: false,
-    }))
-    .with({ kind: "array", element: { kind: "object" } }, (ir) => {
-      const fieldType = ir.distinct ? "Set" : "List";
-      const inner = generateModelValuer({
-        parent: camelize(`${parent}_${field}`),
-        field: "Item",
-        ir: ir.element,
-      });
-      const itemType = camelize(`${parent}_${field}_item`);
-      return {
-        output: `
-          func() (supertypes.${fieldType}NestedObjectValueOf[${itemType}], diag.Diagnostics) {
-            var diags diag.Diagnostics
-            var elements []${itemType}
-            for _, item := range in.${camelize(field)} {
-              var element ${itemType}
-              diags.Append(Fill${itemType}(ctx, item, &element)...)
-              elements = append(elements, element)
-            }
-
-            if diags.HasError() {
-              return supertypes.New${fieldType}NestedObjectValueOfNull[${itemType}](ctx), diags
-            }
-            return supertypes.New${fieldType}NestedObjectValueOfValueSlice(ctx, elements), nil
-          }()
-        `.trim(),
-        nested: inner.nested,
-        hasDiags: true,
-      };
-    })
-    .with({ kind: "array", nullable: false }, (ir) => {
-      const fieldType = ir.distinct ? "Set" : "List";
-      const inner = generateModelValuer({
-        parent,
-        field,
-        ir: ir.element,
-      });
-      return {
-        output: `supertypes.New${fieldType}ValueOfSlice(ctx, in.${camelize(
-          field
-        )})`,
-        nested: inner.nested,
-        hasDiags: false,
-      };
-    })
-    .with({ kind: "array", nullable: true }, (ir) => {
-      const fieldType = ir.distinct ? "Set" : "List";
-      const primitive = generatePrimitiveType({
-        parent,
-        field,
-        ir: ir.element,
-      });
-      const inner = generateModelValuer({
-        parent,
-        field,
-        ir: ir.element,
-      });
-      return {
-        output: `
-          func() supertypes.${fieldType}ValueOf[${primitive.output}] {
-            if in.${camelize(field)} == nil {
-              return supertypes.New${fieldType}ValueOfNull[${
-          primitive.output
-        }](ctx)
-            }
-            return supertypes.New${fieldType}ValueOfSlice(ctx, *in.${camelize(
-          field
-        )})
-          }()
-        `.trim(),
-        nested: inner.nested,
-        hasDiags: false,
-      };
-    })
-    .with({ kind: "object", nullable: false }, (ir) => {
-      const structName = camelize(`${parent}_${field}`);
-      const struct = generateFillModel({ name: structName, ir });
-      return {
-        output: `
-          func() (supertypes.SingleNestedObjectValueOf[${structName}], diag.Diagnostics) {
-            var diags diag.Diagnostics
-            var out ${structName}
-            diags.Append(Fill${structName}(ctx, in.${camelize(field)}, &out)...)
-
-            if diags.HasError() {
-              return supertypes.NewSingleNestedObjectValueOfNull[${structName}](ctx), diags
-            }
-            return supertypes.NewSingleNestedObjectValueOf(ctx, &out), nil
-          }()
-        `.trim(),
-        nested: [struct],
-        hasDiags: true,
-      };
-    })
-    .with({ kind: "object", nullable: true }, (ir) => {
-      const structName = camelize(`${parent}_${field}`);
-      const struct = generateFillModel({ name: structName, ir });
-      return {
-        output: `
-          func() (supertypes.SingleNestedObjectValueOf[${structName}], diag.Diagnostics) {
-            var diags diag.Diagnostics
-
-            if in.${camelize(field)} == nil {
-              return supertypes.NewSingleNestedObjectValueOfNull[${structName}](ctx), diags
-            }
-
-            var out ${structName}
-            diags.Append(Fill${structName}(ctx, *in.${camelize(
-          field
-        )}, &out)...)
-
-            if diags.HasError() {
-              return supertypes.NewSingleNestedObjectValueOfNull[${structName}](ctx), diags
-            }
-            return supertypes.NewSingleNestedObjectValueOf(ctx, &out), nil
-          }()
-        `.trim(),
-        nested: [struct],
-        hasDiags: true,
-      };
-    })
-    .otherwise(() => {
-      throw new Error(`Unsupported IR type: ${JSON.stringify(ir)}`);
-    });
-}
-
-function generateModel({
-  name,
-  ir,
-}: {
-  name: string;
-  ir: IRResource | IRObject;
+  attribute: IRType;
 }) {
-  const modelStructLines: string[] = [];
-  const toClientModelLines: string[] = [];
-  const nested: string[] = [];
+  return match(attribute)
+    .with({ type: "string" }, () => "supertypes.StringValue")
+    .with({ type: "int" }, () => "supertypes.Int64Value")
+    .with({ type: "bool" }, () => "supertypes.BoolValue")
+    .with(
+      { type: "list", elementType: "string" },
+      () => "supertypes.ListValueOf[string]"
+    )
+    .with(
+      { type: "set", elementType: "string" },
+      () => "supertypes.SetValueOf[string]"
+    )
+    .with(
+      { type: "set_nested" },
+      () =>
+        `supertypes.SetNestedObjectValueOf[${parent}${camelize(attribute.name)}Item]`
+    )
+    .with(
+      { type: "object" },
+      () =>
+        `supertypes.SingleNestedObjectValueOf[${parent}${camelize(attribute.name)}]`
+    )
+    .exhaustive();
+}
 
-  if (ir.kind === "resource") {
-    const terraformType = generateTerraformType({
-      parent: name,
-      field: "id",
-      ir: ir.idElement,
-    });
-    modelStructLines.push(`Id ${terraformType.output} \`tfsdk:"id"\``);
-  }
+function generateResourceUpdateDiff(resource: ResourceIR) {
+  const lines: string[] = [];
 
-  for (const [field, fieldIR] of Object.entries(ir.fields)) {
-    const terraformType = generateTerraformType({
-      parent: name,
-      field,
-      ir: fieldIR,
-    });
-    const terraformValuer = generateTerraformValuer({
-      prefix: "m.",
-      parent: name,
-      field,
-      ir: fieldIR,
-    });
-
-    nested.push(...terraformType.nested);
-    modelStructLines.push(
-      `${camelize(field)} ${terraformType.output} \`tfsdk:"${underscore(
-        field
-      )}"\``
+  for (const attribute of resource.attributes) {
+    lines.push(
+      `if !data.${camelize(attribute.name)}.Equal(plan.${camelize(attribute.name)}) {`
     );
-
-    toClientModelLines.push(
-      `if !m.${camelize(field)}.IsNull() && !m.${camelize(field)}.IsUnknown() {`
+    lines.push(
+      generateTerraformToPrimitive({
+        parent: resource.name,
+        attribute,
+        srcVar: "plan",
+        destVar: "modelIn",
+        diagsVar: "resp.Diagnostics",
+      })
     );
-    if (terraformValuer.hasDiags) {
-      toClientModelLines.push(
-        `out.${camelize(field)} = tfutils.MergeDiagnostics(${
-          terraformValuer.output
-        })(&diags)`
-      );
-    } else {
-      toClientModelLines.push(
-        `out.${camelize(field)} = ${terraformValuer.output}`
-      );
-    }
-    toClientModelLines.push(`}\n`);
+    lines.push(`}`);
   }
 
-  const struct = `
-type ${name} struct {
-  ${modelStructLines.join("\n")}
+  return lines.join("\n");
 }
 
-func (m *${name}) ToClientModel(ctx context.Context) (*apiclient.${name}, diag.Diagnostics) {
-  var diags diag.Diagnostics
-  var out apiclient.${name}
-  ${toClientModelLines.join("\n")}
-  if diags.HasError() {
-    return nil, diags
-  }
-  return &out, nil
-}
-`;
-
-  return [struct, ...nested].join("\n");
-}
-
-function generateFillModel({
-  name,
-  ir,
-}: {
-  name: string;
-  ir: IRResource | IRObject;
-}) {
-  const fillModelLines: string[] = [];
-  const nested: string[] = [];
-
-  if (ir.kind === "resource") {
-    const modelValuer = generateModelValuer({
-      parent: name,
-      field: "id",
-      ir: ir.idElement,
-    });
-    fillModelLines.push(`out.Id = ${modelValuer.output}`);
-  }
-
-  for (const [field, fieldIR] of Object.entries(ir.fields)) {
-    const modelValuer = generateModelValuer({
-      parent: name,
-      field,
-      ir: fieldIR,
-    });
-
-    nested.push(...modelValuer.nested);
-
-    if (modelValuer.hasDiags) {
-      fillModelLines.push(
-        `out.${camelize(field)} = tfutils.MergeDiagnostics(${
-          modelValuer.output
-        })(&diags)`
-      );
-    } else {
-      fillModelLines.push(`out.${camelize(field)} = ${modelValuer.output}`);
-    }
-  }
-
-  const struct = `
-func Fill${name}(ctx context.Context, in apiclient.${name}, out *${name}) (diags diag.Diagnostics) {
-  ${fillModelLines.join("\n")}
-  return
-}
-`;
-
-  return [struct, ...nested].join("\n");
-}
-
-function generateAttribute({
+function generateTerraformAttribute({
   parent,
-  field,
-  ir,
+  attribute,
 }: {
   parent: string;
-  field: string;
-  ir: Exclude<IRType, IRResource>;
-}): string {
-  const computedOptionalRequiredLines: string[] = [];
-  if (ir.computedOptionalRequired === "required") {
-    computedOptionalRequiredLines.push("Required: true,");
+  attribute: IRType;
+}) {
+  let description = attribute.description ?? "";
+  if (attribute.deprecationMessage) {
+    description += ` **Deprecated** ${attribute.deprecationMessage}`;
   }
-  if (
-    ir.computedOptionalRequired === "optional" ||
-    ir.computedOptionalRequired === "computed_optional"
-  ) {
-    computedOptionalRequiredLines.push("Optional: true,");
-  }
-  if (
-    ir.computedOptionalRequired === "computed" ||
-    ir.computedOptionalRequired === "computed_optional"
-  ) {
-    computedOptionalRequiredLines.push("Computed: true,");
-  }
-  const computedOptionalRequired = computedOptionalRequiredLines.join("\n");
 
-  const commonLines: string[] = [];
-  if (ir.description) {
-    commonLines.push(`Description: ${JSON.stringify(ir.description)},`);
+  const commonParts: string[] = [];
+  commonParts.push(`MarkdownDescription: ${JSON.stringify(description)},`);
+  if (attribute.deprecationMessage) {
+    commonParts.push(
+      `DeprecationMessage: ${JSON.stringify(attribute.deprecationMessage)},`
+    );
   }
-  if (ir.description) {
-    commonLines.push(`MarkdownDescription: ${JSON.stringify(ir.description)},`);
+  commonParts.push(
+    match(attribute.computedOptionalRequired)
+      .with("required", () => "Required: true,")
+      .with("computed", () => "Computed: true,")
+      .with("computed_optional", () => "Optional: true,\nComputed: true,")
+      .with("optional", () => "Optional: true,")
+      .exhaustive()
+  );
+  if (attribute.sensitive) {
+    commonParts.push("Sensitive: true,");
   }
-  const common = commonLines.join("\n");
 
-  return match(ir)
-    .returnType<string>()
-    .with({ kind: "string" }, (ir) => {
-      const validators = ir.choices
-        ? `Validators: []validator.String{
-            stringvalidator.OneOf(${ir.choices
-              .map((choice) => JSON.stringify(choice))
-              .join(", ")}),
-          },`
-        : "";
-      return `schema.StringAttribute{
-          ${computedOptionalRequired}
-          ${common}
-          CustomType: supertypes.StringType{},
-          ${validators}
-        }`;
-    })
-    .with({ kind: "bool" }, () => {
-      return `schema.BoolAttribute{
-          ${computedOptionalRequired}
-          ${common}
-          CustomType: supertypes.BoolType{},
-        }`;
-    })
-    .with({ kind: "int" }, () => {
-      return `schema.Int64Attribute{
-          ${computedOptionalRequired}
-          ${common}
-          CustomType: supertypes.Int64Type{},
-        }`;
-    })
-    .with(
-      { kind: "array", blocks: false, element: { kind: "object" } },
-      (ir) => {
-        const fieldType = ir.distinct ? "Set" : "List";
-        const structType = camelize(`${parent}_${field}_item`);
-
-        return `schema.${fieldType}NestedAttribute{
-          ${computedOptionalRequired}
-          ${common}
-          CustomType: supertypes.New${fieldType}NestedObjectTypeOf[${structType}](ctx),
-          NestedObject: schema.NestedAttributeObject{
-            ${generateAttributesBlocks({ name: structType, ir: ir.element })}
-          },
-        }`;
+  return match(attribute)
+    .with({ type: "string" }, () => {
+      const parts: string[] = [];
+      parts.push("schema.StringAttribute{");
+      parts.push(...commonParts);
+      parts.push("CustomType: supertypes.StringType{},");
+      if (attribute.validators) {
+        parts.push("Validators: []validator.String{");
+        parts.push(...attribute.validators.map((validator) => `${validator},`));
+        parts.push("},");
       }
-    )
-    .with(
-      { kind: "array", blocks: true, element: { kind: "object" } },
-      (ir) => {
-        const fieldType = ir.distinct ? "Set" : "List";
-        const structType = camelize(`${parent}_${field}_item`);
-
-        return `schema.${fieldType}NestedBlock{
-          ${common}
-          CustomType: supertypes.New${fieldType}NestedObjectTypeOf[${structType}](ctx),
-          NestedObject: schema.NestedBlockObject{
-            ${generateAttributesBlocks({ name: structType, ir: ir.element })}
-          },
-        }`;
+      if (attribute.planModifiers) {
+        parts.push("PlanModifiers: []planmodifier.String{");
+        parts.push(
+          ...attribute.planModifiers.map((modifier) => `${modifier},`)
+        );
+        parts.push("},");
       }
-    )
-    .with({ kind: "array" }, (ir) => {
-      const fieldType = ir.distinct ? "Set" : "List";
-      const primitiveType = generatePrimitiveType({
-        parent,
-        field,
-        ir: ir.element,
-      });
-
-      return `schema.${fieldType}Attribute{
-          ${computedOptionalRequired}
-          ${common}
-          CustomType: supertypes.New${fieldType}TypeOf[${primitiveType.output}](ctx),
-        }`;
+      parts.push("}");
+      return parts.join("\n");
     })
-    .with({ kind: "object", blocks: false }, (ir) => {
-      const structType = camelize(`${parent}_${field}`);
-
-      return `schema.SingleNestedAttribute{
-          ${computedOptionalRequired}
-          ${common}
-          CustomType: supertypes.NewSingleNestedObjectTypeOf[${structType}](ctx),
-          ${generateAttributesBlocks({ name: structType, ir })}
-        }`;
+    .with({ type: "int" }, (attribute) => {
+      const parts: string[] = [];
+      parts.push("schema.Int64Attribute{");
+      parts.push(...commonParts);
+      parts.push("CustomType: supertypes.Int64Type{},");
+      if (attribute.validators) {
+        parts.push("Validators: []validator.Int64{");
+        parts.push(...attribute.validators.map((validator) => `${validator},`));
+        parts.push("},");
+      }
+      if (attribute.planModifiers) {
+        parts.push("PlanModifiers: []planmodifier.Int64{");
+        parts.push(
+          ...attribute.planModifiers.map((modifier) => `${modifier},`)
+        );
+        parts.push("},");
+      }
+      parts.push("}");
+      return parts.join("\n");
     })
-    .with({ kind: "object", blocks: true }, (ir) => {
-      const structType = camelize(`${parent}_${field}`);
-
-      return `schema.SingleNestedBlock{
-          ${common}
-          CustomType: supertypes.NewSingleNestedObjectTypeOf[${structType}](ctx),
-          ${generateAttributesBlocks({ name: structType, ir })}
-        }`;
+    .with({ type: "bool" }, () => {
+      const parts: string[] = [];
+      parts.push("schema.BoolAttribute{");
+      parts.push(...commonParts);
+      parts.push("CustomType: supertypes.BoolType{},");
+      if (attribute.validators) {
+        parts.push("Validators: []validator.Bool{");
+        parts.push(...attribute.validators.map((validator) => `${validator},`));
+        parts.push("},");
+      }
+      if (attribute.planModifiers) {
+        parts.push("PlanModifiers: []planmodifier.Bool{");
+        parts.push(
+          ...attribute.planModifiers.map((modifier) => `${modifier},`)
+        );
+        parts.push("},");
+      }
+      parts.push("}");
+      return parts.join("\n");
     })
-    .otherwise(() => {
-      throw new Error(`Unsupported IR type: ${JSON.stringify(ir)}`);
-    });
+    .with({ type: "list", elementType: "string" }, (attribute) => {
+      const parts: string[] = [];
+      parts.push("schema.ListAttribute{");
+      parts.push(...commonParts);
+      parts.push("CustomType: supertypes.NewListTypeOf[string](ctx),");
+      if (attribute.validators) {
+        parts.push("Validators: []validator.List{");
+        parts.push(...attribute.validators.map((validator) => `${validator},`));
+        parts.push("},");
+      }
+      if (attribute.planModifiers) {
+        parts.push("PlanModifiers: []planmodifier.List{");
+        parts.push(
+          ...attribute.planModifiers.map((modifier) => `${modifier},`)
+        );
+        parts.push("},");
+      }
+      parts.push("}");
+      return parts.join("\n");
+    })
+    .with({ type: "set", elementType: "string" }, (attribute) => {
+      const parts: string[] = [];
+      parts.push("schema.SetAttribute{");
+      parts.push(...commonParts);
+      parts.push("CustomType: supertypes.NewSetTypeOf[string](ctx),");
+      if (attribute.validators) {
+        parts.push("Validators: []validator.Set{");
+        parts.push(...attribute.validators.map((validator) => `${validator},`));
+        parts.push("},");
+      }
+      if (attribute.planModifiers) {
+        parts.push("PlanModifiers: []planmodifier.Set{");
+        parts.push(
+          ...attribute.planModifiers.map((modifier) => `${modifier},`)
+        );
+        parts.push("},");
+      }
+      parts.push("}");
+      return parts.join("\n");
+    })
+    .with({ type: "set_nested" }, (attribute) => {
+      const parts: string[] = [];
+      parts.push("schema.SetNestedAttribute{");
+      parts.push(...commonParts);
+      parts.push(
+        `CustomType: supertypes.NewSetNestedObjectTypeOf[${parent}${camelize(
+          attribute.name
+        )}Item](ctx),`
+      );
+      parts.push("NestedObject: schema.NestedAttributeObject{");
+      parts.push("Attributes: map[string]schema.Attribute{");
+      for (const nestedAttribute of attribute.attributes) {
+        parts.push(
+          `"${nestedAttribute.name}": ${generateTerraformAttribute({
+            parent: `${parent}${camelize(attribute.name)}Item`,
+            attribute: nestedAttribute,
+          })},`
+        );
+      }
+      parts.push("},");
+      parts.push("},");
+      parts.push("}");
+      return parts.join("\n");
+    })
+    .with({ type: "object" }, (attribute) => {
+      const parts: string[] = [];
+
+      parts.push("schema.SingleNestedAttribute{");
+      parts.push(...commonParts);
+      parts.push(
+        `CustomType: supertypes.NewSingleNestedObjectTypeOf[${parent}${camelize(
+          attribute.name
+        )}](ctx),`
+      );
+      parts.push("Attributes: map[string]schema.Attribute{");
+      for (const nestedAttribute of attribute.attributes) {
+        parts.push(
+          `"${nestedAttribute.name}": ${generateTerraformAttribute({
+            parent: `${parent}${camelize(attribute.name)}`,
+            attribute: nestedAttribute,
+          })},`
+        );
+      }
+      parts.push("},");
+      parts.push("}");
+
+      return parts.join("\n");
+    })
+    .exhaustive();
 }
 
-function generateAttributesBlocks({
-  name,
-  ir,
-}: {
-  name: string;
-  ir: IRResource | IRObject;
-}) {
-  const attributes: string[] = [];
-  const blocks: string[] = [];
+function generateResourceSchemaAttributes(resource: ResourceIR) {
+  const lines: string[] = [];
 
-  if (ir.kind === "resource") {
-    attributes.push(
-      `"id": ${generateAttribute({
-        parent: name,
-        field: "id",
-        ir: ir.idElement,
+  for (const attribute of [resource.idAttribute, ...resource.attributes]) {
+    lines.push(
+      `"${attribute.name}": ${generateTerraformAttribute({
+        parent: `${camelize(resource.name)}ResourceModel`,
+        attribute,
       })},`
     );
   }
 
-  for (const [fieldName, fieldIR] of Object.entries(ir.fields)) {
-    const output = `"${underscore(fieldName)}": ${generateAttribute({
-      parent: name,
-      field: fieldName,
-      ir: fieldIR,
-    })},`;
-
-    match(fieldIR)
-      .with({ blocks: true }, () => {
-        blocks.push(output);
-      })
-      .otherwise(() => {
-        attributes.push(output);
-      });
-  }
-
-  const lines: string[] = [];
-
-  if (attributes.length > 0) {
-    lines.push(
-      `Attributes: map[string]schema.Attribute{
-        ${attributes.join("\n")}
-      },
-    `.trim()
-    );
-  }
-
-  if (blocks.length > 0) {
-    lines.push(
-      `Blocks: map[string]schema.Block{
-        ${blocks.join("\n")}
-      },
-    `.trim()
-    );
-  }
-
   return lines.join("\n");
 }
 
-function generateResourceSchema({
-  name,
-  ir,
+function generatePrimitiveToTerraform({
+  parent,
+  attribute,
+  srcVar,
+  destVar,
 }: {
-  name: string;
-  ir: IRResource;
+  parent: string;
+  attribute: IRType;
+  srcVar: string;
+  destVar: string;
 }) {
-  return `
-schema.Schema{
-  ${generateAttributesBlocks({ name, ir })}
-}`;
-}
-
-function generateResourceUpdateDiff({
-  ir,
-  name,
-}: {
-  ir: IRResource;
-  name: string;
-}) {
-  const lines: string[] = [];
-
-  for (const [field, fieldIR] of Object.entries(ir.fields)) {
-    const terraformValuer = generateTerraformValuer({
-      prefix: "plan.",
-      parent: name,
-      field,
-      ir: fieldIR,
-    });
-    lines.push(`if !data.${camelize(field)}.Equal(plan.${camelize(field)}) {`);
-
-    if (terraformValuer.hasDiags) {
-      lines.push(
-        `modelIn.${camelize(field)} = tfutils.MergeDiagnostics(${
-          terraformValuer.output
-        })(&resp.Diagnostics)`
-      );
-    } else {
-      lines.push(`modelIn.${camelize(field)} = ${terraformValuer.output}`);
-    }
-
-    lines.push(`}\n`);
-  }
-
-  return lines.join("\n");
-}
-
-function generateClientModel({ ir, name }: { ir: IRObject; name: string }) {
-  const modelStructLines: string[] = [];
-  const nested: string[] = [];
-
-  const modelName =
-    ir.kind === "resource" ? `${camelize(name)}ResourceModel` : camelize(name);
-
-  if (ir.kind === "resource") {
-    const primitiveType = generatePrimitiveType({
-      parent: modelName,
-      field: "ir",
-      ir: ir.idElement,
-    });
-    modelStructLines.push(
-      `Id ${primitiveType.output} \`jsonapi:"primary,${pluralize(
-        ir.resourceType
-      )},omitempty"\``
-    );
-  }
-
-  for (const [field, fieldIR] of Object.entries(ir.fields)) {
-    const primitiveType = generatePrimitiveType({
-      parent: modelName,
-      field,
-      ir: fieldIR,
-      nestedGenerator: ({ name, ir }) => {
-        if (ir.kind !== "object") {
-          throw new Error(
-            `Unsupported IR type: ${JSON.stringify(ir)} for field ${name}`
-          );
+  const srcVarName = `${srcVar}.${camelize(attribute.name)}`;
+  const destVarName = `${destVar}.${camelize(attribute.name)}`;
+  return match(attribute)
+    .with(
+      { type: "string", nullable: true },
+      () => `${destVarName} = supertypes.NewStringPointerValue(${srcVarName})`
+    )
+    .with(
+      { type: "string", sourceType: "time" },
+      () => `${destVarName} = supertypes.NewStringValue(${srcVarName}.String())`
+    )
+    .with(
+      { type: "string" },
+      () => `${destVarName} = supertypes.NewStringValue(${srcVarName})`
+    )
+    .with(
+      { type: "int" },
+      () => `${destVarName} = supertypes.NewInt64Value(${srcVarName})`
+    )
+    .with(
+      { type: "bool" },
+      () => `${destVarName} = supertypes.NewBoolValue(${srcVarName})`
+    )
+    .with(
+      { type: "list", elementType: "string" },
+      () =>
+        `${destVarName} = supertypes.NewListValueOfSlice(ctx, ${srcVarName})`
+    )
+    .with(
+      { type: "set", nullable: true, elementType: "string" },
+      () => dedent`
+        if ${srcVarName} == nil {
+          ${destVarName} = supertypes.NewSetValueOfNull[string](ctx)
+        } else {
+          ${destVarName} = supertypes.NewSetValueOfSlice(ctx, *${srcVarName})
         }
-        return generateClientModel({ ir, name });
-      },
-    });
-    nested.push(...primitiveType.nested);
-    modelStructLines.push(
-      `${camelize(field)} ${
-        primitiveType.output
-      } \`jsonapi:"attribute" json:"${underscore(field)},omitempty"\``
+      `
+    )
+    .with(
+      { type: "set", elementType: "string" },
+      () => `${destVarName} = supertypes.NewSetValueOfSlice(ctx, ${srcVarName})`
+    )
+    .with(
+      { type: "set_nested" },
+      (attribute) =>
+        `${destVarName} = supertypes.NewSetNestedObjectValueOfValueSlice(ctx, sliceutils.Map(func(item apiclient.${attribute.model}) ${parent}${camelize(attribute.name)}Item {
+          var model ${parent}${camelize(attribute.name)}Item
+          diags.Append(model.FromApi(ctx, item)...)
+          return model
+        }, ${srcVarName}))`
+    )
+    .with(
+      { type: "object" },
+      () => dedent`
+        if ${srcVarName} == nil {
+          ${destVarName} = supertypes.NewSingleNestedObjectValueOfNull[${parent}${camelize(attribute.name)}](ctx)
+        } else {
+          var model ${parent}${camelize(attribute.name)}
+          diags.Append(model.FromApi(ctx, *${srcVarName})...)
+          ${destVarName} = supertypes.NewSingleNestedObjectValueOf[${parent}${camelize(attribute.name)}](ctx, &model)
+        }
+      `
+    )
+    .exhaustive();
+}
+
+function generateTerraformToPrimitive({
+  parent,
+  attribute,
+  srcVar,
+  destVar,
+  diagsVar,
+}: {
+  parent: string;
+  attribute: IRType;
+  srcVar: string;
+  destVar: string;
+  diagsVar: string;
+}) {
+  const srcVarName = `${srcVar}.${camelize(attribute.name)}`;
+  const destVarName = `${destVar}.${camelize(attribute.name)}`;
+  return match(attribute)
+    .with(
+      { type: "string", nullable: true },
+      () => `${destVarName} = ${srcVarName}.ValueStringPointer()`
+    )
+    .with(
+      { type: "string" },
+      () => `${destVarName} = ${srcVarName}.ValueString()`
+    )
+    .with(
+      { type: "int", nullable: true },
+      () => `${destVarName} = ${srcVarName}.ValueInt64Pointer()`
+    )
+    .with({ type: "int" }, () => `${destVarName} = ${srcVarName}.ValueInt64()`)
+    .with(
+      { type: "bool", nullable: true },
+      () => `${destVarName} = ${srcVarName}.ValueBoolPointer()`
+    )
+    .with({ type: "bool" }, () => `${destVarName} = ${srcVarName}.ValueBool()`)
+    .with(
+      { type: "list", nullable: true, elementType: "string" },
+      () =>
+        `${destVarName} = tfutils.MergeDiagnostics(${srcVarName}.Get(ctx))(&${diagsVar})`
+    )
+    .with(
+      { type: "list", elementType: "string" },
+      () =>
+        `${destVarName} = tfutils.MergeDiagnostics(${srcVarName}.Get(ctx))(&${diagsVar})`
+    )
+    .with(
+      { type: "set", nullable: true, elementType: "string" },
+      () => dedent`
+        if ${srcVarName}.IsKnown() {
+          ${destVarName} = ptr.Ptr(tfutils.MergeDiagnostics(${srcVarName}.Get(ctx))(&${diagsVar}))
+        } else {
+          ${destVarName} = nil
+        }
+      `
+    )
+    .with(
+      { type: "set", elementType: "string" },
+      () =>
+        `${destVarName} = tfutils.MergeDiagnostics(${srcVarName}.Get(ctx))(&${diagsVar})`
+    )
+    .with(
+      { type: "set_nested" },
+      () =>
+        `${destVarName} = tfutils.MergeDiagnostics(${srcVarName}.Get(ctx))(&${diagsVar})`
+    )
+    .with(
+      { type: "object", nullable: true },
+      () => dedent`
+        if ${srcVarName}.IsKnown() {
+          model := tfutils.MergeDiagnostics(${srcVarName}.Get(ctx))(&${diagsVar})
+          if ${diagsVar}.HasError() {
+            return
+          }
+          ${destVarName} = ptr.Ptr(tfutils.MergeDiagnostics(model.ToApi(ctx))(&${diagsVar}))
+        } else {
+          ${destVarName} = nil
+        }
+      `
+    )
+    .otherwise(() => "// TODO");
+}
+
+function generateModel({
+  name,
+  attributes,
+}: {
+  name: string;
+  attributes: IRType[];
+}) {
+  const lines: string[] = [];
+  const fromApiLines: string[] = [];
+  const toApiLines: string[] = [];
+  const extras: string[] = [];
+
+  for (const attribute of attributes) {
+    lines.push(
+      `${camelize(attribute.name)} ${generateTerraformValueType({
+        parent: name,
+        attribute,
+      })} \`tfsdk:"${attribute.name}"\``
+    );
+
+    fromApiLines.push(
+      `${generatePrimitiveToTerraform({
+        parent: name,
+        attribute,
+        srcVar: "data",
+        destVar: "m",
+      })}${attribute.deprecationMessage ? " // Deprecated" : ""}`
+    );
+
+    toApiLines.push(
+      `${generateTerraformToPrimitive({
+        parent: name,
+        attribute,
+        srcVar: "m",
+        destVar: "data",
+        diagsVar: "diags",
+      })}${attribute.deprecationMessage ? " // Deprecated" : ""}`
+    );
+
+    extras.push(
+      ...match(attribute)
+        .with({ type: "object" }, (attribute) => [
+          generateModel({
+            name: `${name}${camelize(attribute.name)}`,
+            attributes: attribute.attributes,
+          }),
+        ])
+        .otherwise(() => [])
     );
   }
 
-  const struct = `
-type ${modelName} struct {
-  ${modelStructLines.join("\n")}
-}
-`;
-  return [struct, ...nested].join("\n");
+  return dedent`
+type ${name} struct {
+  ${lines.join("\n")}
 }
 
-export function generateResource({
-  ir,
-  name,
-}: {
-  ir: IRResource;
-  name: string;
-}) {
-  const baseName = camelize(name);
+func (m *${name}) FromApi(ctx context.Context, data apiclient.${name}) (diags diag.Diagnostics) {
+  ${fromApiLines.join("\n")}
+  return
+}
+
+func (m *${name}) ToApi(ctx context.Context) (data apiclient.${name}, diags diag.Diagnostics) {
+  ${toApiLines.join("\n")}
+  return
+}
+
+${extras.join("\n\n")}
+`;
+}
+
+function generateResourceModel(resource: ResourceIR) {
+  return generateModel({
+    name: `${camelize(resource.name)}ResourceModel`,
+    attributes: [
+      ...(resource.idAttribute ? [resource.idAttribute] : []),
+      ...resource.attributes,
+    ],
+  });
+}
+
+export function generateResource(resource: ResourceIR) {
+  const baseName = camelize(resource.name);
   const resourceName = `${baseName}Resource`;
   const modelName = `${baseName}ResourceModel`;
 
   return `
-// DO NOT MODIFY: This file is generated by internal/providergen/index.ts. Any changes will be overwritten during the next build.
+// Code generated by providergen. DO NOT EDIT.
 package provider
 
 import (
@@ -925,11 +533,16 @@ type ${resourceName} struct {
 }
 
 func (r *${resourceName}) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-  resp.TypeName = req.ProviderTypeName + "_${name}"
+  resp.TypeName = req.ProviderTypeName + "_${resource.name}"
 }
 
 func (r *${resourceName}) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
-  resp.Schema = ${generateResourceSchema({ name: modelName, ir })}
+  resp.Schema = schema.Schema{
+    MarkdownDescription: ${JSON.stringify(resource.description ?? "")},
+    Attributes: map[string]schema.Attribute{
+      ${generateResourceSchemaAttributes(resource)}
+    },
+  }
 
   if ext, ok := any(r).(modifySchemaResponseExtension); ok {
     ext.modifySchemaResponse(ctx, resp)
@@ -941,14 +554,12 @@ func (r *${resourceName}) Create(ctx context.Context, req resource.CreateRequest
 
   // Read Terraform plan data into the model
   resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
-
   if resp.Diagnostics.HasError() {
     return
   }
 
   // Create API call logic
-  modelIn := tfutils.MergeDiagnostics(data.ToClientModel(ctx))(&resp.Diagnostics)
-
+  modelIn := tfutils.MergeDiagnostics(data.ToApi(ctx))(&resp.Diagnostics)
   if resp.Diagnostics.HasError() {
     return
   }
@@ -961,18 +572,6 @@ func (r *${resourceName}) Create(ctx context.Context, req resource.CreateRequest
 
   httpResp, err := r.client.Create${baseName}WithBodyWithResponse(
     ctx,
-    ${
-      ir.listPathIdParam
-        ? `${
-            generateTerraformValuer({
-              prefix: "data.",
-              parent: "",
-              field: ir.listPathIdParam.name,
-              ir: ir.listPathIdParam.element,
-            }).output
-          },`
-        : ""
-    }
     "application/vnd.api+json",
     bytes.NewReader(b),
   )
@@ -993,11 +592,7 @@ func (r *${resourceName}) Create(ctx context.Context, req resource.CreateRequest
     return
   }
 
-  if err := Fill${modelName}(ctx, modelOut, &data); err != nil {
-    resp.Diagnostics.AddError("Provider Error", fmt.Sprintf("Unable to fill model: %v", err))
-    return
-  }
-
+  resp.Diagnostics.Append(data.FromApi(ctx, modelOut)...)
   if resp.Diagnostics.HasError() {
     return
   }
@@ -1011,7 +606,6 @@ func (r *${resourceName}) Read(ctx context.Context, req resource.ReadRequest, re
 
   // Read Terraform prior state data into the model
   resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
-
   if resp.Diagnostics.HasError() {
     return
   }
@@ -1019,8 +613,7 @@ func (r *${resourceName}) Read(ctx context.Context, req resource.ReadRequest, re
   // Read API call logic
   httpResp, err := r.client.Get${baseName}WithResponse(
     ctx,
-    data.Id.ValueString(),
-    ${ir.getHasQueryParams ? "nil," : ""}
+    data.Id.ValueString(),${resource.getHasQueryParams ? "\nnil," : ""}
   )
   if err != nil {
     resp.Diagnostics.AddError("API Error", err.Error())
@@ -1039,11 +632,7 @@ func (r *${resourceName}) Read(ctx context.Context, req resource.ReadRequest, re
     return
   }
 
-  if err := Fill${modelName}(ctx, modelOut, &data); err != nil {
-    resp.Diagnostics.AddError("Provider Error", fmt.Sprintf("Unable to fill model: %v", err))
-    return
-  }
-
+  resp.Diagnostics.Append(data.FromApi(ctx, modelOut)...)
   if resp.Diagnostics.HasError() {
     return
   }
@@ -1057,14 +646,12 @@ func (r *${resourceName}) Update(ctx context.Context, req resource.UpdateRequest
 
   // Read Terraform plan data into the model
   resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
-
   if resp.Diagnostics.HasError() {
     return
   }
 
   // Read Terraform state data into the model
   resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
-
   if resp.Diagnostics.HasError() {
     return
   }
@@ -1072,7 +659,7 @@ func (r *${resourceName}) Update(ctx context.Context, req resource.UpdateRequest
   // Update API call logic
   var modelIn apiclient.${modelName}
 
-  ${generateResourceUpdateDiff({ name: modelName, ir })}
+  ${generateResourceUpdateDiff(resource)}
 
   if resp.Diagnostics.HasError() {
     return
@@ -1107,11 +694,7 @@ func (r *${resourceName}) Update(ctx context.Context, req resource.UpdateRequest
     return
   }
 
-  if err := Fill${modelName}(ctx, modelOut, &data); err != nil {
-    resp.Diagnostics.AddError("Provider Error", fmt.Sprintf("Unable to fill model: %v", err))
-    return
-  }
-
+  resp.Diagnostics.Append(data.FromApi(ctx, modelOut)...)
   if resp.Diagnostics.HasError() {
     return
   }
@@ -1125,7 +708,6 @@ func (r *${resourceName}) Delete(ctx context.Context, req resource.DeleteRequest
 
   // Read Terraform prior state data into the model
   resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
-
   if resp.Diagnostics.HasError() {
     return
   }
@@ -1150,41 +732,103 @@ func (r *${resourceName}) ImportState(ctx context.Context, req resource.ImportSt
   resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
 }
 
-${generateModel({ name: modelName, ir })}
-${generateFillModel({ name: modelName, ir })}
+${generateResourceModel(resource)}
 `;
 }
 
-export function generateClientModelFile({
-  ir,
-  name,
+function generatePrimitiveTypeV2({
+  parent,
+  attribute,
 }: {
-  ir: IRResource;
-  name: string;
+  parent: string;
+  attribute: IRType;
 }) {
-  const modelName = camelize(name);
+  return match(attribute)
+    .with({ type: "string", nullable: true }, () => "*string")
+    .with({ type: "string" }, () => "string")
+    .with({ type: "int", nullable: true }, () => "*int64")
+    .with({ type: "int" }, () => "int64")
+    .with({ type: "bool", nullable: true }, () => "*bool")
+    .with({ type: "bool" }, () => "bool")
+    .with(
+      { type: "set", elementType: "string", nullable: true },
+      () => "*[]string"
+    )
+    .with({ type: "set", elementType: "string" }, () => "[]string")
+    .with(
+      { type: "object", nullable: true },
+      () => `*${parent}${camelize(attribute.name)}`
+    )
+    .with({ type: "object" }, () => `${parent}${camelize(attribute.name)}`)
+    .exhaustive();
+}
+
+function generateClientModel({
+  resourceType,
+  name,
+  attributes,
+}: {
+  resourceType?: string;
+  name: string;
+  attributes: IRType[];
+}) {
+  const lines: string[] = [];
+  const extras: string[] = [];
+
+  if (resourceType) {
+    lines.push(
+      `Id string \`jsonapi:"primary,${pluralize(resourceType)},omitempty"\``
+    );
+  }
+
+  for (const attribute of attributes) {
+    lines.push(
+      `${camelize(attribute.name)} ${generatePrimitiveTypeV2({ parent: name, attribute })} \`jsonapi:"attribute" json:"${underscore(attribute.name)},omitempty"\``
+    );
+
+    extras.push(
+      ...match(attribute)
+        .with({ type: "object" }, (attribute) => [
+          generateClientModel({
+            name: `${name}${camelize(attribute.name)}`,
+            attributes: attribute.attributes,
+          }),
+        ])
+        .otherwise(() => [])
+    );
+  }
+
+  return dedent`
+type ${name} struct {
+  ${lines.join("\n")}
+}
+
+${extras.join("\n\n")}
+`;
+}
+
+export function generateResourceClientModel(resource: ResourceIR) {
+  const name = `${camelize(resource.name)}ResourceModel`;
 
   return `
-// DO NOT MODIFY: This file is generated by internal/providergen/index.ts. Any changes will be overwritten during the next build.
+// Code generated by providergen. DO NOT EDIT.
 package apiclient
 
-${generateClientModel({ ir, name: modelName })}
+${generateClientModel({ resourceType: resource.name, name, attributes: resource.attributes })}
 `;
 }
 
-export function generateProvider({
-  resources,
-}: {
-  resources: readonly string[];
-}) {
+export function generateProvider({ resources }: { resources: ResourceIR[] }) {
   return `
-// DO NOT MODIFY: This file is generated by internal/providergen/index.ts. Any changes will be overwritten during the next build.
+// Code generated by providergen. DO NOT EDIT.
 package provider
 
 import "github.com/hashicorp/terraform-plugin-framework/resource"
 
 var RootlyProviderGeneratedResources = []func() resource.Resource{
-  ${resources.map((resource) => `New${camelize(resource)}Resource,`).join("\n")}
+  ${resources
+    .map((resource) => `New${camelize(resource.name)}Resource,`)
+    .join("\n")}
 }
 `;
 }
