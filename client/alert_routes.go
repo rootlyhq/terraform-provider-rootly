@@ -131,16 +131,19 @@ type AsyncRuleCreationStatus struct {
 }
 
 func (c *Client) GetAsyncRuleCreationStatus(alertRouteID, requestId string) (*AsyncRuleCreationStatus, error) {
-	endpoint := fmt.Sprintf("/api/v1/alert_routes/%s/async_rule_creation_status/%s", alertRouteID, requestId)
+	endpoint := fmt.Sprintf("v1/alert_routes/%s/async_rule_creation_status/%s", alertRouteID, requestId)
 
 	baseURL, err := url.Parse(c.Rootly.Server)
 	if err != nil {
 		return nil, fmt.Errorf("Error parsing server URL: %w", err)
 	}
 
-	fullURL := baseURL.ResolveReference(&url.URL{Path: endpoint})
+	fullURL, err := url.JoinPath(baseURL.String(), endpoint)
+	if err != nil {
+		return nil, fmt.Errorf("Error joining URL path: %w", err)
+	}
 
-	req, err := http.NewRequest("GET", fullURL.String(), nil)
+	req, err := http.NewRequest("GET", fullURL, nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
