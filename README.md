@@ -1,10 +1,26 @@
 # Rootly Provider
 
-The [Rootly](https://rootly.com/) provider is used to interact with the resources supported by Rootly. The provider needs to be configured with the proper credentials before it can be used. It requires terraform 0.14 or later.
+The [Rootly](https://rootly.com/) provider is used to interact with the resources supported by Rootly. The provider needs to be configured with the proper credentials before it can be used. It requires terraform 1.0 or later.
 
 ## Usage
 
 Please see the [Terraform Registry documentation](https://registry.terraform.io/providers/rootlyhq/rootly/latest/docs) or [examples/](examples).
+
+```terraform
+terraform {
+  required_providers {
+    rootly = {
+      source = "rootlyhq/rootly"
+    }
+  }
+}
+
+provider "rootly" {
+  # We recommend using the `ROOTLY_API_TOKEN` env var to set the API Token
+  # when interacting with Rootly's API.
+  # api_token = var.rootly_api_key
+}
+```
 
 ## Develop
 
