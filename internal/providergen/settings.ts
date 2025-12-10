@@ -4,5 +4,6 @@ export const DATASOURCES: Array<DataSource> = [];
 export const RESOURCES: Array<Resource> = [
   {
     name: "escalation_policy",
+    mode: "modern",
   },
 ];

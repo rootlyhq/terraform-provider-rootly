@@ -1,36 +1,43 @@
-import { match } from "ts-pattern";
-import type { IRObject, IRResource, IRType, ResourceIR } from "./ir";
+import { match, P } from "ts-pattern";
+import type { IRType, ResourceIR } from "./ir";
 import { camelize, pluralize, underscore } from "inflection";
 import dedent from "dedent";
 
 function generateTerraformValueType({
+  mode,
   parent,
   attribute,
 }: {
+  mode: "legacy" | "modern";
   parent: string;
   attribute: IRType;
 }) {
-  return match(attribute)
-    .with({ type: "string" }, () => "supertypes.StringValue")
-    .with({ type: "int" }, () => "supertypes.Int64Value")
-    .with({ type: "bool" }, () => "supertypes.BoolValue")
+  return match([mode, attribute])
+    .with([P.any, { type: "string" }], () => "supertypes.StringValue")
+    .with([P.any, { type: "int" }], () => "supertypes.Int64Value")
+    .with([P.any, { type: "bool" }], () => "supertypes.BoolValue")
     .with(
-      { type: "list", elementType: "string" },
+      [P.any, { type: "list", elementType: "string" }],
       () => "supertypes.ListValueOf[string]"
     )
     .with(
-      { type: "set", elementType: "string" },
+      [P.any, { type: "set", elementType: "string" }],
       () => "supertypes.SetValueOf[string]"
     )
     .with(
-      { type: "set_nested" },
+      [P.any, { type: "set_nested" }],
       () =>
         `supertypes.SetNestedObjectValueOf[${parent}${camelize(attribute.name)}Item]`
     )
     .with(
-      { type: "object" },
+      ["modern", { type: "object" }],
       () =>
         `supertypes.SingleNestedObjectValueOf[${parent}${camelize(attribute.name)}]`
+    )
+    .with(
+      ["legacy", { type: "object" }],
+      () =>
+        `supertypes.SetNestedObjectValueOf[${parent}${camelize(attribute.name)}]`
     )
     .exhaustive();
 }
@@ -44,6 +51,7 @@ function generateResourceUpdateDiff(resource: ResourceIR) {
     );
     lines.push(
       generateTerraformToPrimitive({
+        mode: resource.mode,
         parent: resource.name,
         attribute,
         srcVar: "plan",
@@ -57,18 +65,31 @@ function generateResourceUpdateDiff(resource: ResourceIR) {
   return lines.join("\n");
 }
 
-function generateTerraformAttribute({
+function generateTerraformSchemaAttribute({
+  mode,
   parent,
   attribute,
 }: {
+  mode: "legacy" | "modern";
   parent: string;
   attribute: IRType;
 }) {
-  let description = attribute.description ?? "";
-  if (attribute.deprecationMessage) {
-    description += ` **Deprecated** ${attribute.deprecationMessage}`;
+  // Description
+  const descriptionParts = [];
+  if (attribute.description) {
+    descriptionParts.push(attribute.description);
   }
+  if (attribute.type === "string" && attribute.enum) {
+    descriptionParts.push(
+      `Value must be one of ${attribute.enum.map((value) => `\`${value}\``).join(", ")}.`
+    );
+  }
+  if (attribute.deprecationMessage) {
+    descriptionParts.push(`**Deprecated** ${attribute.deprecationMessage}`);
+  }
+  const description = descriptionParts.join(" ");
 
+  // Common parts
   const commonParts: string[] = [];
   commonParts.push(`MarkdownDescription: ${JSON.stringify(description)},`);
   if (attribute.deprecationMessage) {
@@ -76,7 +97,10 @@ function generateTerraformAttribute({
       `DeprecationMessage: ${JSON.stringify(attribute.deprecationMessage)},`
     );
   }
-  commonParts.push(
+
+  // Attribute parts
+  const attributeParts: string[] = [];
+  attributeParts.push(
     match(attribute.computedOptionalRequired)
       .with("required", () => "Required: true,")
       .with("computed", () => "Computed: true,")
@@ -85,7 +109,17 @@ function generateTerraformAttribute({
       .exhaustive()
   );
   if (attribute.sensitive) {
-    commonParts.push("Sensitive: true,");
+    attributeParts.push("Sensitive: true,");
+  }
+
+  const validators: string[] = [];
+  if (attribute.validators) {
+    validators.push(...attribute.validators);
+  }
+  if (attribute.type === "string" && attribute.enum) {
+    validators.push(
+      `stringvalidator.OneOf(${attribute.enum.map((value) => JSON.stringify(value)).join(", ")})`
+    );
   }
 
   return match(attribute)
@@ -93,10 +127,11 @@ function generateTerraformAttribute({
       const parts: string[] = [];
       parts.push("schema.StringAttribute{");
       parts.push(...commonParts);
+      parts.push(...attributeParts);
       parts.push("CustomType: supertypes.StringType{},");
-      if (attribute.validators) {
+      if (validators.length > 0) {
         parts.push("Validators: []validator.String{");
-        parts.push(...attribute.validators.map((validator) => `${validator},`));
+        parts.push(...validators.map((validator) => `${validator},`));
         parts.push("},");
       }
       if (attribute.planModifiers) {
@@ -113,10 +148,11 @@ function generateTerraformAttribute({
       const parts: string[] = [];
       parts.push("schema.Int64Attribute{");
       parts.push(...commonParts);
+      parts.push(...attributeParts);
       parts.push("CustomType: supertypes.Int64Type{},");
-      if (attribute.validators) {
+      if (validators.length > 0) {
         parts.push("Validators: []validator.Int64{");
-        parts.push(...attribute.validators.map((validator) => `${validator},`));
+        parts.push(...validators.map((validator) => `${validator},`));
         parts.push("},");
       }
       if (attribute.planModifiers) {
@@ -133,6 +169,7 @@ function generateTerraformAttribute({
       const parts: string[] = [];
       parts.push("schema.BoolAttribute{");
       parts.push(...commonParts);
+      parts.push(...attributeParts);
       parts.push("CustomType: supertypes.BoolType{},");
       if (attribute.validators) {
         parts.push("Validators: []validator.Bool{");
@@ -153,10 +190,11 @@ function generateTerraformAttribute({
       const parts: string[] = [];
       parts.push("schema.ListAttribute{");
       parts.push(...commonParts);
+      parts.push(...attributeParts);
       parts.push("CustomType: supertypes.NewListTypeOf[string](ctx),");
-      if (attribute.validators) {
+      if (validators.length > 0) {
         parts.push("Validators: []validator.List{");
-        parts.push(...attribute.validators.map((validator) => `${validator},`));
+        parts.push(...validators.map((validator) => `${validator},`));
         parts.push("},");
       }
       if (attribute.planModifiers) {
@@ -173,10 +211,11 @@ function generateTerraformAttribute({
       const parts: string[] = [];
       parts.push("schema.SetAttribute{");
       parts.push(...commonParts);
+      parts.push(...attributeParts);
       parts.push("CustomType: supertypes.NewSetTypeOf[string](ctx),");
-      if (attribute.validators) {
+      if (validators.length > 0) {
         parts.push("Validators: []validator.Set{");
-        parts.push(...attribute.validators.map((validator) => `${validator},`));
+        parts.push(...validators.map((validator) => `${validator},`));
         parts.push("},");
       }
       if (attribute.planModifiers) {
@@ -193,45 +232,64 @@ function generateTerraformAttribute({
       const parts: string[] = [];
       parts.push("schema.SetNestedAttribute{");
       parts.push(...commonParts);
+      parts.push(...attributeParts);
       parts.push(
         `CustomType: supertypes.NewSetNestedObjectTypeOf[${parent}${camelize(
           attribute.name
         )}Item](ctx),`
       );
       parts.push("NestedObject: schema.NestedAttributeObject{");
-      parts.push("Attributes: map[string]schema.Attribute{");
-      for (const nestedAttribute of attribute.attributes) {
-        parts.push(
-          `"${nestedAttribute.name}": ${generateTerraformAttribute({
-            parent: `${parent}${camelize(attribute.name)}Item`,
-            attribute: nestedAttribute,
-          })},`
-        );
-      }
-      parts.push("},");
+      parts.push(
+        generateTerraformSchemaAttributesBlocks({
+          mode,
+          name: `${parent}${camelize(attribute.name)}Item`,
+          attributes: attribute.attributes,
+        })
+      );
       parts.push("},");
       parts.push("}");
       return parts.join("\n");
     })
     .with({ type: "object" }, (attribute) => {
+      if (mode === "modern") {
+        const parts: string[] = [];
+
+        parts.push("schema.SingleNestedAttribute{");
+        parts.push(...commonParts);
+        parts.push(...attributeParts);
+        parts.push(
+          `CustomType: supertypes.NewSingleNestedObjectTypeOf[${parent}${camelize(attribute.name)}](ctx),`
+        );
+        parts.push(
+          generateTerraformSchemaAttributesBlocks({
+            mode,
+            name: `${parent}${camelize(attribute.name)}Item`,
+            attributes: attribute.attributes,
+          })
+        );
+        parts.push("}");
+
+        return parts.join("\n");
+      }
+
       const parts: string[] = [];
 
-      parts.push("schema.SingleNestedAttribute{");
+      parts.push("schema.SetNestedBlock{");
       parts.push(...commonParts);
       parts.push(
-        `CustomType: supertypes.NewSingleNestedObjectTypeOf[${parent}${camelize(
-          attribute.name
-        )}](ctx),`
+        `CustomType: supertypes.NewSetNestedObjectTypeOf[${parent}${camelize(attribute.name)}](ctx),`
       );
-      parts.push("Attributes: map[string]schema.Attribute{");
-      for (const nestedAttribute of attribute.attributes) {
-        parts.push(
-          `"${nestedAttribute.name}": ${generateTerraformAttribute({
-            parent: `${parent}${camelize(attribute.name)}`,
-            attribute: nestedAttribute,
-          })},`
-        );
-      }
+      parts.push("NestedObject: schema.NestedBlockObject{");
+      parts.push(
+        generateTerraformSchemaAttributesBlocks({
+          mode,
+          name: `${parent}${camelize(attribute.name)}Item`,
+          attributes: attribute.attributes,
+        })
+      );
+      parts.push("},");
+      parts.push("Validators: []validator.Set{");
+      parts.push("setvalidator.SizeAtMost(1),");
       parts.push("},");
       parts.push("}");
 
@@ -240,27 +298,65 @@ function generateTerraformAttribute({
     .exhaustive();
 }
 
-function generateResourceSchemaAttributes(resource: ResourceIR) {
-  const lines: string[] = [];
+function generateTerraformSchemaAttributesBlocks({
+  mode,
+  name,
+  attributes,
+}: {
+  mode: "legacy" | "modern";
+  name: string;
+  attributes: IRType[];
+}) {
+  const attributeLines: string[] = [];
+  const blockLines: string[] = [];
 
-  for (const attribute of [resource.idAttribute, ...resource.attributes]) {
-    lines.push(
-      `"${attribute.name}": ${generateTerraformAttribute({
-        parent: `${camelize(resource.name)}ResourceModel`,
-        attribute,
-      })},`
-    );
+  for (const attribute of attributes) {
+    match([mode, attribute])
+      .with(["legacy", { type: "object" }], () => {
+        blockLines.push(
+          `"${attribute.name}": ${generateTerraformSchemaAttribute({
+            mode,
+            parent: name,
+            attribute,
+          })},`
+        );
+      })
+      .otherwise(() => {
+        attributeLines.push(
+          `"${attribute.name}": ${generateTerraformSchemaAttribute({
+            mode,
+            parent: name,
+            attribute,
+          })},`
+        );
+      });
   }
 
-  return lines.join("\n");
+  const parts: string[] = [];
+
+  if (attributeLines.length > 0) {
+    parts.push("Attributes: map[string]schema.Attribute{");
+    parts.push(attributeLines.join("\n"));
+    parts.push("},");
+  }
+
+  if (blockLines.length > 0) {
+    parts.push("Blocks: map[string]schema.Block{");
+    parts.push(blockLines.join("\n"));
+    parts.push("},");
+  }
+
+  return parts.join("\n");
 }
 
 function generatePrimitiveToTerraform({
+  mode,
   parent,
   attribute,
   srcVar,
   destVar,
 }: {
+  mode: "legacy" | "modern";
   parent: string;
   attribute: IRType;
   srcVar: string;
@@ -268,34 +364,34 @@ function generatePrimitiveToTerraform({
 }) {
   const srcVarName = `${srcVar}.${camelize(attribute.name)}`;
   const destVarName = `${destVar}.${camelize(attribute.name)}`;
-  return match(attribute)
+  return match([mode, attribute])
     .with(
-      { type: "string", nullable: true },
+      [P.any, { type: "string", nullable: true }],
       () => `${destVarName} = supertypes.NewStringPointerValue(${srcVarName})`
     )
     .with(
-      { type: "string", sourceType: "time" },
+      [P.any, { type: "string", sourceType: "time" }],
       () => `${destVarName} = supertypes.NewStringValue(${srcVarName}.String())`
     )
     .with(
-      { type: "string" },
+      [P.any, { type: "string" }],
       () => `${destVarName} = supertypes.NewStringValue(${srcVarName})`
     )
     .with(
-      { type: "int" },
+      [P.any, { type: "int" }],
       () => `${destVarName} = supertypes.NewInt64Value(${srcVarName})`
     )
     .with(
-      { type: "bool" },
+      [P.any, { type: "bool" }],
       () => `${destVarName} = supertypes.NewBoolValue(${srcVarName})`
     )
     .with(
-      { type: "list", elementType: "string" },
+      [P.any, { type: "list", elementType: "string" }],
       () =>
         `${destVarName} = supertypes.NewListValueOfSlice(ctx, ${srcVarName})`
     )
     .with(
-      { type: "set", nullable: true, elementType: "string" },
+      [P.any, { type: "set", nullable: true, elementType: "string" }],
       () => dedent`
         if ${srcVarName} == nil {
           ${destVarName} = supertypes.NewSetValueOfNull[string](ctx)
@@ -305,11 +401,11 @@ function generatePrimitiveToTerraform({
       `
     )
     .with(
-      { type: "set", elementType: "string" },
+      [P.any, { type: "set", elementType: "string" }],
       () => `${destVarName} = supertypes.NewSetValueOfSlice(ctx, ${srcVarName})`
     )
     .with(
-      { type: "set_nested" },
+      [P.any, { type: "set_nested" }],
       (attribute) =>
         `${destVarName} = supertypes.NewSetNestedObjectValueOfValueSlice(ctx, sliceutils.Map(func(item apiclient.${attribute.model}) ${parent}${camelize(attribute.name)}Item {
           var model ${parent}${camelize(attribute.name)}Item
@@ -318,7 +414,21 @@ function generatePrimitiveToTerraform({
         }, ${srcVarName}))`
     )
     .with(
-      { type: "object" },
+      ["legacy", { type: "object" }],
+      () => dedent`
+        if ${destVarName}.IsKnown() {
+          if ${srcVarName} == nil {
+            ${destVarName} = supertypes.NewSetNestedObjectValueOfNull[${parent}${camelize(attribute.name)}](ctx)
+          } else {
+            var model ${parent}${camelize(attribute.name)}
+            diags.Append(model.FromApi(ctx, *${srcVarName})...)
+            ${destVarName} = supertypes.NewSetNestedObjectValueOfValueSlice(ctx, []${parent}${camelize(attribute.name)}{model})
+          }
+        }
+      `
+    )
+    .with(
+      ["modern", { type: "object" }],
       () => dedent`
         if ${srcVarName} == nil {
           ${destVarName} = supertypes.NewSingleNestedObjectValueOfNull[${parent}${camelize(attribute.name)}](ctx)
@@ -333,12 +443,14 @@ function generatePrimitiveToTerraform({
 }
 
 function generateTerraformToPrimitive({
+  mode,
   parent,
   attribute,
   srcVar,
   destVar,
   diagsVar,
 }: {
+  mode: "legacy" | "modern";
   parent: string;
   attribute: IRType;
   srcVar: string;
@@ -347,37 +459,55 @@ function generateTerraformToPrimitive({
 }) {
   const srcVarName = `${srcVar}.${camelize(attribute.name)}`;
   const destVarName = `${destVar}.${camelize(attribute.name)}`;
-  return match(attribute)
+  return match([mode, attribute])
     .with(
-      { type: "string", nullable: true },
+      [P.any, { type: "string", nullable: true }],
       () => `${destVarName} = ${srcVarName}.ValueStringPointer()`
     )
     .with(
-      { type: "string" },
+      [P.any, { type: "string" }],
       () => `${destVarName} = ${srcVarName}.ValueString()`
     )
     .with(
-      { type: "int", nullable: true },
+      [P.any, { type: "int", nullable: true }],
       () => `${destVarName} = ${srcVarName}.ValueInt64Pointer()`
     )
-    .with({ type: "int" }, () => `${destVarName} = ${srcVarName}.ValueInt64()`)
     .with(
-      { type: "bool", nullable: true },
+      [P.any, { type: "int" }],
+      () => `${destVarName} = ${srcVarName}.ValueInt64()`
+    )
+    .with(
+      [P.any, { type: "bool", nullable: true }],
       () => `${destVarName} = ${srcVarName}.ValueBoolPointer()`
     )
-    .with({ type: "bool" }, () => `${destVarName} = ${srcVarName}.ValueBool()`)
     .with(
-      { type: "list", nullable: true, elementType: "string" },
-      () =>
-        `${destVarName} = tfutils.MergeDiagnostics(${srcVarName}.Get(ctx))(&${diagsVar})`
+      [P.any, { type: "bool" }],
+      () => `${destVarName} = ${srcVarName}.ValueBool()`
     )
     .with(
-      { type: "list", elementType: "string" },
+      [P.any, { type: "list", nullable: true, elementType: "string" }],
       () =>
-        `${destVarName} = tfutils.MergeDiagnostics(${srcVarName}.Get(ctx))(&${diagsVar})`
+        dedent`
+          if ${srcVarName}.IsKnown() {
+            ${destVarName} = ptr.Ptr(tfutils.MergeDiagnostics(${srcVarName}.Get(ctx))(&${diagsVar}))
+          } else {
+            ${destVarName} = nil
+          }
+        `
     )
     .with(
-      { type: "set", nullable: true, elementType: "string" },
+      [P.any, { type: "list", elementType: "string" }],
+      () =>
+        dedent`
+          if ${srcVarName}.IsKnown() {
+            ${destVarName} = tfutils.MergeDiagnostics(${srcVarName}.Get(ctx))(&${diagsVar})
+          } else {
+            ${destVarName} = nil
+          }
+        `
+    )
+    .with(
+      [P.any, { type: "set", nullable: true, elementType: "string" }],
       () => dedent`
         if ${srcVarName}.IsKnown() {
           ${destVarName} = ptr.Ptr(tfutils.MergeDiagnostics(${srcVarName}.Get(ctx))(&${diagsVar}))
@@ -387,17 +517,27 @@ function generateTerraformToPrimitive({
       `
     )
     .with(
-      { type: "set", elementType: "string" },
-      () =>
-        `${destVarName} = tfutils.MergeDiagnostics(${srcVarName}.Get(ctx))(&${diagsVar})`
+      [P.any, { type: "set", elementType: "string" }],
+      () => dedent`
+        if ${srcVarName}.IsKnown() {
+          ${destVarName} = tfutils.MergeDiagnostics(${srcVarName}.Get(ctx))(&${diagsVar})
+        } else {
+          ${destVarName} = nil
+        }
+      `
     )
     .with(
-      { type: "set_nested" },
-      () =>
-        `${destVarName} = tfutils.MergeDiagnostics(${srcVarName}.Get(ctx))(&${diagsVar})`
+      [P.any, { type: "set_nested" }],
+      () => dedent`
+        if ${srcVarName}.IsKnown() {
+          ${destVarName} = ptr.Ptr(tfutils.MergeDiagnostics(${srcVarName}.Get(ctx))(&${diagsVar}))
+        } else {
+          ${destVarName} = nil
+        }
+      `
     )
     .with(
-      { type: "object", nullable: true },
+      ["modern", { type: "object", nullable: true }],
       () => dedent`
         if ${srcVarName}.IsKnown() {
           model := tfutils.MergeDiagnostics(${srcVarName}.Get(ctx))(&${diagsVar})
@@ -410,13 +550,48 @@ function generateTerraformToPrimitive({
         }
       `
     )
-    .otherwise(() => "// TODO");
+    .with(
+      ["modern", { type: "object" }],
+      () => dedent`
+        if ${srcVarName}.IsKnown() {
+          model := tfutils.MergeDiagnostics(${srcVarName}.Get(ctx))(&${diagsVar})
+          if ${diagsVar}.HasError() {
+            return
+          }
+          ${destVarName} = tfutils.MergeDiagnostics(model.ToApi(ctx))(&${diagsVar})
+        } else {
+          ${destVarName} = nil
+        }
+      `
+    )
+    .with(
+      ["legacy", { type: "object", nullable: true }],
+      () => dedent`
+        if ${srcVarName}.IsKnown() {
+          models := tfutils.MergeDiagnostics(${srcVarName}.Get(ctx))(&${diagsVar})
+          if ${diagsVar}.HasError() {
+            return
+          }
+
+          if len(models) == 1 {
+            ${destVarName} = ptr.Ptr(tfutils.MergeDiagnostics(models[0].ToApi(ctx))(&${diagsVar}))
+          } else {
+            ${destVarName} = nil
+          }
+        } else {
+          ${destVarName} = nil
+        }
+      `
+    )
+    .otherwise((schema) => `// TODO ${JSON.stringify(schema)}`);
 }
 
 function generateModel({
+  mode,
   name,
   attributes,
 }: {
+  mode: "legacy" | "modern";
   name: string;
   attributes: IRType[];
 }) {
@@ -428,6 +603,7 @@ function generateModel({
   for (const attribute of attributes) {
     lines.push(
       `${camelize(attribute.name)} ${generateTerraformValueType({
+        mode,
         parent: name,
         attribute,
       })} \`tfsdk:"${attribute.name}"\``
@@ -435,6 +611,7 @@ function generateModel({
 
     fromApiLines.push(
       `${generatePrimitiveToTerraform({
+        mode,
         parent: name,
         attribute,
         srcVar: "data",
@@ -444,6 +621,7 @@ function generateModel({
 
     toApiLines.push(
       `${generateTerraformToPrimitive({
+        mode,
         parent: name,
         attribute,
         srcVar: "m",
@@ -456,6 +634,7 @@ function generateModel({
       ...match(attribute)
         .with({ type: "object" }, (attribute) => [
           generateModel({
+            mode,
             name: `${name}${camelize(attribute.name)}`,
             attributes: attribute.attributes,
           }),
@@ -485,6 +664,7 @@ ${extras.join("\n\n")}
 
 function generateResourceModel(resource: ResourceIR) {
   return generateModel({
+    mode: resource.mode,
     name: `${camelize(resource.name)}ResourceModel`,
     attributes: [
       ...(resource.idAttribute ? [resource.idAttribute] : []),
@@ -539,9 +719,11 @@ func (r *${resourceName}) Metadata(ctx context.Context, req resource.MetadataReq
 func (r *${resourceName}) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
   resp.Schema = schema.Schema{
     MarkdownDescription: ${JSON.stringify(resource.description ?? "")},
-    Attributes: map[string]schema.Attribute{
-      ${generateResourceSchemaAttributes(resource)}
-    },
+    ${generateTerraformSchemaAttributesBlocks({
+      mode: resource.mode,
+      name: `${camelize(resource.name)}ResourceModel`,
+      attributes: [resource.idAttribute, ...resource.attributes],
+    })}
   }
 
   if ext, ok := any(r).(modifySchemaResponseExtension); ok {

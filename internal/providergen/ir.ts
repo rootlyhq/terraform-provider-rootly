@@ -10,10 +10,12 @@ export interface DataSourceIR extends DataSource {}
 export interface Resource {
   name: string;
   description?: string;
+  mode?: "legacy" | "modern";
 }
 
 export interface ResourceIR extends Resource {
-  attributes: Array<IRType>;
+  mode: "legacy" | "modern";
+  attributes: IRType[];
   listPathIdAttribute?: IRString;
   idAttribute: IRString;
   getHasQueryParams: boolean;
@@ -55,6 +57,8 @@ interface IRBase {
   sensitive?: boolean;
   nullable?: boolean;
   computedOptionalRequired: ComputedOptionalRequired;
+  validators?: string[];
+  planModifiers?: string[];
   original?: {
     schema: any;
     newSchema: any;
@@ -64,7 +68,7 @@ interface IRBase {
 
 export interface IRString extends IRBase {
   type: "string";
-  choices?: string[];
+  enum?: string[];
 }
 
 export interface IRBool extends IRBase {
@@ -77,7 +81,7 @@ export interface IRInt extends IRBase {
 
 export interface IRObject extends IRBase {
   type: "object";
-  attributes: Array<IRType>;
+  attributes: IRType[];
 }
 
 export interface IRList extends IRBase {
@@ -92,12 +96,12 @@ export interface IRSet extends IRBase {
 
 export interface IRListNested extends IRBase {
   type: "list_nested";
-  attributes: Array<IRType>;
+  attributes: IRType[];
 }
 
 export interface IRSetNested extends IRBase {
   type: "set_nested";
-  attributes: Array<IRType>;
+  attributes: IRType[];
 }
 
 export interface IRResource extends IRBase {
@@ -146,15 +150,16 @@ function toIR({
 
   return match(schema)
     .returnType<IRType>()
-    .with({ type: "string" }, (schema) => ({
+    .with({ type: "string" }, () => ({
       type: "string",
+      enum: schema.enum,
       ...common,
     }))
-    .with({ type: "integer" }, (schema) => ({
+    .with({ type: "integer" }, () => ({
       type: "int",
       ...common,
     }))
-    .with({ type: "array", items: { type: "string" } }, (schema) => ({
+    .with({ type: "array", items: { type: "string" } }, () => ({
       type: "set",
       elementType: "string",
       ...common,
@@ -167,7 +172,6 @@ function toIR({
       },
       (schema) => ({
         type: "object",
-        blocks: false,
         attributes: Object.entries(schema.properties)
           .filter(([_, schema]: [string, any]) => !schema.tf_ignore)
           .map(([propertyName, propertySchema]: [string, any]) => {
@@ -187,90 +191,9 @@ function toIR({
         ...common,
       })
     )
-    .exhaustive();
-  // .with({ type: "string" }, () => {
-  //   return {
-  //     kind: "string",
-  //     choices: schema.enum,
-  //     ...common,
-  //     description: `${schema.description ? `${schema.description} ` : ""}${
-  //       schema.enum
-  //         ? `Value must be one of ${schema.enum
-  //             .map((v: string) => `\`${v}\``)
-  //             .join(", ")}.`
-  //         : ""
-  //     }`,
-  //   };
-  // })
-  // .with({ type: "boolean" }, () => ({
-  //   kind: "bool",
-  //   ...common,
-  // }))
-  // .with({ type: "integer" }, { type: "number" }, () => ({
-  //   kind: "int",
-  //   ...common,
-  // }))
-  // .with(
-  //   {
-  //     type: "array",
-  //     items: P.record(P.string, P.any),
-  //     tf_blocks: P.boolean.optional(),
-  //     tf_distinct: P.boolean.optional(),
-  //   },
-  //   (schema) => {
-  //     const element = toIR({
-  //       schema: schema.items,
-  //       newSchema: newSchema.items,
-  //       updateSchema: updateSchema.items,
-  //       computedOptionalRequired: "required", // TODO: Investigate
-  //     });
-
-  //     if (!element) {
-  //       throw new Error("Array element is null");
-  //     }
-
-  //     return {
-  //       kind: "array",
-  //       ...common,
-  //       blocks: schema.tf_blocks ?? false,
-  //       distinct: schema.tf_distinct ?? false,
-  //       element,
-  //     };
-  //   }
-  // )
-  // .with(
-  //   {
-  //     type: "object",
-  //     properties: P.record(P.string, P.any),
-  //     required: P.array(P.string).optional(),
-  //     tf_blocks: P.boolean.optional(),
-  //   },
-  //   (schema) => {
-  //     return {
-  //       kind: "object",
-  //       ...common,
-  //       blocks: schema.tf_blocks ?? false,
-  //       fields: Object.fromEntries(
-  //         Object.entries(schema.properties)
-  //           .map(([propertyName, propertySchema]) => [
-  //             propertyName,
-  //             toIR({
-  //               schema: propertySchema,
-  //               newSchema: newSchema.properties[propertyName],
-  //               updateSchema: updateSchema.properties[propertyName],
-  //               computedOptionalRequired: toComputedOptionalRequired({
-  //                 field: propertyName,
-  //                 schema,
-  //                 newSchema,
-  //                 updateSchema,
-  //               }),
-  //             }),
-  //           ])
-  //           .filter(([_, ir]) => ir !== null)
-  //       ),
-  //     };
-  //   }
-  // )
+    .otherwise(() => {
+      throw new Error(`Unsupported type: ${JSON.stringify(schema)}`);
+    });
 }
 
 function toComputedOptionalRequired({
@@ -425,53 +348,7 @@ export function generateResourceIR({
   const getHasQueryParams =
     getSchema?.parameters?.some((param: any) => param.in === "query") ?? false;
 
-  // // Generate immediate representation of the resource
-  // const irFields = toIR({
-  //   schema: resourceSchema,
-  //   newSchema: newResourceSchema.properties.data.properties.attributes,
-  //   updateSchema: updateResourceSchema.properties.data.properties.attributes,
-  //   computedOptionalRequired: "required",
-  // });
-  // if (!irFields || irFields.kind !== "object") {
-  //   throw new Error("Resource root must be an object");
-  // }
-
-  // const ir: IRResource = {
-  //   kind: "resource",
-  //   resourceType: resource.name,
-  //   nullable: false,
-  //   computedOptionalRequired: "required",
-  //   listPathIdParam:
-  //     pathIdParameter && pathIdIR
-  //       ? { name: pathIdParameter, element: pathIdIR }
-  //       : null,
-  //   getHasQueryParams,
-  //   idElement: {
-  //     kind: "string",
-  //     computedOptionalRequired: "computed",
-  //     description: `The ID of the ${humanize(resource.name, true)}`,
-  //     nullable: false,
-  //   },
-  //   fields: irFields.fields,
-  // };
-
-  // const attributes = Object.entries(resourceSchema.properties)
-  //   .filter(([name]) => !["created_at", "updated_at"].includes(name))
-  //   .map(([name, schema]: [string, any]) =>
-  //     toIR({
-  //       name,
-  //       computedOptionalRequired: "required",
-  //       schema,
-  //       newSchema:
-  //         newResourceSchema.properties.data.properties.attributes.properties[
-  //           name
-  //         ],
-  //       updateSchema:
-  //         updateResourceSchema.properties.data.properties.attributes.properties[
-  //           name
-  //         ],
-  //     })
-  //   );
+  // Generate immediate representation of the resource
   const tempIR = toIR({
     name: resource.name,
     computedOptionalRequired: "required",
@@ -487,7 +364,8 @@ export function generateResourceIR({
   );
 
   return {
-    name: resource.name,
+    ...resource,
+    mode: resource.mode ?? "modern",
     description: resourceSchema.description,
     listPathIdAttribute: listPathIdAttribute,
     idAttribute: {
