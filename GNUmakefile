@@ -50,6 +50,10 @@ test:
 testacc:
 	TF_ACC=1 go test $(TEST) -v $(TESTARGS) -timeout 120m
 
+sweeper:
+	@echo "WARNING: This will destroy infrastructure. Use only in development accounts."
+	go test ./internal/provider -v -tags=sweep -sweep=all -sweep-allow-failures -timeout 120m
+
 codegen:
 	curl $(SWAGGER_URL) -o schema/swagger.json
 	node tools/clean-swagger.js schema/swagger.json
@@ -127,6 +131,7 @@ help:
 	@echo "  make docs            - Generate documentation"
 	@echo "  make test            - Run unit tests"
 	@echo "  make testacc         - Run acceptance tests"
+	@echo "  make sweeper         - Delete resources created by acceptance tests. They have names starting with tf-"
 	@echo "  make install         - Install provider locally"
 	@echo "  make release         - Create local snapshot build"
 	@echo ""

@@ -57,6 +57,7 @@ ${dataSources
 				"rootly_custom_field": dataSourceCustomField(),
 				"rootly_custom_field_option": dataSourceCustomFieldOption(),
 				"rootly_causes": dataSourceCauses(),
+				"rootly_communications_group": dataSourceCommunicationsGroup(),
 				"rootly_custom_fields": dataSourceCustomFields(),
 				"rootly_custom_field_options": dataSourceCustomFieldOptions(),
 				"rootly_environments": dataSourceEnvironments(),
@@ -78,6 +79,7 @@ ${resources
   })
   .join("\n")}
 				"rootly_alerts_source": resourceAlertsSource(),
+				"rootly_communications_group": resourceCommunicationsGroup(),
 				"rootly_custom_field": resourceCustomField(),
 				"rootly_custom_field_option": resourceCustomFieldOption(),
 				"rootly_dashboard": resourceDashboard(),
