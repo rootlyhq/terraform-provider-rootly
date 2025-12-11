@@ -72,6 +72,7 @@ const excluded = {
     "incident_post_mortem",
     "incident",
     "ip_ranges",
+    "live_call_router",
     "on_call_role",
     "post_mortem_template",
     "pulse",
