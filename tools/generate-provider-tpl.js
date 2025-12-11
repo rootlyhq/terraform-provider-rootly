@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/meta"
+	goversion "github.com/hashicorp/go-version"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 )
 
@@ -122,6 +123,15 @@ func configure(version string, p *schema.Provider) func(context.Context, *schema
 
 		// Warning or errors can be collected in a slice type
 		var diags diag.Diagnostics
+
+		if goversion.Must(goversion.NewVersion(p.TerraformVersion)).LessThan(goversion.Must(goversion.NewVersion("1.0"))) {
+		    diags = append(diags, diag.Diagnostic{
+		        Severity: diag.Error,
+		        Summary:  "Unsupported Terraform Version",
+		        Detail:   "Please upgrade Terraform to at least version 1.0.",
+		    })
+		    return nil, diags
+		}
 
 		cli, err := client.NewClient(host, token, RootlyUserAgent(version))
 		if err != nil {
