@@ -31,6 +31,7 @@ func init() {
 func New(version string) func() *schema.Provider {
 	return func() *schema.Provider {
 		p := &schema.Provider{
+			TerraformVersion: "1.0",
 			Schema: map[string]*schema.Schema{
 				"api_host": {
 					Description: "The Rootly API host. Defaults to https://api.rootly.com. Can also be sourced from the `ROOTLY_API_URL` environment variable.",
