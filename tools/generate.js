@@ -74,6 +74,7 @@ const excluded = {
     "ip_ranges",
     "live_call_router",
     "on_call_role",
+    "override_shift",
     "post_mortem_template",
     "pulse",
     "retrospective_configuration",
