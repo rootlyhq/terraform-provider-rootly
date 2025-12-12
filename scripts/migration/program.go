@@ -109,7 +109,7 @@ It fetches alert routes from the Rootly API and converts them to terraform alert
 The script writes generated terraform resources to STDOUT in case you want to redirect it to a file.
 Any logs or errors are written to STDERR.
 
-usage: migration_script [-import=<statement|block>] [-api-host=<api_host>] [-api-token=<api_token>] <object_type>
+usage: ` + p.Args[0] + ` [-import=<statement|block>] [-api-host=<api_host>] [-api-token=<api_token>] <object_type>
 
 api-host optional flag specifies the Rootly API host (defaults to https://api.rootly.com or ROOTLY_API_URL env var)
 api-token optional flag specifies the Rootly API token (defaults to ROOTLY_API_TOKEN env var)
@@ -122,8 +122,8 @@ object_type represents the type of Rootly object you want to migrate.
 		- "alert_routes" which fetches all alert routes and converts them to terraform resources
 
 example usage:
-	migration_script alert_routes > ./alert_routes.tf
-	migration_script -import=block -api-token=your-token alert_routes > ./alert_routes.tf
+	` + p.Args[0] + ` alert_routes > ./alert_routes.tf
+	` + p.Args[0] + ` -import=block -api-token=your-token alert_routes > ./alert_routes.tf
 `)
 	}
 
