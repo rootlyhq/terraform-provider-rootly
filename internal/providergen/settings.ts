@@ -1,9 +1,4 @@
 import type { DataSource, Resource } from "./ir";
 
 export const DATASOURCES: Array<DataSource> = [];
-export const RESOURCES: Array<Resource> = [
-  {
-    name: "escalation_policy",
-    mode: "modern",
-  },
-];
+export const RESOURCES: Array<Resource> = [];
