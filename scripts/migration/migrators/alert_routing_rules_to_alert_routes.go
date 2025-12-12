@@ -58,57 +58,80 @@ func NewRootlyClient(apiHost, apiToken string) *RootlyClient {
 }
 
 func (c *RootlyClient) FetchAlertRoutes() ([]client.AlertRoute, error) {
-	url := fmt.Sprintf("%s/v1/alert_routes", strings.TrimSuffix(c.ApiHost, "/"))
+	var allRoutes []client.AlertRoute
+	pageNumber := 1
+	pageSize := 10
 
-	req, err := http.NewRequest("GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
+	for {
+		url := fmt.Sprintf("%s/v1/alert_routes?page[number]=%d&page[size]=%d",
+			strings.TrimSuffix(c.ApiHost, "/"), pageNumber, pageSize)
 
-	req.Header.Set("Authorization", "Bearer "+c.ApiToken)
-	req.Header.Set("Content-Type", "application/vnd.api+json")
-
-	resp, err := c.client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status %d", resp.StatusCode)
-	}
-
-	var jsonApiResponse struct {
-		Data []struct {
-			ID         string `json:"id"`
-			Attributes struct {
-				Name            string        `json:"name"`
-				Enabled         bool          `json:"enabled"`
-				AlertsSourceIds []interface{} `json:"alerts_source_ids"`
-				OwningTeamIds   []interface{} `json:"owning_team_ids"`
-				Rules           []interface{} `json:"rules"`
-			} `json:"attributes"`
-		} `json:"data"`
-	}
-
-	if err := json.NewDecoder(resp.Body).Decode(&jsonApiResponse); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	var routes []client.AlertRoute
-	for _, item := range jsonApiResponse.Data {
-		route := client.AlertRoute{
-			ID:              item.ID,
-			Name:            item.Attributes.Name,
-			Enabled:         &item.Attributes.Enabled,
-			AlertsSourceIds: item.Attributes.AlertsSourceIds,
-			OwningTeamIds:   item.Attributes.OwningTeamIds,
-			Rules:           item.Attributes.Rules,
+		req, err := http.NewRequest("GET", url, nil)
+		if err != nil {
+			return nil, fmt.Errorf("error creating request: %w", err)
 		}
-		routes = append(routes, route)
+
+		req.Header.Set("Authorization", "Bearer "+c.ApiToken)
+		req.Header.Set("Content-Type", "application/vnd.api+json")
+
+		resp, err := c.client.Do(req)
+		if err != nil {
+			return nil, fmt.Errorf("error making request: %w", err)
+		}
+
+		if resp.StatusCode != http.StatusOK {
+			resp.Body.Close()
+			return nil, fmt.Errorf("API request failed with status %d", resp.StatusCode)
+		}
+
+		var jsonApiResponse struct {
+			Data []struct {
+				ID         string `json:"id"`
+				Attributes struct {
+					Name            string        `json:"name"`
+					Enabled         bool          `json:"enabled"`
+					AlertsSourceIds []interface{} `json:"alerts_source_ids"`
+					OwningTeamIds   []interface{} `json:"owning_team_ids"`
+					Rules           []interface{} `json:"rules"`
+				} `json:"attributes"`
+			} `json:"data"`
+			Meta struct {
+				Pagination struct {
+					CurrentPage int `json:"current_page"`
+					TotalPages  int `json:"total_pages"`
+					TotalCount  int `json:"total_count"`
+				} `json:"pagination"`
+			} `json:"meta"`
+		}
+
+		if err := json.NewDecoder(resp.Body).Decode(&jsonApiResponse); err != nil {
+			resp.Body.Close()
+			return nil, fmt.Errorf("error decoding response: %w", err)
+		}
+		resp.Body.Close()
+
+		// Process current page data
+		for _, item := range jsonApiResponse.Data {
+			route := client.AlertRoute{
+				ID:              item.ID,
+				Name:            item.Attributes.Name,
+				Enabled:         &item.Attributes.Enabled,
+				AlertsSourceIds: item.Attributes.AlertsSourceIds,
+				OwningTeamIds:   item.Attributes.OwningTeamIds,
+				Rules:           item.Attributes.Rules,
+			}
+			allRoutes = append(allRoutes, route)
+		}
+
+		// Check if we've reached the last page
+		if len(jsonApiResponse.Data) == 0 || pageNumber >= jsonApiResponse.Meta.Pagination.TotalPages {
+			break
+		}
+
+		pageNumber++
 	}
 
-	return routes, nil
+	return allRoutes, nil
 }
 
 func ConvertAlertRouteToTerraform(route client.AlertRoute) AlertRouteModel {
