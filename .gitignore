@@ -46,6 +46,10 @@ terraform-provider-rootly
 .aider*
 .claude
 
+# Migration script executables
+scripts/migration/migration_script
+scripts/migration/migration
+
 # Editor and IDE files
 .vscode/
 *.swp
