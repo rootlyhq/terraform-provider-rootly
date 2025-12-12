@@ -18,7 +18,6 @@ type ImportModel struct {
 	IdEscaped       string
 }
 
-// AlertRouteModel represents the converted alert route resource
 type AlertRouteModel struct {
 	Name            string
 	Enabled         bool
@@ -27,25 +26,21 @@ type AlertRouteModel struct {
 	Rules           []AlertRouteRuleModel
 }
 
-// AlertRouteRuleModel represents a rule within an alert route
 type AlertRouteRuleModel struct {
 	Name            string
 	Destinations    []DestinationModel
 	ConditionGroups []ConditionGroupModel
 }
 
-// DestinationModel represents a destination in an alert route rule
 type DestinationModel struct {
 	TargetType string
 	TargetId   string
 }
 
-// ConditionGroupModel represents a condition group in an alert route rule
 type ConditionGroupModel struct {
 	Conditions []ConditionModel
 }
 
-// ConditionModel represents a condition in a condition group
 type ConditionModel struct {
 	PropertyFieldType          string
 	PropertyFieldName          string
@@ -55,7 +50,6 @@ type ConditionModel struct {
 	AlertUrgencyIds            []string
 }
 
-// RootlyClient wraps the client functionality for fetching alert routing rules
 type RootlyClient struct {
 	ApiHost  string
 	ApiToken string
@@ -72,7 +66,7 @@ func NewRootlyClient(apiHost, apiToken string) *RootlyClient {
 
 func (c *RootlyClient) FetchAlertRoutes() ([]client.AlertRoute, error) {
 	url := fmt.Sprintf("%s/v1/alert_routes", strings.TrimSuffix(c.ApiHost, "/"))
-	
+
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
@@ -282,7 +276,7 @@ func GenerateTerraformResource(resourceName string, alertRoute AlertRouteModel, 
 
 func GenerateImportStatement(importType ImportStatementType, resourceAddress, resourceID string) (string, error) {
 	var templateText string
-	
+
 	switch importType {
 	case ImportStatementTypeStatement:
 		templateText = `# terraform import {{ .ResourceAddress }} '{{ .Id }}'`
@@ -322,7 +316,7 @@ func GenerateImportStatement(importType ImportStatementType, resourceAddress, re
 
 func HandleAlertRoutingRulesToAlertRoutes(config *Config) (string, error) {
 	client := NewRootlyClient(config.ApiHost, config.ApiToken)
-	
+
 	// Note: This fetches alert routes (the current/new resource type)
 	// In the future, we might want to fetch alert routing rules and convert them
 	// For now, we fetch existing alert routes to help users import them
@@ -339,12 +333,12 @@ func HandleAlertRoutingRulesToAlertRoutes(config *Config) (string, error) {
 		alertRoute := ConvertAlertRouteToTerraform(route)
 		resourceName := sanitizeResourceName(route.Name, i)
 		resourceAddress := fmt.Sprintf("rootly_alert_route.%s", resourceName)
-		
+
 		resourceText, err := GenerateTerraformResource(resourceName, alertRoute, route.ID)
 		if err != nil {
 			return "", fmt.Errorf("error generating resource for route %s: %w", route.ID, err)
 		}
-		
+
 		output.WriteString(resourceText)
 		output.WriteString("\n")
 
@@ -380,7 +374,7 @@ func sanitizeResourceName(name string, fallbackIndex int) string {
 	if name == "" {
 		return fmt.Sprintf("alert_route_%d", fallbackIndex)
 	}
-	
+
 	// Replace invalid characters with underscores
 	result := ""
 	for _, char := range name {
@@ -390,15 +384,15 @@ func sanitizeResourceName(name string, fallbackIndex int) string {
 			result += "_"
 		}
 	}
-	
+
 	// Ensure it starts with a letter or underscore
 	if len(result) > 0 && result[0] >= '0' && result[0] <= '9' {
 		result = "_" + result
 	}
-	
+
 	if result == "" {
 		result = fmt.Sprintf("alert_route_%d", fallbackIndex)
 	}
-	
+
 	return strings.ToLower(result)
 }
