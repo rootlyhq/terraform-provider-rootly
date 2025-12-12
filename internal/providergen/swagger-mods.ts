@@ -12,32 +12,39 @@ export const SWAGGER_MODS: ((swagger: T) => T | Promise<T>)[] = [
    *   { $ref: "#/something" }
    */
   function unwrapSingleAllOfDeep<T>(schema: T): T {
-    if (Array.isArray(schema)) {
-      return schema.map(unwrapSingleAllOfDeep) as T;
-    }
+    const isObj = (v: any) => v && typeof v === "object" && !Array.isArray(v);
 
-    if (schema && typeof schema === "object") {
-      const obj: any = schema;
-
-      // If this object *is itself* an allOf with a single entry
-      if (obj.allOf && Array.isArray(obj.allOf)) {
-        if (obj.allOf.length !== 1) {
-          throw new Error(
-            `Not implemented allOf length !== 1: ${JSON.stringify(obj)}`
-          );
+    const merge = (a: any, b: any): any => {
+      if (isObj(a) && isObj(b)) {
+        const o: any = {};
+        for (const k of new Set([...Object.keys(a), ...Object.keys(b)])) {
+          if (k in a && k in b) o[k] = merge(a[k], b[k]);
+          else if (k in b) o[k] = b[k];
+          else o[k] = a[k];
         }
-        return unwrapSingleAllOfDeep(obj.allOf[0]);
+        return o;
+      }
+      return b !== undefined ? b : a;
+    };
+
+    const inner = (node: any): any => {
+      if (Array.isArray(node)) return node.map(inner);
+      if (!isObj(node)) return node;
+
+      // unwrap: allOf with exactly 1 element
+      if (Array.isArray(node.allOf) && node.allOf.length === 1) {
+        const { allOf, ...rest } = node;
+        const unwrapped = inner(allOf[0]);
+        return inner(merge(unwrapped, rest));
       }
 
-      // Otherwise recurse into properties
+      // normal object: recurse into keys
       const out: any = {};
-      for (const key of Object.keys(obj)) {
-        out[key] = unwrapSingleAllOfDeep(obj[key]);
-      }
+      for (const [k, v] of Object.entries(node)) out[k] = inner(v);
       return out;
-    }
+    };
 
-    return schema;
+    return inner(schema);
   },
   // Dereference all $refs
   dereference,

@@ -104,18 +104,6 @@ export interface IRSetNested extends IRBase {
   attributes: IRType[];
 }
 
-export interface IRResource extends IRBase {
-  type: "resource";
-  resourceType: string;
-  listPathIdParam: {
-    name: string;
-    element: IRType;
-  } | null;
-  getHasQueryParams: boolean;
-  idElement: IRString;
-  fields: Record<string, IRType>;
-}
-
 function toIR({
   name,
   computedOptionalRequired,
@@ -159,6 +147,10 @@ function toIR({
       type: "int",
       ...common,
     }))
+    .with({ type: "boolean" }, () => ({
+      type: "bool",
+      ...common,
+    }))
     .with({ type: "array", items: { type: "string" } }, () => ({
       type: "set",
       elementType: "string",
@@ -184,8 +176,12 @@ function toIR({
                 updateSchema,
               }),
               schema: propertySchema,
-              newSchema: newSchema.properties[propertyName],
-              updateSchema: updateSchema.properties[propertyName],
+              newSchema: newSchema
+                ? newSchema.properties[propertyName]
+                : undefined,
+              updateSchema: updateSchema
+                ? updateSchema.properties[propertyName]
+                : undefined,
             });
           }),
         ...common,
@@ -208,10 +204,10 @@ function toComputedOptionalRequired({
   updateSchema: any;
 }): ComputedOptionalRequired {
   const inRead = name in schema.properties;
-  const inCreate = name in newSchema.properties;
-  const inUpdate = name in updateSchema.properties;
-  const reqCreate = newSchema.required?.includes(name);
-  const reqUpdate = updateSchema.required?.includes(name);
+  const inCreate = newSchema && name in newSchema.properties;
+  const inUpdate = updateSchema && name in updateSchema.properties;
+  const reqCreate = newSchema?.required?.includes(name);
+  const reqUpdate = updateSchema?.required?.includes(name);
 
   if (reqCreate || reqUpdate) {
     return "required";
