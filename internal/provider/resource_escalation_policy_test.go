@@ -16,9 +16,6 @@ import (
 func init() {
 	resource.AddTestSweepers("rootly_escalation_policy", &resource.Sweeper{
 		Name: "rootly_escalation_policy",
-		Dependencies: []string{
-			"rootly_alert_route",
-		},
 		F: func(region string) error {
 			ctx := context.Background()
 

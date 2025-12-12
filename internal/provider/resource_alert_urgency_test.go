@@ -20,9 +20,6 @@ import (
 func init() {
 	resource.AddTestSweepers("rootly_alert_urgency", &resource.Sweeper{
 		Name: "rootly_alert_urgency",
-		Dependencies: []string{
-			"rootly_alerts_source",
-		},
 		F: func(region string) error {
 			ctx := context.Background()
 
