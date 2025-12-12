@@ -106,23 +106,38 @@ func (p *Program) parseInputArguments() (*Config, error) {
 	commandLine.Usage = func() {
 		_, _ = fmt.Fprint(p.StdErr, `Migration script's purpose is to help migrate deprecated Rootly resources to newer equivalents.
 It fetches existing resources from the Rootly API and converts them to new resource formats.
-The script writes generated terraform resources to STDOUT in case you want to redirect it to a file.
-Any logs or errors are written to STDERR.
+The script writes generated terraform resources to STDOUT which is usually redirected to a file.
 
-usage: ` + p.Args[0] + ` [-import=<statement|block>] [-api-host=<api_host>] [-api-token=<api_token>] <migration_type>
+USAGE:
+    go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@main [FLAGS] <migration_type>
 
-api-host optional flag specifies the Rootly API host (defaults to https://api.rootly.com or ROOTLY_API_URL env var)
-api-token optional flag specifies the Rootly API token (defaults to ROOTLY_API_TOKEN env var)
-import optional flag determines the output format for import statements. The possible values are:
-	- "statement" will print appropriate terraform import command at the end of generated content (default)
-	- "block" will generate import block at the end of generated content
+FLAGS:
+    -api-host string
+        Rootly API host (defaults to https://api.rootly.com or ROOTLY_API_URL env var)
+    -api-token string
+        Rootly API token (defaults to ROOTLY_API_TOKEN env var)
+    -import string
+        Output format for import statements: "statement" or "block" (default "statement")
+        - "statement": prints terraform import commands
+        - "block": generates import blocks for use with Terraform
 
-migration_type represents the type of migration to perform. Currently supported migrations are:
-	- "alert_routing_rules_to_alert_routes" migrates deprecated alert_routing_rule resources to alert_route resources
+MIGRATION TYPES:
+    alert_routing_rules_to_alert_routes
+        Migrates deprecated alert_routing_rule resources to alert_route resources
 
-example usage:
-	` + p.Args[0] + ` alert_routing_rules_to_alert_routes > ./alert_routes.tf
-	` + p.Args[0] + ` -import=block -api-token=your-token alert_routing_rules_to_alert_routes > ./alert_routes.tf
+EXAMPLES:
+    # Basic usage
+    go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@main alert_routing_rules_to_alert_routes > ./alert_routes.tf
+
+    # With import blocks
+    go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@main -import=block alert_routing_rules_to_alert_routes > ./alert_routes.tf
+
+    # With custom API configuration
+    go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@main -api-host=https://api.rootly.com -api-token=your-token alert_routing_rules_to_alert_routes > ./alert_routes.tf
+
+ENVIRONMENT VARIABLES:
+    ROOTLY_API_TOKEN    Your Rootly API token
+    ROOTLY_API_URL      Custom Rootly API URL (optional, defaults to https://api.rootly.com)
 `)
 	}
 
