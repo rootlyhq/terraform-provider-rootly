@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	program := NewDefaultProgram()
-	exitCode := program.Run()
+	cli := NewDefaultCLI()
+	exitCode := cli.Run()
 	os.Exit(int(exitCode))
 }
