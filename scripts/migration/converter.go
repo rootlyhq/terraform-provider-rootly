@@ -320,9 +320,12 @@ func GenerateImportStatement(importType ImportStatementType, resourceAddress, re
 	return buf.String(), nil
 }
 
-func HandleAlertRoutes(config *Config) (string, error) {
+func HandleAlertRoutingRulesToAlertRoutes(config *Config) (string, error) {
 	client := NewRootlyClient(config.ApiHost, config.ApiToken)
 	
+	// Note: This fetches alert routes (the current/new resource type)
+	// In the future, we might want to fetch alert routing rules and convert them
+	// For now, we fetch existing alert routes to help users import them
 	routes, err := client.FetchAlertRoutes()
 	if err != nil {
 		return "", fmt.Errorf("error fetching alert routes: %w", err)
@@ -366,7 +369,9 @@ func HandleAlertRoutes(config *Config) (string, error) {
 	output.WriteString("# 1. Run 'terraform plan' to verify the import operations\n")
 	output.WriteString("# 2. Run 'terraform apply' to apply the import operations\n")
 	output.WriteString("# 3. Remove the import blocks/statements above from this file\n")
-	output.WriteString("# 4. These resources are now managed by Terraform\n")
+	output.WriteString("# 4. Remove deprecated 'rootly_alert_routing_rule' resources from your Terraform configuration\n")
+	output.WriteString("# 5. Run 'terraform state rm <resource_address>' for each deprecated alert_routing_rule resource\n")
+	output.WriteString("#    Example: terraform state rm rootly_alert_routing_rule.my_rule\n")
 
 	return output.String(), nil
 }

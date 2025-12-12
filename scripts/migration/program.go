@@ -10,21 +10,21 @@ import (
 	"strings"
 )
 
-type ObjectType string
+type MigrationType string
 
 const (
-	ObjectTypeAlertRoutes ObjectType = "alert_routes"
+	MigrationTypeAlertRoutingRulesToAlertRoutes MigrationType = "alert_routing_rules_to_alert_routes"
 )
 
-var AllObjectTypes = []ObjectType{
-	ObjectTypeAlertRoutes,
+var AllMigrationTypes = []MigrationType{
+	MigrationTypeAlertRoutingRulesToAlertRoutes,
 }
 
-func ToObjectType(s string) (ObjectType, error) {
-	if slices.Contains(AllObjectTypes, ObjectType(strings.ToLower(s))) {
-		return ObjectType(strings.ToLower(s)), nil
+func ToMigrationType(s string) (MigrationType, error) {
+	if slices.Contains(AllMigrationTypes, MigrationType(strings.ToLower(s))) {
+		return MigrationType(strings.ToLower(s)), nil
 	}
-	return "", fmt.Errorf("unsupported object type: %s", s)
+	return "", fmt.Errorf("unsupported migration type: %s", s)
 }
 
 type ImportStatementType string
@@ -56,10 +56,10 @@ const (
 )
 
 type Config struct {
-	ObjectType ObjectType
-	ImportFlag ImportStatementType
-	ApiHost    string
-	ApiToken   string
+	MigrationType MigrationType
+	ImportFlag    ImportStatementType
+	ApiHost       string
+	ApiToken      string
 }
 
 type Program struct {
@@ -104,12 +104,12 @@ func (p *Program) parseInputArguments() (*Config, error) {
 	commandLine := flag.NewFlagSet(p.Args[0], flag.ContinueOnError)
 	commandLine.SetOutput(p.StdErr)
 	commandLine.Usage = func() {
-		_, _ = fmt.Fprint(p.StdErr, `Migration script's purpose is to generate terraform resources from existing Rootly objects.
-It fetches alert routes from the Rootly API and converts them to terraform alert route resources.
+		_, _ = fmt.Fprint(p.StdErr, `Migration script's purpose is to help migrate deprecated Rootly resources to newer equivalents.
+It fetches existing resources from the Rootly API and converts them to new resource formats.
 The script writes generated terraform resources to STDOUT in case you want to redirect it to a file.
 Any logs or errors are written to STDERR.
 
-usage: ` + p.Args[0] + ` [-import=<statement|block>] [-api-host=<api_host>] [-api-token=<api_token>] <object_type>
+usage: ` + p.Args[0] + ` [-import=<statement|block>] [-api-host=<api_host>] [-api-token=<api_token>] <migration_type>
 
 api-host optional flag specifies the Rootly API host (defaults to https://api.rootly.com or ROOTLY_API_URL env var)
 api-token optional flag specifies the Rootly API token (defaults to ROOTLY_API_TOKEN env var)
@@ -117,13 +117,12 @@ import optional flag determines the output format for import statements. The pos
 	- "statement" will print appropriate terraform import command at the end of generated content (default)
 	- "block" will generate import block at the end of generated content
 
-object_type represents the type of Rootly object you want to migrate.
-	Currently supported object types are:
-		- "alert_routes" which fetches all alert routes and converts them to terraform resources
+migration_type represents the type of migration to perform. Currently supported migrations are:
+	- "alert_routing_rules_to_alert_routes" migrates deprecated alert_routing_rule resources to alert_route resources
 
 example usage:
-	` + p.Args[0] + ` alert_routes > ./alert_routes.tf
-	` + p.Args[0] + ` -import=block -api-token=your-token alert_routes > ./alert_routes.tf
+	` + p.Args[0] + ` alert_routing_rules_to_alert_routes > ./alert_routes.tf
+	` + p.Args[0] + ` -import=block -api-token=your-token alert_routing_rules_to_alert_routes > ./alert_routes.tf
 `)
 	}
 
@@ -139,11 +138,11 @@ example usage:
 	// positional arguments
 	args := commandLine.Args()
 	if len(args) != 1 {
-		return nil, fmt.Errorf("no object type specified, use -h for help")
+		return nil, fmt.Errorf("no migration type specified, use -h for help")
 	}
-	parsedObjectType, err := ToObjectType(args[0])
+	parsedMigrationType, err := ToMigrationType(args[0])
 	if err != nil {
-		return nil, fmt.Errorf("error parsing object type: %w", err)
+		return nil, fmt.Errorf("error parsing migration type: %w", err)
 	}
 
 	importFlagType, err := ToImportStatementType(*importFlagString)
@@ -156,19 +155,19 @@ example usage:
 	}
 
 	return &Config{
-		ObjectType: parsedObjectType,
-		ImportFlag: importFlagType,
-		ApiHost:    *apiHost,
-		ApiToken:   *apiToken,
+		MigrationType: parsedMigrationType,
+		ImportFlag:    importFlagType,
+		ApiHost:       *apiHost,
+		ApiToken:      *apiToken,
 	}, nil
 }
 
 func (p *Program) generateOutput() (string, error) {
-	switch p.Config.ObjectType {
-	case ObjectTypeAlertRoutes:
-		return HandleAlertRoutes(p.Config)
+	switch p.Config.MigrationType {
+	case MigrationTypeAlertRoutingRulesToAlertRoutes:
+		return HandleAlertRoutingRulesToAlertRoutes(p.Config)
 	default:
-		return "", fmt.Errorf("unsupported object type: %s, run -h to get more information on allowed object types", p.Config.ObjectType)
+		return "", fmt.Errorf("unsupported migration type: %s, run -h to get more information on allowed migration types", p.Config.MigrationType)
 	}
 }
 
