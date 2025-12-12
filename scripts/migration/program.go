@@ -8,40 +8,38 @@ import (
 	"os"
 	"slices"
 	"strings"
-)
 
-type MigrationType string
+	"github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration/migrators"
+)
 
 const (
-	MigrationTypeAlertRoutingRulesToAlertRoutes MigrationType = "alert_routing_rules_to_alert_routes"
+	MigrationTypeAlertRoutingRulesToAlertRoutes migrators.MigrationType = "alert_routing_rules_to_alert_routes"
 )
 
-var AllMigrationTypes = []MigrationType{
+var AllMigrationTypes = []migrators.MigrationType{
 	MigrationTypeAlertRoutingRulesToAlertRoutes,
 }
 
-func ToMigrationType(s string) (MigrationType, error) {
-	if slices.Contains(AllMigrationTypes, MigrationType(strings.ToLower(s))) {
-		return MigrationType(strings.ToLower(s)), nil
+func ToMigrationType(s string) (migrators.MigrationType, error) {
+	if slices.Contains(AllMigrationTypes, migrators.MigrationType(strings.ToLower(s))) {
+		return migrators.MigrationType(strings.ToLower(s)), nil
 	}
 	return "", fmt.Errorf("unsupported migration type: %s", s)
 }
 
-type ImportStatementType string
-
 const (
-	ImportStatementTypeStatement ImportStatementType = "statement"
-	ImportStatementTypeBlock     ImportStatementType = "block"
+	ImportStatementTypeStatement migrators.ImportStatementType = "statement"
+	ImportStatementTypeBlock     migrators.ImportStatementType = "block"
 )
 
-var AllImportStatementTypes = []ImportStatementType{
+var AllImportStatementTypes = []migrators.ImportStatementType{
 	ImportStatementTypeStatement,
 	ImportStatementTypeBlock,
 }
 
-func ToImportStatementType(s string) (ImportStatementType, error) {
-	if slices.Contains(AllImportStatementTypes, ImportStatementType(strings.ToLower(s))) {
-		return ImportStatementType(strings.ToLower(s)), nil
+func ToImportStatementType(s string) (migrators.ImportStatementType, error) {
+	if slices.Contains(AllImportStatementTypes, migrators.ImportStatementType(strings.ToLower(s))) {
+		return migrators.ImportStatementType(strings.ToLower(s)), nil
 	}
 	return "", fmt.Errorf("invalid import statement type: %s", s)
 }
@@ -55,18 +53,11 @@ const (
 	ExitCodeFailedGeneratingTerraformOutput
 )
 
-type Config struct {
-	MigrationType MigrationType
-	ImportFlag    ImportStatementType
-	ApiHost       string
-	ApiToken      string
-}
-
 type Program struct {
 	Args           []string
 	StdOut, StdErr io.Writer
 	StdIn          io.Reader
-	Config         *Config
+	Config         *migrators.Config
 }
 
 func NewDefaultProgram() *Program {
@@ -100,7 +91,7 @@ func (p *Program) Run() ExitCode {
 	return ExitCodeSuccess
 }
 
-func (p *Program) parseInputArguments() (*Config, error) {
+func (p *Program) parseInputArguments() (*migrators.Config, error) {
 	commandLine := flag.NewFlagSet(p.Args[0], flag.ContinueOnError)
 	commandLine.SetOutput(p.StdErr)
 	commandLine.Usage = func() {
@@ -169,7 +160,7 @@ ENVIRONMENT VARIABLES:
 		return nil, fmt.Errorf("api token is required, provide it via -api-token flag or ROOTLY_API_TOKEN environment variable")
 	}
 
-	return &Config{
+	return &migrators.Config{
 		MigrationType: parsedMigrationType,
 		ImportFlag:    importFlagType,
 		ApiHost:       *apiHost,
@@ -180,7 +171,7 @@ ENVIRONMENT VARIABLES:
 func (p *Program) generateOutput() (string, error) {
 	switch p.Config.MigrationType {
 	case MigrationTypeAlertRoutingRulesToAlertRoutes:
-		return HandleAlertRoutingRulesToAlertRoutes(p.Config)
+		return migrators.HandleAlertRoutingRulesToAlertRoutes(p.Config)
 	default:
 		return "", fmt.Errorf("unsupported migration type: %s, run -h to get more information on allowed migration types", p.Config.MigrationType)
 	}

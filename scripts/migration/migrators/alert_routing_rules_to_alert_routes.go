@@ -1,4 +1,4 @@
-package main
+package migrators
 
 import (
 	"bytes"
@@ -10,13 +10,6 @@ import (
 
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 )
-
-// ImportModel represents the data for terraform import statements
-type ImportModel struct {
-	ResourceAddress string
-	Id              string
-	IdEscaped       string
-}
 
 type AlertRouteModel struct {
 	Name            string
@@ -269,46 +262,6 @@ func GenerateTerraformResource(resourceName string, alertRoute AlertRouteModel, 
 	var buf bytes.Buffer
 	if err := tmpl.Execute(&buf, data); err != nil {
 		return "", fmt.Errorf("error executing template: %w", err)
-	}
-
-	return buf.String(), nil
-}
-
-func GenerateImportStatement(importType ImportStatementType, resourceAddress, resourceID string) (string, error) {
-	var templateText string
-
-	switch importType {
-	case ImportStatementTypeStatement:
-		templateText = `# terraform import {{ .ResourceAddress }} '{{ .Id }}'`
-	case ImportStatementTypeBlock:
-		templateText = `import {
-  to = {{ .ResourceAddress }}
-  id = "{{ .IdEscaped }}"
-}`
-	default:
-		return "", fmt.Errorf("unsupported import type: %s", importType)
-	}
-
-	tmpl, err := template.New("import").Parse(templateText)
-	if err != nil {
-		return "", fmt.Errorf("error parsing import template: %w", err)
-	}
-
-	// Escape the ID for block format if needed
-	idEscaped := resourceID
-	if importType == ImportStatementTypeBlock {
-		idEscaped = strings.ReplaceAll(resourceID, `"`, `\"`)
-	}
-
-	data := ImportModel{
-		ResourceAddress: resourceAddress,
-		Id:              resourceID,
-		IdEscaped:       idEscaped,
-	}
-
-	var buf bytes.Buffer
-	if err := tmpl.Execute(&buf, data); err != nil {
-		return "", fmt.Errorf("error executing import template: %w", err)
 	}
 
 	return buf.String(), nil
