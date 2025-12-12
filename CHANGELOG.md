@@ -1,5 +1,11 @@
 # Changelog
 
+## [5.0.0] -- 2025-12-11
+
+### Changed
+
+- Require minimum Terraform version of 1.0+
+
 ## [4.3.13] -- 2025-12-04
 
 ### Changed
