@@ -92,6 +92,7 @@ ${resources
 				"rootly_retrospective_step": resourceRetrospectiveStep(),
 				"rootly_post_mortem_template": resourcePostmortemTemplate(),
 				"rootly_on_call_role": resourceOnCallRole(),
+				"rootly_override_shift": resourceOverrideShift(),
 				"rootly_schedule": resourceSchedule(),
 				"rootly_schedule_rotation": resourceScheduleRotation(),
 				"rootly_secret": resourceSecret(),
