@@ -128,6 +128,25 @@ func TestAccResourceAlertsSource_AlertTemplateAttributesErrorWhenAlertFieldsEnab
 		PreCheck:                 func() { testAccPreCheck(t) },
 		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
+			// Conflicts with alert_source_fields_attributes
+			{
+				Config: testAccResourceAlertsSourceConfig(teamName, alertUrgencyName, alertsSourceName, `
+					source_type = "generic_webhook"
+
+					alert_template_attributes {
+						title = "alert title"
+						description = "alert description"
+						external_url = "https://example.com"
+					}
+
+					alert_source_fields_attributes {
+						alert_field_id = "alert-field-id"
+						template_body = "alert-template-id"
+					}
+				`),
+				ExpectError: regexp.MustCompile(`"alert_source_fields_attributes": conflicts with alert_template_attributes`),
+			},
+			// Alert template attributes cannot be provided when alert fields are enabled at the team level
 			{
 				Config: testAccResourceAlertsSourceConfig(teamName, alertUrgencyName, alertsSourceName, `
 					source_type = "generic_webhook"
