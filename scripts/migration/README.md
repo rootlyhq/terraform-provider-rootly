@@ -18,7 +18,7 @@ Currently supported migration types:
 
 ### `alert_routing_rules_to_alert_routes`
 Migrates from deprecated `rootly_alert_routing_rule` resources to the new `rootly_alert_route` resources. This migration:
-- Fetches all alert routes from your Rootly organization 
+- Fetches all alert routes from your Rootly organization
 - Preserves all rule configurations, conditions, and destinations
 - Maintains team ownership and alert source associations
 - Generates proper Terraform import statements for state management
@@ -73,6 +73,8 @@ go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@master
 
 ## Migration Process
 
+The following steps demonstrate the migration workflow using the `alert_routing_rules_to_alert_routes` migration as an example. The same general process applies to all migration types, with specific resource names and configurations varying by migration.
+
 ### Step 1: Generate Migration Files
 
 Set your API token and run the migration script:
@@ -86,7 +88,7 @@ go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@master
 
 Open and review the generated `alert_routes.tf` file to ensure:
 - All your alert routes were fetched correctly
-- Resource names are appropriate 
+- Resource names are appropriate
 - Rule configurations, conditions, and destinations are preserved
 - Import statements/blocks are present at the bottom
 
@@ -111,7 +113,7 @@ terraform plan
 # Plan shows import operations
 terraform plan
 
-# Apply the import operations  
+# Apply the import operations
 terraform apply
 
 # Verify import success
@@ -154,12 +156,12 @@ resource "rootly_alert_route" "my_alert_route" {
     name          = "My Rule"
     position      = 1
     fallback_rule = false
-    
+
     destinations {
       target_type = "Service"
       target_id   = "service-id-789"
     }
-    
+
     condition_groups {
       position = 0
       conditions {
@@ -183,29 +185,13 @@ resource "rootly_alert_route" "my_alert_route" {
 # 5. Clean up old resources from Terraform state using 'terraform state rm'
 ```
 
-## Conversion Details
-
-For the `alert_routing_rules_to_alert_routes` migration, the script performs:
-
-1. **API Fetching**: Retrieves all alert routes from your Rootly organization using paginated requests
-2. **Resource Migration**: Converts API response to `rootly_alert_route` Terraform resource format  
-3. **Field Mapping**: Maps all fields including:
-   - Basic route properties (name, enabled, alerts_source_ids, owning_team_ids)
-   - Rule details (name, position, fallback_rule status)
-   - Condition groups with positioning
-   - Individual conditions with all property types and values
-   - Destinations with target types and IDs
-4. **Name Sanitization**: Generates valid Terraform resource names from route names
-5. **Import Generation**: Creates appropriate import statements/blocks for Terraform state management
-6. **Instructions**: Includes detailed step-by-step migration instructions
-
 ## Adding New Migrations
 
 The script is designed to be extensible. To add a new migration type:
 
 1. Add a new `MigrationType` constant in `cli.go`
 2. Add the new migration type to `AllMigrationTypes` slice
-3. Add a new case in the `generateOutput()` switch statement  
+3. Add a new case in the `generateOutput()` switch statement
 4. Implement the handler function in `migrators/` directory
 5. Update help text and documentation
 6. Add appropriate API models and Terraform templates
@@ -221,12 +207,12 @@ The script is designed to be extensible. To add a new migration type:
 ### Authentication Error
 Ensure your API token is valid and has sufficient permissions to read alert routing rules.
 
-### Network Issues
-Verify you can reach the Rootly API host. If using a custom host, ensure it's correctly configured.
-
 ### Resource Name Conflicts
 The script sanitizes resource names automatically. Review generated names and adjust if needed.
 
 ## Support
 
-For issues with the migration script, please file a GitHub issue in the terraform-provider-rootly repository.
+For issues with the migration script:
+
+- **GitHub Issues**: File a bug report or feature request in the [terraform-provider-rootly repository](https://github.com/rootlyhq/terraform-provider-rootly/issues)
+- **Customer Support**: For urgent issues or direct assistance, contact Rootly Customer Support for faster response times
