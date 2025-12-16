@@ -159,7 +159,7 @@ func resourceAlertRoute() *schema.Resource {
 							Sensitive:   false,
 							ForceNew:    false,
 							WriteOnly:   false,
-							Description: "Whether this is a fallback rule. Value must be one of true or false",
+							Description: "Whether this is a fallback rule. Must be `true` if `condition_groups` is not specified.",
 						},
 
 						"destinations": &schema.Schema{
@@ -209,7 +209,7 @@ func resourceAlertRoute() *schema.Resource {
 							Sensitive:        false,
 							ForceNew:         false,
 							WriteOnly:        false,
-							Description:      "",
+							Description:      "Must be specified if `fallback_rule` is `false`.",
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
