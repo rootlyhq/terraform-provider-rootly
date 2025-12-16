@@ -346,20 +346,25 @@ func HandleAlertRoutingRulesToAlertRoutes(config *Config) (string, error) {
 		output.WriteString("#\n")
 	}
 
-	output.WriteString("# Instructions:\n")
-	output.WriteString("# 1. Run 'terraform plan' to verify the import operations\n")
-	output.WriteString("#    WARNING: You should ONLY see import operations in the plan - no creates, updates, or deletes\n")
-	output.WriteString("# 2. Run 'terraform apply' to apply the import operations\n")
-
 	if config.ImportFlag == ImportStatementTypeStatement {
+		output.WriteString("# Instructions:\n")
+		output.WriteString("# 1. Run the terraform import commands above to import existing resources into state\n")
+		output.WriteString("# 2. Run 'terraform plan' to verify the resources are properly imported\n")
+		output.WriteString("#    WARNING: You should ONLY see no changes in the plan - no creates, updates, or deletes\n")
 		output.WriteString("# 3. Remove the import statements above from this file once imports are complete\n")
+		output.WriteString("# 4. Run 'terraform state rm <resource_address>' for each deprecated alert_routing_rule resource\n")
+		output.WriteString("#    Example: terraform state rm rootly_alert_routing_rule.my_rule\n")
+		output.WriteString("# 5. Remove deprecated 'rootly_alert_routing_rule' resources from your Terraform configuration\n")
 	} else {
+		output.WriteString("# Instructions:\n")
+		output.WriteString("# 1. Run 'terraform plan' to verify the import operations\n")
+		output.WriteString("#    WARNING: You should ONLY see import operations in the plan - no creates, updates, or deletes\n")
+		output.WriteString("# 2. Run 'terraform apply' to apply the import operations\n")
 		output.WriteString("# 3. Remove the import blocks above from this file once imports are complete\n")
+		output.WriteString("# 4. Run 'terraform state rm <resource_address>' for each deprecated alert_routing_rule resource\n")
+		output.WriteString("#    Example: terraform state rm rootly_alert_routing_rule.my_rule\n")
+		output.WriteString("# 5. Remove deprecated 'rootly_alert_routing_rule' resources from your Terraform configuration\n")
 	}
-
-	output.WriteString("# 4. Run 'terraform state rm <resource_address>' for each deprecated alert_routing_rule resource\n")
-	output.WriteString("#    Example: terraform state rm rootly_alert_routing_rule.my_rule\n")
-	output.WriteString("# 5. Remove deprecated 'rootly_alert_routing_rule' resources from your Terraform configuration\n")
 
 	return output.String(), nil
 }
