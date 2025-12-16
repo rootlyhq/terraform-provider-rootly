@@ -27,7 +27,7 @@ func resourceAlertRoute() *schema.Resource {
 		ValidateRawResourceConfigFuncs: []schema.ValidateRawResourceConfigFunc{
 			func(ctx context.Context, req schema.ValidateResourceConfigFuncRequest, resp *schema.ValidateResourceConfigFuncResponse) {
 				rawRules := req.RawConfig.GetAttr("rules")
-				if rawRules.IsNull() || !rawRules.IsKnown() {
+				if !rawRules.IsKnown() || rawRules.IsNull() {
 					return
 				}
 
@@ -35,11 +35,26 @@ func resourceAlertRoute() *schema.Resource {
 				for i, ruleCty := range rulesCty {
 					fallbackRuleCty := ruleCty.GetAttr("fallback_rule")
 					conditionGroupsCty := ruleCty.GetAttr("condition_groups")
-					if fallbackRuleCty.IsNull() && (conditionGroupsCty.IsNull() || conditionGroupsCty.LengthInt() == 0) {
+					if !fallbackRuleCty.IsKnown() || !conditionGroupsCty.IsKnown() {
+						return
+					}
+					isFallbackRule := !fallbackRuleCty.IsNull() && fallbackRuleCty.True()
+					hasConditionGroups := !conditionGroupsCty.IsNull() && conditionGroupsCty.LengthInt() > 0
+					if !isFallbackRule && !hasConditionGroups {
 						resp.Diagnostics = append(resp.Diagnostics, diag.Diagnostic{
 							Severity: diag.Error,
 							Summary:  "Invalid alert routing rule",
-							Detail:   "At least one of `fallback_rule` or `condition_groups` must be specified",
+							Detail:   "Either `fallback_rule` or `condition_groups` must be specified",
+							AttributePath: cty.Path{
+								cty.GetAttrStep{Name: "name"},
+								cty.IndexStep{Key: cty.NumberIntVal(int64(i))},
+							},
+						})
+					} else if isFallbackRule && hasConditionGroups {
+						resp.Diagnostics = append(resp.Diagnostics, diag.Diagnostic{
+							Severity: diag.Error,
+							Summary:  "Invalid alert routing rule",
+							Detail:   "`fallback_rule` and `condition_groups` cannot be specified at the same time",
 							AttributePath: cty.Path{
 								cty.GetAttrStep{Name: "name"},
 								cty.IndexStep{Key: cty.NumberIntVal(int64(i))},

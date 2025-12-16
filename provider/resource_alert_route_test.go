@@ -114,6 +114,7 @@ func TestAccResourceAlertRoute_Validation(t *testing.T) {
 		},
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
+			// Empty rule, can validate
 			{
 				Config: `
           resource "rootly_alert_route" "test" {
@@ -125,7 +126,100 @@ func TestAccResourceAlertRoute_Validation(t *testing.T) {
             }
           }
         `,
-				ExpectError: regexp.MustCompile("At least one of `fallback_rule` or `condition_groups` must be specified"),
+				ExpectError: regexp.MustCompile("Either `fallback_rule` or `condition_groups` must be specified"),
+			},
+			// Fallback rule, can validate
+			{
+				Config: `
+          resource "rootly_alert_route" "test" {
+            name              = "Test Alert Route"
+            alerts_source_ids = ["alert-source-id"]
+
+            rules {
+              name = "Empty rule"
+              fallback_rule = true
+              condition_groups {
+                position = 1
+              }
+            }
+          }
+        `,
+				ExpectError: regexp.MustCompile("`fallback_rule` and `condition_groups` cannot be specified at the same time"),
+			},
+			// Unknown rules, cannot validate
+			{
+				Config: `
+          resource "terraform_data" "rules" {
+            input = [
+              {
+                name = "Empty rule"
+                condition_groups = [
+                  {
+                    position = 1
+                  }
+                ]
+              },
+              {
+                name = "Fallback rule"
+                fallback_rule = true
+              }
+            ]
+          }
+
+          resource "rootly_alert_route" "test" {
+            name              = "Test Alert Route"
+            alerts_source_ids = ["alert-source-id"]
+
+            dynamic "rules" {
+              for_each = terraform_data.rules.output
+              content {
+                name = rules.value.name
+                fallback_rule = rules.value.fallback_rule
+                dynamic "condition_groups" {
+                  for_each = rules.value.condition_groups
+                  content {
+                    position = condition_groups.value.position
+                  }
+                }
+              }
+            }
+          }
+        `,
+				PlanOnly:           true,
+				ExpectNonEmptyPlan: true,
+			},
+			// Unknown rules, cannot validate
+			{
+				Config: `
+          resource "terraform_data" "name" {
+            input = "Empty rule"
+          }
+
+          resource "terraform_data" "fallback_rule" {
+            input = true
+          }
+
+          resource "terraform_data" "condition_groups" {
+            input = []
+          }
+
+          resource "rootly_alert_route" "test" {
+            name              = "Test Alert Route"
+            alerts_source_ids = ["alert-source-id"]
+
+            rules {
+              name = terraform_data.name.output
+              fallback_rule = terraform_data.fallback_rule.output
+              dynamic "condition_groups" {
+                for_each = terraform_data.condition_groups.output
+                content {
+                }
+              }
+            }
+          }
+        `,
+				PlanOnly:           true,
+				ExpectNonEmptyPlan: true,
 			},
 		},
 	})
