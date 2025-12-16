@@ -296,7 +296,7 @@ func HandleAlertRoutingRulesToAlertRoutes(config *Config) (string, error) {
 		}
 
 		output.WriteString(resourceText)
-		output.WriteString("\n")
+		output.WriteString("\n\n")
 
 		importStmt, err := GenerateImportStatement(config.ImportFlag, resourceAddress, route.ID)
 		if err != nil {
@@ -312,13 +312,26 @@ func HandleAlertRoutingRulesToAlertRoutes(config *Config) (string, error) {
 	}
 
 	output.WriteString("\n")
+
+	if config.ImportFlag == ImportStatementTypeStatement {
+		output.WriteString("# NOTE: If you prefer import blocks over import statements, re-run with -import=block flag\n")
+		output.WriteString("#\n")
+	}
+
 	output.WriteString("# Instructions:\n")
 	output.WriteString("# 1. Run 'terraform plan' to verify the import operations\n")
+	output.WriteString("#    WARNING: You should ONLY see import operations in the plan - no creates, updates, or deletes\n")
 	output.WriteString("# 2. Run 'terraform apply' to apply the import operations\n")
-	output.WriteString("# 3. Remove the import blocks/statements above from this file\n")
-	output.WriteString("# 4. Remove deprecated 'rootly_alert_routing_rule' resources from your Terraform configuration\n")
-	output.WriteString("# 5. Run 'terraform state rm <resource_address>' for each deprecated alert_routing_rule resource\n")
+
+	if config.ImportFlag == ImportStatementTypeStatement {
+		output.WriteString("# 3. Remove the import statements above from this file once imports are complete\n")
+	} else {
+		output.WriteString("# 3. Remove the import blocks above from this file once imports are complete\n")
+	}
+
+	output.WriteString("# 4. Run 'terraform state rm <resource_address>' for each deprecated alert_routing_rule resource\n")
 	output.WriteString("#    Example: terraform state rm rootly_alert_routing_rule.my_rule\n")
+	output.WriteString("# 5. Remove deprecated 'rootly_alert_routing_rule' resources from your Terraform configuration\n")
 
 	return output.String(), nil
 }
