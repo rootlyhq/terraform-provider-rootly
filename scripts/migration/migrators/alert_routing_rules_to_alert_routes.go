@@ -41,6 +41,8 @@ type ConditionModel struct {
 	PropertyFieldValue         string
 	PropertyFieldValues        []string
 	AlertUrgencyIds            []string
+	ConditionableId            string
+	ConditionableType          string
 }
 
 type RootlyClient struct {
@@ -194,6 +196,14 @@ func ConvertAlertRouteToTerraform(route client.AlertRoute) AlertRouteModel {
 											condition.AlertUrgencyIds = convertInterfaceArrayToStringArray(urgencyArray)
 										}
 
+										// Handle conditionable fields
+										if val, ok := condMap["conditionable_id"].(string); ok {
+											condition.ConditionableId = val
+										}
+										if val, ok := condMap["conditionable_type"].(string); ok {
+											condition.ConditionableType = val
+										}
+
 										conditionGroup.Conditions = append(conditionGroup.Conditions, condition)
 									}
 								}
@@ -246,7 +256,9 @@ func GenerateTerraformResource(resourceName string, alertRoute AlertRouteModel, 
 {{ if .PropertyFieldValue }}        property_field_value           = "{{ .PropertyFieldValue }}"
 {{ end }}{{ if .PropertyFieldValues }}        property_field_values          = [{{ range $i, $val := .PropertyFieldValues }}{{ if $i }}, {{ end }}"{{ $val }}"{{ end }}]
 {{ end }}{{ if .AlertUrgencyIds }}        alert_urgency_ids              = [{{ range $i, $id := .AlertUrgencyIds }}{{ if $i }}, {{ end }}"{{ $id }}"{{ end }}]
-{{ end }}      }
+{{ end }}{{ if eq .PropertyFieldType "alert_field" }}{{ if .ConditionableId }}        conditionable_id               = "{{ .ConditionableId }}"
+{{ end }}{{ if .ConditionableType }}        conditionable_type             = "{{ .ConditionableType }}"
+{{ end }}{{ end }}      }
 {{ end }}    }
 {{ end }}  }
 {{ end }}}`
