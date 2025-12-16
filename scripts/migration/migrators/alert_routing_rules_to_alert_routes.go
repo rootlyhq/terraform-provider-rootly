@@ -95,13 +95,6 @@ func (c *RootlyClient) FetchAlertRoutes() ([]client.AlertRoute, error) {
 					Rules           []interface{} `json:"rules"`
 				} `json:"attributes"`
 			} `json:"data"`
-			Meta struct {
-				Pagination struct {
-					CurrentPage int `json:"current_page"`
-					TotalPages  int `json:"total_pages"`
-					TotalCount  int `json:"total_count"`
-				} `json:"pagination"`
-			} `json:"meta"`
 		}
 
 		if err := json.NewDecoder(resp.Body).Decode(&jsonApiResponse); err != nil {
@@ -109,6 +102,10 @@ func (c *RootlyClient) FetchAlertRoutes() ([]client.AlertRoute, error) {
 			return nil, fmt.Errorf("error decoding response: %w", err)
 		}
 		resp.Body.Close()
+
+		if len(jsonApiResponse.Data) == 0 {
+			break
+		}
 
 		for _, item := range jsonApiResponse.Data {
 			route := client.AlertRoute{
@@ -120,10 +117,6 @@ func (c *RootlyClient) FetchAlertRoutes() ([]client.AlertRoute, error) {
 				Rules:           item.Attributes.Rules,
 			}
 			allRoutes = append(allRoutes, route)
-		}
-
-		if len(jsonApiResponse.Data) == 0 || pageNumber >= jsonApiResponse.Meta.Pagination.TotalPages {
-			break
 		}
 
 		pageNumber++
