@@ -64,6 +64,29 @@ codegen:
 	go tool goimports -w provider/*
 	go tool goimports -w client/*
 
+codegen-resource:
+	@if [ -z "$(RESOURCE)" ]; then \
+		echo "Error: RESOURCE parameter is required. Usage: make codegen-resource RESOURCE=service"; \
+		exit 1; \
+	fi
+	curl $(SWAGGER_URL) -o schema/swagger.json
+	node tools/clean-swagger.js schema/swagger.json
+	cd schema && go tool oapi-codegen --config=oapi-config.yml swagger.json
+	yarn run generate schema/swagger.json $(RESOURCE)
+	@RESOURCE_PLURAL=$$(node -e "const inflect = require('./tools/inflect'); console.log(inflect.pluralize('$(RESOURCE)'))"); \
+	go fmt client/$${RESOURCE_PLURAL}.go 2>/dev/null || true; \
+	go fmt provider/resource_$(RESOURCE).go provider/data_source_$(RESOURCE).go 2>/dev/null || go fmt provider/resource_$(RESOURCE).go 2>/dev/null || true; \
+	go tool goimports -w provider/resource_$(RESOURCE).go provider/data_source_$(RESOURCE).go 2>/dev/null || go tool goimports -w provider/resource_$(RESOURCE).go 2>/dev/null || true
+	@echo ""
+	@echo "✅ Code generation complete for $(RESOURCE)"
+	@echo "📝 Files that may have changed:"
+	@RESOURCE_PLURAL=$$(node -e "const inflect = require('./tools/inflect'); console.log(inflect.pluralize('$(RESOURCE)'))"); \
+	echo "   - client/$${RESOURCE_PLURAL}.go"; \
+	echo "   - provider/resource_$(RESOURCE).go"; \
+	echo "   - provider/data_source_$(RESOURCE).go (if exists)"; \
+	echo ""; \
+	echo "💡 Tip: Use 'git add -p' to selectively stage only the changes you want"
+
 # Version management targets
 # These targets manage semantic versioning using git tags
 .PHONY: version-patch version-minor version-major version-show version-next version-help
