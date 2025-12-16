@@ -106,7 +106,7 @@ USAGE:
 
 MIGRATION TYPES:
     alert_routing_rules_to_alert_routes
-        Migrates deprecated rootly_alert_routing_rule resources to rootly_alert_route 
+        Migrates deprecated rootly_alert_routing_rule resources to rootly_alert_route
         resources. Fetches all alert routes from your Rootly organization and generates
         Terraform configurations with import statements.
 
@@ -147,23 +147,24 @@ WORKFLOW:
 `)
 	}
 
-	if len(cli.Args) < 2 {
-		return nil, fmt.Errorf("no migration type specified, use -h for help")
-	}
-
-	parsedMigrationType, err := ToMigrationType(cli.Args[1])
-	if err != nil {
-		return nil, fmt.Errorf("error parsing migration type: %w", err)
-	}
-
 	// flags
 	importFlagString := commandLine.String("import", "statement", "Determines the output format for import statements")
 	apiHost := commandLine.String("api-host", getEnvOrDefault("ROOTLY_API_URL", "https://api.rootly.com"), "Rootly API host")
 	apiToken := commandLine.String("api-token", os.Getenv("ROOTLY_API_TOKEN"), "Rootly API token")
 
-	// Parse flags from position 2 onwards
-	if err := commandLine.Parse(cli.Args[2:]); err != nil {
+	if err := commandLine.Parse(cli.Args[1:]); err != nil {
 		return nil, err
+	}
+
+	args := commandLine.Args()
+	if len(args) != 1 {
+		return nil, fmt.Errorf("no migration type specified, use -h for help")
+	}
+
+	// Parse migration type from positional arguments
+	parsedMigrationType, err := ToMigrationType(args[0])
+	if err != nil {
+		return nil, fmt.Errorf("error parsing migration type: %w", err)
 	}
 
 	importFlagType, err := ToImportStatementType(*importFlagString)
