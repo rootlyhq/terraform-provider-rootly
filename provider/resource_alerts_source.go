@@ -173,7 +173,7 @@ func resourceAlertsSource() *schema.Resource {
 
 			"alert_source_urgency_rules_attributes": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         false,
+				Computed:         true,
 				Required:         false,
 				Optional:         true,
 				Sensitive:        false,
@@ -316,7 +316,7 @@ func resourceAlertsSource() *schema.Resource {
 
 						"field_mappings_attributes": &schema.Schema{
 							Type:             schema.TypeList,
-							Computed:         false,
+							Computed:         true,
 							Required:         false,
 							Optional:         true,
 							Sensitive:        false,
@@ -538,7 +538,7 @@ func resourceAlertsSource() *schema.Resource {
 
 			"alert_source_fields_attributes": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         false,
+				Computed:         true,
 				Required:         false,
 				Optional:         true,
 				Sensitive:        false,

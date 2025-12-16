@@ -82,12 +82,12 @@ func TestAccResourceTeam_UpgradeFromVersion(t *testing.T) {
 						VersionConstraint: "4.3.8",
 					},
 				},
-				Config:            testAccResourceTeam(teamName),
+				Config:            testAccResourceTeamConfig(teamName),
 				ConfigStateChecks: configStateChecks,
 			},
 			{
 				ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
-				Config:                   testAccResourceTeam(teamName),
+				Config:                   testAccResourceTeamConfig(teamName),
 				ConfigStateChecks:        configStateChecks,
 			},
 		},
@@ -108,14 +108,14 @@ func TestAccResourceTeam(t *testing.T) {
 		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceTeam(teamName),
+				Config: testAccResourceTeamConfig(teamName),
 				ConfigStateChecks: append(
 					configStateChecks,
 					statecheck.ExpectKnownValue(resName, tfjsonpath.New("name"), knownvalue.StringExact(teamName)),
 				),
 			},
 			{
-				Config: testAccResourceTeam(teamName + "-updated"),
+				Config: testAccResourceTeamConfig(teamName + "-updated"),
 				ConfigStateChecks: append(
 					configStateChecks,
 					statecheck.ExpectKnownValue(resName, tfjsonpath.New("name"), knownvalue.StringExact(teamName+"-updated")),
@@ -125,7 +125,7 @@ func TestAccResourceTeam(t *testing.T) {
 	})
 }
 
-func testAccResourceTeam(teamName string) string {
+func testAccResourceTeamConfig(teamName string) string {
 	return fmt.Sprintf(`
 resource "rootly_team" "test" {
 	name = "%s"
