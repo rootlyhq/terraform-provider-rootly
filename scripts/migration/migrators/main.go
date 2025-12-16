@@ -22,7 +22,6 @@ type Config struct {
 	ApiToken      string
 }
 
-// ImportModel represents the data for terraform import statements
 type ImportModel struct {
 	ResourceAddress string
 	Id              string
@@ -68,4 +67,3 @@ func GenerateImportStatement(importType ImportStatementType, resourceAddress, re
 
 	return buf.String(), nil
 }
-

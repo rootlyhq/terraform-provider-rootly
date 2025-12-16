@@ -110,7 +110,6 @@ func (c *RootlyClient) FetchAlertRoutes() ([]client.AlertRoute, error) {
 		}
 		resp.Body.Close()
 
-		// Process current page data
 		for _, item := range jsonApiResponse.Data {
 			route := client.AlertRoute{
 				ID:              item.ID,
@@ -123,7 +122,6 @@ func (c *RootlyClient) FetchAlertRoutes() ([]client.AlertRoute, error) {
 			allRoutes = append(allRoutes, route)
 		}
 
-		// Check if we've reached the last page
 		if len(jsonApiResponse.Data) == 0 || pageNumber >= jsonApiResponse.Meta.Pagination.TotalPages {
 			break
 		}
@@ -135,7 +133,6 @@ func (c *RootlyClient) FetchAlertRoutes() ([]client.AlertRoute, error) {
 }
 
 func ConvertAlertRouteToTerraform(route client.AlertRoute) AlertRouteModel {
-	// Convert the alert route from API to terraform format
 	alertRoute := AlertRouteModel{
 		Name:            route.Name,
 		Enabled:         route.Enabled != nil && *route.Enabled,
@@ -144,7 +141,6 @@ func ConvertAlertRouteToTerraform(route client.AlertRoute) AlertRouteModel {
 		Rules:           []AlertRouteRuleModel{},
 	}
 
-	// Convert rules
 	if route.Rules != nil {
 		for _, ruleInterface := range route.Rules {
 			if ruleMap, ok := ruleInterface.(map[string]interface{}); ok {
@@ -153,12 +149,10 @@ func ConvertAlertRouteToTerraform(route client.AlertRoute) AlertRouteModel {
 					ConditionGroups: []ConditionGroupModel{},
 				}
 
-				// Get rule name
 				if name, ok := ruleMap["name"].(string); ok {
 					routeRule.Name = name
 				}
 
-				// Convert destinations
 				if destinations, ok := ruleMap["destinations"].([]interface{}); ok {
 					for _, destInterface := range destinations {
 						if destMap, ok := destInterface.(map[string]interface{}); ok {
@@ -174,7 +168,6 @@ func ConvertAlertRouteToTerraform(route client.AlertRoute) AlertRouteModel {
 					}
 				}
 
-				// Convert condition groups
 				if conditionGroups, ok := ruleMap["condition_groups"].([]interface{}); ok {
 					for _, cgInterface := range conditionGroups {
 						if cgMap, ok := cgInterface.(map[string]interface{}); ok {
@@ -200,12 +193,10 @@ func ConvertAlertRouteToTerraform(route client.AlertRoute) AlertRouteModel {
 											condition.PropertyFieldValue = val
 										}
 
-										// Handle property_field_values array
 										if valArray, ok := condMap["property_field_values"].([]interface{}); ok {
 											condition.PropertyFieldValues = convertInterfaceArrayToStringArray(valArray)
 										}
 
-										// Handle alert_urgency_ids array
 										if urgencyArray, ok := condMap["alert_urgency_ids"].([]interface{}); ok {
 											condition.AlertUrgencyIds = convertInterfaceArrayToStringArray(urgencyArray)
 										}
@@ -293,9 +284,6 @@ func GenerateTerraformResource(resourceName string, alertRoute AlertRouteModel, 
 func HandleAlertRoutingRulesToAlertRoutes(config *Config) (string, error) {
 	client := NewRootlyClient(config.ApiHost, config.ApiToken)
 
-	// Note: This fetches alert routes (the current/new resource type)
-	// In the future, we might want to fetch alert routing rules and convert them
-	// For now, we fetch existing alert routes to help users import them
 	routes, err := client.FetchAlertRoutes()
 	if err != nil {
 		return "", fmt.Errorf("error fetching alert routes: %w", err)
@@ -304,7 +292,6 @@ func HandleAlertRoutingRulesToAlertRoutes(config *Config) (string, error) {
 	var output strings.Builder
 	var importStatements []string
 
-	// Generate resources
 	for i, route := range routes {
 		alertRoute := ConvertAlertRouteToTerraform(route)
 		resourceName := sanitizeResourceName(route.Name, i)
@@ -318,7 +305,6 @@ func HandleAlertRoutingRulesToAlertRoutes(config *Config) (string, error) {
 		output.WriteString(resourceText)
 		output.WriteString("\n")
 
-		// Generate import statement
 		importStmt, err := GenerateImportStatement(config.ImportFlag, resourceAddress, route.ID)
 		if err != nil {
 			return "", fmt.Errorf("error generating import statement for route %s: %w", route.ID, err)
@@ -326,14 +312,12 @@ func HandleAlertRoutingRulesToAlertRoutes(config *Config) (string, error) {
 		importStatements = append(importStatements, importStmt)
 	}
 
-	// Add import statements
 	output.WriteString("\n# Import statements\n")
 	for _, stmt := range importStatements {
 		output.WriteString(stmt)
 		output.WriteString("\n")
 	}
 
-	// Add instructions
 	output.WriteString("\n")
 	output.WriteString("# Instructions:\n")
 	output.WriteString("# 1. Run 'terraform plan' to verify the import operations\n")
@@ -351,7 +335,6 @@ func sanitizeResourceName(name string, fallbackIndex int) string {
 		return fmt.Sprintf("alert_route_%d", fallbackIndex)
 	}
 
-	// Replace invalid characters with underscores
 	result := ""
 	for _, char := range name {
 		if (char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z') || (char >= '0' && char <= '9') || char == '_' {
@@ -361,7 +344,6 @@ func sanitizeResourceName(name string, fallbackIndex int) string {
 		}
 	}
 
-	// Ensure it starts with a letter or underscore
 	if len(result) > 0 && result[0] >= '0' && result[0] <= '9' {
 		result = "_" + result
 	}
