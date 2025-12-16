@@ -1,49 +1,70 @@
 # Rootly Terraform Provider Migration Script
 
-This migration script helps users migrate from deprecated Rootly resources to their newer equivalents. It's designed to be generic and scalable for various migration scenarios.
+This migration script helps users migrate from deprecated Rootly resources to their newer equivalents. It's designed to be generic and extensible for various migration scenarios.
 
 ## Overview
 
-The script:
-1. Fetches existing resources from your Rootly organization via the API
-2. Converts deprecated resources to newer Terraform resource formats
-3. Generates Terraform resource configurations
-4. Provides import statements/blocks to import existing resources into Terraform state
+The migration script automates the process of migrating deprecated Terraform resources to new ones by:
+
+1. **Fetching**: Retrieves existing resources from your Rootly organization via the API using pagination
+2. **Converting**: Transforms deprecated resource structures to new Terraform resource formats
+3. **Generating**: Creates complete Terraform resource configurations with proper syntax
+4. **Importing**: Provides import statements/blocks to bring existing resources under Terraform management
+5. **Instructing**: Includes step-by-step instructions for completing the migration process
 
 ## Supported Migrations
 
 Currently supported migration types:
 
 ### `alert_routing_rules_to_alert_routes`
-Migrates from deprecated `rootly_alert_routing_rule` resources to the new `rootly_alert_route` resources.
+Migrates from deprecated `rootly_alert_routing_rule` resources to the new `rootly_alert_route` resources. This migration:
+- Fetches all alert routes from your Rootly organization 
+- Preserves all rule configurations, conditions, and destinations
+- Maintains team ownership and alert source associations
+- Generates proper Terraform import statements for state management
 
 ## Usage
 
-### Basic Usage
-
+The script follows this command pattern:
 ```bash
-go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@main alert_routing_rules_to_alert_routes > ./alert_routes.tf
+go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@master <migration_type> [FLAGS] > output_file.tf
 ```
 
-### With Import Blocks
+### Basic Usage with Import Commands
 
 ```bash
-go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@main -import=block alert_routing_rules_to_alert_routes > ./alert_routes.tf
+# Set your API token first
+export ROOTLY_API_TOKEN="your-api-token"
+
+# Generate migration file with shell import commands
+go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@master alert_routing_rules_to_alert_routes > alert_routes.tf
+```
+
+### Using Import Blocks (Terraform 1.5+)
+
+```bash
+# Generate migration file with Terraform import blocks
+go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@master alert_routing_rules_to_alert_routes -import=block > alert_routes.tf
 ```
 
 ### With Custom API Configuration
 
 ```bash
-go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@main -api-host=https://api.rootly.com -api-token=your-token alert_routing_rules_to_alert_routes > ./alert_routes.tf
+# Override default API settings
+go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@master alert_routing_rules_to_alert_routes -api-host=https://api.rootly.com -api-token=your-token > alert_routes.tf
 ```
 
 ## Command Line Options
 
-- `migration_type` (required): Specifies which migration to perform. Currently supports:
-  - `alert_routing_rules_to_alert_routes`: Migrate from alert routing rules to alert routes
-- `-import`: Import statement format. Options: `statement` (default) or `block`
-- `-api-host`: Rootly API host (defaults to `https://api.rootly.com` or `ROOTLY_API_URL` env var)
-- `-api-token`: Rootly API token (defaults to `ROOTLY_API_TOKEN` env var)
+**Migration Type** (required, first argument):
+- `alert_routing_rules_to_alert_routes`: Migrate from deprecated alert routing rules to alert routes
+
+**Flags**:
+- `-import`: Import statement format - `statement` (default) or `block`
+  - `statement`: Generates shell commands like `terraform import resource.name id`
+  - `block`: Generates import blocks for use with `terraform plan/apply` workflow
+- `-api-host`: Rootly API host URL (default: `https://api.rootly.com` or `ROOTLY_API_URL` env var)
+- `-api-token`: Rootly API authentication token (required, or use `ROOTLY_API_TOKEN` env var)
 
 ## Environment Variables
 
@@ -54,47 +75,69 @@ go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@main -
 
 ### Step 1: Generate Migration Files
 
-Run the migration script to generate your new `alert_routes.tf` file:
+Set your API token and run the migration script:
 
 ```bash
 export ROOTLY_API_TOKEN="your-api-token"
-go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@main alert_routing_rules_to_alert_routes > ./alert_routes.tf
+go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@master alert_routing_rules_to_alert_routes > alert_routes.tf
 ```
 
 ### Step 2: Review Generated Configuration
 
-Review the generated `alert_routes.tf` file to ensure all your alert routes have been converted correctly.
+Open and review the generated `alert_routes.tf` file to ensure:
+- All your alert routes were fetched correctly
+- Resource names are appropriate 
+- Rule configurations, conditions, and destinations are preserved
+- Import statements/blocks are present at the bottom
 
-### Step 3: Import Resources
+### Step 3: Import Resources into Terraform State
 
-Run terraform plan to verify the import operations:
+The process depends on which import format you used:
 
+#### If using import statements (default):
 ```bash
+# Run the import commands from the generated file
+terraform import rootly_alert_route.my_route 'route-id-123'
+terraform import rootly_alert_route.another_route 'route-id-456'
+# ... (run all import commands from the file)
+
+# Verify resources are imported correctly
 terraform plan
+# Should show "No changes" if imports were successful
 ```
 
-Apply the import operations:
-
+#### If using import blocks (`-import=block`):
 ```bash
+# Plan shows import operations
+terraform plan
+
+# Apply the import operations  
 terraform apply
+
+# Verify import success
+terraform plan
+# Should show "No changes" after imports complete
 ```
 
 ### Step 4: Clean Up Import Statements
 
-Remove the import blocks/statements from your `alert_routes.tf` file as they are no longer needed.
+Remove the import statements or import blocks from your `alert_routes.tf` file as they are no longer needed after the resources are imported.
 
 ### Step 5: Remove Deprecated Resources
 
-1. Remove all deprecated `rootly_alert_routing_rule` resources from your existing Terraform configuration files
-2. Remove the deprecated resources from Terraform state:
+1. **Remove from Terraform state**: Remove all deprecated `rootly_alert_routing_rule` resources from Terraform state:
 
 ```bash
 terraform state rm rootly_alert_routing_rule.my_old_rule
 terraform state rm rootly_alert_routing_rule.another_old_rule
-# ... repeat for each deprecated resource
+# Repeat for each deprecated resource
 ```
 
-The alert routes are now managed by Terraform using the new `rootly_alert_route` resource type.
+2. **Remove from configuration**: Remove all deprecated `rootly_alert_routing_rule` resource blocks from your existing Terraform configuration files.
+
+3. **Final verification**: Run `terraform plan` to ensure no unexpected changes.
+
+Your alert routes are now managed by Terraform using the new `rootly_alert_route` resource type.
 
 ## Example Output
 
@@ -108,7 +151,9 @@ resource "rootly_alert_route" "my_alert_route" {
   owning_team_ids    = ["team-id-456"]
 
   rules {
-    name = "My Rule"
+    name          = "My Rule"
+    position      = 1
+    fallback_rule = false
     
     destinations {
       target_type = "Service"
@@ -116,6 +161,7 @@ resource "rootly_alert_route" "my_alert_route" {
     }
     
     condition_groups {
+      position = 0
       conditions {
         property_field_type            = "attribute"
         property_field_name            = "summary"
@@ -128,27 +174,41 @@ resource "rootly_alert_route" "my_alert_route" {
 
 # Import statements
 # terraform import rootly_alert_route.my_alert_route 'route-id-123'
+
+# Instructions:
+# 1. Run the terraform import commands above to import existing resources into state
+# 2. Run 'terraform plan' to verify the resources are properly imported
+# 3. Remove the import statements above from this file once imports are complete
+# 4. Remove deprecated 'rootly_alert_routing_rule' resources from your configuration
+# 5. Clean up old resources from Terraform state using 'terraform state rm'
 ```
 
 ## Conversion Details
 
 For the `alert_routing_rules_to_alert_routes` migration, the script performs:
 
-1. **Resource Migration**: Converts deprecated `rootly_alert_routing_rule` to new `rootly_alert_route` format
-2. **Rule Preservation**: Preserves all existing rules with their conditions and destinations
-3. **Team Ownership**: Includes owning team IDs if configured
-4. **Naming**: Generates safe Terraform resource names from route names
-5. **Import Support**: Provides import statements to bring existing resources under Terraform management
+1. **API Fetching**: Retrieves all alert routes from your Rootly organization using paginated requests
+2. **Resource Migration**: Converts API response to `rootly_alert_route` Terraform resource format  
+3. **Field Mapping**: Maps all fields including:
+   - Basic route properties (name, enabled, alerts_source_ids, owning_team_ids)
+   - Rule details (name, position, fallback_rule status)
+   - Condition groups with positioning
+   - Individual conditions with all property types and values
+   - Destinations with target types and IDs
+4. **Name Sanitization**: Generates valid Terraform resource names from route names
+5. **Import Generation**: Creates appropriate import statements/blocks for Terraform state management
+6. **Instructions**: Includes detailed step-by-step migration instructions
 
 ## Adding New Migrations
 
 The script is designed to be extensible. To add a new migration type:
 
-1. Add a new `MigrationType` constant in `program.go`
-2. Add the new migration type to `AllMigrationTypes`
-3. Add a new case in the `generateOutput()` switch statement
-4. Implement the handler function in `converter.go`
-5. Update documentation
+1. Add a new `MigrationType` constant in `cli.go`
+2. Add the new migration type to `AllMigrationTypes` slice
+3. Add a new case in the `generateOutput()` switch statement  
+4. Implement the handler function in `migrators/` directory
+5. Update help text and documentation
+6. Add appropriate API models and Terraform templates
 
 ## Requirements
 
