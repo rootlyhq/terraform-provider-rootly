@@ -34,6 +34,7 @@ type Service struct {
 	OwnerGroupIds            []interface{}          `jsonapi:"attr,owner_group_ids,omitempty"`
 	OwnerUserIds             []interface{}          `jsonapi:"attr,owner_user_ids,omitempty"`
 	AlertUrgencyId           string                 `jsonapi:"attr,alert_urgency_id,omitempty"`
+	EscalationPolicyId       string                 `jsonapi:"attr,escalation_policy_id,omitempty"`
 	AlertsEmailEnabled       *bool                  `jsonapi:"attr,alerts_email_enabled,omitempty"`
 	AlertsEmailAddress       string                 `jsonapi:"attr,alerts_email_address,omitempty"`
 	SlackChannels            []interface{}          `jsonapi:"attr,slack_channels,omitempty"`
