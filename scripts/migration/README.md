@@ -4,7 +4,7 @@ This migration script helps users migrate from deprecated Rootly resources to th
 
 ## Overview
 
-This migration script addresses the deprecation of legacy Rootly resources by generating new Terraform configurations that match your existing infrastructure. When you run the script, it connects to your Rootly organization via the API, fetches all resources of the deprecated type, and transforms them into the modern resource format. The output is a complete Terraform file containing resource definitions that exactly mirror your current configuration, along with the necessary import statements to bring those resources under Terraform management without disrupting your existing infrastructure. This approach ensures a seamless migration path where your Rootly resources continue functioning exactly as before, but are now managed through the updated Terraform resource types.
+This migration script is a helper tool designed to assist with migrating from deprecated Rootly resources to their newer equivalents. It is not an end-to-end migration solution. The script connects to your Rootly organization via the API, fetches existing resources of the deprecated type, and generates new Terraform configurations with import statements. However, users are responsible for several manual steps including reviewing the generated configurations, executing the import commands, cleaning up deprecated resources from their existing Terraform state and configuration files, and verifying the migration was successful. The script provides the foundation and initial setup, but completing the migration requires careful manual intervention and cleanup to ensure your infrastructure remains properly managed.
 
 ## Supported Migrations
 
