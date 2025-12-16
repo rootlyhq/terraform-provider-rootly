@@ -7,9 +7,16 @@ import (
 	"net/http"
 	"strings"
 	"text/template"
-
-	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 )
+
+type AlertRoute struct {
+	ID              string
+	Name            string
+	Enabled         *bool
+	AlertsSourceIds []interface{}
+	OwningTeamIds   []interface{}
+	Rules           []interface{}
+}
 
 type AlertRouteModel struct {
 	Name            string
@@ -62,8 +69,8 @@ func NewRootlyClient(apiHost, apiToken string) *RootlyClient {
 	}
 }
 
-func (c *RootlyClient) FetchAlertRoutes() ([]client.AlertRoute, error) {
-	var allRoutes []client.AlertRoute
+func (c *RootlyClient) FetchAlertRoutes() ([]AlertRoute, error) {
+	var allRoutes []AlertRoute
 	pageNumber := 1
 	pageSize := 10
 
@@ -113,7 +120,7 @@ func (c *RootlyClient) FetchAlertRoutes() ([]client.AlertRoute, error) {
 		}
 
 		for _, item := range jsonApiResponse.Data {
-			route := client.AlertRoute{
+			route := AlertRoute{
 				ID:              item.ID,
 				Name:            item.Attributes.Name,
 				Enabled:         &item.Attributes.Enabled,
@@ -130,7 +137,7 @@ func (c *RootlyClient) FetchAlertRoutes() ([]client.AlertRoute, error) {
 	return allRoutes, nil
 }
 
-func ConvertAlertRouteToTerraform(route client.AlertRoute) AlertRouteModel {
+func ConvertAlertRouteToTerraform(route AlertRoute) AlertRouteModel {
 	alertRoute := AlertRouteModel{
 		Name:            route.Name,
 		Enabled:         route.Enabled != nil && *route.Enabled,
