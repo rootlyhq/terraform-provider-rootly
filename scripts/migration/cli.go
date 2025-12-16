@@ -100,7 +100,7 @@ It fetches existing resources from the Rootly API and converts them to new resou
 The script writes generated terraform resources to STDOUT which is usually redirected to a file.
 
 USAGE:
-    go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@main [FLAGS] <migration_type>
+    go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@main <migration_type> [FLAGS]
 
 FLAGS:
     -api-host string
@@ -121,10 +121,10 @@ EXAMPLES:
     go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@main alert_routing_rules_to_alert_routes > ./alert_routes.tf
 
     # With import blocks
-    go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@main -import=block alert_routing_rules_to_alert_routes > ./alert_routes.tf
+    go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@main alert_routing_rules_to_alert_routes -import=block > ./alert_routes.tf
 
     # With custom API configuration
-    go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@main -api-host=https://api.rootly.com -api-token=your-token alert_routing_rules_to_alert_routes > ./alert_routes.tf
+    go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@main alert_routing_rules_to_alert_routes -api-host=https://api.rootly.com -api-token=your-token > ./alert_routes.tf
 
 ENVIRONMENT VARIABLES:
     ROOTLY_API_TOKEN    Your Rootly API token
@@ -132,23 +132,23 @@ ENVIRONMENT VARIABLES:
 `)
 	}
 
+	if len(cli.Args) < 2 {
+		return nil, fmt.Errorf("no migration type specified, use -h for help")
+	}
+
+	parsedMigrationType, err := ToMigrationType(cli.Args[1])
+	if err != nil {
+		return nil, fmt.Errorf("error parsing migration type: %w", err)
+	}
+
 	// flags
 	importFlagString := commandLine.String("import", "statement", "Determines the output format for import statements")
 	apiHost := commandLine.String("api-host", getEnvOrDefault("ROOTLY_API_URL", "https://api.rootly.com"), "Rootly API host")
 	apiToken := commandLine.String("api-token", os.Getenv("ROOTLY_API_TOKEN"), "Rootly API token")
 
-	if err := commandLine.Parse(cli.Args[1:]); err != nil {
+	// Parse flags from position 2 onwards
+	if err := commandLine.Parse(cli.Args[2:]); err != nil {
 		return nil, err
-	}
-
-	// positional arguments
-	args := commandLine.Args()
-	if len(args) != 1 {
-		return nil, fmt.Errorf("no migration type specified, use -h for help")
-	}
-	parsedMigrationType, err := ToMigrationType(args[0])
-	if err != nil {
-		return nil, fmt.Errorf("error parsing migration type: %w", err)
 	}
 
 	importFlagType, err := ToImportStatementType(*importFlagString)
