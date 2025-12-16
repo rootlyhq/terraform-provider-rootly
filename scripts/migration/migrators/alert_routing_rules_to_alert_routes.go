@@ -21,6 +21,8 @@ type AlertRouteModel struct {
 
 type AlertRouteRuleModel struct {
 	Name            string
+	Position        int
+	FallbackRule    bool
 	Destinations    []DestinationModel
 	ConditionGroups []ConditionGroupModel
 }
@@ -31,6 +33,7 @@ type DestinationModel struct {
 }
 
 type ConditionGroupModel struct {
+	Position   int
 	Conditions []ConditionModel
 }
 
@@ -147,6 +150,12 @@ func ConvertAlertRouteToTerraform(route client.AlertRoute) AlertRouteModel {
 				if name, ok := ruleMap["name"].(string); ok {
 					routeRule.Name = name
 				}
+				if position, ok := ruleMap["position"].(float64); ok {
+					routeRule.Position = int(position)
+				}
+				if fallbackRule, ok := ruleMap["fallback_rule"].(bool); ok {
+					routeRule.FallbackRule = fallbackRule
+				}
 
 				if destinations, ok := ruleMap["destinations"].([]interface{}); ok {
 					for _, destInterface := range destinations {
@@ -168,6 +177,10 @@ func ConvertAlertRouteToTerraform(route client.AlertRoute) AlertRouteModel {
 						if cgMap, ok := cgInterface.(map[string]interface{}); ok {
 							conditionGroup := ConditionGroupModel{
 								Conditions: []ConditionModel{},
+							}
+
+							if position, ok := cgMap["position"].(float64); ok {
+								conditionGroup.Position = int(position)
 							}
 
 							if conditions, ok := cgMap["conditions"].([]interface{}); ok {
@@ -240,7 +253,9 @@ func GenerateTerraformResource(resourceName string, alertRoute AlertRouteModel, 
 {{ if .AlertRoute.OwningTeamIds }}  owning_team_ids    = [{{ range $i, $id := .AlertRoute.OwningTeamIds }}{{ if $i }}, {{ end }}"{{ $id }}"{{ end }}]
 {{ end }}
 {{ range .AlertRoute.Rules }}  rules {
-    name = "{{ .Name }}"
+    name          = "{{ .Name }}"
+    position      = {{ .Position }}
+    fallback_rule = {{ .FallbackRule }}
 {{ range .Destinations }}
     destinations {
       target_type = "{{ .TargetType }}"
@@ -249,6 +264,7 @@ func GenerateTerraformResource(resourceName string, alertRoute AlertRouteModel, 
 {{ end }}
 {{ range .ConditionGroups }}
     condition_groups {
+      position = {{ .Position }}
 {{ range .Conditions }}      conditions {
         property_field_type            = "{{ .PropertyFieldType }}"
         property_field_name            = "{{ .PropertyFieldName }}"
