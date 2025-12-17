@@ -36,6 +36,7 @@ resource "rootly_team" "test" {
 
 resource "rootly_alert_urgency" "test" {
   name = "%s"
+  description = "Test alert urgency"
   position = 1
 }
 
