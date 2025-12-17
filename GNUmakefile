@@ -116,15 +116,15 @@ version-help:
 .PHONY: release-patch release-minor release-major
 
 release-patch: version-patch
-	@echo "✅ Tag v$$(scripts/bump-version.sh show patch) pushed"
+	@echo "✅ Tag $$(git describe --tags --abbrev=0) pushed"
 	@echo "🚀 CI will automatically build and publish the release"
 
 release-minor: version-minor
-	@echo "✅ Tag v$$(scripts/bump-version.sh show minor) pushed" 
+	@echo "✅ Tag $$(git describe --tags --abbrev=0) pushed"
 	@echo "🚀 CI will automatically build and publish the release"
 
 release-major: version-major
-	@echo "✅ Tag v$$(scripts/bump-version.sh show major) pushed"
+	@echo "✅ Tag $$(git describe --tags --abbrev=0) pushed"
 	@echo "🚀 CI will automatically build and publish the release"
 
 # Help target to show available version commands
