@@ -1,13 +1,17 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceAlertRoute(t *testing.T) {
 	resName := "rootly_alert_route.test"
+	escalationPolicyName := acctest.RandomWithPrefix("tf-escalation-policy")
+	alertUrgencyName := acctest.RandomWithPrefix("tf-alert-urgency")
 
 	resource.UnitTest(t, resource.TestCase{
 		IsUnitTest: false,
@@ -17,7 +21,7 @@ func TestAccResourceAlertRoute(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceAlertRouteCreate,
+				Config: testAccResourceAlertRouteConfig(escalationPolicyName, alertUrgencyName, "Test Alert Route", "High Priority Rule", "is_one_of", "$.severity", "critical"),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr(resName, "name", "Test Alert Route"),
 					resource.TestCheckResourceAttr(resName, "enabled", "true"),
@@ -29,7 +33,7 @@ func TestAccResourceAlertRoute(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccResourceAlertRouteUpdate,
+				Config: testAccResourceAlertRouteConfig(escalationPolicyName, alertUrgencyName, "Updated Alert Route", "Updated High Priority Rule", "contains", "$.title", "error"),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr(resName, "name", "Updated Alert Route"),
 					resource.TestCheckResourceAttr(resName, "enabled", "true"),
@@ -51,6 +55,7 @@ func TestAccResourceAlertRoute(t *testing.T) {
 
 func TestAccResourceAlertRouteWithMultipleTeams(t *testing.T) {
 	resName := "rootly_alert_route.multi_team"
+	alertUrgencyName := acctest.RandomWithPrefix("tf-alert-urgency")
 
 	resource.UnitTest(t, resource.TestCase{
 		IsUnitTest: false,
@@ -60,7 +65,7 @@ func TestAccResourceAlertRouteWithMultipleTeams(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceAlertRouteWithMultipleTeams,
+				Config: testAccResourceAlertRouteWithMultipleTeamsConfig(alertUrgencyName),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr(resName, "name", "Multi Team Alert Route"),
 					resource.TestCheckResourceAttr(resName, "enabled", "true"),
@@ -78,6 +83,7 @@ func TestAccResourceAlertRouteWithMultipleTeams(t *testing.T) {
 
 func TestAccResourceAlertRouteDisabled(t *testing.T) {
 	resName := "rootly_alert_route.disabled"
+	alertUrgencyName := acctest.RandomWithPrefix("tf-alert-urgency")
 
 	resource.UnitTest(t, resource.TestCase{
 		IsUnitTest: false,
@@ -87,7 +93,7 @@ func TestAccResourceAlertRouteDisabled(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceAlertRouteDisabled,
+				Config: testAccResourceAlertRouteDisabledConfig(alertUrgencyName),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr(resName, "name", "Disabled Alert Route"),
 					resource.TestCheckResourceAttr(resName, "enabled", "false"),
@@ -105,6 +111,9 @@ func TestAccResourceAlertRouteDisabled(t *testing.T) {
 
 func TestAccResourceAlertRouteWithMultipleRules(t *testing.T) {
 	resName := "rootly_alert_route.multi_rules"
+	criticalEPName := acctest.RandomWithPrefix("tf-critical-escalation")
+	warningEPName := acctest.RandomWithPrefix("tf-warning-escalation")
+	alertUrgencyName := acctest.RandomWithPrefix("tf-alert-urgency")
 
 	resource.UnitTest(t, resource.TestCase{
 		IsUnitTest: false,
@@ -114,7 +123,7 @@ func TestAccResourceAlertRouteWithMultipleRules(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceAlertRouteWithMultipleRules,
+				Config: testAccResourceAlertRouteWithMultipleRulesConfig(criticalEPName, warningEPName, alertUrgencyName),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr(resName, "name", "Multi Rules Alert Route"),
 					resource.TestCheckResourceAttr(resName, "enabled", "true"),
@@ -137,6 +146,8 @@ func TestAccResourceAlertRouteWithMultipleRules(t *testing.T) {
 
 func TestAccResourceAlertRouteRulesUpdate(t *testing.T) {
 	resName := "rootly_alert_route.rules_update"
+	escalationPolicyName := acctest.RandomWithPrefix("tf-escalation-policy")
+	alertUrgencyName := acctest.RandomWithPrefix("tf-alert-urgency")
 
 	resource.UnitTest(t, resource.TestCase{
 		IsUnitTest: false,
@@ -146,7 +157,7 @@ func TestAccResourceAlertRouteRulesUpdate(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceAlertRouteRulesUpdateBefore,
+				Config: testAccResourceAlertRouteRulesUpdateBeforeConfig(escalationPolicyName, alertUrgencyName),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr(resName, "name", "Rules Update Test"),
 					resource.TestCheckResourceAttr(resName, "rules.#", "1"),
@@ -154,7 +165,7 @@ func TestAccResourceAlertRouteRulesUpdate(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccResourceAlertRouteRulesUpdateAfter,
+				Config: testAccResourceAlertRouteRulesUpdateAfterConfig(escalationPolicyName, alertUrgencyName),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr(resName, "name", "Rules Update Test"),
 					resource.TestCheckResourceAttr(resName, "rules.#", "2"),
@@ -171,19 +182,36 @@ func TestAccResourceAlertRouteRulesUpdate(t *testing.T) {
 	})
 }
 
-const testAccResourceAlertRouteCreate = `
+// Helper function to generate the basic alert route config with a single rule
+func testAccResourceAlertRouteConfig(escalationPolicyName, alertUrgencyName, routeName, ruleName, conditionType, conditionField, conditionValue string) string {
+	var conditionBlock string
+	if conditionType == "is_one_of" {
+		conditionBlock = fmt.Sprintf(`
+        property_field_condition_type = "%s"
+        property_field_name = "%s"
+        property_field_type = "payload"
+        property_field_values = ["%s"]`, conditionType, conditionField, conditionValue)
+	} else {
+		conditionBlock = fmt.Sprintf(`
+        property_field_condition_type = "%s"
+        property_field_name = "%s"
+        property_field_type = "payload"
+        property_field_value = "%s"`, conditionType, conditionField, conditionValue)
+	}
+
+	return fmt.Sprintf(`
 resource "rootly_team" "test" {
   name = "Test Team"
   description = "Test team for alert routing"
 }
 
 resource "rootly_escalation_policy" "production_ep" {
-  name      = "Production Escalation"
+  name      = "%s"
   group_ids = [rootly_team.test.id]
 }
 
 resource "rootly_alert_urgency" "test" {
-  name = "Test Alert Urgency"
+  name = "%s"
   description = "Test urgency for alerts"
   position = 1
 }
@@ -231,13 +259,13 @@ resource "rootly_alerts_source" "test" {
 }
 
 resource "rootly_alert_route" "test" {
-  name = "Test Alert Route"
+  name = "%s"
   enabled = true
   alerts_source_ids = [rootly_alerts_source.test.id]
   owning_team_ids = [rootly_team.test.id]
 
   rules {
-    name = "High Priority Rule"
+    name = "%s"
     position = 1
     fallback_rule = false
 
@@ -250,106 +278,16 @@ resource "rootly_alert_route" "test" {
       position = 1
 
       conditions {
-        property_field_condition_type = "is_one_of"
-        property_field_name = "$.severity"
-        property_field_type = "payload"
-        property_field_values = ["critical"]
+        %s
       }
     }
   }
 }
-`
-
-const testAccResourceAlertRouteUpdate = `
-resource "rootly_team" "test" {
-  name = "Test Team"
-  description = "Test team for alert routing"
+`, escalationPolicyName, alertUrgencyName, routeName, ruleName, conditionBlock)
 }
 
-resource "rootly_escalation_policy" "production_ep" {
-  name      = "Production Escalation"
-  group_ids = [rootly_team.test.id]
-}
-
-resource "rootly_alert_urgency" "test" {
-  name = "Test Alert Urgency"
-  description = "Test urgency for alerts"
-  position = 1
-}
-
-data "rootly_alert_field" "title_field" {
-  kind = "title"
-}
-
-data "rootly_alert_field" "description_field" {
-  kind = "description"
-}
-
-data "rootly_alert_field" "source_link_field" {
-  kind = "external_url"
-}
-
-resource "rootly_alerts_source" "test" {
-  name = "Test Alerts Source"
-  source_type = "generic_webhook"
-  owner_group_ids = [rootly_team.test.id]
-
-  alert_source_fields_attributes {
-    alert_field_id = data.rootly_alert_field.title_field.id
-  }
-
-  alert_source_fields_attributes {
-    alert_field_id = data.rootly_alert_field.description_field.id
-  }
-
-  alert_source_fields_attributes {
-    alert_field_id = data.rootly_alert_field.source_link_field.id
-  }
-
-  alert_source_urgency_rules_attributes {
-    alert_urgency_id = rootly_alert_urgency.test.id
-    json_path = "severity"
-    operator = "is"
-    value = "critical"
-  }
-
-  sourceable_attributes {
-    auto_resolve = false
-    resolve_state = "$.resolved"
-  }
-}
-
-resource "rootly_alert_route" "test" {
-  name = "Updated Alert Route"
-  enabled = true
-  alerts_source_ids = [rootly_alerts_source.test.id]
-  owning_team_ids = [rootly_team.test.id]
-
-  rules {
-    name = "Updated High Priority Rule"
-    position = 1
-    fallback_rule = false
-
-    destinations {
-      target_type = "EscalationPolicy"
-      target_id = rootly_escalation_policy.production_ep.id
-    }
-
-    condition_groups {
-      position = 1
-
-      conditions {
-        property_field_condition_type = "contains"
-        property_field_name = "$.title"
-        property_field_type = "payload"
-        property_field_value = "error"
-      }
-    }
-  }
-}
-`
-
-const testAccResourceAlertRouteWithMultipleTeams = `
+func testAccResourceAlertRouteWithMultipleTeamsConfig(alertUrgencyName string) string {
+	return fmt.Sprintf(`
 resource "rootly_team" "test_primary" {
   name = "Primary Team"
   description = "Primary team for alerts"
@@ -361,7 +299,7 @@ resource "rootly_team" "test_secondary" {
 }
 
 resource "rootly_alert_urgency" "test" {
-  name = "Test Alert Urgency"
+  name = "%s"
   description = "Test urgency for alerts"
   position = 1
 }
@@ -414,16 +352,18 @@ resource "rootly_alert_route" "multi_team" {
   alerts_source_ids = [rootly_alerts_source.test.id]
   owning_team_ids = [rootly_team.test_primary.id, rootly_team.test_secondary.id]
 }
-`
+`, alertUrgencyName)
+}
 
-const testAccResourceAlertRouteDisabled = `
+func testAccResourceAlertRouteDisabledConfig(alertUrgencyName string) string {
+	return fmt.Sprintf(`
 resource "rootly_team" "test" {
   name = "Test Team"
   description = "Test team for alert routing"
 }
 
 resource "rootly_alert_urgency" "test" {
-  name = "Test Alert Urgency"
+  name = "%s"
   description = "Test urgency for alerts"
   position = 1
 }
@@ -476,26 +416,28 @@ resource "rootly_alert_route" "disabled" {
   alerts_source_ids = [rootly_alerts_source.test.id]
   owning_team_ids = [rootly_team.test.id]
 }
-`
+`, alertUrgencyName)
+}
 
-const testAccResourceAlertRouteWithMultipleRules = `
+func testAccResourceAlertRouteWithMultipleRulesConfig(criticalEPName, warningEPName, alertUrgencyName string) string {
+	return fmt.Sprintf(`
 resource "rootly_team" "test" {
   name = "Test Team"
   description = "Test team for alert routing"
 }
 
 resource "rootly_escalation_policy" "critical_ep" {
-  name      = "Critical Escalation"
+  name      = "%s"
   group_ids = [rootly_team.test.id]
 }
 
 resource "rootly_escalation_policy" "warning_ep" {
-  name      = "Warning Escalation"
+  name      = "%s"
   group_ids = [rootly_team.test.id]
 }
 
 resource "rootly_alert_urgency" "test" {
-  name = "Test Alert Urgency"
+  name = "%s"
   description = "Test urgency for alerts"
   position = 1
 }
@@ -602,21 +544,23 @@ resource "rootly_alert_route" "multi_rules" {
     }
   }
 }
-`
+`, criticalEPName, warningEPName, alertUrgencyName)
+}
 
-const testAccResourceAlertRouteRulesUpdateBefore = `
+func testAccResourceAlertRouteRulesUpdateBeforeConfig(escalationPolicyName, alertUrgencyName string) string {
+	return fmt.Sprintf(`
 resource "rootly_team" "test" {
   name = "Test Team"
   description = "Test team for alert routing"
 }
 
 resource "rootly_escalation_policy" "production_ep" {
-  name      = "Production Escalation"
+  name      = "%s"
   group_ids = [rootly_team.test.id]
 }
 
 resource "rootly_alert_urgency" "test" {
-  name = "Test Alert Urgency"
+  name = "%s"
   description = "Test urgency for alerts"
   position = 1
 }
@@ -691,21 +635,23 @@ resource "rootly_alert_route" "rules_update" {
     }
   }
 }
-`
+`, escalationPolicyName, alertUrgencyName)
+}
 
-const testAccResourceAlertRouteRulesUpdateAfter = `
+func testAccResourceAlertRouteRulesUpdateAfterConfig(escalationPolicyName, alertUrgencyName string) string {
+	return fmt.Sprintf(`
 resource "rootly_team" "test" {
   name = "Test Team"
   description = "Test team for alert routing"
 }
 
 resource "rootly_escalation_policy" "production_ep" {
-  name      = "Production Escalation"
+  name      = "%s"
   group_ids = [rootly_team.test.id]
 }
 
 resource "rootly_alert_urgency" "test" {
-  name = "Test Alert Urgency"
+  name = "%s"
   description = "Test urgency for alerts"
   position = 1
 }
@@ -802,4 +748,5 @@ resource "rootly_alert_route" "rules_update" {
     }
   }
 }
-`
+`, escalationPolicyName, alertUrgencyName)
+}
