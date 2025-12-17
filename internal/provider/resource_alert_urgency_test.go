@@ -76,7 +76,7 @@ func TestAccResourceAlertUrgency(t *testing.T) {
 		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceAlertUrgency(alertUrgencyName, "description"),
+				Config: testAccResourceAlertUrgencyConfig(alertUrgencyName, "description"),
 				ConfigStateChecks: append(
 					configStateChecks,
 					statecheck.ExpectKnownValue(resName, tfjsonpath.New("name"), knownvalue.StringExact(alertUrgencyName)),
@@ -84,7 +84,7 @@ func TestAccResourceAlertUrgency(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccResourceAlertUrgency(alertUrgencyName+"-updated", "updated description"),
+				Config: testAccResourceAlertUrgencyConfig(alertUrgencyName+"-updated", "updated description"),
 				ConfigStateChecks: append(
 					configStateChecks,
 					statecheck.ExpectKnownValue(resName, tfjsonpath.New("name"), knownvalue.StringExact(alertUrgencyName+"-updated")),
@@ -95,7 +95,7 @@ func TestAccResourceAlertUrgency(t *testing.T) {
 	})
 }
 
-func testAccResourceAlertUrgency(alertUrgencyName, alertUrgencyDescription string) string {
+func testAccResourceAlertUrgencyConfig(alertUrgencyName, alertUrgencyDescription string) string {
 	return fmt.Sprintf(`
 resource "rootly_alert_urgency" "test" {
 	name = "%s"

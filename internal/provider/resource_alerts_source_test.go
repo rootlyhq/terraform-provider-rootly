@@ -5,9 +5,14 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"regexp"
 	"strings"
+	"testing"
 
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
+	"github.com/hashicorp/terraform-plugin-testing/knownvalue"
+	"github.com/hashicorp/terraform-plugin-testing/statecheck"
+	"github.com/hashicorp/terraform-plugin-testing/tfjsonpath"
 	"github.com/jianyuan/go-utils/ptr"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/acctest"
 	rootly "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
@@ -56,4 +61,117 @@ func init() {
 			return nil
 		},
 	})
+}
+
+func TestAccResourceAlertsSource(t *testing.T) {
+	resName := "rootly_alerts_source.test"
+	teamName := acctest.RandomWithPrefix("tf-team")
+	alertUrgencyName := acctest.RandomWithPrefix("tf-alert-urgency")
+	alertsSourceName := acctest.RandomWithPrefix("tf-alerts-source")
+
+	configStateChecks := []statecheck.StateCheck{
+		statecheck.ExpectKnownValue(resName, tfjsonpath.New("id"), knownvalue.NotNull()),
+	}
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceAlertsSourceConfig(teamName, alertUrgencyName, alertsSourceName, `
+					source_type = "generic_webhook"
+
+					deduplicate_alerts_by_key = true
+					deduplication_key_path = "$.id"
+
+					alert_source_urgency_rules_attributes {
+						alert_urgency_id = rootly_alert_urgency.test.id
+						json_path = "test"
+						operator = "is"
+						value = "P1"
+					}
+
+					sourceable_attributes {
+						auto_resolve  = false
+						resolve_state = "$.status"
+					}
+				`),
+				ConfigStateChecks: append(
+					configStateChecks,
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("name"), knownvalue.StringExact(alertsSourceName)),
+				),
+			},
+			{
+				Config: testAccResourceAlertsSourceConfig(teamName, alertUrgencyName, alertsSourceName+"-updated", `
+					source_type = "generic_webhook"
+				`),
+				ConfigStateChecks: append(
+					configStateChecks,
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("name"), knownvalue.StringExact(alertsSourceName+"-updated")),
+				),
+			},
+			{
+				ResourceName:      resName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
+	})
+}
+
+func TestAccResourceAlertsSource_AlertTemplateAttributesErrorWhenAlertFieldsEnabled(t *testing.T) {
+	teamName := acctest.RandomWithPrefix("tf-team")
+	alertUrgencyName := acctest.RandomWithPrefix("tf-alert-urgency")
+	alertsSourceName := acctest.RandomWithPrefix("tf-alerts-source")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			// Conflicts with alert_source_fields_attributes
+			{
+				Config: testAccResourceAlertsSourceConfig(teamName, alertUrgencyName, alertsSourceName, `
+					source_type = "generic_webhook"
+
+					alert_template_attributes {
+						title = "alert title"
+						description = "alert description"
+						external_url = "https://example.com"
+					}
+
+					alert_source_fields_attributes {
+						alert_field_id = "alert-field-id"
+						template_body = "alert-template-id"
+					}
+				`),
+				ExpectError: regexp.MustCompile(`"alert_source_fields_attributes": conflicts with alert_template_attributes`),
+			},
+			// Alert template attributes cannot be provided when alert fields are enabled at the team level
+			{
+				Config: testAccResourceAlertsSourceConfig(teamName, alertUrgencyName, alertsSourceName, `
+					source_type = "generic_webhook"
+
+					alert_template_attributes {
+						title = "alert title"
+						description = "alert description"
+						external_url = "https://example.com"
+					}
+				`),
+				ExpectError: regexp.MustCompile("Alert template attributes cannot be provided when alert fields are enabled"),
+			},
+		},
+	})
+}
+
+func testAccResourceAlertsSourceConfig(teamName, alertUrgencyName, alertsSourceName, extra string) string {
+	return testAccResourceTeamConfig(teamName) + testAccResourceAlertUrgencyConfig(alertUrgencyName, alertUrgencyName+" description") + fmt.Sprintf(`
+resource "rootly_alerts_source" "test" {
+	depends_on = [rootly_alert_urgency.test]
+
+	name            = "%s"
+	owner_group_ids = [rootly_team.test.id]
+
+	%s
+}
+`, alertsSourceName, extra)
 }
