@@ -37,9 +37,12 @@ description: |-
 <a id="nestedblock--destination"></a>
 ### Nested Schema for `destination`
 
-Optional:
+Required:
 
 - `target_id` (String) The ID of the target
+
+Optional:
+
 - `target_type` (String) The type of the target. Value must be one of `Service`, `Group`, `EscalationPolicy`.
 
 

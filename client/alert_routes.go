@@ -3,7 +3,10 @@
 package client
 
 import (
+	"encoding/json"
 	"fmt"
+	"net/http"
+	"net/url"
 	"reflect"
 
 	"github.com/google/jsonapi"
@@ -16,6 +19,8 @@ type AlertRoute struct {
 	Enabled         *bool         `jsonapi:"attr,enabled,omitempty"`
 	AlertsSourceIds []interface{} `jsonapi:"attr,alerts_source_ids,omitempty"`
 	OwningTeamIds   []interface{} `jsonapi:"attr,owning_team_ids,omitempty"`
+	Rules           []interface{} `jsonapi:"attr,rules,omitempty"`
+	RequestId       string        `jsonapi:"attr,request_id,omitempty"`
 }
 
 func (c *Client) ListAlertRoutes(params *rootlygo.ListAlertRoutesParams) ([]interface{}, error) {
@@ -118,4 +123,42 @@ func (c *Client) DeleteAlertRoute(id string) error {
 	}
 
 	return nil
+}
+
+type AsyncRuleCreationStatus struct {
+	Status string `json:"status"`
+	Error  string `json:"error,omitempty"`
+}
+
+func (c *Client) GetAsyncRuleCreationStatus(alertRouteID, requestId string) (*AsyncRuleCreationStatus, error) {
+	endpoint := fmt.Sprintf("v1/alert_routes/%s/async_rule_creation_status/%s", alertRouteID, requestId)
+
+	baseURL, err := url.Parse(c.Rootly.Server)
+	if err != nil {
+		return nil, fmt.Errorf("Error parsing server URL: %w", err)
+	}
+
+	fullURL, err := url.JoinPath(baseURL.String(), endpoint)
+	if err != nil {
+		return nil, fmt.Errorf("Error joining URL path: %w", err)
+	}
+
+	req, err := http.NewRequest("GET", fullURL, nil)
+	if err != nil {
+		return nil, fmt.Errorf("Error building request: %w", err)
+	}
+
+	resp, err := c.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("Error getting status of asynchronous rule creation: %w", err)
+	}
+	defer resp.Body.Close()
+
+	var status AsyncRuleCreationStatus
+	err = json.NewDecoder(resp.Body).Decode(&status)
+	if err != nil {
+		return nil, fmt.Errorf("Error unmarshaling asynchronous rule creation status: %w", err)
+	}
+
+	return &status, nil
 }

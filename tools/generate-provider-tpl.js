@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/meta"
+	goversion "github.com/hashicorp/go-version"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 )
 
@@ -33,6 +34,7 @@ func init() {
 func New(version string) func() *schema.Provider {
 	return func() *schema.Provider {
 		p := &schema.Provider{
+			TerraformVersion: "1.0",
 			Schema: map[string]*schema.Schema {
 				"api_host": {
 					Description: "The Rootly API host. Defaults to https://api.rootly.com. Can also be sourced from the \`ROOTLY_API_URL\` environment variable.",
@@ -57,6 +59,7 @@ ${dataSources
 				"rootly_custom_field": dataSourceCustomField(),
 				"rootly_custom_field_option": dataSourceCustomFieldOption(),
 				"rootly_causes": dataSourceCauses(),
+				"rootly_communications_group": dataSourceCommunicationsGroup(),
 				"rootly_custom_fields": dataSourceCustomFields(),
 				"rootly_custom_field_options": dataSourceCustomFieldOptions(),
 				"rootly_environments": dataSourceEnvironments(),
@@ -78,16 +81,18 @@ ${resources
   })
   .join("\n")}
 				"rootly_alerts_source": resourceAlertsSource(),
+				"rootly_communications_group": resourceCommunicationsGroup(),
 				"rootly_custom_field": resourceCustomField(),
 				"rootly_custom_field_option": resourceCustomFieldOption(),
 				"rootly_dashboard": resourceDashboard(),
-				"rootly_dashboard_panel": resourceDashboardPanel(),
 				"rootly_escalation_path": resourceEscalationPath(),
+				"rootly_escalation_policy": resourceEscalationPolicy(),
 				"rootly_retrospective_configuration": resourceRetrospectiveConfiguration(),
 				"rootly_retrospective_process": resourceRetrospectiveProcess(),
 				"rootly_retrospective_step": resourceRetrospectiveStep(),
 				"rootly_post_mortem_template": resourcePostmortemTemplate(),
 				"rootly_on_call_role": resourceOnCallRole(),
+				"rootly_override_shift": resourceOverrideShift(),
 				"rootly_schedule": resourceSchedule(),
 				"rootly_schedule_rotation": resourceScheduleRotation(),
 				"rootly_secret": resourceSecret(),
@@ -120,6 +125,15 @@ func configure(version string, p *schema.Provider) func(context.Context, *schema
 
 		// Warning or errors can be collected in a slice type
 		var diags diag.Diagnostics
+
+		if goversion.Must(goversion.NewVersion(p.TerraformVersion)).LessThan(goversion.Must(goversion.NewVersion("1.0"))) {
+		    diags = append(diags, diag.Diagnostic{
+		        Severity: diag.Error,
+		        Summary:  "Unsupported Terraform Version",
+		        Detail:   "Please upgrade Terraform to at least version 1.0.",
+		    })
+		    return nil, diags
+		}
 
 		cli, err := client.NewClient(host, token, RootlyUserAgent(version))
 		if err != nil {

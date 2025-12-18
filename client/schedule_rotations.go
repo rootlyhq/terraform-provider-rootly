@@ -3,7 +3,10 @@
 package client
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
+	"io"
 	"reflect"
 
 	"github.com/google/jsonapi"
@@ -23,6 +26,7 @@ type ScheduleRotation struct {
 	TimeZone                       string                 `jsonapi:"attr,time_zone,omitempty"`
 	StartTime                      string                 `jsonapi:"attr,start_time,omitempty"`
 	EndTime                        string                 `jsonapi:"attr,end_time,omitempty"`
+	ScheduleRotationMembers        []interface{}          `jsonapi:"attr,schedule_rotation_members,omitempty"`
 	ScheduleRotationableAttributes map[string]interface{} `jsonapi:"attr,schedule_rotationable_attributes,omitempty"`
 }
 
@@ -76,18 +80,55 @@ func (c *Client) GetScheduleRotation(id string) (*ScheduleRotation, error) {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
 
+	// Add include parameter to get schedule_rotation_members data
+	q := req.URL.Query()
+	q.Add("include", "schedule_rotation_members")
+	req.URL.RawQuery = q.Encode()
+
 	resp, err := c.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("Failed to make request to get schedule_rotation: %w", err)
 	}
+	defer resp.Body.Close()
 
-	data, err := UnmarshalData(resp.Body, new(ScheduleRotation))
-	resp.Body.Close()
+	// Read the response body into a buffer so we can use it twice
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("Error reading response body: %w", err)
+	}
+
+	// First unmarshal the standard attributes using jsonapi
+	data, err := UnmarshalData(io.NopCloser(bytes.NewReader(body)), new(ScheduleRotation))
 	if err != nil {
 		return nil, fmt.Errorf("Error unmarshaling schedule_rotation: %w", err)
 	}
 
-	return data.(*ScheduleRotation), nil
+	scheduleRotation := data.(*ScheduleRotation)
+
+	// Parse raw JSON to extract relationships
+	var jsonResponse map[string]interface{}
+	if err := json.Unmarshal(body, &jsonResponse); err != nil {
+		return nil, fmt.Errorf("Error decoding JSON response: %w", err)
+	}
+
+	// Extract schedule_rotation_members from included data
+	if included, ok := jsonResponse["included"].([]interface{}); ok {
+		var membersList []interface{}
+		for _, item := range included {
+			if includedItem, ok := item.(map[string]interface{}); ok {
+				if itemType, ok := includedItem["type"].(string); ok && itemType == "schedule_rotation_members" {
+					if attributes, ok := includedItem["attributes"].(map[string]interface{}); ok {
+						membersList = append(membersList, attributes)
+					}
+				}
+			}
+		}
+		if len(membersList) > 0 {
+			scheduleRotation.ScheduleRotationMembers = membersList
+		}
+	}
+
+	return scheduleRotation, nil
 }
 
 func (c *Client) UpdateScheduleRotation(id string, schedule_rotation *ScheduleRotation) (*ScheduleRotation, error) {

@@ -9,17 +9,52 @@ description: |-
 
 
 
+## Important Notes
+
+### Required Alert Source Fields
+
+When configuring alert sources, the following alert source fields are **required** and **cannot be deleted**:
+- `title` - Alert title field
+- `description` - Alert description field
+- `external_url` - Alert source URL/external URL field
+
+**Important:** You must use **data sources** (not resources) to reference these required alert fields, as they cannot be modified or deleted by users. See the example below for the correct implementation.
+
 ## Example Usage
 
 ```shell
+# Required: Use data sources for title, description, and external_url fields
+data "rootly_alert_field" "title_field" {
+  kind = "title"
+}
+
+data "rootly_alert_field" "description_field" {
+  kind = "description"
+}
+
+data "rootly_alert_field" "source_link_field" {
+  kind = "external_url"
+}
+
 resource "rootly_alerts_source" "example" {
   name        = "Generic webhook source"
   source_type = "generic_webhook"
 
-  alert_template_attributes {
-    title        = "Server exploded"
-    description  = "Datacenter is burning down."
-    external_url = "https://rootly.com"
+  # Required alert source fields: title, description, and external_url
+  # template_body can be omitted if you want to use the default value for the alert source field
+  alert_source_fields_attributes {
+    alert_field_id = data.rootly_alert_field.title_field.id
+    template_body  = "Server exploded"
+  }
+
+  alert_source_fields_attributes {
+    alert_field_id = data.rootly_alert_field.description_field.id
+    template_body  = "Datacenter is burning down."
+  }
+
+  alert_source_fields_attributes {
+    alert_field_id = data.rootly_alert_field.source_link_field.id
+    template_body  = "https://rootly.com"
   }
 
   sourceable_attributes {
@@ -67,7 +102,7 @@ resource "rootly_alerts_source" "example" {
 
 - `alert_source_fields_attributes` (Block List) List of alert fields to be added to the alert source (see [below for nested schema](#nestedblock--alert_source_fields_attributes))
 - `alert_source_urgency_rules_attributes` (Block List) List of rules that define the conditions under which the alert urgency will be set automatically based on the alert payload (see [below for nested schema](#nestedblock--alert_source_urgency_rules_attributes))
-- `alert_template_attributes` (Block List, Max: 1) (see [below for nested schema](#nestedblock--alert_template_attributes))
+- `alert_template_attributes` (Block List, Max: 1) Note that when alert fields are enabled at the team level, alert template attributes cannot be provided. Use `alert_source_fields_attributes` instead. (see [below for nested schema](#nestedblock--alert_template_attributes))
 - `alert_urgency_id` (String) ID for the default alert urgency assigned to this alert source
 - `deduplicate_alerts_by_key` (Boolean) Toggle alert deduplication using deduplication key. If enabled, deduplication_key_kind and deduplication_key_path are required.. Value must be one of true or false
 - `deduplication_key_kind` (String) Kind of deduplication key.. Value must be one of `payload`.

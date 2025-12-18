@@ -205,11 +205,11 @@ function structAttr(name, resourceSchema) {
 }
 
 function structAttrs(resourceSchema) {
-  return Object.keys(resourceSchema.properties)
-    .filter((name) => {
-      return name !== "created_at" && name !== "updated_at";
+  return Object.entries(resourceSchema.properties)
+    .filter(([name, schema]) => {
+      return name !== "created_at" && name !== "updated_at" && !schema.tf_ignore;
     })
-    .map((name) => {
+    .map(([name]) => {
       return structAttr(name, resourceSchema);
     })
     .join("\n  ");

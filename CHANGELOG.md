@@ -1,5 +1,124 @@
 # Changelog
 
+## [5.2.0] -- 2025-12-17
+
+### Added
+
+- Added validation for rootly_alert_route to enforce exclusivity between fallback_rule and condition_groups.
+
+### Fixed
+
+- Improved `rootly_alerts_source` creation
+
+## [5.1.0] -- 2025-12-16
+
+### Added
+
+- Added the ability to associate an `escalation_policy` to a service with the 
+`escalation_policy_id` attribute.
+
+### Fixed
+
+- Updated the escalation_policy resource validation and schema types.
+
+## [5.0.0] -- 2025-12-11
+
+### Changed
+
+- Require minimum Terraform version of 1.0+
+
+## [4.3.13] -- 2025-12-04
+
+### Changed
+
+- Deprecated communications group condition properties name field.
+
+## [4.3.12] -- 2025-12-04
+
+### Fixed
+
+- Set computed for schedule rotation start and end time attributes. Fixes unintended plans for rotations that had a start time before these fields were added to the provider, and where existing configuration does not have a value specified. 
+
+## [4.3.11] -- 2025-12-03
+
+### Fixed
+
+- Fixed communications group `communication_group_conditions` attribute.
+
+## [4.3.10] -- 2025-12-02
+
+### Added
+
+- Add `rootly_workflow_task_create_sub_incident` resource for creating sub-incidents in workflows
+- Add `temperature`, `max_tokens`, `top_p`, `reasoning_effort`, and `reasoning_summary` parameters to `rootly_workflow_task_create_openai_chat_completion` resource
+- Add `scheduled_sub` to valid incident kinds
+
+### Changed
+
+- Changed `user` (map) to `user_id` (int) on `rootly_override_shift` resource
+- Made `target_id` required on `rootly_alert_routing_rule` destination block
+- Updated incident status values for maintenance: removed `planning` and `verifying` statuses
+
+### Fixed
+
+- Fixed communications module data type values (`communications-groups` → `communications_groups`)
+
+## [4.3.9] -- 2025-11-26
+
+### Added
+
+- Add Terraform Plugin Framework support (#160)
+- Add support for `tf_ignore` schema flag to ignore fields during generation (#157)
+- Add Terraform support for new maintenance statuses (#148)
+
+## [4.3.8] -- 2025-11-12
+
+### Added
+
+- Add `slack_channel` support for on-call schedules (#155)
+
+### Changed
+
+- Upgraded Terraform version used in tests (#154)
+
+### Fixed
+
+- Fixed `rootly_dashboard_panel` import errors when legend is not provided (#156)
+- Fixed text in `resource_alert_route` documentation (#153)
+
+## [4.3.7] -- 2025-11-05
+
+### Changed
+
+- Updated Alert Source resource documentation with Alert Source Field details (#150)
+
+### Fixed
+
+- Fixed `rootly_dashboard_panel` resource (#141)
+
+## [4.3.6] -- 2025-10-31
+
+### Added
+
+- Add support for `members` attribute on schedule rotations resource (#133)
+
+## [4.3.5] -- 2025-10-29
+
+### Added
+
+- Add back `rules` attribute to alert routes (#145)
+
+## [4.3.4] -- 2025-10-28
+
+### Added
+
+- Add `tf_diff_suppress_func` schema property for custom diff suppression (#138)
+
+### Changed
+
+- Improved alert route data source and resource documentation (#134)
+- Regenerated provider code (#137)
+
 ## [4.3.3] -- 2025-10-23
 
 ### Added

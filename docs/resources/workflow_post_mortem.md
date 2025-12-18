@@ -75,7 +75,7 @@ Optional:
 - `incident_condition_visibility` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `incident_conditional_inactivity` (String)
 - `incident_inactivity_duration` (String) ex. 10 min, 1h, 3 days, 2 weeks
-- `incident_kinds` (List of String) Value must be one of `test`, `test_sub`, `example`, `example_sub`, `normal`, `normal_sub`, `backfilled`, `scheduled`.
+- `incident_kinds` (List of String) Value must be one of `test`, `test_sub`, `example`, `example_sub`, `normal`, `normal_sub`, `backfilled`, `scheduled`, `scheduled_sub`.
 - `incident_post_mortem_condition` (String) Value must be one off `ALL`, `ANY`, `NONE`.
 - `incident_post_mortem_condition_cause` (String) [DEPRECATED] Use incident_condition_cause instead. Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `incident_post_mortem_condition_status` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
