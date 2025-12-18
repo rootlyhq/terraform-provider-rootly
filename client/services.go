@@ -29,6 +29,7 @@ type Service struct {
 	GithubRepositoryBranch   string                 `jsonapi:"attr,github_repository_branch,omitempty"`
 	GitlabRepositoryName     string                 `jsonapi:"attr,gitlab_repository_name,omitempty"`
 	GitlabRepositoryBranch   string                 `jsonapi:"attr,gitlab_repository_branch,omitempty"`
+	KubernetesDeploymentName string                 `jsonapi:"attr,kubernetes_deployment_name,omitempty"`
 	EnvironmentIds           []interface{}          `jsonapi:"attr,environment_ids,omitempty"`
 	ServiceIds               []interface{}          `jsonapi:"attr,service_ids,omitempty"`
 	OwnerGroupIds            []interface{}          `jsonapi:"attr,owner_group_ids,omitempty"`

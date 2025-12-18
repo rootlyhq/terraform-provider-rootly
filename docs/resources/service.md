@@ -68,6 +68,7 @@ resource "rootly_service" "customer_postgresql_prod" {
 - `cortex_id` (String) The Cortex group id associated to this service
 - `description` (String) The description of the service
 - `environment_ids` (List of String) Environments associated with this service
+- `escalation_policy_id` (String) The escalation policy id of the service
 - `external_id` (String) The external id associated to this service
 - `github_repository_branch` (String) The GitHub repository branch associated to this service. eg: main
 - `github_repository_name` (String) The GitHub repository name associated to this service. eg: rootlyhq/my-service
@@ -75,6 +76,7 @@ resource "rootly_service" "customer_postgresql_prod" {
 - `gitlab_repository_name` (String) The GitLab repository name associated to this service. eg: rootlyhq/my-service
 - `incident_broadcast_channel` (Block List, Max: 1) Map must contain two fields, `id` and `name`. Slack channel to broadcast incidents to (see [below for nested schema](#nestedblock--incident_broadcast_channel))
 - `incident_broadcast_enabled` (Boolean) Enable incidents to be broadcasted to a specific channel. Value must be one of true or false
+- `kubernetes_deployment_name` (String) The Kubernetes deployment name associated to this service. eg: namespace/deployment-name
 - `notify_emails` (List of String) Emails attached to the service
 - `opsgenie_id` (String) The Opsgenie service id associated to this service
 - `owner_group_ids` (List of String) Owner Teams associated with this service

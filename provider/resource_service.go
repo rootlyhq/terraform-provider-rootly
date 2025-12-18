@@ -222,6 +222,17 @@ func resourceService() *schema.Resource {
 				Description: "The GitLab repository branch associated to this service. eg: main",
 			},
 
+			"kubernetes_deployment_name": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "The Kubernetes deployment name associated to this service. eg: namespace/deployment-name",
+			},
+
 			"environment_ids": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -563,6 +574,9 @@ func resourceServiceCreate(ctx context.Context, d *schema.ResourceData, meta int
 	if value, ok := d.GetOkExists("gitlab_repository_branch"); ok {
 		s.GitlabRepositoryBranch = value.(string)
 	}
+	if value, ok := d.GetOkExists("kubernetes_deployment_name"); ok {
+		s.KubernetesDeploymentName = value.(string)
+	}
 	if value, ok := d.GetOkExists("environment_ids"); ok {
 		s.EnvironmentIds = value.([]interface{})
 	}
@@ -659,6 +673,7 @@ func resourceServiceRead(ctx context.Context, d *schema.ResourceData, meta inter
 	d.Set("github_repository_branch", item.GithubRepositoryBranch)
 	d.Set("gitlab_repository_name", item.GitlabRepositoryName)
 	d.Set("gitlab_repository_branch", item.GitlabRepositoryBranch)
+	d.Set("kubernetes_deployment_name", item.KubernetesDeploymentName)
 	d.Set("environment_ids", item.EnvironmentIds)
 	d.Set("service_ids", item.ServiceIds)
 	d.Set("owner_group_ids", item.OwnerGroupIds)
@@ -789,6 +804,9 @@ func resourceServiceUpdate(ctx context.Context, d *schema.ResourceData, meta int
 	}
 	if d.HasChange("gitlab_repository_branch") {
 		s.GitlabRepositoryBranch = d.Get("gitlab_repository_branch").(string)
+	}
+	if d.HasChange("kubernetes_deployment_name") {
+		s.KubernetesDeploymentName = d.Get("kubernetes_deployment_name").(string)
 	}
 
 	if d.HasChange("environment_ids") {
