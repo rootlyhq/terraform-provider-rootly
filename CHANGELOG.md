@@ -1,5 +1,26 @@
 # Changelog
 
+## [5.2.0] -- 2025-12-17
+
+### Added
+
+- Added validation for rootly_alert_route to enforce exclusivity between fallback_rule and condition_groups.
+
+### Fixed
+
+- Improved `rootly_alerts_source` creation
+
+## [5.1.0] -- 2025-12-16
+
+### Added
+
+- Added the ability to associate an `escalation_policy` to a service with the 
+`escalation_policy_id` attribute.
+
+### Fixed
+
+- Updated the escalation_policy resource validation and schema types.
+
 ## [5.0.0] -- 2025-12-11
 
 ### Changed
