@@ -1,5 +1,17 @@
 # Changelog
 
+## [5.2.1] -- 2025-12-23
+
+### Added
+
+When creating an OncallRole the terraform provider did not allow the ability to configure the following attributes via terraform:
+* alert_fields_permissions
+* alert_groups_permissions
+* alert_routing_rules_permissions
+* on_call_readiness_report_permissions
+* on_call_roles_permissions
+* schedule_override_permissions
+
 ## [5.2.0] -- 2025-12-17
 
 ### Added
