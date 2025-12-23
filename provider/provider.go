@@ -6,10 +6,10 @@ import (
 	"context"
 	"fmt"
 
+	goversion "github.com/hashicorp/go-version"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/meta"
-	goversion "github.com/hashicorp/go-version"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 )
 
@@ -59,7 +59,6 @@ func New(version string) func() *schema.Provider {
 				"rootly_communications_stage":             dataSourceCommunicationsStage(),
 				"rootly_communications_type":              dataSourceCommunicationsType(),
 				"rootly_communications_template":          dataSourceCommunicationsTemplate(),
-				"rootly_communications_group":             dataSourceCommunicationsGroup(),
 				"rootly_custom_form":                      dataSourceCustomForm(),
 				"rootly_environment":                      dataSourceEnvironment(),
 				"rootly_escalation_policy":                dataSourceEscalationPolicy(),
@@ -90,6 +89,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_team":                             dataSourceTeam(),
 				"rootly_user":                             dataSourceUser(),
 				"rootly_webhooks_endpoint":                dataSourceWebhooksEndpoint(),
+				"rootly_status":                           dataSourceStatus(),
 				"rootly_sub_status":                       dataSourceSubStatus(),
 				"rootly_incident_sub_status":              dataSourceIncidentSubStatus(),
 				"rootly_retrospective_process_group":      dataSourceRetrospectiveProcessGroup(),
@@ -97,6 +97,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_custom_field":                     dataSourceCustomField(),
 				"rootly_custom_field_option":              dataSourceCustomFieldOption(),
 				"rootly_causes":                           dataSourceCauses(),
+				"rootly_communications_group":             dataSourceCommunicationsGroup(),
 				"rootly_custom_fields":                    dataSourceCustomFields(),
 				"rootly_custom_field_options":             dataSourceCustomFieldOptions(),
 				"rootly_environments":                     dataSourceEnvironments(),
@@ -112,7 +113,6 @@ func New(version string) func() *schema.Provider {
 				"rootly_schedule":                         dataSourceSchedule(),
 			},
 			ResourcesMap: map[string]*schema.Resource{
-				"rootly_alert_route":                                        resourceAlertRoute(),
 				"rootly_alert_routing_rule":                                 resourceAlertRoutingRule(),
 				"rootly_alert_field":                                        resourceAlertField(),
 				"rootly_alert_urgency":                                      resourceAlertUrgency(),
@@ -122,7 +122,6 @@ func New(version string) func() *schema.Provider {
 				"rootly_communications_stage":                               resourceCommunicationsStage(),
 				"rootly_communications_type":                                resourceCommunicationsType(),
 				"rootly_communications_template":                            resourceCommunicationsTemplate(),
-				"rootly_communications_group":                               resourceCommunicationsGroup(),
 				"rootly_custom_form":                                        resourceCustomForm(),
 				"rootly_dashboard_panel":                                    resourceDashboardPanel(),
 				"rootly_environment":                                        resourceEnvironment(),
@@ -137,7 +136,6 @@ func New(version string) func() *schema.Provider {
 				"rootly_workflow_custom_field_selection":                    resourceWorkflowCustomFieldSelection(),
 				"rootly_workflow_form_field_condition":                      resourceWorkflowFormFieldCondition(),
 				"rootly_workflow_group":                                     resourceWorkflowGroup(),
-				"rootly_live_call_router":                                   resourceLiveCallRouter(),
 				"rootly_heartbeat":                                          resourceHeartbeat(),
 				"rootly_incident_permission_set_boolean":                    resourceIncidentPermissionSetBoolean(),
 				"rootly_incident_permission_set_resource":                   resourceIncidentPermissionSetResource(),
@@ -157,12 +155,14 @@ func New(version string) func() *schema.Provider {
 				"rootly_status_page":                                        resourceStatusPage(),
 				"rootly_team":                                               resourceTeam(),
 				"rootly_webhooks_endpoint":                                  resourceWebhooksEndpoint(),
+				"rootly_status":                                             resourceStatus(),
 				"rootly_sub_status":                                         resourceSubStatus(),
 				"rootly_incident_sub_status":                                resourceIncidentSubStatus(),
 				"rootly_retrospective_process_group":                        resourceRetrospectiveProcessGroup(),
 				"rootly_retrospective_process_group_step":                   resourceRetrospectiveProcessGroupStep(),
 				"rootly_escalation_level":                                   resourceEscalationLevel(),
 				"rootly_alerts_source":                                      resourceAlertsSource(),
+				"rootly_communications_group":                               resourceCommunicationsGroup(),
 				"rootly_custom_field":                                       resourceCustomField(),
 				"rootly_custom_field_option":                                resourceCustomFieldOption(),
 				"rootly_dashboard":                                          resourceDashboard(),
@@ -329,12 +329,12 @@ func configure(version string, p *schema.Provider) func(context.Context, *schema
 		var diags diag.Diagnostics
 
 		if goversion.Must(goversion.NewVersion(p.TerraformVersion)).LessThan(goversion.Must(goversion.NewVersion("1.0"))) {
-		    diags = append(diags, diag.Diagnostic{
-		        Severity: diag.Error,
-		        Summary:  "Unsupported Terraform Version",
-		        Detail:   "Please upgrade Terraform to at least version 1.0.",
-		    })
-		    return nil, diags
+			diags = append(diags, diag.Diagnostic{
+				Severity: diag.Error,
+				Summary:  "Unsupported Terraform Version",
+				Detail:   "Please upgrade Terraform to at least version 1.0.",
+			})
+			return nil, diags
 		}
 
 		cli, err := client.NewClient(host, token, RootlyUserAgent(version))
