@@ -29,7 +29,7 @@ func TestAccResourceService(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccResourceServiceConfig(serviceNameUpdated, slackAliasName, slackChannelNameUpdated),
+				Config: testAccResourceServiceConfigUpdated(serviceNameUpdated, slackChannelNameUpdated),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_service.tf", "name", serviceNameUpdated),
 					resource.TestCheckResourceAttr("rootly_service.tf", "slack_channels.0.name", slackChannelNameUpdated),
@@ -54,6 +54,18 @@ resource "rootly_service" "tf" {
 	}
 }
 `, serviceName, slackAliasName, slackChannelName)
+}
+
+func testAccResourceServiceConfigUpdated(serviceName, slackChannelName string) string {
+	return fmt.Sprintf(`
+resource "rootly_service" "tf" {
+	name = "%s"
+	slack_channels {
+      id   = "C08836PQ123"
+	  name = "%s"
+	}
+}
+`, serviceName, slackChannelName)
 }
 
 // Disabling this test until we get kubernetes deployment integration enabled where this

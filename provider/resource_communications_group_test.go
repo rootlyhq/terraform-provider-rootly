@@ -1,12 +1,25 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceCommunicationsGroup(t *testing.T) {
+	service1Name := acctest.RandomWithPrefix("tf-service-1")
+	service2Name := acctest.RandomWithPrefix("tf-service-2")
+	service3Name := acctest.RandomWithPrefix("tf-service-3")
+	severityName := acctest.RandomWithPrefix("tf-severity")
+	functionalityName := acctest.RandomWithPrefix("tf-functionality")
+	incidentTypeName := acctest.RandomWithPrefix("tf-incident-type")
+	teamName := acctest.RandomWithPrefix("tf-team")
+	communicationsTypeName := acctest.RandomWithPrefix("tf-comm-type")
+	communicationsGroupName := acctest.RandomWithPrefix("tf-comm-group")
+	communicationsGroupNameUpdated := acctest.RandomWithPrefix("tf-comm-group-updated")
+	communicationsGroupNameUpdatedRemoved := acctest.RandomWithPrefix("tf-comm-group-removed")
 	resource.UnitTest(t, resource.TestCase{
 		IsUnitTest: false,
 		PreCheck: func() {
@@ -15,9 +28,9 @@ func TestAccResourceCommunicationsGroup(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceCommunicationsGroupCreate,
+				Config: testAccResourceCommunicationsGroupConfig(service1Name, service2Name, service3Name, severityName, functionalityName, incidentTypeName, teamName, communicationsTypeName, communicationsGroupName),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_communications_group.test", "name", "TF test group"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "name", communicationsGroupName),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "condition_type", "any"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.0.condition", "is"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.0.property_type", "service"),
@@ -54,15 +67,15 @@ func TestAccResourceCommunicationsGroup(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccResourceCommunicationsGroupUpdate,
+				Config: testAccResourceCommunicationsGroupConfigUpdated(service1Name, service2Name, service3Name, severityName, functionalityName, incidentTypeName, teamName, communicationsTypeName, communicationsGroupNameUpdated),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_communications_group.test", "name", "TF test group (updated)"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "name", communicationsGroupNameUpdated),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "condition_type", "all"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.0.condition", "is"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.0.property_type", "service"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.0.properties.#", "2"),
-					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.0.properties.0.name", "TF test service 2"),
-					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.0.properties.1.name", "TF test service 3"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.0.properties.0.name", service2Name),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.0.properties.1.name", service3Name),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.1.condition", "is"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.1.property_type", "group"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.2.property_type", "severity"),
@@ -80,9 +93,9 @@ func TestAccResourceCommunicationsGroup(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccResourceCommunicationsGroupUpdateRemoveConditions,
+				Config: testAccResourceCommunicationsGroupConfigUpdatedRemoveConditions(service1Name, service2Name, service3Name, severityName, functionalityName, incidentTypeName, teamName, communicationsTypeName, communicationsGroupNameUpdatedRemoved),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_communications_group.test", "name", "TF test group (updated removed conditions)"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "name", communicationsGroupNameUpdatedRemoved),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "condition_type", "all"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.#", "0"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_external_group_members.#", "2"),
@@ -100,7 +113,8 @@ func TestAccResourceCommunicationsGroup(t *testing.T) {
 	})
 }
 
-const testAccResourceCommunicationsGroupCreate = `
+func testAccResourceCommunicationsGroupConfig(service1Name, service2Name, service3Name, severityName, functionalityName, incidentTypeName, teamName, communicationsTypeName, communicationsGroupName string) string {
+	return fmt.Sprintf(`
 	data rootly_user test1 {
 		email = "bot-tftests+1@rootly.com"
 	}
@@ -118,40 +132,40 @@ const testAccResourceCommunicationsGroupCreate = `
 	}
 
 	resource rootly_service test1 {
-		name = "TF test service 1"
+		name = "%s"
 	}
 
 	resource rootly_service test2 {
-		name = "TF test service 2"
+		name = "%s"
 	}
 
 	resource rootly_service test3 {
-		name = "TF test service 3"
+		name = "%s"
 	}
 
 	resource rootly_severity test1 {
-		name = "TF test severity 1"
+		name = "%s"
 	}
 
 	resource rootly_functionality test1 {
-		name = "TF test functionality 1"
+		name = "%s"
 	}
 
 	resource rootly_incident_type test1 {
-		name = "TF test incident type 1"
+		name = "%s"
 	}
 
 	resource rootly_team test {
-		name = "TF test group"
+		name = "%s"
 	}
 
 	resource rootly_communications_type test {
-		name = "TF test type"
+		name = "%s"
 		color = "#FFFFFF"
 	}
 
 	resource rootly_communications_group test {
-		name = "TF test group"
+		name = "%s"
 		communication_type_id = rootly_communications_type.test.id
 		email_channel = true
 		condition_type = "any"
@@ -240,9 +254,11 @@ const testAccResourceCommunicationsGroupCreate = `
 			user_id = data.rootly_user.test4.id
 		}
 	}
-`
+`, service1Name, service2Name, service3Name, severityName, functionalityName, incidentTypeName, teamName, communicationsTypeName, communicationsGroupName)
+}
 
-const testAccResourceCommunicationsGroupUpdate = `
+func testAccResourceCommunicationsGroupConfigUpdated(service1Name, service2Name, service3Name, severityName, functionalityName, incidentTypeName, teamName, communicationsTypeName, communicationsGroupName string) string {
+	return fmt.Sprintf(`
 	data rootly_user test1 {
 		email = "bot-tftests+1@rootly.com"
 	}
@@ -260,40 +276,40 @@ const testAccResourceCommunicationsGroupUpdate = `
 	}
 
 	resource rootly_service test1 {
-		name = "TF test service 1"
+		name = "%s"
 	}
 
 	resource rootly_service test2 {
-		name = "TF test service 2"
+		name = "%s"
 	}
 
 	resource rootly_service test3 {
-		name = "TF test service 3"
+		name = "%s"
 	}
 
 	resource rootly_severity test1 {
-		name = "TF test severity 1"
+		name = "%s"
 	}
 
 	resource rootly_functionality test1 {
-		name = "TF test functionality 1"
+		name = "%s"
 	}
 
 	resource rootly_incident_type test1 {
-		name = "TF test incident type 1"
+		name = "%s"
 	}
 
 	resource rootly_team test {
-		name = "TF test group"
+		name = "%s"
 	}
 
 	resource rootly_communications_type test {
-		name = "TF test type"
+		name = "%s"
 		color = "#FFFFFF"
 	}
 
 	resource rootly_communications_group test {
-		name = "TF test group (updated)"
+		name = "%s"
 		communication_type_id = rootly_communications_type.test.id
 		email_channel = true
 		condition_type = "all"
@@ -369,9 +385,11 @@ const testAccResourceCommunicationsGroupUpdate = `
 			user_id = data.rootly_user.test4.id
 		}
 	}
-`
+`, service1Name, service2Name, service3Name, severityName, functionalityName, incidentTypeName, teamName, communicationsTypeName, communicationsGroupName)
+}
 
-const testAccResourceCommunicationsGroupUpdateRemoveConditions = `
+func testAccResourceCommunicationsGroupConfigUpdatedRemoveConditions(service1Name, service2Name, service3Name, severityName, functionalityName, incidentTypeName, teamName, communicationsTypeName, communicationsGroupName string) string {
+	return fmt.Sprintf(`
 	data rootly_user test1 {
 		email = "bot-tftests+1@rootly.com"
 	}
@@ -389,40 +407,40 @@ const testAccResourceCommunicationsGroupUpdateRemoveConditions = `
 	}
 
 	resource rootly_service test1 {
-		name = "TF test service 1"
+		name = "%s"
 	}
 
 	resource rootly_service test2 {
-		name = "TF test service 2"
+		name = "%s"
 	}
 
 	resource rootly_service test3 {
-		name = "TF test service 3"
+		name = "%s"
 	}
 
 	resource rootly_severity test1 {
-		name = "TF test severity 1"
+		name = "%s"
 	}
 
 	resource rootly_functionality test1 {
-		name = "TF test functionality 1"
+		name = "%s"
 	}
 
 	resource rootly_incident_type test1 {
-		name = "TF test incident type 1"
+		name = "%s"
 	}
 
 	resource rootly_team test {
-		name = "TF test group"
+		name = "%s"
 	}
 
 	resource rootly_communications_type test {
-		name = "TF test type"
+		name = "%s"
 		color = "#FFFFFF"
 	}
 
 	resource rootly_communications_group test {
-		name = "TF test group (updated removed conditions)"
+		name = "%s"
 		communication_type_id = rootly_communications_type.test.id
 		email_channel = true
 		condition_type = "all"
@@ -449,4 +467,5 @@ const testAccResourceCommunicationsGroupUpdateRemoveConditions = `
 			user_id = data.rootly_user.test4.id
 		}
 	}
-`
+`, service1Name, service2Name, service3Name, severityName, functionalityName, incidentTypeName, teamName, communicationsTypeName, communicationsGroupName)
+}
