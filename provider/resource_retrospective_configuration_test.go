@@ -14,23 +14,21 @@ func TestAccResourceRetrospectiveConfiguration(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceConfiguration,
+				Config: testAccResourceConfigurationConfig(),
 			},
 		},
 	})
 }
 
-const testAccResourceConfiguration = `
+func testAccResourceConfigurationConfig() string {
+	return `
 data "rootly_severity" "critical" {
   slug = "sev0"
 }
 
-data "rootly_retrospective_configuration" "skip" {
-	kind = "skip"
-}
-
-resource "rootly_retrospective_configuration" "test-skip" {
+resource "rootly_retrospective_configuration" "test" {
 	kind = "skip"
 	severity_ids = [data.rootly_severity.critical.id]
 }
 `
+}

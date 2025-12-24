@@ -3,12 +3,15 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceCommunicationsStage(t *testing.T) {
+	communicationsStageName := acctest.RandomWithPrefix("tf-communications-stage")
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck: func() {
 			testAccPreCheck(t)
@@ -16,14 +19,16 @@ func TestAccResourceCommunicationsStage(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceCommunicationsStage,
+				Config: testAccResourceCommunicationsStageConfig(communicationsStageName),
 			},
 		},
 	})
 }
 
-const testAccResourceCommunicationsStage = `
+func testAccResourceCommunicationsStageConfig(communicationsStageName string) string {
+	return fmt.Sprintf(`
 resource "rootly_communications_stage" "test" {
-	name = "test"
+	name = "%s"
 }
-`
+`, communicationsStageName)
+}

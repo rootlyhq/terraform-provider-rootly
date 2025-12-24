@@ -1,12 +1,19 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceService(t *testing.T) {
+	serviceName := acctest.RandomWithPrefix("tf-service")
+	serviceNameUpdated := acctest.RandomWithPrefix("tf-service-updated")
+	slackAliasName := acctest.RandomWithPrefix("tf-slack-alias")
+	slackChannelName := acctest.RandomWithPrefix("tf-slack-channel")
+	slackChannelNameUpdated := acctest.RandomWithPrefix("tf-slack-channel-updated")
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck: func() {
 			testAccPreCheck(t)
@@ -14,18 +21,18 @@ func TestAccResourceService(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceServiceCreate,
+				Config: testAccResourceServiceConfig(serviceName, slackAliasName, slackChannelName),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_service.tf", "name", "Terraform"),
-					resource.TestCheckResourceAttr("rootly_service.tf", "slack_aliases.0.name", "eng-terraform"),
-					resource.TestCheckResourceAttr("rootly_service.tf", "slack_channels.0.name", "terraform"),
+					resource.TestCheckResourceAttr("rootly_service.tf", "name", serviceName),
+					resource.TestCheckResourceAttr("rootly_service.tf", "slack_aliases.0.name", slackAliasName),
+					resource.TestCheckResourceAttr("rootly_service.tf", "slack_channels.0.name", slackChannelName),
 				),
 			},
 			{
-				Config: testAccResourceServiceUpdate,
+				Config: testAccResourceServiceConfig(serviceNameUpdated, slackAliasName, slackChannelNameUpdated),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_service.tf", "name", "Terraform (updated)"),
-					resource.TestCheckResourceAttr("rootly_service.tf", "slack_channels.0.name", "terraform (updated)"),
+					resource.TestCheckResourceAttr("rootly_service.tf", "name", serviceNameUpdated),
+					resource.TestCheckResourceAttr("rootly_service.tf", "slack_channels.0.name", slackChannelNameUpdated),
 					resource.TestCheckNoResourceAttr("rootly_service.tf", "slack_aliases.0.id"),
 				),
 			},
@@ -33,29 +40,21 @@ func TestAccResourceService(t *testing.T) {
 	})
 }
 
-const testAccResourceServiceCreate = `
-resource "rootly_service" tf {
-	name = "Terraform"
+func testAccResourceServiceConfig(serviceName, slackAliasName, slackChannelName string) string {
+	return fmt.Sprintf(`
+resource "rootly_service" "tf" {
+	name = "%s"
 	slack_aliases {
       id   = "S0883KV6123"
-      name = "eng-terraform"
+      name = "%s"
 	}
 	slack_channels {
       id   = "C08836PQ123"
-	  name = "terraform"
+	  name = "%s"
 	}
 }
-`
-
-const testAccResourceServiceUpdate = `
-resource "rootly_service" tf {
-	name = "Terraform (updated)"
-	slack_channels {
-      id   = "C08836PQ123"
-	  name = "terraform (updated)"
-	}
+`, serviceName, slackAliasName, slackChannelName)
 }
-`
 
 // Disabling this test until we get kubernetes deployment integration enabled where this
 // API token lives.

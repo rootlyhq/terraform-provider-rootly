@@ -365,6 +365,8 @@ function genTaskSchemaPropertyType(type_) {
   }
 }
 
+// 2025-12-23: This function isn't used anywhere right now - was used before
+// Important to note that this was used for the initial generation of the test files,
 function genResourceTestFile(task_name, task_schema) {
   const task_name_camel = task_name
     .split("_")
