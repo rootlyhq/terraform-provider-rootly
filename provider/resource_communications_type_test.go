@@ -3,12 +3,15 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceCommunicationsType(t *testing.T) {
+	communicationsTypeName := acctest.RandomWithPrefix("tf-communications-type")
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck: func() {
 			testAccPreCheck(t)
@@ -16,15 +19,17 @@ func TestAccResourceCommunicationsType(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceCommunicationsType,
+				Config: testAccResourceCommunicationsTypeConfig(communicationsTypeName),
 			},
 		},
 	})
 }
 
-const testAccResourceCommunicationsType = `
+func testAccResourceCommunicationsTypeConfig(communicationsTypeName string) string {
+	return fmt.Sprintf(`
 resource "rootly_communications_type" "test" {
-	name = "test"
-color = "#FF0000"
+	name = "%s"
+	color = "#FF0000"
 }
-`
+`, communicationsTypeName)
+}

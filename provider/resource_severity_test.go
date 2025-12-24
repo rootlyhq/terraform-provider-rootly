@@ -3,12 +3,15 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceSeverity(t *testing.T) {
+	severityName := acctest.RandomWithPrefix("tf-severity")
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck: func() {
 			testAccPreCheck(t)
@@ -16,14 +19,16 @@ func TestAccResourceSeverity(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceSeverity,
+				Config: testAccResourceSeverityConfig(severityName),
 			},
 		},
 	})
 }
 
-const testAccResourceSeverity = `
+func testAccResourceSeverityConfig(severityName string) string {
+	return fmt.Sprintf(`
 resource "rootly_severity" "test" {
-	name = "test"
+	name = "%s"
 }
-`
+`, severityName)
+}

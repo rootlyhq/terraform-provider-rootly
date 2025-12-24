@@ -1,12 +1,18 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceAlertGroup(t *testing.T) {
+	alertUrgencyName := acctest.RandomWithPrefix("tf-alert-urgency")
+	teamName := acctest.RandomWithPrefix("tf-team")
+	alertGroup1Name := acctest.RandomWithPrefix("tf-alert-group-1")
+	alertGroup2Name := acctest.RandomWithPrefix("tf-alert-group-2")
 	resource.UnitTest(t, resource.TestCase{
 		IsUnitTest: false,
 		PreCheck: func() {
@@ -15,24 +21,25 @@ func TestAccResourceAlertGroup(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceAlertGroup,
+				Config: testAccResourceAlertGroupConfig(alertUrgencyName, teamName, alertGroup1Name, alertGroup2Name),
 			},
 		},
 	})
 }
 
-const testAccResourceAlertGroup = `
+func testAccResourceAlertGroupConfig(alertUrgencyName, teamName, alertGroup1Name, alertGroup2Name string) string {
+	return fmt.Sprintf(`
 resource "rootly_alert_urgency" "tf" {
-	name = "tf-test"
+	name = "%s"
 	description = "tf"
 }
 
 resource "rootly_team" "tf" {
-	name = "tf-test"
+	name = "%s"
 }
 
 resource "rootly_alert_group" "tf1" {
-	name = "tf-test1"
+	name = "%s"
 	description = "tf"
 	targets {
 		target_type = "Group"
@@ -46,7 +53,7 @@ resource "rootly_alert_group" "tf1" {
 }
 
 resource "rootly_alert_group" "tf2" {
-	name = "tf-test2"
+	name = "%s"
 	description = "tf"
 	conditions {
 		property_field_type = "attribute"
@@ -58,4 +65,5 @@ resource "rootly_alert_group" "tf2" {
 		}
 	}
 }
-`
+`, alertUrgencyName, teamName, alertGroup1Name, alertGroup2Name)
+}

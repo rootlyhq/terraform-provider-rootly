@@ -3,12 +3,15 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourcePlaybook(t *testing.T) {
+	playbookTitle := acctest.RandomWithPrefix("tf-playbook")
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck: func() {
 			testAccPreCheck(t)
@@ -16,14 +19,16 @@ func TestAccResourcePlaybook(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourcePlaybook,
+				Config: testAccResourcePlaybookConfig(playbookTitle),
 			},
 		},
 	})
 }
 
-const testAccResourcePlaybook = `
+func testAccResourcePlaybookConfig(playbookTitle string) string {
+	return fmt.Sprintf(`
 resource "rootly_playbook" "test" {
-	title = "test"
+	title = "%s"
 }
-`
+`, playbookTitle)
+}

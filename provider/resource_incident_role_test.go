@@ -3,12 +3,15 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceIncidentRole(t *testing.T) {
+	incidentRoleName := acctest.RandomWithPrefix("tf-incident-role")
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck: func() {
 			testAccPreCheck(t)
@@ -16,14 +19,16 @@ func TestAccResourceIncidentRole(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceIncidentRole,
+				Config: testAccResourceIncidentRoleConfig(incidentRoleName),
 			},
 		},
 	})
 }
 
-const testAccResourceIncidentRole = `
+func testAccResourceIncidentRoleConfig(incidentRoleName string) string {
+	return fmt.Sprintf(`
 resource "rootly_incident_role" "test" {
-	name = "test"
+	name = "%s"
 }
-`
+`, incidentRoleName)
+}

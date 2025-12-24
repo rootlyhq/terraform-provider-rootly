@@ -1,12 +1,16 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceAlertField(t *testing.T) {
+	alertFieldName := acctest.RandomWithPrefix("tf-alert-field")
+	alertFieldNameUpdated := acctest.RandomWithPrefix("tf-alert-field-updated")
 	resource.UnitTest(t, resource.TestCase{
 		IsUnitTest: false,
 		PreCheck: func() {
@@ -15,29 +19,25 @@ func TestAccResourceAlertField(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceAlertFieldCreate,
+				Config: testAccResourceAlertFieldConfig(alertFieldName),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_alert_field.test", "name", "Test Alert Field"),
+					resource.TestCheckResourceAttr("rootly_alert_field.test", "name", alertFieldName),
 				),
 			},
 			{
-				Config: testAccResourceAlertFieldUpdate,
+				Config: testAccResourceAlertFieldConfig(alertFieldNameUpdated),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_alert_field.test", "name", "Updated Alert Field"),
+					resource.TestCheckResourceAttr("rootly_alert_field.test", "name", alertFieldNameUpdated),
 				),
 			},
 		},
 	})
 }
 
-const testAccResourceAlertFieldCreate = `
+func testAccResourceAlertFieldConfig(alertFieldName string) string {
+	return fmt.Sprintf(`
 resource "rootly_alert_field" "test" {
-  name = "Test Alert Field"
+  name = "%s"
 }
-`
-
-const testAccResourceAlertFieldUpdate = `
-resource "rootly_alert_field" "test" {
-  name = "Updated Alert Field"
+`, alertFieldName)
 }
-`

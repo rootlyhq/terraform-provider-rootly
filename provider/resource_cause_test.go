@@ -3,12 +3,15 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceCause(t *testing.T) {
+	causeName := acctest.RandomWithPrefix("tf-cause")
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck: func() {
 			testAccPreCheck(t)
@@ -16,14 +19,16 @@ func TestAccResourceCause(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceCause,
+				Config: testAccResourceCauseConfig(causeName),
 			},
 		},
 	})
 }
 
-const testAccResourceCause = `
+func testAccResourceCauseConfig(causeName string) string {
+	return fmt.Sprintf(`
 resource "rootly_cause" "test" {
-	name = "test"
+	name = "%s"
 }
-`
+`, causeName)
+}

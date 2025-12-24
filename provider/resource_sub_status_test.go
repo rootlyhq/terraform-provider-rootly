@@ -1,12 +1,18 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceSubStatus(t *testing.T) {
+
+	randStr := acctest.RandString(8)
+
+	subStatusName := fmt.Sprintf("tf-sub-%s", randStr)
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck: func() {
 			testAccPreCheck(t)
@@ -14,15 +20,17 @@ func TestAccResourceSubStatus(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceSubStatus,
+				Config: testAccResourceSubStatusConfig(subStatusName),
 			},
 		},
 	})
 }
 
-const testAccResourceSubStatus = `
+func testAccResourceSubStatusConfig(subStatusName string) string {
+	return fmt.Sprintf(`
 resource "rootly_sub_status" "test" {
-	name = "test"
+	name = "%s"
 	parent_status = "started"
 }
-`
+`, subStatusName)
+}

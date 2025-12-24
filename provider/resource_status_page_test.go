@@ -3,12 +3,15 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceStatusPage(t *testing.T) {
+	statusPageTitle := acctest.RandomWithPrefix("tf-status-page")
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck: func() {
 			testAccPreCheck(t)
@@ -16,14 +19,16 @@ func TestAccResourceStatusPage(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceStatusPage,
+				Config: testAccResourceStatusPageConfig(statusPageTitle),
 			},
 		},
 	})
 }
 
-const testAccResourceStatusPage = `
+func testAccResourceStatusPageConfig(statusPageTitle string) string {
+	return fmt.Sprintf(`
 resource "rootly_status_page" "test" {
-	title = "test"
+	title = "%s"
 }
-`
+`, statusPageTitle)
+}

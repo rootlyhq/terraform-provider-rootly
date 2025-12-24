@@ -3,12 +3,15 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceIncidentType(t *testing.T) {
+	incidentTypeName := acctest.RandomWithPrefix("tf-incident-type")
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck: func() {
 			testAccPreCheck(t)
@@ -16,14 +19,16 @@ func TestAccResourceIncidentType(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceIncidentType,
+				Config: testAccResourceIncidentTypeConfig(incidentTypeName),
 			},
 		},
 	})
 }
 
-const testAccResourceIncidentType = `
+func testAccResourceIncidentTypeConfig(incidentTypeName string) string {
+	return fmt.Sprintf(`
 resource "rootly_incident_type" "test" {
-	name = "test"
+	name = "%s"
 }
-`
+`, incidentTypeName)
+}

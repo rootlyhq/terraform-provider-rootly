@@ -3,12 +3,15 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceWebhooksEndpoint(t *testing.T) {
+	webhooksEndpointName := acctest.RandomWithPrefix("tf-webhooks-endpoint")
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck: func() {
 			testAccPreCheck(t)
@@ -16,15 +19,17 @@ func TestAccResourceWebhooksEndpoint(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceWebhooksEndpoint,
+				Config: testAccResourceWebhooksEndpointConfig(webhooksEndpointName),
 			},
 		},
 	})
 }
 
-const testAccResourceWebhooksEndpoint = `
+func testAccResourceWebhooksEndpointConfig(webhooksEndpointName string) string {
+	return fmt.Sprintf(`
 resource "rootly_webhooks_endpoint" "test" {
-	name = "test"
+	name = "%s"
 	url = "https://rootly.com/dummy"
 }
-`
+`, webhooksEndpointName)
+}

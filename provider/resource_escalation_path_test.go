@@ -1,12 +1,16 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceEscalationPath(t *testing.T) {
+	escalationPolicyName := acctest.RandomWithPrefix("tf-escalation-policy")
+	escalationPathName := acctest.RandomWithPrefix("tf-escalation-path")
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck: func() {
 			testAccPreCheck(t)
@@ -14,9 +18,9 @@ func TestAccResourceEscalationPath(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceEscalationPath,
+				Config: testAccResourceEscalationPathConfig(escalationPolicyName, escalationPathName),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_escalation_path.test", "name", "test-path"),
+					resource.TestCheckResourceAttr("rootly_escalation_path.test", "name", escalationPathName),
 					resource.TestCheckResourceAttr("rootly_escalation_path.test", "default", "false"),
 					resource.TestCheckResourceAttr("rootly_escalation_path.test", "time_restriction_time_zone", "America/New_York"),
 					resource.TestCheckResourceAttr("rootly_escalation_path.test", "time_restrictions.#", "2"),
@@ -32,9 +36,9 @@ func TestAccResourceEscalationPath(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccResourceEscalationPathUpdated,
+				Config: testAccResourceEscalationPathConfigUpdated(escalationPolicyName, escalationPathName+"-updated"),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_escalation_path.test", "name", "test-path-updated"),
+					resource.TestCheckResourceAttr("rootly_escalation_path.test", "name", escalationPathName+"-updated"),
 					resource.TestCheckResourceAttr("rootly_escalation_path.test", "default", "false"),
 					resource.TestCheckResourceAttr("rootly_escalation_path.test", "time_restriction_time_zone", "Pacific/Honolulu"),
 					resource.TestCheckResourceAttr("rootly_escalation_path.test", "time_restrictions.#", "1"),
@@ -49,39 +53,45 @@ func TestAccResourceEscalationPath(t *testing.T) {
 	})
 }
 
-const testAccResourceEscalationPath = `
+func testAccResourceEscalationPathConfig(policyName string, rootlyEscalationPathName string) string {
+
+	return fmt.Sprintf(
+		`
+		resource "rootly_escalation_policy" "test" {
+			name = "%s"
+		}
+		
+		resource "rootly_escalation_path" "test" {
+			name = "%s"
+			default = false
+			escalation_policy_id = rootly_escalation_policy.test.id
+			initial_delay = 5
+			time_restriction_time_zone = "America/New_York"
+			time_restrictions {
+				start_day = "monday"
+				start_time = "17:00"
+				end_day = "tuesday"
+				end_time = "07:00"
+			}
+			time_restrictions {
+				start_day = "tuesday"
+				start_time = "17:00"
+				end_day = "wednesday"
+				end_time = "07:00"
+			}
+		}
+		`, policyName, rootlyEscalationPathName)
+}
+
+func testAccResourceEscalationPathConfigUpdated(policyName string, rootlyEscalationPathName string) string {
+	return fmt.Sprintf(
+		`
 resource "rootly_escalation_policy" "test" {
-	name = "test-ep"
+	name = "%s"
 }
 
 resource "rootly_escalation_path" "test" {
-	name = "test-path"
-	default = false
-	escalation_policy_id = rootly_escalation_policy.test.id
-	initial_delay = 5
-	time_restriction_time_zone = "America/New_York"
-	time_restrictions {
-		start_day = "monday"
-		start_time = "17:00"
-		end_day = "tuesday"
-		end_time = "07:00"
-	}
-	time_restrictions {
-		start_day = "tuesday"
-		start_time = "17:00"
-		end_day = "wednesday"
-		end_time = "07:00"
-	}
-}
-`
-
-const testAccResourceEscalationPathUpdated = `
-resource "rootly_escalation_policy" "test" {
-	name = "test-ep"
-}
-
-resource "rootly_escalation_path" "test" {
-	name = "test-path-updated"
+	name = "%s"
 	default = false
 	escalation_policy_id = rootly_escalation_policy.test.id
 	initial_delay = 0
@@ -93,4 +103,5 @@ resource "rootly_escalation_path" "test" {
 		end_time = "08:00"
 	}
 }
-`
+`, policyName, rootlyEscalationPathName)
+}
