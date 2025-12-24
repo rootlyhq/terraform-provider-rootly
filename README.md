@@ -22,6 +22,15 @@ provider "rootly" {
 }
 ```
 
+## Migration Script
+
+A migration script is available to help migrate from deprecated Rootly resources to their newer equivalents. The script automates the process of fetching existing resources via the Rootly API and generating Terraform configurations with import statements.
+
+**Currently supported migrations:**
+- `alert_routing_rules_to_alert_routes` - Migrate from deprecated `rootly_alert_routing_rule` to `rootly_alert_route`
+
+For detailed usage instructions, see [Migration Script Documentation](scripts/migration/README.md).
+
 ## Develop
 
 ### Build Commands
