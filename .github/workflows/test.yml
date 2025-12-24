@@ -78,4 +78,4 @@ jobs:
         ROOTLY_API_TOKEN: ${{ secrets.ROOTLY_API_TOKEN }}
 
       run: |
-        go test -v -cover ./provider/ -failfast -parallel
+        go test -v -cover ./provider/ -failfast
