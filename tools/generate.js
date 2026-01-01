@@ -86,6 +86,7 @@ const excluded = {
     "schedule", // cannot auto-generate because of schema upgrade logic
     "schedule_rotation",
     "shift",
+    "team",
     "user",
     "user_notification_rule",
     "webhooks_delivery",
