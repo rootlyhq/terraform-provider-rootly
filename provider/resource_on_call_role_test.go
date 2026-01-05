@@ -30,7 +30,7 @@ resource "rootly_on_call_role" "test" {
 }
 `
 
-func testAccResourceOnCallRoleWithPermissionsConfig(roleName string) string {
+func testAccResourceOnCallRoleWithPermissionsConfig(roleName, roleDisplayName string) string {
 	return fmt.Sprintf(`
 resource "rootly_on_call_role" "%s" {
 	name = "%s"
@@ -41,7 +41,7 @@ resource "rootly_on_call_role" "%s" {
 	on_call_roles_permissions = ["create", "read", "update", "delete"]
 	schedule_override_permissions = ["create", "update"]
 }
-`, roleName)
+`, roleName, roleDisplayName)
 }
 
 func TestAccResourceOnCallRoleWithPermissions(t *testing.T) {
@@ -52,7 +52,7 @@ func TestAccResourceOnCallRoleWithPermissions(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceOnCallRoleWithPermissionsConfig(acctest.RandomWithPrefix("tf-on-call-role")),
+				Config: testAccResourceOnCallRoleWithPermissionsConfig(acctest.RandomWithPrefix("tf-on-call-role"), acctest.RandomWithPrefix("tf-role-display-name")),
 			},
 		},
 	})
