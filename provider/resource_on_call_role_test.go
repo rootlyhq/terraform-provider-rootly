@@ -37,7 +37,7 @@ resource "rootly_on_call_role" "%s" {
 	alert_fields_permissions = ["create", "read", "update", "delete"]
 	alert_groups_permissions = ["create", "read", "update", "delete"]
 	alert_routing_rules_permissions = ["create", "read", "update", "delete"]
-	on_call_readiness_report_permissions = ["create", "read", "update", "delete"]
+	on_call_readiness_report_permissions = ["read"]
 	on_call_roles_permissions = ["create", "read", "update", "delete"]
 	schedule_override_permissions = ["create", "update"]
 }
