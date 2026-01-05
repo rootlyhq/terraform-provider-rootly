@@ -75,7 +75,81 @@ func resourceOnCallRole() *schema.Resource {
 				WriteOnly:        false,
 				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
 			},
-
+			"alert_fields_permissions": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
+			},
+			"alert_groups_permissions": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
+			},
+			"alert_routing_rules_permissions": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
+			},
+			"on_call_readiness_report_permissions": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
+			},
+			"on_call_roles_permissions": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
+			},
 			"alert_urgency_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -386,6 +460,24 @@ func resourceOnCallRoleCreate(ctx context.Context, d *schema.ResourceData, meta 
 	if value, ok := d.GetOkExists("live_call_routing_permissions"); ok {
 		s.LiveCallRoutingPermissions = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("on_call_readiness_report_permissions"); ok {
+		s.OnCallReadinessReportPermissions = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("on_call_roles_permissions"); ok {
+		s.OnCallRolesPermissions = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("alert_fields_permissions"); ok {
+		s.AlertFieldsPermissions = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("alert_groups_permissions"); ok {
+		s.AlertGroupsPermissions = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("alert_routing_rules_permissions"); ok {
+		s.AlertRoutingRulesPermissions = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("alert_urgency_permissions"); ok {
+		s.AlertUrgencyPermissions = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("schedule_override_permissions"); ok {
 		s.ScheduleOverridePermissions = value.([]interface{})
 	}
@@ -435,6 +527,11 @@ func resourceOnCallRoleRead(ctx context.Context, d *schema.ResourceData, meta in
 	d.Set("system_role", item.SystemRole)
 	d.Set("alert_sources_permissions", item.AlertSourcesPermissions)
 	d.Set("alert_urgency_permissions", item.AlertUrgencyPermissions)
+	d.Set("alert_fields_permissions", item.AlertFieldsPermissions)
+	d.Set("alert_groups_permissions", item.AlertGroupsPermissions)
+	d.Set("alert_routing_rules_permissions", item.AlertRoutingRulesPermissions)
+	d.Set("on_call_readiness_report_permissions", item.OnCallReadinessReportPermissions)
+	d.Set("on_call_roles_permissions", item.OnCallRolesPermissions)
 	d.Set("alerts_permissions", item.AlertsPermissions)
 	d.Set("api_keys_permissions", item.ApiKeysPermissions)
 	d.Set("audits_permissions", item.AuditsPermissions)
@@ -480,6 +577,41 @@ func resourceOnCallRoleUpdate(ctx context.Context, d *schema.ResourceData, meta 
 			s.AlertUrgencyPermissions = value.([]interface{})
 		} else {
 			s.AlertUrgencyPermissions = []interface{}{}
+		}
+	}
+	if d.HasChange("alert_fields_permissions") {
+		if value, ok := d.GetOk("alert_fields_permissions"); value != nil && ok {
+			s.AlertFieldsPermissions = value.([]interface{})
+		} else {
+			s.AlertFieldsPermissions = []interface{}{}
+		}
+	}
+	if d.HasChange("alert_groups_permissions") {
+		if value, ok := d.GetOk("alert_groups_permissions"); value != nil && ok {
+			s.AlertGroupsPermissions = value.([]interface{})
+		} else {
+			s.AlertGroupsPermissions = []interface{}{}
+		}
+	}
+	if d.HasChange("alert_routing_rules_permissions") {
+		if value, ok := d.GetOk("alert_routing_rules_permissions"); value != nil && ok {
+			s.AlertRoutingRulesPermissions = value.([]interface{})
+		} else {
+			s.AlertRoutingRulesPermissions = []interface{}{}
+		}
+	}
+	if d.HasChange("on_call_readiness_report_permissions") {
+		if value, ok := d.GetOk("on_call_readiness_report_permissions"); value != nil && ok {
+			s.OnCallReadinessReportPermissions = value.([]interface{})
+		} else {
+			s.OnCallReadinessReportPermissions = []interface{}{}
+		}
+	}
+	if d.HasChange("on_call_roles_permissions") {
+		if value, ok := d.GetOk("on_call_roles_permissions"); value != nil && ok {
+			s.OnCallRolesPermissions = value.([]interface{})
+		} else {
+			s.OnCallRolesPermissions = []interface{}{}
 		}
 	}
 
