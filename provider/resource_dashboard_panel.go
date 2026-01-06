@@ -117,7 +117,7 @@ func resourceDashboardPanel() *schema.Resource {
 
 									"groups": &schema.Schema{
 										Type:         schema.TypeString,
-										Default:      "all",
+										Computed:     true,
 										Required:     false,
 										Optional:     true,
 										Sensitive:    false,

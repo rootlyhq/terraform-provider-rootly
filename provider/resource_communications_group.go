@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"sort"
 
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -476,6 +477,22 @@ func resourceCommunicationsGroupRead(ctx context.Context, d *schema.ResourceData
 			}
 		}
 
+		// Sort by user_id to ensure consistent ordering
+		sort.Slice(processed_items_communication_group_members, func(i, j int) bool {
+			userIdI, okI := processed_items_communication_group_members[i]["user_id"].(float64)
+			userIdJ, okJ := processed_items_communication_group_members[j]["user_id"].(float64)
+			if okI && okJ {
+				return userIdI < userIdJ
+			}
+			// Fallback to comparing as ints if float64 conversion fails
+			userIdIntI, okIntI := processed_items_communication_group_members[i]["user_id"].(int)
+			userIdIntJ, okIntJ := processed_items_communication_group_members[j]["user_id"].(int)
+			if okIntI && okIntJ {
+				return userIdIntI < userIdIntJ
+			}
+			return false
+		})
+
 		d.Set("communication_group_members", processed_items_communication_group_members)
 	} else {
 		d.Set("communication_group_members", nil)
@@ -496,6 +513,16 @@ func resourceCommunicationsGroupRead(ctx context.Context, d *schema.ResourceData
 				processed_items_communication_external_group_members = append(processed_items_communication_external_group_members, processed_item_communication_external_group_members)
 			}
 		}
+
+		// Sort by email to ensure consistent ordering
+		sort.Slice(processed_items_communication_external_group_members, func(i, j int) bool {
+			emailI, okI := processed_items_communication_external_group_members[i]["email"].(string)
+			emailJ, okJ := processed_items_communication_external_group_members[j]["email"].(string)
+			if okI && okJ {
+				return emailI < emailJ
+			}
+			return false
+		})
 
 		d.Set("communication_external_group_members", processed_items_communication_external_group_members)
 	} else {

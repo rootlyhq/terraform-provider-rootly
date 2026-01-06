@@ -39,6 +39,7 @@ For detailed usage instructions, see [Migration Script Documentation](scripts/mi
 |---------|-------------|
 | `make build` | Complete build: generate code, compile provider, regenerate docs |
 | `make codegen` | Download schema and auto-generate client code and provider resources |
+| `make codegen <RESOURCE=resource_name>`| Download schema and auto-generate client code and provider for the named resource | 
 | `make docs` | Regenerate Terraform documentation from provider schemas |
 | `make test` | Run unit tests |
 | `make testacc` | Run acceptance tests |

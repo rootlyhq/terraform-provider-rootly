@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const swaggerPath = process.argv[2];
+const filterResource = process.argv[3] || null;
 const inflect = require("./inflect");
 const providerTpl = require("./generate-provider-tpl");
 const clientTpl = require("./generate-client-tpl");
@@ -100,11 +101,35 @@ const readOnlyCollections = [
 ]
 
 function main() {
-  generateProvider(resources(), workflowTaskResources(), dataSources())
-  generateClients()
-  generateResources()
-  generateWorkflowTaskResources(workflowTaskResources(), swagger)
-  generateDataSources()
+  if (filterResource) {
+    console.log(`Generating code for resource: ${filterResource}`);
+    if (resources().includes(filterResource)) {
+      if (readOnlyCollections.includes(filterResource)) {
+        generateReadOnlyClient(filterResource);
+      } else {
+        generateClient(filterResource);
+      }
+      generateResource(filterResource);
+    } else if (dataSources().includes(filterResource)) {
+      if (readOnlyCollections.includes(filterResource)) {
+        generateReadOnlyClient(filterResource);
+      } else {
+        generateClient(filterResource);
+      }
+      generateDataSource(filterResource);
+    } else {
+      console.error(`Error: Resource '${filterResource}' not found in resources or data sources`);
+      console.error(`Available resources: ${resources().slice(0, 10).join(', ')}...`);
+      process.exit(1);
+    }
+  } else {
+    // Generate everything
+    generateProvider(resources(), workflowTaskResources(), dataSources())
+    generateClients()
+    generateResources()
+    generateWorkflowTaskResources(workflowTaskResources(), swagger)
+    generateDataSources()
+  }
 }
 
 main()
@@ -315,8 +340,17 @@ function resourceSchema(name) {
 }
 
 function requiredFields(name) {
-  return swagger.components.schemas[`new_${name}`].properties.data.properties
-    .attributes.required;
+  const schemaName = `new_${name}`;
+  const schema = swagger.components.schemas[schemaName];
+  if (!schema) {
+    console.warn(`Schema '${schemaName}' not found for resource '${name}'. Skipping required fields check.`);
+    return [];
+  }
+  if (!schema.properties || !schema.properties.data || !schema.properties.data.properties || !schema.properties.data.properties.attributes) {
+    console.warn(`Schema '${schemaName}' exists but doesn't have the expected structure for resource '${name}'. Skipping required fields check.`);
+    return [];
+  }
+  return schema.properties.data.properties.attributes.required || [];
 }
 
 function collectionPathSchema(name) {
