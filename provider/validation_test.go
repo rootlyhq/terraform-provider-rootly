@@ -46,7 +46,6 @@ type dummyClient struct {
 func (c *dummyClient) ListWorkflowTasks(workflowId string, params *rootlygo.ListWorkflowTasksParams) ([]interface{}, error) {
 	var res []interface{}
 	for _, t := range c.tasks {
-		// Return as *client.WorkflowTask-like structure
 		res = append(res, &client.WorkflowTask{
 			ID:       t.ID,
 			Name:     t.Name,
@@ -63,7 +62,6 @@ func TestValidateUniqueWorkflowTaskPosition_RunValidationDirectly(t *testing.T) 
 		Values:      map[string]interface{}{"position": 1, "workflow_id": "wf1"},
 		ChangedKeys: map[string]bool{"position": true, "workflow_id": true},
 	}
-	// Set up a dummy client with a conflicting position
 	c := &dummyClient{
 		tasks: []*struct {
 			ID       string
@@ -73,12 +71,10 @@ func TestValidateUniqueWorkflowTaskPosition_RunValidationDirectly(t *testing.T) 
 			{ID: "my-task-1", Name: "First Task", Position: 1}, // Conflict
 		},
 	}
-	// Test the internal function which accepts our mock interface
 	err := validateUniqueWorkflowTaskPositionInternal(context.Background(), d, c)
 	if err == nil {
 		t.Fatalf("expected an error due to duplicate position, but got nil")
 	}
-	// Also test a case with no conflict
 	d = &ResourceDiffMock{
 		Id_:         "my-task-3",
 		Values:      map[string]interface{}{"position": 2, "workflow_id": "wf1"},
