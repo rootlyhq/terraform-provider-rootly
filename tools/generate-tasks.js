@@ -45,6 +45,7 @@ func resourceWorkflowTask${task_name_camel}() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
+		CustomizeDiff: validateUniqueWorkflowTaskPosition,
 
 		Schema: map[string]*schema.Schema {
 			"workflow_id": {
