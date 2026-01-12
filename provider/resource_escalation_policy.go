@@ -260,15 +260,21 @@ func resourceEscalationPolicyRead(ctx context.Context, d *schema.ResourceData, m
 	d.Set("last_updated_by_user_id", item.LastUpdatedByUserId)
 	d.Set("group_ids", item.GroupIds)
 	d.Set("service_ids", item.ServiceIds)
-	singleton_list_business_hours := make([]interface{}, 1, 1)
-	processed_item_business_hours := map[string]interface{}{
-		"time_zone":  item.BusinessHours["time_zone"],
-		"days":       item.BusinessHours["days"],
-		"start_time": item.BusinessHours["start_time"],
-		"end_time":   item.BusinessHours["end_time"],
+
+	// We can do this cause len check of a nil map returns 0, we don't need a nil check.
+	if len(item.BusinessHours) > 0 {
+		// Only set business_hours if it has actual data from the API
+		// This ensures drift detection works when business_hours is not specified in config
+		singleton_list_business_hours := make([]interface{}, 1)
+		processed_item_business_hours := map[string]interface{}{
+			"time_zone":  item.BusinessHours["time_zone"],
+			"days":       item.BusinessHours["days"],
+			"start_time": item.BusinessHours["start_time"],
+			"end_time":   item.BusinessHours["end_time"],
+		}
+		singleton_list_business_hours[0] = processed_item_business_hours
+		d.Set("business_hours", singleton_list_business_hours)
 	}
-	singleton_list_business_hours[0] = processed_item_business_hours
-	d.Set("business_hours", singleton_list_business_hours)
 
 	return nil
 }
