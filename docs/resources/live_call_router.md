@@ -17,6 +17,7 @@ description: |-
 ### Required
 
 - `name` (String) The name of the live_call_router
+- `paging_targets` (Block List) Paging targets that callers can select from when this live call router is configured as a phone tree. (see [below for nested schema](#nestedblock--paging_targets))
 - `phone_number` (String) You can select a phone number using [generate_phone_number](#//api/v1/live_call_routers/generate_phone_number) API and pass that phone number here to register
 
 ### Optional
@@ -29,7 +30,6 @@ description: |-
 - `escalation_level_delay_in_seconds` (Number) This overrides the delay (seconds) in escalation levels
 - `escalation_policy_trigger_params` (Map of String)
 - `kind` (String) The kind of the live_call_router. Value must be one of `voicemail`, `live`.
-- `paging_targets` (Block List) Paging targets that callers can select from when this live call router is configured as a phone tree. (see [below for nested schema](#nestedblock--paging_targets))
 - `phone_type` (String) The phone type of the live_call_router. Value must be one of `local`, `toll_free`, `mobile`.
 - `sent_to_voicemail_delay` (Number) The delay (seconds) after which the caller in redirected to voicemail
 - `should_auto_resolve_alert_on_call_end` (Boolean) This overrides the delay (seconds) in escalation levels. Value must be one of true or false
