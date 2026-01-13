@@ -170,6 +170,38 @@ func TestAccResourceDashboardPanel(t *testing.T) {
 					})),
 				),
 			},
+			// Empty description
+			{
+				Config: testAccResourceDashboardPanelConfig(dashboardName, dashboardPanelName+"-updated", `
+					position {
+						x = 300
+						y = 400
+						h = 500
+						w = 600
+					}
+
+					params {
+						display = "line_chart"
+						legend {
+							groups = "charted"
+						}
+					}
+				`),
+				ConfigStateChecks: append(
+					configStateChecks,
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("name"), knownvalue.StringExact(dashboardPanelName+"-updated")),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("position").AtSliceIndex(0), knownvalue.MapExact(map[string]knownvalue.Check{
+						"x": knownvalue.Int64Exact(300),
+						"y": knownvalue.Int64Exact(400),
+						"h": knownvalue.Int64Exact(500),
+						"w": knownvalue.Int64Exact(600),
+					})),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("params").AtSliceIndex(0).AtMapKey("display"), knownvalue.StringExact("line_chart")),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("params").AtSliceIndex(0).AtMapKey("description"), knownvalue.StringExact("")),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("params").AtSliceIndex(0).AtMapKey("legend").AtSliceIndex(0).AtMapKey("groups"), knownvalue.StringExact("charted")),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("params").AtSliceIndex(0).AtMapKey("datasets"), knownvalue.ListSizeExact(0)),
+				),
+			},
 			{
 				ResourceName:      resName,
 				ImportState:       true,
