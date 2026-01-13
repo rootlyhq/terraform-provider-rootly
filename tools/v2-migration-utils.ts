@@ -37,6 +37,11 @@ export const SchemaMods: SchemaMod[] = [
       "data"
     ].properties["attributes"].required.push("dashboard_id");
 
+    // Dashboard panel params description is not computed
+    schema.components.schemas["dashboard_panel"].properties[
+      "params"
+    ].properties["description"].tf_computed = false;
+
     return schema;
   },
 ];
