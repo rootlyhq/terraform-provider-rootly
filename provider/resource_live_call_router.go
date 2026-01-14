@@ -196,8 +196,8 @@ func resourceLiveCallRouter() *schema.Resource {
 			"paging_targets": &schema.Schema{
 				Type:             schema.TypeList,
 				Computed:         false,
-				Required:         false,
-				Optional:         true,
+				Required:         true,
+				Optional:         false,
 				Sensitive:        false,
 				ForceNew:         false,
 				WriteOnly:        false,
