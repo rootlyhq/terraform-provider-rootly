@@ -360,6 +360,7 @@ function collectionPathSchema(name) {
       const get = swagger.paths[url].get;
       return (
         get &&
+        get.operationId &&
         get.operationId.replace(/ /g, "") ===
           `list${inflect.pluralize(inflect.camelize(name))}`
       );
@@ -373,6 +374,7 @@ function hasQueryParam(name) {
       const get = swagger.paths[url].get;
       return (
         get &&
+        get.operationId &&
         get.operationId.replace(/ /g, "") ===
           `get${inflect.singularize(inflect.camelize(name))}`
       );
