@@ -44,9 +44,59 @@ resource "rootly_heartbeat" "test" {
   name = "%s"
   alert_summary = "Heartbeat expired"
   interval = 5
+  interval_unit = "minutes"
   notification_target_id = rootly_team.test.id
   notification_target_type = "Group"
   alert_urgency_id = rootly_alert_urgency.test.id
+}
+`, teamName, alertUrgencyName, heartbeatName)
+}
+
+func TestAccResourceHeartbeatWithNewFields(t *testing.T) {
+	heartbeatName := acctest.RandomWithPrefix("tf-heartbeat-new")
+	teamName := acctest.RandomWithPrefix("tf-team")
+	alertUrgencyName := acctest.RandomWithPrefix("tf-alert-urgency")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck: func() {
+			testAccPreCheck(t)
+		},
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceHeartbeatWithNewFields(heartbeatName, teamName, alertUrgencyName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_heartbeat.test_new", "interval_unit", "hours"),
+					resource.TestCheckResourceAttrSet("rootly_heartbeat.test_new", "ping_url"),
+					resource.TestCheckResourceAttrSet("rootly_heartbeat.test_new", "secret"),
+				),
+			},
+		},
+	})
+}
+
+func testAccResourceHeartbeatWithNewFields(heartbeatName, teamName, alertUrgencyName string) string {
+	return fmt.Sprintf(`
+resource "rootly_team" "test" {
+  name = "%s"
+}
+
+resource "rootly_alert_urgency" "test" {
+  name = "%s"
+  description = "Test alert urgency"
+  position = 1
+}
+
+resource "rootly_heartbeat" "test_new" {
+  name = "%s"
+  alert_summary = "Heartbeat expired with new fields"
+  alert_description = "Testing new heartbeat fields"
+  interval = 2
+  interval_unit = "hours"
+  notification_target_id = rootly_team.test.id
+  notification_target_type = "Group"
+  alert_urgency_id = rootly_alert_urgency.test.id
+  enabled = true
 }
 `, teamName, alertUrgencyName, heartbeatName)
 }
