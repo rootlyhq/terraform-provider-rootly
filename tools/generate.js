@@ -59,6 +59,7 @@ const excluded = {
     "catalog_entity",
     "catalog_entity_property",
     "communications_group",
+    "communications_template", // cannot auto-generate because of custom nested JSON:API format handling (IR-3529)
     "custom_field_option",
     "custom_field",
     "dashboard",
