@@ -11,15 +11,11 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
-	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
 
 func resourceStatus() *schema.Resource {
 	return &schema.Resource{
-		CreateContext: resourceStatusCreate,
-		ReadContext:   resourceStatusRead,
-		UpdateContext: resourceStatusUpdate,
-		DeleteContext: resourceStatusDelete,
+		ReadContext: resourceStatusRead,
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
@@ -81,40 +77,6 @@ func resourceStatus() *schema.Resource {
 	}
 }
 
-func resourceStatusCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	c := meta.(*client.Client)
-
-	tflog.Trace(ctx, fmt.Sprintf("Creating Status"))
-
-	s := &client.Status{}
-
-	if value, ok := d.GetOkExists("name"); ok {
-		s.Name = value.(string)
-	}
-	if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
-	}
-	if value, ok := d.GetOkExists("description"); ok {
-		s.Description = value.(string)
-	}
-	if value, ok := d.GetOkExists("color"); ok {
-		s.Color = value.(string)
-	}
-	if value, ok := d.GetOkExists("enabled"); ok {
-		s.Enabled = tools.Bool(value.(bool))
-	}
-
-	res, err := c.CreateStatus(s)
-	if err != nil {
-		return diag.Errorf("Error creating status: %s", err.Error())
-	}
-
-	d.SetId(res.ID)
-	tflog.Trace(ctx, fmt.Sprintf("created a status resource: %s", d.Id()))
-
-	return resourceStatusRead(ctx, d, meta)
-}
-
 func resourceStatusRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading Status: %s", d.Id()))
@@ -137,57 +99,6 @@ func resourceStatusRead(ctx context.Context, d *schema.ResourceData, meta interf
 	d.Set("description", item.Description)
 	d.Set("color", item.Color)
 	d.Set("enabled", item.Enabled)
-
-	return nil
-}
-
-func resourceStatusUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	c := meta.(*client.Client)
-	tflog.Trace(ctx, fmt.Sprintf("Updating Status: %s", d.Id()))
-
-	s := &client.Status{}
-
-	if d.HasChange("name") {
-		s.Name = d.Get("name").(string)
-	}
-	if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
-	}
-	if d.HasChange("description") {
-		s.Description = d.Get("description").(string)
-	}
-	if d.HasChange("color") {
-		s.Color = d.Get("color").(string)
-	}
-	if d.HasChange("enabled") {
-		s.Enabled = tools.Bool(d.Get("enabled").(bool))
-	}
-
-	_, err := c.UpdateStatus(d.Id(), s)
-	if err != nil {
-		return diag.Errorf("Error updating status: %s", err.Error())
-	}
-
-	return resourceStatusRead(ctx, d, meta)
-}
-
-func resourceStatusDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	c := meta.(*client.Client)
-	tflog.Trace(ctx, fmt.Sprintf("Deleting Status: %s", d.Id()))
-
-	err := c.DeleteStatus(d.Id())
-	if err != nil {
-		// In the case of a NotFoundError, it means the resource may have been removed upstream.
-		// We just remove it from the state.
-		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
-			tflog.Warn(ctx, fmt.Sprintf("Status (%s) not found, removing from state", d.Id()))
-			d.SetId("")
-			return nil
-		}
-		return diag.Errorf("Error deleting status: %s", err.Error())
-	}
-
-	d.SetId("")
 
 	return nil
 }
