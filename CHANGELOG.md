@@ -1,5 +1,19 @@
 # Changelog
 
+## [5.4.0] -- 2025-1-25
+
+### Added
+- Make Communications Template Handle Both Response Types
+
+### Fixed
+
+- Codegen was failing due to failed checks on `operation_id`
+- Make Escalation Policy Service IDs Computed & Optional 
+
+
+### Deprecated
+
+
 ## [5.3.0] -- 2025-1-14
 
 ### Added
