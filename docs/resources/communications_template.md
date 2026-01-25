@@ -36,12 +36,50 @@ description: |-
 
 Optional:
 
-- `communication_stage_id` (String) The communication stage ID
+- `data` (Block List, Max: 1) (see [below for nested schema](#nestedblock--communication_template_stages--data))
+
+<a id="nestedblock--communication_template_stages--data"></a>
+### Nested Schema for `communication_template_stages.data`
+
+Optional:
+
+- `attributes` (Block List, Max: 1) (see [below for nested schema](#nestedblock--communication_template_stages--data--attributes))
+- `id` (String) ID of the communication template stage
+- `type` (String) Value must be one of `communications_template_stages`.
+
+<a id="nestedblock--communication_template_stages--data--attributes"></a>
+### Nested Schema for `communication_template_stages.data.attributes`
+
+Optional:
+
+- `communication_stage` (Block List, Max: 1) Map must contain two fields, `id` and `name`. (see [below for nested schema](#nestedblock--communication_template_stages--data--attributes--communication_stage))
+- `communication_template` (Block List, Max: 1) Map must contain two fields, `id` and `name`. (see [below for nested schema](#nestedblock--communication_template_stages--data--attributes--communication_template))
+- `created_at` (String) Date of creation
 - `email_body` (String) Email body for the stage
 - `email_subject` (String) Email subject for the stage
-- `id` (String) ID of the communication template stage
 - `slack_content` (String) Slack content for the stage
 - `sms_content` (String) SMS content for the stage
+- `updated_at` (String) Date of last update
+
+<a id="nestedblock--communication_template_stages--data--attributes--communication_stage"></a>
+### Nested Schema for `communication_template_stages.data.attributes.communication_stage`
+
+Optional:
+
+- `id` (String) The communication stage ID
+- `name` (String) The communication stage name
+
+
+<a id="nestedblock--communication_template_stages--data--attributes--communication_template"></a>
+### Nested Schema for `communication_template_stages.data.attributes.communication_template`
+
+Optional:
+
+- `id` (String) The communication template ID
+- `name` (String) The communication template name
+
+
+
 
 
 <a id="nestedblock--communication_type"></a>

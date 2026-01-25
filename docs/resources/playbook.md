@@ -20,13 +20,13 @@ description: |-
 
 ### Optional
 
-- `environment_ids` (List of String) The Environment ID's to attach to the incident
+- `environment_ids` (List of String) The Environment IDs to attach to the incident
 - `external_url` (String) The external url of the playbook
-- `functionality_ids` (List of String) The Functionality ID's to attach to the incident
-- `group_ids` (List of String) The Team ID's to attach to the incident
-- `incident_type_ids` (List of String) The Incident Type ID's to attach to the incident
-- `service_ids` (List of String) The Service ID's to attach to the incident
-- `severity_ids` (List of String) The Severity ID's to attach to the incident
+- `functionality_ids` (List of String) The Functionality IDs to attach to the incident
+- `group_ids` (List of String) The Team IDs to attach to the incident
+- `incident_type_ids` (List of String) The Incident Type IDs to attach to the incident
+- `service_ids` (List of String) The Service IDs to attach to the incident
+- `severity_ids` (List of String) The Severity IDs to attach to the incident
 - `summary` (String) The summary of the playbook
 
 ### Read-Only
