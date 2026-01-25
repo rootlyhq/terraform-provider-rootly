@@ -52,3 +52,31 @@ resource "rootly_workflow_action_item" "foo" {
 	}
 }
 `
+
+func TestAccResourceWorkflowActionItemWithIsNotCondition(t *testing.T) {
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck: func() {
+			testAccPreCheck(t)
+		},
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceWorkflowActionItemWithIsNotCondition,
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_workflow_action_item.test_is_not", "name", "test-action-item-workflow-is-not"),
+					resource.TestCheckResourceAttr("rootly_workflow_action_item.test_is_not", "trigger_params.0.incident_condition_status", "IS NOT"),
+				),
+			},
+		},
+	})
+}
+
+const testAccResourceWorkflowActionItemWithIsNotCondition = `
+resource "rootly_workflow_action_item" "test_is_not" {
+  name = "test-action-item-workflow-is-not"
+	trigger_params {
+		triggers = ["action_item_created"]
+		incident_condition_status = "IS NOT"
+	}
+}
+`

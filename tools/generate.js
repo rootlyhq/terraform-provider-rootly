@@ -17,6 +17,7 @@ const excluded = {
   dataSources: [
     "alert",
     "alert_event",
+    "alert_route",
     "audit",
     "catalog",
     "catalog_field",
@@ -51,6 +52,7 @@ const excluded = {
   resources: [
     "alert",
     "alert_event",
+    "status",
     "alert_route",
     "alerts_source",
     "audit",
@@ -99,6 +101,7 @@ const readOnlyCollections = [
   "incident_post_mortem",
   "incident",
   "user",
+  "status",
 ]
 
 function main() {

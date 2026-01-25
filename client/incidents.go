@@ -112,6 +112,7 @@ type Incident struct {
 	CancellationMessage            string                 `jsonapi:"attr,cancellation_message,omitempty"`
 	ScheduledFor                   string                 `jsonapi:"attr,scheduled_for,omitempty"`
 	ScheduledUntil                 string                 `jsonapi:"attr,scheduled_until,omitempty"`
+	MutedServiceIds                []interface{}          `jsonapi:"attr,muted_service_ids,omitempty"`
 	RetrospectiveProgressStatus    string                 `jsonapi:"attr,retrospective_progress_status,omitempty"`
 	InTriageBy                     map[string]interface{} `jsonapi:"attr,in_triage_by,omitempty"`
 	StartedBy                      map[string]interface{} `jsonapi:"attr,started_by,omitempty"`

@@ -67,11 +67,11 @@ resource "rootly_workflow_pulse" "my-workflow" {
 Optional:
 
 - `pulse_condition` (String) Value must be one off `ALL`, `ANY`, `NONE`.
-- `pulse_condition_label` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
+- `pulse_condition_label` (String) Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `pulse_condition_label_use_regexp` (Boolean) Value must be one of true or false
-- `pulse_condition_payload` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
+- `pulse_condition_payload` (String) Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `pulse_condition_payload_use_regexp` (Boolean) Value must be one of true or false
-- `pulse_condition_source` (String) Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
+- `pulse_condition_source` (String) Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `pulse_condition_source_use_regexp` (Boolean) Value must be one of true or false
 - `pulse_labels` (List of String)
 - `pulse_payload` (List of String)

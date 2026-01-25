@@ -60,3 +60,41 @@ resource "rootly_workflow_form_field_condition" "test2" {
 	values = ["test"]
 }
 `
+
+func TestAccResourceWorkflowFormFieldConditionWithIsNotCondition(t *testing.T) {
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck: func() {
+			testAccPreCheck(t)
+		},
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceWorkflowFormFieldConditionWithIsNotCondition,
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_workflow_form_field_condition.test_is_not", "incident_condition", "IS NOT"),
+				),
+			},
+		},
+	})
+}
+
+const testAccResourceWorkflowFormFieldConditionWithIsNotCondition = `
+resource "rootly_workflow_incident" "test" {
+  name = "workflow-form-field-test-is-not"
+}
+
+resource "rootly_form_field" "test" {
+  	name = "form-field-test-is-not"
+	kind = "custom"
+	input_kind = "text"
+	shown = ["web_new_incident_form", "slack_new_incident_form"]
+	required = []
+}
+
+resource "rootly_workflow_form_field_condition" "test_is_not" {
+	workflow_id = rootly_workflow_incident.test.id
+	form_field_id = rootly_form_field.test.id
+	values = ["test"]
+	incident_condition = "IS NOT"
+}
+`

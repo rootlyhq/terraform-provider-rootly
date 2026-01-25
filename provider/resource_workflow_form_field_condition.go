@@ -56,8 +56,8 @@ func resourceWorkflowFormFieldCondition() *schema.Resource {
 				Sensitive:    false,
 				ForceNew:     false,
 				WriteOnly:    false,
-				Description:  "The trigger condition. Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
-				ValidateFunc: validation.StringInSlice([]string{"IS", "ANY", "CONTAINS", "CONTAINS_ALL", "CONTAINS_NONE", "NONE", "SET", "UNSET"}, false),
+				Description:  "The trigger condition. Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+				ValidateFunc: validation.StringInSlice([]string{"IS", "IS NOT", "ANY", "CONTAINS", "CONTAINS_ALL", "CONTAINS_NONE", "NONE", "SET", "UNSET"}, false),
 			},
 
 			"values": &schema.Schema{

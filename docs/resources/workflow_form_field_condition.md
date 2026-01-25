@@ -20,7 +20,7 @@ description: |-
 
 ### Optional
 
-- `incident_condition` (String) The trigger condition. Value must be one of `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
+- `incident_condition` (String) The trigger condition. Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `selected_catalog_entity_ids` (List of String)
 - `selected_functionality_ids` (List of String)
 - `selected_group_ids` (List of String)

@@ -56,6 +56,7 @@ ${dataSources
     return `				"rootly_${name}": dataSource${inflect.camelize(name)}(),`;
   })
   .join("\n")}
+				"rootly_alert_route": dataSourceAlertRoute(),
 				"rootly_custom_field": dataSourceCustomField(),
 				"rootly_custom_field_option": dataSourceCustomFieldOption(),
 				"rootly_causes": dataSourceCauses(),
@@ -80,6 +81,7 @@ ${resources
     return `				"rootly_${name}": resource${inflect.camelize(name)}(),`;
   })
   .join("\n")}
+				"rootly_alert_route": resourceAlertRoute(),
 				"rootly_alerts_source": resourceAlertsSource(),
 				"rootly_communications_group": resourceCommunicationsGroup(),
 				"rootly_custom_field": resourceCustomField(),
@@ -91,11 +93,13 @@ ${resources
 				"rootly_retrospective_process": resourceRetrospectiveProcess(),
 				"rootly_retrospective_step": resourceRetrospectiveStep(),
 				"rootly_post_mortem_template": resourcePostmortemTemplate(),
+				"rootly_live_call_router": resourceLiveCallRouter(),
 				"rootly_on_call_role": resourceOnCallRole(),
 				"rootly_override_shift": resourceOverrideShift(),
 				"rootly_schedule": resourceSchedule(),
 				"rootly_schedule_rotation": resourceScheduleRotation(),
 				"rootly_secret": resourceSecret(),
+				"rootly_team": resourceTeam(),
 				"rootly_workflow_incident": resourceWorkflowIncident(),
 				"rootly_workflow_action_item": resourceWorkflowActionItem(),
 				"rootly_workflow_alert": resourceWorkflowAlert(),
