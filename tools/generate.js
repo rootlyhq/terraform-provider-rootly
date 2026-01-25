@@ -100,6 +100,7 @@ const readOnlyCollections = [
   "incident_post_mortem",
   "incident",
   "user",
+  "status",
 ]
 
 function main() {

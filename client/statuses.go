@@ -39,30 +39,6 @@ func (c *Client) ListStatuses(params *rootlygo.ListStatusesParams) ([]interface{
 	return statuses, nil
 }
 
-func (c *Client) CreateStatus(d *Status) (*Status, error) {
-	buffer, err := MarshalData(d)
-	if err != nil {
-		return nil, fmt.Errorf("Error marshaling status: %w", err)
-	}
-
-	req, err := rootlygo.NewCreateStatusRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
-	if err != nil {
-		return nil, fmt.Errorf("Error building request: %w", err)
-	}
-	resp, err := c.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("Failed to perform request to create status: %s", err)
-	}
-
-	data, err := UnmarshalData(resp.Body, new(Status))
-	resp.Body.Close()
-	if err != nil {
-		return nil, fmt.Errorf("Error unmarshaling status: %w", err)
-	}
-
-	return data.(*Status), nil
-}
-
 func (c *Client) GetStatus(id string) (*Status, error) {
 	req, err := rootlygo.NewGetStatusRequest(c.Rootly.Server, id)
 	if err != nil {
@@ -81,42 +57,4 @@ func (c *Client) GetStatus(id string) (*Status, error) {
 	}
 
 	return data.(*Status), nil
-}
-
-func (c *Client) UpdateStatus(id string, status *Status) (*Status, error) {
-	buffer, err := MarshalData(status)
-	if err != nil {
-		return nil, fmt.Errorf("Error marshaling status: %w", err)
-	}
-
-	req, err := rootlygo.NewUpdateStatusRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
-	if err != nil {
-		return nil, fmt.Errorf("Error building request: %w", err)
-	}
-	resp, err := c.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("Failed to make request to update status: %w", err)
-	}
-
-	data, err := UnmarshalData(resp.Body, new(Status))
-	resp.Body.Close()
-	if err != nil {
-		return nil, fmt.Errorf("Error unmarshaling status: %w", err)
-	}
-
-	return data.(*Status), nil
-}
-
-func (c *Client) DeleteStatus(id string) error {
-	req, err := rootlygo.NewDeleteStatusRequest(c.Rootly.Server, id)
-	if err != nil {
-		return fmt.Errorf("Error building request: %w", err)
-	}
-
-	_, err = c.Do(req)
-	if err != nil {
-		return fmt.Errorf("Failed to make request to delete status: %w", err)
-	}
-
-	return nil
 }
