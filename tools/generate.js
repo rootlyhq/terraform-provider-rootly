@@ -17,6 +17,7 @@ const excluded = {
   dataSources: [
     "alert",
     "alert_event",
+    "alert_route",
     "audit",
     "catalog",
     "catalog_field",
