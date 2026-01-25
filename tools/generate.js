@@ -52,6 +52,7 @@ const excluded = {
   resources: [
     "alert",
     "alert_event",
+    "status",
     "alert_route",
     "alerts_source",
     "audit",

@@ -154,7 +154,6 @@ func New(version string) func() *schema.Provider {
 				"rootly_status_page_template":                               resourceStatusPageTemplate(),
 				"rootly_status_page":                                        resourceStatusPage(),
 				"rootly_webhooks_endpoint":                                  resourceWebhooksEndpoint(),
-				"rootly_status":                                             resourceStatus(),
 				"rootly_sub_status":                                         resourceSubStatus(),
 				"rootly_incident_sub_status":                                resourceIncidentSubStatus(),
 				"rootly_retrospective_process_group":                        resourceRetrospectiveProcessGroup(),

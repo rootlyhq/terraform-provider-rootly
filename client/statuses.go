@@ -31,30 +31,9 @@ func (c *Client) ListStatuses(params *rootlygo.ListStatusesParams) ([]interface{
 	}
 
 	statuses, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Status)))
-	resp.Body.Close()
 	if err != nil {
-		return nil, fmt.Errorf("Error unmarshaling: %w", err)
+		return nil, fmt.Errorf("Error unmarshalling: %w", err)
 	}
 
 	return statuses, nil
-}
-
-func (c *Client) GetStatus(id string) (*Status, error) {
-	req, err := rootlygo.NewGetStatusRequest(c.Rootly.Server, id)
-	if err != nil {
-		return nil, fmt.Errorf("Error building request: %w", err)
-	}
-
-	resp, err := c.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("Failed to make request to get status: %w", err)
-	}
-
-	data, err := UnmarshalData(resp.Body, new(Status))
-	resp.Body.Close()
-	if err != nil {
-		return nil, fmt.Errorf("Error unmarshaling status: %w", err)
-	}
-
-	return data.(*Status), nil
 }
