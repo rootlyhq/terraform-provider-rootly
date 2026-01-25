@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
@@ -93,70 +94,205 @@ func resourceCommunicationsTemplate() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
-						"id": &schema.Schema{
-							Type:        schema.TypeString,
+						"data": &schema.Schema{
+							Type:        schema.TypeList,
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
 							Sensitive:   false,
 							ForceNew:    false,
 							WriteOnly:   false,
-							Description: "ID of the communication template stage",
-						},
+							Description: "",
+							MinItems:    0,
+							MaxItems:    1,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
 
-						"communication_stage_id": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Sensitive:   false,
-							ForceNew:    false,
-							WriteOnly:   false,
-							Description: "The communication stage ID",
-						},
+									"id": &schema.Schema{
+										Type:        schema.TypeString,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										Sensitive:   false,
+										ForceNew:    false,
+										WriteOnly:   false,
+										Description: "ID of the communication template stage",
+									},
 
-						"sms_content": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Sensitive:   false,
-							ForceNew:    false,
-							WriteOnly:   false,
-							Description: "SMS content for the stage",
-						},
+									"type": &schema.Schema{
+										Type:         schema.TypeString,
+										Default:      "communications_template_stages",
+										Required:     false,
+										Optional:     true,
+										Sensitive:    false,
+										ForceNew:     false,
+										WriteOnly:    false,
+										Description:  "Value must be one of `communications_template_stages`.",
+										ValidateFunc: validation.StringInSlice([]string{"communications_template_stages"}, false),
+									},
 
-						"email_subject": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Sensitive:   false,
-							ForceNew:    false,
-							WriteOnly:   false,
-							Description: "Email subject for the stage",
-						},
+									"attributes": &schema.Schema{
+										Type:        schema.TypeList,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										Sensitive:   false,
+										ForceNew:    false,
+										WriteOnly:   false,
+										Description: "",
+										MinItems:    0,
+										MaxItems:    1,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
 
-						"email_body": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Sensitive:   false,
-							ForceNew:    false,
-							WriteOnly:   false,
-							Description: "Email body for the stage",
-						},
+												"email_body": &schema.Schema{
+													Type:        schema.TypeString,
+													Computed:    true,
+													Required:    false,
+													Optional:    true,
+													Sensitive:   false,
+													ForceNew:    false,
+													WriteOnly:   false,
+													Description: "Email body for the stage",
+												},
 
-						"slack_content": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Sensitive:   false,
-							ForceNew:    false,
-							WriteOnly:   false,
-							Description: "Slack content for the stage",
+												"email_subject": &schema.Schema{
+													Type:        schema.TypeString,
+													Computed:    true,
+													Required:    false,
+													Optional:    true,
+													Sensitive:   false,
+													ForceNew:    false,
+													WriteOnly:   false,
+													Description: "Email subject for the stage",
+												},
+
+												"slack_content": &schema.Schema{
+													Type:        schema.TypeString,
+													Computed:    true,
+													Required:    false,
+													Optional:    true,
+													Sensitive:   false,
+													ForceNew:    false,
+													WriteOnly:   false,
+													Description: "Slack content for the stage",
+												},
+
+												"sms_content": &schema.Schema{
+													Type:        schema.TypeString,
+													Computed:    true,
+													Required:    false,
+													Optional:    true,
+													Sensitive:   false,
+													ForceNew:    false,
+													WriteOnly:   false,
+													Description: "SMS content for the stage",
+												},
+
+												"created_at": &schema.Schema{
+													Type:        schema.TypeString,
+													Computed:    true,
+													Required:    false,
+													Optional:    true,
+													Sensitive:   false,
+													ForceNew:    false,
+													WriteOnly:   false,
+													Description: "Date of creation",
+												},
+
+												"updated_at": &schema.Schema{
+													Type:        schema.TypeString,
+													Computed:    true,
+													Required:    false,
+													Optional:    true,
+													Sensitive:   false,
+													ForceNew:    false,
+													WriteOnly:   false,
+													Description: "Date of last update",
+												},
+
+												"communication_stage": &schema.Schema{
+													Type:        schema.TypeList,
+													Computed:    true,
+													Required:    false,
+													Optional:    true,
+													Sensitive:   false,
+													ForceNew:    false,
+													WriteOnly:   false,
+													Description: "Map must contain two fields, `id` and `name`. ",
+													MinItems:    0,
+													MaxItems:    1,
+													Elem: &schema.Resource{
+														Schema: map[string]*schema.Schema{
+
+															"id": &schema.Schema{
+																Type:        schema.TypeString,
+																Computed:    true,
+																Required:    false,
+																Optional:    true,
+																Sensitive:   false,
+																ForceNew:    false,
+																WriteOnly:   false,
+																Description: "The communication stage ID",
+															},
+
+															"name": &schema.Schema{
+																Type:        schema.TypeString,
+																Computed:    true,
+																Required:    false,
+																Optional:    true,
+																Sensitive:   false,
+																ForceNew:    false,
+																WriteOnly:   false,
+																Description: "The communication stage name",
+															},
+														},
+													},
+												},
+
+												"communication_template": &schema.Schema{
+													Type:        schema.TypeList,
+													Computed:    true,
+													Required:    false,
+													Optional:    true,
+													Sensitive:   false,
+													ForceNew:    false,
+													WriteOnly:   false,
+													Description: "Map must contain two fields, `id` and `name`. ",
+													MinItems:    0,
+													MaxItems:    1,
+													Elem: &schema.Resource{
+														Schema: map[string]*schema.Schema{
+
+															"id": &schema.Schema{
+																Type:        schema.TypeString,
+																Computed:    true,
+																Required:    false,
+																Optional:    true,
+																Sensitive:   false,
+																ForceNew:    false,
+																WriteOnly:   false,
+																Description: "The communication template ID",
+															},
+
+															"name": &schema.Schema{
+																Type:        schema.TypeString,
+																Computed:    true,
+																Required:    false,
+																Optional:    true,
+																Sensitive:   false,
+																ForceNew:    false,
+																WriteOnly:   false,
+																Description: "The communication template name",
+															},
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+							},
 						},
 					},
 				},
@@ -278,12 +414,7 @@ func resourceCommunicationsTemplateRead(ctx context.Context, d *schema.ResourceD
 			if rawItem, ok := c.(map[string]interface{}); ok {
 				// Create a new map with only the fields defined in the schema
 				processed_item_communication_template_stages := map[string]interface{}{
-					"id":                     rawItem["id"],
-					"communication_stage_id": rawItem["communication_stage_id"],
-					"sms_content":            rawItem["sms_content"],
-					"email_subject":          rawItem["email_subject"],
-					"email_body":             rawItem["email_body"],
-					"slack_content":          rawItem["slack_content"],
+					"data": rawItem["data"],
 				}
 				processed_items_communication_template_stages = append(processed_items_communication_template_stages, processed_item_communication_template_stages)
 			}
