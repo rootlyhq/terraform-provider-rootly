@@ -58,3 +58,40 @@ resource "rootly_workflow_custom_field_selection" "test2" {
 	values = ["test"]
 }
 `
+
+func TestAccResourceWorkflowCustomFieldSelectionWithIsNotCondition(t *testing.T) {
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck: func() {
+			testAccPreCheck(t)
+		},
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceWorkflowCustomFieldSelectionWithIsNotCondition,
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_workflow_custom_field_selection.test_is_not", "incident_condition", "IS NOT"),
+				),
+			},
+		},
+	})
+}
+
+const testAccResourceWorkflowCustomFieldSelectionWithIsNotCondition = `
+resource "rootly_workflow_incident" "test" {
+  name = "workflow-custom-field-test-is-not"
+}
+
+resource "rootly_custom_field" "test" {
+  	label = "custom-field-test-is-not"
+	kind = "text"
+	shown = ["incident_form", "incident_slack_form"]
+	required = []
+}
+
+resource "rootly_workflow_custom_field_selection" "test_is_not" {
+	workflow_id = rootly_workflow_incident.test.id
+	custom_field_id = rootly_custom_field.test.id
+	values = ["test"]
+	incident_condition = "IS NOT"
+}
+`
