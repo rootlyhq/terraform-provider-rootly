@@ -43,8 +43,8 @@ resource "rootly_alert_group" "example" {
 - `conditions` (Block List) The conditions for the alert group (see [below for nested schema](#nestedblock--conditions))
 - `deleted_at` (String) Date or deletion
 - `description` (String) The description of the alert group
-- `group_by_alert_title` (Boolean) Whether the alerts are grouped by title or not. Value must be one of true or false
-- `group_by_alert_urgency` (Boolean) Whether the alerts are grouped by urgency or not. Value must be one of true or false
+- `group_by_alert_title` (Boolean) [DEPRECATED] Whether the alerts are grouped by title or not. This field is deprecated. Please use the `conditions` field with advanced alert grouping instead.. Value must be one of true or false
+- `group_by_alert_urgency` (Boolean) [DEPRECATED] Whether the alerts are grouped by urgency or not. This field is deprecated. Please use the `conditions` field with advanced alert grouping instead.. Value must be one of true or false
 - `slug` (String) The slug of the alert group
 - `targets` (Block List) (see [below for nested schema](#nestedblock--targets))
 - `time_window` (Number) Time window for the alert grouping
@@ -66,7 +66,7 @@ Optional:
 
 Optional:
 
-- `alert_urgency_ids` (List of String) The Alert Urgency ID's to check in the condition. Only need to be set when the property field type is 'attribute', the property field name is 'alert_urgency' and the property field condition type is 'is_one_of' or 'is_not_one_of'
+- `alert_urgency_ids` (List of String) The Alert Urgency IDs to check in the condition. Only need to be set when the property field type is 'attribute', the property field name is 'alert_urgency' and the property field condition type is 'is_one_of' or 'is_not_one_of'
 - `conditionable_id` (String) The ID of the conditionable. If conditionable_type is AlertField, this is the ID of the alert field.
 - `conditionable_type` (String) The type of the conditionable. Value must be one of `AlertField`.
 - `property_field_condition_type` (String) The condition type of the property field. Value must be one of `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `starts_with`, `ends_with`, `matches_regex`, `is_empty`, `matches_existing_alert`.
