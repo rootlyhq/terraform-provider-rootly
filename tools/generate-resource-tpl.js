@@ -475,6 +475,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
     schema.enum &&
     schema.enum.length > 0 &&
     !schema.anyOfChild &&
+    !schema.nullable &&  // Don't add default for nullable fields
     name !== "status"
   ) {
     defaultValue = `Default: "${schema.enum[0]}"`;

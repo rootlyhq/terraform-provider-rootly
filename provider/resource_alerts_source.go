@@ -221,13 +221,13 @@ func resourceAlertsSource() *schema.Resource {
 
 						"conditionable_type": &schema.Schema{
 							Type:         schema.TypeString,
-							Default:      "AlertField",
 							Required:     false,
+							Computed:     true,
 							Optional:     true,
 							Sensitive:    false,
 							ForceNew:     false,
 							WriteOnly:    false,
-							Description:  "The type of the conditionable. Value must be one of `AlertField`.",
+							Description:  "The type of the conditionable. Value must be one of `AlertField or (empty string)`.",
 							ValidateFunc: validation.StringInSlice([]string{"AlertField"}, false),
 						},
 
@@ -498,13 +498,13 @@ func resourceAlertsSource() *schema.Resource {
 
 									"conditionable_type": &schema.Schema{
 										Type:         schema.TypeString,
-										Default:      "AlertField",
 										Required:     false,
+										Computed:     true,
 										Optional:     true,
 										Sensitive:    false,
 										ForceNew:     false,
 										WriteOnly:    false,
-										Description:  "The type of the conditionable. Value must be one of `AlertField`.",
+										Description:  "The type of the conditionable. Value must be one of `AlertField or (empty string)`.",
 										ValidateFunc: validation.StringInSlice([]string{"AlertField"}, false),
 									},
 

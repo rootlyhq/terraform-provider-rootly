@@ -52,6 +52,7 @@ const excluded = {
     "alert",
     "alert_event",
     "alert_route",
+    "alert_group",
     "alerts_source",
     "audit",
     "catalog",
