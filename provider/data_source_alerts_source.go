@@ -21,6 +21,12 @@ func dataSourceAlertsSource() *schema.Resource {
 				Computed: true,
 			},
 
+			"name": &schema.Schema{
+				Type:     schema.TypeString,
+				Computed: true,
+				Optional: true,
+			},
+
 			"source_type": &schema.Schema{
 				Type:         schema.TypeString,
 				Computed:     true,
@@ -44,6 +50,11 @@ func dataSourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, met
 	params := new(rootlygo.ListAlertsSourcesParams)
 	page_size := 1
 	params.PageSize = &page_size
+
+	if value, ok := d.GetOkExists("name"); ok {
+		name := value.(string)
+		params.FilterName = &name
+	}
 
 	items, err := c.ListAlertsSources(params)
 	if err != nil {
