@@ -60,7 +60,7 @@ func dataSource${nameCamel}Read(ctx context.Context, d *schema.ResourceData, met
 	item, _ := items[0].(*client.${nameCamel})
 
 	d.SetId(item.ID)
-
+	${setOutputFields(resourceSchema, filterParameters)}
 	return nil
 }
 `;
@@ -92,37 +92,47 @@ function setFilterFields(name, resourceSchema, filterParameters) {
     })
     .map((paramSchema) => {
       const filterField = filterUnderscore(paramSchema.name);
-      const fieldSchema = resourceSchema.properties[filterField];
+      // Try to find the field in the schema, checking both plural and singular forms
+      // This handles API plural filter names (filter[source_types]) vs singular schema properties (source_type)
+      let fieldSchema = resourceSchema.properties[filterField];
+      let schemaFieldName = filterField;
+      if (!fieldSchema) {
+        const singularField = inflect.singularize(filterField);
+        if (singularField !== filterField && resourceSchema.properties[singularField]) {
+          fieldSchema = resourceSchema.properties[singularField];
+          schemaFieldName = singularField;
+        }
+      }
       if (fieldSchema) {
         if (fieldSchema.type === 'boolean') {
           // Check if this boolean field should be converted to string for this resource
-          const shouldConvertToString = booleanAsStringFilters[name] && 
-            booleanAsStringFilters[name].includes(filterField);
-          
+          const shouldConvertToString = booleanAsStringFilters[name] &&
+            booleanAsStringFilters[name].includes(schemaFieldName);
+
           if (shouldConvertToString) {
             return `
-				if value, ok := d.GetOkExists("${filterField}"); ok {
-					${filterField} := value.(bool)
-					${filterField}_str := "false"
-					if ${filterField} {
-						${filterField}_str = "true"
+				if value, ok := d.GetOkExists("${schemaFieldName}"); ok {
+					${schemaFieldName} := value.(bool)
+					${schemaFieldName}_str := "false"
+					if ${schemaFieldName} {
+						${schemaFieldName}_str = "true"
 					}
-					params.${filterCamelize(paramSchema.name)} = &${filterField}_str
+					params.${filterCamelize(paramSchema.name)} = &${schemaFieldName}_str
 				}
 			`;
           } else {
             return `
-				if value, ok := d.GetOkExists("${filterField}"); ok {
-					${filterField} := value.(bool)
-					params.${filterCamelize(paramSchema.name)} = &${filterField}
+				if value, ok := d.GetOkExists("${schemaFieldName}"); ok {
+					${schemaFieldName} := value.(bool)
+					params.${filterCamelize(paramSchema.name)} = &${schemaFieldName}
 				}
 			`;
           }
         } else {
           return `
-				if value, ok := d.GetOkExists("${filterField}"); ok {
-					${filterField} := value.(${jsonapiToGoType(fieldSchema.type)})
-					params.${filterCamelize(paramSchema.name)} = &${filterField}
+				if value, ok := d.GetOkExists("${schemaFieldName}"); ok {
+					${schemaFieldName} := value.(${jsonapiToGoType(fieldSchema.type)})
+					params.${filterCamelize(paramSchema.name)} = &${schemaFieldName}
 				}
 			`;
         }
@@ -144,6 +154,34 @@ function setFilterFields(name, resourceSchema, filterParameters) {
     .join("\n");
 }
 
+function setOutputFields(resourceSchema, filterParameters) {
+  // Generate d.Set() calls for filter fields so they're available in Terraform state
+  return (filterParameters || [])
+    .filter((paramSchema) => {
+      return paramSchema.name.match(/^filter/) && !paramSchema.name.match(/(lt|gt)\]/);
+    })
+    .map((paramSchema) => {
+      const filterField = filterUnderscore(paramSchema.name);
+      // Try to find the field in the schema, checking both plural and singular forms
+      let fieldSchema = resourceSchema.properties[filterField];
+      let schemaFieldName = filterField;
+      if (!fieldSchema) {
+        const singularField = inflect.singularize(filterField);
+        if (singularField !== filterField && resourceSchema.properties[singularField]) {
+          fieldSchema = resourceSchema.properties[singularField];
+          schemaFieldName = singularField;
+        }
+      }
+      if (fieldSchema) {
+        // Convert Go field name (e.g., SourceType) from schema field name (e.g., source_type)
+        const goFieldName = inflect.camelize(schemaFieldName);
+        return `d.Set("${schemaFieldName}", item.${goFieldName})`;
+      }
+    })
+    .filter((x) => x)
+    .join("\n\t");
+}
+
 function jsonapiToGoType(type) {
   switch (type) {
     case "string":
@@ -162,7 +200,14 @@ function jsonapiToGoType(type) {
 function schemaFields(resourceSchema, filterParameters) {
   return Object.keys(resourceSchema.properties)
     .filter((name) => {
-      return name !== "id" && filterParameters.some((param) => param.name.match(name));
+      if (name === "id") return false;
+      // Check if any filter parameter matches this schema field (handling plural/singular variants)
+      return filterParameters.some((param) => {
+        const filterField = filterUnderscore(param.name);
+        const singularField = inflect.singularize(filterField);
+        // Match if filter field name matches, or if singular form matches
+        return filterField === name || singularField === name || param.name.match(name);
+      });
     })
     .map((name) => {
       return schemaField(name, resourceSchema);
