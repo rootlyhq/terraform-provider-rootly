@@ -12,6 +12,7 @@ func TestAccDataSourceAlertsSource(t *testing.T) {
 	randomName := acctest.RandomWithPrefix("tf-test-alert-source")
 
 	resource.UnitTest(t, resource.TestCase{
+		IsUnitTest: false,
 		PreCheck: func() {
 			testAccPreCheck(t)
 		},
@@ -41,6 +42,7 @@ func TestAccDataSourceAlertsSource_FilterBySourceType(t *testing.T) {
 	emailName := fmt.Sprintf("%s-email", randomName)
 
 	resource.UnitTest(t, resource.TestCase{
+		IsUnitTest: false,
 		PreCheck: func() {
 			testAccPreCheck(t)
 		},
