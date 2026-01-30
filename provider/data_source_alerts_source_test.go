@@ -49,7 +49,15 @@ func TestAccDataSourceAlertsSource_FilterBySourceType(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				// Create two alert sources with different names and types
+				// Step 1: Create resources only, allow time for propagation
+				Config: testAccDataSourceAlertsSourceFilterResourcesOnly(randomName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_alerts_source.test_webhook", "name", webhookName),
+					resource.TestCheckResourceAttr("rootly_alerts_source.test_email", "name", emailName),
+				),
+			},
+			{
+				// Step 2: Now query with data sources (resources have propagated)
 				Config: testAccDataSourceAlertsSourceFilterConfig(randomName),
 				Check: resource.ComposeTestCheckFunc(
 					// Verify we get the correct generic_webhook source
@@ -85,6 +93,23 @@ data "rootly_alerts_source" "test" {
 	depends_on  = [rootly_alerts_source.test]
 }
 `, name, name)
+}
+
+func testAccDataSourceAlertsSourceFilterResourcesOnly(name string) string {
+	webhookName := fmt.Sprintf("%s-webhook", name)
+	emailName := fmt.Sprintf("%s-email", name)
+
+	return fmt.Sprintf(`
+resource "rootly_alerts_source" "test_webhook" {
+	name        = "%s"
+	source_type = "generic_webhook"
+}
+
+resource "rootly_alerts_source" "test_email" {
+	name        = "%s"
+	source_type = "email"
+}
+`, webhookName, emailName)
 }
 
 func testAccDataSourceAlertsSourceFilterConfig(name string) string {
