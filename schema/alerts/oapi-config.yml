@@ -1,0 +1,15 @@
+package: alerts
+generate:
+  models: true
+  client: true
+output: alerts.gen.go
+output-options:
+  include-tags:
+    - Alerts
+    - AlertEvents
+    - AlertFields
+    - AlertGroups
+    - AlertRoutes
+    - AlertRoutingRules
+    - AlertSources
+    - AlertUrgencies
