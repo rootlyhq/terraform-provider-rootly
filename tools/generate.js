@@ -17,7 +17,6 @@ const excluded = {
   dataSources: [
     "alert",
     "alert_event",
-    "alerts_source", // cannot auto-generate because of plural/singular filter mismatch (filter[source_types] vs source_type)
     "audit",
     "catalog",
     "catalog_field",
