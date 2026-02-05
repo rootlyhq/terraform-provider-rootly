@@ -323,14 +323,56 @@ func resourceWorkflowAlert() *schema.Resource {
 						},
 
 						"alert_payload_conditions": &schema.Schema{
-							Type: schema.TypeMap,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
+							Type:        schema.TypeList,
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
-							Description: "",
+							Description: "Advanced payload filtering with multiple conditions and logical operators",
+							MinItems:    0,
+							MaxItems:    1,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"logic": &schema.Schema{
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "ALL",
+										Description: "Logical operator for combining conditions. Value must be one of `ALL`, `ANY`, `NONE`.",
+									},
+									"conditions": &schema.Schema{
+										Type:        schema.TypeList,
+										Optional:    true,
+										Description: "List of condition rules to evaluate",
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"query": &schema.Schema{
+													Type:        schema.TypeString,
+													Required:    true,
+													Description: "JSONPath query to extract value from alert payload (e.g., $.commonLabels.namespace)",
+												},
+												"operator": &schema.Schema{
+													Type:        schema.TypeString,
+													Required:    true,
+													Description: "Comparison operator. Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+												},
+												"values": &schema.Schema{
+													Type:        schema.TypeList,
+													Optional:    true,
+													Description: "List of values to compare against",
+													Elem: &schema.Schema{
+														Type: schema.TypeString,
+													},
+												},
+												"use_regexp": &schema.Schema{
+													Type:        schema.TypeBool,
+													Optional:    true,
+													Default:     false,
+													Description: "Whether to use regular expression matching",
+												},
+											},
+										},
+									},
+								},
+							},
 						},
 					},
 				},
@@ -503,6 +545,13 @@ func resourceWorkflowAlertCreate(ctx context.Context, d *schema.ResourceData, me
 	}
 	if value, ok := d.GetOkExists("trigger_params"); ok {
 		s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
+
+		// Unwrap alert_payload_conditions from TypeList to plain object for API
+		if apc, ok := s.TriggerParams["alert_payload_conditions"].([]interface{}); ok && len(apc) > 0 {
+			if apcMap, ok := apc[0].(map[string]interface{}); ok {
+				s.TriggerParams["alert_payload_conditions"] = apcMap
+			}
+		}
 	}
 	if value, ok := d.GetOkExists("environment_ids"); ok {
 		s.EnvironmentIds = value.([]interface{})
@@ -577,7 +626,22 @@ func resourceWorkflowAlertRead(ctx context.Context, d *schema.ResourceData, meta
 	d.Set("workflow_group_id", item.WorkflowGroupId)
 
 	tps := make([]interface{}, 1, 1)
-	tps[0] = item.TriggerParams
+	triggerParams := item.TriggerParams
+
+	// Wrap alert_payload_conditions back into TypeList format for Terraform
+	if triggerParams != nil {
+		if apcMap, ok := triggerParams["alert_payload_conditions"].(map[string]interface{}); ok {
+			if len(apcMap) > 0 {
+				// Wrap non-empty map into array
+				triggerParams["alert_payload_conditions"] = []interface{}{apcMap}
+			} else {
+				// Remove empty map entirely to avoid Terraform schema errors
+				delete(triggerParams, "alert_payload_conditions")
+			}
+		}
+	}
+
+	tps[0] = triggerParams
 	d.Set("trigger_params", tps)
 
 	d.Set("environment_ids", item.EnvironmentIds)
@@ -649,6 +713,13 @@ func resourceWorkflowAlertUpdate(ctx context.Context, d *schema.ResourceData, me
 		tps := d.Get("trigger_params").([]interface{})
 		for _, tpsi := range tps {
 			s.TriggerParams = tpsi.(map[string]interface{})
+		}
+
+		// Unwrap alert_payload_conditions from TypeList to plain object for API
+		if apc, ok := s.TriggerParams["alert_payload_conditions"].([]interface{}); ok && len(apc) > 0 {
+			if apcMap, ok := apc[0].(map[string]interface{}); ok {
+				s.TriggerParams["alert_payload_conditions"] = apcMap
+			}
 		}
 	}
 	if d.HasChange("environment_ids") {
