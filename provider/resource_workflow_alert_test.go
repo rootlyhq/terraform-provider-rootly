@@ -59,7 +59,7 @@ func TestAccResourceWorkflowAlertWithPayloadConditions(t *testing.T) {
 			{
 				Config: testAccResourceWorkflowAlertWithPayloadConditions,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_alert.test_payload", "name", "test-alert-payload-conditions"),
+					resource.TestCheckResourceAttr("rootly_workflow_alert.test_payload", "name", "test-alert-payload-conditionsTest"),
 					resource.TestCheckResourceAttr("rootly_workflow_alert.test_payload", "enabled", "true"),
 					resource.TestCheckResourceAttr("rootly_workflow_alert.test_payload", "trigger_params.0.triggers.0", "alert_created"),
 					resource.TestCheckResourceAttr("rootly_workflow_alert.test_payload", "trigger_params.0.alert_payload_conditions.0.logic", "ALL"),
