@@ -92,6 +92,7 @@ const excluded = {
     "user",
     "user_notification_rule",
     "webhooks_delivery",
+    "workflow_alert", // cannot auto-generate because codegen doesn't handle nested objects in trigger_params (alert_payload_conditions requires complex nested schema)
     "workflow_run",
     "workflow_task",
   ]
