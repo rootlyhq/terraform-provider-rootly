@@ -17,7 +17,6 @@ const excluded = {
   dataSources: [
     "alert",
     "alert_event",
-    "alerts_source", // cannot auto-generate because of plural/singular filter mismatch (filter[source_types] vs source_type)
     "audit",
     "catalog",
     "catalog_field",
@@ -93,6 +92,7 @@ const excluded = {
     "user",
     "user_notification_rule",
     "webhooks_delivery",
+    "workflow_alert", // cannot auto-generate because codegen doesn't handle nested objects in trigger_params (alert_payload_conditions requires complex nested schema)
     "workflow_run",
     "workflow_task",
   ]
