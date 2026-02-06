@@ -70,6 +70,6 @@ func dataSourceHeartbeatRead(ctx context.Context, d *schema.ResourceData, meta i
 	item, _ := items[0].(*client.Heartbeat)
 
 	d.SetId(item.ID)
-
+	d.Set("name", item.Name)
 	return nil
 }

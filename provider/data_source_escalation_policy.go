@@ -70,6 +70,6 @@ func dataSourceEscalationPolicyRead(ctx context.Context, d *schema.ResourceData,
 	item, _ := items[0].(*client.EscalationPolicy)
 
 	d.SetId(item.ID)
-
+	d.Set("name", item.Name)
 	return nil
 }

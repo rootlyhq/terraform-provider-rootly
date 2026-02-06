@@ -81,6 +81,7 @@ func dataSourceRoleRead(ctx context.Context, d *schema.ResourceData, meta interf
 	item, _ := items[0].(*client.Role)
 
 	d.SetId(item.ID)
-
+	d.Set("slug", item.Slug)
+	d.Set("name", item.Name)
 	return nil
 }

@@ -81,6 +81,7 @@ func dataSourceWorkflowRead(ctx context.Context, d *schema.ResourceData, meta in
 	item, _ := items[0].(*client.Workflow)
 
 	d.SetId(item.ID)
-
+	d.Set("name", item.Name)
+	d.Set("slug", item.Slug)
 	return nil
 }

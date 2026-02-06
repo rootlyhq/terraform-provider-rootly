@@ -11,9 +11,9 @@ import (
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
-func dataSourceCommunicationsType() *schema.Resource {
+func dataSourceStatus() *schema.Resource {
 	return &schema.Resource{
-		ReadContext: dataSourceCommunicationsTypeRead,
+		ReadContext: dataSourceStatusRead,
 		Schema: map[string]*schema.Schema{
 			"id": &schema.Schema{
 				Type:     schema.TypeString,
@@ -32,6 +32,12 @@ func dataSourceCommunicationsType() *schema.Resource {
 				Optional: true,
 			},
 
+			"enabled": &schema.Schema{
+				Type:     schema.TypeBool,
+				Default:  true,
+				Optional: true,
+			},
+
 			"created_at": &schema.Schema{
 				Type:        schema.TypeMap,
 				Description: "Filter by date range using 'lt' and 'gt'.",
@@ -41,21 +47,26 @@ func dataSourceCommunicationsType() *schema.Resource {
 	}
 }
 
-func dataSourceCommunicationsTypeRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func dataSourceStatusRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
-	params := new(rootlygo.ListCommunicationsTypesParams)
+	params := new(rootlygo.ListStatusesParams)
 	page_size := 1
 	params.PageSize = &page_size
+
+	if value, ok := d.GetOkExists("slug"); ok {
+		slug := value.(string)
+		params.FilterSlug = &slug
+	}
 
 	if value, ok := d.GetOkExists("name"); ok {
 		name := value.(string)
 		params.FilterName = &name
 	}
 
-	if value, ok := d.GetOkExists("slug"); ok {
-		slug := value.(string)
-		params.FilterSlug = &slug
+	if value, ok := d.GetOkExists("enabled"); ok {
+		enabled := value.(bool)
+		params.FilterEnabled = &enabled
 	}
 
 	created_at_gt := d.Get("created_at").(map[string]interface{})
@@ -70,18 +81,19 @@ func dataSourceCommunicationsTypeRead(ctx context.Context, d *schema.ResourceDat
 		params.FilterCreatedAtLt = &v
 	}
 
-	items, err := c.ListCommunicationsTypes(params)
+	items, err := c.ListStatuses(params)
 	if err != nil {
 		return diag.FromErr(err)
 	}
 
 	if len(items) == 0 {
-		return diag.Errorf("communications_type not found")
+		return diag.Errorf("status not found")
 	}
-	item, _ := items[0].(*client.CommunicationsType)
+	item, _ := items[0].(*client.Status)
 
 	d.SetId(item.ID)
-	d.Set("name", item.Name)
 	d.Set("slug", item.Slug)
+	d.Set("name", item.Name)
+	d.Set("enabled", item.Enabled)
 	return nil
 }
