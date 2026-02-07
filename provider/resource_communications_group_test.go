@@ -1,12 +1,24 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceCommunicationsGroup(t *testing.T) {
+	service1Name := acctest.RandomWithPrefix("tf-service-1")
+	service2Name := acctest.RandomWithPrefix("tf-service-2")
+	service3Name := acctest.RandomWithPrefix("tf-service-3")
+	severityName := acctest.RandomWithPrefix("tf-severity")
+	functionalityName := acctest.RandomWithPrefix("tf-functionality")
+	incidentTypeName := acctest.RandomWithPrefix("tf-incident-type")
+	teamName := acctest.RandomWithPrefix("tf-team")
+	communicationsTypeName := acctest.RandomWithPrefix("tf-comm-type")
+	communicationsGroupName := acctest.RandomWithPrefix("tf-comm-group")
+
 	resource.UnitTest(t, resource.TestCase{
 		IsUnitTest: false,
 		PreCheck: func() {
@@ -15,9 +27,9 @@ func TestAccResourceCommunicationsGroup(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceCommunicationsGroupCreate,
+				Config: testAccResourceCommunicationsGroupCreate(service1Name, service2Name, service3Name, severityName, functionalityName, incidentTypeName, teamName, communicationsTypeName, communicationsGroupName),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_communications_group.test", "name", "TF test group"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "name", communicationsGroupName),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "condition_type", "any"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.0.condition", "is"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.0.property_type", "service"),
@@ -54,15 +66,15 @@ func TestAccResourceCommunicationsGroup(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccResourceCommunicationsGroupUpdate,
+				Config: testAccResourceCommunicationsGroupUpdate(service1Name, service2Name, service3Name, severityName, functionalityName, incidentTypeName, teamName, communicationsTypeName, communicationsGroupName),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_communications_group.test", "name", "TF test group (updated)"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "name", communicationsGroupName+" (updated)"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "condition_type", "all"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.0.condition", "is"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.0.property_type", "service"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.0.properties.#", "2"),
-					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.0.properties.0.name", "TF test service 2"),
-					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.0.properties.1.name", "TF test service 3"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.0.properties.0.name", service2Name),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.0.properties.1.name", service3Name),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.1.condition", "is"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.1.property_type", "group"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.2.property_type", "severity"),
@@ -80,9 +92,9 @@ func TestAccResourceCommunicationsGroup(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccResourceCommunicationsGroupUpdateRemoveConditions,
+				Config: testAccResourceCommunicationsGroupUpdateRemoveConditions(service1Name, service2Name, service3Name, severityName, functionalityName, incidentTypeName, teamName, communicationsTypeName, communicationsGroupName),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_communications_group.test", "name", "TF test group (updated removed conditions)"),
+					resource.TestCheckResourceAttr("rootly_communications_group.test", "name", communicationsGroupName+" (updated removed conditions)"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "condition_type", "all"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_group_conditions.#", "0"),
 					resource.TestCheckResourceAttr("rootly_communications_group.test", "communication_external_group_members.#", "2"),
@@ -100,353 +112,359 @@ func TestAccResourceCommunicationsGroup(t *testing.T) {
 	})
 }
 
-const testAccResourceCommunicationsGroupCreate = `
-	data rootly_user test1 {
-		email = "bot-tftests+1@rootly.com"
-	}
+func testAccResourceCommunicationsGroupCreate(service1Name, service2Name, service3Name, severityName, functionalityName, incidentTypeName, teamName, communicationsTypeName, communicationsGroupName string) string {
+	return fmt.Sprintf(`
+data rootly_user test1 {
+	email = "bot-tftests+1@rootly.com"
+}
 
-	data rootly_user test2 {
-		email = "bot-tftests+2@rootly.com"
-	}
+data rootly_user test2 {
+	email = "bot-tftests+2@rootly.com"
+}
 
-	data rootly_user test3 {
-		email = "bot-tftests+3@rootly.com"
-	}
+data rootly_user test3 {
+	email = "bot-tftests+3@rootly.com"
+}
 
-	data rootly_user test4 {
-		email = "bot-tftests+4@rootly.com"
-	}
+data rootly_user test4 {
+	email = "bot-tftests+4@rootly.com"
+}
 
-	resource rootly_service test1 {
-		name = "TF test service 1"
-	}
+resource rootly_service test1 {
+	name = "%[1]s"
+}
 
-	resource rootly_service test2 {
-		name = "TF test service 2"
-	}
+resource rootly_service test2 {
+	name = "%[2]s"
+}
 
-	resource rootly_service test3 {
-		name = "TF test service 3"
-	}
+resource rootly_service test3 {
+	name = "%[3]s"
+}
 
-	resource rootly_severity test1 {
-		name = "TF test severity 1"
-	}
+resource rootly_severity test1 {
+	name = "%[4]s"
+}
 
-	resource rootly_functionality test1 {
-		name = "TF test functionality 1"
-	}
+resource rootly_functionality test1 {
+	name = "%[5]s"
+}
 
-	resource rootly_incident_type test1 {
-		name = "TF test incident type 1"
-	}
+resource rootly_incident_type test1 {
+	name = "%[6]s"
+}
 
-	resource rootly_team test {
-		name = "TF test group"
-	}
+resource rootly_team test {
+	name = "%[7]s"
+}
 
-	resource rootly_communications_type test {
-		name = "TF test type"
-		color = "#FFFFFF"
-	}
+resource rootly_communications_type test {
+	name = "%[8]s"
+	color = "#FFFFFF"
+}
 
-	resource rootly_communications_group test {
-		name = "TF test group"
-		communication_type_id = rootly_communications_type.test.id
-		email_channel = true
-		condition_type = "any"
+resource rootly_communications_group test {
+	name = "%[9]s"
+	communication_type_id = rootly_communications_type.test.id
+	email_channel = true
+	condition_type = "any"
 
-		communication_group_conditions {
-			condition = "is"
-			properties {
-				id = rootly_service.test1.id
-				name = rootly_service.test1.name
-			}
-			properties {
-				id = rootly_service.test2.id
-				name = rootly_service.test2.name
-			}
-			properties {
-				id = rootly_service.test3.id
-				name = rootly_service.test3.name
-			}
-			property_type = "service"
+	communication_group_conditions {
+		condition = "is"
+		properties {
+			id = rootly_service.test1.id
+			name = rootly_service.test1.name
 		}
-
-		communication_group_conditions {
-			condition = "is"
-			properties {
-				id = rootly_team.test.id
-				name = rootly_team.test.name
-			}
-			property_type = "group"
+		properties {
+			id = rootly_service.test2.id
+			name = rootly_service.test2.name
 		}
-
-		communication_group_conditions {
-			condition = "is"
-			properties {
-				id = rootly_severity.test1.id
-				name = rootly_severity.test1.name
-			}
-			property_type = "severity"
+		properties {
+			id = rootly_service.test3.id
+			name = rootly_service.test3.name
 		}
+		property_type = "service"
+	}
 
-		communication_group_conditions {
-			condition = "is"
-			properties {
-				id = rootly_functionality.test1.id
-				name = rootly_functionality.test1.name
-			}
-			property_type = "functionality"
+	communication_group_conditions {
+		condition = "is"
+		properties {
+			id = rootly_team.test.id
+			name = rootly_team.test.name
 		}
+		property_type = "group"
+	}
 
-		communication_group_conditions {
-			condition = "is"
-			properties {
-				id = rootly_incident_type.test1.id
-				name = rootly_incident_type.test1.name
-			}
-			property_type = "incident_type"
+	communication_group_conditions {
+		condition = "is"
+		properties {
+			id = rootly_severity.test1.id
+			name = rootly_severity.test1.name
 		}
+		property_type = "severity"
+	}
 
-		communication_external_group_members {
-			email = "test-bot+1@rootly.com"
-			name = "test-bot+1"
+	communication_group_conditions {
+		condition = "is"
+		properties {
+			id = rootly_functionality.test1.id
+			name = rootly_functionality.test1.name
 		}
+		property_type = "functionality"
+	}
 
-		communication_external_group_members {
-			email = "test-bot+2@rootly.com"
-			name = "test-bot+2"
+	communication_group_conditions {
+		condition = "is"
+		properties {
+			id = rootly_incident_type.test1.id
+			name = rootly_incident_type.test1.name
 		}
+		property_type = "incident_type"
+	}
 
-		communication_external_group_members {
-			email = "test-bot+3@rootly.com"
-			name = "test-bot+3"
+	communication_external_group_members {
+		email = "test-bot+1@rootly.com"
+		name = "test-bot+1"
+	}
+
+	communication_external_group_members {
+		email = "test-bot+2@rootly.com"
+		name = "test-bot+2"
+	}
+
+	communication_external_group_members {
+		email = "test-bot+3@rootly.com"
+		name = "test-bot+3"
+	}
+
+	communication_group_members {
+		user_id = data.rootly_user.test1.id
+	}
+
+	communication_group_members {
+		user_id = data.rootly_user.test2.id
+	}
+
+	communication_group_members {
+		user_id = data.rootly_user.test3.id
+	}
+
+	communication_group_members {
+		user_id = data.rootly_user.test4.id
+	}
+}
+`, service1Name, service2Name, service3Name, severityName, functionalityName, incidentTypeName, teamName, communicationsTypeName, communicationsGroupName)
+}
+
+func testAccResourceCommunicationsGroupUpdate(service1Name, service2Name, service3Name, severityName, functionalityName, incidentTypeName, teamName, communicationsTypeName, communicationsGroupName string) string {
+	return fmt.Sprintf(`
+data rootly_user test1 {
+	email = "bot-tftests+1@rootly.com"
+}
+
+data rootly_user test2 {
+	email = "bot-tftests+2@rootly.com"
+}
+
+data rootly_user test3 {
+	email = "bot-tftests+3@rootly.com"
+}
+
+data rootly_user test4 {
+	email = "bot-tftests+4@rootly.com"
+}
+
+resource rootly_service test1 {
+	name = "%[1]s"
+}
+
+resource rootly_service test2 {
+	name = "%[2]s"
+}
+
+resource rootly_service test3 {
+	name = "%[3]s"
+}
+
+resource rootly_severity test1 {
+	name = "%[4]s"
+}
+
+resource rootly_functionality test1 {
+	name = "%[5]s"
+}
+
+resource rootly_incident_type test1 {
+	name = "%[6]s"
+}
+
+resource rootly_team test {
+	name = "%[7]s"
+}
+
+resource rootly_communications_type test {
+	name = "%[8]s"
+	color = "#FFFFFF"
+}
+
+resource rootly_communications_group test {
+	name = "%[9]s (updated)"
+	communication_type_id = rootly_communications_type.test.id
+	email_channel = true
+	condition_type = "all"
+
+	communication_group_conditions {
+		condition = "is"
+		properties {
+			id = rootly_service.test2.id
+			name = rootly_service.test2.name
 		}
-
-		communication_group_members {
-			user_id = data.rootly_user.test1.id
+		properties {
+			id = rootly_service.test3.id
+			name = rootly_service.test3.name
 		}
+		property_type = "service"
+	}
 
-		communication_group_members {
-			user_id = data.rootly_user.test2.id
+	communication_group_conditions {
+		condition = "is"
+		properties {
+			id = rootly_team.test.id
+			name = rootly_team.test.name
 		}
+		property_type = "group"
+	}
 
-		communication_group_members {
-			user_id = data.rootly_user.test3.id
+	communication_group_conditions {
+		condition = "is"
+		properties {
+			id = rootly_severity.test1.id
+			name = rootly_severity.test1.name
 		}
+		property_type = "severity"
+	}
 
-		communication_group_members {
-			user_id = data.rootly_user.test4.id
+	communication_group_conditions {
+		condition = "is"
+		properties {
+			id = rootly_functionality.test1.id
+			name = rootly_functionality.test1.name
 		}
-	}
-`
-
-const testAccResourceCommunicationsGroupUpdate = `
-	data rootly_user test1 {
-		email = "bot-tftests+1@rootly.com"
+		property_type = "functionality"
 	}
 
-	data rootly_user test2 {
-		email = "bot-tftests+2@rootly.com"
-	}
-
-	data rootly_user test3 {
-		email = "bot-tftests+3@rootly.com"
-	}
-
-	data rootly_user test4 {
-		email = "bot-tftests+4@rootly.com"
-	}
-
-	resource rootly_service test1 {
-		name = "TF test service 1"
-	}
-
-	resource rootly_service test2 {
-		name = "TF test service 2"
-	}
-
-	resource rootly_service test3 {
-		name = "TF test service 3"
-	}
-
-	resource rootly_severity test1 {
-		name = "TF test severity 1"
-	}
-
-	resource rootly_functionality test1 {
-		name = "TF test functionality 1"
-	}
-
-	resource rootly_incident_type test1 {
-		name = "TF test incident type 1"
-	}
-
-	resource rootly_team test {
-		name = "TF test group"
-	}
-
-	resource rootly_communications_type test {
-		name = "TF test type"
-		color = "#FFFFFF"
-	}
-
-	resource rootly_communications_group test {
-		name = "TF test group (updated)"
-		communication_type_id = rootly_communications_type.test.id
-		email_channel = true
-		condition_type = "all"
-
-		communication_group_conditions {
-			condition = "is"
-			properties {
-				id = rootly_service.test2.id
-				name = rootly_service.test2.name
-			}
-			properties {
-				id = rootly_service.test3.id
-				name = rootly_service.test3.name
-			}
-			property_type = "service"
+	communication_group_conditions {
+		condition = "is"
+		properties {
+			id = rootly_incident_type.test1.id
+			name = rootly_incident_type.test1.name
 		}
-
-		communication_group_conditions {
-			condition = "is"
-			properties {
-				id = rootly_team.test.id
-				name = rootly_team.test.name
-			}
-			property_type = "group"
-		}
-
-		communication_group_conditions {
-			condition = "is"
-			properties {
-				id = rootly_severity.test1.id
-				name = rootly_severity.test1.name
-			}
-			property_type = "severity"
-		}
-
-		communication_group_conditions {
-			condition = "is"
-			properties {
-				id = rootly_functionality.test1.id
-				name = rootly_functionality.test1.name
-			}
-			property_type = "functionality"
-		}
-
-		communication_group_conditions {
-			condition = "is"
-			properties {
-				id = rootly_incident_type.test1.id
-				name = rootly_incident_type.test1.name
-			}
-			property_type = "incident_type"
-		}
-
-		communication_external_group_members {
-			email = "test-bot+3@rootly.com"
-			name = "test-bot+3"
-		}
-
-		communication_external_group_members {
-			email = "test-bot+5@rootly.com"
-			name = "test-bot+5"
-		}
-
-		communication_group_members {
-			user_id = data.rootly_user.test1.id
-		}
-
-		communication_group_members {
-			user_id = data.rootly_user.test3.id
-		}
-
-		communication_group_members {
-			user_id = data.rootly_user.test4.id
-		}
-	}
-`
-
-const testAccResourceCommunicationsGroupUpdateRemoveConditions = `
-	data rootly_user test1 {
-		email = "bot-tftests+1@rootly.com"
+		property_type = "incident_type"
 	}
 
-	data rootly_user test2 {
-		email = "bot-tftests+2@rootly.com"
+	communication_external_group_members {
+		email = "test-bot+3@rootly.com"
+		name = "test-bot+3"
 	}
 
-	data rootly_user test3 {
-		email = "bot-tftests+3@rootly.com"
+	communication_external_group_members {
+		email = "test-bot+5@rootly.com"
+		name = "test-bot+5"
 	}
 
-	data rootly_user test4 {
-		email = "bot-tftests+4@rootly.com"
+	communication_group_members {
+		user_id = data.rootly_user.test1.id
 	}
 
-	resource rootly_service test1 {
-		name = "TF test service 1"
+	communication_group_members {
+		user_id = data.rootly_user.test3.id
 	}
 
-	resource rootly_service test2 {
-		name = "TF test service 2"
+	communication_group_members {
+		user_id = data.rootly_user.test4.id
+	}
+}
+`, service1Name, service2Name, service3Name, severityName, functionalityName, incidentTypeName, teamName, communicationsTypeName, communicationsGroupName)
+}
+
+func testAccResourceCommunicationsGroupUpdateRemoveConditions(service1Name, service2Name, service3Name, severityName, functionalityName, incidentTypeName, teamName, communicationsTypeName, communicationsGroupName string) string {
+	return fmt.Sprintf(`
+data rootly_user test1 {
+	email = "bot-tftests+1@rootly.com"
+}
+
+data rootly_user test2 {
+	email = "bot-tftests+2@rootly.com"
+}
+
+data rootly_user test3 {
+	email = "bot-tftests+3@rootly.com"
+}
+
+data rootly_user test4 {
+	email = "bot-tftests+4@rootly.com"
+}
+
+resource rootly_service test1 {
+	name = "%[1]s"
+}
+
+resource rootly_service test2 {
+	name = "%[2]s"
+}
+
+resource rootly_service test3 {
+	name = "%[3]s"
+}
+
+resource rootly_severity test1 {
+	name = "%[4]s"
+}
+
+resource rootly_functionality test1 {
+	name = "%[5]s"
+}
+
+resource rootly_incident_type test1 {
+	name = "%[6]s"
+}
+
+resource rootly_team test {
+	name = "%[7]s"
+}
+
+resource rootly_communications_type test {
+	name = "%[8]s"
+	color = "#FFFFFF"
+}
+
+resource rootly_communications_group test {
+	name = "%[9]s (updated removed conditions)"
+	communication_type_id = rootly_communications_type.test.id
+	email_channel = true
+	condition_type = "all"
+
+	communication_external_group_members {
+		email = "test-bot+3@rootly.com"
+		name = "test-bot+3"
 	}
 
-	resource rootly_service test3 {
-		name = "TF test service 3"
+	communication_external_group_members {
+		email = "test-bot+5@rootly.com"
+		name = "test-bot+5"
 	}
 
-	resource rootly_severity test1 {
-		name = "TF test severity 1"
+	communication_group_members {
+		user_id = data.rootly_user.test1.id
 	}
 
-	resource rootly_functionality test1 {
-		name = "TF test functionality 1"
+	communication_group_members {
+		user_id = data.rootly_user.test3.id
 	}
 
-	resource rootly_incident_type test1 {
-		name = "TF test incident type 1"
+	communication_group_members {
+		user_id = data.rootly_user.test4.id
 	}
-
-	resource rootly_team test {
-		name = "TF test group"
-	}
-
-	resource rootly_communications_type test {
-		name = "TF test type"
-		color = "#FFFFFF"
-	}
-
-	resource rootly_communications_group test {
-		name = "TF test group (updated removed conditions)"
-		communication_type_id = rootly_communications_type.test.id
-		email_channel = true
-		condition_type = "all"
-
-		communication_external_group_members {
-			email = "test-bot+3@rootly.com"
-			name = "test-bot+3"
-		}
-
-		communication_external_group_members {
-			email = "test-bot+5@rootly.com"
-			name = "test-bot+5"
-		}
-
-		communication_group_members {
-			user_id = data.rootly_user.test1.id
-		}
-
-		communication_group_members {
-			user_id = data.rootly_user.test3.id
-		}
-
-		communication_group_members {
-			user_id = data.rootly_user.test4.id
-		}
-	}
-`
+}
+`, service1Name, service2Name, service3Name, severityName, functionalityName, incidentTypeName, teamName, communicationsTypeName, communicationsGroupName)
+}
