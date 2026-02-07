@@ -100,6 +100,7 @@ const excluded = {
 }
 
 const readOnlyCollections = [
+  "audit", // API is read-only (list only); no create/update/get/delete in schema
   "incident_post_mortem",
   "incident",
   "status",

@@ -63,6 +63,7 @@ func dataSourceWebhooksEndpointRead(ctx context.Context, d *schema.ResourceData,
 	item, _ := items[0].(*client.WebhooksEndpoint)
 
 	d.SetId(item.ID)
-
+	d.Set("slug", item.Slug)
+	d.Set("name", item.Name)
 	return nil
 }

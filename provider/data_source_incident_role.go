@@ -92,6 +92,8 @@ func dataSourceIncidentRoleRead(ctx context.Context, d *schema.ResourceData, met
 	item, _ := items[0].(*client.IncidentRole)
 
 	d.SetId(item.ID)
-
+	d.Set("slug", item.Slug)
+	d.Set("name", item.Name)
+	d.Set("enabled", item.Enabled)
 	return nil
 }

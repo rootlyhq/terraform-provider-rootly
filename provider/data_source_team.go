@@ -147,6 +147,13 @@ func dataSourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interf
 	item, _ := items[0].(*client.Team)
 
 	d.SetId(item.ID)
-
+	d.Set("slug", item.Slug)
+	d.Set("name", item.Name)
+	d.Set("backstage_id", item.BackstageId)
+	d.Set("cortex_id", item.CortexId)
+	d.Set("external_id", item.ExternalId)
+	d.Set("color", item.Color)
+	d.Set("alert_broadcast_enabled", item.AlertBroadcastEnabled)
+	d.Set("incident_broadcast_enabled", item.IncidentBroadcastEnabled)
 	return nil
 }

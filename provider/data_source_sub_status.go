@@ -94,6 +94,8 @@ func dataSourceSubStatusRead(ctx context.Context, d *schema.ResourceData, meta i
 	item, _ := items[0].(*client.SubStatus)
 
 	d.SetId(item.ID)
-
+	d.Set("slug", item.Slug)
+	d.Set("name", item.Name)
+	d.Set("parent_status", item.ParentStatus)
 	return nil
 }

@@ -81,6 +81,7 @@ func dataSourceIncidentPermissionSetRead(ctx context.Context, d *schema.Resource
 	item, _ := items[0].(*client.IncidentPermissionSet)
 
 	d.SetId(item.ID)
-
+	d.Set("slug", item.Slug)
+	d.Set("name", item.Name)
 	return nil
 }
