@@ -65,6 +65,8 @@ const excluded = {
     "custom_field_option",
     "custom_field",
     "dashboard",
+    "edge_connector", // cannot auto-generate because actions are nested resources
+    "edge_connector_action", // cannot auto-generate because it's a nested resource under edge_connectors
     "escalation_path",
     "escalation_policy",
     "incident_action_item",
