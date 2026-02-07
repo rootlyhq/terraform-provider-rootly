@@ -19,6 +19,14 @@ func TestAccDataSourceAlertsSource(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
+				// Step 1: Create resource only, allow time for propagation
+				Config: testAccDataSourceAlertsSourceResourceOnly(randomName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_alerts_source.test", "name", randomName),
+				),
+			},
+			{
+				// Step 2: Now query with data source (resource has propagated)
 				Config: testAccDataSourceAlertsSourceConfig(randomName),
 				Check: resource.ComposeTestCheckFunc(
 					// Verify the data source found the correct alert source
@@ -78,6 +86,15 @@ func TestAccDataSourceAlertsSource_FilterBySourceType(t *testing.T) {
 			},
 		},
 	})
+}
+
+func testAccDataSourceAlertsSourceResourceOnly(name string) string {
+	return fmt.Sprintf(`
+resource "rootly_alerts_source" "test" {
+	name        = "%s"
+	source_type = "generic_webhook"
+}
+`, name)
 }
 
 func testAccDataSourceAlertsSourceConfig(name string) string {
