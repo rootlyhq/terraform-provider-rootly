@@ -3,11 +3,11 @@
 package client
 
 import (
+	"encoding/json"
 	"fmt"
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type EdgeConnectorAction struct {
@@ -15,8 +15,8 @@ type EdgeConnectorAction struct {
 	Data map[string]interface{} `jsonapi:"attr,data,omitempty"`
 }
 
-func (c *Client) ListEdgeConnectorActions(params *rootlygo.ListEdgeConnectorActionsParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListEdgeConnectorActionsRequest(c.Rootly.Server, params)
+func (c *Client) ListEdgeConnectorActions(edgeConnectorId string) ([]interface{}, error) {
+	req, err := c.Rootly.NewListEdgeConnectorActionsRequest(c.Rootly.Server, edgeConnectorId)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -35,13 +35,13 @@ func (c *Client) ListEdgeConnectorActions(params *rootlygo.ListEdgeConnectorActi
 	return edge_connector_actions, nil
 }
 
-func (c *Client) CreateEdgeConnectorAction(d *EdgeConnectorAction) (*EdgeConnectorAction, error) {
+func (c *Client) CreateEdgeConnectorAction(edgeConnectorId string, d *EdgeConnectorAction) (*EdgeConnectorAction, error) {
 	buffer, err := MarshalData(d)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling edge_connector_action: %w", err)
 	}
 
-	req, err := rootlygo.NewCreateEdgeConnectorActionRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
+	req, err := c.Rootly.NewCreateEdgeConnectorActionRequestWithBody(c.Rootly.Server, edgeConnectorId, c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -59,8 +59,13 @@ func (c *Client) CreateEdgeConnectorAction(d *EdgeConnectorAction) (*EdgeConnect
 	return data.(*EdgeConnectorAction), nil
 }
 
-func (c *Client) GetEdgeConnectorAction(id string) (*EdgeConnectorAction, error) {
-	req, err := rootlygo.NewGetEdgeConnectorActionRequest(c.Rootly.Server, id)
+func (c *Client) GetEdgeConnectorAction(edgeConnectorId string, actionId string) (*EdgeConnectorAction, error) {
+	var idUnion struct {
+		union json.RawMessage
+	}
+	idUnion.union, _ = json.Marshal(actionId)
+
+	req, err := c.Rootly.NewGetEdgeConnectorActionRequest(c.Rootly.Server, edgeConnectorId, idUnion)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -79,13 +84,18 @@ func (c *Client) GetEdgeConnectorAction(id string) (*EdgeConnectorAction, error)
 	return data.(*EdgeConnectorAction), nil
 }
 
-func (c *Client) UpdateEdgeConnectorAction(id string, edge_connector_action *EdgeConnectorAction) (*EdgeConnectorAction, error) {
+func (c *Client) UpdateEdgeConnectorAction(edgeConnectorId string, actionId string, edge_connector_action *EdgeConnectorAction) (*EdgeConnectorAction, error) {
 	buffer, err := MarshalData(edge_connector_action)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling edge_connector_action: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateEdgeConnectorActionRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	var idUnion struct {
+		union json.RawMessage
+	}
+	idUnion.union, _ = json.Marshal(actionId)
+
+	req, err := c.Rootly.NewUpdateEdgeConnectorActionRequestWithBody(c.Rootly.Server, edgeConnectorId, idUnion, c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -103,8 +113,13 @@ func (c *Client) UpdateEdgeConnectorAction(id string, edge_connector_action *Edg
 	return data.(*EdgeConnectorAction), nil
 }
 
-func (c *Client) DeleteEdgeConnectorAction(id string) error {
-	req, err := rootlygo.NewDeleteEdgeConnectorActionRequest(c.Rootly.Server, id)
+func (c *Client) DeleteEdgeConnectorAction(edgeConnectorId string, actionId string) error {
+	var idUnion struct {
+		union json.RawMessage
+	}
+	idUnion.union, _ = json.Marshal(actionId)
+
+	req, err := c.Rootly.NewDeleteEdgeConnectorActionRequest(c.Rootly.Server, edgeConnectorId, idUnion)
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

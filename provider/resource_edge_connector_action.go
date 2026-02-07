@@ -26,6 +26,13 @@ func resourceEdgeConnectorAction() *schema.Resource {
 		},
 		Schema: map[string]*schema.Schema{
 
+			"edge_connector_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
+				Description: "The ID of the edge connector this action belongs to",
+			},
+
 			"data": &schema.Schema{
 				Type:        schema.TypeList,
 				Computed:    true,
@@ -279,6 +286,7 @@ func resourceEdgeConnectorActionCreate(ctx context.Context, d *schema.ResourceDa
 
 	tflog.Trace(ctx, fmt.Sprintf("Creating EdgeConnectorAction"))
 
+	edgeConnectorId := d.Get("edge_connector_id").(string)
 	s := &client.EdgeConnectorAction{}
 
 	if value, ok := d.GetOkExists("data"); ok {
@@ -289,7 +297,7 @@ func resourceEdgeConnectorActionCreate(ctx context.Context, d *schema.ResourceDa
 		}
 	}
 
-	res, err := c.CreateEdgeConnectorAction(s)
+	res, err := c.CreateEdgeConnectorAction(edgeConnectorId, s)
 	if err != nil {
 		return diag.Errorf("Error creating edge_connector_action: %s", err.Error())
 	}
@@ -304,7 +312,8 @@ func resourceEdgeConnectorActionRead(ctx context.Context, d *schema.ResourceData
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading EdgeConnectorAction: %s", d.Id()))
 
-	item, err := c.GetEdgeConnectorAction(d.Id())
+	edgeConnectorId := d.Get("edge_connector_id").(string)
+	item, err := c.GetEdgeConnectorAction(edgeConnectorId, d.Id())
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -333,6 +342,7 @@ func resourceEdgeConnectorActionUpdate(ctx context.Context, d *schema.ResourceDa
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating EdgeConnectorAction: %s", d.Id()))
 
+	edgeConnectorId := d.Get("edge_connector_id").(string)
 	s := &client.EdgeConnectorAction{}
 
 	if d.HasChange("data") {
@@ -342,7 +352,7 @@ func resourceEdgeConnectorActionUpdate(ctx context.Context, d *schema.ResourceDa
 		}
 	}
 
-	_, err := c.UpdateEdgeConnectorAction(d.Id(), s)
+	_, err := c.UpdateEdgeConnectorAction(edgeConnectorId, d.Id(), s)
 	if err != nil {
 		return diag.Errorf("Error updating edge_connector_action: %s", err.Error())
 	}
@@ -354,7 +364,8 @@ func resourceEdgeConnectorActionDelete(ctx context.Context, d *schema.ResourceDa
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting EdgeConnectorAction: %s", d.Id()))
 
-	err := c.DeleteEdgeConnectorAction(d.Id())
+	edgeConnectorId := d.Get("edge_connector_id").(string)
+	err := c.DeleteEdgeConnectorAction(edgeConnectorId, d.Id())
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
