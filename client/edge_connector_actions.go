@@ -3,13 +3,19 @@
 package client
 
 import (
-	"encoding/json"
 	"fmt"
+	"net/http"
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
+
+// NOTE: This file uses manual HTTP request building instead of schema-generated functions.
+// The OpenAPI spec uses 'anyOf' for the action ID parameter (accepts UUID or string),
+// which causes oapi-codegen to generate anonymous union structs like: struct { union json.RawMessage }
+// Go's type system treats each anonymous struct declaration as a unique type, even if structurally identical,
+// causing compilation errors when trying to pass these structs to the generated functions.
+// To work around this oapi-codegen limitation, we build HTTP requests manually here.
 
 type EdgeConnectorAction struct {
 	ID   string                 `jsonapi:"primary,edge_connector_actions"`
@@ -17,7 +23,8 @@ type EdgeConnectorAction struct {
 }
 
 func (c *Client) ListEdgeConnectorActions(edgeConnectorId string) ([]interface{}, error) {
-	req, err := rootlygo.NewListEdgeConnectorActionsRequest(c.Rootly.Server, edgeConnectorId)
+	url := fmt.Sprintf("%s/v1/edge_connectors/%s/actions", c.Rootly.Server, edgeConnectorId)
+	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -42,10 +49,13 @@ func (c *Client) CreateEdgeConnectorAction(edgeConnectorId string, d *EdgeConnec
 		return nil, fmt.Errorf("Error marshaling edge_connector_action: %w", err)
 	}
 
-	req, err := rootlygo.NewCreateEdgeConnectorActionRequestWithBody(c.Rootly.Server, edgeConnectorId, c.ContentType, buffer)
+	url := fmt.Sprintf("%s/v1/edge_connectors/%s/actions", c.Rootly.Server, edgeConnectorId)
+	req, err := http.NewRequest("POST", url, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
+	req.Header.Set("Content-Type", c.ContentType)
+
 	resp, err := c.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("Failed to perform request to create edge_connector_action: %s", err)
@@ -61,11 +71,8 @@ func (c *Client) CreateEdgeConnectorAction(edgeConnectorId string, d *EdgeConnec
 }
 
 func (c *Client) GetEdgeConnectorAction(edgeConnectorId string, actionId string) (*EdgeConnectorAction, error) {
-	idBytes, _ := json.Marshal(actionId)
-
-	req, err := rootlygo.NewGetEdgeConnectorActionRequest(c.Rootly.Server, edgeConnectorId, struct {
-		union json.RawMessage
-	}{union: idBytes})
+	url := fmt.Sprintf("%s/v1/edge_connectors/%s/actions/%s", c.Rootly.Server, edgeConnectorId, actionId)
+	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -90,14 +97,13 @@ func (c *Client) UpdateEdgeConnectorAction(edgeConnectorId string, actionId stri
 		return nil, fmt.Errorf("Error marshaling edge_connector_action: %w", err)
 	}
 
-	idBytes, _ := json.Marshal(actionId)
-
-	req, err := rootlygo.NewUpdateEdgeConnectorActionRequestWithBody(c.Rootly.Server, edgeConnectorId, struct {
-		union json.RawMessage
-	}{union: idBytes}, c.ContentType, buffer)
+	url := fmt.Sprintf("%s/v1/edge_connectors/%s/actions/%s", c.Rootly.Server, edgeConnectorId, actionId)
+	req, err := http.NewRequest("PATCH", url, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
+	req.Header.Set("Content-Type", c.ContentType)
+
 	resp, err := c.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("Failed to make request to update edge_connector_action: %w", err)
@@ -113,11 +119,8 @@ func (c *Client) UpdateEdgeConnectorAction(edgeConnectorId string, actionId stri
 }
 
 func (c *Client) DeleteEdgeConnectorAction(edgeConnectorId string, actionId string) error {
-	idBytes, _ := json.Marshal(actionId)
-
-	req, err := rootlygo.NewDeleteEdgeConnectorActionRequest(c.Rootly.Server, edgeConnectorId, struct {
-		union json.RawMessage
-	}{union: idBytes})
+	url := fmt.Sprintf("%s/v1/edge_connectors/%s/actions/%s", c.Rootly.Server, edgeConnectorId, actionId)
+	req, err := http.NewRequest("DELETE", url, nil)
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}
