@@ -43,8 +43,8 @@ resource "rootly_alert_group" "example" {
 - `conditions` (Block List) The conditions for the alert group (see [below for nested schema](#nestedblock--conditions))
 - `deleted_at` (String) Date or deletion
 - `description` (String) The description of the alert group
-- `group_by_alert_title` (Boolean) [DEPRECATED] Whether the alerts are grouped by title or not. This field is deprecated. Please use the `conditions` field with advanced alert grouping instead.. Value must be one of true or false
-- `group_by_alert_urgency` (Boolean) [DEPRECATED] Whether the alerts are grouped by urgency or not. This field is deprecated. Please use the `conditions` field with advanced alert grouping instead.. Value must be one of true or false
+- `group_by_alert_title` (Boolean, Deprecated) [DEPRECATED] Whether the alerts are grouped by title or not. This field is deprecated. Please use the `conditions` field with advanced alert grouping instead.. Value must be one of true or false
+- `group_by_alert_urgency` (Boolean, Deprecated) [DEPRECATED] Whether the alerts are grouped by urgency or not. This field is deprecated. Please use the `conditions` field with advanced alert grouping instead.. Value must be one of true or false
 - `slug` (String) The slug of the alert group
 - `targets` (Block List) (see [below for nested schema](#nestedblock--targets))
 - `time_window` (Number) Time window for the alert grouping
