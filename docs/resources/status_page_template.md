@@ -27,6 +27,7 @@ description: |-
 - `should_notify_subscribers` (Boolean) Controls if incident subscribers should be notified. Value must be one of true or false
 - `status_page_id` (String)
 - `update_status` (String) Status of the event the template will populate
+- `update_title` (String) Title that will be used for the status page update
 
 ### Read-Only
 
