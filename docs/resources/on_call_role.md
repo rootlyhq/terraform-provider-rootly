@@ -25,7 +25,7 @@ description: |-
 - `alert_routing_rules_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `alert_sources_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `alert_urgency_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
-- `alerts_permissions` (List of String) Value must be one of `create`, `update`, `read`.
+- `alerts_permissions` (List of String) Value must be one of `create`, `update`, `read`, `delete`.
 - `api_keys_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `audits_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `contacts_permissions` (List of String) Value must be one of `read`.
@@ -35,7 +35,7 @@ description: |-
 - `integrations_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `invitations_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `live_call_routing_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
-- `on_call_readiness_report_permissions` (List of String) Value must be only `read`
+- `on_call_readiness_report_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `on_call_roles_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `schedule_override_permissions` (List of String) Value must be one of `create`, `update`.
 - `schedules_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
