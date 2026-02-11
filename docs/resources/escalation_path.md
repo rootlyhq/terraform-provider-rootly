@@ -197,14 +197,14 @@ resource "rootly_escalation_level" "second" {
 
 Optional:
 
-- `fieldable_id` (String) The ID of the alert field
-- `fieldable_type` (String) The type of the fieldable (e.g., AlertField)
+- `fieldable_id` (String) The ID of the alert field. Only used with `field` rule type.
+- `fieldable_type` (String) The type of the fieldable (e.g., AlertField). Only used with `field` rule type.
 - `json_path` (String) JSON path to extract value from payload
-- `operator` (String) How the value should be matched. Value must be one of `is`, `is_not`, `contains`, `does_not_contain`, `is_one_of`, `is_not_one_of`, `is_empty`, `is_not_empty`, `contains_key`, `does_not_contain_key`, `starts_with`, `does_not_start_with`, `matches`, `does_not_match`.
+- `operator` (String) How the value should be matched. For `json_path` rule type: `is`, `is_not`, `contains`, `does_not_contain`. For `field` rule type: `is`, `is_not`, `contains`, `does_not_contain`, `is_one_of`, `is_not_one_of`, `is_empty`, `is_not_empty`, `contains_key`, `does_not_contain_key`, `starts_with`, `does_not_start_with`, `matches`, `does_not_match`.
 - `rule_type` (String) The type of the escalation path rule. Value must be one of `alert_urgency`, `working_hour`, `json_path`, `field`.
 - `urgency_ids` (List of String) Alert urgency ids for which this escalation path should be used
 - `value` (String) Value with which JSON path value should be matched
-- `values` (List of String) Values to match against
+- `values` (List of String) Values to match against. Only used with `field` rule type.
 - `within_working_hour` (Boolean) Whether the escalation path should be used within working hours. Value must be one of true or false
 
 

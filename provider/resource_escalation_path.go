@@ -162,7 +162,7 @@ func resourceEscalationPath() *schema.Resource {
 							Required:     false,
 							Optional:     true,
 							ForceNew:     false,
-							Description:  "How the value should be matched. Value must be one of `is`, `is_not`, `contains`, `does_not_contain`, `is_one_of`, `is_not_one_of`, `is_empty`, `is_not_empty`, `contains_key`, `does_not_contain_key`, `starts_with`, `does_not_start_with`, `matches`, `does_not_match`.",
+							Description:  "How the value should be matched. For `json_path` rule type: `is`, `is_not`, `contains`, `does_not_contain`. For `field` rule type: `is`, `is_not`, `contains`, `does_not_contain`, `is_one_of`, `is_not_one_of`, `is_empty`, `is_not_empty`, `contains_key`, `does_not_contain_key`, `starts_with`, `does_not_start_with`, `matches`, `does_not_match`.",
 							ValidateFunc: validation.StringInSlice([]string{"is", "is_not", "contains", "does_not_contain", "is_one_of", "is_not_one_of", "is_empty", "is_not_empty", "contains_key", "does_not_contain_key", "starts_with", "does_not_start_with", "matches", "does_not_match"}, false),
 						},
 
@@ -181,7 +181,7 @@ func resourceEscalationPath() *schema.Resource {
 							Required:    false,
 							Optional:    true,
 							ForceNew:    false,
-							Description: "The type of the fieldable (e.g., AlertField)",
+							Description: "The type of the fieldable (e.g., AlertField). Only used with `field` rule type.",
 						},
 
 						"fieldable_id": &schema.Schema{
@@ -190,7 +190,7 @@ func resourceEscalationPath() *schema.Resource {
 							Required:    false,
 							Optional:    true,
 							ForceNew:    false,
-							Description: "The ID of the alert field",
+							Description: "The ID of the alert field. Only used with `field` rule type.",
 						},
 
 						"values": &schema.Schema{
@@ -202,7 +202,7 @@ func resourceEscalationPath() *schema.Resource {
 							Computed:         false,
 							Required:         false,
 							Optional:         true,
-							Description:      "Values to match against",
+							Description:      "Values to match against. Only used with `field` rule type.",
 						},
 					},
 				},
