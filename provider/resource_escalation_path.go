@@ -123,8 +123,8 @@ func resourceEscalationPath() *schema.Resource {
 							Required:     false,
 							Optional:     true,
 							ForceNew:     false,
-							Description:  "The type of the escalation path rule. Value must be one of `alert_urgency`, `working_hour`, `json_path`.",
-							ValidateFunc: validation.StringInSlice([]string{"alert_urgency", "working_hour", "json_path"}, false),
+							Description:  "The type of the escalation path rule. Value must be one of `alert_urgency`, `working_hour`, `json_path`, `field`.",
+							ValidateFunc: validation.StringInSlice([]string{"alert_urgency", "working_hour", "json_path", "field"}, false),
 						},
 
 						"urgency_ids": &schema.Schema{
@@ -162,8 +162,8 @@ func resourceEscalationPath() *schema.Resource {
 							Required:     false,
 							Optional:     true,
 							ForceNew:     false,
-							Description:  "How JSON path value should be matched. Value must be one of `is`, `is_not`, `contains`, `does_not_contain`.",
-							ValidateFunc: validation.StringInSlice([]string{"is", "is_not", "contains", "does_not_contain"}, false),
+							Description:  "How the value should be matched. Value must be one of `is`, `is_not`, `contains`, `does_not_contain`, `is_one_of`, `is_not_one_of`, `is_empty`, `is_not_empty`, `contains_key`, `does_not_contain_key`, `starts_with`, `does_not_start_with`, `matches`, `does_not_match`.",
+							ValidateFunc: validation.StringInSlice([]string{"is", "is_not", "contains", "does_not_contain", "is_one_of", "is_not_one_of", "is_empty", "is_not_empty", "contains_key", "does_not_contain_key", "starts_with", "does_not_start_with", "matches", "does_not_match"}, false),
 						},
 
 						"value": &schema.Schema{
@@ -173,6 +173,36 @@ func resourceEscalationPath() *schema.Resource {
 							Optional:    true,
 							ForceNew:    false,
 							Description: "Value with which JSON path value should be matched",
+						},
+
+						"fieldable_type": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "The type of the fieldable (e.g., AlertField)",
+						},
+
+						"fieldable_id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "The ID of the alert field",
+						},
+
+						"values": &schema.Schema{
+							Type: schema.TypeList,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         false,
+							Required:         false,
+							Optional:         true,
+							Description:      "Values to match against",
 						},
 					},
 				},
@@ -337,6 +367,9 @@ func resourceEscalationPathRead(ctx context.Context, d *schema.ResourceData, met
 					"json_path":           rawItem["json_path"],
 					"operator":            rawItem["operator"],
 					"value":               rawItem["value"],
+					"fieldable_type":      rawItem["fieldable_type"],
+					"fieldable_id":        rawItem["fieldable_id"],
+					"values":              rawItem["values"],
 				}
 				processed_items_rules = append(processed_items_rules, processed_item_rules)
 			}
