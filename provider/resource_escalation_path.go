@@ -176,12 +176,13 @@ func resourceEscalationPath() *schema.Resource {
 						},
 
 						"fieldable_type": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "The type of the fieldable (e.g., AlertField). Only used with `field` rule type.",
+							Type:         schema.TypeString,
+							Computed:     true,
+							Required:     false,
+							Optional:     true,
+							ForceNew:     false,
+							Description:  "The type of the fieldable. Only used with `field` rule type. Value must be one of `AlertField`.",
+							ValidateFunc: validation.StringInSlice([]string{"AlertField"}, false),
 						},
 
 						"fieldable_id": &schema.Schema{
