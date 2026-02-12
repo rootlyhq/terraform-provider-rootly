@@ -80,7 +80,7 @@ func resourceEscalationLevel() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "Delay before notification targets will be alerted.",
+				Description: "Delay before notifying targets in the next Escalation Level.",
 			},
 
 			"position": &schema.Schema{
@@ -132,7 +132,7 @@ func resourceEscalationLevel() *schema.Resource {
 
 						"team_members": &schema.Schema{
 							Type:         schema.TypeString,
-							Default:      "all",
+							Computed:     true,
 							Required:     false,
 							Optional:     true,
 							Sensitive:    false,
