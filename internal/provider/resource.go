@@ -34,3 +34,7 @@ func (r *baseResource) Configure(ctx context.Context, req resource.ConfigureRequ
 	r.client = providerData.Client
 	r.legacyClient = providerData.LegacyClient
 }
+
+type modifySchemaResponseExtension interface {
+	modifySchemaResponse(ctx context.Context, resp *resource.SchemaResponse)
+}
