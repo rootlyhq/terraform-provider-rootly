@@ -545,7 +545,7 @@ func resourceAlertsSource() *schema.Resource {
 				Sensitive:        false,
 				ForceNew:         false,
 				WriteOnly:        false,
-				Description:      "List of alert fields to be added to the alert source",
+				Description:      "List of alert fields to be added to the alert source. Note: This attribute requires the alert field feature to be enabled on your account. Contact Rootly customer support if you need assistance with this feature.",
 				ConflictsWith:    []string{"alert_template_attributes"},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Elem: &schema.Resource{
