@@ -92,6 +92,8 @@ func dataSourceIncidentTypeRead(ctx context.Context, d *schema.ResourceData, met
 	item, _ := items[0].(*client.IncidentType)
 
 	d.SetId(item.ID)
-
+	d.Set("slug", item.Slug)
+	d.Set("name", item.Name)
+	d.Set("color", item.Color)
 	return nil
 }

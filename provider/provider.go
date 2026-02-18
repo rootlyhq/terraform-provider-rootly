@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 
+	goversion "github.com/hashicorp/go-version"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/meta"
@@ -31,6 +32,7 @@ func init() {
 func New(version string) func() *schema.Provider {
 	return func() *schema.Provider {
 		p := &schema.Provider{
+			TerraformVersion: "1.0",
 			Schema: map[string]*schema.Schema{
 				"api_host": {
 					Description: "The Rootly API host. Defaults to https://api.rootly.com. Can also be sourced from the `ROOTLY_API_URL` environment variable.",
@@ -57,7 +59,6 @@ func New(version string) func() *schema.Provider {
 				"rootly_communications_stage":             dataSourceCommunicationsStage(),
 				"rootly_communications_type":              dataSourceCommunicationsType(),
 				"rootly_communications_template":          dataSourceCommunicationsTemplate(),
-				"rootly_communications_group":             dataSourceCommunicationsGroup(),
 				"rootly_custom_form":                      dataSourceCustomForm(),
 				"rootly_environment":                      dataSourceEnvironment(),
 				"rootly_escalation_policy":                dataSourceEscalationPolicy(),
@@ -95,6 +96,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_custom_field":                     dataSourceCustomField(),
 				"rootly_custom_field_option":              dataSourceCustomFieldOption(),
 				"rootly_causes":                           dataSourceCauses(),
+				"rootly_communications_group":             dataSourceCommunicationsGroup(),
 				"rootly_custom_fields":                    dataSourceCustomFields(),
 				"rootly_custom_field_options":             dataSourceCustomFieldOptions(),
 				"rootly_environments":                     dataSourceEnvironments(),
@@ -110,21 +112,19 @@ func New(version string) func() *schema.Provider {
 				"rootly_schedule":                         dataSourceSchedule(),
 			},
 			ResourcesMap: map[string]*schema.Resource{
-				"rootly_alert_route":                                        resourceAlertRoute(),
 				"rootly_alert_routing_rule":                                 resourceAlertRoutingRule(),
 				"rootly_alert_field":                                        resourceAlertField(),
 				"rootly_alert_urgency":                                      resourceAlertUrgency(),
 				"rootly_alert_group":                                        resourceAlertGroup(),
+				"rootly_alert_route":                                        resourceAlertRoute(),
 				"rootly_authorization":                                      resourceAuthorization(),
 				"rootly_cause":                                              resourceCause(),
 				"rootly_communications_stage":                               resourceCommunicationsStage(),
 				"rootly_communications_type":                                resourceCommunicationsType(),
 				"rootly_communications_template":                            resourceCommunicationsTemplate(),
-				"rootly_communications_group":                               resourceCommunicationsGroup(),
 				"rootly_custom_form":                                        resourceCustomForm(),
 				"rootly_dashboard_panel":                                    resourceDashboardPanel(),
 				"rootly_environment":                                        resourceEnvironment(),
-				"rootly_escalation_policy":                                  resourceEscalationPolicy(),
 				"rootly_form_field_option":                                  resourceFormFieldOption(),
 				"rootly_form_field_placement_condition":                     resourceFormFieldPlacementCondition(),
 				"rootly_form_field_placement":                               resourceFormFieldPlacement(),
@@ -135,8 +135,8 @@ func New(version string) func() *schema.Provider {
 				"rootly_functionality":                                      resourceFunctionality(),
 				"rootly_workflow_custom_field_selection":                    resourceWorkflowCustomFieldSelection(),
 				"rootly_workflow_form_field_condition":                      resourceWorkflowFormFieldCondition(),
-				"rootly_workflow_group":                                     resourceWorkflowGroup(),
 				"rootly_live_call_router":                                   resourceLiveCallRouter(),
+				"rootly_workflow_group":                                     resourceWorkflowGroup(),
 				"rootly_heartbeat":                                          resourceHeartbeat(),
 				"rootly_incident_permission_set_boolean":                    resourceIncidentPermissionSetBoolean(),
 				"rootly_incident_permission_set_resource":                   resourceIncidentPermissionSetResource(),
@@ -145,7 +145,6 @@ func New(version string) func() *schema.Provider {
 				"rootly_incident_role":                                      resourceIncidentRole(),
 				"rootly_incident_type":                                      resourceIncidentType(),
 				"rootly_on_call_shadow":                                     resourceOnCallShadow(),
-				"rootly_override_shift":                                     resourceOverrideShift(),
 				"rootly_playbook_task":                                      resourcePlaybookTask(),
 				"rootly_playbook":                                           resourcePlaybook(),
 				"rootly_role":                                               resourceRole(),
@@ -163,15 +162,18 @@ func New(version string) func() *schema.Provider {
 				"rootly_retrospective_process_group_step":                   resourceRetrospectiveProcessGroupStep(),
 				"rootly_escalation_level":                                   resourceEscalationLevel(),
 				"rootly_alerts_source":                                      resourceAlertsSource(),
+				"rootly_communications_group":                               resourceCommunicationsGroup(),
 				"rootly_custom_field":                                       resourceCustomField(),
 				"rootly_custom_field_option":                                resourceCustomFieldOption(),
 				"rootly_dashboard":                                          resourceDashboard(),
 				"rootly_escalation_path":                                    resourceEscalationPath(),
+				"rootly_escalation_policy":                                  resourceEscalationPolicy(),
 				"rootly_retrospective_configuration":                        resourceRetrospectiveConfiguration(),
 				"rootly_retrospective_process":                              resourceRetrospectiveProcess(),
 				"rootly_retrospective_step":                                 resourceRetrospectiveStep(),
 				"rootly_post_mortem_template":                               resourcePostmortemTemplate(),
 				"rootly_on_call_role":                                       resourceOnCallRole(),
+				"rootly_override_shift":                                     resourceOverrideShift(),
 				"rootly_schedule":                                           resourceSchedule(),
 				"rootly_schedule_rotation":                                  resourceScheduleRotation(),
 				"rootly_secret":                                             resourceSecret(),
@@ -238,6 +240,11 @@ func New(version string) func() *schema.Provider {
 				"rootly_workflow_task_send_microsoft_teams_message":         resourceWorkflowTaskSendMicrosoftTeamsMessage(),
 				"rootly_workflow_task_send_microsoft_teams_blocks":          resourceWorkflowTaskSendMicrosoftTeamsBlocks(),
 				"rootly_workflow_task_update_notion_page":                   resourceWorkflowTaskUpdateNotionPage(),
+				"rootly_workflow_task_update_quip_page":                     resourceWorkflowTaskUpdateQuipPage(),
+				"rootly_workflow_task_update_confluence_page":               resourceWorkflowTaskUpdateConfluencePage(),
+				"rootly_workflow_task_update_sharepoint_page":               resourceWorkflowTaskUpdateSharepointPage(),
+				"rootly_workflow_task_update_dropbox_paper_page":            resourceWorkflowTaskUpdateDropboxPaperPage(),
+				"rootly_workflow_task_update_datadog_notebook":              resourceWorkflowTaskUpdateDatadogNotebook(),
 				"rootly_workflow_task_create_service_now_incident":          resourceWorkflowTaskCreateServiceNowIncident(),
 				"rootly_workflow_task_create_shortcut_story":                resourceWorkflowTaskCreateShortcutStory(),
 				"rootly_workflow_task_create_shortcut_task":                 resourceWorkflowTaskCreateShortcutTask(),
@@ -325,6 +332,15 @@ func configure(version string, p *schema.Provider) func(context.Context, *schema
 
 		// Warning or errors can be collected in a slice type
 		var diags diag.Diagnostics
+
+		if goversion.Must(goversion.NewVersion(p.TerraformVersion)).LessThan(goversion.Must(goversion.NewVersion("1.0"))) {
+			diags = append(diags, diag.Diagnostic{
+				Severity: diag.Error,
+				Summary:  "Unsupported Terraform Version",
+				Detail:   "Please upgrade Terraform to at least version 1.0.",
+			})
+			return nil, diags
+		}
 
 		cli, err := client.NewClient(host, token, RootlyUserAgent(version))
 		if err != nil {

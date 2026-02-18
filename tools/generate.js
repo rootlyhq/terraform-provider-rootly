@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const swaggerPath = process.argv[2];
+const filterResource = process.argv[3] || null;
 const inflect = require("./inflect");
 const providerTpl = require("./generate-provider-tpl");
 const clientTpl = require("./generate-client-tpl");
@@ -16,7 +17,7 @@ const excluded = {
   dataSources: [
     "alert",
     "alert_event",
-    "audit",
+    "alert_route",
     "catalog",
     "catalog_field",
     "catalog_entity",
@@ -50,17 +51,22 @@ const excluded = {
   resources: [
     "alert",
     "alert_event",
+    "alert_route",
+    "alert_group",
     "alerts_source",
+    "status",
     "audit",
     "catalog",
     "catalog_field",
     "catalog_entity",
     "catalog_entity_property",
     "communications_group",
+    "communications_template", // cannot auto-generate because of custom nested JSON:API format handling (IR-3529)
     "custom_field_option",
     "custom_field",
     "dashboard",
     "escalation_path",
+    "escalation_policy",
     "incident_action_item",
     "incident_custom_field_selection",
     "incident_event_functionality",
@@ -71,7 +77,9 @@ const excluded = {
     "incident_post_mortem",
     "incident",
     "ip_ranges",
+    "live_call_router",
     "on_call_role",
+    "override_shift",
     "post_mortem_template",
     "pulse",
     "retrospective_configuration",
@@ -81,26 +89,54 @@ const excluded = {
     "schedule", // cannot auto-generate because of schema upgrade logic
     "schedule_rotation",
     "shift",
+    "team",
     "user",
     "user_notification_rule",
     "webhooks_delivery",
+    "workflow_alert", // cannot auto-generate because codegen doesn't handle nested objects in trigger_params (alert_payload_conditions requires complex nested schema)
     "workflow_run",
     "workflow_task",
   ]
 }
 
 const readOnlyCollections = [
+  "audit", // API is read-only (list only); no create/update/get/delete in schema
   "incident_post_mortem",
   "incident",
+  "status",
   "user",
 ]
 
 function main() {
-  generateProvider(resources(), workflowTaskResources(), dataSources())
-  generateClients()
-  generateResources()
-  generateWorkflowTaskResources(workflowTaskResources(), swagger)
-  generateDataSources()
+  if (filterResource) {
+    console.log(`Generating code for resource: ${filterResource}`);
+    if (resources().includes(filterResource)) {
+      if (readOnlyCollections.includes(filterResource)) {
+        generateReadOnlyClient(filterResource);
+      } else {
+        generateClient(filterResource);
+      }
+      generateResource(filterResource);
+    } else if (dataSources().includes(filterResource)) {
+      if (readOnlyCollections.includes(filterResource)) {
+        generateReadOnlyClient(filterResource);
+      } else {
+        generateClient(filterResource);
+      }
+      generateDataSource(filterResource);
+    } else {
+      console.error(`Error: Resource '${filterResource}' not found in resources or data sources`);
+      console.error(`Available resources: ${resources().slice(0, 10).join(', ')}...`);
+      process.exit(1);
+    }
+  } else {
+    // Generate everything
+    generateProvider(resources(), workflowTaskResources(), dataSources())
+    generateClients()
+    generateResources()
+    generateWorkflowTaskResources(workflowTaskResources(), swagger)
+    generateDataSources()
+  }
 }
 
 main()
@@ -311,8 +347,17 @@ function resourceSchema(name) {
 }
 
 function requiredFields(name) {
-  return swagger.components.schemas[`new_${name}`].properties.data.properties
-    .attributes.required;
+  const schemaName = `new_${name}`;
+  const schema = swagger.components.schemas[schemaName];
+  if (!schema) {
+    console.warn(`Schema '${schemaName}' not found for resource '${name}'. Skipping required fields check.`);
+    return [];
+  }
+  if (!schema.properties || !schema.properties.data || !schema.properties.data.properties || !schema.properties.data.properties.attributes) {
+    console.warn(`Schema '${schemaName}' exists but doesn't have the expected structure for resource '${name}'. Skipping required fields check.`);
+    return [];
+  }
+  return schema.properties.data.properties.attributes.required || [];
 }
 
 function collectionPathSchema(name) {
@@ -321,6 +366,7 @@ function collectionPathSchema(name) {
       const get = swagger.paths[url].get;
       return (
         get &&
+        get.operationId &&
         get.operationId.replace(/ /g, "") ===
           `list${inflect.pluralize(inflect.camelize(name))}`
       );
@@ -334,6 +380,7 @@ function hasQueryParam(name) {
       const get = swagger.paths[url].get;
       return (
         get &&
+        get.operationId &&
         get.operationId.replace(/ /g, "") ===
           `get${inflect.singularize(inflect.camelize(name))}`
       );

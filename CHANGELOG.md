@@ -1,5 +1,91 @@
 # Changelog
 
+## [5.5.0] -- 2025-1-29
+
+### Added
+- `alert_payload_conditions` into schema & docs
+- `name` can be used to filter `alert_sources`
+
+### Fixed
+- Alert Source drift forced `AlertField` `conditional_type` which is Fixed.
+
+
+## [5.4.0] -- 2025-1-25
+
+### Added
+- Make Communications Template Handle Both Response Types
+
+### Fixed
+
+- Codegen was failing due to failed checks on `operation_id`
+- Make Escalation Policy Service IDs Computed & Optional 
+
+
+### Deprecated
+
+
+## [5.3.0] -- 2025-1-14
+
+### Added
+
+- Added validation to the `workflow_tasks` ensuring that the position of each task is not the same to ensure teams do not run into
+clashing task issues.
+
+### Fixed
+- Missing `alert_field_permissions`, `alert_groups_permissions`, `alert_routing_rules_permissions`, `on_call_roles_permissions` and `on_call_readiness_report_permissions` in the On call role resource which have been fixed.
+
+- Fixed running of the migration script by migrating script to the base `go.mod` 
+
+- Migrated `Live call Router` resource schema for `paging_targets` to required instead of optional as it is necessary.
+
+- Marking `params.description` as non computed for the `resource_dashboard_panel` to allow for a blank value.
+
+- Fixed Escalation Policy Business Hours state checks to actually verify values are being passed in when doing state checks.
+
+### Deprecated
+
+- Removed alert `Alert_email_address` & `alert_email_enabled` from team resource. 
+
+
+## [5.2.0] -- 2025-12-17
+
+### Added
+
+- Added validation for rootly_alert_route to enforce exclusivity between fallback_rule and condition_groups.
+
+### Fixed
+
+- Improved `rootly_alerts_source` creation
+
+## [5.1.0] -- 2025-12-16
+
+### Added
+
+- Added the ability to associate an `escalation_policy` to a service with the 
+`escalation_policy_id` attribute.
+
+### Fixed
+
+- Updated the escalation_policy resource validation and schema types.
+
+## [5.0.0] -- 2025-12-11
+
+### Changed
+
+- Require minimum Terraform version of 1.0+
+
+## [4.3.13] -- 2025-12-04
+
+### Changed
+
+- Deprecated communications group condition properties name field.
+
+## [4.3.12] -- 2025-12-04
+
+### Fixed
+
+- Set computed for schedule rotation start and end time attributes. Fixes unintended plans for rotations that had a start time before these fields were added to the provider, and where existing configuration does not have a value specified. 
+
 ## [4.3.11] -- 2025-12-03
 
 ### Fixed

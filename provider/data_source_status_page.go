@@ -70,6 +70,6 @@ func dataSourceStatusPageRead(ctx context.Context, d *schema.ResourceData, meta 
 	item, _ := items[0].(*client.StatusPage)
 
 	d.SetId(item.ID)
-
+	d.Set("slug", item.Slug)
 	return nil
 }

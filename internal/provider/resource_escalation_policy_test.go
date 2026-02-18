@@ -6,8 +6,12 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"testing"
 
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
+	"github.com/hashicorp/terraform-plugin-testing/knownvalue"
+	"github.com/hashicorp/terraform-plugin-testing/statecheck"
+	"github.com/hashicorp/terraform-plugin-testing/tfjsonpath"
 	"github.com/jianyuan/go-utils/ptr"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/acctest"
 	rootly "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
@@ -56,4 +60,76 @@ func init() {
 			return nil
 		},
 	})
+}
+
+func TestAccResourceEscalationPolicy(t *testing.T) {
+	resName := "rootly_escalation_policy.test"
+	escalationPolicyName := acctest.RandomWithPrefix("tf-escalation-policy")
+
+	configStateChecks := []statecheck.StateCheck{
+		statecheck.ExpectKnownValue(resName, tfjsonpath.New("id"), knownvalue.NotNull()),
+	}
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceEscalationPolicyConfig(escalationPolicyName, "description", `
+					business_hours {
+						time_zone  = "America/New_York"
+						start_time = "12:00 PM"
+						end_time   = "13:00"
+						days       = ["M", "T", "W"]
+					}
+				`),
+				ConfigStateChecks: append(
+					configStateChecks,
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("name"), knownvalue.StringExact(escalationPolicyName)),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("description"), knownvalue.StringExact("description")),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("business_hours").AtSliceIndex(0).AtMapKey("time_zone"), knownvalue.StringExact("America/New_York")),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("business_hours").AtSliceIndex(0).AtMapKey("start_time"), knownvalue.StringExact("12:00")),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("business_hours").AtSliceIndex(0).AtMapKey("end_time"), knownvalue.StringExact("13:00")),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("business_hours").AtSliceIndex(0).AtMapKey("days"), knownvalue.SetExact([]knownvalue.Check{
+						knownvalue.StringExact("M"),
+						knownvalue.StringExact("T"),
+						knownvalue.StringExact("W"),
+					})),
+				),
+			},
+			{
+				Config: testAccResourceEscalationPolicyConfig(escalationPolicyName+"-updated", "description-updated", `
+					business_hours {
+						time_zone  = "America/Los_Angeles"
+						start_time = "09:00"
+						end_time   = "10:00"
+						days       = ["W", "R", "F"]
+					}
+				`),
+				ConfigStateChecks: append(
+					configStateChecks,
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("name"), knownvalue.StringExact(escalationPolicyName+"-updated")),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("description"), knownvalue.StringExact("description-updated")),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("business_hours").AtSliceIndex(0).AtMapKey("time_zone"), knownvalue.StringExact("America/Los_Angeles")),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("business_hours").AtSliceIndex(0).AtMapKey("start_time"), knownvalue.StringExact("09:00")),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("business_hours").AtSliceIndex(0).AtMapKey("end_time"), knownvalue.StringExact("10:00")),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("business_hours").AtSliceIndex(0).AtMapKey("days"), knownvalue.SetExact([]knownvalue.Check{
+						knownvalue.StringExact("W"),
+						knownvalue.StringExact("R"),
+						knownvalue.StringExact("F"),
+					})),
+				),
+			},
+		},
+	})
+}
+
+func testAccResourceEscalationPolicyConfig(name, description, extra string) string {
+	return fmt.Sprintf(`
+resource "rootly_escalation_policy" "test" {
+	name        = "%s"
+	description = "%s"
+	%s
+}
+`, name, description, extra)
 }

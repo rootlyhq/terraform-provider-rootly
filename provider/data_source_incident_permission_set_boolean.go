@@ -73,6 +73,6 @@ func dataSourceIncidentPermissionSetBooleanRead(ctx context.Context, d *schema.R
 	item, _ := items[0].(*client.IncidentPermissionSetBoolean)
 
 	d.SetId(item.ID)
-
+	d.Set("kind", item.Kind)
 	return nil
 }

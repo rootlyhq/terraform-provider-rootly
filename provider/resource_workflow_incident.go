@@ -231,7 +231,7 @@ func resourceWorkflowIncident() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"incident_condition_kind": &schema.Schema{
@@ -239,7 +239,7 @@ func resourceWorkflowIncident() *schema.Resource {
 							Default:     "IS",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"incident_condition_status": &schema.Schema{
@@ -247,7 +247,7 @@ func resourceWorkflowIncident() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"incident_condition_sub_status": &schema.Schema{
@@ -255,7 +255,7 @@ func resourceWorkflowIncident() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"incident_condition_environment": &schema.Schema{
@@ -263,7 +263,7 @@ func resourceWorkflowIncident() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"incident_condition_severity": &schema.Schema{
@@ -271,7 +271,7 @@ func resourceWorkflowIncident() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"incident_condition_incident_type": &schema.Schema{
@@ -279,7 +279,7 @@ func resourceWorkflowIncident() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"incident_condition_incident_roles": &schema.Schema{
@@ -287,7 +287,7 @@ func resourceWorkflowIncident() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"incident_condition_service": &schema.Schema{
@@ -295,7 +295,7 @@ func resourceWorkflowIncident() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"incident_condition_functionality": &schema.Schema{
@@ -303,7 +303,7 @@ func resourceWorkflowIncident() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"incident_condition_group": &schema.Schema{
@@ -311,7 +311,7 @@ func resourceWorkflowIncident() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"incident_condition_cause": &schema.Schema{
@@ -319,7 +319,7 @@ func resourceWorkflowIncident() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"incident_post_mortem_condition_cause": &schema.Schema{
@@ -327,7 +327,7 @@ func resourceWorkflowIncident() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "[DEPRECATED] Use incident_condition_cause instead. Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "[DEPRECATED] Use incident_condition_cause instead. Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"incident_condition_summary": &schema.Schema{

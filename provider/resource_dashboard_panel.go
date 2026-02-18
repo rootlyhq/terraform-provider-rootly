@@ -77,7 +77,8 @@ func resourceDashboardPanel() *schema.Resource {
 
 						"description": &schema.Schema{
 							Type:        schema.TypeString,
-							Computed:    true,
+							Default:     nil,
+							Computed:    false,
 							Required:    false,
 							Optional:    true,
 							Sensitive:   false,

@@ -102,7 +102,7 @@ resource "rootly_alerts_source" "example" {
 
 - `alert_source_fields_attributes` (Block List) List of alert fields to be added to the alert source (see [below for nested schema](#nestedblock--alert_source_fields_attributes))
 - `alert_source_urgency_rules_attributes` (Block List) List of rules that define the conditions under which the alert urgency will be set automatically based on the alert payload (see [below for nested schema](#nestedblock--alert_source_urgency_rules_attributes))
-- `alert_template_attributes` (Block List, Max: 1) (see [below for nested schema](#nestedblock--alert_template_attributes))
+- `alert_template_attributes` (Block List, Max: 1) Note that when alert fields are enabled at the team level, alert template attributes cannot be provided. Use `alert_source_fields_attributes` instead. (see [below for nested schema](#nestedblock--alert_template_attributes))
 - `alert_urgency_id` (String) ID for the default alert urgency assigned to this alert source
 - `deduplicate_alerts_by_key` (Boolean) Toggle alert deduplication using deduplication key. If enabled, deduplication_key_kind and deduplication_key_path are required.. Value must be one of true or false
 - `deduplication_key_kind` (String) Kind of deduplication key.. Value must be one of `payload`.
@@ -137,7 +137,7 @@ Optional:
 
 - `alert_urgency_id` (String) The ID of the alert urgency
 - `conditionable_id` (String) The ID of the conditionable. If conditionable_type is AlertField, this is the ID of the alert field.
-- `conditionable_type` (String) The type of the conditionable. Value must be one of `AlertField`.
+- `conditionable_type` (String) The type of the conditionable. Value must be one of `AlertField or (empty string)`.
 - `json_path` (String) JSON path expression to extract a specific value from the alert's payload for evaluation
 - `kind` (String) The kind of the conditionable. Value must be one of `payload`, `alert_field`.
 - `operator` (String) Comparison operator used to evaluate the extracted value against the specified condition. Value must be one of `is`, `is_not`, `contains`, `does_not_contain`.
@@ -174,7 +174,7 @@ Optional:
 Optional:
 
 - `conditionable_id` (String) The ID of the conditionable. If conditionable_type is AlertField, this is the ID of the alert field.
-- `conditionable_type` (String) The type of the conditionable. Value must be one of `AlertField`.
+- `conditionable_type` (String) The type of the conditionable. Value must be one of `AlertField or (empty string)`.
 - `field` (String) JSON path expression to extract a specific value from the alert's payload for evaluation
 - `kind` (String) The kind of the conditionable. Value must be one of `payload`, `alert_field`.
 - `operator` (String) Comparison operator used to evaluate the extracted value against the specified condition. Value must be one of `is`, `is_not`, `contains`, `does_not_contain`, `starts_with`, `ends_with`.
