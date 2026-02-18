@@ -1,0 +1,12 @@
+package: workflows
+generate:
+  models: true
+  client: true
+output: workflows.gen.go
+output-options:
+  include-tags:
+    - Workflows
+    - WorkflowTasks
+    - WorkflowGroups
+    - WorkflowFormFieldConditions
+    - WorkflowRuns

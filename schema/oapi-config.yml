@@ -10,3 +10,47 @@ output-options:
     - dashboard_panel_list
     - dashboard_panel
     - dashboard_panel_response
+
+# Excluding all these as communication templates and catalogs need to stay unchanged.
+    # Communications (Groups, Stages, Templates, Types)
+    - communications_group
+    - communications_group_response
+    - communications_groups_response
+    - communications_stage
+    - communications_stage_response
+    - communications_stages_response
+    - communications_template
+    - communications_template_response
+    - communications_templates_response
+    - communications_type
+    - communications_type_response
+    - communications_types_response
+    - new_communications_group
+    - new_communications_stage
+    - new_communications_template
+    - new_communications_type
+    - update_communications_group
+    - update_communications_stage
+    - update_communications_template
+    - update_communications_type
+    # Catalogs (Catalog, CatalogField, CatalogEntity, CatalogEntityProperty)
+    - catalog
+    - catalog_entity
+    - catalog_entity_list
+    - catalog_entity_property
+    - catalog_entity_property_list
+    - catalog_entity_property_response
+    - catalog_entity_response
+    - catalog_field
+    - catalog_field_list
+    - catalog_field_response
+    - catalog_list
+    - catalog_response
+    - new_catalog
+    - new_catalog_entity
+    - new_catalog_entity_property
+    - new_catalog_field
+    - update_catalog
+    - update_catalog_entity
+    - update_catalog_entity_property
+    - update_catalog_field

@@ -139,7 +139,7 @@ Optional:
 
 - `alert_urgency_id` (String) The ID of the alert urgency
 - `conditionable_id` (String) The ID of the conditionable. If conditionable_type is AlertField, this is the ID of the alert field.
-- `conditionable_type` (String) The type of the conditionable. Value must be one of `AlertField`.
+- `conditionable_type` (String) The type of the conditionable. Value must be one of `AlertField or (empty string)`.
 - `json_path` (String) JSON path expression to extract a specific value from the alert's payload for evaluation
 - `kind` (String) The kind of the conditionable. Value must be one of `payload`, `alert_field`.
 - `operator` (String) Comparison operator used to evaluate the extracted value against the specified condition. Value must be one of `is`, `is_not`, `contains`, `does_not_contain`.
@@ -176,7 +176,7 @@ Optional:
 Optional:
 
 - `conditionable_id` (String) The ID of the conditionable. If conditionable_type is AlertField, this is the ID of the alert field.
-- `conditionable_type` (String) The type of the conditionable. Value must be one of `AlertField`.
+- `conditionable_type` (String) The type of the conditionable. Value must be one of `AlertField or (empty string)`.
 - `field` (String) JSON path expression to extract a specific value from the alert's payload for evaluation
 - `kind` (String) The kind of the conditionable. Value must be one of `payload`, `alert_field`.
 - `operator` (String) Comparison operator used to evaluate the extracted value against the specified condition. Value must be one of `is`, `is_not`, `contains`, `does_not_contain`, `starts_with`, `ends_with`.

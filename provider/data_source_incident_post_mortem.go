@@ -126,6 +126,6 @@ func dataSourceIncidentPostMortemRead(ctx context.Context, d *schema.ResourceDat
 	item, _ := items[0].(*client.IncidentPostMortem)
 
 	d.SetId(item.ID)
-
+	d.Set("status", item.Status)
 	return nil
 }

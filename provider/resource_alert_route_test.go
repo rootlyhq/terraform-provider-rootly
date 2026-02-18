@@ -504,6 +504,175 @@ func TestAccResourceAlertRouteRulesUpdate(t *testing.T) {
 	})
 }
 
+func TestAccResourceAlertRouteConditionTypes(t *testing.T) {
+	resName := "rootly_alert_route.test"
+	team1Name := acctest.RandomWithPrefix("tf-team-1")
+	team2Name := acctest.RandomWithPrefix("tf-team-2")
+	escalationPolicy1Name := acctest.RandomWithPrefix("tf-escalation-policy-1")
+	escalationPolicy2Name := acctest.RandomWithPrefix("tf-escalation-policy-2")
+	alertUrgencyName := acctest.RandomWithPrefix("tf-alert-urgency")
+	alertsSourceName := acctest.RandomWithPrefix("tf-alerts-source")
+	alertRouteName := acctest.RandomWithPrefix("tf-alert-route")
+
+	resource.UnitTest(t, resource.TestCase{
+		IsUnitTest: false,
+		PreCheck: func() {
+			testAccPreCheck(t)
+		},
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			// Test payload condition
+			{
+				Config: testAccResourceAlertRouteConfig(team1Name, team2Name, escalationPolicy1Name, escalationPolicy2Name, alertUrgencyName, alertsSourceName, alertRouteName, `
+          rules {
+            name = "Payload Condition"
+            position = 1
+            fallback_rule = false
+
+            destinations {
+              target_type = "EscalationPolicy"
+              target_id = rootly_escalation_policy.test_1.id
+            }
+
+            condition_groups {
+              position = 1
+
+              conditions {
+                property_field_condition_type = "is_one_of"
+                property_field_type = "payload"
+                property_field_name = "$.severity"
+                property_field_values = ["critical", "high"]
+              }
+            }
+          }
+        `),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr(resName, "name", alertRouteName),
+					resource.TestCheckResourceAttr(resName, "rules.#", "1"),
+					resource.TestCheckResourceAttr(resName, "rules.0.condition_groups.0.conditions.0.property_field_type", "payload"),
+					resource.TestCheckResourceAttr(resName, "rules.0.condition_groups.0.conditions.0.property_field_name", "$.severity"),
+				),
+			},
+			// Test attribute condition
+			{
+				Config: testAccResourceAlertRouteConfig(team1Name, team2Name, escalationPolicy1Name, escalationPolicy2Name, alertUrgencyName, alertsSourceName, alertRouteName, `
+          rules {
+            name = "Attribute Condition"
+            position = 1
+            fallback_rule = false
+
+            destinations {
+              target_type = "EscalationPolicy"
+              target_id = rootly_escalation_policy.test_1.id
+            }
+
+            condition_groups {
+              position = 1
+
+              conditions {
+                property_field_condition_type = "contains"
+                property_field_type = "attribute"
+                property_field_name = "summary"
+                property_field_value = "error"
+              }
+            }
+          }
+        `),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr(resName, "rules.0.condition_groups.0.conditions.0.property_field_type", "attribute"),
+					resource.TestCheckResourceAttr(resName, "rules.0.condition_groups.0.conditions.0.property_field_name", "summary"),
+				),
+			},
+			// Test alert_field condition
+			{
+				Config: testAccResourceAlertRouteConfig(team1Name, team2Name, escalationPolicy1Name, escalationPolicy2Name, alertUrgencyName, alertsSourceName, alertRouteName, `
+          rules {
+            name = "Alert Field Condition"
+            position = 1
+            fallback_rule = false
+
+            destinations {
+              target_type = "EscalationPolicy"
+              target_id = rootly_escalation_policy.test_1.id
+            }
+
+            condition_groups {
+              position = 1
+
+              conditions {
+                property_field_condition_type = "is_one_of"
+                property_field_type = "alert_field"
+                conditionable_type = "AlertField"
+                conditionable_id = data.rootly_alert_field.title_field.id
+                property_field_values = ["Production"]
+              }
+            }
+          }
+        `),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr(resName, "rules.0.condition_groups.0.conditions.0.property_field_type", "alert_field"),
+					resource.TestCheckResourceAttr(resName, "rules.0.condition_groups.0.conditions.0.conditionable_type", "AlertField"),
+					resource.TestCheckResourceAttrSet(resName, "rules.0.condition_groups.0.conditions.0.conditionable_id"),
+				),
+			},
+			// Test multiple condition types in one rule
+			{
+				Config: testAccResourceAlertRouteConfig(team1Name, team2Name, escalationPolicy1Name, escalationPolicy2Name, alertUrgencyName, alertsSourceName, alertRouteName, `
+          rules {
+            name = "Mixed Conditions"
+            position = 1
+            fallback_rule = false
+
+            destinations {
+              target_type = "EscalationPolicy"
+              target_id = rootly_escalation_policy.test_1.id
+            }
+
+            condition_groups {
+              position = 1
+
+              conditions {
+                property_field_condition_type = "is_one_of"
+                property_field_type = "payload"
+                property_field_name = "$.severity"
+                property_field_values = ["critical"]
+              }
+
+              conditions {
+                property_field_condition_type = "contains"
+                property_field_type = "attribute"
+                property_field_name = "summary"
+                property_field_value = "database"
+              }
+
+              conditions {
+                property_field_condition_type = "is_one_of"
+                property_field_type = "alert_field"
+                conditionable_type = "AlertField"
+                conditionable_id = data.rootly_alert_field.title_field.id
+                property_field_values = ["Production"]
+              }
+            }
+          }
+        `),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr(resName, "rules.#", "1"),
+					resource.TestCheckResourceAttr(resName, "rules.0.condition_groups.0.conditions.#", "3"),
+					resource.TestCheckResourceAttr(resName, "rules.0.condition_groups.0.conditions.0.property_field_type", "payload"),
+					resource.TestCheckResourceAttr(resName, "rules.0.condition_groups.0.conditions.1.property_field_type", "attribute"),
+					resource.TestCheckResourceAttr(resName, "rules.0.condition_groups.0.conditions.2.property_field_type", "alert_field"),
+					resource.TestCheckResourceAttr(resName, "rules.0.condition_groups.0.conditions.2.conditionable_type", "AlertField"),
+				),
+			},
+			{
+				ResourceName:      resName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
+	})
+}
+
 func testAccResourceAlertRouteConfig(team1Name, team2Name, escalationPolicy1Name, escalationPolicy2Name, alertUrgencyName, alertsSourceName, alertRouteName, extra string) string {
 	return fmt.Sprintf(`
 resource "rootly_team" "test_1" {

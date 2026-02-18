@@ -17,7 +17,7 @@ const excluded = {
   dataSources: [
     "alert",
     "alert_event",
-    "audit",
+    "alert_route",
     "catalog",
     "catalog_field",
     "catalog_entity",
@@ -52,13 +52,16 @@ const excluded = {
     "alert",
     "alert_event",
     "alert_route",
+    "alert_group",
     "alerts_source",
+    "status",
     "audit",
     "catalog",
     "catalog_field",
     "catalog_entity",
     "catalog_entity_property",
     "communications_group",
+    "communications_template", // cannot auto-generate because of custom nested JSON:API format handling (IR-3529)
     "custom_field_option",
     "custom_field",
     "dashboard",
@@ -90,14 +93,17 @@ const excluded = {
     "user",
     "user_notification_rule",
     "webhooks_delivery",
+    "workflow_alert", // cannot auto-generate because codegen doesn't handle nested objects in trigger_params (alert_payload_conditions requires complex nested schema)
     "workflow_run",
     "workflow_task",
   ]
 }
 
 const readOnlyCollections = [
+  "audit", // API is read-only (list only); no create/update/get/delete in schema
   "incident_post_mortem",
   "incident",
+  "status",
   "user",
 ]
 
@@ -360,6 +366,7 @@ function collectionPathSchema(name) {
       const get = swagger.paths[url].get;
       return (
         get &&
+        get.operationId &&
         get.operationId.replace(/ /g, "") ===
           `list${inflect.pluralize(inflect.camelize(name))}`
       );
@@ -373,6 +380,7 @@ function hasQueryParam(name) {
       const get = swagger.paths[url].get;
       return (
         get &&
+        get.operationId &&
         get.operationId.replace(/ /g, "") ===
           `get${inflect.singularize(inflect.camelize(name))}`
       );

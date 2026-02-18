@@ -21,6 +21,12 @@ func dataSourceAlertsSource() *schema.Resource {
 				Computed: true,
 			},
 
+			"name": &schema.Schema{
+				Type:     schema.TypeString,
+				Computed: true,
+				Optional: true,
+			},
+
 			"source_type": &schema.Schema{
 				Type:         schema.TypeString,
 				Computed:     true,
@@ -45,6 +51,21 @@ func dataSourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, met
 	page_size := 1
 	params.PageSize = &page_size
 
+	if value, ok := d.GetOkExists("status"); ok {
+		status := value.(string)
+		params.FilterStatuses = &status
+	}
+
+	if value, ok := d.GetOkExists("source_type"); ok {
+		source_type := value.(string)
+		params.FilterSourceTypes = &source_type
+	}
+
+	if value, ok := d.GetOkExists("name"); ok {
+		name := value.(string)
+		params.FilterName = &name
+	}
+
 	items, err := c.ListAlertsSources(params)
 	if err != nil {
 		return diag.FromErr(err)
@@ -56,6 +77,8 @@ func dataSourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, met
 	item, _ := items[0].(*client.AlertsSource)
 
 	d.SetId(item.ID)
-
+	d.Set("status", item.Status)
+	d.Set("source_type", item.SourceType)
+	d.Set("name", item.Name)
 	return nil
 }

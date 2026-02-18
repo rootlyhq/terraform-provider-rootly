@@ -17,7 +17,7 @@ description: |-
 ### Required
 
 - `name` (String) The name of the live_call_router
-- `paging_targets` (Block List) Paging targets that callers can select from when this live call router is configured as a phone tree. (see [below for nested schema](#nestedblock--paging_targets))
+- `paging_targets` (Block List, Min: 1) Paging targets that callers can select from when this live call router is configured as a phone tree. (see [below for nested schema](#nestedblock--paging_targets))
 - `phone_number` (String) You can select a phone number using [generate_phone_number](#//api/v1/live_call_routers/generate_phone_number) API and pass that phone number here to register
 
 ### Optional

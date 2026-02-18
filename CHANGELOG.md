@@ -1,5 +1,29 @@
 # Changelog
 
+## [5.5.0] -- 2025-1-29
+
+### Added
+- `alert_payload_conditions` into schema & docs
+- `name` can be used to filter `alert_sources`
+
+### Fixed
+- Alert Source drift forced `AlertField` `conditional_type` which is Fixed.
+
+
+## [5.4.0] -- 2025-1-25
+
+### Added
+- Make Communications Template Handle Both Response Types
+
+### Fixed
+
+- Codegen was failing due to failed checks on `operation_id`
+- Make Escalation Policy Service IDs Computed & Optional 
+
+
+### Deprecated
+
+
 ## [5.3.0] -- 2025-1-14
 
 ### Added
