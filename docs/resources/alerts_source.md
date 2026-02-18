@@ -20,8 +20,6 @@ When configuring alert sources, the following alert source fields are **required
 
 **Important:** You must use **data sources** (not resources) to reference these required alert fields, as they cannot be modified or deleted by users. See the example below for the correct implementation.
 
-*Note: The `alert_source_fields_attributes` attribute requires the alert field feature to be enabled on your account. Contact Rootly customer support if you need assistance with this feature.*
-
 ## Example Usage
 
 ```shell
@@ -102,7 +100,7 @@ resource "rootly_alerts_source" "example" {
 
 ### Optional
 
-- `alert_source_fields_attributes` (Block List) List of alert fields to be added to the alert source. **Note:** This attribute requires the alert field feature to be enabled on your account. Contact Rootly customer support if you need assistance with this feature. (see [below for nested schema](#nestedblock--alert_source_fields_attributes))
+- `alert_source_fields_attributes` (Block List) List of alert fields to be added to the alert source (see [below for nested schema](#nestedblock--alert_source_fields_attributes))
 - `alert_source_urgency_rules_attributes` (Block List) List of rules that define the conditions under which the alert urgency will be set automatically based on the alert payload (see [below for nested schema](#nestedblock--alert_source_urgency_rules_attributes))
 - `alert_template_attributes` (Block List, Max: 1) Note that when alert fields are enabled at the team level, alert template attributes cannot be provided. Use `alert_source_fields_attributes` instead. (see [below for nested schema](#nestedblock--alert_template_attributes))
 - `alert_urgency_id` (String) ID for the default alert urgency assigned to this alert source
