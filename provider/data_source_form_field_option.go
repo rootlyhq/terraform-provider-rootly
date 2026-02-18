@@ -64,6 +64,7 @@ func dataSourceFormFieldOptionRead(ctx context.Context, d *schema.ResourceData, 
 	item, _ := items[0].(*client.FormFieldOption)
 
 	d.SetId(item.ID)
-
+	d.Set("value", item.Value)
+	d.Set("color", item.Color)
 	return nil
 }

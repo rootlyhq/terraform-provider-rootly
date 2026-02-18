@@ -1,0 +1,19 @@
+package: oncall
+generate:
+  models: true
+  client: true
+output: oncall.gen.go
+output-options:
+  include-tags:
+    - Schedules
+    - ScheduleRotations
+    - ScheduleRotationUsers
+    - ScheduleRotationActiveDays
+    - OnCallRoles
+    - OnCallShadows
+    - OverrideShifts
+    - Shifts
+    - EscalationPolicies
+    - EscalationPaths
+    - EscalationLevels
+    - LiveCallRouters

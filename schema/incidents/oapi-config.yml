@@ -1,0 +1,34 @@
+package: incidents
+generate:
+  models: true
+  client: true
+output: incidents.gen.go
+output-options:
+  include-tags:
+    - Incidents
+    - IncidentTypes
+    - IncidentRoles
+    - IncidentRoleTasks
+    - IncidentEvents
+    - IncidentEventServices
+    - IncidentEventFunctionalities
+    - IncidentActionItems
+    - IncidentPermissionSets
+    - IncidentPermissionSetBooleans
+    - IncidentPermissionSetResources
+    - IncidentFormFieldSelections
+    - IncidentFeedbacks
+    - IncidentRetrospectives
+    - IncidentRetrospectiveSteps
+    - IncidentStatusPageEvents
+    - IncidentSubStatuses
+    - RetrospectiveProcesses
+    - RetrospectiveConfigurations
+    - RetrospectiveSteps
+    - RetrospectiveTemplates
+    - RetrospectiveProcessGroups
+    - RetrospectiveProcessGroupSteps
+    - Severities
+    - Statuses
+    - SubStatuses
+    - Causes

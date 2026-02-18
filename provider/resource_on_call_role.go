@@ -168,7 +168,7 @@ func resourceOnCallRole() *schema.Resource {
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
 					Type:         schema.TypeString,
-					ValidateFunc: validation.StringInSlice([]string{"create", "update", "read"}, false),
+					ValidateFunc: validation.StringInSlice([]string{"create", "update", "read", "delete"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         true,
@@ -177,7 +177,7 @@ func resourceOnCallRole() *schema.Resource {
 				Sensitive:        false,
 				ForceNew:         false,
 				WriteOnly:        false,
-				Description:      "Value must be one of `create`, `update`, `read`.",
+				Description:      "Value must be one of `create`, `update`, `read`, `delete`.",
 			},
 
 			"api_keys_permissions": &schema.Schema{

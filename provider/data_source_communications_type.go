@@ -81,6 +81,7 @@ func dataSourceCommunicationsTypeRead(ctx context.Context, d *schema.ResourceDat
 	item, _ := items[0].(*client.CommunicationsType)
 
 	d.SetId(item.ID)
-
+	d.Set("name", item.Name)
+	d.Set("slug", item.Slug)
 	return nil
 }

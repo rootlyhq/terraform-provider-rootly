@@ -105,6 +105,9 @@ func dataSourceFormFieldRead(ctx context.Context, d *schema.ResourceData, meta i
 	item, _ := items[0].(*client.FormField)
 
 	d.SetId(item.ID)
-
+	d.Set("slug", item.Slug)
+	d.Set("name", item.Name)
+	d.Set("kind", item.Kind)
+	d.Set("enabled", item.Enabled)
 	return nil
 }
