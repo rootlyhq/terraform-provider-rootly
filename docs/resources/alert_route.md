@@ -9,7 +9,13 @@ description: |-
 
 
 
-*Note: This resource/data source requires access to Advanced Alert Routing. If you're unsure whether you have access to this feature, please contact Rootly customer support.*
+*Note: This resource requires access to Advanced Alert Routing. If you're unsure whether you have access to this feature, please contact Rootly customer support.*
+
+## Asynchronous Rule Creation
+
+For organizations with large numbers of routing rules, Rootly supports asynchronous rule processing to improve performance. When enabled, the Terraform provider will automatically handle rule creation in the background and wait for completion.
+
+If you experience slow operations when managing alert routes with many rules, contact Rootly customer support to enable asynchronous rule processing for your organization. This feature helps optimize performance for teams managing complex routing configurations.
 
 ## Example Usage
 
@@ -140,9 +146,9 @@ resource "rootly_alert_route" "production_route" {
 
 Optional:
 
-- `condition_groups` (Block List) (see [below for nested schema](#nestedblock--rules--condition_groups))
+- `condition_groups` (Block List) Must be specified if `fallback_rule` is `false`. (see [below for nested schema](#nestedblock--rules--condition_groups))
 - `destinations` (Block List) (see [below for nested schema](#nestedblock--rules--destinations))
-- `fallback_rule` (Boolean) Whether this is a fallback rule. Value must be one of true or false
+- `fallback_rule` (Boolean) Whether this is a fallback rule. Must be `true` if `condition_groups` is not specified.
 - `name` (String) The name of the alert routing rule
 - `position` (Number) The position of the alert routing rule for ordering evaluation
 

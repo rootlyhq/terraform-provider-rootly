@@ -40,8 +40,13 @@ Required:
 
 Optional:
 
+- `max_tokens` (String) Maximum number of tokens to generate in the response
+- `reasoning_effort` (String) Constrains effort on reasoning for GPT-5 and o-series models. Value must be one of `minimal`, `low`, `medium`, `high`.
+- `reasoning_summary` (String) Summary of the reasoning performed by the model for GPT-5 and o-series models. Value must be one of `auto`, `concise`, `detailed`.
 - `system_prompt` (String) The system prompt to send to OpenAI (optional)
 - `task_type` (String)
+- `temperature` (Number) Controls randomness in the response. Higher values make output more random
+- `top_p` (Number) Controls diversity via nucleus sampling. Lower values make output more focused
 
 ## Import
 

@@ -70,6 +70,6 @@ func dataSourceUserRead(ctx context.Context, d *schema.ResourceData, meta interf
 	item, _ := items[0].(*client.User)
 
 	d.SetId(item.ID)
-
+	d.Set("email", item.Email)
 	return nil
 }

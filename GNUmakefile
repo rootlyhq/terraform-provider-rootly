@@ -50,6 +50,10 @@ test:
 testacc:
 	TF_ACC=1 go test $(TEST) -v $(TESTARGS) -timeout 120m
 
+sweeper:
+	@echo "WARNING: This will destroy infrastructure. Use only in development accounts."
+	go test ./internal/provider -v -tags=sweep -sweep=all -sweep-allow-failures -timeout 120m
+
 codegen:
 	curl $(SWAGGER_URL) -o schema/swagger.json
 	node tools/clean-swagger.js schema/swagger.json
@@ -59,6 +63,29 @@ codegen:
 	go fmt provider/*
 	go tool goimports -w provider/*
 	go tool goimports -w client/*
+
+codegen-resource:
+	@if [ -z "$(RESOURCE)" ]; then \
+		echo "Error: RESOURCE parameter is required. Usage: make codegen-resource RESOURCE=service"; \
+		exit 1; \
+	fi
+	curl $(SWAGGER_URL) -o schema/swagger.json
+	node tools/clean-swagger.js schema/swagger.json
+	cd schema && go tool oapi-codegen --config=oapi-config.yml swagger.json
+	yarn run generate schema/swagger.json $(RESOURCE)
+	@RESOURCE_PLURAL=$$(node -e "const inflect = require('./tools/inflect'); console.log(inflect.pluralize('$(RESOURCE)'))"); \
+	go fmt client/$${RESOURCE_PLURAL}.go 2>/dev/null || true; \
+	go fmt provider/resource_$(RESOURCE).go provider/data_source_$(RESOURCE).go 2>/dev/null || go fmt provider/resource_$(RESOURCE).go 2>/dev/null || true; \
+	go tool goimports -w provider/resource_$(RESOURCE).go provider/data_source_$(RESOURCE).go 2>/dev/null || go tool goimports -w provider/resource_$(RESOURCE).go 2>/dev/null || true
+	@echo ""
+	@echo "✅ Code generation complete for $(RESOURCE)"
+	@echo "📝 Files that may have changed:"
+	@RESOURCE_PLURAL=$$(node -e "const inflect = require('./tools/inflect'); console.log(inflect.pluralize('$(RESOURCE)'))"); \
+	echo "   - client/$${RESOURCE_PLURAL}.go"; \
+	echo "   - provider/resource_$(RESOURCE).go"; \
+	echo "   - provider/data_source_$(RESOURCE).go (if exists)"; \
+	echo ""; \
+	echo "💡 Tip: Use 'git add -p' to selectively stage only the changes you want"
 
 # Version management targets
 # These targets manage semantic versioning using git tags
@@ -89,15 +116,15 @@ version-help:
 .PHONY: release-patch release-minor release-major
 
 release-patch: version-patch
-	@echo "✅ Tag v$$(scripts/bump-version.sh show patch) pushed"
+	@echo "✅ Tag $$(git describe --tags --abbrev=0) pushed"
 	@echo "🚀 CI will automatically build and publish the release"
 
 release-minor: version-minor
-	@echo "✅ Tag v$$(scripts/bump-version.sh show minor) pushed" 
+	@echo "✅ Tag $$(git describe --tags --abbrev=0) pushed"
 	@echo "🚀 CI will automatically build and publish the release"
 
 release-major: version-major
-	@echo "✅ Tag v$$(scripts/bump-version.sh show major) pushed"
+	@echo "✅ Tag $$(git describe --tags --abbrev=0) pushed"
 	@echo "🚀 CI will automatically build and publish the release"
 
 # Help target to show available version commands
@@ -127,6 +154,7 @@ help:
 	@echo "  make docs            - Generate documentation"
 	@echo "  make test            - Run unit tests"
 	@echo "  make testacc         - Run acceptance tests"
+	@echo "  make sweeper         - Delete resources created by acceptance tests. They have names starting with tf-"
 	@echo "  make install         - Install provider locally"
 	@echo "  make release         - Create local snapshot build"
 	@echo ""

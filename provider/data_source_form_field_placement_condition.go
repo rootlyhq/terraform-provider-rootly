@@ -53,6 +53,6 @@ func dataSourceFormFieldPlacementConditionRead(ctx context.Context, d *schema.Re
 	item, _ := items[0].(*client.FormFieldPlacementCondition)
 
 	d.SetId(item.ID)
-
+	d.Set("form_field_id", item.FormFieldId)
 	return nil
 }

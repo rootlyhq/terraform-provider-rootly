@@ -56,3 +56,37 @@ resource "rootly_service" tf {
 	}
 }
 `
+
+// Disabling this test until we get kubernetes deployment integration enabled where this
+// API token lives.
+
+// func TestAccResourceServiceWithKubernetesDeploymentName(t *testing.T) {
+// 	service_name := acctest.RandomWithPrefix("tf-service")
+// 	kubernetes_deployment_name := "namespace/" + acctest.RandomWithPrefix("deployment-name")
+// 	tf_name := "tf-" + acctest.RandomWithPrefix("service")
+
+// 	resource.UnitTest(t, resource.TestCase{
+// 		PreCheck: func() {
+// 			testAccPreCheck(t)
+// 		},
+// 		ProviderFactories: providerFactories,
+// 		Steps: []resource.TestStep{
+// 			{
+// 				Config: testAccResourceServiceWithKubernetesDeploymentNameConfig(tf_name, service_name, kubernetes_deployment_name),
+// 				Check: resource.ComposeTestCheckFunc(
+// 					resource.TestCheckResourceAttr("rootly_service.tf", "name", service_name),
+// 					resource.TestCheckResourceAttr("rootly_service.tf", "kubernetes_deployment_name", kubernetes_deployment_name),
+// 				),
+// 			},
+// 		},
+// 	})
+// }
+
+// func testAccResourceServiceWithKubernetesDeploymentNameConfig(tf_name, service_name, kubernetes_deployment_name string) string {
+// 	return fmt.Sprintf(`
+// 	resource "rootly_service" "%s" {
+// 		name = "%s"
+// 		kubernetes_deployment_name = "%s"
+// 	}
+// 	`, tf_name, service_name, kubernetes_deployment_name)
+// }

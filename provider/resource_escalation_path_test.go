@@ -94,3 +94,120 @@ resource "rootly_escalation_path" "test" {
 	}
 }
 `
+
+func TestAccResourceEscalationPathWithAllRuleTypes(t *testing.T) {
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck: func() {
+			testAccPreCheck(t)
+		},
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceEscalationPathWithAllRuleTypes,
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_escalation_path.test_rules", "name", "tf-test-path-all-rules"),
+					resource.TestCheckResourceAttr("rootly_escalation_path.test_rules", "match_mode", "match-any-rule"),
+					resource.TestCheckResourceAttr("rootly_escalation_path.test_rules", "rules.#", "4"),
+				),
+			},
+			{
+				Config: testAccResourceEscalationPathWithAllRuleTypesUpdated,
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_escalation_path.test_rules", "name", "tf-test-path-all-rules-updated"),
+					resource.TestCheckResourceAttr("rootly_escalation_path.test_rules", "match_mode", "match-all-rules"),
+					resource.TestCheckResourceAttr("rootly_escalation_path.test_rules", "rules.#", "2"),
+				),
+			},
+		},
+	})
+}
+
+const testAccResourceEscalationPathWithAllRuleTypes = `
+resource "rootly_escalation_policy" "test_rules" {
+	name = "tf-test-ep-rules"
+}
+
+resource "rootly_alert_urgency" "test" {
+	name = "tf-test-urgency"
+	description = "Test urgency for escalation path rules"
+}
+
+resource "rootly_alert_field" "test" {
+	name = "tf-test-alert-field"
+}
+
+resource "rootly_escalation_path" "test_rules" {
+	name = "tf-test-path-all-rules"
+	default = false
+	escalation_policy_id = rootly_escalation_policy.test_rules.id
+	match_mode = "match-any-rule"
+
+	# Rule type: alert_urgency
+	rules {
+		rule_type = "alert_urgency"
+		urgency_ids = [rootly_alert_urgency.test.id]
+	}
+
+	# Rule type: working_hour
+	rules {
+		rule_type = "working_hour"
+		within_working_hour = true
+	}
+
+	# Rule type: json_path
+	rules {
+		rule_type = "json_path"
+		json_path = "$.severity"
+		operator = "is"
+		value = "critical"
+	}
+
+	# Rule type: field
+	rules {
+		rule_type = "field"
+		fieldable_type = "AlertField"
+		fieldable_id = rootly_alert_field.test.id
+		operator = "is_one_of"
+		values = ["value1", "value2"]
+	}
+}
+`
+
+const testAccResourceEscalationPathWithAllRuleTypesUpdated = `
+resource "rootly_escalation_policy" "test_rules" {
+	name = "tf-test-ep-rules"
+}
+
+resource "rootly_alert_urgency" "test" {
+	name = "tf-test-urgency"
+	description = "Test urgency for escalation path rules"
+}
+
+resource "rootly_alert_field" "test" {
+	name = "tf-test-alert-field"
+}
+
+resource "rootly_escalation_path" "test_rules" {
+	name = "tf-test-path-all-rules-updated"
+	default = false
+	escalation_policy_id = rootly_escalation_policy.test_rules.id
+	match_mode = "match-all-rules"
+
+	# Rule type: field with different operator
+	rules {
+		rule_type = "field"
+		fieldable_type = "AlertField"
+		fieldable_id = rootly_alert_field.test.id
+		operator = "contains"
+		values = ["updated-value"]
+	}
+
+	# Rule type: json_path with different operator
+	rules {
+		rule_type = "json_path"
+		json_path = "$.priority"
+		operator = "is_not"
+		value = "low"
+	}
+}
+`
