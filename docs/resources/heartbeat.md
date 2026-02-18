@@ -29,16 +29,16 @@ description: |-
 - `email_address` (String) Email address to receive heartbeat pings.
 - `enabled` (Boolean)
 - `expires_at` (String) When heartbeat expires
-- `interval_unit` (String) Value must be one of `seconds`, `minutes`, `hours`.
+- `interval_unit` (String) Value must be one of `minutes`, `hours`.
 - `last_pinged_at` (String) When the heartbeat was last pinged.
 - `notification_target_type` (String) Value must be one of `User`, `Group`, `Service`, `EscalationPolicy`.
-- `ping_url` (String) URL to receive heartbeat pings.
-- `secret` (String) Secret used as bearer token when pinging heartbeat.
 - `status` (String) Value must be one of `waiting`, `active`, `expired`.
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `ping_url` (String) URL to receive heartbeat pings.
+- `secret` (String) Secret used as bearer token when pinging heartbeat.
 
 ## Import
 

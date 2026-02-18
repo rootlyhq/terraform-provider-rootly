@@ -14,6 +14,7 @@ type StatusPageTemplate struct {
 	ID                      string `jsonapi:"primary,status_page_templates"`
 	StatusPageId            string `jsonapi:"attr,status_page_id,omitempty"`
 	Title                   string `jsonapi:"attr,title,omitempty"`
+	UpdateTitle             string `jsonapi:"attr,update_title,omitempty"`
 	Body                    string `jsonapi:"attr,body,omitempty"`
 	UpdateStatus            string `jsonapi:"attr,update_status,omitempty"`
 	Kind                    string `jsonapi:"attr,kind,omitempty"`

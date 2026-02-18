@@ -92,6 +92,8 @@ func dataSourceEnvironmentRead(ctx context.Context, d *schema.ResourceData, meta
 	item, _ := items[0].(*client.Environment)
 
 	d.SetId(item.ID)
-
+	d.Set("slug", item.Slug)
+	d.Set("name", item.Name)
+	d.Set("color", item.Color)
 	return nil
 }

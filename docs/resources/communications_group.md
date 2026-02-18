@@ -62,7 +62,7 @@ Optional:
 Optional:
 
 - `id` (String)
-- `name` (String)
+- `name` (String, Deprecated)
 
 
 
@@ -71,9 +71,7 @@ Optional:
 
 Optional:
 
-- `email` (String) Email of the group member
 - `id` (String) ID of the group member
-- `name` (String) Name of the group member
 - `user_id` (Number) User ID
 
 ## Import

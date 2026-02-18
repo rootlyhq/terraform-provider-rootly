@@ -70,6 +70,6 @@ func dataSourceLiveCallRouterRead(ctx context.Context, d *schema.ResourceData, m
 	item, _ := items[0].(*client.LiveCallRouter)
 
 	d.SetId(item.ID)
-
+	d.Set("name", item.Name)
 	return nil
 }

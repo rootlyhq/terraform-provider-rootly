@@ -196,8 +196,8 @@ func resourceLiveCallRouter() *schema.Resource {
 			"paging_targets": &schema.Schema{
 				Type:             schema.TypeList,
 				Computed:         false,
-				Required:         false,
-				Optional:         true,
+				Required:         true,
+				Optional:         false,
 				Sensitive:        false,
 				ForceNew:         false,
 				WriteOnly:        false,
@@ -313,10 +313,8 @@ func resourceLiveCallRouterCreate(ctx context.Context, d *schema.ResourceData, m
 		s.PagingTargets = value.([]interface{})
 	}
 	if value, ok := d.GetOkExists("escalation_policy_trigger_params"); ok {
-		if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
-			if mapValue, ok := valueList[0].(map[string]interface{}); ok {
-				s.EscalationPolicyTriggerParams = mapValue
-			}
+		if mapValue, ok := value.(map[string]interface{}); ok {
+			s.EscalationPolicyTriggerParams = mapValue
 		}
 	}
 
@@ -384,13 +382,10 @@ func resourceLiveCallRouterRead(ctx context.Context, d *schema.ResourceData, met
 		d.Set("paging_targets", nil)
 	}
 
-	singleton_list_escalation_policy_trigger_params := make([]interface{}, 1, 1)
-	processed_item_escalation_policy_trigger_params := map[string]interface{}{
-		"id":   item.EscalationPolicyTriggerParams["id"],
-		"type": item.EscalationPolicyTriggerParams["type"],
+	// We were forcing blank values here - should make sure that the values are actually present to avoid perpetual diffs
+	if item.EscalationPolicyTriggerParams != nil && len(item.EscalationPolicyTriggerParams) > 0 {
+		d.Set("escalation_policy_trigger_params", item.EscalationPolicyTriggerParams)
 	}
-	singleton_list_escalation_policy_trigger_params[0] = processed_item_escalation_policy_trigger_params
-	d.Set("escalation_policy_trigger_params", singleton_list_escalation_policy_trigger_params)
 
 	return nil
 }
@@ -456,9 +451,8 @@ func resourceLiveCallRouterUpdate(ctx context.Context, d *schema.ResourceData, m
 	}
 
 	if d.HasChange("escalation_policy_trigger_params") {
-		tps := d.Get("escalation_policy_trigger_params").([]interface{})
-		for _, tpsi := range tps {
-			s.EscalationPolicyTriggerParams = tpsi.(map[string]interface{})
+		if value, ok := d.GetOk("escalation_policy_trigger_params"); value != nil && ok {
+			s.EscalationPolicyTriggerParams = value.(map[string]interface{})
 		}
 	}
 

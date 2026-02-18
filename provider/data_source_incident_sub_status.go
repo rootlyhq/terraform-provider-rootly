@@ -71,6 +71,6 @@ func dataSourceIncidentSubStatusRead(ctx context.Context, d *schema.ResourceData
 	item, _ := items[0].(*client.IncidentSubStatus)
 
 	d.SetId(item.ID)
-
+	d.Set("sub_status_id", item.SubStatusId)
 	return nil
 }

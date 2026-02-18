@@ -81,6 +81,7 @@ func dataSourceAlertFieldRead(ctx context.Context, d *schema.ResourceData, meta 
 	item, _ := items[0].(*client.AlertField)
 
 	d.SetId(item.ID)
-
+	d.Set("name", item.Name)
+	d.Set("kind", item.Kind)
 	return nil
 }

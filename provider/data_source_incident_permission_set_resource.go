@@ -73,6 +73,6 @@ func dataSourceIncidentPermissionSetResourceRead(ctx context.Context, d *schema.
 	item, _ := items[0].(*client.IncidentPermissionSetResource)
 
 	d.SetId(item.ID)
-
+	d.Set("kind", item.Kind)
 	return nil
 }

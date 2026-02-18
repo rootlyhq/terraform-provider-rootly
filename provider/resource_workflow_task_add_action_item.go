@@ -28,6 +28,7 @@ func resourceWorkflowTaskAddActionItem() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
+		CustomizeDiff: validateUniqueWorkflowTaskPosition,
 
 		Schema: map[string]*schema.Schema{
 			"workflow_id": {
