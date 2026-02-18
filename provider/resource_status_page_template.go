@@ -48,6 +48,17 @@ func resourceStatusPageTemplate() *schema.Resource {
 				Description: "Title of the template",
 			},
 
+			"update_title": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Title that will be used for the status page update",
+			},
+
 			"body": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    false,
@@ -129,6 +140,9 @@ func resourceStatusPageTemplateCreate(ctx context.Context, d *schema.ResourceDat
 	if value, ok := d.GetOkExists("title"); ok {
 		s.Title = value.(string)
 	}
+	if value, ok := d.GetOkExists("update_title"); ok {
+		s.UpdateTitle = value.(string)
+	}
 	if value, ok := d.GetOkExists("body"); ok {
 		s.Body = value.(string)
 	}
@@ -178,6 +192,7 @@ func resourceStatusPageTemplateRead(ctx context.Context, d *schema.ResourceData,
 
 	d.Set("status_page_id", item.StatusPageId)
 	d.Set("title", item.Title)
+	d.Set("update_title", item.UpdateTitle)
 	d.Set("body", item.Body)
 	d.Set("update_status", item.UpdateStatus)
 	d.Set("kind", item.Kind)
@@ -199,6 +214,9 @@ func resourceStatusPageTemplateUpdate(ctx context.Context, d *schema.ResourceDat
 	}
 	if d.HasChange("title") {
 		s.Title = d.Get("title").(string)
+	}
+	if d.HasChange("update_title") {
+		s.UpdateTitle = d.Get("update_title").(string)
 	}
 	if d.HasChange("body") {
 		s.Body = d.Get("body").(string)

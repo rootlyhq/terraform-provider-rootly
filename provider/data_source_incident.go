@@ -297,6 +297,13 @@ func dataSourceIncidentRead(ctx context.Context, d *schema.ResourceData, meta in
 	item, _ := items[0].(*client.Incident)
 
 	d.SetId(item.ID)
-
+	d.Set("kind", item.Kind)
+	d.Set("status", item.Status)
+	d.Set("private", item.Private)
+	d.Set("severity", item.Severity)
+	d.Set("labels", item.Labels)
+	d.Set("environments", item.Environments)
+	d.Set("functionalities", item.Functionalities)
+	d.Set("services", item.Services)
 	return nil
 }

@@ -87,20 +87,22 @@ func resourceAlertGroup() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				Sensitive:   false,
+				Deprecated:  "This field is deprecated. Please use the `conditions` field with advanced alert grouping instead.",
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "Whether the alerts are grouped by title or not. Value must be one of true or false",
+				Description: "[DEPRECATED] Whether the alerts are grouped by title or not. This field is deprecated. Please use the `conditions` field with advanced alert grouping instead.. Value must be one of true or false",
 			},
 
 			"group_by_alert_urgency": &schema.Schema{
 				Type:        schema.TypeBool,
 				Computed:    true,
 				Required:    false,
+				Deprecated:  "This field is deprecated. Please use the `conditions` field with advanced alert grouping instead.",
 				Optional:    true,
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "Whether the alerts are grouped by urgency or not. Value must be one of true or false",
+				Description: "[DEPRECATED] Whether the alerts are grouped by urgency or not. This field is deprecated. Please use the `conditions` field with advanced alert grouping instead.. Value must be one of true or false",
 			},
 
 			"targets": &schema.Schema{
@@ -293,12 +295,12 @@ func resourceAlertGroup() *schema.Resource {
 							Sensitive:        false,
 							ForceNew:         false,
 							WriteOnly:        false,
-							Description:      "The Alert Urgency ID's to check in the condition. Only need to be set when the property field type is 'attribute', the property field name is 'alert_urgency' and the property field condition type is 'is_one_of' or 'is_not_one_of'",
+							Description:      "The Alert Urgency IDs to check in the condition. Only need to be set when the property field type is 'attribute', the property field name is 'alert_urgency' and the property field condition type is 'is_one_of' or 'is_not_one_of'",
 						},
 
 						"conditionable_type": &schema.Schema{
 							Type:         schema.TypeString,
-							Default:      "AlertField",
+							Computed:     true,
 							Required:     false,
 							Optional:     true,
 							Sensitive:    false,

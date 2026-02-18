@@ -114,6 +114,10 @@ func dataSourceFunctionalityRead(ctx context.Context, d *schema.ResourceData, me
 	item, _ := items[0].(*client.Functionality)
 
 	d.SetId(item.ID)
-
+	d.Set("name", item.Name)
+	d.Set("backstage_id", item.BackstageId)
+	d.Set("cortex_id", item.CortexId)
+	d.Set("external_id", item.ExternalId)
+	d.Set("slug", item.Slug)
 	return nil
 }

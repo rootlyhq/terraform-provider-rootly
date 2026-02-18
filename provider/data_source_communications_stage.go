@@ -81,6 +81,7 @@ func dataSourceCommunicationsStageRead(ctx context.Context, d *schema.ResourceDa
 	item, _ := items[0].(*client.CommunicationsStage)
 
 	d.SetId(item.ID)
-
+	d.Set("name", item.Name)
+	d.Set("slug", item.Slug)
 	return nil
 }

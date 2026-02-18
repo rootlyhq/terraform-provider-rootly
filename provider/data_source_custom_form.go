@@ -92,6 +92,8 @@ func dataSourceCustomFormRead(ctx context.Context, d *schema.ResourceData, meta 
 	item, _ := items[0].(*client.CustomForm)
 
 	d.SetId(item.ID)
-
+	d.Set("name", item.Name)
+	d.Set("slug", item.Slug)
+	d.Set("command", item.Command)
 	return nil
 }

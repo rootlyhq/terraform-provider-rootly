@@ -98,6 +98,8 @@ func dataSourceCommunicationsTemplateRead(ctx context.Context, d *schema.Resourc
 	item, _ := items[0].(*client.CommunicationsTemplate)
 
 	d.SetId(item.ID)
-
+	d.Set("name", item.Name)
+	d.Set("slug", item.Slug)
+	d.Set("communication_type_id", item.CommunicationTypeId)
 	return nil
 }

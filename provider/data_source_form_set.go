@@ -81,6 +81,6 @@ func dataSourceFormSetRead(ctx context.Context, d *schema.ResourceData, meta int
 	item, _ := items[0].(*client.FormSet)
 
 	d.SetId(item.ID)
-
+	d.Set("slug", item.Slug)
 	return nil
 }
