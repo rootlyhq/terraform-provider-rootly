@@ -7,7 +7,35 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strings"
 )
+
+// actionSchemaAttrs is the set of attributes declared in the Terraform schema for
+// edge_connector_action. The API returns extra fields (trigger, source, etc.) that
+// are not in the schema; passing them to d.Set causes a panic.
+var actionSchemaAttrs = map[string]bool{
+	"name":             true,
+	"slug":             true,
+	"action_type":      true,
+	"icon":             true,
+	"description":      true,
+	"timeout":          true,
+	"parameters":       true,
+	"last_executed_at": true,
+	"created_at":       true,
+	"updated_at":       true,
+}
+
+// filterActionAttrs returns a copy of attrs containing only schema-known keys.
+func filterActionAttrs(attrs map[string]interface{}) map[string]interface{} {
+	out := make(map[string]interface{}, len(actionSchemaAttrs))
+	for k, v := range attrs {
+		if actionSchemaAttrs[k] {
+			out[k] = v
+		}
+	}
+	return out
+}
 
 // NOTE: This file uses manual HTTP request building instead of schema-generated functions.
 // The OpenAPI spec uses 'anyOf' for the action ID parameter (accepts UUID or string),
@@ -130,8 +158,12 @@ func marshalEdgeConnectorAction(ec *EdgeConnectorAction) ([]byte, error) {
 	return json.Marshal(req)
 }
 
+func edgeConnectorActionsBase(server string) string {
+	return strings.TrimRight(server, "/")
+}
+
 func (c *Client) ListEdgeConnectorActions(edgeConnectorId string) ([]interface{}, error) {
-	url := fmt.Sprintf("%s/v1/edge_connectors/%s/actions", c.Rootly.Server, edgeConnectorId)
+	url := fmt.Sprintf("%s/v1/edge_connectors/%s/actions", edgeConnectorActionsBase(c.Rootly.Server), edgeConnectorId)
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
@@ -155,7 +187,7 @@ func (c *Client) ListEdgeConnectorActions(edgeConnectorId string) ([]interface{}
 			Data: map[string]interface{}{
 				"type":       item.Type,
 				"id":         item.ID,
-				"attributes": []interface{}{item.Attributes},
+				"attributes": []interface{}{filterActionAttrs(item.Attributes)},
 			},
 		}
 		results = append(results, ec)
@@ -169,7 +201,7 @@ func (c *Client) CreateEdgeConnectorAction(edgeConnectorId string, d *EdgeConnec
 		return nil, fmt.Errorf("Error marshaling edge_connector_action: %w", err)
 	}
 
-	url := fmt.Sprintf("%s/v1/edge_connectors/%s/actions", c.Rootly.Server, edgeConnectorId)
+	url := fmt.Sprintf("%s/v1/edge_connectors/%s/actions", edgeConnectorActionsBase(c.Rootly.Server), edgeConnectorId)
 	req, err := http.NewRequest("POST", url, bytes.NewReader(body))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
@@ -192,13 +224,13 @@ func (c *Client) CreateEdgeConnectorAction(edgeConnectorId string, d *EdgeConnec
 		Data: map[string]interface{}{
 			"type":       apiResp.Data.Type,
 			"id":         apiResp.Data.ID,
-			"attributes": []interface{}{apiResp.Data.Attributes},
+			"attributes": []interface{}{filterActionAttrs(apiResp.Data.Attributes)},
 		},
 	}, nil
 }
 
 func (c *Client) GetEdgeConnectorAction(edgeConnectorId string, actionId string) (*EdgeConnectorAction, error) {
-	url := fmt.Sprintf("%s/v1/edge_connectors/%s/actions/%s", c.Rootly.Server, edgeConnectorId, actionId)
+	url := fmt.Sprintf("%s/v1/edge_connectors/%s/actions/%s", edgeConnectorActionsBase(c.Rootly.Server), edgeConnectorId, actionId)
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
@@ -220,7 +252,7 @@ func (c *Client) GetEdgeConnectorAction(edgeConnectorId string, actionId string)
 		Data: map[string]interface{}{
 			"type":       apiResp.Data.Type,
 			"id":         apiResp.Data.ID,
-			"attributes": []interface{}{apiResp.Data.Attributes},
+			"attributes": []interface{}{filterActionAttrs(apiResp.Data.Attributes)},
 		},
 	}, nil
 }
@@ -231,7 +263,7 @@ func (c *Client) UpdateEdgeConnectorAction(edgeConnectorId string, actionId stri
 		return nil, fmt.Errorf("Error marshaling edge_connector_action: %w", err)
 	}
 
-	url := fmt.Sprintf("%s/v1/edge_connectors/%s/actions/%s", c.Rootly.Server, edgeConnectorId, actionId)
+	url := fmt.Sprintf("%s/v1/edge_connectors/%s/actions/%s", edgeConnectorActionsBase(c.Rootly.Server), edgeConnectorId, actionId)
 	req, err := http.NewRequest("PATCH", url, bytes.NewReader(body))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
@@ -254,13 +286,13 @@ func (c *Client) UpdateEdgeConnectorAction(edgeConnectorId string, actionId stri
 		Data: map[string]interface{}{
 			"type":       apiResp.Data.Type,
 			"id":         apiResp.Data.ID,
-			"attributes": []interface{}{apiResp.Data.Attributes},
+			"attributes": []interface{}{filterActionAttrs(apiResp.Data.Attributes)},
 		},
 	}, nil
 }
 
 func (c *Client) DeleteEdgeConnectorAction(edgeConnectorId string, actionId string) error {
-	url := fmt.Sprintf("%s/v1/edge_connectors/%s/actions/%s", c.Rootly.Server, edgeConnectorId, actionId)
+	url := fmt.Sprintf("%s/v1/edge_connectors/%s/actions/%s", edgeConnectorActionsBase(c.Rootly.Server), edgeConnectorId, actionId)
 	req, err := http.NewRequest("DELETE", url, nil)
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
