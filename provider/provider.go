@@ -124,6 +124,8 @@ func New(version string) func() *schema.Provider {
 				"rootly_communications_template":                            resourceCommunicationsTemplate(),
 				"rootly_custom_form":                                        resourceCustomForm(),
 				"rootly_dashboard_panel":                                    resourceDashboardPanel(),
+				"rootly_edge_connector":                                     resourceEdgeConnector(),
+				"rootly_edge_connector_action":                              resourceEdgeConnectorAction(),
 				"rootly_environment":                                        resourceEnvironment(),
 				"rootly_form_field_option":                                  resourceFormFieldOption(),
 				"rootly_form_field_placement_condition":                     resourceFormFieldPlacementCondition(),
