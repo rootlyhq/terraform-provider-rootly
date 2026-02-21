@@ -3,11 +3,10 @@
 package client
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"net/http"
-	"reflect"
-
-	"github.com/google/jsonapi"
 )
 
 // NOTE: This file uses manual HTTP request building instead of schema-generated functions.
@@ -18,8 +17,117 @@ import (
 // To work around this oapi-codegen limitation, we build HTTP requests manually here.
 
 type EdgeConnectorAction struct {
-	ID   string                 `jsonapi:"primary,edge_connector_actions"`
-	Data map[string]interface{} `jsonapi:"attr,data,omitempty"`
+	ID   string                 `json:"-"`
+	Data map[string]interface{} `json:"-"`
+}
+
+// edgeConnectorActionAPIRequest is the JSON:API request body for create/update.
+// The API uses jsonapi_parse! to parse the body, expecting JSON:API format.
+// Note: 'parameters' from Terraform must be wrapped inside 'metadata' for writes,
+// but the API returns 'parameters' directly in the response attributes.
+type edgeConnectorActionAPIRequest struct {
+	Data edgeConnectorActionAPIRequestData `json:"data"`
+}
+
+type edgeConnectorActionAPIRequestData struct {
+	Type       string                 `json:"type"`
+	ID         string                 `json:"id,omitempty"`
+	Attributes map[string]interface{} `json:"attributes"`
+}
+
+// edgeConnectorActionAPIResponse is the JSON:API response from the server
+type edgeConnectorActionAPIResponse struct {
+	Data struct {
+		ID         string                 `json:"id"`
+		Type       string                 `json:"type"`
+		Attributes map[string]interface{} `json:"attributes"`
+	} `json:"data"`
+}
+
+type edgeConnectorActionListAPIResponse struct {
+	Data []struct {
+		ID         string                 `json:"id"`
+		Type       string                 `json:"type"`
+		Attributes map[string]interface{} `json:"attributes"`
+	} `json:"data"`
+}
+
+// marshalEdgeConnectorAction builds the correct JSON:API request body.
+// Terraform's 'parameters' field (direct attribute) is wrapped inside 'metadata' for the API.
+func marshalEdgeConnectorAction(ec *EdgeConnectorAction) ([]byte, error) {
+	req := edgeConnectorActionAPIRequest{}
+	req.Data.Type = "edge_connector_actions"
+
+	if ec.Data != nil {
+		if id, ok := ec.Data["id"].(string); ok && id != "" && id != "temp-id" {
+			req.Data.ID = id
+		}
+		if attrsList, ok := ec.Data["attributes"].([]interface{}); ok && len(attrsList) > 0 {
+			if attrsMap, ok := attrsList[0].(map[string]interface{}); ok {
+				attrs := map[string]interface{}{}
+
+				// Direct writable attributes
+				for _, key := range []string{"name", "slug", "trigger", "action_type", "icon", "description"} {
+					if v, exists := attrsMap[key]; exists {
+						if s, ok := v.(string); ok && s != "" {
+							attrs[key] = v
+						}
+					}
+				}
+
+				// Integer timeout
+				if v, exists := attrsMap["timeout"]; exists && v != nil {
+					switch val := v.(type) {
+					case int:
+						if val != 0 {
+							attrs["timeout"] = val
+						}
+					case float64:
+						if val != 0 {
+							attrs["timeout"] = int(val)
+						}
+					}
+				}
+
+				// 'parameters' lives inside 'metadata' for writes
+				if params, exists := attrsMap["parameters"]; exists && params != nil {
+					if paramList, ok := params.([]interface{}); ok {
+						// Convert Terraform's TypeList representation to clean JSON-serializable slice
+						cleanParams := make([]interface{}, 0, len(paramList))
+						for _, p := range paramList {
+							if pm, ok := p.(map[string]interface{}); ok {
+								param := map[string]interface{}{}
+								for _, f := range []string{"name", "type", "required", "description", "default", "options"} {
+									if fv, ok := pm[f]; ok && fv != nil {
+										switch fv.(type) {
+										case string:
+											if fv.(string) != "" {
+												param[f] = fv
+											}
+										case bool:
+											param[f] = fv
+										case []interface{}:
+											if len(fv.([]interface{})) > 0 {
+												param[f] = fv
+											}
+										default:
+											param[f] = fv
+										}
+									}
+								}
+								cleanParams = append(cleanParams, param)
+							}
+						}
+						attrs["metadata"] = map[string]interface{}{"parameters": cleanParams}
+					}
+				}
+
+				req.Data.Attributes = attrs
+			}
+		}
+	}
+
+	return json.Marshal(req)
 }
 
 func (c *Client) ListEdgeConnectorActions(edgeConnectorId string) ([]interface{}, error) {
@@ -33,24 +141,36 @@ func (c *Client) ListEdgeConnectorActions(edgeConnectorId string) ([]interface{}
 	if err != nil {
 		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
+	defer resp.Body.Close()
 
-	edge_connector_actions, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(EdgeConnectorAction)))
-	resp.Body.Close()
-	if err != nil {
+	var listResp edgeConnectorActionListAPIResponse
+	if err := json.NewDecoder(resp.Body).Decode(&listResp); err != nil {
 		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
-	return edge_connector_actions, nil
+	results := make([]interface{}, 0, len(listResp.Data))
+	for _, item := range listResp.Data {
+		ec := &EdgeConnectorAction{
+			ID: item.ID,
+			Data: map[string]interface{}{
+				"type":       item.Type,
+				"id":         item.ID,
+				"attributes": []interface{}{item.Attributes},
+			},
+		}
+		results = append(results, ec)
+	}
+	return results, nil
 }
 
 func (c *Client) CreateEdgeConnectorAction(edgeConnectorId string, d *EdgeConnectorAction) (*EdgeConnectorAction, error) {
-	buffer, err := MarshalData(d)
+	body, err := marshalEdgeConnectorAction(d)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling edge_connector_action: %w", err)
 	}
 
 	url := fmt.Sprintf("%s/v1/edge_connectors/%s/actions", c.Rootly.Server, edgeConnectorId)
-	req, err := http.NewRequest("POST", url, buffer)
+	req, err := http.NewRequest("POST", url, bytes.NewReader(body))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -60,14 +180,21 @@ func (c *Client) CreateEdgeConnectorAction(edgeConnectorId string, d *EdgeConnec
 	if err != nil {
 		return nil, fmt.Errorf("Failed to perform request to create edge_connector_action: %s", err)
 	}
+	defer resp.Body.Close()
 
-	data, err := UnmarshalData(resp.Body, new(EdgeConnectorAction))
-	resp.Body.Close()
-	if err != nil {
+	var apiResp edgeConnectorActionAPIResponse
+	if err := json.NewDecoder(resp.Body).Decode(&apiResp); err != nil {
 		return nil, fmt.Errorf("Error unmarshaling edge_connector_action: %w", err)
 	}
 
-	return data.(*EdgeConnectorAction), nil
+	return &EdgeConnectorAction{
+		ID: apiResp.Data.ID,
+		Data: map[string]interface{}{
+			"type":       apiResp.Data.Type,
+			"id":         apiResp.Data.ID,
+			"attributes": []interface{}{apiResp.Data.Attributes},
+		},
+	}, nil
 }
 
 func (c *Client) GetEdgeConnectorAction(edgeConnectorId string, actionId string) (*EdgeConnectorAction, error) {
@@ -81,24 +208,31 @@ func (c *Client) GetEdgeConnectorAction(edgeConnectorId string, actionId string)
 	if err != nil {
 		return nil, fmt.Errorf("Failed to make request to get edge_connector_action: %w", err)
 	}
+	defer resp.Body.Close()
 
-	data, err := UnmarshalData(resp.Body, new(EdgeConnectorAction))
-	resp.Body.Close()
-	if err != nil {
+	var apiResp edgeConnectorActionAPIResponse
+	if err := json.NewDecoder(resp.Body).Decode(&apiResp); err != nil {
 		return nil, fmt.Errorf("Error unmarshaling edge_connector_action: %w", err)
 	}
 
-	return data.(*EdgeConnectorAction), nil
+	return &EdgeConnectorAction{
+		ID: apiResp.Data.ID,
+		Data: map[string]interface{}{
+			"type":       apiResp.Data.Type,
+			"id":         apiResp.Data.ID,
+			"attributes": []interface{}{apiResp.Data.Attributes},
+		},
+	}, nil
 }
 
 func (c *Client) UpdateEdgeConnectorAction(edgeConnectorId string, actionId string, edge_connector_action *EdgeConnectorAction) (*EdgeConnectorAction, error) {
-	buffer, err := MarshalData(edge_connector_action)
+	body, err := marshalEdgeConnectorAction(edge_connector_action)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling edge_connector_action: %w", err)
 	}
 
 	url := fmt.Sprintf("%s/v1/edge_connectors/%s/actions/%s", c.Rootly.Server, edgeConnectorId, actionId)
-	req, err := http.NewRequest("PATCH", url, buffer)
+	req, err := http.NewRequest("PATCH", url, bytes.NewReader(body))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -108,14 +242,21 @@ func (c *Client) UpdateEdgeConnectorAction(edgeConnectorId string, actionId stri
 	if err != nil {
 		return nil, fmt.Errorf("Failed to make request to update edge_connector_action: %w", err)
 	}
+	defer resp.Body.Close()
 
-	data, err := UnmarshalData(resp.Body, new(EdgeConnectorAction))
-	resp.Body.Close()
-	if err != nil {
+	var apiResp edgeConnectorActionAPIResponse
+	if err := json.NewDecoder(resp.Body).Decode(&apiResp); err != nil {
 		return nil, fmt.Errorf("Error unmarshaling edge_connector_action: %w", err)
 	}
 
-	return data.(*EdgeConnectorAction), nil
+	return &EdgeConnectorAction{
+		ID: apiResp.Data.ID,
+		Data: map[string]interface{}{
+			"type":       apiResp.Data.Type,
+			"id":         apiResp.Data.ID,
+			"attributes": []interface{}{apiResp.Data.Attributes},
+		},
+	}, nil
 }
 
 func (c *Client) DeleteEdgeConnectorAction(edgeConnectorId string, actionId string) error {

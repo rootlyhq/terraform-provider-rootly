@@ -3,16 +3,104 @@
 package client
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
-	"reflect"
+	"io"
 
-	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
 type EdgeConnector struct {
-	ID   string                 `jsonapi:"primary,edge_connectors"`
-	Data map[string]interface{} `jsonapi:"attr,data,omitempty"`
+	ID   string                 `json:"-"`
+	Data map[string]interface{} `json:"-"`
+}
+
+// edgeConnectorAPIRequest is the JSON:API request body for create/update
+type edgeConnectorAPIRequest struct {
+	Data edgeConnectorAPIRequestData `json:"data"`
+}
+
+type edgeConnectorAPIRequestData struct {
+	Type       string                 `json:"type"`
+	ID         string                 `json:"id,omitempty"`
+	Attributes map[string]interface{} `json:"attributes"`
+}
+
+// edgeConnectorAPIResponse is the JSON:API response from the server
+type edgeConnectorAPIResponse struct {
+	Data struct {
+		ID         string                 `json:"id"`
+		Type       string                 `json:"type"`
+		Attributes map[string]interface{} `json:"attributes"`
+	} `json:"data"`
+}
+
+type edgeConnectorListAPIResponse struct {
+	Data []struct {
+		ID         string                 `json:"id"`
+		Type       string                 `json:"type"`
+		Attributes map[string]interface{} `json:"attributes"`
+	} `json:"data"`
+}
+
+// marshalEdgeConnector builds the correct JSON:API request body from the Terraform nested data structure.
+// Terraform stores edge connector config as: data[0].attributes[0].{name,description,status,subscriptions}
+// The API expects: {"data": {"type": "edge_connectors", "attributes": {name, description, status, subscriptions}}}
+func marshalEdgeConnector(ec *EdgeConnector) (io.Reader, error) {
+	req := edgeConnectorAPIRequest{}
+	req.Data.Type = "edge_connectors"
+
+	if ec.Data != nil {
+		if id, ok := ec.Data["id"].(string); ok && id != "" && id != "temp-id" {
+			req.Data.ID = id
+		}
+		if attrsList, ok := ec.Data["attributes"].([]interface{}); ok && len(attrsList) > 0 {
+			if attrsMap, ok := attrsList[0].(map[string]interface{}); ok {
+				filtered := map[string]interface{}{}
+				for _, key := range []string{"name", "description", "status", "subscriptions"} {
+					if v, exists := attrsMap[key]; exists {
+						switch val := v.(type) {
+						case string:
+							if val != "" {
+								filtered[key] = v
+							}
+						default:
+							if v != nil {
+								filtered[key] = v
+							}
+						}
+					}
+				}
+				req.Data.Attributes = filtered
+			}
+		}
+	}
+
+	buf, err := json.Marshal(req)
+	if err != nil {
+		return nil, err
+	}
+	return bytes.NewReader(buf), nil
+}
+
+// unmarshalEdgeConnector parses the JSON:API response and reconstructs the nested structure
+// expected by the Terraform resource: Data["attributes"] must be []interface{}{map[string]interface{}{...}}
+func unmarshalEdgeConnector(body io.Reader) (*EdgeConnector, error) {
+	var resp edgeConnectorAPIResponse
+	if err := json.NewDecoder(body).Decode(&resp); err != nil {
+		return nil, err
+	}
+
+	ec := &EdgeConnector{
+		ID: resp.Data.ID,
+		Data: map[string]interface{}{
+			"type":       resp.Data.Type,
+			"id":         resp.Data.ID,
+			"attributes": []interface{}{resp.Data.Attributes},
+		},
+	}
+	return ec, nil
 }
 
 func (c *Client) ListEdgeConnectors(params *rootlygo.ListEdgeConnectorsParams) ([]interface{}, error) {
@@ -25,18 +113,30 @@ func (c *Client) ListEdgeConnectors(params *rootlygo.ListEdgeConnectorsParams) (
 	if err != nil {
 		return nil, fmt.Errorf("Failed to make request: %w", err)
 	}
+	defer resp.Body.Close()
 
-	edge_connectors, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(EdgeConnector)))
-	resp.Body.Close()
-	if err != nil {
+	var listResp edgeConnectorListAPIResponse
+	if err := json.NewDecoder(resp.Body).Decode(&listResp); err != nil {
 		return nil, fmt.Errorf("Error unmarshaling: %w", err)
 	}
 
-	return edge_connectors, nil
+	results := make([]interface{}, 0, len(listResp.Data))
+	for _, item := range listResp.Data {
+		ec := &EdgeConnector{
+			ID: item.ID,
+			Data: map[string]interface{}{
+				"type":       item.Type,
+				"id":         item.ID,
+				"attributes": []interface{}{item.Attributes},
+			},
+		}
+		results = append(results, ec)
+	}
+	return results, nil
 }
 
 func (c *Client) CreateEdgeConnector(d *EdgeConnector) (*EdgeConnector, error) {
-	buffer, err := MarshalData(d)
+	buffer, err := marshalEdgeConnector(d)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling edge_connector: %w", err)
 	}
@@ -49,14 +149,14 @@ func (c *Client) CreateEdgeConnector(d *EdgeConnector) (*EdgeConnector, error) {
 	if err != nil {
 		return nil, fmt.Errorf("Failed to perform request to create edge_connector: %s", err)
 	}
+	defer resp.Body.Close()
 
-	data, err := UnmarshalData(resp.Body, new(EdgeConnector))
-	resp.Body.Close()
+	ec, err := unmarshalEdgeConnector(resp.Body)
 	if err != nil {
 		return nil, fmt.Errorf("Error unmarshaling edge_connector: %w", err)
 	}
 
-	return data.(*EdgeConnector), nil
+	return ec, nil
 }
 
 func (c *Client) GetEdgeConnector(id string) (*EdgeConnector, error) {
@@ -69,18 +169,18 @@ func (c *Client) GetEdgeConnector(id string) (*EdgeConnector, error) {
 	if err != nil {
 		return nil, fmt.Errorf("Failed to make request to get edge_connector: %w", err)
 	}
+	defer resp.Body.Close()
 
-	data, err := UnmarshalData(resp.Body, new(EdgeConnector))
-	resp.Body.Close()
+	ec, err := unmarshalEdgeConnector(resp.Body)
 	if err != nil {
 		return nil, fmt.Errorf("Error unmarshaling edge_connector: %w", err)
 	}
 
-	return data.(*EdgeConnector), nil
+	return ec, nil
 }
 
 func (c *Client) UpdateEdgeConnector(id string, edge_connector *EdgeConnector) (*EdgeConnector, error) {
-	buffer, err := MarshalData(edge_connector)
+	buffer, err := marshalEdgeConnector(edge_connector)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling edge_connector: %w", err)
 	}
@@ -93,14 +193,14 @@ func (c *Client) UpdateEdgeConnector(id string, edge_connector *EdgeConnector) (
 	if err != nil {
 		return nil, fmt.Errorf("Failed to make request to update edge_connector: %w", err)
 	}
+	defer resp.Body.Close()
 
-	data, err := UnmarshalData(resp.Body, new(EdgeConnector))
-	resp.Body.Close()
+	ec, err := unmarshalEdgeConnector(resp.Body)
 	if err != nil {
 		return nil, fmt.Errorf("Error unmarshaling edge_connector: %w", err)
 	}
 
-	return data.(*EdgeConnector), nil
+	return ec, nil
 }
 
 func (c *Client) DeleteEdgeConnector(id string) error {
