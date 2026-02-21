@@ -35,11 +35,11 @@ Manages workflow page_rootly_on_call_responders task.
 
 Required:
 
+- `alert_urgency_id` (String) Alert urgency ID
 - `summary` (String) Alert title
 
 Optional:
 
-- `alert_urgency_id` (String) Alert urgency ID
 - `description` (String) Alert description
 - `escalation_note` (String)
 - `escalation_policy_target` (Map of String) Map must contain two fields, `id` and `name`.
