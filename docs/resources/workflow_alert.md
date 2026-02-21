@@ -78,7 +78,7 @@ Optional:
 - `alert_field_conditions` (Block List) (see [below for nested schema](#nestedblock--trigger_params--alert_field_conditions))
 - `alert_labels` (List of String)
 - `alert_payload` (List of String)
-- `alert_payload_conditions` (Map of String)
+- `alert_payload_conditions` (Block List, Max: 1) Advanced payload filtering with multiple conditions and logical operators (see [below for nested schema](#nestedblock--trigger_params--alert_payload_conditions))
 - `alert_query_payload` (String) You can use jsonpath syntax. eg: $.incident.teams[*]
 - `alert_sources` (List of String)
 - `alert_statuses` (List of String)
@@ -92,6 +92,28 @@ Required:
 
 - `id` (String)
 - `name` (String)
+
+
+<a id="nestedblock--trigger_params--alert_payload_conditions"></a>
+### Nested Schema for `trigger_params.alert_payload_conditions`
+
+Optional:
+
+- `conditions` (Block List) List of condition rules to evaluate (see [below for nested schema](#nestedblock--trigger_params--alert_payload_conditions--conditions))
+- `logic` (String) Logical operator for combining conditions. Value must be one of `ALL`, `ANY`, `NONE`.
+
+<a id="nestedblock--trigger_params--alert_payload_conditions--conditions"></a>
+### Nested Schema for `trigger_params.alert_payload_conditions.conditions`
+
+Required:
+
+- `operator` (String) Comparison operator. Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
+- `query` (String) JSONPath query to extract value from alert payload (e.g., $.commonLabels.namespace)
+
+Optional:
+
+- `use_regexp` (Boolean) Whether to use regular expression matching
+- `values` (List of String) List of values to compare against
 
 ## Import
 
