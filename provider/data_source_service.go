@@ -136,6 +136,12 @@ func dataSourceServiceRead(ctx context.Context, d *schema.ResourceData, meta int
 	item, _ := items[0].(*client.Service)
 
 	d.SetId(item.ID)
-
+	d.Set("name", item.Name)
+	d.Set("slug", item.Slug)
+	d.Set("backstage_id", item.BackstageId)
+	d.Set("cortex_id", item.CortexId)
+	d.Set("external_id", item.ExternalId)
+	d.Set("alert_broadcast_enabled", item.AlertBroadcastEnabled)
+	d.Set("incident_broadcast_enabled", item.IncidentBroadcastEnabled)
 	return nil
 }

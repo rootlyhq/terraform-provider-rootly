@@ -200,7 +200,7 @@ func resourceTeam() *schema.Resource {
 					Type: schema.TypeInt,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         false,
+				Computed:         true,
 				Required:         false,
 				Optional:         true,
 				Sensitive:        false,
@@ -215,35 +215,13 @@ func resourceTeam() *schema.Resource {
 					Type: schema.TypeInt,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         false,
+				Computed:         true,
 				Required:         false,
 				Optional:         true,
 				Sensitive:        false,
 				ForceNew:         false,
 				WriteOnly:        false,
 				Description:      "The user ids of the admins of this team. These users must also be present in user_ids attribute.",
-			},
-
-			"alerts_email_enabled": &schema.Schema{
-				Type:        schema.TypeBool,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Sensitive:   false,
-				ForceNew:    false,
-				WriteOnly:   false,
-				Description: "Enable alerts through email. Value must be one of true or false",
-			},
-
-			"alerts_email_address": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Sensitive:   false,
-				ForceNew:    false,
-				WriteOnly:   false,
-				Description: "Email generated to send alerts to",
 			},
 
 			"alert_urgency_id": &schema.Schema{
@@ -505,12 +483,6 @@ func resourceTeamCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	if value, ok := d.GetOkExists("admin_ids"); ok {
 		s.AdminIds = value.([]interface{})
 	}
-	if value, ok := d.GetOkExists("alerts_email_enabled"); ok {
-		s.AlertsEmailEnabled = tools.Bool(value.(bool))
-	}
-	if value, ok := d.GetOkExists("alerts_email_address"); ok {
-		s.AlertsEmailAddress = value.(string)
-	}
 	if value, ok := d.GetOkExists("alert_urgency_id"); ok {
 		s.AlertUrgencyId = value.(string)
 	}
@@ -589,8 +561,6 @@ func resourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	d.Set("service_now_ci_sys_id", item.ServiceNowCiSysId)
 	d.Set("user_ids", item.UserIds)
 	d.Set("admin_ids", item.AdminIds)
-	d.Set("alerts_email_enabled", item.AlertsEmailEnabled)
-	d.Set("alerts_email_address", item.AlertsEmailAddress)
 	d.Set("alert_urgency_id", item.AlertUrgencyId)
 
 	if item.SlackChannels != nil {
@@ -728,12 +698,6 @@ func resourceTeamUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 		}
 	}
 
-	if d.HasChange("alerts_email_enabled") {
-		s.AlertsEmailEnabled = tools.Bool(d.Get("alerts_email_enabled").(bool))
-	}
-	if d.HasChange("alerts_email_address") {
-		s.AlertsEmailAddress = d.Get("alerts_email_address").(string)
-	}
 	if d.HasChange("alert_urgency_id") {
 		s.AlertUrgencyId = d.Get("alert_urgency_id").(string)
 	}

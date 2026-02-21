@@ -28,6 +28,7 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
+		CustomizeDiff: validateUniqueWorkflowTaskPosition,
 
 		Schema: map[string]*schema.Schema{
 			"workflow_id": {
@@ -92,7 +93,7 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 							Optional:    true,
 						},
 						"status": &schema.Schema{
-							Description: "Value must be one of `investigating`, `identified`, `monitoring`, `resolved`, `planning`, `scheduled`, `in_progress`, `verifying`, `completed`, `cancelled`.",
+							Description: "Value must be one of `investigating`, `identified`, `monitoring`, `resolved`, `scheduled`, `in_progress`, `completed`.",
 							Type:        schema.TypeString,
 							Required:    true,
 							ValidateFunc: validation.StringInSlice([]string{
@@ -100,12 +101,9 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 								"identified",
 								"monitoring",
 								"resolved",
-								"planning",
 								"scheduled",
 								"in_progress",
-								"verifying",
 								"completed",
-								"cancelled",
 							}, false),
 						},
 						"notify_subscribers": &schema.Schema{

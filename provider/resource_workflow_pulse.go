@@ -187,7 +187,7 @@ func resourceWorkflowPulse() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"pulse_condition_source_use_regexp": &schema.Schema{
@@ -215,7 +215,7 @@ func resourceWorkflowPulse() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"pulse_condition_label_use_regexp": &schema.Schema{
@@ -243,7 +243,7 @@ func resourceWorkflowPulse() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"pulse_condition_payload_use_regexp": &schema.Schema{

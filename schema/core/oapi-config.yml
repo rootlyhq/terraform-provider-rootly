@@ -1,0 +1,48 @@
+package: core
+generate:
+  models: true
+  client: true
+output: core.gen.go
+output-options:
+  include-tags:
+    - Services
+    - Functionalities
+    - Environments
+    - Teams
+    - Users
+    - UserEmailAddresses
+    - UserPhoneNumbers
+    - UserNotificationRules
+    - Roles
+    - Dashboards
+    - DashboardPanels
+    - Playbooks
+    - PlaybookTasks
+    - StatusPages
+    - StatusPageTemplates
+    - FormFields
+    - FormFieldOptions
+    - FormFieldPlacements
+    - FormFieldPlacementConditions
+    - FormFieldPositions
+    - FormSets
+    - FormSetConditions
+    - CustomForms
+    - Catalogs
+    - CatalogFields
+    - CatalogEntities
+    - CatalogEntityProperties
+    - WebhooksEndpoints
+    - WebhooksDeliveries
+    - Secrets
+    - Heartbeats
+    - Pulses
+    - IpRanges
+    - Authorizations
+    - Audits
+    - Communications Groups
+    - Communications Stages
+    - Communications Templates
+    - Communications Types
+    - Edge Connectors
+    - Edge Connector Actions

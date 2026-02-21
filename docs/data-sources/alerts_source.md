@@ -16,6 +16,7 @@ description: |-
 
 ### Optional
 
+- `name` (String)
 - `source_type` (String)
 - `status` (String)
 

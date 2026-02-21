@@ -122,16 +122,17 @@ func resourceAlertsSource() *schema.Resource {
 			},
 
 			"alert_template_attributes": &schema.Schema{
-				Type:        schema.TypeList,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Sensitive:   false,
-				ForceNew:    false,
-				WriteOnly:   false,
-				Description: "",
-				MinItems:    0,
-				MaxItems:    1,
+				Type:          schema.TypeList,
+				Computed:      true,
+				Required:      false,
+				Optional:      true,
+				Sensitive:     false,
+				ForceNew:      false,
+				WriteOnly:     false,
+				Description:   "Note that when alert fields are enabled at the team level, alert template attributes cannot be provided. Use `alert_source_fields_attributes` instead.",
+				ConflictsWith: []string{"alert_source_fields_attributes"},
+				MinItems:      0,
+				MaxItems:      1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
@@ -173,7 +174,7 @@ func resourceAlertsSource() *schema.Resource {
 
 			"alert_source_urgency_rules_attributes": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         false,
+				Computed:         true,
 				Required:         false,
 				Optional:         true,
 				Sensitive:        false,
@@ -220,13 +221,13 @@ func resourceAlertsSource() *schema.Resource {
 
 						"conditionable_type": &schema.Schema{
 							Type:         schema.TypeString,
-							Default:      "AlertField",
 							Required:     false,
+							Computed:     true,
 							Optional:     true,
 							Sensitive:    false,
 							ForceNew:     false,
 							WriteOnly:    false,
-							Description:  "The type of the conditionable. Value must be one of `AlertField`.",
+							Description:  "The type of the conditionable. Value must be one of `AlertField or (empty string)`.",
 							ValidateFunc: validation.StringInSlice([]string{"AlertField"}, false),
 						},
 
@@ -316,7 +317,7 @@ func resourceAlertsSource() *schema.Resource {
 
 						"field_mappings_attributes": &schema.Schema{
 							Type:             schema.TypeList,
-							Computed:         false,
+							Computed:         true,
 							Required:         false,
 							Optional:         true,
 							Sensitive:        false,
@@ -497,13 +498,13 @@ func resourceAlertsSource() *schema.Resource {
 
 									"conditionable_type": &schema.Schema{
 										Type:         schema.TypeString,
-										Default:      "AlertField",
 										Required:     false,
+										Computed:     true,
 										Optional:     true,
 										Sensitive:    false,
 										ForceNew:     false,
 										WriteOnly:    false,
-										Description:  "The type of the conditionable. Value must be one of `AlertField`.",
+										Description:  "The type of the conditionable. Value must be one of `AlertField or (empty string)`.",
 										ValidateFunc: validation.StringInSlice([]string{"AlertField"}, false),
 									},
 
@@ -538,13 +539,14 @@ func resourceAlertsSource() *schema.Resource {
 
 			"alert_source_fields_attributes": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         false,
+				Computed:         true,
 				Required:         false,
 				Optional:         true,
 				Sensitive:        false,
 				ForceNew:         false,
 				WriteOnly:        false,
-				Description:      "List of alert fields to be added to the alert source",
+				Description:      "List of alert fields to be added to the alert source. Note: This attribute requires the alert field feature to be enabled on your account. Contact Rootly customer support if you need assistance with this feature.",
+				ConflictsWith:    []string{"alert_template_attributes"},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{

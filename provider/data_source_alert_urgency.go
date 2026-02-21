@@ -70,6 +70,6 @@ func dataSourceAlertUrgencyRead(ctx context.Context, d *schema.ResourceData, met
 	item, _ := items[0].(*client.AlertUrgency)
 
 	d.SetId(item.ID)
-
+	d.Set("name", item.Name)
 	return nil
 }
