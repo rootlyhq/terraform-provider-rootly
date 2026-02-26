@@ -258,7 +258,7 @@ func resourceStatusPage() *schema.Resource {
 					ValidateFunc: validation.StringInSlice([]string{"maintenance", "system_status", "incidents"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         false,
+				Computed:         true,
 				Required:         false,
 				Optional:         true,
 				Sensitive:        false,
