@@ -241,7 +241,7 @@ func resourceStatusPage() *schema.Resource {
 
 			"saml_name_identifier_format": &schema.Schema{
 				Type:         schema.TypeString,
-				Default:      "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+				Computed:     true,
 				Required:     false,
 				Optional:     true,
 				Sensitive:    false,
@@ -249,6 +249,22 @@ func resourceStatusPage() *schema.Resource {
 				WriteOnly:    false,
 				Description:  "SAML name identifier format. Value must be one of `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`, `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`, `urn:oasis:names:tc:SAML:2.0:nameid-format:transient`, `urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified`.",
 				ValidateFunc: validation.StringInSlice([]string{"urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress", "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent", "urn:oasis:names:tc:SAML:2.0:nameid-format:transient", "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"}, false),
+			},
+
+			"section_order": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"maintenance", "system_status", "incidents"}, false),
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         false,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Order of sections on the status page. Value must be a list of `maintenance`, `system_status`, `incidents`.",
 			},
 
 			"website_url": &schema.Schema{
@@ -441,6 +457,9 @@ func resourceStatusPageCreate(ctx context.Context, d *schema.ResourceData, meta 
 	if value, ok := d.GetOkExists("saml_name_identifier_format"); ok {
 		s.SamlNameIdentifierFormat = value.(string)
 	}
+	if value, ok := d.GetOkExists("section_order"); ok {
+		s.SectionOrder = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("website_url"); ok {
 		s.WebsiteUrl = value.(string)
 	}
@@ -520,6 +539,7 @@ func resourceStatusPageRead(ctx context.Context, d *schema.ResourceData, meta in
 	d.Set("saml_idp_cert", item.SamlIdpCert)
 	d.Set("saml_idp_cert_fingerprint", item.SamlIdpCertFingerprint)
 	d.Set("saml_name_identifier_format", item.SamlNameIdentifierFormat)
+	d.Set("section_order", item.SectionOrder)
 	d.Set("website_url", item.WebsiteUrl)
 	d.Set("website_privacy_url", item.WebsitePrivacyUrl)
 	d.Set("website_support_url", item.WebsiteSupportUrl)
@@ -600,6 +620,15 @@ func resourceStatusPageUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	if d.HasChange("saml_name_identifier_format") {
 		s.SamlNameIdentifierFormat = d.Get("saml_name_identifier_format").(string)
 	}
+
+	if d.HasChange("section_order") {
+		if value, ok := d.GetOk("section_order"); value != nil && ok {
+			s.SectionOrder = value.([]interface{})
+		} else {
+			s.SectionOrder = []interface{}{}
+		}
+	}
+
 	if d.HasChange("website_url") {
 		s.WebsiteUrl = d.Get("website_url").(string)
 	}

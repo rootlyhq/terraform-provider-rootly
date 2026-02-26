@@ -2,7 +2,6 @@
 page_title: "Resource rootly_status_page - terraform-provider-rootly"
 subcategory:
 description: |-
-    
 ---
 
 # Resource (rootly_status_page)
@@ -40,6 +39,7 @@ description: |-
 - `saml_idp_slo_service_url` (String) SAML IdP SLO service URL
 - `saml_idp_sso_service_url` (String) SAML IdP SSO service URL
 - `saml_name_identifier_format` (String) SAML name identifier format. Value must be one of `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`, `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`, `urn:oasis:names:tc:SAML:2.0:nameid-format:transient`, `urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified`.
+- `section_order` (List of String) Order of sections on the status page. Value must be a list of `maintenance`, `system_status`, `incidents`.
 - `service_ids` (List of String) Services attached to the status page
 - `show_uptime` (Boolean) Show uptime. Value must be one of true or false
 - `show_uptime_last_days` (Number) Show uptime over x days. Value must be one of `30`, `60`, `90`.
