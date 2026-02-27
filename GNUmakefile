@@ -10,7 +10,7 @@ OS_ARCH=darwin_amd64
 default: testacc
 
 # Run acceptance tests
-.PHONY: testacc testacc-changed codegen build release install test docs
+.PHONY: testacc codegen build release install test docs
 build: codegen docs
 	go build -o ${BINARY}
 
