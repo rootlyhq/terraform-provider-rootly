@@ -18,6 +18,7 @@ const excluded = {
     "alert",
     "alert_event",
     "alert_route",
+    "alerts_source", // manual change: retry logic for eventual consistency on list queries
     "catalog",
     "catalog_field",
     "catalog_entity",
