@@ -22,6 +22,8 @@ shift 2>/dev/null || true
 # ---------------------------------------------------------------------------
 
 to_pascal() {
+  # Split on underscores, capitalize the first letter of each segment, rejoin with no separator.
+  # e.g. alert_routing_rule -> AlertRoutingRule
   echo "$1" | awk 'BEGIN{FS="_";OFS=""} {for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) substr($i,2); print}'
 }
 
