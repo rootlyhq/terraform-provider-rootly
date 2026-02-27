@@ -22,11 +22,7 @@ shift 2>/dev/null || true
 # ---------------------------------------------------------------------------
 
 to_pascal() {
-  python3 -c "
-import sys
-s = sys.stdin.read().strip()
-print(''.join(w.capitalize() for w in s.split('_')))
-" <<< "$1"
+  echo "$1" | awk 'BEGIN{FS="_";OFS=""} {for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) substr($i,2); print}'
 }
 
 # Naive singularization of the last underscore-segment:
