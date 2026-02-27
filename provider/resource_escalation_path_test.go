@@ -146,6 +146,7 @@ resource "rootly_escalation_path" "test_rules" {
 	default              = false
 	escalation_policy_id = rootly_escalation_policy.test_rules.id
 	match_mode           = "match-any-rule"
+	depends_on           = [rootly_alert_field.test, rootly_alert_urgency.test]
 
 	rules {
 		rule_type   = "alert_urgency"
@@ -153,8 +154,8 @@ resource "rootly_escalation_path" "test_rules" {
 	}
 
 	rules {
-		rule_type            = "working_hour"
-		within_working_hour  = true
+		rule_type           = "working_hour"
+		within_working_hour = true
 	}
 
 	rules {
@@ -195,6 +196,7 @@ resource "rootly_escalation_path" "test_rules" {
 	default              = false
 	escalation_policy_id = rootly_escalation_policy.test_rules.id
 	match_mode           = "match-all-rules"
+	depends_on           = [rootly_alert_field.test, rootly_alert_urgency.test]
 
 	rules {
 		rule_type      = "field"
