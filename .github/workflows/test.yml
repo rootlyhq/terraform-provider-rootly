@@ -57,6 +57,8 @@ jobs:
     steps:
 
     - uses: actions/checkout@v5
+      with:
+        fetch-depth: 0
 
     - uses: actions/setup-go@v6
       with:
@@ -71,11 +73,21 @@ jobs:
       run: |
         go mod download
 
-    - name: TF acceptance tests
+    - name: TF acceptance tests (changed only)
+      if: github.event_name == 'pull_request'
       timeout-minutes: 10
       env:
         TF_ACC: "1"
         ROOTLY_API_TOKEN: ${{ secrets.ROOTLY_API_TOKEN }}
+      run: |
+        chmod +x scripts/test-changed.sh
+        scripts/test-changed.sh origin/${{ github.base_ref }}
 
+    - name: TF acceptance tests (full)
+      if: github.event_name != 'pull_request'
+      timeout-minutes: 10
+      env:
+        TF_ACC: "1"
+        ROOTLY_API_TOKEN: ${{ secrets.ROOTLY_API_TOKEN }}
       run: |
         go test -v -cover ./provider/
