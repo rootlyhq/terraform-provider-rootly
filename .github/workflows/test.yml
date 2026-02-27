@@ -57,6 +57,8 @@ jobs:
     steps:
 
     - uses: actions/checkout@v5
+      with:
+        fetch-depth: 0
 
     - uses: actions/setup-go@v6
       with:
@@ -76,6 +78,5 @@ jobs:
       env:
         TF_ACC: "1"
         ROOTLY_API_TOKEN: ${{ secrets.ROOTLY_API_TOKEN }}
-
       run: |
         go test -v -cover ./provider/
