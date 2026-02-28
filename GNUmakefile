@@ -17,8 +17,8 @@ build: codegen docs
 docs:
 	terraform fmt -recursive examples
 	go tool tfplugindocs
-	mv ./docs/data-sources/ip_ranges.md ./docs/data-sources/ip_range.md
-	rm ./docs/data-sources/*s.md
+	mv ./docs/data-sources/ip_ranges.md ./docs/data-sources/ip_range.md 2>/dev/null || true
+	rm -f ./docs/data-sources/ip_ranges.md
 	mv ./docs/data-sources/ip_range.md ./docs/data-sources/ip_ranges.md
 	find ./docs/resources/*.md -type f -exec node tools/clean-docs.js {} \;
 	find ./docs/resources/ -type f -name 'workflow_task_*.md' -exec perl -pi -e 's/subcategory:$$/subcategory: Workflow Tasks/g' {} +
@@ -49,6 +49,9 @@ test:
 
 testacc:
 	TF_ACC=1 go test $(TEST) -v $(TESTARGS) -timeout 120m
+
+testacc-changed:
+	TF_ACC=1 scripts/test-changed.sh $(BASE_REF) $(TESTARGS)
 
 sweeper:
 	@echo "WARNING: This will destroy infrastructure. Use only in development accounts."
