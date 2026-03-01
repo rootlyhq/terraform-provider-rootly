@@ -27,8 +27,8 @@ const excluded = {
     "custom_field_option",
     "custom_field",
     "dashboard",
-    "audit", 
-    "incident",
+    "audit", // Need to be manually handled due to pointer logic in the schema
+    "incident", // Need to be manually handled due to pointer logic in the schema
     "incident_action_item",
     "incident_custom_field_selection",
     "incident_event_functionality",
