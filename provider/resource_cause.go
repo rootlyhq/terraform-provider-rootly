@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
 
 func resourceCause() *schema.Resource {
@@ -67,6 +68,44 @@ func resourceCause() *schema.Resource {
 				WriteOnly:   false,
 				Description: "Position of the cause",
 			},
+
+			"properties": &schema.Schema{
+				Type:             schema.TypeList,
+				Computed:         false,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Array of property values for this cause.",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+
+						"catalog_property_id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "Catalog property ID",
+						},
+
+						"value": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "The property value",
+						},
+					},
+				},
+			},
 		},
 	}
 }
@@ -89,6 +128,9 @@ func resourceCauseCreate(ctx context.Context, d *schema.ResourceData, meta inter
 	}
 	if value, ok := d.GetOkExists("position"); ok {
 		s.Position = value.(int)
+	}
+	if value, ok := d.GetOkExists("properties"); ok {
+		s.Properties = value.([]interface{})
 	}
 
 	res, err := c.CreateCause(s)
@@ -124,6 +166,25 @@ func resourceCauseRead(ctx context.Context, d *schema.ResourceData, meta interfa
 	d.Set("description", item.Description)
 	d.Set("position", item.Position)
 
+	if item.Properties != nil {
+		processed_items_properties := make([]map[string]interface{}, 0)
+
+		for _, c := range item.Properties {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processed_item_properties := map[string]interface{}{
+					"catalog_property_id": rawItem["catalog_property_id"],
+					"value":               rawItem["value"],
+				}
+				processed_items_properties = append(processed_items_properties, processed_item_properties)
+			}
+		}
+
+		d.Set("properties", processed_items_properties)
+	} else {
+		d.Set("properties", nil)
+	}
+
 	return nil
 }
 
@@ -144,6 +205,14 @@ func resourceCauseUpdate(ctx context.Context, d *schema.ResourceData, meta inter
 	}
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)
+	}
+
+	if d.HasChange("properties") {
+		if value, ok := d.GetOk("properties"); value != nil && ok {
+			s.Properties = value.([]interface{})
+		} else {
+			s.Properties = []interface{}{}
+		}
 	}
 
 	_, err := c.UpdateCause(d.Id(), s)

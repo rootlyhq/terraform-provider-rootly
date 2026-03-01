@@ -27,6 +27,8 @@ const excluded = {
     "custom_field_option",
     "custom_field",
     "dashboard",
+    "audit", 
+    "incident",
     "incident_action_item",
     "incident_custom_field_selection",
     "incident_event_functionality",
@@ -64,6 +66,7 @@ const excluded = {
     "catalog_field",
     "catalog_entity",
     "catalog_entity_property",
+    "catalog_property",
     "communications_group",
     "communications_template", // cannot auto-generate because of custom nested JSON:API format handling (IR-3529)
     "custom_field_option",
@@ -225,7 +228,7 @@ function resourceHasFilters(name) {
   const collectionSchema = collectionPathSchema(name);
   const filterParameters =
     collectionSchema.get && collectionSchema.get.parameters;
-  return filterParameters.filter((filter) => filter.name.match(/filter/i))
+  return (filterParameters || []).filter((filter) => filter.name.match(/filter/i))
     .length;
 }
 
