@@ -35,7 +35,7 @@ Manages workflow create_openai_chat_completion task.
 
 Required:
 
-- `model` (Map of String) Map must contain two fields, `id` and `name`. The OpenAI model. eg: gpt-4o-mini
+- `model` (Map of String) Map must contain two fields, `id` and `name`. The OpenAI model. eg: gpt-5-nano
 - `prompt` (String) The prompt to send to OpenAI
 
 Optional:
