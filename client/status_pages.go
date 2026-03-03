@@ -32,6 +32,7 @@ type StatusPage struct {
 	SamlIdpCert              string        `jsonapi:"attr,saml_idp_cert,omitempty"`
 	SamlIdpCertFingerprint   string        `jsonapi:"attr,saml_idp_cert_fingerprint,omitempty"`
 	SamlNameIdentifierFormat string        `jsonapi:"attr,saml_name_identifier_format,omitempty"`
+	SectionOrder             []interface{} `jsonapi:"attr,section_order,omitempty"`
 	WebsiteUrl               string        `jsonapi:"attr,website_url,omitempty"`
 	WebsitePrivacyUrl        string        `jsonapi:"attr,website_privacy_url,omitempty"`
 	WebsiteSupportUrl        string        `jsonapi:"attr,website_support_url,omitempty"`

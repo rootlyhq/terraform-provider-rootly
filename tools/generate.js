@@ -100,6 +100,7 @@ const excluded = {
     "user",
     "user_notification_rule",
     "webhooks_delivery",
+    "status_page", // manual change: section_order set to Computed: true to prevent drift from API-returned defaults
     "workflow_alert", // cannot auto-generate because codegen doesn't handle nested objects in trigger_params (alert_payload_conditions requires complex nested schema)
     "workflow_run",
     "workflow_task",
