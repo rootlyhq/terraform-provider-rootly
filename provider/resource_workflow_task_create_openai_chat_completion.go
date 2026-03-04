@@ -76,7 +76,7 @@ func resourceWorkflowTaskCreateOpenaiChatCompletion() *schema.Resource {
 							}, false),
 						},
 						"model": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. The OpenAI model. eg: gpt-4o-mini",
+							Description: "Map must contain two fields, `id` and `name`. The OpenAI model. eg: gpt-5-nano",
 							Type:        schema.TypeMap,
 							Required:    true,
 						},

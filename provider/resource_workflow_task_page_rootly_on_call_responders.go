@@ -98,7 +98,7 @@ func resourceWorkflowTaskPageRootlyOnCallResponders() *schema.Resource {
 						"alert_urgency_id": &schema.Schema{
 							Description: "Alert urgency ID",
 							Type:        schema.TypeString,
-							Optional:    true,
+							Required:    true,
 						},
 						"summary": &schema.Schema{
 							Description: "Alert title",

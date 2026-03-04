@@ -44,6 +44,7 @@ Optional:
 - `post_to_incident_timeline` (Boolean) Value must be one of true or false
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
 - `record_meeting` (Boolean) Rootly AI will record the meeting and automatically generate a transcript and summary from your meeting. Value must be one of true or false
+- `recording_mode` (String) The video layout for the bot's recording (e.g. speaker_view, gallery_view, gallery_view_v2, audio_only). Value must be one of `speaker_view`, `gallery_view`, `gallery_view_v2`, `audio_only`.
 - `task_type` (String)
 
 <a id="nestedblock--task_params--post_to_slack_channels"></a>

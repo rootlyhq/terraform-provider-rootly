@@ -90,6 +90,18 @@ func resourceWorkflowTaskCreateMicrosoftTeamsMeeting() *schema.Resource {
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},
+						"recording_mode": &schema.Schema{
+							Description: "The video layout for the bot's recording (e.g. speaker_view, gallery_view, gallery_view_v2, audio_only). Value must be one of `speaker_view`, `gallery_view`, `gallery_view_v2`, `audio_only`.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     nil,
+							ValidateFunc: validation.StringInSlice([]string{
+								"speaker_view",
+								"gallery_view",
+								"gallery_view_v2",
+								"audio_only",
+							}, false),
+						},
 						"post_to_incident_timeline": &schema.Schema{
 							Description: "Value must be one of true or false",
 							Type:        schema.TypeBool,
