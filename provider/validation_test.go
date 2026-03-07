@@ -102,3 +102,73 @@ func (r *ResourceDiffMock) HasChange(key string) bool  { return r.ChangedKeys[ke
 func (r *ResourceDiffMock) GetChange(key string) (interface{}, interface{}) {
 	return nil, r.Values[key]
 }
+
+func TestValidateScheduleRotationMemberPositions_Valid(t *testing.T) {
+	d := &ResourceDiffMock{
+		Values: map[string]interface{}{
+			"schedule_rotation_members": []interface{}{
+				map[string]interface{}{"position": 1, "user_id": "user-1"},
+				map[string]interface{}{"position": 2, "user_id": "user-2"},
+				map[string]interface{}{"position": 3, "user_id": "user-3"},
+			},
+		},
+	}
+	err := validateScheduleRotationMemberPositionsInternal(context.Background(), d, nil)
+	if err != nil {
+		t.Fatalf("expected no error for valid sequential positions, got: %v", err)
+	}
+}
+
+func TestValidateScheduleRotationMemberPositions_DuplicatePosition(t *testing.T) {
+	d := &ResourceDiffMock{
+		Values: map[string]interface{}{
+			"schedule_rotation_members": []interface{}{
+				map[string]interface{}{"position": 1, "user_id": "user-1"},
+				map[string]interface{}{"position": 1, "user_id": "user-2"},
+			},
+		},
+	}
+	err := validateScheduleRotationMemberPositionsInternal(context.Background(), d, nil)
+	if err == nil {
+		t.Fatalf("expected error for duplicate position, got nil")
+	}
+}
+
+func TestValidateScheduleRotationMemberPositions_ZeroPosition(t *testing.T) {
+	d := &ResourceDiffMock{
+		Values: map[string]interface{}{
+			"schedule_rotation_members": []interface{}{
+				map[string]interface{}{"position": 0, "user_id": "user-1"},
+				map[string]interface{}{"position": 1, "user_id": "user-2"},
+			},
+		},
+	}
+	err := validateScheduleRotationMemberPositionsInternal(context.Background(), d, nil)
+	if err == nil {
+		t.Fatalf("expected error for position 0, got nil")
+	}
+}
+
+func TestValidateScheduleRotationMemberPositions_NegativePosition(t *testing.T) {
+	d := &ResourceDiffMock{
+		Values: map[string]interface{}{
+			"schedule_rotation_members": []interface{}{
+				map[string]interface{}{"position": -1, "user_id": "user-1"},
+			},
+		},
+	}
+	err := validateScheduleRotationMemberPositionsInternal(context.Background(), d, nil)
+	if err == nil {
+		t.Fatalf("expected error for negative position, got nil")
+	}
+}
+
+func TestValidateScheduleRotationMemberPositions_NoMembers(t *testing.T) {
+	d := &ResourceDiffMock{
+		Values: map[string]interface{}{},
+	}
+	err := validateScheduleRotationMemberPositionsInternal(context.Background(), d, nil)
+	if err != nil {
+		t.Fatalf("expected no error when no members set, got: %v", err)
+	}
+}
