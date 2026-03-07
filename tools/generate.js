@@ -60,6 +60,8 @@ const excluded = {
     "alerts_source",
     "status",
     "audit",
+    "edge_connector",
+    "edge_connector_action",
     "catalog",
     "catalog_field",
     "catalog_entity",
