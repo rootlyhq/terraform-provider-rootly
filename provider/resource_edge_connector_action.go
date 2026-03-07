@@ -26,6 +26,17 @@ func resourceEdgeConnectorAction() *schema.Resource {
 		},
 		Schema: map[string]*schema.Schema{
 
+			"edge_connector_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
+				Sensitive:   false,
+				ForceNew:    true,
+				WriteOnly:   false,
+				Description: "The ID of the edge connector",
+			},
+
 			"data": &schema.Schema{
 				Type:        schema.TypeList,
 				Computed:    true,
@@ -281,6 +292,10 @@ func resourceEdgeConnectorActionCreate(ctx context.Context, d *schema.ResourceDa
 
 	s := &client.EdgeConnectorAction{}
 
+	if value, ok := d.GetOkExists("edge_connector_id"); ok {
+		s.EdgeConnectorId = value.(string)
+	}
+
 	if value, ok := d.GetOkExists("data"); ok {
 		if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
 			if mapValue, ok := valueList[0].(map[string]interface{}); ok {
@@ -304,7 +319,7 @@ func resourceEdgeConnectorActionRead(ctx context.Context, d *schema.ResourceData
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading EdgeConnectorAction: %s", d.Id()))
 
-	item, err := c.GetEdgeConnectorAction(d.Id())
+	item, err := c.GetEdgeConnectorAction(d.Get("edge_connector_id").(string), d.Id())
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -333,7 +348,9 @@ func resourceEdgeConnectorActionUpdate(ctx context.Context, d *schema.ResourceDa
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Updating EdgeConnectorAction: %s", d.Id()))
 
-	s := &client.EdgeConnectorAction{}
+	s := &client.EdgeConnectorAction{
+		EdgeConnectorId: d.Get("edge_connector_id").(string),
+	}
 
 	if d.HasChange("data") {
 		tps := d.Get("data").([]interface{})
@@ -354,7 +371,7 @@ func resourceEdgeConnectorActionDelete(ctx context.Context, d *schema.ResourceDa
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting EdgeConnectorAction: %s", d.Id()))
 
-	err := c.DeleteEdgeConnectorAction(d.Id())
+	err := c.DeleteEdgeConnectorAction(d.Get("edge_connector_id").(string), d.Id())
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

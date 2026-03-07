@@ -4,6 +4,8 @@ package client
 
 import (
 	"fmt"
+	"net/http"
+	"net/url"
 	"reflect"
 
 	"github.com/google/jsonapi"
@@ -11,12 +13,13 @@ import (
 )
 
 type EdgeConnectorAction struct {
-	ID   string                 `jsonapi:"primary,edge_connector_actions"`
-	Data map[string]interface{} `jsonapi:"attr,data,omitempty"`
+	ID              string                 `jsonapi:"primary,edge_connector_actions"`
+	EdgeConnectorId string                 `jsonapi:"attr,edge_connector_id,omitempty"`
+	Data            map[string]interface{} `jsonapi:"attr,data,omitempty"`
 }
 
-func (c *Client) ListEdgeConnectorActions(params *rootlygo.ListEdgeConnectorActionsParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListEdgeConnectorActionsRequest(c.Rootly.Server, params)
+func (c *Client) ListEdgeConnectorActions(edgeConnectorId string) ([]interface{}, error) {
+	req, err := rootlygo.NewListEdgeConnectorActionsRequest(c.Rootly.Server, edgeConnectorId)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -41,7 +44,7 @@ func (c *Client) CreateEdgeConnectorAction(d *EdgeConnectorAction) (*EdgeConnect
 		return nil, fmt.Errorf("Error marshaling edge_connector_action: %w", err)
 	}
 
-	req, err := rootlygo.NewCreateEdgeConnectorActionRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
+	req, err := rootlygo.NewCreateEdgeConnectorActionRequestWithBody(c.Rootly.Server, d.EdgeConnectorId, c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -59,8 +62,18 @@ func (c *Client) CreateEdgeConnectorAction(d *EdgeConnectorAction) (*EdgeConnect
 	return data.(*EdgeConnectorAction), nil
 }
 
-func (c *Client) GetEdgeConnectorAction(id string) (*EdgeConnectorAction, error) {
-	req, err := rootlygo.NewGetEdgeConnectorActionRequest(c.Rootly.Server, id)
+func (c *Client) GetEdgeConnectorAction(edgeConnectorId string, id string) (*EdgeConnectorAction, error) {
+	baseURL, err := url.Parse(c.Rootly.Server)
+	if err != nil {
+		return nil, fmt.Errorf("Error parsing server URL: %w", err)
+	}
+
+	fullURL, err := url.JoinPath(baseURL.String(), fmt.Sprintf("v1/edge_connectors/%s/actions/%s", edgeConnectorId, id))
+	if err != nil {
+		return nil, fmt.Errorf("Error joining URL path: %w", err)
+	}
+
+	req, err := http.NewRequest("GET", fullURL, nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -85,10 +98,22 @@ func (c *Client) UpdateEdgeConnectorAction(id string, edge_connector_action *Edg
 		return nil, fmt.Errorf("Error marshaling edge_connector_action: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateEdgeConnectorActionRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	baseURL, err := url.Parse(c.Rootly.Server)
+	if err != nil {
+		return nil, fmt.Errorf("Error parsing server URL: %w", err)
+	}
+
+	fullURL, err := url.JoinPath(baseURL.String(), fmt.Sprintf("v1/edge_connectors/%s/actions/%s", edge_connector_action.EdgeConnectorId, id))
+	if err != nil {
+		return nil, fmt.Errorf("Error joining URL path: %w", err)
+	}
+
+	req, err := http.NewRequest("PATCH", fullURL, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
+	req.Header.Add("Content-Type", c.ContentType)
+
 	resp, err := c.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("Failed to make request to update edge_connector_action: %w", err)
@@ -103,8 +128,18 @@ func (c *Client) UpdateEdgeConnectorAction(id string, edge_connector_action *Edg
 	return data.(*EdgeConnectorAction), nil
 }
 
-func (c *Client) DeleteEdgeConnectorAction(id string) error {
-	req, err := rootlygo.NewDeleteEdgeConnectorActionRequest(c.Rootly.Server, id)
+func (c *Client) DeleteEdgeConnectorAction(edgeConnectorId string, id string) error {
+	baseURL, err := url.Parse(c.Rootly.Server)
+	if err != nil {
+		return fmt.Errorf("Error parsing server URL: %w", err)
+	}
+
+	fullURL, err := url.JoinPath(baseURL.String(), fmt.Sprintf("v1/edge_connectors/%s/actions/%s", edgeConnectorId, id))
+	if err != nil {
+		return fmt.Errorf("Error joining URL path: %w", err)
+	}
+
+	req, err := http.NewRequest("DELETE", fullURL, nil)
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}
