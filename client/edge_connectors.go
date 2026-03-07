@@ -11,8 +11,12 @@ import (
 )
 
 type EdgeConnector struct {
-	ID   string                 `jsonapi:"primary,edge_connectors"`
-	Data map[string]interface{} `jsonapi:"attr,data,omitempty"`
+	ID          string `jsonapi:"primary,edge_connectors"`
+	Name        string `jsonapi:"attr,name,omitempty"`
+	Description string `jsonapi:"attr,description,omitempty"`
+	Status      string `jsonapi:"attr,status,omitempty"`
+	CreatedAt   string `jsonapi:"attr,created_at,omitempty"`
+	UpdatedAt   string `jsonapi:"attr,updated_at,omitempty"`
 }
 
 func (c *Client) ListEdgeConnectors(params *rootlygo.ListEdgeConnectorsParams) ([]interface{}, error) {

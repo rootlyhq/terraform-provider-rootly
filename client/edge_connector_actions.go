@@ -13,9 +13,19 @@ import (
 )
 
 type EdgeConnectorAction struct {
-	ID              string                 `jsonapi:"primary,edge_connector_actions"`
-	EdgeConnectorId string                 `jsonapi:"attr,edge_connector_id,omitempty"`
-	Data            map[string]interface{} `jsonapi:"attr,data,omitempty"`
+	ID              string                 `jsonapi:"primary,edge_connector-actions"`
+	EdgeConnectorId string                 // used for URL building only, not serialized
+	Name            string                 `jsonapi:"attr,name,omitempty"`
+	Slug            string                 `jsonapi:"attr,slug,omitempty"`
+	ActionType      string                 `jsonapi:"attr,action_type,omitempty"`
+	Icon            string                 `jsonapi:"attr,icon,omitempty"`
+	Description     string                 `jsonapi:"attr,description,omitempty"`
+	Timeout         int                    `jsonapi:"attr,timeout,omitempty"`
+	Metadata        map[string]interface{} `jsonapi:"attr,metadata,omitempty"` // write: contains parameters
+	Parameters      []interface{}          `jsonapi:"attr,parameters,omitempty"` // read: returned directly by API
+	LastExecutedAt  string                 `jsonapi:"attr,last_executed_at,omitempty"`
+	CreatedAt       string                 `jsonapi:"attr,created_at,omitempty"`
+	UpdatedAt       string                 `jsonapi:"attr,updated_at,omitempty"`
 }
 
 func (c *Client) ListEdgeConnectorActions(edgeConnectorId string) ([]interface{}, error) {
