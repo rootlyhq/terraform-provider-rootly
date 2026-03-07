@@ -153,9 +153,10 @@ func resourceAlertRoute() *schema.Resource {
 
 						"fallback_rule": &schema.Schema{
 							Type:        schema.TypeBool,
-							Computed:    true,
+							Computed:    false,
 							Required:    false,
 							Optional:    true,
+							Default:     false,
 							Sensitive:   false,
 							ForceNew:    false,
 							WriteOnly:   false,
