@@ -35,6 +35,49 @@ func validateUniqueWorkflowTaskPosition(ctx context.Context, d *schema.ResourceD
 	return validateUniqueWorkflowTaskPositionInternal(ctx, d, meta)
 }
 
+func validateScheduleRotationMemberPositions(ctx context.Context, d *schema.ResourceDiff, meta interface{}) error {
+	return validateScheduleRotationMemberPositionsInternal(ctx, d, meta)
+}
+
+func validateScheduleRotationMemberPositionsInternal(ctx context.Context, d resourceDiffGetter, meta interface{}) error {
+	members, ok := d.GetOk("schedule_rotation_members")
+	if !ok {
+		return nil
+	}
+
+	memberList, ok := members.([]interface{})
+	if !ok || len(memberList) == 0 {
+		return nil
+	}
+
+	seen := make(map[int]bool)
+	for i, memberRaw := range memberList {
+		member, ok := memberRaw.(map[string]interface{})
+		if !ok {
+			continue
+		}
+
+		posRaw, ok := member["position"]
+		if !ok {
+			continue
+		}
+		pos, ok := posRaw.(int)
+		if !ok {
+			continue
+		}
+
+		if pos <= 0 {
+			return fmt.Errorf("schedule_rotation_members[%d].position must be greater than 0 (got %d)", i, pos)
+		}
+		if seen[pos] {
+			return fmt.Errorf("schedule_rotation_members has duplicate position %d — positions must be unique and 1-indexed", pos)
+		}
+		seen[pos] = true
+	}
+
+	return nil
+}
+
 // validateUniqueWorkflowTaskPositionInternal is the internal implementation that accepts an interface for testing
 func validateUniqueWorkflowTaskPositionInternal(ctx context.Context, d resourceDiffGetter, meta interface{}) error {
 	if d.Id() == "" && !d.HasChange("workflow_id") {

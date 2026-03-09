@@ -18,6 +18,7 @@ const excluded = {
     "alert",
     "alert_event",
     "alert_route",
+    "alerts_source", // manual change: retry logic for eventual consistency on list queries
     "catalog",
     "catalog_field",
     "catalog_entity",
@@ -26,6 +27,8 @@ const excluded = {
     "custom_field_option",
     "custom_field",
     "dashboard",
+    "audit", // Need to be manually handled due to pointer logic in the schema
+    "incident", // Need to be manually handled due to pointer logic in the schema
     "incident_action_item",
     "incident_custom_field_selection",
     "incident_event_functionality",
@@ -34,6 +37,7 @@ const excluded = {
     "incident_feedback",
     "incident_form_field_selection",
     "ip_ranges",
+    "status",
     "post_mortem_template",
     "pulse",
     "retrospective_configuration",
@@ -56,10 +60,13 @@ const excluded = {
     "alerts_source",
     "status",
     "audit",
+    "edge_connector",
+    "edge_connector_action",
     "catalog",
     "catalog_field",
     "catalog_entity",
     "catalog_entity_property",
+    "catalog_property",
     "communications_group",
     "communications_template", // cannot auto-generate because of custom nested JSON:API format handling (IR-3529)
     "custom_field_option",
@@ -93,6 +100,7 @@ const excluded = {
     "user",
     "user_notification_rule",
     "webhooks_delivery",
+    "status_page", // manual change: section_order set to Computed: true to prevent drift from API-returned defaults
     "workflow_alert", // cannot auto-generate because codegen doesn't handle nested objects in trigger_params (alert_payload_conditions requires complex nested schema)
     "workflow_run",
     "workflow_task",
@@ -221,7 +229,7 @@ function resourceHasFilters(name) {
   const collectionSchema = collectionPathSchema(name);
   const filterParameters =
     collectionSchema.get && collectionSchema.get.parameters;
-  return filterParameters.filter((filter) => filter.name.match(/filter/i))
+  return (filterParameters || []).filter((filter) => filter.name.match(/filter/i))
     .length;
 }
 

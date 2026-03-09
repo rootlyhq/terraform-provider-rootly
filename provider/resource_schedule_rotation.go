@@ -23,6 +23,7 @@ func resourceScheduleRotation() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
+		CustomizeDiff: validateScheduleRotationMemberPositions,
 		Schema: map[string]*schema.Schema{
 
 			"schedule_id": &schema.Schema{
