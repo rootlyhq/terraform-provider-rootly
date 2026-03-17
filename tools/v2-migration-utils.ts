@@ -44,4 +44,9 @@ export const SchemaMods: SchemaMod[] = [
 
     return schema;
   },
+  function fixFunctionalityServiceIds(schema) {
+    schema.components.schemas["functionality"].properties["service_ids"].tf_computed = true;
+
+    return schema;
+  },
 ];
