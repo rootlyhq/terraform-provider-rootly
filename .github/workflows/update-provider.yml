@@ -13,18 +13,18 @@ jobs:
   codegen:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - uses: actions/setup-go@v6
         with:
           go-version-file: "go.mod"
 
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           check-latest: true
       - run: yarn install --frozen-lockfile
 
-      - uses: hashicorp/setup-terraform@v3
+      - uses: hashicorp/setup-terraform@v4
         with:
           terraform_wrapper: false
 
@@ -34,7 +34,7 @@ jobs:
         run: make docs
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           branch: update-provider
           commit-message: |
