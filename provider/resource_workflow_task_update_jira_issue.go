@@ -77,6 +77,11 @@ func resourceWorkflowTaskUpdateJiraIssue() *schema.Resource {
 								"update_jira_issue",
 							}, false),
 						},
+						"integration": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. Specify integration id if you have more than one Jira instance",
+							Type:        schema.TypeMap,
+							Optional:    true,
+						},
 						"issue_id": &schema.Schema{
 							Description: "The issue id",
 							Type:        schema.TypeString,
