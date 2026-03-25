@@ -13,12 +13,16 @@ type AsyncRuleCreationStatus struct {
 	Error  string `json:"error,omitempty"`
 }
 
+const (
+	maxRuleCreationTimeout = 30 * time.Minute
+)
+
 type AsyncRuleCreationStatusFunc func(alertRouteID, requestId string) (*AsyncRuleCreationStatus, error)
 
 type RefetchAlertRouteFunc func() error
 
 func WaitForAsyncRuleCreation(ctx context.Context, alertRouteID, requestId string, checkStatusFunc AsyncRuleCreationStatusFunc) error {
-	return retry.RetryContext(ctx, 5*time.Minute, func() *retry.RetryError {
+	return retry.RetryContext(ctx, maxRuleCreationTimeout, func() *retry.RetryError {
 		status, err := checkStatusFunc(alertRouteID, requestId)
 		if err != nil {
 			return retry.NonRetryableError(fmt.Errorf("error checking async rule creation status: %w", err))
