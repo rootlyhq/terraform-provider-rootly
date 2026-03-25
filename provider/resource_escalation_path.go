@@ -345,6 +345,13 @@ func resourceEscalationPath() *schema.Resource {
 										ForceNew:    false,
 										Description: "Position of the time block",
 									},
+									"ends_next_day": &schema.Schema{
+										Type:        schema.TypeBool,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										Description: "Whether the time block ends on the next day",
+									},
 								},
 							},
 						},
