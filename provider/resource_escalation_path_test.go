@@ -97,6 +97,205 @@ resource "rootly_escalation_path" "test" {
 }
 `
 
+func TestAccResourceEscalationPathDeferral(t *testing.T) {
+	rName := acctest.RandomWithPrefix("tf-test")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck: func() {
+			testAccPreCheck(t)
+		},
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceEscalationPathDeferralConfig(rName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_escalation_path.deferral", "name", rName+"-deferral-path"),
+					resource.TestCheckResourceAttr("rootly_escalation_path.deferral", "path_type", "deferral"),
+					resource.TestCheckResourceAttr("rootly_escalation_path.deferral", "after_deferral_behavior", "re_evaluate"),
+					resource.TestCheckResourceAttr("rootly_escalation_path.deferral", "rules.#", "1"),
+				),
+			},
+			{
+				Config: testAccResourceEscalationPathDeferralUpdatedConfig(rName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_escalation_path.deferral", "name", rName+"-deferral-path-updated"),
+					resource.TestCheckResourceAttr("rootly_escalation_path.deferral", "path_type", "deferral"),
+					resource.TestCheckResourceAttr("rootly_escalation_path.deferral", "after_deferral_behavior", "re_evaluate"),
+					resource.TestCheckResourceAttr("rootly_escalation_path.deferral", "rules.#", "1"),
+				),
+			},
+		},
+	})
+}
+
+func testAccResourceEscalationPathDeferralConfig(rName string) string {
+	return fmt.Sprintf(`
+resource "rootly_escalation_policy" "deferral_test" {
+	name = "%s-ep"
+}
+
+resource "rootly_escalation_path" "deferral" {
+	name                   = "%s-deferral-path"
+	default                = false
+	escalation_policy_id   = rootly_escalation_policy.deferral_test.id
+	path_type              = "deferral"
+	after_deferral_behavior = "re_evaluate"
+
+	rules {
+		rule_type = "deferral_window"
+		time_zone = "America/Los_Angeles"
+		time_blocks {
+			monday     = true
+			tuesday    = true
+			start_time = "17:00"
+			end_time   = "07:00"
+			position   = 1
+		}
+	}
+}
+`, rName, rName)
+}
+
+func testAccResourceEscalationPathDeferralUpdatedConfig(rName string) string {
+	return fmt.Sprintf(`
+resource "rootly_escalation_policy" "deferral_test" {
+	name = "%s-ep"
+}
+
+resource "rootly_escalation_path" "deferral" {
+	name                   = "%s-deferral-path-updated"
+	default                = false
+	escalation_policy_id   = rootly_escalation_policy.deferral_test.id
+	path_type              = "deferral"
+	after_deferral_behavior = "re_evaluate"
+
+	rules {
+		rule_type = "deferral_window"
+		time_zone = "America/New_York"
+		time_blocks {
+			monday     = true
+			wednesday  = true
+			friday     = true
+			start_time = "18:00"
+			end_time   = "08:00"
+			position   = 1
+		}
+		time_blocks {
+			saturday   = true
+			sunday     = true
+			all_day    = true
+			position   = 2
+		}
+	}
+}
+`, rName, rName)
+}
+
+func TestAccResourceEscalationPathDeferralExecutePath(t *testing.T) {
+	rName := acctest.RandomWithPrefix("tf-test")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck: func() {
+			testAccPreCheck(t)
+		},
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceEscalationPathDeferralExecutePathConfig(rName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_escalation_path.deferral_exec", "name", rName+"-deferral-exec"),
+					resource.TestCheckResourceAttr("rootly_escalation_path.deferral_exec", "path_type", "deferral"),
+					resource.TestCheckResourceAttr("rootly_escalation_path.deferral_exec", "after_deferral_behavior", "execute_path"),
+					resource.TestCheckResourceAttrSet("rootly_escalation_path.deferral_exec", "after_deferral_path_id"),
+				),
+			},
+		},
+	})
+}
+
+func testAccResourceEscalationPathDeferralExecutePathConfig(rName string) string {
+	return fmt.Sprintf(`
+resource "rootly_escalation_policy" "exec_test" {
+	name = "%s-ep"
+}
+
+resource "rootly_escalation_path" "target" {
+	name                 = "%s-target-path"
+	default              = false
+	escalation_policy_id = rootly_escalation_policy.exec_test.id
+	path_type            = "escalation"
+}
+
+resource "rootly_escalation_path" "deferral_exec" {
+	name                    = "%s-deferral-exec"
+	default                 = false
+	escalation_policy_id    = rootly_escalation_policy.exec_test.id
+	path_type               = "deferral"
+	after_deferral_behavior = "execute_path"
+	after_deferral_path_id  = rootly_escalation_path.target.id
+
+	rules {
+		rule_type = "deferral_window"
+		time_zone = "UTC"
+		time_blocks {
+			monday     = true
+			tuesday    = true
+			wednesday  = true
+			thursday   = true
+			friday     = true
+			start_time = "22:00"
+			end_time   = "06:00"
+			position   = 1
+		}
+	}
+}
+`, rName, rName, rName)
+}
+
+func TestAccResourceEscalationPathServiceRule(t *testing.T) {
+	rName := acctest.RandomWithPrefix("tf-test")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck: func() {
+			testAccPreCheck(t)
+		},
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceEscalationPathServiceRuleConfig(rName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_escalation_path.service_rule", "name", rName+"-service-path"),
+					resource.TestCheckResourceAttr("rootly_escalation_path.service_rule", "rules.#", "1"),
+				),
+			},
+		},
+	})
+}
+
+func testAccResourceEscalationPathServiceRuleConfig(rName string) string {
+	return fmt.Sprintf(`
+resource "rootly_escalation_policy" "svc_test" {
+	name = "%s-ep"
+}
+
+resource "rootly_service" "test" {
+	name = "%s-svc"
+}
+
+resource "rootly_escalation_path" "service_rule" {
+	name                 = "%s-service-path"
+	default              = false
+	escalation_policy_id = rootly_escalation_policy.svc_test.id
+	match_mode           = "match-any-rule"
+
+	rules {
+		rule_type   = "service"
+		service_ids = [rootly_service.test.id]
+	}
+}
+`, rName, rName, rName)
+}
+
 func TestAccResourceEscalationPathWithAllRuleTypes(t *testing.T) {
 	rName := acctest.RandomWithPrefix("tf-test")
 
