@@ -149,7 +149,6 @@ resource "rootly_escalation_path" "deferral" {
 			tuesday    = true
 			start_time = "17:00"
 			end_time   = "07:00"
-			position   = 1
 		}
 	}
 }
@@ -178,13 +177,11 @@ resource "rootly_escalation_path" "deferral" {
 			friday     = true
 			start_time = "18:00"
 			end_time   = "08:00"
-			position   = 1
 		}
 		time_blocks {
 			saturday   = true
 			sunday     = true
 			all_day    = true
-			position   = 2
 		}
 	}
 }
@@ -224,6 +221,11 @@ resource "rootly_escalation_path" "target" {
 	default              = false
 	escalation_policy_id = rootly_escalation_policy.exec_test.id
 	path_type            = "escalation"
+
+	rules {
+		rule_type           = "working_hour"
+		within_working_hour = true
+	}
 }
 
 resource "rootly_escalation_path" "deferral_exec" {
@@ -236,7 +238,7 @@ resource "rootly_escalation_path" "deferral_exec" {
 
 	rules {
 		rule_type = "deferral_window"
-		time_zone = "UTC"
+		time_zone = "Etc/UTC"
 		time_blocks {
 			monday     = true
 			tuesday    = true
@@ -245,7 +247,6 @@ resource "rootly_escalation_path" "deferral_exec" {
 			friday     = true
 			start_time = "22:00"
 			end_time   = "06:00"
-			position   = 1
 		}
 	}
 }

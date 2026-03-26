@@ -345,13 +345,6 @@ func resourceEscalationPath() *schema.Resource {
 										ForceNew:    false,
 										Description: "Position of the time block",
 									},
-									"ends_next_day": &schema.Schema{
-										Type:        schema.TypeBool,
-										Computed:    true,
-										Required:    false,
-										Optional:    true,
-										Description: "Whether the time block ends on the next day",
-									},
 								},
 							},
 						},
@@ -525,17 +518,25 @@ func resourceEscalationPathRead(ctx context.Context, d *schema.ResourceData, met
 				// Create a new map with only the fields defined in the schema
 				processed_item_rules := map[string]interface{}{
 					"rule_type":           rawItem["rule_type"],
-					"urgency_ids":         rawItem["urgency_ids"],
 					"within_working_hour": rawItem["within_working_hour"],
 					"json_path":           rawItem["json_path"],
 					"operator":            rawItem["operator"],
 					"value":               rawItem["value"],
 					"fieldable_type":      rawItem["fieldable_type"],
 					"fieldable_id":        rawItem["fieldable_id"],
-					"values":              rawItem["values"],
-					"service_ids":         rawItem["service_ids"],
 					"time_zone":           rawItem["time_zone"],
-					"time_blocks":         rawItem["time_blocks"],
+				}
+				if v := nilIfEmpty(rawItem["urgency_ids"]); v != nil {
+					processed_item_rules["urgency_ids"] = v
+				}
+				if v := nilIfEmpty(rawItem["values"]); v != nil {
+					processed_item_rules["values"] = v
+				}
+				if v := nilIfEmpty(rawItem["service_ids"]); v != nil {
+					processed_item_rules["service_ids"] = v
+				}
+				if tb := processTimeBlocks(rawItem["time_blocks"]); tb != nil {
+					processed_item_rules["time_blocks"] = tb
 				}
 				processed_items_rules = append(processed_items_rules, processed_item_rules)
 			}
@@ -662,4 +663,43 @@ func resourceEscalationPathDelete(ctx context.Context, d *schema.ResourceData, m
 	d.SetId("")
 
 	return nil
+}
+
+func nilIfEmpty(v interface{}) interface{} {
+	if v == nil {
+		return nil
+	}
+	if arr, ok := v.([]interface{}); ok && len(arr) == 0 {
+		return nil
+	}
+	return v
+}
+
+func processTimeBlocks(raw interface{}) []map[string]interface{} {
+	if raw == nil {
+		return nil
+	}
+	rawSlice, ok := raw.([]interface{})
+	if !ok {
+		return nil
+	}
+	result := make([]map[string]interface{}, 0, len(rawSlice))
+	for _, item := range rawSlice {
+		if m, ok := item.(map[string]interface{}); ok {
+			result = append(result, map[string]interface{}{
+				"monday":     m["monday"],
+				"tuesday":    m["tuesday"],
+				"wednesday":  m["wednesday"],
+				"thursday":   m["thursday"],
+				"friday":     m["friday"],
+				"saturday":   m["saturday"],
+				"sunday":     m["sunday"],
+				"start_time": m["start_time"],
+				"end_time":   m["end_time"],
+				"all_day":    m["all_day"],
+				"position":   m["position"],
+			})
+		}
+	}
+	return result
 }
