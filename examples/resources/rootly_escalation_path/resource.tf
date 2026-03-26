@@ -121,6 +121,67 @@ resource "rootly_escalation_path" "ignore" {
   }
 }
 
+# Deferral path - defer alerts outside business hours, then re-evaluate
+resource "rootly_escalation_path" "defer_off_hours" {
+  name                    = "Defer Off Hours"
+  default                 = false
+  escalation_policy_id    = rootly_escalation_policy.primary.id
+  path_type               = "deferral"
+  after_deferral_behavior = "re_evaluate"
+
+  rules {
+    rule_type = "deferral_window"
+    time_zone = "America/New_York"
+    time_blocks {
+      monday    = true
+      tuesday   = true
+      wednesday = true
+      thursday  = true
+      friday    = true
+      start_time = "18:00"
+      end_time   = "09:00"
+    }
+    time_blocks {
+      saturday = true
+      sunday   = true
+      all_day  = true
+    }
+  }
+}
+
+# Deferral path that executes another path after deferral
+resource "rootly_escalation_path" "defer_then_escalate" {
+  name                    = "Defer Then Escalate"
+  default                 = false
+  escalation_policy_id    = rootly_escalation_policy.primary.id
+  path_type               = "deferral"
+  after_deferral_behavior = "execute_path"
+  after_deferral_path_id  = rootly_escalation_path.default.id
+
+  rules {
+    rule_type = "deferral_window"
+    time_zone = "America/New_York"
+    time_blocks {
+      saturday = true
+      sunday   = true
+      all_day  = true
+    }
+  }
+}
+
+# Service-based routing path
+resource "rootly_escalation_path" "by_service" {
+  name                 = "Route by Service"
+  default              = false
+  escalation_policy_id = rootly_escalation_policy.primary.id
+  match_mode           = "match-any-rule"
+
+  rules {
+    rule_type   = "service"
+    service_ids = ["your-service-id"]
+  }
+}
+
 resource "rootly_escalation_level" "first" {
   escalation_policy_path_id = rootly_escalation_path.default.id
   escalation_policy_id      = rootly_escalation_policy.primary.id

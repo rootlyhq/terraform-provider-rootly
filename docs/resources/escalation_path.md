@@ -135,6 +135,67 @@ resource "rootly_escalation_path" "ignore" {
   }
 }
 
+# Deferral path - defer alerts outside business hours, then re-evaluate
+resource "rootly_escalation_path" "defer_off_hours" {
+  name                    = "Defer Off Hours"
+  default                 = false
+  escalation_policy_id    = rootly_escalation_policy.primary.id
+  path_type               = "deferral"
+  after_deferral_behavior = "re_evaluate"
+
+  rules {
+    rule_type = "deferral_window"
+    time_zone = "America/New_York"
+    time_blocks {
+      monday    = true
+      tuesday   = true
+      wednesday = true
+      thursday  = true
+      friday    = true
+      start_time = "18:00"
+      end_time   = "09:00"
+    }
+    time_blocks {
+      saturday = true
+      sunday   = true
+      all_day  = true
+    }
+  }
+}
+
+# Deferral path that executes another path after deferral
+resource "rootly_escalation_path" "defer_then_escalate" {
+  name                    = "Defer Then Escalate"
+  default                 = false
+  escalation_policy_id    = rootly_escalation_policy.primary.id
+  path_type               = "deferral"
+  after_deferral_behavior = "execute_path"
+  after_deferral_path_id  = rootly_escalation_path.default.id
+
+  rules {
+    rule_type = "deferral_window"
+    time_zone = "America/New_York"
+    time_blocks {
+      saturday = true
+      sunday   = true
+      all_day  = true
+    }
+  }
+}
+
+# Service-based routing path
+resource "rootly_escalation_path" "by_service" {
+  name                 = "Route by Service"
+  default              = false
+  escalation_policy_id = rootly_escalation_policy.primary.id
+  match_mode           = "match-any-rule"
+
+  rules {
+    rule_type   = "service"
+    service_ids = ["your-service-id"]
+  }
+}
+
 resource "rootly_escalation_level" "first" {
   escalation_policy_path_id = rootly_escalation_path.default.id
   escalation_policy_id      = rootly_escalation_policy.primary.id
@@ -176,11 +237,14 @@ resource "rootly_escalation_level" "second" {
 
 ### Optional
 
+- `after_deferral_behavior` (String) What happens after a deferral path finishes. Required for deferral paths. Value must be one of `re_evaluate`, `execute_path`.
+- `after_deferral_path_id` (String) The escalation path to execute after this deferral path when after_deferral_behavior is execute_path.
 - `default` (Boolean) Whether this escalation path is the default path. Value must be one of true or false
 - `escalation_policy_id` (String) The ID of the escalation policy
 - `initial_delay` (Number) Initial delay for escalation path in minutes. Maximum 1 week (10080).
 - `match_mode` (String) How path rules are matched.. Value must be one of `match-all-rules`, `match-any-rule`.
 - `notification_type` (String) Notification rule type
+- `path_type` (String) The type of escalation path. Cannot be changed after creation. Value must be one of `escalation`, `deferral`.
 - `position` (Number) The position of this path in the paths for this EP.
 - `repeat` (Boolean) Whether this path should be repeated until someone acknowledges the alert. Value must be one of true or false
 - `repeat_count` (Number) The number of times this path will be executed until someone acknowledges the alert
@@ -201,11 +265,31 @@ Optional:
 - `fieldable_type` (String) The type of the fieldable. Only used with `field` rule type. Value must be one of `AlertField`.
 - `json_path` (String) JSON path to extract value from payload
 - `operator` (String) How the value should be matched. For `json_path` rule type: `is`, `is_not`, `contains`, `does_not_contain`. For `field` rule type: `is`, `is_not`, `contains`, `does_not_contain`, `is_one_of`, `is_not_one_of`, `is_empty`, `is_not_empty`, `contains_key`, `does_not_contain_key`, `starts_with`, `does_not_start_with`, `matches`, `does_not_match`.
-- `rule_type` (String) The type of the escalation path rule. Value must be one of `alert_urgency`, `working_hour`, `json_path`, `field`.
+- `rule_type` (String) The type of the escalation path rule. Value must be one of `alert_urgency`, `working_hour`, `json_path`, `field`, `service`, `deferral_window`.
+- `service_ids` (List of String) Service ids for which this escalation path should be used. Only used with `service` rule type.
+- `time_blocks` (Block List) Time windows during which alerts are deferred. Only used with `deferral_window` rule type. (see [below for nested schema](#nestedblock--rules--time_blocks))
+- `time_zone` (String) Time zone for the deferral window. Only used with `deferral_window` rule type.
 - `urgency_ids` (List of String) Alert urgency ids for which this escalation path should be used
 - `value` (String) Value with which JSON path value should be matched
 - `values` (List of String) Values to match against. Only used with `field` rule type.
 - `within_working_hour` (Boolean) Whether the escalation path should be used within working hours. Value must be one of true or false
+
+<a id="nestedblock--rules--time_blocks"></a>
+### Nested Schema for `rules.time_blocks`
+
+Optional:
+
+- `all_day` (Boolean) Whether this time block covers the entire day
+- `end_time` (String) Formatted as HH:MM
+- `friday` (Boolean) Whether the time block applies on Friday
+- `monday` (Boolean) Whether the time block applies on Monday
+- `position` (Number) Position of the time block
+- `saturday` (Boolean) Whether the time block applies on Saturday
+- `start_time` (String) Formatted as HH:MM
+- `sunday` (Boolean) Whether the time block applies on Sunday
+- `thursday` (Boolean) Whether the time block applies on Thursday
+- `tuesday` (Boolean) Whether the time block applies on Tuesday
+- `wednesday` (Boolean) Whether the time block applies on Wednesday
 
 
 <a id="nestedblock--time_restrictions"></a>

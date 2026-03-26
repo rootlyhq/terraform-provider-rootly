@@ -53,6 +53,35 @@ func resourceEscalationPath() *schema.Resource {
 				Description: "Notification rule type",
 			},
 
+			"path_type": &schema.Schema{
+				Type:         schema.TypeString,
+				Default:      "escalation",
+				Required:     false,
+				Optional:     true,
+				ForceNew:     true,
+				Description:  "The type of escalation path. Cannot be changed after creation.. Value must be one of `escalation`, `deferral`.",
+				ValidateFunc: validation.StringInSlice([]string{"escalation", "deferral"}, false),
+			},
+
+			"after_deferral_behavior": &schema.Schema{
+				Type:         schema.TypeString,
+				Computed:     true,
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "What happens after a deferral path finishes. Required for deferral paths.. Value must be one of `re_evaluate`, `execute_path`.",
+				ValidateFunc: validation.StringInSlice([]string{"re_evaluate", "execute_path"}, false),
+			},
+
+			"after_deferral_path_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "The escalation path to execute after this deferral path when after_deferral_behavior is execute_path.",
+			},
+
 			"escalation_policy_id": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
@@ -123,8 +152,8 @@ func resourceEscalationPath() *schema.Resource {
 							Required:     false,
 							Optional:     true,
 							ForceNew:     false,
-							Description:  "The type of the escalation path rule. Value must be one of `alert_urgency`, `working_hour`, `json_path`, `field`.",
-							ValidateFunc: validation.StringInSlice([]string{"alert_urgency", "working_hour", "json_path", "field"}, false),
+							Description:  "The type of the escalation path rule. Value must be one of `alert_urgency`, `working_hour`, `json_path`, `field`, `service`, `deferral_window`.",
+							ValidateFunc: validation.StringInSlice([]string{"alert_urgency", "working_hour", "json_path", "field", "service", "deferral_window"}, false),
 						},
 
 						"urgency_ids": &schema.Schema{
@@ -204,6 +233,120 @@ func resourceEscalationPath() *schema.Resource {
 							Required:         false,
 							Optional:         true,
 							Description:      "Values to match against. Only used with `field` rule type.",
+						},
+
+						"service_ids": &schema.Schema{
+							Type: schema.TypeList,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         false,
+							Required:         false,
+							Optional:         true,
+							Description:      "Service ids for which this escalation path should be used. Only used with `service` rule type.",
+						},
+
+						"time_zone": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							ForceNew:    false,
+							Description: "Time zone for the deferral window. Only used with `deferral_window` rule type.",
+						},
+
+						"time_blocks": &schema.Schema{
+							Type:             schema.TypeList,
+							Computed:         false,
+							Required:         false,
+							Optional:         true,
+							Description:      "Time windows during which alerts are deferred. Only used with `deferral_window` rule type.",
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"monday": &schema.Schema{
+										Type:        schema.TypeBool,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										Description: "Whether the time block applies on Monday",
+									},
+									"tuesday": &schema.Schema{
+										Type:        schema.TypeBool,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										Description: "Whether the time block applies on Tuesday",
+									},
+									"wednesday": &schema.Schema{
+										Type:        schema.TypeBool,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										Description: "Whether the time block applies on Wednesday",
+									},
+									"thursday": &schema.Schema{
+										Type:        schema.TypeBool,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										Description: "Whether the time block applies on Thursday",
+									},
+									"friday": &schema.Schema{
+										Type:        schema.TypeBool,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										Description: "Whether the time block applies on Friday",
+									},
+									"saturday": &schema.Schema{
+										Type:        schema.TypeBool,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										Description: "Whether the time block applies on Saturday",
+									},
+									"sunday": &schema.Schema{
+										Type:        schema.TypeBool,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										Description: "Whether the time block applies on Sunday",
+									},
+									"start_time": &schema.Schema{
+										Type:        schema.TypeString,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "Formatted as HH:MM",
+									},
+									"end_time": &schema.Schema{
+										Type:        schema.TypeString,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "Formatted as HH:MM",
+									},
+									"all_day": &schema.Schema{
+										Type:        schema.TypeBool,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										Description: "Whether this time block covers the entire day",
+									},
+									"position": &schema.Schema{
+										Type:        schema.TypeInt,
+										Computed:    true,
+										Required:    false,
+										Optional:    true,
+										ForceNew:    false,
+										Description: "Position of the time block",
+									},
+								},
+							},
 						},
 					},
 				},
@@ -289,6 +432,15 @@ func resourceEscalationPathCreate(ctx context.Context, d *schema.ResourceData, m
 	if value, ok := d.GetOkExists("notification_type"); ok {
 		s.NotificationType = value.(string)
 	}
+	if value, ok := d.GetOkExists("path_type"); ok {
+		s.PathType = value.(string)
+	}
+	if value, ok := d.GetOkExists("after_deferral_behavior"); ok {
+		s.AfterDeferralBehavior = value.(string)
+	}
+	if value, ok := d.GetOkExists("after_deferral_path_id"); ok {
+		s.AfterDeferralPathId = value.(string)
+	}
 	if value, ok := d.GetOkExists("escalation_policy_id"); ok {
 		s.EscalationPolicyId = value.(string)
 	}
@@ -348,6 +500,9 @@ func resourceEscalationPathRead(ctx context.Context, d *schema.ResourceData, met
 	d.Set("name", item.Name)
 	d.Set("default", item.Default)
 	d.Set("notification_type", item.NotificationType)
+	d.Set("path_type", item.PathType)
+	d.Set("after_deferral_behavior", item.AfterDeferralBehavior)
+	d.Set("after_deferral_path_id", item.AfterDeferralPathId)
 	d.Set("escalation_policy_id", item.EscalationPolicyId)
 	d.Set("match_mode", item.MatchMode)
 	d.Set("position", item.Position)
@@ -363,14 +518,25 @@ func resourceEscalationPathRead(ctx context.Context, d *schema.ResourceData, met
 				// Create a new map with only the fields defined in the schema
 				processed_item_rules := map[string]interface{}{
 					"rule_type":           rawItem["rule_type"],
-					"urgency_ids":         rawItem["urgency_ids"],
 					"within_working_hour": rawItem["within_working_hour"],
 					"json_path":           rawItem["json_path"],
 					"operator":            rawItem["operator"],
 					"value":               rawItem["value"],
 					"fieldable_type":      rawItem["fieldable_type"],
 					"fieldable_id":        rawItem["fieldable_id"],
-					"values":              rawItem["values"],
+					"time_zone":           rawItem["time_zone"],
+				}
+				if v := nilIfEmpty(rawItem["urgency_ids"]); v != nil {
+					processed_item_rules["urgency_ids"] = v
+				}
+				if v := nilIfEmpty(rawItem["values"]); v != nil {
+					processed_item_rules["values"] = v
+				}
+				if v := nilIfEmpty(rawItem["service_ids"]); v != nil {
+					processed_item_rules["service_ids"] = v
+				}
+				if tb := processTimeBlocks(rawItem["time_blocks"]); tb != nil {
+					processed_item_rules["time_blocks"] = tb
 				}
 				processed_items_rules = append(processed_items_rules, processed_item_rules)
 			}
@@ -421,6 +587,15 @@ func resourceEscalationPathUpdate(ctx context.Context, d *schema.ResourceData, m
 	}
 	if d.HasChange("notification_type") {
 		s.NotificationType = d.Get("notification_type").(string)
+	}
+	if d.HasChange("path_type") {
+		s.PathType = d.Get("path_type").(string)
+	}
+	if d.HasChange("after_deferral_behavior") {
+		s.AfterDeferralBehavior = d.Get("after_deferral_behavior").(string)
+	}
+	if d.HasChange("after_deferral_path_id") {
+		s.AfterDeferralPathId = d.Get("after_deferral_path_id").(string)
 	}
 	if d.HasChange("escalation_policy_id") {
 		s.EscalationPolicyId = d.Get("escalation_policy_id").(string)
@@ -488,4 +663,43 @@ func resourceEscalationPathDelete(ctx context.Context, d *schema.ResourceData, m
 	d.SetId("")
 
 	return nil
+}
+
+func nilIfEmpty(v interface{}) interface{} {
+	if v == nil {
+		return nil
+	}
+	if arr, ok := v.([]interface{}); ok && len(arr) == 0 {
+		return nil
+	}
+	return v
+}
+
+func processTimeBlocks(raw interface{}) []map[string]interface{} {
+	if raw == nil {
+		return nil
+	}
+	rawSlice, ok := raw.([]interface{})
+	if !ok {
+		return nil
+	}
+	result := make([]map[string]interface{}, 0, len(rawSlice))
+	for _, item := range rawSlice {
+		if m, ok := item.(map[string]interface{}); ok {
+			result = append(result, map[string]interface{}{
+				"monday":     m["monday"],
+				"tuesday":    m["tuesday"],
+				"wednesday":  m["wednesday"],
+				"thursday":   m["thursday"],
+				"friday":     m["friday"],
+				"saturday":   m["saturday"],
+				"sunday":     m["sunday"],
+				"start_time": m["start_time"],
+				"end_time":   m["end_time"],
+				"all_day":    m["all_day"],
+				"position":   m["position"],
+			})
+		}
+	}
+	return result
 }
