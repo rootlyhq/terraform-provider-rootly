@@ -141,10 +141,22 @@ function processPathParametersAnyOf(paths) {
   }
 }
 
+// Add catalog_id to catalog_entity schema so codegen can use it for nested create route
+function addNestedRouteParentIds(schemas) {
+  if (schemas.catalog_entity && !schemas.catalog_entity.properties.catalog_id) {
+    schemas.catalog_entity.properties.catalog_id = {
+      type: "string",
+      description: "The ID of the parent catalog",
+      tf_force_new: true,
+    };
+  }
+}
+
 fixFilterParameterTypes(swagger.paths);
 stripAnyOf(swagger.components.schemas);
 combineOneOf(swagger.components.schemas);
 processPathParametersAnyOf(swagger.paths);
 renameEscalationPolicyLevelSchemas(swagger);
 renameEscalationPolicyPathSchemas(swagger);
+addNestedRouteParentIds(swagger.components.schemas);
 fs.writeFileSync(process.argv[2], JSON.stringify(swagger));

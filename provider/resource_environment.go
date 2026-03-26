@@ -170,6 +170,44 @@ func resourceEnvironment() *schema.Resource {
 					},
 				},
 			},
+
+			"properties": &schema.Schema{
+				Type:             schema.TypeList,
+				Computed:         false,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Array of property values for this environment.",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+
+						"catalog_property_id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "Catalog property ID",
+						},
+
+						"value": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "The property value",
+						},
+					},
+				},
+			},
 		},
 	}
 }
@@ -204,6 +242,9 @@ func resourceEnvironmentCreate(ctx context.Context, d *schema.ResourceData, meta
 	}
 	if value, ok := d.GetOkExists("slack_aliases"); ok {
 		s.SlackAliases = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("properties"); ok {
+		s.Properties = value.([]interface{})
 	}
 
 	res, err := c.CreateEnvironment(s)
@@ -279,6 +320,25 @@ func resourceEnvironmentRead(ctx context.Context, d *schema.ResourceData, meta i
 		d.Set("slack_aliases", nil)
 	}
 
+	if item.Properties != nil {
+		processed_items_properties := make([]map[string]interface{}, 0)
+
+		for _, c := range item.Properties {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processed_item_properties := map[string]interface{}{
+					"catalog_property_id": rawItem["catalog_property_id"],
+					"value":               rawItem["value"],
+				}
+				processed_items_properties = append(processed_items_properties, processed_item_properties)
+			}
+		}
+
+		d.Set("properties", processed_items_properties)
+	} else {
+		d.Set("properties", nil)
+	}
+
 	return nil
 }
 
@@ -326,6 +386,14 @@ func resourceEnvironmentUpdate(ctx context.Context, d *schema.ResourceData, meta
 			s.SlackAliases = value.([]interface{})
 		} else {
 			s.SlackAliases = []interface{}{}
+		}
+	}
+
+	if d.HasChange("properties") {
+		if value, ok := d.GetOk("properties"); value != nil && ok {
+			s.Properties = value.([]interface{})
+		} else {
+			s.Properties = []interface{}{}
 		}
 	}
 

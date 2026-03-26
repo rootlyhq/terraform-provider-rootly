@@ -11,19 +11,20 @@ import (
 )
 
 type FormField struct {
-	ID                    string        `jsonapi:"primary,form_fields"`
-	Kind                  string        `jsonapi:"attr,kind,omitempty"`
-	InputKind             string        `jsonapi:"attr,input_kind,omitempty"`
-	ValueKind             string        `jsonapi:"attr,value_kind,omitempty"`
-	ValueKindCatalogId    string        `jsonapi:"attr,value_kind_catalog_id,omitempty"`
-	Name                  string        `jsonapi:"attr,name,omitempty"`
-	Slug                  string        `jsonapi:"attr,slug,omitempty"`
-	Description           string        `jsonapi:"attr,description,omitempty"`
-	Shown                 []interface{} `jsonapi:"attr,shown,omitempty"`
-	Required              []interface{} `jsonapi:"attr,required,omitempty"`
-	ShowOnIncidentDetails *bool         `jsonapi:"attr,show_on_incident_details,omitempty"`
-	Enabled               *bool         `jsonapi:"attr,enabled,omitempty"`
-	DefaultValues         []interface{} `jsonapi:"attr,default_values,omitempty"`
+	ID                         string        `jsonapi:"primary,form_fields"`
+	Kind                       string        `jsonapi:"attr,kind,omitempty"`
+	InputKind                  string        `jsonapi:"attr,input_kind,omitempty"`
+	ValueKind                  string        `jsonapi:"attr,value_kind,omitempty"`
+	ValueKindCatalogId         string        `jsonapi:"attr,value_kind_catalog_id,omitempty"`
+	Name                       string        `jsonapi:"attr,name,omitempty"`
+	Slug                       string        `jsonapi:"attr,slug,omitempty"`
+	Description                string        `jsonapi:"attr,description,omitempty"`
+	Shown                      []interface{} `jsonapi:"attr,shown,omitempty"`
+	Required                   []interface{} `jsonapi:"attr,required,omitempty"`
+	ShowOnIncidentDetails      *bool         `jsonapi:"attr,show_on_incident_details,omitempty"`
+	Enabled                    *bool         `jsonapi:"attr,enabled,omitempty"`
+	DefaultValues              []interface{} `jsonapi:"attr,default_values,omitempty"`
+	AutoSetByCatalogPropertyId string        `jsonapi:"attr,auto_set_by_catalog_property_id,omitempty"`
 }
 
 func (c *Client) ListFormFields(params *rootlygo.ListFormFieldsParams) ([]interface{}, error) {

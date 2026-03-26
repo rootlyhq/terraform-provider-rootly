@@ -20,6 +20,7 @@ type Environment struct {
 	Position      int           `jsonapi:"attr,position,omitempty"`
 	SlackChannels []interface{} `jsonapi:"attr,slack_channels,omitempty"`
 	SlackAliases  []interface{} `jsonapi:"attr,slack_aliases,omitempty"`
+	Properties    []interface{} `jsonapi:"attr,properties,omitempty"`
 }
 
 func (c *Client) ListEnvironments(params *rootlygo.ListEnvironmentsParams) ([]interface{}, error) {

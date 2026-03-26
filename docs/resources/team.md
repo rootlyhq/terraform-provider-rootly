@@ -53,6 +53,7 @@ resource "rootly_team" "sre" {
 - `pagerduty_service_id` (String) The PagerDuty service id associated to this team
 - `pagertree_id` (String) The PagerTree group id associated to this team
 - `position` (Number) Position of the team
+- `properties` (Block List) Array of property values for this team. (see [below for nested schema](#nestedblock--properties))
 - `service_now_ci_sys_id` (String) The Service Now CI sys id associated to this team
 - `slack_aliases` (Block List) Slack Aliases associated with this team (see [below for nested schema](#nestedblock--slack_aliases))
 - `slack_channels` (Block List) Slack Channels associated with this team (see [below for nested schema](#nestedblock--slack_channels))
@@ -80,6 +81,15 @@ Optional:
 
 - `id` (String) Slack channel ID
 - `name` (String) Slack channel name
+
+
+<a id="nestedblock--properties"></a>
+### Nested Schema for `properties`
+
+Optional:
+
+- `catalog_property_id` (String) Catalog property ID
+- `value` (String) The property value
 
 
 <a id="nestedblock--slack_aliases"></a>

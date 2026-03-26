@@ -44,6 +44,7 @@ type Service struct {
 	AlertBroadcastChannel    map[string]interface{} `jsonapi:"attr,alert_broadcast_channel,omitempty"`
 	IncidentBroadcastEnabled *bool                  `jsonapi:"attr,incident_broadcast_enabled,omitempty"`
 	IncidentBroadcastChannel map[string]interface{} `jsonapi:"attr,incident_broadcast_channel,omitempty"`
+	Properties               []interface{}          `jsonapi:"attr,properties,omitempty"`
 }
 
 func (c *Client) ListServices(params *rootlygo.ListServicesParams) ([]interface{}, error) {
