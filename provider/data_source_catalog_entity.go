@@ -20,6 +20,11 @@ func dataSourceCatalogEntity() *schema.Resource {
 				Computed: true,
 			},
 
+			"catalog_id": &schema.Schema{
+				Type:     schema.TypeString,
+				Required: true,
+			},
+
 			"name": &schema.Schema{
 				Type:     schema.TypeString,
 				Computed: true,
