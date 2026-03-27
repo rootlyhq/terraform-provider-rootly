@@ -2,7 +2,6 @@
 page_title: "Resource rootly_status_page - terraform-provider-rootly"
 subcategory:
 description: |-
-    
 ---
 
 # Resource (rootly_status_page)
