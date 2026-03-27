@@ -25,7 +25,6 @@ description: |-
 - `kind` (String) Value must be one of `text`, `reference`.
 - `kind_catalog_id` (String) Restricts values to items of specified catalog.
 - `multiple` (Boolean) Whether the attribute accepts multiple values.. Value must be one of true or false
-- `position` (Number) Default position of the item when displayed in a list.
 - `required` (Boolean) Whether the property is required.. Value must be one of true or false
 - `slug` (String)
 

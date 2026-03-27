@@ -93,17 +93,6 @@ func resourceCatalogProperty() *schema.Resource {
 				Description: "Whether the attribute accepts multiple values.. Value must be one of true or false",
 			},
 
-			"position": &schema.Schema{
-				Type:        schema.TypeInt,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Sensitive:   false,
-				ForceNew:    false,
-				WriteOnly:   false,
-				Description: "Default position of the item when displayed in a list.",
-			},
-
 			"required": &schema.Schema{
 				Type:        schema.TypeBool,
 				Computed:    true,
@@ -155,9 +144,6 @@ func resourceCatalogPropertyCreate(ctx context.Context, d *schema.ResourceData, 
 	if value, ok := d.GetOkExists("multiple"); ok {
 		s.Multiple = tools.Bool(value.(bool))
 	}
-	if value, ok := d.GetOkExists("position"); ok {
-		s.Position = value.(int)
-	}
 	if value, ok := d.GetOkExists("required"); ok {
 		s.Required = tools.Bool(value.(bool))
 	}
@@ -199,7 +185,6 @@ func resourceCatalogPropertyRead(ctx context.Context, d *schema.ResourceData, me
 	d.Set("kind", item.Kind)
 	d.Set("kind_catalog_id", item.KindCatalogId)
 	d.Set("multiple", item.Multiple)
-	d.Set("position", item.Position)
 	d.Set("required", item.Required)
 	d.Set("catalog_type", item.CatalogType)
 
@@ -229,9 +214,6 @@ func resourceCatalogPropertyUpdate(ctx context.Context, d *schema.ResourceData, 
 	}
 	if d.HasChange("multiple") {
 		s.Multiple = tools.Bool(d.Get("multiple").(bool))
-	}
-	if d.HasChange("position") {
-		s.Position = d.Get("position").(int)
 	}
 	if d.HasChange("required") {
 		s.Required = tools.Bool(d.Get("required").(bool))

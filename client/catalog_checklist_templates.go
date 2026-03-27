@@ -11,15 +11,15 @@ import (
 )
 
 type CatalogChecklistTemplate struct {
-	ID             string        `jsonapi:"primary,catalog_checklist_templates"`
-	Name           string        `jsonapi:"attr,name,omitempty"`
-	Slug           string        `jsonapi:"attr,slug,omitempty"`
-	Description    string        `jsonapi:"attr,description,omitempty"`
-	CatalogType    string        `jsonapi:"attr,catalog_type,omitempty"`
-	ScopeType      string        `jsonapi:"attr,scope_type,omitempty"`
-	ScopeId        string        `jsonapi:"attr,scope_id,omitempty"`
-	TemplateFields []interface{} `jsonapi:"attr,template_fields,omitempty"`
-	TemplateOwners []interface{} `jsonapi:"attr,template_owners,omitempty"`
+	ID          string        `jsonapi:"primary,catalog_checklist_templates"`
+	Name        string        `jsonapi:"attr,name,omitempty"`
+	Slug        string        `jsonapi:"attr,slug,omitempty"`
+	Description string        `jsonapi:"attr,description,omitempty"`
+	CatalogType string        `jsonapi:"attr,catalog_type,omitempty"`
+	ScopeType   string        `jsonapi:"attr,scope_type,omitempty"`
+	ScopeId     string        `jsonapi:"attr,scope_id,omitempty"`
+	Fields      []interface{} `jsonapi:"attr,fields,omitempty"`
+	Owners      []interface{} `jsonapi:"attr,owners,omitempty"`
 }
 
 func (c *Client) ListCatalogChecklistTemplates(params *rootlygo.ListCatalogChecklistTemplatesParams) ([]interface{}, error) {

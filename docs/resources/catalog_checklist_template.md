@@ -17,78 +17,38 @@ description: |-
 ### Required
 
 - `name` (String) The name of the checklist template
-- `scope_id` (String) The scope ID
 
 ### Optional
 
 - `catalog_type` (String) The catalog type. Value must be one of `Service`, `Functionality`, `Environment`, `Group`, `Cause`, `IncidentType`, `Catalog`.
 - `description` (String) The description of the checklist template
+- `fields` (Block List) Template fields in position order (see [below for nested schema](#nestedblock--fields))
+- `owners` (Block List) Template owners (see [below for nested schema](#nestedblock--owners))
+- `scope_id` (String) The scope ID
 - `scope_type` (String) The scope type. Value must be one of `Team`, `Catalog`.
 - `slug` (String) The slug of the checklist template
-- `template_fields` (Block List) Template fields (see [below for nested schema](#nestedblock--template_fields))
-- `template_owners` (Block List) Template owners (see [below for nested schema](#nestedblock--template_owners))
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
 
-<a id="nestedblock--template_fields"></a>
-### Nested Schema for `template_fields`
+<a id="nestedblock--fields"></a>
+### Nested Schema for `fields`
 
 Optional:
 
-- `data` (Block List, Max: 1) (see [below for nested schema](#nestedblock--template_fields--data))
-
-<a id="nestedblock--template_fields--data"></a>
-### Nested Schema for `template_fields.data`
-
-Optional:
-
-- `attributes` (Block List, Max: 1) (see [below for nested schema](#nestedblock--template_fields--data--attributes))
-- `id` (String) ID of the template field
-- `type` (String) Value must be one of `catalog_checklist_template_fields`.
-
-<a id="nestedblock--template_fields--data--attributes"></a>
-### Nested Schema for `template_fields.data.attributes`
-
-Optional:
-
-- `catalog_field_id` (String) ID of the catalog field
-- `created_at` (String) Date of creation
+- `catalog_property_id` (String) ID of the catalog property for custom fields
 - `field_key` (String) Key identifying the field
 - `field_source` (String) Source of the field. Value must be one of `builtin`, `custom`.
-- `position` (Number) Position of the field
-- `updated_at` (String) Date of last update
 
 
-
-
-<a id="nestedblock--template_owners"></a>
-### Nested Schema for `template_owners`
+<a id="nestedblock--owners"></a>
+### Nested Schema for `owners`
 
 Optional:
 
-- `data` (Block List, Max: 1) (see [below for nested schema](#nestedblock--template_owners--data))
-
-<a id="nestedblock--template_owners--data"></a>
-### Nested Schema for `template_owners.data`
-
-Optional:
-
-- `attributes` (Block List, Max: 1) (see [below for nested schema](#nestedblock--template_owners--data--attributes))
-- `id` (String) ID of the template owner
-- `type` (String) Value must be one of `catalog_checklist_template_owners`.
-
-<a id="nestedblock--template_owners--data--attributes"></a>
-### Nested Schema for `template_owners.data.attributes`
-
-Optional:
-
-- `created_at` (String) Date of creation
-- `owner_field_key` (String) Field key for field-based owners
-- `owner_type` (String) Type of owner. Value must be one of `field`, `user`.
-- `owner_user_id` (Number) User ID for user-based owners
-- `updated_at` (String) Date of last update
+- `id` (String) User ID for user owners, or field key for field owners
+- `type` (String) Type of owner. Value must be one of `field`, `user`.
 
 ## Import
 

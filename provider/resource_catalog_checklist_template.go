@@ -85,16 +85,16 @@ func resourceCatalogChecklistTemplate() *schema.Resource {
 
 			"scope_id": &schema.Schema{
 				Type:        schema.TypeString,
-				Computed:    false,
-				Required:    true,
-				Optional:    false,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
 				Description: "The scope ID",
 			},
 
-			"template_fields": &schema.Schema{
+			"fields": &schema.Schema{
 				Type:             schema.TypeList,
 				Computed:         false,
 				Required:         false,
@@ -102,139 +102,49 @@ func resourceCatalogChecklistTemplate() *schema.Resource {
 				Sensitive:        false,
 				ForceNew:         false,
 				WriteOnly:        false,
-				Description:      "Template fields",
+				Description:      "Template fields in position order",
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
-						"data": &schema.Schema{
-							Type:        schema.TypeList,
+						"field_source": &schema.Schema{
+							Type:         schema.TypeString,
+							Default:      "builtin",
+							Required:     false,
+							Optional:     true,
+							Sensitive:    false,
+							ForceNew:     false,
+							WriteOnly:    false,
+							Description:  "Source of the field. Value must be one of `builtin`, `custom`.",
+							ValidateFunc: validation.StringInSlice([]string{"builtin", "custom"}, false),
+						},
+
+						"field_key": &schema.Schema{
+							Type:        schema.TypeString,
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
 							Sensitive:   false,
 							ForceNew:    false,
 							WriteOnly:   false,
-							Description: "",
-							MinItems:    0,
-							MaxItems:    1,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
+							Description: "Key identifying the field",
+						},
 
-									"id": &schema.Schema{
-										Type:        schema.TypeString,
-										Computed:    true,
-										Required:    false,
-										Optional:    true,
-										Sensitive:   false,
-										ForceNew:    false,
-										WriteOnly:   false,
-										Description: "ID of the template field",
-									},
-
-									"type": &schema.Schema{
-										Type:         schema.TypeString,
-										Default:      "catalog_checklist_template_fields",
-										Required:     false,
-										Optional:     true,
-										Sensitive:    false,
-										ForceNew:     false,
-										WriteOnly:    false,
-										Description:  "Value must be one of `catalog_checklist_template_fields`.",
-										ValidateFunc: validation.StringInSlice([]string{"catalog_checklist_template_fields"}, false),
-									},
-
-									"attributes": &schema.Schema{
-										Type:        schema.TypeList,
-										Computed:    true,
-										Required:    false,
-										Optional:    true,
-										Sensitive:   false,
-										ForceNew:    false,
-										WriteOnly:   false,
-										Description: "",
-										MinItems:    0,
-										MaxItems:    1,
-										Elem: &schema.Resource{
-											Schema: map[string]*schema.Schema{
-
-												"field_source": &schema.Schema{
-													Type:         schema.TypeString,
-													Default:      "builtin",
-													Required:     false,
-													Optional:     true,
-													Sensitive:    false,
-													ForceNew:     false,
-													WriteOnly:    false,
-													Description:  "Source of the field. Value must be one of `builtin`, `custom`.",
-													ValidateFunc: validation.StringInSlice([]string{"builtin", "custom"}, false),
-												},
-
-												"field_key": &schema.Schema{
-													Type:        schema.TypeString,
-													Computed:    true,
-													Required:    false,
-													Optional:    true,
-													Sensitive:   false,
-													ForceNew:    false,
-													WriteOnly:   false,
-													Description: "Key identifying the field",
-												},
-
-												"position": &schema.Schema{
-													Type:        schema.TypeInt,
-													Computed:    true,
-													Required:    false,
-													Optional:    true,
-													Sensitive:   false,
-													ForceNew:    false,
-													WriteOnly:   false,
-													Description: "Position of the field",
-												},
-
-												"catalog_field_id": &schema.Schema{
-													Type:        schema.TypeString,
-													Computed:    true,
-													Required:    false,
-													Optional:    true,
-													Sensitive:   false,
-													ForceNew:    false,
-													WriteOnly:   false,
-													Description: "ID of the catalog field",
-												},
-
-												"created_at": &schema.Schema{
-													Type:        schema.TypeString,
-													Computed:    true,
-													Required:    false,
-													Optional:    true,
-													Sensitive:   false,
-													ForceNew:    false,
-													WriteOnly:   false,
-													Description: "Date of creation",
-												},
-
-												"updated_at": &schema.Schema{
-													Type:        schema.TypeString,
-													Computed:    true,
-													Required:    false,
-													Optional:    true,
-													Sensitive:   false,
-													ForceNew:    false,
-													WriteOnly:   false,
-													Description: "Date of last update",
-												},
-											},
-										},
-									},
-								},
-							},
+						"catalog_property_id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "ID of the catalog property for custom fields",
 						},
 					},
 				},
 			},
 
-			"template_owners": &schema.Schema{
+			"owners": &schema.Schema{
 				Type:             schema.TypeList,
 				Computed:         false,
 				Required:         false,
@@ -247,117 +157,27 @@ func resourceCatalogChecklistTemplate() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
-						"data": &schema.Schema{
-							Type:        schema.TypeList,
+						"id": &schema.Schema{
+							Type:        schema.TypeString,
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
 							Sensitive:   false,
 							ForceNew:    false,
 							WriteOnly:   false,
-							Description: "",
-							MinItems:    0,
-							MaxItems:    1,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
+							Description: "User ID for user owners, or field key for field owners",
+						},
 
-									"id": &schema.Schema{
-										Type:        schema.TypeString,
-										Computed:    true,
-										Required:    false,
-										Optional:    true,
-										Sensitive:   false,
-										ForceNew:    false,
-										WriteOnly:   false,
-										Description: "ID of the template owner",
-									},
-
-									"type": &schema.Schema{
-										Type:         schema.TypeString,
-										Default:      "catalog_checklist_template_owners",
-										Required:     false,
-										Optional:     true,
-										Sensitive:    false,
-										ForceNew:     false,
-										WriteOnly:    false,
-										Description:  "Value must be one of `catalog_checklist_template_owners`.",
-										ValidateFunc: validation.StringInSlice([]string{"catalog_checklist_template_owners"}, false),
-									},
-
-									"attributes": &schema.Schema{
-										Type:        schema.TypeList,
-										Computed:    true,
-										Required:    false,
-										Optional:    true,
-										Sensitive:   false,
-										ForceNew:    false,
-										WriteOnly:   false,
-										Description: "",
-										MinItems:    0,
-										MaxItems:    1,
-										Elem: &schema.Resource{
-											Schema: map[string]*schema.Schema{
-
-												"owner_type": &schema.Schema{
-													Type:         schema.TypeString,
-													Default:      "field",
-													Required:     false,
-													Optional:     true,
-													Sensitive:    false,
-													ForceNew:     false,
-													WriteOnly:    false,
-													Description:  "Type of owner. Value must be one of `field`, `user`.",
-													ValidateFunc: validation.StringInSlice([]string{"field", "user"}, false),
-												},
-
-												"owner_field_key": &schema.Schema{
-													Type:        schema.TypeString,
-													Computed:    true,
-													Required:    false,
-													Optional:    true,
-													Sensitive:   false,
-													ForceNew:    false,
-													WriteOnly:   false,
-													Description: "Field key for field-based owners",
-												},
-
-												"owner_user_id": &schema.Schema{
-													Type:        schema.TypeInt,
-													Computed:    true,
-													Required:    false,
-													Optional:    true,
-													Sensitive:   false,
-													ForceNew:    false,
-													WriteOnly:   false,
-													Description: "User ID for user-based owners",
-												},
-
-												"created_at": &schema.Schema{
-													Type:        schema.TypeString,
-													Computed:    true,
-													Required:    false,
-													Optional:    true,
-													Sensitive:   false,
-													ForceNew:    false,
-													WriteOnly:   false,
-													Description: "Date of creation",
-												},
-
-												"updated_at": &schema.Schema{
-													Type:        schema.TypeString,
-													Computed:    true,
-													Required:    false,
-													Optional:    true,
-													Sensitive:   false,
-													ForceNew:    false,
-													WriteOnly:   false,
-													Description: "Date of last update",
-												},
-											},
-										},
-									},
-								},
-							},
+						"type": &schema.Schema{
+							Type:         schema.TypeString,
+							Default:      "field",
+							Required:     false,
+							Optional:     true,
+							Sensitive:    false,
+							ForceNew:     false,
+							WriteOnly:    false,
+							Description:  "Type of owner. Value must be one of `field`, `user`.",
+							ValidateFunc: validation.StringInSlice([]string{"field", "user"}, false),
 						},
 					},
 				},
@@ -391,11 +211,11 @@ func resourceCatalogChecklistTemplateCreate(ctx context.Context, d *schema.Resou
 	if value, ok := d.GetOkExists("scope_id"); ok {
 		s.ScopeId = value.(string)
 	}
-	if value, ok := d.GetOkExists("template_fields"); ok {
-		s.TemplateFields = value.([]interface{})
+	if value, ok := d.GetOkExists("fields"); ok {
+		s.Fields = value.([]interface{})
 	}
-	if value, ok := d.GetOkExists("template_owners"); ok {
-		s.TemplateOwners = value.([]interface{})
+	if value, ok := d.GetOkExists("owners"); ok {
+		s.Owners = value.([]interface{})
 	}
 
 	res, err := c.CreateCatalogChecklistTemplate(s)
@@ -433,40 +253,43 @@ func resourceCatalogChecklistTemplateRead(ctx context.Context, d *schema.Resourc
 	d.Set("scope_type", item.ScopeType)
 	d.Set("scope_id", item.ScopeId)
 
-	if item.TemplateFields != nil {
-		processed_items_template_fields := make([]map[string]interface{}, 0)
+	if item.Fields != nil {
+		processed_items_fields := make([]map[string]interface{}, 0)
 
-		for _, c := range item.TemplateFields {
+		for _, c := range item.Fields {
 			if rawItem, ok := c.(map[string]interface{}); ok {
 				// Create a new map with only the fields defined in the schema
-				processed_item_template_fields := map[string]interface{}{
-					"data": rawItem["data"],
+				processed_item_fields := map[string]interface{}{
+					"field_source":        rawItem["field_source"],
+					"field_key":           rawItem["field_key"],
+					"catalog_property_id": rawItem["catalog_property_id"],
 				}
-				processed_items_template_fields = append(processed_items_template_fields, processed_item_template_fields)
+				processed_items_fields = append(processed_items_fields, processed_item_fields)
 			}
 		}
 
-		d.Set("template_fields", processed_items_template_fields)
+		d.Set("fields", processed_items_fields)
 	} else {
-		d.Set("template_fields", nil)
+		d.Set("fields", nil)
 	}
 
-	if item.TemplateOwners != nil {
-		processed_items_template_owners := make([]map[string]interface{}, 0)
+	if item.Owners != nil {
+		processed_items_owners := make([]map[string]interface{}, 0)
 
-		for _, c := range item.TemplateOwners {
+		for _, c := range item.Owners {
 			if rawItem, ok := c.(map[string]interface{}); ok {
 				// Create a new map with only the fields defined in the schema
-				processed_item_template_owners := map[string]interface{}{
-					"data": rawItem["data"],
+				processed_item_owners := map[string]interface{}{
+					"id":   rawItem["id"],
+					"type": rawItem["type"],
 				}
-				processed_items_template_owners = append(processed_items_template_owners, processed_item_template_owners)
+				processed_items_owners = append(processed_items_owners, processed_item_owners)
 			}
 		}
 
-		d.Set("template_owners", processed_items_template_owners)
+		d.Set("owners", processed_items_owners)
 	} else {
-		d.Set("template_owners", nil)
+		d.Set("owners", nil)
 	}
 
 	return nil
@@ -497,19 +320,19 @@ func resourceCatalogChecklistTemplateUpdate(ctx context.Context, d *schema.Resou
 		s.ScopeId = d.Get("scope_id").(string)
 	}
 
-	if d.HasChange("template_fields") {
-		if value, ok := d.GetOk("template_fields"); value != nil && ok {
-			s.TemplateFields = value.([]interface{})
+	if d.HasChange("fields") {
+		if value, ok := d.GetOk("fields"); value != nil && ok {
+			s.Fields = value.([]interface{})
 		} else {
-			s.TemplateFields = []interface{}{}
+			s.Fields = []interface{}{}
 		}
 	}
 
-	if d.HasChange("template_owners") {
-		if value, ok := d.GetOk("template_owners"); value != nil && ok {
-			s.TemplateOwners = value.([]interface{})
+	if d.HasChange("owners") {
+		if value, ok := d.GetOk("owners"); value != nil && ok {
+			s.Owners = value.([]interface{})
 		} else {
-			s.TemplateOwners = []interface{}{}
+			s.Owners = []interface{}{}
 		}
 	}
 
