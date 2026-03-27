@@ -95,6 +95,7 @@ ${resources
 				"rootly_override_shift": resourceOverrideShift(),
 				"rootly_schedule": resourceSchedule(),
 				"rootly_schedule_rotation": resourceScheduleRotation(),
+				"rootly_catalog_property": resourceCatalogProperty(),
 				"rootly_secret": resourceSecret(),
 				"rootly_workflow_incident": resourceWorkflowIncident(),
 				"rootly_workflow_action_item": resourceWorkflowActionItem(),

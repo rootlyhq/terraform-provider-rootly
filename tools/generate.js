@@ -19,10 +19,9 @@ const excluded = {
     "alert_event",
     "alert_route",
     "alerts_source", // manual change: retry logic for eventual consistency on list queries
-    "catalog",
     "catalog_field",
-    "catalog_entity",
-    "catalog_entity_property",
+    "catalog_entity_checklist", // read-only API; Get uses UUID type, no create/update/delete
+    "catalog_entity_property", // covered by catalog_entity properties field
     "communications_group",
     "custom_field_option",
     "custom_field",
@@ -62,11 +61,10 @@ const excluded = {
     "audit",
     "edge_connector",
     "edge_connector_action",
-    "catalog",
     "catalog_field",
-    "catalog_entity",
-    "catalog_entity_property",
-    "catalog_property",
+    "catalog_entity_checklist", // read-only API; no create/update/delete endpoints; Get uses UUID type
+    "catalog_entity_property", // covered by catalog_entity properties field
+    "catalog_property", // manually implemented; create/list route varies by catalog_type
     "communications_group",
     "communications_template", // cannot auto-generate because of custom nested JSON:API format handling (IR-3529)
     "custom_field_option",

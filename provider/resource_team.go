@@ -421,6 +421,44 @@ func resourceTeam() *schema.Resource {
 				WriteOnly:   false,
 				Description: "Auto add members to incident channel when team is attached. Value must be one of true or false",
 			},
+
+			"properties": &schema.Schema{
+				Type:             schema.TypeList,
+				Computed:         false,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Array of property values for this team.",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+
+						"catalog_property_id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "Catalog property ID",
+						},
+
+						"value": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "The property value",
+						},
+					},
+				},
+			},
 		},
 	}
 }
@@ -514,6 +552,9 @@ func resourceTeamCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	}
 	if value, ok := d.GetOkExists("auto_add_members_when_attached"); ok {
 		s.AutoAddMembersWhenAttached = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("properties"); ok {
+		s.Properties = value.([]interface{})
 	}
 
 	res, err := c.CreateTeam(s)
@@ -620,6 +661,25 @@ func resourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	d.Set("incident_broadcast_channel", singleton_list_incident_broadcast_channel)
 
 	d.Set("auto_add_members_when_attached", item.AutoAddMembersWhenAttached)
+
+	if item.Properties != nil {
+		processed_items_properties := make([]map[string]interface{}, 0)
+
+		for _, c := range item.Properties {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processed_item_properties := map[string]interface{}{
+					"catalog_property_id": rawItem["catalog_property_id"],
+					"value":               rawItem["value"],
+				}
+				processed_items_properties = append(processed_items_properties, processed_item_properties)
+			}
+		}
+
+		d.Set("properties", processed_items_properties)
+	} else {
+		d.Set("properties", nil)
+	}
 
 	return nil
 }
@@ -740,6 +800,14 @@ func resourceTeamUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 
 	if d.HasChange("auto_add_members_when_attached") {
 		s.AutoAddMembersWhenAttached = tools.Bool(d.Get("auto_add_members_when_attached").(bool))
+	}
+
+	if d.HasChange("properties") {
+		if value, ok := d.GetOk("properties"); value != nil && ok {
+			s.Properties = value.([]interface{})
+		} else {
+			s.Properties = []interface{}{}
+		}
 	}
 
 	_, err := c.UpdateTeam(d.Id(), s)

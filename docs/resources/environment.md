@@ -80,6 +80,7 @@ resource "rootly_environment" "production" {
 - `description` (String) The description of the environment
 - `notify_emails` (List of String) Emails attached to the environment
 - `position` (Number) Position of the environment
+- `properties` (Block List) Array of property values for this environment. (see [below for nested schema](#nestedblock--properties))
 - `slack_aliases` (Block List) Slack Aliases associated with this environment (see [below for nested schema](#nestedblock--slack_aliases))
 - `slack_channels` (Block List) Slack Channels associated with this environment (see [below for nested schema](#nestedblock--slack_channels))
 - `slug` (String) The slug of the environment
@@ -87,6 +88,15 @@ resource "rootly_environment" "production" {
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--properties"></a>
+### Nested Schema for `properties`
+
+Optional:
+
+- `catalog_property_id` (String) Catalog property ID
+- `value` (String) The property value
+
 
 <a id="nestedblock--slack_aliases"></a>
 ### Nested Schema for `slack_aliases`

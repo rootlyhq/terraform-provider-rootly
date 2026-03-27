@@ -32,6 +32,7 @@ type Functionality struct {
 	OwnerUserIds      []interface{} `jsonapi:"attr,owner_user_ids,omitempty"`
 	SlackChannels     []interface{} `jsonapi:"attr,slack_channels,omitempty"`
 	SlackAliases      []interface{} `jsonapi:"attr,slack_aliases,omitempty"`
+	Properties        []interface{} `jsonapi:"attr,properties,omitempty"`
 }
 
 func (c *Client) ListFunctionalities(params *rootlygo.ListFunctionalitiesParams) ([]interface{}, error) {

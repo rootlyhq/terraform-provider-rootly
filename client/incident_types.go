@@ -20,6 +20,7 @@ type IncidentType struct {
 	NotifyEmails  []interface{} `jsonapi:"attr,notify_emails,omitempty"`
 	SlackChannels []interface{} `jsonapi:"attr,slack_channels,omitempty"`
 	SlackAliases  []interface{} `jsonapi:"attr,slack_aliases,omitempty"`
+	Properties    []interface{} `jsonapi:"attr,properties,omitempty"`
 }
 
 func (c *Client) ListIncidentTypes(params *rootlygo.ListIncidentTypesParams) ([]interface{}, error) {
