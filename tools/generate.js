@@ -118,20 +118,20 @@ const readOnlyCollections = [
 function main() {
   if (filterResource) {
     console.log(`Generating code for resource: ${filterResource}`);
-    if (resources().includes(filterResource)) {
+    const isResource = resources().includes(filterResource);
+    const isDataSource = dataSources().includes(filterResource);
+    if (isResource || isDataSource) {
       if (readOnlyCollections.includes(filterResource)) {
         generateReadOnlyClient(filterResource);
       } else {
         generateClient(filterResource);
       }
-      generateResource(filterResource);
-    } else if (dataSources().includes(filterResource)) {
-      if (readOnlyCollections.includes(filterResource)) {
-        generateReadOnlyClient(filterResource);
-      } else {
-        generateClient(filterResource);
+      if (isResource) {
+        generateResource(filterResource);
       }
-      generateDataSource(filterResource);
+      if (isDataSource) {
+        generateDataSource(filterResource);
+      }
     } else {
       console.error(`Error: Resource '${filterResource}' not found in resources or data sources`);
       console.error(`Available resources: ${resources().slice(0, 10).join(', ')}...`);

@@ -141,7 +141,20 @@ function processPathParametersAnyOf(paths) {
   }
 }
 
+// Fix SLA operationIds: API uses uppercase "SLA" but codegen expects "Sla"
+function fixSlaOperationIds(paths) {
+  Object.keys(paths).forEach(path => {
+    Object.keys(paths[path]).forEach(method => {
+      const op = paths[path][method];
+      if (op && op.operationId) {
+        op.operationId = op.operationId.replace(/SLAs/, "Slas").replace(/SLA/, "Sla");
+      }
+    });
+  });
+}
+
 fixFilterParameterTypes(swagger.paths);
+fixSlaOperationIds(swagger.paths);
 stripAnyOf(swagger.components.schemas);
 combineOneOf(swagger.components.schemas);
 processPathParametersAnyOf(swagger.paths);
