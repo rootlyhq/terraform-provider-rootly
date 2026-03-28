@@ -22,11 +22,20 @@ description: |-
 
 - `description` (String) The description of the cause
 - `position` (Number) Position of the cause
+- `properties` (Block List) Array of property values for this cause. (see [below for nested schema](#nestedblock--properties))
 - `slug` (String) The slug of the cause
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--properties"></a>
+### Nested Schema for `properties`
+
+Optional:
+
+- `catalog_property_id` (String) Catalog property ID
+- `value` (String) The property value
 
 ## Import
 

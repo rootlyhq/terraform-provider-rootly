@@ -83,6 +83,7 @@ resource "rootly_service" "customer_postgresql_prod" {
 - `owner_user_ids` (List of Number) Owner Users associated with this service
 - `pagerduty_id` (String) The PagerDuty service id associated to this service
 - `position` (Number) Position of the service
+- `properties` (Block List) Array of property values for this service. (see [below for nested schema](#nestedblock--properties))
 - `public_description` (String) The public description of the service
 - `service_ids` (List of String) Services dependent on this service
 - `service_now_ci_sys_id` (String) The Service Now CI sys id associated to this service
@@ -110,6 +111,15 @@ Optional:
 
 - `id` (String) Slack channel ID
 - `name` (String) Slack channel name
+
+
+<a id="nestedblock--properties"></a>
+### Nested Schema for `properties`
+
+Optional:
+
+- `catalog_property_id` (String) Catalog property ID
+- `value` (String) The property value
 
 
 <a id="nestedblock--slack_aliases"></a>

@@ -58,8 +58,8 @@ func resourceFormField() *schema.Resource {
 				Sensitive:    false,
 				ForceNew:     false,
 				WriteOnly:    false,
-				Description:  "The value kind of the form field. Value must be one of `inherit`, `group`, `service`, `functionality`, `user`, `catalog_entity`.",
-				ValidateFunc: validation.StringInSlice([]string{"inherit", "group", "service", "functionality", "user", "catalog_entity"}, false),
+				Description:  "The value kind of the form field. Value must be one of `inherit`, `group`, `service`, `functionality`, `user`, `catalog_entity`, `environment`, `cause`, `incident_type`.",
+				ValidateFunc: validation.StringInSlice([]string{"inherit", "group", "service", "functionality", "user", "catalog_entity", "environment", "cause", "incident_type"}, false),
 			},
 
 			"value_kind_catalog_id": &schema.Schema{
@@ -170,6 +170,17 @@ func resourceFormField() *schema.Resource {
 				WriteOnly:        false,
 				Description:      "",
 			},
+
+			"auto_set_by_catalog_property_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Catalog property ID to auto-set this form field. Only reference-kind catalog properties are supported.",
+			},
 		},
 	}
 }
@@ -217,6 +228,9 @@ func resourceFormFieldCreate(ctx context.Context, d *schema.ResourceData, meta i
 	if value, ok := d.GetOkExists("default_values"); ok {
 		s.DefaultValues = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("auto_set_by_catalog_property_id"); ok {
+		s.AutoSetByCatalogPropertyId = value.(string)
+	}
 
 	res, err := c.CreateFormField(s)
 	if err != nil {
@@ -258,6 +272,7 @@ func resourceFormFieldRead(ctx context.Context, d *schema.ResourceData, meta int
 	d.Set("show_on_incident_details", item.ShowOnIncidentDetails)
 	d.Set("enabled", item.Enabled)
 	d.Set("default_values", item.DefaultValues)
+	d.Set("auto_set_by_catalog_property_id", item.AutoSetByCatalogPropertyId)
 
 	return nil
 }
@@ -319,6 +334,10 @@ func resourceFormFieldUpdate(ctx context.Context, d *schema.ResourceData, meta i
 		} else {
 			s.DefaultValues = []interface{}{}
 		}
+	}
+
+	if d.HasChange("auto_set_by_catalog_property_id") {
+		s.AutoSetByCatalogPropertyId = d.Get("auto_set_by_catalog_property_id").(string)
 	}
 
 	_, err := c.UpdateFormField(d.Id(), s)

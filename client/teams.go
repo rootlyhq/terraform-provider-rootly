@@ -39,6 +39,7 @@ type Team struct {
 	IncidentBroadcastEnabled   *bool                  `jsonapi:"attr,incident_broadcast_enabled,omitempty"`
 	IncidentBroadcastChannel   map[string]interface{} `jsonapi:"attr,incident_broadcast_channel,omitempty"`
 	AutoAddMembersWhenAttached *bool                  `jsonapi:"attr,auto_add_members_when_attached,omitempty"`
+	Properties                 []interface{}          `jsonapi:"attr,properties,omitempty"`
 }
 
 func (c *Client) ListTeams(params *rootlygo.ListTeamsParams) ([]interface{}, error) {

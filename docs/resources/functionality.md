@@ -71,6 +71,7 @@ resource "rootly_functionality" "logging_in" {
 - `owner_user_ids` (List of Number) Owner Users associated with this functionality
 - `pagerduty_id` (String) The PagerDuty service id associated to this functionality
 - `position` (Number) Position of the functionality
+- `properties` (Block List) Array of property values for this functionality. (see [below for nested schema](#nestedblock--properties))
 - `public_description` (String) The public description of the functionality
 - `service_ids` (List of String) Services associated with this functionality
 - `service_now_ci_sys_id` (String) The Service Now CI sys id associated to this functionality
@@ -81,6 +82,15 @@ resource "rootly_functionality" "logging_in" {
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--properties"></a>
+### Nested Schema for `properties`
+
+Optional:
+
+- `catalog_property_id` (String) Catalog property ID
+- `value` (String) The property value
+
 
 <a id="nestedblock--slack_aliases"></a>
 ### Nested Schema for `slack_aliases`

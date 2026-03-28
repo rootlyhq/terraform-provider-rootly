@@ -512,6 +512,44 @@ func resourceService() *schema.Resource {
 					},
 				},
 			},
+
+			"properties": &schema.Schema{
+				Type:             schema.TypeList,
+				Computed:         false,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Array of property values for this service.",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+
+						"catalog_property_id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "Catalog property ID",
+						},
+
+						"value": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "The property value",
+						},
+					},
+				},
+			},
 		},
 	}
 }
@@ -627,6 +665,9 @@ func resourceServiceCreate(ctx context.Context, d *schema.ResourceData, meta int
 			}
 		}
 	}
+	if value, ok := d.GetOkExists("properties"); ok {
+		s.Properties = value.([]interface{})
+	}
 
 	res, err := c.CreateService(s)
 	if err != nil {
@@ -738,6 +779,25 @@ func resourceServiceRead(ctx context.Context, d *schema.ResourceData, meta inter
 	}
 	singleton_list_incident_broadcast_channel[0] = processed_item_incident_broadcast_channel
 	d.Set("incident_broadcast_channel", singleton_list_incident_broadcast_channel)
+
+	if item.Properties != nil {
+		processed_items_properties := make([]map[string]interface{}, 0)
+
+		for _, c := range item.Properties {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processed_item_properties := map[string]interface{}{
+					"catalog_property_id": rawItem["catalog_property_id"],
+					"value":               rawItem["value"],
+				}
+				processed_items_properties = append(processed_items_properties, processed_item_properties)
+			}
+		}
+
+		d.Set("properties", processed_items_properties)
+	} else {
+		d.Set("properties", nil)
+	}
 
 	return nil
 }
@@ -887,6 +947,14 @@ func resourceServiceUpdate(ctx context.Context, d *schema.ResourceData, meta int
 		tps := d.Get("incident_broadcast_channel").([]interface{})
 		for _, tpsi := range tps {
 			s.IncidentBroadcastChannel = tpsi.(map[string]interface{})
+		}
+	}
+
+	if d.HasChange("properties") {
+		if value, ok := d.GetOk("properties"); value != nil && ok {
+			s.Properties = value.([]interface{})
+		} else {
+			s.Properties = []interface{}{}
 		}
 	}
 

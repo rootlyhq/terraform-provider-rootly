@@ -35,7 +35,7 @@ func dataSource${nameCamel}() *schema.Resource {
 				Type: schema.TypeString,
 				Computed: true,
 			},
-			${schemaFields(resourceSchema, filterParameters)}
+			${pathIdSchemaField(resourceSchema, pathIdField)}${schemaFields(resourceSchema, filterParameters, pathIdField)}
 		},
 	}
 }
@@ -197,10 +197,30 @@ function jsonapiToGoType(type) {
   }
 }
 
-function schemaFields(resourceSchema, filterParameters) {
+function pathIdSchemaField(resourceSchema, pathIdField) {
+  if (!pathIdField) return "";
+  const schema = resourceSchema.properties[pathIdField];
+  if (schema && schema.type === "number") {
+    return `
+			"${pathIdField}": &schema.Schema {
+				Type: schema.TypeInt,
+				Required: true,
+			},
+			`;
+  }
+  return `
+			"${pathIdField}": &schema.Schema {
+				Type: schema.TypeString,
+				Required: true,
+			},
+			`;
+}
+
+function schemaFields(resourceSchema, filterParameters, pathIdField) {
   return Object.keys(resourceSchema.properties)
     .filter((name) => {
       if (name === "id") return false;
+      if (pathIdField && name === pathIdField) return false;
       // Check if any filter parameter matches this schema field (handling plural/singular variants)
       return filterParameters.some((param) => {
         const filterField = filterUnderscore(param.name);
