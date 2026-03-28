@@ -602,22 +602,28 @@ func resourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	}
 
 	d.Set("alert_broadcast_enabled", item.AlertBroadcastEnabled)
-	singleton_list_alert_broadcast_channel := make([]interface{}, 1, 1)
-	processed_item_alert_broadcast_channel := map[string]interface{}{
-		"id":   item.AlertBroadcastChannel["id"],
-		"name": item.AlertBroadcastChannel["name"],
+	if item.AlertBroadcastChannel != nil && len(item.AlertBroadcastChannel) > 0 {
+		d.Set("alert_broadcast_channel", []interface{}{
+			map[string]interface{}{
+				"id":   item.AlertBroadcastChannel["id"],
+				"name": item.AlertBroadcastChannel["name"],
+			},
+		})
+	} else {
+		d.Set("alert_broadcast_channel", []interface{}{})
 	}
-	singleton_list_alert_broadcast_channel[0] = processed_item_alert_broadcast_channel
-	d.Set("alert_broadcast_channel", singleton_list_alert_broadcast_channel)
 
 	d.Set("incident_broadcast_enabled", item.IncidentBroadcastEnabled)
-	singleton_list_incident_broadcast_channel := make([]interface{}, 1, 1)
-	processed_item_incident_broadcast_channel := map[string]interface{}{
-		"id":   item.IncidentBroadcastChannel["id"],
-		"name": item.IncidentBroadcastChannel["name"],
+	if item.IncidentBroadcastChannel != nil && len(item.IncidentBroadcastChannel) > 0 {
+		d.Set("incident_broadcast_channel", []interface{}{
+			map[string]interface{}{
+				"id":   item.IncidentBroadcastChannel["id"],
+				"name": item.IncidentBroadcastChannel["name"],
+			},
+		})
+	} else {
+		d.Set("incident_broadcast_channel", []interface{}{})
 	}
-	singleton_list_incident_broadcast_channel[0] = processed_item_incident_broadcast_channel
-	d.Set("incident_broadcast_channel", singleton_list_incident_broadcast_channel)
 
 	d.Set("auto_add_members_when_attached", item.AutoAddMembersWhenAttached)
 
