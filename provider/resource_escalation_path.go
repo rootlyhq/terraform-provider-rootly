@@ -248,12 +248,13 @@ func resourceEscalationPath() *schema.Resource {
 						},
 
 						"time_zone": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "Time zone for the deferral window. Only used with `deferral_window` rule type.",
+							Type:         schema.TypeString,
+							Computed:     true,
+							Required:     false,
+							Optional:     true,
+							ForceNew:     false,
+							Description:  "Time zone for the deferral window (IANA format, e.g. `America/New_York`). Only used with `deferral_window` rule type.",
+							ValidateFunc: validation.StringInSlice(IANATimeZones, false),
 						},
 
 						"time_blocks": &schema.Schema{
