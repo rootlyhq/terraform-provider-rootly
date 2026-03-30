@@ -1,5 +1,24 @@
 # Changelog
 
+## [5.6.0] -- 2025-3-30
+
+### Added
+- New workflow tasks: `workflow_task_create_jsmops_alert`, `workflow_task_page_jsmops_on_call_responders`, `workflow_task_add_microsoft_teams_chat_tab`, `workflow_task_send_microsoft_teams_chat_message`
+- New data sources: `custom_fields`, `custom_field_options`, `incident_roles`, `incident_sub_status`, `sub_status`
+- New attributes on existing resources from schema updates (GitHub issue tasks, Rootly on-call paging, workflow form field conditions, etc.)
+
+### Fixed
+- `make docs` now works correctly when run from directories not named `terraform-provider-rootly` by using `--provider-name` and `--rendered-provider-name` flags
+
+### Removed
+- `alert_route` resource and data source (use `alert_routing_rule` instead)
+- `alert_group` resource
+- `communications_template` resource
+- `live_call_router` resource
+- `status_page` resource
+- `team` resource
+- `incident` data source
+
 ## [5.5.0] -- 2025-1-29
 
 ### Added
