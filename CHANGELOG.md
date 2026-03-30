@@ -10,15 +10,6 @@
 ### Fixed
 - `make docs` now works correctly when run from directories not named `terraform-provider-rootly` by using `--provider-name` and `--rendered-provider-name` flags
 
-### Removed
-- `alert_route` resource and data source (use `alert_routing_rule` instead)
-- `alert_group` resource
-- `communications_template` resource
-- `live_call_router` resource
-- `status_page` resource
-- `team` resource
-- `incident` data source
-
 ## [5.5.0] -- 2025-1-29
 
 ### Added
