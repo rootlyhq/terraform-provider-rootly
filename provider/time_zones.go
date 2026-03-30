@@ -1,8 +1,5 @@
 package provider
 
-// RailsTimeZones contains both Rails display names and their IANA equivalents.
-// Used by fields that accept the Rails-style timezone format (e.g. time_restriction_time_zone,
-// business_hours.time_zone on escalation policies).
 var RailsTimeZones = []string{
 	"International Date Line West", "Etc/GMT+12",
 	"American Samoa", "Pacific/Pago_Pago",
