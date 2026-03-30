@@ -20,6 +20,11 @@ func dataSourceRetrospectiveProcessGroupStep() *schema.Resource {
 				Computed: true,
 			},
 
+			"retrospective_process_group_id": &schema.Schema{
+				Type:     schema.TypeString,
+				Required: true,
+			},
+
 			"retrospective_step_id": &schema.Schema{
 				Type:     schema.TypeString,
 				Computed: true,

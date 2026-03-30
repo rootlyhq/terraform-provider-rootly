@@ -20,6 +20,11 @@ func dataSourceIncidentSubStatus() *schema.Resource {
 				Computed: true,
 			},
 
+			"incident_id": &schema.Schema{
+				Type:     schema.TypeString,
+				Required: true,
+			},
+
 			"sub_status_id": &schema.Schema{
 				Type:     schema.TypeString,
 				Computed: true,

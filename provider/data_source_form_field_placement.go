@@ -22,8 +22,7 @@ func dataSourceFormFieldPlacement() *schema.Resource {
 
 			"form_field_id": &schema.Schema{
 				Type:     schema.TypeString,
-				Computed: true,
-				Optional: true,
+				Required: true,
 			},
 
 			"form": &schema.Schema{

@@ -20,6 +20,11 @@ func dataSourceFormFieldPlacementCondition() *schema.Resource {
 				Computed: true,
 			},
 
+			"form_field_placement_id": &schema.Schema{
+				Type:     schema.TypeString,
+				Required: true,
+			},
+
 			"form_field_id": &schema.Schema{
 				Type:     schema.TypeString,
 				Computed: true,
