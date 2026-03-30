@@ -154,8 +154,6 @@ var RailsTimeZones = []string{
 	"Tokelau Is.", "Pacific/Fakaofo",
 }
 
-// IANATimeZones contains only IANA standard timezone identifiers.
-// Used by fields that require the IANA format (e.g. deferral_window rule time_zone).
 var IANATimeZones = []string{
 	"Africa/Algiers",
 	"Africa/Cairo",
