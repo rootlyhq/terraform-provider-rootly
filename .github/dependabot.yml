@@ -5,6 +5,8 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 20
+    cooldown:
+      default-days: 3
     groups:
       minor-and-patch:
         applies-to: version-updates
@@ -19,3 +21,5 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 20
+    cooldown:
+      default-days: 3
