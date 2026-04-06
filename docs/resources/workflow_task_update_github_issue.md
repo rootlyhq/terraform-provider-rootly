@@ -41,8 +41,18 @@ Required:
 Optional:
 
 - `body` (String) The issue body
+- `issue_type` (Map of String) Map must contain two fields, `id` and `name`. The issue type
+- `labels` (Block List) The issue labels (see [below for nested schema](#nestedblock--task_params--labels))
 - `task_type` (String)
 - `title` (String) The issue title
+
+<a id="nestedblock--task_params--labels"></a>
+### Nested Schema for `task_params.labels`
+
+Required:
+
+- `id` (String)
+- `name` (String)
 
 ## Import
 

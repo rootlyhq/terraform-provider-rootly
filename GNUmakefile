@@ -16,7 +16,7 @@ build: codegen docs
 
 docs:
 	terraform fmt -recursive examples
-	go tool tfplugindocs
+	go tool tfplugindocs generate --provider-name rootly --rendered-provider-name terraform-provider-rootly
 	mv ./docs/data-sources/ip_ranges.md ./docs/data-sources/ip_range.md 2>/dev/null || true
 	rm -f ./docs/data-sources/ip_ranges.md
 	mv ./docs/data-sources/ip_range.md ./docs/data-sources/ip_ranges.md

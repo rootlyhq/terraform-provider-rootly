@@ -101,8 +101,8 @@ func resourceHeartbeat() *schema.Resource {
 				Sensitive:    false,
 				ForceNew:     false,
 				WriteOnly:    false,
-				Description:  "Value must be one of `minutes`, `hours`.",
-				ValidateFunc: validation.StringInSlice([]string{"minutes", "hours"}, false),
+				Description:  "Value must be one of `minutes`, `hours`, `days`.",
+				ValidateFunc: validation.StringInSlice([]string{"minutes", "hours", "days"}, false),
 			},
 
 			"notification_target_id": &schema.Schema{
@@ -154,7 +154,7 @@ func resourceHeartbeat() *schema.Resource {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Required:    false,
-				Optional:    false,
+				Optional:    true,
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
@@ -165,7 +165,7 @@ func resourceHeartbeat() *schema.Resource {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Required:    false,
-				Optional:    false,
+				Optional:    true,
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
@@ -247,6 +247,12 @@ func resourceHeartbeatCreate(ctx context.Context, d *schema.ResourceData, meta i
 	}
 	if value, ok := d.GetOkExists("status"); ok {
 		s.Status = value.(string)
+	}
+	if value, ok := d.GetOkExists("ping_url"); ok {
+		s.PingUrl = value.(string)
+	}
+	if value, ok := d.GetOkExists("secret"); ok {
+		s.Secret = value.(string)
 	}
 	if value, ok := d.GetOkExists("email_address"); ok {
 		s.EmailAddress = value.(string)
@@ -344,6 +350,12 @@ func resourceHeartbeatUpdate(ctx context.Context, d *schema.ResourceData, meta i
 	}
 	if d.HasChange("status") {
 		s.Status = d.Get("status").(string)
+	}
+	if d.HasChange("ping_url") {
+		s.PingUrl = d.Get("ping_url").(string)
+	}
+	if d.HasChange("secret") {
+		s.Secret = d.Get("secret").(string)
 	}
 	if d.HasChange("email_address") {
 		s.EmailAddress = d.Get("email_address").(string)

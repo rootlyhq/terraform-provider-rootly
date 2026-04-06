@@ -28,7 +28,7 @@ func resourceWorkflowGroup() *schema.Resource {
 
 			"kind": &schema.Schema{
 				Type:         schema.TypeString,
-				Default:      "simple",
+				Computed:     true,
 				Required:     false,
 				Optional:     true,
 				Sensitive:    false,

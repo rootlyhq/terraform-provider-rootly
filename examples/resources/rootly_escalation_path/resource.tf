@@ -133,11 +133,11 @@ resource "rootly_escalation_path" "defer_off_hours" {
     rule_type = "deferral_window"
     time_zone = "America/New_York"
     time_blocks {
-      monday    = true
-      tuesday   = true
-      wednesday = true
-      thursday  = true
-      friday    = true
+      monday     = true
+      tuesday    = true
+      wednesday  = true
+      thursday   = true
+      friday     = true
       start_time = "18:00"
       end_time   = "09:00"
     }

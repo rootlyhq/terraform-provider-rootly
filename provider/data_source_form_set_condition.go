@@ -20,6 +20,11 @@ func dataSourceFormSetCondition() *schema.Resource {
 				Computed: true,
 			},
 
+			"form_set_id": &schema.Schema{
+				Type:     schema.TypeString,
+				Required: true,
+			},
+
 			"form_field_id": &schema.Schema{
 				Type:     schema.TypeString,
 				Computed: true,

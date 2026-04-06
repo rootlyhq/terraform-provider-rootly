@@ -179,8 +179,8 @@ func resourceAlertRoutingRule() *schema.Resource {
 							Sensitive:    false,
 							ForceNew:     false,
 							WriteOnly:    false,
-							Description:  "The type of the target. Value must be one of `Service`, `Group`, `EscalationPolicy`.",
-							ValidateFunc: validation.StringInSlice([]string{"Service", "Group", "EscalationPolicy"}, false),
+							Description:  "The type of the target. Please contact support if you encounter issues using `Functionality` as a target type.. Value must be one of `Service`, `Group`, `Functionality`, `EscalationPolicy`.",
+							ValidateFunc: validation.StringInSlice([]string{"Service", "Group", "Functionality", "EscalationPolicy"}, false),
 						},
 
 						"target_id": &schema.Schema{

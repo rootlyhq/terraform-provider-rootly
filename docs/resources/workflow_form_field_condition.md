@@ -22,8 +22,11 @@ description: |-
 
 - `incident_condition` (String) The trigger condition. Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `selected_catalog_entity_ids` (List of String)
+- `selected_cause_ids` (List of String)
+- `selected_environment_ids` (List of String)
 - `selected_functionality_ids` (List of String)
 - `selected_group_ids` (List of String)
+- `selected_incident_type_ids` (List of String)
 - `selected_option_ids` (List of String)
 - `selected_service_ids` (List of String)
 - `selected_user_ids` (List of Number)

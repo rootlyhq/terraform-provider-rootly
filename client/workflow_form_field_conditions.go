@@ -22,6 +22,9 @@ type WorkflowFormFieldCondition struct {
 	SelectedOptionIds        []interface{} `jsonapi:"attr,selected_option_ids,omitempty"`
 	SelectedServiceIds       []interface{} `jsonapi:"attr,selected_service_ids,omitempty"`
 	SelectedUserIds          []interface{} `jsonapi:"attr,selected_user_ids,omitempty"`
+	SelectedCauseIds         []interface{} `jsonapi:"attr,selected_cause_ids,omitempty"`
+	SelectedEnvironmentIds   []interface{} `jsonapi:"attr,selected_environment_ids,omitempty"`
+	SelectedIncidentTypeIds  []interface{} `jsonapi:"attr,selected_incident_type_ids,omitempty"`
 }
 
 func (c *Client) ListWorkflowFormFieldConditions(id string, params *rootlygo.ListWorkflowFormFieldConditionsParams) ([]interface{}, error) {

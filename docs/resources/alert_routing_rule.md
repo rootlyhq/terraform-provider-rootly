@@ -43,7 +43,7 @@ Required:
 
 Optional:
 
-- `target_type` (String) The type of the target. Value must be one of `Service`, `Group`, `EscalationPolicy`.
+- `target_type` (String) The type of the target. Please contact support if you encounter issues using `Functionality` as a target type.. Value must be one of `Service`, `Group`, `Functionality`, `EscalationPolicy`.
 
 
 <a id="nestedblock--condition_groups"></a>
