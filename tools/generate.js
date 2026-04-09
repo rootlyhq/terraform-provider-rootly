@@ -36,6 +36,7 @@ const excluded = {
     "incident_feedback",
     "incident_form_field_selection",
     "ip_ranges",
+    "on_call_pay_report", // not exposed via Terraform
     "status",
     "post_mortem_template",
     "pulse",
@@ -83,6 +84,7 @@ const excluded = {
     "incident",
     "ip_ranges",
     "live_call_router",
+    "on_call_pay_report", // not exposed via Terraform; API has no delete endpoint
     "on_call_role",
     "override_shift",
     "post_mortem_template",
