@@ -76,7 +76,7 @@ func dataSourceSLARead(ctx context.Context, d *schema.ResourceData, meta interfa
 	// searchable immediately. Retry for a short period to let the index
 	// catch up before giving up.
 	var items []interface{}
-	err := resource.RetryContext(ctx, 30*time.Second, func() *resource.RetryError {
+	err := resource.RetryContext(ctx, 10*time.Second, func() *resource.RetryError {
 		var listErr error
 		items, listErr = c.ListSLAs(params)
 		if listErr != nil {
