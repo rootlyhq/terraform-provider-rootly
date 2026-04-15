@@ -58,7 +58,9 @@ func TestAccResourceSLA_update(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccResourceSLAUpdated(updatedName),
+				// Re-use the same role suffix as step 1 so the incident_role
+				// isn't replaced between steps (only the SLA is updated).
+				Config: testAccResourceSLAUpdated(updatedName, name),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_sla.test", "name", updatedName),
 					resource.TestCheckResourceAttr("rootly_sla.test", "description", "Updated description"),
@@ -117,14 +119,19 @@ func TestAccResourceSLA_withNotifications(t *testing.T) {
 	})
 }
 
-const testAccResourceSLAManagerRole = `
+// managerRoleConfig returns a unique incident_role block so tests that share
+// the same test binary (or previous runs that leaked roles) don't collide on
+// the "name must be unique" constraint.
+func managerRoleConfig(suffix string) string {
+	return fmt.Sprintf(`
 resource "rootly_incident_role" "test" {
-	name = "tf-test-sla-manager"
+	name = "tf-test-sla-manager-%s"
 }
-`
+`, suffix)
+}
 
 func testAccResourceSLABasic(name string) string {
-	return testAccResourceSLAManagerRole + fmt.Sprintf(`
+	return managerRoleConfig(name) + fmt.Sprintf(`
 resource "rootly_sla" "test" {
 	name                              = "%s"
 	assignment_deadline_days          = 3
@@ -136,8 +143,8 @@ resource "rootly_sla" "test" {
 `, name)
 }
 
-func testAccResourceSLAUpdated(name string) string {
-	return testAccResourceSLAManagerRole + fmt.Sprintf(`
+func testAccResourceSLAUpdated(name, roleSuffix string) string {
+	return managerRoleConfig(roleSuffix) + fmt.Sprintf(`
 resource "rootly_sla" "test" {
 	name                              = "%s"
 	description                       = "Updated description"
@@ -154,7 +161,7 @@ resource "rootly_sla" "test" {
 }
 
 func testAccResourceSLAWithConditions(name string) string {
-	return testAccResourceSLAManagerRole + fmt.Sprintf(`
+	return managerRoleConfig(name) + fmt.Sprintf(`
 resource "rootly_sla" "test" {
 	name                              = "%s"
 	assignment_deadline_days          = 2
@@ -173,7 +180,7 @@ resource "rootly_sla" "test" {
 }
 
 func testAccResourceSLAWithNotifications(name string) string {
-	return testAccResourceSLAManagerRole + fmt.Sprintf(`
+	return managerRoleConfig(name) + fmt.Sprintf(`
 resource "rootly_sla" "test" {
 	name                              = "%s"
 	assignment_deadline_days          = 3

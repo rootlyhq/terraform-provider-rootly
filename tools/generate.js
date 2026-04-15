@@ -47,6 +47,7 @@ const excluded = {
     "schedule_rotation",
     "secret",
     "shift",
+    "sla", // manual change: retry logic for eventual consistency on list queries (Searchkick index)
     "user_notification_rule",
     "webhooks_delivery",
     "workflow_run",
