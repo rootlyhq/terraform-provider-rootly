@@ -3,6 +3,7 @@ package provider
 import (
 	"fmt"
 	"testing"
+	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
@@ -16,7 +17,14 @@ func TestAccDataSourceCatalogEntity(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccDataSourceCatalogEntityConfig(rName),
+				Config: testAccDataSourceCatalogEntityResourceOnly(rName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_catalog_entity.test", "name", rName),
+				),
+			},
+			{
+				PreConfig: func() { time.Sleep(5 * time.Second) },
+				Config:    testAccDataSourceCatalogEntityWithLookup(rName),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("data.rootly_catalog_entity.test", "name", rName),
 					resource.TestCheckResourceAttrPair(
@@ -33,7 +41,20 @@ func TestAccDataSourceCatalogEntity(t *testing.T) {
 	})
 }
 
-func testAccDataSourceCatalogEntityConfig(name string) string {
+func testAccDataSourceCatalogEntityResourceOnly(name string) string {
+	return fmt.Sprintf(`
+resource "rootly_catalog" "test" {
+  name = "%s-catalog"
+}
+
+resource "rootly_catalog_entity" "test" {
+  catalog_id = rootly_catalog.test.id
+  name       = "%s"
+}
+`, name, name)
+}
+
+func testAccDataSourceCatalogEntityWithLookup(name string) string {
 	return fmt.Sprintf(`
 resource "rootly_catalog" "test" {
   name = "%s-catalog"
@@ -46,8 +67,8 @@ resource "rootly_catalog_entity" "test" {
 
 data "rootly_catalog_entity" "test" {
   catalog_id = rootly_catalog.test.id
-  name       = "%s"
+  name       = rootly_catalog_entity.test.name
   depends_on = [rootly_catalog_entity.test]
 }
-`, name, name, name)
+`, name, name)
 }
