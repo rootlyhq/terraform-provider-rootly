@@ -266,6 +266,18 @@ func resourceWorkflowAlert() *schema.Resource {
 							Description:      "",
 						},
 
+						"alert_urgency_ids": &schema.Schema{
+							Type: schema.TypeList,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "",
+						},
+
 						"alert_condition_payload": &schema.Schema{
 							Type:        schema.TypeString,
 							Default:     "ANY",
