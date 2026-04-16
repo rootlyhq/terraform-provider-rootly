@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/retry"
 )
 
-const defaultListTimeout = 60 * time.Second
+const defaultListTimeout = 10 * time.Second
 
 // ListFunc is a function that performs a list/search API call and returns
 // the results. Data source Read functions should wrap their client.List*
