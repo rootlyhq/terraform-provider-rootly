@@ -19,6 +19,8 @@ const excluded = {
     "alert_event",
     "alert_route",
     "alerts_source", // manual change: retry logic for eventual consistency on list queries
+    "catalog", // manual change: retry logic for eventual consistency on list queries (Searchkick index)
+    "catalog_entity", // manual change: retry logic for eventual consistency on list queries (Searchkick index)
     "catalog_field",
     "catalog_entity_checklist", // read-only API; Get uses UUID type, no create/update/delete
     "catalog_entity_property", // covered by catalog_entity properties field

@@ -2,13 +2,10 @@ package provider
 
 import (
 	"context"
-	"fmt"
-	"time"
-
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/polling"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
@@ -71,21 +68,8 @@ func dataSourceSLARead(ctx context.Context, d *schema.ResourceData, meta interfa
 		params.FilterCreatedAtLt = &v
 	}
 
-	// The SLA list endpoint is backed by a Searchkick index that is updated
-	// asynchronously via Sidekiq, so a newly-created SLA may not be
-	// searchable immediately. Retry for a short period to let the index
-	// catch up before giving up.
-	var items []interface{}
-	err := resource.RetryContext(ctx, 10*time.Second, func() *resource.RetryError {
-		var listErr error
-		items, listErr = c.ListSLAs(params)
-		if listErr != nil {
-			return resource.NonRetryableError(listErr)
-		}
-		if len(items) == 0 {
-			return resource.RetryableError(fmt.Errorf("sla not found, retrying..."))
-		}
-		return nil
+	items, err := polling.WaitForList(ctx, "sla", func() ([]interface{}, error) {
+		return c.ListSLAs(params)
 	})
 	if err != nil {
 		return diag.FromErr(err)
