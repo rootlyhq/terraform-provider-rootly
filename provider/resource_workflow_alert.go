@@ -266,18 +266,6 @@ func resourceWorkflowAlert() *schema.Resource {
 							Description:      "",
 						},
 
-						"alert_urgency_ids": &schema.Schema{
-							Type: schema.TypeList,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-							DiffSuppressFunc: tools.EqualIgnoringOrder,
-							Computed:         true,
-							Required:         false,
-							Optional:         true,
-							Description:      "",
-						},
-
 						"alert_condition_payload": &schema.Schema{
 							Type:        schema.TypeString,
 							Default:     "ANY",
@@ -649,6 +637,18 @@ func resourceWorkflowAlertRead(ctx context.Context, d *schema.ResourceData, meta
 			} else {
 				// Remove empty map entirely to avoid Terraform schema errors
 				delete(triggerParams, "alert_payload_conditions")
+			}
+		}
+	}
+
+	// Filter trigger_params to only include keys declared in the schema.
+	// The API may return new fields that the Terraform schema doesn't know
+	// about yet, and passing unknown keys to d.Set() causes a panic.
+	if triggerParams != nil {
+		allowedKeys := resourceWorkflowAlert().Schema["trigger_params"].Elem.(*schema.Resource).Schema
+		for k := range triggerParams {
+			if _, ok := allowedKeys[k]; !ok {
+				delete(triggerParams, k)
 			}
 		}
 	}
