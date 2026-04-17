@@ -19,6 +19,8 @@ const excluded = {
     "alert_event",
     "alert_route",
     "alerts_source", // manual change: retry logic for eventual consistency on list queries
+    "catalog", // manual change: retry logic for eventual consistency on list queries (Searchkick index)
+    "catalog_entity", // manual change: retry logic for eventual consistency on list queries (Searchkick index)
     "catalog_field",
     "catalog_entity_checklist", // read-only API; Get uses UUID type, no create/update/delete
     "catalog_entity_property", // covered by catalog_entity properties field
@@ -36,6 +38,7 @@ const excluded = {
     "incident_feedback",
     "incident_form_field_selection",
     "ip_ranges",
+    "on_call_pay_report", // not exposed via Terraform
     "status",
     "post_mortem_template",
     "pulse",
@@ -46,6 +49,7 @@ const excluded = {
     "schedule_rotation",
     "secret",
     "shift",
+    "sla", // manual change: retry logic for eventual consistency on list queries (Searchkick index)
     "user_notification_rule",
     "webhooks_delivery",
     "workflow_run",
@@ -83,6 +87,7 @@ const excluded = {
     "incident",
     "ip_ranges",
     "live_call_router",
+    "on_call_pay_report", // not exposed via Terraform; API has no delete endpoint
     "on_call_role",
     "override_shift",
     "post_mortem_template",
