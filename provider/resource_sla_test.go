@@ -241,9 +241,17 @@ func TestAccResourceSLA_example(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_sla.critical", "completion_deadline_days", "5"),
 					resource.TestCheckResourceAttr("rootly_sla.critical", "completion_skip_weekends", "false"),
 
-					// Three conditions present (order may vary from API)
-					resource.TestCheckResourceAttr("rootly_sla.critical", "conditions.#", "3"),
+					// Two built-in conditions (order may vary from API)
+					resource.TestCheckResourceAttr("rootly_sla.critical", "conditions.#", "2"),
 					resource.TestCheckResourceAttr("rootly_sla.critical", "notification_configurations.#", "3"),
+
+					// Compliance SLA with custom field contains condition
+					resource.TestCheckResourceAttr("rootly_sla.compliance", "name", suffix+"-compliance"),
+					resource.TestCheckResourceAttr("rootly_sla.compliance", "conditions.#", "1"),
+					resource.TestCheckResourceAttr("rootly_sla.compliance", "conditions.0.conditionable_type", "SLAs::CustomFieldCondition"),
+					resource.TestCheckResourceAttr("rootly_sla.compliance", "conditions.0.operator", "contains"),
+					resource.TestCheckResourceAttr("rootly_sla.compliance", "conditions.0.values.#", "1"),
+					resource.TestCheckResourceAttrSet("rootly_sla.compliance", "conditions.0.form_field_id"),
 				),
 			},
 		},
@@ -311,14 +319,6 @@ resource "rootly_sla" "critical" {
 		operator           = "is_set"
 	}
 
-	# contains: single value, custom field condition
-	conditions {
-		conditionable_type = "SLAs::CustomFieldCondition"
-		form_field_id      = rootly_form_field.region.id
-		operator           = "contains"
-		values             = ["production"]
-	}
-
 	notification_configurations {
 		offset_type = "before_due"
 		offset_days = 1
@@ -332,6 +332,24 @@ resource "rootly_sla" "critical" {
 	notification_configurations {
 		offset_type = "after_due"
 		offset_days = 1
+	}
+}
+
+# SLA with a custom field condition using the "contains" operator
+resource "rootly_sla" "compliance" {
+	name                              = "%[1]s-compliance"
+	assignment_deadline_days          = 2
+	assignment_deadline_parent_status = "started"
+	completion_deadline_days          = 5
+	completion_deadline_parent_status = "resolved"
+	manager_role_id                   = rootly_incident_role.commander.id
+
+	# contains: single value, custom field condition
+	conditions {
+		conditionable_type = "SLAs::CustomFieldCondition"
+		form_field_id      = rootly_form_field.region.id
+		operator           = "contains"
+		values             = ["production"]
 	}
 }
 `, suffix)
