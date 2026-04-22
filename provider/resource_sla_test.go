@@ -119,11 +119,18 @@ func TestAccResourceSLA_withNotifications(t *testing.T) {
 	})
 }
 
-// managerRoleConfig returns a unique incident_role block so tests that share
-// the same test binary (or previous runs that leaked roles) don't collide on
-// the "name must be unique" constraint.
-func managerRoleConfig(suffix string) string {
+// slaBaseConfig returns shared data sources (sub-statuses) and a uniquely-named
+// incident_role so tests don't collide on the "name must be unique" constraint.
+func slaBaseConfig(suffix string) string {
 	return fmt.Sprintf(`
+data "rootly_sub_status" "started" {
+	parent_status = "started"
+}
+
+data "rootly_sub_status" "resolved" {
+	parent_status = "resolved"
+}
+
 resource "rootly_incident_role" "test" {
 	name = "tf-test-sla-manager-%s"
 }
@@ -131,29 +138,33 @@ resource "rootly_incident_role" "test" {
 }
 
 func testAccResourceSLABasic(name string) string {
-	return managerRoleConfig(name) + fmt.Sprintf(`
+	return slaBaseConfig(name) + fmt.Sprintf(`
 resource "rootly_sla" "test" {
 	name                              = "%s"
 	assignment_deadline_days          = 3
 	assignment_deadline_parent_status = "started"
+	assignment_deadline_sub_status_id = data.rootly_sub_status.started.id
 	completion_deadline_days          = 7
 	completion_deadline_parent_status = "resolved"
+	completion_deadline_sub_status_id = data.rootly_sub_status.resolved.id
 	manager_role_id                   = rootly_incident_role.test.id
 }
 `, name)
 }
 
 func testAccResourceSLAUpdated(name, roleSuffix string) string {
-	return managerRoleConfig(roleSuffix) + fmt.Sprintf(`
+	return slaBaseConfig(roleSuffix) + fmt.Sprintf(`
 resource "rootly_sla" "test" {
 	name                              = "%s"
 	description                       = "Updated description"
 	condition_match_type              = "ANY"
 	assignment_deadline_days          = 5
 	assignment_deadline_parent_status = "started"
+	assignment_deadline_sub_status_id = data.rootly_sub_status.started.id
 	assignment_skip_weekends          = true
 	completion_deadline_days          = 14
 	completion_deadline_parent_status = "resolved"
+	completion_deadline_sub_status_id = data.rootly_sub_status.resolved.id
 	completion_skip_weekends          = true
 	manager_role_id                   = rootly_incident_role.test.id
 }
@@ -161,13 +172,15 @@ resource "rootly_sla" "test" {
 }
 
 func testAccResourceSLAWithConditions(name string) string {
-	return managerRoleConfig(name) + fmt.Sprintf(`
+	return slaBaseConfig(name) + fmt.Sprintf(`
 resource "rootly_sla" "test" {
 	name                              = "%s"
 	assignment_deadline_days          = 2
 	assignment_deadline_parent_status = "started"
+	assignment_deadline_sub_status_id = data.rootly_sub_status.started.id
 	completion_deadline_days          = 7
 	completion_deadline_parent_status = "resolved"
+	completion_deadline_sub_status_id = data.rootly_sub_status.resolved.id
 	manager_role_id                   = rootly_incident_role.test.id
 
 	conditions {
@@ -180,13 +193,15 @@ resource "rootly_sla" "test" {
 }
 
 func testAccResourceSLAWithNotifications(name string) string {
-	return managerRoleConfig(name) + fmt.Sprintf(`
+	return slaBaseConfig(name) + fmt.Sprintf(`
 resource "rootly_sla" "test" {
 	name                              = "%s"
 	assignment_deadline_days          = 3
 	assignment_deadline_parent_status = "started"
+	assignment_deadline_sub_status_id = data.rootly_sub_status.started.id
 	completion_deadline_days          = 7
 	completion_deadline_parent_status = "resolved"
+	completion_deadline_sub_status_id = data.rootly_sub_status.resolved.id
 	manager_role_id                   = rootly_incident_role.test.id
 
 	notification_configurations {
@@ -260,6 +275,14 @@ func TestAccResourceSLA_example(t *testing.T) {
 
 func testAccResourceSLAExample(suffix string) string {
 	return fmt.Sprintf(`
+data "rootly_sub_status" "started" {
+	parent_status = "started"
+}
+
+data "rootly_sub_status" "resolved" {
+	parent_status = "resolved"
+}
+
 resource "rootly_severity" "sev0" {
 	name     = "%[1]s-sev0"
 	severity = "low"
@@ -286,8 +309,10 @@ resource "rootly_sla" "basic" {
 	description                       = "Ensure follow-ups are assigned and completed on time"
 	assignment_deadline_days          = 3
 	assignment_deadline_parent_status = "started"
+	assignment_deadline_sub_status_id = data.rootly_sub_status.started.id
 	completion_deadline_days          = 7
 	completion_deadline_parent_status = "resolved"
+	completion_deadline_sub_status_id = data.rootly_sub_status.resolved.id
 	manager_role_id                   = rootly_incident_role.commander.id
 }
 
@@ -298,9 +323,11 @@ resource "rootly_sla" "critical" {
 	condition_match_type              = "ALL"
 	assignment_deadline_days          = 3
 	assignment_deadline_parent_status = "started"
+	assignment_deadline_sub_status_id = data.rootly_sub_status.started.id
 	assignment_skip_weekends          = false
 	completion_deadline_days          = 5
 	completion_deadline_parent_status = "resolved"
+	completion_deadline_sub_status_id = data.rootly_sub_status.resolved.id
 	completion_skip_weekends          = false
 	manager_role_id                   = rootly_incident_role.commander.id
 
@@ -340,8 +367,10 @@ resource "rootly_sla" "compliance" {
 	name                              = "%[1]s-compliance"
 	assignment_deadline_days          = 2
 	assignment_deadline_parent_status = "started"
+	assignment_deadline_sub_status_id = data.rootly_sub_status.started.id
 	completion_deadline_days          = 5
 	completion_deadline_parent_status = "resolved"
+	completion_deadline_sub_status_id = data.rootly_sub_status.resolved.id
 	manager_role_id                   = rootly_incident_role.commander.id
 
 	# contains: single value, custom field condition
