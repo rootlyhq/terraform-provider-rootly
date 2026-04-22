@@ -206,3 +206,109 @@ resource "rootly_sla" "test" {
 }
 `, name)
 }
+
+// TestAccResourceSLA_example mirrors the example in
+// examples/resources/rootly_sla/resource.tf to ensure the documented
+// configuration stays valid.
+func TestAccResourceSLA_example(t *testing.T) {
+	suffix := acctest.RandomWithPrefix("tf-test-sla-ex")
+
+	resource.UnitTest(t, resource.TestCase{
+		IsUnitTest:        false,
+		PreCheck:          func() { testAccPreCheck(t) },
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceSLAExample(suffix),
+				Check: resource.ComposeTestCheckFunc(
+					// Basic SLA
+					resource.TestCheckResourceAttr("rootly_sla.basic", "name", suffix+"-standard"),
+					resource.TestCheckResourceAttr("rootly_sla.basic", "assignment_deadline_days", "3"),
+					resource.TestCheckResourceAttr("rootly_sla.basic", "assignment_deadline_parent_status", "started"),
+					resource.TestCheckResourceAttr("rootly_sla.basic", "completion_deadline_days", "7"),
+					resource.TestCheckResourceAttr("rootly_sla.basic", "completion_deadline_parent_status", "resolved"),
+					resource.TestCheckResourceAttrSet("rootly_sla.basic", "manager_role_id"),
+
+					// Critical SLA with conditions + notifications
+					resource.TestCheckResourceAttr("rootly_sla.critical", "name", suffix+"-critical"),
+					resource.TestCheckResourceAttr("rootly_sla.critical", "condition_match_type", "ALL"),
+					resource.TestCheckResourceAttr("rootly_sla.critical", "assignment_deadline_days", "3"),
+					resource.TestCheckResourceAttr("rootly_sla.critical", "assignment_skip_weekends", "false"),
+					resource.TestCheckResourceAttr("rootly_sla.critical", "completion_deadline_days", "5"),
+					resource.TestCheckResourceAttr("rootly_sla.critical", "completion_skip_weekends", "false"),
+					resource.TestCheckResourceAttr("rootly_sla.critical", "conditions.#", "1"),
+					resource.TestCheckResourceAttr("rootly_sla.critical", "conditions.0.conditionable_type", "SLAs::BuiltInFieldCondition"),
+					resource.TestCheckResourceAttr("rootly_sla.critical", "conditions.0.property", "severity"),
+					resource.TestCheckResourceAttr("rootly_sla.critical", "conditions.0.operator", "is_one_of"),
+					resource.TestCheckResourceAttr("rootly_sla.critical", "conditions.0.values.#", "2"),
+					resource.TestCheckResourceAttr("rootly_sla.critical", "notification_configurations.#", "3"),
+				),
+			},
+		},
+	})
+}
+
+func testAccResourceSLAExample(suffix string) string {
+	return fmt.Sprintf(`
+resource "rootly_severity" "sev0" {
+	name     = "%[1]s-sev0"
+	severity = "low"
+}
+
+resource "rootly_severity" "sev1" {
+	name     = "%[1]s-sev1"
+	severity = "low"
+}
+
+resource "rootly_incident_role" "commander" {
+	name = "%[1]s-commander"
+}
+
+# Basic SLA
+resource "rootly_sla" "basic" {
+	name                              = "%[1]s-standard"
+	description                       = "Ensure follow-ups are assigned and completed on time"
+	assignment_deadline_days          = 3
+	assignment_deadline_parent_status = "started"
+	completion_deadline_days          = 7
+	completion_deadline_parent_status = "resolved"
+	manager_role_id                   = rootly_incident_role.commander.id
+}
+
+# SLA with conditions — values takes resource IDs, not display names
+resource "rootly_sla" "critical" {
+	name                              = "%[1]s-critical"
+	description                       = "Stricter deadlines for SEV0 and SEV1 incidents"
+	condition_match_type              = "ALL"
+	assignment_deadline_days          = 3
+	assignment_deadline_parent_status = "started"
+	assignment_skip_weekends          = false
+	completion_deadline_days          = 5
+	completion_deadline_parent_status = "resolved"
+	completion_skip_weekends          = false
+	manager_role_id                   = rootly_incident_role.commander.id
+
+	conditions {
+		conditionable_type = "SLAs::BuiltInFieldCondition"
+		property           = "severity"
+		operator           = "is_one_of"
+		values             = [rootly_severity.sev0.id, rootly_severity.sev1.id]
+	}
+
+	notification_configurations {
+		offset_type = "before_due"
+		offset_days = 1
+	}
+
+	notification_configurations {
+		offset_type = "when_due"
+		offset_days = 0
+	}
+
+	notification_configurations {
+		offset_type = "after_due"
+		offset_days = 1
+	}
+}
+`, suffix)
+}

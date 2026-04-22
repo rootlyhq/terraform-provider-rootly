@@ -30,10 +30,10 @@ resource "rootly_sla" "critical" {
   name                              = "Critical Incident SLA"
   description                       = "Stricter deadlines for SEV0 and SEV1 incidents"
   condition_match_type              = "ALL"
-  assignment_deadline_days          = 1
+  assignment_deadline_days          = 3
   assignment_deadline_parent_status = "started"
   assignment_skip_weekends          = false
-  completion_deadline_days          = 3
+  completion_deadline_days          = 5
   completion_deadline_parent_status = "resolved"
   completion_skip_weekends          = false
   manager_role_id                   = data.rootly_incident_role.commander.id
