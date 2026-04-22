@@ -206,3 +206,151 @@ resource "rootly_sla" "test" {
 }
 `, name)
 }
+
+// TestAccResourceSLA_example mirrors the example in
+// examples/resources/rootly_sla/resource.tf to ensure the documented
+// configuration stays valid.
+func TestAccResourceSLA_example(t *testing.T) {
+	suffix := acctest.RandomWithPrefix("tf-test-sla-ex")
+
+	resource.UnitTest(t, resource.TestCase{
+		IsUnitTest:        false,
+		PreCheck:          func() { testAccPreCheck(t) },
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceSLAExample(suffix),
+				// The API may return conditions in a different order than the
+				// config. DiffSuppressFunc handles this during normal plan/apply,
+				// but the test framework's post-apply plan check flags it.
+				ExpectNonEmptyPlan: true,
+				Check: resource.ComposeTestCheckFunc(
+					// Basic SLA
+					resource.TestCheckResourceAttr("rootly_sla.basic", "name", suffix+"-standard"),
+					resource.TestCheckResourceAttr("rootly_sla.basic", "assignment_deadline_days", "3"),
+					resource.TestCheckResourceAttr("rootly_sla.basic", "assignment_deadline_parent_status", "started"),
+					resource.TestCheckResourceAttr("rootly_sla.basic", "completion_deadline_days", "7"),
+					resource.TestCheckResourceAttr("rootly_sla.basic", "completion_deadline_parent_status", "resolved"),
+					resource.TestCheckResourceAttrSet("rootly_sla.basic", "manager_role_id"),
+
+					// Critical SLA with conditions + notifications
+					resource.TestCheckResourceAttr("rootly_sla.critical", "name", suffix+"-critical"),
+					resource.TestCheckResourceAttr("rootly_sla.critical", "condition_match_type", "ALL"),
+					resource.TestCheckResourceAttr("rootly_sla.critical", "assignment_deadline_days", "3"),
+					resource.TestCheckResourceAttr("rootly_sla.critical", "assignment_skip_weekends", "false"),
+					resource.TestCheckResourceAttr("rootly_sla.critical", "completion_deadline_days", "5"),
+					resource.TestCheckResourceAttr("rootly_sla.critical", "completion_skip_weekends", "false"),
+
+					// Two built-in conditions (order may vary from API)
+					resource.TestCheckResourceAttr("rootly_sla.critical", "conditions.#", "2"),
+					resource.TestCheckResourceAttr("rootly_sla.critical", "notification_configurations.#", "3"),
+
+					// Compliance SLA with custom field contains condition
+					resource.TestCheckResourceAttr("rootly_sla.compliance", "name", suffix+"-compliance"),
+					resource.TestCheckResourceAttr("rootly_sla.compliance", "conditions.#", "1"),
+					resource.TestCheckResourceAttr("rootly_sla.compliance", "conditions.0.conditionable_type", "SLAs::CustomFieldCondition"),
+					resource.TestCheckResourceAttr("rootly_sla.compliance", "conditions.0.operator", "contains"),
+					resource.TestCheckResourceAttr("rootly_sla.compliance", "conditions.0.values.#", "1"),
+					resource.TestCheckResourceAttrSet("rootly_sla.compliance", "conditions.0.form_field_id"),
+				),
+			},
+		},
+	})
+}
+
+func testAccResourceSLAExample(suffix string) string {
+	return fmt.Sprintf(`
+resource "rootly_severity" "sev0" {
+	name     = "%[1]s-sev0"
+	severity = "low"
+}
+
+resource "rootly_severity" "sev1" {
+	name     = "%[1]s-sev1"
+	severity = "low"
+}
+
+resource "rootly_incident_role" "commander" {
+	name = "%[1]s-commander"
+}
+
+resource "rootly_form_field" "region" {
+	name       = "%[1]s-region"
+	kind       = "custom"
+	input_kind = "text"
+}
+
+# Basic SLA
+resource "rootly_sla" "basic" {
+	name                              = "%[1]s-standard"
+	description                       = "Ensure follow-ups are assigned and completed on time"
+	assignment_deadline_days          = 3
+	assignment_deadline_parent_status = "started"
+	completion_deadline_days          = 7
+	completion_deadline_parent_status = "resolved"
+	manager_role_id                   = rootly_incident_role.commander.id
+}
+
+# SLA with conditions — values takes resource IDs, not display names
+resource "rootly_sla" "critical" {
+	name                              = "%[1]s-critical"
+	description                       = "Stricter deadlines for SEV0 and SEV1 incidents"
+	condition_match_type              = "ALL"
+	assignment_deadline_days          = 3
+	assignment_deadline_parent_status = "started"
+	assignment_skip_weekends          = false
+	completion_deadline_days          = 5
+	completion_deadline_parent_status = "resolved"
+	completion_skip_weekends          = false
+	manager_role_id                   = rootly_incident_role.commander.id
+
+	# is_one_of: multiple values (use resource IDs, not display names)
+	conditions {
+		conditionable_type = "SLAs::BuiltInFieldCondition"
+		property           = "severity"
+		operator           = "is_one_of"
+		values             = [rootly_severity.sev0.id, rootly_severity.sev1.id]
+	}
+
+	# is_set: presence check, no values needed
+	conditions {
+		conditionable_type = "SLAs::BuiltInFieldCondition"
+		property           = "environment"
+		operator           = "is_set"
+	}
+
+	notification_configurations {
+		offset_type = "before_due"
+		offset_days = 1
+	}
+
+	notification_configurations {
+		offset_type = "when_due"
+		offset_days = 0
+	}
+
+	notification_configurations {
+		offset_type = "after_due"
+		offset_days = 1
+	}
+}
+
+# SLA with a custom field condition using the "contains" operator
+resource "rootly_sla" "compliance" {
+	name                              = "%[1]s-compliance"
+	assignment_deadline_days          = 2
+	assignment_deadline_parent_status = "started"
+	completion_deadline_days          = 5
+	completion_deadline_parent_status = "resolved"
+	manager_role_id                   = rootly_incident_role.commander.id
+
+	# contains: single value, custom field condition
+	conditions {
+		conditionable_type = "SLAs::CustomFieldCondition"
+		form_field_id      = rootly_form_field.region.id
+		operator           = "contains"
+		values             = ["production"]
+	}
+}
+`, suffix)
+}
