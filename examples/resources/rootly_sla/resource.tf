@@ -38,12 +38,21 @@ resource "rootly_sla" "critical" {
   completion_skip_weekends          = false
   manager_role_id                   = data.rootly_incident_role.commander.id
 
-  # Match only SEV0 and SEV1 incidents
+  # is_one_of: match incidents with SEV0 or SEV1 severity.
+  # Note: `values` takes resource IDs (not display names like "SEV0").
+  # Use a data source to look up the ID first.
   conditions {
     conditionable_type = "SLAs::BuiltInFieldCondition"
     property           = "severity"
     operator           = "is_one_of"
     values             = [data.rootly_severity.sev0.id, data.rootly_severity.sev1.id]
+  }
+
+  # is_set: require that the environment field is present (no values needed)
+  conditions {
+    conditionable_type = "SLAs::BuiltInFieldCondition"
+    property           = "environment"
+    operator           = "is_set"
   }
 
   # Notify 1 day before the deadline, when due, and 1 day after
@@ -63,7 +72,7 @@ resource "rootly_sla" "critical" {
   }
 }
 
-# SLA with a custom field condition
+# SLA with a custom field condition using the "contains" operator (single value)
 resource "rootly_sla" "compliance" {
   name                              = "Compliance Review SLA"
   assignment_deadline_days          = 2
@@ -72,10 +81,11 @@ resource "rootly_sla" "compliance" {
   completion_deadline_parent_status = "resolved"
   manager_role_id                   = data.rootly_incident_role.commander.id
 
+  # contains: match when the custom field value contains a substring
   conditions {
     conditionable_type = "SLAs::CustomFieldCondition"
     form_field_id      = "your-custom-field-uuid"
-    operator           = "is_one_of"
-    values             = ["option-value-1", "option-value-2"]
+    operator           = "contains"
+    values             = ["production"]
   }
 }
