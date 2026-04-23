@@ -2,14 +2,11 @@ package provider
 
 import (
 	"context"
-	"fmt"
-	"time"
-
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/polling"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
 )
 
@@ -67,17 +64,8 @@ func dataSourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, met
 		params.FilterName = &name
 	}
 
-	var items []interface{}
-	err := resource.RetryContext(ctx, 30*time.Second, func() *resource.RetryError {
-		var listErr error
-		items, listErr = c.ListAlertsSources(params)
-		if listErr != nil {
-			return resource.NonRetryableError(listErr)
-		}
-		if len(items) == 0 {
-			return resource.RetryableError(fmt.Errorf("alerts_source not found, retrying..."))
-		}
-		return nil
+	items, err := polling.WaitForList(ctx, "alerts_source", func() ([]interface{}, error) {
+		return c.ListAlertsSources(params)
 	})
 	if err != nil {
 		return diag.FromErr(err)

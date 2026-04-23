@@ -1,4 +1,4 @@
-import inflect from "inflect";
+import inflect from "./inflect.js";
 import { v2Resources } from "./v2-migration-utils";
 
 function forceMapFor(name) {

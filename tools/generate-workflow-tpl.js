@@ -1,4 +1,4 @@
-const inflect = require("inflect");
+const inflect = require("./inflect");
 
 module.exports = (name, resourceSchema, requiredFields, taskParamsSchema) => {
   // convert {anyOf: [{enum: [null]}, {type: "string"}]} to {type: "string"}

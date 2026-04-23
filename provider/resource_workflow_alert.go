@@ -641,6 +641,18 @@ func resourceWorkflowAlertRead(ctx context.Context, d *schema.ResourceData, meta
 		}
 	}
 
+	// Filter trigger_params to only include keys declared in the schema.
+	// The API may return new fields that the Terraform schema doesn't know
+	// about yet, and passing unknown keys to d.Set() causes a panic.
+	if triggerParams != nil {
+		allowedKeys := resourceWorkflowAlert().Schema["trigger_params"].Elem.(*schema.Resource).Schema
+		for k := range triggerParams {
+			if _, ok := allowedKeys[k]; !ok {
+				delete(triggerParams, k)
+			}
+		}
+	}
+
 	tps[0] = triggerParams
 	d.Set("trigger_params", tps)
 
