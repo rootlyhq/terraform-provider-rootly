@@ -65,6 +65,14 @@ func TestAccDataSourceSLA_bySlug(t *testing.T) {
 
 func testAccDataSourceSLAResourcesOnly(name string) string {
 	return fmt.Sprintf(`
+data "rootly_sub_status" "started" {
+	parent_status = "started"
+}
+
+data "rootly_sub_status" "resolved" {
+	parent_status = "resolved"
+}
+
 resource "rootly_incident_role" "test" {
 	name = "tf-test-ds-sla-manager-%s"
 }
@@ -73,8 +81,10 @@ resource "rootly_sla" "test" {
 	name                              = "%s"
 	assignment_deadline_days          = 3
 	assignment_deadline_parent_status = "started"
+	assignment_deadline_sub_status_id = data.rootly_sub_status.started.id
 	completion_deadline_days          = 7
 	completion_deadline_parent_status = "resolved"
+	completion_deadline_sub_status_id = data.rootly_sub_status.resolved.id
 	manager_role_id                   = rootly_incident_role.test.id
 }
 `, name, name)

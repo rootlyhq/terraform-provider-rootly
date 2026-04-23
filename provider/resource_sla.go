@@ -102,7 +102,7 @@ func resourceSLA() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "The ID of the manager incident role",
+				Description: "The ID of the manager incident role. Exactly one of `manager_role_id` or `manager_user_id` must be provided.",
 			},
 
 			"manager_user_id": &schema.Schema{
@@ -113,7 +113,7 @@ func resourceSLA() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "The ID of the manager user",
+				Description: "The ID of the manager user. Exactly one of `manager_role_id` or `manager_user_id` must be provided.",
 			},
 
 			"assignment_deadline_days": &schema.Schema{
@@ -146,7 +146,7 @@ func resourceSLA() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "Optional sub-status for the assignment deadline",
+				Description: "Sub-status for the assignment deadline. Required when custom lifecycle statuses are enabled on the team.",
 			},
 
 			"assignment_skip_weekends": &schema.Schema{
@@ -190,7 +190,7 @@ func resourceSLA() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "Optional sub-status for the completion deadline",
+				Description: "Sub-status for the completion deadline. Required when custom lifecycle statuses are enabled on the team.",
 			},
 
 			"completion_skip_weekends": &schema.Schema{
