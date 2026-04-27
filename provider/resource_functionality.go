@@ -243,6 +243,17 @@ func resourceFunctionality() *schema.Resource {
 				Description:      "Owner Users associated with this functionality",
 			},
 
+			"escalation_policy_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "The escalation policy id of the functionality",
+			},
+
 			"slack_channels": &schema.Schema{
 				Type:             schema.TypeList,
 				Computed:         false,
@@ -421,6 +432,9 @@ func resourceFunctionalityCreate(ctx context.Context, d *schema.ResourceData, me
 	if value, ok := d.GetOkExists("owner_user_ids"); ok {
 		s.OwnerUserIds = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("escalation_policy_id"); ok {
+		s.EscalationPolicyId = value.(string)
+	}
 	if value, ok := d.GetOkExists("slack_channels"); ok {
 		s.SlackChannels = value.([]interface{})
 	}
@@ -477,6 +491,7 @@ func resourceFunctionalityRead(ctx context.Context, d *schema.ResourceData, meta
 	d.Set("service_ids", item.ServiceIds)
 	d.Set("owner_group_ids", item.OwnerGroupIds)
 	d.Set("owner_user_ids", item.OwnerUserIds)
+	d.Set("escalation_policy_id", item.EscalationPolicyId)
 
 	if item.SlackChannels != nil {
 		processed_items_slack_channels := make([]map[string]interface{}, 0)
@@ -623,6 +638,10 @@ func resourceFunctionalityUpdate(ctx context.Context, d *schema.ResourceData, me
 		} else {
 			s.OwnerUserIds = []interface{}{}
 		}
+	}
+
+	if d.HasChange("escalation_policy_id") {
+		s.EscalationPolicyId = d.Get("escalation_policy_id").(string)
 	}
 
 	if d.HasChange("slack_channels") {
