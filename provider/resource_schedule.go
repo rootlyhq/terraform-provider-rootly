@@ -10,27 +10,9 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v2/provider/stateupgrade"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
-
-// Upgrade logic from version 0 to version 1
-func upgradeScheduleStateV0ToV1(ctx context.Context, rawState map[string]any, meta any) (map[string]any, error) {
-	delete(rawState, "slack_user_group")
-	return rawState, nil
-}
-
-func resourceScheduleV0() *schema.Resource {
-	return &schema.Resource{
-		Schema: map[string]*schema.Schema{
-			"slack_user_group": {
-				Type:     schema.TypeString,
-				Required: false,
-				Optional: true,
-				Computed: true,
-			},
-		},
-	}
-}
 
 func resourceSchedule() *schema.Resource {
 	return &schema.Resource{
@@ -45,8 +27,8 @@ func resourceSchedule() *schema.Resource {
 		StateUpgraders: []schema.StateUpgrader{
 			{
 				Version: 0,
-				Type:    resourceScheduleV0().CoreConfigSchema().ImpliedType(),
-				Upgrade: upgradeScheduleStateV0ToV1,
+				Type:    stateupgrade.ScheduleV0().CoreConfigSchema().ImpliedType(),
+				Upgrade: stateupgrade.UpgradeScheduleV0ToV1,
 			},
 		},
 		Schema: map[string]*schema.Schema{
