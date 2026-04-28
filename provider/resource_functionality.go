@@ -75,7 +75,7 @@ func resourceFunctionality() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         false,
+				Computed:         true,
 				Required:         false,
 				Optional:         true,
 				Sensitive:        false,
