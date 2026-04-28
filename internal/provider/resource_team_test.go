@@ -125,10 +125,48 @@ func TestAccResourceTeam(t *testing.T) {
 	})
 }
 
+func TestAccResourceTeam_NoBroadcastChannel(t *testing.T) {
+	resName := "rootly_team.test"
+	teamName := acctest.RandomWithPrefix("tf-team")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceTeamNoBroadcastChannelConfig(teamName),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("name"), knownvalue.StringExact(teamName)),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("alert_broadcast_enabled"), knownvalue.Bool(false)),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("incident_broadcast_enabled"), knownvalue.Bool(false)),
+				},
+			},
+			// Re-plan to verify no drift on broadcast channel fields
+			{
+				Config: testAccResourceTeamNoBroadcastChannelConfig(teamName),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("name"), knownvalue.StringExact(teamName)),
+				},
+				PlanOnly: true,
+			},
+		},
+	})
+}
+
 func testAccResourceTeamConfig(teamName string) string {
 	return fmt.Sprintf(`
 resource "rootly_team" "test" {
 	name = "%s"
+}
+`, teamName)
+}
+
+func testAccResourceTeamNoBroadcastChannelConfig(teamName string) string {
+	return fmt.Sprintf(`
+resource "rootly_team" "test" {
+	name                       = "%s"
+	alert_broadcast_enabled    = false
+	incident_broadcast_enabled = false
 }
 `, teamName)
 }
