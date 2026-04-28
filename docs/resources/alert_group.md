@@ -91,8 +91,8 @@ Optional:
 
 Optional:
 
-- `target_id` (String) id for the Group, Service or EscalationPolicy
-- `target_type` (String) The type of the target.. Value must be one of `Group`, `Service`, `EscalationPolicy`.
+- `target_id` (String) id for the Group, Service, Functionality or EscalationPolicy
+- `target_type` (String) The type of the target.. Value must be one of `Group`, `Service`, `Functionality`, `EscalationPolicy`.
 
 ## Import
 

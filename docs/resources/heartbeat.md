@@ -31,7 +31,7 @@ description: |-
 - `expires_at` (String) When heartbeat expires
 - `interval_unit` (String) Value must be one of `minutes`, `hours`.
 - `last_pinged_at` (String) When the heartbeat was last pinged.
-- `notification_target_type` (String) Value must be one of `User`, `Group`, `Service`, `EscalationPolicy`.
+- `notification_target_type` (String) Value must be one of `User`, `Group`, `Service`, `EscalationPolicy`, `Functionality`.
 - `status` (String) Value must be one of `waiting`, `active`, `expired`.
 
 ### Read-Only
