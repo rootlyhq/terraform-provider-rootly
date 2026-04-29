@@ -124,8 +124,8 @@ func resourceHeartbeat() *schema.Resource {
 				Sensitive:    false,
 				ForceNew:     false,
 				WriteOnly:    false,
-				Description:  "Value must be one of `User`, `Group`, `Service`, `EscalationPolicy`.",
-				ValidateFunc: validation.StringInSlice([]string{"User", "Group", "Service", "EscalationPolicy"}, false),
+				Description:  "Value must be one of `User`, `Group`, `Service`, `EscalationPolicy`, `Functionality`.",
+				ValidateFunc: validation.StringInSlice([]string{"User", "Group", "Service", "EscalationPolicy", "Functionality"}, false),
 			},
 
 			"enabled": &schema.Schema{

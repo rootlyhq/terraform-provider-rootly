@@ -63,6 +63,7 @@ resource "rootly_functionality" "logging_in" {
 - `cortex_id` (String) The Cortex group id associated to this functionality
 - `description` (String) The description of the functionality
 - `environment_ids` (List of String) Environments associated with this functionality
+- `escalation_policy_id` (String) The escalation policy id of the functionality
 - `external_id` (String) The external id associated to this functionality
 - `notify_emails` (List of String) Emails attached to the functionality
 - `opsgenie_id` (String) The Opsgenie service id associated to this functionality

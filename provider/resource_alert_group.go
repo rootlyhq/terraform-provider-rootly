@@ -126,8 +126,8 @@ func resourceAlertGroup() *schema.Resource {
 							Sensitive:    false,
 							ForceNew:     false,
 							WriteOnly:    false,
-							Description:  "The type of the target.. Value must be one of `Group`, `Service`, `EscalationPolicy`.",
-							ValidateFunc: validation.StringInSlice([]string{"Group", "Service", "EscalationPolicy"}, false),
+							Description:  "The type of the target.. Value must be one of `Group`, `Service`, `Functionality`, `EscalationPolicy`.",
+							ValidateFunc: validation.StringInSlice([]string{"Group", "Service", "Functionality", "EscalationPolicy"}, false),
 						},
 
 						"target_id": &schema.Schema{
