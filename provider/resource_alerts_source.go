@@ -593,7 +593,7 @@ func resourceAlertsSource() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
-				Sensitive:   false,
+				Sensitive:   true,
 				ForceNew:    false,
 				WriteOnly:   false,
 				Description: "The secret used to authenticate non-email alert sources",
