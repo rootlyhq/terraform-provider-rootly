@@ -311,16 +311,18 @@ function generateResource(name) {
       ),
       code
     );
-    code = workflowTpl(
-      "workflow_alert",
-      resourceSchema(name),
-      requiredFields(name),
-      swagger.components.schemas.alert_trigger_params
-    );
-    fs.writeFileSync(
-      path.resolve(__dirname, "..", "provider", `resource_${name}_alert.go`),
-      code
-    );
+    if (!excluded.resources.includes("workflow_alert")) {
+      code = workflowTpl(
+        "workflow_alert",
+        resourceSchema(name),
+        requiredFields(name),
+        swagger.components.schemas.alert_trigger_params
+      );
+      fs.writeFileSync(
+        path.resolve(__dirname, "..", "provider", `resource_${name}_alert.go`),
+        code
+      );
+    }
     code = workflowTpl(
       "workflow_pulse",
       resourceSchema(name),
