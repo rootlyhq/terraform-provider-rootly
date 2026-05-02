@@ -343,14 +343,50 @@ func resourceWorkflowAlert() *schema.Resource {
 						},
 
 						"alert_payload_conditions": &schema.Schema{
-							Type: schema.TypeMap,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
+							Type:     schema.TypeList,
+							Optional: true,
+							Computed: true,
+							MaxItems: 1,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"logic": {
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "ALL",
+										Description: "Logic operator for conditions. Value must be one of `ALL` or `ANY`.",
+									},
+									"conditions": {
+										Type:     schema.TypeList,
+										Optional: true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"query": {
+													Type:        schema.TypeString,
+													Required:    true,
+													Description: "JSONPath query. eg: $.commonLabels.namespace",
+												},
+												"operator": {
+													Type:        schema.TypeString,
+													Required:    true,
+													Description: "Value must be one of `IS`, `IS NOT`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `SET`, `UNSET`.",
+												},
+												"values": {
+													Type:     schema.TypeList,
+													Required: true,
+													Elem: &schema.Schema{
+														Type: schema.TypeString,
+													},
+												},
+												"use_regexp": {
+													Type:     schema.TypeBool,
+													Optional: true,
+													Default:  false,
+												},
+											},
+										},
+									},
+								},
 							},
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "",
 						},
 					},
 				},
