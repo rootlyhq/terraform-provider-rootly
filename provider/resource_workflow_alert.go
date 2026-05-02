@@ -633,7 +633,16 @@ func resourceWorkflowAlertRead(ctx context.Context, d *schema.ResourceData, meta
 	d.Set("workflow_group_id", item.WorkflowGroupId)
 
 	tps := make([]interface{}, 1, 1)
-	tps[0] = item.TriggerParams
+	tp := item.TriggerParams
+	if tp != nil {
+		if apc, ok := tp["alert_payload_conditions"]; ok && apc != nil {
+			switch v := apc.(type) {
+			case map[string]interface{}:
+				tp["alert_payload_conditions"] = []interface{}{v}
+			}
+		}
+	}
+	tps[0] = tp
 	d.Set("trigger_params", tps)
 
 	d.Set("environment_ids", item.EnvironmentIds)
