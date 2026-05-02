@@ -80,6 +80,11 @@ func resourceWorkflowTaskUpdateGithubIssue() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 						},
+						"repository": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. The repository (used for loading labels and issue types)",
+							Type:        schema.TypeMap,
+							Optional:    true,
+						},
 						"title": &schema.Schema{
 							Description: "The issue title",
 							Type:        schema.TypeString,
@@ -88,6 +93,39 @@ func resourceWorkflowTaskUpdateGithubIssue() *schema.Resource {
 						"body": &schema.Schema{
 							Description: "The issue body",
 							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"labels": &schema.Schema{
+							Description:      "The issue labels",
+							Type:             schema.TypeList,
+							Optional:         true,
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": &schema.Schema{
+										Type:     schema.TypeString,
+										Required: true,
+									},
+									"name": &schema.Schema{
+										Type:     schema.TypeString,
+										Required: true,
+									},
+								},
+							},
+						},
+						"labels_mode": &schema.Schema{
+							Description: "How to apply labels. 'replace' (default) overwrites all existing labels. 'append' adds to existing labels without removing them.. Value must be one of `replace`, `append`.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "replace",
+							ValidateFunc: validation.StringInSlice([]string{
+								"replace",
+								"append",
+							}, false),
+						},
+						"issue_type": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. The issue type",
+							Type:        schema.TypeMap,
 							Optional:    true,
 						},
 						"completion": &schema.Schema{

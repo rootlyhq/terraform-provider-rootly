@@ -95,6 +95,11 @@ func resourceWorkflowTaskPageRootlyOnCallResponders() *schema.Resource {
 							Type:        schema.TypeMap,
 							Optional:    true,
 						},
+						"functionality_target": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. ",
+							Type:        schema.TypeMap,
+							Optional:    true,
+						},
 						"alert_urgency_id": &schema.Schema{
 							Description: "Alert urgency ID",
 							Type:        schema.TypeString,

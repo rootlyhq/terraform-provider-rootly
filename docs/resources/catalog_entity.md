@@ -20,6 +20,7 @@ description: |-
 
 ### Optional
 
+- `backstage_id` (String) The Backstage entity ID this catalog entity is linked to.
 - `catalog_id` (String) The ID of the parent catalog
 - `description` (String)
 - `position` (Number) Default position of the item when displayed in a list.

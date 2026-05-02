@@ -41,8 +41,20 @@ Required:
 Optional:
 
 - `body` (String) The issue body
+- `issue_type` (Map of String) Map must contain two fields, `id` and `name`. The issue type
+- `labels` (Block List) The issue labels (see [below for nested schema](#nestedblock--task_params--labels))
+- `labels_mode` (String) How to apply labels. 'replace' (default) overwrites all existing labels. 'append' adds to existing labels without removing them.. Value must be one of `replace`, `append`.
+- `repository` (Map of String) Map must contain two fields, `id` and `name`. The repository (used for loading labels and issue types)
 - `task_type` (String)
 - `title` (String) The issue title
+
+<a id="nestedblock--task_params--labels"></a>
+### Nested Schema for `task_params.labels`
+
+Required:
+
+- `id` (String)
+- `name` (String)
 
 ## Import
 

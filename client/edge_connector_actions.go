@@ -21,7 +21,7 @@ type EdgeConnectorAction struct {
 	Icon            string                 `jsonapi:"attr,icon,omitempty"`
 	Description     string                 `jsonapi:"attr,description,omitempty"`
 	Timeout         int                    `jsonapi:"attr,timeout,omitempty"`
-	Metadata        map[string]interface{} `jsonapi:"attr,metadata,omitempty"` // write: contains parameters
+	Metadata        map[string]interface{} `jsonapi:"attr,metadata,omitempty"`   // write: contains parameters
 	Parameters      []interface{}          `jsonapi:"attr,parameters,omitempty"` // read: returned directly by API
 	LastExecutedAt  string                 `jsonapi:"attr,last_executed_at,omitempty"`
 	CreatedAt       string                 `jsonapi:"attr,created_at,omitempty"`

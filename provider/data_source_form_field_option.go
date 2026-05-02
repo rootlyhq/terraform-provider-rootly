@@ -20,6 +20,11 @@ func dataSourceFormFieldOption() *schema.Resource {
 				Computed: true,
 			},
 
+			"form_field_id": &schema.Schema{
+				Type:     schema.TypeString,
+				Required: true,
+			},
+
 			"value": &schema.Schema{
 				Type:     schema.TypeString,
 				Computed: true,

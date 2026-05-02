@@ -24,11 +24,15 @@ description: |-
 - `api_keys_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `audits_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `billing_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
+- `catalogs_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
+- `communication_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
+- `edge_connector_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `environments_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `form_fields_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `functionalities_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `groups_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `incident_causes_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
+- `incident_communication_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`, `send`.
 - `incident_feedbacks_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `incident_permission_set_id` (String) Associated incident permissions set.
 - `incident_roles_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
@@ -38,6 +42,7 @@ description: |-
 - `invitations_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `is_deletable` (Boolean) Whether the role can be deleted.. Value must be one of true or false
 - `is_editable` (Boolean) Whether the role can be edited.. Value must be one of true or false
+- `paging_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `playbooks_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `private_incidents_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `pulses_permissions` (List of String) Value must be one of `create`, `update`, `read`.
@@ -46,8 +51,10 @@ description: |-
 - `secrets_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `services_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `severities_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
+- `slas_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `slug` (String) The role slug.
 - `status_pages_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
+- `sub_statuses_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `webhooks_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `workflows_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 

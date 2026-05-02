@@ -38,6 +38,7 @@ const excluded = {
     "incident_feedback",
     "incident_form_field_selection",
     "ip_ranges",
+    "meeting_recording", // nested under incidents; list/create require incidentId
     "on_call_pay_report", // not exposed via Terraform
     "status",
     "post_mortem_template",
@@ -87,6 +88,7 @@ const excluded = {
     "incident",
     "ip_ranges",
     "live_call_router",
+    "meeting_recording", // nested under incidents; list/create require incidentId, no update endpoint
     "on_call_pay_report", // not exposed via Terraform; API has no delete endpoint
     "on_call_role",
     "override_shift",

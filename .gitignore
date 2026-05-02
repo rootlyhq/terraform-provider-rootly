@@ -41,6 +41,8 @@ swagger.json
 schema/swagger.json
 
 node_modules/
+.yarn/
+.yarnrc.yml
 
 terraform-provider-rootly
 .aider*

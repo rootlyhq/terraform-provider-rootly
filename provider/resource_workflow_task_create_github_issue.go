@@ -90,6 +90,34 @@ func resourceWorkflowTaskCreateGithubIssue() *schema.Resource {
 							Type:        schema.TypeMap,
 							Required:    true,
 						},
+						"labels": &schema.Schema{
+							Description:      "The issue labels",
+							Type:             schema.TypeList,
+							Optional:         true,
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": &schema.Schema{
+										Type:     schema.TypeString,
+										Required: true,
+									},
+									"name": &schema.Schema{
+										Type:     schema.TypeString,
+										Required: true,
+									},
+								},
+							},
+						},
+						"issue_type": &schema.Schema{
+							Description: "Map must contain two fields, `id` and `name`. The issue type",
+							Type:        schema.TypeMap,
+							Optional:    true,
+						},
+						"parent_issue_number": &schema.Schema{
+							Description: "The parent issue number for sub-issue linking",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 					},
 				},
 			},

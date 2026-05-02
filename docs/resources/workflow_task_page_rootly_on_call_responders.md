@@ -43,6 +43,7 @@ Optional:
 - `description` (String) Alert description
 - `escalation_note` (String)
 - `escalation_policy_target` (Map of String) Map must contain two fields, `id` and `name`.
+- `functionality_target` (Map of String) Map must contain two fields, `id` and `name`.
 - `group_target` (Map of String) Map must contain two fields, `id` and `name`.
 - `service_target` (Map of String) Map must contain two fields, `id` and `name`.
 - `task_type` (String)
