@@ -16,7 +16,7 @@ build: codegen docs
 
 docs:
 	terraform fmt -recursive examples
-	go tool tfplugindocs
+	go tool tfplugindocs generate --provider-name rootly --rendered-provider-name terraform-provider-rootly
 	mv ./docs/data-sources/ip_ranges.md ./docs/data-sources/ip_range.md 2>/dev/null || true
 	rm -f ./docs/data-sources/ip_ranges.md
 	mv ./docs/data-sources/ip_range.md ./docs/data-sources/ip_ranges.md
@@ -62,10 +62,10 @@ codegen:
 	node tools/clean-swagger.js schema/swagger.json
 	cd schema && go tool oapi-codegen --config=oapi-config.yml swagger.json
 	yarn run generate schema/swagger.json
-	go fmt client/*
-	go fmt provider/*
-	go tool goimports -w provider/*
-	go tool goimports -w client/*
+	go fmt client/*.go
+	go fmt provider/*.go
+	go tool goimports -w provider/*.go
+	go tool goimports -w client/*.go
 
 codegen-resource:
 	@if [ -z "$(RESOURCE)" ]; then \

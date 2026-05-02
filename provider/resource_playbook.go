@@ -70,7 +70,7 @@ func resourcePlaybook() *schema.Resource {
 				Sensitive:        false,
 				ForceNew:         false,
 				WriteOnly:        false,
-				Description:      "The Severity ID's to attach to the incident",
+				Description:      "The Severity IDs to attach to the incident",
 			},
 
 			"environment_ids": &schema.Schema{
@@ -85,7 +85,7 @@ func resourcePlaybook() *schema.Resource {
 				Sensitive:        false,
 				ForceNew:         false,
 				WriteOnly:        false,
-				Description:      "The Environment ID's to attach to the incident",
+				Description:      "The Environment IDs to attach to the incident",
 			},
 
 			"functionality_ids": &schema.Schema{
@@ -100,7 +100,7 @@ func resourcePlaybook() *schema.Resource {
 				Sensitive:        false,
 				ForceNew:         false,
 				WriteOnly:        false,
-				Description:      "The Functionality ID's to attach to the incident",
+				Description:      "The Functionality IDs to attach to the incident",
 			},
 
 			"service_ids": &schema.Schema{
@@ -115,7 +115,7 @@ func resourcePlaybook() *schema.Resource {
 				Sensitive:        false,
 				ForceNew:         false,
 				WriteOnly:        false,
-				Description:      "The Service ID's to attach to the incident",
+				Description:      "The Service IDs to attach to the incident",
 			},
 
 			"group_ids": &schema.Schema{
@@ -130,7 +130,7 @@ func resourcePlaybook() *schema.Resource {
 				Sensitive:        false,
 				ForceNew:         false,
 				WriteOnly:        false,
-				Description:      "The Team ID's to attach to the incident",
+				Description:      "The Team IDs to attach to the incident",
 			},
 
 			"incident_type_ids": &schema.Schema{
@@ -145,7 +145,7 @@ func resourcePlaybook() *schema.Resource {
 				Sensitive:        false,
 				ForceNew:         false,
 				WriteOnly:        false,
-				Description:      "The Incident Type ID's to attach to the incident",
+				Description:      "The Incident Type IDs to attach to the incident",
 			},
 		},
 	}

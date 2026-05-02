@@ -9,14 +9,6 @@ description: |-
 
 
 
-*Note: This resource requires access to Advanced Alert Routing. If you're unsure whether you have access to this feature, please contact Rootly customer support.*
-
-## Asynchronous Rule Creation
-
-For organizations with large numbers of routing rules, Rootly supports asynchronous rule processing to improve performance. When enabled, the Terraform provider will automatically handle rule creation in the background and wait for completion.
-
-If you experience slow operations when managing alert routes with many rules, contact Rootly customer support to enable asynchronous rule processing for your organization. This feature helps optimize performance for teams managing complex routing configurations.
-
 ## Example Usage
 
 ```shell

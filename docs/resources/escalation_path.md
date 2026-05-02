@@ -147,11 +147,11 @@ resource "rootly_escalation_path" "defer_off_hours" {
     rule_type = "deferral_window"
     time_zone = "America/New_York"
     time_blocks {
-      monday    = true
-      tuesday   = true
-      wednesday = true
-      thursday  = true
-      friday    = true
+      monday     = true
+      tuesday    = true
+      wednesday  = true
+      thursday   = true
+      friday     = true
       start_time = "18:00"
       end_time   = "09:00"
     }
@@ -237,14 +237,14 @@ resource "rootly_escalation_level" "second" {
 
 ### Optional
 
-- `after_deferral_behavior` (String) What happens after a deferral path finishes. Required for deferral paths. Value must be one of `re_evaluate`, `execute_path`.
+- `after_deferral_behavior` (String) What happens after a deferral path finishes. Required for deferral paths.. Value must be one of `re_evaluate`, `execute_path`.
 - `after_deferral_path_id` (String) The escalation path to execute after this deferral path when after_deferral_behavior is execute_path.
 - `default` (Boolean) Whether this escalation path is the default path. Value must be one of true or false
 - `escalation_policy_id` (String) The ID of the escalation policy
 - `initial_delay` (Number) Initial delay for escalation path in minutes. Maximum 1 week (10080).
 - `match_mode` (String) How path rules are matched.. Value must be one of `match-all-rules`, `match-any-rule`.
 - `notification_type` (String) Notification rule type
-- `path_type` (String) The type of escalation path. Cannot be changed after creation. Value must be one of `escalation`, `deferral`.
+- `path_type` (String) The type of escalation path. Cannot be changed after creation.. Value must be one of `escalation`, `deferral`.
 - `position` (Number) The position of this path in the paths for this EP.
 - `repeat` (Boolean) Whether this path should be repeated until someone acknowledges the alert. Value must be one of true or false
 - `repeat_count` (Number) The number of times this path will be executed until someone acknowledges the alert
@@ -268,7 +268,7 @@ Optional:
 - `rule_type` (String) The type of the escalation path rule. Value must be one of `alert_urgency`, `working_hour`, `json_path`, `field`, `service`, `deferral_window`.
 - `service_ids` (List of String) Service ids for which this escalation path should be used. Only used with `service` rule type.
 - `time_blocks` (Block List) Time windows during which alerts are deferred. Only used with `deferral_window` rule type. (see [below for nested schema](#nestedblock--rules--time_blocks))
-- `time_zone` (String) Time zone for the deferral window (IANA format). Only used with `deferral_window` rule type. Value must be one of `Africa/Algiers`, `Africa/Cairo`, `Africa/Casablanca`, `Africa/Harare`, `Africa/Johannesburg`, `Africa/Monrovia`, `Africa/Nairobi`, `America/Argentina/Buenos_Aires`, `America/Asuncion`, `America/Bogota`, `America/Caracas`, `America/Chicago`, `America/Chihuahua`, `America/Denver`, `America/Guatemala`, `America/Guyana`, `America/Halifax`, `America/Indiana/Indianapolis`, `America/Juneau`, `America/La_Paz`, `America/Lima`, `America/Los_Angeles`, `America/Mazatlan`, `America/Mexico_City`, `America/Monterrey`, `America/Montevideo`, `America/New_York`, `America/Nuuk`, `America/Phoenix`, `America/Puerto_Rico`, `America/Regina`, `America/Santiago`, `America/Sao_Paulo`, `America/St_Johns`, `America/Tijuana`, `Asia/Almaty`, `Asia/Baghdad`, `Asia/Baku`, `Asia/Bangkok`, `Asia/Chongqing`, `Asia/Colombo`, `Asia/Dhaka`, `Asia/Hong_Kong`, `Asia/Irkutsk`, `Asia/Jakarta`, `Asia/Jerusalem`, `Asia/Kabul`, `Asia/Kamchatka`, `Asia/Karachi`, `Asia/Kathmandu`, `Asia/Kolkata`, `Asia/Krasnoyarsk`, `Asia/Kuala_Lumpur`, `Asia/Kuwait`, `Asia/Magadan`, `Asia/Muscat`, `Asia/Novosibirsk`, `Asia/Rangoon`, `Asia/Riyadh`, `Asia/Seoul`, `Asia/Shanghai`, `Asia/Singapore`, `Asia/Srednekolymsk`, `Asia/Taipei`, `Asia/Tashkent`, `Asia/Tbilisi`, `Asia/Tehran`, `Asia/Tokyo`, `Asia/Ulaanbaatar`, `Asia/Urumqi`, `Asia/Vladivostok`, `Asia/Yakutsk`, `Asia/Yekaterinburg`, `Asia/Yerevan`, `Atlantic/Azores`, `Atlantic/Cape_Verde`, `Atlantic/South_Georgia`, `Australia/Adelaide`, `Australia/Brisbane`, `Australia/Canberra`, `Australia/Darwin`, `Australia/Hobart`, `Australia/Melbourne`, `Australia/Perth`, `Australia/Sydney`, `Etc/GMT+12`, `Etc/UTC`, `Europe/Amsterdam`, `Europe/Athens`, `Europe/Belgrade`, `Europe/Berlin`, `Europe/Bratislava`, `Europe/Brussels`, `Europe/Bucharest`, `Europe/Budapest`, `Europe/Copenhagen`, `Europe/Dublin`, `Europe/Helsinki`, `Europe/Istanbul`, `Europe/Kaliningrad`, `Europe/Kiev`, `Europe/Lisbon`, `Europe/Ljubljana`, `Europe/London`, `Europe/Madrid`, `Europe/Minsk`, `Europe/Moscow`, `Europe/Paris`, `Europe/Prague`, `Europe/Riga`, `Europe/Rome`, `Europe/Samara`, `Europe/Sarajevo`, `Europe/Skopje`, `Europe/Sofia`, `Europe/Stockholm`, `Europe/Tallinn`, `Europe/Vienna`, `Europe/Vilnius`, `Europe/Volgograd`, `Europe/Warsaw`, `Europe/Zagreb`, `Europe/Zurich`, `Pacific/Apia`, `Pacific/Auckland`, `Pacific/Chatham`, `Pacific/Fakaofo`, `Pacific/Fiji`, `Pacific/Guadalcanal`, `Pacific/Guam`, `Pacific/Honolulu`, `Pacific/Majuro`, `Pacific/Midway`, `Pacific/Noumea`, `Pacific/Pago_Pago`, `Pacific/Port_Moresby`, `Pacific/Tongatapu`.
+- `time_zone` (String) Time zone for the deferral window (IANA format, e.g. `America/New_York`). Only used with `deferral_window` rule type.
 - `urgency_ids` (List of String) Alert urgency ids for which this escalation path should be used
 - `value` (String) Value with which JSON path value should be matched
 - `values` (List of String) Values to match against. Only used with `field` rule type.
@@ -290,6 +290,7 @@ Optional:
 - `thursday` (Boolean) Whether the time block applies on Thursday
 - `tuesday` (Boolean) Whether the time block applies on Tuesday
 - `wednesday` (Boolean) Whether the time block applies on Wednesday
+
 
 
 <a id="nestedblock--time_restrictions"></a>

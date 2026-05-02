@@ -21,6 +21,11 @@ func dataSourceIncidentPermissionSetBoolean() *schema.Resource {
 				Computed: true,
 			},
 
+			"incident_permission_set_id": &schema.Schema{
+				Type:     schema.TypeString,
+				Required: true,
+			},
+
 			"kind": &schema.Schema{
 				Type:         schema.TypeString,
 				Computed:     true,

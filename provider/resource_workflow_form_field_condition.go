@@ -164,6 +164,51 @@ func resourceWorkflowFormFieldCondition() *schema.Resource {
 				WriteOnly:        false,
 				Description:      "",
 			},
+
+			"selected_cause_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         false,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "",
+			},
+
+			"selected_environment_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         false,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "",
+			},
+
+			"selected_incident_type_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         false,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "",
+			},
 		},
 	}
 }
@@ -205,6 +250,15 @@ func resourceWorkflowFormFieldConditionCreate(ctx context.Context, d *schema.Res
 	if value, ok := d.GetOkExists("selected_user_ids"); ok {
 		s.SelectedUserIds = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("selected_cause_ids"); ok {
+		s.SelectedCauseIds = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("selected_environment_ids"); ok {
+		s.SelectedEnvironmentIds = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("selected_incident_type_ids"); ok {
+		s.SelectedIncidentTypeIds = value.([]interface{})
+	}
 
 	res, err := c.CreateWorkflowFormFieldCondition(s)
 	if err != nil {
@@ -244,6 +298,9 @@ func resourceWorkflowFormFieldConditionRead(ctx context.Context, d *schema.Resou
 	d.Set("selected_option_ids", item.SelectedOptionIds)
 	d.Set("selected_service_ids", item.SelectedServiceIds)
 	d.Set("selected_user_ids", item.SelectedUserIds)
+	d.Set("selected_cause_ids", item.SelectedCauseIds)
+	d.Set("selected_environment_ids", item.SelectedEnvironmentIds)
+	d.Set("selected_incident_type_ids", item.SelectedIncidentTypeIds)
 
 	return nil
 }
@@ -317,6 +374,30 @@ func resourceWorkflowFormFieldConditionUpdate(ctx context.Context, d *schema.Res
 			s.SelectedUserIds = value.([]interface{})
 		} else {
 			s.SelectedUserIds = []interface{}{}
+		}
+	}
+
+	if d.HasChange("selected_cause_ids") {
+		if value, ok := d.GetOk("selected_cause_ids"); value != nil && ok {
+			s.SelectedCauseIds = value.([]interface{})
+		} else {
+			s.SelectedCauseIds = []interface{}{}
+		}
+	}
+
+	if d.HasChange("selected_environment_ids") {
+		if value, ok := d.GetOk("selected_environment_ids"); value != nil && ok {
+			s.SelectedEnvironmentIds = value.([]interface{})
+		} else {
+			s.SelectedEnvironmentIds = []interface{}{}
+		}
+	}
+
+	if d.HasChange("selected_incident_type_ids") {
+		if value, ok := d.GetOk("selected_incident_type_ids"); value != nil && ok {
+			s.SelectedIncidentTypeIds = value.([]interface{})
+		} else {
+			s.SelectedIncidentTypeIds = []interface{}{}
 		}
 	}
 

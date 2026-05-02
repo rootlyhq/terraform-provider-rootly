@@ -496,6 +496,118 @@ func resourceRole() *schema.Resource {
 				WriteOnly:        false,
 				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
 			},
+
+			"catalogs_permissions": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
+			},
+
+			"sub_statuses_permissions": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
+			},
+
+			"edge_connector_permissions": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
+			},
+
+			"slas_permissions": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
+			},
+
+			"paging_permissions": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
+			},
+
+			"incident_communication_permissions": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete", "send"}, false),
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Value must be one of `create`, `read`, `update`, `delete`, `send`.",
+			},
+
+			"communication_permissions": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
+			},
 		},
 	}
 }
@@ -600,6 +712,27 @@ func resourceRoleCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	if value, ok := d.GetOkExists("workflows_permissions"); ok {
 		s.WorkflowsPermissions = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("catalogs_permissions"); ok {
+		s.CatalogsPermissions = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("sub_statuses_permissions"); ok {
+		s.SubStatusesPermissions = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("edge_connector_permissions"); ok {
+		s.EdgeConnectorPermissions = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("slas_permissions"); ok {
+		s.SlasPermissions = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("paging_permissions"); ok {
+		s.PagingPermissions = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("incident_communication_permissions"); ok {
+		s.IncidentCommunicationPermissions = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("communication_permissions"); ok {
+		s.CommunicationPermissions = value.([]interface{})
+	}
 
 	res, err := c.CreateRole(s)
 	if err != nil {
@@ -660,6 +793,13 @@ func resourceRoleRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	d.Set("status_pages_permissions", item.StatusPagesPermissions)
 	d.Set("webhooks_permissions", item.WebhooksPermissions)
 	d.Set("workflows_permissions", item.WorkflowsPermissions)
+	d.Set("catalogs_permissions", item.CatalogsPermissions)
+	d.Set("sub_statuses_permissions", item.SubStatusesPermissions)
+	d.Set("edge_connector_permissions", item.EdgeConnectorPermissions)
+	d.Set("slas_permissions", item.SlasPermissions)
+	d.Set("paging_permissions", item.PagingPermissions)
+	d.Set("incident_communication_permissions", item.IncidentCommunicationPermissions)
+	d.Set("communication_permissions", item.CommunicationPermissions)
 
 	return nil
 }
@@ -891,6 +1031,62 @@ func resourceRoleUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 			s.WorkflowsPermissions = value.([]interface{})
 		} else {
 			s.WorkflowsPermissions = []interface{}{}
+		}
+	}
+
+	if d.HasChange("catalogs_permissions") {
+		if value, ok := d.GetOk("catalogs_permissions"); value != nil && ok {
+			s.CatalogsPermissions = value.([]interface{})
+		} else {
+			s.CatalogsPermissions = []interface{}{}
+		}
+	}
+
+	if d.HasChange("sub_statuses_permissions") {
+		if value, ok := d.GetOk("sub_statuses_permissions"); value != nil && ok {
+			s.SubStatusesPermissions = value.([]interface{})
+		} else {
+			s.SubStatusesPermissions = []interface{}{}
+		}
+	}
+
+	if d.HasChange("edge_connector_permissions") {
+		if value, ok := d.GetOk("edge_connector_permissions"); value != nil && ok {
+			s.EdgeConnectorPermissions = value.([]interface{})
+		} else {
+			s.EdgeConnectorPermissions = []interface{}{}
+		}
+	}
+
+	if d.HasChange("slas_permissions") {
+		if value, ok := d.GetOk("slas_permissions"); value != nil && ok {
+			s.SlasPermissions = value.([]interface{})
+		} else {
+			s.SlasPermissions = []interface{}{}
+		}
+	}
+
+	if d.HasChange("paging_permissions") {
+		if value, ok := d.GetOk("paging_permissions"); value != nil && ok {
+			s.PagingPermissions = value.([]interface{})
+		} else {
+			s.PagingPermissions = []interface{}{}
+		}
+	}
+
+	if d.HasChange("incident_communication_permissions") {
+		if value, ok := d.GetOk("incident_communication_permissions"); value != nil && ok {
+			s.IncidentCommunicationPermissions = value.([]interface{})
+		} else {
+			s.IncidentCommunicationPermissions = []interface{}{}
+		}
+	}
+
+	if d.HasChange("communication_permissions") {
+		if value, ok := d.GetOk("communication_permissions"); value != nil && ok {
+			s.CommunicationPermissions = value.([]interface{})
+		} else {
+			s.CommunicationPermissions = []interface{}{}
 		}
 	}
 
