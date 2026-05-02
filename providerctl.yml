@@ -1,0 +1,45 @@
+version: 1
+
+# Repo-level generator config:
+# - where the tool reads the spec from
+# - where slice-local configs live
+# - which slices exist
+provider:
+  name: rootly
+  module: github.com/rootlyhq/terraform-provider-rootly/v2
+
+input:
+  kind: terraform_enriched_openapi
+  source_env: ROOTLY_PROVIDERCTL_SPEC
+  fallback_source: ""
+
+merge:
+  compat_file: providerctl.compat.yml
+  slice_config_file: providerctl.yml
+
+slices:
+  core:
+    enabled: true
+    schema_dir: schema/core
+    provider_dir: internal/provider/core
+    package: core
+  alerts:
+    enabled: true
+    schema_dir: schema/alerts
+    provider_dir: internal/provider/alerts
+    package: alerts
+  incidents:
+    enabled: true
+    schema_dir: schema/incidents
+    provider_dir: internal/provider/incidents
+    package: incidents
+  oncall:
+    enabled: true
+    schema_dir: schema/oncall
+    provider_dir: internal/provider/oncall
+    package: oncall
+  workflows:
+    enabled: true
+    schema_dir: schema/workflows
+    provider_dir: internal/provider/workflows
+    package: workflows

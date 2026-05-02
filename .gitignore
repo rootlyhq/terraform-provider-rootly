@@ -41,6 +41,7 @@ swagger.json
 schema/swagger.json
 
 node_modules/
+.providerctl-out/
 .yarn/
 .yarnrc.yml
 

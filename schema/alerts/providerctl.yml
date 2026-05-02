@@ -1,0 +1,32 @@
+version: 1
+
+slice:
+  name: alerts
+  package: alerts
+  tags:
+    - Alerts
+    - AlertEvents
+    - AlertFields
+    - AlertGroups
+    - AlertRoutes
+    - AlertRoutingRules
+    - AlertSources
+    - AlertUrgencies
+
+resources:
+  include:
+    - alert_field
+    - alert_routing_rule
+  manual:
+    - alert_urgency
+    - alert_route
+    - alerts_source
+
+data_sources:
+  include:
+    - alert_field
+    - alert_routing_rule
+    - alert_urgency
+
+terraform:
+  field_overrides: {}

@@ -1,0 +1,25 @@
+version: 1
+
+slice:
+  name: workflows
+  package: workflows
+  tags:
+    - Workflows
+    - WorkflowTasks
+    - WorkflowGroups
+    - WorkflowFormFieldConditions
+    - WorkflowRuns
+
+resources:
+  include:
+    - workflow
+    - workflow_form_field_condition
+    - workflow_group
+
+data_sources:
+  include:
+    - workflow
+    - workflow_group
+
+terraform:
+  field_overrides: {}

@@ -67,6 +67,21 @@ codegen:
 	go tool goimports -w provider/*.go
 	go tool goimports -w client/*.go
 
+PROVIDERCTL ?= rootly-providerctl
+PROVIDERCTL_CONFIG ?= providerctl.yml
+PROVIDERCTL_COMPAT ?= providerctl.compat.yml
+PROVIDERCTL_OUT ?= internal/provider
+
+codegen-providerctl:
+	curl $(SWAGGER_URL) -o schema/swagger.json
+	node tools/clean-swagger.js schema/swagger.json
+	ROOTLY_PROVIDERCTL_SPEC=schema/swagger.json $(PROVIDERCTL) generate \
+		--config $(PROVIDERCTL_CONFIG) \
+		--compat $(PROVIDERCTL_COMPAT) \
+		--out .
+	go fmt ./internal/provider/...
+	go tool goimports -w ./internal/provider/
+
 codegen-resource:
 	@if [ -z "$(RESOURCE)" ]; then \
 		echo "Error: RESOURCE parameter is required. Usage: make codegen-resource RESOURCE=service"; \
