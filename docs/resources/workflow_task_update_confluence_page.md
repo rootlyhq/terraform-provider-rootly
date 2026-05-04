@@ -40,6 +40,7 @@ Required:
 Optional:
 
 - `content` (String) The Confluence page content
+- `integration` (Map of String) Map must contain two fields, `id` and `name`. Specify integration id if you have more than one Confluence instance
 - `post_mortem_template_id` (String) Retrospective template to use when updating page, if desired
 - `task_type` (String)
 - `template` (Map of String) Map must contain two fields, `id` and `name`. The Confluence template to use
