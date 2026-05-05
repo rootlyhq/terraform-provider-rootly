@@ -112,7 +112,7 @@ resource "rootly_alerts_source" "example" {
 - `owner_group_ids` (List of String) List of team IDs that will own the alert source
 - `resolution_rule_attributes` (Block List, Max: 1) Provide additional attributes for email alerts source (see [below for nested schema](#nestedblock--resolution_rule_attributes))
 - `secret` (String, Sensitive) The secret used to authenticate non-email alert sources
-- `source_type` (String) The alert source type. Value must be one of `email`, `app_dynamics`, `catchpoint`, `datadog`, `alertmanager`, `google_cloud`, `grafana`, `sentry`, `generic_webhook`, `cloud_watch`, `checkly`, `azure`, `new_relic`, `splunk`, `chronosphere`, `app_optics`, `bug_snag`, `honeycomb`, `monte_carlo`, `nagios`, `prtg`.
+- `source_type` (String) The alert source type. Value must be one of `email`, `app_dynamics`, `catchpoint`, `datadog`, `dynatrace`, `alertmanager`, `google_cloud`, `grafana`, `sentry`, `generic_webhook`, `cloud_watch`, `aws_sns`, `checkly`, `azure`, `new_relic`, `splunk`, `chronosphere`, `app_optics`, `bug_snag`, `honeycomb`, `monte_carlo`, `nagios`, `prtg`.
 - `sourceable_attributes` (Block List, Max: 1) Provide additional attributes for generic_webhook alerts source (see [below for nested schema](#nestedblock--sourceable_attributes))
 - `status` (String) The status of the alert source. Value must be one of `connected`, `setup_complete`, `setup_incomplete`.
 - `webhook_endpoint` (String) The webhook URL generated for non-email alert sources

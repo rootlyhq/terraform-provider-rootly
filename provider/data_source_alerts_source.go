@@ -30,7 +30,7 @@ func dataSourceAlertsSource() *schema.Resource {
 				Type:         schema.TypeString,
 				Computed:     true,
 				Optional:     true,
-				ValidateFunc: validation.StringInSlice([]string{"email", "app_dynamics", "catchpoint", "datadog", "alertmanager", "google_cloud", "grafana", "sentry", "generic_webhook", "cloud_watch", "checkly", "azure", "new_relic", "splunk", "chronosphere", "app_optics", "bug_snag", "honeycomb", "monte_carlo", "nagios", "prtg"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"email", "app_dynamics", "catchpoint", "datadog", "dynatrace", "alertmanager", "google_cloud", "grafana", "sentry", "generic_webhook", "cloud_watch", "aws_sns", "checkly", "azure", "new_relic", "splunk", "chronosphere", "app_optics", "bug_snag", "honeycomb", "monte_carlo", "nagios", "prtg"}, false),
 			},
 
 			"status": &schema.Schema{
