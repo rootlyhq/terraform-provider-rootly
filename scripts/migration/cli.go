@@ -9,7 +9,7 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration/migrators"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/scripts/migration/migrators"
 )
 
 const (
@@ -102,7 +102,7 @@ func (cli *CLI) parseInputArguments() (*migrators.Config, error) {
     and import statements to bring them under Terraform management.
 
 USAGE:
-    go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@master [FLAGS] <migration_type>
+    go run github.com/rootlyhq/terraform-provider-rootly/v5/scripts/migration@master [FLAGS] <migration_type>
 
 MIGRATION TYPES:
     alert_routing_rules_to_alert_routes
@@ -126,17 +126,17 @@ ENVIRONMENT VARIABLES:
 
 EXAMPLES:
     # Basic usage with import commands
-    go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@master alert_routing_rules_to_alert_routes > alert_routes.tf
+    go run github.com/rootlyhq/terraform-provider-rootly/v5/scripts/migration@master alert_routing_rules_to_alert_routes > alert_routes.tf
 
     # Generate import blocks instead of shell commands
-    go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@master -import=block alert_routing_rules_to_alert_routes > alert_routes.tf
+    go run github.com/rootlyhq/terraform-provider-rootly/v5/scripts/migration@master -import=block alert_routing_rules_to_alert_routes > alert_routes.tf
 
     # With explicit API configuration
-    go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@master -api-host=https://api.rootly.com -api-token=your-token alert_routing_rules_to_alert_routes > alert_routes.tf
+    go run github.com/rootlyhq/terraform-provider-rootly/v5/scripts/migration@master -api-host=https://api.rootly.com -api-token=your-token alert_routing_rules_to_alert_routes > alert_routes.tf
 
     # Set environment variables first
     export ROOTLY_API_TOKEN="your-api-token"
-    go run github.com/rootlyhq/terraform-provider-rootly/v2/scripts/migration@master alert_routing_rules_to_alert_routes > alert_routes.tf
+    go run github.com/rootlyhq/terraform-provider-rootly/v5/scripts/migration@master alert_routing_rules_to_alert_routes > alert_routes.tf
 
 WORKFLOW:
     1. Run the migration script to generate Terraform configuration

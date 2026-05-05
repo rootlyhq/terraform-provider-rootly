@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-testing/knownvalue"
 	"github.com/hashicorp/terraform-plugin-testing/statecheck"
 	"github.com/hashicorp/terraform-plugin-testing/tfjsonpath"
-	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/acctest"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/acctest"
 )
 
 func TestAccResourceDashboardPanel(t *testing.T) {

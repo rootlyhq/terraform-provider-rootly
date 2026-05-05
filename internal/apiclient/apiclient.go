@@ -3,9 +3,9 @@ package apiclient
 import (
 	"fmt"
 
-	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
-	sdkv2_provider "github.com/rootlyhq/terraform-provider-rootly/v2/provider"
-	rootly "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	sdkv2_provider "github.com/rootlyhq/terraform-provider-rootly/v5/provider"
+	rootly "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
 func New(apiHost string, apiToken string, version string) (*client.Client, *rootly.ClientWithResponses, error) {

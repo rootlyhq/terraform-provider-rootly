@@ -5,8 +5,8 @@ import (
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
-	rootly "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	rootly "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
 type baseDataSource struct {

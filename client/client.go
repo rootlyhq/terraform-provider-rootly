@@ -11,7 +11,7 @@ import (
 	"github.com/hashicorp/go-retryablehttp"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/logging"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
 type Client struct {

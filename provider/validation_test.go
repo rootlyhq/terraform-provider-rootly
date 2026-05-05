@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
 func TestValidPermissionAction(t *testing.T) {
