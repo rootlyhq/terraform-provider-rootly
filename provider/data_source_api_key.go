@@ -130,6 +130,7 @@ func dataSourceApiKeyRead(ctx context.Context, d *schema.ResourceData, meta inte
 	item, _ := items[0].(*client.ApiKey)
 
 	d.SetId(item.ID)
+
 	d.Set("kind", item.Kind)
 	d.Set("name", item.Name)
 	d.Set("role_id", item.RoleId)

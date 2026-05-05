@@ -147,6 +147,7 @@ func dataSourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interf
 	item, _ := items[0].(*client.Team)
 
 	d.SetId(item.ID)
+
 	d.Set("slug", item.Slug)
 	d.Set("name", item.Name)
 	d.Set("backstage_id", item.BackstageId)

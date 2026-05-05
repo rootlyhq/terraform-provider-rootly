@@ -70,6 +70,7 @@ func dataSourceRetrospectiveProcessGroupStepRead(ctx context.Context, d *schema.
 	item, _ := items[0].(*client.RetrospectiveProcessGroupStep)
 
 	d.SetId(item.ID)
+	d.Set("retrospective_process_group_id", retrospective_process_group_id)
 	d.Set("retrospective_step_id", item.RetrospectiveStepId)
 	return nil
 }
