@@ -12,7 +12,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
-	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
 )
 
@@ -138,16 +137,15 @@ func resourceHeartbeat() *schema.Resource {
 			},
 
 			"status": &schema.Schema{
-				Type:             schema.TypeString,
-				Computed:         true,
-				Required:         false,
-				Optional:         true,
-				Sensitive:        false,
-				ForceNew:         false,
-				WriteOnly:        false,
-				Description:      "Value must be one of `waiting`, `active`, `expired`.",
-				ValidateFunc:     validation.StringInSlice([]string{"waiting", "active", "expired"}, false),
-				DiffSuppressFunc: diffsuppressfunc.Skip,
+				Type:         schema.TypeString,
+				Computed:     true,
+				Required:     false,
+				Optional:     true,
+				Sensitive:    false,
+				ForceNew:     false,
+				WriteOnly:    false,
+				Description:  "Value must be one of `waiting`, `active`, `expired`.",
+				ValidateFunc: validation.StringInSlice([]string{"waiting", "active", "expired"}, false),
 			},
 
 			"ping_url": &schema.Schema{
