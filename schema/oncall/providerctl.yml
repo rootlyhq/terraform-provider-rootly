@@ -1,0 +1,31 @@
+version: 1
+
+slice:
+  name: oncall
+  package: oncall
+  tags:
+    - Schedules
+    - ScheduleRotations
+    - ScheduleRotationUsers
+    - ScheduleRotationActiveDays
+    - OnCallRoles
+    - OnCallShadows
+    - OverrideShifts
+    - Shifts
+    - EscalationPolicies
+    - EscalationPaths
+    - EscalationLevels
+    - LiveCallRouters
+
+resources:
+  include:
+    - on_call_shadow
+    - schedule_rotation_active_day
+    - schedule_rotation_user
+
+data_sources:
+  include:
+    - on_call_role
+
+terraform:
+  field_overrides: {}

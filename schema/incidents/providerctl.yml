@@ -1,0 +1,59 @@
+version: 1
+
+slice:
+  name: incidents
+  package: incidents
+  tags:
+    - Incidents
+    - IncidentTypes
+    - IncidentRoles
+    - IncidentRoleTasks
+    - IncidentEvents
+    - IncidentEventServices
+    - IncidentEventFunctionalities
+    - IncidentActionItems
+    - IncidentPermissionSets
+    - IncidentPermissionSetBooleans
+    - IncidentPermissionSetResources
+    - IncidentFormFieldSelections
+    - IncidentFeedbacks
+    - IncidentRetrospectives
+    - IncidentRetrospectiveSteps
+    - IncidentStatusPageEvents
+    - IncidentSubStatuses
+    - RetrospectiveProcesses
+    - RetrospectiveConfigurations
+    - RetrospectiveSteps
+    - RetrospectiveTemplates
+    - RetrospectiveProcessGroups
+    - RetrospectiveProcessGroupSteps
+    - Severities
+    - Statuses
+    - SubStatuses
+    - Causes
+
+resources:
+  include:
+    - incident_permission_set
+    - incident_permission_set_boolean
+    - incident_permission_set_resource
+    - incident_role
+    - incident_role_task
+    - incident_type
+    - retrospective_process_group
+    - retrospective_process_group_step
+    - severity
+
+data_sources:
+  include:
+    - incident_permission_set
+    - incident_permission_set_boolean
+    - incident_permission_set_resource
+    - incident_role
+    - incident_type
+    - retrospective_process_group
+    - retrospective_process_group_step
+    - severity
+
+terraform:
+  field_overrides: {}
