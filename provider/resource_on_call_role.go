@@ -10,8 +10,8 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
-	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
-	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceOnCallRole() *schema.Resource {

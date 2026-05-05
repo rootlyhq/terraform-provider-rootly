@@ -28,10 +28,10 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/structure"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
-	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
-	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/converter"
-	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/diffsuppressfunc"
-	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/converter"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resource${nameCamel}() *schema.Resource {

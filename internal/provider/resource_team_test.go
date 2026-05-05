@@ -13,8 +13,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-testing/statecheck"
 	"github.com/hashicorp/terraform-plugin-testing/tfjsonpath"
 	"github.com/jianyuan/go-utils/ptr"
-	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/acctest"
-	rootly "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/acctest"
+	rootly "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
 func init() {

@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
 type CustomFieldOption struct {

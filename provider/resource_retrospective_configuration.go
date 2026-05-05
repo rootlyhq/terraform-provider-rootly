@@ -9,9 +9,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
-	"github.com/rootlyhq/terraform-provider-rootly/v2/tools"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceRetrospectiveConfiguration() *schema.Resource {
