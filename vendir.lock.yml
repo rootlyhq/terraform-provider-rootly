@@ -1,0 +1,11 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - git:
+      commitTitle: 'chore(deps): update vendored openapi spec'
+      sha: 244b6d61a1f6a47a8c6978b2f36b7649cc2508de
+      tags:
+      - v0.10.1
+    path: .
+  path: .vendored/rootly-go
+kind: LockConfig
