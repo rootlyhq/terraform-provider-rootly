@@ -66,18 +66,18 @@ resource "rootly_workflow_pulse" "my-workflow" {
 
 Optional:
 
-- `pulse_condition` (String) Value must be one off `ALL`, `ANY`, `NONE`.
-- `pulse_condition_label` (String) Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
+- `pulse_condition` (String) Value must be one of `ALL`, `ANY`, `NONE`.
+- `pulse_condition_label` (String) Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `pulse_condition_label_use_regexp` (Boolean) Value must be one of true or false
-- `pulse_condition_payload` (String) Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
+- `pulse_condition_payload` (String) Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `pulse_condition_payload_use_regexp` (Boolean) Value must be one of true or false
-- `pulse_condition_source` (String) Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
+- `pulse_condition_source` (String) Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `pulse_condition_source_use_regexp` (Boolean) Value must be one of true or false
 - `pulse_labels` (List of String)
 - `pulse_payload` (List of String)
 - `pulse_query_payload` (String) You can use jsonpath syntax. eg: $.incident.teams[*]
 - `pulse_sources` (List of String)
-- `trigger_type` (String) Value must be one off `pulse`.
+- `trigger_type` (String) Value must be one of `pulse`.
 - `triggers` (List of String) Actions that trigger the workflow. Value must be one of `pulse_created`.
 
 ## Import

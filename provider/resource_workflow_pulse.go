@@ -159,7 +159,7 @@ func resourceWorkflowPulse() *schema.Resource {
 							Default:     "pulse",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `pulse`.",
+							Description: "Value must be one of `pulse`.",
 						},
 
 						"triggers": &schema.Schema{
@@ -179,7 +179,7 @@ func resourceWorkflowPulse() *schema.Resource {
 							Default:     "ALL",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `ALL`, `ANY`, `NONE`.",
+							Description: "Value must be one of `ALL`, `ANY`, `NONE`.",
 						},
 
 						"pulse_condition_source": &schema.Schema{
@@ -187,7 +187,7 @@ func resourceWorkflowPulse() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"pulse_condition_source_use_regexp": &schema.Schema{
@@ -215,7 +215,7 @@ func resourceWorkflowPulse() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"pulse_condition_label_use_regexp": &schema.Schema{
@@ -243,7 +243,7 @@ func resourceWorkflowPulse() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"pulse_condition_payload_use_regexp": &schema.Schema{

@@ -54,7 +54,7 @@ description: |-
 
 Optional:
 
-- `trigger_type` (String) Value must be one off `simple`.
+- `trigger_type` (String) Value must be one of `simple`.
 - `triggers` (List of String) Actions that trigger the workflow. Value must be one of `slack_command`.
 
 ## Import

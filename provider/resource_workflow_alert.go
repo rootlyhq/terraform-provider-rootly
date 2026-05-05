@@ -169,7 +169,7 @@ func resourceWorkflowAlert() *schema.Resource {
 							Default:     "alert",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `alert`.",
+							Description: "Value must be one of `alert`.",
 						},
 
 						"triggers": &schema.Schema{
@@ -189,7 +189,7 @@ func resourceWorkflowAlert() *schema.Resource {
 							Default:     "ALL",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `ALL`, `ANY`, `NONE`.",
+							Description: "Value must be one of `ALL`, `ANY`, `NONE`.",
 						},
 
 						"alert_condition_source": &schema.Schema{
@@ -197,7 +197,7 @@ func resourceWorkflowAlert() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"alert_condition_source_use_regexp": &schema.Schema{
@@ -225,7 +225,7 @@ func resourceWorkflowAlert() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"alert_condition_label_use_regexp": &schema.Schema{
@@ -241,7 +241,7 @@ func resourceWorkflowAlert() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"alert_condition_status_use_regexp": &schema.Schema{
@@ -281,7 +281,7 @@ func resourceWorkflowAlert() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"alert_urgency_ids": &schema.Schema{
@@ -301,7 +301,7 @@ func resourceWorkflowAlert() *schema.Resource {
 							Default:     "ANY",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
 						"alert_condition_payload_use_regexp": &schema.Schema{
