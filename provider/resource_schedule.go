@@ -96,7 +96,7 @@ func resourceSchedule() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
-				Description: "ID of user assigned as owner of the schedule",
+				Description: "ID of user assigned as owner of the schedule. Defaults to the API token's user if not specified.",
 			},
 		},
 	}

@@ -82,7 +82,7 @@ func dataSourceSeveritiesRead(ctx context.Context, d *schema.ResourceData, meta 
 	tf_severities := make([]interface{}, len(severities), len(severities))
 	for i, severity := range severities {
 		x, _ := severity.(*client.Severity)
-		tf_severities[i] = structToLowerFirstMap(*x)
+		tf_severities[i] = filterMapKeys(structToLowerFirstMap(*x), dataSourceSeverities().Schema["severities"].Elem.(*schema.Resource).Schema)
 	}
 
 	if err := d.Set("severities", tf_severities); err != nil {

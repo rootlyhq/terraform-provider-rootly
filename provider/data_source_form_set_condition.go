@@ -58,6 +58,7 @@ func dataSourceFormSetConditionRead(ctx context.Context, d *schema.ResourceData,
 	item, _ := items[0].(*client.FormSetCondition)
 
 	d.SetId(item.ID)
+	d.Set("form_set_id", form_set_id)
 	d.Set("form_field_id", item.FormFieldId)
 	return nil
 }

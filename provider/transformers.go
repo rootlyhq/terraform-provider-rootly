@@ -4,6 +4,7 @@ import (
 	"reflect"
 
 	"github.com/buxizhizhoum/inflection"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func structToLowerFirstMap(in interface{}) map[string]interface{} {
@@ -17,5 +18,15 @@ func structToLowerFirstMap(in interface{}) map[string]interface{} {
 		result[inflection.Underscore(name)] = v.Field(i).Interface()
 	}
 
+	return result
+}
+
+func filterMapKeys(m map[string]interface{}, allowed map[string]*schema.Schema) map[string]interface{} {
+	result := make(map[string]interface{}, len(allowed))
+	for k, v := range m {
+		if _, ok := allowed[k]; ok {
+			result[k] = v
+		}
+	}
 	return result
 }

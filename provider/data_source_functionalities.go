@@ -82,7 +82,7 @@ func dataSourceFunctionalitiesRead(ctx context.Context, d *schema.ResourceData, 
 	tf_functionalities := make([]interface{}, len(functionalities), len(functionalities))
 	for i, functionality := range functionalities {
 		c, _ := functionality.(*client.Functionality)
-		tf_functionalities[i] = structToLowerFirstMap(*c)
+		tf_functionalities[i] = filterMapKeys(structToLowerFirstMap(*c), dataSourceFunctionalities().Schema["functionalities"].Elem.(*schema.Resource).Schema)
 	}
 
 	if err := d.Set("functionalities", tf_functionalities); err != nil {
