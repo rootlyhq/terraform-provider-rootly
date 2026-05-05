@@ -564,6 +564,20 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
 				},
 				`;
       }
+      if (schema.default !== undefined && schema.default !== null) {
+        return `
+        "${name}": &schema.Schema {
+          Type: schema.TypeBool,
+          Default: ${schema.default},
+          Optional: ${optional},
+          Sensitive: ${sensitive},
+          ForceNew: ${forceNew},
+          WriteOnly: ${writeOnly},
+          Description: "${description}",
+          ${diffSuppressFuncField}
+        },
+        `;
+      }
       return `
         "${name}": &schema.Schema {
           Type: schema.TypeBool,
