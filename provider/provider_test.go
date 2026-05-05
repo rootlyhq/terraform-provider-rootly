@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/meta"
-	rootly "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootly "github.com/rootlyhq/rootly-go"
 )
 
 // providerFactories are used to instantiate a provider during acceptance testing.

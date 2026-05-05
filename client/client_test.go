@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/hashicorp/go-cleanhttp"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type requestTesterFunc func(r *http.Request) error

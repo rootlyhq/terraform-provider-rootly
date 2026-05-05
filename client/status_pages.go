@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type StatusPage struct {
@@ -91,7 +91,7 @@ func (c *Client) CreateStatusPage(d *StatusPage) (*StatusPage, error) {
 }
 
 func (c *Client) GetStatusPage(id string) (*StatusPage, error) {
-	req, err := rootlygo.NewGetStatusPageRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetStatusPageRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -116,7 +116,7 @@ func (c *Client) UpdateStatusPage(id string, status_page *StatusPage) (*StatusPa
 		return nil, fmt.Errorf("Error marshaling status_page: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateStatusPageRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateStatusPageRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -135,7 +135,7 @@ func (c *Client) UpdateStatusPage(id string, status_page *StatusPage) (*StatusPa
 }
 
 func (c *Client) DeleteStatusPage(id string) error {
-	req, err := rootlygo.NewDeleteStatusPageRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteStatusPageRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

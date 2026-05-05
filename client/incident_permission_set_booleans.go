@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type IncidentPermissionSetBoolean struct {
@@ -63,7 +63,7 @@ func (c *Client) CreateIncidentPermissionSetBoolean(d *IncidentPermissionSetBool
 }
 
 func (c *Client) GetIncidentPermissionSetBoolean(id string) (*IncidentPermissionSetBoolean, error) {
-	req, err := rootlygo.NewGetIncidentPermissionSetBooleanRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetIncidentPermissionSetBooleanRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -88,7 +88,7 @@ func (c *Client) UpdateIncidentPermissionSetBoolean(id string, incident_permissi
 		return nil, fmt.Errorf("Error marshaling incident_permission_set_boolean: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateIncidentPermissionSetBooleanRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateIncidentPermissionSetBooleanRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -107,7 +107,7 @@ func (c *Client) UpdateIncidentPermissionSetBoolean(id string, incident_permissi
 }
 
 func (c *Client) DeleteIncidentPermissionSetBoolean(id string) error {
-	req, err := rootlygo.NewDeleteIncidentPermissionSetBooleanRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteIncidentPermissionSetBooleanRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

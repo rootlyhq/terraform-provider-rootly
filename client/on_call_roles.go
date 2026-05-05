@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type OnCallRole struct {
@@ -84,7 +84,7 @@ func (c *Client) CreateOnCallRole(d *OnCallRole) (*OnCallRole, error) {
 }
 
 func (c *Client) GetOnCallRole(id string) (*OnCallRole, error) {
-	req, err := rootlygo.NewGetOnCallRoleRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetOnCallRoleRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -109,7 +109,7 @@ func (c *Client) UpdateOnCallRole(id string, on_call_role *OnCallRole) (*OnCallR
 		return nil, fmt.Errorf("Error marshaling on_call_role: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateOnCallRoleRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateOnCallRoleRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -128,7 +128,7 @@ func (c *Client) UpdateOnCallRole(id string, on_call_role *OnCallRole) (*OnCallR
 }
 
 func (c *Client) DeleteOnCallRole(id string) error {
-	req, err := rootlygo.NewDeleteOnCallRoleRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteOnCallRoleRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

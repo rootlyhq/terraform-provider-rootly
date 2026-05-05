@@ -10,7 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
 	"github.com/jianyuan/go-utils/ptr"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/acctest"
-	rootly "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootly "github.com/rootlyhq/rootly-go"
 )
 
 func init() {
@@ -29,13 +29,13 @@ func init() {
 					return fmt.Errorf("Error getting alert routes, got error: %s", err)
 				} else if httpResp.StatusCode() != http.StatusOK {
 					return fmt.Errorf("Error getting alert routes, got status code: %d", httpResp.StatusCode())
-				} else if httpResp.ApplicationvndApiJSON200 == nil {
+				} else if httpResp.ApplicationVndAPIJSON200 == nil {
 					return fmt.Errorf("Error getting alert routes, got empty response")
 				}
 
-				for _, alertRoute := range httpResp.ApplicationvndApiJSON200.Data {
+				for _, alertRoute := range httpResp.ApplicationVndAPIJSON200.Data {
 					if strings.HasPrefix(alertRoute.Attributes.Name, "tf-") {
-						httpResp, err := acctest.SharedClient.DeleteAlertRouteWithResponse(ctx, alertRoute.Id)
+						httpResp, err := acctest.SharedClient.DeleteAlertRouteWithResponse(ctx, rootly.ID(alertRoute.ID))
 						if err != nil {
 							return fmt.Errorf("Error deleting alert route: %s", err)
 						} else if httpResp.StatusCode() != http.StatusOK {
@@ -46,7 +46,7 @@ func init() {
 					}
 				}
 
-				if httpResp.ApplicationvndApiJSON200.Links.Next == nil {
+				if httpResp.ApplicationVndAPIJSON200.Links.Next == nil {
 					break
 				}
 

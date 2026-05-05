@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type IncidentRoleTask struct {
@@ -63,7 +63,7 @@ func (c *Client) CreateIncidentRoleTask(d *IncidentRoleTask) (*IncidentRoleTask,
 }
 
 func (c *Client) GetIncidentRoleTask(id string) (*IncidentRoleTask, error) {
-	req, err := rootlygo.NewGetIncidentRoleTaskRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetIncidentRoleTaskRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -88,7 +88,7 @@ func (c *Client) UpdateIncidentRoleTask(id string, incident_role_task *IncidentR
 		return nil, fmt.Errorf("Error marshaling incident_role_task: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateIncidentRoleTaskRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateIncidentRoleTaskRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -107,7 +107,7 @@ func (c *Client) UpdateIncidentRoleTask(id string, incident_role_task *IncidentR
 }
 
 func (c *Client) DeleteIncidentRoleTask(id string) error {
-	req, err := rootlygo.NewDeleteIncidentRoleTaskRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteIncidentRoleTaskRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

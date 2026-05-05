@@ -10,7 +10,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type ScheduleRotation struct {
@@ -75,7 +75,7 @@ func (c *Client) CreateScheduleRotation(d *ScheduleRotation) (*ScheduleRotation,
 }
 
 func (c *Client) GetScheduleRotation(id string) (*ScheduleRotation, error) {
-	req, err := rootlygo.NewGetScheduleRotationRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetScheduleRotationRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -137,7 +137,7 @@ func (c *Client) UpdateScheduleRotation(id string, schedule_rotation *ScheduleRo
 		return nil, fmt.Errorf("Error marshaling schedule_rotation: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateScheduleRotationRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateScheduleRotationRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -156,7 +156,7 @@ func (c *Client) UpdateScheduleRotation(id string, schedule_rotation *ScheduleRo
 }
 
 func (c *Client) DeleteScheduleRotation(id string) error {
-	req, err := rootlygo.NewDeleteScheduleRotationRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteScheduleRotationRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

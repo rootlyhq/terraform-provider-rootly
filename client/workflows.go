@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type Workflow struct {
@@ -84,7 +84,7 @@ func (c *Client) CreateWorkflow(d *Workflow) (*Workflow, error) {
 }
 
 func (c *Client) GetWorkflow(id string) (*Workflow, error) {
-	req, err := rootlygo.NewGetWorkflowRequest(c.Rootly.Server, id, nil)
+	req, err := rootlygo.NewGetWorkflowRequest(c.Rootly.Server, rootlygo.ID(id), nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -109,7 +109,7 @@ func (c *Client) UpdateWorkflow(id string, workflow *Workflow) (*Workflow, error
 		return nil, fmt.Errorf("Error marshaling workflow: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateWorkflowRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateWorkflowRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -128,7 +128,7 @@ func (c *Client) UpdateWorkflow(id string, workflow *Workflow) (*Workflow, error
 }
 
 func (c *Client) DeleteWorkflow(id string) error {
-	req, err := rootlygo.NewDeleteWorkflowRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteWorkflowRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type IncidentPermissionSetResource struct {
@@ -64,7 +64,7 @@ func (c *Client) CreateIncidentPermissionSetResource(d *IncidentPermissionSetRes
 }
 
 func (c *Client) GetIncidentPermissionSetResource(id string) (*IncidentPermissionSetResource, error) {
-	req, err := rootlygo.NewGetIncidentPermissionSetResourceRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetIncidentPermissionSetResourceRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -89,7 +89,7 @@ func (c *Client) UpdateIncidentPermissionSetResource(id string, incident_permiss
 		return nil, fmt.Errorf("Error marshaling incident_permission_set_resource: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateIncidentPermissionSetResourceRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateIncidentPermissionSetResourceRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -108,7 +108,7 @@ func (c *Client) UpdateIncidentPermissionSetResource(id string, incident_permiss
 }
 
 func (c *Client) DeleteIncidentPermissionSetResource(id string) error {
-	req, err := rootlygo.NewDeleteIncidentPermissionSetResourceRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteIncidentPermissionSetResourceRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type Authorization struct {
@@ -64,7 +64,7 @@ func (c *Client) CreateAuthorization(d *Authorization) (*Authorization, error) {
 }
 
 func (c *Client) GetAuthorization(id string) (*Authorization, error) {
-	req, err := rootlygo.NewGetAuthorizationRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetAuthorizationRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -89,7 +89,7 @@ func (c *Client) UpdateAuthorization(id string, authorization *Authorization) (*
 		return nil, fmt.Errorf("Error marshaling authorization: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateAuthorizationRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateAuthorizationRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -108,7 +108,7 @@ func (c *Client) UpdateAuthorization(id string, authorization *Authorization) (*
 }
 
 func (c *Client) DeleteAuthorization(id string) error {
-	req, err := rootlygo.NewDeleteAuthorizationRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteAuthorizationRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

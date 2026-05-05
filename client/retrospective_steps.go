@@ -6,7 +6,7 @@ import (
 	"fmt"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type RetrospectiveStep struct {
@@ -64,7 +64,7 @@ func (c *Client) CreateRetrospectiveStep(d *RetrospectiveStep) (*RetrospectiveSt
 }
 
 func (c *Client) GetRetrospectiveStep(id string) (*RetrospectiveStep, error) {
-	req, err := rootlygo.NewGetRetrospectiveStepRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetRetrospectiveStepRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -88,7 +88,7 @@ func (c *Client) UpdateRetrospectiveStep(id string, retrospective_step *Retrospe
 		return nil, fmt.Errorf("Error marshaling retrospective_step: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateRetrospectiveStepRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateRetrospectiveStepRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -106,7 +106,7 @@ func (c *Client) UpdateRetrospectiveStep(id string, retrospective_step *Retrospe
 }
 
 func (c *Client) DeleteRetrospectiveStep(id string) error {
-	req, err := rootlygo.NewDeleteRetrospectiveStepRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteRetrospectiveStepRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

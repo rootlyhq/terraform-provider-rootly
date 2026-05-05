@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type SLA struct {
@@ -77,7 +77,7 @@ func (c *Client) CreateSLA(d *SLA) (*SLA, error) {
 }
 
 func (c *Client) GetSLA(id string) (*SLA, error) {
-	req, err := rootlygo.NewGetSLARequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetSLARequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -102,7 +102,7 @@ func (c *Client) UpdateSLA(id string, sla *SLA) (*SLA, error) {
 		return nil, fmt.Errorf("Error marshaling sla: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateSLARequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateSLARequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -121,7 +121,7 @@ func (c *Client) UpdateSLA(id string, sla *SLA) (*SLA, error) {
 }
 
 func (c *Client) DeleteSLA(id string) error {
-	req, err := rootlygo.NewDeleteSLARequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteSLARequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

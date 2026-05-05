@@ -6,7 +6,7 @@ import (
 	"fmt"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type PostmortemTemplate struct {
@@ -60,7 +60,7 @@ func (c *Client) CreatePostmortemTemplate(d *PostmortemTemplate) (*PostmortemTem
 }
 
 func (c *Client) GetPostmortemTemplate(id string) (*PostmortemTemplate, error) {
-	req, err := rootlygo.NewGetPostmortemTemplateRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetPostmortemTemplateRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -84,7 +84,7 @@ func (c *Client) UpdatePostmortemTemplate(id string, post_mortem_template *Postm
 		return nil, fmt.Errorf("Error marshaling post_mortem_template: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdatePostmortemTemplateRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdatePostmortemTemplateRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -102,7 +102,7 @@ func (c *Client) UpdatePostmortemTemplate(id string, post_mortem_template *Postm
 }
 
 func (c *Client) DeletePostmortemTemplate(id string) error {
-	req, err := rootlygo.NewDeletePostmortemTemplateRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeletePostmortemTemplateRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

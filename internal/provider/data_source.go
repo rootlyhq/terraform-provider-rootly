@@ -6,7 +6,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
-	rootly "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootly "github.com/rootlyhq/rootly-go"
 )
 
 type baseDataSource struct {

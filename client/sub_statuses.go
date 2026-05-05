@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type SubStatus struct {
@@ -64,7 +64,7 @@ func (c *Client) CreateSubStatus(d *SubStatus) (*SubStatus, error) {
 }
 
 func (c *Client) GetSubStatus(id string) (*SubStatus, error) {
-	req, err := rootlygo.NewGetSubStatusRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetSubStatusRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -89,7 +89,7 @@ func (c *Client) UpdateSubStatus(id string, sub_status *SubStatus) (*SubStatus, 
 		return nil, fmt.Errorf("Error marshaling sub_status: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateSubStatusRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateSubStatusRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -108,7 +108,7 @@ func (c *Client) UpdateSubStatus(id string, sub_status *SubStatus) (*SubStatus, 
 }
 
 func (c *Client) DeleteSubStatus(id string) error {
-	req, err := rootlygo.NewDeleteSubStatusRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteSubStatusRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

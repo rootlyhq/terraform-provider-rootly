@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type LiveCallRouter struct {
@@ -76,7 +76,7 @@ func (c *Client) CreateLiveCallRouter(d *LiveCallRouter) (*LiveCallRouter, error
 }
 
 func (c *Client) GetLiveCallRouter(id string) (*LiveCallRouter, error) {
-	req, err := rootlygo.NewGetLiveCallRouterRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetLiveCallRouterRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -101,7 +101,7 @@ func (c *Client) UpdateLiveCallRouter(id string, live_call_router *LiveCallRoute
 		return nil, fmt.Errorf("Error marshaling live_call_router: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateLiveCallRouterRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateLiveCallRouterRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -120,7 +120,7 @@ func (c *Client) UpdateLiveCallRouter(id string, live_call_router *LiveCallRoute
 }
 
 func (c *Client) DeleteLiveCallRouter(id string) error {
-	req, err := rootlygo.NewDeleteLiveCallRouterRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteLiveCallRouterRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

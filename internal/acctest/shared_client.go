@@ -6,7 +6,7 @@ import (
 
 	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/apiclient"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/meta"
-	rootly "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootly "github.com/rootlyhq/rootly-go"
 )
 
 var (

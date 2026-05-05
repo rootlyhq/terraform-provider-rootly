@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type WorkflowFormFieldCondition struct {
@@ -72,7 +72,7 @@ func (c *Client) CreateWorkflowFormFieldCondition(d *WorkflowFormFieldCondition)
 }
 
 func (c *Client) GetWorkflowFormFieldCondition(id string) (*WorkflowFormFieldCondition, error) {
-	req, err := rootlygo.NewGetWorkflowFormFieldConditionRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetWorkflowFormFieldConditionRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -97,7 +97,7 @@ func (c *Client) UpdateWorkflowFormFieldCondition(id string, workflow_form_field
 		return nil, fmt.Errorf("Error marshaling workflow_form_field_condition: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateWorkflowFormFieldConditionRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateWorkflowFormFieldConditionRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -116,7 +116,7 @@ func (c *Client) UpdateWorkflowFormFieldCondition(id string, workflow_form_field
 }
 
 func (c *Client) DeleteWorkflowFormFieldCondition(id string) error {
-	req, err := rootlygo.NewDeleteWorkflowFormFieldConditionRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteWorkflowFormFieldConditionRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

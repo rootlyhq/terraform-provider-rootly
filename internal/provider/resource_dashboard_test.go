@@ -10,7 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
 	"github.com/jianyuan/go-utils/ptr"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/acctest"
-	rootly "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootly "github.com/rootlyhq/rootly-go"
 )
 
 func init() {
@@ -29,13 +29,13 @@ func init() {
 					return fmt.Errorf("Error getting dashboards, got error: %s", err)
 				} else if httpResp.StatusCode() != http.StatusOK {
 					return fmt.Errorf("Error getting dashboards, got status code: %d", httpResp.StatusCode())
-				} else if httpResp.ApplicationvndApiJSON200 == nil {
+				} else if httpResp.ApplicationVndAPIJSON200 == nil {
 					return fmt.Errorf("Error getting dashboards, got empty response")
 				}
 
-				for _, dashboard := range httpResp.ApplicationvndApiJSON200.Data {
+				for _, dashboard := range httpResp.ApplicationVndAPIJSON200.Data {
 					if strings.HasPrefix(dashboard.Attributes.Name, "tf-") {
-						httpResp, err := acctest.SharedClient.DeleteDashboardWithResponse(ctx, dashboard.Id)
+						httpResp, err := acctest.SharedClient.DeleteDashboardWithResponse(ctx, rootly.ID(dashboard.ID))
 						if err != nil {
 							return fmt.Errorf("Error deleting dashboard: %s", err)
 						} else if httpResp.StatusCode() != http.StatusOK {
@@ -46,7 +46,7 @@ func init() {
 					}
 				}
 
-				if httpResp.ApplicationvndApiJSON200.Links.Next == nil {
+				if httpResp.ApplicationVndAPIJSON200.Links.Next == nil {
 					break
 				}
 

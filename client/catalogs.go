@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type Catalog struct {
@@ -63,7 +63,7 @@ func (c *Client) CreateCatalog(d *Catalog) (*Catalog, error) {
 }
 
 func (c *Client) GetCatalog(id string) (*Catalog, error) {
-	req, err := rootlygo.NewGetCatalogRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetCatalogRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -88,7 +88,7 @@ func (c *Client) UpdateCatalog(id string, catalog *Catalog) (*Catalog, error) {
 		return nil, fmt.Errorf("Error marshaling catalog: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateCatalogRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateCatalogRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -107,7 +107,7 @@ func (c *Client) UpdateCatalog(id string, catalog *Catalog) (*Catalog, error) {
 }
 
 func (c *Client) DeleteCatalog(id string) error {
-	req, err := rootlygo.NewDeleteCatalogRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteCatalogRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

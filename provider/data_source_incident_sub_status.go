@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 func dataSourceIncidentSubStatus() *schema.Resource {
@@ -49,7 +49,7 @@ func dataSourceIncidentSubStatusRead(ctx context.Context, d *schema.ResourceData
 
 	if value, ok := d.GetOkExists("sub_status_id"); ok {
 		sub_status_id := value.(string)
-		params.FilterSubStatusId = &sub_status_id
+		params.FilterSubStatusID = &sub_status_id
 	}
 
 	assigned_at_gt := d.Get("assigned_at").(map[string]interface{})

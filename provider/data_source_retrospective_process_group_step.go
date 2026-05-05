@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 func dataSourceRetrospectiveProcessGroupStep() *schema.Resource {
@@ -43,7 +43,7 @@ func dataSourceRetrospectiveProcessGroupStepRead(ctx context.Context, d *schema.
 
 	if value, ok := d.GetOkExists("retrospective_step_id"); ok {
 		retrospective_step_id := value.(string)
-		params.FilterRetrospectiveStepId = &retrospective_step_id
+		params.FilterRetrospectiveStepID = &retrospective_step_id
 	}
 
 	created_at_gt := d.Get("created_at").(map[string]interface{})

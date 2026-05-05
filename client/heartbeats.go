@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type Heartbeat struct {
@@ -75,7 +75,7 @@ func (c *Client) CreateHeartbeat(d *Heartbeat) (*Heartbeat, error) {
 }
 
 func (c *Client) GetHeartbeat(id string) (*Heartbeat, error) {
-	req, err := rootlygo.NewGetHeartbeatRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetHeartbeatRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -100,7 +100,7 @@ func (c *Client) UpdateHeartbeat(id string, heartbeat *Heartbeat) (*Heartbeat, e
 		return nil, fmt.Errorf("Error marshaling heartbeat: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateHeartbeatRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateHeartbeatRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -119,7 +119,7 @@ func (c *Client) UpdateHeartbeat(id string, heartbeat *Heartbeat) (*Heartbeat, e
 }
 
 func (c *Client) DeleteHeartbeat(id string) error {
-	req, err := rootlygo.NewDeleteHeartbeatRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteHeartbeatRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

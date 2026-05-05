@@ -62,8 +62,6 @@ vendir-sync:
 
 codegen: vendir-sync
 	cp $(SWAGGER_PATH) schema/swagger.json
-	node tools/clean-swagger.js schema/swagger.json
-	cd schema && go tool oapi-codegen --config=oapi-config.yml swagger.json
 	yarn run generate schema/swagger.json
 	go fmt client/*.go
 	go fmt provider/*.go
@@ -76,8 +74,6 @@ codegen-resource: vendir-sync
 		exit 1; \
 	fi
 	cp $(SWAGGER_PATH) schema/swagger.json
-	node tools/clean-swagger.js schema/swagger.json
-	cd schema && go tool oapi-codegen --config=oapi-config.yml swagger.json
 	yarn run generate schema/swagger.json $(RESOURCE)
 	@RESOURCE_PLURAL=$$(node -e "const inflect = require('./tools/inflect'); console.log(inflect.pluralize('$(RESOURCE)'))"); \
 	go fmt client/$${RESOURCE_PLURAL}.go 2>/dev/null || true; \

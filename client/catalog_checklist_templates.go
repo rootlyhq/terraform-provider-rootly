@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type CatalogChecklistTemplate struct {
@@ -67,7 +67,7 @@ func (c *Client) CreateCatalogChecklistTemplate(d *CatalogChecklistTemplate) (*C
 }
 
 func (c *Client) GetCatalogChecklistTemplate(id string) (*CatalogChecklistTemplate, error) {
-	req, err := rootlygo.NewGetCatalogChecklistTemplateRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetCatalogChecklistTemplateRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -92,7 +92,7 @@ func (c *Client) UpdateCatalogChecklistTemplate(id string, catalog_checklist_tem
 		return nil, fmt.Errorf("Error marshaling catalog_checklist_template: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateCatalogChecklistTemplateRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateCatalogChecklistTemplateRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -111,7 +111,7 @@ func (c *Client) UpdateCatalogChecklistTemplate(id string, catalog_checklist_tem
 }
 
 func (c *Client) DeleteCatalogChecklistTemplate(id string) error {
-	req, err := rootlygo.NewDeleteCatalogChecklistTemplateRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteCatalogChecklistTemplateRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

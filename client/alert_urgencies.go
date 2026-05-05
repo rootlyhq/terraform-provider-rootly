@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type AlertUrgency struct {
@@ -62,7 +62,7 @@ func (c *Client) CreateAlertUrgency(d *AlertUrgency) (*AlertUrgency, error) {
 }
 
 func (c *Client) GetAlertUrgency(id string) (*AlertUrgency, error) {
-	req, err := rootlygo.NewGetAlertUrgencyRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetAlertUrgencyRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -87,7 +87,7 @@ func (c *Client) UpdateAlertUrgency(id string, alert_urgency *AlertUrgency) (*Al
 		return nil, fmt.Errorf("Error marshaling alert_urgency: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateAlertUrgencyRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateAlertUrgencyRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -106,7 +106,7 @@ func (c *Client) UpdateAlertUrgency(id string, alert_urgency *AlertUrgency) (*Al
 }
 
 func (c *Client) DeleteAlertUrgency(id string) error {
-	req, err := rootlygo.NewDeleteAlertUrgencyRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteAlertUrgencyRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}
