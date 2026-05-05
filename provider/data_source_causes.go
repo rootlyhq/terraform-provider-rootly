@@ -70,7 +70,7 @@ func dataSourceCausesRead(ctx context.Context, d *schema.ResourceData, meta inte
 	tf_causes := make([]interface{}, len(causes), len(causes))
 	for i, cause := range causes {
 		c, _ := cause.(*client.Cause)
-		tf_causes[i] = structToLowerFirstMap(*c)
+		tf_causes[i] = filterMapKeys(structToLowerFirstMap(*c), dataSourceCauses().Schema["causes"].Elem.(*schema.Resource).Schema)
 	}
 
 	if err := d.Set("causes", tf_causes); err != nil {

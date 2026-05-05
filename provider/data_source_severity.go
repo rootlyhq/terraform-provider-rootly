@@ -105,6 +105,7 @@ func dataSourceSeverityRead(ctx context.Context, d *schema.ResourceData, meta in
 	item, _ := items[0].(*client.Severity)
 
 	d.SetId(item.ID)
+
 	d.Set("slug", item.Slug)
 	d.Set("name", item.Name)
 	d.Set("severity", item.Severity)

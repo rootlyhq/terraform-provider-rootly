@@ -60,7 +60,8 @@ func dataSource${nameCamel}Read(ctx context.Context, d *schema.ResourceData, met
 	item, _ := items[0].(*client.${nameCamel})
 
 	d.SetId(item.ID)
-	${setOutputFields(resourceSchema, filterParameters)}
+	${pathIdField ? `d.Set("${pathIdField}", ${pathIdField})` : ''}
+	${setOutputFields(resourceSchema, filterParameters, pathIdField)}
 	return nil
 }
 `;
@@ -154,7 +155,7 @@ function setFilterFields(name, resourceSchema, filterParameters) {
     .join("\n");
 }
 
-function setOutputFields(resourceSchema, filterParameters) {
+function setOutputFields(resourceSchema, filterParameters, pathIdField) {
   // Generate d.Set() calls for filter fields so they're available in Terraform state
   return (filterParameters || [])
     .filter((paramSchema) => {
@@ -162,6 +163,8 @@ function setOutputFields(resourceSchema, filterParameters) {
     })
     .map((paramSchema) => {
       const filterField = filterUnderscore(paramSchema.name);
+      // Skip pathIdField — already set from the local variable above
+      if (pathIdField && filterField === pathIdField) return;
       // Try to find the field in the schema, checking both plural and singular forms
       let fieldSchema = resourceSchema.properties[filterField];
       let schemaFieldName = filterField;

@@ -70,7 +70,7 @@ func dataSourceIncidentTypesRead(ctx context.Context, d *schema.ResourceData, me
 	tf_incident_types := make([]interface{}, len(incident_types), len(incident_types))
 	for i, incident_type := range incident_types {
 		c, _ := incident_type.(*client.IncidentType)
-		tf_incident_types[i] = structToLowerFirstMap(*c)
+		tf_incident_types[i] = filterMapKeys(structToLowerFirstMap(*c), dataSourceIncidentTypes().Schema["incident_types"].Elem.(*schema.Resource).Schema)
 	}
 
 	if err := d.Set("incident_types", tf_incident_types); err != nil {

@@ -98,6 +98,7 @@ func dataSourceWorkflowGroupRead(ctx context.Context, d *schema.ResourceData, me
 	item, _ := items[0].(*client.WorkflowGroup)
 
 	d.SetId(item.ID)
+
 	d.Set("name", item.Name)
 	d.Set("slug", item.Slug)
 	d.Set("kind", item.Kind)

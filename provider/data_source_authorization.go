@@ -106,6 +106,7 @@ func dataSourceAuthorizationRead(ctx context.Context, d *schema.ResourceData, me
 	item, _ := items[0].(*client.Authorization)
 
 	d.SetId(item.ID)
+
 	d.Set("authorizable_id", item.AuthorizableId)
 	d.Set("authorizable_type", item.AuthorizableType)
 	d.Set("grantee_id", item.GranteeId)
