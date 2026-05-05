@@ -75,11 +75,6 @@ func resourceWorkflowTaskUpdateConfluencePage() *schema.Resource {
 								"update_confluence_page",
 							}, false),
 						},
-						"integration": &schema.Schema{
-							Description: "Map must contain two fields, `id` and `name`. Specify integration id if you have more than one Confluence instance",
-							Type:        schema.TypeMap,
-							Optional:    true,
-						},
 						"file_id": &schema.Schema{
 							Description: "The Confluence page ID",
 							Type:        schema.TypeString,
