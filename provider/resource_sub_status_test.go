@@ -9,7 +9,7 @@ import (
 )
 
 func TestAccResourceSubStatus(t *testing.T) {
-	rName := acctest.RandomWithPrefix("tf-sub-status")
+	rName := "tf-ss-" + acctest.RandString(10)
 
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck: func() {
