@@ -106,6 +106,7 @@ func dataSourceCatalogChecklistTemplateRead(ctx context.Context, d *schema.Resou
 	item, _ := items[0].(*client.CatalogChecklistTemplate)
 
 	d.SetId(item.ID)
+
 	d.Set("name", item.Name)
 	d.Set("slug", item.Slug)
 	d.Set("catalog_type", item.CatalogType)

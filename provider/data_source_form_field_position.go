@@ -60,6 +60,7 @@ func dataSourceFormFieldPositionRead(ctx context.Context, d *schema.ResourceData
 	item, _ := items[0].(*client.FormFieldPosition)
 
 	d.SetId(item.ID)
+	d.Set("form_field_id", form_field_id)
 	d.Set("form", item.Form)
 	return nil
 }
