@@ -240,7 +240,7 @@ function annotatedDescription(schema) {
   if (schema.enum) {
     return `${
       !!description ? `${description}. ` : ""
-    }Value must be one off ${schema.enum
+    }Value must be one of ${schema.enum
       .map((val) => `\`${val}\``)
       .join(", ")}.`;
   }

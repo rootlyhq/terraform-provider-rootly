@@ -159,7 +159,7 @@ func resourceWorkflowSimple() *schema.Resource {
 							Default:     "simple",
 							Required:    false,
 							Optional:    true,
-							Description: "Value must be one off `simple`.",
+							Description: "Value must be one of `simple`.",
 						},
 
 						"triggers": &schema.Schema{
