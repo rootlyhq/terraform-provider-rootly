@@ -9,7 +9,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
@@ -32,7 +31,9 @@ func resourceEscalationPath() *schema.Resource {
 				Computed:    false,
 				Required:    true,
 				Optional:    false,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The name of the escalation path",
 			},
 
@@ -41,6 +42,9 @@ func resourceEscalationPath() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Whether this escalation path is the default path. Value must be one of true or false",
 			},
 
@@ -49,7 +53,9 @@ func resourceEscalationPath() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Notification rule type",
 			},
 
@@ -58,9 +64,22 @@ func resourceEscalationPath() *schema.Resource {
 				Default:      "escalation",
 				Required:     false,
 				Optional:     true,
-				ForceNew:     true,
-				Description:  "The type of escalation path. Cannot be changed after creation.. Value must be one of `escalation`, `deferral`.",
+				Sensitive:    false,
+				ForceNew:     false,
+				WriteOnly:    false,
+				Description:  "The type of escalation path. Value must be one of `escalation`, `deferral`.",
 				ValidateFunc: validation.StringInSlice([]string{"escalation", "deferral"}, false),
+			},
+
+			"escalation_policy_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    true,
+				WriteOnly:   false,
+				Description: "The ID of the escalation policy",
 			},
 
 			"after_deferral_behavior": &schema.Schema{
@@ -68,8 +87,10 @@ func resourceEscalationPath() *schema.Resource {
 				Computed:     true,
 				Required:     false,
 				Optional:     true,
+				Sensitive:    false,
 				ForceNew:     false,
-				Description:  "What happens after a deferral path finishes. Required for deferral paths.. Value must be one of `re_evaluate`, `execute_path`.",
+				WriteOnly:    false,
+				Description:  "What happens after a deferral path finishes. Value must be one of `re_evaluate`, `execute_path`.",
 				ValidateFunc: validation.StringInSlice([]string{"re_evaluate", "execute_path"}, false),
 			},
 
@@ -78,17 +99,10 @@ func resourceEscalationPath() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
-				Description: "The escalation path to execute after this deferral path when after_deferral_behavior is execute_path.",
-			},
-
-			"escalation_policy_id": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    true,
-				Description: "The ID of the escalation policy",
+				WriteOnly:   false,
+				Description: "The escalation path to execute after this deferral path when after_deferral_behavior is execute_path",
 			},
 
 			"match_mode": &schema.Schema{
@@ -96,7 +110,9 @@ func resourceEscalationPath() *schema.Resource {
 				Default:      "match-all-rules",
 				Required:     false,
 				Optional:     true,
+				Sensitive:    false,
 				ForceNew:     false,
+				WriteOnly:    false,
 				Description:  "How path rules are matched.. Value must be one of `match-all-rules`, `match-any-rule`.",
 				ValidateFunc: validation.StringInSlice([]string{"match-all-rules", "match-any-rule"}, false),
 			},
@@ -106,7 +122,9 @@ func resourceEscalationPath() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The position of this path in the paths for this EP.",
 			},
 
@@ -115,6 +133,9 @@ func resourceEscalationPath() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Whether this path should be repeated until someone acknowledges the alert. Value must be one of true or false",
 			},
 
@@ -123,7 +144,9 @@ func resourceEscalationPath() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "The number of times this path will be executed until someone acknowledges the alert",
 			},
 
@@ -132,7 +155,9 @@ func resourceEscalationPath() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
+				Sensitive:   false,
 				ForceNew:    false,
+				WriteOnly:   false,
 				Description: "Initial delay for escalation path in minutes. Maximum 1 week (10080).",
 			},
 
@@ -141,6 +166,9 @@ func resourceEscalationPath() *schema.Resource {
 				Computed:         false,
 				Required:         false,
 				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
 				Description:      "Escalation path rules",
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Elem: &schema.Resource{
@@ -148,12 +176,14 @@ func resourceEscalationPath() *schema.Resource {
 
 						"rule_type": &schema.Schema{
 							Type:         schema.TypeString,
-							Computed:     true,
+							Default:      "deferral_window",
 							Required:     false,
 							Optional:     true,
+							Sensitive:    false,
 							ForceNew:     false,
-							Description:  "The type of the escalation path rule. Value must be one of `alert_urgency`, `working_hour`, `json_path`, `field`, `service`, `deferral_window`.",
-							ValidateFunc: validation.StringInSlice([]string{"alert_urgency", "working_hour", "json_path", "field", "service", "deferral_window"}, false),
+							WriteOnly:    false,
+							Description:  "The type of the escalation path rule. Value must be one of `deferral_window`.",
+							ValidateFunc: validation.StringInSlice([]string{"deferral_window"}, false),
 						},
 
 						"urgency_ids": &schema.Schema{
@@ -165,6 +195,9 @@ func resourceEscalationPath() *schema.Resource {
 							Computed:         false,
 							Required:         false,
 							Optional:         true,
+							Sensitive:        false,
+							ForceNew:         false,
+							WriteOnly:        false,
 							Description:      "Alert urgency ids for which this escalation path should be used",
 						},
 
@@ -173,6 +206,9 @@ func resourceEscalationPath() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
 							Description: "Whether the escalation path should be used within working hours. Value must be one of true or false",
 						},
 
@@ -181,18 +217,22 @@ func resourceEscalationPath() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
+							Sensitive:   false,
 							ForceNew:    false,
+							WriteOnly:   false,
 							Description: "JSON path to extract value from payload",
 						},
 
 						"operator": &schema.Schema{
 							Type:         schema.TypeString,
-							Computed:     true,
+							Default:      "is",
 							Required:     false,
 							Optional:     true,
+							Sensitive:    false,
 							ForceNew:     false,
-							Description:  "How the value should be matched. For `json_path` rule type: `is`, `is_not`, `contains`, `does_not_contain`. For `field` rule type: `is`, `is_not`, `contains`, `does_not_contain`, `is_one_of`, `is_not_one_of`, `is_empty`, `is_not_empty`, `contains_key`, `does_not_contain_key`, `starts_with`, `does_not_start_with`, `matches`, `does_not_match`.",
-							ValidateFunc: validation.StringInSlice([]string{"is", "is_not", "contains", "does_not_contain", "is_one_of", "is_not_one_of", "is_empty", "is_not_empty", "contains_key", "does_not_contain_key", "starts_with", "does_not_start_with", "matches", "does_not_match"}, false),
+							WriteOnly:    false,
+							Description:  "How the alert field value should be matched. Value must be one of `is`, `is_not`, `is_one_of`, `is_not_one_of`, `contains`, `does_not_contain`, `is_empty`, `is_not_empty`, `contains_key`, `does_not_contain_key`, `starts_with`, `does_not_start_with`, `matches`, `does_not_match`.",
+							ValidateFunc: validation.StringInSlice([]string{"is", "is_not", "is_one_of", "is_not_one_of", "contains", "does_not_contain", "is_empty", "is_not_empty", "contains_key", "does_not_contain_key", "starts_with", "does_not_start_with", "matches", "does_not_match"}, false),
 						},
 
 						"value": &schema.Schema{
@@ -200,27 +240,10 @@ func resourceEscalationPath() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
+							Sensitive:   false,
 							ForceNew:    false,
+							WriteOnly:   false,
 							Description: "Value with which JSON path value should be matched",
-						},
-
-						"fieldable_type": &schema.Schema{
-							Type:         schema.TypeString,
-							Computed:     true,
-							Required:     false,
-							Optional:     true,
-							ForceNew:     false,
-							Description:  "The type of the fieldable. Only used with `field` rule type. Value must be one of `AlertField`.",
-							ValidateFunc: validation.StringInSlice([]string{"AlertField"}, false),
-						},
-
-						"fieldable_id": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "The ID of the alert field. Only used with `field` rule type.",
 						},
 
 						"values": &schema.Schema{
@@ -232,7 +255,32 @@ func resourceEscalationPath() *schema.Resource {
 							Computed:         false,
 							Required:         false,
 							Optional:         true,
-							Description:      "Values to match against. Only used with `field` rule type.",
+							Sensitive:        false,
+							ForceNew:         false,
+							WriteOnly:        false,
+							Description:      "Values to match against",
+						},
+
+						"fieldable_type": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "The type of the fieldable (e.g., AlertField)",
+						},
+
+						"fieldable_id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "The ID of the alert field",
 						},
 
 						"service_ids": &schema.Schema{
@@ -244,17 +292,22 @@ func resourceEscalationPath() *schema.Resource {
 							Computed:         false,
 							Required:         false,
 							Optional:         true,
-							Description:      "Service ids for which this escalation path should be used. Only used with `service` rule type.",
+							Sensitive:        false,
+							ForceNew:         false,
+							WriteOnly:        false,
+							Description:      "Service ids for which this escalation path should be used",
 						},
 
 						"time_zone": &schema.Schema{
 							Type:         schema.TypeString,
-							Computed:     true,
+							Default:      "International Date Line West",
 							Required:     false,
 							Optional:     true,
+							Sensitive:    false,
 							ForceNew:     false,
-							Description:  "Time zone for the deferral window (IANA format, e.g. `America/New_York`). Only used with `deferral_window` rule type.",
-							ValidateFunc: validation.StringInSlice(IANATimeZones, false),
+							WriteOnly:    false,
+							Description:  "Time zone for the deferral window. Value must be one of `International Date Line West`, `Etc/GMT+12`, `American Samoa`, `Pacific/Pago_Pago`, `Midway Island`, `Pacific/Midway`, `Hawaii`, `Pacific/Honolulu`, `Alaska`, `America/Juneau`, `Pacific Time (US & Canada)`, `America/Los_Angeles`, `Tijuana`, `America/Tijuana`, `Arizona`, `America/Phoenix`, `Mazatlan`, `America/Mazatlan`, `Mountain Time (US & Canada)`, `America/Denver`, `Central America`, `America/Guatemala`, `Central Time (US & Canada)`, `America/Chicago`, `Chihuahua`, `America/Chihuahua`, `Guadalajara`, `America/Mexico_City`, `Mexico City`, `America/Mexico_City`, `Monterrey`, `America/Monterrey`, `Saskatchewan`, `America/Regina`, `Bogota`, `America/Bogota`, `Eastern Time (US & Canada)`, `America/New_York`, `Indiana (East)`, `America/Indiana/Indianapolis`, `Lima`, `America/Lima`, `Quito`, `America/Lima`, `Atlantic Time (Canada)`, `America/Halifax`, `Caracas`, `America/Caracas`, `Georgetown`, `America/Guyana`, `La Paz`, `America/La_Paz`, `Puerto Rico`, `America/Puerto_Rico`, `Santiago`, `America/Santiago`, `Newfoundland`, `America/St_Johns`, `Asuncion`, `America/Asuncion`, `Brasilia`, `America/Sao_Paulo`, `Buenos Aires`, `America/Argentina/Buenos_Aires`, `Montevideo`, `America/Montevideo`, `Greenland`, `America/Nuuk`, `Mid-Atlantic`, `Atlantic/South_Georgia`, `Azores`, `Atlantic/Azores`, `Cape Verde Is.`, `Atlantic/Cape_Verde`, `Edinburgh`, `Europe/London`, `Lisbon`, `Europe/Lisbon`, `London`, `Europe/London`, `Monrovia`, `Africa/Monrovia`, `UTC`, `Etc/UTC`, `Amsterdam`, `Europe/Amsterdam`, `Belgrade`, `Europe/Belgrade`, `Berlin`, `Europe/Berlin`, `Bern`, `Europe/Zurich`, `Bratislava`, `Europe/Bratislava`, `Brussels`, `Europe/Brussels`, `Budapest`, `Europe/Budapest`, `Casablanca`, `Africa/Casablanca`, `Copenhagen`, `Europe/Copenhagen`, `Dublin`, `Europe/Dublin`, `Ljubljana`, `Europe/Ljubljana`, `Madrid`, `Europe/Madrid`, `Paris`, `Europe/Paris`, `Prague`, `Europe/Prague`, `Rome`, `Europe/Rome`, `Sarajevo`, `Europe/Sarajevo`, `Skopje`, `Europe/Skopje`, `Stockholm`, `Europe/Stockholm`, `Vienna`, `Europe/Vienna`, `Warsaw`, `Europe/Warsaw`, `West Central Africa`, `Africa/Algiers`, `Zagreb`, `Europe/Zagreb`, `Zurich`, `Europe/Zurich`, `Athens`, `Europe/Athens`, `Bucharest`, `Europe/Bucharest`, `Cairo`, `Africa/Cairo`, `Harare`, `Africa/Harare`, `Helsinki`, `Europe/Helsinki`, `Jerusalem`, `Asia/Jerusalem`, `Kaliningrad`, `Europe/Kaliningrad`, `Kyiv`, `Europe/Kiev`, `Pretoria`, `Africa/Johannesburg`, `Riga`, `Europe/Riga`, `Sofia`, `Europe/Sofia`, `Tallinn`, `Europe/Tallinn`, `Vilnius`, `Europe/Vilnius`, `Baghdad`, `Asia/Baghdad`, `Istanbul`, `Europe/Istanbul`, `Kuwait`, `Asia/Kuwait`, `Minsk`, `Europe/Minsk`, `Moscow`, `Europe/Moscow`, `Nairobi`, `Africa/Nairobi`, `Riyadh`, `Asia/Riyadh`, `St. Petersburg`, `Europe/Moscow`, `Volgograd`, `Europe/Volgograd`, `Tehran`, `Asia/Tehran`, `Abu Dhabi`, `Asia/Muscat`, `Baku`, `Asia/Baku`, `Muscat`, `Asia/Muscat`, `Samara`, `Europe/Samara`, `Tbilisi`, `Asia/Tbilisi`, `Yerevan`, `Asia/Yerevan`, `Kabul`, `Asia/Kabul`, `Almaty`, `Asia/Almaty`, `Astana`, `Asia/Almaty`, `Ekaterinburg`, `Asia/Yekaterinburg`, `Islamabad`, `Asia/Karachi`, `Karachi`, `Asia/Karachi`, `Tashkent`, `Asia/Tashkent`, `Chennai`, `Asia/Kolkata`, `Kolkata`, `Asia/Kolkata`, `Mumbai`, `Asia/Kolkata`, `New Delhi`, `Asia/Kolkata`, `Sri Jayawardenepura`, `Asia/Colombo`, `Kathmandu`, `Asia/Kathmandu`, `Dhaka`, `Asia/Dhaka`, `Urumqi`, `Asia/Urumqi`, `Rangoon`, `Asia/Rangoon`, `Bangkok`, `Asia/Bangkok`, `Hanoi`, `Asia/Bangkok`, `Jakarta`, `Asia/Jakarta`, `Krasnoyarsk`, `Asia/Krasnoyarsk`, `Novosibirsk`, `Asia/Novosibirsk`, `Beijing`, `Asia/Shanghai`, `Chongqing`, `Asia/Chongqing`, `Hong Kong`, `Asia/Hong_Kong`, `Irkutsk`, `Asia/Irkutsk`, `Kuala Lumpur`, `Asia/Kuala_Lumpur`, `Perth`, `Australia/Perth`, `Singapore`, `Asia/Singapore`, `Taipei`, `Asia/Taipei`, `Ulaanbaatar`, `Asia/Ulaanbaatar`, `Osaka`, `Asia/Tokyo`, `Sapporo`, `Asia/Tokyo`, `Seoul`, `Asia/Seoul`, `Tokyo`, `Asia/Tokyo`, `Yakutsk`, `Asia/Yakutsk`, `Adelaide`, `Australia/Adelaide`, `Darwin`, `Australia/Darwin`, `Brisbane`, `Australia/Brisbane`, `Canberra`, `Australia/Canberra`, `Guam`, `Pacific/Guam`, `Hobart`, `Australia/Hobart`, `Melbourne`, `Australia/Melbourne`, `Port Moresby`, `Pacific/Port_Moresby`, `Sydney`, `Australia/Sydney`, `Vladivostok`, `Asia/Vladivostok`, `Magadan`, `Asia/Magadan`, `New Caledonia`, `Pacific/Noumea`, `Solomon Is.`, `Pacific/Guadalcanal`, `Srednekolymsk`, `Asia/Srednekolymsk`, `Auckland`, `Pacific/Auckland`, `Fiji`, `Pacific/Fiji`, `Kamchatka`, `Asia/Kamchatka`, `Marshall Is.`, `Pacific/Majuro`, `Wellington`, `Pacific/Auckland`, `Chatham Is.`, `Pacific/Chatham`, `Nuku'alofa`, `Pacific/Tongatapu`, `Samoa`, `Pacific/Apia`, `Tokelau Is.`, `Pacific/Fakaofo`.",
+							ValidateFunc: validation.StringInSlice([]string{"International Date Line West", "Etc/GMT+12", "American Samoa", "Pacific/Pago_Pago", "Midway Island", "Pacific/Midway", "Hawaii", "Pacific/Honolulu", "Alaska", "America/Juneau", "Pacific Time (US & Canada)", "America/Los_Angeles", "Tijuana", "America/Tijuana", "Arizona", "America/Phoenix", "Mazatlan", "America/Mazatlan", "Mountain Time (US & Canada)", "America/Denver", "Central America", "America/Guatemala", "Central Time (US & Canada)", "America/Chicago", "Chihuahua", "America/Chihuahua", "Guadalajara", "America/Mexico_City", "Mexico City", "America/Mexico_City", "Monterrey", "America/Monterrey", "Saskatchewan", "America/Regina", "Bogota", "America/Bogota", "Eastern Time (US & Canada)", "America/New_York", "Indiana (East)", "America/Indiana/Indianapolis", "Lima", "America/Lima", "Quito", "America/Lima", "Atlantic Time (Canada)", "America/Halifax", "Caracas", "America/Caracas", "Georgetown", "America/Guyana", "La Paz", "America/La_Paz", "Puerto Rico", "America/Puerto_Rico", "Santiago", "America/Santiago", "Newfoundland", "America/St_Johns", "Asuncion", "America/Asuncion", "Brasilia", "America/Sao_Paulo", "Buenos Aires", "America/Argentina/Buenos_Aires", "Montevideo", "America/Montevideo", "Greenland", "America/Nuuk", "Mid-Atlantic", "Atlantic/South_Georgia", "Azores", "Atlantic/Azores", "Cape Verde Is.", "Atlantic/Cape_Verde", "Edinburgh", "Europe/London", "Lisbon", "Europe/Lisbon", "London", "Europe/London", "Monrovia", "Africa/Monrovia", "UTC", "Etc/UTC", "Amsterdam", "Europe/Amsterdam", "Belgrade", "Europe/Belgrade", "Berlin", "Europe/Berlin", "Bern", "Europe/Zurich", "Bratislava", "Europe/Bratislava", "Brussels", "Europe/Brussels", "Budapest", "Europe/Budapest", "Casablanca", "Africa/Casablanca", "Copenhagen", "Europe/Copenhagen", "Dublin", "Europe/Dublin", "Ljubljana", "Europe/Ljubljana", "Madrid", "Europe/Madrid", "Paris", "Europe/Paris", "Prague", "Europe/Prague", "Rome", "Europe/Rome", "Sarajevo", "Europe/Sarajevo", "Skopje", "Europe/Skopje", "Stockholm", "Europe/Stockholm", "Vienna", "Europe/Vienna", "Warsaw", "Europe/Warsaw", "West Central Africa", "Africa/Algiers", "Zagreb", "Europe/Zagreb", "Zurich", "Europe/Zurich", "Athens", "Europe/Athens", "Bucharest", "Europe/Bucharest", "Cairo", "Africa/Cairo", "Harare", "Africa/Harare", "Helsinki", "Europe/Helsinki", "Jerusalem", "Asia/Jerusalem", "Kaliningrad", "Europe/Kaliningrad", "Kyiv", "Europe/Kiev", "Pretoria", "Africa/Johannesburg", "Riga", "Europe/Riga", "Sofia", "Europe/Sofia", "Tallinn", "Europe/Tallinn", "Vilnius", "Europe/Vilnius", "Baghdad", "Asia/Baghdad", "Istanbul", "Europe/Istanbul", "Kuwait", "Asia/Kuwait", "Minsk", "Europe/Minsk", "Moscow", "Europe/Moscow", "Nairobi", "Africa/Nairobi", "Riyadh", "Asia/Riyadh", "St. Petersburg", "Europe/Moscow", "Volgograd", "Europe/Volgograd", "Tehran", "Asia/Tehran", "Abu Dhabi", "Asia/Muscat", "Baku", "Asia/Baku", "Muscat", "Asia/Muscat", "Samara", "Europe/Samara", "Tbilisi", "Asia/Tbilisi", "Yerevan", "Asia/Yerevan", "Kabul", "Asia/Kabul", "Almaty", "Asia/Almaty", "Astana", "Asia/Almaty", "Ekaterinburg", "Asia/Yekaterinburg", "Islamabad", "Asia/Karachi", "Karachi", "Asia/Karachi", "Tashkent", "Asia/Tashkent", "Chennai", "Asia/Kolkata", "Kolkata", "Asia/Kolkata", "Mumbai", "Asia/Kolkata", "New Delhi", "Asia/Kolkata", "Sri Jayawardenepura", "Asia/Colombo", "Kathmandu", "Asia/Kathmandu", "Dhaka", "Asia/Dhaka", "Urumqi", "Asia/Urumqi", "Rangoon", "Asia/Rangoon", "Bangkok", "Asia/Bangkok", "Hanoi", "Asia/Bangkok", "Jakarta", "Asia/Jakarta", "Krasnoyarsk", "Asia/Krasnoyarsk", "Novosibirsk", "Asia/Novosibirsk", "Beijing", "Asia/Shanghai", "Chongqing", "Asia/Chongqing", "Hong Kong", "Asia/Hong_Kong", "Irkutsk", "Asia/Irkutsk", "Kuala Lumpur", "Asia/Kuala_Lumpur", "Perth", "Australia/Perth", "Singapore", "Asia/Singapore", "Taipei", "Asia/Taipei", "Ulaanbaatar", "Asia/Ulaanbaatar", "Osaka", "Asia/Tokyo", "Sapporo", "Asia/Tokyo", "Seoul", "Asia/Seoul", "Tokyo", "Asia/Tokyo", "Yakutsk", "Asia/Yakutsk", "Adelaide", "Australia/Adelaide", "Darwin", "Australia/Darwin", "Brisbane", "Australia/Brisbane", "Canberra", "Australia/Canberra", "Guam", "Pacific/Guam", "Hobart", "Australia/Hobart", "Melbourne", "Australia/Melbourne", "Port Moresby", "Pacific/Port_Moresby", "Sydney", "Australia/Sydney", "Vladivostok", "Asia/Vladivostok", "Magadan", "Asia/Magadan", "New Caledonia", "Pacific/Noumea", "Solomon Is.", "Pacific/Guadalcanal", "Srednekolymsk", "Asia/Srednekolymsk", "Auckland", "Pacific/Auckland", "Fiji", "Pacific/Fiji", "Kamchatka", "Asia/Kamchatka", "Marshall Is.", "Pacific/Majuro", "Wellington", "Pacific/Auckland", "Chatham Is.", "Pacific/Chatham", "Nuku'alofa", "Pacific/Tongatapu", "Samoa", "Pacific/Apia", "Tokelau Is.", "Pacific/Fakaofo"}, false),
 						},
 
 						"time_blocks": &schema.Schema{
@@ -262,89 +315,125 @@ func resourceEscalationPath() *schema.Resource {
 							Computed:         false,
 							Required:         false,
 							Optional:         true,
-							Description:      "Time windows during which alerts are deferred. Only used with `deferral_window` rule type.",
+							Sensitive:        false,
+							ForceNew:         false,
+							WriteOnly:        false,
+							Description:      "Time windows during which alerts are deferred",
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
+
 									"monday": &schema.Schema{
 										Type:        schema.TypeBool,
-										Computed:    true,
-										Required:    false,
+										Default:     false,
 										Optional:    true,
-										Description: "Whether the time block applies on Monday",
+										Sensitive:   false,
+										ForceNew:    false,
+										WriteOnly:   false,
+										Description: "Value must be one of true or false",
 									},
+
 									"tuesday": &schema.Schema{
 										Type:        schema.TypeBool,
-										Computed:    true,
-										Required:    false,
+										Default:     false,
 										Optional:    true,
-										Description: "Whether the time block applies on Tuesday",
+										Sensitive:   false,
+										ForceNew:    false,
+										WriteOnly:   false,
+										Description: "Value must be one of true or false",
 									},
+
 									"wednesday": &schema.Schema{
 										Type:        schema.TypeBool,
-										Computed:    true,
-										Required:    false,
+										Default:     false,
 										Optional:    true,
-										Description: "Whether the time block applies on Wednesday",
+										Sensitive:   false,
+										ForceNew:    false,
+										WriteOnly:   false,
+										Description: "Value must be one of true or false",
 									},
+
 									"thursday": &schema.Schema{
 										Type:        schema.TypeBool,
-										Computed:    true,
-										Required:    false,
+										Default:     false,
 										Optional:    true,
-										Description: "Whether the time block applies on Thursday",
+										Sensitive:   false,
+										ForceNew:    false,
+										WriteOnly:   false,
+										Description: "Value must be one of true or false",
 									},
+
 									"friday": &schema.Schema{
 										Type:        schema.TypeBool,
-										Computed:    true,
-										Required:    false,
+										Default:     false,
 										Optional:    true,
-										Description: "Whether the time block applies on Friday",
+										Sensitive:   false,
+										ForceNew:    false,
+										WriteOnly:   false,
+										Description: "Value must be one of true or false",
 									},
+
 									"saturday": &schema.Schema{
 										Type:        schema.TypeBool,
-										Computed:    true,
-										Required:    false,
+										Default:     false,
 										Optional:    true,
-										Description: "Whether the time block applies on Saturday",
+										Sensitive:   false,
+										ForceNew:    false,
+										WriteOnly:   false,
+										Description: "Value must be one of true or false",
 									},
+
 									"sunday": &schema.Schema{
 										Type:        schema.TypeBool,
-										Computed:    true,
-										Required:    false,
+										Default:     false,
 										Optional:    true,
-										Description: "Whether the time block applies on Sunday",
+										Sensitive:   false,
+										ForceNew:    false,
+										WriteOnly:   false,
+										Description: "Value must be one of true or false",
 									},
+
 									"start_time": &schema.Schema{
 										Type:        schema.TypeString,
 										Computed:    true,
 										Required:    false,
 										Optional:    true,
+										Sensitive:   false,
 										ForceNew:    false,
+										WriteOnly:   false,
 										Description: "Formatted as HH:MM",
 									},
+
 									"end_time": &schema.Schema{
 										Type:        schema.TypeString,
 										Computed:    true,
 										Required:    false,
 										Optional:    true,
+										Sensitive:   false,
 										ForceNew:    false,
+										WriteOnly:   false,
 										Description: "Formatted as HH:MM",
 									},
+
 									"all_day": &schema.Schema{
 										Type:        schema.TypeBool,
-										Computed:    true,
-										Required:    false,
+										Default:     false,
 										Optional:    true,
-										Description: "Whether this time block covers the entire day",
+										Sensitive:   false,
+										ForceNew:    false,
+										WriteOnly:   false,
+										Description: "Value must be one of true or false",
 									},
+
 									"position": &schema.Schema{
 										Type:        schema.TypeInt,
 										Computed:    true,
 										Required:    false,
 										Optional:    true,
+										Sensitive:   false,
 										ForceNew:    false,
-										Description: "Position of the time block",
+										WriteOnly:   false,
+										Description: "",
 									},
 								},
 							},
@@ -355,12 +444,14 @@ func resourceEscalationPath() *schema.Resource {
 
 			"time_restriction_time_zone": &schema.Schema{
 				Type:         schema.TypeString,
-				Default:      "International Date Line West",
+				Computed:     true,
 				Required:     false,
 				Optional:     true,
+				Sensitive:    false,
 				ForceNew:     false,
-				Description:  "Time zone used for time restrictions.. Value must be one of `International Date Line West`, `Etc/GMT+12`, `American Samoa`, `Pacific/Pago_Pago`, `Midway Island`, `Pacific/Midway`, `Hawaii`, `Pacific/Honolulu`, `Alaska`, `America/Juneau`, `Pacific Time (US & Canada)`, `America/Los_Angeles`, `Tijuana`, `America/Tijuana`, `Arizona`, `America/Phoenix`, `Mazatlan`, `America/Mazatlan`, `Mountain Time (US & Canada)`, `America/Denver`, `Central America`, `America/Guatemala`, `Central Time (US & Canada)`, `America/Chicago`, `Chihuahua`, `America/Chihuahua`, `Guadalajara`, `America/Mexico_City`, `Mexico City`, `America/Mexico_City`, `Monterrey`, `America/Monterrey`, `Saskatchewan`, `America/Regina`, `Bogota`, `America/Bogota`, `Eastern Time (US & Canada)`, `America/New_York`, `Indiana (East)`, `America/Indiana/Indianapolis`, `Lima`, `America/Lima`, `Quito`, `America/Lima`, `Atlantic Time (Canada)`, `America/Halifax`, `Caracas`, `America/Caracas`, `Georgetown`, `America/Guyana`, `La Paz`, `America/La_Paz`, `Puerto Rico`, `America/Puerto_Rico`, `Santiago`, `America/Santiago`, `Newfoundland`, `America/St_Johns`, `Brasilia`, `America/Sao_Paulo`, `Buenos Aires`, `America/Argentina/Buenos_Aires`, `Montevideo`, `America/Montevideo`, `Greenland`, `America/Godthab`, `Mid-Atlantic`, `Atlantic/South_Georgia`, `Azores`, `Atlantic/Azores`, `Cape Verde Is.`, `Atlantic/Cape_Verde`, `Casablanca`, `Africa/Casablanca`, `Dublin`, `Europe/Dublin`, `Edinburgh`, `Europe/London`, `Lisbon`, `Europe/Lisbon`, `London`, `Europe/London`, `Monrovia`, `Africa/Monrovia`, `UTC`, `Etc/UTC`, `Amsterdam`, `Europe/Amsterdam`, `Belgrade`, `Europe/Belgrade`, `Berlin`, `Europe/Berlin`, `Bern`, `Europe/Zurich`, `Bratislava`, `Europe/Bratislava`, `Brussels`, `Europe/Brussels`, `Budapest`, `Europe/Budapest`, `Copenhagen`, `Europe/Copenhagen`, `Ljubljana`, `Europe/Ljubljana`, `Madrid`, `Europe/Madrid`, `Paris`, `Europe/Paris`, `Prague`, `Europe/Prague`, `Rome`, `Europe/Rome`, `Sarajevo`, `Europe/Sarajevo`, `Skopje`, `Europe/Skopje`, `Stockholm`, `Europe/Stockholm`, `Vienna`, `Europe/Vienna`, `Warsaw`, `Europe/Warsaw`, `West Central Africa`, `Africa/Algiers`, `Zagreb`, `Europe/Zagreb`, `Zurich`, `Europe/Zurich`, `Athens`, `Europe/Athens`, `Bucharest`, `Europe/Bucharest`, `Cairo`, `Africa/Cairo`, `Harare`, `Africa/Harare`, `Helsinki`, `Europe/Helsinki`, `Jerusalem`, `Asia/Jerusalem`, `Kaliningrad`, `Europe/Kaliningrad`, `Kyiv`, `Europe/Kiev`, `Pretoria`, `Africa/Johannesburg`, `Riga`, `Europe/Riga`, `Sofia`, `Europe/Sofia`, `Tallinn`, `Europe/Tallinn`, `Vilnius`, `Europe/Vilnius`, `Baghdad`, `Asia/Baghdad`, `Istanbul`, `Europe/Istanbul`, `Kuwait`, `Asia/Kuwait`, `Minsk`, `Europe/Minsk`, `Moscow`, `Europe/Moscow`, `Nairobi`, `Africa/Nairobi`, `Riyadh`, `Asia/Riyadh`, `St. Petersburg`, `Europe/Moscow`, `Volgograd`, `Europe/Volgograd`, `Tehran`, `Asia/Tehran`, `Abu Dhabi`, `Asia/Muscat`, `Baku`, `Asia/Baku`, `Muscat`, `Asia/Muscat`, `Samara`, `Europe/Samara`, `Tbilisi`, `Asia/Tbilisi`, `Yerevan`, `Asia/Yerevan`, `Kabul`, `Asia/Kabul`, `Almaty`, `Asia/Almaty`, `Astana`, `Asia/Almaty`, `Ekaterinburg`, `Asia/Yekaterinburg`, `Islamabad`, `Asia/Karachi`, `Karachi`, `Asia/Karachi`, `Tashkent`, `Asia/Tashkent`, `Chennai`, `Asia/Kolkata`, `Kolkata`, `Asia/Kolkata`, `Mumbai`, `Asia/Kolkata`, `New Delhi`, `Asia/Kolkata`, `Sri Jayawardenepura`, `Asia/Colombo`, `Kathmandu`, `Asia/Kathmandu`, `Dhaka`, `Asia/Dhaka`, `Urumqi`, `Asia/Urumqi`, `Rangoon`, `Asia/Rangoon`, `Bangkok`, `Asia/Bangkok`, `Hanoi`, `Asia/Bangkok`, `Jakarta`, `Asia/Jakarta`, `Krasnoyarsk`, `Asia/Krasnoyarsk`, `Novosibirsk`, `Asia/Novosibirsk`, `Beijing`, `Asia/Shanghai`, `Chongqing`, `Asia/Chongqing`, `Hong Kong`, `Asia/Hong_Kong`, `Irkutsk`, `Asia/Irkutsk`, `Kuala Lumpur`, `Asia/Kuala_Lumpur`, `Perth`, `Australia/Perth`, `Singapore`, `Asia/Singapore`, `Taipei`, `Asia/Taipei`, `Ulaanbaatar`, `Asia/Ulaanbaatar`, `Osaka`, `Asia/Tokyo`, `Sapporo`, `Asia/Tokyo`, `Seoul`, `Asia/Seoul`, `Tokyo`, `Asia/Tokyo`, `Yakutsk`, `Asia/Yakutsk`, `Adelaide`, `Australia/Adelaide`, `Darwin`, `Australia/Darwin`, `Brisbane`, `Australia/Brisbane`, `Canberra`, `Australia/Canberra`, `Guam`, `Pacific/Guam`, `Hobart`, `Australia/Hobart`, `Melbourne`, `Australia/Melbourne`, `Port Moresby`, `Pacific/Port_Moresby`, `Sydney`, `Australia/Sydney`, `Vladivostok`, `Asia/Vladivostok`, `Magadan`, `Asia/Magadan`, `New Caledonia`, `Pacific/Noumea`, `Solomon Is.`, `Pacific/Guadalcanal`, `Srednekolymsk`, `Asia/Srednekolymsk`, `Auckland`, `Pacific/Auckland`, `Fiji`, `Pacific/Fiji`, `Kamchatka`, `Asia/Kamchatka`, `Marshall Is.`, `Pacific/Majuro`, `Wellington`, `Pacific/Auckland`, `Chatham Is.`, `Pacific/Chatham`, `Nuku'alofa`, `Pacific/Tongatapu`, `Samoa`, `Pacific/Apia`, `Tokelau Is.`, `Pacific/Fakaofo`.",
-				ValidateFunc: validation.StringInSlice([]string{"International Date Line West", "Etc/GMT+12", "American Samoa", "Pacific/Pago_Pago", "Midway Island", "Pacific/Midway", "Hawaii", "Pacific/Honolulu", "Alaska", "America/Juneau", "Pacific Time (US & Canada)", "America/Los_Angeles", "Tijuana", "America/Tijuana", "Arizona", "America/Phoenix", "Mazatlan", "America/Mazatlan", "Mountain Time (US & Canada)", "America/Denver", "Central America", "America/Guatemala", "Central Time (US & Canada)", "America/Chicago", "Chihuahua", "America/Chihuahua", "Guadalajara", "America/Mexico_City", "Mexico City", "America/Mexico_City", "Monterrey", "America/Monterrey", "Saskatchewan", "America/Regina", "Bogota", "America/Bogota", "Eastern Time (US & Canada)", "America/New_York", "Indiana (East)", "America/Indiana/Indianapolis", "Lima", "America/Lima", "Quito", "America/Lima", "Atlantic Time (Canada)", "America/Halifax", "Caracas", "America/Caracas", "Georgetown", "America/Guyana", "La Paz", "America/La_Paz", "Puerto Rico", "America/Puerto_Rico", "Santiago", "America/Santiago", "Newfoundland", "America/St_Johns", "Brasilia", "America/Sao_Paulo", "Buenos Aires", "America/Argentina/Buenos_Aires", "Montevideo", "America/Montevideo", "Greenland", "America/Godthab", "Mid-Atlantic", "Atlantic/South_Georgia", "Azores", "Atlantic/Azores", "Cape Verde Is.", "Atlantic/Cape_Verde", "Casablanca", "Africa/Casablanca", "Dublin", "Europe/Dublin", "Edinburgh", "Europe/London", "Lisbon", "Europe/Lisbon", "London", "Europe/London", "Monrovia", "Africa/Monrovia", "UTC", "Etc/UTC", "Amsterdam", "Europe/Amsterdam", "Belgrade", "Europe/Belgrade", "Berlin", "Europe/Berlin", "Bern", "Europe/Zurich", "Bratislava", "Europe/Bratislava", "Brussels", "Europe/Brussels", "Budapest", "Europe/Budapest", "Copenhagen", "Europe/Copenhagen", "Ljubljana", "Europe/Ljubljana", "Madrid", "Europe/Madrid", "Paris", "Europe/Paris", "Prague", "Europe/Prague", "Rome", "Europe/Rome", "Sarajevo", "Europe/Sarajevo", "Skopje", "Europe/Skopje", "Stockholm", "Europe/Stockholm", "Vienna", "Europe/Vienna", "Warsaw", "Europe/Warsaw", "West Central Africa", "Africa/Algiers", "Zagreb", "Europe/Zagreb", "Zurich", "Europe/Zurich", "Athens", "Europe/Athens", "Bucharest", "Europe/Bucharest", "Cairo", "Africa/Cairo", "Harare", "Africa/Harare", "Helsinki", "Europe/Helsinki", "Jerusalem", "Asia/Jerusalem", "Kaliningrad", "Europe/Kaliningrad", "Kyiv", "Europe/Kiev", "Pretoria", "Africa/Johannesburg", "Riga", "Europe/Riga", "Sofia", "Europe/Sofia", "Tallinn", "Europe/Tallinn", "Vilnius", "Europe/Vilnius", "Baghdad", "Asia/Baghdad", "Istanbul", "Europe/Istanbul", "Kuwait", "Asia/Kuwait", "Minsk", "Europe/Minsk", "Moscow", "Europe/Moscow", "Nairobi", "Africa/Nairobi", "Riyadh", "Asia/Riyadh", "St. Petersburg", "Europe/Moscow", "Volgograd", "Europe/Volgograd", "Tehran", "Asia/Tehran", "Abu Dhabi", "Asia/Muscat", "Baku", "Asia/Baku", "Muscat", "Asia/Muscat", "Samara", "Europe/Samara", "Tbilisi", "Asia/Tbilisi", "Yerevan", "Asia/Yerevan", "Kabul", "Asia/Kabul", "Almaty", "Asia/Almaty", "Astana", "Asia/Almaty", "Ekaterinburg", "Asia/Yekaterinburg", "Islamabad", "Asia/Karachi", "Karachi", "Asia/Karachi", "Tashkent", "Asia/Tashkent", "Chennai", "Asia/Kolkata", "Kolkata", "Asia/Kolkata", "Mumbai", "Asia/Kolkata", "New Delhi", "Asia/Kolkata", "Sri Jayawardenepura", "Asia/Colombo", "Kathmandu", "Asia/Kathmandu", "Dhaka", "Asia/Dhaka", "Urumqi", "Asia/Urumqi", "Rangoon", "Asia/Rangoon", "Bangkok", "Asia/Bangkok", "Hanoi", "Asia/Bangkok", "Jakarta", "Asia/Jakarta", "Krasnoyarsk", "Asia/Krasnoyarsk", "Novosibirsk", "Asia/Novosibirsk", "Beijing", "Asia/Shanghai", "Chongqing", "Asia/Chongqing", "Hong Kong", "Asia/Hong_Kong", "Irkutsk", "Asia/Irkutsk", "Kuala Lumpur", "Asia/Kuala_Lumpur", "Perth", "Australia/Perth", "Singapore", "Asia/Singapore", "Taipei", "Asia/Taipei", "Ulaanbaatar", "Asia/Ulaanbaatar", "Osaka", "Asia/Tokyo", "Sapporo", "Asia/Tokyo", "Seoul", "Asia/Seoul", "Tokyo", "Asia/Tokyo", "Yakutsk", "Asia/Yakutsk", "Adelaide", "Australia/Adelaide", "Darwin", "Australia/Darwin", "Brisbane", "Australia/Brisbane", "Canberra", "Australia/Canberra", "Guam", "Pacific/Guam", "Hobart", "Australia/Hobart", "Melbourne", "Australia/Melbourne", "Port Moresby", "Pacific/Port_Moresby", "Sydney", "Australia/Sydney", "Vladivostok", "Asia/Vladivostok", "Magadan", "Asia/Magadan", "New Caledonia", "Pacific/Noumea", "Solomon Is.", "Pacific/Guadalcanal", "Srednekolymsk", "Asia/Srednekolymsk", "Auckland", "Pacific/Auckland", "Fiji", "Pacific/Fiji", "Kamchatka", "Asia/Kamchatka", "Marshall Is.", "Pacific/Majuro", "Wellington", "Pacific/Auckland", "Chatham Is.", "Pacific/Chatham", "Nuku'alofa", "Pacific/Tongatapu", "Samoa", "Pacific/Apia", "Tokelau Is.", "Pacific/Fakaofo"}, false),
+				WriteOnly:    false,
+				Description:  "Time zone used for time restrictions.. Value must be one of `International Date Line West`, `Etc/GMT+12`, `American Samoa`, `Pacific/Pago_Pago`, `Midway Island`, `Pacific/Midway`, `Hawaii`, `Pacific/Honolulu`, `Alaska`, `America/Juneau`, `Pacific Time (US & Canada)`, `America/Los_Angeles`, `Tijuana`, `America/Tijuana`, `Arizona`, `America/Phoenix`, `Mazatlan`, `America/Mazatlan`, `Mountain Time (US & Canada)`, `America/Denver`, `Central America`, `America/Guatemala`, `Central Time (US & Canada)`, `America/Chicago`, `Chihuahua`, `America/Chihuahua`, `Guadalajara`, `America/Mexico_City`, `Mexico City`, `America/Mexico_City`, `Monterrey`, `America/Monterrey`, `Saskatchewan`, `America/Regina`, `Bogota`, `America/Bogota`, `Eastern Time (US & Canada)`, `America/New_York`, `Indiana (East)`, `America/Indiana/Indianapolis`, `Lima`, `America/Lima`, `Quito`, `America/Lima`, `Atlantic Time (Canada)`, `America/Halifax`, `Caracas`, `America/Caracas`, `Georgetown`, `America/Guyana`, `La Paz`, `America/La_Paz`, `Puerto Rico`, `America/Puerto_Rico`, `Santiago`, `America/Santiago`, `Newfoundland`, `America/St_Johns`, `Asuncion`, `America/Asuncion`, `Brasilia`, `America/Sao_Paulo`, `Buenos Aires`, `America/Argentina/Buenos_Aires`, `Montevideo`, `America/Montevideo`, `Greenland`, `America/Nuuk`, `Mid-Atlantic`, `Atlantic/South_Georgia`, `Azores`, `Atlantic/Azores`, `Cape Verde Is.`, `Atlantic/Cape_Verde`, `Edinburgh`, `Europe/London`, `Lisbon`, `Europe/Lisbon`, `London`, `Europe/London`, `Monrovia`, `Africa/Monrovia`, `UTC`, `Etc/UTC`, `Amsterdam`, `Europe/Amsterdam`, `Belgrade`, `Europe/Belgrade`, `Berlin`, `Europe/Berlin`, `Bern`, `Europe/Zurich`, `Bratislava`, `Europe/Bratislava`, `Brussels`, `Europe/Brussels`, `Budapest`, `Europe/Budapest`, `Casablanca`, `Africa/Casablanca`, `Copenhagen`, `Europe/Copenhagen`, `Dublin`, `Europe/Dublin`, `Ljubljana`, `Europe/Ljubljana`, `Madrid`, `Europe/Madrid`, `Paris`, `Europe/Paris`, `Prague`, `Europe/Prague`, `Rome`, `Europe/Rome`, `Sarajevo`, `Europe/Sarajevo`, `Skopje`, `Europe/Skopje`, `Stockholm`, `Europe/Stockholm`, `Vienna`, `Europe/Vienna`, `Warsaw`, `Europe/Warsaw`, `West Central Africa`, `Africa/Algiers`, `Zagreb`, `Europe/Zagreb`, `Zurich`, `Europe/Zurich`, `Athens`, `Europe/Athens`, `Bucharest`, `Europe/Bucharest`, `Cairo`, `Africa/Cairo`, `Harare`, `Africa/Harare`, `Helsinki`, `Europe/Helsinki`, `Jerusalem`, `Asia/Jerusalem`, `Kaliningrad`, `Europe/Kaliningrad`, `Kyiv`, `Europe/Kiev`, `Pretoria`, `Africa/Johannesburg`, `Riga`, `Europe/Riga`, `Sofia`, `Europe/Sofia`, `Tallinn`, `Europe/Tallinn`, `Vilnius`, `Europe/Vilnius`, `Baghdad`, `Asia/Baghdad`, `Istanbul`, `Europe/Istanbul`, `Kuwait`, `Asia/Kuwait`, `Minsk`, `Europe/Minsk`, `Moscow`, `Europe/Moscow`, `Nairobi`, `Africa/Nairobi`, `Riyadh`, `Asia/Riyadh`, `St. Petersburg`, `Europe/Moscow`, `Volgograd`, `Europe/Volgograd`, `Tehran`, `Asia/Tehran`, `Abu Dhabi`, `Asia/Muscat`, `Baku`, `Asia/Baku`, `Muscat`, `Asia/Muscat`, `Samara`, `Europe/Samara`, `Tbilisi`, `Asia/Tbilisi`, `Yerevan`, `Asia/Yerevan`, `Kabul`, `Asia/Kabul`, `Almaty`, `Asia/Almaty`, `Astana`, `Asia/Almaty`, `Ekaterinburg`, `Asia/Yekaterinburg`, `Islamabad`, `Asia/Karachi`, `Karachi`, `Asia/Karachi`, `Tashkent`, `Asia/Tashkent`, `Chennai`, `Asia/Kolkata`, `Kolkata`, `Asia/Kolkata`, `Mumbai`, `Asia/Kolkata`, `New Delhi`, `Asia/Kolkata`, `Sri Jayawardenepura`, `Asia/Colombo`, `Kathmandu`, `Asia/Kathmandu`, `Dhaka`, `Asia/Dhaka`, `Urumqi`, `Asia/Urumqi`, `Rangoon`, `Asia/Rangoon`, `Bangkok`, `Asia/Bangkok`, `Hanoi`, `Asia/Bangkok`, `Jakarta`, `Asia/Jakarta`, `Krasnoyarsk`, `Asia/Krasnoyarsk`, `Novosibirsk`, `Asia/Novosibirsk`, `Beijing`, `Asia/Shanghai`, `Chongqing`, `Asia/Chongqing`, `Hong Kong`, `Asia/Hong_Kong`, `Irkutsk`, `Asia/Irkutsk`, `Kuala Lumpur`, `Asia/Kuala_Lumpur`, `Perth`, `Australia/Perth`, `Singapore`, `Asia/Singapore`, `Taipei`, `Asia/Taipei`, `Ulaanbaatar`, `Asia/Ulaanbaatar`, `Osaka`, `Asia/Tokyo`, `Sapporo`, `Asia/Tokyo`, `Seoul`, `Asia/Seoul`, `Tokyo`, `Asia/Tokyo`, `Yakutsk`, `Asia/Yakutsk`, `Adelaide`, `Australia/Adelaide`, `Darwin`, `Australia/Darwin`, `Brisbane`, `Australia/Brisbane`, `Canberra`, `Australia/Canberra`, `Guam`, `Pacific/Guam`, `Hobart`, `Australia/Hobart`, `Melbourne`, `Australia/Melbourne`, `Port Moresby`, `Pacific/Port_Moresby`, `Sydney`, `Australia/Sydney`, `Vladivostok`, `Asia/Vladivostok`, `Magadan`, `Asia/Magadan`, `New Caledonia`, `Pacific/Noumea`, `Solomon Is.`, `Pacific/Guadalcanal`, `Srednekolymsk`, `Asia/Srednekolymsk`, `Auckland`, `Pacific/Auckland`, `Fiji`, `Pacific/Fiji`, `Kamchatka`, `Asia/Kamchatka`, `Marshall Is.`, `Pacific/Majuro`, `Wellington`, `Pacific/Auckland`, `Chatham Is.`, `Pacific/Chatham`, `Nuku'alofa`, `Pacific/Tongatapu`, `Samoa`, `Pacific/Apia`, `Tokelau Is.`, `Pacific/Fakaofo`.",
+				ValidateFunc: validation.StringInSlice([]string{"International Date Line West", "Etc/GMT+12", "American Samoa", "Pacific/Pago_Pago", "Midway Island", "Pacific/Midway", "Hawaii", "Pacific/Honolulu", "Alaska", "America/Juneau", "Pacific Time (US & Canada)", "America/Los_Angeles", "Tijuana", "America/Tijuana", "Arizona", "America/Phoenix", "Mazatlan", "America/Mazatlan", "Mountain Time (US & Canada)", "America/Denver", "Central America", "America/Guatemala", "Central Time (US & Canada)", "America/Chicago", "Chihuahua", "America/Chihuahua", "Guadalajara", "America/Mexico_City", "Mexico City", "America/Mexico_City", "Monterrey", "America/Monterrey", "Saskatchewan", "America/Regina", "Bogota", "America/Bogota", "Eastern Time (US & Canada)", "America/New_York", "Indiana (East)", "America/Indiana/Indianapolis", "Lima", "America/Lima", "Quito", "America/Lima", "Atlantic Time (Canada)", "America/Halifax", "Caracas", "America/Caracas", "Georgetown", "America/Guyana", "La Paz", "America/La_Paz", "Puerto Rico", "America/Puerto_Rico", "Santiago", "America/Santiago", "Newfoundland", "America/St_Johns", "Asuncion", "America/Asuncion", "Brasilia", "America/Sao_Paulo", "Buenos Aires", "America/Argentina/Buenos_Aires", "Montevideo", "America/Montevideo", "Greenland", "America/Nuuk", "Mid-Atlantic", "Atlantic/South_Georgia", "Azores", "Atlantic/Azores", "Cape Verde Is.", "Atlantic/Cape_Verde", "Edinburgh", "Europe/London", "Lisbon", "Europe/Lisbon", "London", "Europe/London", "Monrovia", "Africa/Monrovia", "UTC", "Etc/UTC", "Amsterdam", "Europe/Amsterdam", "Belgrade", "Europe/Belgrade", "Berlin", "Europe/Berlin", "Bern", "Europe/Zurich", "Bratislava", "Europe/Bratislava", "Brussels", "Europe/Brussels", "Budapest", "Europe/Budapest", "Casablanca", "Africa/Casablanca", "Copenhagen", "Europe/Copenhagen", "Dublin", "Europe/Dublin", "Ljubljana", "Europe/Ljubljana", "Madrid", "Europe/Madrid", "Paris", "Europe/Paris", "Prague", "Europe/Prague", "Rome", "Europe/Rome", "Sarajevo", "Europe/Sarajevo", "Skopje", "Europe/Skopje", "Stockholm", "Europe/Stockholm", "Vienna", "Europe/Vienna", "Warsaw", "Europe/Warsaw", "West Central Africa", "Africa/Algiers", "Zagreb", "Europe/Zagreb", "Zurich", "Europe/Zurich", "Athens", "Europe/Athens", "Bucharest", "Europe/Bucharest", "Cairo", "Africa/Cairo", "Harare", "Africa/Harare", "Helsinki", "Europe/Helsinki", "Jerusalem", "Asia/Jerusalem", "Kaliningrad", "Europe/Kaliningrad", "Kyiv", "Europe/Kiev", "Pretoria", "Africa/Johannesburg", "Riga", "Europe/Riga", "Sofia", "Europe/Sofia", "Tallinn", "Europe/Tallinn", "Vilnius", "Europe/Vilnius", "Baghdad", "Asia/Baghdad", "Istanbul", "Europe/Istanbul", "Kuwait", "Asia/Kuwait", "Minsk", "Europe/Minsk", "Moscow", "Europe/Moscow", "Nairobi", "Africa/Nairobi", "Riyadh", "Asia/Riyadh", "St. Petersburg", "Europe/Moscow", "Volgograd", "Europe/Volgograd", "Tehran", "Asia/Tehran", "Abu Dhabi", "Asia/Muscat", "Baku", "Asia/Baku", "Muscat", "Asia/Muscat", "Samara", "Europe/Samara", "Tbilisi", "Asia/Tbilisi", "Yerevan", "Asia/Yerevan", "Kabul", "Asia/Kabul", "Almaty", "Asia/Almaty", "Astana", "Asia/Almaty", "Ekaterinburg", "Asia/Yekaterinburg", "Islamabad", "Asia/Karachi", "Karachi", "Asia/Karachi", "Tashkent", "Asia/Tashkent", "Chennai", "Asia/Kolkata", "Kolkata", "Asia/Kolkata", "Mumbai", "Asia/Kolkata", "New Delhi", "Asia/Kolkata", "Sri Jayawardenepura", "Asia/Colombo", "Kathmandu", "Asia/Kathmandu", "Dhaka", "Asia/Dhaka", "Urumqi", "Asia/Urumqi", "Rangoon", "Asia/Rangoon", "Bangkok", "Asia/Bangkok", "Hanoi", "Asia/Bangkok", "Jakarta", "Asia/Jakarta", "Krasnoyarsk", "Asia/Krasnoyarsk", "Novosibirsk", "Asia/Novosibirsk", "Beijing", "Asia/Shanghai", "Chongqing", "Asia/Chongqing", "Hong Kong", "Asia/Hong_Kong", "Irkutsk", "Asia/Irkutsk", "Kuala Lumpur", "Asia/Kuala_Lumpur", "Perth", "Australia/Perth", "Singapore", "Asia/Singapore", "Taipei", "Asia/Taipei", "Ulaanbaatar", "Asia/Ulaanbaatar", "Osaka", "Asia/Tokyo", "Sapporo", "Asia/Tokyo", "Seoul", "Asia/Seoul", "Tokyo", "Asia/Tokyo", "Yakutsk", "Asia/Yakutsk", "Adelaide", "Australia/Adelaide", "Darwin", "Australia/Darwin", "Brisbane", "Australia/Brisbane", "Canberra", "Australia/Canberra", "Guam", "Pacific/Guam", "Hobart", "Australia/Hobart", "Melbourne", "Australia/Melbourne", "Port Moresby", "Pacific/Port_Moresby", "Sydney", "Australia/Sydney", "Vladivostok", "Asia/Vladivostok", "Magadan", "Asia/Magadan", "New Caledonia", "Pacific/Noumea", "Solomon Is.", "Pacific/Guadalcanal", "Srednekolymsk", "Asia/Srednekolymsk", "Auckland", "Pacific/Auckland", "Fiji", "Pacific/Fiji", "Kamchatka", "Asia/Kamchatka", "Marshall Is.", "Pacific/Majuro", "Wellington", "Pacific/Auckland", "Chatham Is.", "Pacific/Chatham", "Nuku'alofa", "Pacific/Tongatapu", "Samoa", "Pacific/Apia", "Tokelau Is.", "Pacific/Fakaofo"}, false),
 			},
 
 			"time_restrictions": &schema.Schema{
@@ -368,6 +459,9 @@ func resourceEscalationPath() *schema.Resource {
 				Computed:         false,
 				Required:         false,
 				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
 				Description:      "If time restrictions are set, alerts will follow this path when they arrive within the specified time ranges and meet the rules.",
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Elem: &schema.Resource{
@@ -378,7 +472,9 @@ func resourceEscalationPath() *schema.Resource {
 							Default:      "monday",
 							Required:     false,
 							Optional:     true,
+							Sensitive:    false,
 							ForceNew:     false,
+							WriteOnly:    false,
 							Description:  "Value must be one of `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`.",
 							ValidateFunc: validation.StringInSlice([]string{"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"}, false),
 						},
@@ -388,7 +484,9 @@ func resourceEscalationPath() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
+							Sensitive:   false,
 							ForceNew:    false,
+							WriteOnly:   false,
 							Description: "Formatted as HH:MM",
 						},
 
@@ -397,7 +495,9 @@ func resourceEscalationPath() *schema.Resource {
 							Default:      "monday",
 							Required:     false,
 							Optional:     true,
+							Sensitive:    false,
 							ForceNew:     false,
+							WriteOnly:    false,
 							Description:  "Value must be one of `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`.",
 							ValidateFunc: validation.StringInSlice([]string{"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"}, false),
 						},
@@ -407,7 +507,9 @@ func resourceEscalationPath() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
+							Sensitive:   false,
 							ForceNew:    false,
+							WriteOnly:   false,
 							Description: "Formatted as HH:MM",
 						},
 					},
@@ -436,14 +538,14 @@ func resourceEscalationPathCreate(ctx context.Context, d *schema.ResourceData, m
 	if value, ok := d.GetOkExists("path_type"); ok {
 		s.PathType = value.(string)
 	}
+	if value, ok := d.GetOkExists("escalation_policy_id"); ok {
+		s.EscalationPolicyId = value.(string)
+	}
 	if value, ok := d.GetOkExists("after_deferral_behavior"); ok {
 		s.AfterDeferralBehavior = value.(string)
 	}
 	if value, ok := d.GetOkExists("after_deferral_path_id"); ok {
 		s.AfterDeferralPathId = value.(string)
-	}
-	if value, ok := d.GetOkExists("escalation_policy_id"); ok {
-		s.EscalationPolicyId = value.(string)
 	}
 	if value, ok := d.GetOkExists("match_mode"); ok {
 		s.MatchMode = value.(string)
@@ -502,9 +604,9 @@ func resourceEscalationPathRead(ctx context.Context, d *schema.ResourceData, met
 	d.Set("default", item.Default)
 	d.Set("notification_type", item.NotificationType)
 	d.Set("path_type", item.PathType)
+	d.Set("escalation_policy_id", item.EscalationPolicyId)
 	d.Set("after_deferral_behavior", item.AfterDeferralBehavior)
 	d.Set("after_deferral_path_id", item.AfterDeferralPathId)
-	d.Set("escalation_policy_id", item.EscalationPolicyId)
 	d.Set("match_mode", item.MatchMode)
 	d.Set("position", item.Position)
 	d.Set("repeat", item.Repeat)
@@ -519,25 +621,17 @@ func resourceEscalationPathRead(ctx context.Context, d *schema.ResourceData, met
 				// Create a new map with only the fields defined in the schema
 				processed_item_rules := map[string]interface{}{
 					"rule_type":           rawItem["rule_type"],
+					"urgency_ids":         rawItem["urgency_ids"],
 					"within_working_hour": rawItem["within_working_hour"],
 					"json_path":           rawItem["json_path"],
 					"operator":            rawItem["operator"],
 					"value":               rawItem["value"],
+					"values":              rawItem["values"],
 					"fieldable_type":      rawItem["fieldable_type"],
 					"fieldable_id":        rawItem["fieldable_id"],
+					"service_ids":         rawItem["service_ids"],
 					"time_zone":           rawItem["time_zone"],
-				}
-				if v := nilIfEmpty(rawItem["urgency_ids"]); v != nil {
-					processed_item_rules["urgency_ids"] = v
-				}
-				if v := nilIfEmpty(rawItem["values"]); v != nil {
-					processed_item_rules["values"] = v
-				}
-				if v := nilIfEmpty(rawItem["service_ids"]); v != nil {
-					processed_item_rules["service_ids"] = v
-				}
-				if tb := processTimeBlocks(rawItem["time_blocks"]); tb != nil {
-					processed_item_rules["time_blocks"] = tb
+					"time_blocks":         rawItem["time_blocks"],
 				}
 				processed_items_rules = append(processed_items_rules, processed_item_rules)
 			}
@@ -592,14 +686,14 @@ func resourceEscalationPathUpdate(ctx context.Context, d *schema.ResourceData, m
 	if d.HasChange("path_type") {
 		s.PathType = d.Get("path_type").(string)
 	}
+	if d.HasChange("escalation_policy_id") {
+		s.EscalationPolicyId = d.Get("escalation_policy_id").(string)
+	}
 	if d.HasChange("after_deferral_behavior") {
 		s.AfterDeferralBehavior = d.Get("after_deferral_behavior").(string)
 	}
 	if d.HasChange("after_deferral_path_id") {
 		s.AfterDeferralPathId = d.Get("after_deferral_path_id").(string)
-	}
-	if d.HasChange("escalation_policy_id") {
-		s.EscalationPolicyId = d.Get("escalation_policy_id").(string)
 	}
 	if d.HasChange("match_mode") {
 		s.MatchMode = d.Get("match_mode").(string)
@@ -664,43 +758,4 @@ func resourceEscalationPathDelete(ctx context.Context, d *schema.ResourceData, m
 	d.SetId("")
 
 	return nil
-}
-
-func nilIfEmpty(v interface{}) interface{} {
-	if v == nil {
-		return nil
-	}
-	if arr, ok := v.([]interface{}); ok && len(arr) == 0 {
-		return nil
-	}
-	return v
-}
-
-func processTimeBlocks(raw interface{}) []map[string]interface{} {
-	if raw == nil {
-		return nil
-	}
-	rawSlice, ok := raw.([]interface{})
-	if !ok {
-		return nil
-	}
-	result := make([]map[string]interface{}, 0, len(rawSlice))
-	for _, item := range rawSlice {
-		if m, ok := item.(map[string]interface{}); ok {
-			result = append(result, map[string]interface{}{
-				"monday":     m["monday"],
-				"tuesday":    m["tuesday"],
-				"wednesday":  m["wednesday"],
-				"thursday":   m["thursday"],
-				"friday":     m["friday"],
-				"saturday":   m["saturday"],
-				"sunday":     m["sunday"],
-				"start_time": m["start_time"],
-				"end_time":   m["end_time"],
-				"all_day":    m["all_day"],
-				"position":   m["position"],
-			})
-		}
-	}
-	return result
 }
