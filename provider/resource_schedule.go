@@ -92,9 +92,7 @@ func resourceSchedule() *schema.Resource {
 
 			"owner_user_id": &schema.Schema{
 				Type:        schema.TypeInt,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
+				Required:    true,
 				ForceNew:    false,
 				Description: "ID of user assigned as owner of the schedule",
 			},
