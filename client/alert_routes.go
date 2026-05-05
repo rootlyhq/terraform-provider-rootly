@@ -10,7 +10,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type AlertRoute struct {
@@ -68,7 +68,7 @@ func (c *Client) CreateAlertRoute(d *AlertRoute) (*AlertRoute, error) {
 }
 
 func (c *Client) GetAlertRoute(id string) (*AlertRoute, error) {
-	req, err := rootlygo.NewGetAlertRouteRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetAlertRouteRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -93,7 +93,7 @@ func (c *Client) UpdateAlertRoute(id string, alert_route *AlertRoute) (*AlertRou
 		return nil, fmt.Errorf("Error marshaling alert_route: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateAlertRouteRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateAlertRouteRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -112,7 +112,7 @@ func (c *Client) UpdateAlertRoute(id string, alert_route *AlertRoute) (*AlertRou
 }
 
 func (c *Client) DeleteAlertRoute(id string) error {
-	req, err := rootlygo.NewDeleteAlertRouteRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteAlertRouteRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

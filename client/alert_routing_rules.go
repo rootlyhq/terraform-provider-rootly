@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type AlertRoutingRule struct {
@@ -67,7 +67,7 @@ func (c *Client) CreateAlertRoutingRule(d *AlertRoutingRule) (*AlertRoutingRule,
 }
 
 func (c *Client) GetAlertRoutingRule(id string) (*AlertRoutingRule, error) {
-	req, err := rootlygo.NewGetAlertRoutingRuleRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetAlertRoutingRuleRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -92,7 +92,7 @@ func (c *Client) UpdateAlertRoutingRule(id string, alert_routing_rule *AlertRout
 		return nil, fmt.Errorf("Error marshaling alert_routing_rule: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateAlertRoutingRuleRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateAlertRoutingRuleRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -111,7 +111,7 @@ func (c *Client) UpdateAlertRoutingRule(id string, alert_routing_rule *AlertRout
 }
 
 func (c *Client) DeleteAlertRoutingRule(id string) error {
-	req, err := rootlygo.NewDeleteAlertRoutingRuleRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteAlertRoutingRuleRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type OnCallShadow struct {
@@ -65,7 +65,7 @@ func (c *Client) CreateOnCallShadow(d *OnCallShadow) (*OnCallShadow, error) {
 }
 
 func (c *Client) GetOnCallShadow(id string) (*OnCallShadow, error) {
-	req, err := rootlygo.NewGetOnCallShadowRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetOnCallShadowRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -90,7 +90,7 @@ func (c *Client) UpdateOnCallShadow(id string, on_call_shadow *OnCallShadow) (*O
 		return nil, fmt.Errorf("Error marshaling on_call_shadow: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateOnCallShadowRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateOnCallShadowRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -109,7 +109,7 @@ func (c *Client) UpdateOnCallShadow(id string, on_call_shadow *OnCallShadow) (*O
 }
 
 func (c *Client) DeleteOnCallShadow(id string) error {
-	req, err := rootlygo.NewDeleteOnCallShadowRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteOnCallShadowRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

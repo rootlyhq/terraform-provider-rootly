@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type IncidentPermissionSet struct {
@@ -64,7 +64,7 @@ func (c *Client) CreateIncidentPermissionSet(d *IncidentPermissionSet) (*Inciden
 }
 
 func (c *Client) GetIncidentPermissionSet(id string) (*IncidentPermissionSet, error) {
-	req, err := rootlygo.NewGetIncidentPermissionSetRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetIncidentPermissionSetRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -89,7 +89,7 @@ func (c *Client) UpdateIncidentPermissionSet(id string, incident_permission_set 
 		return nil, fmt.Errorf("Error marshaling incident_permission_set: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateIncidentPermissionSetRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateIncidentPermissionSetRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -108,7 +108,7 @@ func (c *Client) UpdateIncidentPermissionSet(id string, incident_permission_set 
 }
 
 func (c *Client) DeleteIncidentPermissionSet(id string) error {
-	req, err := rootlygo.NewDeleteIncidentPermissionSetRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteIncidentPermissionSetRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

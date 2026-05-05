@@ -3,7 +3,7 @@ package client
 import (
 	"fmt"
 
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type IpRanges struct {
@@ -14,7 +14,7 @@ type IpRanges struct {
 }
 
 func (c *Client) GetIpRanges() (*IpRanges, error) {
-	req, err := rootlygo.NewGetIpRangesRequest(c.Rootly.Server)
+	req, err := rootlygo.NewGetIPRangesRequest(c.Rootly.Server)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}

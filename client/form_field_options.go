@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type FormFieldOption struct {
@@ -65,7 +65,7 @@ func (c *Client) CreateFormFieldOption(d *FormFieldOption) (*FormFieldOption, er
 }
 
 func (c *Client) GetFormFieldOption(id string) (*FormFieldOption, error) {
-	req, err := rootlygo.NewGetFormFieldOptionRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetFormFieldOptionRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -90,7 +90,7 @@ func (c *Client) UpdateFormFieldOption(id string, form_field_option *FormFieldOp
 		return nil, fmt.Errorf("Error marshaling form_field_option: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateFormFieldOptionRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateFormFieldOptionRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -109,7 +109,7 @@ func (c *Client) UpdateFormFieldOption(id string, form_field_option *FormFieldOp
 }
 
 func (c *Client) DeleteFormFieldOption(id string) error {
-	req, err := rootlygo.NewDeleteFormFieldOptionRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteFormFieldOptionRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

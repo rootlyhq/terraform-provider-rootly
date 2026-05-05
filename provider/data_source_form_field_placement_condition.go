@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 func dataSourceFormFieldPlacementCondition() *schema.Resource {
@@ -43,7 +43,7 @@ func dataSourceFormFieldPlacementConditionRead(ctx context.Context, d *schema.Re
 
 	if value, ok := d.GetOkExists("form_field_id"); ok {
 		form_field_id := value.(string)
-		params.FilterFormFieldId = &form_field_id
+		params.FilterFormFieldID = &form_field_id
 	}
 
 	form_field_placement_id := d.Get("form_field_placement_id").(string)

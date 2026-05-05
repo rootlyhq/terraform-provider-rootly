@@ -5,7 +5,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type CustomField struct {
@@ -64,7 +64,7 @@ func (c *Client) CreateCustomField(d *CustomField) (*CustomField, error) {
 }
 
 func (c *Client) GetCustomField(id string) (*CustomField, error) {
-	req, err := rootlygo.NewGetCustomFieldRequest(c.Rootly.Server, id, nil)
+	req, err := rootlygo.NewGetCustomFieldRequest(c.Rootly.Server, rootlygo.ID(id), nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -88,7 +88,7 @@ func (c *Client) UpdateCustomField(id string, custom_field *CustomField) (*Custo
 		return nil, fmt.Errorf("Error marshaling custom_field: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateCustomFieldRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateCustomFieldRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -106,7 +106,7 @@ func (c *Client) UpdateCustomField(id string, custom_field *CustomField) (*Custo
 }
 
 func (c *Client) DeleteCustomField(id string) error {
-	req, err := rootlygo.NewDeleteCustomFieldRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteCustomFieldRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

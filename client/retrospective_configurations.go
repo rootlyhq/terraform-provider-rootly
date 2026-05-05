@@ -6,7 +6,7 @@ import (
 	"fmt"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type RetrospectiveConfiguration struct {
@@ -37,7 +37,7 @@ func (c *Client) ListRetrospectiveConfigurations(params *rootlygo.ListRetrospect
 }
 
 func (c *Client) GetRetrospectiveConfiguration(id string) (*RetrospectiveConfiguration, error) {
-	req, err := rootlygo.NewGetRetrospectiveConfigurationRequest(c.Rootly.Server, id, nil)
+	req, err := rootlygo.NewGetRetrospectiveConfigurationRequest(c.Rootly.Server, rootlygo.ID(id), nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -61,7 +61,7 @@ func (c *Client) UpdateRetrospectiveConfiguration(id string, retrospective_confi
 		return nil, fmt.Errorf("Error marshaling retrospective_configuration: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateRetrospectiveConfigurationRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateRetrospectiveConfigurationRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}

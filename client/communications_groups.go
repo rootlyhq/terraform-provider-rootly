@@ -5,7 +5,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type CommunicationsGroup struct {
@@ -68,7 +68,7 @@ func (c *Client) CreateCommunicationsGroup(d *CommunicationsGroup) (*Communicati
 }
 
 func (c *Client) GetCommunicationsGroup(id string) (*CommunicationsGroup, error) {
-	req, err := rootlygo.NewGetCommunicationsGroupRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetCommunicationsGroupRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -93,7 +93,7 @@ func (c *Client) UpdateCommunicationsGroup(id string, communications_group *Comm
 		return nil, fmt.Errorf("Error marshaling communications_group: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateCommunicationsGroupRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateCommunicationsGroupRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -112,7 +112,7 @@ func (c *Client) UpdateCommunicationsGroup(id string, communications_group *Comm
 }
 
 func (c *Client) DeleteCommunicationsGroup(id string) error {
-	req, err := rootlygo.NewDeleteCommunicationsGroupRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteCommunicationsGroupRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

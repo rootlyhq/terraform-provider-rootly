@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type CustomForm struct {
@@ -64,7 +64,7 @@ func (c *Client) CreateCustomForm(d *CustomForm) (*CustomForm, error) {
 }
 
 func (c *Client) GetCustomForm(id string) (*CustomForm, error) {
-	req, err := rootlygo.NewGetCustomFormRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetCustomFormRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -89,7 +89,7 @@ func (c *Client) UpdateCustomForm(id string, custom_form *CustomForm) (*CustomFo
 		return nil, fmt.Errorf("Error marshaling custom_form: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateCustomFormRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateCustomFormRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -108,7 +108,7 @@ func (c *Client) UpdateCustomForm(id string, custom_form *CustomForm) (*CustomFo
 }
 
 func (c *Client) DeleteCustomForm(id string) error {
-	req, err := rootlygo.NewDeleteCustomFormRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteCustomFormRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

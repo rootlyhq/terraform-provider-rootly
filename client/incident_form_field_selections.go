@@ -6,7 +6,7 @@ import (
 	"fmt"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type IncidentFormFieldSelection struct {
@@ -61,7 +61,7 @@ func (c *Client) CreateIncidentFormFieldSelection(d *IncidentFormFieldSelection)
 }
 
 func (c *Client) GetIncidentFormFieldSelection(id string) (*IncidentFormFieldSelection, error) {
-	req, err := rootlygo.NewGetIncidentFormFieldSelectionRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetIncidentFormFieldSelectionRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -85,7 +85,7 @@ func (c *Client) UpdateIncidentFormFieldSelection(id string, incident_form_field
 		return nil, fmt.Errorf("Error marshaling incident_form_field_selection: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateIncidentFormFieldSelectionRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateIncidentFormFieldSelectionRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -103,7 +103,7 @@ func (c *Client) UpdateIncidentFormFieldSelection(id string, incident_form_field
 }
 
 func (c *Client) DeleteIncidentFormFieldSelection(id string) error {
-	req, err := rootlygo.NewDeleteIncidentFormFieldSelectionRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteIncidentFormFieldSelectionRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

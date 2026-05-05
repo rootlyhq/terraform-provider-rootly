@@ -9,7 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 func dataSourceApiKey() *schema.Resource {
@@ -64,7 +64,7 @@ func dataSourceApiKey() *schema.Resource {
 func dataSourceApiKeyRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
-	params := new(rootlygo.ListApiKeysParams)
+	params := new(rootlygo.ListAPIKeysParams)
 	page_size := 1
 	params.PageSize = &page_size
 
@@ -80,7 +80,7 @@ func dataSourceApiKeyRead(ctx context.Context, d *schema.ResourceData, meta inte
 
 	if value, ok := d.GetOkExists("role_id"); ok {
 		role_id := value.(string)
-		params.FilterRoleId = &role_id
+		params.FilterRoleID = &role_id
 	}
 
 	created_at_gt := d.Get("created_at").(map[string]interface{})

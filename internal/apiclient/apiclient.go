@@ -5,7 +5,7 @@ import (
 
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
 	sdkv2_provider "github.com/rootlyhq/terraform-provider-rootly/v2/provider"
-	rootly "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootly "github.com/rootlyhq/rootly-go"
 )
 
 func New(apiHost string, apiToken string, version string) (*client.Client, *rootly.ClientWithResponses, error) {

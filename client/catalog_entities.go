@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type CatalogEntity struct {
@@ -65,7 +65,7 @@ func (c *Client) CreateCatalogEntity(d *CatalogEntity) (*CatalogEntity, error) {
 }
 
 func (c *Client) GetCatalogEntity(id string) (*CatalogEntity, error) {
-	req, err := rootlygo.NewGetCatalogEntityRequest(c.Rootly.Server, id, nil)
+	req, err := rootlygo.NewGetCatalogEntityRequest(c.Rootly.Server, rootlygo.ID(id), nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -90,7 +90,7 @@ func (c *Client) UpdateCatalogEntity(id string, catalog_entity *CatalogEntity) (
 		return nil, fmt.Errorf("Error marshaling catalog_entity: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateCatalogEntityRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateCatalogEntityRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -109,7 +109,7 @@ func (c *Client) UpdateCatalogEntity(id string, catalog_entity *CatalogEntity) (
 }
 
 func (c *Client) DeleteCatalogEntity(id string) error {
-	req, err := rootlygo.NewDeleteCatalogEntityRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteCatalogEntityRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 func dataSourceTeam() *schema.Resource {
@@ -96,17 +96,17 @@ func dataSourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interf
 
 	if value, ok := d.GetOkExists("backstage_id"); ok {
 		backstage_id := value.(string)
-		params.FilterBackstageId = &backstage_id
+		params.FilterBackstageID = &backstage_id
 	}
 
 	if value, ok := d.GetOkExists("cortex_id"); ok {
 		cortex_id := value.(string)
-		params.FilterCortexId = &cortex_id
+		params.FilterCortexID = &cortex_id
 	}
 
 	if value, ok := d.GetOkExists("external_id"); ok {
 		external_id := value.(string)
-		params.FilterExternalId = &external_id
+		params.FilterExternalID = &external_id
 	}
 
 	if value, ok := d.GetOkExists("color"); ok {

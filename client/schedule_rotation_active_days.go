@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type ScheduleRotationActiveDay struct {
@@ -62,7 +62,7 @@ func (c *Client) CreateScheduleRotationActiveDay(d *ScheduleRotationActiveDay) (
 }
 
 func (c *Client) GetScheduleRotationActiveDay(id string) (*ScheduleRotationActiveDay, error) {
-	req, err := rootlygo.NewGetScheduleRotationActiveDayRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetScheduleRotationActiveDayRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -87,7 +87,7 @@ func (c *Client) UpdateScheduleRotationActiveDay(id string, schedule_rotation_ac
 		return nil, fmt.Errorf("Error marshaling schedule_rotation_active_day: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateScheduleRotationActiveDayRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateScheduleRotationActiveDayRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -106,7 +106,7 @@ func (c *Client) UpdateScheduleRotationActiveDay(id string, schedule_rotation_ac
 }
 
 func (c *Client) DeleteScheduleRotationActiveDay(id string) error {
-	req, err := rootlygo.NewDeleteScheduleRotationActiveDayRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteScheduleRotationActiveDayRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

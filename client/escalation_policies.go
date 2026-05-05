@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type EscalationPolicy struct {
@@ -67,7 +67,7 @@ func (c *Client) CreateEscalationPolicy(d *EscalationPolicy) (*EscalationPolicy,
 }
 
 func (c *Client) GetEscalationPolicy(id string) (*EscalationPolicy, error) {
-	req, err := rootlygo.NewGetEscalationPolicyRequest(c.Rootly.Server, id, nil)
+	req, err := rootlygo.NewGetEscalationPolicyRequest(c.Rootly.Server, rootlygo.ID(id), nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -92,7 +92,7 @@ func (c *Client) UpdateEscalationPolicy(id string, escalation_policy *Escalation
 		return nil, fmt.Errorf("Error marshaling escalation_policy: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateEscalationPolicyRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateEscalationPolicyRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -111,7 +111,7 @@ func (c *Client) UpdateEscalationPolicy(id string, escalation_policy *Escalation
 }
 
 func (c *Client) DeleteEscalationPolicy(id string) error {
-	req, err := rootlygo.NewDeleteEscalationPolicyRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteEscalationPolicyRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type Functionality struct {
@@ -81,7 +81,7 @@ func (c *Client) CreateFunctionality(d *Functionality) (*Functionality, error) {
 }
 
 func (c *Client) GetFunctionality(id string) (*Functionality, error) {
-	req, err := rootlygo.NewGetFunctionalityRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetFunctionalityRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -106,7 +106,7 @@ func (c *Client) UpdateFunctionality(id string, functionality *Functionality) (*
 		return nil, fmt.Errorf("Error marshaling functionality: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateFunctionalityRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateFunctionalityRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -125,7 +125,7 @@ func (c *Client) UpdateFunctionality(id string, functionality *Functionality) (*
 }
 
 func (c *Client) DeleteFunctionality(id string) error {
-	req, err := rootlygo.NewDeleteFunctionalityRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteFunctionalityRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

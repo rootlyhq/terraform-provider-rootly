@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type RetrospectiveProcessGroup struct {
@@ -62,7 +62,7 @@ func (c *Client) CreateRetrospectiveProcessGroup(d *RetrospectiveProcessGroup) (
 }
 
 func (c *Client) GetRetrospectiveProcessGroup(id string) (*RetrospectiveProcessGroup, error) {
-	req, err := rootlygo.NewGetRetrospectiveProcessGroupRequest(c.Rootly.Server, id, nil)
+	req, err := rootlygo.NewGetRetrospectiveProcessGroupRequest(c.Rootly.Server, rootlygo.ID(id), nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -87,7 +87,7 @@ func (c *Client) UpdateRetrospectiveProcessGroup(id string, retrospective_proces
 		return nil, fmt.Errorf("Error marshaling retrospective_process_group: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateRetrospectiveProcessGroupRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateRetrospectiveProcessGroupRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -106,7 +106,7 @@ func (c *Client) UpdateRetrospectiveProcessGroup(id string, retrospective_proces
 }
 
 func (c *Client) DeleteRetrospectiveProcessGroup(id string) error {
-	req, err := rootlygo.NewDeleteRetrospectiveProcessGroupRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteRetrospectiveProcessGroupRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

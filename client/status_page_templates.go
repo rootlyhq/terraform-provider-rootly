@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type StatusPageTemplate struct {
@@ -68,7 +68,7 @@ func (c *Client) CreateStatusPageTemplate(d *StatusPageTemplate) (*StatusPageTem
 }
 
 func (c *Client) GetStatusPageTemplate(id string) (*StatusPageTemplate, error) {
-	req, err := rootlygo.NewGetStatusPageTemplateRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetStatusPageTemplateRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -93,7 +93,7 @@ func (c *Client) UpdateStatusPageTemplate(id string, status_page_template *Statu
 		return nil, fmt.Errorf("Error marshaling status_page_template: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateStatusPageTemplateRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateStatusPageTemplateRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -112,7 +112,7 @@ func (c *Client) UpdateStatusPageTemplate(id string, status_page_template *Statu
 }
 
 func (c *Client) DeleteStatusPageTemplate(id string) error {
-	req, err := rootlygo.NewDeleteStatusPageTemplateRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteStatusPageTemplateRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

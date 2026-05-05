@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type CommunicationsType struct {
@@ -64,7 +64,7 @@ func (c *Client) CreateCommunicationsType(d *CommunicationsType) (*Communication
 }
 
 func (c *Client) GetCommunicationsType(id string) (*CommunicationsType, error) {
-	req, err := rootlygo.NewGetCommunicationsTypeRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetCommunicationsTypeRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -89,7 +89,7 @@ func (c *Client) UpdateCommunicationsType(id string, communications_type *Commun
 		return nil, fmt.Errorf("Error marshaling communications_type: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateCommunicationsTypeRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateCommunicationsTypeRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -108,7 +108,7 @@ func (c *Client) UpdateCommunicationsType(id string, communications_type *Commun
 }
 
 func (c *Client) DeleteCommunicationsType(id string) error {
-	req, err := rootlygo.NewDeleteCommunicationsTypeRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteCommunicationsTypeRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

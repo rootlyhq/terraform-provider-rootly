@@ -6,7 +6,7 @@ import (
 	"fmt"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type Secret struct {
@@ -61,7 +61,7 @@ func (c *Client) CreateSecret(d *Secret) (*Secret, error) {
 }
 
 func (c *Client) GetSecret(id string) (*Secret, error) {
-	req, err := rootlygo.NewGetSecretRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetSecretRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -85,7 +85,7 @@ func (c *Client) UpdateSecret(id string, secret *Secret) (*Secret, error) {
 		return nil, fmt.Errorf("Error marshaling secret: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateSecretRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateSecretRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -103,7 +103,7 @@ func (c *Client) UpdateSecret(id string, secret *Secret) (*Secret, error) {
 }
 
 func (c *Client) DeleteSecret(id string) error {
-	req, err := rootlygo.NewDeleteSecretRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteSecretRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

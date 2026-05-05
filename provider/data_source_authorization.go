@@ -9,7 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 func dataSourceAuthorization() *schema.Resource {
@@ -65,7 +65,7 @@ func dataSourceAuthorizationRead(ctx context.Context, d *schema.ResourceData, me
 
 	if value, ok := d.GetOkExists("authorizable_id"); ok {
 		authorizable_id := value.(string)
-		params.FilterAuthorizableId = &authorizable_id
+		params.FilterAuthorizableID = &authorizable_id
 	}
 
 	if value, ok := d.GetOkExists("authorizable_type"); ok {
@@ -75,7 +75,7 @@ func dataSourceAuthorizationRead(ctx context.Context, d *schema.ResourceData, me
 
 	if value, ok := d.GetOkExists("grantee_id"); ok {
 		grantee_id := value.(string)
-		params.FilterGranteeId = &grantee_id
+		params.FilterGranteeID = &grantee_id
 	}
 
 	if value, ok := d.GetOkExists("grantee_type"); ok {

@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type IncidentSubStatus struct {
@@ -63,7 +63,7 @@ func (c *Client) CreateIncidentSubStatus(d *IncidentSubStatus) (*IncidentSubStat
 }
 
 func (c *Client) GetIncidentSubStatus(id string) (*IncidentSubStatus, error) {
-	req, err := rootlygo.NewGetIncidentSubStatusRequest(c.Rootly.Server, id, nil)
+	req, err := rootlygo.NewGetIncidentSubStatusRequest(c.Rootly.Server, rootlygo.ID(id), nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -88,7 +88,7 @@ func (c *Client) UpdateIncidentSubStatus(id string, incident_sub_status *Inciden
 		return nil, fmt.Errorf("Error marshaling incident_sub_status: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateIncidentSubStatusRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateIncidentSubStatusRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -107,7 +107,7 @@ func (c *Client) UpdateIncidentSubStatus(id string, incident_sub_status *Inciden
 }
 
 func (c *Client) DeleteIncidentSubStatus(id string) error {
-	req, err := rootlygo.NewDeleteIncidentSubStatusRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteIncidentSubStatusRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

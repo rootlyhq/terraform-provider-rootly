@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type EscalationPath struct {
@@ -74,7 +74,7 @@ func (c *Client) CreateEscalationPath(d *EscalationPath) (*EscalationPath, error
 }
 
 func (c *Client) GetEscalationPath(id string) (*EscalationPath, error) {
-	req, err := rootlygo.NewGetEscalationPathRequest(c.Rootly.Server, id, nil)
+	req, err := rootlygo.NewGetEscalationPathRequest(c.Rootly.Server, rootlygo.ID(id), nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -99,7 +99,7 @@ func (c *Client) UpdateEscalationPath(id string, escalation_path *EscalationPath
 		return nil, fmt.Errorf("Error marshaling escalation_path: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateEscalationPathRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateEscalationPathRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -118,7 +118,7 @@ func (c *Client) UpdateEscalationPath(id string, escalation_path *EscalationPath
 }
 
 func (c *Client) DeleteEscalationPath(id string) error {
-	req, err := rootlygo.NewDeleteEscalationPathRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteEscalationPathRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

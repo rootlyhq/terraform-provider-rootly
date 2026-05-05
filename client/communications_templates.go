@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type CommunicationsTemplate struct {
@@ -66,7 +66,7 @@ func (c *Client) CreateCommunicationsTemplate(d *CommunicationsTemplate) (*Commu
 }
 
 func (c *Client) GetCommunicationsTemplate(id string) (*CommunicationsTemplate, error) {
-	req, err := rootlygo.NewGetCommunicationsTemplateRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetCommunicationsTemplateRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -91,7 +91,7 @@ func (c *Client) UpdateCommunicationsTemplate(id string, communications_template
 		return nil, fmt.Errorf("Error marshaling communications_template: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateCommunicationsTemplateRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateCommunicationsTemplateRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -110,7 +110,7 @@ func (c *Client) UpdateCommunicationsTemplate(id string, communications_template
 }
 
 func (c *Client) DeleteCommunicationsTemplate(id string) error {
-	req, err := rootlygo.NewDeleteCommunicationsTemplateRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteCommunicationsTemplateRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

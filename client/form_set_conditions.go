@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type FormSetCondition struct {
@@ -63,7 +63,7 @@ func (c *Client) CreateFormSetCondition(d *FormSetCondition) (*FormSetCondition,
 }
 
 func (c *Client) GetFormSetCondition(id string) (*FormSetCondition, error) {
-	req, err := rootlygo.NewGetFormSetConditionRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetFormSetConditionRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -88,7 +88,7 @@ func (c *Client) UpdateFormSetCondition(id string, form_set_condition *FormSetCo
 		return nil, fmt.Errorf("Error marshaling form_set_condition: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateFormSetConditionRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateFormSetConditionRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -107,7 +107,7 @@ func (c *Client) UpdateFormSetCondition(id string, form_set_condition *FormSetCo
 }
 
 func (c *Client) DeleteFormSetCondition(id string) error {
-	req, err := rootlygo.NewDeleteFormSetConditionRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteFormSetConditionRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type Service struct {
@@ -19,12 +19,12 @@ type Service struct {
 	NotifyEmails             []interface{}          `jsonapi:"attr,notify_emails,omitempty"`
 	Color                    string                 `jsonapi:"attr,color,omitempty"`
 	Position                 int                    `jsonapi:"attr,position,omitempty"`
-	BackstageId              string                 `jsonapi:"attr,backstage_id"`
-	ExternalId               string                 `jsonapi:"attr,external_id"`
-	PagerdutyId              string                 `jsonapi:"attr,pagerduty_id"`
-	OpsgenieId               string                 `jsonapi:"attr,opsgenie_id"`
-	CortexId                 string                 `jsonapi:"attr,cortex_id"`
-	ServiceNowCiSysId        string                 `jsonapi:"attr,service_now_ci_sys_id"`
+	BackstageId              string                 `jsonapi:"attr,backstage_id,omitempty"`
+	ExternalId               string                 `jsonapi:"attr,external_id,omitempty"`
+	PagerdutyId              string                 `jsonapi:"attr,pagerduty_id,omitempty"`
+	OpsgenieId               string                 `jsonapi:"attr,opsgenie_id,omitempty"`
+	CortexId                 string                 `jsonapi:"attr,cortex_id,omitempty"`
+	ServiceNowCiSysId        string                 `jsonapi:"attr,service_now_ci_sys_id,omitempty"`
 	GithubRepositoryName     string                 `jsonapi:"attr,github_repository_name,omitempty"`
 	GithubRepositoryBranch   string                 `jsonapi:"attr,github_repository_branch,omitempty"`
 	GitlabRepositoryName     string                 `jsonapi:"attr,gitlab_repository_name,omitempty"`
@@ -92,7 +92,7 @@ func (c *Client) CreateService(d *Service) (*Service, error) {
 }
 
 func (c *Client) GetService(id string) (*Service, error) {
-	req, err := rootlygo.NewGetServiceRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetServiceRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -117,7 +117,7 @@ func (c *Client) UpdateService(id string, service *Service) (*Service, error) {
 		return nil, fmt.Errorf("Error marshaling service: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateServiceRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateServiceRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -136,7 +136,7 @@ func (c *Client) UpdateService(id string, service *Service) (*Service, error) {
 }
 
 func (c *Client) DeleteService(id string) error {
-	req, err := rootlygo.NewDeleteServiceRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteServiceRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

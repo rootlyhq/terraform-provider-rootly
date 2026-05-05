@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type ApiKey struct {
@@ -22,8 +22,8 @@ type ApiKey struct {
 	GracePeriodEndsAt string `jsonapi:"attr,grace_period_ends_at,omitempty"`
 }
 
-func (c *Client) ListApiKeys(params *rootlygo.ListApiKeysParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListApiKeysRequest(c.Rootly.Server, params)
+func (c *Client) ListApiKeys(params *rootlygo.ListAPIKeysParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListAPIKeysRequest(c.Rootly.Server, params)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -48,7 +48,7 @@ func (c *Client) CreateApiKey(d *ApiKey) (*ApiKey, error) {
 		return nil, fmt.Errorf("Error marshaling api_key: %w", err)
 	}
 
-	req, err := rootlygo.NewCreateApiKeyRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
+	req, err := rootlygo.NewCreateAPIKeyRequestWithBody(c.Rootly.Server, c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -67,7 +67,7 @@ func (c *Client) CreateApiKey(d *ApiKey) (*ApiKey, error) {
 }
 
 func (c *Client) GetApiKey(id string) (*ApiKey, error) {
-	req, err := rootlygo.NewGetApiKeyRequest(c.Rootly.Server, id, nil)
+	req, err := rootlygo.NewGetAPIKeyRequest(c.Rootly.Server, rootlygo.ID(id), nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -92,7 +92,7 @@ func (c *Client) UpdateApiKey(id string, api_key *ApiKey) (*ApiKey, error) {
 		return nil, fmt.Errorf("Error marshaling api_key: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateApiKeyRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateAPIKeyRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -111,7 +111,7 @@ func (c *Client) UpdateApiKey(id string, api_key *ApiKey) (*ApiKey, error) {
 }
 
 func (c *Client) DeleteApiKey(id string) error {
-	req, err := rootlygo.NewDeleteApiKeyRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteAPIKeyRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

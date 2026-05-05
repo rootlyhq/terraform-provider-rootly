@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type CustomFieldOption struct {
@@ -61,7 +61,7 @@ func (c *Client) CreateCustomFieldOption(d *CustomFieldOption) (*CustomFieldOpti
 }
 
 func (c *Client) GetCustomFieldOption(id string) (*CustomFieldOption, error) {
-	req, err := rootlygo.NewGetCustomFieldOptionRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetCustomFieldOptionRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -85,7 +85,7 @@ func (c *Client) UpdateCustomFieldOption(id string, custom_field_option *CustomF
 		return nil, fmt.Errorf("Error marshaling custom_field_option: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateCustomFieldOptionRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateCustomFieldOptionRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -103,7 +103,7 @@ func (c *Client) UpdateCustomFieldOption(id string, custom_field_option *CustomF
 }
 
 func (c *Client) DeleteCustomFieldOption(id string) error {
-	req, err := rootlygo.NewDeleteCustomFieldOptionRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteCustomFieldOptionRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

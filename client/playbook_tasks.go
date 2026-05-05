@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type PlaybookTask struct {
@@ -63,7 +63,7 @@ func (c *Client) CreatePlaybookTask(d *PlaybookTask) (*PlaybookTask, error) {
 }
 
 func (c *Client) GetPlaybookTask(id string) (*PlaybookTask, error) {
-	req, err := rootlygo.NewGetPlaybookTaskRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetPlaybookTaskRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -88,7 +88,7 @@ func (c *Client) UpdatePlaybookTask(id string, playbook_task *PlaybookTask) (*Pl
 		return nil, fmt.Errorf("Error marshaling playbook_task: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdatePlaybookTaskRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdatePlaybookTaskRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -107,7 +107,7 @@ func (c *Client) UpdatePlaybookTask(id string, playbook_task *PlaybookTask) (*Pl
 }
 
 func (c *Client) DeletePlaybookTask(id string) error {
-	req, err := rootlygo.NewDeletePlaybookTaskRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeletePlaybookTaskRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

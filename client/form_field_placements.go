@@ -7,7 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 type FormFieldPlacement struct {
@@ -67,7 +67,7 @@ func (c *Client) CreateFormFieldPlacement(d *FormFieldPlacement) (*FormFieldPlac
 }
 
 func (c *Client) GetFormFieldPlacement(id string) (*FormFieldPlacement, error) {
-	req, err := rootlygo.NewGetFormFieldPlacementRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetFormFieldPlacementRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -92,7 +92,7 @@ func (c *Client) UpdateFormFieldPlacement(id string, form_field_placement *FormF
 		return nil, fmt.Errorf("Error marshaling form_field_placement: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateFormFieldPlacementRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateFormFieldPlacementRequestWithBody(c.Rootly.Server, rootlygo.ID(id), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -111,7 +111,7 @@ func (c *Client) UpdateFormFieldPlacement(id string, form_field_placement *FormF
 }
 
 func (c *Client) DeleteFormFieldPlacement(id string) error {
-	req, err := rootlygo.NewDeleteFormFieldPlacementRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewDeleteFormFieldPlacementRequest(c.Rootly.Server, rootlygo.ID(id))
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

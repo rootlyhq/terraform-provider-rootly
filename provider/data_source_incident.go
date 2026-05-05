@@ -4,11 +4,12 @@ package provider
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 func dataSourceIncident() *schema.Resource {
@@ -149,7 +150,7 @@ func dataSourceIncidentRead(ctx context.Context, d *schema.ResourceData, meta in
 	}
 
 	if value, ok := d.GetOkExists("private"); ok {
-		private := value.(bool)
+		private := strconv.FormatBool(value.(bool))
 		params.FilterPrivate = &private
 	}
 

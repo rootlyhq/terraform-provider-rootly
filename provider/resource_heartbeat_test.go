@@ -8,6 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+	rootly "github.com/rootlyhq/rootly-go"
 )
 
 func TestAccResourceHeartbeat(t *testing.T) {
@@ -28,7 +29,7 @@ func TestAccResourceHeartbeat(t *testing.T) {
 
 			id := rs.Primary.ID
 			ctx := context.Background()
-			heartbeat, err := testAccSharedClient.GetHeartbeatWithResponse(ctx, id)
+			heartbeat, err := testAccSharedClient.GetHeartbeatWithResponse(ctx, rootly.ID(id))
 			if err != nil {
 				return fmt.Errorf("failed to get heartbeat: %v", err)
 			}
@@ -37,8 +38,8 @@ func TestAccResourceHeartbeat(t *testing.T) {
 				return fmt.Errorf("heartbeat not found")
 			}
 
-			if heartbeat.ApplicationvndApiJSON200.Data.Attributes.Enabled != enabled {
-				return fmt.Errorf("heartbeat enabled status does not match expected value: %t, got: %t", enabled, heartbeat.ApplicationvndApiJSON200.Data.Attributes.Enabled)
+			if heartbeat.ApplicationVndAPIJSON200.Data.Attributes.Enabled != enabled {
+				return fmt.Errorf("heartbeat enabled status does not match expected value: %t, got: %t", enabled, heartbeat.ApplicationVndAPIJSON200.Data.Attributes.Enabled)
 			}
 
 			return nil

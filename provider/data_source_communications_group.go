@@ -9,7 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/client"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootlygo "github.com/rootlyhq/rootly-go"
 )
 
 func dataSourceCommunicationsGroup() *schema.Resource {
@@ -89,7 +89,7 @@ func dataSourceCommunicationsGroupRead(ctx context.Context, d *schema.ResourceDa
 
 	if value, ok := d.GetOkExists("communication_type_id"); ok {
 		communication_type_id := value.(string)
-		params.FilterCommunicationTypeId = &communication_type_id
+		params.FilterCommunicationTypeID = &communication_type_id
 	}
 
 	if value, ok := d.GetOkExists("condition_type"); ok {

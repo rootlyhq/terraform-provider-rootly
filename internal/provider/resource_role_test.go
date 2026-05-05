@@ -14,7 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-testing/tfjsonpath"
 	"github.com/jianyuan/go-utils/ptr"
 	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/acctest"
-	rootly "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	rootly "github.com/rootlyhq/rootly-go"
 )
 
 func init() {
@@ -33,13 +33,13 @@ func init() {
 					return fmt.Errorf("Error getting roles, got error: %s", err)
 				} else if httpResp.StatusCode() != http.StatusOK {
 					return fmt.Errorf("Error getting roles, got status code: %d", httpResp.StatusCode())
-				} else if httpResp.ApplicationvndApiJSON200 == nil {
+				} else if httpResp.ApplicationVndAPIJSON200 == nil {
 					return fmt.Errorf("Error getting roles, got empty response")
 				}
 
-				for _, role := range httpResp.ApplicationvndApiJSON200.Data {
+				for _, role := range httpResp.ApplicationVndAPIJSON200.Data {
 					if strings.HasPrefix(role.Attributes.Name, "tf-") {
-						httpResp, err := acctest.SharedClient.DeleteRoleWithResponse(ctx, role.Id)
+						httpResp, err := acctest.SharedClient.DeleteRoleWithResponse(ctx, rootly.ID(role.ID))
 						if err != nil {
 							return fmt.Errorf("Error deleting role: %s", err)
 						} else if httpResp.StatusCode() != http.StatusOK {
@@ -50,7 +50,7 @@ func init() {
 					}
 				}
 
-				if httpResp.ApplicationvndApiJSON200.Links.Next == nil {
+				if httpResp.ApplicationVndAPIJSON200.Links.Next == nil {
 					break
 				}
 
