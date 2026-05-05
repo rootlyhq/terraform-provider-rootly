@@ -112,6 +112,30 @@ make release-major     # Bump major + create release
 
 The version flows through: `git tag` → `GoReleaser` → `meta.GetVersion()` → `provider.New()` → `RootlyUserAgent()` → `client.UserAgent`
 
+## Acceptance Test Naming
+
+**All acceptance tests MUST use randomized resource names** via `acctest.RandomWithPrefix("tf-...")` or `acctest.RandString()`. Never use hardcoded names like `name = "test"` in test HCL configs — concurrent CI runs share the same API and hardcoded names cause `422 Name has already been taken` failures.
+
+Pattern to follow:
+```go
+func TestAccResourceFoo(t *testing.T) {
+    rName := acctest.RandomWithPrefix("tf-foo")
+    resource.UnitTest(t, resource.TestCase{
+        Steps: []resource.TestStep{{
+            Config: testAccResourceFooConfig(rName),
+        }},
+    })
+}
+
+func testAccResourceFooConfig(name string) string {
+    return fmt.Sprintf(`resource "rootly_foo" "test" { name = "%s" }`, name)
+}
+```
+
+- Use `const` HCL strings only for data sources that read by slug/email (no create)
+- Keep name prefixes starting with `tf-` (sweeper targets this prefix)
+- Watch for API field constraints: some fields have max length (e.g. sub_status: 20 chars) or character restrictions (e.g. secret: alphanumeric + underscore only)
+
 ## Important Notes
 
 - **Generated Files**: Files marked with "DO NOT MODIFY" headers are auto-generated. Changes should be made to templates in `tools/` directory.

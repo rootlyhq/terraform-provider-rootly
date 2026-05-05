@@ -1,12 +1,16 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceDashboard(t *testing.T) {
+	rName := acctest.RandomWithPrefix("tf-dashboard")
+
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck: func() {
 			testAccPreCheck(t)
@@ -14,29 +18,25 @@ func TestAccResourceDashboard(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceDashboard,
+				Config: testAccResourceDashboardConfig(rName),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_dashboard.foo", "name", "mydashboard"),
+					resource.TestCheckResourceAttr("rootly_dashboard.foo", "name", rName),
 				),
 			},
 			{
-				Config: testAccResourceDashboardUpdate,
+				Config: testAccResourceDashboardConfig(rName + "-updated"),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_dashboard.foo", "name", "mydashboard2"),
+					resource.TestCheckResourceAttr("rootly_dashboard.foo", "name", rName+"-updated"),
 				),
 			},
 		},
 	})
 }
 
-const testAccResourceDashboard = `
+func testAccResourceDashboardConfig(name string) string {
+	return fmt.Sprintf(`
 resource "rootly_dashboard" "foo" {
-  name = "mydashboard"
+  name = "%s"
 }
-`
-
-const testAccResourceDashboardUpdate = `
-resource "rootly_dashboard" "foo" {
-  name = "mydashboard2"
+`, name)
 }
-`

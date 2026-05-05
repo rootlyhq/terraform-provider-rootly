@@ -41,6 +41,18 @@ jobs:
       run: |
         go build -v ./...
 
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+    - name: Lint test names
+      run: |
+        scripts/lint-test-names.sh
+
   # run acceptance tests in a matrix with Terraform core versions
   test:
     name: Matrix Test
