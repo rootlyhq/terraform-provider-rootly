@@ -1,0 +1,50 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices",
+    "helpers:pinGitHubActionDigestsToSemver",
+    "github>oapi-codegen/renovate-config:user"
+  ],
+  "addLabels": [
+    "dependencies"
+  ],
+  "separateMinorPatch": true,
+  "minimumReleaseAge": "3 days",
+  "packageRules": [
+    {
+      "description": "Require human review for `toolchain` directive and Mise updates",
+      "matchDepNames": [
+        "go"
+      ],
+      "dependencyDashboardApproval": true,
+      "groupName": "go-toolchain"
+    },
+    {
+      "description": "Require human review for `go` directive updates",
+      "matchPackageNames": [
+        "go"
+      ],
+      "matchDepTypes": [
+        "golang"
+      ],
+      "dependencyDashboardApproval": true,
+      "groupName": "go-directive"
+    },
+    {
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "minimumReleaseAge": "7 days"
+    },
+    {
+      "matchUpdateTypes": [
+        "lockFileMaintenance"
+      ],
+      "minimumReleaseAge": null
+    }
+  ],
+  "postUpdateOptions": [
+    "gomodTidy",
+    "gomodUpdateImportPaths"
+  ]
+}
