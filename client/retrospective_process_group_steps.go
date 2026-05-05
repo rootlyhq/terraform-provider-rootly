@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -17,8 +18,8 @@ type RetrospectiveProcessGroupStep struct {
 	Position                    int    `jsonapi:"attr,position,omitempty"`
 }
 
-func (c *Client) ListRetrospectiveProcessGroupSteps(id string, params *rootlygo.ListRetrospectiveProcessGroupStepsParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListRetrospectiveProcessGroupStepsRequest(c.Rootly.Server, id, params)
+func (c *Client) ListRetrospectiveProcessGroupSteps(id rootlygo_.ID, params *rootlygo.ListRetrospectiveProcessGroupStepsParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListRetrospectiveProcessGroupStepsRequest(c.Rootly.Server, id.String(), params)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -61,8 +62,8 @@ func (c *Client) CreateRetrospectiveProcessGroupStep(d *RetrospectiveProcessGrou
 	return data.(*RetrospectiveProcessGroupStep), nil
 }
 
-func (c *Client) GetRetrospectiveProcessGroupStep(id string) (*RetrospectiveProcessGroupStep, error) {
-	req, err := rootlygo.NewGetRetrospectiveProcessGroupStepRequest(c.Rootly.Server, id)
+func (c *Client) GetRetrospectiveProcessGroupStep(id rootlygo_.ID) (*RetrospectiveProcessGroupStep, error) {
+	req, err := rootlygo.NewGetRetrospectiveProcessGroupStepRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -81,13 +82,13 @@ func (c *Client) GetRetrospectiveProcessGroupStep(id string) (*RetrospectiveProc
 	return data.(*RetrospectiveProcessGroupStep), nil
 }
 
-func (c *Client) UpdateRetrospectiveProcessGroupStep(id string, retrospective_process_group_step *RetrospectiveProcessGroupStep) (*RetrospectiveProcessGroupStep, error) {
+func (c *Client) UpdateRetrospectiveProcessGroupStep(id rootlygo_.ID, retrospective_process_group_step *RetrospectiveProcessGroupStep) (*RetrospectiveProcessGroupStep, error) {
 	buffer, err := MarshalData(retrospective_process_group_step)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling retrospective_process_group_step: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateRetrospectiveProcessGroupStepRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateRetrospectiveProcessGroupStepRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -105,8 +106,8 @@ func (c *Client) UpdateRetrospectiveProcessGroupStep(id string, retrospective_pr
 	return data.(*RetrospectiveProcessGroupStep), nil
 }
 
-func (c *Client) DeleteRetrospectiveProcessGroupStep(id string) error {
-	req, err := rootlygo.NewDeleteRetrospectiveProcessGroupStepRequest(c.Rootly.Server, id)
+func (c *Client) DeleteRetrospectiveProcessGroupStep(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteRetrospectiveProcessGroupStepRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

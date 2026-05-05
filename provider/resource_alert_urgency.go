@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 )
 
@@ -92,7 +93,7 @@ func resourceAlertUrgencyRead(ctx context.Context, d *schema.ResourceData, meta 
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading AlertUrgency: %s", d.Id()))
 
-	item, err := c.GetAlertUrgency(d.Id())
+	item, err := c.GetAlertUrgency(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -128,7 +129,7 @@ func resourceAlertUrgencyUpdate(ctx context.Context, d *schema.ResourceData, met
 		s.Position = d.Get("position").(int)
 	}
 
-	_, err := c.UpdateAlertUrgency(d.Id(), s)
+	_, err := c.UpdateAlertUrgency(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating alert_urgency: %s", err.Error())
 	}
@@ -140,7 +141,7 @@ func resourceAlertUrgencyDelete(ctx context.Context, d *schema.ResourceData, met
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting AlertUrgency: %s", d.Id()))
 
-	err := c.DeleteAlertUrgency(d.Id())
+	err := c.DeleteAlertUrgency(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

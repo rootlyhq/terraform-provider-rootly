@@ -8,6 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 )
@@ -121,7 +122,7 @@ func resourceOverrideShiftRead(ctx context.Context, d *schema.ResourceData, meta
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading OverrideShift: %s", d.Id()))
 
-	item, err := c.GetOverrideShift(d.Id())
+	item, err := c.GetOverrideShift(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -165,7 +166,7 @@ func resourceOverrideShiftUpdate(ctx context.Context, d *schema.ResourceData, me
 		s.UserId = d.Get("user_id").(int)
 	}
 
-	_, err := c.UpdateOverrideShift(d.Id(), s)
+	_, err := c.UpdateOverrideShift(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating override_shift: %s", err.Error())
 	}
@@ -177,7 +178,7 @@ func resourceOverrideShiftDelete(ctx context.Context, d *schema.ResourceData, me
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting OverrideShift: %s", d.Id()))
 
-	err := c.DeleteOverrideShift(d.Id())
+	err := c.DeleteOverrideShift(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -67,8 +68,8 @@ func (c *Client) CreateIncidentType(d *IncidentType) (*IncidentType, error) {
 	return data.(*IncidentType), nil
 }
 
-func (c *Client) GetIncidentType(id string) (*IncidentType, error) {
-	req, err := rootlygo.NewGetIncidentTypeRequest(c.Rootly.Server, id)
+func (c *Client) GetIncidentType(id rootlygo_.ID) (*IncidentType, error) {
+	req, err := rootlygo.NewGetIncidentTypeRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -87,13 +88,13 @@ func (c *Client) GetIncidentType(id string) (*IncidentType, error) {
 	return data.(*IncidentType), nil
 }
 
-func (c *Client) UpdateIncidentType(id string, incident_type *IncidentType) (*IncidentType, error) {
+func (c *Client) UpdateIncidentType(id rootlygo_.ID, incident_type *IncidentType) (*IncidentType, error) {
 	buffer, err := MarshalData(incident_type)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling incident_type: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateIncidentTypeRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateIncidentTypeRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -111,8 +112,8 @@ func (c *Client) UpdateIncidentType(id string, incident_type *IncidentType) (*In
 	return data.(*IncidentType), nil
 }
 
-func (c *Client) DeleteIncidentType(id string) error {
-	req, err := rootlygo.NewDeleteIncidentTypeRequest(c.Rootly.Server, id)
+func (c *Client) DeleteIncidentType(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteIncidentTypeRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

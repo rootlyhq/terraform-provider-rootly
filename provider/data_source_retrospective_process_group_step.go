@@ -7,6 +7,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
@@ -59,7 +60,7 @@ func dataSourceRetrospectiveProcessGroupStepRead(ctx context.Context, d *schema.
 	}
 
 	retrospective_process_group_id := d.Get("retrospective_process_group_id").(string)
-	items, err := c.ListRetrospectiveProcessGroupSteps(retrospective_process_group_id, params)
+	items, err := c.ListRetrospectiveProcessGroupSteps(rootlygo_.ID(retrospective_process_group_id), params)
 	if err != nil {
 		return diag.FromErr(err)
 	}

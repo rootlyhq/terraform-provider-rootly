@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 )
 
@@ -115,7 +116,7 @@ func resourceSecretRead(ctx context.Context, d *schema.ResourceData, meta interf
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading Secret: %s", d.Id()))
 
-	item, err := c.GetSecret(d.Id())
+	item, err := c.GetSecret(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -159,7 +160,7 @@ func resourceSecretUpdate(ctx context.Context, d *schema.ResourceData, meta inte
 		s.HashicorpVaultVersion = d.Get("hashicorp_vault_version").(int)
 	}
 
-	_, err := c.UpdateSecret(d.Id(), s)
+	_, err := c.UpdateSecret(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating secret: %s", err.Error())
 	}
@@ -171,7 +172,7 @@ func resourceSecretDelete(ctx context.Context, d *schema.ResourceData, meta inte
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting Secret: %s", d.Id()))
 
-	err := c.DeleteSecret(d.Id())
+	err := c.DeleteSecret(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

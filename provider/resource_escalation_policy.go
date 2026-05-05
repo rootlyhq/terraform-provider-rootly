@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
@@ -240,7 +241,7 @@ func resourceEscalationPolicyRead(ctx context.Context, d *schema.ResourceData, m
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading EscalationPolicy: %s", d.Id()))
 
-	item, err := c.GetEscalationPolicy(d.Id())
+	item, err := c.GetEscalationPolicy(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -334,7 +335,7 @@ func resourceEscalationPolicyUpdate(ctx context.Context, d *schema.ResourceData,
 		}
 	}
 
-	_, err := c.UpdateEscalationPolicy(d.Id(), s)
+	_, err := c.UpdateEscalationPolicy(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating escalation_policy: %s", err.Error())
 	}
@@ -346,7 +347,7 @@ func resourceEscalationPolicyDelete(ctx context.Context, d *schema.ResourceData,
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting EscalationPolicy: %s", d.Id()))
 
-	err := c.DeleteEscalationPolicy(d.Id())
+	err := c.DeleteEscalationPolicy(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

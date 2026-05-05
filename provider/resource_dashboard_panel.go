@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/converter"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
@@ -467,7 +468,7 @@ func resourceDashboardPanelRead(ctx context.Context, d *schema.ResourceData, met
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading DashboardPanel: %s", d.Id()))
 
-	item, err := c.GetDashboardPanel(d.Id())
+	item, err := c.GetDashboardPanel(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -535,7 +536,7 @@ func resourceDashboardPanelUpdate(ctx context.Context, d *schema.ResourceData, m
 		}
 	}
 
-	_, err := c.UpdateDashboardPanel(d.Id(), s)
+	_, err := c.UpdateDashboardPanel(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating dashboard_panel: %s", err.Error())
 	}
@@ -547,7 +548,7 @@ func resourceDashboardPanelDelete(ctx context.Context, d *schema.ResourceData, m
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting DashboardPanel: %s", d.Id()))
 
-	err := c.DeleteDashboardPanel(d.Id())
+	err := c.DeleteDashboardPanel(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

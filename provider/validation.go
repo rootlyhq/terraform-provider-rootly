@@ -8,6 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
@@ -28,7 +29,7 @@ type resourceDiffGetter interface {
 
 // workflowTaskLister is an interface for listing workflow tasks (for testing)
 type workflowTaskLister interface {
-	ListWorkflowTasks(workflowId string, params *rootlygo.ListWorkflowTasksParams) ([]interface{}, error)
+	ListWorkflowTasks(workflowId rootlygo_.ID, params *rootlygo.ListWorkflowTasksParams) ([]interface{}, error)
 }
 
 func validateUniqueWorkflowTaskPosition(ctx context.Context, d *schema.ResourceDiff, meta interface{}) error {
@@ -115,7 +116,7 @@ func validateUniqueWorkflowTaskPositionInternal(ctx context.Context, d resourceD
 		return nil
 	}
 
-	tasks, err := lister.ListWorkflowTasks(workflowId, &rootlygo.ListWorkflowTasksParams{})
+	tasks, err := lister.ListWorkflowTasks(rootlygo_.ID(workflowId), &rootlygo.ListWorkflowTasksParams{})
 	if err != nil {
 		tflog.Warn(ctx, fmt.Sprintf("Could not validate unique position for workflow %s: %v", workflowId, err))
 		return nil

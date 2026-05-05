@@ -8,6 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
@@ -67,7 +68,7 @@ func dataSourceIncidentPermissionSetResourceRead(ctx context.Context, d *schema.
 	}
 
 	incident_permission_set_id := d.Get("incident_permission_set_id").(string)
-	items, err := c.ListIncidentPermissionSetResources(incident_permission_set_id, params)
+	items, err := c.ListIncidentPermissionSetResources(rootlygo_.ID(incident_permission_set_id), params)
 	if err != nil {
 		return diag.FromErr(err)
 	}

@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -123,7 +124,7 @@ func resourceIncidentPermissionSetResourceRead(ctx context.Context, d *schema.Re
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading IncidentPermissionSetResource: %s", d.Id()))
 
-	item, err := c.GetIncidentPermissionSetResource(d.Id())
+	item, err := c.GetIncidentPermissionSetResource(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -167,7 +168,7 @@ func resourceIncidentPermissionSetResourceUpdate(ctx context.Context, d *schema.
 		s.ResourceType = d.Get("resource_type").(string)
 	}
 
-	_, err := c.UpdateIncidentPermissionSetResource(d.Id(), s)
+	_, err := c.UpdateIncidentPermissionSetResource(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating incident_permission_set_resource: %s", err.Error())
 	}
@@ -179,7 +180,7 @@ func resourceIncidentPermissionSetResourceDelete(ctx context.Context, d *schema.
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting IncidentPermissionSetResource: %s", d.Id()))
 
-	err := c.DeleteIncidentPermissionSetResource(d.Id())
+	err := c.DeleteIncidentPermissionSetResource(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

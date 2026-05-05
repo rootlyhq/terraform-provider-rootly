@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -65,8 +66,8 @@ func (c *Client) CreateWorkflowGroup(d *WorkflowGroup) (*WorkflowGroup, error) {
 	return data.(*WorkflowGroup), nil
 }
 
-func (c *Client) GetWorkflowGroup(id string) (*WorkflowGroup, error) {
-	req, err := rootlygo.NewGetWorkflowGroupRequest(c.Rootly.Server, id)
+func (c *Client) GetWorkflowGroup(id rootlygo_.ID) (*WorkflowGroup, error) {
+	req, err := rootlygo.NewGetWorkflowGroupRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -85,13 +86,13 @@ func (c *Client) GetWorkflowGroup(id string) (*WorkflowGroup, error) {
 	return data.(*WorkflowGroup), nil
 }
 
-func (c *Client) UpdateWorkflowGroup(id string, workflow_group *WorkflowGroup) (*WorkflowGroup, error) {
+func (c *Client) UpdateWorkflowGroup(id rootlygo_.ID, workflow_group *WorkflowGroup) (*WorkflowGroup, error) {
 	buffer, err := MarshalData(workflow_group)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling workflow_group: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateWorkflowGroupRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateWorkflowGroupRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -109,8 +110,8 @@ func (c *Client) UpdateWorkflowGroup(id string, workflow_group *WorkflowGroup) (
 	return data.(*WorkflowGroup), nil
 }
 
-func (c *Client) DeleteWorkflowGroup(id string) error {
-	req, err := rootlygo.NewDeleteWorkflowGroupRequest(c.Rootly.Server, id)
+func (c *Client) DeleteWorkflowGroup(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteWorkflowGroupRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

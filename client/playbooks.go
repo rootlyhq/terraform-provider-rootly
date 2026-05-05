@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -67,8 +68,8 @@ func (c *Client) CreatePlaybook(d *Playbook) (*Playbook, error) {
 	return data.(*Playbook), nil
 }
 
-func (c *Client) GetPlaybook(id string) (*Playbook, error) {
-	req, err := rootlygo.NewGetPlaybookRequest(c.Rootly.Server, id, nil)
+func (c *Client) GetPlaybook(id rootlygo_.ID) (*Playbook, error) {
+	req, err := rootlygo.NewGetPlaybookRequest(c.Rootly.Server, id.String(), nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -87,13 +88,13 @@ func (c *Client) GetPlaybook(id string) (*Playbook, error) {
 	return data.(*Playbook), nil
 }
 
-func (c *Client) UpdatePlaybook(id string, playbook *Playbook) (*Playbook, error) {
+func (c *Client) UpdatePlaybook(id rootlygo_.ID, playbook *Playbook) (*Playbook, error) {
 	buffer, err := MarshalData(playbook)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling playbook: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdatePlaybookRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdatePlaybookRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -111,8 +112,8 @@ func (c *Client) UpdatePlaybook(id string, playbook *Playbook) (*Playbook, error
 	return data.(*Playbook), nil
 }
 
-func (c *Client) DeletePlaybook(id string) error {
-	req, err := rootlygo.NewDeletePlaybookRequest(c.Rootly.Server, id)
+func (c *Client) DeletePlaybook(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeletePlaybookRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

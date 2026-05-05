@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -394,7 +395,7 @@ func resourceAlertGroupRead(ctx context.Context, d *schema.ResourceData, meta in
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading AlertGroup: %s", d.Id()))
 
-	item, err := c.GetAlertGroup(d.Id())
+	item, err := c.GetAlertGroup(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -539,7 +540,7 @@ func resourceAlertGroupUpdate(ctx context.Context, d *schema.ResourceData, meta 
 		s.DeletedAt = d.Get("deleted_at").(string)
 	}
 
-	_, err := c.UpdateAlertGroup(d.Id(), s)
+	_, err := c.UpdateAlertGroup(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating alert_group: %s", err.Error())
 	}
@@ -551,7 +552,7 @@ func resourceAlertGroupDelete(ctx context.Context, d *schema.ResourceData, meta 
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting AlertGroup: %s", d.Id()))
 
-	err := c.DeleteAlertGroup(d.Id())
+	err := c.DeleteAlertGroup(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

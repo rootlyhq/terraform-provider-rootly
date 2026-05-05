@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -145,7 +146,7 @@ func resourceRetrospectiveStepRead(ctx context.Context, d *schema.ResourceData, 
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading RetrospectiveStep: %s", d.Id()))
 
-	item, err := c.GetRetrospectiveStep(d.Id())
+	item, err := c.GetRetrospectiveStep(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -201,7 +202,7 @@ func resourceRetrospectiveStepUpdate(ctx context.Context, d *schema.ResourceData
 		s.Skippable = tools.Bool(d.Get("skippable").(bool))
 	}
 
-	_, err := c.UpdateRetrospectiveStep(d.Id(), s)
+	_, err := c.UpdateRetrospectiveStep(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating retrospective_step: %s", err.Error())
 	}
@@ -213,7 +214,7 @@ func resourceRetrospectiveStepDelete(ctx context.Context, d *schema.ResourceData
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting RetrospectiveStep: %s", d.Id()))
 
-	err := c.DeleteRetrospectiveStep(d.Id())
+	err := c.DeleteRetrospectiveStep(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

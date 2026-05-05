@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -18,8 +19,8 @@ type DashboardPanel struct {
 	Position    map[string]interface{} `jsonapi:"attr,position,omitempty"`
 }
 
-func (c *Client) ListDashboardPanels(id string, params *rootlygo.ListDashboardPanelsParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListDashboardPanelsRequest(c.Rootly.Server, id, params)
+func (c *Client) ListDashboardPanels(id rootlygo_.ID, params *rootlygo.ListDashboardPanelsParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListDashboardPanelsRequest(c.Rootly.Server, id.String(), params)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -62,8 +63,8 @@ func (c *Client) CreateDashboardPanel(d *DashboardPanel) (*DashboardPanel, error
 	return data.(*DashboardPanel), nil
 }
 
-func (c *Client) GetDashboardPanel(id string) (*DashboardPanel, error) {
-	req, err := rootlygo.NewGetDashboardPanelRequest(c.Rootly.Server, id, nil)
+func (c *Client) GetDashboardPanel(id rootlygo_.ID) (*DashboardPanel, error) {
+	req, err := rootlygo.NewGetDashboardPanelRequest(c.Rootly.Server, id.String(), nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -82,13 +83,13 @@ func (c *Client) GetDashboardPanel(id string) (*DashboardPanel, error) {
 	return data.(*DashboardPanel), nil
 }
 
-func (c *Client) UpdateDashboardPanel(id string, dashboard_panel *DashboardPanel) (*DashboardPanel, error) {
+func (c *Client) UpdateDashboardPanel(id rootlygo_.ID, dashboard_panel *DashboardPanel) (*DashboardPanel, error) {
 	buffer, err := MarshalData(dashboard_panel)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling dashboard_panel: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateDashboardPanelRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateDashboardPanelRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -106,8 +107,8 @@ func (c *Client) UpdateDashboardPanel(id string, dashboard_panel *DashboardPanel
 	return data.(*DashboardPanel), nil
 }
 
-func (c *Client) DeleteDashboardPanel(id string) error {
-	req, err := rootlygo.NewDeleteDashboardPanelRequest(c.Rootly.Server, id)
+func (c *Client) DeleteDashboardPanel(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteDashboardPanelRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

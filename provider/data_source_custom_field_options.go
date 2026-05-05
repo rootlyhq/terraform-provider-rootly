@@ -7,6 +7,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
@@ -71,7 +72,7 @@ func dataSourceCustomFieldOptionsRead(ctx context.Context, d *schema.ResourceDat
 	params.FilterValue = &value
 	params.FilterColor = &color
 
-	custom_field_options, err := c.ListCustomFieldOptions(customFieldId, params)
+	custom_field_options, err := c.ListCustomFieldOptions(rootlygo_.ID(customFieldId), params)
 	if err != nil {
 		return diag.FromErr(err)
 	}

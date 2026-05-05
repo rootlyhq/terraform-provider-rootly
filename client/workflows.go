@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -83,8 +84,8 @@ func (c *Client) CreateWorkflow(d *Workflow) (*Workflow, error) {
 	return data.(*Workflow), nil
 }
 
-func (c *Client) GetWorkflow(id string) (*Workflow, error) {
-	req, err := rootlygo.NewGetWorkflowRequest(c.Rootly.Server, id, nil)
+func (c *Client) GetWorkflow(id rootlygo_.ID) (*Workflow, error) {
+	req, err := rootlygo.NewGetWorkflowRequest(c.Rootly.Server, id.String(), nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -103,13 +104,13 @@ func (c *Client) GetWorkflow(id string) (*Workflow, error) {
 	return data.(*Workflow), nil
 }
 
-func (c *Client) UpdateWorkflow(id string, workflow *Workflow) (*Workflow, error) {
+func (c *Client) UpdateWorkflow(id rootlygo_.ID, workflow *Workflow) (*Workflow, error) {
 	buffer, err := MarshalData(workflow)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling workflow: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateWorkflowRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateWorkflowRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -127,8 +128,8 @@ func (c *Client) UpdateWorkflow(id string, workflow *Workflow) (*Workflow, error
 	return data.(*Workflow), nil
 }
 
-func (c *Client) DeleteWorkflow(id string) error {
-	req, err := rootlygo.NewDeleteWorkflowRequest(c.Rootly.Server, id)
+func (c *Client) DeleteWorkflow(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteWorkflowRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

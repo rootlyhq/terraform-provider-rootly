@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -66,8 +67,8 @@ func (c *Client) CreateAlertRoutingRule(d *AlertRoutingRule) (*AlertRoutingRule,
 	return data.(*AlertRoutingRule), nil
 }
 
-func (c *Client) GetAlertRoutingRule(id string) (*AlertRoutingRule, error) {
-	req, err := rootlygo.NewGetAlertRoutingRuleRequest(c.Rootly.Server, id)
+func (c *Client) GetAlertRoutingRule(id rootlygo_.ID) (*AlertRoutingRule, error) {
+	req, err := rootlygo.NewGetAlertRoutingRuleRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -86,13 +87,13 @@ func (c *Client) GetAlertRoutingRule(id string) (*AlertRoutingRule, error) {
 	return data.(*AlertRoutingRule), nil
 }
 
-func (c *Client) UpdateAlertRoutingRule(id string, alert_routing_rule *AlertRoutingRule) (*AlertRoutingRule, error) {
+func (c *Client) UpdateAlertRoutingRule(id rootlygo_.ID, alert_routing_rule *AlertRoutingRule) (*AlertRoutingRule, error) {
 	buffer, err := MarshalData(alert_routing_rule)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling alert_routing_rule: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateAlertRoutingRuleRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateAlertRoutingRuleRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -110,8 +111,8 @@ func (c *Client) UpdateAlertRoutingRule(id string, alert_routing_rule *AlertRout
 	return data.(*AlertRoutingRule), nil
 }
 
-func (c *Client) DeleteAlertRoutingRule(id string) error {
-	req, err := rootlygo.NewDeleteAlertRoutingRuleRequest(c.Rootly.Server, id)
+func (c *Client) DeleteAlertRoutingRule(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteAlertRoutingRuleRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

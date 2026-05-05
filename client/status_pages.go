@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -90,8 +91,8 @@ func (c *Client) CreateStatusPage(d *StatusPage) (*StatusPage, error) {
 	return data.(*StatusPage), nil
 }
 
-func (c *Client) GetStatusPage(id string) (*StatusPage, error) {
-	req, err := rootlygo.NewGetStatusPageRequest(c.Rootly.Server, id)
+func (c *Client) GetStatusPage(id rootlygo_.ID) (*StatusPage, error) {
+	req, err := rootlygo.NewGetStatusPageRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -110,13 +111,13 @@ func (c *Client) GetStatusPage(id string) (*StatusPage, error) {
 	return data.(*StatusPage), nil
 }
 
-func (c *Client) UpdateStatusPage(id string, status_page *StatusPage) (*StatusPage, error) {
+func (c *Client) UpdateStatusPage(id rootlygo_.ID, status_page *StatusPage) (*StatusPage, error) {
 	buffer, err := MarshalData(status_page)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling status_page: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateStatusPageRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateStatusPageRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -134,8 +135,8 @@ func (c *Client) UpdateStatusPage(id string, status_page *StatusPage) (*StatusPa
 	return data.(*StatusPage), nil
 }
 
-func (c *Client) DeleteStatusPage(id string) error {
-	req, err := rootlygo.NewDeleteStatusPageRequest(c.Rootly.Server, id)
+func (c *Client) DeleteStatusPage(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteStatusPageRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

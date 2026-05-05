@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -61,8 +62,8 @@ func (c *Client) CreateAlertField(d *AlertField) (*AlertField, error) {
 	return data.(*AlertField), nil
 }
 
-func (c *Client) GetAlertField(id string) (*AlertField, error) {
-	req, err := rootlygo.NewGetAlertFieldRequest(c.Rootly.Server, id)
+func (c *Client) GetAlertField(id rootlygo_.ID) (*AlertField, error) {
+	req, err := rootlygo.NewGetAlertFieldRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -81,13 +82,13 @@ func (c *Client) GetAlertField(id string) (*AlertField, error) {
 	return data.(*AlertField), nil
 }
 
-func (c *Client) UpdateAlertField(id string, alert_field *AlertField) (*AlertField, error) {
+func (c *Client) UpdateAlertField(id rootlygo_.ID, alert_field *AlertField) (*AlertField, error) {
 	buffer, err := MarshalData(alert_field)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling alert_field: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateAlertFieldRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateAlertFieldRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -105,8 +106,8 @@ func (c *Client) UpdateAlertField(id string, alert_field *AlertField) (*AlertFie
 	return data.(*AlertField), nil
 }
 
-func (c *Client) DeleteAlertField(id string) error {
-	req, err := rootlygo.NewDeleteAlertFieldRequest(c.Rootly.Server, id)
+func (c *Client) DeleteAlertField(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteAlertFieldRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

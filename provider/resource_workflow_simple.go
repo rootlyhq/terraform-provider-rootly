@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -388,7 +389,7 @@ func resourceWorkflowSimpleRead(ctx context.Context, d *schema.ResourceData, met
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading WorkflowSimple: %s", d.Id()))
 
-	item, err := c.GetWorkflow(d.Id())
+	item, err := c.GetWorkflow(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -520,7 +521,7 @@ func resourceWorkflowSimpleUpdate(ctx context.Context, d *schema.ResourceData, m
 		s.SubStatusIds = d.Get("sub_status_ids").([]interface{})
 	}
 
-	_, err := c.UpdateWorkflow(d.Id(), s)
+	_, err := c.UpdateWorkflow(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating workflow_simple: %s", err.Error())
 	}
@@ -532,7 +533,7 @@ func resourceWorkflowSimpleDelete(ctx context.Context, d *schema.ResourceData, m
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting WorkflowSimple: %s", d.Id()))
 
-	err := c.DeleteWorkflow(d.Id())
+	err := c.DeleteWorkflow(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

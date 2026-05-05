@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -27,8 +28,8 @@ type WorkflowFormFieldCondition struct {
 	SelectedIncidentTypeIds  []interface{} `jsonapi:"attr,selected_incident_type_ids,omitempty"`
 }
 
-func (c *Client) ListWorkflowFormFieldConditions(id string, params *rootlygo.ListWorkflowFormFieldConditionsParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListWorkflowFormFieldConditionsRequest(c.Rootly.Server, id, params)
+func (c *Client) ListWorkflowFormFieldConditions(id rootlygo_.ID, params *rootlygo.ListWorkflowFormFieldConditionsParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListWorkflowFormFieldConditionsRequest(c.Rootly.Server, id.String(), params)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -71,8 +72,8 @@ func (c *Client) CreateWorkflowFormFieldCondition(d *WorkflowFormFieldCondition)
 	return data.(*WorkflowFormFieldCondition), nil
 }
 
-func (c *Client) GetWorkflowFormFieldCondition(id string) (*WorkflowFormFieldCondition, error) {
-	req, err := rootlygo.NewGetWorkflowFormFieldConditionRequest(c.Rootly.Server, id)
+func (c *Client) GetWorkflowFormFieldCondition(id rootlygo_.ID) (*WorkflowFormFieldCondition, error) {
+	req, err := rootlygo.NewGetWorkflowFormFieldConditionRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -91,13 +92,13 @@ func (c *Client) GetWorkflowFormFieldCondition(id string) (*WorkflowFormFieldCon
 	return data.(*WorkflowFormFieldCondition), nil
 }
 
-func (c *Client) UpdateWorkflowFormFieldCondition(id string, workflow_form_field_condition *WorkflowFormFieldCondition) (*WorkflowFormFieldCondition, error) {
+func (c *Client) UpdateWorkflowFormFieldCondition(id rootlygo_.ID, workflow_form_field_condition *WorkflowFormFieldCondition) (*WorkflowFormFieldCondition, error) {
 	buffer, err := MarshalData(workflow_form_field_condition)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling workflow_form_field_condition: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateWorkflowFormFieldConditionRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateWorkflowFormFieldConditionRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -115,8 +116,8 @@ func (c *Client) UpdateWorkflowFormFieldCondition(id string, workflow_form_field
 	return data.(*WorkflowFormFieldCondition), nil
 }
 
-func (c *Client) DeleteWorkflowFormFieldCondition(id string) error {
-	req, err := rootlygo.NewDeleteWorkflowFormFieldConditionRequest(c.Rootly.Server, id)
+func (c *Client) DeleteWorkflowFormFieldCondition(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteWorkflowFormFieldConditionRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

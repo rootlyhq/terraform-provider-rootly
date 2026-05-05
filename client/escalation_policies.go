@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -66,8 +67,8 @@ func (c *Client) CreateEscalationPolicy(d *EscalationPolicy) (*EscalationPolicy,
 	return data.(*EscalationPolicy), nil
 }
 
-func (c *Client) GetEscalationPolicy(id string) (*EscalationPolicy, error) {
-	req, err := rootlygo.NewGetEscalationPolicyRequest(c.Rootly.Server, id, nil)
+func (c *Client) GetEscalationPolicy(id rootlygo_.ID) (*EscalationPolicy, error) {
+	req, err := rootlygo.NewGetEscalationPolicyRequest(c.Rootly.Server, id.String(), nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -86,13 +87,13 @@ func (c *Client) GetEscalationPolicy(id string) (*EscalationPolicy, error) {
 	return data.(*EscalationPolicy), nil
 }
 
-func (c *Client) UpdateEscalationPolicy(id string, escalation_policy *EscalationPolicy) (*EscalationPolicy, error) {
+func (c *Client) UpdateEscalationPolicy(id rootlygo_.ID, escalation_policy *EscalationPolicy) (*EscalationPolicy, error) {
 	buffer, err := MarshalData(escalation_policy)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling escalation_policy: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateEscalationPolicyRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateEscalationPolicyRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -110,8 +111,8 @@ func (c *Client) UpdateEscalationPolicy(id string, escalation_policy *Escalation
 	return data.(*EscalationPolicy), nil
 }
 
-func (c *Client) DeleteEscalationPolicy(id string) error {
-	req, err := rootlygo.NewDeleteEscalationPolicyRequest(c.Rootly.Server, id)
+func (c *Client) DeleteEscalationPolicy(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteEscalationPolicyRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

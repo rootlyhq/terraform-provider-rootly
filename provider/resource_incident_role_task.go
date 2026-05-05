@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 )
 
@@ -108,7 +109,7 @@ func resourceIncidentRoleTaskRead(ctx context.Context, d *schema.ResourceData, m
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading IncidentRoleTask: %s", d.Id()))
 
-	item, err := c.GetIncidentRoleTask(d.Id())
+	item, err := c.GetIncidentRoleTask(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -148,7 +149,7 @@ func resourceIncidentRoleTaskUpdate(ctx context.Context, d *schema.ResourceData,
 		s.Priority = d.Get("priority").(string)
 	}
 
-	_, err := c.UpdateIncidentRoleTask(d.Id(), s)
+	_, err := c.UpdateIncidentRoleTask(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating incident_role_task: %s", err.Error())
 	}
@@ -160,7 +161,7 @@ func resourceIncidentRoleTaskDelete(ctx context.Context, d *schema.ResourceData,
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting IncidentRoleTask: %s", d.Id()))
 
-	err := c.DeleteIncidentRoleTask(d.Id())
+	err := c.DeleteIncidentRoleTask(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -18,8 +19,8 @@ type IncidentPermissionSetBoolean struct {
 	Enabled                 *bool  `jsonapi:"attr,enabled,omitempty"`
 }
 
-func (c *Client) ListIncidentPermissionSetBooleans(id string, params *rootlygo.ListIncidentPermissionSetBooleansParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListIncidentPermissionSetBooleansRequest(c.Rootly.Server, id, params)
+func (c *Client) ListIncidentPermissionSetBooleans(id rootlygo_.ID, params *rootlygo.ListIncidentPermissionSetBooleansParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListIncidentPermissionSetBooleansRequest(c.Rootly.Server, id.String(), params)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -62,8 +63,8 @@ func (c *Client) CreateIncidentPermissionSetBoolean(d *IncidentPermissionSetBool
 	return data.(*IncidentPermissionSetBoolean), nil
 }
 
-func (c *Client) GetIncidentPermissionSetBoolean(id string) (*IncidentPermissionSetBoolean, error) {
-	req, err := rootlygo.NewGetIncidentPermissionSetBooleanRequest(c.Rootly.Server, id)
+func (c *Client) GetIncidentPermissionSetBoolean(id rootlygo_.ID) (*IncidentPermissionSetBoolean, error) {
+	req, err := rootlygo.NewGetIncidentPermissionSetBooleanRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -82,13 +83,13 @@ func (c *Client) GetIncidentPermissionSetBoolean(id string) (*IncidentPermission
 	return data.(*IncidentPermissionSetBoolean), nil
 }
 
-func (c *Client) UpdateIncidentPermissionSetBoolean(id string, incident_permission_set_boolean *IncidentPermissionSetBoolean) (*IncidentPermissionSetBoolean, error) {
+func (c *Client) UpdateIncidentPermissionSetBoolean(id rootlygo_.ID, incident_permission_set_boolean *IncidentPermissionSetBoolean) (*IncidentPermissionSetBoolean, error) {
 	buffer, err := MarshalData(incident_permission_set_boolean)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling incident_permission_set_boolean: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateIncidentPermissionSetBooleanRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateIncidentPermissionSetBooleanRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -106,8 +107,8 @@ func (c *Client) UpdateIncidentPermissionSetBoolean(id string, incident_permissi
 	return data.(*IncidentPermissionSetBoolean), nil
 }
 
-func (c *Client) DeleteIncidentPermissionSetBoolean(id string) error {
-	req, err := rootlygo.NewDeleteIncidentPermissionSetBooleanRequest(c.Rootly.Server, id)
+func (c *Client) DeleteIncidentPermissionSetBoolean(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteIncidentPermissionSetBooleanRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

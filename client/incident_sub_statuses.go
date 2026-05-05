@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -18,8 +19,8 @@ type IncidentSubStatus struct {
 	AssignedByUserId int    `jsonapi:"attr,assigned_by_user_id,omitempty"`
 }
 
-func (c *Client) ListIncidentSubStatuses(id string, params *rootlygo.ListIncidentSubStatusesParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListIncidentSubStatusesRequest(c.Rootly.Server, id, params)
+func (c *Client) ListIncidentSubStatuses(id rootlygo_.ID, params *rootlygo.ListIncidentSubStatusesParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListIncidentSubStatusesRequest(c.Rootly.Server, id.String(), params)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -62,8 +63,8 @@ func (c *Client) CreateIncidentSubStatus(d *IncidentSubStatus) (*IncidentSubStat
 	return data.(*IncidentSubStatus), nil
 }
 
-func (c *Client) GetIncidentSubStatus(id string) (*IncidentSubStatus, error) {
-	req, err := rootlygo.NewGetIncidentSubStatusRequest(c.Rootly.Server, id, nil)
+func (c *Client) GetIncidentSubStatus(id rootlygo_.ID) (*IncidentSubStatus, error) {
+	req, err := rootlygo.NewGetIncidentSubStatusRequest(c.Rootly.Server, id.String(), nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -82,13 +83,13 @@ func (c *Client) GetIncidentSubStatus(id string) (*IncidentSubStatus, error) {
 	return data.(*IncidentSubStatus), nil
 }
 
-func (c *Client) UpdateIncidentSubStatus(id string, incident_sub_status *IncidentSubStatus) (*IncidentSubStatus, error) {
+func (c *Client) UpdateIncidentSubStatus(id rootlygo_.ID, incident_sub_status *IncidentSubStatus) (*IncidentSubStatus, error) {
 	buffer, err := MarshalData(incident_sub_status)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling incident_sub_status: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateIncidentSubStatusRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateIncidentSubStatusRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -106,8 +107,8 @@ func (c *Client) UpdateIncidentSubStatus(id string, incident_sub_status *Inciden
 	return data.(*IncidentSubStatus), nil
 }
 
-func (c *Client) DeleteIncidentSubStatus(id string) error {
-	req, err := rootlygo.NewDeleteIncidentSubStatusRequest(c.Rootly.Server, id)
+func (c *Client) DeleteIncidentSubStatus(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteIncidentSubStatusRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

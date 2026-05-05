@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -164,7 +165,7 @@ func resourceCatalogPropertyRead(ctx context.Context, d *schema.ResourceData, me
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading CatalogProperty: %s", d.Id()))
 
-	item, err := c.GetCatalogProperty(d.Id())
+	item, err := c.GetCatalogProperty(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -220,7 +221,7 @@ func resourceCatalogPropertyUpdate(ctx context.Context, d *schema.ResourceData, 
 		s.CatalogType = d.Get("catalog_type").(string)
 	}
 
-	_, err := c.UpdateCatalogProperty(d.Id(), s)
+	_, err := c.UpdateCatalogProperty(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating catalog_property: %s", err.Error())
 	}
@@ -232,7 +233,7 @@ func resourceCatalogPropertyDelete(ctx context.Context, d *schema.ResourceData, 
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting CatalogProperty: %s", d.Id()))
 
-	err := c.DeleteCatalogProperty(d.Id())
+	err := c.DeleteCatalogProperty(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

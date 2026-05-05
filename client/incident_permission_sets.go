@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -63,8 +64,8 @@ func (c *Client) CreateIncidentPermissionSet(d *IncidentPermissionSet) (*Inciden
 	return data.(*IncidentPermissionSet), nil
 }
 
-func (c *Client) GetIncidentPermissionSet(id string) (*IncidentPermissionSet, error) {
-	req, err := rootlygo.NewGetIncidentPermissionSetRequest(c.Rootly.Server, id)
+func (c *Client) GetIncidentPermissionSet(id rootlygo_.ID) (*IncidentPermissionSet, error) {
+	req, err := rootlygo.NewGetIncidentPermissionSetRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -83,13 +84,13 @@ func (c *Client) GetIncidentPermissionSet(id string) (*IncidentPermissionSet, er
 	return data.(*IncidentPermissionSet), nil
 }
 
-func (c *Client) UpdateIncidentPermissionSet(id string, incident_permission_set *IncidentPermissionSet) (*IncidentPermissionSet, error) {
+func (c *Client) UpdateIncidentPermissionSet(id rootlygo_.ID, incident_permission_set *IncidentPermissionSet) (*IncidentPermissionSet, error) {
 	buffer, err := MarshalData(incident_permission_set)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling incident_permission_set: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateIncidentPermissionSetRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateIncidentPermissionSetRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -107,8 +108,8 @@ func (c *Client) UpdateIncidentPermissionSet(id string, incident_permission_set 
 	return data.(*IncidentPermissionSet), nil
 }
 
-func (c *Client) DeleteIncidentPermissionSet(id string) error {
-	req, err := rootlygo.NewDeleteIncidentPermissionSetRequest(c.Rootly.Server, id)
+func (c *Client) DeleteIncidentPermissionSet(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteIncidentPermissionSetRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

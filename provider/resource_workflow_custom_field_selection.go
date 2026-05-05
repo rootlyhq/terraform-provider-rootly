@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -131,7 +132,7 @@ func resourceWorkflowCustomFieldSelectionRead(ctx context.Context, d *schema.Res
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading WorkflowCustomFieldSelection: %s", d.Id()))
 
-	item, err := c.GetWorkflowCustomFieldSelection(d.Id())
+	item, err := c.GetWorkflowCustomFieldSelection(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -185,7 +186,7 @@ func resourceWorkflowCustomFieldSelectionUpdate(ctx context.Context, d *schema.R
 		}
 	}
 
-	_, err := c.UpdateWorkflowCustomFieldSelection(d.Id(), s)
+	_, err := c.UpdateWorkflowCustomFieldSelection(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating workflow_custom_field_selection: %s", err.Error())
 	}
@@ -197,7 +198,7 @@ func resourceWorkflowCustomFieldSelectionDelete(ctx context.Context, d *schema.R
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting WorkflowCustomFieldSelection: %s", d.Id()))
 
-	err := c.DeleteWorkflowCustomFieldSelection(d.Id())
+	err := c.DeleteWorkflowCustomFieldSelection(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

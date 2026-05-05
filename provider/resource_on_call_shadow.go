@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 )
 
@@ -136,7 +137,7 @@ func resourceOnCallShadowRead(ctx context.Context, d *schema.ResourceData, meta 
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading OnCallShadow: %s", d.Id()))
 
-	item, err := c.GetOnCallShadow(d.Id())
+	item, err := c.GetOnCallShadow(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -184,7 +185,7 @@ func resourceOnCallShadowUpdate(ctx context.Context, d *schema.ResourceData, met
 		s.EndsAt = d.Get("ends_at").(string)
 	}
 
-	_, err := c.UpdateOnCallShadow(d.Id(), s)
+	_, err := c.UpdateOnCallShadow(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating on_call_shadow: %s", err.Error())
 	}
@@ -196,7 +197,7 @@ func resourceOnCallShadowDelete(ctx context.Context, d *schema.ResourceData, met
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting OnCallShadow: %s", d.Id()))
 
-	err := c.DeleteOnCallShadow(d.Id())
+	err := c.DeleteOnCallShadow(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

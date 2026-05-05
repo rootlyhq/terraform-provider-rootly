@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
@@ -420,7 +421,7 @@ func resourceCommunicationsGroupRead(ctx context.Context, d *schema.ResourceData
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading CommunicationsGroup: %s", d.Id()))
 
-	item, err := c.GetCommunicationsGroup(d.Id())
+	item, err := c.GetCommunicationsGroup(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -587,7 +588,7 @@ func resourceCommunicationsGroupUpdate(ctx context.Context, d *schema.ResourceDa
 		}
 	}
 
-	_, err := c.UpdateCommunicationsGroup(d.Id(), s)
+	_, err := c.UpdateCommunicationsGroup(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating communications_group: %s", err.Error())
 	}
@@ -599,7 +600,7 @@ func resourceCommunicationsGroupDelete(ctx context.Context, d *schema.ResourceDa
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting CommunicationsGroup: %s", d.Id()))
 
-	err := c.DeleteCommunicationsGroup(d.Id())
+	err := c.DeleteCommunicationsGroup(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -69,8 +70,8 @@ func (c *Client) CreateAlertGroup(d *AlertGroup) (*AlertGroup, error) {
 	return data.(*AlertGroup), nil
 }
 
-func (c *Client) GetAlertGroup(id string) (*AlertGroup, error) {
-	req, err := rootlygo.NewGetAlertGroupRequest(c.Rootly.Server, id)
+func (c *Client) GetAlertGroup(id rootlygo_.ID) (*AlertGroup, error) {
+	req, err := rootlygo.NewGetAlertGroupRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -89,13 +90,13 @@ func (c *Client) GetAlertGroup(id string) (*AlertGroup, error) {
 	return data.(*AlertGroup), nil
 }
 
-func (c *Client) UpdateAlertGroup(id string, alert_group *AlertGroup) (*AlertGroup, error) {
+func (c *Client) UpdateAlertGroup(id rootlygo_.ID, alert_group *AlertGroup) (*AlertGroup, error) {
 	buffer, err := MarshalData(alert_group)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling alert_group: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateAlertGroupRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateAlertGroupRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -113,8 +114,8 @@ func (c *Client) UpdateAlertGroup(id string, alert_group *AlertGroup) (*AlertGro
 	return data.(*AlertGroup), nil
 }
 
-func (c *Client) DeleteAlertGroup(id string) error {
-	req, err := rootlygo.NewDeleteAlertGroupRequest(c.Rootly.Server, id)
+func (c *Client) DeleteAlertGroup(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteAlertGroupRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

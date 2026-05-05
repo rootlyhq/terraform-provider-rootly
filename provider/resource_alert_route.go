@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/polling"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
@@ -417,7 +418,7 @@ func resourceAlertRouteRead(ctx context.Context, d *schema.ResourceData, meta in
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading AlertRoute: %s", d.Id()))
 
-	item, err := c.GetAlertRoute(d.Id())
+	item, err := c.GetAlertRoute(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -503,7 +504,7 @@ func resourceAlertRouteUpdate(ctx context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	_, err := c.UpdateAlertRoute(d.Id(), s)
+	_, err := c.UpdateAlertRoute(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating alert_route: %s", err.Error())
 	}
@@ -537,7 +538,7 @@ func resourceAlertRouteDelete(ctx context.Context, d *schema.ResourceData, meta 
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting AlertRoute: %s", d.Id()))
 
-	err := c.DeleteAlertRoute(d.Id())
+	err := c.DeleteAlertRoute(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

@@ -5,6 +5,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -59,8 +60,8 @@ func (c *Client) CreateDashboard(dashboard *Dashboard) (*Dashboard, error) {
 	return data.(*Dashboard), nil
 }
 
-func (c *Client) GetDashboard(id string) (*Dashboard, error) {
-	req, err := rootlygo.NewGetDashboardRequest(c.Rootly.Server, id, nil)
+func (c *Client) GetDashboard(id rootlygo_.ID) (*Dashboard, error) {
+	req, err := rootlygo.NewGetDashboardRequest(c.Rootly.Server, id.String(), nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -78,13 +79,13 @@ func (c *Client) GetDashboard(id string) (*Dashboard, error) {
 	return data.(*Dashboard), nil
 }
 
-func (c *Client) UpdateDashboard(id string, dashboard *Dashboard) (*Dashboard, error) {
+func (c *Client) UpdateDashboard(id rootlygo_.ID, dashboard *Dashboard) (*Dashboard, error) {
 	buffer, err := MarshalData(dashboard)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling dashboard: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateDashboardRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateDashboardRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -101,8 +102,8 @@ func (c *Client) UpdateDashboard(id string, dashboard *Dashboard) (*Dashboard, e
 	return data.(*Dashboard), nil
 }
 
-func (c *Client) DeleteDashboard(id string) error {
-	req, err := rootlygo.NewDeleteDashboardRequest(c.Rootly.Server, id)
+func (c *Client) DeleteDashboard(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteDashboardRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

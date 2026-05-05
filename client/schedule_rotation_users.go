@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -17,8 +18,8 @@ type ScheduleRotationUser struct {
 	Position           int    `jsonapi:"attr,position,omitempty"`
 }
 
-func (c *Client) ListScheduleRotationUsers(id string, params *rootlygo.ListScheduleRotationUsersParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListScheduleRotationUsersRequest(c.Rootly.Server, id, params)
+func (c *Client) ListScheduleRotationUsers(id rootlygo_.ID, params *rootlygo.ListScheduleRotationUsersParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListScheduleRotationUsersRequest(c.Rootly.Server, id.String(), params)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -61,8 +62,8 @@ func (c *Client) CreateScheduleRotationUser(d *ScheduleRotationUser) (*ScheduleR
 	return data.(*ScheduleRotationUser), nil
 }
 
-func (c *Client) GetScheduleRotationUser(id string) (*ScheduleRotationUser, error) {
-	req, err := rootlygo.NewGetScheduleRotationUserRequest(c.Rootly.Server, id)
+func (c *Client) GetScheduleRotationUser(id rootlygo_.ID) (*ScheduleRotationUser, error) {
+	req, err := rootlygo.NewGetScheduleRotationUserRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -81,13 +82,13 @@ func (c *Client) GetScheduleRotationUser(id string) (*ScheduleRotationUser, erro
 	return data.(*ScheduleRotationUser), nil
 }
 
-func (c *Client) UpdateScheduleRotationUser(id string, schedule_rotation_user *ScheduleRotationUser) (*ScheduleRotationUser, error) {
+func (c *Client) UpdateScheduleRotationUser(id rootlygo_.ID, schedule_rotation_user *ScheduleRotationUser) (*ScheduleRotationUser, error) {
 	buffer, err := MarshalData(schedule_rotation_user)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling schedule_rotation_user: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateScheduleRotationUserRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateScheduleRotationUserRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -105,8 +106,8 @@ func (c *Client) UpdateScheduleRotationUser(id string, schedule_rotation_user *S
 	return data.(*ScheduleRotationUser), nil
 }
 
-func (c *Client) DeleteScheduleRotationUser(id string) error {
-	req, err := rootlygo.NewDeleteScheduleRotationUserRequest(c.Rootly.Server, id)
+func (c *Client) DeleteScheduleRotationUser(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteScheduleRotationUserRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

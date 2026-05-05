@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -247,7 +248,7 @@ func resourceFormFieldRead(ctx context.Context, d *schema.ResourceData, meta int
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading FormField: %s", d.Id()))
 
-	item, err := c.GetFormField(d.Id())
+	item, err := c.GetFormField(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -340,7 +341,7 @@ func resourceFormFieldUpdate(ctx context.Context, d *schema.ResourceData, meta i
 		s.AutoSetByCatalogPropertyId = d.Get("auto_set_by_catalog_property_id").(string)
 	}
 
-	_, err := c.UpdateFormField(d.Id(), s)
+	_, err := c.UpdateFormField(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating form_field: %s", err.Error())
 	}
@@ -352,7 +353,7 @@ func resourceFormFieldDelete(ctx context.Context, d *schema.ResourceData, meta i
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting FormField: %s", d.Id()))
 
-	err := c.DeleteFormField(d.Id())
+	err := c.DeleteFormField(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
