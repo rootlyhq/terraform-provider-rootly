@@ -3613,7 +3613,7 @@ type Id0 = openapi_types.UUID
 type Id1 = string
 
 // ListAlertGroupsParams defines parameters for ListAlertGroups.
-type ListAlertGroupsParams struct {
+type listAlertGroupsParams struct {
 	Include *string `form:"include,omitempty" json:"include,omitempty"`
 }
 

@@ -40,6 +40,9 @@ website/vendor
 swagger.json
 schema/swagger.json
 
+# vendir synced content (vendir.yml and vendir.lock.yml are committed)
+.vendored/rootly-go/
+
 node_modules/
 .yarn/
 .yarnrc.yml
