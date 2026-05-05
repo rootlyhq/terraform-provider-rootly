@@ -108,8 +108,7 @@ func resourceService() *schema.Resource {
 
 			"backstage_id": &schema.Schema{
 				Type:        schema.TypeString,
-				Default:     nil,
-				Computed:    false,
+				Computed:    true,
 				Required:    false,
 				Optional:    true,
 				Sensitive:   false,
@@ -120,8 +119,7 @@ func resourceService() *schema.Resource {
 
 			"external_id": &schema.Schema{
 				Type:        schema.TypeString,
-				Default:     nil,
-				Computed:    false,
+				Computed:    true,
 				Required:    false,
 				Optional:    true,
 				Sensitive:   false,
@@ -132,8 +130,7 @@ func resourceService() *schema.Resource {
 
 			"pagerduty_id": &schema.Schema{
 				Type:        schema.TypeString,
-				Default:     nil,
-				Computed:    false,
+				Computed:    true,
 				Required:    false,
 				Optional:    true,
 				Sensitive:   false,
@@ -144,8 +141,7 @@ func resourceService() *schema.Resource {
 
 			"opsgenie_id": &schema.Schema{
 				Type:        schema.TypeString,
-				Default:     nil,
-				Computed:    false,
+				Computed:    true,
 				Required:    false,
 				Optional:    true,
 				Sensitive:   false,
@@ -156,8 +152,7 @@ func resourceService() *schema.Resource {
 
 			"cortex_id": &schema.Schema{
 				Type:        schema.TypeString,
-				Default:     nil,
-				Computed:    false,
+				Computed:    true,
 				Required:    false,
 				Optional:    true,
 				Sensitive:   false,
@@ -168,8 +163,7 @@ func resourceService() *schema.Resource {
 
 			"service_now_ci_sys_id": &schema.Schema{
 				Type:        schema.TypeString,
-				Default:     nil,
-				Computed:    false,
+				Computed:    true,
 				Required:    false,
 				Optional:    true,
 				Sensitive:   false,

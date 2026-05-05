@@ -1,0 +1,12 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+  - path: .vendored/rootly-go
+    contents:
+      - path: .
+        git:
+          url: https://github.com/rootlyhq/rootly-go
+          ref: v0.10.1
+          depth: 1
+        includePaths:
+          - .vendored/rootly-api/swagger.json

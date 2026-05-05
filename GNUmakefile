@@ -1,4 +1,4 @@
-SWAGGER_URL ?= https://rootly-heroku.s3.amazonaws.com/swagger/v1/swagger.tf.json
+SWAGGER_PATH = .vendored/rootly-go/.vendored/rootly-api/swagger.json
 TEST?=$$(go list ./... | grep -v 'vendor')
 HOSTNAME=hashicorp.com
 NAMESPACE=eduW
@@ -57,8 +57,11 @@ sweeper:
 	@echo "WARNING: This will destroy infrastructure. Use only in development accounts."
 	go test ./internal/provider -v -tags=sweep -sweep=all -sweep-allow-failures -timeout 120m
 
-codegen:
-	curl $(SWAGGER_URL) -o schema/swagger.json
+vendir-sync:
+	vendir sync
+
+codegen: vendir-sync
+	cp $(SWAGGER_PATH) schema/swagger.json
 	node tools/clean-swagger.js schema/swagger.json
 	cd schema && go tool oapi-codegen --config=oapi-config.yml swagger.json
 	yarn run generate schema/swagger.json
@@ -67,12 +70,12 @@ codegen:
 	go tool goimports -w provider/*.go
 	go tool goimports -w client/*.go
 
-codegen-resource:
+codegen-resource: vendir-sync
 	@if [ -z "$(RESOURCE)" ]; then \
 		echo "Error: RESOURCE parameter is required. Usage: make codegen-resource RESOURCE=service"; \
 		exit 1; \
 	fi
-	curl $(SWAGGER_URL) -o schema/swagger.json
+	cp $(SWAGGER_PATH) schema/swagger.json
 	node tools/clean-swagger.js schema/swagger.json
 	cd schema && go tool oapi-codegen --config=oapi-config.yml swagger.json
 	yarn run generate schema/swagger.json $(RESOURCE)
