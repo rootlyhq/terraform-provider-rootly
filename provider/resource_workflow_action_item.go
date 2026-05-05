@@ -319,7 +319,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
-							Description: "",
+							Description: "Value must be one of `SET`, `UNSET`.",
 						},
 
 						"incident_condition_started_at": &schema.Schema{
@@ -327,7 +327,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
-							Description: "",
+							Description: "Value must be one of `SET`, `UNSET`.",
 						},
 
 						"incident_condition_detected_at": &schema.Schema{
@@ -335,7 +335,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
-							Description: "",
+							Description: "Value must be one of `SET`, `UNSET`.",
 						},
 
 						"incident_condition_acknowledged_at": &schema.Schema{
@@ -343,7 +343,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
-							Description: "",
+							Description: "Value must be one of `SET`, `UNSET`.",
 						},
 
 						"incident_condition_mitigated_at": &schema.Schema{
@@ -351,7 +351,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
-							Description: "",
+							Description: "Value must be one of `SET`, `UNSET`.",
 						},
 
 						"incident_condition_resolved_at": &schema.Schema{
@@ -359,7 +359,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
-							Description: "",
+							Description: "Value must be one of `SET`, `UNSET`.",
 						},
 
 						"incident_conditional_inactivity": &schema.Schema{
@@ -367,7 +367,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 							Computed:    true,
 							Required:    false,
 							Optional:    true,
-							Description: "",
+							Description: "Value must be one of `IS`.",
 						},
 
 						"incident_action_item_condition": &schema.Schema{
