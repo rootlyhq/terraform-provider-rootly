@@ -41,6 +41,15 @@
         "lockFileMaintenance"
       ],
       "minimumReleaseAge": null
+    },
+    {
+      "description": "Group Vendir and Go module updates for rootly-go",
+      "matchDepNames": [
+        "https://github.com/rootlyhq/rootly-go",
+        "github.com/rootlyhq/rootly-go"
+      ],
+      "groupName": "rootly-go",
+      "minimumReleaseAge": null
     }
   ],
   "postUpdateOptions": [
