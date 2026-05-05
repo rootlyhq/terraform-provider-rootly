@@ -87,10 +87,11 @@ func dataSourceServicesRead(ctx context.Context, d *schema.ResourceData, meta in
 		return diag.FromErr(err)
 	}
 
+	serviceSchema := dataSourceServices().Schema["services"].Elem.(*schema.Resource).Schema
 	tf_services := make([]interface{}, len(services), len(services))
 	for i, service := range services {
 		c, _ := service.(*client.Service)
-		tf_services[i] = structToLowerFirstMap(*c)
+		tf_services[i] = filterMapKeys(structToLowerFirstMap(*c), serviceSchema)
 	}
 
 	if err := d.Set("services", tf_services); err != nil {
