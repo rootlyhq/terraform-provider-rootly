@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -64,8 +65,8 @@ func (c *Client) CreateWebhooksEndpoint(d *WebhooksEndpoint) (*WebhooksEndpoint,
 	return data.(*WebhooksEndpoint), nil
 }
 
-func (c *Client) GetWebhooksEndpoint(id string) (*WebhooksEndpoint, error) {
-	req, err := rootlygo.NewGetWebhooksEndpointRequest(c.Rootly.Server, id)
+func (c *Client) GetWebhooksEndpoint(id rootlygo_.ID) (*WebhooksEndpoint, error) {
+	req, err := rootlygo.NewGetWebhooksEndpointRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -84,13 +85,13 @@ func (c *Client) GetWebhooksEndpoint(id string) (*WebhooksEndpoint, error) {
 	return data.(*WebhooksEndpoint), nil
 }
 
-func (c *Client) UpdateWebhooksEndpoint(id string, webhooks_endpoint *WebhooksEndpoint) (*WebhooksEndpoint, error) {
+func (c *Client) UpdateWebhooksEndpoint(id rootlygo_.ID, webhooks_endpoint *WebhooksEndpoint) (*WebhooksEndpoint, error) {
 	buffer, err := MarshalData(webhooks_endpoint)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling webhooks_endpoint: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateWebhooksEndpointRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateWebhooksEndpointRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -108,8 +109,8 @@ func (c *Client) UpdateWebhooksEndpoint(id string, webhooks_endpoint *WebhooksEn
 	return data.(*WebhooksEndpoint), nil
 }
 
-func (c *Client) DeleteWebhooksEndpoint(id string) error {
-	req, err := rootlygo.NewDeleteWebhooksEndpointRequest(c.Rootly.Server, id)
+func (c *Client) DeleteWebhooksEndpoint(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteWebhooksEndpointRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

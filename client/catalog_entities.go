@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -20,8 +21,8 @@ type CatalogEntity struct {
 	CatalogId   string        `jsonapi:"attr,catalog_id,omitempty"`
 }
 
-func (c *Client) ListCatalogEntities(id string, params *rootlygo.ListCatalogEntitiesParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListCatalogEntitiesRequest(c.Rootly.Server, id, params)
+func (c *Client) ListCatalogEntities(id rootlygo_.ID, params *rootlygo.ListCatalogEntitiesParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListCatalogEntitiesRequest(c.Rootly.Server, id.String(), params)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -64,8 +65,8 @@ func (c *Client) CreateCatalogEntity(d *CatalogEntity) (*CatalogEntity, error) {
 	return data.(*CatalogEntity), nil
 }
 
-func (c *Client) GetCatalogEntity(id string) (*CatalogEntity, error) {
-	req, err := rootlygo.NewGetCatalogEntityRequest(c.Rootly.Server, id, nil)
+func (c *Client) GetCatalogEntity(id rootlygo_.ID) (*CatalogEntity, error) {
+	req, err := rootlygo.NewGetCatalogEntityRequest(c.Rootly.Server, id.String(), nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -84,13 +85,13 @@ func (c *Client) GetCatalogEntity(id string) (*CatalogEntity, error) {
 	return data.(*CatalogEntity), nil
 }
 
-func (c *Client) UpdateCatalogEntity(id string, catalog_entity *CatalogEntity) (*CatalogEntity, error) {
+func (c *Client) UpdateCatalogEntity(id rootlygo_.ID, catalog_entity *CatalogEntity) (*CatalogEntity, error) {
 	buffer, err := MarshalData(catalog_entity)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling catalog_entity: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateCatalogEntityRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateCatalogEntityRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -108,8 +109,8 @@ func (c *Client) UpdateCatalogEntity(id string, catalog_entity *CatalogEntity) (
 	return data.(*CatalogEntity), nil
 }
 
-func (c *Client) DeleteCatalogEntity(id string) error {
-	req, err := rootlygo.NewDeleteCatalogEntityRequest(c.Rootly.Server, id)
+func (c *Client) DeleteCatalogEntity(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteCatalogEntityRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

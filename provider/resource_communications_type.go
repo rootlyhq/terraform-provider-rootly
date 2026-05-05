@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 )
 
@@ -120,7 +121,7 @@ func resourceCommunicationsTypeRead(ctx context.Context, d *schema.ResourceData,
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading CommunicationsType: %s", d.Id()))
 
-	item, err := c.GetCommunicationsType(d.Id())
+	item, err := c.GetCommunicationsType(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -164,7 +165,7 @@ func resourceCommunicationsTypeUpdate(ctx context.Context, d *schema.ResourceDat
 		s.Position = d.Get("position").(int)
 	}
 
-	_, err := c.UpdateCommunicationsType(d.Id(), s)
+	_, err := c.UpdateCommunicationsType(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating communications_type: %s", err.Error())
 	}
@@ -176,7 +177,7 @@ func resourceCommunicationsTypeDelete(ctx context.Context, d *schema.ResourceDat
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting CommunicationsType: %s", d.Id()))
 
-	err := c.DeleteCommunicationsType(d.Id())
+	err := c.DeleteCommunicationsType(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

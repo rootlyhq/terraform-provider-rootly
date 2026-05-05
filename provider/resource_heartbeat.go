@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
@@ -279,7 +280,7 @@ func resourceHeartbeatRead(ctx context.Context, d *schema.ResourceData, meta int
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading Heartbeat: %s", d.Id()))
 
-	item, err := c.GetHeartbeat(d.Id())
+	item, err := c.GetHeartbeat(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -367,7 +368,7 @@ func resourceHeartbeatUpdate(ctx context.Context, d *schema.ResourceData, meta i
 		s.ExpiresAt = d.Get("expires_at").(string)
 	}
 
-	_, err := c.UpdateHeartbeat(d.Id(), s)
+	_, err := c.UpdateHeartbeat(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating heartbeat: %s", err.Error())
 	}
@@ -379,7 +380,7 @@ func resourceHeartbeatDelete(ctx context.Context, d *schema.ResourceData, meta i
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting Heartbeat: %s", d.Id()))
 
-	err := c.DeleteHeartbeat(d.Id())
+	err := c.DeleteHeartbeat(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -272,7 +273,7 @@ func resourceScheduleRotationRead(ctx context.Context, d *schema.ResourceData, m
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading ScheduleRotation: %s", d.Id()))
 
-	item, err := c.GetScheduleRotation(d.Id())
+	item, err := c.GetScheduleRotation(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -385,7 +386,7 @@ func resourceScheduleRotationUpdate(ctx context.Context, d *schema.ResourceData,
 		}
 	}
 
-	_, err := c.UpdateScheduleRotation(d.Id(), s)
+	_, err := c.UpdateScheduleRotation(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating schedule_rotation: %s", err.Error())
 	}
@@ -397,7 +398,7 @@ func resourceScheduleRotationDelete(ctx context.Context, d *schema.ResourceData,
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting ScheduleRotation: %s", d.Id()))
 
-	err := c.DeleteScheduleRotation(d.Id())
+	err := c.DeleteScheduleRotation(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

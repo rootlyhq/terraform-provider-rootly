@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/provider/stateupgrade"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
@@ -160,7 +161,7 @@ func resourceScheduleRead(ctx context.Context, d *schema.ResourceData, meta inte
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading Schedule: %s", d.Id()))
 
-	item, err := c.GetSchedule(d.Id())
+	item, err := c.GetSchedule(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -230,7 +231,7 @@ func resourceScheduleUpdate(ctx context.Context, d *schema.ResourceData, meta in
 		s.OwnerUserId = d.Get("owner_user_id").(int)
 	}
 
-	_, err := c.UpdateSchedule(d.Id(), s)
+	_, err := c.UpdateSchedule(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating schedule: %s", err.Error())
 	}
@@ -242,7 +243,7 @@ func resourceScheduleDelete(ctx context.Context, d *schema.ResourceData, meta in
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting Schedule: %s", d.Id()))
 
-	err := c.DeleteSchedule(d.Id())
+	err := c.DeleteSchedule(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

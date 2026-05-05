@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -59,8 +60,8 @@ func (c *Client) CreatePostmortemTemplate(d *PostmortemTemplate) (*PostmortemTem
 	return data.(*PostmortemTemplate), nil
 }
 
-func (c *Client) GetPostmortemTemplate(id string) (*PostmortemTemplate, error) {
-	req, err := rootlygo.NewGetPostmortemTemplateRequest(c.Rootly.Server, id)
+func (c *Client) GetPostmortemTemplate(id rootlygo_.ID) (*PostmortemTemplate, error) {
+	req, err := rootlygo.NewGetPostmortemTemplateRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -78,13 +79,13 @@ func (c *Client) GetPostmortemTemplate(id string) (*PostmortemTemplate, error) {
 	return data.(*PostmortemTemplate), nil
 }
 
-func (c *Client) UpdatePostmortemTemplate(id string, post_mortem_template *PostmortemTemplate) (*PostmortemTemplate, error) {
+func (c *Client) UpdatePostmortemTemplate(id rootlygo_.ID, post_mortem_template *PostmortemTemplate) (*PostmortemTemplate, error) {
 	buffer, err := MarshalData(post_mortem_template)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling post_mortem_template: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdatePostmortemTemplateRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdatePostmortemTemplateRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -101,8 +102,8 @@ func (c *Client) UpdatePostmortemTemplate(id string, post_mortem_template *Postm
 	return data.(*PostmortemTemplate), nil
 }
 
-func (c *Client) DeletePostmortemTemplate(id string) error {
-	req, err := rootlygo.NewDeletePostmortemTemplateRequest(c.Rootly.Server, id)
+func (c *Client) DeletePostmortemTemplate(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeletePostmortemTemplateRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

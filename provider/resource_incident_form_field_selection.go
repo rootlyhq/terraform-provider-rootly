@@ -8,6 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 )
 
@@ -112,7 +113,7 @@ func resourceIncidentFormFieldSelectionRead(ctx context.Context, d *schema.Resou
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading IncidentFormFieldSelection: %s", d.Id()))
 
-	item, err := c.GetIncidentFormFieldSelection(d.Id())
+	item, err := c.GetIncidentFormFieldSelection(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -156,7 +157,7 @@ func resourceIncidentFormFieldSelectionUpdate(ctx context.Context, d *schema.Res
 		s.SelectedUserIds = d.Get("selected_user_ids").([]interface{})
 	}
 
-	_, err := c.UpdateIncidentFormFieldSelection(d.Id(), s)
+	_, err := c.UpdateIncidentFormFieldSelection(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating incident_form_field_selection: %s", err.Error())
 	}
@@ -168,7 +169,7 @@ func resourceIncidentFormFieldSelectionDelete(ctx context.Context, d *schema.Res
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting IncidentFormFieldSelection: %s", d.Id()))
 
-	err := c.DeleteIncidentFormFieldSelection(d.Id())
+	err := c.DeleteIncidentFormFieldSelection(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

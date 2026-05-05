@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -454,7 +455,7 @@ func resourceSLARead(ctx context.Context, d *schema.ResourceData, meta interface
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading SLA: %s", d.Id()))
 
-	item, err := c.GetSLA(d.Id())
+	item, err := c.GetSLA(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -604,7 +605,7 @@ func resourceSLAUpdate(ctx context.Context, d *schema.ResourceData, meta interfa
 		}
 	}
 
-	_, err := c.UpdateSLA(d.Id(), s)
+	_, err := c.UpdateSLA(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating sla: %s", err.Error())
 	}
@@ -616,7 +617,7 @@ func resourceSLADelete(ctx context.Context, d *schema.ResourceData, meta interfa
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting SLA: %s", d.Id()))
 
-	err := c.DeleteSLA(d.Id())
+	err := c.DeleteSLA(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

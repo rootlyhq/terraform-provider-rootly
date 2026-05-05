@@ -8,6 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -160,7 +161,7 @@ func resourceCustomFieldRead(ctx context.Context, d *schema.ResourceData, meta i
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading CustomField: %s", d.Id()))
 
-	item, err := c.GetCustomField(d.Id())
+	item, err := c.GetCustomField(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -220,7 +221,7 @@ func resourceCustomFieldUpdate(ctx context.Context, d *schema.ResourceData, meta
 		s.Position = d.Get("position").(int)
 	}
 
-	_, err := c.UpdateCustomField(d.Id(), s)
+	_, err := c.UpdateCustomField(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating custom_field: %s", err.Error())
 	}
@@ -232,7 +233,7 @@ func resourceCustomFieldDelete(ctx context.Context, d *schema.ResourceData, meta
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting CustomField: %s", d.Id()))
 
-	err := c.DeleteCustomField(d.Id())
+	err := c.DeleteCustomField(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

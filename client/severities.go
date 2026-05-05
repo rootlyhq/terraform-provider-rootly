@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -67,8 +68,8 @@ func (c *Client) CreateSeverity(d *Severity) (*Severity, error) {
 	return data.(*Severity), nil
 }
 
-func (c *Client) GetSeverity(id string) (*Severity, error) {
-	req, err := rootlygo.NewGetSeverityRequest(c.Rootly.Server, id)
+func (c *Client) GetSeverity(id rootlygo_.ID) (*Severity, error) {
+	req, err := rootlygo.NewGetSeverityRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -87,13 +88,13 @@ func (c *Client) GetSeverity(id string) (*Severity, error) {
 	return data.(*Severity), nil
 }
 
-func (c *Client) UpdateSeverity(id string, severity *Severity) (*Severity, error) {
+func (c *Client) UpdateSeverity(id rootlygo_.ID, severity *Severity) (*Severity, error) {
 	buffer, err := MarshalData(severity)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling severity: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateSeverityRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateSeverityRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -111,8 +112,8 @@ func (c *Client) UpdateSeverity(id string, severity *Severity) (*Severity, error
 	return data.(*Severity), nil
 }
 
-func (c *Client) DeleteSeverity(id string) error {
-	req, err := rootlygo.NewDeleteSeverityRequest(c.Rootly.Server, id)
+func (c *Client) DeleteSeverity(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteSeverityRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

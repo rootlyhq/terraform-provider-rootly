@@ -9,6 +9,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -28,8 +29,8 @@ type EdgeConnectorAction struct {
 	UpdatedAt       string                 `jsonapi:"attr,updated_at,omitempty"`
 }
 
-func (c *Client) ListEdgeConnectorActions(edgeConnectorId string) ([]interface{}, error) {
-	req, err := rootlygo.NewListEdgeConnectorActionsRequest(c.Rootly.Server, edgeConnectorId)
+func (c *Client) ListEdgeConnectorActions(edgeConnectorId rootlygo_.ID) ([]interface{}, error) {
+	req, err := rootlygo.NewListEdgeConnectorActionsRequest(c.Rootly.Server, edgeConnectorId.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -72,7 +73,7 @@ func (c *Client) CreateEdgeConnectorAction(d *EdgeConnectorAction) (*EdgeConnect
 	return data.(*EdgeConnectorAction), nil
 }
 
-func (c *Client) GetEdgeConnectorAction(edgeConnectorId string, id string) (*EdgeConnectorAction, error) {
+func (c *Client) GetEdgeConnectorAction(edgeConnectorId rootlygo_.ID, id rootlygo_.ID) (*EdgeConnectorAction, error) {
 	baseURL, err := url.Parse(c.Rootly.Server)
 	if err != nil {
 		return nil, fmt.Errorf("Error parsing server URL: %w", err)
@@ -102,7 +103,7 @@ func (c *Client) GetEdgeConnectorAction(edgeConnectorId string, id string) (*Edg
 	return data.(*EdgeConnectorAction), nil
 }
 
-func (c *Client) UpdateEdgeConnectorAction(id string, edge_connector_action *EdgeConnectorAction) (*EdgeConnectorAction, error) {
+func (c *Client) UpdateEdgeConnectorAction(id rootlygo_.ID, edge_connector_action *EdgeConnectorAction) (*EdgeConnectorAction, error) {
 	buffer, err := MarshalData(edge_connector_action)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling edge_connector_action: %w", err)
@@ -138,7 +139,7 @@ func (c *Client) UpdateEdgeConnectorAction(id string, edge_connector_action *Edg
 	return data.(*EdgeConnectorAction), nil
 }
 
-func (c *Client) DeleteEdgeConnectorAction(edgeConnectorId string, id string) error {
+func (c *Client) DeleteEdgeConnectorAction(edgeConnectorId rootlygo_.ID, id rootlygo_.ID) error {
 	baseURL, err := url.Parse(c.Rootly.Server)
 	if err != nil {
 		return fmt.Errorf("Error parsing server URL: %w", err)

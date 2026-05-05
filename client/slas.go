@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -76,8 +77,8 @@ func (c *Client) CreateSLA(d *SLA) (*SLA, error) {
 	return data.(*SLA), nil
 }
 
-func (c *Client) GetSLA(id string) (*SLA, error) {
-	req, err := rootlygo.NewGetSLARequest(c.Rootly.Server, id)
+func (c *Client) GetSLA(id rootlygo_.ID) (*SLA, error) {
+	req, err := rootlygo.NewGetSLARequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -96,13 +97,13 @@ func (c *Client) GetSLA(id string) (*SLA, error) {
 	return data.(*SLA), nil
 }
 
-func (c *Client) UpdateSLA(id string, sla *SLA) (*SLA, error) {
+func (c *Client) UpdateSLA(id rootlygo_.ID, sla *SLA) (*SLA, error) {
 	buffer, err := MarshalData(sla)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling sla: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateSLARequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateSLARequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -120,8 +121,8 @@ func (c *Client) UpdateSLA(id string, sla *SLA) (*SLA, error) {
 	return data.(*SLA), nil
 }
 
-func (c *Client) DeleteSLA(id string) error {
-	req, err := rootlygo.NewDeleteSLARequest(c.Rootly.Server, id)
+func (c *Client) DeleteSLA(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteSLARequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

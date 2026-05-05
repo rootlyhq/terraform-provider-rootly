@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -119,7 +120,7 @@ func resourceCustomFormRead(ctx context.Context, d *schema.ResourceData, meta in
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading CustomForm: %s", d.Id()))
 
-	item, err := c.GetCustomForm(d.Id())
+	item, err := c.GetCustomForm(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -163,7 +164,7 @@ func resourceCustomFormUpdate(ctx context.Context, d *schema.ResourceData, meta 
 		s.Command = d.Get("command").(string)
 	}
 
-	_, err := c.UpdateCustomForm(d.Id(), s)
+	_, err := c.UpdateCustomForm(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating custom_form: %s", err.Error())
 	}
@@ -175,7 +176,7 @@ func resourceCustomFormDelete(ctx context.Context, d *schema.ResourceData, meta 
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting CustomForm: %s", d.Id()))
 
-	err := c.DeleteCustomForm(d.Id())
+	err := c.DeleteCustomForm(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

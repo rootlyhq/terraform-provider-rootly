@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -36,8 +37,8 @@ func (c *Client) ListRetrospectiveConfigurations(params *rootlygo.ListRetrospect
 	return retrospective_configurations, nil
 }
 
-func (c *Client) GetRetrospectiveConfiguration(id string) (*RetrospectiveConfiguration, error) {
-	req, err := rootlygo.NewGetRetrospectiveConfigurationRequest(c.Rootly.Server, id, nil)
+func (c *Client) GetRetrospectiveConfiguration(id rootlygo_.ID) (*RetrospectiveConfiguration, error) {
+	req, err := rootlygo.NewGetRetrospectiveConfigurationRequest(c.Rootly.Server, id.String(), nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -55,13 +56,13 @@ func (c *Client) GetRetrospectiveConfiguration(id string) (*RetrospectiveConfigu
 	return data.(*RetrospectiveConfiguration), nil
 }
 
-func (c *Client) UpdateRetrospectiveConfiguration(id string, retrospective_configuration *RetrospectiveConfiguration) (*RetrospectiveConfiguration, error) {
+func (c *Client) UpdateRetrospectiveConfiguration(id rootlygo_.ID, retrospective_configuration *RetrospectiveConfiguration) (*RetrospectiveConfiguration, error) {
 	buffer, err := MarshalData(retrospective_configuration)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling retrospective_configuration: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateRetrospectiveConfigurationRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateRetrospectiveConfigurationRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}

@@ -5,6 +5,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -63,8 +64,8 @@ func (c *Client) CreateCustomField(d *CustomField) (*CustomField, error) {
 	return data.(*CustomField), nil
 }
 
-func (c *Client) GetCustomField(id string) (*CustomField, error) {
-	req, err := rootlygo.NewGetCustomFieldRequest(c.Rootly.Server, id, nil)
+func (c *Client) GetCustomField(id rootlygo_.ID) (*CustomField, error) {
+	req, err := rootlygo.NewGetCustomFieldRequest(c.Rootly.Server, id.String(), nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -82,13 +83,13 @@ func (c *Client) GetCustomField(id string) (*CustomField, error) {
 	return data.(*CustomField), nil
 }
 
-func (c *Client) UpdateCustomField(id string, custom_field *CustomField) (*CustomField, error) {
+func (c *Client) UpdateCustomField(id rootlygo_.ID, custom_field *CustomField) (*CustomField, error) {
 	buffer, err := MarshalData(custom_field)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling custom_field: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateCustomFieldRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateCustomFieldRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -105,8 +106,8 @@ func (c *Client) UpdateCustomField(id string, custom_field *CustomField) (*Custo
 	return data.(*CustomField), nil
 }
 
-func (c *Client) DeleteCustomField(id string) error {
-	req, err := rootlygo.NewDeleteCustomFieldRequest(c.Rootly.Server, id)
+func (c *Client) DeleteCustomField(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteCustomFieldRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

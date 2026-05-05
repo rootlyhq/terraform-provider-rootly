@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -63,8 +64,8 @@ func (c *Client) CreateEdgeConnector(d *EdgeConnector) (*EdgeConnector, error) {
 	return data.(*EdgeConnector), nil
 }
 
-func (c *Client) GetEdgeConnector(id string) (*EdgeConnector, error) {
-	req, err := rootlygo.NewGetEdgeConnectorRequest(c.Rootly.Server, id)
+func (c *Client) GetEdgeConnector(id rootlygo_.ID) (*EdgeConnector, error) {
+	req, err := rootlygo.NewGetEdgeConnectorRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -83,13 +84,13 @@ func (c *Client) GetEdgeConnector(id string) (*EdgeConnector, error) {
 	return data.(*EdgeConnector), nil
 }
 
-func (c *Client) UpdateEdgeConnector(id string, edge_connector *EdgeConnector) (*EdgeConnector, error) {
+func (c *Client) UpdateEdgeConnector(id rootlygo_.ID, edge_connector *EdgeConnector) (*EdgeConnector, error) {
 	buffer, err := MarshalData(edge_connector)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling edge_connector: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateEdgeConnectorRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateEdgeConnectorRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -107,8 +108,8 @@ func (c *Client) UpdateEdgeConnector(id string, edge_connector *EdgeConnector) (
 	return data.(*EdgeConnector), nil
 }
 
-func (c *Client) DeleteEdgeConnector(id string) error {
-	req, err := rootlygo.NewDeleteEdgeConnectorRequest(c.Rootly.Server, id)
+func (c *Client) DeleteEdgeConnector(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteEdgeConnectorRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

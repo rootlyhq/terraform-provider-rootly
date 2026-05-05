@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -96,7 +97,7 @@ func resourcePostmortemTemplateRead(ctx context.Context, d *schema.ResourceData,
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading PostmortemTemplate: %s", d.Id()))
 
-	item, err := c.GetPostmortemTemplate(d.Id())
+	item, err := c.GetPostmortemTemplate(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -136,7 +137,7 @@ func resourcePostmortemTemplateUpdate(ctx context.Context, d *schema.ResourceDat
 		s.Format = d.Get("format").(string)
 	}
 
-	_, err := c.UpdatePostmortemTemplate(d.Id(), s)
+	_, err := c.UpdatePostmortemTemplate(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating post_mortem_template: %s", err.Error())
 	}
@@ -148,7 +149,7 @@ func resourcePostmortemTemplateDelete(ctx context.Context, d *schema.ResourceDat
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting PostmortemTemplate: %s", d.Id()))
 
-	err := c.DeletePostmortemTemplate(d.Id())
+	err := c.DeletePostmortemTemplate(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -122,7 +123,7 @@ func resourceScheduleRotationActiveDayRead(ctx context.Context, d *schema.Resour
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading ScheduleRotationActiveDay: %s", d.Id()))
 
-	item, err := c.GetScheduleRotationActiveDay(d.Id())
+	item, err := c.GetScheduleRotationActiveDay(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -181,7 +182,7 @@ func resourceScheduleRotationActiveDayUpdate(ctx context.Context, d *schema.Reso
 		}
 	}
 
-	_, err := c.UpdateScheduleRotationActiveDay(d.Id(), s)
+	_, err := c.UpdateScheduleRotationActiveDay(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating schedule_rotation_active_day: %s", err.Error())
 	}
@@ -193,7 +194,7 @@ func resourceScheduleRotationActiveDayDelete(ctx context.Context, d *schema.Reso
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting ScheduleRotationActiveDay: %s", d.Id()))
 
-	err := c.DeleteScheduleRotationActiveDay(d.Id())
+	err := c.DeleteScheduleRotationActiveDay(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

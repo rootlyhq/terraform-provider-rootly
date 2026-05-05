@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 )
 
@@ -106,7 +107,7 @@ func resourceIncidentSubStatusRead(ctx context.Context, d *schema.ResourceData, 
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading IncidentSubStatus: %s", d.Id()))
 
-	item, err := c.GetIncidentSubStatus(d.Id())
+	item, err := c.GetIncidentSubStatus(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -146,7 +147,7 @@ func resourceIncidentSubStatusUpdate(ctx context.Context, d *schema.ResourceData
 		s.AssignedByUserId = d.Get("assigned_by_user_id").(int)
 	}
 
-	_, err := c.UpdateIncidentSubStatus(d.Id(), s)
+	_, err := c.UpdateIncidentSubStatus(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating incident_sub_status: %s", err.Error())
 	}
@@ -158,7 +159,7 @@ func resourceIncidentSubStatusDelete(ctx context.Context, d *schema.ResourceData
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting IncidentSubStatus: %s", d.Id()))
 
-	err := c.DeleteIncidentSubStatus(d.Id())
+	err := c.DeleteIncidentSubStatus(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 )
 
@@ -94,7 +95,7 @@ func resourceFormFieldPositionRead(ctx context.Context, d *schema.ResourceData, 
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading FormFieldPosition: %s", d.Id()))
 
-	item, err := c.GetFormFieldPosition(d.Id())
+	item, err := c.GetFormFieldPosition(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -130,7 +131,7 @@ func resourceFormFieldPositionUpdate(ctx context.Context, d *schema.ResourceData
 		s.Position = d.Get("position").(int)
 	}
 
-	_, err := c.UpdateFormFieldPosition(d.Id(), s)
+	_, err := c.UpdateFormFieldPosition(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating form_field_position: %s", err.Error())
 	}
@@ -142,7 +143,7 @@ func resourceFormFieldPositionDelete(ctx context.Context, d *schema.ResourceData
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting FormFieldPosition: %s", d.Id()))
 
-	err := c.DeleteFormFieldPosition(d.Id())
+	err := c.DeleteFormFieldPosition(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

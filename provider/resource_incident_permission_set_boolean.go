@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -107,7 +108,7 @@ func resourceIncidentPermissionSetBooleanRead(ctx context.Context, d *schema.Res
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading IncidentPermissionSetBoolean: %s", d.Id()))
 
-	item, err := c.GetIncidentPermissionSetBoolean(d.Id())
+	item, err := c.GetIncidentPermissionSetBoolean(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -147,7 +148,7 @@ func resourceIncidentPermissionSetBooleanUpdate(ctx context.Context, d *schema.R
 		s.Enabled = tools.Bool(d.Get("enabled").(bool))
 	}
 
-	_, err := c.UpdateIncidentPermissionSetBoolean(d.Id(), s)
+	_, err := c.UpdateIncidentPermissionSetBoolean(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating incident_permission_set_boolean: %s", err.Error())
 	}
@@ -159,7 +160,7 @@ func resourceIncidentPermissionSetBooleanDelete(ctx context.Context, d *schema.R
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting IncidentPermissionSetBoolean: %s", d.Id()))
 
-	err := c.DeleteIncidentPermissionSetBoolean(d.Id())
+	err := c.DeleteIncidentPermissionSetBoolean(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

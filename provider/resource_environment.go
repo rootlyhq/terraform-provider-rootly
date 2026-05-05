@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -262,7 +263,7 @@ func resourceEnvironmentRead(ctx context.Context, d *schema.ResourceData, meta i
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading Environment: %s", d.Id()))
 
-	item, err := c.GetEnvironment(d.Id())
+	item, err := c.GetEnvironment(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -397,7 +398,7 @@ func resourceEnvironmentUpdate(ctx context.Context, d *schema.ResourceData, meta
 		}
 	}
 
-	_, err := c.UpdateEnvironment(d.Id(), s)
+	_, err := c.UpdateEnvironment(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating environment: %s", err.Error())
 	}
@@ -409,7 +410,7 @@ func resourceEnvironmentDelete(ctx context.Context, d *schema.ResourceData, meta
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting Environment: %s", d.Id()))
 
-	err := c.DeleteEnvironment(d.Id())
+	err := c.DeleteEnvironment(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

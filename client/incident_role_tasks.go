@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -18,8 +19,8 @@ type IncidentRoleTask struct {
 	Priority       string `jsonapi:"attr,priority,omitempty"`
 }
 
-func (c *Client) ListIncidentRoleTasks(id string, params *rootlygo.ListIncidentRoleTasksParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListIncidentRoleTasksRequest(c.Rootly.Server, id, params)
+func (c *Client) ListIncidentRoleTasks(id rootlygo_.ID, params *rootlygo.ListIncidentRoleTasksParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListIncidentRoleTasksRequest(c.Rootly.Server, id.String(), params)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -62,8 +63,8 @@ func (c *Client) CreateIncidentRoleTask(d *IncidentRoleTask) (*IncidentRoleTask,
 	return data.(*IncidentRoleTask), nil
 }
 
-func (c *Client) GetIncidentRoleTask(id string) (*IncidentRoleTask, error) {
-	req, err := rootlygo.NewGetIncidentRoleTaskRequest(c.Rootly.Server, id)
+func (c *Client) GetIncidentRoleTask(id rootlygo_.ID) (*IncidentRoleTask, error) {
+	req, err := rootlygo.NewGetIncidentRoleTaskRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -82,13 +83,13 @@ func (c *Client) GetIncidentRoleTask(id string) (*IncidentRoleTask, error) {
 	return data.(*IncidentRoleTask), nil
 }
 
-func (c *Client) UpdateIncidentRoleTask(id string, incident_role_task *IncidentRoleTask) (*IncidentRoleTask, error) {
+func (c *Client) UpdateIncidentRoleTask(id rootlygo_.ID, incident_role_task *IncidentRoleTask) (*IncidentRoleTask, error) {
 	buffer, err := MarshalData(incident_role_task)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling incident_role_task: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateIncidentRoleTaskRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateIncidentRoleTaskRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -106,8 +107,8 @@ func (c *Client) UpdateIncidentRoleTask(id string, incident_role_task *IncidentR
 	return data.(*IncidentRoleTask), nil
 }
 
-func (c *Client) DeleteIncidentRoleTask(id string) error {
-	req, err := rootlygo.NewDeleteIncidentRoleTaskRequest(c.Rootly.Server, id)
+func (c *Client) DeleteIncidentRoleTask(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteIncidentRoleTaskRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

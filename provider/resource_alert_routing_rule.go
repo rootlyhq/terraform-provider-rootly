@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -443,7 +444,7 @@ func resourceAlertRoutingRuleRead(ctx context.Context, d *schema.ResourceData, m
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading AlertRoutingRule: %s", d.Id()))
 
-	item, err := c.GetAlertRoutingRule(d.Id())
+	item, err := c.GetAlertRoutingRule(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -562,7 +563,7 @@ func resourceAlertRoutingRuleUpdate(ctx context.Context, d *schema.ResourceData,
 		}
 	}
 
-	_, err := c.UpdateAlertRoutingRule(d.Id(), s)
+	_, err := c.UpdateAlertRoutingRule(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating alert_routing_rule: %s", err.Error())
 	}
@@ -574,7 +575,7 @@ func resourceAlertRoutingRuleDelete(ctx context.Context, d *schema.ResourceData,
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting AlertRoutingRule: %s", d.Id()))
 
-	err := c.DeleteAlertRoutingRule(d.Id())
+	err := c.DeleteAlertRoutingRule(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

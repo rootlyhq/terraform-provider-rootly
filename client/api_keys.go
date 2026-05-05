@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -66,8 +67,8 @@ func (c *Client) CreateApiKey(d *ApiKey) (*ApiKey, error) {
 	return data.(*ApiKey), nil
 }
 
-func (c *Client) GetApiKey(id string) (*ApiKey, error) {
-	req, err := rootlygo.NewGetApiKeyRequest(c.Rootly.Server, id, nil)
+func (c *Client) GetApiKey(id rootlygo_.ID) (*ApiKey, error) {
+	req, err := rootlygo.NewGetApiKeyRequest(c.Rootly.Server, id.String(), nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -86,13 +87,13 @@ func (c *Client) GetApiKey(id string) (*ApiKey, error) {
 	return data.(*ApiKey), nil
 }
 
-func (c *Client) UpdateApiKey(id string, api_key *ApiKey) (*ApiKey, error) {
+func (c *Client) UpdateApiKey(id rootlygo_.ID, api_key *ApiKey) (*ApiKey, error) {
 	buffer, err := MarshalData(api_key)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling api_key: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateApiKeyRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateApiKeyRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -110,8 +111,8 @@ func (c *Client) UpdateApiKey(id string, api_key *ApiKey) (*ApiKey, error) {
 	return data.(*ApiKey), nil
 }
 
-func (c *Client) DeleteApiKey(id string) error {
-	req, err := rootlygo.NewDeleteApiKeyRequest(c.Rootly.Server, id)
+func (c *Client) DeleteApiKey(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteApiKeyRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}
