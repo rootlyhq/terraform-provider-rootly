@@ -1,5 +1,18 @@
 const fs = require("fs");
 const path = require("path");
+
+const HAND_MAINTAINED_HEADER = "// Hand-maintained";
+
+function safeWriteFile(filePath, code) {
+  if (fs.existsSync(filePath)) {
+    const existing = fs.readFileSync(filePath, "utf8");
+    if (existing.startsWith(HAND_MAINTAINED_HEADER)) {
+      console.warn(`SKIPPED ${path.basename(filePath)} (hand-maintained)`);
+      return;
+    }
+  }
+  fs.writeFileSync(filePath, code);
+}
 const swaggerPath = process.argv[2];
 const filterResource = process.argv[3] || null;
 const inflect = require("./inflect");
@@ -254,7 +267,7 @@ function generateDataSource(name) {
     pathIdField
   );
   if (code) {
-    fs.writeFileSync(
+    safeWriteFile(
       path.resolve(__dirname, "..", "provider", `data_source_${name}.go`),
       code
     );
@@ -277,7 +290,7 @@ function generateResource(name) {
       requiredFields(name),
       swagger.components.schemas.incident_trigger_params
     );
-    fs.writeFileSync(
+    safeWriteFile(
       path.resolve(__dirname, "..", "provider", `resource_${name}_incident.go`),
       code
     );
@@ -287,7 +300,7 @@ function generateResource(name) {
       requiredFields(name),
       swagger.components.schemas.post_mortem_trigger_params
     );
-    fs.writeFileSync(
+    safeWriteFile(
       path.resolve(
         __dirname,
         "..",
@@ -302,7 +315,7 @@ function generateResource(name) {
       requiredFields(name),
       swagger.components.schemas.action_item_trigger_params
     );
-    fs.writeFileSync(
+    safeWriteFile(
       path.resolve(
         __dirname,
         "..",
@@ -318,7 +331,7 @@ function generateResource(name) {
         requiredFields(name),
         swagger.components.schemas.alert_trigger_params
       );
-      fs.writeFileSync(
+      safeWriteFile(
         path.resolve(__dirname, "..", "provider", `resource_${name}_alert.go`),
         code
       );
@@ -329,7 +342,7 @@ function generateResource(name) {
       requiredFields(name),
       swagger.components.schemas.pulse_trigger_params
     );
-    fs.writeFileSync(
+    safeWriteFile(
       path.resolve(__dirname, "..", "provider", `resource_${name}_pulse.go`),
       code
     );
@@ -339,7 +352,7 @@ function generateResource(name) {
       requiredFields(name),
       swagger.components.schemas.simple_trigger_params
     );
-    fs.writeFileSync(
+    safeWriteFile(
       path.resolve(__dirname, "..", "provider", `resource_${name}_simple.go`),
       code
     );
@@ -350,7 +363,7 @@ function generateResource(name) {
       requiredFields(name),
       pathIdField
     );
-    fs.writeFileSync(
+    safeWriteFile(
       path.resolve(__dirname, "..", "provider", `resource_${name}.go`),
       code
     );
