@@ -377,6 +377,15 @@ func resourceStatusPage() *schema.Resource {
 				Description:      "External domain names attached to the status page",
 			},
 
+			"cname_records": &schema.Schema{
+				Type: schema.TypeMap,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Description: "CNAME records mapping external domain names to their DNS target values. Populated asynchronously after setting external_domain_names.",
+			},
+
 			"enabled": &schema.Schema{
 				Type:      schema.TypeBool,
 				Default:   true,
@@ -548,6 +557,7 @@ func resourceStatusPageRead(ctx context.Context, d *schema.ResourceData, meta in
 	d.Set("service_ids", item.ServiceIds)
 	d.Set("functionality_ids", item.FunctionalityIds)
 	d.Set("external_domain_names", item.ExternalDomainNames)
+	d.Set("cname_records", item.CnameRecords)
 	d.Set("enabled", item.Enabled)
 
 	return nil
