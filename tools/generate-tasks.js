@@ -416,7 +416,7 @@ resource "rootly_workflow_incident" "foo" {
 resource "rootly_workflow_task_${task_name}" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		${genTestParams(task_name, task_schema).join("\n")}
+		${genTestParams(task_name, task_schema).join("\n").replace(/%/g, "%%")}
 	}
 }
 \`, name)
@@ -434,7 +434,7 @@ resource "rootly_workflow_incident" "foo" {
 resource "rootly_workflow_task_${task_name}" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		${genTestParams(task_name, task_schema).join("\n")}
+		${genTestParams(task_name, task_schema).join("\n").replace(/%/g, "%%")}
 	}
 }
 \`, name)
