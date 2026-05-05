@@ -5,15 +5,15 @@ import (
 	"flag"
 	"log"
 
-	"github.com/rootlyhq/terraform-provider-rootly/v2/meta"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/meta"
 
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6/tf6server"
 	"github.com/hashicorp/terraform-plugin-mux/tf5to6server"
 	"github.com/hashicorp/terraform-plugin-mux/tf6muxserver"
-	framework_provider "github.com/rootlyhq/terraform-provider-rootly/v2/internal/provider"
-	sdkv2_provider "github.com/rootlyhq/terraform-provider-rootly/v2/provider"
+	framework_provider "github.com/rootlyhq/terraform-provider-rootly/v5/internal/provider"
+	sdkv2_provider "github.com/rootlyhq/terraform-provider-rootly/v5/provider"
 )
 
 // Run "go generate" to format example terraform files and generate the docs for the registry/website

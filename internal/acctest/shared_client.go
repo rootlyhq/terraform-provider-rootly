@@ -4,9 +4,9 @@ import (
 	"log"
 	"os"
 
-	"github.com/rootlyhq/terraform-provider-rootly/v2/internal/apiclient"
-	"github.com/rootlyhq/terraform-provider-rootly/v2/meta"
-	rootly "github.com/rootlyhq/terraform-provider-rootly/v2/schema"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/apiclient"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/meta"
+	rootly "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
 var (
