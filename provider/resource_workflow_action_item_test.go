@@ -1,12 +1,16 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceWorkflowActionItem(t *testing.T) {
+	rName := acctest.RandomWithPrefix("tf-wf-action")
+
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck: func() {
 			testAccPreCheck(t)
@@ -14,17 +18,17 @@ func TestAccResourceWorkflowActionItem(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceWorkflowActionItem,
+				Config: testAccResourceWorkflowActionItemConfig(rName),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_action_item.foo", "name", "test-action-item-workflow"),
+					resource.TestCheckResourceAttr("rootly_workflow_action_item.foo", "name", rName),
 					resource.TestCheckResourceAttr("rootly_workflow_action_item.foo", "description", ""),
 					resource.TestCheckResourceAttr("rootly_workflow_action_item.foo", "enabled", "true"),
 				),
 			},
 			{
-				Config: testAccResourceWorkflowActionItemUpdate,
+				Config: testAccResourceWorkflowActionItemUpdateConfig(rName + "-updated"),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_action_item.foo", "name", "test-action-item-workflow2"),
+					resource.TestCheckResourceAttr("rootly_workflow_action_item.foo", "name", rName+"-updated"),
 					resource.TestCheckResourceAttr("rootly_workflow_action_item.foo", "description", "test description"),
 					resource.TestCheckResourceAttr("rootly_workflow_action_item.foo", "enabled", "false"),
 				),
@@ -33,22 +37,26 @@ func TestAccResourceWorkflowActionItem(t *testing.T) {
 	})
 }
 
-const testAccResourceWorkflowActionItem = `
+func testAccResourceWorkflowActionItemConfig(name string) string {
+	return fmt.Sprintf(`
 resource "rootly_workflow_action_item" "foo" {
-  name = "test-action-item-workflow"
+  name = "%s"
 	trigger_params {
 		triggers = ["action_item_created"]
 	}
 }
-`
+`, name)
+}
 
-const testAccResourceWorkflowActionItemUpdate = `
+func testAccResourceWorkflowActionItemUpdateConfig(name string) string {
+	return fmt.Sprintf(`
 resource "rootly_workflow_action_item" "foo" {
-  name       = "test-action-item-workflow2"
+  name       = "%s"
   description = "test description"
   enabled     = false
 	trigger_params {
 		triggers = ["action_item_updated"]
 	}
 }
-`
+`, name)
+}

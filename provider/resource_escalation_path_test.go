@@ -9,6 +9,8 @@ import (
 )
 
 func TestAccResourceEscalationPath(t *testing.T) {
+	rName := acctest.RandomWithPrefix("tf-ep")
+
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck: func() {
 			testAccPreCheck(t)
@@ -16,9 +18,9 @@ func TestAccResourceEscalationPath(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceEscalationPath,
+				Config: testAccResourceEscalationPathConfig(rName),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_escalation_path.test", "name", "test-path"),
+					resource.TestCheckResourceAttr("rootly_escalation_path.test", "name", rName+"-path"),
 					resource.TestCheckResourceAttr("rootly_escalation_path.test", "default", "false"),
 					resource.TestCheckResourceAttr("rootly_escalation_path.test", "time_restriction_time_zone", "America/New_York"),
 					resource.TestCheckResourceAttr("rootly_escalation_path.test", "time_restrictions.#", "2"),
@@ -34,9 +36,9 @@ func TestAccResourceEscalationPath(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccResourceEscalationPathUpdated,
+				Config: testAccResourceEscalationPathUpdatedConfig(rName),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_escalation_path.test", "name", "test-path-updated"),
+					resource.TestCheckResourceAttr("rootly_escalation_path.test", "name", rName+"-path-updated"),
 					resource.TestCheckResourceAttr("rootly_escalation_path.test", "default", "false"),
 					resource.TestCheckResourceAttr("rootly_escalation_path.test", "time_restriction_time_zone", "Pacific/Honolulu"),
 					resource.TestCheckResourceAttr("rootly_escalation_path.test", "time_restrictions.#", "1"),
@@ -51,13 +53,14 @@ func TestAccResourceEscalationPath(t *testing.T) {
 	})
 }
 
-const testAccResourceEscalationPath = `
+func testAccResourceEscalationPathConfig(rName string) string {
+	return fmt.Sprintf(`
 resource "rootly_escalation_policy" "test" {
-	name = "test-ep"
+	name = "%s-ep"
 }
 
 resource "rootly_escalation_path" "test" {
-	name = "test-path"
+	name = "%s-path"
 	default = false
 	escalation_policy_id = rootly_escalation_policy.test.id
 	initial_delay = 5
@@ -75,15 +78,17 @@ resource "rootly_escalation_path" "test" {
 		end_time = "07:00"
 	}
 }
-`
+`, rName, rName)
+}
 
-const testAccResourceEscalationPathUpdated = `
+func testAccResourceEscalationPathUpdatedConfig(rName string) string {
+	return fmt.Sprintf(`
 resource "rootly_escalation_policy" "test" {
-	name = "test-ep"
+	name = "%s-ep"
 }
 
 resource "rootly_escalation_path" "test" {
-	name = "test-path-updated"
+	name = "%s-path-updated"
 	default = false
 	escalation_policy_id = rootly_escalation_policy.test.id
 	initial_delay = 0
@@ -95,7 +100,8 @@ resource "rootly_escalation_path" "test" {
 		end_time = "08:00"
 	}
 }
-`
+`, rName, rName)
+}
 
 func TestAccResourceEscalationPathDeferral(t *testing.T) {
 	rName := acctest.RandomWithPrefix("tf-test")

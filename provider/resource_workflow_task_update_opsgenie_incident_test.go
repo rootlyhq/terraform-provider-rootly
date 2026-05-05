@@ -1,12 +1,16 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceWorkflowTaskUpdateOpsgenieIncident(t *testing.T) {
+	rName := acctest.RandomWithPrefix("tf-wf-opsgenie")
+
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck: func() {
 			testAccPreCheck(t)
@@ -14,7 +18,7 @@ func TestAccResourceWorkflowTaskUpdateOpsgenieIncident(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceWorkflowTaskUpdateOpsgenieIncident,
+				Config: testAccResourceWorkflowTaskUpdateOpsgenieIncidentConfig(rName),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_workflow_task_update_opsgenie_incident.foo", "enabled", "true"),
 					resource.TestCheckResourceAttr("rootly_workflow_task_update_opsgenie_incident.foo", "task_params.0.task_type", "update_opsgenie_incident"),
@@ -23,7 +27,7 @@ func TestAccResourceWorkflowTaskUpdateOpsgenieIncident(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccResourceWorkflowTaskUpdateOpsgenieIncidentEmptyPriority,
+				Config: testAccResourceWorkflowTaskUpdateOpsgenieIncidentEmptyPriorityConfig(rName),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_workflow_task_update_opsgenie_incident.foo", "task_params.0.priority", ""),
 				),
@@ -32,9 +36,10 @@ func TestAccResourceWorkflowTaskUpdateOpsgenieIncident(t *testing.T) {
 	})
 }
 
-const testAccResourceWorkflowTaskUpdateOpsgenieIncident = `
+func testAccResourceWorkflowTaskUpdateOpsgenieIncidentConfig(name string) string {
+	return fmt.Sprintf(`
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow-for-opsgenie-task"
+  name = "%s"
   trigger_params {
     triggers = ["incident_created"]
   }
@@ -47,11 +52,13 @@ resource "rootly_workflow_task_update_opsgenie_incident" "foo" {
     priority             = "P1"
   }
 }
-`
+`, name)
+}
 
-const testAccResourceWorkflowTaskUpdateOpsgenieIncidentEmptyPriority = `
+func testAccResourceWorkflowTaskUpdateOpsgenieIncidentEmptyPriorityConfig(name string) string {
+	return fmt.Sprintf(`
 resource "rootly_workflow_incident" "foo" {
-  name = "test-workflow-for-opsgenie-task"
+  name = "%s"
   trigger_params {
     triggers = ["incident_created"]
   }
@@ -64,4 +71,5 @@ resource "rootly_workflow_task_update_opsgenie_incident" "foo" {
     priority             = ""
   }
 }
-`
+`, name)
+}
