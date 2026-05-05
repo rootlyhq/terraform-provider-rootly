@@ -53,6 +53,9 @@ testacc:
 testacc-changed:
 	TF_ACC=1 scripts/test-changed.sh $(BASE_REF) $(TESTARGS)
 
+lint-test-names:
+	@scripts/lint-test-names.sh
+
 sweeper:
 	@echo "WARNING: This will destroy infrastructure. Use only in development accounts."
 	go test ./internal/provider -v -tags=sweep -sweep=all -sweep-allow-failures -timeout 120m

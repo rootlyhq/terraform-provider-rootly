@@ -1,12 +1,17 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceSecret(t *testing.T) {
+	rName := "tf_secret_" + acctest.RandString(8)
+	rSecret := "tf_secret_value_" + acctest.RandString(8)
+
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck: func() {
 			testAccPreCheck(t)
@@ -14,15 +19,17 @@ func TestAccResourceSecret(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceSecret,
+				Config: testAccResourceSecretConfig(rName, rSecret),
 			},
 		},
 	})
 }
 
-const testAccResourceSecret = `
+func testAccResourceSecretConfig(name, secret string) string {
+	return fmt.Sprintf(`
 resource "rootly_secret" "test" {
-	name = "test"
-secret = "test"
+	name = "%s"
+	secret = "%s"
 }
-`
+`, name, secret)
+}

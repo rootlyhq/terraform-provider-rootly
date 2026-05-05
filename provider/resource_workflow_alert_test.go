@@ -1,28 +1,32 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceWorkflowAlert(t *testing.T) {
+	rName := acctest.RandomWithPrefix("tf-wf-alert")
+
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck:          func() { testAccPreCheck(t) },
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceWorkflowAlert,
+				Config: testAccResourceWorkflowAlertConfig(rName),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_alert.foo", "name", "test-alert-workflow"),
+					resource.TestCheckResourceAttr("rootly_workflow_alert.foo", "name", rName),
 					resource.TestCheckResourceAttr("rootly_workflow_alert.foo", "description", ""),
 					resource.TestCheckResourceAttr("rootly_workflow_alert.foo", "enabled", "true"),
 				),
 			},
 			{
-				Config: testAccResourceWorkflowAlertUpdate,
+				Config: testAccResourceWorkflowAlertUpdateConfig(rName + "-updated"),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_alert.foo", "name", "test-alert-workflow2"),
+					resource.TestCheckResourceAttr("rootly_workflow_alert.foo", "name", rName+"-updated"),
 					resource.TestCheckResourceAttr("rootly_workflow_alert.foo", "description", "test description"),
 					resource.TestCheckResourceAttr("rootly_workflow_alert.foo", "enabled", "false"),
 				),
@@ -31,35 +35,41 @@ func TestAccResourceWorkflowAlert(t *testing.T) {
 	})
 }
 
-const testAccResourceWorkflowAlert = `
+func testAccResourceWorkflowAlertConfig(name string) string {
+	return fmt.Sprintf(`
 resource "rootly_workflow_alert" "foo" {
-  name = "test-alert-workflow"
+  name = "%s"
 	trigger_params {
 		triggers = ["alert_created"]
 	}
 }
-`
+`, name)
+}
 
-const testAccResourceWorkflowAlertUpdate = `
+func testAccResourceWorkflowAlertUpdateConfig(name string) string {
+	return fmt.Sprintf(`
 resource "rootly_workflow_alert" "foo" {
-  name       = "test-alert-workflow2"
+  name       = "%s"
   description = "test description"
   enabled     = false
 	trigger_params {
 		triggers = ["alert_created"]
 	}
 }
-`
+`, name)
+}
 
 func TestAccResourceWorkflowAlertWithPayloadConditions(t *testing.T) {
+	rName := acctest.RandomWithPrefix("tf-wf-alert-pc")
+
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck:          func() { testAccPreCheck(t) },
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceWorkflowAlertWithPayloadConditions,
+				Config: testAccResourceWorkflowAlertPayloadConditionsConfig(rName),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_alert.test_payload", "name", "test-alert-payload-conditionsTest"),
+					resource.TestCheckResourceAttr("rootly_workflow_alert.test_payload", "name", rName),
 					resource.TestCheckResourceAttr("rootly_workflow_alert.test_payload", "enabled", "true"),
 					resource.TestCheckResourceAttr("rootly_workflow_alert.test_payload", "trigger_params.0.triggers.0", "alert_created"),
 					resource.TestCheckResourceAttr("rootly_workflow_alert.test_payload", "trigger_params.0.alert_payload_conditions.0.logic", "ALL"),
@@ -73,9 +83,9 @@ func TestAccResourceWorkflowAlertWithPayloadConditions(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccResourceWorkflowAlertWithPayloadConditionsUpdate,
+				Config: testAccResourceWorkflowAlertPayloadConditionsUpdateConfig(rName + "-updated"),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_alert.test_payload", "name", "test-alert-payload-conditions-updated"),
+					resource.TestCheckResourceAttr("rootly_workflow_alert.test_payload", "name", rName+"-updated"),
 					resource.TestCheckResourceAttr("rootly_workflow_alert.test_payload", "trigger_params.0.alert_payload_conditions.0.logic", "ANY"),
 					resource.TestCheckResourceAttr("rootly_workflow_alert.test_payload", "trigger_params.0.alert_payload_conditions.0.conditions.0.query", "$.commonLabels.environment"),
 					resource.TestCheckResourceAttr("rootly_workflow_alert.test_payload", "trigger_params.0.alert_payload_conditions.0.conditions.0.operator", "IS"),
@@ -86,9 +96,10 @@ func TestAccResourceWorkflowAlertWithPayloadConditions(t *testing.T) {
 	})
 }
 
-const testAccResourceWorkflowAlertWithPayloadConditions = `
+func testAccResourceWorkflowAlertPayloadConditionsConfig(name string) string {
+	return fmt.Sprintf(`
 resource "rootly_workflow_alert" "test_payload" {
-  name    = "test-alert-payload-conditionsTest"
+  name    = "%s"
   enabled = true
 
   trigger_params {
@@ -111,11 +122,13 @@ resource "rootly_workflow_alert" "test_payload" {
     }
   }
 }
-`
+`, name)
+}
 
-const testAccResourceWorkflowAlertWithPayloadConditionsUpdate = `
+func testAccResourceWorkflowAlertPayloadConditionsUpdateConfig(name string) string {
+	return fmt.Sprintf(`
 resource "rootly_workflow_alert" "test_payload" {
-  name    = "test-alert-payload-conditions-updated"
+  name    = "%s"
   enabled = true
 
   trigger_params {
@@ -132,17 +145,20 @@ resource "rootly_workflow_alert" "test_payload" {
     }
   }
 }
-`
+`, name)
+}
 
 func TestAccResourceWorkflowAlertWithRegexpConditions(t *testing.T) {
+	rName := acctest.RandomWithPrefix("tf-wf-alert-re")
+
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck:          func() { testAccPreCheck(t) },
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceWorkflowAlertWithRegexpConditions,
+				Config: testAccResourceWorkflowAlertRegexpConditionsConfig(rName),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_alert.test_regexp", "name", "test-alert-regexp-conditions"),
+					resource.TestCheckResourceAttr("rootly_workflow_alert.test_regexp", "name", rName),
 					resource.TestCheckResourceAttr("rootly_workflow_alert.test_regexp", "trigger_params.0.alert_payload_conditions.0.conditions.0.query", "$.alertname"),
 					resource.TestCheckResourceAttr("rootly_workflow_alert.test_regexp", "trigger_params.0.alert_payload_conditions.0.conditions.0.operator", "IS"),
 					resource.TestCheckResourceAttr("rootly_workflow_alert.test_regexp", "trigger_params.0.alert_payload_conditions.0.conditions.0.values.0", "^(api|web)-.+"),
@@ -153,9 +169,10 @@ func TestAccResourceWorkflowAlertWithRegexpConditions(t *testing.T) {
 	})
 }
 
-const testAccResourceWorkflowAlertWithRegexpConditions = `
+func testAccResourceWorkflowAlertRegexpConditionsConfig(name string) string {
+	return fmt.Sprintf(`
 resource "rootly_workflow_alert" "test_regexp" {
-  name    = "test-alert-regexp-conditions"
+  name    = "%s"
   enabled = true
 
   trigger_params {
@@ -173,4 +190,5 @@ resource "rootly_workflow_alert" "test_regexp" {
     }
   }
 }
-`
+`, name)
+}

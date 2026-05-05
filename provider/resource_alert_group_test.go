@@ -1,12 +1,16 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccResourceAlertGroup(t *testing.T) {
+	rName := acctest.RandomWithPrefix("tf-alert-group")
+
 	resource.UnitTest(t, resource.TestCase{
 		IsUnitTest: false,
 		PreCheck: func() {
@@ -15,24 +19,25 @@ func TestAccResourceAlertGroup(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceAlertGroup,
+				Config: testAccResourceAlertGroupConfig(rName),
 			},
 		},
 	})
 }
 
-const testAccResourceAlertGroup = `
+func testAccResourceAlertGroupConfig(rName string) string {
+	return fmt.Sprintf(`
 resource "rootly_alert_urgency" "tf" {
-	name = "tf-test"
+	name = "%s-urgency"
 	description = "tf"
 }
 
 resource "rootly_team" "tf" {
-	name = "tf-test"
+	name = "%s-team"
 }
 
 resource "rootly_alert_group" "tf1" {
-	name = "tf-test1"
+	name = "%s-1"
 	description = "tf"
 	targets {
 		target_type = "Group"
@@ -46,7 +51,7 @@ resource "rootly_alert_group" "tf1" {
 }
 
 resource "rootly_alert_group" "tf2" {
-	name = "tf-test2"
+	name = "%s-2"
 	description = "tf"
 	conditions {
 		property_field_type = "attribute"
@@ -58,4 +63,5 @@ resource "rootly_alert_group" "tf2" {
 		}
 	}
 }
-`
+`, rName, rName, rName, rName)
+}
