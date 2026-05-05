@@ -332,7 +332,7 @@ func resourceWorkflowIncident() *schema.Resource {
 
 						"incident_condition_summary": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "SET",
+							Computed:    true,
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `SET`, `UNSET`.",
@@ -340,7 +340,7 @@ func resourceWorkflowIncident() *schema.Resource {
 
 						"incident_condition_started_at": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "SET",
+							Computed:    true,
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `SET`, `UNSET`.",
@@ -348,7 +348,7 @@ func resourceWorkflowIncident() *schema.Resource {
 
 						"incident_condition_detected_at": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "SET",
+							Computed:    true,
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `SET`, `UNSET`.",
@@ -356,7 +356,7 @@ func resourceWorkflowIncident() *schema.Resource {
 
 						"incident_condition_acknowledged_at": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "SET",
+							Computed:    true,
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `SET`, `UNSET`.",
@@ -364,7 +364,7 @@ func resourceWorkflowIncident() *schema.Resource {
 
 						"incident_condition_mitigated_at": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "SET",
+							Computed:    true,
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `SET`, `UNSET`.",
@@ -372,7 +372,7 @@ func resourceWorkflowIncident() *schema.Resource {
 
 						"incident_condition_resolved_at": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "SET",
+							Computed:    true,
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `SET`, `UNSET`.",
@@ -380,7 +380,7 @@ func resourceWorkflowIncident() *schema.Resource {
 
 						"incident_conditional_inactivity": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "IS",
+							Computed:    true,
 							Required:    false,
 							Optional:    true,
 							Description: "Value must be one off `IS`.",

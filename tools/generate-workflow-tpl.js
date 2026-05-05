@@ -279,7 +279,7 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
   let defaultValue;
   if (schema.default) {
     defaultValue = `Default: "${schema.default}"`;
-  } else if (schema.enum && schema.enum.length > 0) {
+  } else if (schema.enum && schema.enum.length > 0 && !schema.nullable) {
     defaultValue = `Default: "${schema.enum[0]}"`;
   } else {
     defaultValue = `Computed: ${optional}`;
