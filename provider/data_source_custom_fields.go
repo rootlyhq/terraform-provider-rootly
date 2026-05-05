@@ -105,7 +105,7 @@ func dataSourceCustomFieldsRead(ctx context.Context, d *schema.ResourceData, met
 	tf_custom_fields := make([]interface{}, len(custom_fields), len(custom_fields))
 	for i, custom_field := range custom_fields {
 		c, _ := custom_field.(*client.CustomField)
-		tf_custom_fields[i] = structToLowerFirstMap(*c)
+		tf_custom_fields[i] = filterMapKeys(structToLowerFirstMap(*c), dataSourceCustomFields().Schema["custom_fields"].Elem.(*schema.Resource).Schema)
 	}
 
 	if err := d.Set("custom_fields", tf_custom_fields); err != nil {

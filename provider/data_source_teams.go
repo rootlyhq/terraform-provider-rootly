@@ -74,7 +74,7 @@ func dataSourceTeamsRead(ctx context.Context, d *schema.ResourceData, meta inter
 	tf_teams := make([]interface{}, len(teams), len(teams))
 	for i, team := range teams {
 		c, _ := team.(*client.Team)
-		tf_teams[i] = structToLowerFirstMap(*c)
+		tf_teams[i] = filterMapKeys(structToLowerFirstMap(*c), dataSourceTeams().Schema["teams"].Elem.(*schema.Resource).Schema)
 	}
 
 	if err := d.Set("teams", tf_teams); err != nil {

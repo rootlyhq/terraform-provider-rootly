@@ -85,7 +85,7 @@ func dataSourceIncidentRolesRead(ctx context.Context, d *schema.ResourceData, me
 	tf_incident_roles := make([]interface{}, len(incident_roles), len(incident_roles))
 	for i, incident_role := range incident_roles {
 		c, _ := incident_role.(*client.IncidentRole)
-		tf_incident_roles[i] = structToLowerFirstMap(*c)
+		tf_incident_roles[i] = filterMapKeys(structToLowerFirstMap(*c), dataSourceIncidentRoles().Schema["incident_roles"].Elem.(*schema.Resource).Schema)
 	}
 
 	if err := d.Set("incident_roles", tf_incident_roles); err != nil {

@@ -79,7 +79,7 @@ func dataSourceCustomFieldOptionsRead(ctx context.Context, d *schema.ResourceDat
 	tf_custom_field_options := make([]interface{}, len(custom_field_options), len(custom_field_options))
 	for i, custom_field_option := range custom_field_options {
 		c, _ := custom_field_option.(*client.CustomFieldOption)
-		tf_custom_field_options[i] = structToLowerFirstMap(*c)
+		tf_custom_field_options[i] = filterMapKeys(structToLowerFirstMap(*c), dataSourceCustomFieldOptions().Schema["custom_field_options"].Elem.(*schema.Resource).Schema)
 	}
 
 	if err := d.Set("custom_field_options", tf_custom_field_options); err != nil {

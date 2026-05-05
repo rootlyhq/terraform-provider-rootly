@@ -74,7 +74,7 @@ func dataSourceEnvironmentsRead(ctx context.Context, d *schema.ResourceData, met
 	tf_environments := make([]interface{}, len(environments), len(environments))
 	for i, environment := range environments {
 		c, _ := environment.(*client.Environment)
-		tf_environments[i] = structToLowerFirstMap(*c)
+		tf_environments[i] = filterMapKeys(structToLowerFirstMap(*c), dataSourceEnvironments().Schema["environments"].Elem.(*schema.Resource).Schema)
 	}
 
 	if err := d.Set("environments", tf_environments); err != nil {
