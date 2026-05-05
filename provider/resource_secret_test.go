@@ -9,8 +9,8 @@ import (
 )
 
 func TestAccResourceSecret(t *testing.T) {
-	rName := acctest.RandomWithPrefix("tf-secret")
-	rSecret := acctest.RandomWithPrefix("tf-secret-value")
+	rName := "tf_secret_" + acctest.RandString(8)
+	rSecret := "tf_secret_value_" + acctest.RandString(8)
 
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck: func() {
