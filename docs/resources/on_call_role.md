@@ -32,7 +32,6 @@ resource "rootly_on_call_role" "custom" {
   ]
   schedule_override_permissions = [
     "create",
-    "read",
     "update",
   ]
 }
