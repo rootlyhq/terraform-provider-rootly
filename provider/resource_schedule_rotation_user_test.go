@@ -30,7 +30,7 @@ func TestAccResourceScheduleRotationUser(t *testing.T) {
 func testAccResourceScheduleRotationUserConfig(scheduleName, rotationName string) string {
 	return fmt.Sprintf(`
 data "rootly_user" "test" {
-	email = "demo@rootly.com"
+	email = "bot+tftests@rootly.com"
 }
 
 resource "rootly_schedule" "test" {
