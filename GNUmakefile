@@ -161,6 +161,9 @@ check-docs-drift: docs
 check-docs-completeness:
 	@scripts/lint-docs-completeness.sh
 
+check-test-coverage:
+	@scripts/lint-test-coverage.sh
+
 # General help target
 help:
 	@echo "Available targets:"
@@ -178,5 +181,6 @@ help:
 	@echo "Drift Detection:"
 	@echo "  make check-docs-drift        - Check for documentation drift"
 	@echo "  make check-docs-completeness - Check docs coverage for all resources"
+	@echo "  make check-test-coverage     - Check test coverage for all resources"
 	@echo ""
 	@make help-version
