@@ -119,7 +119,7 @@ resource "rootly_schedule_rotation_user" "jane" {
 - `all_time_coverage` (Boolean) 24/7 coverage of the schedule. Value must be one of true or false
 - `description` (String) The description of the schedule
 - `owner_group_ids` (List of String) The owning teams for this schedules.
-- `owner_user_id` (Number) ID of user assigned as owner of the schedule
+- `owner_user_id` (Number) ID of user assigned as owner of the schedule. Defaults to the API token's user if not specified.
 - `slack_channel` (Map of String) Map must contain two fields, `id` and `name`. Synced slack channel of the schedule
 - `slack_user_group` (Map of String) Map must contain two fields, `id` and `name`. Synced slack group of the schedule
 

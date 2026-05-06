@@ -53,6 +53,7 @@ description: |-
 
 ### Read-Only
 
+- `cname_records` (Map of String) CNAME records mapping external domain names to their DNS target values. Populated asynchronously after setting external_domain_names.
 - `id` (String) The ID of this resource.
 
 ## Import
