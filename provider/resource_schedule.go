@@ -98,6 +98,62 @@ func resourceSchedule() *schema.Resource {
 				ForceNew:    false,
 				Description: "ID of user assigned as owner of the schedule. Defaults to the API token's user if not specified.",
 			},
+
+			"sync_linear_enabled": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Optional:    true,
+				Description: "Whether the schedule is synced with Linear. Value must be one of true or false",
+			},
+
+			"include_shadows_in_slack_notifications": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Optional:    true,
+				Description: "Whether shadow users are included in Slack notifications and user group syncing. Value must be one of true or false",
+			},
+
+			"shift_start_notifications_enabled": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Optional:    true,
+				Description: "Whether to send a Slack message every time a new shift begins. Requires `slack_channel` to be set. Value must be one of true or false",
+			},
+
+			"shift_update_notifications_enabled": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Optional:    true,
+				Description: "Whether to send a Slack message whenever a shift is updated (overrides, removed users, rotation changes, etc.). Requires `slack_channel` to be set. Value must be one of true or false",
+			},
+
+			"shift_report_enabled": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Optional:    true,
+				Description: "Whether the weekly shift summary report is sent. Requires `slack_channel` to be set. Value must be one of true or false",
+			},
+
+			"shift_report_day_of_week": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Optional:    true,
+				Description: "Day of week the weekly shift summary is sent. Value must be one of `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`.",
+			},
+
+			"shift_report_time_of_day": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Optional:    true,
+				Description: "Time of day the weekly shift summary is sent, in `HH:MM` 24-hour format.",
+			},
+
+			"shift_report_time_zone": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Optional:    true,
+				Description: "IANA time zone used for the weekly shift summary (e.g. `Australia/Sydney`).",
+			},
 		},
 	}
 }
@@ -144,6 +200,30 @@ func resourceScheduleCreate(ctx context.Context, d *schema.ResourceData, meta in
 	if value, ok := d.GetOkExists("owner_user_id"); ok {
 		s.OwnerUserId = value.(int)
 	}
+	if value, ok := d.GetOkExists("sync_linear_enabled"); ok {
+		s.SyncLinearEnabled = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("include_shadows_in_slack_notifications"); ok {
+		s.IncludeShadowsInSlackNotifications = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("shift_start_notifications_enabled"); ok {
+		s.ShiftStartNotificationsEnabled = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("shift_update_notifications_enabled"); ok {
+		s.ShiftUpdateNotificationsEnabled = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("shift_report_enabled"); ok {
+		s.ShiftReportEnabled = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("shift_report_day_of_week"); ok {
+		s.ShiftReportDayOfWeek = value.(string)
+	}
+	if value, ok := d.GetOkExists("shift_report_time_of_day"); ok {
+		s.ShiftReportTimeOfDay = value.(string)
+	}
+	if value, ok := d.GetOkExists("shift_report_time_zone"); ok {
+		s.ShiftReportTimeZone = value.(string)
+	}
 
 	res, err := c.CreateSchedule(s)
 	if err != nil {
@@ -180,6 +260,14 @@ func resourceScheduleRead(ctx context.Context, d *schema.ResourceData, meta inte
 	d.Set("slack_channel", item.SlackChannel)
 	d.Set("owner_group_ids", item.OwnerGroupIds)
 	d.Set("owner_user_id", item.OwnerUserId)
+	d.Set("sync_linear_enabled", item.SyncLinearEnabled)
+	d.Set("include_shadows_in_slack_notifications", item.IncludeShadowsInSlackNotifications)
+	d.Set("shift_start_notifications_enabled", item.ShiftStartNotificationsEnabled)
+	d.Set("shift_update_notifications_enabled", item.ShiftUpdateNotificationsEnabled)
+	d.Set("shift_report_enabled", item.ShiftReportEnabled)
+	d.Set("shift_report_day_of_week", item.ShiftReportDayOfWeek)
+	d.Set("shift_report_time_of_day", item.ShiftReportTimeOfDay)
+	d.Set("shift_report_time_zone", item.ShiftReportTimeZone)
 
 	return nil
 }
@@ -228,6 +316,30 @@ func resourceScheduleUpdate(ctx context.Context, d *schema.ResourceData, meta in
 	}
 	if d.HasChange("owner_user_id") {
 		s.OwnerUserId = d.Get("owner_user_id").(int)
+	}
+	if d.HasChange("sync_linear_enabled") {
+		s.SyncLinearEnabled = tools.Bool(d.Get("sync_linear_enabled").(bool))
+	}
+	if d.HasChange("include_shadows_in_slack_notifications") {
+		s.IncludeShadowsInSlackNotifications = tools.Bool(d.Get("include_shadows_in_slack_notifications").(bool))
+	}
+	if d.HasChange("shift_start_notifications_enabled") {
+		s.ShiftStartNotificationsEnabled = tools.Bool(d.Get("shift_start_notifications_enabled").(bool))
+	}
+	if d.HasChange("shift_update_notifications_enabled") {
+		s.ShiftUpdateNotificationsEnabled = tools.Bool(d.Get("shift_update_notifications_enabled").(bool))
+	}
+	if d.HasChange("shift_report_enabled") {
+		s.ShiftReportEnabled = tools.Bool(d.Get("shift_report_enabled").(bool))
+	}
+	if d.HasChange("shift_report_day_of_week") {
+		s.ShiftReportDayOfWeek = d.Get("shift_report_day_of_week").(string)
+	}
+	if d.HasChange("shift_report_time_of_day") {
+		s.ShiftReportTimeOfDay = d.Get("shift_report_time_of_day").(string)
+	}
+	if d.HasChange("shift_report_time_zone") {
+		s.ShiftReportTimeZone = d.Get("shift_report_time_zone").(string)
 	}
 
 	_, err := c.UpdateSchedule(d.Id(), s)
