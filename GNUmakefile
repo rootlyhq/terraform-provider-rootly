@@ -158,6 +158,9 @@ check-docs-drift: docs
 	fi
 	@echo "✅ No documentation drift."
 
+check-docs-completeness:
+	@scripts/lint-docs-completeness.sh
+
 # General help target
 help:
 	@echo "Available targets:"
@@ -173,6 +176,7 @@ help:
 	@echo "  make release         - Create local snapshot build"
 	@echo ""
 	@echo "Drift Detection:"
-	@echo "  make check-docs-drift    - Check for documentation drift"
+	@echo "  make check-docs-drift        - Check for documentation drift"
+	@echo "  make check-docs-completeness - Check docs coverage for all resources"
 	@echo ""
 	@make help-version
