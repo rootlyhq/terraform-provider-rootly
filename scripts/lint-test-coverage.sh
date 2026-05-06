@@ -98,8 +98,8 @@ if [ "$count_untested_wf" -gt 0 ]; then
   echo ""
 fi
 
-resource_pct=$((total_tested_resources * 100 / total_resources))
-ds_pct=$((total_tested_datasources * 100 / total_datasources))
+resource_pct=$(( total_resources > 0 ? total_tested_resources * 100 / total_resources : 0 ))
+ds_pct=$(( total_datasources > 0 ? total_tested_datasources * 100 / total_datasources : 0 ))
 
 echo "📊 Summary:"
 echo "   Resources:    $total_tested_resources/$total_resources tested ($resource_pct%)"
