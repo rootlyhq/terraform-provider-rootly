@@ -150,6 +150,14 @@ help-version:
 	@echo "  make release-major    - Bump major and push tag (triggers CI release)"
 	@echo ""
 
+check-docs-drift: docs
+	@if ! git diff --quiet docs/ examples/; then \
+		echo "❌ Documentation drift detected. Commit the changes from 'make docs'."; \
+		git diff --name-only docs/ examples/; \
+		exit 1; \
+	fi
+	@echo "✅ No documentation drift."
+
 # General help target
 help:
 	@echo "Available targets:"
@@ -163,5 +171,8 @@ help:
 	@echo "  make sweeper         - Delete resources created by acceptance tests. They have names starting with tf-"
 	@echo "  make install         - Install provider locally"
 	@echo "  make release         - Create local snapshot build"
+	@echo ""
+	@echo "Drift Detection:"
+	@echo "  make check-docs-drift    - Check for documentation drift"
 	@echo ""
 	@make help-version
