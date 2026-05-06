@@ -38,8 +38,8 @@ jobs:
           rm -f ./docs/data-sources/ip_ranges.md
           mv ./docs/data-sources/ip_range.md ./docs/data-sources/ip_ranges.md
           find ./docs/resources/*.md -type f -exec node tools/clean-docs.js {} \;
-          find ./docs/resources/ -type f -name 'workflow_task_*.md' -exec perl -pi -e 's/subcategory:$$/subcategory: Workflow Tasks/g' {} +
-          find ./docs/resources/ -type f -name 'workflow_*.md' -exec perl -pi -e 's/subcategory:$$/subcategory: Workflows/g' {} +
+          find ./docs/resources/ -type f -name 'workflow_task_*.md' -exec perl -pi -e 's/subcategory:$/subcategory: Workflow Tasks/g' {} +
+          find ./docs/resources/ -type f -name 'workflow_*.md' -exec perl -pi -e 's/subcategory:$/subcategory: Workflows/g' {} +
 
       - name: Check for drift
         run: |
