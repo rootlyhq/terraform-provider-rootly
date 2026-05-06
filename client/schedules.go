@@ -11,14 +11,22 @@ import (
 )
 
 type Schedule struct {
-	ID              string                 `jsonapi:"primary,schedules"`
-	Name            string                 `jsonapi:"attr,name,omitempty"`
-	Description     string                 `jsonapi:"attr,description,omitempty"`
-	AllTimeCoverage *bool                  `jsonapi:"attr,all_time_coverage,omitempty"`
-	SlackUserGroup  map[string]interface{} `jsonapi:"attr,slack_user_group,omitempty"`
-	SlackChannel    map[string]interface{} `jsonapi:"attr,slack_channel,omitempty"`
-	OwnerGroupIds   []interface{}          `jsonapi:"attr,owner_group_ids,omitempty"`
-	OwnerUserId     int                    `jsonapi:"attr,owner_user_id,omitempty"`
+	ID                                  string                 `jsonapi:"primary,schedules"`
+	Name                                string                 `jsonapi:"attr,name,omitempty"`
+	Description                         string                 `jsonapi:"attr,description,omitempty"`
+	AllTimeCoverage                     *bool                  `jsonapi:"attr,all_time_coverage,omitempty"`
+	SlackUserGroup                      map[string]interface{} `jsonapi:"attr,slack_user_group,omitempty"`
+	SlackChannel                        map[string]interface{} `jsonapi:"attr,slack_channel,omitempty"`
+	OwnerGroupIds                       []interface{}          `jsonapi:"attr,owner_group_ids,omitempty"`
+	OwnerUserId                         int                    `jsonapi:"attr,owner_user_id,omitempty"`
+	SyncLinearEnabled                   *bool                  `jsonapi:"attr,sync_linear_enabled,omitempty"`
+	IncludeShadowsInSlackNotifications  *bool                  `jsonapi:"attr,include_shadows_in_slack_notifications,omitempty"`
+	ShiftStartNotificationsEnabled      *bool                  `jsonapi:"attr,shift_start_notifications_enabled,omitempty"`
+	ShiftUpdateNotificationsEnabled     *bool                  `jsonapi:"attr,shift_update_notifications_enabled,omitempty"`
+	ShiftReportEnabled                  *bool                  `jsonapi:"attr,shift_report_enabled,omitempty"`
+	ShiftReportDayOfWeek                string                 `jsonapi:"attr,shift_report_day_of_week,omitempty"`
+	ShiftReportTimeOfDay                string                 `jsonapi:"attr,shift_report_time_of_day,omitempty"`
+	ShiftReportTimeZone                 string                 `jsonapi:"attr,shift_report_time_zone,omitempty"`
 }
 
 func (c *Client) ListSchedules(params *rootlygo.ListSchedulesParams) ([]interface{}, error) {
