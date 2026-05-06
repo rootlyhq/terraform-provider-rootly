@@ -8,5 +8,6 @@
   "devDependencies": {
     "tsx": "^4.21.0",
     "typescript": "^6.0.0"
-  }
+  },
+  "packageManager": "yarn@1.22.22"
 }
