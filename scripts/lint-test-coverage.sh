@@ -2,6 +2,8 @@
 set -euo pipefail
 
 PROVIDER_DIR="provider"
+BASE_REF="${1:-}"
+EXIT_CODE=0
 
 # Extract resource names from resource files (excluding tests)
 all_resources=$(ls "$PROVIDER_DIR"/resource_*.go 2>/dev/null \
@@ -41,6 +43,41 @@ count_untested_core=$(echo "$untested_core" | grep -c . || echo 0)
 count_untested_wf=$(echo "$untested_workflow_tasks" | grep -c . || echo 0)
 count_untested_ds=$(echo "$untested_datasources" | grep -c . || echo 0)
 
+# --- New resource gate: fail if PR adds a resource without a test ---
+if [ -n "$BASE_REF" ]; then
+  echo "Checking for new resources without tests (base: $BASE_REF)..."
+  echo ""
+
+  # Resources added in this branch that don't exist in base
+  base_resources=$(git show "$BASE_REF":provider/ 2>/dev/null \
+    | grep '^resource_' | grep -v '_test\.go$' \
+    | sed 's|resource_||;s|\.go$||' \
+    | sort -u || true)
+
+  new_resources=$(comm -23 <(echo "$all_resources") <(echo "$base_resources"))
+  new_untested=""
+
+  if [ -n "$new_resources" ]; then
+    for r in $new_resources; do
+      if ! echo "$tested_resources" | grep -qx "$r"; then
+        new_untested="${new_untested}${r}\n"
+      fi
+    done
+  fi
+
+  if [ -n "$new_untested" ]; then
+    count_new_untested=$(printf "$new_untested" | grep -c . || echo 0)
+    echo "❌ New resources added without tests ($count_new_untested):"
+    printf "$new_untested" | sed 's/^/   /'
+    echo ""
+    EXIT_CODE=1
+  else
+    echo "✅ All new resources have tests."
+    echo ""
+  fi
+fi
+
+# --- Coverage report ---
 echo "Checking test coverage..."
 echo ""
 
@@ -69,3 +106,5 @@ echo "   Resources:    $total_tested_resources/$total_resources tested ($resourc
 echo "   Data sources: $total_tested_datasources/$total_datasources tested ($ds_pct%)"
 echo "   Core resources missing: $count_untested_core"
 echo "   Workflow tasks missing: $count_untested_wf"
+
+exit $EXIT_CODE
