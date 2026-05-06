@@ -447,8 +447,8 @@ __metadata:
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
     inflect: "npm:^0.5.0"
-    tsx: "npm:^4.21.0"
-    typescript: "npm:^6.0.0"
+    tsx: "npm:4.21.0"
+    typescript: "npm:6.0.3"
   languageName: unknown
   linkType: soft
 
@@ -484,7 +484,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsx@npm:^4.21.0":
+"tsx@npm:4.21.0":
   version: 4.21.0
   resolution: "tsx@npm:4.21.0"
   dependencies:
@@ -500,7 +500,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^6.0.0":
+"typescript@npm:6.0.3":
   version: 6.0.3
   resolution: "typescript@npm:6.0.3"
   bin:
@@ -510,7 +510,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^6.0.0#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A6.0.3#optional!builtin<compat/typescript>":
   version: 6.0.3
   resolution: "typescript@patch:typescript@npm%3A6.0.3#optional!builtin<compat/typescript>::version=6.0.3&hash=5786d5"
   bin:
