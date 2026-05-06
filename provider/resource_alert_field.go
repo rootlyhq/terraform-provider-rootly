@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 )
 
@@ -92,7 +93,7 @@ func resourceAlertFieldRead(ctx context.Context, d *schema.ResourceData, meta in
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading AlertField: %s", d.Id()))
 
-	item, err := c.GetAlertField(d.Id())
+	item, err := c.GetAlertField(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -128,7 +129,7 @@ func resourceAlertFieldUpdate(ctx context.Context, d *schema.ResourceData, meta 
 		s.Kind = d.Get("kind").(string)
 	}
 
-	_, err := c.UpdateAlertField(d.Id(), s)
+	_, err := c.UpdateAlertField(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating alert_field: %s", err.Error())
 	}
@@ -140,7 +141,7 @@ func resourceAlertFieldDelete(ctx context.Context, d *schema.ResourceData, meta 
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting AlertField: %s", d.Id()))
 
-	err := c.DeleteAlertField(d.Id())
+	err := c.DeleteAlertField(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

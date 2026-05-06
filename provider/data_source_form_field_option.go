@@ -7,6 +7,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
@@ -58,7 +59,7 @@ func dataSourceFormFieldOptionRead(ctx context.Context, d *schema.ResourceData, 
 	}
 
 	form_field_id := d.Get("form_field_id").(string)
-	items, err := c.ListFormFieldOptions(form_field_id, params)
+	items, err := c.ListFormFieldOptions(rootlygo_.ID(form_field_id), params)
 	if err != nil {
 		return diag.FromErr(err)
 	}

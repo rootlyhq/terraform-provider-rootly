@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -18,8 +19,8 @@ type FormSetCondition struct {
 	Values      []interface{} `jsonapi:"attr,values,omitempty"`
 }
 
-func (c *Client) ListFormSetConditions(id string, params *rootlygo.ListFormSetConditionsParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListFormSetConditionsRequest(c.Rootly.Server, id, params)
+func (c *Client) ListFormSetConditions(id rootlygo_.ID, params *rootlygo.ListFormSetConditionsParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListFormSetConditionsRequest(c.Rootly.Server, id.String(), params)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -62,8 +63,8 @@ func (c *Client) CreateFormSetCondition(d *FormSetCondition) (*FormSetCondition,
 	return data.(*FormSetCondition), nil
 }
 
-func (c *Client) GetFormSetCondition(id string) (*FormSetCondition, error) {
-	req, err := rootlygo.NewGetFormSetConditionRequest(c.Rootly.Server, id)
+func (c *Client) GetFormSetCondition(id rootlygo_.ID) (*FormSetCondition, error) {
+	req, err := rootlygo.NewGetFormSetConditionRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -82,13 +83,13 @@ func (c *Client) GetFormSetCondition(id string) (*FormSetCondition, error) {
 	return data.(*FormSetCondition), nil
 }
 
-func (c *Client) UpdateFormSetCondition(id string, form_set_condition *FormSetCondition) (*FormSetCondition, error) {
+func (c *Client) UpdateFormSetCondition(id rootlygo_.ID, form_set_condition *FormSetCondition) (*FormSetCondition, error) {
 	buffer, err := MarshalData(form_set_condition)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling form_set_condition: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateFormSetConditionRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateFormSetConditionRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -106,8 +107,8 @@ func (c *Client) UpdateFormSetCondition(id string, form_set_condition *FormSetCo
 	return data.(*FormSetCondition), nil
 }
 
-func (c *Client) DeleteFormSetCondition(id string) error {
-	req, err := rootlygo.NewDeleteFormSetConditionRequest(c.Rootly.Server, id)
+func (c *Client) DeleteFormSetCondition(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteFormSetConditionRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

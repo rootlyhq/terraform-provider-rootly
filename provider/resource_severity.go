@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -237,7 +238,7 @@ func resourceSeverityRead(ctx context.Context, d *schema.ResourceData, meta inte
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading Severity: %s", d.Id()))
 
-	item, err := c.GetSeverity(d.Id())
+	item, err := c.GetSeverity(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -348,7 +349,7 @@ func resourceSeverityUpdate(ctx context.Context, d *schema.ResourceData, meta in
 		}
 	}
 
-	_, err := c.UpdateSeverity(d.Id(), s)
+	_, err := c.UpdateSeverity(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating severity: %s", err.Error())
 	}
@@ -360,7 +361,7 @@ func resourceSeverityDelete(ctx context.Context, d *schema.ResourceData, meta in
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting Severity: %s", d.Id()))
 
-	err := c.DeleteSeverity(d.Id())
+	err := c.DeleteSeverity(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

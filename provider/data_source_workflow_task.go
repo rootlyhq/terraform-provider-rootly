@@ -5,6 +5,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
@@ -57,7 +58,7 @@ func dataSourceWorkflowTaskRead(ctx context.Context, d *schema.ResourceData, met
 
 	workflow_id := d.Get("workflow_id").(string)
 
-	items, err := c.ListWorkflowTasks(workflow_id, params)
+	items, err := c.ListWorkflowTasks(rootlygo_.ID(workflow_id), params)
 	if err != nil {
 		return diag.FromErr(err)
 	}

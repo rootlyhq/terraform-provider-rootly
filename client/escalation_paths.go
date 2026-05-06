@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -29,8 +30,8 @@ type EscalationPath struct {
 	TimeRestrictions        []interface{} `jsonapi:"attr,time_restrictions,omitempty"`
 }
 
-func (c *Client) ListEscalationPaths(id string, params *rootlygo.ListEscalationPathsParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListEscalationPathsRequest(c.Rootly.Server, id, params)
+func (c *Client) ListEscalationPaths(id rootlygo_.ID, params *rootlygo.ListEscalationPathsParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListEscalationPathsRequest(c.Rootly.Server, id.String(), params)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -73,8 +74,8 @@ func (c *Client) CreateEscalationPath(d *EscalationPath) (*EscalationPath, error
 	return data.(*EscalationPath), nil
 }
 
-func (c *Client) GetEscalationPath(id string) (*EscalationPath, error) {
-	req, err := rootlygo.NewGetEscalationPathRequest(c.Rootly.Server, id, nil)
+func (c *Client) GetEscalationPath(id rootlygo_.ID) (*EscalationPath, error) {
+	req, err := rootlygo.NewGetEscalationPathRequest(c.Rootly.Server, id.String(), nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -93,13 +94,13 @@ func (c *Client) GetEscalationPath(id string) (*EscalationPath, error) {
 	return data.(*EscalationPath), nil
 }
 
-func (c *Client) UpdateEscalationPath(id string, escalation_path *EscalationPath) (*EscalationPath, error) {
+func (c *Client) UpdateEscalationPath(id rootlygo_.ID, escalation_path *EscalationPath) (*EscalationPath, error) {
 	buffer, err := MarshalData(escalation_path)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling escalation_path: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateEscalationPathRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateEscalationPathRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -117,8 +118,8 @@ func (c *Client) UpdateEscalationPath(id string, escalation_path *EscalationPath
 	return data.(*EscalationPath), nil
 }
 
-func (c *Client) DeleteEscalationPath(id string) error {
-	req, err := rootlygo.NewDeleteEscalationPathRequest(c.Rootly.Server, id)
+func (c *Client) DeleteEscalationPath(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteEscalationPathRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -60,8 +61,8 @@ func (c *Client) CreateSecret(d *Secret) (*Secret, error) {
 	return data.(*Secret), nil
 }
 
-func (c *Client) GetSecret(id string) (*Secret, error) {
-	req, err := rootlygo.NewGetSecretRequest(c.Rootly.Server, id)
+func (c *Client) GetSecret(id rootlygo_.ID) (*Secret, error) {
+	req, err := rootlygo.NewGetSecretRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -79,13 +80,13 @@ func (c *Client) GetSecret(id string) (*Secret, error) {
 	return data.(*Secret), nil
 }
 
-func (c *Client) UpdateSecret(id string, secret *Secret) (*Secret, error) {
+func (c *Client) UpdateSecret(id rootlygo_.ID, secret *Secret) (*Secret, error) {
 	buffer, err := MarshalData(secret)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling secret: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateSecretRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateSecretRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -102,8 +103,8 @@ func (c *Client) UpdateSecret(id string, secret *Secret) (*Secret, error) {
 	return data.(*Secret), nil
 }
 
-func (c *Client) DeleteSecret(id string) error {
-	req, err := rootlygo.NewDeleteSecretRequest(c.Rootly.Server, id)
+func (c *Client) DeleteSecret(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteSecretRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

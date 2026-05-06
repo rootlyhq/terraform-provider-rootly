@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -19,8 +20,8 @@ type WorkflowTask struct {
 	TaskParams    map[string]interface{} `jsonapi:"attr,task_params,omitempty"`
 }
 
-func (c *Client) ListWorkflowTasks(workflowId string, params *rootlygo.ListWorkflowTasksParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListWorkflowTasksRequest(c.Rootly.Server, workflowId, params)
+func (c *Client) ListWorkflowTasks(workflowId rootlygo_.ID, params *rootlygo.ListWorkflowTasksParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListWorkflowTasksRequest(c.Rootly.Server, workflowId.String(), params)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -61,8 +62,8 @@ func (c *Client) CreateWorkflowTask(i *WorkflowTask) (*WorkflowTask, error) {
 	return data.(*WorkflowTask), nil
 }
 
-func (c *Client) GetWorkflowTask(id string) (*WorkflowTask, error) {
-	req, err := rootlygo.NewGetWorkflowTaskRequest(c.Rootly.Server, id)
+func (c *Client) GetWorkflowTask(id rootlygo_.ID) (*WorkflowTask, error) {
+	req, err := rootlygo.NewGetWorkflowTaskRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -80,13 +81,13 @@ func (c *Client) GetWorkflowTask(id string) (*WorkflowTask, error) {
 	return data.(*WorkflowTask), nil
 }
 
-func (c *Client) UpdateWorkflowTask(id string, i *WorkflowTask) (*WorkflowTask, error) {
+func (c *Client) UpdateWorkflowTask(id rootlygo_.ID, i *WorkflowTask) (*WorkflowTask, error) {
 	buffer, err := MarshalData(i)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling workflow_task: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateWorkflowTaskRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateWorkflowTaskRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -103,8 +104,8 @@ func (c *Client) UpdateWorkflowTask(id string, i *WorkflowTask) (*WorkflowTask, 
 	return data.(*WorkflowTask), nil
 }
 
-func (c *Client) DeleteWorkflowTask(id string) error {
-	req, err := rootlygo.NewDeleteWorkflowTaskRequest(c.Rootly.Server, id)
+func (c *Client) DeleteWorkflowTask(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteWorkflowTaskRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

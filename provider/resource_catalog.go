@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 )
 
@@ -108,7 +109,7 @@ func resourceCatalogRead(ctx context.Context, d *schema.ResourceData, meta inter
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading Catalog: %s", d.Id()))
 
-	item, err := c.GetCatalog(d.Id())
+	item, err := c.GetCatalog(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -148,7 +149,7 @@ func resourceCatalogUpdate(ctx context.Context, d *schema.ResourceData, meta int
 		s.Position = d.Get("position").(int)
 	}
 
-	_, err := c.UpdateCatalog(d.Id(), s)
+	_, err := c.UpdateCatalog(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating catalog: %s", err.Error())
 	}
@@ -160,7 +161,7 @@ func resourceCatalogDelete(ctx context.Context, d *schema.ResourceData, meta int
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting Catalog: %s", d.Id()))
 
-	err := c.DeleteCatalog(d.Id())
+	err := c.DeleteCatalog(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

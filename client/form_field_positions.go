@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -17,8 +18,8 @@ type FormFieldPosition struct {
 	Position    int    `jsonapi:"attr,position,omitempty"`
 }
 
-func (c *Client) ListFormFieldPositions(id string, params *rootlygo.ListFormFieldPositionsParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListFormFieldPositionsRequest(c.Rootly.Server, id, params)
+func (c *Client) ListFormFieldPositions(id rootlygo_.ID, params *rootlygo.ListFormFieldPositionsParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListFormFieldPositionsRequest(c.Rootly.Server, id.String(), params)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -61,8 +62,8 @@ func (c *Client) CreateFormFieldPosition(d *FormFieldPosition) (*FormFieldPositi
 	return data.(*FormFieldPosition), nil
 }
 
-func (c *Client) GetFormFieldPosition(id string) (*FormFieldPosition, error) {
-	req, err := rootlygo.NewGetFormFieldPositionRequest(c.Rootly.Server, id)
+func (c *Client) GetFormFieldPosition(id rootlygo_.ID) (*FormFieldPosition, error) {
+	req, err := rootlygo.NewGetFormFieldPositionRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -81,13 +82,13 @@ func (c *Client) GetFormFieldPosition(id string) (*FormFieldPosition, error) {
 	return data.(*FormFieldPosition), nil
 }
 
-func (c *Client) UpdateFormFieldPosition(id string, form_field_position *FormFieldPosition) (*FormFieldPosition, error) {
+func (c *Client) UpdateFormFieldPosition(id rootlygo_.ID, form_field_position *FormFieldPosition) (*FormFieldPosition, error) {
 	buffer, err := MarshalData(form_field_position)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling form_field_position: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateFormFieldPositionRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateFormFieldPositionRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -105,8 +106,8 @@ func (c *Client) UpdateFormFieldPosition(id string, form_field_position *FormFie
 	return data.(*FormFieldPosition), nil
 }
 
-func (c *Client) DeleteFormFieldPosition(id string) error {
-	req, err := rootlygo.NewDeleteFormFieldPositionRequest(c.Rootly.Server, id)
+func (c *Client) DeleteFormFieldPosition(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteFormFieldPositionRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 )
 
@@ -106,7 +107,7 @@ func resourceCommunicationsStageRead(ctx context.Context, d *schema.ResourceData
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading CommunicationsStage: %s", d.Id()))
 
-	item, err := c.GetCommunicationsStage(d.Id())
+	item, err := c.GetCommunicationsStage(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -146,7 +147,7 @@ func resourceCommunicationsStageUpdate(ctx context.Context, d *schema.ResourceDa
 		s.Position = d.Get("position").(int)
 	}
 
-	_, err := c.UpdateCommunicationsStage(d.Id(), s)
+	_, err := c.UpdateCommunicationsStage(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating communications_stage: %s", err.Error())
 	}
@@ -158,7 +159,7 @@ func resourceCommunicationsStageDelete(ctx context.Context, d *schema.ResourceDa
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting CommunicationsStage: %s", d.Id()))
 
-	err := c.DeleteCommunicationsStage(d.Id())
+	err := c.DeleteCommunicationsStage(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

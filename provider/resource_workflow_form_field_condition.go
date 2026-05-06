@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -275,7 +276,7 @@ func resourceWorkflowFormFieldConditionRead(ctx context.Context, d *schema.Resou
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading WorkflowFormFieldCondition: %s", d.Id()))
 
-	item, err := c.GetWorkflowFormFieldCondition(d.Id())
+	item, err := c.GetWorkflowFormFieldCondition(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -401,7 +402,7 @@ func resourceWorkflowFormFieldConditionUpdate(ctx context.Context, d *schema.Res
 		}
 	}
 
-	_, err := c.UpdateWorkflowFormFieldCondition(d.Id(), s)
+	_, err := c.UpdateWorkflowFormFieldCondition(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating workflow_form_field_condition: %s", err.Error())
 	}
@@ -413,7 +414,7 @@ func resourceWorkflowFormFieldConditionDelete(ctx context.Context, d *schema.Res
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting WorkflowFormFieldCondition: %s", d.Id()))
 
-	err := c.DeleteWorkflowFormFieldCondition(d.Id())
+	err := c.DeleteWorkflowFormFieldCondition(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

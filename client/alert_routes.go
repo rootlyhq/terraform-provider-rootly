@@ -10,6 +10,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -67,8 +68,8 @@ func (c *Client) CreateAlertRoute(d *AlertRoute) (*AlertRoute, error) {
 	return data.(*AlertRoute), nil
 }
 
-func (c *Client) GetAlertRoute(id string) (*AlertRoute, error) {
-	req, err := rootlygo.NewGetAlertRouteRequest(c.Rootly.Server, id)
+func (c *Client) GetAlertRoute(id rootlygo_.ID) (*AlertRoute, error) {
+	req, err := rootlygo.NewGetAlertRouteRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -87,13 +88,13 @@ func (c *Client) GetAlertRoute(id string) (*AlertRoute, error) {
 	return data.(*AlertRoute), nil
 }
 
-func (c *Client) UpdateAlertRoute(id string, alert_route *AlertRoute) (*AlertRoute, error) {
+func (c *Client) UpdateAlertRoute(id rootlygo_.ID, alert_route *AlertRoute) (*AlertRoute, error) {
 	buffer, err := MarshalData(alert_route)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling alert_route: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateAlertRouteRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateAlertRouteRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -111,8 +112,8 @@ func (c *Client) UpdateAlertRoute(id string, alert_route *AlertRoute) (*AlertRou
 	return data.(*AlertRoute), nil
 }
 
-func (c *Client) DeleteAlertRoute(id string) error {
-	req, err := rootlygo.NewDeleteAlertRouteRequest(c.Rootly.Server, id)
+func (c *Client) DeleteAlertRoute(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteAlertRouteRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

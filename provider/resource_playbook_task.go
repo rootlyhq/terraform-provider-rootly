@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 )
 
@@ -106,7 +107,7 @@ func resourcePlaybookTaskRead(ctx context.Context, d *schema.ResourceData, meta 
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading PlaybookTask: %s", d.Id()))
 
-	item, err := c.GetPlaybookTask(d.Id())
+	item, err := c.GetPlaybookTask(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -146,7 +147,7 @@ func resourcePlaybookTaskUpdate(ctx context.Context, d *schema.ResourceData, met
 		s.Position = d.Get("position").(int)
 	}
 
-	_, err := c.UpdatePlaybookTask(d.Id(), s)
+	_, err := c.UpdatePlaybookTask(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating playbook_task: %s", err.Error())
 	}
@@ -158,7 +159,7 @@ func resourcePlaybookTaskDelete(ctx context.Context, d *schema.ResourceData, met
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting PlaybookTask: %s", d.Id()))
 
-	err := c.DeletePlaybookTask(d.Id())
+	err := c.DeletePlaybookTask(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

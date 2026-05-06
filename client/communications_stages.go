@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -62,8 +63,8 @@ func (c *Client) CreateCommunicationsStage(d *CommunicationsStage) (*Communicati
 	return data.(*CommunicationsStage), nil
 }
 
-func (c *Client) GetCommunicationsStage(id string) (*CommunicationsStage, error) {
-	req, err := rootlygo.NewGetCommunicationsStageRequest(c.Rootly.Server, id)
+func (c *Client) GetCommunicationsStage(id rootlygo_.ID) (*CommunicationsStage, error) {
+	req, err := rootlygo.NewGetCommunicationsStageRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -82,13 +83,13 @@ func (c *Client) GetCommunicationsStage(id string) (*CommunicationsStage, error)
 	return data.(*CommunicationsStage), nil
 }
 
-func (c *Client) UpdateCommunicationsStage(id string, communications_stage *CommunicationsStage) (*CommunicationsStage, error) {
+func (c *Client) UpdateCommunicationsStage(id rootlygo_.ID, communications_stage *CommunicationsStage) (*CommunicationsStage, error) {
 	buffer, err := MarshalData(communications_stage)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling communications_stage: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateCommunicationsStageRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateCommunicationsStageRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -106,8 +107,8 @@ func (c *Client) UpdateCommunicationsStage(id string, communications_stage *Comm
 	return data.(*CommunicationsStage), nil
 }
 
-func (c *Client) DeleteCommunicationsStage(id string) error {
-	req, err := rootlygo.NewDeleteCommunicationsStageRequest(c.Rootly.Server, id)
+func (c *Client) DeleteCommunicationsStage(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteCommunicationsStageRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

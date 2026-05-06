@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -67,8 +68,8 @@ func (c *Client) CreateEnvironment(d *Environment) (*Environment, error) {
 	return data.(*Environment), nil
 }
 
-func (c *Client) GetEnvironment(id string) (*Environment, error) {
-	req, err := rootlygo.NewGetEnvironmentRequest(c.Rootly.Server, id)
+func (c *Client) GetEnvironment(id rootlygo_.ID) (*Environment, error) {
+	req, err := rootlygo.NewGetEnvironmentRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -87,13 +88,13 @@ func (c *Client) GetEnvironment(id string) (*Environment, error) {
 	return data.(*Environment), nil
 }
 
-func (c *Client) UpdateEnvironment(id string, environment *Environment) (*Environment, error) {
+func (c *Client) UpdateEnvironment(id rootlygo_.ID, environment *Environment) (*Environment, error) {
 	buffer, err := MarshalData(environment)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling environment: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateEnvironmentRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateEnvironmentRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -111,8 +112,8 @@ func (c *Client) UpdateEnvironment(id string, environment *Environment) (*Enviro
 	return data.(*Environment), nil
 }
 
-func (c *Client) DeleteEnvironment(id string) error {
-	req, err := rootlygo.NewDeleteEnvironmentRequest(c.Rootly.Server, id)
+func (c *Client) DeleteEnvironment(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteEnvironmentRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

@@ -13,6 +13,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -711,7 +712,7 @@ func resourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, meta 
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading AlertsSource: %s", d.Id()))
 
-	item, err := c.GetAlertsSource(d.Id())
+	item, err := c.GetAlertsSource(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -936,7 +937,7 @@ func resourceAlertsSourceUpdate(ctx context.Context, d *schema.ResourceData, met
 		s.WebhookEndpoint = d.Get("webhook_endpoint").(string)
 	}
 
-	_, err := c.UpdateAlertsSource(d.Id(), s)
+	_, err := c.UpdateAlertsSource(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating alerts_source: %s", err.Error())
 	}
@@ -948,7 +949,7 @@ func resourceAlertsSourceDelete(ctx context.Context, d *schema.ResourceData, met
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting AlertsSource: %s", d.Id()))
 
-	err := c.DeleteAlertsSource(d.Id())
+	err := c.DeleteAlertsSource(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

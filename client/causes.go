@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -63,8 +64,8 @@ func (c *Client) CreateCause(d *Cause) (*Cause, error) {
 	return data.(*Cause), nil
 }
 
-func (c *Client) GetCause(id string) (*Cause, error) {
-	req, err := rootlygo.NewGetCauseRequest(c.Rootly.Server, id)
+func (c *Client) GetCause(id rootlygo_.ID) (*Cause, error) {
+	req, err := rootlygo.NewGetCauseRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -83,13 +84,13 @@ func (c *Client) GetCause(id string) (*Cause, error) {
 	return data.(*Cause), nil
 }
 
-func (c *Client) UpdateCause(id string, cause *Cause) (*Cause, error) {
+func (c *Client) UpdateCause(id rootlygo_.ID, cause *Cause) (*Cause, error) {
 	buffer, err := MarshalData(cause)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling cause: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateCauseRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateCauseRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -107,8 +108,8 @@ func (c *Client) UpdateCause(id string, cause *Cause) (*Cause, error) {
 	return data.(*Cause), nil
 }
 
-func (c *Client) DeleteCause(id string) error {
-	req, err := rootlygo.NewDeleteCauseRequest(c.Rootly.Server, id)
+func (c *Client) DeleteCause(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteCauseRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

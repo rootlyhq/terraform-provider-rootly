@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -60,8 +61,8 @@ func (c *Client) CreateRetrospectiveProcess(d *RetrospectiveProcess) (*Retrospec
 	return data.(*RetrospectiveProcess), nil
 }
 
-func (c *Client) GetRetrospectiveProcess(id string) (*RetrospectiveProcess, error) {
-	req, err := rootlygo.NewGetRetrospectiveProcessRequest(c.Rootly.Server, id, nil)
+func (c *Client) GetRetrospectiveProcess(id rootlygo_.ID) (*RetrospectiveProcess, error) {
+	req, err := rootlygo.NewGetRetrospectiveProcessRequest(c.Rootly.Server, id.String(), nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -79,13 +80,13 @@ func (c *Client) GetRetrospectiveProcess(id string) (*RetrospectiveProcess, erro
 	return data.(*RetrospectiveProcess), nil
 }
 
-func (c *Client) UpdateRetrospectiveProcess(id string, retrospective_process *RetrospectiveProcess) (*RetrospectiveProcess, error) {
+func (c *Client) UpdateRetrospectiveProcess(id rootlygo_.ID, retrospective_process *RetrospectiveProcess) (*RetrospectiveProcess, error) {
 	buffer, err := MarshalData(retrospective_process)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling retrospective_process: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateRetrospectiveProcessRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateRetrospectiveProcessRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -102,8 +103,8 @@ func (c *Client) UpdateRetrospectiveProcess(id string, retrospective_process *Re
 	return data.(*RetrospectiveProcess), nil
 }
 
-func (c *Client) DeleteRetrospectiveProcess(id string) error {
-	req, err := rootlygo.NewDeleteRetrospectiveProcessRequest(c.Rootly.Server, id)
+func (c *Client) DeleteRetrospectiveProcess(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteRetrospectiveProcessRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

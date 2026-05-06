@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -166,7 +167,7 @@ func resourceFormFieldPlacementRead(ctx context.Context, d *schema.ResourceData,
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading FormFieldPlacement: %s", d.Id()))
 
-	item, err := c.GetFormFieldPlacement(d.Id())
+	item, err := c.GetFormFieldPlacement(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -222,7 +223,7 @@ func resourceFormFieldPlacementUpdate(ctx context.Context, d *schema.ResourceDat
 		s.NonEditable = tools.Bool(d.Get("non_editable").(bool))
 	}
 
-	_, err := c.UpdateFormFieldPlacement(d.Id(), s)
+	_, err := c.UpdateFormFieldPlacement(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating form_field_placement: %s", err.Error())
 	}
@@ -234,7 +235,7 @@ func resourceFormFieldPlacementDelete(ctx context.Context, d *schema.ResourceDat
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting FormFieldPlacement: %s", d.Id()))
 
-	err := c.DeleteFormFieldPlacement(d.Id())
+	err := c.DeleteFormFieldPlacement(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

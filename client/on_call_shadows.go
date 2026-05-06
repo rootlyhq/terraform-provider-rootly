@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -20,8 +21,8 @@ type OnCallShadow struct {
 	EndsAt         string `jsonapi:"attr,ends_at,omitempty"`
 }
 
-func (c *Client) ListOnCallShadows(id string, params *rootlygo.ListOnCallShadowsParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListOnCallShadowsRequest(c.Rootly.Server, id, params)
+func (c *Client) ListOnCallShadows(id rootlygo_.ID, params *rootlygo.ListOnCallShadowsParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListOnCallShadowsRequest(c.Rootly.Server, id.String(), params)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -64,8 +65,8 @@ func (c *Client) CreateOnCallShadow(d *OnCallShadow) (*OnCallShadow, error) {
 	return data.(*OnCallShadow), nil
 }
 
-func (c *Client) GetOnCallShadow(id string) (*OnCallShadow, error) {
-	req, err := rootlygo.NewGetOnCallShadowRequest(c.Rootly.Server, id)
+func (c *Client) GetOnCallShadow(id rootlygo_.ID) (*OnCallShadow, error) {
+	req, err := rootlygo.NewGetOnCallShadowRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -84,13 +85,13 @@ func (c *Client) GetOnCallShadow(id string) (*OnCallShadow, error) {
 	return data.(*OnCallShadow), nil
 }
 
-func (c *Client) UpdateOnCallShadow(id string, on_call_shadow *OnCallShadow) (*OnCallShadow, error) {
+func (c *Client) UpdateOnCallShadow(id rootlygo_.ID, on_call_shadow *OnCallShadow) (*OnCallShadow, error) {
 	buffer, err := MarshalData(on_call_shadow)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling on_call_shadow: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateOnCallShadowRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateOnCallShadowRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -108,8 +109,8 @@ func (c *Client) UpdateOnCallShadow(id string, on_call_shadow *OnCallShadow) (*O
 	return data.(*OnCallShadow), nil
 }
 
-func (c *Client) DeleteOnCallShadow(id string) error {
-	req, err := rootlygo.NewDeleteOnCallShadowRequest(c.Rootly.Server, id)
+func (c *Client) DeleteOnCallShadow(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteOnCallShadowRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

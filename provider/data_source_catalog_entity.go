@@ -5,6 +5,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/polling"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
@@ -66,7 +67,7 @@ func dataSourceCatalogEntityRead(ctx context.Context, d *schema.ResourceData, me
 	catalog_id := d.Get("catalog_id").(string)
 
 	items, err := polling.WaitForList(ctx, "catalog_entity", func() ([]interface{}, error) {
-		return c.ListCatalogEntities(catalog_id, params)
+		return c.ListCatalogEntities(rootlygo_.ID(catalog_id), params)
 	})
 	if err != nil {
 		return diag.FromErr(err)

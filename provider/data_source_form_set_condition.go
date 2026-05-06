@@ -7,6 +7,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
@@ -47,7 +48,7 @@ func dataSourceFormSetConditionRead(ctx context.Context, d *schema.ResourceData,
 	}
 
 	form_set_id := d.Get("form_set_id").(string)
-	items, err := c.ListFormSetConditions(form_set_id, params)
+	items, err := c.ListFormSetConditions(rootlygo_.ID(form_set_id), params)
 	if err != nil {
 		return diag.FromErr(err)
 	}

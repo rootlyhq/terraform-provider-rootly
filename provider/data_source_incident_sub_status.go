@@ -7,6 +7,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
@@ -65,7 +66,7 @@ func dataSourceIncidentSubStatusRead(ctx context.Context, d *schema.ResourceData
 	}
 
 	incident_id := d.Get("incident_id").(string)
-	items, err := c.ListIncidentSubStatuses(incident_id, params)
+	items, err := c.ListIncidentSubStatuses(rootlygo_.ID(incident_id), params)
 	if err != nil {
 		return diag.FromErr(err)
 	}
