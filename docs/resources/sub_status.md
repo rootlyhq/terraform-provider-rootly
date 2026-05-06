@@ -15,13 +15,13 @@ description: |-
 resource "rootly_sub_status" "investigating" {
   name          = "Investigating"
   parent_status = "started"
-  description   = "Team is investigating the issue"
+  description   = "Responders are investigating"
 }
 
-resource "rootly_sub_status" "fix_deployed" {
-  name          = "Fix Deployed"
-  parent_status = "resolved"
-  description   = "A fix has been deployed"
+resource "rootly_sub_status" "fix_in_progress" {
+  name          = "Fix In Progress"
+  parent_status = "started"
+  description   = "A fix is being implemented"
 }
 ```
 

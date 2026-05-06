@@ -1,4 +1,4 @@
-resource "rootly_alert_field" "region" {
-  label = "Region"
+resource "rootly_alert_field" "cloud_region" {
+  label = "Cloud Region"
   kind  = "select"
 }

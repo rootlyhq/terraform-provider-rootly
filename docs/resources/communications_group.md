@@ -12,7 +12,7 @@ description: |-
 ## Example Usage
 
 ```shell
-resource "rootly_communications_group" "stakeholders" {
+resource "rootly_communications_group" "executive_stakeholders" {
   name = "Executive Stakeholders"
 }
 ```

@@ -82,7 +82,7 @@ fi
 total_resources=$(echo "$resources" | wc -w)
 total_datasources=$(echo "$datasources" | wc -w)
 resources_with_examples=$((total_resources - ${#missing_resource_examples[@]}))
-resources_with_imports=$((total_resources - ${#missing_resource_imports[@]}))
+resources_with_imports=$((total_resources - ${#missing_resource_imports[@]} - ${#missing_resource_docs[@]}))
 
 echo "📊 Summary:"
 echo "   Resources:  $total_resources total, $((total_resources - ${#missing_resource_docs[@]})) with docs, $resources_with_imports with import section, $resources_with_examples with examples"

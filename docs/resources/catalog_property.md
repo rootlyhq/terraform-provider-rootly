@@ -12,9 +12,9 @@ description: |-
 ## Example Usage
 
 ```shell
-resource "rootly_catalog_property" "tier" {
-  catalog_id = rootly_catalog.services.id
-  name       = "Service Tier"
+resource "rootly_catalog_property" "support_level" {
+  catalog_id = rootly_catalog.customer_tier.id
+  name       = "Support Level"
   kind       = "select"
 }
 ```

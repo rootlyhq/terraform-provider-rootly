@@ -1,14 +1,13 @@
-resource "rootly_incident_role" "commander" {
+resource "rootly_incident_role" "incident_commander" {
   name        = "Incident Commander"
   summary     = "Leads the incident response"
-  description = "Responsible for coordinating the incident response effort"
+  description = "Coordinates response, delegates tasks, makes decisions"
   enabled     = true
 }
 
 resource "rootly_incident_role" "communications_lead" {
-  name        = "Communications Lead"
-  summary     = "Manages stakeholder communications"
-  description = "Responsible for internal and external communications during the incident"
-  optional    = true
-  enabled     = true
+  name     = "Communications Lead"
+  summary  = "Manages stakeholder communications"
+  optional = true
+  enabled  = true
 }

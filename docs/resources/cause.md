@@ -12,14 +12,14 @@ description: |-
 ## Example Usage
 
 ```shell
-resource "rootly_cause" "deployment" {
-  name        = "Deployment"
-  description = "Caused by a recent deployment"
+resource "rootly_cause" "bad_deploy" {
+  name        = "Bad Deploy"
+  description = "Incident caused by a faulty deployment"
 }
 
-resource "rootly_cause" "configuration_change" {
-  name        = "Configuration Change"
-  description = "Caused by a configuration change"
+resource "rootly_cause" "infrastructure_failure" {
+  name        = "Infrastructure Failure"
+  description = "Hardware or cloud provider issue"
 }
 ```
 

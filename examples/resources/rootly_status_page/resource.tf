@@ -6,6 +6,6 @@ resource "rootly_status_page" "public" {
   failure_message       = "Degraded Performance"
   show_uptime           = true
   show_uptime_last_days = 90
-  service_ids           = [rootly_service.api.id, rootly_service.web.id]
-  functionality_ids     = [rootly_functionality.payments.id]
+  service_ids           = [rootly_service.elasticsearch_prod.id]
+  functionality_ids     = [rootly_functionality.checkout.id]
 }
