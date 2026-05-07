@@ -30,7 +30,7 @@ func testAccResourceApiKeyConfig(name string) string {
 	return fmt.Sprintf(`
 resource "rootly_api_key" "test" {
 	name       = "%s"
-	expires_at = "2027-01-01T00:00:00Z"
+	expires_at = "2099-01-01T00:00:00Z"
 }
 `, name)
 }
