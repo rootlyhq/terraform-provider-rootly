@@ -23,7 +23,7 @@ func TestAccResourceAlertUrgency(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccResourceAlertUrgencyConfigUpdated(rName+"-updated"),
+				Config: testAccResourceAlertUrgencyConfigUpdated(rName + "-updated"),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_alert_urgency.test", "name", rName+"-updated"),
 					resource.TestCheckResourceAttr("rootly_alert_urgency.test", "description", "Updated urgency"),
