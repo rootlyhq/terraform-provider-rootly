@@ -58,6 +58,17 @@ func resourceCatalogEntity() *schema.Resource {
 				Description: "Default position of the item when displayed in a list.",
 			},
 
+			"backstage_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "The Backstage entity ID this catalog entity is linked to.",
+			},
+
 			"properties": &schema.Schema{
 				Type:             schema.TypeList,
 				Computed:         false,
@@ -126,6 +137,9 @@ func resourceCatalogEntityCreate(ctx context.Context, d *schema.ResourceData, me
 	if value, ok := d.GetOkExists("position"); ok {
 		s.Position = value.(int)
 	}
+	if value, ok := d.GetOkExists("backstage_id"); ok {
+		s.BackstageId = value.(string)
+	}
 	if value, ok := d.GetOkExists("properties"); ok {
 		s.Properties = value.([]interface{})
 	}
@@ -164,6 +178,7 @@ func resourceCatalogEntityRead(ctx context.Context, d *schema.ResourceData, meta
 	d.Set("name", item.Name)
 	d.Set("description", item.Description)
 	d.Set("position", item.Position)
+	d.Set("backstage_id", item.BackstageId)
 
 	if item.Properties != nil {
 		processed_items_properties := make([]map[string]interface{}, 0)
@@ -203,6 +218,9 @@ func resourceCatalogEntityUpdate(ctx context.Context, d *schema.ResourceData, me
 	}
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)
+	}
+	if d.HasChange("backstage_id") {
+		s.BackstageId = d.Get("backstage_id").(string)
 	}
 
 	if d.HasChange("properties") {
