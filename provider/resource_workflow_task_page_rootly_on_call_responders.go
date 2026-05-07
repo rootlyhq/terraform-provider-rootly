@@ -182,7 +182,7 @@ func resourceWorkflowTaskPageRootlyOnCallRespondersRead(ctx context.Context, d *
 	d.Set("skip_on_failure", res.SkipOnFailure)
 	d.Set("enabled", res.Enabled)
 	tps := make([]interface{}, 1, 1)
-	tps[0] = res.TaskParams
+	tps[0] = normalizePageRootlyOnCallRespondersTaskParams(res.TaskParams)
 	d.Set("task_params", tps)
 
 	return nil
@@ -236,4 +236,39 @@ func resourceWorkflowTaskPageRootlyOnCallRespondersDelete(ctx context.Context, d
 	d.SetId("")
 
 	return nil
+}
+
+func normalizePageRootlyOnCallRespondersTaskParams(taskParams map[string]interface{}) map[string]interface{} {
+	targetFields := map[string]struct{}{
+		"escalation_policy_target": {},
+		"service_target":           {},
+		"user_target":              {},
+		"group_target":             {},
+		"functionality_target":     {},
+	}
+
+	normalized := make(map[string]interface{})
+	for field, value := range taskParams {
+		if _, isTargetField := targetFields[field]; isTargetField && isEmptyWorkflowTaskTarget(value) {
+			continue
+		}
+		normalized[field] = value
+	}
+
+	return normalized
+}
+
+func isEmptyWorkflowTaskTarget(value interface{}) bool {
+	switch v := value.(type) {
+	case nil:
+		return true
+	case map[string]interface{}:
+		return len(v) == 0
+	case map[string]string:
+		return len(v) == 0
+	case map[interface{}]interface{}:
+		return len(v) == 0
+	default:
+		return false
+	}
 }

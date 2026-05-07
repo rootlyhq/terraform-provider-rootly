@@ -122,7 +122,10 @@ const excluded = {
     "workflow_alert", // cannot auto-generate because codegen doesn't handle nested objects in trigger_params (alert_payload_conditions requires complex nested schema)
     "workflow_run",
     "workflow_task",
-  ]
+  ],
+  workflowTaskResources: [
+    "page_rootly_on_call_responders", // manual change: Read normalizes target maps so UI drift is detected
+  ],
 }
 
 const readOnlyCollections = [
@@ -157,10 +160,11 @@ function main() {
     }
   } else {
     // Generate everything
-    generateProvider(resources(), workflowTaskResources(), dataSources())
+    const taskResources = workflowTaskResources()
+    generateProvider(resources(), taskResources, dataSources())
     generateClients()
     generateResources()
-    generateWorkflowTaskResources(workflowTaskResources(), swagger)
+    generateWorkflowTaskResources(generatedWorkflowTaskResources(taskResources), swagger)
     generateDataSources()
   }
 }
@@ -183,6 +187,10 @@ function workflowTaskResources() {
   return Object.keys(swagger.components.schemas)
     .filter((key) => key.match(/_task_params/))
     .map((key) => key.replace("_task_params", ""))
+}
+
+function generatedWorkflowTaskResources(taskResources) {
+  return taskResources.filter((name) => !excluded.workflowTaskResources.includes(name))
 }
 
 function generateProvider(resources, taskResources, dataSources) {
