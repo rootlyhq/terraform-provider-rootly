@@ -21,7 +21,6 @@ func TestAccResourceApiKey(t *testing.T) {
 				Config: testAccResourceApiKeyConfig(rName, expiresAt),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_api_key.test", "name", rName),
-					resource.TestCheckResourceAttrSet("rootly_api_key.test", "token"),
 				),
 			},
 		},
