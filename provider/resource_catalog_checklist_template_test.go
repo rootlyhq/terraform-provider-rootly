@@ -30,12 +30,11 @@ func testAccResourceCatalogChecklistTemplateConfig(catalogName, checklistName st
 	return fmt.Sprintf(`
 resource "rootly_catalog" "test" {
 	name = "%s"
-	kind = "service"
 }
 
 resource "rootly_catalog_checklist_template" "test" {
-	catalog_id = rootly_catalog.test.id
-	name       = "%s"
+	catalog_type = rootly_catalog.test.slug
+	name         = "%s"
 }
 `, catalogName, checklistName)
 }
