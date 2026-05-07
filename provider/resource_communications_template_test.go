@@ -36,7 +36,6 @@ resource "rootly_communications_type" "test" {
 resource "rootly_communications_template" "test" {
 	name                  = "%s"
 	communication_type_id = rootly_communications_type.test.id
-	body                  = "Incident {{ incident.title }} is {{ incident.status }}"
 }
 `, typeName, name)
 }
