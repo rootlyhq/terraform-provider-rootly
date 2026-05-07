@@ -20,6 +20,10 @@ func TestNormalizePageRootlyOnCallRespondersTaskParamsDropsEmptyTargets(t *testi
 			"name": "New Team",
 		},
 		"functionality_target": map[interface{}]interface{}{},
+		"future_api_field": map[string]interface{}{
+			"id":   "future-id",
+			"name": "Future Value",
+		},
 	}
 
 	got := normalizePageRootlyOnCallRespondersTaskParams(input)
@@ -32,6 +36,10 @@ func TestNormalizePageRootlyOnCallRespondersTaskParamsDropsEmptyTargets(t *testi
 		"group_target": map[string]interface{}{
 			"id":   "new-group-id",
 			"name": "New Team",
+		},
+		"future_api_field": map[string]interface{}{
+			"id":   "future-id",
+			"name": "Future Value",
 		},
 	}
 

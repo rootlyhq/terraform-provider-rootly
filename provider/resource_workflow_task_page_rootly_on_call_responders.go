@@ -247,26 +247,8 @@ func normalizePageRootlyOnCallRespondersTaskParams(taskParams map[string]interfa
 		"functionality_target":     {},
 	}
 
-	knownFields := []string{
-		"task_type",
-		"escalation_policy_target",
-		"service_target",
-		"user_target",
-		"group_target",
-		"functionality_target",
-		"alert_urgency_id",
-		"summary",
-		"description",
-		"escalation_note",
-	}
-
-	// Skip target fields that are empty
 	normalized := make(map[string]interface{})
-	for _, field := range knownFields {
-		value, ok := taskParams[field]
-		if !ok {
-			continue
-		}
+	for field, value := range taskParams {
 		if _, isTargetField := targetFields[field]; isTargetField && isEmptyWorkflowTaskTarget(value) {
 			continue
 		}
