@@ -29,7 +29,8 @@ func TestAccResourceCommunicationsTemplate(t *testing.T) {
 func testAccResourceCommunicationsTemplateConfig(name, typeName string) string {
 	return fmt.Sprintf(`
 resource "rootly_communications_type" "test" {
-	name = "%s"
+	name  = "%s"
+	color = "#047BF8"
 }
 
 resource "rootly_communications_template" "test" {
