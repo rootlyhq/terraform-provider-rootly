@@ -53,6 +53,12 @@ jobs:
       run: |
         scripts/lint-test-names.sh
 
+    - name: Check new resources have tests
+      if: github.event_name == 'pull_request'
+      run: |
+        git fetch origin ${{ github.base_ref }} --depth=1
+        scripts/lint-test-coverage.sh origin/${{ github.base_ref }}
+
   # run acceptance tests in a matrix with Terraform core versions
   test:
     name: Matrix Test
