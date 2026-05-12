@@ -6,6 +6,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/polling"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -95,14 +96,13 @@ func dataSourceScheduleRead(ctx context.Context, d *schema.ResourceData, meta in
 		params.FilterCreatedAtLt = &v
 	}
 
-	items, err := c.ListSchedules(params)
+	items, err := polling.WaitForList(ctx, "schedule", func() ([]interface{}, error) {
+		return c.ListSchedules(params)
+	})
 	if err != nil {
 		return diag.FromErr(err)
 	}
 
-	if len(items) == 0 {
-		return diag.Errorf("schedule not found")
-	}
 	item, _ := items[0].(*client.Schedule)
 
 	d.SetId(item.ID)
