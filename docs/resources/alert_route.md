@@ -174,7 +174,7 @@ Optional:
 Optional:
 
 - `target_id` (String) The ID of the target
-- `target_type` (String) The type of the target. Value must be one of `Service`, `Group`, `EscalationPolicy`.
+- `target_type` (String) The type of the target. Value must be one of `Service`, `Group`, `Functionality`, `EscalationPolicy`.
 
 ## Import
 
