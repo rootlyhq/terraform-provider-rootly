@@ -28,3 +28,11 @@ data "rootly_schedule" "my-schedule" {
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `include_shadows_in_slack_notifications` (Boolean)
+- `shift_report_day_of_week` (String)
+- `shift_report_enabled` (Boolean)
+- `shift_report_time_of_day` (String)
+- `shift_report_time_zone` (String)
+- `shift_start_notifications_enabled` (Boolean)
+- `shift_update_notifications_enabled` (Boolean)
+- `sync_linear_enabled` (Boolean)

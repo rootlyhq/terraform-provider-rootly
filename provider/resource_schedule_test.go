@@ -36,6 +36,14 @@ func TestAccResourceSchedule(t *testing.T) {
 							id = "456ABC"
 							name = "slack channel"
 						}
+						sync_linear_enabled                    = true
+						include_shadows_in_slack_notifications = true
+						shift_start_notifications_enabled      = true
+						shift_update_notifications_enabled     = true
+						shift_report_enabled                   = true
+						shift_report_day_of_week               = "tuesday"
+						shift_report_time_of_day               = "10:30"
+						shift_report_time_zone                 = "Australia/Sydney"
 					`,
 					RotationName: "test-initial",
 				}),
@@ -49,6 +57,14 @@ func TestAccResourceSchedule(t *testing.T) {
 					resource.TestCheckResourceAttr(resName, "slack_user_group.name", "slack user group"),
 					resource.TestCheckResourceAttr(resName, "slack_channel.id", "456ABC"),
 					resource.TestCheckResourceAttr(resName, "slack_channel.name", "slack channel"),
+					resource.TestCheckResourceAttr(resName, "sync_linear_enabled", "true"),
+					resource.TestCheckResourceAttr(resName, "include_shadows_in_slack_notifications", "true"),
+					resource.TestCheckResourceAttr(resName, "shift_start_notifications_enabled", "true"),
+					resource.TestCheckResourceAttr(resName, "shift_update_notifications_enabled", "true"),
+					resource.TestCheckResourceAttr(resName, "shift_report_enabled", "true"),
+					resource.TestCheckResourceAttr(resName, "shift_report_day_of_week", "tuesday"),
+					resource.TestCheckResourceAttr(resName, "shift_report_time_of_day", "10:30"),
+					resource.TestCheckResourceAttr(resName, "shift_report_time_zone", "Australia/Sydney"),
 					resource.TestCheckResourceAttr("rootly_schedule_rotation.tf", "name", "test-initial"),
 				),
 			},
@@ -59,8 +75,14 @@ func TestAccResourceSchedule(t *testing.T) {
 					OwnerGroupId:    "868f05dd-3c8f-4fe8-8aa7-6c4851b72c15",
 					OwnerUserId:     117092,
 					AllTimeCoverage: false,
-					Extras:          ``,
-					RotationName:    "test-updated",
+					Extras: `
+						sync_linear_enabled                    = false
+						include_shadows_in_slack_notifications = false
+						shift_start_notifications_enabled      = false
+						shift_update_notifications_enabled     = false
+						shift_report_enabled                   = false
+					`,
+					RotationName: "test-updated",
 				}),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckNoResourceAttr(resName, "slack_user_group.id"),
@@ -71,6 +93,11 @@ func TestAccResourceSchedule(t *testing.T) {
 					resource.TestCheckResourceAttr(resName, "slack_user_group.#", "0"),
 					resource.TestCheckResourceAttr(resName, "slack_channel.#", "0"),
 					resource.TestCheckResourceAttr(resName, "all_time_coverage", "false"),
+					resource.TestCheckResourceAttr(resName, "sync_linear_enabled", "false"),
+					resource.TestCheckResourceAttr(resName, "include_shadows_in_slack_notifications", "false"),
+					resource.TestCheckResourceAttr(resName, "shift_start_notifications_enabled", "false"),
+					resource.TestCheckResourceAttr(resName, "shift_update_notifications_enabled", "false"),
+					resource.TestCheckResourceAttr(resName, "shift_report_enabled", "false"),
 					resource.TestCheckResourceAttr("rootly_schedule_rotation.tf", "name", "test-updated"),
 				),
 			},
