@@ -14,6 +14,7 @@ import (
 	"strconv"
 	"fmt"
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -74,8 +75,8 @@ func (c *Client) Create${nameCamel}(d *${nameCamel}) (*${nameCamel}, error) {
 	return data.(*${nameCamel}), nil
 }
 
-func (c *Client) Get${nameCamel}(id string) (*${nameCamel}, error) {
-	req, err := rootlygo.NewGet${nameCamel}Request(c.Rootly.Server, id${hasIncludeParam ? ', nil' : ''})
+func (c *Client) Get${nameCamel}(id rootlygo_.ID) (*${nameCamel}, error) {
+	req, err := rootlygo.NewGet${nameCamel}Request(c.Rootly.Server, id.String()${hasIncludeParam ? ', nil' : ''})
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -94,13 +95,13 @@ func (c *Client) Get${nameCamel}(id string) (*${nameCamel}, error) {
 	return data.(*${nameCamel}), nil
 }
 
-func (c *Client) Update${nameCamel}(id string, ${name} *${nameCamel}) (*${nameCamel}, error) {
+func (c *Client) Update${nameCamel}(id rootlygo_.ID, ${name} *${nameCamel}) (*${nameCamel}, error) {
 	buffer, err := MarshalData(${name})
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling ${name}: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdate${nameCamel}RequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdate${nameCamel}RequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -118,8 +119,8 @@ func (c *Client) Update${nameCamel}(id string, ${name} *${nameCamel}) (*${nameCa
 	return data.(*${nameCamel}), nil
 }
 
-func (c *Client) Delete${nameCamel}(id string) error {
-	req, err := rootlygo.NewDelete${nameCamel}Request(c.Rootly.Server, id)
+func (c *Client) Delete${nameCamel}(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDelete${nameCamel}Request(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}
@@ -142,7 +143,7 @@ function clientJsonApiResourceType(name) {
 
 function listFnParams(nameCamelPlural, nested) {
   if (nested) {
-    return `id string, params *rootlygo.List${nameCamelPlural}Params`;
+    return `id rootlygo_.ID, params *rootlygo.List${nameCamelPlural}Params`;
   } else {
     return `params *rootlygo.List${nameCamelPlural}Params`;
   }
@@ -150,7 +151,7 @@ function listFnParams(nameCamelPlural, nested) {
 
 function listClientParams(nested) {
   if (nested) {
-    return `c.Rootly.Server, id, params`;
+    return `c.Rootly.Server, id.String(), params`;
   } else {
     return `c.Rootly.Server, params`;
   }
