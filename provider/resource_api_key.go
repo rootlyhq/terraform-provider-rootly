@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 )
 
@@ -164,7 +165,7 @@ func resourceApiKeyRead(ctx context.Context, d *schema.ResourceData, meta interf
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading ApiKey: %s", d.Id()))
 
-	item, err := c.GetApiKey(d.Id())
+	item, err := c.GetApiKey(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -220,7 +221,7 @@ func resourceApiKeyUpdate(ctx context.Context, d *schema.ResourceData, meta inte
 		s.GracePeriodEndsAt = d.Get("grace_period_ends_at").(string)
 	}
 
-	_, err := c.UpdateApiKey(d.Id(), s)
+	_, err := c.UpdateApiKey(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating api_key: %s", err.Error())
 	}
@@ -232,7 +233,7 @@ func resourceApiKeyDelete(ctx context.Context, d *schema.ResourceData, meta inte
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting ApiKey: %s", d.Id()))
 
-	err := c.DeleteApiKey(d.Id())
+	err := c.DeleteApiKey(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

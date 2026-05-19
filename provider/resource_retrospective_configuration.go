@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
@@ -109,7 +110,7 @@ func resourceRetrospectiveConfigurationCreate(ctx context.Context, d *schema.Res
 		item.IncidentTypeIds = value.([]interface{})
 	}
 
-	_, err = c.UpdateRetrospectiveConfiguration(d.Id(), item)
+	_, err = c.UpdateRetrospectiveConfiguration(rootlygo_.ID(d.Id()), item)
 	if err != nil {
 		return diag.Errorf("Error creating retrospective configuration: %s", err.Error())
 	}
@@ -121,7 +122,7 @@ func resourceRetrospectiveConfigurationRead(ctx context.Context, d *schema.Resou
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading RetrospectiveConfiguration: %s", d.Id()))
 
-	item, err := c.GetRetrospectiveConfiguration(d.Id())
+	item, err := c.GetRetrospectiveConfiguration(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -161,7 +162,7 @@ func resourceRetrospectiveConfigurationUpdate(ctx context.Context, d *schema.Res
 		s.IncidentTypeIds = d.Get("incident_type_ids").([]interface{})
 	}
 
-	_, err := c.UpdateRetrospectiveConfiguration(d.Id(), s)
+	_, err := c.UpdateRetrospectiveConfiguration(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating retrospective configuration: %s", err.Error())
 	}

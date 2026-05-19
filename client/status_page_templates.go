@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -23,8 +24,8 @@ type StatusPageTemplate struct {
 	Position                int    `jsonapi:"attr,position,omitempty"`
 }
 
-func (c *Client) ListStatusPageTemplates(id string, params *rootlygo.ListStatusPageTemplatesParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListStatusPageTemplatesRequest(c.Rootly.Server, id, params)
+func (c *Client) ListStatusPageTemplates(id rootlygo_.ID, params *rootlygo.ListStatusPageTemplatesParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListStatusPageTemplatesRequest(c.Rootly.Server, id.String(), params)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -67,8 +68,8 @@ func (c *Client) CreateStatusPageTemplate(d *StatusPageTemplate) (*StatusPageTem
 	return data.(*StatusPageTemplate), nil
 }
 
-func (c *Client) GetStatusPageTemplate(id string) (*StatusPageTemplate, error) {
-	req, err := rootlygo.NewGetStatusPageTemplateRequest(c.Rootly.Server, id)
+func (c *Client) GetStatusPageTemplate(id rootlygo_.ID) (*StatusPageTemplate, error) {
+	req, err := rootlygo.NewGetStatusPageTemplateRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -87,13 +88,13 @@ func (c *Client) GetStatusPageTemplate(id string) (*StatusPageTemplate, error) {
 	return data.(*StatusPageTemplate), nil
 }
 
-func (c *Client) UpdateStatusPageTemplate(id string, status_page_template *StatusPageTemplate) (*StatusPageTemplate, error) {
+func (c *Client) UpdateStatusPageTemplate(id rootlygo_.ID, status_page_template *StatusPageTemplate) (*StatusPageTemplate, error) {
 	buffer, err := MarshalData(status_page_template)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling status_page_template: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateStatusPageTemplateRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateStatusPageTemplateRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -111,8 +112,8 @@ func (c *Client) UpdateStatusPageTemplate(id string, status_page_template *Statu
 	return data.(*StatusPageTemplate), nil
 }
 
-func (c *Client) DeleteStatusPageTemplate(id string) error {
-	req, err := rootlygo.NewDeleteStatusPageTemplateRequest(c.Rootly.Server, id)
+func (c *Client) DeleteStatusPageTemplate(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteStatusPageTemplateRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

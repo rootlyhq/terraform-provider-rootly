@@ -5,6 +5,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -17,8 +18,8 @@ type OverrideShift struct {
 	UserId     int    `jsonapi:"attr,user_id,omitempty"`
 }
 
-func (c *Client) ListOverrideShifts(id string, params *rootlygo.ListOverrideShiftsParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListOverrideShiftsRequest(c.Rootly.Server, id, params)
+func (c *Client) ListOverrideShifts(id rootlygo_.ID, params *rootlygo.ListOverrideShiftsParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListOverrideShiftsRequest(c.Rootly.Server, id.String(), params)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -61,8 +62,8 @@ func (c *Client) CreateOverrideShift(d *OverrideShift) (*OverrideShift, error) {
 	return data.(*OverrideShift), nil
 }
 
-func (c *Client) GetOverrideShift(id string) (*OverrideShift, error) {
-	req, err := rootlygo.NewGetOverrideShiftRequest(c.Rootly.Server, id)
+func (c *Client) GetOverrideShift(id rootlygo_.ID) (*OverrideShift, error) {
+	req, err := rootlygo.NewGetOverrideShiftRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -81,13 +82,13 @@ func (c *Client) GetOverrideShift(id string) (*OverrideShift, error) {
 	return data.(*OverrideShift), nil
 }
 
-func (c *Client) UpdateOverrideShift(id string, override_shift *OverrideShift) (*OverrideShift, error) {
+func (c *Client) UpdateOverrideShift(id rootlygo_.ID, override_shift *OverrideShift) (*OverrideShift, error) {
 	buffer, err := MarshalData(override_shift)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling override_shift: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateOverrideShiftRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateOverrideShiftRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -105,8 +106,8 @@ func (c *Client) UpdateOverrideShift(id string, override_shift *OverrideShift) (
 	return data.(*OverrideShift), nil
 }
 
-func (c *Client) DeleteOverrideShift(id string) error {
-	req, err := rootlygo.NewDeleteOverrideShiftRequest(c.Rootly.Server, id)
+func (c *Client) DeleteOverrideShift(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteOverrideShiftRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

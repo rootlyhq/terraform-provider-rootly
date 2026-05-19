@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -65,8 +66,8 @@ func (c *Client) CreateCommunicationsTemplate(d *CommunicationsTemplate) (*Commu
 	return data.(*CommunicationsTemplate), nil
 }
 
-func (c *Client) GetCommunicationsTemplate(id string) (*CommunicationsTemplate, error) {
-	req, err := rootlygo.NewGetCommunicationsTemplateRequest(c.Rootly.Server, id)
+func (c *Client) GetCommunicationsTemplate(id rootlygo_.ID) (*CommunicationsTemplate, error) {
+	req, err := rootlygo.NewGetCommunicationsTemplateRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -85,13 +86,13 @@ func (c *Client) GetCommunicationsTemplate(id string) (*CommunicationsTemplate, 
 	return data.(*CommunicationsTemplate), nil
 }
 
-func (c *Client) UpdateCommunicationsTemplate(id string, communications_template *CommunicationsTemplate) (*CommunicationsTemplate, error) {
+func (c *Client) UpdateCommunicationsTemplate(id rootlygo_.ID, communications_template *CommunicationsTemplate) (*CommunicationsTemplate, error) {
 	buffer, err := MarshalData(communications_template)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling communications_template: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateCommunicationsTemplateRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateCommunicationsTemplateRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -109,8 +110,8 @@ func (c *Client) UpdateCommunicationsTemplate(id string, communications_template
 	return data.(*CommunicationsTemplate), nil
 }
 
-func (c *Client) DeleteCommunicationsTemplate(id string) error {
-	req, err := rootlygo.NewDeleteCommunicationsTemplateRequest(c.Rootly.Server, id)
+func (c *Client) DeleteCommunicationsTemplate(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteCommunicationsTemplateRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

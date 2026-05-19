@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -21,8 +22,8 @@ type EscalationLevel struct {
 	NotificationTargetParams                    []interface{} `jsonapi:"attr,notification_target_params,omitempty"`
 }
 
-func (c *Client) ListEscalationLevels(id string, params *rootlygo.ListEscalationLevelsParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListEscalationLevelsRequest(c.Rootly.Server, id, params)
+func (c *Client) ListEscalationLevels(id rootlygo_.ID, params *rootlygo.ListEscalationLevelsParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListEscalationLevelsRequest(c.Rootly.Server, id.String(), params)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -65,8 +66,8 @@ func (c *Client) CreateEscalationLevel(d *EscalationLevel) (*EscalationLevel, er
 	return data.(*EscalationLevel), nil
 }
 
-func (c *Client) GetEscalationLevel(id string) (*EscalationLevel, error) {
-	req, err := rootlygo.NewGetEscalationLevelRequest(c.Rootly.Server, id)
+func (c *Client) GetEscalationLevel(id rootlygo_.ID) (*EscalationLevel, error) {
+	req, err := rootlygo.NewGetEscalationLevelRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -85,13 +86,13 @@ func (c *Client) GetEscalationLevel(id string) (*EscalationLevel, error) {
 	return data.(*EscalationLevel), nil
 }
 
-func (c *Client) UpdateEscalationLevel(id string, escalation_level *EscalationLevel) (*EscalationLevel, error) {
+func (c *Client) UpdateEscalationLevel(id rootlygo_.ID, escalation_level *EscalationLevel) (*EscalationLevel, error) {
 	buffer, err := MarshalData(escalation_level)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling escalation_level: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateEscalationLevelRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateEscalationLevelRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -109,8 +110,8 @@ func (c *Client) UpdateEscalationLevel(id string, escalation_level *EscalationLe
 	return data.(*EscalationLevel), nil
 }
 
-func (c *Client) DeleteEscalationLevel(id string) error {
-	req, err := rootlygo.NewDeleteEscalationLevelRequest(c.Rootly.Server, id)
+func (c *Client) DeleteEscalationLevel(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteEscalationLevelRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

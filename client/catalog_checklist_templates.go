@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -66,8 +67,8 @@ func (c *Client) CreateCatalogChecklistTemplate(d *CatalogChecklistTemplate) (*C
 	return data.(*CatalogChecklistTemplate), nil
 }
 
-func (c *Client) GetCatalogChecklistTemplate(id string) (*CatalogChecklistTemplate, error) {
-	req, err := rootlygo.NewGetCatalogChecklistTemplateRequest(c.Rootly.Server, id)
+func (c *Client) GetCatalogChecklistTemplate(id rootlygo_.ID) (*CatalogChecklistTemplate, error) {
+	req, err := rootlygo.NewGetCatalogChecklistTemplateRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -86,13 +87,13 @@ func (c *Client) GetCatalogChecklistTemplate(id string) (*CatalogChecklistTempla
 	return data.(*CatalogChecklistTemplate), nil
 }
 
-func (c *Client) UpdateCatalogChecklistTemplate(id string, catalog_checklist_template *CatalogChecklistTemplate) (*CatalogChecklistTemplate, error) {
+func (c *Client) UpdateCatalogChecklistTemplate(id rootlygo_.ID, catalog_checklist_template *CatalogChecklistTemplate) (*CatalogChecklistTemplate, error) {
 	buffer, err := MarshalData(catalog_checklist_template)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling catalog_checklist_template: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateCatalogChecklistTemplateRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateCatalogChecklistTemplateRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -110,8 +111,8 @@ func (c *Client) UpdateCatalogChecklistTemplate(id string, catalog_checklist_tem
 	return data.(*CatalogChecklistTemplate), nil
 }
 
-func (c *Client) DeleteCatalogChecklistTemplate(id string) error {
-	req, err := rootlygo.NewDeleteCatalogChecklistTemplateRequest(c.Rootly.Server, id)
+func (c *Client) DeleteCatalogChecklistTemplate(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteCatalogChecklistTemplateRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

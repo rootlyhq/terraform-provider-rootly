@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -62,8 +63,8 @@ func (c *Client) CreateFormSet(d *FormSet) (*FormSet, error) {
 	return data.(*FormSet), nil
 }
 
-func (c *Client) GetFormSet(id string) (*FormSet, error) {
-	req, err := rootlygo.NewGetFormSetRequest(c.Rootly.Server, id)
+func (c *Client) GetFormSet(id rootlygo_.ID) (*FormSet, error) {
+	req, err := rootlygo.NewGetFormSetRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -82,13 +83,13 @@ func (c *Client) GetFormSet(id string) (*FormSet, error) {
 	return data.(*FormSet), nil
 }
 
-func (c *Client) UpdateFormSet(id string, form_set *FormSet) (*FormSet, error) {
+func (c *Client) UpdateFormSet(id rootlygo_.ID, form_set *FormSet) (*FormSet, error) {
 	buffer, err := MarshalData(form_set)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling form_set: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateFormSetRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateFormSetRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -106,8 +107,8 @@ func (c *Client) UpdateFormSet(id string, form_set *FormSet) (*FormSet, error) {
 	return data.(*FormSet), nil
 }
 
-func (c *Client) DeleteFormSet(id string) error {
-	req, err := rootlygo.NewDeleteFormSetRequest(c.Rootly.Server, id)
+func (c *Client) DeleteFormSet(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteFormSetRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

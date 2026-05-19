@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -572,7 +573,7 @@ func resourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading Team: %s", d.Id()))
 
-	item, err := c.GetTeam(d.Id())
+	item, err := c.GetTeam(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -810,7 +811,7 @@ func resourceTeamUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 		}
 	}
 
-	_, err := c.UpdateTeam(d.Id(), s)
+	_, err := c.UpdateTeam(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating team: %s", err.Error())
 	}
@@ -822,7 +823,7 @@ func resourceTeamDelete(ctx context.Context, d *schema.ResourceData, meta interf
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting Team: %s", d.Id()))
 
-	err := c.DeleteTeam(d.Id())
+	err := c.DeleteTeam(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

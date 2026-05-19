@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -20,8 +21,8 @@ type FormFieldOption struct {
 	Position    int    `jsonapi:"attr,position,omitempty"`
 }
 
-func (c *Client) ListFormFieldOptions(id string, params *rootlygo.ListFormFieldOptionsParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListFormFieldOptionsRequest(c.Rootly.Server, id, params)
+func (c *Client) ListFormFieldOptions(id rootlygo_.ID, params *rootlygo.ListFormFieldOptionsParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListFormFieldOptionsRequest(c.Rootly.Server, id.String(), params)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -64,8 +65,8 @@ func (c *Client) CreateFormFieldOption(d *FormFieldOption) (*FormFieldOption, er
 	return data.(*FormFieldOption), nil
 }
 
-func (c *Client) GetFormFieldOption(id string) (*FormFieldOption, error) {
-	req, err := rootlygo.NewGetFormFieldOptionRequest(c.Rootly.Server, id)
+func (c *Client) GetFormFieldOption(id rootlygo_.ID) (*FormFieldOption, error) {
+	req, err := rootlygo.NewGetFormFieldOptionRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -84,13 +85,13 @@ func (c *Client) GetFormFieldOption(id string) (*FormFieldOption, error) {
 	return data.(*FormFieldOption), nil
 }
 
-func (c *Client) UpdateFormFieldOption(id string, form_field_option *FormFieldOption) (*FormFieldOption, error) {
+func (c *Client) UpdateFormFieldOption(id rootlygo_.ID, form_field_option *FormFieldOption) (*FormFieldOption, error) {
 	buffer, err := MarshalData(form_field_option)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling form_field_option: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateFormFieldOptionRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateFormFieldOptionRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -108,8 +109,8 @@ func (c *Client) UpdateFormFieldOption(id string, form_field_option *FormFieldOp
 	return data.(*FormFieldOption), nil
 }
 
-func (c *Client) DeleteFormFieldOption(id string) error {
-	req, err := rootlygo.NewDeleteFormFieldOptionRequest(c.Rootly.Server, id)
+func (c *Client) DeleteFormFieldOption(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteFormFieldOptionRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

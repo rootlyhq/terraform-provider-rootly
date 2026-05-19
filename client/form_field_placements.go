@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -22,8 +23,8 @@ type FormFieldPlacement struct {
 	NonEditable       *bool  `jsonapi:"attr,non_editable,omitempty"`
 }
 
-func (c *Client) ListFormFieldPlacements(id string, params *rootlygo.ListFormFieldPlacementsParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListFormFieldPlacementsRequest(c.Rootly.Server, id, params)
+func (c *Client) ListFormFieldPlacements(id rootlygo_.ID, params *rootlygo.ListFormFieldPlacementsParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListFormFieldPlacementsRequest(c.Rootly.Server, id.String(), params)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -66,8 +67,8 @@ func (c *Client) CreateFormFieldPlacement(d *FormFieldPlacement) (*FormFieldPlac
 	return data.(*FormFieldPlacement), nil
 }
 
-func (c *Client) GetFormFieldPlacement(id string) (*FormFieldPlacement, error) {
-	req, err := rootlygo.NewGetFormFieldPlacementRequest(c.Rootly.Server, id)
+func (c *Client) GetFormFieldPlacement(id rootlygo_.ID) (*FormFieldPlacement, error) {
+	req, err := rootlygo.NewGetFormFieldPlacementRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -86,13 +87,13 @@ func (c *Client) GetFormFieldPlacement(id string) (*FormFieldPlacement, error) {
 	return data.(*FormFieldPlacement), nil
 }
 
-func (c *Client) UpdateFormFieldPlacement(id string, form_field_placement *FormFieldPlacement) (*FormFieldPlacement, error) {
+func (c *Client) UpdateFormFieldPlacement(id rootlygo_.ID, form_field_placement *FormFieldPlacement) (*FormFieldPlacement, error) {
 	buffer, err := MarshalData(form_field_placement)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling form_field_placement: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateFormFieldPlacementRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateFormFieldPlacementRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -110,8 +111,8 @@ func (c *Client) UpdateFormFieldPlacement(id string, form_field_placement *FormF
 	return data.(*FormFieldPlacement), nil
 }
 
-func (c *Client) DeleteFormFieldPlacement(id string) error {
-	req, err := rootlygo.NewDeleteFormFieldPlacementRequest(c.Rootly.Server, id)
+func (c *Client) DeleteFormFieldPlacement(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteFormFieldPlacementRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

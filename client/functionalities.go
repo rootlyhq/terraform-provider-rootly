@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -80,8 +81,8 @@ func (c *Client) CreateFunctionality(d *Functionality) (*Functionality, error) {
 	return data.(*Functionality), nil
 }
 
-func (c *Client) GetFunctionality(id string) (*Functionality, error) {
-	req, err := rootlygo.NewGetFunctionalityRequest(c.Rootly.Server, id)
+func (c *Client) GetFunctionality(id rootlygo_.ID) (*Functionality, error) {
+	req, err := rootlygo.NewGetFunctionalityRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -100,13 +101,13 @@ func (c *Client) GetFunctionality(id string) (*Functionality, error) {
 	return data.(*Functionality), nil
 }
 
-func (c *Client) UpdateFunctionality(id string, functionality *Functionality) (*Functionality, error) {
+func (c *Client) UpdateFunctionality(id rootlygo_.ID, functionality *Functionality) (*Functionality, error) {
 	buffer, err := MarshalData(functionality)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling functionality: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateFunctionalityRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateFunctionalityRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -124,8 +125,8 @@ func (c *Client) UpdateFunctionality(id string, functionality *Functionality) (*
 	return data.(*Functionality), nil
 }
 
-func (c *Client) DeleteFunctionality(id string) error {
-	req, err := rootlygo.NewDeleteFunctionalityRequest(c.Rootly.Server, id)
+func (c *Client) DeleteFunctionality(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteFunctionalityRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

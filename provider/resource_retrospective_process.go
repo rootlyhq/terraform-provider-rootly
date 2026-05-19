@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -154,7 +155,7 @@ func resourceRetrospectiveProcessRead(ctx context.Context, d *schema.ResourceDat
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading RetrospectiveProcess: %s", d.Id()))
 
-	item, err := c.GetRetrospectiveProcess(d.Id())
+	item, err := c.GetRetrospectiveProcess(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -205,7 +206,7 @@ func resourceRetrospectiveProcessUpdate(ctx context.Context, d *schema.ResourceD
 		}
 	}
 
-	_, err := c.UpdateRetrospectiveProcess(d.Id(), s)
+	_, err := c.UpdateRetrospectiveProcess(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating retrospective_process: %s", err.Error())
 	}
@@ -217,7 +218,7 @@ func resourceRetrospectiveProcessDelete(ctx context.Context, d *schema.ResourceD
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting RetrospectiveProcess: %s", d.Id()))
 
-	err := c.DeleteRetrospectiveProcess(d.Id())
+	err := c.DeleteRetrospectiveProcess(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

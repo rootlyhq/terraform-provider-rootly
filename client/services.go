@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -91,8 +92,8 @@ func (c *Client) CreateService(d *Service) (*Service, error) {
 	return data.(*Service), nil
 }
 
-func (c *Client) GetService(id string) (*Service, error) {
-	req, err := rootlygo.NewGetServiceRequest(c.Rootly.Server, id)
+func (c *Client) GetService(id rootlygo_.ID) (*Service, error) {
+	req, err := rootlygo.NewGetServiceRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -111,13 +112,13 @@ func (c *Client) GetService(id string) (*Service, error) {
 	return data.(*Service), nil
 }
 
-func (c *Client) UpdateService(id string, service *Service) (*Service, error) {
+func (c *Client) UpdateService(id rootlygo_.ID, service *Service) (*Service, error) {
 	buffer, err := MarshalData(service)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling service: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateServiceRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateServiceRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -135,8 +136,8 @@ func (c *Client) UpdateService(id string, service *Service) (*Service, error) {
 	return data.(*Service), nil
 }
 
-func (c *Client) DeleteService(id string) error {
-	req, err := rootlygo.NewDeleteServiceRequest(c.Rootly.Server, id)
+func (c *Client) DeleteService(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteServiceRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -151,7 +152,7 @@ func resourceWorkflowGroupRead(ctx context.Context, d *schema.ResourceData, meta
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading WorkflowGroup: %s", d.Id()))
 
-	item, err := c.GetWorkflowGroup(d.Id())
+	item, err := c.GetWorkflowGroup(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -203,7 +204,7 @@ func resourceWorkflowGroupUpdate(ctx context.Context, d *schema.ResourceData, me
 		s.Position = d.Get("position").(int)
 	}
 
-	_, err := c.UpdateWorkflowGroup(d.Id(), s)
+	_, err := c.UpdateWorkflowGroup(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating workflow_group: %s", err.Error())
 	}
@@ -215,7 +216,7 @@ func resourceWorkflowGroupDelete(ctx context.Context, d *schema.ResourceData, me
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting WorkflowGroup: %s", d.Id()))
 
-	err := c.DeleteWorkflowGroup(d.Id())
+	err := c.DeleteWorkflowGroup(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -460,7 +461,7 @@ func resourceFunctionalityRead(ctx context.Context, d *schema.ResourceData, meta
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading Functionality: %s", d.Id()))
 
-	item, err := c.GetFunctionality(d.Id())
+	item, err := c.GetFunctionality(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -668,7 +669,7 @@ func resourceFunctionalityUpdate(ctx context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	_, err := c.UpdateFunctionality(d.Id(), s)
+	_, err := c.UpdateFunctionality(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating functionality: %s", err.Error())
 	}
@@ -680,7 +681,7 @@ func resourceFunctionalityDelete(ctx context.Context, d *schema.ResourceData, me
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting Functionality: %s", d.Id()))
 
-	err := c.DeleteFunctionality(d.Id())
+	err := c.DeleteFunctionality(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -26,7 +27,7 @@ type CatalogProperty struct {
 // catalogPropertyCollectionPath returns the API path for listing/creating catalog properties
 // based on the catalog_type. For native types (service, team, etc.) the path is
 // /v1/{plural_type}/properties. For custom catalogs it is /v1/catalogs/{catalog_id}/properties.
-func catalogPropertyCollectionPath(catalogType string, catalogId string) (string, error) {
+func catalogPropertyCollectionPath(catalogType string, catalogId rootlygo_.ID) (string, error) {
 	switch catalogType {
 	case "service":
 		return "/v1/services/properties", nil
@@ -44,13 +45,13 @@ func catalogPropertyCollectionPath(catalogType string, catalogId string) (string
 		if catalogId == "" {
 			return "", fmt.Errorf("catalog_id is required when catalog_type is 'catalog'")
 		}
-		return fmt.Sprintf("/v1/catalogs/%s/properties", url.PathEscape(catalogId)), nil
+		return fmt.Sprintf("/v1/catalogs/%s/properties", url.PathEscape(catalogId.String())), nil
 	default:
 		return "", fmt.Errorf("unsupported catalog_type: %s", catalogType)
 	}
 }
 
-func (c *Client) ListCatalogProperties(catalogType string, catalogId string) ([]interface{}, error) {
+func (c *Client) ListCatalogProperties(catalogType string, catalogId rootlygo_.ID) ([]interface{}, error) {
 	collectionPath, err := catalogPropertyCollectionPath(catalogType, catalogId)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request path: %w", err)
@@ -92,7 +93,7 @@ func (c *Client) CreateCatalogProperty(d *CatalogProperty) (*CatalogProperty, er
 		return nil, fmt.Errorf("Error marshaling catalog_property: %w", err)
 	}
 
-	collectionPath, err := catalogPropertyCollectionPath(d.CatalogType, d.CatalogId)
+	collectionPath, err := catalogPropertyCollectionPath(d.CatalogType, rootlygo_.ID(d.CatalogId))
 	if err != nil {
 		return nil, fmt.Errorf("Error building request path: %w", err)
 	}
@@ -128,8 +129,8 @@ func (c *Client) CreateCatalogProperty(d *CatalogProperty) (*CatalogProperty, er
 	return data.(*CatalogProperty), nil
 }
 
-func (c *Client) GetCatalogProperty(id string) (*CatalogProperty, error) {
-	req, err := rootlygo.NewGetCatalogPropertyRequest(c.Rootly.Server, id)
+func (c *Client) GetCatalogProperty(id rootlygo_.ID) (*CatalogProperty, error) {
+	req, err := rootlygo.NewGetCatalogPropertyRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -148,13 +149,13 @@ func (c *Client) GetCatalogProperty(id string) (*CatalogProperty, error) {
 	return data.(*CatalogProperty), nil
 }
 
-func (c *Client) UpdateCatalogProperty(id string, catalog_property *CatalogProperty) (*CatalogProperty, error) {
+func (c *Client) UpdateCatalogProperty(id rootlygo_.ID, catalog_property *CatalogProperty) (*CatalogProperty, error) {
 	buffer, err := MarshalData(catalog_property)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling catalog_property: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateCatalogPropertyRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateCatalogPropertyRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -172,8 +173,8 @@ func (c *Client) UpdateCatalogProperty(id string, catalog_property *CatalogPrope
 	return data.(*CatalogProperty), nil
 }
 
-func (c *Client) DeleteCatalogProperty(id string) error {
-	req, err := rootlygo.NewDeleteCatalogPropertyRequest(c.Rootly.Server, id)
+func (c *Client) DeleteCatalogProperty(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteCatalogPropertyRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

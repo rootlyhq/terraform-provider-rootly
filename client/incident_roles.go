@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -66,8 +67,8 @@ func (c *Client) CreateIncidentRole(d *IncidentRole) (*IncidentRole, error) {
 	return data.(*IncidentRole), nil
 }
 
-func (c *Client) GetIncidentRole(id string) (*IncidentRole, error) {
-	req, err := rootlygo.NewGetIncidentRoleRequest(c.Rootly.Server, id)
+func (c *Client) GetIncidentRole(id rootlygo_.ID) (*IncidentRole, error) {
+	req, err := rootlygo.NewGetIncidentRoleRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -86,13 +87,13 @@ func (c *Client) GetIncidentRole(id string) (*IncidentRole, error) {
 	return data.(*IncidentRole), nil
 }
 
-func (c *Client) UpdateIncidentRole(id string, incident_role *IncidentRole) (*IncidentRole, error) {
+func (c *Client) UpdateIncidentRole(id rootlygo_.ID, incident_role *IncidentRole) (*IncidentRole, error) {
 	buffer, err := MarshalData(incident_role)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling incident_role: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateIncidentRoleRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateIncidentRoleRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -110,8 +111,8 @@ func (c *Client) UpdateIncidentRole(id string, incident_role *IncidentRole) (*In
 	return data.(*IncidentRole), nil
 }
 
-func (c *Client) DeleteIncidentRole(id string) error {
-	req, err := rootlygo.NewDeleteIncidentRoleRequest(c.Rootly.Server, id)
+func (c *Client) DeleteIncidentRole(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteIncidentRoleRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

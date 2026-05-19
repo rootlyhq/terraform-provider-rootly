@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -161,7 +162,7 @@ func resourceIncidentRoleRead(ctx context.Context, d *schema.ResourceData, meta 
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading IncidentRole: %s", d.Id()))
 
-	item, err := c.GetIncidentRole(d.Id())
+	item, err := c.GetIncidentRole(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -217,7 +218,7 @@ func resourceIncidentRoleUpdate(ctx context.Context, d *schema.ResourceData, met
 		s.AllowMultiUserAssignment = tools.Bool(d.Get("allow_multi_user_assignment").(bool))
 	}
 
-	_, err := c.UpdateIncidentRole(d.Id(), s)
+	_, err := c.UpdateIncidentRole(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating incident_role: %s", err.Error())
 	}
@@ -229,7 +230,7 @@ func resourceIncidentRoleDelete(ctx context.Context, d *schema.ResourceData, met
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting IncidentRole: %s", d.Id()))
 
-	err := c.DeleteIncidentRole(d.Id())
+	err := c.DeleteIncidentRole(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

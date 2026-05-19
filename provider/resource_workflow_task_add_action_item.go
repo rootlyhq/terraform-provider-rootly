@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -227,7 +228,7 @@ func resourceWorkflowTaskAddActionItemRead(ctx context.Context, d *schema.Resour
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading workflow task: %s", d.Id()))
 
-	res, err := c.GetWorkflowTask(d.Id())
+	res, err := c.GetWorkflowTask(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -273,7 +274,7 @@ func resourceWorkflowTaskAddActionItemUpdate(ctx context.Context, d *schema.Reso
 	}
 
 	tflog.Debug(ctx, fmt.Sprintf("adding value: %#v", s))
-	_, err := c.UpdateWorkflowTask(d.Id(), s)
+	_, err := c.UpdateWorkflowTask(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
@@ -285,7 +286,7 @@ func resourceWorkflowTaskAddActionItemDelete(ctx context.Context, d *schema.Reso
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting workflow task: %s", d.Id()))
 
-	err := c.DeleteWorkflowTask(d.Id())
+	err := c.DeleteWorkflowTask(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 )
 
@@ -94,7 +95,7 @@ func resourceDashboardRead(ctx context.Context, d *schema.ResourceData, meta int
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading Dashboard: %s", d.Id()))
 
-	dashboard, err := c.GetDashboard(d.Id())
+	dashboard, err := c.GetDashboard(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -134,7 +135,7 @@ func resourceDashboardUpdate(ctx context.Context, d *schema.ResourceData, meta i
 		s.Owner = d.Get("owner").(string)
 	}
 
-	_, err := c.UpdateDashboard(d.Id(), s)
+	_, err := c.UpdateDashboard(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating dashboard: %s", err.Error())
 	}
@@ -146,7 +147,7 @@ func resourceDashboardDelete(ctx context.Context, d *schema.ResourceData, meta i
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting Dashboard: %s", d.Id()))
 
-	err := c.DeleteDashboard(d.Id())
+	err := c.DeleteDashboard(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

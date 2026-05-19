@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -18,8 +19,8 @@ type CustomFieldOption struct {
 	Position      int    `jsonapi:"attr,position,omitempty"`
 }
 
-func (c *Client) ListCustomFieldOptions(id string, params *rootlygo.ListCustomFieldOptionsParams) ([]interface{}, error) {
-	req, err := rootlygo.NewListCustomFieldOptionsRequest(c.Rootly.Server, id, params)
+func (c *Client) ListCustomFieldOptions(id rootlygo_.ID, params *rootlygo.ListCustomFieldOptionsParams) ([]interface{}, error) {
+	req, err := rootlygo.NewListCustomFieldOptionsRequest(c.Rootly.Server, id.String(), params)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -60,8 +61,8 @@ func (c *Client) CreateCustomFieldOption(d *CustomFieldOption) (*CustomFieldOpti
 	return data.(*CustomFieldOption), nil
 }
 
-func (c *Client) GetCustomFieldOption(id string) (*CustomFieldOption, error) {
-	req, err := rootlygo.NewGetCustomFieldOptionRequest(c.Rootly.Server, id)
+func (c *Client) GetCustomFieldOption(id rootlygo_.ID) (*CustomFieldOption, error) {
+	req, err := rootlygo.NewGetCustomFieldOptionRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -79,13 +80,13 @@ func (c *Client) GetCustomFieldOption(id string) (*CustomFieldOption, error) {
 	return data.(*CustomFieldOption), nil
 }
 
-func (c *Client) UpdateCustomFieldOption(id string, custom_field_option *CustomFieldOption) (*CustomFieldOption, error) {
+func (c *Client) UpdateCustomFieldOption(id rootlygo_.ID, custom_field_option *CustomFieldOption) (*CustomFieldOption, error) {
 	buffer, err := MarshalData(custom_field_option)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling custom_field_option: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateCustomFieldOptionRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateCustomFieldOptionRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -102,8 +103,8 @@ func (c *Client) UpdateCustomFieldOption(id string, custom_field_option *CustomF
 	return data.(*CustomFieldOption), nil
 }
 
-func (c *Client) DeleteCustomFieldOption(id string) error {
-	req, err := rootlygo.NewDeleteCustomFieldOptionRequest(c.Rootly.Server, id)
+func (c *Client) DeleteCustomFieldOption(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteCustomFieldOptionRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

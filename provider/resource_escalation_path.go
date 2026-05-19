@@ -13,6 +13,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -474,7 +475,7 @@ func resourceEscalationPathRead(ctx context.Context, d *schema.ResourceData, met
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading EscalationPath: %s", d.Id()))
 
-	item, err := c.GetEscalationPath(d.Id())
+	item, err := c.GetEscalationPath(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -626,7 +627,7 @@ func resourceEscalationPathUpdate(ctx context.Context, d *schema.ResourceData, m
 		}
 	}
 
-	_, err := c.UpdateEscalationPath(d.Id(), s)
+	_, err := c.UpdateEscalationPath(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating escalation_path: %s", err.Error())
 	}
@@ -638,7 +639,7 @@ func resourceEscalationPathDelete(ctx context.Context, d *schema.ResourceData, m
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting EscalationPath: %s", d.Id()))
 
-	err := c.DeleteEscalationPath(d.Id())
+	err := c.DeleteEscalationPath(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -63,8 +64,8 @@ func (c *Client) CreateCommunicationsType(d *CommunicationsType) (*Communication
 	return data.(*CommunicationsType), nil
 }
 
-func (c *Client) GetCommunicationsType(id string) (*CommunicationsType, error) {
-	req, err := rootlygo.NewGetCommunicationsTypeRequest(c.Rootly.Server, id)
+func (c *Client) GetCommunicationsType(id rootlygo_.ID) (*CommunicationsType, error) {
+	req, err := rootlygo.NewGetCommunicationsTypeRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -83,13 +84,13 @@ func (c *Client) GetCommunicationsType(id string) (*CommunicationsType, error) {
 	return data.(*CommunicationsType), nil
 }
 
-func (c *Client) UpdateCommunicationsType(id string, communications_type *CommunicationsType) (*CommunicationsType, error) {
+func (c *Client) UpdateCommunicationsType(id rootlygo_.ID, communications_type *CommunicationsType) (*CommunicationsType, error) {
 	buffer, err := MarshalData(communications_type)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling communications_type: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateCommunicationsTypeRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateCommunicationsTypeRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -107,8 +108,8 @@ func (c *Client) UpdateCommunicationsType(id string, communications_type *Commun
 	return data.(*CommunicationsType), nil
 }
 
-func (c *Client) DeleteCommunicationsType(id string) error {
-	req, err := rootlygo.NewDeleteCommunicationsTypeRequest(c.Rootly.Server, id)
+func (c *Client) DeleteCommunicationsType(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteCommunicationsTypeRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -148,7 +149,7 @@ func resourceCauseRead(ctx context.Context, d *schema.ResourceData, meta interfa
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading Cause: %s", d.Id()))
 
-	item, err := c.GetCause(d.Id())
+	item, err := c.GetCause(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -215,7 +216,7 @@ func resourceCauseUpdate(ctx context.Context, d *schema.ResourceData, meta inter
 		}
 	}
 
-	_, err := c.UpdateCause(d.Id(), s)
+	_, err := c.UpdateCause(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating cause: %s", err.Error())
 	}
@@ -227,7 +228,7 @@ func resourceCauseDelete(ctx context.Context, d *schema.ResourceData, meta inter
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting Cause: %s", d.Id()))
 
-	err := c.DeleteCause(d.Id())
+	err := c.DeleteCause(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

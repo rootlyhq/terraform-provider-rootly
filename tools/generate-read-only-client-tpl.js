@@ -14,6 +14,7 @@ import (
 	"strconv"
 	"fmt"
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -51,7 +52,7 @@ func (c *Client) List${nameCamelPlural}(${listFnParams(
 
 function listFnParams(nameCamelPlural, nested) {
   if (nested) {
-    return `id string, params *rootlygo.List${nameCamelPlural}Params`;
+    return `id rootlygo_.ID, params *rootlygo.List${nameCamelPlural}Params`;
   } else {
     return `params *rootlygo.List${nameCamelPlural}Params`;
   }
@@ -59,7 +60,7 @@ function listFnParams(nameCamelPlural, nested) {
 
 function listClientParams(nested) {
   if (nested) {
-    return `c.Rootly.Server, id, params`;
+    return `c.Rootly.Server, id.String(), params`;
   } else {
     return `c.Rootly.Server, params`;
   }

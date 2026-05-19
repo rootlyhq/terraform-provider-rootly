@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -96,8 +97,8 @@ func (c *Client) CreateRole(d *Role) (*Role, error) {
 	return data.(*Role), nil
 }
 
-func (c *Client) GetRole(id string) (*Role, error) {
-	req, err := rootlygo.NewGetRoleRequest(c.Rootly.Server, id)
+func (c *Client) GetRole(id rootlygo_.ID) (*Role, error) {
+	req, err := rootlygo.NewGetRoleRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -116,13 +117,13 @@ func (c *Client) GetRole(id string) (*Role, error) {
 	return data.(*Role), nil
 }
 
-func (c *Client) UpdateRole(id string, role *Role) (*Role, error) {
+func (c *Client) UpdateRole(id rootlygo_.ID, role *Role) (*Role, error) {
 	buffer, err := MarshalData(role)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling role: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateRoleRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateRoleRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -140,8 +141,8 @@ func (c *Client) UpdateRole(id string, role *Role) (*Role, error) {
 	return data.(*Role), nil
 }
 
-func (c *Client) DeleteRole(id string) error {
-	req, err := rootlygo.NewDeleteRoleRequest(c.Rootly.Server, id)
+func (c *Client) DeleteRole(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteRoleRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

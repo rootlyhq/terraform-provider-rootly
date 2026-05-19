@@ -6,6 +6,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
@@ -54,7 +55,7 @@ func dataSourceCustomFieldOptionRead(ctx context.Context, d *schema.ResourceData
 	}
 
 	custom_field_id := strconv.Itoa(d.Get("custom_field_id").(int))
-	items, err := c.ListCustomFieldOptions(custom_field_id, params)
+	items, err := c.ListCustomFieldOptions(rootlygo_.ID(custom_field_id), params)
 	if err != nil {
 		return diag.FromErr(err)
 	}

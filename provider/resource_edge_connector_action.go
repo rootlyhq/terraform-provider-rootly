@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -167,7 +168,7 @@ func resourceEdgeConnectorActionRead(ctx context.Context, d *schema.ResourceData
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading EdgeConnectorAction: %s", d.Id()))
 
-	item, err := c.GetEdgeConnectorAction(d.Get("edge_connector_id").(string), d.Id())
+	item, err := c.GetEdgeConnectorAction(rootlygo_.ID(d.Get("edge_connector_id").(string)), rootlygo_.ID(d.Id()))
 	if err != nil {
 		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("EdgeConnectorAction (%s) not found, removing from state", d.Id()))
@@ -223,7 +224,7 @@ func resourceEdgeConnectorActionUpdate(ctx context.Context, d *schema.ResourceDa
 		}
 	}
 
-	_, err := c.UpdateEdgeConnectorAction(d.Id(), s)
+	_, err := c.UpdateEdgeConnectorAction(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating edge_connector_action: %s", err.Error())
 	}
@@ -235,7 +236,7 @@ func resourceEdgeConnectorActionDelete(ctx context.Context, d *schema.ResourceDa
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting EdgeConnectorAction: %s", d.Id()))
 
-	err := c.DeleteEdgeConnectorAction(d.Get("edge_connector_id").(string), d.Id())
+	err := c.DeleteEdgeConnectorAction(rootlygo_.ID(d.Get("edge_connector_id").(string)), rootlygo_.ID(d.Id()))
 	if err != nil {
 		if errors.Is(err, client.NewNotFoundError("")) && !d.IsNewResource() {
 			tflog.Warn(ctx, fmt.Sprintf("EdgeConnectorAction (%s) not found, removing from state", d.Id()))

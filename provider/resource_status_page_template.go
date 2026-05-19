@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -177,7 +178,7 @@ func resourceStatusPageTemplateRead(ctx context.Context, d *schema.ResourceData,
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading StatusPageTemplate: %s", d.Id()))
 
-	item, err := c.GetStatusPageTemplate(d.Id())
+	item, err := c.GetStatusPageTemplate(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -237,7 +238,7 @@ func resourceStatusPageTemplateUpdate(ctx context.Context, d *schema.ResourceDat
 		s.Position = d.Get("position").(int)
 	}
 
-	_, err := c.UpdateStatusPageTemplate(d.Id(), s)
+	_, err := c.UpdateStatusPageTemplate(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating status_page_template: %s", err.Error())
 	}
@@ -249,7 +250,7 @@ func resourceStatusPageTemplateDelete(ctx context.Context, d *schema.ResourceDat
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting StatusPageTemplate: %s", d.Id()))
 
-	err := c.DeleteStatusPageTemplate(d.Id())
+	err := c.DeleteStatusPageTemplate(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

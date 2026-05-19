@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -86,8 +87,8 @@ func (c *Client) CreateTeam(d *Team) (*Team, error) {
 	return data.(*Team), nil
 }
 
-func (c *Client) GetTeam(id string) (*Team, error) {
-	req, err := rootlygo.NewGetTeamRequest(c.Rootly.Server, id, nil)
+func (c *Client) GetTeam(id rootlygo_.ID) (*Team, error) {
+	req, err := rootlygo.NewGetTeamRequest(c.Rootly.Server, id.String(), nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -106,13 +107,13 @@ func (c *Client) GetTeam(id string) (*Team, error) {
 	return data.(*Team), nil
 }
 
-func (c *Client) UpdateTeam(id string, team *Team) (*Team, error) {
+func (c *Client) UpdateTeam(id rootlygo_.ID, team *Team) (*Team, error) {
 	buffer, err := MarshalData(team)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling team: %w", err)
 	}
 
-	req, err := rootlygo.NewUpdateTeamRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	req, err := rootlygo.NewUpdateTeamRequestWithBody(c.Rootly.Server, id.String(), c.ContentType, buffer)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -130,8 +131,8 @@ func (c *Client) UpdateTeam(id string, team *Team) (*Team, error) {
 	return data.(*Team), nil
 }
 
-func (c *Client) DeleteTeam(id string) error {
-	req, err := rootlygo.NewDeleteTeamRequest(c.Rootly.Server, id)
+func (c *Client) DeleteTeam(id rootlygo_.ID) error {
+	req, err := rootlygo.NewDeleteTeamRequest(c.Rootly.Server, id.String())
 	if err != nil {
 		return fmt.Errorf("Error building request: %w", err)
 	}

@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	rootlygo_ "github.com/rootlyhq/rootly-go"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -262,7 +263,7 @@ func resourceIncidentTypeRead(ctx context.Context, d *schema.ResourceData, meta 
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Reading IncidentType: %s", d.Id()))
 
-	item, err := c.GetIncidentType(d.Id())
+	item, err := c.GetIncidentType(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream
 		// We just remove it from the state.
@@ -396,7 +397,7 @@ func resourceIncidentTypeUpdate(ctx context.Context, d *schema.ResourceData, met
 		}
 	}
 
-	_, err := c.UpdateIncidentType(d.Id(), s)
+	_, err := c.UpdateIncidentType(rootlygo_.ID(d.Id()), s)
 	if err != nil {
 		return diag.Errorf("Error updating incident_type: %s", err.Error())
 	}
@@ -408,7 +409,7 @@ func resourceIncidentTypeDelete(ctx context.Context, d *schema.ResourceData, met
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting IncidentType: %s", d.Id()))
 
-	err := c.DeleteIncidentType(d.Id())
+	err := c.DeleteIncidentType(rootlygo_.ID(d.Id()))
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.
