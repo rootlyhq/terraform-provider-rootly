@@ -16,14 +16,14 @@ type EscalationPath struct {
 	Default                 *bool         `jsonapi:"attr,default,omitempty"`
 	NotificationType        string        `jsonapi:"attr,notification_type,omitempty"`
 	PathType                string        `jsonapi:"attr,path_type,omitempty"`
+	EscalationPolicyId      string        `jsonapi:"attr,escalation_policy_id,omitempty"`
 	AfterDeferralBehavior   string        `jsonapi:"attr,after_deferral_behavior,omitempty"`
 	AfterDeferralPathId     string        `jsonapi:"attr,after_deferral_path_id,omitempty"`
-	EscalationPolicyId      string        `jsonapi:"attr,escalation_policy_id,omitempty"`
 	MatchMode               string        `jsonapi:"attr,match_mode,omitempty"`
 	Position                int           `jsonapi:"attr,position,omitempty"`
 	Repeat                  *bool         `jsonapi:"attr,repeat,omitempty"`
 	RepeatCount             int           `jsonapi:"attr,repeat_count,omitempty"`
-	InitialDelay            int           `jsonapi:"attr,initial_delay"`
+	InitialDelay            int           `jsonapi:"attr,initial_delay,omitempty"`
 	Rules                   []interface{} `jsonapi:"attr,rules,omitempty"`
 	TimeRestrictionTimeZone string        `jsonapi:"attr,time_restriction_time_zone,omitempty"`
 	TimeRestrictions        []interface{} `jsonapi:"attr,time_restrictions,omitempty"`

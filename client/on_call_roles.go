@@ -37,6 +37,7 @@ type OnCallRole struct {
 	ServicesPermissions              []interface{} `jsonapi:"attr,services_permissions,omitempty"`
 	WebhooksPermissions              []interface{} `jsonapi:"attr,webhooks_permissions,omitempty"`
 	WorkflowsPermissions             []interface{} `jsonapi:"attr,workflows_permissions,omitempty"`
+	CatalogsPermissions              []interface{} `jsonapi:"attr,catalogs_permissions,omitempty"`
 }
 
 func (c *Client) ListOnCallRoles(params *rootlygo.ListOnCallRolesParams) ([]interface{}, error) {
