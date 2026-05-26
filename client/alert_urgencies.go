@@ -14,7 +14,7 @@ type AlertUrgency struct {
 	ID          string `jsonapi:"primary,alert_urgencies"`
 	Name        string `jsonapi:"attr,name,omitempty"`
 	Description string `jsonapi:"attr,description,omitempty"`
-	Position    int    `jsonapi:"attr,position"`
+	Position    int    `jsonapi:"attr,position,omitempty"`
 }
 
 func (c *Client) ListAlertUrgencies(params *rootlygo.ListAlertUrgenciesParams) ([]interface{}, error) {

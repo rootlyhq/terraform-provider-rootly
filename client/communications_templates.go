@@ -15,7 +15,7 @@ type CommunicationsTemplate struct {
 	Name                        string                 `jsonapi:"attr,name,omitempty"`
 	Slug                        string                 `jsonapi:"attr,slug,omitempty"`
 	Description                 string                 `jsonapi:"attr,description,omitempty"`
-	Position                    int                    `jsonapi:"attr,position"`
+	Position                    int                    `jsonapi:"attr,position,omitempty"`
 	CommunicationTypeId         string                 `jsonapi:"attr,communication_type_id,omitempty"`
 	CommunicationTemplateStages []interface{}          `jsonapi:"attr,communication_template_stages,omitempty"`
 	CommunicationType           map[string]interface{} `jsonapi:"attr,communication_type,omitempty"`

@@ -15,16 +15,16 @@ type SLA struct {
 	Slug                           string        `jsonapi:"attr,slug,omitempty"`
 	Name                           string        `jsonapi:"attr,name,omitempty"`
 	Description                    string        `jsonapi:"attr,description,omitempty"`
-	Position                       int           `jsonapi:"attr,position"`
+	Position                       int           `jsonapi:"attr,position,omitempty"`
 	EntityType                     string        `jsonapi:"attr,entity_type,omitempty"`
 	ConditionMatchType             string        `jsonapi:"attr,condition_match_type,omitempty"`
 	ManagerRoleId                  string        `jsonapi:"attr,manager_role_id,omitempty"`
-	ManagerUserId                  int           `jsonapi:"attr,manager_user_id"`
-	AssignmentDeadlineDays         int           `jsonapi:"attr,assignment_deadline_days"`
+	ManagerUserId                  int           `jsonapi:"attr,manager_user_id,omitempty"`
+	AssignmentDeadlineDays         int           `jsonapi:"attr,assignment_deadline_days,omitempty"`
 	AssignmentDeadlineParentStatus string        `jsonapi:"attr,assignment_deadline_parent_status,omitempty"`
 	AssignmentDeadlineSubStatusId  string        `jsonapi:"attr,assignment_deadline_sub_status_id,omitempty"`
 	AssignmentSkipWeekends         *bool         `jsonapi:"attr,assignment_skip_weekends,omitempty"`
-	CompletionDeadlineDays         int           `jsonapi:"attr,completion_deadline_days"`
+	CompletionDeadlineDays         int           `jsonapi:"attr,completion_deadline_days,omitempty"`
 	CompletionDeadlineParentStatus string        `jsonapi:"attr,completion_deadline_parent_status,omitempty"`
 	CompletionDeadlineSubStatusId  string        `jsonapi:"attr,completion_deadline_sub_status_id,omitempty"`
 	CompletionSkipWeekends         *bool         `jsonapi:"attr,completion_skip_weekends,omitempty"`

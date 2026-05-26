@@ -20,12 +20,12 @@ type Workflow struct {
 	Wait                                 string                 `jsonapi:"attr,wait,omitempty"`
 	RepeatEveryDuration                  string                 `jsonapi:"attr,repeat_every_duration,omitempty"`
 	RepeatConditionDurationSinceFirstRun string                 `jsonapi:"attr,repeat_condition_duration_since_first_run,omitempty"`
-	RepeatConditionNumberOfRepeats       int                    `jsonapi:"attr,repeat_condition_number_of_repeats"`
+	RepeatConditionNumberOfRepeats       int                    `jsonapi:"attr,repeat_condition_number_of_repeats,omitempty"`
 	ContinuouslyRepeat                   *bool                  `jsonapi:"attr,continuously_repeat,omitempty"`
 	RepeatOn                             []interface{}          `jsonapi:"attr,repeat_on,omitempty"`
 	Enabled                              *bool                  `jsonapi:"attr,enabled,omitempty"`
 	Locked                               *bool                  `jsonapi:"attr,locked,omitempty"`
-	Position                             int                    `jsonapi:"attr,position"`
+	Position                             int                    `jsonapi:"attr,position,omitempty"`
 	WorkflowGroupId                      string                 `jsonapi:"attr,workflow_group_id,omitempty"`
 	TriggerParams                        map[string]interface{} `jsonapi:"attr,trigger_params,omitempty"`
 	EnvironmentIds                       []interface{}          `jsonapi:"attr,environment_ids,omitempty"`

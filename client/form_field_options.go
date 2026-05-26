@@ -17,7 +17,7 @@ type FormFieldOption struct {
 	Value       string `jsonapi:"attr,value,omitempty"`
 	Color       string `jsonapi:"attr,color,omitempty"`
 	Default     *bool  `jsonapi:"attr,default,omitempty"`
-	Position    int    `jsonapi:"attr,position"`
+	Position    int    `jsonapi:"attr,position,omitempty"`
 }
 
 func (c *Client) ListFormFieldOptions(id string, params *rootlygo.ListFormFieldOptionsParams) ([]interface{}, error) {

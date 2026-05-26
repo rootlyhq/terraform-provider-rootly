@@ -18,7 +18,7 @@ type Service struct {
 	PublicDescription        string                 `jsonapi:"attr,public_description,omitempty"`
 	NotifyEmails             []interface{}          `jsonapi:"attr,notify_emails,omitempty"`
 	Color                    string                 `jsonapi:"attr,color,omitempty"`
-	Position                 int                    `jsonapi:"attr,position"`
+	Position                 int                    `jsonapi:"attr,position,omitempty"`
 	BackstageId              string                 `jsonapi:"attr,backstage_id"`
 	ExternalId               string                 `jsonapi:"attr,external_id"`
 	PagerdutyId              string                 `jsonapi:"attr,pagerduty_id"`

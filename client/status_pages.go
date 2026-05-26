@@ -21,7 +21,7 @@ type StatusPage struct {
 	FooterColor              string                 `jsonapi:"attr,footer_color,omitempty"`
 	AllowSearchEngineIndex   *bool                  `jsonapi:"attr,allow_search_engine_index,omitempty"`
 	ShowUptime               *bool                  `jsonapi:"attr,show_uptime,omitempty"`
-	ShowUptimeLastDays       int                    `jsonapi:"attr,show_uptime_last_days"`
+	ShowUptimeLastDays       int                    `jsonapi:"attr,show_uptime_last_days,omitempty"`
 	SuccessMessage           string                 `jsonapi:"attr,success_message,omitempty"`
 	FailureMessage           string                 `jsonapi:"attr,failure_message,omitempty"`
 	AuthenticationMethod     string                 `jsonapi:"attr,authentication_method,omitempty"`

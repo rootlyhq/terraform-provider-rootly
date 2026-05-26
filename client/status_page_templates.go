@@ -20,7 +20,7 @@ type StatusPageTemplate struct {
 	Kind                    string `jsonapi:"attr,kind,omitempty"`
 	ShouldNotifySubscribers *bool  `jsonapi:"attr,should_notify_subscribers,omitempty"`
 	Enabled                 *bool  `jsonapi:"attr,enabled,omitempty"`
-	Position                int    `jsonapi:"attr,position"`
+	Position                int    `jsonapi:"attr,position,omitempty"`
 }
 
 func (c *Client) ListStatusPageTemplates(id string, params *rootlygo.ListStatusPageTemplatesParams) ([]interface{}, error) {

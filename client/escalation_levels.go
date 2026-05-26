@@ -16,8 +16,8 @@ type EscalationLevel struct {
 	EscalationPolicyPathId                      string        `jsonapi:"attr,escalation_policy_path_id,omitempty"`
 	PagingStrategyConfigurationStrategy         string        `jsonapi:"attr,paging_strategy_configuration_strategy,omitempty"`
 	PagingStrategyConfigurationScheduleStrategy string        `jsonapi:"attr,paging_strategy_configuration_schedule_strategy,omitempty"`
-	Delay                                       int           `jsonapi:"attr,delay"`
-	Position                                    int           `jsonapi:"attr,position"`
+	Delay                                       int           `jsonapi:"attr,delay,omitempty"`
+	Position                                    int           `jsonapi:"attr,position,omitempty"`
 	NotificationTargetParams                    []interface{} `jsonapi:"attr,notification_target_params,omitempty"`
 }
 

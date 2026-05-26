@@ -13,8 +13,8 @@ import (
 type ScheduleRotationUser struct {
 	ID                 string `jsonapi:"primary,schedule_rotation_users"`
 	ScheduleRotationId string `jsonapi:"attr,schedule_rotation_id,omitempty"`
-	UserId             int    `jsonapi:"attr,user_id"`
-	Position           int    `jsonapi:"attr,position"`
+	UserId             int    `jsonapi:"attr,user_id,omitempty"`
+	Position           int    `jsonapi:"attr,position,omitempty"`
 }
 
 func (c *Client) ListScheduleRotationUsers(id string, params *rootlygo.ListScheduleRotationUsersParams) ([]interface{}, error) {
