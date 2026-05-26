@@ -129,6 +129,15 @@ function setFilterFields(name, resourceSchema, filterParameters) {
 				}
 			`;
           }
+        } else if (paramSchema.schema && paramSchema.schema.enum) {
+          // When the filter param has an enum, oapi-codegen generates a named type
+          const namedType = `rootlygo.List${inflect.camelize(inflect.pluralize(name))}Params${filterCamelize(paramSchema.name)}`;
+          return `
+				if value, ok := d.GetOkExists("${schemaFieldName}"); ok {
+					${schemaFieldName} := ${namedType}(value.(string))
+					params.${filterCamelize(paramSchema.name)} = &${schemaFieldName}
+				}
+			`;
         } else {
           return `
 				if value, ok := d.GetOkExists("${schemaFieldName}"); ok {

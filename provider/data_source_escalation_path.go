@@ -44,7 +44,7 @@ func dataSourceEscalationPathRead(ctx context.Context, d *schema.ResourceData, m
 	params.PageSize = &page_size
 
 	if value, ok := d.GetOkExists("path_type"); ok {
-		path_type := value.(string)
+		path_type := rootlygo.ListEscalationPathsParamsFilterPathType(value.(string))
 		params.FilterPathType = &path_type
 	}
 
