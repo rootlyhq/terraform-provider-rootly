@@ -25,7 +25,7 @@ type Functionality struct {
 	OpsgenieTeamId     string        `jsonapi:"attr,opsgenie_team_id,omitempty"`
 	CortexId           string        `jsonapi:"attr,cortex_id,omitempty"`
 	ServiceNowCiSysId  string        `jsonapi:"attr,service_now_ci_sys_id,omitempty"`
-	Position           int           `jsonapi:"attr,position,omitempty"`
+	Position           int           `jsonapi:"attr,position"`
 	EnvironmentIds     []interface{} `jsonapi:"attr,environment_ids,omitempty"`
 	ServiceIds         []interface{} `jsonapi:"attr,service_ids,omitempty"`
 	OwnerGroupIds      []interface{} `jsonapi:"attr,owner_group_ids,omitempty"`

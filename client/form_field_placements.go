@@ -15,7 +15,7 @@ type FormFieldPlacement struct {
 	FormFieldId       string `jsonapi:"attr,form_field_id,omitempty"`
 	FormSetId         string `jsonapi:"attr,form_set_id,omitempty"`
 	Form              string `jsonapi:"attr,form,omitempty"`
-	Position          int    `jsonapi:"attr,position,omitempty"`
+	Position          int    `jsonapi:"attr,position"`
 	Required          *bool  `jsonapi:"attr,required,omitempty"`
 	RequiredOperator  string `jsonapi:"attr,required_operator,omitempty"`
 	PlacementOperator string `jsonapi:"attr,placement_operator,omitempty"`

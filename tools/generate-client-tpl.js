@@ -183,7 +183,7 @@ function structAttr(name, resourceSchema) {
     case "integer":
       return `${inflect.camelize(
         name
-      )} int \`jsonapi:"attr,${name},omitempty"\``;
+      )} int \`jsonapi:"attr,${name}"\``;
     case "number":
       return `${inflect.camelize(
         name

@@ -16,7 +16,7 @@ type SubStatus struct {
 	Slug         string `jsonapi:"attr,slug,omitempty"`
 	Description  string `jsonapi:"attr,description,omitempty"`
 	ParentStatus string `jsonapi:"attr,parent_status,omitempty"`
-	Position     int    `jsonapi:"attr,position,omitempty"`
+	Position     int    `jsonapi:"attr,position"`
 }
 
 func (c *Client) ListSubStatuses(params *rootlygo.ListSubStatusesParams) ([]interface{}, error) {

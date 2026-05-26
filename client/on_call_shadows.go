@@ -15,7 +15,7 @@ type OnCallShadow struct {
 	ScheduleId     string `jsonapi:"attr,schedule_id,omitempty"`
 	ShadowableType string `jsonapi:"attr,shadowable_type,omitempty"`
 	ShadowableId   string `jsonapi:"attr,shadowable_id,omitempty"`
-	ShadowUserId   int    `jsonapi:"attr,shadow_user_id,omitempty"`
+	ShadowUserId   int    `jsonapi:"attr,shadow_user_id"`
 	StartsAt       string `jsonapi:"attr,starts_at,omitempty"`
 	EndsAt         string `jsonapi:"attr,ends_at,omitempty"`
 }

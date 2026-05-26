@@ -16,7 +16,7 @@ type CommunicationsType struct {
 	Slug        string `jsonapi:"attr,slug,omitempty"`
 	Description string `jsonapi:"attr,description,omitempty"`
 	Color       string `jsonapi:"attr,color,omitempty"`
-	Position    int    `jsonapi:"attr,position,omitempty"`
+	Position    int    `jsonapi:"attr,position"`
 }
 
 func (c *Client) ListCommunicationsTypes(params *rootlygo.ListCommunicationsTypesParams) ([]interface{}, error) {

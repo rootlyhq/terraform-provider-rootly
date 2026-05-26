@@ -14,7 +14,7 @@ type CatalogEntity struct {
 	ID          string        `jsonapi:"primary,catalog_entities"`
 	Name        string        `jsonapi:"attr,name,omitempty"`
 	Description string        `jsonapi:"attr,description,omitempty"`
-	Position    int           `jsonapi:"attr,position,omitempty"`
+	Position    int           `jsonapi:"attr,position"`
 	BackstageId string        `jsonapi:"attr,backstage_id,omitempty"`
 	Properties  []interface{} `jsonapi:"attr,properties,omitempty"`
 	CatalogId   string        `jsonapi:"attr,catalog_id,omitempty"`

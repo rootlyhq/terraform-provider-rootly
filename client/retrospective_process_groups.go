@@ -14,7 +14,7 @@ type RetrospectiveProcessGroup struct {
 	ID                     string `jsonapi:"primary,retrospective_process_groups"`
 	RetrospectiveProcessId string `jsonapi:"attr,retrospective_process_id,omitempty"`
 	SubStatusId            string `jsonapi:"attr,sub_status_id,omitempty"`
-	Position               int    `jsonapi:"attr,position,omitempty"`
+	Position               int    `jsonapi:"attr,position"`
 }
 
 func (c *Client) ListRetrospectiveProcessGroups(id string, params *rootlygo.ListRetrospectiveProcessGroupsParams) ([]interface{}, error) {

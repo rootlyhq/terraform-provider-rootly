@@ -18,7 +18,7 @@ type WorkflowGroup struct {
 	Description string `jsonapi:"attr,description,omitempty"`
 	Icon        string `jsonapi:"attr,icon,omitempty"`
 	Expanded    *bool  `jsonapi:"attr,expanded,omitempty"`
-	Position    int    `jsonapi:"attr,position,omitempty"`
+	Position    int    `jsonapi:"attr,position"`
 }
 
 func (c *Client) ListWorkflowGroups(params *rootlygo.ListWorkflowGroupsParams) ([]interface{}, error) {

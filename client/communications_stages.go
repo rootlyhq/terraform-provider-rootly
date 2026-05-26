@@ -15,7 +15,7 @@ type CommunicationsStage struct {
 	Name        string `jsonapi:"attr,name,omitempty"`
 	Slug        string `jsonapi:"attr,slug,omitempty"`
 	Description string `jsonapi:"attr,description,omitempty"`
-	Position    int    `jsonapi:"attr,position,omitempty"`
+	Position    int    `jsonapi:"attr,position"`
 }
 
 func (c *Client) ListCommunicationsStages(params *rootlygo.ListCommunicationsStagesParams) ([]interface{}, error) {

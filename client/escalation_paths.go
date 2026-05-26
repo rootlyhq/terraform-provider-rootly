@@ -20,10 +20,10 @@ type EscalationPath struct {
 	AfterDeferralBehavior   string        `jsonapi:"attr,after_deferral_behavior,omitempty"`
 	AfterDeferralPathId     string        `jsonapi:"attr,after_deferral_path_id,omitempty"`
 	MatchMode               string        `jsonapi:"attr,match_mode,omitempty"`
-	Position                int           `jsonapi:"attr,position,omitempty"`
+	Position                int           `jsonapi:"attr,position"`
 	Repeat                  *bool         `jsonapi:"attr,repeat,omitempty"`
-	RepeatCount             int           `jsonapi:"attr,repeat_count,omitempty"`
-	InitialDelay            int           `jsonapi:"attr,initial_delay,omitempty"`
+	RepeatCount             int           `jsonapi:"attr,repeat_count"`
+	InitialDelay            int           `jsonapi:"attr,initial_delay"`
 	Rules                   []interface{} `jsonapi:"attr,rules,omitempty"`
 	TimeRestrictionTimeZone string        `jsonapi:"attr,time_restriction_time_zone,omitempty"`
 	TimeRestrictions        []interface{} `jsonapi:"attr,time_restrictions,omitempty"`

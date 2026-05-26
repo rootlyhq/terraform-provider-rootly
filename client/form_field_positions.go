@@ -14,7 +14,7 @@ type FormFieldPosition struct {
 	ID          string `jsonapi:"primary,form_field_positions"`
 	FormFieldId string `jsonapi:"attr,form_field_id,omitempty"`
 	Form        string `jsonapi:"attr,form,omitempty"`
-	Position    int    `jsonapi:"attr,position,omitempty"`
+	Position    int    `jsonapi:"attr,position"`
 }
 
 func (c *Client) ListFormFieldPositions(id string, params *rootlygo.ListFormFieldPositionsParams) ([]interface{}, error) {
