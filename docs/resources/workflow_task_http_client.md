@@ -48,6 +48,8 @@ Optional:
 - `params` (String) JSON map of HTTP query parameters
 - `post_to_incident_timeline` (Boolean) Value must be one of true or false
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
+- `retry_count` (String) Number of times to retry on HTTP 429 responses (0-4). 0 disables retry.
+- `retry_wait_time` (String) Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.
 - `task_type` (String)
 
 <a id="nestedblock--task_params--post_to_slack_channels"></a>

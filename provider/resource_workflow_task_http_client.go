@@ -177,6 +177,16 @@ func resourceWorkflowTaskHttpClient() *schema.Resource {
 								},
 							},
 						},
+						"retry_count": &schema.Schema{
+							Description: "Number of times to retry on HTTP 429 responses (0-4). 0 disables retry.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"retry_wait_time": &schema.Schema{
+							Description: "Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 					},
 				},
 			},

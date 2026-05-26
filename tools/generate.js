@@ -122,6 +122,9 @@ const excluded = {
     "workflow_alert", // cannot auto-generate because codegen doesn't handle nested objects in trigger_params (alert_payload_conditions requires complex nested schema)
     "workflow_run",
     "workflow_task",
+  ],
+  clients: [
+    "escalation_path", // manual fix: initial_delay must not use omitempty so 0 is sent (c74784b)
   ]
 }
 
@@ -199,6 +202,7 @@ function generateProvider(resources, taskResources, dataSources) {
 
 function generateClients() {
   new Set([...resources(), ...dataSources()]).forEach((name) => {
+    if ((excluded.clients || []).includes(name)) return;
     if (readOnlyCollections.includes(name)) {
       generateReadOnlyClient(name)
     } else {

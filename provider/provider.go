@@ -92,6 +92,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_incident_sub_status":              dataSourceIncidentSubStatus(),
 				"rootly_retrospective_process_group":      dataSourceRetrospectiveProcessGroup(),
 				"rootly_retrospective_process_group_step": dataSourceRetrospectiveProcessGroupStep(),
+				"rootly_escalation_path":                  dataSourceEscalationPath(),
 				"rootly_alerts_source":                    dataSourceAlertsSource(),
 				"rootly_alert_route":                      dataSourceAlertRoute(),
 				"rootly_catalog":                          dataSourceCatalog(),
