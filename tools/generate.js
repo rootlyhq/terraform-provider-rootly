@@ -124,6 +124,7 @@ const excluded = {
     "workflow_task",
   ],
   clients: [
+    "escalation_level", // manual fix: delay must not use omitempty so 0 is sent
     "escalation_path", // manual fix: initial_delay must not use omitempty so 0 is sent (c74784b)
   ]
 }

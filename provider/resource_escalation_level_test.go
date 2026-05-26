@@ -20,6 +20,7 @@ func TestAccResourceEscalationLevel(t *testing.T) {
 				Config: testAccResourceEscalationLevelConfig(epName, teamName),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_escalation_level.test", "position", "1"),
+					resource.TestCheckResourceAttr("rootly_escalation_level.test", "delay", "0"),
 					resource.TestCheckResourceAttr("rootly_escalation_level.test", "notification_target_params.#", "1"),
 				),
 			},
@@ -40,6 +41,7 @@ resource "rootly_escalation_policy" "test" {
 resource "rootly_escalation_level" "test" {
 	escalation_policy_id = rootly_escalation_policy.test.id
 	position             = 1
+	delay                = 0
 
 	notification_target_params {
 		id   = rootly_team.test.id
