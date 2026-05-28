@@ -349,7 +349,9 @@ func resourceLiveCallRouterRead(ctx context.Context, d *schema.ResourceData, met
 	d.Set("phone_number", item.PhoneNumber)
 	d.Set("voicemail_greeting", item.VoicemailGreeting)
 	d.Set("caller_greeting", item.CallerGreeting)
-	d.Set("waiting_music_url", item.WaitingMusicUrl)
+	if item.WaitingMusicUrl != "" {
+		d.Set("waiting_music_url", item.WaitingMusicUrl)
+	}
 	d.Set("sent_to_voicemail_delay", item.SentToVoicemailDelay)
 	d.Set("should_redirect_to_voicemail_on_no_answer", item.ShouldRedirectToVoicemailOnNoAnswer)
 	d.Set("escalation_level_delay_in_seconds", item.EscalationLevelDelayInSeconds)
@@ -378,8 +380,10 @@ func resourceLiveCallRouterRead(ctx context.Context, d *schema.ResourceData, met
 	}
 
 	// We were forcing blank values here - should make sure that the values are actually present to avoid perpetual diffs
-	if item.EscalationPolicyTriggerParams != nil && len(item.EscalationPolicyTriggerParams) > 0 {
+	if len(item.EscalationPolicyTriggerParams) > 0 {
 		d.Set("escalation_policy_trigger_params", item.EscalationPolicyTriggerParams)
+	} else {
+		d.Set("escalation_policy_trigger_params", nil)
 	}
 
 	return nil
