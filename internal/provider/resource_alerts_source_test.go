@@ -164,7 +164,7 @@ func TestAccResourceAlertsSource_AlertTemplateAttributesErrorWhenAlertFieldsEnab
 }
 
 func testAccResourceAlertsSourceConfig(teamName, alertUrgencyName, alertsSourceName, extra string) string {
-	return testAccResourceTeamConfig(teamName) + testAccResourceAlertUrgencyConfig(alertUrgencyName, alertUrgencyName+" description") + fmt.Sprintf(`
+	return testAccResourceTeamConfig(teamName, "") + testAccResourceAlertUrgencyConfig(alertUrgencyName, alertUrgencyName+" description") + fmt.Sprintf(`
 resource "rootly_alerts_source" "test" {
 	depends_on = [rootly_alert_urgency.test]
 
