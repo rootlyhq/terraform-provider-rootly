@@ -1,5 +1,5 @@
 {
-  "packageManager": "yarn@4.15.0",
+  "packageManager": "yarn@4.16.0",
   "scripts": {
     "generate": "tsx ./tools/generate.js"
   },
