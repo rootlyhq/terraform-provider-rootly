@@ -53,6 +53,18 @@ resource "rootly_schedule_rotation" "weekdays" {
   }
   schedule_rotationable_type = "ScheduleDailyRotation"
   time_zone                  = "America/Toronto"
+
+  schedule_rotation_members {
+    member_type = "User"
+    member_id   = data.rootly_user.john.id
+    position    = 1
+  }
+
+  schedule_rotation_members {
+    member_type = "User"
+    member_id   = data.rootly_user.jane.id
+    position    = 2
+  }
 }
 
 # Define active days for the weekday rotation
@@ -100,18 +112,6 @@ resource "rootly_schedule_rotation_active_day" "f1-weekday" {
     start_time = "10:00"
     end_time   = "18:00"
   }
-}
-
-resource "rootly_schedule_rotation_user" "john" {
-  schedule_rotation_id = rootly_schedule_rotation.weekdays.id
-  position             = 1
-  user_id              = data.rootly_user.john.id
-}
-
-resource "rootly_schedule_rotation_user" "jane" {
-  schedule_rotation_id = rootly_schedule_rotation.weekdays.id
-  position             = 2
-  user_id              = data.rootly_user.jane.id
 }
 
 resource "rootly_escalation_policy" "primary" {

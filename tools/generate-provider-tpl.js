@@ -107,6 +107,7 @@ ${resources
 				"rootly_override_shift": resourceOverrideShift(),
 				"rootly_schedule": resourceSchedule(),
 				"rootly_schedule_rotation": resourceScheduleRotation(),
+				"rootly_schedule_rotation_user": resourceScheduleRotationUser(),
 				"rootly_catalog_property": resourceCatalogProperty(),
 				"rootly_secret": resourceSecret(),
 				"rootly_status_page": resourceStatusPage(),
