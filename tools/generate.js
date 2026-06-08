@@ -113,6 +113,7 @@ const excluded = {
     "secret",
     "schedule", // cannot auto-generate because of schema upgrade logic
     "schedule_rotation",
+    "schedule_rotation_user", // deprecated. schedule_rotation should be used instead
     "shift",
     "team",
     "user",
