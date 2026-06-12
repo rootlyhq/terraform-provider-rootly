@@ -175,7 +175,6 @@ func resourceAlertsSource() *schema.Resource {
 
 			"alert_source_urgency_rules_attributes": &schema.Schema{
 				Type:             schema.TypeList,
-				Computed:         true,
 				Required:         false,
 				Optional:         true,
 				Sensitive:        false,
