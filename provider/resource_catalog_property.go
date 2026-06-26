@@ -65,8 +65,8 @@ func resourceCatalogProperty() *schema.Resource {
 				Sensitive:    false,
 				ForceNew:     false,
 				WriteOnly:    false,
-				Description:  "Value must be one of `text`, `reference`.",
-				ValidateFunc: validation.StringInSlice([]string{"text", "reference"}, false),
+				Description:  "Value must be one of `text`, `reference`, `functionality`.",
+				ValidateFunc: validation.StringInSlice([]string{"text", "reference", "functionality"}, false),
 			},
 
 			"kind_catalog_id": &schema.Schema{
