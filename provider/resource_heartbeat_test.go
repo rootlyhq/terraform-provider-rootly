@@ -52,22 +52,41 @@ func TestAccResourceHeartbeat(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceHeartbeat(heartbeatName, teamName, alertUrgencyName, true),
-				Check:  checkHeartbeatEnabled(true),
+				// Create with an owning team.
+				Config: testAccResourceHeartbeat(heartbeatName, teamName, alertUrgencyName, true, true),
+				Check: resource.ComposeTestCheckFunc(
+					checkHeartbeatEnabled(true),
+					resource.TestCheckResourceAttr("rootly_heartbeat.test", "owner_group_ids.#", "1"),
+					resource.TestCheckResourceAttrPair("rootly_heartbeat.test", "owner_group_ids.0", "rootly_team.test", "id"),
+				),
 			},
 			{
-				Config: testAccResourceHeartbeat(heartbeatName, teamName, alertUrgencyName, false),
-				Check:  checkHeartbeatEnabled(false),
+				// Update: clear the owning team.
+				Config: testAccResourceHeartbeat(heartbeatName, teamName, alertUrgencyName, false, false),
+				Check: resource.ComposeTestCheckFunc(
+					checkHeartbeatEnabled(false),
+					resource.TestCheckResourceAttr("rootly_heartbeat.test", "owner_group_ids.#", "0"),
+				),
 			},
 			{
-				Config: testAccResourceHeartbeat(heartbeatName, teamName, alertUrgencyName, true),
-				Check:  checkHeartbeatEnabled(true),
+				// Update: re-add the owning team.
+				Config: testAccResourceHeartbeat(heartbeatName, teamName, alertUrgencyName, true, true),
+				Check: resource.ComposeTestCheckFunc(
+					checkHeartbeatEnabled(true),
+					resource.TestCheckResourceAttr("rootly_heartbeat.test", "owner_group_ids.#", "1"),
+					resource.TestCheckResourceAttrPair("rootly_heartbeat.test", "owner_group_ids.0", "rootly_team.test", "id"),
+				),
 			},
 		},
 	})
 }
 
-func testAccResourceHeartbeat(heartbeatName, teamName, alertUrgencyName string, heartbeatEnabled bool) string {
+func testAccResourceHeartbeat(heartbeatName, teamName, alertUrgencyName string, heartbeatEnabled, withOwnerTeam bool) string {
+	ownerGroupIds := "[]"
+	if withOwnerTeam {
+		ownerGroupIds = "[rootly_team.test.id]"
+	}
+
 	return fmt.Sprintf(`
 resource "rootly_team" "test" {
   name = "%s"
@@ -86,7 +105,8 @@ resource "rootly_heartbeat" "test" {
   notification_target_id = rootly_team.test.id
   notification_target_type = "Group"
   alert_urgency_id = rootly_alert_urgency.test.id
+  owner_group_ids = %s
   enabled = %t
 }
-`, teamName, alertUrgencyName, heartbeatName, heartbeatEnabled)
+`, teamName, alertUrgencyName, heartbeatName, ownerGroupIds, heartbeatEnabled)
 }
