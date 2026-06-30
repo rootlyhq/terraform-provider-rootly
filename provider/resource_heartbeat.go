@@ -128,6 +128,21 @@ func resourceHeartbeat() *schema.Resource {
 				ValidateFunc: validation.StringInSlice([]string{"User", "Group", "Service", "EscalationPolicy", "Functionality"}, false),
 			},
 
+			"owner_group_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         false,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "List of team IDs that own this heartbeat",
+			},
+
 			"enabled": &schema.Schema{
 				Type:      schema.TypeBool,
 				Default:   true,
@@ -242,6 +257,9 @@ func resourceHeartbeatCreate(ctx context.Context, d *schema.ResourceData, meta i
 	if value, ok := d.GetOkExists("notification_target_type"); ok {
 		s.NotificationTargetType = value.(string)
 	}
+	if value, ok := d.GetOkExists("owner_group_ids"); ok {
+		s.OwnerGroupIds = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("enabled"); ok {
 		s.Enabled = tools.Bool(value.(bool))
 	}
@@ -301,6 +319,7 @@ func resourceHeartbeatRead(ctx context.Context, d *schema.ResourceData, meta int
 	d.Set("interval_unit", item.IntervalUnit)
 	d.Set("notification_target_id", item.NotificationTargetId)
 	d.Set("notification_target_type", item.NotificationTargetType)
+	d.Set("owner_group_ids", item.OwnerGroupIds)
 	d.Set("enabled", item.Enabled)
 	d.Set("status", item.Status)
 	d.Set("ping_url", item.PingUrl)
@@ -345,6 +364,15 @@ func resourceHeartbeatUpdate(ctx context.Context, d *schema.ResourceData, meta i
 	if d.HasChange("notification_target_type") {
 		s.NotificationTargetType = d.Get("notification_target_type").(string)
 	}
+
+	if d.HasChange("owner_group_ids") {
+		if value, ok := d.GetOk("owner_group_ids"); value != nil && ok {
+			s.OwnerGroupIds = value.([]interface{})
+		} else {
+			s.OwnerGroupIds = []interface{}{}
+		}
+	}
+
 	if d.HasChange("enabled") {
 		s.Enabled = tools.Bool(d.Get("enabled").(bool))
 	}

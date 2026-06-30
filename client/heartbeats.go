@@ -11,23 +11,24 @@ import (
 )
 
 type Heartbeat struct {
-	ID                     string `jsonapi:"primary,heartbeats"`
-	Name                   string `jsonapi:"attr,name,omitempty"`
-	Description            string `jsonapi:"attr,description,omitempty"`
-	AlertSummary           string `jsonapi:"attr,alert_summary,omitempty"`
-	AlertDescription       string `jsonapi:"attr,alert_description,omitempty"`
-	AlertUrgencyId         string `jsonapi:"attr,alert_urgency_id,omitempty"`
-	Interval               int    `jsonapi:"attr,interval,omitempty"`
-	IntervalUnit           string `jsonapi:"attr,interval_unit,omitempty"`
-	NotificationTargetId   string `jsonapi:"attr,notification_target_id,omitempty"`
-	NotificationTargetType string `jsonapi:"attr,notification_target_type,omitempty"`
-	Enabled                *bool  `jsonapi:"attr,enabled,omitempty"`
-	Status                 string `jsonapi:"attr,status,omitempty"`
-	PingUrl                string `jsonapi:"attr,ping_url,omitempty"`
-	Secret                 string `jsonapi:"attr,secret,omitempty"`
-	EmailAddress           string `jsonapi:"attr,email_address,omitempty"`
-	LastPingedAt           string `jsonapi:"attr,last_pinged_at,omitempty"`
-	ExpiresAt              string `jsonapi:"attr,expires_at,omitempty"`
+	ID                     string        `jsonapi:"primary,heartbeats"`
+	Name                   string        `jsonapi:"attr,name,omitempty"`
+	Description            string        `jsonapi:"attr,description,omitempty"`
+	AlertSummary           string        `jsonapi:"attr,alert_summary,omitempty"`
+	AlertDescription       string        `jsonapi:"attr,alert_description,omitempty"`
+	AlertUrgencyId         string        `jsonapi:"attr,alert_urgency_id,omitempty"`
+	Interval               int           `jsonapi:"attr,interval,omitempty"`
+	IntervalUnit           string        `jsonapi:"attr,interval_unit,omitempty"`
+	NotificationTargetId   string        `jsonapi:"attr,notification_target_id,omitempty"`
+	NotificationTargetType string        `jsonapi:"attr,notification_target_type,omitempty"`
+	OwnerGroupIds          []interface{} `jsonapi:"attr,owner_group_ids,omitempty"`
+	Enabled                *bool         `jsonapi:"attr,enabled,omitempty"`
+	Status                 string        `jsonapi:"attr,status,omitempty"`
+	PingUrl                string        `jsonapi:"attr,ping_url,omitempty"`
+	Secret                 string        `jsonapi:"attr,secret,omitempty"`
+	EmailAddress           string        `jsonapi:"attr,email_address,omitempty"`
+	LastPingedAt           string        `jsonapi:"attr,last_pinged_at,omitempty"`
+	ExpiresAt              string        `jsonapi:"attr,expires_at,omitempty"`
 }
 
 func (c *Client) ListHeartbeats(params *rootlygo.ListHeartbeatsParams) ([]interface{}, error) {
