@@ -77,6 +77,24 @@ func resourceWorkflowTaskSendMicrosoftTeamsBlocks() *schema.Resource {
 								"send_microsoft_teams_blocks",
 							}, false),
 						},
+						"channels": &schema.Schema{
+							Description:      "",
+							Type:             schema.TypeList,
+							Optional:         true,
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": &schema.Schema{
+										Type:     schema.TypeString,
+										Required: true,
+									},
+									"name": &schema.Schema{
+										Type:     schema.TypeString,
+										Required: true,
+									},
+								},
+							},
+						},
 						"attachments": &schema.Schema{
 							Description: "Support liquid markup. Needs to be a valid JSON string after liquid is parsed",
 							Type:        schema.TypeString,

@@ -39,7 +39,16 @@ Required:
 
 Optional:
 
+- `channels` (Block List) (see [below for nested schema](#nestedblock--task_params--channels))
 - `task_type` (String)
+
+<a id="nestedblock--task_params--channels"></a>
+### Nested Schema for `task_params.channels`
+
+Required:
+
+- `id` (String)
+- `name` (String)
 
 ## Import
 

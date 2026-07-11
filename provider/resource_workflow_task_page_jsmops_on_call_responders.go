@@ -127,7 +127,7 @@ func resourceWorkflowTaskPageJsmopsOnCallResponders() *schema.Resource {
 							},
 						},
 						"priority": &schema.Schema{
-							Description: "Value must be one of `P3`, `P1`, `P2`, `P3`, `P4`, `P5`, `auto`.",
+							Description: "Value must be one of `P3`, `P1`, `P2`, `P4`, `P5`, `auto`.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Default:     "P3",
@@ -135,7 +135,6 @@ func resourceWorkflowTaskPageJsmopsOnCallResponders() *schema.Resource {
 								"P3",
 								"P1",
 								"P2",
-								"P3",
 								"P4",
 								"P5",
 								"auto",

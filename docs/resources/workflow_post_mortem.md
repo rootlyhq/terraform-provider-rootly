@@ -64,6 +64,8 @@ Optional:
 - `incident_condition_incident_roles` (String) Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `incident_condition_incident_type` (String) Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `incident_condition_kind` (String) Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
+- `incident_condition_label` (String) Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
+- `incident_condition_label_use_regexp` (Boolean) Value must be one of true or false
 - `incident_condition_mitigated_at` (String) Value must be one of `SET`, `UNSET`.
 - `incident_condition_resolved_at` (String) Value must be one of `SET`, `UNSET`.
 - `incident_condition_service` (String) Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
@@ -76,6 +78,7 @@ Optional:
 - `incident_conditional_inactivity` (String) Value must be one of `IS`.
 - `incident_inactivity_duration` (String) ex. 10 min, 1h, 3 days, 2 weeks
 - `incident_kinds` (List of String) Value must be one of `test`, `test_sub`, `example`, `example_sub`, `normal`, `normal_sub`, `backfilled`, `scheduled`, `scheduled_sub`.
+- `incident_labels` (List of String)
 - `incident_post_mortem_condition` (String) Value must be one of `ALL`, `ANY`, `NONE`.
 - `incident_post_mortem_condition_cause` (String) [DEPRECATED] Use incident_condition_cause instead. Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `incident_post_mortem_condition_status` (String) Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.

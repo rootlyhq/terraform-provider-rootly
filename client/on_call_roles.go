@@ -35,6 +35,7 @@ type OnCallRole struct {
 	ScheduleOverridePermissions      []interface{} `jsonapi:"attr,schedule_override_permissions,omitempty"`
 	SchedulesPermissions             []interface{} `jsonapi:"attr,schedules_permissions,omitempty"`
 	ServicesPermissions              []interface{} `jsonapi:"attr,services_permissions,omitempty"`
+	FunctionalitiesPermissions       []interface{} `jsonapi:"attr,functionalities_permissions,omitempty"`
 	WebhooksPermissions              []interface{} `jsonapi:"attr,webhooks_permissions,omitempty"`
 	WorkflowsPermissions             []interface{} `jsonapi:"attr,workflows_permissions,omitempty"`
 	CatalogsPermissions              []interface{} `jsonapi:"attr,catalogs_permissions,omitempty"`

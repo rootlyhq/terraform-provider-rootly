@@ -40,6 +40,8 @@ Required:
 Optional:
 
 - `content` (String) The Confluence page content
+- `include_overview` (Boolean) Value must be one of true or false
+- `include_timeline` (Boolean) Value must be one of true or false
 - `integration` (Map of String) Map must contain two fields, `id` and `name`. Specify integration id if you have more than one Confluence instance
 - `post_mortem_template_id` (String) Retrospective template to use when updating page, if desired
 - `task_type` (String)

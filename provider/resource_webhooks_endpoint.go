@@ -94,6 +94,44 @@ func resourceWebhooksEndpoint() *schema.Resource {
 				ForceNew:  false,
 				WriteOnly: false,
 			},
+
+			"custom_headers": &schema.Schema{
+				Type:             schema.TypeList,
+				Computed:         false,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Custom HTTP headers sent with each delivery. Max 10. Reserved names (Content-Type, X-Rootly-Signature, Host, etc.) are rejected.",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+
+						"name": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "",
+						},
+
+						"value": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "",
+						},
+					},
+				},
+			},
 		},
 	}
 }
@@ -122,6 +160,9 @@ func resourceWebhooksEndpointCreate(ctx context.Context, d *schema.ResourceData,
 	}
 	if value, ok := d.GetOkExists("enabled"); ok {
 		s.Enabled = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("custom_headers"); ok {
+		s.CustomHeaders = value.([]interface{})
 	}
 
 	res, err := c.CreateWebhooksEndpoint(s)
@@ -159,6 +200,25 @@ func resourceWebhooksEndpointRead(ctx context.Context, d *schema.ResourceData, m
 	d.Set("secret", item.Secret)
 	d.Set("enabled", item.Enabled)
 
+	if item.CustomHeaders != nil {
+		processed_items_custom_headers := make([]map[string]interface{}, 0)
+
+		for _, c := range item.CustomHeaders {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processed_item_custom_headers := map[string]interface{}{
+					"name":  rawItem["name"],
+					"value": rawItem["value"],
+				}
+				processed_items_custom_headers = append(processed_items_custom_headers, processed_item_custom_headers)
+			}
+		}
+
+		d.Set("custom_headers", processed_items_custom_headers)
+	} else {
+		d.Set("custom_headers", nil)
+	}
+
 	return nil
 }
 
@@ -191,6 +251,14 @@ func resourceWebhooksEndpointUpdate(ctx context.Context, d *schema.ResourceData,
 	}
 	if d.HasChange("enabled") {
 		s.Enabled = tools.Bool(d.Get("enabled").(bool))
+	}
+
+	if d.HasChange("custom_headers") {
+		if value, ok := d.GetOk("custom_headers"); value != nil && ok {
+			s.CustomHeaders = value.([]interface{})
+		} else {
+			s.CustomHeaders = []interface{}{}
+		}
 	}
 
 	_, err := c.UpdateWebhooksEndpoint(d.Id(), s)

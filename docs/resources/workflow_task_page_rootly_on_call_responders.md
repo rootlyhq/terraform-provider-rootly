@@ -40,6 +40,7 @@ Required:
 
 Optional:
 
+- `create_new_alert` (Boolean) When true, always create a new alert instead of re-paging the alert that triggered the workflow. Value must be one of true or false
 - `description` (String) Alert description
 - `escalation_note` (String)
 - `escalation_policy_target` (Map of String) Map must contain two fields, `id` and `name`.

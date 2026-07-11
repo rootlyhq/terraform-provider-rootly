@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -67,6 +68,29 @@ func resourceCatalogEntity() *schema.Resource {
 				ForceNew:    false,
 				WriteOnly:   false,
 				Description: "The Backstage entity ID this catalog entity is linked to.",
+			},
+
+			"external_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "An external identifier for this catalog entity. Must be unique within the catalog.",
+			},
+
+			"managed_by": &schema.Schema{
+				Type:         schema.TypeString,
+				Default:      "web",
+				Required:     false,
+				Optional:     true,
+				Sensitive:    false,
+				ForceNew:     false,
+				WriteOnly:    false,
+				Description:  "Which source manages this resource (read-only).. Value must be one of `web`, `admin_web`, `api`, `terraform`, `pulumi`, `backstage`, `catalog_sync`.",
+				ValidateFunc: validation.StringInSlice([]string{"web", "admin_web", "api", "terraform", "pulumi", "backstage", "catalog_sync"}, false),
 			},
 
 			"properties": &schema.Schema{
@@ -140,6 +164,12 @@ func resourceCatalogEntityCreate(ctx context.Context, d *schema.ResourceData, me
 	if value, ok := d.GetOkExists("backstage_id"); ok {
 		s.BackstageId = value.(string)
 	}
+	if value, ok := d.GetOkExists("external_id"); ok {
+		s.ExternalId = value.(string)
+	}
+	if value, ok := d.GetOkExists("managed_by"); ok {
+		s.ManagedBy = value.(string)
+	}
 	if value, ok := d.GetOkExists("properties"); ok {
 		s.Properties = value.([]interface{})
 	}
@@ -179,6 +209,8 @@ func resourceCatalogEntityRead(ctx context.Context, d *schema.ResourceData, meta
 	d.Set("description", item.Description)
 	d.Set("position", item.Position)
 	d.Set("backstage_id", item.BackstageId)
+	d.Set("external_id", item.ExternalId)
+	d.Set("managed_by", item.ManagedBy)
 
 	if item.Properties != nil {
 		processed_items_properties := make([]map[string]interface{}, 0)
@@ -221,6 +253,12 @@ func resourceCatalogEntityUpdate(ctx context.Context, d *schema.ResourceData, me
 	}
 	if d.HasChange("backstage_id") {
 		s.BackstageId = d.Get("backstage_id").(string)
+	}
+	if d.HasChange("external_id") {
+		s.ExternalId = d.Get("external_id").(string)
+	}
+	if d.HasChange("managed_by") {
+		s.ManagedBy = d.Get("managed_by").(string)
 	}
 
 	if d.HasChange("properties") {

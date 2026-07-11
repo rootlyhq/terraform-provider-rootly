@@ -35,6 +35,7 @@ Manages workflow create_microsoft_teams_channel task.
 
 Required:
 
+- `team` (Map of String) Map must contain two fields, `id` and `name`.
 - `title` (String) Microsoft Team channel title
 
 Optional:
@@ -42,7 +43,6 @@ Optional:
 - `description` (String) Microsoft Team channel description
 - `private` (String) Value must be one of `auto`, `true`, `false`.
 - `task_type` (String)
-- `team` (Map of String) Map must contain two fields, `id` and `name`.
 
 ## Import
 

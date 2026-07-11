@@ -120,6 +120,11 @@ func resourceWorkflowTaskPageRootlyOnCallResponders() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
+						"create_new_alert": &schema.Schema{
+							Description: "When true, always create a new alert instead of re-paging the alert that triggered the workflow. Value must be one of true or false",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
 					},
 				},
 			},

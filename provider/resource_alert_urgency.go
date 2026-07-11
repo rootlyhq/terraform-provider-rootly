@@ -24,6 +24,17 @@ func resourceAlertUrgency() *schema.Resource {
 		},
 		Schema: map[string]*schema.Schema{
 
+			"id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Unique ID of the alert urgency",
+			},
+
 			"name": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    false,
@@ -56,6 +67,50 @@ func resourceAlertUrgency() *schema.Resource {
 				WriteOnly:   false,
 				Description: "Position of the alert urgency",
 			},
+
+			"urgency": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "The urgency level",
+			},
+
+			"color": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "The color associated with this urgency level",
+			},
+
+			"team_id": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "The ID of the team this urgency belongs to",
+			},
+
+			"deleted_at": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Date of deletion",
+			},
 		},
 	}
 }
@@ -67,6 +122,9 @@ func resourceAlertUrgencyCreate(ctx context.Context, d *schema.ResourceData, met
 
 	s := &client.AlertUrgency{}
 
+	if value, ok := d.GetOkExists("id"); ok {
+		s.Id = value.(string)
+	}
 	if value, ok := d.GetOkExists("name"); ok {
 		s.Name = value.(string)
 	}
@@ -75,6 +133,18 @@ func resourceAlertUrgencyCreate(ctx context.Context, d *schema.ResourceData, met
 	}
 	if value, ok := d.GetOkExists("position"); ok {
 		s.Position = value.(int)
+	}
+	if value, ok := d.GetOkExists("urgency"); ok {
+		s.Urgency = value.(string)
+	}
+	if value, ok := d.GetOkExists("color"); ok {
+		s.Color = value.(string)
+	}
+	if value, ok := d.GetOkExists("team_id"); ok {
+		s.TeamId = value.(int)
+	}
+	if value, ok := d.GetOkExists("deleted_at"); ok {
+		s.DeletedAt = value.(string)
 	}
 
 	res, err := c.CreateAlertUrgency(s)
@@ -105,9 +175,14 @@ func resourceAlertUrgencyRead(ctx context.Context, d *schema.ResourceData, meta 
 		return diag.Errorf("Error reading alert_urgency: %s", d.Id())
 	}
 
+	d.Set("id", item.Id)
 	d.Set("name", item.Name)
 	d.Set("description", item.Description)
 	d.Set("position", item.Position)
+	d.Set("urgency", item.Urgency)
+	d.Set("color", item.Color)
+	d.Set("team_id", item.TeamId)
+	d.Set("deleted_at", item.DeletedAt)
 
 	return nil
 }
@@ -118,6 +193,9 @@ func resourceAlertUrgencyUpdate(ctx context.Context, d *schema.ResourceData, met
 
 	s := &client.AlertUrgency{}
 
+	if d.HasChange("id") {
+		s.Id = d.Get("id").(string)
+	}
 	if d.HasChange("name") {
 		s.Name = d.Get("name").(string)
 	}
@@ -126,6 +204,18 @@ func resourceAlertUrgencyUpdate(ctx context.Context, d *schema.ResourceData, met
 	}
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)
+	}
+	if d.HasChange("urgency") {
+		s.Urgency = d.Get("urgency").(string)
+	}
+	if d.HasChange("color") {
+		s.Color = d.Get("color").(string)
+	}
+	if d.HasChange("team_id") {
+		s.TeamId = d.Get("team_id").(int)
+	}
+	if d.HasChange("deleted_at") {
+		s.DeletedAt = d.Get("deleted_at").(string)
 	}
 
 	_, err := c.UpdateAlertUrgency(d.Id(), s)

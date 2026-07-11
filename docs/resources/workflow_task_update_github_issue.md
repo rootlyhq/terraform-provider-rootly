@@ -41,6 +41,7 @@ Required:
 Optional:
 
 - `body` (String) The issue body
+- `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON
 - `issue_type` (Map of String) Map must contain two fields, `id` and `name`. The issue type
 - `labels` (Block List) The issue labels (see [below for nested schema](#nestedblock--task_params--labels))
 - `labels_mode` (String) How to apply labels. 'replace' (default) overwrites all existing labels. 'append' adds to existing labels without removing them.. Value must be one of `replace`, `append`.

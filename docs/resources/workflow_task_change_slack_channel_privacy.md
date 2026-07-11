@@ -35,11 +35,11 @@ Manages workflow change_slack_channel_privacy task.
 
 Required:
 
+- `channel` (Map of String) Map must contain two fields, `id` and `name`.
 - `privacy` (String) Value must be one of `private`, `public`.
 
 Optional:
 
-- `channel` (Map of String) Map must contain two fields, `id` and `name`.
 - `task_type` (String)
 
 ## Import

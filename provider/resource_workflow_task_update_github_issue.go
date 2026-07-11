@@ -4,8 +4,10 @@ package provider
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"reflect"
 
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -132,6 +134,25 @@ func resourceWorkflowTaskUpdateGithubIssue() *schema.Resource {
 							Description: "Map must contain two fields, `id` and `name`. ",
 							Type:        schema.TypeMap,
 							Required:    true,
+						},
+						"custom_fields_mapping": &schema.Schema{
+							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON",
+							Type:        schema.TypeString,
+							Optional:    true,
+							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {
+								var oldJSONAsInterface, newJSONAsInterface interface{}
+
+								if err := json.Unmarshal([]byte(old), &oldJSONAsInterface); err != nil {
+									return false
+								}
+
+								if err := json.Unmarshal([]byte(new), &newJSONAsInterface); err != nil {
+									return false
+								}
+
+								return reflect.DeepEqual(oldJSONAsInterface, newJSONAsInterface)
+							},
+							Default: "{}",
 						},
 					},
 				},
