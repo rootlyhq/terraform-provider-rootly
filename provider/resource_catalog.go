@@ -83,7 +83,7 @@ func resourceCatalog() *schema.Resource {
 
 			"managed_by": &schema.Schema{
 				Type:         schema.TypeString,
-				Default:      "web",
+				Computed:     true,
 				Required:     false,
 				Optional:     true,
 				Sensitive:    false,

@@ -460,11 +460,14 @@ function generateValidateFunc(schema) {
 
 function schemaField(name, resourceSchema, requiredFields, pathIdField) {
   const schema = resourceSchema.properties[name];
+  const isPathId = name === pathIdField;
   const optional =
+    isPathId ? "false" :
     (requiredFields || []).indexOf(name) === -1 || schema.enum
       ? "true"
       : "false";
   const required =
+    isPathId ? "true" :
     (requiredFields || []).indexOf(name) === -1 || schema.enum
       ? "false"
       : "true";
@@ -476,6 +479,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField) {
     schema.enum.length > 0 &&
     !schema.anyOfChild &&
     !schema.nullable &&  // Don't add default for nullable fields
+    !schema.tf_computed &&  // Don't add default for computed fields
     name !== "status"
   ) {
     defaultValue = `Default: "${schema.enum[0]}"`;

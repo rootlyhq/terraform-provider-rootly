@@ -17,11 +17,11 @@ description: |-
 ### Required
 
 - `form` (String) The form this field is placed on.
+- `form_field_id` (String) The form field that is placed.
 - `form_set_id` (String) The form set this field is placed in.
 
 ### Optional
 
-- `form_field_id` (String) The form field that is placed.
 - `non_editable` (Boolean) Whether the field is read-only and cannot be edited by users.. Value must be one of true or false
 - `placement_operator` (String) Logical operator when evaluating multiple form_field_placement_conditions with conditioned=placement. Value must be one of `and`, `or`.
 - `position` (Number) The position of the field placement.

@@ -83,7 +83,7 @@ func resourceCatalogEntity() *schema.Resource {
 
 			"managed_by": &schema.Schema{
 				Type:         schema.TypeString,
-				Default:      "web",
+				Computed:     true,
 				Required:     false,
 				Optional:     true,
 				Sensitive:    false,
@@ -133,9 +133,9 @@ func resourceCatalogEntity() *schema.Resource {
 
 			"catalog_id": &schema.Schema{
 				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
 				Sensitive:   false,
 				ForceNew:    true,
 				WriteOnly:   false,

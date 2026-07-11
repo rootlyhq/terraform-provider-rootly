@@ -28,9 +28,9 @@ func resourceScheduleRotationActiveDay() *schema.Resource {
 
 			"schedule_rotation_id": &schema.Schema{
 				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
 				Sensitive:   false,
 				ForceNew:    true,
 				WriteOnly:   false,

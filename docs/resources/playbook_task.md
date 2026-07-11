@@ -28,12 +28,12 @@ resource "rootly_playbook_task" "notify_dba" {
 
 ### Required
 
+- `playbook_id` (String)
 - `task` (String) The task of the task
 
 ### Optional
 
 - `description` (String) The description of task
-- `playbook_id` (String)
 - `position` (Number) The position of the task
 
 ### Read-Only

@@ -16,12 +16,12 @@ description: |-
 
 ### Required
 
+- `retrospective_process_id` (String)
 - `sub_status_id` (String)
 
 ### Optional
 
 - `position` (Number)
-- `retrospective_process_id` (String)
 
 ### Read-Only
 

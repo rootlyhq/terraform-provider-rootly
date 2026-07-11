@@ -17,12 +17,12 @@ description: |-
 ### Required
 
 - `form_field_id` (String) The form field this condition applies.
+- `form_set_id` (String) The form set this condition applies.
 - `values` (List of String) The values for comparison.
 
 ### Optional
 
 - `comparison` (String) The condition comparison.. Value must be one of `equal`.
-- `form_set_id` (String) The form set this condition applies.
 
 ### Read-Only
 
