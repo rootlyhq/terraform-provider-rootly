@@ -10,7 +10,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -82,15 +81,14 @@ func resourceCatalogEntity() *schema.Resource {
 			},
 
 			"managed_by": &schema.Schema{
-				Type:         schema.TypeString,
-				Computed:     true,
-				Required:     false,
-				Optional:     false,
-				Sensitive:    false,
-				ForceNew:     false,
-				WriteOnly:    false,
-				Description:  "Which source manages this resource (read-only).. Value must be one of `web`, `admin_web`, `api`, `terraform`, `pulumi`, `backstage`, `catalog_sync`.",
-				ValidateFunc: validation.StringInSlice([]string{"web", "admin_web", "api", "terraform", "pulumi", "backstage", "catalog_sync"}, false),
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    false,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Which source manages this resource (read-only).. Value must be one of `web`, `admin_web`, `api`, `terraform`, `pulumi`, `backstage`, `catalog_sync`.",
 			},
 
 			"properties": &schema.Schema{

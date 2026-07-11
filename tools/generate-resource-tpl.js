@@ -516,7 +516,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField, writable
 		},
 	`
     : "";
-  const validateFunc = generateValidateFunc(schema);
+  const validateFunc = isReadOnly ? "" : generateValidateFunc(schema);
   switch (schema.type) {
     case "string":
       return `

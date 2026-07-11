@@ -82,15 +82,14 @@ func resourceCatalog() *schema.Resource {
 			},
 
 			"managed_by": &schema.Schema{
-				Type:         schema.TypeString,
-				Computed:     true,
-				Required:     false,
-				Optional:     false,
-				Sensitive:    false,
-				ForceNew:     false,
-				WriteOnly:    false,
-				Description:  "Which source manages this resource (read-only).. Value must be one of `web`, `admin_web`, `api`, `terraform`, `pulumi`, `backstage`, `catalog_sync`.",
-				ValidateFunc: validation.StringInSlice([]string{"web", "admin_web", "api", "terraform", "pulumi", "backstage", "catalog_sync"}, false),
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    false,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Which source manages this resource (read-only).. Value must be one of `web`, `admin_web`, `api`, `terraform`, `pulumi`, `backstage`, `catalog_sync`.",
 			},
 		},
 	}
