@@ -31,12 +31,12 @@ resource "rootly_catalog" "customer_tier" {
 - `description` (String)
 - `external_id` (String) An external identifier for this catalog. Must be unique within the team.
 - `icon` (String) Value must be one of `globe-alt`, `server-stack`, `users`, `user-group`, `chart-bar`, `shapes`, `light-bulb`, `cursor-arrow-ripple`.
-- `managed_by` (String) Which source manages this resource (read-only).. Value must be one of `web`, `admin_web`, `api`, `terraform`, `pulumi`, `backstage`, `catalog_sync`.
 - `position` (Number) Default position of the catalog when displayed in a list.
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `managed_by` (String) Which source manages this resource (read-only).. Value must be one of `web`, `admin_web`, `api`, `terraform`, `pulumi`, `backstage`, `catalog_sync`.
 
 ## Import
 

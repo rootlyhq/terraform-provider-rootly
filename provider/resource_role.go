@@ -41,7 +41,7 @@ func resourceRole() *schema.Resource {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Required:    false,
-				Optional:    true,
+				Optional:    false,
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
@@ -622,9 +622,6 @@ func resourceRoleCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	if value, ok := d.GetOkExists("name"); ok {
 		s.Name = value.(string)
 	}
-	if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
-	}
 	if value, ok := d.GetOkExists("incident_permission_set_id"); ok {
 		s.IncidentPermissionSetId = value.(string)
 	}
@@ -812,9 +809,6 @@ func resourceRoleUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 
 	if d.HasChange("name") {
 		s.Name = d.Get("name").(string)
-	}
-	if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
 	}
 	if d.HasChange("incident_permission_set_id") {
 		s.IncidentPermissionSetId = d.Get("incident_permission_set_id").(string)

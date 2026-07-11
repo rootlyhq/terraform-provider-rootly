@@ -40,7 +40,7 @@ func resourceIncidentRole() *schema.Resource {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Required:    false,
-				Optional:    true,
+				Optional:    false,
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
@@ -124,9 +124,6 @@ func resourceIncidentRoleCreate(ctx context.Context, d *schema.ResourceData, met
 	if value, ok := d.GetOkExists("name"); ok {
 		s.Name = value.(string)
 	}
-	if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
-	}
 	if value, ok := d.GetOkExists("summary"); ok {
 		s.Summary = value.(string)
 	}
@@ -194,9 +191,6 @@ func resourceIncidentRoleUpdate(ctx context.Context, d *schema.ResourceData, met
 
 	if d.HasChange("name") {
 		s.Name = d.Get("name").(string)
-	}
-	if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
 	}
 	if d.HasChange("summary") {
 		s.Summary = d.Get("summary").(string)

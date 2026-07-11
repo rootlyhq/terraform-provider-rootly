@@ -85,7 +85,7 @@ func resourceCatalogEntity() *schema.Resource {
 				Type:         schema.TypeString,
 				Computed:     true,
 				Required:     false,
-				Optional:     true,
+				Optional:     false,
 				Sensitive:    false,
 				ForceNew:     false,
 				WriteOnly:    false,
@@ -166,9 +166,6 @@ func resourceCatalogEntityCreate(ctx context.Context, d *schema.ResourceData, me
 	}
 	if value, ok := d.GetOkExists("external_id"); ok {
 		s.ExternalId = value.(string)
-	}
-	if value, ok := d.GetOkExists("managed_by"); ok {
-		s.ManagedBy = value.(string)
 	}
 	if value, ok := d.GetOkExists("properties"); ok {
 		s.Properties = value.([]interface{})
@@ -256,9 +253,6 @@ func resourceCatalogEntityUpdate(ctx context.Context, d *schema.ResourceData, me
 	}
 	if d.HasChange("external_id") {
 		s.ExternalId = d.Get("external_id").(string)
-	}
-	if d.HasChange("managed_by") {
-		s.ManagedBy = d.Get("managed_by").(string)
 	}
 
 	if d.HasChange("properties") {

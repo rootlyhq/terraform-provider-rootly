@@ -83,11 +83,11 @@ resource "rootly_severity" "sev2" {
 - `severity` (String) The severity of the severity. Value must be one of `critical`, `high`, `medium`, `low`.
 - `slack_aliases` (Block List) Slack Aliases associated with this severity (see [below for nested schema](#nestedblock--slack_aliases))
 - `slack_channels` (Block List) Slack Channels associated with this severity (see [below for nested schema](#nestedblock--slack_channels))
-- `slug` (String) The slug of the severity
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `slug` (String) The slug of the severity
 
 <a id="nestedblock--slack_aliases"></a>
 ### Nested Schema for `slack_aliases`

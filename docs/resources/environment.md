@@ -83,11 +83,11 @@ resource "rootly_environment" "production" {
 - `properties` (Block List) Array of property values for this environment. (see [below for nested schema](#nestedblock--properties))
 - `slack_aliases` (Block List) Slack Aliases associated with this environment (see [below for nested schema](#nestedblock--slack_aliases))
 - `slack_channels` (Block List) Slack Channels associated with this environment (see [below for nested schema](#nestedblock--slack_channels))
-- `slug` (String) The slug of the environment
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `slug` (String) The slug of the environment
 
 <a id="nestedblock--properties"></a>
 ### Nested Schema for `properties`

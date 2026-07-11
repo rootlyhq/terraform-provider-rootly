@@ -85,7 +85,7 @@ func resourceCatalog() *schema.Resource {
 				Type:         schema.TypeString,
 				Computed:     true,
 				Required:     false,
-				Optional:     true,
+				Optional:     false,
 				Sensitive:    false,
 				ForceNew:     false,
 				WriteOnly:    false,
@@ -117,9 +117,6 @@ func resourceCatalogCreate(ctx context.Context, d *schema.ResourceData, meta int
 	}
 	if value, ok := d.GetOkExists("external_id"); ok {
 		s.ExternalId = value.(string)
-	}
-	if value, ok := d.GetOkExists("managed_by"); ok {
-		s.ManagedBy = value.(string)
 	}
 
 	res, err := c.CreateCatalog(s)
@@ -180,9 +177,6 @@ func resourceCatalogUpdate(ctx context.Context, d *schema.ResourceData, meta int
 	}
 	if d.HasChange("external_id") {
 		s.ExternalId = d.Get("external_id").(string)
-	}
-	if d.HasChange("managed_by") {
-		s.ManagedBy = d.Get("managed_by").(string)
 	}
 
 	_, err := c.UpdateCatalog(d.Id(), s)

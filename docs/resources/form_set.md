@@ -22,11 +22,11 @@ description: |-
 ### Optional
 
 - `is_default` (Boolean) Whether the form set is default. Value must be one of true or false
-- `slug` (String) The slug of the form set
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `slug` (String) The slug of the form set
 
 ## Import
 

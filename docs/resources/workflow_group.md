@@ -25,11 +25,11 @@ description: |-
 - `icon` (String) An emoji icon displayed next to the workflow group.
 - `kind` (String) The kind of the workflow group. Value must be one of `simple`, `incident`, `post_mortem`, `action_item`, `pulse`, `alert`.
 - `position` (Number) The position of the workflow group
-- `slug` (String) The slug of the workflow group.
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `slug` (String) The slug of the workflow group.
 
 ## Import
 

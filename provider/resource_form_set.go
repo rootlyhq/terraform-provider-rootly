@@ -40,7 +40,7 @@ func resourceFormSet() *schema.Resource {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Required:    false,
-				Optional:    true,
+				Optional:    false,
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
@@ -85,9 +85,6 @@ func resourceFormSetCreate(ctx context.Context, d *schema.ResourceData, meta int
 
 	if value, ok := d.GetOkExists("name"); ok {
 		s.Name = value.(string)
-	}
-	if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
 	}
 	if value, ok := d.GetOkExists("is_default"); ok {
 		s.IsDefault = tools.Bool(value.(bool))
@@ -140,9 +137,6 @@ func resourceFormSetUpdate(ctx context.Context, d *schema.ResourceData, meta int
 
 	if d.HasChange("name") {
 		s.Name = d.Get("name").(string)
-	}
-	if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
 	}
 	if d.HasChange("is_default") {
 		s.IsDefault = tools.Bool(d.Get("is_default").(bool))

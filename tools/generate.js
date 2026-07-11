@@ -372,7 +372,8 @@ function generateResource(name) {
       name,
       schema,
       requiredFields(name),
-      pathIdField
+      pathIdField,
+      writableFields(name)
     );
     safeWriteFile(
       path.resolve(__dirname, "..", "provider", `resource_${name}.go`),
@@ -397,6 +398,15 @@ function requiredFields(name) {
     return [];
   }
   return schema.properties.data.properties.attributes.required || [];
+}
+
+function writableFields(name) {
+  const schemaName = `new_${name}`;
+  const schema = swagger.components.schemas[schemaName];
+  if (!schema || !schema.properties || !schema.properties.data || !schema.properties.data.properties || !schema.properties.data.properties.attributes) {
+    return null;
+  }
+  return Object.keys(schema.properties.data.properties.attributes.properties || {});
 }
 
 function collectionPathSchema(name) {

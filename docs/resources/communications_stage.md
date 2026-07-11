@@ -29,11 +29,11 @@ resource "rootly_communications_stage" "initial_notification" {
 
 - `description` (String) The description of the communications stage
 - `position` (Number) Position of the communications stage
-- `slug` (String) The slug of the communications stage
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `slug` (String) The slug of the communications stage
 
 ## Import
 

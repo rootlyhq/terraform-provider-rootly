@@ -33,11 +33,11 @@ resource "rootly_catalog_checklist_template" "production_readiness" {
 - `owners` (Block List) Template owners (see [below for nested schema](#nestedblock--owners))
 - `scope_id` (String) The scope ID
 - `scope_type` (String) The scope type. Value must be one of `Team`, `Catalog`.
-- `slug` (String) The slug of the checklist template
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `slug` (String) The slug of the checklist template
 
 <a id="nestedblock--fields"></a>
 ### Nested Schema for `fields`

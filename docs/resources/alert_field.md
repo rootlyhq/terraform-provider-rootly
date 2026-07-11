@@ -28,11 +28,11 @@ resource "rootly_alert_field" "cloud_region" {
 ### Optional
 
 - `kind` (String) The kind of alert field
-- `slug` (String) The slug of the alert field
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `slug` (String) The slug of the alert field
 
 ## Import
 

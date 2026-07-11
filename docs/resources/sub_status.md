@@ -37,11 +37,11 @@ resource "rootly_sub_status" "fix_in_progress" {
 - `description` (String)
 - `parent_status` (String) Value must be one of `in_triage`, `started`, `resolved`, `closed`, `cancelled`, `planning`, `scheduled`, `in_progress`, `verifying`, `completed`.
 - `position` (Number)
-- `slug` (String)
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `slug` (String)
 
 ## Import
 

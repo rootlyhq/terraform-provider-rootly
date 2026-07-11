@@ -23,11 +23,11 @@ description: |-
 - `description` (String) The incident permission set description.
 - `private_incident_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `public_incident_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
-- `slug` (String) The incident permission set slug.
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `slug` (String) The incident permission set slug.
 
 ## Import
 

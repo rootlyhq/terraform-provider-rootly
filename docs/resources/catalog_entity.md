@@ -38,13 +38,13 @@ resource "rootly_catalog_entity" "growth_tier" {
 - `backstage_id` (String) The Backstage entity ID this catalog entity is linked to.
 - `description` (String)
 - `external_id` (String) An external identifier for this catalog entity. Must be unique within the catalog.
-- `managed_by` (String) Which source manages this resource (read-only).. Value must be one of `web`, `admin_web`, `api`, `terraform`, `pulumi`, `backstage`, `catalog_sync`.
 - `position` (Number) Default position of the item when displayed in a list.
 - `properties` (Block List) Array of property values for this catalog entity (see [below for nested schema](#nestedblock--properties))
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `managed_by` (String) Which source manages this resource (read-only).. Value must be one of `web`, `admin_web`, `api`, `terraform`, `pulumi`, `backstage`, `catalog_sync`.
 
 <a id="nestedblock--properties"></a>
 ### Nested Schema for `properties`

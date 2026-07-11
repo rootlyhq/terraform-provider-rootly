@@ -23,11 +23,11 @@ description: |-
 
 - `description` (String)
 - `enabled` (Boolean)
-- `slug` (String) The custom form slug. Add this to form_field.shown or form_field.required to associate form fields with custom forms.
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `slug` (String) The custom form slug. Add this to form_field.shown or form_field.required to associate form fields with custom forms.
 
 ## Import
 
