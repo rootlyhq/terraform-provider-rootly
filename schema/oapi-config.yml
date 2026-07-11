@@ -10,3 +10,4 @@ output-options:
     - dashboard_panel_list
     - dashboard_panel
     - dashboard_panel_response
+    - bulk_upsert_catalog_entities_response
