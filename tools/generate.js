@@ -30,6 +30,7 @@ const excluded = {
   dataSources: [
     "alert",
     "alert_event",
+    "alert_group",
     "alert_route",
     "alerts_source", // manual change: retry logic for eventual consistency on list queries
     "catalog", // manual change: retry logic for eventual consistency on list queries (Searchkick index)
@@ -53,6 +54,7 @@ const excluded = {
     "ip_ranges",
     "meeting_recording", // nested under incidents; list/create require incidentId
     "on_call_pay_report", // not exposed via Terraform
+    "oncall",
     "status",
     "post_mortem_template",
     "pulse",
@@ -73,6 +75,7 @@ const excluded = {
     "alert",
     "alert_event",
     "alert_route",
+    "ai_chat_session_message",
     "alert_group",
     "alerts_source",
     "status",
@@ -104,6 +107,7 @@ const excluded = {
     "meeting_recording", // nested under incidents; list/create require incidentId, no update endpoint
     "on_call_pay_report", // not exposed via Terraform; API has no delete endpoint
     "on_call_role",
+    "oncall",
     "override_shift",
     "post_mortem_template",
     "pulse",
@@ -115,6 +119,7 @@ const excluded = {
     "schedule_rotation",
     "schedule_rotation_user", // deprecated. schedule_rotation should be used instead
     "shift",
+    "shift_coverage_request",
     "team",
     "user",
     "user_notification_rule",
@@ -367,7 +372,8 @@ function generateResource(name) {
       name,
       schema,
       requiredFields(name),
-      pathIdField
+      pathIdField,
+      writableFields(name)
     );
     safeWriteFile(
       path.resolve(__dirname, "..", "provider", `resource_${name}.go`),
@@ -392,6 +398,15 @@ function requiredFields(name) {
     return [];
   }
   return schema.properties.data.properties.attributes.required || [];
+}
+
+function writableFields(name) {
+  const schemaName = `new_${name}`;
+  const schema = swagger.components.schemas[schemaName];
+  if (!schema || !schema.properties || !schema.properties.data || !schema.properties.data.properties || !schema.properties.data.properties.attributes) {
+    return null;
+  }
+  return Object.keys(schema.properties.data.properties.attributes.properties || {});
 }
 
 function collectionPathSchema(name) {

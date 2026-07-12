@@ -322,6 +322,34 @@ func resourceWorkflowPostMortem() *schema.Resource {
 							Description: "Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
 						},
 
+						"incident_condition_label": &schema.Schema{
+							Type:        schema.TypeString,
+							Default:     "ANY",
+							Required:    false,
+							Optional:    true,
+							Description: "Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+						},
+
+						"incident_condition_label_use_regexp": &schema.Schema{
+							Type:        schema.TypeBool,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Description: "Value must be one of true or false",
+						},
+
+						"incident_labels": &schema.Schema{
+							Type: schema.TypeList,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "",
+						},
+
 						"incident_post_mortem_condition_cause": &schema.Schema{
 							Type:        schema.TypeString,
 							Default:     "ANY",

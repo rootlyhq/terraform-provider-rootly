@@ -127,6 +127,11 @@ func resourceWorkflowTaskCreateZoomMeeting() *schema.Resource {
 								"audio_only",
 							}, false),
 						},
+						"enable_zoom_bot_auto_join": &schema.Schema{
+							Description: "Allow the Rootly bot to start recording without waiting for host approval. Value must be one of true or false",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
 						"post_to_incident_timeline": &schema.Schema{
 							Description: "Value must be one of true or false",
 							Type:        schema.TypeBool,

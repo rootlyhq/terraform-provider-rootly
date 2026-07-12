@@ -10,6 +10,7 @@ import (
 )
 
 func TestAccResourceApiKey(t *testing.T) {
+	t.Skip("Skipping: CI uses a service account token which cannot create personal API keys")
 	rName := acctest.RandomWithPrefix("tf-apikey")
 	expiresAt := time.Now().AddDate(1, 0, 0).UTC().Format(time.RFC3339)
 

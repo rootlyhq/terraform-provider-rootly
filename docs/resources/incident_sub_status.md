@@ -25,12 +25,12 @@ resource "rootly_incident_sub_status" "investigating" {
 ### Required
 
 - `assigned_at` (String)
+- `incident_id` (String)
 - `sub_status_id` (String) Note: To change an incident's sub-status, use the PATCH /incidents/:id endpoint and set the sub_status_id attribute. This endpoint is for modifying the timestamp of when an incident's sub-status was assigned.
 
 ### Optional
 
 - `assigned_by_user_id` (Number)
-- `incident_id` (String)
 
 ### Read-Only
 

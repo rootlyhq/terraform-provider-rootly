@@ -92,10 +92,18 @@ jobs:
       run: |
         go mod download
 
+    - name: Sweep dangling test resources
+      timeout-minutes: 5
+      env:
+        ROOTLY_API_TOKEN: ${{ secrets.ROOTLY_API_TOKEN }}
+      run: |
+        go test ./internal/provider -v -tags=sweep -sweep=all -sweep-allow-failures -timeout 5m
+      continue-on-error: true
+
     - name: TF acceptance tests
-      timeout-minutes: 10
+      timeout-minutes: 30
       env:
         TF_ACC: "1"
         ROOTLY_API_TOKEN: ${{ secrets.ROOTLY_API_TOKEN }}
       run: |
-        go test -v -cover ./provider/ ./internal/provider/
+        go test -v -cover -timeout 30m ./provider/ ./internal/provider/

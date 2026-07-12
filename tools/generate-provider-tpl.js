@@ -73,6 +73,7 @@ ${dataSources
 				"rootly_incident_types": dataSourceIncidentTypes(),
 				"rootly_incident_roles": dataSourceIncidentRoles(),
 				"rootly_retrospective_configuration": dataSourceRetrospectiveConfiguration(),
+				"rootly_post_mortem_template": dataSourcePostmortemTemplate(),
 				"rootly_sla": dataSourceSLA(),
 				"rootly_workflow_task": dataSourceWorkflowTask(),
 				"rootly_teams": dataSourceTeams(),

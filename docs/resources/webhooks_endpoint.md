@@ -30,14 +30,23 @@ resource "rootly_webhooks_endpoint" "datadog_events" {
 
 ### Optional
 
+- `custom_headers` (Block List) Custom HTTP headers sent with each delivery. Max 10. Reserved names (Content-Type, X-Rootly-Signature, Host, etc.) are rejected. (see [below for nested schema](#nestedblock--custom_headers))
 - `enabled` (Boolean)
 - `event_types` (List of String) Value must be one of `incident.created`, `incident.updated`, `incident.in_triage`, `incident.mitigated`, `incident.resolved`, `incident.cancelled`, `incident.deleted`, `incident.scheduled.created`, `incident.scheduled.updated`, `incident.scheduled.in_progress`, `incident.scheduled.completed`, `incident.scheduled.deleted`, `incident_post_mortem.created`, `incident_post_mortem.updated`, `incident_post_mortem.published`, `incident_post_mortem.deleted`, `incident_status_page_event.created`, `incident_status_page_event.updated`, `incident_status_page_event.deleted`, `incident_event.created`, `incident_event.updated`, `incident_event.deleted`, `alert.created`, `pulse.created`, `shift.started`, `genius_workflow_run.queued`, `genius_workflow_run.started`, `genius_workflow_run.completed`, `genius_workflow_run.failed`, `genius_workflow_run.canceled`, `audit_log.created`.
 - `secret` (String) The webhook signing secret used to verify webhook requests.
-- `slug` (String) The slug of the endpoint
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `slug` (String) The slug of the endpoint
+
+<a id="nestedblock--custom_headers"></a>
+### Nested Schema for `custom_headers`
+
+Optional:
+
+- `name` (String)
+- `value` (String)
 
 ## Import
 

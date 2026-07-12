@@ -28,13 +28,13 @@ resource "rootly_on_call_shadow" "new_hire_shadow" {
 ### Required
 
 - `ends_at` (String) End datetime for shadow shift
+- `schedule_id` (String) ID of schedule the shadow shift belongs to
 - `shadow_user_id` (Number) Which user the shadow shift belongs to.
 - `shadowable_id` (String) ID of schedule or user the shadow user is shadowing
 - `starts_at` (String) Start datetime of shadow shift
 
 ### Optional
 
-- `schedule_id` (String) ID of schedule the shadow shift belongs to
 - `shadowable_type` (String) Value must be one of `User`, `Schedule`.
 
 ### Read-Only

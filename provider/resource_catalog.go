@@ -69,6 +69,28 @@ func resourceCatalog() *schema.Resource {
 				WriteOnly:   false,
 				Description: "Default position of the catalog when displayed in a list.",
 			},
+
+			"external_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "An external identifier for this catalog. Must be unique within the team.",
+			},
+
+			"managed_by": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    false,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Which source manages this resource (read-only).. Value must be one of `web`, `admin_web`, `api`, `terraform`, `pulumi`, `backstage`, `catalog_sync`.",
+			},
 		},
 	}
 }
@@ -91,6 +113,9 @@ func resourceCatalogCreate(ctx context.Context, d *schema.ResourceData, meta int
 	}
 	if value, ok := d.GetOkExists("position"); ok {
 		s.Position = value.(int)
+	}
+	if value, ok := d.GetOkExists("external_id"); ok {
+		s.ExternalId = value.(string)
 	}
 
 	res, err := c.CreateCatalog(s)
@@ -125,6 +150,8 @@ func resourceCatalogRead(ctx context.Context, d *schema.ResourceData, meta inter
 	d.Set("description", item.Description)
 	d.Set("icon", item.Icon)
 	d.Set("position", item.Position)
+	d.Set("external_id", item.ExternalId)
+	d.Set("managed_by", item.ManagedBy)
 
 	return nil
 }
@@ -146,6 +173,9 @@ func resourceCatalogUpdate(ctx context.Context, d *schema.ResourceData, meta int
 	}
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)
+	}
+	if d.HasChange("external_id") {
+		s.ExternalId = d.Get("external_id").(string)
 	}
 
 	_, err := c.UpdateCatalog(d.Id(), s)

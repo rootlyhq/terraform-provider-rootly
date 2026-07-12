@@ -100,6 +100,16 @@ func resourceWorkflowTaskUpdateGoogleDocsPage() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
+						"include_overview": &schema.Schema{
+							Description: "Value must be one of true or false",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
+						"include_timeline": &schema.Schema{
+							Description: "Value must be one of true or false",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
 					},
 				},
 			},

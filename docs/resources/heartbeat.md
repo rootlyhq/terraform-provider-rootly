@@ -46,13 +46,13 @@ resource "rootly_heartbeat" "nightly_backup" {
 - `last_pinged_at` (String) When the heartbeat was last pinged.
 - `notification_target_type` (String) The type of the notification target. Please contact support if you encounter issues using `Functionality` as a target type.. Value must be one of `User`, `Group`, `Service`, `EscalationPolicy`, `Functionality`.
 - `owner_group_ids` (List of String) List of team IDs that own this heartbeat
-- `ping_url` (String) URL to receive heartbeat pings.
-- `secret` (String) Secret used as bearer token when pinging heartbeat.
 - `status` (String) Value must be one of `waiting`, `active`, `expired`.
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `ping_url` (String) URL to receive heartbeat pings.
+- `secret` (String) Secret used as bearer token when pinging heartbeat.
 
 ## Import
 

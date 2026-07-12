@@ -20,11 +20,15 @@ type LiveCallRouter struct {
 	PhoneNumber                         string                 `jsonapi:"attr,phone_number,omitempty"`
 	VoicemailGreeting                   string                 `jsonapi:"attr,voicemail_greeting,omitempty"`
 	CallerGreeting                      string                 `jsonapi:"attr,caller_greeting,omitempty"`
+	UnavailableResponderMessage         string                 `jsonapi:"attr,unavailable_responder_message,omitempty"`
 	WaitingMusicUrl                     string                 `jsonapi:"attr,waiting_music_url,omitempty"`
 	SentToVoicemailDelay                int                    `jsonapi:"attr,sent_to_voicemail_delay,omitempty"`
 	ShouldRedirectToVoicemailOnNoAnswer *bool                  `jsonapi:"attr,should_redirect_to_voicemail_on_no_answer,omitempty"`
 	EscalationLevelDelayInSeconds       int                    `jsonapi:"attr,escalation_level_delay_in_seconds,omitempty"`
 	ShouldAutoResolveAlertOnCallEnd     *bool                  `jsonapi:"attr,should_auto_resolve_alert_on_call_end,omitempty"`
+	NotifyViaSms                        *bool                  `jsonapi:"attr,notify_via_sms,omitempty"`
+	NotifyViaPushNotification           *bool                  `jsonapi:"attr,notify_via_push_notification,omitempty"`
+	InformationalNotificationMessage    string                 `jsonapi:"attr,informational_notification_message,omitempty"`
 	AlertUrgencyId                      string                 `jsonapi:"attr,alert_urgency_id,omitempty"`
 	CallingTreePrompt                   string                 `jsonapi:"attr,calling_tree_prompt,omitempty"`
 	PagingTargets                       []interface{}          `jsonapi:"attr,paging_targets,omitempty"`

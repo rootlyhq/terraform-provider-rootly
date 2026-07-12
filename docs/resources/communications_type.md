@@ -29,11 +29,11 @@ resource "rootly_communications_type" "slack_notification" {
 
 - `description` (String) The description of the communications type
 - `position` (Number) Position of the communications type
-- `slug` (String) The slug of the communications type
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `slug` (String) The slug of the communications type
 
 ## Import
 

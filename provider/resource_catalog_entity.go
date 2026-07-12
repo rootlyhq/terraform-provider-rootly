@@ -69,6 +69,28 @@ func resourceCatalogEntity() *schema.Resource {
 				Description: "The Backstage entity ID this catalog entity is linked to.",
 			},
 
+			"external_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "An external identifier for this catalog entity. Must be unique within the catalog.",
+			},
+
+			"managed_by": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    false,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Which source manages this resource (read-only).. Value must be one of `web`, `admin_web`, `api`, `terraform`, `pulumi`, `backstage`, `catalog_sync`.",
+			},
+
 			"properties": &schema.Schema{
 				Type:             schema.TypeList,
 				Computed:         false,
@@ -109,9 +131,9 @@ func resourceCatalogEntity() *schema.Resource {
 
 			"catalog_id": &schema.Schema{
 				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
+				Computed:    false,
+				Required:    true,
+				Optional:    false,
 				Sensitive:   false,
 				ForceNew:    true,
 				WriteOnly:   false,
@@ -139,6 +161,9 @@ func resourceCatalogEntityCreate(ctx context.Context, d *schema.ResourceData, me
 	}
 	if value, ok := d.GetOkExists("backstage_id"); ok {
 		s.BackstageId = value.(string)
+	}
+	if value, ok := d.GetOkExists("external_id"); ok {
+		s.ExternalId = value.(string)
 	}
 	if value, ok := d.GetOkExists("properties"); ok {
 		s.Properties = value.([]interface{})
@@ -179,6 +204,8 @@ func resourceCatalogEntityRead(ctx context.Context, d *schema.ResourceData, meta
 	d.Set("description", item.Description)
 	d.Set("position", item.Position)
 	d.Set("backstage_id", item.BackstageId)
+	d.Set("external_id", item.ExternalId)
+	d.Set("managed_by", item.ManagedBy)
 
 	if item.Properties != nil {
 		processed_items_properties := make([]map[string]interface{}, 0)
@@ -221,6 +248,9 @@ func resourceCatalogEntityUpdate(ctx context.Context, d *schema.ResourceData, me
 	}
 	if d.HasChange("backstage_id") {
 		s.BackstageId = d.Get("backstage_id").(string)
+	}
+	if d.HasChange("external_id") {
+		s.ExternalId = d.Get("external_id").(string)
 	}
 
 	if d.HasChange("properties") {

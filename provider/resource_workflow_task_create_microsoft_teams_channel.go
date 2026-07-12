@@ -78,7 +78,7 @@ func resourceWorkflowTaskCreateMicrosoftTeamsChannel() *schema.Resource {
 						"team": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. ",
 							Type:        schema.TypeMap,
-							Optional:    true,
+							Required:    true,
 						},
 						"title": &schema.Schema{
 							Description: "Microsoft Team channel title",

@@ -38,11 +38,12 @@ resource "rootly_alert_urgency" "informational" {
 
 ### Optional
 
+- `color` (String) The color associated with this urgency level
+- `deleted_at` (String) Date of deletion
+- `id` (String) Unique ID of the alert urgency
 - `position` (Number) Position of the alert urgency
-
-### Read-Only
-
-- `id` (String) The ID of this resource.
+- `team_id` (Number) The ID of the team this urgency belongs to
+- `urgency` (String) The urgency level
 
 ## Import
 

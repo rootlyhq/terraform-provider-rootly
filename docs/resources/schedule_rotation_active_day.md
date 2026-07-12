@@ -173,11 +173,11 @@ resource "rootly_escalation_level" "second" {
 ### Required
 
 - `active_time_attributes` (Block List, Min: 1) Schedule rotation active times per day (see [below for nested schema](#nestedblock--active_time_attributes))
+- `schedule_rotation_id` (String)
 
 ### Optional
 
 - `day_name` (String) Schedule rotation day name for which active times to be created. Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.
-- `schedule_rotation_id` (String)
 
 ### Read-Only
 

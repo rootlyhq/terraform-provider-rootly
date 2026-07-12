@@ -78,11 +78,11 @@ resource "rootly_functionality" "logging_in" {
 - `service_now_ci_sys_id` (String) The Service Now CI sys id associated to this functionality
 - `slack_aliases` (Block List) Slack Aliases associated with this functionality (see [below for nested schema](#nestedblock--slack_aliases))
 - `slack_channels` (Block List) Slack Channels associated with this functionality (see [below for nested schema](#nestedblock--slack_channels))
-- `slug` (String) The slug of the functionality
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `slug` (String) The slug of the functionality
 
 <a id="nestedblock--properties"></a>
 ### Nested Schema for `properties`

@@ -41,6 +41,7 @@ Required:
 Optional:
 
 - `body` (String) The issue body
+- `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON
 - `issue_type` (Map of String) Map must contain two fields, `id` and `name`. The issue type
 - `labels` (Block List) The issue labels (see [below for nested schema](#nestedblock--task_params--labels))
 - `parent_issue_number` (String) The parent issue number for sub-issue linking

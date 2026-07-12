@@ -39,7 +39,7 @@ func resourceCommunicationsStage() *schema.Resource {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Required:    false,
-				Optional:    true,
+				Optional:    false,
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
@@ -80,9 +80,6 @@ func resourceCommunicationsStageCreate(ctx context.Context, d *schema.ResourceDa
 
 	if value, ok := d.GetOkExists("name"); ok {
 		s.Name = value.(string)
-	}
-	if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
 	}
 	if value, ok := d.GetOkExists("description"); ok {
 		s.Description = value.(string)
@@ -135,9 +132,6 @@ func resourceCommunicationsStageUpdate(ctx context.Context, d *schema.ResourceDa
 
 	if d.HasChange("name") {
 		s.Name = d.Get("name").(string)
-	}
-	if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
 	}
 	if d.HasChange("description") {
 		s.Description = d.Get("description").(string)

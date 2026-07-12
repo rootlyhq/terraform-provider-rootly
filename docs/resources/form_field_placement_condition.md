@@ -17,13 +17,13 @@ description: |-
 ### Required
 
 - `form_field_id` (String) The condition field.
+- `form_field_placement_id` (String) The form field placement this condition applies.
 - `values` (List of String) The values for comparison.
 
 ### Optional
 
 - `comparison` (String) The condition comparison.. Value must be one of `equal`, `not_equal`, `is_set`, `is_not_set`.
 - `conditioned` (String) The resource or attribute the condition applies.. Value must be one of `placement`, `required`.
-- `form_field_placement_id` (String) The form field placement this condition applies.
 - `position` (Number) The condition position.
 
 ### Read-Only

@@ -16,6 +16,8 @@ type Catalog struct {
 	Description string `jsonapi:"attr,description,omitempty"`
 	Icon        string `jsonapi:"attr,icon,omitempty"`
 	Position    int    `jsonapi:"attr,position,omitempty"`
+	ExternalId  string `jsonapi:"attr,external_id,omitempty"`
+	ManagedBy   string `jsonapi:"attr,managed_by,omitempty"`
 }
 
 func (c *Client) ListCatalogs(params *rootlygo.ListCatalogsParams) ([]interface{}, error) {

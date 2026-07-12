@@ -76,7 +76,6 @@ resource "rootly_role" "custom" {
 - `services_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `severities_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `slas_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
-- `slug` (String) The role slug.
 - `status_pages_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `sub_statuses_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `webhooks_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
@@ -85,6 +84,7 @@ resource "rootly_role" "custom" {
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `slug` (String) The role slug.
 
 ## Import
 

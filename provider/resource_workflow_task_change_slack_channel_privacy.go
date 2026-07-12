@@ -78,7 +78,7 @@ func resourceWorkflowTaskChangeSlackChannelPrivacy() *schema.Resource {
 						"channel": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. ",
 							Type:        schema.TypeMap,
-							Optional:    true,
+							Required:    true,
 						},
 						"privacy": &schema.Schema{
 							Description: "Value must be one of `private`, `public`.",

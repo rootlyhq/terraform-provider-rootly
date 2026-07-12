@@ -17,6 +17,7 @@ description: |-
 ### Required
 
 - `form_field_id` (String) The custom field for this condition
+- `workflow_id` (String) The workflow for this condition
 
 ### Optional
 
@@ -31,7 +32,6 @@ description: |-
 - `selected_service_ids` (List of String)
 - `selected_user_ids` (List of Number)
 - `values` (List of String)
-- `workflow_id` (String) The workflow for this condition
 
 ### Read-Only
 

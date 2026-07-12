@@ -172,13 +172,13 @@ resource "rootly_escalation_level" "second" {
 
 ### Required
 
+- `escalation_policy_id` (String) The ID of the escalation policy
 - `notification_target_params` (Block List, Min: 1) Escalation level's notification targets (see [below for nested schema](#nestedblock--notification_target_params))
 - `position` (Number) Position of the escalation policy level
 
 ### Optional
 
 - `delay` (Number) Delay before notifying targets in the next Escalation Level.
-- `escalation_policy_id` (String) The ID of the escalation policy
 - `escalation_policy_path_id` (String) The ID of the dynamic escalation policy path the level will belong to. If nothing is specified it will add the level to your default path.
 - `paging_strategy_configuration_schedule_strategy` (String) Value must be one of `on_call_only`, `everyone`.
 - `paging_strategy_configuration_strategy` (String) Value must be one of `default`, `random`, `cycle`, `alert`.

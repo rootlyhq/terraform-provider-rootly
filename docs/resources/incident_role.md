@@ -41,12 +41,12 @@ resource "rootly_incident_role" "communications_lead" {
 - `enabled` (Boolean)
 - `optional` (Boolean) Value must be one of true or false
 - `position` (Number) Position of the incident role
-- `slug` (String) The slug of the incident role
 - `summary` (String) The summary of the incident role
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `slug` (String) The slug of the incident role
 
 ## Import
 

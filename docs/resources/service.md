@@ -89,11 +89,11 @@ resource "rootly_service" "customer_postgresql_prod" {
 - `service_now_ci_sys_id` (String) The Service Now CI sys id associated to this service
 - `slack_aliases` (Block List) Slack Aliases associated with this service (see [below for nested schema](#nestedblock--slack_aliases))
 - `slack_channels` (Block List) Slack Channels associated with this service (see [below for nested schema](#nestedblock--slack_channels))
-- `slug` (String) The slug of the service
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `slug` (String) The slug of the service
 
 <a id="nestedblock--alert_broadcast_channel"></a>
 ### Nested Schema for `alert_broadcast_channel`
