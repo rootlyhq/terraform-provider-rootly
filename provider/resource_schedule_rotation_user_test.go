@@ -34,7 +34,8 @@ data "rootly_user" "test" {
 }
 
 resource "rootly_schedule" "test" {
-	name = "%s"
+	name          = "%s"
+	owner_user_id = data.rootly_user.test.id
 }
 
 resource "rootly_schedule_rotation" "test" {
