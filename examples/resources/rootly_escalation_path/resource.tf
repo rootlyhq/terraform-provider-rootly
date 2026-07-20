@@ -182,6 +182,33 @@ resource "rootly_escalation_path" "by_service" {
   }
 }
 
+# Alert source-based routing path - only route alerts from specific sources
+resource "rootly_escalation_path" "by_source" {
+  name                 = "Route by Alert Source"
+  default              = false
+  escalation_policy_id = rootly_escalation_policy.primary.id
+  match_mode           = "match-any-rule"
+
+  rules {
+    rule_type = "source"
+    operator  = "is_one_of"
+    values    = ["manual", "datadog"]
+  }
+}
+
+# Related incidents routing path - only route alerts that have related incidents
+resource "rootly_escalation_path" "with_related_incidents" {
+  name                 = "Route When Related Incidents Exist"
+  default              = false
+  escalation_policy_id = rootly_escalation_policy.primary.id
+  match_mode           = "match-any-rule"
+
+  rules {
+    rule_type = "related_incidents"
+    operator  = "is_set"
+  }
+}
+
 resource "rootly_escalation_level" "first" {
   escalation_policy_path_id = rootly_escalation_path.default.id
   escalation_policy_id      = rootly_escalation_policy.primary.id
