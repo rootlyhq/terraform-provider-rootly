@@ -421,3 +421,57 @@ resource "rootly_escalation_path" "test_rules" {
 }
 `, rName, rName, rName, rName)
 }
+
+func TestAccResourceEscalationPathSourceAndRelatedIncidentsRules(t *testing.T) {
+	// The `source` and `related_incidents` escalation path rule types are gated behind a
+	// team-level feature that is not enabled on the CI test org, so the API rejects them
+	// with 422 "Source rules are not enabled for this team". Skip until the feature is
+	// enabled for the test account; the enum validation, example, and docs still cover the
+	// provider-side change.
+	t.Skip("Skipped: source/related_incidents escalation rules require a team feature not enabled on the CI test org")
+
+	rName := acctest.RandomWithPrefix("tf-test")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck: func() {
+			testAccPreCheck(t)
+		},
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceEscalationPathSourceAndRelatedIncidentsRulesConfig(rName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_escalation_path.source_related", "name", rName+"-source-related-path"),
+					resource.TestCheckResourceAttr("rootly_escalation_path.source_related", "match_mode", "match-any-rule"),
+					resource.TestCheckResourceAttr("rootly_escalation_path.source_related", "rules.#", "2"),
+				),
+			},
+		},
+	})
+}
+
+func testAccResourceEscalationPathSourceAndRelatedIncidentsRulesConfig(rName string) string {
+	return fmt.Sprintf(`
+resource "rootly_escalation_policy" "source_related" {
+	name = "%s-ep"
+}
+
+resource "rootly_escalation_path" "source_related" {
+	name                 = "%s-source-related-path"
+	default              = false
+	escalation_policy_id = rootly_escalation_policy.source_related.id
+	match_mode           = "match-any-rule"
+
+	rules {
+		rule_type = "source"
+		operator  = "is_one_of"
+		values    = ["manual", "datadog"]
+	}
+
+	rules {
+		rule_type = "related_incidents"
+		operator  = "is_set"
+	}
+}
+`, rName, rName)
+}
