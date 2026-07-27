@@ -11,7 +11,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/apiclient"
-	rootly "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
 type RootlyProviderModel struct {
@@ -20,7 +19,7 @@ type RootlyProviderModel struct {
 }
 
 type RootlyProviderData struct {
-	Client       *rootly.ClientWithResponses
+	Client       *apiclient.Client
 	LegacyClient *client.Client
 }
 
