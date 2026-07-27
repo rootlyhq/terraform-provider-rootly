@@ -6,11 +6,11 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
-	rootly "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/apiclient"
 )
 
 type baseResource struct {
-	client       *rootly.ClientWithResponses
+	client       *apiclient.Client
 	legacyClient *client.Client
 }
 
