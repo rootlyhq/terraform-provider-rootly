@@ -96,7 +96,9 @@ func (p *RootlyProvider) DataSources(ctx context.Context) []func() datasource.Da
 
 // Resources implements provider.Provider.
 func (p *RootlyProvider) Resources(ctx context.Context) []func() resource.Resource {
-	return []func() resource.Resource{}
+	return []func() resource.Resource{
+		NewScheduleRotationResource,
+	}
 }
 
 func New(version string) func() provider.Provider {

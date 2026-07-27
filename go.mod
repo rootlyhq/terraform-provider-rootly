@@ -3,6 +3,7 @@ module github.com/rootlyhq/terraform-provider-rootly/v5
 go 1.25.8
 
 require (
+	github.com/DataDog/jsonapi v0.13.0
 	github.com/buxizhizhoum/inflection v1.0.4
 	github.com/google/jsonapi v1.0.0
 	github.com/google/uuid v1.6.0
@@ -12,13 +13,17 @@ require (
 	github.com/hashicorp/go-version v1.9.0
 	github.com/hashicorp/terraform-plugin-docs v0.25.0
 	github.com/hashicorp/terraform-plugin-framework v1.19.0
+	github.com/hashicorp/terraform-plugin-framework-validators v0.19.0
 	github.com/hashicorp/terraform-plugin-go v0.31.0
 	github.com/hashicorp/terraform-plugin-log v0.11.0
 	github.com/hashicorp/terraform-plugin-mux v0.23.1
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.40.1
 	github.com/hashicorp/terraform-plugin-testing v1.16.0
 	github.com/jianyuan/go-utils v0.0.0-20250223213401-62c93a9e0b6c
+	github.com/oapi-codegen/nullable v1.2.0
 	github.com/oapi-codegen/runtime v1.6.0
+	github.com/orange-cloudavenue/terraform-plugin-framework-supertypes v1.2.0
+	github.com/samber/lo v1.53.0
 	github.com/stretchr/testify v1.11.1
 )
 
@@ -64,6 +69,7 @@ require (
 	github.com/hashicorp/terraform-svchost v0.2.1 // indirect
 	github.com/hashicorp/yamux v0.1.2 // indirect
 	github.com/huandu/xstrings v1.5.0 // indirect
+	github.com/iancoleman/strcase v0.3.0 // indirect
 	github.com/mattn/go-colorable v0.1.15 // indirect
 	github.com/mattn/go-isatty v0.0.24 // indirect
 	github.com/mattn/go-runewidth v0.0.27 // indirect
