@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/acctest"
 )
 
 func TestAccResourceScheduleRotationUser(t *testing.T) {
@@ -13,8 +13,8 @@ func TestAccResourceScheduleRotationUser(t *testing.T) {
 	rotationName := acctest.RandomWithPrefix("tf-rotation")
 
 	resource.UnitTest(t, resource.TestCase{
-		PreCheck:          func() { testAccPreCheck(t) },
-		ProviderFactories: providerFactories,
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccResourceScheduleRotationUserConfig(scheduleName, rotationName),
