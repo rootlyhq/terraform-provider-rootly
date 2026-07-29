@@ -196,6 +196,33 @@ resource "rootly_escalation_path" "by_service" {
   }
 }
 
+# Alert source-based routing path - only route alerts from specific sources
+resource "rootly_escalation_path" "by_source" {
+  name                 = "Route by Alert Source"
+  default              = false
+  escalation_policy_id = rootly_escalation_policy.primary.id
+  match_mode           = "match-any-rule"
+
+  rules {
+    rule_type = "source"
+    operator  = "is_one_of"
+    values    = ["manual", "datadog"]
+  }
+}
+
+# Related incidents routing path - only route alerts that have related incidents
+resource "rootly_escalation_path" "with_related_incidents" {
+  name                 = "Route When Related Incidents Exist"
+  default              = false
+  escalation_policy_id = rootly_escalation_policy.primary.id
+  match_mode           = "match-any-rule"
+
+  rules {
+    rule_type = "related_incidents"
+    operator  = "is_set"
+  }
+}
+
 resource "rootly_escalation_level" "first" {
   escalation_policy_path_id = rootly_escalation_path.default.id
   escalation_policy_id      = rootly_escalation_policy.primary.id
@@ -264,14 +291,14 @@ Optional:
 - `fieldable_id` (String) The ID of the alert field. Only used with `field` rule type.
 - `fieldable_type` (String) The type of the fieldable. Only used with `field` rule type. Value must be one of `AlertField`.
 - `json_path` (String) JSON path to extract value from payload
-- `operator` (String) How the value should be matched. For `json_path` rule type: `is`, `is_not`, `contains`, `does_not_contain`. For `field` rule type: `is`, `is_not`, `contains`, `does_not_contain`, `is_one_of`, `is_not_one_of`, `is_empty`, `is_not_empty`, `contains_key`, `does_not_contain_key`, `starts_with`, `does_not_start_with`, `matches`, `does_not_match`.
-- `rule_type` (String) The type of the escalation path rule. Value must be one of `alert_urgency`, `working_hour`, `json_path`, `field`, `service`, `deferral_window`.
+- `operator` (String) How the value should be matched. For `json_path` rule type: `is`, `is_not`, `contains`, `does_not_contain`. For `field` rule type: `is`, `is_not`, `contains`, `does_not_contain`, `is_one_of`, `is_not_one_of`, `is_empty`, `is_not_empty`, `contains_key`, `does_not_contain_key`, `starts_with`, `does_not_start_with`, `matches`, `does_not_match`. For `source` rule type: `is`, `is_not`, `is_one_of`, `is_not_one_of`. For `related_incidents` rule type: `is_set`, `is_not_set`.
+- `rule_type` (String) The type of the escalation path rule. Value must be one of `alert_urgency`, `working_hour`, `json_path`, `field`, `service`, `deferral_window`, `source`, `related_incidents`.
 - `service_ids` (List of String) Service ids for which this escalation path should be used. Only used with `service` rule type.
 - `time_blocks` (Block List) Time windows during which alerts are deferred. Only used with `deferral_window` rule type. (see [below for nested schema](#nestedblock--rules--time_blocks))
 - `time_zone` (String) Time zone for the deferral window (IANA format, e.g. `America/New_York`). Only used with `deferral_window` rule type.
 - `urgency_ids` (List of String) Alert urgency ids for which this escalation path should be used
 - `value` (String) Value with which JSON path value should be matched
-- `values` (List of String) Values to match against. Only used with `field` rule type.
+- `values` (List of String) Values to match against. Used with `field` and `source` rule types.
 - `within_working_hour` (Boolean) Whether the escalation path should be used within working hours. Value must be one of true or false
 
 <a id="nestedblock--rules--time_blocks"></a>

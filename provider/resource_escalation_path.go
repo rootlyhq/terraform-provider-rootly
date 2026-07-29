@@ -153,8 +153,8 @@ func resourceEscalationPath() *schema.Resource {
 							Required:     false,
 							Optional:     true,
 							ForceNew:     false,
-							Description:  "The type of the escalation path rule. Value must be one of `alert_urgency`, `working_hour`, `json_path`, `field`, `service`, `deferral_window`.",
-							ValidateFunc: validation.StringInSlice([]string{"alert_urgency", "working_hour", "json_path", "field", "service", "deferral_window"}, false),
+							Description:  "The type of the escalation path rule. Value must be one of `alert_urgency`, `working_hour`, `json_path`, `field`, `service`, `deferral_window`, `source`, `related_incidents`.",
+							ValidateFunc: validation.StringInSlice([]string{"alert_urgency", "working_hour", "json_path", "field", "service", "deferral_window", "source", "related_incidents"}, false),
 						},
 
 						"urgency_ids": &schema.Schema{
@@ -192,8 +192,8 @@ func resourceEscalationPath() *schema.Resource {
 							Required:     false,
 							Optional:     true,
 							ForceNew:     false,
-							Description:  "How the value should be matched. For `json_path` rule type: `is`, `is_not`, `contains`, `does_not_contain`. For `field` rule type: `is`, `is_not`, `contains`, `does_not_contain`, `is_one_of`, `is_not_one_of`, `is_empty`, `is_not_empty`, `contains_key`, `does_not_contain_key`, `starts_with`, `does_not_start_with`, `matches`, `does_not_match`.",
-							ValidateFunc: validation.StringInSlice([]string{"is", "is_not", "contains", "does_not_contain", "is_one_of", "is_not_one_of", "is_empty", "is_not_empty", "contains_key", "does_not_contain_key", "starts_with", "does_not_start_with", "matches", "does_not_match"}, false),
+							Description:  "How the value should be matched. For `json_path` rule type: `is`, `is_not`, `contains`, `does_not_contain`. For `field` rule type: `is`, `is_not`, `contains`, `does_not_contain`, `is_one_of`, `is_not_one_of`, `is_empty`, `is_not_empty`, `contains_key`, `does_not_contain_key`, `starts_with`, `does_not_start_with`, `matches`, `does_not_match`. For `source` rule type: `is`, `is_not`, `is_one_of`, `is_not_one_of`. For `related_incidents` rule type: `is_set`, `is_not_set`.",
+							ValidateFunc: validation.StringInSlice([]string{"is", "is_not", "contains", "does_not_contain", "is_one_of", "is_not_one_of", "is_empty", "is_not_empty", "contains_key", "does_not_contain_key", "starts_with", "does_not_start_with", "matches", "does_not_match", "is_set", "is_not_set"}, false),
 						},
 
 						"value": &schema.Schema{
@@ -233,7 +233,7 @@ func resourceEscalationPath() *schema.Resource {
 							Computed:         false,
 							Required:         false,
 							Optional:         true,
-							Description:      "Values to match against. Only used with `field` rule type.",
+							Description:      "Values to match against. Used with `field` and `source` rule types.",
 						},
 
 						"service_ids": &schema.Schema{
