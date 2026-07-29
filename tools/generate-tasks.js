@@ -465,11 +465,11 @@ function genTestParams(task_name, task_schema) {
       case "string":
         return `${key} = "${val}"`;
       case "number":
+      case "integer":
         return `${key} = 1`;
       case "array":
         if (
-          task_schema.properties[key].items.type === "object" &&
-          task_schema.properties[key].items.properties.id
+          task_schema.properties[key].items.type === "object"
         ) {
           return `${key} {
 						id = "foo"

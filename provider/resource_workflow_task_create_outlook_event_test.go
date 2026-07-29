@@ -47,7 +47,7 @@ resource "rootly_workflow_task_create_outlook_event" "foo" {
 					id = "foo"
 					name = "bar"
 				}
-
+days_until_meeting = 1
 time_of_meeting = "14:30"
 meeting_duration = "1 hour"
 summary = "test"
@@ -73,7 +73,7 @@ resource "rootly_workflow_task_create_outlook_event" "foo" {
 					id = "foo"
 					name = "bar"
 				}
-
+days_until_meeting = 1
 time_of_meeting = "14:30"
 meeting_duration = "1 hour"
 summary = "test"

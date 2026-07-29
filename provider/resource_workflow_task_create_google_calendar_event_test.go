@@ -43,7 +43,7 @@ resource "rootly_workflow_incident" "foo" {
 resource "rootly_workflow_task_create_google_calendar_event" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		
+		days_until_meeting = 1
 time_of_meeting = "14:30"
 meeting_duration = "1 hour"
 summary = "test"
@@ -65,7 +65,7 @@ resource "rootly_workflow_incident" "foo" {
 resource "rootly_workflow_task_create_google_calendar_event" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		
+		days_until_meeting = 1
 time_of_meeting = "14:30"
 meeting_duration = "1 hour"
 summary = "test"

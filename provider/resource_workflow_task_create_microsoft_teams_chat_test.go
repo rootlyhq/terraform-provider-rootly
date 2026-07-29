@@ -43,7 +43,10 @@ resource "rootly_workflow_incident" "foo" {
 resource "rootly_workflow_task_create_microsoft_teams_chat" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		members = ["foo"]
+		members {
+						id = "foo"
+						name = "bar"
+					}
 	}
 }
 `, name)
@@ -61,7 +64,10 @@ resource "rootly_workflow_incident" "foo" {
 resource "rootly_workflow_task_create_microsoft_teams_chat" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		members = ["foo"]
+		members {
+						id = "foo"
+						name = "bar"
+					}
 	}
 }
 `, name)
