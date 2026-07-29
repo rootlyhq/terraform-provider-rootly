@@ -447,7 +447,13 @@ resource "rootly_workflow_task_${task_name}" "foo" {
 }
 
 function genTestParams(task_name, task_schema) {
-  const required = task_schema.required || [];
+  const required = [...(task_schema.required || [])];
+  const conditional = task_schema.anyOf || task_schema.oneOf || [];
+  if (conditional.length > 0 && conditional[0].required) {
+    conditional[0].required.forEach((key) => {
+      if (!required.includes(key)) required.push(key);
+    });
+  }
   return required.map((key) => {
     let val;
 

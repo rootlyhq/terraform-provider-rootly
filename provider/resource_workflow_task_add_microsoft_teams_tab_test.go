@@ -51,6 +51,8 @@ channel = {
 					id = "foo"
 					name = "bar"
 				}
+title = "test"
+link = "test"
 	}
 }
 `, name)
@@ -76,6 +78,8 @@ channel = {
 					id = "foo"
 					name = "bar"
 				}
+title = "test"
+link = "test"
 	}
 }
 `, name)

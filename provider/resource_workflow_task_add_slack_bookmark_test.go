@@ -47,6 +47,8 @@ resource "rootly_workflow_task_add_slack_bookmark" "foo" {
 					id = "foo"
 					name = "bar"
 				}
+title = "test"
+link = "test"
 	}
 }
 `, name)
@@ -68,6 +70,8 @@ resource "rootly_workflow_task_add_slack_bookmark" "foo" {
 					id = "foo"
 					name = "bar"
 				}
+title = "test"
+link = "test"
 	}
 }
 `, name)
