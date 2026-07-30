@@ -39,7 +39,7 @@ Required:
 
 Optional:
 
-- `adjustment_days` (String) Days to adjust meeting by
+- `adjustment_days` (Number) Days to adjust meeting by
 - `attendees` (List of String) Emails of attendees
 - `calendar_id` (String)
 - `can_guests_invite_others` (Boolean) Value must be one of true or false
