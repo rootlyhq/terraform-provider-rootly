@@ -315,10 +315,13 @@ function genTaskSchemaProperty(property_name, property_schema, required_props) {
 								${property_schema.enum.map((k) => `"${k}",`).join("\n")}
 							}, false),`;
   }
-  if (property_schema.type === "number") {
+  if (property_schema.type === "number" || property_schema.type === "integer") {
     if (!isRequired) {
+      const defaultVal = property_schema.default != null ? property_schema.default
+        : property_schema.minimum != null ? property_schema.minimum
+        : null;
       a = `${a}
-							Default: nil,`;
+							Default: ${defaultVal != null ? defaultVal : "nil"},`;
     }
   }
   if (property_schema.type === "array") {
