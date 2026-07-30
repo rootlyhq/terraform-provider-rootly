@@ -50,6 +50,7 @@ subtask_issue_type = {
 					id = "foo"
 					name = "bar"
 				}
+retry_wait_time = 1
 	}
 }
 `, name)
@@ -74,6 +75,7 @@ subtask_issue_type = {
 					id = "foo"
 					name = "bar"
 				}
+retry_wait_time = 1
 	}
 }
 `, name)

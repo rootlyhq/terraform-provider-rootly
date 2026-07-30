@@ -44,6 +44,7 @@ resource "rootly_workflow_task_update_pagerduty_incident" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
 		pagerduty_incident_id = "test"
+escalation_level = 1
 	}
 }
 `, name)
@@ -62,6 +63,7 @@ resource "rootly_workflow_task_update_pagerduty_incident" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
 		pagerduty_incident_id = "test"
+escalation_level = 1
 	}
 }
 `, name)
