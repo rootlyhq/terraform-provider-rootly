@@ -48,6 +48,7 @@ resource "rootly_workflow_task_create_gitlab_issue" "foo" {
 					name = "bar"
 				}
 title = "test"
+issue_type = "issue"
 	}
 }
 `, name)
@@ -70,6 +71,7 @@ resource "rootly_workflow_task_create_gitlab_issue" "foo" {
 					name = "bar"
 				}
 title = "test"
+issue_type = "issue"
 	}
 }
 `, name)

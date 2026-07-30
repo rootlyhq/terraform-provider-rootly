@@ -43,7 +43,10 @@ resource "rootly_workflow_incident" "foo" {
 resource "rootly_workflow_task_page_victor_ops_on_call_responders" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		
+		users {
+						id = "foo"
+						name = "bar"
+					}
 	}
 }
 `, name)
@@ -61,7 +64,10 @@ resource "rootly_workflow_incident" "foo" {
 resource "rootly_workflow_task_page_victor_ops_on_call_responders" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		
+		users {
+						id = "foo"
+						name = "bar"
+					}
 	}
 }
 `, name)

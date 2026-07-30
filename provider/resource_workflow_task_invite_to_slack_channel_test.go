@@ -47,6 +47,10 @@ resource "rootly_workflow_task_invite_to_slack_channel" "foo" {
 					id = "foo"
 					name = "bar"
 				}
+slack_users {
+						id = "foo"
+						name = "bar"
+					}
 	}
 }
 `, name)
@@ -68,6 +72,10 @@ resource "rootly_workflow_task_invite_to_slack_channel" "foo" {
 					id = "foo"
 					name = "bar"
 				}
+slack_users {
+						id = "foo"
+						name = "bar"
+					}
 	}
 }
 `, name)

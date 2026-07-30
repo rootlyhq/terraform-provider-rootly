@@ -49,6 +49,10 @@ archivation = {
 					name = "bar"
 				}
 kind = "bug"
+project = {
+					id = "foo"
+					name = "bar"
+				}
 	}
 }
 `, name)
@@ -72,6 +76,10 @@ archivation = {
 					name = "bar"
 				}
 kind = "bug"
+project = {
+					id = "foo"
+					name = "bar"
+				}
 	}
 }
 `, name)

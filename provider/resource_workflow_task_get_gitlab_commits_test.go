@@ -45,6 +45,7 @@ resource "rootly_workflow_task_get_gitlab_commits" "foo" {
 	task_params {
 		branch = "test"
 past_duration = "1 hour"
+service_ids = ["foo"]
 	}
 }
 `, name)
@@ -64,6 +65,7 @@ resource "rootly_workflow_task_get_gitlab_commits" "foo" {
 	task_params {
 		branch = "test"
 past_duration = "1 hour"
+service_ids = ["foo"]
 	}
 }
 `, name)

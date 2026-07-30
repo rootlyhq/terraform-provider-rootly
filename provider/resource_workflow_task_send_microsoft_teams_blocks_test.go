@@ -44,6 +44,10 @@ resource "rootly_workflow_task_send_microsoft_teams_blocks" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
 		attachments = "test"
+channels {
+						id = "foo"
+						name = "bar"
+					}
 	}
 }
 `, name)
@@ -62,6 +66,10 @@ resource "rootly_workflow_task_send_microsoft_teams_blocks" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
 		attachments = "test"
+channels {
+						id = "foo"
+						name = "bar"
+					}
 	}
 }
 `, name)

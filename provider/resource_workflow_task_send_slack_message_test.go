@@ -44,6 +44,10 @@ resource "rootly_workflow_task_send_slack_message" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
 		text = "test"
+channels {
+						id = "foo"
+						name = "bar"
+					}
 	}
 }
 `, name)
@@ -62,6 +66,10 @@ resource "rootly_workflow_task_send_slack_message" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
 		text = "test"
+channels {
+						id = "foo"
+						name = "bar"
+					}
 	}
 }
 `, name)

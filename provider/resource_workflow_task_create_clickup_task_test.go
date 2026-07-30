@@ -44,6 +44,10 @@ resource "rootly_workflow_task_create_clickup_task" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
 		title = "test"
+list = {
+					id = "foo"
+					name = "bar"
+				}
 	}
 }
 `, name)
@@ -62,6 +66,10 @@ resource "rootly_workflow_task_create_clickup_task" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
 		title = "test"
+list = {
+					id = "foo"
+					name = "bar"
+				}
 	}
 }
 `, name)
