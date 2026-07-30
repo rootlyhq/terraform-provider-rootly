@@ -366,6 +366,7 @@ function genTaskSchemaPropertyType(type_) {
     case "string":
       return "schema.TypeString";
     case "number":
+      return "schema.TypeFloat";
     case "integer":
       return "schema.TypeInt";
     case "array":
@@ -480,6 +481,7 @@ function genTestParams(task_name, task_schema) {
       case "string":
         return `${key} = "${val}"`;
       case "number":
+        return `${key} = 1.0`;
       case "integer":
         return `${key} = 1`;
       case "array":
