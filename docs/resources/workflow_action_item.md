@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_action_item - terraform-provider-rootly"
-subcategory: Workflow Tasks
+subcategory: Workflows
 description: |-
     
 ---
