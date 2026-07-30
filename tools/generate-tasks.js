@@ -14,11 +14,19 @@ module.exports = function generateWorkflowTaskResources(tasks, swagger) {
 	})
 };
 
+function hasJSONProperty(task_schema) {
+  return Object.values(task_schema.properties).some(
+    (p) => p.type === "string" && p.description && p.description.match(/JSON/)
+  );
+}
+
 function genResourceFile(task_name, task_schema) {
   const task_name_camel = task_name
     .split("_")
     .map((p) => `${p[0].toUpperCase()}${p.slice(1)}`)
     .join("");
+
+  const needsJSON = hasJSONProperty(task_schema);
 
   return `package provider
 
@@ -27,9 +35,9 @@ function genResourceFile(task_name, task_schema) {
 import (
 	"context"
 	"errors"
-	"fmt"
+	"fmt"${needsJSON ? `
 	"reflect"
-	"encoding/json"
+	"encoding/json"` : ""}
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -358,6 +366,7 @@ function genTaskSchemaPropertyType(type_) {
     case "string":
       return "schema.TypeString";
     case "number":
+    case "integer":
       return "schema.TypeInt";
     case "array":
       return "schema.TypeList";
