@@ -335,7 +335,8 @@ func TestAccResourceEscalationPathWithAllRuleTypes(t *testing.T) {
 func testAccResourceEscalationPathWithAllRuleTypesConfig(rName string) string {
 	return fmt.Sprintf(`
 resource "rootly_escalation_policy" "test_rules" {
-	name = "%s-ep"
+	name       = "%s-ep"
+	depends_on = [rootly_alert_urgency.test, rootly_alert_field.test]
 }
 
 resource "rootly_alert_urgency" "test" {
@@ -385,7 +386,8 @@ resource "rootly_escalation_path" "test_rules" {
 func testAccResourceEscalationPathWithAllRuleTypesUpdatedConfig(rName string) string {
 	return fmt.Sprintf(`
 resource "rootly_escalation_policy" "test_rules" {
-	name = "%s-ep"
+	name       = "%s-ep"
+	depends_on = [rootly_alert_urgency.test, rootly_alert_field.test]
 }
 
 resource "rootly_alert_urgency" "test" {
