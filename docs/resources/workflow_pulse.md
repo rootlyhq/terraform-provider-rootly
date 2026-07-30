@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_pulse - terraform-provider-rootly"
-subcategory: Workflows
+subcategory:
 description: |-
     
 ---

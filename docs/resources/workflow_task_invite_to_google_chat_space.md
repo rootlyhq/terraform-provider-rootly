@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_invite_to_google_chat_space - terraform-provider-rootly"
-subcategory: Workflow Tasks
+subcategory:
 description: |-
     Manages workflow invite_to_google_chat_space task.
 ---

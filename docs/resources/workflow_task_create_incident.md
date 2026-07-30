@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_create_incident - terraform-provider-rootly"
-subcategory: Workflow Tasks
+subcategory:
 description: |-
     Manages workflow create_incident task.
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_snapshot_new_relic_graph - terraform-provider-rootly"
-subcategory: Workflow Tasks
+subcategory:
 description: |-
     Manages workflow snapshot_new_relic_graph task.
 ---

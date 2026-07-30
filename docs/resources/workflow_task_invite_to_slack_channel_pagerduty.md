@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_invite_to_slack_channel_pagerduty - terraform-provider-rootly"
-subcategory: Workflow Tasks
+subcategory:
 description: |-
     Manages workflow invite_to_slack_channel_pagerduty task.
 ---

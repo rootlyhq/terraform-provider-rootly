@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_get_github_commits - terraform-provider-rootly"
-subcategory: Workflow Tasks
+subcategory:
 description: |-
     Manages workflow get_github_commits task.
 ---

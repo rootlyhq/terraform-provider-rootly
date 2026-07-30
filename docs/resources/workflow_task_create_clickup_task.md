@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_create_clickup_task - terraform-provider-rootly"
-subcategory: Workflow Tasks
+subcategory:
 description: |-
     Manages workflow create_clickup_task task.
 ---
@@ -35,6 +35,7 @@ Manages workflow create_clickup_task task.
 
 Required:
 
+- `list` (Map of String) Map must contain two fields, `id` and `name`.
 - `title` (String) The task title
 
 Optional:

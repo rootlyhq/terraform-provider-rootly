@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_invite_to_microsoft_teams_channel_rootly - terraform-provider-rootly"
-subcategory: Workflow Tasks
+subcategory:
 description: |-
     Manages workflow invite_to_microsoft_teams_channel_rootly task.
 ---

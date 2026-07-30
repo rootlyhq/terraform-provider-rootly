@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_page_rootly_on_call_responders - terraform-provider-rootly"
-subcategory: Workflow Tasks
+subcategory:
 description: |-
     Manages workflow page_rootly_on_call_responders task.
 ---

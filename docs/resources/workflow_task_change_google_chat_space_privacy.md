@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_change_google_chat_space_privacy - terraform-provider-rootly"
-subcategory: Workflow Tasks
+subcategory:
 description: |-
     Manages workflow change_google_chat_space_privacy task.
 ---

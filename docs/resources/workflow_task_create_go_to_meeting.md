@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_create_go_to_meeting - terraform-provider-rootly"
-subcategory: Workflow Tasks
+subcategory:
 description: |-
     Manages workflow create_go_to_meeting task.
 ---

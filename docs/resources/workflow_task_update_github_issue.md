@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_update_github_issue - terraform-provider-rootly"
-subcategory: Workflow Tasks
+subcategory:
 description: |-
     Manages workflow update_github_issue task.
 ---

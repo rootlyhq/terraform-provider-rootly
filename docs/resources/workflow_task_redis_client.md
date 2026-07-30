@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_redis_client - terraform-provider-rootly"
-subcategory: Workflow Tasks
+subcategory:
 description: |-
     Manages workflow redis_client task.
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_send_sms - terraform-provider-rootly"
-subcategory: Workflow Tasks
+subcategory:
 description: |-
     Manages workflow send_sms task.
 ---

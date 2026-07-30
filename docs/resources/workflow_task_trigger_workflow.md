@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_trigger_workflow - terraform-provider-rootly"
-subcategory: Workflow Tasks
+subcategory:
 description: |-
     Manages workflow trigger_workflow task.
 ---

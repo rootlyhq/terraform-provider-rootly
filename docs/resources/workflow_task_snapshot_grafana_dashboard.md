@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_snapshot_grafana_dashboard - terraform-provider-rootly"
-subcategory: Workflow Tasks
+subcategory:
 description: |-
     Manages workflow snapshot_grafana_dashboard task.
 ---

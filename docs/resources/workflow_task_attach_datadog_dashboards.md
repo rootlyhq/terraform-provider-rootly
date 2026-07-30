@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_attach_datadog_dashboards - terraform-provider-rootly"
-subcategory: Workflow Tasks
+subcategory:
 description: |-
     Manages workflow attach_datadog_dashboards task.
 ---

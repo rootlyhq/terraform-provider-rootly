@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_add_microsoft_teams_chat_tab - terraform-provider-rootly"
-subcategory: Workflow Tasks
+subcategory:
 description: |-
     Manages workflow add_microsoft_teams_chat_tab task.
 ---

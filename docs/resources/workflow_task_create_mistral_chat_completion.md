@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_create_mistral_chat_completion - terraform-provider-rootly"
-subcategory: Workflow Tasks
+subcategory:
 description: |-
     Manages workflow create_mistral_chat_completion task.
 ---
