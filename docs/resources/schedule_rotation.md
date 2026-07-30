@@ -2,12 +2,12 @@
 page_title: "Resource rootly_schedule_rotation - terraform-provider-rootly"
 subcategory:
 description: |-
-    
+    Manages a schedule rotation.
 ---
 
 # Resource (rootly_schedule_rotation)
 
-
+Manages a schedule rotation.
 
 ## Example Usage
 
@@ -172,19 +172,19 @@ resource "rootly_escalation_level" "second" {
 
 ### Required
 
-- `name` (String) The name of the schedule rotation
-- `schedule_id` (String) The ID of parent schedule
-- `schedule_rotationable_attributes` (Map of String) handoff_time and/or handoff_day may be required, depending on schedule_rotationable_type. Please see API docs for options based on schedule_rotationable_type: https://docs.rootly.com/api-reference/schedulerotations/creates-a-schedule-rotation#response-data-attributes-schedule-rotationable-attributes
+- `name` (String) The name of the schedule rotation.
+- `schedule_id` (String) The ID of parent schedule.
+- `schedule_rotationable_attributes` (Attributes) handoff_time and/or handoff_day may be required, depending on schedule_rotationable_type. Please see API docs for options based on schedule_rotationable_type: https://docs.rootly.com/api-reference/schedulerotations/creates-a-schedule-rotation#response-data-attributes-schedule-rotationable-attributes (see [below for nested schema](#nestedatt--schedule_rotationable_attributes))
 
 ### Optional
 
-- `active_all_week` (Boolean) Schedule rotation active all week?. Value must be one of true or false
-- `active_days` (List of String) Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.
-- `active_time_attributes` (Block List) Schedule rotation's active times (see [below for nested schema](#nestedblock--active_time_attributes))
+- `active_all_week` (Boolean) Schedule rotation active all week?
+- `active_days` (Set of String) Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.
+- `active_time_attributes` (Block Set) Schedule rotation's active times (see [below for nested schema](#nestedblock--active_time_attributes))
 - `active_time_type` (String) Value must be one of `all_day`, `same_time`, or `custom`. The value chosen will override `active_time_attributes` in any `rootly_schedule_rotation_active_day` resources linked to this `rootly_schedule_rotation`.
 - `end_time` (String) ISO8601 date and time when rotation ends. Shifts will only be created before this time.
-- `position` (Number) Position of the schedule rotation
-- `schedule_rotation_members` (Block List) Schedule rotation members. You can only add schedule rotation members if your account has schedule nesting feature enabled. (see [below for nested schema](#nestedblock--schedule_rotation_members))
+- `position` (Number) Position of the schedule rotation.
+- `schedule_rotation_members` (Block Set) Schedule rotation members. You can only add schedule rotation members if your account has schedule nesting feature enabled. (see [below for nested schema](#nestedblock--schedule_rotation_members))
 - `schedule_rotationable_type` (String) Schedule rotation type. Value must be one of `ScheduleDailyRotation`, `ScheduleWeeklyRotation`, `ScheduleBiweeklyRotation`, `ScheduleMonthlyRotation`, `ScheduleCustomRotation`.
 - `start_time` (String) ISO8601 date and time when rotation starts. Shifts will only be created after this time.
 - `time_zone` (String) A valid IANA time zone name.
@@ -193,10 +193,24 @@ resource "rootly_escalation_level" "second" {
 
 - `id` (String) The ID of this resource.
 
+<a id="nestedatt--schedule_rotationable_attributes"></a>
+### Nested Schema for `schedule_rotationable_attributes`
+
+Required:
+
+- `handoff_time` (String) Hand off time. Only applicable for daily, weekly/biweekly, monthly, and custom rotations.
+
+Optional:
+
+- `handoff_day` (String) Hand off day. Only applicable for weekly/biweekly, and monthly.
+- `shift_length` (Number) Shift length for custom rotation.
+- `shift_length_unit` (String) Shift length unit for custom rotation. Value must be one of `hours`, `days`, `weeks`.
+
+
 <a id="nestedblock--active_time_attributes"></a>
 ### Nested Schema for `active_time_attributes`
 
-Optional:
+Required:
 
 - `end_time` (String) End time for schedule rotation active time
 - `start_time` (String) Start time for schedule rotation active time
@@ -205,10 +219,13 @@ Optional:
 <a id="nestedblock--schedule_rotation_members"></a>
 ### Nested Schema for `schedule_rotation_members`
 
+Required:
+
+- `member_id` (String) ID of the member.
+- `member_type` (String) Type of member. Value must be one of `Schedule` or `User`.
+
 Optional:
 
-- `member_id` (String) ID of the member
-- `member_type` (String) Type of member. Value must be one of `Schedule` or `User`.
 - `position` (Number) Position of the member in rotation
 
 ## Import
