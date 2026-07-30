@@ -407,6 +407,7 @@ import (
 )
 
 func TestAccResourceWorkflowTask${task_name_camel}(t *testing.T) {
+	t.Parallel()
 	rName := acctest.RandomWithPrefix("tf-wf-task")
 
 	resource.UnitTest(t, resource.TestCase{

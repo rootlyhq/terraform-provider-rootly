@@ -10,6 +10,7 @@ import (
 )
 
 func TestAccResourceWorkflowTaskCreateNotionPage(t *testing.T) {
+	t.Parallel()
 	rName := acctest.RandomWithPrefix("tf-wf-task")
 
 	resource.UnitTest(t, resource.TestCase{
