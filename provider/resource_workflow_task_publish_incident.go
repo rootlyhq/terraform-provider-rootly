@@ -4,11 +4,10 @@ package provider
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"reflect"
-
+	"encoding/json"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -30,109 +29,118 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 		},
 		CustomizeDiff: validateUniqueWorkflowTaskPosition,
 
-		Schema: map[string]*schema.Schema{
+		Schema: map[string]*schema.Schema {
 			"workflow_id": {
-				Description: "The ID of the parent workflow",
-				Type:        schema.TypeString,
-				Required:    true,
-				ForceNew:    true,
+				Description:  "The ID of the parent workflow",
+				Type:         schema.TypeString,
+				Required:     true,
+				ForceNew:     true,
 			},
 			"name": {
-				Description: "Name of the workflow task",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
+				Description:  "Name of the workflow task",
+				Type:         schema.TypeString,
+				Optional:     true,
+				Computed:     true,
 			},
 			"position": {
-				Description: "The position of the workflow task (1 being top of list)",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Computed:    true,
+				Description:  "The position of the workflow task (1 being top of list)",
+				Type:         schema.TypeInt,
+				Optional:     true,
+				Computed:     true,
 			},
 			"skip_on_failure": {
-				Description: "Skip workflow task if any failures",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Default:     false,
+				Description:  "Skip workflow task if any failures",
+				Type:         schema.TypeBool,
+				Optional:     true,
+				Default:      false,
 			},
 			"enabled": {
-				Description: "Enable/disable this workflow task",
-				Type:        schema.TypeBool,
-				Optional:    true,
-				Default:     true,
+				Description:  "Enable/disable this workflow task",
+				Type:         schema.TypeBool,
+				Optional:     true,
+				Default:      true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type:        schema.TypeList,
-				Required:    true,
-				MinItems:    1,
-				MaxItems:    1,
+				Type: schema.TypeList,
+				Required: true,
+				MinItems: 1,
+				MaxItems: 1,
 				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"task_type": &schema.Schema{
-							Type:     schema.TypeString,
+					Schema: map[string]*schema.Schema {
+						"task_type": &schema.Schema {
+							Type: schema.TypeString,
 							Optional: true,
-							Default:  "publish_incident",
-							ValidateFunc: validation.StringInSlice([]string{
+							Default: "publish_incident",
+							ValidateFunc: validation.StringInSlice([]string {
 								"publish_incident",
 							}, false),
 						},
-						"incident": &schema.Schema{
+						"incident": &schema.Schema {
 							Description: "Map must contain two fields, `id` and `name`. ",
-							Type:        schema.TypeMap,
-							Required:    true,
+							Type: schema.TypeMap,
+							Required: true,
 						},
-						"public_title": &schema.Schema{
+						"public_title": &schema.Schema {
 							Description: "",
-							Type:        schema.TypeString,
-							Required:    true,
+							Type: schema.TypeString,
+							Required: true,
 						},
-						"event": &schema.Schema{
+						"event": &schema.Schema {
 							Description: "Incident event description",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 						},
-						"status": &schema.Schema{
+						"status": &schema.Schema {
 							Description: "Value must be one of `investigating`, `identified`, `monitoring`, `resolved`, `scheduled`, `in_progress`, `completed`.",
-							Type:        schema.TypeString,
-							Required:    true,
+							Type: schema.TypeString,
+							Required: true,
 							ValidateFunc: validation.StringInSlice([]string{
 								"investigating",
-								"identified",
-								"monitoring",
-								"resolved",
-								"scheduled",
-								"in_progress",
-								"completed",
+"identified",
+"monitoring",
+"resolved",
+"scheduled",
+"in_progress",
+"completed",
 							}, false),
 						},
-						"notify_subscribers": &schema.Schema{
+						"notify_subscribers": &schema.Schema {
 							Description: "When true notifies subscribers of the status page by email/text. Value must be one of true or false",
-							Type:        schema.TypeBool,
-							Optional:    true,
+							Type: schema.TypeBool,
+							Optional: true,
 						},
-						"should_tweet": &schema.Schema{
+						"should_tweet": &schema.Schema {
 							Description: "For Statuspage.io integrated pages auto publishes a tweet for your update. Value must be one of true or false",
-							Type:        schema.TypeBool,
-							Optional:    true,
+							Type: schema.TypeBool,
+							Optional: true,
 						},
-						"status_page_template": &schema.Schema{
+						"status_page_template": &schema.Schema {
 							Description: "Map must contain two fields, `id` and `name`. ",
-							Type:        schema.TypeMap,
-							Optional:    true,
+							Type: schema.TypeMap,
+							Optional: true,
 						},
-						"status_page_id": &schema.Schema{
+						"status_page_id": &schema.Schema {
 							Description: "",
-							Type:        schema.TypeString,
-							Required:    true,
+							Type: schema.TypeString,
+							Required: true,
 						},
-						"integration_payload": &schema.Schema{
+						"status_page_ids": &schema.Schema {
+							Description: "Publishes the update to every listed status page (requires the status-page-v3-limited-bulk-publish feature). When set, it takes precedence over status_page_id and the first entry becomes status_page_id.",
+							Type: schema.TypeList,
+							Optional: true,
+							Elem: &schema.Schema {
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+						},
+						"integration_payload": &schema.Schema {
 							Description: "Additional API Payload you can pass to statuspage.io for example. Can contain liquid markup and need to be valid JSON",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Type: schema.TypeString,
+							Optional: true,
 							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {
 								var oldJSONAsInterface, newJSONAsInterface interface{}
-
+							
 								if err := json.Unmarshal([]byte(old), &oldJSONAsInterface); err != nil {
 									return false
 								}
@@ -165,12 +173,12 @@ func resourceWorkflowTaskPublishIncidentCreate(ctx context.Context, d *schema.Re
 	tflog.Trace(ctx, fmt.Sprintf("Creating workflow task: %s", workflowId))
 
 	s := &client.WorkflowTask{
-		WorkflowId:    workflowId,
-		Name:          name,
-		Position:      position,
+		WorkflowId: workflowId,
+		Name: name,
+		Position: position,
 		SkipOnFailure: skipOnFailure,
-		Enabled:       enabled,
-		TaskParams:    taskParams,
+		Enabled: enabled,
+		TaskParams: taskParams,
 	}
 
 	res, err := c.CreateWorkflowTask(s)
@@ -225,12 +233,12 @@ func resourceWorkflowTaskPublishIncidentUpdate(ctx context.Context, d *schema.Re
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	s := &client.WorkflowTask{
-		WorkflowId:    workflowId,
-		Name:          name,
-		Position:      position,
+		WorkflowId: workflowId,
+		Name: name,
+		Position: position,
 		SkipOnFailure: skipOnFailure,
-		Enabled:       enabled,
-		TaskParams:    taskParams,
+		Enabled: enabled,
+		TaskParams: taskParams,
 	}
 
 	tflog.Debug(ctx, fmt.Sprintf("adding value: %#v", s))
