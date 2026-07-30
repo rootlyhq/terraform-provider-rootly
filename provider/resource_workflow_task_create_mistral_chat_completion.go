@@ -91,9 +91,9 @@ func resourceWorkflowTaskCreateMistralChatCompletion() *schema.Resource {
 						},
 						"temperature": &schema.Schema {
 							Description: "Sampling temperature (0.0-1.5). Higher values make output more random.",
-							Type: schema.TypeFloat,
+							Type: schema.TypeString,
 							Optional: true,
-							Default: 0,
+							Default: nil,
 						},
 						"max_tokens": &schema.Schema {
 							Description: "Maximum number of tokens to generate",
@@ -103,9 +103,9 @@ func resourceWorkflowTaskCreateMistralChatCompletion() *schema.Resource {
 						},
 						"top_p": &schema.Schema {
 							Description: "Nucleus sampling parameter (0.0-1.0)",
-							Type: schema.TypeFloat,
+							Type: schema.TypeString,
 							Optional: true,
-							Default: 0,
+							Default: nil,
 						},
 					},
 				},

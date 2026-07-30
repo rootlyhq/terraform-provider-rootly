@@ -91,9 +91,9 @@ func resourceWorkflowTaskCreateOpenaiChatCompletion() *schema.Resource {
 						},
 						"temperature": &schema.Schema {
 							Description: "Controls randomness in the response. Higher values make output more random",
-							Type: schema.TypeFloat,
+							Type: schema.TypeString,
 							Optional: true,
-							Default: 0,
+							Default: nil,
 						},
 						"max_tokens": &schema.Schema {
 							Description: "Maximum number of tokens to generate in the response",
@@ -103,9 +103,9 @@ func resourceWorkflowTaskCreateOpenaiChatCompletion() *schema.Resource {
 						},
 						"top_p": &schema.Schema {
 							Description: "Controls diversity via nucleus sampling. Lower values make output more focused",
-							Type: schema.TypeFloat,
+							Type: schema.TypeString,
 							Optional: true,
-							Default: 0,
+							Default: nil,
 						},
 						"reasoning_effort": &schema.Schema {
 							Description: "Constrains effort on reasoning for GPT-5 and o-series models. Value must be one of `minimal`, `low`, `medium`, `high`.",

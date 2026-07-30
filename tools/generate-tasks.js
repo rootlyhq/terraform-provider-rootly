@@ -315,7 +315,13 @@ function genTaskSchemaProperty(property_name, property_schema, required_props) {
 								${property_schema.enum.map((k) => `"${k}",`).join("\n")}
 							}, false),`;
   }
-  if (property_schema.type === "number" || property_schema.type === "integer") {
+  if (property_schema.type === "number") {
+    if (!isRequired) {
+      a = `${a}
+							Default: nil,`;
+    }
+  }
+  if (property_schema.type === "integer") {
     if (!isRequired) {
       const defaultVal = property_schema.default != null ? property_schema.default
         : property_schema.minimum != null ? property_schema.minimum
@@ -369,7 +375,7 @@ function genTaskSchemaPropertyType(type_) {
     case "string":
       return "schema.TypeString";
     case "number":
-      return "schema.TypeFloat";
+      return "schema.TypeString";
     case "integer":
       return "schema.TypeInt";
     case "array":
@@ -484,7 +490,7 @@ function genTestParams(task_name, task_schema) {
       case "string":
         return `${key} = "${val}"`;
       case "number":
-        return `${key} = 1.0`;
+        return `${key} = "1"`;
       case "integer":
         return `${key} = 1`;
       case "array":
