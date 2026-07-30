@@ -40,11 +40,11 @@ Required:
 
 Optional:
 
-- `max_tokens` (String) Maximum number of tokens to generate
+- `max_tokens` (Number) Maximum number of tokens to generate
 - `system_prompt` (String) The system prompt to send to Mistral (optional)
 - `task_type` (String)
-- `temperature` (Number) Sampling temperature (0.0-1.5). Higher values make output more random.
-- `top_p` (Number) Nucleus sampling parameter (0.0-1.0)
+- `temperature` (String) Sampling temperature (0.0-1.5). Higher values make output more random.
+- `top_p` (String) Nucleus sampling parameter (0.0-1.0)
 
 ## Import
 

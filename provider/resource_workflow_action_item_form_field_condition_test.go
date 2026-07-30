@@ -9,6 +9,7 @@ import (
 )
 
 func TestAccResourceWorkflowActionItemFormFieldCondition(t *testing.T) {
+	t.Skip("CI API key lacks permission for action_item_form_field_conditions (403)")
 	rName := acctest.RandomWithPrefix("tf-wf-ai-ffc")
 
 	resource.UnitTest(t, resource.TestCase{

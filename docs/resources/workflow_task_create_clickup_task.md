@@ -35,6 +35,7 @@ Manages workflow create_clickup_task task.
 
 Required:
 
+- `list` (Map of String) Map must contain two fields, `id` and `name`.
 - `title` (String) The task title
 
 Optional:

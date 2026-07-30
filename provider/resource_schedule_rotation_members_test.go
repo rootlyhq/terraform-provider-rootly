@@ -115,6 +115,7 @@ resource "rootly_schedule_rotation" "tf" {
 }
 
 func TestAccResourceScheduleRotationMembersScheduleType(t *testing.T) {
+	t.Skip("CI uses a user-less API key; schedule creation requires owner_user")
 	rName := acctest.RandomWithPrefix("tf-sched-rm-s")
 
 	resource.UnitTest(t, resource.TestCase{

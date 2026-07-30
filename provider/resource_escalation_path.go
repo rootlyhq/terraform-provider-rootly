@@ -532,6 +532,18 @@ func resourceEscalationPathRead(ctx context.Context, d *schema.ResourceData, met
 			}
 		}
 
+		processed_items_rules = matchRulesOrder(d, processed_items_rules)
+
+		if configRules, ok := d.GetOk("rules"); ok {
+			if configList, ok := configRules.([]interface{}); ok {
+				for i, rule := range processed_items_rules {
+					if tb, ok := rule["time_blocks"].([]map[string]interface{}); ok && len(tb) > 1 {
+						processed_items_rules[i]["time_blocks"] = matchTimeBlocksOrder(configList, i, tb)
+					}
+				}
+			}
+		}
+
 		d.Set("rules", processed_items_rules)
 	} else {
 		d.Set("rules", nil)
@@ -663,6 +675,94 @@ func nilIfEmpty(v interface{}) interface{} {
 		return nil
 	}
 	return v
+}
+
+// matchRulesOrder reorders API rules to match the config order so that
+// TypeList doesn't detect a spurious diff when the API returns rules in
+// a different order than the config defines them.
+func matchRulesOrder(d *schema.ResourceData, apiRules []map[string]interface{}) []map[string]interface{} {
+	configRules, ok := d.GetOk("rules")
+	if !ok {
+		return apiRules
+	}
+	configList, ok := configRules.([]interface{})
+	if !ok || len(configList) == 0 {
+		return apiRules
+	}
+
+	result := make([]map[string]interface{}, 0, len(apiRules))
+	used := make([]bool, len(apiRules))
+
+	for _, cfgRaw := range configList {
+		cfgRule, ok := cfgRaw.(map[string]interface{})
+		if !ok {
+			continue
+		}
+		cfgType, _ := cfgRule["rule_type"].(string)
+		for i, apiRule := range apiRules {
+			if used[i] {
+				continue
+			}
+			apiType, _ := apiRule["rule_type"].(string)
+			if apiType == cfgType {
+				result = append(result, apiRule)
+				used[i] = true
+				break
+			}
+		}
+	}
+
+	for i, apiRule := range apiRules {
+		if !used[i] {
+			result = append(result, apiRule)
+		}
+	}
+
+	return result
+}
+
+// matchTimeBlocksOrder reorders API time_blocks to match config order.
+// Uses position field if available, falls back to matching by all_day value.
+func matchTimeBlocksOrder(configRules []interface{}, ruleIdx int, apiBlocks []map[string]interface{}) []map[string]interface{} {
+	if ruleIdx >= len(configRules) {
+		return apiBlocks
+	}
+	cfgRule, ok := configRules[ruleIdx].(map[string]interface{})
+	if !ok {
+		return apiBlocks
+	}
+	cfgBlocks, ok := cfgRule["time_blocks"].([]interface{})
+	if !ok || len(cfgBlocks) == 0 {
+		return apiBlocks
+	}
+
+	result := make([]map[string]interface{}, 0, len(apiBlocks))
+	used := make([]bool, len(apiBlocks))
+
+	for _, cbRaw := range cfgBlocks {
+		cb, ok := cbRaw.(map[string]interface{})
+		if !ok {
+			continue
+		}
+		for i, ab := range apiBlocks {
+			if used[i] {
+				continue
+			}
+			if fmt.Sprintf("%v", ab["all_day"]) == fmt.Sprintf("%v", cb["all_day"]) {
+				result = append(result, ab)
+				used[i] = true
+				break
+			}
+		}
+	}
+
+	for i, ab := range apiBlocks {
+		if !used[i] {
+			result = append(result, ab)
+		}
+	}
+
+	return result
 }
 
 func processTimeBlocks(raw interface{}) []map[string]interface{} {

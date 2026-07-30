@@ -52,6 +52,7 @@ node_modules/
 terraform-provider-rootly
 .aider*
 .claude
+.serena
 
 # Editor and IDE files
 .vscode/

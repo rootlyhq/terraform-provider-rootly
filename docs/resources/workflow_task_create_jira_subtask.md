@@ -50,6 +50,8 @@ Optional:
 - `labels` (String) The issue labels
 - `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name
 - `reporter_user_email` (String) The reporter user's email
+- `retry_count` (Number) Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.
+- `retry_wait_time` (Number) Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.
 - `status` (Map of String) Map must contain two fields, `id` and `name`. The status id and display name
 - `task_type` (String)
 - `update_payload` (String) Update payload. Can contain liquid markup and need to be valid JSON

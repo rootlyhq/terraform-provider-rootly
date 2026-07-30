@@ -146,7 +146,8 @@ func TestAccResourceAlertsSource_AlertTemplateAttributesErrorWhenAlertFieldsEnab
 				`),
 				ExpectError: regexp.MustCompile(`"alert_source_fields_attributes": conflicts with alert_template_attributes`),
 			},
-			// Alert template attributes cannot be provided when alert fields are enabled at the team level
+			// alert_template_attributes are now auto-converted to alert_source_fields
+			// when alert fields are enabled (backward compatibility), so no error expected
 			{
 				Config: testAccResourceAlertsSourceConfig(teamName, alertUrgencyName, alertsSourceName, `
 					source_type = "generic_webhook"
@@ -157,7 +158,6 @@ func TestAccResourceAlertsSource_AlertTemplateAttributesErrorWhenAlertFieldsEnab
 						external_url = "https://example.com"
 					}
 				`),
-				ExpectError: regexp.MustCompile("Alert template attributes cannot be provided when alert fields are enabled"),
 			},
 		},
 	})
