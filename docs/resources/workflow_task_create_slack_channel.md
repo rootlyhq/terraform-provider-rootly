@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_create_slack_channel - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow create_slack_channel task.
 ---

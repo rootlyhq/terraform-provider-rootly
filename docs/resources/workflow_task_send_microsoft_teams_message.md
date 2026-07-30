@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_send_microsoft_teams_message - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow send_microsoft_teams_message task.
 ---

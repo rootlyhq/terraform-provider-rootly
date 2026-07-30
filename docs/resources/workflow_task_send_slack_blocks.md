@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_send_slack_blocks - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow send_slack_blocks task.
 ---

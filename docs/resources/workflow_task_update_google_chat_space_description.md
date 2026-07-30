@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_update_google_chat_space_description - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow update_google_chat_space_description task.
 ---

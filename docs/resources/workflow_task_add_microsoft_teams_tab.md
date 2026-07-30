@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_add_microsoft_teams_tab - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow add_microsoft_teams_tab task.
 ---

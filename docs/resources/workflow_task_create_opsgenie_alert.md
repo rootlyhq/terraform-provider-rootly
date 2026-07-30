@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_create_opsgenie_alert - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow create_opsgenie_alert task.
 ---

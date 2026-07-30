@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_create_zendesk_jira_link - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow create_zendesk_jira_link task.
 ---

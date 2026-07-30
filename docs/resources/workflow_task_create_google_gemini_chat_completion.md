@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_create_google_gemini_chat_completion - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow create_google_gemini_chat_completion task.
 ---

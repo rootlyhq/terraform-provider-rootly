@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_http_client - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow http_client task.
 ---

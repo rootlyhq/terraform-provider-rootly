@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_rename_microsoft_teams_channel - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow rename_microsoft_teams_channel task.
 ---

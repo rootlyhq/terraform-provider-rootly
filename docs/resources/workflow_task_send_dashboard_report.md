@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_send_dashboard_report - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow send_dashboard_report task.
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_call_people - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow call_people task.
 ---

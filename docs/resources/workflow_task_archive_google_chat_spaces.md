@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_archive_google_chat_spaces - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow archive_google_chat_spaces task.
 ---

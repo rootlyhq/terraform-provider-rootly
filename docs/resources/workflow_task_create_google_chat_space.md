@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_create_google_chat_space - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow create_google_chat_space task.
 ---

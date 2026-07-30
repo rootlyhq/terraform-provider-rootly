@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_rename_google_chat_space - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow rename_google_chat_space task.
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_update_dropbox_paper_page - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow update_dropbox_paper_page task.
 ---

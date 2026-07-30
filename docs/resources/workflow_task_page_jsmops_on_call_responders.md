@@ -1,6 +1,6 @@
 ---
 page_title: "Resource rootly_workflow_task_page_jsmops_on_call_responders - terraform-provider-rootly"
-subcategory:
+subcategory: Workflow Tasks
 description: |-
     Manages workflow page_jsmops_on_call_responders task.
 ---
