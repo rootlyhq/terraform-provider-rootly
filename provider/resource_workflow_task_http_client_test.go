@@ -45,6 +45,7 @@ resource "rootly_workflow_task_http_client" "foo" {
 	task_params {
 		url = "https://example.com/foo.json"
 succeed_on_status = "200"
+retry_wait_time = 1
 	}
 }
 `, name)
@@ -64,6 +65,7 @@ resource "rootly_workflow_task_http_client" "foo" {
 	task_params {
 		url = "https://example.com/foo.json"
 succeed_on_status = "200"
+retry_wait_time = 1
 	}
 }
 `, name)

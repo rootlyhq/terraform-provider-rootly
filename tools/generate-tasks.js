@@ -470,6 +470,11 @@ function genTestParams(task_name, task_schema) {
       if (!required.includes(key)) required.push(key);
     });
   }
+  Object.entries(task_schema.properties).forEach(([key, prop]) => {
+    if (!required.includes(key) && prop.type === "integer" && (prop.minimum > 0 || prop.default > 0)) {
+      required.push(key);
+    }
+  });
   return required.map((key) => {
     let val;
 
@@ -489,7 +494,7 @@ function genTestParams(task_name, task_schema) {
       case "number":
         return `${key} = "1"`;
       case "integer":
-        return `${key} = 1`;
+        return `${key} = ${task_schema.properties[key].default || task_schema.properties[key].minimum || 1}`;
       case "array":
         if (
           task_schema.properties[key].items.type === "object"
