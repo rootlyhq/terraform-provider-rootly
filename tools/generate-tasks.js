@@ -315,6 +315,10 @@ function genTaskSchemaProperty(property_name, property_schema, required_props) {
 								${property_schema.enum.map((k) => `"${k}",`).join("\n")}
 							}, false),`;
   }
+  if (property_schema.type === "string" && !isJSON && !property_schema.enum && !isRequired && property_schema.default) {
+    a = `${a}
+							Default: "${property_schema.default.replace(/"/g, '\\"')}",`;
+  }
   if (property_schema.type === "number") {
     if (!isRequired) {
       a = `${a}
