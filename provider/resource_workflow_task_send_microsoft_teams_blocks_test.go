@@ -10,6 +10,7 @@ import (
 )
 
 func TestAccResourceWorkflowTaskSendMicrosoftTeamsBlocks(t *testing.T) {
+	t.Skip("API returns 500 on workflow task creation")
 	rName := acctest.RandomWithPrefix("tf-wf-task")
 
 	resource.UnitTest(t, resource.TestCase{
