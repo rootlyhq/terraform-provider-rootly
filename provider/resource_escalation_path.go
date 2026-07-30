@@ -532,6 +532,7 @@ func resourceEscalationPathRead(ctx context.Context, d *schema.ResourceData, met
 			}
 		}
 
+		processed_items_rules = matchRulesOrder(d, processed_items_rules)
 		d.Set("rules", processed_items_rules)
 	} else {
 		d.Set("rules", nil)
@@ -663,6 +664,50 @@ func nilIfEmpty(v interface{}) interface{} {
 		return nil
 	}
 	return v
+}
+
+// matchRulesOrder reorders API rules to match the config order so that
+// TypeList doesn't detect a spurious diff when the API returns rules in
+// a different order than the config defines them.
+func matchRulesOrder(d *schema.ResourceData, apiRules []map[string]interface{}) []map[string]interface{} {
+	configRules, ok := d.GetOk("rules")
+	if !ok {
+		return apiRules
+	}
+	configList, ok := configRules.([]interface{})
+	if !ok || len(configList) == 0 {
+		return apiRules
+	}
+
+	result := make([]map[string]interface{}, 0, len(apiRules))
+	used := make([]bool, len(apiRules))
+
+	for _, cfgRaw := range configList {
+		cfgRule, ok := cfgRaw.(map[string]interface{})
+		if !ok {
+			continue
+		}
+		cfgType, _ := cfgRule["rule_type"].(string)
+		for i, apiRule := range apiRules {
+			if used[i] {
+				continue
+			}
+			apiType, _ := apiRule["rule_type"].(string)
+			if apiType == cfgType {
+				result = append(result, apiRule)
+				used[i] = true
+				break
+			}
+		}
+	}
+
+	for i, apiRule := range apiRules {
+		if !used[i] {
+			result = append(result, apiRule)
+		}
+	}
+
+	return result
 }
 
 func processTimeBlocks(raw interface{}) []map[string]interface{} {
