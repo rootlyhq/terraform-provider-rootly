@@ -323,11 +323,8 @@ function genTaskSchemaProperty(property_name, property_schema, required_props) {
   }
   if (property_schema.type === "integer") {
     if (!isRequired) {
-      const defaultVal = property_schema.default != null ? property_schema.default
-        : property_schema.minimum != null ? property_schema.minimum
-        : null;
       a = `${a}
-							Default: ${defaultVal != null ? defaultVal : "nil"},`;
+							Default: nil,`;
     }
   }
   if (property_schema.type === "array") {

@@ -99,7 +99,7 @@ func resourceWorkflowTaskCreateMistralChatCompletion() *schema.Resource {
 							Description: "Maximum number of tokens to generate",
 							Type: schema.TypeInt,
 							Optional: true,
-							Default: 1,
+							Default: nil,
 						},
 						"top_p": &schema.Schema {
 							Description: "Nucleus sampling parameter (0.0-1.0)",

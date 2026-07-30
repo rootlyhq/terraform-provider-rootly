@@ -99,7 +99,7 @@ func resourceWorkflowTaskCreateOpenaiChatCompletion() *schema.Resource {
 							Description: "Maximum number of tokens to generate in the response",
 							Type: schema.TypeInt,
 							Optional: true,
-							Default: 1,
+							Default: nil,
 						},
 						"top_p": &schema.Schema {
 							Description: "Controls diversity via nucleus sampling. Lower values make output more focused",
