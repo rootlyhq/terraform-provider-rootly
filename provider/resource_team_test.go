@@ -69,14 +69,10 @@ resource "rootly_team" "test" {
 
 func testAccResourceTeamAdminNotInUsersConfig(name string) string {
 	return fmt.Sprintf(`
-data "rootly_user" "bot" {
-	email = "bot+tftests@rootly.com"
-}
-
 resource "rootly_team" "test" {
 	name      = "%s"
-	user_ids  = []
-	admin_ids = [data.rootly_user.bot.user_id]
+	user_ids  = [12345]
+	admin_ids = [12345, 99999]
 }
 `, name)
 }
