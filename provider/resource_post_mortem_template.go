@@ -115,11 +115,9 @@ func resourcePostmortemTemplateRead(ctx context.Context, d *schema.ResourceData,
 
 	// When format is "markdown", the API converts content to HTML server-side.
 	// Keep the configured markdown in state to avoid perpetual drift.
-	if configFormat, _ := d.GetOk("format"); configFormat == "markdown" {
-		// Only update content from API if this is an import (no config value yet)
-		if _, hasContent := d.GetOk("content"); !hasContent {
-			d.Set("content", item.Content)
-		}
+	// On import (no prior state), store the API value so state isn't empty.
+	if d.Get("format") == "markdown" && !d.IsNewResource() {
+		// Existing resource: don't overwrite configured markdown with API's HTML
 	} else {
 		d.Set("content", item.Content)
 	}
