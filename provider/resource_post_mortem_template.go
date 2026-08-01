@@ -111,8 +111,18 @@ func resourcePostmortemTemplateRead(ctx context.Context, d *schema.ResourceData,
 
 	d.Set("name", item.Name)
 	d.Set("default", item.Default)
-	d.Set("content", item.Content)
 	d.Set("format", item.Format)
+
+	// When format is "markdown", the API converts content to HTML server-side.
+	// Keep the configured markdown in state to avoid perpetual drift.
+	if configFormat, _ := d.GetOk("format"); configFormat == "markdown" {
+		// Only update content from API if this is an import (no config value yet)
+		if _, hasContent := d.GetOk("content"); !hasContent {
+			d.Set("content", item.Content)
+		}
+	} else {
+		d.Set("content", item.Content)
+	}
 
 	return nil
 }

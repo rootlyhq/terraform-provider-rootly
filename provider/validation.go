@@ -26,6 +26,44 @@ type resourceDiffGetter interface {
 	HasChange(key string) bool
 }
 
+func validateTeamAdminIdsInUserIds(ctx context.Context, d *schema.ResourceDiff, meta interface{}) error {
+	return validateTeamAdminIdsInUserIdsInternal(ctx, d, meta)
+}
+
+func validateTeamAdminIdsInUserIdsInternal(_ context.Context, d resourceDiffGetter, _ interface{}) error {
+	adminRaw, adminOk := d.GetOk("admin_ids")
+	if !adminOk {
+		return nil
+	}
+	adminList, ok := adminRaw.([]interface{})
+	if !ok || len(adminList) == 0 {
+		return nil
+	}
+
+	userRaw, userOk := d.GetOk("user_ids")
+	userSet := make(map[int]bool)
+	if userOk {
+		if userList, ok := userRaw.([]interface{}); ok {
+			for _, u := range userList {
+				if id, ok := u.(int); ok {
+					userSet[id] = true
+				}
+			}
+		}
+	}
+
+	for _, a := range adminList {
+		id, ok := a.(int)
+		if !ok {
+			continue
+		}
+		if !userSet[id] {
+			return fmt.Errorf("admin_ids contains user %d which is not in user_ids — every admin must also be a team member", id)
+		}
+	}
+	return nil
+}
+
 // workflowTaskLister is an interface for listing workflow tasks (for testing)
 type workflowTaskLister interface {
 	ListWorkflowTasks(workflowId string, params *rootlygo.ListWorkflowTasksParams) ([]interface{}, error)
