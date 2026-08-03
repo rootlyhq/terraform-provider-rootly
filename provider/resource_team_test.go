@@ -2,6 +2,7 @@ package provider
 
 import (
 	"fmt"
+	"regexp"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
@@ -33,6 +34,21 @@ func TestAccResourceTeam(t *testing.T) {
 	})
 }
 
+func TestAccResourceTeam_AdminIdsValidation(t *testing.T) {
+	rName := acctest.RandomWithPrefix("tf-team-adm")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:          func() { testAccPreCheck(t) },
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			{
+				Config:      testAccResourceTeamAdminNotInUsersConfig(rName),
+				ExpectError: regexp.MustCompile(`admin_ids contains user .* which is not in user_ids`),
+			},
+		},
+	})
+}
+
 func testAccResourceTeamConfig(name string) string {
 	return fmt.Sprintf(`
 resource "rootly_team" "test" {
@@ -47,6 +63,16 @@ func testAccResourceTeamConfigUpdated(name string) string {
 resource "rootly_team" "test" {
 	name        = "%s"
 	description = "Updated description"
+}
+`, name)
+}
+
+func testAccResourceTeamAdminNotInUsersConfig(name string) string {
+	return fmt.Sprintf(`
+resource "rootly_team" "test" {
+	name      = "%s"
+	user_ids  = [12345]
+	admin_ids = [12345, 99999]
 }
 `, name)
 }

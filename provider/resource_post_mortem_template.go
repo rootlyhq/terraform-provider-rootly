@@ -111,8 +111,17 @@ func resourcePostmortemTemplateRead(ctx context.Context, d *schema.ResourceData,
 
 	d.Set("name", item.Name)
 	d.Set("default", item.Default)
-	d.Set("content", item.Content)
 	d.Set("format", item.Format)
+
+	// When format is "markdown", the API converts content to HTML server-side.
+	// Never overwrite the configured markdown with the API's HTML rendering,
+	// otherwise every plan shows a diff. Only set content from API when the
+	// current state has no content (i.e. import via terraform import).
+	if d.Get("format") == "markdown" && d.Get("content") != "" {
+		// Keep the existing value in state (configured markdown or prior import)
+	} else {
+		d.Set("content", item.Content)
+	}
 
 	return nil
 }

@@ -23,6 +23,7 @@ func resourceTeam() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
+		CustomizeDiff: validateTeamAdminIdsInUserIds,
 		Schema: map[string]*schema.Schema{
 
 			"name": &schema.Schema{

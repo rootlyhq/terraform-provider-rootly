@@ -172,3 +172,53 @@ func TestValidateScheduleRotationMemberPositions_NoMembers(t *testing.T) {
 		t.Fatalf("expected no error when no members set, got: %v", err)
 	}
 }
+
+func TestValidateTeamAdminIdsInUserIds_Valid(t *testing.T) {
+	d := &ResourceDiffMock{
+		Values: map[string]interface{}{
+			"user_ids":  []interface{}{1, 2, 3},
+			"admin_ids": []interface{}{1, 3},
+		},
+	}
+	err := validateTeamAdminIdsInUserIdsInternal(context.Background(), d, nil)
+	if err != nil {
+		t.Fatalf("expected no error when all admins are in user_ids: %v", err)
+	}
+}
+
+func TestValidateTeamAdminIdsInUserIds_AdminNotInUsers(t *testing.T) {
+	d := &ResourceDiffMock{
+		Values: map[string]interface{}{
+			"user_ids":  []interface{}{1, 2},
+			"admin_ids": []interface{}{1, 99},
+		},
+	}
+	err := validateTeamAdminIdsInUserIdsInternal(context.Background(), d, nil)
+	if err == nil {
+		t.Fatalf("expected error when admin 99 is not in user_ids, got nil")
+	}
+}
+
+func TestValidateTeamAdminIdsInUserIds_NoAdmins(t *testing.T) {
+	d := &ResourceDiffMock{
+		Values: map[string]interface{}{
+			"user_ids": []interface{}{1, 2},
+		},
+	}
+	err := validateTeamAdminIdsInUserIdsInternal(context.Background(), d, nil)
+	if err != nil {
+		t.Fatalf("expected no error when no admin_ids set: %v", err)
+	}
+}
+
+func TestValidateTeamAdminIdsInUserIds_NoUsers(t *testing.T) {
+	d := &ResourceDiffMock{
+		Values: map[string]interface{}{
+			"admin_ids": []interface{}{1},
+		},
+	}
+	err := validateTeamAdminIdsInUserIdsInternal(context.Background(), d, nil)
+	if err == nil {
+		t.Fatalf("expected error when admin set but no user_ids, got nil")
+	}
+}
