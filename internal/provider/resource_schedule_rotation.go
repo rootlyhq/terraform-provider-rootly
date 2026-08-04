@@ -136,23 +136,23 @@ func (r *ScheduleRotationResource) Schema(ctx context.Context, _ resource.Schema
 		},
 		Blocks: map[string]schema.Block{
 			"active_time_attributes": schema.SetNestedBlock{
-				CustomType:          supertypes.NewSetNestedObjectTypeOf[ScheduleRotationResourceActiveTimeAttributesModel](ctx),
-				MarkdownDescription: "Schedule rotation's active times",
+				CustomType:          supertypes.NewSetNestedObjectTypeOf[ScheduleRotationResourceActiveTimeModel](ctx),
+				MarkdownDescription: "Schedule rotation's active times.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"start_time": schema.StringAttribute{
-							MarkdownDescription: "Start time for schedule rotation active time",
+							MarkdownDescription: "Start time for schedule rotation active time.",
 							Required:            true,
 						},
 						"end_time": schema.StringAttribute{
-							MarkdownDescription: "End time for schedule rotation active time",
+							MarkdownDescription: "End time for schedule rotation active time.",
 							Required:            true,
 						},
 					},
 				},
 			},
 			"schedule_rotation_members": schema.SetNestedBlock{
-				CustomType:          supertypes.NewSetNestedObjectTypeOf[ScheduleRotationResourceScheduleRotationMembersModel](ctx),
+				CustomType:          supertypes.NewSetNestedObjectTypeOf[ScheduleRotationResourceScheduleRotationMemberModel](ctx),
 				MarkdownDescription: "Schedule rotation members. You can only add schedule rotation members if your account has schedule nesting feature enabled.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
@@ -294,20 +294,24 @@ func (r *ScheduleRotationResource) read(ctx context.Context, data *ScheduleRotat
 	}
 	data.ScheduleRotationableAttributes = supertypes.NewSingleNestedObjectValueOf(ctx, &scheduleRotationableAttributes)
 
-	data.ActiveTimeAttributes = supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(item.ActiveTimeAttributes, func(v apiclient.ScheduleRotationActiveTimeAttributes, _ int) ScheduleRotationResourceActiveTimeAttributesModel {
-		return ScheduleRotationResourceActiveTimeAttributesModel{
-			StartTime: types.StringValue(v.StartTime),
-			EndTime:   types.StringValue(v.EndTime),
-		}
-	}))
+	if data.ActiveTimeAttributes.IsKnown() {
+		data.ActiveTimeAttributes = supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(item.ActiveTimeAttributes, func(v apiclient.ScheduleRotationActiveTimeAttributes, _ int) ScheduleRotationResourceActiveTimeModel {
+			return ScheduleRotationResourceActiveTimeModel{
+				StartTime: types.StringValue(v.StartTime),
+				EndTime:   types.StringValue(v.EndTime),
+			}
+		}))
+	}
 
-	data.ScheduleRotationMembers = supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(item.ScheduleRotationMembers, func(v apiclient.ScheduleRotationMember, _ int) ScheduleRotationResourceScheduleRotationMembersModel {
-		return ScheduleRotationResourceScheduleRotationMembersModel{
-			MemberId:   types.StringValue(v.MemberID),
-			MemberType: types.StringValue(v.MemberType),
-			Position:   types.Int64Value(v.Position),
-		}
-	}))
+	if data.ScheduleRotationMembers.IsKnown() {
+		data.ScheduleRotationMembers = supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(item.ScheduleRotationMembers, func(v apiclient.ScheduleRotationMember, _ int) ScheduleRotationResourceScheduleRotationMemberModel {
+			return ScheduleRotationResourceScheduleRotationMemberModel{
+				MemberId:   types.StringValue(v.MemberID),
+				MemberType: types.StringValue(v.MemberType),
+				Position:   types.Int64Value(v.Position),
+			}
+		}))
+	}
 
 	return diags
 }
@@ -371,8 +375,8 @@ type ScheduleRotationResourceModel struct {
 	StartTime                      types.String                                                                                  `tfsdk:"start_time"`
 	EndTime                        types.String                                                                                  `tfsdk:"end_time"`
 	ScheduleRotationableAttributes supertypes.SingleNestedObjectValueOf[ScheduleRotationResourceScheduleRotationAttributesModel] `tfsdk:"schedule_rotationable_attributes"`
-	ActiveTimeAttributes           supertypes.SetNestedObjectValueOf[ScheduleRotationResourceActiveTimeAttributesModel]          `tfsdk:"active_time_attributes"`
-	ScheduleRotationMembers        supertypes.SetNestedObjectValueOf[ScheduleRotationResourceScheduleRotationMembersModel]       `tfsdk:"schedule_rotation_members"`
+	ActiveTimeAttributes           supertypes.SetNestedObjectValueOf[ScheduleRotationResourceActiveTimeModel]                    `tfsdk:"active_time_attributes"`
+	ScheduleRotationMembers        supertypes.SetNestedObjectValueOf[ScheduleRotationResourceScheduleRotationMemberModel]        `tfsdk:"schedule_rotation_members"`
 }
 
 func (m *ScheduleRotationResourceModel) ToApi(ctx context.Context) (*apiclient.ScheduleRotation, diag.Diagnostics) {
@@ -525,25 +529,25 @@ func (m *ScheduleRotationResourceScheduleRotationAttributesModel) ToApi(ctx cont
 	return &data, nil
 }
 
-type ScheduleRotationResourceActiveTimeAttributesModel struct {
+type ScheduleRotationResourceActiveTimeModel struct {
 	StartTime types.String `tfsdk:"start_time"`
 	EndTime   types.String `tfsdk:"end_time"`
 }
 
-func (m *ScheduleRotationResourceActiveTimeAttributesModel) ToApi(ctx context.Context) (*apiclient.ScheduleRotationActiveTimeAttributes, diag.Diagnostics) {
+func (m *ScheduleRotationResourceActiveTimeModel) ToApi(ctx context.Context) (*apiclient.ScheduleRotationActiveTimeAttributes, diag.Diagnostics) {
 	return &apiclient.ScheduleRotationActiveTimeAttributes{
 		StartTime: m.StartTime.ValueString(),
 		EndTime:   m.EndTime.ValueString(),
 	}, nil
 }
 
-type ScheduleRotationResourceScheduleRotationMembersModel struct {
+type ScheduleRotationResourceScheduleRotationMemberModel struct {
 	MemberId   types.String `tfsdk:"member_id"`
 	MemberType types.String `tfsdk:"member_type"`
 	Position   types.Int64  `tfsdk:"position"`
 }
 
-func (m *ScheduleRotationResourceScheduleRotationMembersModel) ToApi(ctx context.Context) (*apiclient.ScheduleRotationMember, diag.Diagnostics) {
+func (m *ScheduleRotationResourceScheduleRotationMemberModel) ToApi(ctx context.Context) (*apiclient.ScheduleRotationMember, diag.Diagnostics) {
 	return &apiclient.ScheduleRotationMember{
 		MemberID:   m.MemberId.ValueString(),
 		MemberType: m.MemberType.ValueString(),
