@@ -132,6 +132,7 @@ const excluded = {
   clients: [
     "escalation_level", // manual fix: delay must not use omitempty so 0 is sent
     "escalation_path", // manual fix: initial_delay must not use omitempty so 0 is sent (c74784b)
+    "user", // hand-maintained: exposes on_call_role/role relations + on_call_role update
   ]
 }
 
