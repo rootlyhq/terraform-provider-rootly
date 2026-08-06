@@ -151,6 +151,28 @@ function addNestedRouteParentIds(schemas) {
     };
   }
 }
+// Bulk upsert/delete endpoints are not exposed via Terraform and their
+// *_response schema names collide with oapi-codegen's generated operation
+// response types (e.g. BulkUpsertServicesResponse redeclared).
+function stripBulkOperations(swagger) {
+  for (const url of Object.keys(swagger.paths)) {
+    const operations = swagger.paths[url];
+    for (const method of Object.keys(operations)) {
+      const operationId = operations[method] && operations[method].operationId;
+      if (operationId && /^bulk/i.test(operationId)) {
+        delete operations[method];
+      }
+    }
+    if (Object.keys(operations).length === 0) {
+      delete swagger.paths[url];
+    }
+  }
+  for (const name of Object.keys(swagger.components.schemas)) {
+    if (/^bulk_/.test(name)) {
+      delete swagger.components.schemas[name];
+    }
+  }
+}
 
 fixFilterParameterTypes(swagger.paths);
 stripAnyOf(swagger.components.schemas);
@@ -159,4 +181,5 @@ processPathParametersAnyOf(swagger.paths);
 renameEscalationPolicyLevelSchemas(swagger);
 renameEscalationPolicyPathSchemas(swagger);
 addNestedRouteParentIds(swagger.components.schemas);
+stripBulkOperations(swagger);
 fs.writeFileSync(process.argv[2], JSON.stringify(swagger));

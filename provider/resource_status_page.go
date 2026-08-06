@@ -1,5 +1,7 @@
 // Hand-maintained: status_page is excluded from codegen (see tools/generate.js)
-// because section_order needs Computed: true to prevent drift from API-returned defaults.
+// because section_order, service_ids, and functionality_ids need Computed: true to
+// prevent drift from API-returned defaults and from catalog-backed status page
+// components attaching their source to the page server-side.
 
 package provider
 
@@ -339,7 +341,7 @@ func resourceStatusPage() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         false,
+				Computed:         true,
 				Required:         false,
 				Optional:         true,
 				Sensitive:        false,
@@ -354,7 +356,7 @@ func resourceStatusPage() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         false,
+				Computed:         true,
 				Required:         false,
 				Optional:         true,
 				Sensitive:        false,
