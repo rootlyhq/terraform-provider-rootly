@@ -151,3 +151,21 @@ resource "rootly_escalation_level" "second" {
     team_members = "all"
   }
 }
+
+# cycle-based round-robin: page 3 users at a time from the active rotation
+resource "rootly_escalation_level" "third" {
+  escalation_policy_path_id                       = rootly_escalation_path.default.id
+  escalation_policy_id                            = rootly_escalation_policy.primary.id
+  position                                        = 3
+  delay                                           = 5
+  paging_strategy_configuration_strategy          = "cycle"
+  paging_strategy_configuration_schedule_strategy = "everyone"
+  paging_strategy_configuration_repeats_mode      = "users"
+  paging_strategy_configuration_repeats           = 3
+  paging_strategy_configuration_rotation_scope    = "active_rotation"
+  paging_strategy_configuration_page_users_count  = 2
+  notification_target_params {
+    type = "schedule"
+    id   = rootly_schedule.primary.id
+  }
+}
