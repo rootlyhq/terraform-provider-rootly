@@ -101,7 +101,7 @@ resource "rootly_escalation_policy" "cycle_test" {
 resource "rootly_escalation_level" "cycle" {
 	escalation_policy_id                            = rootly_escalation_policy.cycle_test.id
 	position                                        = 1
-	delay                                           = 5
+	delay                                           = 0
 	paging_strategy_configuration_strategy          = "cycle"
 	paging_strategy_configuration_schedule_strategy = "everyone"
 	paging_strategy_configuration_repeats_mode      = "%s"
