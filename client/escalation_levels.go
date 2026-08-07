@@ -19,7 +19,7 @@ type EscalationLevel struct {
 	PagingStrategyConfigurationRepeatsMode      string        `jsonapi:"attr,paging_strategy_configuration_repeats_mode,omitempty"`
 	PagingStrategyConfigurationRotationScope    string        `jsonapi:"attr,paging_strategy_configuration_rotation_scope,omitempty"`
 	PagingStrategyConfigurationPageUsersCount   int           `jsonapi:"attr,paging_strategy_configuration_page_users_count,omitempty"`
-	Delay                                       int           `jsonapi:"attr,delay,omitempty"`
+	Delay                                       int           `jsonapi:"attr,delay"`
 	Position                                    int           `jsonapi:"attr,position,omitempty"`
 	NotificationTargetParams                    []interface{} `jsonapi:"attr,notification_target_params,omitempty"`
 }
