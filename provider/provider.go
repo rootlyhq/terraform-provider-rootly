@@ -159,6 +159,8 @@ func New(version string) func() *schema.Provider {
 				"rootly_schedule_rotation_active_day":                           resourceScheduleRotationActiveDay(),
 				"rootly_service":                                                resourceService(),
 				"rootly_severity":                                               resourceSeverity(),
+				"rootly_status_page_component_group":                            resourceStatusPageComponentGroup(),
+				"rootly_status_page_component":                                  resourceStatusPageComponent(),
 				"rootly_status_page_template":                                   resourceStatusPageTemplate(),
 				"rootly_webhooks_endpoint":                                      resourceWebhooksEndpoint(),
 				"rootly_sub_status":                                             resourceSubStatus(),
