@@ -124,7 +124,7 @@ func resourceScheduleRotation() *schema.Resource {
 
 			"time_zone": &schema.Schema{
 				Type:        schema.TypeString,
-				Default:     "Etc/UTC",
+				Computed:    true,
 				Required:    false,
 				Optional:    true,
 				ForceNew:    false,
