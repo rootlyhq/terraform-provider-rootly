@@ -91,6 +91,7 @@ const excluded = {
     "custom_field_option",
     "custom_field",
     "dashboard",
+    "escalation_level", // manual fix: delay is a nullable *int so partial updates can omit it (TER-182, #351)
     "escalation_path",
     "escalation_policy",
     "incident_action_item",
@@ -130,7 +131,7 @@ const excluded = {
     "workflow_task",
   ],
   clients: [
-    "escalation_level", // manual fix: delay must not use omitempty so 0 is sent
+    "escalation_level", // manual fix: delay is a nullable *int so it can be both omitted and explicitly 0 (TER-182, #351)
     "escalation_path", // manual fix: initial_delay must not use omitempty so 0 is sent (c74784b)
   ]
 }
@@ -146,20 +147,37 @@ const readOnlyCollections = [
 function main() {
   if (filterResource) {
     console.log(`Generating code for resource: ${filterResource}`);
-    if (resources().includes(filterResource)) {
-      if (readOnlyCollections.includes(filterResource)) {
-        generateReadOnlyClient(filterResource);
-      } else {
-        generateClient(filterResource);
+    // Honour excluded.clients here the same way generateClients() does. Without this the
+    // single-resource path silently regenerates hand-maintained client files and reverts
+    // their manual fixes, which then look like ordinary codegen drift in review.
+    const clientExcluded = (excluded.clients || []).includes(filterResource);
+    const generateClientUnlessExcluded = (name) => {
+      if (clientExcluded) {
+        console.log(
+          `Skipping client for '${name}': hand-maintained, listed in excluded.clients`
+        );
+        return;
       }
+      if (readOnlyCollections.includes(name)) {
+        generateReadOnlyClient(name);
+      } else {
+        generateClient(name);
+      }
+    };
+
+    if (resources().includes(filterResource)) {
+      generateClientUnlessExcluded(filterResource);
       generateResource(filterResource);
     } else if (dataSources().includes(filterResource)) {
-      if (readOnlyCollections.includes(filterResource)) {
-        generateReadOnlyClient(filterResource);
-      } else {
-        generateClient(filterResource);
-      }
+      generateClientUnlessExcluded(filterResource);
       generateDataSource(filterResource);
+    } else if (
+      excluded.resources.includes(filterResource) ||
+      excluded.dataSources.includes(filterResource)
+    ) {
+      console.log(
+        `Skipping '${filterResource}': hand-maintained, listed in excluded.resources/excluded.dataSources`
+      );
     } else {
       console.error(`Error: Resource '${filterResource}' not found in resources or data sources`);
       console.error(`Available resources: ${resources().slice(0, 10).join(', ')}...`);
