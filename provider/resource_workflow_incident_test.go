@@ -6,6 +6,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 )
 
 func TestAccResourceWorkflowIncident(t *testing.T) {
@@ -21,7 +22,24 @@ func TestAccResourceWorkflowIncident(t *testing.T) {
 				Config: testAccResourceWorkflowIncidentConfig(rName),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_workflow_incident.foo3", "name", rName+"-3"),
+					resource.TestCheckResourceAttr("rootly_workflow_incident.foo1", "trigger_params.0.incident_visibilities.0", "true"),
 				),
+			},
+			{
+				// Regression coverage: incident_visibilities is a boolean array in the
+				// API, so importing a workflow that sets it used to drop the whole
+				// trigger_params block.
+				ResourceName: "rootly_workflow_incident.foo1",
+				ImportState:  true,
+				ImportStateCheck: func(states []*terraform.InstanceState) error {
+					if len(states) != 1 {
+						return fmt.Errorf("expected 1 state, got %d", len(states))
+					}
+					if got := states[0].Attributes["trigger_params.0.incident_visibilities.0"]; got != "true" {
+						return fmt.Errorf("expected imported incident_visibilities.0 to be \"true\", got %q", got)
+					}
+					return nil
+				},
 			},
 			{
 				Config: testAccResourceWorkflowIncidentUpdateConfig(rName),
@@ -39,6 +57,8 @@ resource "rootly_workflow_incident" "foo1" {
   name = "%s-1"
 	trigger_params {
 		triggers = ["incident_updated"]
+		incident_condition_visibility = "IS"
+		incident_visibilities = [true]
 	}
 }
 resource "rootly_workflow_incident" "foo2" {

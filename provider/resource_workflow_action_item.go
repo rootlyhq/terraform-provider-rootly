@@ -177,7 +177,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 						"incident_visibilities": &schema.Schema{
 							Type: schema.TypeList,
 							Elem: &schema.Schema{
-								Type: schema.TypeString,
+								Type: schema.TypeBool,
 							},
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Computed:         true,
