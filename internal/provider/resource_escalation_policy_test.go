@@ -19,7 +19,8 @@ import (
 
 func init() {
 	resource.AddTestSweepers("rootly_escalation_policy", &resource.Sweeper{
-		Name: "rootly_escalation_policy",
+		Name:         "rootly_escalation_policy",
+		Dependencies: []string{"rootly_alert_route"},
 		F: func(region string) error {
 			ctx := context.Background()
 
@@ -41,9 +42,11 @@ func init() {
 					if strings.HasPrefix(escalationPolicy.Attributes.Name, "tf-") {
 						httpResp, err := acctest.SharedClient.DeleteEscalationPolicyWithResponse(ctx, escalationPolicy.Id)
 						if err != nil {
-							return fmt.Errorf("Error deleting escalation policy: %s", err)
+							log.Printf("[WARN] Error deleting escalation policy %s: %s", escalationPolicy.Attributes.Name, err)
+							continue
 						} else if httpResp.StatusCode() != http.StatusOK {
-							return fmt.Errorf("Error deleting escalation policy, got status code: %d", httpResp.StatusCode())
+							log.Printf("[WARN] Error deleting escalation policy %s, got status code: %d", escalationPolicy.Attributes.Name, httpResp.StatusCode())
+							continue
 						}
 
 						log.Printf("[INFO] Deleted escalation policy %s", escalationPolicy.Attributes.Name)
