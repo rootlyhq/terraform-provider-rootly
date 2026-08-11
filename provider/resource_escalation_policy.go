@@ -4,9 +4,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"strings"
+	"time"
 
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/retry"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
@@ -346,7 +349,18 @@ func resourceEscalationPolicyDelete(ctx context.Context, d *schema.ResourceData,
 	c := meta.(*client.Client)
 	tflog.Trace(ctx, fmt.Sprintf("Deleting EscalationPolicy: %s", d.Id()))
 
-	err := c.DeleteEscalationPolicy(d.Id())
+	// alert route rules (and their escalation policy targets) are destroyed
+	// asynchronously server-side
+	err := retry.RetryContext(ctx, 2*time.Minute, func() *retry.RetryError {
+		err := c.DeleteEscalationPolicy(d.Id())
+		if err == nil {
+			return nil
+		}
+		if strings.Contains(err.Error(), "Cannot delete record because dependent") {
+			return retry.RetryableError(err)
+		}
+		return retry.NonRetryableError(err)
+	})
 	if err != nil {
 		// In the case of a NotFoundError, it means the resource may have been removed upstream.
 		// We just remove it from the state.

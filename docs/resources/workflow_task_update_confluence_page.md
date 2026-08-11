@@ -40,6 +40,7 @@ Required:
 Optional:
 
 - `content` (String) The Confluence page content
+- `include_follow_ups` (Boolean) Value must be one of true or false
 - `include_overview` (Boolean) Value must be one of true or false
 - `include_timeline` (Boolean) Value must be one of true or false
 - `integration` (Map of String) Map must contain two fields, `id` and `name`. Specify integration id if you have more than one Confluence instance
