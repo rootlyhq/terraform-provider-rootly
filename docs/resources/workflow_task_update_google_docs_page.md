@@ -40,6 +40,7 @@ Required:
 Optional:
 
 - `content` (String) The Google Doc content
+- `include_follow_ups` (Boolean) Value must be one of true or false
 - `include_overview` (Boolean) Value must be one of true or false
 - `include_timeline` (Boolean) Value must be one of true or false
 - `post_mortem_template_id` (String) Retrospective template to use when updating page, if desired
