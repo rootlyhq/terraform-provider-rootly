@@ -27,6 +27,7 @@ type Schedule struct {
 	ShiftReportDayOfWeek               string                 `jsonapi:"attr,shift_report_day_of_week,omitempty"`
 	ShiftReportTimeOfDay               string                 `jsonapi:"attr,shift_report_time_of_day,omitempty"`
 	ShiftReportTimeZone                string                 `jsonapi:"attr,shift_report_time_zone,omitempty"`
+	TimeZone                           string                 `jsonapi:"attr,time_zone,omitempty"`
 }
 
 func (c *Client) ListSchedules(params *rootlygo.ListSchedulesParams) ([]interface{}, error) {
