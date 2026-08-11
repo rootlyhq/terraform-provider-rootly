@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceStatusPageComponent() *schema.Resource {
@@ -38,7 +39,8 @@ func resourceStatusPageComponent() *schema.Resource {
 
 			"status_page_component_group_id": &schema.Schema{
 				Type:        schema.TypeString,
-				Computed:    true,
+				Default:     nil,
+				Computed:    false,
 				Required:    false,
 				Optional:    true,
 				Sensitive:   false,
@@ -128,7 +130,7 @@ func resourceStatusPageComponentCreate(ctx context.Context, d *schema.ResourceDa
 		s.StatusPageId = value.(string)
 	}
 	if value, ok := d.GetOkExists("status_page_component_group_id"); ok {
-		s.StatusPageComponentGroupId = value.(string)
+		s.StatusPageComponentGroupId = tools.String(value.(string))
 	}
 	if value, ok := d.GetOkExists("name"); ok {
 		s.Name = value.(string)
@@ -199,7 +201,7 @@ func resourceStatusPageComponentUpdate(ctx context.Context, d *schema.ResourceDa
 		s.StatusPageId = d.Get("status_page_id").(string)
 	}
 	if d.HasChange("status_page_component_group_id") {
-		s.StatusPageComponentGroupId = d.Get("status_page_component_group_id").(string)
+		s.StatusPageComponentGroupId = tools.String(d.Get("status_page_component_group_id").(string))
 	}
 	if d.HasChange("name") {
 		s.Name = d.Get("name").(string)

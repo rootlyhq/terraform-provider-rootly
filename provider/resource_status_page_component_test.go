@@ -47,6 +47,20 @@ func TestAccResourceStatusPageComponent(t *testing.T) {
 				),
 			},
 			{
+				// Dropping status_page_component_group_id must move the component
+				// back to the top level (explicit blank clears the relationship).
+				Config: testAccResourceStatusPageComponentUngroupedConfig(
+					statusPageName,
+					groupName,
+					componentName+"-updated",
+					"Updated description",
+				),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr(resName, "status_page_component_group_id", ""),
+					resource.TestCheckResourceAttr(resName, "name", componentName+"-updated"),
+				),
+			},
+			{
 				ResourceName:      resName,
 				ImportState:       true,
 				ImportStateVerify: true,
@@ -104,6 +118,25 @@ resource "rootly_status_page_component" "test" {
 	status_page_component_group_id = rootly_status_page_component_group.test.id
 	name                           = "` + componentName + `"
 	description                    = "` + description + `"
+}
+`
+}
+
+func testAccResourceStatusPageComponentUngroupedConfig(statusPageName, groupName, componentName, description string) string {
+	return `
+resource "rootly_status_page" "test" {
+	title = "` + statusPageName + `"
+}
+
+resource "rootly_status_page_component_group" "test" {
+	status_page_id = rootly_status_page.test.id
+	name           = "` + groupName + `"
+}
+
+resource "rootly_status_page_component" "test" {
+	status_page_id = rootly_status_page.test.id
+	name           = "` + componentName + `"
+	description    = "` + description + `"
 }
 `
 }

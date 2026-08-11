@@ -151,6 +151,17 @@ function addNestedRouteParentIds(schemas) {
     };
   }
 }
+
+// The component→group relationship is cleared by updating the component with a
+// blank status_page_component_group_id (the API casts "" to NULL). Mark the
+// property tf_nullable so codegen emits a pointer field that is omitted from
+// requests when unchanged but still serialized when explicitly cleared.
+// TODO: emit tf_nullable from the API's swagger generator instead.
+function annotateNullableRelationships(schemas) {
+  if (schemas.status_page_component) {
+    schemas.status_page_component.properties.status_page_component_group_id.tf_nullable = true;
+  }
+}
 // Bulk upsert/delete endpoints are not exposed via Terraform and their
 // *_response schema names collide with oapi-codegen's generated operation
 // response types (e.g. BulkUpsertServicesResponse redeclared).
@@ -181,5 +192,6 @@ processPathParametersAnyOf(swagger.paths);
 renameEscalationPolicyLevelSchemas(swagger);
 renameEscalationPolicyPathSchemas(swagger);
 addNestedRouteParentIds(swagger.components.schemas);
+annotateNullableRelationships(swagger.components.schemas);
 stripBulkOperations(swagger);
 fs.writeFileSync(process.argv[2], JSON.stringify(swagger));

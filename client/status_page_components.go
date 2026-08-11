@@ -11,15 +11,15 @@ import (
 )
 
 type StatusPageComponent struct {
-	ID                         string `jsonapi:"primary,status_page_components"`
-	StatusPageId               string `jsonapi:"attr,status_page_id,omitempty"`
-	StatusPageComponentGroupId string `jsonapi:"attr,status_page_component_group_id,omitempty"`
-	Name                       string `jsonapi:"attr,name,omitempty"`
-	Description                string `jsonapi:"attr,description,omitempty"`
-	Position                   int    `jsonapi:"attr,position,omitempty"`
-	SourceType                 string `jsonapi:"attr,source_type,omitempty"`
-	SourceId                   string `jsonapi:"attr,source_id,omitempty"`
-	Status                     string `jsonapi:"attr,status,omitempty"`
+	ID                         string  `jsonapi:"primary,status_page_components"`
+	StatusPageId               string  `jsonapi:"attr,status_page_id,omitempty"`
+	StatusPageComponentGroupId *string `jsonapi:"attr,status_page_component_group_id,omitempty"`
+	Name                       string  `jsonapi:"attr,name,omitempty"`
+	Description                string  `jsonapi:"attr,description,omitempty"`
+	Position                   int     `jsonapi:"attr,position,omitempty"`
+	SourceType                 string  `jsonapi:"attr,source_type,omitempty"`
+	SourceId                   string  `jsonapi:"attr,source_id,omitempty"`
+	Status                     string  `jsonapi:"attr,status,omitempty"`
 }
 
 func (c *Client) ListStatusPageComponents(id string, params *rootlygo.ListStatusPageComponentsParams) ([]interface{}, error) {

@@ -8,6 +8,7 @@
 
 ### Fixed
 - `rootly_status_page`: `service_ids` and `functionality_ids` are now computed, matching the API's `tf_computed` annotation, so pages no longer drift when catalog-backed components attach their source to the page server-side.
+- `rootly_status_page_component`: removing `status_page_component_group_id` from config now moves the component back to the top level; the client sends an explicit blank instead of omitting the attribute, and the field is no longer computed so the removal produces a plan diff.
 
 ## [5.5.0] -- 2025-1-29
 
