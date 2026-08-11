@@ -41,6 +41,7 @@ Optional:
 
 - `content` (String) The page content
 - `drive` (Map of String) Map must contain two fields, `id` and `name`.
+- `include_follow_ups` (Boolean) Value must be one of true or false
 - `include_overview` (Boolean) Value must be one of true or false
 - `include_timeline` (Boolean) Value must be one of true or false
 - `mark_post_mortem_as_published` (Boolean) Value must be one of true or false

@@ -130,6 +130,7 @@ resource "rootly_schedule_rotation_user" "jane" {
 - `slack_channel` (Map of String) Map must contain two fields, `id` and `name`. Synced slack channel of the schedule
 - `slack_user_group` (Map of String) Map must contain two fields, `id` and `name`. Synced slack group of the schedule
 - `sync_linear_enabled` (Boolean) Whether the schedule is synced with Linear. Value must be one of true or false
+- `time_zone` (String) A valid IANA time zone name. Only applicable when config_one_timezone_per_schedule_enabled is true for the organization.
 
 ### Read-Only
 
