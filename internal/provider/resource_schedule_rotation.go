@@ -2,6 +2,7 @@ package provider
 
 import (
 	"context"
+	"errors"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
@@ -16,6 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	supertypes "github.com/orange-cloudavenue/terraform-plugin-framework-supertypes"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/apiclient"
 	"github.com/samber/lo"
 )
@@ -204,8 +206,8 @@ func (r *ScheduleRotationResource) Create(ctx context.Context, req resource.Crea
 
 	data.Id = types.StringValue(res.ID)
 
-	resp.Diagnostics.Append(r.read(ctx, &data)...)
-	if resp.Diagnostics.HasError() {
+	if err := r.read(ctx, &data); err != nil {
+		resp.Diagnostics.AddError("Unable to read schedule rotation", err.Error())
 		return
 	}
 
@@ -220,21 +222,22 @@ func (r *ScheduleRotationResource) Read(ctx context.Context, req resource.ReadRe
 		return
 	}
 
-	resp.Diagnostics.Append(r.read(ctx, &data)...)
-	if resp.Diagnostics.HasError() {
+	if err := r.read(ctx, &data); err != nil {
+		if errors.Is(err, client.NotFoundError{}) {
+			resp.State.RemoveResource(ctx)
+			return
+		}
+		resp.Diagnostics.AddError("Unable to read schedule rotation", err.Error())
 		return
 	}
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *ScheduleRotationResource) read(ctx context.Context, data *ScheduleRotationResourceModel) diag.Diagnostics {
-	var diags diag.Diagnostics
-
+func (r *ScheduleRotationResource) read(ctx context.Context, data *ScheduleRotationResourceModel) error {
 	item, err := r.client.GetScheduleRotation(ctx, data.Id.ValueString())
 	if err != nil {
-		diags.AddError("Unable to read schedule rotation", err.Error())
-		return diags
+		return err
 	}
 
 	data.Id = types.StringValue(item.ID)
@@ -313,7 +316,7 @@ func (r *ScheduleRotationResource) read(ctx context.Context, data *ScheduleRotat
 		}))
 	}
 
-	return diags
+	return nil
 }
 
 func (r *ScheduleRotationResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
@@ -336,8 +339,8 @@ func (r *ScheduleRotationResource) Update(ctx context.Context, req resource.Upda
 		return
 	}
 
-	resp.Diagnostics.Append(r.read(ctx, &data)...)
-	if resp.Diagnostics.HasError() {
+	if err := r.read(ctx, &data); err != nil {
+		resp.Diagnostics.AddError("Unable to read schedule rotation", err.Error())
 		return
 	}
 
@@ -512,18 +515,26 @@ func (m *ScheduleRotationResourceScheduleRotationAttributesModel) ToApi(ctx cont
 
 	if !m.HandoffTime.IsNull() && !m.HandoffTime.IsUnknown() {
 		data.HandoffTime.Set(m.HandoffTime.ValueString())
+	} else {
+		data.HandoffTime.SetNull()
 	}
 
 	if !m.HandoffDay.IsNull() && !m.HandoffDay.IsUnknown() {
 		data.HandoffDay.Set(m.HandoffDay.ValueString())
+	} else {
+		data.HandoffDay.SetNull()
 	}
 
 	if !m.ShiftLength.IsNull() && !m.ShiftLength.IsUnknown() {
 		data.ShiftLength.Set(m.ShiftLength.ValueInt64())
+	} else {
+		data.ShiftLength.SetNull()
 	}
 
 	if !m.ShiftLengthUnit.IsNull() && !m.ShiftLengthUnit.IsUnknown() {
 		data.ShiftLengthUnit.Set(m.ShiftLengthUnit.ValueString())
+	} else {
+		data.ShiftLengthUnit.SetNull()
 	}
 
 	return &data, nil
