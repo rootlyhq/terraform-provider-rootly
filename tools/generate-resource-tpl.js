@@ -246,6 +246,11 @@ function createResourceFields(name, resourceSchema, writableFields) {
             schema.type
           )}))
           }`;
+        } else if (schema.type === "string" && schema.tf_nullable) {
+          return `
+          if value, ok := d.GetOkExists("${field}"); ok {
+            s.${inflect.camelize(field)} = tools.String(value.(string))
+          }`;
         } else {
           return `
           if value, ok := d.GetOkExists("${field}"); ok {
@@ -263,6 +268,10 @@ function createResourceFields(name, resourceSchema, writableFields) {
 				s.${inflect.camelize(field)} = tools.Bool(value.(${jsonapiToGoType(
           schema.type
         )}))
+			}`;
+      } else if (schema.type === "string" && schema.tf_nullable) {
+        return `  if value, ok := d.GetOkExists("${field}"); ok {
+				s.${inflect.camelize(field)} = tools.String(value.(string))
 			}`;
       } else if (
         schema.type == "object" &&
@@ -318,6 +327,11 @@ function updateResourceFields(name, resourceSchema, writableFields) {
               field
             )} = tools.Bool(d.Get("${field}").(${jsonapiToGoType(schema.type)}))
           }`;
+        } else if (schema.type === "string" && schema.tf_nullable) {
+          return `
+          if d.HasChange("${field}") {
+            s.${inflect.camelize(field)} = tools.String(d.Get("${field}").(string))
+          }`;
         } else if (schema.tf_include_unchanged) {
           return `
           s.${inflect.camelize(field)} = d.Get("${field}").(${jsonapiToGoType(
@@ -340,6 +354,12 @@ function updateResourceFields(name, resourceSchema, writableFields) {
 				s.${inflect.camelize(field)} = tools.Bool(d.Get("${field}").(${jsonapiToGoType(
           schema.type
         )}))
+			}`;
+      } else if (schema.type === "string" && schema.tf_nullable) {
+        // Pointer client field: always assigned on change so clearing the
+        // attribute serializes an explicit blank instead of being omitted.
+        return `  if d.HasChange("${field}") {
+				s.${inflect.camelize(field)} = tools.String(d.Get("${field}").(string))
 			}`;
       } else if (schema.type == "array") {
         return `
@@ -488,6 +508,10 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField, writable
     defaultValue = `Default: "${schema.enum[0]}"`;
   } else if (schema.tf_computed === true) {
     defaultValue = `Computed: true`;
+  } else if (schema.tf_nullable) {
+    // Not computed: removing the attribute from config must produce a plan
+    // diff so the value can be cleared server-side.
+    defaultValue = `Default: nil,\n				Computed: false`;
   } else if (schema.tf_computed === false) {
     defaultValue = `Default: nil,\n				Computed: false`;
   } else {
